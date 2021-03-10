@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -17,10 +17,10 @@
 		65D6D51E25F8B94D000CB339 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65D6D51D25F8B94D000CB339 /* Preview Assets.xcassets */; };
 		65D6D52925F8B94D000CB339 /* VaccinationValidatorAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D6D52825F8B94D000CB339 /* VaccinationValidatorAppTests.swift */; };
 		65D6D53425F8B94E000CB339 /* VaccinationValidatorAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D6D53325F8B94E000CB339 /* VaccinationValidatorAppUITests.swift */; };
-		65D6D54F25F8B980000CB339 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65D6D46D25F7A634000CB339 /* Assets.xcassets */; };
-		65D6D55025F8B982000CB339 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65D6D46D25F7A634000CB339 /* Assets.xcassets */; };
 		65D6D55725F8B98F000CB339 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D6D46C25F7A632000CB339 /* ContentView.swift */; };
 		65D6D55825F8B991000CB339 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D6D46C25F7A632000CB339 /* ContentView.swift */; };
+		65D6D56C25F8BCDC000CB339 /* VaccinationPass in Frameworks */ = {isa = PBXBuildFile; productRef = 65D6D56B25F8BCDC000CB339 /* VaccinationPass */; };
+		65D6D56E25F8BCE5000CB339 /* VaccinationValidator in Frameworks */ = {isa = PBXBuildFile; productRef = 65D6D56D25F8BCE5000CB339 /* VaccinationValidator */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,7 +57,6 @@
 /* Begin PBXFileReference section */
 		65D6D46B25F7A632000CB339 /* VaccinationCertificateApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaccinationCertificateApp.swift; sourceTree = "<group>"; };
 		65D6D46C25F7A632000CB339 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		65D6D46D25F7A634000CB339 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		65D6D4AC25F7A6C3000CB339 /* VaccinationPass */ = {isa = PBXFileReference; lastKnownFileType = folder; path = VaccinationPass; sourceTree = "<group>"; };
 		65D6D4B125F7A6C6000CB339 /* VaccinationValidator */ = {isa = PBXFileReference; lastKnownFileType = folder; path = VaccinationValidator; sourceTree = "<group>"; };
 		65D6D4BF25F7AD8B000CB339 /* VaccinationCommon */ = {isa = PBXFileReference; lastKnownFileType = folder; path = VaccinationCommon; sourceTree = "<group>"; };
@@ -90,6 +89,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				65D6D56C25F8BCDC000CB339 /* VaccinationPass in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -111,6 +111,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				65D6D56E25F8BCE5000CB339 /* VaccinationValidator in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -154,7 +155,6 @@
 			children = (
 				65D6D46B25F7A632000CB339 /* VaccinationCertificateApp.swift */,
 				65D6D46C25F7A632000CB339 /* ContentView.swift */,
-				65D6D46D25F7A634000CB339 /* Assets.xcassets */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -269,6 +269,9 @@
 			dependencies = (
 			);
 			name = VaccinationPassApp;
+			packageProductDependencies = (
+				65D6D56B25F8BCDC000CB339 /* VaccinationPass */,
+			);
 			productName = VaccinationPassApp;
 			productReference = 65D6D4DE25F8B8FB000CB339 /* VaccinationPassApp.app */;
 			productType = "com.apple.product-type.application";
@@ -322,6 +325,9 @@
 			dependencies = (
 			);
 			name = VaccinationValidatorApp;
+			packageProductDependencies = (
+				65D6D56D25F8BCE5000CB339 /* VaccinationValidator */,
+			);
 			productName = VaccinationValidatorApp;
 			productReference = 65D6D51425F8B94D000CB339 /* VaccinationValidatorApp.app */;
 			productType = "com.apple.product-type.application";
@@ -424,7 +430,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				65D6D4E825F8B8FB000CB339 /* Preview Assets.xcassets in Resources */,
-				65D6D54F25F8B980000CB339 /* Assets.xcassets in Resources */,
 				65D6D4E525F8B8FB000CB339 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -448,7 +453,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				65D6D51E25F8B94D000CB339 /* Preview Assets.xcassets in Resources */,
-				65D6D55025F8B982000CB339 /* Assets.xcassets in Resources */,
 				65D6D51B25F8B94D000CB339 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1002,6 +1006,17 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		65D6D56B25F8BCDC000CB339 /* VaccinationPass */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = VaccinationPass;
+		};
+		65D6D56D25F8BCE5000CB339 /* VaccinationValidator */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = VaccinationValidator;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 65D6D46625F7A631000CB339 /* Project object */;
 }
