@@ -3,37 +3,54 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		65D6D48725F7A634000CB339 /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D6D48625F7A634000CB339 /* Tests_iOS.swift */; };
-		65D6D49225F7A634000CB339 /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D6D49125F7A634000CB339 /* Tests_macOS.swift */; };
-		65D6D49425F7A634000CB339 /* VaccinationCertificateApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D6D46B25F7A632000CB339 /* VaccinationCertificateApp.swift */; };
-		65D6D49525F7A634000CB339 /* VaccinationCertificateApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D6D46B25F7A632000CB339 /* VaccinationCertificateApp.swift */; };
-		65D6D49625F7A634000CB339 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D6D46C25F7A632000CB339 /* ContentView.swift */; };
-		65D6D49725F7A634000CB339 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D6D46C25F7A632000CB339 /* ContentView.swift */; };
-		65D6D49825F7A634000CB339 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65D6D46D25F7A634000CB339 /* Assets.xcassets */; };
-		65D6D49925F7A634000CB339 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65D6D46D25F7A634000CB339 /* Assets.xcassets */; };
-		65D6D4B825F7A6E2000CB339 /* VaccinationPass in Frameworks */ = {isa = PBXBuildFile; productRef = 65D6D4B725F7A6E2000CB339 /* VaccinationPass */; };
-		65D6D4BA25F7A6E7000CB339 /* VaccinationValidator in Frameworks */ = {isa = PBXBuildFile; productRef = 65D6D4B925F7A6E7000CB339 /* VaccinationValidator */; };
-		65D6D4C525F7AE1E000CB339 /* VaccinationCommon in Frameworks */ = {isa = PBXBuildFile; productRef = 65D6D4C425F7AE1E000CB339 /* VaccinationCommon */; };
+		65D6D4E125F8B8FB000CB339 /* VaccinationPassAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D6D4E025F8B8FB000CB339 /* VaccinationPassAppApp.swift */; };
+		65D6D4E525F8B8FB000CB339 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65D6D4E425F8B8FB000CB339 /* Assets.xcassets */; };
+		65D6D4E825F8B8FB000CB339 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65D6D4E725F8B8FB000CB339 /* Preview Assets.xcassets */; };
+		65D6D4F325F8B8FB000CB339 /* VaccinationPassAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D6D4F225F8B8FB000CB339 /* VaccinationPassAppTests.swift */; };
+		65D6D4FE25F8B8FC000CB339 /* VaccinationPassAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D6D4FD25F8B8FC000CB339 /* VaccinationPassAppUITests.swift */; };
+		65D6D51725F8B94D000CB339 /* VaccinationValidatorAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D6D51625F8B94D000CB339 /* VaccinationValidatorAppApp.swift */; };
+		65D6D51B25F8B94D000CB339 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65D6D51A25F8B94D000CB339 /* Assets.xcassets */; };
+		65D6D51E25F8B94D000CB339 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65D6D51D25F8B94D000CB339 /* Preview Assets.xcassets */; };
+		65D6D52925F8B94D000CB339 /* VaccinationValidatorAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D6D52825F8B94D000CB339 /* VaccinationValidatorAppTests.swift */; };
+		65D6D53425F8B94E000CB339 /* VaccinationValidatorAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D6D53325F8B94E000CB339 /* VaccinationValidatorAppUITests.swift */; };
+		65D6D54F25F8B980000CB339 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65D6D46D25F7A634000CB339 /* Assets.xcassets */; };
+		65D6D55025F8B982000CB339 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65D6D46D25F7A634000CB339 /* Assets.xcassets */; };
+		65D6D55725F8B98F000CB339 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D6D46C25F7A632000CB339 /* ContentView.swift */; };
+		65D6D55825F8B991000CB339 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D6D46C25F7A632000CB339 /* ContentView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		65D6D48325F7A634000CB339 /* PBXContainerItemProxy */ = {
+		65D6D4EF25F8B8FB000CB339 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 65D6D46625F7A631000CB339 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 65D6D47125F7A634000CB339;
-			remoteInfo = "VaccinationCertificate (iOS)";
+			remoteGlobalIDString = 65D6D4DD25F8B8FB000CB339;
+			remoteInfo = VaccinationPassApp;
 		};
-		65D6D48E25F7A634000CB339 /* PBXContainerItemProxy */ = {
+		65D6D4FA25F8B8FC000CB339 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 65D6D46625F7A631000CB339 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 65D6D47925F7A634000CB339;
-			remoteInfo = "VaccinationCertificate (macOS)";
+			remoteGlobalIDString = 65D6D4DD25F8B8FB000CB339;
+			remoteInfo = VaccinationPassApp;
+		};
+		65D6D52525F8B94D000CB339 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 65D6D46625F7A631000CB339 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 65D6D51325F8B94D000CB339;
+			remoteInfo = VaccinationValidatorApp;
+		};
+		65D6D53025F8B94E000CB339 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 65D6D46625F7A631000CB339 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 65D6D51325F8B94D000CB339;
+			remoteInfo = VaccinationValidatorApp;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -41,48 +58,70 @@
 		65D6D46B25F7A632000CB339 /* VaccinationCertificateApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaccinationCertificateApp.swift; sourceTree = "<group>"; };
 		65D6D46C25F7A632000CB339 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		65D6D46D25F7A634000CB339 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		65D6D47225F7A634000CB339 /* VaccinationCertificate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VaccinationCertificate.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		65D6D47525F7A634000CB339 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		65D6D47A25F7A634000CB339 /* VaccinationCertificate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VaccinationCertificate.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		65D6D47C25F7A634000CB339 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		65D6D47D25F7A634000CB339 /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
-		65D6D48225F7A634000CB339 /* Tests iOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tests iOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		65D6D48625F7A634000CB339 /* Tests_iOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_iOS.swift; sourceTree = "<group>"; };
-		65D6D48825F7A634000CB339 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		65D6D48D25F7A634000CB339 /* Tests macOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tests macOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		65D6D49125F7A634000CB339 /* Tests_macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_macOS.swift; sourceTree = "<group>"; };
-		65D6D49325F7A634000CB339 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		65D6D4AC25F7A6C3000CB339 /* VaccinationPass */ = {isa = PBXFileReference; lastKnownFileType = folder; path = VaccinationPass; sourceTree = "<group>"; };
 		65D6D4B125F7A6C6000CB339 /* VaccinationValidator */ = {isa = PBXFileReference; lastKnownFileType = folder; path = VaccinationValidator; sourceTree = "<group>"; };
 		65D6D4BF25F7AD8B000CB339 /* VaccinationCommon */ = {isa = PBXFileReference; lastKnownFileType = folder; path = VaccinationCommon; sourceTree = "<group>"; };
+		65D6D4DE25F8B8FB000CB339 /* VaccinationPassApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VaccinationPassApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		65D6D4E025F8B8FB000CB339 /* VaccinationPassAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaccinationPassAppApp.swift; sourceTree = "<group>"; };
+		65D6D4E425F8B8FB000CB339 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		65D6D4E725F8B8FB000CB339 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		65D6D4E925F8B8FB000CB339 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		65D6D4EE25F8B8FB000CB339 /* VaccinationPassAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VaccinationPassAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		65D6D4F225F8B8FB000CB339 /* VaccinationPassAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaccinationPassAppTests.swift; sourceTree = "<group>"; };
+		65D6D4F425F8B8FB000CB339 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		65D6D4F925F8B8FB000CB339 /* VaccinationPassAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VaccinationPassAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		65D6D4FD25F8B8FC000CB339 /* VaccinationPassAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaccinationPassAppUITests.swift; sourceTree = "<group>"; };
+		65D6D4FF25F8B8FC000CB339 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		65D6D51425F8B94D000CB339 /* VaccinationValidatorApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VaccinationValidatorApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		65D6D51625F8B94D000CB339 /* VaccinationValidatorAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaccinationValidatorAppApp.swift; sourceTree = "<group>"; };
+		65D6D51A25F8B94D000CB339 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		65D6D51D25F8B94D000CB339 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		65D6D51F25F8B94D000CB339 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		65D6D52425F8B94D000CB339 /* VaccinationValidatorAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VaccinationValidatorAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		65D6D52825F8B94D000CB339 /* VaccinationValidatorAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaccinationValidatorAppTests.swift; sourceTree = "<group>"; };
+		65D6D52A25F8B94D000CB339 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		65D6D52F25F8B94E000CB339 /* VaccinationValidatorAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VaccinationValidatorAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		65D6D53325F8B94E000CB339 /* VaccinationValidatorAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaccinationValidatorAppUITests.swift; sourceTree = "<group>"; };
+		65D6D53525F8B94E000CB339 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		65D6D46F25F7A634000CB339 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				65D6D4B825F7A6E2000CB339 /* VaccinationPass in Frameworks */,
-				65D6D4C525F7AE1E000CB339 /* VaccinationCommon in Frameworks */,
-				65D6D4BA25F7A6E7000CB339 /* VaccinationValidator in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		65D6D47725F7A634000CB339 /* Frameworks */ = {
+		65D6D4DB25F8B8FB000CB339 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		65D6D47F25F7A634000CB339 /* Frameworks */ = {
+		65D6D4EB25F8B8FB000CB339 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		65D6D48A25F7A634000CB339 /* Frameworks */ = {
+		65D6D4F625F8B8FB000CB339 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		65D6D51125F8B94D000CB339 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		65D6D52125F8B94D000CB339 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		65D6D52C25F8B94E000CB339 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -99,10 +138,12 @@
 				65D6D4B125F7A6C6000CB339 /* VaccinationValidator */,
 				65D6D4AC25F7A6C3000CB339 /* VaccinationPass */,
 				65D6D46A25F7A631000CB339 /* Shared */,
-				65D6D47425F7A634000CB339 /* iOS */,
-				65D6D47B25F7A634000CB339 /* macOS */,
-				65D6D48525F7A634000CB339 /* Tests iOS */,
-				65D6D49025F7A634000CB339 /* Tests macOS */,
+				65D6D4DF25F8B8FB000CB339 /* VaccinationPassApp */,
+				65D6D4F125F8B8FB000CB339 /* VaccinationPassAppTests */,
+				65D6D4FC25F8B8FC000CB339 /* VaccinationPassAppUITests */,
+				65D6D51525F8B94D000CB339 /* VaccinationValidatorApp */,
+				65D6D52725F8B94D000CB339 /* VaccinationValidatorAppTests */,
+				65D6D53225F8B94E000CB339 /* VaccinationValidatorAppUITests */,
 				65D6D47325F7A634000CB339 /* Products */,
 				65D6D4B625F7A6E2000CB339 /* Frameworks */,
 			);
@@ -121,47 +162,14 @@
 		65D6D47325F7A634000CB339 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				65D6D47225F7A634000CB339 /* VaccinationCertificate.app */,
-				65D6D47A25F7A634000CB339 /* VaccinationCertificate.app */,
-				65D6D48225F7A634000CB339 /* Tests iOS.xctest */,
-				65D6D48D25F7A634000CB339 /* Tests macOS.xctest */,
+				65D6D4DE25F8B8FB000CB339 /* VaccinationPassApp.app */,
+				65D6D4EE25F8B8FB000CB339 /* VaccinationPassAppTests.xctest */,
+				65D6D4F925F8B8FB000CB339 /* VaccinationPassAppUITests.xctest */,
+				65D6D51425F8B94D000CB339 /* VaccinationValidatorApp.app */,
+				65D6D52425F8B94D000CB339 /* VaccinationValidatorAppTests.xctest */,
+				65D6D52F25F8B94E000CB339 /* VaccinationValidatorAppUITests.xctest */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		65D6D47425F7A634000CB339 /* iOS */ = {
-			isa = PBXGroup;
-			children = (
-				65D6D47525F7A634000CB339 /* Info.plist */,
-			);
-			path = iOS;
-			sourceTree = "<group>";
-		};
-		65D6D47B25F7A634000CB339 /* macOS */ = {
-			isa = PBXGroup;
-			children = (
-				65D6D47C25F7A634000CB339 /* Info.plist */,
-				65D6D47D25F7A634000CB339 /* macOS.entitlements */,
-			);
-			path = macOS;
-			sourceTree = "<group>";
-		};
-		65D6D48525F7A634000CB339 /* Tests iOS */ = {
-			isa = PBXGroup;
-			children = (
-				65D6D48625F7A634000CB339 /* Tests_iOS.swift */,
-				65D6D48825F7A634000CB339 /* Info.plist */,
-			);
-			path = "Tests iOS";
-			sourceTree = "<group>";
-		};
-		65D6D49025F7A634000CB339 /* Tests macOS */ = {
-			isa = PBXGroup;
-			children = (
-				65D6D49125F7A634000CB339 /* Tests_macOS.swift */,
-				65D6D49325F7A634000CB339 /* Info.plist */,
-			);
-			path = "Tests macOS";
 			sourceTree = "<group>";
 		};
 		65D6D4B625F7A6E2000CB339 /* Frameworks */ = {
@@ -171,82 +179,187 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		65D6D4DF25F8B8FB000CB339 /* VaccinationPassApp */ = {
+			isa = PBXGroup;
+			children = (
+				65D6D4E025F8B8FB000CB339 /* VaccinationPassAppApp.swift */,
+				65D6D4E425F8B8FB000CB339 /* Assets.xcassets */,
+				65D6D4E925F8B8FB000CB339 /* Info.plist */,
+				65D6D4E625F8B8FB000CB339 /* Preview Content */,
+			);
+			path = VaccinationPassApp;
+			sourceTree = "<group>";
+		};
+		65D6D4E625F8B8FB000CB339 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				65D6D4E725F8B8FB000CB339 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		65D6D4F125F8B8FB000CB339 /* VaccinationPassAppTests */ = {
+			isa = PBXGroup;
+			children = (
+				65D6D4F225F8B8FB000CB339 /* VaccinationPassAppTests.swift */,
+				65D6D4F425F8B8FB000CB339 /* Info.plist */,
+			);
+			path = VaccinationPassAppTests;
+			sourceTree = "<group>";
+		};
+		65D6D4FC25F8B8FC000CB339 /* VaccinationPassAppUITests */ = {
+			isa = PBXGroup;
+			children = (
+				65D6D4FD25F8B8FC000CB339 /* VaccinationPassAppUITests.swift */,
+				65D6D4FF25F8B8FC000CB339 /* Info.plist */,
+			);
+			path = VaccinationPassAppUITests;
+			sourceTree = "<group>";
+		};
+		65D6D51525F8B94D000CB339 /* VaccinationValidatorApp */ = {
+			isa = PBXGroup;
+			children = (
+				65D6D51625F8B94D000CB339 /* VaccinationValidatorAppApp.swift */,
+				65D6D51A25F8B94D000CB339 /* Assets.xcassets */,
+				65D6D51F25F8B94D000CB339 /* Info.plist */,
+				65D6D51C25F8B94D000CB339 /* Preview Content */,
+			);
+			path = VaccinationValidatorApp;
+			sourceTree = "<group>";
+		};
+		65D6D51C25F8B94D000CB339 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				65D6D51D25F8B94D000CB339 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		65D6D52725F8B94D000CB339 /* VaccinationValidatorAppTests */ = {
+			isa = PBXGroup;
+			children = (
+				65D6D52825F8B94D000CB339 /* VaccinationValidatorAppTests.swift */,
+				65D6D52A25F8B94D000CB339 /* Info.plist */,
+			);
+			path = VaccinationValidatorAppTests;
+			sourceTree = "<group>";
+		};
+		65D6D53225F8B94E000CB339 /* VaccinationValidatorAppUITests */ = {
+			isa = PBXGroup;
+			children = (
+				65D6D53325F8B94E000CB339 /* VaccinationValidatorAppUITests.swift */,
+				65D6D53525F8B94E000CB339 /* Info.plist */,
+			);
+			path = VaccinationValidatorAppUITests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		65D6D47125F7A634000CB339 /* VaccinationCertificate (iOS) */ = {
+		65D6D4DD25F8B8FB000CB339 /* VaccinationPassApp */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 65D6D49C25F7A634000CB339 /* Build configuration list for PBXNativeTarget "VaccinationCertificate (iOS)" */;
+			buildConfigurationList = 65D6D50625F8B8FC000CB339 /* Build configuration list for PBXNativeTarget "VaccinationPassApp" */;
 			buildPhases = (
-				65D6D46E25F7A634000CB339 /* Sources */,
-				65D6D46F25F7A634000CB339 /* Frameworks */,
-				65D6D47025F7A634000CB339 /* Resources */,
+				65D6D4DA25F8B8FB000CB339 /* Sources */,
+				65D6D4DB25F8B8FB000CB339 /* Frameworks */,
+				65D6D4DC25F8B8FB000CB339 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = "VaccinationCertificate (iOS)";
-			packageProductDependencies = (
-				65D6D4B725F7A6E2000CB339 /* VaccinationPass */,
-				65D6D4B925F7A6E7000CB339 /* VaccinationValidator */,
-				65D6D4C425F7AE1E000CB339 /* VaccinationCommon */,
-			);
-			productName = "VaccinationCertificate (iOS)";
-			productReference = 65D6D47225F7A634000CB339 /* VaccinationCertificate.app */;
+			name = VaccinationPassApp;
+			productName = VaccinationPassApp;
+			productReference = 65D6D4DE25F8B8FB000CB339 /* VaccinationPassApp.app */;
 			productType = "com.apple.product-type.application";
 		};
-		65D6D47925F7A634000CB339 /* VaccinationCertificate (macOS) */ = {
+		65D6D4ED25F8B8FB000CB339 /* VaccinationPassAppTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 65D6D49F25F7A634000CB339 /* Build configuration list for PBXNativeTarget "VaccinationCertificate (macOS)" */;
+			buildConfigurationList = 65D6D50725F8B8FC000CB339 /* Build configuration list for PBXNativeTarget "VaccinationPassAppTests" */;
 			buildPhases = (
-				65D6D47625F7A634000CB339 /* Sources */,
-				65D6D47725F7A634000CB339 /* Frameworks */,
-				65D6D47825F7A634000CB339 /* Resources */,
+				65D6D4EA25F8B8FB000CB339 /* Sources */,
+				65D6D4EB25F8B8FB000CB339 /* Frameworks */,
+				65D6D4EC25F8B8FB000CB339 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				65D6D4F025F8B8FB000CB339 /* PBXTargetDependency */,
 			);
-			name = "VaccinationCertificate (macOS)";
-			productName = "VaccinationCertificate (macOS)";
-			productReference = 65D6D47A25F7A634000CB339 /* VaccinationCertificate.app */;
-			productType = "com.apple.product-type.application";
+			name = VaccinationPassAppTests;
+			productName = VaccinationPassAppTests;
+			productReference = 65D6D4EE25F8B8FB000CB339 /* VaccinationPassAppTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		65D6D48125F7A634000CB339 /* Tests iOS */ = {
+		65D6D4F825F8B8FB000CB339 /* VaccinationPassAppUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 65D6D4A225F7A634000CB339 /* Build configuration list for PBXNativeTarget "Tests iOS" */;
+			buildConfigurationList = 65D6D50825F8B8FC000CB339 /* Build configuration list for PBXNativeTarget "VaccinationPassAppUITests" */;
 			buildPhases = (
-				65D6D47E25F7A634000CB339 /* Sources */,
-				65D6D47F25F7A634000CB339 /* Frameworks */,
-				65D6D48025F7A634000CB339 /* Resources */,
+				65D6D4F525F8B8FB000CB339 /* Sources */,
+				65D6D4F625F8B8FB000CB339 /* Frameworks */,
+				65D6D4F725F8B8FB000CB339 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				65D6D48425F7A634000CB339 /* PBXTargetDependency */,
+				65D6D4FB25F8B8FC000CB339 /* PBXTargetDependency */,
 			);
-			name = "Tests iOS";
-			productName = "Tests iOS";
-			productReference = 65D6D48225F7A634000CB339 /* Tests iOS.xctest */;
+			name = VaccinationPassAppUITests;
+			productName = VaccinationPassAppUITests;
+			productReference = 65D6D4F925F8B8FB000CB339 /* VaccinationPassAppUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
-		65D6D48C25F7A634000CB339 /* Tests macOS */ = {
+		65D6D51325F8B94D000CB339 /* VaccinationValidatorApp */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 65D6D4A525F7A634000CB339 /* Build configuration list for PBXNativeTarget "Tests macOS" */;
+			buildConfigurationList = 65D6D53625F8B94E000CB339 /* Build configuration list for PBXNativeTarget "VaccinationValidatorApp" */;
 			buildPhases = (
-				65D6D48925F7A634000CB339 /* Sources */,
-				65D6D48A25F7A634000CB339 /* Frameworks */,
-				65D6D48B25F7A634000CB339 /* Resources */,
+				65D6D51025F8B94D000CB339 /* Sources */,
+				65D6D51125F8B94D000CB339 /* Frameworks */,
+				65D6D51225F8B94D000CB339 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				65D6D48F25F7A634000CB339 /* PBXTargetDependency */,
 			);
-			name = "Tests macOS";
-			productName = "Tests macOS";
-			productReference = 65D6D48D25F7A634000CB339 /* Tests macOS.xctest */;
+			name = VaccinationValidatorApp;
+			productName = VaccinationValidatorApp;
+			productReference = 65D6D51425F8B94D000CB339 /* VaccinationValidatorApp.app */;
+			productType = "com.apple.product-type.application";
+		};
+		65D6D52325F8B94D000CB339 /* VaccinationValidatorAppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 65D6D53925F8B94E000CB339 /* Build configuration list for PBXNativeTarget "VaccinationValidatorAppTests" */;
+			buildPhases = (
+				65D6D52025F8B94D000CB339 /* Sources */,
+				65D6D52125F8B94D000CB339 /* Frameworks */,
+				65D6D52225F8B94D000CB339 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				65D6D52625F8B94D000CB339 /* PBXTargetDependency */,
+			);
+			name = VaccinationValidatorAppTests;
+			productName = VaccinationValidatorAppTests;
+			productReference = 65D6D52425F8B94D000CB339 /* VaccinationValidatorAppTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		65D6D52E25F8B94E000CB339 /* VaccinationValidatorAppUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 65D6D53C25F8B94E000CB339 /* Build configuration list for PBXNativeTarget "VaccinationValidatorAppUITests" */;
+			buildPhases = (
+				65D6D52B25F8B94E000CB339 /* Sources */,
+				65D6D52C25F8B94E000CB339 /* Frameworks */,
+				65D6D52D25F8B94E000CB339 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				65D6D53125F8B94E000CB339 /* PBXTargetDependency */,
+			);
+			name = VaccinationValidatorAppUITests;
+			productName = VaccinationValidatorAppUITests;
+			productReference = 65D6D52F25F8B94E000CB339 /* VaccinationValidatorAppUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -258,19 +371,27 @@
 				LastSwiftUpdateCheck = 1240;
 				LastUpgradeCheck = 1240;
 				TargetAttributes = {
-					65D6D47125F7A634000CB339 = {
+					65D6D4DD25F8B8FB000CB339 = {
 						CreatedOnToolsVersion = 12.4;
 					};
-					65D6D47925F7A634000CB339 = {
+					65D6D4ED25F8B8FB000CB339 = {
+						CreatedOnToolsVersion = 12.4;
+						TestTargetID = 65D6D4DD25F8B8FB000CB339;
+					};
+					65D6D4F825F8B8FB000CB339 = {
+						CreatedOnToolsVersion = 12.4;
+						TestTargetID = 65D6D4DD25F8B8FB000CB339;
+					};
+					65D6D51325F8B94D000CB339 = {
 						CreatedOnToolsVersion = 12.4;
 					};
-					65D6D48125F7A634000CB339 = {
+					65D6D52325F8B94D000CB339 = {
 						CreatedOnToolsVersion = 12.4;
-						TestTargetID = 65D6D47125F7A634000CB339;
+						TestTargetID = 65D6D51325F8B94D000CB339;
 					};
-					65D6D48C25F7A634000CB339 = {
+					65D6D52E25F8B94E000CB339 = {
 						CreatedOnToolsVersion = 12.4;
-						TestTargetID = 65D6D47925F7A634000CB339;
+						TestTargetID = 65D6D51325F8B94D000CB339;
 					};
 				};
 			};
@@ -287,39 +408,59 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				65D6D47125F7A634000CB339 /* VaccinationCertificate (iOS) */,
-				65D6D47925F7A634000CB339 /* VaccinationCertificate (macOS) */,
-				65D6D48125F7A634000CB339 /* Tests iOS */,
-				65D6D48C25F7A634000CB339 /* Tests macOS */,
+				65D6D4DD25F8B8FB000CB339 /* VaccinationPassApp */,
+				65D6D4ED25F8B8FB000CB339 /* VaccinationPassAppTests */,
+				65D6D4F825F8B8FB000CB339 /* VaccinationPassAppUITests */,
+				65D6D51325F8B94D000CB339 /* VaccinationValidatorApp */,
+				65D6D52325F8B94D000CB339 /* VaccinationValidatorAppTests */,
+				65D6D52E25F8B94E000CB339 /* VaccinationValidatorAppUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		65D6D47025F7A634000CB339 /* Resources */ = {
+		65D6D4DC25F8B8FB000CB339 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				65D6D49825F7A634000CB339 /* Assets.xcassets in Resources */,
+				65D6D4E825F8B8FB000CB339 /* Preview Assets.xcassets in Resources */,
+				65D6D54F25F8B980000CB339 /* Assets.xcassets in Resources */,
+				65D6D4E525F8B8FB000CB339 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		65D6D47825F7A634000CB339 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				65D6D49925F7A634000CB339 /* Assets.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		65D6D48025F7A634000CB339 /* Resources */ = {
+		65D6D4EC25F8B8FB000CB339 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		65D6D48B25F7A634000CB339 /* Resources */ = {
+		65D6D4F725F8B8FB000CB339 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		65D6D51225F8B94D000CB339 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				65D6D51E25F8B94D000CB339 /* Preview Assets.xcassets in Resources */,
+				65D6D55025F8B982000CB339 /* Assets.xcassets in Resources */,
+				65D6D51B25F8B94D000CB339 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		65D6D52225F8B94D000CB339 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		65D6D52D25F8B94E000CB339 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -329,52 +470,78 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		65D6D46E25F7A634000CB339 /* Sources */ = {
+		65D6D4DA25F8B8FB000CB339 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				65D6D49625F7A634000CB339 /* ContentView.swift in Sources */,
-				65D6D49425F7A634000CB339 /* VaccinationCertificateApp.swift in Sources */,
+				65D6D4E125F8B8FB000CB339 /* VaccinationPassAppApp.swift in Sources */,
+				65D6D55725F8B98F000CB339 /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		65D6D47625F7A634000CB339 /* Sources */ = {
+		65D6D4EA25F8B8FB000CB339 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				65D6D49725F7A634000CB339 /* ContentView.swift in Sources */,
-				65D6D49525F7A634000CB339 /* VaccinationCertificateApp.swift in Sources */,
+				65D6D4F325F8B8FB000CB339 /* VaccinationPassAppTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		65D6D47E25F7A634000CB339 /* Sources */ = {
+		65D6D4F525F8B8FB000CB339 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				65D6D48725F7A634000CB339 /* Tests_iOS.swift in Sources */,
+				65D6D4FE25F8B8FC000CB339 /* VaccinationPassAppUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		65D6D48925F7A634000CB339 /* Sources */ = {
+		65D6D51025F8B94D000CB339 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				65D6D49225F7A634000CB339 /* Tests_macOS.swift in Sources */,
+				65D6D51725F8B94D000CB339 /* VaccinationValidatorAppApp.swift in Sources */,
+				65D6D55825F8B991000CB339 /* ContentView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		65D6D52025F8B94D000CB339 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				65D6D52925F8B94D000CB339 /* VaccinationValidatorAppTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		65D6D52B25F8B94E000CB339 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				65D6D53425F8B94E000CB339 /* VaccinationValidatorAppUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		65D6D48425F7A634000CB339 /* PBXTargetDependency */ = {
+		65D6D4F025F8B8FB000CB339 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 65D6D47125F7A634000CB339 /* VaccinationCertificate (iOS) */;
-			targetProxy = 65D6D48325F7A634000CB339 /* PBXContainerItemProxy */;
+			target = 65D6D4DD25F8B8FB000CB339 /* VaccinationPassApp */;
+			targetProxy = 65D6D4EF25F8B8FB000CB339 /* PBXContainerItemProxy */;
 		};
-		65D6D48F25F7A634000CB339 /* PBXTargetDependency */ = {
+		65D6D4FB25F8B8FC000CB339 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 65D6D47925F7A634000CB339 /* VaccinationCertificate (macOS) */;
-			targetProxy = 65D6D48E25F7A634000CB339 /* PBXContainerItemProxy */;
+			target = 65D6D4DD25F8B8FB000CB339 /* VaccinationPassApp */;
+			targetProxy = 65D6D4FA25F8B8FC000CB339 /* PBXContainerItemProxy */;
+		};
+		65D6D52625F8B94D000CB339 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 65D6D51325F8B94D000CB339 /* VaccinationValidatorApp */;
+			targetProxy = 65D6D52525F8B94D000CB339 /* PBXContainerItemProxy */;
+		};
+		65D6D53125F8B94E000CB339 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 65D6D51325F8B94D000CB339 /* VaccinationValidatorApp */;
+			targetProxy = 65D6D53025F8B94E000CB339 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -490,44 +657,46 @@
 			};
 			name = Release;
 		};
-		65D6D49D25F7A634000CB339 /* Debug */ = {
+		65D6D50025F8B8FC000CB339 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"VaccinationPassApp/Preview Content\"";
 				DEVELOPMENT_TEAM = 4L856QL76Y;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = iOS/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				INFOPLIST_FILE = VaccinationPassApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = IBM.VaccinationCertificate;
-				PRODUCT_NAME = VaccinationCertificate;
+				PRODUCT_BUNDLE_IDENTIFIER = IBM.VaccinationPassApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
-		65D6D49E25F7A634000CB339 /* Release */ = {
+		65D6D50125F8B8FC000CB339 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"VaccinationPassApp/Preview Content\"";
 				DEVELOPMENT_TEAM = 4L856QL76Y;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = iOS/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				INFOPLIST_FILE = VaccinationPassApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = IBM.VaccinationCertificate;
-				PRODUCT_NAME = VaccinationCertificate;
+				PRODUCT_BUNDLE_IDENTIFIER = IBM.VaccinationPassApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -535,140 +704,234 @@
 			};
 			name = Release;
 		};
-		65D6D4A025F7A634000CB339 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = macOS/macOS.entitlements;
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 4L856QL76Y;
-				ENABLE_HARDENED_RUNTIME = YES;
-				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = macOS/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				PRODUCT_BUNDLE_IDENTIFIER = IBM.VaccinationCertificate;
-				PRODUCT_NAME = VaccinationCertificate;
-				SDKROOT = macosx;
-				SWIFT_VERSION = 5.0;
-			};
-			name = Debug;
-		};
-		65D6D4A125F7A634000CB339 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = macOS/macOS.entitlements;
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 4L856QL76Y;
-				ENABLE_HARDENED_RUNTIME = YES;
-				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = macOS/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				PRODUCT_BUNDLE_IDENTIFIER = IBM.VaccinationCertificate;
-				PRODUCT_NAME = VaccinationCertificate;
-				SDKROOT = macosx;
-				SWIFT_VERSION = 5.0;
-			};
-			name = Release;
-		};
-		65D6D4A325F7A634000CB339 /* Debug */ = {
+		65D6D50225F8B8FC000CB339 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4L856QL76Y;
-				INFOPLIST_FILE = "Tests iOS/Info.plist";
+				INFOPLIST_FILE = VaccinationPassAppTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "IBM.Tests-iOS";
+				PRODUCT_BUNDLE_IDENTIFIER = IBM.VaccinationPassAppTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "VaccinationCertificate (iOS)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/VaccinationPassApp.app/VaccinationPassApp";
 			};
 			name = Debug;
 		};
-		65D6D4A425F7A634000CB339 /* Release */ = {
+		65D6D50325F8B8FC000CB339 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4L856QL76Y;
-				INFOPLIST_FILE = "Tests iOS/Info.plist";
+				INFOPLIST_FILE = VaccinationPassAppTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "IBM.Tests-iOS";
+				PRODUCT_BUNDLE_IDENTIFIER = IBM.VaccinationPassAppTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "VaccinationCertificate (iOS)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/VaccinationPassApp.app/VaccinationPassApp";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
-		65D6D4A625F7A634000CB339 /* Debug */ = {
+		65D6D50425F8B8FC000CB339 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 4L856QL76Y;
-				INFOPLIST_FILE = "Tests macOS/Info.plist";
+				INFOPLIST_FILE = VaccinationPassAppUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@loader_path/../Frameworks",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 11.1;
-				PRODUCT_BUNDLE_IDENTIFIER = "IBM.Tests-macOS";
+				PRODUCT_BUNDLE_IDENTIFIER = IBM.VaccinationPassAppUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
+				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
-				TEST_TARGET_NAME = "VaccinationCertificate (macOS)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = VaccinationPassApp;
 			};
 			name = Debug;
 		};
-		65D6D4A725F7A634000CB339 /* Release */ = {
+		65D6D50525F8B8FC000CB339 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 4L856QL76Y;
-				INFOPLIST_FILE = "Tests macOS/Info.plist";
+				INFOPLIST_FILE = VaccinationPassAppUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@loader_path/../Frameworks",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 11.1;
-				PRODUCT_BUNDLE_IDENTIFIER = "IBM.Tests-macOS";
+				PRODUCT_BUNDLE_IDENTIFIER = IBM.VaccinationPassAppUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
+				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
-				TEST_TARGET_NAME = "VaccinationCertificate (macOS)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = VaccinationPassApp;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		65D6D53725F8B94E000CB339 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"VaccinationValidatorApp/Preview Content\"";
+				DEVELOPMENT_TEAM = 4L856QL76Y;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = VaccinationValidatorApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = IBM.VaccinationValidatorApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		65D6D53825F8B94E000CB339 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"VaccinationValidatorApp/Preview Content\"";
+				DEVELOPMENT_TEAM = 4L856QL76Y;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = VaccinationValidatorApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = IBM.VaccinationValidatorApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		65D6D53A25F8B94E000CB339 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4L856QL76Y;
+				INFOPLIST_FILE = VaccinationValidatorAppTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = IBM.VaccinationValidatorAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/VaccinationValidatorApp.app/VaccinationValidatorApp";
+			};
+			name = Debug;
+		};
+		65D6D53B25F8B94E000CB339 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4L856QL76Y;
+				INFOPLIST_FILE = VaccinationValidatorAppTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = IBM.VaccinationValidatorAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/VaccinationValidatorApp.app/VaccinationValidatorApp";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		65D6D53D25F8B94E000CB339 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4L856QL76Y;
+				INFOPLIST_FILE = VaccinationValidatorAppUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = IBM.VaccinationValidatorAppUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = VaccinationValidatorApp;
+			};
+			name = Debug;
+		};
+		65D6D53E25F8B94E000CB339 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4L856QL76Y;
+				INFOPLIST_FILE = VaccinationValidatorAppUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = IBM.VaccinationValidatorAppUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = VaccinationValidatorApp;
+				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
@@ -684,58 +947,61 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		65D6D49C25F7A634000CB339 /* Build configuration list for PBXNativeTarget "VaccinationCertificate (iOS)" */ = {
+		65D6D50625F8B8FC000CB339 /* Build configuration list for PBXNativeTarget "VaccinationPassApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				65D6D49D25F7A634000CB339 /* Debug */,
-				65D6D49E25F7A634000CB339 /* Release */,
+				65D6D50025F8B8FC000CB339 /* Debug */,
+				65D6D50125F8B8FC000CB339 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		65D6D49F25F7A634000CB339 /* Build configuration list for PBXNativeTarget "VaccinationCertificate (macOS)" */ = {
+		65D6D50725F8B8FC000CB339 /* Build configuration list for PBXNativeTarget "VaccinationPassAppTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				65D6D4A025F7A634000CB339 /* Debug */,
-				65D6D4A125F7A634000CB339 /* Release */,
+				65D6D50225F8B8FC000CB339 /* Debug */,
+				65D6D50325F8B8FC000CB339 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		65D6D4A225F7A634000CB339 /* Build configuration list for PBXNativeTarget "Tests iOS" */ = {
+		65D6D50825F8B8FC000CB339 /* Build configuration list for PBXNativeTarget "VaccinationPassAppUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				65D6D4A325F7A634000CB339 /* Debug */,
-				65D6D4A425F7A634000CB339 /* Release */,
+				65D6D50425F8B8FC000CB339 /* Debug */,
+				65D6D50525F8B8FC000CB339 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		65D6D4A525F7A634000CB339 /* Build configuration list for PBXNativeTarget "Tests macOS" */ = {
+		65D6D53625F8B94E000CB339 /* Build configuration list for PBXNativeTarget "VaccinationValidatorApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				65D6D4A625F7A634000CB339 /* Debug */,
-				65D6D4A725F7A634000CB339 /* Release */,
+				65D6D53725F8B94E000CB339 /* Debug */,
+				65D6D53825F8B94E000CB339 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		65D6D53925F8B94E000CB339 /* Build configuration list for PBXNativeTarget "VaccinationValidatorAppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				65D6D53A25F8B94E000CB339 /* Debug */,
+				65D6D53B25F8B94E000CB339 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		65D6D53C25F8B94E000CB339 /* Build configuration list for PBXNativeTarget "VaccinationValidatorAppUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				65D6D53D25F8B94E000CB339 /* Debug */,
+				65D6D53E25F8B94E000CB339 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		65D6D4B725F7A6E2000CB339 /* VaccinationPass */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = VaccinationPass;
-		};
-		65D6D4B925F7A6E7000CB339 /* VaccinationValidator */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = VaccinationValidator;
-		};
-		65D6D4C425F7AE1E000CB339 /* VaccinationCommon */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = VaccinationCommon;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 65D6D46625F7A631000CB339 /* Project object */;
 }
