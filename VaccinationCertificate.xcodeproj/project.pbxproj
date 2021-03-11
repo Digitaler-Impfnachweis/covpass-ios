@@ -696,7 +696,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.ega.VaccinationPass;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.ibm.ega.VaccinationPass";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.ibm.ega.VaccinationPass";
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -855,7 +855,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.ega.VaccinationValidator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.ibm.ega.VaccinationValidator";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.ibm.ega.VaccinationValidator";
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
