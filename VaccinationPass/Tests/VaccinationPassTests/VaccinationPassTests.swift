@@ -1,3 +1,10 @@
+//
+//  VaccinationPassTests.swift
+//
+//
+//  Copyright © 2021 IBM. All rights reserved.
+//
+
 import XCTest
 @testable import VaccinationPass
 

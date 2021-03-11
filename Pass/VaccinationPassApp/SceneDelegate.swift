@@ -1,7 +1,12 @@
+//
+//  SceneDelegate.swift
+//
+//  Copyright © 2021 IBM. All rights reserved.
+//
+
 import UIKit
 import SwiftUI
-import VaccinationValidator
-
+import VaccinationPass
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -14,7 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
 
         // Create the SwiftUI view that provides the window contents.
-        let contentView = ValidatorDashboard()
+        let contentView = PassDashboard()
 
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {

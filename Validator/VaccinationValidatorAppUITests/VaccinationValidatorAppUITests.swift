@@ -1,13 +1,13 @@
 //
-//  VaccinationPassAppUITests.swift
-//  VaccinationPassAppUITests
+//  VaccinationValidatorAppUITests.swift
+//  VaccinationValidatorAppUITests
 //
-//  Created by Daniel on 10.03.2021.
+//  Copyright © 2021 IBM. All rights reserved.
 //
 
 import XCTest
 
-class VaccinationPassAppUITests: XCTestCase {
+class VaccinationValidatorAppUITests: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.

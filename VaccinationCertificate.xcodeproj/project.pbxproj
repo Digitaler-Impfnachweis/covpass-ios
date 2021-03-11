@@ -7,22 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		65D6D4E525F8B8FB000CB339 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65D6D4E425F8B8FB000CB339 /* Assets.xcassets */; };
-		65D6D4E825F8B8FB000CB339 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65D6D4E725F8B8FB000CB339 /* Preview Assets.xcassets */; };
-		65D6D4F325F8B8FB000CB339 /* VaccinationPassAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D6D4F225F8B8FB000CB339 /* VaccinationPassAppTests.swift */; };
-		65D6D4FE25F8B8FC000CB339 /* VaccinationPassAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D6D4FD25F8B8FC000CB339 /* VaccinationPassAppUITests.swift */; };
-		65D6D51B25F8B94D000CB339 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65D6D51A25F8B94D000CB339 /* Assets.xcassets */; };
-		65D6D51E25F8B94D000CB339 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65D6D51D25F8B94D000CB339 /* Preview Assets.xcassets */; };
-		65D6D52925F8B94D000CB339 /* VaccinationValidatorAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D6D52825F8B94D000CB339 /* VaccinationValidatorAppTests.swift */; };
-		65D6D53425F8B94E000CB339 /* VaccinationValidatorAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D6D53325F8B94E000CB339 /* VaccinationValidatorAppUITests.swift */; };
-		65D6D56C25F8BCDC000CB339 /* VaccinationPass in Frameworks */ = {isa = PBXBuildFile; productRef = 65D6D56B25F8BCDC000CB339 /* VaccinationPass */; };
 		65D6D56E25F8BCE5000CB339 /* VaccinationValidator in Frameworks */ = {isa = PBXBuildFile; productRef = 65D6D56D25F8BCE5000CB339 /* VaccinationValidator */; };
-		65D6D5C025F90EC6000CB339 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D6D5BD25F90EC6000CB339 /* AppDelegate.swift */; };
-		65D6D5C225F90EC6000CB339 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D6D5BE25F90EC6000CB339 /* SceneDelegate.swift */; };
 		65D6D5E925F910A9000CB339 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65D6D5E825F910A9000CB339 /* LaunchScreen.storyboard */; };
 		65D6D5EA25F910A9000CB339 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65D6D5E825F910A9000CB339 /* LaunchScreen.storyboard */; };
-		65D6D5F825F91294000CB339 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D6D5F725F91294000CB339 /* SceneDelegate.swift */; };
-		65D6D65825F913D1000CB339 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D6D65725F913D1000CB339 /* AppDelegate.swift */; };
+		88AB2A8425FA41E200D4EA52 /* VaccinationPass in Frameworks */ = {isa = PBXBuildFile; productRef = 88AB2A8325FA41E200D4EA52 /* VaccinationPass */; };
+		88AB2A9725FA431100D4EA52 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88AB2A3B25FA40CE00D4EA52 /* AppDelegate.swift */; };
+		88AB2A9E25FA431700D4EA52 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88AB2A3D25FA40CE00D4EA52 /* SceneDelegate.swift */; };
+		88AB2AA525FA431E00D4EA52 /* VaccinationPassAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88AB2A3F25FA40CE00D4EA52 /* VaccinationPassAppTests.swift */; };
+		88AB2AB925FA432D00D4EA52 /* VaccinationPassAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88AB2A3525FA40CE00D4EA52 /* VaccinationPassAppUITests.swift */; };
+		88AB2AC025FA433F00D4EA52 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88AB2A4625FA40CE00D4EA52 /* AppDelegate.swift */; };
+		88AB2AC725FA434500D4EA52 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88AB2A4825FA40CE00D4EA52 /* SceneDelegate.swift */; };
+		88AB2ACE25FA434B00D4EA52 /* VaccinationValidatorAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88AB2A6025FA40CE00D4EA52 /* VaccinationValidatorAppTests.swift */; };
+		88AB2AD525FA435000D4EA52 /* VaccinationValidatorAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88AB2A5D25FA40CE00D4EA52 /* VaccinationValidatorAppUITests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,34 +53,34 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		65D6D4AC25F7A6C3000CB339 /* VaccinationPass */ = {isa = PBXFileReference; lastKnownFileType = folder; path = VaccinationPass; sourceTree = "<group>"; };
-		65D6D4B125F7A6C6000CB339 /* VaccinationValidator */ = {isa = PBXFileReference; lastKnownFileType = folder; path = VaccinationValidator; sourceTree = "<group>"; };
 		65D6D4BF25F7AD8B000CB339 /* VaccinationCommon */ = {isa = PBXFileReference; lastKnownFileType = folder; path = VaccinationCommon; sourceTree = "<group>"; };
 		65D6D4DE25F8B8FB000CB339 /* VaccinationPassApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VaccinationPassApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		65D6D4E425F8B8FB000CB339 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		65D6D4E725F8B8FB000CB339 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		65D6D4E925F8B8FB000CB339 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		65D6D4EE25F8B8FB000CB339 /* VaccinationPassAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VaccinationPassAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		65D6D4F225F8B8FB000CB339 /* VaccinationPassAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaccinationPassAppTests.swift; sourceTree = "<group>"; };
-		65D6D4F425F8B8FB000CB339 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		65D6D4F925F8B8FB000CB339 /* VaccinationPassAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VaccinationPassAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		65D6D4FD25F8B8FC000CB339 /* VaccinationPassAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaccinationPassAppUITests.swift; sourceTree = "<group>"; };
-		65D6D4FF25F8B8FC000CB339 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		65D6D51425F8B94D000CB339 /* VaccinationValidatorApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VaccinationValidatorApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		65D6D51A25F8B94D000CB339 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		65D6D51D25F8B94D000CB339 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		65D6D51F25F8B94D000CB339 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		65D6D52425F8B94D000CB339 /* VaccinationValidatorAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VaccinationValidatorAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		65D6D52825F8B94D000CB339 /* VaccinationValidatorAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaccinationValidatorAppTests.swift; sourceTree = "<group>"; };
-		65D6D52A25F8B94D000CB339 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		65D6D52F25F8B94E000CB339 /* VaccinationValidatorAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VaccinationValidatorAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		65D6D53325F8B94E000CB339 /* VaccinationValidatorAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaccinationValidatorAppUITests.swift; sourceTree = "<group>"; };
-		65D6D53525F8B94E000CB339 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		65D6D5BD25F90EC6000CB339 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		65D6D5BE25F90EC6000CB339 /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		65D6D5E825F910A9000CB339 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
-		65D6D5F725F91294000CB339 /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		65D6D65725F913D1000CB339 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		88AB2A3525FA40CE00D4EA52 /* VaccinationPassAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaccinationPassAppUITests.swift; sourceTree = "<group>"; };
+		88AB2A3625FA40CE00D4EA52 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		88AB2A3825FA40CE00D4EA52 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		88AB2A3A25FA40CE00D4EA52 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		88AB2A3B25FA40CE00D4EA52 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		88AB2A3C25FA40CE00D4EA52 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		88AB2A3D25FA40CE00D4EA52 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		88AB2A3F25FA40CE00D4EA52 /* VaccinationPassAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaccinationPassAppTests.swift; sourceTree = "<group>"; };
+		88AB2A4025FA40CE00D4EA52 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		88AB2A4325FA40CE00D4EA52 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		88AB2A4525FA40CE00D4EA52 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		88AB2A4625FA40CE00D4EA52 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		88AB2A4725FA40CE00D4EA52 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		88AB2A4825FA40CE00D4EA52 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		88AB2A5D25FA40CE00D4EA52 /* VaccinationValidatorAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaccinationValidatorAppUITests.swift; sourceTree = "<group>"; };
+		88AB2A5E25FA40CE00D4EA52 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		88AB2A6025FA40CE00D4EA52 /* VaccinationValidatorAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaccinationValidatorAppTests.swift; sourceTree = "<group>"; };
+		88AB2A6125FA40CE00D4EA52 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		88AB2A7B25FA41C100D4EA52 /* VaccinationValidator */ = {isa = PBXFileReference; lastKnownFileType = folder; path = VaccinationValidator; sourceTree = "<group>"; };
+		88AB2A7C25FA41C100D4EA52 /* VaccinationPass */ = {isa = PBXFileReference; lastKnownFileType = folder; path = VaccinationPass; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,7 +88,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				65D6D56C25F8BCDC000CB339 /* VaccinationPass in Frameworks */,
+				88AB2A8425FA41E200D4EA52 /* VaccinationPass in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,16 +134,12 @@
 		65D6D46525F7A631000CB339 = {
 			isa = PBXGroup;
 			children = (
+				88AB2A7C25FA41C100D4EA52 /* VaccinationPass */,
+				88AB2A7B25FA41C100D4EA52 /* VaccinationValidator */,
 				65D6D4BF25F7AD8B000CB339 /* VaccinationCommon */,
-				65D6D4B125F7A6C6000CB339 /* VaccinationValidator */,
-				65D6D4AC25F7A6C3000CB339 /* VaccinationPass */,
+				88AB2A1D25FA40CE00D4EA52 /* Pass */,
+				88AB2A4125FA40CE00D4EA52 /* Validator */,
 				65D6D46A25F7A631000CB339 /* Shared */,
-				65D6D4DF25F8B8FB000CB339 /* VaccinationPassApp */,
-				65D6D4F125F8B8FB000CB339 /* VaccinationPassAppTests */,
-				65D6D4FC25F8B8FC000CB339 /* VaccinationPassAppUITests */,
-				65D6D51525F8B94D000CB339 /* VaccinationValidatorApp */,
-				65D6D52725F8B94D000CB339 /* VaccinationValidatorAppTests */,
-				65D6D53225F8B94E000CB339 /* VaccinationValidatorAppUITests */,
 				65D6D47325F7A634000CB339 /* Products */,
 				65D6D4B625F7A6E2000CB339 /* Frameworks */,
 			);
@@ -181,80 +173,100 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		65D6D4DF25F8B8FB000CB339 /* VaccinationPassApp */ = {
+		88AB2A1D25FA40CE00D4EA52 /* Pass */ = {
 			isa = PBXGroup;
 			children = (
-				65D6D65725F913D1000CB339 /* AppDelegate.swift */,
-				65D6D5F725F91294000CB339 /* SceneDelegate.swift */,
-				65D6D4E425F8B8FB000CB339 /* Assets.xcassets */,
-				65D6D4E925F8B8FB000CB339 /* Info.plist */,
-				65D6D4E625F8B8FB000CB339 /* Preview Content */,
+				88AB2A3725FA40CE00D4EA52 /* VaccinationPassApp */,
+				88AB2A3E25FA40CE00D4EA52 /* VaccinationPassAppTests */,
+				88AB2A3425FA40CE00D4EA52 /* VaccinationPassAppUITests */,
 			);
-			path = VaccinationPassApp;
+			path = Pass;
 			sourceTree = "<group>";
 		};
-		65D6D4E625F8B8FB000CB339 /* Preview Content */ = {
+		88AB2A3425FA40CE00D4EA52 /* VaccinationPassAppUITests */ = {
 			isa = PBXGroup;
 			children = (
-				65D6D4E725F8B8FB000CB339 /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
-			sourceTree = "<group>";
-		};
-		65D6D4F125F8B8FB000CB339 /* VaccinationPassAppTests */ = {
-			isa = PBXGroup;
-			children = (
-				65D6D4F225F8B8FB000CB339 /* VaccinationPassAppTests.swift */,
-				65D6D4F425F8B8FB000CB339 /* Info.plist */,
-			);
-			path = VaccinationPassAppTests;
-			sourceTree = "<group>";
-		};
-		65D6D4FC25F8B8FC000CB339 /* VaccinationPassAppUITests */ = {
-			isa = PBXGroup;
-			children = (
-				65D6D4FD25F8B8FC000CB339 /* VaccinationPassAppUITests.swift */,
-				65D6D4FF25F8B8FC000CB339 /* Info.plist */,
+				88AB2A3525FA40CE00D4EA52 /* VaccinationPassAppUITests.swift */,
+				88AB2A3625FA40CE00D4EA52 /* Info.plist */,
 			);
 			path = VaccinationPassAppUITests;
 			sourceTree = "<group>";
 		};
-		65D6D51525F8B94D000CB339 /* VaccinationValidatorApp */ = {
+		88AB2A3725FA40CE00D4EA52 /* VaccinationPassApp */ = {
 			isa = PBXGroup;
 			children = (
-				65D6D5BD25F90EC6000CB339 /* AppDelegate.swift */,
-				65D6D5BE25F90EC6000CB339 /* SceneDelegate.swift */,
-				65D6D51A25F8B94D000CB339 /* Assets.xcassets */,
-				65D6D51F25F8B94D000CB339 /* Info.plist */,
-				65D6D51C25F8B94D000CB339 /* Preview Content */,
+				88AB2A3825FA40CE00D4EA52 /* Assets.xcassets */,
+				88AB2A3925FA40CE00D4EA52 /* Preview Content */,
+				88AB2A3B25FA40CE00D4EA52 /* AppDelegate.swift */,
+				88AB2A3C25FA40CE00D4EA52 /* Info.plist */,
+				88AB2A3D25FA40CE00D4EA52 /* SceneDelegate.swift */,
 			);
-			path = VaccinationValidatorApp;
+			path = VaccinationPassApp;
 			sourceTree = "<group>";
 		};
-		65D6D51C25F8B94D000CB339 /* Preview Content */ = {
+		88AB2A3925FA40CE00D4EA52 /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
-				65D6D51D25F8B94D000CB339 /* Preview Assets.xcassets */,
+				88AB2A3A25FA40CE00D4EA52 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		65D6D52725F8B94D000CB339 /* VaccinationValidatorAppTests */ = {
+		88AB2A3E25FA40CE00D4EA52 /* VaccinationPassAppTests */ = {
 			isa = PBXGroup;
 			children = (
-				65D6D52825F8B94D000CB339 /* VaccinationValidatorAppTests.swift */,
-				65D6D52A25F8B94D000CB339 /* Info.plist */,
+				88AB2A3F25FA40CE00D4EA52 /* VaccinationPassAppTests.swift */,
+				88AB2A4025FA40CE00D4EA52 /* Info.plist */,
 			);
-			path = VaccinationValidatorAppTests;
+			path = VaccinationPassAppTests;
 			sourceTree = "<group>";
 		};
-		65D6D53225F8B94E000CB339 /* VaccinationValidatorAppUITests */ = {
+		88AB2A4125FA40CE00D4EA52 /* Validator */ = {
 			isa = PBXGroup;
 			children = (
-				65D6D53325F8B94E000CB339 /* VaccinationValidatorAppUITests.swift */,
-				65D6D53525F8B94E000CB339 /* Info.plist */,
+				88AB2A4225FA40CE00D4EA52 /* VaccinationValidatorApp */,
+				88AB2A5F25FA40CE00D4EA52 /* VaccinationValidatorAppTests */,
+				88AB2A5C25FA40CE00D4EA52 /* VaccinationValidatorAppUITests */,
+			);
+			path = Validator;
+			sourceTree = "<group>";
+		};
+		88AB2A4225FA40CE00D4EA52 /* VaccinationValidatorApp */ = {
+			isa = PBXGroup;
+			children = (
+				88AB2A4325FA40CE00D4EA52 /* Assets.xcassets */,
+				88AB2A4425FA40CE00D4EA52 /* Preview Content */,
+				88AB2A4625FA40CE00D4EA52 /* AppDelegate.swift */,
+				88AB2A4725FA40CE00D4EA52 /* Info.plist */,
+				88AB2A4825FA40CE00D4EA52 /* SceneDelegate.swift */,
+			);
+			path = VaccinationValidatorApp;
+			sourceTree = "<group>";
+		};
+		88AB2A4425FA40CE00D4EA52 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				88AB2A4525FA40CE00D4EA52 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		88AB2A5C25FA40CE00D4EA52 /* VaccinationValidatorAppUITests */ = {
+			isa = PBXGroup;
+			children = (
+				88AB2A5D25FA40CE00D4EA52 /* VaccinationValidatorAppUITests.swift */,
+				88AB2A5E25FA40CE00D4EA52 /* Info.plist */,
 			);
 			path = VaccinationValidatorAppUITests;
+			sourceTree = "<group>";
+		};
+		88AB2A5F25FA40CE00D4EA52 /* VaccinationValidatorAppTests */ = {
+			isa = PBXGroup;
+			children = (
+				88AB2A6025FA40CE00D4EA52 /* VaccinationValidatorAppTests.swift */,
+				88AB2A6125FA40CE00D4EA52 /* Info.plist */,
+			);
+			path = VaccinationValidatorAppTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -274,7 +286,7 @@
 			);
 			name = VaccinationPassApp;
 			packageProductDependencies = (
-				65D6D56B25F8BCDC000CB339 /* VaccinationPass */,
+				88AB2A8325FA41E200D4EA52 /* VaccinationPass */,
 			);
 			productName = VaccinationPassApp;
 			productReference = 65D6D4DE25F8B8FB000CB339 /* VaccinationPassApp.app */;
@@ -436,8 +448,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				65D6D5E925F910A9000CB339 /* LaunchScreen.storyboard in Resources */,
-				65D6D4E825F8B8FB000CB339 /* Preview Assets.xcassets in Resources */,
-				65D6D4E525F8B8FB000CB339 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -460,8 +470,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				65D6D5EA25F910A9000CB339 /* LaunchScreen.storyboard in Resources */,
-				65D6D51E25F8B94D000CB339 /* Preview Assets.xcassets in Resources */,
-				65D6D51B25F8B94D000CB339 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -486,8 +494,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				65D6D65825F913D1000CB339 /* AppDelegate.swift in Sources */,
-				65D6D5F825F91294000CB339 /* SceneDelegate.swift in Sources */,
+				88AB2A9725FA431100D4EA52 /* AppDelegate.swift in Sources */,
+				88AB2A9E25FA431700D4EA52 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -495,7 +503,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				65D6D4F325F8B8FB000CB339 /* VaccinationPassAppTests.swift in Sources */,
+				88AB2AA525FA431E00D4EA52 /* VaccinationPassAppTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -503,7 +511,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				65D6D4FE25F8B8FC000CB339 /* VaccinationPassAppUITests.swift in Sources */,
+				88AB2AB925FA432D00D4EA52 /* VaccinationPassAppUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -511,8 +519,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				65D6D5C025F90EC6000CB339 /* AppDelegate.swift in Sources */,
-				65D6D5C225F90EC6000CB339 /* SceneDelegate.swift in Sources */,
+				88AB2AC025FA433F00D4EA52 /* AppDelegate.swift in Sources */,
+				88AB2AC725FA434500D4EA52 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -520,7 +528,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				65D6D52925F8B94D000CB339 /* VaccinationValidatorAppTests.swift in Sources */,
+				88AB2ACE25FA434B00D4EA52 /* VaccinationValidatorAppTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -528,7 +536,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				65D6D53425F8B94E000CB339 /* VaccinationValidatorAppUITests.swift in Sources */,
+				88AB2AD525FA435000D4EA52 /* VaccinationValidatorAppUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -677,10 +685,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 3;
-				DEVELOPMENT_ASSET_PATHS = "\"VaccinationPassApp/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Pass/VaccinationPassApp/Preview Content\"";
 				DEVELOPMENT_TEAM = ***REMOVED***;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = VaccinationPassApp/Info.plist;
+				INFOPLIST_FILE = Pass/VaccinationPassApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -704,10 +712,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 3;
-				DEVELOPMENT_ASSET_PATHS = "\"VaccinationPassApp/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Pass/VaccinationPassApp/Preview Content\"";
 				DEVELOPMENT_TEAM = ***REMOVED***;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = VaccinationPassApp/Info.plist;
+				INFOPLIST_FILE = Pass/VaccinationPassApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -836,10 +844,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 3;
-				DEVELOPMENT_ASSET_PATHS = "\"VaccinationValidatorApp/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Validator/VaccinationValidatorApp/Preview Content\"";
 				DEVELOPMENT_TEAM = ***REMOVED***;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = VaccinationValidatorApp/Info.plist;
+				INFOPLIST_FILE = Validator/VaccinationValidatorApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -863,10 +871,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 3;
-				DEVELOPMENT_ASSET_PATHS = "\"VaccinationValidatorApp/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Validator/VaccinationValidatorApp/Preview Content\"";
 				DEVELOPMENT_TEAM = ***REMOVED***;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = VaccinationValidatorApp/Info.plist;
+				INFOPLIST_FILE = Validator/VaccinationValidatorApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1052,13 +1060,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		65D6D56B25F8BCDC000CB339 /* VaccinationPass */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = VaccinationPass;
-		};
 		65D6D56D25F8BCE5000CB339 /* VaccinationValidator */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = VaccinationValidator;
+		};
+		88AB2A8325FA41E200D4EA52 /* VaccinationPass */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = VaccinationPass;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

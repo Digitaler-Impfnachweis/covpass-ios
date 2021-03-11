@@ -2,7 +2,7 @@
 //  PassDashboard.swift
 //  
 //
-//  Created by Daniel on 10.03.2021.
+//  Copyright © 2021 IBM. All rights reserved.
 //
 
 import SwiftUI
