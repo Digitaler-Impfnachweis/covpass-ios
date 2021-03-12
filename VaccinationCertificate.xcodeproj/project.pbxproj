@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6507D7E625FB5DF700D69F94 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 88AB2A3825FA40CE00D4EA52 /* Assets.xcassets */; };
+		6507D7ED25FB5E0300D69F94 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 88AB2A4325FA40CE00D4EA52 /* Assets.xcassets */; };
+		6507D7F425FB5E1200D69F94 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 88AB2A4525FA40CE00D4EA52 /* Preview Assets.xcassets */; };
+		6507D7FB25FB5E1C00D69F94 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 88AB2A3A25FA40CE00D4EA52 /* Preview Assets.xcassets */; };
 		65D6D56E25F8BCE5000CB339 /* VaccinationValidator in Frameworks */ = {isa = PBXBuildFile; productRef = 65D6D56D25F8BCE5000CB339 /* VaccinationValidator */; };
 		65D6D5E925F910A9000CB339 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65D6D5E825F910A9000CB339 /* LaunchScreen.storyboard */; };
 		65D6D5EA25F910A9000CB339 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65D6D5E825F910A9000CB339 /* LaunchScreen.storyboard */; };
@@ -447,6 +451,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6507D7E625FB5DF700D69F94 /* Assets.xcassets in Resources */,
+				6507D7FB25FB5E1C00D69F94 /* Preview Assets.xcassets in Resources */,
 				65D6D5E925F910A9000CB339 /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -469,6 +475,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6507D7ED25FB5E0300D69F94 /* Assets.xcassets in Resources */,
+				6507D7F425FB5E1200D69F94 /* Preview Assets.xcassets in Resources */,
 				65D6D5EA25F910A9000CB339 /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
