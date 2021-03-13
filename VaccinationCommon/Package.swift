@@ -14,7 +14,7 @@ let package = Package(
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
-         .package(url: "https://github.com/IBM/ios-keychain", from: "0.0.1"),
+        .package(name: "Keychain", url: "https://github.com/IBM/ios-keychain", from: "0.0.1")
         
     ],
     targets: [
