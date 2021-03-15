@@ -1,0 +1,25 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "CodeScanner",
+        "repositoryURL": "https://github.com/twostraws/CodeScanner",
+        "state": {
+          "branch": null,
+          "revision": "a2144ddaa7c43a6ee00873edd4cc7815ad97942f",
+          "version": "1.0.7"
+        }
+      },
+      {
+        "package": "Keychain",
+        "repositoryURL": "https://github.com/IBM/ios-keychain",
+        "state": {
+          "branch": null,
+          "revision": "c6791e21f77b795e9a309c6f8e05096ba45f3d44",
+          "version": "0.0.2"
+        }
+      }
+    ]
+  },
+  "version": 1
+}
