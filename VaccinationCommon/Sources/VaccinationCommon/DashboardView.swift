@@ -5,9 +5,11 @@
 //  Copyright © 2021 IBM. All rights reserved.
 //
 
+import CodeScanner
 import SwiftUI
 
 public struct DashboardView: View {
+    @State private var isShowingScanner = false
     
     public init() {
         
@@ -15,15 +17,34 @@ public struct DashboardView: View {
     
     public var body: some View {
         VStack {
-            Text("Hello, Gabrilea")
+            Text("Hello, Gabriela")
             Button(action: tap) {
-                Text("Tap this Buttom")
+                Text("Tap this Button")
+            }
+            .font(.title)
+            .padding()
+            .background(Color.black)
+            .sheet(isPresented: $isShowingScanner) {
+                CodeScannerView(codeTypes: [.qr], simulatedData: "Gabriela Secelean\ngabriela.secelean@ibm.com", completion: self.handleScan)
             }
         }
     }
     
     func tap() {
-        
+        self.isShowingScanner = true
+    }
+
+    func handleScan(result: Result<String, CodeScannerView.ScanError>) {
+       self.isShowingScanner = false
+        switch result {
+        case .success(let code):
+            let details = code.components(separatedBy: "\n")
+            guard details.count == 2 else { return }
+
+            print("Managed to scan name: \(details[0]) and e-mail address \(details[1])")
+        case .failure(let error):
+            print("Scanning failed with error \(error)")
+        }
     }
 }
 
