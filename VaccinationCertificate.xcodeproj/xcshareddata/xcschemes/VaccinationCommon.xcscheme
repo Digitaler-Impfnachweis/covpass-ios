@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "VaccinationPass"
-               BuildableName = "VaccinationPass"
-               BlueprintName = "VaccinationPass"
-               ReferencedContainer = "container:">
+               BlueprintIdentifier = "VaccinationCommon"
+               BuildableName = "VaccinationCommon"
+               BlueprintName = "VaccinationCommon"
+               ReferencedContainer = "container:VaccinationCommon">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,10 +33,10 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "VaccinationPassTests"
-               BuildableName = "VaccinationPassTests"
-               BlueprintName = "VaccinationPassTests"
-               ReferencedContainer = "container:">
+               BlueprintIdentifier = "VaccinationCommonTests"
+               BuildableName = "VaccinationCommonTests"
+               BlueprintName = "VaccinationCommonTests"
+               ReferencedContainer = "container:VaccinationCommon">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -61,10 +61,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "VaccinationPass"
-            BuildableName = "VaccinationPass"
-            BlueprintName = "VaccinationPass"
-            ReferencedContainer = "container:">
+            BlueprintIdentifier = "VaccinationCommon"
+            BuildableName = "VaccinationCommon"
+            BlueprintName = "VaccinationCommon"
+            ReferencedContainer = "container:VaccinationCommon">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>
