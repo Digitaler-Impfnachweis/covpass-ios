@@ -32,18 +32,11 @@ class DotViewTests: XCTestCase {
     
     // MARK: - Tests
     
-    func testConfiguration() throws {
+    func testBody() throws {
         XCTAssertNotNil(sut.body)
-    }
-    
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct
-        // results.
-        XCTAssertEqual(VaccinationCommon().text, "Hello, World!")
     }
 
     static var allTests = [
-        ("testExample", testExample),
+        ("testBody", testBody),
     ]
 }
