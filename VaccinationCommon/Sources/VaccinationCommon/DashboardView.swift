@@ -6,6 +6,7 @@
 //
 
 import CodeScanner
+import SwiftCBOR
 import SwiftUI
 
 public struct DashboardView: View {

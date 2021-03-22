@@ -18,6 +18,15 @@
           "revision": "c6791e21f77b795e9a309c6f8e05096ba45f3d44",
           "version": "0.0.2"
         }
+      },
+      {
+        "package": "SwiftCBOR",
+        "repositoryURL": "https://github.com/unrelentingtech/SwiftCBOR",
+        "state": {
+          "branch": null,
+          "revision": "668c26fc3373d5f1bccbaad7665ca6048797e324",
+          "version": "0.4.3"
+        }
       }
     ]
   },
