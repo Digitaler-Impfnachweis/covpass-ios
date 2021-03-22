@@ -10,12 +10,20 @@ import SwiftUI
 
 public struct DashboardView: View {
     @State private var isShowingScanner = false
+    @State private var showActivityIndicator = false
     
     public init() {
         
     }
     
     public var body: some View {
+        VStack {
+            Toggle("Show activity indicator", isOn: $showActivityIndicator)
+            viewThatWillChange
+        }
+    }
+    
+    var viewThatWillChange: some View {
         VStack {
             Text("Hello, Gabriela")
             Button(action: tap) {
@@ -27,7 +35,7 @@ public struct DashboardView: View {
             .sheet(isPresented: $isShowingScanner) {
                 CodeScannerView(codeTypes: [.qr], simulatedData: "Gabriela Secelean\ngabriela.secelean@ibm.com", completion: self.handleScan)
             }
-        }
+        }.showLoadingView(when: $showActivityIndicator)
     }
     
     func tap() {
