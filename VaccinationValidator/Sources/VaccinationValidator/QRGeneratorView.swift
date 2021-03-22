@@ -27,7 +27,7 @@ struct QRGeneratorView: View {
             TextField(titleKey, text: $text)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding()
-            Image(uiImage: UIImage(data: getQRCodeData(text: text)!)!)
+            Image(uiImage: getQRCodeImage(from: text))
                 .resizable()
                 .frame(width: imageWidth, height: imageHeight)
         }
@@ -42,5 +42,10 @@ struct QRGeneratorView: View {
         let scaledCIImage = ciimage.transformed(by: transform)
         let uiimage = UIImage(ciImage: scaledCIImage)
         return uiimage.pngData()
+    }
+
+    func getQRCodeImage(from text: String) -> UIImage {
+        guard let data = getQRCodeData(text: text), let qrImage = UIImage(data: data) else { return UIImage() }
+        return qrImage
     }
 }
