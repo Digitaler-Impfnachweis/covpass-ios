@@ -11,12 +11,20 @@ import SwiftUI
 struct QRGeneratorView: View {
     @State private var text = ""
 
-    private let imageWidth: CGFloat = 200
-    private let imageHeight: CGFloat = 200
+    private let imageWidth: CGFloat
+    private let imageHeight: CGFloat
+
+    private let titleKey: LocalizedStringKey
+
+    public init(imageWidth: CGFloat = 200, imageHeight: CGFloat = 200, titleKey: LocalizedStringKey = "Enter code") {
+        self.imageWidth = imageWidth
+        self.imageHeight = imageHeight
+        self.titleKey = titleKey
+    }
     
     var body: some View {
         VStack {
-            TextField("Enter code", text: $text)
+            TextField(titleKey, text: $text)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding()
             Image(uiImage: UIImage(data: getQRCodeData(text: text)!)!)
