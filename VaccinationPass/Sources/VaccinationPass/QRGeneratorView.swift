@@ -7,18 +7,12 @@
 
 import SwiftUI
 
-
 struct QRGeneratorView: View {
     @State private var text = ""
 
-    private let imageWidth: CGFloat
-    private let imageHeight: CGFloat
-
     private let titleKey: LocalizedStringKey
 
-    public init(imageWidth: CGFloat = 200, imageHeight: CGFloat = 200, titleKey: LocalizedStringKey = "Enter code") {
-        self.imageWidth = imageWidth
-        self.imageHeight = imageHeight
+    public init(titleKey: LocalizedStringKey = "Enter code") {
         self.titleKey = titleKey
     }
     
@@ -29,7 +23,7 @@ struct QRGeneratorView: View {
                 .padding()
             Image(uiImage: getQRCodeImage(from: text))
                 .resizable()
-                .frame(width: imageWidth, height: imageHeight)
+                .aspectRatio(contentMode: .fit)
         }
     }
     
@@ -47,5 +41,12 @@ struct QRGeneratorView: View {
     func getQRCodeImage(from text: String) -> UIImage {
         guard let data = getQRCodeData(text: text), let qrImage = UIImage(data: data) else { return UIImage() }
         return qrImage
+    }
+}
+
+struct QRGeneratorView_Previews: PreviewProvider {
+    static var previews: some View {
+        QRGeneratorView()
+            .frame(width: 400, height: 400)
     }
 }

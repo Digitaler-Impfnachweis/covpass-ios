@@ -13,7 +13,7 @@ public struct ValidatorDashboard: View {
     public init() {}
     
     public var body: some View {
-        QRGeneratorView()
+        DashboardView()
     }
 }
 
