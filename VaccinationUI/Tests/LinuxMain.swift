@@ -3,7 +3,8 @@
 //
 
 import XCTest
-import VaccinationCommonTests
+
+import VaccinationValidatorTests
 
 var tests = [XCTestCaseEntry]()
 XCTMain(tests)
