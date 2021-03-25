@@ -396,6 +396,7 @@
 			attributes = {
 				LastSwiftUpdateCheck = 1240;
 				LastUpgradeCheck = 1240;
+				ORGANIZATIONNAME = IBM;
 				TargetAttributes = {
 					65D6D4DD25F8B8FB000CB339 = {
 						CreatedOnToolsVersion = 12.4;
