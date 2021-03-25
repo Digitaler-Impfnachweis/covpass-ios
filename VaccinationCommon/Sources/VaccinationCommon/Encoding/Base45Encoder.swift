@@ -2,7 +2,7 @@
 //  Base45Encoder.swift
 //  
 //
-//  Created by Gabriela Secelean on 23.03.2021.
+//  Copyright © 2021 IBM. All rights reserved.
 //
 
 import Foundation
@@ -15,15 +15,65 @@ class Base45Encoder {
         34: "Y", 35: "Z", 36: " ", 37: "$", 38: "%", 39: "*", 40: "+", 41: "-", 42: ".", 43: "/", 44: ":"
     ]
 
-    func encode(_ int8Array: [Int8]) -> String {
-        let int16Array = sequence(state: int8Array.makeIterator(), next: { it in
+    func encode(_ int8Array: [UInt8]) -> String {
+        var encodedString = ""
+        let _ = sequence(state: int8Array.makeIterator(), next: { it in
             it.next().map { ($0, it.next()) }
-        }).map { convertToInt16(firstInt: $0, secondInt: $1 ?? 0 ) }
+        }).map { encodedString += mapToBase45Character(firstInt: $0, secondInt: $1) }
+
+        return encodedString
     }
 
-    private func convertToInt16(firstInt: Int8, secondInt: Int8) -> Int16 {
-        let bytes: [Int8] = [firstInt, secondInt]
+    func decode(_ payload: String) -> [UInt8] {
+        var base45Values = [UInt8]()
+        var result = [UInt8]()
 
-        return Int16(bytes[0]) << 8 | Int16(bytes[1])
+        for character in payload {
+            if let key = base45Table.getKey(for: String(character)) {
+                base45Values.append(UInt8(key))
+            }
+        }
+
+        base45Values.chunked(into: 3).forEach { result.append(contentsOf: mapToCBOR($0)) }
+
+        return result
+    }
+
+    private func mapToBase45Character(firstInt: UInt8, secondInt: UInt8?) -> String {
+        guard let lastInt = secondInt else {
+            return expand(number: UInt16(firstInt), by: 2)
+        }
+        let int16Value = UInt16(firstInt) << 8 | UInt16(lastInt)
+
+        return expand(number: int16Value, by: 3)
+    }
+
+    private func mapToCBOR(_ sequence: [UInt8]) -> [UInt8] {
+        guard sequence.count == 3 else { return [UInt8(reduce(array: sequence) & 0x00ff)] }
+
+        let int16Value = reduce(array: sequence)
+        return [UInt8(int16Value >> 8), UInt8(int16Value & 0x00ff)]
+    }
+
+    private func expand(number: UInt16, by count: Int) -> String {
+        var result = ""
+        var integerNumber = Int(number)
+
+        for _ in 0..<count {
+            result += base45Table[integerNumber % 45] ?? ""
+            integerNumber /= 45
+        }
+
+        return result
+    }
+
+    private func reduce(array: [UInt8]) -> UInt16 {
+        var result: UInt16 = 0
+
+        for count in 0..<array.count {
+            result += UInt16(array[count]) * UInt16(pow(45, Double(count)))
+        }
+
+        return result
     }
 }

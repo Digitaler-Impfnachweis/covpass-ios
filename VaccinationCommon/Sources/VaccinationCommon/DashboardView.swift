@@ -33,6 +33,7 @@ public struct DashboardView: View {
         "ve": "1.0.0",
         "se": "1r8qh67qeqt"
     ]
+    private let base45Encoder = Base45Encoder()
 
     public init() {}
     
@@ -72,13 +73,17 @@ public struct DashboardView: View {
     }
 
     func encodeJson() {
-        guard let jsonString = convertJson(from: dummyJson) else { return }
-        print("JSON String: \(jsonString)")
-        let cborEncodedString = CBOR.encode(jsonString)
-        print("JSON encoded with CBOR: \(cborEncodedString)")
-        let cborData = Data(cborEncodedString)
-        let base64CborData = cborData.base64EncodedString()
-        print("Base64 encoding result is: \(base64CborData)")
+//        guard let jsonString = convertJson(from: dummyJson) else { return }
+//
+//        let cborEncodedString = CBOR.encode(jsonString)
+//
+//        let cborData = Data(cborEncodedString)
+        let dummyTestData: [UInt8] = [72, 101, 108, 108, 111, 33, 33]
+        let base64CborData = base45Encoder.encode(dummyTestData)
+        print("Base45 encoding result is: \(base64CborData)")
+
+        let rawCborData = base45Encoder.decode(base64CborData)
+        print("Raw decoded data is: \(rawCborData)")
     }
 
     func convertJson(from stringOject: Dictionary<String, String>) -> String? {
