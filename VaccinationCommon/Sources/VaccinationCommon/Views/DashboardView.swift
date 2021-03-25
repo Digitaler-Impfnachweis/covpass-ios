@@ -11,6 +11,7 @@ import SwiftUI
 
 public struct DashboardView: View {
     @State private var isShowingScanner = false
+    @State private var showActivityIndicator = false
 
     private let dummyJson: Dictionary<String, String> = [
         "fn": "Mustermann",
@@ -39,6 +40,13 @@ public struct DashboardView: View {
     
     public var body: some View {
         VStack {
+            Toggle("Show activity indicator", isOn: $showActivityIndicator)
+            viewThatWillChange
+        }
+    }
+    
+    var viewThatWillChange: some View {
+        VStack {
             Text("Hello, Gabriela")
             Button(action: tap) {
                 Text("Tap this Button")
@@ -52,7 +60,7 @@ public struct DashboardView: View {
             Button(action: encodeJson) {
                 Text("Start CBOR encoding")
             }
-        }
+        }.showLoadingView(when: $showActivityIndicator)
     }
     
     func tap() {

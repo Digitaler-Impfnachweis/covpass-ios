@@ -13,7 +13,8 @@ public struct PassDashboard: View {
     public init() {}
     
     public var body: some View {
-        DashboardView()
+        QRGeneratorView()
+            .frame(width: 400, height: 400)
     }
 }
 
