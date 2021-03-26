@@ -16,27 +16,21 @@ class Base45Encoder {
     ]
 
     func encode(_ int8Array: [UInt8]) -> String {
-        var encodedString = ""
-        let _ = sequence(state: int8Array.makeIterator(), next: { it in
+        return sequence(state: int8Array.makeIterator(), next: { it in
             it.next().map { ($0, it.next()) }
-        }).map { encodedString += mapToBase45Character(firstInt: $0, secondInt: $1) }
-
-        return encodedString
+        }).map { mapToBase45Character(firstInt: $0, secondInt: $1) }.joined()
     }
 
     func decode(_ payload: String) -> [UInt8] {
         var base45Values = [UInt8]()
-        var result = [UInt8]()
 
         for character in payload {
-            if let key = base45Table.getKey(for: String(character)) {
+            if let key = base45Table.getKeys(for: String(character)).first {
                 base45Values.append(UInt8(key))
             }
         }
 
-        base45Values.chunked(into: 3).forEach { result.append(contentsOf: mapToCBOR($0)) }
-
-        return result
+        return base45Values.chunked(into: 3).flatMap { mapToCBOR($0) }
     }
 
     private func mapToBase45Character(firstInt: UInt8, secondInt: UInt8?) -> String {

@@ -57,9 +57,6 @@ public struct DashboardView: View {
             .sheet(isPresented: $isShowingScanner) {
                 CodeScannerView(codeTypes: [.qr], simulatedData: "Gabriela Secelean\ngabriela.secelean@ibm.com", completion: self.handleScan)
             }
-            Button(action: encodeJson) {
-                Text("Start CBOR encoding")
-            }
         }.showLoadingView(when: $showActivityIndicator)
     }
     
