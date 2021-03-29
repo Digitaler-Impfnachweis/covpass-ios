@@ -829,7 +829,6 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 29;
-				DEVELOPMENT_ASSET_PATHS = "\"Validator/VaccinationValidatorApp/Preview Content\"";
 				DEVELOPMENT_TEAM = ***REMOVED***;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Validator/VaccinationValidatorApp/Info.plist;
@@ -857,7 +856,6 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 29;
-				DEVELOPMENT_ASSET_PATHS = "\"Validator/VaccinationValidatorApp/Preview Content\"";
 				DEVELOPMENT_TEAM = ***REMOVED***;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Validator/VaccinationValidatorApp/Info.plist;

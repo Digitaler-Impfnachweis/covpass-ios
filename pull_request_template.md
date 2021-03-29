@@ -59,6 +59,8 @@
 
 ## VaccinationCommon
 
+## VaccinationUI
+
 ## VaccinationPass
 
 ## VaccinationValidator
