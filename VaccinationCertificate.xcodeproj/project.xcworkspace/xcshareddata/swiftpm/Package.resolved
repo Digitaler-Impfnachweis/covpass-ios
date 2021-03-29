@@ -9,6 +9,15 @@
           "revision": "c6791e21f77b795e9a309c6f8e05096ba45f3d44",
           "version": "0.0.2"
         }
+      },
+      {
+        "package": "Scanner",
+        "repositoryURL": "https://github.com/DanielMandea/ios-scanner.git",
+        "state": {
+          "branch": null,
+          "revision": "0baeae98e7fc7e349d8366786b02fe33a7fc0a1e",
+          "version": "0.0.1"
+        }
       }
     ]
   },
