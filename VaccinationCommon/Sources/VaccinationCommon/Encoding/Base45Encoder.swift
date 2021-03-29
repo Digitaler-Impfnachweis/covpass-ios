@@ -15,12 +15,18 @@ class Base45Encoder {
         34: "Y", 35: "Z", 36: " ", 37: "$", 38: "%", 39: "*", 40: "+", 41: "-", 42: ".", 43: "/", 44: ":"
     ]
 
+    /// This method encodes an array of unsigned 8 bit integers representing ascii values to a String in base45
+    /// - parameter int8Array: the array to be encoded
+    /// - returns: a String in base45
     func encode(_ int8Array: [UInt8]) -> String {
         return sequence(state: int8Array.makeIterator(), next: { it in
             it.next().map { ($0, it.next()) }
         }).map { mapToBase45Character(firstInt: $0, secondInt: $1) }.joined()
     }
 
+    /// This method decodes a base45 String back into an array of UInt8 ascii values
+    /// - parameter payload: a String represented in base45
+    /// - returns: an array of unsigned 8 bit integers representing ascii values
     func decode(_ payload: String) -> [UInt8] {
         var base45Values = [UInt8]()
 
@@ -33,6 +39,13 @@ class Base45Encoder {
         return base45Values.chunked(into: 3).flatMap { mapToCBOR($0) }
     }
 
+
+    // MARK: - Private helper methods
+
+    /// This method takes two 8 bit integer values, converts them into a 16 bit value and calls the `expand` method to receive a base45 character
+    /// - parameter firstInt: an unsignd 8 bit integer
+    /// - parameter secondInt: the second unsigned 8 bit integer, an optional value which will be ignored in case it has the value `nil`
+    /// - returns: a base45 String
     private func mapToBase45Character(firstInt: UInt8, secondInt: UInt8?) -> String {
         guard let lastInt = secondInt else {
             return expand(number: UInt16(firstInt), by: 2)
@@ -42,6 +55,10 @@ class Base45Encoder {
         return expand(number: int16Value, by: 3)
     }
 
+    /// Expects an array of length either 3 or 2 of base45 unsigned 8 bit integer values which will then be converted to a 16 bit value through the `reduce` method, afterwards being splitted in two or three unsigned 8 bit integers
+    /// depending on the initial length of the array
+    /// - parameter sequence: an array of unsigned 8 bit integers of length 3 or 2
+    /// - returns: an array with length 2 or 1 of unsigned 8 bit integer values, depending on the length of `sequence`
     private func mapToCBOR(_ sequence: [UInt8]) -> [UInt8] {
         guard sequence.count == 3 else { return [UInt8(reduce(array: sequence) & 0x00ff)] }
 
@@ -49,6 +66,10 @@ class Base45Encoder {
         return [UInt8(int16Value >> 8), UInt8(int16Value & 0x00ff)]
     }
 
+    /// Expands an unsigned 16 bit integer into a string composed of base45 characters
+    /// - parameter number: the 16 bit integer number to be mapped to base45 characters
+    /// - parameter count: an integer establishing the number of characters the 16 bit value should be split into
+    /// - returns: a base45 String
     private func expand(number: UInt16, by count: Int) -> String {
         var result = ""
         var integerNumber = Int(number)
@@ -61,6 +82,9 @@ class Base45Encoder {
         return result
     }
 
+    /// Reduces an array of length 3 or 2 of base45 integers to an unsigned 16 bit value
+    /// - parameter array: the base45 integer array to be reduced to a UInt16 value
+    /// - returns: The unsigned 16 bit value resulted from compressing the received array
     private func reduce(array: [UInt8]) -> UInt16 {
         var result: UInt16 = 0
 
