@@ -79,7 +79,8 @@ class Base45Encoder {
         var integerNumber = Int(number)
 
         for _ in 0..<count {
-            result += base45Table[integerNumber % 45] ?? ""
+            let base45Character = base45Table[integerNumber % 45] ?? ""
+            result += base45Character
             integerNumber /= 45
         }
 

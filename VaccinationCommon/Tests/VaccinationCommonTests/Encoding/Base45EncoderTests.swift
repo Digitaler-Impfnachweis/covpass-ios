@@ -27,7 +27,7 @@ class Base45EncoderTests: XCTestCase {
         super.tearDown()
     }
 
-    func testSucccessfulEncoding() {
+    func testSuccessfulEncoding() {
         rawToBase45.forEach { key, value in
             var asciiValues = [UInt8]()
             key.forEach { character in
