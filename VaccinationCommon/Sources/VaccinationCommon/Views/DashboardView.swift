@@ -87,8 +87,12 @@ public struct DashboardView: View {
         let base64CborData = base45Encoder.encode(dummyTestData)
         print("Base45 encoding result is: \(base64CborData)")
 
-        let rawCborData = base45Encoder.decode(base64CborData)
-        print("Raw decoded data is: \(rawCborData)")
+        do {
+            let rawCborData = try base45Encoder.decode(base64CborData)
+            print("Raw decoded data is: \(rawCborData)")
+        } catch {
+            print(error.localizedDescription)
+        }
     }
 
     func convertJson(from stringOject: Dictionary<String, String>) -> String? {

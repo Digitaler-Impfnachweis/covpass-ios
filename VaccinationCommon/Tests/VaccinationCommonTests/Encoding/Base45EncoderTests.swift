@@ -42,10 +42,26 @@ class Base45EncoderTests: XCTestCase {
     func testSuccessfulDecoding() {
         rawToBase45.forEach { key, value in
             var result = ""
-            sut.decode(value).forEach { integer in
-                result.append(Character(UnicodeScalar(integer)))
+            do {
+                try sut.decode(value).forEach { integer in
+                    result.append(Character(UnicodeScalar(integer)))
+                }
+                XCTAssertEqual(key, result)
+            } catch {
+                XCTFail(error.localizedDescription)
             }
-            XCTAssertEqual(key, result)
+        }
+    }
+
+    func testInvalidDecoding() {
+        let base45Payload = [":::", "ZZZ", "+++"]
+        base45Payload.forEach { entry in
+            do {
+                try _ = sut.decode(entry)
+                XCTFail("Output for \(entry) should be invalid")
+            } catch {
+                XCTAssertNotNil(error as? Base45DecodingError)
+            }
         }
     }
 }

@@ -7,6 +7,10 @@
 
 import Foundation
 
+enum Base45DecodingError: Error {
+    case overflow
+}
+
 class Base45Encoder {
     private let base45Table: Dictionary<Int, String> = [
         0: "0", 1: "1", 2: "2", 3: "3", 4: "4", 5: "5", 6: "6", 7: "7", 8: "8", 9: "9", 10: "A", 11: "B",
@@ -27,7 +31,7 @@ class Base45Encoder {
     /// This method decodes a base45 String back into an array of UInt8 ascii values
     /// - parameter payload: a String represented in base45
     /// - returns: an array of unsigned 8 bit integers representing ascii values
-    func decode(_ payload: String) -> [UInt8] {
+    func decode(_ payload: String) throws -> [UInt8] {
         var base45Values = [UInt8]()
 
         for character in payload {
@@ -36,7 +40,7 @@ class Base45Encoder {
             }
         }
 
-        return base45Values.chunked(into: 3).flatMap { mapToCBOR($0) }
+        return try base45Values.chunked(into: 3).flatMap { try mapToCBOR($0) }
     }
 
 
@@ -59,10 +63,10 @@ class Base45Encoder {
     /// depending on the initial length of the array
     /// - parameter sequence: an array of unsigned 8 bit integers of length 3 or 2
     /// - returns: an array with length 2 or 1 of unsigned 8 bit integer values, depending on the length of `sequence`
-    private func mapToCBOR(_ sequence: [UInt8]) -> [UInt8] {
-        guard sequence.count == 3 else { return [UInt8(reduce(array: sequence) & 0x00ff)] }
+    private func mapToCBOR(_ sequence: [UInt8]) throws -> [UInt8] {
+        guard sequence.count == 3 else { return [UInt8(try reduce(array: sequence) & 0x00ff)] }
 
-        let int16Value = reduce(array: sequence)
+        let int16Value = try reduce(array: sequence)
         return [UInt8(int16Value >> 8), UInt8(int16Value & 0x00ff)]
     }
 
@@ -85,11 +89,15 @@ class Base45Encoder {
     /// Reduces an array of length 3 or 2 of base45 integers to an unsigned 16 bit value
     /// - parameter array: the base45 integer array to be reduced to a UInt16 value
     /// - returns: The unsigned 16 bit value resulted from compressing the received array
-    private func reduce(array: [UInt8]) -> UInt16 {
+    private func reduce(array: [UInt8]) throws -> UInt16 {
         var result: UInt16 = 0
 
         for count in 0..<array.count {
-            result += UInt16(array[count]) * UInt16(pow(45, Double(count)))
+            if UInt16(array[count]).multipliedReportingOverflow(by: UInt16(pow(45, Double(count)))).overflow {
+                throw Base45DecodingError.overflow
+            } else {
+                result += UInt16(array[count]) * UInt16(pow(45, Double(count)))
+            }
         }
 
         return result
