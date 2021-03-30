@@ -15,6 +15,7 @@ let package = Package(
     dependencies: [
         // Dependencies declare other packages that this package depends on.
         .package(name: "Keychain", url: "https://github.com/IBM/ios-keychain", from: "0.0.1"),
+        .package(name: "SwiftCBOR", url: "https://github.com/unrelentingtech/SwiftCBOR", from: "0.1.0")
 //        .package(name: "CodeScanner", url: "https://github.com/twostraws/CodeScanner", from: "1.0.0")
     ],
     targets: [
@@ -22,7 +23,7 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .target(
             name: "VaccinationCommon",
-            dependencies: ["Keychain"]),
+            dependencies: ["Keychain", "SwiftCBOR"]),
         .testTarget(
             name: "VaccinationCommonTests",
             dependencies: ["VaccinationCommon"]),
