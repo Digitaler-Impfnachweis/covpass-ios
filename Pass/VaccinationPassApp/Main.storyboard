@@ -9,10 +9,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Scan View Controller-->
         <scene sceneID="izp-tb-qyY">
             <objects>
-                <viewController id="4d1-da-Wcb" sceneMemberID="viewController">
+                <viewController id="4d1-da-Wcb" customClass="ScanViewController" customModule="VaccinationPassApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="T7W-26-TuE">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -23,12 +23,21 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MMd-M6-I73">
+                                <rect key="frame" x="189.5" y="492" width="35" height="30"/>
+                                <state key="normal" title="Scan"/>
+                                <connections>
+                                    <action selector="showScanner:" destination="4d1-da-Wcb" eventType="touchUpInside" id="wzp-cQ-HPg"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="WvM-em-B1s"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="NkY-zq-GYz" firstAttribute="centerX" secondItem="WvM-em-B1s" secondAttribute="centerX" id="D0M-h0-uCC"/>
+                            <constraint firstItem="MMd-M6-I73" firstAttribute="top" secondItem="NkY-zq-GYz" secondAttribute="bottom" constant="28.5" id="FUw-Ro-UlJ"/>
                             <constraint firstItem="NkY-zq-GYz" firstAttribute="centerY" secondItem="WvM-em-B1s" secondAttribute="centerY" id="LpA-pv-iD1"/>
+                            <constraint firstItem="MMd-M6-I73" firstAttribute="centerX" secondItem="WvM-em-B1s" secondAttribute="centerX" id="NoU-mM-oTD"/>
                         </constraints>
                     </view>
                 </viewController>
