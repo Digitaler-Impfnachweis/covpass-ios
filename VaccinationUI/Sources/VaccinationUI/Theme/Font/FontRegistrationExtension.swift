@@ -9,7 +9,6 @@ import Foundation
 import UIKit
 
 extension UIFont {
-    
     static let sansSemiBold = "IBMPlexSans-SemiBold"
     static let sansRegular = "IBMPlexSans"
     static let otfExtension = "otf"
