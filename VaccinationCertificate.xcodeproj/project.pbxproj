@@ -11,6 +11,7 @@
 		6507D7ED25FB5E0300D69F94 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 88AB2A4325FA40CE00D4EA52 /* Assets.xcassets */; };
 		6598186B260CB44D00776F70 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6598186A260CB44D00776F70 /* Main.storyboard */; };
 		65981892260CBA9400776F70 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65981872260CB45D00776F70 /* Main.storyboard */; };
+		65D48D8A2611E6BD00223100 /* ScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D48D892611E6BD00223100 /* ScanViewController.swift */; };
 		65D6D56E25F8BCE5000CB339 /* VaccinationValidator in Frameworks */ = {isa = PBXBuildFile; productRef = 65D6D56D25F8BCE5000CB339 /* VaccinationValidator */; };
 		65D6D5E925F910A9000CB339 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65D6D5E825F910A9000CB339 /* LaunchScreen.storyboard */; };
 		65D6D5EA25F910A9000CB339 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65D6D5E825F910A9000CB339 /* LaunchScreen.storyboard */; };
@@ -58,6 +59,7 @@
 		6561AB43260CB02C00D3A7FF /* VaccinationUI */ = {isa = PBXFileReference; lastKnownFileType = folder; path = VaccinationUI; sourceTree = "<group>"; };
 		6598186A260CB44D00776F70 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		65981872260CB45D00776F70 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		65D48D892611E6BD00223100 /* ScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanViewController.swift; sourceTree = "<group>"; };
 		65D6D4BF25F7AD8B000CB339 /* VaccinationCommon */ = {isa = PBXFileReference; lastKnownFileType = folder; path = VaccinationCommon; sourceTree = "<group>"; };
 		65D6D4DE25F8B8FB000CB339 /* VaccinationPassApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VaccinationPassApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		65D6D4EE25F8B8FB000CB339 /* VaccinationPassAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VaccinationPassAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -201,6 +203,7 @@
 				88AB2A3B25FA40CE00D4EA52 /* AppDelegate.swift */,
 				6598186A260CB44D00776F70 /* Main.storyboard */,
 				88AB2A3C25FA40CE00D4EA52 /* Info.plist */,
+				65D48D892611E6BD00223100 /* ScanViewController.swift */,
 			);
 			path = VaccinationPassApp;
 			sourceTree = "<group>";
@@ -484,6 +487,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				88AB2A9725FA431100D4EA52 /* AppDelegate.swift in Sources */,
+				65D48D8A2611E6BD00223100 /* ScanViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -682,7 +686,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.ega.VaccinationPass;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "match Development com.ibm.ega.VaccinationPass";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.ibm.ega.VaccinationPass";
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -840,7 +844,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.ega.VaccinationValidator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "match Development com.ibm.ega.VaccinationValidator";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.ibm.ega.VaccinationValidator";
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
