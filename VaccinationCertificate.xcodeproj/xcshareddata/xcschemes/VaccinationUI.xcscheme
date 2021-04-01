@@ -51,6 +51,17 @@
                BlueprintName = "VaccinationUITests"
                ReferencedContainer = "container:VaccinationUI">
             </BuildableReference>
+            <SkippedTests>
+               <Test
+                  Identifier = "CustomToolbarViewTests/testLeftButtonAction()">
+               </Test>
+               <Test
+                  Identifier = "PrimaryButtonContainerTests/testAction()">
+               </Test>
+               <Test
+                  Identifier = "PrimaryButtonContainerTests/testButtonAction()">
+               </Test>
+            </SkippedTests>
          </TestableReference>
       </Testables>
    </TestAction>

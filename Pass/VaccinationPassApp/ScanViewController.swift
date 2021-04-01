@@ -8,10 +8,20 @@
 
 import UIKit
 import Scanner
+import VaccinationUI
 
 class ScanViewController: UIViewController {
     
+    @IBOutlet weak var primaryButtonContainer: PrimaryButtonContainer!
+    
     var scanViewController: ScannerViewController?
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        primaryButtonContainer.action = {
+            print("Hello World")
+        }
+    }
     
     @IBAction func showScanner(_ sender: UIButton) {
         scanViewController = Scanner.viewController(codeTypes: [.qr], scanMode: .once, simulatedData: "This is Gabriela", delegate: self)
