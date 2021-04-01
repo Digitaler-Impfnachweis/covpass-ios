@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PrimaryButtonContainer" customModule="VaccinationUI">
+            <connections>
+                <outlet property="bottomLayoutConstraint" destination="Glm-H1-FtB" id="8YJ-6j-DWl"/>
+                <outlet property="bottomTitleInsetConstraint" destination="xw1-lf-6vK" id="83q-ge-T0w"/>
+                <outlet property="dotPulseActivityView" destination="xDz-a1-pjF" id="eni-id-MJk"/>
+                <outlet property="innerButton" destination="99Y-BN-Zg1" id="cQX-Y3-TKm"/>
+                <outlet property="leadingTitleInsetConstraint" destination="QM0-9x-EqR" id="28f-lQ-9LG"/>
+                <outlet property="leftLayoutConstraint" destination="8pm-CY-a2O" id="Afq-AL-WqL"/>
+                <outlet property="minPreferredHeightConstraint" destination="Qqd-0U-Npw" id="34j-qe-1Sk"/>
+                <outlet property="rightLayoutConstraint" destination="AMv-kq-NJf" id="DRQ-KU-IZL"/>
+                <outlet property="textableView" destination="OdT-FR-wHw" id="Rfu-Rs-g1W"/>
+                <outlet property="topLayoutConstraint" destination="DcO-dh-HXJ" id="MGP-Sc-5T9"/>
+                <outlet property="topTitleInsetConstraint" destination="OCh-zZ-ZJj" id="oGR-RR-qfj"/>
+                <outlet property="trailingTitleInsetConstraint" destination="ddR-G7-GPi" id="B6d-T6-SGA"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="6B2-FJ-smq">
+            <rect key="frame" x="0.0" y="0.0" width="200" height="100"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="99Y-BN-Zg1">
+                    <rect key="frame" x="24" y="0.0" width="152" height="100"/>
+                    <constraints>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="750" constant="56" id="Qqd-0U-Npw"/>
+                    </constraints>
+                    <connections>
+                        <action selector="buttonPressed:" destination="-1" eventType="touchUpInside" id="Q0C-G0-aTr"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="InnerLabel" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OdT-FR-wHw">
+                    <rect key="frame" x="64" y="18" width="72" height="64"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xDz-a1-pjF" customClass="DotPulseActivityIndicator" customModule="VaccinationUI">
+                    <rect key="frame" x="80" y="35" width="40" height="30"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="40" id="C3s-P0-xu3"/>
+                        <constraint firstAttribute="height" constant="30" id="fS4-qD-Idf"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="pa9-r5-TsT"/>
+            <constraints>
+                <constraint firstItem="99Y-BN-Zg1" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6B2-FJ-smq" secondAttribute="leading" priority="999" id="8pm-CY-a2O"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="99Y-BN-Zg1" secondAttribute="trailing" priority="999" id="AMv-kq-NJf"/>
+                <constraint firstItem="xDz-a1-pjF" firstAttribute="centerY" secondItem="6B2-FJ-smq" secondAttribute="centerY" id="AQX-Qd-FRn"/>
+                <constraint firstItem="99Y-BN-Zg1" firstAttribute="top" secondItem="6B2-FJ-smq" secondAttribute="top" priority="999" id="DcO-dh-HXJ"/>
+                <constraint firstAttribute="bottom" secondItem="99Y-BN-Zg1" secondAttribute="bottom" priority="999" id="Glm-H1-FtB"/>
+                <constraint firstItem="OdT-FR-wHw" firstAttribute="top" secondItem="99Y-BN-Zg1" secondAttribute="top" constant="18" id="OCh-zZ-ZJj"/>
+                <constraint firstItem="OdT-FR-wHw" firstAttribute="leading" secondItem="99Y-BN-Zg1" secondAttribute="leading" constant="40" id="QM0-9x-EqR"/>
+                <constraint firstItem="OdT-FR-wHw" firstAttribute="centerY" secondItem="99Y-BN-Zg1" secondAttribute="centerY" id="TlG-RN-dg2"/>
+                <constraint firstItem="xDz-a1-pjF" firstAttribute="centerX" secondItem="6B2-FJ-smq" secondAttribute="centerX" id="aR4-gd-Sag"/>
+                <constraint firstItem="99Y-BN-Zg1" firstAttribute="trailing" secondItem="OdT-FR-wHw" secondAttribute="trailing" constant="40" id="ddR-G7-GPi"/>
+                <constraint firstItem="99Y-BN-Zg1" firstAttribute="centerX" secondItem="pa9-r5-TsT" secondAttribute="centerX" id="p1q-au-XiY"/>
+                <constraint firstItem="99Y-BN-Zg1" firstAttribute="bottom" secondItem="OdT-FR-wHw" secondAttribute="bottom" constant="18" id="xw1-lf-6vK"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="139" y="127"/>
+        </view>
+    </objects>
+</document>
