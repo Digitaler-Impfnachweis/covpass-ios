@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PrimaryIconButtonContainer" customModule="VaccinationUI">
+            <connections>
+                <outlet property="bottomLayoutConstraint" destination="5SU-sV-cNA" id="yoL-SM-0uh"/>
+                <outlet property="bottomTitleInsetConstraint" destination="qT1-Fc-YEn" id="Ve8-ap-z4f"/>
+                <outlet property="dotPulseActivityView" destination="xrX-NC-KEl" id="nER-DU-DNP"/>
+                <outlet property="heightConstraint" destination="246-dv-Ngk" id="iMN-Jf-uhI"/>
+                <outlet property="icon" destination="s5P-D4-2rh" id="vbP-QB-Mwr"/>
+                <outlet property="innerButton" destination="8eZ-Kv-fwO" id="7VM-Qt-M3D"/>
+                <outlet property="leadingTitleInsetConstraint" destination="ZTF-3x-xM4" id="yMx-I1-EfM"/>
+                <outlet property="leftLayoutConstraint" destination="PoB-0f-kjg" id="b1U-4a-Okw"/>
+                <outlet property="rightLayoutConstraint" destination="U9o-6X-meW" id="yVj-ie-AUc"/>
+                <outlet property="textableView" destination="vLl-lS-NtW" id="svb-Ek-kBx"/>
+                <outlet property="topLayoutConstraint" destination="pOR-gc-CfU" id="7II-Ps-t3y"/>
+                <outlet property="topTitleInsetConstraint" destination="JGe-NT-bhI" id="UAk-EE-P77"/>
+                <outlet property="trailingTitleInsetConstraint" destination="6sd-J7-KYo" id="8SA-Te-EBk"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="efM-QZ-31c" userLabel="View">
+            <rect key="frame" x="0.0" y="0.0" width="200" height="100"/>
+            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8eZ-Kv-fwO">
+                    <rect key="frame" x="0.0" y="0.0" width="200" height="100"/>
+                    <connections>
+                        <action selector="buttonPressed:" destination="-1" eventType="touchUpInside" id="29W-ae-SeZ"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="InnerLabel" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vLl-lS-NtW">
+                    <rect key="frame" x="40" y="18" width="120" height="64"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="plus" translatesAutoresizingMaskIntoConstraints="NO" id="s5P-D4-2rh">
+                    <rect key="frame" x="78.5" y="28.5" width="43" height="43"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="s5P-D4-2rh" secondAttribute="height" multiplier="1:1" id="3R3-yG-dlS"/>
+                    </constraints>
+                </imageView>
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xrX-NC-KEl" customClass="DotPulseActivityIndicator" customModule="VaccinationUI">
+                    <rect key="frame" x="80" y="35" width="40" height="30"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="40" id="eLS-uT-yaQ"/>
+                        <constraint firstAttribute="height" constant="30" id="gOt-gh-zLl"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="color" keyPath="color">
+                            <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="numberOfDots">
+                            <integer key="value" value="3"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="padding">
+                            <real key="value" value="5"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="VjE-kW-WlL"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="s5P-D4-2rh" firstAttribute="height" secondItem="efM-QZ-31c" secondAttribute="height" multiplier="0.43" id="246-dv-Ngk"/>
+                <constraint firstItem="xrX-NC-KEl" firstAttribute="centerX" secondItem="efM-QZ-31c" secondAttribute="centerX" id="3Ub-Kk-oBH"/>
+                <constraint firstItem="xrX-NC-KEl" firstAttribute="centerY" secondItem="efM-QZ-31c" secondAttribute="centerY" id="541-Tj-Dyv"/>
+                <constraint firstAttribute="bottom" secondItem="8eZ-Kv-fwO" secondAttribute="bottom" id="5SU-sV-cNA"/>
+                <constraint firstItem="8eZ-Kv-fwO" firstAttribute="trailing" secondItem="vLl-lS-NtW" secondAttribute="trailing" constant="40" id="6sd-J7-KYo"/>
+                <constraint firstItem="vLl-lS-NtW" firstAttribute="centerY" secondItem="8eZ-Kv-fwO" secondAttribute="centerY" id="7FG-Vw-E5t"/>
+                <constraint firstItem="vLl-lS-NtW" firstAttribute="centerX" secondItem="8eZ-Kv-fwO" secondAttribute="centerX" id="HGX-4D-XVg"/>
+                <constraint firstItem="vLl-lS-NtW" firstAttribute="top" secondItem="8eZ-Kv-fwO" secondAttribute="top" constant="18" id="JGe-NT-bhI"/>
+                <constraint firstItem="8eZ-Kv-fwO" firstAttribute="leading" secondItem="efM-QZ-31c" secondAttribute="leading" priority="999" id="PoB-0f-kjg"/>
+                <constraint firstAttribute="trailing" secondItem="8eZ-Kv-fwO" secondAttribute="trailing" priority="999" id="U9o-6X-meW"/>
+                <constraint firstItem="vLl-lS-NtW" firstAttribute="leading" secondItem="8eZ-Kv-fwO" secondAttribute="leading" constant="40" id="ZTF-3x-xM4"/>
+                <constraint firstItem="s5P-D4-2rh" firstAttribute="centerY" secondItem="8eZ-Kv-fwO" secondAttribute="centerY" id="hWp-tQ-Rjr"/>
+                <constraint firstItem="8eZ-Kv-fwO" firstAttribute="top" secondItem="efM-QZ-31c" secondAttribute="top" priority="999" id="pOR-gc-CfU"/>
+                <constraint firstItem="8eZ-Kv-fwO" firstAttribute="bottom" secondItem="vLl-lS-NtW" secondAttribute="bottom" constant="18" id="qT1-Fc-YEn"/>
+                <constraint firstItem="s5P-D4-2rh" firstAttribute="centerX" secondItem="8eZ-Kv-fwO" secondAttribute="centerX" id="whA-Ml-cre"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="54" y="25"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="plus" width="32" height="32"/>
+    </resources>
+</document>
