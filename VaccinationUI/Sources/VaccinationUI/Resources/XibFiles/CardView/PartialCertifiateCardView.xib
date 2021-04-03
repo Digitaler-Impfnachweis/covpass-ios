@@ -40,10 +40,10 @@
                     <rect key="frame" x="0.0" y="0.0" width="414" height="309"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7PC-dC-X93" customClass="PrimaryIconButtonContainer" customModule="VaccinationUI">
-                            <rect key="frame" x="40" y="236" width="330" height="50"/>
+                            <rect key="frame" x="40" y="218" width="330" height="55"/>
                             <color key="backgroundColor" systemColor="systemBlueColor"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="50" id="tww-g8-iJ3"/>
+                                <constraint firstAttribute="height" constant="55" id="tww-g8-iJ3"/>
                             </constraints>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="number" keyPath="iconHeightMultiplier">
@@ -52,30 +52,24 @@
                             </userDefinedRuntimeAttributes>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hrR-va-zyE" customClass="CardViewHeader" customModule="VaccinationUI">
-                            <rect key="frame" x="8" y="8" width="398" height="100"/>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <rect key="frame" x="15" y="15" width="384" height="80"/>
+                            <color key="tintColor" systemColor="systemBlueColor"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="100" id="hws-Ym-eVe"/>
+                                <constraint firstAttribute="height" constant="80" id="hws-Ym-eVe"/>
                             </constraints>
                             <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="color" keyPath="cardBackgroundColor">
-                                    <color key="value" red="0.82483828069999998" green="0.90418249370000003" blue="0.99609237910000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                </userDefinedRuntimeAttribute>
                                 <userDefinedRuntimeAttribute type="color" keyPath="cardTintColor">
                                     <color key="value" systemColor="systemBlueColor"/>
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0eU-7G-yy7" customClass="CardViewAction" customModule="VaccinationUI">
-                            <rect key="frame" x="8" y="116" width="398" height="75"/>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <rect key="frame" x="15" y="103" width="384" height="75"/>
+                            <color key="tintColor" systemColor="systemBlueColor"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="75" id="kQO-3l-eDB"/>
                             </constraints>
                             <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="color" keyPath="cardBackgroundColor">
-                                    <color key="value" red="0.82483828069999998" green="0.90418249370000003" blue="0.99609237910000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                </userDefinedRuntimeAttribute>
                                 <userDefinedRuntimeAttribute type="color" keyPath="cardTintColor">
                                     <color key="value" systemColor="systemBlueColor"/>
                                 </userDefinedRuntimeAttribute>
@@ -84,19 +78,20 @@
                     </subviews>
                     <constraints>
                         <constraint firstItem="0eU-7G-yy7" firstAttribute="leading" secondItem="hrR-va-zyE" secondAttribute="leading" id="8AH-Zv-1jE"/>
-                        <constraint firstItem="7PC-dC-X93" firstAttribute="top" secondItem="0eU-7G-yy7" secondAttribute="bottom" constant="45" id="Kjm-2K-2Q8"/>
-                        <constraint firstItem="hrR-va-zyE" firstAttribute="top" secondItem="RHv-ZG-T5F" secondAttribute="top" constant="8" id="PvW-Fa-Kp5"/>
+                        <constraint firstItem="7PC-dC-X93" firstAttribute="top" secondItem="0eU-7G-yy7" secondAttribute="bottom" constant="40" id="Kjm-2K-2Q8"/>
+                        <constraint firstItem="hrR-va-zyE" firstAttribute="top" secondItem="RHv-ZG-T5F" secondAttribute="top" constant="15" id="PvW-Fa-Kp5"/>
                         <constraint firstAttribute="trailing" secondItem="7PC-dC-X93" secondAttribute="trailing" constant="44" id="Xa8-tn-BW2"/>
                         <constraint firstItem="0eU-7G-yy7" firstAttribute="trailing" secondItem="hrR-va-zyE" secondAttribute="trailing" id="ZaT-Tp-UTx"/>
-                        <constraint firstItem="hrR-va-zyE" firstAttribute="leading" secondItem="RHv-ZG-T5F" secondAttribute="leading" constant="8" id="dls-rm-aRR"/>
+                        <constraint firstItem="hrR-va-zyE" firstAttribute="leading" secondItem="RHv-ZG-T5F" secondAttribute="leading" constant="15" id="dls-rm-aRR"/>
                         <constraint firstItem="0eU-7G-yy7" firstAttribute="top" secondItem="hrR-va-zyE" secondAttribute="bottom" constant="8" symbolic="YES" id="ft6-fA-tGN"/>
-                        <constraint firstAttribute="trailing" secondItem="hrR-va-zyE" secondAttribute="trailing" constant="8" id="gCl-Ee-kbL"/>
+                        <constraint firstAttribute="trailing" secondItem="hrR-va-zyE" secondAttribute="trailing" constant="15" id="gCl-Ee-kbL"/>
+                        <constraint firstAttribute="bottom" secondItem="7PC-dC-X93" secondAttribute="bottom" constant="36" id="j6i-Q4-KJM"/>
                         <constraint firstItem="7PC-dC-X93" firstAttribute="leading" secondItem="RHv-ZG-T5F" secondAttribute="leading" constant="40" id="kWN-rV-ZoL"/>
-                        <constraint firstAttribute="bottom" secondItem="7PC-dC-X93" secondAttribute="bottom" constant="23" id="yqH-Mk-pik"/>
                     </constraints>
                 </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" red="0.82483828069999998" green="0.90418249370000003" blue="0.99609237910000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
             <constraints>
                 <constraint firstItem="RHv-ZG-T5F" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="Y4L-Ci-7gY"/>
                 <constraint firstItem="RHv-ZG-T5F" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Yf1-VL-lCP"/>
@@ -108,9 +103,6 @@
         </view>
     </objects>
     <resources>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
         <systemColor name="systemBlueColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

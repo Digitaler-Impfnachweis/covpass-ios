@@ -36,17 +36,6 @@ public class PartialCertifiateCardView: MarginableXibView {
         didSet { backgroundColor = cardBackgroundColor }
     }
     @IBInspectable public var cardTintColor: UIColor = UIColor.systemBlue {
-        didSet { backgroundColor = cardTintColor }
-    }
-    
-    // MARK: - Lifecycle
-    
-    override public func initView() {
-        super.initView()
-        
-        actionButton.action = {
-            print("Hello World")
-        }
-        actionButton.title = "2. Impfung hinzufügen"
+        didSet { tintColor = cardTintColor }
     }
 }

@@ -22,16 +22,6 @@ public class CardViewHeader: MarginableXibView {
     public var action: (() -> Void)?
     public var buttonImage: UIImage? { didSet { leftButton.setImage(buttonImage, for: .normal) } }
     
-    // MARK: - IBInspectable
-    
-    @IBInspectable public var cardBackgroundColor: UIColor = UIColor.white {
-        didSet { backgroundColor = cardBackgroundColor }
-    }
-    
-    @IBInspectable public var cardTintColor: UIColor = UIColor.systemBlue {
-        didSet { tintColor = cardTintColor }
-    }
-    
     // MARK: - IBAction
     
     @IBAction public func infoButtonPressed(button: UIButton) { action?() }
