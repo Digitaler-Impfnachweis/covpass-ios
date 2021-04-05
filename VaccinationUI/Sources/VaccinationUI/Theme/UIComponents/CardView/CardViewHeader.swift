@@ -20,7 +20,9 @@ public class CardViewHeader: MarginableXibView {
     // MARK: - Variables
     
     public var action: (() -> Void)?
-    public var buttonImage: UIImage? { didSet { leftButton.setImage(buttonImage, for: .normal) } }
+    public var buttonImage: UIImage? {
+        didSet { leftButton.setImage(buttonImage, for: .normal) }
+    }
     
     // MARK: - IBAction
     

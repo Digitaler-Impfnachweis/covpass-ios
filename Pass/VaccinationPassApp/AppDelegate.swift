@@ -17,7 +17,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         try? UIFont.loadCustomFonts()
         window = UIWindow(frame: UIScreen.main.bounds)
         self.window = UIWindow(frame: UIScreen.main.bounds)
-        self.window?.rootViewController = VaccinationPass.Storyboard.pass.instantiateInitialViewController()
+        self.window?.rootViewController = PassUIConstants.Storyboard.pass.instantiateInitialViewController()
         self.window?.makeKeyAndVisible()
         return true
     }
