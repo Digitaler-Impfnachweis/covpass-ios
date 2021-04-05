@@ -1,5 +1,5 @@
 //
-//  PartialCertifiateCardView.swift
+//  PartialCertificateCardView.swift
 //  
 //
 //  Copyright © 2021 IBM. All rights reserved.
@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 @IBDesignable
-public class PartialCertifiateCardView: MarginableXibView {
+public class PartialCertificateCardView: MarginableXibView {
     
     // MARK: - Outlets
     

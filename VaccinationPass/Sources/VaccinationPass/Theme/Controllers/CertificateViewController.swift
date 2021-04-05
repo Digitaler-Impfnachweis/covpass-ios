@@ -11,7 +11,7 @@ import VaccinationUI
 
 public class CertificateViewController: UIViewController {
     
-    @IBOutlet public var partialCardView: PartialCertifiateCardView!
+    @IBOutlet public var partialCardView: PartialCertificateCardView!
     
     override public func viewDidLoad() {
         super.viewDidLoad()

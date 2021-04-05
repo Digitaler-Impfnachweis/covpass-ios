@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" restorationIdentifier="Pass" translatesAutoresizingMaskIntoConstraints="NO" id="8qU-Mp-FTi" customClass="PartialCertifiateCardView" customModule="VaccinationUI">
+                            <view contentMode="scaleToFill" restorationIdentifier="Pass" translatesAutoresizingMaskIntoConstraints="NO" id="8qU-Mp-FTi" customClass="PartialCertificateCardView" customModule="VaccinationUI">
                                 <rect key="frame" x="20" y="79" width="374" height="320"/>
                                 <color key="backgroundColor" red="0.82483828069999998" green="0.90418249370000003" blue="0.99609237910000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>

@@ -9,11 +9,11 @@
 import XCTest
 
 class PartialCertifiateCardViewTests: XCTestCase {
-    var sut: PartialCertifiateCardView!
+    var sut: PartialCertificateCardView!
 
     override func setUp() {
         super.setUp()
-        sut = PartialCertifiateCardView()
+        sut = PartialCertificateCardView()
     }
 
     override func tearDown() {
