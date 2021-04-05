@@ -16,16 +16,16 @@ open class UIConstants {
     public static let brandColorPalette: BrandColorPalette = BrandColorPaletteManager.shared.colorPalette
 
     open class IconName {
-        public static let NavigationArrow = "ega_back_arrow"
-        public static let Edit = "hui_icon_edit"
-        public static let Search = "hui_icon_search"
-        public static let CancelButton = "hui_cancel"
+        public static let NavigationArrow = "back_arrow"
+        public static let CancelButton = "cancel"
         public static let PlusIcon = "plus"
         public static let CheckmarkIcon = "check"
-        public static let RgArrowDown = "ega_rg_arrow_down"
+        public static let RgArrowDown = "rg_arrow_down"
     }
 
     open class BrandColor {
+        public static let brandBase = brandColorPalette.brandBase
+        public static let onBrandBase = brandColorPalette.onBrandBase
         public static let onBrandAccent = brandColorPalette.onBrandAccent
         public static let onBackground20 = brandColorPalette.onBackground20
         public static let onBackground50 = brandColorPalette.onBackground50
@@ -49,5 +49,9 @@ open class UIConstants {
     public struct Animation {
         public static let DotPulseAnimationDotsNumber = 3
         public static let Duration = 0.5
+    }
+
+    public struct Storyboard {
+        public static let Onboarding = "Onboarding"
     }
 }
