@@ -2,7 +2,6 @@
 //  ScanViewController.swift
 //  VaccinationPassApp
 //
-//  Created by Daniel on 29.03.2021.
 //  Copyright © 2021 IBM. All rights reserved.
 //
 
