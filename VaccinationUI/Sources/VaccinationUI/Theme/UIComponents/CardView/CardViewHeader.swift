@@ -10,7 +10,6 @@ import UIKit
 
 @IBDesignable
 public class CardViewHeader: MarginableXibView {
-    
     // MARK: - Outlets
 
     @IBOutlet public var subtitleLabel: UILabel!
@@ -26,5 +25,7 @@ public class CardViewHeader: MarginableXibView {
     
     // MARK: - IBAction
     
-    @IBAction public func infoButtonPressed(button: UIButton) { action?() }
+    @IBAction public func infoButtonPressed(button: UIButton) {
+        action?()
+    }
 }
