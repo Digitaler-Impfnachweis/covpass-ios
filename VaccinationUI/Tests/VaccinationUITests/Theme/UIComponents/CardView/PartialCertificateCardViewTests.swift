@@ -1,5 +1,5 @@
 //
-//  PartialCertifiateCardViewTests.swift
+//  PartialCertificateCardViewTests.swift
 //  
 //
 //  Copyright © 2021 IBM. All rights reserved.
@@ -8,7 +8,7 @@
 @testable import VaccinationUI
 import XCTest
 
-class PartialCertifiateCardViewTests: XCTestCase {
+class PartialCertificateCardViewTests: XCTestCase {
     var sut: PartialCertificateCardView!
 
     override func setUp() {
