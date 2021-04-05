@@ -25,7 +25,9 @@ class ScanViewController: UIViewController {
     
     @IBAction func showScanner(_ sender: UIButton) {
         scanViewController = Scanner.viewController(codeTypes: [.qr], scanMode: .once, simulatedData: "This is Gabriela", delegate: self)
-        present(scanViewController ?? UIViewController(), animated: true, completion: nil)
+        let onboardingScreen = OnboardingViewController.createFromStoryboard()
+//        present(scanViewController ?? UIViewController(), animated: true, completion: nil)
+        present(onboardingScreen, animated: true)
     }
 }
 

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Onboarding View Controller-->
+        <scene sceneID="a6Z-H5-VpD">
+            <objects>
+                <viewController storyboardIdentifier="OnboardingViewController" id="xRz-h5-aWw" customClass="OnboardingViewController" customModule="VaccinationUI" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="PMc-tR-bhk">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" contentInsetAdjustmentBehavior="never" translatesAutoresizingMaskIntoConstraints="NO" id="8yi-8W-VtU">
+                                <rect key="frame" x="19" y="114" width="375" height="432"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="I5d-8E-dEj" customClass="ScrollableStackView" customModule="VaccinationUI">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="559.5"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xur-fd-QbP" customClass="OnboardingLogoAndTextView" customModule="VaccinationUI">
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="140"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="textKey" value=""/>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="logoName" value=""/>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
+                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="znJ-UI-yg8" customClass="OnboardingLogoAndTextView" customModule="VaccinationUI">
+                                                <rect key="frame" x="0.0" y="140" width="375" height="163.5"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="textKey" value=""/>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="logoName" value=""/>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
+                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9wV-pc-NAw" customClass="OnboardingLogoAndTextView" customModule="VaccinationUI">
+                                                <rect key="frame" x="0.0" y="303.5" width="375" height="128"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="textKey" value=""/>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="logoName" value=""/>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
+                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jB0-cE-Brt" customClass="PrimaryButtonContainer" customModule="VaccinationUI">
+                                                <rect key="frame" x="0.0" y="431.5" width="375" height="128"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                            </view>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="I5d-8E-dEj" secondAttribute="trailing" id="0rr-ai-pLz"/>
+                                    <constraint firstItem="I5d-8E-dEj" firstAttribute="leading" secondItem="8yi-8W-VtU" secondAttribute="leading" id="RLs-9u-NAQ"/>
+                                    <constraint firstItem="I5d-8E-dEj" firstAttribute="width" secondItem="8yi-8W-VtU" secondAttribute="width" id="ZiQ-Gc-a8F"/>
+                                    <constraint firstItem="I5d-8E-dEj" firstAttribute="top" secondItem="8yi-8W-VtU" secondAttribute="top" id="emY-aM-ogY"/>
+                                    <constraint firstAttribute="bottom" secondItem="I5d-8E-dEj" secondAttribute="bottom" constant="40" id="kXN-d0-qp1"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Qjh-pj-JKB"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <connections>
+                        <outlet property="firstOnboardingPage" destination="Xur-fd-QbP" id="019-pq-zvA"/>
+                        <outlet property="primaryButtonContainer" destination="jB0-cE-Brt" id="nN0-eP-aKL"/>
+                        <outlet property="secondOnboardingPage" destination="znJ-UI-yg8" id="L2x-O2-uEQ"/>
+                        <outlet property="thirdOnboardingPage" destination="9wV-pc-NAw" id="7FF-ZK-IXT"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="V6d-UI-X8y" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="495.6521739130435" y="22.767857142857142"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

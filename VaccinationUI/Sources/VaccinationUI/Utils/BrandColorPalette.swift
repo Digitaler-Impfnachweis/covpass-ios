@@ -8,6 +8,8 @@
 import UIKit
 
 public protocol BrandColorPalette {
+    var brandBase: UIColor { get }
+    var onBrandBase: UIColor { get }
     var onBrandAccent: UIColor { get }
     var onBackground20: UIColor { get }
     var onBackground50: UIColor { get }
@@ -24,6 +26,12 @@ public class BrandColorPaletteManager: NSObject {
 
 open class BrandDefaultColorPalette: BrandColorPalette, Codable {
     public init() {}
+
+    private var _brandBase: String = "#065FC4"
+    open var brandBase: UIColor { UIColor(hexString: _brandBase) }
+
+    private var _onBrandBase: String = "#FFFFFF"
+    open var onBrandBase: UIColor { UIColor(hexString: _onBrandBase) }
 
     private var _onBrandAccent: String = "#FFFFFF"
     open var onBrandAccent: UIColor { UIColor(hexString: _onBrandAccent) }
