@@ -13,10 +13,6 @@ final class VaccinationPassTests: XCTestCase {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct
         // results.
-        XCTAssertEqual(VaccinationPass().text, "Hello, World!")
+        XCTAssertNotNil(VaccinationPassConstants.Storyboard.pass)
     }
-
-    static var allTests = [
-        ("testExample", testExample),
-    ]
 }

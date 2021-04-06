@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="UdV-L4-z1x">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Certificate View Controller-->
+        <scene sceneID="uEn-NE-ct7">
+            <objects>
+                <viewController storyboardIdentifier="CertificateViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="UdV-L4-z1x" customClass="CertificateViewController" customModule="VaccinationPass" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="wrk-hy-PlS">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" restorationIdentifier="Pass" translatesAutoresizingMaskIntoConstraints="NO" id="8qU-Mp-FTi" customClass="PartialCertificateCardView" customModule="VaccinationUI">
+                                <rect key="frame" x="20" y="79" width="374" height="320"/>
+                                <color key="backgroundColor" red="0.82483828069999998" green="0.90418249370000003" blue="0.99609237910000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="320" id="6h2-Ln-F7J"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="cardBackgroundColor">
+                                        <color key="value" red="0.82483828069999998" green="0.90418249370000003" blue="0.99609237910000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="cardTintColor">
+                                        <color key="value" systemColor="systemBlueColor"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="ImR-9o-f5p"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="8qU-Mp-FTi" firstAttribute="top" secondItem="ImR-9o-f5p" secondAttribute="top" constant="35" id="1H4-z2-fDL"/>
+                            <constraint firstItem="8qU-Mp-FTi" firstAttribute="leading" secondItem="ImR-9o-f5p" secondAttribute="leading" constant="20" id="dxS-2d-Zc7"/>
+                            <constraint firstItem="ImR-9o-f5p" firstAttribute="trailing" secondItem="8qU-Mp-FTi" secondAttribute="trailing" constant="20" id="lWn-HN-JXc"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="partialCardView" destination="8qU-Mp-FTi" id="5n3-cd-N3B"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ULQ-jF-Xq2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="305.79710144927537" y="143.97321428571428"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBlueColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

@@ -5,6 +5,8 @@
 //
 
 import UIKit
+import VaccinationUI
+import VaccinationPass
 
 @UIApplicationMain
 final class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -12,9 +14,10 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        try? UIFont.loadCustomFonts()
         window = UIWindow(frame: UIScreen.main.bounds)
         self.window = UIWindow(frame: UIScreen.main.bounds)
-        self.window?.rootViewController = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController()
+        self.window?.rootViewController = VaccinationPassConstants.Storyboard.pass.instantiateInitialViewController()
         self.window?.makeKeyAndVisible()
         return true
     }
