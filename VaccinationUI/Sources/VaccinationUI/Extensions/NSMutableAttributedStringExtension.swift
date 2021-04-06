@@ -8,7 +8,22 @@
 import UIKit
 
 extension NSMutableAttributedString {
-    public func configureBoldParts(_ font: UIFont = UIFont.ibmPlexSansSemiBold(with: 14) ?? UIFont()) {
+    func configureLinkParts(linkParts: [String: String], linkIsSemiBold: Bool) {
+        for (key, link) in linkParts {
+            if let range = string.range(of: key) {
+                let nsRange = string.UInsRange(from: range)
+
+                let linkFont = linkIsSemiBold ? UIConstants.Font.semiBold : UIConstants.Font.regular
+                let linkTextAttributes: [NSAttributedString.Key: Any] = [
+                    .link: link as AnyObject,
+                    .font: UIFontMetrics.default.scaledFont(for: linkFont)
+                ]
+                addAttributes(linkTextAttributes, range: nsRange)
+            }
+        }
+    }
+
+    public func configureBoldParts(_ font: UIFont = UIConstants.Font.semiBold) {
         let originalString = string
         mutableString.replaceOccurrences(of: "[b]", with: "", options: .caseInsensitive, range: NSRange(location: 0, length: length))
         mutableString.replaceOccurrences(of: "[/b]", with: "", options: .caseInsensitive, range: NSRange(location: 0, length: length))

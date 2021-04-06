@@ -102,6 +102,8 @@ public class PrimaryButtonContainer: MarginableXibView, Textable {
     public override func initView() {
         super.initView()
 
+        try? UIFont.loadCustomFonts()
+
         // Rounded corners
         innerButton.layer.cornerRadius = cornerRadius
         innerButton.layer.masksToBounds = false
@@ -124,12 +126,12 @@ public class PrimaryButtonContainer: MarginableXibView, Textable {
 
         // Title
         textableView.text = title
-//        textableView.setupAdjustedFontWith(font: UIConstants.Font.semiBold, multiplier: 2)
+        textableView.setupAdjustedFontWith(font: UIConstants.Font.semiBold, multiplier: 2)
         textableView.isHidden = true
 
         innerButton.setTitle(title, for: .normal)
         innerButton.titleLabel?.textAlignment = .center
-//        innerButton.titleLabel?.setupAdjustedFontWith(font: UIConstants.Font.semiBold, multiplier: 2)
+        innerButton.titleLabel?.setupAdjustedFontWith(font: UIConstants.Font.semiBold, multiplier: 2)
         innerButton.accessibilityIdentifier = AccessibilityIdentifier.TimeLine.serviceSelectionButton
         contentMode = .center
 

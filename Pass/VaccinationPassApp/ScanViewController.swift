@@ -2,7 +2,7 @@
 //  ScanViewController.swift
 //  VaccinationPassApp
 //
-//  Created by Daniel on 29.03.2021.
+//
 //  Copyright © 2021 IBM. All rights reserved.
 //
 
@@ -25,9 +25,11 @@ class ScanViewController: UIViewController {
     
     @IBAction func showScanner(_ sender: UIButton) {
         scanViewController = Scanner.viewController(codeTypes: [.qr], scanMode: .once, simulatedData: "This is Gabriela", delegate: self)
-        let onboardingScreen = OnboardingViewController.createFromStoryboard()
-//        present(scanViewController ?? UIViewController(), animated: true, completion: nil)
-        present(onboardingScreen, animated: true)
+//        let controller = OnboardingContainerViewController.createFromStoryboard()
+//        let pageModels = OnboardingPageViewModelType.allCases.map { OnboardingPageViewModel(type: $0) }
+//        controller.viewModel = OnboardingContainerViewModel(items: pageModels)
+        present(scanViewController ?? UIViewController(), animated: true, completion: nil)
+//        present(controller, animated: true)
     }
 }
 
