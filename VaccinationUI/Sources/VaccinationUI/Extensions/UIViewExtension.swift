@@ -52,4 +52,16 @@ public extension AutoLayoutContainer {
         widthConstraint.isActive = true
         return [widthConstraint]
     }
+
+    @discardableResult
+    func setConstant(size: CGSize) -> [NSLayoutConstraint] {
+        if let view = self as? UIView {
+            view.translatesAutoresizingMaskIntoConstraints = false
+        }
+        let widthConstraint = widthAnchor.constraint(equalToConstant: size.width)
+        let heightConstraint = heightAnchor.constraint(equalToConstant: size.height)
+        widthConstraint.isActive = true
+        heightConstraint.isActive = true
+        return [widthConstraint, heightConstraint]
+    }
 }
