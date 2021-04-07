@@ -16,9 +16,13 @@ public class OnboardingContainerViewController: UIViewController {
     @IBOutlet var pageIndicator: DotPageIndicator!
     @IBOutlet var startButtonBottomConstraint: NSLayoutConstraint!
     
-    // MARK: - Properties
+    // MARK: - Public Properties
 
     public var viewModel: OnboardingContainerViewModel!
+    public var router: Router!
+    
+    // MARK: - Internal Properties
+    
     var pageController: UIPageViewController!
     var pages: [OnboardingPageViewController] = []
     var currentIndex: Int = 0
@@ -164,7 +168,9 @@ extension OnboardingContainerViewController: CustomToolbarViewDelegate {
             pageController.setViewControllers([pages[currentIndex]], direction: .reverse, animated: true, completion: nil)
             pageIndicator.selectDot(withIndex: currentIndex)
         case .textButton:
-            guard currentIndex+1 < pages.count else { return }
+            guard currentIndex+1 < pages.count else {
+                return router.navigateToNextViewController()
+            }
             currentIndex += 1
             pageController.setViewControllers([pages[currentIndex]], direction: .forward, animated: true, completion: nil)
             pageIndicator.selectDot(withIndex: currentIndex)

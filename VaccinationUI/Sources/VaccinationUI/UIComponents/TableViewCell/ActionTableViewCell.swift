@@ -27,15 +27,13 @@ public class ActionTableViewCell: UITableViewCell {
         super.awakeFromNib()
         labelHeadline.font = UIFont.ibmPlexSansSemiBold(with: 14)
     }
+}
 
-    // MARK: - Actions
+// MARK: - ActionCell
 
-    public func configure(title: String, systemIconName: String = "chevron.right") {
+extension ActionTableViewCell: ActionCell {
+    public func configure(title: String, iconName: String) {
         labelHeadline.text = title
-        if #available(iOS 13.0, *) {
-            iconImageView.image = UIImage(systemName: systemIconName)
-        } else {
-            // Fallback on earlier versions
-        }
+        iconImageView.image = UIImage(named: iconName, in: Bundle.module, compatibleWith: nil)
     }
 }

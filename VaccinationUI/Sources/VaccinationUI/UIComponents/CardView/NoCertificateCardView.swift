@@ -1,6 +1,6 @@
 //
 //  PartialCertificateCardView.swift
-//  
+//
 //
 //  Copyright © 2021 IBM. All rights reserved.
 //
@@ -9,13 +9,12 @@ import Foundation
 import UIKit
 
 @IBDesignable
-public class PartialCertificateCardView: MarginableXibView {
-    
+public class NoCertificateCardView: MarginableXibView {
     // MARK: - Outlets
     
-    @IBOutlet public var headerView: CardViewHeader!
-    @IBOutlet public var actionView: CardViewAction!
-    @IBOutlet public var continerView: UIView!
+    @IBOutlet public var topImageView: UIImageView!
+    @IBOutlet public var titleLabel: UILabel!
+    @IBOutlet public var textLable: UILabel!
     @IBOutlet public var actionButton: PrimaryButtonContainer!
     
     // MARK: - IBInspectable

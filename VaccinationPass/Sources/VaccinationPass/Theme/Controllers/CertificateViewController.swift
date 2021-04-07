@@ -10,24 +10,27 @@ import UIKit
 import VaccinationUI
 
 public class CertificateViewController: UIViewController {
-    
-    @IBOutlet public var partialCardView: PartialCertificateCardView!
+    // MARK: - IBOutlet
+
+    @IBOutlet public var container: UIView!
     @IBOutlet public var headerView: HeaderView!
     @IBOutlet public var addButton: PrimaryIconButtonContainer!
     @IBOutlet public var showAllButton: UIButton!
     @IBOutlet public var showAllLabel: UILabel!
     @IBOutlet public var tableView: UITableView!
     
+    // MARK: - Public
+    
+    public var viewModel: CertificateViewModel!
+    
+    // MARK: - Fifecycle
+    
     override public func viewDidLoad() {
         super.viewDidLoad()
-        partialCardView.actionButton.title = "2. Impfung hinzufügen"
         headerView.headline.text = "Meine Impfnachweise"
-        if #available(iOS 13.0, *) {
-            addButton.iconImage = UIImage(systemName: "plus")
-        } else {
-            // Fallback on earlier versions
-        }
+        addButton.iconImage = UIImage(named: "plus", in: UIConstants.bundle, compatibleWith: nil)
         setupTableView()
+        setupContinerContent()
     }
     
     // MARK: - Private
@@ -38,22 +41,29 @@ public class CertificateViewController: UIViewController {
         tableView.tableFooterView = UIView(frame: CGRect.zero)
         tableView.register(UINib(nibName: ActionTableViewCell.identifier, bundle: UIConstants.bundle), forCellReuseIdentifier: ActionTableViewCell.identifier)
     }
+    
+    private func setupContinerContent() {
+        let noCertificate = NoCertificateCardView(frame: container.bounds)
+        noCertificate.actionButton.title = "2. Impfung hinzufügen"
+        noCertificate.cornerRadius = 20
+        noCertificate.actionButton.action = {
+            // TODO: - show scan vc
+        }
+        container.addSubview(noCertificate)
+    }
 }
 
 // MARK: - UITableViewDataSource
 
 extension CertificateViewController: UITableViewDataSource {
-    public func numberOfSections(in tableView: UITableView) -> Int {
-        1
-    }
-    
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-       3
+        viewModel.titles.count
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: ActionTableViewCell.identifier, for: indexPath) as? ActionTableViewCell
-        cell?.configure(title: "Hello World")
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: ActionTableViewCell.identifier, for: indexPath) as? ActionTableViewCell else { return UITableViewCell()
+        }
+        viewModel.configure(cell: cell, at: indexPath)
         return cell ?? UITableViewCell()
     }
 }
@@ -61,5 +71,16 @@ extension CertificateViewController: UITableViewDataSource {
 // MARK: - UITableViewDelegate
 
 extension CertificateViewController: UITableViewDelegate {
-    
+    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // TODO: - show smth
+    }
 }
+
+// MARK: - StoryboardInstantiating
+
+extension CertificateViewController: StoryboardInstantiating {
+    public static var storyboardName: String {
+        return VaccinationPassConstants.Storyboard.Pass
+    }
+}
+
