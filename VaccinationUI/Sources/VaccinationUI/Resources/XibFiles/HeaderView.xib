@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="IBMPlexSans-SemiBold.otf">
+            <string>IBMPlexSans-SemiBold</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HeaderView" customModule="IBMHealthUI" customModuleProvider="target">
+            <connections>
+                <outlet property="actionButton" destination="RSG-an-e0J" id="Q1H-u7-Uqh"/>
+                <outlet property="headline" destination="jYL-ZW-bpk" id="vQO-sL-XIg"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="444" height="41"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dkT-Pk-XDJ">
+                    <rect key="frame" x="0.0" y="0.0" width="444" height="41"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jYL-ZW-bpk">
+                            <rect key="frame" x="8" y="0.0" width="380" height="41"/>
+                            <fontDescription key="fontDescription" name="IBMPlexSans-SemiBold" family="IBM Plex Sans" pointSize="34"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RSG-an-e0J">
+                            <rect key="frame" x="396" y="0.0" width="40" height="40"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="54t-9C-FWN"/>
+                                <constraint firstAttribute="width" constant="40" id="7eg-Wg-3Bw"/>
+                            </constraints>
+                            <state key="normal" image="gearshape" catalog="system"/>
+                            <connections>
+                                <action selector="actionButtonPressedWithButton:" destination="-1" eventType="touchUpInside" id="qlZ-Ts-9i8"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="jYL-ZW-bpk" secondAttribute="bottom" id="A8V-yK-Egq"/>
+                        <constraint firstItem="jYL-ZW-bpk" firstAttribute="leading" secondItem="dkT-Pk-XDJ" secondAttribute="leading" constant="8" id="BFW-UW-ZPD"/>
+                        <constraint firstItem="RSG-an-e0J" firstAttribute="leading" secondItem="jYL-ZW-bpk" secondAttribute="trailing" constant="8" id="HTc-GW-vhb"/>
+                        <constraint firstItem="jYL-ZW-bpk" firstAttribute="top" secondItem="dkT-Pk-XDJ" secondAttribute="top" id="I6j-7e-FMb"/>
+                        <constraint firstItem="jYL-ZW-bpk" firstAttribute="centerY" secondItem="dkT-Pk-XDJ" secondAttribute="centerY" id="IIO-Ws-Aa8"/>
+                        <constraint firstItem="RSG-an-e0J" firstAttribute="top" secondItem="jYL-ZW-bpk" secondAttribute="top" id="uNB-S4-kWl"/>
+                        <constraint firstAttribute="trailing" secondItem="RSG-an-e0J" secondAttribute="trailing" constant="8" id="zHI-gR-b7N"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="dkT-Pk-XDJ" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="4Jg-9G-MOk"/>
+                <constraint firstItem="dkT-Pk-XDJ" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="YZJ-wh-ukJ"/>
+                <constraint firstItem="dkT-Pk-XDJ" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="aTU-38-OaJ"/>
+                <constraint firstItem="dkT-Pk-XDJ" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="u86-30-F4h"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="-251.19999999999999" y="-132.68365817091455"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="gearshape" catalog="system" width="128" height="121"/>
+    </resources>
+</document>

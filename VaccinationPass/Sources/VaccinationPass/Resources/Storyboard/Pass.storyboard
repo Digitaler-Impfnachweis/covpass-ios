@@ -8,6 +8,14 @@
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="IBMPlexSans-SemiBold.otf">
+            <string>IBMPlexSans-SemiBold</string>
+        </array>
+        <array key="IBMPlexSans.otf">
+            <string>IBMPlexSans</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Certificate View Controller-->
         <scene sceneID="uEn-NE-ct7">
@@ -18,10 +26,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" restorationIdentifier="Pass" translatesAutoresizingMaskIntoConstraints="NO" id="8qU-Mp-FTi" customClass="PartialCertificateCardView" customModule="VaccinationUI">
-                                <rect key="frame" x="20" y="79" width="374" height="320"/>
+                                <rect key="frame" x="20" y="159" width="374" height="340"/>
                                 <color key="backgroundColor" red="0.82483828069999998" green="0.90418249370000003" blue="0.99609237910000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="320" id="6h2-Ln-F7J"/>
+                                    <constraint firstAttribute="height" constant="340" id="6h2-Ln-F7J"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="cardBackgroundColor">
@@ -35,17 +43,80 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d0j-R2-SIh" customClass="HeaderView" customModule="VaccinationUI">
+                                <rect key="frame" x="20" y="44" width="374" height="95"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="95" id="NUS-1e-95A"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jXD-uc-srT" customClass="PrimaryIconButtonContainer" customModule="VaccinationUI">
+                                <rect key="frame" x="179.5" y="817" width="55" height="55"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="tintColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="55" id="Dwz-cS-GTv"/>
+                                    <constraint firstAttribute="width" constant="55" id="oe7-OM-Pb8"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="enabledButtonBackgroundColor">
+                                        <color key="value" systemColor="systemBlueColor"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="dotPulseViewColor">
+                                        <color key="value" systemColor="systemBlueColor"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Häufige Fragen" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Kw-dj-U49">
+                                <rect key="frame" x="20" y="514" width="247" height="23"/>
+                                <fontDescription key="fontDescription" name="IBMPlexSans" family="IBM Plex Sans" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J5K-BB-wv8">
+                                <rect key="frame" x="294" y="510" width="100" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="JBh-C7-ex2"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="IBMPlexSans-SemiBold" family="IBM Plex Sans" pointSize="14"/>
+                                <color key="tintColor" systemColor="systemBlueColor"/>
+                                <state key="normal" title="Alle anzeigen"/>
+                            </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Ry2-RF-kQk">
+                                <rect key="frame" x="20" y="556" width="374" height="257"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ImR-9o-f5p"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="8qU-Mp-FTi" firstAttribute="top" secondItem="ImR-9o-f5p" secondAttribute="top" constant="35" id="1H4-z2-fDL"/>
+                            <constraint firstItem="Ry2-RF-kQk" firstAttribute="trailing" secondItem="J5K-BB-wv8" secondAttribute="trailing" id="At9-QI-FJW"/>
+                            <constraint firstItem="Ry2-RF-kQk" firstAttribute="top" secondItem="J5K-BB-wv8" secondAttribute="bottom" constant="15" id="Ftk-rX-Hhc"/>
+                            <constraint firstItem="d0j-R2-SIh" firstAttribute="top" secondItem="ImR-9o-f5p" secondAttribute="top" id="G7z-t7-UJm"/>
+                            <constraint firstItem="jXD-uc-srT" firstAttribute="centerX" secondItem="ImR-9o-f5p" secondAttribute="centerX" id="KKZ-kc-MuY"/>
+                            <constraint firstAttribute="bottom" secondItem="jXD-uc-srT" secondAttribute="bottom" constant="24" id="RLc-iK-GlU"/>
+                            <constraint firstItem="6Kw-dj-U49" firstAttribute="leading" secondItem="ImR-9o-f5p" secondAttribute="leading" constant="20" id="bub-hg-1mw"/>
+                            <constraint firstItem="J5K-BB-wv8" firstAttribute="leading" secondItem="6Kw-dj-U49" secondAttribute="trailing" constant="27" id="cFo-KV-A4J"/>
+                            <constraint firstItem="8qU-Mp-FTi" firstAttribute="top" secondItem="d0j-R2-SIh" secondAttribute="bottom" constant="20" id="cHv-Rj-dyK"/>
                             <constraint firstItem="8qU-Mp-FTi" firstAttribute="leading" secondItem="ImR-9o-f5p" secondAttribute="leading" constant="20" id="dxS-2d-Zc7"/>
+                            <constraint firstItem="jXD-uc-srT" firstAttribute="top" secondItem="Ry2-RF-kQk" secondAttribute="bottom" constant="4" id="eHW-6U-tS6"/>
+                            <constraint firstItem="ImR-9o-f5p" firstAttribute="trailing" secondItem="J5K-BB-wv8" secondAttribute="trailing" constant="20" id="eLy-GL-u6E"/>
+                            <constraint firstItem="d0j-R2-SIh" firstAttribute="leading" secondItem="ImR-9o-f5p" secondAttribute="leading" constant="20" id="gvx-j5-Lvu"/>
+                            <constraint firstItem="Ry2-RF-kQk" firstAttribute="leading" secondItem="6Kw-dj-U49" secondAttribute="leading" id="hwE-Lw-BhH"/>
                             <constraint firstItem="ImR-9o-f5p" firstAttribute="trailing" secondItem="8qU-Mp-FTi" secondAttribute="trailing" constant="20" id="lWn-HN-JXc"/>
+                            <constraint firstItem="6Kw-dj-U49" firstAttribute="top" secondItem="8qU-Mp-FTi" secondAttribute="bottom" constant="15" id="pP6-IX-24p"/>
+                            <constraint firstItem="J5K-BB-wv8" firstAttribute="centerY" secondItem="6Kw-dj-U49" secondAttribute="centerY" id="pRU-Mh-Gfm"/>
+                            <constraint firstItem="ImR-9o-f5p" firstAttribute="trailing" secondItem="d0j-R2-SIh" secondAttribute="trailing" constant="20" id="uBy-zY-o91"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="addButton" destination="jXD-uc-srT" id="gyc-Ya-1Ei"/>
+                        <outlet property="headerView" destination="d0j-R2-SIh" id="2Ng-rs-QPi"/>
                         <outlet property="partialCardView" destination="8qU-Mp-FTi" id="5n3-cd-N3B"/>
+                        <outlet property="showAllButton" destination="J5K-BB-wv8" id="Uaj-wm-jVl"/>
+                        <outlet property="showAllLabel" destination="6Kw-dj-U49" id="LxJ-mO-Pq2"/>
+                        <outlet property="tableView" destination="Ry2-RF-kQk" id="fg7-1e-Zvs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ULQ-jF-Xq2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
