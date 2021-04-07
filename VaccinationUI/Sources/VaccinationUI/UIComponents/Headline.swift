@@ -52,8 +52,6 @@ public class Headline: MarginableXibView, Textable {
     public override func initView() {
         super.initView()
 
-        try? UIFont.loadCustomFonts()
-
         if needsTextAlignmentCenter {
             textableView.textAlignment = .center
         }

@@ -102,8 +102,6 @@ public class PrimaryButtonContainer: MarginableXibView, Textable {
     public override func initView() {
         super.initView()
 
-        try? UIFont.loadCustomFonts()
-
         // Rounded corners
         innerButton.layer.cornerRadius = cornerRadius
         innerButton.layer.masksToBounds = false

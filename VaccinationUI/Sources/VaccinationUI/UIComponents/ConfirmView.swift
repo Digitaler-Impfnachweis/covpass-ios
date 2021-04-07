@@ -89,8 +89,6 @@ public class ConfirmView: MarginableXibView {
     public override func initView() {
         super.initView()
 
-        try? UIFont.loadCustomFonts()
-
         updateImageView()
         detailLabel.font = UIConstants.Font.regularLarger
         detailLabel.adjustsFontForContentSizeCategory()

@@ -95,8 +95,6 @@ public class ParagraphView: MarginableXibView {
     }
 
     internal func setupView() {
-        try? UIFont.loadCustomFonts()
-
         title.font = UIConstants.Font.semiBold
         title.adjustsFontForContentSizeCategory()
         title.textColor = UIConstants.BrandColor.onBackground100
