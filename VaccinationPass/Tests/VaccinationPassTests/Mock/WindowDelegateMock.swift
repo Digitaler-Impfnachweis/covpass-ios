@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import VaccinationUI
+import UIKit
 
 class WindowDelegateMock: WindowDelegate {
     
