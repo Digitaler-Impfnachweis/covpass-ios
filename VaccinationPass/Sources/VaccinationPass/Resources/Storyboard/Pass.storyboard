@@ -38,7 +38,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jXD-uc-srT" customClass="PrimaryIconButtonContainer" customModule="VaccinationUI">
-                                <rect key="frame" x="179" y="816" width="56" height="56"/>
+                                <rect key="frame" x="179" y="806" width="56" height="56"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <color key="tintColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
@@ -66,11 +66,10 @@
                                     <constraint firstAttribute="width" constant="100" id="JBh-C7-ex2"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="IBMPlexSans-SemiBold" family="IBM Plex Sans" pointSize="14"/>
-                                <color key="tintColor" systemColor="systemBlueColor"/>
                                 <state key="normal" title="Alle anzeigen"/>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Ry2-RF-kQk">
-                                <rect key="frame" x="20" y="586" width="374" height="226"/>
+                                <rect key="frame" x="20" y="586" width="374" height="212"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                         </subviews>
@@ -81,12 +80,12 @@
                             <constraint firstItem="Ry2-RF-kQk" firstAttribute="top" secondItem="J5K-BB-wv8" secondAttribute="bottom" constant="15" id="Ftk-rX-Hhc"/>
                             <constraint firstItem="d0j-R2-SIh" firstAttribute="top" secondItem="ImR-9o-f5p" secondAttribute="top" id="G7z-t7-UJm"/>
                             <constraint firstItem="jXD-uc-srT" firstAttribute="centerX" secondItem="ImR-9o-f5p" secondAttribute="centerX" id="KKZ-kc-MuY"/>
-                            <constraint firstAttribute="bottom" secondItem="jXD-uc-srT" secondAttribute="bottom" constant="24" id="RLc-iK-GlU"/>
+                            <constraint firstItem="ImR-9o-f5p" firstAttribute="bottom" secondItem="jXD-uc-srT" secondAttribute="bottom" id="RLc-iK-GlU"/>
                             <constraint firstItem="6Kw-dj-U49" firstAttribute="leading" secondItem="ImR-9o-f5p" secondAttribute="leading" constant="20" id="bub-hg-1mw"/>
                             <constraint firstItem="J5K-BB-wv8" firstAttribute="leading" secondItem="6Kw-dj-U49" secondAttribute="trailing" constant="27" id="cFo-KV-A4J"/>
                             <constraint firstItem="8qU-Mp-FTi" firstAttribute="top" secondItem="d0j-R2-SIh" secondAttribute="bottom" constant="20" id="cHv-Rj-dyK"/>
                             <constraint firstItem="8qU-Mp-FTi" firstAttribute="leading" secondItem="ImR-9o-f5p" secondAttribute="leading" constant="20" id="dxS-2d-Zc7"/>
-                            <constraint firstItem="jXD-uc-srT" firstAttribute="top" secondItem="Ry2-RF-kQk" secondAttribute="bottom" constant="4" id="eHW-6U-tS6"/>
+                            <constraint firstItem="jXD-uc-srT" firstAttribute="top" secondItem="Ry2-RF-kQk" secondAttribute="bottom" constant="8" id="eHW-6U-tS6"/>
                             <constraint firstItem="ImR-9o-f5p" firstAttribute="trailing" secondItem="J5K-BB-wv8" secondAttribute="trailing" constant="20" id="eLy-GL-u6E"/>
                             <constraint firstItem="d0j-R2-SIh" firstAttribute="leading" secondItem="ImR-9o-f5p" secondAttribute="leading" constant="20" id="gvx-j5-Lvu"/>
                             <constraint firstItem="Ry2-RF-kQk" firstAttribute="leading" secondItem="6Kw-dj-U49" secondAttribute="leading" id="hwE-Lw-BhH"/>

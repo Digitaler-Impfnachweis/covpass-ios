@@ -27,10 +27,10 @@ public class CertificateViewController: UIViewController {
     
     override public func viewDidLoad() {
         super.viewDidLoad()
-        headerView.headline.text = "Meine Impfnachweise"
-        addButton.iconImage = UIImage(named: "plus", in: UIConstants.bundle, compatibleWith: nil)
+        setupOther()
         setupTableView()
         setupContinerContent()
+        setupOther()
     }
     
     // MARK: - Private
@@ -40,6 +40,7 @@ public class CertificateViewController: UIViewController {
         tableView.dataSource = self
         tableView.tableFooterView = UIView(frame: CGRect.zero)
         tableView.register(UINib(nibName: ActionTableViewCell.identifier, bundle: UIConstants.bundle), forCellReuseIdentifier: ActionTableViewCell.identifier)
+        tableView.tintColor = UIConstants.BrandColor.brandAccent
     }
     
     private func setupContinerContent() {
@@ -50,6 +51,13 @@ public class CertificateViewController: UIViewController {
             // TODO: - show scan vc
         }
         container.addSubview(noCertificate)
+    }
+    
+    private func setupOther() {
+        view.tintColor = UIConstants.BrandColor.brandAccent
+        headerView.headline.text = viewModel.title
+        addButton.iconImage = viewModel.addButtonImage
+        addButton.buttonBackgroundColor = UIConstants.BrandColor.brandAccent
     }
 }
 
@@ -64,7 +72,7 @@ extension CertificateViewController: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ActionTableViewCell.identifier, for: indexPath) as? ActionTableViewCell else { return UITableViewCell()
         }
         viewModel.configure(cell: cell, at: indexPath)
-        return cell ?? UITableViewCell()
+        return cell
     }
 }
 

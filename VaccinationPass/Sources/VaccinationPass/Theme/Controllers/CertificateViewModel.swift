@@ -7,8 +7,17 @@
 
 import Foundation
 import VaccinationUI
+import UIKit
 
 public struct CertificateViewModel {
+    
+    var title: String {
+        "Meine Impfnachweise"
+    }
+    
+    var addButtonImage: UIImage? {
+        UIImage(named: "plus", in: UIConstants.bundle, compatibleWith: nil)
+    }
     
     public var titles = [
         "Wie nutze ich den digitalen Nachweis?",

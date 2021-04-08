@@ -20,13 +20,12 @@ public struct MainRouter {
     
     // MARK: - Public Methods
     
-    public func rootViewController() -> OnboardingContainerViewController {
-        var onboardingRouter = OnboardingRouter()
-        onboardingRouter.windowDelegate = windowDelegate
-        let controller = OnboardingContainerViewController.createFromStoryboard()
-        let pageModels = OnboardingPageViewModelType.allCases.map { OnboardingPageViewModel(type: $0) }
-        controller.viewModel = OnboardingContainerViewModel(items: pageModels)
-        controller.router = onboardingRouter
+    public func rootViewController() -> UIViewController {
+        var router = StartRouter()
+        router.windowDelegate = windowDelegate
+        let controller = StartOnboardingViewController.createFromStoryboard()
+        controller.viewModel = StartOnboardingViewModel()
+        controller.router = router
         return controller
     }
 }

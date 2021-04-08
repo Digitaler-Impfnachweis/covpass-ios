@@ -29,6 +29,11 @@ extension OnboardingRouter: Router {
     }
     
     public func navigateToPreviousViewController() {
-        
+        var router = StartRouter()
+        router.windowDelegate = windowDelegate
+        let controller = StartOnboardingViewController.createFromStoryboard()
+        controller.viewModel = StartOnboardingViewModel()
+        controller.router = router
+        windowDelegate?.update(rootViewController: controller)
     }
 }
