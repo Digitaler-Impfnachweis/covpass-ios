@@ -20,11 +20,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         router = MainRouter()
         router.windowDelegate = self
         self.window = UIWindow(frame: UIScreen.main.bounds)
-<<<<<<< HEAD
         self.window?.rootViewController = router.rootViewController()
-=======
-        self.window?.rootViewController = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateInitialViewController()
->>>>>>> 9ac2db5b55818a668ef7dc0cf0fdf972f5c7efac
         self.window?.makeKeyAndVisible()
         return true
     }
