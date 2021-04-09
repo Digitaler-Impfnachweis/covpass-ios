@@ -60,13 +60,13 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Häufige Fragen" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Kw-dj-U49">
-                                <rect key="frame" x="20" y="558" width="247" height="21"/>
+                                <rect key="frame" x="20" y="558" width="247" height="23.5"/>
                                 <fontDescription key="fontDescription" name="IBMPlexSans-SemiBold" family="IBM Plex Sans" pointSize="18"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J5K-BB-wv8">
-                                <rect key="frame" x="294" y="554" width="100" height="29"/>
+                                <rect key="frame" x="294" y="554" width="100" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="JBh-C7-ex2"/>
                                 </constraints>
@@ -74,7 +74,7 @@
                                 <state key="normal" title="Alle anzeigen"/>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Ry2-RF-kQk">
-                                <rect key="frame" x="20" y="598" width="374" height="200"/>
+                                <rect key="frame" x="20" y="600" width="374" height="198"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                         </subviews>

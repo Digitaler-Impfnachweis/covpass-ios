@@ -8,8 +8,11 @@
 import Foundation
 import VaccinationUI
 import UIKit
+import VaccinationCommon
 
 public struct CertificateViewModel {
+    
+    let parser: QRCodeProcessor = QRCodeProcessor()
     
     var title: String {
         "Meine Impfnachweise"
@@ -26,5 +29,9 @@ public struct CertificateViewModel {
     
     func configure(cell: ActionCell, at indexPath: IndexPath) {
         cell.configure(title: titles[indexPath.row], iconName: UIConstants.IconName.ChevronRight)
+    }
+    
+    func process(payload: String) -> String {
+        parser.parse(payload) ?? ""
     }
 }

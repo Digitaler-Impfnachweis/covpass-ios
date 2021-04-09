@@ -2,6 +2,15 @@
   "object": {
     "pins": [
       {
+        "package": "BottomPopup",
+        "repositoryURL": "https://github.com/ergunemr/BottomPopup.git",
+        "state": {
+          "branch": null,
+          "revision": "4fa8e75440f591c4fb7e8e205cad27335761b0e9",
+          "version": "0.6.0"
+        }
+      },
+      {
         "package": "Keychain",
         "repositoryURL": "https://github.com/IBM/ios-keychain",
         "state": {
