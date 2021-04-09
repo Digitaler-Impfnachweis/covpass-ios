@@ -57,6 +57,9 @@
                   Identifier = "CustomToolbarViewTests/testLeftButtonAction()">
                </Test>
                <Test
+                  Identifier = "HeadlineTests/testInitView()">
+               </Test>
+               <Test
                   Identifier = "PrimaryButtonContainerTests/testAction()">
                </Test>
                <Test

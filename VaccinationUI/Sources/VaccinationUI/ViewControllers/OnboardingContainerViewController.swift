@@ -2,7 +2,7 @@
 //  OnboardingContainerViewController.swift
 //  
 //
-//  Created by Gabriela Secelean on 06.04.2021.
+//  Copyright © 2021 IBM. All rights reserved.
 //
 
 import UIKit
@@ -16,9 +16,13 @@ public class OnboardingContainerViewController: UIViewController {
     @IBOutlet var pageIndicator: DotPageIndicator!
     @IBOutlet var startButtonBottomConstraint: NSLayoutConstraint!
     
-    // MARK: - Properties
+    // MARK: - Public Properties
 
     public var viewModel: OnboardingContainerViewModel!
+    public var router: Router?
+    
+    // MARK: - Internal Properties
+    
     var pageController: UIPageViewController!
     var pages: [OnboardingPageViewController] = []
     var currentIndex: Int = 0
@@ -63,7 +67,8 @@ public class OnboardingContainerViewController: UIViewController {
     // MARK: - Private
 
     private func configureToolbarView() {
-        toolbarView.shouldShowTransparency = false
+        toolbarView.shouldShowTransparency = true
+        toolbarView.shouldShowGradient = false
         toolbarView.state = .confirm(viewModel.startButtonTitle)
         toolbarView.setUpLeftButton(leftButtonItem: .navigationArrow)
         toolbarView.delegate = self
@@ -159,12 +164,18 @@ extension OnboardingContainerViewController: CustomToolbarViewDelegate {
     public func customToolbarView(_: CustomToolbarView, didTap buttonType: ButtonItemType) {
         switch buttonType {
         case .navigationArrow:
-            guard currentIndex-1 >= 0 else { return }
+            guard currentIndex-1 >= 0 else {
+                router?.navigateToPreviousViewController()
+                return
+            }
             currentIndex -= 1
             pageController.setViewControllers([pages[currentIndex]], direction: .reverse, animated: true, completion: nil)
             pageIndicator.selectDot(withIndex: currentIndex)
         case .textButton:
-            guard currentIndex+1 < pages.count else { return }
+            guard currentIndex+1 < pages.count else {
+                router?.navigateToNextViewController()
+                return
+            }
             currentIndex += 1
             pageController.setViewControllers([pages[currentIndex]], direction: .forward, animated: true, completion: nil)
             pageIndicator.selectDot(withIndex: currentIndex)

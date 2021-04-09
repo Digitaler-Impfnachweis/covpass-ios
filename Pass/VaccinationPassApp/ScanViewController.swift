@@ -25,9 +25,6 @@ class ScanViewController: UIViewController {
     
     @IBAction func showScanner(_ sender: UIButton) {
         scanViewController = Scanner.viewController(codeTypes: [.qr], scanMode: .once, simulatedData: "This is Gabriela", delegate: self)
-//        let controller = OnboardingContainerViewController.createFromStoryboard()
-//        let pageModels = OnboardingPageViewModelType.allCases.map { OnboardingPageViewModel(type: $0) }
-//        controller.viewModel = OnboardingContainerViewModel(items: pageModels)
         present(scanViewController ?? UIViewController(), animated: true, completion: nil)
 //        present(controller, animated: true)
     }
