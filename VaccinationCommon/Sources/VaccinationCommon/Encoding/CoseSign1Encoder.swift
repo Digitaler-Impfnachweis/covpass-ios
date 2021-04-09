@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftCBOR
 
 //struct CoseSignature {
 //    var protected: [UInt8]
@@ -33,10 +34,44 @@ struct CoseSign1Message {
     }
 }
 
-class CodeSign1Encoder {
-    static func parse(_ decompressedData: Data) -> CoseSign1Message? {
-        guard let cborArray = [UInt8](decompressedData).decode() as? NSArray, cborArray.count == 4 else { return nil }
+class CoseSign1Encoder {
+    func parse(_ decompressedPayload: Data) -> CoseSign1Message? {
+        guard let cbor = try? CBOR.decode(([UInt8])(decompressedPayload)) else { return nil }
+        
+        switch cbor {
+        case .tagged( _, let cobr):
+            switch cobr {
+            case .array(let array):
+                if case .byteString(let protectedValue) = array[0],
+                   case .map(let unprotectedValue) = array[1],
+                   case .byteString(let payloadValue) = array[2],
+                   case .byteString(let signaturesValue) = array[3] {
+                        return CoseSign1Message(protected: protectedValue, unprotected: unprotectedValue, payload: payloadValue, signatures: signaturesValue)
+                    }
+            default:
+                 print("Unable to extract CBOR array: wrong type")
+            }
+        default:
+             print("Unable to extract tagged CBOR: wrong type")
+        }
 
-        return CoseSign1Message(protected: (cborArray[0] as? [UInt8]) ?? [], unprotected: cborArray[1], payload: (cborArray[2] as? [UInt8]) ?? [], signatures: (cborArray[3] as? [UInt8]) ?? [])
+        return nil
+    }
+
+    func mapToString(cborObject: CBOR?) -> String? {
+        guard let cborData = cborObject, case .map(let cborMap) = cborData else { return nil }
+
+        var result = ""
+
+        for (key, value) in cborMap {
+            if case .utf8String(let keyString) = key, case .utf8String(let valueString) = value {
+                result += keyString + ": " + valueString + "\n"
+            } else if case .utf8String(let keyString) = key, case .array(let cborArray) = value {
+                guard let remappedResult = mapToString(cborObject: cborArray.first) else { return nil }
+                result += keyString + ": " + remappedResult
+            }
+        }
+
+        return result
     }
 }

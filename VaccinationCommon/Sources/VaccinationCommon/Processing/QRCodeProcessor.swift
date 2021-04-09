@@ -11,21 +11,16 @@ import SwiftCBOR
 
 public class QRCodeProcessor {
     private let base45Encoder = Base45Encoder()
+    private let cose1SignEncoder = CoseSign1Encoder()
 
     public init() {}
 
-    public func parse(_ payload: String) { //-> String {
+    public func parse(_ payload: String) -> String? {
         let base45Decoded = (try? base45Encoder.decode(payload)) ?? []
-        print("Base45 Decoded: \(base45Decoded)")
-        let base45Encoded = base45Encoder.encode(base45Decoded)
-        print("Base45 works fine: \(base45Encoded == payload)")
         let decompressedPayload = decompress(Data(base45Decoded)) ?? Data()
-        print("Decompressed payload: \(decompressedPayload)")
-        let cosePayload = CodeSign1Encoder.parse(decompressedPayload)
-        print("COSE batshit: \(String(describing: cosePayload))")
-        let cborDecodedPayload = CBOR.decode(cosePayload?.payload ?? [])
-
-        print("God help us with: \(String(describing: cborDecodedPayload))")
+        let cosePayload = cose1SignEncoder.parse(decompressedPayload)
+        let cborDecodedPayload = try? CBOR.decode(cosePayload?.payload ?? [])
+        return cose1SignEncoder.mapToString(cborObject: cborDecodedPayload)
     }
 
     func decompress(_ data: Data) -> Data? {
