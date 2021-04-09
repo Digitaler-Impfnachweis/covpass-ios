@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import VaccinationUI
+import Scanner
 
 public class CertificateViewController: UIViewController {
     // MARK: - IBOutlet
@@ -66,6 +67,22 @@ public class CertificateViewController: UIViewController {
         addButton.buttonBackgroundColor = UIConstants.BrandColor.brandAccent
         addButton.action = { [self] in
             router?.presentPopup(onTopOf: self)
+        }
+    }
+}
+
+// MARK: - ScannerDelegate
+
+extension CertificateViewController: ScannerDelegate {
+    public func result(with value: Result<String, ScanError>) {
+        presentedViewController?.dismiss(animated: true, completion: nil)
+        switch value {
+        case .success(let payload):
+            let vc = VaccinationDetailsViewController.createFromStoryboard(bundle: Bundle.module)
+            vc.cborData = viewModel?.process(payload: payload)
+            present(vc, animated: true, completion: nil)
+        default:
+            print("There has been an error !")
         }
     }
 }

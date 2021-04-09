@@ -20,6 +20,7 @@ public class ScanPopupViewController: BottomPopupViewController {
     
     public var viewModel: ScanPopupViewModel!
     public var router: Router?
+    public weak var parsingDelegate: ScannerDelegate?
     
     // MARK: - Internal
     
@@ -36,7 +37,7 @@ public class ScanPopupViewController: BottomPopupViewController {
     // MARK: - Private
 
     private func configureScanView() {
-        scanViewController = Scanner.viewController(codeTypes: [.qr], scanMode: .once, simulatedData: "This is Gabriela", delegate: self)
+        scanViewController = Scanner.viewController(codeTypes: [.qr], scanMode: .once, simulatedData: "This is Gabriela", delegate: parsingDelegate)
         scanViewController?.view.frame = continer.bounds
         continer.addSubview(scanViewController!.view)
     }
@@ -55,15 +56,6 @@ public class ScanPopupViewController: BottomPopupViewController {
     public override var popupDismissDuration: Double { viewModel.dismissDuration }
     public override var popupShouldDismissInteractivelty: Bool { viewModel.shouldDismissInteractivelty }
     public override var popupDimmingViewAlpha: CGFloat { 0.5 }
-}
-
-// MARK: - ScannerDelegate
-
-extension ScanPopupViewController: ScannerDelegate {
-    public func result(with value: Result<String, ScanError>) {
-        print(value)
-        scanViewController?.dismiss(animated: true, completion: nil)
-    }
 }
 
 // MARK: - CustomToolbarViewDelegate

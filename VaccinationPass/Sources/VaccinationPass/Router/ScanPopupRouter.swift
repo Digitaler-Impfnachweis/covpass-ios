@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 import VaccinationUI
 import BottomPopup
+import Scanner
 
 public class ScanPopupRouter {
     
@@ -22,10 +23,13 @@ public class ScanPopupRouter {
 extension ScanPopupRouter: Popup {
     
     public func presentPopup(onTopOf viewController: UIViewController) {
-        let popupVC = ScanPopupViewController.createFromStoryboard()
-        popupVC.popupDelegate = self
-        popupVC.viewModel = ScanPopupViewModel()
-        viewController.present(popupVC, animated: true, completion: nil)
+        viewController.presentedViewController?.dismiss(animated: true, completion: {
+            let popupVC = ScanPopupViewController.createFromStoryboard()
+            popupVC.popupDelegate = self
+            popupVC.viewModel = ScanPopupViewModel()
+            popupVC.parsingDelegate = viewController as? ScannerDelegate
+            viewController.present(popupVC, animated: true, completion: nil)
+        })
     }
 }
 

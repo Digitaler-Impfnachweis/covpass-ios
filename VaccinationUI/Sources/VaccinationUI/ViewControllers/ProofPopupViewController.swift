@@ -98,7 +98,7 @@ extension ProofPopupViewController: CustomToolbarViewDelegate {
         case .navigationArrow:
             dismiss(animated: true, completion: nil)
         case .textButton:
-            router?.presentPopup(onTopOf: self)
+            router?.presentPopup(onTopOf: self.presentingViewController ?? self)
         default:
             return
         }
