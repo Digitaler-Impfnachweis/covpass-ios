@@ -21,6 +21,6 @@ public class VaccinationDetailsViewController: UIViewController {
 
 extension VaccinationDetailsViewController: StoryboardInstantiating {
     public static var storyboardName: String {
-        "Pass"
+        VaccinationPassConstants.Storyboard.Pass
     }
 }
