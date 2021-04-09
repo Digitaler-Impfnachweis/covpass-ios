@@ -85,8 +85,13 @@ public class CustomToolbarView: XibView {
 
     public var shouldShowTransparency: Bool = true {
         didSet {
-            gradientImageView.isHidden = !shouldShowTransparency
             backgroundColor = shouldShowTransparency ? UIColor.clear : UIColor.white
+        }
+    }
+    
+    public var shouldShowGradient: Bool = false {
+        didSet {
+            gradientImageView.isHidden = !shouldShowTransparency
         }
     }
 

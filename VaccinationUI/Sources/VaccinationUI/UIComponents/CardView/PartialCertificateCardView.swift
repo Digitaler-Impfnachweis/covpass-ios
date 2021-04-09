@@ -16,7 +16,7 @@ public class PartialCertificateCardView: MarginableXibView {
     @IBOutlet public var headerView: CardViewHeader!
     @IBOutlet public var actionView: CardViewAction!
     @IBOutlet public var continerView: UIView!
-    @IBOutlet public var actionButton: PrimaryIconButtonContainer!
+    @IBOutlet public var actionButton: PrimaryButtonContainer!
     
     // MARK: - IBInspectable
 

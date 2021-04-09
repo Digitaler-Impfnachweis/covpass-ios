@@ -25,7 +25,7 @@
                 </userDefinedRuntimeAttribute>
             </userDefinedRuntimeAttributes>
             <connections>
-                <outlet property="actionButton" destination="7PC-dC-X93" id="e7d-D3-LpC"/>
+                <outlet property="actionButton" destination="7PC-dC-X93" id="d1e-EI-FWD"/>
                 <outlet property="actionView" destination="0eU-7G-yy7" id="T7N-wp-DbB"/>
                 <outlet property="continerView" destination="RHv-ZG-T5F" id="chK-jQ-APo"/>
                 <outlet property="headerView" destination="hrR-va-zyE" id="fi1-vE-3yW"/>
@@ -39,7 +39,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RHv-ZG-T5F">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="309"/>
                     <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7PC-dC-X93" customClass="PrimaryIconButtonContainer" customModule="VaccinationUI">
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7PC-dC-X93" customClass="PrimaryButtonContainer" customModule="VaccinationUI">
                             <rect key="frame" x="40" y="218" width="330" height="55"/>
                             <color key="backgroundColor" systemColor="systemBlueColor"/>
                             <constraints>

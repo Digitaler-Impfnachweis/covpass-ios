@@ -10,6 +10,6 @@ public struct VaccinationPassConstants {
     public static let bundle = Bundle.module
 
     public struct Storyboard {
-        public static let pass = UIStoryboard(name: "Pass", bundle: Bundle.module)
+        public static let Pass = "Pass"
     }
 }

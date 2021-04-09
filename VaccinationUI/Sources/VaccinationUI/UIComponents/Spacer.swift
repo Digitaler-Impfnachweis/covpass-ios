@@ -1,6 +1,6 @@
 //
 //  Spacer.swift
-//  IBMHealthUI
+//  
 //
 //  Copyright © 2018 IBM. All rights reserved.
 //
