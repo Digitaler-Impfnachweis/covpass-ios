@@ -22,10 +22,12 @@ public class CertificateViewController: UIViewController {
     // MARK: - Public
     
     public var viewModel: CertificateViewModel?
+    public var router: Popup?
     
     // MARK: - Private
     
     private let continerCornerRadius: CGFloat = 20
+    private let continerHeight: CGFloat = 200
     
     // MARK: - Fifecycle
     
@@ -48,11 +50,11 @@ public class CertificateViewController: UIViewController {
     }
     
     private func setupContinerContent() {
-        let noCertificate = NoCertificateCardView(frame: CGRect(origin: stackView.bounds.origin, size: CGSize(width: stackView.bounds.width, height: 200)))
+        let noCertificate = NoCertificateCardView(frame: CGRect(origin: stackView.bounds.origin, size: CGSize(width: stackView.bounds.width, height: continerHeight)))
         noCertificate.actionButton.title = "Nachweis hinzufügen"
         noCertificate.cornerRadius = continerCornerRadius
-        noCertificate.actionButton.action = {
-            // TODO: - show scan vc
+        noCertificate.actionButton.action = { [self] in
+            router?.presentPopup(onTopOf: self)
         }
         stackView.addArrangedSubview(noCertificate)
     }
@@ -62,6 +64,9 @@ public class CertificateViewController: UIViewController {
         headerView.headline.text = viewModel?.title
         addButton.iconImage = viewModel?.addButtonImage
         addButton.buttonBackgroundColor = UIConstants.BrandColor.brandAccent
+        addButton.action = { [self] in
+            router?.presentPopup(onTopOf: self)
+        }
     }
 }
 

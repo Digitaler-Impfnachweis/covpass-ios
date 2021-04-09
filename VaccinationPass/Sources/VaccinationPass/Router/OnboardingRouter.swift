@@ -25,6 +25,7 @@ extension OnboardingRouter: Router {
     public func navigateToNextViewController() {
         let certificateViewController = CertificateViewController.createFromStoryboard(bundle: Bundle.module)
         certificateViewController.viewModel = CertificateViewModel()
+        certificateViewController.router = ProofPopupRouter()
         windowDelegate?.update(rootViewController: certificateViewController)
     }
     

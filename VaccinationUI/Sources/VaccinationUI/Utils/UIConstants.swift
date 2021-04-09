@@ -27,6 +27,8 @@ open class UIConstants {
         public static let StartScreen = "start_screen_1"
         public static let IconLock = "icon_lock"
         public static let ChevronRight = "chevron--right"
+        public static let IconClose = "epa_button_close"
+        public static let ProofScreen = "scan_proof_image"
     }
     
     open class BrandColor {

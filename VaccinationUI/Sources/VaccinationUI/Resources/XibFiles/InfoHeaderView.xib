@@ -17,6 +17,7 @@
             <connections>
                 <outlet property="actionButton" destination="RSG-an-e0J" id="Q1H-u7-Uqh"/>
                 <outlet property="headline" destination="jYL-ZW-bpk" id="vQO-sL-XIg"/>
+                <outlet property="leftLayoutConstraint" destination="YZJ-wh-ukJ" id="a6j-zT-Qb4"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -58,7 +59,7 @@
                 </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="dkT-Pk-XDJ" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="4Jg-9G-MOk"/>
                 <constraint firstItem="dkT-Pk-XDJ" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="YZJ-wh-ukJ"/>
