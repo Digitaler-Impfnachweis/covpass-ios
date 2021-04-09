@@ -16,11 +16,17 @@ public class QRCodeProcessor {
     public init() {}
 
     public func parse(_ payload: String) -> String? {
-        let base45Decoded = (try? base45Encoder.decode(payload)) ?? []
-        let decompressedPayload = decompress(Data(base45Decoded)) ?? Data()
-        let cosePayload = cose1SignEncoder.parse(decompressedPayload)
-        let cborDecodedPayload = try? CBOR.decode(cosePayload?.payload ?? [])
-        return cose1SignEncoder.mapToString(cborObject: cborDecodedPayload)
+        // Error handling to be improved
+        do {
+            let base45Decoded = try base45Encoder.decode(payload)
+            let decompressedPayload = decompress(Data(base45Decoded)) ?? Data()
+            let cosePayload = cose1SignEncoder.parse(decompressedPayload)
+            let cborDecodedPayload = try CBOR.decode(cosePayload?.payload ?? [])
+            return cose1SignEncoder.mapToString(cborObject: cborDecodedPayload)
+        } catch {
+            print(error.localizedDescription)
+            return nil
+        }
     }
 
     func decompress(_ data: Data) -> Data? {

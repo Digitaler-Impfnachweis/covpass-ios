@@ -36,26 +36,32 @@ struct CoseSign1Message {
 
 class CoseSign1Encoder {
     func parse(_ decompressedPayload: Data) -> CoseSign1Message? {
-        guard let cbor = try? CBOR.decode(([UInt8])(decompressedPayload)) else { return nil }
-        
-        switch cbor {
-        case .tagged( _, let cobr):
-            switch cobr {
-            case .array(let array):
-                if case .byteString(let protectedValue) = array[0],
-                   case .map(let unprotectedValue) = array[1],
-                   case .byteString(let payloadValue) = array[2],
-                   case .byteString(let signaturesValue) = array[3] {
-                        return CoseSign1Message(protected: protectedValue, unprotected: unprotectedValue, payload: payloadValue, signatures: signaturesValue)
-                    }
-            default:
-                 print("Unable to extract CBOR array: wrong type")
-            }
-        default:
-             print("Unable to extract tagged CBOR: wrong type")
-        }
+        // Error handling to be improved
+        do {
+            let cbor = try CBOR.decode(([UInt8])(decompressedPayload))
 
-        return nil
+            switch cbor {
+            case .tagged( _, let cobr):
+                switch cobr {
+                case .array(let array):
+                    if case .byteString(let protectedValue) = array[0],
+                       case .map(let unprotectedValue) = array[1],
+                       case .byteString(let payloadValue) = array[2],
+                       case .byteString(let signaturesValue) = array[3] {
+                            return CoseSign1Message(protected: protectedValue, unprotected: unprotectedValue, payload: payloadValue, signatures: signaturesValue)
+                        }
+                default:
+                     print("Unable to extract CBOR array: wrong type")
+                }
+            default:
+                 print("Unable to extract tagged CBOR: wrong type")
+            }
+
+            return nil
+        } catch {
+            print(error.localizedDescription)
+            return nil
+        }
     }
 
     func mapToString(cborObject: CBOR?) -> String? {
