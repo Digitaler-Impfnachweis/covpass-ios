@@ -31,9 +31,10 @@
                     <rect key="frame" x="0.0" y="0.0" width="414" height="335"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pP8-Zv-hAB" customClass="PrimaryButtonContainer" customModule="VaccinationUI">
-                            <rect key="frame" x="40" y="242.5" width="330" height="55"/>
+                            <rect key="frame" x="40" y="234.5" width="334" height="55"/>
                             <color key="backgroundColor" systemColor="systemBlueColor"/>
                             <constraints>
+                                <constraint firstAttribute="width" constant="334" id="3bS-Q9-ZcT"/>
                                 <constraint firstAttribute="height" constant="55" id="pTo-HI-s5V"/>
                             </constraints>
                             <userDefinedRuntimeAttributes>
@@ -43,7 +44,7 @@
                             </userDefinedRuntimeAttributes>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Kein Nachweis hinzugefügt" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VW2-PA-GY7">
-                            <rect key="frame" x="8" y="134" width="398" height="18.5"/>
+                            <rect key="frame" x="8" y="134" width="398" height="16.5"/>
                             <fontDescription key="fontDescription" name="IBMPlexSans-SemiBold" family="IBM Plex Sans" pointSize="14"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -56,7 +57,7 @@
                             </constraints>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EKc-Hh-BeX">
-                            <rect key="frame" x="8" y="152.5" width="398" height="55"/>
+                            <rect key="frame" x="8" y="150.5" width="398" height="49"/>
                             <attributedString key="attributedText">
                                 <fragment content="Scannen Sie eine  Bescheinigung mit QR Code, um hier  Ihren Nachweis zu sehen">
                                     <attributes>
@@ -71,15 +72,14 @@
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
+                        <constraint firstItem="pP8-Zv-hAB" firstAttribute="centerX" secondItem="Flh-qW-5MS" secondAttribute="centerX" id="0WP-Cm-VKl"/>
                         <constraint firstItem="EKc-Hh-BeX" firstAttribute="leading" secondItem="VW2-PA-GY7" secondAttribute="leading" id="AkO-UG-BLg"/>
-                        <constraint firstItem="pP8-Zv-hAB" firstAttribute="leading" secondItem="Flh-qW-5MS" secondAttribute="leading" constant="40" id="Dgh-75-Q45"/>
                         <constraint firstAttribute="trailing" secondItem="VW2-PA-GY7" secondAttribute="trailing" constant="8" id="Egh-dT-rvh"/>
                         <constraint firstItem="EKc-Hh-BeX" firstAttribute="trailing" secondItem="VW2-PA-GY7" secondAttribute="trailing" id="Kgp-rr-Ly4"/>
                         <constraint firstItem="VW2-PA-GY7" firstAttribute="top" secondItem="6Y0-ii-9y9" secondAttribute="bottom" constant="15" id="RDT-3G-9Pp"/>
                         <constraint firstItem="VW2-PA-GY7" firstAttribute="leading" secondItem="Flh-qW-5MS" secondAttribute="leading" constant="8" id="YKH-r5-D3v"/>
                         <constraint firstItem="6Y0-ii-9y9" firstAttribute="centerX" secondItem="Flh-qW-5MS" secondAttribute="centerX" id="Z8m-el-jMr"/>
                         <constraint firstItem="6Y0-ii-9y9" firstAttribute="centerY" secondItem="Flh-qW-5MS" secondAttribute="centerY" multiplier="1:2" id="a2n-Y7-NQB"/>
-                        <constraint firstAttribute="trailing" secondItem="pP8-Zv-hAB" secondAttribute="trailing" constant="44" id="aUF-yB-ssz"/>
                         <constraint firstItem="pP8-Zv-hAB" firstAttribute="top" secondItem="EKc-Hh-BeX" secondAttribute="bottom" constant="35" id="hxz-GJ-lfZ"/>
                         <constraint firstItem="EKc-Hh-BeX" firstAttribute="top" secondItem="VW2-PA-GY7" secondAttribute="bottom" id="mxn-c3-YYs"/>
                     </constraints>

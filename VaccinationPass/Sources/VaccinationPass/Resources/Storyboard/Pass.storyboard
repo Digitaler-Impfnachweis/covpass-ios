@@ -22,21 +22,26 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" restorationIdentifier="Pass" translatesAutoresizingMaskIntoConstraints="NO" id="8qU-Mp-FTi">
-                                <rect key="frame" x="20" y="159" width="374" height="370"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="RN0-20-eRb">
+                                <rect key="frame" x="20" y="44" width="374" height="500"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d0j-R2-SIh" customClass="InfoHeaderView" customModule="VaccinationUI">
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="480"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KLz-VO-yfm" customClass="Spacer" customModule="VaccinationUI">
+                                        <rect key="frame" x="0.0" y="480" width="374" height="20"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="20" id="g8z-cK-f7K"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="8qU-Mp-FTi" secondAttribute="height" multiplier="187:185" id="NDV-rG-n0e"/>
+                                    <constraint firstAttribute="width" secondItem="RN0-20-eRb" secondAttribute="height" multiplier="187:250" id="YIb-Qm-eNp"/>
                                 </constraints>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d0j-R2-SIh" customClass="HeaderView" customModule="VaccinationUI">
-                                <rect key="frame" x="20" y="44" width="374" height="95"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="95" id="NUS-1e-95A"/>
-                                </constraints>
-                            </view>
+                            </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jXD-uc-srT" customClass="PrimaryIconButtonContainer" customModule="VaccinationUI">
                                 <rect key="frame" x="179" y="806" width="56" height="56"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -55,13 +60,13 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Häufige Fragen" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Kw-dj-U49">
-                                <rect key="frame" x="20" y="544" width="247" height="23"/>
+                                <rect key="frame" x="20" y="558" width="247" height="21"/>
                                 <fontDescription key="fontDescription" name="IBMPlexSans-SemiBold" family="IBM Plex Sans" pointSize="18"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J5K-BB-wv8">
-                                <rect key="frame" x="294" y="540" width="100" height="31"/>
+                                <rect key="frame" x="294" y="554" width="100" height="29"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="JBh-C7-ex2"/>
                                 </constraints>
@@ -69,7 +74,7 @@
                                 <state key="normal" title="Alle anzeigen"/>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Ry2-RF-kQk">
-                                <rect key="frame" x="20" y="586" width="374" height="212"/>
+                                <rect key="frame" x="20" y="598" width="374" height="200"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                         </subviews>
@@ -78,29 +83,26 @@
                         <constraints>
                             <constraint firstItem="Ry2-RF-kQk" firstAttribute="trailing" secondItem="J5K-BB-wv8" secondAttribute="trailing" id="At9-QI-FJW"/>
                             <constraint firstItem="Ry2-RF-kQk" firstAttribute="top" secondItem="J5K-BB-wv8" secondAttribute="bottom" constant="15" id="Ftk-rX-Hhc"/>
-                            <constraint firstItem="d0j-R2-SIh" firstAttribute="top" secondItem="ImR-9o-f5p" secondAttribute="top" id="G7z-t7-UJm"/>
                             <constraint firstItem="jXD-uc-srT" firstAttribute="centerX" secondItem="ImR-9o-f5p" secondAttribute="centerX" id="KKZ-kc-MuY"/>
                             <constraint firstItem="ImR-9o-f5p" firstAttribute="bottom" secondItem="jXD-uc-srT" secondAttribute="bottom" id="RLc-iK-GlU"/>
+                            <constraint firstItem="RN0-20-eRb" firstAttribute="leading" secondItem="ImR-9o-f5p" secondAttribute="leading" constant="20" id="Vrx-pO-jFt"/>
                             <constraint firstItem="6Kw-dj-U49" firstAttribute="leading" secondItem="ImR-9o-f5p" secondAttribute="leading" constant="20" id="bub-hg-1mw"/>
                             <constraint firstItem="J5K-BB-wv8" firstAttribute="leading" secondItem="6Kw-dj-U49" secondAttribute="trailing" constant="27" id="cFo-KV-A4J"/>
-                            <constraint firstItem="8qU-Mp-FTi" firstAttribute="top" secondItem="d0j-R2-SIh" secondAttribute="bottom" constant="20" id="cHv-Rj-dyK"/>
-                            <constraint firstItem="8qU-Mp-FTi" firstAttribute="leading" secondItem="ImR-9o-f5p" secondAttribute="leading" constant="20" id="dxS-2d-Zc7"/>
+                            <constraint firstItem="RN0-20-eRb" firstAttribute="top" secondItem="ImR-9o-f5p" secondAttribute="top" id="dQG-88-b6o"/>
                             <constraint firstItem="jXD-uc-srT" firstAttribute="top" secondItem="Ry2-RF-kQk" secondAttribute="bottom" constant="8" id="eHW-6U-tS6"/>
                             <constraint firstItem="ImR-9o-f5p" firstAttribute="trailing" secondItem="J5K-BB-wv8" secondAttribute="trailing" constant="20" id="eLy-GL-u6E"/>
-                            <constraint firstItem="d0j-R2-SIh" firstAttribute="leading" secondItem="ImR-9o-f5p" secondAttribute="leading" constant="20" id="gvx-j5-Lvu"/>
+                            <constraint firstAttribute="trailing" secondItem="RN0-20-eRb" secondAttribute="trailing" constant="20" id="gJg-5m-pLH"/>
+                            <constraint firstItem="J5K-BB-wv8" firstAttribute="top" secondItem="RN0-20-eRb" secondAttribute="bottom" constant="10" id="hKT-yp-nk5"/>
                             <constraint firstItem="Ry2-RF-kQk" firstAttribute="leading" secondItem="6Kw-dj-U49" secondAttribute="leading" id="hwE-Lw-BhH"/>
-                            <constraint firstItem="ImR-9o-f5p" firstAttribute="trailing" secondItem="8qU-Mp-FTi" secondAttribute="trailing" constant="20" id="lWn-HN-JXc"/>
-                            <constraint firstItem="6Kw-dj-U49" firstAttribute="top" secondItem="8qU-Mp-FTi" secondAttribute="bottom" constant="15" id="pP6-IX-24p"/>
                             <constraint firstItem="J5K-BB-wv8" firstAttribute="centerY" secondItem="6Kw-dj-U49" secondAttribute="centerY" id="pRU-Mh-Gfm"/>
-                            <constraint firstItem="ImR-9o-f5p" firstAttribute="trailing" secondItem="d0j-R2-SIh" secondAttribute="trailing" constant="20" id="uBy-zY-o91"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="addButton" destination="jXD-uc-srT" id="gyc-Ya-1Ei"/>
-                        <outlet property="container" destination="8qU-Mp-FTi" id="jvF-tq-5tq"/>
                         <outlet property="headerView" destination="d0j-R2-SIh" id="2Ng-rs-QPi"/>
                         <outlet property="showAllButton" destination="J5K-BB-wv8" id="Uaj-wm-jVl"/>
                         <outlet property="showAllLabel" destination="6Kw-dj-U49" id="LxJ-mO-Pq2"/>
+                        <outlet property="stackView" destination="RN0-20-eRb" id="mbn-82-mzc"/>
                         <outlet property="tableView" destination="Ry2-RF-kQk" id="fg7-1e-Zvs"/>
                     </connections>
                 </viewController>

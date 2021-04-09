@@ -1,10 +1,8 @@
 //
-//  HUISelectableItemTableViewCell.swift
-//  IBMHealthUI
+//  ActionTableViewCell.swift
 //
-//  Created by LucianaPetre on 4/23/18.
+//
 //  Copyright © 2018 IBM. All rights reserved.
-//  Updated by Serhii Miakynnikov on 2/6/20.
 //
 
 import UIKit

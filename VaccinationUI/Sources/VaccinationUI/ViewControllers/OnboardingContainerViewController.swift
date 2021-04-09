@@ -19,7 +19,7 @@ public class OnboardingContainerViewController: UIViewController {
     // MARK: - Public Properties
 
     public var viewModel: OnboardingContainerViewModel!
-    public var router: Router!
+    public var router: Router?
     
     // MARK: - Internal Properties
     
@@ -164,13 +164,17 @@ extension OnboardingContainerViewController: CustomToolbarViewDelegate {
     public func customToolbarView(_: CustomToolbarView, didTap buttonType: ButtonItemType) {
         switch buttonType {
         case .navigationArrow:
-            guard currentIndex-1 >= 0 else { return router.navigateToPreviousViewController()}
+            guard currentIndex-1 >= 0 else {
+                router?.navigateToPreviousViewController()
+                return
+            }
             currentIndex -= 1
             pageController.setViewControllers([pages[currentIndex]], direction: .reverse, animated: true, completion: nil)
             pageIndicator.selectDot(withIndex: currentIndex)
         case .textButton:
             guard currentIndex+1 < pages.count else {
-                return router.navigateToNextViewController()
+                router?.navigateToNextViewController()
+                return
             }
             currentIndex += 1
             pageController.setViewControllers([pages[currentIndex]], direction: .forward, animated: true, completion: nil)

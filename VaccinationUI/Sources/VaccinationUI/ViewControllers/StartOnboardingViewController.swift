@@ -17,8 +17,8 @@ public class StartOnboardingViewController: UIViewController {
     
     // MARK: - Public Properties
     
-    public var router: Router!
     public var viewModel: StartOnboardingViewModel!
+    public var router: Router?
 
     // MARK: - Lifecycle
 
@@ -60,7 +60,7 @@ public class StartOnboardingViewController: UIViewController {
     private func configureActionButton() {
         actionButton.title = viewModel.navigationButtonTitle
         actionButton.action = { [weak self] in
-            self?.router.navigateToNextViewController()
+            self?.router?.navigateToNextViewController()
         }
     }
     

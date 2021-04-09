@@ -26,6 +26,7 @@ open class UIConstants {
         public static let OnboardingScreen3 = "onboarding_screen_3"
         public static let StartScreen = "start_screen_1"
         public static let IconLock = "icon_lock"
+        public static let ChevronRight = "chevron--right"
     }
     
     open class BrandColor {

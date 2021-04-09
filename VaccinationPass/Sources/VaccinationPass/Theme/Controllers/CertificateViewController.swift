@@ -12,16 +12,20 @@ import VaccinationUI
 public class CertificateViewController: UIViewController {
     // MARK: - IBOutlet
 
-    @IBOutlet public var container: UIView!
-    @IBOutlet public var headerView: HeaderView!
+    @IBOutlet public var headerView: InfoHeaderView!
     @IBOutlet public var addButton: PrimaryIconButtonContainer!
     @IBOutlet public var showAllButton: UIButton!
     @IBOutlet public var showAllLabel: UILabel!
     @IBOutlet public var tableView: UITableView!
+    @IBOutlet public var stackView: UIStackView!
     
     // MARK: - Public
     
-    public var viewModel: CertificateViewModel!
+    public var viewModel: CertificateViewModel?
+    
+    // MARK: - Private
+    
+    private let continerCornerRadius: CGFloat = 20
     
     // MARK: - Fifecycle
     
@@ -44,19 +48,19 @@ public class CertificateViewController: UIViewController {
     }
     
     private func setupContinerContent() {
-        let noCertificate = NoCertificateCardView(frame: container.bounds)
-        noCertificate.actionButton.title = "2. Impfung hinzufügen"
-        noCertificate.cornerRadius = 20
+        let noCertificate = NoCertificateCardView(frame: CGRect(origin: stackView.bounds.origin, size: CGSize(width: stackView.bounds.width, height: 200)))
+        noCertificate.actionButton.title = "Nachweis hinzufügen"
+        noCertificate.cornerRadius = continerCornerRadius
         noCertificate.actionButton.action = {
             // TODO: - show scan vc
         }
-        container.addSubview(noCertificate)
+        stackView.addArrangedSubview(noCertificate)
     }
     
     private func setupOther() {
         view.tintColor = UIConstants.BrandColor.brandAccent
-        headerView.headline.text = viewModel.title
-        addButton.iconImage = viewModel.addButtonImage
+        headerView.headline.text = viewModel?.title
+        addButton.iconImage = viewModel?.addButtonImage
         addButton.buttonBackgroundColor = UIConstants.BrandColor.brandAccent
     }
 }
@@ -65,13 +69,12 @@ public class CertificateViewController: UIViewController {
 
 extension CertificateViewController: UITableViewDataSource {
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        viewModel.titles.count
+        viewModel?.titles.count ?? 0
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: ActionTableViewCell.identifier, for: indexPath) as? ActionTableViewCell else { return UITableViewCell()
-        }
-        viewModel.configure(cell: cell, at: indexPath)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: ActionTableViewCell.identifier, for: indexPath) as? ActionTableViewCell else { return UITableViewCell()}
+        viewModel?.configure(cell: cell, at: indexPath)
         return cell
     }
 }

@@ -16,7 +16,7 @@ public struct CertificateViewModel {
     }
     
     var addButtonImage: UIImage? {
-        UIImage(named: "plus", in: UIConstants.bundle, compatibleWith: nil)
+        UIImage(named: UIConstants.IconName.PlusIcon, in: UIConstants.bundle, compatibleWith: nil)
     }
     
     public var titles = [
@@ -25,6 +25,6 @@ public struct CertificateViewModel {
         "Was passiert mit meinen Daten?"]
     
     func configure(cell: ActionCell, at indexPath: IndexPath) {
-        cell.configure(title: titles[indexPath.row], iconName: "chevron--right")
+        cell.configure(title: titles[indexPath.row], iconName: UIConstants.IconName.ChevronRight)
     }
 }

@@ -1,5 +1,5 @@
 //
-//  HeaderView.swift
+//  InfoHeaderView.swift
 //
 //
 //  Copyright © 2018 IBM. All rights reserved.
@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 @IBDesignable
-public class HeaderView: MarginableXibView {
+public class InfoHeaderView: MarginableXibView {
     
     // MARK: - Outlets
     
