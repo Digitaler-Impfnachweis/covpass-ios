@@ -9,8 +9,6 @@
 import UIKit
 import Scanner
 import VaccinationUI
-import VaccinationCommon
-import VaccinationPass
 
 class ScanViewController: UIViewController {
     
