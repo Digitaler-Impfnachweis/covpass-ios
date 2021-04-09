@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="UdV-L4-z1x">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="UdV-L4-z1x">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -109,6 +109,36 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ULQ-jF-Xq2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="30" y="145"/>
+        </scene>
+        <!--Vaccination Details View Controller-->
+        <scene sceneID="3eg-rO-M8k">
+            <objects>
+                <viewController storyboardIdentifier="VaccinationDetailsViewController" id="siV-cK-2aN" customClass="VaccinationDetailsViewController" customModule="VaccinationPass" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="gYk-x2-Ee4">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wOL-d4-AM4" customClass="ParagraphView" customModule="VaccinationUI">
+                                <rect key="frame" x="0.0" y="126" width="414" height="654"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="tDb-4c-WSh"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="tDb-4c-WSh" firstAttribute="bottom" secondItem="wOL-d4-AM4" secondAttribute="bottom" constant="82" id="24v-JH-vGE"/>
+                            <constraint firstItem="tDb-4c-WSh" firstAttribute="trailing" secondItem="wOL-d4-AM4" secondAttribute="trailing" id="8fr-xQ-T2V"/>
+                            <constraint firstItem="wOL-d4-AM4" firstAttribute="top" secondItem="tDb-4c-WSh" secondAttribute="top" constant="82" id="Nzz-f8-t0L"/>
+                            <constraint firstItem="wOL-d4-AM4" firstAttribute="leading" secondItem="tDb-4c-WSh" secondAttribute="leading" id="TOL-Sc-Ge3"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="paragraphView" destination="wOL-d4-AM4" id="plF-iF-7aC"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oNf-eD-7wV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1470" y="144"/>
         </scene>
     </scenes>
     <resources>
