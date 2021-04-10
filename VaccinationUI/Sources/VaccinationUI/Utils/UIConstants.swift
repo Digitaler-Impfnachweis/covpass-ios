@@ -29,6 +29,7 @@ open class UIConstants {
         public static let ChevronRight = "chevron--right"
         public static let IconClose = "epa_button_close"
         public static let ProofScreen = "scan_proof_image"
+        public static let SettingsImage = "ega_settings_image"
     }
     
     open class BrandColor {

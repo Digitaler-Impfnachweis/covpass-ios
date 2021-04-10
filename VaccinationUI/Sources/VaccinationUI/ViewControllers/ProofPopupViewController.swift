@@ -49,8 +49,8 @@ public class ProofPopupViewController: BottomPopupViewController {
     private func configureHeadline() {
         headline.headline.text = viewModel.title
         headline.headline.textColor = viewModel.headlineColor
-        headline.action = {
-            // Do Smth
+        headline.action = { [weak self] in
+            self?.dismiss(animated: true, completion: nil)
         }
         headline.buttonImage = viewModel.closeButtonImage
         headline.headlineFont = viewModel.headlineFont
@@ -59,8 +59,8 @@ public class ProofPopupViewController: BottomPopupViewController {
     private func configureActionView() {
         actionView.headline.text = viewModel.actionTitle
         actionView.headline.textColor = viewModel.headlineColor
-        actionView.action = {
-            self.dismiss(animated: true, completion: nil)
+        actionView.action = { [weak self] in
+            self?.dismiss(animated: true, completion: nil)
         }
         actionView.buttonImage = viewModel.chevronRightImage
         actionView.headlineFont = viewModel.headlineFont

@@ -34,6 +34,7 @@ public class CertificateViewController: UIViewController {
     
     override public func viewDidLoad() {
         super.viewDidLoad()
+        setupHeaderView()
         setupOther()
         setupTableView()
         setupContinerContent()
@@ -41,6 +42,11 @@ public class CertificateViewController: UIViewController {
     }
     
     // MARK: - Private
+    
+    public func setupHeaderView() {
+        headerView.actionButton.imageEdgeInsets = UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 0)
+        headerView.headline.text = viewModel?.title
+    }
     
     private func setupTableView() {
         tableView.delegate = self
