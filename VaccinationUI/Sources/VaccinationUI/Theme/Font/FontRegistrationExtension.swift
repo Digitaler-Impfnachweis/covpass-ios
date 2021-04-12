@@ -31,30 +31,21 @@ extension UIFont {
         UIFont(name: sansRegular, size: size)
     }
     
-    static func cgFont(with name: String, bundle: Bundle, fontExtension: String) throws -> CGFont {
-        guard let fontURL = bundle.url(forResource: name, withExtension: fontExtension),
-              let fontDataProvider = CGDataProvider(url: fontURL as CFURL),
-              let font = CGFont(fontDataProvider) else {
-            throw FontLoadingError.other("Couldn't find font \(name)")
-        }
-        return font
-    }
-    
-    static func register(with name: String, bundle: Bundle, fontExtension: String) throws {
-        let font = try cgFont(with: name, bundle: bundle, fontExtension: fontExtension)
-        var error: Unmanaged<CFError>?
-        let success = CTFontManagerRegisterGraphicsFont(font, &error)
+    static func register(with name: String, bundle: Bundle = Bundle.module, fontExtension: String) throws {
+        guard let url = bundle.url(forResource: name, withExtension: fontExtension) else { return }
+        var errorRef: Unmanaged<CFError>?
+        let success = CTFontManagerRegisterFontsForURL(url as CFURL, .none, &errorRef)
         guard success else {
-            throw FontLoadingError.other("Error registering font: maybe it was already registered. \(error.debugDescription)")
+            throw FontLoadingError.other("Error registering font: maybe it was already registered. \(errorRef.debugDescription)")
         }
     }
     
-    static func unregister(with name: String, bundle: Bundle, fontExtension: String) throws {
-        let font = try cgFont(with: name, bundle: bundle, fontExtension: fontExtension)
-        var error: Unmanaged<CFError>?
-        let success = CTFontManagerUnregisterGraphicsFont(font, &error)
+    static func unregister(with name: String, bundle: Bundle = Bundle.module, fontExtension: String) throws {
+        guard let url = bundle.url(forResource: name, withExtension: fontExtension) else { return }
+        var errorRef: Unmanaged<CFError>?
+        let success = CTFontManagerUnregisterFontsForURL(url as CFURL, .none, &errorRef)
         guard success else {
-            throw FontLoadingError.other("Error unregistering font: maybe it was already unregistered. \(error.debugDescription)")
+            throw FontLoadingError.other("Error registering font: maybe it was already registered. \(errorRef.debugDescription)")
         }
     }
 }

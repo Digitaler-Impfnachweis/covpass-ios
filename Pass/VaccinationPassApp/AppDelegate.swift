@@ -12,12 +12,11 @@ import VaccinationPass
 final class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
-    var router: MainRouter!
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         try? UIFont.loadCustomFonts()
         window = UIWindow(frame: UIScreen.main.bounds)
-        router = MainRouter()
+        var router = MainRouter()
         router.windowDelegate = self
         self.window = UIWindow(frame: UIScreen.main.bounds)
         self.window?.rootViewController = router.rootViewController()
