@@ -23,7 +23,7 @@ public class OnboardingContainerViewController: UIViewController {
     
     // MARK: - Internal Properties
     
-    var pageController: UIPageViewController!
+    var pageController: UIPageViewController?
     var pages: [OnboardingPageViewController] = []
     var currentIndex: Int = 0
     
@@ -80,16 +80,10 @@ public class OnboardingContainerViewController: UIViewController {
     }
 
     private func configurePageController() {
-        pageController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
-        pageController.dataSource = self
-        pageController.delegate = self
-        pageController.setViewControllers([pages[currentIndex]], direction: .forward, animated: false, completion: nil)
-
-        addChild(pageController)
-        view.insertSubview(pageController.view, at: 0)
-        pageController.view.frame = view.bounds
-        pageController.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        pageController.didMove(toParent: self)
+        pageController = children.first as? UIPageViewController
+        pageController?.dataSource = self
+        pageController?.delegate = self
+        pageController?.setViewControllers([pages[currentIndex]], direction: .forward, animated: false, completion: nil)
     }
     
     private func updateOnboardingPages() {
@@ -153,7 +147,7 @@ extension OnboardingContainerViewController: DotPageIndicatorDelegate {
             return
         }
         let direction: UIPageViewController.NavigationDirection = index > currentIndex ? .forward : .reverse
-        pageController.setViewControllers([pages[index]], direction: direction, animated: true, completion: nil)
+        pageController?.setViewControllers([pages[index]], direction: direction, animated: true, completion: nil)
         currentIndex = index
     }
 }
@@ -169,7 +163,7 @@ extension OnboardingContainerViewController: CustomToolbarViewDelegate {
                 return
             }
             currentIndex -= 1
-            pageController.setViewControllers([pages[currentIndex]], direction: .reverse, animated: true, completion: nil)
+            pageController?.setViewControllers([pages[currentIndex]], direction: .reverse, animated: true, completion: nil)
             pageIndicator.selectDot(withIndex: currentIndex)
         case .textButton:
             guard currentIndex+1 < pages.count else {
@@ -177,7 +171,7 @@ extension OnboardingContainerViewController: CustomToolbarViewDelegate {
                 return
             }
             currentIndex += 1
-            pageController.setViewControllers([pages[currentIndex]], direction: .forward, animated: true, completion: nil)
+            pageController?.setViewControllers([pages[currentIndex]], direction: .forward, animated: true, completion: nil)
             pageIndicator.selectDot(withIndex: currentIndex)
         default:
             return
