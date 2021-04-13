@@ -29,6 +29,7 @@ public class CertificateViewController: UIViewController {
     
     private let continerCornerRadius: CGFloat = 20
     private let continerHeight: CGFloat = 200
+    private var continerView: UIView!
     
     // MARK: - Fifecycle
     
@@ -37,8 +38,8 @@ public class CertificateViewController: UIViewController {
         setupHeaderView()
         setupOther()
         setupTableView()
-        setupContinerContent()
         setupOther()
+        setupCardViewFor(state: viewModel?.certificateState ?? .none)
     }
     
     // MARK: - Private
@@ -56,16 +57,6 @@ public class CertificateViewController: UIViewController {
         tableView.tintColor = UIConstants.BrandColor.brandAccent
     }
     
-    private func setupContinerContent() {
-        let noCertificate = NoCertificateCardView(frame: CGRect(origin: stackView.bounds.origin, size: CGSize(width: stackView.bounds.width, height: continerHeight)))
-        noCertificate.actionButton.title = "Nachweis hinzufügen"
-        noCertificate.cornerRadius = continerCornerRadius
-        noCertificate.actionButton.action = { [self] in
-            router?.presentPopup(onTopOf: self)
-        }
-        stackView.addArrangedSubview(noCertificate)
-    }
-    
     private func setupOther() {
         view.tintColor = UIConstants.BrandColor.brandAccent
         headerView.headline.text = viewModel?.title
@@ -74,6 +65,47 @@ public class CertificateViewController: UIViewController {
         addButton.action = { [self] in
             router?.presentPopup(onTopOf: self)
         }
+    }
+    
+    // MARK: - Card View
+    
+    func noCertificateCardView() -> NoCertificateCardView {
+        let noCertificate = NoCertificateCardView(frame: CGRect(origin: stackView.bounds.origin, size: CGSize(width: stackView.bounds.width, height: continerHeight)))
+        noCertificate.actionButton.title = "Nachweis hinzufügen"
+        noCertificate.cornerRadius = continerCornerRadius
+        noCertificate.actionButton.action = { [weak self] in
+            guard let `self` = self else { return }
+            self.router?.presentPopup(onTopOf: self)
+        }
+        return noCertificate
+    }
+    
+    func halfCertificateCarView() -> PartialCertificateCardView {
+        let certificate = PartialCertificateCardView(frame: CGRect(origin: stackView.bounds.origin, size: CGSize(width: stackView.bounds.width, height: continerHeight)))
+        certificate.actionButton.title = "Nachweis hinzufügen"
+        certificate.cornerRadius = continerCornerRadius
+        certificate.actionButton.action = { [weak self] in
+            guard let `self` = self else { return }
+            self.router?.presentPopup(onTopOf: self)
+        }
+        return certificate
+    }
+    
+    func setupCardViewFor(state: CertificateState) {
+        if continerView != nil {
+            stackView.removeArrangedSubview(continerView)
+        }
+        switch state {
+        case .none:
+            print("None")
+            continerView = noCertificateCardView()
+        case .half:
+            print("half")
+            continerView = halfCertificateCarView()
+        case .full:
+            print("full")
+        }
+        stackView.insertArrangedSubview(continerView, at: stackView.arrangedSubviews.count - 1)
     }
 }
 
@@ -84,11 +116,9 @@ extension CertificateViewController: ScannerDelegate {
         presentedViewController?.dismiss(animated: true, completion: nil)
         switch value {
         case .success(let payload):
-            let vc = VaccinationDetailsViewController.createFromStoryboard(bundle: Bundle.module)
-            vc.cborData = viewModel?.process(payload: payload)
-            present(vc, animated: true, completion: nil)
-        default:
-            print("There has been an error !")
+            viewModel?.process(payload: payload)
+        case .failure(let error):
+            print("We have an error: \(error)")
         }
     }
 }
@@ -123,3 +153,10 @@ extension CertificateViewController: StoryboardInstantiating {
     }
 }
 
+// MARK: - CertificateStateDelegate
+
+extension CertificateViewController: CertificateStateDelegate {
+    public func didUpdatedCertificate(state: CertificateState) {
+        setupCardViewFor(state: state)
+    }
+}

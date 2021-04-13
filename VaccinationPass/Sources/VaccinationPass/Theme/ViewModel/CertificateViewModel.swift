@@ -10,19 +10,25 @@ import VaccinationUI
 import UIKit
 import VaccinationCommon
 
-public struct CertificateViewModel {
+public class CertificateViewModel {
     
-    let parser: QRCodeProcessor = QRCodeProcessor()
+    // MARK: - Private
     
-    var title: String {
-        "Meine Impfnachweise"
+    private let parser: QRCodeProcessor = QRCodeProcessor()
+    
+    // MARK: - Internal
+    
+    weak var stateDelegate: CertificateStateDelegate?
+    var certificateState: CertificateState = .none {
+        didSet { stateDelegate?.didUpdatedCertificate(state: certificateState) }
     }
+    var title: String { "Meine Impfungen" }
     
     var addButtonImage: UIImage? {
         UIImage(named: UIConstants.IconName.PlusIcon, in: UIConstants.bundle, compatibleWith: nil)
     }
     
-    public var titles = [
+    var titles = [
         "Wie nutze ich den digitalen Nachweis?",
         "Woher bekomme ich einen QR Code?",
         "Was passiert mit meinen Daten?"]
@@ -31,7 +37,9 @@ public struct CertificateViewModel {
         cell.configure(title: titles[indexPath.row], iconName: UIConstants.IconName.ChevronRight)
     }
     
-    func process(payload: String) -> String {
-        parser.parse(payload) ?? ""
+    func process(payload: String) {
+        guard let decodedPayload = parser.parse(payload) else { return }
+        // Do more processes
+        certificateState = .half
     }
 }

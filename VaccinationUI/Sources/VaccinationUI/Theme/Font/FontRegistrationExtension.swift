@@ -9,19 +9,14 @@ import Foundation
 import UIKit
 
 extension UIFont {
-    static let sansSemiBold = "IBMPlexSans-SemiBold"
-    static let sansRegular = "IBMPlexSans"
-    static let otfExtension = "otf"
     
-    public static func loadCustomFonts() throws {
-        try? UIFont.register(with: sansSemiBold, bundle: Bundle.module,  fontExtension: otfExtension)
-        try? UIFont.register(with: sansRegular, bundle:Bundle.module, fontExtension: otfExtension)
-    }
+    // MARK: - Supported fonts name
     
-    public static func unloadCustomFonts() throws {
-        try? UIFont.unregister(with: sansSemiBold, bundle: Bundle.module, fontExtension: otfExtension)
-        try? UIFont.unregister(with: sansRegular, bundle:Bundle.module, fontExtension: otfExtension)
-    }
+    public static let sansSemiBold = "IBMPlexSans-SemiBold"
+    public static let sansRegular = "IBMPlexSans"
+    public static let otfExtension = "otf"
+    
+    // MARK: - Predefiend Font
     
     public static func ibmPlexSansSemiBold(with size: CGFloat) -> UIFont? {
         UIFont(name: sansSemiBold, size: size)
@@ -31,7 +26,9 @@ extension UIFont {
         UIFont(name: sansRegular, size: size)
     }
     
-    static func register(with name: String, bundle: Bundle = Bundle.module, fontExtension: String) throws {
+    // MARK: - Register Font 
+    
+    public static func register(with name: String, bundle: Bundle, fontExtension: String) throws {
         guard let url = bundle.url(forResource: name, withExtension: fontExtension) else { return }
         var errorRef: Unmanaged<CFError>?
         let success = CTFontManagerRegisterFontsForURL(url as CFURL, .none, &errorRef)
@@ -40,7 +37,7 @@ extension UIFont {
         }
     }
     
-    static func unregister(with name: String, bundle: Bundle = Bundle.module, fontExtension: String) throws {
+    public static func unregister(with name: String, bundle: Bundle, fontExtension: String) throws {
         guard let url = bundle.url(forResource: name, withExtension: fontExtension) else { return }
         var errorRef: Unmanaged<CFError>?
         let success = CTFontManagerUnregisterFontsForURL(url as CFURL, .none, &errorRef)

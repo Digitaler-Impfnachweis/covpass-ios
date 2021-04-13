@@ -14,7 +14,9 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        try? UIFont.loadCustomFonts()
+        try? UIFont.register(with: UIFont.sansRegular, bundle: Bundle.main, fontExtension: UIFont.otfExtension)
+        try? UIFont.register(with: UIFont.sansSemiBold, bundle: Bundle.main, fontExtension: UIFont.otfExtension)
+        
         window = UIWindow(frame: UIScreen.main.bounds)
         var router = MainRouter()
         router.windowDelegate = self
