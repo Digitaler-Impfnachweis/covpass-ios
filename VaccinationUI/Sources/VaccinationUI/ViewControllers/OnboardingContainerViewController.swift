@@ -88,8 +88,8 @@ public class OnboardingContainerViewController: UIViewController {
     
     private func updateOnboardingPages() {
         pages.forEach { onboardingPageViewController in
-            guard let bottomConstraint = onboardingPageViewController.contentBottomConstraint else { return }
-            bottomConstraint.constant = startButtonBottomConstraint.constant + toolbarView.primaryButton.frame.height + LayoutConstants().topStartButtonMargin
+//            guard let bottomConstraint = onboardingPageViewController.contentBottomConstraint else { return }
+//            bottomConstraint.constant = startButtonBottomConstraint.constant + toolbarView.primaryButton.frame.height + LayoutConstants().topStartButtonMargin
         }
     }
 }
