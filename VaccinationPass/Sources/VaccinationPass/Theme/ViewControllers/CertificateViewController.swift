@@ -80,7 +80,7 @@ public class CertificateViewController: UIViewController {
         return noCertificate
     }
     
-    func halfCertificateCarView() -> PartialCertificateCardView {
+    func halfCertificateCardView() -> PartialCertificateCardView {
         let certificate = PartialCertificateCardView(frame: CGRect(origin: stackView.bounds.origin, size: CGSize(width: stackView.bounds.width, height: continerHeight)))
         certificate.actionButton.title = "Nachweis hinzufügen"
         certificate.cornerRadius = continerCornerRadius
@@ -91,19 +91,22 @@ public class CertificateViewController: UIViewController {
         return certificate
     }
     
+    func fullCertificateCardView() -> UIView {
+        // TBD - we should update with actual card view
+        UIView(frame: CGRect(origin: stackView.bounds.origin, size: CGSize(width: stackView.bounds.width, height: continerHeight)))
+    }
+    
     func setupCardViewFor(state: CertificateState) {
         if continerView != nil {
             stackView.removeArrangedSubview(continerView)
         }
         switch state {
         case .none:
-            print("None")
             continerView = noCertificateCardView()
         case .half:
-            print("half")
-            continerView = halfCertificateCarView()
+            continerView = halfCertificateCardView()
         case .full:
-            print("full")
+            continerView = fullCertificateCardView()
         }
         stackView.insertArrangedSubview(continerView, at: stackView.arrangedSubviews.count - 1)
     }
