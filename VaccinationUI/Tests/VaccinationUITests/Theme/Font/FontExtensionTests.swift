@@ -15,13 +15,11 @@ class FontExtensionTests: XCTestCase {
     
     override func setUpWithError() throws {
         try super.setUpWithError()
-        try UIFont.register(with: UIFont.sansRegular, bundle: Bundle.module, fontExtension: UIFont.otfExtension)
-        try UIFont.register(with: UIFont.sansSemiBold, bundle: Bundle.module, fontExtension: UIFont.otfExtension)
+        try UIFont.loadCustomFonts()
     }
     
     override func tearDownWithError() throws {
-        try UIFont.unregister(with: UIFont.sansRegular, bundle: Bundle.module, fontExtension: UIFont.otfExtension)
-        try UIFont.unregister(with: UIFont.sansSemiBold, bundle: Bundle.module, fontExtension: UIFont.otfExtension)
+        try UIFont.unloadCustomFonts()
         try super.tearDownWithError()
     }
 

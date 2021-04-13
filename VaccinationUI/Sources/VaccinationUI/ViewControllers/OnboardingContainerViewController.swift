@@ -42,26 +42,17 @@ public class OnboardingContainerViewController: UIViewController {
             fatalError("ViewModel should contain at least one page")
         }
 
-        weak var weakSelf = self
         viewModel.items.forEach { model in
             let controller = OnboardingPageViewController.createFromStoryboard(bundle: UIConstants.bundle)
             controller.viewModel = model
             controller.viewDidLoadAction = {
-                weakSelf?.updateOnboardingPages()
+               // Do smth if needed
             }
-            
             pages.append(controller)
         }
-
         configureToolbarView()
         configurePageIndicator()
         configurePageController()
-    }
-    
-    public override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        
-        updateOnboardingPages()
     }
 
     // MARK: - Private
@@ -84,13 +75,6 @@ public class OnboardingContainerViewController: UIViewController {
         pageController?.dataSource = self
         pageController?.delegate = self
         pageController?.setViewControllers([pages[currentIndex]], direction: .forward, animated: false, completion: nil)
-    }
-    
-    private func updateOnboardingPages() {
-        pages.forEach { onboardingPageViewController in
-//            guard let bottomConstraint = onboardingPageViewController.contentBottomConstraint else { return }
-//            bottomConstraint.constant = startButtonBottomConstraint.constant + toolbarView.primaryButton.frame.height + LayoutConstants().topStartButtonMargin
-        }
     }
 }
 

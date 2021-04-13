@@ -14,11 +14,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        
-        // Register fonts 
-        try? UIFont.register(with: UIFont.sansRegular, bundle: Bundle.main, fontExtension: UIFont.otfExtension)
-        try? UIFont.register(with: UIFont.sansSemiBold, bundle: Bundle.main, fontExtension: UIFont.otfExtension)
-        
+        try? UIFont.loadCustomFonts()
         window = UIWindow(frame: UIScreen.main.bounds)
         var router = MainRouter()
         router.windowDelegate = self
@@ -28,6 +24,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 }
+
+// MARK: - WindowDelegate
 
 extension AppDelegate: WindowDelegate {
     func update(rootViewController: UIViewController) {

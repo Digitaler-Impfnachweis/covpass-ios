@@ -12,9 +12,9 @@ extension UIFont {
     
     // MARK: - Supported fonts name
     
-    public static let sansSemiBold = "IBMPlexSans-SemiBold"
-    public static let sansRegular = "IBMPlexSans"
-    public static let otfExtension = "otf"
+    static let sansSemiBold = "IBMPlexSans-SemiBold"
+    static let sansRegular = "IBMPlexSans"
+    static let otfExtension = "otf"
     
     // MARK: - Predefiend Font
     
@@ -24,6 +24,19 @@ extension UIFont {
     
     public static func ibmPlexSansRegular(with size: CGFloat) -> UIFont? {
         UIFont(name: sansRegular, size: size)
+    }
+    
+    // MARK: - Register Predefined Fonts
+    
+    public static func loadCustomFonts() throws {
+        try? UIFont.register(with: sansSemiBold, bundle: Bundle.module,  fontExtension: otfExtension)
+        try? UIFont.register(with: sansRegular, bundle:Bundle.module, fontExtension: otfExtension)
+    }
+    // MARK: - Supported fonts name
+    
+    public static func unloadCustomFonts() throws {
+        try? UIFont.unregister(with: sansSemiBold, bundle: Bundle.module, fontExtension: otfExtension)
+        try? UIFont.unregister(with: sansRegular, bundle:Bundle.module, fontExtension: otfExtension)
     }
     
     // MARK: - Register Font 

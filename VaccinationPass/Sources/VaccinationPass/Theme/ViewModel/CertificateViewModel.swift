@@ -39,6 +39,7 @@ public class CertificateViewModel {
     
     func process(payload: String) {
         guard let decodedPayload = parser.parse(payload) else { return }
+        print(decodedPayload)
         // Do more processes
         certificateState = .half
     }
