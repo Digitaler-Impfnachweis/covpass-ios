@@ -22,13 +22,11 @@ public class CertificateViewController: UIViewController {
     
     // MARK: - Public
     
-    public var viewModel: CertificateViewModel?
+    public var viewModel: CertificateViewModel!
     public var router: Popup?
     
     // MARK: - Private
-    
-    private let continerCornerRadius: CGFloat = 20
-    private let continerHeight: CGFloat = 200
+
     private var continerView: UIView!
     
     // MARK: - Fifecycle
@@ -45,7 +43,7 @@ public class CertificateViewController: UIViewController {
     // MARK: - Private
     
     public func setupHeaderView() {
-        headerView.actionButton.imageEdgeInsets = UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 0)
+        headerView.actionButton.imageEdgeInsets = viewModel.headerButtonInsets
         headerView.headline.text = viewModel?.title
     }
     
@@ -68,24 +66,24 @@ public class CertificateViewController: UIViewController {
     // MARK: - Card View
     
     func noCertificateCardView() -> NoCertificateCardView {
-        let noCertificate = NoCertificateCardView(frame: CGRect(origin: stackView.bounds.origin, size: CGSize(width: stackView.bounds.width, height: continerHeight)))
-        noCertificate.actionButton.title = "Nachweis hinzufügen"
-        noCertificate.cornerRadius = continerCornerRadius
+        let noCertificate = NoCertificateCardView(frame: CGRect(origin: stackView.bounds.origin, size: CGSize(width: stackView.bounds.width, height: viewModel.continerHeight)))
+        noCertificate.actionButton.title = viewModel.noCertificateCardTitle
+        noCertificate.cornerRadius = viewModel.continerCornerRadius
         noCertificate.actionButton.action = presentPopup
         return noCertificate
     }
     
     func halfCertificateCardView() -> PartialCertificateCardView {
-        let certificate = PartialCertificateCardView(frame: CGRect(origin: stackView.bounds.origin, size: CGSize(width: stackView.bounds.width, height: continerHeight)))
-        certificate.actionButton.title = "Nachweis hinzufügen"
-        certificate.cornerRadius = continerCornerRadius
+        let certificate = PartialCertificateCardView(frame: CGRect(origin: stackView.bounds.origin, size: CGSize(width: stackView.bounds.width, height: viewModel.continerHeight)))
+        certificate.actionButton.title = viewModel.halfCertificateCardTitle
+        certificate.cornerRadius = viewModel.continerCornerRadius
         certificate.actionButton.action = presentPopup
         return certificate
     }
     
     func fullCertificateCardView() -> UIView {
         // TBD - we should update with actual card view
-        UIView(frame: CGRect(origin: stackView.bounds.origin, size: CGSize(width: stackView.bounds.width, height: continerHeight)))
+        UIView(frame: CGRect(origin: stackView.bounds.origin, size: CGSize(width: stackView.bounds.width, height: viewModel.continerHeight)))
     }
     
     func setupCardViewFor(state: CertificateState) {

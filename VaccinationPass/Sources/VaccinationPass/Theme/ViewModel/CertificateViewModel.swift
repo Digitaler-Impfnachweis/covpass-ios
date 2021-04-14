@@ -43,4 +43,16 @@ public class CertificateViewModel {
         // Do more processes
         certificateState = .half
     }
+    
+    // MARK: - No Certificate Configuration
+    let noCertificateCardTitle = "Nachweis hinzufügen"
+    
+    // MARK: - Half Certificate Configuration
+    let halfCertificateCardTitle = "Nachweis hinzufügen"
+    
+    // MARK: - UIConfigureation
+    
+    let continerCornerRadius: CGFloat = 20
+    let continerHeight: CGFloat = 200
+    var headerButtonInsets = UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 0)
 }
