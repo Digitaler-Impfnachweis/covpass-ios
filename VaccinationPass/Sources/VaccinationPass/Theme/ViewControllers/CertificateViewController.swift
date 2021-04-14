@@ -62,9 +62,7 @@ public class CertificateViewController: UIViewController {
         headerView.headline.text = viewModel?.title
         addButton.iconImage = viewModel?.addButtonImage
         addButton.buttonBackgroundColor = UIConstants.BrandColor.brandAccent
-        addButton.action = { [self] in
-            router?.presentPopup(onTopOf: self)
-        }
+        addButton.action = presentPopup
     }
     
     // MARK: - Card View
@@ -73,10 +71,7 @@ public class CertificateViewController: UIViewController {
         let noCertificate = NoCertificateCardView(frame: CGRect(origin: stackView.bounds.origin, size: CGSize(width: stackView.bounds.width, height: continerHeight)))
         noCertificate.actionButton.title = "Nachweis hinzufügen"
         noCertificate.cornerRadius = continerCornerRadius
-        noCertificate.actionButton.action = { [weak self] in
-            guard let `self` = self else { return }
-            self.router?.presentPopup(onTopOf: self)
-        }
+        noCertificate.actionButton.action = presentPopup
         return noCertificate
     }
     
@@ -84,10 +79,7 @@ public class CertificateViewController: UIViewController {
         let certificate = PartialCertificateCardView(frame: CGRect(origin: stackView.bounds.origin, size: CGSize(width: stackView.bounds.width, height: continerHeight)))
         certificate.actionButton.title = "Nachweis hinzufügen"
         certificate.cornerRadius = continerCornerRadius
-        certificate.actionButton.action = { [weak self] in
-            guard let `self` = self else { return }
-            self.router?.presentPopup(onTopOf: self)
-        }
+        certificate.actionButton.action = presentPopup
         return certificate
     }
     
@@ -109,6 +101,10 @@ public class CertificateViewController: UIViewController {
             continerView = fullCertificateCardView()
         }
         stackView.insertArrangedSubview(continerView, at: stackView.arrangedSubviews.count - 1)
+    }
+    
+    func presentPopup() {
+        router?.presentPopup(onTopOf: self)
     }
 }
 
