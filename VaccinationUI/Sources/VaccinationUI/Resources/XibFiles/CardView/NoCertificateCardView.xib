@@ -31,20 +31,15 @@
                     <rect key="frame" x="0.0" y="0.0" width="414" height="335"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pP8-Zv-hAB" customClass="PrimaryButtonContainer" customModule="VaccinationUI">
-                            <rect key="frame" x="40" y="234.5" width="334" height="55"/>
+                            <rect key="frame" x="40" y="238" width="334" height="55"/>
                             <color key="backgroundColor" systemColor="systemBlueColor"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="334" id="3bS-Q9-ZcT"/>
                                 <constraint firstAttribute="height" constant="55" id="pTo-HI-s5V"/>
                             </constraints>
-                            <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="number" keyPath="iconHeightMultiplier">
-                                    <real key="value" value="2"/>
-                                </userDefinedRuntimeAttribute>
-                            </userDefinedRuntimeAttributes>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Kein Nachweis hinzugefügt" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VW2-PA-GY7">
-                            <rect key="frame" x="8" y="134" width="398" height="16.5"/>
+                            <rect key="frame" x="8" y="134" width="398" height="18.5"/>
                             <fontDescription key="fontDescription" name="IBMPlexSans-SemiBold" family="IBM Plex Sans" pointSize="14"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -57,12 +52,12 @@
                             </constraints>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EKc-Hh-BeX">
-                            <rect key="frame" x="8" y="150.5" width="398" height="49"/>
+                            <rect key="frame" x="8" y="152.5" width="398" height="50.5"/>
                             <attributedString key="attributedText">
                                 <fragment content="Scannen Sie eine  Bescheinigung mit QR Code, um hier  Ihren Nachweis zu sehen">
                                     <attributes>
                                         <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                        <font key="NSFont" size="14" name="IBMPlexSans"/>
+                                        <font key="NSFont" metaFont="system" size="14"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                     </attributes>
                                 </fragment>

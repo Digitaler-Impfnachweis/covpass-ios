@@ -71,6 +71,6 @@
         </view>
     </objects>
     <resources>
-        <image name="ega_settings_image" width="64" height="64"/>
+        <image name="gearshape" catalog="system" width="128" height="121"/>
     </resources>
 </document>

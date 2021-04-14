@@ -45,11 +45,6 @@
                             <constraints>
                                 <constraint firstAttribute="height" constant="55" id="tww-g8-iJ3"/>
                             </constraints>
-                            <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="number" keyPath="iconHeightMultiplier">
-                                    <real key="value" value="2"/>
-                                </userDefinedRuntimeAttribute>
-                            </userDefinedRuntimeAttributes>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hrR-va-zyE" customClass="CardViewHeader" customModule="VaccinationUI">
                             <rect key="frame" x="15" y="15" width="384" height="80"/>
