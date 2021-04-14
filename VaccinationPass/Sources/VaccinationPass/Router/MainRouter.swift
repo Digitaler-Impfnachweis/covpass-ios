@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 import VaccinationUI
 
+/// Establishes the root ViewController to initialize the main window with
 public struct MainRouter {
     // MARK: - Public Variables 
     
@@ -24,7 +25,6 @@ public struct MainRouter {
         var router = StartRouter()
         router.windowDelegate = windowDelegate
         let controller = StartOnboardingViewController.createFromStoryboard()
-        controller.viewModel = StartOnboardingViewModel()
         controller.router = router
         return controller
     }

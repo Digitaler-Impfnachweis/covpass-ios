@@ -17,8 +17,14 @@ public class StartOnboardingViewController: UIViewController {
     
     // MARK: - Public Properties
     
-    public var viewModel: StartOnboardingViewModel!
+    public var viewModel: BaseViewModel?
     public var router: Router?
+
+    // MARK: - Internal Properties
+
+    var inputViewModel: StartOnboardingViewModel {
+        viewModel as? StartOnboardingViewModel ?? StartOnboardingViewModel()
+    }
 
     // MARK: - Lifecycle
 
@@ -35,30 +41,30 @@ public class StartOnboardingViewController: UIViewController {
 
     private func configureImageView() {
         confirmView.kind = .custom(
-            image: viewModel.image,
-            width: viewModel.imageWidth,
-            height: viewModel.imageHeight
+            image: inputViewModel.image,
+            width: inputViewModel.imageWidth,
+            height: inputViewModel.imageHeight
         )
         confirmView.detail = nil
-        confirmView.imageView.contentMode = viewModel.imageContentMode
-        confirmView.contentView?.backgroundColor = viewModel.backgroundColor
+        confirmView.imageView.contentMode = inputViewModel.imageContentMode
+        confirmView.contentView?.backgroundColor = inputViewModel.backgroundColor
     }
 
     private func configureHeadline() {
-        headline.text = viewModel.title
-        headline.font = viewModel.headlineFont
-        headline.textColor = viewModel.headlineColor
+        headline.text = inputViewModel.title
+        headline.font = inputViewModel.headlineFont
+        headline.textColor = inputViewModel.headlineColor
     }
 
     private func configureParagraphView() {
         paragraphView.title.isHidden = true
-        paragraphView.bodyText = viewModel.info
-        paragraphView.bodyFont = viewModel.paragraphBodyFont
-        paragraphView.contentView?.backgroundColor = viewModel.backgroundColor
+        paragraphView.bodyText = inputViewModel.info
+        paragraphView.bodyFont = inputViewModel.paragraphBodyFont
+        paragraphView.contentView?.backgroundColor = inputViewModel.backgroundColor
     }
     
     private func configureActionButton() {
-        actionButton.title = viewModel.navigationButtonTitle
+        actionButton.title = inputViewModel.navigationButtonTitle
         actionButton.action = { [weak self] in
             self?.router?.navigateToNextViewController()
         }
@@ -66,12 +72,12 @@ public class StartOnboardingViewController: UIViewController {
     
     private func configureSecureContentView() {
         secureContentView.title.isHidden = false
-        secureContentView.title.font = viewModel.secureHeadlineFont
-        secureContentView.title.text = viewModel.secureTitle
+        secureContentView.title.font = inputViewModel.secureHeadlineFont
+        secureContentView.title.text = inputViewModel.secureTitle
         secureContentView.spacing = 0
-        secureContentView.bodyText = viewModel.secureText
-        secureContentView.bodyFont = viewModel.secureTextFont
-        secureContentView.contentView?.backgroundColor = viewModel.backgroundColor
+        secureContentView.bodyText = inputViewModel.secureText
+        secureContentView.bodyFont = inputViewModel.secureTextFont
+        secureContentView.contentView?.backgroundColor = inputViewModel.backgroundColor
     }
 }
 

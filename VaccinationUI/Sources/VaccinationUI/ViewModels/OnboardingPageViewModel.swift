@@ -13,14 +13,14 @@ public enum OnboardingPageViewModelType: CaseIterable {
     case page3
 }
 
-public class OnboardingPageViewModel {
+public class OnboardingPageViewModel: BaseViewModel {
     var type: OnboardingPageViewModelType
 
     public init(type: OnboardingPageViewModelType) {
         self.type = type
     }
 
-    var image: UIImage? {
+    public var image: UIImage? {
         switch type {
         case .page1:
             return UIImage(named: UIConstants.IconName.OnboardingScreen1, in: UIConstants.bundle, compatibleWith: nil)
@@ -31,7 +31,7 @@ public class OnboardingPageViewModel {
         }
     }
 
-    var title: String {
+    public var title: String {
         switch type {
         case .page1:
             return "Nach der Impfung erhalten Sie ihre Impfbescheinigung mit QR-Code"
@@ -42,7 +42,7 @@ public class OnboardingPageViewModel {
         }
     }
 
-    var info: String {
+    public var info: String {
         switch type {
         case .page1:
             return "Gut zu wissen: Sie können den QR-Code nur ein mal verwenden. Die Impfbescheinigung ist anschließend an das einlesende Smartphone gebunden."
@@ -55,13 +55,13 @@ public class OnboardingPageViewModel {
 
     // MARK: - Settings
 
-    var imageAspectRatio: CGFloat { 375 / 220 }
-    var imageWidth: CGFloat { UIScreen.main.bounds.width }
-    var imageHeight: CGFloat { imageWidth / imageAspectRatio }
-    var imageContentMode: UIView.ContentMode { .scaleAspectFit }
-    var headlineFont: UIFont { UIConstants.Font.onboardingHeadlineFont }
-    var headlineColor: UIColor { .black }
-    var paragraphBodyFont: UIFont { UIConstants.Font.regularLarger }
-    var backgroundColor: UIColor { UIConstants.BrandColor.backgroundPrimary }
+    public var imageAspectRatio: CGFloat { 375 / 220 }
+    public var imageWidth: CGFloat { UIScreen.main.bounds.width }
+    public var imageHeight: CGFloat { imageWidth / imageAspectRatio }
+    public var imageContentMode: UIView.ContentMode { .scaleAspectFit }
+    public var headlineFont: UIFont { UIConstants.Font.onboardingHeadlineFont }
+    public var headlineColor: UIColor { .black }
+    public var paragraphBodyFont: UIFont { UIConstants.Font.regularLarger }
+    public var backgroundColor: UIColor { UIConstants.BrandColor.backgroundPrimary }
 }
 

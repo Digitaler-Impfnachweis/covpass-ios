@@ -12,7 +12,7 @@ import VaccinationCommon
 
 public struct CertificateViewModel {
     
-    let parser: QRCodeProcessor = QRCodeProcessor()
+    private let parser: QRCoderProtocol = QRCoder()
     
     var title: String {
         "Meine Impfnachweise"
@@ -25,13 +25,14 @@ public struct CertificateViewModel {
     public var titles = [
         "Wie nutze ich den digitalen Nachweis?",
         "Woher bekomme ich einen QR Code?",
-        "Was passiert mit meinen Daten?"]
+        "Was passiert mit meinen Daten?"
+    ]
     
     func configure(cell: ActionCell, at indexPath: IndexPath) {
         cell.configure(title: titles[indexPath.row], iconName: UIConstants.IconName.ChevronRight)
     }
     
-    func process(payload: String) -> String {
-        parser.parse(payload) ?? ""
+    func process(payload: String, completion: ((Error) -> Void)? = nil) -> String {
+        parser.parse(payload, completion: completion) ?? ""
     }
 }

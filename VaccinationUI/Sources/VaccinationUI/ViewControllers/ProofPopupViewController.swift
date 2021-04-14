@@ -9,7 +9,6 @@ import UIKit
 import BottomPopup
 
 public class ProofPopupViewController: BottomPopupViewController {
-    
     // MARK: - IBOutlet
     
     @IBOutlet public var toolbarView: CustomToolbarView!
@@ -20,8 +19,14 @@ public class ProofPopupViewController: BottomPopupViewController {
     
     // MARK: - Public Properties
     
-    public var viewModel: ProofPopupViewModel!
+    public var viewModel: BaseViewModel?
     public var router: Popup?
+
+    // MARK: - Internal Properties
+
+    var inputViewModel: ProofPopupViewModel {
+        viewModel as? ProofPopupViewModel ?? ProofPopupViewModel()
+    }
 
     // MARK: - Lifecycle
 
@@ -38,55 +43,55 @@ public class ProofPopupViewController: BottomPopupViewController {
 
     private func configureImageView() {
         confirmView.kind = .custom(
-            image: viewModel.image,
-            width: viewModel.imageWidth,
-            height: viewModel.imageHeight
+            image: inputViewModel.image,
+            width: inputViewModel.imageWidth,
+            height: inputViewModel.imageHeight
         )
         confirmView.detail = nil
-        confirmView.imageView.contentMode = viewModel.imageContentMode
+        confirmView.imageView.contentMode = inputViewModel.imageContentMode
     }
 
     private func configureHeadline() {
-        headline.headline.text = viewModel.title
-        headline.headline.textColor = viewModel.headlineColor
+        headline.headline.text = inputViewModel.title
+        headline.headline.textColor = inputViewModel.headlineColor
         headline.action = { [weak self] in
             self?.dismiss(animated: true, completion: nil)
         }
-        headline.buttonImage = viewModel.closeButtonImage
-        headline.headlineFont = viewModel.headlineFont
+        headline.buttonImage = inputViewModel.closeButtonImage
+        headline.headlineFont = inputViewModel.headlineFont
     }
     
     private func configureActionView() {
-        actionView.headline.text = viewModel.actionTitle
-        actionView.headline.textColor = viewModel.headlineColor
+        actionView.headline.text = inputViewModel.actionTitle
+        actionView.headline.textColor = inputViewModel.headlineColor
         actionView.action = { [weak self] in
             self?.dismiss(animated: true, completion: nil)
         }
-        actionView.buttonImage = viewModel.chevronRightImage
-        actionView.headlineFont = viewModel.headlineFont
+        actionView.buttonImage = inputViewModel.chevronRightImage
+        actionView.headlineFont = inputViewModel.headlineFont
         actionView.leftMargin = 14
-        actionView.tintColor = viewModel.tintColor
+        actionView.tintColor = inputViewModel.tintColor
     }
 
     private func configureParagraphView() {
         paragraphView.title.isHidden = true
-        paragraphView.bodyText = viewModel.info
-        paragraphView.bodyFont = viewModel.paragraphBodyFont
+        paragraphView.bodyText = inputViewModel.info
+        paragraphView.bodyFont = inputViewModel.paragraphBodyFont
     }
     
     private func configureToolbarView() {
         toolbarView.shouldShowTransparency = true
         toolbarView.shouldShowGradient = false
-        toolbarView.state = .confirm(viewModel.startButtonTitle)
+        toolbarView.state = .confirm(inputViewModel.startButtonTitle)
         toolbarView.setUpLeftButton(leftButtonItem: .navigationArrow)
         toolbarView.delegate = self
     }
 
-    public override var popupHeight: CGFloat { viewModel.height }
-    public override var popupTopCornerRadius: CGFloat { viewModel.topCornerRadius }
-    public override var popupPresentDuration: Double { viewModel.presentDuration }
-    public override var popupDismissDuration: Double { viewModel.dismissDuration }
-    public override var popupShouldDismissInteractivelty: Bool { viewModel.shouldDismissInteractivelty }
+    public override var popupHeight: CGFloat { inputViewModel.height }
+    public override var popupTopCornerRadius: CGFloat { inputViewModel.topCornerRadius }
+    public override var popupPresentDuration: Double { inputViewModel.presentDuration }
+    public override var popupDismissDuration: Double { inputViewModel.dismissDuration }
+    public override var popupShouldDismissInteractivelty: Bool { inputViewModel.shouldDismissInteractivelty }
     public override var popupDimmingViewAlpha: CGFloat { 0.5 }
 }
 
