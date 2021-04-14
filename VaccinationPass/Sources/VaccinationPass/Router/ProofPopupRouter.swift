@@ -25,6 +25,7 @@ extension ProofPopupRouter: Popup {
     public func presentPopup(onTopOf viewController: UIViewController) {
         let popupVC = ProofPopupViewController.createFromStoryboard()
         popupVC.popupDelegate = self
+        popupVC.viewModel = ProofPopupViewModel()
         popupVC.router = ScanPopupRouter()
         viewController.present(popupVC, animated: true, completion: nil)
     }

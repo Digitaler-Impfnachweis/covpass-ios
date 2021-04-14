@@ -25,6 +25,7 @@ public struct MainRouter {
         var router = StartRouter()
         router.windowDelegate = windowDelegate
         let controller = StartOnboardingViewController.createFromStoryboard()
+        controller.viewModel = StartOnboardingViewModel()
         controller.router = router
         return controller
     }

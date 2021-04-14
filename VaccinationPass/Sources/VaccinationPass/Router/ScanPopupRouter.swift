@@ -26,6 +26,7 @@ extension ScanPopupRouter: Popup {
         viewController.presentedViewController?.dismiss(animated: true, completion: {
             let popupVC = ScanPopupViewController.createFromStoryboard()
             popupVC.popupDelegate = self
+            popupVC.viewModel = ScanPopupViewModel()
             popupVC.parsingDelegate = viewController as? ScannerDelegate
             viewController.present(popupVC, animated: true, completion: nil)
         })
