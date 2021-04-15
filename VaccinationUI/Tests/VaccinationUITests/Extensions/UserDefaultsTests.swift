@@ -2,7 +2,7 @@
 //  UserDefaultsTests.swift
 //  
 //
-//  Created by Timo Koenig on 15.04.21.
+//  Copyright © 2021 IBM. All rights reserved.
 //
 
 import Foundation

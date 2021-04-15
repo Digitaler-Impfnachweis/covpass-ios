@@ -8,7 +8,6 @@
 import Foundation
 import UIKit
 import VaccinationUI
-import VaccinationCommon
 
 public struct OnboardingRouter {
     // MARK: - Public Vardiables

@@ -8,7 +8,6 @@
 import Foundation
 import UIKit
 import VaccinationUI
-import VaccinationCommon
 
 public struct MainRouter {
     // MARK: - Public Variables 
@@ -23,7 +22,7 @@ public struct MainRouter {
     
     public func rootViewController() -> UIViewController {
         if UserDefaults.StartupInfo.bool(.onboarding) {
-            // User has already seen the onboard, go straight to the certificate view
+            // User has already seen the onboarding, go straight to the certificate view
             let certificateViewController = CertificateViewController.createFromStoryboard(bundle: Bundle.module)
             certificateViewController.viewModel = CertificateViewModel()
             certificateViewController.router = ProofPopupRouter()
