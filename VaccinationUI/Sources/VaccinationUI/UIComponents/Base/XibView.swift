@@ -52,7 +52,7 @@ open class XibView: UIView, Compoundable {
         initView()
     }
 
-    public override init(frame: CGRect) {
+    public required override init(frame: CGRect) {
         super.init(frame: frame)
 
         xibSetup()

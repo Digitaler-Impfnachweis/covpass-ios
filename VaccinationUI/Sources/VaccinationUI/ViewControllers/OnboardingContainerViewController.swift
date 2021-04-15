@@ -45,9 +45,6 @@ public class OnboardingContainerViewController: UIViewController {
         viewModel.items.forEach { model in
             let controller = OnboardingPageViewController.createFromStoryboard(bundle: UIConstants.bundle)
             controller.viewModel = model
-            controller.viewDidLoadAction = {
-               // Do smth if needed
-            }
             pages.append(controller)
         }
         configureToolbarView()

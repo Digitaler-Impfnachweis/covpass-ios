@@ -66,24 +66,29 @@ public class CertificateViewController: UIViewController {
     // MARK: - Card View
     
     func noCertificateCardView() -> NoCertificateCardView {
-        let noCertificate = NoCertificateCardView(frame: CGRect(origin: stackView.bounds.origin, size: CGSize(width: stackView.bounds.width, height: viewModel.continerHeight)))
+        let noCertificate = configureCard(NoCertificateCardView.self)
         noCertificate.actionButton.title = viewModel.noCertificateCardTitle
-        noCertificate.cornerRadius = viewModel.continerCornerRadius
         noCertificate.actionButton.action = presentPopup
         return noCertificate
     }
     
     func halfCertificateCardView() -> PartialCertificateCardView {
-        let certificate = PartialCertificateCardView(frame: CGRect(origin: stackView.bounds.origin, size: CGSize(width: stackView.bounds.width, height: viewModel.continerHeight)))
+        let certificate = configureCard(PartialCertificateCardView.self)
         certificate.actionButton.title = viewModel.halfCertificateCardTitle
-        certificate.cornerRadius = viewModel.continerCornerRadius
         certificate.actionButton.action = presentPopup
         return certificate
     }
     
     func fullCertificateCardView() -> UIView {
         // TBD - we should update with actual card view
-        UIView(frame: CGRect(origin: stackView.bounds.origin, size: CGSize(width: stackView.bounds.width, height: viewModel.continerHeight)))
+        let certificate = configureCard(BaseCardView.self)
+        return certificate
+    }
+    
+    func configureCard<T>(_ type: T.Type) -> T where T : BaseCardView {
+        let certificate = T(frame: CGRect(origin: stackView.bounds.origin, size: CGSize(width: stackView.bounds.width, height: viewModel.continerHeight)))
+        certificate.cornerRadius = viewModel.continerCornerRadius
+        return certificate
     }
     
     func setupCardViewFor(state: CertificateState) {
