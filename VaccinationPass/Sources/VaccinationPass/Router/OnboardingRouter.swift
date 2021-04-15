@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import VaccinationUI
+import VaccinationCommon
 
 public struct OnboardingRouter {
     // MARK: - Public Vardiables
@@ -23,6 +24,9 @@ public struct OnboardingRouter {
 
 extension OnboardingRouter: Router {
     public func navigateToNextViewController() {
+        // User saw onboarding once, let's remember that for the next start
+        UserDefaults.StartupInfo.set(true, forKey: .onboarding)
+
         let certificateViewController = CertificateViewController.createFromStoryboard(bundle: Bundle.module)
         certificateViewController.viewModel = CertificateViewModel()
         certificateViewController.router = ProofPopupRouter()
