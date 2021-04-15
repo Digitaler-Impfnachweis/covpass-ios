@@ -29,7 +29,6 @@ class CustomToolbarViewTests: XCTestCase {
 
         XCTAssertNotNil(sut.leftButton)
         XCTAssertNotNil(sut.gradientImageView)
-        XCTAssertNotNil(sut.gradientImageView.image)
         XCTAssertEqual(sut.navigationIcon, UIConstants.IconName.NavigationArrow)
         XCTAssertEqual(sut.navigationIconColor, UIConstants.BrandColor.onBackground70)
     }

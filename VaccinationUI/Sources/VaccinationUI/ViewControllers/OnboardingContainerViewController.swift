@@ -44,26 +44,14 @@ public class OnboardingContainerViewController: UIViewController {
             fatalError("ViewModel should contain at least one page")
         }
 
-        weak var weakSelf = self
         viewModel.items.forEach { model in
             let controller = OnboardingPageViewController.createFromStoryboard(bundle: UIConstants.bundle)
             controller.viewModel = model
-            controller.viewDidLoadAction = {
-                weakSelf?.updateOnboardingPages()
-            }
-            
             pages.append(controller)
         }
-
         configureToolbarView()
         configurePageIndicator()
         configurePageController()
-    }
-    
-    public override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        
-        updateOnboardingPages()
     }
 
     // MARK: - Private
@@ -82,25 +70,10 @@ public class OnboardingContainerViewController: UIViewController {
     }
 
     private func configurePageController() {
-        pageController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
+        pageController = children.first as? UIPageViewController
         pageController?.dataSource = self
         pageController?.delegate = self
         pageController?.setViewControllers([pages[currentIndex]], direction: .forward, animated: false, completion: nil)
-
-        if let pageController = pageController {
-            addChild(pageController)
-            view.insertSubview(pageController.view, at: 0)
-        }
-        pageController?.view.frame = view.bounds
-        pageController?.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        pageController?.didMove(toParent: self)
-    }
-    
-    private func updateOnboardingPages() {
-        pages.forEach { onboardingPageViewController in
-            guard let bottomConstraint = onboardingPageViewController.contentBottomConstraint else { return }
-            bottomConstraint.constant = startButtonBottomConstraint.constant + toolbarView.primaryButton.frame.height + LayoutConstants().topStartButtonMargin
-        }
     }
 }
 

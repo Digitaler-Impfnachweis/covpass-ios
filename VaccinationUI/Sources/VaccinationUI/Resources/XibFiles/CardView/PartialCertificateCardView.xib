@@ -45,11 +45,6 @@
                             <constraints>
                                 <constraint firstAttribute="height" constant="55" id="tww-g8-iJ3"/>
                             </constraints>
-                            <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="number" keyPath="iconHeightMultiplier">
-                                    <real key="value" value="2"/>
-                                </userDefinedRuntimeAttribute>
-                            </userDefinedRuntimeAttributes>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hrR-va-zyE" customClass="CardViewHeader" customModule="VaccinationUI">
                             <rect key="frame" x="15" y="15" width="384" height="80"/>
@@ -78,7 +73,6 @@
                     </subviews>
                     <constraints>
                         <constraint firstItem="0eU-7G-yy7" firstAttribute="leading" secondItem="hrR-va-zyE" secondAttribute="leading" id="8AH-Zv-1jE"/>
-                        <constraint firstItem="7PC-dC-X93" firstAttribute="top" secondItem="0eU-7G-yy7" secondAttribute="bottom" constant="40" id="Kjm-2K-2Q8"/>
                         <constraint firstItem="hrR-va-zyE" firstAttribute="top" secondItem="RHv-ZG-T5F" secondAttribute="top" constant="15" id="PvW-Fa-Kp5"/>
                         <constraint firstAttribute="trailing" secondItem="7PC-dC-X93" secondAttribute="trailing" constant="44" id="Xa8-tn-BW2"/>
                         <constraint firstItem="0eU-7G-yy7" firstAttribute="trailing" secondItem="hrR-va-zyE" secondAttribute="trailing" id="ZaT-Tp-UTx"/>

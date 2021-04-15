@@ -31,7 +31,6 @@ class OnboardingPageViewControllerTests: XCTestCase {
         XCTAssertNotNil(sut.confirmView)
         XCTAssertNotNil(sut.headline)
         XCTAssertNotNil(sut.paragraphView)
-        XCTAssertNotNil(sut.contentBottomConstraint)
     }
 
     func testConfigureImageView() {

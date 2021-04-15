@@ -15,6 +15,10 @@
 		65D6D56E25F8BCE5000CB339 /* VaccinationValidator in Frameworks */ = {isa = PBXBuildFile; productRef = 65D6D56D25F8BCE5000CB339 /* VaccinationValidator */; };
 		65D6D5E925F910A9000CB339 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65D6D5E825F910A9000CB339 /* LaunchScreen.storyboard */; };
 		65D6D5EA25F910A9000CB339 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65D6D5E825F910A9000CB339 /* LaunchScreen.storyboard */; };
+		65F59A6826258AA60093EC4E /* IBMPlexSans.otf in Resources */ = {isa = PBXBuildFile; fileRef = 65F59A6626258AA60093EC4E /* IBMPlexSans.otf */; };
+		65F59A6926258AA60093EC4E /* IBMPlexSans.otf in Resources */ = {isa = PBXBuildFile; fileRef = 65F59A6626258AA60093EC4E /* IBMPlexSans.otf */; };
+		65F59A6A26258AA60093EC4E /* IBMPlexSans-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 65F59A6726258AA60093EC4E /* IBMPlexSans-SemiBold.otf */; };
+		65F59A6B26258AA60093EC4E /* IBMPlexSans-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 65F59A6726258AA60093EC4E /* IBMPlexSans-SemiBold.otf */; };
 		88AB2A8425FA41E200D4EA52 /* VaccinationPass in Frameworks */ = {isa = PBXBuildFile; productRef = 88AB2A8325FA41E200D4EA52 /* VaccinationPass */; };
 		88AB2A9725FA431100D4EA52 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88AB2A3B25FA40CE00D4EA52 /* AppDelegate.swift */; };
 		88AB2AA525FA431E00D4EA52 /* VaccinationPassAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88AB2A3F25FA40CE00D4EA52 /* VaccinationPassAppTests.swift */; };
@@ -68,6 +72,8 @@
 		65D6D52425F8B94D000CB339 /* VaccinationValidatorAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VaccinationValidatorAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		65D6D52F25F8B94E000CB339 /* VaccinationValidatorAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VaccinationValidatorAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		65D6D5E825F910A9000CB339 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		65F59A6626258AA60093EC4E /* IBMPlexSans.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = IBMPlexSans.otf; path = VaccinationUI/Sources/VaccinationUI/Resources/Fonts/IBMPlexSans.otf; sourceTree = SOURCE_ROOT; };
+		65F59A6726258AA60093EC4E /* IBMPlexSans-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "IBMPlexSans-SemiBold.otf"; path = "VaccinationUI/Sources/VaccinationUI/Resources/Fonts/IBMPlexSans-SemiBold.otf"; sourceTree = SOURCE_ROOT; };
 		88AB2A3525FA40CE00D4EA52 /* VaccinationPassAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaccinationPassAppUITests.swift; sourceTree = "<group>"; };
 		88AB2A3625FA40CE00D4EA52 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		88AB2A3825FA40CE00D4EA52 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -152,6 +158,8 @@
 		65D6D46A25F7A631000CB339 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				65F59A6726258AA60093EC4E /* IBMPlexSans-SemiBold.otf */,
+				65F59A6626258AA60093EC4E /* IBMPlexSans.otf */,
 				65D6D5E825F910A9000CB339 /* LaunchScreen.storyboard */,
 			);
 			path = Shared;
@@ -435,7 +443,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				65F59A6826258AA60093EC4E /* IBMPlexSans.otf in Resources */,
 				6507D7E625FB5DF700D69F94 /* Assets.xcassets in Resources */,
+				65F59A6A26258AA60093EC4E /* IBMPlexSans-SemiBold.otf in Resources */,
 				65D6D5E925F910A9000CB339 /* LaunchScreen.storyboard in Resources */,
 				6598186B260CB44D00776F70 /* Main.storyboard in Resources */,
 			);
@@ -459,7 +469,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				65F59A6926258AA60093EC4E /* IBMPlexSans.otf in Resources */,
 				65981892260CBA9400776F70 /* Main.storyboard in Resources */,
+				65F59A6B26258AA60093EC4E /* IBMPlexSans-SemiBold.otf in Resources */,
 				6507D7ED25FB5E0300D69F94 /* Assets.xcassets in Resources */,
 				65D6D5EA25F910A9000CB339 /* LaunchScreen.storyboard in Resources */,
 			);
@@ -675,7 +687,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 48;
+				CURRENT_PROJECT_VERSION = 52;
 				DEVELOPMENT_TEAM = ***REMOVED***;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Pass/VaccinationPassApp/Info.plist;
@@ -701,7 +713,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 48;
+				CURRENT_PROJECT_VERSION = 52;
 				DEVELOPMENT_TEAM = ***REMOVED***;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Pass/VaccinationPassApp/Info.plist;
@@ -832,7 +844,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 48;
+				CURRENT_PROJECT_VERSION = 52;
 				DEVELOPMENT_TEAM = ***REMOVED***;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Validator/VaccinationValidatorApp/Info.plist;
@@ -859,7 +871,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 48;
+				CURRENT_PROJECT_VERSION = 52;
 				DEVELOPMENT_TEAM = ***REMOVED***;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Validator/VaccinationValidatorApp/Info.plist;

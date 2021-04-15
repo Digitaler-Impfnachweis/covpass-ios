@@ -10,29 +10,49 @@ import VaccinationUI
 import UIKit
 import VaccinationCommon
 
-public struct CertificateViewModel {
+public class CertificateViewModel {
     
-    private let parser: QRCoderProtocol = QRCoder()
+    // MARK: - Private
     
-    var title: String {
-        "Meine Impfnachweise"
+    private let parser: QRCoder = QRCoder()
+    
+    // MARK: - Internal
+    
+    weak var stateDelegate: CertificateStateDelegate?
+    var certificateState: CertificateState = .none {
+        didSet { stateDelegate?.didUpdatedCertificate(state: certificateState) }
     }
+    var title: String { "Meine Impfungen" }
     
     var addButtonImage: UIImage? {
         UIImage(named: UIConstants.IconName.PlusIcon, in: UIConstants.bundle, compatibleWith: nil)
     }
     
-    public var titles = [
+    var titles = [
         "Wie nutze ich den digitalen Nachweis?",
         "Woher bekomme ich einen QR Code?",
-        "Was passiert mit meinen Daten?"
-    ]
+        "Was passiert mit meinen Daten?"]
     
     func configure(cell: ActionCell, at indexPath: IndexPath) {
         cell.configure(title: titles[indexPath.row], iconName: UIConstants.IconName.ChevronRight)
     }
     
-    func process(payload: String, completion: ((Error) -> Void)? = nil) -> String {
-        parser.parse(payload, completion: completion) ?? ""
+    func process(payload: String, completion: ((Error) -> Void)? = nil) {
+        guard let decodedPayload = parser.parse(payload, completion: completion) else { return }
+        print(decodedPayload)
+        // Do more processes
+        certificateState = .half
     }
+    
+    // MARK: - No Certificate Configuration
+    let noCertificateCardTitle = "Nachweis hinzufügen"
+    
+    // MARK: - Half Certificate Configuration
+    let halfCertificateCardTitle = "Nachweis hinzufügen"
+    
+    // MARK: - UIConfigureation
+    
+    let continerCornerRadius: CGFloat = 20
+    let continerHeight: CGFloat = 200
+    var headerButtonInsets = UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 0)
 }

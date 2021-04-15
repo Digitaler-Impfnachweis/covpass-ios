@@ -19,8 +19,8 @@ class FontExtensionTests: XCTestCase {
     }
     
     override func tearDownWithError() throws {
-        try super.tearDownWithError()
         try UIFont.unloadCustomFonts()
+        try super.tearDownWithError()
     }
 
     // MARK: - Tests
