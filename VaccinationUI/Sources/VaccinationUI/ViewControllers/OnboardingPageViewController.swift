@@ -13,8 +13,6 @@ public class OnboardingPageViewController: UIViewController {
     @IBOutlet var confirmView: ConfirmView!
     @IBOutlet var headline: Headline!
     @IBOutlet var paragraphView: ParagraphView!
-
-    @IBOutlet var contentBottomConstraint: NSLayoutConstraint!
     
     // MARK: - Properties
 

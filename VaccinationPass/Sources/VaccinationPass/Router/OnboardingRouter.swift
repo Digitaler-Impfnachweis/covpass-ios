@@ -27,7 +27,9 @@ extension OnboardingRouter: Router {
         UserDefaults.StartupInfo.set(true, forKey: .onboarding)
 
         let certificateViewController = CertificateViewController.createFromStoryboard(bundle: Bundle.module)
-        certificateViewController.viewModel = CertificateViewModel()
+        let viewModel = CertificateViewModel()
+        viewModel.stateDelegate = certificateViewController
+        certificateViewController.viewModel = viewModel
         certificateViewController.router = ProofPopupRouter()
         windowDelegate?.update(rootViewController: certificateViewController)
     }
