@@ -15,7 +15,7 @@ public struct CertificateViewModel {
     let parser: QRCodeProcessor = QRCodeProcessor()
     
     var title: String {
-        "Meine Impfnachweise"
+        "vaccination_certificate_list_title".localized
     }
     
     var addButtonImage: UIImage? {
@@ -23,9 +23,9 @@ public struct CertificateViewModel {
     }
     
     public var titles = [
-        "Wie nutze ich den digitalen Nachweis?",
-        "Woher bekomme ich einen QR Code?",
-        "Was passiert mit meinen Daten?"]
+        "vaccination_certificate_first_faq".localized,
+        "vaccination_certificate_second_faq".localized,
+        "vaccination_certificate_third_faq".localized]
     
     func configure(cell: ActionCell, at indexPath: IndexPath) {
         cell.configure(title: titles[indexPath.row], iconName: UIConstants.IconName.ChevronRight)

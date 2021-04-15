@@ -58,7 +58,7 @@ public class CertificateViewController: UIViewController {
     
     private func setupContinerContent() {
         let noCertificate = NoCertificateCardView(frame: CGRect(origin: stackView.bounds.origin, size: CGSize(width: stackView.bounds.width, height: continerHeight)))
-        noCertificate.actionButton.title = "Nachweis hinzufügen"
+        noCertificate.actionButton.title = "add_vaccination_certificate_button_title".localized
         noCertificate.cornerRadius = continerCornerRadius
         noCertificate.actionButton.action = { [self] in
             router?.presentPopup(onTopOf: self)
@@ -88,7 +88,7 @@ extension CertificateViewController: ScannerDelegate {
             vc.cborData = viewModel?.process(payload: payload)
             present(vc, animated: true, completion: nil)
         default:
-            print("There has been an error !")
+            print("There has been an error!")
         }
     }
 }

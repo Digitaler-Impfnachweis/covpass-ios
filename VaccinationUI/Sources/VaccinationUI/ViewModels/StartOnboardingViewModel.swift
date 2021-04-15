@@ -16,23 +16,23 @@ public class StartOnboardingViewModel {
     }
 
     var title: String {
-        "Ihr digitaler Impfnachweis wartet auf Sie!"
+        "start_onboarding_title".localized
     }
 
     var info: String {
-        "Dokumentieren Sie Impfungen einfach und sicher auf Ihrem Smartphone."
+        "start_onboarding_message".localized
     }
     
     var secureTitle: String {
-        "Absolute Sicherheit Ihrer Daten"
+        "start_onboarding_secure_title".localized
     }
     
     var secureText: String {
-        "Ihre Daten warden lokal auf Ihrem Smartphone gespeichert und können nur von Ihren abgefragt werden."
+        "start_onboarding_secure_message".localized
     }
     
     var navigationButtonTitle: String {
-        "Los geht's"
+        "start_onboarding_button_title".localized
     }
     
     var secureImage: UIImage? {

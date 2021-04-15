@@ -34,22 +34,22 @@ public class OnboardingPageViewModel {
     var title: String {
         switch type {
         case .page1:
-            return "Nach der Impfung erhalten Sie ihre Impfbescheinigung mit QR-Code"
+            return "vaccination_first_onboarding_page_title".localized
         case .page2:
-            return "Scannen Sie mit der App den QR-Code auf Ihrer Impfbescheinigung"
+            return "vaccination_second_onboarding_page_title".localized
         case .page3:
-            return "Weisen Sie Ihren Impfschutz schnnell und sicher mit dem Impfticket nach"
+            return "vaccination_third_onboarding_page_title".localized
         }
     }
 
     var info: String {
         switch type {
         case .page1:
-            return "Gut zu wissen: Sie können den QR-Code nur ein mal verwenden. Die Impfbescheinigung ist anschließend an das einlesende Smartphone gebunden."
+            return "vaccination_first_onboarding_page_message".localized
         case .page2:
-            return "Tipp: Speichern Sie Impfbescheinigungen von der ganzen Familie zusammen auf einem Smartphone und verwalten Sie diese sicher mit der App."
+            return "vaccination_second_onboarding_page_message".localized
         case .page3:
-            return "Sobald Ihr Impfschutz vollständig ist, erstellt die App automatisch einen Nachweis mit QR-Code. Dieses Impfticket enthält nur die nötigsten Daten. Zeigen Sie es zum Beispiel bei Flugreisen vor."
+            return "vaccination_third_onboarding_page_message".localized
         }
     }
 

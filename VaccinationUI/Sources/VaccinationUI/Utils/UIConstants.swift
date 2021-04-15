@@ -82,5 +82,9 @@ open class UIConstants {
     public struct Storyboard {
         public static let Onboarding = "Onboarding"
     }
+
+    public struct CellIdentifier {
+        public static let ActionTableViewCell = "ActionTableViewCell"
+    }
 }
 

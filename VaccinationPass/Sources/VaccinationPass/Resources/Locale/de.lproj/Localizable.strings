@@ -2,3 +2,15 @@
  Localizable.strings
  VaccinationUI
  */
+
+/********** Start Screen **********/
+
+"vaccination_certificate_add_button_title" = "Nachweis hinzufügen";
+
+"vaccination_certificate_list_title" = "Meine Impfnachweise";
+
+"vaccination_certificate_first_faq" = "Wie nutze ich den digitalen Nachweis?";
+
+"vaccination_certificate_second_faq" = "Woher bekomme ich einen QR Code?";
+
+"vaccination_certificate_third_faq" = "Was passiert mit meinen Daten?";
