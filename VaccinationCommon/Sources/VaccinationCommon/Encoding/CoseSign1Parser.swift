@@ -22,6 +22,7 @@ import SwiftCBOR
 
 enum CoseParsingError: Error {
     case wrongType
+    case wrongArrayLength
     case general
 }
 
@@ -51,6 +52,7 @@ class CoseSign1Parser {
         case .tagged( _, let cobr):
             switch cobr {
             case .array(let array):
+                guard array.count == 4 else { throw CoseParsingError.wrongArrayLength }
                 if case .byteString(let protectedValue) = array[0],
                    case .map(let unprotectedValue) = array[1],
                    case .byteString(let payloadValue) = array[2],
