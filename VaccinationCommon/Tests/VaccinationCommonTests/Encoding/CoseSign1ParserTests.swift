@@ -43,7 +43,7 @@ class CoseSign1ParserTests: XCTestCase {
         XCTAssertNotNil(try? CBOR.decode(message.payload))
     }
 
-    func testMapping() {
+    func testMapping() throws {
         let decompressedPayload = prepareData()
         let coseSign1Message = try? sut.parse(decompressedPayload)
 
