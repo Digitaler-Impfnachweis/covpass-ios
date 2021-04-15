@@ -14,7 +14,7 @@ public class CertificateViewModel {
     
     // MARK: - Private
     
-    private let parser: QRCodeProcessor = QRCodeProcessor()
+    private let parser: QRCoder = QRCoder()
     
     // MARK: - Internal
     
@@ -37,8 +37,8 @@ public class CertificateViewModel {
         cell.configure(title: titles[indexPath.row], iconName: UIConstants.IconName.ChevronRight)
     }
     
-    func process(payload: String) {
-        guard let decodedPayload = parser.parse(payload) else { return }
+    func process(payload: String, completion: ((Error) -> Void)? = nil) {
+        guard let decodedPayload = parser.parse(payload, completion: completion) else { return }
         print(decodedPayload)
         // Do more processes
         certificateState = .half

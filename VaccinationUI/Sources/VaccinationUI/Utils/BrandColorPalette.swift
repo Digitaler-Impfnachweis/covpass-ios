@@ -7,6 +7,7 @@
 
 import UIKit
 
+/// The color palette used throughout the entire app. This protocol can be implemented in order to override the default color palette
 public protocol BrandColorPalette {
     var brandBase: UIColor { get }
     var onBrandBase: UIColor { get }

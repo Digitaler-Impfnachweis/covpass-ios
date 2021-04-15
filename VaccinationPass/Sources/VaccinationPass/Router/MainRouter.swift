@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 import VaccinationUI
 
+/// Establishes the root ViewController to initialize the main window with
 public struct MainRouter {
     // MARK: - Public Variables 
     
