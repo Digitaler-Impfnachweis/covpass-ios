@@ -8,7 +8,7 @@
 import Foundation
 import XCTest
 
-@testable import VaccinationCommon
+@testable import VaccinationUI
 
 class UserDefaultsTests: XCTestCase {
 
