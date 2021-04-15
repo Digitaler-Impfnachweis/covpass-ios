@@ -29,7 +29,7 @@ extension String {
 }
 
 extension String {
-    public var localized: String {
+    var localized: String {
         return Localizer.localized(self, bundle: UIConstants.bundle)
     }
 }

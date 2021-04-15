@@ -8,7 +8,6 @@
 import UIKit
 
 open class UIConstants {
-    // use a class from same package to identify the package
     open class var bundle: Bundle {
         Bundle.module
     }

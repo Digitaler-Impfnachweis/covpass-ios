@@ -11,13 +11,32 @@ import UIKit
 import VaccinationCommon
 
 public struct CertificateViewModel {
-    
     let parser: QRCodeProcessor = QRCodeProcessor()
     
     var title: String {
         "vaccination_certificate_list_title".localized
     }
+
+    var faqTitel: String {
+        "vaccination_certificate_faq_title".localized
+    }
+
+    var showAllFaqTitle: String {
+        "vaccination_certificate_all_faq_title".localized
+    }
+
+    var noCertificateCardTitle: String {
+        "vaccination_no_certificate_card_title".localized
+    }
+
+    var noCertificateCardMessage: String {
+        "vaccination_no_certificate_card_message".localized
+    }
     
+
+    var addButtonTitle: String {
+        "vaccination_certificate_add_button_title".localized
+    }
     var addButtonImage: UIImage? {
         UIImage(named: UIConstants.IconName.PlusIcon, in: UIConstants.bundle, compatibleWith: nil)
     }

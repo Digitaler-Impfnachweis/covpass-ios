@@ -35,7 +35,6 @@ public class CertificateViewController: UIViewController {
     override public func viewDidLoad() {
         super.viewDidLoad()
         setupHeaderView()
-        setupOther()
         setupTableView()
         setupContinerContent()
         setupOther()
@@ -58,7 +57,9 @@ public class CertificateViewController: UIViewController {
     
     private func setupContinerContent() {
         let noCertificate = NoCertificateCardView(frame: CGRect(origin: stackView.bounds.origin, size: CGSize(width: stackView.bounds.width, height: continerHeight)))
-        noCertificate.actionButton.title = "add_vaccination_certificate_button_title".localized
+        noCertificate.actionButton.title = viewModel?.addButtonTitle ?? "vaccination_certificate_add_button_title".localized
+        noCertificate.titleText = viewModel?.noCertificateCardTitle
+        noCertificate.detailText = viewModel?.noCertificateCardMessage
         noCertificate.cornerRadius = continerCornerRadius
         noCertificate.actionButton.action = { [self] in
             router?.presentPopup(onTopOf: self)
@@ -69,6 +70,8 @@ public class CertificateViewController: UIViewController {
     private func setupOther() {
         view.tintColor = UIConstants.BrandColor.brandAccent
         headerView.headline.text = viewModel?.title
+        showAllLabel.text = viewModel?.faqTitel
+        showAllButton.setTitle(viewModel?.showAllFaqTitle, for: .normal)
         addButton.iconImage = viewModel?.addButtonImage
         addButton.buttonBackgroundColor = UIConstants.BrandColor.brandAccent
         addButton.action = { [self] in

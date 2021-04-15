@@ -14,3 +14,11 @@
 "vaccination_certificate_second_faq" = "Woher bekomme ich einen QR Code?";
 
 "vaccination_certificate_third_faq" = "Was passiert mit meinen Daten?";
+
+"vaccination_certificate_faq_title" = "Häufige Fragen";
+
+"vaccination_certificate_all_faq_title" = "Alle anzeigen";
+
+"vaccination_no_certificate_card_title" = "Kein Nachweis hinzugefügt";
+
+"vaccination_no_certificate_card_message" = "Scannen Sie eine\n Bescheinigung mit QR Code, um hier \nIhren Nachweis zu sehen";
