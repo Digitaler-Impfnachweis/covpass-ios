@@ -21,6 +21,14 @@ public struct MainRouter {
     // MARK: - Public Methods
     
     public func rootViewController() -> UIViewController {
+        if UserDefaults.StartupInfo.bool(.onboarding) {
+            // User has already seen the onboarding, go straight to the certificate view
+            let certificateViewController = CertificateViewController.createFromStoryboard(bundle: Bundle.module)
+            certificateViewController.viewModel = CertificateViewModel()
+            certificateViewController.router = ProofPopupRouter()
+            return certificateViewController
+        }
+
         var router = StartRouter()
         router.windowDelegate = windowDelegate
         let controller = StartOnboardingViewController.createFromStoryboard()

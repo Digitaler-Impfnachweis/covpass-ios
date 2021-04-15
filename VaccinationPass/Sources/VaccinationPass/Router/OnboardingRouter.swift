@@ -23,8 +23,13 @@ public struct OnboardingRouter {
 
 extension OnboardingRouter: Router {
     public func navigateToNextViewController() {
+        // User saw onboarding once, let's remember that for the next start
+        UserDefaults.StartupInfo.set(true, forKey: .onboarding)
+
         let certificateViewController = CertificateViewController.createFromStoryboard(bundle: Bundle.module)
-        certificateViewController.viewModel = CertificateViewModel()
+        let viewModel = CertificateViewModel()
+        viewModel.stateDelegate = certificateViewController
+        certificateViewController.viewModel = viewModel
         certificateViewController.router = ProofPopupRouter()
         windowDelegate?.update(rootViewController: certificateViewController)
     }

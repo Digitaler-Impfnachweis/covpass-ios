@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -11,9 +11,9 @@
             <connections>
                 <outlet property="bottomLayoutConstraint" destination="D16-Ga-qh1" id="Y8W-Xu-mlc"/>
                 <outlet property="detailLabel" destination="JZg-Ix-P1L" id="DqF-PX-SVN"/>
-                <outlet property="imageHeightConstraint" destination="426-8d-9pI" id="OTQ-g0-Ba7"/>
-                <outlet property="imageView" destination="7aD-tK-omb" id="xe6-9c-kJS"/>
-                <outlet property="imageWidthConstraint" destination="tBM-87-Vup" id="e71-iB-Uq7"/>
+                <outlet property="imageHeightConstraint" destination="fCy-NC-FDe" id="iOZ-PZ-pQy"/>
+                <outlet property="imageView" destination="Pxz-HK-l9D" id="WY2-C7-sde"/>
+                <outlet property="imageWidthConstraint" destination="bLK-kT-9RD" id="CgJ-Ff-mlq"/>
                 <outlet property="infoLabel" destination="RNe-aK-G62" id="HO9-75-Cnz"/>
                 <outlet property="leftLayoutConstraint" destination="6ns-Il-95X" id="udN-Gp-dQH"/>
                 <outlet property="rightLayoutConstraint" destination="fHO-k5-Cfe" id="WRC-Zh-ACU"/>
@@ -32,19 +32,19 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6OI-Cc-jgM">
                             <rect key="frame" x="0.0" y="0.0" width="252" height="136"/>
                             <subviews>
-                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7aD-tK-omb">
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Pxz-HK-l9D">
                                     <rect key="frame" x="58" y="0.0" width="136" height="136"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="136" id="426-8d-9pI"/>
-                                        <constraint firstAttribute="width" constant="136" id="tBM-87-Vup"/>
+                                        <constraint firstAttribute="width" constant="136" id="bLK-kT-9RD"/>
+                                        <constraint firstAttribute="height" constant="136" id="fCy-NC-FDe"/>
                                     </constraints>
                                 </imageView>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
-                                <constraint firstAttribute="bottom" secondItem="7aD-tK-omb" secondAttribute="bottom" id="VB4-A0-xuT"/>
-                                <constraint firstItem="7aD-tK-omb" firstAttribute="centerX" secondItem="6OI-Cc-jgM" secondAttribute="centerX" id="pRW-MD-K4p"/>
-                                <constraint firstItem="7aD-tK-omb" firstAttribute="top" secondItem="6OI-Cc-jgM" secondAttribute="top" id="xu1-vV-3yH"/>
+                                <constraint firstItem="Pxz-HK-l9D" firstAttribute="top" secondItem="6OI-Cc-jgM" secondAttribute="top" id="J30-mV-PGM"/>
+                                <constraint firstItem="Pxz-HK-l9D" firstAttribute="centerX" secondItem="6OI-Cc-jgM" secondAttribute="centerX" id="e2h-Md-OYy"/>
+                                <constraint firstAttribute="bottom" secondItem="Pxz-HK-l9D" secondAttribute="bottom" id="wGd-45-adx"/>
                             </constraints>
                         </view>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="sC1-fX-rbd">

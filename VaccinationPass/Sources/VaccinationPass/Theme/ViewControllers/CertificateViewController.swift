@@ -22,13 +22,12 @@ public class CertificateViewController: UIViewController {
     
     // MARK: - Public
     
-    public var viewModel: CertificateViewModel?
+    public var viewModel: CertificateViewModel!
     public var router: Popup?
     
     // MARK: - Private
-    
-    private let continerCornerRadius: CGFloat = 20
-    private let continerHeight: CGFloat = 200
+
+    private var continerView: UIView!
     
     // MARK: - Fifecycle
     
@@ -36,14 +35,14 @@ public class CertificateViewController: UIViewController {
         super.viewDidLoad()
         setupHeaderView()
         setupTableView()
-        setupContinerContent()
         setupOther()
+        setupCardViewFor(state: viewModel?.certificateState ?? .none)
     }
     
     // MARK: - Private
     
     public func setupHeaderView() {
-        headerView.actionButton.imageEdgeInsets = UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 0)
+        headerView.actionButton.imageEdgeInsets = viewModel.headerButtonInsets
         headerView.headline.text = viewModel?.title
     }
     
@@ -55,18 +54,6 @@ public class CertificateViewController: UIViewController {
         tableView.tintColor = UIConstants.BrandColor.brandAccent
     }
     
-    private func setupContinerContent() {
-        let noCertificate = NoCertificateCardView(frame: CGRect(origin: stackView.bounds.origin, size: CGSize(width: stackView.bounds.width, height: continerHeight)))
-        noCertificate.actionButton.title = viewModel?.addButtonTitle ?? "vaccination_certificate_add_button_title".localized
-        noCertificate.titleText = viewModel?.noCertificateCardTitle
-        noCertificate.detailText = viewModel?.noCertificateCardMessage
-        noCertificate.cornerRadius = continerCornerRadius
-        noCertificate.actionButton.action = { [self] in
-            router?.presentPopup(onTopOf: self)
-        }
-        stackView.addArrangedSubview(noCertificate)
-    }
-    
     private func setupOther() {
         view.tintColor = UIConstants.BrandColor.brandAccent
         headerView.headline.text = viewModel?.title
@@ -74,9 +61,54 @@ public class CertificateViewController: UIViewController {
         showAllButton.setTitle(viewModel?.showAllFaqTitle, for: .normal)
         addButton.iconImage = viewModel?.addButtonImage
         addButton.buttonBackgroundColor = UIConstants.BrandColor.brandAccent
-        addButton.action = { [self] in
-            router?.presentPopup(onTopOf: self)
+        addButton.action = presentPopup
+    }
+    
+    // MARK: - Card View
+    
+    func noCertificateCardView() -> NoCertificateCardView {
+        let noCertificate = configureCard(NoCertificateCardView.self)
+        noCertificate.actionButton.title = viewModel.noCertificateCardTitle
+        noCertificate.actionButton.action = presentPopup
+        return noCertificate
+    }
+    
+    func halfCertificateCardView() -> PartialCertificateCardView {
+        let certificate = configureCard(PartialCertificateCardView.self)
+        certificate.actionButton.title = viewModel.halfCertificateCardTitle
+        certificate.actionButton.action = presentPopup
+        return certificate
+    }
+    
+    func fullCertificateCardView() -> UIView {
+        // TBD - we should update with actual card view
+        let certificate = configureCard(BaseCardView.self)
+        return certificate
+    }
+    
+    func configureCard<T>(_ type: T.Type) -> T where T : BaseCardView {
+        let certificate = T(frame: CGRect(origin: stackView.bounds.origin, size: CGSize(width: stackView.bounds.width, height: viewModel.continerHeight)))
+        certificate.cornerRadius = viewModel.continerCornerRadius
+        return certificate
+    }
+    
+    func setupCardViewFor(state: CertificateState) {
+        if continerView != nil {
+            stackView.removeArrangedSubview(continerView)
         }
+        switch state {
+        case .none:
+            continerView = noCertificateCardView()
+        case .half:
+            continerView = halfCertificateCardView()
+        case .full:
+            continerView = fullCertificateCardView()
+        }
+        stackView.insertArrangedSubview(continerView, at: stackView.arrangedSubviews.count - 1)
+    }
+    
+    func presentPopup() {
+        router?.presentPopup(onTopOf: self)
     }
 }
 
@@ -87,11 +119,9 @@ extension CertificateViewController: ScannerDelegate {
         presentedViewController?.dismiss(animated: true, completion: nil)
         switch value {
         case .success(let payload):
-            let vc = VaccinationDetailsViewController.createFromStoryboard(bundle: Bundle.module)
-            vc.cborData = viewModel?.process(payload: payload)
-            present(vc, animated: true, completion: nil)
-        default:
-            print("There has been an error!")
+            viewModel?.process(payload: payload)
+        case .failure(let error):
+            print("We have an error: \(error)")
         }
     }
 }
@@ -126,3 +156,10 @@ extension CertificateViewController: StoryboardInstantiating {
     }
 }
 
+// MARK: - CertificateStateDelegate
+
+extension CertificateViewController: CertificateStateDelegate {
+    public func didUpdatedCertificate(state: CertificateState) {
+        setupCardViewFor(state: state)
+    }
+}
