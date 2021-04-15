@@ -22,7 +22,7 @@ public class CertificateViewController: UIViewController {
     
     // MARK: - Public
     
-    public var viewModel: CertificateViewModel!
+    public var viewModel: CertificateViewModel = CertificateViewModel()
     public var router: Popup?
     
     // MARK: - Private
@@ -36,14 +36,14 @@ public class CertificateViewController: UIViewController {
         setupHeaderView()
         setupTableView()
         setupOther()
-        setupCardViewFor(state: viewModel?.certificateState ?? .none)
+        setupCardViewFor(state: viewModel.certificateState)
     }
     
     // MARK: - Private
     
     public func setupHeaderView() {
         headerView.actionButton.imageEdgeInsets = viewModel.headerButtonInsets
-        headerView.headline.text = viewModel?.title
+        headerView.headline.text = viewModel.title
     }
     
     private func setupTableView() {
@@ -56,10 +56,9 @@ public class CertificateViewController: UIViewController {
     
     private func setupOther() {
         view.tintColor = UIConstants.BrandColor.brandAccent
-        headerView.headline.text = viewModel?.title
-        showAllLabel.text = viewModel?.faqTitel
-        showAllButton.setTitle(viewModel?.showAllFaqTitle, for: .normal)
-        addButton.iconImage = viewModel?.addButtonImage
+        showAllLabel.text = viewModel.faqTitle
+        showAllButton.setTitle(viewModel.showAllFaqTitle, for: .normal)
+        addButton.iconImage = viewModel.addButtonImage
         addButton.buttonBackgroundColor = UIConstants.BrandColor.brandAccent
         addButton.action = presentPopup
     }
@@ -68,14 +67,16 @@ public class CertificateViewController: UIViewController {
     
     func noCertificateCardView() -> NoCertificateCardView {
         let noCertificate = configureCard(NoCertificateCardView.self)
-        noCertificate.actionButton.title = viewModel.noCertificateCardTitle
+        noCertificate.titleText = viewModel.noCertificateCardTitle
+        noCertificate.detailText = viewModel.noCertificateCardMessage
+        noCertificate.actionButton.title = viewModel.noCertificateActionTitle
         noCertificate.actionButton.action = presentPopup
         return noCertificate
     }
     
     func halfCertificateCardView() -> PartialCertificateCardView {
         let certificate = configureCard(PartialCertificateCardView.self)
-        certificate.actionButton.title = viewModel.halfCertificateCardTitle
+        certificate.actionButton.title = viewModel.halfCertificateActionTitle
         certificate.actionButton.action = presentPopup
         return certificate
     }
@@ -119,7 +120,7 @@ extension CertificateViewController: ScannerDelegate {
         presentedViewController?.dismiss(animated: true, completion: nil)
         switch value {
         case .success(let payload):
-            viewModel?.process(payload: payload)
+            viewModel.process(payload: payload)
         case .failure(let error):
             print("We have an error: \(error)")
         }
@@ -130,12 +131,12 @@ extension CertificateViewController: ScannerDelegate {
 
 extension CertificateViewController: UITableViewDataSource {
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        viewModel?.titles.count ?? 0
+        viewModel.titles.count ?? 0
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ActionTableViewCell.identifier, for: indexPath) as? ActionTableViewCell else { return UITableViewCell()}
-        viewModel?.configure(cell: cell, at: indexPath)
+        viewModel.configure(cell: cell, at: indexPath)
         return cell
     }
 }
