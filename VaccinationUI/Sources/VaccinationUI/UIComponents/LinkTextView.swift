@@ -7,6 +7,7 @@
 
 import UIKit
 
+/// A custom `UITextView` processing bold or link text
 public class LinkTextView: UITextView {
     ///
     /// !!! Find all occurences in code with regular expression (?<=#).+::.+(?=#) !!!
