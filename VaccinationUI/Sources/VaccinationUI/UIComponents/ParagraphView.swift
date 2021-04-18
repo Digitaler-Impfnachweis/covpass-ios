@@ -65,12 +65,13 @@ public class ParagraphView: MarginableXibView {
         return [
             RelatedViewMargin(constant: 40, relatedViewType: PrimaryButtonContainer.self),
             RelatedViewMargin(constant: 24, relatedViewType: ParagraphView.self),
-            RelatedViewMargin(constant: 40, relatedViewType: Headline.self),
-            PositionMargin(constant: topMargin, position: 0, type: .top),
+            RelatedViewMargin(constant: 12, relatedViewType: Headline.self),
+            RelatedViewMargin(constant: 12, relatedViewType: Spacer.self),
+            PositionMargin(constant: topMargin, position: 24, type: .top),
         ]
     }
 
-    override required init(frame: CGRect) {
+    required init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
     }
@@ -83,6 +84,14 @@ public class ParagraphView: MarginableXibView {
     public override func initView() {
         super.initView()
         setupView()
+    }
+    
+    public func addBottomBorder() {
+        let thickness: CGFloat = 1.0
+        let bottomBorder = CALayer()
+        bottomBorder.frame = CGRect(x: 0, y: frame.size.height, width: frame.width + 14, height: thickness)
+        bottomBorder.backgroundColor = UIConstants.BrandColor.onBackground20.cgColor
+        layer.addSublayer(bottomBorder)
     }
 
     private func checkVisibility() {

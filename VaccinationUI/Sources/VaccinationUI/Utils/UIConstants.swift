@@ -30,6 +30,8 @@ open class UIConstants {
         public static let IconClose = "epa_button_close"
         public static let ProofScreen = "scan_proof_image"
         public static let SettingsImage = "ega_settings_image"
+        public static let StatusFull = "status_full"
+        public static let StatusPartial = "status_partial"
     }
     
     open class BrandColor {

@@ -124,35 +124,141 @@
             </objects>
             <point key="canvasLocation" x="28.985507246376812" y="144.64285714285714"/>
         </scene>
-        <!--Vaccination Details View Controller-->
+        <!--Vaccination Detail View Controller-->
         <scene sceneID="3eg-rO-M8k">
             <objects>
-                <viewController storyboardIdentifier="VaccinationDetailsViewController" id="siV-cK-2aN" customClass="VaccinationDetailsViewController" customModule="VaccinationPass" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="VaccinationDetailViewController" id="siV-cK-2aN" customClass="VaccinationDetailViewController" customModule="VaccinationPass" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gYk-x2-Ee4">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wOL-d4-AM4" customClass="ParagraphView" customModule="VaccinationUI">
-                                <rect key="frame" x="0.0" y="126" width="414" height="654"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                            </view>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TCT-S7-S1m">
+                                <rect key="frame" x="0.0" y="24" width="414" height="858"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="YV8-Tq-Fkx" customClass="ScrollableStackView" customModule="VaccinationUI">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1302"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gRX-6s-FzF" customClass="Headline" customModule="VaccinationUI">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                            </view>
+                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hrb-mG-kzt" customClass="ParagraphIconView" customModule="VaccinationUI">
+                                                <rect key="frame" x="0.0" y="50" width="414" height="128"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                            </view>
+                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ihi-Ap-8Ly" customClass="PrimaryButtonContainer" customModule="VaccinationUI">
+                                                <rect key="frame" x="0.0" y="178" width="414" height="128"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                            </view>
+                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hYG-QK-Ff6">
+                                                <rect key="frame" x="0.0" y="306" width="414" height="12"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="12" id="Fc6-Mt-C4F"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uTX-yD-jMP" customClass="SecondaryButtonContainer" customModule="VaccinationUI">
+                                                <rect key="frame" x="0.0" y="318" width="414" height="128"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                            </view>
+                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6lk-qG-Ler" customClass="Spacer" customModule="VaccinationUI">
+                                                <rect key="frame" x="0.0" y="446" width="414" height="24"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="24" id="fY6-z5-RwC"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bSB-GK-DAm" customClass="Headline" customModule="VaccinationUI">
+                                                <rect key="frame" x="0.0" y="470" width="414" height="50"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                            </view>
+                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7qq-aF-hn9" customClass="Spacer" customModule="VaccinationUI">
+                                                <rect key="frame" x="0.0" y="520" width="414" height="12"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="12" id="SHG-IU-eqx"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wOL-d4-AM4" customClass="ParagraphView" customModule="VaccinationUI">
+                                                <rect key="frame" x="0.0" y="532" width="414" height="50"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                            </view>
+                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Bge-SR-I1b" customClass="ParagraphView" customModule="VaccinationUI">
+                                                <rect key="frame" x="0.0" y="582" width="414" height="50"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                            </view>
+                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LuG-GH-ONj" customClass="Headline" customModule="VaccinationUI">
+                                                <rect key="frame" x="0.0" y="632" width="414" height="50"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                            </view>
+                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Erb-j0-c2h" customClass="Spacer" customModule="VaccinationUI">
+                                                <rect key="frame" x="0.0" y="682" width="414" height="12"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="12" id="3Qu-jx-v4H"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wk3-2J-UDP" customClass="ParagraphView" customModule="VaccinationUI">
+                                                <rect key="frame" x="0.0" y="694" width="414" height="50"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                            </view>
+                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Egd-5c-HLk" customClass="ParagraphView" customModule="VaccinationUI">
+                                                <rect key="frame" x="0.0" y="744" width="414" height="50"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                            </view>
+                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="r60-BN-MLG" customClass="ParagraphView" customModule="VaccinationUI">
+                                                <rect key="frame" x="0.0" y="794" width="414" height="50"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                            </view>
+                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CG4-i8-Oj3" customClass="ParagraphView" customModule="VaccinationUI">
+                                                <rect key="frame" x="0.0" y="844" width="414" height="330"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                            </view>
+                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OfP-W2-jo2" customClass="Spacer" customModule="VaccinationUI">
+                                                <rect key="frame" x="0.0" y="1174" width="414" height="128"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                            </view>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="YV8-Tq-Fkx" firstAttribute="width" secondItem="TCT-S7-S1m" secondAttribute="width" id="7xd-Zy-U1U"/>
+                                    <constraint firstItem="YV8-Tq-Fkx" firstAttribute="top" secondItem="TCT-S7-S1m" secondAttribute="top" id="R0w-IF-uol"/>
+                                    <constraint firstAttribute="bottom" secondItem="YV8-Tq-Fkx" secondAttribute="bottom" id="jYN-WM-EAC"/>
+                                    <constraint firstAttribute="trailing" secondItem="YV8-Tq-Fkx" secondAttribute="trailing" id="xns-jr-kkc"/>
+                                    <constraint firstItem="YV8-Tq-Fkx" firstAttribute="leading" secondItem="TCT-S7-S1m" secondAttribute="leading" id="xyi-ER-UO0"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="HwW-kj-fR9"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="oFK-wq-XU8"/>
+                            </scrollView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="tDb-4c-WSh"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="tDb-4c-WSh" firstAttribute="bottom" secondItem="wOL-d4-AM4" secondAttribute="bottom" constant="82" id="24v-JH-vGE"/>
-                            <constraint firstItem="tDb-4c-WSh" firstAttribute="trailing" secondItem="wOL-d4-AM4" secondAttribute="trailing" id="8fr-xQ-T2V"/>
-                            <constraint firstItem="wOL-d4-AM4" firstAttribute="top" secondItem="tDb-4c-WSh" secondAttribute="top" constant="82" id="Nzz-f8-t0L"/>
-                            <constraint firstItem="wOL-d4-AM4" firstAttribute="leading" secondItem="tDb-4c-WSh" secondAttribute="leading" id="TOL-Sc-Ge3"/>
+                            <constraint firstAttribute="bottom" secondItem="TCT-S7-S1m" secondAttribute="bottom" constant="14" id="3c7-b4-oZ0"/>
+                            <constraint firstItem="TCT-S7-S1m" firstAttribute="top" secondItem="gYk-x2-Ee4" secondAttribute="top" constant="24" id="8Ga-Ap-FXr"/>
+                            <constraint firstAttribute="trailing" secondItem="TCT-S7-S1m" secondAttribute="trailing" id="Cov-ML-eWS"/>
+                            <constraint firstItem="TCT-S7-S1m" firstAttribute="leading" secondItem="gYk-x2-Ee4" secondAttribute="leading" id="gei-aB-iN6"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="paragraphView" destination="wOL-d4-AM4" id="plF-iF-7aC"/>
+                        <outlet property="birtdateView" destination="Bge-SR-I1b" id="MDg-qC-mrG"/>
+                        <outlet property="date1View" destination="CG4-i8-Oj3" id="RHA-XN-kbf"/>
+                        <outlet property="immunization1Headline" destination="LuG-GH-ONj" id="q5Q-OK-3O4"/>
+                        <outlet property="immunizationScanButton" destination="uTX-yD-jMP" id="iD5-eh-MFB"/>
+                        <outlet property="immunizationTicketButton" destination="Ihi-Ap-8Ly" id="UAX-fV-epL"/>
+                        <outlet property="immunizationView" destination="Hrb-mG-kzt" id="ES7-8A-IQ2"/>
+                        <outlet property="location1View" destination="wk3-2J-UDP" id="9mn-ay-gjd"/>
+                        <outlet property="nameHeadline" destination="gRX-6s-FzF" id="Ehy-Lu-fuL"/>
+                        <outlet property="nameView" destination="wOL-d4-AM4" id="zKN-3i-cQW"/>
+                        <outlet property="number1View" destination="r60-BN-MLG" id="oNN-0p-XWt"/>
+                        <outlet property="personalDataHeadline" destination="bSB-GK-DAm" id="j6y-qU-Xka"/>
+                        <outlet property="vaccine1View" destination="Egd-5c-HLk" id="N7d-nM-EIR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oNf-eD-7wV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1470" y="144"/>
+            <point key="canvasLocation" x="1469.5652173913045" y="143.97321428571428"/>
         </scene>
     </scenes>
     <resources>
