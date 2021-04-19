@@ -28,7 +28,6 @@ class CardViewActionTests: XCTestCase {
     func testInit() {
         XCTAssertNotNil(sut.titleLabel)
         XCTAssertNotNil(sut.contentView)
-        XCTAssertNotNil(sut.subtitleLabel)
         XCTAssertNotNil(sut.actionButton)
         XCTAssertNotNil(sut.stateImageView)
     }

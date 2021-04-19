@@ -28,7 +28,7 @@ extension OnboardingRouter: Router {
 
         let certificateViewController = CertificateViewController.createFromStoryboard(bundle: Bundle.module)
         let viewModel = CertificateViewModel()
-        viewModel.stateDelegate = certificateViewController
+        viewModel.delegate = certificateViewController
         certificateViewController.viewModel = viewModel
         certificateViewController.router = ProofPopupRouter()
         windowDelegate?.update(rootViewController: certificateViewController)

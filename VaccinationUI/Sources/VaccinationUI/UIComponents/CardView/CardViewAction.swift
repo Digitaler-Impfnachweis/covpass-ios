@@ -14,7 +14,6 @@ public class CardViewAction: MarginableXibView {
     // MARK: - Outlets
     
     @IBOutlet public var titleLabel: UILabel!
-    @IBOutlet public var subtitleLabel: UILabel!
     @IBOutlet public var actionButton: UIButton!
     @IBOutlet public var stateImageView: UIImageView!
     

@@ -1,6 +1,6 @@
 //
 //  CertificateViewController.swift
-//  
+//
 //
 //  Copyright © 2021 IBM. All rights reserved.
 //
@@ -15,98 +15,64 @@ public class CertificateViewController: UIViewController {
 
     @IBOutlet public var headerView: InfoHeaderView!
     @IBOutlet public var addButton: PrimaryIconButtonContainer!
-    @IBOutlet public var showAllButton: UIButton!
-    @IBOutlet public var showAllLabel: UILabel!
-    @IBOutlet public var tableView: UITableView!
-    @IBOutlet public var stackView: UIStackView!
+    @IBOutlet public var collectionView: UICollectionView!
+    @IBOutlet public var dotPageIndicator: DotPageIndicator!
     
     // MARK: - Public
     
     public var viewModel: CertificateViewModel!
     public var router: Popup?
     
-    // MARK: - Private
-
-    private var continerView: UIView!
-    
     // MARK: - Fifecycle
     
     override public func viewDidLoad() {
         super.viewDidLoad()
         setupHeaderView()
-        setupOther()
-        setupTableView()
-        setupOther()
-        setupCardViewFor(state: viewModel?.certificateState ?? .none)
+        setupActionButton()
+        setupCollecttionView()
+        setupDotIndicator()
     }
     
     // MARK: - Private
     
-    public func setupHeaderView() {
+    private func setupDotIndicator() {
+        dotPageIndicator.delegate = self
+        dotPageIndicator.numberOfDots = viewModel.certificates.count
+        dotPageIndicator.isHidden = viewModel.certificates.count == 1 ? true : false
+    }
+    
+    private func setupHeaderView() {
         headerView.actionButton.imageEdgeInsets = viewModel.headerButtonInsets
-        headerView.headline.text = viewModel?.title
+        headerView.headline.text = viewModel.headerTitle
+        headerView.headlineFont = viewModel.headerFont
+        headerView.buttonImage = viewModel.headerActionImage
     }
     
-    private func setupTableView() {
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.tableFooterView = UIView(frame: CGRect.zero)
-        tableView.register(UINib(nibName: ActionTableViewCell.identifier, bundle: UIConstants.bundle), forCellReuseIdentifier: ActionTableViewCell.identifier)
-        tableView.tintColor = UIConstants.BrandColor.brandAccent
+    private func setupCollecttionView() {
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        let layout = CardFlowLayout()
+        layout.scrollDirection = .horizontal
+        collectionView.collectionViewLayout = layout
+        collectionView.register(UINib(nibName: "\(NoCertificateCollectionViewCell.self)", bundle: UIConstants.bundle), forCellWithReuseIdentifier: "\(NoCertificateCollectionViewCell.self)")
+        collectionView.register(UINib(nibName: "\(QrCertificateCollectionViewCell.self)", bundle: UIConstants.bundle), forCellWithReuseIdentifier: "\(QrCertificateCollectionViewCell.self)")
+        collectionView.showsHorizontalScrollIndicator = false
     }
     
-    private func setupOther() {
+    private func setupActionButton() {
         view.tintColor = UIConstants.BrandColor.brandAccent
-        headerView.headline.text = viewModel?.title
         addButton.iconImage = viewModel?.addButtonImage
         addButton.buttonBackgroundColor = UIConstants.BrandColor.brandAccent
         addButton.action = presentPopup
     }
     
-    // MARK: - Card View
-    
-    func noCertificateCardView() -> NoCertificateCardView {
-        let noCertificate = configureCard(NoCertificateCardView.self)
-        noCertificate.actionButton.title = viewModel.noCertificateCardTitle
-        noCertificate.actionButton.action = presentPopup
-        return noCertificate
+    private func reloadCollectionView() {
+        collectionView.reloadData()
+        dotPageIndicator.numberOfDots = viewModel.certificates.count
+        dotPageIndicator.isHidden = viewModel.certificates.count == 1 ? true : false
     }
     
-    func halfCertificateCardView() -> PartialCertificateCardView {
-        let certificate = configureCard(PartialCertificateCardView.self)
-        certificate.actionButton.title = viewModel.halfCertificateCardTitle
-        certificate.actionButton.action = presentPopup
-        return certificate
-    }
-    
-    func fullCertificateCardView() -> UIView {
-        // TBD - we should update with actual card view
-        let certificate = configureCard(BaseCardView.self)
-        return certificate
-    }
-    
-    func configureCard<T>(_ type: T.Type) -> T where T : BaseCardView {
-        let certificate = T(frame: CGRect(origin: stackView.bounds.origin, size: CGSize(width: stackView.bounds.width, height: viewModel.continerHeight)))
-        certificate.cornerRadius = viewModel.continerCornerRadius
-        return certificate
-    }
-    
-    func setupCardViewFor(state: CertificateState) {
-        if continerView != nil {
-            stackView.removeArrangedSubview(continerView)
-        }
-        switch state {
-        case .none:
-            continerView = noCertificateCardView()
-        case .half:
-            continerView = halfCertificateCardView()
-        case .full:
-            continerView = fullCertificateCardView()
-        }
-        stackView.insertArrangedSubview(continerView, at: stackView.arrangedSubviews.count - 1)
-    }
-    
-    func presentPopup() {
+    private func presentPopup() {
         router?.presentPopup(onTopOf: self)
     }
 }
@@ -127,23 +93,49 @@ extension CertificateViewController: ScannerDelegate {
 
 // MARK: - UITableViewDataSource
 
-extension CertificateViewController: UITableViewDataSource {
-    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        viewModel?.titles.count ?? 0
+extension CertificateViewController: UICollectionViewDataSource {
+    
+    public func numberOfSections(in collectionView: UICollectionView) -> Int { 1 }
+    
+    public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        viewModel?.certificates.count ?? 0
     }
     
-    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: ActionTableViewCell.identifier, for: indexPath) as? ActionTableViewCell else { return UITableViewCell()}
-        viewModel?.configure(cell: cell, at: indexPath)
+    public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: viewModel.reuseIdentifier(for: indexPath), for: indexPath) as? BaseCardCollectionViewCell else { return UICollectionViewCell() }
+        viewModel.configure(cell: cell, at: indexPath)
         return cell
     }
 }
 
 // MARK: - UITableViewDelegate
 
-extension CertificateViewController: UITableViewDelegate {
-    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // TODO: - show smth
+extension CertificateViewController: UICollectionViewDelegate {
+    public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+    }
+    
+    public func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        let visibleRect = CGRect(origin: collectionView.contentOffset, size: collectionView.bounds.size)
+        let visiblePoint = CGPoint(x: visibleRect.midX, y: visibleRect.midY)
+        guard let visibleIndexPath = collectionView.indexPathForItem(at: visiblePoint) else { return }
+        dotPageIndicator.selectDot(withIndex: visibleIndexPath.item)
+    }
+}
+
+// MARK: - UICollectionViewDelegateFlowLayout
+
+extension CertificateViewController: UICollectionViewDelegateFlowLayout {
+    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        CGSize(width: collectionView.bounds.width - 40, height: collectionView.bounds.height)
+    }
+}
+
+// MARK: - DotPageIndicatorDelegate
+
+extension CertificateViewController: DotPageIndicatorDelegate {
+    public func dotPageIndicator(_ dotPageIndicator: DotPageIndicator, didTapDot index: Int) {
+        collectionView.scrollToItem(at: IndexPath(item: index, section: 0), at: .left, animated: true)
     }
 }
 
@@ -151,14 +143,14 @@ extension CertificateViewController: UITableViewDelegate {
 
 extension CertificateViewController: StoryboardInstantiating {
     public static var storyboardName: String {
-        return VaccinationPassConstants.Storyboard.Pass
+        VaccinationPassConstants.Storyboard.Pass
     }
 }
 
-// MARK: - CertificateStateDelegate
+// MARK: - UpdateDelegate
 
-extension CertificateViewController: CertificateStateDelegate {
-    public func didUpdatedCertificate(state: CertificateState) {
-        setupCardViewFor(state: state)
+extension CertificateViewController: ReloadDelegate {
+    public func shouldReload() {
+        reloadCollectionView()
     }
 }
