@@ -70,7 +70,7 @@ public class ParagraphView: MarginableXibView {
         ]
     }
 
-    override required init(frame: CGRect) {
+    required init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
     }

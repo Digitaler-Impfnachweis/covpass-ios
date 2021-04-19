@@ -7,35 +7,35 @@
 
 import UIKit
 
-public class StartOnboardingViewModel: BaseViewModel {
+open class StartOnboardingViewModel: BaseViewModel {
     
     public init() {}
 
-    public var image: UIImage? {
+    open var image: UIImage? {
         UIImage(named: UIConstants.IconName.StartScreen, in: UIConstants.bundle, compatibleWith: nil)
     }
 
-    public var title: String {
+    open var title: String {
         "Ihr digitaler Impfnachweis wartet auf Sie!"
     }
 
-    public var info: String {
+    open var info: String {
         "Dokumentieren Sie Impfungen einfach und sicher auf Ihrem Smartphone."
     }
     
-    var secureTitle: String {
+    open var secureTitle: String {
         "Absolute Sicherheit Ihrer Daten"
     }
     
-    var secureText: String {
+    open var secureText: String {
         "Ihre Daten warden lokal auf Ihrem Smartphone gespeichert und können nur von Ihren abgefragt werden."
     }
     
-    var navigationButtonTitle: String {
+    open var navigationButtonTitle: String {
         "Los geht's"
     }
     
-    var secureImage: UIImage? {
+    open var secureImage: UIImage? {
         UIImage(named: UIConstants.IconName.IconLock, in: UIConstants.bundle, compatibleWith: nil)
     }
 
