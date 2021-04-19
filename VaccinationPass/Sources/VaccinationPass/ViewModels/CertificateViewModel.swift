@@ -11,7 +11,6 @@ import UIKit
 import VaccinationCommon
 
 public class CertificateViewModel {
-    
     // MARK: - Private
     
     private let parser: QRCoder = QRCoder()
@@ -22,16 +21,30 @@ public class CertificateViewModel {
     var certificateState: CertificateState = .none {
         didSet { stateDelegate?.didUpdatedCertificate(state: certificateState) }
     }
-    var title: String { "Meine Impfungen" }
+    var title: String { "vaccination_certificate_list_title".localized }
     
     var addButtonImage: UIImage? {
         UIImage(named: UIConstants.IconName.PlusIcon, in: UIConstants.bundle, compatibleWith: nil)
     }
     
     var titles = [
-        "Wie nutze ich den digitalen Nachweis?",
-        "Woher bekomme ich einen QR Code?",
-        "Was passiert mit meinen Daten?"]
+        "vaccination_certificate_first_faq".localized,
+        "vaccination_certificate_second_faq".localized,
+        "vaccination_certificate_third_faq".localized]
+
+    var faqTitle: String { "vaccination_certificate_faq_title".localized }
+
+    var showAllFaqTitle: String {  "vaccination_certificate_all_faq_title".localized }
+
+    // MARK: - No Certificate Configuration
+    var noCertificateCardTitle: String { "vaccination_no_certificate_card_title".localized }
+
+    var noCertificateCardMessage: String { "vaccination_no_certificate_card_message".localized }
+
+    var noCertificateActionTitle: String { "vaccination_certificate_add_button_title".localized }
+    
+    // MARK: - Half Certificate Configuration
+    var halfCertificateActionTitle: String { "vaccination_certificate_add_button_title".localized }
     
     func configure(cell: ActionCell, at indexPath: IndexPath) {
         cell.configure(title: titles[indexPath.row], iconName: UIConstants.IconName.ChevronRight)
@@ -43,12 +56,6 @@ public class CertificateViewModel {
         // Do more processes
         certificateState = .half
     }
-    
-    // MARK: - No Certificate Configuration
-    let noCertificateCardTitle = "Nachweis hinzufügen"
-    
-    // MARK: - Half Certificate Configuration
-    let halfCertificateCardTitle = "Nachweis hinzufügen"
     
     // MARK: - UIConfigureation
     

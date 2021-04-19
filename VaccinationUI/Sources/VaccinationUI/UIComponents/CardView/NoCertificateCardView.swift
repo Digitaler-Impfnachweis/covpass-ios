@@ -14,6 +14,20 @@ public class NoCertificateCardView: BaseCardView {
     
     @IBOutlet public var topImageView: UIImageView!
     @IBOutlet public var titleLabel: UILabel!
-    @IBOutlet public var textLable: UILabel!
+    @IBOutlet public var textLabel: UILabel!
     @IBOutlet public var actionButton: PrimaryButtonContainer!
+
+    // MARK: - Public Properties
+
+    public var titleText: String? {
+        didSet {
+            titleLabel.text = titleText
+        }
+    }
+
+    public var detailText: String? {
+        didSet {
+            textLabel.text = detailText
+        }
+    }
 }

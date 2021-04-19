@@ -16,18 +16,18 @@ public class ProofPopupViewModel: BaseViewModel {
     }
 
     public var title: String {
-        "Impfung hinzufügen"
+        "vaccination_proof_popup_title".localized
     }
 
     public var info: String {
-        "Nach der Impfung erhalten Sie eine Impfbescheinigung mit QR-Code. Scannen Sie den Code um die Impfung in der App hinzufügen."
+        "vaccination_proof_popup_message".localized
     }
     
     var actionTitle: String {
-        "Sie habben keinen QR-Code erhalten"
+        "vaccination_proof_popup_action_title".localized
     }
     
-    var startButtonTitle: String { "QR-Code Scannen" }
+    var startButtonTitle: String { "vaccination_proof_popup_scan_title".localized }
     
     var closeButtonImage: UIImage? {
         UIImage(named: UIConstants.IconName.IconClose, in: UIConstants.bundle, compatibleWith: nil)
