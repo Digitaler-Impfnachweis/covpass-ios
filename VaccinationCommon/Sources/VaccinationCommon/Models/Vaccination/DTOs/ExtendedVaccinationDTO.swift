@@ -45,12 +45,14 @@ public struct ExtendedVaccinationDTO: JsonConvertable {
                                      product: jsonDict[kProduct] as? String,
                                      manufacturer: jsonDict[kManufacturer] as? String,
                                      series: jsonDict[kSeries] as? String,
-                                     occurence: jsonDict[kOccurence] as? Date,
+                                     occurence: DateUtils.vaccinationDateFormatter.date(from: jsonDict[kOccurence] as? String ?? ""),
                                      country: jsonDict[kCountry] as? String)
         lotNumber = jsonDict[kLotNumber] as? String
         location = jsonDict[kLocation] as? String
         performer = jsonDict[kPerformer] as? String
-        nextDate = jsonDict[kNextDate] as? Date
+        if let date = jsonDict[kNextDate]  as? String {
+            nextDate = DateUtils.vaccinationDateFormatter.date(from: date)
+        }
     }
 
     public func asJson() throws -> [String: Any] {

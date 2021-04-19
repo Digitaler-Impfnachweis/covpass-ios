@@ -58,7 +58,9 @@ public struct VaccinationCertificateDTO: JsonConvertable {
 
     public init(jsonDict: [String: Any]) {
         name = jsonDict[kName] as? String
-        birthDate = jsonDict[kBirthDate] as? Date
+        if let date = jsonDict[kBirthDate] as? String {
+            birthDate = DateUtils.vaccinationDateFormatter.date(from: date)
+        }
         identifier = jsonDict[kIdentifier] as? String
         sex = Sex(rawValue: jsonDict[kSex] as? String ?? "unknown")
         if let vaccinationJsonList = jsonDict[kVaccination] as? [[String: Any]] {
@@ -75,8 +77,13 @@ public struct VaccinationCertificateDTO: JsonConvertable {
         }
         issuer = jsonDict[kIssuer] as? String
         id = jsonDict[kId] as? String
-        validFrom = jsonDict[kValidFrom] as? Date
-        validUntil = jsonDict[kValidUntil] as? Date
+        if let validFromDate = jsonDict[kValidFrom] as? String {
+            validFrom = DateUtils.vaccinationDateFormatter.date(from: validFromDate)
+        }
+        if let validUntilDate = jsonDict[kValidUntil] as? String {
+            validUntil = DateUtils.vaccinationDateFormatter.date(from: validUntilDate)
+        }
+        version = jsonDict[kVersion] as? String
         secret = jsonDict[kSecret] as? String
     }
 

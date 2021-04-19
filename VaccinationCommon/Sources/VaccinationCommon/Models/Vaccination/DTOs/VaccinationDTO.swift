@@ -46,7 +46,9 @@ public struct VaccinationDTO: JsonConvertable {
         product = jsonDict[kProduct] as? String
         manufacturer = jsonDict[kManufacturer] as? String
         series = jsonDict[kSeries] as? String
-        occurence = jsonDict[kOccurence] as? Date
+        if let occurenceDate = jsonDict[kOccurence] as? String {
+            occurence = DateUtils.vaccinationDateFormatter.date(from: occurenceDate)
+        }
         country = jsonDict[kCountry] as? String
     }
 
