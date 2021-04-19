@@ -19,13 +19,16 @@ public class CertificateViewModel {
     
     func process(payload: String, completion: ((Error) -> Void)? = nil) {
         guard let decodedPayload = parser.parse(payload, completion: completion) else { return }
+        // TODO: - we should cache the certificate and update `certificates` variable
         print(decodedPayload)
+        // TODO: - aftre perfomring all the chnages we should notify the colection view to reload
         delegate?.shouldReload()
     }
     
     // MARK: - Certificates Continer
     
     weak var delegate: ReloadDelegate?
+
     var certificates = [ "\(NoCertificateCollectionViewCell.self)",
                          "\(QrCertificateCollectionViewCell.self)",
                          "\(QrCertificateCollectionViewCell.self)"]
