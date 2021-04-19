@@ -8,7 +8,6 @@
 import UIKit
 
 open class UIConstants {
-    // use a class from same package to identify the package
     open class var bundle: Bundle {
         Bundle.module
     }
@@ -87,6 +86,10 @@ open class UIConstants {
     
     public struct Storyboard {
         public static let Onboarding = "Onboarding"
+    }
+
+    public struct CellIdentifier {
+        public static let ActionTableViewCell = "ActionTableViewCell"
     }
 }
 

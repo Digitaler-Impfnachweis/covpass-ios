@@ -9,14 +9,18 @@ import Foundation
 import UIKit
 
 public class NoCertifiateConfiguration: BaseCertifiateConfiguration {
+    // MARK: - Public Variables 
+    
     public var title: String?
     public var subtitle: String?
     public var image: UIImage?
     
-    public init(title: String?, subtitle: String?, image: UIImage?) {
+    // MARK: - Init
+    
+    public init(title: String?, subtitle: String?, image: UIImage?, identifier: String = "\(NoCertificateCollectionViewCell.self)") {
         self.title = title
         self.subtitle = subtitle
         self.image = image
-        super.init(backgroundColor: UIConstants.BrandColor.onBackground20)
+        super.init(backgroundColor: UIConstants.BrandColor.onBackground20, identifer: identifier)
     }
 }

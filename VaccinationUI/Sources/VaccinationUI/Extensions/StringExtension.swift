@@ -19,13 +19,17 @@ extension String {
             return nil
         }
     }
-}
 
-extension String {
     func UInsRange(from range: Range<Index>) -> NSRange {
         let location = distance(from: startIndex, to: range.lowerBound)
         let length = distance(from: range.lowerBound, to: range.upperBound)
 
         return NSRange(location: location, length: length)
+    }
+}
+
+extension String {
+    var localized: String {
+        return Localizer.localized(self, bundle: UIConstants.bundle)
     }
 }

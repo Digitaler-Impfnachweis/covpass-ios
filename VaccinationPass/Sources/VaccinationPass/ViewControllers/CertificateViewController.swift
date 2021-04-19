@@ -21,7 +21,7 @@ public class CertificateViewController: UIViewController {
     // MARK: - Public
     
     public var viewModel: CertificateViewModel!
-    public var router: Popup?
+    public var router: PopupRouter?
     
     // MARK: - Fifecycle
     
@@ -42,10 +42,10 @@ public class CertificateViewController: UIViewController {
     }
     
     private func setupHeaderView() {
-        headerView.actionButton.imageEdgeInsets = viewModel.headerButtonInsets
-        headerView.headline.text = viewModel.headerTitle
-        headerView.headlineFont = viewModel.headerFont
-        headerView.buttonImage = viewModel.headerActionImage
+        headerView.actionButton.imageEdgeInsets = viewModel.headlineButtonInsets
+        headerView.headline.text = viewModel.headlineTitle
+        headerView.headlineFont = viewModel.headlineFont
+        headerView.buttonImage = viewModel.headlineButtonImage
     }
     
     private func setupCollecttionView() {
@@ -84,7 +84,7 @@ extension CertificateViewController: ScannerDelegate {
         presentedViewController?.dismiss(animated: true, completion: nil)
         switch value {
         case .success(let payload):
-            viewModel?.process(payload: payload)
+            viewModel?.process(payload: payload, completion: nil)
         case .failure(let error):
             print("We have an error: \(error)")
         }
@@ -111,10 +111,6 @@ extension CertificateViewController: UICollectionViewDataSource {
 // MARK: - UITableViewDelegate
 
 extension CertificateViewController: UICollectionViewDelegate {
-    public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-    }
-    
     public func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         let visibleRect = CGRect(origin: collectionView.contentOffset, size: collectionView.bounds.size)
         let visiblePoint = CGPoint(x: visibleRect.midX, y: visibleRect.midY)
@@ -149,7 +145,7 @@ extension CertificateViewController: StoryboardInstantiating {
 
 // MARK: - UpdateDelegate
 
-extension CertificateViewController: ReloadDelegate {
+extension CertificateViewController: ViewModelDelegate {
     public func shouldReload() {
         reloadCollectionView()
     }

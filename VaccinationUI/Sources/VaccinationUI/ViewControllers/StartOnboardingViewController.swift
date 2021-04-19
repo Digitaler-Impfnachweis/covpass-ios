@@ -8,7 +8,7 @@
 import UIKit
 
 public class StartOnboardingViewController: UIViewController {
-
+    @IBOutlet public var stackView: UIStackView!
     @IBOutlet public var actionButton: PrimaryButtonContainer!
     @IBOutlet public var confirmView: ConfirmView!
     @IBOutlet public var headline: Headline!
@@ -30,6 +30,7 @@ public class StartOnboardingViewController: UIViewController {
 
     public override func viewDidLoad() {
         super.viewDidLoad()
+        configureStackView()
         configureImageView()
         configureHeadline()
         configureParagraphView()
@@ -38,6 +39,11 @@ public class StartOnboardingViewController: UIViewController {
     }
 
     // MARK: - Private
+
+    private func configureStackView() {
+        stackView.setCustomSpacing(40, after: headline)
+        stackView.setCustomSpacing(40, after: confirmView)
+    }
 
     private func configureImageView() {
         confirmView.kind = .custom(

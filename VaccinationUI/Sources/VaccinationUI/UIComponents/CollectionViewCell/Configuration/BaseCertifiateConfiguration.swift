@@ -10,7 +10,9 @@ import UIKit
 
 public class BaseCertifiateConfiguration {
     public var backgroundColor: UIColor?
-    public init(backgroundColor: UIColor?) {
+    public var identifier: String
+    public init(backgroundColor: UIColor?, identifer: String) {
         self.backgroundColor = backgroundColor
+        self.identifier = identifer
     }
 }
