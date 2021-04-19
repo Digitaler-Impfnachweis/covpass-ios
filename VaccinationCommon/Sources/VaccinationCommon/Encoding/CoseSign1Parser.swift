@@ -1,5 +1,5 @@
 //
-//  CoseSign1Encoder.swift
+//  CoseSign1Parser.swift
 //  
 //
 //  Copyright © 2021 IBM. All rights reserved.
@@ -20,6 +20,12 @@ import SwiftCBOR
 //    }
 //}
 
+enum CoseParsingError: Error {
+    case wrongType
+    case wrongArrayLength
+    case general
+}
+
 struct CoseSign1Message {
     var protected: [UInt8]
     var unprotected: Any?
@@ -34,36 +40,38 @@ struct CoseSign1Message {
     }
 }
 
-class CoseSign1Encoder {
-    func parse(_ decompressedPayload: Data) -> CoseSign1Message? {
-        // Error handling to be improved
-        do {
-            let cbor = try CBOR.decode(([UInt8])(decompressedPayload))
-
-            switch cbor {
-            case .tagged( _, let cobr):
-                switch cobr {
-                case .array(let array):
-                    if case .byteString(let protectedValue) = array[0],
-                       case .map(let unprotectedValue) = array[1],
-                       case .byteString(let payloadValue) = array[2],
-                       case .byteString(let signaturesValue) = array[3] {
-                            return CoseSign1Message(protected: protectedValue, unprotected: unprotectedValue, payload: payloadValue, signatures: signaturesValue)
-                        }
-                default:
-                     print("Unable to extract CBOR array: wrong type")
+class CoseSign1Parser {
+    /// Decodes the received data with CBOR and parses the resulting COSE structure
+    /// - parameter decompressedPayload: the data containing a COSE object
+    /// - parameter completion: a fallback in case an error occurs
+    /// - returns a constructed object of type `CoseSign1Message`
+    func parse(_ decompressedPayload: Data) throws -> CoseSign1Message? {
+        let cbor = try CBOR.decode(([UInt8])(decompressedPayload))
+        
+        switch cbor {
+        case .tagged( _, let cobr):
+            switch cobr {
+            case .array(let array):
+                guard array.count == 4 else { throw CoseParsingError.wrongArrayLength }
+                if case .byteString(let protectedValue) = array[0],
+                   case .map(let unprotectedValue) = array[1],
+                   case .byteString(let payloadValue) = array[2],
+                   case .byteString(let signaturesValue) = array[3] {
+                    return CoseSign1Message(protected: protectedValue, unprotected: unprotectedValue, payload: payloadValue, signatures: signaturesValue)
                 }
             default:
-                 print("Unable to extract tagged CBOR: wrong type")
+                throw CoseParsingError.wrongType
             }
-
-            return nil
-        } catch {
-            print(error.localizedDescription)
-            return nil
+        default:
+            throw CoseParsingError.wrongType
         }
+        
+        return nil
     }
 
+    /// Parse a CBOR object into a readable String
+    /// - parameter cborObject: the CBOR object to be parsed
+    /// - returns a String composed of key-value pairs
     func mapToString(cborObject: CBOR?) -> String? {
         guard let cborData = cborObject, case .map(let cborMap) = cborData else { return nil }
 

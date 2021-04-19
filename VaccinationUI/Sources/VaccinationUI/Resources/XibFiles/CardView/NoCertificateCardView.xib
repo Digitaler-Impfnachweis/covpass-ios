@@ -12,12 +12,15 @@
         <array key="IBMPlexSans-SemiBold.otf">
             <string>IBMPlexSans-SemiBold</string>
         </array>
+        <array key="IBMPlexSans.otf">
+            <string>IBMPlexSans</string>
+        </array>
     </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NoCertificateCardView" customModule="VaccinationUI">
             <connections>
                 <outlet property="actionButton" destination="pP8-Zv-hAB" id="yF1-hG-I8n"/>
-                <outlet property="textLable" destination="EKc-Hh-BeX" id="YWo-Gc-YYU"/>
+                <outlet property="textLabel" destination="EKc-Hh-BeX" id="Mpy-QO-JKd"/>
                 <outlet property="titleLabel" destination="VW2-PA-GY7" id="PSZ-ii-jQf"/>
                 <outlet property="topImageView" destination="6Y0-ii-9y9" id="nnF-b2-5ea"/>
             </connections>
@@ -31,15 +34,18 @@
                     <rect key="frame" x="0.0" y="0.0" width="414" height="335"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pP8-Zv-hAB" customClass="PrimaryButtonContainer" customModule="VaccinationUI">
-                            <rect key="frame" x="40" y="242.5" width="334" height="55"/>
+                            <rect key="frame" x="40" y="249" width="334" height="55"/>
                             <color key="backgroundColor" systemColor="systemBlueColor"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="334" id="3bS-Q9-ZcT"/>
                                 <constraint firstAttribute="height" constant="55" id="pTo-HI-s5V"/>
                             </constraints>
                         </view>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Kein Nachweis hinzugefügt" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VW2-PA-GY7">
-                            <rect key="frame" x="8" y="134" width="398" height="18.5"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VW2-PA-GY7">
+                            <rect key="frame" x="8" y="134" width="398" height="20"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="20" id="20J-xx-Ekx"/>
+                            </constraints>
                             <fontDescription key="fontDescription" name="IBMPlexSans-SemiBold" family="IBM Plex Sans" pointSize="14"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -51,17 +57,13 @@
                                 <constraint firstAttribute="width" constant="70" id="vkD-Da-sdO"/>
                             </constraints>
                         </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EKc-Hh-BeX">
-                            <rect key="frame" x="8" y="152.5" width="398" height="55"/>
-                            <attributedString key="attributedText">
-                                <fragment content="Scannen Sie eine  Bescheinigung mit QR Code, um hier  Ihren Nachweis zu sehen">
-                                    <attributes>
-                                        <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                        <font key="NSFont" size="14" name="IBMPlexSans"/>
-                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                    </attributes>
-                                </fragment>
-                            </attributedString>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EKc-Hh-BeX">
+                            <rect key="frame" x="8" y="154" width="398" height="60"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="60" id="yWM-zR-hFz"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="IBMPlexSans" family="IBM Plex Sans" pointSize="14"/>
+                            <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>

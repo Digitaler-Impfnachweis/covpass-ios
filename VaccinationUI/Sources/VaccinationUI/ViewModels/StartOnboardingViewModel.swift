@@ -7,32 +7,32 @@
 
 import UIKit
 
-public class StartOnboardingViewModel {
+public class StartOnboardingViewModel: BaseViewModel {
     
     public init() {}
 
-    var image: UIImage? {
+    public var image: UIImage? {
         UIImage(named: UIConstants.IconName.StartScreen, in: UIConstants.bundle, compatibleWith: nil)
     }
 
-    var title: String {
-        "Ihr digitaler Impfnachweis wartet auf Sie!"
+    public var title: String {
+        "start_onboarding_title".localized
     }
 
-    var info: String {
-        "Dokumentieren Sie Impfungen einfach und sicher auf Ihrem Smartphone."
+    public var info: String {
+        "start_onboarding_message".localized
     }
     
     var secureTitle: String {
-        "Absolute Sicherheit Ihrer Daten"
+        "start_onboarding_secure_title".localized
     }
     
     var secureText: String {
-        "Ihre Daten warden lokal auf Ihrem Smartphone gespeichert und können nur von Ihren abgefragt werden."
+        "start_onboarding_secure_message".localized
     }
     
     var navigationButtonTitle: String {
-        "Los geht's"
+        "start_onboarding_button_title".localized
     }
     
     var secureImage: UIImage? {
@@ -41,15 +41,16 @@ public class StartOnboardingViewModel {
 
     // MARK: - Settings
 
-    var imageAspectRatio: CGFloat { 375 / 220 }
-    var imageWidth: CGFloat { UIScreen.main.bounds.width }
-    var imageHeight: CGFloat { imageWidth / imageAspectRatio }
-    var imageContentMode: UIView.ContentMode { .scaleAspectFit }
-    var headlineFont: UIFont { UIConstants.Font.startOnboardingHeadlineFont }
-    var headlineColor: UIColor { .black }
-    var paragraphBodyFont: UIFont { UIConstants.Font.startParagraphRegular }
+    public var imageAspectRatio: CGFloat { 375 / 220 }
+    public var imageWidth: CGFloat { UIScreen.main.bounds.width }
+    public var imageHeight: CGFloat { imageWidth / imageAspectRatio }
+    public var imageContentMode: UIView.ContentMode { .scaleAspectFit }
+    public var headlineFont: UIFont { UIConstants.Font.startOnboardingHeadlineFont }
+    public var headlineColor: UIColor { .black }
+    public var paragraphBodyFont: UIFont { UIConstants.Font.startParagraphRegular }
+    public var backgroundColor: UIColor { UIConstants.BrandColor.backgroundPrimary }
+
     var secureHeadlineFont: UIFont { UIConstants.Font.semiBold }
     var secureTextFont: UIFont { UIConstants.Font.regular }
-    var backgroundColor: UIColor { UIConstants.BrandColor.backgroundPrimary }
 }
 

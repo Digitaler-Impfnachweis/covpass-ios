@@ -12,13 +12,15 @@ enum OnboardingError: Error {
 }
 
 public class OnboardingContainerViewController: UIViewController {
+    // MARK: - IBOutlets
+
     @IBOutlet var toolbarView: CustomToolbarView!
     @IBOutlet var pageIndicator: DotPageIndicator!
     @IBOutlet var startButtonBottomConstraint: NSLayoutConstraint!
     
     // MARK: - Public Properties
 
-    public var viewModel: OnboardingContainerViewModel!
+    public var viewModel: OnboardingContainerViewModel?
     public var router: Router?
     
     // MARK: - Internal Properties
@@ -38,7 +40,7 @@ public class OnboardingContainerViewController: UIViewController {
     public override func viewDidLoad() {
         super.viewDidLoad()
 
-        guard viewModel.items.count > 0 else {
+        guard let viewModel = viewModel, viewModel.items.count > 0 else {
             fatalError("ViewModel should contain at least one page")
         }
 
@@ -57,7 +59,7 @@ public class OnboardingContainerViewController: UIViewController {
     private func configureToolbarView() {
         toolbarView.shouldShowTransparency = true
         toolbarView.shouldShowGradient = false
-        toolbarView.state = .confirm(viewModel.startButtonTitle)
+        toolbarView.state = .confirm(viewModel?.startButtonTitle ?? "Los geht's")
         toolbarView.setUpLeftButton(leftButtonItem: .navigationArrow)
         toolbarView.delegate = self
     }
@@ -79,25 +81,17 @@ public class OnboardingContainerViewController: UIViewController {
 
 extension OnboardingContainerViewController: UIPageViewControllerDataSource {
     public func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        guard let onboardingPageViewController = viewController as? OnboardingPageViewController, let index = pages.firstIndex(of: onboardingPageViewController) else {
-            return nil
-        }
-
-        guard index > 0 else {
-            return nil
-        }
+        guard let onboardingPageViewController = viewController as? OnboardingPageViewController,
+              let index = pages.firstIndex(of: onboardingPageViewController),
+              index > 0 else { return nil }
 
         return pages[index - 1]
     }
 
     public func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        guard let onboardingPageViewController = viewController as? OnboardingPageViewController, let index = pages.firstIndex(of: onboardingPageViewController) else {
-            return nil
-        }
-
-        guard index < pages.count - 1 else {
-            return nil
-        }
+        guard let onboardingPageViewController = viewController as? OnboardingPageViewController,
+              let index = pages.firstIndex(of: onboardingPageViewController),
+              index < pages.count - 1 else { return nil }
 
         return pages[index + 1]
     }
@@ -107,13 +101,9 @@ extension OnboardingContainerViewController: UIPageViewControllerDataSource {
 
 extension OnboardingContainerViewController: UIPageViewControllerDelegate {
     public func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
-        guard let currentViewController = pageViewController.viewControllers?.first else {
-            return
-        }
-
-        guard let onboardingPageViewController = currentViewController as? OnboardingPageViewController, let index = pages.firstIndex(of: onboardingPageViewController) else {
-            return
-        }
+        guard let currentViewController = pageViewController.viewControllers?.first,
+              let onboardingPageViewController = currentViewController as? OnboardingPageViewController,
+              let index = pages.firstIndex(of: onboardingPageViewController) else { return }
 
         currentIndex = index
         pageIndicator.selectDot(withIndex: index)
@@ -124,9 +114,8 @@ extension OnboardingContainerViewController: UIPageViewControllerDelegate {
 
 extension OnboardingContainerViewController: DotPageIndicatorDelegate {
     public func dotPageIndicator(_ dotPageIndicator: DotPageIndicator, didTapDot index: Int) {
-        guard index != currentIndex, index >= 0, index < pages.count else {
-            return
-        }
+        guard index != currentIndex, index >= 0, index < pages.count else { return }
+
         let direction: UIPageViewController.NavigationDirection = index > currentIndex ? .forward : .reverse
         pageController?.setViewControllers([pages[index]], direction: direction, animated: true, completion: nil)
         currentIndex = index

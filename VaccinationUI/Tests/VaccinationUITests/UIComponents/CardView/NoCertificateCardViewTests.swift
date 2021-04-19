@@ -28,7 +28,7 @@ class NoCertificateCardViewTests: XCTestCase {
     func testInit() {
         XCTAssertNotNil(sut.topImageView)
         XCTAssertNotNil(sut.titleLabel)
-        XCTAssertNotNil(sut.textLable)
+        XCTAssertNotNil(sut.textLabel)
         XCTAssertNotNil(sut.actionButton)
     }
     

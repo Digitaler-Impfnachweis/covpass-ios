@@ -18,7 +18,7 @@ public class ScanPopupViewController: BottomPopupViewController {
     
     // MARK: - Public Properties
     
-    public var viewModel: ScanPopupViewModel!
+    public var viewModel: ScanPopupViewModel = ScanPopupViewModel()
     public var router: Router?
     public weak var parsingDelegate: ScannerDelegate?
     

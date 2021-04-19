@@ -7,27 +7,27 @@
 
 import UIKit
 
-public class ProofPopupViewModel {
+public class ProofPopupViewModel: BaseViewModel {
     
     public init() {}
 
-    var image: UIImage? {
+    public var image: UIImage? {
         UIImage(named: UIConstants.IconName.ProofScreen, in: UIConstants.bundle, compatibleWith: nil)
     }
 
-    var title: String {
-        "Impfung hinzufügen"
+    public var title: String {
+        "vaccination_proof_popup_title".localized
     }
 
-    var info: String {
-        "Nach der Impfung erhalten Sie eine Impfbescheinigung mit QR-Code. Scannen Sie den Code um die Impfung in der App hinzufügen."
+    public var info: String {
+        "vaccination_proof_popup_message".localized
     }
     
     var actionTitle: String {
-        "Sie habben keinen QR-Code erhalten"
+        "vaccination_proof_popup_action_title".localized
     }
     
-    var startButtonTitle: String { "QR-Code Scannen" }
+    var startButtonTitle: String { "vaccination_proof_popup_scan_title".localized }
     
     var closeButtonImage: UIImage? {
         UIImage(named: UIConstants.IconName.IconClose, in: UIConstants.bundle, compatibleWith: nil)
@@ -39,16 +39,16 @@ public class ProofPopupViewModel {
 
     // MARK: - Settings
 
-    var imageAspectRatio: CGFloat { 375 / 220 }
-    var imageWidth: CGFloat { UIScreen.main.bounds.width }
-    var imageHeight: CGFloat { imageWidth / imageAspectRatio }
-    var imageContentMode: UIView.ContentMode { .scaleAspectFit }
-    var headlineFont: UIFont { UIConstants.Font.semiBold }
-    var headlineColor: UIColor { .black }
-    var paragraphBodyFont: UIFont { UIConstants.Font.regular }
+    public var imageAspectRatio: CGFloat { 375 / 220 }
+    public var imageWidth: CGFloat { UIScreen.main.bounds.width }
+    public var imageHeight: CGFloat { imageWidth / imageAspectRatio }
+    public var imageContentMode: UIView.ContentMode { .scaleAspectFit }
+    public var headlineFont: UIFont { UIConstants.Font.semiBold }
+    public var headlineColor: UIColor { .black }
+    public var paragraphBodyFont: UIFont { UIConstants.Font.regular }
+    public var backgroundColor: UIColor { UIConstants.BrandColor.backgroundPrimary }
     var secureHeadlineFont: UIFont { UIConstants.Font.semiBold }
     var secureTextFont: UIFont { UIConstants.Font.regular }
-    var backgroundColor: UIColor { UIConstants.BrandColor.backgroundPrimary }
     var tintColor: UIColor { UIConstants.BrandColor.brandAccent }
     
     // MARK - Popup
