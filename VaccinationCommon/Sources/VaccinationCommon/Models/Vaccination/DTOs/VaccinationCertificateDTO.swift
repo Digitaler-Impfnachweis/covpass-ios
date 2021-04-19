@@ -24,7 +24,7 @@ public struct VaccinationCertificateDTO: JsonConvertable {
     public var birthDate: Date?
     public var identifier: String?
     public var sex: Sex?
-    public var vaccination: [Vaccination]?
+    public var vaccination: [ExtendedVaccination]?
     public var issuer: String?
     public var id: String?
     public var validFrom: Date?
@@ -36,7 +36,7 @@ public struct VaccinationCertificateDTO: JsonConvertable {
                 birthDate: Date? = nil,
                 identifier: String? = nil,
                 sex: Sex? = nil,
-                vaccination: [Vaccination]? = nil,
+                vaccination: [ExtendedVaccination]? = nil,
                 issuer: String? = nil,
                 id: String? = nil,
                 validFrom: Date? = nil,
@@ -61,13 +61,17 @@ public struct VaccinationCertificateDTO: JsonConvertable {
         birthDate = jsonDict[kBirthDate] as? Date
         identifier = jsonDict[kIdentifier] as? String
         sex = Sex(rawValue: jsonDict[kSex] as? String ?? "unknown")
-        if let vaccinationJson = jsonDict[kVaccination] as? [String: Any] {
-            let vaccinationDTO = VaccinationDTO(jsonDict: vaccinationJson)
-            do {
-                vaccination = try [Vaccination(with: vaccinationDTO)]
-            } catch {
-                print(error)
+        if let vaccinationJsonList = jsonDict[kVaccination] as? [[String: Any]] {
+            var vaccinationArray = [ExtendedVaccination]()
+            for json in vaccinationJsonList {
+                let vaccinationDTO = ExtendedVaccinationDTO(jsonDict: json)
+                do {
+                    vaccinationArray.append(try ExtendedVaccination(with: vaccinationDTO))
+                } catch {
+                    print(error)
+                }
             }
+            vaccination = vaccinationArray
         }
         issuer = jsonDict[kIssuer] as? String
         id = jsonDict[kId] as? String

@@ -19,7 +19,7 @@ public struct VaccinationCertificate {
     public var birthDate: Date?
     public var identifier: String
     public var sex: Sex?
-    public var vaccination: [Vaccination]
+    public var vaccination: [ExtendedVaccination]
     public var issuer: String
     public var id: String
     public var validFrom: Date?
@@ -31,7 +31,7 @@ public struct VaccinationCertificate {
                 birthDate: Date? = nil,
                 identifier: String,
                 sex: Sex? = nil,
-                vaccination: [Vaccination],
+                vaccination: [ExtendedVaccination],
                 issuer: String,
                 id: String,
                 validFrom: Date? = nil,
