@@ -26,6 +26,7 @@ let package = Package(
             dependencies: ["Keychain", "SwiftCBOR", "Scanner"]),
         .testTarget(
             name: "VaccinationCommonTests",
-            dependencies: ["VaccinationCommon"]),
+            dependencies: ["VaccinationCommon"],
+            resources: [.process("Resources")]),
     ]
 )
