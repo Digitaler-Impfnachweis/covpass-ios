@@ -7,9 +7,7 @@
 
 import Foundation
 import XCTest
-import VaccinationUI
-@testable import VaccinationPass
-
+@testable import VaccinationUI
 
 class QrCertificateCollectionViewCellTests: XCTestCase {
     
