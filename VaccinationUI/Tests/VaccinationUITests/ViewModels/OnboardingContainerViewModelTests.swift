@@ -23,7 +23,7 @@ class OnboardingContainerViewModelTests: XCTestCase {
     }
 
     func testSettings() {
-        XCTAssertEqual(sut.startButtonTitle, "Weiter")
+        XCTAssertEqual(sut.startButtonTitle, "next_onboarding_page_button_title".localized)
         XCTAssertEqual(sut.startButtonShadowColor, .clear)
     }
 }

@@ -17,7 +17,7 @@ public class ActionTableViewCell: UITableViewCell {
     
     // MARK: - Public
     
-    public static let identifier = "ActionTableViewCell"
+    public static let identifier = UIConstants.CellIdentifier.ActionTableViewCell
     
     // MARK: - Lifecycle
     
