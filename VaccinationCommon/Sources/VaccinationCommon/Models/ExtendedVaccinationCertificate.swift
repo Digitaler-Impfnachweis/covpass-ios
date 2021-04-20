@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct ExtendedVaccinationCertificate {
+public struct ExtendedVaccinationCertificate: Codable {
     /// The vaccination certificate
     var vaccinationCertificate: VaccinationCertificate
 

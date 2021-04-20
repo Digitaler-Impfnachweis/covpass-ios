@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct Vaccination: Codable {
+public class Vaccination: Codable {
     public var targetDisease: String
     public var vaccineCode: String
     public var product: String
@@ -26,7 +26,7 @@ public struct Vaccination: Codable {
         case country
     }
 
-    public init(from decoder: Decoder) throws {
+    required public init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         targetDisease = try values.decode(String.self, forKey: .targetDisease)
         vaccineCode = try values.decode(String.self, forKey: .vaccineCode)
@@ -36,21 +36,5 @@ public struct Vaccination: Codable {
         let occurenceDateString = try values.decode(String.self, forKey: .occurence)
         occurence = DateUtils.vaccinationDateFormatter.date(from: occurenceDateString)
         country = try values.decode(String.self, forKey: .country)
-    }
-
-    public init(targetDisease: String,
-                vaccineCode: String,
-                product: String,
-                manufacturer: String,
-                series: String,
-                occurence: Date? = nil,
-                country: String) {
-        self.targetDisease = targetDisease
-        self.vaccineCode = vaccineCode
-        self.product = product
-        self.manufacturer = manufacturer
-        self.series = series
-        self.occurence = occurence
-        self.country = country
     }
 }
