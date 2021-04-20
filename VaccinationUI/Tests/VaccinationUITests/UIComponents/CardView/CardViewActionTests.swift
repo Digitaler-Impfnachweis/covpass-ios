@@ -43,8 +43,6 @@ class CardViewActionTests: XCTestCase {
         sut.action = {
             buttonTapped = true
         }
-        // TODO: Figure out why this fails 
-//        sut.actionButton.sendActions(for: .touchUpInside)
         sut.actionButtonPressed(button: UIButton())
         XCTAssertTrue(buttonTapped)
     }
