@@ -11,16 +11,19 @@ public struct ExtendedVaccinationCertificate {
     /// The vaccination certificate
     var vaccinationCertificate: VaccinationCertificate
 
-    /// The raw qr content of the full vaccination certificate. This is not really used right now, but stored as a
-    /// safety fallback in case of e.g. data migration issues.
-    var vaccinationQRContent: String
+    /// The raw qr code data of the vaccination certificate
+    var vaccinationQRCodeData: String
 
-    /// The raw qr content of the simplified validation certificate.
-    var validationQRContent: String?
+    /// The validation certificate
+    var validationCertificate: ValidationCertificate?
 
-    public init(vaccinationCertificate: VaccinationCertificate, vaccinationQRContent: String, validationQRContent: String?) {
+    /// The raw qr code data of the validation certificate
+    var validationQRCodeData: String?
+
+    public init(vaccinationCertificate: VaccinationCertificate, vaccinationQRCodeData: String, validationCertificate: ValidationCertificate?, validationQRCodeData: String?) {
         self.vaccinationCertificate = vaccinationCertificate
-        self.vaccinationQRContent = vaccinationQRContent
-        self.validationQRContent = validationQRContent
+        self.vaccinationQRCodeData = vaccinationQRCodeData
+        self.validationCertificate = validationCertificate
+        self.validationQRCodeData = validationQRCodeData
     }
 }
