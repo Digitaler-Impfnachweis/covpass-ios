@@ -84,7 +84,7 @@ extension CertificateViewController: ScannerDelegate {
         presentedViewController?.dismiss(animated: true, completion: nil)
         switch value {
         case .success(let payload):
-            viewModel?.process(payload: payload, completion: nil)
+            viewModel.process(payload: payload, completion: nil)
         case .failure(let error):
             print("We have an error: \(error)")
         }
