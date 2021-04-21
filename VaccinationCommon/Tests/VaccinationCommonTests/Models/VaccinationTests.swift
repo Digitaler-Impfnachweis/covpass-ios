@@ -12,9 +12,7 @@ import XCTest
 
 class VaccinationTests: XCTestCase {
     func testDecoding() {
-        let url = Bundle.module.url(forResource: "Vaccination", withExtension: "json")!
-        let jsonData = try! String(contentsOf: url, encoding: .utf8).data(using: .utf8)!
-
+        let jsonData = Data.json("Vaccination")
         let sut = try! JSONDecoder().decode(Vaccination.self, from: jsonData)
 
         XCTAssertEqual(sut.targetDisease, "U07.1!")
