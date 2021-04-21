@@ -8,8 +8,8 @@
 import Foundation
 
 public struct VaccinationCertificateList: Codable {
-    var certificates: [ExtendedVaccinationCertificate]
-    var favoriteCertificateId: String?
+    public var certificates: [ExtendedVaccinationCertificate]
+    public var favoriteCertificateId: String?
 
     public init(certificates: [ExtendedVaccinationCertificate], favoriteCertificateId: String? = nil) {
         self.certificates = certificates

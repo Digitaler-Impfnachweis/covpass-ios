@@ -81,7 +81,7 @@ class CoseSign1Parser {
             if case .utf8String(let keyString) = key, case .utf8String(let valueString) = value {
                 result.updateValue(valueString, forKey: keyString)
             } else if case .utf8String(let keyString) = key, case .array(let cborArray) = value {
-                guard let remappedResult = map(cborObject: cborArray.first) else { return nil }
+                let remappedResult = cborArray.map { self.map(cborObject: $0) }
                 result.updateValue(remappedResult, forKey: keyString)
             }
         }

@@ -25,7 +25,6 @@ public struct VaccinationCertificate: Codable {
     public var validFrom: Date?
     public var validUntil: Date?
     public var version: String
-    public var secret: String
 
     enum CodingKeys: String, CodingKey {
         case name
@@ -38,7 +37,6 @@ public struct VaccinationCertificate: Codable {
         case validFrom
         case validUntil
         case version
-        case secret
     }
 
     public init(from decoder: Decoder) throws {
@@ -56,6 +54,5 @@ public struct VaccinationCertificate: Codable {
         let validUntilDateString = try values.decode(String.self, forKey: .validUntil)
         validUntil = DateUtils.vaccinationDateFormatter.date(from: validUntilDateString)
         version = try values.decode(String.self, forKey: .version)
-        secret = try values.decode(String.self, forKey: .secret)
     }
 }

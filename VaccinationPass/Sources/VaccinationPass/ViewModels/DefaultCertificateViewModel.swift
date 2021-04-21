@@ -14,6 +14,7 @@ public class DefaultCertificateViewModel<T: QRCoderProtocol>: CertificateViewMod
     // MARK: - Parser
     
     private let parser: T
+    private let service = VaccinationCertificateService()
     
     public init(parser: T) {
         self.parser = parser
@@ -38,7 +39,14 @@ public class DefaultCertificateViewModel<T: QRCoderProtocol>: CertificateViewMod
     
     public func process(payload: String, completion: ((Error) -> Void)? = nil) {
         guard let decodedPayload = parser.parse(payload, completion: completion) else { return }
-        delegate?.shouldReload()
+        do {
+            let extendedVaccinationCertificate = ExtendedVaccinationCertificate(vaccinationCertificate: decodedPayload, vaccinationQRCodeData: "blabla", validationQRCodeData: nil)
+            let certificateList = VaccinationCertificateList(certificates: [extendedVaccinationCertificate])
+            try service.save(certificateList)
+            delegate?.shouldReload()
+        } catch {
+            print(error)
+        }
     }
     
     public func configure<T: CellConfigutation>(cell: T, at indexPath: IndexPath)  {

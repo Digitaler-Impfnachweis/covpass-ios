@@ -13,7 +13,7 @@ public class Vaccination: Codable {
     public var product: String
     public var manufacturer: String
     public var series: String
-    public var occurence: Date?
+    public var occurrence: Date?
     public var country: String
 
     enum CodingKeys: String, CodingKey {
@@ -22,7 +22,7 @@ public class Vaccination: Codable {
         case product
         case manufacturer
         case series
-        case occurence
+        case occurrence
         case country
     }
 
@@ -33,8 +33,8 @@ public class Vaccination: Codable {
         product = try values.decode(String.self, forKey: .product)
         manufacturer = try values.decode(String.self, forKey: .manufacturer)
         series = try values.decode(String.self, forKey: .series)
-        let occurenceDateString = try values.decode(String.self, forKey: .occurence)
-        occurence = DateUtils.vaccinationDateFormatter.date(from: occurenceDateString)
+        let occurenceDateString = try values.decode(String.self, forKey: .occurrence)
+        occurrence = DateUtils.vaccinationDateFormatter.date(from: occurenceDateString)
         country = try values.decode(String.self, forKey: .country)
     }
 }

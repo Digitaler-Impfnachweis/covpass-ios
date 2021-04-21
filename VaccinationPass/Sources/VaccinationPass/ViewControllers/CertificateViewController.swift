@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import VaccinationCommon
 import VaccinationUI
 import Scanner
 
@@ -147,6 +148,13 @@ extension CertificateViewController: StoryboardInstantiating {
 
 extension CertificateViewController: ViewModelDelegate {
     public func shouldReload() {
-        reloadCollectionView()
+        let service = VaccinationCertificateService()
+        do {
+            let certificateList = try service.fetch()
+            print("Fetched list: \(certificateList.certificates.first)")
+            reloadCollectionView()
+        } catch {
+            print(error)
+        }
     }
 }
