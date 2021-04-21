@@ -51,7 +51,7 @@ public class ProofPopupViewModel: BaseViewModel {
     var secureTextFont: UIFont { UIConstants.Font.regular }
     var tintColor: UIColor { UIConstants.BrandColor.brandAccent }
     
-    // MARK - Popup
+    // MARK - PopupRouter
     
     let height: CGFloat = 650
     let topCornerRadius: CGFloat = 20

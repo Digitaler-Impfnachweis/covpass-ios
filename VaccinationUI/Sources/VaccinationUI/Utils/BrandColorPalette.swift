@@ -41,16 +41,16 @@ open class BrandDefaultColorPalette: BrandColorPalette, Codable {
     private var _onBrandAccent: String = "#FFFFFF"
     open var onBrandAccent: UIColor { UIColor(hexString: _onBrandAccent) }
     
-    private var _onBrandAccent70: String = "#666666"
+    private var _onBrandAccent70: String = "#0B47B7"
     open var onBrandAccent70: UIColor { UIColor(hexString: _onBrandAccent70) }
 
-    private var _onBackground20: String = "#E4E8EC"
+    private var _onBackground20: String = "#E2E2E2"
     open var onBackground20: UIColor { UIColor(hexString: _onBackground20) }
 
-    private var _onBackground50: String = "#94A5B2"
+    private var _onBackground50: String = "#C9E1FE"
     open var onBackground50: UIColor { UIColor(hexString: _onBackground50) }
 
-    private var _onBackground70: String = "#556877"
+    private var _onBackground70: String = "#375FBF"
     open var onBackground70: UIColor { UIColor(hexString: _onBackground70) }
 
     private var _onBackground100: String = "#1C2227"

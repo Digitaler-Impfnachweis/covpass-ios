@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import VaccinationUI
+import VaccinationCommon
 
 /// Establishes the root ViewController to initialize the main window with
 public struct MainRouter {
@@ -25,7 +26,7 @@ public struct MainRouter {
         if UserDefaults.StartupInfo.bool(.onboarding) {
             // User has already seen the onboarding, go straight to the certificate view
             let certificateViewController = CertificateViewController.createFromStoryboard(bundle: Bundle.module)
-            certificateViewController.viewModel = CertificateViewModel()
+            certificateViewController.viewModel = DefaultCertificateViewModel(parser: QRCoder())
             certificateViewController.router = ProofPopupRouter()
             return certificateViewController
         }
