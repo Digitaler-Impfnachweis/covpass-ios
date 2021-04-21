@@ -28,7 +28,6 @@ class CardViewActionTests: XCTestCase {
     func testInit() {
         XCTAssertNotNil(sut.titleLabel)
         XCTAssertNotNil(sut.contentView)
-        XCTAssertNotNil(sut.subtitleLabel)
         XCTAssertNotNil(sut.actionButton)
         XCTAssertNotNil(sut.stateImageView)
     }
@@ -44,8 +43,6 @@ class CardViewActionTests: XCTestCase {
         sut.action = {
             buttonTapped = true
         }
-        // TODO: Figure out why this fails 
-//        sut.actionButton.sendActions(for: .touchUpInside)
         sut.actionButtonPressed(button: UIButton())
         XCTAssertTrue(buttonTapped)
     }

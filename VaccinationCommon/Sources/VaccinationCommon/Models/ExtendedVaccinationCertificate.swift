@@ -14,16 +14,12 @@ public struct ExtendedVaccinationCertificate: Codable {
     /// The raw qr code data of the vaccination certificate
     var vaccinationQRCodeData: String
 
-    /// The validation certificate
-    var validationCertificate: ValidationCertificate?
-
     /// The raw qr code data of the validation certificate
     var validationQRCodeData: String?
 
-    public init(vaccinationCertificate: VaccinationCertificate, vaccinationQRCodeData: String, validationCertificate: ValidationCertificate?, validationQRCodeData: String?) {
+    public init(vaccinationCertificate: VaccinationCertificate, vaccinationQRCodeData: String, validationQRCodeData: String?) {
         self.vaccinationCertificate = vaccinationCertificate
         self.vaccinationQRCodeData = vaccinationQRCodeData
-        self.validationCertificate = validationCertificate
         self.validationQRCodeData = validationQRCodeData
     }
 }
