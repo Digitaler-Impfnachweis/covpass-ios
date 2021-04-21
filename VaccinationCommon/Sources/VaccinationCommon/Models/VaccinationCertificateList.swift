@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct VaccinationCertificateList {
+public struct VaccinationCertificateList: Codable {
     var certificates: [ExtendedVaccinationCertificate]
     var favoriteCertificateId: String?
 
