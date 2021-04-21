@@ -20,7 +20,7 @@ public class ProofPopupViewController: BottomPopupViewController {
     // MARK: - Public Properties
     
     public var viewModel: BaseViewModel?
-    public var router: Popup?
+    public var router: PopupRouter?
 
     // MARK: - Internal Properties
 

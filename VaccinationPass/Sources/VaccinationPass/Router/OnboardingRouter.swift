@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import VaccinationUI
+import VaccinationCommon
 
 public struct OnboardingRouter {
     // MARK: - Public Vardiables
@@ -27,8 +28,8 @@ extension OnboardingRouter: Router {
         UserDefaults.StartupInfo.set(true, forKey: .onboarding)
 
         let certificateViewController = CertificateViewController.createFromStoryboard(bundle: Bundle.module)
-        let viewModel = CertificateViewModel()
-        viewModel.stateDelegate = certificateViewController
+        let viewModel = DefaultCertificateViewModel(parser: QRCoder())
+        viewModel.delegate = certificateViewController
         certificateViewController.viewModel = viewModel
         certificateViewController.router = ProofPopupRouter()
         windowDelegate?.update(rootViewController: certificateViewController)

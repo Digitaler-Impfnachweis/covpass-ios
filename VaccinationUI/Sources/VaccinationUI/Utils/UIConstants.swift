@@ -31,6 +31,11 @@ open class UIConstants {
         public static let SettingsImage = "ega_settings_image"
         public static let StatusFull = "status_full"
         public static let StatusPartial = "status_partial"
+        public static let HelpIcon = "ega_help"
+        public static let NoCertificateImage = "no_vaccine_image"
+        public static let StarEmpty = "star_48px"
+        public static let CompletnessImage = "ega_prevention_label"
+        public static let HalfShield = "shield_lefthalf_fill"
     }
     
     open class BrandColor {
@@ -72,6 +77,7 @@ open class UIConstants {
         public static let semiBold = UIFont.ibmPlexSansSemiBold(with: 14) ?? UIFont.systemFont(ofSize: 14)
         public static let semiBoldLarger = UIFont.ibmPlexSansSemiBold(with: 16) ?? UIFont.systemFont(ofSize: 16)
         public static let onboardingHeadlineFont = UIFont.ibmPlexSansSemiBold(with: 28) ?? UIFont.systemFont(ofSize: 28)
+        public static let subHeadlineFont = UIFont.ibmPlexSansSemiBold(with: 18) ?? UIFont.systemFont(ofSize: 18)
         public static let startOnboardingHeadlineFont = UIFont.ibmPlexSansSemiBold(with: 34) ?? UIFont.systemFont(ofSize: 34)
         public static let startParagraphRegular = UIFont.ibmPlexSansRegular(with: 18) ?? UIFont.systemFont(ofSize: 18)
     }

@@ -11,7 +11,7 @@ public class ScanPopupViewModel {
     
     public init() {}
     
-    // MARK - Popup
+    // MARK - PopupRouter
     
     let height: CGFloat = UIScreen.main.bounds.height - 100
     let topCornerRadius: CGFloat = 20
