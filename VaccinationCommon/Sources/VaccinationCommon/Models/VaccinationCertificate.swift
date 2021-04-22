@@ -55,4 +55,33 @@ public struct VaccinationCertificate: Codable {
         validUntil = DateUtils.vaccinationDateFormatter.date(from: validUntilDateString)
         version = try values.decode(String.self, forKey: .version)
     }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(name, forKey: .name)
+        if let birthdate = birthDate {
+            let dateString = DateUtils.vaccinationDateFormatter.string(from: birthdate)
+            try container.encode(dateString, forKey: .birthDate)
+        }
+        try container.encode(identifier, forKey: .identifier)
+        try container.encode(sex, forKey: .sex)
+        try container.encode(vaccination, forKey: .vaccination)
+        try container.encode(issuer, forKey: .issuer)
+        try container.encode(id, forKey: .id)
+        if let validFrom = validFrom {
+            let dateString = DateUtils.vaccinationDateFormatter.string(from: validFrom)
+            try container.encode(dateString, forKey: .validFrom)
+        }
+        if let validUntil = validUntil {
+            let dateString = DateUtils.vaccinationDateFormatter.string(from: validUntil)
+            try container.encode(dateString, forKey: .validUntil)
+        }
+        try container.encode(version, forKey: .version)
+    }
+
+    
+    public func isComplete() -> Bool {
+        guard let series = vaccination.last?.series.components(separatedBy: "/"), series.count == 2 else { return false }
+        return series[0] == series[1]
+    }
 }

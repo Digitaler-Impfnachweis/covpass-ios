@@ -54,4 +54,8 @@ class MockCertificateViewModel: CertificateViewModel {
     var headlineButtonImage: UIImage?{
         nil
     }
+
+    func loadCertificatesConfiguration(completion: ((Error) -> Void)?) {
+        certificates = MockCellConfiguration.noCertificateConfiguration()
+    }
 }

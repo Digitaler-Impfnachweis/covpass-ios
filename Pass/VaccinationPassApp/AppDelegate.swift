@@ -4,7 +4,9 @@
 //  Copyright © 2021 IBM. All rights reserved.
 //
 
+import Keychain
 import UIKit
+import VaccinationCommon
 import VaccinationUI
 import VaccinationPass
 
@@ -14,6 +16,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        try? clearKeychainIfWillUnistall()
         try? UIFont.loadCustomFonts()
         window = UIWindow(frame: UIScreen.main.bounds)
         var router = MainRouter()
@@ -22,6 +25,13 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.rootViewController = router.rootViewController()
         self.window?.makeKeyAndVisible()
         return true
+    }
+
+    private func clearKeychainIfWillUnistall() throws {
+        if !UserDefaults.StartupInfo.bool(.appInstalled) {
+            UserDefaults.StartupInfo.set(true, forKey: .appInstalled)
+            try Keychain.deletePassword(for: KeychainConfiguration.vaccinationCertificateKey)
+        }
     }
 }
 

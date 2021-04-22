@@ -37,4 +37,18 @@ public class Vaccination: Codable {
         occurrence = DateUtils.vaccinationDateFormatter.date(from: occurenceDateString)
         country = try values.decode(String.self, forKey: .country)
     }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(targetDisease, forKey: .targetDisease)
+        try container.encode(vaccineCode, forKey: .vaccineCode)
+        try container.encode(product, forKey: .product)
+        try container.encode(manufacturer, forKey: .manufacturer)
+        try container.encode(series, forKey: .series)
+        if let occurrence = occurrence {
+            let occurrenceDate = DateUtils.vaccinationDateFormatter.string(from: occurrence)
+            try container.encode(occurrenceDate, forKey: .occurrence)
+        }
+        try container.encode(country, forKey: .country)
+    }
 }

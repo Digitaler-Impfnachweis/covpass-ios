@@ -22,7 +22,7 @@ public class DefaultCertificateViewModel<T: QRCoderProtocol>: CertificateViewMod
     
     // MARK: - HeadlineViewModel
     
-    public var headlineTitle =  "vaccination_certificate_list_title".localized
+    public var headlineTitle = "vaccination_certificate_list_title".localized
     public var headlineButtonInsets = UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 0)
     public var headlineFont: UIFont = UIConstants.Font.subHeadlineFont
     public var headlineButtonImage = UIImage(named: UIConstants.IconName.HelpIcon, in: UIConstants.bundle, compatibleWith: nil)
@@ -30,22 +30,41 @@ public class DefaultCertificateViewModel<T: QRCoderProtocol>: CertificateViewMod
     // MARK: - CertificateViewModel
     
     public weak var delegate: ViewModelDelegate?
-    public var certificates: [BaseCertifiateConfiguration] = [
-        noCertificateConfiguration(),
-        mockHalfCertificateConfiguration(),
-        mockFullCertificateConfiguration()
-    ]
+    public var certificates = [BaseCertifiateConfiguration]()
     public var addButtonImage = UIImage(named: UIConstants.IconName.PlusIcon, in: UIConstants.bundle, compatibleWith: nil)
     
     public func process(payload: String, completion: ((Error) -> Void)? = nil) {
         guard let decodedPayload = parser.parse(payload, completion: completion) else { return }
         do {
-            let extendedVaccinationCertificate = ExtendedVaccinationCertificate(vaccinationCertificate: decodedPayload, vaccinationQRCodeData: "blabla", validationQRCodeData: nil)
-            let certificateList = VaccinationCertificateList(certificates: [extendedVaccinationCertificate])
-            try service.save(certificateList)
+            let extendedVaccinationCertificate = ExtendedVaccinationCertificate(vaccinationCertificate: decodedPayload, vaccinationQRCodeData: payload, validationQRCodeData: nil)
+            var certificateList = try service.fetch()
+            if certificateList.certificates.allSatisfy({ $0.vaccinationQRCodeData != payload }) {
+                certificateList.certificates.append(extendedVaccinationCertificate)
+                try service.save(certificateList)
+                certificates.append(getCertficateConfiguration(for: extendedVaccinationCertificate.vaccinationCertificate))
+            } else {
+                completion?(QRCodeError.qrCodeExists)
+            }
+        } catch {
+            do {
+                let extendedVaccinationCertificate = ExtendedVaccinationCertificate(vaccinationCertificate: decodedPayload, vaccinationQRCodeData: payload, validationQRCodeData: nil)
+                let certificateList = VaccinationCertificateList(certificates: [extendedVaccinationCertificate])
+                try service.save(certificateList)
+                certificates = [getCertficateConfiguration(for: extendedVaccinationCertificate.vaccinationCertificate)]
+            } catch {
+                completion?(error)
+            }
+        }
+        delegate?.shouldReload()
+    }
+
+    public func loadCertificatesConfiguration() {
+        do {
+            let certificateList = try service.fetch()
+            certificates = certificateList.certificates.map { getCertficateConfiguration(for: $0.vaccinationCertificate) }
             delegate?.shouldReload()
         } catch {
-            print(error)
+            certificates = [noCertificateConfiguration()]
         }
     }
     
@@ -66,15 +85,19 @@ public class DefaultCertificateViewModel<T: QRCoderProtocol>: CertificateViewMod
     }
     
     // MARK: - Configurations
-    
-    private static func mockFullCertificateConfiguration() -> QRCertificateConfiguration {
+
+    private func getCertficateConfiguration(for certificate: VaccinationCertificate) -> QRCertificateConfiguration {
+        certificate.isComplete() ? fullCertificateConfiguration(for: certificate) : halfCertificateConfiguration(for: certificate)
+    }
+
+    private func fullCertificateConfiguration(for certificate: VaccinationCertificate) -> QRCertificateConfiguration {
         let image = UIImage(named: UIConstants.IconName.StarEmpty, in: UIConstants.bundle, compatibleWith: nil)
         let stateImage = UIImage(named: UIConstants.IconName.CompletnessImage, in: UIConstants.bundle, compatibleWith: nil)
         let headerImage = UIImage(named: UIConstants.IconName.StarEmpty, in: UIConstants.bundle, compatibleWith: nil)
-        let qrViewConfiguration = QrViewConfiguration(tintColor: .white, qrValue: NSUUID().uuidString, qrTitle: nil, qrSubtitle: "Gultig bis 23.02.2023")
+        let qrViewConfiguration = QrViewConfiguration(tintColor: .white, qrValue: NSUUID().uuidString, qrTitle: nil, qrSubtitle: nil)
         return QRCertificateConfiguration(
             title: "Covid-19 Nachweis",
-            subtitle: "Maximilian Mustermann",
+            subtitle: certificate.name,
             image: image,
             stateImage: stateImage,
             stateTitle: "Impfungen Anzeigen",
@@ -85,14 +108,14 @@ public class DefaultCertificateViewModel<T: QRCoderProtocol>: CertificateViewMod
             qrViewConfiguration: qrViewConfiguration)
     }
 
-    private static func mockHalfCertificateConfiguration() -> QRCertificateConfiguration {
+    private func halfCertificateConfiguration(for certificate: VaccinationCertificate) -> QRCertificateConfiguration {
         let image = UIImage(named: UIConstants.IconName.StarEmpty, in: UIConstants.bundle, compatibleWith: nil)
         let stateImage = UIImage(named: UIConstants.IconName.HalfShield, in: UIConstants.bundle, compatibleWith: nil)
         let headerImage = UIImage(named: UIConstants.IconName.StarEmpty, in: UIConstants.bundle, compatibleWith: nil)
-        let qrViewConfiguration = QrViewConfiguration(tintColor: .black, qrValue: NSUUID().uuidString, qrTitle: "Vorlaüfiger Impfnachweis", qrSubtitle: "Gultig bis 23.02.2023")
+        let qrViewConfiguration = QrViewConfiguration(tintColor: .black, qrValue: NSUUID().uuidString, qrTitle: "Vorlaüfiger Impfnachweis", qrSubtitle: nil)
         return QRCertificateConfiguration(
             title: "Covid-19 Nachweis",
-            subtitle: "Maximilian Mustermann",
+            subtitle: certificate.name,
             image: image,
             stateImage: stateImage,
             stateTitle: "Impfungen Anzeigen",
@@ -103,7 +126,7 @@ public class DefaultCertificateViewModel<T: QRCoderProtocol>: CertificateViewMod
             qrViewConfiguration: qrViewConfiguration)
     }
     
-    private static func noCertificateConfiguration() -> NoCertifiateConfiguration {
+    private func noCertificateConfiguration() -> NoCertifiateConfiguration {
         let image = UIImage(named: UIConstants.IconName.NoCertificateImage, in: UIConstants.bundle, compatibleWith: nil)
         return NoCertifiateConfiguration(
             title:"vaccination_no_certificate_card_title".localized,

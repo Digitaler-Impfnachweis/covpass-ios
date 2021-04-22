@@ -30,4 +30,16 @@ public class ExtendedVaccination: Vaccination {
         nextDate = DateUtils.vaccinationDateFormatter.date(from: nextDateString)
         try super.init(from: decoder)
     }
+
+    public override func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(lotNumber, forKey: .lotNumber)
+        try container.encode(location, forKey: .location)
+        try container.encode(performer, forKey: .performer)
+        if let nextDate = nextDate {
+            let date = DateUtils.vaccinationDateFormatter.string(from: nextDate)
+            try container.encode(date, forKey: .nextDate)
+        }
+        try super.encode(to: encoder)
+    }
 }

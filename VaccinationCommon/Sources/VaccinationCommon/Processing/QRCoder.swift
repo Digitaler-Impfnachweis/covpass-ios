@@ -9,6 +9,10 @@ import Compression
 import Foundation
 import SwiftCBOR
 
+public enum QRCodeError: Error {
+    case qrCodeExists
+}
+
 public class QRCoder: QRCoderProtocol {
     private let base45Encoder = Base45Encoder()
     private let cose1SignEncoder = CoseSign1Parser()

@@ -23,11 +23,15 @@ public class CertificateViewController: UIViewController {
     
     public var viewModel: CertificateViewModel!
     public var router: PopupRouter?
+
+    // MARK: - Private properties
+    private let service = VaccinationCertificateService()
     
-    // MARK: - Fifecycle
+    // MARK: - Lifecycle
     
     override public func viewDidLoad() {
         super.viewDidLoad()
+        viewModel.loadCertificatesConfiguration()
         setupHeaderView()
         setupActionButton()
         setupCollecttionView()
@@ -148,13 +152,6 @@ extension CertificateViewController: StoryboardInstantiating {
 
 extension CertificateViewController: ViewModelDelegate {
     public func shouldReload() {
-        let service = VaccinationCertificateService()
-        do {
-            let certificateList = try service.fetch()
-            print("Fetched list: \(certificateList.certificates.first)")
-            reloadCollectionView()
-        } catch {
-            print(error)
-        }
+        reloadCollectionView()
     }
 }

@@ -7,6 +7,6 @@
 
 import Foundation
 
-struct KeychainConfiguration {
-    static let vaccinationCertificateKey = "VaccinationCertificateList"
+public struct KeychainConfiguration {
+    public static let vaccinationCertificateKey = "VaccinationCertificateList"
 }
