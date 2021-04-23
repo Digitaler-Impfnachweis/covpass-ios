@@ -279,8 +279,8 @@ public class CustomToolbarView: XibView {
         button.tintColor = UIConstants.BrandColor.onBackground70
 
         addSubview(button)
-        button.centerX(of: self)
-        button.centerY(of: self)
+        button.centerX(of: layoutMarginsGuide)
+        button.pinEdges([.top, .bottom], to: layoutMarginsGuide)
         button.setConstant(height: UIConstants.Size.CancelButtonSize)
         button.setConstant(width: UIConstants.Size.CancelButtonSize)
     }
@@ -291,8 +291,8 @@ public class CustomToolbarView: XibView {
         button.isEnabled = false
 
         addSubview(button)
-        button.centerX(of: self)
-        button.centerY(of: self)
+        button.centerX(of: layoutMarginsGuide)
+        button.pinEdges([.top, .bottom], to: layoutMarginsGuide)
         if button is PrimaryIconButtonContainer {
             button.setConstant(height: UIConstants.Size.MiddleButtonSize)
             button.setConstant(width: UIConstants.Size.MiddleButtonSize)
@@ -303,8 +303,8 @@ public class CustomToolbarView: XibView {
         button.cornerRadius = UIConstants.Size.ButtonCornerRadius
         button.shadowColor = UIConstants.BrandColor.primaryButtonShadow
         addSubview(button)
-        button.centerX(of: self)
-        button.centerY(of: self)
+        button.centerX(of: layoutMarginsGuide)
+        button.pinEdges([.top, .bottom], to: layoutMarginsGuide)
         if button is PrimaryIconButtonContainer {
             button.setConstant(height: UIConstants.Size.MiddleButtonSize)
             button.setConstant(width: UIConstants.Size.MiddleButtonSize)
@@ -317,8 +317,8 @@ public class CustomToolbarView: XibView {
         button.shadowColor = UIColor.clear
 
         addSubview(button)
-        button.centerX(of: self)
-        button.centerY(of: self)
+        button.centerX(of: layoutMarginsGuide)
+        button.pinEdges([.top, .bottom], to: layoutMarginsGuide)
         if button is PrimaryIconButtonContainer {
             button.setConstant(height: UIConstants.Size.MiddleButtonSize)
             button.setConstant(width: UIConstants.Size.MiddleButtonSize)

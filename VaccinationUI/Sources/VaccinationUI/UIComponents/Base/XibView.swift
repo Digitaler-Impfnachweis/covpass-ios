@@ -80,12 +80,12 @@ open class XibView: UIView, Compoundable {
 
     private func xibSetup() {
         // load view from xib file and
-        // add as subview with autoresizing mask for autolayout constraints
+        // add as subview with pinned edges to layoutMarginsGuide for autolayout constraints
         // ATTENTION: don't call this method twice in a view lifecycle
         guard let view = loadViewFromNib() else { return }
         view.frame = bounds
-        view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         addSubview(view)
+        view.pinEdges([.all], to: layoutMarginsGuide, margins: .zero)
         contentView = view
     }
 

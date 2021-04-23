@@ -65,7 +65,6 @@
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </stackView>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="ELK-m8-ONR" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="24" id="6ns-Il-95X"/>
                 <constraint firstAttribute="bottom" secondItem="ELK-m8-ONR" secondAttribute="bottom" constant="24" id="D16-Ga-qh1"/>

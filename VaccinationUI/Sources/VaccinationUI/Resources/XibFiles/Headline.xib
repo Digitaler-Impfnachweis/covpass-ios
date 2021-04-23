@@ -18,13 +18,12 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" preservesSuperviewLayoutMargins="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DBZ-k3-RZg">
-                    <rect key="frame" x="24" y="12" width="233" height="63"/>
+                    <rect key="frame" x="16" y="0.0" width="249" height="91"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstAttribute="trailingMargin" secondItem="DBZ-k3-RZg" secondAttribute="trailing" id="KrU-qn-fMC"/>
                 <constraint firstItem="DBZ-k3-RZg" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="topMargin" id="PuL-Ji-HhJ"/>
@@ -32,7 +31,7 @@
                 <constraint firstAttribute="bottomMargin" secondItem="DBZ-k3-RZg" secondAttribute="bottom" id="s5U-ap-fQE"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <edgeInsets key="layoutMargins" top="12" left="24" bottom="16" right="24"/>
+            <edgeInsets key="layoutMargins" top="0.0" left="0.0" bottom="0.0" right="0.0"/>
             <point key="canvasLocation" x="-22.5" y="-236.5"/>
         </view>
     </objects>

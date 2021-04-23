@@ -74,13 +74,6 @@ public class ConfirmView: XibView {
         }
     }
 
-//    public override var margins: [Margin] {
-//        return [
-//            RelatedViewMargin(constant: 40, relatedViewType: Headline.self),
-//            PositionMargin(constant: 24, position: -1, type: .bottom)
-//        ]
-//    }
-
     // MARK: - Init
 
     /**

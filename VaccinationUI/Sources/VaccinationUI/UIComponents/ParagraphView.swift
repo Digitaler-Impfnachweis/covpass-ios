@@ -56,15 +56,6 @@ public class ParagraphView: XibView {
         }
     }
 
-//    public override var margins: [Margin] {
-//        return [
-//            RelatedViewMargin(constant: 40, relatedViewType: PrimaryButtonContainer.self),
-//            RelatedViewMargin(constant: 24, relatedViewType: ParagraphView.self),
-//            RelatedViewMargin(constant: 40, relatedViewType: Headline.self),
-//            PositionMargin(constant: topMargin, position: 0, type: .top),
-//        ]
-//    }
-
     required init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
@@ -90,6 +81,7 @@ public class ParagraphView: XibView {
     }
 
     internal func setupView() {
+        layoutMargins = .init(top: 0, left: 24, bottom: 0, right: 24)
         title.font = UIConstants.Font.semiBold
         title.adjustsFontForContentSizeCategory()
         title.textColor = UIConstants.BrandColor.onBackground100

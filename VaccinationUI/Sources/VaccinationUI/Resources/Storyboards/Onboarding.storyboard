@@ -28,15 +28,12 @@
                                                 <subviews>
                                                     <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="243" translatesAutoresizingMaskIntoConstraints="NO" id="c3h-xY-XBF" customClass="ConfirmView" customModule="VaccinationUI">
                                                         <rect key="frame" x="0.0" y="0.0" width="398" height="243"/>
-                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     </view>
                                                     <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="60" translatesAutoresizingMaskIntoConstraints="NO" id="mQR-L5-HeH" customClass="Headline" customModule="VaccinationUI">
                                                         <rect key="frame" x="0.0" y="243" width="398" height="60"/>
-                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     </view>
                                                     <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="cCA-Hh-fFF" customClass="ParagraphView" customModule="VaccinationUI">
                                                         <rect key="frame" x="0.0" y="303" width="398" height="128"/>
-                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     </view>
                                                 </subviews>
                                             </stackView>
@@ -246,42 +243,53 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" placeholderIntrinsicWidth="240" placeholderIntrinsicHeight="12" translatesAutoresizingMaskIntoConstraints="NO" id="MD3-T0-j5S" customClass="DotPageIndicator" customModule="VaccinationUI">
-                                <rect key="frame" x="87" y="770" width="240" height="12"/>
-                                <color key="backgroundColor" red="0.023529411760000001" green="0.37254901959999998" blue="0.76862745099999996" alpha="1" colorSpace="calibratedRGB"/>
-                            </view>
-                            <view contentMode="scaleToFill" placeholderIntrinsicWidth="240" placeholderIntrinsicHeight="56" translatesAutoresizingMaskIntoConstraints="NO" id="DcZ-ry-4Hc" customClass="CustomToolbarView" customModule="VaccinationUI">
-                                <rect key="frame" x="0.0" y="802" width="414" height="60"/>
-                                <color key="backgroundColor" red="0.023529411760000001" green="0.37254901959999998" blue="0.76862745099999996" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="p1k-CI-PI8"/>
-                                </constraints>
-                            </view>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ELU-e8-hMC">
-                                <rect key="frame" x="0.0" y="44" width="414" height="726"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="730"/>
                                 <connections>
                                     <segue destination="h9P-jE-8JB" kind="embed" id="ip2-dZ-nAW"/>
                                 </connections>
                             </containerView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C1A-5U-JZx" userLabel="Bottom Container View">
+                                <rect key="frame" x="0.0" y="774" width="414" height="88"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="P8K-We-hUP">
+                                        <rect key="frame" x="0.0" y="15" width="414" height="73"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" verticalHuggingPriority="1000" placeholderIntrinsicWidth="240" placeholderIntrinsicHeight="12" translatesAutoresizingMaskIntoConstraints="NO" id="MD3-T0-j5S" customClass="DotPageIndicator" customModule="VaccinationUI">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="12"/>
+                                                <color key="backgroundColor" red="0.023529411760000001" green="0.37254901959999998" blue="0.76862745099999996" alpha="1" colorSpace="calibratedRGB"/>
+                                            </view>
+                                            <view contentMode="scaleToFill" placeholderIntrinsicWidth="240" placeholderIntrinsicHeight="56" translatesAutoresizingMaskIntoConstraints="NO" id="DcZ-ry-4Hc" customClass="CustomToolbarView" customModule="VaccinationUI">
+                                                <rect key="frame" x="0.0" y="17" width="414" height="56"/>
+                                                <color key="backgroundColor" red="0.023529411760000001" green="0.37254901959999998" blue="0.76862745099999996" alpha="1" colorSpace="calibratedRGB"/>
+                                            </view>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="P8K-We-hUP" firstAttribute="top" secondItem="C1A-5U-JZx" secondAttribute="topMargin" id="3xD-6z-e3c"/>
+                                    <constraint firstItem="P8K-We-hUP" firstAttribute="leading" secondItem="C1A-5U-JZx" secondAttribute="leadingMargin" id="9Sa-iE-3Rl"/>
+                                    <constraint firstAttribute="trailingMargin" secondItem="P8K-We-hUP" secondAttribute="trailing" id="Tee-Bb-bhJ"/>
+                                    <constraint firstAttribute="bottomMargin" secondItem="P8K-We-hUP" secondAttribute="bottom" id="f63-uw-POE"/>
+                                </constraints>
+                                <edgeInsets key="layoutMargins" top="15" left="0.0" bottom="0.0" right="0.0"/>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="hN0-zA-OAK"/>
                         <color key="backgroundColor" red="0.97647058819999999" green="0.97647058819999999" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="hN0-zA-OAK" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="DcZ-ry-4Hc" secondAttribute="trailing" id="2FE-ZW-UG7"/>
-                            <constraint firstItem="DcZ-ry-4Hc" firstAttribute="centerX" secondItem="uDg-Qp-d0d" secondAttribute="centerX" id="Hmd-di-afl"/>
-                            <constraint firstItem="hN0-zA-OAK" firstAttribute="bottom" secondItem="DcZ-ry-4Hc" secondAttribute="bottom" id="LWe-kC-Q8V"/>
+                            <constraint firstItem="C1A-5U-JZx" firstAttribute="top" secondItem="ELU-e8-hMC" secondAttribute="bottom" id="AfM-OH-orp"/>
                             <constraint firstItem="ELU-e8-hMC" firstAttribute="top" secondItem="hN0-zA-OAK" secondAttribute="top" id="M2a-Au-0zb"/>
-                            <constraint firstItem="MD3-T0-j5S" firstAttribute="centerX" secondItem="uDg-Qp-d0d" secondAttribute="centerX" id="S8M-ks-Rbl"/>
-                            <constraint firstItem="MD3-T0-j5S" firstAttribute="top" secondItem="ELU-e8-hMC" secondAttribute="bottom" id="SCP-6j-oIh"/>
-                            <constraint firstItem="DcZ-ry-4Hc" firstAttribute="leading" secondItem="hN0-zA-OAK" secondAttribute="leading" id="Urp-rg-Vqe"/>
-                            <constraint firstItem="MD3-T0-j5S" firstAttribute="bottom" secondItem="DcZ-ry-4Hc" secondAttribute="top" constant="-20" id="lvz-TX-f1q"/>
+                            <constraint firstItem="C1A-5U-JZx" firstAttribute="leading" secondItem="hN0-zA-OAK" secondAttribute="leading" id="W9w-cC-Ew9"/>
+                            <constraint firstItem="hN0-zA-OAK" firstAttribute="trailing" secondItem="C1A-5U-JZx" secondAttribute="trailing" id="reh-dT-FfA"/>
+                            <constraint firstItem="hN0-zA-OAK" firstAttribute="bottom" secondItem="C1A-5U-JZx" secondAttribute="bottom" id="vwc-OZ-nob"/>
                             <constraint firstItem="ELU-e8-hMC" firstAttribute="leading" secondItem="hN0-zA-OAK" secondAttribute="leading" id="wXC-8r-AHj"/>
                             <constraint firstItem="ELU-e8-hMC" firstAttribute="trailing" secondItem="hN0-zA-OAK" secondAttribute="trailing" id="yOg-YL-kfj"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="pageIndicator" destination="MD3-T0-j5S" id="RBg-Gi-C00"/>
-                        <outlet property="startButtonBottomConstraint" destination="LWe-kC-Q8V" id="Fho-9D-56c"/>
                         <outlet property="toolbarView" destination="DcZ-ry-4Hc" id="yoI-d3-hLT"/>
                     </connections>
                 </viewController>
@@ -316,22 +324,15 @@
                                         <subviews>
                                             <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="60" translatesAutoresizingMaskIntoConstraints="NO" id="aqp-ex-1mg" customClass="Headline" customModule="VaccinationUI">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                             </view>
                                             <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="u6z-A1-sKt" customClass="ParagraphView" customModule="VaccinationUI">
                                                 <rect key="frame" x="0.0" y="60" width="414" height="128"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                             </view>
                                             <view contentMode="scaleToFill" ambiguous="YES" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="243" translatesAutoresizingMaskIntoConstraints="NO" id="8j1-Sz-NcG" customClass="ConfirmView" customModule="VaccinationUI">
                                                 <rect key="frame" x="0.0" y="188" width="414" height="243"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                             </view>
                                             <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zgZ-oc-hQh" customClass="SecureContentView" customModule="VaccinationUI">
                                                 <rect key="frame" x="0.0" y="431" width="414" height="100"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="100" id="Aop-u4-PnU"/>
-                                                </constraints>
                                             </view>
                                         </subviews>
                                     </stackView>
