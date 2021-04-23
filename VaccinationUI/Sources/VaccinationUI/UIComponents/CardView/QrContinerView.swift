@@ -9,8 +9,7 @@ import Foundation
 import UIKit
 
 @IBDesignable
-public class QrContinerView: MarginableXibView {
-    
+public class QrContinerView: XibView {
     // MARK: - IBInspectable
     
     @IBInspectable public var cornerRadius: CGFloat = 0 {

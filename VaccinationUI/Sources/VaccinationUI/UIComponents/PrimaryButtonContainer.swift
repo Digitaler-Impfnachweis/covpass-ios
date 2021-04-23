@@ -9,7 +9,7 @@ import UIKit
 
 @IBDesignable
 /// A custom button with support for rounded corners, shadow and animation
-public class PrimaryButtonContainer: MarginableXibView, Textable {
+public class PrimaryButtonContainer: XibView, Textable {
     @IBOutlet var dotPulseActivityView: DotPulseActivityIndicator!
 
     @IBOutlet public var textableView: UILabel!

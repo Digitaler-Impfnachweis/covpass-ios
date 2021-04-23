@@ -9,8 +9,7 @@ import Foundation
 import UIKit
 
 @IBDesignable
-public class CardViewAction: MarginableXibView {
-    
+public class CardViewAction: XibView {
     // MARK: - Outlets
     
     @IBOutlet public var titleLabel: UILabel!

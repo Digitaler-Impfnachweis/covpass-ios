@@ -9,16 +9,12 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ConfirmView" customModule="VaccinationUI">
             <connections>
-                <outlet property="bottomLayoutConstraint" destination="D16-Ga-qh1" id="Y8W-Xu-mlc"/>
                 <outlet property="detailLabel" destination="JZg-Ix-P1L" id="DqF-PX-SVN"/>
                 <outlet property="imageHeightConstraint" destination="fCy-NC-FDe" id="iOZ-PZ-pQy"/>
                 <outlet property="imageView" destination="Pxz-HK-l9D" id="WY2-C7-sde"/>
                 <outlet property="imageWidthConstraint" destination="bLK-kT-9RD" id="CgJ-Ff-mlq"/>
                 <outlet property="infoLabel" destination="RNe-aK-G62" id="HO9-75-Cnz"/>
-                <outlet property="leftLayoutConstraint" destination="6ns-Il-95X" id="udN-Gp-dQH"/>
-                <outlet property="rightLayoutConstraint" destination="fHO-k5-Cfe" id="WRC-Zh-ACU"/>
                 <outlet property="stackView" destination="ELK-m8-ONR" id="4S6-u1-vuM"/>
-                <outlet property="topLayoutConstraint" destination="c18-eG-97S" id="FnC-ZQ-iZq"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>

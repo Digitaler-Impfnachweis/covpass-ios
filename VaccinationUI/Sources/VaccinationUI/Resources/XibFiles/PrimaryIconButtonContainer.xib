@@ -1,26 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PrimaryIconButtonContainer" customModule="VaccinationUI">
             <connections>
-                <outlet property="bottomLayoutConstraint" destination="5SU-sV-cNA" id="yoL-SM-0uh"/>
                 <outlet property="bottomTitleInsetConstraint" destination="qT1-Fc-YEn" id="Ve8-ap-z4f"/>
                 <outlet property="dotPulseActivityView" destination="xrX-NC-KEl" id="nER-DU-DNP"/>
                 <outlet property="heightConstraint" destination="246-dv-Ngk" id="iMN-Jf-uhI"/>
                 <outlet property="icon" destination="s5P-D4-2rh" id="vbP-QB-Mwr"/>
                 <outlet property="innerButton" destination="8eZ-Kv-fwO" id="7VM-Qt-M3D"/>
                 <outlet property="leadingTitleInsetConstraint" destination="ZTF-3x-xM4" id="yMx-I1-EfM"/>
-                <outlet property="leftLayoutConstraint" destination="PoB-0f-kjg" id="b1U-4a-Okw"/>
-                <outlet property="rightLayoutConstraint" destination="U9o-6X-meW" id="yVj-ie-AUc"/>
                 <outlet property="textableView" destination="vLl-lS-NtW" id="svb-Ek-kBx"/>
-                <outlet property="topLayoutConstraint" destination="pOR-gc-CfU" id="7II-Ps-t3y"/>
                 <outlet property="topTitleInsetConstraint" destination="JGe-NT-bhI" id="UAk-EE-P77"/>
                 <outlet property="trailingTitleInsetConstraint" destination="6sd-J7-KYo" id="8SA-Te-EBk"/>
             </connections>

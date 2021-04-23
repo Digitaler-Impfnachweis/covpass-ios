@@ -9,8 +9,7 @@ import Foundation
 import UIKit
 
 @IBDesignable
-public class InfoHeaderView: MarginableXibView {
-    
+public class InfoHeaderView: XibView {
     // MARK: - Outlets
     
     @IBOutlet public var headline: UILabel!
@@ -27,11 +26,11 @@ public class InfoHeaderView: MarginableXibView {
     
     public var leftMargin: CGFloat = 0
     
-    public override var margins: [Margin] {
-        return [
-            PositionMargin(constant: leftMargin, position: -1, type: .left)
-        ]
-    }
+//    public override var margins: [Margin] {
+//        return [
+//            PositionMargin(constant: leftMargin, position: -1, type: .left)
+//        ]
+//    }
     
     // MARK: - IBAction
     

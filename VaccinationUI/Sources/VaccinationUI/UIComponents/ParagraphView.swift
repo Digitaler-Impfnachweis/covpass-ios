@@ -8,15 +8,10 @@
 import UIKit
 
 @IBDesignable
-public class ParagraphView: MarginableXibView {
+public class ParagraphView: XibView {
     @IBOutlet public var stackView: UIStackView!
     @IBOutlet public var title: UILabel!
     @IBOutlet public var body: LinkTextView!
-
-    internal static let BodyLeftInset: CGFloat = -5
-
-    public var topMargin: CGFloat = 25
-    public var marginToSecondaryButton: CGFloat = 40
 
     public var titleText: String? {
         didSet {
@@ -61,16 +56,16 @@ public class ParagraphView: MarginableXibView {
         }
     }
 
-    public override var margins: [Margin] {
-        return [
-            RelatedViewMargin(constant: 40, relatedViewType: PrimaryButtonContainer.self),
-            RelatedViewMargin(constant: 24, relatedViewType: ParagraphView.self),
-            RelatedViewMargin(constant: 40, relatedViewType: Headline.self),
-            PositionMargin(constant: topMargin, position: 0, type: .top),
-        ]
-    }
+//    public override var margins: [Margin] {
+//        return [
+//            RelatedViewMargin(constant: 40, relatedViewType: PrimaryButtonContainer.self),
+//            RelatedViewMargin(constant: 24, relatedViewType: ParagraphView.self),
+//            RelatedViewMargin(constant: 40, relatedViewType: Headline.self),
+//            PositionMargin(constant: topMargin, position: 0, type: .top),
+//        ]
+//    }
 
-    override required init(frame: CGRect) {
+    required init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
     }

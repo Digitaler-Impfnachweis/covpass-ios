@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 @IBDesignable
-public class CardViewHeader: MarginableXibView {
+public class CardViewHeader: XibView {
     // MARK: - Outlets
 
     @IBOutlet public var subtitleLabel: UILabel!

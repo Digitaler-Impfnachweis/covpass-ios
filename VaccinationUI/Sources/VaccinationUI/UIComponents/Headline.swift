@@ -8,7 +8,7 @@
 import UIKit
 
 @IBDesignable
-public class Headline: MarginableXibView, Textable {
+public class Headline: XibView, Textable {
     @IBOutlet public var textableView: UILabel!
 
     @IBInspectable public var isCentered: Bool = false {
@@ -40,12 +40,12 @@ public class Headline: MarginableXibView, Textable {
 
     @IBInspectable public var needsTextAlignmentCenter: Bool = false
 
-    public override var margins: [Margin] {
-        return [
-            RelatedViewMargin(constant: 24, relatedViewType: Headline.self),
-            RelatedViewMargin(constant: 24, relatedViewType: ParagraphView.self)
-        ]
-    }
+//    public override var margins: [Margin] {
+//        return [
+//            RelatedViewMargin(constant: 24, relatedViewType: Headline.self),
+//            RelatedViewMargin(constant: 24, relatedViewType: ParagraphView.self)
+//        ]
+//    }
 
     // MARK: - Lifecycle
 
