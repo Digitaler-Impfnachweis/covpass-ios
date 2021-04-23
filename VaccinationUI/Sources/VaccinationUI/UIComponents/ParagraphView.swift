@@ -12,6 +12,7 @@ public class ParagraphView: MarginableXibView {
     @IBOutlet public var stackView: UIStackView!
     @IBOutlet public var title: UILabel!
     @IBOutlet public var body: LinkTextView!
+    @IBOutlet public var bottomBorder: UIView!
 
     internal static let BodyLeftInset: CGFloat = -5
 
@@ -86,12 +87,8 @@ public class ParagraphView: MarginableXibView {
         setupView()
     }
     
-    public func addBottomBorder() {
-        let thickness: CGFloat = 1.0
-        let bottomBorder = CALayer()
-        bottomBorder.frame = CGRect(x: 0, y: frame.size.height, width: frame.width + 14, height: thickness)
-        bottomBorder.backgroundColor = UIConstants.BrandColor.onBackground20.cgColor
-        layer.addSublayer(bottomBorder)
+    public func showBottomBorder() {
+        bottomBorder.isHidden = false
     }
 
     private func checkVisibility() {
@@ -109,5 +106,6 @@ public class ParagraphView: MarginableXibView {
         title.textColor = UIConstants.BrandColor.onBackground100
         bodyFont = UIConstants.Font.regular
         body.textColor = UIConstants.BrandColor.onBackground100
+        bottomBorder.backgroundColor = UIConstants.BrandColor.onBackground20
     }
 }

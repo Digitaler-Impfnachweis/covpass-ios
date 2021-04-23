@@ -25,10 +25,6 @@ public struct MainRouter {
     public func rootViewController() -> UIViewController {
         if UserDefaults.StartupInfo.bool(.onboarding) {
             // User has already seen the onboarding, go straight to the certificate view
-            let vc = VaccinationDetailViewController.createFromStoryboard(bundle: Bundle.module)
-            vc.viewModel = VaccinationDetailViewModel(certificates: [])
-            return vc
-
             let certificateViewController = CertificateViewController.createFromStoryboard(bundle: Bundle.module)
             certificateViewController.viewModel = DefaultCertificateViewModel(parser: QRCoder())
             certificateViewController.router = ProofPopupRouter()
