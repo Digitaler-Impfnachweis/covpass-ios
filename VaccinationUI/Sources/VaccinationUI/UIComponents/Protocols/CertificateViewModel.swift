@@ -14,4 +14,5 @@ public protocol CertificateViewModel: HeadlineViewModel {
     func process(payload: String, completion: ((Error) -> Void)?)
     func configure<T: CellConfigutation>(cell: T, at indexPath: IndexPath)
     func reuseIdentifier(for indexPath: IndexPath) -> String
+    func loadCertificatesConfiguration()
 }

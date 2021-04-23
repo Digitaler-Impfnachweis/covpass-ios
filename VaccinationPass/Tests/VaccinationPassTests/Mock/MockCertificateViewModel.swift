@@ -11,7 +11,6 @@ import VaccinationPass
 import VaccinationUI
 
 class MockCertificateViewModel: CertificateViewModel {
-    
     // MARK: - Test Variables
     
     var processCalled = false
@@ -53,5 +52,9 @@ class MockCertificateViewModel: CertificateViewModel {
     
     var headlineButtonImage: UIImage?{
         nil
+    }
+
+    func loadCertificatesConfiguration() {
+        certificates = [MockCellConfiguration.noCertificateConfiguration()]
     }
 }

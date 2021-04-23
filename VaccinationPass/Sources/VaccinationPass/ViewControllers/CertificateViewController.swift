@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import VaccinationCommon
 import VaccinationUI
 import Scanner
 
@@ -22,11 +23,15 @@ public class CertificateViewController: UIViewController {
     
     public var viewModel: CertificateViewModel!
     public var router: PopupRouter?
+
+    // MARK: - Private properties
+    private let service = VaccinationCertificateService()
     
-    // MARK: - Fifecycle
+    // MARK: - Lifecycle
     
     override public func viewDidLoad() {
         super.viewDidLoad()
+        viewModel.loadCertificatesConfiguration()
         setupHeaderView()
         setupActionButton()
         setupCollecttionView()

@@ -29,6 +29,7 @@ public extension UserDefaults {
     struct StartupInfo: UserDefaultsSettable {
         public enum defaultKeys: String {
             case onboarding
+            case appInstalled
         }
     }
 }
