@@ -26,7 +26,9 @@ public struct MainRouter {
         if UserDefaults.StartupInfo.bool(.onboarding) {
             // User has already seen the onboarding, go straight to the certificate view
             let certificateViewController = CertificateViewController.createFromStoryboard(bundle: Bundle.module)
-            certificateViewController.viewModel = DefaultCertificateViewModel(parser: QRCoder())
+            let certificateViewModel = DefaultCertificateViewModel(parser: QRCoder())
+            certificateViewModel.delegate = certificateViewController
+            certificateViewController.viewModel = certificateViewModel
             certificateViewController.router = ProofPopupRouter()
             return certificateViewController
         }

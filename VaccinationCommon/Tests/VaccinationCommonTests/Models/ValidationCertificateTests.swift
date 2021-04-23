@@ -26,7 +26,7 @@ class ValidationCertificateTests: XCTestCase {
         XCTAssertEqual(sut.vaccination.first!.product, "COMIRNATY")
         XCTAssertEqual(sut.vaccination.first!.manufacturer, "BioNTech Manufacturing GmbH")
         XCTAssertEqual(sut.vaccination.first!.series, "2/2")
-        XCTAssertEqual(sut.vaccination.first!.occurence, DateUtils.vaccinationDateFormatter.date(from: "20210202")!)
+        XCTAssertEqual(sut.vaccination.first!.occurrence, DateUtils.vaccinationDateFormatter.date(from: "20210202")!)
         XCTAssertEqual(sut.vaccination.first!.country, "DE")
     }
 }

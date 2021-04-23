@@ -25,6 +25,5 @@ class VaccinationCertificateTests: XCTestCase {
         XCTAssertEqual(sut.validFrom, DateUtils.vaccinationDateFormatter.date(from: "20200202"))
         XCTAssertEqual(sut.validUntil, DateUtils.vaccinationDateFormatter.date(from: "20230202"))
         XCTAssertEqual(sut.version, "1.0.0")
-        XCTAssertEqual(sut.secret, "ZFKIYIBK39A3#S")
     }
 }

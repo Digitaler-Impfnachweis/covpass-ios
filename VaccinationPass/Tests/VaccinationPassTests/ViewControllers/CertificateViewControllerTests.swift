@@ -12,7 +12,6 @@ import VaccinationUI
 
 
 class CertificateViewControllerTests: XCTestCase {
-    
     // MARK: - Test Variables
     
     var sut: CertificateViewController!
@@ -25,7 +24,7 @@ class CertificateViewControllerTests: XCTestCase {
         super.setUp()
         viewModel = MockCertificateViewModel()
         router = MockPopupRouter()
-        // Crete sut
+        // Create sut
         let certificateViewController = CertificateViewController.createFromStoryboard(bundle: Bundle.module)
         viewModel.delegate = certificateViewController
         certificateViewController.viewModel = viewModel

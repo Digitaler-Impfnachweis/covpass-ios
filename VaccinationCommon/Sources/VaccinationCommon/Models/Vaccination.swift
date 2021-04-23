@@ -13,7 +13,7 @@ public class Vaccination: Codable {
     public var product: String
     public var manufacturer: String
     public var series: String
-    public var occurence: Date?
+    public var occurrence: Date?
     public var country: String
 
     public var seriesNumber: Int {
@@ -34,7 +34,7 @@ public class Vaccination: Codable {
         case product
         case manufacturer
         case series
-        case occurence
+        case occurrence
         case country
     }
 
@@ -45,8 +45,22 @@ public class Vaccination: Codable {
         product = try values.decode(String.self, forKey: .product)
         manufacturer = try values.decode(String.self, forKey: .manufacturer)
         series = try values.decode(String.self, forKey: .series)
-        let occurenceDateString = try values.decode(String.self, forKey: .occurence)
-        occurence = DateUtils.vaccinationDateFormatter.date(from: occurenceDateString)
+        let occurenceDateString = try values.decode(String.self, forKey: .occurrence)
+        occurrence = DateUtils.vaccinationDateFormatter.date(from: occurenceDateString)
         country = try values.decode(String.self, forKey: .country)
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(targetDisease, forKey: .targetDisease)
+        try container.encode(vaccineCode, forKey: .vaccineCode)
+        try container.encode(product, forKey: .product)
+        try container.encode(manufacturer, forKey: .manufacturer)
+        try container.encode(series, forKey: .series)
+        if let occurrence = occurrence {
+            let occurrenceDate = DateUtils.vaccinationDateFormatter.string(from: occurrence)
+            try container.encode(occurrenceDate, forKey: .occurrence)
+        }
+        try container.encode(country, forKey: .country)
     }
 }
