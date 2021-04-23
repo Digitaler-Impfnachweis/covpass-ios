@@ -11,7 +11,6 @@ import VaccinationPass
 import VaccinationUI
 
 class MockCertificateViewModel: CertificateViewModel {
-    
     // MARK: - Test Variables
     
     var processCalled = false
@@ -55,7 +54,7 @@ class MockCertificateViewModel: CertificateViewModel {
         nil
     }
 
-    func loadCertificatesConfiguration(completion: ((Error) -> Void)?) {
-        certificates = MockCellConfiguration.noCertificateConfiguration()
+    func loadCertificatesConfiguration() {
+        certificates = [MockCellConfiguration.noCertificateConfiguration()]
     }
 }
