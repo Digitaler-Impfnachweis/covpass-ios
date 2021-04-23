@@ -16,7 +16,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        try? clearKeychainIfWillUnistall()
+        try? clearKeychainOnFreshInstall()
         try? UIFont.loadCustomFonts()
         window = UIWindow(frame: UIScreen.main.bounds)
         var router = MainRouter()
@@ -27,7 +27,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
-    private func clearKeychainIfWillUnistall() throws {
+    private func clearKeychainOnFreshInstall() throws {
         if !UserDefaults.StartupInfo.bool(.appInstalled) {
             UserDefaults.StartupInfo.set(true, forKey: .appInstalled)
             try Keychain.deletePassword(for: KeychainConfiguration.vaccinationCertificateKey)
