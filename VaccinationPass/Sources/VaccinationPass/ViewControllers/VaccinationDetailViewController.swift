@@ -7,25 +7,82 @@
 
 import VaccinationUI
 import UIKit
+import VaccinationCommon
+
+let cert = """
+{ \
+    "name": "Mustermann Erika", \
+    "birthDate": "19640812", \
+    "identifier": "C01X00T47", \
+    "sex": "female", \
+    "vaccination": [{ \
+        "targetDisease": "U07.1!", \
+        "vaccineCode": "1119349007", \
+        "product": "COMIRNATY", \
+        "manufacturer": "BioNTech Manufacturing GmbH11", \
+        "series": "1/1", \
+        "lotNumber": "T654X4", \
+        "occurence": "20210202", \
+        "location": "84503", \
+        "performer": "999999900", \
+        "country": "DE", \
+        "nextDate": "20210402" \
+    }], \
+    "issuer": "Landratsamt Altötting", \
+    "id": "01DE/84503/1119349007/DXSGWLWL40SU8ZFKIYIBK39A3#S", \
+    "validFrom": "20200202", \
+    "validUntil": "20230202", \
+    "version": "1.0.0", \
+    "secret": "ZFKIYIBK39A3#S" \
+}
+"""
+
+let cert2 = """
+{ \
+    "name": "Mustermann Erika", \
+    "birthDate": "19640812", \
+    "identifier": "C01X00T47", \
+    "sex": "female", \
+    "vaccination": [{ \
+        "targetDisease": "U07.1!", \
+        "vaccineCode": "1119349007", \
+        "product": "COMIRNATY", \
+        "manufacturer": "BioNTech Manufacturing GmbH11", \
+        "series": "2/2", \
+        "lotNumber": "T654X4", \
+        "occurence": "20210202", \
+        "location": "84503", \
+        "performer": "999999900", \
+        "country": "DE", \
+        "nextDate": "20210402" \
+    }], \
+    "issuer": "Landratsamt Altötting", \
+    "id": "01DE/84503/1119349007/DXSGWLWL40SU8ZFKIYIBK39A3#S", \
+    "validFrom": "20200202", \
+    "validUntil": "20230202", \
+    "version": "1.0.0", \
+    "secret": "ZFKIYIBK39A3#S" \
+}
+"""
 
 public class VaccinationDetailViewController: UIViewController {
+    @IBOutlet var stackView: UIStackView!
     @IBOutlet var nameHeadline: Headline!
     @IBOutlet var immunizationView: ParagraphIconView!
-    @IBOutlet var immunizationTicketButton: PrimaryButtonContainer!
-    @IBOutlet var immunizationScanButton: SecondaryButtonContainer!
+    @IBOutlet var immunizationButton: PrimaryButtonContainer!
     @IBOutlet var personalDataHeadline: Headline!
     @IBOutlet var nameView: ParagraphView!
     @IBOutlet var birtdateView: ParagraphView!
-    @IBOutlet var immunization1Headline: Headline!
-    @IBOutlet var location1View: ParagraphView!
-    @IBOutlet var vaccine1View: ParagraphView!
-    @IBOutlet var number1View: ParagraphView!
-    @IBOutlet var date1View: ParagraphView!
     
     public var viewModel: VaccinationDetailViewModel!
     
     public override func viewDidLoad() {
         super.viewDidLoad()
+        let sut = try! JSONDecoder().decode(VaccinationCertificate.self, from: cert.data(using: .utf8)!)
+        let cert = ExtendedVaccinationCertificate(vaccinationCertificate: sut, vaccinationQRCodeData: "", validationQRCodeData: nil)
+        let sut2 = try! JSONDecoder().decode(VaccinationCertificate.self, from: cert2.data(using: .utf8)!)
+        let cert2 = ExtendedVaccinationCertificate(vaccinationCertificate: sut2, vaccinationQRCodeData: "", validationQRCodeData: nil)
+        viewModel = VaccinationDetailViewModel(certificates: [cert])
         setupView()
     }
     
@@ -36,37 +93,21 @@ public class VaccinationDetailViewController: UIViewController {
         nameHeadline.text = viewModel.name
         
         immunizationView.icon.image = viewModel.immunizationIcon
-        immunizationView.titleText = viewModel.immunizationText
+        immunizationView.titleText = viewModel.immunizationTitle
         immunizationView.bodyText = viewModel.immunizationBody
         
-        immunizationTicketButton.title = viewModel.immunizationTicketButton
-        immunizationTicketButton.backgroundColor = UIColor.white
-        immunizationTicketButton.shadowColor = UIColor.white
-        
-        immunizationScanButton.title = "2. Impfung hinzufügen"
-        immunizationScanButton.backgroundColor = UIColor.white
-        immunizationScanButton.shadowColor = UIColor.white
-        immunizationScanButton.isHidden = !viewModel.partialVaccination
+        immunizationButton.title = viewModel.immunizationButton
+        immunizationButton.backgroundColor = UIColor.white
+        immunizationButton.shadowColor = UIColor.white
 
-        personalDataHeadline.text = "Persönliche Daten"
-        nameView.titleText = "Name"
-        nameView.bodyText = "Max Mustermann"
+        personalDataHeadline.text = "vaccination_detail_personal_information".localized
+        nameView.titleText = "vaccination_detail_name".localized
+        nameView.bodyText = viewModel.name
         nameView.addBottomBorder()
-        birtdateView.titleText = "Geburtsdatum"
-        birtdateView.bodyText = "18.04.1953"
+        birtdateView.titleText = "vaccination_detail_birthdate".localized
+        birtdateView.bodyText = viewModel.birthDate
         
-        immunization1Headline.text = "Impfung 1 von 2"
-        location1View.titleText = "Zentrales Impfzentrum, Musterstadt"
-        location1View.bodyText = "03.02.2021"
-        location1View.addBottomBorder()
-        vaccine1View.titleText = "Impfstoff"
-        vaccine1View.bodyText = "mRNA"
-        vaccine1View.addBottomBorder()
-        number1View.titleText = "Chargennummer"
-        number1View.bodyText = "DA123456"
-        number1View.addBottomBorder()
-        date1View.titleText = "Datum der Impfung"
-        date1View.bodyText = "03.02.2021"
+        viewModel.vaccinations.forEach({ stackView.addArrangedSubview(VaccinationView(viewModel: $0)) })
     }
 }
 

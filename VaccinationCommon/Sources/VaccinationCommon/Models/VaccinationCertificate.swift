@@ -8,9 +8,9 @@
 import Foundation
 
 public enum Sex: String, Codable {
-    case male = "male"
-    case female = "female"
-    case diverse = "diverse"
+    case male
+    case female
+    case diverse
     case unknown
 }
 
@@ -27,6 +27,12 @@ public struct VaccinationCertificate: Codable {
     public var version: String
     public var secret: String
 
+    
+
+    public var partialVaccination: Bool {
+        return vaccination.first?.seriesNumber != vaccination.first?.seriesTotal
+    }
+
     enum CodingKeys: String, CodingKey {
         case name
         case birthDate
@@ -39,6 +45,16 @@ public struct VaccinationCertificate: Codable {
         case validUntil
         case version
         case secret
+    }
+
+    public init() {
+        name = ""
+        identifier = ""
+        vaccination = []
+        issuer = ""
+        id = ""
+        version = ""
+        secret = ""
     }
 
     public init(from decoder: Decoder) throws {
