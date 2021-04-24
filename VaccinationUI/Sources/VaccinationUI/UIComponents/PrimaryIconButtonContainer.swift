@@ -52,7 +52,6 @@ public class PrimaryIconButtonContainer: PrimaryButtonContainer {
         super.initView()
         innerButton.setTitle(nil, for: .normal)
         textableView.text = nil
-        leadingTitleInsetConstraint.isActive = false
-        trailingTitleInsetConstraint.isActive = false
+        contentView?.layoutMargins = .init(top: 15, left: 15, bottom: 15, right: 15)
     }
 }

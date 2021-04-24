@@ -81,7 +81,7 @@ public class ConfirmView: XibView {
      */
     public override func initView() {
         super.initView()
-
+        layoutMargins = .init(top: 24, left: 24, bottom: 24, right: 24)
         updateImageView()
         detailLabel.font = UIConstants.Font.regularLarger
         detailLabel.adjustsFontForContentSizeCategory()

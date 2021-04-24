@@ -25,6 +25,13 @@ public class InfoHeaderView: XibView {
         didSet { headline.font = headlineFont }
     }
 
+    // MARK: - Lifecycle
+
+    public override func initView() {
+        super.initView()
+        layoutMargins = .init(top: 0, left: 24, bottom: 0, right: 24)
+    }
+
     // MARK: - IBAction
     
     @IBAction public func actionButtonPressed(button: UIButton) { action?() }

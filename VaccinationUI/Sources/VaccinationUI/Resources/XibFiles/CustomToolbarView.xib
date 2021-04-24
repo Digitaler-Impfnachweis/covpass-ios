@@ -42,6 +42,7 @@
                 <constraint firstAttribute="bottom" secondItem="dgX-Vs-azu" secondAttribute="bottom" id="rgc-co-VT7"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <edgeInsets key="layoutMargins" top="0.0" left="0.0" bottom="0.0" right="0.0"/>
             <point key="canvasLocation" x="-265.60000000000002" y="19.790104947526238"/>
         </view>
     </objects>

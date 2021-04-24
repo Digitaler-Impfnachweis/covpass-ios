@@ -15,12 +15,6 @@ public class PrimaryButtonContainer: XibView, Textable {
     @IBOutlet public var textableView: UILabel!
     @IBOutlet public var innerButton: UIButton!
 
-    @IBOutlet public var leadingTitleInsetConstraint: NSLayoutConstraint!
-    @IBOutlet public var trailingTitleInsetConstraint: NSLayoutConstraint!
-    @IBOutlet public var topTitleInsetConstraint: NSLayoutConstraint!
-    @IBOutlet public var bottomTitleInsetConstraint: NSLayoutConstraint!
-    @IBOutlet public var minPreferredHeightConstraint: NSLayoutConstraint!
-
     var buttonWidthConstraint: NSLayoutConstraint?
     var buttonHeightConstraint: NSLayoutConstraint?
     private let animationDuration: TimeInterval = 0.2
@@ -102,6 +96,8 @@ public class PrimaryButtonContainer: XibView, Textable {
     public override func initView() {
         super.initView()
 
+        contentView?.layoutMargins = .init(top: 18, left: 40, bottom: 18, right: 40)
+
         // Rounded corners
         innerButton.layer.cornerRadius = cornerRadius
         innerButton.layer.masksToBounds = false
@@ -167,7 +163,8 @@ public class PrimaryButtonContainer: XibView, Textable {
     public func startAnimating(makeCircle: Bool = true) {
         if makeCircle {
             [buttonWidthConstraint, buttonHeightConstraint].forEach({ $0?.isActive = true })
-            [leadingTitleInsetConstraint, trailingTitleInsetConstraint].forEach({ $0?.isActive = false })
+//            [leadingTitleInsetConstraint, trailingTitleInsetConstraint].forEach({ $0?.isActive = false })
+            contentView?.layoutMargins = .zero
         }
         innerButton.setTitle("", for: .normal)
         textableView.text = ""
@@ -179,7 +176,8 @@ public class PrimaryButtonContainer: XibView, Textable {
         innerButton.setTitle(title, for: .normal)
         textableView.text = title
         [buttonWidthConstraint, buttonHeightConstraint].forEach({ $0?.isActive = false })
-        [leadingTitleInsetConstraint, trailingTitleInsetConstraint].forEach({ $0?.isActive = true })
+//        [leadingTitleInsetConstraint, trailingTitleInsetConstraint].forEach({ $0?.isActive = true })
+        contentView?.layoutMargins = .init(top: 18, left: 40, bottom: 18, right: 40)
     }
 
     /// Enables the button and changes the background color to enabled color.

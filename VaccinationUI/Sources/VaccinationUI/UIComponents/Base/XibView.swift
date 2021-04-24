@@ -83,6 +83,7 @@ open class XibView: UIView, Compoundable {
         // add as subview with pinned edges to layoutMarginsGuide for autolayout constraints
         // ATTENTION: don't call this method twice in a view lifecycle
         guard let view = loadViewFromNib() else { return }
+        layoutMargins = .zero
         view.frame = bounds
         addSubview(view)
         view.pinEdges([.all], to: layoutMarginsGuide, margins: .zero)
