@@ -29,6 +29,15 @@
         }
       },
       {
+        "package": "PromiseKit",
+        "repositoryURL": "https://github.com/mxcl/PromiseKit",
+        "state": {
+          "branch": null,
+          "revision": "aea48ea1855f5d82e2dffa6027afce3aab8f3dd7",
+          "version": "6.13.3"
+        }
+      },
+      {
         "package": "SwiftCBOR",
         "repositoryURL": "https://github.com/unrelentingtech/SwiftCBOR",
         "state": {

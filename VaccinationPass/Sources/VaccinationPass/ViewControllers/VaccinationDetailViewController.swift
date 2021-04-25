@@ -55,7 +55,7 @@ public class VaccinationDetailViewController: UIViewController {
         immunizationButton.shadowColor = UIColor.white
         immunizationButton.action = { [weak self] in
             guard let self = self else { return }
-            if self.viewModel.partialVaccination ?? true {
+            if self.viewModel.partialVaccination {
                 self.router.presentPopup(onTopOf: self)
             } else {
                 self.navigationController?.popViewController(animated: true)
@@ -76,8 +76,12 @@ public class VaccinationDetailViewController: UIViewController {
 
             alert.addAction(UIAlertAction(title: "Abbrechen", style: .default, handler: nil))
             alert.addAction(UIAlertAction(title: "Löschen", style: .destructive, handler: { _ in
-                self?.viewModel.delete()
-                self?.navigationController?.popViewController(animated: true)
+                self?.viewModel.delete().done({
+                    self?.navigationController?.popViewController(animated: true)
+                }).catch({ error in
+                    print(error)
+                    // TODO error handling
+                })
             }))
             self?.present(alert, animated: true)
         }

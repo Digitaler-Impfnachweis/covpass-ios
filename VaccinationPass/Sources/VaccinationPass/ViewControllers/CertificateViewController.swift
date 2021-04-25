@@ -32,7 +32,6 @@ public class CertificateViewController: UIViewController {
     override public func viewDidLoad() {
         super.viewDidLoad()
         title = ""
-//        viewModel.loadCertificatesConfiguration()
         setupHeaderView()
         setupActionButton()
         setupCollecttionView()
@@ -90,7 +89,8 @@ public class CertificateViewController: UIViewController {
     }
     
     private func presentPopup() {
-        router?.presentPopup(onTopOf: self)
+        guard let vc = self.navigationController else { return }
+        router?.presentPopup(onTopOf: vc)
     }
 }
 
@@ -101,17 +101,17 @@ extension CertificateViewController: ScannerDelegate {
         presentedViewController?.dismiss(animated: true, completion: nil)
         switch value {
         case .success(let payload):
-            viewModel.process(payload: payload, completion: { (cert, error) in
-                if error != nil {
-                    print(error?.localizedDescription)
-                    return
-                }
-                guard let vaccinationCertificate = cert else { return }
+            viewModel.process(payload: payload).done({ cert in
                 let vc = VaccinationDetailViewController.createFromStoryboard()
-                vc.viewModel = VaccinationDetailViewModel(certificates: [vaccinationCertificate])
+                vc.viewModel = VaccinationDetailViewModel(certificates: [cert])
                 vc.router = ProofPopupRouter()
-                self.present(vc, animated: true, completion: nil)
-            })
+                self.navigationController?.pushViewController(vc, animated: true)
+            }).catch({ error in
+                print(error)
+                // TODO error handling
+            }).finally {
+                self.reloadCollectionView()
+            }
         case .failure(let error):
             print("We have an error: \(error)")
         }

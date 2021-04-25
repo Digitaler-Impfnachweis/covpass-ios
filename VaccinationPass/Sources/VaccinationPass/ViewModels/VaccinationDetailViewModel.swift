@@ -8,8 +8,11 @@
 import UIKit
 import VaccinationUI
 import VaccinationCommon
+import PromiseKit
 
 public struct VaccinationDetailViewModel {
+
+    private var service = VaccinationCertificateService()
 
     private var certificates: [ExtendedVaccinationCertificate]
 
@@ -50,21 +53,18 @@ public struct VaccinationDetailViewModel {
         return certificates.map({ VaccinationViewModel(certificate: $0.vaccinationCertificate) })
     }
 
-    public func delete() {
-        // TODO delete cert from keychain
-        let service = VaccinationCertificateService()
-        do {
-            guard var certificateList = try service.fetch() else { return }
-            certificateList.certificates.removeAll(where: { certificate in
+    public func delete() -> Promise<Void> {
+        service.fetch().then({ list -> Promise<VaccinationCertificateList> in
+            var certList = list
+            certList.certificates.removeAll(where: { certificate in
                 for cert in self.certificates where cert == certificate {
                     return true
                 }
                 return false
             })
-            try service.save(certificateList)
-        } catch {
-            // TODO error handling
-            print(error)
-        }
+            return Promise.value(certList)
+        }).then({ list in
+            service.save(list)
+        })
     }
 }
