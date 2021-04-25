@@ -107,7 +107,7 @@
                                 <rect key="frame" x="0.0" y="24" width="414" height="858"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="YV8-Tq-Fkx" customClass="ScrollableStackView" customModule="VaccinationUI">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="620"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="748"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gRX-6s-FzF" customClass="Headline" customModule="VaccinationUI">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
@@ -147,8 +147,12 @@
                                                 <rect key="frame" x="0.0" y="442" width="414" height="50"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                             </view>
-                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OfP-W2-jo2" customClass="Spacer" customModule="VaccinationUI">
+                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="F59-gV-20d" customClass="SecondaryButtonContainer" customModule="VaccinationUI">
                                                 <rect key="frame" x="0.0" y="492" width="414" height="128"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                            </view>
+                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OfP-W2-jo2" customClass="Spacer" customModule="VaccinationUI">
+                                                <rect key="frame" x="0.0" y="620" width="414" height="128"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                             </view>
                                         </subviews>
@@ -176,7 +180,8 @@
                     </view>
                     <connections>
                         <outlet property="birtdateView" destination="Bge-SR-I1b" id="MDg-qC-mrG"/>
-                        <outlet property="immunizationButton" destination="Ihi-Ap-8Ly" id="HlJ-Lx-fzS"/>
+                        <outlet property="deleteButton" destination="F59-gV-20d" id="ZCG-qM-LVf"/>
+                        <outlet property="immunizationButton" destination="Ihi-Ap-8Ly" id="lTA-WH-zQj"/>
                         <outlet property="immunizationView" destination="Hrb-mG-kzt" id="ES7-8A-IQ2"/>
                         <outlet property="nameHeadline" destination="gRX-6s-FzF" id="Ehy-Lu-fuL"/>
                         <outlet property="nameView" destination="wOL-d4-AM4" id="zKN-3i-cQW"/>

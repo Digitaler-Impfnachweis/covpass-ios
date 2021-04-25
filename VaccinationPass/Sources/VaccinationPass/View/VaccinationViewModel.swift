@@ -23,7 +23,7 @@ public struct VaccinationViewModel {
     }
 
     public var date: String {
-        guard let occurrence = certificate.vaccination.first?.occurence else { return "" }
+        guard let occurrence = certificate.vaccination.first?.occurrence else { return "" }
         return DateUtils.displayDateFormatter.string(from: occurrence)
     }
 

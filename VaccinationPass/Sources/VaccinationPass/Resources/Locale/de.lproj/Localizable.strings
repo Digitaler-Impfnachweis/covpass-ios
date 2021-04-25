@@ -64,3 +64,7 @@
 "vaccination_detail_delete" = "Nachweis löschen";
 
 "vaccination_detail_vaccination_title" = "Impfung %@ von %@";
+
+"vaccination_delete_title" = "Möchten Sie das Zertifikat von %@ wirklich löschen?";
+
+"vaccination_delete_body" = "Alle enthaltenen Daten werden rückstandslos von diesem Gerät entfernt. Die Wiederherstellung der Daten ist nicht möglich.";

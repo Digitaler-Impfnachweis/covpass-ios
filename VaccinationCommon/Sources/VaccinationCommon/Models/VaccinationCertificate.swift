@@ -52,7 +52,6 @@ public struct VaccinationCertificate: Codable {
         issuer = ""
         id = ""
         version = ""
-        secret = ""
     }
 
     public init(from decoder: Decoder) throws {

@@ -17,7 +17,7 @@ public struct VaccinationDetailViewModel {
         self.certificates = certificates
     }
 
-    private var partialVaccination: Bool {
+    public var partialVaccination: Bool {
         return certificates.map({ $0.vaccinationCertificate.partialVaccination }).first(where: { !$0 }) ?? true
     }
 
@@ -48,5 +48,23 @@ public struct VaccinationDetailViewModel {
 
     public var vaccinations: [VaccinationViewModel] {
         return certificates.map({ VaccinationViewModel(certificate: $0.vaccinationCertificate) })
+    }
+
+    public func delete() {
+        // TODO delete cert from keychain
+        let service = VaccinationCertificateService()
+        do {
+            guard var certificateList = try service.fetch() else { return }
+            certificateList.certificates.removeAll(where: { certificate in
+                for cert in self.certificates where cert == certificate {
+                    return true
+                }
+                return false
+            })
+            try service.save(certificateList)
+        } catch {
+            // TODO error handling
+            print(error)
+        }
     }
 }

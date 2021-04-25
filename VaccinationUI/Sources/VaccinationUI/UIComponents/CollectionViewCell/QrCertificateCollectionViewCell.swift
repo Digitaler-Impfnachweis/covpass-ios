@@ -23,6 +23,8 @@ public class QrCertificateCollectionViewCell: BaseCardCollectionViewCell {
         actionView.tintColor = UIConstants.BrandColor.brandAccent
         qrContinerView.titleLabel.font = UIConstants.Font.semiBoldLarger
         qrContinerView.subtitleLabel.font = UIConstants.Font.regular
+        actionView.action = onAction
+        headerView.action = onFavorite
     }
 }
 
