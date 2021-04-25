@@ -20,7 +20,7 @@ public class ScanPopupRouter {
 
 // MARK: - Router
 
-extension ScanPopupRouter: Popup {
+extension ScanPopupRouter: PopupRouter {
     
     public func presentPopup(onTopOf viewController: UIViewController) {
         viewController.presentedViewController?.dismiss(animated: true, completion: {

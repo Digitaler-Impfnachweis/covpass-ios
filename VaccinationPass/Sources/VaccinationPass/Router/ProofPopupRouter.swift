@@ -20,7 +20,7 @@ public class ProofPopupRouter {
 
 // MARK: - Router
 
-extension ProofPopupRouter: Popup {
+extension ProofPopupRouter: PopupRouter {
     
     public func presentPopup(onTopOf viewController: UIViewController) {
         let popupVC = ProofPopupViewController.createFromStoryboard()

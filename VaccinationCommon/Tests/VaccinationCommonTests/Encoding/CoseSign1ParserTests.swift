@@ -51,14 +51,12 @@ class CoseSign1ParserTests: XCTestCase {
             XCTFail("Cose1SignMessage should not be nil")
             return
         }
-        let mappedString = sut.mapToString(cborObject: try? CBOR.decode(message.payload))
+        let mappedDictionary = sut.map(cborObject: try? CBOR.decode(message.payload))
 
-        XCTAssertTrue(mappedString?.contains("issuer") ?? false)
-        XCTAssertTrue(mappedString?.contains("manufacturer") ?? false)
-        XCTAssertTrue(mappedString?.contains("vaccineCode") ?? false)
-        XCTAssertTrue(mappedString?.contains("targetDisease") ?? false)
-        XCTAssertTrue(mappedString?.contains("lotNumber") ?? false)
-
+        XCTAssertEqual(mappedDictionary?["issuer"] as? String, "Landratsamt Altötting")
+        XCTAssertEqual(mappedDictionary?["identifier"] as? String, "C01X00T47")
+        XCTAssertNotNil(mappedDictionary?["vaccination"])
+        XCTAssertEqual(mappedDictionary?["id"] as? String, "01DE/84503/1119349007/DXSGWLWL40SU8ZFKIYIBK39A3#S")
     }
 }
 

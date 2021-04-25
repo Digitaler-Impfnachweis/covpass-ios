@@ -15,24 +15,24 @@ open class StartOnboardingViewModel: BaseViewModel {
         UIImage(named: UIConstants.IconName.StartScreen, in: UIConstants.bundle, compatibleWith: nil)
     }
 
-    open var title: String {
-        "Ihr digitaler Impfnachweis wartet auf Sie!"
+    public var title: String {
+        "start_onboarding_title".localized
     }
 
-    open var info: String {
-        "Dokumentieren Sie Impfungen einfach und sicher auf Ihrem Smartphone."
+    public var info: String {
+        "start_onboarding_message".localized
     }
     
-    open var secureTitle: String {
-        "Absolute Sicherheit Ihrer Daten"
+    var secureTitle: String {
+        "start_onboarding_secure_title".localized
     }
     
-    open var secureText: String {
-        "Ihre Daten warden lokal auf Ihrem Smartphone gespeichert und können nur von Ihren abgefragt werden."
+    var secureText: String {
+        "start_onboarding_secure_message".localized
     }
     
-    open var navigationButtonTitle: String {
-        "Los geht's"
+    var navigationButtonTitle: String {
+        "start_onboarding_button_title".localized
     }
     
     open var secureImage: UIImage? {

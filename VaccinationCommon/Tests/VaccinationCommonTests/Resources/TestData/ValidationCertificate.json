@@ -1,0 +1,16 @@
+{
+    "name": "Mustermann Erika",
+    "birthDate": "19640812",
+    "vaccination": [{
+        "targetDisease": "U07.1!",
+        "vaccineCode": "1119349007",
+        "product": "COMIRNATY",
+        "manufacturer": "BioNTech Manufacturing GmbH",
+        "series": "2/2",
+        "occurrence": "20210202",
+        "country": "DE",
+    }],
+    "issuer": "Landratsamt Altötting",
+    "id": "01DE/84503/1119349007/DXSGWLWL40SU8ZFKIYIBK39A3#S",
+    "validUntil": "20230202",
+}

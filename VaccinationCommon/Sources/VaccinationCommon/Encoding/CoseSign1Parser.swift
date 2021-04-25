@@ -71,18 +71,18 @@ class CoseSign1Parser {
 
     /// Parse a CBOR object into a readable String
     /// - parameter cborObject: the CBOR object to be parsed
-    /// - returns a String composed of key-value pairs
-    func mapToString(cborObject: CBOR?) -> String? {
+    /// - returns a dictionary
+    func map(cborObject: CBOR?) -> [String: Any]? {
         guard let cborData = cborObject, case .map(let cborMap) = cborData else { return nil }
 
-        var result = ""
+        var result = [String: Any]()
 
         for (key, value) in cborMap {
             if case .utf8String(let keyString) = key, case .utf8String(let valueString) = value {
-                result += keyString + ": " + valueString + "\n"
+                result.updateValue(valueString, forKey: keyString)
             } else if case .utf8String(let keyString) = key, case .array(let cborArray) = value {
-                guard let remappedResult = mapToString(cborObject: cborArray.first) else { return nil }
-                result += keyString + ": " + remappedResult
+                let remappedResult = cborArray.map { self.map(cborObject: $0) }
+                result.updateValue(remappedResult, forKey: keyString)
             }
         }
 
