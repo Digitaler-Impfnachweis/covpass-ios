@@ -35,7 +35,7 @@ public class VaccinationDetailViewController: UIViewController {
         navigationController?.navigationBar.backIndicatorTransitionMaskImage = UIImage(named: "back_arrow", in: UIConstants.bundle, compatibleWith: nil)
         navigationController?.navigationBar.tintColor = UIConstants.BrandColor.onBackground100
 
-        let favoriteIcon = UIBarButtonItem(image: UIImage(named: "star_full", in: UIConstants.bundle, compatibleWith: nil), style: .plain, target: self, action: nil)
+        let favoriteIcon = UIBarButtonItem(image: UIImage(named: viewModel.isFavorite ? "star_full" : "star_partial", in: UIConstants.bundle, compatibleWith: nil), style: .plain, target: self, action: #selector(onFavorite))
         favoriteIcon.tintColor = UIConstants.BrandColor.onBackground100
         navigationItem.rightBarButtonItem = favoriteIcon
     }
@@ -55,7 +55,7 @@ public class VaccinationDetailViewController: UIViewController {
         immunizationButton.shadowColor = UIColor.white
         immunizationButton.action = { [weak self] in
             guard let self = self else { return }
-            if self.viewModel.partialVaccination ?? true {
+            if self.viewModel.partialVaccination {
                 self.router.presentPopup(onTopOf: self)
             } else {
                 self.navigationController?.popViewController(animated: true)
@@ -76,13 +76,25 @@ public class VaccinationDetailViewController: UIViewController {
 
             alert.addAction(UIAlertAction(title: "Abbrechen", style: .default, handler: nil))
             alert.addAction(UIAlertAction(title: "Löschen", style: .destructive, handler: { _ in
-                self?.viewModel.delete()
-                self?.navigationController?.popViewController(animated: true)
+                self?.viewModel.delete().done({
+                    self?.navigationController?.popViewController(animated: true)
+                }).catch({ error in
+                    print(error)
+                    // TODO error handling
+                })
             }))
             self?.present(alert, animated: true)
         }
         
-        viewModel.vaccinations.forEach({ stackView.insertArrangedSubview(VaccinationView(viewModel: $0), at: stackView.subviews.count - 2) })
+        viewModel.vaccinations.forEach({ stackView.insertArrangedSubview(VaccinationView(viewModel: $0), at: stackView.subviews.count - 3) })
+    }
+
+    @objc public func onFavorite() {
+        viewModel.updateFavorite().done({
+            self.setupNavigationBar()
+        }).catch({ error in
+            print(error)
+        })
     }
 }
 

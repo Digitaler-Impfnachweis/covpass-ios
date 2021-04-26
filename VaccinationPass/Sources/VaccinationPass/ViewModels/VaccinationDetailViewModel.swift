@@ -8,8 +8,11 @@
 import UIKit
 import VaccinationUI
 import VaccinationCommon
+import PromiseKit
 
 public struct VaccinationDetailViewModel {
+
+    private var service = VaccinationCertificateService()
 
     private var certificates: [ExtendedVaccinationCertificate]
 
@@ -19,6 +22,16 @@ public struct VaccinationDetailViewModel {
 
     public var partialVaccination: Bool {
         return certificates.map({ $0.vaccinationCertificate.partialVaccination }).first(where: { !$0 }) ?? true
+    }
+
+    public var isFavorite: Bool {
+        do {
+            let certList = try service.fetch().wait()
+            return certificates.contains(where: { $0.vaccinationCertificate.id == certList.favoriteCertificateId })
+        } catch {
+            print(error)
+            return false
+        }
     }
 
     public var name: String {
@@ -50,21 +63,31 @@ public struct VaccinationDetailViewModel {
         return certificates.map({ VaccinationViewModel(certificate: $0.vaccinationCertificate) })
     }
 
-    public func delete() {
-        // TODO delete cert from keychain
-        let service = VaccinationCertificateService()
-        do {
-            guard var certificateList = try service.fetch() else { return }
-            certificateList.certificates.removeAll(where: { certificate in
+    public func delete() -> Promise<Void> {
+        service.fetch().then({ list -> Promise<VaccinationCertificateList> in
+            var certList = list
+            certList.certificates.removeAll(where: { certificate in
                 for cert in self.certificates where cert == certificate {
                     return true
                 }
                 return false
             })
-            try service.save(certificateList)
-        } catch {
-            // TODO error handling
-            print(error)
-        }
+            return Promise.value(certList)
+        }).then({ list in
+            service.save(list)
+        })
+    }
+
+    public func updateFavorite() -> Promise<Void> {
+        return service.fetch().map({ cert in
+            var certList = cert
+            guard let id = certificates.first?.vaccinationCertificate.id else {
+                return certList
+            }
+            certList.favoriteCertificateId = certList.favoriteCertificateId == id ? nil : id
+            return certList
+        }).then({ cert in
+            return service.save(cert)
+        })
     }
 }
