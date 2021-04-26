@@ -35,7 +35,7 @@ public class VaccinationDetailViewController: UIViewController {
         navigationController?.navigationBar.backIndicatorTransitionMaskImage = UIImage(named: "back_arrow", in: UIConstants.bundle, compatibleWith: nil)
         navigationController?.navigationBar.tintColor = UIConstants.BrandColor.onBackground100
 
-        let favoriteIcon = UIBarButtonItem(image: UIImage(named: "star_full", in: UIConstants.bundle, compatibleWith: nil), style: .plain, target: self, action: nil)
+        let favoriteIcon = UIBarButtonItem(image: UIImage(named: viewModel.isFavorite ? "star_full" : "star_partial", in: UIConstants.bundle, compatibleWith: nil), style: .plain, target: self, action: #selector(onFavorite))
         favoriteIcon.tintColor = UIConstants.BrandColor.onBackground100
         navigationItem.rightBarButtonItem = favoriteIcon
     }
@@ -86,7 +86,15 @@ public class VaccinationDetailViewController: UIViewController {
             self?.present(alert, animated: true)
         }
         
-        viewModel.vaccinations.forEach({ stackView.insertArrangedSubview(VaccinationView(viewModel: $0), at: stackView.subviews.count - 2) })
+        viewModel.vaccinations.forEach({ stackView.insertArrangedSubview(VaccinationView(viewModel: $0), at: stackView.subviews.count - 3) })
+    }
+
+    @objc public func onFavorite() {
+        viewModel.updateFavorite().done({
+            self.setupNavigationBar()
+        }).catch({ error in
+            print(error)
+        })
     }
 }
 

@@ -24,6 +24,19 @@ public struct VaccinationDetailViewModel {
         return certificates.map({ $0.vaccinationCertificate.partialVaccination }).first(where: { !$0 }) ?? true
     }
 
+    public var isFavorite: Bool {
+        do {
+            let certList = try service.fetch().wait()
+            for cert in certificates where cert.vaccinationCertificate.id == certList.favoriteCertificateId {
+                return true
+            }
+            return false
+        } catch {
+            print(error)
+            return false
+        }
+    }
+
     public var name: String {
         return certificates.first?.vaccinationCertificate.name ?? ""
     }
@@ -65,6 +78,23 @@ public struct VaccinationDetailViewModel {
             return Promise.value(certList)
         }).then({ list in
             service.save(list)
+        })
+    }
+
+    public func updateFavorite() -> Promise<Void> {
+        return service.fetch().map({ cert in
+            var certList = cert
+            guard let id = certificates.first?.vaccinationCertificate.id else {
+                return certList
+            }
+            if certList.favoriteCertificateId == id {
+                certList.favoriteCertificateId = ""
+            } else {
+                certList.favoriteCertificateId = id
+            }
+            return certList
+        }).then({ cert in
+            return service.save(cert)
         })
     }
 }

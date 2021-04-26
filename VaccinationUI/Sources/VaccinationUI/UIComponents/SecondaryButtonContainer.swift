@@ -18,5 +18,6 @@ public class SecondaryButtonContainer: PrimaryButtonContainer {
         innerButton.backgroundColor = UIColor.white
         textableView.textColor = enabledButtonBackgroundColor
         innerButton.setTitleColor(enabledButtonBackgroundColor, for: .normal)
+        shadowColor = UIColor.white
     }
 }
