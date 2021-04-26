@@ -17,7 +17,7 @@ public enum Sex: String, Codable {
 public struct VaccinationCertificate: Codable {
     public var name: String
     public var birthDate: Date?
-    public var identifier: String
+    public var identifier: String?
     public var sex: Sex?
     public var vaccination: [ExtendedVaccination]
     public var issuer: String
@@ -48,17 +48,20 @@ public struct VaccinationCertificate: Codable {
     public init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         name = try values.decode(String.self, forKey: .name)
-        let birthDateString = try values.decode(String.self, forKey: .birthDate)
-        birthDate = DateUtils.vaccinationDateFormatter.date(from: birthDateString)
-        identifier = try values.decode(String.self, forKey: .identifier)
-        sex = try values.decode(Sex.self, forKey: .sex)
+        if let birthDateString = try? values.decode(String.self, forKey: .birthDate) {
+            birthDate = DateUtils.vaccinationDateFormatter.date(from: birthDateString)
+        }
+        identifier = try? values.decode(String.self, forKey: .identifier)
+        sex = try? values.decode(Sex.self, forKey: .sex)
         vaccination = try values.decode([ExtendedVaccination].self, forKey: .vaccination)
         issuer = try values.decode(String.self, forKey: .issuer)
         id = try values.decode(String.self, forKey: .id)
-        let validFromDateString = try values.decode(String.self, forKey: .validFrom)
-        validFrom = DateUtils.vaccinationDateFormatter.date(from: validFromDateString)
-        let validUntilDateString = try values.decode(String.self, forKey: .validUntil)
-        validUntil = DateUtils.vaccinationDateFormatter.date(from: validUntilDateString)
+        if let validFromDateString = try? values.decode(String.self, forKey: .validFrom) {
+            validFrom = DateUtils.vaccinationDateFormatter.date(from: validFromDateString)
+        }
+        if let validUntilDateString = try? values.decode(String.self, forKey: .validUntil) {
+            validUntil = DateUtils.vaccinationDateFormatter.date(from: validUntilDateString)
+        }
         version = try values.decode(String.self, forKey: .version)
     }
 
@@ -69,7 +72,7 @@ public struct VaccinationCertificate: Codable {
             let dateString = DateUtils.vaccinationDateFormatter.string(from: birthdate)
             try container.encode(dateString, forKey: .birthDate)
         }
-        try container.encode(identifier, forKey: .identifier)
+//        try container.encode(identifier, forKey: .identifier)
         try container.encode(sex, forKey: .sex)
         try container.encode(vaccination, forKey: .vaccination)
         try container.encode(issuer, forKey: .issuer)
@@ -83,11 +86,5 @@ public struct VaccinationCertificate: Codable {
             try container.encode(dateString, forKey: .validUntil)
         }
         try container.encode(version, forKey: .version)
-    }
-
-    
-    public func isComplete() -> Bool {
-        guard let series = vaccination.last?.series.components(separatedBy: "/"), series.count == 2 else { return false }
-        return series[0] == series[1]
     }
 }

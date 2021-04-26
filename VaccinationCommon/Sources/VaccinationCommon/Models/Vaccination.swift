@@ -45,8 +45,9 @@ public class Vaccination: Codable {
         product = try values.decode(String.self, forKey: .product)
         manufacturer = try values.decode(String.self, forKey: .manufacturer)
         series = try values.decode(String.self, forKey: .series)
-        let occurenceDateString = try values.decode(String.self, forKey: .occurrence)
-        occurrence = DateUtils.vaccinationDateFormatter.date(from: occurenceDateString)
+        if let occurenceDateString = try? values.decode(String.self, forKey: .occurrence) {
+            occurrence = DateUtils.vaccinationDateFormatter.date(from: occurenceDateString)
+        }
         country = try values.decode(String.self, forKey: .country)
     }
 

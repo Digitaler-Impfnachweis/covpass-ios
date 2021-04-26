@@ -108,7 +108,7 @@ public class DefaultCertificateViewModel<T: QRCoderProtocol>: CertificateViewMod
     // MARK: - Configurations
 
     private func getCertficateConfiguration(for certificate: VaccinationCertificate) -> QRCertificateConfiguration {
-        certificate.isComplete() ? fullCertificateConfiguration(for: certificate) : halfCertificateConfiguration(for: certificate)
+        certificate.partialVaccination ? halfCertificateConfiguration(for: certificate) : fullCertificateConfiguration(for: certificate)
     }
 
     private func fullCertificateConfiguration(for certificate: VaccinationCertificate) -> QRCertificateConfiguration {
@@ -133,7 +133,7 @@ public class DefaultCertificateViewModel<T: QRCoderProtocol>: CertificateViewMod
         let image = UIImage(named: UIConstants.IconName.StarEmpty, in: UIConstants.bundle, compatibleWith: nil)
         let stateImage = UIImage(named: UIConstants.IconName.HalfShield, in: UIConstants.bundle, compatibleWith: nil)
         let headerImage = UIImage(named: UIConstants.IconName.StarEmpty, in: UIConstants.bundle, compatibleWith: nil)
-        let qrViewConfiguration = QrViewConfiguration(tintColor: .black, qrValue: NSUUID().uuidString, qrTitle: "Vorlaüfiger Impfnachweis", qrSubtitle: nil)
+//        let qrViewConfiguration = QrViewConfiguration(tintColor: .black, qrValue: NSUUID().uuidString, qrTitle: "Vorlaüfiger Impfnachweis", qrSubtitle: nil)
         return QRCertificateConfiguration(
             title: "Covid-19 Nachweis",
             subtitle: certificate.name,
@@ -144,7 +144,7 @@ public class DefaultCertificateViewModel<T: QRCoderProtocol>: CertificateViewMod
             headerImage: headerImage,
             headerAction: nil,
             backgroundColor: UIConstants.BrandColor.onBackground50,
-            qrViewConfiguration: qrViewConfiguration)
+            qrViewConfiguration: nil)
     }
     
     private func noCertificateConfiguration() -> NoCertifiateConfiguration {
