@@ -22,7 +22,7 @@ public class ValidatorViewController: UIViewController {
     // MARK: - Public
     
     public var viewModel: ValidatorViewModel!
-    public var router: Popup?
+    public var router: PopupRouter?
     
     // MARK: - Private
 

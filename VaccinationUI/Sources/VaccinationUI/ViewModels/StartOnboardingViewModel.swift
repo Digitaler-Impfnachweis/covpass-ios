@@ -15,23 +15,23 @@ open class StartOnboardingViewModel: BaseViewModel {
         UIImage(named: UIConstants.IconName.StartScreen, in: UIConstants.bundle, compatibleWith: nil)
     }
 
-    public var title: String {
+    open var title: String {
         "start_onboarding_title".localized
     }
 
-    public var info: String {
+    open var info: String {
         "start_onboarding_message".localized
     }
     
-    var secureTitle: String {
+    open var secureTitle: String {
         "start_onboarding_secure_title".localized
     }
     
-    var secureText: String {
+    open var secureText: String {
         "start_onboarding_secure_message".localized
     }
     
-    var navigationButtonTitle: String {
+    open var navigationButtonTitle: String {
         "start_onboarding_button_title".localized
     }
     

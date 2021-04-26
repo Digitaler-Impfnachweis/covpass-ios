@@ -28,7 +28,7 @@ extension StartRouter: Router {
 
         let vc = ValidatorViewController.createFromStoryboard(bundle: Bundle.module)
         vc.viewModel = ValidatorViewModel()
-        vc.router = PopupRouter()
+        vc.router = ValidatorPopupRouter()
         windowDelegate?.update(rootViewController: vc)
     }
     

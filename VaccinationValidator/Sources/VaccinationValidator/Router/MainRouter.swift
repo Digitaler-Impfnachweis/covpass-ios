@@ -26,7 +26,7 @@ public struct MainRouter {
             // User has already seen the onboarding, go straight to the validator view
             let vc = ValidatorViewController.createFromStoryboard(bundle: Bundle.module)
             vc.viewModel = ValidatorViewModel()
-            vc.router = PopupRouter()
+            vc.router = ValidatorPopupRouter()
             return vc
         }
 

@@ -11,7 +11,7 @@ import VaccinationUI
 import BottomPopup
 import Scanner
 
-public class PopupRouter {
+public class ValidatorPopupRouter {
     
     // MARK: - Init
     
@@ -20,7 +20,7 @@ public class PopupRouter {
 
 // MARK: - Router
 
-extension PopupRouter: Popup {
+extension ValidatorPopupRouter: PopupRouter {
     
     public func presentPopup(onTopOf viewController: UIViewController) {
         let popupVC = ProofPopupViewController.createFromStoryboard()
@@ -33,7 +33,7 @@ extension PopupRouter: Popup {
 
 // MARK: - BottomPopupDelegate
 
-extension PopupRouter: BottomPopupDelegate {
+extension ValidatorPopupRouter: BottomPopupDelegate {
     public func bottomPopupViewLoaded(){}
     public func bottomPopupWillAppear(){}
     public func bottomPopupDidAppear(){}
