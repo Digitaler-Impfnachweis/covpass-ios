@@ -44,7 +44,7 @@ public struct VaccinationViewModel {
     }
 
     public var issuer: String {
-        return certificate.issuer
+        return certificate.issuer ?? ""
     }
 
     public var country: String {
