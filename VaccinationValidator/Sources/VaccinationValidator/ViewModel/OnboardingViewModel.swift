@@ -13,27 +13,27 @@ public class OnboardingViewModel: StartOnboardingViewModel {
     public override init() {}
 
     public override var image: UIImage? {
-        UIImage(named: UIConstants.IconName.StartScreen, in: UIConstants.bundle, compatibleWith: nil)
+        UIImage(named: "illustration_1", in: UIConstants.bundle, compatibleWith: nil)
     }
 
     public override var title: String {
-        "Willkommen zur Prüf-App für digialte Impfnachweise"
+        "validation_onboarding_welcome".localized
     }
 
     public override var info: String {
-        "Schnell und datensicher die Gültigkeit eines Impfnachweises prüfen."
+        "validation_onboarding_body".localized
     }
     
     public override var secureTitle: String {
-        "Sicherer Datenaustausch"
+        "validation_onboarding_secure_title".localized
     }
     
     public override var secureText: String {
-        "Es werden keine persönlichen Daten gespeichert und Sie sehen nur die wirklich notwendigen Informationen."
+        "validation_onboarding_secure_body".localized
     }
     
     public override var navigationButtonTitle: String {
-        "Jetzt starten"
+        "validation_onboarding_start".localized
     }
     
     public override var secureImage: UIImage? {

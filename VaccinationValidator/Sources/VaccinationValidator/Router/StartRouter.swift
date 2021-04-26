@@ -23,13 +23,15 @@ public struct StartRouter {
 
 extension StartRouter: Router {
     public func navigateToNextViewController() {
-        // User saw onboarding once, let's remember that for the next start
-        UserDefaults.StartupInfo.set(true, forKey: .onboarding)
-
-        let vc = ValidatorViewController.createFromStoryboard(bundle: Bundle.module)
-        vc.viewModel = ValidatorViewModel()
-        vc.router = ValidatorPopupRouter()
-        windowDelegate?.update(rootViewController: vc)
+        var onboardingRouter = OnboardingRouter()
+        onboardingRouter.windowDelegate = windowDelegate
+        let controller = OnboardingContainerViewController.createFromStoryboard()
+        controller.viewModel = OnboardingContainerViewModel(items: [
+            ValidationOnboardingPageViewModel(type: .page1),
+            ValidationOnboardingPageViewModel(type: .page2)
+        ])
+        controller.router = onboardingRouter
+        windowDelegate?.update(rootViewController: controller)
     }
     
     public func navigateToPreviousViewController() {
