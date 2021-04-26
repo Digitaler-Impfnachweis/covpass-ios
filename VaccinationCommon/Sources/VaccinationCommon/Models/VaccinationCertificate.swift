@@ -72,7 +72,7 @@ public struct VaccinationCertificate: Codable {
             let dateString = DateUtils.vaccinationDateFormatter.string(from: birthdate)
             try container.encode(dateString, forKey: .birthDate)
         }
-//        try container.encode(identifier, forKey: .identifier)
+        try container.encode(identifier, forKey: .identifier)
         try container.encode(sex, forKey: .sex)
         try container.encode(vaccination, forKey: .vaccination)
         try container.encode(issuer, forKey: .issuer)
@@ -86,5 +86,11 @@ public struct VaccinationCertificate: Codable {
             try container.encode(dateString, forKey: .validUntil)
         }
         try container.encode(version, forKey: .version)
+    }
+}
+
+extension VaccinationCertificate: Equatable {
+    public static func == (lhs: VaccinationCertificate, rhs: VaccinationCertificate) -> Bool {
+        return lhs.name == rhs.name && lhs.birthDate == rhs.birthDate
     }
 }
