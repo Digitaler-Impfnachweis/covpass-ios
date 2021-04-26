@@ -9,8 +9,10 @@ import Foundation
 import UIKit
 import VaccinationPass
 import VaccinationUI
+import VaccinationCommon
 
 class MockCertificateViewModel: CertificateViewModel {
+
     // MARK: - Test Variables
     
     var processCalled = false
@@ -56,5 +58,13 @@ class MockCertificateViewModel: CertificateViewModel {
 
     func loadCertificatesConfiguration() {
         certificates = [MockCellConfiguration.noCertificateConfiguration()]
+    }
+
+    func process(payload: String, completion: @escaping ((ExtendedVaccinationCertificate?, Error?) -> Void)) {
+
+    }
+
+    func detailViewModel(_ indexPath: IndexPath) -> VaccinationDetailViewModel? {
+        return nil
     }
 }

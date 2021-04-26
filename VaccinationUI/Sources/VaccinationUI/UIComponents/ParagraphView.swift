@@ -65,11 +65,11 @@ public class ParagraphView: MarginableXibView {
     public override var margins: [Margin] {
         return [
             RelatedViewMargin(constant: 40, relatedViewType: PrimaryButtonContainer.self),
-            RelatedViewMargin(constant: 12, relatedViewType: SecondaryButtonContainer.self),
             RelatedViewMargin(constant: 24, relatedViewType: ParagraphView.self),
             RelatedViewMargin(constant: 12, relatedViewType: Headline.self),
             RelatedViewMargin(constant: 12, relatedViewType: Spacer.self),
             PositionMargin(constant: topMargin, position: 24, type: .top),
+            RelatedViewMargin(constant: 12, relatedViewType: SecondaryButtonContainer.self),
         ]
     }
 
