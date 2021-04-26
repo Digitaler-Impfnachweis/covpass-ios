@@ -132,6 +132,20 @@ public class DefaultCertificateViewModel<T: QRCoderProtocol>: CertificateViewMod
             return nil
         }
     }
+
+    public func detailViewModel(_ cert: ExtendedVaccinationCertificate) -> VaccinationDetailViewModel? {
+        do {
+            let list = try service.fetch().wait()
+            if list.certificates.isEmpty {
+                return nil
+            }
+            let pair = findCertificatePair(cert, list.certificates)
+            return VaccinationDetailViewModel(certificates: pair)
+        } catch {
+            print(error)
+            return nil
+        }
+    }
     
     // MARK: - Configurations
 

@@ -103,7 +103,7 @@ extension CertificateViewController: ScannerDelegate {
         case .success(let payload):
             viewModel.process(payload: payload).done({ cert in
                 let vc = VaccinationDetailViewController.createFromStoryboard()
-                vc.viewModel = VaccinationDetailViewModel(certificates: [cert])
+                vc.viewModel = self.viewModel.detailViewModel(cert)
                 vc.router = ProofPopupRouter()
                 self.navigationController?.pushViewController(vc, animated: true)
             }).catch({ error in

@@ -30,12 +30,11 @@ public class VaccinationCertificateService {
                 let certificate = try JSONDecoder().decode(VaccinationCertificateList.self, from: data)
                 seal.fulfill(certificate)
             } catch {
-                // FIXME KeychainError is internal. It needs to be public so we can use it
-    //            if error == KeychainError.fetch {
-    //                return nil
-    //            }
-    //                throw error
-                seal.fulfill(VaccinationCertificateList(certificates: []))
+                if case KeychainError.fetch = error {
+                    seal.fulfill(VaccinationCertificateList(certificates: []))
+                    return
+                }
+                throw error
             }
         }
     }
