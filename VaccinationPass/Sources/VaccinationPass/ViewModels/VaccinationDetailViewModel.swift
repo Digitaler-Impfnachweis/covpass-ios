@@ -27,10 +27,7 @@ public struct VaccinationDetailViewModel {
     public var isFavorite: Bool {
         do {
             let certList = try service.fetch().wait()
-            for cert in certificates where cert.vaccinationCertificate.id == certList.favoriteCertificateId {
-                return true
-            }
-            return false
+            return certificates.contains(where: { $0.vaccinationCertificate.id == certList.favoriteCertificateId })
         } catch {
             print(error)
             return false
@@ -87,11 +84,7 @@ public struct VaccinationDetailViewModel {
             guard let id = certificates.first?.vaccinationCertificate.id else {
                 return certList
             }
-            if certList.favoriteCertificateId == id {
-                certList.favoriteCertificateId = ""
-            } else {
-                certList.favoriteCertificateId = id
-            }
+            certList.favoriteCertificateId = certList.favoriteCertificateId == id ? nil : id
             return certList
         }).then({ cert in
             return service.save(cert)
