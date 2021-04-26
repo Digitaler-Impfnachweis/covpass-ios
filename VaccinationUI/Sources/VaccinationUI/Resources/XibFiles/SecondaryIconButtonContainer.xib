@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SecondaryIconButtonContainer" customModule="VaccinationUI">
+            <connections>
+                <outlet property="bottomLayoutConstraint" destination="5SU-sV-cNA" id="yoL-SM-0uh"/>
+                <outlet property="dotPulseActivityView" destination="xrX-NC-KEl" id="nER-DU-DNP"/>
+                <outlet property="icon" destination="s5P-D4-2rh" id="zIE-3Y-IRV"/>
+                <outlet property="innerButton" destination="8eZ-Kv-fwO" id="7VM-Qt-M3D"/>
+                <outlet property="leadingTitleInsetConstraint" destination="7oG-M5-skl" id="B9Y-xD-E6E"/>
+                <outlet property="leftLayoutConstraint" destination="PoB-0f-kjg" id="b1U-4a-Okw"/>
+                <outlet property="rightLayoutConstraint" destination="U9o-6X-meW" id="yVj-ie-AUc"/>
+                <outlet property="textableView" destination="vLl-lS-NtW" id="svb-Ek-kBx"/>
+                <outlet property="topLayoutConstraint" destination="pOR-gc-CfU" id="7II-Ps-t3y"/>
+                <outlet property="trailingTitleInsetConstraint" destination="zjC-ys-Z5Z" id="SAm-Ij-GSk"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="efM-QZ-31c" userLabel="View">
+            <rect key="frame" x="0.0" y="0.0" width="200" height="100"/>
+            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VpU-at-VIC">
+                    <rect key="frame" x="40" y="58" width="120" height="24"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="trash" translatesAutoresizingMaskIntoConstraints="NO" id="s5P-D4-2rh">
+                            <rect key="frame" x="0.0" y="0.0" width="24" height="24"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="s5P-D4-2rh" secondAttribute="height" multiplier="1:1" id="3R3-yG-dlS"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="InnerLabel" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vLl-lS-NtW">
+                            <rect key="frame" x="24" y="0.0" width="96" height="24"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="24" id="0Tg-4U-vnF"/>
+                    </constraints>
+                </stackView>
+                <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8eZ-Kv-fwO">
+                    <rect key="frame" x="0.0" y="40" width="200" height="60"/>
+                    <connections>
+                        <action selector="buttonPressed:" destination="-1" eventType="touchUpInside" id="29W-ae-SeZ"/>
+                    </connections>
+                </button>
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xrX-NC-KEl" customClass="DotPulseActivityIndicator" customModule="VaccinationUI">
+                    <rect key="frame" x="80" y="35" width="40" height="30"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="40" id="eLS-uT-yaQ"/>
+                        <constraint firstAttribute="height" constant="30" id="gOt-gh-zLl"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="color" keyPath="color">
+                            <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="numberOfDots">
+                            <integer key="value" value="3"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="padding">
+                            <real key="value" value="5"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="VjE-kW-WlL"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="xrX-NC-KEl" firstAttribute="centerX" secondItem="efM-QZ-31c" secondAttribute="centerX" id="3Ub-Kk-oBH"/>
+                <constraint firstItem="xrX-NC-KEl" firstAttribute="centerY" secondItem="efM-QZ-31c" secondAttribute="centerY" id="541-Tj-Dyv"/>
+                <constraint firstAttribute="bottom" secondItem="8eZ-Kv-fwO" secondAttribute="bottom" id="5SU-sV-cNA"/>
+                <constraint firstItem="VpU-at-VIC" firstAttribute="leading" secondItem="8eZ-Kv-fwO" secondAttribute="leading" constant="40" id="7oG-M5-skl"/>
+                <constraint firstItem="8eZ-Kv-fwO" firstAttribute="leading" secondItem="efM-QZ-31c" secondAttribute="leading" priority="999" id="PoB-0f-kjg"/>
+                <constraint firstAttribute="trailing" secondItem="8eZ-Kv-fwO" secondAttribute="trailing" priority="999" id="U9o-6X-meW"/>
+                <constraint firstItem="VpU-at-VIC" firstAttribute="bottom" secondItem="8eZ-Kv-fwO" secondAttribute="bottom" constant="-18" id="dDE-Ur-v5E"/>
+                <constraint firstItem="VpU-at-VIC" firstAttribute="top" secondItem="8eZ-Kv-fwO" secondAttribute="top" constant="18" id="jFC-og-deF"/>
+                <constraint firstItem="8eZ-Kv-fwO" firstAttribute="top" secondItem="efM-QZ-31c" secondAttribute="top" priority="999" id="pOR-gc-CfU"/>
+                <constraint firstItem="VpU-at-VIC" firstAttribute="trailing" secondItem="8eZ-Kv-fwO" secondAttribute="trailing" constant="-40" id="zjC-ys-Z5Z"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="54" y="25"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="trash" width="27" height="26"/>
+    </resources>
+</document>

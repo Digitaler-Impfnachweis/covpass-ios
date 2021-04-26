@@ -1,5 +1,5 @@
 //
-//  SecureContentView.swift
+//  ParagraphIconView.swift
 //
 //
 //  Copyright © 2021 IBM. All rights reserved.
@@ -8,17 +8,11 @@
 import UIKit
 
 @IBDesignable
-public class SecureContentView: MarginableXibView {
-    
+public class ParagraphIconView: MarginableXibView {
     @IBOutlet public var stackView: UIStackView!
+    @IBOutlet public var icon: UIImageView!
     @IBOutlet public var title: UILabel!
     @IBOutlet public var body: LinkTextView!
-    @IBOutlet public var imageView: UIImageView!
-
-    internal static let BodyLeftInset: CGFloat = -5
-
-    public var topMargin: CGFloat = 25
-    public var marginToSecondaryButton: CGFloat = 40
 
     public var titleText: String? {
         didSet {
@@ -63,6 +57,16 @@ public class SecureContentView: MarginableXibView {
         }
     }
 
+    public override var margins: [Margin] {
+        return [
+            RelatedViewMargin(constant: 24, relatedViewType: PrimaryButtonContainer.self),
+            RelatedViewMargin(constant: 24, relatedViewType: PrimaryButtonContainer.self, type: .top),
+            RelatedViewMargin(constant: 24, relatedViewType: ParagraphView.self),
+            RelatedViewMargin(constant: 12, relatedViewType: Headline.self),
+            RelatedViewMargin(constant: 12, relatedViewType: Spacer.self),
+        ]
+    }
+
     required init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
@@ -93,6 +97,5 @@ public class SecureContentView: MarginableXibView {
         title.textColor = UIConstants.BrandColor.onBackground100
         bodyFont = UIConstants.Font.regular
         body.textColor = UIConstants.BrandColor.onBackground100
-        imageView.tintColor = UIConstants.BrandColor.brandAccent
     }
 }

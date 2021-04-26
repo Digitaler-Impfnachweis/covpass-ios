@@ -30,7 +30,7 @@ public struct MainRouter {
             certificateViewModel.delegate = certificateViewController
             certificateViewController.viewModel = certificateViewModel
             certificateViewController.router = ProofPopupRouter()
-            return certificateViewController
+            return UINavigationController(rootViewController: certificateViewController)
         }
 
         var router = StartRouter()

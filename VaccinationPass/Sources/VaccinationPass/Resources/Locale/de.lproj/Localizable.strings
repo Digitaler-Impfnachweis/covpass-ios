@@ -22,3 +22,49 @@
 "vaccination_no_certificate_card_title" = "Kein Nachweis hinzugefügt";
 
 "vaccination_no_certificate_card_message" = "Scannen Sie eine\n Bescheinigung mit QR Code, um hier \nIhren Nachweis zu sehen";
+
+/********** Detail Screen **********/
+
+"vaccination_detail_title" = "COVID-19-Impfung";
+
+"vaccination_detail_immunization_partial_title" = "1 von 2 Impfungen vorhanden";
+
+"vaccination_detail_immunization_full_title" = "Impfschutz vollständig";
+
+"vaccination_detail_immunization_1_body" = "Ihr Impfschutz ist nicht vollständig. Um ein Prüfzertifikat zu erstellen, fügen Sie bitte die zweite Impfung hinzu.";
+
+"vaccination_detail_immunization_2_body" = "Teilen Sie jetzt den Impfschutz vertrauensvoll mit einer weiteren Person. Nutzen Sie dafür das Prüfzertifikat.";
+
+"vaccination_detail_immunization_1_button" = "Impfung hinzufügen";
+
+"vaccination_detail_immunization_2_button" = "Prüfzertifikat anzeigen";
+
+"vaccination_detail_personal_information" = "Persönliche Daten";
+
+"vaccination_detail_name" = "Name";
+
+"vaccination_detail_birthdate" = "Geburtsdatum";
+
+"vaccination_detail_location" = "Impfort";
+
+"vaccination_detail_date" = "Datum der Impfung";
+
+"vaccination_detail_vaccine" = "Impfstoff";
+
+"vaccination_detail_vaccine_code" = "Chargennummer";
+
+"vaccination_detail_manufacturer" = "Hersteller";
+
+"vaccination_detail_issuer" = "Aussteller";
+
+"vaccination_detail_country" = "Land";
+
+"vaccination_detail_uvci" = "UVCI (Identifikationsnummer für das Zertifikat)";
+
+"vaccination_detail_delete" = "Nachweis löschen";
+
+"vaccination_detail_vaccination_title" = "Impfung %@ von %@";
+
+"vaccination_delete_title" = "Möchten Sie das Zertifikat von %@ wirklich löschen?";
+
+"vaccination_delete_body" = "Alle enthaltenen Daten werden rückstandslos von diesem Gerät entfernt. Die Wiederherstellung der Daten ist nicht möglich.";
