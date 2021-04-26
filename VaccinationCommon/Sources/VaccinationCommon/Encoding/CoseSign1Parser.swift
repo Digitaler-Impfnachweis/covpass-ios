@@ -26,6 +26,11 @@ enum CoseParsingError: Error {
     case general
 }
 
+enum CoseProtectedHeader: Int {
+    case alg = 1
+    case kid = 4
+}
+
 struct CoseSign1Message {
     var protected: [UInt8]
     var unprotected: Any?
@@ -87,5 +92,13 @@ class CoseSign1Parser {
         }
 
         return result
+    }
+
+    func parse(header: CBOR?) {
+        guard let data = header, case .map(let headerMap) = data else { return }
+
+        for (key, value) in headerMap {
+            print("\(key): \(value)")
+        }
     }
 }
