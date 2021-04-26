@@ -14,19 +14,13 @@ public class ValidatorViewController: UIViewController {
     // MARK: - IBOutlet
 
     @IBOutlet public var headerView: InfoHeaderView!
-    @IBOutlet public var showAllButton: UIButton!
-    @IBOutlet public var showAllLabel: UILabel!
-    @IBOutlet public var tableView: UITableView!
-    @IBOutlet public var stackView: UIStackView!
+    @IBOutlet public var scanCard: ScanCardView!
+    @IBOutlet public var offlineCard: OfflineCardView!
     
     // MARK: - Public
     
     public var viewModel: ValidatorViewModel!
     public var router: PopupRouter?
-    
-    // MARK: - Private
-
-    private var containerView: UIView!
     
     // MARK: - Fifecycle
     
@@ -34,7 +28,6 @@ public class ValidatorViewController: UIViewController {
         super.viewDidLoad()
         setupHeaderView()
         setupOther()
-        setupTableView()
         setupOther()
         setupCardView()
     }
@@ -44,39 +37,23 @@ public class ValidatorViewController: UIViewController {
     public func setupHeaderView() {
         headerView.actionButton.imageEdgeInsets = viewModel.headerButtonInsets
         headerView.headline.text = viewModel?.title
+        headerView.buttonImage = UIImage(named: "ega_help", in: UIConstants.bundle, compatibleWith: nil)
     }
-    
-    private func setupTableView() {
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.tableFooterView = UIView(frame: CGRect.zero)
-        tableView.register(UINib(nibName: ActionTableViewCell.identifier, bundle: UIConstants.bundle), forCellReuseIdentifier: ActionTableViewCell.identifier)
-        tableView.tintColor = UIConstants.BrandColor.brandAccent
-    }
-    
+
     private func setupOther() {
         view.tintColor = UIConstants.BrandColor.brandAccent
         headerView.headline.text = viewModel?.title
     }
     
     // MARK: - Card View
-    
-    func configureCard<T>(_ type: T.Type) -> T where T : BaseCardView {
-        let certificate = T(frame: CGRect(origin: stackView.bounds.origin, size: CGSize(width: stackView.bounds.width, height: viewModel.continerHeight)))
-        certificate.cornerRadius = viewModel.continerCornerRadius
-        return certificate
-    }
-    
+
     func setupCardView() {
-        if containerView != nil {
-            stackView.removeArrangedSubview(containerView)
-        }
-        
-        let card = configureCard(ScanCardView.self)
-        card.actionButton.title = "QR Code scannen"
-        card.actionButton.action = presentPopup
-        
-        stackView.insertArrangedSubview(card, at: stackView.arrangedSubviews.count - 1)
+        scanCard.actionButton.title = "Zertifikat scannen"
+        scanCard.actionButton.action = presentPopup
+        scanCard.cornerRadius = viewModel.continerCornerRadius
+
+        offlineCard.infoImageView.image = UIImage(named: "warning", in: UIConstants.bundle, compatibleWith: nil)
+        offlineCard.cornerRadius = viewModel.continerCornerRadius
     }
     
     func presentPopup() {
@@ -95,28 +72,6 @@ extension ValidatorViewController: ScannerDelegate {
         case .failure(let error):
             print("We have an error: \(error)")
         }
-    }
-}
-
-// MARK: - UITableViewDataSource
-
-extension ValidatorViewController: UITableViewDataSource {
-    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        viewModel?.titles.count ?? 0
-    }
-    
-    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: ActionTableViewCell.identifier, for: indexPath) as? ActionTableViewCell else { return UITableViewCell()}
-        viewModel?.configure(cell: cell, at: indexPath)
-        return cell
-    }
-}
-
-// MARK: - UITableViewDelegate
-
-extension ValidatorViewController: UITableViewDelegate {
-    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // TODO: - show smth
     }
 }
 

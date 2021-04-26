@@ -14,7 +14,7 @@
         </array>
     </customFonts>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NoCertificateCardView" customModule="VaccinationUI">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ScanCardView" customModule="VaccinationUI">
             <connections>
                 <outlet property="actionButton" destination="pP8-Zv-hAB" id="yF1-hG-I8n"/>
                 <outlet property="textLable" destination="EKc-Hh-BeX" id="YWo-Gc-YYU"/>
@@ -30,10 +30,10 @@
                     <rect key="frame" x="0.0" y="0.0" width="414" height="335"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pP8-Zv-hAB" customClass="PrimaryIconButtonContainer" customModule="VaccinationUI">
-                            <rect key="frame" x="40" y="109" width="334" height="55"/>
+                            <rect key="frame" x="82" y="232" width="250" height="55"/>
                             <color key="backgroundColor" systemColor="systemBlueColor"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="334" id="3bS-Q9-ZcT"/>
+                                <constraint firstAttribute="width" constant="250" id="5Zn-yb-3yy"/>
                                 <constraint firstAttribute="height" constant="55" id="pTo-HI-s5V"/>
                             </constraints>
                             <userDefinedRuntimeAttributes>
@@ -45,16 +45,16 @@
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                         </view>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nachweis prüfen" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VW2-PA-GY7">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Impfschutz prüfen" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VW2-PA-GY7">
                             <rect key="frame" x="24" y="24" width="366" height="31.5"/>
                             <fontDescription key="fontDescription" name="IBMPlexSans-SemiBold" family="IBM Plex Sans" pointSize="24"/>
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EKc-Hh-BeX">
-                            <rect key="frame" x="24" y="55.5" width="366" height="18.5"/>
+                            <rect key="frame" x="24" y="55.5" width="366" height="36.5"/>
                             <attributedString key="attributedText">
-                                <fragment content="Scannen Sie den QR Code eines Prüfzertifikats">
+                                <fragment content="Scannen Sie jetzt das Prüfzertifikat. Sie sehen sofort, ob die Person geimpft ist.">
                                     <attributes>
                                         <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <font key="NSFont" size="14" name="IBMPlexSans"/>
@@ -65,14 +65,13 @@
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
-                    <color key="backgroundColor" systemColor="systemBlueColor"/>
                     <constraints>
                         <constraint firstItem="pP8-Zv-hAB" firstAttribute="centerX" secondItem="Flh-qW-5MS" secondAttribute="centerX" id="0WP-Cm-VKl"/>
                         <constraint firstItem="EKc-Hh-BeX" firstAttribute="leading" secondItem="VW2-PA-GY7" secondAttribute="leading" id="AkO-UG-BLg"/>
                         <constraint firstAttribute="trailing" secondItem="VW2-PA-GY7" secondAttribute="trailing" constant="24" id="Egh-dT-rvh"/>
                         <constraint firstItem="EKc-Hh-BeX" firstAttribute="trailing" secondItem="VW2-PA-GY7" secondAttribute="trailing" id="Kgp-rr-Ly4"/>
                         <constraint firstItem="VW2-PA-GY7" firstAttribute="leading" secondItem="Flh-qW-5MS" secondAttribute="leading" constant="24" id="YKH-r5-D3v"/>
-                        <constraint firstItem="pP8-Zv-hAB" firstAttribute="top" secondItem="EKc-Hh-BeX" secondAttribute="bottom" constant="35" id="hxz-GJ-lfZ"/>
+                        <constraint firstAttribute="bottom" secondItem="pP8-Zv-hAB" secondAttribute="bottom" constant="48" id="gh2-q2-gqI"/>
                         <constraint firstItem="EKc-Hh-BeX" firstAttribute="top" secondItem="VW2-PA-GY7" secondAttribute="bottom" id="mxn-c3-YYs"/>
                         <constraint firstItem="VW2-PA-GY7" firstAttribute="top" secondItem="Flh-qW-5MS" secondAttribute="top" constant="24" id="sPB-oJ-Npe"/>
                     </constraints>

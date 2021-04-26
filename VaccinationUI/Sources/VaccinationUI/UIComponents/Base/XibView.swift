@@ -56,6 +56,7 @@ open class XibView: UIView, Compoundable {
         super.init(frame: frame)
 
         xibSetup()
+        initView()
     }
 
     public required init?(coder aDecoder: NSCoder) {

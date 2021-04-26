@@ -22,13 +22,13 @@ public struct MainRouter {
     // MARK: - Public Methods
     
     public func rootViewController() -> UIViewController {
-//        if UserDefaults.StartupInfo.bool(.onboarding) {
-//            // User has already seen the onboarding, go straight to the validator view
-//            let vc = ValidatorViewController.createFromStoryboard(bundle: Bundle.module)
-//            vc.viewModel = ValidatorViewModel()
-//            vc.router = ValidatorPopupRouter()
-//            return vc
-//        }
+        if UserDefaults.StartupInfo.bool(.onboarding) {
+            // User has already seen the onboarding, go straight to the validator view
+            let vc = ValidatorViewController.createFromStoryboard(bundle: Bundle.module)
+            vc.viewModel = ValidatorViewModel()
+            vc.router = ValidatorPopupRouter()
+            return vc
+        }
 
         var router = StartRouter()
         router.windowDelegate = windowDelegate
