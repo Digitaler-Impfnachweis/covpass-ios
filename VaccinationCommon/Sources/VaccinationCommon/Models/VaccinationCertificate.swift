@@ -45,15 +45,6 @@ public struct VaccinationCertificate: Codable {
         case version
     }
 
-    public init() {
-        name = ""
-        identifier = ""
-        vaccination = []
-        issuer = ""
-        id = ""
-        version = ""
-    }
-
     public init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         name = try values.decode(String.self, forKey: .name)

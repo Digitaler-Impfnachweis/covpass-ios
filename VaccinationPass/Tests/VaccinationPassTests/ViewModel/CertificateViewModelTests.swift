@@ -40,7 +40,7 @@ class CertificateViewModelTests: XCTestCase {
     }
     
     func testProcessQr() {
-        sut.process(payload: NSUUID().uuidString)
+        sut.process(payload: NSUUID().uuidString, completion: {_,_ in })
         XCTAssertTrue(sutDelegate.updateCalled)
     }
     
