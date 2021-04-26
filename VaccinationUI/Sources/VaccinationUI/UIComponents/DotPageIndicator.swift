@@ -65,6 +65,7 @@ public class DotPageIndicator: UIView {
     }
 
     private func setupView() {
+        layoutMargins = .zero
         backgroundColor = .clear
         if dotContentView != nil {
             dotContentView.removeFromSuperview()

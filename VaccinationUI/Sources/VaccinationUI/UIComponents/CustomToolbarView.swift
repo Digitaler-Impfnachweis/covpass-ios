@@ -255,9 +255,10 @@ public class CustomToolbarView: XibView {
         if let primaryButton = previousMiddleButton, !primaryButton.title.isEmpty {
             showLoadingOverIconButton = false
         }
+        let title = showLoadingOverIconButton == false ? previousMiddleButton?.title : nil
         primaryButton = showLoadingOverIconButton ? PrimaryButtonContainer() : previousMiddleButton
         primaryButton.startAnimating(makeCircle: showLoadingOverIconButton)
-        configureMiddleButton(button: primaryButton)
+        configureMiddleButton(button: primaryButton, title: title)
     }
 
     // MARK: Private Methods
@@ -281,8 +282,10 @@ public class CustomToolbarView: XibView {
         addSubview(button)
         button.centerX(of: layoutMarginsGuide)
         button.pinEdges([.top, .bottom], to: layoutMarginsGuide)
-        button.setConstant(height: UIConstants.Size.CancelButtonSize)
-        button.setConstant(width: UIConstants.Size.CancelButtonSize)
+        button.setContentHuggingPriority(.required, for: .horizontal)
+        button.setContentHuggingPriority(.required, for: .vertical)
+//        button.setConstant(height: UIConstants.Size.CancelButtonSize)
+//        button.setConstant(width: UIConstants.Size.CancelButtonSize)
     }
 
     private func configureDisabledButton(button: PrimaryButtonContainer, title: String? = nil) {
@@ -293,10 +296,12 @@ public class CustomToolbarView: XibView {
         addSubview(button)
         button.centerX(of: layoutMarginsGuide)
         button.pinEdges([.top, .bottom], to: layoutMarginsGuide)
-        if button is PrimaryIconButtonContainer {
-            button.setConstant(height: UIConstants.Size.MiddleButtonSize)
-            button.setConstant(width: UIConstants.Size.MiddleButtonSize)
-        }
+        button.setContentHuggingPriority(.required, for: .horizontal)
+        button.setContentHuggingPriority(.required, for: .vertical)
+//        if button is PrimaryIconButtonContainer {
+//            button.setConstant(height: UIConstants.Size.MiddleButtonSize)
+//            button.setConstant(width: UIConstants.Size.MiddleButtonSize)
+//        }
     }
 
     private func configureMiddleButton(button: PrimaryButtonContainer, title: String? = nil) {
@@ -305,10 +310,12 @@ public class CustomToolbarView: XibView {
         addSubview(button)
         button.centerX(of: layoutMarginsGuide)
         button.pinEdges([.top, .bottom], to: layoutMarginsGuide)
-        if button is PrimaryIconButtonContainer {
-            button.setConstant(height: UIConstants.Size.MiddleButtonSize)
-            button.setConstant(width: UIConstants.Size.MiddleButtonSize)
-        }
+        button.setContentHuggingPriority(.required, for: .horizontal)
+        button.setContentHuggingPriority(.required, for: .vertical)
+//        if button is PrimaryIconButtonContainer {
+//            button.setConstant(height: UIConstants.Size.MiddleButtonSize)
+//            button.setConstant(width: UIConstants.Size.MiddleButtonSize)
+//        }
         button.defaultText = title
     }
 
@@ -319,10 +326,12 @@ public class CustomToolbarView: XibView {
         addSubview(button)
         button.centerX(of: layoutMarginsGuide)
         button.pinEdges([.top, .bottom], to: layoutMarginsGuide)
-        if button is PrimaryIconButtonContainer {
-            button.setConstant(height: UIConstants.Size.MiddleButtonSize)
-            button.setConstant(width: UIConstants.Size.MiddleButtonSize)
-        }
+        button.setContentHuggingPriority(.required, for: .horizontal)
+        button.setContentHuggingPriority(.required, for: .vertical)
+//        if button is PrimaryIconButtonContainer {
+//            button.setConstant(height: UIConstants.Size.MiddleButtonSize)
+//            button.setConstant(width: UIConstants.Size.MiddleButtonSize)
+//        }
     }
 
     // MARK: Action Methods
