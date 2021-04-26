@@ -29,6 +29,8 @@ open class UIConstants {
         public static let IconClose = "epa_button_close"
         public static let ProofScreen = "scan_proof_image"
         public static let SettingsImage = "ega_settings_image"
+        public static let StatusFull = "status_full"
+        public static let StatusPartial = "status_partial"
         public static let HelpIcon = "ega_help"
         public static let NoCertificateImage = "no_vaccine_image"
         public static let StarEmpty = "star_48px"

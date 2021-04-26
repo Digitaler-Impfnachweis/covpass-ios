@@ -17,12 +17,20 @@ public class VaccinationCertificateService {
         try Keychain.storePassword(data, for: KeychainConfiguration.vaccinationCertificateKey)
     }
 
-    public func fetch() throws -> VaccinationCertificateList {
-        guard let data = try Keychain.fetchPassword(for: KeychainConfiguration.vaccinationCertificateKey) else {
-            throw ApplicationError.general("Could not find certificate in Keychain")
+    public func fetch() throws -> VaccinationCertificateList? {
+        do {
+            guard let data = try Keychain.fetchPassword(for: KeychainConfiguration.vaccinationCertificateKey) else {
+                throw ApplicationError.general("Could not find certificate in Keychain")
+            }
+            let certificate = try JSONDecoder().decode(VaccinationCertificateList.self, from: data)
+            return certificate
+        } catch {
+            // TODO FIX THIS
+//            if error == KeychainError.fetch {
+//                return nil
+//            }
+            return nil
+            throw error
         }
-        let certificate = try JSONDecoder().decode(VaccinationCertificateList.self, from: data)
-
-        return certificate
     }
 }

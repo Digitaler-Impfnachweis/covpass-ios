@@ -32,35 +32,46 @@ public class DefaultCertificateViewModel<T: QRCoderProtocol>: CertificateViewMod
     public weak var delegate: ViewModelDelegate?
     public var certificates = [BaseCertifiateConfiguration]()
     public var addButtonImage = UIImage(named: UIConstants.IconName.PlusIcon, in: UIConstants.bundle, compatibleWith: nil)
-    
-    public func process(payload: String, completion: ((Error) -> Void)? = nil) {
-        guard let decodedPayload = parser.parse(payload, completion: completion) else { return }
+
+    public func process(payload: String, completion: @escaping ((ExtendedVaccinationCertificate?, Error?) -> Void)) {
+        guard let decodedPayload = parser.parse(payload, completion: { error in
+            completion(nil, error)
+        }) else {
+            completion(nil, ApplicationError.unknownError)
+            return
+        }
         do {
             let extendedVaccinationCertificate = ExtendedVaccinationCertificate(vaccinationCertificate: decodedPayload, vaccinationQRCodeData: payload, validationQRCodeData: nil)
-            var certificateList = try service.fetch()
+            var certificateList = VaccinationCertificateList(certificates: [])
+            if let list = try service.fetch() {
+                certificateList = list
+            }
             if certificateList.certificates.allSatisfy({ $0.vaccinationQRCodeData != payload }) {
                 certificateList.certificates.append(extendedVaccinationCertificate)
                 try service.save(certificateList)
-                certificates.append(getCertficateConfiguration(for: extendedVaccinationCertificate.vaccinationCertificate))
+                certificates = certificateList.certificates.map { getCertficateConfiguration(for: $0.vaccinationCertificate) }
+                completion(extendedVaccinationCertificate, nil)
             } else {
-                completion?(QRCodeError.qrCodeExists)
+                completion(nil, QRCodeError.qrCodeExists)
             }
         } catch {
-            do {
-                let extendedVaccinationCertificate = ExtendedVaccinationCertificate(vaccinationCertificate: decodedPayload, vaccinationQRCodeData: payload, validationQRCodeData: nil)
-                let certificateList = VaccinationCertificateList(certificates: [extendedVaccinationCertificate])
-                try service.save(certificateList)
-                certificates = [getCertficateConfiguration(for: extendedVaccinationCertificate.vaccinationCertificate)]
-            } catch {
-                completion?(error)
-            }
+            completion(nil, error)
         }
         delegate?.shouldReload()
     }
 
     public func loadCertificatesConfiguration() {
         do {
-            let certificateList = try service.fetch()
+            guard let certificateList = try service.fetch() else {
+                certificates = [noCertificateConfiguration()]
+                delegate?.shouldReload()
+                return
+            }
+            if certificateList.certificates.isEmpty {
+                certificates = [noCertificateConfiguration()]
+                delegate?.shouldReload()
+                return
+            }
             certificates = certificateList.certificates.map { getCertficateConfiguration(for: $0.vaccinationCertificate) }
             delegate?.shouldReload()
         } catch {
@@ -82,6 +93,22 @@ public class DefaultCertificateViewModel<T: QRCoderProtocol>: CertificateViewMod
         guard certificates.indices.contains(indexPath.row) else {
             return "\(NoCertificateCollectionViewCell.self)"}
         return certificates[indexPath.row].identifier
+    }
+
+    public func detailViewModel(_ indexPath: IndexPath) -> VaccinationDetailViewModel? {
+        do {
+            guard let certificateList = try service.fetch() else {
+                certificates = [noCertificateConfiguration()]
+                return nil
+            }
+            if certificateList.certificates.isEmpty {
+                return nil
+            }
+            return VaccinationDetailViewModel(certificates: [certificateList.certificates[indexPath.row]])
+        } catch {
+            print(error)
+            return nil
+        }
     }
     
     // MARK: - Configurations

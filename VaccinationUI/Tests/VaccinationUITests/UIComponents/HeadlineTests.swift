@@ -65,6 +65,6 @@ class HeadlineTests: XCTestCase {
 
         // Then
         XCTAssertEqual(marginToParagraphView.type, MarginType.bottom)
-        XCTAssertEqual(marginToParagraphView.constant, 24)
+        XCTAssertEqual(marginToParagraphView.constant, 12)
     }
 }
