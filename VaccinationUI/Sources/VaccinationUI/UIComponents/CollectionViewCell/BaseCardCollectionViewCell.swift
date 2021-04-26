@@ -41,6 +41,9 @@ public class BaseCardCollectionViewCell: UICollectionViewCell {
     @IBInspectable public var cardTintColor: UIColor = UIConstants.BrandColor.brandAccent {
         didSet { tintColor = cardTintColor }
     }
+
+    public var onAction: (() -> Void)?
+    public var onFavorite: (() -> Void)?
 }
 
 // MARK: - CellConfigutation

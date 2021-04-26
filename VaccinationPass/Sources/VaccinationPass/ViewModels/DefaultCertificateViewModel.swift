@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 import VaccinationUI
 import VaccinationCommon
+import PromiseKit
 
 public class DefaultCertificateViewModel<T: QRCoderProtocol>: CertificateViewModel {
     // MARK: - Parser
@@ -32,40 +33,74 @@ public class DefaultCertificateViewModel<T: QRCoderProtocol>: CertificateViewMod
     public weak var delegate: ViewModelDelegate?
     public var certificates = [BaseCertifiateConfiguration]()
     public var addButtonImage = UIImage(named: UIConstants.IconName.PlusIcon, in: UIConstants.bundle, compatibleWith: nil)
-    
-    public func process(payload: String, completion: ((Error) -> Void)? = nil) {
-        guard let decodedPayload = parser.parse(payload, completion: completion) else { return }
-        do {
-            let extendedVaccinationCertificate = ExtendedVaccinationCertificate(vaccinationCertificate: decodedPayload, vaccinationQRCodeData: payload, validationQRCodeData: nil)
-            var certificateList = try service.fetch()
-            if certificateList.certificates.allSatisfy({ $0.vaccinationQRCodeData != payload }) {
-                certificateList.certificates.append(extendedVaccinationCertificate)
-                try service.save(certificateList)
-                certificates.append(getCertficateConfiguration(for: extendedVaccinationCertificate.vaccinationCertificate))
-            } else {
-                completion?(QRCodeError.qrCodeExists)
+
+    public func process(payload: String) -> Promise<ExtendedVaccinationCertificate> {
+        return Promise<ExtendedVaccinationCertificate>() { seal in
+            // TODO refactor parser
+            guard let decodedPayload = parser.parse(payload, completion: { error in
+                seal.reject(error)
+            }) else {
+                seal.reject(ApplicationError.unknownError)
+                return
             }
-        } catch {
-            do {
-                let extendedVaccinationCertificate = ExtendedVaccinationCertificate(vaccinationCertificate: decodedPayload, vaccinationQRCodeData: payload, validationQRCodeData: nil)
-                let certificateList = VaccinationCertificateList(certificates: [extendedVaccinationCertificate])
-                try service.save(certificateList)
-                certificates = [getCertficateConfiguration(for: extendedVaccinationCertificate.vaccinationCertificate)]
-            } catch {
-                completion?(error)
-            }
-        }
-        delegate?.shouldReload()
+            seal.fulfill(ExtendedVaccinationCertificate(vaccinationCertificate: decodedPayload, vaccinationQRCodeData: payload, validationQRCodeData: nil))
+        }.then({ extendedVaccinationCertificate in
+            return self.service.fetch().then({ list -> Promise<Void> in
+                var certList = list
+                if certList.certificates.contains(where: { $0.vaccinationQRCodeData == payload }) {
+                    throw QRCodeError.qrCodeExists
+                }
+                certList.certificates.append(extendedVaccinationCertificate)
+                return self.service.save(certList)
+            }).then(self.service.fetch).then({ list -> Promise<ExtendedVaccinationCertificate> in
+                self.certificates = list.certificates.map { self.getCertficateConfiguration(for: $0.vaccinationCertificate) }
+                return Promise.value(extendedVaccinationCertificate)
+            })
+        })
     }
 
     public func loadCertificatesConfiguration() {
-        do {
-            let certificateList = try service.fetch()
-            certificates = certificateList.certificates.map { getCertficateConfiguration(for: $0.vaccinationCertificate) }
-            delegate?.shouldReload()
-        } catch {
-            certificates = [noCertificateConfiguration()]
+        service.fetch().map({ list in
+            return self.matchCertificates(list.certificates)
+        }).done({ list in
+            if list.isEmpty {
+                self.certificates = [self.noCertificateConfiguration()]
+                return
+            }
+            self.certificates = list.map { self.getCertficateConfiguration(for: $0.vaccinationCertificate) }
+        }).catch({ error in
+            print(error)
+            self.certificates = [self.noCertificateConfiguration()]
+        }).finally({
+            self.delegate?.shouldReload()
+        })
+    }
+
+    private func matchCertificates(_ certificates: [ExtendedVaccinationCertificate]) -> [ExtendedVaccinationCertificate] {
+        var list = [ExtendedVaccinationCertificate]()
+        var certs = certificates
+        while certs.count > 0 {
+            guard let cert = certs.popLast() else { return list }
+            let pair = findCertificatePair(cert, certs)
+            certs.removeAll(where: { pair.contains($0) })
+
+            if let fullCert = pair.first(where: { !$0.vaccinationCertificate.partialVaccination }) {
+                list.append(fullCert)
+            } else if let partialCert = pair.last {
+                list.append(partialCert)
+            }
         }
+        return list
+    }
+
+    private func findCertificatePair(_ certificate: ExtendedVaccinationCertificate, _ certificates: [ExtendedVaccinationCertificate]) -> [ExtendedVaccinationCertificate] {
+        var list = [certificate]
+        for cert in certificates where certificate.vaccinationCertificate == cert.vaccinationCertificate {
+            if !list.contains(cert) {
+                list.append(cert)
+            }
+        }
+        return list
     }
     
     public func configure<T: CellConfigutation>(cell: T, at indexPath: IndexPath)  {
@@ -83,11 +118,39 @@ public class DefaultCertificateViewModel<T: QRCoderProtocol>: CertificateViewMod
             return "\(NoCertificateCollectionViewCell.self)"}
         return certificates[indexPath.row].identifier
     }
+
+    public func detailViewModel(_ indexPath: IndexPath) -> VaccinationDetailViewModel? {
+        do {
+            let list = try service.fetch().wait()
+            if list.certificates.isEmpty {
+                return nil
+            }
+            let pair = findCertificatePair(list.certificates[indexPath.row], list.certificates)
+            return VaccinationDetailViewModel(certificates: pair)
+        } catch {
+            print(error)
+            return nil
+        }
+    }
+
+    public func detailViewModel(_ cert: ExtendedVaccinationCertificate) -> VaccinationDetailViewModel? {
+        do {
+            let list = try service.fetch().wait()
+            if list.certificates.isEmpty {
+                return nil
+            }
+            let pair = findCertificatePair(cert, list.certificates)
+            return VaccinationDetailViewModel(certificates: pair)
+        } catch {
+            print(error)
+            return nil
+        }
+    }
     
     // MARK: - Configurations
 
     private func getCertficateConfiguration(for certificate: VaccinationCertificate) -> QRCertificateConfiguration {
-        certificate.isComplete() ? fullCertificateConfiguration(for: certificate) : halfCertificateConfiguration(for: certificate)
+        certificate.partialVaccination ? halfCertificateConfiguration(for: certificate) : fullCertificateConfiguration(for: certificate)
     }
 
     private func fullCertificateConfiguration(for certificate: VaccinationCertificate) -> QRCertificateConfiguration {
@@ -112,7 +175,7 @@ public class DefaultCertificateViewModel<T: QRCoderProtocol>: CertificateViewMod
         let image = UIImage(named: UIConstants.IconName.StarEmpty, in: UIConstants.bundle, compatibleWith: nil)
         let stateImage = UIImage(named: UIConstants.IconName.HalfShield, in: UIConstants.bundle, compatibleWith: nil)
         let headerImage = UIImage(named: UIConstants.IconName.StarEmpty, in: UIConstants.bundle, compatibleWith: nil)
-        let qrViewConfiguration = QrViewConfiguration(tintColor: .black, qrValue: NSUUID().uuidString, qrTitle: "Vorlaüfiger Impfnachweis", qrSubtitle: nil)
+//        let qrViewConfiguration = QrViewConfiguration(tintColor: .black, qrValue: NSUUID().uuidString, qrTitle: "Vorlaüfiger Impfnachweis", qrSubtitle: nil)
         return QRCertificateConfiguration(
             title: "Covid-19 Nachweis",
             subtitle: certificate.name,
@@ -123,7 +186,7 @@ public class DefaultCertificateViewModel<T: QRCoderProtocol>: CertificateViewMod
             headerImage: headerImage,
             headerAction: nil,
             backgroundColor: UIConstants.BrandColor.onBackground50,
-            qrViewConfiguration: qrViewConfiguration)
+            qrViewConfiguration: nil)
     }
     
     private func noCertificateConfiguration() -> NoCertifiateConfiguration {

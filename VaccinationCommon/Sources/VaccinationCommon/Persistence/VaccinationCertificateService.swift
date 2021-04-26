@@ -7,22 +7,35 @@
 
 import Foundation
 import Keychain
+import PromiseKit
 
 public class VaccinationCertificateService {
     public init() {}
 
-    public func save(_ certificate: VaccinationCertificateList) throws {
-        let data = try JSONEncoder().encode(certificate)
-
-        try Keychain.storePassword(data, for: KeychainConfiguration.vaccinationCertificateKey)
+    public func save(_ certificate: VaccinationCertificateList) -> Promise<Void> {
+        return Promise { seal in
+            let data = try JSONEncoder().encode(certificate)
+            try Keychain.storePassword(data, for: KeychainConfiguration.vaccinationCertificateKey)
+            seal.fulfill_()
+        }
     }
 
-    public func fetch() throws -> VaccinationCertificateList {
-        guard let data = try Keychain.fetchPassword(for: KeychainConfiguration.vaccinationCertificateKey) else {
-            throw ApplicationError.general("Could not find certificate in Keychain")
+    public func fetch() -> Promise<VaccinationCertificateList> {
+        return Promise { seal in
+            do {
+                guard let data = try Keychain.fetchPassword(for: KeychainConfiguration.vaccinationCertificateKey) else {
+                    // TODO replace ApplicationError
+                    throw ApplicationError.general("Could not find certificate in Keychain")
+                }
+                let certificate = try JSONDecoder().decode(VaccinationCertificateList.self, from: data)
+                seal.fulfill(certificate)
+            } catch {
+                if case KeychainError.fetch = error {
+                    seal.fulfill(VaccinationCertificateList(certificates: []))
+                    return
+                }
+                throw error
+            }
         }
-        let certificate = try JSONDecoder().decode(VaccinationCertificateList.self, from: data)
-
-        return certificate
     }
 }

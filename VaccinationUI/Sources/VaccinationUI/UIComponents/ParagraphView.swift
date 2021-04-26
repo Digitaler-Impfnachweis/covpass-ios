@@ -12,6 +12,7 @@ public class ParagraphView: MarginableXibView {
     @IBOutlet public var stackView: UIStackView!
     @IBOutlet public var title: UILabel!
     @IBOutlet public var body: LinkTextView!
+    @IBOutlet public var bottomBorder: UIView!
 
     internal static let BodyLeftInset: CGFloat = -5
 
@@ -65,8 +66,10 @@ public class ParagraphView: MarginableXibView {
         return [
             RelatedViewMargin(constant: 40, relatedViewType: PrimaryButtonContainer.self),
             RelatedViewMargin(constant: 24, relatedViewType: ParagraphView.self),
-            RelatedViewMargin(constant: 40, relatedViewType: Headline.self),
-            PositionMargin(constant: topMargin, position: 0, type: .top),
+            RelatedViewMargin(constant: 12, relatedViewType: Headline.self),
+            RelatedViewMargin(constant: 12, relatedViewType: Spacer.self),
+            PositionMargin(constant: topMargin, position: 24, type: .top),
+            RelatedViewMargin(constant: 12, relatedViewType: SecondaryButtonContainer.self),
         ]
     }
 
@@ -84,6 +87,10 @@ public class ParagraphView: MarginableXibView {
         super.initView()
         setupView()
     }
+    
+    public func showBottomBorder() {
+        bottomBorder.isHidden = false
+    }
 
     private func checkVisibility() {
         isHidden = (bodyText?.isEmpty ?? true) && !hasTitle
@@ -100,5 +107,6 @@ public class ParagraphView: MarginableXibView {
         title.textColor = UIConstants.BrandColor.onBackground100
         bodyFont = UIConstants.Font.regular
         body.textColor = UIConstants.BrandColor.onBackground100
+        bottomBorder.backgroundColor = UIConstants.BrandColor.onBackground20
     }
 }
