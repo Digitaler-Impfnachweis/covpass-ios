@@ -23,9 +23,9 @@ public class ValidatorPopupRouter {
 extension ValidatorPopupRouter: PopupRouter {
     
     public func presentPopup(onTopOf viewController: UIViewController) {
-        let popupVC = ProofPopupViewController.createFromStoryboard()
+        let popupVC = ScanPopupViewController.createFromStoryboard()
         popupVC.popupDelegate = self
-        popupVC.viewModel = ProofPopupViewModel()
+        popupVC.viewModel = ScanPopupViewModel()
 //        popupVC.router = ScanPopupRouter()
         viewController.present(popupVC, animated: true, completion: nil)
     }
