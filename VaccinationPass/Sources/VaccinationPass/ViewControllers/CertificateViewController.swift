@@ -32,7 +32,6 @@ public class CertificateViewController: UIViewController {
     override public func viewDidLoad() {
         super.viewDidLoad()
         title = ""
-//        viewModel.loadCertificatesConfiguration()
         setupHeaderView()
         setupActionButton()
         setupCollecttionView()
