@@ -8,6 +8,7 @@
 import VaccinationUI
 import UIKit
 import VaccinationCommon
+import Scanner
 
 public class VaccinationDetailViewController: UIViewController {
     @IBOutlet var stackView: UIStackView!
@@ -85,8 +86,20 @@ public class VaccinationDetailViewController: UIViewController {
             }))
             self?.present(alert, animated: true)
         }
-        
-        viewModel.vaccinations.forEach({ stackView.insertArrangedSubview(VaccinationView(viewModel: $0), at: stackView.subviews.count - 3) })
+
+        showVaccinations()
+    }
+
+    private func showVaccinations() {
+        stackView.subviews.forEach({ v in
+            if v is VaccinationView {
+                v.removeFromSuperview()
+                self.stackView.removeArrangedSubview(v)
+            }
+        })
+        viewModel.vaccinations.forEach({
+            stackView.insertArrangedSubview(VaccinationView(viewModel: $0), at: stackView.subviews.count - 3)
+        })
     }
 
     @objc public func onFavorite() {
@@ -95,6 +108,23 @@ public class VaccinationDetailViewController: UIViewController {
         }).catch({ error in
             print(error)
         })
+    }
+}
+
+extension VaccinationDetailViewController: ScannerDelegate {
+    public func result(with value: Result<String, ScanError>) {
+        presentedViewController?.dismiss(animated: true, completion: nil)
+        switch value {
+        case .success(let payload):
+            viewModel.process(payload: payload).done({ cert in
+                self.setupView()
+            }).catch({ error in
+                print(error)
+                // TODO error handling
+            })
+        case .failure(let error):
+            print("We have an error: \(error)")
+        }
     }
 }
 
