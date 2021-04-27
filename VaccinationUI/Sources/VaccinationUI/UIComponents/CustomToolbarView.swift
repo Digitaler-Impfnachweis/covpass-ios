@@ -284,8 +284,6 @@ public class CustomToolbarView: XibView {
         button.pinEdges([.top, .bottom], to: layoutMarginsGuide)
         button.setContentHuggingPriority(.required, for: .horizontal)
         button.setContentHuggingPriority(.required, for: .vertical)
-//        button.setConstant(height: UIConstants.Size.CancelButtonSize)
-//        button.setConstant(width: UIConstants.Size.CancelButtonSize)
     }
 
     private func configureDisabledButton(button: PrimaryButtonContainer, title: String? = nil) {
@@ -298,10 +296,6 @@ public class CustomToolbarView: XibView {
         button.pinEdges([.top, .bottom], to: layoutMarginsGuide)
         button.setContentHuggingPriority(.required, for: .horizontal)
         button.setContentHuggingPriority(.required, for: .vertical)
-//        if button is PrimaryIconButtonContainer {
-//            button.setConstant(height: UIConstants.Size.MiddleButtonSize)
-//            button.setConstant(width: UIConstants.Size.MiddleButtonSize)
-//        }
     }
 
     private func configureMiddleButton(button: PrimaryButtonContainer, title: String? = nil) {
@@ -312,10 +306,6 @@ public class CustomToolbarView: XibView {
         button.pinEdges([.top, .bottom], to: layoutMarginsGuide)
         button.setContentHuggingPriority(.required, for: .horizontal)
         button.setContentHuggingPriority(.required, for: .vertical)
-//        if button is PrimaryIconButtonContainer {
-//            button.setConstant(height: UIConstants.Size.MiddleButtonSize)
-//            button.setConstant(width: UIConstants.Size.MiddleButtonSize)
-//        }
         button.defaultText = title
     }
 
@@ -328,10 +318,6 @@ public class CustomToolbarView: XibView {
         button.pinEdges([.top, .bottom], to: layoutMarginsGuide)
         button.setContentHuggingPriority(.required, for: .horizontal)
         button.setContentHuggingPriority(.required, for: .vertical)
-//        if button is PrimaryIconButtonContainer {
-//            button.setConstant(height: UIConstants.Size.MiddleButtonSize)
-//            button.setConstant(width: UIConstants.Size.MiddleButtonSize)
-//        }
     }
 
     // MARK: Action Methods

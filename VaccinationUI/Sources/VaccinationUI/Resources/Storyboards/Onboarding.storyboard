@@ -92,7 +92,7 @@
                                 </constraints>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Pw-wA-kA9">
-                                <rect key="frame" x="0.0" y="124" width="414" height="668"/>
+                                <rect key="frame" x="0.0" y="124" width="414" height="672"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="I0B-wx-NK9">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="411"/>
@@ -120,14 +120,11 @@
                                 <viewLayoutGuide key="frameLayoutGuide" id="yzh-Nt-LyK"/>
                             </scrollView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WJ2-Wc-hd3" userLabel="Bottom Container View">
-                                <rect key="frame" x="0.0" y="792" width="414" height="70"/>
+                                <rect key="frame" x="0.0" y="796" width="414" height="66"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" placeholderIntrinsicWidth="240" placeholderIntrinsicHeight="56" translatesAutoresizingMaskIntoConstraints="NO" id="BKV-kV-ew0" customClass="CustomToolbarView" customModule="VaccinationUI">
-                                        <rect key="frame" x="0.0" y="10" width="414" height="60"/>
+                                        <rect key="frame" x="0.0" y="10" width="414" height="56"/>
                                         <color key="backgroundColor" red="0.023529411760000001" green="0.37254901959999998" blue="0.76862745099999996" alpha="1" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="60" id="eTI-Tz-3GV"/>
-                                        </constraints>
                                     </view>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
