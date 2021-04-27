@@ -23,8 +23,17 @@ public class QrContinerView: XibView {
     }
     
     // MARK: - IBOutlet
-    
+
+    @IBOutlet public var stackView: UIStackView!
     @IBOutlet public var qrImageView: UIImageView!
     @IBOutlet public var titleLabel: UILabel!
     @IBOutlet public var subtitleLabel: UILabel!
+
+    // MARK: - Lifecycle
+
+    public override func initView() {
+        super.initView()
+        layoutMargins = .init(top: 10, left: 10, bottom: 20, right: 10)
+        stackView.setCustomSpacing(20, after: qrImageView)
+    }
 }
