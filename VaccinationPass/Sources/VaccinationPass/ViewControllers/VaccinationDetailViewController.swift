@@ -50,7 +50,8 @@ public class VaccinationDetailViewController: UIViewController {
         immunizationView.icon.image = viewModel.immunizationIcon
         immunizationView.titleText = viewModel.immunizationTitle
         immunizationView.bodyText = viewModel.immunizationBody
-        
+
+        stackView.setCustomSpacing(24, after: immunizationButton)
         immunizationButton.title = viewModel.immunizationButton
         immunizationButton.backgroundColor = UIColor.white
         immunizationButton.shadowColor = UIColor.white
@@ -63,10 +64,14 @@ public class VaccinationDetailViewController: UIViewController {
             }
         }
 
+        stackView.setCustomSpacing(12, after: personalDataHeadline)
         personalDataHeadline.text = "vaccination_detail_personal_information".localized
+
         nameView.titleText = "vaccination_detail_name".localized
         nameView.bodyText = viewModel.name
         nameView.showBottomBorder()
+
+        stackView.setCustomSpacing(24, after: birtdateView)
         birtdateView.titleText = "vaccination_detail_birthdate".localized
         birtdateView.bodyText = viewModel.birthDate
 

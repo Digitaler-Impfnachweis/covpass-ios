@@ -18,24 +18,10 @@ public class PrimaryIconButtonContainer: PrimaryButtonContainer {
         }
     }
 
-    @IBInspectable public var iconHeightMultiplier: CGFloat = 0.6 {
-        didSet {
-            setupIconHeight(iconHeightMultiplier)
-        }
-    }
-
-    convenience init(iconImage: UIImage?, iconHeightMultiplier: CGFloat) {
+    convenience init(iconImage: UIImage?) {
         self.init()
         self.iconImage = iconImage
         icon.image = iconImage
-        setupIconHeight(iconHeightMultiplier)
-    }
-
-    private func setupIconHeight(_ iconHeightMultiplier: CGFloat) {
-        heightConstraint.isActive = false
-        guard let icon = icon else { return }
-        let newConstraint = NSLayoutConstraint(item: icon, attribute: .height, relatedBy: .equal, toItem: self, attribute: .height, multiplier: iconHeightMultiplier, constant: 0)
-        addConstraint(newConstraint)
     }
 
     public override func startAnimating(makeCircle: Bool) {

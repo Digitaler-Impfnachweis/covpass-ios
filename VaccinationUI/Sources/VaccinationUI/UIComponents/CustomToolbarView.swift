@@ -176,7 +176,7 @@ public class CustomToolbarView: XibView {
 
     private var cancelButton: PrimaryButtonContainer {
         let cancelIcon = UIImage(named: UIConstants.IconName.CancelButton, in: UIConstants.bundle, compatibleWith: nil)
-        primaryButton = PrimaryIconButtonContainer(iconImage: cancelIcon, iconHeightMultiplier: 0.6)
+        primaryButton = PrimaryIconButtonContainer(iconImage: cancelIcon)
         primaryButton.action = { [weak self] in
             guard let strongSelf = self else { return }
             strongSelf.delegate?.customToolbarView(strongSelf, didTap: .cancelButton)
@@ -218,7 +218,7 @@ public class CustomToolbarView: XibView {
 
     private var addButton: PrimaryButtonContainer {
         let plusIcon = UIImage(named: UIConstants.IconName.PlusIcon, in: UIConstants.bundle, compatibleWith: nil)
-        primaryButton = PrimaryIconButtonContainer(iconImage: plusIcon, iconHeightMultiplier: 0.6)
+        primaryButton = PrimaryIconButtonContainer(iconImage: plusIcon)
         primaryButton.action = { [weak self] in
             guard let strongSelf = self else { return }
             strongSelf.delegate?.customToolbarView(strongSelf, didTap: .addButton)
@@ -228,7 +228,7 @@ public class CustomToolbarView: XibView {
 
     private var checkButton: PrimaryButtonContainer {
         let checkmarkIcon = UIImage(named: UIConstants.IconName.CheckmarkIcon, in: UIConstants.bundle, compatibleWith: nil)
-        primaryButton = PrimaryIconButtonContainer(iconImage: checkmarkIcon, iconHeightMultiplier: 0.6)
+        primaryButton = PrimaryIconButtonContainer(iconImage: checkmarkIcon)
         primaryButton.innerButton.accessibilityIdentifier = AccessibilityIdentifier.InputForms.checkButton
         primaryButton.action = { [weak self] in
             guard let strongSelf = self else { return }
@@ -239,7 +239,7 @@ public class CustomToolbarView: XibView {
 
     private var scrollButton: PrimaryButtonContainer {
         let arrowIcon = UIImage(named: UIConstants.IconName.RgArrowDown, in: UIConstants.bundle, compatibleWith: nil)
-        primaryButton = PrimaryIconButtonContainer(iconImage: arrowIcon, iconHeightMultiplier: 0.6)
+        primaryButton = PrimaryIconButtonContainer(iconImage: arrowIcon)
         primaryButton.tintColor = navigationIconColor
         primaryButton.enabledButtonBackgroundColor = UIColor.clear
         primaryButton.innerButton.accessibilityIdentifier = AccessibilityIdentifier.InputForms.scrollButton
