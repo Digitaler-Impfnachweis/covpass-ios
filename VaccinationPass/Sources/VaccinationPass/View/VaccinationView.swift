@@ -45,35 +45,46 @@ public class VaccinationView: XibView {
     }
     
     internal func setupView() {
+        layoutMargins = .init(top: 0, left: 0, bottom: 12, right: 0)
+        stackView.setCustomSpacing(12, after: immunizationHeadline)
+
         immunizationHeadline.text = viewModel?.headline
+
         dateView.titleText = "vaccination_detail_date".localized
         dateView.bodyText = viewModel?.date
         dateView.isHidden = viewModel?.date.isEmpty ?? true
         dateView.showBottomBorder()
+
         vaccineView.titleText = "vaccination_detail_vaccine".localized
         vaccineView.bodyText = viewModel?.vaccine
         vaccineView.isHidden = viewModel?.vaccine.isEmpty ?? true
         vaccineView.showBottomBorder()
+
         manufacturerView.titleText = "vaccination_detail_manufacturer".localized
         manufacturerView.bodyText = viewModel?.manufacturer
         manufacturerView.isHidden = viewModel?.manufacturer.isEmpty ?? true
         manufacturerView.showBottomBorder()
+
         vaccineCodeView.titleText = "vaccination_detail_vaccine_code".localized
         vaccineCodeView.bodyText = viewModel?.vaccineCode
         vaccineCodeView.isHidden = viewModel?.vaccineCode.isEmpty ?? true
         vaccineCodeView.showBottomBorder()
+
         locationView.titleText = "vaccination_detail_location".localized
         locationView.bodyText = viewModel?.location
         locationView.isHidden = viewModel?.location.isEmpty ?? true
         locationView.showBottomBorder()
+
         issuerView.titleText = "vaccination_detail_issuer".localized
         issuerView.bodyText = viewModel?.issuer
         issuerView.isHidden = viewModel?.issuer.isEmpty ?? true
         issuerView.showBottomBorder()
+
         countryView.titleText = "vaccination_detail_country".localized
         countryView.bodyText = viewModel?.country
         countryView.isHidden = viewModel?.country.isEmpty ?? true
         countryView.showBottomBorder()
+        
         uvciView.titleText = "vaccination_detail_uvci".localized
         uvciView.bodyText = viewModel?.uvci
         uvciView.isHidden = viewModel?.uvci.isEmpty ?? true
