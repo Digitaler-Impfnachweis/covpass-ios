@@ -280,10 +280,7 @@ public class CustomToolbarView: XibView {
         button.tintColor = UIConstants.BrandColor.onBackground70
 
         addSubview(button)
-        button.centerX(of: layoutMarginsGuide)
-        button.pinEdges([.top, .bottom], to: layoutMarginsGuide)
-        button.setContentHuggingPriority(.required, for: .horizontal)
-        button.setContentHuggingPriority(.required, for: .vertical)
+        configureDefaultConstraints(for: button)
     }
 
     private func configureDisabledButton(button: PrimaryButtonContainer, title: String? = nil) {
@@ -292,21 +289,15 @@ public class CustomToolbarView: XibView {
         button.isEnabled = false
 
         addSubview(button)
-        button.centerX(of: layoutMarginsGuide)
-        button.pinEdges([.top, .bottom], to: layoutMarginsGuide)
-        button.setContentHuggingPriority(.required, for: .horizontal)
-        button.setContentHuggingPriority(.required, for: .vertical)
+        configureDefaultConstraints(for: button)
     }
 
     private func configureMiddleButton(button: PrimaryButtonContainer, title: String? = nil) {
         button.cornerRadius = UIConstants.Size.ButtonCornerRadius
         button.shadowColor = UIConstants.BrandColor.primaryButtonShadow
-        addSubview(button)
-        button.centerX(of: layoutMarginsGuide)
-        button.pinEdges([.top, .bottom], to: layoutMarginsGuide)
-        button.setContentHuggingPriority(.required, for: .horizontal)
-        button.setContentHuggingPriority(.required, for: .vertical)
         button.defaultText = title
+        addSubview(button)
+        configureDefaultConstraints(for: button)
     }
 
     private func configureScrollButton(button: PrimaryButtonContainer) {
@@ -314,6 +305,10 @@ public class CustomToolbarView: XibView {
         button.shadowColor = UIColor.clear
 
         addSubview(button)
+        configureDefaultConstraints(for: button)
+    }
+
+    private func configureDefaultConstraints(for button: PrimaryButtonContainer) {
         button.centerX(of: layoutMarginsGuide)
         button.pinEdges([.top, .bottom], to: layoutMarginsGuide)
         button.setContentHuggingPriority(.required, for: .horizontal)
