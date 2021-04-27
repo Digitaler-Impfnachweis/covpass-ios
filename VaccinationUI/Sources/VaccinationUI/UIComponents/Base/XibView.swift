@@ -14,21 +14,13 @@
 import UIKit
 
 @IBDesignable
-open class XibView: UIView, Compoundable {
-    public weak var compoundDelegate: CompoundableUpdate?
-
+open class XibView: UIView {
     // content view from the xib file
     public var contentView: UIView?
 
     // name of the xib file
     @objc dynamic var nibName: String? {
         return NSStringFromClass(type(of: self)).components(separatedBy: ".").last
-    }
-
-    open override var bounds: CGRect {
-        didSet {
-            compoundDelegate?.compoundableDidUpdate()
-        }
     }
 
     // MARK: - Lifecycle
@@ -69,11 +61,6 @@ open class XibView: UIView, Compoundable {
 
         initView()
         contentView?.prepareForInterfaceBuilder()
-    }
-
-    open override func layoutSubviews() {
-        super.layoutSubviews()
-        compoundDelegate?.compoundableDidUpdate()
     }
 
     // MARK: - Private Helpers
