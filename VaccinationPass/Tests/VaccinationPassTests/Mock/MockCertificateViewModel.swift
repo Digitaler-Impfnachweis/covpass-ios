@@ -9,8 +9,11 @@ import Foundation
 import UIKit
 import VaccinationPass
 import VaccinationUI
+import VaccinationCommon
+import PromiseKit
 
 class MockCertificateViewModel: CertificateViewModel {
+
     // MARK: - Test Variables
     
     var processCalled = false
@@ -56,5 +59,17 @@ class MockCertificateViewModel: CertificateViewModel {
 
     func loadCertificatesConfiguration() {
         certificates = [MockCellConfiguration.noCertificateConfiguration()]
+    }
+
+    func process(payload: String) -> Promise<ExtendedVaccinationCertificate> {
+        return Promise.init(error: ApplicationError.unknownError)
+    }
+
+    func detailViewModel(_ cert: ExtendedVaccinationCertificate) -> VaccinationDetailViewModel? {
+        return nil
+    }
+
+    func detailViewModel(_ indexPath: IndexPath) -> VaccinationDetailViewModel? {
+        return nil
     }
 }

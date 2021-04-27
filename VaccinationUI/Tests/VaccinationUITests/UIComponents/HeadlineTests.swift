@@ -47,4 +47,24 @@ class HeadlineTests: XCTestCase {
         XCTAssertTrue(sut.textableView.adjustsFontForContentSizeCategory)
         XCTAssertEqual(sut.textableView.numberOfLines, 0)
     }
+
+    func testMargins() {
+        // Given
+        let view = Headline()
+        guard let relatedMargins = view.margins as? [RelatedViewMargin] else {
+            XCTFail("No related margins was set.")
+            return
+        }
+
+        // When
+        guard let marginToParagraphViewIndex = relatedMargins.firstIndex(where: { $0.relatedViewType == ParagraphView.self }) else {
+            XCTFail("There should be a margin to the HUIParagraphView")
+            return
+        }
+        let marginToParagraphView = relatedMargins[marginToParagraphViewIndex] as Margin
+
+        // Then
+        XCTAssertEqual(marginToParagraphView.type, MarginType.bottom)
+        XCTAssertEqual(marginToParagraphView.constant, 12)
+    }
 }

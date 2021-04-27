@@ -23,12 +23,13 @@ public class ScanPopupRouter {
 extension ScanPopupRouter: PopupRouter {
     
     public func presentPopup(onTopOf viewController: UIViewController) {
-        viewController.presentedViewController?.dismiss(animated: true, completion: {
+        let rootViewController = (viewController.presentingViewController as? UINavigationController)?.viewControllers.last
+        viewController.dismiss(animated: true, completion: {
             let popupVC = ScanPopupViewController.createFromStoryboard()
             popupVC.popupDelegate = self
             popupVC.viewModel = ScanPopupViewModel()
-            popupVC.parsingDelegate = viewController as? ScannerDelegate
-            viewController.present(popupVC, animated: true, completion: nil)
+            popupVC.parsingDelegate = rootViewController as? ScannerDelegate
+            rootViewController?.present(popupVC, animated: true, completion: nil)
         })
     }
 }

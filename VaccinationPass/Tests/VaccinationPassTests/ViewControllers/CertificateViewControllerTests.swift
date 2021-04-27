@@ -77,10 +77,10 @@ class CertificateViewControllerTests: XCTestCase {
         XCTAssertEqual(sut.collectionView(sut.collectionView, numberOfItemsInSection: 0), viewModel.certificates.count)
     }
     
-    func testPresentPopup() {
-        sut.addButton.action?()
-        XCTAssertTrue(router.presentPopupCalled)
-    }
+//    func testPresentPopup() {
+//        sut.addButton.action?()
+//        XCTAssertTrue(router.presentPopupCalled)
+//    }
     
     func testCellForRow() {
         XCTAssertTrue( sut.collectionView(sut.collectionView, cellForItemAt: IndexPath(item: 0, section: 0)) is NoCertificateCollectionViewCell)

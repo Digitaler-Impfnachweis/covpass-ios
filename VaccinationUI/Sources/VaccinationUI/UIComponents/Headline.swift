@@ -40,6 +40,15 @@ public class Headline: XibView, Textable {
 
     @IBInspectable public var needsTextAlignmentCenter: Bool = false
 
+    public override var margins: [Margin] {
+        return [
+            RelatedViewMargin(constant: 24, relatedViewType: Headline.self),
+            RelatedViewMargin(constant: 12, relatedViewType: ParagraphView.self),
+            RelatedViewMargin(constant: 40, relatedViewType: ParagraphView.self, type: .top),
+            RelatedViewMargin(constant: 40, relatedViewType: Spacer.self, type: .top)
+        ]
+    }
+
     // MARK: - Lifecycle
 
     public override func initView() {

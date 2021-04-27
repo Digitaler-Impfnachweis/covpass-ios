@@ -31,11 +31,22 @@ public class CertificateViewController: UIViewController {
     
     override public func viewDidLoad() {
         super.viewDidLoad()
-        viewModel.loadCertificatesConfiguration()
+        title = ""
         setupHeaderView()
         setupActionButton()
         setupCollecttionView()
         setupDotIndicator()
+    }
+
+    public override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+        viewModel.loadCertificatesConfiguration()
+    }
+
+    public override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
     // MARK: - Private
@@ -78,7 +89,8 @@ public class CertificateViewController: UIViewController {
     }
     
     private func presentPopup() {
-        router?.presentPopup(onTopOf: self)
+        guard let vc = self.navigationController else { return }
+        router?.presentPopup(onTopOf: vc)
     }
 }
 
@@ -89,7 +101,20 @@ extension CertificateViewController: ScannerDelegate {
         presentedViewController?.dismiss(animated: true, completion: nil)
         switch value {
         case .success(let payload):
-            viewModel.process(payload: payload, completion: nil)
+            viewModel.process(payload: payload).done({ cert in
+                self.viewModel.loadCertificatesConfiguration()
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5, execute: {
+                    let vc = VaccinationDetailViewController.createFromStoryboard()
+                    vc.viewModel = self.viewModel.detailViewModel(cert)
+                    vc.router = ProofPopupRouter()
+                    self.navigationController?.pushViewController(vc, animated: true)
+                })
+            }).catch({ error in
+                print(error)
+                // TODO error handling
+            }).finally {
+                self.reloadCollectionView()
+            }
         case .failure(let error):
             print("We have an error: \(error)")
         }
@@ -109,6 +134,19 @@ extension CertificateViewController: UICollectionViewDataSource {
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: viewModel.reuseIdentifier(for: indexPath), for: indexPath) as? BaseCardCollectionViewCell else { return UICollectionViewCell() }
         viewModel.configure(cell: cell, at: indexPath)
+
+        // FIXME: DOES NOT WORK
+        cell.onAction = { [weak self] in
+            guard let self = self else { return }
+            guard let vm = self.viewModel.detailViewModel(indexPath) else { return }
+            let vc = VaccinationDetailViewController.createFromStoryboard()
+            vc.viewModel = vm
+            vc.router = ProofPopupRouter()
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+        cell.onFavorite = { [weak self] in
+            // TODO mark as favorite
+        }
         return cell
     }
 }
@@ -121,6 +159,14 @@ extension CertificateViewController: UICollectionViewDelegate {
         let visiblePoint = CGPoint(x: visibleRect.midX, y: visibleRect.midY)
         guard let visibleIndexPath = collectionView.indexPathForItem(at: visiblePoint) else { return }
         dotPageIndicator.selectDot(withIndex: visibleIndexPath.item)
+    }
+
+    public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let vm = viewModel.detailViewModel(indexPath) else { return }
+        let vc = VaccinationDetailViewController.createFromStoryboard()
+        vc.viewModel = vm
+        vc.router = ProofPopupRouter()
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 

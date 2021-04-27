@@ -23,3 +23,9 @@ public struct ExtendedVaccinationCertificate: Codable {
         self.validationQRCodeData = validationQRCodeData
     }
 }
+
+extension ExtendedVaccinationCertificate: Equatable {
+    public static func == (lhs: ExtendedVaccinationCertificate, rhs: ExtendedVaccinationCertificate) -> Bool {
+        return lhs.vaccinationQRCodeData == rhs.vaccinationQRCodeData
+    }
+}
