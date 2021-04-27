@@ -23,6 +23,8 @@ public class QrCertificateCollectionViewCell: BaseCardCollectionViewCell {
         actionView.tintColor = UIConstants.BrandColor.brandAccent
         qrContinerView.titleLabel.font = UIConstants.Font.semiBoldLarger
         qrContinerView.subtitleLabel.font = UIConstants.Font.regular
+        actionView.action = onAction
+        headerView.action = onFavorite
     }
 }
 
@@ -49,5 +51,6 @@ extension QrCertificateCollectionViewCell {
         qrContinerView.qrImageView.image = configuration.qrViewConfiguration?.qrValue?.makeQr(size: qrContinerView.qrImageView.bounds.size)
         qrContinerView.titleLabel.text = configuration.qrViewConfiguration?.qrTitle
         qrContinerView.subtitleLabel.text = configuration.qrViewConfiguration?.qrSubtitle
+        qrContinerView.isHidden = configuration.qrViewConfiguration == nil
     }
 }

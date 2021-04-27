@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ParagraphIconView" customModule="VaccinationUI">
+            <connections>
+                <outlet property="body" destination="OIr-tz-S3l" id="2zF-Nb-1Mo"/>
+                <outlet property="bottomLayoutConstraint" destination="nFc-dt-jqI" id="RJK-No-tfi"/>
+                <outlet property="icon" destination="qHP-5d-tZ1" id="CkD-db-0jJ"/>
+                <outlet property="rightLayoutConstraint" destination="NpI-Mp-Y2X" id="nh6-Z0-PDI"/>
+                <outlet property="stackView" destination="oUb-Cv-MzU" id="Dlo-D8-gko"/>
+                <outlet property="title" destination="Shp-hj-0SD" id="mFH-lW-Lef"/>
+                <outlet property="topLayoutConstraint" destination="nFd-jo-Tlr" id="sYk-lm-fV2"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="Emf-oB-Bnc">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="180"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="oUb-Cv-MzU">
+                    <rect key="frame" x="88" y="44" width="263" height="136"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Shp-hj-0SD">
+                            <rect key="frame" x="0.0" y="0.0" width="263" height="0.0"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OIr-tz-S3l" customClass="LinkTextView" customModule="VaccinationUI">
+                            <rect key="frame" x="0.0" y="4" width="263" height="132"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                        </textView>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </stackView>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qHP-5d-tZ1">
+                    <rect key="frame" x="24" y="44" width="40" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="40" id="NlI-aX-PR2"/>
+                        <constraint firstAttribute="height" constant="40" id="TVa-K6-69g"/>
+                    </constraints>
+                </imageView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="zYh-Je-bB5"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="oUb-Cv-MzU" firstAttribute="top" secondItem="qHP-5d-tZ1" secondAttribute="top" id="3SF-Ph-KSe"/>
+                <constraint firstItem="zYh-Je-bB5" firstAttribute="trailing" secondItem="oUb-Cv-MzU" secondAttribute="trailing" constant="24" id="NpI-Mp-Y2X"/>
+                <constraint firstItem="oUb-Cv-MzU" firstAttribute="leading" secondItem="qHP-5d-tZ1" secondAttribute="trailing" constant="24" id="g0U-ny-MrU"/>
+                <constraint firstItem="qHP-5d-tZ1" firstAttribute="leading" secondItem="zYh-Je-bB5" secondAttribute="leading" constant="24" id="hd3-0b-BQb"/>
+                <constraint firstItem="zYh-Je-bB5" firstAttribute="bottom" secondItem="oUb-Cv-MzU" secondAttribute="bottom" priority="999" id="nFc-dt-jqI"/>
+                <constraint firstItem="qHP-5d-tZ1" firstAttribute="top" secondItem="zYh-Je-bB5" secondAttribute="top" id="nFd-jo-Tlr"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="125.36231884057972" y="-161.38392857142856"/>
+        </view>
+    </objects>
+</document>

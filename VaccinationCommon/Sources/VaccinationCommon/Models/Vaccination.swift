@@ -16,6 +16,18 @@ public class Vaccination: Codable {
     public var occurrence: Date?
     public var country: String
 
+    public var seriesNumber: Int {
+        let numbers = series.split(separator: "/")
+        if numbers.count != 2 { return 0 }
+        return Int(numbers[0].trimmingCharacters(in: .whitespaces)) ?? 0
+    }
+
+    public var seriesTotal: Int {
+        let numbers = series.split(separator: "/")
+        if numbers.count != 2 { return 0 }
+        return Int(numbers[1].trimmingCharacters(in: .whitespaces)) ?? 0
+    }
+
     enum CodingKeys: String, CodingKey {
         case targetDisease
         case vaccineCode
@@ -33,8 +45,9 @@ public class Vaccination: Codable {
         product = try values.decode(String.self, forKey: .product)
         manufacturer = try values.decode(String.self, forKey: .manufacturer)
         series = try values.decode(String.self, forKey: .series)
-        let occurenceDateString = try values.decode(String.self, forKey: .occurrence)
-        occurrence = DateUtils.vaccinationDateFormatter.date(from: occurenceDateString)
+        if let occurenceDateString = try? values.decode(String.self, forKey: .occurrence) {
+            occurrence = DateUtils.vaccinationDateFormatter.date(from: occurenceDateString)
+        }
         country = try values.decode(String.self, forKey: .country)
     }
 

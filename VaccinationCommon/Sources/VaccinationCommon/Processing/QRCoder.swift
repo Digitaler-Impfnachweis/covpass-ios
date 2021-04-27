@@ -22,7 +22,10 @@ public class QRCoder: QRCoderProtocol {
     public func parse(_ payload: String, completion: ((Error) -> Void)?) -> VaccinationCertificate? {
         do {
             let base45Decoded = try base45Encoder.decode(payload)
-            let decompressedPayload = Compression.decompress(Data(base45Decoded)) ?? Data()
+            guard let decompressedPayload = Compression.decompress(Data(base45Decoded)) else {
+                completion?(ApplicationError.general("Could not decompress QR Code data"))
+                return nil
+            }
             let cosePayload = try cose1SignEncoder.parse(decompressedPayload)
             let cborDecodedPayload = try CBOR.decode(cosePayload?.payload ?? [])
             let cborDecodedProtected = try CBOR.decode(cosePayload?.protected ?? [])
