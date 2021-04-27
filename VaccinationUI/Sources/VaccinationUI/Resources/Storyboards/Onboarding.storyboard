@@ -38,7 +38,6 @@
                                                 </subviews>
                                             </stackView>
                                         </subviews>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstItem="PlU-Hg-2Bs" firstAttribute="leading" secondItem="eQf-3g-Gna" secondAttribute="leadingMargin" id="6iP-au-NBh"/>
                                             <constraint firstAttribute="bottomMargin" secondItem="PlU-Hg-2Bs" secondAttribute="bottom" priority="900" id="SLs-0M-zLY"/>
@@ -59,6 +58,7 @@
                             </scrollView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="nW0-pL-ggO"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="DUn-kR-NJa" secondAttribute="bottom" id="G2a-XJ-Aie"/>
                             <constraint firstItem="DUn-kR-NJa" firstAttribute="top" secondItem="bLn-yM-xGQ" secondAttribute="top" id="Mby-JW-ifl"/>
