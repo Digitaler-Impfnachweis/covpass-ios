@@ -12,7 +12,7 @@ import UIKit
 public class CardViewHeader: XibView {
     // MARK: - Outlets
 
-    @IBOutlet var stackView: UIStackView!
+    @IBOutlet public var stackView: UIStackView!
     @IBOutlet public var subtitleLabel: UILabel!
     @IBOutlet public var titleLabel: UILabel!
     @IBOutlet public var leftButton: UIButton!
