@@ -150,8 +150,6 @@ public class PrimaryButtonContainer: XibView, Textable {
             [buttonWidthConstraint, buttonHeightConstraint].forEach({ $0?.isActive = true })
             contentView?.layoutMargins = .zero
         }
-//        innerButton.setTitle("", for: .normal)
-//        textableView.text = ""
         innerButton.alpha = 0
         textableView.alpha = 0
         dotPulseActivityView.startAnimating()
@@ -159,10 +157,8 @@ public class PrimaryButtonContainer: XibView, Textable {
 
     public func stopAnimating() {
         dotPulseActivityView.stopAnimating()
-//        innerButton.setTitle(title, for: .normal)
-//        textableView.text = title
-        innerButton.alpha = 0
-        textableView.alpha = 0
+        innerButton.alpha = 1
+        textableView.alpha = 1
         [buttonWidthConstraint, buttonHeightConstraint].forEach({ $0?.isActive = false })
         contentView?.layoutMargins = defaultMargins
     }
