@@ -224,23 +224,23 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ELU-e8-hMC">
-                                <rect key="frame" x="0.0" y="44" width="414" height="730"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="720"/>
                                 <connections>
                                     <segue destination="h9P-jE-8JB" kind="embed" id="ip2-dZ-nAW"/>
                                 </connections>
                             </containerView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C1A-5U-JZx" userLabel="Bottom Container View">
-                                <rect key="frame" x="0.0" y="774" width="414" height="88"/>
+                                <rect key="frame" x="0.0" y="764" width="414" height="98"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="P8K-We-hUP">
-                                        <rect key="frame" x="0.0" y="15" width="414" height="73"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="P8K-We-hUP">
+                                        <rect key="frame" x="0.0" y="15" width="414" height="83"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" verticalHuggingPriority="1000" placeholderIntrinsicWidth="240" placeholderIntrinsicHeight="12" translatesAutoresizingMaskIntoConstraints="NO" id="MD3-T0-j5S" customClass="DotPageIndicator" customModule="VaccinationUI">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="12"/>
+                                            <view contentMode="scaleToFill" placeholderIntrinsicWidth="240" placeholderIntrinsicHeight="56" translatesAutoresizingMaskIntoConstraints="NO" id="DcZ-ry-4Hc" customClass="CustomToolbarView" customModule="VaccinationUI">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
                                                 <color key="backgroundColor" red="0.023529411760000001" green="0.37254901959999998" blue="0.76862745099999996" alpha="1" colorSpace="calibratedRGB"/>
                                             </view>
-                                            <view contentMode="scaleToFill" placeholderIntrinsicWidth="240" placeholderIntrinsicHeight="56" translatesAutoresizingMaskIntoConstraints="NO" id="DcZ-ry-4Hc" customClass="CustomToolbarView" customModule="VaccinationUI">
-                                                <rect key="frame" x="0.0" y="17" width="414" height="56"/>
+                                            <view contentMode="scaleToFill" verticalHuggingPriority="1000" placeholderIntrinsicWidth="240" placeholderIntrinsicHeight="12" translatesAutoresizingMaskIntoConstraints="NO" id="MD3-T0-j5S" customClass="DotPageIndicator" customModule="VaccinationUI">
+                                                <rect key="frame" x="0.0" y="71" width="414" height="12"/>
                                                 <color key="backgroundColor" red="0.023529411760000001" green="0.37254901959999998" blue="0.76862745099999996" alpha="1" colorSpace="calibratedRGB"/>
                                             </view>
                                         </subviews>

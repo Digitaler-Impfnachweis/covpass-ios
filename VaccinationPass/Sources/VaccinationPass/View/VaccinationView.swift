@@ -9,7 +9,7 @@ import UIKit
 import VaccinationUI
 
 @IBDesignable
-public class VaccinationView: MarginableXibView {
+public class VaccinationView: XibView {
     @IBOutlet public var stackView: UIStackView!
     @IBOutlet var immunizationHeadline: Headline!
     @IBOutlet var dateView: ParagraphView!

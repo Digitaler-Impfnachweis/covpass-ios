@@ -62,13 +62,6 @@ public class OnboardingContainerViewController: UIViewController {
         toolbarView.state = .confirm(viewModel?.startButtonTitle ?? "Los geht's")
         toolbarView.setUpLeftButton(leftButtonItem: .navigationArrow)
         toolbarView.delegate = self
-
-        Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { (_) in
-            self.toolbarView.state = .inProgress
-            Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { (_) in
-                self.toolbarView.state = .confirm(self.viewModel?.startButtonTitle ?? "Los geht's")
-            }
-        }
     }
 
     private func configurePageIndicator() {
