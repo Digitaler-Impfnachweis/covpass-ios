@@ -12,6 +12,7 @@ import UIKit
 public class QrCertificateCollectionViewCell: BaseCardCollectionViewCell {
     // MARK: - IBOutlet
 
+    @IBOutlet public var stackView: UIStackView!
     @IBOutlet public var headerView: CardViewHeader!
     @IBOutlet public var actionView: CardViewAction!
     @IBOutlet public var qrContinerView: QrContinerView!
@@ -19,6 +20,8 @@ public class QrCertificateCollectionViewCell: BaseCardCollectionViewCell {
     // MARK: - Lifecycle
 
     public override func awakeFromNib() {
+        super.awakeFromNib()
+        stackView.setCustomSpacing(20, after: actionView)
         actionView.tintColor = UIConstants.BrandColor.brandAccent
         actionView.tintColor = UIConstants.BrandColor.brandAccent
         qrContinerView.titleLabel.font = UIConstants.Font.semiBoldLarger
