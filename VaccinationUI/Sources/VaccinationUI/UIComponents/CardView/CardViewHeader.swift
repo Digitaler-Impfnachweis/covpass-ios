@@ -12,6 +12,7 @@ import UIKit
 public class CardViewHeader: XibView {
     // MARK: - Outlets
 
+    @IBOutlet var stackView: UIStackView!
     @IBOutlet public var subtitleLabel: UILabel!
     @IBOutlet public var titleLabel: UILabel!
     @IBOutlet public var leftButton: UIButton!
@@ -27,5 +28,10 @@ public class CardViewHeader: XibView {
     
     @IBAction public func infoButtonPressed(button: UIButton) {
         action?()
+    }
+
+    public override func initView() {
+        super.initView()
+        stackView.spacing = 20
     }
 }

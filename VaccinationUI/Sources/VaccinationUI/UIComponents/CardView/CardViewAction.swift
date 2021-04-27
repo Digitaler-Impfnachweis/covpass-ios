@@ -11,7 +11,7 @@ import UIKit
 @IBDesignable
 public class CardViewAction: XibView {
     // MARK: - Outlets
-    
+
     @IBOutlet public var titleLabel: UILabel!
     @IBOutlet public var actionButton: UIButton!
     @IBOutlet public var stateImageView: UIImageView!
