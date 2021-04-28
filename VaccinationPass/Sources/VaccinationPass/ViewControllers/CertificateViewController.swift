@@ -102,10 +102,13 @@ extension CertificateViewController: ScannerDelegate {
         switch value {
         case .success(let payload):
             viewModel.process(payload: payload).done({ cert in
-                let vc = VaccinationDetailViewController.createFromStoryboard()
-                vc.viewModel = self.viewModel.detailViewModel(cert)
-                vc.router = ProofPopupRouter()
-                self.navigationController?.pushViewController(vc, animated: true)
+                self.viewModel.loadCertificatesConfiguration()
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5, execute: {
+                    let vc = VaccinationDetailViewController.createFromStoryboard()
+                    vc.viewModel = self.viewModel.detailViewModel(cert)
+                    vc.router = ProofPopupRouter()
+                    self.navigationController?.pushViewController(vc, animated: true)
+                })
             }).catch({ error in
                 print(error)
                 // TODO error handling

@@ -10,7 +10,7 @@ import Foundation
 public class ExtendedVaccination: Vaccination {
     public var lotNumber: String?
     public var location: String
-    public var performer: String
+    public var performer: String?
     public var nextDate: Date?
 
     enum CodingKeys: String, CodingKey {
@@ -25,7 +25,7 @@ public class ExtendedVaccination: Vaccination {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         lotNumber = try? values.decode(String.self, forKey: .lotNumber)
         location = try values.decode(String.self, forKey: .location)
-        performer = try values.decode(String.self, forKey: .performer)
+        performer = try? values.decode(String.self, forKey: .performer)
         if let nextDateString = try? values.decode(String.self, forKey: .nextDate) {
             nextDate = DateUtils.vaccinationDateFormatter.date(from: nextDateString)
         }

@@ -9,12 +9,12 @@ import Foundation
 import UIKit
 
 @IBDesignable
-public class InfoHeaderView: MarginableXibView {
-    
+public class InfoHeaderView: XibView {
     // MARK: - Outlets
     
     @IBOutlet public var headline: UILabel!
     @IBOutlet public var actionButton: UIButton!
+
     // MARK: - Variables
     
     public var action: (() -> Void)?
@@ -24,15 +24,14 @@ public class InfoHeaderView: MarginableXibView {
     public var headlineFont: UIFont? {
         didSet { headline.font = headlineFont }
     }
-    
-    public var leftMargin: CGFloat = 0
-    
-    public override var margins: [Margin] {
-        return [
-            PositionMargin(constant: leftMargin, position: -1, type: .left)
-        ]
+
+    // MARK: - Lifecycle
+
+    public override func initView() {
+        super.initView()
+        layoutMargins = .init(top: 0, left: 24, bottom: 0, right: 24)
     }
-    
+
     // MARK: - IBAction
     
     @IBAction public func actionButtonPressed(button: UIButton) { action?() }

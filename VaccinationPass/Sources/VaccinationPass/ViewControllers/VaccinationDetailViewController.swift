@@ -8,16 +8,19 @@
 import VaccinationUI
 import UIKit
 import VaccinationCommon
+import Scanner
 
 public class VaccinationDetailViewController: UIViewController {
     @IBOutlet var stackView: UIStackView!
+    @IBOutlet var vaccinationsStackView: UIStackView!
     @IBOutlet var nameHeadline: Headline!
     @IBOutlet var immunizationView: ParagraphIconView!
+    @IBOutlet var immunizationButtonContainerView: UIStackView!
     @IBOutlet var immunizationButton: PrimaryButtonContainer!
     @IBOutlet var personalDataHeadline: Headline!
     @IBOutlet var nameView: ParagraphView!
     @IBOutlet var birtdateView: ParagraphView!
-    @IBOutlet var deleteButton: SecondaryButtonContainer!
+    @IBOutlet var deleteButton: PrimaryButtonContainer!
     
     public var viewModel: VaccinationDetailViewModel!
     public var router: PopupRouter!
@@ -45,11 +48,14 @@ public class VaccinationDetailViewController: UIViewController {
 
         nameHeadline.font = UIFont.ibmPlexSansSemiBold(with: 32)
         nameHeadline.text = viewModel.name
-        
+        nameHeadline.layoutMargins.top = 30
+        stackView.setCustomSpacing(24, after: nameHeadline)
+
         immunizationView.icon.image = viewModel.immunizationIcon
         immunizationView.titleText = viewModel.immunizationTitle
         immunizationView.bodyText = viewModel.immunizationBody
-        
+        stackView.setCustomSpacing(24, after: immunizationView)
+
         immunizationButton.title = viewModel.immunizationButton
         immunizationButton.backgroundColor = UIColor.white
         immunizationButton.shadowColor = UIColor.white
@@ -61,13 +67,20 @@ public class VaccinationDetailViewController: UIViewController {
                 self.navigationController?.popViewController(animated: true)
             }
         }
+        stackView.setCustomSpacing(24, after: immunizationButtonContainerView)
 
+        stackView.setCustomSpacing(12, after: personalDataHeadline)
         personalDataHeadline.text = "vaccination_detail_personal_information".localized
+
         nameView.titleText = "vaccination_detail_name".localized
         nameView.bodyText = viewModel.name
+        nameView.contentView?.layoutMargins = .init(top: 12, left: 24, bottom: 12, right: 24)
         nameView.showBottomBorder()
+
+        stackView.setCustomSpacing(24, after: birtdateView)
         birtdateView.titleText = "vaccination_detail_birthdate".localized
         birtdateView.bodyText = viewModel.birthDate
+        birtdateView.contentView?.layoutMargins = .init(top: 12, left: 24, bottom: 12, right: 24)
 
         deleteButton.title = "vaccination_detail_delete".localized
         deleteButton.action = { [weak self] in
@@ -85,8 +98,19 @@ public class VaccinationDetailViewController: UIViewController {
             }))
             self?.present(alert, animated: true)
         }
-        
-        viewModel.vaccinations.forEach({ stackView.insertArrangedSubview(VaccinationView(viewModel: $0), at: stackView.subviews.count - 3) })
+
+        showVaccinations()
+    }
+
+    private func showVaccinations() {
+        stackView.setCustomSpacing(30, after: vaccinationsStackView)
+        vaccinationsStackView.subviews.forEach {
+            $0.removeFromSuperview()
+            self.vaccinationsStackView.removeArrangedSubview($0)
+        }
+        viewModel.vaccinations.forEach({
+            vaccinationsStackView.addArrangedSubview(VaccinationView(viewModel: $0))
+        })
     }
 
     @objc public func onFavorite() {
@@ -95,6 +119,23 @@ public class VaccinationDetailViewController: UIViewController {
         }).catch({ error in
             print(error)
         })
+    }
+}
+
+extension VaccinationDetailViewController: ScannerDelegate {
+    public func result(with value: Result<String, ScanError>) {
+        presentedViewController?.dismiss(animated: true, completion: nil)
+        switch value {
+        case .success(let payload):
+            viewModel.process(payload: payload).done({ cert in
+                self.setupView()
+            }).catch({ error in
+                print(error)
+                // TODO error handling
+            })
+        case .failure(let error):
+            print("We have an error: \(error)")
+        }
     }
 }
 
