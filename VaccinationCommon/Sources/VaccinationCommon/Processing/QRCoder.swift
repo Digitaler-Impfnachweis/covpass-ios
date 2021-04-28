@@ -28,9 +28,9 @@ public class QRCoder: QRCoderProtocol {
             }
             let cosePayload = try cose1SignEncoder.parse(decompressedPayload)
             let cborDecodedPayload = try CBOR.decode(cosePayload?.payload ?? [])
-            let cborDecodedProtected = try CBOR.decode(cosePayload?.protected ?? [])
+//            let cborDecodedProtected = try CBOR.decode(cosePayload?.protected ?? [])
             let certificateJson = cose1SignEncoder.map(cborObject: cborDecodedPayload)
-            cose1SignEncoder.parse(header: cborDecodedProtected)
+//            cose1SignEncoder.parse(header: cborDecodedProtected)
             let jsonData = try JSONSerialization.data(withJSONObject: certificateJson as Any)
             return try JSONDecoder().decode(VaccinationCertificate.self, from: jsonData)
         } catch {
