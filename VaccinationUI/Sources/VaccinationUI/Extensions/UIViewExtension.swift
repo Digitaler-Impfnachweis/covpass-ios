@@ -64,4 +64,21 @@ public extension AutoLayoutContainer {
         heightConstraint.isActive = true
         return [widthConstraint, heightConstraint]
     }
+
+    func pinEdges(_ edges: UIRectEdge = .all, to container: AutoLayoutContainer, margins: UIEdgeInsets = .zero) {
+        (self as? UIView)?.translatesAutoresizingMaskIntoConstraints = false
+
+        if edges.contains(.top) {
+            topAnchor.constraint(equalTo: container.topAnchor, constant: margins.top).isActive = true
+        }
+        if edges.contains(.left) {
+            leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: margins.left).isActive = true
+        }
+        if edges.contains(.bottom) {
+            bottomAnchor.constraint(equalTo: container.bottomAnchor, constant: -margins.bottom).isActive = true
+        }
+        if edges.contains(.right) {
+            trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: -margins.right).isActive = true
+        }
+    }
 }

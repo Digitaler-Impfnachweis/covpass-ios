@@ -69,7 +69,6 @@ public class ProofPopupViewController: BottomPopupViewController {
         }
         actionView.buttonImage = inputViewModel.chevronRightImage
         actionView.headlineFont = inputViewModel.headlineFont
-        actionView.leftMargin = 14
         actionView.tintColor = inputViewModel.tintColor
     }
 
@@ -77,6 +76,7 @@ public class ProofPopupViewController: BottomPopupViewController {
         paragraphView.title.isHidden = true
         paragraphView.bodyText = inputViewModel.info
         paragraphView.bodyFont = inputViewModel.paragraphBodyFont
+        paragraphView.layoutMargins.top = 10
     }
     
     private func configureToolbarView() {

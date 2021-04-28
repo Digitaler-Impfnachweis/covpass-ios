@@ -18,51 +18,47 @@
                 <rect key="frame" x="0.0" y="0.0" width="414" height="514"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pTs-ku-Q18" customClass="CardViewHeader" customModule="VaccinationUI">
-                        <rect key="frame" x="20" y="10" width="374" height="120"/>
-                        <color key="tintColor" systemColor="systemBlueColor"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="120" id="Zq3-EL-9C9"/>
-                        </constraints>
-                        <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="color" keyPath="cardTintColor">
-                                <color key="value" systemColor="systemBlueColor"/>
-                            </userDefinedRuntimeAttribute>
-                        </userDefinedRuntimeAttributes>
-                    </view>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VUx-Xk-tTT" customClass="CardViewAction" customModule="VaccinationUI">
-                        <rect key="frame" x="20" y="130" width="374" height="30"/>
-                        <color key="tintColor" systemColor="systemBlueColor"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="30" id="QB0-9E-nIc"/>
-                        </constraints>
-                        <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="color" keyPath="cardTintColor">
-                                <color key="value" systemColor="systemBlueColor"/>
-                            </userDefinedRuntimeAttribute>
-                        </userDefinedRuntimeAttributes>
-                    </view>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JXX-SM-lmC" customClass="QrContinerView" customModule="VaccinationUI">
-                        <rect key="frame" x="40" y="180" width="334" height="294"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                <real key="value" value="20"/>
-                            </userDefinedRuntimeAttribute>
-                        </userDefinedRuntimeAttributes>
-                    </view>
+                    <stackView opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="T1V-OB-XnR">
+                        <rect key="frame" x="20" y="44" width="374" height="462"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" placeholderIntrinsicWidth="374" placeholderIntrinsicHeight="120" translatesAutoresizingMaskIntoConstraints="NO" id="pTs-ku-Q18" customClass="CardViewHeader" customModule="VaccinationUI">
+                                <rect key="frame" x="0.0" y="0.0" width="374" height="120"/>
+                                <color key="tintColor" systemColor="systemBlueColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="cardTintColor">
+                                        <color key="value" systemColor="systemBlueColor"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <view contentMode="scaleToFill" placeholderIntrinsicWidth="374" placeholderIntrinsicHeight="30" translatesAutoresizingMaskIntoConstraints="NO" id="VUx-Xk-tTT" customClass="CardViewAction" customModule="VaccinationUI">
+                                <rect key="frame" x="0.0" y="120" width="374" height="30"/>
+                                <color key="tintColor" systemColor="systemBlueColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="cardTintColor">
+                                        <color key="value" systemColor="systemBlueColor"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JXX-SM-lmC" customClass="QrContinerView" customModule="VaccinationUI">
+                                <rect key="frame" x="0.0" y="150" width="374" height="262"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <view contentMode="scaleToFill" horizontalHuggingPriority="1" verticalHuggingPriority="1" placeholderIntrinsicWidth="374" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="cOM-t7-BrJ" userLabel="Flexible Space">
+                                <rect key="frame" x="0.0" y="412" width="374" height="50"/>
+                            </view>
+                        </subviews>
+                    </stackView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="pTs-ku-Q18" firstAttribute="top" secondItem="4RZ-nW-lgh" secondAttribute="top" constant="10" id="5vg-U4-0zl"/>
-                    <constraint firstItem="JXX-SM-lmC" firstAttribute="top" secondItem="VUx-Xk-tTT" secondAttribute="bottom" constant="20" id="Cf5-cr-cvm"/>
-                    <constraint firstItem="VUx-Xk-tTT" firstAttribute="leading" secondItem="pTs-ku-Q18" secondAttribute="leading" id="IwN-26-Kai"/>
-                    <constraint firstItem="JXX-SM-lmC" firstAttribute="leading" secondItem="4RZ-nW-lgh" secondAttribute="leading" constant="40" id="Syu-Ta-rfq"/>
-                    <constraint firstItem="VUx-Xk-tTT" firstAttribute="top" secondItem="pTs-ku-Q18" secondAttribute="bottom" id="dxN-yO-ZhK"/>
-                    <constraint firstItem="pTs-ku-Q18" firstAttribute="leading" secondItem="4RZ-nW-lgh" secondAttribute="leading" constant="20" id="ekf-wU-fBT"/>
-                    <constraint firstAttribute="bottom" secondItem="JXX-SM-lmC" secondAttribute="bottom" priority="1" constant="40" id="l7B-YF-YNl"/>
-                    <constraint firstItem="VUx-Xk-tTT" firstAttribute="trailing" secondItem="pTs-ku-Q18" secondAttribute="trailing" id="wBG-yh-r8S"/>
-                    <constraint firstAttribute="trailing" secondItem="pTs-ku-Q18" secondAttribute="trailing" constant="20" id="ydK-BS-bLi"/>
-                    <constraint firstAttribute="trailing" secondItem="JXX-SM-lmC" secondAttribute="trailing" constant="40" id="z4I-XU-duP"/>
+                    <constraint firstItem="T1V-OB-XnR" firstAttribute="leading" secondItem="4RZ-nW-lgh" secondAttribute="leadingMargin" id="T3p-r4-oBb"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="T1V-OB-XnR" secondAttribute="trailing" id="XeX-fM-sG3"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="T1V-OB-XnR" secondAttribute="bottom" id="jZl-wH-ZV6"/>
+                    <constraint firstItem="T1V-OB-XnR" firstAttribute="top" secondItem="4RZ-nW-lgh" secondAttribute="topMargin" id="yWI-Qx-Plo"/>
                 </constraints>
             </collectionViewCellContentView>
             <size key="customSize" width="414" height="514"/>
@@ -93,10 +89,19 @@
                 <outlet property="actionView" destination="VUx-Xk-tTT" id="dFG-2L-mnU"/>
                 <outlet property="headerView" destination="pTs-ku-Q18" id="NbY-zP-9wf"/>
                 <outlet property="qrContinerView" destination="JXX-SM-lmC" id="R2G-bG-gJv"/>
+                <outlet property="stackView" destination="T1V-OB-XnR" id="cvS-bj-Xdw"/>
             </connections>
             <point key="canvasLocation" x="-620.28985507246387" y="292.63392857142856"/>
         </collectionViewCell>
     </objects>
+    <designables>
+        <designable name="VUx-Xk-tTT">
+            <size key="intrinsicContentSize" width="374" height="30"/>
+        </designable>
+        <designable name="pTs-ku-Q18">
+            <size key="intrinsicContentSize" width="374" height="120"/>
+        </designable>
+    </designables>
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

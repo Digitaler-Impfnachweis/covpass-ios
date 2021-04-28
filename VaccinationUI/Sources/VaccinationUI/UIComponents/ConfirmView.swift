@@ -7,7 +7,7 @@
 
 import UIKit
 
-public class ConfirmView: MarginableXibView {
+public class ConfirmView: XibView {
     // MARK: - IBOutlets
 
     @IBOutlet public var detailLabel: UILabel!
@@ -74,13 +74,6 @@ public class ConfirmView: MarginableXibView {
         }
     }
 
-    public override var margins: [Margin] {
-        return [
-            RelatedViewMargin(constant: 40, relatedViewType: Headline.self),
-            PositionMargin(constant: 24, position: -1, type: .bottom)
-        ]
-    }
-
     // MARK: - Init
 
     /**
@@ -88,7 +81,7 @@ public class ConfirmView: MarginableXibView {
      */
     public override func initView() {
         super.initView()
-
+        layoutMargins = .init(top: 24, left: 24, bottom: 24, right: 24)
         updateImageView()
         detailLabel.font = UIConstants.Font.regularLarger
         detailLabel.adjustsFontForContentSizeCategory()

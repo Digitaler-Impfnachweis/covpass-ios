@@ -19,11 +19,13 @@ public class SecondaryButtonContainer: PrimaryButtonContainer {
     
     public override func initView() {
         super.initView()
-        innerButton.layer.borderColor = enabledButtonBackgroundColor.cgColor
-        innerButton.layer.borderWidth = 1.0
-        innerButton.backgroundColor = UIColor.white
-        textableView.textColor = enabledButtonBackgroundColor
-        innerButton.setTitleColor(enabledButtonBackgroundColor, for: .normal)
+        layer.borderColor = enabledButtonBackgroundColor.cgColor
+        layer.borderWidth = 1.0
+        enabledButtonTextColor = UIConstants.BrandColor.brandAccent
+        enabledButtonBackgroundColor = UIColor.white
+        disabledButtonBackgroundColor = UIColor.white
+        textableView.textColor = UIConstants.BrandColor.brandAccent
+        tintColor = UIConstants.BrandColor.brandAccent
         shadowColor = UIColor.white
     }
 }

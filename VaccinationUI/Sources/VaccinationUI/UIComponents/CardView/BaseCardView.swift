@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 @IBDesignable
-public class BaseCardView: MarginableXibView {
+public class BaseCardView: XibView {
     // MARK: - IBInspectable
 
     @IBInspectable public var cornerRadius: CGFloat = 0 {

@@ -9,9 +9,10 @@ import Foundation
 import UIKit
 
 @IBDesignable
-public class CardViewHeader: MarginableXibView {
+public class CardViewHeader: XibView {
     // MARK: - Outlets
 
+    @IBOutlet public var stackView: UIStackView!
     @IBOutlet public var subtitleLabel: UILabel!
     @IBOutlet public var titleLabel: UILabel!
     @IBOutlet public var leftButton: UIButton!
@@ -27,5 +28,10 @@ public class CardViewHeader: MarginableXibView {
     
     @IBAction public func infoButtonPressed(button: UIButton) {
         action?()
+    }
+
+    public override func initView() {
+        super.initView()
+        stackView.spacing = 20
     }
 }

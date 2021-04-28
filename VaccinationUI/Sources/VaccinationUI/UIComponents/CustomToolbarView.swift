@@ -176,7 +176,7 @@ public class CustomToolbarView: XibView {
 
     private var cancelButton: PrimaryButtonContainer {
         let cancelIcon = UIImage(named: UIConstants.IconName.CancelButton, in: UIConstants.bundle, compatibleWith: nil)
-        primaryButton = PrimaryIconButtonContainer(iconImage: cancelIcon, iconHeightMultiplier: 0.6)
+        primaryButton = PrimaryIconButtonContainer(iconImage: cancelIcon)
         primaryButton.action = { [weak self] in
             guard let strongSelf = self else { return }
             strongSelf.delegate?.customToolbarView(strongSelf, didTap: .cancelButton)
@@ -218,7 +218,7 @@ public class CustomToolbarView: XibView {
 
     private var addButton: PrimaryButtonContainer {
         let plusIcon = UIImage(named: UIConstants.IconName.PlusIcon, in: UIConstants.bundle, compatibleWith: nil)
-        primaryButton = PrimaryIconButtonContainer(iconImage: plusIcon, iconHeightMultiplier: 0.6)
+        primaryButton = PrimaryIconButtonContainer(iconImage: plusIcon)
         primaryButton.action = { [weak self] in
             guard let strongSelf = self else { return }
             strongSelf.delegate?.customToolbarView(strongSelf, didTap: .addButton)
@@ -228,7 +228,7 @@ public class CustomToolbarView: XibView {
 
     private var checkButton: PrimaryButtonContainer {
         let checkmarkIcon = UIImage(named: UIConstants.IconName.CheckmarkIcon, in: UIConstants.bundle, compatibleWith: nil)
-        primaryButton = PrimaryIconButtonContainer(iconImage: checkmarkIcon, iconHeightMultiplier: 0.6)
+        primaryButton = PrimaryIconButtonContainer(iconImage: checkmarkIcon)
         primaryButton.innerButton.accessibilityIdentifier = AccessibilityIdentifier.InputForms.checkButton
         primaryButton.action = { [weak self] in
             guard let strongSelf = self else { return }
@@ -239,7 +239,7 @@ public class CustomToolbarView: XibView {
 
     private var scrollButton: PrimaryButtonContainer {
         let arrowIcon = UIImage(named: UIConstants.IconName.RgArrowDown, in: UIConstants.bundle, compatibleWith: nil)
-        primaryButton = PrimaryIconButtonContainer(iconImage: arrowIcon, iconHeightMultiplier: 0.6)
+        primaryButton = PrimaryIconButtonContainer(iconImage: arrowIcon)
         primaryButton.tintColor = navigationIconColor
         primaryButton.enabledButtonBackgroundColor = UIColor.clear
         primaryButton.innerButton.accessibilityIdentifier = AccessibilityIdentifier.InputForms.scrollButton
@@ -255,9 +255,10 @@ public class CustomToolbarView: XibView {
         if let primaryButton = previousMiddleButton, !primaryButton.title.isEmpty {
             showLoadingOverIconButton = false
         }
+        let title = showLoadingOverIconButton == false ? previousMiddleButton?.title : nil
         primaryButton = showLoadingOverIconButton ? PrimaryButtonContainer() : previousMiddleButton
         primaryButton.startAnimating(makeCircle: showLoadingOverIconButton)
-        configureMiddleButton(button: primaryButton)
+        configureMiddleButton(button: primaryButton, title: title)
     }
 
     // MARK: Private Methods
@@ -279,10 +280,7 @@ public class CustomToolbarView: XibView {
         button.tintColor = UIConstants.BrandColor.onBackground70
 
         addSubview(button)
-        button.centerX(of: self)
-        button.centerY(of: self)
-        button.setConstant(height: UIConstants.Size.CancelButtonSize)
-        button.setConstant(width: UIConstants.Size.CancelButtonSize)
+        configureDefaultConstraints(for: button)
     }
 
     private func configureDisabledButton(button: PrimaryButtonContainer, title: String? = nil) {
@@ -291,25 +289,15 @@ public class CustomToolbarView: XibView {
         button.isEnabled = false
 
         addSubview(button)
-        button.centerX(of: self)
-        button.centerY(of: self)
-        if button is PrimaryIconButtonContainer {
-            button.setConstant(height: UIConstants.Size.MiddleButtonSize)
-            button.setConstant(width: UIConstants.Size.MiddleButtonSize)
-        }
+        configureDefaultConstraints(for: button)
     }
 
     private func configureMiddleButton(button: PrimaryButtonContainer, title: String? = nil) {
         button.cornerRadius = UIConstants.Size.ButtonCornerRadius
         button.shadowColor = UIConstants.BrandColor.primaryButtonShadow
-        addSubview(button)
-        button.centerX(of: self)
-        button.centerY(of: self)
-        if button is PrimaryIconButtonContainer {
-            button.setConstant(height: UIConstants.Size.MiddleButtonSize)
-            button.setConstant(width: UIConstants.Size.MiddleButtonSize)
-        }
         button.defaultText = title
+        addSubview(button)
+        configureDefaultConstraints(for: button)
     }
 
     private func configureScrollButton(button: PrimaryButtonContainer) {
@@ -317,12 +305,14 @@ public class CustomToolbarView: XibView {
         button.shadowColor = UIColor.clear
 
         addSubview(button)
-        button.centerX(of: self)
-        button.centerY(of: self)
-        if button is PrimaryIconButtonContainer {
-            button.setConstant(height: UIConstants.Size.MiddleButtonSize)
-            button.setConstant(width: UIConstants.Size.MiddleButtonSize)
-        }
+        configureDefaultConstraints(for: button)
+    }
+
+    private func configureDefaultConstraints(for button: PrimaryButtonContainer) {
+        button.centerX(of: layoutMarginsGuide)
+        button.pinEdges([.top, .bottom], to: layoutMarginsGuide)
+        button.setContentHuggingPriority(.required, for: .horizontal)
+        button.setContentHuggingPriority(.required, for: .vertical)
     }
 
     // MARK: Action Methods

@@ -32,7 +32,6 @@ class OnboardingContainerViewControllerTests: XCTestCase {
     func testOutlets() {
         XCTAssertNotNil(sut.toolbarView)
         XCTAssertNotNil(sut.pageIndicator)
-        XCTAssertNotNil(sut.startButtonBottomConstraint)
     }
 
     func testViewDidLoad() {

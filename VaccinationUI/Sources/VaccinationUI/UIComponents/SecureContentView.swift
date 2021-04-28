@@ -8,7 +8,7 @@
 import UIKit
 
 @IBDesignable
-public class SecureContentView: MarginableXibView {
+public class SecureContentView: XibView {
     
     @IBOutlet public var stackView: UIStackView!
     @IBOutlet public var title: UILabel!
@@ -16,9 +16,6 @@ public class SecureContentView: MarginableXibView {
     @IBOutlet public var imageView: UIImageView!
 
     internal static let BodyLeftInset: CGFloat = -5
-
-    public var topMargin: CGFloat = 25
-    public var marginToSecondaryButton: CGFloat = 40
 
     public var titleText: String? {
         didSet {

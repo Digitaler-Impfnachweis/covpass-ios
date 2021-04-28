@@ -32,7 +32,7 @@ extension OnboardingRouter: Router {
         viewModel.delegate = certificateViewController
         certificateViewController.viewModel = viewModel
         certificateViewController.router = ProofPopupRouter()
-        windowDelegate?.update(rootViewController: certificateViewController)
+        windowDelegate?.update(rootViewController: UINavigationController(rootViewController: certificateViewController))
     }
     
     public func navigateToPreviousViewController() {
