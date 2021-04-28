@@ -390,21 +390,40 @@
                                     <constraint firstAttribute="height" constant="60" id="blt-rJ-wBB"/>
                                 </constraints>
                             </view>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ifP-Gl-48h">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ifP-Gl-48h">
                                 <rect key="frame" x="0.0" y="124" width="414" height="657.5"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="1gh-Bm-jvT" customClass="ScrollableStackView" customModule="VaccinationUI">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="148"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="1gh-Bm-jvT" customClass="ScrollableStackView" customModule="VaccinationUI">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="560"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xkg-HL-cGV" customClass="Spacer" customModule="VaccinationUI">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="20"/>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="a3u-gF-Aal" customClass="ConfirmView" customModule="VaccinationUI">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="128"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                            </view>
+                                            <view contentMode="scaleToFill" ambiguous="YES" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="btb-DJ-LeM" customClass="ParagraphView" customModule="VaccinationUI">
+                                                <rect key="frame" x="0.0" y="128" width="414" height="128"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                            </view>
+                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Zgc-NZ-HB6" customClass="Spacer">
+                                                <rect key="frame" x="0.0" y="256" width="414" height="24"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="20" id="4jJ-gp-cZp"/>
+                                                    <constraint firstAttribute="height" constant="24" id="sTZ-dQ-oRh"/>
                                                 </constraints>
                                             </view>
-                                            <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="btb-DJ-LeM" customClass="ParagraphView" customModule="VaccinationUI">
-                                                <rect key="frame" x="0.0" y="20" width="414" height="128"/>
+                                            <view contentMode="scaleToFill" ambiguous="YES" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="kFp-28-n6g" customClass="ParagraphView" customModule="VaccinationUI">
+                                                <rect key="frame" x="0.0" y="280" width="414" height="128"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                            </view>
+                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7sY-3Z-A0K" customClass="Spacer">
+                                                <rect key="frame" x="0.0" y="408" width="414" height="24"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="24" id="CjE-Kt-wk8"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" ambiguous="YES" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="CtT-AJ-EPL" customClass="ParagraphView" customModule="VaccinationUI">
+                                                <rect key="frame" x="0.0" y="432" width="414" height="128"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                             </view>
                                         </subviews>
@@ -448,7 +467,10 @@
                     </view>
                     <connections>
                         <outlet property="headline" destination="PFc-dj-gMR" id="s9z-Ar-tsf"/>
-                        <outlet property="paragraphView" destination="btb-DJ-LeM" id="WiF-Y2-WyO"/>
+                        <outlet property="idView" destination="CtT-AJ-EPL" id="bGO-jv-dZj"/>
+                        <outlet property="imageView" destination="a3u-gF-Aal" id="1vb-AA-gJS"/>
+                        <outlet property="nameView" destination="kFp-28-n6g" id="7vC-0z-mjo"/>
+                        <outlet property="resultView" destination="btb-DJ-LeM" id="z0F-LB-JXN"/>
                         <outlet property="toolbarView" destination="mGT-zD-jyY" id="WdP-kT-nVY"/>
                     </connections>
                 </viewController>
@@ -466,6 +488,9 @@
         </designable>
         <designable name="BZA-KE-FmB">
             <size key="intrinsicContentSize" width="414" height="40"/>
+        </designable>
+        <designable name="CtT-AJ-EPL">
+            <size key="intrinsicContentSize" width="414" height="128"/>
         </designable>
         <designable name="DcZ-ry-4Hc">
             <size key="intrinsicContentSize" width="240" height="56"/>
@@ -490,6 +515,9 @@
         </designable>
         <designable name="jX9-UW-4T8">
             <size key="intrinsicContentSize" width="414" height="60"/>
+        </designable>
+        <designable name="kFp-28-n6g">
+            <size key="intrinsicContentSize" width="414" height="128"/>
         </designable>
         <designable name="mGT-zD-jyY">
             <size key="intrinsicContentSize" width="240" height="56"/>

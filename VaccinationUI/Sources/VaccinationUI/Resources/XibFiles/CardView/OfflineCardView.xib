@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -50,7 +50,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WKN-lr-q90">
-                            <rect key="frame" x="75" y="128" width="315" height="18.5"/>
+                            <rect key="frame" x="54" y="128" width="336" height="18.5"/>
                             <attributedString key="attributedText">
                                 <fragment content="Aktualisieren Sie die App">
                                     <attributes>
@@ -63,10 +63,10 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="06J-Ay-zYR">
-                            <rect key="frame" x="24" y="121.5" width="32" height="32"/>
+                            <rect key="frame" x="24" y="125.5" width="24" height="24"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="32" id="3ex-ge-C6n"/>
-                                <constraint firstAttribute="height" constant="32" id="ggt-4d-MjK"/>
+                                <constraint firstAttribute="width" constant="24" id="3ex-ge-C6n"/>
+                                <constraint firstAttribute="height" constant="24" id="ggt-4d-MjK"/>
                             </constraints>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" misplaced="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VNN-es-BAs">
@@ -97,7 +97,7 @@
                         <constraint firstAttribute="trailing" secondItem="WKN-lr-q90" secondAttribute="trailing" constant="24" id="hG7-qv-goe"/>
                         <constraint firstItem="EKc-Hh-BeX" firstAttribute="top" secondItem="VW2-PA-GY7" secondAttribute="bottom" constant="12" id="mxn-c3-YYs"/>
                         <constraint firstItem="VW2-PA-GY7" firstAttribute="top" secondItem="Flh-qW-5MS" secondAttribute="top" constant="24" id="sPB-oJ-Npe"/>
-                        <constraint firstItem="WKN-lr-q90" firstAttribute="leading" secondItem="06J-Ay-zYR" secondAttribute="trailing" constant="19" id="ySE-um-lKQ"/>
+                        <constraint firstItem="WKN-lr-q90" firstAttribute="leading" secondItem="06J-Ay-zYR" secondAttribute="trailing" constant="6" id="ySE-um-lKQ"/>
                     </constraints>
                 </view>
             </subviews>

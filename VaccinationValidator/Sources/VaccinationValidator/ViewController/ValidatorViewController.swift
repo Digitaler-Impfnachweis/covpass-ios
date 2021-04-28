@@ -54,6 +54,8 @@ public class ValidatorViewController: UIViewController {
 
         offlineCard.infoImageView.image = UIImage(named: "warning", in: UIConstants.bundle, compatibleWith: nil)
         offlineCard.cornerRadius = viewModel.continerCornerRadius
+        offlineCard.dateLabel.text = "Letztes Update: 01.01.1971, 05:36"
+        offlineCard.dateLabel.textColor = UIConstants.BrandColor.onBackground100
     }
     
     func presentPopup() {

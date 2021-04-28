@@ -12,10 +12,11 @@ public class ValidationResultViewController: BottomPopupViewController {
     // MARK: - IBOutlet
 
     @IBOutlet public var toolbarView: CustomToolbarView!
-//    @IBOutlet public var confirmView: ConfirmView!
     @IBOutlet public var headline: InfoHeaderView!
-    @IBOutlet public var paragraphView: ParagraphView!
-//    @IBOutlet public var actionView: InfoHeaderView!
+    @IBOutlet public var imageView: ConfirmView!
+    @IBOutlet public var resultView: ParagraphView!
+    @IBOutlet public var nameView: ParagraphView!
+    @IBOutlet public var idView: ParagraphView!
 
     // MARK: - Public Properties
 
@@ -24,66 +25,57 @@ public class ValidationResultViewController: BottomPopupViewController {
 
     // MARK: - Internal Properties
 
-    var inputViewModel: ProofPopupViewModel {
-        viewModel as? ProofPopupViewModel ?? ProofPopupViewModel()
+    var inputViewModel: ValidationResultViewModel {
+        viewModel as? ValidationResultViewModel ?? ValidationResultViewModel(certificate: nil)
     }
 
     // MARK: - Lifecycle
 
     public override func viewDidLoad() {
         super.viewDidLoad()
-//        configureImageView()
+        configureImageView()
         configureHeadline()
         configureParagraphView()
         configureToolbarView()
-//        configureActionView()
     }
 
     // MARK: - Private
 
-//    private func configureImageView() {
-//        confirmView.kind = .custom(
-//            image: inputViewModel.image,
-//            width: inputViewModel.imageWidth,
-//            height: inputViewModel.imageHeight
-//        )
-//        confirmView.detail = nil
-//        confirmView.imageView.contentMode = inputViewModel.imageContentMode
-//    }
+    private func configureImageView() {
+        imageView.kind = .custom(
+            image: inputViewModel.icon,
+            width: 150,
+            height: 150
+        )
+        imageView.detail = nil
+        imageView.imageView.contentMode = .scaleAspectFill
+    }
 
     private func configureHeadline() {
-        headline.headline.text = inputViewModel.title
-        headline.headline.textColor = inputViewModel.headlineColor
+        headline.headline.text = ""
         headline.action = { [weak self] in
             self?.dismiss(animated: true, completion: nil)
         }
         headline.buttonImage = inputViewModel.closeButtonImage
-        headline.headlineFont = inputViewModel.headlineFont
     }
 
-//    private func configureActionView() {
-//        actionView.headline.text = inputViewModel.actionTitle
-//        actionView.headline.textColor = inputViewModel.headlineColor
-//        actionView.action = { [weak self] in
-//            self?.dismiss(animated: true, completion: nil)
-//        }
-//        actionView.buttonImage = inputViewModel.chevronRightImage
-//        actionView.headlineFont = inputViewModel.headlineFont
-//        actionView.leftMargin = 14
-//        actionView.tintColor = inputViewModel.tintColor
-//    }
-
     private func configureParagraphView() {
-        paragraphView.title.isHidden = true
-        paragraphView.bodyText = inputViewModel.info
-        paragraphView.bodyFont = inputViewModel.paragraphBodyFont
+        resultView.titleText = inputViewModel.resultTitle
+        resultView.titleFont = UIConstants.Font.onboardingHeadlineFont
+        resultView.bodyText = inputViewModel.resultBody
+        resultView.spacing = 12.0
+
+        nameView.titleText = inputViewModel.nameTitle
+        nameView.bodyText = inputViewModel.nameBody
+
+        idView.titleText = inputViewModel.idTitle
+        idView.bodyText = inputViewModel.idTitle
     }
 
     private func configureToolbarView() {
         toolbarView.shouldShowTransparency = true
         toolbarView.shouldShowGradient = false
-        toolbarView.state = .confirm(inputViewModel.startButtonTitle)
-        toolbarView.setUpLeftButton(leftButtonItem: .navigationArrow)
+        toolbarView.state = .confirm("Nächstes Zertifikat scannen")
         toolbarView.delegate = self
     }
 

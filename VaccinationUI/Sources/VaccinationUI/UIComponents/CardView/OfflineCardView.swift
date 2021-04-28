@@ -20,7 +20,6 @@ public class OfflineCardView: BaseCardView {
     
     public override func initView() {
         super.initView()
-        // TODO add QR code icon
-//        actionButton.iconImage = UIImage(named: "", in: <#T##Bundle?#>, with: <#T##UIImage.Configuration?#>)
+        contentView?.backgroundColor = UIConstants.BrandColor.brandAccent20
     }
 }

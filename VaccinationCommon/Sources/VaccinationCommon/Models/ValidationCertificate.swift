@@ -15,6 +15,10 @@ public struct ValidationCertificate: Codable {
     public var id: String
     public var validUntil: Date?
 
+    public var partialVaccination: Bool {
+        return vaccination.first?.seriesNumber != vaccination.first?.seriesTotal
+    }
+
     enum CodingKeys: String, CodingKey {
         case name
         case birthDate

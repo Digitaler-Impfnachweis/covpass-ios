@@ -26,8 +26,6 @@ public struct VaccinationCertificate: Codable {
     public var validUntil: Date?
     public var version: String?
 
-    
-
     public var partialVaccination: Bool {
         return vaccination.first?.seriesNumber != vaccination.first?.seriesTotal
     }
