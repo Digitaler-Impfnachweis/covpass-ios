@@ -14,7 +14,7 @@ enum Result {
     case error
 }
 
-open class ValidationResultViewModel {
+open class ValidationResultViewModel: BaseViewModel {
 
     public init(certificate: ValidationCertificate?) {
         self.certificate = certificate
@@ -109,5 +109,28 @@ open class ValidationResultViewModel {
     let presentDuration: Double = 0.5
     let dismissDuration: Double = 0.5
     let shouldDismissInteractivelty: Bool = true
+
+    //
+    public var image: UIImage?
+
+    public var title: String = ""
+
+    public var info: String = ""
+
+    public var imageAspectRatio: CGFloat = 0.0
+
+    public var imageWidth: CGFloat = 0.0
+
+    public var imageHeight: CGFloat = 0.0
+
+    public var imageContentMode: UIView.ContentMode = .scaleAspectFit
+
+    public var headlineFont: UIFont = UIFont.boldSystemFont(ofSize: 12)
+
+    public var headlineColor: UIColor = UIColor.black
+
+    public var paragraphBodyFont: UIFont = UIFont.boldSystemFont(ofSize: 12)
+
+    public var backgroundColor: UIColor = UIColor.black
 }
 

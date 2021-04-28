@@ -69,7 +69,8 @@ public class ValidationResultViewController: BottomPopupViewController {
         nameView.bodyText = inputViewModel.nameBody
 
         idView.titleText = inputViewModel.idTitle
-        idView.bodyText = inputViewModel.idTitle
+        idView.bodyText = inputViewModel.idBody
+        idView.isHidden = inputViewModel.idBody == nil
     }
 
     private func configureToolbarView() {
@@ -95,7 +96,10 @@ extension ValidationResultViewController: CustomToolbarViewDelegate {
         case .navigationArrow:
             dismiss(animated: true, completion: nil)
         case .textButton:
-            router?.presentPopup(onTopOf: self.presentingViewController?.presentingViewController ?? self)
+            let vc = self.presentingViewController
+            dismiss(animated: true, completion: {
+                self.router?.presentPopup(onTopOf: vc ?? self)
+            })
         default:
             return
         }

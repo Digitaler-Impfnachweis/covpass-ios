@@ -9,6 +9,7 @@ import Foundation
 import VaccinationUI
 import UIKit
 import VaccinationCommon
+import PromiseKit
 
 public class ValidatorViewModel {
     
@@ -28,12 +29,18 @@ public class ValidatorViewModel {
     func configure(cell: ActionCell, at indexPath: IndexPath) {
         cell.configure(title: titles[indexPath.row], iconName: UIConstants.IconName.ChevronRight)
     }
-    
-    func process(payload: String, completion: ((Error) -> Void)? = nil) {
-        guard let decodedPayload = parser.parse(payload, completion: completion) else { return }
-        print(decodedPayload)
-        // Do more processes
-//        certificateState = .half
+
+    public func process(payload: String) -> Promise<ValidationCertificate> {
+        return Promise<ValidationCertificate>() { seal in
+            // TODO refactor parser
+            guard let decodedPayload: ValidationCertificate = parser.parse(payload, completion: { error in
+                seal.reject(error)
+            }) else {
+                seal.reject(ApplicationError.unknownError)
+                return
+            }
+            seal.fulfill(decodedPayload)
+        }
     }
     
     // MARK: - UIConfigureation

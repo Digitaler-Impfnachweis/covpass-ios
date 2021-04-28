@@ -31,6 +31,16 @@ public class ValidatorViewController: UIViewController {
         setupOther()
         setupCardView()
     }
+
+    public override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+
+    public override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
     
     // MARK: - Private
     
@@ -67,13 +77,21 @@ public class ValidatorViewController: UIViewController {
 
 extension ValidatorViewController: ScannerDelegate {
     public func result(with value: Result<String, ScanError>) {
-        presentedViewController?.dismiss(animated: true, completion: nil)
-        switch value {
-        case .success(let payload):
-            viewModel?.process(payload: payload)
-        case .failure(let error):
-            print("We have an error: \(error)")
-        }
+        presentedViewController?.dismiss(animated: true, completion: {
+            switch value {
+            case .success(let payload):
+                self.viewModel?.process(payload: payload).done({ cert in
+                    let vc = ValidationResultViewController.createFromStoryboard()
+                    vc.viewModel = ValidationResultViewModel(certificate: cert)
+                    vc.router = ValidatorPopupRouter()
+                    self.present(vc, animated: true, completion: nil)
+                }).catch({ error in
+                    print(error)
+                })
+            case .failure(let error):
+                print("We have an error: \(error)")
+            }
+        })
     }
 }
 
