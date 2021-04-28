@@ -1,6 +1,6 @@
 //
-//  ProofPopupViewController.swift
-//  
+//  ValidationResultViewController.swift
+//
 //
 //  Copyright © 2021 IBM. All rights reserved.
 //
@@ -8,17 +8,17 @@
 import UIKit
 import BottomPopup
 
-public class ProofPopupViewController: BottomPopupViewController {
+public class ValidationResultViewController: BottomPopupViewController {
     // MARK: - IBOutlet
-    
+
     @IBOutlet public var toolbarView: CustomToolbarView!
-    @IBOutlet public var confirmView: ConfirmView!
+//    @IBOutlet public var confirmView: ConfirmView!
     @IBOutlet public var headline: InfoHeaderView!
     @IBOutlet public var paragraphView: ParagraphView!
-    @IBOutlet public var actionView: InfoHeaderView!
-    
+//    @IBOutlet public var actionView: InfoHeaderView!
+
     // MARK: - Public Properties
-    
+
     public var viewModel: BaseViewModel?
     public var router: PopupRouter?
 
@@ -32,24 +32,24 @@ public class ProofPopupViewController: BottomPopupViewController {
 
     public override func viewDidLoad() {
         super.viewDidLoad()
-        configureImageView()
+//        configureImageView()
         configureHeadline()
         configureParagraphView()
         configureToolbarView()
-        configureActionView()
+//        configureActionView()
     }
 
     // MARK: - Private
 
-    private func configureImageView() {
-        confirmView.kind = .custom(
-            image: inputViewModel.image,
-            width: inputViewModel.imageWidth,
-            height: inputViewModel.imageHeight
-        )
-        confirmView.detail = nil
-        confirmView.imageView.contentMode = inputViewModel.imageContentMode
-    }
+//    private func configureImageView() {
+//        confirmView.kind = .custom(
+//            image: inputViewModel.image,
+//            width: inputViewModel.imageWidth,
+//            height: inputViewModel.imageHeight
+//        )
+//        confirmView.detail = nil
+//        confirmView.imageView.contentMode = inputViewModel.imageContentMode
+//    }
 
     private func configureHeadline() {
         headline.headline.text = inputViewModel.title
@@ -60,25 +60,25 @@ public class ProofPopupViewController: BottomPopupViewController {
         headline.buttonImage = inputViewModel.closeButtonImage
         headline.headlineFont = inputViewModel.headlineFont
     }
-    
-    private func configureActionView() {
-        actionView.headline.text = inputViewModel.actionTitle
-        actionView.headline.textColor = inputViewModel.headlineColor
-        actionView.action = { [weak self] in
-            self?.dismiss(animated: true, completion: nil)
-        }
-        actionView.buttonImage = inputViewModel.chevronRightImage
-        actionView.headlineFont = inputViewModel.headlineFont
-        actionView.leftMargin = 14
-        actionView.tintColor = inputViewModel.tintColor
-    }
+
+//    private func configureActionView() {
+//        actionView.headline.text = inputViewModel.actionTitle
+//        actionView.headline.textColor = inputViewModel.headlineColor
+//        actionView.action = { [weak self] in
+//            self?.dismiss(animated: true, completion: nil)
+//        }
+//        actionView.buttonImage = inputViewModel.chevronRightImage
+//        actionView.headlineFont = inputViewModel.headlineFont
+//        actionView.leftMargin = 14
+//        actionView.tintColor = inputViewModel.tintColor
+//    }
 
     private func configureParagraphView() {
         paragraphView.title.isHidden = true
         paragraphView.bodyText = inputViewModel.info
         paragraphView.bodyFont = inputViewModel.paragraphBodyFont
     }
-    
+
     private func configureToolbarView() {
         toolbarView.shouldShowTransparency = true
         toolbarView.shouldShowGradient = false
@@ -97,7 +97,7 @@ public class ProofPopupViewController: BottomPopupViewController {
 
 // MARK: - CustomToolbarViewDelegate
 
-extension ProofPopupViewController: CustomToolbarViewDelegate {
+extension ValidationResultViewController: CustomToolbarViewDelegate {
     public func customToolbarView(_: CustomToolbarView, didTap buttonType: ButtonItemType) {
         switch buttonType {
         case .navigationArrow:
@@ -112,7 +112,7 @@ extension ProofPopupViewController: CustomToolbarViewDelegate {
 
 // MARK: - StoryboardInstantiating
 
-extension ProofPopupViewController: StoryboardInstantiating {
+extension ValidationResultViewController: StoryboardInstantiating {
     public static var storyboardName: String {
         return UIConstants.Storyboard.Onboarding
     }
