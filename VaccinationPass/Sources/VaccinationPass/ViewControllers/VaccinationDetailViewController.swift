@@ -13,11 +13,11 @@ import Scanner
 public class VaccinationDetailViewController: UIViewController {
     @IBOutlet var stackView: UIStackView!
     @IBOutlet var vaccinationsStackView: UIStackView!
-    @IBOutlet var nameHeadline: Headline!
+    @IBOutlet var nameHeadline: PlainLabel!
     @IBOutlet var immunizationView: ParagraphIconView!
     @IBOutlet var immunizationButtonContainerView: UIStackView!
     @IBOutlet var immunizationButton: PrimaryButtonContainer!
-    @IBOutlet var personalDataHeadline: Headline!
+    @IBOutlet var personalDataHeadline: PlainLabel!
     @IBOutlet var nameView: ParagraphView!
     @IBOutlet var birtdateView: ParagraphView!
     @IBOutlet var deleteButton: PrimaryButtonContainer!
@@ -46,9 +46,8 @@ public class VaccinationDetailViewController: UIViewController {
     private func setupView() {
         view.backgroundColor = UIConstants.BrandColor.backgroundPrimary
 
-        nameHeadline.font = UIFont.ibmPlexSansSemiBold(with: 32)
-        nameHeadline.text = viewModel.name
-        nameHeadline.layoutMargins.top = 30
+        nameHeadline.attributedText = viewModel.name.toAttributedString(.h2)
+        nameHeadline.layoutMargins = .init(top: .space_30, left: .space_24, bottom: .space_16, right: .space_24)
         stackView.setCustomSpacing(24, after: nameHeadline)
 
         immunizationView.icon.image = viewModel.immunizationIcon
@@ -70,7 +69,8 @@ public class VaccinationDetailViewController: UIViewController {
         stackView.setCustomSpacing(24, after: immunizationButtonContainerView)
 
         stackView.setCustomSpacing(12, after: personalDataHeadline)
-        personalDataHeadline.text = "vaccination_detail_personal_information".localized
+        personalDataHeadline.attributedText = "vaccination_detail_personal_information".localized.toAttributedString(.h4)
+        personalDataHeadline.layoutMargins = .init(top: .space_30, left: .space_24, bottom: .zero, right: .space_24)
 
         nameView.titleText = "vaccination_detail_name".localized
         nameView.bodyText = viewModel.name

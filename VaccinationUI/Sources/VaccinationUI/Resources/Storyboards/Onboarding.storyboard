@@ -29,10 +29,10 @@
                                                     <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="243" translatesAutoresizingMaskIntoConstraints="NO" id="c3h-xY-XBF" customClass="ConfirmView" customModule="VaccinationUI">
                                                         <rect key="frame" x="0.0" y="0.0" width="398" height="243"/>
                                                     </view>
-                                                    <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="60" translatesAutoresizingMaskIntoConstraints="NO" id="mQR-L5-HeH" customClass="Headline" customModule="VaccinationUI">
+                                                    <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="60" translatesAutoresizingMaskIntoConstraints="NO" id="mQR-L5-HeH" customClass="PlainLabel" customModule="VaccinationUI">
                                                         <rect key="frame" x="0.0" y="243" width="398" height="60"/>
                                                     </view>
-                                                    <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="cCA-Hh-fFF" customClass="ParagraphView" customModule="VaccinationUI">
+                                                    <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="cCA-Hh-fFF" customClass="PlainLabel" customModule="VaccinationUI">
                                                         <rect key="frame" x="0.0" y="303" width="398" height="128"/>
                                                     </view>
                                                 </subviews>
@@ -67,9 +67,10 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="confirmView" destination="c3h-xY-XBF" id="nYT-Jw-g0r"/>
-                        <outlet property="headline" destination="mQR-L5-HeH" id="HdA-Pk-S1B"/>
-                        <outlet property="paragraphView" destination="cCA-Hh-fFF" id="xq9-db-hGp"/>
+                        <outlet property="confirmView" destination="c3h-xY-XBF" id="PPy-xm-joD"/>
+                        <outlet property="descriptionText" destination="cCA-Hh-fFF" id="KEe-SB-QsX"/>
+                        <outlet property="headline" destination="mQR-L5-HeH" id="eiS-wP-DjE"/>
+                        <outlet property="scrollView" destination="DUn-kR-NJa" id="X3Z-Na-L2a"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aik-m9-ubG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -302,7 +303,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="TTC-yw-sLe">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="531"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="60" translatesAutoresizingMaskIntoConstraints="NO" id="aqp-ex-1mg" customClass="Headline" customModule="VaccinationUI">
+                                            <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="60" translatesAutoresizingMaskIntoConstraints="NO" id="aqp-ex-1mg" customClass="PlainLabel" customModule="VaccinationUI">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
                                             </view>
                                             <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="u6z-A1-sKt" customClass="ParagraphView" customModule="VaccinationUI">

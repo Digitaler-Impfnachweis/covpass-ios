@@ -10,9 +10,10 @@ import UIKit
 public class OnboardingPageViewController: UIViewController {
     // MARK: - IBOutlets
 
+    @IBOutlet var scrollView: UIScrollView!
     @IBOutlet var confirmView: ConfirmView!
-    @IBOutlet var headline: Headline!
-    @IBOutlet var paragraphView: ParagraphView!
+    @IBOutlet var headline: PlainLabel!
+    @IBOutlet var descriptionText: PlainLabel!
     
     // MARK: - Properties
 
@@ -26,7 +27,7 @@ public class OnboardingPageViewController: UIViewController {
 
     public override func viewDidLoad() {
         super.viewDidLoad()
-
+        scrollView.contentInset.top = .space_30
         configureImageView()
         configureHeadline()
         configureParagraphView()
@@ -48,16 +49,13 @@ public class OnboardingPageViewController: UIViewController {
     }
 
     private func configureHeadline() {
-        headline.text = inputViewModel.title
-        headline.font = inputViewModel.headlineFont
-        headline.textColor = inputViewModel.headlineColor
+        headline.attributedText = inputViewModel.title.toAttributedString(.h4)
+        headline.layoutMargins = .init(top: .space_12, left: .space_24, bottom: .zero, right: .space_24)
     }
 
     private func configureParagraphView() {
-        paragraphView.title.isHidden = true
-        paragraphView.bodyText = inputViewModel.info
-        paragraphView.bodyFont = inputViewModel.paragraphBodyFont
-        paragraphView.contentView?.backgroundColor = inputViewModel.backgroundColor
+        descriptionText.attributedText = inputViewModel.info.toAttributedString(.body)
+        descriptionText.layoutMargins = .init(top: .space_12, left: .space_24, bottom: .zero, right: .space_24)
     }
 }
 

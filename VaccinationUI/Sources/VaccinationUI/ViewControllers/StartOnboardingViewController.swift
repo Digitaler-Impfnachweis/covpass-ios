@@ -11,7 +11,7 @@ public class StartOnboardingViewController: UIViewController {
     @IBOutlet public var stackView: UIStackView!
     @IBOutlet public var actionButton: PrimaryButtonContainer!
     @IBOutlet public var confirmView: ConfirmView!
-    @IBOutlet public var headline: Headline!
+    @IBOutlet public var headline: PlainLabel!
     @IBOutlet public var paragraphView: ParagraphView!
     @IBOutlet public var secureContentView: SecureContentView!
     
@@ -57,9 +57,8 @@ public class StartOnboardingViewController: UIViewController {
     }
 
     private func configureHeadline() {
-        headline.text = inputViewModel.title
-        headline.font = inputViewModel.headlineFont
-        headline.textColor = inputViewModel.headlineColor
+        headline.attributedText = inputViewModel.title.toAttributedString(.h2)
+        headline.layoutMargins = .init(top: .space_12, left: .space_24, bottom: .space_16, right: .space_24)
     }
 
     private func configureParagraphView() {

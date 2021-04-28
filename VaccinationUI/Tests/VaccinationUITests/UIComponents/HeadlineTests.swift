@@ -9,11 +9,11 @@
 import XCTest
 
 class HeadlineTests: XCTestCase {
-    var sut: Headline!
+    var sut: PlainLabel!
 
     override func setUp() {
         super.setUp()
-        sut = Headline(frame: .zero)
+        sut = PlainLabel(frame: .zero)
         sut.initView()
     }
 
@@ -27,7 +27,7 @@ class HeadlineTests: XCTestCase {
     }
 
     func testInitWithCoder() {
-        let sut = Headline(coder: CoderMock.unarchivedCoder)
+        let sut = PlainLabel(coder: CoderMock.unarchivedCoder)
         XCTAssertNotNil(sut?.contentView)
     }
 

@@ -11,6 +11,7 @@ public protocol Textable: AnyObject {
     associatedtype ViewType: UIView
     var textableView: ViewType! { get set }
     var text: String? { get set }
+    var attributedText: NSAttributedString? { get set }
 }
 
 extension Textable where ViewType == UILabel {
@@ -20,6 +21,15 @@ extension Textable where ViewType == UILabel {
         }
         set {
             textableView.text = newValue
+        }
+    }
+
+    public var attributedText: NSAttributedString? {
+        get {
+            return textableView.attributedText
+        }
+        set {
+            textableView.attributedText = newValue
         }
     }
 }
@@ -36,6 +46,15 @@ extension Textable where ViewType == UIButton {
             textableView.titleLabel?.text = newValue
         }
     }
+
+    public var attributedText: NSAttributedString? {
+        get {
+            return textableView.attributedTitle(for: .normal)
+        }
+        set {
+            textableView.setAttributedTitle(newValue, for: .normal)
+        }
+    }
 }
 
 extension Textable where ViewType == UITextField {
@@ -47,6 +66,15 @@ extension Textable where ViewType == UITextField {
             textableView.text = newValue
         }
     }
+
+    public var attributedText: NSAttributedString? {
+        get {
+            return textableView.attributedText
+        }
+        set {
+            textableView.attributedText = newValue
+        }
+    }
 }
 
 extension Textable where ViewType == UITextView {
@@ -56,6 +84,15 @@ extension Textable where ViewType == UITextView {
         }
         set {
             textableView.text = newValue
+        }
+    }
+
+    public var attributedText: NSAttributedString? {
+        get {
+            return textableView.attributedText
+        }
+        set {
+            textableView.attributedText = newValue
         }
     }
 }

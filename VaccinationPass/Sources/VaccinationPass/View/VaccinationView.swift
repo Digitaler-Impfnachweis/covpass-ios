@@ -11,7 +11,7 @@ import VaccinationUI
 @IBDesignable
 public class VaccinationView: XibView {
     @IBOutlet public var stackView: UIStackView!
-    @IBOutlet var immunizationHeadline: Headline!
+    @IBOutlet var immunizationHeadline: PlainLabel!
     @IBOutlet var dateView: ParagraphView!
     @IBOutlet var vaccineView: ParagraphView!
     @IBOutlet var manufacturerView: ParagraphView!
@@ -48,6 +48,8 @@ public class VaccinationView: XibView {
         layoutMargins = .init(top: 0, left: 0, bottom: 12, right: 0)
         stackView.spacing = .zero
 
+        immunizationHeadline.attributedText = viewModel?.headline.toAttributedString(.h4)
+        immunizationHeadline.layoutMargins = .init(top: .zero, left: .space_24, bottom: .zero, right: .space_24)
         immunizationHeadline.text = viewModel?.headline
         stackView.setCustomSpacing(12, after: immunizationHeadline)
 
