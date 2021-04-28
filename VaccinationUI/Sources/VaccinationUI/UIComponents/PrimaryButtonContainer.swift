@@ -9,22 +9,15 @@ import UIKit
 
 @IBDesignable
 /// A custom button with support for rounded corners, shadow and animation
-public class PrimaryButtonContainer: MarginableXibView, Textable {
+public class PrimaryButtonContainer: XibView, Textable {
     @IBOutlet var dotPulseActivityView: DotPulseActivityIndicator!
 
     @IBOutlet public var textableView: UILabel!
     @IBOutlet public var innerButton: UIButton!
 
-    @IBOutlet public var leadingTitleInsetConstraint: NSLayoutConstraint!
-    @IBOutlet public var trailingTitleInsetConstraint: NSLayoutConstraint!
-    @IBOutlet public var topTitleInsetConstraint: NSLayoutConstraint!
-    @IBOutlet public var bottomTitleInsetConstraint: NSLayoutConstraint!
-    @IBOutlet public var minPreferredHeightConstraint: NSLayoutConstraint!
-
     var buttonWidthConstraint: NSLayoutConstraint?
     var buttonHeightConstraint: NSLayoutConstraint?
     private let animationDuration: TimeInterval = 0.2
-    private var observerToken: NSKeyValueObservation?
 
     /// For backward compatibility with PrimaryButtonContainer
     public var buttonBackgroundColor: UIColor {
@@ -69,10 +62,7 @@ public class PrimaryButtonContainer: MarginableXibView, Textable {
     }
 
     @IBInspectable public var cornerRadius: CGFloat = UIConstants.Size.ButtonCornerRadius {
-        didSet {
-            observerToken?.invalidate()
-            innerButton.layer.cornerRadius = cornerRadius
-        }
+        didSet { updateAppearence() }
     }
 
     @IBInspectable public var shadowRadius: CGFloat = UIConstants.Size.ButtonShadowRadius
@@ -97,14 +87,18 @@ public class PrimaryButtonContainer: MarginableXibView, Textable {
 
     public var action: (() -> Void)?
 
+    private let defaultMargins = UIEdgeInsets(top: 18, left: 40, bottom: 18, right: 40)
+
     // MARK: - Lifecycle
 
     public override func initView() {
         super.initView()
 
+        contentView?.layoutMargins = defaultMargins
+
         // Rounded corners
-        innerButton.layer.cornerRadius = cornerRadius
-        innerButton.layer.masksToBounds = false
+        layer.cornerRadius = cornerRadius
+        layer.masksToBounds = false
 
         // Shadow
         if shadowOffset != .zero {
@@ -113,13 +107,6 @@ public class PrimaryButtonContainer: MarginableXibView, Textable {
             layer.masksToBounds = false
             layer.shadowColor = shadowColor.cgColor
             layer.shadowOffset = shadowOffset
-        }
-        observerToken = observe(\.bounds) { [weak self] _, _ in
-            guard let strongSelf = self else { return }
-            strongSelf.innerButton.layer.cornerRadius = strongSelf.bounds.height / 2
-            if strongSelf.shadowOffset != .zero {
-                strongSelf.innerButton.layer.shadowPath = UIBezierPath(roundedRect: strongSelf.innerButton.bounds, cornerRadius: strongSelf.innerButton.layer.cornerRadius).cgPath
-            }
         }
 
         // Title
@@ -144,57 +131,53 @@ public class PrimaryButtonContainer: MarginableXibView, Textable {
 
         updateAppearence()
 
-        // Constraints
-        if let titleLabel = innerButton.titleLabel {
-            textableView.topAnchor.constraint(equalTo: titleLabel.topAnchor).isActive = true
-            textableView.bottomAnchor.constraint(equalTo: titleLabel.bottomAnchor).isActive = true
-            textableView.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor).isActive = true
-            textableView.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor).isActive = true
-        }
         let maxButtonWidth = UIScreen.main.bounds.width - 2 * UIConstants.Size.PrimaryButtonMargin
         innerButton.widthAnchor.constraint(lessThanOrEqualToConstant: maxButtonWidth).isActive = true
 
         // Constraints for circle button
-        buttonHeightConstraint = innerButton.heightAnchor.constraint(equalToConstant: UIConstants.Size.ButtonAnimatingSize)
-        buttonWidthConstraint = innerButton.widthAnchor.constraint(equalToConstant: UIConstants.Size.ButtonAnimatingSize)
+        buttonHeightConstraint = heightAnchor.constraint(equalToConstant: UIConstants.Size.ButtonAnimatingSize)
+        buttonWidthConstraint = widthAnchor.constraint(equalToConstant: UIConstants.Size.ButtonAnimatingSize)
     }
 
-    deinit {
-        observerToken?.invalidate()
+    public override func layoutSubviews() {
+        super.layoutSubviews()
+        updateAppearence()
     }
 
     /// Animating
     public func startAnimating(makeCircle: Bool = true) {
         if makeCircle {
             [buttonWidthConstraint, buttonHeightConstraint].forEach({ $0?.isActive = true })
-            [leadingTitleInsetConstraint, trailingTitleInsetConstraint].forEach({ $0?.isActive = false })
+            contentView?.layoutMargins = .zero
         }
-        innerButton.setTitle("", for: .normal)
-        textableView.text = ""
+        innerButton.alpha = 0
+        textableView.alpha = 0
         dotPulseActivityView.startAnimating()
     }
 
     public func stopAnimating() {
         dotPulseActivityView.stopAnimating()
-        innerButton.setTitle(title, for: .normal)
-        textableView.text = title
+        innerButton.alpha = 1
+        textableView.alpha = 1
         [buttonWidthConstraint, buttonHeightConstraint].forEach({ $0?.isActive = false })
-        [leadingTitleInsetConstraint, trailingTitleInsetConstraint].forEach({ $0?.isActive = true })
+        contentView?.layoutMargins = defaultMargins
     }
 
     /// Enables the button and changes the background color to enabled color.
     public func enable() {
         isEnabled = true
+        setNeedsLayout()
         UIView.animate(withDuration: animationDuration) {
-            self.updateAppearence()
+            self.layoutIfNeeded()
         }
     }
 
     /// Disables the button and changes the background color to disabled color.
     public func disable() {
         isEnabled = false
+        setNeedsLayout()
         UIView.animate(withDuration: animationDuration) {
-            self.updateAppearence()
+            self.layoutIfNeeded()
         }
     }
 
@@ -206,7 +189,13 @@ public class PrimaryButtonContainer: MarginableXibView, Textable {
     }
 
     private func updateAppearence() {
-        innerButton.backgroundColor = isEnabled ? enabledButtonBackgroundColor : disabledButtonBackgroundColor
+        backgroundColor = isEnabled ? enabledButtonBackgroundColor : disabledButtonBackgroundColor
+        layer.cornerRadius = bounds.height / 2
+
+        if shadowOffset != .zero {
+            layer.shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: layer.cornerRadius).cgPath
+        }
+
         let titleColor = isEnabled ? enabledButtonTextColor : disabledButtonTextColor
         textableView.textColor = titleColor
         innerButton.setTitleColor(titleColor, for: .normal)

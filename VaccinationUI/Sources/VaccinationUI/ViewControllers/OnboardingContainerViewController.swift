@@ -16,7 +16,6 @@ public class OnboardingContainerViewController: UIViewController {
 
     @IBOutlet var toolbarView: CustomToolbarView!
     @IBOutlet var pageIndicator: DotPageIndicator!
-    @IBOutlet var startButtonBottomConstraint: NSLayoutConstraint!
     
     // MARK: - Public Properties
 

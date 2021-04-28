@@ -65,6 +65,7 @@ public class DotPageIndicator: UIView {
     }
 
     private func setupView() {
+        layoutMargins = .zero
         backgroundColor = .clear
         if dotContentView != nil {
             dotContentView.removeFromSuperview()
@@ -78,9 +79,9 @@ public class DotPageIndicator: UIView {
         dotContentView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(dotContentView)
         NSLayoutConstraint.activate([
-            dotContentView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            dotContentView.topAnchor.constraint(equalTo: self.topAnchor),
-            dotContentView.bottomAnchor.constraint(equalTo: self.bottomAnchor)
+            dotContentView.centerXAnchor.constraint(equalTo: layoutMarginsGuide.centerXAnchor),
+            dotContentView.topAnchor.constraint(equalTo: layoutMarginsGuide.topAnchor),
+            dotContentView.bottomAnchor.constraint(equalTo: layoutMarginsGuide.bottomAnchor)
         ])
     }
 

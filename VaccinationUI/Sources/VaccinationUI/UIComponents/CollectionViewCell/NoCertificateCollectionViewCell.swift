@@ -11,14 +11,21 @@ import UIKit
 @IBDesignable
 public class NoCertificateCollectionViewCell: BaseCardCollectionViewCell {
     // MARK: - IBOutlet
-    
+
+    @IBOutlet public var stackView: UIStackView!
     @IBOutlet public var iconImageView: UIImageView!
     @IBOutlet public var headlineLabel: UILabel!
     @IBOutlet public var subHeadlineLabel: UILabel!
     
     // MARK: - Lifecycle
     
-    public override func awakeFromNib() {}
+    public override func awakeFromNib() {
+        super.awakeFromNib()
+        contentView.layoutMargins = .init(top: 0, left: 24, bottom: 0, right: 24)
+        stackView.spacing = 0
+        stackView.setCustomSpacing(30, after: iconImageView)
+        stackView.setCustomSpacing(15, after: headlineLabel)
+    }
 }
 
 // MARK: - CellConfigutation
