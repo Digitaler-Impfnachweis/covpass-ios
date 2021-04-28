@@ -71,6 +71,8 @@ public class VaccinationDetailViewController: UIViewController {
         birtdateView.bodyText = viewModel.birthDate
 
         deleteButton.title = "vaccination_detail_delete".localized
+        deleteButton.innerImageView.image = UIImage(named: UIConstants.IconName.DeleteImage, in: UIConstants.bundle, compatibleWith: nil)
+        deleteButton.tintColor = UIConstants.BrandColor.brandAccent
         deleteButton.action = { [weak self] in
             let alertTitle = String(format: "vaccination_delete_title".localized, self?.viewModel.name ?? "")
             let alert = UIAlertController(title: alertTitle, message: "vaccination_delete_body".localized, preferredStyle: .alert)
