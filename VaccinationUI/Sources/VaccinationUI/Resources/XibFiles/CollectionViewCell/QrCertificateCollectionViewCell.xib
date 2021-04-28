@@ -40,13 +40,16 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JXX-SM-lmC" customClass="QrContinerView" customModule="VaccinationUI">
-                                <rect key="frame" x="0.0" y="150" width="374" height="312"/>
+                                <rect key="frame" x="0.0" y="150" width="374" height="262"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                         <real key="value" value="20"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                            </view>
+                            <view contentMode="scaleToFill" horizontalHuggingPriority="1" verticalHuggingPriority="1" placeholderIntrinsicWidth="374" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="cOM-t7-BrJ" userLabel="Flexible Space">
+                                <rect key="frame" x="0.0" y="412" width="374" height="50"/>
                             </view>
                         </subviews>
                     </stackView>

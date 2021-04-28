@@ -35,23 +35,26 @@
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                         </textView>
-                        <view hidden="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rov-aZ-Hta" userLabel="Bottom Border">
-                            <rect key="frame" x="0.0" y="120" width="343" height="1"/>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="1" id="psK-6Y-pBg"/>
-                            </constraints>
-                        </view>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </stackView>
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rov-aZ-Hta" userLabel="Bottom Border">
+                    <rect key="frame" x="0.0" y="179" width="375" height="1"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="psK-6Y-pBg"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstAttribute="trailingMargin" secondItem="oUb-Cv-MzU" secondAttribute="trailing" id="0H5-P0-HqK"/>
                 <constraint firstItem="oUb-Cv-MzU" firstAttribute="top" secondItem="Emf-oB-Bnc" secondAttribute="topMargin" id="C1K-BS-mQr"/>
+                <constraint firstAttribute="bottom" secondItem="rov-aZ-Hta" secondAttribute="bottom" id="Q4s-5q-EZg"/>
                 <constraint firstItem="oUb-Cv-MzU" firstAttribute="leading" secondItem="Emf-oB-Bnc" secondAttribute="leadingMargin" id="dRk-Lb-fjL"/>
+                <constraint firstItem="rov-aZ-Hta" firstAttribute="leading" secondItem="Emf-oB-Bnc" secondAttribute="leading" id="gSb-lo-6j2"/>
                 <constraint firstAttribute="bottomMargin" secondItem="oUb-Cv-MzU" secondAttribute="bottom" id="jRd-6d-f1v"/>
+                <constraint firstAttribute="trailing" secondItem="rov-aZ-Hta" secondAttribute="trailing" id="w8k-a2-d8R"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <edgeInsets key="layoutMargins" top="0.0" left="0.0" bottom="0.0" right="0.0"/>

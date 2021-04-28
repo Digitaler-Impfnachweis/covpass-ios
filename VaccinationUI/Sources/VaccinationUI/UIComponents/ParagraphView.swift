@@ -86,7 +86,7 @@ public class ParagraphView: XibView {
     }
 
     internal func setupView() {
-        layoutMargins = .init(top: 0, left: 24, bottom: 0, right: 24)
+        contentView?.layoutMargins = .init(top: 0, left: 24, bottom: 0, right: 24)
         title.font = UIConstants.Font.semiBold
         title.adjustsFontForContentSizeCategory()
         title.textColor = UIConstants.BrandColor.onBackground100

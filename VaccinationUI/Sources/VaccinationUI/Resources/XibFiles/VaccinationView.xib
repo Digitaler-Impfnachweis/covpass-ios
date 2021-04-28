@@ -4,7 +4,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -31,39 +30,30 @@
                     <subviews>
                         <view contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="343" placeholderIntrinsicHeight="172" translatesAutoresizingMaskIntoConstraints="NO" id="Vtu-0a-hp0" userLabel="immunizationHeadline" customClass="Headline" customModule="VaccinationUI">
                             <rect key="frame" x="0.0" y="0.0" width="343" height="172"/>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         </view>
                         <view contentMode="scaleToFill" verticalHuggingPriority="249" placeholderIntrinsicWidth="343" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="XGD-vt-dCq" userLabel="dateView" customClass="ParagraphView" customModule="VaccinationUI">
                             <rect key="frame" x="0.0" y="172" width="343" height="62"/>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         </view>
                         <view contentMode="scaleToFill" placeholderIntrinsicWidth="343" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="RGm-nQ-hea" userLabel="vaccineView" customClass="ParagraphView" customModule="VaccinationUI">
                             <rect key="frame" x="0.0" y="234" width="343" height="50"/>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         </view>
                         <view contentMode="scaleToFill" placeholderIntrinsicWidth="343" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="9Hq-h1-plc" userLabel="manufacturerView" customClass="ParagraphView" customModule="VaccinationUI">
                             <rect key="frame" x="0.0" y="284" width="343" height="50"/>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         </view>
                         <view contentMode="scaleToFill" placeholderIntrinsicWidth="343" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="cQX-l9-Ytd" userLabel="vaccineCodeView" customClass="ParagraphView" customModule="VaccinationUI">
                             <rect key="frame" x="0.0" y="334" width="343" height="50"/>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         </view>
                         <view contentMode="scaleToFill" placeholderIntrinsicWidth="343" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="IKL-9R-NAf" userLabel="locationView" customClass="ParagraphView" customModule="VaccinationUI">
                             <rect key="frame" x="0.0" y="384" width="343" height="50"/>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         </view>
                         <view contentMode="scaleToFill" placeholderIntrinsicWidth="343" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="mmI-TM-IPt" userLabel="issuerView" customClass="ParagraphView" customModule="VaccinationUI">
                             <rect key="frame" x="0.0" y="434" width="343" height="50"/>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         </view>
                         <view contentMode="scaleToFill" placeholderIntrinsicWidth="343" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="j2F-gs-Xii" userLabel="countryView" customClass="ParagraphView" customModule="VaccinationUI">
                             <rect key="frame" x="0.0" y="484" width="343" height="50"/>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         </view>
                         <view contentMode="scaleToFill" placeholderIntrinsicWidth="343" placeholderIntrinsicHeight="34" translatesAutoresizingMaskIntoConstraints="NO" id="dmy-b2-SUJ" userLabel="uvciView" customClass="ParagraphView" customModule="VaccinationUI">
                             <rect key="frame" x="0.0" y="534" width="343" height="34"/>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         </view>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -110,9 +100,4 @@
             <size key="intrinsicContentSize" width="343" height="50"/>
         </designable>
     </designables>
-    <resources>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-    </resources>
 </document>

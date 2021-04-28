@@ -30,6 +30,6 @@ public class CardViewAction: XibView {
 
     public override func initView() {
         super.initView()
-        stackView.spacing = 10
+        stackView.spacing = 5
     }
 }

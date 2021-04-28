@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="qwH-5m-N3R">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="qwH-5m-N3R">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" placeholderIntrinsicWidth="374" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="d0j-R2-SIh" customClass="InfoHeaderView" customModule="VaccinationUI">
-                                <rect key="frame" x="0.0" y="44" width="414" height="50"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="50"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
@@ -118,36 +118,42 @@
                                 <rect key="frame" x="0.0" y="24" width="414" height="858"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="YV8-Tq-Fkx" customClass="ScrollableStackView" customModule="VaccinationUI">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="584"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="784"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="gRX-6s-FzF" customClass="Headline" customModule="VaccinationUI">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                             </view>
                                             <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="Hrb-mG-kzt" customClass="ParagraphIconView" customModule="VaccinationUI">
                                                 <rect key="frame" x="0.0" y="50" width="414" height="128"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                             </view>
-                                            <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="Ihi-Ap-8Ly" customClass="PrimaryButtonContainer" customModule="VaccinationUI">
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="ox2-9Q-5Of">
                                                 <rect key="frame" x="0.0" y="178" width="414" height="128"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                            </view>
+                                                <subviews>
+                                                    <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="Ihi-Ap-8Ly" customClass="PrimaryButtonContainer" customModule="VaccinationUI">
+                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="128"/>
+                                                    </view>
+                                                </subviews>
+                                            </stackView>
                                             <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="bSB-GK-DAm" customClass="Headline" customModule="VaccinationUI">
                                                 <rect key="frame" x="0.0" y="306" width="414" height="50"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                             </view>
                                             <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="wOL-d4-AM4" customClass="ParagraphView" customModule="VaccinationUI">
                                                 <rect key="frame" x="0.0" y="356" width="414" height="50"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                             </view>
                                             <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="Bge-SR-I1b" customClass="ParagraphView" customModule="VaccinationUI">
                                                 <rect key="frame" x="0.0" y="406" width="414" height="50"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                             </view>
-                                            <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="F59-gV-20d" customClass="SecondaryButtonContainer" customModule="VaccinationUI">
-                                                <rect key="frame" x="0.0" y="456" width="414" height="128"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                            </view>
+                                            <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="200" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="qFA-Qd-Yby">
+                                                <rect key="frame" x="0.0" y="456" width="414" height="200"/>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="9ia-DC-rGi">
+                                                <rect key="frame" x="0.0" y="656" width="414" height="128"/>
+                                                <subviews>
+                                                    <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="F59-gV-20d" customClass="PrimaryButtonContainer" customModule="VaccinationUI">
+                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="128"/>
+                                                    </view>
+                                                </subviews>
+                                            </stackView>
                                         </subviews>
                                     </stackView>
                                 </subviews>
@@ -175,11 +181,13 @@
                         <outlet property="birtdateView" destination="Bge-SR-I1b" id="MDg-qC-mrG"/>
                         <outlet property="deleteButton" destination="F59-gV-20d" id="ZCG-qM-LVf"/>
                         <outlet property="immunizationButton" destination="Ihi-Ap-8Ly" id="lTA-WH-zQj"/>
+                        <outlet property="immunizationButtonContainerView" destination="ox2-9Q-5Of" id="IzT-8c-aAt"/>
                         <outlet property="immunizationView" destination="Hrb-mG-kzt" id="ES7-8A-IQ2"/>
                         <outlet property="nameHeadline" destination="gRX-6s-FzF" id="Ehy-Lu-fuL"/>
                         <outlet property="nameView" destination="wOL-d4-AM4" id="zKN-3i-cQW"/>
                         <outlet property="personalDataHeadline" destination="bSB-GK-DAm" id="j6y-qU-Xka"/>
                         <outlet property="stackView" destination="YV8-Tq-Fkx" id="5vc-9s-Izd"/>
+                        <outlet property="vaccinationsStackView" destination="qFA-Qd-Yby" id="VaN-1G-NgR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oNf-eD-7wV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
