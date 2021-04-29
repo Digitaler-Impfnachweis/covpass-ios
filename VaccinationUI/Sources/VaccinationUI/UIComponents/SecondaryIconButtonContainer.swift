@@ -10,7 +10,7 @@ import UIKit
 @IBDesignable
 public class SecondaryIconButtonContainer: PrimaryButtonContainer {
     @IBOutlet public var icon: UIImageView!
-//    @IBOutlet var heightConstraint: NSLayoutConstraint!
+    @IBOutlet var heightConstraint: NSLayoutConstraint!
 
     public var iconImage: UIImage? {
         didSet {
