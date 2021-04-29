@@ -12,13 +12,13 @@ import VaccinationUI
 
 class ScanViewController: UIViewController {
     
-    @IBOutlet weak var MainButton: MainButton!
+    @IBOutlet weak var scanButton: MainButton!
     
     var scanViewController: ScannerViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        MainButton.action = {
+        scanButton.action = {
             print("Hello World")
         }
     }
