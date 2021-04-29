@@ -20,7 +20,7 @@ public class VaccinationDetailViewController: UIViewController {
     @IBOutlet var personalDataHeadline: Headline!
     @IBOutlet var nameView: ParagraphView!
     @IBOutlet var birtdateView: ParagraphView!
-    @IBOutlet var deleteButton: PrimaryButtonContainer!
+    @IBOutlet var deleteButton: SecondaryButtonContainer!
     
     public var viewModel: VaccinationDetailViewModel!
     public var router: PopupRouter!
@@ -83,6 +83,8 @@ public class VaccinationDetailViewController: UIViewController {
         birtdateView.contentView?.layoutMargins = .init(top: 12, left: 24, bottom: 12, right: 24)
 
         deleteButton.title = "vaccination_detail_delete".localized
+        deleteButton.image = UIImage(named: UIConstants.IconName.DeleteImage, in: UIConstants.bundle, compatibleWith: nil)
+        deleteButton.tintColor = UIConstants.BrandColor.brandAccent
         deleteButton.action = { [weak self] in
             let alertTitle = String(format: "vaccination_delete_title".localized, self?.viewModel.name ?? "")
             let alert = UIAlertController(title: alertTitle, message: "vaccination_delete_body".localized, preferredStyle: .alert)
