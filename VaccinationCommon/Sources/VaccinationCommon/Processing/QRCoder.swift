@@ -15,7 +15,7 @@ public enum QRCodeError: Error {
 
 public class QRCoder: QRCoderProtocol {
     private let base45Encoder = Base45Encoder()
-    private let cose1SignEncoder = CoseSign1Parser()
+    private let cose1SignParser = CoseSign1Parser()
     private let cert = HCert()
 
     public init() {}
@@ -27,12 +27,12 @@ public class QRCoder: QRCoderProtocol {
                 completion?(ApplicationError.general("Could not decompress QR Code data"))
                 return nil
             }
-            let cosePayload = try cose1SignEncoder.parse(decompressedPayload)
+            let cosePayload = try cose1SignParser.parse(decompressedPayload)
             let cborDecodedPayload = try CBOR.decode(cosePayload?.payload ?? [])
 //            let cborDecodedProtected = try CBOR.decode(cosePayload?.protected ?? [])
-            let certificateJson = cose1SignEncoder.map(cborObject: cborDecodedPayload)
+            let certificateJson = cose1SignParser.map(cborObject: cborDecodedPayload)
             if let cosePayload = cosePayload {
-                cert.verify(message: cosePayload)
+                print("Seal verified: \(cert.verify(message: cosePayload, certificatePath: "default-ca"))")
             }
 //            cose1SignEncoder.parse(header: cborDecodedProtected)
             let jsonData = try JSONSerialization.data(withJSONObject: certificateJson as Any)
@@ -50,9 +50,9 @@ public class QRCoder: QRCoderProtocol {
                 completion?(ApplicationError.general("Could not decompress QR Code data"))
                 return nil
             }
-            let cosePayload = try cose1SignEncoder.parse(decompressedPayload)
+            let cosePayload = try cose1SignParser.parse(decompressedPayload)
             let cborDecodedPayload = try CBOR.decode(cosePayload?.payload ?? [])
-            let certificateJson = cose1SignEncoder.map(cborObject: cborDecodedPayload)
+            let certificateJson = cose1SignParser.map(cborObject: cborDecodedPayload)
             let jsonData = try JSONSerialization.data(withJSONObject: certificateJson as Any)
             return try JSONDecoder().decode(ValidationCertificate.self, from: jsonData)
         } catch {
