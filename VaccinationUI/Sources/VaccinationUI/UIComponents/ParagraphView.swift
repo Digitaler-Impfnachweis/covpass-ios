@@ -53,7 +53,7 @@ public class ParagraphView: XibView {
         bodyLabel.attributedText = bodyAttributedText
         bodyLabel.isHidden = bodyAttributedText.isNilOrEmpty
 
-        isHidden = imageView.isHidden && titleLabel.isHidden && bodyLabel.isHidden
+        isHidden = imageView.isHidden && bodyLabel.isHidden
 
         setupAccessibility()
     }

@@ -45,7 +45,6 @@ public class MainButton: XibView {
     }
 
     public var action: (() -> Void)?
-    private var margins = UIEdgeInsets(top: 18, left: 40, bottom: 18, right: 40)
     private var observerTokens = [NSKeyValueObservation?]()
 
     // MARK: - Lifecycle
@@ -54,7 +53,6 @@ public class MainButton: XibView {
         super.initView()
 
         contentView?.layoutMargins = .zero
-        innerButton.contentEdgeInsets = margins
 
         // Shadow
         layer.shadowRadius = UIConstants.Size.ButtonShadowRadius
@@ -97,7 +95,6 @@ public class MainButton: XibView {
     }
 
     deinit {
-        observerToken?.invalidate()
         observerTokens.forEach { $0?.invalidate() }
     }
 
@@ -122,7 +119,7 @@ public class MainButton: XibView {
         dotPulseActivityView.stopAnimating()
         innerButton.alpha = 1
         [buttonWidthConstraint, buttonHeightConstraint].forEach({ $0?.isActive = false })
-        innerButton.contentEdgeInsets = margins
+        updateAppearence()
     }
 
     /// Enables the button and changes the background color to enabled color.
@@ -155,31 +152,61 @@ public class MainButton: XibView {
     }
 
     private func updateAppearence() {
+        updateBackgroundColor()
+        updateLayer()
+        updateInsets()
+    }
+
+    private func updateBackgroundColor() {
         switch innerButton.state {
         case .normal:
             backgroundColor = style.backgroundColor
-            layer.borderColor = style.borderColor?.cgColor
-
         case .selected:
             backgroundColor = style.selectedBackgroundColor
-            layer.borderColor = style.selectedBorderColor?.cgColor
-
         case .highlighted:
             backgroundColor = style.highlightedBackgroundColor
+        default:
+            break
+        }
+    }
+
+    private func updateLayer() {
+        switch innerButton.state {
+        case .normal:
+            layer.borderColor = style.borderColor?.cgColor
+        case .selected:
+            layer.borderColor = style.selectedBorderColor?.cgColor
+        case .highlighted:
             layer.borderColor = style.highlightedBorderColor?.cgColor
-            
         default:
             break
         }
 
-        margins = title.isNilOrEmpty ?
-            UIEdgeInsets(top: .space_10, left: .space_10, bottom: .space_10, right: .space_10) :
-            UIEdgeInsets(top: .space_18, left: .space_40, bottom: .space_18, right: .space_40)
-
         layer.cornerRadius = bounds.height / 2
         layer.shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: layer.cornerRadius).cgPath
         layer.shadowColor = style.shadowColor?.cgColor
+    }
 
-        innerButton.contentEdgeInsets = margins
+    private func updateInsets() {
+        switch (icon == nil, title.isNilOrEmpty) {
+        case (true, false):
+            // text only
+            innerButton.contentEdgeInsets = UIEdgeInsets(top: .space_18, left: .space_40, bottom: .space_18, right: .space_40)
+            innerButton.titleEdgeInsets = .zero
+
+        case (false, true):
+            // icon only
+            innerButton.contentEdgeInsets = UIEdgeInsets(top: .space_10, left: .space_10, bottom: .space_10, right: .space_10)
+            innerButton.titleEdgeInsets = .zero
+
+        case (false, false):
+            // icon and text
+            let distance: CGFloat = .space_8
+            innerButton.contentEdgeInsets = UIEdgeInsets(top: .space_18, left: .space_40, bottom: .space_18, right: .space_40 + distance)
+            innerButton.titleEdgeInsets.right = -distance
+            innerButton.titleEdgeInsets.left = distance
+        default:
+            break
+        }
     }
 }

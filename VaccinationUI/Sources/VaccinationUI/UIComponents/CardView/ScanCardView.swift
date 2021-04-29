@@ -14,7 +14,7 @@ public class ScanCardView: BaseCardView {
 
     @IBOutlet public var titleLabel: UILabel!
     @IBOutlet public var textLable: UILabel!
-    @IBOutlet public var actionButton: PrimaryIconButtonContainer!
+    @IBOutlet public var actionButton: MainButton!
     
     public override func initView() {
         super.initView()

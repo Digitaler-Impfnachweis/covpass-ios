@@ -60,17 +60,14 @@ public class ValidationResultViewController: BottomPopupViewController {
     }
 
     private func configureParagraphView() {
-        resultView.titleText = inputViewModel.resultTitle
-        resultView.titleFont = UIConstants.Font.onboardingHeadlineFont
-        resultView.bodyText = inputViewModel.resultBody
-        resultView.spacing = 12.0
+        resultView.titleAttributedText = inputViewModel.resultTitle.toAttributedString(.h3)
+        resultView.bodyAttributedText = inputViewModel.resultBody.toAttributedString(.body)
 
-        nameView.titleText = inputViewModel.nameTitle
-        nameView.bodyText = inputViewModel.nameBody
+        nameView.titleAttributedText = inputViewModel.nameTitle?.toAttributedString(.h3)
+        nameView.bodyAttributedText = inputViewModel.nameBody?.toAttributedString(.body)
 
-        idView.titleText = inputViewModel.idTitle
-        idView.bodyText = inputViewModel.idBody
-        idView.isHidden = inputViewModel.idBody == nil
+        idView.titleAttributedText = inputViewModel.idTitle?.toAttributedString(.h3)
+        idView.bodyAttributedText = inputViewModel.idBody?.toAttributedString(.body)
     }
 
     private func configureToolbarView() {
