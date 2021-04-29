@@ -25,6 +25,15 @@ public class ParagraphView: XibView {
         }
     }
 
+    public var titleFont: UIFont? {
+        didSet {
+            guard let titleFont = titleFont else { return }
+            let newFont = UIFont(descriptor: titleFont.fontDescriptor, size: titleFont.fontDescriptor.pointSize)
+            title.adjustsFontForContentSizeCategory = true
+            title.font = newFont
+        }
+    }
+
     public var spacing: CGFloat? {
         didSet {
             guard let spacing = spacing else { return }

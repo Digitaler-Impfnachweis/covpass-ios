@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "warning_20x20_hui.pdf",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

@@ -43,7 +43,7 @@ public class DefaultCertificateViewModel<T: QRCoderProtocol>: CertificateViewMod
     public func process(payload: String) -> Promise<ExtendedVaccinationCertificate> {
         return Promise<ExtendedVaccinationCertificate>() { seal in
             // TODO refactor parser
-            guard let decodedPayload = parser.parse(payload, completion: { error in
+            guard let decodedPayload: VaccinationCertificate = parser.parse(payload, completion: { error in
                 seal.reject(error)
             }) else {
                 seal.reject(ApplicationError.unknownError)
