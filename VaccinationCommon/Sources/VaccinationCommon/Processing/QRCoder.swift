@@ -16,6 +16,7 @@ public enum QRCodeError: Error {
 public class QRCoder: QRCoderProtocol {
     private let base45Encoder = Base45Encoder()
     private let cose1SignEncoder = CoseSign1Parser()
+    private let cert = HCert()
 
     public init() {}
 
@@ -30,6 +31,9 @@ public class QRCoder: QRCoderProtocol {
             let cborDecodedPayload = try CBOR.decode(cosePayload?.payload ?? [])
 //            let cborDecodedProtected = try CBOR.decode(cosePayload?.protected ?? [])
             let certificateJson = cose1SignEncoder.map(cborObject: cborDecodedPayload)
+            if let cosePayload = cosePayload {
+                cert.verify(message: cosePayload)
+            }
 //            cose1SignEncoder.parse(header: cborDecodedProtected)
             let jsonData = try JSONSerialization.data(withJSONObject: certificateJson as Any)
             return try JSONDecoder().decode(VaccinationCertificate.self, from: jsonData)

@@ -32,12 +32,13 @@ public class HCert {
         let signed_payload : [UInt8] = CBOR.encode(["Signature1", cborProtected, externalData, cborPayload])
         let digest = sha256(Data(signed_payload))
 
-        let publicKey = X509_REQ_get0_pubkey(getCertificate(from: ""))
+        let certContent = readFile(from: "default-ca")
+        guard let publicKey = X509_REQ_get0_pubkey(getCertificate(from: certContent)) else { return false }
 
-        return ECDSA_verify(0, digest, digest.count, message.signatures, message.signatures.count, publicKey)
+        return ECDSA_verify(0, digest, Int32(digest.count), message.signatures, Int32(message.signatures.count), publicKey) != 0
     }
 
-    private func sha256(_ data: Data) -> Data {
+    private func sha256(_ data: Data) -> [UInt8] {
         var result = [UInt8](repeating: 0, count: Int(SHA256_DIGEST_LENGTH))
         data.withUnsafeBytes { (ptr: UnsafeRawBufferPointer) in
             SHA256(ptr.bindMemory(to: UInt8.self).baseAddress.unsafelyUnwrapped,
@@ -45,16 +46,25 @@ public class HCert {
                    &result)
             return
         }
-        return Data(result)
+        return result
     }
 
-    private func getCertificate(from certString: String) -> X509 {
+    private func getCertificate(from certString: String) -> OpaquePointer? {
         let bio = BIO_new(BIO_s_mem())
         defer {
             BIO_free(bio)
         }
         BIO_puts(bio, certString)
-        let certificate = PEM_read_bio_X509(bio, nil, nil, nil)
-        return certificate
+        return PEM_read_bio_X509(bio, nil, nil, nil)
+    }
+
+    private func readFile(from resource: String) -> String {
+        guard let url = Bundle.module.url(forResource: resource, withExtension: "pem") else { return "" }
+        do {
+            return try String(contentsOf: url, encoding: .utf8)
+        } catch {
+            print(error.localizedDescription)
+            return ""
+        }
     }
 }
