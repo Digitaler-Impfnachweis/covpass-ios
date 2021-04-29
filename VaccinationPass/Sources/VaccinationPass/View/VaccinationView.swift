@@ -54,50 +54,50 @@ public class VaccinationView: XibView {
 
         let itemsMargins = UIEdgeInsets(top: 12, left: 24, bottom: 12, right: 24)
 
-        dateView.titleAttributedText = "vaccination_detail_date".localized.toAttributedString(.h5)
-        dateView.bodyAttributedText = viewModel?.date.toAttributedString(.body)
+        dateView.attributedTitleText = "vaccination_detail_date".localized.toAttributedString(.h5)
+        dateView.attributedBodyText = viewModel?.date.toAttributedString(.body)
         dateView.isHidden = viewModel?.date.isEmpty ?? true
         dateView.contentView?.layoutMargins = itemsMargins
         dateView.showBottomBorder()
 
-        vaccineView.titleAttributedText = "vaccination_detail_vaccine".localized.toAttributedString(.h5)
-        vaccineView.bodyAttributedText = viewModel?.vaccine.toAttributedString(.body)
+        vaccineView.attributedTitleText = "vaccination_detail_vaccine".localized.toAttributedString(.h5)
+        vaccineView.attributedBodyText = viewModel?.vaccine.toAttributedString(.body)
         vaccineView.isHidden = viewModel?.vaccine.isEmpty ?? true
         vaccineView.contentView?.layoutMargins = itemsMargins
         vaccineView.showBottomBorder()
 
-        manufacturerView.titleAttributedText = "vaccination_detail_manufacturer".localized.toAttributedString(.h5)
-        manufacturerView.bodyAttributedText = viewModel?.vaccine.toAttributedString(.body)
+        manufacturerView.attributedTitleText = "vaccination_detail_manufacturer".localized.toAttributedString(.h5)
+        manufacturerView.attributedBodyText = viewModel?.vaccine.toAttributedString(.body)
         manufacturerView.isHidden = viewModel?.manufacturer.isEmpty ?? true
         manufacturerView.contentView?.layoutMargins = itemsMargins
         manufacturerView.showBottomBorder()
 
-        vaccineCodeView.titleAttributedText = "vaccination_detail_vaccine_code".localized.toAttributedString(.h5)
-        vaccineCodeView.bodyAttributedText = viewModel?.vaccineCode.toAttributedString(.body)
+        vaccineCodeView.attributedTitleText = "vaccination_detail_vaccine_code".localized.toAttributedString(.h5)
+        vaccineCodeView.attributedBodyText = viewModel?.vaccineCode.toAttributedString(.body)
         vaccineCodeView.isHidden = viewModel?.vaccineCode.isEmpty ?? true
         vaccineCodeView.contentView?.layoutMargins = itemsMargins
         vaccineCodeView.showBottomBorder()
 
-        locationView.titleAttributedText = "vaccination_detail_location".localized.toAttributedString(.h5)
-        locationView.bodyAttributedText = viewModel?.location.toAttributedString(.body)
+        locationView.attributedTitleText = "vaccination_detail_location".localized.toAttributedString(.h5)
+        locationView.attributedBodyText = viewModel?.location.toAttributedString(.body)
         locationView.isHidden = viewModel?.location.isEmpty ?? true
         locationView.contentView?.layoutMargins = itemsMargins
         locationView.showBottomBorder()
 
-        issuerView.titleAttributedText = "vaccination_detail_issuer".localized.toAttributedString(.h5)
-        issuerView.bodyAttributedText = viewModel?.issuer.toAttributedString(.body)
+        issuerView.attributedTitleText = "vaccination_detail_issuer".localized.toAttributedString(.h5)
+        issuerView.attributedBodyText = viewModel?.issuer.toAttributedString(.body)
         issuerView.isHidden = viewModel?.issuer.isEmpty ?? true
         issuerView.contentView?.layoutMargins = itemsMargins
         issuerView.showBottomBorder()
 
-        countryView.titleAttributedText = "vaccination_detail_country".localized.toAttributedString(.h5)
-        countryView.bodyAttributedText = viewModel?.country.toAttributedString(.body)
+        countryView.attributedTitleText = "vaccination_detail_country".localized.toAttributedString(.h5)
+        countryView.attributedBodyText = viewModel?.country.toAttributedString(.body)
         countryView.isHidden = viewModel?.country.isEmpty ?? true
         countryView.contentView?.layoutMargins = itemsMargins
         countryView.showBottomBorder()
 
-        uvciView.titleAttributedText = "vaccination_detail_uvci".localized.toAttributedString(.h5)
-        uvciView.bodyAttributedText = viewModel?.uvci.toAttributedString(.body)
+        uvciView.attributedTitleText = "vaccination_detail_uvci".localized.toAttributedString(.h5)
+        uvciView.attributedBodyText = viewModel?.uvci.toAttributedString(.body)
         uvciView.contentView?.layoutMargins = itemsMargins
         uvciView.isHidden = viewModel?.uvci.isEmpty ?? true
     }

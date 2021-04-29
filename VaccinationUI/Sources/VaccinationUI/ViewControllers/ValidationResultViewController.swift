@@ -60,14 +60,14 @@ public class ValidationResultViewController: BottomPopupViewController {
     }
 
     private func configureParagraphView() {
-        resultView.titleAttributedText = inputViewModel.resultTitle.toAttributedString(.h3)
-        resultView.bodyAttributedText = inputViewModel.resultBody.toAttributedString(.body)
+        resultView.attributedTitleText = inputViewModel.resultTitle.toAttributedString(.h3)
+        resultView.attributedBodyText = inputViewModel.resultBody.toAttributedString(.body)
 
-        nameView.titleAttributedText = inputViewModel.nameTitle?.toAttributedString(.h3)
-        nameView.bodyAttributedText = inputViewModel.nameBody?.toAttributedString(.body)
+        nameView.attributedTitleText = inputViewModel.nameTitle?.toAttributedString(.h3)
+        nameView.attributedBodyText = inputViewModel.nameBody?.toAttributedString(.body)
 
-        idView.titleAttributedText = inputViewModel.idTitle?.toAttributedString(.h3)
-        idView.bodyAttributedText = inputViewModel.idBody?.toAttributedString(.body)
+        idView.attributedTitleText = inputViewModel.idTitle?.toAttributedString(.h3)
+        idView.attributedBodyText = inputViewModel.idBody?.toAttributedString(.body)
     }
 
     private func configureToolbarView() {

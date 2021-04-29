@@ -21,8 +21,8 @@ public class ParagraphView: XibView {
     // MARK: - Properties
 
     public var image: UIImage? { didSet { updateView() } }
-    public var titleAttributedText: NSAttributedString? { didSet { updateView() } }
-    public var bodyAttributedText: NSAttributedString? { didSet { updateView() } }
+    public var attributedTitleText: NSAttributedString? { didSet { updateView() } }
+    public var attributedBodyText: NSAttributedString? { didSet { updateView() } }
 
     // MARK: - Lifecycle
 
@@ -41,17 +41,17 @@ public class ParagraphView: XibView {
     }
 
     private func setupAccessibility() {
-        let accessibilityLabelText = "\(titleAttributedText?.string ?? "") \(bodyAttributedText?.string ?? "")"
+        let accessibilityLabelText = "\(attributedTitleText?.string ?? "") \(attributedBodyText?.string ?? "")"
         enableAccessibility(label: accessibilityLabelText, traits: .staticText)
     }
 
     private func updateView() {
         imageView.image = image
         imageView.isHidden = image == nil
-        titleLabel.attributedText = titleAttributedText
-        titleLabel.isHidden = titleAttributedText.isNilOrEmpty
-        bodyLabel.attributedText = bodyAttributedText
-        bodyLabel.isHidden = bodyAttributedText.isNilOrEmpty
+        titleLabel.attributedText = attributedTitleText
+        titleLabel.isHidden = attributedTitleText.isNilOrEmpty
+        bodyLabel.attributedText = attributedBodyText
+        bodyLabel.isHidden = attributedBodyText.isNilOrEmpty
 
         isHidden = imageView.isHidden && bodyLabel.isHidden
 

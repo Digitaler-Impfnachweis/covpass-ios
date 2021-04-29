@@ -73,7 +73,7 @@ public class ProofPopupViewController: BottomPopupViewController {
     }
 
     private func configureParagraphView() {
-        paragraphView.bodyAttributedText = inputViewModel.info.toAttributedString(.body)
+        paragraphView.attributedBodyText = inputViewModel.info.toAttributedString(.body)
         paragraphView.layoutMargins.top = 10
     }
     

@@ -51,8 +51,8 @@ public class VaccinationDetailViewController: UIViewController {
         stackView.setCustomSpacing(24, after: nameHeadline)
 
         immunizationView.image = viewModel.immunizationIcon
-        immunizationView.titleAttributedText = viewModel.immunizationTitle.toAttributedString(.h5)
-        immunizationView.bodyAttributedText = viewModel.immunizationBody.toAttributedString(.body)
+        immunizationView.attributedTitleText = viewModel.immunizationTitle.toAttributedString(.h5)
+        immunizationView.attributedBodyText = viewModel.immunizationBody.toAttributedString(.body)
         stackView.setCustomSpacing(24, after: immunizationView)
 
         immunizationButton.title = viewModel.immunizationButton
@@ -71,15 +71,15 @@ public class VaccinationDetailViewController: UIViewController {
         personalDataHeadline.attributedText = "vaccination_detail_personal_information".localized.toAttributedString(.h4)
         personalDataHeadline.layoutMargins = .init(top: .space_30, left: .space_24, bottom: .zero, right: .space_24)
 
-        nameView.titleAttributedText = "vaccination_detail_name".localized.toAttributedString(.h5)
-        nameView.bodyAttributedText = viewModel?.name.toAttributedString(.body)
+        nameView.attributedTitleText = "vaccination_detail_name".localized.toAttributedString(.h5)
+        nameView.attributedBodyText = viewModel?.name.toAttributedString(.body)
         nameView.contentView?.layoutMargins = .init(top: 12, left: 24, bottom: 12, right: 24)
         nameView.showBottomBorder()
 
         stackView.setCustomSpacing(24, after: birtdateView)
 
-        birtdateView.titleAttributedText = "vaccination_detail_birthdate".localized.toAttributedString(.h5)
-        birtdateView.bodyAttributedText = viewModel?.birthDate.toAttributedString(.body)
+        birtdateView.attributedTitleText = "vaccination_detail_birthdate".localized.toAttributedString(.h5)
+        birtdateView.attributedBodyText = viewModel?.birthDate.toAttributedString(.body)
         birtdateView.contentView?.layoutMargins = .init(top: 12, left: 24, bottom: 12, right: 24)
 
         deleteButton.title = "vaccination_detail_delete".localized
