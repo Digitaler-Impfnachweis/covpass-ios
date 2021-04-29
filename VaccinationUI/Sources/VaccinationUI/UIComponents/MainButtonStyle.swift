@@ -2,7 +2,7 @@
 //  File.swift
 //  
 //
-//  Created by Sebastian Maschinski on 29.04.21.
+//  Copyright © 2021 IBM. All rights reserved.
 //
 
 import UIKit
