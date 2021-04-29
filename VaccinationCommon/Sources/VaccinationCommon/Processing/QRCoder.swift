@@ -36,4 +36,22 @@ public class QRCoder: QRCoderProtocol {
             return nil
         }
     }
+
+    public func parse(_ payload: String, completion: ((Error) -> Void)?) -> ValidationCertificate? {
+        do {
+            let base45Decoded = try base45Encoder.decode(payload)
+            guard let decompressedPayload = Compression.decompress(Data(base45Decoded)) else {
+                completion?(ApplicationError.general("Could not decompress QR Code data"))
+                return nil
+            }
+            let cosePayload = try cose1SignEncoder.parse(decompressedPayload)
+            let cborDecodedPayload = try CBOR.decode(cosePayload?.payload ?? [])
+            let certificateJson = cose1SignEncoder.map(cborObject: cborDecodedPayload)
+            let jsonData = try JSONSerialization.data(withJSONObject: certificateJson as Any)
+            return try JSONDecoder().decode(ValidationCertificate.self, from: jsonData)
+        } catch {
+            completion?(error)
+            return nil
+        }
+    }
 }

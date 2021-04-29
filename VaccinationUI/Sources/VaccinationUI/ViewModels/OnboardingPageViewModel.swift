@@ -13,14 +13,14 @@ public enum OnboardingPageViewModelType: CaseIterable {
     case page3
 }
 
-public class OnboardingPageViewModel: BaseViewModel {
-    var type: OnboardingPageViewModelType
+open class OnboardingPageViewModel: BaseViewModel {
+    public var type: OnboardingPageViewModelType
 
     public init(type: OnboardingPageViewModelType) {
         self.type = type
     }
 
-    public var image: UIImage? {
+    open var image: UIImage? {
         switch type {
         case .page1:
             return UIImage(named: UIConstants.IconName.OnboardingScreen1, in: UIConstants.bundle, compatibleWith: nil)
@@ -31,7 +31,7 @@ public class OnboardingPageViewModel: BaseViewModel {
         }
     }
 
-    public var title: String {
+    open var title: String {
         switch type {
         case .page1:
             return "vaccination_first_onboarding_page_title".localized
@@ -42,7 +42,7 @@ public class OnboardingPageViewModel: BaseViewModel {
         }
     }
 
-    public var info: String {
+    open var info: String {
         switch type {
         case .page1:
             return "vaccination_first_onboarding_page_message".localized
