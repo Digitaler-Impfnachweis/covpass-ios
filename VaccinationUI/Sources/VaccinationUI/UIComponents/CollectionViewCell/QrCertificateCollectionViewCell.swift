@@ -37,7 +37,7 @@ extension QrCertificateCollectionViewCell {
     public func configure(with configuration: T) {
         contentView.layoutMargins = .init(top: 30, left: 24, bottom: 30, right: 24)
         headerView.action = {
-            configuration.favoriteAction?(configuration.certificate)
+            configuration.favoriteAction?(configuration)
         }
         headerView.titleLabel.text = configuration.subtitle
         headerView.subtitleLabel.text = configuration.title
@@ -53,6 +53,6 @@ extension QrCertificateCollectionViewCell {
         actionView.tintColor = configuration.tintColor
         cardBackgroundColor = configuration.backgroundColor ?? UIColor.white
         qrContinerView.qrImageView.image = configuration.qrValue?.makeQr(size: qrContinerView.qrImageView.bounds.size)
-        qrContinerView.isHidden = configuration.certificate.partialVaccination
+        qrContinerView.isHidden = configuration.qrValue == nil
     }
 }

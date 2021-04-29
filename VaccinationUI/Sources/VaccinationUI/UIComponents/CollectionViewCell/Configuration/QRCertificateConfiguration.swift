@@ -7,44 +7,42 @@
 
 import Foundation
 import UIKit
-import VaccinationCommon
 
 public class QRCertificateConfiguration: NoCertifiateConfiguration {
     // MARK: - Public Variables
     
+    public var qrValue: String?
     public var stateImage: UIImage?
     public var stateTitle: String?
     public var headerImage: UIImage?
-    public var favoriteAction: ((_ certificate: VaccinationCertificate) -> Void)?
-    public var qrValue: String?
+    public var favoriteAction: ((_ configuration: QRCertificateConfiguration) -> Void)?
     public var tintColor: UIColor
-    public var certificate: VaccinationCertificate
 
     // MARK: - Init
     
-    public init(certificate: VaccinationCertificate,
+    public init(qrValue: String? = nil,
                 title: String? = "Covid-19 Nachweis".localized,
+                subtitle: String? = nil,
                 image: UIImage? = nil,
                 stateImage: UIImage? = nil,
                 stateTitle: String = "Impfungen Anzeigen".localized,
                 headerImage: UIImage? = nil,
-                favoriteAction: ((_ certificate: VaccinationCertificate) -> Void)? = nil,
+                favoriteAction: ((_ configuration: QRCertificateConfiguration) -> Void)? = nil,
                 backgroundColor: UIColor? = nil,
                 tintColor: UIColor = UIColor.black) {
-        self.certificate = certificate
         self.stateImage = stateImage
         self.stateTitle = stateTitle
         self.headerImage = headerImage
         self.favoriteAction = favoriteAction
-        self.qrValue = certificate.name // we should provide right data here
+        self.qrValue = qrValue // we should provide right data here
         self.tintColor = tintColor
-        super.init(title: title, subtitle: certificate.name, image: image, identifier: "\(QrCertificateCollectionViewCell.self)")
+        super.init(title: title, subtitle: subtitle, image: image, identifier: "\(QrCertificateCollectionViewCell.self)")
         self.backgroundColor = backgroundColor
     }
     
     // MARK: - Equatable
     
     public static func == (lhs: QRCertificateConfiguration, rhs: QRCertificateConfiguration) -> Bool {
-        return lhs.certificate.name == rhs.certificate.name && lhs.certificate.birthDate == rhs.certificate.birthDate
+        return lhs.title == rhs.title && lhs.subtitle == rhs.subtitle && lhs.qrValue == rhs.qrValue
     }
 }

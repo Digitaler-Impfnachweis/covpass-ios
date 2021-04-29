@@ -65,7 +65,7 @@ public class DefaultCertificateViewModel<T: QRCoderProtocol>: CertificateViewMod
 
                 return self.service.save(certList)
             }).then(self.service.fetch).then({ list -> Promise<ExtendedVaccinationCertificate> in
-                self.certificates = list.certificates.map { self.getCertficateConfiguration(for: $0.vaccinationCertificate) }
+                self.certificates = list.certificates.map { self.getCertficateConfiguration(for: $0) }
                 return Promise.value(extendedVaccinationCertificate)
             })
         })
@@ -80,7 +80,7 @@ public class DefaultCertificateViewModel<T: QRCoderProtocol>: CertificateViewMod
                 self.certificates = [self.noCertificateConfiguration()]
                 return
             }
-            self.certificates = list.map { self.getCertficateConfiguration(for: $0.vaccinationCertificate) }
+            self.certificates = list.map { self.getCertficateConfiguration(for: $0) }
         }).catch({ error in
             print(error)
             self.certificates = [self.noCertificateConfiguration()]
@@ -162,16 +162,17 @@ public class DefaultCertificateViewModel<T: QRCoderProtocol>: CertificateViewMod
     
     // MARK: - Card Configurations
 
-    private func getCertficateConfiguration(for certificate: VaccinationCertificate) -> QRCertificateConfiguration {
-        certificate.partialVaccination ? halfCertificateConfiguration(for: certificate) : fullCertificateConfiguration(for: certificate)
+    private func getCertficateConfiguration(for certificate: ExtendedVaccinationCertificate) -> QRCertificateConfiguration {
+        certificate.vaccinationCertificate.partialVaccination ? halfCertificateConfiguration(for: certificate) : fullCertificateConfiguration(for: certificate)
     }
 
-    private func fullCertificateConfiguration(for certificate: VaccinationCertificate) -> QRCertificateConfiguration {
+    private func fullCertificateConfiguration(for certificate: ExtendedVaccinationCertificate) -> QRCertificateConfiguration {
         let image = UIImage(named: UIConstants.IconName.StarEmpty, in: UIConstants.bundle, compatibleWith: nil)
         let stateImage = UIImage(named: UIConstants.IconName.CompletnessImage, in: UIConstants.bundle, compatibleWith: nil)
         let headerImage = UIImage(named: UIConstants.IconName.StarEmpty, in: UIConstants.bundle, compatibleWith: nil)
         return QRCertificateConfiguration(
-            certificate: certificate,
+            qrValue: certificate.validationQRCodeData,
+            subtitle: certificate.vaccinationCertificate.name,
             image: image,
             stateImage: stateImage,
             headerImage: headerImage,
@@ -180,12 +181,12 @@ public class DefaultCertificateViewModel<T: QRCoderProtocol>: CertificateViewMod
             tintColor: UIColor.white)
     }
 
-    private func halfCertificateConfiguration(for certificate: VaccinationCertificate) -> QRCertificateConfiguration {
+    private func halfCertificateConfiguration(for certificate: ExtendedVaccinationCertificate) -> QRCertificateConfiguration {
         let image = UIImage(named: UIConstants.IconName.StarEmpty, in: UIConstants.bundle, compatibleWith: nil)
         let stateImage = UIImage(named: UIConstants.IconName.HalfShield, in: UIConstants.bundle, compatibleWith: nil)
         let headerImage = UIImage(named: UIConstants.IconName.StarEmpty, in: UIConstants.bundle, compatibleWith: nil)
         return QRCertificateConfiguration(
-            certificate: certificate,
+            subtitle: certificate.vaccinationCertificate.name,
             image: image,
             stateImage: stateImage,
             headerImage: headerImage,
@@ -203,8 +204,11 @@ public class DefaultCertificateViewModel<T: QRCoderProtocol>: CertificateViewMod
     
     // MARK: - Card Actions
     
-    private func favoriteAction(for certificate: VaccinationCertificate) {
-        // Mark as favorite
-        
+    private func favoriteAction(for configuration: QRCertificateConfiguration) {
+        guard let extendedCertificate = certificateList.certificates.filter({ $0.vaccinationCertificate.name == configuration.subtitle }).first else { return }
+        certificateList.favoriteCertificateId = extendedCertificate.vaccinationCertificate.id
+        service.save(certificateList).done {
+            self.loadCertificatesConfiguration()
+        }
     }
 }
