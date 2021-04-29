@@ -11,15 +11,6 @@
         }
       },
       {
-        "package": "CCommonCrypto",
-        "repositoryURL": "https://github.com/jernejstrasner/CCommonCrypto",
-        "state": {
-          "branch": null,
-          "revision": "0530a4637e4a3728f6d5f23199a2f6e4f56c126d",
-          "version": "1.1.0"
-        }
-      },
-      {
         "package": "Keychain",
         "repositoryURL": "https://github.com/IBM/ios-keychain",
         "state": {
@@ -35,6 +26,15 @@
           "branch": null,
           "revision": "0baeae98e7fc7e349d8366786b02fe33a7fc0a1e",
           "version": "0.0.1"
+        }
+      },
+      {
+        "package": "OpenSSL",
+        "repositoryURL": "https://github.com/krzyzanowskim/OpenSSL",
+        "state": {
+          "branch": null,
+          "revision": "e88deedfc37501f03ae3a08b3b8cf497d0340197",
+          "version": "1.1.1100"
         }
       },
       {

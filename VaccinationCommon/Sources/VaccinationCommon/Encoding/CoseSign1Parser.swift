@@ -5,7 +5,6 @@
 //  Copyright © 2021 IBM. All rights reserved.
 //
 
-import CommonCrypto
 import Foundation
 import SwiftCBOR
 
@@ -47,9 +46,6 @@ struct CoseSign1Message {
 }
 
 class CoseSign1Parser {
-    let COSE_PHDR_KID = CBOR.unsignedInt(4)
-    let COSE_PHDR_SIG_ES256 = CBOR.negativeInt(6 /* Value is -7 -- ECDSA256 with a NIST P256 curve */)
-
     /// Decodes the received data with CBOR and parses the resulting COSE structure
     /// - parameter decompressedPayload: the data containing a COSE object
     /// - parameter completion: a fallback in case an error occurs
@@ -96,40 +92,5 @@ class CoseSign1Parser {
         }
 
         return result
-    }
-
-    func verify(message: CoseSign1Message) -> Bool {
-//        guard let header = try? CBOR.decode(message.protected),
-//              case .map(let headerMap) = header,
-//              let kid = headerMap[COSE_PHDR_KID],
-//              kid == COSE_PHDR_SIG_ES256 else { return false }
-//
-//        guard let cborProtected = try? CBOR.decode(message.protected), let cborPayload = try? CBOR.decode(message.payload) else { return false }
-//        let externalData = CBOR.byteString([]) // nil string - need to an empty byte buffer, not a nil or an empty array.
-//        let signed_payload : [UInt8] = CBOR.encode(["Signature1", cborProtected, externalData, cborPayload])
-//        let digest = ccSha256(data: Data(signed_payload)) //SHA256.hash(data:signed_payload)
-//
-//        let signatureForData = try! P256.Signing.ECDSASignature.init(rawRepresentation: signature)
-//
-//        let publicKeys = getPublicKeyByKid(kid: kid)
-//
-//        for pk in publicKeys {
-//            if (pk.isValidSignature(signatureForData, for: digest)) {
-//                return true
-//            }
-//        }
-//
-//        return true
-    }
-
-    private func ccSha256(data: Data) -> Data {
-        var digest = Data(count: Int(CC_SHA256_DIGEST_LENGTH))
-
-        _ = digest.withUnsafeMutableBytes { (digestBytes) in
-            data.withUnsafeBytes { (stringBytes) in
-                CC_SHA256(stringBytes, CC_LONG(data.count), digestBytes)
-            }
-        }
-        return digest
     }
 }
