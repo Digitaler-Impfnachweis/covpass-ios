@@ -7,8 +7,6 @@
 
 import UIKit
 
-@IBDesignable
-/// A custom button with support for rounded corners, shadow and animation
 public class MainButton: XibView {
     // MARK: - IBOutlet
 
