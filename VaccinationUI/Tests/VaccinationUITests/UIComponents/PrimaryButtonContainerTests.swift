@@ -9,11 +9,11 @@
 import XCTest
 
 class PrimaryButtonContainerTests: XCTestCase {
-    var sut: PrimaryButtonContainer!
+    var sut: MainButton!
 
     override func setUp() {
         super.setUp()
-        sut = PrimaryButtonContainer()
+        sut = MainButton()
     }
 
     override func tearDown() {
@@ -24,10 +24,10 @@ class PrimaryButtonContainerTests: XCTestCase {
     func testInit() {
         XCTAssertNotNil(sut.contentView, "Button ContentView should exist")
 
-        let viewWithFrame = PrimaryButtonContainer(frame: .zero)
+        let viewWithFrame = MainButton(frame: .zero)
         XCTAssertNotNil(viewWithFrame.contentView, "Button ContentView should exist")
 
-        let viewWithCoder = PrimaryButtonContainer(coder: CoderMock.unarchivedCoder)
+        let viewWithCoder = MainButton(coder: CoderMock.unarchivedCoder)
         viewWithCoder?.awakeFromNib()
         viewWithCoder?.prepareForInterfaceBuilder()
         XCTAssertNotNil(viewWithCoder, "Button should exist")

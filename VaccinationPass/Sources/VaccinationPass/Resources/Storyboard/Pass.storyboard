@@ -53,7 +53,7 @@
                                                 <rect key="frame" x="87" y="0.0" width="240" height="12"/>
                                                 <color key="backgroundColor" red="0.023529411760000001" green="0.37254901959999998" blue="0.76862745099999996" alpha="1" colorSpace="calibratedRGB"/>
                                             </view>
-                                            <view contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="56" placeholderIntrinsicHeight="56" translatesAutoresizingMaskIntoConstraints="NO" id="jXD-uc-srT" customClass="PrimaryIconButtonContainer" customModule="VaccinationUI">
+                                            <view contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="56" placeholderIntrinsicHeight="56" translatesAutoresizingMaskIntoConstraints="NO" id="jXD-uc-srT" customClass="MainButton" customModule="VaccinationUI">
                                                 <rect key="frame" x="179" y="22" width="56" height="56"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <color key="tintColor" systemColor="systemBackgroundColor"/>
@@ -129,7 +129,7 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="ox2-9Q-5Of">
                                                 <rect key="frame" x="0.0" y="178" width="414" height="128"/>
                                                 <subviews>
-                                                    <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="Ihi-Ap-8Ly" customClass="PrimaryButtonContainer" customModule="VaccinationUI">
+                                                    <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="Ihi-Ap-8Ly" customClass="MainButton" customModule="VaccinationUI">
                                                         <rect key="frame" x="0.0" y="0.0" width="414" height="128"/>
                                                     </view>
                                                 </subviews>
@@ -149,7 +149,7 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="9ia-DC-rGi">
                                                 <rect key="frame" x="0.0" y="656" width="414" height="128"/>
                                                 <subviews>
-                                                    <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="F59-gV-20d" customClass="PrimaryButtonContainer" customModule="VaccinationUI">
+                                                    <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="F59-gV-20d" customClass="MainButton" customModule="VaccinationUI">
                                                         <rect key="frame" x="0.0" y="0.0" width="414" height="128"/>
                                                     </view>
                                                 </subviews>

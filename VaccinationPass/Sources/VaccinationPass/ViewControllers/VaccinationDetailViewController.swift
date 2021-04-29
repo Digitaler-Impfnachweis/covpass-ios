@@ -16,11 +16,11 @@ public class VaccinationDetailViewController: UIViewController {
     @IBOutlet var nameHeadline: PlainLabel!
     @IBOutlet var immunizationView: ParagraphView!
     @IBOutlet var immunizationButtonContainerView: UIStackView!
-    @IBOutlet var immunizationButton: PrimaryButtonContainer!
+    @IBOutlet var immunizationButton: MainButton!
     @IBOutlet var personalDataHeadline: PlainLabel!
     @IBOutlet var nameView: ParagraphView!
     @IBOutlet var birtdateView: ParagraphView!
-    @IBOutlet var deleteButton: PrimaryButtonContainer!
+    @IBOutlet var deleteButton: MainButton!
     
     public var viewModel: VaccinationDetailViewModel!
     public var router: PopupRouter!
@@ -57,7 +57,6 @@ public class VaccinationDetailViewController: UIViewController {
 
         immunizationButton.title = viewModel.immunizationButton
         immunizationButton.backgroundColor = UIColor.white
-        immunizationButton.shadowColor = UIColor.white
         immunizationButton.action = { [weak self] in
             guard let self = self else { return }
             if self.viewModel.partialVaccination {
@@ -84,6 +83,8 @@ public class VaccinationDetailViewController: UIViewController {
         birtdateView.contentView?.layoutMargins = .init(top: 12, left: 24, bottom: 12, right: 24)
 
         deleteButton.title = "vaccination_detail_delete".localized
+        deleteButton.style = .secondary
+        deleteButton.icon = UIImage(named: UIConstants.IconName.CheckmarkIcon, in: UIConstants.bundle, compatibleWith: nil)
         deleteButton.action = { [weak self] in
             let alertTitle = String(format: "vaccination_delete_title".localized, self?.viewModel.name ?? "")
             let alert = UIAlertController(title: alertTitle, message: "vaccination_delete_body".localized, preferredStyle: .alert)

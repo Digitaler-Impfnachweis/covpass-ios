@@ -29,6 +29,9 @@ public enum TextStyle {
     /// size: 16 type: regular color: neutralBlack
     case body
 
+    /// size: 18 type: semi-bold color: neutralWhite
+    case mainButton
+
     public func apply(_ string: NSAttributedString) -> NSAttributedString {
         switch self {
         case .h1:
@@ -72,6 +75,11 @@ public enum TextStyle {
                 .font(named: UIFont.sansRegular, size: 16.0, lineHeight: 24.0, textStyle: .body)
                 .letterSpacing(0.12)
                 .colored(.neutralBlack)
+
+        case .mainButton:
+            return string
+                .font(named: UIFont.sansSemiBold, size: 16.0, lineHeight: 18.0, textStyle: .subheadline)
+                .letterSpacing(0.12)
         }
     }
 }

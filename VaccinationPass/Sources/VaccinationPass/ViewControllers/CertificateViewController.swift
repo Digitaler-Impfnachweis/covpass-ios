@@ -15,7 +15,7 @@ public class CertificateViewController: UIViewController {
     // MARK: - IBOutlet
 
     @IBOutlet public var headerView: InfoHeaderView!
-    @IBOutlet public var addButton: PrimaryIconButtonContainer!
+    @IBOutlet public var addButton: MainButton!
     @IBOutlet public var collectionView: UICollectionView!
     @IBOutlet public var dotPageIndicator: DotPageIndicator!
     
@@ -77,9 +77,10 @@ public class CertificateViewController: UIViewController {
     
     private func setupActionButton() {
         view.tintColor = UIConstants.BrandColor.brandAccent
-        addButton.iconImage = viewModel?.addButtonImage
-        addButton.buttonBackgroundColor = UIConstants.BrandColor.brandAccent
-        addButton.action = presentPopup
+        addButton.icon = viewModel?.addButtonImage
+        addButton.action = { [weak self] in
+            self?.presentPopup()
+        }
     }
     
     private func reloadCollectionView() {

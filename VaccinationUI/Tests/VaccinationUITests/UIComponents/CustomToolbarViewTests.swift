@@ -43,7 +43,7 @@ class CustomToolbarViewTests: XCTestCase {
         XCTAssertEqual(sut.leftButton.isEnabled, false)
 
         sut.setUpMiddleButton(middleButtonItem: .cancelButton)
-        XCTAssertTrue(sut.subviews.last is PrimaryButtonContainer)
+        XCTAssertTrue(sut.subviews.last is MainButton)
     }
 
     func testLeftButtonAction() {
@@ -156,7 +156,7 @@ class CustomToolbarViewTests: XCTestCase {
 
     func testSettingPrimaryButton() {
         // When
-        sut.primaryButton = PrimaryButtonContainer()
+        sut.primaryButton = MainButton()
         // Then
         XCTAssertEqual(sut.primaryButton.textableView.numberOfLines, 2)
         XCTAssertEqual(sut.primaryButton.innerButton.titleLabel?.numberOfLines, 2)

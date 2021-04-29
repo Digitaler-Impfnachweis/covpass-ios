@@ -11,8 +11,8 @@ import UIKit
 public extension UIColor {
     // MARK: - Primary Colors
 
-    /// bg/primary/base #6AA500
-    static let primaryBase = UIColor("PrimaryBase")
+    /// bg/brant/accent #065FC4
+    static let brandAccent = UIColor("BrandAccent")
 
     /// bg/primary/disabled #6AA500
     static let primaryDisabled = UIColor("PrimaryDisabled")

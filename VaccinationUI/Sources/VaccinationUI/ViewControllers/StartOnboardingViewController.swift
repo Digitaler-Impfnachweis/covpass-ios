@@ -9,7 +9,7 @@ import UIKit
 
 public class StartOnboardingViewController: UIViewController {
     @IBOutlet public var stackView: UIStackView!
-    @IBOutlet public var actionButton: PrimaryButtonContainer!
+    @IBOutlet public var actionButton: MainButton!
     @IBOutlet public var confirmView: ConfirmView!
     @IBOutlet public var headline: PlainLabel!
     @IBOutlet public var subtitle: PlainLabel!
@@ -62,6 +62,7 @@ public class StartOnboardingViewController: UIViewController {
     
     private func configureActionButton() {
         actionButton.title = inputViewModel.navigationButtonTitle
+        actionButton.style = .primary
         actionButton.action = { [weak self] in
             self?.router?.navigateToNextViewController()
         }

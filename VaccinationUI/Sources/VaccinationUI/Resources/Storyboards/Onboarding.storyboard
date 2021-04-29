@@ -334,7 +334,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tcR-S1-wXD" userLabel="Bottom Container View">
                                 <rect key="frame" x="0.0" y="791" width="414" height="71"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" placeholderIntrinsicWidth="240" placeholderIntrinsicHeight="56" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="z1w-BA-0EP" customClass="PrimaryButtonContainer" customModule="VaccinationUI">
+                                    <view contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" placeholderIntrinsicWidth="240" placeholderIntrinsicHeight="56" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="z1w-BA-0EP" customClass="MainButton" customModule="VaccinationUI">
                                         <rect key="frame" x="87" y="15" width="240" height="56"/>
                                         <color key="backgroundColor" red="0.023529411760000001" green="0.37254901959999998" blue="0.76862745099999996" alpha="1" colorSpace="calibratedRGB"/>
                                     </view>
