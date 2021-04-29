@@ -4,106 +4,100 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="VaccinationView" customModule="VaccinationUI">
             <connections>
-                <outlet property="bottomLayoutConstraint" destination="nFc-dt-jqI" id="RJK-No-tfi"/>
                 <outlet property="countryView" destination="j2F-gs-Xii" id="k2X-Wx-4zN"/>
                 <outlet property="dateView" destination="XGD-vt-dCq" id="dkf-Dv-T9g"/>
                 <outlet property="immunizationHeadline" destination="Vtu-0a-hp0" id="cc9-dr-0ax"/>
                 <outlet property="issuerView" destination="mmI-TM-IPt" id="lZq-p7-AjK"/>
-                <outlet property="leftLayoutConstraint" destination="cu9-gc-uFh" id="Xbv-ug-fMs"/>
                 <outlet property="locationView" destination="IKL-9R-NAf" id="BFM-qb-hP7"/>
                 <outlet property="manufacturerView" destination="9Hq-h1-plc" id="GkU-nF-iJe"/>
-                <outlet property="rightLayoutConstraint" destination="NpI-Mp-Y2X" id="nh6-Z0-PDI"/>
                 <outlet property="stackView" destination="oUb-Cv-MzU" id="Dlo-D8-gko"/>
-                <outlet property="topLayoutConstraint" destination="W4p-ty-wYW" id="Tzz-3t-iwk"/>
                 <outlet property="uvciView" destination="dmy-b2-SUJ" id="gmJ-4I-9Qh"/>
                 <outlet property="vaccineCodeView" destination="cQX-l9-Ytd" id="PeK-0Z-z33"/>
                 <outlet property="vaccineView" destination="RGm-nQ-hea" id="tma-9J-SOa"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="Emf-oB-Bnc">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="180"/>
-            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+        <view contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Emf-oB-Bnc">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="628"/>
             <subviews>
-                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="oUb-Cv-MzU" customClass="ScrollableStackView" customModule="VaccinationUI">
-                    <rect key="frame" x="0.0" y="44" width="375" height="136"/>
+                <stackView opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="oUb-Cv-MzU" customClass="ScrollableStackView" customModule="VaccinationUI">
+                    <rect key="frame" x="16" y="52" width="343" height="568"/>
                     <subviews>
-                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Vtu-0a-hp0" customClass="Headline" customModule="VaccinationUI">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <view contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="343" placeholderIntrinsicHeight="172" translatesAutoresizingMaskIntoConstraints="NO" id="Vtu-0a-hp0" userLabel="immunizationHeadline" customClass="Headline" customModule="VaccinationUI">
+                            <rect key="frame" x="0.0" y="0.0" width="343" height="172"/>
                         </view>
-                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KCv-qe-C0N" customClass="Spacer" customModule="VaccinationUI">
-                            <rect key="frame" x="0.0" y="50" width="375" height="12"/>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="12" id="O4n-10-93A"/>
-                            </constraints>
+                        <view contentMode="scaleToFill" verticalHuggingPriority="249" placeholderIntrinsicWidth="343" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="XGD-vt-dCq" userLabel="dateView" customClass="ParagraphView" customModule="VaccinationUI">
+                            <rect key="frame" x="0.0" y="172" width="343" height="62"/>
                         </view>
-                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XGD-vt-dCq" customClass="ParagraphView" customModule="VaccinationUI">
-                            <rect key="frame" x="0.0" y="62" width="375" height="50"/>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <view contentMode="scaleToFill" placeholderIntrinsicWidth="343" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="RGm-nQ-hea" userLabel="vaccineView" customClass="ParagraphView" customModule="VaccinationUI">
+                            <rect key="frame" x="0.0" y="234" width="343" height="50"/>
                         </view>
-                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RGm-nQ-hea" customClass="ParagraphView" customModule="VaccinationUI">
-                            <rect key="frame" x="0.0" y="112" width="375" height="12"/>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <view contentMode="scaleToFill" placeholderIntrinsicWidth="343" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="9Hq-h1-plc" userLabel="manufacturerView" customClass="ParagraphView" customModule="VaccinationUI">
+                            <rect key="frame" x="0.0" y="284" width="343" height="50"/>
                         </view>
-                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9Hq-h1-plc" customClass="ParagraphView" customModule="VaccinationUI">
-                            <rect key="frame" x="0.0" y="124" width="375" height="0.0"/>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <view contentMode="scaleToFill" placeholderIntrinsicWidth="343" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="cQX-l9-Ytd" userLabel="vaccineCodeView" customClass="ParagraphView" customModule="VaccinationUI">
+                            <rect key="frame" x="0.0" y="334" width="343" height="50"/>
                         </view>
-                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cQX-l9-Ytd" customClass="ParagraphView" customModule="VaccinationUI">
-                            <rect key="frame" x="0.0" y="124" width="375" height="0.0"/>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <view contentMode="scaleToFill" placeholderIntrinsicWidth="343" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="IKL-9R-NAf" userLabel="locationView" customClass="ParagraphView" customModule="VaccinationUI">
+                            <rect key="frame" x="0.0" y="384" width="343" height="50"/>
                         </view>
-                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IKL-9R-NAf" customClass="ParagraphView" customModule="VaccinationUI">
-                            <rect key="frame" x="0.0" y="124" width="375" height="0.0"/>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <view contentMode="scaleToFill" placeholderIntrinsicWidth="343" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="mmI-TM-IPt" userLabel="issuerView" customClass="ParagraphView" customModule="VaccinationUI">
+                            <rect key="frame" x="0.0" y="434" width="343" height="50"/>
                         </view>
-                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mmI-TM-IPt" customClass="ParagraphView" customModule="VaccinationUI">
-                            <rect key="frame" x="0.0" y="124" width="375" height="0.0"/>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <view contentMode="scaleToFill" placeholderIntrinsicWidth="343" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="j2F-gs-Xii" userLabel="countryView" customClass="ParagraphView" customModule="VaccinationUI">
+                            <rect key="frame" x="0.0" y="484" width="343" height="50"/>
                         </view>
-                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="j2F-gs-Xii" customClass="ParagraphView" customModule="VaccinationUI">
-                            <rect key="frame" x="0.0" y="124" width="375" height="0.0"/>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        </view>
-                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dmy-b2-SUJ" customClass="ParagraphView" customModule="VaccinationUI">
-                            <rect key="frame" x="0.0" y="124" width="375" height="0.0"/>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oDi-aR-Smg" customClass="Spacer" customModule="VaccinationUI">
-                            <rect key="frame" x="0.0" y="124" width="375" height="12"/>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="12" id="UBK-JA-RbX"/>
-                            </constraints>
+                        <view contentMode="scaleToFill" placeholderIntrinsicWidth="343" placeholderIntrinsicHeight="34" translatesAutoresizingMaskIntoConstraints="NO" id="dmy-b2-SUJ" userLabel="uvciView" customClass="ParagraphView" customModule="VaccinationUI">
+                            <rect key="frame" x="0.0" y="534" width="343" height="34"/>
                         </view>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </stackView>
             </subviews>
-            <viewLayoutGuide key="safeArea" id="zYh-Je-bB5"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="zYh-Je-bB5" firstAttribute="trailing" secondItem="oUb-Cv-MzU" secondAttribute="trailing" id="NpI-Mp-Y2X"/>
-                <constraint firstItem="oUb-Cv-MzU" firstAttribute="top" secondItem="zYh-Je-bB5" secondAttribute="top" priority="999" id="W4p-ty-wYW"/>
-                <constraint firstItem="oUb-Cv-MzU" firstAttribute="leading" secondItem="zYh-Je-bB5" secondAttribute="leading" id="cu9-gc-uFh"/>
-                <constraint firstItem="zYh-Je-bB5" firstAttribute="bottom" secondItem="oUb-Cv-MzU" secondAttribute="bottom" priority="999" id="nFc-dt-jqI"/>
+                <constraint firstAttribute="trailingMargin" secondItem="oUb-Cv-MzU" secondAttribute="trailing" id="2az-jZ-fmz"/>
+                <constraint firstItem="oUb-Cv-MzU" firstAttribute="leading" secondItem="Emf-oB-Bnc" secondAttribute="leadingMargin" id="ArD-o2-cFW"/>
+                <constraint firstItem="oUb-Cv-MzU" firstAttribute="top" secondItem="Emf-oB-Bnc" secondAttribute="topMargin" id="JsY-qY-rGL"/>
+                <constraint firstItem="oUb-Cv-MzU" firstAttribute="bottom" secondItem="Emf-oB-Bnc" secondAttribute="bottomMargin" id="pHY-mw-ijw"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="126.5" y="-161"/>
+            <edgeInsets key="layoutMargins" top="0.0" left="0.0" bottom="0.0" right="0.0"/>
+            <point key="canvasLocation" x="125.36231884057972" y="-11.383928571428571"/>
         </view>
     </objects>
-    <resources>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-    </resources>
+    <designables>
+        <designable name="9Hq-h1-plc">
+            <size key="intrinsicContentSize" width="343" height="50"/>
+        </designable>
+        <designable name="IKL-9R-NAf">
+            <size key="intrinsicContentSize" width="343" height="50"/>
+        </designable>
+        <designable name="RGm-nQ-hea">
+            <size key="intrinsicContentSize" width="343" height="50"/>
+        </designable>
+        <designable name="Vtu-0a-hp0">
+            <size key="intrinsicContentSize" width="343" height="172"/>
+        </designable>
+        <designable name="XGD-vt-dCq">
+            <size key="intrinsicContentSize" width="343" height="50"/>
+        </designable>
+        <designable name="cQX-l9-Ytd">
+            <size key="intrinsicContentSize" width="343" height="50"/>
+        </designable>
+        <designable name="dmy-b2-SUJ">
+            <size key="intrinsicContentSize" width="343" height="34"/>
+        </designable>
+        <designable name="j2F-gs-Xii">
+            <size key="intrinsicContentSize" width="343" height="50"/>
+        </designable>
+        <designable name="mmI-TM-IPt">
+            <size key="intrinsicContentSize" width="343" height="50"/>
+        </designable>
+    </designables>
 </document>

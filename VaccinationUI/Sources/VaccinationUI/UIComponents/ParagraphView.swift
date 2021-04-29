@@ -8,16 +8,11 @@
 import UIKit
 
 @IBDesignable
-public class ParagraphView: MarginableXibView {
+public class ParagraphView: XibView {
     @IBOutlet public var stackView: UIStackView!
     @IBOutlet public var title: UILabel!
     @IBOutlet public var body: LinkTextView!
     @IBOutlet public var bottomBorder: UIView!
-
-    internal static let BodyLeftInset: CGFloat = -5
-
-    public var topMargin: CGFloat = 25
-    public var marginToSecondaryButton: CGFloat = 40
 
     public var titleText: String? {
         didSet {
@@ -27,6 +22,15 @@ public class ParagraphView: MarginableXibView {
                 checkVisibility()
                 setupAccessibility()
             }
+        }
+    }
+
+    public var titleFont: UIFont? {
+        didSet {
+            guard let titleFont = titleFont else { return }
+            let newFont = UIFont(descriptor: titleFont.fontDescriptor, size: titleFont.fontDescriptor.pointSize)
+            title.adjustsFontForContentSizeCategory = true
+            title.font = newFont
         }
     }
 
@@ -62,17 +66,6 @@ public class ParagraphView: MarginableXibView {
         }
     }
 
-    public override var margins: [Margin] {
-        return [
-            RelatedViewMargin(constant: 40, relatedViewType: PrimaryButtonContainer.self),
-            RelatedViewMargin(constant: 24, relatedViewType: ParagraphView.self),
-            RelatedViewMargin(constant: 12, relatedViewType: Headline.self),
-            RelatedViewMargin(constant: 12, relatedViewType: Spacer.self),
-            PositionMargin(constant: topMargin, position: 24, type: .top),
-            RelatedViewMargin(constant: 12, relatedViewType: SecondaryButtonContainer.self),
-        ]
-    }
-
     required init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
@@ -102,11 +95,13 @@ public class ParagraphView: MarginableXibView {
     }
 
     internal func setupView() {
+        contentView?.layoutMargins = .init(top: 0, left: 24, bottom: 0, right: 24)
         title.font = UIConstants.Font.semiBold
         title.adjustsFontForContentSizeCategory()
         title.textColor = UIConstants.BrandColor.onBackground100
         bodyFont = UIConstants.Font.regular
         body.textColor = UIConstants.BrandColor.onBackground100
+        stackView.setCustomSpacing(11, after: body)
         bottomBorder.backgroundColor = UIConstants.BrandColor.onBackground20
     }
 }

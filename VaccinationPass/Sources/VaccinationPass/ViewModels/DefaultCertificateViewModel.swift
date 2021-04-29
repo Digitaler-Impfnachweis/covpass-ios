@@ -31,13 +31,19 @@ public class DefaultCertificateViewModel<T: QRCoderProtocol>: CertificateViewMod
     // MARK: - CertificateViewModel
     
     public weak var delegate: ViewModelDelegate?
-    public var certificates = [BaseCertifiateConfiguration]()
     public var addButtonImage = UIImage(named: UIConstants.IconName.PlusIcon, in: UIConstants.bundle, compatibleWith: nil)
+
+    public var certificates = [BaseCertifiateConfiguration]()
+    public var certificateList = VaccinationCertificateList(certificates: [])
+    public var matchedCertificates: [ExtendedVaccinationCertificate] {
+        let certs = self.sortFavorite(certificateList.certificates, favorite: certificateList.favoriteCertificateId ?? "")
+        return self.matchCertificates(certs)
+    }
 
     public func process(payload: String) -> Promise<ExtendedVaccinationCertificate> {
         return Promise<ExtendedVaccinationCertificate>() { seal in
             // TODO refactor parser
-            guard let decodedPayload = parser.parse(payload, completion: { error in
+            guard let decodedPayload: VaccinationCertificate = parser.parse(payload, completion: { error in
                 seal.reject(error)
             }) else {
                 seal.reject(ApplicationError.unknownError)
@@ -51,6 +57,12 @@ public class DefaultCertificateViewModel<T: QRCoderProtocol>: CertificateViewMod
                     throw QRCodeError.qrCodeExists
                 }
                 certList.certificates.append(extendedVaccinationCertificate)
+
+                // Mark first certificate as favorite
+                if certList.certificates.count == 1 {
+                    certList.favoriteCertificateId = extendedVaccinationCertificate.vaccinationCertificate.id
+                }
+
                 return self.service.save(certList)
             }).then(self.service.fetch).then({ list -> Promise<ExtendedVaccinationCertificate> in
                 self.certificates = list.certificates.map { self.getCertficateConfiguration(for: $0.vaccinationCertificate) }
@@ -60,8 +72,9 @@ public class DefaultCertificateViewModel<T: QRCoderProtocol>: CertificateViewMod
     }
 
     public func loadCertificatesConfiguration() {
-        service.fetch().map({ list in
-            return self.matchCertificates(list.certificates)
+        service.fetch().map({ list -> [ExtendedVaccinationCertificate] in
+            self.certificateList = list
+            return self.matchedCertificates
         }).done({ list in
             if list.isEmpty {
                 self.certificates = [self.noCertificateConfiguration()]
@@ -76,9 +89,17 @@ public class DefaultCertificateViewModel<T: QRCoderProtocol>: CertificateViewMod
         })
     }
 
+    private func sortFavorite(_ certificates: [ExtendedVaccinationCertificate], favorite: String) -> [ExtendedVaccinationCertificate] {
+        guard let favoriteCert = certificates.first(where: { $0.vaccinationCertificate.id == favorite }) else { return certificates }
+        var list = [ExtendedVaccinationCertificate]()
+        list.append(favoriteCert)
+        list.append(contentsOf: certificates.filter({ $0 != favoriteCert }))
+        return list
+    }
+
     private func matchCertificates(_ certificates: [ExtendedVaccinationCertificate]) -> [ExtendedVaccinationCertificate] {
         var list = [ExtendedVaccinationCertificate]()
-        var certs = certificates
+        var certs: [ExtendedVaccinationCertificate] = certificates.reversed()
         while certs.count > 0 {
             guard let cert = certs.popLast() else { return list }
             let pair = findCertificatePair(cert, certs)
@@ -120,31 +141,19 @@ public class DefaultCertificateViewModel<T: QRCoderProtocol>: CertificateViewMod
     }
 
     public func detailViewModel(_ indexPath: IndexPath) -> VaccinationDetailViewModel? {
-        do {
-            let list = try service.fetch().wait()
-            if list.certificates.isEmpty {
-                return nil
-            }
-            let pair = findCertificatePair(list.certificates[indexPath.row], list.certificates)
-            return VaccinationDetailViewModel(certificates: pair)
-        } catch {
-            print(error)
+        if matchedCertificates.isEmpty {
             return nil
         }
+        let pair = findCertificatePair(matchedCertificates[indexPath.row], certificateList.certificates)
+        return VaccinationDetailViewModel(certificates: pair)
     }
 
     public func detailViewModel(_ cert: ExtendedVaccinationCertificate) -> VaccinationDetailViewModel? {
-        do {
-            let list = try service.fetch().wait()
-            if list.certificates.isEmpty {
-                return nil
-            }
-            let pair = findCertificatePair(cert, list.certificates)
-            return VaccinationDetailViewModel(certificates: pair)
-        } catch {
-            print(error)
+        if certificateList.certificates.isEmpty {
             return nil
         }
+        let pair = findCertificatePair(cert, certificateList.certificates)
+        return VaccinationDetailViewModel(certificates: pair)
     }
     
     // MARK: - Configurations

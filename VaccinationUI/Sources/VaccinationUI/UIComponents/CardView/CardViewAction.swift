@@ -9,10 +9,10 @@ import Foundation
 import UIKit
 
 @IBDesignable
-public class CardViewAction: MarginableXibView {
-    
+public class CardViewAction: XibView {
     // MARK: - Outlets
-    
+
+    @IBOutlet public var stackView: UIStackView!
     @IBOutlet public var titleLabel: UILabel!
     @IBOutlet public var actionButton: UIButton!
     @IBOutlet public var stateImageView: UIImageView!
@@ -25,4 +25,11 @@ public class CardViewAction: MarginableXibView {
     // MARK: - IBAction
     
     @IBAction public func actionButtonPressed(button: UIButton) { action?() }
+
+    // MARK: - Lifecycle
+
+    public override func initView() {
+        super.initView()
+        stackView.spacing = 5
+    }
 }

@@ -15,6 +15,10 @@ public struct ValidationCertificate: Codable {
     public var id: String
     public var validUntil: Date?
 
+    public var partialVaccination: Bool {
+        return vaccination.first?.seriesNumber != vaccination.first?.seriesTotal
+    }
+
     enum CodingKeys: String, CodingKey {
         case name
         case birthDate
@@ -27,12 +31,14 @@ public struct ValidationCertificate: Codable {
     public init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         name = try values.decode(String.self, forKey: .name)
-        let birthDateString = try values.decode(String.self, forKey: .birthDate)
-        birthDate = DateUtils.vaccinationDateFormatter.date(from: birthDateString)
+        if let birthDateString = try? values.decode(String.self, forKey: .birthDate) {
+            birthDate = DateUtils.vaccinationDateFormatter.date(from: birthDateString)
+        }
         vaccination = try values.decode([Vaccination].self, forKey: .vaccination)
         issuer = try values.decode(String.self, forKey: .issuer)
         id = try values.decode(String.self, forKey: .id)
-        let validUntilString = try values.decode(String.self, forKey: .validUntil)
-        validUntil = DateUtils.vaccinationDateFormatter.date(from: validUntilString)
+        if let validUntilString = try? values.decode(String.self, forKey: .validUntil) {
+            validUntil = DateUtils.vaccinationDateFormatter.date(from: validUntilString)
+        }
     }
 }

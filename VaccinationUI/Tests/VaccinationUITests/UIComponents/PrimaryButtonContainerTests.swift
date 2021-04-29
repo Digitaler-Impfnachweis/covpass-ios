@@ -54,8 +54,8 @@ class PrimaryButtonContainerTests: XCTestCase {
         XCTAssertEqual(sut.layer.shadowColor, sut.shadowColor.cgColor)
 
         // Corners
-        XCTAssertEqual(sut.innerButton.layer.cornerRadius, sut.cornerRadius)
-        XCTAssertFalse(sut.innerButton.layer.masksToBounds)
+//        XCTAssertEqual(sut.layer.cornerRadius, sut.cornerRadius) // The button will never have a custom corner radius. We should refactor that.
+        XCTAssertFalse(sut.layer.masksToBounds)
 
         // Title
         XCTAssertTrue(sut.textableView.isHidden)
@@ -70,8 +70,7 @@ class PrimaryButtonContainerTests: XCTestCase {
 //        XCTAssertTrue(sut.innerButton.titleLabel?.adjustsFontForContentSizeCategory ?? true)
 
         // Background
-        XCTAssertEqual(sut.innerButton.backgroundColor, UIConstants.BrandColor.brandAccent)
-        XCTAssertEqual(sut.backgroundColor, .clear)
+        XCTAssertEqual(sut.backgroundColor, UIConstants.BrandColor.brandAccent)
         XCTAssertEqual(sut.contentView?.backgroundColor, .clear)
 
         // Dot Pulse Animation
@@ -116,8 +115,6 @@ class PrimaryButtonContainerTests: XCTestCase {
 
         XCTAssertTrue(sut.buttonWidthConstraint?.isActive ?? false)
         XCTAssertTrue(sut.buttonHeightConstraint?.isActive ?? false)
-        XCTAssertFalse(sut.leadingTitleInsetConstraint.isActive)
-        XCTAssertFalse(sut.trailingTitleInsetConstraint.isActive)
     }
 
     func testStopAnimation() {
@@ -130,8 +127,6 @@ class PrimaryButtonContainerTests: XCTestCase {
 
         XCTAssertFalse(sut.buttonWidthConstraint?.isActive ?? false)
         XCTAssertFalse(sut.buttonHeightConstraint?.isActive ?? false)
-        XCTAssertTrue(sut.leadingTitleInsetConstraint.isActive)
-        XCTAssertTrue(sut.trailingTitleInsetConstraint.isActive)
     }
 
     func testStopAnimationOnTitleButton() {
@@ -150,8 +145,6 @@ class PrimaryButtonContainerTests: XCTestCase {
 
         XCTAssertFalse(sut.buttonWidthConstraint?.isActive ?? false)
         XCTAssertFalse(sut.buttonHeightConstraint?.isActive ?? false)
-        XCTAssertTrue(sut.leadingTitleInsetConstraint.isActive)
-        XCTAssertTrue(sut.trailingTitleInsetConstraint.isActive)
     }
 
     func testEnable() {
@@ -163,7 +156,7 @@ class PrimaryButtonContainerTests: XCTestCase {
         XCTAssertTrue(sut.textableView.isHidden)
         XCTAssertEqual(sut.textableView.textColor, UIConstants.BrandColor.onBrandAccent, "TextableView text color should match.")
         XCTAssertEqual(sut.innerButton.titleColor(for: .normal), UIConstants.BrandColor.onBrandAccent)
-        XCTAssertEqual(sut.innerButton.backgroundColor, UIConstants.BrandColor.brandAccent, "Button background color should match.")
+        XCTAssertEqual(sut.backgroundColor, UIConstants.BrandColor.brandAccent, "Button background color should match.")
     }
 
     func testDisable() {
@@ -175,7 +168,7 @@ class PrimaryButtonContainerTests: XCTestCase {
         XCTAssertTrue(sut.textableView.isHidden)
         XCTAssertEqual(sut.textableView.textColor, UIConstants.BrandColor.onBackground50, "TextableView text color should match.")
         XCTAssertEqual(sut.innerButton.titleColor(for: .normal), UIConstants.BrandColor.onBackground50)
-        XCTAssertEqual(sut.innerButton.backgroundColor, UIConstants.BrandColor.onBackground20, "Button background color should match.")
+        XCTAssertEqual(sut.backgroundColor, UIConstants.BrandColor.onBackground20, "Button background color should match.")
     }
 
     func testButtonAction() {

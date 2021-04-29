@@ -11,7 +11,8 @@ import UIKit
 public class ActionTableViewCell: UITableViewCell {
     
     // MARK: - IBOutlet
-    
+
+    @IBOutlet public var stackView: UIStackView!
     @IBOutlet public var labelHeadline: UILabel!
     @IBOutlet public var iconImageView: UIImageView!
     
@@ -23,6 +24,8 @@ public class ActionTableViewCell: UITableViewCell {
     
     public override func awakeFromNib() {
         super.awakeFromNib()
+        contentView.layoutMargins = .init(top: 15, left: 0, bottom: 15, right: 0)
+        stackView.spacing = 5
         labelHeadline.font = UIFont.ibmPlexSansSemiBold(with: 14)
     }
 }

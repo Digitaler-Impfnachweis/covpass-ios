@@ -8,8 +8,9 @@
 import UIKit
 
 @IBDesignable
-public class ParagraphIconView: MarginableXibView {
+public class ParagraphIconView: XibView {
     @IBOutlet public var stackView: UIStackView!
+    @IBOutlet public var textStackView: UIStackView!
     @IBOutlet public var icon: UIImageView!
     @IBOutlet public var title: UILabel!
     @IBOutlet public var body: LinkTextView!
@@ -28,7 +29,7 @@ public class ParagraphIconView: MarginableXibView {
     public var spacing: CGFloat? {
         didSet {
             guard let spacing = spacing else { return }
-            stackView.spacing = spacing
+            textStackView.spacing = spacing
         }
     }
 
@@ -57,16 +58,6 @@ public class ParagraphIconView: MarginableXibView {
         }
     }
 
-    public override var margins: [Margin] {
-        return [
-            RelatedViewMargin(constant: 24, relatedViewType: PrimaryButtonContainer.self),
-            RelatedViewMargin(constant: 24, relatedViewType: PrimaryButtonContainer.self, type: .top),
-            RelatedViewMargin(constant: 24, relatedViewType: ParagraphView.self),
-            RelatedViewMargin(constant: 12, relatedViewType: Headline.self),
-            RelatedViewMargin(constant: 12, relatedViewType: Spacer.self),
-        ]
-    }
-
     required init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
@@ -92,6 +83,8 @@ public class ParagraphIconView: MarginableXibView {
     }
 
     internal func setupView() {
+        layoutMargins = .init(top: 0, left: 24, bottom: 0, right: 24)
+        stackView.setCustomSpacing(15, after: icon)
         title.font = UIConstants.Font.semiBold
         title.adjustsFontForContentSizeCategory()
         title.textColor = UIConstants.BrandColor.onBackground100

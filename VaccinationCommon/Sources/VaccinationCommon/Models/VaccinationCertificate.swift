@@ -20,13 +20,11 @@ public struct VaccinationCertificate: Codable {
     public var identifier: String?
     public var sex: Sex?
     public var vaccination: [ExtendedVaccination]
-    public var issuer: String
+    public var issuer: String?
     public var id: String
     public var validFrom: Date?
     public var validUntil: Date?
-    public var version: String
-
-    
+    public var version: String?
 
     public var partialVaccination: Bool {
         return vaccination.first?.seriesNumber != vaccination.first?.seriesTotal
@@ -54,7 +52,7 @@ public struct VaccinationCertificate: Codable {
         identifier = try? values.decode(String.self, forKey: .identifier)
         sex = try? values.decode(Sex.self, forKey: .sex)
         vaccination = try values.decode([ExtendedVaccination].self, forKey: .vaccination)
-        issuer = try values.decode(String.self, forKey: .issuer)
+        issuer = try? values.decode(String.self, forKey: .issuer)
         id = try values.decode(String.self, forKey: .id)
         if let validFromDateString = try? values.decode(String.self, forKey: .validFrom) {
             validFrom = DateUtils.vaccinationDateFormatter.date(from: validFromDateString)
@@ -62,7 +60,7 @@ public struct VaccinationCertificate: Codable {
         if let validUntilDateString = try? values.decode(String.self, forKey: .validUntil) {
             validUntil = DateUtils.vaccinationDateFormatter.date(from: validUntilDateString)
         }
-        version = try values.decode(String.self, forKey: .version)
+        version = try? values.decode(String.self, forKey: .version)
     }
 
     public func encode(to encoder: Encoder) throws {

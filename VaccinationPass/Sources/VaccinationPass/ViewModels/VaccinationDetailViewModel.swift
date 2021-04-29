@@ -10,8 +10,9 @@ import VaccinationUI
 import VaccinationCommon
 import PromiseKit
 
-public struct VaccinationDetailViewModel {
+public class VaccinationDetailViewModel {
 
+    private let parser = QRCoder()
     private var service = VaccinationCertificateService()
 
     private var certificates: [ExtendedVaccinationCertificate]
@@ -74,20 +75,54 @@ public struct VaccinationDetailViewModel {
             })
             return Promise.value(certList)
         }).then({ list in
-            service.save(list)
+            self.service.save(list)
         })
     }
 
     public func updateFavorite() -> Promise<Void> {
         return service.fetch().map({ cert in
             var certList = cert
-            guard let id = certificates.first?.vaccinationCertificate.id else {
+            guard let id = self.certificates.first?.vaccinationCertificate.id else {
                 return certList
             }
             certList.favoriteCertificateId = certList.favoriteCertificateId == id ? nil : id
             return certList
         }).then({ cert in
-            return service.save(cert)
+            return self.service.save(cert)
         })
+    }
+
+    public func process(payload: String) -> Promise<Void> {
+        return Promise<ExtendedVaccinationCertificate>() { seal in
+            // TODO refactor parser
+            guard let decodedPayload: VaccinationCertificate = parser.parse(payload, completion: { error in
+                seal.reject(error)
+            }) else {
+                seal.reject(ApplicationError.unknownError)
+                return
+            }
+            seal.fulfill(ExtendedVaccinationCertificate(vaccinationCertificate: decodedPayload, vaccinationQRCodeData: payload, validationQRCodeData: nil))
+        }.then({ extendedVaccinationCertificate in
+            return self.service.fetch().then({ list -> Promise<Void> in
+                var certList = list
+                if certList.certificates.contains(where: { $0.vaccinationQRCodeData == payload }) {
+                    throw QRCodeError.qrCodeExists
+                }
+                certList.certificates.append(extendedVaccinationCertificate)
+                return self.service.save(certList)
+            }).then(self.service.fetch).done({ list in
+                self.certificates = self.findCertificatePair(extendedVaccinationCertificate, list.certificates)
+            })
+        })
+    }
+
+    private func findCertificatePair(_ certificate: ExtendedVaccinationCertificate, _ certificates: [ExtendedVaccinationCertificate]) -> [ExtendedVaccinationCertificate] {
+        var list = [certificate]
+        for cert in certificates where certificate.vaccinationCertificate == cert.vaccinationCertificate {
+            if !list.contains(cert) {
+                list.append(cert)
+            }
+        }
+        return list
     }
 }
