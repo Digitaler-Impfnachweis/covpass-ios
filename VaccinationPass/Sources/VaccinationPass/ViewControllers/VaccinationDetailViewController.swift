@@ -83,7 +83,7 @@ public class VaccinationDetailViewController: UIViewController {
         birtdateView.contentView?.layoutMargins = .init(top: 12, left: 24, bottom: 12, right: 24)
 
         deleteButton.title = "vaccination_detail_delete".localized
-        deleteButton.buttonImage = UIImage(named: UIConstants.IconName.DeleteImage, in: UIConstants.bundle, compatibleWith: nil)
+        deleteButton.image = UIImage(named: UIConstants.IconName.DeleteImage, in: UIConstants.bundle, compatibleWith: nil)
         deleteButton.tintColor = UIConstants.BrandColor.brandAccent
         deleteButton.action = { [weak self] in
             let alertTitle = String(format: "vaccination_delete_title".localized, self?.viewModel.name ?? "")
