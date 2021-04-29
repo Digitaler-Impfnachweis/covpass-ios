@@ -52,40 +52,54 @@ public class MainButton: XibView {
     public override func initView() {
         super.initView()
 
+        contentMode = .center
+        backgroundColor = .clear
+        contentView?.backgroundColor = .clear
         contentView?.layoutMargins = .zero
 
-        // Shadow
+        setupShadow()
+        setupInnerButton()
+        setupActivityIndicatorView()
+        setupConstraints()
+        setupObservers()
+        updateAppearence()
+    }
+
+    deinit {
+        observerTokens.forEach { $0?.invalidate() }
+    }
+
+    private func setupShadow() {
         layer.shadowRadius = UIConstants.Size.ButtonShadowRadius
         layer.shadowOpacity = 0.6
         layer.masksToBounds = false
         layer.borderWidth = 2
         layer.shadowOffset = .init(width: 0, height: 0.3)
+    }
 
+    private func setupInnerButton() {
         innerButton.titleLabel?.numberOfLines = 0
         innerButton.titleLabel?.adjustsFontForContentSizeCategory = true
         innerButton.accessibilityIdentifier = AccessibilityIdentifier.TimeLine.serviceSelectionButton
-        contentMode = .center
+        let maxButtonWidth = UIScreen.main.bounds.width - 2 * UIConstants.Size.PrimaryButtonMargin
+        innerButton.widthAnchor.constraint(lessThanOrEqualToConstant: maxButtonWidth).isActive = true
+    }
 
-        // Background
-        backgroundColor = .clear
-        contentView?.backgroundColor = .clear
-
-        // Dot Pulse Animation
+    private func setupActivityIndicatorView() {
         dotPulseActivityView.numberOfDots = UIConstants.Animation.DotPulseAnimationDotsNumber
         dotPulseActivityView.color = UIConstants.BrandColor.backgroundSecondary
         dotPulseActivityView.padding = UIConstants.Size.ButtonDotPulseAnimationPadding
+    }
 
-        updateAppearence()
-
-        let maxButtonWidth = UIScreen.main.bounds.width - 2 * UIConstants.Size.PrimaryButtonMargin
-        innerButton.widthAnchor.constraint(lessThanOrEqualToConstant: maxButtonWidth).isActive = true
-
+    func setupConstraints() {
         // Constraints for circle button
         buttonHeightConstraint = heightAnchor.constraint(equalToConstant: UIConstants.Size.ButtonAnimatingSize)
         buttonWidthConstraint = widthAnchor.constraint(equalToConstant: UIConstants.Size.ButtonAnimatingSize)
+    }
 
+    func setupObservers() {
+        // Observe state changes and update appearance
         let keys = [\UIButton.isHighlighted, \UIButton.isSelected, \UIButton.isEnabled]
-
         keys.forEach {
             observerTokens.append(
                 innerButton.observe($0) { [weak self] (_, _) in
@@ -93,10 +107,6 @@ public class MainButton: XibView {
                 }
             )
         }
-    }
-
-    deinit {
-        observerTokens.forEach { $0?.invalidate() }
     }
 
     // MARK: - Methods
