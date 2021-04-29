@@ -69,12 +69,8 @@ public class StartOnboardingViewController: UIViewController {
     }
     
     private func configureSecureContentView() {
-        secureContentView.title.isHidden = false
-        secureContentView.title.font = inputViewModel.secureHeadlineFont
-        secureContentView.title.text = inputViewModel.secureTitle
-        secureContentView.spacing = 0
-        secureContentView.bodyText = inputViewModel.secureText
-        secureContentView.bodyFont = inputViewModel.secureTextFont
+        secureContentView.titleAttributedString = inputViewModel.secureTitle.toAttributedString(.h5)
+        secureContentView.bodyAttributedString = inputViewModel.secureText.toAttributedString(.bodySmall)
         secureContentView.contentView?.backgroundColor = inputViewModel.backgroundColor
     }
 }

@@ -29,6 +29,9 @@ public enum TextStyle {
     /// size: 16 type: regular color: neutralBlack
     case body
 
+    /// size: 14 type: regular color: neutralBlack
+    case bodySmall
+
     /// size: 18 type: semi-bold color: neutralWhite
     case mainButton
 
@@ -73,6 +76,12 @@ public enum TextStyle {
         case .body:
             return string
                 .font(named: UIFont.sansRegular, size: 16.0, lineHeight: 24.0, textStyle: .body)
+                .letterSpacing(0.12)
+                .colored(.neutralBlack)
+
+        case .bodySmall:
+            return string
+                .font(named: UIFont.sansRegular, size: 14.0, lineHeight: 20.0, textStyle: .caption1)
                 .letterSpacing(0.12)
                 .colored(.neutralBlack)
 

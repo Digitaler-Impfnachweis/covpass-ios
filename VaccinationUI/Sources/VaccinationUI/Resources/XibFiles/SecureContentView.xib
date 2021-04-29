@@ -9,10 +9,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SecureContentView" customModule="VaccinationUI">
             <connections>
-                <outlet property="body" destination="onV-da-TSV" id="UJo-eu-bqf"/>
+                <outlet property="bodyLabel" destination="6yv-3h-QWO" id="uES-mh-oHN"/>
                 <outlet property="imageView" destination="TLf-Pp-gLj" id="hGe-dZ-z6D"/>
-                <outlet property="stackView" destination="oUb-Cv-MzU" id="Dlo-D8-gko"/>
-                <outlet property="title" destination="Shp-hj-0SD" id="mFH-lW-Lef"/>
+                <outlet property="stackView" destination="PjT-QB-KQG" id="Bqd-RS-cTh"/>
+                <outlet property="textStackView" destination="oUb-Cv-MzU" id="Dhh-sI-qyn"/>
+                <outlet property="titleLabel" destination="Shp-hj-0SD" id="7h2-sc-7Ic"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -30,20 +31,20 @@
                             </constraints>
                         </imageView>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="oUb-Cv-MzU">
-                            <rect key="frame" x="35" y="17" width="300" height="43"/>
+                            <rect key="frame" x="35" y="33.5" width="300" height="10"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Shp-hj-0SD">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Shp-hj-0SD" userLabel="Title">
                                     <rect key="frame" x="0.0" y="0.0" width="300" height="0.0"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="onV-da-TSV" customClass="LinkTextView" customModule="VaccinationUI">
-                                    <rect key="frame" x="0.0" y="10" width="300" height="33"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                </textView>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6yv-3h-QWO" userLabel="Body">
+                                    <rect key="frame" x="0.0" y="10" width="300" height="0.0"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </stackView>
