@@ -11,10 +11,13 @@ import UIKit
 /// A custom button with support for rounded corners, shadow and animation
 public class SecondaryButtonContainer: PrimaryButtonContainer {
     
-    // MARK: - IBOutlets
-    
-    @IBOutlet public var innerImageView: UIImageView!
-    
+    // MARK: - Public Variables
+
+    public var buttonImage: UIImage? {
+        didSet {
+            innerButton.setImage(buttonImage, for: .normal)
+        }
+    }
     // MARK: - Lifecycle
     
     public override func initView() {
