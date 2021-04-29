@@ -8,32 +8,50 @@
 import Foundation
 import UIKit
 
-@IBDesignable
 public class QrContinerView: XibView {
-    // MARK: - IBInspectable
-    
-    @IBInspectable public var cornerRadius: CGFloat = 0 {
-        didSet {
-            layer.cornerRadius = cornerRadius
-            layer.masksToBounds = cornerRadius > 0
-        }
-    }
-    @IBInspectable public var cardBackgroundColor: UIColor = UIColor.white {
-        didSet { backgroundColor = cardBackgroundColor }
-    }
-    
     // MARK: - IBOutlet
 
     @IBOutlet public var stackView: UIStackView!
-    @IBOutlet public var qrImageView: UIImageView!
+    @IBOutlet public var imageView: UIImageView!
     @IBOutlet public var titleLabel: UILabel!
     @IBOutlet public var subtitleLabel: UILabel!
+
+    // MARK: - Properties
+
+    public var image: UIImage? {
+        didSet {
+            imageView.image = image
+        }
+    }
+
+    public var title: String? {
+        didSet {
+            updateViews()
+        }
+    }
+
+    public var subtitle: String? {
+        didSet {
+            updateViews()
+        }
+    }
 
     // MARK: - Lifecycle
 
     public override func initView() {
         super.initView()
-        layoutMargins = .init(top: 10, left: 10, bottom: 20, right: 10)
-        stackView.setCustomSpacing(20, after: qrImageView)
+        contentView?.backgroundColor = .neutralWhite
+        contentView?.layoutMargins = .init(top: .space_10, left: .space_10, bottom: .space_10, right: .space_10)
+        contentView?.layer.cornerRadius = 30
+        contentView?.layer.masksToBounds = true
+        stackView.setCustomSpacing(.space_20, after: imageView)
+    }
+
+    private func updateViews() {
+        titleLabel.attributedText = title?.toAttributedString(.h4)
+        titleLabel.isHidden = titleLabel.text.isNilOrEmpty
+
+        subtitleLabel.attributedText = title?.toAttributedString(.body)
+        subtitleLabel.isHidden = subtitleLabel.text.isNilOrEmpty
     }
 }

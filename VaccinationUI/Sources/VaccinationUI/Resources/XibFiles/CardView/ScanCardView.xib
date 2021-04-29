@@ -52,12 +52,12 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EKc-Hh-BeX">
-                            <rect key="frame" x="24" y="55.5" width="366" height="36.5"/>
+                            <rect key="frame" x="24" y="55.5" width="366" height="33.5"/>
                             <attributedString key="attributedText">
                                 <fragment content="Scannen Sie jetzt das Prüfzertifikat. Sie sehen sofort, ob die Person geimpft ist.">
                                     <attributes>
                                         <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                        <font key="NSFont" size="14" name="IBMPlexSans"/>
+                                        <font key="NSFont" metaFont="system" size="14"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                     </attributes>
                                 </fragment>

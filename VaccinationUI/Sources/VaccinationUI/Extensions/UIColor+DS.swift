@@ -28,6 +28,9 @@ public extension UIColor {
     /// bg/neutral/black #000000
     static let neutralBlack = UIColor("NeutralBlack")
 
+    /// bg/neutral/600 #E8E8E8
+    static let neutral600 = UIColor("Neutral600")
+
     /// bg/neutral/white #FFFFFF
     static let neutralWhite = UIColor("NeutralWhite")
 

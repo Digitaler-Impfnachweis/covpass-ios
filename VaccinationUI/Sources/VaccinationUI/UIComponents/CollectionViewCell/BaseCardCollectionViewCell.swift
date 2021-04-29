@@ -8,37 +8,43 @@
 import Foundation
 import UIKit
 
-@IBDesignable
 public class BaseCardCollectionViewCell: UICollectionViewCell {
-    
-    @IBInspectable public var cornerRadius: CGFloat = 0 {
+    public var cornerRadius: CGFloat = 0 {
         didSet {
             layer.cornerRadius = cornerRadius
             layer.masksToBounds = cornerRadius > 0
         }
     }
-    @IBInspectable public var borderWidth: CGFloat = 0 {
+
+    public var borderWidth: CGFloat = 0 {
         didSet { layer.borderWidth = borderWidth }
     }
-    @IBInspectable public var borderColor: UIColor? {
+
+    public var borderColor: UIColor? {
         didSet { layer.borderColor = borderColor?.cgColor }
     }
-    @IBInspectable public var shadowColor: UIColor = UIConstants.BrandColor.primaryButtonShadow {
+
+    public var shadowColor: UIColor = UIConstants.BrandColor.primaryButtonShadow {
         didSet { layer.shadowColor = shadowColor.cgColor }
     }
-    @IBInspectable public var shadowOffset: CGSize = CGSize(width: 0, height: 3) {
+
+    public var shadowOffset: CGSize = CGSize(width: 0, height: 3) {
         didSet { layer.shadowOffset = shadowOffset }
     }
-    @IBInspectable public var shadowOpacity: Float = 1.0 {
+
+    public var shadowOpacity: Float = 1.0 {
         didSet { layer.shadowOpacity = shadowOpacity }
     }
-    @IBInspectable public var shadowRadius: CGFloat = 3.0 {
+
+    public var shadowRadius: CGFloat = 3.0 {
         didSet { layer.shadowRadius = shadowRadius }
     }
-    @IBInspectable public var cardBackgroundColor: UIColor = UIColor.white {
+
+    public var cardBackgroundColor: UIColor = UIColor.white {
         didSet { backgroundColor = cardBackgroundColor }
     }
-    @IBInspectable public var cardTintColor: UIColor = UIConstants.BrandColor.brandAccent {
+
+    public var cardTintColor: UIColor = UIConstants.BrandColor.brandAccent {
         didSet { tintColor = cardTintColor }
     }
 

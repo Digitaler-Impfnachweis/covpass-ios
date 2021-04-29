@@ -21,10 +21,14 @@ public class NoCertificateCollectionViewCell: BaseCardCollectionViewCell {
     
     public override func awakeFromNib() {
         super.awakeFromNib()
-        contentView.layoutMargins = .init(top: 0, left: 24, bottom: 0, right: 24)
-        stackView.spacing = 0
-        stackView.setCustomSpacing(30, after: iconImageView)
-        stackView.setCustomSpacing(15, after: headlineLabel)
+        contentView.layoutMargins = .init(top: .zero, left: .space_24, bottom: .zero, right: .space_24)
+        shadowColor = .neutralBlack
+        cardTintColor = .neutralBlack
+        cardBackgroundColor = .neutral600
+        cornerRadius = 15
+        stackView.spacing = .zero
+        stackView.setCustomSpacing(.space_30, after: iconImageView)
+        stackView.setCustomSpacing(.space_16, after: headlineLabel)
     }
 }
 
