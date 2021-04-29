@@ -10,6 +10,11 @@ import VaccinationUI
 import VaccinationCommon
 
 class MockQRCoder: QRCoderProtocol {
+    func parse(_ payload: String, completion: ((Error) -> Void)?) -> ValidationCertificate? {
+        let jsonData = Data.json()
+        return try? JSONDecoder().decode(ValidationCertificate.self, from: jsonData)
+    }
+    
     func parse(_ payload: String, completion: ((Error) -> Void)?) -> VaccinationCertificate? {
         let jsonData = Data.json()
         return try? JSONDecoder().decode(VaccinationCertificate.self, from: jsonData)

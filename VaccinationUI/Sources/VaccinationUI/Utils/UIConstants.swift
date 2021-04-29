@@ -36,6 +36,7 @@ open class UIConstants {
         public static let StarEmpty = "star_48px"
         public static let CompletnessImage = "ega_prevention_label"
         public static let HalfShield = "shield_lefthalf_fill"
+        public static let DeleteImage = "ega_delete"
     }
     
     open class BrandColor {
