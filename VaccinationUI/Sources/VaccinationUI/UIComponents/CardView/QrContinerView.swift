@@ -26,9 +26,7 @@ public class QrContinerView: XibView {
 
     @IBOutlet public var stackView: UIStackView!
     @IBOutlet public var qrImageView: UIImageView!
-    @IBOutlet public var titleLabel: UILabel!
-    @IBOutlet public var subtitleLabel: UILabel!
-
+    
     // MARK: - Lifecycle
 
     public override func initView() {

@@ -12,6 +12,7 @@ public protocol QRCoderProtocol {
     /// - parameter payload: the String read from the QR Code
     /// - parameter completion: the fallback in case an error occurs
     /// - returns a `VaccinationCertificate`
-    func parse(_ payload: String, completion: ((Error) -> Void)?) -> VaccinationCertificate?
-    func parse(_ payload: String, completion: ((Error) -> Void)?) -> ValidationCertificate?
+    func parseVaccinationCertificate(_ payload: String, completion: ((Error) -> Void)?) -> VaccinationCertificate?
+    
+    func parseValidationCertificate(_ payload: String, completion: ((Error) -> Void)?) -> ValidationCertificate?
 }

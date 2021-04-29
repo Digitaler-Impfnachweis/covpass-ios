@@ -7,27 +7,47 @@
 
 import Foundation
 import UIKit
+import VaccinationCommon
 
 public class QRCertificateConfiguration: NoCertifiateConfiguration {
     // MARK: - Public Variables
     
     public var stateImage: UIImage?
     public var stateTitle: String?
-    public var stateAction: (() -> Void)?
+    public var detailsAction: ((_ configuration: QRCertificateConfiguration) -> Void)?
     public var headerImage: UIImage?
-    public var headerAction: (() -> Void)?
-    public var qrViewConfiguration: QrViewConfiguration?
-    
+    public var favoriteAction: ((_ certificate: VaccinationCertificate) -> Void)?
+    public var qrValue: String?
+    public var tintColor: UIColor
+    public var certificate: VaccinationCertificate
+
     // MARK: - Init
     
-    public init(title: String?, subtitle: String?, image: UIImage?, stateImage: UIImage?, stateTitle: String?, stateAction: (() -> Void)?, headerImage: UIImage?, headerAction: (() -> Void)?, backgroundColor: UIColor?, qrViewConfiguration: QrViewConfiguration?) {
+    public init(certificate: VaccinationCertificate,
+                title: String? = "Covid-19 Nachweis".localized,
+                image: UIImage? = nil,
+                stateImage: UIImage? = nil,
+                stateTitle: String = "Impfungen Anzeigen".localized,
+                detailsAction: ((_ configuration: QRCertificateConfiguration) -> Void)? = nil,
+                headerImage: UIImage? = nil,
+                favoriteAction: ((_ certificate: VaccinationCertificate) -> Void)? = nil,
+                backgroundColor: UIColor? = nil,
+                tintColor: UIColor = UIColor.black) {
+        self.certificate = certificate
         self.stateImage = stateImage
         self.stateTitle = stateTitle
-        self.stateAction = stateAction
+        self.detailsAction = detailsAction
         self.headerImage = headerImage
-        self.headerAction = headerAction
-        self.qrViewConfiguration = qrViewConfiguration
-        super.init(title: title, subtitle: subtitle, image: image, identifier: "\(QrCertificateCollectionViewCell.self)")
+        self.favoriteAction = favoriteAction
+        self.qrValue = certificate.name // we should provide right data here
+        self.tintColor = tintColor
+        super.init(title: title, subtitle: certificate.name, image: image, identifier: "\(QrCertificateCollectionViewCell.self)")
         self.backgroundColor = backgroundColor
+    }
+    
+    // MARK: - Equatable
+    
+    public static func == (lhs: QRCertificateConfiguration, rhs: QRCertificateConfiguration) -> Bool {
+        return lhs.certificate.name == rhs.certificate.name && lhs.certificate.birthDate == rhs.certificate.birthDate
     }
 }

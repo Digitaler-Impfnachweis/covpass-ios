@@ -23,4 +23,10 @@ public class NoCertifiateConfiguration: BaseCertifiateConfiguration {
         self.image = image
         super.init(backgroundColor: UIConstants.BrandColor.onBackground20, identifer: identifier)
     }
+    
+    // MARK: - Equatable
+    
+    public static func == (lhs: NoCertifiateConfiguration, rhs: NoCertifiateConfiguration) -> Bool {
+        lhs.title == rhs.title && lhs.subtitle == rhs.subtitle
+    }
 }

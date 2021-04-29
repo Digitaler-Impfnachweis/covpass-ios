@@ -30,7 +30,7 @@ public class DefaultCertificateViewModel<T: QRCoderProtocol>: CertificateViewMod
     
     // MARK: - CertificateViewModel
     
-    public weak var delegate: ViewModelDelegate?
+    public weak var delegate: CertificateViewModelDelegate?
     public var addButtonImage = UIImage(named: UIConstants.IconName.PlusIcon, in: UIConstants.bundle, compatibleWith: nil)
 
     public var certificates = [BaseCertifiateConfiguration]()
@@ -43,7 +43,7 @@ public class DefaultCertificateViewModel<T: QRCoderProtocol>: CertificateViewMod
     public func process(payload: String) -> Promise<ExtendedVaccinationCertificate> {
         return Promise<ExtendedVaccinationCertificate>() { seal in
             // TODO refactor parser
-            guard let decodedPayload = parser.parse(payload, completion: { error in
+            guard let decodedPayload = parser.parseVaccinationCertificate(payload, completion: { error in
                 seal.reject(error)
             }) else {
                 seal.reject(ApplicationError.unknownError)
@@ -166,36 +166,29 @@ public class DefaultCertificateViewModel<T: QRCoderProtocol>: CertificateViewMod
         let image = UIImage(named: UIConstants.IconName.StarEmpty, in: UIConstants.bundle, compatibleWith: nil)
         let stateImage = UIImage(named: UIConstants.IconName.CompletnessImage, in: UIConstants.bundle, compatibleWith: nil)
         let headerImage = UIImage(named: UIConstants.IconName.StarEmpty, in: UIConstants.bundle, compatibleWith: nil)
-        let qrViewConfiguration = QrViewConfiguration(tintColor: .white, qrValue: NSUUID().uuidString, qrTitle: nil, qrSubtitle: nil)
         return QRCertificateConfiguration(
-            title: "Covid-19 Nachweis",
-            subtitle: certificate.name,
+            certificate: certificate,
             image: image,
             stateImage: stateImage,
-            stateTitle: "Impfungen Anzeigen",
-            stateAction: nil,
+            detailsAction: detailsAction,
             headerImage: headerImage,
-            headerAction: nil,
+            favoriteAction: favoriteAction,
             backgroundColor: UIConstants.BrandColor.onBackground70,
-            qrViewConfiguration: qrViewConfiguration)
+            tintColor: UIColor.white)
     }
 
     private func halfCertificateConfiguration(for certificate: VaccinationCertificate) -> QRCertificateConfiguration {
         let image = UIImage(named: UIConstants.IconName.StarEmpty, in: UIConstants.bundle, compatibleWith: nil)
         let stateImage = UIImage(named: UIConstants.IconName.HalfShield, in: UIConstants.bundle, compatibleWith: nil)
         let headerImage = UIImage(named: UIConstants.IconName.StarEmpty, in: UIConstants.bundle, compatibleWith: nil)
-//        let qrViewConfiguration = QrViewConfiguration(tintColor: .black, qrValue: NSUUID().uuidString, qrTitle: "Vorlaüfiger Impfnachweis", qrSubtitle: nil)
         return QRCertificateConfiguration(
-            title: "Covid-19 Nachweis",
-            subtitle: certificate.name,
+            certificate: certificate,
             image: image,
             stateImage: stateImage,
-            stateTitle: "Impfungen Anzeigen",
-            stateAction: nil,
+            detailsAction: detailsAction,
             headerImage: headerImage,
-            headerAction: nil,
-            backgroundColor: UIConstants.BrandColor.onBackground50,
-            qrViewConfiguration: nil)
+            favoriteAction: favoriteAction,
+            backgroundColor: UIConstants.BrandColor.onBackground50)
     }
     
     private func noCertificateConfiguration() -> NoCertifiateConfiguration {
@@ -204,5 +197,16 @@ public class DefaultCertificateViewModel<T: QRCoderProtocol>: CertificateViewMod
             title:"vaccination_no_certificate_card_title".localized,
             subtitle: "vaccination_no_certificate_card_message".localized,
             image: image)
+    }
+    
+    
+    private func favoriteAction(certificate: VaccinationCertificate) {
+        // Mark as favorite
+        
+    }
+    
+    private func detailsAction(configuration: QRCertificateConfiguration) {
+        guard let index = certificates.firstIndex(of: configuration) else { return }
+        delegate?.detailsButtonTapped(for: IndexPath(item: index, section: 0))
     }
 }

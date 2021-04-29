@@ -19,7 +19,7 @@ public class QRCoder: QRCoderProtocol {
 
     public init() {}
 
-    public func parse(_ payload: String, completion: ((Error) -> Void)?) -> VaccinationCertificate? {
+    public func parseVaccinationCertificate(_ payload: String, completion: ((Error) -> Void)?) -> VaccinationCertificate? {
         do {
             let base45Decoded = try base45Encoder.decode(payload)
             guard let decompressedPayload = Compression.decompress(Data(base45Decoded)) else {
@@ -37,7 +37,7 @@ public class QRCoder: QRCoderProtocol {
         }
     }
 
-    public func parse(_ payload: String, completion: ((Error) -> Void)?) -> ValidationCertificate? {
+    public func parseValidationCertificate(_ payload: String, completion: ((Error) -> Void)?) -> ValidationCertificate? {
         do {
             let base45Decoded = try base45Encoder.decode(payload)
             guard let decompressedPayload = Compression.decompress(Data(base45Decoded)) else {
