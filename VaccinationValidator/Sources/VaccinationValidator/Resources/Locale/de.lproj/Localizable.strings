@@ -2,3 +2,23 @@
  Localizable.strings
  VaccinationUI
  */
+
+/********** Start Screen **********/
+
+"validation_onboarding_welcome" = "Willkommen in der Prüf-App für Corona-Impfungen";
+
+"validation_onboarding_body" = "Finden Sie in wenigen Sekunden heraus, ob eine Person vollständig geimpft ist.";
+
+"validation_onboarding_secure_title" = "Sicherer Datenaustausch";
+
+"validation_onboarding_secure_body" = "Gemäß DSGVO werden keine empfindlichen Daten gespeichert. Sie sehen nur die nötigsten Informationen";
+
+"validation_onboarding_start" = "Los geht's";
+
+"validation_step1_title" = "Erster Schritt: Scannen Sie das Prüfzertifikat mit der App";
+
+"validation_step1_body" = "Halten Sie das Handy über den QR-Code und scannen Sie diesen mit der App. Die Daten werden datenschutzkonform übermittelt und können nicht gespeichert werden. Sie sehen sofort alle nötigen Informationen in der App. Und das auch, wenn Sie mal kein Internet haben.";
+
+"validation_step2_title" = "Zweiter Schritt: Überprüfen Sie die Indentität mit einem amtlichen Ausweis";
+
+"validation_step2_body" = "Sie sehen nur den Impfstatus sowie Namen und Geburtsdatum der geimpften Person. Zur sicheren Identifikation gleichen Sie bitte die Daten mit einem Personalausweis oder Reisepass ab.";

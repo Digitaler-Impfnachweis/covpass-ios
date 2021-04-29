@@ -48,6 +48,7 @@ open class XibView: UIView {
         super.init(frame: frame)
 
         xibSetup()
+        initView()
     }
 
     public required init?(coder aDecoder: NSCoder) {
