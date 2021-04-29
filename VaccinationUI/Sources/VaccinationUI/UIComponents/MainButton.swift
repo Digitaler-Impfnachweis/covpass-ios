@@ -10,9 +10,12 @@ import UIKit
 @IBDesignable
 /// A custom button with support for rounded corners, shadow and animation
 public class MainButton: XibView {
+    // MARK: - IBOutlet
 
     @IBOutlet public var innerButton: UIButton!
     @IBOutlet var dotPulseActivityView: DotPulseActivityIndicator!
+
+    // MARK: - Properties
 
     public var style: MainButtonStyle = .primary {
         didSet {
