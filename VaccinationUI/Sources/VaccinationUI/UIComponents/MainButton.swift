@@ -199,18 +199,18 @@ public class MainButton: XibView {
     }
 
     private func updateInsets() {
-        switch (icon == nil, title.isNilOrEmpty) {
+        switch (icon != nil, title.isNilOrEmpty == false) {
         case (true, false):
-            // text only
-            innerButton.contentEdgeInsets = UIEdgeInsets(top: .space_18, left: .space_40, bottom: .space_18, right: .space_40)
-            innerButton.titleEdgeInsets = .zero
-
-        case (false, true):
             // icon only
             innerButton.contentEdgeInsets = UIEdgeInsets(top: .space_10, left: .space_10, bottom: .space_10, right: .space_10)
             innerButton.titleEdgeInsets = .zero
 
-        case (false, false):
+        case (false, true):
+            // text only
+            innerButton.contentEdgeInsets = UIEdgeInsets(top: .space_18, left: .space_40, bottom: .space_18, right: .space_40)
+            innerButton.titleEdgeInsets = .zero
+
+        case (true, true):
             // icon and text
             let distance: CGFloat = .space_8
             innerButton.contentEdgeInsets = UIEdgeInsets(top: .space_18, left: .space_40, bottom: .space_18, right: .space_40 + distance)
