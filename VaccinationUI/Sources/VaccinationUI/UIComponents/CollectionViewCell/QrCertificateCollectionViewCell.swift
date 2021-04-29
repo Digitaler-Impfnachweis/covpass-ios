@@ -45,9 +45,6 @@ extension QrCertificateCollectionViewCell {
         headerView.subtitleLabel.textColor = configuration.tintColor
         headerView.tintColor = configuration.tintColor
         stackView.setCustomSpacing(30, after: headerView)
-        actionView.action = {
-            configuration.detailsAction?(configuration)
-        }
         actionView.stateImageView.image = configuration.stateImage
         actionView.titleLabel.text = configuration.stateTitle
         actionView.titleLabel.textColor = configuration.tintColor

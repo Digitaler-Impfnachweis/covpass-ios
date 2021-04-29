@@ -14,7 +14,6 @@ public class QRCertificateConfiguration: NoCertifiateConfiguration {
     
     public var stateImage: UIImage?
     public var stateTitle: String?
-    public var detailsAction: ((_ configuration: QRCertificateConfiguration) -> Void)?
     public var headerImage: UIImage?
     public var favoriteAction: ((_ certificate: VaccinationCertificate) -> Void)?
     public var qrValue: String?
@@ -28,7 +27,6 @@ public class QRCertificateConfiguration: NoCertifiateConfiguration {
                 image: UIImage? = nil,
                 stateImage: UIImage? = nil,
                 stateTitle: String = "Impfungen Anzeigen".localized,
-                detailsAction: ((_ configuration: QRCertificateConfiguration) -> Void)? = nil,
                 headerImage: UIImage? = nil,
                 favoriteAction: ((_ certificate: VaccinationCertificate) -> Void)? = nil,
                 backgroundColor: UIColor? = nil,
@@ -36,7 +34,6 @@ public class QRCertificateConfiguration: NoCertifiateConfiguration {
         self.certificate = certificate
         self.stateImage = stateImage
         self.stateTitle = stateTitle
-        self.detailsAction = detailsAction
         self.headerImage = headerImage
         self.favoriteAction = favoriteAction
         self.qrValue = certificate.name // we should provide right data here

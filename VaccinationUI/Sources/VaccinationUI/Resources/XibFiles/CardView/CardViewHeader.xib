@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -39,21 +39,19 @@
                     <rect key="frame" x="20" y="52" width="378" height="61"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="OLa-uq-atU" userLabel="Header Stack View">
-                            <rect key="frame" x="0.0" y="0.0" width="378" height="24.5"/>
+                            <rect key="frame" x="0.0" y="0.0" width="378" height="44"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Covid - 19" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HCd-OX-ihK">
-                                    <rect key="frame" x="0.0" y="3" width="126" height="18.5"/>
+                                    <rect key="frame" x="0.0" y="13" width="334" height="18.5"/>
                                     <fontDescription key="fontDescription" name="IBMPlexSans" family="IBM Plex Sans" pointSize="14"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <view contentMode="scaleToFill" horizontalHuggingPriority="1" verticalHuggingPriority="1" translatesAutoresizingMaskIntoConstraints="NO" id="W1t-pA-UfO">
-                                    <rect key="frame" x="126" y="0.0" width="222" height="24.5"/>
-                                </view>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZXp-jt-g9G">
-                                    <rect key="frame" x="348" y="1.5" width="30" height="22"/>
+                                    <rect key="frame" x="334" y="0.0" width="44" height="44"/>
                                     <constraints>
-                                        <constraint firstAttribute="width" constant="30" id="fLa-dG-KGd"/>
+                                        <constraint firstAttribute="width" constant="44" id="fLa-dG-KGd"/>
+                                        <constraint firstAttribute="height" constant="44" id="x8L-d8-Luc"/>
                                     </constraints>
                                     <state key="normal" image="star.fill" catalog="system"/>
                                     <connections>
@@ -63,7 +61,7 @@
                             </subviews>
                         </stackView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" text="Max Mustermann" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="szZ-jF-geW">
-                            <rect key="frame" x="0.0" y="24.5" width="378" height="36.5"/>
+                            <rect key="frame" x="0.0" y="44" width="378" height="17"/>
                             <fontDescription key="fontDescription" name="IBMPlexSans-SemiBold" family="IBM Plex Sans" pointSize="28"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>

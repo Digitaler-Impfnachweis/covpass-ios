@@ -30,7 +30,7 @@ public class DefaultCertificateViewModel<T: QRCoderProtocol>: CertificateViewMod
     
     // MARK: - CertificateViewModel
     
-    public weak var delegate: CertificateViewModelDelegate?
+    public weak var delegate: ViewModelDelegate?
     public var addButtonImage = UIImage(named: UIConstants.IconName.PlusIcon, in: UIConstants.bundle, compatibleWith: nil)
 
     public var certificates = [BaseCertifiateConfiguration]()
@@ -43,7 +43,7 @@ public class DefaultCertificateViewModel<T: QRCoderProtocol>: CertificateViewMod
     public func process(payload: String) -> Promise<ExtendedVaccinationCertificate> {
         return Promise<ExtendedVaccinationCertificate>() { seal in
             // TODO refactor parser
-            guard let decodedPayload = parser.parseVaccinationCertificate(payload, completion: { error in
+            guard let decodedPayload: VaccinationCertificate = parser.parse(payload, completion: { error in
                 seal.reject(error)
             }) else {
                 seal.reject(ApplicationError.unknownError)
@@ -124,6 +124,8 @@ public class DefaultCertificateViewModel<T: QRCoderProtocol>: CertificateViewMod
         return list
     }
     
+    // MARK: - Collection View
+    
     public func configure<T: CellConfigutation>(cell: T, at indexPath: IndexPath)  {
         guard certificates.indices.contains(indexPath.row) else { return }
         let configuration = certificates[indexPath.row]
@@ -140,6 +142,8 @@ public class DefaultCertificateViewModel<T: QRCoderProtocol>: CertificateViewMod
         return certificates[indexPath.row].identifier
     }
 
+    // MARK: - Details View Model
+    
     public func detailViewModel(_ indexPath: IndexPath) -> VaccinationDetailViewModel? {
         if matchedCertificates.isEmpty {
             return nil
@@ -156,7 +160,7 @@ public class DefaultCertificateViewModel<T: QRCoderProtocol>: CertificateViewMod
         return VaccinationDetailViewModel(certificates: pair)
     }
     
-    // MARK: - Configurations
+    // MARK: - Card Configurations
 
     private func getCertficateConfiguration(for certificate: VaccinationCertificate) -> QRCertificateConfiguration {
         certificate.partialVaccination ? halfCertificateConfiguration(for: certificate) : fullCertificateConfiguration(for: certificate)
@@ -170,7 +174,6 @@ public class DefaultCertificateViewModel<T: QRCoderProtocol>: CertificateViewMod
             certificate: certificate,
             image: image,
             stateImage: stateImage,
-            detailsAction: detailsAction,
             headerImage: headerImage,
             favoriteAction: favoriteAction,
             backgroundColor: UIConstants.BrandColor.onBackground70,
@@ -185,7 +188,6 @@ public class DefaultCertificateViewModel<T: QRCoderProtocol>: CertificateViewMod
             certificate: certificate,
             image: image,
             stateImage: stateImage,
-            detailsAction: detailsAction,
             headerImage: headerImage,
             favoriteAction: favoriteAction,
             backgroundColor: UIConstants.BrandColor.onBackground50)
@@ -199,14 +201,10 @@ public class DefaultCertificateViewModel<T: QRCoderProtocol>: CertificateViewMod
             image: image)
     }
     
+    // MARK: - Card Actions
     
-    private func favoriteAction(certificate: VaccinationCertificate) {
+    private func favoriteAction(for certificate: VaccinationCertificate) {
         // Mark as favorite
         
-    }
-    
-    private func detailsAction(configuration: QRCertificateConfiguration) {
-        guard let index = certificates.firstIndex(of: configuration) else { return }
-        delegate?.detailsButtonTapped(for: IndexPath(item: index, section: 0))
     }
 }

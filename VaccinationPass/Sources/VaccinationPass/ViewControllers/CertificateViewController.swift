@@ -196,20 +196,8 @@ extension CertificateViewController: StoryboardInstantiating {
 
 // MARK: - UpdateDelegate
 
-extension CertificateViewController: CertificateViewModelDelegate {
+extension CertificateViewController: ViewModelDelegate {
     public func shouldReload() {
         reloadCollectionView()
-    }
-    
-    public func favoriteButtonTapped(for indexPath: IndexPath) {
-        // DO smth 
-    }
-    
-    public func detailsButtonTapped(for indexPath: IndexPath) {
-        guard let vm = viewModel.detailViewModel(indexPath) else { return }
-        let vc = VaccinationDetailViewController.createFromStoryboard()
-        vc.viewModel = vm
-        vc.router = ProofPopupRouter()
-        navigationController?.pushViewController(vc, animated: true)
     }
 }

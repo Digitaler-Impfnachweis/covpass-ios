@@ -95,7 +95,7 @@ public class VaccinationDetailViewModel {
     public func process(payload: String) -> Promise<Void> {
         return Promise<ExtendedVaccinationCertificate>() { seal in
             // TODO refactor parser
-            guard let decodedPayload = parser.parseVaccinationCertificate(payload, completion: { error in
+            guard let decodedPayload: VaccinationCertificate = parser.parse(payload, completion: { error in
                 seal.reject(error)
             }) else {
                 seal.reject(ApplicationError.unknownError)
