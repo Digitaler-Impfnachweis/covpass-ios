@@ -73,9 +73,7 @@ public class ProofPopupViewController: BottomPopupViewController {
     }
 
     private func configureParagraphView() {
-        paragraphView.title.isHidden = true
-        paragraphView.bodyText = inputViewModel.info
-        paragraphView.bodyFont = inputViewModel.paragraphBodyFont
+        paragraphView.bodyAttributedText = inputViewModel.info.toAttributedString(.body)
         paragraphView.layoutMargins.top = 10
     }
     

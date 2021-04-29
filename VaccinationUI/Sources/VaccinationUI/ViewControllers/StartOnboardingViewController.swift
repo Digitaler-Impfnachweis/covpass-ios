@@ -12,7 +12,7 @@ public class StartOnboardingViewController: UIViewController {
     @IBOutlet public var actionButton: PrimaryButtonContainer!
     @IBOutlet public var confirmView: ConfirmView!
     @IBOutlet public var headline: PlainLabel!
-    @IBOutlet public var paragraphView: ParagraphView!
+    @IBOutlet public var subtitle: PlainLabel!
     @IBOutlet public var secureContentView: SecureContentView!
     
     // MARK: - Public Properties
@@ -30,20 +30,14 @@ public class StartOnboardingViewController: UIViewController {
 
     public override func viewDidLoad() {
         super.viewDidLoad()
-        configureStackView()
         configureImageView()
         configureHeadline()
-        configureParagraphView()
+        configureSubtitle()
         configureActionButton()
         configureSecureContentView()
     }
 
     // MARK: - Private
-
-    private func configureStackView() {
-        stackView.setCustomSpacing(40, after: headline)
-        stackView.setCustomSpacing(40, after: confirmView)
-    }
 
     private func configureImageView() {
         confirmView.kind = .custom(
@@ -58,14 +52,12 @@ public class StartOnboardingViewController: UIViewController {
 
     private func configureHeadline() {
         headline.attributedText = inputViewModel.title.toAttributedString(.h2)
-        headline.layoutMargins = .init(top: .space_12, left: .space_24, bottom: .space_16, right: .space_24)
+        headline.layoutMargins = .init(top: .space_12, left: .space_24, bottom: .zero, right: .space_24)
     }
 
-    private func configureParagraphView() {
-        paragraphView.title.isHidden = true
-        paragraphView.bodyText = inputViewModel.info
-        paragraphView.bodyFont = inputViewModel.paragraphBodyFont
-        paragraphView.contentView?.backgroundColor = inputViewModel.backgroundColor
+    private func configureSubtitle() {
+        subtitle.attributedText = inputViewModel.info.toAttributedString(.body)
+        subtitle.layoutMargins = .init(top: .space_24, left: .space_24, bottom: .zero, right: .space_24)
     }
     
     private func configureActionButton() {

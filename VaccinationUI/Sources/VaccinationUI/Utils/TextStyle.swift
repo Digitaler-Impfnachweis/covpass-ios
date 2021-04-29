@@ -39,7 +39,7 @@ public enum TextStyle {
 
         case .h2:
             return string
-                .font(named: UIFont.sansSemiBold, size: 42.0, lineHeight: 48.0, textStyle: .title2)
+                .font(named: UIFont.sansSemiBold, size: 42.0, lineHeight: 55.0, textStyle: .title2)
                 .letterSpacing(0.12)
                 .colored(.neutralBlack)
 
@@ -69,7 +69,7 @@ public enum TextStyle {
 
         case .body:
             return string
-                .font(named: UIFont.sansRegular, size: 16.0, textStyle: .body)
+                .font(named: UIFont.sansRegular, size: 16.0, lineHeight: 24.0, textStyle: .body)
                 .letterSpacing(0.12)
                 .colored(.neutralBlack)
         }

@@ -301,12 +301,12 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="747"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="TTC-yw-sLe">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="531"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="659"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="60" translatesAutoresizingMaskIntoConstraints="NO" id="aqp-ex-1mg" customClass="PlainLabel" customModule="VaccinationUI">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
                                             </view>
-                                            <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="u6z-A1-sKt" customClass="ParagraphView" customModule="VaccinationUI">
+                                            <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="u6z-A1-sKt" customClass="PlainLabel" customModule="VaccinationUI">
                                                 <rect key="frame" x="0.0" y="60" width="414" height="128"/>
                                             </view>
                                             <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="243" translatesAutoresizingMaskIntoConstraints="NO" id="8j1-Sz-NcG" customClass="ConfirmView" customModule="VaccinationUI">
@@ -314,6 +314,9 @@
                                             </view>
                                             <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="100" translatesAutoresizingMaskIntoConstraints="NO" id="zgZ-oc-hQh" customClass="SecureContentView" customModule="VaccinationUI">
                                                 <rect key="frame" x="0.0" y="431" width="414" height="100"/>
+                                            </view>
+                                            <view contentMode="scaleToFill" horizontalHuggingPriority="1" verticalHuggingPriority="1" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="nUy-6P-UqC" userLabel="Flexible Space">
+                                                <rect key="frame" x="0.0" y="531" width="414" height="128"/>
                                             </view>
                                         </subviews>
                                     </stackView>
@@ -360,9 +363,9 @@
                         <outlet property="actionButton" destination="z1w-BA-0EP" id="h6O-vs-Cea"/>
                         <outlet property="confirmView" destination="8j1-Sz-NcG" id="FiH-ht-tea"/>
                         <outlet property="headline" destination="aqp-ex-1mg" id="wIl-vB-PGg"/>
-                        <outlet property="paragraphView" destination="u6z-A1-sKt" id="eXg-dF-9TX"/>
                         <outlet property="secureContentView" destination="zgZ-oc-hQh" id="Dee-gK-oQk"/>
                         <outlet property="stackView" destination="TTC-yw-sLe" id="sY0-aK-AXn"/>
+                        <outlet property="subtitle" destination="u6z-A1-sKt" id="FvQ-Pn-hGb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jUY-bM-F2c" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

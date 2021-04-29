@@ -25,7 +25,7 @@
         <view contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Emf-oB-Bnc">
             <rect key="frame" x="0.0" y="0.0" width="375" height="628"/>
             <subviews>
-                <stackView opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="oUb-Cv-MzU" customClass="ScrollableStackView" customModule="VaccinationUI">
+                <stackView opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="oUb-Cv-MzU">
                     <rect key="frame" x="16" y="52" width="343" height="568"/>
                     <subviews>
                         <view contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="343" placeholderIntrinsicHeight="172" translatesAutoresizingMaskIntoConstraints="NO" id="Vtu-0a-hp0" userLabel="immunizationHeadline" customClass="PlainLabel" customModule="VaccinationUI">

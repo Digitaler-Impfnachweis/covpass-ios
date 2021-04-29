@@ -39,3 +39,9 @@ extension NSMutableAttributedString {
         }
     }
 }
+
+extension Optional where Wrapped == NSAttributedString {
+    var isNilOrEmpty: Bool {
+        self?.string.isEmpty ?? true
+    }
+}

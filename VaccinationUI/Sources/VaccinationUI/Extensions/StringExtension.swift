@@ -33,3 +33,9 @@ extension String {
         return Localizer.localized(self, bundle: UIConstants.bundle)
     }
 }
+
+extension Optional where Wrapped == String {
+    var isNilOrEmpty: Bool {
+        self?.isEmpty ?? true
+    }
+}
