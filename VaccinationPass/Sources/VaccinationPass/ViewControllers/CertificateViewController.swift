@@ -58,10 +58,8 @@ public class CertificateViewController: UIViewController {
     }
     
     private func setupHeaderView() {
-        headerView.actionButton.imageEdgeInsets = viewModel.headlineButtonInsets
-        headerView.headline.text = viewModel.headlineTitle
-        headerView.headlineFont = viewModel.headlineFont
-        headerView.buttonImage = viewModel.headlineButtonImage
+        headerView.attributedTitleText = viewModel.headlineTitle.toAttributedString(.h4)
+        headerView.image = viewModel.headlineButtonImage
     }
     
     private func setupCollecttionView() {

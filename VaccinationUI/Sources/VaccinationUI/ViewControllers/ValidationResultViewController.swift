@@ -52,11 +52,11 @@ public class ValidationResultViewController: BottomPopupViewController {
     }
 
     private func configureHeadline() {
-        headline.headline.text = ""
+        headline.attributedTitleText = "".toAttributedString()
         headline.action = { [weak self] in
             self?.dismiss(animated: true, completion: nil)
         }
-        headline.buttonImage = inputViewModel.closeButtonImage
+        headline.image = inputViewModel.closeButtonImage
     }
 
     private func configureParagraphView() {

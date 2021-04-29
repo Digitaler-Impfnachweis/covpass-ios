@@ -15,7 +15,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="InfoHeaderView" customModule="IBMHealthUI" customModuleProvider="target">
             <connections>
                 <outlet property="actionButton" destination="RSG-an-e0J" id="Q1H-u7-Uqh"/>
-                <outlet property="headline" destination="jYL-ZW-bpk" id="vQO-sL-XIg"/>
+                <outlet property="textLabel" destination="jYL-ZW-bpk" id="f2g-m7-enc"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>

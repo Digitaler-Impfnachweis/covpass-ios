@@ -52,23 +52,19 @@ public class ProofPopupViewController: BottomPopupViewController {
     }
 
     private func configureHeadline() {
-        headline.headline.text = inputViewModel.title
-        headline.headline.textColor = inputViewModel.headlineColor
+        headline.attributedTitleText = inputViewModel.title.toAttributedString(.h4)
         headline.action = { [weak self] in
             self?.dismiss(animated: true, completion: nil)
         }
-        headline.buttonImage = inputViewModel.closeButtonImage
-        headline.headlineFont = inputViewModel.headlineFont
+        headline.image = inputViewModel.closeButtonImage
     }
     
     private func configureActionView() {
-        actionView.headline.text = inputViewModel.actionTitle
-        actionView.headline.textColor = inputViewModel.headlineColor
+        actionView.attributedTitleText = inputViewModel.actionTitle.toAttributedString(.h5)
         actionView.action = { [weak self] in
             self?.dismiss(animated: true, completion: nil)
         }
-        actionView.buttonImage = inputViewModel.chevronRightImage
-        actionView.headlineFont = inputViewModel.headlineFont
+        actionView.image = inputViewModel.chevronRightImage
         actionView.tintColor = inputViewModel.tintColor
     }
 
