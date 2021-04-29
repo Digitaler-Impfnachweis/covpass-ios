@@ -219,6 +219,7 @@ public class MainButton: XibView {
             innerButton.contentEdgeInsets = UIEdgeInsets(top: .space_18, left: .space_40, bottom: .space_18, right: .space_40 + distance)
             innerButton.titleEdgeInsets.right = -distance
             innerButton.titleEdgeInsets.left = distance
+
         default:
             break
         }
