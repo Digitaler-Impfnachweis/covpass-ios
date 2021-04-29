@@ -171,7 +171,7 @@ public class DefaultCertificateViewModel<T: QRCoderProtocol>: CertificateViewMod
         let stateImage = UIImage(named: UIConstants.IconName.CompletnessImage, in: UIConstants.bundle, compatibleWith: nil)
         let headerImage = UIImage(named: UIConstants.IconName.StarEmpty, in: UIConstants.bundle, compatibleWith: nil)
         return QRCertificateConfiguration(
-            qrValue: certificate.validationQRCodeData,
+            qrValue: certificate.validationQRCodeData ?? NSUUID().uuidString,// neeeded due to no qr data
             subtitle: certificate.vaccinationCertificate.name,
             image: image,
             stateImage: stateImage,
