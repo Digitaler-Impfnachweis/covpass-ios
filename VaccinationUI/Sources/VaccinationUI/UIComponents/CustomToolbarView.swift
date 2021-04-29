@@ -50,15 +50,11 @@ public class CustomToolbarView: XibView {
     @IBInspectable var navigationIcon: String = UIConstants.IconName.NavigationArrow
     @IBInspectable var navigationIconColor: UIColor = UIConstants.BrandColor.onBackground70
 
-    public var primaryButton: MainButton! {
-        didSet {
-            primaryButton?.innerButton.titleLabel?.numberOfLines = 2
-        }
-    }
+    public var primaryButton: MainButton!
 
     var state: CustomToolbarState {
         get {
-            return .cancel
+            .cancel
         }
         set {
             switch newValue {
@@ -275,28 +271,27 @@ public class CustomToolbarView: XibView {
         button.tintColor = UIConstants.BrandColor.onBackground70
 
         addSubview(button)
-        configureDefaultConstraints(for: button)
+        configureConstraints(for: button)
     }
 
     private func configureDisabledButton(button: MainButton, title: String? = nil) {
         button.isEnabled = false
-
         addSubview(button)
-        configureDefaultConstraints(for: button)
+        configureConstraints(for: button)
     }
 
     private func configureMiddleButton(button: MainButton, title: String? = nil) {
         button.title = title
         addSubview(button)
-        configureDefaultConstraints(for: button)
+        configureConstraints(for: button)
     }
 
     private func configureScrollButton(button: MainButton) {
         addSubview(button)
-        configureDefaultConstraints(for: button)
+        configureConstraints(for: button)
     }
 
-    private func configureDefaultConstraints(for button: MainButton) {
+    private func configureConstraints(for button: MainButton) {
         button.centerX(of: layoutMarginsGuide)
         button.pinEdges([.top, .bottom], to: layoutMarginsGuide)
         button.setContentHuggingPriority(.required, for: .horizontal)

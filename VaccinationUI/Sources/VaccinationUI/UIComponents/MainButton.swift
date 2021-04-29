@@ -61,6 +61,7 @@ public class MainButton: XibView {
         layer.borderWidth = 2
         layer.shadowOffset = .init(width: 0, height: 0.3)
 
+        innerButton.titleLabel?.numberOfLines = 0
         innerButton.titleLabel?.adjustsFontForContentSizeCategory = true
         innerButton.accessibilityIdentifier = AccessibilityIdentifier.TimeLine.serviceSelectionButton
         contentMode = .center
