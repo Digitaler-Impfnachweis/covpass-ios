@@ -33,8 +33,8 @@ public class ActionTableViewCell: UITableViewCell {
 // MARK: - ActionCell
 
 extension ActionTableViewCell: ActionCell {
-    public func configure(title: String, iconName: String) {
+    public func configure(title: String, icon: UIImage) {
         labelHeadline.text = title
-        iconImageView.image = UIImage(named: iconName, in: Bundle.module, compatibleWith: nil)
+        iconImageView.image = icon
     }
 }

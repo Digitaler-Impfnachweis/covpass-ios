@@ -13,32 +13,7 @@ open class UIConstants {
     }
     
     public static let brandColorPalette: BrandColorPalette = BrandColorPaletteManager.shared.colorPalette
-    
-    open class IconName {
-        public static let NavigationArrow = "back_arrow"
-        public static let CancelButton = "cancel"
-        public static let PlusIcon = "plus"
-        public static let CheckmarkIcon = "check"
-        public static let RgArrowDown = "rg_arrow_down"
-        public static let OnboardingScreen1 = "onboarding_screen_1"
-        public static let OnboardingScreen2 = "onboarding_screen_2"
-        public static let OnboardingScreen3 = "onboarding_screen_3"
-        public static let StartScreen = "start_screen_1"
-        public static let IconLock = "icon_lock"
-        public static let ChevronRight = "chevron--right"
-        public static let IconClose = "epa_button_close"
-        public static let ProofScreen = "scan_proof_image"
-        public static let SettingsImage = "ega_settings_image"
-        public static let StatusFull = "status_full"
-        public static let StatusPartial = "status_partial"
-        public static let HelpIcon = "ega_help"
-        public static let NoCertificateImage = "no_vaccine_image"
-        public static let StarEmpty = "star_48px"
-        public static let CompletnessImage = "ega_prevention_label"
-        public static let HalfShield = "shield_lefthalf_fill"
-        public static let DeleteImage = "ega_delete"
-    }
-    
+
     open class BrandColor {
         public static let brandBase = brandColorPalette.brandBase
         public static let onBrandBase = brandColorPalette.onBrandBase

@@ -23,11 +23,11 @@ open class OnboardingPageViewModel: BaseViewModel {
     open var image: UIImage? {
         switch type {
         case .page1:
-            return UIImage(named: UIConstants.IconName.OnboardingScreen1, in: UIConstants.bundle, compatibleWith: nil)
+            return .onboardingScreen1
         case .page2:
-            return UIImage(named: UIConstants.IconName.OnboardingScreen2, in: UIConstants.bundle, compatibleWith: nil)
+            return .onboardingScreen2
         case .page3:
-            return UIImage(named: UIConstants.IconName.OnboardingScreen3, in: UIConstants.bundle, compatibleWith: nil)
+            return .onboardingScreen3
         }
     }
 

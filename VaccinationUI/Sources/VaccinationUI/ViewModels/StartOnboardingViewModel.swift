@@ -12,7 +12,7 @@ open class StartOnboardingViewModel: BaseViewModel {
     public init() {}
 
     open var image: UIImage? {
-        UIImage(named: UIConstants.IconName.StartScreen, in: UIConstants.bundle, compatibleWith: nil)
+        .startScreen
     }
 
     open var title: String {
@@ -36,7 +36,7 @@ open class StartOnboardingViewModel: BaseViewModel {
     }
     
     open var secureImage: UIImage? {
-        UIImage(named: UIConstants.IconName.IconLock, in: UIConstants.bundle, compatibleWith: nil)
+        .lock
     }
 
     // MARK: - Settings

@@ -12,7 +12,7 @@ public class ProofPopupViewModel: BaseViewModel {
     public init() {}
 
     public var image: UIImage? {
-        UIImage(named: UIConstants.IconName.ProofScreen, in: UIConstants.bundle, compatibleWith: nil)
+        .proofScreen
     }
 
     public var title: String {
@@ -30,11 +30,11 @@ public class ProofPopupViewModel: BaseViewModel {
     var startButtonTitle: String { "vaccination_proof_popup_scan_title".localized }
     
     var closeButtonImage: UIImage? {
-        UIImage(named: UIConstants.IconName.IconClose, in: UIConstants.bundle, compatibleWith: nil)
+        .close
     }
     
     var chevronRightImage: UIImage? {
-        UIImage(named: UIConstants.IconName.ChevronRight, in: UIConstants.bundle, compatibleWith: nil)
+        .chevronRight
     }
 
     // MARK: - Settings
