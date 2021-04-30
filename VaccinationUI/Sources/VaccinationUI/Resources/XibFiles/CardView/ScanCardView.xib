@@ -7,11 +7,6 @@
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <array key="IBMPlexSans-SemiBold.otf">
-            <string>IBMPlexSans-SemiBold</string>
-        </array>
-    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ScanCardView" customModule="VaccinationUI">
             <connections>
@@ -30,16 +25,16 @@
                     <rect key="frame" x="20" y="52" width="374" height="194"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="ks6-On-fMn" userLabel="Text Stack View">
-                            <rect key="frame" x="3" y="0.0" width="368" height="65"/>
+                            <rect key="frame" x="3" y="0.0" width="368" height="67"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Impfschutz prüfen" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VW2-PA-GY7">
-                                    <rect key="frame" x="0.0" y="0.0" width="207.5" height="31.5"/>
-                                    <fontDescription key="fontDescription" name="IBMPlexSans-SemiBold" family="IBM Plex Sans" pointSize="24"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="218.5" height="33.5"/>
+                                    <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Scannen Sie jetzt das Prüfzertifikat. Sie sehen sofort, ob die Person geimpft ist." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EKc-Hh-BeX">
-                                    <rect key="frame" x="0.0" y="31.5" width="368" height="33.5"/>
+                                    <rect key="frame" x="0.0" y="33.5" width="368" height="33.5"/>
                                     <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="14"/>
                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                     <nil key="highlightedColor"/>
@@ -47,13 +42,13 @@
                             </subviews>
                         </stackView>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="5Td-zH-uHB" userLabel="MainAction Container View">
-                            <rect key="frame" x="0.0" y="65" width="374" height="129"/>
+                            <rect key="frame" x="0.0" y="67" width="374" height="127"/>
                             <subviews>
                                 <view contentMode="scaleToFill" verticalHuggingPriority="1" placeholderIntrinsicWidth="374" placeholderIntrinsicHeight="79" translatesAutoresizingMaskIntoConstraints="NO" id="jUQ-kI-VEE" userLabel="Flexible View">
                                     <rect key="frame" x="0.0" y="0.0" width="374" height="79"/>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pP8-Zv-hAB" customClass="MainButton" customModule="VaccinationUI">
-                                    <rect key="frame" x="0.0" y="79" width="374" height="50"/>
+                                    <rect key="frame" x="0.0" y="79" width="374" height="48"/>
                                     <color key="backgroundColor" systemColor="systemBlueColor"/>
                                 </view>
                             </subviews>

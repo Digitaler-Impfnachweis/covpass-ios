@@ -6,14 +6,6 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <array key="IBMPlexSans-SemiBold.otf">
-            <string>IBMPlexSans-SemiBold</string>
-        </array>
-        <array key="IBMPlexSans.otf">
-            <string>IBMPlexSans</string>
-        </array>
-    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CardViewHeader" customModule="VaccinationUI">
             <connections>
@@ -32,16 +24,16 @@
                     <rect key="frame" x="20" y="52" width="378" height="61"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="OLa-uq-atU" userLabel="Header Stack View">
-                            <rect key="frame" x="0.0" y="0.0" width="378" height="24.5"/>
+                            <rect key="frame" x="0.0" y="0.0" width="378" height="27.5"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Covid - 19" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HCd-OX-ihK">
-                                    <rect key="frame" x="0.0" y="3" width="348" height="18.5"/>
-                                    <fontDescription key="fontDescription" name="IBMPlexSans" family="IBM Plex Sans" pointSize="14"/>
+                                    <rect key="frame" x="0.0" y="4" width="348" height="19.5"/>
+                                    <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZXp-jt-g9G">
-                                    <rect key="frame" x="348" y="1.5" width="30" height="22"/>
+                                    <rect key="frame" x="348" y="3" width="30" height="22"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="30" id="fLa-dG-KGd"/>
                                     </constraints>
@@ -53,8 +45,8 @@
                             </subviews>
                         </stackView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" text="Max Mustermann" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="szZ-jF-geW">
-                            <rect key="frame" x="0.0" y="24.5" width="378" height="36.5"/>
-                            <fontDescription key="fontDescription" name="IBMPlexSans-SemiBold" family="IBM Plex Sans" pointSize="28"/>
+                            <rect key="frame" x="0.0" y="27.5" width="378" height="33.5"/>
+                            <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
