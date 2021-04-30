@@ -28,16 +28,13 @@ class OnboardingPageViewControllerTests: XCTestCase {
     }
 
     func testOutlets() {
-        XCTAssertNotNil(sut.confirmView)
+        XCTAssertNotNil(sut.imageView)
         XCTAssertNotNil(sut.headline)
-        XCTAssertNotNil(sut.paragraphView)
+        XCTAssertNotNil(sut.descriptionText)
     }
 
     func testConfigureImageView() {
-        XCTAssertEqual(sut.confirmView.kind, .custom(image: viewModel.image, width: viewModel.imageWidth, height: viewModel.imageHeight))
-        XCTAssertNil(sut.confirmView.detail)
-        XCTAssertEqual(sut.confirmView.imageView.contentMode, viewModel.imageContentMode)
-        XCTAssertEqual(sut.confirmView.contentView?.backgroundColor, viewModel.backgroundColor)
+        XCTAssertEqual(sut.imageView.image, viewModel.image)
     }
 
     func testConfigureHeadline() {

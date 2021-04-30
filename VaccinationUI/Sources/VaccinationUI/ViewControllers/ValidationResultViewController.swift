@@ -11,9 +11,11 @@ import BottomPopup
 public class ValidationResultViewController: BottomPopupViewController {
     // MARK: - IBOutlet
 
+    @IBOutlet public var stackView: UIStackView!
     @IBOutlet public var toolbarView: CustomToolbarView!
     @IBOutlet public var headline: InfoHeaderView!
-    @IBOutlet public var imageView: ConfirmView!
+    @IBOutlet public var imageContainerView: UIStackView!
+    @IBOutlet public var imageView: UIImageView!
     @IBOutlet public var resultView: ParagraphView!
     @IBOutlet public var nameView: ParagraphView!
     @IBOutlet public var idView: ParagraphView!
@@ -42,13 +44,8 @@ public class ValidationResultViewController: BottomPopupViewController {
     // MARK: - Private
 
     private func configureImageView() {
-        imageView.kind = .custom(
-            image: inputViewModel.icon,
-            width: 150,
-            height: 150
-        )
-        imageView.detail = nil
-        imageView.imageView.contentMode = .scaleAspectFill
+        imageView.image = inputViewModel.icon
+        stackView.setCustomSpacing(.space_24, after: imageContainerView)
     }
 
     private func configureHeadline() {
@@ -57,6 +54,7 @@ public class ValidationResultViewController: BottomPopupViewController {
             self?.dismiss(animated: true, completion: nil)
         }
         headline.image = inputViewModel.closeButtonImage
+        stackView.setCustomSpacing(.space_24, after: headline)
     }
 
     private func configureParagraphView() {
