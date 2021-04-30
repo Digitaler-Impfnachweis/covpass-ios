@@ -10,7 +10,7 @@ import UIKit
 public class StartOnboardingViewController: UIViewController {
     @IBOutlet public var stackView: UIStackView!
     @IBOutlet public var actionButton: MainButton!
-    @IBOutlet public var confirmView: ConfirmView!
+    @IBOutlet public var imageView: UIImageView!
     @IBOutlet public var headline: PlainLabel!
     @IBOutlet public var subtitle: PlainLabel!
     @IBOutlet public var secureContentView: SecureContentView!
@@ -40,14 +40,8 @@ public class StartOnboardingViewController: UIViewController {
     // MARK: - Private
 
     private func configureImageView() {
-        confirmView.kind = .custom(
-            image: inputViewModel.image,
-            width: inputViewModel.imageWidth,
-            height: inputViewModel.imageHeight
-        )
-        confirmView.detail = nil
-        confirmView.imageView.contentMode = inputViewModel.imageContentMode
-        confirmView.contentView?.backgroundColor = inputViewModel.backgroundColor
+        imageView.image = inputViewModel.image
+        imageView.scaleAspectFit()
     }
 
     private func configureHeadline() {
@@ -57,7 +51,7 @@ public class StartOnboardingViewController: UIViewController {
 
     private func configureSubtitle() {
         subtitle.attributedText = inputViewModel.info.toAttributedString(.body)
-        subtitle.layoutMargins = .init(top: .space_24, left: .space_24, bottom: .zero, right: .space_24)
+        subtitle.layoutMargins = .init(top: .space_12, left: .space_24, bottom: .space_40, right: .space_24)
     }
     
     private func configureActionButton() {
@@ -72,6 +66,7 @@ public class StartOnboardingViewController: UIViewController {
         secureContentView.titleAttributedString = inputViewModel.secureTitle.toAttributedString(.h5)
         secureContentView.bodyAttributedString = inputViewModel.secureText.toAttributedString(.bodySmall)
         secureContentView.contentView?.backgroundColor = inputViewModel.backgroundColor
+        secureContentView.layoutMargins = .init(top: .space_40, left: .space_24, bottom: .space_50, right: .space_24)
     }
 }
 

@@ -39,7 +39,7 @@ public class OnboardingPageViewController: UIViewController {
 
     private func configureImageView() {
         imageView.image = inputViewModel.image
-        imageView.contentMode = .scaleAspectFit
+        imageView.scaleAspectFit()
     }
 
     private func configureHeadline() {

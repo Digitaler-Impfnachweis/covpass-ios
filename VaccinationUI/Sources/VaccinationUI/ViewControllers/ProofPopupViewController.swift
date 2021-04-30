@@ -12,7 +12,7 @@ public class ProofPopupViewController: BottomPopupViewController {
     // MARK: - IBOutlet
     
     @IBOutlet public var toolbarView: CustomToolbarView!
-    @IBOutlet public var confirmView: ConfirmView!
+    @IBOutlet public var imageView: UIImageView!
     @IBOutlet public var headline: InfoHeaderView!
     @IBOutlet public var paragraphView: ParagraphView!
     @IBOutlet public var actionView: InfoHeaderView!
@@ -42,13 +42,8 @@ public class ProofPopupViewController: BottomPopupViewController {
     // MARK: - Private
 
     private func configureImageView() {
-        confirmView.kind = .custom(
-            image: inputViewModel.image,
-            width: inputViewModel.imageWidth,
-            height: inputViewModel.imageHeight
-        )
-        confirmView.detail = nil
-        confirmView.imageView.contentMode = inputViewModel.imageContentMode
+        imageView.image = inputViewModel.image
+        imageView.scaleAspectFit()
     }
 
     private func configureHeadline() {

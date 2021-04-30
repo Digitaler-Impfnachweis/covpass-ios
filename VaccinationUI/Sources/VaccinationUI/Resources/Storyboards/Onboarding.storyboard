@@ -21,22 +21,19 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eQf-3g-Gna" userLabel="Content View">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="475"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="482"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="PlU-Hg-2Bs">
-                                                <rect key="frame" x="0.0" y="44" width="414" height="431"/>
+                                                <rect key="frame" x="0.0" y="44" width="414" height="438"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="1000" verticalHuggingPriority="251" placeholderIntrinsicWidth="398" placeholderIntrinsicHeight="250" translatesAutoresizingMaskIntoConstraints="NO" id="vhb-FH-CwB">
-                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="243"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" secondItem="vhb-FH-CwB" secondAttribute="height" multiplier="375:220" id="GqT-kX-2qO"/>
-                                                        </constraints>
+                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="250"/>
                                                     </imageView>
                                                     <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="60" translatesAutoresizingMaskIntoConstraints="NO" id="mQR-L5-HeH" customClass="PlainLabel" customModule="VaccinationUI">
-                                                        <rect key="frame" x="0.0" y="243" width="414" height="60"/>
+                                                        <rect key="frame" x="0.0" y="250" width="414" height="60"/>
                                                     </view>
                                                     <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="cCA-Hh-fFF" customClass="PlainLabel" customModule="VaccinationUI">
-                                                        <rect key="frame" x="0.0" y="303" width="414" height="128"/>
+                                                        <rect key="frame" x="0.0" y="310" width="414" height="128"/>
                                                     </view>
                                                 </subviews>
                                             </stackView>
@@ -100,16 +97,16 @@
                                 <rect key="frame" x="0.0" y="124" width="414" height="672"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="I0B-wx-NK9">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="411"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="418"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="xWE-Gn-WTl" customClass="ParagraphView" customModule="VaccinationUI">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="128"/>
                                             </view>
-                                            <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="243" translatesAutoresizingMaskIntoConstraints="NO" id="gY8-Aw-Kq5" customClass="ConfirmView" customModule="VaccinationUI">
-                                                <rect key="frame" x="0.0" y="128" width="414" height="243"/>
-                                            </view>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="250" translatesAutoresizingMaskIntoConstraints="NO" id="GkY-Eb-KGx">
+                                                <rect key="frame" x="0.0" y="128" width="414" height="250"/>
+                                            </imageView>
                                             <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="40" translatesAutoresizingMaskIntoConstraints="NO" id="BZA-KE-FmB" customClass="InfoHeaderView" customModule="VaccinationUI">
-                                                <rect key="frame" x="0.0" y="371" width="414" height="40"/>
+                                                <rect key="frame" x="0.0" y="378" width="414" height="40"/>
                                             </view>
                                         </subviews>
                                     </stackView>
@@ -159,8 +156,8 @@
                     </view>
                     <connections>
                         <outlet property="actionView" destination="BZA-KE-FmB" id="qW7-Ik-d1k"/>
-                        <outlet property="confirmView" destination="gY8-Aw-Kq5" id="WdF-ha-obx"/>
                         <outlet property="headline" destination="jX9-UW-4T8" id="RwH-7I-EZY"/>
+                        <outlet property="imageView" destination="GkY-Eb-KGx" id="4iQ-2r-uv7"/>
                         <outlet property="paragraphView" destination="xWE-Gn-WTl" id="mbR-BV-1o7"/>
                         <outlet property="toolbarView" destination="BKV-kV-ew0" id="jeZ-Xf-FM4"/>
                     </connections>
@@ -305,7 +302,7 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="747"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="TTC-yw-sLe">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="659"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="666"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="60" translatesAutoresizingMaskIntoConstraints="NO" id="aqp-ex-1mg" customClass="PlainLabel" customModule="VaccinationUI">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
@@ -313,14 +310,14 @@
                                             <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="u6z-A1-sKt" customClass="PlainLabel" customModule="VaccinationUI">
                                                 <rect key="frame" x="0.0" y="60" width="414" height="128"/>
                                             </view>
-                                            <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="243" translatesAutoresizingMaskIntoConstraints="NO" id="8j1-Sz-NcG" customClass="ConfirmView" customModule="VaccinationUI">
-                                                <rect key="frame" x="0.0" y="188" width="414" height="243"/>
-                                            </view>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="250" translatesAutoresizingMaskIntoConstraints="NO" id="IgZ-Vh-9bN">
+                                                <rect key="frame" x="0.0" y="188" width="414" height="250"/>
+                                            </imageView>
                                             <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="100" translatesAutoresizingMaskIntoConstraints="NO" id="zgZ-oc-hQh" customClass="SecureContentView" customModule="VaccinationUI">
-                                                <rect key="frame" x="0.0" y="431" width="414" height="100"/>
+                                                <rect key="frame" x="0.0" y="438" width="414" height="100"/>
                                             </view>
                                             <view contentMode="scaleToFill" horizontalHuggingPriority="1" verticalHuggingPriority="1" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="nUy-6P-UqC" userLabel="Flexible Space">
-                                                <rect key="frame" x="0.0" y="531" width="414" height="128"/>
+                                                <rect key="frame" x="0.0" y="538" width="414" height="128"/>
                                             </view>
                                         </subviews>
                                     </stackView>
@@ -365,8 +362,8 @@
                     </view>
                     <connections>
                         <outlet property="actionButton" destination="z1w-BA-0EP" id="h6O-vs-Cea"/>
-                        <outlet property="confirmView" destination="8j1-Sz-NcG" id="FiH-ht-tea"/>
                         <outlet property="headline" destination="aqp-ex-1mg" id="wIl-vB-PGg"/>
+                        <outlet property="imageView" destination="IgZ-Vh-9bN" id="SAP-C1-YOq"/>
                         <outlet property="secureContentView" destination="zgZ-oc-hQh" id="Dee-gK-oQk"/>
                         <outlet property="stackView" destination="TTC-yw-sLe" id="sY0-aK-AXn"/>
                         <outlet property="subtitle" destination="u6z-A1-sKt" id="FvQ-Pn-hGb"/>
@@ -488,9 +485,6 @@
         </scene>
     </scenes>
     <designables>
-        <designable name="8j1-Sz-NcG">
-            <size key="intrinsicContentSize" width="414" height="243"/>
-        </designable>
         <designable name="BKV-kV-ew0">
             <size key="intrinsicContentSize" width="240" height="56"/>
         </designable>
@@ -514,9 +508,6 @@
         </designable>
         <designable name="cCA-Hh-fFF">
             <size key="intrinsicContentSize" width="414" height="128"/>
-        </designable>
-        <designable name="gY8-Aw-Kq5">
-            <size key="intrinsicContentSize" width="414" height="243"/>
         </designable>
         <designable name="jX9-UW-4T8">
             <size key="intrinsicContentSize" width="414" height="60"/>
