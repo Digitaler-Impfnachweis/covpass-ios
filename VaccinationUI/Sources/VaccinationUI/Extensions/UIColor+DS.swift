@@ -23,7 +23,7 @@ extension UIColor {
 
     public static let onBackground50 = UIColor(hexString: "#C9E1FE")
 
-    public static let onBackground70 = UIColor(hexString: "#375FBF")
+    public static let onBackground70 = UIColor(hexString: "#556877")
 
     public static let onBackground100 = UIColor(hexString: "#1C2227")
 
@@ -36,6 +36,8 @@ extension UIColor {
     public static let backgroundPrimary100 = UIColor(hexString: "#1B1B28")
 
     public static let brandAccent = UIColor(hexString: "#065FC4")
+
+    public static let brandAccent10 = UIColor(hexString: "#EBF4FE")
 
     public static let brandAccent20 = UIColor(hexString: "#D2E7FE")
 

@@ -61,7 +61,7 @@ public enum MainButtonStyle {
         case .primary:
             return .brandBase
         case .secondary:
-            return .brandBase
+            return .backgroundSecondary
         case .tertiary:
             return .onBackground20
         }
@@ -105,7 +105,7 @@ public enum MainButtonStyle {
         case .primary:
             return .clear
         case .secondary:
-            return .brandAccent
+            return .onBackground20
         case .tertiary:
             return .clear
         }
@@ -153,5 +153,9 @@ public enum MainButtonStyle {
         case .tertiary:
             return .clear
         }
+    }
+
+    public var tintColor: UIColor? {
+        .brandBase
     }
 }

@@ -48,7 +48,7 @@ public class QrContinerView: XibView {
     }
 
     private func updateViews() {
-        titleLabel.attributedText = title?.toAttributedString(.h4)
+        titleLabel.attributedText = title?.toAttributedString(.header_3)
         titleLabel.isHidden = titleLabel.text.isNilOrEmpty
 
         subtitleLabel.attributedText = title?.toAttributedString(.body)

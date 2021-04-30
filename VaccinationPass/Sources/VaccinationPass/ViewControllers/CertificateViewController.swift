@@ -58,7 +58,7 @@ public class CertificateViewController: UIViewController {
     }
     
     private func setupHeaderView() {
-        headerView.attributedTitleText = viewModel.headlineTitle.toAttributedString(.h4)
+        headerView.attributedTitleText = viewModel.headlineTitle.toAttributedString(.header_2)
         headerView.image = viewModel.headlineButtonImage
     }
     
@@ -74,7 +74,7 @@ public class CertificateViewController: UIViewController {
     }
     
     private func setupActionButton() {
-        view.tintColor = UIConstants.BrandColor.brandAccent
+        view.tintColor = .brandAccent
         addButton.icon = viewModel?.addButtonImage
         addButton.action = { [weak self] in
             self?.presentPopup()

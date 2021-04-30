@@ -211,11 +211,9 @@
                                         <subviews>
                                             <view contentMode="scaleToFill" placeholderIntrinsicWidth="240" placeholderIntrinsicHeight="56" translatesAutoresizingMaskIntoConstraints="NO" id="DcZ-ry-4Hc" customClass="CustomToolbarView" customModule="VaccinationUI">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
-                                                <color key="backgroundColor" red="0.023529411760000001" green="0.37254901959999998" blue="0.76862745099999996" alpha="1" colorSpace="calibratedRGB"/>
                                             </view>
                                             <view contentMode="scaleToFill" verticalHuggingPriority="1000" placeholderIntrinsicWidth="240" placeholderIntrinsicHeight="12" translatesAutoresizingMaskIntoConstraints="NO" id="MD3-T0-j5S" customClass="DotPageIndicator" customModule="VaccinationUI">
                                                 <rect key="frame" x="0.0" y="71" width="414" height="12"/>
-                                                <color key="backgroundColor" red="0.023529411760000001" green="0.37254901959999998" blue="0.76862745099999996" alpha="1" colorSpace="calibratedRGB"/>
                                             </view>
                                         </subviews>
                                     </stackView>
@@ -429,6 +427,7 @@
                         <outlet property="headline" destination="PFc-dj-gMR" id="s9z-Ar-tsf"/>
                         <outlet property="idView" destination="CtT-AJ-EPL" id="bGO-jv-dZj"/>
                         <outlet property="imageContainerView" destination="qf0-Cy-1UM" id="H84-us-PM4"/>
+                        <outlet property="imageView" destination="oct-2V-77Z" id="j6B-Kp-ar3"/>
                         <outlet property="nameView" destination="kFp-28-n6g" id="7vC-0z-mjo"/>
                         <outlet property="resultView" destination="btb-DJ-LeM" id="z0F-LB-JXN"/>
                         <outlet property="stackView" destination="1gh-Bm-jvT" id="RnI-hN-kWe"/>

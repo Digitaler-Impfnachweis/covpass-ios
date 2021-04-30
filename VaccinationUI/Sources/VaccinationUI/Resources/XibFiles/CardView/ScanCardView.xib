@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -17,68 +16,60 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ScanCardView" customModule="VaccinationUI">
             <connections>
                 <outlet property="actionButton" destination="pP8-Zv-hAB" id="yF1-hG-I8n"/>
-                <outlet property="textLable" destination="EKc-Hh-BeX" id="YWo-Gc-YYU"/>
+                <outlet property="stackView" destination="WCh-CY-QiR" id="r9o-78-dq4"/>
+                <outlet property="textLabel" destination="EKc-Hh-BeX" id="fyR-er-WcX"/>
+                <outlet property="textStackView" destination="ks6-On-fMn" id="s6G-nM-SrH"/>
                 <outlet property="titleLabel" destination="VW2-PA-GY7" id="PSZ-ii-jQf"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="414" height="335"/>
-            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+        <view contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="254"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Flh-qW-5MS">
-                    <rect key="frame" x="0.0" y="0.0" width="414" height="335"/>
+                <stackView opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="WCh-CY-QiR">
+                    <rect key="frame" x="20" y="52" width="374" height="194"/>
                     <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pP8-Zv-hAB" customClass="MainButton" customModule="VaccinationUI">
-                            <rect key="frame" x="82" y="232" width="250" height="55"/>
-                            <color key="backgroundColor" systemColor="systemBlueColor"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="250" id="5Zn-yb-3yy"/>
-                                <constraint firstAttribute="height" constant="55" id="pTo-HI-s5V"/>
-                            </constraints>
-                        </view>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Impfschutz prüfen" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VW2-PA-GY7">
-                            <rect key="frame" x="24" y="24" width="366" height="31.5"/>
-                            <fontDescription key="fontDescription" name="IBMPlexSans-SemiBold" family="IBM Plex Sans" pointSize="24"/>
-                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EKc-Hh-BeX">
-                            <rect key="frame" x="24" y="55.5" width="366" height="33.5"/>
-                            <attributedString key="attributedText">
-                                <fragment content="Scannen Sie jetzt das Prüfzertifikat. Sie sehen sofort, ob die Person geimpft ist.">
-                                    <attributes>
-                                        <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                        <font key="NSFont" metaFont="system" size="14"/>
-                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                    </attributes>
-                                </fragment>
-                            </attributedString>
-                            <nil key="highlightedColor"/>
-                        </label>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="ks6-On-fMn" userLabel="Text Stack View">
+                            <rect key="frame" x="3" y="0.0" width="368" height="65"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Impfschutz prüfen" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VW2-PA-GY7">
+                                    <rect key="frame" x="0.0" y="0.0" width="207.5" height="31.5"/>
+                                    <fontDescription key="fontDescription" name="IBMPlexSans-SemiBold" family="IBM Plex Sans" pointSize="24"/>
+                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Scannen Sie jetzt das Prüfzertifikat. Sie sehen sofort, ob die Person geimpft ist." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EKc-Hh-BeX">
+                                    <rect key="frame" x="0.0" y="31.5" width="368" height="33.5"/>
+                                    <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="14"/>
+                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                        </stackView>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="5Td-zH-uHB" userLabel="MainAction Container View">
+                            <rect key="frame" x="0.0" y="65" width="374" height="129"/>
+                            <subviews>
+                                <view contentMode="scaleToFill" verticalHuggingPriority="1" placeholderIntrinsicWidth="374" placeholderIntrinsicHeight="79" translatesAutoresizingMaskIntoConstraints="NO" id="jUQ-kI-VEE" userLabel="Flexible View">
+                                    <rect key="frame" x="0.0" y="0.0" width="374" height="79"/>
+                                </view>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pP8-Zv-hAB" customClass="MainButton" customModule="VaccinationUI">
+                                    <rect key="frame" x="0.0" y="79" width="374" height="50"/>
+                                    <color key="backgroundColor" systemColor="systemBlueColor"/>
+                                </view>
+                            </subviews>
+                        </stackView>
                     </subviews>
-                    <constraints>
-                        <constraint firstItem="pP8-Zv-hAB" firstAttribute="centerX" secondItem="Flh-qW-5MS" secondAttribute="centerX" id="0WP-Cm-VKl"/>
-                        <constraint firstItem="EKc-Hh-BeX" firstAttribute="leading" secondItem="VW2-PA-GY7" secondAttribute="leading" id="AkO-UG-BLg"/>
-                        <constraint firstAttribute="trailing" secondItem="VW2-PA-GY7" secondAttribute="trailing" constant="24" id="Egh-dT-rvh"/>
-                        <constraint firstItem="EKc-Hh-BeX" firstAttribute="trailing" secondItem="VW2-PA-GY7" secondAttribute="trailing" id="Kgp-rr-Ly4"/>
-                        <constraint firstItem="VW2-PA-GY7" firstAttribute="leading" secondItem="Flh-qW-5MS" secondAttribute="leading" constant="24" id="YKH-r5-D3v"/>
-                        <constraint firstAttribute="bottom" secondItem="pP8-Zv-hAB" secondAttribute="bottom" constant="48" id="gh2-q2-gqI"/>
-                        <constraint firstItem="EKc-Hh-BeX" firstAttribute="top" secondItem="VW2-PA-GY7" secondAttribute="bottom" id="mxn-c3-YYs"/>
-                        <constraint firstItem="VW2-PA-GY7" firstAttribute="top" secondItem="Flh-qW-5MS" secondAttribute="top" constant="24" id="sPB-oJ-Npe"/>
-                    </constraints>
-                </view>
+                </stackView>
             </subviews>
-            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <color key="backgroundColor" red="0.90981608629999999" green="0.90978193279999997" blue="0.90980511900000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
             <constraints>
-                <constraint firstItem="Flh-qW-5MS" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="23X-d3-ucQ"/>
-                <constraint firstItem="Flh-qW-5MS" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="Wc0-cd-4OC"/>
-                <constraint firstItem="Flh-qW-5MS" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="gso-FU-1TS"/>
-                <constraint firstItem="Flh-qW-5MS" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="rCx-5d-8r8"/>
+                <constraint firstAttribute="trailingMargin" secondItem="WCh-CY-QiR" secondAttribute="trailing" id="0ui-Hq-lMn"/>
+                <constraint firstAttribute="bottomMargin" secondItem="WCh-CY-QiR" secondAttribute="bottom" priority="900" id="2cj-sQ-Oao"/>
+                <constraint firstItem="WCh-CY-QiR" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leadingMargin" id="4W9-TU-OlV"/>
+                <constraint firstItem="WCh-CY-QiR" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="topMargin" id="9uJ-ke-JPn"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="-291.304347826087" y="-47.879464285714285"/>
+            <edgeInsets key="layoutMargins" top="0.0" left="0.0" bottom="0.0" right="0.0"/>
+            <point key="canvasLocation" x="-291.304347826087" y="-20.758928571428569"/>
         </view>
     </objects>
     <resources>

@@ -26,9 +26,8 @@ public class ValidatorViewController: UIViewController {
     
     override public func viewDidLoad() {
         super.viewDidLoad()
+        view.tintColor = .brandAccent
         setupHeaderView()
-        setupOther()
-        setupOther()
         setupCardView()
     }
 
@@ -45,27 +44,25 @@ public class ValidatorViewController: UIViewController {
     // MARK: - Private
     
     public func setupHeaderView() {
-        headerView.actionButton.imageEdgeInsets = viewModel.headerButtonInsets
-        headerView.attributedTitleText = viewModel?.title.toAttributedString(.h4)
+        headerView.attributedTitleText = viewModel?.title.toAttributedString(.header_2)
         headerView.image = .help
-    }
-
-    private func setupOther() {
-        view.tintColor = .brandAccent
-        headerView.attributedTitleText = viewModel?.title.toAttributedString(.h4)
     }
     
     // MARK: - Card View
 
     func setupCardView() {
+        scanCard.titleLabel.attributedText = "Impfschutz prüfen".toAttributedString(.header_1).colored(.backgroundSecondary)
+        scanCard.textLabel.attributedText = "Scannen Sie jetzt das Prüfzertifikat. Sie sehen sofort ob die Person geimpft ist.".toAttributedString(.body).colored(.backgroundSecondary)
         scanCard.actionButton.title = "Zertifikat scannen"
         scanCard.actionButton.action = presentPopup
         scanCard.cornerRadius = viewModel.continerCornerRadius
 
+        offlineCard.titleLabel.attributedText = "Offline-Modus".toAttributedString(.header_2)
+        offlineCard.textLable.attributedText = "Um offline prüfen zu können, halten Sie die App auf dem aktuellsten Stand. Stellen Sie dafür ab und an eine Verbindung mit dem Internet her.".toAttributedString(.body)
+        offlineCard.infoLabel.attributedText = "Aktualisieren Sie die App".toAttributedString(.body)
         offlineCard.infoImageView.image = .warning
         offlineCard.cornerRadius = viewModel.continerCornerRadius
-        offlineCard.dateLabel.attributedText = "Letztes Update: 01.01.1971, 05:36".toAttributedString(.body)
-        offlineCard.dateLabel.textColor = UIConstants.BrandColor.onBackground100
+        offlineCard.dateLabel.attributedText = "Letztes Update: 01.01.1971, 05:36".toAttributedString(.body).colored(.onBackground70)
     }
     
     func presentPopup() {

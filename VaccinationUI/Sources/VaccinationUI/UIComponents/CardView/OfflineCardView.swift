@@ -20,6 +20,7 @@ public class OfflineCardView: BaseCardView {
     
     public override func initView() {
         super.initView()
-        contentView?.backgroundColor = UIConstants.BrandColor.brandAccent20
+        contentView?.layoutMargins = .init(top: .space_18, left: .space_24, bottom: .space_18, right: .space_24)
+        contentView?.backgroundColor = .brandAccent10
     }
 }

@@ -60,6 +60,12 @@ extension UIImage {
     @ImageLoader(name: "status_partial")
     public private(set) static var statusPartial
 
+    @ImageLoader(name: "star_full")
+    public private(set) static var starFull
+
+    @ImageLoader(name: "star_partial")
+    public private(set) static var starPartial
+
     @ImageLoader(name: "ega_help")
     public private(set) static var help
 
@@ -74,6 +80,12 @@ extension UIImage {
 
     @ImageLoader(name: "shield_lefthalf_fill")
     public private(set) static var halfShield
+
+    @ImageLoader(name: "icon_qr")
+    public private(set) static var scan
+
+    @ImageLoader(name: "icon_card")
+    public private(set) static var card
 
     @ImageLoader(name: "ega_delete")
     public private(set) static var delete

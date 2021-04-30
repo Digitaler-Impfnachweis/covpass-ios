@@ -18,7 +18,7 @@ public class ActionTableViewCell: UITableViewCell {
     
     // MARK: - Public
     
-    public static let identifier = UIConstants.CellIdentifier.ActionTableViewCell
+    public static let identifier = "ActionTableViewCell"
     
     // MARK: - Lifecycle
     
@@ -33,7 +33,7 @@ public class ActionTableViewCell: UITableViewCell {
 
 extension ActionTableViewCell: ActionCell {
     public func configure(title: String, icon: UIImage) {
-        labelHeadline.attributedText = title.toAttributedString(.h5)
+        labelHeadline.attributedText = title.toAttributedString(.header_3)
         iconImageView.image = icon
     }
 }

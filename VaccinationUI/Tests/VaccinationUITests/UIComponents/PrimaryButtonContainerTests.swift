@@ -35,11 +35,11 @@ class PrimaryButtonContainerTests: XCTestCase {
     }
 
     func testInspectablesDefaultValues() {
-        XCTAssertEqual(sut.enabledButtonTextColor, UIConstants.BrandColor.onBrandAccent)
-        XCTAssertEqual(sut.disabledButtonTextColor, UIConstants.BrandColor.onBackground50)
-        XCTAssertEqual(sut.enabledButtonBackgroundColor, UIConstants.BrandColor.brandAccent70)
-        XCTAssertEqual(sut.disabledButtonBackgroundColor, UIConstants.BrandColor.onBackground20)
-        XCTAssertEqual(sut.shadowColor, UIConstants.BrandColor.primaryButtonShadow)
+        XCTAssertEqual(sut.enabledButtonTextColor, .onBrandAccent)
+        XCTAssertEqual(sut.disabledButtonTextColor, .onBackground50)
+        XCTAssertEqual(sut.enabledButtonBackgroundColor, .brandAccent70)
+        XCTAssertEqual(sut.disabledButtonBackgroundColor, .onBackground20)
+        XCTAssertEqual(sut.shadowColor, .primaryButtonShadow)
         XCTAssertEqual(sut.shadowOffset, CGSize(width: 0, height: 3))
         XCTAssertEqual(sut.cornerRadius, UIConstants.Size.ButtonCornerRadius)
         XCTAssertEqual(sut.shadowRadius, UIConstants.Size.ButtonShadowRadius)
@@ -59,24 +59,24 @@ class PrimaryButtonContainerTests: XCTestCase {
 
         // Title
         XCTAssertTrue(sut.textableView.isHidden)
-        XCTAssertEqual(sut.textableView.textColor, UIConstants.BrandColor.onBrandAccent)
+        XCTAssertEqual(sut.textableView.textColor, .onBrandAccent)
 //        XCTAssertEqual(sut.textableView.font, UIFontMetrics.default.scaledFont(for: UIConstants.Font.semiBold, maximumPointSize: HUIConstants.Font.semiBold.pointSize * 2))
         XCTAssertEqual(sut.textableView.numberOfLines, 0)
 //        XCTAssertTrue(sut.textableView.adjustsFontForContentSizeCategory)
 
-        XCTAssertEqual(sut.innerButton.titleColor(for: .normal), UIConstants.BrandColor.onBrandAccent)
+        XCTAssertEqual(sut.innerButton.titleColor(for: .normal), .onBrandAccent)
 //        XCTAssertEqual(sut.innerButton.titleLabel?.font, UIFontMetrics.default.scaledFont(for: UIConstants.Font.semiBold, maximumPointSize: UIConstants.Font.semiBold.pointSize * 2))
 //        XCTAssertEqual(sut.innerButton.titleLabel?.numberOfLines, 0)
 //        XCTAssertTrue(sut.innerButton.titleLabel?.adjustsFontForContentSizeCategory ?? true)
 
         // Background
-        XCTAssertEqual(sut.backgroundColor, UIConstants.BrandColor.brandAccent)
+        XCTAssertEqual(sut.backgroundColor, .brandAccent)
         XCTAssertEqual(sut.contentView?.backgroundColor, .clear)
 
         // Dot Pulse Animation
-        XCTAssertEqual(sut.dotPulseActivityView.color, UIConstants.BrandColor.backgroundSecondary)
-        XCTAssertEqual(sut.dotPulseActivityView.numberOfDots, UIConstants.Animation.DotPulseAnimationDotsNumber)
-        XCTAssertEqual(sut.dotPulseActivityView.padding, UIConstants.Size.ButtonDotPulseAnimationPadding)
+        XCTAssertEqual(sut.dotPulseActivityView.color, .backgroundSecondary)
+        XCTAssertEqual(sut.dotPulseActivityView.numberOfDots, 3)
+        XCTAssertEqual(sut.dotPulseActivityView.padding, 5)
     }
 
     func testAction() {
@@ -154,9 +154,9 @@ class PrimaryButtonContainerTests: XCTestCase {
         // Then
         XCTAssertTrue(sut.isEnabled, "Button should be enabled.")
         XCTAssertTrue(sut.textableView.isHidden)
-        XCTAssertEqual(sut.textableView.textColor, UIConstants.BrandColor.onBrandAccent, "TextableView text color should match.")
-        XCTAssertEqual(sut.innerButton.titleColor(for: .normal), UIConstants.BrandColor.onBrandAccent)
-        XCTAssertEqual(sut.backgroundColor, UIConstants.BrandColor.brandAccent, "Button background color should match.")
+        XCTAssertEqual(sut.textableView.textColor, .onBrandAccent, "TextableView text color should match.")
+        XCTAssertEqual(sut.innerButton.titleColor(for: .normal), .onBrandAccent)
+        XCTAssertEqual(sut.backgroundColor, .brandAccent, "Button background color should match.")
     }
 
     func testDisable() {
@@ -166,9 +166,9 @@ class PrimaryButtonContainerTests: XCTestCase {
         // Then
         XCTAssertFalse(sut.isEnabled, "Button should not be enabled.")
         XCTAssertTrue(sut.textableView.isHidden)
-        XCTAssertEqual(sut.textableView.textColor, UIConstants.BrandColor.onBackground50, "TextableView text color should match.")
-        XCTAssertEqual(sut.innerButton.titleColor(for: .normal), UIConstants.BrandColor.onBackground50)
-        XCTAssertEqual(sut.backgroundColor, UIConstants.BrandColor.onBackground20, "Button background color should match.")
+        XCTAssertEqual(sut.textableView.textColor, .onBackground50, "TextableView text color should match.")
+        XCTAssertEqual(sut.innerButton.titleColor(for: .normal), .onBackground50)
+        XCTAssertEqual(sut.backgroundColor, .onBackground20, "Button background color should match.")
     }
 
     func testButtonAction() {

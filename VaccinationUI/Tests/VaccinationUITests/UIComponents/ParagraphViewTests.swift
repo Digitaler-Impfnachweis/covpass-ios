@@ -37,10 +37,10 @@ class ParagraphViewTests: XCTestCase {
         XCTAssertEqual(sut.body.backgroundColor, .clear)
         XCTAssertEqual(sut.title.font, UIFontMetrics.default.scaledFont(for: UIConstants.Font.semiBold))
         XCTAssertTrue(sut.title.adjustsFontForContentSizeCategory)
-        XCTAssertEqual(sut.title.textColor, UIConstants.BrandColor.onBackground100)
+        XCTAssertEqual(sut.title.textColor, .onBackground100)
         XCTAssertEqual(sut.body.font, UIFontMetrics.default.scaledFont(for: UIConstants.Font.regular))
         XCTAssertTrue(sut.body.adjustsFontForContentSizeCategory)
-        XCTAssertEqual(sut.body.textColor, UIConstants.BrandColor.onBackground100)
+        XCTAssertEqual(sut.body.textColor, .onBackground100)
         XCTAssertNotNil(sut.bodyFont)
     }
 

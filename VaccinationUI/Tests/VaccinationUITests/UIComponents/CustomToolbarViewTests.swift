@@ -27,7 +27,7 @@ class CustomToolbarViewTests: XCTestCase {
 
         XCTAssertNotNil(sut.leftButton)
         XCTAssertEqual(sut.navigationIcon, UIConstants.IconName.NavigationArrow)
-        XCTAssertEqual(sut.navigationIconColor, UIConstants.BrandColor.onBackground70)
+        XCTAssertEqual(sut.navigationIconColor, .onBackground70)
     }
 
     func testSetup() {
@@ -75,8 +75,8 @@ class CustomToolbarViewTests: XCTestCase {
         XCTAssertNotNil(sut.primaryButton as? PrimaryIconButtonContainer)
         XCTAssertTrue(sut.primaryButton.isEnabled)
 
-        XCTAssertEqual(sut.primaryButton.enabledButtonBackgroundColor, UIConstants.BrandColor.onBackground20)
-        XCTAssertEqual(sut.primaryButton.tintColor, UIConstants.BrandColor.onBackground70)
+        XCTAssertEqual(sut.primaryButton.enabledButtonBackgroundColor, .onBackground20)
+        XCTAssertEqual(sut.primaryButton.tintColor, .onBackground70)
     }
 
     func test_State_Check() {
@@ -128,10 +128,9 @@ class CustomToolbarViewTests: XCTestCase {
         // Then
         XCTAssertNotNil(sut.primaryButton)
         XCTAssertEqual(sut.primaryButton.text, "Test")
-        XCTAssertEqual(sut.primaryButton.buttonBackgroundColor, UIConstants.BrandColor.onBackground20)
-        XCTAssertEqual(sut.primaryButton.buttonTextColor, UIConstants.BrandColor.onBackground50)
+        XCTAssertEqual(sut.primaryButton.buttonBackgroundColor, .onBackground20)
+        XCTAssertEqual(sut.primaryButton.buttonTextColor, .onBackground50)
         XCTAssertEqual(sut.primaryButton.shadowColor, .clear)
-        XCTAssertEqual(sut.primaryButton.cornerRadius, UIConstants.Size.ButtonCornerRadius)
         XCTAssertFalse(sut.primaryButton.isEnabled)
     }
 
@@ -144,10 +143,9 @@ class CustomToolbarViewTests: XCTestCase {
 
         // Then
         XCTAssertNotNil(sut.primaryButton)
-        XCTAssertEqual(sut.primaryButton.buttonBackgroundColor, UIConstants.BrandColor.onBackground20)
-        XCTAssertEqual(sut.primaryButton.buttonTextColor, UIConstants.BrandColor.onBackground50)
+        XCTAssertEqual(sut.primaryButton.buttonBackgroundColor, .onBackground20)
+        XCTAssertEqual(sut.primaryButton.buttonTextColor, .onBackground50)
         XCTAssertEqual(sut.primaryButton.shadowColor, .clear)
-        XCTAssertEqual(sut.primaryButton.cornerRadius, UIConstants.Size.ButtonCornerRadius)
         XCTAssertFalse(sut.primaryButton.isEnabled)
     }
 

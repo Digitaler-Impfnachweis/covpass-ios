@@ -29,10 +29,9 @@ public class ParagraphView: XibView {
     public override func initView() {
         super.initView()
         backgroundColor = .neutralWhite
-        contentView?.layoutMargins = .init(top: 0, left: 24, bottom: 0, right: 24)
-        stackView.spacing = 15
-        textStackView.setCustomSpacing(11, after: bodyLabel)
-        bottomBorder.backgroundColor = UIConstants.BrandColor.onBackground20
+        contentView?.layoutMargins = .init(top: .zero, left: .space_24, bottom: .zero, right: .space_24)
+        stackView.spacing = .space_24
+        bottomBorder.backgroundColor = .onBackground20
     }
 
     // MARK: - Methods
@@ -54,7 +53,7 @@ public class ParagraphView: XibView {
         bodyLabel.attributedText = attributedBodyText
         bodyLabel.isHidden = attributedBodyText.isNilOrEmpty
 
-        isHidden = imageView.isHidden && bodyLabel.isHidden
+        isHidden = bodyLabel.isHidden
 
         setupAccessibility()
     }

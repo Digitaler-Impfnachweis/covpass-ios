@@ -29,7 +29,7 @@ class MockCellConfiguration {
             stateAction: nil,
             headerImage: headerImage,
             headerAction: nil,
-            backgroundColor: UIConstants.BrandColor.onBackground50,
+            backgroundColor: .onBackground50,
             qrViewConfiguration: qrViewConfiguration)
     }
 }

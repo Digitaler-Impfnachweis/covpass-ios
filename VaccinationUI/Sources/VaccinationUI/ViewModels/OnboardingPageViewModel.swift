@@ -55,13 +55,6 @@ open class OnboardingPageViewModel: BaseViewModel {
 
     // MARK: - Settings
 
-    public var imageAspectRatio: CGFloat { 375 / 220 }
-    public var imageWidth: CGFloat { UIScreen.main.bounds.width }
-    public var imageHeight: CGFloat { imageWidth / imageAspectRatio }
-    public var imageContentMode: UIView.ContentMode { .scaleAspectFit }
-    public var headlineFont: UIFont { UIConstants.Font.onboardingHeadlineFont }
-    public var headlineColor: UIColor { .black }
-    public var paragraphBodyFont: UIFont { UIConstants.Font.regularLarger }
-    public var backgroundColor: UIColor { UIConstants.BrandColor.backgroundPrimary }
+    public var backgroundColor: UIColor { .backgroundPrimary }
 }
 

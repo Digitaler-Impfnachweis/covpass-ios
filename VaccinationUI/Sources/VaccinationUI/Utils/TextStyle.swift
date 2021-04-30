@@ -8,87 +8,78 @@
 import UIKit
 
 public enum TextStyle {
-    /// size: 64 type: semi-bold color: neutralBlack
-    case h1
+    /// size: 34 lineHeight: 51 letterSpacing: 0.13 type: semi-bold color: onBackground100
+    case display
 
-    /// size: 42 type: semi-bold color: neutralBlack
-    case h2
+    /// size: 28 lineHeight: 42 letterSpacing: 0.13 type: semi-bold color: onBackground100
+    case header_1
 
-    /// size: 28 type: semi-bold color: neutralBlack
-    case h3
+    /// size: 18 lineHeight: 27 letterSpacing: 0.13 type: semi-bold color: onBackground100
+    case header_2
 
-    /// size: 20 type: semi-bold color: neutralBlack
-    case h4
+    /// size: 14 lineHeight: 17 letterSpacing: 0.13 type: semi-bold color: onBackground100
+    case header_3
 
-    /// size: 16 type: semi-bold color: neutralBlack
-    case h5
+    /// size: 18 lineHeight: 27 letterSpacing: 0.13 type: semi-bold color: onBackground100
+    case subheader_1
 
-    /// size: 14 type: semi-bold color: neutralBlack
-    case h6
-
-    /// size: 16 type: regular color: neutralBlack
+    /// size: 14 lineHeight: 21 letterSpacing: 0.13 type: regular color: onBackground100
     case body
 
-    /// size: 14 type: regular color: neutralBlack
-    case bodySmall
+    /// size: 12 lineHeight: 18 letterSpacing: 0.13 type: regular color: onBackground100
+    case label
 
-    /// size: 18 type: semi-bold color: neutralWhite
+    /// size: 14 lineHeight: 21 letterSpacing: 0.13 type: semi-bold color: onBackground100
     case mainButton
 
     public func apply(_ string: NSAttributedString) -> NSAttributedString {
         switch self {
-        case .h1:
+        case .display:
             return string
-                .font(named: UIFont.sansSemiBold, size: 64.0, lineHeight: 72.0, textStyle: .title1)
-                .letterSpacing(0.12)
-                .colored(.neutralBlack)
+                .font(named: UIFont.sansSemiBold, size: 34.0, lineHeight: 51.0, textStyle: .title2)
+                .letterSpacing(0.13)
+                .colored(.onBackground100)
 
-        case .h2:
+        case .header_1:
             return string
-                .font(named: UIFont.sansSemiBold, size: 42.0, lineHeight: 55.0, textStyle: .title2)
-                .letterSpacing(0.12)
-                .colored(.neutralBlack)
+                .font(named: UIFont.sansSemiBold, size: 28.0, lineHeight: 42.0, textStyle: .title3)
+                .letterSpacing(0.13)
+                .colored(.onBackground100)
 
-        case .h3:
+        case .header_2:
             return string
-                .font(named: UIFont.sansSemiBold, size: 28.0, lineHeight: 32.0, textStyle: .title3)
-                .letterSpacing(0.12)
-                .colored(.neutralBlack)
+                .font(named: UIFont.sansSemiBold, size: 18.0, lineHeight: 27.0, textStyle: .headline)
+                .letterSpacing(0.13)
+                .colored(.onBackground100)
 
-        case .h4:
+        case .header_3:
             return string
-                .font(named: UIFont.sansSemiBold, size: 20.0, lineHeight: 24.0, textStyle: .headline)
-                .letterSpacing(0.12)
-                .colored(.neutralBlack)
+                .font(named: UIFont.sansSemiBold, size: 14.0, lineHeight: 17.0, textStyle: .subheadline)
+                .letterSpacing(0.13)
+                .colored(.onBackground100)
 
-        case .h5:
+        case .subheader_1:
             return string
-                .font(named: UIFont.sansSemiBold, size: 16.0, lineHeight: 24.0, textStyle: .subheadline)
-                .letterSpacing(0.12)
-                .colored(.neutralBlack)
-
-        case .h6:
-            return string
-                .font(named: UIFont.sansSemiBold, size: 14.0, lineHeight: 20.0, textStyle: .subheadline)
-                .letterSpacing(0.12)
-                .colored(.neutralBlack)
+                .font(named: UIFont.sansRegular, size: 18.0, lineHeight: 27.0, textStyle: .headline)
+                .letterSpacing(0.13)
+                .colored(.onBackground100)
 
         case .body:
             return string
-                .font(named: UIFont.sansRegular, size: 16.0, lineHeight: 24.0, textStyle: .body)
-                .letterSpacing(0.12)
-                .colored(.neutralBlack)
+                .font(named: UIFont.sansRegular, size: 14.0, lineHeight: 21.0, textStyle: .body)
+                .letterSpacing(0.13)
+                .colored(.onBackground100)
 
-        case .bodySmall:
+        case .label:
             return string
-                .font(named: UIFont.sansRegular, size: 14.0, lineHeight: 20.0, textStyle: .caption1)
-                .letterSpacing(0.12)
-                .colored(.neutralBlack)
+                .font(named: UIFont.sansRegular, size: 12.0, lineHeight: 18.0, textStyle: .body)
+                .letterSpacing(0.13)
+                .colored(.onBackground100)
 
         case .mainButton:
             return string
-                .font(named: UIFont.sansSemiBold, size: 16.0, lineHeight: 18.0, textStyle: .subheadline)
-                .letterSpacing(0.12)
+                .font(named: UIFont.sansSemiBold, size: 14.0, lineHeight: 18.0, textStyle: .headline)
+                .letterSpacing(0.13)
         }
     }
 }

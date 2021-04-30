@@ -71,31 +71,33 @@ public class MainButton: XibView {
     }
 
     private func setupShadow() {
-        layer.shadowRadius = UIConstants.Size.ButtonShadowRadius
+        layer.shadowRadius = 9
         layer.shadowOpacity = 0.6
         layer.masksToBounds = false
-        layer.borderWidth = 2
+        layer.borderWidth = 1
         layer.shadowOffset = .init(width: 0, height: 0.3)
     }
 
     private func setupInnerButton() {
         innerButton.titleLabel?.numberOfLines = 0
         innerButton.titleLabel?.adjustsFontForContentSizeCategory = true
+        innerButton.imageView?.contentMode = .scaleAspectFit
         innerButton.accessibilityIdentifier = AccessibilityIdentifier.TimeLine.serviceSelectionButton
-        let maxButtonWidth = UIScreen.main.bounds.width - 2 * UIConstants.Size.PrimaryButtonMargin
+        let maxButtonWidth = UIScreen.main.bounds.width - 2 * .space_24
         innerButton.widthAnchor.constraint(lessThanOrEqualToConstant: maxButtonWidth).isActive = true
     }
 
     private func setupActivityIndicatorView() {
-        dotPulseActivityView.numberOfDots = UIConstants.Animation.DotPulseAnimationDotsNumber
+        dotPulseActivityView.numberOfDots = 3
         dotPulseActivityView.color = .backgroundSecondary
-        dotPulseActivityView.padding = UIConstants.Size.ButtonDotPulseAnimationPadding
+        dotPulseActivityView.padding = 5
     }
 
     func setupConstraints() {
         // Constraints for circle button
-        buttonHeightConstraint = heightAnchor.constraint(equalToConstant: UIConstants.Size.ButtonAnimatingSize)
-        buttonWidthConstraint = widthAnchor.constraint(equalToConstant: UIConstants.Size.ButtonAnimatingSize)
+        let size: CGFloat = 56
+        buttonHeightConstraint = heightAnchor.constraint(equalToConstant: size)
+        buttonWidthConstraint = widthAnchor.constraint(equalToConstant: size)
     }
 
     func setupObservers() {
@@ -173,10 +175,13 @@ public class MainButton: XibView {
         switch innerButton.state {
         case .normal:
             backgroundColor = style.backgroundColor
+            tintColor = style.tintColor
         case .selected:
             backgroundColor = style.selectedBackgroundColor
+            tintColor = style.tintColor
         case .highlighted:
             backgroundColor = style.highlightedBackgroundColor
+            tintColor = style.tintColor
         default:
             break
         }

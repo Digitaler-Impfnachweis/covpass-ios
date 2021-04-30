@@ -24,7 +24,7 @@ public class BaseCardCollectionViewCell: UICollectionViewCell {
         didSet { layer.borderColor = borderColor?.cgColor }
     }
 
-    public var shadowColor: UIColor = UIConstants.BrandColor.primaryButtonShadow {
+    public var shadowColor: UIColor = .primaryButtonShadow {
         didSet { layer.shadowColor = shadowColor.cgColor }
     }
 
@@ -44,7 +44,7 @@ public class BaseCardCollectionViewCell: UICollectionViewCell {
         didSet { backgroundColor = cardBackgroundColor }
     }
 
-    public var cardTintColor: UIColor = UIConstants.BrandColor.brandAccent {
+    public var cardTintColor: UIColor = .brandAccent {
         didSet { tintColor = cardTintColor }
     }
 

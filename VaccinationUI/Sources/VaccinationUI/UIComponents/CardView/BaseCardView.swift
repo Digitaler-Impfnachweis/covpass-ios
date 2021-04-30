@@ -24,7 +24,7 @@ public class BaseCardView: XibView {
     @IBInspectable public var borderColor: UIColor? {
         didSet { layer.borderColor = borderColor?.cgColor }
     }
-    @IBInspectable public var shadowColor: UIColor = UIConstants.BrandColor.primaryButtonShadow {
+    @IBInspectable public var shadowColor: UIColor = .primaryButtonShadow {
         didSet { layer.shadowColor = shadowColor.cgColor }
     }
     @IBInspectable public var shadowOffset: CGSize = CGSize(width: 0, height: 3) {
@@ -39,7 +39,7 @@ public class BaseCardView: XibView {
     @IBInspectable public var cardBackgroundColor: UIColor = UIColor.white {
         didSet { backgroundColor = cardBackgroundColor }
     }
-    @IBInspectable public var cardTintColor: UIColor = UIConstants.BrandColor.brandAccent {
+    @IBInspectable public var cardTintColor: UIColor = .brandAccent {
         didSet { tintColor = cardTintColor }
     }
 }

@@ -36,17 +36,17 @@ public class VaccinationDetailViewController: UIViewController {
     private func setupNavigationBar() {
         title = "vaccination_detail_title".localized
 
-        navigationController?.navigationBar.backIndicatorImage = UIImage(named: "back_arrow", in: UIConstants.bundle, compatibleWith: nil)
-        navigationController?.navigationBar.backIndicatorTransitionMaskImage = UIImage(named: "back_arrow", in: UIConstants.bundle, compatibleWith: nil)
-        navigationController?.navigationBar.tintColor = UIConstants.BrandColor.onBackground100
+        navigationController?.navigationBar.backIndicatorImage = .arrowBack
+        navigationController?.navigationBar.backIndicatorTransitionMaskImage = .arrowBack
+        navigationController?.navigationBar.tintColor = .onBackground100
 
-        let favoriteIcon = UIBarButtonItem(image: UIImage(named: viewModel.isFavorite ? "star_full" : "star_partial", in: UIConstants.bundle, compatibleWith: nil), style: .plain, target: self, action: #selector(onFavorite))
-        favoriteIcon.tintColor = UIConstants.BrandColor.onBackground100
+        let favoriteIcon = UIBarButtonItem(image: viewModel.isFavorite ? .starFull : .starPartial, style: .plain, target: self, action: #selector(onFavorite))
+        favoriteIcon.tintColor = .onBackground100
         navigationItem.rightBarButtonItem = favoriteIcon
     }
 
     private func setupView() {
-        view.backgroundColor = UIConstants.BrandColor.backgroundPrimary
+        view.backgroundColor = .backgroundPrimary
         scrollView.contentInset = .init(top: .space_24, left: .zero, bottom: .space_70, right: .zero)
 
         setupHeadline()
@@ -57,7 +57,7 @@ public class VaccinationDetailViewController: UIViewController {
     }
 
     private func setupHeadline() {
-        nameHeadline.attributedText = viewModel.name.toAttributedString(.h2)
+        nameHeadline.attributedText = viewModel.name.toAttributedString(.header_1).colored(.onBackground100)
         nameHeadline.layoutMargins = .init(top: .zero, left: .space_24, bottom: .zero, right: .space_24)
         stackView.setCustomSpacing(.space_24, after: nameHeadline)
     }
@@ -66,9 +66,10 @@ public class VaccinationDetailViewController: UIViewController {
         immunizationContainerView.layoutMargins.top = .space_24
         immunizationContainerView.layoutMargins.bottom = .space_24
         immunizationContainerView.backgroundColor = .neutralWhite
+        immunizationView.stackView.alignment = .top
         immunizationView.image = viewModel.immunizationIcon
-        immunizationView.attributedTitleText = viewModel.immunizationTitle.toAttributedString(.h5)
-        immunizationView.attributedBodyText = viewModel.immunizationBody.toAttributedString(.body)
+        immunizationView.attributedTitleText = viewModel.immunizationTitle.toAttributedString(.header_3)
+        immunizationView.attributedBodyText = viewModel.immunizationBody.toAttributedString(.body).colored(.onBackground70)
         immunizationView.layoutMargins.bottom = .space_24
 
         immunizationButton.title = viewModel.immunizationButton
@@ -86,15 +87,15 @@ public class VaccinationDetailViewController: UIViewController {
 
     private func setupPersonalData() {
         stackView.setCustomSpacing(12, after: personalDataHeadline)
-        personalDataHeadline.attributedText = "vaccination_detail_personal_information".localized.toAttributedString(.h4)
+        personalDataHeadline.attributedText = "vaccination_detail_personal_information".localized.toAttributedString(.header_2)
         personalDataHeadline.layoutMargins = .init(top: .space_30, left: .space_24, bottom: .zero, right: .space_24)
 
-        nameView.attributedTitleText = "vaccination_detail_name".localized.toAttributedString(.h5)
+        nameView.attributedTitleText = "vaccination_detail_name".localized.toAttributedString(.header_3)
         nameView.attributedBodyText = viewModel?.name.toAttributedString(.body)
         nameView.contentView?.layoutMargins = .init(top: 12, left: 24, bottom: 12, right: 24)
         nameView.showBottomBorder()
 
-        birtdateView.attributedTitleText = "vaccination_detail_birthdate".localized.toAttributedString(.h5)
+        birtdateView.attributedTitleText = "vaccination_detail_birthdate".localized.toAttributedString(.header_3)
         birtdateView.attributedBodyText = viewModel?.birthDate.toAttributedString(.body)
         birtdateView.contentView?.layoutMargins = .init(top: 12, left: 24, bottom: 12, right: 24)
     }

@@ -58,13 +58,16 @@ public class ValidationResultViewController: BottomPopupViewController {
     }
 
     private func configureParagraphView() {
-        resultView.attributedTitleText = inputViewModel.resultTitle.toAttributedString(.h3)
+        resultView.attributedTitleText = inputViewModel.resultTitle.toAttributedString(.header_1)
         resultView.attributedBodyText = inputViewModel.resultBody.toAttributedString(.body)
+        stackView.setCustomSpacing(.space_24, after: resultView)
 
-        nameView.attributedTitleText = inputViewModel.nameTitle?.toAttributedString(.h3)
+        nameView.image = .warning
+        nameView.attributedTitleText = inputViewModel.nameTitle?.toAttributedString(.header_3)
         nameView.attributedBodyText = inputViewModel.nameBody?.toAttributedString(.body)
 
-        idView.attributedTitleText = inputViewModel.idTitle?.toAttributedString(.h3)
+        idView.image = .card
+        idView.attributedTitleText = inputViewModel.idTitle?.toAttributedString(.header_3)
         idView.attributedBodyText = inputViewModel.idBody?.toAttributedString(.body)
     }
 

@@ -54,9 +54,7 @@ class CertificateViewControllerTests: XCTestCase {
     }
     
     func testSetupHeaderView() {
-        XCTAssertEqual(sut.headerView.actionButton.imageEdgeInsets, viewModel.headlineButtonInsets)
         XCTAssertEqual(sut.headerView.headline.text, viewModel.headlineTitle)
-        XCTAssertEqual(sut.headerView.headlineFont,viewModel.headlineFont)
         XCTAssertEqual(sut.headerView.buttonImage, viewModel.headlineButtonImage)
     }
     
@@ -67,7 +65,7 @@ class CertificateViewControllerTests: XCTestCase {
     
     func testSetupActionButton() {
         XCTAssertEqual(sut.addButton.iconImage, viewModel?.addButtonImage)
-        XCTAssertEqual(sut.addButton.buttonBackgroundColor, UIConstants.BrandColor.brandAccent)
+        XCTAssertEqual(sut.addButton.buttonBackgroundColor, .brandAccent)
         XCTAssertNotNil(sut.addButton.action)
     }
     

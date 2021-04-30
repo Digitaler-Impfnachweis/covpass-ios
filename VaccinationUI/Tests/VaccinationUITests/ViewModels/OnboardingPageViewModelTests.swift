@@ -29,7 +29,7 @@ class OnboardingPageViewModelTests: XCTestCase {
         XCTAssertEqual(sut.headlineFont, UIConstants.Font.onboardingHeadlineFont)
         XCTAssertEqual(sut.headlineColor, .black)
         XCTAssertEqual(sut.paragraphBodyFont, UIConstants.Font.regularLarger)
-        XCTAssertEqual(sut.backgroundColor, UIConstants.BrandColor.backgroundPrimary)
+        XCTAssertEqual(sut.backgroundColor, .backgroundPrimary)
     }
 
     func testPage1Values() {

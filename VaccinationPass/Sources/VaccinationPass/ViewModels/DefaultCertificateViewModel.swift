@@ -24,8 +24,6 @@ public class DefaultCertificateViewModel<T: QRCoderProtocol>: CertificateViewMod
     // MARK: - HeadlineViewModel
     
     public var headlineTitle = "vaccination_certificate_list_title".localized
-    public var headlineButtonInsets = UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 0)
-    public var headlineFont: UIFont = UIConstants.Font.subHeadlineFont
     public var headlineButtonImage: UIImage? = .help
     
     // MARK: - CertificateViewModel
@@ -173,7 +171,7 @@ public class DefaultCertificateViewModel<T: QRCoderProtocol>: CertificateViewMod
             stateAction: nil,
             headerImage: .starEmpty,
             headerAction: nil,
-            backgroundColor: UIConstants.BrandColor.onBackground70,
+            backgroundColor: .onBackground70,
             qrViewConfiguration: qrViewConfiguration)
     }
 
@@ -188,7 +186,7 @@ public class DefaultCertificateViewModel<T: QRCoderProtocol>: CertificateViewMod
             stateAction: nil,
             headerImage: .starEmpty,
             headerAction: nil,
-            backgroundColor: UIConstants.BrandColor.onBackground50,
+            backgroundColor: .onBackground50,
             qrViewConfiguration: nil)
     }
     
