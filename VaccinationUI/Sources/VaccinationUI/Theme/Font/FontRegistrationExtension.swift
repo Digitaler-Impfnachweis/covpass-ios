@@ -28,15 +28,15 @@ extension UIFont {
     // MARK: - Register Predefined Fonts
     
     public static func loadCustomFonts() throws {
-        try? UIFont.register(with: sansSemiBold, bundle: .module)
-        try? UIFont.register(with: sansRegular, bundle: .module)
+        try UIFont.register(with: sansSemiBold, bundle: .module)
+        try UIFont.register(with: sansRegular, bundle: .module)
     }
 
     // MARK: - Supported fonts name
     
     public static func unloadCustomFonts() throws {
-        try? UIFont.unregister(with: sansSemiBold, bundle: Bundle.module)
-        try? UIFont.unregister(with: sansRegular, bundle:Bundle.module)
+        try UIFont.unregister(with: sansSemiBold, bundle: Bundle.module)
+        try UIFont.unregister(with: sansRegular, bundle:Bundle.module)
     }
     
     // MARK: - Register Font 
