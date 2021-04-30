@@ -69,7 +69,7 @@ public class VaccinationDetailViewController: UIViewController {
         immunizationView.image = viewModel.immunizationIcon
         immunizationView.attributedTitleText = viewModel.immunizationTitle.toAttributedString(.h5)
         immunizationView.attributedBodyText = viewModel.immunizationBody.toAttributedString(.body)
-        stackView.setCustomSpacing(24, after: immunizationView)
+        immunizationView.layoutMargins.bottom = .space_24
 
         immunizationButton.title = viewModel.immunizationButton
         immunizationButton.backgroundColor = UIColor.white
