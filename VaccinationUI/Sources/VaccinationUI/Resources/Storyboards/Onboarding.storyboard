@@ -156,9 +156,9 @@
                     </view>
                     <connections>
                         <outlet property="actionView" destination="BZA-KE-FmB" id="qW7-Ik-d1k"/>
+                        <outlet property="descriptionText" destination="xWE-Gn-WTl" id="Mz0-M3-G9w"/>
                         <outlet property="headline" destination="jX9-UW-4T8" id="RwH-7I-EZY"/>
                         <outlet property="imageView" destination="GkY-Eb-KGx" id="4iQ-2r-uv7"/>
-                        <outlet property="paragraphView" destination="xWE-Gn-WTl" id="mbR-BV-1o7"/>
                         <outlet property="toolbarView" destination="BKV-kV-ew0" id="jeZ-Xf-FM4"/>
                     </connections>
                 </viewController>

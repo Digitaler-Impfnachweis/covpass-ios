@@ -53,7 +53,7 @@ public class ProofPopupViewModel: BaseViewModel {
     
     // MARK - PopupRouter
     
-    let height: CGFloat = 650
+    let height: CGFloat = 700 // heights should be calculated by autolayout
     let topCornerRadius: CGFloat = 20
     let presentDuration: Double = 0.5
     let dismissDuration: Double = 0.5

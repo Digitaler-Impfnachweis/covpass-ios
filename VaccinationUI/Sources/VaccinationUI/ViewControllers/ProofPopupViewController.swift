@@ -14,7 +14,7 @@ public class ProofPopupViewController: BottomPopupViewController {
     @IBOutlet public var toolbarView: CustomToolbarView!
     @IBOutlet public var imageView: UIImageView!
     @IBOutlet public var headline: InfoHeaderView!
-    @IBOutlet public var paragraphView: ParagraphView!
+    @IBOutlet public var descriptionText: ParagraphView!
     @IBOutlet public var actionView: InfoHeaderView!
     
     // MARK: - Public Properties
@@ -34,7 +34,7 @@ public class ProofPopupViewController: BottomPopupViewController {
         super.viewDidLoad()
         configureImageView()
         configureHeadline()
-        configureParagraphView()
+        configureDescriptionText()
         configureToolbarView()
         configureActionView()
     }
@@ -55,17 +55,19 @@ public class ProofPopupViewController: BottomPopupViewController {
     }
     
     private func configureActionView() {
-        actionView.attributedTitleText = inputViewModel.actionTitle.toAttributedString(.h5)
+        actionView.attributedTitleText = inputViewModel.actionTitle.toAttributedString(.h6)
         actionView.action = { [weak self] in
             self?.dismiss(animated: true, completion: nil)
         }
         actionView.image = inputViewModel.chevronRightImage
         actionView.tintColor = inputViewModel.tintColor
+        actionView.layoutMargins.top = .space_40
     }
 
-    private func configureParagraphView() {
-        paragraphView.attributedBodyText = inputViewModel.info.toAttributedString(.body)
-        paragraphView.layoutMargins.top = 10
+    private func configureDescriptionText() {
+        descriptionText.attributedBodyText = inputViewModel.info.toAttributedString(.body)
+        descriptionText.layoutMargins.top = .space_18
+        descriptionText.layoutMargins.bottom = .space_40
     }
     
     private func configureToolbarView() {

@@ -44,7 +44,7 @@ public class OnboardingPageViewController: UIViewController {
 
     private func configureHeadline() {
         headline.attributedText = inputViewModel.title.toAttributedString(.h4)
-        headline.layoutMargins = .init(top: .space_12, left: .space_24, bottom: .zero, right: .space_24)
+        headline.layoutMargins = .init(top: .space_40, left: .space_24, bottom: .zero, right: .space_24)
     }
 
     private func configureParagraphView() {
