@@ -26,7 +26,6 @@ public class ActionTableViewCell: UITableViewCell {
         super.awakeFromNib()
         contentView.layoutMargins = .init(top: 15, left: 0, bottom: 15, right: 0)
         stackView.spacing = 5
-        labelHeadline.font = UIFont.ibmPlexSansSemiBold(with: 14)
     }
 }
 
@@ -34,7 +33,7 @@ public class ActionTableViewCell: UITableViewCell {
 
 extension ActionTableViewCell: ActionCell {
     public func configure(title: String, icon: UIImage) {
-        labelHeadline.text = title
+        labelHeadline.attributedText = title.toAttributedString(.h5)
         iconImageView.image = icon
     }
 }

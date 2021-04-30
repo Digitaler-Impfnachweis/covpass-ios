@@ -46,13 +46,13 @@ public class ValidatorViewController: UIViewController {
     
     public func setupHeaderView() {
         headerView.actionButton.imageEdgeInsets = viewModel.headerButtonInsets
-        headerView.headline.text = viewModel?.title
-        headerView.buttonImage = UIImage(named: "ega_help", in: UIConstants.bundle, compatibleWith: nil)
+        headerView.attributedTitleText = viewModel?.title.toAttributedString(.h4)
+        headerView.image = .help
     }
 
     private func setupOther() {
-        view.tintColor = UIConstants.BrandColor.brandAccent
-        headerView.headline.text = viewModel?.title
+        view.tintColor = .brandAccent
+        headerView.attributedTitleText = viewModel?.title.toAttributedString(.h4)
     }
     
     // MARK: - Card View
@@ -62,9 +62,9 @@ public class ValidatorViewController: UIViewController {
         scanCard.actionButton.action = presentPopup
         scanCard.cornerRadius = viewModel.continerCornerRadius
 
-        offlineCard.infoImageView.image = UIImage(named: "warning", in: UIConstants.bundle, compatibleWith: nil)
+        offlineCard.infoImageView.image = .warning
         offlineCard.cornerRadius = viewModel.continerCornerRadius
-        offlineCard.dateLabel.text = "Letztes Update: 01.01.1971, 05:36"
+        offlineCard.dateLabel.attributedText = "Letztes Update: 01.01.1971, 05:36".toAttributedString(.body)
         offlineCard.dateLabel.textColor = UIConstants.BrandColor.onBackground100
     }
     

@@ -77,6 +77,9 @@ extension UIImage {
 
     @ImageLoader(name: "ega_delete")
     public private(set) static var delete
+
+    @ImageLoader(name: "warning")
+    public private(set) static var warning
 }
 
 @propertyWrapper
