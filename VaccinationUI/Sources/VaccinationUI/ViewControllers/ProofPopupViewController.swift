@@ -71,10 +71,9 @@ public class ProofPopupViewController: BottomPopupViewController {
     }
     
     private func configureToolbarView() {
-        toolbarView.shouldShowTransparency = true
-        toolbarView.shouldShowGradient = false
         toolbarView.state = .confirm(inputViewModel.startButtonTitle)
         toolbarView.setUpLeftButton(leftButtonItem: .navigationArrow)
+        toolbarView.layoutMargins.top = .space_24
         toolbarView.delegate = self
     }
 

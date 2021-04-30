@@ -8,49 +8,54 @@
 
 import UIKit
 
-public extension UIColor {
+extension UIColor {
     // MARK: - Primary Colors
 
-    /// bg/brant/accent #065FC4
-    static let brandAccent = UIColor("BrandAccent")
+    public static let brandBase = UIColor(hexString: "#065FC4")
 
-    /// bg/primary/disabled #6AA500
-    static let primaryDisabled = UIColor("PrimaryDisabled")
+    public static let onBrandBase = UIColor(hexString: "#FFFFFF")
 
-    /// bg/primary/hover #5F9400
-    static let primaryHover = UIColor("PrimaryHover")
+    public static let onBrandAccent = UIColor(hexString: "#FFFFFF")
 
-    /// bg/primary/pressed #538200
-    static let primaryPressed = UIColor("PrimaryPressed")
+    public static let onBrandAccent70 = UIColor(hexString: "#0B47B7")
+
+    public static let onBackground20 = UIColor(hexString: "#E2E2E2")
+
+    public static let onBackground50 = UIColor(hexString: "#C9E1FE")
+
+    public static let onBackground70 = UIColor(hexString: "#375FBF")
+
+    public static let onBackground100 = UIColor(hexString: "#1C2227")
+
+    public static let backgroundPrimary = UIColor(hexString: "#F9F9FB")
+
+    public static let backgroundSecondary = UIColor(hexString: "#FFFFFF")
+
+    public static let backgroundSecondary20 = UIColor(hexString: "#E8E8E8")
+
+    public static let backgroundPrimary100 = UIColor(hexString: "#1B1B28")
+
+    public static let brandAccent = UIColor(hexString: "#065FC4")
+
+    public static let brandAccent20 = UIColor(hexString: "#D2E7FE")
+
+    public static let brandAccent70 = UIColor(hexString: "#065FC4")
+
+    public static let primaryButtonShadow = UIColor(hexString: "#8B8B8B").withAlphaComponent(0.5)
 
     // MARK: - Neutral Colors
 
-    /// bg/neutral/black #000000
-    static let neutralBlack = UIColor("NeutralBlack")
+    public static let neutralBlack = UIColor(hexString: "#000000")
 
-    /// bg/neutral/600 #E8E8E8
-    static let neutral600 = UIColor("Neutral600")
-
-    /// bg/neutral/white #FFFFFF
-    static let neutralWhite = UIColor("NeutralWhite")
+    public static let neutralWhite = UIColor(hexString: "#FFFFFF")
 
     // MARK: - Neutral Status
 
-    /// bg/status/error #D90000
-    static let error = UIColor("Error")
+    public static let error = UIColor(hexString: "#D90000")
 
-    /// bg/status/success #6AA500
-    static let success = UIColor("Success")
+    public static let success = UIColor(hexString: "#6AA500")
 
-    /// bg/status/warning #FECB00
-    static let warning = UIColor("Warning")
+    public static let warning = UIColor(hexString: "#FECB00")
 
-    /// bg/status/info ##0097BD
-    static let info = UIColor("Info")
-}
-
-private extension UIColor {
-    convenience init(_ catalogColor: String) {
-        self.init(named: catalogColor, in: UIConstants.bundle, compatibleWith: nil)!
-    }
+    public static let info = UIColor(hexString: "#0097BD")
 }

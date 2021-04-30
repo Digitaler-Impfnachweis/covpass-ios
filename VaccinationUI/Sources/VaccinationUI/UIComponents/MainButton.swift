@@ -88,7 +88,7 @@ public class MainButton: XibView {
 
     private func setupActivityIndicatorView() {
         dotPulseActivityView.numberOfDots = UIConstants.Animation.DotPulseAnimationDotsNumber
-        dotPulseActivityView.color = UIConstants.BrandColor.backgroundSecondary
+        dotPulseActivityView.color = .backgroundSecondary
         dotPulseActivityView.padding = UIConstants.Size.ButtonDotPulseAnimationPadding
     }
 

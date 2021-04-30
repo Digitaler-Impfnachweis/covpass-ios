@@ -10,12 +10,15 @@ import UIKit
 public enum MainButtonStyle {
     case primary
     case secondary
+    case tertiary
 
     public var textColor: UIColor {
         switch self {
         case .primary:
             return .neutralWhite
         case .secondary:
+            return .neutralBlack
+        case .tertiary:
             return .neutralBlack
         }
     }
@@ -26,6 +29,8 @@ public enum MainButtonStyle {
             return .neutralWhite
         case .secondary:
             return .neutralBlack
+        case .tertiary:
+            return .neutralBlack
         }
     }
 
@@ -34,6 +39,8 @@ public enum MainButtonStyle {
         case .primary:
             return .neutralWhite
         case .secondary:
+            return .neutralBlack
+        case .tertiary:
             return .neutralBlack
         }
     }
@@ -44,42 +51,52 @@ public enum MainButtonStyle {
             return .neutralWhite
         case .secondary:
             return .neutralBlack
+        case .tertiary:
+            return .neutralBlack
         }
     }
 
     public var backgroundColor: UIColor {
         switch self {
         case .primary:
-            return .brandAccent
+            return .brandBase
         case .secondary:
-            return .neutralWhite
+            return .brandBase
+        case .tertiary:
+            return .onBackground20
         }
     }
 
     public var selectedBackgroundColor: UIColor {
         switch self {
         case .primary:
-            return .primaryPressed
+            return .brandAccent
         case .secondary:
-            return .primaryPressed
+            return .brandAccent
+        case .tertiary:
+            return .onBackground20
         }
     }
 
     public var highlightedBackgroundColor: UIColor {
         switch self {
         case .primary:
-            return .primaryPressed
+            return .brandBase
         case .secondary:
-            return .primaryPressed
+            return .brandBase
+        case .tertiary:
+            return .onBackground20
         }
     }
 
     public var disabledBackgroundColor: UIColor {
         switch self {
         case .primary:
-            return .primaryPressed
+            return .brandBase
         case .secondary:
-            return .primaryPressed
+            return .brandBase
+        case .tertiary:
+            return .onBackground20
         }
     }
 
@@ -89,6 +106,8 @@ public enum MainButtonStyle {
             return .clear
         case .secondary:
             return .brandAccent
+        case .tertiary:
+            return .clear
         }
     }
 
@@ -98,6 +117,8 @@ public enum MainButtonStyle {
             return .clear
         case .secondary:
             return .brandAccent
+        case .tertiary:
+            return .clear
         }
     }
 
@@ -107,6 +128,8 @@ public enum MainButtonStyle {
             return .clear
         case .secondary:
             return .brandAccent
+        case .tertiary:
+            return .clear
         }
     }
 
@@ -116,6 +139,8 @@ public enum MainButtonStyle {
             return .clear
         case .secondary:
             return .brandAccent
+        case .tertiary:
+            return .clear
         }
     }
 
@@ -124,6 +149,8 @@ public enum MainButtonStyle {
         case .primary:
             return UIColor(hexString: "#8B8B8B").withAlphaComponent(0.5)
         case .secondary:
+            return .clear
+        case .tertiary:
             return .clear
         }
     }

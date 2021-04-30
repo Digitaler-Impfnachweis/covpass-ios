@@ -69,8 +69,6 @@ public class ValidationResultViewController: BottomPopupViewController {
     }
 
     private func configureToolbarView() {
-        toolbarView.shouldShowTransparency = true
-        toolbarView.shouldShowGradient = false
         toolbarView.state = .confirm("Nächstes Zertifikat scannen")
         toolbarView.delegate = self
     }

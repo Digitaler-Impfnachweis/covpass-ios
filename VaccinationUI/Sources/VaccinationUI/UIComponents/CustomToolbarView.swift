@@ -11,11 +11,6 @@ public protocol CustomToolbarViewDelegate: AnyObject {
     func customToolbarView(_: CustomToolbarView, didTap buttonType: ButtonItemType)
 }
 
-struct ToolBarItems {
-    var leftItem: ButtonItemType?
-    var middleItem: ButtonItemType?
-}
-
 public enum ButtonItemType {
     case navigationArrow
     case cancelButton
@@ -44,8 +39,6 @@ public class CustomToolbarView: XibView {
     public weak var delegate: CustomToolbarViewDelegate?
 
     @IBOutlet var leftButton: UIButton!
-    @IBOutlet var gradientImageView: UIImageView!
-
     public var primaryButton: MainButton!
 
     var state: CustomToolbarState {
@@ -71,18 +64,6 @@ public class CustomToolbarView: XibView {
             case let .disabledWithText(title):
                 setupDisabledButton(with: title)
             }
-        }
-    }
-
-    public var shouldShowTransparency: Bool = true {
-        didSet {
-            backgroundColor = shouldShowTransparency ? UIColor.clear : UIColor.white
-        }
-    }
-    
-    public var shouldShowGradient: Bool = false {
-        didSet {
-            gradientImageView.isHidden = !shouldShowTransparency
         }
     }
 
@@ -166,6 +147,7 @@ public class CustomToolbarView: XibView {
 
     private var cancelButton: MainButton {
         primaryButton = MainButton()
+        primaryButton.style = .tertiary
         primaryButton.icon = .cancel
         primaryButton.action = { [weak self] in
             guard let strongSelf = self else { return }
@@ -257,31 +239,29 @@ public class CustomToolbarView: XibView {
     }
 
     private func configureCancelButton(button: MainButton) {
-        button.layer.shadowOpacity = 0
-        button.tintColor = UIConstants.BrandColor.onBackground70
-
+        button.tintColor = .onBackground70
         addSubview(button)
-        configureConstraints(for: button)
+        configureCenterConstraints(for: button)
     }
 
     private func configureDisabledButton(button: MainButton, title: String? = nil) {
         button.isEnabled = false
         addSubview(button)
-        configureConstraints(for: button)
+        configureCenterConstraints(for: button)
     }
 
     private func configureMiddleButton(button: MainButton, title: String? = nil) {
         button.title = title
         addSubview(button)
-        configureConstraints(for: button)
+        configureCenterConstraints(for: button)
     }
 
     private func configureScrollButton(button: MainButton) {
         addSubview(button)
-        configureConstraints(for: button)
+        configureCenterConstraints(for: button)
     }
 
-    private func configureConstraints(for button: MainButton) {
+    private func configureCenterConstraints(for button: MainButton) {
         button.centerX(of: layoutMarginsGuide)
         button.pinEdges([.top, .bottom], to: layoutMarginsGuide)
         button.setContentHuggingPriority(.required, for: .horizontal)

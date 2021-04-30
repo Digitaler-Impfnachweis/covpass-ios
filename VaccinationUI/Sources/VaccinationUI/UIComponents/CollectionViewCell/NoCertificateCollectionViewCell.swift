@@ -23,8 +23,8 @@ public class NoCertificateCollectionViewCell: BaseCardCollectionViewCell {
         super.awakeFromNib()
         contentView.layoutMargins = .init(top: .zero, left: .space_24, bottom: .zero, right: .space_24)
         shadowColor = .neutralBlack
-        cardTintColor = .neutralBlack
-        cardBackgroundColor = .neutral600
+        cardTintColor = .onBackground70
+        cardBackgroundColor = .backgroundSecondary20
         cornerRadius = 15
         stackView.spacing = .zero
         stackView.setCustomSpacing(.space_30, after: iconImageView)

@@ -43,10 +43,9 @@ public class ScanPopupViewController: BottomPopupViewController {
     }
     
     private func configureToolbarView() {
-        toolbarView.shouldShowTransparency = true
-        toolbarView.shouldShowGradient = false
         toolbarView.state = .cancel
         toolbarView.setUpLeftButton(leftButtonItem: .navigationArrow)
+        toolbarView.layoutMargins.top = .space_24
         toolbarView.delegate = self
     }
 

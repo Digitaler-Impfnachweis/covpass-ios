@@ -23,12 +23,9 @@ class CustomToolbarViewTests: XCTestCase {
 
     func testInit() {
         let view = CustomToolbarView()
-        XCTAssertTrue(view.shouldShowTransparency)
         XCTAssertNotNil(view.contentView, "View ContentView should exist")
-        XCTAssertNotNil(view.gradientImageView, "A gradient image view should exist")
 
         XCTAssertNotNil(sut.leftButton)
-        XCTAssertNotNil(sut.gradientImageView)
         XCTAssertEqual(sut.navigationIcon, UIConstants.IconName.NavigationArrow)
         XCTAssertEqual(sut.navigationIconColor, UIConstants.BrandColor.onBackground70)
     }
