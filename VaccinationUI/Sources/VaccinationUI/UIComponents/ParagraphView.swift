@@ -28,6 +28,7 @@ public class ParagraphView: XibView {
 
     public override func initView() {
         super.initView()
+        backgroundColor = .neutralWhite
         contentView?.layoutMargins = .init(top: 0, left: 24, bottom: 0, right: 24)
         stackView.spacing = 15
         textStackView.setCustomSpacing(11, after: bodyLabel)

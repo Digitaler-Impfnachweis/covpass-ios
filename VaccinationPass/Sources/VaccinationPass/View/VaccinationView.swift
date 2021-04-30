@@ -49,7 +49,7 @@ public class VaccinationView: XibView {
         stackView.spacing = .zero
 
         immunizationHeadline.attributedText = viewModel?.headline.toAttributedString(.h4)
-        immunizationHeadline.layoutMargins = .init(top: .zero, left: .space_24, bottom: .zero, right: .space_24)
+        immunizationHeadline.layoutMargins = .init(top: .space_40, left: .space_24, bottom: .zero, right: .space_24)
         stackView.setCustomSpacing(12, after: immunizationHeadline)
 
         let itemsMargins = UIEdgeInsets(top: 12, left: 24, bottom: 12, right: 24)

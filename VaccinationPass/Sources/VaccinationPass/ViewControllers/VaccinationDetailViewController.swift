@@ -11,9 +11,11 @@ import VaccinationCommon
 import Scanner
 
 public class VaccinationDetailViewController: UIViewController {
+    @IBOutlet var scrollView: UIScrollView!
     @IBOutlet var stackView: UIStackView!
     @IBOutlet var vaccinationsStackView: UIStackView!
     @IBOutlet var nameHeadline: PlainLabel!
+    @IBOutlet var immunizationContainerView: UIView!
     @IBOutlet var immunizationView: ParagraphView!
     @IBOutlet var immunizationButtonContainerView: UIStackView!
     @IBOutlet var immunizationButton: MainButton!
@@ -42,14 +44,28 @@ public class VaccinationDetailViewController: UIViewController {
         favoriteIcon.tintColor = UIConstants.BrandColor.onBackground100
         navigationItem.rightBarButtonItem = favoriteIcon
     }
-    
+
     private func setupView() {
         view.backgroundColor = UIConstants.BrandColor.backgroundPrimary
+        scrollView.contentInset = .init(top: .space_24, left: .zero, bottom: .space_70, right: .zero)
 
+        setupHeadline()
+        setupImmunizationView()
+        setupPersonalData()
+        setupDeleteButton()
+        setupVaccinations()
+    }
+
+    private func setupHeadline() {
         nameHeadline.attributedText = viewModel.name.toAttributedString(.h2)
-        nameHeadline.layoutMargins = .init(top: .space_30, left: .space_24, bottom: .space_16, right: .space_24)
-        stackView.setCustomSpacing(24, after: nameHeadline)
-
+        nameHeadline.layoutMargins = .init(top: .zero, left: .space_24, bottom: .zero, right: .space_24)
+        stackView.setCustomSpacing(.space_24, after: nameHeadline)
+    }
+    
+    private func setupImmunizationView() {
+        immunizationContainerView.layoutMargins.top = .space_24
+        immunizationContainerView.layoutMargins.bottom = .space_24
+        immunizationContainerView.backgroundColor = .neutralWhite
         immunizationView.image = viewModel.immunizationIcon
         immunizationView.attributedTitleText = viewModel.immunizationTitle.toAttributedString(.h5)
         immunizationView.attributedBodyText = viewModel.immunizationBody.toAttributedString(.body)
@@ -66,7 +82,9 @@ public class VaccinationDetailViewController: UIViewController {
             }
         }
         stackView.setCustomSpacing(24, after: immunizationButtonContainerView)
+    }
 
+    private func setupPersonalData() {
         stackView.setCustomSpacing(12, after: personalDataHeadline)
         personalDataHeadline.attributedText = "vaccination_detail_personal_information".localized.toAttributedString(.h4)
         personalDataHeadline.layoutMargins = .init(top: .space_30, left: .space_24, bottom: .zero, right: .space_24)
@@ -76,12 +94,12 @@ public class VaccinationDetailViewController: UIViewController {
         nameView.contentView?.layoutMargins = .init(top: 12, left: 24, bottom: 12, right: 24)
         nameView.showBottomBorder()
 
-        stackView.setCustomSpacing(24, after: birtdateView)
-
         birtdateView.attributedTitleText = "vaccination_detail_birthdate".localized.toAttributedString(.h5)
         birtdateView.attributedBodyText = viewModel?.birthDate.toAttributedString(.body)
         birtdateView.contentView?.layoutMargins = .init(top: 12, left: 24, bottom: 12, right: 24)
+    }
 
+    private func setupDeleteButton() {
         deleteButton.title = "vaccination_detail_delete".localized
         deleteButton.style = .secondary
         deleteButton.icon = .delete
@@ -100,12 +118,10 @@ public class VaccinationDetailViewController: UIViewController {
             }))
             self?.present(alert, animated: true)
         }
-
-        showVaccinations()
     }
 
-    private func showVaccinations() {
-        stackView.setCustomSpacing(30, after: vaccinationsStackView)
+    private func setupVaccinations() {
+        stackView.setCustomSpacing(.space_40, after: vaccinationsStackView)
         vaccinationsStackView.subviews.forEach {
             $0.removeFromSuperview()
             self.vaccinationsStackView.removeArrangedSubview($0)
