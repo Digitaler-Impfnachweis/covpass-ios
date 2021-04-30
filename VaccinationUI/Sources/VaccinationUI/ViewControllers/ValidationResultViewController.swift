@@ -49,7 +49,7 @@ public class ValidationResultViewController: BottomPopupViewController {
     }
 
     private func configureHeadline() {
-        headline.attributedTitleText = "".toAttributedString()
+        headline.attributedTitleText = "".styledAs(.header_3)
         headline.action = { [weak self] in
             self?.dismiss(animated: true, completion: nil)
         }
@@ -58,17 +58,17 @@ public class ValidationResultViewController: BottomPopupViewController {
     }
 
     private func configureParagraphView() {
-        resultView.attributedTitleText = inputViewModel.resultTitle.toAttributedString(.header_1)
-        resultView.attributedBodyText = inputViewModel.resultBody.toAttributedString(.body)
+        resultView.attributedTitleText = inputViewModel.resultTitle.styledAs(.header_1)
+        resultView.attributedBodyText = inputViewModel.resultBody.styledAs(.body)
         stackView.setCustomSpacing(.space_24, after: resultView)
 
         nameView.image = .warning
-        nameView.attributedTitleText = inputViewModel.nameTitle?.toAttributedString(.header_3)
-        nameView.attributedBodyText = inputViewModel.nameBody?.toAttributedString(.body)
+        nameView.attributedTitleText = inputViewModel.nameTitle?.styledAs(.header_3)
+        nameView.attributedBodyText = inputViewModel.nameBody?.styledAs(.body)
 
         idView.image = .card
-        idView.attributedTitleText = inputViewModel.idTitle?.toAttributedString(.header_3)
-        idView.attributedBodyText = inputViewModel.idBody?.toAttributedString(.body)
+        idView.attributedTitleText = inputViewModel.idTitle?.styledAs(.header_3)
+        idView.attributedBodyText = inputViewModel.idBody?.styledAs(.body)
     }
 
     private func configureToolbarView() {

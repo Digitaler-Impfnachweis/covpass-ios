@@ -45,12 +45,12 @@ public class StartOnboardingViewController: UIViewController {
     }
 
     private func configureHeadline() {
-        headline.attributedText = inputViewModel.title.toAttributedString(.display)
+        headline.attributedText = inputViewModel.title.styledAs(.display)
         headline.layoutMargins = .init(top: .space_12, left: .space_24, bottom: .zero, right: .space_24)
     }
 
     private func configureSubtitle() {
-        subtitle.attributedText = inputViewModel.info.toAttributedString(.subheader_1)
+        subtitle.attributedText = inputViewModel.info.styledAs(.subheader_1)
         subtitle.layoutMargins = .init(top: .space_12, left: .space_24, bottom: .space_40, right: .space_24)
     }
     
@@ -63,8 +63,8 @@ public class StartOnboardingViewController: UIViewController {
     }
     
     private func configureSecureContentView() {
-        secureContentView.titleAttributedString = inputViewModel.secureTitle.toAttributedString(.header_3)
-        secureContentView.bodyAttributedString = inputViewModel.secureText.toAttributedString(.body).colored(.onBackground70)
+        secureContentView.titleAttributedString = inputViewModel.secureTitle.styledAs(.header_3)
+        secureContentView.bodyAttributedString = inputViewModel.secureText.styledAs(.body).colored(.onBackground70)
         secureContentView.contentView?.backgroundColor = inputViewModel.backgroundColor
         secureContentView.layoutMargins = .init(top: .space_40, left: .space_24, bottom: .space_50, right: .space_24)
     }

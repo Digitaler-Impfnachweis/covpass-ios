@@ -38,8 +38,8 @@ extension NoCertificateCollectionViewCell {
     public typealias T = NoCertifiateConfiguration
     
     public func configure(with configuration: T) {
-        headlineLabel.attributedText = configuration.title?.toAttributedString(.header_3).aligned(to: .center)
-        subHeadlineLabel.attributedText = configuration.subtitle?.toAttributedString(.body).aligned(to: .center)
+        headlineLabel.attributedText = configuration.title?.styledAs(.header_3).aligned(to: .center)
+        subHeadlineLabel.attributedText = configuration.subtitle?.styledAs(.body).aligned(to: .center)
         iconImageView.image = configuration.image
     }
 }

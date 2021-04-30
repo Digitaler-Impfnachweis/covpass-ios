@@ -58,7 +58,7 @@ public class CertificateViewController: UIViewController {
     }
     
     private func setupHeaderView() {
-        headerView.attributedTitleText = viewModel.headlineTitle.toAttributedString(.header_2)
+        headerView.attributedTitleText = viewModel.headlineTitle.styledAs(.header_2)
         headerView.image = viewModel.headlineButtonImage
     }
     

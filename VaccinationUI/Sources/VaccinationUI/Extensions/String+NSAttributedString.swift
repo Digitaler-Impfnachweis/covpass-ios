@@ -9,11 +9,7 @@
 import Foundation
 
 extension String {
-    public func toAttributedString(_ style: TextStyle? = nil) -> NSAttributedString {
-        if let style = style {
-            return NSAttributedString(string: self).styled(as: style)
-        } else {
-            return NSAttributedString(string: self)
-        }
+    public func styledAs(_ style: TextStyle) -> NSAttributedString {
+        NSAttributedString(string: self).styledAs(style)
     }
 }

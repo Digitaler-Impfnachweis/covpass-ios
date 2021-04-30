@@ -40,14 +40,14 @@ extension QrCertificateCollectionViewCell {
         let tintColor: UIColor = configuration.qrViewConfiguration?.tintColor ?? .neutralBlack
 
         headerView.action = configuration.headerAction
-        headerView.titleLabel.attributedText = configuration.subtitle?.toAttributedString(.header_1).colored(tintColor)
-        headerView.subtitleLabel.attributedText = configuration.title?.toAttributedString(.body).colored(tintColor)
+        headerView.titleLabel.attributedText = configuration.subtitle?.styledAs(.header_1).colored(tintColor)
+        headerView.subtitleLabel.attributedText = configuration.title?.styledAs(.body).colored(tintColor)
         headerView.tintColor = tintColor
         stackView.setCustomSpacing(.space_12, after: headerView)
 
         actionView.action = configuration.stateAction
         actionView.stateImageView.image = configuration.stateImage
-        actionView.titleLabel.attributedText = configuration.stateTitle?.toAttributedString(.header_3).colored(tintColor)
+        actionView.titleLabel.attributedText = configuration.stateTitle?.styledAs(.header_3).colored(tintColor)
         actionView.stateImageView.tintColor = tintColor
         actionView.actionButton.tintColor = tintColor
         actionView.tintColor = .neutralWhite

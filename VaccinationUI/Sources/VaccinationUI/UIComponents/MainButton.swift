@@ -159,7 +159,7 @@ public class MainButton: XibView {
     }
 
     private func updateTextStyle() {
-        let attributedText = title?.toAttributedString(.mainButton).aligned(to: .center)
+        let attributedText = title?.styledAs(.mainButton).aligned(to: .center)
         innerButton.setAttributedTitle(attributedText?.colored(style.textColor), for: .normal)
         innerButton.setAttributedTitle(attributedText?.colored(style.disabledTextColor), for: .disabled)
         innerButton.setAttributedTitle(attributedText?.colored(style.highlightedTextColor), for: .highlighted)

@@ -47,7 +47,7 @@ public class ProofPopupViewController: BottomPopupViewController {
     }
 
     private func configureHeadline() {
-        headline.attributedTitleText = inputViewModel.title.toAttributedString(.header_2)
+        headline.attributedTitleText = inputViewModel.title.styledAs(.header_2)
         headline.action = { [weak self] in
             self?.dismiss(animated: true, completion: nil)
         }
@@ -55,7 +55,7 @@ public class ProofPopupViewController: BottomPopupViewController {
     }
     
     private func configureActionView() {
-        actionView.attributedTitleText = inputViewModel.actionTitle.toAttributedString(.header_3)
+        actionView.attributedTitleText = inputViewModel.actionTitle.styledAs(.header_3)
         actionView.action = { [weak self] in
             self?.dismiss(animated: true, completion: nil)
         }
@@ -65,7 +65,7 @@ public class ProofPopupViewController: BottomPopupViewController {
     }
 
     private func configureDescriptionText() {
-        descriptionText.attributedBodyText = inputViewModel.info.toAttributedString(.body)
+        descriptionText.attributedBodyText = inputViewModel.info.styledAs(.body)
         descriptionText.layoutMargins.top = .space_18
         descriptionText.layoutMargins.bottom = .space_40
     }

@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 extension NSAttributedString {
-    public func styled(as style: TextStyle) -> NSAttributedString {
+    public func styledAs(_ style: TextStyle) -> NSAttributedString {
         style.apply(self)
     }
 
@@ -19,11 +19,11 @@ extension NSAttributedString {
     }
 
     public func font(named fontName: String,
-                    size: CGFloat,
-                    lineHeight: CGFloat? = nil,
-                    textStyle: UIFont.TextStyle = .body,
-                    in range: NSRange? = nil,
-                    traitCollection: UITraitCollection? = nil) -> NSAttributedString {
+                     size: CGFloat,
+                     lineHeight: CGFloat? = nil,
+                     textStyle: UIFont.TextStyle = .body,
+                     in range: NSRange? = nil,
+                     traitCollection: UITraitCollection? = nil) -> NSAttributedString {
         guard let font = UIFont(name: fontName, size: size) else { fatalError("Error loading font with name \(fontName)") }
 
         let fontMetrics = UIFontMetrics(forTextStyle: textStyle)
@@ -37,7 +37,9 @@ extension NSAttributedString {
         }
     }
 
-    public func underlined(style: NSUnderlineStyle = .single, color: UIColor? = nil, in range: NSRange? = nil) -> NSAttributedString {
+    public func underlined(style: NSUnderlineStyle = .single,
+                           color: UIColor? = nil,
+                           in range: NSRange? = nil) -> NSAttributedString {
         let result = setAttribute(.underlineStyle, value: style.rawValue, in: range)
 
         if let color = color ?? attribute(.foregroundColor, at: range?.location) {
@@ -49,17 +51,20 @@ extension NSAttributedString {
 
     // This is a solution for fonts with a high built in lineHeight(See UIFont's lineHeight property at runtime).
     // LineSpacing cannot be used with negative values.
-    public func lineHeight(_ withValue: CGFloat, in range: NSRange? = nil, fontMetrics: UIFontMetrics = .default, traitCollection: UITraitCollection? = nil) -> NSAttributedString {
+    public func lineHeight(_ value: CGFloat,
+                           in range: NSRange? = nil,
+                           fontMetrics: UIFontMetrics = .default,
+                           traitCollection: UITraitCollection? = nil) -> NSAttributedString {
         paragraphStyled(in: range) { style in
             guard let font: UIFont = attribute(.font) else { return }
 
-            // font.lineHeight is already scaled, so we must scale the requested lineHeight value, too, to calculate the multiple.
-            style.lineHeightMultiple = 1.0 / font.lineHeight * fontMetrics.scaledValue(for: withValue, compatibleWith: traitCollection)
+            // font.lineHeight is already scaled, so we must scale the requested lineHeight value too, to calculate the multiple.
+            style.lineHeightMultiple = 1.0 / font.lineHeight * fontMetrics.scaledValue(for: value, compatibleWith: traitCollection)
         }
     }
 
-    public func letterSpacing(_ withValue: CGFloat, in range: NSRange? = nil) -> NSAttributedString {
-        setAttribute(.kern, value: withValue, in: range)
+    public func letterSpacing(_ value: CGFloat, in range: NSRange? = nil) -> NSAttributedString {
+        setAttribute(.kern, value: value, in: range)
     }
 
     public func paragraphStyled(in range: NSRange? = nil, with style: (NSMutableParagraphStyle) -> Void) -> NSAttributedString {

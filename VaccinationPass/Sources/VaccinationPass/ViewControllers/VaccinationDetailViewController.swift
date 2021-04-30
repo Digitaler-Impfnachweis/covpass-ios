@@ -57,7 +57,7 @@ public class VaccinationDetailViewController: UIViewController {
     }
 
     private func setupHeadline() {
-        nameHeadline.attributedText = viewModel.name.toAttributedString(.header_1).colored(.onBackground100)
+        nameHeadline.attributedText = viewModel.name.styledAs(.header_1).colored(.onBackground100)
         nameHeadline.layoutMargins = .init(top: .zero, left: .space_24, bottom: .zero, right: .space_24)
         stackView.setCustomSpacing(.space_24, after: nameHeadline)
     }
@@ -68,8 +68,8 @@ public class VaccinationDetailViewController: UIViewController {
         immunizationContainerView.backgroundColor = .neutralWhite
         immunizationView.stackView.alignment = .top
         immunizationView.image = viewModel.immunizationIcon
-        immunizationView.attributedTitleText = viewModel.immunizationTitle.toAttributedString(.header_3)
-        immunizationView.attributedBodyText = viewModel.immunizationBody.toAttributedString(.body).colored(.onBackground70)
+        immunizationView.attributedTitleText = viewModel.immunizationTitle.styledAs(.header_3)
+        immunizationView.attributedBodyText = viewModel.immunizationBody.styledAs(.body).colored(.onBackground70)
         immunizationView.layoutMargins.bottom = .space_24
 
         immunizationButton.title = viewModel.immunizationButton
@@ -87,16 +87,16 @@ public class VaccinationDetailViewController: UIViewController {
 
     private func setupPersonalData() {
         stackView.setCustomSpacing(12, after: personalDataHeadline)
-        personalDataHeadline.attributedText = "vaccination_detail_personal_information".localized.toAttributedString(.header_2)
+        personalDataHeadline.attributedText = "vaccination_detail_personal_information".localized.styledAs(.header_2)
         personalDataHeadline.layoutMargins = .init(top: .space_30, left: .space_24, bottom: .zero, right: .space_24)
 
-        nameView.attributedTitleText = "vaccination_detail_name".localized.toAttributedString(.header_3)
-        nameView.attributedBodyText = viewModel?.name.toAttributedString(.body)
+        nameView.attributedTitleText = "vaccination_detail_name".localized.styledAs(.header_3)
+        nameView.attributedBodyText = viewModel?.name.styledAs(.body)
         nameView.contentView?.layoutMargins = .init(top: 12, left: 24, bottom: 12, right: 24)
         nameView.showBottomBorder()
 
-        birtdateView.attributedTitleText = "vaccination_detail_birthdate".localized.toAttributedString(.header_3)
-        birtdateView.attributedBodyText = viewModel?.birthDate.toAttributedString(.body)
+        birtdateView.attributedTitleText = "vaccination_detail_birthdate".localized.styledAs(.header_3)
+        birtdateView.attributedBodyText = viewModel?.birthDate.styledAs(.body)
         birtdateView.contentView?.layoutMargins = .init(top: 12, left: 24, bottom: 12, right: 24)
     }
 

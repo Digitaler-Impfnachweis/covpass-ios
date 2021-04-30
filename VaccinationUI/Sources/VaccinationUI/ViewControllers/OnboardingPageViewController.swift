@@ -43,12 +43,12 @@ public class OnboardingPageViewController: UIViewController {
     }
 
     private func configureHeadline() {
-        headline.attributedText = inputViewModel.title.toAttributedString(.header_2)
+        headline.attributedText = inputViewModel.title.styledAs(.header_2)
         headline.layoutMargins = .init(top: .space_40, left: .space_24, bottom: .zero, right: .space_24)
     }
 
     private func configureParagraphView() {
-        descriptionText.attributedText = inputViewModel.info.toAttributedString(.body).colored(.onBackground70)
+        descriptionText.attributedText = inputViewModel.info.styledAs(.body).colored(.onBackground70)
         descriptionText.layoutMargins = .init(top: .space_12, left: .space_24, bottom: .zero, right: .space_24)
     }
 }

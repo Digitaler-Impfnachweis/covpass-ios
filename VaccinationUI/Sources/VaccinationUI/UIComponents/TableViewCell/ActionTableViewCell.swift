@@ -33,7 +33,7 @@ public class ActionTableViewCell: UITableViewCell {
 
 extension ActionTableViewCell: ActionCell {
     public func configure(title: String, icon: UIImage) {
-        labelHeadline.attributedText = title.toAttributedString(.header_3)
+        labelHeadline.attributedText = title.styledAs(.header_3)
         iconImageView.image = icon
     }
 }
