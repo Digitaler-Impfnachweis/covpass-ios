@@ -11,53 +11,59 @@ import UIKit
 extension UIColor {
     // MARK: - Primary Colors
 
-    public static let brandBase = UIColor(hexString: "#065FC4")
+    public static let brandBase = UIColor("BrandBase")
 
-    public static let onBrandBase = UIColor(hexString: "#FFFFFF")
+    public static let onBrandBase = UIColor("OnBrandBase")
 
-    public static let onBrandAccent = UIColor(hexString: "#FFFFFF")
+    public static let onBrandAccent = UIColor("OnBrandAccent")
 
-    public static let onBrandAccent70 = UIColor(hexString: "#0B47B7")
+    public static let onBrandAccent70 = UIColor("OnBrandAccent70")
 
-    public static let onBackground20 = UIColor(hexString: "#E2E2E2")
+    public static let onBackground20 = UIColor("OnBackground20")
 
-    public static let onBackground50 = UIColor(hexString: "#C9E1FE")
+    public static let onBackground50 = UIColor("OnBackground50")
 
-    public static let onBackground70 = UIColor(hexString: "#556877")
+    public static let onBackground70 = UIColor("OnBackground70")
 
-    public static let onBackground100 = UIColor(hexString: "#1C2227")
+    public static let onBackground100 = UIColor("OnBackground100")
 
-    public static let backgroundPrimary = UIColor(hexString: "#F9F9FB")
+    public static let backgroundPrimary = UIColor("BackgroundPrimary")
 
-    public static let backgroundSecondary = UIColor(hexString: "#FFFFFF")
+    public static let backgroundSecondary = UIColor("BackgroundSecondary")
 
-    public static let backgroundSecondary20 = UIColor(hexString: "#E8E8E8")
+    public static let backgroundSecondary20 = UIColor("BackgroundSecondary20")
 
-    public static let backgroundPrimary100 = UIColor(hexString: "#1B1B28")
+    public static let backgroundPrimary100 = UIColor("backgroundSecondary100")
 
-    public static let brandAccent = UIColor(hexString: "#065FC4")
+    public static let brandAccent = UIColor("BrandAccent")
 
-    public static let brandAccent10 = UIColor(hexString: "#EBF4FE")
+    public static let brandAccent10 = UIColor("BrandAccent10")
 
-    public static let brandAccent20 = UIColor(hexString: "#D2E7FE")
+    public static let brandAccent20 = UIColor("BrandAccent20")
 
-    public static let brandAccent70 = UIColor(hexString: "#065FC4")
+    public static let brandAccent70 = UIColor("BrandAccent70")
 
-    public static let primaryButtonShadow = UIColor(hexString: "#8B8B8B").withAlphaComponent(0.5)
+    public static let primaryButtonShadow = UIColor("PrimaryButtonShadow")
 
     // MARK: - Neutral Colors
 
-    public static let neutralBlack = UIColor(hexString: "#000000")
+    public static let neutralBlack = UIColor("NeutralBlack")
 
-    public static let neutralWhite = UIColor(hexString: "#FFFFFF")
+    public static let neutralWhite = UIColor("NeutralWhite")
 
     // MARK: - Neutral Status
 
-    public static let error = UIColor(hexString: "#D90000")
+    public static let error = UIColor("Error")
 
-    public static let success = UIColor(hexString: "#6AA500")
+    public static let success = UIColor("Success")
 
-    public static let warning = UIColor(hexString: "#FECB00")
+    public static let warning = UIColor("Warning")
 
-    public static let info = UIColor(hexString: "#0097BD")
+    public static let info = UIColor("Info")
+}
+
+private extension UIColor {
+    convenience init(_ catalogColor: String) {
+        self.init(named: catalogColor, in: .module, compatibleWith: nil)!
+    }
 }
