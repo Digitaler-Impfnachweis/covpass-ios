@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -21,19 +21,22 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eQf-3g-Gna" userLabel="Content View">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="491"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="475"/>
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="PlU-Hg-2Bs">
-                                                <rect key="frame" x="8" y="52" width="398" height="431"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="PlU-Hg-2Bs">
+                                                <rect key="frame" x="0.0" y="44" width="414" height="431"/>
                                                 <subviews>
-                                                    <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="243" translatesAutoresizingMaskIntoConstraints="NO" id="c3h-xY-XBF" customClass="ConfirmView" customModule="VaccinationUI">
-                                                        <rect key="frame" x="0.0" y="0.0" width="398" height="243"/>
-                                                    </view>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="1000" verticalHuggingPriority="251" placeholderIntrinsicWidth="398" placeholderIntrinsicHeight="250" translatesAutoresizingMaskIntoConstraints="NO" id="vhb-FH-CwB">
+                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="243"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" secondItem="vhb-FH-CwB" secondAttribute="height" multiplier="375:220" id="GqT-kX-2qO"/>
+                                                        </constraints>
+                                                    </imageView>
                                                     <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="60" translatesAutoresizingMaskIntoConstraints="NO" id="mQR-L5-HeH" customClass="PlainLabel" customModule="VaccinationUI">
-                                                        <rect key="frame" x="0.0" y="243" width="398" height="60"/>
+                                                        <rect key="frame" x="0.0" y="243" width="414" height="60"/>
                                                     </view>
                                                     <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="cCA-Hh-fFF" customClass="PlainLabel" customModule="VaccinationUI">
-                                                        <rect key="frame" x="0.0" y="303" width="398" height="128"/>
+                                                        <rect key="frame" x="0.0" y="303" width="414" height="128"/>
                                                     </view>
                                                 </subviews>
                                             </stackView>
@@ -44,6 +47,7 @@
                                             <constraint firstItem="PlU-Hg-2Bs" firstAttribute="top" secondItem="eQf-3g-Gna" secondAttribute="topMargin" id="UJO-4g-OSd"/>
                                             <constraint firstAttribute="trailingMargin" secondItem="PlU-Hg-2Bs" secondAttribute="trailing" id="c0R-bf-yQU"/>
                                         </constraints>
+                                        <edgeInsets key="layoutMargins" top="0.0" left="0.0" bottom="0.0" right="0.0"/>
                                     </view>
                                 </subviews>
                                 <constraints>
@@ -67,9 +71,9 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="confirmView" destination="c3h-xY-XBF" id="PPy-xm-joD"/>
                         <outlet property="descriptionText" destination="cCA-Hh-fFF" id="KEe-SB-QsX"/>
                         <outlet property="headline" destination="mQR-L5-HeH" id="eiS-wP-DjE"/>
+                        <outlet property="imageView" destination="vhb-FH-CwB" id="9Qg-Ae-9pO"/>
                         <outlet property="scrollView" destination="DUn-kR-NJa" id="X3Z-Na-L2a"/>
                     </connections>
                 </viewController>
@@ -507,9 +511,6 @@
         </designable>
         <designable name="btb-DJ-LeM">
             <size key="intrinsicContentSize" width="414" height="128"/>
-        </designable>
-        <designable name="c3h-xY-XBF">
-            <size key="intrinsicContentSize" width="414" height="243"/>
         </designable>
         <designable name="cCA-Hh-fFF">
             <size key="intrinsicContentSize" width="414" height="128"/>

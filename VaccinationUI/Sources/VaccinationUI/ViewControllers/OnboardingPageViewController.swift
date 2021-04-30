@@ -11,7 +11,7 @@ public class OnboardingPageViewController: UIViewController {
     // MARK: - IBOutlets
 
     @IBOutlet var scrollView: UIScrollView!
-    @IBOutlet var confirmView: ConfirmView!
+    @IBOutlet var imageView: UIImageView!
     @IBOutlet var headline: PlainLabel!
     @IBOutlet var descriptionText: PlainLabel!
     
@@ -38,14 +38,8 @@ public class OnboardingPageViewController: UIViewController {
     // MARK: - Private
 
     private func configureImageView() {
-        confirmView.kind = .custom(
-            image: inputViewModel.image,
-            width: inputViewModel.imageWidth,
-            height: inputViewModel.imageHeight
-        )
-        confirmView.detail = nil
-        confirmView.imageView.contentMode = inputViewModel.imageContentMode
-        confirmView.contentView?.backgroundColor = inputViewModel.backgroundColor
+        imageView.image = inputViewModel.image
+        imageView.contentMode = .scaleAspectFit
     }
 
     private func configureHeadline() {
