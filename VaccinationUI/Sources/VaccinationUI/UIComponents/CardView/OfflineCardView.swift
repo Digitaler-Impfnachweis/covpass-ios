@@ -17,10 +17,15 @@ public class OfflineCardView: BaseCardView {
     @IBOutlet public var infoImageView: UIImageView!
     @IBOutlet public var infoLabel: UILabel!
     @IBOutlet public var dateLabel: UILabel!
-    
+
+    // MARK: - Properties
+
+    private let cornerRadius: CGFloat = 14
+
     public override func initView() {
         super.initView()
         contentView?.layoutMargins = .init(top: .space_18, left: .space_24, bottom: .space_18, right: .space_24)
         contentView?.backgroundColor = .brandAccent10
+        contentView?.layer.cornerRadius = cornerRadius
     }
 }
