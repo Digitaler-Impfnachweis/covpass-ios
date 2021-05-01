@@ -171,7 +171,7 @@ public class DefaultCertificateViewModel<T: QRCoderProtocol>: CertificateViewMod
             stateAction: nil,
             headerImage: .starEmpty,
             headerAction: nil,
-            backgroundColor: .onBackground70,
+            backgroundColor: .onBrandAccent70,
             qrViewConfiguration: qrViewConfiguration)
     }
 

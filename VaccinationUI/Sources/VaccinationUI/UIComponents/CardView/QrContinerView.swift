@@ -20,7 +20,7 @@ public class QrContinerView: XibView {
 
     public var image: UIImage? {
         didSet {
-            imageView.image = image
+            updateViews()
         }
     }
 
@@ -40,7 +40,6 @@ public class QrContinerView: XibView {
 
     public override func initView() {
         super.initView()
-        contentView?.backgroundColor = .neutralWhite
         contentView?.layoutMargins = .init(top: .space_10, left: .space_10, bottom: .space_10, right: .space_10)
         contentView?.layer.cornerRadius = 30
         contentView?.layer.masksToBounds = true
@@ -48,6 +47,9 @@ public class QrContinerView: XibView {
     }
 
     private func updateViews() {
+        imageView.image = image
+        contentView?.backgroundColor = imageView.image == nil ? .clear : .neutralWhite
+
         titleLabel.attributedText = title?.styledAs(.header_3)
         titleLabel.isHidden = titleLabel.text.isNilOrEmpty
 
