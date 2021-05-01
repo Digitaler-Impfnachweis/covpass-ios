@@ -72,7 +72,7 @@ public enum MainButtonStyle {
         case .primary:
             return .brandAccent
         case .secondary:
-            return .brandAccent
+            return .backgroundSecondary
         case .tertiary:
             return .onBackground20
         }
@@ -83,7 +83,7 @@ public enum MainButtonStyle {
         case .primary:
             return .brandBase
         case .secondary:
-            return .brandBase
+            return .backgroundSecondary
         case .tertiary:
             return .onBackground20
         }
@@ -94,7 +94,7 @@ public enum MainButtonStyle {
         case .primary:
             return .brandBase
         case .secondary:
-            return .brandBase
+            return .backgroundSecondary
         case .tertiary:
             return .onBackground20
         }
@@ -116,7 +116,7 @@ public enum MainButtonStyle {
         case .primary:
             return .clear
         case .secondary:
-            return .brandAccent
+            return .onBackground20
         case .tertiary:
             return .clear
         }
@@ -127,7 +127,7 @@ public enum MainButtonStyle {
         case .primary:
             return .clear
         case .secondary:
-            return .brandAccent
+            return .onBackground20
         case .tertiary:
             return .clear
         }
@@ -138,7 +138,7 @@ public enum MainButtonStyle {
         case .primary:
             return .clear
         case .secondary:
-            return .brandAccent
+            return .onBackground20
         case .tertiary:
             return .clear
         }
@@ -147,15 +147,11 @@ public enum MainButtonStyle {
     public var shadowColor: UIColor? {
         switch self {
         case .primary:
-            return UIColor(hexString: "#8B8B8B").withAlphaComponent(0.5)
+            return .primaryButtonShadow
         case .secondary:
             return .clear
         case .tertiary:
             return .clear
         }
-    }
-
-    public var tintColor: UIColor? {
-        .brandBase
     }
 }

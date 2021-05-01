@@ -175,13 +175,10 @@ public class MainButton: XibView {
         switch innerButton.state {
         case .normal:
             backgroundColor = style.backgroundColor
-            tintColor = style.tintColor
         case .selected:
             backgroundColor = style.selectedBackgroundColor
-            tintColor = style.tintColor
         case .highlighted:
             backgroundColor = style.highlightedBackgroundColor
-            tintColor = style.tintColor
         default:
             break
         }

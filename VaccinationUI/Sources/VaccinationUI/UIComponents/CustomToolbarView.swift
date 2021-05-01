@@ -98,6 +98,7 @@ public class CustomToolbarView: XibView {
 
         leftButton.isHidden = false
         leftButton.isEnabled = true
+        leftButton.tintColor = .onBackground70
         switch leftButtonItem {
         case .navigationArrow:
             leftButton.setImage(.arrowBack, for: .normal)

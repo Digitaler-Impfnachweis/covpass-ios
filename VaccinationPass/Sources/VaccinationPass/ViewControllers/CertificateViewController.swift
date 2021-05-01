@@ -75,7 +75,6 @@ public class CertificateViewController: UIViewController {
     }
     
     private func setupActionButton() {
-        view.tintColor = .brandAccent
         addButton.icon = viewModel?.addButtonImage
         addButton.action = { [weak self] in
             self?.presentPopup()

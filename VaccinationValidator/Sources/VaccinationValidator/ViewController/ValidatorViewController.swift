@@ -26,7 +26,6 @@ public class ValidatorViewController: UIViewController {
     
     override public func viewDidLoad() {
         super.viewDidLoad()
-        view.tintColor = .brandAccent
         setupHeaderView()
         setupCardView()
     }
