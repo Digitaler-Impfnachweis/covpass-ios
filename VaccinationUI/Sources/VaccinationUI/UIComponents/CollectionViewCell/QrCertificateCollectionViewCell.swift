@@ -18,16 +18,38 @@ public class QrCertificateCollectionViewCell: BaseCardCollectionViewCell {
     @IBOutlet public var actionView: CardViewAction!
     @IBOutlet public var qrContinerView: QrContinerView!
 
+    // MARK: - Properties
+
+    private let cornerRadius: CGFloat = 14
+    private let shadowRadius: CGFloat = 16
+    private let shadowOpacity: CGFloat = 0.2
+    private let shadowOffset: CGSize = .init(width: 0, height: -4)
+
     // MARK: - Lifecycle
 
     public override func awakeFromNib() {
         super.awakeFromNib()
+
+        clipsToBounds = false
+
+        contentView.clipsToBounds = false
+        contentView.layer.shadowColor = UIColor.neutralBlack.cgColor
+        contentView.layer.shadowRadius = shadowRadius
+        contentView.layer.shadowOpacity = Float(shadowOpacity)
+        contentView.layer.shadowOffset = shadowOffset
+
         containerView.layoutMargins = .init(top: .space_30, left: .space_24, bottom: .space_30, right: .space_24)
         containerView.tintColor = .brandAccent
-        containerView.layer.cornerRadius = 15
+        containerView.layer.cornerRadius = cornerRadius
         contentStackView.setCustomSpacing(.space_20, after: actionView)
+
         actionView.action = onAction
         headerView.action = onFavorite
+    }
+
+    public override func layoutSubviews() {
+        super.layoutSubviews()
+        contentView.layer.shadowPath = UIBezierPath(roundedRect: containerView.frame, cornerRadius: containerView.layer.cornerRadius).cgPath
     }
 }
 
@@ -58,5 +80,7 @@ extension QrCertificateCollectionViewCell {
         qrContinerView.title = configuration.qrViewConfiguration?.qrTitle
         qrContinerView.subtitle = configuration.qrViewConfiguration?.qrSubtitle
         qrContinerView.layoutMargins = .init(top: .space_20, left: .space_24, bottom: .zero, right: .space_24)
+
+        layoutIfNeeded()
     }
 }

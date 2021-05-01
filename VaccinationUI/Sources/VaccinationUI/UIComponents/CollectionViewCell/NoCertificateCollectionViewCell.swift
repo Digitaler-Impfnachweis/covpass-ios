@@ -22,10 +22,12 @@ public class NoCertificateCollectionViewCell: BaseCardCollectionViewCell {
     
     public override func awakeFromNib() {
         super.awakeFromNib()
+
         containerView.layoutMargins = .init(top: .space_120, left: .space_24, bottom: .space_120, right: .space_24)
         containerView.layer.cornerRadius = 15
         containerView.backgroundColor = .backgroundSecondary20
-        cardTintColor = .backgroundSecondary20
+        containerView.tintColor = .backgroundSecondary20
+
         stackView.spacing = .zero
         stackView.setCustomSpacing(.space_10, after: iconImageView)
     }
@@ -40,5 +42,7 @@ extension NoCertificateCollectionViewCell {
         headlineLabel.attributedText = configuration.title?.styledAs(.header_3).aligned(to: .center)
         subHeadlineLabel.attributedText = configuration.subtitle?.styledAs(.body).colored(.onBackground70).aligned(to: .center)
         iconImageView.image = configuration.image
+
+        layoutIfNeeded()
     }
 }

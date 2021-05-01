@@ -55,13 +55,11 @@ public class ValidatorViewController: UIViewController {
         scanCard.textLabel.attributedText = "Scannen Sie jetzt das Prüfzertifikat. Sie sehen sofort ob die Person geimpft ist.".styledAs(.body).colored(.backgroundSecondary)
         scanCard.actionButton.title = "Zertifikat scannen"
         scanCard.actionButton.action = presentPopup
-        scanCard.cornerRadius = viewModel.continerCornerRadius
 
         offlineCard.titleLabel.attributedText = "Offline-Modus".styledAs(.header_2)
         offlineCard.textLable.attributedText = "Um offline prüfen zu können, halten Sie die App auf dem aktuellsten Stand. Stellen Sie dafür ab und an eine Verbindung mit dem Internet her.".styledAs(.body)
         offlineCard.infoLabel.attributedText = "Aktualisieren Sie die App".styledAs(.body)
         offlineCard.infoImageView.image = .warning
-        offlineCard.cornerRadius = viewModel.continerCornerRadius
         offlineCard.dateLabel.attributedText = "Letztes Update: 01.01.1971, 05:36".styledAs(.body).colored(.onBackground70)
     }
     

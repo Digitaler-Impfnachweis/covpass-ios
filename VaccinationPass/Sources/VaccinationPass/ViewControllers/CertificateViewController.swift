@@ -63,6 +63,7 @@ public class CertificateViewController: UIViewController {
     }
     
     private func setupCollecttionView() {
+        collectionView.clipsToBounds = false
         collectionView.delegate = self
         collectionView.dataSource = self
         let layout = CardFlowLayout()
