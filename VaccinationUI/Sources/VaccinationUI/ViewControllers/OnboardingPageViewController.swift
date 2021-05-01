@@ -27,7 +27,7 @@ public class OnboardingPageViewController: UIViewController {
 
     public override func viewDidLoad() {
         super.viewDidLoad()
-        scrollView.contentInset.top = .space_30
+        scrollView.contentInset.top = .space_70
         configureImageView()
         configureHeadline()
         configureParagraphView()
