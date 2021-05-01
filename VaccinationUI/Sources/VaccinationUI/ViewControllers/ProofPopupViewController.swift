@@ -43,7 +43,7 @@ public class ProofPopupViewController: BottomPopupViewController {
 
     private func configureImageView() {
         imageView.image = inputViewModel.image
-        imageView.scaleAspectFit()
+        imageView.pinHeightToScaleAspectFit()
     }
 
     private func configureHeadline() {
