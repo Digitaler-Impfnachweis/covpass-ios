@@ -29,7 +29,7 @@ public enum TextStyle {
     /// size: 12 lineHeight: 18 letterSpacing: 0.13 type: regular color: onBackground100
     case label
 
-    /// size: 14 lineHeight: 21 letterSpacing: 0.13 type: semi-bold color: onBackground100
+    /// size: 14 lineHeight: 18 letterSpacing: 0.13 type: semi-bold color: onBackground100
     case mainButton
 
     public func apply(_ string: NSAttributedString) -> NSAttributedString {
