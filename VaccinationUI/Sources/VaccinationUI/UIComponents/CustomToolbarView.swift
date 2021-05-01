@@ -247,6 +247,7 @@ public class CustomToolbarView: XibView {
 
     private func configureDisabledButton(button: MainButton, title: String? = nil) {
         button.isEnabled = false
+        button.title = title
         addSubview(button)
         configureCenterConstraints(for: button)
     }

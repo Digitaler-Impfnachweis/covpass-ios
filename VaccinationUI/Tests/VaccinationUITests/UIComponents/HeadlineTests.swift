@@ -36,12 +36,7 @@ class HeadlineTests: XCTestCase {
     }
 
     func testInitView() {
-        XCTAssertEqual(sut.isTransparent, false)
-        XCTAssertEqual(sut.font, UIFont.ibmPlexSansSemiBold(with: 20))
-        XCTAssertEqual(sut.textColor, .onBackground100)
-
         XCTAssertTrue(sut.textableView.adjustsFontForContentSizeCategory)
-        XCTAssertEqual(sut.textableView.font, UIFontMetrics.default.scaledFont(for: UIFont.ibmPlexSansSemiBold(with: 20) ?? UIFont.systemFont(ofSize: 20)))
         XCTAssertEqual(sut.textableView.numberOfLines, 0)
 
         XCTAssertTrue(sut.textableView.adjustsFontForContentSizeCategory)

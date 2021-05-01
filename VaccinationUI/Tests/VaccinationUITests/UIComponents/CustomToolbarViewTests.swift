@@ -26,15 +26,13 @@ class CustomToolbarViewTests: XCTestCase {
         XCTAssertNotNil(view.contentView, "View ContentView should exist")
 
         XCTAssertNotNil(sut.leftButton)
-        XCTAssertEqual(sut.navigationIcon, UIConstants.IconName.NavigationArrow)
-        XCTAssertEqual(sut.navigationIconColor, .onBackground70)
     }
 
     func testSetup() {
         sut.setUpLeftButton(leftButtonItem: .navigationArrow)
         XCTAssertFalse(sut.leftButton.isHidden)
         XCTAssertTrue(sut.leftButton.isEnabled)
-        XCTAssertEqual(sut.leftButton.tintColor, sut.navigationIconColor)
+        XCTAssertEqual(sut.leftButton.tintColor, .onBackground70)
 
         sut.setUpLeftButton(leftButtonItem: nil)
         XCTAssertEqual(sut.leftButton.isEnabled, false)
@@ -72,10 +70,8 @@ class CustomToolbarViewTests: XCTestCase {
 
         // Then
         XCTAssertNotNil(sut.primaryButton)
-        XCTAssertNotNil(sut.primaryButton as? PrimaryIconButtonContainer)
         XCTAssertTrue(sut.primaryButton.isEnabled)
 
-        XCTAssertEqual(sut.primaryButton.enabledButtonBackgroundColor, .onBackground20)
         XCTAssertEqual(sut.primaryButton.tintColor, .onBackground70)
     }
 
@@ -88,7 +84,6 @@ class CustomToolbarViewTests: XCTestCase {
 
         // Then
         XCTAssertNotNil(sut.primaryButton)
-        XCTAssertNotNil(sut.primaryButton as? PrimaryIconButtonContainer)
         XCTAssertTrue(sut.primaryButton.isEnabled)
     }
 
@@ -114,7 +109,6 @@ class CustomToolbarViewTests: XCTestCase {
 
         // Then
         XCTAssertNotNil(sut.primaryButton)
-        XCTAssertEqual(sut.primaryButton.buttonBackgroundColor, .clear)
         XCTAssertTrue(sut.primaryButton.isEnabled)
     }
 
@@ -127,10 +121,8 @@ class CustomToolbarViewTests: XCTestCase {
 
         // Then
         XCTAssertNotNil(sut.primaryButton)
-        XCTAssertEqual(sut.primaryButton.text, "Test")
-        XCTAssertEqual(sut.primaryButton.buttonBackgroundColor, .onBackground20)
-        XCTAssertEqual(sut.primaryButton.buttonTextColor, .onBackground50)
-        XCTAssertEqual(sut.primaryButton.shadowColor, .clear)
+        XCTAssertEqual(sut.primaryButton.title, "Test")
+        XCTAssertEqual(sut.primaryButton.style, .primary)
         XCTAssertFalse(sut.primaryButton.isEnabled)
     }
 
@@ -143,18 +135,8 @@ class CustomToolbarViewTests: XCTestCase {
 
         // Then
         XCTAssertNotNil(sut.primaryButton)
-        XCTAssertEqual(sut.primaryButton.buttonBackgroundColor, .onBackground20)
-        XCTAssertEqual(sut.primaryButton.buttonTextColor, .onBackground50)
-        XCTAssertEqual(sut.primaryButton.shadowColor, .clear)
+        XCTAssertEqual(sut.primaryButton.style, .primary)
         XCTAssertFalse(sut.primaryButton.isEnabled)
-    }
-
-    func testSettingPrimaryButton() {
-        // When
-        sut.primaryButton = MainButton()
-        // Then
-        XCTAssertEqual(sut.primaryButton.textableView.numberOfLines, 2)
-        XCTAssertEqual(sut.primaryButton.innerButton.titleLabel?.numberOfLines, 2)
     }
 
     func testVoiceOver() {
@@ -173,9 +155,9 @@ class CustomToolbarViewTests: XCTestCase {
         sut.leftButtonVoiceOverSettings?.traits = [.button,
                                                    .updatesFrequently]
 
-        XCTAssertEqual(sut.primaryButton.textableView.accessibilityLabel, "primaryLabel")
-        XCTAssertEqual(sut.primaryButton.textableView.accessibilityHint, "primaryHint")
-        XCTAssertEqual(sut.primaryButton.textableView.accessibilityTraits, [UIAccessibilityTraits.button,
+        XCTAssertEqual(sut.primaryButton.innerButton.accessibilityLabel, "primaryLabel")
+        XCTAssertEqual(sut.primaryButton.innerButton.accessibilityHint, "primaryHint")
+        XCTAssertEqual(sut.primaryButton.innerButton.accessibilityTraits, [UIAccessibilityTraits.button,
                                                                             UIAccessibilityTraits.notEnabled])
 
         XCTAssertEqual(sut.leftButton.accessibilityLabel, "leftLabel")

@@ -154,7 +154,7 @@ public class MainButton: XibView {
         }
     }
 
-    @IBAction func buttonPressed(_: Any) {
+    @IBAction func buttonPressed() {
         action?()
     }
 

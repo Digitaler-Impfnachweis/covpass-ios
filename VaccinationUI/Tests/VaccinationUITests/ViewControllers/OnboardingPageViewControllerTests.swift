@@ -38,18 +38,11 @@ class OnboardingPageViewControllerTests: XCTestCase {
     }
 
     func testConfigureHeadline() {
-        XCTAssertEqual(sut.headline.text, viewModel.title)
-        XCTAssertEqual(sut.headline.font, viewModel.headlineFont)
-        XCTAssertEqual(sut.headline.textColor, viewModel.headlineColor)
+        XCTAssertEqual(sut.headline.attributedText, viewModel.title.styledAs(.header_2))
     }
 
     func testConfigureParagraphView() {
-        XCTAssertTrue(sut.paragraphView.title.isHidden)
-        XCTAssertEqual(sut.paragraphView.bodyText, viewModel.info)
-        XCTAssertEqual(sut.paragraphView.bodyFont, viewModel.paragraphBodyFont)
-        XCTAssertEqual(sut.paragraphView.body.font, UIFontMetrics.default.scaledFont(for: viewModel.paragraphBodyFont))
-        XCTAssertTrue(sut.paragraphView.body.adjustsFontForContentSizeCategory)
-        XCTAssertEqual(sut.paragraphView.contentView?.backgroundColor, viewModel.backgroundColor)
+        XCTAssertEqual(sut.descriptionText.attributedText, viewModel.info.styledAs(.body).colored(.onBackground70))
     }
     
     func testViewDidLoadActionExecuted() {

@@ -24,6 +24,11 @@ extension NSAttributedString {
                      textStyle: UIFont.TextStyle = .body,
                      in range: NSRange? = nil,
                      traitCollection: UITraitCollection? = nil) -> NSAttributedString {
+
+        if NSClassFromString("XCTest") != nil  {
+            try? UIFont.loadCustomFonts()
+        }
+
         guard let font = UIFont(name: fontName, size: size) else { fatalError("Error loading font with name \(fontName)") }
 
         let fontMetrics = UIFontMetrics(forTextStyle: textStyle)

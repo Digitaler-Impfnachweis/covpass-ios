@@ -20,7 +20,7 @@
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="86x-Q9-jWu">
                     <rect key="frame" x="16" y="8" width="168" height="84"/>
                     <connections>
-                        <action selector="buttonPressed:" destination="-1" eventType="touchUpInside" id="tlr-P2-t86"/>
+                        <action selector="buttonPressed" destination="-1" eventType="touchUpInside" id="NIo-5J-2Uh"/>
                     </connections>
                 </button>
                 <view hidden="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JWD-Kr-Fjd" customClass="DotPulseActivityIndicator" customModule="VaccinationUI">
