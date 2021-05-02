@@ -28,7 +28,8 @@ extension OnboardingRouter: Router {
         UserDefaults.StartupInfo.set(true, forKey: .onboarding)
 
         let vc = ValidatorViewController.createFromStoryboard(bundle: Bundle.module)
-        vc.viewModel = ValidatorViewModel()
+        let repository = VaccinationRepository(service: APIService(), parser: QRCoder())
+        vc.viewModel = ValidatorViewModel(repository: repository)
         vc.router = ValidatorPopupRouter()
         windowDelegate?.update(rootViewController: vc)
     }

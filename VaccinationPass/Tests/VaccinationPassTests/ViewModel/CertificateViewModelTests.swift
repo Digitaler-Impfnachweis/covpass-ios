@@ -15,14 +15,14 @@ class CertificateViewModelTests: XCTestCase {
     
     // MARK: - Test Variables
     
-    var sut: DefaultCertificateViewModel<MockQRCoder>!
+    var sut: DefaultCertificateViewModel!
     var sutDelegate: MockViewModelDelegate!
 
     // MARK: - Setup & Teardown
     
     override func setUp() {
         super.setUp()
-        sut = DefaultCertificateViewModel(parser: MockQRCoder())
+        sut = DefaultCertificateViewModel(repository: VaccinationRepositoryMock())
         sutDelegate = MockViewModelDelegate()
         sut.delegate = sutDelegate
     }

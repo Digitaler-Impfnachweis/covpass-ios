@@ -15,7 +15,11 @@ public class ValidatorViewModel {
     
     // MARK: - Private
     
-    private let parser: QRCoder = QRCoder()
+    private let repository: VaccinationRepositoryProtocol
+
+    public init(repository: VaccinationRepositoryProtocol) {
+        self.repository = repository
+    }
     
     // MARK: - Internal
     
@@ -31,16 +35,7 @@ public class ValidatorViewModel {
     }
 
     public func process(payload: String) -> Promise<ValidationCertificate> {
-        return Promise<ValidationCertificate>() { seal in
-            // TODO refactor parser
-            guard let decodedPayload: ValidationCertificate = parser.parse(payload, completion: { error in
-                seal.reject(error)
-            }) else {
-                seal.reject(ApplicationError.unknownError)
-                return
-            }
-            seal.fulfill(decodedPayload)
-        }
+        return repository.checkValidationCertificate(payload)
     }
     
     // MARK: - UIConfigureation

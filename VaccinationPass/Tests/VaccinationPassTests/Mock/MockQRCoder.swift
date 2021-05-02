@@ -6,18 +6,25 @@
 //
 
 import Foundation
+import PromiseKit
 import VaccinationUI
 import VaccinationCommon
 
 class MockQRCoder: QRCoderProtocol {
-    func parse(_ payload: String, completion: ((Error) -> Void)?) -> ValidationCertificate? {
-        let jsonData = Data.json()
-        return try? JSONDecoder().decode(ValidationCertificate.self, from: jsonData)
+    func parse(_ payload: String) -> Promise<ValidationCertificate> {
+        return Promise { seal in
+            let jsonData = Data.json()
+            let cert = try JSONDecoder().decode(ValidationCertificate.self, from: jsonData)
+            seal.fulfill(cert)
+        }
     }
     
-    func parse(_ payload: String, completion: ((Error) -> Void)?) -> VaccinationCertificate? {
-        let jsonData = Data.json()
-        return try? JSONDecoder().decode(VaccinationCertificate.self, from: jsonData)
+    func parse(_ payload: String) -> Promise<VaccinationCertificate> {
+        return Promise { seal in
+            let jsonData = Data.json()
+            let cert = try JSONDecoder().decode(VaccinationCertificate.self, from: jsonData)
+            seal.fulfill(cert)
+        }
     }
 }
 

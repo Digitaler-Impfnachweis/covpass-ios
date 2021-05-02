@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import VaccinationUI
+import VaccinationCommon
 
 /// Establishes the root ViewController to initialize the main window with
 public struct MainRouter {
@@ -25,7 +26,8 @@ public struct MainRouter {
         if UserDefaults.StartupInfo.bool(.onboarding) {
             // User has already seen the onboarding, go straight to the validator view
             let vc = ValidatorViewController.createFromStoryboard(bundle: Bundle.module)
-            vc.viewModel = ValidatorViewModel()
+            let repository = VaccinationRepository(service: APIService(), parser: QRCoder())
+            vc.viewModel = ValidatorViewModel(repository: repository)
             vc.router = ValidatorPopupRouter()
             return vc
         }

@@ -12,13 +12,12 @@ import PromiseKit
 
 public class VaccinationDetailViewModel {
 
-    private let parser = QRCoder()
-    private var service = VaccinationCertificateService()
-
+    private let repository: VaccinationRepositoryProtocol
     private var certificates: [ExtendedVaccinationCertificate]
 
-    public init(certificates: [ExtendedVaccinationCertificate]) {
+    public init(certificates: [ExtendedVaccinationCertificate], repository: VaccinationRepositoryProtocol) {
         self.certificates = certificates
+        self.repository = repository
     }
 
     public var partialVaccination: Bool {
@@ -27,7 +26,7 @@ public class VaccinationDetailViewModel {
 
     public var isFavorite: Bool {
         do {
-            let certList = try service.fetch().wait()
+            let certList = try repository.getVaccinationCertificateList().wait()
             return certificates.contains(where: { $0.vaccinationCertificate.id == certList.favoriteCertificateId })
         } catch {
             print(error)
@@ -65,7 +64,7 @@ public class VaccinationDetailViewModel {
     }
 
     public func delete() -> Promise<Void> {
-        service.fetch().then({ list -> Promise<VaccinationCertificateList> in
+        return repository.getVaccinationCertificateList().then({ list -> Promise<VaccinationCertificateList> in
             var certList = list
             certList.certificates.removeAll(where: { certificate in
                 for cert in self.certificates where cert == certificate {
@@ -75,12 +74,12 @@ public class VaccinationDetailViewModel {
             })
             return Promise.value(certList)
         }).then({ list in
-            self.service.save(list)
+            return self.repository.saveVaccinationCertificateList(list).asVoid()
         })
     }
 
     public func updateFavorite() -> Promise<Void> {
-        return service.fetch().map({ cert in
+        return repository.getVaccinationCertificateList().map({ cert in
             var certList = cert
             guard let id = self.certificates.first?.vaccinationCertificate.id else {
                 return certList
@@ -88,30 +87,15 @@ public class VaccinationDetailViewModel {
             certList.favoriteCertificateId = certList.favoriteCertificateId == id ? nil : id
             return certList
         }).then({ cert in
-            return self.service.save(cert)
+            return self.repository.saveVaccinationCertificateList(cert).asVoid()
         })
     }
 
     public func process(payload: String) -> Promise<Void> {
-        return Promise<ExtendedVaccinationCertificate>() { seal in
-            // TODO refactor parser
-            guard let decodedPayload: VaccinationCertificate = parser.parse(payload, completion: { error in
-                seal.reject(error)
-            }) else {
-                seal.reject(ApplicationError.unknownError)
-                return
-            }
-            seal.fulfill(ExtendedVaccinationCertificate(vaccinationCertificate: decodedPayload, vaccinationQRCodeData: payload, validationQRCodeData: nil))
-        }.then({ extendedVaccinationCertificate in
-            return self.service.fetch().then({ list -> Promise<Void> in
-                var certList = list
-                if certList.certificates.contains(where: { $0.vaccinationQRCodeData == payload }) {
-                    throw QRCodeError.qrCodeExists
-                }
-                certList.certificates.append(extendedVaccinationCertificate)
-                return self.service.save(certList)
-            }).then(self.service.fetch).done({ list in
-                self.certificates = self.findCertificatePair(extendedVaccinationCertificate, list.certificates)
+        return repository.scanVaccinationCertificate(payload).then({ cert in
+            return self.repository.getVaccinationCertificateList().then({ list -> Promise<Void> in
+                self.certificates = self.findCertificatePair(cert, list.certificates)
+                return Promise.value(())
             })
         })
     }

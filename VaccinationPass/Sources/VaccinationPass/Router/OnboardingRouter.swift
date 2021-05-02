@@ -28,7 +28,8 @@ extension OnboardingRouter: Router {
         UserDefaults.StartupInfo.set(true, forKey: .onboarding)
 
         let certificateViewController = CertificateViewController.createFromStoryboard(bundle: Bundle.module)
-        let viewModel = DefaultCertificateViewModel(parser: QRCoder())
+        let repository = VaccinationRepository(service: APIService(), parser: QRCoder())
+        let viewModel = DefaultCertificateViewModel(repository: repository)
         viewModel.delegate = certificateViewController
         certificateViewController.viewModel = viewModel
         certificateViewController.router = ProofPopupRouter()

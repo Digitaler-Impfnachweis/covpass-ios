@@ -11,14 +11,13 @@ import VaccinationUI
 import VaccinationCommon
 import PromiseKit
 
-public class DefaultCertificateViewModel<T: QRCoderProtocol>: CertificateViewModel {
+public class DefaultCertificateViewModel: CertificateViewModel {
     // MARK: - Parser
     
-    private let parser: T
-    private let service = VaccinationCertificateService()
+    private let repository: VaccinationRepositoryProtocol
     
-    public init(parser: T) {
-        self.parser = parser
+    public init(repository: VaccinationRepositoryProtocol) {
+        self.repository = repository
     }
     
     // MARK: - HeadlineViewModel
@@ -39,38 +38,16 @@ public class DefaultCertificateViewModel<T: QRCoderProtocol>: CertificateViewMod
     }
 
     public func process(payload: String) -> Promise<ExtendedVaccinationCertificate> {
-        return Promise<ExtendedVaccinationCertificate>() { seal in
-            // TODO refactor parser
-            guard let decodedPayload: VaccinationCertificate = parser.parse(payload, completion: { error in
-                seal.reject(error)
-            }) else {
-                seal.reject(ApplicationError.unknownError)
-                return
-            }
-            seal.fulfill(ExtendedVaccinationCertificate(vaccinationCertificate: decodedPayload, vaccinationQRCodeData: payload, validationQRCodeData: nil))
-        }.then({ extendedVaccinationCertificate in
-            return self.service.fetch().then({ list -> Promise<Void> in
-                var certList = list
-                if certList.certificates.contains(where: { $0.vaccinationQRCodeData == payload }) {
-                    throw QRCodeError.qrCodeExists
-                }
-                certList.certificates.append(extendedVaccinationCertificate)
-
-                // Mark first certificate as favorite
-                if certList.certificates.count == 1 {
-                    certList.favoriteCertificateId = extendedVaccinationCertificate.vaccinationCertificate.id
-                }
-
-                return self.service.save(certList)
-            }).then(self.service.fetch).then({ list -> Promise<ExtendedVaccinationCertificate> in
+        return repository.scanVaccinationCertificate(payload).then({ cert in
+            return self.repository.getVaccinationCertificateList().map({ list in
                 self.certificates = list.certificates.map { self.getCertficateConfiguration(for: $0.vaccinationCertificate) }
-                return Promise.value(extendedVaccinationCertificate)
+                return cert
             })
         })
     }
 
     public func loadCertificatesConfiguration() {
-        service.fetch().map({ list -> [ExtendedVaccinationCertificate] in
+        repository.getVaccinationCertificateList().map({ list -> [ExtendedVaccinationCertificate] in
             self.certificateList = list
             return self.matchedCertificates
         }).done({ list in
@@ -143,7 +120,7 @@ public class DefaultCertificateViewModel<T: QRCoderProtocol>: CertificateViewMod
             return nil
         }
         let pair = findCertificatePair(matchedCertificates[indexPath.row], certificateList.certificates)
-        return VaccinationDetailViewModel(certificates: pair)
+        return VaccinationDetailViewModel(certificates: pair, repository: self.repository)
     }
 
     public func detailViewModel(_ cert: ExtendedVaccinationCertificate) -> VaccinationDetailViewModel? {
@@ -151,7 +128,7 @@ public class DefaultCertificateViewModel<T: QRCoderProtocol>: CertificateViewMod
             return nil
         }
         let pair = findCertificatePair(cert, certificateList.certificates)
-        return VaccinationDetailViewModel(certificates: pair)
+        return VaccinationDetailViewModel(certificates: pair, repository: self.repository)
     }
     
     // MARK: - Configurations

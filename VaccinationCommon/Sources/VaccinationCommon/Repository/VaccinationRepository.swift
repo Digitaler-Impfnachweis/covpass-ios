@@ -103,8 +103,20 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
         return self.service.reissue(certificate.vaccinationQRCodeData).map({ validationCert in
             var cert = certificate
             cert.validationQRCodeData = validationCert
-            // TODO update certificate in database
             return cert
+        }).then({ cert in
+            return self.getVaccinationCertificateList().map({ list in
+                var certList = list
+                certList.certificates = certList.certificates.map({
+                    if $0 == cert {
+                        return cert
+                    }
+                    return $0
+                })
+                return certList
+            }).then(self.saveVaccinationCertificateList).map({ _ in
+                return cert
+            })
         })
     }
 

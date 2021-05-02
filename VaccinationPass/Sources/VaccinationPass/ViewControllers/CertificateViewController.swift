@@ -23,9 +23,6 @@ public class CertificateViewController: UIViewController {
     
     public var viewModel: CertificateViewModel!
     public var router: PopupRouter?
-
-    // MARK: - Private properties
-    private let service = VaccinationCertificateService()
     
     // MARK: - Lifecycle
     
