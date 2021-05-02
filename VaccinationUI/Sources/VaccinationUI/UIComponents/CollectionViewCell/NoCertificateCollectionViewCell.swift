@@ -12,6 +12,7 @@ import UIKit
 public class NoCertificateCollectionViewCell: BaseCardCollectionViewCell {
     // MARK: - IBOutlet
 
+    @IBOutlet public var containerView: UIView!
     @IBOutlet public var stackView: UIStackView!
     @IBOutlet public var iconImageView: UIImageView!
     @IBOutlet public var headlineLabel: UILabel!
@@ -21,10 +22,14 @@ public class NoCertificateCollectionViewCell: BaseCardCollectionViewCell {
     
     public override func awakeFromNib() {
         super.awakeFromNib()
-        contentView.layoutMargins = .init(top: 0, left: 24, bottom: 0, right: 24)
-        stackView.spacing = 0
-        stackView.setCustomSpacing(30, after: iconImageView)
-        stackView.setCustomSpacing(15, after: headlineLabel)
+
+        containerView.layoutMargins = .init(top: .space_120, left: .space_24, bottom: .space_120, right: .space_24)
+        containerView.layer.cornerRadius = 15
+        containerView.backgroundColor = .backgroundSecondary20
+        containerView.tintColor = .backgroundSecondary20
+
+        stackView.spacing = .zero
+        stackView.setCustomSpacing(.space_10, after: iconImageView)
     }
 }
 
@@ -34,8 +39,10 @@ extension NoCertificateCollectionViewCell {
     public typealias T = NoCertifiateConfiguration
     
     public func configure(with configuration: T) {
-        headlineLabel.text = configuration.title
-        subHeadlineLabel.text = configuration.subtitle
+        headlineLabel.attributedText = configuration.title?.styledAs(.header_3).aligned(to: .center)
+        subHeadlineLabel.attributedText = configuration.subtitle?.styledAs(.body).colored(.onBackground70).aligned(to: .center)
         iconImageView.image = configuration.image
+
+        layoutIfNeeded()
     }
 }

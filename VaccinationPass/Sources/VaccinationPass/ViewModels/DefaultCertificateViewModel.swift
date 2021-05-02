@@ -24,14 +24,12 @@ public class DefaultCertificateViewModel<T: QRCoderProtocol>: CertificateViewMod
     // MARK: - HeadlineViewModel
     
     public var headlineTitle = "vaccination_certificate_list_title".localized
-    public var headlineButtonInsets = UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 0)
-    public var headlineFont: UIFont = UIConstants.Font.subHeadlineFont
-    public var headlineButtonImage = UIImage(named: UIConstants.IconName.HelpIcon, in: UIConstants.bundle, compatibleWith: nil)
+    public var headlineButtonImage: UIImage? = .help
     
     // MARK: - CertificateViewModel
     
     public weak var delegate: ViewModelDelegate?
-    public var addButtonImage = UIImage(named: UIConstants.IconName.PlusIcon, in: UIConstants.bundle, compatibleWith: nil)
+    public var addButtonImage: UIImage? = .plus
 
     public var certificates = [BaseCertifiateConfiguration]()
     public var certificateList = VaccinationCertificateList(certificates: [])
@@ -43,7 +41,7 @@ public class DefaultCertificateViewModel<T: QRCoderProtocol>: CertificateViewMod
     public func process(payload: String) -> Promise<ExtendedVaccinationCertificate> {
         return Promise<ExtendedVaccinationCertificate>() { seal in
             // TODO refactor parser
-            guard let decodedPayload = parser.parse(payload, completion: { error in
+            guard let decodedPayload: VaccinationCertificate = parser.parse(payload, completion: { error in
                 seal.reject(error)
             }) else {
                 seal.reject(ApplicationError.unknownError)
@@ -163,46 +161,40 @@ public class DefaultCertificateViewModel<T: QRCoderProtocol>: CertificateViewMod
     }
 
     private func fullCertificateConfiguration(for certificate: VaccinationCertificate) -> QRCertificateConfiguration {
-        let image = UIImage(named: UIConstants.IconName.StarEmpty, in: UIConstants.bundle, compatibleWith: nil)
-        let stateImage = UIImage(named: UIConstants.IconName.CompletnessImage, in: UIConstants.bundle, compatibleWith: nil)
-        let headerImage = UIImage(named: UIConstants.IconName.StarEmpty, in: UIConstants.bundle, compatibleWith: nil)
         let qrViewConfiguration = QrViewConfiguration(tintColor: .white, qrValue: NSUUID().uuidString, qrTitle: nil, qrSubtitle: nil)
         return QRCertificateConfiguration(
             title: "Covid-19 Nachweis",
             subtitle: certificate.name,
-            image: image,
-            stateImage: stateImage,
+            image: .starEmpty,
+            stateImage: .completness,
             stateTitle: "Impfungen Anzeigen",
             stateAction: nil,
-            headerImage: headerImage,
+            headerImage: .starEmpty,
             headerAction: nil,
-            backgroundColor: UIConstants.BrandColor.onBackground70,
+            backgroundColor: .onBrandAccent70,
             qrViewConfiguration: qrViewConfiguration)
     }
 
     private func halfCertificateConfiguration(for certificate: VaccinationCertificate) -> QRCertificateConfiguration {
-        let image = UIImage(named: UIConstants.IconName.StarEmpty, in: UIConstants.bundle, compatibleWith: nil)
-        let stateImage = UIImage(named: UIConstants.IconName.HalfShield, in: UIConstants.bundle, compatibleWith: nil)
-        let headerImage = UIImage(named: UIConstants.IconName.StarEmpty, in: UIConstants.bundle, compatibleWith: nil)
 //        let qrViewConfiguration = QrViewConfiguration(tintColor: .black, qrValue: NSUUID().uuidString, qrTitle: "Vorlaüfiger Impfnachweis", qrSubtitle: nil)
         return QRCertificateConfiguration(
             title: "Covid-19 Nachweis",
             subtitle: certificate.name,
-            image: image,
-            stateImage: stateImage,
+            image: .starEmpty,
+            stateImage: .halfShield,
             stateTitle: "Impfungen Anzeigen",
             stateAction: nil,
-            headerImage: headerImage,
+            headerImage: .starEmpty,
             headerAction: nil,
-            backgroundColor: UIConstants.BrandColor.onBackground50,
+            backgroundColor: .onBackground50,
             qrViewConfiguration: nil)
     }
     
     private func noCertificateConfiguration() -> NoCertifiateConfiguration {
-        let image = UIImage(named: UIConstants.IconName.NoCertificateImage, in: UIConstants.bundle, compatibleWith: nil)
-        return NoCertifiateConfiguration(
+        NoCertifiateConfiguration(
             title:"vaccination_no_certificate_card_title".localized,
             subtitle: "vaccination_no_certificate_card_message".localized,
-            image: image)
+            image: .noCertificate
+        )
     }
 }

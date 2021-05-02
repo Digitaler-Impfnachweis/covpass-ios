@@ -29,7 +29,7 @@ class DotPulseActivityIndicatorTests: XCTestCase {
         sut = DotPulseActivityIndicator(frame: frame)
 
         // Then
-        XCTAssertEqual(sut.color, UIConstants.BrandColor.brandAccent70)
+        XCTAssertEqual(sut.color, .brandAccent70)
         XCTAssertEqual(sut.padding, 0.0)
         XCTAssertEqual(sut.backgroundColor, UIColor.clear)
     }

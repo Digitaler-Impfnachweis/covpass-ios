@@ -16,20 +16,17 @@ class MockCellConfiguration {
     }
     
     static func qrCertificateConfiguration() -> QRCertificateConfiguration {
-        let image = UIImage(named: UIConstants.IconName.StarEmpty, in: UIConstants.bundle, compatibleWith: nil)
-        let stateImage = UIImage(named: UIConstants.IconName.HalfShield, in: UIConstants.bundle, compatibleWith: nil)
-        let headerImage = UIImage(named: UIConstants.IconName.StarEmpty, in: UIConstants.bundle, compatibleWith: nil)
         let qrViewConfiguration = QrViewConfiguration(tintColor: .black, qrValue: NSUUID().uuidString, qrTitle: "Vorlaüfiger Impfnachweis", qrSubtitle: "Gultig bis 23.02.2023")
         return QRCertificateConfiguration(
             title: "Covid-19 Nachweis",
             subtitle: "Maximilian Mustermann",
-            image: image,
-            stateImage: stateImage,
+            image: .starEmpty,
+            stateImage: .halfShield,
             stateTitle: "Impfungen Anzeigen",
             stateAction: nil,
-            headerImage: headerImage,
+            headerImage: .starEmpty,
             headerAction: nil,
-            backgroundColor: UIConstants.BrandColor.onBackground50,
+            backgroundColor: .onBackground50,
             qrViewConfiguration: qrViewConfiguration)
     }
 }

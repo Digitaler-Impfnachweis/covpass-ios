@@ -46,13 +46,11 @@ class CertificateViewModelTests: XCTestCase {
     
     func testHeadline() {
         XCTAssertEqual(sut.headlineTitle, "Übersicht aller Impfnachweise")
-        XCTAssertEqual(sut.headlineButtonInsets, UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 0))
-        XCTAssertEqual(sut.headlineFont, UIConstants.Font.subHeadlineFont)
-        XCTAssertEqual(sut.headlineButtonImage, UIImage(named: UIConstants.IconName.HelpIcon, in: UIConstants.bundle, compatibleWith: nil))
+        XCTAssertEqual(sut.headlineButtonImage, .help)
     }
     
     func testAddButtonImage() {
-        XCTAssertEqual(sut.addButtonImage, UIImage(named: UIConstants.IconName.PlusIcon, in: UIConstants.bundle, compatibleWith: nil))
+        XCTAssertEqual(sut.addButtonImage, .plus)
     }
     
     func testReuseIdentifier() {

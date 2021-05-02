@@ -18,7 +18,7 @@ public class ActionTableViewCell: UITableViewCell {
     
     // MARK: - Public
     
-    public static let identifier = UIConstants.CellIdentifier.ActionTableViewCell
+    public static let identifier = "ActionTableViewCell"
     
     // MARK: - Lifecycle
     
@@ -26,15 +26,14 @@ public class ActionTableViewCell: UITableViewCell {
         super.awakeFromNib()
         contentView.layoutMargins = .init(top: 15, left: 0, bottom: 15, right: 0)
         stackView.spacing = 5
-        labelHeadline.font = UIFont.ibmPlexSansSemiBold(with: 14)
     }
 }
 
 // MARK: - ActionCell
 
 extension ActionTableViewCell: ActionCell {
-    public func configure(title: String, iconName: String) {
-        labelHeadline.text = title
-        iconImageView.image = UIImage(named: iconName, in: Bundle.module, compatibleWith: nil)
+    public func configure(title: String, icon: UIImage) {
+        labelHeadline.attributedText = title.styledAs(.header_3)
+        iconImageView.image = icon
     }
 }

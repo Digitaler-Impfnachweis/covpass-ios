@@ -12,22 +12,44 @@ import UIKit
 public class QrCertificateCollectionViewCell: BaseCardCollectionViewCell {
     // MARK: - IBOutlet
 
-    @IBOutlet public var stackView: UIStackView!
+    @IBOutlet public var containerView: UIView!
+    @IBOutlet public var contentStackView: UIStackView!
     @IBOutlet public var headerView: CardViewHeader!
     @IBOutlet public var actionView: CardViewAction!
     @IBOutlet public var qrContinerView: QrContinerView!
+
+    // MARK: - Properties
+
+    private let cornerRadius: CGFloat = 14
+    private let shadowRadius: CGFloat = 16
+    private let shadowOpacity: CGFloat = 0.2
+    private let shadowOffset: CGSize = .init(width: 0, height: -4)
 
     // MARK: - Lifecycle
 
     public override func awakeFromNib() {
         super.awakeFromNib()
-        stackView.setCustomSpacing(20, after: actionView)
-        actionView.tintColor = UIConstants.BrandColor.brandAccent
-        actionView.tintColor = UIConstants.BrandColor.brandAccent
-        qrContinerView.titleLabel.font = UIConstants.Font.semiBoldLarger
-        qrContinerView.subtitleLabel.font = UIConstants.Font.regular
+
+        clipsToBounds = false
+
+        contentView.clipsToBounds = false
+        contentView.layer.shadowColor = UIColor.neutralBlack.cgColor
+        contentView.layer.shadowRadius = shadowRadius
+        contentView.layer.shadowOpacity = Float(shadowOpacity)
+        contentView.layer.shadowOffset = shadowOffset
+
+        containerView.layoutMargins = .init(top: .space_30, left: .space_24, bottom: .space_30, right: .space_24)
+        containerView.tintColor = .brandAccent
+        containerView.layer.cornerRadius = cornerRadius
+        contentStackView.setCustomSpacing(.space_20, after: actionView)
+
         actionView.action = onAction
         headerView.action = onFavorite
+    }
+
+    public override func layoutSubviews() {
+        super.layoutSubviews()
+        contentView.layer.shadowPath = UIBezierPath(roundedRect: containerView.frame, cornerRadius: containerView.layer.cornerRadius).cgPath
     }
 }
 
@@ -37,29 +59,28 @@ extension QrCertificateCollectionViewCell {
     public typealias T = QRCertificateConfiguration
     
     public func configure(with configuration: T) {
-        contentView.layoutMargins = .init(top: 30, left: 24, bottom: 30, right: 24)
+        let tintColor: UIColor = configuration.qrViewConfiguration?.tintColor ?? .neutralBlack
+
+        containerView.backgroundColor = configuration.backgroundColor ?? .neutralWhite
 
         headerView.action = configuration.headerAction
-        headerView.titleLabel.text = configuration.subtitle
-        headerView.subtitleLabel.text = configuration.title
-        headerView.titleLabel.textColor = configuration.qrViewConfiguration?.tintColor
-        headerView.subtitleLabel.textColor = configuration.qrViewConfiguration?.tintColor
-        headerView.tintColor = configuration.qrViewConfiguration?.tintColor
-        stackView.setCustomSpacing(30, after: headerView)
+        headerView.titleLabel.attributedText = configuration.subtitle?.styledAs(.header_1).colored(tintColor)
+        headerView.subtitleLabel.attributedText = configuration.title?.styledAs(.body).colored(tintColor)
+        headerView.tintColor = tintColor
+        contentStackView.setCustomSpacing(.space_12, after: headerView)
 
         actionView.action = configuration.stateAction
         actionView.stateImageView.image = configuration.stateImage
-        actionView.titleLabel.text = configuration.stateTitle
-        actionView.titleLabel.textColor = configuration.qrViewConfiguration?.tintColor
-        actionView.stateImageView.tintColor = configuration.qrViewConfiguration?.tintColor
-        actionView.actionButton.tintColor = configuration.qrViewConfiguration?.tintColor
-        actionView.tintColor = configuration.qrViewConfiguration?.tintColor
+        actionView.titleLabel.attributedText = configuration.stateTitle?.styledAs(.header_3).colored(tintColor)
+        actionView.stateImageView.tintColor = tintColor
+        actionView.actionButton.tintColor = tintColor
+        actionView.tintColor = .neutralWhite
 
-        cardBackgroundColor = configuration.backgroundColor ?? UIColor.white
+        qrContinerView.image = configuration.qrViewConfiguration?.qrValue?.makeQr(size: UIScreen.main.bounds.size)
+        qrContinerView.title = configuration.qrViewConfiguration?.qrTitle
+        qrContinerView.subtitle = configuration.qrViewConfiguration?.qrSubtitle
+        qrContinerView.layoutMargins = .init(top: .space_20, left: .space_24, bottom: .zero, right: .space_24)
 
-        qrContinerView.qrImageView.image = configuration.qrViewConfiguration?.qrValue?.makeQr(size: qrContinerView.qrImageView.bounds.size)
-        qrContinerView.titleLabel.text = configuration.qrViewConfiguration?.qrTitle
-        qrContinerView.subtitleLabel.text = configuration.qrViewConfiguration?.qrSubtitle
-        qrContinerView.isHidden = configuration.qrViewConfiguration == nil
+        layoutIfNeeded()
     }
 }

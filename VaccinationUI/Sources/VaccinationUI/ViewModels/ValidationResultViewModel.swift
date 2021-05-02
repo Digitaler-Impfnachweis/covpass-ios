@@ -99,7 +99,7 @@ open class ValidationResultViewModel: BaseViewModel {
     }
 
     var closeButtonImage: UIImage? {
-        UIImage(named: UIConstants.IconName.IconClose, in: UIConstants.bundle, compatibleWith: nil)
+        .close
     }
 
     // MARK - PopupRouter

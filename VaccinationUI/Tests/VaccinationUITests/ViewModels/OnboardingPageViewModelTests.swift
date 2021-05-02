@@ -22,33 +22,26 @@ class OnboardingPageViewModelTests: XCTestCase {
     }
 
     func testSettings() {
-        XCTAssertEqual(sut.imageAspectRatio, 375 / 220)
-        XCTAssertEqual(sut.imageWidth, UIScreen.main.bounds.width)
-        XCTAssertEqual(sut.imageHeight, sut.imageWidth / sut.imageAspectRatio)
-        XCTAssertEqual(sut.imageContentMode, .scaleAspectFit)
-        XCTAssertEqual(sut.headlineFont, UIConstants.Font.onboardingHeadlineFont)
-        XCTAssertEqual(sut.headlineColor, .black)
-        XCTAssertEqual(sut.paragraphBodyFont, UIConstants.Font.regularLarger)
-        XCTAssertEqual(sut.backgroundColor, UIConstants.BrandColor.backgroundPrimary)
+        XCTAssertEqual(sut.backgroundColor, .backgroundPrimary)
     }
 
     func testPage1Values() {
         sut = OnboardingPageViewModel(type: .page1)
-        XCTAssertEqual(sut.image, UIImage(named: UIConstants.IconName.OnboardingScreen1, in: UIConstants.bundle, compatibleWith: nil))
+        XCTAssertEqual(sut.image, .onboardingScreen1)
         XCTAssertEqual(sut.title, "vaccination_first_onboarding_page_title".localized)
         XCTAssertEqual(sut.info, "vaccination_first_onboarding_page_message".localized)
     }
 
     func testPage2Values() {
         sut = OnboardingPageViewModel(type: .page2)
-        XCTAssertEqual(sut.image, UIImage(named: UIConstants.IconName.OnboardingScreen2, in: UIConstants.bundle, compatibleWith: nil))
+        XCTAssertEqual(sut.image, .onboardingScreen2)
         XCTAssertEqual(sut.title, "vaccination_second_onboarding_page_title".localized)
         XCTAssertEqual(sut.info, "vaccination_second_onboarding_page_message".localized)
     }
 
     func testPage3Values() {
         sut = OnboardingPageViewModel(type: .page3)
-        XCTAssertEqual(sut.image, UIImage(named: UIConstants.IconName.OnboardingScreen3, in: UIConstants.bundle, compatibleWith: nil))
+        XCTAssertEqual(sut.image, .onboardingScreen3)
         XCTAssertEqual(sut.title, "vaccination_third_onboarding_page_title".localized)
         XCTAssertEqual(sut.info, "vaccination_third_onboarding_page_message".localized)
     }

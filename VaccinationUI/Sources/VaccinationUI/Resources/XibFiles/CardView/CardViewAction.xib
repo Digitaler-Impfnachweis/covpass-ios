@@ -6,11 +6,6 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <array key="IBMPlexSans-SemiBold.otf">
-            <string>IBMPlexSans-SemiBold</string>
-        </array>
-    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CardViewAction" customModule="VaccinationUI">
             <connections>
@@ -35,13 +30,13 @@
                             </constraints>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Impfschutz nicht komplett" textAlignment="natural" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BOL-p7-WNG">
-                            <rect key="frame" x="35" y="17" width="172.5" height="18.5"/>
-                            <fontDescription key="fontDescription" name="IBMPlexSans-SemiBold" family="IBM Plex Sans" pointSize="14"/>
+                            <rect key="frame" x="35" y="16" width="208.5" height="20.5"/>
+                            <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0FL-M8-Ec7">
-                            <rect key="frame" x="217.5" y="11" width="30" height="30"/>
+                            <rect key="frame" x="253.5" y="11" width="30" height="30"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="30" id="bTr-Rc-u0w"/>
                                 <constraint firstAttribute="width" constant="30" id="rxA-ux-6bS"/>
@@ -52,7 +47,7 @@
                             </connections>
                         </button>
                         <view contentMode="scaleToFill" horizontalHuggingPriority="1" verticalHuggingPriority="1" translatesAutoresizingMaskIntoConstraints="NO" id="ZwI-4p-FRc" userLabel="Flexible Space">
-                            <rect key="frame" x="257.5" y="1" width="116.5" height="50"/>
+                            <rect key="frame" x="293.5" y="1" width="80.5" height="50"/>
                         </view>
                     </subviews>
                 </stackView>
