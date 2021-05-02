@@ -27,7 +27,7 @@ public class ValidatorViewModel {
         "Was passiert mit meinen Daten?"]
     
     func configure(cell: ActionCell, at indexPath: IndexPath) {
-        cell.configure(title: titles[indexPath.row], iconName: UIConstants.IconName.ChevronRight)
+        cell.configure(title: titles[indexPath.row], icon: .chevronRight)
     }
 
     public func process(payload: String) -> Promise<ValidationCertificate> {

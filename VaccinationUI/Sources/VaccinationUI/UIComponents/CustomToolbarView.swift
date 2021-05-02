@@ -11,11 +11,6 @@ public protocol CustomToolbarViewDelegate: AnyObject {
     func customToolbarView(_: CustomToolbarView, didTap buttonType: ButtonItemType)
 }
 
-struct ToolBarItems {
-    var leftItem: ButtonItemType?
-    var middleItem: ButtonItemType?
-}
-
 public enum ButtonItemType {
     case navigationArrow
     case cancelButton
@@ -40,26 +35,15 @@ public enum CustomToolbarState: Equatable {
 }
 
 /// A custom toolbar that supports multiple states
-@IBDesignable
 public class CustomToolbarView: XibView {
     public weak var delegate: CustomToolbarViewDelegate?
 
     @IBOutlet var leftButton: UIButton!
-    @IBOutlet var gradientImageView: UIImageView!
-
-    @IBInspectable var navigationIcon: String = UIConstants.IconName.NavigationArrow
-    @IBInspectable var navigationIconColor: UIColor = UIConstants.BrandColor.onBackground70
-
-    public var primaryButton: PrimaryButtonContainer! {
-        didSet {
-            primaryButton?.textableView.numberOfLines = 2
-            primaryButton?.innerButton.titleLabel?.numberOfLines = 2
-        }
-    }
+    public var primaryButton: MainButton!
 
     var state: CustomToolbarState {
         get {
-            return .cancel
+            .cancel
         }
         set {
             switch newValue {
@@ -83,18 +67,6 @@ public class CustomToolbarView: XibView {
         }
     }
 
-    public var shouldShowTransparency: Bool = true {
-        didSet {
-            backgroundColor = shouldShowTransparency ? UIColor.clear : UIColor.white
-        }
-    }
-    
-    public var shouldShowGradient: Bool = false {
-        didSet {
-            gradientImageView.isHidden = !shouldShowTransparency
-        }
-    }
-
     public var leftButtonVoiceOverSettings: VoiceOverOptions.Settings? {
         didSet {
             leftButtonVoiceOverSettings.map {
@@ -108,9 +80,9 @@ public class CustomToolbarView: XibView {
     public var primaryButtonVoiceOverSettings: VoiceOverOptions.Settings? {
         didSet {
             primaryButtonVoiceOverSettings.map {
-                primaryButton.textableView.enableAccessibility(label: $0.label,
-                                                               hint: $0.hint,
-                                                               traits: $0.traits)
+                primaryButton.innerButton.enableAccessibility(label: $0.label,
+                                                              hint: $0.hint,
+                                                              traits: $0.traits)
             }
         }
     }
@@ -126,10 +98,10 @@ public class CustomToolbarView: XibView {
 
         leftButton.isHidden = false
         leftButton.isEnabled = true
+        leftButton.tintColor = .onBackground70
         switch leftButtonItem {
         case .navigationArrow:
-            leftButton.setImage(UIImage(named: navigationIcon, in: UIConstants.bundle, compatibleWith: nil)?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate), for: .normal)
-            leftButton.tintColor = navigationIconColor
+            leftButton.setImage(.arrowBack, for: .normal)
             leftButtonAction = { [weak self] in
                 guard let strongSelf = self else { return }
                 strongSelf.delegate?.customToolbarView(strongSelf, didTap: .navigationArrow)
@@ -174,9 +146,10 @@ public class CustomToolbarView: XibView {
         }
     }
 
-    private var cancelButton: PrimaryButtonContainer {
-        let cancelIcon = UIImage(named: UIConstants.IconName.CancelButton, in: UIConstants.bundle, compatibleWith: nil)
-        primaryButton = PrimaryIconButtonContainer(iconImage: cancelIcon)
+    private var cancelButton: MainButton {
+        primaryButton = MainButton()
+        primaryButton.style = .tertiary
+        primaryButton.icon = .cancel
         primaryButton.action = { [weak self] in
             guard let strongSelf = self else { return }
             strongSelf.delegate?.customToolbarView(strongSelf, didTap: .cancelButton)
@@ -184,8 +157,8 @@ public class CustomToolbarView: XibView {
         return primaryButton
     }
 
-    private var textButton: PrimaryButtonContainer {
-        primaryButton = PrimaryButtonContainer()
+    private var textButton: MainButton {
+        primaryButton = MainButton()
         primaryButton.action = { [weak self] in
             guard let strongSelf = self else { return }
             strongSelf.delegate?.customToolbarView(strongSelf, didTap: .textButton)
@@ -193,11 +166,8 @@ public class CustomToolbarView: XibView {
         return primaryButton
     }
 
-    private var disabledButtonWithText: PrimaryButtonContainer {
-        primaryButton = PrimaryButtonContainer()
-        primaryButton.enabledButtonBackgroundColor = UIConstants.BrandColor.onBackground20
-        primaryButton.enabledButtonTextColor = UIConstants.BrandColor.onBackground50
-        primaryButton.shadowColor = UIColor.clear
+    private var disabledButtonWithText: MainButton {
+        primaryButton = MainButton()
         primaryButton.action = { [weak self] in
             guard let strongSelf = self else { return }
             strongSelf.delegate?.customToolbarView(strongSelf, didTap: .disabledWithText)
@@ -205,10 +175,8 @@ public class CustomToolbarView: XibView {
         return primaryButton
     }
 
-    private var disabledTextButton: PrimaryButtonContainer {
-        primaryButton = PrimaryButtonContainer()
-        primaryButton.enabledButtonBackgroundColor = UIConstants.BrandColor.onBackground20
-        primaryButton.shadowColor = UIColor.clear
+    private var disabledTextButton: MainButton {
+        primaryButton = MainButton()
         primaryButton.action = { [weak self] in
             guard let strongSelf = self else { return }
             strongSelf.delegate?.customToolbarView(strongSelf, didTap: .textButton)
@@ -216,9 +184,9 @@ public class CustomToolbarView: XibView {
         return primaryButton
     }
 
-    private var addButton: PrimaryButtonContainer {
-        let plusIcon = UIImage(named: UIConstants.IconName.PlusIcon, in: UIConstants.bundle, compatibleWith: nil)
-        primaryButton = PrimaryIconButtonContainer(iconImage: plusIcon)
+    private var addButton: MainButton {
+        primaryButton = MainButton()
+        primaryButton.icon = .plus
         primaryButton.action = { [weak self] in
             guard let strongSelf = self else { return }
             strongSelf.delegate?.customToolbarView(strongSelf, didTap: .addButton)
@@ -226,9 +194,9 @@ public class CustomToolbarView: XibView {
         return primaryButton
     }
 
-    private var checkButton: PrimaryButtonContainer {
-        let checkmarkIcon = UIImage(named: UIConstants.IconName.CheckmarkIcon, in: UIConstants.bundle, compatibleWith: nil)
-        primaryButton = PrimaryIconButtonContainer(iconImage: checkmarkIcon)
+    private var checkButton: MainButton {
+        primaryButton = MainButton()
+        primaryButton.icon = .check
         primaryButton.innerButton.accessibilityIdentifier = AccessibilityIdentifier.InputForms.checkButton
         primaryButton.action = { [weak self] in
             guard let strongSelf = self else { return }
@@ -237,11 +205,9 @@ public class CustomToolbarView: XibView {
         return primaryButton
     }
 
-    private var scrollButton: PrimaryButtonContainer {
-        let arrowIcon = UIImage(named: UIConstants.IconName.RgArrowDown, in: UIConstants.bundle, compatibleWith: nil)
-        primaryButton = PrimaryIconButtonContainer(iconImage: arrowIcon)
-        primaryButton.tintColor = navigationIconColor
-        primaryButton.enabledButtonBackgroundColor = UIColor.clear
+    private var scrollButton: MainButton {
+        primaryButton = MainButton()
+        primaryButton.icon = .arrowDown
         primaryButton.innerButton.accessibilityIdentifier = AccessibilityIdentifier.InputForms.scrollButton
         primaryButton.action = { [weak self] in
             guard let strongSelf = self else { return }
@@ -250,13 +216,13 @@ public class CustomToolbarView: XibView {
         return primaryButton
     }
 
-    private func configureLoadingButton(previousMiddleButton: PrimaryButtonContainer?) {
+    private func configureLoadingButton(previousMiddleButton: MainButton?) {
         var showLoadingOverIconButton = true
-        if let primaryButton = previousMiddleButton, !primaryButton.title.isEmpty {
+        if let primaryButton = previousMiddleButton, !primaryButton.title.isNilOrEmpty {
             showLoadingOverIconButton = false
         }
         let title = showLoadingOverIconButton == false ? previousMiddleButton?.title : nil
-        primaryButton = showLoadingOverIconButton ? PrimaryButtonContainer() : previousMiddleButton
+        primaryButton = showLoadingOverIconButton ? MainButton() : previousMiddleButton
         primaryButton.startAnimating(makeCircle: showLoadingOverIconButton)
         configureMiddleButton(button: primaryButton, title: title)
     }
@@ -273,42 +239,31 @@ public class CustomToolbarView: XibView {
         primaryButton = nil
     }
 
-    private func configureCancelButton(button: PrimaryButtonContainer) {
-        button.layer.shadowOpacity = 0
-        button.cornerRadius = UIConstants.Size.ButtonCornerRadius
-        button.enabledButtonBackgroundColor = UIConstants.BrandColor.onBackground20
-        button.tintColor = UIConstants.BrandColor.onBackground70
-
+    private func configureCancelButton(button: MainButton) {
+        button.tintColor = .onBackground70
         addSubview(button)
-        configureDefaultConstraints(for: button)
+        configureCenterConstraints(for: button)
     }
 
-    private func configureDisabledButton(button: PrimaryButtonContainer, title: String? = nil) {
-        button.cornerRadius = UIConstants.Size.ButtonCornerRadius
-        button.defaultText = title
+    private func configureDisabledButton(button: MainButton, title: String? = nil) {
         button.isEnabled = false
-
+        button.title = title
         addSubview(button)
-        configureDefaultConstraints(for: button)
+        configureCenterConstraints(for: button)
     }
 
-    private func configureMiddleButton(button: PrimaryButtonContainer, title: String? = nil) {
-        button.cornerRadius = UIConstants.Size.ButtonCornerRadius
-        button.shadowColor = UIConstants.BrandColor.primaryButtonShadow
-        button.defaultText = title
+    private func configureMiddleButton(button: MainButton, title: String? = nil) {
+        button.title = title
         addSubview(button)
-        configureDefaultConstraints(for: button)
+        configureCenterConstraints(for: button)
     }
 
-    private func configureScrollButton(button: PrimaryButtonContainer) {
-        button.cornerRadius = UIConstants.Size.ButtonCornerRadius
-        button.shadowColor = UIColor.clear
-
+    private func configureScrollButton(button: MainButton) {
         addSubview(button)
-        configureDefaultConstraints(for: button)
+        configureCenterConstraints(for: button)
     }
 
-    private func configureDefaultConstraints(for button: PrimaryButtonContainer) {
+    private func configureCenterConstraints(for button: MainButton) {
         button.centerX(of: layoutMarginsGuide)
         button.pinEdges([.top, .bottom], to: layoutMarginsGuide)
         button.setContentHuggingPriority(.required, for: .horizontal)

@@ -9,11 +9,11 @@
 import XCTest
 
 class HeadlineTests: XCTestCase {
-    var sut: Headline!
+    var sut: PlainLabel!
 
     override func setUp() {
         super.setUp()
-        sut = Headline(frame: .zero)
+        sut = PlainLabel(frame: .zero)
         sut.initView()
     }
 
@@ -27,7 +27,7 @@ class HeadlineTests: XCTestCase {
     }
 
     func testInitWithCoder() {
-        let sut = Headline(coder: CoderMock.unarchivedCoder)
+        let sut = PlainLabel(coder: CoderMock.unarchivedCoder)
         XCTAssertNotNil(sut?.contentView)
     }
 
@@ -36,12 +36,7 @@ class HeadlineTests: XCTestCase {
     }
 
     func testInitView() {
-        XCTAssertEqual(sut.isTransparent, false)
-        XCTAssertEqual(sut.font, UIFont.ibmPlexSansSemiBold(with: 20))
-        XCTAssertEqual(sut.textColor, UIConstants.BrandColor.onBackground100)
-
         XCTAssertTrue(sut.textableView.adjustsFontForContentSizeCategory)
-        XCTAssertEqual(sut.textableView.font, UIFontMetrics.default.scaledFont(for: UIFont.ibmPlexSansSemiBold(with: 20) ?? UIFont.systemFont(ofSize: 20)))
         XCTAssertEqual(sut.textableView.numberOfLines, 0)
 
         XCTAssertTrue(sut.textableView.adjustsFontForContentSizeCategory)

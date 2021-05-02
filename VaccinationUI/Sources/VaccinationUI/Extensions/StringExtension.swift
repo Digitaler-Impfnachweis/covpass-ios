@@ -8,28 +8,13 @@
 import Foundation
 
 extension String {
-    public var boldParts: [String]? {
-        do {
-            let regex = try NSRegularExpression(pattern: "\\[b\\](.*?)\\[\\/b\\]")
-            let nsString = self as NSString
-            let results = regex.matches(in: self, range: NSRange(location: 0, length: nsString.length))
-
-            return results.map { nsString.substring(with: $0.range(at: 1)) }
-        } catch {
-            return nil
-        }
-    }
-
-    func UInsRange(from range: Range<Index>) -> NSRange {
-        let location = distance(from: startIndex, to: range.lowerBound)
-        let length = distance(from: range.lowerBound, to: range.upperBound)
-
-        return NSRange(location: location, length: length)
+    var localized: String {
+        return Localizer.localized(self, bundle: UIConstants.bundle)
     }
 }
 
-extension String {
-    var localized: String {
-        return Localizer.localized(self, bundle: UIConstants.bundle)
+extension Optional where Wrapped == String {
+    var isNilOrEmpty: Bool {
+        self?.isEmpty ?? true
     }
 }

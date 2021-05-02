@@ -44,15 +44,7 @@ class MockCertificateViewModel: CertificateViewModel {
     var headlineTitle: String {
         "Title"
     }
-    
-    var headlineButtonInsets: UIEdgeInsets {
-        UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0 )
-    }
-    
-    var headlineFont: UIFont {
-        UIFont.systemFont(ofSize: 20)
-    }
-    
+
     var headlineButtonImage: UIImage?{
         nil
     }

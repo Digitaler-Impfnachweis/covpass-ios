@@ -10,9 +10,10 @@ import UIKit
 public class OnboardingPageViewController: UIViewController {
     // MARK: - IBOutlets
 
-    @IBOutlet var confirmView: ConfirmView!
-    @IBOutlet var headline: Headline!
-    @IBOutlet var paragraphView: ParagraphView!
+    @IBOutlet var scrollView: UIScrollView!
+    @IBOutlet var imageView: UIImageView!
+    @IBOutlet var headline: PlainLabel!
+    @IBOutlet var descriptionText: PlainLabel!
     
     // MARK: - Properties
 
@@ -26,7 +27,7 @@ public class OnboardingPageViewController: UIViewController {
 
     public override func viewDidLoad() {
         super.viewDidLoad()
-
+        scrollView.contentInset.top = .space_70
         configureImageView()
         configureHeadline()
         configureParagraphView()
@@ -37,27 +38,18 @@ public class OnboardingPageViewController: UIViewController {
     // MARK: - Private
 
     private func configureImageView() {
-        confirmView.kind = .custom(
-            image: inputViewModel.image,
-            width: inputViewModel.imageWidth,
-            height: inputViewModel.imageHeight
-        )
-        confirmView.detail = nil
-        confirmView.imageView.contentMode = inputViewModel.imageContentMode
-        confirmView.contentView?.backgroundColor = inputViewModel.backgroundColor
+        imageView.image = inputViewModel.image
+        imageView.pinHeightToScaleAspectFit()
     }
 
     private func configureHeadline() {
-        headline.text = inputViewModel.title
-        headline.font = inputViewModel.headlineFont
-        headline.textColor = inputViewModel.headlineColor
+        headline.attributedText = inputViewModel.title.styledAs(.header_2)
+        headline.layoutMargins = .init(top: .space_40, left: .space_24, bottom: .zero, right: .space_24)
     }
 
     private func configureParagraphView() {
-        paragraphView.title.isHidden = true
-        paragraphView.bodyText = inputViewModel.info
-        paragraphView.bodyFont = inputViewModel.paragraphBodyFont
-        paragraphView.contentView?.backgroundColor = inputViewModel.backgroundColor
+        descriptionText.attributedText = inputViewModel.info.styledAs(.body).colored(.onBackground70)
+        descriptionText.layoutMargins = .init(top: .space_12, left: .space_24, bottom: .zero, right: .space_24)
     }
 }
 

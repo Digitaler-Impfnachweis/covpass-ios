@@ -12,7 +12,7 @@ public class ProofPopupViewModel: BaseViewModel {
     public init() {}
 
     public var image: UIImage? {
-        UIImage(named: UIConstants.IconName.ProofScreen, in: UIConstants.bundle, compatibleWith: nil)
+        .proofScreen
     }
 
     public var title: String {
@@ -30,30 +30,21 @@ public class ProofPopupViewModel: BaseViewModel {
     var startButtonTitle: String { "vaccination_proof_popup_scan_title".localized }
     
     var closeButtonImage: UIImage? {
-        UIImage(named: UIConstants.IconName.IconClose, in: UIConstants.bundle, compatibleWith: nil)
+        .close
     }
     
     var chevronRightImage: UIImage? {
-        UIImage(named: UIConstants.IconName.ChevronRight, in: UIConstants.bundle, compatibleWith: nil)
+        .chevronRight
     }
 
     // MARK: - Settings
 
-    public var imageAspectRatio: CGFloat { 375 / 220 }
-    public var imageWidth: CGFloat { UIScreen.main.bounds.width }
-    public var imageHeight: CGFloat { imageWidth / imageAspectRatio }
-    public var imageContentMode: UIView.ContentMode { .scaleAspectFit }
-    public var headlineFont: UIFont { UIConstants.Font.semiBold }
-    public var headlineColor: UIColor { .black }
-    public var paragraphBodyFont: UIFont { UIConstants.Font.regular }
-    public var backgroundColor: UIColor { UIConstants.BrandColor.backgroundPrimary }
-    var secureHeadlineFont: UIFont { UIConstants.Font.semiBold }
-    var secureTextFont: UIFont { UIConstants.Font.regular }
-    var tintColor: UIColor { UIConstants.BrandColor.brandAccent }
+    public var backgroundColor: UIColor { .backgroundPrimary }
+    var tintColor: UIColor { .brandAccent }
     
     // MARK - PopupRouter
     
-    let height: CGFloat = 650
+    let height: CGFloat = 700 // heights should be calculated by autolayout
     let topCornerRadius: CGFloat = 20
     let presentDuration: Double = 0.5
     let dismissDuration: Double = 0.5

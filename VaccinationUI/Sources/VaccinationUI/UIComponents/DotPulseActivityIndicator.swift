@@ -29,7 +29,7 @@ import UIKit
 public final class DotPulseActivityIndicator: UIView {
     struct Defaults {
         /// Default color of activity indicator.
-        static let color: UIColor = UIConstants.BrandColor.brandAccent70
+        static let color: UIColor = .brandAccent70
         /// Default padding (0)
         static let padding: CGFloat = 0
     }
