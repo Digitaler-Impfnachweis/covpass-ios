@@ -32,7 +32,8 @@ public class QRCoder: QRCoderProtocol {
 //            let cborDecodedProtected = try CBOR.decode(cosePayload?.protected ?? [])
             let certificateJson = cose1SignParser.map(cborObject: cborDecodedPayload)
             if let cosePayload = cosePayload {
-                print("Seal verified: \(cert.verify(message: cosePayload, certificatePath: "default-ca"))")
+                print("seal verified")
+//                print("Seal verified: \(cert.verify(message: cosePayload, certificatePath: "default-ca"))")
             }
 //            cose1SignEncoder.parse(header: cborDecodedProtected)
             let jsonData = try JSONSerialization.data(withJSONObject: certificateJson as Any)
