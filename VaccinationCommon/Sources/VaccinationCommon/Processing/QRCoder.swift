@@ -8,6 +8,7 @@
 import Compression
 import Foundation
 import SwiftCBOR
+import PromiseKit
 
 public enum QRCodeError: Error {
     case qrCodeExists
@@ -19,39 +20,33 @@ public class QRCoder: QRCoderProtocol {
 
     public init() {}
 
-    public func parse(_ payload: String, completion: ((Error) -> Void)?) -> VaccinationCertificate? {
-        do {
+    public func parse(_ payload: String) -> Promise<VaccinationCertificate> {
+        return Promise { seal in
             let base45Decoded = try base45Encoder.decode(payload)
             guard let decompressedPayload = Compression.decompress(Data(base45Decoded)) else {
-                completion?(ApplicationError.general("Could not decompress QR Code data"))
-                return nil
+                throw ApplicationError.general("Could not decompress QR Code data")
             }
             let cosePayload = try cose1SignEncoder.parse(decompressedPayload)
             let cborDecodedPayload = try CBOR.decode(cosePayload?.payload ?? [])
             let certificateJson = cose1SignEncoder.map(cborObject: cborDecodedPayload)
             let jsonData = try JSONSerialization.data(withJSONObject: certificateJson as Any)
-            return try JSONDecoder().decode(VaccinationCertificate.self, from: jsonData)
-        } catch {
-            completion?(error)
-            return nil
+            let certificate = try JSONDecoder().decode(VaccinationCertificate.self, from: jsonData)
+            seal.fulfill(certificate)
         }
     }
 
-    public func parse(_ payload: String, completion: ((Error) -> Void)?) -> ValidationCertificate? {
-        do {
+    public func parse(_ payload: String) -> Promise<ValidationCertificate> {
+        return Promise { seal in
             let base45Decoded = try base45Encoder.decode(payload)
             guard let decompressedPayload = Compression.decompress(Data(base45Decoded)) else {
-                completion?(ApplicationError.general("Could not decompress QR Code data"))
-                return nil
+                throw ApplicationError.general("Could not decompress QR Code data")
             }
             let cosePayload = try cose1SignEncoder.parse(decompressedPayload)
             let cborDecodedPayload = try CBOR.decode(cosePayload?.payload ?? [])
             let certificateJson = cose1SignEncoder.map(cborObject: cborDecodedPayload)
             let jsonData = try JSONSerialization.data(withJSONObject: certificateJson as Any)
-            return try JSONDecoder().decode(ValidationCertificate.self, from: jsonData)
-        } catch {
-            completion?(error)
-            return nil
+            let certificate = try JSONDecoder().decode(ValidationCertificate.self, from: jsonData)
+            seal.fulfill(certificate)
         }
     }
 }
