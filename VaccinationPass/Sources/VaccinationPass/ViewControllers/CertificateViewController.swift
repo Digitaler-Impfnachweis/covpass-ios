@@ -23,10 +23,6 @@ public class CertificateViewController: UIViewController {
     
     public var viewModel: CertificateViewModel!
 
-    // MARK: - Private properties
-
-    private let service = VaccinationCertificateService()
-    
     // MARK: - Lifecycle
     
     override public func viewDidLoad() {
@@ -87,35 +83,6 @@ public class CertificateViewController: UIViewController {
         dotPageIndicator.isHidden = viewModel.certificates.count == 1 ? true : false
     }
 }
-
-//// MARK: - ScannerDelegate
-//
-//extension CertificateViewController: ScannerDelegate {
-//    //
-//    //
-//    // TODO: We should move scanner logic into the ViewModel
-//    //
-//    //
-//    public func result(with value: Result<String, ScanError>) {
-//        presentedViewController?.dismiss(animated: true, completion: nil)
-//        switch value {
-//        case .success(let payload):
-//            viewModel.process(payload: payload).done({ cert in
-//                self.viewModel.loadCertificatesConfiguration()
-//                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5, execute: {
-//                    self.viewModel.showCertificate(cert)
-//                })
-//            }).catch({ error in
-//                print(error)
-//                // TODO error handling
-//            }).finally {
-//                self.reloadCollectionView()
-//            }
-//        case .failure(let error):
-//            print("We have an error: \(error)")
-//        }
-//    }
-//}
 
 // MARK: - UITableViewDataSource
 
