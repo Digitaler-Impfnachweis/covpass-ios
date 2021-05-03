@@ -225,7 +225,7 @@ public class DefaultCertificateViewModel<T: QRCoderProtocol>: CertificateViewMod
             router.showProof()
         }
         .then {
-            self.router.showScanner()
+            self.router.scanQRCode()
         }
         .map { result in
             try self.payloadFromScannerResult(result)

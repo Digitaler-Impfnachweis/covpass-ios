@@ -14,5 +14,5 @@ import Scanner
 public protocol CertificateRouterProtocol: RouterProtocol {
     func showCertificates(_ certificates: [ExtendedVaccinationCertificate])
     func showProof() -> Promise<Void>
-    func showScanner() -> Promise<Swift.Result<String, ScanError>>
+    func scanQRCode() -> Promise<Swift.Result<String, ScanError>>
 }

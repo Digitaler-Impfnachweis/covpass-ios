@@ -41,7 +41,7 @@ class CertificateRouter: CertificateRouterProtocol {
         )
     }
 
-    func showScanner() -> Promise<ScanResult> {
+    func scanQRCode() -> Promise<ScanResult> {
         sceneCoordinator.present(
             ScanSceneFactory()
         )
