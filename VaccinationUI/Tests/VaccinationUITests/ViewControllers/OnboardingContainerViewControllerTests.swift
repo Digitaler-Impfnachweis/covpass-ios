@@ -6,6 +6,7 @@
 //
 
 @testable import VaccinationUI
+import PromiseKit
 import XCTest
 
 class OnboardingContainerViewControllerTests: XCTestCase {
@@ -16,7 +17,7 @@ class OnboardingContainerViewControllerTests: XCTestCase {
         super.setUp()
 
         let pageModels = OnboardingPageViewModelType.allCases.map { OnboardingPageViewModel(type: $0) }
-        viewModel = OnboardingContainerViewModel(items: pageModels)
+        viewModel = OnboardingContainerViewModel(router: OnboardingRouterMock(sceneCoordinator: SceneCoordinatorMock()), items: pageModels)
         sut = OnboardingContainerViewController.createFromStoryboard(bundle: UIConstants.bundle)
         sut.viewModel = viewModel
         sut.loadViewIfNeeded()

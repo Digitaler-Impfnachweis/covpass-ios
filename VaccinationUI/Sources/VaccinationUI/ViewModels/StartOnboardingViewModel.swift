@@ -8,8 +8,9 @@
 import UIKit
 
 open class StartOnboardingViewModel: BaseViewModel {
-    
-    public init() {}
+    // MARK: - Properties
+
+    let router: StartOnboardingRouterProtocol
 
     open var image: UIImage? {
         .startScreen
@@ -39,8 +40,18 @@ open class StartOnboardingViewModel: BaseViewModel {
         .lock
     }
 
-    // MARK: - Settings
-
     public var backgroundColor: UIColor { .backgroundPrimary }
+
+    // MARK: - Lifecycle
+
+    public init(router: StartOnboardingRouterProtocol) {
+        self.router = router
+    }
+
+    // MARK: - Methods
+
+    func showNextScene() {
+        router.showNextScene()
+    }
 }
 

@@ -22,9 +22,9 @@ public class CertificateViewController: UIViewController {
     // MARK: - Public
     
     public var viewModel: CertificateViewModel!
-    public var router: PopupRouter?
 
     // MARK: - Private properties
+
     private let service = VaccinationCertificateService()
     
     // MARK: - Lifecycle
@@ -77,48 +77,45 @@ public class CertificateViewController: UIViewController {
     private func setupActionButton() {
         addButton.icon = viewModel?.addButtonImage
         addButton.action = { [weak self] in
-            self?.presentPopup()
+            self?.viewModel.showScanner()
         }
     }
-    
+
     private func reloadCollectionView() {
         collectionView.reloadData()
         dotPageIndicator.numberOfDots = viewModel.certificates.count
         dotPageIndicator.isHidden = viewModel.certificates.count == 1 ? true : false
     }
-    
-    private func presentPopup() {
-        guard let vc = self.navigationController else { return }
-        router?.presentPopup(onTopOf: vc)
-    }
 }
 
-// MARK: - ScannerDelegate
-
-extension CertificateViewController: ScannerDelegate {
-    public func result(with value: Result<String, ScanError>) {
-        presentedViewController?.dismiss(animated: true, completion: nil)
-        switch value {
-        case .success(let payload):
-            viewModel.process(payload: payload).done({ cert in
-                self.viewModel.loadCertificatesConfiguration()
-                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5, execute: {
-                    let vc = VaccinationDetailViewController.createFromStoryboard()
-                    vc.viewModel = self.viewModel.detailViewModel(cert)
-                    vc.router = ProofPopupRouter()
-                    self.navigationController?.pushViewController(vc, animated: true)
-                })
-            }).catch({ error in
-                print(error)
-                // TODO error handling
-            }).finally {
-                self.reloadCollectionView()
-            }
-        case .failure(let error):
-            print("We have an error: \(error)")
-        }
-    }
-}
+//// MARK: - ScannerDelegate
+//
+//extension CertificateViewController: ScannerDelegate {
+//    //
+//    //
+//    // TODO: We should move scanner logic into the ViewModel
+//    //
+//    //
+//    public func result(with value: Result<String, ScanError>) {
+//        presentedViewController?.dismiss(animated: true, completion: nil)
+//        switch value {
+//        case .success(let payload):
+//            viewModel.process(payload: payload).done({ cert in
+//                self.viewModel.loadCertificatesConfiguration()
+//                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5, execute: {
+//                    self.viewModel.showCertificate(cert)
+//                })
+//            }).catch({ error in
+//                print(error)
+//                // TODO error handling
+//            }).finally {
+//                self.reloadCollectionView()
+//            }
+//        case .failure(let error):
+//            print("We have an error: \(error)")
+//        }
+//    }
+//}
 
 // MARK: - UITableViewDataSource
 
@@ -136,12 +133,7 @@ extension CertificateViewController: UICollectionViewDataSource {
 
         // FIXME: DOES NOT WORK
         cell.onAction = { [weak self] in
-            guard let self = self else { return }
-            guard let vm = self.viewModel.detailViewModel(indexPath) else { return }
-            let vc = VaccinationDetailViewController.createFromStoryboard()
-            vc.viewModel = vm
-            vc.router = ProofPopupRouter()
-            self.navigationController?.pushViewController(vc, animated: true)
+            self?.viewModel.showCertificate(at: indexPath)
         }
         cell.onFavorite = { [weak self] in
             // TODO mark as favorite
@@ -161,11 +153,7 @@ extension CertificateViewController: UICollectionViewDelegate {
     }
 
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let vm = viewModel.detailViewModel(indexPath) else { return }
-        let vc = VaccinationDetailViewController.createFromStoryboard()
-        vc.viewModel = vm
-        vc.router = ProofPopupRouter()
-        navigationController?.pushViewController(vc, animated: true)
+        viewModel.showCertificate(at: indexPath)
     }
 }
 

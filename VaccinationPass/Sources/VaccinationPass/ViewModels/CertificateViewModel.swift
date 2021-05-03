@@ -17,7 +17,9 @@ public protocol CertificateViewModel: HeadlineViewModel {
     func process(payload: String) -> Promise<ExtendedVaccinationCertificate>
     func configure<T: CellConfigutation>(cell: T, at indexPath: IndexPath)
     func reuseIdentifier(for indexPath: IndexPath) -> String
-    func detailViewModel(_ indexPath: IndexPath) -> VaccinationDetailViewModel?
-    func detailViewModel(_ cert: ExtendedVaccinationCertificate) -> VaccinationDetailViewModel?
     func loadCertificatesConfiguration()
+
+    func showCertificate(at indexPath: IndexPath)
+    func showCertificate(_ certificate: ExtendedVaccinationCertificate)
+    func showScanner()
 }

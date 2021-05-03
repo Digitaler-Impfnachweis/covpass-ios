@@ -74,13 +74,12 @@ public class VaccinationDetailViewController: UIViewController {
 
         immunizationButton.title = viewModel.immunizationButton
         immunizationButton.backgroundColor = UIColor.white
+
+        let isPartialVaccination = viewModel.partialVaccination
         immunizationButton.action = { [weak self] in
-            guard let self = self else { return }
-            if self.viewModel.partialVaccination {
-                self.router.presentPopup(onTopOf: self)
-            } else {
-                self.navigationController?.popViewController(animated: true)
-            }
+            isPartialVaccination ?
+                self?.viewModel.scanCertificate() :
+                self?.viewModel.showCertificate()
         }
         stackView.setCustomSpacing(.space_24, after: immunizationButtonContainerView)
     }
@@ -105,19 +104,7 @@ public class VaccinationDetailViewController: UIViewController {
         deleteButton.style = .secondary
         deleteButton.icon = .delete
         deleteButton.action = { [weak self] in
-            let alertTitle = String(format: "vaccination_delete_title".localized, self?.viewModel.name ?? "")
-            let alert = UIAlertController(title: alertTitle, message: "vaccination_delete_body".localized, preferredStyle: .alert)
-
-            alert.addAction(UIAlertAction(title: "Abbrechen", style: .default, handler: nil))
-            alert.addAction(UIAlertAction(title: "Löschen", style: .destructive, handler: { _ in
-                self?.viewModel.delete().done({
-                    self?.navigationController?.popViewController(animated: true)
-                }).catch({ error in
-                    print(error)
-                    // TODO error handling
-                })
-            }))
-            self?.present(alert, animated: true)
+            self?.viewModel.delete()
         }
     }
 

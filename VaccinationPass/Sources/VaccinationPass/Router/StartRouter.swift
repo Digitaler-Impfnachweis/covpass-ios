@@ -6,33 +6,28 @@
 //
 
 import Foundation
-import UIKit
 import VaccinationUI
 
-public struct StartRouter {
-    // MARK: - Public Vardiables
-    
-    public weak var windowDelegate: WindowDelegate?
-    
-    // MARK: - Init
-    
-    public init() {}
-}
+struct StartOnboardingRouter: StartOnboardingRouterProtocol {
+    // MARK: - Properties
 
-// MARK: - Router
+    let sceneCoordinator: SceneCoordinator
 
-extension StartRouter: Router {
-    public func navigateToNextViewController() {
-        var onboardingRouter = OnboardingRouter()
-        onboardingRouter.windowDelegate = windowDelegate
+    // MARK: - Lifecycle
+
+    init(sceneCoordinator: SceneCoordinator) {
+        self.sceneCoordinator = sceneCoordinator
+    }
+
+    // MARK: - Methods
+
+    func showNextScene() {
+        let router = OnboardingRouter(sceneCoordinator: sceneCoordinator)
+        let factory = OnboardingSceneFactory(router: router)
         let controller = OnboardingContainerViewController.createFromStoryboard()
         let pageModels = OnboardingPageViewModelType.allCases.map { OnboardingPageViewModel(type: $0) }
-        controller.viewModel = OnboardingContainerViewModel(items: pageModels)
-        controller.router = onboardingRouter
-        windowDelegate?.update(rootViewController: controller)
-    }
-    
-    public func navigateToPreviousViewController() {
-        
+        controller.viewModel = OnboardingContainerViewModel(router: router, items: pageModels)
+
+        sceneCoordinator.asRoot(factory)
     }
 }

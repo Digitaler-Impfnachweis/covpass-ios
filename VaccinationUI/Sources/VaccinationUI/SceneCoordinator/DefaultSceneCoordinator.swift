@@ -48,16 +48,27 @@ public class DefaultSceneCoordinator: SceneCoordinator {
         viewController: UIViewController,
         animated: Bool = true) {
 
-        let presenter = rootViewController?.mostTopViewController
+        rootViewController?.mostTopViewController?.present(
+            viewController,
+            animated: animated,
+            completion: nil
+        )
 
-        guard shouldCreateNavigationController(for: viewController) else {
-            presenter?.present(viewController, animated: animated, completion: nil)
-            return
-        }
+//        let presenter = rootViewController?.mostTopViewController
 
-        let navigationController = UINavigationController(rootViewController: viewController)
-        navigationController.modalPresentationStyle = viewController.modalPresentationStyle
-        presenter?.present(navigationController, animated: animated, completion: nil)
+//        guard shouldCreateNavigationController(for: viewController) else {
+//            presenter?.present(viewController, animated: animated, completion: nil)
+//            return
+//        }
+
+//        guard viewController.transitioningDelegate == nil else {
+//            presenter?.present(viewController, animated: animated, completion: nil)
+//            return
+//        }
+//
+//        let navigationController = UINavigationController(rootViewController: viewController)
+//        navigationController.modalPresentationStyle = viewController.modalPresentationStyle
+//        presenter?.present(navigationController, animated: animated, completion: nil)
     }
 
     func present<T>(

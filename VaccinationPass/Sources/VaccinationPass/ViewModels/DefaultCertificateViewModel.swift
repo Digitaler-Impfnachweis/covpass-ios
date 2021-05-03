@@ -13,12 +13,17 @@ import PromiseKit
 
 public class DefaultCertificateViewModel<T: QRCoderProtocol>: CertificateViewModel {
     // MARK: - Parser
-    
+
+    private let router: CertificateRouterProtocol
     private let parser: T
     private let service = VaccinationCertificateService()
     
-    public init(parser: T) {
+    public init(
+        router: CertificateRouterProtocol,
+        parser: T) {
+
         self.parser = parser
+        self.router = router
     }
     
     // MARK: - HeadlineViewModel
@@ -137,22 +142,6 @@ public class DefaultCertificateViewModel<T: QRCoderProtocol>: CertificateViewMod
             return "\(NoCertificateCollectionViewCell.self)"}
         return certificates[indexPath.row].identifier
     }
-
-    public func detailViewModel(_ indexPath: IndexPath) -> VaccinationDetailViewModel? {
-        if matchedCertificates.isEmpty {
-            return nil
-        }
-        let pair = findCertificatePair(matchedCertificates[indexPath.row], certificateList.certificates)
-        return VaccinationDetailViewModel(certificates: pair)
-    }
-
-    public func detailViewModel(_ cert: ExtendedVaccinationCertificate) -> VaccinationDetailViewModel? {
-        if certificateList.certificates.isEmpty {
-            return nil
-        }
-        let pair = findCertificatePair(cert, certificateList.certificates)
-        return VaccinationDetailViewModel(certificates: pair)
-    }
     
     // MARK: - Configurations
 
@@ -196,5 +185,72 @@ public class DefaultCertificateViewModel<T: QRCoderProtocol>: CertificateViewMod
             subtitle: "vaccination_no_certificate_card_message".localized,
             image: .noCertificate
         )
+    }
+
+    private func certificatePair(for indexPath: IndexPath ) -> [ExtendedVaccinationCertificate] {
+        if certificateList.certificates.isEmpty {
+            return []
+        }
+        return findCertificatePair(matchedCertificates[indexPath.row], certificateList.certificates)
+    }
+
+    private func certificatePair(for certificate: ExtendedVaccinationCertificate ) -> [ExtendedVaccinationCertificate] {
+        if certificateList.certificates.isEmpty {
+            return []
+        }
+        return findCertificatePair(certificate, certificateList.certificates)
+    }
+
+    public func showCertificate(at indexPath: IndexPath) {
+        showCertificates(
+            certificatePair(for: indexPath)
+        )
+    }
+
+    public func showCertificate(_ certificate: ExtendedVaccinationCertificate) {
+        showCertificates(
+            certificatePair(for: certificate)
+        )
+    }
+
+    private func showCertificates(_ certificates: [ExtendedVaccinationCertificate]) {
+        guard certificates.isEmpty == false else {
+            return
+        }
+        router.showCertificates(certificates)
+    }
+
+    public func showScanner() {
+        firstly {
+            router.showProof()
+        }
+        .then {
+            self.router.showScanner()
+        }
+        .map { result in
+            try self.payloadFromScannerResult(result)
+        }
+        .then { payload in
+            self.process(payload: payload)
+        }
+        .ensure {
+            self.loadCertificatesConfiguration()
+        }
+        .done { certificate in
+            self.showCertificate(certificate)
+        }
+        .catch { error in
+            print(error)
+            // TODO error handling
+        }
+    }
+
+    private func payloadFromScannerResult(_ result: ScanResult) throws -> String {
+        switch result {
+        case .success(let payload):
+            return payload
+        case .failure(let error):
+            throw error
+        }
     }
 }
