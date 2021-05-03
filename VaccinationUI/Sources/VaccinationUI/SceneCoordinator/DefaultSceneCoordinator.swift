@@ -53,22 +53,6 @@ public class DefaultSceneCoordinator: SceneCoordinator {
             animated: animated,
             completion: nil
         )
-
-//        let presenter = rootViewController?.mostTopViewController
-
-//        guard shouldCreateNavigationController(for: viewController) else {
-//            presenter?.present(viewController, animated: animated, completion: nil)
-//            return
-//        }
-
-//        guard viewController.transitioningDelegate == nil else {
-//            presenter?.present(viewController, animated: animated, completion: nil)
-//            return
-//        }
-//
-//        let navigationController = UINavigationController(rootViewController: viewController)
-//        navigationController.modalPresentationStyle = viewController.modalPresentationStyle
-//        presenter?.present(navigationController, animated: animated, completion: nil)
     }
 
     func present<T>(
