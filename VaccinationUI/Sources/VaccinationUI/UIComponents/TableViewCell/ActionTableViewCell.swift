@@ -24,8 +24,8 @@ public class ActionTableViewCell: UITableViewCell {
     
     public override func awakeFromNib() {
         super.awakeFromNib()
-        contentView.layoutMargins = .init(top: 15, left: 0, bottom: 15, right: 0)
-        stackView.spacing = 5
+        contentView.layoutMargins = .init(top: .space_12, left: .zero, bottom: .space_12, right: .zero)
+        stackView.spacing = .space_6
     }
 }
 
