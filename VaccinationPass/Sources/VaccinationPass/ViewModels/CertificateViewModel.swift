@@ -21,5 +21,5 @@ public protocol CertificateViewModel: HeadlineViewModel {
 
     func showCertificate(at indexPath: IndexPath)
     func showCertificate(_ certificate: ExtendedVaccinationCertificate)
-    func showScanner()
+    func scanCertificate()
 }

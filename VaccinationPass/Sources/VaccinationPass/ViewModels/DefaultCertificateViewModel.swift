@@ -220,7 +220,7 @@ public class DefaultCertificateViewModel<T: QRCoderProtocol>: CertificateViewMod
         router.showCertificates(certificates)
     }
 
-    public func showScanner() {
+    public func scanCertificate() {
         firstly {
             router.showProof()
         }

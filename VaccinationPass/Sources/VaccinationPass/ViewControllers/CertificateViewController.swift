@@ -73,7 +73,7 @@ public class CertificateViewController: UIViewController {
     private func setupActionButton() {
         addButton.icon = viewModel?.addButtonImage
         addButton.action = { [weak self] in
-            self?.viewModel.showScanner()
+            self?.viewModel.scanCertificate()
         }
     }
 
