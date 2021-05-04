@@ -63,7 +63,7 @@ public class DefaultCertificateViewModel<T: QRCoderProtocol>: CertificateViewMod
 
                 return self.service.save(certList)
             }).then(self.service.fetch).then({ list -> Promise<ExtendedVaccinationCertificate> in
-                self.certificates = list.certificates.map { self.getCertficateConfiguration(for: $0.vaccinationCertificate) }
+                self.certificates = list.certificates.map { self.getCertficateConfiguration(for: $0) }
                 return Promise.value(extendedVaccinationCertificate)
             })
         })
@@ -78,7 +78,7 @@ public class DefaultCertificateViewModel<T: QRCoderProtocol>: CertificateViewMod
                 self.certificates = [self.noCertificateConfiguration()]
                 return
             }
-            self.certificates = list.map { self.getCertficateConfiguration(for: $0.vaccinationCertificate) }
+            self.certificates = list.map { self.getCertficateConfiguration(for: $0) }
         }).catch({ error in
             print(error)
             self.certificates = [self.noCertificateConfiguration()]
@@ -122,6 +122,8 @@ public class DefaultCertificateViewModel<T: QRCoderProtocol>: CertificateViewMod
         return list
     }
     
+    // MARK: - Collection View
+    
     public func configure<T: CellConfigutation>(cell: T, at indexPath: IndexPath)  {
         guard certificates.indices.contains(indexPath.row) else { return }
         let configuration = certificates[indexPath.row]
@@ -138,6 +140,8 @@ public class DefaultCertificateViewModel<T: QRCoderProtocol>: CertificateViewMod
         return certificates[indexPath.row].identifier
     }
 
+    // MARK: - Details View Model
+    
     public func detailViewModel(_ indexPath: IndexPath) -> VaccinationDetailViewModel? {
         if matchedCertificates.isEmpty {
             return nil
@@ -154,40 +158,37 @@ public class DefaultCertificateViewModel<T: QRCoderProtocol>: CertificateViewMod
         return VaccinationDetailViewModel(certificates: pair)
     }
     
-    // MARK: - Configurations
+    // MARK: - Card Configurations
 
-    private func getCertficateConfiguration(for certificate: VaccinationCertificate) -> QRCertificateConfiguration {
-        certificate.partialVaccination ? halfCertificateConfiguration(for: certificate) : fullCertificateConfiguration(for: certificate)
+    private func getCertficateConfiguration(for certificate: ExtendedVaccinationCertificate) -> QRCertificateConfiguration {
+        certificate.vaccinationCertificate.partialVaccination ? halfCertificateConfiguration(for: certificate) : fullCertificateConfiguration(for: certificate)
     }
 
-    private func fullCertificateConfiguration(for certificate: VaccinationCertificate) -> QRCertificateConfiguration {
-        let qrViewConfiguration = QrViewConfiguration(tintColor: .white, qrValue: NSUUID().uuidString, qrTitle: nil, qrSubtitle: nil)
-        return QRCertificateConfiguration(
-            title: "Covid-19 Nachweis",
-            subtitle: certificate.name,
+    private func fullCertificateConfiguration(for certificate: ExtendedVaccinationCertificate) -> QRCertificateConfiguration {
+        QRCertificateConfiguration(
+            qrValue: certificate.validationQRCodeData ?? NSUUID().uuidString,// neeeded due to no qr data
+            title: "Covid-19 Nachweis".localized,
+            subtitle: certificate.vaccinationCertificate.name,
             image: .starEmpty,
             stateImage: .completness,
-            stateTitle: "Impfungen Anzeigen",
-            stateAction: nil,
+            stateTitle: "Impfungen Anzeigen".localized,
             headerImage: .starEmpty,
-            headerAction: nil,
+            favoriteAction: favoriteAction,
             backgroundColor: .onBrandAccent70,
-            qrViewConfiguration: qrViewConfiguration)
+            tintColor: UIColor.white)
     }
 
-    private func halfCertificateConfiguration(for certificate: VaccinationCertificate) -> QRCertificateConfiguration {
-//        let qrViewConfiguration = QrViewConfiguration(tintColor: .black, qrValue: NSUUID().uuidString, qrTitle: "Vorlaüfiger Impfnachweis", qrSubtitle: nil)
-        return QRCertificateConfiguration(
-            title: "Covid-19 Nachweis",
-            subtitle: certificate.name,
+    private func halfCertificateConfiguration(for certificate: ExtendedVaccinationCertificate) -> QRCertificateConfiguration {
+        QRCertificateConfiguration(
+            title: "Covid-19 Nachweis".localized,
+            subtitle: certificate.vaccinationCertificate.name,
             image: .starEmpty,
             stateImage: .halfShield,
-            stateTitle: "Impfungen Anzeigen",
-            stateAction: nil,
+            stateTitle: "Impfungen Anzeigen".localized,
             headerImage: .starEmpty,
-            headerAction: nil,
-            backgroundColor: .onBackground50,
-            qrViewConfiguration: nil)
+            favoriteAction: favoriteAction,
+            backgroundColor: .onBackground50)
+
     }
     
     private func noCertificateConfiguration() -> NoCertifiateConfiguration {
@@ -196,5 +197,15 @@ public class DefaultCertificateViewModel<T: QRCoderProtocol>: CertificateViewMod
             subtitle: "vaccination_no_certificate_card_message".localized,
             image: .noCertificate
         )
+    }
+    
+    // MARK: - Card Actions
+    
+    private func favoriteAction(for configuration: QRCertificateConfiguration) {
+        guard let extendedCertificate = certificateList.certificates.filter({ $0.vaccinationCertificate.name == configuration.subtitle }).first else { return }
+        certificateList.favoriteCertificateId = extendedCertificate.vaccinationCertificate.id
+        service.save(certificateList).done {
+            self.loadCertificatesConfiguration()
+        }
     }
 }
