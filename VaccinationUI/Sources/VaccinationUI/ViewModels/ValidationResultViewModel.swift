@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import PromiseKit
 import VaccinationCommon
 
 enum Result {
@@ -15,8 +16,12 @@ enum Result {
 }
 
 open class ValidationResultViewModel: BaseViewModel {
+    let router: ValidationResultRouterProtocol
 
-    public init(certificate: ValidationCertificate?) {
+    public init(
+        router: ValidationResultRouterProtocol,
+        certificate: ValidationCertificate?) {
+        self.router = router
         self.certificate = certificate
     }
 
@@ -132,5 +137,18 @@ open class ValidationResultViewModel: BaseViewModel {
     public var paragraphBodyFont: UIFont = UIFont.boldSystemFont(ofSize: 12)
 
     public var backgroundColor: UIColor = UIColor.black
+
+    // MARK: - Methods
+
+    func cancel() {
+        router.showStart()
+    }
+
+    func scanNextCertifcate() {
+        firstly {
+            router.scanQRCode()
+        }
+        .cauterize()
+    }
 }
 

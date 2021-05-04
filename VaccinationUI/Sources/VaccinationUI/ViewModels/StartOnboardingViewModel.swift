@@ -10,7 +10,7 @@ import UIKit
 open class StartOnboardingViewModel: BaseViewModel {
     // MARK: - Properties
 
-    let router: StartOnboardingRouterProtocol
+    let router: StartRouterProtocol
 
     open var image: UIImage? {
         .startScreen
@@ -44,7 +44,7 @@ open class StartOnboardingViewModel: BaseViewModel {
 
     // MARK: - Lifecycle
 
-    public init(router: StartOnboardingRouterProtocol) {
+    public init(router: StartRouterProtocol) {
         self.router = router
     }
 

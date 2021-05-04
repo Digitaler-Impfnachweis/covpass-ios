@@ -33,8 +33,8 @@ struct OnboardingRouter: OnboardingRouterProtocol {
 
     func showPreviousScene() {
         sceneCoordinator.asRoot(
-            StartOnboardingSceneFactory(
-                router: StartOnboardingRouter(sceneCoordinator: sceneCoordinator)
+            StartSceneFactory(
+                router: StartRouter(sceneCoordinator: sceneCoordinator)
             )
         )
     }

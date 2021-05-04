@@ -7,6 +7,6 @@
 
 import Foundation
 
-public protocol StartOnboardingRouterProtocol: RouterProtocol {
+public protocol StartRouterProtocol: RouterProtocol {
     func showNextScene()
 }

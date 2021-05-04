@@ -10,19 +10,40 @@ import VaccinationValidator
 
 @UIApplicationMain
 final class AppDelegate: UIResponder, UIApplicationDelegate {
-    
+
     var window: UIWindow?
-    
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    var sceneCoordinator: DefaultSceneCoordinator?
+
+    func application(
+        _ application: UIApplication,
+        didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+
         try? UIFont.loadCustomFonts()
-        window = UIWindow(frame: UIScreen.main.bounds)
-        var router = MainRouter()
-        router.windowDelegate = self
-        self.window = UIWindow(frame: UIScreen.main.bounds)
-        self.window?.rootViewController = router.rootViewController()
-        self.window?.makeKeyAndVisible()
+
+        let window = UIWindow(frame: UIScreen.main.bounds)
+        let sceneCoordinator = DefaultSceneCoordinator(window: window)
+        let mainScene = ValidatorAppSceneFactory(sceneCoordinator: sceneCoordinator)
+        sceneCoordinator.asRoot(mainScene)
+        window.rootViewController = sceneCoordinator.rootViewController
+        window.makeKeyAndVisible()
+        self.window = window
+        self.sceneCoordinator = sceneCoordinator
+
         return true
     }
+
+//    var window: UIWindow?
+//
+//    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+//        try? UIFont.loadCustomFonts()
+//        window = UIWindow(frame: UIScreen.main.bounds)
+//        var router = MainRouter()
+//        router.windowDelegate = self
+//        self.window = UIWindow(frame: UIScreen.main.bounds)
+//        self.window?.rootViewController = router.rootViewController()
+//        self.window?.makeKeyAndVisible()
+//        return true
+//    }
 }
 
 // MARK: - WindowDelegate

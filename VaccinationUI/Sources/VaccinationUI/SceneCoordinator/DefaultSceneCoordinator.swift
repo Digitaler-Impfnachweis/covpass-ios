@@ -36,7 +36,10 @@ public class DefaultSceneCoordinator: SceneCoordinator {
             fatalError(ScenePresentationError.notPresentable.localizedDescription)
         }
         let navigationViewController = rootViewController?.mostTopViewController as? UINavigationController
-        navigationViewController?.pushViewController(viewController, animated: animated)
+        navigationViewController?.pushViewController(
+            viewController,
+            animated: animated
+        )
     }
 
     func popViewController(animated: Bool) {
@@ -84,12 +87,22 @@ public class DefaultSceneCoordinator: SceneCoordinator {
         return internalPromise
     }
 
+    func dismissViewController(_ animated: Bool) {
+        rootViewController?.mostTopViewController?.dismiss(
+            animated: animated,
+            completion: nil
+        )
+    }
+
     func dismiss(
         _ viewController: UIViewController,
         _ animated: Bool,
         completion: (() -> Void)? = nil) {
 
-        viewController.dismiss(animated: animated, completion: completion)
+        viewController.dismiss(
+            animated: animated,
+            completion: completion
+        )
     }
 
     // MARK: - Helper

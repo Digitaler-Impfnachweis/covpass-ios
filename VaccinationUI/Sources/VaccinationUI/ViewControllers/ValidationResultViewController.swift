@@ -22,14 +22,7 @@ public class ValidationResultViewController: BottomPopupViewController {
 
     // MARK: - Public Properties
 
-    public var viewModel: BaseViewModel?
-    public var router: PopupRouter?
-
-    // MARK: - Internal Properties
-
-    var inputViewModel: ValidationResultViewModel {
-        viewModel as? ValidationResultViewModel ?? ValidationResultViewModel(certificate: nil)
-    }
+    public var viewModel: ValidationResultViewModel!
 
     // MARK: - Lifecycle
 
@@ -44,31 +37,31 @@ public class ValidationResultViewController: BottomPopupViewController {
     // MARK: - Private
 
     private func configureImageView() {
-        imageView.image = inputViewModel.icon
+        imageView.image = viewModel.icon
         stackView.setCustomSpacing(.space_24, after: imageContainerView)
     }
 
     private func configureHeadline() {
         headline.attributedTitleText = "".styledAs(.header_3)
         headline.action = { [weak self] in
-            self?.dismiss(animated: true, completion: nil)
+            self?.viewModel.cancel()
         }
-        headline.image = inputViewModel.closeButtonImage
+        headline.image = viewModel.closeButtonImage
         stackView.setCustomSpacing(.space_24, after: headline)
     }
 
     private func configureParagraphView() {
-        resultView.attributedTitleText = inputViewModel.resultTitle.styledAs(.header_1)
-        resultView.attributedBodyText = inputViewModel.resultBody.styledAs(.body)
+        resultView.attributedTitleText = viewModel.resultTitle.styledAs(.header_1)
+        resultView.attributedBodyText = viewModel.resultBody.styledAs(.body)
         stackView.setCustomSpacing(.space_24, after: resultView)
 
         nameView.image = .warning
-        nameView.attributedTitleText = inputViewModel.nameTitle?.styledAs(.header_3)
-        nameView.attributedBodyText = inputViewModel.nameBody?.styledAs(.body)
+        nameView.attributedTitleText = viewModel.nameTitle?.styledAs(.header_3)
+        nameView.attributedBodyText = viewModel.nameBody?.styledAs(.body)
 
         idView.image = .card
-        idView.attributedTitleText = inputViewModel.idTitle?.styledAs(.header_3)
-        idView.attributedBodyText = inputViewModel.idBody?.styledAs(.body)
+        idView.attributedTitleText = viewModel.idTitle?.styledAs(.header_3)
+        idView.attributedBodyText = viewModel.idBody?.styledAs(.body)
     }
 
     private func configureToolbarView() {
@@ -76,11 +69,11 @@ public class ValidationResultViewController: BottomPopupViewController {
         toolbarView.delegate = self
     }
 
-    public override var popupHeight: CGFloat { inputViewModel.height }
-    public override var popupTopCornerRadius: CGFloat { inputViewModel.topCornerRadius }
-    public override var popupPresentDuration: Double { inputViewModel.presentDuration }
-    public override var popupDismissDuration: Double { inputViewModel.dismissDuration }
-    public override var popupShouldDismissInteractivelty: Bool { inputViewModel.shouldDismissInteractivelty }
+    public override var popupHeight: CGFloat { viewModel.height }
+    public override var popupTopCornerRadius: CGFloat { viewModel.topCornerRadius }
+    public override var popupPresentDuration: Double { viewModel.presentDuration }
+    public override var popupDismissDuration: Double { viewModel.dismissDuration }
+    public override var popupShouldDismissInteractivelty: Bool { viewModel.shouldDismissInteractivelty }
     public override var popupDimmingViewAlpha: CGFloat { 0.5 }
 }
 
@@ -89,13 +82,8 @@ public class ValidationResultViewController: BottomPopupViewController {
 extension ValidationResultViewController: CustomToolbarViewDelegate {
     public func customToolbarView(_: CustomToolbarView, didTap buttonType: ButtonItemType) {
         switch buttonType {
-        case .navigationArrow:
-            dismiss(animated: true, completion: nil)
         case .textButton:
-            let vc = self.presentingViewController
-            dismiss(animated: true, completion: {
-                self.router?.presentPopup(onTopOf: vc ?? self)
-            })
+            viewModel.scanNextCertifcate()
         default:
             return
         }

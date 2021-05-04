@@ -7,10 +7,15 @@
 
 import UIKit
 import PromiseKit
-import VaccinationUI
 
-struct ScanSceneFactory: ResolvableSceneFactory {
-    func make(resolvable: Resolver<ScanResult>) -> UIViewController {
+public struct ScanSceneFactory: ResolvableSceneFactory {
+    // MARK: - Lifecycle
+
+    public init() {}
+
+    // MARK: - Methods
+
+    public func make(resolvable: Resolver<ScanResult>) -> UIViewController {
         let viewModel = ScanPopupViewModel(resolvable: resolvable)
         let viewController = ScanPopupViewController.createFromStoryboard()
         viewController.viewModel = viewModel

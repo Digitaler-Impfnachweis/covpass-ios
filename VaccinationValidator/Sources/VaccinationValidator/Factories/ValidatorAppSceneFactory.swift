@@ -1,5 +1,5 @@
 //
-//  MainSceneFactory.swift
+//  PassAppSceneFactory.swift
 //
 //
 //  Copyright © 2021 IBM. All rights reserved.
@@ -9,7 +9,7 @@ import UIKit
 import VaccinationUI
 import VaccinationCommon
 
-public struct MainSceneFactory: SceneFactory {
+public struct ValidatorAppSceneFactory: SceneFactory {
     // MARK: - Properties
 
     private let sceneCoordinator: SceneCoordinator
@@ -22,20 +22,20 @@ public struct MainSceneFactory: SceneFactory {
 
     public func make() -> UIViewController {
         UserDefaults.StartupInfo.bool(.onboarding) ?
-            certificateViewController() :
-            startOnboardingViewController()
+            validatorViewController() :
+            startViewController()
     }
 
-    private func startOnboardingViewController() -> UIViewController {
-        let router = StartOnboardingRouter(sceneCoordinator: sceneCoordinator)
-        let factory = StartOnboardingSceneFactory(router: router)
+    private func startViewController() -> UIViewController {
+        let router = StartRouter(sceneCoordinator: sceneCoordinator)
+        let factory = StartSceneFactory(router: router)
         let viewController = factory.make()
         return viewController
     }
 
-    private func certificateViewController() -> UIViewController {
-        let router = CertificateRouter(sceneCoordinator: sceneCoordinator)
-        let factory = CertificateSceneFactory(router: router)
+    private func validatorViewController() -> UIViewController {
+        let router = ValidatorRouter(sceneCoordinator: sceneCoordinator)
+        let factory = ValidatorSceneFactory(router: router)
         let viewController = factory.make()
         return viewController
     }

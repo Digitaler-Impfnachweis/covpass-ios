@@ -8,7 +8,7 @@
 import Foundation
 import VaccinationUI
 
-struct StartOnboardingRouter: StartOnboardingRouterProtocol {
+struct StartRouter: StartRouterProtocol {
     // MARK: - Properties
 
     let sceneCoordinator: SceneCoordinator

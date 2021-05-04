@@ -7,14 +7,14 @@
 
 import UIKit
 
-public struct StartOnboardingSceneFactory: SceneFactory {
+public struct StartSceneFactory: SceneFactory {
     // MARK: - Properties
 
-    let router: StartOnboardingRouterProtocol
+    let router: StartRouterProtocol
 
     // MARK: - Lifecylce
 
-    public init(router: StartOnboardingRouterProtocol) {
+    public init(router: StartRouterProtocol) {
         self.router = router
     }
 

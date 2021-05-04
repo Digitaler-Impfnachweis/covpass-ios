@@ -18,11 +18,10 @@ public class ValidatorViewController: UIViewController {
     @IBOutlet public var offlineCard: OfflineCardView!
     
     // MARK: - Public
-    
+
     public var viewModel: ValidatorViewModel!
-    public var router: PopupRouter?
     
-    // MARK: - Fifecycle
+    // MARK: - Lifecycle
     
     override public func viewDidLoad() {
         super.viewDidLoad()
@@ -53,39 +52,15 @@ public class ValidatorViewController: UIViewController {
         scanCard.titleLabel.attributedText = "Impfschutz prüfen".styledAs(.header_1).colored(.backgroundSecondary)
         scanCard.textLabel.attributedText = "Scannen Sie jetzt das Prüfzertifikat. Sie sehen sofort ob die Person geimpft ist.".styledAs(.body).colored(.backgroundSecondary)
         scanCard.actionButton.title = "Zertifikat scannen"
-        scanCard.actionButton.action = presentPopup
+        scanCard.actionButton.action = { [weak self] in
+            self?.viewModel.startQRCodeValidation()
+        }
 
         offlineCard.titleLabel.attributedText = "Offline-Modus".styledAs(.header_2)
         offlineCard.textLable.attributedText = "Um offline prüfen zu können, halten Sie die App auf dem aktuellsten Stand. Stellen Sie dafür ab und an eine Verbindung mit dem Internet her.".styledAs(.body)
         offlineCard.infoLabel.attributedText = "Aktualisieren Sie die App".styledAs(.body)
         offlineCard.infoImageView.image = .warning
         offlineCard.dateLabel.attributedText = "Letztes Update: 01.01.1971, 05:36".styledAs(.body).colored(.onBackground70)
-    }
-    
-    func presentPopup() {
-        router?.presentPopup(onTopOf: self)
-    }
-}
-
-// MARK: - ScannerDelegate
-
-extension ValidatorViewController: ScannerDelegate {
-    public func result(with value: Result<String, ScanError>) {
-        presentedViewController?.dismiss(animated: true, completion: {
-            switch value {
-            case .success(let payload):
-                self.viewModel?.process(payload: payload).done({ cert in
-                    let vc = ValidationResultViewController.createFromStoryboard()
-                    vc.viewModel = ValidationResultViewModel(certificate: cert)
-                    vc.router = ValidatorPopupRouter()
-                    self.present(vc, animated: true, completion: nil)
-                }).catch({ error in
-                    print(error)
-                })
-            case .failure(let error):
-                print("We have an error: \(error)")
-            }
-        })
     }
 }
 

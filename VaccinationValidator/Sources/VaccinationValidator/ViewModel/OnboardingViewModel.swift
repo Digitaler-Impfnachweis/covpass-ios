@@ -8,36 +8,45 @@
 import UIKit
 import VaccinationUI
 
-public class OnboardingViewModel: StartOnboardingViewModel {
-    
-    public override init() {}
+public class OnboardingViewModel: BaseViewModel {
+    // MARK: - Properties
 
-    public override var image: UIImage? {
+    private let router: StartRouterProtocol
+
+    public var image: UIImage? {
         .illustration1
     }
 
-    public override var title: String {
+    public var title: String {
         "validation_onboarding_welcome".localized
     }
 
-    public override var info: String {
+    public var info: String {
         "validation_onboarding_body".localized
     }
     
-    public override var secureTitle: String {
+    public var secureTitle: String {
         "validation_onboarding_secure_title".localized
     }
     
-    public override var secureText: String {
+    public var secureText: String {
         "validation_onboarding_secure_body".localized
     }
     
-    public override var navigationButtonTitle: String {
+    public var navigationButtonTitle: String {
         "validation_onboarding_start".localized
     }
     
-    public override var secureImage: UIImage? {
+    public var secureImage: UIImage? {
         .lock
+    }
+
+    public var backgroundColor: UIColor = .neutralWhite
+
+    // MARK: - Lifecycle
+
+    public init(router: StartRouterProtocol) {
+        self.router = router
     }
 }
 
