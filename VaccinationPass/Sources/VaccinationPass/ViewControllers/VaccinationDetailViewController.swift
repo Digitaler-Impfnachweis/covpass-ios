@@ -75,11 +75,8 @@ public class VaccinationDetailViewController: UIViewController {
         immunizationButton.title = viewModel.immunizationButton
         immunizationButton.backgroundColor = UIColor.white
 
-        let isPartialVaccination = viewModel.partialVaccination
         immunizationButton.action = { [weak self] in
-            isPartialVaccination ?
-                self?.viewModel.scanCertificate() :
-                self?.viewModel.showCertificate()
+            self?.viewModel.immunizationButtonTapped()
         }
         stackView.setCustomSpacing(.space_24, after: immunizationButtonContainerView)
     }

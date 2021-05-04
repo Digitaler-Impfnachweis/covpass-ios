@@ -69,7 +69,13 @@ public class VaccinationDetailViewModel {
         return certificates.map({ VaccinationViewModel(certificate: $0.vaccinationCertificate) })
     }
 
-    public func scanCertificate() {
+    public func immunizationButtonTapped() {
+        partialVaccination ?
+            scanNextCertificate() :
+            showCertificate()
+    }
+
+    private func scanNextCertificate() {
         firstly {
             router.showScanner()
         }
@@ -79,7 +85,7 @@ public class VaccinationDetailViewModel {
         .cauterize()
     }
 
-    public func showCertificate() {
+    private func showCertificate() {
         router.showCertificateOverview()
     }
 
