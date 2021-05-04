@@ -13,7 +13,6 @@ import VaccinationCommon
 import PromiseKit
 
 class MockCertificateViewModel: CertificateViewModel {
-
     // MARK: - Test Variables
     
     var processCalled = false
@@ -63,5 +62,17 @@ class MockCertificateViewModel: CertificateViewModel {
 
     func detailViewModel(_ indexPath: IndexPath) -> VaccinationDetailViewModel? {
         return nil
+    }
+
+    func showCertificate(at indexPath: IndexPath) {
+        // TODO: Add tests
+    }
+
+    func showCertificate(_ certificate: ExtendedVaccinationCertificate) {
+        // TODO: Add tests
+    }
+
+    func scanCertificate() {
+        // TODO: Add tests
     }
 }
