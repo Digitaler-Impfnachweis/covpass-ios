@@ -18,7 +18,6 @@ public class ValidationResultViewController: BottomPopupViewController {
     @IBOutlet public var imageView: UIImageView!
     @IBOutlet public var resultView: ParagraphView!
     @IBOutlet public var nameView: ParagraphView!
-    @IBOutlet public var idView: ParagraphView!
 
     // MARK: - Public Properties
 
@@ -56,12 +55,8 @@ public class ValidationResultViewController: BottomPopupViewController {
         stackView.setCustomSpacing(.space_24, after: resultView)
 
         nameView.image = .warning
-        nameView.attributedTitleText = viewModel.nameTitle?.styledAs(.header_3)
-        nameView.attributedBodyText = viewModel.nameBody?.styledAs(.body)
-
-        idView.image = .card
-        idView.attributedTitleText = viewModel.idTitle?.styledAs(.header_3)
-        idView.attributedBodyText = viewModel.idBody?.styledAs(.body)
+        nameView.attributedTitleText = inputViewModel.nameTitle?.styledAs(.header_3)
+        nameView.attributedBodyText = inputViewModel.nameBody?.styledAs(.body)
     }
 
     private func configureToolbarView() {
