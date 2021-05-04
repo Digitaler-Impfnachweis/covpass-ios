@@ -80,26 +80,8 @@ open class ValidationResultViewModel: BaseViewModel {
         }
     }
 
-    open var idTitle: String? {
-        switch result {
-        case .full, .partial:
-            return "Ausweis-Nummer"
-        case .error:
-            return "Impfnachweis abgelaufen"
-        }
-    }
-
-    open var idBody: String? {
-        switch result {
-        case .full, .partial:
-            return nil
-        case .error:
-            return "Das Prüfzertifikat ist nicht mehr gültig. Der aktuelle Status kann in der Impf-Nachweis-App eingesehen werden."
-        }
-    }
-
     var closeButtonImage: UIImage? {
-        UIImage(named: UIConstants.IconName.IconClose, in: UIConstants.bundle, compatibleWith: nil)
+        .close
     }
 
     // MARK - PopupRouter
@@ -116,20 +98,6 @@ open class ValidationResultViewModel: BaseViewModel {
     public var title: String = ""
 
     public var info: String = ""
-
-    public var imageAspectRatio: CGFloat = 0.0
-
-    public var imageWidth: CGFloat = 0.0
-
-    public var imageHeight: CGFloat = 0.0
-
-    public var imageContentMode: UIView.ContentMode = .scaleAspectFit
-
-    public var headlineFont: UIFont = UIFont.boldSystemFont(ofSize: 12)
-
-    public var headlineColor: UIColor = UIColor.black
-
-    public var paragraphBodyFont: UIFont = UIFont.boldSystemFont(ofSize: 12)
 
     public var backgroundColor: UIColor = UIColor.black
 }

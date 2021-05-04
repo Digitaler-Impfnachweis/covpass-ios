@@ -11,12 +11,13 @@ import BottomPopup
 public class ValidationResultViewController: BottomPopupViewController {
     // MARK: - IBOutlet
 
+    @IBOutlet public var stackView: UIStackView!
     @IBOutlet public var toolbarView: CustomToolbarView!
     @IBOutlet public var headline: InfoHeaderView!
-    @IBOutlet public var imageView: ConfirmView!
+    @IBOutlet public var imageContainerView: UIStackView!
+    @IBOutlet public var imageView: UIImageView!
     @IBOutlet public var resultView: ParagraphView!
     @IBOutlet public var nameView: ParagraphView!
-    @IBOutlet public var idView: ParagraphView!
 
     // MARK: - Public Properties
 
@@ -42,40 +43,30 @@ public class ValidationResultViewController: BottomPopupViewController {
     // MARK: - Private
 
     private func configureImageView() {
-        imageView.kind = .custom(
-            image: inputViewModel.icon,
-            width: 150,
-            height: 150
-        )
-        imageView.detail = nil
-        imageView.imageView.contentMode = .scaleAspectFill
+        imageView.image = inputViewModel.icon
+        stackView.setCustomSpacing(.space_24, after: imageContainerView)
     }
 
     private func configureHeadline() {
-        headline.headline.text = ""
+        headline.attributedTitleText = "".styledAs(.header_3)
         headline.action = { [weak self] in
             self?.dismiss(animated: true, completion: nil)
         }
-        headline.buttonImage = inputViewModel.closeButtonImage
+        headline.image = inputViewModel.closeButtonImage
+        stackView.setCustomSpacing(.space_24, after: headline)
     }
 
     private func configureParagraphView() {
-        resultView.titleText = inputViewModel.resultTitle
-        resultView.titleFont = UIConstants.Font.onboardingHeadlineFont
-        resultView.bodyText = inputViewModel.resultBody
-        resultView.spacing = 12.0
+        resultView.attributedTitleText = inputViewModel.resultTitle.styledAs(.header_1)
+        resultView.attributedBodyText = inputViewModel.resultBody.styledAs(.body)
+        stackView.setCustomSpacing(.space_24, after: resultView)
 
-        nameView.titleText = inputViewModel.nameTitle
-        nameView.bodyText = inputViewModel.nameBody
-
-        idView.titleText = inputViewModel.idTitle
-        idView.bodyText = inputViewModel.idBody
-        idView.isHidden = inputViewModel.idBody == nil
+        nameView.image = .warning
+        nameView.attributedTitleText = inputViewModel.nameTitle?.styledAs(.header_3)
+        nameView.attributedBodyText = inputViewModel.nameBody?.styledAs(.body)
     }
 
     private func configureToolbarView() {
-        toolbarView.shouldShowTransparency = true
-        toolbarView.shouldShowGradient = false
         toolbarView.state = .confirm("Nächstes Zertifikat scannen")
         toolbarView.delegate = self
     }

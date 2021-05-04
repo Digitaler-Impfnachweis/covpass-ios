@@ -21,11 +21,11 @@ public class QRCertificateConfiguration: NoCertifiateConfiguration {
     // MARK: - Init
     
     public init(qrValue: String? = nil,
-                title: String? = "Covid-19 Nachweis".localized,
+                title: String? = nil,
                 subtitle: String? = nil,
                 image: UIImage? = nil,
                 stateImage: UIImage? = nil,
-                stateTitle: String = "Impfungen Anzeigen".localized,
+                stateTitle: String? = nil,
                 headerImage: UIImage? = nil,
                 favoriteAction: ((_ configuration: QRCertificateConfiguration) -> Void)? = nil,
                 backgroundColor: UIColor? = nil,

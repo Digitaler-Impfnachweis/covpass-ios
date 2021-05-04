@@ -27,12 +27,6 @@ public class OnboardingContainerViewController: UIViewController {
     var pageController: UIPageViewController?
     var pages: [OnboardingPageViewController] = []
     var currentIndex: Int = 0
-    
-    // MARK: - Private constants
-
-    private struct LayoutConstants {
-        let topStartButtonMargin: CGFloat = 12
-    }
 
     // MARK: - Lifecycle
 
@@ -56,8 +50,6 @@ public class OnboardingContainerViewController: UIViewController {
     // MARK: - Private
 
     private func configureToolbarView() {
-        toolbarView.shouldShowTransparency = true
-        toolbarView.shouldShowGradient = false
         toolbarView.state = .confirm(viewModel?.startButtonTitle ?? "Los geht's")
         toolbarView.setUpLeftButton(leftButtonItem: .navigationArrow)
         toolbarView.delegate = self

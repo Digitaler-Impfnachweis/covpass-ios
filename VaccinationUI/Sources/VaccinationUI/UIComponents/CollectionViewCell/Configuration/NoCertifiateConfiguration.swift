@@ -21,7 +21,7 @@ public class NoCertifiateConfiguration: BaseCertifiateConfiguration {
         self.title = title
         self.subtitle = subtitle
         self.image = image
-        super.init(backgroundColor: UIConstants.BrandColor.onBackground20, identifer: identifier)
+        super.init(backgroundColor: .onBackground20, identifer: identifier)
     }
     
     // MARK: - Equatable

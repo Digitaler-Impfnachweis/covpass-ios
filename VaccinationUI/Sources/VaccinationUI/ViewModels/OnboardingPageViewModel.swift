@@ -23,11 +23,11 @@ open class OnboardingPageViewModel: BaseViewModel {
     open var image: UIImage? {
         switch type {
         case .page1:
-            return UIImage(named: UIConstants.IconName.OnboardingScreen1, in: UIConstants.bundle, compatibleWith: nil)
+            return .onboardingScreen1
         case .page2:
-            return UIImage(named: UIConstants.IconName.OnboardingScreen2, in: UIConstants.bundle, compatibleWith: nil)
+            return .onboardingScreen2
         case .page3:
-            return UIImage(named: UIConstants.IconName.OnboardingScreen3, in: UIConstants.bundle, compatibleWith: nil)
+            return .onboardingScreen3
         }
     }
 
@@ -55,13 +55,6 @@ open class OnboardingPageViewModel: BaseViewModel {
 
     // MARK: - Settings
 
-    public var imageAspectRatio: CGFloat { 375 / 220 }
-    public var imageWidth: CGFloat { UIScreen.main.bounds.width }
-    public var imageHeight: CGFloat { imageWidth / imageAspectRatio }
-    public var imageContentMode: UIView.ContentMode { .scaleAspectFit }
-    public var headlineFont: UIFont { UIConstants.Font.onboardingHeadlineFont }
-    public var headlineColor: UIColor { .black }
-    public var paragraphBodyFont: UIFont { UIConstants.Font.regularLarger }
-    public var backgroundColor: UIColor { UIConstants.BrandColor.backgroundPrimary }
+    public var backgroundColor: UIColor { .backgroundPrimary }
 }
 

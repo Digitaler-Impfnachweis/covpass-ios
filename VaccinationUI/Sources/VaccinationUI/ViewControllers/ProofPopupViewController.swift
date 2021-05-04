@@ -12,9 +12,9 @@ public class ProofPopupViewController: BottomPopupViewController {
     // MARK: - IBOutlet
     
     @IBOutlet public var toolbarView: CustomToolbarView!
-    @IBOutlet public var confirmView: ConfirmView!
+    @IBOutlet public var imageView: UIImageView!
     @IBOutlet public var headline: InfoHeaderView!
-    @IBOutlet public var paragraphView: ParagraphView!
+    @IBOutlet public var descriptionText: ParagraphView!
     @IBOutlet public var actionView: InfoHeaderView!
     
     // MARK: - Public Properties
@@ -34,7 +34,7 @@ public class ProofPopupViewController: BottomPopupViewController {
         super.viewDidLoad()
         configureImageView()
         configureHeadline()
-        configureParagraphView()
+        configureDescriptionText()
         configureToolbarView()
         configureActionView()
     }
@@ -42,48 +42,38 @@ public class ProofPopupViewController: BottomPopupViewController {
     // MARK: - Private
 
     private func configureImageView() {
-        confirmView.kind = .custom(
-            image: inputViewModel.image,
-            width: inputViewModel.imageWidth,
-            height: inputViewModel.imageHeight
-        )
-        confirmView.detail = nil
-        confirmView.imageView.contentMode = inputViewModel.imageContentMode
+        imageView.image = inputViewModel.image
+        imageView.pinHeightToScaleAspectFit()
     }
 
     private func configureHeadline() {
-        headline.headline.text = inputViewModel.title
-        headline.headline.textColor = inputViewModel.headlineColor
+        headline.attributedTitleText = inputViewModel.title.styledAs(.header_2)
         headline.action = { [weak self] in
             self?.dismiss(animated: true, completion: nil)
         }
-        headline.buttonImage = inputViewModel.closeButtonImage
-        headline.headlineFont = inputViewModel.headlineFont
+        headline.image = inputViewModel.closeButtonImage
     }
     
     private func configureActionView() {
-        actionView.headline.text = inputViewModel.actionTitle
-        actionView.headline.textColor = inputViewModel.headlineColor
+        actionView.attributedTitleText = inputViewModel.actionTitle.styledAs(.header_3)
         actionView.action = { [weak self] in
             self?.dismiss(animated: true, completion: nil)
         }
-        actionView.buttonImage = inputViewModel.chevronRightImage
-        actionView.headlineFont = inputViewModel.headlineFont
+        actionView.image = inputViewModel.chevronRightImage
         actionView.tintColor = inputViewModel.tintColor
+        actionView.layoutMargins.top = .space_40
     }
 
-    private func configureParagraphView() {
-        paragraphView.title.isHidden = true
-        paragraphView.bodyText = inputViewModel.info
-        paragraphView.bodyFont = inputViewModel.paragraphBodyFont
-        paragraphView.layoutMargins.top = 10
+    private func configureDescriptionText() {
+        descriptionText.attributedBodyText = inputViewModel.info.styledAs(.body)
+        descriptionText.layoutMargins.top = .space_18
+        descriptionText.layoutMargins.bottom = .space_40
     }
     
     private func configureToolbarView() {
-        toolbarView.shouldShowTransparency = true
-        toolbarView.shouldShowGradient = false
         toolbarView.state = .confirm(inputViewModel.startButtonTitle)
         toolbarView.setUpLeftButton(leftButtonItem: .navigationArrow)
+        toolbarView.layoutMargins.top = .space_24
         toolbarView.delegate = self
     }
 

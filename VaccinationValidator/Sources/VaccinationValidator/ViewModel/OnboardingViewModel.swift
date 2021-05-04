@@ -13,7 +13,7 @@ public class OnboardingViewModel: StartOnboardingViewModel {
     public override init() {}
 
     public override var image: UIImage? {
-        UIImage(named: "illustration_1", in: UIConstants.bundle, compatibleWith: nil)
+        .illustration1
     }
 
     public override var title: String {
@@ -37,7 +37,7 @@ public class OnboardingViewModel: StartOnboardingViewModel {
     }
     
     public override var secureImage: UIImage? {
-        UIImage(named: UIConstants.IconName.IconLock, in: UIConstants.bundle, compatibleWith: nil)
+        .lock
     }
 }
 

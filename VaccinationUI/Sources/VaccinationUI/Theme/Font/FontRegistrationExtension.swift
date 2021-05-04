@@ -14,48 +14,25 @@ extension UIFont {
     
     static let sansSemiBold = "IBMPlexSans-SemiBold"
     static let sansRegular = "IBMPlexSans"
-    static let otfExtension = "otf"
-    
-    // MARK: - Predefiend Font
-    
-    public static func ibmPlexSansSemiBold(with size: CGFloat) -> UIFont? {
-        UIFont(name: sansSemiBold, size: size)
-    }
-    
-    public static func ibmPlexSansRegular(with size: CGFloat) -> UIFont? {
-        UIFont(name: sansRegular, size: size)
-    }
-    
-    // MARK: - Register Predefined Fonts
+
+    // MARK: - Load and unload fonts
     
     public static func loadCustomFonts() throws {
-        try? UIFont.register(with: sansSemiBold, bundle: Bundle.module,  fontExtension: otfExtension)
-        try? UIFont.register(with: sansRegular, bundle:Bundle.module, fontExtension: otfExtension)
-    }
-    // MARK: - Supported fonts name
-    
-    public static func unloadCustomFonts() throws {
-        try? UIFont.unregister(with: sansSemiBold, bundle: Bundle.module, fontExtension: otfExtension)
-        try? UIFont.unregister(with: sansRegular, bundle:Bundle.module, fontExtension: otfExtension)
+        try UIFont.register(with: sansSemiBold, bundle: .module)
+        try UIFont.register(with: sansRegular, bundle: .module)
     }
     
     // MARK: - Register Font 
-    
-    public static func register(with name: String, bundle: Bundle, fontExtension: String) throws {
-        guard let url = bundle.url(forResource: name, withExtension: fontExtension) else { return }
-        var errorRef: Unmanaged<CFError>?
-        let success = CTFontManagerRegisterFontsForURL(url as CFURL, .none, &errorRef)
-        guard success else {
-            throw FontLoadingError.other("Error registering font: maybe it was already registered. \(errorRef.debugDescription)")
+
+    private static func register(with name: String, bundle: Bundle) throws {
+        guard let fontData = NSDataAsset(name: name, bundle: bundle)?.data,
+              let fontDataProvider = CGDataProvider(data: fontData as CFData),
+              let font = CGFont(fontDataProvider) else {
+            throw FontLoadingError.other("Error registering font \(name). Maybe it was already registered.")
         }
-    }
-    
-    public static func unregister(with name: String, bundle: Bundle, fontExtension: String) throws {
-        guard let url = bundle.url(forResource: name, withExtension: fontExtension) else { return }
-        var errorRef: Unmanaged<CFError>?
-        let success = CTFontManagerUnregisterFontsForURL(url as CFURL, .none, &errorRef)
-        guard success else {
-            throw FontLoadingError.other("Error registering font: maybe it was already registered. \(errorRef.debugDescription)")
+        var error: Unmanaged<CFError>?
+        guard CTFontManagerRegisterGraphicsFont(font, &error) else {
+            throw error!.takeUnretainedValue()
         }
     }
 }

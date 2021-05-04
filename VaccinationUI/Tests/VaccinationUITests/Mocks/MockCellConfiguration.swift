@@ -16,14 +16,11 @@ class MockCellConfiguration {
     }
     
     static func qrCertificateConfiguration() -> QRCertificateConfiguration {
-        let image = UIImage(named: UIConstants.IconName.StarEmpty, in: UIConstants.bundle, compatibleWith: nil)
-        let stateImage = UIImage(named: UIConstants.IconName.HalfShield, in: UIConstants.bundle, compatibleWith: nil)
-        let headerImage = UIImage(named: UIConstants.IconName.StarEmpty, in: UIConstants.bundle, compatibleWith: nil)
-        return QRCertificateConfiguration(
-            image: image,
-            stateImage: stateImage,
-            headerImage: headerImage,
+        QRCertificateConfiguration(
+            image: .starEmpty,
+            stateImage: .halfShield,
+            headerImage: .starEmpty,
             favoriteAction: nil,
-            backgroundColor: UIConstants.BrandColor.onBackground50)
+            backgroundColor: .onBackground50)
     }
 }

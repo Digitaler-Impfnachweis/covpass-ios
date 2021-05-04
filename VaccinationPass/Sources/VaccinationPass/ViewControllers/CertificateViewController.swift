@@ -15,7 +15,7 @@ public class CertificateViewController: UIViewController {
     // MARK: - IBOutlet
 
     @IBOutlet public var headerView: InfoHeaderView!
-    @IBOutlet public var addButton: PrimaryIconButtonContainer!
+    @IBOutlet public var addButton: MainButton!
     @IBOutlet public var collectionView: UICollectionView!
     @IBOutlet public var dotPageIndicator: DotPageIndicator!
     
@@ -58,13 +58,12 @@ public class CertificateViewController: UIViewController {
     }
     
     private func setupHeaderView() {
-        headerView.actionButton.imageEdgeInsets = viewModel.headlineButtonInsets
-        headerView.headline.text = viewModel.headlineTitle
-        headerView.headlineFont = viewModel.headlineFont
-        headerView.buttonImage = viewModel.headlineButtonImage
+        headerView.attributedTitleText = viewModel.headlineTitle.styledAs(.header_2)
+        headerView.image = viewModel.headlineButtonImage
     }
     
     private func setupCollecttionView() {
+        collectionView.clipsToBounds = false
         collectionView.delegate = self
         collectionView.dataSource = self
         let layout = CardFlowLayout()
@@ -76,10 +75,10 @@ public class CertificateViewController: UIViewController {
     }
     
     private func setupActionButton() {
-        view.tintColor = UIConstants.BrandColor.brandAccent
-        addButton.iconImage = viewModel?.addButtonImage
-        addButton.buttonBackgroundColor = UIConstants.BrandColor.brandAccent
-        addButton.action = presentPopup
+        addButton.icon = viewModel?.addButtonImage
+        addButton.action = { [weak self] in
+            self?.presentPopup()
+        }
     }
     
     private func reloadCollectionView() {
