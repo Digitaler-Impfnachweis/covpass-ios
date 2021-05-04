@@ -38,8 +38,6 @@ class QrCertificateCollectionViewCellTests: XCTestCase {
         sut.configure(with: item)
         XCTAssertEqual(sut.headerView.titleLabel.text, item.subtitle)
         XCTAssertEqual(sut.headerView.subtitleLabel.text, item.title)
-        XCTAssertEqual(sut.headerView.titleLabel.textColor, item.tintColor)
-        XCTAssertEqual(sut.headerView.subtitleLabel.textColor, item.tintColor)
         XCTAssertEqual(sut.headerView.tintColor, item.tintColor)
     }
     
