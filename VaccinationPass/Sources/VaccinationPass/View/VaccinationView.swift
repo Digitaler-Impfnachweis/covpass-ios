@@ -16,7 +16,6 @@ public class VaccinationView: XibView {
     @IBOutlet var vaccineView: ParagraphView!
     @IBOutlet var manufacturerView: ParagraphView!
     @IBOutlet var vaccineCodeView: ParagraphView!
-    @IBOutlet var locationView: ParagraphView!
     @IBOutlet var issuerView: ParagraphView!
     @IBOutlet var countryView: ParagraphView!
     @IBOutlet var uvciView: ParagraphView!
@@ -77,12 +76,6 @@ public class VaccinationView: XibView {
         vaccineCodeView.isHidden = viewModel?.vaccineCode.isEmpty ?? true
         vaccineCodeView.contentView?.layoutMargins = itemsMargins
         vaccineCodeView.showBottomBorder()
-
-        locationView.attributedTitleText = "vaccination_detail_location".localized.styledAs(.header_3)
-        locationView.attributedBodyText = viewModel?.location.styledAs(.body)
-        locationView.isHidden = viewModel?.location.isEmpty ?? true
-        locationView.contentView?.layoutMargins = itemsMargins
-        locationView.showBottomBorder()
 
         issuerView.attributedTitleText = "vaccination_detail_issuer".localized.styledAs(.header_3)
         issuerView.attributedBodyText = viewModel?.issuer.styledAs(.body)

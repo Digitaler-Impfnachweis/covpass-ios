@@ -16,7 +16,7 @@ enum Result {
 
 open class ValidationResultViewModel: BaseViewModel {
 
-    public init(certificate: ValidationCertificate?) {
+    public init(certificate: CBORWebToken?) {
         self.certificate = certificate
     }
 
@@ -24,9 +24,9 @@ open class ValidationResultViewModel: BaseViewModel {
         guard let cert = certificate else {
             return .error
         }
-        return cert.partialVaccination ? .partial : .full
+        return cert.hcert.dgc.fullImmunization ? .full : .partial
     }
-    private var certificate: ValidationCertificate?
+    private var certificate: CBORWebToken?
 
     open var icon: UIImage? {
         switch result {
@@ -62,7 +62,7 @@ open class ValidationResultViewModel: BaseViewModel {
     open var nameTitle: String? {
         switch result {
         case .full, .partial:
-            return certificate?.name
+            return certificate?.hcert.dgc.nam.fullName
         case .error:
             return "Impfnachweis nicht gefunden"
         }
@@ -71,7 +71,7 @@ open class ValidationResultViewModel: BaseViewModel {
     open var nameBody: String? {
         switch result {
         case .full, .partial:
-            if let date = certificate?.birthDate {
+            if let date = certificate?.hcert.dgc.dob {
                 return "Geboren am \(DateUtils.displayDateFormatter.string(from: date))"
             }
             return nil

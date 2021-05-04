@@ -7,6 +7,7 @@
 
 import Foundation
 import PromiseKit
+import SwiftCBOR
 
 public protocol APIServiceProtocol {
     func reissue(_ vaccinationQRCode: String) -> Promise<String>
@@ -15,7 +16,7 @@ public protocol APIServiceProtocol {
 public struct APIService: APIServiceProtocol {
 
     // TODO get URL from config
-    private let url: String = "https://api.certify.dev.ubirch.com/api/certify/v1/reissue/cbor"
+    private let url: String = "https://api.recertify.demo.ubirch.com/api/certify/v2/reissue/cbor"
 
     // TODO rename Encoder to Coder because an encoder does not decode
     private let encoder = Base45Encoder()
@@ -54,12 +55,12 @@ public struct APIService: APIServiceProtocol {
                     return
                 }
 
-                guard let data = data, let validationData = String(data: data, encoding: .utf8) else {
+                guard let data = data, let validationCertificate = String(data: data, encoding: .utf8) else {
                     seal.reject(ApplicationError.unknownError)
                     return
                 }
 
-                seal.fulfill(validationData)
+                seal.fulfill(validationCertificate)
             }.resume()
         }
     }

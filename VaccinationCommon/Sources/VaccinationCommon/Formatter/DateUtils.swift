@@ -8,7 +8,7 @@
 import Foundation
 
 public struct DateUtils {
-    public static let vaccinationDateFormatter = utcDateFormatter(format: "yyyyMMdd")
+    public static let vaccinationDateFormatter = utcDateFormatter(format: "yyyy-MM-dd")
     public static let displayDateFormatter = utcDateFormatter(format: "dd.MM.yyyy")
 
     private static func utcDateFormatter(format: String) -> DateFormatter {

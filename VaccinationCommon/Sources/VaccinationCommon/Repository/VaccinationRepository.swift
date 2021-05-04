@@ -24,17 +24,17 @@ public protocol VaccinationRepositoryProtocol {
     // If an error occurs, the method will not return a certificate but an error
     //
     // - USED BY VaccinationPass App
-    func scanVaccinationCertificate(_ data: String) -> Promise<ExtendedVaccinationCertificate>
+    func scanVaccinationCertificate(_ data: String) -> Promise<ExtendedCBORWebToken>
 
     // reissueValidationCertificate will send the vaccination certificate to the backend to issue a new validation certificate
     //
     // - USED BY VaccinationPass App
-    func reissueValidationCertificate(_ certificate: ExtendedVaccinationCertificate) -> Promise<ExtendedVaccinationCertificate>
+    func reissueValidationCertificate(_ certificate: ExtendedCBORWebToken) -> Promise<ExtendedCBORWebToken>
 
     // checkValidationCertificate validates the given QR code and returns the ValidationCertificate when it's valid, otherwise an error
     //
     // - USED BY VaccinationValidator App
-    func checkValidationCertificate(_ data: String) -> Promise<ValidationCertificate>
+    func checkValidationCertificate(_ data: String) -> Promise<CBORWebToken>
 }
 
 public struct VaccinationRepository: VaccinationRepositoryProtocol {
@@ -78,28 +78,28 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
         return Promise.value(())
     }
 
-    public func scanVaccinationCertificate(_ data: String) -> Promise<ExtendedVaccinationCertificate> {
+    public func scanVaccinationCertificate(_ data: String) -> Promise<ExtendedCBORWebToken> {
         return self.parser.parse(data).map({ certificate in
-            return ExtendedVaccinationCertificate(vaccinationCertificate: certificate, vaccinationQRCodeData: data, validationQRCodeData: nil)
-        }).then({ extendedVaccinationCertificate in
+            return ExtendedCBORWebToken(vaccinationCertificate: certificate, vaccinationQRCodeData: data)
+        }).then({ extendedCBORWebToken in
             return self.getVaccinationCertificateList().then({ list -> Promise<Void> in
                 var certList = list
                 if certList.certificates.contains(where: { $0.vaccinationQRCodeData == data }) {
                     throw QRCodeError.qrCodeExists
                 }
-                certList.certificates.append(extendedVaccinationCertificate)
+                certList.certificates.append(extendedCBORWebToken)
 
                 // Mark first certificate as favorite
                 if certList.certificates.count == 1 {
-                    certList.favoriteCertificateId = extendedVaccinationCertificate.vaccinationCertificate.id
+                    certList.favoriteCertificateId = extendedCBORWebToken.vaccinationCertificate.hcert.dgc.v.first?.ci
                 }
 
                 return self.saveVaccinationCertificateList(certList).asVoid()
-            }).map({ return extendedVaccinationCertificate })
+            }).map({ return extendedCBORWebToken })
         })
     }
 
-    public func reissueValidationCertificate(_ certificate: ExtendedVaccinationCertificate) -> Promise<ExtendedVaccinationCertificate> {
+    public func reissueValidationCertificate(_ certificate: ExtendedCBORWebToken) -> Promise<ExtendedCBORWebToken> {
         return self.service.reissue(certificate.vaccinationQRCodeData).map({ validationCert in
             var cert = certificate
             cert.validationQRCodeData = validationCert
@@ -120,7 +120,7 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
         })
     }
 
-    public func checkValidationCertificate(_ data: String) -> Promise<ValidationCertificate> {
+    public func checkValidationCertificate(_ data: String) -> Promise<CBORWebToken> {
         return self.parser.parse(data)
     }
 }

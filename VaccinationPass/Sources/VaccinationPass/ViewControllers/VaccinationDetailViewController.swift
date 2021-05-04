@@ -76,10 +76,10 @@ public class VaccinationDetailViewController: UIViewController {
         immunizationButton.backgroundColor = UIColor.white
         immunizationButton.action = { [weak self] in
             guard let self = self else { return }
-            if self.viewModel.partialVaccination {
-                self.router.presentPopup(onTopOf: self)
-            } else {
+            if self.viewModel.fullImmunization {
                 self.navigationController?.popViewController(animated: true)
+            } else {
+                self.router.presentPopup(onTopOf: self)
             }
         }
         stackView.setCustomSpacing(24, after: immunizationButtonContainerView)
