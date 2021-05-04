@@ -55,8 +55,8 @@ public class ValidationResultViewController: BottomPopupViewController {
         stackView.setCustomSpacing(.space_24, after: resultView)
 
         nameView.image = .warning
-        nameView.attributedTitleText = inputViewModel.nameTitle?.styledAs(.header_3)
-        nameView.attributedBodyText = inputViewModel.nameBody?.styledAs(.body)
+        nameView.attributedTitleText = viewModel.nameTitle?.styledAs(.header_3)
+        nameView.attributedBodyText = viewModel.nameBody?.styledAs(.body)
     }
 
     private func configureToolbarView() {
