@@ -8,8 +8,5 @@
 import UIKit
 
 public protocol BaseViewModel {
-    var image: UIImage? { get }
-    var title: String { get }
-    var info: String { get }
-    var backgroundColor: UIColor { get }
+    var delegate: ViewModelDelegate? { get set }
 }

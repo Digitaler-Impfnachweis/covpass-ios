@@ -11,6 +11,7 @@ import PromiseKit
 public class ProofPopupViewModel: BaseViewModel {
     // MARK: - Properties
 
+    public weak var delegate: ViewModelDelegate?
     let router: ProofRouterProtocol
     let resolver: Resolver<Void>
 

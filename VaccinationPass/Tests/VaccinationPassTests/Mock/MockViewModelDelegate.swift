@@ -11,7 +11,7 @@ class MockViewModelDelegate: ViewModelDelegate {
     
     var updateCalled = false
     
-    func shouldReload() {
+    func viewModelDidUpdate() {
         updateCalled = true 
     }
 }

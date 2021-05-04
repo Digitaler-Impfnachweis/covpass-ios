@@ -32,6 +32,7 @@ public struct ValidationResultSceneFactory: SceneFactory {
         )
         let viewController = ValidationResultViewController.createFromStoryboard(bundle: Bundle.module)
         viewController.viewModel = viewModel
+        viewModel.delegate = viewController
         return viewController
     }
 }

@@ -8,7 +8,7 @@
 import UIKit
 import BottomPopup
 
-public class ValidationResultViewController: BottomPopupViewController {
+public class ValidationResultViewController: BottomPopupViewController, ViewModelDelegate {
     // MARK: - IBOutlet
 
     @IBOutlet public var stackView: UIStackView!
@@ -31,12 +31,31 @@ public class ValidationResultViewController: BottomPopupViewController {
         configureHeadline()
         configureParagraphView()
         configureToolbarView()
+        updateViews()
+    }
+
+    public func viewModelDidUpdate() {
+        updateViews()
+    }
+
+    public func viewModelUpdateDidFailWithError(_ error: Error) {
+        // TODO: Handle error
     }
 
     // MARK: - Private
 
-    private func configureImageView() {
+    private func updateViews() {
         imageView.image = viewModel.icon
+
+        resultView.attributedTitleText = viewModel.resultTitle.styledAs(.header_1)
+        resultView.attributedBodyText = viewModel.resultBody.styledAs(.body)
+
+        nameView.attributedTitleText = viewModel.nameTitle?.styledAs(.header_3)
+        nameView.attributedBodyText = viewModel.nameBody?.styledAs(.body)
+    }
+
+    private func configureImageView() {
+
         stackView.setCustomSpacing(.space_24, after: imageContainerView)
     }
 
@@ -50,13 +69,8 @@ public class ValidationResultViewController: BottomPopupViewController {
     }
 
     private func configureParagraphView() {
-        resultView.attributedTitleText = viewModel.resultTitle.styledAs(.header_1)
-        resultView.attributedBodyText = viewModel.resultBody.styledAs(.body)
         stackView.setCustomSpacing(.space_24, after: resultView)
-
         nameView.image = .warning
-        nameView.attributedTitleText = viewModel.nameTitle?.styledAs(.header_3)
-        nameView.attributedBodyText = viewModel.nameBody?.styledAs(.body)
     }
 
     private func configureToolbarView() {

@@ -12,7 +12,6 @@ import VaccinationCommon
 import PromiseKit
 
 public class ValidatorViewModel {
-    
     // MARK: - Private
 
     private let router: ValidatorRouterProtocol

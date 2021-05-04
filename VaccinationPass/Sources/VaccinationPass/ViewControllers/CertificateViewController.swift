@@ -151,7 +151,11 @@ extension CertificateViewController: StoryboardInstantiating {
 // MARK: - UpdateDelegate
 
 extension CertificateViewController: ViewModelDelegate {
-    public func shouldReload() {
+    public func viewModelDidUpdate() {
         reloadCollectionView()
+    }
+
+    public func viewModelUpdateDidFailWithError(_ error: Error) {
+        // TODO: Handle error
     }
 }

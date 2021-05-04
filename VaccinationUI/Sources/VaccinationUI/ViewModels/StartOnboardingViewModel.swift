@@ -10,6 +10,7 @@ import UIKit
 open class StartOnboardingViewModel: BaseViewModel {
     // MARK: - Properties
 
+    public weak var delegate: ViewModelDelegate?
     let router: StartRouterProtocol
 
     open var image: UIImage? {

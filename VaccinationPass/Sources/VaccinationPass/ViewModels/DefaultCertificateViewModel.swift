@@ -88,7 +88,7 @@ public class DefaultCertificateViewModel<T: QRCoderProtocol>: CertificateViewMod
             print(error)
             self.certificates = [self.noCertificateConfiguration()]
         }).finally({
-            self.delegate?.shouldReload()
+            self.delegate?.viewModelDidUpdate()
         })
     }
 

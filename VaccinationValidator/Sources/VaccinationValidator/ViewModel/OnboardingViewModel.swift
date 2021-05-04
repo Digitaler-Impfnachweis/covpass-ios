@@ -11,6 +11,7 @@ import VaccinationUI
 public class OnboardingViewModel: BaseViewModel {
     // MARK: - Properties
 
+    public weak var delegate: ViewModelDelegate?
     private let router: StartRouterProtocol
 
     public var image: UIImage? {
