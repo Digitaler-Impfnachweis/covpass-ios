@@ -128,23 +128,6 @@ public class VaccinationDetailViewController: UIViewController {
     }
 }
 
-extension VaccinationDetailViewController: ScannerDelegate {
-    public func result(with value: Result<String, ScanError>) {
-        presentedViewController?.dismiss(animated: true, completion: nil)
-        switch value {
-        case .success(let payload):
-            viewModel.process(payload: payload).done({ cert in
-                self.setupView()
-            }).catch({ error in
-                print(error)
-                // TODO error handling
-            })
-        case .failure(let error):
-            print("We have an error: \(error)")
-        }
-    }
-}
-
 extension VaccinationDetailViewController: StoryboardInstantiating {
     public static var bundle: Bundle {
         return Bundle.module
