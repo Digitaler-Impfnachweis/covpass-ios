@@ -1,8 +1,8 @@
 //
-//  File.swift
+//  ValidatorRouterProtocol.swift
 //  
 //
-//  Created by Sebastian Maschinski on 04.05.21.
+//  Copyright © 2021 IBM. All rights reserved.
 //
 
 import UIKit

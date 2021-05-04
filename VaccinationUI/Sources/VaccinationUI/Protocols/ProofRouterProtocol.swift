@@ -1,8 +1,8 @@
 //
-//  File.swift
+//  ProofRouterProtocol.swift
 //  
 //
-//  Created by Sebastian Maschinski on 03.05.21.
+//  Copyright © 2021 IBM. All rights reserved.
 //
 
 import UIKit
