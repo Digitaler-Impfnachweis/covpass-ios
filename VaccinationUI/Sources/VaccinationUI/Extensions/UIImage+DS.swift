@@ -33,6 +33,9 @@ extension UIImage {
     @ImageLoader(name: "onboarding_screen_3")
     public private(set) static var onboardingScreen3
 
+    @ImageLoader(name: "onboarding_screen_3")
+    public private(set) static var onboardingScreen4
+
     @ImageLoader(name: "illustration_1")
     public private(set) static var illustration1
 

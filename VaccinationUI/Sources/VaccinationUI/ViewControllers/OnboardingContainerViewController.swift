@@ -38,7 +38,12 @@ public class OnboardingContainerViewController: UIViewController {
         }
 
         viewModel.items.forEach { model in
-            let controller = OnboardingPageViewController.createFromStoryboard(bundle: UIConstants.bundle)
+            var controller: OnboardingPageViewController
+            if model.type == .page4 {
+                controller = ConsentViewController.createFromStoryboard(bundle: UIConstants.bundle)
+            } else {
+                controller = OnboardingPageViewController.createFromStoryboard(bundle: UIConstants.bundle)
+            }
             controller.viewModel = model
             pages.append(controller)
         }

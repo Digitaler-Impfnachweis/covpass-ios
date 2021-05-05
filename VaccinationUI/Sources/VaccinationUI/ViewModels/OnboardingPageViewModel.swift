@@ -11,6 +11,7 @@ public enum OnboardingPageViewModelType: CaseIterable {
     case page1
     case page2
     case page3
+    case page4
 }
 
 open class OnboardingPageViewModel: BaseViewModel {
@@ -28,6 +29,8 @@ open class OnboardingPageViewModel: BaseViewModel {
             return .onboardingScreen2
         case .page3:
             return .onboardingScreen3
+        case .page4:
+            return .onboardingScreen4
         }
     }
 
@@ -39,6 +42,8 @@ open class OnboardingPageViewModel: BaseViewModel {
             return "vaccination_second_onboarding_page_title".localized
         case .page3:
             return "vaccination_third_onboarding_page_title".localized
+        case .page4:
+            return "Zustimmung für die Nutzung"
         }
     }
 
@@ -50,7 +55,17 @@ open class OnboardingPageViewModel: BaseViewModel {
             return "vaccination_second_onboarding_page_message".localized
         case .page3:
             return "vaccination_third_onboarding_page_message".localized
+        case .page4:
+            return "Um die App zu nutzen, müssen Sie bestätigen, dass Sie den AGBs zustimmen und die Datenschuterklärung zur Kenntnis genommen haben."
         }
+    }
+
+    open var termsTitle: String {
+        "Ich akzeptiere die AGB."
+    }
+
+    open var dataPrivacyTitle: String {
+        "Ich habe die Datenschutzerklärung zur Kenntnis genommen."
     }
 
     // MARK: - Settings
