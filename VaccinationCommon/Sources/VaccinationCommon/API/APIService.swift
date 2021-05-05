@@ -38,6 +38,7 @@ public struct APIService: APIServiceProtocol {
             var request = URLRequest(url: requestUrl)
             request.httpMethod = "POST"
             request.httpBody = decompressedPayload
+            request.addValue("application/cbor+base45", forHTTPHeaderField: "Content-Type")
 
             URLSession.shared.dataTask(with: request) { (data, response, error) in
                 // Check for Error
