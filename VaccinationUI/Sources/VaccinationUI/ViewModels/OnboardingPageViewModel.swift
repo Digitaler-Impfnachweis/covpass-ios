@@ -43,7 +43,7 @@ open class OnboardingPageViewModel: BaseViewModel {
         case .page3:
             return "vaccination_third_onboarding_page_title".localized
         case .page4:
-            return "Zustimmung für die Nutzung"
+            return "vaccination_consent_page_title".localized
         }
     }
 
@@ -56,12 +56,12 @@ open class OnboardingPageViewModel: BaseViewModel {
         case .page3:
             return "vaccination_third_onboarding_page_message".localized
         case .page4:
-            return "Um die App zu nutzen, müssen Sie bestätigen, dass Sie den AGBs zustimmen und die Datenschuterklärung zur Kenntnis genommen haben."
+            return "vaccination_consent_page_message".localized
         }
     }
 
     open var dataPrivacyTitle: NSAttributedString {
-        NSMutableAttributedString(string: "Ich habe die Datenschutzerklärung zur Kenntnis genommen.").addLink(url: "https://www.coronawarn.app/assets/documents/cwa-privacy-notice-de.pdf", in: "Datenschutzerklärung").styledAs(.body)
+        NSMutableAttributedString(string: "vaccination_data_privacy_disclaimer".localized).addLink(url: "https://www.coronawarn.app/assets/documents/cwa-privacy-notice-de.pdf", in: "Datenschutzerklärung").styledAs(.body)
     }
 
     // MARK: - Settings

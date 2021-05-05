@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import WebKit
 
 class ConsentViewController: UIViewController {
     @IBOutlet var scrollView: UIScrollView!
@@ -52,6 +53,8 @@ class ConsentViewController: UIViewController {
         dataPrivacyCheckbox.layoutMargins = .init(top: .space_40, left: .space_24, bottom: .zero, right: .space_24)
     }
 }
+
+// MARK: - StoryboardInstantiating
 
 extension ConsentViewController: StoryboardInstantiating {
     public static var storyboardName: String {
