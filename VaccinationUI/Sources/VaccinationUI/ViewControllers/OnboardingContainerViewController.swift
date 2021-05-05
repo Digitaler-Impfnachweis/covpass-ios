@@ -20,7 +20,6 @@ public class OnboardingContainerViewController: UIViewController {
     // MARK: - Public Properties
 
     public var viewModel: OnboardingContainerViewModel?
-    public var router: Router?
     
     // MARK: - Internal Properties
     
@@ -123,7 +122,7 @@ extension OnboardingContainerViewController: CustomToolbarViewDelegate {
         switch buttonType {
         case .navigationArrow:
             guard currentIndex-1 >= 0 else {
-                router?.navigateToPreviousViewController()
+                viewModel?.navigateToPreviousScene()
                 return
             }
             currentIndex -= 1
@@ -131,7 +130,7 @@ extension OnboardingContainerViewController: CustomToolbarViewDelegate {
             pageIndicator.selectDot(withIndex: currentIndex)
         case .textButton:
             guard currentIndex+1 < pages.count else {
-                router?.navigateToNextViewController()
+                viewModel?.navigateToNextScene()
                 return
             }
             currentIndex += 1

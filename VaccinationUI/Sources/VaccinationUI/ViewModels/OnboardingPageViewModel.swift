@@ -15,6 +15,7 @@ public enum OnboardingPageViewModelType: CaseIterable {
 }
 
 open class OnboardingPageViewModel: BaseViewModel {
+    public weak var delegate: ViewModelDelegate?
     public var type: OnboardingPageViewModelType
 
     public init(type: OnboardingPageViewModelType) {

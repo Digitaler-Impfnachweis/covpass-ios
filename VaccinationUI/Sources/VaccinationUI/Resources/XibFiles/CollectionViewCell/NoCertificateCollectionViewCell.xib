@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -19,10 +19,10 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SzY-ds-Wbh">
-                        <rect key="frame" x="20" y="44" width="374" height="377.5"/>
+                        <rect key="frame" x="20" y="44" width="374" height="514"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="8B7-er-g14">
-                                <rect key="frame" x="24" y="120" width="326" height="137.5"/>
+                                <rect key="frame" x="24" y="120" width="326" height="274"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="no_vaccine_image" translatesAutoresizingMaskIntoConstraints="NO" id="gcH-Qd-BlY">
                                         <rect key="frame" x="123" y="0.0" width="80" height="80"/>
@@ -32,13 +32,13 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Kein Nachweis hinzugefügt" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NTW-8L-z4m">
-                                        <rect key="frame" x="44.5" y="80" width="237.5" height="24"/>
+                                        <rect key="frame" x="60" y="80" width="206" height="20.5"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Scannen Sie eine Bescheinigung mit QR Code, um hier Ihren Nachweis zu sehen" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fxk-0D-dnM">
-                                        <rect key="frame" x="0.0" y="104" width="326" height="33.5"/>
+                                        <rect key="frame" x="0.0" y="100.5" width="326" height="173.5"/>
                                         <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="14"/>
                                         <color key="textColor" name="OnBackground70"/>
                                         <nil key="highlightedColor"/>
@@ -60,6 +60,7 @@
                 <constraints>
                     <constraint firstAttribute="trailingMargin" secondItem="SzY-ds-Wbh" secondAttribute="trailing" id="DzA-oS-yZA"/>
                     <constraint firstItem="SzY-ds-Wbh" firstAttribute="leading" secondItem="4RZ-nW-lgh" secondAttribute="leadingMargin" id="Pla-OU-SGr"/>
+                    <constraint firstAttribute="bottom" secondItem="SzY-ds-Wbh" secondAttribute="bottom" id="YZH-xa-R2O"/>
                     <constraint firstItem="SzY-ds-Wbh" firstAttribute="top" secondItem="4RZ-nW-lgh" secondAttribute="topMargin" id="rPv-bO-y13"/>
                 </constraints>
                 <edgeInsets key="layoutMargins" top="0.0" left="0.0" bottom="0.0" right="0.0"/>

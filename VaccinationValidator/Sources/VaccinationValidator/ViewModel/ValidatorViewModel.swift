@@ -12,9 +12,10 @@ import VaccinationCommon
 import PromiseKit
 
 public class ValidatorViewModel {
-    
     // MARK: - Private
-    
+
+    private let repository: VaccinationRepositoryProtocol
+    private let router: ValidatorRouterProtocol
     private let parser: QRCoder = QRCoder()
     
     // MARK: - Internal
@@ -30,17 +31,8 @@ public class ValidatorViewModel {
         cell.configure(title: titles[indexPath.row], icon: .chevronRight)
     }
 
-    public func process(payload: String) -> Promise<ValidationCertificate> {
-        return Promise<ValidationCertificate>() { seal in
-            // TODO refactor parser
-            guard let decodedPayload: ValidationCertificate = parser.parse(payload, completion: { error in
-                seal.reject(error)
-            }) else {
-                seal.reject(ApplicationError.unknownError)
-                return
-            }
-            seal.fulfill(decodedPayload)
-        }
+    public func process(payload: String) -> Promise<CBORWebToken> {
+        return repository.checkValidationCertificate(payload)
     }
     
     // MARK: - UIConfigureation
@@ -48,4 +40,36 @@ public class ValidatorViewModel {
     let continerCornerRadius: CGFloat = 20
     let continerHeight: CGFloat = 200
     var headerButtonInsets = UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 0)
+
+    // MARK: - Lifecycle
+
+    public init(router: ValidatorRouterProtocol, repository: VaccinationRepositoryProtocol) {
+        self.router = router
+        self.repository = repository
+    }
+
+    func startQRCodeValidation() {
+        firstly {
+            router.scanQRCode()
+        }
+        .map {
+            try self.payloadFromScannerResult($0)
+        }
+        .then {
+            self.process(payload: $0)
+        }
+        .done {
+            self.router.showCertificate($0)
+        }
+        .cauterize()
+    }
+
+    private func payloadFromScannerResult(_ result: ScanResult) throws -> String {
+        switch result {
+        case .success(let payload):
+            return payload
+        case .failure(let error):
+            throw error
+        }
+    }
 }

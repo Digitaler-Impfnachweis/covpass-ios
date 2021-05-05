@@ -26,7 +26,6 @@ class CardViewHeaderTests: XCTestCase {
     }
 
     func testInit() {
-        XCTAssertNotNil(sut.titleLabel)
         XCTAssertNotNil(sut.subtitleLabel)
         XCTAssertNotNil(sut.leftButton)
     }
