@@ -27,6 +27,7 @@ HC1:6BFOXN*TS0BI$ZD4N9:9S6RCVN5+O30K3/XIV0W23NTDEXWK G2EP4J0BGJLOFJEIKVGAE%9ETMS
             }
 
             // Parse and validate issued validation certificate
+            let result = result.stripPrefix()
             let base45Decoded = try Base45Encoder().decode(result)
             guard let decompressedPayload = Compression.decompress(Data(base45Decoded)) else {
                 XCTFail("Could not decompress QR Code data")
@@ -38,7 +39,7 @@ HC1:6BFOXN*TS0BI$ZD4N9:9S6RCVN5+O30K3/XIV0W23NTDEXWK G2EP4J0BGJLOFJEIKVGAE%9ETMS
             let certificateJson = cose1SignEncoder.map(cborObject: cborDecodedPayload)
             let jsonData = try JSONSerialization.data(withJSONObject: certificateJson as Any)
             let sut = try JSONDecoder().decode(CBORWebToken.self, from: jsonData)
-//            XCTAsserentEqual(sut.id, "")
+            XCTAssertEqual(sut.iss, "")
 
         }).catch({ error in
             XCTFail(error.localizedDescription)

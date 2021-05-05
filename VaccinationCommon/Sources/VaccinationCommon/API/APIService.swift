@@ -17,6 +17,7 @@ public struct APIService: APIServiceProtocol {
 
     // TODO get URL from config
     private let url: String = "https://api.recertify.demo.ubirch.com/api/certify/v2/reissue/cbor"
+    private let contentType: String = "application/cbor+base45"
 
     // TODO rename Encoder to Coder because an encoder does not decode
     private let encoder = Base45Encoder()
@@ -25,7 +26,8 @@ public struct APIService: APIServiceProtocol {
 
     public func reissue(_ vaccinationQRCode: String) -> Promise<String> {
         return Promise { seal in
-            let base45Decoded = try encoder.decode(vaccinationQRCode)
+            var code = vaccinationQRCode.stripPrefix()
+            let base45Decoded = try encoder.decode(code)
             guard let decompressedPayload = Compression.decompress(Data(base45Decoded)) else {
                 seal.reject(ApplicationError.unknownError)
                 return
@@ -38,7 +40,7 @@ public struct APIService: APIServiceProtocol {
             var request = URLRequest(url: requestUrl)
             request.httpMethod = "POST"
             request.httpBody = decompressedPayload
-            request.addValue("application/cbor+base45", forHTTPHeaderField: "Content-Type")
+            request.addValue(contentType, forHTTPHeaderField: "Accept")
 
             URLSession.shared.dataTask(with: request) { (data, response, error) in
                 // Check for Error

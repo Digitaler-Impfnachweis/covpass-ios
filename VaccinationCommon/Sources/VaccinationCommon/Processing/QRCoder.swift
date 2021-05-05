@@ -14,8 +14,6 @@ public enum QRCodeError: Error {
     case qrCodeExists
 }
 
-let HC1 = "HC1:"
-
 public class QRCoder: QRCoderProtocol {
     private let base45Encoder = Base45Encoder()
     private let cose1SignEncoder = CoseSign1Parser()
@@ -24,10 +22,7 @@ public class QRCoder: QRCoderProtocol {
 
     public func parse(_ payload: String) -> Promise<CBORWebToken> {
         return Promise { seal in
-            var payload = payload
-            if payload.starts(with: HC1) {
-                payload = String(payload.dropFirst(4))
-            }
+            var payload = payload.stripPrefix()
             let base45Decoded = try base45Encoder.decode(payload)
             guard let decompressedPayload = Compression.decompress(Data(base45Decoded)) else {
                 throw ApplicationError.general("Could not decompress QR Code data")
