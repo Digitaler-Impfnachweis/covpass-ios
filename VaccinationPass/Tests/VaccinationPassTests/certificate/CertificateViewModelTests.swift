@@ -1,8 +1,8 @@
 //
-//  File.swift
+//  CertificateViewModelTests.swift
 //  
 //
-//  Created by Daniel on 19.04.2021.
+//  Copyright © 2021 IBM. All rights reserved.
 //
 
 import Foundation
@@ -10,19 +10,22 @@ import XCTest
 import VaccinationUI
 @testable import VaccinationPass
 
-
 class CertificateViewModelTests: XCTestCase {
     
     // MARK: - Test Variables
     
     var sut: DefaultCertificateViewModel!
     var sutDelegate: MockViewModelDelegate!
+    var sceneCoordinator: SceneCoordinatorMock!
+    var router: CertificateRouter!
 
     // MARK: - Setup & Teardown
     
     override func setUp() {
         super.setUp()
-        sut = DefaultCertificateViewModel(repository: VaccinationRepositoryMock())
+        sceneCoordinator = SceneCoordinatorMock()
+        router = CertificateRouter(sceneCoordinator: sceneCoordinator)
+        sut = DefaultCertificateViewModel(router: router, parser: MockQRCoder())
         sutDelegate = MockViewModelDelegate()
         sut.delegate = sutDelegate
     }
@@ -30,6 +33,8 @@ class CertificateViewModelTests: XCTestCase {
     override func tearDown() {
         sut = nil
         sutDelegate = nil
+        router = nil
+        sceneCoordinator = nil
         super.tearDown()
     }
     

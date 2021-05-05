@@ -10,38 +10,32 @@ import UIKit
 import VaccinationUI
 import VaccinationCommon
 
-public struct OnboardingRouter {
-    // MARK: - Public Vardiables
-    
-    public weak var windowDelegate: WindowDelegate?
-    
-    // MARK: - Init
-    
-    public init() {}
-}
+struct OnboardingRouter: OnboardingRouterProtocol {
+    // MARK: - Properties
 
-// MARK: - Router
+    let sceneCoordinator: SceneCoordinator
 
-extension OnboardingRouter: Router {
-    public func navigateToNextViewController() {
-        // User saw onboarding once, let's remember that for the next start
-        UserDefaults.StartupInfo.set(true, forKey: .onboarding)
+    // MARK: - Lifecycle
 
-        let certificateViewController = CertificateViewController.createFromStoryboard(bundle: Bundle.module)
-        let repository = VaccinationRepository(service: APIService(), parser: QRCoder())
-        let viewModel = DefaultCertificateViewModel(repository: repository)
-        viewModel.delegate = certificateViewController
-        certificateViewController.viewModel = viewModel
-        certificateViewController.router = ProofPopupRouter()
-        windowDelegate?.update(rootViewController: UINavigationController(rootViewController: certificateViewController))
+    init(sceneCoordinator: SceneCoordinator) {
+        self.sceneCoordinator = sceneCoordinator
     }
-    
-    public func navigateToPreviousViewController() {
-        var router = StartRouter()
-        router.windowDelegate = windowDelegate
-        let controller = StartOnboardingViewController.createFromStoryboard()
-        controller.viewModel = StartOnboardingViewModel()
-        controller.router = router
-        windowDelegate?.update(rootViewController: controller)
+
+    // MARK: - Methods
+
+    func showNextScene() {
+        sceneCoordinator.asRoot(
+            CertificateSceneFactory(
+                router: CertificateRouter(sceneCoordinator: sceneCoordinator)
+            )
+        )
+    }
+
+    func showPreviousScene() {
+        sceneCoordinator.asRoot(
+            StartSceneFactory(
+                router: StartRouter(sceneCoordinator: sceneCoordinator)
+            )
+        )
     }
 }

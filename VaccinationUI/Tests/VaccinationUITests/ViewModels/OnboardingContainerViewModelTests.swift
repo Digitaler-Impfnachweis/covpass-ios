@@ -14,7 +14,7 @@ class OnboardingContainerViewModelTests: XCTestCase {
     override func setUp() {
         super.setUp()
         let pageModels = OnboardingPageViewModelType.allCases.map { OnboardingPageViewModel(type: $0) }
-        sut = OnboardingContainerViewModel(items: pageModels)
+        sut = OnboardingContainerViewModel(router: OnboardingRouterMock(sceneCoordinator: SceneCoordinatorMock()), items: pageModels)
     }
 
     override func tearDown() {

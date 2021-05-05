@@ -18,9 +18,7 @@ public class ScanPopupViewController: BottomPopupViewController {
     
     // MARK: - Public Properties
     
-    public var viewModel: ScanPopupViewModel = ScanPopupViewModel()
-    public var router: Router?
-    public weak var parsingDelegate: ScannerDelegate?
+    public var viewModel: ScanPopupViewModel!
     
     // MARK: - Internal
     
@@ -37,14 +35,15 @@ public class ScanPopupViewController: BottomPopupViewController {
     // MARK: - Private
 
     private func configureScanView() {
-        scanViewController = Scanner.viewController(codeTypes: [.qr], scanMode: .once, simulatedData: "This is Gabriela", delegate: parsingDelegate)
+        scanViewController = Scanner.viewController(codeTypes: [.qr], scanMode: .once, simulatedData: "This is Gabriela", delegate: self)
         scanViewController?.view.frame = continer.bounds
         continer.addSubview(scanViewController!.view)
     }
     
     private func configureToolbarView() {
         toolbarView.state = .cancel
-        toolbarView.setUpLeftButton(leftButtonItem: .navigationArrow)
+        // Comment out for now. We need to update the routing to make this work.
+//        toolbarView.setUpLeftButton(leftButtonItem: .navigationArrow)
         toolbarView.layoutMargins.top = .space_24
         toolbarView.delegate = self
     }
@@ -63,10 +62,9 @@ extension ScanPopupViewController: CustomToolbarViewDelegate {
     public func customToolbarView(_: CustomToolbarView, didTap buttonType: ButtonItemType) {
         switch buttonType {
         case .navigationArrow:
-            dismiss(animated: true, completion: nil)
+            viewModel.cancel()
         case .cancelButton:
-            dismiss(animated: true, completion: nil)
-            print("Hello")
+            viewModel.cancel()
         default:
             return
         }
@@ -81,4 +79,10 @@ extension ScanPopupViewController: StoryboardInstantiating {
     }
 }
 
+// MARK: - ScannerDelegate
 
+extension ScanPopupViewController: ScannerDelegate {
+    public func result(with value: Swift.Result<String, ScanError>) {
+        viewModel.onResult(value)
+    }
+}

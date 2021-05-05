@@ -17,7 +17,8 @@ public protocol CertificateViewModel: HeadlineViewModel {
     func process(payload: String) -> Promise<ExtendedCBORWebToken>
     func configure<T: CellConfigutation>(cell: T, at indexPath: IndexPath)
     func reuseIdentifier(for indexPath: IndexPath) -> String
-    func detailViewModel(_ indexPath: IndexPath) -> VaccinationDetailViewModel?
-    func detailViewModel(_ cert: ExtendedCBORWebToken) -> VaccinationDetailViewModel?
     func loadCertificatesConfiguration()
+    func showCertificate(at indexPath: IndexPath)
+    func showCertificate(_ certificate: ExtendedVaccinationCertificate)
+    func scanCertificate()
 }

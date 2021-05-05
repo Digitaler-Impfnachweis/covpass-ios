@@ -74,13 +74,9 @@ public class VaccinationDetailViewController: UIViewController {
 
         immunizationButton.title = viewModel.immunizationButton
         immunizationButton.backgroundColor = UIColor.white
+
         immunizationButton.action = { [weak self] in
-            guard let self = self else { return }
-            if self.viewModel.fullImmunization {
-                self.navigationController?.popViewController(animated: true)
-            } else {
-                self.router.presentPopup(onTopOf: self)
-            }
+            self?.viewModel.immunizationButtonTapped()
         }
         stackView.setCustomSpacing(.space_24, after: immunizationButtonContainerView)
     }
@@ -105,19 +101,7 @@ public class VaccinationDetailViewController: UIViewController {
         deleteButton.style = .secondary
         deleteButton.icon = .delete
         deleteButton.action = { [weak self] in
-            let alertTitle = String(format: "vaccination_delete_title".localized, self?.viewModel.name ?? "")
-            let alert = UIAlertController(title: alertTitle, message: "vaccination_delete_body".localized, preferredStyle: .alert)
-
-            alert.addAction(UIAlertAction(title: "Abbrechen", style: .default, handler: nil))
-            alert.addAction(UIAlertAction(title: "Löschen", style: .destructive, handler: { _ in
-                self?.viewModel.delete().done({
-                    self?.navigationController?.popViewController(animated: true)
-                }).catch({ error in
-                    print(error)
-                    // TODO error handling
-                })
-            }))
-            self?.present(alert, animated: true)
+            self?.viewModel.delete()
         }
     }
 
@@ -138,23 +122,6 @@ public class VaccinationDetailViewController: UIViewController {
         }).catch({ error in
             print(error)
         })
-    }
-}
-
-extension VaccinationDetailViewController: ScannerDelegate {
-    public func result(with value: Result<String, ScanError>) {
-        presentedViewController?.dismiss(animated: true, completion: nil)
-        switch value {
-        case .success(let payload):
-            viewModel.process(payload: payload).done({ cert in
-                self.setupView()
-            }).catch({ error in
-                print(error)
-                // TODO error handling
-            })
-        case .failure(let error):
-            print("We have an error: \(error)")
-        }
     }
 }
 
