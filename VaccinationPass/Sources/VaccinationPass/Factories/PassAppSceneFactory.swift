@@ -14,7 +14,7 @@ public struct PassAppSceneFactory: SceneFactory {
 
     private let sceneCoordinator: SceneCoordinator
 
-    // MARK: - Lifecylce
+    // MARK: - Lifecycle
 
     public init(sceneCoordinator: SceneCoordinator) {
         self.sceneCoordinator = sceneCoordinator

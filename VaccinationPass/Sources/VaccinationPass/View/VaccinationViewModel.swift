@@ -21,7 +21,7 @@ public struct VaccinationViewModel {
     public var headline: String {
         let number = String(vaccination?.dn ?? 0)
         let total = String(vaccination?.sd ?? 0)
-        return String(format: "vaccination_detail_vaccination_title".localized, number, total)
+        return String(format: "vaccination_certificate_detail_view_vaccination_title".localized, number, total)
     }
 
     public var date: String {

@@ -15,7 +15,7 @@ public struct ValidationResultSceneFactory: SceneFactory {
     let router: ValidationResultRouterProtocol
     let certificate: CBORWebToken
 
-    // MARK: - Lifecylce
+    // MARK: - Lifecycle
 
     public init(
         router: ValidationResultRouterProtocol,

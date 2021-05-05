@@ -17,7 +17,7 @@ struct VaccinationDetailSceneFactory: SceneFactory {
     let repository: VaccinationRepositoryProtocol
     let certificates: [ExtendedCBORWebToken]
 
-    // MARK: - Lifecylce
+    // MARK: - Lifecycle
 
     init(
         router: VaccinationDetailRouterProtocol,
@@ -35,7 +35,7 @@ struct VaccinationDetailSceneFactory: SceneFactory {
             repository: repository,
             certificates: certificates
         )
-        let viewController = VaccinationDetailViewController.createFromStoryboard()
+        let viewController = VaccinationDetailViewController.createFromStoryboard(bundle: Bundle.module)
         viewController.viewModel = viewModel
         return viewController
     }

@@ -54,15 +54,15 @@ public class VaccinationDetailViewModel {
     }
     
     public var immunizationTitle: String {
-        fullImmunization ? "vaccination_detail_immunization_full_title".localized : "vaccination_detail_immunization_partial_title".localized
+        fullImmunization ? "vaccination_certificate_detail_view_complete_title".localized : "vaccination_certificate_detail_view_incomplete_title".localized
     }
     
     public var immunizationBody: String {
-        fullImmunization ? "vaccination_detail_immunization_2_body".localized : "vaccination_detail_immunization_1_body".localized
+        fullImmunization ? "vaccination_certificate_detail_view_complete_message".localized : "vaccination_certificate_detail_view_incomplete_message".localized
     }
     
     public var immunizationButton: String {
-        fullImmunization ? "vaccination_detail_immunization_2_button".localized : "vaccination_detail_immunization_1_button".localized
+        fullImmunization ? "vaccination_certificate_detail_view_complete_action_button_title".localized : "vaccination_certificate_detail_view_incomplete_action_button_title".localized
     }
 
     public var vaccinations: [VaccinationViewModel] {
@@ -152,16 +152,16 @@ public class VaccinationDetailViewModel {
 
     private func showDeleteDialog() -> Promise<Void> {
         .init { seal in
-            let delete = DialogAction(title: "Löschen", style: .destructive) { _ in
+            let delete = DialogAction(title: "dialog_delete_certificate_button_delete".localized, style: .destructive) { _ in
                 seal.fulfill_()
             }
-            let cancel = DialogAction(title: "Abbrechen", style: .cancel) { _ in
+            let cancel = DialogAction(title: "dialog_delete_certificate_button_cancel".localized, style: .cancel) { _ in
                 seal.cancel()
             }
-            let title = String(format: "vaccination_delete_title".localized, self.name)
+            let title = String(format: "dialog_delete_certificate_title".localized, self.name)
             self.router.showDialog(
                 title: title,
-                message: "vaccination_delete_body".localized,
+                message: "dialog_delete_certificate_message".localized,
                 actions: [delete, cancel],
                 style: .alert
             )

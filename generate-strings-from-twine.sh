@@ -62,8 +62,10 @@ sleep 0.5
 
 echo -ne "Generating strings file:     [${BIRed}#                             ${Color_Off}]"\\r
 # Twining
-twine generate-localization-file ./text-vaccination/twine_container_engine.txt $path/VaccinationUI/Sources/VaccinationUI/Resources/Locale/en.lproj/Localizable.strings --format apple
-twine generate-localization-file ./text-vaccination/twine_container_engine.txt $path/VaccinationUI/Sources/VaccinationUI/Resources/Locale/de.lproj/Localizable.strings --format apple
+twine generate-localization-file ./text-vaccination/twine-cert.txt $path/VaccinationPass/Sources/VaccinationPass/Resources/Locale/de.lproj/Localizable.strings --format apple
+twine generate-localization-file ./text-vaccination/twine-cert.txt $path/VaccinationPass/Sources/VaccinationPass/Resources/Locale/en.lproj/Localizable.strings --format apple
+twine generate-localization-file ./text-vaccination/twine-validator.txt $path/VaccinationValidator/Sources/VaccinationValidator/Resources/Locale/de.lproj/Localizable.strings --format apple
+twine generate-localization-file ./text-vaccination/twine-validator.txt $path/VaccinationValidator/Sources/VaccinationValidator/Resources/Locale/en.lproj/Localizable.strings --format apple
 sleep 0.5
 
 echo -ne "Generating strings file:     [${BIRed}##############                ${Color_Off}]"\\r

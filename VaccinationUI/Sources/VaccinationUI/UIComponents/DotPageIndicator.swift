@@ -44,7 +44,7 @@ public class DotPageIndicator: UIView {
     }
 
     public func selectDot(withIndex index: Int) {
-        // If it's already selected, then it's no need to select again.
+        // If it is already selected, then there is no need to select it again
         guard selectedDotIndex != index else { return }
 
         deselectSelectedDot()

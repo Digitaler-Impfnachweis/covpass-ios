@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import VaccinationUI
 
 public class StartOnboardingViewController: UIViewController {
     @IBOutlet public var stackView: UIStackView!

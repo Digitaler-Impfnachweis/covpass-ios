@@ -26,7 +26,7 @@ public class DefaultCertificateViewModel: CertificateViewModel {
     
     // MARK: - HeadlineViewModel
     
-    public var headlineTitle = "vaccination_certificate_list_title".localized
+    public var headlineTitle = "vaccination_start_screen_title".localized
     public var headlineButtonImage: UIImage? = .help
     
     // MARK: - CertificateViewModel
@@ -131,11 +131,11 @@ public class DefaultCertificateViewModel: CertificateViewModel {
     private func fullCertificateConfiguration(for certificate: ExtendedCBORWebToken) -> QRCertificateConfiguration {
         QRCertificateConfiguration(
             qrValue: certificate.validationQRCodeData ?? NSUUID().uuidString,// neeeded due to no qr data
-            title: "Covid-19 Nachweis".localized,
+            title: "vaccination_full_immunization_title".localized,
             subtitle: certificate.vaccinationCertificate.hcert.dgc.nam.fullName,
             image: .starEmpty,
             stateImage: .completness,
-            stateTitle: "Impfungen Anzeigen".localized,
+            stateTitle: "vaccination_full_immunization_action_button".localized,
             headerImage: .starEmpty,
             favoriteAction: favoriteAction,
             backgroundColor: .onBrandAccent70,
@@ -144,11 +144,11 @@ public class DefaultCertificateViewModel: CertificateViewModel {
 
     private func halfCertificateConfiguration(for certificate: ExtendedCBORWebToken) -> QRCertificateConfiguration {
         QRCertificateConfiguration(
-            title: "Covid-19 Nachweis".localized,
+            title: "vaccination_partial_immunization_title".localized,
             subtitle: certificate.vaccinationCertificate.hcert.dgc.nam.fullName,
             image: .starEmpty,
             stateImage: .halfShield,
-            stateTitle: "Impfungen Anzeigen".localized,
+            stateTitle: "vaccination_partial_immunization_action_button".localized,
             headerImage: .starEmpty,
             favoriteAction: favoriteAction,
             backgroundColor: .onBackground50)
@@ -157,8 +157,8 @@ public class DefaultCertificateViewModel: CertificateViewModel {
     
     private func noCertificateConfiguration() -> NoCertifiateConfiguration {
         NoCertifiateConfiguration(
-            title:"vaccination_no_certificate_card_title".localized,
-            subtitle: "vaccination_no_certificate_card_message".localized,
+            title:"vaccination_start_screen_note_title".localized,
+            subtitle: "vaccination_start_screen_note_message".localized,
             image: .noCertificate
         )
     }
@@ -212,6 +212,7 @@ public class DefaultCertificateViewModel: CertificateViewModel {
         .ensure {
            self.loadCertificatesConfiguration()
         }
+        // TODO enable this again!
 //        .done { certificate in
 //            self.showCertificate(at: certificate)
 //        }

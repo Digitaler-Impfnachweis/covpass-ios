@@ -37,7 +37,5 @@ public class ScanCardView: BaseCardView {
 
         actionButton.style = .secondary
         actionButton.icon = .scan
-        // TODO add QR code icon
-//        actionButton.iconImage = UIImage(named: "", in: <#T##Bundle?#>, with: <#T##UIImage.Configuration?#>)
     }
 }

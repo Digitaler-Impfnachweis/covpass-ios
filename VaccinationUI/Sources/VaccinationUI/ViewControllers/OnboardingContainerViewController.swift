@@ -36,6 +36,8 @@ public class OnboardingContainerViewController: UIViewController {
             fatalError("ViewModel should contain at least one page")
         }
 
+        view.backgroundColor = .neutralWhite
+
         viewModel.items.forEach { model in
             let controller = OnboardingPageViewController.createFromStoryboard(bundle: UIConstants.bundle)
             controller.viewModel = model

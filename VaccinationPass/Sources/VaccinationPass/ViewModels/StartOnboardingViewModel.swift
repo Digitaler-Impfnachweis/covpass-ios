@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import VaccinationUI
 
 open class StartOnboardingViewModel: BaseViewModel {
     // MARK: - Properties
