@@ -29,5 +29,9 @@ let package = Package(
             name: "VaccinationCommonTests",
             dependencies: ["VaccinationCommon"],
             resources: [.process("Resources")]),
+        .testTarget(
+            name: "VaccinationCommonIntegrationTests",
+            dependencies: ["VaccinationCommon"],
+            resources: [.process("Resources")]),
     ]
 )

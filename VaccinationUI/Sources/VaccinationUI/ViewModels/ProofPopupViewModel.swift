@@ -6,10 +6,14 @@
 //
 
 import UIKit
+import PromiseKit
 
 public class ProofPopupViewModel: BaseViewModel {
-    
-    public init() {}
+    // MARK: - Properties
+
+    public weak var delegate: ViewModelDelegate?
+    let router: ProofRouterProtocol
+    let resolver: Resolver<Void>
 
     public var image: UIImage? {
         .proofScreen
@@ -49,5 +53,26 @@ public class ProofPopupViewModel: BaseViewModel {
     let presentDuration: Double = 0.5
     let dismissDuration: Double = 0.5
     let shouldDismissInteractivelty: Bool = true
-}
 
+    // MARK: - Lifecycle
+
+    public init(
+        router: ProofRouterProtocol,
+        resolvable: Resolver<Void>) {
+
+        self.router = router
+        self.resolver = resolvable
+    }
+
+    func done() {
+        resolver.fulfill_()
+    }
+
+    func cancel() {
+        resolver.cancel()
+    }
+
+    func showMoreInformation() {
+        router.showMoreInformation()
+    }
+}

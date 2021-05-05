@@ -36,11 +36,9 @@ class QrCertificateCollectionViewCellTests: XCTestCase {
     func testConfigure() {
         let item = MockCellConfiguration.qrCertificateConfiguration()
         sut.configure(with: item)
-        XCTAssertEqual(sut.headerView.titleLabel.text, item.subtitle)
+        XCTAssertEqual(sut.titleView.textableView.text, item.subtitle)
         XCTAssertEqual(sut.headerView.subtitleLabel.text, item.title)
-        XCTAssertEqual(sut.headerView.titleLabel.textColor, item.qrViewConfiguration?.tintColor)
-        XCTAssertEqual(sut.headerView.subtitleLabel.textColor, item.qrViewConfiguration?.tintColor)
-        XCTAssertEqual(sut.headerView.tintColor, item.qrViewConfiguration?.tintColor)
+        XCTAssertEqual(sut.headerView.tintColor, item.tintColor)
     }
     
     // MARK: - Mock Data

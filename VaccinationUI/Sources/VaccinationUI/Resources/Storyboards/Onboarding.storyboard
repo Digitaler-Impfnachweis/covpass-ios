@@ -359,7 +359,7 @@
                                 <rect key="frame" x="0.0" y="124" width="414" height="654"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="1gh-Bm-jvT" customClass="ScrollableStackView" customModule="VaccinationUI">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="584"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="456"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="qf0-Cy-1UM">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="150"/>
@@ -381,12 +381,8 @@
                                                 <rect key="frame" x="0.0" y="278" width="414" height="128"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                             </view>
-                                            <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="CtT-AJ-EPL" customClass="ParagraphView" customModule="VaccinationUI">
-                                                <rect key="frame" x="0.0" y="406" width="414" height="128"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                            </view>
                                             <view contentMode="scaleToFill" verticalHuggingPriority="1" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="GVf-M7-B1o" userLabel="Flexible View">
-                                                <rect key="frame" x="0.0" y="534" width="414" height="50"/>
+                                                <rect key="frame" x="0.0" y="406" width="414" height="50"/>
                                             </view>
                                         </subviews>
                                     </stackView>
@@ -425,7 +421,6 @@
                     </view>
                     <connections>
                         <outlet property="headline" destination="PFc-dj-gMR" id="s9z-Ar-tsf"/>
-                        <outlet property="idView" destination="CtT-AJ-EPL" id="bGO-jv-dZj"/>
                         <outlet property="imageContainerView" destination="qf0-Cy-1UM" id="H84-us-PM4"/>
                         <outlet property="imageView" destination="oct-2V-77Z" id="j6B-Kp-ar3"/>
                         <outlet property="nameView" destination="kFp-28-n6g" id="7vC-0z-mjo"/>
@@ -445,9 +440,6 @@
         </designable>
         <designable name="BZA-KE-FmB">
             <size key="intrinsicContentSize" width="414" height="40"/>
-        </designable>
-        <designable name="CtT-AJ-EPL">
-            <size key="intrinsicContentSize" width="414" height="128"/>
         </designable>
         <designable name="DcZ-ry-4Hc">
             <size key="intrinsicContentSize" width="240" height="56"/>

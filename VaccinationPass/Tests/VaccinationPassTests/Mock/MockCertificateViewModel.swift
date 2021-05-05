@@ -13,7 +13,6 @@ import VaccinationCommon
 import PromiseKit
 
 class MockCertificateViewModel: CertificateViewModel {
-
     // MARK: - Test Variables
     
     var processCalled = false
@@ -53,15 +52,27 @@ class MockCertificateViewModel: CertificateViewModel {
         certificates = [MockCellConfiguration.noCertificateConfiguration()]
     }
 
-    func process(payload: String) -> Promise<ExtendedVaccinationCertificate> {
+    func process(payload: String) -> Promise<ExtendedCBORWebToken> {
         return Promise.init(error: ApplicationError.unknownError)
     }
 
-    func detailViewModel(_ cert: ExtendedVaccinationCertificate) -> VaccinationDetailViewModel? {
+    func detailViewModel(_ cert: ExtendedCBORWebToken) -> VaccinationDetailViewModel? {
         return nil
     }
 
     func detailViewModel(_ indexPath: IndexPath) -> VaccinationDetailViewModel? {
         return nil
+    }
+
+    func showCertificate(at indexPath: IndexPath) {
+        // TODO: Add tests
+    }
+
+    func showCertificate(_ certificate: ExtendedCBORWebToken) {
+        // TODO: Add tests
+    }
+
+    func scanCertificate() {
+        // TODO: Add tests
     }
 }

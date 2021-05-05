@@ -10,35 +10,32 @@ import UIKit
 import VaccinationUI
 import VaccinationCommon
 
-public struct OnboardingRouter {
-    // MARK: - Public Vardiables
+struct OnboardingRouter: OnboardingRouterProtocol {
+    // MARK: - Properties
 
-    public weak var windowDelegate: WindowDelegate?
+    let sceneCoordinator: SceneCoordinator
 
-    // MARK: - Init
+    // MARK: - Lifecycle
 
-    public init() {}
-}
-
-// MARK: - Router
-
-extension OnboardingRouter: Router {
-    public func navigateToNextViewController() {
-        // User saw onboarding once, let's remember that for the next start
-        UserDefaults.StartupInfo.set(true, forKey: .onboarding)
-
-        let vc = ValidatorViewController.createFromStoryboard(bundle: Bundle.module)
-        vc.viewModel = ValidatorViewModel()
-        vc.router = ValidatorPopupRouter()
-        windowDelegate?.update(rootViewController: vc)
+    init(sceneCoordinator: SceneCoordinator) {
+        self.sceneCoordinator = sceneCoordinator
     }
 
-    public func navigateToPreviousViewController() {
-        var router = StartRouter()
-        router.windowDelegate = windowDelegate
-        let controller = StartOnboardingViewController.createFromStoryboard()
-        controller.viewModel = StartOnboardingViewModel()
-        controller.router = router
-        windowDelegate?.update(rootViewController: controller)
+    // MARK: - Methods
+
+    func showNextScene() {
+        sceneCoordinator.asRoot(
+            ValidatorSceneFactory(
+                router: ValidatorRouter(sceneCoordinator: sceneCoordinator)
+            )
+        )
+    }
+
+    func showPreviousScene() {
+        sceneCoordinator.asRoot(
+            StartSceneFactory(
+                router: StartRouter(sceneCoordinator: sceneCoordinator)
+            )
+        )
     }
 }

@@ -8,5 +8,6 @@
 import Foundation
 
 public protocol ViewModelDelegate: class {
-    func shouldReload()
+    func viewModelDidUpdate()
+    func viewModelUpdateDidFailWithError(_ error: Error)
 }

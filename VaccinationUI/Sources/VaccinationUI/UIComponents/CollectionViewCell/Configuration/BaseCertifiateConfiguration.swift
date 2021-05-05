@@ -16,3 +16,12 @@ public class BaseCertifiateConfiguration {
         self.identifier = identifer
     }
 }
+
+// MARK: - Equatable
+
+extension BaseCertifiateConfiguration: Equatable {
+    public static func == (lhs: BaseCertifiateConfiguration, rhs: BaseCertifiateConfiguration) -> Bool {
+        return lhs.identifier == rhs.identifier
+    }
+}
+
