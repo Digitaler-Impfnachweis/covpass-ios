@@ -40,7 +40,7 @@ public class DefaultCertificateViewModel: CertificateViewModel {
     public func process(payload: String) -> Promise<ExtendedCBORWebToken> {
         return repository.scanVaccinationCertificate(payload).then({ cert in
             return self.repository.getVaccinationCertificateList().map({ list in
-                self.certificates = list.certificates.map { self.getCertficateConfiguration(for: $0.vaccinationCertificate.hcert.dgc) }
+                self.certificates = list.certificates.map { self.getCertficateConfiguration(for: $0) }
                 return cert
             })
         })
@@ -55,7 +55,7 @@ public class DefaultCertificateViewModel: CertificateViewModel {
                 self.certificates = [self.noCertificateConfiguration()]
                 return
             }
-            self.certificates = list.map { self.getCertficateConfiguration(for: $0.vaccinationCertificate.hcert.dgc) }
+            self.certificates = list.map { self.getCertficateConfiguration(for: $0) }
         }).catch({ error in
             print(error)
             self.certificates = [self.noCertificateConfiguration()]
@@ -138,16 +138,15 @@ public class DefaultCertificateViewModel: CertificateViewModel {
     
     // MARK: - Card Configurations
 
-    private func getCertficateConfiguration(for certificate: DigitalGreenCertificate) -> QRCertificateConfiguration {
-        certificate.fullImmunization ? fullCertificateConfiguration(for: certificate) : halfCertificateConfiguration(for: certificate)
+    private func getCertficateConfiguration(for certificate: ExtendedCBORWebToken) -> QRCertificateConfiguration {
+        certificate.vaccinationCertificate.hcert.dgc.fullImmunization ? fullCertificateConfiguration(for: certificate) : halfCertificateConfiguration(for: certificate)
     }
 
-    private func fullCertificateConfiguration(for certificate: DigitalGreenCertificate) -> QRCertificateConfiguration {
-        let qrViewConfiguration = QrViewConfiguration(tintColor: .white, qrValue: NSUUID().uuidString, qrTitle: nil, qrSubtitle: nil)
-        return QRCertificateConfiguration(
+    private func fullCertificateConfiguration(for certificate: ExtendedCBORWebToken) -> QRCertificateConfiguration {
+        QRCertificateConfiguration(
             qrValue: certificate.validationQRCodeData ?? NSUUID().uuidString,// neeeded due to no qr data
             title: "Covid-19 Nachweis".localized,
-            subtitle: certificate.nam.fullName,
+            subtitle: certificate.vaccinationCertificate.hcert.dgc.nam.fullName,
             image: .starEmpty,
             stateImage: .completness,
             stateTitle: "Impfungen Anzeigen".localized,
@@ -157,10 +156,10 @@ public class DefaultCertificateViewModel: CertificateViewModel {
             tintColor: UIColor.white)
     }
 
-    private func halfCertificateConfiguration(for certificate: DigitalGreenCertificate) -> QRCertificateConfiguration {
-        return QRCertificateConfiguration(
+    private func halfCertificateConfiguration(for certificate: ExtendedCBORWebToken) -> QRCertificateConfiguration {
+        QRCertificateConfiguration(
             title: "Covid-19 Nachweis".localized,
-            subtitle: certificate.nam.fullName,
+            subtitle: certificate.vaccinationCertificate.hcert.dgc.nam.fullName,
             image: .starEmpty,
             stateImage: .halfShield,
             stateTitle: "Impfungen Anzeigen".localized,
@@ -181,10 +180,13 @@ public class DefaultCertificateViewModel: CertificateViewModel {
     // MARK: - Card Actions
     
     private func favoriteAction(for configuration: QRCertificateConfiguration) {
-        guard let extendedCertificate = certificateList.certificates.filter({ $0.vaccinationCertificate.name == configuration.subtitle }).first else { return }
-        certificateList.favoriteCertificateId = extendedCertificate.vaccinationCertificate.id
-        service.save(certificateList).done {
+        guard let extendedCertificate = certificateList.certificates.filter({ $0.vaccinationCertificate.hcert.dgc.nam.fullName == configuration.subtitle }).first else { return }
+        certificateList.favoriteCertificateId = extendedCertificate.vaccinationCertificate.hcert.dgc.v.first?.ci
+        repository.saveVaccinationCertificateList(certificateList).done { _ in
             self.loadCertificatesConfiguration()
+        }.catch{ error in
+            print(error)
+            // TODO error handling
         }
     }
 }
