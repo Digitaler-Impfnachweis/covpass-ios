@@ -23,9 +23,10 @@ struct CertificateSceneFactory: SceneFactory {
 
     func make() -> UIViewController {
         let viewController = CertificateViewController.createFromStoryboard(bundle: Bundle.module)
+        let repository = VaccinationRepository(service: APIService(), parser: QRCoder())
         let viewModel = DefaultCertificateViewModel(
             router: router,
-            parser: QRCoder()
+            repository: repository
         )
         viewController.viewModel = viewModel
         viewModel.delegate = viewController

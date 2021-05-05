@@ -11,19 +11,17 @@ import VaccinationUI
 import VaccinationCommon
 import PromiseKit
 
-public class DefaultCertificateViewModel<T: QRCoderProtocol>: CertificateViewModel {
+public class DefaultCertificateViewModel: CertificateViewModel {
     // MARK: - Parser
 
     private let router: CertificateRouterProtocol
-    private let parser: T
-    private let service = VaccinationCertificateService()
+    private let repository: VaccinationRepositoryProtocol
     
     public init(
         router: CertificateRouterProtocol,
-        parser: T) {
-
-        self.parser = parser
+        repository: VaccinationRepositoryProtocol) {
         self.router = router
+        self.repository = repository
     }
     
     // MARK: - HeadlineViewModel
@@ -38,44 +36,22 @@ public class DefaultCertificateViewModel<T: QRCoderProtocol>: CertificateViewMod
 
     public var certificates = [BaseCertifiateConfiguration]()
     public var certificateList = VaccinationCertificateList(certificates: [])
-    public var matchedCertificates: [ExtendedVaccinationCertificate] {
+    public var matchedCertificates: [ExtendedCBORWebToken] {
         let certs = self.sortFavorite(certificateList.certificates, favorite: certificateList.favoriteCertificateId ?? "")
         return self.matchCertificates(certs)
     }
 
-    public func process(payload: String) -> Promise<ExtendedVaccinationCertificate> {
-        return Promise<ExtendedVaccinationCertificate>() { seal in
-            // TODO refactor parser
-            guard let decodedPayload: VaccinationCertificate = parser.parse(payload, completion: { error in
-                seal.reject(error)
-            }) else {
-                seal.reject(ApplicationError.unknownError)
-                return
-            }
-            seal.fulfill(ExtendedVaccinationCertificate(vaccinationCertificate: decodedPayload, vaccinationQRCodeData: payload, validationQRCodeData: nil))
-        }.then({ extendedVaccinationCertificate in
-            return self.service.fetch().then({ list -> Promise<Void> in
-                var certList = list
-                if certList.certificates.contains(where: { $0.vaccinationQRCodeData == payload }) {
-                    throw QRCodeError.qrCodeExists
-                }
-                certList.certificates.append(extendedVaccinationCertificate)
-
-                // Mark first certificate as favorite
-                if certList.certificates.count == 1 {
-                    certList.favoriteCertificateId = extendedVaccinationCertificate.vaccinationCertificate.id
-                }
-
-                return self.service.save(certList)
-            }).then(self.service.fetch).then({ list -> Promise<ExtendedVaccinationCertificate> in
+    public func process(payload: String) -> Promise<ExtendedCBORWebToken> {
+        return repository.scanVaccinationCertificate(payload).then({ cert in
+            return self.repository.getVaccinationCertificateList().map({ list in
                 self.certificates = list.certificates.map { self.getCertficateConfiguration(for: $0) }
-                return Promise.value(extendedVaccinationCertificate)
+                return cert
             })
         })
     }
 
     public func loadCertificatesConfiguration() {
-        service.fetch().map({ list -> [ExtendedVaccinationCertificate] in
+        repository.getVaccinationCertificateList().map({ list -> [ExtendedCBORWebToken] in
             self.certificateList = list
             return self.matchedCertificates
         }).done({ list in
@@ -92,23 +68,24 @@ public class DefaultCertificateViewModel<T: QRCoderProtocol>: CertificateViewMod
         })
     }
 
-    private func sortFavorite(_ certificates: [ExtendedVaccinationCertificate], favorite: String) -> [ExtendedVaccinationCertificate] {
-        guard let favoriteCert = certificates.first(where: { $0.vaccinationCertificate.id == favorite }) else { return certificates }
-        var list = [ExtendedVaccinationCertificate]()
+    private func sortFavorite(_ certificates: [ExtendedCBORWebToken], favorite: String) -> [ExtendedCBORWebToken] {
+        guard let favoriteCert = certificates.first(where: { $0.vaccinationCertificate.hcert.dgc.v.first?.ci == favorite }) else { return certificates }
+        var list = [ExtendedCBORWebToken]()
         list.append(favoriteCert)
         list.append(contentsOf: certificates.filter({ $0 != favoriteCert }))
         return list
     }
 
-    private func matchCertificates(_ certificates: [ExtendedVaccinationCertificate]) -> [ExtendedVaccinationCertificate] {
-        var list = [ExtendedVaccinationCertificate]()
-        var certs: [ExtendedVaccinationCertificate] = certificates.reversed()
+    private func matchCertificates(_ certificates: [ExtendedCBORWebToken]) -> [ExtendedCBORWebToken] {
+        var list = [ExtendedCBORWebToken]()
+        var certs: [ExtendedCBORWebToken] = certificates.reversed()
         while certs.count > 0 {
             guard let cert = certs.popLast() else { return list }
             let pair = findCertificatePair(cert, certs)
             certs.removeAll(where: { pair.contains($0) })
 
-            if let fullCert = pair.first(where: { !$0.vaccinationCertificate.partialVaccination }) {
+            if let fullCert = pair.first(where: { $0.vaccinationCertificate.hcert.dgc.fullImmunization
+            }) {
                 list.append(fullCert)
             } else if let partialCert = pair.last {
                 list.append(partialCert)
@@ -117,9 +94,9 @@ public class DefaultCertificateViewModel<T: QRCoderProtocol>: CertificateViewMod
         return list
     }
 
-    private func findCertificatePair(_ certificate: ExtendedVaccinationCertificate, _ certificates: [ExtendedVaccinationCertificate]) -> [ExtendedVaccinationCertificate] {
+    private func findCertificatePair(_ certificate: ExtendedCBORWebToken, _ certificates: [ExtendedCBORWebToken]) -> [ExtendedCBORWebToken] {
         var list = [certificate]
-        for cert in certificates where certificate.vaccinationCertificate == cert.vaccinationCertificate {
+        for cert in certificates where certificate.vaccinationCertificate.hcert.dgc == cert.vaccinationCertificate.hcert.dgc {
             if !list.contains(cert) {
                 list.append(cert)
             }
@@ -147,15 +124,15 @@ public class DefaultCertificateViewModel<T: QRCoderProtocol>: CertificateViewMod
 
     // MARK: - Card Configurations
 
-    private func getCertficateConfiguration(for certificate: ExtendedVaccinationCertificate) -> QRCertificateConfiguration {
-        certificate.vaccinationCertificate.partialVaccination ? halfCertificateConfiguration(for: certificate) : fullCertificateConfiguration(for: certificate)
+    private func getCertficateConfiguration(for certificate: ExtendedCBORWebToken) -> QRCertificateConfiguration {
+        certificate.vaccinationCertificate.hcert.dgc.fullImmunization ? fullCertificateConfiguration(for: certificate) : halfCertificateConfiguration(for: certificate)
     }
 
-    private func fullCertificateConfiguration(for certificate: ExtendedVaccinationCertificate) -> QRCertificateConfiguration {
+    private func fullCertificateConfiguration(for certificate: ExtendedCBORWebToken) -> QRCertificateConfiguration {
         QRCertificateConfiguration(
             qrValue: certificate.validationQRCodeData ?? NSUUID().uuidString,// neeeded due to no qr data
             title: "Covid-19 Nachweis".localized,
-            subtitle: certificate.vaccinationCertificate.name,
+            subtitle: certificate.vaccinationCertificate.hcert.dgc.nam.fullName,
             image: .starEmpty,
             stateImage: .completness,
             stateTitle: "Impfungen Anzeigen".localized,
@@ -165,10 +142,10 @@ public class DefaultCertificateViewModel<T: QRCoderProtocol>: CertificateViewMod
             tintColor: UIColor.white)
     }
 
-    private func halfCertificateConfiguration(for certificate: ExtendedVaccinationCertificate) -> QRCertificateConfiguration {
+    private func halfCertificateConfiguration(for certificate: ExtendedCBORWebToken) -> QRCertificateConfiguration {
         QRCertificateConfiguration(
             title: "Covid-19 Nachweis".localized,
-            subtitle: certificate.vaccinationCertificate.name,
+            subtitle: certificate.vaccinationCertificate.hcert.dgc.nam.fullName,
             image: .starEmpty,
             stateImage: .halfShield,
             stateTitle: "Impfungen Anzeigen".localized,
@@ -186,14 +163,14 @@ public class DefaultCertificateViewModel<T: QRCoderProtocol>: CertificateViewMod
         )
     }
 
-    private func certificatePair(for indexPath: IndexPath ) -> [ExtendedVaccinationCertificate] {
+    private func certificatePair(for indexPath: IndexPath) -> [ExtendedCBORWebToken] {
         if certificateList.certificates.isEmpty {
             return []
         }
         return findCertificatePair(matchedCertificates[indexPath.row], certificateList.certificates)
     }
 
-    private func certificatePair(for certificate: ExtendedVaccinationCertificate ) -> [ExtendedVaccinationCertificate] {
+    private func certificatePair(for certificate: ExtendedCBORWebToken) -> [ExtendedCBORWebToken] {
         if certificateList.certificates.isEmpty {
             return []
         }
@@ -206,13 +183,13 @@ public class DefaultCertificateViewModel<T: QRCoderProtocol>: CertificateViewMod
         )
     }
 
-    public func showCertificate(_ certificate: ExtendedVaccinationCertificate) {
+    public func showCertificate(_ certificate: ExtendedCBORWebToken) {
         showCertificates(
             certificatePair(for: certificate)
         )
     }
 
-    private func showCertificates(_ certificates: [ExtendedVaccinationCertificate]) {
+    private func showCertificates(_ certificates: [ExtendedCBORWebToken]) {
         guard certificates.isEmpty == false else {
             return
         }
@@ -235,9 +212,9 @@ public class DefaultCertificateViewModel<T: QRCoderProtocol>: CertificateViewMod
         .ensure {
            self.loadCertificatesConfiguration()
         }
-        .done { certificate in
-           self.showCertificate(certificate)
-        }
+//        .done { certificate in
+//            self.showCertificate(at: certificate)
+//        }
         .catch { error in
            print(error)
            // TODO error handling
@@ -245,17 +222,16 @@ public class DefaultCertificateViewModel<T: QRCoderProtocol>: CertificateViewMod
     }
 
     private func favoriteAction(for configuration: QRCertificateConfiguration) {
-        guard let extendedCertificate = certificateList.certificates.filter({ $0.vaccinationCertificate.name == configuration.subtitle }).first else { return }
-        certificateList.favoriteCertificateId = extendedCertificate.vaccinationCertificate.id
+        guard let extendedCertificate = certificateList.certificates.filter({ $0.vaccinationCertificate.hcert.dgc.nam.fullName == configuration.subtitle }).first else { return }
+        certificateList.favoriteCertificateId = extendedCertificate.vaccinationCertificate.hcert.dgc.v.first?.ci
         firstly {
-            service.save(certificateList)
+            repository.saveVaccinationCertificateList(certificateList).asVoid()
         }
         .done {
             self.loadCertificatesConfiguration()
-        }
-        .catch { error in
-           print(error)
-           // TODO error handling
+        }.catch{ error in
+            print(error)
+            // TODO error handling
         }
     }
 

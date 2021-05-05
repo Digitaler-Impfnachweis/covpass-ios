@@ -23,7 +23,8 @@ struct ValidatorSceneFactory: SceneFactory {
 
     func make() -> UIViewController {
         let viewController = ValidatorViewController.createFromStoryboard(bundle: Bundle.module)
-        let viewModel = ValidatorViewModel(router: router)
+        let repository = VaccinationRepository(service: APIService(), parser: QRCoder())
+        let viewModel = ValidatorViewModel(router: router, repository: repository)
         viewController.viewModel = viewModel
 //        viewModel.delegate = viewController
 

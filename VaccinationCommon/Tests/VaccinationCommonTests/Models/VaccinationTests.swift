@@ -15,12 +15,13 @@ class VaccinationTests: XCTestCase {
         let jsonData = Data.json("Vaccination")
         let sut = try! JSONDecoder().decode(Vaccination.self, from: jsonData)
 
-        XCTAssertEqual(sut.targetDisease, "U07.1!")
-        XCTAssertEqual(sut.vaccineCode, "1119349007")
-        XCTAssertEqual(sut.product, "COMIRNATY")
-        XCTAssertEqual(sut.manufacturer, "BioNTech Manufacturing GmbH")
-        XCTAssertEqual(sut.series, "2/2")
-        XCTAssertEqual(sut.occurrence, DateUtils.vaccinationDateFormatter.date(from: "20210202"))
-        XCTAssertEqual(sut.country, "DE")
+        XCTAssertEqual(sut.tg, "840539006")
+        XCTAssertEqual(sut.vp, "1119349007")
+        XCTAssertEqual(sut.mp, "EU/1/20/1528")
+        XCTAssertEqual(sut.ma, "ORG-100030215")
+        XCTAssertEqual(sut.dn, 2)
+        XCTAssertEqual(sut.sd, 2)
+        XCTAssertEqual(sut.dt, DateUtils.vaccinationDateFormatter.date(from: "2021-02-02"))
+        XCTAssertEqual(sut.co, "DE")
     }
 }

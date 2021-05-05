@@ -19,10 +19,11 @@ open class ValidationResultViewModel: BaseViewModel {
     public weak var delegate: ViewModelDelegate?
     let router: ValidationResultRouterProtocol
     private let parser: QRCoder = QRCoder()
+    private var certificate: CBORWebToken?
 
     public init(
         router: ValidationResultRouterProtocol,
-        certificate: ValidationCertificate?) {
+        certificate: CBORWebToken?) {
         self.router = router
         self.certificate = certificate
     }
@@ -31,9 +32,8 @@ open class ValidationResultViewModel: BaseViewModel {
         guard let cert = certificate else {
             return .error
         }
-        return cert.partialVaccination ? .partial : .full
+        return cert.hcert.dgc.fullImmunization ? .full : .partial
     }
-    private var certificate: ValidationCertificate?
 
     open var icon: UIImage? {
         switch result {
@@ -69,7 +69,7 @@ open class ValidationResultViewModel: BaseViewModel {
     open var nameTitle: String? {
         switch result {
         case .full, .partial:
-            return certificate?.name
+            return certificate?.hcert.dgc.nam.fullName
         case .error:
             return "Impfnachweis nicht gefunden"
         }
@@ -78,7 +78,7 @@ open class ValidationResultViewModel: BaseViewModel {
     open var nameBody: String? {
         switch result {
         case .full, .partial:
-            if let date = certificate?.birthDate {
+            if let date = certificate?.hcert.dgc.dob {
                 return "Geboren am \(DateUtils.displayDateFormatter.string(from: date))"
             }
             return nil
@@ -135,18 +135,8 @@ open class ValidationResultViewModel: BaseViewModel {
         }
     }
 
-    // TODO: Needs a common shared place
-    private func process(payload: String) -> Promise<ValidationCertificate> {
-        return Promise<ValidationCertificate>() { seal in
-            // TODO refactor parser
-            guard let decodedPayload: ValidationCertificate = parser.parse(payload, completion: { error in
-                seal.reject(error)
-            }) else {
-                seal.reject(ApplicationError.unknownError)
-                return
-            }
-            seal.fulfill(decodedPayload)
-        }
+    private func process(payload: String) -> Promise<CBORWebToken> {
+        return parser.parse(payload)
     }
 
     // TODO: Needs a common shared place

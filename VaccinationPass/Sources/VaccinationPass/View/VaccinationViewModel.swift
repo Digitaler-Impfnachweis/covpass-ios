@@ -10,48 +10,46 @@ import VaccinationCommon
 
 public struct VaccinationViewModel {
 
-    private var certificate: VaccinationCertificate
+    private var token: CBORWebToken
+    private var certificate: DigitalGreenCertificate { token.hcert.dgc }
+    private var vaccination: Vaccination? { certificate.v.first }
 
-    public init(certificate: VaccinationCertificate) {
-        self.certificate = certificate
+    public init(token: CBORWebToken) {
+        self.token = token
     }
 
     public var headline: String {
-        let number = String(certificate.vaccination.first?.seriesNumber ?? 0)
-        let total = String(certificate.vaccination.first?.seriesTotal ?? 0)
+        let number = String(vaccination?.dn ?? 0)
+        let total = String(vaccination?.sd ?? 0)
         return String(format: "vaccination_detail_vaccination_title".localized, number, total)
     }
 
     public var date: String {
-        guard let occurrence = certificate.vaccination.first?.occurrence else { return "" }
+        guard let occurrence = vaccination?.dt else { return "" }
         return DateUtils.displayDateFormatter.string(from: occurrence)
     }
 
     public var vaccine: String {
-        return certificate.vaccination.first?.product ?? ""
+        vaccination?.mp ?? ""
     }
 
     public var manufacturer: String {
-        return certificate.vaccination.first?.manufacturer ?? ""
+        vaccination?.ma ?? ""
     }
 
     public var vaccineCode: String {
-        return certificate.vaccination.first?.vaccineCode ?? ""
-    }
-
-    public var location: String {
-        return certificate.vaccination.first?.location ?? ""
+        vaccination?.vp ?? ""
     }
 
     public var issuer: String {
-        return certificate.issuer ?? ""
+        token.iss
     }
 
     public var country: String {
-        return certificate.vaccination.first?.country ?? ""
+        vaccination?.co ?? ""
     }
 
     public var uvci: String {
-        return certificate.id
+        vaccination?.ci ?? ""
     }
 }

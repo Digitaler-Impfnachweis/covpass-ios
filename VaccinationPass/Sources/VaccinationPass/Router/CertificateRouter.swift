@@ -24,10 +24,11 @@ class CertificateRouter: CertificateRouterProtocol {
 
     // MARK: - Methods
 
-    func showCertificates(_ certificates: [ExtendedVaccinationCertificate]) {
+    func showCertificates(_ certificates: [ExtendedCBORWebToken]) {
         sceneCoordinator.push(
             VaccinationDetailSceneFactory(
                 router: VaccinationDetailRouter(sceneCoordinator: sceneCoordinator),
+                repository: VaccinationRepository(service: APIService(), parser: QRCoder()),
                 certificates: certificates
             )
         )

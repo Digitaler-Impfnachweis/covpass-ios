@@ -14,6 +14,7 @@ import PromiseKit
 public class ValidatorViewModel {
     // MARK: - Private
 
+    private let repository: VaccinationRepositoryProtocol
     private let router: ValidatorRouterProtocol
     private let parser: QRCoder = QRCoder()
     
@@ -30,17 +31,8 @@ public class ValidatorViewModel {
         cell.configure(title: titles[indexPath.row], icon: .chevronRight)
     }
 
-    public func process(payload: String) -> Promise<ValidationCertificate> {
-        return Promise<ValidationCertificate>() { seal in
-            // TODO refactor parser
-            guard let decodedPayload: ValidationCertificate = parser.parse(payload, completion: { error in
-                seal.reject(error)
-            }) else {
-                seal.reject(ApplicationError.unknownError)
-                return
-            }
-            seal.fulfill(decodedPayload)
-        }
+    public func process(payload: String) -> Promise<CBORWebToken> {
+        return repository.checkValidationCertificate(payload)
     }
     
     // MARK: - UIConfigureation
@@ -51,8 +43,9 @@ public class ValidatorViewModel {
 
     // MARK: - Lifecycle
 
-    public init(router: ValidatorRouterProtocol) {
+    public init(router: ValidatorRouterProtocol, repository: VaccinationRepositoryProtocol) {
         self.router = router
+        self.repository = repository
     }
 
     func startQRCodeValidation() {

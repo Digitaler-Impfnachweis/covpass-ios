@@ -14,10 +14,11 @@ class CertificateViewModelTests: XCTestCase {
     
     // MARK: - Test Variables
     
-    var sut: DefaultCertificateViewModel<MockQRCoder>!
+    var sut: DefaultCertificateViewModel!
     var sutDelegate: MockViewModelDelegate!
     var sceneCoordinator: SceneCoordinatorMock!
     var router: CertificateRouter!
+    var repository: VaccinationRepositoryMock!
 
     // MARK: - Setup & Teardown
     
@@ -25,7 +26,8 @@ class CertificateViewModelTests: XCTestCase {
         super.setUp()
         sceneCoordinator = SceneCoordinatorMock()
         router = CertificateRouter(sceneCoordinator: sceneCoordinator)
-        sut = DefaultCertificateViewModel(router: router, parser: MockQRCoder())
+        repository = VaccinationRepositoryMock()
+        sut = DefaultCertificateViewModel(router: router, repository: repository)
         sutDelegate = MockViewModelDelegate()
         sut.delegate = sutDelegate
     }
