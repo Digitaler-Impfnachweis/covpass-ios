@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import PromiseKit
 import VaccinationCommon
 
 enum Result {
@@ -15,8 +16,14 @@ enum Result {
 }
 
 open class ValidationResultViewModel: BaseViewModel {
+    public weak var delegate: ViewModelDelegate?
+    let router: ValidationResultRouterProtocol
+    private let parser: QRCoder = QRCoder()
 
-    public init(certificate: ValidationCertificate?) {
+    public init(
+        router: ValidationResultRouterProtocol,
+        certificate: ValidationCertificate?) {
+        self.router = router
         self.certificate = certificate
     }
 
@@ -100,5 +107,56 @@ open class ValidationResultViewModel: BaseViewModel {
     public var info: String = ""
 
     public var backgroundColor: UIColor = UIColor.black
+
+    // MARK: - Methods
+
+    func cancel() {
+        router.showStart()
+    }
+
+    func scanNextCertifcate() {
+        firstly {
+            router.scanQRCode()
+        }
+        .map {
+            try self.payloadFromScannerResult($0)
+        }
+        .then {
+            self.process(payload: $0)
+        }
+        .get {
+            self.certificate = $0
+        }
+        .done { _ in
+            self.delegate?.viewModelDidUpdate()
+        }
+        .catch {
+            self.delegate?.viewModelUpdateDidFailWithError($0)
+        }
+    }
+
+    // TODO: Needs a common shared place
+    private func process(payload: String) -> Promise<ValidationCertificate> {
+        return Promise<ValidationCertificate>() { seal in
+            // TODO refactor parser
+            guard let decodedPayload: ValidationCertificate = parser.parse(payload, completion: { error in
+                seal.reject(error)
+            }) else {
+                seal.reject(ApplicationError.unknownError)
+                return
+            }
+            seal.fulfill(decodedPayload)
+        }
+    }
+
+    // TODO: Needs a common shared place
+    private func payloadFromScannerResult(_ result: ScanResult) throws -> String {
+        switch result {
+        case .success(let payload):
+            return payload
+        case .failure(let error):
+            throw error
+        }
+    }
 }
 

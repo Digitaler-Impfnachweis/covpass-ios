@@ -10,25 +10,21 @@ import XCTest
 import VaccinationUI
 @testable import VaccinationPass
 
-
 class CertificateViewControllerTests: XCTestCase {
     // MARK: - Test Variables
     
     var sut: CertificateViewController!
     var viewModel: MockCertificateViewModel!
-    var router: MockPopupRouter!
     
     // MARK: - Setup & Teardown
     
     override func setUp() {
         super.setUp()
         viewModel = MockCertificateViewModel()
-        router = MockPopupRouter()
         // Create sut
         let certificateViewController = CertificateViewController.createFromStoryboard(bundle: Bundle.module)
         viewModel.delegate = certificateViewController
         certificateViewController.viewModel = viewModel
-        certificateViewController.router = router
         sut = certificateViewController
         // Load View
         let window = UIWindow(frame:  UIScreen.main.bounds)
@@ -67,18 +63,7 @@ class CertificateViewControllerTests: XCTestCase {
         XCTAssertEqual(sut.addButton.icon, viewModel?.addButtonImage)
         XCTAssertNotNil(sut.addButton.action)
     }
-    
-    func testReloadData() {
-        viewModel.certificates.append(MockCellConfiguration.noCertificateConfiguration())
-        sut.result(with: .success("Hello World"))
-        XCTAssertEqual(sut.collectionView(sut.collectionView, numberOfItemsInSection: 0), viewModel.certificates.count)
-    }
-    
-//    func testPresentPopup() {
-//        sut.addButton.action?()
-//        XCTAssertTrue(router.presentPopupCalled)
-//    }
-    
+
     func testCellForRow() {
         XCTAssertTrue( sut.collectionView(sut.collectionView, cellForItemAt: IndexPath(item: 0, section: 0)) is NoCertificateCollectionViewCell)
     }

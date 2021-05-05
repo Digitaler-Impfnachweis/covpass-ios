@@ -16,17 +16,10 @@ public class ProofPopupViewController: BottomPopupViewController {
     @IBOutlet public var headline: InfoHeaderView!
     @IBOutlet public var descriptionText: ParagraphView!
     @IBOutlet public var actionView: InfoHeaderView!
-    
-    // MARK: - Public Properties
-    
-    public var viewModel: BaseViewModel?
-    public var router: PopupRouter?
 
     // MARK: - Internal Properties
 
-    var inputViewModel: ProofPopupViewModel {
-        viewModel as? ProofPopupViewModel ?? ProofPopupViewModel()
-    }
+    public var viewModel: ProofPopupViewModel!
 
     // MARK: - Lifecycle
 
@@ -42,46 +35,46 @@ public class ProofPopupViewController: BottomPopupViewController {
     // MARK: - Private
 
     private func configureImageView() {
-        imageView.image = inputViewModel.image
+        imageView.image = viewModel.image
         imageView.pinHeightToScaleAspectFit()
     }
 
     private func configureHeadline() {
-        headline.attributedTitleText = inputViewModel.title.styledAs(.header_2)
+        headline.attributedTitleText = viewModel.title.styledAs(.header_2)
         headline.action = { [weak self] in
-            self?.dismiss(animated: true, completion: nil)
+            self?.viewModel.cancel()
         }
-        headline.image = inputViewModel.closeButtonImage
+        headline.image = viewModel.closeButtonImage
     }
     
     private func configureActionView() {
-        actionView.attributedTitleText = inputViewModel.actionTitle.styledAs(.header_3)
+        actionView.attributedTitleText = viewModel.actionTitle.styledAs(.header_3)
         actionView.action = { [weak self] in
             self?.dismiss(animated: true, completion: nil)
         }
-        actionView.image = inputViewModel.chevronRightImage
-        actionView.tintColor = inputViewModel.tintColor
+        actionView.image = viewModel.chevronRightImage
+        actionView.tintColor = viewModel.tintColor
         actionView.layoutMargins.top = .space_40
     }
 
     private func configureDescriptionText() {
-        descriptionText.attributedBodyText = inputViewModel.info.styledAs(.body)
+        descriptionText.attributedBodyText = viewModel.info.styledAs(.body)
         descriptionText.layoutMargins.top = .space_18
         descriptionText.layoutMargins.bottom = .space_40
     }
     
     private func configureToolbarView() {
-        toolbarView.state = .confirm(inputViewModel.startButtonTitle)
+        toolbarView.state = .confirm(viewModel.startButtonTitle)
         toolbarView.setUpLeftButton(leftButtonItem: .navigationArrow)
         toolbarView.layoutMargins.top = .space_24
         toolbarView.delegate = self
     }
 
-    public override var popupHeight: CGFloat { inputViewModel.height }
-    public override var popupTopCornerRadius: CGFloat { inputViewModel.topCornerRadius }
-    public override var popupPresentDuration: Double { inputViewModel.presentDuration }
-    public override var popupDismissDuration: Double { inputViewModel.dismissDuration }
-    public override var popupShouldDismissInteractivelty: Bool { inputViewModel.shouldDismissInteractivelty }
+    public override var popupHeight: CGFloat { viewModel.height }
+    public override var popupTopCornerRadius: CGFloat { viewModel.topCornerRadius }
+    public override var popupPresentDuration: Double { viewModel.presentDuration }
+    public override var popupDismissDuration: Double { viewModel.dismissDuration }
+    public override var popupShouldDismissInteractivelty: Bool { viewModel.shouldDismissInteractivelty }
     public override var popupDimmingViewAlpha: CGFloat { 0.5 }
 }
 
@@ -91,9 +84,9 @@ extension ProofPopupViewController: CustomToolbarViewDelegate {
     public func customToolbarView(_: CustomToolbarView, didTap buttonType: ButtonItemType) {
         switch buttonType {
         case .navigationArrow:
-            dismiss(animated: true, completion: nil)
+            viewModel.cancel()
         case .textButton:
-            router?.presentPopup(onTopOf: self.presentingViewController?.presentingViewController ?? self)
+            viewModel.done()
         default:
             return
         }
@@ -107,4 +100,3 @@ extension ProofPopupViewController: StoryboardInstantiating {
         return UIConstants.Storyboard.Onboarding
     }
 }
-

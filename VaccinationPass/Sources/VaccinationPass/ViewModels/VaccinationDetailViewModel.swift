@@ -12,12 +12,17 @@ import PromiseKit
 
 public class VaccinationDetailViewModel {
 
+    private let router: VaccinationDetailRouterProtocol
     private let parser = QRCoder()
     private var service = VaccinationCertificateService()
 
     private var certificates: [ExtendedVaccinationCertificate]
 
-    public init(certificates: [ExtendedVaccinationCertificate]) {
+    public init(
+        router: VaccinationDetailRouterProtocol,
+        certificates: [ExtendedVaccinationCertificate]) {
+
+        self.router = router
         self.certificates = certificates
     }
 
@@ -64,8 +69,34 @@ public class VaccinationDetailViewModel {
         return certificates.map({ VaccinationViewModel(certificate: $0.vaccinationCertificate) })
     }
 
-    public func delete() -> Promise<Void> {
-        service.fetch().then({ list -> Promise<VaccinationCertificateList> in
+    public func immunizationButtonTapped() {
+        partialVaccination ?
+            scanNextCertificate() :
+            showCertificate()
+    }
+
+    private func scanNextCertificate() {
+        firstly {
+            router.showScanner()
+        }
+        .done { result in
+            fatalError("TBD: To avoid code dublication we should add a scene wich scans and procced a certificate.")
+        }
+        .cauterize()
+    }
+
+    private func showCertificate() {
+        router.showCertificateOverview()
+    }
+
+    public func delete() {
+        firstly {
+            showDeleteDialog()
+        }
+        .then {
+            self.service.fetch()
+        }
+        .then { list -> Promise<VaccinationCertificateList> in
             var certList = list
             certList.certificates.removeAll(where: { certificate in
                 for cert in self.certificates where cert == certificate {
@@ -74,9 +105,17 @@ public class VaccinationDetailViewModel {
                 return false
             })
             return Promise.value(certList)
-        }).then({ list in
+        }
+        .then { list in
             self.service.save(list)
-        })
+        }
+        .done {
+            self.router.showCertificateOverview()
+        }
+        .catch { error in
+            print(error)
+            // TODO: Handle error
+        }
     }
 
     public func updateFavorite() -> Promise<Void> {
@@ -124,5 +163,23 @@ public class VaccinationDetailViewModel {
             }
         }
         return list
+    }
+
+    private func showDeleteDialog() -> Promise<Void> {
+        .init { seal in
+            let delete = DialogAction(title: "Löschen", style: .destructive) { _ in
+                seal.fulfill_()
+            }
+            let cancel = DialogAction(title: "Abbrechen", style: .cancel) { _ in
+                seal.cancel()
+            }
+            let title = String(format: "vaccination_delete_title".localized, self.name)
+            self.router.showDialog(
+                title: title,
+                message: "vaccination_delete_body".localized,
+                actions: [delete, cancel],
+                style: .alert
+            )
+        }
     }
 }
