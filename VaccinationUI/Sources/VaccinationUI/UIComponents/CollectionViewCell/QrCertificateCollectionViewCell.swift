@@ -29,7 +29,6 @@ public class QrCertificateCollectionViewCell: BaseCardCollectionViewCell {
 
     public override func awakeFromNib() {
         super.awakeFromNib()
-
         clipsToBounds = false
 
         contentView.clipsToBounds = false
@@ -43,7 +42,6 @@ public class QrCertificateCollectionViewCell: BaseCardCollectionViewCell {
         containerView.layer.cornerRadius = cornerRadius
         contentStackView.setCustomSpacing(.space_20, after: actionView)
 
-        actionView.action = onAction
         headerView.action = onFavorite
     }
 
@@ -59,28 +57,27 @@ extension QrCertificateCollectionViewCell {
     public typealias T = QRCertificateConfiguration
     
     public func configure(with configuration: T) {
-        let tintColor: UIColor = configuration.qrViewConfiguration?.tintColor ?? .neutralBlack
+        let tintColor: UIColor = configuration.tintColor
 
         containerView.backgroundColor = configuration.backgroundColor ?? .neutralWhite
 
-        headerView.action = configuration.headerAction
+        headerView.action = {
+            configuration.favoriteAction?(configuration)
+        }
         headerView.titleLabel.attributedText = configuration.subtitle?.styledAs(.header_1).colored(tintColor)
         headerView.subtitleLabel.attributedText = configuration.title?.styledAs(.body).colored(tintColor)
         headerView.tintColor = tintColor
         contentStackView.setCustomSpacing(.space_12, after: headerView)
 
-        actionView.action = configuration.stateAction
         actionView.stateImageView.image = configuration.stateImage
         actionView.titleLabel.attributedText = configuration.stateTitle?.styledAs(.header_3).colored(tintColor)
         actionView.stateImageView.tintColor = tintColor
         actionView.actionButton.tintColor = tintColor
         actionView.tintColor = .neutralWhite
 
-        qrContinerView.image = configuration.qrViewConfiguration?.qrValue?.makeQr(size: UIScreen.main.bounds.size)
-        qrContinerView.title = configuration.qrViewConfiguration?.qrTitle
-        qrContinerView.subtitle = configuration.qrViewConfiguration?.qrSubtitle
+        qrContinerView.image = configuration.qrValue?.makeQr(size: UIScreen.main.bounds.size)
         qrContinerView.layoutMargins = .init(top: .space_20, left: .space_24, bottom: .zero, right: .space_24)
-
+        qrContinerView.isHidden = configuration.qrValue == nil
         layoutIfNeeded()
     }
 }

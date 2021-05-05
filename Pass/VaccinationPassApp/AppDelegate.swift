@@ -12,18 +12,26 @@ import VaccinationPass
 
 @UIApplicationMain
 final class AppDelegate: UIResponder, UIApplicationDelegate {
-    
+
     var window: UIWindow?
-    
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    var sceneCoordinator: DefaultSceneCoordinator?
+
+    func application(
+        _ application: UIApplication,
+        didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+
         try? clearKeychainOnFreshInstall()
         try? UIFont.loadCustomFonts()
-        window = UIWindow(frame: UIScreen.main.bounds)
-        var router = MainRouter()
-        router.windowDelegate = self
-        self.window = UIWindow(frame: UIScreen.main.bounds)
-        self.window?.rootViewController = router.rootViewController()
-        self.window?.makeKeyAndVisible()
+
+        let window = UIWindow(frame: UIScreen.main.bounds)
+        let sceneCoordinator = DefaultSceneCoordinator(window: window)
+        let mainScene = PassAppSceneFactory(sceneCoordinator: sceneCoordinator)
+        sceneCoordinator.asRoot(mainScene)
+        window.rootViewController = sceneCoordinator.rootViewController
+        window.makeKeyAndVisible()
+        self.window = window
+        self.sceneCoordinator = sceneCoordinator
+
         return true
     }
 
@@ -32,16 +40,5 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
             UserDefaults.StartupInfo.set(true, forKey: .appInstalled)
             try Keychain.deletePassword(for: KeychainConfiguration.vaccinationCertificateKey)
         }
-    }
-}
-
-// MARK: - WindowDelegate
-
-extension AppDelegate: WindowDelegate {
-    func update(rootViewController: UIViewController) {
-        guard let window = window else { return }
-        UIView.transition(with: window, duration: 0.3, options: .transitionCrossDissolve, animations: {}, completion: { completed in
-            window.rootViewController = rootViewController
-        })
     }
 }

@@ -16,20 +16,14 @@ public class StartOnboardingViewController: UIViewController {
     @IBOutlet public var secureContentView: SecureContentView!
     
     // MARK: - Public Properties
-    
-    public var viewModel: BaseViewModel?
-    public var router: Router?
 
-    // MARK: - Internal Properties
-
-    var inputViewModel: StartOnboardingViewModel {
-        viewModel as? StartOnboardingViewModel ?? StartOnboardingViewModel()
-    }
+    public var viewModel: StartOnboardingViewModel?
 
     // MARK: - Lifecycle
 
     public override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.setNavigationBarHidden(true, animated: false)
         configureImageView()
         configureHeadline()
         configureSubtitle()
@@ -40,32 +34,32 @@ public class StartOnboardingViewController: UIViewController {
     // MARK: - Private
 
     private func configureImageView() {
-        imageView.image = inputViewModel.image
+        imageView.image = viewModel?.image
         imageView.pinHeightToScaleAspectFit()
     }
 
     private func configureHeadline() {
-        headline.attributedText = inputViewModel.title.styledAs(.display)
+        headline.attributedText = viewModel?.title.styledAs(.display)
         headline.layoutMargins = .init(top: .space_12, left: .space_24, bottom: .zero, right: .space_24)
     }
 
     private func configureSubtitle() {
-        subtitle.attributedText = inputViewModel.info.styledAs(.subheader_1)
+        subtitle.attributedText = viewModel?.info.styledAs(.subheader_1)
         subtitle.layoutMargins = .init(top: .space_12, left: .space_24, bottom: .space_40, right: .space_24)
     }
     
     private func configureActionButton() {
-        actionButton.title = inputViewModel.navigationButtonTitle
+        actionButton.title = viewModel?.navigationButtonTitle
         actionButton.style = .primary
         actionButton.action = { [weak self] in
-            self?.router?.navigateToNextViewController()
+            self?.viewModel?.showNextScene()
         }
     }
     
     private func configureSecureContentView() {
-        secureContentView.titleAttributedString = inputViewModel.secureTitle.styledAs(.header_3)
-        secureContentView.bodyAttributedString = inputViewModel.secureText.styledAs(.body).colored(.onBackground70)
-        secureContentView.contentView?.backgroundColor = inputViewModel.backgroundColor
+        secureContentView.titleAttributedString = viewModel?.secureTitle.styledAs(.header_3)
+        secureContentView.bodyAttributedString = viewModel?.secureText.styledAs(.body).colored(.onBackground70)
+        secureContentView.contentView?.backgroundColor = viewModel?.backgroundColor
         secureContentView.layoutMargins = .init(top: .space_40, left: .space_24, bottom: .space_50, right: .space_24)
     }
 }
