@@ -145,24 +145,6 @@ public class DefaultCertificateViewModel<T: QRCoderProtocol>: CertificateViewMod
         return certificates[indexPath.row].identifier
     }
 
-    // MARK: - Details View Model
-    
-    public func detailViewModel(_ indexPath: IndexPath) -> VaccinationDetailViewModel? {
-        if matchedCertificates.isEmpty {
-            return nil
-        }
-        let pair = findCertificatePair(matchedCertificates[indexPath.row], certificateList.certificates)
-        return VaccinationDetailViewModel(certificates: pair)
-    }
-
-    public func detailViewModel(_ cert: ExtendedVaccinationCertificate) -> VaccinationDetailViewModel? {
-        if certificateList.certificates.isEmpty {
-            return nil
-        }
-        let pair = findCertificatePair(cert, certificateList.certificates)
-        return VaccinationDetailViewModel(certificates: pair)
-    }
-    
     // MARK: - Card Configurations
 
     private func getCertficateConfiguration(for certificate: ExtendedVaccinationCertificate) -> QRCertificateConfiguration {
@@ -239,33 +221,41 @@ public class DefaultCertificateViewModel<T: QRCoderProtocol>: CertificateViewMod
 
     public func scanCertificate() {
         firstly {
-            router.showProof()
+           router.showProof()
         }
         .then {
-            self.router.scanQRCode()
+           self.router.scanQRCode()
         }
         .map { result in
-            try self.payloadFromScannerResult(result)
+           try self.payloadFromScannerResult(result)
         }
         .then { payload in
-            self.process(payload: payload)
+           self.process(payload: payload)
         }
         .ensure {
-    
-    // MARK: - Card Actions
-    
+           self.loadCertificatesConfiguration()
+        }
+        .done { certificate in
+           self.showCertificate(certificate)
+        }
+        .catch { error in
+           print(error)
+           // TODO error handling
+        }
+    }
+
     private func favoriteAction(for configuration: QRCertificateConfiguration) {
         guard let extendedCertificate = certificateList.certificates.filter({ $0.vaccinationCertificate.name == configuration.subtitle }).first else { return }
         certificateList.favoriteCertificateId = extendedCertificate.vaccinationCertificate.id
-        service.save(certificateList).done {
+        firstly {
+            service.save(certificateList)
+        }
+        .done {
             self.loadCertificatesConfiguration()
         }
-        .done { certificate in
-            self.showCertificate(certificate)
-        }
         .catch { error in
-            print(error)
-            // TODO error handling
+           print(error)
+           // TODO error handling
         }
     }
 
