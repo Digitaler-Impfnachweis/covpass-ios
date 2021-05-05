@@ -31,7 +31,7 @@ public class ValidatorViewModel {
         cell.configure(title: titles[indexPath.row], icon: .chevronRight)
     }
 
-    public func process(payload: String) -> Promise<ValidationCertificate> {
+    public func process(payload: String) -> Promise<CBORWebToken> {
         return repository.checkValidationCertificate(payload)
     }
     

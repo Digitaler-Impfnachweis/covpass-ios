@@ -14,21 +14,25 @@ struct VaccinationDetailSceneFactory: SceneFactory {
     // MARK: - Properties
 
     let router: VaccinationDetailRouterProtocol
-    let certificates: [ExtendedVaccinationCertificate]
+    let repository: VaccinationRepositoryProtocol
+    let certificates: [ExtendedCBORWebToken]
 
     // MARK: - Lifecylce
 
     init(
         router: VaccinationDetailRouterProtocol,
-        certificates: [ExtendedVaccinationCertificate]) {
+        repository: VaccinationRepositoryProtocol,
+        certificates: [ExtendedCBORWebToken]) {
 
         self.router = router
+        self.repository = repository
         self.certificates = certificates
     }
 
     func make() -> UIViewController {
         let viewModel = VaccinationDetailViewModel(
             router: router,
+            repository: repository,
             certificates: certificates
         )
         let viewController = VaccinationDetailViewController.createFromStoryboard()

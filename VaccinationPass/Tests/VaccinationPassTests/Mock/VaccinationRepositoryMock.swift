@@ -21,19 +21,19 @@ public struct VaccinationRepositoryMock: VaccinationRepositoryProtocol {
         return Promise.value(())
     }
 
-    public func scanVaccinationCertificate(_ data: String) -> Promise<ExtendedVaccinationCertificate> {
+    public func scanVaccinationCertificate(_ data: String) -> Promise<ExtendedCBORWebToken> {
         return Promise { seal in
             seal.reject(ApplicationError.unknownError)
         }
     }
 
-    public func reissueValidationCertificate(_ certificate: ExtendedVaccinationCertificate) -> Promise<ExtendedVaccinationCertificate> {
+    public func reissueValidationCertificate(_ certificate: ExtendedCBORWebToken) -> Promise<ExtendedCBORWebToken> {
         return Promise { seal in
             seal.reject(ApplicationError.unknownError)
         }
     }
 
-    public func checkValidationCertificate(_ data: String) -> Promise<ValidationCertificate> {
+    public func checkValidationCertificate(_ data: String) -> Promise<CBORWebToken> {
         return Promise { seal in
             seal.reject(ApplicationError.unknownError)
         }

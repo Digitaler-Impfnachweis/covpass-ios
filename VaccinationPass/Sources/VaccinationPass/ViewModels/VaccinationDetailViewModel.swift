@@ -70,9 +70,9 @@ public class VaccinationDetailViewModel {
     }
 
     public func immunizationButtonTapped() {
-        partialVaccination ?
-            scanNextCertificate() :
-            showCertificate()
+        fullImmunization ?
+            showCertificate() :
+            scanNextCertificate()
     }
 
     private func scanNextCertificate() {
@@ -94,7 +94,7 @@ public class VaccinationDetailViewModel {
             showDeleteDialog()
         }
         .then {
-            self.service.fetch()
+            self.repository.getVaccinationCertificateList()
         }
         .then { list -> Promise<VaccinationCertificateList> in
             var certList = list

@@ -163,14 +163,14 @@ public class DefaultCertificateViewModel: CertificateViewModel {
         )
     }
 
-    private func certificatePair(for indexPath: IndexPath ) -> [ExtendedVaccinationCertificate] {
+    private func certificatePair(for indexPath: IndexPath) -> [ExtendedCBORWebToken] {
         if certificateList.certificates.isEmpty {
             return []
         }
         return findCertificatePair(matchedCertificates[indexPath.row], certificateList.certificates)
     }
 
-    private func certificatePair(for certificate: ExtendedVaccinationCertificate ) -> [ExtendedVaccinationCertificate] {
+    private func certificatePair(for certificate: ExtendedCBORWebToken) -> [ExtendedCBORWebToken] {
         if certificateList.certificates.isEmpty {
             return []
         }
@@ -183,13 +183,13 @@ public class DefaultCertificateViewModel: CertificateViewModel {
         )
     }
 
-    public func showCertificate(_ certificate: ExtendedVaccinationCertificate) {
+    public func showCertificate(_ certificate: ExtendedCBORWebToken) {
         showCertificates(
             certificatePair(for: certificate)
         )
     }
 
-    private func showCertificates(_ certificates: [ExtendedVaccinationCertificate]) {
+    private func showCertificates(_ certificates: [ExtendedCBORWebToken]) {
         guard certificates.isEmpty == false else {
             return
         }
@@ -212,9 +212,9 @@ public class DefaultCertificateViewModel: CertificateViewModel {
         .ensure {
            self.loadCertificatesConfiguration()
         }
-        .done { certificate in
-           self.showCertificate(certificate)
-        }
+//        .done { certificate in
+//            self.showCertificate(at: certificate)
+//        }
         .catch { error in
            print(error)
            // TODO error handling
@@ -222,20 +222,16 @@ public class DefaultCertificateViewModel: CertificateViewModel {
     }
 
     private func favoriteAction(for configuration: QRCertificateConfiguration) {
-        guard let extendedCertificate = certificateList.certificates.filter({ $0.vaccinationCertificate.name == configuration.subtitle }).first else { return }
-        certificateList.favoriteCertificateId = extendedCertificate.vaccinationCertificate.id
+        guard let extendedCertificate = certificateList.certificates.filter({ $0.vaccinationCertificate.hcert.dgc.nam.fullName == configuration.subtitle }).first else { return }
+        certificateList.favoriteCertificateId = extendedCertificate.vaccinationCertificate.hcert.dgc.v.first?.ci
         firstly {
-            service.save(certificateList)
+            repository.saveVaccinationCertificateList(certificateList).asVoid()
         }
         .done {
             self.loadCertificatesConfiguration()
         }.catch{ error in
             print(error)
             // TODO error handling
-        }
-        .catch { error in
-           print(error)
-           // TODO error handling
         }
     }
 

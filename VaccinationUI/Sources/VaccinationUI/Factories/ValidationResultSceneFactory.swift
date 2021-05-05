@@ -13,13 +13,13 @@ public struct ValidationResultSceneFactory: SceneFactory {
     // MARK: - Properties
 
     let router: ValidationResultRouterProtocol
-    let certificate: ValidationCertificate
+    let certificate: CBORWebToken
 
     // MARK: - Lifecylce
 
     public init(
         router: ValidationResultRouterProtocol,
-        certificate: ValidationCertificate) {
+        certificate: CBORWebToken) {
 
         self.router = router
         self.certificate = certificate

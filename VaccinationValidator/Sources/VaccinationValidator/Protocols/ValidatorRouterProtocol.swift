@@ -13,5 +13,5 @@ import Scanner
 
 public protocol ValidatorRouterProtocol: RouterProtocol {
     func scanQRCode() -> Promise<Swift.Result<String, ScanError>>
-    func showCertificate(_ certificate: ValidationCertificate)
+    func showCertificate(_ certificate: CBORWebToken)
 }

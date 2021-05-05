@@ -19,7 +19,7 @@ open class ValidationResultViewModel: BaseViewModel {
     public weak var delegate: ViewModelDelegate?
     let router: ValidationResultRouterProtocol
     private let parser: QRCoder = QRCoder()
-    private let certificate: CBORWebToken?
+    private var certificate: CBORWebToken?
 
     public init(
         router: ValidationResultRouterProtocol,
@@ -135,18 +135,8 @@ open class ValidationResultViewModel: BaseViewModel {
         }
     }
 
-    // TODO: Needs a common shared place
-    private func process(payload: String) -> Promise<ValidationCertificate> {
-        return Promise<ValidationCertificate>() { seal in
-            // TODO refactor parser
-            guard let decodedPayload: ValidationCertificate = parser.parse(payload, completion: { error in
-                seal.reject(error)
-            }) else {
-                seal.reject(ApplicationError.unknownError)
-                return
-            }
-            seal.fulfill(decodedPayload)
-        }
+    private func process(payload: String) -> Promise<CBORWebToken> {
+        return parser.parse(payload)
     }
 
     // TODO: Needs a common shared place

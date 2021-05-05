@@ -19,6 +19,6 @@ public protocol CertificateViewModel: HeadlineViewModel {
     func reuseIdentifier(for indexPath: IndexPath) -> String
     func loadCertificatesConfiguration()
     func showCertificate(at indexPath: IndexPath)
-    func showCertificate(_ certificate: ExtendedVaccinationCertificate)
+    func showCertificate(_ certificate: ExtendedCBORWebToken)
     func scanCertificate()
 }
