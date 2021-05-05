@@ -95,6 +95,12 @@ extension UIImage {
 
     @ImageLoader(name: "warning")
     public private(set) static var warning
+
+    @ImageLoader(name: "ega_checkbox_checked")
+    public private(set) static var checkboxChecked
+
+    @ImageLoader(name: "ega_checkbox_unchecked")
+    public private(set) static var checkboxUnchecked
 }
 
 @propertyWrapper

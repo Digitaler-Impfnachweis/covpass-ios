@@ -60,12 +60,8 @@ open class OnboardingPageViewModel: BaseViewModel {
         }
     }
 
-    open var termsTitle: String {
-        "Ich akzeptiere die AGB."
-    }
-
-    open var dataPrivacyTitle: String {
-        "Ich habe die Datenschutzerklärung zur Kenntnis genommen."
+    open var dataPrivacyTitle: NSAttributedString {
+        NSMutableAttributedString(string: "Ich habe die Datenschutzerklärung zur Kenntnis genommen.").addLink(url: "https://www.coronawarn.app/assets/documents/cwa-privacy-notice-de.pdf", in: "Datenschutzerklärung").styledAs(.body)
     }
 
     // MARK: - Settings

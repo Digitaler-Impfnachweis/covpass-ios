@@ -12,3 +12,13 @@ extension Optional where Wrapped == NSAttributedString {
         self?.string.isEmpty ?? true
     }
 }
+
+extension NSMutableAttributedString {
+    public func addLink(url: String, in range: String) -> NSMutableAttributedString {
+        if let urlRange = self.string.range(of: range) {
+            let nsUrlRange = NSRange(urlRange, in: self.string)
+            self.addAttribute(.link, value: url, range: nsUrlRange)
+        }
+        return self
+    }
+}

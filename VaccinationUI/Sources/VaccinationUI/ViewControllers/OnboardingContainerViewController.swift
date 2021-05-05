@@ -25,7 +25,7 @@ public class OnboardingContainerViewController: UIViewController {
     // MARK: - Internal Properties
     
     var pageController: UIPageViewController?
-    var pages: [OnboardingPageViewController] = []
+    var pages: [UIViewController] = []
     var currentIndex: Int = 0
 
     // MARK: - Lifecycle
@@ -38,13 +38,14 @@ public class OnboardingContainerViewController: UIViewController {
         }
 
         viewModel.items.forEach { model in
-            var controller: OnboardingPageViewController
+            var controller: UIViewController
             if model.type == .page4 {
                 controller = ConsentViewController.createFromStoryboard(bundle: UIConstants.bundle)
+                (controller as? ConsentViewController)?.viewModel = model
             } else {
                 controller = OnboardingPageViewController.createFromStoryboard(bundle: UIConstants.bundle)
+                (controller as? OnboardingPageViewController)?.viewModel = model
             }
-            controller.viewModel = model
             pages.append(controller)
         }
         configureToolbarView()
@@ -77,16 +78,14 @@ public class OnboardingContainerViewController: UIViewController {
 
 extension OnboardingContainerViewController: UIPageViewControllerDataSource {
     public func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        guard let onboardingPageViewController = viewController as? OnboardingPageViewController,
-              let index = pages.firstIndex(of: onboardingPageViewController),
+        guard let index = pages.firstIndex(of: viewController),
               index > 0 else { return nil }
 
         return pages[index - 1]
     }
 
     public func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        guard let onboardingPageViewController = viewController as? OnboardingPageViewController,
-              let index = pages.firstIndex(of: onboardingPageViewController),
+        guard let index = pages.firstIndex(of: viewController),
               index < pages.count - 1 else { return nil }
 
         return pages[index + 1]
@@ -98,8 +97,7 @@ extension OnboardingContainerViewController: UIPageViewControllerDataSource {
 extension OnboardingContainerViewController: UIPageViewControllerDelegate {
     public func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
         guard let currentViewController = pageViewController.viewControllers?.first,
-              let onboardingPageViewController = currentViewController as? OnboardingPageViewController,
-              let index = pages.firstIndex(of: onboardingPageViewController) else { return }
+              let index = pages.firstIndex(of: currentViewController) else { return }
 
         currentIndex = index
         pageIndicator.selectDot(withIndex: index)
@@ -142,6 +140,14 @@ extension OnboardingContainerViewController: CustomToolbarViewDelegate {
         default:
             return
         }
+    }
+}
+
+// MARK: - CheckboxViewDelegate
+
+extension OnboardingContainerViewController: CheckboxViewDelegate {
+    public func didSelectCheckboxView(_ state: Bool) {
+        toolbarView.state = state ? .confirm(viewModel?.confirmButtonTitle ?? "Bestätigen") : .disabledWithText(viewModel?.confirmButtonTitle ?? "Bestätigen")
     }
 }
 

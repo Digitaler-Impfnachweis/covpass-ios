@@ -17,5 +17,6 @@ public class OnboardingContainerViewModel {
     // MARK: - Settings
 
     let startButtonTitle: String = "next_onboarding_page_button_title".localized
+    let confirmButtonTitle: String = "Bestätigen"
     let startButtonShadowColor: UIColor = .clear
 }
