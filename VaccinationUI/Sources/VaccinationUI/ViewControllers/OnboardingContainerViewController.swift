@@ -27,12 +27,6 @@ public class OnboardingContainerViewController: UIViewController {
     var pageController: UIPageViewController?
     var pages: [OnboardingPageViewController] = []
     var currentIndex: Int = 0
-    
-    // MARK: - Private constants
-
-    private struct LayoutConstants {
-        let topStartButtonMargin: CGFloat = 12
-    }
 
     // MARK: - Lifecycle
 

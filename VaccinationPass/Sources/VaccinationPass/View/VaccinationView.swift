@@ -49,9 +49,9 @@ public class VaccinationView: XibView {
 
         immunizationHeadline.attributedText = viewModel?.headline.styledAs(.header_2)
         immunizationHeadline.layoutMargins = .init(top: .space_40, left: .space_24, bottom: .zero, right: .space_24)
-        stackView.setCustomSpacing(12, after: immunizationHeadline)
+        stackView.setCustomSpacing(.space_12, after: immunizationHeadline)
 
-        let itemsMargins = UIEdgeInsets(top: 12, left: 24, bottom: 12, right: 24)
+        let itemsMargins = UIEdgeInsets(top: .space_12, left: .space_24, bottom: .space_12, right: .space_24)
 
         dateView.attributedTitleText = "vaccination_detail_date".localized.styledAs(.header_3)
         dateView.attributedBodyText = viewModel?.date.styledAs(.body)

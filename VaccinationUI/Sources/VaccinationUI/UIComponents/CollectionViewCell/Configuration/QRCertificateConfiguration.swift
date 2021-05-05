@@ -11,23 +11,38 @@ import UIKit
 public class QRCertificateConfiguration: NoCertifiateConfiguration {
     // MARK: - Public Variables
     
+    public var qrValue: String?
     public var stateImage: UIImage?
     public var stateTitle: String?
-    public var stateAction: (() -> Void)?
     public var headerImage: UIImage?
-    public var headerAction: (() -> Void)?
-    public var qrViewConfiguration: QrViewConfiguration?
-    
+    public var favoriteAction: ((_ configuration: QRCertificateConfiguration) -> Void)?
+    public var tintColor: UIColor
+
     // MARK: - Init
     
-    public init(title: String?, subtitle: String?, image: UIImage?, stateImage: UIImage?, stateTitle: String?, stateAction: (() -> Void)?, headerImage: UIImage?, headerAction: (() -> Void)?, backgroundColor: UIColor?, qrViewConfiguration: QrViewConfiguration?) {
+    public init(qrValue: String? = nil,
+                title: String? = nil,
+                subtitle: String? = nil,
+                image: UIImage? = nil,
+                stateImage: UIImage? = nil,
+                stateTitle: String? = nil,
+                headerImage: UIImage? = nil,
+                favoriteAction: ((_ configuration: QRCertificateConfiguration) -> Void)? = nil,
+                backgroundColor: UIColor? = nil,
+                tintColor: UIColor = UIColor.black) {
         self.stateImage = stateImage
         self.stateTitle = stateTitle
-        self.stateAction = stateAction
         self.headerImage = headerImage
-        self.headerAction = headerAction
-        self.qrViewConfiguration = qrViewConfiguration
+        self.favoriteAction = favoriteAction
+        self.qrValue = qrValue // we should provide right data here
+        self.tintColor = tintColor
         super.init(title: title, subtitle: subtitle, image: image, identifier: "\(QrCertificateCollectionViewCell.self)")
         self.backgroundColor = backgroundColor
+    }
+    
+    // MARK: - Equatable
+    
+    public static func == (lhs: QRCertificateConfiguration, rhs: QRCertificateConfiguration) -> Bool {
+        return lhs.title == rhs.title && lhs.subtitle == rhs.subtitle && lhs.qrValue == rhs.qrValue
     }
 }

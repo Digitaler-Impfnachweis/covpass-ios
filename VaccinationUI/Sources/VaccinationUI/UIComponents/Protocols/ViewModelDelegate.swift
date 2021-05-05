@@ -7,6 +7,6 @@
 
 import Foundation
 
-public protocol ViewModelDelegate: class {
+public protocol ViewModelDelegate: AnyObject {
     func shouldReload()
 }
