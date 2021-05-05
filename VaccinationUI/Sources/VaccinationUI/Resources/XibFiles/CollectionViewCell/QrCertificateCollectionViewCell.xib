@@ -22,35 +22,48 @@
                     <view contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DgT-IF-arn" userLabel="Container View">
                         <rect key="frame" x="20" y="44" width="374" height="546"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="nSa-2P-88e">
-                                <rect key="frame" x="0.0" y="0.0" width="374" height="546"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8UB-7x-Wld">
+                                <rect key="frame" x="0.0" y="-9" width="374" height="564"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="T1V-OB-XnR">
-                                        <rect key="frame" x="0.0" y="0.0" width="374" height="396"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" preservesSuperviewLayoutMargins="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="T1V-OB-XnR">
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="532"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" placeholderIntrinsicWidth="374" placeholderIntrinsicHeight="120" translatesAutoresizingMaskIntoConstraints="NO" id="pTs-ku-Q18" customClass="CardViewHeader" customModule="VaccinationUI">
-                                                <rect key="frame" x="0.0" y="0.0" width="374" height="120"/>
-                                                <color key="tintColor" systemColor="systemBlueColor"/>
-                                            </view>
-                                            <view contentMode="scaleToFill" placeholderIntrinsicWidth="374" placeholderIntrinsicHeight="30" translatesAutoresizingMaskIntoConstraints="NO" id="VUx-Xk-tTT" customClass="CardViewAction" customModule="VaccinationUI">
-                                                <rect key="frame" x="0.0" y="120" width="374" height="30"/>
+                                                <rect key="frame" x="24" y="0.0" width="326" height="120"/>
                                                 <color key="tintColor" systemColor="systemBlueColor"/>
                                             </view>
                                             <view contentMode="scaleToFill" placeholderIntrinsicWidth="358" placeholderIntrinsicHeight="246" translatesAutoresizingMaskIntoConstraints="NO" id="JXX-SM-lmC" customClass="QrContinerView" customModule="VaccinationUI">
-                                                <rect key="frame" x="0.0" y="150" width="374" height="246"/>
+                                                <rect key="frame" x="24" y="120" width="326" height="246"/>
+                                            </view>
+                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oUs-2O-r3G" customClass="PlainLabel" customModule="VaccinationUI">
+                                                <rect key="frame" x="24" y="366" width="326" height="128"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                            </view>
+                                            <view contentMode="scaleToFill" ambiguous="YES" placeholderIntrinsicWidth="374" placeholderIntrinsicHeight="30" translatesAutoresizingMaskIntoConstraints="NO" id="VUx-Xk-tTT" customClass="CardViewAction" customModule="VaccinationUI">
+                                                <rect key="frame" x="24" y="494" width="326" height="30"/>
+                                                <color key="tintColor" systemColor="systemBlueColor"/>
                                             </view>
                                         </subviews>
+                                        <edgeInsets key="layoutMargins" top="0.0" left="24" bottom="0.0" right="24"/>
                                     </stackView>
                                 </subviews>
-                                <edgeInsets key="layoutMargins" top="0.0" left="0.0" bottom="0.0" right="0.0"/>
-                            </stackView>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="T1V-OB-XnR" secondAttribute="trailing" id="0Wy-XA-YxV"/>
+                                    <constraint firstItem="T1V-OB-XnR" firstAttribute="top" secondItem="8UB-7x-Wld" secondAttribute="top" constant="34" id="KqA-lC-sOK"/>
+                                    <constraint firstItem="T1V-OB-XnR" firstAttribute="leading" secondItem="8UB-7x-Wld" secondAttribute="leading" id="Xmj-Xd-nFI"/>
+                                    <constraint firstAttribute="bottom" secondItem="T1V-OB-XnR" secondAttribute="bottom" constant="34" id="roh-W1-uUR"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="Z3p-F2-YpW"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="Avf-2N-heg"/>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" name="OnBrandAccent70"/>
                         <constraints>
-                            <constraint firstItem="nSa-2P-88e" firstAttribute="leading" secondItem="DgT-IF-arn" secondAttribute="leadingMargin" id="4WD-Lg-fgk"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="nSa-2P-88e" secondAttribute="trailing" id="aUR-nW-lyn"/>
-                            <constraint firstItem="nSa-2P-88e" firstAttribute="top" secondItem="DgT-IF-arn" secondAttribute="topMargin" id="uGk-fP-Pv6"/>
-                            <constraint firstAttribute="bottom" secondItem="nSa-2P-88e" secondAttribute="bottom" id="w1T-0N-OCa"/>
+                            <constraint firstItem="8UB-7x-Wld" firstAttribute="leading" secondItem="DgT-IF-arn" secondAttribute="leading" id="8Jg-nS-6ZF"/>
+                            <constraint firstItem="T1V-OB-XnR" firstAttribute="width" secondItem="DgT-IF-arn" secondAttribute="width" id="JgL-J3-n8V"/>
+                            <constraint firstAttribute="bottom" secondItem="8UB-7x-Wld" secondAttribute="bottom" id="PkU-Ro-Ug2"/>
+                            <constraint firstItem="8UB-7x-Wld" firstAttribute="top" secondItem="DgT-IF-arn" secondAttribute="top" id="bLy-fz-Acf"/>
+                            <constraint firstAttribute="trailing" secondItem="8UB-7x-Wld" secondAttribute="trailing" id="fdo-dS-NLS"/>
                         </constraints>
                         <edgeInsets key="layoutMargins" top="0.0" left="0.0" bottom="0.0" right="0.0"/>
                     </view>
@@ -70,6 +83,7 @@
                 <outlet property="contentStackView" destination="T1V-OB-XnR" id="Bsf-ww-2o1"/>
                 <outlet property="headerView" destination="pTs-ku-Q18" id="NbY-zP-9wf"/>
                 <outlet property="qrContinerView" destination="JXX-SM-lmC" id="R2G-bG-gJv"/>
+                <outlet property="titleView" destination="oUs-2O-r3G" id="wGh-Li-9mY"/>
             </connections>
             <point key="canvasLocation" x="-1049.2753623188407" y="225.66964285714283"/>
         </collectionViewCell>
@@ -78,6 +92,9 @@
         <namedColor name="OnBrandAccent70">
             <color red="0.024000000208616257" green="0.37299999594688416" blue="0.76899999380111694" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBlueColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

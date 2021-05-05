@@ -15,7 +15,6 @@ public class CardViewHeader: XibView {
     @IBOutlet public var stackView: UIStackView!
     @IBOutlet public var subtitleStackView: UIStackView!
     @IBOutlet public var subtitleLabel: UILabel!
-    @IBOutlet public var titleLabel: UILabel!
     @IBOutlet public var leftButton: UIButton!
     
     // MARK: - Variables
