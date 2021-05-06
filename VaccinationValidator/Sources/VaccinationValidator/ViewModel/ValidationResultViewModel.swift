@@ -33,7 +33,7 @@ open class ValidationResultViewModel: BaseViewModel {
         guard let cert = certificate else {
             return .error
         }
-        return cert.hcert.dgc.fullImmunization ? .full : .partial
+        return immunizationState(for: cert.hcert.dgc)
     }
 
     open var icon: UIImage? {
@@ -158,6 +158,18 @@ open class ValidationResultViewModel: BaseViewModel {
         case .failure(let error):
             throw error
         }
+    }
+
+    private func immunizationState(for certificate: DigitalGreenCertificate) -> Result {
+        let calendar = Calendar.current
+        if certificate.fullImmunization,
+           let vaccinationDate = certificate.v.last?.dt,
+           let validDate = calendar.date(byAdding: .weekOfYear, value: 2, to: vaccinationDate),
+           let validTimestamp = calendar.date(bySettingHour: 23, minute: 59, second: 59, of: validDate),
+           validTimestamp >= Date() {
+            return .partial
+        }
+        return certificate.fullImmunization ? .full : .partial
     }
 }
 
