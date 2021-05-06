@@ -165,7 +165,7 @@ open class ValidationResultViewModel: BaseViewModel {
         if certificate.fullImmunization,
            let vaccinationDate = certificate.v.last?.dt,
            let validDate = calendar.date(byAdding: .weekOfYear, value: 2, to: vaccinationDate),
-           validDate > Date() {
+           validDate >= Date() {
             return .partial
         }
         return certificate.fullImmunization ? .full : .partial
