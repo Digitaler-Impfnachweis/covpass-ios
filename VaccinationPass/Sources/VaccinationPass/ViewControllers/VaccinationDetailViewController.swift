@@ -25,7 +25,6 @@ public class VaccinationDetailViewController: UIViewController {
     @IBOutlet var deleteButton: MainButton!
     
     public var viewModel: VaccinationDetailViewModel!
-    public var router: PopupRouter!
     
     public override func viewDidLoad() {
         super.viewDidLoad()

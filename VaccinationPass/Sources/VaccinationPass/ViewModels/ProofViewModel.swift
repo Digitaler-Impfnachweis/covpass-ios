@@ -1,5 +1,5 @@
 //
-//  ProofPopupViewModel.swift
+//  ProofViewModel.swift
 //  
 //
 //  Copyright © 2021 IBM. All rights reserved.
@@ -9,7 +9,7 @@ import UIKit
 import PromiseKit
 import VaccinationUI
 
-public class ProofPopupViewModel: BaseViewModel {
+public class ProofViewModel: BaseViewModel {
     // MARK: - Properties
 
     public weak var delegate: ViewModelDelegate?

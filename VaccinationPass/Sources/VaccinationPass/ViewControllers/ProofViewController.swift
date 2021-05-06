@@ -1,5 +1,5 @@
 //
-//  ProofPopupViewController.swift
+//  ProofViewController.swift
 //  
 //
 //  Copyright © 2021 IBM. All rights reserved.
@@ -8,7 +8,7 @@
 import UIKit
 import VaccinationUI
 
-public class ProofPopupViewController: UIViewController {
+public class ProofViewController: UIViewController {
     // MARK: - IBOutlet
     
     @IBOutlet public var toolbarView: CustomToolbarView!
@@ -19,7 +19,7 @@ public class ProofPopupViewController: UIViewController {
 
     // MARK: - Internal Properties
 
-    public var viewModel: ProofPopupViewModel!
+    public var viewModel: ProofViewModel!
 
     // MARK: - Lifecycle
 
@@ -73,7 +73,7 @@ public class ProofPopupViewController: UIViewController {
 
 // MARK: - CustomToolbarViewDelegate
 
-extension ProofPopupViewController: CustomToolbarViewDelegate {
+extension ProofViewController: CustomToolbarViewDelegate {
     public func customToolbarView(_: CustomToolbarView, didTap buttonType: ButtonItemType) {
         switch buttonType {
         case .navigationArrow:
@@ -88,7 +88,7 @@ extension ProofPopupViewController: CustomToolbarViewDelegate {
 
 // MARK: - StoryboardInstantiating
 
-extension ProofPopupViewController: StoryboardInstantiating {
+extension ProofViewController: StoryboardInstantiating {
     public static var storyboardName: String {
         return UIConstants.Storyboard.Onboarding
     }

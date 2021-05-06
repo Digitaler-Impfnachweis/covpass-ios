@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -78,10 +78,10 @@
             </objects>
             <point key="canvasLocation" x="1105.7971014492755" y="-135.26785714285714"/>
         </scene>
-        <!--Proof Popup View Controller-->
+        <!--Proof View Controller-->
         <scene sceneID="qEE-hA-Zu3">
             <objects>
-                <viewController storyboardIdentifier="ProofPopupViewController" id="WLG-sy-0ob" customClass="ProofPopupViewController" customModule="VaccinationPass" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ProofViewController" id="WLG-sy-0ob" customClass="ProofViewController" customModule="VaccinationPass" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="DOt-h3-x7P">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -152,10 +152,10 @@
             </objects>
             <point key="canvasLocation" x="-1288" y="593"/>
         </scene>
-        <!--Scan Popup View Controller-->
+        <!--Scan View Controller-->
         <scene sceneID="yGT-Pv-Jva">
             <objects>
-                <viewController storyboardIdentifier="ScanPopupViewController" id="5Tg-9E-7X5" customClass="ScanPopupViewController" customModule="VaccinationUI" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ScanViewController" id="5Tg-9E-7X5" customClass="ScanViewController" customModule="VaccinationUI" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2O1-HV-Vz9">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

@@ -1,5 +1,5 @@
 //
-//  ProofPopupViewController.swift
+//  ScanViewController.swift
 //
 //
 //  Copyright © 2021 IBM. All rights reserved.
@@ -8,7 +8,7 @@
 import UIKit
 import Scanner
 
-public class ScanPopupViewController: UIViewController {
+public class ScanViewController: UIViewController {
     
     // MARK: - IBOutlet
     
@@ -17,7 +17,7 @@ public class ScanPopupViewController: UIViewController {
     
     // MARK: - Public Properties
     
-    public var viewModel: ScanPopupViewModel!
+    public var viewModel: ScanViewModel!
     
     // MARK: - Internal
     
@@ -50,7 +50,7 @@ public class ScanPopupViewController: UIViewController {
 
 // MARK: - CustomToolbarViewDelegate
 
-extension ScanPopupViewController: CustomToolbarViewDelegate {
+extension ScanViewController: CustomToolbarViewDelegate {
     public func customToolbarView(_: CustomToolbarView, didTap buttonType: ButtonItemType) {
         switch buttonType {
         case .navigationArrow:
@@ -65,7 +65,7 @@ extension ScanPopupViewController: CustomToolbarViewDelegate {
 
 // MARK: - StoryboardInstantiating
 
-extension ScanPopupViewController: StoryboardInstantiating {
+extension ScanViewController: StoryboardInstantiating {
     public static var storyboardName: String {
         return UIConstants.Storyboard.Onboarding
     }
@@ -73,13 +73,13 @@ extension ScanPopupViewController: StoryboardInstantiating {
 
 // MARK: - ScannerDelegate
 
-extension ScanPopupViewController: ScannerDelegate {
+extension ScanViewController: ScannerDelegate {
     public func result(with value: Swift.Result<String, ScanError>) {
         viewModel.onResult(value)
     }
 }
 
-extension ScanPopupViewController: ModalInteractiveDismissibleProtocol {
+extension ScanViewController: ModalInteractiveDismissibleProtocol {
     public func canDismissModalViewController() -> Bool {
         viewModel.isCancellable()
     }

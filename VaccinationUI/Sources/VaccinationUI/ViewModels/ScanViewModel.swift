@@ -11,7 +11,7 @@ import Scanner
 
 public typealias ScanResult = Swift.Result<String, ScanError>
 
-public class ScanPopupViewModel: CancellableViewModelProtocol {
+public class ScanViewModel: CancellableViewModelProtocol {
     // MARK - Properties
 
     let resolver: Resolver<ScanResult>
