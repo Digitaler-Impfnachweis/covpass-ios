@@ -23,6 +23,9 @@ public class CardViewHeader: XibView {
     public var buttonImage: UIImage? {
         didSet { leftButton.setImage(buttonImage, for: .normal) }
     }
+    public var buttonTint: UIColor? {
+        didSet { leftButton.tintColor = buttonTint ?? .black }
+    }
     
     // MARK: - IBAction
     
