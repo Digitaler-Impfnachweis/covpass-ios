@@ -63,7 +63,7 @@ public class QrCertificateCollectionViewCell: BaseCardCollectionViewCell {
 extension QrCertificateCollectionViewCell {
     public typealias T = QRCertificateConfiguration
 
-    // TODO refactor this shit to a viewmodel like every other view
+    // TODO refactor to view model
     public func configure(with configuration: T) {
         let tintColor: UIColor = configuration.tintColor
 
