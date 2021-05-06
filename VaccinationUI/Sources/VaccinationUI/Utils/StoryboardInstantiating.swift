@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-public protocol StoryboardInstantiating: class {
+public protocol StoryboardInstantiating: AnyObject {
     /// Name of the storyboard where the view controller is in
     static var storyboardName: String { get }
 

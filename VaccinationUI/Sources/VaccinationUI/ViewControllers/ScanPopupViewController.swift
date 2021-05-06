@@ -2,7 +2,7 @@
 //  ProofPopupViewController.swift
 //
 //
-//  Created by Daniel on 09.04.2021.
+//  Copyright © 2021 IBM. All rights reserved.
 //
 
 import UIKit
@@ -35,7 +35,7 @@ public class ScanPopupViewController: BottomPopupViewController {
     // MARK: - Private
 
     private func configureScanView() {
-        scanViewController = Scanner.viewController(codeTypes: [.qr], scanMode: .once, simulatedData: "This is Gabriela", delegate: self)
+        scanViewController = Scanner.viewController(codeTypes: [.qr], scanMode: .once, delegate: self)
         scanViewController?.view.frame = continer.bounds
         continer.addSubview(scanViewController!.view)
     }

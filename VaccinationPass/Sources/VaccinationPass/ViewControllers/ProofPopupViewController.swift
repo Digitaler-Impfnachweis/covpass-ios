@@ -7,6 +7,7 @@
 
 import UIKit
 import BottomPopup
+import VaccinationUI
 
 public class ProofPopupViewController: BottomPopupViewController {
     // MARK: - IBOutlet

@@ -22,7 +22,7 @@ public class QRCoder: QRCoderProtocol {
 
     public func parse(_ payload: String) -> Promise<CBORWebToken> {
         return Promise { seal in
-            var payload = payload.stripPrefix()
+            let payload = payload.stripPrefix()
             let base45Decoded = try base45Encoder.decode(payload)
             guard let decompressedPayload = Compression.decompress(Data(base45Decoded)) else {
                 throw ApplicationError.general("Could not decompress QR Code data")

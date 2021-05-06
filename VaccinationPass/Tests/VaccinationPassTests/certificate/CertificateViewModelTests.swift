@@ -46,13 +46,8 @@ class CertificateViewModelTests: XCTestCase {
         XCTAssertNotNil(sut)
     }
     
-//    func testProcessQr() {
-//        try! sut.process(payload: NSUUID().uuidString)
-//        XCTAssertTrue(sutDelegate.updateCalled)
-//    }
-    
     func testHeadline() {
-        XCTAssertEqual(sut.headlineTitle, "Übersicht aller Impfnachweise")
+        XCTAssertEqual(sut.headlineTitle, "Alle Zertifikate")
         XCTAssertEqual(sut.headlineButtonImage, .help)
     }
     

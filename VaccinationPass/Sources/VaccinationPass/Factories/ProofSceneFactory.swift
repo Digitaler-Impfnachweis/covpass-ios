@@ -7,13 +7,14 @@
 
 import UIKit
 import PromiseKit
+import VaccinationUI
 
 public struct ProofSceneFactory: ResolvableSceneFactory {
     // MARK: - Properties
 
     let router: ProofRouterProtocol
 
-    // MARK: - Lifecylce
+    // MARK: - Lifecycle
 
     public init(router: ProofRouterProtocol) {
         self.router = router
@@ -24,7 +25,7 @@ public struct ProofSceneFactory: ResolvableSceneFactory {
             router: router,
             resolvable: resolvable
         )
-        let viewController = ProofPopupViewController.createFromStoryboard()
+        let viewController = ProofPopupViewController.createFromStoryboard(bundle: Bundle.module)
         viewController.viewModel = viewModel
         return viewController
     }

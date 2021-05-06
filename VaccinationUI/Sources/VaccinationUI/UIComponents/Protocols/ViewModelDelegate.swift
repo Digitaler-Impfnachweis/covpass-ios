@@ -7,7 +7,7 @@
 
 import Foundation
 
-public protocol ViewModelDelegate: class {
+public protocol ViewModelDelegate: AnyObject {
     func viewModelDidUpdate()
     func viewModelUpdateDidFailWithError(_ error: Error)
 }

@@ -34,7 +34,7 @@ public class VaccinationDetailViewController: UIViewController {
     }
 
     private func setupNavigationBar() {
-        title = "vaccination_detail_title".localized
+        title = "vaccination_certificate_detail_view_title".localized
 
         navigationController?.navigationBar.backIndicatorImage = .arrowBack
         navigationController?.navigationBar.backIndicatorTransitionMaskImage = .arrowBack
@@ -83,21 +83,21 @@ public class VaccinationDetailViewController: UIViewController {
 
     private func setupPersonalData() {
         stackView.setCustomSpacing(.space_12, after: personalDataHeadline)
-        personalDataHeadline.attributedText = "vaccination_detail_personal_information".localized.styledAs(.header_2)
+        personalDataHeadline.attributedText = "vaccination_certificate_detail_view_personal_data_title".localized.styledAs(.header_2)
         personalDataHeadline.layoutMargins = .init(top: .space_30, left: .space_24, bottom: .zero, right: .space_24)
 
-        nameView.attributedTitleText = "vaccination_detail_name".localized.styledAs(.header_3)
+        nameView.attributedTitleText = "vaccination_certificate_detail_view_name".localized.styledAs(.header_3)
         nameView.attributedBodyText = viewModel?.name.styledAs(.body)
         nameView.contentView?.layoutMargins = .init(top: .space_12, left: .space_24, bottom: .space_12, right: .space_24)
         nameView.showBottomBorder()
 
-        birtdateView.attributedTitleText = "vaccination_detail_birthdate".localized.styledAs(.header_3)
+        birtdateView.attributedTitleText = "vaccination_certificate_detail_view_birthdate".localized.styledAs(.header_3)
         birtdateView.attributedBodyText = viewModel?.birthDate.styledAs(.body)
         birtdateView.contentView?.layoutMargins = .init(top: .space_12, left: .space_24, bottom: .space_12, right: .space_24)
     }
 
     private func setupDeleteButton() {
-        deleteButton.title = "vaccination_detail_delete".localized
+        deleteButton.title = "vaccination_certificate_detail_view_delete_button_title".localized
         deleteButton.style = .secondary
         deleteButton.icon = .delete
         deleteButton.action = { [weak self] in

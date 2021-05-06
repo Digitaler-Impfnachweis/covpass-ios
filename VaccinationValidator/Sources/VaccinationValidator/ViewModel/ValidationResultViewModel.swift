@@ -8,6 +8,7 @@
 import UIKit
 import PromiseKit
 import VaccinationCommon
+import VaccinationUI
 
 enum Result {
     case full
@@ -38,31 +39,31 @@ open class ValidationResultViewModel: BaseViewModel {
     open var icon: UIImage? {
         switch result {
         case .full:
-            return UIImage(named: "result_success", in: UIConstants.bundle, compatibleWith: nil)
+            return .resultSuccess
         case .partial, .error:
-            return UIImage(named: "result_error", in: UIConstants.bundle, compatibleWith: nil)
+            return .resultError
         }
     }
 
     open var resultTitle: String {
         switch result {
         case .full:
-            return "Impfschutz gültig"
+            return "validation_check_popup_valid_vaccination_title".localized
         case .partial:
-            return "Impfschutz nicht vollständig"
+            return "validation_check_popup_vaccination_not_completely_title".localized
         case .error:
-            return "Prüfung nicht erfolgreich"
+            return "validation_check_popup_unsuccessful_test_title".localized
         }
     }
 
     open var resultBody: String {
         switch result {
         case .full:
-            return "Gleichen Sie jetzt folgende Daten mit dem Personalausweis oder Reisepass ab."
+            return "validation_check_popup_valid_vaccination_message".localized
         case .partial:
-            return "Das geprüfte Zertifikat weist keine vollständige Impfung nach."
+            return "validation_check_popup_vaccination_not_completely_message".localized
         case .error:
-            return "Das kann zwei Gründe haben:"
+            return "validation_check_popup_unsuccessful_test_message".localized
         }
     }
 
@@ -71,7 +72,7 @@ open class ValidationResultViewModel: BaseViewModel {
         case .full, .partial:
             return certificate?.hcert.dgc.nam.fullName
         case .error:
-            return "Impfnachweis nicht gefunden"
+            return "validation_check_popup_unsuccessful_test_first_reason_title".localized
         }
     }
 
@@ -79,11 +80,29 @@ open class ValidationResultViewModel: BaseViewModel {
         switch result {
         case .full, .partial:
             if let date = certificate?.hcert.dgc.dob {
-                return "Geboren am \(DateUtils.displayDateFormatter.string(from: date))"
+                return String(format: "%@ %@", "validation_check_popup_partial_valid_vaccination_date_of_birth_at".localized, DateUtils.displayDateFormatter.string(from: date))
             }
             return nil
         case .error:
-            return "Es sind keine Daten auf dem Prüfzertifikat gespeichert. Sollten Sie sich im Offline-Modus befinden, aktualisieren Sie die App."
+            return "validation_check_popup_unsuccessful_test_first_reason_body".localized
+        }
+    }
+
+    open var errorTitle: String? {
+        switch result {
+        case .full, .partial:
+            return ""
+        case .error:
+            return "validation_check_popup_unsuccessful_test_second_reason_title".localized
+        }
+    }
+
+    open var errorBody: String? {
+        switch result {
+        case .full, .partial:
+            return ""
+        case .error:
+            return "validation_check_popup_unsuccessful_test_second_reason_body".localized
         }
     }
 
@@ -93,20 +112,12 @@ open class ValidationResultViewModel: BaseViewModel {
 
     // MARK - PopupRouter
 
+    // TODO Do we really need it here?!
     let height: CGFloat = 650
     let topCornerRadius: CGFloat = 20
     let presentDuration: Double = 0.5
     let dismissDuration: Double = 0.5
     let shouldDismissInteractivelty: Bool = true
-
-    //
-    public var image: UIImage?
-
-    public var title: String = ""
-
-    public var info: String = ""
-
-    public var backgroundColor: UIColor = UIColor.black
 
     // MARK: - Methods
 

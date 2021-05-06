@@ -7,6 +7,7 @@
 
 import UIKit
 
+// TODO REMOVE IT?!
 open class UIConstants {
     open class var bundle: Bundle {
         Bundle.module

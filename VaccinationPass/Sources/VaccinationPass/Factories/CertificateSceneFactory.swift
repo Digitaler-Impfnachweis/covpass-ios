@@ -15,7 +15,7 @@ struct CertificateSceneFactory: SceneFactory {
 
     let router: CertificateRouterProtocol
 
-    // MARK: - Lifecylce
+    // MARK: - Lifecycle
 
     init(router: CertificateRouterProtocol) {
         self.router = router

@@ -24,10 +24,6 @@ struct StartRouter: StartRouterProtocol {
     func showNextScene() {
         let router = OnboardingRouter(sceneCoordinator: sceneCoordinator)
         let factory = OnboardingSceneFactory(router: router)
-        let controller = OnboardingContainerViewController.createFromStoryboard()
-        let pageModels = OnboardingPageViewModelType.allCases.map { OnboardingPageViewModel(type: $0) }
-        controller.viewModel = OnboardingContainerViewModel(router: router, items: pageModels)
-
         sceneCoordinator.asRoot(factory)
     }
 }
