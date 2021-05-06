@@ -358,7 +358,7 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ifP-Gl-48h">
                                 <rect key="frame" x="0.0" y="124" width="414" height="654"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="1gh-Bm-jvT" customClass="ScrollableStackView" customModule="VaccinationUI">
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="1gh-Bm-jvT">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="456"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="qf0-Cy-1UM">
