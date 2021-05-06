@@ -9,7 +9,7 @@ import UIKit
 import PromiseKit
 import VaccinationUI
 
-public class ProofViewModel: BaseViewModel {
+public class ProofViewModel: BaseViewModel, CancellableViewModelProtocol {
     // MARK: - Properties
 
     public weak var delegate: ViewModelDelegate?
@@ -61,7 +61,7 @@ public class ProofViewModel: BaseViewModel {
         resolver.fulfill_()
     }
 
-    func cancel() {
+    public func cancel() {
         resolver.cancel()
     }
 
