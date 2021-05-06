@@ -48,5 +48,9 @@ class ValidationOnboardingPageViewModel: OnboardingPageViewModel {
             return ""
         }
     }
+
+    var toolbarState: CustomToolbarState {
+        .confirm("next_onboarding_page_button_title".localized)
+    }
 }
 

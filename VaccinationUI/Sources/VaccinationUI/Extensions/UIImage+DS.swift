@@ -33,6 +33,9 @@ extension UIImage {
     @ImageLoader(name: "onboarding_screen_3")
     public private(set) static var onboardingScreen3
 
+    @ImageLoader(name: "Illustration_consent")
+    public private(set) static var onboardingScreen4
+
     @ImageLoader(name: "illustration_1")
     public private(set) static var illustration1
 
@@ -98,6 +101,12 @@ extension UIImage {
 
     @ImageLoader(name: "warning")
     public private(set) static var warning
+
+    @ImageLoader(name: "ega_checkbox_checked")
+    public private(set) static var checkboxChecked
+
+    @ImageLoader(name: "ega_checkbox_unchecked")
+    public private(set) static var checkboxUnchecked
 
     @ImageLoader(name: "result_success")
     public private(set) static var resultSuccess

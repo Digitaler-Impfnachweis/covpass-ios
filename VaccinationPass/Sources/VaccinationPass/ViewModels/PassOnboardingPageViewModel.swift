@@ -16,6 +16,10 @@ class PassOnboardingPageViewModel: OnboardingPageViewModel {
         self.type = type
     }
 
+    var toolbarState: CustomToolbarState {
+        .confirm("next_onboarding_page_button_title".localized)
+    }
+
     var image: UIImage? {
         switch type {
         case .page1:
@@ -24,6 +28,8 @@ class PassOnboardingPageViewModel: OnboardingPageViewModel {
             return .onboardingScreen2
         case .page3:
             return .onboardingScreen3
+        default:
+            return nil
         }
     }
 
@@ -35,6 +41,8 @@ class PassOnboardingPageViewModel: OnboardingPageViewModel {
             return "vaccination_second_onboarding_page_title".localized
         case .page3:
             return "vaccination_third_onboarding_page_title".localized
+        default:
+            return ""
         }
     }
 
@@ -46,6 +54,8 @@ class PassOnboardingPageViewModel: OnboardingPageViewModel {
             return "vaccination_second_onboarding_page_message".localized
         case .page3:
             return "vaccination_third_onboarding_page_message".localized
+        default:
+            return ""
         }
     }
 }

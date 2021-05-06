@@ -7,7 +7,6 @@
 
 import UIKit
 
-@IBDesignable
 public class PlainLabel: XibView {
     @IBOutlet public var textableView: UILabel!
 

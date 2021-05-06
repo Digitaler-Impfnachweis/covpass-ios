@@ -48,7 +48,7 @@ public enum MainButtonStyle {
     public var disabledTextColor: UIColor {
         switch self {
         case .primary:
-            return .neutralWhite
+            return .onBackground70
         case .secondary:
             return .neutralBlack
         case .tertiary:
@@ -92,11 +92,11 @@ public enum MainButtonStyle {
     public var disabledBackgroundColor: UIColor {
         switch self {
         case .primary:
-            return .brandBase
+            return .backgroundSecondary20
         case .secondary:
             return .backgroundSecondary
         case .tertiary:
-            return .onBackground20
+            return .backgroundSecondary20
         }
     }
 
@@ -153,5 +153,9 @@ public enum MainButtonStyle {
         case .tertiary:
             return .clear
         }
+    }
+
+    public var disabledShadowColor: UIColor? {
+        .clear
     }
 }
