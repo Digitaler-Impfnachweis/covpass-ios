@@ -33,7 +33,7 @@ open class ValidationResultViewModel: BaseViewModel {
         guard let cert = certificate else {
             return .error
         }
-        return immunizationState(for: cert.hcert.dgc ) //cert.hcert.dgc.fullImmunization ? .full : .partial
+        return immunizationState(for: cert.hcert.dgc )
     }
 
     open var icon: UIImage? {
