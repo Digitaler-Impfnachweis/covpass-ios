@@ -27,7 +27,7 @@ public class VaccinationDetailViewModel {
     }
 
     public var fullImmunization: Bool {
-        certificates.map({ $0.vaccinationCertificate.hcert.dgc.fullImmunization }).first(where: { $0 }) ?? true
+        certificates.map({ $0.vaccinationCertificate.hcert.dgc.fullImmunization }).first(where: { $0 }) ?? false
     }
 
     public var isFavorite: Bool {
