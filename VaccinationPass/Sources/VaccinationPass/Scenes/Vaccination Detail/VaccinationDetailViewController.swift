@@ -128,7 +128,8 @@ extension VaccinationDetailViewController: StoryboardInstantiating {
     public static var bundle: Bundle {
         return Bundle.module
     }
+
     public static var storyboardName: String {
-        VaccinationPassConstants.Storyboard.Pass
+        "Pass"
     }
 }

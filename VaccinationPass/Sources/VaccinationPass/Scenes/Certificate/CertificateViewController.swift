@@ -144,7 +144,7 @@ extension CertificateViewController: DotPageIndicatorDelegate {
 
 extension CertificateViewController: StoryboardInstantiating {
     public static var storyboardName: String {
-        VaccinationPassConstants.Storyboard.Pass
+        "Pass"
     }
 }
 

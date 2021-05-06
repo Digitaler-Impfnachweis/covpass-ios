@@ -10,12 +10,6 @@ import PromiseKit
 import VaccinationCommon
 import VaccinationUI
 
-enum Result {
-    case full
-    case partial
-    case error
-}
-
 open class ValidationResultViewModel: BaseViewModel, CancellableViewModelProtocol {
     public weak var delegate: ViewModelDelegate?
     let router: ValidationResultRouterProtocol
@@ -29,7 +23,7 @@ open class ValidationResultViewModel: BaseViewModel, CancellableViewModelProtoco
         self.certificate = certificate
     }
 
-    private var result: Result {
+    private var immunizationState: ImmunizationState {
         guard let cert = certificate else {
             return .error
         }
@@ -37,7 +31,7 @@ open class ValidationResultViewModel: BaseViewModel, CancellableViewModelProtoco
     }
 
     open var icon: UIImage? {
-        switch result {
+        switch immunizationState {
         case .full:
             return .resultSuccess
         case .partial, .error:
@@ -46,7 +40,7 @@ open class ValidationResultViewModel: BaseViewModel, CancellableViewModelProtoco
     }
 
     open var resultTitle: String {
-        switch result {
+        switch immunizationState {
         case .full:
             return "validation_check_popup_valid_vaccination_title".localized
         case .partial:
@@ -57,7 +51,7 @@ open class ValidationResultViewModel: BaseViewModel, CancellableViewModelProtoco
     }
 
     open var resultBody: String {
-        switch result {
+        switch immunizationState {
         case .full:
             return "validation_check_popup_valid_vaccination_message".localized
         case .partial:
@@ -68,7 +62,7 @@ open class ValidationResultViewModel: BaseViewModel, CancellableViewModelProtoco
     }
 
     open var nameTitle: String? {
-        switch result {
+        switch immunizationState {
         case .full, .partial:
             return certificate?.hcert.dgc.nam.fullName
         case .error:
@@ -77,7 +71,7 @@ open class ValidationResultViewModel: BaseViewModel, CancellableViewModelProtoco
     }
 
     open var nameBody: String? {
-        switch result {
+        switch immunizationState {
         case .full, .partial:
             if let date = certificate?.hcert.dgc.dob {
                 return String(format: "%@ %@", "validation_check_popup_partial_valid_vaccination_date_of_birth_at".localized, DateUtils.displayDateFormatter.string(from: date))
@@ -89,7 +83,7 @@ open class ValidationResultViewModel: BaseViewModel, CancellableViewModelProtoco
     }
 
     open var errorTitle: String? {
-        switch result {
+        switch immunizationState {
         case .full, .partial:
             return ""
         case .error:
@@ -98,7 +92,7 @@ open class ValidationResultViewModel: BaseViewModel, CancellableViewModelProtoco
     }
 
     open var errorBody: String? {
-        switch result {
+        switch immunizationState {
         case .full, .partial:
             return ""
         case .error:
@@ -151,7 +145,7 @@ open class ValidationResultViewModel: BaseViewModel, CancellableViewModelProtoco
         }
     }
 
-    private func immunizationState(for certificate: DigitalGreenCertificate) -> Result {
+    private func immunizationState(for certificate: DigitalGreenCertificate) -> ImmunizationState {
         let calendar = Calendar.current
         if certificate.fullImmunization,
            let vaccinationDate = certificate.v.last?.dt,
