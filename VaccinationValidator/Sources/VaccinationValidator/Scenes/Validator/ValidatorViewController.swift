@@ -44,6 +44,9 @@ public class ValidatorViewController: UIViewController {
     public func setupHeaderView() {
         headerView.attributedTitleText = viewModel?.title.styledAs(.header_2)
         headerView.image = .help
+        headerView.action = { [weak self] in
+            self?.viewModel.showAppInformation()
+        }
     }
     
     // MARK: - Card View

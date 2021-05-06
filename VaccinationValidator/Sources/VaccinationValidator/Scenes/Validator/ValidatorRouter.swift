@@ -38,4 +38,12 @@ class ValidatorRouter: ValidatorRouterProtocol {
             )
         )
     }
+
+    func showAppInformation() {
+        sceneCoordinator.push(
+            ValidatorAppInformationSceneFactory(
+                router: AppInformationRouter(sceneCoordinator: sceneCoordinator)
+            )
+        )
+    }
 }
