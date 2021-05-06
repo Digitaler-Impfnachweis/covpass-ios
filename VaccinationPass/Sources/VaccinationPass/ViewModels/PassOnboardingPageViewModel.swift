@@ -8,15 +8,15 @@
 import UIKit
 import VaccinationUI
 
-open class PassOnboardingPageViewModel: OnboardingPageViewModel {
-    public weak var delegate: ViewModelDelegate?
-    public var type: OnboardingPageViewModelType
+class PassOnboardingPageViewModel: OnboardingPageViewModel {
+    weak var delegate: ViewModelDelegate?
+    var type: OnboardingPageViewModelType
 
-    public init(type: OnboardingPageViewModelType) {
+    init(type: OnboardingPageViewModelType) {
         self.type = type
     }
 
-    open var image: UIImage? {
+    var image: UIImage? {
         switch type {
         case .page1:
             return .onboardingScreen1
@@ -27,7 +27,7 @@ open class PassOnboardingPageViewModel: OnboardingPageViewModel {
         }
     }
 
-    open var title: String {
+    var title: String {
         switch type {
         case .page1:
             return "vaccination_first_onboarding_page_title".localized
@@ -38,7 +38,7 @@ open class PassOnboardingPageViewModel: OnboardingPageViewModel {
         }
     }
 
-    open var info: String {
+    var info: String {
         switch type {
         case .page1:
             return "vaccination_first_onboarding_page_message".localized

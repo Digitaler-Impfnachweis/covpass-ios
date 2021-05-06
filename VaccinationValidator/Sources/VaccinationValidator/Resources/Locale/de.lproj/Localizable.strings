@@ -80,15 +80,21 @@
 
 "validation_check_popup_partial_valid_vaccination_date_of_birth" = "Geburtsdatum";
 
+"validation_check_popup_partial_valid_vaccination_date_of_birth_at" = "Geboren am";
+
 "validation_check_popup_partial_valid_vaccination_button_title" = "Nächsten QR-Code scannen";
 
 "validation_check_popup_unsuccessful_test_title" = "Prüfung nicht erfolgreich";
 
 "validation_check_popup_unsuccessful_test_message" = "Das kann folgende Gründe haben:";
 
-"validation_check_popup_unsuccessful_test_first_reason" = "Prüfzertifikat nicht gefunden: Es sind keine Daten auf dem Prüfzertifikat gespeichert. Sollten Sie sich im Offline-Modus befinden, aktualisieren Sie die App.";
+"validation_check_popup_unsuccessful_test_first_reason_title" = "Prüfzertifikat nicht gefunden:";
 
-"validation_check_popup_unsuccessful_test_second_reason" = "Prüfzertifikat abgelaufen: Das Prüfzertifikat ist nicht mehr gültig. Der aktuelle Status kann in der Impfnachweis-App eingesehen werden.";
+"validation_check_popup_unsuccessful_test_second_reason_title" = "Prüfzertifikat abgelaufen:";
+
+"validation_check_popup_unsuccessful_test_first_reason_body" = "Es sind keine Daten auf dem Prüfzertifikat gespeichert. Sollten Sie sich im Offline-Modus befinden, aktualisieren Sie die App.";
+
+"validation_check_popup_unsuccessful_test_second_reason_body" = "Das Prüfzertifikat ist nicht mehr gültig. Der aktuelle Status kann in der Impfnachweis-App eingesehen werden.";
 
 "validation_check_popup_unsuccessful_test_button_title" = "Nächsten QR-Code scannen";
 

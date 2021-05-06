@@ -25,8 +25,8 @@ struct StartRouter: StartRouterProtocol {
         let router = OnboardingRouter(sceneCoordinator: sceneCoordinator)
         let factory = OnboardingSceneFactory(router: router)
         let controller = OnboardingContainerViewController.createFromStoryboard()
-        let pageModels = OnboardingPageViewModelType.allCases.map { OnboardingPageViewModel(type: $0) }
-        controller.viewModel = OnboardingContainerViewModel(router: router, items: pageModels)
+        let pageModels = OnboardingPageViewModelType.allCases.map { ValidationOnboardingPageViewModel(type: $0) }
+        controller.viewModel = ValidationOnboardingContainerViewModel(router: router, items: pageModels)
 
         sceneCoordinator.asRoot(factory)
     }

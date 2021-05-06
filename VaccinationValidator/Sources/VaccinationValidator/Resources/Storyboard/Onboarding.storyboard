@@ -78,117 +78,6 @@
             </objects>
             <point key="canvasLocation" x="1105.7971014492755" y="-135.26785714285714"/>
         </scene>
-        <!--Proof Popup View Controller-->
-        <scene sceneID="qEE-hA-Zu3">
-            <objects>
-                <viewController storyboardIdentifier="ProofPopupViewController" id="WLG-sy-0ob" customClass="ProofPopupViewController" customModule="VaccinationUI" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="DOt-h3-x7P">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="60" translatesAutoresizingMaskIntoConstraints="NO" id="jX9-UW-4T8" customClass="InfoHeaderView" customModule="VaccinationUI">
-                                <rect key="frame" x="0.0" y="64" width="414" height="60"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="9xJ-Qd-f5x"/>
-                                </constraints>
-                            </view>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Pw-wA-kA9">
-                                <rect key="frame" x="0.0" y="124" width="414" height="682"/>
-                                <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="I0B-wx-NK9">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="418"/>
-                                        <subviews>
-                                            <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="xWE-Gn-WTl" customClass="ParagraphView" customModule="VaccinationUI">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="128"/>
-                                            </view>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="250" translatesAutoresizingMaskIntoConstraints="NO" id="GkY-Eb-KGx">
-                                                <rect key="frame" x="0.0" y="128" width="414" height="250"/>
-                                            </imageView>
-                                            <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="40" translatesAutoresizingMaskIntoConstraints="NO" id="BZA-KE-FmB" customClass="InfoHeaderView" customModule="VaccinationUI">
-                                                <rect key="frame" x="0.0" y="378" width="414" height="40"/>
-                                            </view>
-                                        </subviews>
-                                    </stackView>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstItem="I0B-wx-NK9" firstAttribute="trailing" secondItem="3kv-Z3-Icm" secondAttribute="trailing" id="4sA-ru-NSM"/>
-                                    <constraint firstItem="I0B-wx-NK9" firstAttribute="width" secondItem="yzh-Nt-LyK" secondAttribute="width" id="Jhe-Qq-HRb"/>
-                                    <constraint firstItem="I0B-wx-NK9" firstAttribute="bottom" secondItem="3kv-Z3-Icm" secondAttribute="bottom" id="NUn-ag-cPc"/>
-                                    <constraint firstItem="3kv-Z3-Icm" firstAttribute="top" secondItem="I0B-wx-NK9" secondAttribute="top" id="Ulb-d0-kTu"/>
-                                    <constraint firstItem="I0B-wx-NK9" firstAttribute="leading" secondItem="3kv-Z3-Icm" secondAttribute="leading" id="ybz-Do-uud"/>
-                                </constraints>
-                                <viewLayoutGuide key="contentLayoutGuide" id="3kv-Z3-Icm"/>
-                                <viewLayoutGuide key="frameLayoutGuide" id="yzh-Nt-LyK"/>
-                            </scrollView>
-                            <view contentMode="scaleToFill" placeholderIntrinsicWidth="240" placeholderIntrinsicHeight="56" translatesAutoresizingMaskIntoConstraints="NO" id="BKV-kV-ew0" customClass="CustomToolbarView" customModule="VaccinationUI">
-                                <rect key="frame" x="0.0" y="806" width="414" height="56"/>
-                            </view>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="0pZ-8t-H7B"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="BKV-kV-ew0" firstAttribute="top" secondItem="3Pw-wA-kA9" secondAttribute="bottom" id="INl-34-Ifo"/>
-                            <constraint firstItem="3Pw-wA-kA9" firstAttribute="trailing" secondItem="0pZ-8t-H7B" secondAttribute="trailing" id="JGl-0l-PYV"/>
-                            <constraint firstItem="3Pw-wA-kA9" firstAttribute="leading" secondItem="0pZ-8t-H7B" secondAttribute="leading" id="JxB-3g-ETp"/>
-                            <constraint firstItem="0pZ-8t-H7B" firstAttribute="trailing" secondItem="BKV-kV-ew0" secondAttribute="trailing" id="O4d-nT-oRN"/>
-                            <constraint firstItem="3Pw-wA-kA9" firstAttribute="top" secondItem="jX9-UW-4T8" secondAttribute="bottom" id="P31-r1-KmI"/>
-                            <constraint firstItem="jX9-UW-4T8" firstAttribute="trailing" secondItem="0pZ-8t-H7B" secondAttribute="trailing" id="Rac-SI-NXe"/>
-                            <constraint firstItem="jX9-UW-4T8" firstAttribute="top" secondItem="0pZ-8t-H7B" secondAttribute="top" constant="20" id="Ran-DZ-C08"/>
-                            <constraint firstItem="BKV-kV-ew0" firstAttribute="leading" secondItem="0pZ-8t-H7B" secondAttribute="leading" id="egu-aZ-lec"/>
-                            <constraint firstItem="jX9-UW-4T8" firstAttribute="leading" secondItem="0pZ-8t-H7B" secondAttribute="leading" id="ghj-WS-Fbz"/>
-                            <constraint firstItem="BKV-kV-ew0" firstAttribute="bottom" secondItem="0pZ-8t-H7B" secondAttribute="bottom" id="grv-Wg-gao"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="actionView" destination="BZA-KE-FmB" id="qW7-Ik-d1k"/>
-                        <outlet property="descriptionText" destination="xWE-Gn-WTl" id="Mz0-M3-G9w"/>
-                        <outlet property="headline" destination="jX9-UW-4T8" id="RwH-7I-EZY"/>
-                        <outlet property="imageView" destination="GkY-Eb-KGx" id="4iQ-2r-uv7"/>
-                        <outlet property="toolbarView" destination="BKV-kV-ew0" id="jeZ-Xf-FM4"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="8fL-4N-I0x" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1288" y="593"/>
-        </scene>
-        <!--Scan Popup View Controller-->
-        <scene sceneID="yGT-Pv-Jva">
-            <objects>
-                <viewController storyboardIdentifier="ScanPopupViewController" id="5Tg-9E-7X5" customClass="ScanPopupViewController" customModule="VaccinationUI" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="2O1-HV-Vz9">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IXO-Mg-ArT" userLabel="Container">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="806"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                            </view>
-                            <view contentMode="scaleToFill" placeholderIntrinsicWidth="240" placeholderIntrinsicHeight="56" translatesAutoresizingMaskIntoConstraints="NO" id="zHj-fD-Rzv" customClass="CustomToolbarView" customModule="VaccinationUI">
-                                <rect key="frame" x="0.0" y="806" width="414" height="56"/>
-                            </view>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="C6Q-Sz-16j"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="zHj-fD-Rzv" firstAttribute="trailing" secondItem="C6Q-Sz-16j" secondAttribute="trailing" id="1xU-Nw-IGh"/>
-                            <constraint firstItem="IXO-Mg-ArT" firstAttribute="trailing" secondItem="C6Q-Sz-16j" secondAttribute="trailing" id="Gyt-GF-bo8"/>
-                            <constraint firstItem="zHj-fD-Rzv" firstAttribute="top" secondItem="IXO-Mg-ArT" secondAttribute="bottom" id="Jog-tu-xE5"/>
-                            <constraint firstItem="IXO-Mg-ArT" firstAttribute="leading" secondItem="C6Q-Sz-16j" secondAttribute="leading" id="mdV-ql-Ikk"/>
-                            <constraint firstItem="IXO-Mg-ArT" firstAttribute="top" secondItem="2O1-HV-Vz9" secondAttribute="top" id="q0z-lf-CF3"/>
-                            <constraint firstItem="zHj-fD-Rzv" firstAttribute="leading" secondItem="C6Q-Sz-16j" secondAttribute="leading" id="uPE-zN-mn1"/>
-                            <constraint firstItem="zHj-fD-Rzv" firstAttribute="bottom" secondItem="C6Q-Sz-16j" secondAttribute="bottom" id="wvC-2V-gZ8"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="continer" destination="IXO-Mg-ArT" id="VVu-id-Fea"/>
-                        <outlet property="toolbarView" destination="zHj-fD-Rzv" id="Dwv-im-Dwk"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="8qR-2w-JRm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-323.1884057971015" y="592.63392857142856"/>
-        </scene>
         <!--Onboarding Container View Controller-->
         <scene sceneID="CGh-rv-i0p">
             <objects>
@@ -263,7 +152,7 @@
         <!--Start Onboarding View Controller-->
         <scene sceneID="iRn-hF-CnH">
             <objects>
-                <viewController storyboardIdentifier="StartOnboardingViewController" id="4f1-2B-1Lo" customClass="StartOnboardingViewController" customModule="VaccinationUI" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="StartOnboardingViewController" id="4f1-2B-1Lo" customClass="StartOnboardingViewController" customModule="VaccinationValidator" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xci-yh-6XR">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -346,7 +235,7 @@
         <!--Validation Result View Controller-->
         <scene sceneID="0gP-gs-dYe">
             <objects>
-                <viewController storyboardIdentifier="ValidationResultViewController" id="LGG-67-6dI" customClass="ValidationResultViewController" customModule="VaccinationUI" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ValidationResultViewController" id="LGG-67-6dI" customClass="ValidationResultViewController" customModule="VaccinationValidator" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gvb-Cv-Q50">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -440,12 +329,6 @@
         </scene>
     </scenes>
     <designables>
-        <designable name="BKV-kV-ew0">
-            <size key="intrinsicContentSize" width="240" height="56"/>
-        </designable>
-        <designable name="BZA-KE-FmB">
-            <size key="intrinsicContentSize" width="414" height="40"/>
-        </designable>
         <designable name="DcZ-ry-4Hc">
             <size key="intrinsicContentSize" width="240" height="56"/>
         </designable>
@@ -464,9 +347,6 @@
         <designable name="cTS-h6-fh3">
             <size key="intrinsicContentSize" width="414" height="128"/>
         </designable>
-        <designable name="jX9-UW-4T8">
-            <size key="intrinsicContentSize" width="414" height="60"/>
-        </designable>
         <designable name="kFp-28-n6g">
             <size key="intrinsicContentSize" width="414" height="128"/>
         </designable>
@@ -479,13 +359,7 @@
         <designable name="u6z-A1-sKt">
             <size key="intrinsicContentSize" width="414" height="128"/>
         </designable>
-        <designable name="xWE-Gn-WTl">
-            <size key="intrinsicContentSize" width="414" height="128"/>
-        </designable>
         <designable name="z1w-BA-0EP">
-            <size key="intrinsicContentSize" width="240" height="56"/>
-        </designable>
-        <designable name="zHj-fD-Rzv">
             <size key="intrinsicContentSize" width="240" height="56"/>
         </designable>
         <designable name="zgZ-oc-hQh">

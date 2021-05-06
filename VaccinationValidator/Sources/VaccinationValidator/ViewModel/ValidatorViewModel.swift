@@ -20,19 +20,19 @@ public class ValidatorViewModel {
     
     // MARK: - Internal
     
-    var title: String { "Prüf-App" }
-    
-    var titles = [
-        "Wie nutze ich den digitalen Nachweis?",
-        "Woher bekomme ich einen QR Code?",
-        "Was passiert mit meinen Daten?"]
-    
-    func configure(cell: ActionCell, at indexPath: IndexPath) {
-        cell.configure(title: titles[indexPath.row], icon: .chevronRight)
-    }
+    var title: String { "validation_start_screen_title".localized }
 
-    public func process(payload: String) -> Promise<CBORWebToken> {
-        return repository.checkValidationCertificate(payload)
+    // TODO implmement logic
+    var offlineTitle: String {
+        if true {
+            return "validation_start_screen_offline_modus_note_latest_version".localized
+        } else {
+            return "validation_start_screen_offline_modus_note_old_version".localized
+        }
+    }
+    var offlineMessage: String {
+        let date = "01.01.1970"
+        return String(format: "%@ %@", "validation_start_screen_offline_modus_note_update".localized, date)
     }
     
     // MARK: - UIConfigureation
@@ -46,6 +46,12 @@ public class ValidatorViewModel {
     public init(router: ValidatorRouterProtocol, repository: VaccinationRepositoryProtocol) {
         self.router = router
         self.repository = repository
+    }
+
+    // MARK: - Actions
+
+    public func process(payload: String) -> Promise<CBORWebToken> {
+        return repository.checkValidationCertificate(payload)
     }
 
     func startQRCodeValidation() {

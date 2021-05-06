@@ -8,35 +8,42 @@
 import UIKit
 import VaccinationUI
 
-public class ValidationOnboardingPageViewModel: OnboardingPageViewModel {
-    public override var image: UIImage? {
+class ValidationOnboardingPageViewModel: OnboardingPageViewModel {
+    weak var delegate: ViewModelDelegate?
+    var type: OnboardingPageViewModelType
+
+    init(type: OnboardingPageViewModelType) {
+        self.type = type
+    }
+
+    var image: UIImage? {
         switch self.type {
         case .page1:
-            return UIImage(named: "illustration_2", in: UIConstants.bundle, compatibleWith: nil)
+            return .illustration2
         case .page2:
-            return UIImage(named: "illustration_3", in: UIConstants.bundle, compatibleWith: nil)
+            return .illustration3
         default:
             return nil
         }
     }
 
-    public override var title: String {
+    var title: String {
         switch self.type {
         case .page1:
-            return "validation_step1_title".localized
+            return "validation_first_onboarding_page_title".localized
         case .page2:
-            return "validation_step2_title".localized
+            return "validation_second_onboarding_page_title".localized
         default:
             return ""
         }
     }
 
-    public override var info: String {
+    var info: String {
         switch self.type {
         case .page1:
-            return "validation_step1_body".localized
+            return "validation_first_onboarding_page_message".localized
         case .page2:
-            return "validation_step2_body".localized
+            return "validation_second_onboarding_page_message".localized
         default:
             return ""
         }

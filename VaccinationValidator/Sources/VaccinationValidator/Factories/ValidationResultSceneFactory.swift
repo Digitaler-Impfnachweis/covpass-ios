@@ -8,6 +8,7 @@
 import UIKit
 import PromiseKit
 import VaccinationCommon
+import VaccinationUI
 
 public struct ValidationResultSceneFactory: SceneFactory {
     // MARK: - Properties

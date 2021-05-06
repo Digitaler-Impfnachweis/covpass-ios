@@ -49,18 +49,18 @@ public class ValidatorViewController: UIViewController {
     // MARK: - Card View
 
     func setupCardView() {
-        scanCard.titleLabel.attributedText = "Impfschutz prüfen".styledAs(.header_1).colored(.backgroundSecondary)
-        scanCard.textLabel.attributedText = "Scannen Sie jetzt das Prüfzertifikat. Sie sehen sofort ob die Person geimpft ist.".styledAs(.body).colored(.backgroundSecondary)
-        scanCard.actionButton.title = "Zertifikat scannen"
+        scanCard.titleLabel.attributedText = "validation_start_screen_Scan_title".localized.styledAs(.header_1).colored(.backgroundSecondary)
+        scanCard.textLabel.attributedText = "validation_start_screen_Scan_message".localized.styledAs(.body).colored(.backgroundSecondary)
+        scanCard.actionButton.title = "validation_start_screen_Scan_action_button_title".localized
         scanCard.actionButton.action = { [weak self] in
             self?.viewModel.startQRCodeValidation()
         }
 
-        offlineCard.titleLabel.attributedText = "Offline-Modus".styledAs(.header_2)
-        offlineCard.textLable.attributedText = "Um offline prüfen zu können, halten Sie die App auf dem aktuellsten Stand. Stellen Sie dafür ab und an eine Verbindung mit dem Internet her.".styledAs(.body)
-        offlineCard.infoLabel.attributedText = "Aktualisieren Sie die App".styledAs(.body)
+        offlineCard.titleLabel.attributedText = "validation_start_screen_offline_modus_title".localized.styledAs(.header_2)
+        offlineCard.textLable.attributedText = "validation_start_screen_offline_modus_message".localized.styledAs(.body)
+        offlineCard.infoLabel.attributedText = viewModel.offlineTitle.styledAs(.body)
         offlineCard.infoImageView.image = .warning
-        offlineCard.dateLabel.attributedText = "Letztes Update: 01.01.1971, 05:36".styledAs(.body).colored(.onBackground70)
+        offlineCard.dateLabel.attributedText = viewModel.offlineMessage.styledAs(.body).colored(.onBackground70)
     }
 }
 
