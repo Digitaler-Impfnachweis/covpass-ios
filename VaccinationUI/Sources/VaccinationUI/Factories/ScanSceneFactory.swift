@@ -16,9 +16,10 @@ public struct ScanSceneFactory: ResolvableSceneFactory {
     // MARK: - Methods
 
     public func make(resolvable: Resolver<ScanResult>) -> UIViewController {
-        let viewModel = ScanPopupViewModel(resolvable: resolvable)
-        let viewController = ScanPopupViewController.createFromStoryboard()
+        let viewModel = ScanViewModel(resolvable: resolvable)
+        let viewController = ScanViewController.createFromStoryboard()
         viewController.viewModel = viewModel
+        viewController.modalPresentationStyle = .fullScreen
         return viewController
     }
 }

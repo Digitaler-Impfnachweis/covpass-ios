@@ -16,7 +16,7 @@ enum Result {
     case error
 }
 
-open class ValidationResultViewModel: BaseViewModel {
+open class ValidationResultViewModel: BaseViewModel, CancellableViewModelProtocol {
     public weak var delegate: ViewModelDelegate?
     let router: ValidationResultRouterProtocol
     private let parser: QRCoder = QRCoder()
@@ -110,18 +110,9 @@ open class ValidationResultViewModel: BaseViewModel {
         .close
     }
 
-    // MARK - PopupRouter
-
-    // TODO Do we really need it here?!
-    let height: CGFloat = 650
-    let topCornerRadius: CGFloat = 20
-    let presentDuration: Double = 0.5
-    let dismissDuration: Double = 0.5
-    let shouldDismissInteractivelty: Bool = true
-
     // MARK: - Methods
 
-    func cancel() {
+    public func cancel() {
         router.showStart()
     }
 

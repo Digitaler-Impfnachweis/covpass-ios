@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -78,10 +78,10 @@
             </objects>
             <point key="canvasLocation" x="1105.7971014492755" y="-135.26785714285714"/>
         </scene>
-        <!--Proof Popup View Controller-->
+        <!--Proof View Controller-->
         <scene sceneID="qEE-hA-Zu3">
             <objects>
-                <viewController storyboardIdentifier="ProofPopupViewController" id="WLG-sy-0ob" customClass="ProofPopupViewController" customModule="VaccinationPass" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ProofViewController" id="WLG-sy-0ob" customClass="ProofViewController" customModule="VaccinationPass" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="DOt-h3-x7P">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -152,10 +152,10 @@
             </objects>
             <point key="canvasLocation" x="-1288" y="593"/>
         </scene>
-        <!--Scan Popup View Controller-->
+        <!--Scan View Controller-->
         <scene sceneID="yGT-Pv-Jva">
             <objects>
-                <viewController storyboardIdentifier="ScanPopupViewController" id="5Tg-9E-7X5" customClass="ScanPopupViewController" customModule="VaccinationUI" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ScanViewController" id="5Tg-9E-7X5" customClass="ScanViewController" customModule="VaccinationUI" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2O1-HV-Vz9">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -198,13 +198,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ELU-e8-hMC">
-                                <rect key="frame" x="0.0" y="44" width="414" height="720"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="705"/>
                                 <connections>
                                     <segue destination="h9P-jE-8JB" kind="embed" id="ip2-dZ-nAW"/>
                                 </connections>
                             </containerView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C1A-5U-JZx" userLabel="Bottom Container View">
-                                <rect key="frame" x="0.0" y="764" width="414" height="98"/>
+                                <rect key="frame" x="0.0" y="749" width="414" height="113"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="P8K-We-hUP">
                                         <rect key="frame" x="0.0" y="15" width="414" height="83"/>
@@ -225,7 +225,7 @@
                                     <constraint firstAttribute="trailingMargin" secondItem="P8K-We-hUP" secondAttribute="trailing" id="Tee-Bb-bhJ"/>
                                     <constraint firstAttribute="bottomMargin" secondItem="P8K-We-hUP" secondAttribute="bottom" id="f63-uw-POE"/>
                                 </constraints>
-                                <edgeInsets key="layoutMargins" top="15" left="0.0" bottom="0.0" right="0.0"/>
+                                <edgeInsets key="layoutMargins" top="15" left="0.0" bottom="15" right="0.0"/>
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="hN0-zA-OAK"/>
@@ -269,7 +269,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kS1-Kd-7Rh">
-                                <rect key="frame" x="0.0" y="44" width="414" height="747"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="732"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="TTC-yw-sLe">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="666"/>
@@ -303,7 +303,7 @@
                                 <viewLayoutGuide key="frameLayoutGuide" id="gw7-mb-82G"/>
                             </scrollView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tcR-S1-wXD" userLabel="Bottom Container View">
-                                <rect key="frame" x="0.0" y="791" width="414" height="71"/>
+                                <rect key="frame" x="0.0" y="776" width="414" height="86"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" placeholderIntrinsicWidth="240" placeholderIntrinsicHeight="56" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="z1w-BA-0EP" customClass="MainButton" customModule="VaccinationUI">
                                         <rect key="frame" x="87" y="15" width="240" height="56"/>
@@ -315,7 +315,7 @@
                                     <constraint firstAttribute="bottomMargin" secondItem="z1w-BA-0EP" secondAttribute="bottom" id="47g-jZ-Ivb"/>
                                     <constraint firstItem="z1w-BA-0EP" firstAttribute="top" secondItem="tcR-S1-wXD" secondAttribute="topMargin" id="Fva-hL-QhR"/>
                                 </constraints>
-                                <edgeInsets key="layoutMargins" top="15" left="0.0" bottom="0.0" right="0.0"/>
+                                <edgeInsets key="layoutMargins" top="15" left="0.0" bottom="15" right="0.0"/>
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="gs3-HV-KW2"/>
@@ -358,7 +358,7 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ifP-Gl-48h">
                                 <rect key="frame" x="0.0" y="124" width="414" height="654"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="1gh-Bm-jvT" customClass="ScrollableStackView" customModule="VaccinationUI">
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="1gh-Bm-jvT">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="456"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="qf0-Cy-1UM">

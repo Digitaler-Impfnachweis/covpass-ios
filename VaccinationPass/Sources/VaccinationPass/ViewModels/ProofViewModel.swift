@@ -1,5 +1,5 @@
 //
-//  ProofPopupViewModel.swift
+//  ProofViewModel.swift
 //  
 //
 //  Copyright © 2021 IBM. All rights reserved.
@@ -9,7 +9,7 @@ import UIKit
 import PromiseKit
 import VaccinationUI
 
-public class ProofPopupViewModel: BaseViewModel {
+public class ProofViewModel: BaseViewModel, CancellableViewModelProtocol {
     // MARK: - Properties
 
     public weak var delegate: ViewModelDelegate?
@@ -47,14 +47,6 @@ public class ProofPopupViewModel: BaseViewModel {
     public var backgroundColor: UIColor { .backgroundPrimary }
     var tintColor: UIColor { .brandAccent }
     
-    // MARK - PopupRouter
-    
-    let height: CGFloat = 700 // heights should be calculated by autolayout
-    let topCornerRadius: CGFloat = 20
-    let presentDuration: Double = 0.5
-    let dismissDuration: Double = 0.5
-    let shouldDismissInteractivelty: Bool = true
-
     // MARK: - Lifecycle
 
     public init(
@@ -69,7 +61,7 @@ public class ProofPopupViewModel: BaseViewModel {
         resolver.fulfill_()
     }
 
-    func cancel() {
+    public func cancel() {
         resolver.cancel()
     }
 

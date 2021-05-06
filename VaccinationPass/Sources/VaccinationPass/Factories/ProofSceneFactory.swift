@@ -21,12 +21,13 @@ public struct ProofSceneFactory: ResolvableSceneFactory {
     }
 
     public func make(resolvable: Resolver<Void>) -> UIViewController {
-        let viewModel = ProofPopupViewModel(
+        let viewModel = ProofViewModel(
             router: router,
             resolvable: resolvable
         )
-        let viewController = ProofPopupViewController.createFromStoryboard(bundle: Bundle.module)
+        let viewController = ProofViewController.createFromStoryboard(bundle: Bundle.module)
         viewController.viewModel = viewModel
+
         return viewController
     }
 }

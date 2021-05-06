@@ -1,15 +1,14 @@
 //
-//  ProofPopupViewController.swift
+//  ProofViewController.swift
 //  
 //
 //  Copyright © 2021 IBM. All rights reserved.
 //
 
 import UIKit
-import BottomPopup
 import VaccinationUI
 
-public class ProofPopupViewController: BottomPopupViewController {
+public class ProofViewController: UIViewController {
     // MARK: - IBOutlet
     
     @IBOutlet public var toolbarView: CustomToolbarView!
@@ -20,7 +19,7 @@ public class ProofPopupViewController: BottomPopupViewController {
 
     // MARK: - Internal Properties
 
-    public var viewModel: ProofPopupViewModel!
+    public var viewModel: ProofViewModel!
 
     // MARK: - Lifecycle
 
@@ -70,18 +69,11 @@ public class ProofPopupViewController: BottomPopupViewController {
         toolbarView.layoutMargins.top = .space_24
         toolbarView.delegate = self
     }
-
-    public override var popupHeight: CGFloat { viewModel.height }
-    public override var popupTopCornerRadius: CGFloat { viewModel.topCornerRadius }
-    public override var popupPresentDuration: Double { viewModel.presentDuration }
-    public override var popupDismissDuration: Double { viewModel.dismissDuration }
-    public override var popupShouldDismissInteractivelty: Bool { viewModel.shouldDismissInteractivelty }
-    public override var popupDimmingViewAlpha: CGFloat { 0.5 }
 }
 
 // MARK: - CustomToolbarViewDelegate
 
-extension ProofPopupViewController: CustomToolbarViewDelegate {
+extension ProofViewController: CustomToolbarViewDelegate {
     public func customToolbarView(_: CustomToolbarView, didTap buttonType: ButtonItemType) {
         switch buttonType {
         case .navigationArrow:
@@ -96,8 +88,16 @@ extension ProofPopupViewController: CustomToolbarViewDelegate {
 
 // MARK: - StoryboardInstantiating
 
-extension ProofPopupViewController: StoryboardInstantiating {
+extension ProofViewController: StoryboardInstantiating {
     public static var storyboardName: String {
         return UIConstants.Storyboard.Onboarding
+    }
+}
+
+// MARK: - ModalInteractiveDismissibleProtocol
+
+extension ProofViewController: ModalInteractiveDismissibleProtocol {
+    public func modalViewControllerDidDismiss() {
+        viewModel.cancel()
     }
 }
