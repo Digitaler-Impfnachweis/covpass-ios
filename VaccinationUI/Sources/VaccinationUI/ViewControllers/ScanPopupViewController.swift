@@ -78,3 +78,13 @@ extension ScanPopupViewController: ScannerDelegate {
         viewModel.onResult(value)
     }
 }
+
+extension ScanPopupViewController: ModalInteractiveDismissibleProtocol {
+    public func canDismissModalViewController() -> Bool {
+        viewModel.isCancellable()
+    }
+
+    public func modalViewControllerDidDismiss() {
+        viewModel.cancel()
+    }
+}

@@ -16,7 +16,7 @@ enum Result {
     case error
 }
 
-open class ValidationResultViewModel: BaseViewModel {
+open class ValidationResultViewModel: BaseViewModel, CancellableViewModelProtocol {
     public weak var delegate: ViewModelDelegate?
     let router: ValidationResultRouterProtocol
     private let parser: QRCoder = QRCoder()
@@ -112,7 +112,7 @@ open class ValidationResultViewModel: BaseViewModel {
 
     // MARK: - Methods
 
-    func cancel() {
+    public func cancel() {
         router.showStart()
     }
 

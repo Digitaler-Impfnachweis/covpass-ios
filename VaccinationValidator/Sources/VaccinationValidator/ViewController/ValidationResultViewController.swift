@@ -104,3 +104,12 @@ extension ValidationResultViewController: StoryboardInstantiating {
     }
 }
 
+extension ValidationResultViewController: ModalInteractiveDismissibleProtocol {
+    public func canDismissModalViewController() -> Bool {
+        viewModel.isCancellable()
+    }
+
+    public func modalViewControllerDidDismiss() {
+        viewModel.cancel()
+    }
+}
