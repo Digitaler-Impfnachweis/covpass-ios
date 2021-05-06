@@ -7,6 +7,7 @@
 
 import UIKit
 import PromiseKit
+import VaccinationUI
 
 public protocol ValidationResultRouterProtocol: RouterProtocol {
     func showStart()

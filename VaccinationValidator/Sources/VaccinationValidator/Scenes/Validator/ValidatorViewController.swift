@@ -68,6 +68,6 @@ public class ValidatorViewController: UIViewController {
 
 extension ValidatorViewController: StoryboardInstantiating {
     public static var storyboardName: String {
-        return ValidatorPassConstants.Storyboard.Pass
+        "Validator"
     }
 }
