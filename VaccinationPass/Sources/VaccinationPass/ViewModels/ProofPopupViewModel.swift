@@ -47,14 +47,6 @@ public class ProofPopupViewModel: BaseViewModel {
     public var backgroundColor: UIColor { .backgroundPrimary }
     var tintColor: UIColor { .brandAccent }
     
-    // MARK - PopupRouter
-    
-    let height: CGFloat = 700 // heights should be calculated by autolayout
-    let topCornerRadius: CGFloat = 20
-    let presentDuration: Double = 0.5
-    let dismissDuration: Double = 0.5
-    let shouldDismissInteractivelty: Bool = true
-
     // MARK: - Lifecycle
 
     public init(

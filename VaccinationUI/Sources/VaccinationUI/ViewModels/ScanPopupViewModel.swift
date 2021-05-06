@@ -16,14 +16,6 @@ public class ScanPopupViewModel {
 
     let resolver: Resolver<ScanResult>
 
-    // MARK - PopupRouter
-
-    let height: CGFloat = UIScreen.main.bounds.height - 100
-    let topCornerRadius: CGFloat = 20
-    let presentDuration: Double = 0.5
-    let dismissDuration: Double = 0.5
-    let shouldDismissInteractivelty: Bool = true
-
     // MARK - Lifecycle
 
     public init(resolvable: Resolver<ScanResult>) {

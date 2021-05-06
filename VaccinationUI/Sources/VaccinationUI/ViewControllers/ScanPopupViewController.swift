@@ -6,10 +6,9 @@
 //
 
 import UIKit
-import BottomPopup
 import Scanner
 
-public class ScanPopupViewController: BottomPopupViewController {
+public class ScanPopupViewController: UIViewController {
     
     // MARK: - IBOutlet
     
@@ -47,13 +46,6 @@ public class ScanPopupViewController: BottomPopupViewController {
         toolbarView.layoutMargins.top = .space_24
         toolbarView.delegate = self
     }
-
-    public override var popupHeight: CGFloat { viewModel.height }
-    public override var popupTopCornerRadius: CGFloat { viewModel.topCornerRadius }
-    public override var popupPresentDuration: Double { viewModel.presentDuration }
-    public override var popupDismissDuration: Double { viewModel.dismissDuration }
-    public override var popupShouldDismissInteractivelty: Bool { viewModel.shouldDismissInteractivelty }
-    public override var popupDimmingViewAlpha: CGFloat { 0.5 }
 }
 
 // MARK: - CustomToolbarViewDelegate
