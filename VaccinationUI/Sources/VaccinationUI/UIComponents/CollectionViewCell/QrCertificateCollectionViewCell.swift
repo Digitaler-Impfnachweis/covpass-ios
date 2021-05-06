@@ -62,7 +62,8 @@ public class QrCertificateCollectionViewCell: BaseCardCollectionViewCell {
 
 extension QrCertificateCollectionViewCell {
     public typealias T = QRCertificateConfiguration
-    
+
+    // TODO refactor this shit to a viewmodel like every other view
     public func configure(with configuration: T) {
         let tintColor: UIColor = configuration.tintColor
 
@@ -73,6 +74,8 @@ extension QrCertificateCollectionViewCell {
         }
         headerView.subtitleLabel.attributedText = configuration.title?.styledAs(.body).colored(tintColor)
         headerView.tintColor = tintColor
+        headerView.buttonImage = (configuration.isFavorite ? UIImage.starFull : UIImage.starPartial).withRenderingMode(.alwaysTemplate)
+        headerView.buttonTint = configuration.isFullImmunization ? .neutralWhite : .darkText
         contentStackView.setCustomSpacing(.space_12, after: headerView)
 
         qrContinerView.image = configuration.qrValue?.makeQr(size: UIScreen.main.bounds.size)

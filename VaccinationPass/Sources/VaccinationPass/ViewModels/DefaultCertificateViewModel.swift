@@ -139,7 +139,9 @@ public class DefaultCertificateViewModel: CertificateViewModel {
             headerImage: .starEmpty,
             favoriteAction: favoriteAction,
             backgroundColor: .onBrandAccent70,
-            tintColor: UIColor.white)
+            tintColor: UIColor.white,
+            isFavorite: certificate.vaccinationCertificate.hcert.dgc.v.first?.ci == certificateList.favoriteCertificateId,
+            isFullImmunization: certificate.vaccinationCertificate.hcert.dgc.fullImmunization)
     }
 
     private func halfCertificateConfiguration(for certificate: ExtendedCBORWebToken) -> QRCertificateConfiguration {
@@ -151,7 +153,9 @@ public class DefaultCertificateViewModel: CertificateViewModel {
             stateTitle: "vaccination_partial_immunization_action_button".localized,
             headerImage: .starEmpty,
             favoriteAction: favoriteAction,
-            backgroundColor: .onBackground50)
+            backgroundColor: .onBackground50,
+            isFavorite: certificate.vaccinationCertificate.hcert.dgc.v.first?.ci == certificateList.favoriteCertificateId,
+            isFullImmunization: certificate.vaccinationCertificate.hcert.dgc.fullImmunization)
 
     }
     
