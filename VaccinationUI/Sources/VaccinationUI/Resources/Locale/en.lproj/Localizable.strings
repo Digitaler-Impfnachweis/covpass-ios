@@ -23,11 +23,17 @@
 
 "vaccination_third_onboarding_page_title" = "Weisen Sie Ihren Impfschutz schnnell und sicher mit dem Impfticket nach";
 
+"vaccination_consent_page_title" = "Zustimmung für die Nutzung";
+
 "vaccination_first_onboarding_page_message" = "Gut zu wissen: Sie können den QR-Code nur ein mal verwenden. Die Impfbescheinigung ist anschließend an das einlesende Smartphone gebunden.";
 
 "vaccination_second_onboarding_page_message" = "Tipp: Speichern Sie Impfbescheinigungen von der ganzen Familie zusammen auf einem Smartphone und verwalten Sie diese sicher mit der App.";
 
 "vaccination_third_onboarding_page_message" = "Sobald Ihr Impfschutz vollständig ist, erstellt die App automatisch einen Nachweis mit QR-Code. Dieses Impfticket enthält nur die nötigsten Daten. Zeigen Sie es zum Beispiel bei Flugreisen vor.";
+
+"vaccination_consent_page_message" = "Um die App zu nutzen, müssen Sie bestätigen, dass Sie die Datenschuterklärung zur Kenntnis genommen haben.";
+
+"vaccination_data_privacy_disclaimer" = "Ich habe die Datenschutzerklärung zur Kenntnis genommen.";
 
 
 /********** Start Screen **********/

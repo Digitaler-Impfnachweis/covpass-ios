@@ -22,3 +22,9 @@
 "validation_step2_title" = "Zweiter Schritt: Überprüfen Sie die Indentität mit einem amtlichen Ausweis";
 
 "validation_step2_body" = "Sie sehen nur den Impfstatus sowie Namen und Geburtsdatum der geimpften Person. Zur sicheren Identifikation gleichen Sie bitte die Daten mit einem Personalausweis oder Reisepass ab.";
+
+"validation_consent_page_title" = "Zustimmung für die Nutzung der Prüf-App";
+
+"validation_consent_page_message" = "Um die Prüf-App zu nutzen, müssen Sie bestätigen, dass Sie die Datenschuterklärung zur Kenntnis genommen haben.";
+
+"validation_data_privacy_disclaimer" = "Ich habe die Datenschutzerklärung zur Kenntnis genommen.";

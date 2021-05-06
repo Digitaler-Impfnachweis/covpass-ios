@@ -62,7 +62,7 @@ open class OnboardingPageViewModel: BaseViewModel {
     }
 
     open var dataPrivacyTitle: NSAttributedString {
-        NSMutableAttributedString(string: "vaccination_data_privacy_disclaimer".localized).addLink(url: "https://www.coronawarn.app/assets/documents/cwa-privacy-notice-de.pdf", in: "Datenschutzerklärung").styledAs(.body)
+        NSMutableAttributedString(string: "vaccination_data_privacy_disclaimer".localized).addLink(url: "https://www.digitaler-impfnachweis-app.de/webviews/client-app/privacy/", in: "Datenschutzerklärung").styledAs(.body)
     }
 
     // MARK: - Settings
