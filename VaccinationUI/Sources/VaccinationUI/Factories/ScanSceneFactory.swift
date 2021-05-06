@@ -19,6 +19,7 @@ public struct ScanSceneFactory: ResolvableSceneFactory {
         let viewModel = ScanViewModel(resolvable: resolvable)
         let viewController = ScanViewController.createFromStoryboard()
         viewController.viewModel = viewModel
+        viewController.modalPresentationStyle = .fullScreen
         return viewController
     }
 }
