@@ -17,10 +17,7 @@ class ConsentViewController: UIViewController {
 
     // MARK: - Properties
 
-    var viewModel: BaseViewModel?
-    var inputViewModel: OnboardingPageViewModel {
-        viewModel as? OnboardingPageViewModel ?? OnboardingPageViewModel(type: .page4)
-    }
+    var viewModel: ConsentPageViewModel?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,23 +31,26 @@ class ConsentViewController: UIViewController {
     // MARK: - Private
 
     private func configureImageView() {
-        imageView.image = inputViewModel.image
+        imageView.image = viewModel?.image
         imageView.pinHeightToScaleAspectFit()
     }
 
     private func configureHeadline() {
-        headline.attributedText = inputViewModel.title.styledAs(.header_2)
+        headline.attributedText = viewModel?.title.styledAs(.header_2)
         headline.layoutMargins = .init(top: .space_40, left: .space_24, bottom: .zero, right: .space_24)
     }
 
     private func configureParagraphView() {
-        descriptionText.attributedText = inputViewModel.info.styledAs(.body).colored(.onBackground70)
+        descriptionText.attributedText = viewModel?.info.styledAs(.body).colored(.onBackground70)
         descriptionText.layoutMargins = .init(top: .space_12, left: .space_24, bottom: .zero, right: .space_24)
     }
 
     private func configureCheckboxes() {
-        dataPrivacyCheckbox.textView.attributedText = inputViewModel.dataPrivacyTitle
+        dataPrivacyCheckbox.textView.attributedText = viewModel?.dataPrivacyTitle
         dataPrivacyCheckbox.layoutMargins = .init(top: .space_40, left: .space_24, bottom: .zero, right: .space_24)
+        dataPrivacyCheckbox.didChangeState = { [weak self] in
+            self?.viewModel?.isGranted = $0
+        }
     }
 }
 

@@ -42,7 +42,10 @@ public class MainButton: XibView {
 
     public var isEnabled: Bool {
         get { innerButton.isEnabled }
-        set { innerButton.isEnabled = newValue }
+        set {
+            innerButton.isEnabled = newValue
+            updateAppearence()
+        }
     }
 
     public var action: (() -> Void)?
@@ -169,6 +172,7 @@ public class MainButton: XibView {
         updateBackgroundColor()
         updateLayer()
         updateInsets()
+        updateShadow()
     }
 
     private func updateBackgroundColor() {
@@ -179,6 +183,8 @@ public class MainButton: XibView {
             backgroundColor = style.selectedBackgroundColor
         case .highlighted:
             backgroundColor = style.highlightedBackgroundColor
+        case .disabled:
+            backgroundColor = style.disabledBackgroundColor
         default:
             break
         }
@@ -192,13 +198,23 @@ public class MainButton: XibView {
             layer.borderColor = style.selectedBorderColor?.cgColor
         case .highlighted:
             layer.borderColor = style.highlightedBorderColor?.cgColor
+        case .disabled:
+            layer.borderColor = style.disabledBorderColor?.cgColor
         default:
             break
         }
 
         layer.cornerRadius = bounds.height / 2
+    }
+
+    private func updateShadow() {
+        switch innerButton.state {
+        case .disabled:
+            layer.shadowColor = style.disabledShadowColor?.cgColor
+        default:
+            layer.shadowColor = style.shadowColor?.cgColor
+        }
         layer.shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: layer.cornerRadius).cgPath
-        layer.shadowColor = style.shadowColor?.cgColor
     }
 
     private func updateInsets() {

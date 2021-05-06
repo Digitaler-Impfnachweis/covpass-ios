@@ -14,14 +14,16 @@ public enum OnboardingPageViewModelType: CaseIterable {
     case page4
 }
 
-//    open var dataPrivacyTitle: NSAttributedString {
-//        NSMutableAttributedString(string: "vaccination_data_privacy_disclaimer".localized).addLink(url: "https://www.digitaler-impfnachweis-app.de/webviews/client-app/privacy/", in: "Datenschutzerklärung").styledAs(.body)
-//    }
-
 public protocol OnboardingPageViewModel {
     var delegate: ViewModelDelegate? { get set }
     var type: OnboardingPageViewModelType { get set }
+    var toolbarState: CustomToolbarState { get }
     var image: UIImage? { get }
     var title: String { get }
     var info: String { get }
+}
+
+public protocol ConsentPageViewModel: OnboardingPageViewModel {
+    var dataPrivacyTitle: NSAttributedString { get }
+    var isGranted: Bool { get set }
 }

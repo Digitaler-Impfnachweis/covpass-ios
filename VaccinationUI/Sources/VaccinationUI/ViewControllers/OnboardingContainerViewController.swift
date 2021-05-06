@@ -11,7 +11,7 @@ enum OnboardingError: Error {
     case closeError
 }
 
-public class OnboardingContainerViewController: UIViewController {
+public class OnboardingContainerViewController: UIViewController, ViewModelDelegate {
     // MARK: - IBOutlets
 
     @IBOutlet var toolbarView: CustomToolbarView!
@@ -39,25 +39,38 @@ public class OnboardingContainerViewController: UIViewController {
         view.backgroundColor = .neutralWhite
 
         viewModel.items.forEach { model in
-            var controller: UIViewController
-            if model.type == .page4 {
-                controller = ConsentViewController.createFromStoryboard(bundle: UIConstants.bundle)
-                (controller as? ConsentViewController)?.viewModel = model
-            } else {
-                controller = OnboardingPageViewController.createFromStoryboard(bundle: UIConstants.bundle)
-                (controller as? OnboardingPageViewController)?.viewModel = model
+            var pageViewModel = model
+            pageViewModel.delegate = self
+            var pageViewController: UIViewController
+            switch pageViewModel {
+            case let consentViewModel as ConsentPageViewModel:
+                let viewController = ConsentViewController.createFromStoryboard(bundle: UIConstants.bundle)
+                viewController.viewModel = consentViewModel
+                pageViewController = viewController
+            default:
+                let viewController = OnboardingPageViewController.createFromStoryboard(bundle: UIConstants.bundle)
+                viewController.viewModel = pageViewModel
+                pageViewController = viewController
             }
-            pages.append(controller)
+            pages.append(pageViewController)
         }
         configureToolbarView()
         configurePageIndicator()
         configurePageController()
     }
 
+    public func viewModelDidUpdate() {
+        updateToolbarForPage(at: currentIndex)
+    }
+    
+    public func viewModelUpdateDidFailWithError(_ error: Error) {
+        
+    }
+
     // MARK: - Private
 
     private func configureToolbarView() {
-        toolbarView.state = .confirm(viewModel?.startButtonTitle ?? "Los geht's")
+        updateToolbarForPage(at: currentIndex)
         toolbarView.setUpLeftButton(leftButtonItem: .navigationArrow)
         toolbarView.delegate = self
     }
@@ -72,6 +85,11 @@ public class OnboardingContainerViewController: UIViewController {
         pageController?.dataSource = self
         pageController?.delegate = self
         pageController?.setViewControllers([pages[currentIndex]], direction: .forward, animated: false, completion: nil)
+    }
+
+    private func updateToolbarForPage(at index: Int) {
+        guard let state = viewModel?.items[index].toolbarState else { return }
+        toolbarView.state = state
     }
 }
 
@@ -141,18 +159,9 @@ extension OnboardingContainerViewController: CustomToolbarViewDelegate {
         default:
             return
         }
+        updateToolbarForPage(at: currentIndex)
     }
 }
-
-// MARK: - CheckboxViewDelegate
-
-extension OnboardingContainerViewController: CheckboxViewDelegate {
-    public func didSelectCheckboxView(_ state: Bool) {
-        toolbarView.state = state ? .confirm(viewModel?.confirmButtonTitle ?? "Bestätigen") : .disabledWithText(viewModel?.confirmButtonTitle ?? "Bestätigen")
-    }
-}
-
-// MARK: - StoryboardInstantiating
 
 extension OnboardingContainerViewController: StoryboardInstantiating {
     public static var storyboardName: String {
