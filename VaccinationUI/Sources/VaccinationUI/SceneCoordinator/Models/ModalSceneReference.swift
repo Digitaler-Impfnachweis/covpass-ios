@@ -18,21 +18,24 @@ class ModalSceneReference: NSObject, UIAdaptivePresentationControllerDelegate {
     // MARK: - Methods
 
     func presentationControllerShouldDismiss(_ presentationController: UIPresentationController) -> Bool {
-        getDismissible(from: presentationController.presentedViewController)?.canDismissModalViewController() ?? true
+        presentationController
+            .presentedViewController
+            .modalInteractiveDismissible()?
+            .canDismissModalViewController()
+            ?? true
     }
 
     func presentationControllerDidAttemptToDismiss(_ presentationController: UIPresentationController) {
-        getDismissible(from: presentationController.presentedViewController)?.modalViewControllerDidAttemptToDismiss()
+        presentationController
+            .presentedViewController
+            .modalInteractiveDismissible()?
+            .modalViewControllerDidAttemptToDismiss()
     }
 
     func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
-        getDismissible(from: presentationController.presentedViewController)?.modalViewControllerDidDismiss()
-    }
-
-    private func getDismissible(from viewController: UIViewController) -> ModalInteractiveDismissibleProtocol? {
-        if let dissmisable = viewController as? ModalInteractiveDismissibleProtocol {
-            return dissmisable
-        }
-        return (viewController as? UINavigationController)?.topViewController as? ModalInteractiveDismissibleProtocol
+        presentationController
+            .presentedViewController
+            .modalInteractiveDismissible()?
+            .modalViewControllerDidDismiss()
     }
 }

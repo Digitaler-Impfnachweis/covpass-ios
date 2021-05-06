@@ -58,8 +58,7 @@ public class DefaultSceneCoordinator: SceneCoordinator {
             completion: nil
         )
 
-        // ModalSceneReference needs iOS 13 APIs.
-        if #available(iOS 13.0, *), viewController is ModalInteractiveDismissibleProtocol {
+        if viewController.modalInteractiveDismissible() != nil {
             let reference = ModalSceneReference(viewController: viewController)
             modalSceneStack.append(reference)
         }

@@ -93,3 +93,11 @@ extension ProofViewController: StoryboardInstantiating {
         return UIConstants.Storyboard.Onboarding
     }
 }
+
+// MARK: - ModalInteractiveDismissibleProtocol
+
+extension ProofViewController: ModalInteractiveDismissibleProtocol {
+    public func modalViewControllerDidDismiss() {
+        viewModel.cancel()
+    }
+}

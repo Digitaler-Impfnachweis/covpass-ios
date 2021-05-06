@@ -27,6 +27,8 @@ public struct ProofSceneFactory: ResolvableSceneFactory {
         )
         let viewController = ProofViewController.createFromStoryboard(bundle: Bundle.module)
         viewController.viewModel = viewModel
-        return viewController
+
+        return UINavigationController(rootViewController: viewController)
+        //return viewController
     }
 }
