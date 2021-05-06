@@ -120,7 +120,7 @@ class MainButtonTests: XCTestCase {
 
     func testEnable() {
         // Given
-        let expectedText = "Test".styledAs(.mainButton).aligned(to: .center).colored(.neutralWhite)
+        let expectedText = "Test".styledAs(.mainButton).aligned(to: .center).colored(.onBackground70)
         sut.title = expectedText.string
 
         // When
@@ -134,7 +134,7 @@ class MainButtonTests: XCTestCase {
 
     func testDisable() {
         // Given
-        let expectedText = "Test".styledAs(.mainButton).aligned(to: .center).colored(.neutralWhite)
+        let expectedText = "Test".styledAs(.mainButton).aligned(to: .center).colored(.onBackground70)
         sut.title = expectedText.string
 
         // When
@@ -142,7 +142,7 @@ class MainButtonTests: XCTestCase {
 
         // Then
         XCTAssertFalse(sut.isEnabled, "Button should not be enabled.")
-        XCTAssertEqual(sut.backgroundColor, .brandBase, "Button background color should match.")
+        XCTAssertEqual(sut.backgroundColor, .backgroundSecondary20, "Button background color should match.")
         XCTAssertEqual(sut.innerButton.attributedTitle(for: .disabled), expectedText)
     }
 }
