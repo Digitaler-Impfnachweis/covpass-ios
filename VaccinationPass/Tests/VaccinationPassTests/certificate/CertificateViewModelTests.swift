@@ -47,7 +47,7 @@ class CertificateViewModelTests: XCTestCase {
     }
     
     func testHeadline() {
-        XCTAssertEqual(sut.headlineTitle, "Übersicht aller Impfnachweise")
+        XCTAssertEqual(sut.headlineTitle, "Alle Zertifikate")
         XCTAssertEqual(sut.headlineButtonImage, .help)
     }
     
