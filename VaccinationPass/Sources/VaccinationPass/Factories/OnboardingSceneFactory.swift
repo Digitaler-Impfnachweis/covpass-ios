@@ -6,22 +6,23 @@
 //
 
 import UIKit
+import VaccinationUI
 
 public struct OnboardingSceneFactory: SceneFactory {
     // MARK: - Properties
 
     let router: OnboardingRouterProtocol
 
-    // MARK: - Lifecylce
+    // MARK: - Lifecycle
 
     public init(router: OnboardingRouterProtocol) {
         self.router = router
     }
 
     public func make() -> UIViewController {
-        let viewController = OnboardingContainerViewController.createFromStoryboard()
-        let pageModels = OnboardingPageViewModelType.allCases.map { OnboardingPageViewModel(type: $0) }
-        viewController.viewModel = OnboardingContainerViewModel(
+        let viewController = OnboardingContainerViewController.createFromStoryboard(bundle: Bundle.module)
+        let pageModels = OnboardingPageViewModelType.allCases.map { PassOnboardingPageViewModel(type: $0) }
+        viewController.viewModel = PassOnboardingContainerViewModel(
             router: router,
             items: pageModels
         )

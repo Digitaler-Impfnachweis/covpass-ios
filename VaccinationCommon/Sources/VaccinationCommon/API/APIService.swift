@@ -26,7 +26,7 @@ public struct APIService: APIServiceProtocol {
 
     public func reissue(_ vaccinationQRCode: String) -> Promise<String> {
         return Promise { seal in
-            var code = vaccinationQRCode.stripPrefix()
+            let code = vaccinationQRCode.stripPrefix()
             let base45Decoded = try encoder.decode(code)
             guard let decompressedPayload = Compression.decompress(Data(base45Decoded)) else {
                 seal.reject(ApplicationError.unknownError)

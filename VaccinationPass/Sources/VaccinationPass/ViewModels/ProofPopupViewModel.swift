@@ -7,6 +7,7 @@
 
 import UIKit
 import PromiseKit
+import VaccinationUI
 
 public class ProofPopupViewModel: BaseViewModel {
     // MARK: - Properties
@@ -20,18 +21,18 @@ public class ProofPopupViewModel: BaseViewModel {
     }
 
     public var title: String {
-        "vaccination_proof_popup_title".localized
+        "vaccination_add_popup_title".localized
     }
 
     public var info: String {
-        "vaccination_proof_popup_message".localized
+        "vaccination_add_popup_message".localized
     }
     
     var actionTitle: String {
-        "vaccination_proof_popup_action_title".localized
+        "vaccination_add_popup_action_title".localized
     }
     
-    var startButtonTitle: String { "vaccination_proof_popup_scan_title".localized }
+    var startButtonTitle: String { "vaccination_add_popup_scan_button_title".localized }
     
     var closeButtonImage: UIImage? {
         .close

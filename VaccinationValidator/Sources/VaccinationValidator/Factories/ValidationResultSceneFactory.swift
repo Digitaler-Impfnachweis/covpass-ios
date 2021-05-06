@@ -8,6 +8,7 @@
 import UIKit
 import PromiseKit
 import VaccinationCommon
+import VaccinationUI
 
 public struct ValidationResultSceneFactory: SceneFactory {
     // MARK: - Properties
@@ -15,7 +16,7 @@ public struct ValidationResultSceneFactory: SceneFactory {
     let router: ValidationResultRouterProtocol
     let certificate: CBORWebToken
 
-    // MARK: - Lifecylce
+    // MARK: - Lifecycle
 
     public init(
         router: ValidationResultRouterProtocol,

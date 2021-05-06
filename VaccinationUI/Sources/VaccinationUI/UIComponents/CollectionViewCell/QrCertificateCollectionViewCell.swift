@@ -80,7 +80,7 @@ extension QrCertificateCollectionViewCell {
         qrContinerView.isHidden = configuration.qrValue == nil
 
         titleView.textableView.attributedText = configuration.subtitle?.styledAs(.header_1).colored(tintColor)
-        titleView.backgroundColor = .brandBase
+        titleView.backgroundColor = .clear
         contentStackView.setCustomSpacing(.space_12, after: titleView)
 
         actionView.stateImageView.image = configuration.stateImage

@@ -7,6 +7,7 @@
 
 import UIKit
 import BottomPopup
+import VaccinationUI
 
 public class ValidationResultViewController: BottomPopupViewController, ViewModelDelegate {
     // MARK: - IBOutlet
@@ -18,6 +19,7 @@ public class ValidationResultViewController: BottomPopupViewController, ViewMode
     @IBOutlet public var imageView: UIImageView!
     @IBOutlet public var resultView: ParagraphView!
     @IBOutlet public var nameView: ParagraphView!
+    @IBOutlet public var errorView: ParagraphView!
 
     // MARK: - Public Properties
 
@@ -52,6 +54,9 @@ public class ValidationResultViewController: BottomPopupViewController, ViewMode
 
         nameView.attributedTitleText = viewModel.nameTitle?.styledAs(.header_3)
         nameView.attributedBodyText = viewModel.nameBody?.styledAs(.body)
+
+        errorView.attributedTitleText = viewModel.errorTitle?.styledAs(.header_3)
+        errorView.attributedBodyText = viewModel.errorBody?.styledAs(.body)
     }
 
     private func configureImageView() {
@@ -70,11 +75,11 @@ public class ValidationResultViewController: BottomPopupViewController, ViewMode
 
     private func configureParagraphView() {
         stackView.setCustomSpacing(.space_24, after: resultView)
-        nameView.image = .warning
+        nameView.image = .data
     }
 
     private func configureToolbarView() {
-        toolbarView.state = .confirm("Nächstes Zertifikat scannen")
+        toolbarView.state = .confirm("validation_check_popup_valid_vaccination_button_title".localized)
         toolbarView.delegate = self
     }
 

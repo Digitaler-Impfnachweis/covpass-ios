@@ -39,6 +39,12 @@ extension UIImage {
     @ImageLoader(name: "illustration_1")
     public private(set) static var illustration1
 
+    @ImageLoader(name: "illustration_2")
+    public private(set) static var illustration2
+
+    @ImageLoader(name: "illustration_3")
+    public private(set) static var illustration3
+
     @ImageLoader(name: "start_screen_1")
     public private(set) static var startScreen
 
@@ -101,6 +107,15 @@ extension UIImage {
 
     @ImageLoader(name: "ega_checkbox_unchecked")
     public private(set) static var checkboxUnchecked
+
+    @ImageLoader(name: "result_success")
+    public private(set) static var resultSuccess
+
+    @ImageLoader(name: "result_error")
+    public private(set) static var resultError
+
+    @ImageLoader(name: "data")
+    public private(set) static var data
 }
 
 @propertyWrapper

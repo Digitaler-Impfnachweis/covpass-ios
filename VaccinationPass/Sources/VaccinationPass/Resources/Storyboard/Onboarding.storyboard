@@ -78,86 +78,10 @@
             </objects>
             <point key="canvasLocation" x="1105.7971014492755" y="-135.26785714285714"/>
         </scene>
-        <!--Consent View Controller-->
-        <scene sceneID="x07-Ju-MB2">
-            <objects>
-                <viewController storyboardIdentifier="ConsentViewController" id="lof-ZS-bOP" customClass="ConsentViewController" customModule="VaccinationUI" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="4Ak-NF-aIU">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hwy-TI-XRR">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="98N-UW-I0f" userLabel="ContentView">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="566"/>
-                                        <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="O8y-Y3-HdT">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="566"/>
-                                                <subviews>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="250" translatesAutoresizingMaskIntoConstraints="NO" id="KAr-dy-GGO">
-                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="250"/>
-                                                    </imageView>
-                                                    <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="60" translatesAutoresizingMaskIntoConstraints="NO" id="TnP-73-69r" customClass="PlainLabel" customModule="VaccinationUI">
-                                                        <rect key="frame" x="0.0" y="250" width="414" height="60"/>
-                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                    </view>
-                                                    <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="QK3-B3-PMv" customClass="PlainLabel" customModule="VaccinationUI">
-                                                        <rect key="frame" x="0.0" y="310" width="414" height="128"/>
-                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                    </view>
-                                                    <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="CUE-Ld-zkb" customClass="CheckboxView" customModule="VaccinationUI">
-                                                        <rect key="frame" x="0.0" y="438" width="414" height="128"/>
-                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                    </view>
-                                                </subviews>
-                                            </stackView>
-                                        </subviews>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                        <constraints>
-                                            <constraint firstItem="O8y-Y3-HdT" firstAttribute="top" secondItem="98N-UW-I0f" secondAttribute="top" id="LxY-7c-9Dv"/>
-                                            <constraint firstAttribute="bottom" secondItem="O8y-Y3-HdT" secondAttribute="bottom" priority="900" id="dCT-4c-ceW"/>
-                                            <constraint firstAttribute="trailing" secondItem="O8y-Y3-HdT" secondAttribute="trailing" id="m2e-pn-L4W"/>
-                                            <constraint firstItem="O8y-Y3-HdT" firstAttribute="leading" secondItem="98N-UW-I0f" secondAttribute="leading" id="zVI-3S-Vgi"/>
-                                        </constraints>
-                                    </view>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstItem="98N-UW-I0f" firstAttribute="trailing" secondItem="uJi-6C-YpY" secondAttribute="trailing" id="2Lm-9F-k5c"/>
-                                    <constraint firstItem="98N-UW-I0f" firstAttribute="bottom" secondItem="uJi-6C-YpY" secondAttribute="bottom" id="KgT-1Y-K84"/>
-                                    <constraint firstItem="98N-UW-I0f" firstAttribute="width" secondItem="VWL-xs-Rh6" secondAttribute="width" id="QBN-br-uVP"/>
-                                    <constraint firstItem="98N-UW-I0f" firstAttribute="leading" secondItem="uJi-6C-YpY" secondAttribute="leading" id="eEc-vO-IpS"/>
-                                    <constraint firstItem="98N-UW-I0f" firstAttribute="top" secondItem="uJi-6C-YpY" secondAttribute="top" id="p5c-ak-Jji"/>
-                                </constraints>
-                                <viewLayoutGuide key="contentLayoutGuide" id="uJi-6C-YpY"/>
-                                <viewLayoutGuide key="frameLayoutGuide" id="VWL-xs-Rh6"/>
-                            </scrollView>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="mbQ-pX-agk"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="mbQ-pX-agk" firstAttribute="trailing" secondItem="hwy-TI-XRR" secondAttribute="trailing" id="aDs-b8-jRy"/>
-                            <constraint firstItem="mbQ-pX-agk" firstAttribute="bottom" secondItem="hwy-TI-XRR" secondAttribute="bottom" id="fGp-Xb-wzg"/>
-                            <constraint firstItem="hwy-TI-XRR" firstAttribute="top" secondItem="mbQ-pX-agk" secondAttribute="top" id="yMB-80-aHg"/>
-                            <constraint firstItem="hwy-TI-XRR" firstAttribute="leading" secondItem="mbQ-pX-agk" secondAttribute="leading" id="yrA-DI-ixe"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="dataPrivacyCheckbox" destination="CUE-Ld-zkb" id="laC-is-n2O"/>
-                        <outlet property="descriptionText" destination="QK3-B3-PMv" id="e37-YE-AT1"/>
-                        <outlet property="headline" destination="TnP-73-69r" id="b48-9y-ftl"/>
-                        <outlet property="imageView" destination="KAr-dy-GGO" id="3I1-Y1-qUU"/>
-                        <outlet property="scrollView" destination="hwy-TI-XRR" id="2ga-9s-IY4"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ynZ-Ot-tv5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1992.753623188406" y="-135.26785714285714"/>
-        </scene>
         <!--Proof Popup View Controller-->
         <scene sceneID="qEE-hA-Zu3">
             <objects>
-                <viewController storyboardIdentifier="ProofPopupViewController" id="WLG-sy-0ob" customClass="ProofPopupViewController" customModule="VaccinationUI" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ProofPopupViewController" id="WLG-sy-0ob" customClass="ProofPopupViewController" customModule="VaccinationPass" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="DOt-h3-x7P">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -339,7 +263,7 @@
         <!--Start Onboarding View Controller-->
         <scene sceneID="iRn-hF-CnH">
             <objects>
-                <viewController storyboardIdentifier="StartOnboardingViewController" id="4f1-2B-1Lo" customClass="StartOnboardingViewController" customModule="VaccinationUI" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="StartOnboardingViewController" id="4f1-2B-1Lo" customClass="StartOnboardingViewController" customModule="VaccinationPass" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xci-yh-6XR">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -435,7 +359,7 @@
                                 <rect key="frame" x="0.0" y="124" width="414" height="654"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="1gh-Bm-jvT" customClass="ScrollableStackView" customModule="VaccinationUI">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="584"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="456"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="qf0-Cy-1UM">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="150"/>
@@ -457,12 +381,8 @@
                                                 <rect key="frame" x="0.0" y="278" width="414" height="128"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                             </view>
-                                            <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="cTS-h6-fh3" customClass="ParagraphView" customModule="VaccinationUI">
-                                                <rect key="frame" x="0.0" y="406" width="414" height="128"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                            </view>
                                             <view contentMode="scaleToFill" verticalHuggingPriority="1" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="GVf-M7-B1o" userLabel="Flexible View">
-                                                <rect key="frame" x="0.0" y="534" width="414" height="50"/>
+                                                <rect key="frame" x="0.0" y="406" width="414" height="50"/>
                                             </view>
                                         </subviews>
                                     </stackView>
@@ -500,7 +420,6 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="errorView" destination="cTS-h6-fh3" id="3n4-3g-gPL"/>
                         <outlet property="headline" destination="PFc-dj-gMR" id="s9z-Ar-tsf"/>
                         <outlet property="imageContainerView" destination="qf0-Cy-1UM" id="H84-us-PM4"/>
                         <outlet property="imageView" destination="oct-2V-77Z" id="j6B-Kp-ar3"/>
@@ -522,19 +441,10 @@
         <designable name="BZA-KE-FmB">
             <size key="intrinsicContentSize" width="414" height="40"/>
         </designable>
-        <designable name="CUE-Ld-zkb">
-            <size key="intrinsicContentSize" width="414" height="128"/>
-        </designable>
         <designable name="DcZ-ry-4Hc">
             <size key="intrinsicContentSize" width="240" height="56"/>
         </designable>
         <designable name="PFc-dj-gMR">
-            <size key="intrinsicContentSize" width="414" height="60"/>
-        </designable>
-        <designable name="QK3-B3-PMv">
-            <size key="intrinsicContentSize" width="414" height="128"/>
-        </designable>
-        <designable name="TnP-73-69r">
             <size key="intrinsicContentSize" width="414" height="60"/>
         </designable>
         <designable name="aqp-ex-1mg">
@@ -544,9 +454,6 @@
             <size key="intrinsicContentSize" width="414" height="128"/>
         </designable>
         <designable name="cCA-Hh-fFF">
-            <size key="intrinsicContentSize" width="414" height="128"/>
-        </designable>
-        <designable name="cTS-h6-fh3">
             <size key="intrinsicContentSize" width="414" height="128"/>
         </designable>
         <designable name="jX9-UW-4T8">

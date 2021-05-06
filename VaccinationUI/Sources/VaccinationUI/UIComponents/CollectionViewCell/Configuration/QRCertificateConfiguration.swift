@@ -34,7 +34,7 @@ public class QRCertificateConfiguration: NoCertifiateConfiguration {
         self.stateTitle = stateTitle
         self.headerImage = headerImage
         self.favoriteAction = favoriteAction
-        self.qrValue = qrValue // we should provide right data here
+        self.qrValue = qrValue
         self.tintColor = tintColor
         super.init(title: title, subtitle: subtitle, image: image, identifier: "\(QrCertificateCollectionViewCell.self)")
         self.backgroundColor = backgroundColor

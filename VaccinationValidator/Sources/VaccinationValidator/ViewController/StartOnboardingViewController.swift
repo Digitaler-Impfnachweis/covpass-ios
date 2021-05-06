@@ -1,11 +1,12 @@
 //
 //  StartOnboardingViewController.swift
-//  
+//
 //
 //  Copyright © 2021 IBM. All rights reserved.
 //
 
 import UIKit
+import VaccinationUI
 
 public class StartOnboardingViewController: UIViewController {
     @IBOutlet public var stackView: UIStackView!
@@ -14,7 +15,7 @@ public class StartOnboardingViewController: UIViewController {
     @IBOutlet public var headline: PlainLabel!
     @IBOutlet public var subtitle: PlainLabel!
     @IBOutlet public var secureContentView: SecureContentView!
-    
+
     // MARK: - Public Properties
 
     public var viewModel: StartOnboardingViewModel?
@@ -47,7 +48,7 @@ public class StartOnboardingViewController: UIViewController {
         subtitle.attributedText = viewModel?.info.styledAs(.subheader_1)
         subtitle.layoutMargins = .init(top: .space_12, left: .space_24, bottom: .space_40, right: .space_24)
     }
-    
+
     private func configureActionButton() {
         actionButton.title = viewModel?.navigationButtonTitle
         actionButton.style = .primary
@@ -55,7 +56,7 @@ public class StartOnboardingViewController: UIViewController {
             self?.viewModel?.showNextScene()
         }
     }
-    
+
     private func configureSecureContentView() {
         secureContentView.titleAttributedString = viewModel?.secureTitle.styledAs(.header_3)
         secureContentView.bodyAttributedString = viewModel?.secureText.styledAs(.body).colored(.onBackground70)

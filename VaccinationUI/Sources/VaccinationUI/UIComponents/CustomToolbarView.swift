@@ -41,7 +41,7 @@ public class CustomToolbarView: XibView {
     @IBOutlet var leftButton: UIButton!
     public var primaryButton: MainButton!
 
-    var state: CustomToolbarState {
+    public var state: CustomToolbarState {
         get {
             .cancel
         }

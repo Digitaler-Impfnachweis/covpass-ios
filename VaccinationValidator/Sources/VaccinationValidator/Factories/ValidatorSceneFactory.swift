@@ -15,7 +15,7 @@ struct ValidatorSceneFactory: SceneFactory {
 
     let router: ValidatorRouterProtocol
 
-    // MARK: - Lifecylce
+    // MARK: - Lifecycle
 
     init(router: ValidatorRouterProtocol) {
         self.router = router
