@@ -8,22 +8,32 @@
 import UIKit
 import VaccinationUI
 
-public class ProofViewController: UIViewController {
+class ProofViewController: UIViewController {
     // MARK: - IBOutlet
-    
-    @IBOutlet public var toolbarView: CustomToolbarView!
-    @IBOutlet public var imageView: UIImageView!
+
     @IBOutlet public var headline: InfoHeaderView!
     @IBOutlet public var descriptionText: ParagraphView!
+    @IBOutlet public var imageView: UIImageView!
     @IBOutlet public var actionView: InfoHeaderView!
+    @IBOutlet public var toolbarView: CustomToolbarView!
 
-    // MARK: - Internal Properties
+    // MARK: - Properties
 
-    public var viewModel: ProofViewModel!
+    private(set) var viewModel: ProofViewModel
 
     // MARK: - Lifecycle
 
-    public override func viewDidLoad() {
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) { fatalError("init?(coder: NSCoder) not implemented yet") }
+
+    init(viewModel: ProofViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: String(describing: Self.self), bundle: .module)
+    }
+
+    // MARK: - Lifecycle
+
+    override func viewDidLoad() {
         super.viewDidLoad()
         configureImageView()
         configureHeadline()
@@ -83,14 +93,6 @@ extension ProofViewController: CustomToolbarViewDelegate {
         default:
             return
         }
-    }
-}
-
-// MARK: - StoryboardInstantiating
-
-extension ProofViewController: StoryboardInstantiating {
-    public static var storyboardName: String {
-        return UIConstants.Storyboard.Onboarding
     }
 }
 
