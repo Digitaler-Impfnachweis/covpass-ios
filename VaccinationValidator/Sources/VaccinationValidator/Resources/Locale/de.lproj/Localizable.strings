@@ -4,6 +4,11 @@
  * Language: de
  */
 
+/********** App **********/
+
+"validator_app_name" = "Impfprüfer";
+
+
 /********** Onboarding **********/
 
 "start_onboarding_title" = "Willkommen in der Prüf-App";
@@ -61,6 +66,8 @@
 
 "validation_start_screen_offline_modus_note_update" = "Letztes Update";
 
+"validation_start_screen_offline_modus_note_update_pattern" = "Letztes Update: %@";
+
 "Error_old_version_title" = "App-Version veraltet";
 
 "Error_old_version_message" = "Um offline prüfen zu können, halten Sie die App auf dem aktuellsten Stand. Stellen Sie dafür eine Verbindung mit dem Internet her.";
@@ -88,6 +95,8 @@
 
 "validation_check_popup_valid_vaccination_date_of_birth" = "Geburtsdatum";
 
+"validation_check_popup_button_title" = "Nächstes Zertifikat scannen";
+
 "validation_check_popup_valid_vaccination_button_title" = "Nächstes Zertifikat scannen";
 
 "validation_check_popup_partial_valid_vaccination_title" = "Teil-Impfschutz gültig";
@@ -99,6 +108,8 @@
 "validation_check_popup_partial_valid_vaccination_date_of_birth" = "Geburtsdatum";
 
 "validation_check_popup_partial_valid_vaccination_date_of_birth_at" = "Geboren am";
+
+"validation_check_popup_date_of_birth_at_pattern" = "Geboren am %@";
 
 "validation_check_popup_partial_valid_vaccination_button_title" = "Nächstes Zertifikat scannen";
 

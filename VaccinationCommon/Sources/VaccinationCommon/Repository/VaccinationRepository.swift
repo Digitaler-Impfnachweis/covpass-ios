@@ -95,7 +95,9 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
                 }
 
                 return self.saveVaccinationCertificateList(certList).asVoid()
-            }).map({ return extendedCBORWebToken })
+            })
+            .map({ return extendedCBORWebToken })
+            .then(self.reissueValidationCertificate) // TODO make this more resilient and hide errors that might occur (this will get handled on the start screen if it fails)
         })
     }
 
