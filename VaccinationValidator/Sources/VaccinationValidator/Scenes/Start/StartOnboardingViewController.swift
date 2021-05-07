@@ -70,7 +70,7 @@ class StartOnboardingViewController: UIViewController {
     private func configureSecureContentView() {
         secureContentView.titleAttributedString = viewModel.secureTitle.styledAs(.header_3)
         secureContentView.bodyAttributedString = viewModel.secureText.styledAs(.body).colored(.onBackground70)
-        secureContentView.contentView?.backgroundColor = viewModel.backgroundColor
+        secureContentView.contentView?.backgroundColor = .backgroundPrimary
         secureContentView.layoutMargins = .init(top: .space_40, left: .space_24, bottom: .space_50, right: .space_24)
     }
 }

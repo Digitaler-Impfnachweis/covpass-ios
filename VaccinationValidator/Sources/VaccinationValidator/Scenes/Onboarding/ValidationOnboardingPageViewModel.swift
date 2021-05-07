@@ -12,7 +12,7 @@ class ValidationOnboardingPageViewModel: OnboardingPageViewModel {
     // MARK: - Properties
 
     weak var delegate: ViewModelDelegate?
-    var type: OnboardingPageViewModelType
+    let type: OnboardingPageViewModelType
 
     var image: UIImage? {
         switch self.type {

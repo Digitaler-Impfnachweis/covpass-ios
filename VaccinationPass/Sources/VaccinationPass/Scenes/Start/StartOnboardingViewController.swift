@@ -32,7 +32,7 @@ class StartOnboardingViewController: UIViewController {
         super.init(nibName: String(describing: Self.self), bundle: .module)
     }
 
-    public override func viewDidLoad() {
+    override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.setNavigationBarHidden(true, animated: false)
         configureImageView()

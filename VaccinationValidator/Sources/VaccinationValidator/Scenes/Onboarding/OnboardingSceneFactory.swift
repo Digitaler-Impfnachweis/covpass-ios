@@ -8,18 +8,18 @@
 import UIKit
 import VaccinationUI
 
-public struct OnboardingSceneFactory: SceneFactory {
+struct OnboardingSceneFactory: SceneFactory {
     // MARK: - Properties
 
-    let router: OnboardingRouterProtocol
+    private let router: OnboardingRouterProtocol
 
     // MARK: - Lifecycle
 
-    public init(router: OnboardingRouterProtocol) {
+    init(router: OnboardingRouterProtocol) {
         self.router = router
     }
 
-    public func make() -> UIViewController {
+    func make() -> UIViewController {
         let pageModels: [OnboardingPageViewModel] = [
             ValidationOnboardingPageViewModel(type: .page1),
             ValidationOnboardingPageViewModel(type: .page2),

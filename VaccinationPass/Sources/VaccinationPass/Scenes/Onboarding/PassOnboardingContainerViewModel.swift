@@ -5,7 +5,7 @@
 //  Copyright © 2021 IBM. All rights reserved.
 //
 
-import UIKit
+import Foundation
 import VaccinationUI
 
 class PassOnboardingContainerViewModel: OnboardingContainerViewModel {

@@ -16,7 +16,7 @@ public enum OnboardingPageViewModelType: CaseIterable {
 
 public protocol OnboardingPageViewModel {
     var delegate: ViewModelDelegate? { get set }
-    var type: OnboardingPageViewModelType { get set }
+    var type: OnboardingPageViewModelType { get }
     var toolbarState: CustomToolbarState { get }
     var image: UIImage? { get }
     var title: String? { get }

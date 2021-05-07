@@ -10,13 +10,13 @@ import VaccinationUI
 import VaccinationCommon
 import PromiseKit
 
-public class VaccinationDetailViewModel {
+class VaccinationDetailViewModel {
 
     private let router: VaccinationDetailRouterProtocol
     private let repository: VaccinationRepositoryProtocol
     private var certificates: [ExtendedCBORWebToken]
 
-    public init(
+    init(
         router: VaccinationDetailRouterProtocol,
         repository: VaccinationRepositoryProtocol,
         certificates: [ExtendedCBORWebToken]) {
@@ -26,11 +26,11 @@ public class VaccinationDetailViewModel {
         self.certificates = certificates
     }
 
-    public var fullImmunization: Bool {
+    var fullImmunization: Bool {
         certificates.map({ $0.vaccinationCertificate.hcert.dgc.fullImmunization }).first(where: { $0 }) ?? false
     }
 
-    public var isFavorite: Bool {
+    var isFavorite: Bool {
         do {
             let certList = try repository.getVaccinationCertificateList().wait()
             return certificates.contains(where: { $0.vaccinationCertificate.hcert.dgc.v.first?.ci == certList.favoriteCertificateId })
@@ -40,36 +40,36 @@ public class VaccinationDetailViewModel {
         }
     }
 
-    public var name: String {
+    var name: String {
         certificates.first?.vaccinationCertificate.hcert.dgc.nam.fullName ?? ""
     }
 
-    public var birthDate: String {
+    var birthDate: String {
         guard let date = certificates.first?.vaccinationCertificate.hcert.dgc.dob else { return "" }
         return DateUtils.displayDateFormatter.string(from: date)
     }
     
-    public var immunizationIcon: UIImage? {
+    var immunizationIcon: UIImage? {
         UIImage(named: fullImmunization ? "status_full" : "status_partial", in: UIConstants.bundle, compatibleWith: nil)
     }
     
-    public var immunizationTitle: String {
+    var immunizationTitle: String {
         fullImmunization ? "vaccination_certificate_detail_view_complete_title".localized : "vaccination_certificate_detail_view_incomplete_title".localized
     }
     
-    public var immunizationBody: String {
+    var immunizationBody: String {
         fullImmunization ? "vaccination_certificate_detail_view_complete_message".localized : "vaccination_certificate_detail_view_incomplete_message".localized
     }
     
-    public var immunizationButton: String {
+    var immunizationButton: String {
         fullImmunization ? "vaccination_certificate_detail_view_complete_action_button_title".localized : "vaccination_certificate_detail_view_incomplete_action_button_title".localized
     }
 
-    public var vaccinations: [VaccinationViewModel] {
+    var vaccinations: [VaccinationViewModel] {
         certificates.map({ VaccinationViewModel(token: $0.vaccinationCertificate) })
     }
 
-    public func immunizationButtonTapped() {
+    func immunizationButtonTapped() {
         fullImmunization ?
             showCertificate() :
             scanNextCertificate()
@@ -89,7 +89,7 @@ public class VaccinationDetailViewModel {
         router.showCertificateOverview()
     }
 
-    public func delete() {
+    func delete() {
         firstly {
             showDeleteDialog()
         }
@@ -118,7 +118,7 @@ public class VaccinationDetailViewModel {
         }
     }
 
-    public func updateFavorite() -> Promise<Void> {
+    func updateFavorite() -> Promise<Void> {
         return repository.getVaccinationCertificateList().map({ cert in
             var certList = cert
             guard let id = self.certificates.first?.vaccinationCertificate.hcert.dgc.v.first?.ci else {
@@ -131,7 +131,7 @@ public class VaccinationDetailViewModel {
         })
     }
 
-    public func process(payload: String) -> Promise<Void> {
+    func process(payload: String) -> Promise<Void> {
         return repository.scanVaccinationCertificate(payload).then({ cert in
             return self.repository.getVaccinationCertificateList().then({ list -> Promise<Void> in
                 self.certificates = self.findCertificatePair(cert, list.certificates)

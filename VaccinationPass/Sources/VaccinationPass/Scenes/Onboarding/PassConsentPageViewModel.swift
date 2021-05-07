@@ -12,7 +12,7 @@ class PassConsentPageViewModel: ConsentPageViewModel {
     // MARK: - Properties
 
     weak var delegate: ViewModelDelegate?
-    var type: OnboardingPageViewModelType
+    private(set) var type: OnboardingPageViewModelType
 
     var toolbarState: CustomToolbarState {
         isGranted ?
