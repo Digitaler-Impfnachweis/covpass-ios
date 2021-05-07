@@ -8,7 +8,7 @@
 import UIKit
 import VaccinationUI
 
-public class ValidationResultViewController: UIViewController, ViewModelDelegate {
+public class ValidationResultViewController: UIViewController {
     // MARK: - IBOutlet
 
     @IBOutlet public var stackView: UIStackView!
@@ -42,14 +42,6 @@ public class ValidationResultViewController: UIViewController, ViewModelDelegate
         configureParagraphView()
         configureToolbarView()
         updateViews()
-    }
-
-    public func viewModelDidUpdate() {
-        updateViews()
-    }
-
-    public func viewModelUpdateDidFailWithError(_ error: Error) {
-        // TODO: Handle error
     }
 
     // MARK: - Private
@@ -90,6 +82,16 @@ public class ValidationResultViewController: UIViewController, ViewModelDelegate
         toolbarView.state = .confirm("validation_check_popup_valid_vaccination_button_title".localized)
         toolbarView.delegate = self
     }
+}
+
+// MARK: - ViewModelDelegate
+
+extension ValidationResultViewController: ViewModelDelegate {
+    public func viewModelDidUpdate() {
+        updateViews()
+    }
+
+    public func viewModelUpdateDidFailWithError(_ error: Error) {}
 }
 
 // MARK: - CustomToolbarViewDelegate

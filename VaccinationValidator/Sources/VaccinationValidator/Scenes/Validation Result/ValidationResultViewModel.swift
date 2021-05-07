@@ -74,7 +74,7 @@ open class ValidationResultViewModel: BaseViewModel, CancellableViewModelProtoco
         switch immunizationState {
         case .full, .partial:
             if let date = certificate?.hcert.dgc.dob {
-                return String(format: "%@ %@", "validation_check_popup_partial_valid_vaccination_date_of_birth_at".localized, DateUtils.displayDateFormatter.string(from: date))
+                return "\("validation_check_popup_partial_valid_vaccination_date_of_birth_at".localized) \(DateUtils.displayDateFormatter.string(from: date))"
             }
             return nil
         case .error:
@@ -126,8 +126,9 @@ open class ValidationResultViewModel: BaseViewModel, CancellableViewModelProtoco
         .done { _ in
             self.delegate?.viewModelDidUpdate()
         }
-        .catch {
-            self.delegate?.viewModelUpdateDidFailWithError($0)
+        .catch { _ in
+            self.certificate = nil
+            self.delegate?.viewModelDidUpdate()
         }
     }
 
@@ -135,7 +136,6 @@ open class ValidationResultViewModel: BaseViewModel, CancellableViewModelProtoco
         return parser.parse(payload)
     }
 
-    // TODO: Needs a common shared place
     private func payloadFromScannerResult(_ result: ScanResult) throws -> String {
         switch result {
         case .success(let payload):
@@ -146,15 +146,7 @@ open class ValidationResultViewModel: BaseViewModel, CancellableViewModelProtoco
     }
 
     private func immunizationState(for certificate: DigitalGreenCertificate) -> ImmunizationState {
-        let calendar = Calendar.current
-        if certificate.fullImmunization,
-           let vaccinationDate = certificate.v.last?.dt,
-           let validDate = calendar.date(byAdding: .weekOfYear, value: 2, to: vaccinationDate),
-           let validTimestamp = calendar.date(bySettingHour: 23, minute: 59, second: 59, of: validDate),
-           validTimestamp >= Date() {
-            return .partial
-        }
-        return certificate.fullImmunization ? .full : .partial
+        return certificate.fullImmunizationValid ? .full : .partial
     }
 }
 

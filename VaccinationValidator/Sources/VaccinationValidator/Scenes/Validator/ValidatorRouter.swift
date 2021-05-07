@@ -30,7 +30,7 @@ class ValidatorRouter: ValidatorRouterProtocol {
         )
     }
 
-    func showCertificate(_ certificate: CBORWebToken) {
+    func showCertificate(_ certificate: CBORWebToken?) {
         sceneCoordinator.present(
             ValidationResultSceneFactory(
                 router: ValidationResultRouter(sceneCoordinator: sceneCoordinator),

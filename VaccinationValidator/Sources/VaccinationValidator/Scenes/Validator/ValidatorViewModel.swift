@@ -22,13 +22,8 @@ public class ValidatorViewModel {
     
     var title: String { "validation_start_screen_title".localized }
 
-    // TODO implmement logic
     var offlineTitle: String {
-        if true {
-            return "validation_start_screen_offline_modus_note_latest_version".localized
-        } else {
-            return "validation_start_screen_offline_modus_note_old_version".localized
-        }
+        "validation_start_screen_offline_modus_note_latest_version".localized
     }
     var offlineMessage: String {
         let date = "01.01.1970"
@@ -67,7 +62,9 @@ public class ValidatorViewModel {
         .done {
             self.router.showCertificate($0)
         }
-        .cauterize()
+        .catch { _ in
+            self.router.showCertificate(nil)
+        }
     }
 
     func showAppInformation() {
