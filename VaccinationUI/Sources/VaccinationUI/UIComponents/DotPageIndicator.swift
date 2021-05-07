@@ -58,6 +58,7 @@ public class DotPageIndicator: UIView {
     }
 
     func deselectSelectedDot() {
+        guard selectedDotIndex < numberOfDots else { return }
         let selectedDot = dots[selectedDotIndex]
         UIView.animate(withDuration: 0.4) {
             selectedDot.backgroundColor = self.unselectedColor
