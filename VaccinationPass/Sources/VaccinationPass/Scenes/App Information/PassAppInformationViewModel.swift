@@ -22,15 +22,30 @@ public class PassAppInformationViewModel: AppInformationViewModelProtocol {
     }
 
     public var appVersionText: String {
-        "Version 1.0".localized
+        String(
+            format: "Version %@".localized,
+            Bundle.module.appVersion()
+        )
     }
 
     public lazy var entries: [AppInformationEntry] = {
         [
-            webEntry(title: "Häufige Fragen", url: URL(string: "https://www.digitaler-impfnachweis-app.de/webviews/client-app/faq/")!),
-            webEntry(title: "Datenschutzerklärung", url: URL(string: "https://www.digitaler-impfnachweis-app.de/webviews/client-app/privacy/")!),
-            webEntry(title: "Impressum", url: URL(string: "https://www.digitaler-impfnachweis-app.de/webviews/imprint/")!),
-            entry(title: "Open Source Lizenzen", url: URL(string: "https://www.digitaler-impfnachweis-app.de/webviews/client-app/faq/")!)
+            webEntry(
+                title: "Häufige Fragen".localized,
+                url: URL(string: "https://www.digitaler-impfnachweis-app.de/webviews/client-app/faq/")!),
+
+            webEntry(
+                title: "Datenschutzerklärung".localized,
+                url: URL(string: "https://www.digitaler-impfnachweis-app.de/webviews/client-app/privacy/")!),
+
+            webEntry(
+                title: "Impressum".localized,
+                url: URL(string: "https://www.digitaler-impfnachweis-app.de/webviews/imprint/")!),
+
+            // TODO: Needs a scene to display localized texts from bundle. 
+            webEntry(
+                title: "Open Source Lizenzen".localized,
+                url: URL(string: "https://www.digitaler-impfnachweis-app.de/")!)
         ]
     }()
 
@@ -47,13 +62,6 @@ public class PassAppInformationViewModel: AppInformationViewModelProtocol {
     }
 
     private func webEntry(title: String, url: URL) -> AppInformationEntry {
-        AppInformationEntry(
-            title: title,
-            scene: WebviewSceneFactory(title: title, url: url)
-        )
-    }
-
-    private func entry(title: String, url: URL) -> AppInformationEntry {
         AppInformationEntry(
             title: title,
             scene: WebviewSceneFactory(title: title, url: url)
