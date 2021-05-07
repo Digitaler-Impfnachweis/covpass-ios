@@ -8,24 +8,28 @@
 import UIKit
 import Scanner
 
-public class ScanViewController: UIViewController {
-    
+class ScanViewController: UIViewController {
     // MARK: - IBOutlet
     
-    @IBOutlet public var toolbarView: CustomToolbarView!
-    @IBOutlet public var continer: UIView!
-    
-    // MARK: - Public Properties
-    
-    public var viewModel: ScanViewModel!
-    
-    // MARK: - Internal
-    
+    @IBOutlet var toolbarView: CustomToolbarView!
+    @IBOutlet var container: UIView!
+
+    // MARK: - Properties
+
+    private(set) var viewModel: ScanViewModel
     var scanViewController: ScannerViewController?
 
     // MARK: - Lifecycle
 
-    public override func viewDidLoad() {
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) { fatalError("init?(coder: NSCoder) not implemented yet") }
+
+    init(viewModel: ScanViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: String(describing: Self.self), bundle: .module)
+    }
+
+    override func viewDidLoad() {
         super.viewDidLoad()
         configureToolbarView()
         configureScanView()
@@ -35,8 +39,9 @@ public class ScanViewController: UIViewController {
 
     private func configureScanView() {
         scanViewController = Scanner.viewController(codeTypes: [.qr], scanMode: .once, delegate: self)
-        scanViewController?.view.frame = continer.bounds
-        continer.addSubview(scanViewController!.view)
+        scanViewController?.view.frame = container.bounds
+        container.addSubview(scanViewController!.view)
+        scanViewController?.view.pinEdges(to: container)
     }
     
     private func configureToolbarView() {
@@ -60,14 +65,6 @@ extension ScanViewController: CustomToolbarViewDelegate {
         default:
             return
         }
-    }
-}
-
-// MARK: - StoryboardInstantiating
-
-extension ScanViewController: StoryboardInstantiating {
-    public static var storyboardName: String {
-        return UIConstants.Storyboard.Onboarding
     }
 }
 
