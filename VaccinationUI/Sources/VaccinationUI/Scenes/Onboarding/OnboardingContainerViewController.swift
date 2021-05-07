@@ -7,20 +7,17 @@
 
 import UIKit
 
-enum OnboardingError: Error {
-    case closeError
-}
-
 public class OnboardingContainerViewController: UIViewController, ViewModelDelegate {
     // MARK: - IBOutlets
 
     @IBOutlet var toolbarView: CustomToolbarView!
     @IBOutlet var pageIndicator: DotPageIndicator!
+    @IBOutlet var containerView: UIView!
     
     // MARK: - Public Properties
 
-    public var viewModel: OnboardingContainerViewModel?
-    
+    private(set) var viewModel: OnboardingContainerViewModel
+
     // MARK: - Internal Properties
     
     var pageController: UIPageViewController?
@@ -29,13 +26,16 @@ public class OnboardingContainerViewController: UIViewController, ViewModelDeleg
 
     // MARK: - Lifecycle
 
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) { fatalError("init?(coder: NSCoder) not implemented yet") }
+
+    public init(viewModel: OnboardingContainerViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: String(describing: Self.self), bundle: .module)
+    }
+
     public override func viewDidLoad() {
         super.viewDidLoad()
-
-        guard let viewModel = viewModel, viewModel.items.count > 0 else {
-            fatalError("ViewModel should contain at least one page")
-        }
-
         view.backgroundColor = .neutralWhite
 
         viewModel.items.forEach { model in
@@ -44,12 +44,10 @@ public class OnboardingContainerViewController: UIViewController, ViewModelDeleg
             var pageViewController: UIViewController
             switch pageViewModel {
             case let consentViewModel as ConsentPageViewModel:
-                let viewController = ConsentViewController.createFromStoryboard(bundle: UIConstants.bundle)
-                viewController.viewModel = consentViewModel
+                let viewController = ConsentViewController(viewModel: consentViewModel)
                 pageViewController = viewController
             default:
-                let viewController = OnboardingPageViewController.createFromStoryboard(bundle: UIConstants.bundle)
-                viewController.viewModel = pageViewModel
+                let viewController = OnboardingPageViewController(viewModel: pageViewModel)
                 pageViewController = viewController
             }
             pages.append(pageViewController)
@@ -81,14 +79,18 @@ public class OnboardingContainerViewController: UIViewController, ViewModelDeleg
     }
 
     private func configurePageController() {
-        pageController = children.first as? UIPageViewController
-        pageController?.dataSource = self
-        pageController?.delegate = self
-        pageController?.setViewControllers([pages[currentIndex]], direction: .forward, animated: false, completion: nil)
+        let viewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: [:])
+        addChild(viewController)
+        containerView.addSubview(viewController.view)
+        viewController.view.pinEdges(to: view)
+        viewController.dataSource = self
+        viewController.delegate = self
+        viewController.setViewControllers([pages[currentIndex]], direction: .forward, animated: false, completion: nil)
+        self.pageController = viewController
     }
 
     private func updateToolbarForPage(at index: Int) {
-        guard let state = viewModel?.items[index].toolbarState else { return }
+        let state = viewModel.items[index].toolbarState
         toolbarView.state = state
     }
 }
@@ -142,7 +144,7 @@ extension OnboardingContainerViewController: CustomToolbarViewDelegate {
         switch buttonType {
         case .navigationArrow:
             guard currentIndex-1 >= 0 else {
-                viewModel?.navigateToPreviousScene()
+                viewModel.navigateToPreviousScene()
                 return
             }
             currentIndex -= 1
@@ -150,7 +152,7 @@ extension OnboardingContainerViewController: CustomToolbarViewDelegate {
             pageIndicator.selectDot(withIndex: currentIndex)
         case .textButton:
             guard currentIndex+1 < pages.count else {
-                viewModel?.navigateToNextScene()
+                viewModel.navigateToNextScene()
                 return
             }
             currentIndex += 1
@@ -160,11 +162,5 @@ extension OnboardingContainerViewController: CustomToolbarViewDelegate {
             return
         }
         updateToolbarForPage(at: currentIndex)
-    }
-}
-
-extension OnboardingContainerViewController: StoryboardInstantiating {
-    public static var storyboardName: String {
-        return UIConstants.Storyboard.Onboarding
     }
 }

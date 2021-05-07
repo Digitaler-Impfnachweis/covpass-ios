@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OnboardingPageViewController" customModule="VaccinationUI">
+            <connections>
+                <outlet property="descriptionText" destination="e9M-1g-a3U" id="UMK-Jy-xjH"/>
+                <outlet property="headline" destination="jk8-X8-0hY" id="V0X-gp-OSA"/>
+                <outlet property="imageView" destination="vsi-yy-Tde" id="rld-E2-2Dr"/>
+                <outlet property="scrollView" destination="alu-TR-5nb" id="POg-Hv-zsn"/>
+                <outlet property="view" destination="7ww-Gh-F20" id="8xV-JM-8cT"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="7ww-Gh-F20">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="alu-TR-5nb">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xRL-HX-N4h" userLabel="Content View">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="482"/>
+                            <subviews>
+                                <stackView opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="uxs-GI-cWq">
+                                    <rect key="frame" x="0.0" y="44" width="414" height="438"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="1000" verticalHuggingPriority="251" placeholderIntrinsicWidth="398" placeholderIntrinsicHeight="250" translatesAutoresizingMaskIntoConstraints="NO" id="vsi-yy-Tde">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="250"/>
+                                        </imageView>
+                                        <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="60" translatesAutoresizingMaskIntoConstraints="NO" id="jk8-X8-0hY" userLabel="Headline" customClass="PlainLabel" customModule="VaccinationUI">
+                                            <rect key="frame" x="0.0" y="250" width="414" height="60"/>
+                                        </view>
+                                        <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="e9M-1g-a3U" userLabel="Description Text" customClass="PlainLabel" customModule="VaccinationUI">
+                                            <rect key="frame" x="0.0" y="310" width="414" height="128"/>
+                                        </view>
+                                    </subviews>
+                                </stackView>
+                            </subviews>
+                            <constraints>
+                                <constraint firstItem="uxs-GI-cWq" firstAttribute="leading" secondItem="xRL-HX-N4h" secondAttribute="leadingMargin" id="AaR-yH-dbg"/>
+                                <constraint firstItem="uxs-GI-cWq" firstAttribute="top" secondItem="xRL-HX-N4h" secondAttribute="topMargin" id="For-wS-cvg"/>
+                                <constraint firstAttribute="bottomMargin" secondItem="uxs-GI-cWq" secondAttribute="bottom" priority="900" id="HOg-T3-T28"/>
+                                <constraint firstAttribute="trailingMargin" secondItem="uxs-GI-cWq" secondAttribute="trailing" id="vkH-Z1-eV4"/>
+                            </constraints>
+                            <edgeInsets key="layoutMargins" top="0.0" left="0.0" bottom="0.0" right="0.0"/>
+                        </view>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="xRL-HX-N4h" firstAttribute="top" secondItem="mlE-Oe-zt6" secondAttribute="top" id="Icn-yb-b55"/>
+                        <constraint firstItem="xRL-HX-N4h" firstAttribute="leading" secondItem="mlE-Oe-zt6" secondAttribute="leading" id="MHO-Wo-gSy"/>
+                        <constraint firstItem="xRL-HX-N4h" firstAttribute="bottom" secondItem="mlE-Oe-zt6" secondAttribute="bottom" id="dAr-Y5-HCY"/>
+                        <constraint firstItem="xRL-HX-N4h" firstAttribute="width" secondItem="drk-L0-XZA" secondAttribute="width" id="i2o-XN-QrU"/>
+                        <constraint firstItem="xRL-HX-N4h" firstAttribute="trailing" secondItem="mlE-Oe-zt6" secondAttribute="trailing" id="lAQ-0S-I9z"/>
+                    </constraints>
+                    <viewLayoutGuide key="contentLayoutGuide" id="mlE-Oe-zt6"/>
+                    <viewLayoutGuide key="frameLayoutGuide" id="drk-L0-XZA"/>
+                </scrollView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="YuL-Va-gII"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="alu-TR-5nb" secondAttribute="bottom" id="PBg-VO-gQ4"/>
+                <constraint firstItem="alu-TR-5nb" firstAttribute="trailing" secondItem="YuL-Va-gII" secondAttribute="trailing" id="WP4-Ua-Iyw"/>
+                <constraint firstItem="alu-TR-5nb" firstAttribute="top" secondItem="7ww-Gh-F20" secondAttribute="top" id="lbP-yg-keh"/>
+                <constraint firstItem="alu-TR-5nb" firstAttribute="leading" secondItem="YuL-Va-gII" secondAttribute="leading" id="wTC-zE-3as"/>
+            </constraints>
+            <point key="canvasLocation" x="-52" y="-491"/>
+        </view>
+    </objects>
+    <designables>
+        <designable name="e9M-1g-a3U">
+            <size key="intrinsicContentSize" width="414" height="128"/>
+        </designable>
+        <designable name="jk8-X8-0hY">
+            <size key="intrinsicContentSize" width="414" height="60"/>
+        </designable>
+    </designables>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

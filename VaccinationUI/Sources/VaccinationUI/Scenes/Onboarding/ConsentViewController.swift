@@ -9,6 +9,8 @@ import UIKit
 import WebKit
 
 class ConsentViewController: UIViewController {
+    // MARK: - IBOutlets
+
     @IBOutlet var scrollView: UIScrollView!
     @IBOutlet var imageView: UIImageView!
     @IBOutlet var headline: PlainLabel!
@@ -17,7 +19,17 @@ class ConsentViewController: UIViewController {
 
     // MARK: - Properties
 
-    var viewModel: ConsentPageViewModel?
+    private(set) var viewModel: ConsentPageViewModel
+
+    // MARK: - Lifecycle
+
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) { fatalError("init?(coder: NSCoder) not implemented yet") }
+
+    public init(viewModel: ConsentPageViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: String(describing: Self.self), bundle: .module)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,36 +40,28 @@ class ConsentViewController: UIViewController {
         configureCheckboxes()
     }
 
-    // MARK: - Private
+    // MARK: - Methods
 
     private func configureImageView() {
-        imageView.image = viewModel?.image
+        imageView.image = viewModel.image
         imageView.pinHeightToScaleAspectFit()
     }
 
     private func configureHeadline() {
-        headline.attributedText = viewModel?.title.styledAs(.header_2)
+        headline.attributedText = viewModel.title.styledAs(.header_2)
         headline.layoutMargins = .init(top: .space_40, left: .space_24, bottom: .zero, right: .space_24)
     }
 
     private func configureParagraphView() {
-        descriptionText.attributedText = viewModel?.info.styledAs(.body).colored(.onBackground70)
+        descriptionText.attributedText = viewModel.info.styledAs(.body).colored(.onBackground70)
         descriptionText.layoutMargins = .init(top: .space_12, left: .space_24, bottom: .zero, right: .space_24)
     }
 
     private func configureCheckboxes() {
-        dataPrivacyCheckbox.textView.attributedText = viewModel?.dataPrivacyTitle
+        dataPrivacyCheckbox.textView.attributedText = viewModel.dataPrivacyTitle
         dataPrivacyCheckbox.layoutMargins = .init(top: .space_40, left: .space_24, bottom: .zero, right: .space_24)
         dataPrivacyCheckbox.didChangeState = { [weak self] in
-            self?.viewModel?.isGranted = $0
+            self?.viewModel.isGranted = $0
         }
-    }
-}
-
-// MARK: - StoryboardInstantiating
-
-extension ConsentViewController: StoryboardInstantiating {
-    public static var storyboardName: String {
-        UIConstants.Storyboard.Onboarding
     }
 }

@@ -149,89 +149,6 @@
             </objects>
             <point key="canvasLocation" x="345" y="-154"/>
         </scene>
-        <!--Start Onboarding View Controller-->
-        <scene sceneID="iRn-hF-CnH">
-            <objects>
-                <viewController storyboardIdentifier="StartOnboardingViewController" id="4f1-2B-1Lo" customClass="StartOnboardingViewController" customModule="VaccinationValidator" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="xci-yh-6XR">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kS1-Kd-7Rh">
-                                <rect key="frame" x="0.0" y="44" width="414" height="747"/>
-                                <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="TTC-yw-sLe">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="666"/>
-                                        <subviews>
-                                            <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="60" translatesAutoresizingMaskIntoConstraints="NO" id="aqp-ex-1mg" customClass="PlainLabel" customModule="VaccinationUI">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
-                                            </view>
-                                            <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="u6z-A1-sKt" customClass="PlainLabel" customModule="VaccinationUI">
-                                                <rect key="frame" x="0.0" y="60" width="414" height="128"/>
-                                            </view>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="250" translatesAutoresizingMaskIntoConstraints="NO" id="IgZ-Vh-9bN">
-                                                <rect key="frame" x="0.0" y="188" width="414" height="250"/>
-                                            </imageView>
-                                            <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="100" translatesAutoresizingMaskIntoConstraints="NO" id="zgZ-oc-hQh" customClass="SecureContentView" customModule="VaccinationUI">
-                                                <rect key="frame" x="0.0" y="438" width="414" height="100"/>
-                                            </view>
-                                            <view contentMode="scaleToFill" horizontalHuggingPriority="1" verticalHuggingPriority="1" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="nUy-6P-UqC" userLabel="Flexible Space">
-                                                <rect key="frame" x="0.0" y="538" width="414" height="128"/>
-                                            </view>
-                                        </subviews>
-                                    </stackView>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstItem="97I-xN-T0Z" firstAttribute="top" secondItem="TTC-yw-sLe" secondAttribute="top" id="1a3-He-KAy"/>
-                                    <constraint firstItem="TTC-yw-sLe" firstAttribute="trailing" secondItem="97I-xN-T0Z" secondAttribute="trailing" id="1wQ-QA-eg7"/>
-                                    <constraint firstItem="TTC-yw-sLe" firstAttribute="leading" secondItem="97I-xN-T0Z" secondAttribute="leading" id="T1c-cD-x1W"/>
-                                    <constraint firstItem="TTC-yw-sLe" firstAttribute="width" secondItem="gw7-mb-82G" secondAttribute="width" id="chz-Hh-7eT"/>
-                                    <constraint firstItem="TTC-yw-sLe" firstAttribute="bottom" secondItem="97I-xN-T0Z" secondAttribute="bottom" id="hyU-zr-Bp2"/>
-                                </constraints>
-                                <viewLayoutGuide key="contentLayoutGuide" id="97I-xN-T0Z"/>
-                                <viewLayoutGuide key="frameLayoutGuide" id="gw7-mb-82G"/>
-                            </scrollView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tcR-S1-wXD" userLabel="Bottom Container View">
-                                <rect key="frame" x="0.0" y="791" width="414" height="71"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" placeholderIntrinsicWidth="240" placeholderIntrinsicHeight="56" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="z1w-BA-0EP" customClass="MainButton" customModule="VaccinationUI">
-                                        <rect key="frame" x="87" y="15" width="240" height="56"/>
-                                        <color key="backgroundColor" red="0.023529411760000001" green="0.37254901959999998" blue="0.76862745099999996" alpha="1" colorSpace="calibratedRGB"/>
-                                    </view>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstItem="z1w-BA-0EP" firstAttribute="centerX" secondItem="tcR-S1-wXD" secondAttribute="centerX" id="2nc-KH-bSz"/>
-                                    <constraint firstAttribute="bottomMargin" secondItem="z1w-BA-0EP" secondAttribute="bottom" id="47g-jZ-Ivb"/>
-                                    <constraint firstItem="z1w-BA-0EP" firstAttribute="top" secondItem="tcR-S1-wXD" secondAttribute="topMargin" id="Fva-hL-QhR"/>
-                                </constraints>
-                                <edgeInsets key="layoutMargins" top="15" left="0.0" bottom="0.0" right="0.0"/>
-                            </view>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="gs3-HV-KW2"/>
-                        <color key="backgroundColor" red="0.97647058819999999" green="0.97647058819999999" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstItem="kS1-Kd-7Rh" firstAttribute="trailing" secondItem="gs3-HV-KW2" secondAttribute="trailing" id="0ce-bo-kXP"/>
-                            <constraint firstItem="kS1-Kd-7Rh" firstAttribute="leading" secondItem="gs3-HV-KW2" secondAttribute="leading" id="DjP-nh-Jtn"/>
-                            <constraint firstItem="gs3-HV-KW2" firstAttribute="bottom" secondItem="tcR-S1-wXD" secondAttribute="bottom" id="HCg-Nj-9UU"/>
-                            <constraint firstItem="tcR-S1-wXD" firstAttribute="leading" secondItem="gs3-HV-KW2" secondAttribute="leading" id="Irr-n5-guq"/>
-                            <constraint firstItem="kS1-Kd-7Rh" firstAttribute="top" secondItem="gs3-HV-KW2" secondAttribute="top" id="Ysk-uC-6MA"/>
-                            <constraint firstItem="tcR-S1-wXD" firstAttribute="top" secondItem="kS1-Kd-7Rh" secondAttribute="bottom" id="mDJ-5n-TC7"/>
-                            <constraint firstItem="tcR-S1-wXD" firstAttribute="trailing" secondItem="gs3-HV-KW2" secondAttribute="trailing" id="ucD-9o-wKV"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="actionButton" destination="z1w-BA-0EP" id="h6O-vs-Cea"/>
-                        <outlet property="headline" destination="aqp-ex-1mg" id="wIl-vB-PGg"/>
-                        <outlet property="imageView" destination="IgZ-Vh-9bN" id="SAP-C1-YOq"/>
-                        <outlet property="secureContentView" destination="zgZ-oc-hQh" id="Dee-gK-oQk"/>
-                        <outlet property="stackView" destination="TTC-yw-sLe" id="sY0-aK-AXn"/>
-                        <outlet property="subtitle" destination="u6z-A1-sKt" id="FvQ-Pn-hGb"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="jUY-bM-F2c" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1288.4057971014495" y="-135.26785714285714"/>
-        </scene>
         <!--Validation Result View Controller-->
         <scene sceneID="0gP-gs-dYe">
             <objects>
@@ -335,9 +252,6 @@
         <designable name="PFc-dj-gMR">
             <size key="intrinsicContentSize" width="414" height="60"/>
         </designable>
-        <designable name="aqp-ex-1mg">
-            <size key="intrinsicContentSize" width="414" height="60"/>
-        </designable>
         <designable name="btb-DJ-LeM">
             <size key="intrinsicContentSize" width="414" height="128"/>
         </designable>
@@ -355,15 +269,6 @@
         </designable>
         <designable name="mQR-L5-HeH">
             <size key="intrinsicContentSize" width="414" height="60"/>
-        </designable>
-        <designable name="u6z-A1-sKt">
-            <size key="intrinsicContentSize" width="414" height="128"/>
-        </designable>
-        <designable name="z1w-BA-0EP">
-            <size key="intrinsicContentSize" width="240" height="56"/>
-        </designable>
-        <designable name="zgZ-oc-hQh">
-            <size key="intrinsicContentSize" width="414" height="100"/>
         </designable>
     </designables>
     <resources>

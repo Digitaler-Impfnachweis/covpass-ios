@@ -20,17 +20,17 @@ public struct OnboardingSceneFactory: SceneFactory {
     }
 
     public func make() -> UIViewController {
-        let viewController = OnboardingContainerViewController.createFromStoryboard(bundle: Bundle.module)
         let pageModels: [OnboardingPageViewModel] = [
             PassOnboardingPageViewModel(type: .page1),
             PassOnboardingPageViewModel(type: .page2),
             PassOnboardingPageViewModel(type: .page3),
             PassConsentPageViewModel(type: .page4)
         ]
-        viewController.viewModel = PassOnboardingContainerViewModel(
+        let viewModel = PassOnboardingContainerViewModel(
             router: router,
             items: pageModels
         )
+        let viewController = OnboardingContainerViewController(viewModel: viewModel)
         return viewController
     }
 }
