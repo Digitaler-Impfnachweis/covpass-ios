@@ -25,8 +25,8 @@ let package = Package(
             name: "VaccinationValidator",
             dependencies: ["VaccinationUI"],
             resources: [.process("Resources")]),
-//        .testTarget(
-//            name: "VaccinationValidatorTests",
-//            dependencies: ["VaccinationValidator"]),
+        .testTarget(
+            name: "VaccinationValidatorTests",
+            dependencies: ["VaccinationValidator"]),
     ]
 )
