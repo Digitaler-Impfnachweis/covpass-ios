@@ -15,6 +15,7 @@ public class VaccinationDetailViewModel {
     private let router: VaccinationDetailRouterProtocol
     private let repository: VaccinationRepositoryProtocol
     private var certificates: [ExtendedCBORWebToken]
+    public weak var delegate: ViewModelDelegate?
 
     public init(
         router: VaccinationDetailRouterProtocol,
@@ -87,7 +88,12 @@ public class VaccinationDetailViewModel {
                 throw error
             }
         }
-        .cauterize()
+        .done { [weak self] in
+            self?.delegate?.viewModelDidUpdate()
+        }
+        .catch { [weak self] error in
+            self?.delegate?.viewModelUpdateDidFailWithError(error)
+        }
     }
 
     private func showCertificate() {
@@ -139,7 +145,7 @@ public class VaccinationDetailViewModel {
     public func process(payload: String) -> Promise<Void> {
         return repository.scanVaccinationCertificate(payload).then({ cert in
             return self.repository.getVaccinationCertificateList().then({ list -> Promise<Void> in
-                self.certificates = self.findCertificatePair(cert, list.certificates)
+                self.certificates = self.findCertificatePair(cert, list.certificates).sorted(by: { $0.vaccinationCertificate.hcert.dgc.v.first?.dn ?? 0 < $1.vaccinationCertificate.hcert.dgc.v.first?.dn ?? 0 })
                 return Promise.value(())
             })
         })

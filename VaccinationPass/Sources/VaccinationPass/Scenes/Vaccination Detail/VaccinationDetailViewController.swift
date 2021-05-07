@@ -42,6 +42,7 @@ class VaccinationDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.viewModel.delegate = self
         setupNavigationBar()
         setupView()
     }
@@ -137,5 +138,15 @@ class VaccinationDetailViewController: UIViewController {
         }).catch({ error in
             // TODO: Handle error
         })
+    }
+}
+
+extension VaccinationDetailViewController: ViewModelDelegate {
+    func viewModelDidUpdate() {
+        setupView()
+    }
+
+    func viewModelUpdateDidFailWithError(_ error: Error) {
+        // TODO error handling
     }
 }
