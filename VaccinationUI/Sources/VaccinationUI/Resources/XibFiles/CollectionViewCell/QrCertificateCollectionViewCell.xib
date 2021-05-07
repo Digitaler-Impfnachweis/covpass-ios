@@ -92,6 +92,20 @@
             <point key="canvasLocation" x="-1049.2753623188407" y="225.66964285714283"/>
         </collectionViewCell>
     </objects>
+    <designables>
+        <designable name="JXX-SM-lmC">
+            <size key="intrinsicContentSize" width="358" height="246"/>
+        </designable>
+        <designable name="VUx-Xk-tTT">
+            <size key="intrinsicContentSize" width="374" height="30"/>
+        </designable>
+        <designable name="adP-Zh-FLt">
+            <size key="intrinsicContentSize" width="358" height="246"/>
+        </designable>
+        <designable name="pTs-ku-Q18">
+            <size key="intrinsicContentSize" width="374" height="120"/>
+        </designable>
+    </designables>
     <resources>
         <namedColor name="OnBrandAccent70">
             <color red="0.024000000208616257" green="0.37299999594688416" blue="0.76899999380111694" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

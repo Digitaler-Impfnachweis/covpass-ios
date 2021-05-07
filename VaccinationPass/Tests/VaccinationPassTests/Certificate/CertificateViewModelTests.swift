@@ -15,7 +15,7 @@ class CertificateViewModelTests: XCTestCase {
     // MARK: - Test Variables
     
     var sut: DefaultCertificateViewModel!
-    var sutDelegate: MockViewModelDelegate!
+    var sutDelegate: MockCertificateViewModelDelegate!
     var sceneCoordinator: SceneCoordinatorMock!
     var router: CertificateRouter!
     var repository: VaccinationRepositoryMock!
@@ -28,7 +28,7 @@ class CertificateViewModelTests: XCTestCase {
         router = CertificateRouter(sceneCoordinator: sceneCoordinator)
         repository = VaccinationRepositoryMock()
         sut = DefaultCertificateViewModel(router: router, repository: repository)
-        sutDelegate = MockViewModelDelegate()
+        sutDelegate = MockCertificateViewModelDelegate()
         sut.delegate = sutDelegate
     }
 

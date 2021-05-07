@@ -13,6 +13,7 @@ import VaccinationCommon
 import PromiseKit
 
 class MockCertificateViewModel: CertificateViewModel {
+
     // MARK: - Test Variables
     
     var processCalled = false
@@ -20,7 +21,7 @@ class MockCertificateViewModel: CertificateViewModel {
     
     // MARK: - CertificateViewModel
     
-    weak var delegate: ViewModelDelegate?
+    weak var delegate: CertificateViewModelDelegate?
     
     var addButtonImage: UIImage? = UIImage()
     

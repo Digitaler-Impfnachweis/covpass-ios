@@ -1,5 +1,5 @@
 //
-//  WindowDelegateMock.swift
+//  MockCertificateViewModelDelegate.swift
 //
 //
 //  Copyright © 2021 IBM. All rights reserved.
@@ -7,12 +7,18 @@
 
 import Foundation
 import VaccinationUI
+import VaccinationPass
 
-class MockViewModelDelegate: ViewModelDelegate {
+class MockCertificateViewModelDelegate: CertificateViewModelDelegate {
     var updateCalled = false
-    
+    var updateFavoriteCalled = false
+
     func viewModelDidUpdate() {
-        updateCalled = true 
+        updateCalled = true
+    }
+
+    func viewModelDidUpdateFavorite() {
+        updateFavoriteCalled = true
     }
 
     var receivedError: Error?

@@ -116,6 +116,9 @@ extension UIImage {
 
     @ImageLoader(name: "data")
     public private(set) static var data
+
+    @ImageLoader(name: "checkmark")
+    public private(set) static var validationCheckmark
 }
 
 @propertyWrapper
