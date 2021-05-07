@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import VaccinationCommon
 
 @IBDesignable
 public class QrCertificateCollectionViewCell: BaseCardCollectionViewCell {
@@ -16,6 +17,7 @@ public class QrCertificateCollectionViewCell: BaseCardCollectionViewCell {
     @IBOutlet public var contentStackView: UIStackView!
     @IBOutlet public var headerView: CardViewHeader!
     @IBOutlet public var actionView: CardViewAction!
+    @IBOutlet public var loadingView: CardViewLoading!
     @IBOutlet public var titleView: PlainLabel!
     @IBOutlet public var qrContinerView: QrContinerView!
 
@@ -91,6 +93,61 @@ extension QrCertificateCollectionViewCell {
         actionView.stateImageView.tintColor = tintColor
         actionView.actionButton.tintColor = tintColor
         actionView.tintColor = .neutralWhite
+
+        loadingView.isHidden = true
+        if configuration.isFullImmunization {
+            if configuration.qrValue == nil {
+                loadingView.isHidden = false
+                loadingView.titleLabel.isHidden = true
+                loadingView.subtitleLabel.isHidden = true
+                loadingView.loadingIndicator.isHidden = false
+                loadingView.loadingIndicator.startAnimating()
+
+                // TODO replace this with the real logic (edge cases so don't worry for now)
+                let NO_INTERNET = false
+                let ERROR = false
+
+                if NO_INTERNET {
+                    loadingView.subtitleLabel.isHidden = false
+                    loadingView.subtitleLabel.attributedText = "vaccination_full_immunization_loading_message_check_internet"
+                        .localized
+                        .styledAs(.body)
+                        .aligned(to: .center)
+                        .colored(.neutralWhite)
+                } else if ERROR {
+                    loadingView.subtitleLabel.isHidden = false
+                    loadingView.subtitleLabel.attributedText = "vaccination_full_immunization_loading_message_error"
+                        .localized
+                        .styledAs(.body)
+                        .aligned(to: .center)
+                        .colored(.neutralWhite)
+                }
+
+            } else {
+                if let vaccinationDate = configuration.token?.vaccinationCertificate.hcert.dgc.v.first?.dt,
+                   let validDate = Calendar.current.date(byAdding: .weekOfYear, value: 2, to: vaccinationDate),
+                   let invalidUntil = Calendar.current.date(bySettingHour: 23, minute: 59, second: 59, of: validDate),
+                   let validFrom = Calendar.current.date(byAdding: .day, value: 1, to: invalidUntil),
+                   invalidUntil >= Date() {
+
+                    loadingView.isHidden = false
+                    loadingView.titleLabel.attributedText = "vaccination_full_immunization_loading_message_14_days_title"
+                        .localized
+                        .replacingOccurrences(of: "{Datum}", with: DateUtils.displayDateFormatter.string(from: validFrom))
+                        .styledAs(.header_3)
+                        .aligned(to: .center)
+                        .colored(.neutralWhite)
+                    loadingView.subtitleLabel.attributedText = "vaccination_full_immunization_loading_message_14_days_message"
+                        .localized
+                        .styledAs(.body)
+                        .aligned(to: .center)
+                        .colored(.neutralWhite)
+                }
+            }
+        }
+        if !loadingView.isHidden {
+            loadingView.layoutMargins = .init(top: .space_70, left: .space_24, bottom: .space_70, right: .space_24)
+        }
 
         layoutIfNeeded()
     }

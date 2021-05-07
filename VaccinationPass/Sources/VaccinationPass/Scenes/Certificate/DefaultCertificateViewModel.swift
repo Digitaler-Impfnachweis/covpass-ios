@@ -130,7 +130,7 @@ public class DefaultCertificateViewModel: CertificateViewModel {
 
     private func fullCertificateConfiguration(for certificate: ExtendedCBORWebToken) -> QRCertificateConfiguration {
         QRCertificateConfiguration(
-            qrValue: certificate.validationQRCodeData ?? NSUUID().uuidString,// neeeded due to no qr data
+            qrValue: certificate.validationQRCodeData,
             title: "vaccination_full_immunization_title".localized,
             subtitle: certificate.vaccinationCertificate.hcert.dgc.nam.fullName,
             image: .starEmpty,
@@ -141,7 +141,8 @@ public class DefaultCertificateViewModel: CertificateViewModel {
             backgroundColor: .onBrandAccent70,
             tintColor: UIColor.white,
             isFavorite: certificate.vaccinationCertificate.hcert.dgc.v.first?.ci == certificateList.favoriteCertificateId,
-            isFullImmunization: certificate.vaccinationCertificate.hcert.dgc.fullImmunization)
+            isFullImmunization: certificate.vaccinationCertificate.hcert.dgc.fullImmunization,
+            token: certificate)
     }
 
     private func halfCertificateConfiguration(for certificate: ExtendedCBORWebToken) -> QRCertificateConfiguration {
@@ -155,7 +156,8 @@ public class DefaultCertificateViewModel: CertificateViewModel {
             favoriteAction: favoriteAction,
             backgroundColor: .onBackground50,
             isFavorite: certificate.vaccinationCertificate.hcert.dgc.v.first?.ci == certificateList.favoriteCertificateId,
-            isFullImmunization: certificate.vaccinationCertificate.hcert.dgc.fullImmunization)
+            isFullImmunization: certificate.vaccinationCertificate.hcert.dgc.fullImmunization,
+            token: certificate)
 
     }
     

@@ -26,21 +26,24 @@
                                 <rect key="frame" x="0.0" y="-9" width="374" height="564"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" preservesSuperviewLayoutMargins="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="T1V-OB-XnR">
-                                        <rect key="frame" x="0.0" y="0.0" width="374" height="532"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="778"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" placeholderIntrinsicWidth="374" placeholderIntrinsicHeight="120" translatesAutoresizingMaskIntoConstraints="NO" id="pTs-ku-Q18" customClass="CardViewHeader" customModule="VaccinationUI">
                                                 <rect key="frame" x="24" y="0.0" width="326" height="120"/>
                                                 <color key="tintColor" systemColor="systemBlueColor"/>
                                             </view>
-                                            <view contentMode="scaleToFill" placeholderIntrinsicWidth="358" placeholderIntrinsicHeight="246" translatesAutoresizingMaskIntoConstraints="NO" id="JXX-SM-lmC" customClass="QrContinerView" customModule="VaccinationUI">
+                                            <view contentMode="scaleToFill" placeholderIntrinsicWidth="358" placeholderIntrinsicHeight="246" translatesAutoresizingMaskIntoConstraints="NO" id="JXX-SM-lmC" customClass="CardViewLoading" customModule="VaccinationUI">
                                                 <rect key="frame" x="24" y="120" width="326" height="246"/>
                                             </view>
+                                            <view contentMode="scaleToFill" placeholderIntrinsicWidth="358" placeholderIntrinsicHeight="246" translatesAutoresizingMaskIntoConstraints="NO" id="adP-Zh-FLt" customClass="QrContinerView" customModule="VaccinationUI">
+                                                <rect key="frame" x="24" y="366" width="326" height="246"/>
+                                            </view>
                                             <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oUs-2O-r3G" customClass="PlainLabel" customModule="VaccinationUI">
-                                                <rect key="frame" x="24" y="366" width="326" height="128"/>
+                                                <rect key="frame" x="24" y="612" width="326" height="128"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                             </view>
                                             <view contentMode="scaleToFill" ambiguous="YES" placeholderIntrinsicWidth="374" placeholderIntrinsicHeight="30" translatesAutoresizingMaskIntoConstraints="NO" id="VUx-Xk-tTT" customClass="CardViewAction" customModule="VaccinationUI">
-                                                <rect key="frame" x="24" y="494" width="326" height="30"/>
+                                                <rect key="frame" x="24" y="740" width="326" height="30"/>
                                                 <color key="tintColor" systemColor="systemBlueColor"/>
                                             </view>
                                         </subviews>
@@ -82,23 +85,13 @@
                 <outlet property="containerView" destination="DgT-IF-arn" id="IOi-yc-BTS"/>
                 <outlet property="contentStackView" destination="T1V-OB-XnR" id="Bsf-ww-2o1"/>
                 <outlet property="headerView" destination="pTs-ku-Q18" id="NbY-zP-9wf"/>
-                <outlet property="qrContinerView" destination="JXX-SM-lmC" id="R2G-bG-gJv"/>
+                <outlet property="loadingView" destination="JXX-SM-lmC" id="7mZ-jZ-Gar"/>
+                <outlet property="qrContinerView" destination="adP-Zh-FLt" id="yNs-85-4sC"/>
                 <outlet property="titleView" destination="oUs-2O-r3G" id="wGh-Li-9mY"/>
             </connections>
             <point key="canvasLocation" x="-1049.2753623188407" y="225.66964285714283"/>
         </collectionViewCell>
     </objects>
-    <designables>
-        <designable name="JXX-SM-lmC">
-            <size key="intrinsicContentSize" width="358" height="246"/>
-        </designable>
-        <designable name="VUx-Xk-tTT">
-            <size key="intrinsicContentSize" width="374" height="30"/>
-        </designable>
-        <designable name="pTs-ku-Q18">
-            <size key="intrinsicContentSize" width="374" height="120"/>
-        </designable>
-    </designables>
     <resources>
         <namedColor name="OnBrandAccent70">
             <color red="0.024000000208616257" green="0.37299999594688416" blue="0.76899999380111694" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

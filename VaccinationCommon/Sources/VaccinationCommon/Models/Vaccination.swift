@@ -21,7 +21,7 @@ public class Vaccination: Codable {
     /// Total Series of Doses
     public var sd: Int
     /// Date of Vaccination
-    public var dt: Date?
+    public var dt: Date
     /// Country of Vaccination
     public var co: String
     /// Certificate Issuer
@@ -62,9 +62,12 @@ public class Vaccination: Codable {
         ma = try values.decode(String.self, forKey: .ma)
         dn = try values.decode(Int.self, forKey: .dn)
         sd = try values.decode(Int.self, forKey: .sd)
-        if let dtDateString = try? values.decode(String.self, forKey: .dt) {
-            dt = DateUtils.vaccinationDateFormatter.date(from: dtDateString)
+        guard let dtDateString = try? values.decode(String.self, forKey: .dt),
+           let dtDate = DateUtils.vaccinationDateFormatter.date(from: dtDateString) else {
+            // TODO use other error
+            throw ApplicationError.missingData("Date String")
         }
+        dt = dtDate
         co = try values.decode(String.self, forKey: .co)
         `is` = try values.decode(String.self, forKey: .is)
         ci = try values.decode(String.self, forKey: .ci)
@@ -83,10 +86,8 @@ public class Vaccination: Codable {
         try container.encode(ma, forKey: .ma)
         try container.encode(dn, forKey: .dn)
         try container.encode(sd, forKey: .sd)
-        if let dt = dt {
-            let dtDate = DateUtils.vaccinationDateFormatter.string(from: dt)
-            try container.encode(dtDate, forKey: .tg)
-        }
+        let dtDate = DateUtils.vaccinationDateFormatter.string(from: dt)
+        try container.encode(dtDate, forKey: .dt)
         try container.encode(co, forKey: .co)
         try container.encode(`is`, forKey: .is)
         try container.encode(ci, forKey: .ci)
