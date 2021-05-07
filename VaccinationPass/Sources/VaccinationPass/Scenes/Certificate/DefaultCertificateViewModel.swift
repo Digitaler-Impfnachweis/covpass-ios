@@ -31,7 +31,7 @@ public class DefaultCertificateViewModel: CertificateViewModel {
     
     // MARK: - CertificateViewModel
     
-    public weak var delegate: ViewModelDelegate?
+    public weak var delegate: CertificateViewModelDelegate?
     public var addButtonImage: UIImage? = .plus
 
     public var certificates = [BaseCertifiateConfiguration]()
@@ -230,12 +230,15 @@ public class DefaultCertificateViewModel: CertificateViewModel {
 
     private func favoriteAction(for configuration: QRCertificateConfiguration) {
         guard let extendedCertificate = certificateList.certificates.filter({ $0.vaccinationCertificate.hcert.dgc.nam.fullName == configuration.subtitle }).first else { return }
-        certificateList.favoriteCertificateId = extendedCertificate.vaccinationCertificate.hcert.dgc.v.first?.ci
+        let favoriteId = extendedCertificate.vaccinationCertificate.hcert.dgc.v.first?.ci
+        certificateList.favoriteCertificateId = certificateList.favoriteCertificateId == favoriteId ? nil : favoriteId
+
         firstly {
             repository.saveVaccinationCertificateList(certificateList).asVoid()
         }
         .done {
             self.loadCertificatesConfiguration()
+            self.delegate?.viewModelDidUpdateFavorite()
         }.catch{ error in
             print(error)
             // TODO error handling

@@ -10,8 +10,14 @@ import VaccinationUI
 import VaccinationCommon
 import PromiseKit
 
+public protocol CertificateViewModelDelegate: AnyObject {
+    func viewModelDidUpdate()
+    func viewModelDidUpdateFavorite()
+    func viewModelUpdateDidFailWithError(_ error: Error)
+}
+
 public protocol CertificateViewModel: HeadlineViewModel {
-    var delegate: ViewModelDelegate? { get set }
+    var delegate: CertificateViewModelDelegate? { get set }
     var addButtonImage: UIImage? { get }
     var certificates: [BaseCertifiateConfiguration] { get set }
     func process(payload: String) -> Promise<ExtendedCBORWebToken>

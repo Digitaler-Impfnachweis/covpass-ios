@@ -103,7 +103,7 @@ extension CertificateViewController: UICollectionViewDataSource {
     public func numberOfSections(in collectionView: UICollectionView) -> Int { 1 }
     
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        viewModel.certificates.count ?? 0
+        viewModel.certificates.count
     }
     
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -154,9 +154,13 @@ extension CertificateViewController: DotPageIndicatorDelegate {
 
 // MARK: - UpdateDelegate
 
-extension CertificateViewController: ViewModelDelegate {
+extension CertificateViewController: CertificateViewModelDelegate {
     public func viewModelDidUpdate() {
         reloadCollectionView()
+    }
+
+    public func viewModelDidUpdateFavorite() {
+        collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .centeredHorizontally, animated: false)
     }
 
     public func viewModelUpdateDidFailWithError(_ error: Error) {
