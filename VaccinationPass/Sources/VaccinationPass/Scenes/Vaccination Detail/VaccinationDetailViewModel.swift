@@ -54,7 +54,7 @@ public class VaccinationDetailViewModel {
     }
     
     public var immunizationTitle: String {
-        fullImmunization ? "vaccination_certificate_detail_view_complete_title".localized : "vaccination_certificate_detail_view_incomplete_title".localized
+        fullImmunization ? "vaccination_certificate_detail_view_complete_title".localized : String(format: "vaccination_certificate_detail_view_incomplete_title".localized, 1, 2)
     }
     
     public var immunizationBody: String {

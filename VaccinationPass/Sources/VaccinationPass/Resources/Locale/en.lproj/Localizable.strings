@@ -6,12 +6,12 @@
 
 /********** App **********/
 
-"cert_app_name" = "Impfnachweis";
+"cert_app_name" = "CovPass";
 
 
-/********** Onboarding **********/
+/********** onboarding **********/
 
-"start_onboarding_title" = "Willkommen in Ihrem Corona-Impfnachweis";
+"start_onboarding_title" = "Willkommen in der CovPass-App";
 
 "start_onboarding_message" = "Weisen Sie Ihren Corona-Impfstatus ganz einfach mit dem Smartphone nach.";
 
@@ -25,26 +25,26 @@
 
 "vaccination_first_onboarding_page_title" = "Erster Schritt: Die Corona-Impfungen per QR-Code hinzufügen";
 
-"vaccination_first_onboarding_page_message" = "Nach der Corona-Impfung erhalten Sie vom medizinischen Personal ein Impfzertifikat. Scannen Sie mit der Impfnachweis-App das Impfzertifikat. Halten Sie dafür Ihr Smartphone über den QR-Code. Die Corona-Impfung wird direkt auf Ihrem Smartphone gespeichert. Sie können in der Impfnachweis-App die Impfzertifikate für mehrere Personen verwalten.";
+"vaccination_first_onboarding_page_message" = "Nach der Corona-Impfung erhalten Sie vom medizinischen Personal ein Impfzertifikat. Scannen Sie mit der CovPass-App das Impfzertifikat. Halten Sie dafür Ihr Smartphone über den QR-Code. Die Corona-Impfung wird direkt auf Ihrem Smartphone gespeichert. Sie können in der CovPass-App die Impfzertifikate für mehrere Personen verwalten.";
 
-"vaccination_second_onboarding_page_title" = "Zweiter Schritt: Die Impfnachweis-App erstellt das Prüfzertifikat";
+"vaccination_second_onboarding_page_title" = "Zweiter Schritt: Die CovPass-App erstellt das Prüfzertifikat";
 
-"vaccination_second_onboarding_page_message" = "Das Prüfzertifikat wird automatisch in der Impfnachweis-App erstellt. Es bestätigt den vollständigen Impfschutz. Bei einer Überprüfung werden nur der Impfstatus, der Name und das Geburtsdatum angezeigt. Laden Sie dafür alle notwendigen Corona-Impfungen auf Ihr Smartphone.";
+"vaccination_second_onboarding_page_message" = "Das Prüfzertifikat wird automatisch in der CovPass-App erstellt. Es bestätigt den vollständigen Impfschutz. Bei einer Überprüfung werden nur der Impfstatus, der Name und das Geburtsdatum angezeigt. Laden Sie dafür alle notwendigen Corona-Impfungen auf Ihr Smartphone.";
 
 "vaccination_third_onboarding_page_title" = "Dritter Schritt: Das Prüfzertifikat bei Bedarf vorzeigen";
 
-"vaccination_third_onboarding_page_message" = "Es können auch mehrere Prüfzertifikate von zum Beispiel Freunden und Angehörigen erstellt werden. Diese werden alle übersichtlich in der Impfnachweis-App angezeigt. Lassen Sie das Prüfzertifikat ganz einfach von der prüfenden Person scannen. Bitte halten Sie ergänzend Ihr Ausweisdokument bzw. das Ausweisdokument der geimpften Person bereit.";
+"vaccination_third_onboarding_page_message" = "Es können auch mehrere Prüfzertifikate von zum Beispiel Freunden und Angehörigen erstellt werden. Diese werden alle übersichtlich in der CovPass-App angezeigt. Lassen Sie das Prüfzertifikat ganz einfach von der prüfenden Person scannen. Bitte halten Sie ergänzend Ihr Ausweisdokument bzw. das Ausweisdokument der geimpften Person bereit.";
 
-"vaccination_fourth_onboarding_page_title" = "Zustimmung für die Nutzung der Impfnachweis-App";
+"vaccination_fourth_onboarding_page_title" = "Zustimmung für die Nutzung der CovPass-App";
 
-"vaccination_fourth_onboarding_page_message" = "Um die Impfnachweis-App zu nutzen, müssen Sie bestätigen, dass Sie die Datenschutzerklärung zur Kenntnis genommen haben.";
+"vaccination_fourth_onboarding_page_message" = "Um die CovPass-App zu nutzen, müssen Sie bestätigen, dass Sie die Datenschutzerklärung zur Kenntnis genommen haben.";
 
 "vaccination_fourth_onboarding_page_second_selection" = "Ich habe die Datenschutzerklärung zur Kenntnis genommen.";
 
 "confirmation_fourth_onboarding_page_button_title" = "Fertig";
 
 
-/********** Start Screen **********/
+/********** start Screen **********/
 
 "vaccination_start_screen_title" = "Alle Zertifikate";
 
@@ -53,11 +53,11 @@
 "vaccination_start_screen_note_message" = "Sie haben aktuell keine Impfungen gespeichert. Drücken Sie auf das Plus-Symbol, um eine Impfung hinzuzufügen.";
 
 
-/********** Popup: add vaccination **********/
+/********** popup: add vaccination **********/
 
 "vaccination_add_popup_title" = "Impfung hinzufügen";
 
-"vaccination_add_popup_message" = "Scannen Sie den QR-Code auf dem Impfzertifikat. Die Informationen werden direkt in die Impfnachweis-App übertragen.";
+"vaccination_add_popup_message" = "Scannen Sie den QR-Code auf dem Impfzertifikat. Die Informationen werden direkt in die CovPass-App übertragen.";
 
 "vaccination_add_popup_action_title" = "Sie haben keinen QR-Code erhalten?";
 
@@ -65,30 +65,30 @@
 
 "vaccination_add_popup_scan_button_title" = "QR-Code scannen";
 
-"Error_camera_access_title" = "Die Impfnachweis-App möchte auf Ihre Kamera zugreifen.";
+"error_camera_access_title" = "Die CovPass-App möchte auf Ihre Kamera zugreifen.";
 
-"Error_camera_access_message" = "Erlauben Sie den Zugriff, um QR-Codes scannen zu können.";
+"error_camera_access_message" = "Erlauben Sie den Zugriff, um QR-Codes scannen zu können.";
 
-"Error_camera_access_button_do_not_allow" = "Nicht Erlauben";
+"error_camera_access_button_do_not_allow" = "Nicht Erlauben";
 
-"Error_camera_access_button_allow" = "Erlauben";
+"error_camera_access_button_allow" = "Erlauben";
 
 "vaccination_add_loading_screen_message" = "Impfung wird hinzugefügt";
 
 
-/********** Start Screen: favorite immunization certificate **********/
+/********** start Screen: favorite immunization certificate **********/
 
 "vaccination_favorite_button_hint" = "Als Favorit markieren";
 
 
-/********** Start Screen: partial immunization certificate **********/
+/********** start Screen: partial immunization certificate **********/
 
 "vaccination_partial_immunization_title" = "COVID-19-Impfzertifikat";
 
 "vaccination_partial_immunization_action_button" = "Impfungen anzeigen";
 
 
-/********** Start Screen: full immunization certificate **********/
+/********** start screen: full immunization certificate **********/
 
 "vaccination_full_immunization_title" = "COVID-19-Prüfzertifikat";
 
@@ -96,11 +96,11 @@
 
 "vaccination_full_immunization_status_expired" = "Abgelaufen";
 
-"Error_connect_to_internet_title" = "Flugzeugmodus ausschalten oder Wi-Fi für den Datenzugriff verwenden";
+"error_connect_to_internet_title" = "Flugzeugmodus ausschalten oder Wi-Fi für den Datenzugriff verwenden";
 
-"Error_connect_to_internet_Button_settings" = "Einstellungen";
+"error_connect_to_internet_button_settings" = "Einstellungen";
 
-"Error_connect_to_internet_Button_ok" = "OK";
+"error_connect_to_internet_Button_ok" = "OK";
 
 "vaccination_full_immunization_loading_message_no_internet" = "Das Prüfzertifikat wird angezeigt, sobald Ihr Gerät mit dem Internet verbunden ist.";
 
@@ -108,12 +108,14 @@
 
 "vaccination_full_immunization_loading_message_error" = "Es ist ein unerwarteter Fehler aufgetreten. Das Prüfzertifikat kann aktuell nicht geladen werden.";
 
-"vaccination_full_immunization_loading_message_14_days_title" = "Das Prüfzertifikat wird ab dem {Datum} hier angezeigt.";
+"vaccination_full_immunization_loading_message_14_days_title" = "Das Prüfzertifikat wird ab dem %@ hier angezeigt.";
+
+"vaccination_full_immunization_loading_message_14_days_title_pattern" = "Das Prüfzertifikat wird ab dem %@ hier angezeigt.";
 
 "vaccination_full_immunization_loading_message_14_days_message" = "Der Impfschutz ist erst 14 Tage nach der vollständigen Impfung wirksam.";
 
 
-/********** Detail view vaccinations **********/
+/********** detail view vaccinations **********/
 
 "vaccination_certificate_detail_view_title" = "COVID-19-Impfungen";
 
@@ -121,9 +123,7 @@
 
 "vaccination_certificate_detail_view_birthdate" = "Geburtsdatum";
 
-"vaccination_certificate_detail_view_incomplete_title" = "1 von 2 Impfungen vorhanden";
-
-"vaccination_certificate_detail_view_incomplete_title_pattern" = "%@ von %@ Impfungen vorhanden";
+"vaccination_certificate_detail_view_incomplete_title" = "%d von %d Impfungen vorhanden";
 
 "vaccination_certificate_detail_view_incomplete_message" = "Ihr Impfschutz ist nicht vollständig. Um ein Prüfzertifikat erstellen zu lassen, fügen Sie bitte die 2. Impfung hinzu.";
 
@@ -137,32 +137,28 @@
 
 "vaccination_certificate_detail_view_personal_data_title" = "Persönliche Daten";
 
-"vaccination_certificate_detail_view_first_vaccination_title" = "Impfung 1 von 2";
+"vaccination_certificate_detail_view_vaccination_title" = "Impfung %d von %d";
 
-"vaccination_certificate_detail_view_second_vaccination_title" = "Impfung 2 von 2";
+"vaccination_certificate_detail_view_data_date" = "Datum der Impfung";
 
-"vaccination_certificate_detail_view_vaccination_title" = "Impfung %@ von %@";
+"vaccination_certificate_detail_view_data_vaccine" = "Impfstoff";
 
-"vaccination_certificate_detail_view_datas_date" = "Datum der Impfung";
+"vaccination_certificate_detail_view_data_producer" = "Hersteller";
 
-"vaccination_certificate_detail_view_datas_vaccine" = "Impfstoff";
+"vaccination_certificate_detail_view_data_bench_number" = "Chargennummer";
 
-"vaccination_certificate_detail_view_datas_producer" = "Hersteller";
+"vaccination_certificate_detail_view_data_place" = "Ort der Impfung";
 
-"vaccination_certificate_detail_view_datas_bench_number" = "Chargennummer";
+"vaccination_certificate_detail_view_data_exhibitor" = "Aussteller";
 
-"vaccination_certificate_detail_view_datas_place" = "Ort der Impfung";
+"vaccination_certificate_detail_view_data_country" = "Land";
 
-"vaccination_certificate_detail_view_datas_exhibitor" = "Aussteller";
-
-"vaccination_certificate_detail_view_datas_country" = "Land";
-
-"vaccination_certificate_detail_view_datas_identification_number" = "UVCI (Identifikationsnummer für das Zertifikat)";
+"vaccination_certificate_detail_view_data_identification_number" = "UVCI (Identifikationsnummer für das Zertifikat)";
 
 "vaccination_certificate_detail_view_delete_button_title" = "Zertifikat löschen";
 
 
-/********** Certificate Delete Dialog **********/
+/********** certificate delete dialog **********/
 
 "dialog_delete_certificate_title" = "Möchten Sie das Zertifikat von %@ wirklich löschen?";
 
@@ -177,14 +173,14 @@
 
 "error_standard_unexpected_title" = "Entschuldigung";
 
-"error_stadard_unexpected_message" = "Es ist ein unerwarteter Fehler aufgetreten. Bitte versuchen Sie es später erneut.";
+"error_standard_unexpected_message" = "Es ist ein unerwarteter Fehler aufgetreten. Bitte versuchen Sie es später erneut.";
 
-"error_no_connection_to_servcer_title" = "Verbindungsfehler";
+"error_no_connection_to_server_title" = "Verbindungsfehler";
 
-"error_no_connection_to_servcer_message" = "Bei der Verbindung zum Server ist ein Fehler aufgetreten. Bitte überprüfen Sie Ihre Internetverbindung.";
+"error_no_connection_to_server_message" = "Bei der Verbindung zum Server ist ein Fehler aufgetreten. Bitte überprüfen Sie Ihre Internetverbindung.";
 
 
-/********** Dialog: delete result **********/
+/********** dialog: delete result **********/
 
 "delete_result_dialog_header" = "Nachweis entfernt";
 
@@ -193,7 +189,7 @@
 "delete_result_dialog_positive_button_text" = "Schließen";
 
 
-/********** Dialog: duplicate certificate **********/
+/********** dialog: duplicate certificate **********/
 
 "duplicate_certificate_dialog_header" = "Impfzertifikat wurde bereits hinzugefügt";
 
