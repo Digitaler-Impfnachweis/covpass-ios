@@ -65,8 +65,8 @@ public class VaccinationView: XibView {
         vaccineView.contentView?.layoutMargins = itemsMargins
         vaccineView.showBottomBorder()
 
-        manufacturerView.attributedTitleText = "vaccination_detail_manufacturer".localized.styledAs(.header_3)
-        manufacturerView.attributedBodyText = viewModel?.vaccine.styledAs(.body)
+        manufacturerView.attributedTitleText = "vaccination_certificate_detail_view_datas_producer".localized.styledAs(.header_3)
+        manufacturerView.attributedBodyText = viewModel?.manufacturer.styledAs(.body)
         manufacturerView.isHidden = viewModel?.manufacturer.isEmpty ?? true
         manufacturerView.contentView?.layoutMargins = itemsMargins
         manufacturerView.showBottomBorder()
