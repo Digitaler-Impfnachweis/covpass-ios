@@ -89,7 +89,7 @@ class APIServiceDelegate: NSObject, URLSessionDelegate {
                     let size = CFDataGetLength(serverCertificateData)
                     if let dataBytes = CFDataGetBytePtr(serverCertificateData) {
                         let cert1 = NSData(bytes: dataBytes, length: size)
-                        if let cerFilePath = Bundle.module.url(forResource: "rsa-certify.demo.ubirch.com", withExtension: "cer"),
+                        if let cerFilePath = Bundle.module.url(forResource: "rsa-certify.demo.ubirch.com", withExtension: "der"),
                            let cert2 = try? Data(contentsOf: cerFilePath) {
                             if cert1.isEqual(to: cert2) {
                                 completionHandler(URLSession.AuthChallengeDisposition.useCredential, URLCredential(trust:serverTrust))
