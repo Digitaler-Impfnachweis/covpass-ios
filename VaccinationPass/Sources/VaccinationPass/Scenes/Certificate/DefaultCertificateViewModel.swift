@@ -248,4 +248,8 @@ public class DefaultCertificateViewModel: CertificateViewModel {
             throw error
         }
     }
+
+    public func showAppInformation() {
+        router.showAppInformation()
+    }
 }
