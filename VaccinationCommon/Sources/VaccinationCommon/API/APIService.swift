@@ -42,7 +42,11 @@ public struct APIService: APIServiceProtocol {
             request.httpBody = decompressedPayload
             request.addValue(contentType, forHTTPHeaderField: "Accept")
 
-            URLSession.shared.dataTask(with: request) { (data, response, error) in
+            let session = URLSession(configuration: URLSessionConfiguration.ephemeral,
+                                     delegate: APIServiceDelegate(),
+                                     delegateQueue: nil)
+
+            session.dataTask(with: request) { (data, response, error) in
                 // Check for Error
                 if let error = error {
                     seal.reject(error)
@@ -66,5 +70,37 @@ public struct APIService: APIServiceProtocol {
                 seal.fulfill(validationCertificate)
             }.resume()
         }
+    }
+}
+
+class APIServiceDelegate: NSObject, URLSessionDelegate {
+    func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
+        if challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodServerTrust {
+            if let serverTrust = challenge.protectionSpace.serverTrust {
+                var result = SecTrustResultType.invalid
+                let isTrustedServer = SecTrustEvaluate(serverTrust, &result)
+                
+                if errSecSuccess == isTrustedServer {
+                    guard let serverCertificate = SecTrustGetCertificateAtIndex(serverTrust, 0) else {
+                        completionHandler(URLSession.AuthChallengeDisposition.cancelAuthenticationChallenge, nil)
+                        return
+                    }
+                    let serverCertificateData = SecCertificateCopyData(serverCertificate)
+                    let size = CFDataGetLength(serverCertificateData)
+                    if let dataBytes = CFDataGetBytePtr(serverCertificateData) {
+                        let cert1 = NSData(bytes: dataBytes, length: size)
+                        if let cerFilePath = Bundle.module.url(forResource: "rsa-certify.demo.ubirch.com", withExtension: "cer"),
+                           let cert2 = try? Data(contentsOf: cerFilePath) {
+                            if cert1.isEqual(to: cert2) {
+                                completionHandler(URLSession.AuthChallengeDisposition.useCredential, URLCredential(trust:serverTrust))
+                                return
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        completionHandler(URLSession.AuthChallengeDisposition.cancelAuthenticationChallenge, nil)
     }
 }
