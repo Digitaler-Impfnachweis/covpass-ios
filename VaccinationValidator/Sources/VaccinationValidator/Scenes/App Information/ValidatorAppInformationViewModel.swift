@@ -14,15 +14,15 @@ public class ValidatorAppInformationViewModel: AppInformationViewModelProtocol {
     public let router: AppInformationRouterProtocol
 
     public var title: String {
-        "Title"
+        "Informationen".localized
     }
 
     public var descriptionText: String {
-        "description"
+        "Alle Informationen zur Impfnachweis-App im Überblick:".localized
     }
 
     public var appVersionText: String {
-        "Version 1.0"
+        "Version 1.0".localized
     }
 
     public lazy var entries: [AppInformationEntry] = {

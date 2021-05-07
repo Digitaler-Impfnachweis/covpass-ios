@@ -27,23 +27,23 @@
                     <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DU0-h6-0KX" userLabel="Content View">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="336"/>
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="320"/>
                             <subviews>
-                                <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="5WU-bn-YHG">
-                                    <rect key="frame" x="8" y="8" width="398" height="320"/>
+                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="5WU-bn-YHG">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="320"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="60" translatesAutoresizingMaskIntoConstraints="NO" id="o1e-73-NAg" customClass="PlainLabel" customModule="VaccinationUI">
-                                            <rect key="frame" x="0.0" y="0.0" width="398" height="60"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="qx9-r7-pBa"/>
                                             </constraints>
                                         </view>
-                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ck2-r2-AjP">
-                                            <rect key="frame" x="0.0" y="60" width="398" height="200"/>
+                                        <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="398" placeholderIntrinsicHeight="200" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ck2-r2-AjP" userLabel="Entries Stack View">
+                                            <rect key="frame" x="0.0" y="60" width="414" height="200"/>
                                         </stackView>
                                         <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="60" translatesAutoresizingMaskIntoConstraints="NO" id="rTl-aT-fkg" customClass="PlainLabel" customModule="VaccinationUI">
-                                            <rect key="frame" x="0.0" y="260" width="398" height="60"/>
+                                            <rect key="frame" x="0.0" y="260" width="414" height="60"/>
                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="Ifp-sB-0r2"/>
@@ -52,13 +52,13 @@
                                     </subviews>
                                 </stackView>
                             </subviews>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             <constraints>
                                 <constraint firstItem="5WU-bn-YHG" firstAttribute="leading" secondItem="DU0-h6-0KX" secondAttribute="leadingMargin" id="FIY-m4-Ghq"/>
                                 <constraint firstAttribute="trailingMargin" secondItem="5WU-bn-YHG" secondAttribute="trailing" id="Yas-QC-Ow7"/>
                                 <constraint firstAttribute="bottomMargin" secondItem="5WU-bn-YHG" secondAttribute="bottom" id="gLk-xT-gyl"/>
                                 <constraint firstItem="5WU-bn-YHG" firstAttribute="top" secondItem="DU0-h6-0KX" secondAttribute="topMargin" id="hwW-uG-jk3"/>
                             </constraints>
+                            <edgeInsets key="layoutMargins" top="0.0" left="0.0" bottom="0.0" right="0.0"/>
                         </view>
                     </subviews>
                     <constraints>

@@ -76,6 +76,7 @@ open class XibView: UIView {
         addSubview(view)
         view.pinEdges([.all], to: layoutMarginsGuide, margins: .zero)
         contentView = view
+        backgroundColor = .clear
     }
 
     private func loadViewFromNib() -> UIView? {

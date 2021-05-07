@@ -40,10 +40,12 @@ open class AppInformationViewController: UIViewController {
 
     private func configureDescription() {
         descriptionLabel.attributedText = viewModel.descriptionText.styledAs(.body)
+        descriptionLabel.layoutMargins = .init(top: .space_24, left: .space_24, bottom: .space_24, right: .space_24)
     }
 
     private func configureAppVersion() {
-        versionLabel.attributedText = viewModel.appVersionText.styledAs(.body).aligned(to: .center)
+        versionLabel.attributedText = viewModel.appVersionText.styledAs(.body).colored(.onBackground70).aligned(to: .center)
+        versionLabel.layoutMargins = .init(top: .space_24, left: .space_24, bottom: .space_24, right: .space_24)
     }
 
     private func configureEntries() {
@@ -53,20 +55,16 @@ open class AppInformationViewController: UIViewController {
         let flexibleView = UIView()
         flexibleView.setContentHuggingPriority(.defaultLow, for: .vertical)
         flexibleView.backgroundColor = .red
-//        stackView.addArrangedSubview(flexibleView)
-//        stackView.setNeedsLayout()
-//        view.layoutIfNeeded()
+        stackView.addArrangedSubview(flexibleView)
     }
 
     private func entryView(for entry: AppInformationEntry) -> UIView {
         let view = ListItemView()
-        view.textLabel.attributedText = entry.title.styledAs(.header_2)
+        view.textLabel.attributedText = entry.title.styledAs(.header_3)
         view.showSeperator = true
-        view.setContentHuggingPriority(.required, for: .vertical)
         view.action = { [weak self] in
             self?.viewModel.showSceneForEntry(entry)
         }
-        view.setNeedsLayout()
         return view
     }
 }

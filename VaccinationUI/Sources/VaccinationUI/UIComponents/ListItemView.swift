@@ -28,11 +28,11 @@ public class ListItemView: XibView {
 
     public override func initView() {
         super.initView()
-        layoutMargins = .init(top: .zero, left: .space_24, bottom: .zero, right: .space_24)
+        contentView?.layoutMargins = .init(top: .space_12, left: .space_24, bottom: .space_12, right: .space_24)
         backgroundColor = .neutralWhite
         textLabel.text = ""
         imageView.image = .chevronRight
-        seperatorView.backgroundColor = .onBackground70
+        seperatorView.backgroundColor = .onBackground20
     }
 
     // MARK: - Methods
