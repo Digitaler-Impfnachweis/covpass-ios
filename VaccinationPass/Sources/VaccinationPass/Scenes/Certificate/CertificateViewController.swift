@@ -46,7 +46,7 @@ public class CertificateViewController: UIViewController {
     public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
-        viewModel.loadCertificatesConfiguration()
+        viewModel.loadCertificates()
     }
 
     public override func viewWillDisappear(_ animated: Bool) {
@@ -58,8 +58,8 @@ public class CertificateViewController: UIViewController {
     
     private func setupDotIndicator() {
         dotPageIndicator.delegate = self
-        dotPageIndicator.numberOfDots = viewModel.certificates.count
-        dotPageIndicator.isHidden = viewModel.certificates.count == 1 ? true : false
+        dotPageIndicator.numberOfDots = viewModel.certificateViewModels.count
+        dotPageIndicator.isHidden = viewModel.certificateViewModels.count == 1 ? true : false
     }
     
     private func setupHeaderView() {
@@ -78,7 +78,7 @@ public class CertificateViewController: UIViewController {
         layout.scrollDirection = .horizontal
         collectionView.collectionViewLayout = layout
         collectionView.register(UINib(nibName: "\(NoCertificateCollectionViewCell.self)", bundle: UIConstants.bundle), forCellWithReuseIdentifier: "\(NoCertificateCollectionViewCell.self)")
-        collectionView.register(UINib(nibName: "\(QrCertificateCollectionViewCell.self)", bundle: UIConstants.bundle), forCellWithReuseIdentifier: "\(QrCertificateCollectionViewCell.self)")
+        collectionView.register(UINib(nibName: "\(CertificateCollectionViewCell.self)", bundle: UIConstants.bundle), forCellWithReuseIdentifier: "\(CertificateCollectionViewCell.self)")
         collectionView.showsHorizontalScrollIndicator = false
     }
     
@@ -91,8 +91,8 @@ public class CertificateViewController: UIViewController {
 
     private func reloadCollectionView() {
         collectionView.reloadData()
-        dotPageIndicator.numberOfDots = viewModel.certificates.count
-        dotPageIndicator.isHidden = viewModel.certificates.count == 1 ? true : false
+        dotPageIndicator.numberOfDots = viewModel.certificateViewModels.count
+        dotPageIndicator.isHidden = viewModel.certificateViewModels.count == 1 ? true : false
     }
 }
 
@@ -100,23 +100,21 @@ public class CertificateViewController: UIViewController {
 
 extension CertificateViewController: UICollectionViewDataSource {
     
-    public func numberOfSections(in collectionView: UICollectionView) -> Int { 1 }
+    public func numberOfSections(in collectionView: UICollectionView) -> Int {
+        1
+    }
     
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        viewModel.certificates.count
+        viewModel.certificateViewModels.count
     }
     
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: viewModel.reuseIdentifier(for: indexPath), for: indexPath) as? BaseCardCollectionViewCell else { return UICollectionViewCell() }
-        viewModel.configure(cell: cell, at: indexPath)
+        guard viewModel.certificateViewModels.count > indexPath.row else { return UICollectionViewCell() }
+        let viewModel = viewModel.certificateViewModels[indexPath.row]
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: viewModel.reuseIdentifier, for: indexPath) as? CardCollectionViewCell else { return UICollectionViewCell() }
 
-        // FIXME: DOES NOT WORK
-        cell.onAction = { [weak self] in
-            self?.viewModel.showCertificate(at: indexPath)
-        }
-        cell.onFavorite = { [weak self] in
-            // TODO mark as favorite
-        }
+        cell.viewModel = viewModel
+
         return cell
     }
 }

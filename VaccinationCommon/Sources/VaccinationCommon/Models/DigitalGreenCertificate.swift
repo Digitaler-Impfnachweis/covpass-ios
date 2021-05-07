@@ -20,6 +20,23 @@ public struct DigitalGreenCertificate: Codable {
     // True if full immunization is given
     public var fullImmunization: Bool { v.first?.fullImmunization ?? false }
 
+    // Date when the full immunization is valid
+    public var fullImmunizationValidFrom: Date? {
+        if !fullImmunization { return nil }
+        guard let vaccinationDate = v.first?.dt,
+              let validDate = Calendar.current.date(byAdding: .day, value: 15, to: vaccinationDate),
+              let validFrom = Calendar.current.date(bySettingHour: 0, minute: 0, second: 0, of: validDate) else {
+            return nil
+        }
+        return validFrom
+    }
+
+    // True if full immunization is valid
+    public var fullImmunizationValid: Bool {
+        guard let date = fullImmunizationValidFrom else { return false }
+        return Date() > date
+    }
+
     enum CodingKeys: String, CodingKey {
         case nam
         case dob

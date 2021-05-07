@@ -1,5 +1,5 @@
 //
-//  BaseCardCollectionViewCell.swift
+//  QRContainerView.swift
 //
 //
 //  Copyright © 2021 IBM. All rights reserved.
@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-public class QrContinerView: XibView {
+public class QRContainerView: XibView {
     // MARK: - IBOutlet
 
     @IBOutlet public var stackView: UIStackView!
@@ -40,7 +40,12 @@ public class QrContinerView: XibView {
 
     public override func initView() {
         super.initView()
-        contentView?.layoutMargins = .init(top: .space_10, left: .space_10, bottom: .space_10, right: .space_10)
+        contentView?.layoutMargins = .init(
+            top: .space_10,
+            left: .space_10,
+            bottom: .space_10,
+            right: .space_10
+        )
         contentView?.layer.cornerRadius = 30
         contentView?.layer.masksToBounds = true
         stackView.setCustomSpacing(.space_20, after: imageView)

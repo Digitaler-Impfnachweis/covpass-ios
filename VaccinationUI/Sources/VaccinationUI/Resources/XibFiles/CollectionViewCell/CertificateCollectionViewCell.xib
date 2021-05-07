@@ -12,7 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="QrCertificateCollectionViewCell" id="VBZ-4c-av2" userLabel="QrCertificateCollectionViewCell" customClass="QrCertificateCollectionViewCell" customModule="VaccinationUI">
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CertificateCollectionViewCell" id="VBZ-4c-av2" userLabel="CertificateCollectionViewCell" customClass="CertificateCollectionViewCell" customModule="VaccinationUI">
             <rect key="frame" x="0.0" y="0.0" width="414" height="590"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="4RZ-nW-lgh">
@@ -35,7 +35,7 @@
                                             <view contentMode="scaleToFill" placeholderIntrinsicWidth="358" placeholderIntrinsicHeight="246" translatesAutoresizingMaskIntoConstraints="NO" id="JXX-SM-lmC" customClass="CardViewLoading" customModule="VaccinationUI">
                                                 <rect key="frame" x="24" y="120" width="326" height="246"/>
                                             </view>
-                                            <view contentMode="scaleToFill" placeholderIntrinsicWidth="358" placeholderIntrinsicHeight="246" translatesAutoresizingMaskIntoConstraints="NO" id="adP-Zh-FLt" customClass="QrContinerView" customModule="VaccinationUI">
+                                            <view contentMode="scaleToFill" placeholderIntrinsicWidth="358" placeholderIntrinsicHeight="246" translatesAutoresizingMaskIntoConstraints="NO" id="adP-Zh-FLt" customClass="QRContainerView" customModule="VaccinationUI">
                                                 <rect key="frame" x="24" y="366" width="326" height="246"/>
                                             </view>
                                             <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oUs-2O-r3G" customClass="PlainLabel" customModule="VaccinationUI">
@@ -81,12 +81,12 @@
             </collectionViewCellContentView>
             <size key="customSize" width="414" height="590"/>
             <connections>
+                <outlet property="QRContainerView" destination="adP-Zh-FLt" id="yNs-85-4sC"/>
                 <outlet property="actionView" destination="VUx-Xk-tTT" id="dFG-2L-mnU"/>
                 <outlet property="containerView" destination="DgT-IF-arn" id="IOi-yc-BTS"/>
                 <outlet property="contentStackView" destination="T1V-OB-XnR" id="Bsf-ww-2o1"/>
                 <outlet property="headerView" destination="pTs-ku-Q18" id="NbY-zP-9wf"/>
                 <outlet property="loadingView" destination="JXX-SM-lmC" id="7mZ-jZ-Gar"/>
-                <outlet property="qrContinerView" destination="adP-Zh-FLt" id="yNs-85-4sC"/>
                 <outlet property="titleView" destination="oUs-2O-r3G" id="wGh-Li-9mY"/>
             </connections>
             <point key="canvasLocation" x="-1049.2753623188407" y="225.66964285714283"/>

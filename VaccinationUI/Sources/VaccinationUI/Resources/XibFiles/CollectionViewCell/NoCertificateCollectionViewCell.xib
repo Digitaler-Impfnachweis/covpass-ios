@@ -22,7 +22,7 @@
                         <rect key="frame" x="20" y="44" width="374" height="514"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="8B7-er-g14">
-                                <rect key="frame" x="24" y="120" width="326" height="274"/>
+                                <rect key="frame" x="24" y="120" width="326" height="134"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="no_vaccine_image" translatesAutoresizingMaskIntoConstraints="NO" id="gcH-Qd-BlY">
                                         <rect key="frame" x="123" y="0.0" width="80" height="80"/>
@@ -38,7 +38,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Scannen Sie eine Bescheinigung mit QR Code, um hier Ihren Nachweis zu sehen" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fxk-0D-dnM">
-                                        <rect key="frame" x="0.0" y="100.5" width="326" height="173.5"/>
+                                        <rect key="frame" x="0.0" y="100.5" width="326" height="33.5"/>
                                         <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="14"/>
                                         <color key="textColor" name="OnBackground70"/>
                                         <nil key="highlightedColor"/>
@@ -51,7 +51,6 @@
                         <constraints>
                             <constraint firstItem="8B7-er-g14" firstAttribute="leading" secondItem="SzY-ds-Wbh" secondAttribute="leadingMargin" id="2CN-a7-qes"/>
                             <constraint firstAttribute="trailingMargin" secondItem="8B7-er-g14" secondAttribute="trailing" id="9uW-Wf-cUh"/>
-                            <constraint firstAttribute="bottomMargin" secondItem="8B7-er-g14" secondAttribute="bottom" id="PkM-hp-UZ7"/>
                             <constraint firstItem="8B7-er-g14" firstAttribute="top" secondItem="SzY-ds-Wbh" secondAttribute="topMargin" id="auP-7w-W8o"/>
                         </constraints>
                         <edgeInsets key="layoutMargins" top="120" left="24" bottom="120" right="24"/>

@@ -17,7 +17,7 @@ public class CardViewHeader: XibView {
     @IBOutlet public var subtitleLabel: UILabel!
     @IBOutlet public var leftButton: UIButton!
     
-    // MARK: - Variables
+    // MARK: - Properties
     
     public var action: (() -> Void)?
     public var buttonImage: UIImage? {
@@ -26,16 +26,18 @@ public class CardViewHeader: XibView {
     public var buttonTint: UIColor? {
         didSet { leftButton.tintColor = buttonTint ?? .black }
     }
-    
-    // MARK: - IBAction
-    
-    @IBAction public func infoButtonPressed(button: UIButton) {
-        action?()
-    }
+
+    // MARK: - Lifecycle
 
     public override func initView() {
         super.initView()
         stackView.spacing = .space_24
         subtitleStackView.spacing = .space_12
+    }
+
+    // MARK: - IBAction
+
+    @IBAction public func infoButtonPressed(button: UIButton) {
+        action?()
     }
 }
