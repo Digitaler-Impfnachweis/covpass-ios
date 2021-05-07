@@ -21,4 +21,5 @@ public protocol CertificateViewModel: HeadlineViewModel {
     func showCertificate(at indexPath: IndexPath)
     func showCertificate(_ certificate: ExtendedCBORWebToken)
     func scanCertificate()
+    func showAppInformation()
 }

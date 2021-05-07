@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  NoCertificateCollectionViewCellTests.swift
 //
 //
 //  Created by Daniel on 19.04.2021.
@@ -8,7 +8,6 @@
 import Foundation
 import XCTest
 @testable import VaccinationUI
-
 
 class NoCertificateCollectionViewCellTests: XCTestCase {
     

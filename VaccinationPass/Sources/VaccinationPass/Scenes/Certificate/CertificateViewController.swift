@@ -56,6 +56,9 @@ public class CertificateViewController: UIViewController {
     private func setupHeaderView() {
         headerView.attributedTitleText = viewModel.headlineTitle.styledAs(.header_2)
         headerView.image = viewModel.headlineButtonImage
+        headerView.action = { [weak self] in
+            self?.viewModel.showAppInformation()
+        }
     }
     
     private func setupCollecttionView() {
