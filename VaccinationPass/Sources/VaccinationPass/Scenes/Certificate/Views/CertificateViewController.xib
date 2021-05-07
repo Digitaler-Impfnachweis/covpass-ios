@@ -94,14 +94,6 @@
             <point key="canvasLocation" x="139" y="-491"/>
         </view>
     </objects>
-    <designables>
-        <designable name="qpg-K1-lgH">
-            <size key="intrinsicContentSize" width="374" height="50"/>
-        </designable>
-        <designable name="wcE-wM-PY1">
-            <size key="intrinsicContentSize" width="56" height="56"/>
-        </designable>
-    </designables>
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
