@@ -1,8 +1,8 @@
 //
-//  File.swift
+//  ValidatorAppInformationSceneFactory.swift
 //  
 //
-//  Created by Sebastian Maschinski on 06.05.21.
+//  Copyright © 2021 IBM. All rights reserved.
 //
 
 import UIKit

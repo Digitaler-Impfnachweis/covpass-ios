@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  String+MakeQR.swift
 //  
 //
 //  Copyright © 2021 IBM. All rights reserved.
@@ -7,7 +7,6 @@
 
 import Foundation
 import UIKit
-
 
 extension String {
     func makeQr(size: CGSize) -> UIImage? {

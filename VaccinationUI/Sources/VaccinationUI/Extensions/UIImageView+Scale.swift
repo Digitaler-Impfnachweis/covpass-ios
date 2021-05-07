@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  UIImageView+Scale.swift
 //  
 //
 //  Copyright © 2021 IBM. All rights reserved.
