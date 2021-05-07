@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import VaccinationCommon
 
 public class QRCertificateConfiguration: NoCertifiateConfiguration {
     // MARK: - Public Variables
@@ -17,6 +18,9 @@ public class QRCertificateConfiguration: NoCertifiateConfiguration {
     public var headerImage: UIImage?
     public var favoriteAction: ((_ configuration: QRCertificateConfiguration) -> Void)?
     public var tintColor: UIColor
+    public var isFavorite: Bool
+    public var isFullImmunization: Bool
+    public var token: ExtendedCBORWebToken?
 
     // MARK: - Init
     
@@ -29,13 +33,19 @@ public class QRCertificateConfiguration: NoCertifiateConfiguration {
                 headerImage: UIImage? = nil,
                 favoriteAction: ((_ configuration: QRCertificateConfiguration) -> Void)? = nil,
                 backgroundColor: UIColor? = nil,
-                tintColor: UIColor = UIColor.black) {
+                tintColor: UIColor = UIColor.black,
+                isFavorite: Bool = false,
+                isFullImmunization: Bool = false,
+                token: ExtendedCBORWebToken? = nil) {
         self.stateImage = stateImage
         self.stateTitle = stateTitle
         self.headerImage = headerImage
         self.favoriteAction = favoriteAction
         self.qrValue = qrValue
         self.tintColor = tintColor
+        self.isFavorite = isFavorite
+        self.isFullImmunization = isFullImmunization
+        self.token = token
         super.init(title: title, subtitle: subtitle, image: image, identifier: "\(QrCertificateCollectionViewCell.self)")
         self.backgroundColor = backgroundColor
     }

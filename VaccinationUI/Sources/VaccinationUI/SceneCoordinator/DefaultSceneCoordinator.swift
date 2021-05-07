@@ -13,6 +13,7 @@ public class DefaultSceneCoordinator: SceneCoordinator {
 
     public private(set) var window: UIWindow?
     public private(set) var rootViewController: UIViewController?
+    private var modalSceneStack = [ModalSceneReference]()
 
     // MARK: - Lifecycle
 
@@ -56,6 +57,11 @@ public class DefaultSceneCoordinator: SceneCoordinator {
             animated: animated,
             completion: nil
         )
+
+        if viewController.modalInteractiveDismissible() != nil {
+            let reference = ModalSceneReference(viewController: viewController)
+            modalSceneStack.append(reference)
+        }
     }
 
     func present<T>(
