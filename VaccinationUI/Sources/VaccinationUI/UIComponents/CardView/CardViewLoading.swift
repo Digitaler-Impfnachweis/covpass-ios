@@ -17,22 +17,6 @@ public class CardViewLoading: XibView {
     @IBOutlet public var subtitleLabel: PlainLabel!
     @IBOutlet public var loadingIndicator: DotPulseActivityIndicator!
 
-    // MARK: - Variables
-
-//    public var action: (() -> Void)?
-//    public var buttonImage: UIImage? {
-//        didSet { leftButton.setImage(buttonImage, for: .normal) }
-//    }
-//    public var buttonTint: UIColor? {
-//        didSet { leftButton.tintColor = buttonTint ?? .black }
-//    }
-
-    // MARK: - IBAction
-
-//    @IBAction public func infoButtonPressed(button: UIButton) {
-//        action?()
-//    }
-
     public override func initView() {
         super.initView()
         stackView.spacing = .space_12
