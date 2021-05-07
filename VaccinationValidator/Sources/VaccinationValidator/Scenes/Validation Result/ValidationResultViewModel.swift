@@ -104,6 +104,19 @@ open class ValidationResultViewModel: BaseViewModel, CancellableViewModelProtoco
         .close
     }
 
+    var nameIcon: UIImage? {
+        switch immunizationState {
+        case .full, .partial:
+            return .data
+        case .error:
+            return .validationSearch
+        }
+    }
+
+    var errorIcon: UIImage? {
+        .validationPending
+    }
+
     // MARK: - Methods
 
     public func cancel() {

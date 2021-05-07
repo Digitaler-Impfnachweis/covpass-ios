@@ -54,9 +54,11 @@ public class ValidationResultViewController: UIViewController {
 
         nameView.attributedTitleText = viewModel.nameTitle?.styledAs(.header_3)
         nameView.attributedBodyText = viewModel.nameBody?.styledAs(.body)
+        nameView.image = viewModel.nameIcon
 
         errorView.attributedTitleText = viewModel.errorTitle?.styledAs(.header_3)
         errorView.attributedBodyText = viewModel.errorBody?.styledAs(.body)
+        errorView.image = viewModel.errorIcon
     }
 
     private func configureImageView() {
@@ -75,7 +77,6 @@ public class ValidationResultViewController: UIViewController {
 
     private func configureParagraphView() {
         stackView.setCustomSpacing(.space_24, after: resultView)
-        nameView.image = .data
     }
 
     private func configureToolbarView() {

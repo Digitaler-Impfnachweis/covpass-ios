@@ -119,6 +119,12 @@ extension UIImage {
 
     @ImageLoader(name: "checkmark")
     public private(set) static var validationCheckmark
+
+    @ImageLoader(name: "pending")
+    public private(set) static var validationPending
+
+    @ImageLoader(name: "search")
+    public private(set) static var validationSearch
 }
 
 @propertyWrapper
