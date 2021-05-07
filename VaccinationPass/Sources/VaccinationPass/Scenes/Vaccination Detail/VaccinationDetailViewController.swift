@@ -10,7 +10,9 @@ import UIKit
 import VaccinationCommon
 import Scanner
 
-public class VaccinationDetailViewController: UIViewController {
+class VaccinationDetailViewController: UIViewController {
+    // MARK: - Outlets
+
     @IBOutlet var scrollView: UIScrollView!
     @IBOutlet var stackView: UIStackView!
     @IBOutlet var vaccinationsStackView: UIStackView!
@@ -23,14 +25,28 @@ public class VaccinationDetailViewController: UIViewController {
     @IBOutlet var nameView: ParagraphView!
     @IBOutlet var birtdateView: ParagraphView!
     @IBOutlet var deleteButton: MainButton!
+
+    // MARK: - Properties
+
+    private(set) var viewModel: VaccinationDetailViewModel
+
+    // MARK: - Lifecycle
+
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) { fatalError("init?(coder: NSCoder) not implemented yet") }
+
+    init(viewModel: VaccinationDetailViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: String(describing: Self.self), bundle: .module)
+    }
     
-    public var viewModel: VaccinationDetailViewModel!
-    
-    public override func viewDidLoad() {
+    override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationBar()
         setupView()
     }
+
+    // MARK: - Methods
 
     private func setupNavigationBar() {
         title = "vaccination_certificate_detail_view_title".localized
@@ -86,12 +102,12 @@ public class VaccinationDetailViewController: UIViewController {
         personalDataHeadline.layoutMargins = .init(top: .space_30, left: .space_24, bottom: .zero, right: .space_24)
 
         nameView.attributedTitleText = "vaccination_certificate_detail_view_name".localized.styledAs(.header_3)
-        nameView.attributedBodyText = viewModel?.name.styledAs(.body)
+        nameView.attributedBodyText = viewModel.name.styledAs(.body)
         nameView.contentView?.layoutMargins = .init(top: .space_12, left: .space_24, bottom: .space_12, right: .space_24)
         nameView.showBottomBorder()
 
         birtdateView.attributedTitleText = "vaccination_certificate_detail_view_birthdate".localized.styledAs(.header_3)
-        birtdateView.attributedBodyText = viewModel?.birthDate.styledAs(.body)
+        birtdateView.attributedBodyText = viewModel.birthDate.styledAs(.body)
         birtdateView.contentView?.layoutMargins = .init(top: .space_12, left: .space_24, bottom: .space_12, right: .space_24)
     }
 
@@ -115,21 +131,11 @@ public class VaccinationDetailViewController: UIViewController {
         })
     }
 
-    @objc public func onFavorite() {
+    @objc private func onFavorite() {
         viewModel.updateFavorite().done({
             self.setupNavigationBar()
         }).catch({ error in
-            print(error)
+            // TODO: Handle error
         })
-    }
-}
-
-extension VaccinationDetailViewController: StoryboardInstantiating {
-    public static var bundle: Bundle {
-        return Bundle.module
-    }
-
-    public static var storyboardName: String {
-        "Pass"
     }
 }

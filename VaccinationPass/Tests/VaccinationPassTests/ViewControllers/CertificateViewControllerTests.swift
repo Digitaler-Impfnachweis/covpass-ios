@@ -21,11 +21,7 @@ class CertificateViewControllerTests: XCTestCase {
     override func setUp() {
         super.setUp()
         viewModel = MockCertificateViewModel()
-        // Create sut
-        let certificateViewController = CertificateViewController.createFromStoryboard(bundle: Bundle.module)
-        viewModel.delegate = certificateViewController
-        certificateViewController.viewModel = viewModel
-        sut = certificateViewController
+        sut = CertificateViewController(viewModel: viewModel)
         // Load View
         let window = UIWindow(frame:  UIScreen.main.bounds)
         window.makeKeyAndVisible()
@@ -33,6 +29,7 @@ class CertificateViewControllerTests: XCTestCase {
     }
     
     override func tearDown() {
+        viewModel = nil
         sut = nil
         super.tearDown()
     }

@@ -42,8 +42,6 @@ open class StartOnboardingViewModel: BaseViewModel {
         .lock
     }
 
-    public var backgroundColor: UIColor { .backgroundPrimary }
-
     // MARK: - Lifecycle
 
     public init(router: StartRouterProtocol) {

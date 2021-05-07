@@ -8,21 +8,20 @@
 import UIKit
 import VaccinationUI
 
-public struct StartSceneFactory: SceneFactory {
+struct StartSceneFactory: SceneFactory {
     // MARK: - Properties
 
     let router: StartRouterProtocol
 
     // MARK: - Lifecycle
 
-    public init(router: StartRouterProtocol) {
+    init(router: StartRouterProtocol) {
         self.router = router
     }
 
-    public func make() -> UIViewController {
+    func make() -> UIViewController {
         let viewModel = StartOnboardingViewModel(router: router)
-        let viewController = StartOnboardingViewController.createFromStoryboard(bundle: Bundle.module)
-        viewController.viewModel = viewModel
+        let viewController = StartOnboardingViewController(viewModel: viewModel)
         let navigationController = UINavigationController(rootViewController: viewController)
         return navigationController
     }

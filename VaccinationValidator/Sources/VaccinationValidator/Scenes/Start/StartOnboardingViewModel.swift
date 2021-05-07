@@ -8,7 +8,7 @@
 import UIKit
 import VaccinationUI
 
-open class StartOnboardingViewModel: BaseViewModel {
+class StartOnboardingViewModel: BaseViewModel {
     // MARK: - Properties
 
     public weak var delegate: ViewModelDelegate?

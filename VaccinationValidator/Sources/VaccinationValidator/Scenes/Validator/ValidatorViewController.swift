@@ -10,48 +10,54 @@ import UIKit
 import VaccinationUI
 import Scanner
 
-public class ValidatorViewController: UIViewController {
+class ValidatorViewController: UIViewController {
     // MARK: - IBOutlet
 
-    @IBOutlet public var headerView: InfoHeaderView!
-    @IBOutlet public var scanCard: ScanCardView!
-    @IBOutlet public var offlineCard: OfflineCardView!
-    
-    // MARK: - Public
+    @IBOutlet var headerView: InfoHeaderView!
+    @IBOutlet var scanCard: ScanCardView!
+    @IBOutlet var offlineCard: OfflineCardView!
 
-    public var viewModel: ValidatorViewModel!
-    
+    // MARK: - Properties
+
+    private(set) var viewModel: ValidatorViewModel
+
     // MARK: - Lifecycle
-    
-    override public func viewDidLoad() {
+
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) { fatalError("init?(coder: NSCoder) not implemented yet") }
+
+    init(viewModel: ValidatorViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: String(describing: Self.self), bundle: .module)
+    }
+
+    override func viewDidLoad() {
         super.viewDidLoad()
         setupHeaderView()
         setupCardView()
     }
 
-    public override func viewWillAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
     }
 
-    public override func viewWillDisappear(_ animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
-    // MARK: - Private
+    // MARK: - Methods
     
-    public func setupHeaderView() {
-        headerView.attributedTitleText = viewModel?.title.styledAs(.header_2)
+    private func setupHeaderView() {
+        headerView.attributedTitleText = viewModel.title.styledAs(.header_2)
         headerView.image = .help
         headerView.action = { [weak self] in
             self?.viewModel.showAppInformation()
         }
     }
-    
-    // MARK: - Card View
 
-    func setupCardView() {
+    private func setupCardView() {
         scanCard.titleLabel.attributedText = "validation_start_screen_Scan_title".localized.styledAs(.header_1).colored(.backgroundSecondary)
         scanCard.textLabel.attributedText = "validation_start_screen_Scan_message".localized.styledAs(.body).colored(.backgroundSecondary)
         scanCard.actionButton.title = "validation_start_screen_Scan_action_button_title".localized
@@ -64,13 +70,5 @@ public class ValidatorViewController: UIViewController {
         offlineCard.infoLabel.attributedText = viewModel.offlineTitle.styledAs(.body)
         offlineCard.infoImageView.image = .warning
         offlineCard.dateLabel.attributedText = viewModel.offlineMessage.styledAs(.body).colored(.onBackground70)
-    }
-}
-
-// MARK: - StoryboardInstantiating
-
-extension ValidatorViewController: StoryboardInstantiating {
-    public static var storyboardName: String {
-        "Validator"
     }
 }

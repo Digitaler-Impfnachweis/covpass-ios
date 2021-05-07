@@ -22,15 +22,12 @@ struct CertificateSceneFactory: SceneFactory {
     }
 
     func make() -> UIViewController {
-        let viewController = CertificateViewController.createFromStoryboard(bundle: Bundle.module)
         let repository = VaccinationRepository(service: APIService(), parser: QRCoder())
         let viewModel = DefaultCertificateViewModel(
             router: router,
             repository: repository
         )
-        viewController.viewModel = viewModel
-        viewModel.delegate = viewController
-
+        let viewController = CertificateViewController(viewModel: viewModel)
         let navigationController = UINavigationController(rootViewController: viewController)
         return navigationController
     }

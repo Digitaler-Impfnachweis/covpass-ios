@@ -25,9 +25,7 @@ public struct ProofSceneFactory: ResolvableSceneFactory {
             router: router,
             resolvable: resolvable
         )
-        let viewController = ProofViewController.createFromStoryboard(bundle: Bundle.module)
-        viewController.viewModel = viewModel
-
+        let viewController = ProofViewController(viewModel: viewModel)
         return viewController
     }
 }
