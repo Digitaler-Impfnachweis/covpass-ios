@@ -31,9 +31,7 @@ public struct ValidationResultSceneFactory: SceneFactory {
             router: router,
             certificate: certificate
         )
-        let viewController = ValidationResultViewController.createFromStoryboard(bundle: Bundle.module)
-        viewController.viewModel = viewModel
-        viewModel.delegate = viewController
+        let viewController = ValidationResultViewController(viewModel: viewModel)
         return viewController
     }
 }
