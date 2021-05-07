@@ -16,7 +16,7 @@ public class DefaultCertificateViewModel: CertificateViewModel {
 
     private let router: CertificateRouterProtocol
     private let repository: VaccinationRepositoryProtocol
-    
+
     public init(
         router: CertificateRouterProtocol,
         repository: VaccinationRepositoryProtocol) {

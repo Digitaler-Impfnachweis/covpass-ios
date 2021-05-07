@@ -31,23 +31,29 @@ class ScanViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .backgroundPrimary
+        container.backgroundColor = .neutralBlack
+
         configureToolbarView()
-        configureScanView()
+
+        viewModel.onCameraAccess = { [weak self] in
+            self?.configureScanView()
+        }
+        viewModel.requestCameraAccess()
     }
 
     // MARK: - Private
 
     private func configureScanView() {
-        scanViewController = Scanner.viewController(codeTypes: [.qr], scanMode: .once, delegate: self)
-        scanViewController?.view.frame = container.bounds
-        container.addSubview(scanViewController!.view)
-        scanViewController?.view.pinEdges(to: container)
+        let viewController = Scanner.viewController(codeTypes: [.qr], scanMode: .once, delegate: self)
+        viewController.view.frame = container.bounds
+        container.addSubview(viewController.view)
+        viewController.view.pinEdges(to: container)
+        scanViewController = viewController
     }
     
     private func configureToolbarView() {
         toolbarView.state = .cancel
-        // Comment out for now. We need to update the routing to make this work.
-//        toolbarView.setUpLeftButton(leftButtonItem: .navigationArrow)
         toolbarView.layoutMargins.top = .space_24
         toolbarView.delegate = self
     }
@@ -58,8 +64,6 @@ class ScanViewController: UIViewController {
 extension ScanViewController: CustomToolbarViewDelegate {
     public func customToolbarView(_: CustomToolbarView, didTap buttonType: ButtonItemType) {
         switch buttonType {
-        case .navigationArrow:
-            viewModel.cancel()
         case .cancelButton:
             viewModel.cancel()
         default:

@@ -44,7 +44,11 @@ class CertificateRouter: CertificateRouterProtocol {
 
     func scanQRCode() -> Promise<ScanResult> {
         sceneCoordinator.present(
-            ScanSceneFactory()
+            ScanSceneFactory(
+                cameraAccessProvider: CameraAccessProvider(
+                    router: DialogRouter(sceneCoordinator: sceneCoordinator)
+                )
+            )
         )
     }
 

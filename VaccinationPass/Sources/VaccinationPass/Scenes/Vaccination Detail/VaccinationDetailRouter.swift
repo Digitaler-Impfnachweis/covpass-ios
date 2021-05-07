@@ -24,7 +24,11 @@ class VaccinationDetailRouter: VaccinationDetailRouterProtocol {
 
     func showScanner() -> Promise<ScanResult> {
         sceneCoordinator.present(
-            ScanSceneFactory()
+            ScanSceneFactory(
+                cameraAccessProvider: CameraAccessProvider(
+                    router: DialogRouter(sceneCoordinator: sceneCoordinator)
+                )
+            )
         )
     }
 
