@@ -99,7 +99,6 @@ public class CertificateViewController: UIViewController {
 // MARK: - UITableViewDataSource
 
 extension CertificateViewController: UICollectionViewDataSource {
-    
     public func numberOfSections(in collectionView: UICollectionView) -> Int {
         1
     }
@@ -128,10 +127,6 @@ extension CertificateViewController: UICollectionViewDelegate {
         guard let visibleIndexPath = collectionView.indexPathForItem(at: visiblePoint) else { return }
         dotPageIndicator.selectDot(withIndex: visibleIndexPath.item)
     }
-
-    public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        viewModel.showCertificate(at: indexPath)
-    }
 }
 
 // MARK: - UICollectionViewDelegateFlowLayout
@@ -158,7 +153,7 @@ extension CertificateViewController: CertificateViewModelDelegate {
     }
 
     public func viewModelDidUpdateFavorite() {
-        collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .centeredHorizontally, animated: false)
+        collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .centeredHorizontally, animated: false)
     }
 
     public func viewModelUpdateDidFailWithError(_ error: Error) {

@@ -107,9 +107,6 @@ public class CertificateCollectionViewCell: CardCollectionViewCell {
         actionView.tintColor = .neutralWhite
 
         loadingView.isHidden = !vm.isLoading && vm.errorTitle == nil && vm.errorSubtitle == nil
-        if !loadingView.isHidden {
-            loadingView.layoutMargins = .init(top: .space_70, left: .space_24, bottom: .space_70, right: .space_24)
-        }
         loadingView.titleLabel.isHidden = vm.errorTitle == nil
         loadingView.titleLabel.attributedText = vm.errorTitle?
             .styledAs(.header_3)

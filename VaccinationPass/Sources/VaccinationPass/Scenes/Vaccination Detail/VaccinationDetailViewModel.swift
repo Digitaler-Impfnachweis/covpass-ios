@@ -23,7 +23,7 @@ public class VaccinationDetailViewModel {
 
         self.router = router
         self.repository = repository
-        self.certificates = certificates
+        self.certificates = certificates.sorted(by: { $0.vaccinationCertificate.hcert.dgc.v.first?.dn ?? 0 < $1.vaccinationCertificate.hcert.dgc.v.first?.dn ?? 0 })
     }
 
     public var fullImmunization: Bool {
@@ -79,8 +79,13 @@ public class VaccinationDetailViewModel {
         firstly {
             router.showScanner()
         }
-        .done { result in
-            fatalError("TBD: To avoid code dublication we should add a scene wich scans and procced a certificate.")
+        .then { result -> Promise<Void> in
+            switch result {
+            case .success(let qrCode):
+                return self.process(payload: qrCode)
+            case.failure(let error):
+                throw error
+            }
         }
         .cauterize()
     }

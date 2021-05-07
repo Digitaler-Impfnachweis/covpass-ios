@@ -55,7 +55,10 @@ public class DefaultCertificateViewModel: CertificateViewModel {
                 self.certificateViewModels = [NoCertificateCardViewModel()]
                 return
             }
-            self.certificateViewModels = list.map { CertificateCardViewModel(token: $0, favoriteId: self.certificateList.favoriteCertificateId, onAction: self.onAction, onFavorite: self.onFavorite) }
+            self.certificateViewModels = list.map { cert in
+                let isFavorite = self.certificatePair(for: cert).contains(where: { $0.vaccinationCertificate.hcert.dgc.v.first?.ci == self.certificateList.favoriteCertificateId })
+                return CertificateCardViewModel(token: cert, isFavorite: isFavorite, onAction: self.onAction, onFavorite: self.onFavorite)
+            }
         }).catch({ error in
             print(error)
             self.certificateViewModels = [NoCertificateCardViewModel()]
@@ -181,7 +184,6 @@ public class DefaultCertificateViewModel: CertificateViewModel {
             repository.saveVaccinationCertificateList(certificateList).asVoid()
         }
         .done {
-            self.loadCertificates()
             self.delegate?.viewModelDidUpdateFavorite()
         }
         .catch{ error in

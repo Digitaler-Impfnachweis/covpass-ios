@@ -16,7 +16,7 @@ struct CertificateCardViewModel: CertificateCardViewModelProtocol {
     // MARK: - Private Properties
 
     private var token: ExtendedCBORWebToken
-    private var favoriteId: String?
+    private var certificateIsFavorite: Bool
     private var onAction: (ExtendedCBORWebToken) -> Void
     private var onFavorite: (String) -> Void
     private var certificate: DigitalGreenCertificate {
@@ -25,9 +25,9 @@ struct CertificateCardViewModel: CertificateCardViewModelProtocol {
 
     // MARK: - Lifecycle
 
-    init(token: ExtendedCBORWebToken, favoriteId: String?, onAction: @escaping (ExtendedCBORWebToken) -> Void, onFavorite: @escaping (String) -> Void) {
+    init(token: ExtendedCBORWebToken, isFavorite: Bool, onAction: @escaping (ExtendedCBORWebToken) -> Void, onFavorite: @escaping (String) -> Void) {
         self.token = token
-        self.favoriteId = favoriteId
+        self.certificateIsFavorite = isFavorite
         self.onAction = onAction
         self.onFavorite = onFavorite
     }
@@ -47,11 +47,11 @@ struct CertificateCardViewModel: CertificateCardViewModelProtocol {
     }
 
     var isFavorite: Bool {
-        certificate.v.first?.ci == favoriteId
+        certificateIsFavorite
     }
 
     var qrCode: UIImage? {
-        if !isFullImmunization { return nil }
+        if !certificate.fullImmunizationValid { return nil }
         return token.validationQRCodeData?.generateQRCode(size: UIScreen.main.bounds.size)
     }
 
@@ -68,12 +68,12 @@ struct CertificateCardViewModel: CertificateCardViewModelProtocol {
     }
 
     var isLoading: Bool {
-        isFullImmunization && qrCode == nil
+        isFullImmunization && token.validationQRCodeData == nil
     }
 
     var errorTitle: String? {
         if !isFullImmunization { return nil }
-        if qrCode == nil || certificate.fullImmunizationValid { return nil }
+        if token.validationQRCodeData == nil || certificate.fullImmunizationValid { return nil }
         guard let date = certificate.fullImmunizationValidFrom else { return nil }
         let dateString = DateUtils.displayDateFormatter.string(from: date)
         return String(format: "vaccination_full_immunization_loading_message_14_days_title".localized, dateString)
@@ -81,7 +81,7 @@ struct CertificateCardViewModel: CertificateCardViewModelProtocol {
 
     var errorSubtitle: String? {
         if !isFullImmunization { return nil }
-        if qrCode == nil {
+        if token.validationQRCodeData == nil {
             if NO_INTERNET {
                 return "vaccination_full_immunization_loading_message_check_internet".localized
             }
