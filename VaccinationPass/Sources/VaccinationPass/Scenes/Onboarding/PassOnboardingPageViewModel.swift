@@ -9,12 +9,10 @@ import UIKit
 import VaccinationUI
 
 class PassOnboardingPageViewModel: OnboardingPageViewModel {
+    // MARK: - Properties
+
     weak var delegate: ViewModelDelegate?
     var type: OnboardingPageViewModelType
-
-    init(type: OnboardingPageViewModelType) {
-        self.type = type
-    }
 
     var toolbarState: CustomToolbarState {
         .confirm("next_onboarding_page_button_title".localized)
@@ -33,7 +31,7 @@ class PassOnboardingPageViewModel: OnboardingPageViewModel {
         }
     }
 
-    var title: String {
+    var title: String? {
         switch type {
         case .page1:
             return "vaccination_first_onboarding_page_title".localized
@@ -42,11 +40,11 @@ class PassOnboardingPageViewModel: OnboardingPageViewModel {
         case .page3:
             return "vaccination_third_onboarding_page_title".localized
         default:
-            return ""
+            return nil
         }
     }
 
-    var info: String {
+    var info: String? {
         switch type {
         case .page1:
             return "vaccination_first_onboarding_page_message".localized
@@ -55,8 +53,13 @@ class PassOnboardingPageViewModel: OnboardingPageViewModel {
         case .page3:
             return "vaccination_third_onboarding_page_message".localized
         default:
-            return ""
+            return nil
         }
     }
-}
 
+    // MARK: - Lifecycle
+
+    init(type: OnboardingPageViewModelType) {
+        self.type = type
+    }
+}

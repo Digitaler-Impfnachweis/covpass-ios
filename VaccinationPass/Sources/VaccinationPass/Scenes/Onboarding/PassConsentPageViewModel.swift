@@ -9,7 +9,9 @@ import UIKit
 import VaccinationUI
 
 class PassConsentPageViewModel: ConsentPageViewModel {
-    var delegate: ViewModelDelegate?
+    // MARK: - Properties
+
+    weak var delegate: ViewModelDelegate?
     var type: OnboardingPageViewModelType
 
     var toolbarState: CustomToolbarState {
@@ -22,11 +24,11 @@ class PassConsentPageViewModel: ConsentPageViewModel {
         .onboardingScreen4
     }
     
-    var title: String {
+    var title: String? {
         "vaccination_fourth_onboarding_page_title".localized
     }
     
-    var info: String {
+    var info: String? {
         "vaccination_fourth_onboarding_page_message".localized
     }
     
@@ -39,6 +41,8 @@ class PassConsentPageViewModel: ConsentPageViewModel {
             delegate?.viewModelDidUpdate()
         }
     }
+
+    // MARK: - Lifecycle
 
     init(type: OnboardingPageViewModelType) {
         self.type = type

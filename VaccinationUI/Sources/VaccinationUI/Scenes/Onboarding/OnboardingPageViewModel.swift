@@ -19,8 +19,8 @@ public protocol OnboardingPageViewModel {
     var type: OnboardingPageViewModelType { get set }
     var toolbarState: CustomToolbarState { get }
     var image: UIImage? { get }
-    var title: String { get }
-    var info: String { get }
+    var title: String? { get }
+    var info: String? { get }
 }
 
 public protocol ConsentPageViewModel: OnboardingPageViewModel {
