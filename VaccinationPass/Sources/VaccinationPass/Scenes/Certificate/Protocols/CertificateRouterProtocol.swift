@@ -15,4 +15,5 @@ public protocol CertificateRouterProtocol: RouterProtocol {
     func showCertificates(_ certificates: [ExtendedCBORWebToken])
     func showProof() -> Promise<Void>
     func scanQRCode() -> Promise<Swift.Result<String, ScanError>>
+    func showAppInformation()
 }

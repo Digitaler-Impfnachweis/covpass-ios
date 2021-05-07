@@ -21,9 +21,18 @@ public class CertificateViewController: UIViewController {
     
     // MARK: - Public
     
-    public var viewModel: CertificateViewModel!
+    public private(set) var viewModel: CertificateViewModel
 
     // MARK: - Lifecycle
+
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) { fatalError("init?(coder: NSCoder) not implemented yet") }
+
+    init(viewModel: CertificateViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: String(describing: Self.self), bundle: .module)
+        self.viewModel.delegate = self
+    }
     
     override public func viewDidLoad() {
         super.viewDidLoad()
@@ -56,6 +65,9 @@ public class CertificateViewController: UIViewController {
     private func setupHeaderView() {
         headerView.attributedTitleText = viewModel.headlineTitle.styledAs(.header_2)
         headerView.image = viewModel.headlineButtonImage
+        headerView.action = { [weak self] in
+            self?.viewModel.showAppInformation()
+        }
     }
     
     private func setupCollecttionView() {
@@ -71,7 +83,7 @@ public class CertificateViewController: UIViewController {
     }
     
     private func setupActionButton() {
-        addButton.icon = viewModel?.addButtonImage
+        addButton.icon = viewModel.addButtonImage
         addButton.action = { [weak self] in
             self?.viewModel.scanCertificate()
         }
@@ -91,7 +103,7 @@ extension CertificateViewController: UICollectionViewDataSource {
     public func numberOfSections(in collectionView: UICollectionView) -> Int { 1 }
     
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        viewModel?.certificates.count ?? 0
+        viewModel.certificates.count ?? 0
     }
     
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -137,14 +149,6 @@ extension CertificateViewController: UICollectionViewDelegateFlowLayout {
 extension CertificateViewController: DotPageIndicatorDelegate {
     public func dotPageIndicator(_ dotPageIndicator: DotPageIndicator, didTapDot index: Int) {
         collectionView.scrollToItem(at: IndexPath(item: index, section: 0), at: .left, animated: true)
-    }
-}
-
-// MARK: - StoryboardInstantiating
-
-extension CertificateViewController: StoryboardInstantiating {
-    public static var storyboardName: String {
-        "Pass"
     }
 }
 

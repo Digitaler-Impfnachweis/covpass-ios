@@ -70,6 +70,10 @@ public class ValidatorViewModel {
         .cauterize()
     }
 
+    func showAppInformation() {
+        router.showAppInformation()
+    }
+
     private func payloadFromScannerResult(_ result: ScanResult) throws -> String {
         switch result {
         case .success(let payload):

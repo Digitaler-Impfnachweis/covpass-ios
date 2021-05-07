@@ -75,4 +75,8 @@ class MockCertificateViewModel: CertificateViewModel {
     func scanCertificate() {
         // TODO: Add tests
     }
+
+    func showAppInformation() {
+        // TODO: Add tests
+    }
 }

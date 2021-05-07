@@ -20,11 +20,20 @@ public class ValidationResultViewController: UIViewController, ViewModelDelegate
     @IBOutlet public var nameView: ParagraphView!
     @IBOutlet public var errorView: ParagraphView!
 
-    // MARK: - Public Properties
+    // MARK: - Properties
 
-    public var viewModel: ValidationResultViewModel!
+    private(set) var viewModel: ValidationResultViewModel
 
     // MARK: - Lifecycle
+
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) { fatalError("init?(coder: NSCoder) not implemented yet") }
+
+    init(viewModel: ValidationResultViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: String(describing: Self.self), bundle: .module)
+        self.viewModel.delegate = self
+    }
 
     public override func viewDidLoad() {
         super.viewDidLoad()
@@ -96,13 +105,7 @@ extension ValidationResultViewController: CustomToolbarViewDelegate {
     }
 }
 
-// MARK: - StoryboardInstantiating
-
-extension ValidationResultViewController: StoryboardInstantiating {
-    public static var storyboardName: String {
-        return UIConstants.Storyboard.Onboarding
-    }
-}
+// MARK: - ModalInteractiveDismissibleProtocol
 
 extension ValidationResultViewController: ModalInteractiveDismissibleProtocol {
     public func canDismissModalViewController() -> Bool {

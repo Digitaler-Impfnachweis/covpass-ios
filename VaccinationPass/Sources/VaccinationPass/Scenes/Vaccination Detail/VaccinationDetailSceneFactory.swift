@@ -35,8 +35,7 @@ struct VaccinationDetailSceneFactory: SceneFactory {
             repository: repository,
             certificates: certificates
         )
-        let viewController = VaccinationDetailViewController.createFromStoryboard(bundle: Bundle.module)
-        viewController.viewModel = viewModel
+        let viewController = VaccinationDetailViewController(viewModel: viewModel)
         return viewController
     }
 }

@@ -47,4 +47,12 @@ class CertificateRouter: CertificateRouterProtocol {
             ScanSceneFactory()
         )
     }
+
+    func showAppInformation() {
+        sceneCoordinator.push(
+            PassAppInformationSceneFactory(
+                router: AppInformationRouter(sceneCoordinator: sceneCoordinator)
+            )
+        )
+    }
 }

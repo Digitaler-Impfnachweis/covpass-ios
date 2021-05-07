@@ -11,7 +11,7 @@ import VaccinationCommon
 import PromiseKit
 
 public protocol CertificateViewModel: HeadlineViewModel {
-    var delegate: ViewModelDelegate? { get }
+    var delegate: ViewModelDelegate? { get set }
     var addButtonImage: UIImage? { get }
     var certificates: [BaseCertifiateConfiguration] { get set }
     func process(payload: String) -> Promise<ExtendedCBORWebToken>
@@ -21,4 +21,5 @@ public protocol CertificateViewModel: HeadlineViewModel {
     func showCertificate(at indexPath: IndexPath)
     func showCertificate(_ certificate: ExtendedCBORWebToken)
     func scanCertificate()
+    func showAppInformation()
 }
