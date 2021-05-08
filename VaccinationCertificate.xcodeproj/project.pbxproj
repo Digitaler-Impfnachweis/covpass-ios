@@ -7,13 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		210116F92646D18100B9E8FF /* release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 210116F72646D18100B9E8FF /* release.xcconfig */; };
-		210116FA2646D18100B9E8FF /* debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 210116F82646D18100B9E8FF /* debug.xcconfig */; };
 		6507D7E625FB5DF700D69F94 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 88AB2A3825FA40CE00D4EA52 /* Assets.xcassets */; };
 		6507D7ED25FB5E0300D69F94 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 88AB2A4325FA40CE00D4EA52 /* Assets.xcassets */; };
 		6598186B260CB44D00776F70 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6598186A260CB44D00776F70 /* Main.storyboard */; };
 		65981892260CBA9400776F70 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65981872260CB45D00776F70 /* Main.storyboard */; };
-		65D48D8A2611E6BD00223100 /* ScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D48D892611E6BD00223100 /* ScanViewController.swift */; };
 		65D6D56E25F8BCE5000CB339 /* VaccinationValidator in Frameworks */ = {isa = PBXBuildFile; productRef = 65D6D56D25F8BCE5000CB339 /* VaccinationValidator */; };
 		65D6D5E925F910A9000CB339 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65D6D5E825F910A9000CB339 /* LaunchScreen.storyboard */; };
 		65D6D5EA25F910A9000CB339 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65D6D5E825F910A9000CB339 /* LaunchScreen.storyboard */; };
@@ -60,10 +57,11 @@
 /* Begin PBXFileReference section */
 		210116F72646D18100B9E8FF /* release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = release.xcconfig; sourceTree = "<group>"; };
 		210116F82646D18100B9E8FF /* debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = debug.xcconfig; sourceTree = "<group>"; };
+		2101178C2646E86F00B9E8FF /* debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = debug.xcconfig; sourceTree = "<group>"; };
+		2101178D2646E86F00B9E8FF /* release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = release.xcconfig; sourceTree = "<group>"; };
 		6561AB43260CB02C00D3A7FF /* VaccinationUI */ = {isa = PBXFileReference; lastKnownFileType = folder; path = VaccinationUI; sourceTree = "<group>"; };
 		6598186A260CB44D00776F70 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		65981872260CB45D00776F70 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		65D48D892611E6BD00223100 /* ScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanViewController.swift; sourceTree = "<group>"; };
 		65D6D4BF25F7AD8B000CB339 /* VaccinationCommon */ = {isa = PBXFileReference; lastKnownFileType = folder; path = VaccinationCommon; sourceTree = "<group>"; };
 		65D6D4DE25F8B8FB000CB339 /* VaccinationPassApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VaccinationPassApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		65D6D4EE25F8B8FB000CB339 /* VaccinationPassAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VaccinationPassAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -207,13 +205,12 @@
 		88AB2A3725FA40CE00D4EA52 /* VaccinationPassApp */ = {
 			isa = PBXGroup;
 			children = (
-				88AB2A3825FA40CE00D4EA52 /* Assets.xcassets */,
-				88AB2A3B25FA40CE00D4EA52 /* AppDelegate.swift */,
 				210116F82646D18100B9E8FF /* debug.xcconfig */,
 				210116F72646D18100B9E8FF /* release.xcconfig */,
+				88AB2A3825FA40CE00D4EA52 /* Assets.xcassets */,
+				88AB2A3B25FA40CE00D4EA52 /* AppDelegate.swift */,
 				6598186A260CB44D00776F70 /* Main.storyboard */,
 				88AB2A3C25FA40CE00D4EA52 /* Info.plist */,
-				65D48D892611E6BD00223100 /* ScanViewController.swift */,
 			);
 			path = VaccinationPassApp;
 			sourceTree = "<group>";
@@ -240,6 +237,8 @@
 		88AB2A4225FA40CE00D4EA52 /* VaccinationValidatorApp */ = {
 			isa = PBXGroup;
 			children = (
+				2101178C2646E86F00B9E8FF /* debug.xcconfig */,
+				2101178D2646E86F00B9E8FF /* release.xcconfig */,
 				88AB2A4325FA40CE00D4EA52 /* Assets.xcassets */,
 				88AB2A4625FA40CE00D4EA52 /* AppDelegate.swift */,
 				65981872260CB45D00776F70 /* Main.storyboard */,
@@ -447,10 +446,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				210116F92646D18100B9E8FF /* release.xcconfig in Resources */,
 				6507D7E625FB5DF700D69F94 /* Assets.xcassets in Resources */,
 				65D6D5E925F910A9000CB339 /* LaunchScreen.storyboard in Resources */,
-				210116FA2646D18100B9E8FF /* debug.xcconfig in Resources */,
 				6598186B260CB44D00776F70 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -522,7 +519,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				88AB2A9725FA431100D4EA52 /* AppDelegate.swift in Sources */,
-				65D48D8A2611E6BD00223100 /* ScanViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -862,6 +858,7 @@
 		};
 		65D6D53725F8B94E000CB339 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2101178C2646E86F00B9E8FF /* debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
@@ -888,6 +885,7 @@
 		};
 		65D6D53825F8B94E000CB339 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2101178D2646E86F00B9E8FF /* release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";

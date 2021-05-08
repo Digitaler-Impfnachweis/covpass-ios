@@ -1,11 +1,11 @@
 //
-//  rki-pass-release.xcconfig
+//  release.xcconfig
 //
 //
 
 // BASIC
 
-BUNDLE_NAME = PassApp
+APP_NAME = CovPass
 
 
 // API
@@ -13,13 +13,15 @@ BUNDLE_NAME = PassApp
 API_URL = https:/$()/api.recertify.demo.ubirch.com/api/certify/v2/reissue/cbor
 
 
-// CERTIVICATE PINNING
+// TLS CERTIVICATE PINNING
 
-CERTIVICATE_NAME = rsa-certify.demo.ubirch.com
-CERTIVICATE_PATH = Certificates/PROD/CA
+TLS_CERTIFICATE_NAME = rsa-certify.demo.ubirch.com
+TLS_CERTIFICATE_FILES = Certificates/PROD/TLS/
+TLS_CERTIFICATES_DESTINATION = VaccinationCommon/Sources/VaccinationCommon/Resources/TLS/
 
 
 // SEAL VERIVICATION
 
-CERTIVICATE_SIGNATURES = sig1,sig2,sig3
-CERTIVICATE_PATHS = path/sig1.cert,path/sig2.cert,path/sig3.cert
+CA_CERTIFICATE_SIGNATURES = dtrust_demo-bmg_seal_ubirch-02
+CA_CERTIFICATE_FILES = Certificates/PROD/CA/
+CA_CERTIFICATES_DESTINATION = VaccinationCommon/Sources/VaccinationCommon/Resources/CA/

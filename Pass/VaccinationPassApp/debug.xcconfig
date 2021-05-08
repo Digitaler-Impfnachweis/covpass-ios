@@ -1,11 +1,11 @@
 //
-//  release.xcconfig
+//  debug.xcconfig
 //
 //
 
 // BASIC
 
-BUNDLE_NAME = PassApp
+APP_NAME = Pass ⚙️
 
 
 // API
