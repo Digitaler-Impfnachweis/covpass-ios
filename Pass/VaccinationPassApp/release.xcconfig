@@ -1,0 +1,25 @@
+//
+//  rki-pass-release.xcconfig
+//
+//
+
+// BASIC
+
+BUNDLE_NAME = PassApp
+
+
+// API
+
+API_URL = https:/$()/api.recertify.demo.ubirch.com/api/certify/v2/reissue/cbor
+
+
+// CERTIVICATE PINNING
+
+CERTIVICATE_NAME = rsa-certify.demo.ubirch.com
+CERTIVICATE_PATH = Certificates/PROD/CA
+
+
+// SEAL VERIVICATION
+
+CERTIVICATE_SIGNATURES = sig1,sig2,sig3
+CERTIVICATE_PATHS = path/sig1.cert,path/sig2.cert,path/sig3.cert

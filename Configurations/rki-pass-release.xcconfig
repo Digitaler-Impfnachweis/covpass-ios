@@ -1,0 +1,25 @@
+//
+//  rki-pass-release.xcconfig
+//
+//
+
+// BASIC
+
+BUNDLE_NAME = PassApp
+
+
+// API
+
+API_URL = 
+
+
+// CERTIVICATE PINNING
+
+CERTIVICATE_NAME = hello
+CERTIVICATE_PATH = VaccinationCommon/Sources/VaccinationCommon/Resources/
+
+
+// SEAL VERIVICATION
+
+CERTIVICATE_SIGNATURES = sig1,sig2,sig3
+CERTIVICATE_PATHS = path/sig1.cert,path/sig2.cert,path/sig3.cert
