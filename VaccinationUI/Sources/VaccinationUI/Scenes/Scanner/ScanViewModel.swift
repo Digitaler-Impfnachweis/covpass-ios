@@ -9,9 +9,7 @@ import PromiseKit
 import Scanner
 import UIKit
 
-public typealias ScanResult = Swift.Result<String, ScanError>
-
-public class ScanViewModel: CancellableViewModelProtocol {
+class ScanViewModel: CancellableViewModelProtocol {
     // MARK: - Properties
 
     private let cameraAccessProvider: CameraAccessProviderProtocol
@@ -21,7 +19,7 @@ public class ScanViewModel: CancellableViewModelProtocol {
 
     // MARK - Lifecycle
 
-    public init(
+    init(
         cameraAccessProvider: CameraAccessProviderProtocol,
         resolvable: Resolver<ScanResult>) {
 
@@ -45,11 +43,11 @@ public class ScanViewModel: CancellableViewModelProtocol {
         }
     }
 
-    public func onResult(_ result: ScanResult) {
+    func onResult(_ result: ScanResult) {
         resolver.fulfill(result)
     }
 
-    public func cancel() {
+    func cancel() {
         resolver.cancel()
     }
 }

@@ -29,7 +29,11 @@ struct ValidationResultRouter: ValidationResultRouterProtocol {
 
     func scanQRCode() -> Promise<ScanResult> {
         sceneCoordinator.present(
-            ScanSceneFactory()
+            ScanSceneFactory(
+                cameraAccessProvider: CameraAccessProvider(
+                    router: DialogRouter(sceneCoordinator: sceneCoordinator)
+                )
+            )
         )
     }
 }
