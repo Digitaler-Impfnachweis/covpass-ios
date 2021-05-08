@@ -58,3 +58,9 @@
 "error_missing_camera_permissions_actions_goto_settings" = "Erlauben";
 
 "error_missing_camera_permissions_actions_cancel" = "Nicht Erlauben";
+
+"error_standard_unexpected_title" = "Entschuldigung";
+
+"error_standard_unexpected_message" = "Es ist ein unerwarteter Fehler aufgetreten. Bitte versuchen Sie es später erneut.";
+
+"error_connect_to_internet_Button_ok" = "OK";
