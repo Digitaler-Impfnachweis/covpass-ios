@@ -50,16 +50,22 @@ public class CameraAccessProvider: CameraAccessProviderProtocol {
 
     private func displayMissingAuthorizationDialog() -> Promise<Void> {
         .init { seal in
-            let delete = DialogAction(title: "Einstellungen".localized, style: .default) { _ in
+            let delete = DialogAction(
+                title: "error_missing_camera_permissions_actions_goto_settings".localized,
+                style: .default) { _ in
+
                 self.showAppSettings()
                 seal.cancel()
             }
-            let cancel = DialogAction(title: "Abbrechen".localized, style: .cancel) { _ in
+            let cancel = DialogAction(
+                title: "error_missing_camera_permissions_actions_cancel".localized,
+                style: .cancel) { _ in
+
                 seal.cancel()
             }
             self.router.showDialog(
-                title: "Fehlende Berechtigung".localized,
-                message: "Bitte aktivieren Sie die Kamera in den Einstellungen".localized,
+                title: "error_missing_camera_permissions_title".localized,
+                message: "error_missing_camera_permissions_message".localized,
                 actions: [cancel, delete],
                 style: .alert
             )
