@@ -1,6 +1,6 @@
 //
 //  OnboardingPageViewController.swift
-//  
+//
 //
 //  Copyright © 2021 IBM. All rights reserved.
 //
@@ -14,7 +14,7 @@ public class OnboardingPageViewController: UIViewController {
     @IBOutlet var imageView: UIImageView!
     @IBOutlet var headline: PlainLabel!
     @IBOutlet var descriptionText: PlainLabel!
-    
+
     // MARK: - Properties
 
     private(set) var viewModel: OnboardingPageViewModel
@@ -29,7 +29,7 @@ public class OnboardingPageViewController: UIViewController {
         super.init(nibName: String(describing: Self.self), bundle: .module)
     }
 
-    public override func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
         scrollView.contentInset.top = .space_70
         configureImageView()

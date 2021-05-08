@@ -24,7 +24,7 @@ public class OfflineCardView: XibView {
 
     // MARK: - Lifecycle
 
-    public override func initView() {
+    override public func initView() {
         super.initView()
         contentView?.layoutMargins = .init(
             top: .space_18,

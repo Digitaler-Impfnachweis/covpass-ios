@@ -42,7 +42,7 @@ class VaccinationView: XibView {
         super.initView()
         setupView()
     }
-    
+
     func setupView() {
         layoutMargins = .zero
         stackView.spacing = .zero

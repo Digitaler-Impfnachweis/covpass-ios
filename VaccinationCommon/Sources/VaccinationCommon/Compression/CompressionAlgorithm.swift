@@ -1,12 +1,12 @@
 //
 //  CompressionAlgorithm.swift
-//  
+//
 //
 //  Copyright © 2021 IBM. All rights reserved.
 //
 
-import Foundation
 import Compression
+import Foundation
 
 /// Please consider the [libcompression documentation](https://developer.apple.com/reference/compression/1665429-data_compression)
 /// for further details. Short info:
@@ -26,10 +26,10 @@ public enum CompressionAlgorithm {
 extension CompressionAlgorithm {
     var lowLevelType: compression_algorithm {
         switch self {
-            case .zlib    : return COMPRESSION_ZLIB
-            case .lzfse   : return COMPRESSION_LZFSE
-            case .lz4     : return COMPRESSION_LZ4
-            case .lzma    : return COMPRESSION_LZMA
+        case .zlib: return COMPRESSION_ZLIB
+        case .lzfse: return COMPRESSION_LZFSE
+        case .lz4: return COMPRESSION_LZ4
+        case .lzma: return COMPRESSION_LZMA
         }
     }
 }

@@ -1,6 +1,6 @@
 //
 //  OnboardingContainerViewModel.swift
-//  
+//
 //
 //  Copyright © 2021 IBM. All rights reserved.
 //
@@ -18,8 +18,8 @@ class PassOnboardingContainerViewModel: OnboardingContainerViewModel {
 
     init(
         router: OnboardingRouterProtocol,
-        items: [OnboardingPageViewModel]) {
-
+        items: [OnboardingPageViewModel]
+    ) {
         self.router = router
         self.items = items
     }

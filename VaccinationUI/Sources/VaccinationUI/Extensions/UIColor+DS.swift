@@ -8,58 +8,58 @@
 
 import UIKit
 
-extension UIColor {
+public extension UIColor {
     // MARK: - Primary Colors
 
-    public static let brandBase = UIColor("BrandBase")
+    static let brandBase = UIColor("BrandBase")
 
-    public static let onBrandBase = UIColor("OnBrandBase")
+    static let onBrandBase = UIColor("OnBrandBase")
 
-    public static let onBrandAccent = UIColor("OnBrandAccent")
+    static let onBrandAccent = UIColor("OnBrandAccent")
 
-    public static let onBrandAccent70 = UIColor("OnBrandAccent70")
+    static let onBrandAccent70 = UIColor("OnBrandAccent70")
 
-    public static let onBackground20 = UIColor("OnBackground20")
+    static let onBackground20 = UIColor("OnBackground20")
 
-    public static let onBackground50 = UIColor("OnBackground50")
+    static let onBackground50 = UIColor("OnBackground50")
 
-    public static let onBackground70 = UIColor("OnBackground70")
+    static let onBackground70 = UIColor("OnBackground70")
 
-    public static let onBackground100 = UIColor("OnBackground100")
+    static let onBackground100 = UIColor("OnBackground100")
 
-    public static let backgroundPrimary = UIColor("BackgroundPrimary")
+    static let backgroundPrimary = UIColor("BackgroundPrimary")
 
-    public static let backgroundSecondary = UIColor("BackgroundSecondary")
+    static let backgroundSecondary = UIColor("BackgroundSecondary")
 
-    public static let backgroundSecondary20 = UIColor("BackgroundSecondary20")
+    static let backgroundSecondary20 = UIColor("BackgroundSecondary20")
 
-    public static let backgroundPrimary100 = UIColor("backgroundSecondary100")
+    static let backgroundPrimary100 = UIColor("backgroundSecondary100")
 
-    public static let brandAccent = UIColor("BrandAccent")
+    static let brandAccent = UIColor("BrandAccent")
 
-    public static let brandAccent10 = UIColor("BrandAccent10")
+    static let brandAccent10 = UIColor("BrandAccent10")
 
-    public static let brandAccent20 = UIColor("BrandAccent20")
+    static let brandAccent20 = UIColor("BrandAccent20")
 
-    public static let brandAccent70 = UIColor("BrandAccent70")
+    static let brandAccent70 = UIColor("BrandAccent70")
 
-    public static let primaryButtonShadow = UIColor("PrimaryButtonShadow")
+    static let primaryButtonShadow = UIColor("PrimaryButtonShadow")
 
     // MARK: - Neutral Colors
 
-    public static let neutralBlack = UIColor("NeutralBlack")
+    static let neutralBlack = UIColor("NeutralBlack")
 
-    public static let neutralWhite = UIColor("NeutralWhite")
+    static let neutralWhite = UIColor("NeutralWhite")
 
     // MARK: - Neutral Status
 
-    public static let error = UIColor("Error")
+    static let error = UIColor("Error")
 
-    public static let success = UIColor("Success")
+    static let success = UIColor("Success")
 
-    public static let warning = UIColor("Warning")
+    static let warning = UIColor("Warning")
 
-    public static let info = UIColor("Info")
+    static let info = UIColor("Info")
 }
 
 private extension UIColor {

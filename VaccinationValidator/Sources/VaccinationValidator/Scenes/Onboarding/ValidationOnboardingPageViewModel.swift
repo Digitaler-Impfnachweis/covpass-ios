@@ -15,7 +15,7 @@ class ValidationOnboardingPageViewModel: OnboardingPageViewModel {
     let type: OnboardingPageViewModelType
 
     var image: UIImage? {
-        switch self.type {
+        switch type {
         case .page1:
             return .illustration2
         case .page2:
@@ -26,7 +26,7 @@ class ValidationOnboardingPageViewModel: OnboardingPageViewModel {
     }
 
     var title: String? {
-        switch self.type {
+        switch type {
         case .page1:
             return "validation_first_onboarding_page_title".localized
         case .page2:
@@ -37,7 +37,7 @@ class ValidationOnboardingPageViewModel: OnboardingPageViewModel {
     }
 
     var info: String? {
-        switch self.type {
+        switch type {
         case .page1:
             return "validation_first_onboarding_page_message".localized
         case .page2:

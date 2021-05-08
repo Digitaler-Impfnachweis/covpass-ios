@@ -1,19 +1,18 @@
 //
 //  CertificateViewModelTests.swift
-//  
+//
 //
 //  Copyright © 2021 IBM. All rights reserved.
 //
 
 import Foundation
-import XCTest
-import VaccinationUI
 @testable import VaccinationPass
+import VaccinationUI
+import XCTest
 
 class CertificateViewModelTests: XCTestCase {
-    
     // MARK: - Test Variables
-    
+
     var sut: DefaultCertificateViewModel!
     var sutDelegate: MockCertificateViewModelDelegate!
     var sceneCoordinator: SceneCoordinatorMock!
@@ -21,7 +20,7 @@ class CertificateViewModelTests: XCTestCase {
     var repository: VaccinationRepositoryMock!
 
     // MARK: - Setup & Teardown
-    
+
     override func setUp() {
         super.setUp()
         sceneCoordinator = SceneCoordinatorMock()
@@ -39,18 +38,17 @@ class CertificateViewModelTests: XCTestCase {
         sceneCoordinator = nil
         super.tearDown()
     }
-    
+
     // MARK: - Tests
-    
+
     func testSutNotNil() {
         XCTAssertNotNil(sut)
     }
-    
+
     // MARK: - Mock Data
-    
+
     private func createNoCertificateCell() -> NoCertificateCollectionViewCell? {
         let nib = UIConstants.bundle.loadNibNamed("\(NoCertificateCollectionViewCell.self)", owner: nil, options: nil)
         return nib?.first as? NoCertificateCollectionViewCell
     }
 }
-

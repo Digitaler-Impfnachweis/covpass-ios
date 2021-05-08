@@ -1,14 +1,14 @@
 //
 //  ProofRouter.swift
-//  
+//
 //
 //  Copyright © 2021 IBM. All rights reserved.
 //
 
-import UIKit
 import PromiseKit
-import VaccinationUI
+import UIKit
 import VaccinationCommon
+import VaccinationUI
 
 class ProofRouter: ProofRouterProtocol {
     // MARK: - Properties

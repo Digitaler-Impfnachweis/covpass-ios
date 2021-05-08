@@ -6,17 +6,16 @@
 //
 
 import Foundation
-import XCTest
 @testable import VaccinationUI
+import XCTest
 
 class CertificateCollectionViewCellTests: XCTestCase {
-    
     // MARK: - Test Variables
-    
+
     var sut: CertificateCollectionViewCell!
 
     // MARK: - Setup & Teardown
-    
+
     override func setUp() {
         super.setUp()
         sut = createQrCertificateCell()
@@ -26,15 +25,15 @@ class CertificateCollectionViewCellTests: XCTestCase {
         sut = nil
         super.tearDown()
     }
-    
+
     // MARK: - Tests
-    
+
     func testSutNotNil() {
         XCTAssertNotNil(sut)
     }
-    
+
     // MARK: - Mock Data
-    
+
     private func createQrCertificateCell() -> CertificateCollectionViewCell? {
         let nib = UIConstants.bundle.loadNibNamed("\(CertificateCollectionViewCell.self)", owner: nil, options: nil)
         return nib?.first as? CertificateCollectionViewCell

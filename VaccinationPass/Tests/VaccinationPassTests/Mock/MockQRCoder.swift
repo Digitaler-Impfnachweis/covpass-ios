@@ -7,11 +7,11 @@
 
 import Foundation
 import PromiseKit
-import VaccinationUI
 import VaccinationCommon
+import VaccinationUI
 
 class MockQRCoder: QRCoderProtocol {
-    func parse(_ payload: String) -> Promise<CBORWebToken> {
+    func parse(_: String) -> Promise<CBORWebToken> {
         return Promise { seal in
             let jsonData = Data.json()
             let cert = try JSONDecoder().decode(CBORWebToken.self, from: jsonData)

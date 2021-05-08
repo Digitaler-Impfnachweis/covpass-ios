@@ -5,8 +5,8 @@
 //  Copyright © 2021 IBM. All rights reserved.
 //
 
-import UIKit
 import PromiseKit
+import UIKit
 import VaccinationCommon
 import VaccinationUI
 
@@ -20,8 +20,8 @@ struct ValidationResultSceneFactory: SceneFactory {
 
     init(
         router: ValidationResultRouterProtocol,
-        certificate: CBORWebToken?) {
-
+        certificate: CBORWebToken?
+    ) {
         self.router = router
         self.certificate = certificate
     }

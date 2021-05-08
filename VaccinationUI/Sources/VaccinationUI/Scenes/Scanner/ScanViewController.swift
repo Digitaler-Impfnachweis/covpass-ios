@@ -5,12 +5,12 @@
 //  Copyright © 2021 IBM. All rights reserved.
 //
 
-import UIKit
 import Scanner
+import UIKit
 
 class ScanViewController: UIViewController {
     // MARK: - IBOutlet
-    
+
     @IBOutlet var toolbarView: CustomToolbarView!
     @IBOutlet var container: UIView!
 
@@ -43,7 +43,7 @@ class ScanViewController: UIViewController {
         container.addSubview(scanViewController!.view)
         scanViewController?.view.pinEdges(to: container)
     }
-    
+
     private func configureToolbarView() {
         toolbarView.state = .cancel
         // Comment out for now. We need to update the routing to make this work.

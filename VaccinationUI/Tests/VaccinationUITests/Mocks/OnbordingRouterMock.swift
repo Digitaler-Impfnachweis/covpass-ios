@@ -1,12 +1,12 @@
 //
 //  OnbordingRouterMock.swift
-//  
+//
 //
 //  Copyright © 2021 IBM. All rights reserved.
 //
 
-@testable import VaccinationUI
 import Foundation
+@testable import VaccinationUI
 
 class OnboardingRouterMock: OnboardingRouterProtocol {
     let sceneCoordinator: SceneCoordinator

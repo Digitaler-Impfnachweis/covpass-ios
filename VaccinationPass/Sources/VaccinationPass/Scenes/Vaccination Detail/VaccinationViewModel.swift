@@ -1,6 +1,6 @@
 //
 //  VaccinationViewModel.swift
-//  
+//
 //
 //  Created by Timo Koenig on 23.04.21.
 //

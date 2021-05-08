@@ -5,8 +5,8 @@
 //  Copyright © 2021 IBM. All rights reserved.
 //
 
-import UIKit
 import PromiseKit
+import UIKit
 
 public protocol ScenePresenting {
     func asRoot(_ factory: SceneFactory)
@@ -17,16 +17,16 @@ public protocol ScenePresenting {
 
 // MARK: - Optionals
 
-extension ScenePresenting {
-    public func push(_ factory: SceneFactory, animated: Bool = true) {
+public extension ScenePresenting {
+    func push(_ factory: SceneFactory, animated: Bool = true) {
         push(factory, animated: animated)
     }
 
-    public func present(_ factory: SceneFactory, animated: Bool = true) {
+    func present(_ factory: SceneFactory, animated: Bool = true) {
         present(factory, animated: animated)
     }
 
-    public func present<Scene: ResolvableSceneFactory>(_ factory: Scene, animated: Bool = true) -> Promise<Scene.Result> {
+    func present<Scene: ResolvableSceneFactory>(_ factory: Scene, animated: Bool = true) -> Promise<Scene.Result> {
         present(factory, animated: animated)
     }
 }

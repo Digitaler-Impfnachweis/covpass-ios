@@ -1,6 +1,6 @@
 //
 //  UserDefaults.swift
-//  
+//
 //
 //  Copyright © 2021 IBM. All rights reserved.
 //
@@ -11,7 +11,7 @@ public protocol UserDefaultsSettable {
     associatedtype defaultKeys: RawRepresentable
 }
 
-public extension UserDefaultsSettable where defaultKeys.RawValue==String {
+public extension UserDefaultsSettable where defaultKeys.RawValue == String {
     static func set(_ value: Bool, forKey key: defaultKeys) {
         UserDefaults.standard.set(value, forKey: key.rawValue)
     }

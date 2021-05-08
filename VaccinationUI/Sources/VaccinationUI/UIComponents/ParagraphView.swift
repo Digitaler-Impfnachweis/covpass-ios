@@ -26,7 +26,7 @@ public class ParagraphView: XibView {
 
     // MARK: - Lifecycle
 
-    public override func initView() {
+    override public func initView() {
         super.initView()
         backgroundColor = .neutralWhite
         contentView?.layoutMargins = .init(top: .zero, left: .space_24, bottom: .zero, right: .space_24)
@@ -35,7 +35,7 @@ public class ParagraphView: XibView {
     }
 
     // MARK: - Methods
-    
+
     public func showBottomBorder() {
         bottomBorder.isHidden = false
     }

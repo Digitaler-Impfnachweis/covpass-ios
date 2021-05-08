@@ -1,6 +1,6 @@
 //
 //  APIService.swift
-//  
+//
 //
 //  Copyright © 2021 IBM. All rights reserved.
 //
@@ -14,12 +14,11 @@ public protocol APIServiceProtocol {
 }
 
 public struct APIService: APIServiceProtocol {
-
-    // TODO get URL from config
+    // TODO: get URL from config
     private let url: String = "https://api.recertify.demo.ubirch.com/api/certify/v2/reissue/cbor"
     private let contentType: String = "application/cbor+base45"
 
-    // TODO rename Encoder to Coder because an encoder does not decode
+    // TODO: rename Encoder to Coder because an encoder does not decode
     private let encoder = Base45Encoder()
     private let sessionDelegate: URLSessionDelegate
 
@@ -49,7 +48,7 @@ public struct APIService: APIServiceProtocol {
                                      delegate: sessionDelegate,
                                      delegateQueue: nil)
 
-            session.dataTask(with: request) { (data, response, error) in
+            session.dataTask(with: request) { data, response, error in
                 // Check for Error
                 if let error = error {
                     seal.reject(error)
@@ -59,7 +58,7 @@ public struct APIService: APIServiceProtocol {
                     seal.reject(ApplicationError.unknownError)
                     return
                 }
-                guard (200...299).contains(response.statusCode) else {
+                guard (200 ... 299).contains(response.statusCode) else {
                     print(String(data: data ?? Data(), encoding: .utf8) ?? "")
                     seal.reject(ApplicationError.unknownError)
                     return
@@ -83,12 +82,12 @@ public class APIServiceDelegate: NSObject, URLSessionDelegate {
         self.certFileName = certFileName
     }
 
-    public func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
+    public func urlSession(_: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
         if challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodServerTrust {
             if let serverTrust = challenge.protectionSpace.serverTrust {
                 var result = SecTrustResultType.invalid
                 let isTrustedServer = SecTrustEvaluate(serverTrust, &result)
-                
+
                 if errSecSuccess == isTrustedServer {
                     guard let serverCertificate = SecTrustGetCertificateAtIndex(serverTrust, 0) else {
                         completionHandler(URLSession.AuthChallengeDisposition.cancelAuthenticationChallenge, nil)
@@ -99,9 +98,10 @@ public class APIServiceDelegate: NSObject, URLSessionDelegate {
                     if let dataBytes = CFDataGetBytePtr(serverCertificateData) {
                         let cert1 = NSData(bytes: dataBytes, length: size)
                         if let cerFilePath = Bundle.module.url(forResource: certFileName, withExtension: "der"),
-                           let cert2 = try? Data(contentsOf: cerFilePath) {
+                           let cert2 = try? Data(contentsOf: cerFilePath)
+                        {
                             if cert1.isEqual(to: cert2) {
-                                completionHandler(URLSession.AuthChallengeDisposition.useCredential, URLCredential(trust:serverTrust))
+                                completionHandler(URLSession.AuthChallengeDisposition.useCredential, URLCredential(trust: serverTrust))
                                 return
                             }
                         }

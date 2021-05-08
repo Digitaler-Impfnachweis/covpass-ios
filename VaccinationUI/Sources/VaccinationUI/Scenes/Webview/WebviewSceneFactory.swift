@@ -1,6 +1,6 @@
 //
 //  WebviewSceneFactory.swift
-//  
+//
 //
 //  Copyright © 2021 IBM. All rights reserved.
 //
@@ -17,8 +17,8 @@ public struct WebviewSceneFactory: SceneFactory {
 
     public init(
         title: String,
-        url: URL) {
-
+        url: URL
+    ) {
         self.title = title
         self.url = url
     }

@@ -1,6 +1,6 @@
 //
 //  CertificateCollectionViewCell.swift
-//  
+//
 //
 //  Copyright © 2021 IBM. All rights reserved.
 //
@@ -42,7 +42,7 @@ public class CertificateCollectionViewCell: CardCollectionViewCell {
 
     // MARK: - Public Properties
 
-    public override var viewModel: CardViewModel? {
+    override public var viewModel: CardViewModel? {
         didSet {
             updateView()
         }
@@ -57,7 +57,7 @@ public class CertificateCollectionViewCell: CardCollectionViewCell {
 
     // MARK: - Lifecycle
 
-    public override func awakeFromNib() {
+    override public func awakeFromNib() {
         super.awakeFromNib()
         clipsToBounds = false
 
@@ -75,7 +75,7 @@ public class CertificateCollectionViewCell: CardCollectionViewCell {
         contentStackView.setCustomSpacing(.space_20, after: actionView)
     }
 
-    public override func layoutSubviews() {
+    override public func layoutSubviews() {
         super.layoutSubviews()
         contentView.layer.shadowPath = UIBezierPath(roundedRect: containerView.frame, cornerRadius: containerView.layer.cornerRadius).cgPath
     }

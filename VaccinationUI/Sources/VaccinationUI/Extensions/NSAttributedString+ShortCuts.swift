@@ -8,23 +8,23 @@
 import Foundation
 import UIKit
 
-extension NSAttributedString {
-    public func styledAs(_ style: TextStyle) -> NSAttributedString {
+public extension NSAttributedString {
+    func styledAs(_ style: TextStyle) -> NSAttributedString {
         style.apply(self)
     }
 
-    public func colored(_ color: UIColor, in range: NSRange? = nil) -> NSAttributedString {
+    func colored(_ color: UIColor, in range: NSRange? = nil) -> NSAttributedString {
         setAttribute(.foregroundColor, value: color, in: range)
     }
 
-    public func font(named fontName: String,
-                     size: CGFloat,
-                     lineHeight: CGFloat? = nil,
-                     textStyle: UIFont.TextStyle = .body,
-                     in range: NSRange? = nil,
-                     traitCollection: UITraitCollection? = nil) -> NSAttributedString {
-
-        if NSClassFromString("XCTest") != nil  {
+    func font(named fontName: String,
+              size: CGFloat,
+              lineHeight: CGFloat? = nil,
+              textStyle: UIFont.TextStyle = .body,
+              in range: NSRange? = nil,
+              traitCollection: UITraitCollection? = nil) -> NSAttributedString
+    {
+        if NSClassFromString("XCTest") != nil {
             try? UIFont.loadCustomFonts()
         }
 
@@ -41,9 +41,10 @@ extension NSAttributedString {
         }
     }
 
-    public func underlined(style: NSUnderlineStyle = .single,
-                           color: UIColor? = nil,
-                           in range: NSRange? = nil) -> NSAttributedString {
+    func underlined(style: NSUnderlineStyle = .single,
+                    color: UIColor? = nil,
+                    in range: NSRange? = nil) -> NSAttributedString
+    {
         let result = setAttribute(.underlineStyle, value: style.rawValue, in: range)
 
         if let color = color ?? attribute(.foregroundColor, at: range?.location) {
@@ -55,10 +56,11 @@ extension NSAttributedString {
 
     // This is a solution for fonts with a high built in lineHeight(See UIFont's lineHeight property at runtime).
     // LineSpacing cannot be used with negative values.
-    public func lineHeight(_ value: CGFloat,
-                           in range: NSRange? = nil,
-                           fontMetrics: UIFontMetrics = .default,
-                           traitCollection: UITraitCollection? = nil) -> NSAttributedString {
+    func lineHeight(_ value: CGFloat,
+                    in range: NSRange? = nil,
+                    fontMetrics: UIFontMetrics = .default,
+                    traitCollection: UITraitCollection? = nil) -> NSAttributedString
+    {
         paragraphStyled(in: range) { style in
             guard let font: UIFont = attribute(.font) else { return }
 
@@ -67,11 +69,11 @@ extension NSAttributedString {
         }
     }
 
-    public func letterSpacing(_ value: CGFloat, in range: NSRange? = nil) -> NSAttributedString {
+    func letterSpacing(_ value: CGFloat, in range: NSRange? = nil) -> NSAttributedString {
         setAttribute(.kern, value: value, in: range)
     }
 
-    public func paragraphStyled(in range: NSRange? = nil, with style: (NSMutableParagraphStyle) -> Void) -> NSAttributedString {
+    func paragraphStyled(in range: NSRange? = nil, with style: (NSMutableParagraphStyle) -> Void) -> NSAttributedString {
         let paragraphStyle = NSMutableParagraphStyle()
         if let currentParagraphStyle: NSParagraphStyle = attribute(.paragraphStyle, at: range?.location) {
             paragraphStyle.setParagraphStyle(currentParagraphStyle)
@@ -81,13 +83,13 @@ extension NSAttributedString {
         return setAttribute(.paragraphStyle, value: paragraphStyle, in: range)
     }
 
-    public func lineSpacing(_ withValue: CGFloat, in range: NSRange? = nil) -> NSAttributedString {
+    func lineSpacing(_ withValue: CGFloat, in range: NSRange? = nil) -> NSAttributedString {
         paragraphStyled(in: range) { style in
             style.lineSpacing = withValue
         }
     }
 
-    public func aligned(to alignment: NSTextAlignment, in range: NSRange? = nil) -> NSAttributedString {
+    func aligned(to alignment: NSTextAlignment, in range: NSRange? = nil) -> NSAttributedString {
         paragraphStyled(in: range) { style in
             style.alignment = alignment
         }

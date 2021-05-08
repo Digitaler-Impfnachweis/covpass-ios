@@ -5,41 +5,40 @@
 //  Copyright © 2021 IBM. All rights reserved.
 //
 
-@testable import VaccinationPass
 import Foundation
-import UIKit
-import VaccinationPass
-import VaccinationUI
-import VaccinationCommon
 import PromiseKit
+import UIKit
+import VaccinationCommon
+@testable import VaccinationPass
+import VaccinationUI
 
 class MockCertificateViewModel: CertificateViewModel {
     // MARK: - Test Variables
-    
+
     var processCalled = false
     var configureCalled = false
-    
+
     // MARK: - CertificateViewModel
-    
+
     weak var delegate: CertificateViewModelDelegate?
-    
+
     var addButtonImage: UIImage? = UIImage()
-    
+
     var certificateViewModels: [CardViewModel] = []
-    
-    func process(payload: String, completion: ((Error) -> Void)?) {
+
+    func process(payload _: String, completion _: ((Error) -> Void)?) {
         processCalled = true
     }
 
     func reuseIdentifier(for indexPath: IndexPath) -> String {
         certificateViewModels[indexPath.row].reuseIdentifier
     }
-    
+
     var headlineTitle: String {
         "Title"
     }
 
-    var headlineButtonImage: UIImage?{
+    var headlineButtonImage: UIImage? {
         nil
     }
 
@@ -47,23 +46,23 @@ class MockCertificateViewModel: CertificateViewModel {
         certificateViewModels = [MockCardViewModel()]
     }
 
-    func process(payload: String) -> Promise<ExtendedCBORWebToken> {
-        return Promise.init(error: ApplicationError.unknownError)
+    func process(payload _: String) -> Promise<ExtendedCBORWebToken> {
+        return Promise(error: ApplicationError.unknownError)
     }
 
-    func detailViewModel(_ cert: ExtendedCBORWebToken) -> VaccinationDetailViewModel? {
+    func detailViewModel(_: ExtendedCBORWebToken) -> VaccinationDetailViewModel? {
         return nil
     }
 
-    func detailViewModel(_ indexPath: IndexPath) -> VaccinationDetailViewModel? {
+    func detailViewModel(_: IndexPath) -> VaccinationDetailViewModel? {
         return nil
     }
 
-    func showCertificate(at indexPath: IndexPath) {
+    func showCertificate(at _: IndexPath) {
         // TODO: Add tests
     }
 
-    func showCertificate(_ certificate: ExtendedCBORWebToken) {
+    func showCertificate(_: ExtendedCBORWebToken) {
         // TODO: Add tests
     }
 

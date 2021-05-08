@@ -5,10 +5,9 @@
 //  Copyright © 2021 IBM. All rights reserved.
 //
 
-@testable import VaccinationPass
 import Foundation
+@testable import VaccinationPass
 import VaccinationUI
-import VaccinationPass
 
 class MockCertificateViewModelDelegate: CertificateViewModelDelegate {
     var updateCalled = false

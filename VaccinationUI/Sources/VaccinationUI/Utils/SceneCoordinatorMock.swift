@@ -1,15 +1,14 @@
 //
 //  SceneCoordinatorMock.swift
-//  
+//
 //
 //  Copyright © 2021 IBM. All rights reserved.
 //
 
-import UIKit
 import PromiseKit
+import UIKit
 
 public class SceneCoordinatorMock: SceneCoordinator {
-
     public init() {}
 
     public var didSetAsRoot: ((SceneFactory) -> Void)?
@@ -18,12 +17,12 @@ public class SceneCoordinatorMock: SceneCoordinator {
     }
 
     public var didPush: ((SceneFactory) -> Void)?
-    public func push(_ factory: SceneFactory, animated: Bool) {
+    public func push(_ factory: SceneFactory, animated _: Bool) {
         didPush?(factory)
     }
 
     public var didPresent: ((SceneFactory) -> Void)?
-    public func present(_ factory: SceneFactory, animated: Bool) {
+    public func present(_ factory: SceneFactory, animated _: Bool) {
         didPresent?(factory)
     }
 
@@ -31,7 +30,7 @@ public class SceneCoordinatorMock: SceneCoordinator {
     public var result: Any?
     public var error: Error?
 
-    public func present<Scene: ResolvableSceneFactory>(_ factory: Scene, animated: Bool) -> Promise<Scene.Result> {
+    public func present<Scene: ResolvableSceneFactory>(_ factory: Scene, animated _: Bool) -> Promise<Scene.Result> {
         didPresentResolvable?(factory)
 
         if let someError = error {

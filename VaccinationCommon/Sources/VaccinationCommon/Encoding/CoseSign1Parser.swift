@@ -37,14 +37,15 @@ class CoseSign1Parser {
         let cbor = try CBOR.decode(([UInt8])(decompressedPayload))
 
         switch cbor {
-        case .tagged( _, let cobr):
+        case let .tagged(_, cobr):
             switch cobr {
-            case .array(let array):
+            case let .array(array):
                 guard array.count == 4 else { throw CoseParsingError.wrongArrayLength }
-                if case .byteString(let protectedValue) = array[0],
-                   case .map(let unprotectedValue) = array[1],
-                   case .byteString(let payloadValue) = array[2],
-                   case .byteString(let signaturesValue) = array[3] {
+                if case let .byteString(protectedValue) = array[0],
+                   case let .map(unprotectedValue) = array[1],
+                   case let .byteString(payloadValue) = array[2],
+                   case let .byteString(signaturesValue) = array[3]
+                {
                     return CoseSign1Message(protected: protectedValue, unprotected: unprotectedValue, payload: payloadValue, signatures: signaturesValue)
                 }
             default:
@@ -61,7 +62,7 @@ class CoseSign1Parser {
     /// - parameter cborObject: the CBOR object to be parsed
     /// - returns a dictionary
     func map(cborObject: CBOR?) -> [String: Any]? {
-        guard let cborData = cborObject, case .map(let cborMap) = cborData else { return nil }
+        guard let cborData = cborObject, case let .map(cborMap) = cborData else { return nil }
 
         var result = [String: Any]()
         for (key, value) in cborMap {
@@ -73,16 +74,16 @@ class CoseSign1Parser {
         return result
     }
 
-    // TODO refactor this method
+    // TODO: refactor this method
     func map(key: CBOR, value: CBOR) -> (String, Any)? {
-        if case .utf8String(let keyString) = key, case .utf8String(let valueString) = value {
+        if case let .utf8String(keyString) = key, case let .utf8String(valueString) = value {
             return (keyString, valueString)
-        } else if case .utf8String(let keyString) = key, case .array(let cborArray) = value {
+        } else if case let .utf8String(keyString) = key, case let .array(cborArray) = value {
             let remappedResult = cborArray.map { self.map(cborObject: $0) }
             return (keyString, remappedResult)
-        } else if case .utf8String(let keyString) = key, case .unsignedInt(let valueInt) = value {
+        } else if case let .utf8String(keyString) = key, case let .unsignedInt(valueInt) = value {
             return (keyString, valueInt)
-        } else if case .utf8String(let keyString) = key, case .map(let valueMap) = value {
+        } else if case let .utf8String(keyString) = key, case let .map(valueMap) = value {
             var result = [String: Any]()
             for (mapKey, mapValue) in valueMap {
                 if let (k, v) = map(key: mapKey, value: mapValue) {
@@ -90,14 +91,14 @@ class CoseSign1Parser {
                 }
             }
             return (keyString, result)
-        } else if case .unsignedInt(let keyInt) = key, case .utf8String(let valueString) = value {
+        } else if case let .unsignedInt(keyInt) = key, case let .utf8String(valueString) = value {
             return (String(keyInt), valueString)
-        } else if case .unsignedInt(let keyInt) = key, case .array(let cborArray) = value {
+        } else if case let .unsignedInt(keyInt) = key, case let .array(cborArray) = value {
             let remappedResult = cborArray.map { self.map(cborObject: $0) }
             return (String(keyInt), remappedResult)
-        } else if case .unsignedInt(let keyInt) = key, case .unsignedInt(let valueInt) = value {
+        } else if case let .unsignedInt(keyInt) = key, case let .unsignedInt(valueInt) = value {
             return (String(keyInt), valueInt)
-        } else if case .unsignedInt(let keyInt) = key, case .map(let valueMap) = value {
+        } else if case let .unsignedInt(keyInt) = key, case let .map(valueMap) = value {
             var result = [String: Any]()
             for (mapKey, mapValue) in valueMap {
                 if let (k, v) = map(key: mapKey, value: mapValue) {
@@ -105,14 +106,14 @@ class CoseSign1Parser {
                 }
             }
             return (String(keyInt), result)
-        } else if case .negativeInt(let keyInt) = key, case .utf8String(let valueString) = value {
+        } else if case let .negativeInt(keyInt) = key, case let .utf8String(valueString) = value {
             return ("-\(keyInt + 1)", valueString)
-        } else if case .negativeInt(let keyInt) = key, case .array(let cborArray) = value {
+        } else if case let .negativeInt(keyInt) = key, case let .array(cborArray) = value {
             let remappedResult = cborArray.map { self.map(cborObject: $0) }
             return ("-\(keyInt + 1)", remappedResult)
-        } else if case .negativeInt(let keyInt) = key, case .unsignedInt(let valueInt) = value {
+        } else if case let .negativeInt(keyInt) = key, case let .unsignedInt(valueInt) = value {
             return ("-\(keyInt + 1)", valueInt)
-        } else if case .negativeInt(let keyInt) = key, case .map(let valueMap) = value {
+        } else if case let .negativeInt(keyInt) = key, case let .map(valueMap) = value {
             var result = [String: Any]()
             for (mapKey, mapValue) in valueMap {
                 if let (k, v) = map(key: mapKey, value: mapValue) {

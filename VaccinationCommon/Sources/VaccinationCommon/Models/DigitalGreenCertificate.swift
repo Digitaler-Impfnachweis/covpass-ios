@@ -1,6 +1,6 @@
 //
 //  DigitalGreenCertificate.swift
-//  
+//
 //
 //  Copyright © 2021 IBM. All rights reserved.
 //
@@ -25,7 +25,8 @@ public struct DigitalGreenCertificate: Codable {
         if !fullImmunization { return nil }
         guard let vaccinationDate = v.first?.dt,
               let validDate = Calendar.current.date(byAdding: .day, value: 15, to: vaccinationDate),
-              let validFrom = Calendar.current.date(bySettingHour: 0, minute: 0, second: 0, of: validDate) else {
+              let validFrom = Calendar.current.date(bySettingHour: 0, minute: 0, second: 0, of: validDate)
+        else {
             return nil
         }
         return validFrom

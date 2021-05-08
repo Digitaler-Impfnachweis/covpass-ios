@@ -1,14 +1,14 @@
 //
 //  QRCoder.swift
-//  
+//
 //
 //  Copyright © 2021 IBM. All rights reserved.
 //
 
 import Compression
 import Foundation
-import SwiftCBOR
 import PromiseKit
+import SwiftCBOR
 
 public enum QRCodeError: Error {
     case qrCodeExists

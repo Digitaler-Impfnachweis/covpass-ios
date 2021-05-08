@@ -1,6 +1,6 @@
 //
 //  CardViewActionTests.swift
-//  
+//
 //
 //  Copyright © 2021 IBM. All rights reserved.
 //
@@ -20,7 +20,7 @@ class CardViewActionTests: XCTestCase {
         sut = nil
         super.tearDown()
     }
-    
+
     func testSutNotNil() {
         XCTAssertNotNil(sut)
     }
@@ -31,13 +31,13 @@ class CardViewActionTests: XCTestCase {
         XCTAssertNotNil(sut.actionButton)
         XCTAssertNotNil(sut.stateImageView)
     }
-    
+
     func testButtonImage() {
         let image = UIImage()
         sut.buttonImage = image
         XCTAssertTrue(sut.buttonImage === sut.actionButton.currentImage)
     }
-    
+
     func testButtonAction() {
         var buttonTapped = false
         sut.action = {
