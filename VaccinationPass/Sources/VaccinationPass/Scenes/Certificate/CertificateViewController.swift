@@ -110,10 +110,10 @@ extension CertificateViewController: UICollectionViewDataSource {
     
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard viewModel.certificateViewModels.count > indexPath.row else { return UICollectionViewCell() }
-        let viewModel = viewModel.certificateViewModels[indexPath.row]
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: viewModel.reuseIdentifier, for: indexPath) as? CardCollectionViewCell else { return UICollectionViewCell() }
+        let vm = viewModel.certificateViewModels[indexPath.row]
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: vm.reuseIdentifier, for: indexPath) as? CardCollectionViewCell else { return UICollectionViewCell() }
 
-        cell.viewModel = viewModel
+        cell.viewModel = vm
 
         return cell
     }
