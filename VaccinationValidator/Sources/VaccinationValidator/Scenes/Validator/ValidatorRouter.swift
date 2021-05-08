@@ -12,6 +12,7 @@ import VaccinationCommon
 import Scanner
 
 class ValidatorRouter: ValidatorRouterProtocol {
+
     // MARK: - Properties
 
     let sceneCoordinator: SceneCoordinator
@@ -30,7 +31,7 @@ class ValidatorRouter: ValidatorRouterProtocol {
         )
     }
 
-    func showCertificate(_ certificate: CBORWebToken) {
+    func showCertificate(_ certificate: CBORWebToken?) {
         sceneCoordinator.present(
             ValidationResultSceneFactory(
                 router: ValidationResultRouter(sceneCoordinator: sceneCoordinator),

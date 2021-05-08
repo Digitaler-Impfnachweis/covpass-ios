@@ -17,14 +17,10 @@ public class CardViewAction: XibView {
     @IBOutlet public var actionButton: UIButton!
     @IBOutlet public var stateImageView: UIImageView!
     
-    // MARK: - Variables
+    // MARK: - Properties
     
     public var action: (() -> Void)?
     public var buttonImage: UIImage? { didSet { actionButton.setImage(buttonImage, for: .normal) } }
-    
-    // MARK: - IBAction
-    
-    @IBAction public func actionButtonPressed(button: UIButton) { action?() }
 
     // MARK: - Lifecycle
 
@@ -32,4 +28,8 @@ public class CardViewAction: XibView {
         super.initView()
         stackView.spacing = .space_6
     }
+
+    // MARK: - IBAction
+
+    @IBAction public func actionButtonPressed(button: UIButton) { action?() }
 }

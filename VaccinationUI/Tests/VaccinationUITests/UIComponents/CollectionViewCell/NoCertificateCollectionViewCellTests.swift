@@ -32,13 +32,6 @@ class NoCertificateCollectionViewCellTests: XCTestCase {
     func testSutNotNil() {
         XCTAssertNotNil(sut)
     }
-
-    func testConfigure() {
-        let item = MockCellConfiguration.noCertificateConfiguration()
-        sut.configure(with: item)
-        XCTAssertEqual(sut.headlineLabel.text, "Title")
-        XCTAssertEqual(sut.subHeadlineLabel.text, "Subtitle")
-    }
     
     // MARK: - Mock Data
     
@@ -47,5 +40,3 @@ class NoCertificateCollectionViewCellTests: XCTestCase {
         return nib?.first as? NoCertificateCollectionViewCell
     }
 }
-
-

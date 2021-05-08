@@ -8,7 +8,7 @@
 import UIKit
 import VaccinationUI
 
-class ValidationResultViewController: UIViewController, ViewModelDelegate {
+class ValidationResultViewController: UIViewController {
     // MARK: - IBOutlet
 
     @IBOutlet var stackView: UIStackView!
@@ -44,14 +44,6 @@ class ValidationResultViewController: UIViewController, ViewModelDelegate {
         updateViews()
     }
 
-    func viewModelDidUpdate() {
-        updateViews()
-    }
-
-    func viewModelUpdateDidFailWithError(_ error: Error) {
-        // TODO: Handle error
-    }
-
     // MARK: - Private
 
     private func updateViews() {
@@ -62,9 +54,11 @@ class ValidationResultViewController: UIViewController, ViewModelDelegate {
 
         nameView.attributedTitleText = viewModel.nameTitle?.styledAs(.header_3)
         nameView.attributedBodyText = viewModel.nameBody?.styledAs(.body)
+        nameView.image = viewModel.nameIcon
 
         errorView.attributedTitleText = viewModel.errorTitle?.styledAs(.header_3)
         errorView.attributedBodyText = viewModel.errorBody?.styledAs(.body)
+        errorView.image = viewModel.errorIcon
     }
 
     private func configureImageView() {
@@ -83,13 +77,22 @@ class ValidationResultViewController: UIViewController, ViewModelDelegate {
 
     private func configureParagraphView() {
         stackView.setCustomSpacing(.space_24, after: resultView)
-        nameView.image = .data
     }
 
     private func configureToolbarView() {
         toolbarView.state = .confirm("validation_check_popup_valid_vaccination_button_title".localized)
         toolbarView.delegate = self
     }
+}
+
+// MARK: - ViewModelDelegate
+
+extension ValidationResultViewController: ViewModelDelegate {
+    public func viewModelDidUpdate() {
+        updateViews()
+    }
+
+    public func viewModelUpdateDidFailWithError(_ error: Error) {}
 }
 
 // MARK: - CustomToolbarViewDelegate

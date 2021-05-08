@@ -51,16 +51,16 @@ extension UIImage {
     @ImageLoader(name: "icon_lock")
     public private(set) static var lock
 
-    @ImageLoader(name: "chevron--right")
+    @ImageLoader(name: "chevron_right")
     public private(set) static var chevronRight
 
-    @ImageLoader(name: "epa_button_close")
+    @ImageLoader(name: "button_close")
     public private(set) static var close
 
     @ImageLoader(name: "scan_proof_image")
     public private(set) static var proofScreen
 
-    @ImageLoader(name: "ega_settings_image")
+    @ImageLoader(name: "settings_image")
     public private(set) static var settings
 
     @ImageLoader(name: "status_full")
@@ -75,7 +75,7 @@ extension UIImage {
     @ImageLoader(name: "star_partial")
     public private(set) static var starPartial
 
-    @ImageLoader(name: "ega_help")
+    @ImageLoader(name: "help")
     public private(set) static var help
 
     @ImageLoader(name: "no_vaccine_image")
@@ -84,7 +84,7 @@ extension UIImage {
     @ImageLoader(name: "star_48px")
     public private(set) static var starEmpty
 
-    @ImageLoader(name: "ega_prevention_label")
+    @ImageLoader(name: "prevention_label")
     public private(set) static var completness
 
     @ImageLoader(name: "shield_lefthalf_fill")
@@ -96,16 +96,16 @@ extension UIImage {
     @ImageLoader(name: "icon_card")
     public private(set) static var card
 
-    @ImageLoader(name: "ega_delete")
+    @ImageLoader(name: "delete")
     public private(set) static var delete
 
     @ImageLoader(name: "warning")
     public private(set) static var warning
 
-    @ImageLoader(name: "ega_checkbox_checked")
+    @ImageLoader(name: "checkbox_checked")
     public private(set) static var checkboxChecked
 
-    @ImageLoader(name: "ega_checkbox_unchecked")
+    @ImageLoader(name: "checkbox_unchecked")
     public private(set) static var checkboxUnchecked
 
     @ImageLoader(name: "result_success")
@@ -119,6 +119,12 @@ extension UIImage {
 
     @ImageLoader(name: "checkmark")
     public private(set) static var validationCheckmark
+
+    @ImageLoader(name: "pending")
+    public private(set) static var validationPending
+
+    @ImageLoader(name: "search")
+    public private(set) static var validationSearch
 }
 
 @propertyWrapper

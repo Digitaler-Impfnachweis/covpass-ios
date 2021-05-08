@@ -45,7 +45,7 @@ class CoseSign1ParserTests: XCTestCase {
 
     func testMapping() throws {
         let decompressedPayload = prepareData()
-        let coseSign1Message = try? sut.parse(decompressedPayload)
+        let coseSign1Message = try sut.parse(decompressedPayload)
 
         guard let message = coseSign1Message else {
             XCTFail("Cose1SignMessage should not be nil")

@@ -12,4 +12,5 @@ import VaccinationUI
 protocol VaccinationDetailRouterProtocol: DialogRouterProtocol {
     func showScanner() -> Promise<ScanResult>
     func showCertificateOverview()
+    func showErrorDialog()
 }

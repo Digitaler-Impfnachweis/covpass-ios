@@ -12,6 +12,7 @@ import VaccinationUI
 import Scanner
 
 class CertificateViewController: UIViewController {
+    
     // MARK: - IBOutlet
 
     @IBOutlet var headerView: InfoHeaderView!
@@ -46,7 +47,7 @@ class CertificateViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
-        viewModel.loadCertificatesConfiguration()
+        viewModel.loadCertificates()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -58,13 +59,13 @@ class CertificateViewController: UIViewController {
     
     private func setupDotIndicator() {
         dotPageIndicator.delegate = self
-        dotPageIndicator.numberOfDots = viewModel.certificates.count
-        dotPageIndicator.isHidden = viewModel.certificates.count == 1 ? true : false
+        dotPageIndicator.numberOfDots = viewModel.certificateViewModels.count
+        dotPageIndicator.isHidden = viewModel.certificateViewModels.count == 1 ? true : false
     }
     
     private func setupHeaderView() {
-        headerView.attributedTitleText = viewModel.headlineTitle.styledAs(.header_2)
-        headerView.image = viewModel.headlineButtonImage
+        headerView.attributedTitleText = "vaccination_start_screen_title".localized.styledAs(.header_2)
+        headerView.image = .help
         headerView.action = { [weak self] in
             self?.viewModel.showAppInformation()
         }
@@ -78,12 +79,12 @@ class CertificateViewController: UIViewController {
         layout.scrollDirection = .horizontal
         collectionView.collectionViewLayout = layout
         collectionView.register(UINib(nibName: "\(NoCertificateCollectionViewCell.self)", bundle: UIConstants.bundle), forCellWithReuseIdentifier: "\(NoCertificateCollectionViewCell.self)")
-        collectionView.register(UINib(nibName: "\(QrCertificateCollectionViewCell.self)", bundle: UIConstants.bundle), forCellWithReuseIdentifier: "\(QrCertificateCollectionViewCell.self)")
+        collectionView.register(UINib(nibName: "\(CertificateCollectionViewCell.self)", bundle: UIConstants.bundle), forCellWithReuseIdentifier: "\(CertificateCollectionViewCell.self)")
         collectionView.showsHorizontalScrollIndicator = false
     }
     
     private func setupActionButton() {
-        addButton.icon = viewModel.addButtonImage
+        addButton.icon = .plus
         addButton.action = { [weak self] in
             self?.viewModel.scanCertificate()
         }
@@ -91,32 +92,29 @@ class CertificateViewController: UIViewController {
 
     private func reloadCollectionView() {
         collectionView.reloadData()
-        dotPageIndicator.numberOfDots = viewModel.certificates.count
-        dotPageIndicator.isHidden = viewModel.certificates.count == 1 ? true : false
+        dotPageIndicator.numberOfDots = viewModel.certificateViewModels.count
+        dotPageIndicator.isHidden = viewModel.certificateViewModels.count == 1 ? true : false
     }
 }
 
 // MARK: - UITableViewDataSource
 
 extension CertificateViewController: UICollectionViewDataSource {
-    
-    public func numberOfSections(in collectionView: UICollectionView) -> Int { 1 }
+    public func numberOfSections(in collectionView: UICollectionView) -> Int {
+        1
+    }
     
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        viewModel.certificates.count
+        viewModel.certificateViewModels.count
     }
     
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: viewModel.reuseIdentifier(for: indexPath), for: indexPath) as? BaseCardCollectionViewCell else { return UICollectionViewCell() }
-        viewModel.configure(cell: cell, at: indexPath)
+        guard viewModel.certificateViewModels.count > indexPath.row else { return UICollectionViewCell() }
+        let vm = viewModel.certificateViewModels[indexPath.row]
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: vm.reuseIdentifier, for: indexPath) as? CardCollectionViewCell else { return UICollectionViewCell() }
 
-        // FIXME: DOES NOT WORK
-        cell.onAction = { [weak self] in
-            self?.viewModel.showCertificate(at: indexPath)
-        }
-        cell.onFavorite = { [weak self] in
-            // TODO mark as favorite
-        }
+        cell.viewModel = vm
+
         return cell
     }
 }
@@ -129,10 +127,6 @@ extension CertificateViewController: UICollectionViewDelegate {
         let visiblePoint = CGPoint(x: visibleRect.midX, y: visibleRect.midY)
         guard let visibleIndexPath = collectionView.indexPathForItem(at: visiblePoint) else { return }
         dotPageIndicator.selectDot(withIndex: visibleIndexPath.item)
-    }
-
-    public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        viewModel.showCertificate(at: indexPath)
     }
 }
 
@@ -160,10 +154,10 @@ extension CertificateViewController: CertificateViewModelDelegate {
     }
 
     func viewModelDidUpdateFavorite() {
-        collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .centeredHorizontally, animated: false)
+        collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .centeredHorizontally, animated: false)
     }
 
     func viewModelUpdateDidFailWithError(_ error: Error) {
-        // TODO: Handle error
+        viewModel.showErrorDialog()
     }
 }

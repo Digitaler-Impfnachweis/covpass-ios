@@ -10,17 +10,14 @@ import VaccinationUI
 import VaccinationCommon
 import PromiseKit
 
-protocol CertificateViewModel: HeadlineViewModel {
+protocol CertificateViewModel {
     var delegate: CertificateViewModelDelegate? { get set }
-    var addButtonImage: UIImage? { get }
-    var certificates: [BaseCertifiateConfiguration] { get set }
-
+    var certificateViewModels: [CardViewModel] { get set }
     func process(payload: String) -> Promise<ExtendedCBORWebToken>
-    func configure<T: CellConfigutation>(cell: T, at indexPath: IndexPath)
-    func reuseIdentifier(for indexPath: IndexPath) -> String
-    func loadCertificatesConfiguration()
+    func loadCertificates()
     func showCertificate(at indexPath: IndexPath)
     func showCertificate(_ certificate: ExtendedCBORWebToken)
     func scanCertificate()
     func showAppInformation()
+    func showErrorDialog()
 }

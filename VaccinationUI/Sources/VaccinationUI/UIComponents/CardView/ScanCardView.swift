@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-public class ScanCardView: BaseCardView {
+public class ScanCardView: XibView {
     // MARK: - Outlets
 
     @IBOutlet public var stackView: UIStackView!
@@ -24,9 +24,16 @@ public class ScanCardView: BaseCardView {
     private let shadowOpacity: CGFloat = 0.2
     private let shadowOffset: CGSize = .init(width: 0, height: -4)
 
+    // MARK: - Lifecycle
+
     public override func initView() {
         super.initView()
-        contentView?.layoutMargins = .init(top: .space_18, left: .space_24, bottom: .space_40, right: .space_24)
+        contentView?.layoutMargins = .init(
+            top: .space_18,
+            left: .space_24,
+            bottom: .space_40,
+            right: .space_24
+        )
         contentView?.backgroundColor = .brandBase
 
         contentView?.layer.cornerRadius = cornerRadius

@@ -15,6 +15,9 @@ class VaccinationDetailViewModel {
     private let router: VaccinationDetailRouterProtocol
     private let repository: VaccinationRepositoryProtocol
     private var certificates: [ExtendedCBORWebToken]
+    public weak var delegate: ViewModelDelegate?
+
+    // MARK: - Lifecyle
 
     init(
         router: VaccinationDetailRouterProtocol,
@@ -23,8 +26,10 @@ class VaccinationDetailViewModel {
 
         self.router = router
         self.repository = repository
-        self.certificates = certificates
+        self.certificates = certificates.sorted(by: { $0.vaccinationCertificate.hcert.dgc.v.first?.dn ?? 0 < $1.vaccinationCertificate.hcert.dgc.v.first?.dn ?? 0 })
     }
+
+    // MARK: - Actions
 
     var fullImmunization: Bool {
         certificates.map({ $0.vaccinationCertificate.hcert.dgc.fullImmunization }).first(where: { $0 }) ?? false
@@ -35,7 +40,6 @@ class VaccinationDetailViewModel {
             let certList = try repository.getVaccinationCertificateList().wait()
             return certificates.contains(where: { $0.vaccinationCertificate.hcert.dgc.v.first?.ci == certList.favoriteCertificateId })
         } catch {
-            print(error)
             return false
         }
     }
@@ -54,7 +58,7 @@ class VaccinationDetailViewModel {
     }
     
     var immunizationTitle: String {
-        fullImmunization ? "vaccination_certificate_detail_view_complete_title".localized : "vaccination_certificate_detail_view_incomplete_title".localized
+        fullImmunization ? "vaccination_certificate_detail_view_complete_title".localized : String(format: "vaccination_certificate_detail_view_incomplete_title".localized, 1, 2)
     }
     
     var immunizationBody: String {
@@ -73,20 +77,6 @@ class VaccinationDetailViewModel {
         fullImmunization ?
             showCertificate() :
             scanNextCertificate()
-    }
-
-    private func scanNextCertificate() {
-        firstly {
-            router.showScanner()
-        }
-        .done { result in
-            fatalError("TBD: To avoid code dublication we should add a scene wich scans and procced a certificate.")
-        }
-        .cauterize()
-    }
-
-    private func showCertificate() {
-        router.showCertificateOverview()
     }
 
     func delete() {
@@ -113,32 +103,44 @@ class VaccinationDetailViewModel {
             self.router.showCertificateOverview()
         }
         .catch { error in
-            print(error)
-            // TODO: Handle error
+            self.delegate?.viewModelUpdateDidFailWithError(error)
         }
     }
 
     func updateFavorite() -> Promise<Void> {
-        return repository.getVaccinationCertificateList().map({ cert in
+        firstly {
+            repository.getVaccinationCertificateList()
+        }
+        .map { cert in
             var certList = cert
             guard let id = self.certificates.first?.vaccinationCertificate.hcert.dgc.v.first?.ci else {
                 return certList
             }
             certList.favoriteCertificateId = certList.favoriteCertificateId == id ? nil : id
             return certList
-        }).then({ cert in
+        }
+        .then { cert in
             return self.repository.saveVaccinationCertificateList(cert).asVoid()
-        })
+        }
     }
 
     func process(payload: String) -> Promise<Void> {
-        return repository.scanVaccinationCertificate(payload).then({ cert in
+        firstly {
+            repository.scanVaccinationCertificate(payload)
+        }
+        .then { cert in
             return self.repository.getVaccinationCertificateList().then({ list -> Promise<Void> in
-                self.certificates = self.findCertificatePair(cert, list.certificates)
+                self.certificates = self.findCertificatePair(cert, list.certificates).sorted(by: { $0.vaccinationCertificate.hcert.dgc.v.first?.dn ?? 0 < $1.vaccinationCertificate.hcert.dgc.v.first?.dn ?? 0 })
                 return Promise.value(())
             })
-        })
+        }
     }
+
+    func showErrorDialog() {
+        router.showErrorDialog()
+    }
+
+    // MARK: - Private Helper
 
     private func findCertificatePair(_ certificate: ExtendedCBORWebToken, _ certificates: [ExtendedCBORWebToken]) -> [ExtendedCBORWebToken] {
         var list = [certificate]
@@ -166,5 +168,29 @@ class VaccinationDetailViewModel {
                 style: .alert
             )
         }
+    }
+
+    private func scanNextCertificate() {
+        firstly {
+            router.showScanner()
+        }
+        .then { result -> Promise<Void> in
+            switch result {
+            case .success(let qrCode):
+                return self.process(payload: qrCode)
+            case.failure(let error):
+                throw error
+            }
+        }
+        .done { [weak self] in
+            self?.delegate?.viewModelDidUpdate()
+        }
+        .catch { [weak self] error in
+            self?.delegate?.viewModelUpdateDidFailWithError(error)
+        }
+    }
+
+    private func showCertificate() {
+        router.showCertificateOverview()
     }
 }

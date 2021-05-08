@@ -94,11 +94,11 @@ class Base45Encoder {
         var result: UInt16 = 0
 
         for count in 0..<array.count {
-            if UInt16(array[count]).multipliedReportingOverflow(by: UInt16(pow(45, Double(count)))).overflow {
-                throw Base45DecodingError.overflow
-            } else {
-                result += UInt16(array[count]) * UInt16(pow(45, Double(count)))
-            }
+            let resMultiply = UInt16(array[count]).multipliedReportingOverflow(by: UInt16(pow(45, Double(count))))
+            if resMultiply.overflow { throw Base45DecodingError.overflow }
+            let resAdd = result.addingReportingOverflow(resMultiply.partialValue)
+            if resAdd.overflow { throw Base45DecodingError.overflow }
+            result = resAdd.partialValue
         }
 
         return result

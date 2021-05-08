@@ -9,6 +9,7 @@ import VaccinationUI
 import UIKit
 import VaccinationCommon
 import Scanner
+import PromiseKit
 
 class VaccinationDetailViewController: UIViewController {
     // MARK: - Outlets
@@ -42,6 +43,7 @@ class VaccinationDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.viewModel.delegate = self
         setupNavigationBar()
         setupView()
     }
@@ -132,10 +134,24 @@ class VaccinationDetailViewController: UIViewController {
     }
 
     @objc private func onFavorite() {
-        viewModel.updateFavorite().done({
+        firstly {
+            viewModel.updateFavorite()
+        }
+        .done {
             self.setupNavigationBar()
-        }).catch({ error in
-            // TODO: Handle error
-        })
+        }
+        .catch{ error in
+            self.viewModel.showErrorDialog()
+        }
+    }
+}
+
+extension VaccinationDetailViewController: ViewModelDelegate {
+    func viewModelDidUpdate() {
+        setupView()
+    }
+
+    func viewModelUpdateDidFailWithError(_ error: Error) {
+        viewModel.showErrorDialog()
     }
 }

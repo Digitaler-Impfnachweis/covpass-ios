@@ -69,7 +69,7 @@ class ValidationResultViewModel: BaseViewModel, CancellableViewModelProtocol {
         switch immunizationState {
         case .full, .partial:
             if let date = certificate?.hcert.dgc.dob {
-                return String(format: "%@ %@", "validation_check_popup_partial_valid_vaccination_date_of_birth_at".localized, DateUtils.displayDateFormatter.string(from: date))
+                return "\("validation_check_popup_partial_valid_vaccination_date_of_birth_at".localized) \(DateUtils.displayDateFormatter.string(from: date))"
             }
             return nil
         case .error:
@@ -104,6 +104,19 @@ class ValidationResultViewModel: BaseViewModel, CancellableViewModelProtocol {
         self.certificate = certificate
     }
 
+    var nameIcon: UIImage? {
+        switch immunizationState {
+        case .full, .partial:
+            return .data
+        case .error:
+            return .validationSearch
+        }
+    }
+
+    var errorIcon: UIImage? {
+        .validationPending
+    }
+
     // MARK: - Methods
 
     public func cancel() {
@@ -126,8 +139,9 @@ class ValidationResultViewModel: BaseViewModel, CancellableViewModelProtocol {
         .done { _ in
             self.delegate?.viewModelDidUpdate()
         }
-        .catch {
-            self.delegate?.viewModelUpdateDidFailWithError($0)
+        .catch { _ in
+            self.certificate = nil
+            self.delegate?.viewModelDidUpdate()
         }
     }
 
@@ -135,7 +149,6 @@ class ValidationResultViewModel: BaseViewModel, CancellableViewModelProtocol {
         return parser.parse(payload)
     }
 
-    // TODO: Needs a common shared place
     private func payloadFromScannerResult(_ result: ScanResult) throws -> String {
         switch result {
         case .success(let payload):
@@ -146,15 +159,7 @@ class ValidationResultViewModel: BaseViewModel, CancellableViewModelProtocol {
     }
 
     private func immunizationState(for certificate: DigitalGreenCertificate) -> ImmunizationState {
-        let calendar = Calendar.current
-        if certificate.fullImmunization,
-           let vaccinationDate = certificate.v.last?.dt,
-           let validDate = calendar.date(byAdding: .weekOfYear, value: 2, to: vaccinationDate),
-           let validTimestamp = calendar.date(bySettingHour: 23, minute: 59, second: 59, of: validDate),
-           validTimestamp >= Date() {
-            return .partial
-        }
-        return certificate.fullImmunization ? .full : .partial
+        return certificate.fullImmunizationValid ? .full : .partial
     }
 }
 
