@@ -59,13 +59,4 @@ class CertificateRouter: CertificateRouterProtocol, DialogRouterProtocol {
             )
         )
     }
-
-    func showErrorDialog() {
-        showDialog(
-            title: "error_standard_unexpected_title".localized,
-            message: "error_standard_unexpected_message".localized,
-            actions: [DialogAction(title: "error_connect_to_internet_Button_ok".localized)],
-            style: .alert
-        )
-    }
 }

@@ -110,7 +110,7 @@ class DefaultCertificateViewModel: CertificateViewModel {
     }
 
     func showErrorDialog() {
-        router.showErrorDialog()
+        router.showUnexpectedErrorDialog()
     }
 
     // MARK: - Private Functions

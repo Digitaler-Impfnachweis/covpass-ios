@@ -137,7 +137,7 @@ class VaccinationDetailViewModel {
     }
 
     func showErrorDialog() {
-        router.showErrorDialog()
+        router.showUnexpectedErrorDialog()
     }
 
     // MARK: - Private Helper
