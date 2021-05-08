@@ -10,7 +10,7 @@ APP_NAME = CovPass Check
 
 // API
 
-API_URL = https:/$()/api.recertify.demo.ubirch.com/api/certify/v2/reissue/cbor
+API_URL = https:/$()/api.recertify.ubirch.com
 
 
 // TLS CERTIVICATE PINNING
