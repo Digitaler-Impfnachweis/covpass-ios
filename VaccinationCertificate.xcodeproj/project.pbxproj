@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3814420A2646ED5800207CFA /* release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 381442092646ED5800207CFA /* release.xcconfig */; };
+		3814420C2646ED7600207CFA /* release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 3814420B2646ED7600207CFA /* release.xcconfig */; };
 		6507D7E625FB5DF700D69F94 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 88AB2A3825FA40CE00D4EA52 /* Assets.xcassets */; };
 		6507D7ED25FB5E0300D69F94 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 88AB2A4325FA40CE00D4EA52 /* Assets.xcassets */; };
 		6598186B260CB44D00776F70 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6598186A260CB44D00776F70 /* Main.storyboard */; };
@@ -55,10 +57,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		210116F72646D18100B9E8FF /* release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = release.xcconfig; sourceTree = "<group>"; };
+		210116F72646D18100B9E8FF /* release-rki.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "release-rki.xcconfig"; sourceTree = "<group>"; };
 		210116F82646D18100B9E8FF /* debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = debug.xcconfig; sourceTree = "<group>"; };
 		2101178C2646E86F00B9E8FF /* debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = debug.xcconfig; sourceTree = "<group>"; };
-		2101178D2646E86F00B9E8FF /* release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = release.xcconfig; sourceTree = "<group>"; };
+		2101178D2646E86F00B9E8FF /* release-rki.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "release-rki.xcconfig"; sourceTree = "<group>"; };
+		381442092646ED5800207CFA /* release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = release.xcconfig; sourceTree = "<group>"; };
+		3814420B2646ED7600207CFA /* release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = release.xcconfig; sourceTree = "<group>"; };
 		6561AB43260CB02C00D3A7FF /* VaccinationUI */ = {isa = PBXFileReference; lastKnownFileType = folder; path = VaccinationUI; sourceTree = "<group>"; };
 		6598186A260CB44D00776F70 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		65981872260CB45D00776F70 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
@@ -205,8 +209,9 @@
 		88AB2A3725FA40CE00D4EA52 /* VaccinationPassApp */ = {
 			isa = PBXGroup;
 			children = (
+				381442092646ED5800207CFA /* release.xcconfig */,
 				210116F82646D18100B9E8FF /* debug.xcconfig */,
-				210116F72646D18100B9E8FF /* release.xcconfig */,
+				210116F72646D18100B9E8FF /* release-rki.xcconfig */,
 				88AB2A3825FA40CE00D4EA52 /* Assets.xcassets */,
 				88AB2A3B25FA40CE00D4EA52 /* AppDelegate.swift */,
 				6598186A260CB44D00776F70 /* Main.storyboard */,
@@ -237,8 +242,9 @@
 		88AB2A4225FA40CE00D4EA52 /* VaccinationValidatorApp */ = {
 			isa = PBXGroup;
 			children = (
+				3814420B2646ED7600207CFA /* release.xcconfig */,
 				2101178C2646E86F00B9E8FF /* debug.xcconfig */,
-				2101178D2646E86F00B9E8FF /* release.xcconfig */,
+				2101178D2646E86F00B9E8FF /* release-rki.xcconfig */,
 				88AB2A4325FA40CE00D4EA52 /* Assets.xcassets */,
 				88AB2A4625FA40CE00D4EA52 /* AppDelegate.swift */,
 				65981872260CB45D00776F70 /* Main.storyboard */,
@@ -446,9 +452,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3814420A2646ED5800207CFA /* release.xcconfig in Resources */,
 				6507D7E625FB5DF700D69F94 /* Assets.xcassets in Resources */,
 				65D6D5E925F910A9000CB339 /* LaunchScreen.storyboard in Resources */,
 				6598186B260CB44D00776F70 /* Main.storyboard in Resources */,
+				3814420C2646ED7600207CFA /* release.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -727,7 +735,7 @@
 		};
 		65D6D50125F8B8FC000CB339 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 210116F72646D18100B9E8FF /* release.xcconfig */;
+			baseConfigurationReference = 210116F72646D18100B9E8FF /* release-rki.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
@@ -885,7 +893,7 @@
 		};
 		65D6D53825F8B94E000CB339 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2101178D2646E86F00B9E8FF /* release.xcconfig */;
+			baseConfigurationReference = 2101178D2646E86F00B9E8FF /* release-rki.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
