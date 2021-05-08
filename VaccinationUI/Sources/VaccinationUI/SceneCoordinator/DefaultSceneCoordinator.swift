@@ -94,8 +94,13 @@ public class DefaultSceneCoordinator: SceneCoordinator {
     }
 
     func dismissViewController(_ animated: Bool) {
-        rootViewController?.mostTopViewController?.dismiss(
-            animated: animated,
+        guard let viewController = rootViewController?.mostTopViewController else {
+            return
+        }
+
+        dismiss(
+            viewController,
+            animated,
             completion: nil
         )
     }
@@ -104,6 +109,8 @@ public class DefaultSceneCoordinator: SceneCoordinator {
         _ viewController: UIViewController,
         _ animated: Bool,
         completion: (() -> Void)? = nil) {
+
+        _ = modalSceneStack.popLast()
 
         viewController.dismiss(
             animated: animated,
