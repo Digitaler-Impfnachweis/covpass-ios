@@ -9,30 +9,51 @@ import UIKit
 import VaccinationCommon
 import VaccinationUI
 
+// TODO: implement this
 let NO_INTERNET = false
-let ERROR = false
 
-struct CertificateCardViewModel: CertificateCardViewModelProtocol {
+class CertificateCardViewModel: CertificateCardViewModelProtocol {
     // MARK: - Private Properties
 
     private var token: ExtendedCBORWebToken
     private var certificateIsFavorite: Bool
     private var onAction: (ExtendedCBORWebToken) -> Void
     private var onFavorite: (String) -> Void
+    private var repository: VaccinationRepositoryProtocol
+    private var didFailToUpdate: Bool = false
     private var certificate: DigitalGreenCertificate {
         token.vaccinationCertificate.hcert.dgc
     }
 
     // MARK: - Lifecycle
 
-    init(token: ExtendedCBORWebToken, isFavorite: Bool, onAction: @escaping (ExtendedCBORWebToken) -> Void, onFavorite: @escaping (String) -> Void) {
+    init(token: ExtendedCBORWebToken, isFavorite: Bool, onAction: @escaping (ExtendedCBORWebToken) -> Void, onFavorite: @escaping (String) -> Void, repository: VaccinationRepositoryProtocol) {
         self.token = token
         certificateIsFavorite = isFavorite
         self.onAction = onAction
         self.onFavorite = onFavorite
+        self.repository = repository
+
+        reissueCertificateIfNeeded()
+    }
+
+    func reissueCertificateIfNeeded() {
+        guard token.validationQRCodeData == nil else { return }
+        repository.reissueValidationCertificate(token)
+            .done { [weak self] cert in
+                self?.token = cert
+            }
+            .catch { [weak self] _ in
+                self?.didFailToUpdate = true
+            }
+            .finally { [weak self] in
+                self?.delegate?.viewModelDidUpdate()
+            }
     }
 
     // MARK: - Internal Properties
+
+    var delegate: ViewModelDelegate?
 
     var reuseIdentifier: String {
         "\(CertificateCollectionViewCell.self)"
@@ -85,7 +106,7 @@ struct CertificateCardViewModel: CertificateCardViewModelProtocol {
             if NO_INTERNET {
                 return "vaccination_full_immunization_loading_message_check_internet".localized
             }
-            if ERROR {
+            if didFailToUpdate {
                 return "vaccination_full_immunization_loading_message_error".localized
             }
         } else {

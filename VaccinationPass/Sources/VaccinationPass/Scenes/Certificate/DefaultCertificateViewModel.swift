@@ -58,7 +58,7 @@ class DefaultCertificateViewModel: CertificateViewModel {
             }
             self.certificateViewModels = list.map { cert in
                 let isFavorite = self.certificatePair(for: cert).contains(where: { $0.vaccinationCertificate.hcert.dgc.v.first?.ci == self.certificateList.favoriteCertificateId })
-                return CertificateCardViewModel(token: cert, isFavorite: isFavorite, onAction: self.onAction, onFavorite: self.onFavorite)
+                return CertificateCardViewModel(token: cert, isFavorite: isFavorite, onAction: self.onAction, onFavorite: self.onFavorite, repository: self.repository)
             }
         }
         .catch { _ in

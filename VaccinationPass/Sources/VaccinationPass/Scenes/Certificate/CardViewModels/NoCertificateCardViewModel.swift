@@ -11,6 +11,8 @@ import VaccinationUI
 struct NoCertificateCardViewModel: NoCertificateCardViewModelProtocol {
     // MARK: - Internal Properties
 
+    var delegate: ViewModelDelegate?
+
     var reuseIdentifier: String {
         "\(NoCertificateCollectionViewCell.self)"
     }
@@ -30,4 +32,6 @@ struct NoCertificateCardViewModel: NoCertificateCardViewModelProtocol {
     var image: UIImage {
         .noCertificate
     }
+
+    func willMoveToWindow() {}
 }
