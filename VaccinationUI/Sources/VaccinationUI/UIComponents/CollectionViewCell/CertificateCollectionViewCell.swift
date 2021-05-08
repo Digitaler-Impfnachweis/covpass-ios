@@ -24,8 +24,10 @@ public protocol CertificateCardViewModelBase {
     var tintColor: UIColor { get }
     var isFullImmunization: Bool { get }
     var vaccinationDate: Date? { get }
+    var delegate: ViewModelDelegate? { get set }
     func onClickAction()
     func onClickFavorite()
+    func reissueCertificateIfNeeded()
 }
 
 @IBDesignable
@@ -107,6 +109,12 @@ public class CertificateCollectionViewCell: CardCollectionViewCell {
         actionView.tintColor = .neutralWhite
 
         loadingView.isHidden = !vm.isLoading && vm.errorTitle == nil && vm.errorSubtitle == nil
+        loadingView.loadingIndicator.isHidden = vm.errorTitle != nil
+        if !loadingView.loadingIndicator.isHidden {
+            loadingView.loadingIndicator.startAnimating()
+        } else {
+            loadingView.loadingIndicator.stopAnimating()
+        }
         loadingView.titleLabel.isHidden = vm.errorTitle == nil
         loadingView.titleLabel.attributedText = vm.errorTitle?
             .styledAs(.header_3)
@@ -117,6 +125,10 @@ public class CertificateCollectionViewCell: CardCollectionViewCell {
             .styledAs(.body)
             .aligned(to: .center)
             .colored(.neutralWhite)
+    }
+
+    public override func viewModelDidUpdate() {
+        updateView()
     }
 
     // MARK: - Actions

@@ -113,6 +113,7 @@ extension CertificateViewController: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: viewModel.reuseIdentifier, for: indexPath) as? CardCollectionViewCell else { return UICollectionViewCell() }
 
         cell.viewModel = viewModel
+        cell.viewModel?.delegate = cell
 
         return cell
     }
