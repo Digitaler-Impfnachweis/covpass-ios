@@ -20,15 +20,6 @@
         }
       },
       {
-        "package": "OpenSSL",
-        "repositoryURL": "https://github.com/krzyzanowskim/OpenSSL",
-        "state": {
-          "branch": null,
-          "revision": "e88deedfc37501f03ae3a08b3b8cf497d0340197",
-          "version": "1.1.1100"
-        }
-      },
-      {
         "package": "PromiseKit",
         "repositoryURL": "https://github.com/mxcl/PromiseKit",
         "state": {
