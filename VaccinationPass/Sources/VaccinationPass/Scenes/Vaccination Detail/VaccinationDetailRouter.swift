@@ -22,6 +22,14 @@ class VaccinationDetailRouter: VaccinationDetailRouterProtocol, DialogRouterProt
 
     // MARK: - Methods
 
+    func showHowToScan() -> Promise<Void> {
+        sceneCoordinator.present(
+            HowToScanSceneFactory(
+                router: HowToScanRouter(sceneCoordinator: sceneCoordinator)
+            )
+        )
+    }
+
     func showScanner() -> Promise<ScanResult> {
         sceneCoordinator.present(
             ScanSceneFactory(

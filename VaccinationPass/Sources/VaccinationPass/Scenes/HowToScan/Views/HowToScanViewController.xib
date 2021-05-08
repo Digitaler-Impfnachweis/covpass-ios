@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ProofViewController" customModule="VaccinationPass">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HowToScanViewController" customModule="VaccinationPass">
             <connections>
                 <outlet property="actionView" destination="kiK-Qt-Oxb" id="Rg5-I5-d7M"/>
                 <outlet property="descriptionText" destination="czg-wL-cb7" id="KMZ-HX-ASj"/>

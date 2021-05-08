@@ -83,7 +83,7 @@ class DefaultCertificateViewModel: CertificateViewModel {
 
     func scanCertificate() {
         firstly {
-            router.showProof()
+            router.showHowToScan()
         }
         .then {
             self.router.scanQRCode()
