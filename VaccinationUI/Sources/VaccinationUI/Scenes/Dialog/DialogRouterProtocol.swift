@@ -15,6 +15,8 @@ public protocol DialogRouterProtocol: RouterProtocol {
         actions: [DialogAction],
         style: UIAlertController.Style
     )
+
+    func showUnexpectedErrorDialog()
 }
 
 public extension DialogRouterProtocol {
@@ -28,5 +30,15 @@ public extension DialogRouterProtocol {
             AlertSceneFactory(title: title, message: message, actions: actions, style: style)
         )
         .cauterize()
+    }
+
+    func showUnexpectedErrorDialog() {
+        let scene = AlertSceneFactory(
+            title: "error_standard_unexpected_title".localized,
+            message: "error_standard_unexpected_message".localized,
+            actions: [DialogAction(title: "error_connect_to_internet_Button_ok".localized)],
+            style: .alert
+        )
+        sceneCoordinator.present(scene).cauterize()
     }
 }

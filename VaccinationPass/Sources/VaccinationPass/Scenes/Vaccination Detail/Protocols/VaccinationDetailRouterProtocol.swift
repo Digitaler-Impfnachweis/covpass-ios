@@ -13,5 +13,4 @@ protocol VaccinationDetailRouterProtocol: DialogRouterProtocol {
     func showHowToScan() -> Promise<Void>
     func showScanner() -> Promise<ScanResult>
     func showCertificateOverview() -> Promise<Void>
-    func showErrorDialog()
 }
