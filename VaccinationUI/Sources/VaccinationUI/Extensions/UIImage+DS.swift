@@ -32,7 +32,7 @@ public extension UIImage {
     @ImageLoader(name: "onboarding_screen_3")
     private(set) static var onboardingScreen3
 
-    @ImageLoader(name: "illustration_consent")
+    @ImageLoader(name: "Illustration_consent")
     private(set) static var onboardingScreen4
 
     @ImageLoader(name: "illustration_1")
