@@ -13,7 +13,6 @@ import VaccinationCommon
 import PromiseKit
 
 class MockCertificateViewModel: CertificateViewModel {
-
     // MARK: - Test Variables
     
     var processCalled = false
@@ -25,20 +24,14 @@ class MockCertificateViewModel: CertificateViewModel {
     
     var addButtonImage: UIImage? = UIImage()
     
-    var certificates: [BaseCertifiateConfiguration] = [
-        MockCellConfiguration.noCertificateConfiguration()
-    ]
+    var certificateViewModels: [CardViewModel] = []
     
     func process(payload: String, completion: ((Error) -> Void)?) {
         processCalled = true
     }
-    
-    func configure<T>(cell: T, at indexPath: IndexPath) where T : CellConfigutation {
-        configureCalled = true
-    }
-    
+
     func reuseIdentifier(for indexPath: IndexPath) -> String {
-        certificates[indexPath.row].identifier
+        certificateViewModels[indexPath.row].reuseIdentifier
     }
     
     var headlineTitle: String {
@@ -49,8 +42,8 @@ class MockCertificateViewModel: CertificateViewModel {
         nil
     }
 
-    func loadCertificatesConfiguration() {
-        certificates = [MockCellConfiguration.noCertificateConfiguration()]
+    func loadCertificates() {
+        certificateViewModels = [MockCardViewModel()]
     }
 
     func process(payload: String) -> Promise<ExtendedCBORWebToken> {
@@ -78,6 +71,10 @@ class MockCertificateViewModel: CertificateViewModel {
     }
 
     func showAppInformation() {
+        // TODO: Add tests
+    }
+
+    func showErrorDialog() {
         // TODO: Add tests
     }
 }

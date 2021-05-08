@@ -40,28 +40,12 @@ class CertificateViewControllerTests: XCTestCase {
         XCTAssertNotNil(sut)
     }
     
-    func testDotPageIndicator() {
-        XCTAssertNotNil(sut.dotPageIndicator.delegate)
-        XCTAssertEqual(sut.dotPageIndicator.numberOfDots, viewModel.certificates.count)
-        XCTAssertEqual(sut.dotPageIndicator.isHidden, true)
-    }
-    
-    func testSetupHeaderView() {
-        XCTAssertEqual(sut.headerView.attributedTitleText, viewModel.headlineTitle.styledAs(.header_2))
-        XCTAssertEqual(sut.headerView.image, viewModel.headlineButtonImage)
-    }
-    
     func testCollectionView() {
         XCTAssertNotNil(sut.collectionView.delegate)
         XCTAssertNotNil(sut.collectionView.dataSource)
     }
     
     func testSetupActionButton() {
-        XCTAssertEqual(sut.addButton.icon, viewModel?.addButtonImage)
         XCTAssertNotNil(sut.addButton.action)
-    }
-
-    func testCellForRow() {
-        XCTAssertTrue( sut.collectionView(sut.collectionView, cellForItemAt: IndexPath(item: 0, section: 0)) is NoCertificateCollectionViewCell)
     }
 }
