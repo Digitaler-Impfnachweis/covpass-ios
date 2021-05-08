@@ -7,8 +7,8 @@
 
 import Foundation
 import UIKit
-import VaccinationUI
 import VaccinationCommon
+import VaccinationUI
 
 struct OnboardingRouter: OnboardingRouterProtocol {
     // MARK: - Properties

@@ -1,6 +1,6 @@
 //
 //  MainButton.swift
-// 
+//
 //
 //  Copyright © 2021 IBM. All rights reserved.
 //
@@ -53,7 +53,7 @@ public class MainButton: XibView {
 
     // MARK: - Lifecycle
 
-    public override func initView() {
+    override public func initView() {
         super.initView()
 
         contentMode = .center
@@ -108,7 +108,7 @@ public class MainButton: XibView {
         let keys = [\UIButton.isHighlighted, \UIButton.isSelected, \UIButton.isEnabled]
         keys.forEach {
             observerTokens.append(
-                innerButton.observe($0) { [weak self] (_, _) in
+                innerButton.observe($0) { [weak self] _, _ in
                     self?.updateAppearence()
                 }
             )
@@ -117,7 +117,7 @@ public class MainButton: XibView {
 
     // MARK: - Methods
 
-    public override func layoutSubviews() {
+    override public func layoutSubviews() {
         super.layoutSubviews()
         updateAppearence()
     }
@@ -125,7 +125,7 @@ public class MainButton: XibView {
     /// Animating
     public func startAnimating(makeCircle: Bool = true) {
         if makeCircle {
-            [buttonWidthConstraint, buttonHeightConstraint].forEach({ $0?.isActive = true })
+            [buttonWidthConstraint, buttonHeightConstraint].forEach { $0?.isActive = true }
             innerButton.contentEdgeInsets = .zero
         }
         innerButton.alpha = 0
@@ -135,7 +135,7 @@ public class MainButton: XibView {
     public func stopAnimating() {
         dotPulseActivityView.stopAnimating()
         innerButton.alpha = 1
-        [buttonWidthConstraint, buttonHeightConstraint].forEach({ $0?.isActive = false })
+        [buttonWidthConstraint, buttonHeightConstraint].forEach { $0?.isActive = false }
         updateAppearence()
     }
 

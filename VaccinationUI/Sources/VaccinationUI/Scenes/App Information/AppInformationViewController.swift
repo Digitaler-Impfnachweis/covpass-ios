@@ -1,6 +1,6 @@
 //
 //  AppInformationViewController.swift
-//  
+//
 //
 //  Copyright © 2021 IBM. All rights reserved.
 //
@@ -26,7 +26,7 @@ open class AppInformationViewController: UIViewController {
     }
 
     @available(*, unavailable)
-    required public init?(coder _: NSCoder) { fatalError("init?(coder: NSCoder) not implemented yet") }
+    public required init?(coder _: NSCoder) { fatalError("init?(coder: NSCoder) not implemented yet") }
 
     override public func viewDidLoad() {
         super.viewDidLoad()

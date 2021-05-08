@@ -5,8 +5,8 @@
 //  Copyright © 2021 IBM. All rights reserved.
 //
 
-import UIKit
 import PromiseKit
+import UIKit
 
 public class DefaultSceneCoordinator: SceneCoordinator {
     // MARK: - Properties
@@ -31,8 +31,8 @@ public class DefaultSceneCoordinator: SceneCoordinator {
 
     func push(
         pushable: UIViewController?,
-        animated: Bool = true) {
-
+        animated: Bool = true
+    ) {
         guard let viewController = pushable else {
             fatalError(ScenePresentationError.notPresentable.localizedDescription)
         }
@@ -50,8 +50,8 @@ public class DefaultSceneCoordinator: SceneCoordinator {
 
     func present(
         viewController: UIViewController,
-        animated: Bool = true) {
-
+        animated: Bool = true
+    ) {
         rootViewController?.mostTopViewController?.present(
             viewController,
             animated: animated,
@@ -67,8 +67,8 @@ public class DefaultSceneCoordinator: SceneCoordinator {
     func present<T>(
         viewController: UIViewController,
         promise: Promise<T>,
-        animated: Bool = true) -> Promise<T> {
-
+        animated: Bool = true
+    ) -> Promise<T> {
         present(viewController: viewController, animated: animated)
 
         // Map to an internal resolver to resolve only when view did dismiss.

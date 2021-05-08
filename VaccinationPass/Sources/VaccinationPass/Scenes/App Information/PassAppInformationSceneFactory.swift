@@ -1,6 +1,6 @@
 //
 //  PassAppInformationSceneFactory.swift
-//  
+//
 //
 //  Copyright © 2021 IBM. All rights reserved.
 //
@@ -8,10 +8,10 @@
 import UIKit
 import VaccinationUI
 
-public struct PassAppInformationSceneFactory: SceneFactory {
+struct PassAppInformationSceneFactory: SceneFactory {
     // MARK: - Properties
 
-    let router: AppInformationRouterProtocol
+    private let router: AppInformationRouterProtocol
 
     // MARK: - Lifecycle
 
@@ -19,7 +19,7 @@ public struct PassAppInformationSceneFactory: SceneFactory {
         self.router = router
     }
 
-    public func make() -> UIViewController {
+    func make() -> UIViewController {
         let viewModel = PassAppInformationViewModel(router: router)
         let viewController = AppInformationViewController(viewModel: viewModel)
         return viewController

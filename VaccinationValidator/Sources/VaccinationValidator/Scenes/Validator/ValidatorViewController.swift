@@ -6,9 +6,9 @@
 //
 
 import Foundation
+import Scanner
 import UIKit
 import VaccinationUI
-import Scanner
 
 class ValidatorViewController: UIViewController {
     // MARK: - IBOutlet
@@ -46,9 +46,9 @@ class ValidatorViewController: UIViewController {
         super.viewWillDisappear(animated)
         navigationController?.setNavigationBarHidden(false, animated: animated)
     }
-    
+
     // MARK: - Methods
-    
+
     private func setupHeaderView() {
         headerView.attributedTitleText = viewModel.title.styledAs(.header_2)
         headerView.image = .help
@@ -58,9 +58,9 @@ class ValidatorViewController: UIViewController {
     }
 
     private func setupCardView() {
-        scanCard.titleLabel.attributedText = "validation_start_screen_Scan_title".localized.styledAs(.header_1).colored(.backgroundSecondary)
-        scanCard.textLabel.attributedText = "validation_start_screen_Scan_message".localized.styledAs(.body).colored(.backgroundSecondary)
-        scanCard.actionButton.title = "validation_start_screen_Scan_action_button_title".localized
+        scanCard.titleLabel.attributedText = "validation_start_screen_scan_title".localized.styledAs(.header_1).colored(.backgroundSecondary)
+        scanCard.textLabel.attributedText = "validation_start_screen_scan_message".localized.styledAs(.body).colored(.backgroundSecondary)
+        scanCard.actionButton.title = "validation_start_screen_scan_action_button_title".localized
         scanCard.actionButton.action = { [weak self] in
             self?.viewModel.startQRCodeValidation()
         }

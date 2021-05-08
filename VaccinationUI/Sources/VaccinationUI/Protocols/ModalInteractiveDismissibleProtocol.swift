@@ -18,12 +18,12 @@ public protocol ModalInteractiveDismissibleProtocol {
     func modalViewControllerDidDismiss()
 }
 
-extension ModalInteractiveDismissibleProtocol {
-    public func canDismissModalViewController() -> Bool {
+public extension ModalInteractiveDismissibleProtocol {
+    func canDismissModalViewController() -> Bool {
         true
     }
 
-    public func modalViewControllerDidAttemptToDismiss() {}
+    func modalViewControllerDidAttemptToDismiss() {}
 
-    public func modalViewControllerDidDismiss() {}
+    func modalViewControllerDidDismiss() {}
 }

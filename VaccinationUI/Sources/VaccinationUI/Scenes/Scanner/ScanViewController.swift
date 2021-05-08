@@ -5,12 +5,12 @@
 //  Copyright © 2021 IBM. All rights reserved.
 //
 
-import UIKit
 import Scanner
+import UIKit
 
 class ScanViewController: UIViewController {
     // MARK: - IBOutlet
-    
+
     @IBOutlet var toolbarView: CustomToolbarView!
     @IBOutlet var container: UIView!
 
@@ -51,7 +51,7 @@ class ScanViewController: UIViewController {
         viewController.view.pinEdges(to: container)
         scanViewController = viewController
     }
-    
+
     private func configureToolbarView() {
         toolbarView.state = .cancel
         toolbarView.layoutMargins.top = .space_24
@@ -62,7 +62,7 @@ class ScanViewController: UIViewController {
 // MARK: - CustomToolbarViewDelegate
 
 extension ScanViewController: CustomToolbarViewDelegate {
-    public func customToolbarView(_: CustomToolbarView, didTap buttonType: ButtonItemType) {
+    func customToolbarView(_: CustomToolbarView, didTap buttonType: ButtonItemType) {
         switch buttonType {
         case .cancelButton:
             viewModel.cancel()
@@ -75,17 +75,17 @@ extension ScanViewController: CustomToolbarViewDelegate {
 // MARK: - ScannerDelegate
 
 extension ScanViewController: ScannerDelegate {
-    public func result(with value: Swift.Result<String, ScanError>) {
+    func result(with value: Swift.Result<String, ScanError>) {
         viewModel.onResult(value)
     }
 }
 
 extension ScanViewController: ModalInteractiveDismissibleProtocol {
-    public func canDismissModalViewController() -> Bool {
+    func canDismissModalViewController() -> Bool {
         viewModel.isCancellable()
     }
 
-    public func modalViewControllerDidDismiss() {
+    func modalViewControllerDidDismiss() {
         viewModel.cancel()
     }
 }

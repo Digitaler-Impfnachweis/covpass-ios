@@ -1,6 +1,6 @@
 //
 //  Base45Encoder.swift
-//  
+//
 //
 //  Copyright © 2021 IBM. All rights reserved.
 //
@@ -12,7 +12,7 @@ enum Base45DecodingError: Error {
 }
 
 class Base45Encoder {
-    private let base45Table: Dictionary<Int, String> = [
+    private let base45Table: [Int: String] = [
         0: "0", 1: "1", 2: "2", 3: "3", 4: "4", 5: "5", 6: "6", 7: "7", 8: "8", 9: "9", 10: "A", 11: "B",
         12: "C", 13: "D", 14: "E", 15: "F", 16: "G", 17: "H", 18: "I", 19: "J", 20: "K", 21: "L", 22: "M",
         23: "N", 24: "O", 25: "P", 26: "Q", 27: "R", 28: "S", 29: "T", 30: "U", 31: "V", 32: "W", 33: "X",
@@ -43,7 +43,6 @@ class Base45Encoder {
         return try base45Values.chunked(into: 3).flatMap { try mapToCBOR($0) }
     }
 
-
     // MARK: - Private helper methods
 
     /// This method takes two 8 bit integer values, converts them into a 16 bit value and calls the `expand` method to receive a base45 character
@@ -64,10 +63,10 @@ class Base45Encoder {
     /// - parameter sequence: an array of unsigned 8 bit integers of length 3 or 2
     /// - returns: an array with length 2 or 1 of unsigned 8 bit integer values, depending on the length of `sequence`
     private func mapToCBOR(_ sequence: [UInt8]) throws -> [UInt8] {
-        guard sequence.count == 3 else { return [UInt8(try reduce(array: sequence) & 0x00ff)] }
+        guard sequence.count == 3 else { return [UInt8(try reduce(array: sequence) & 0x00FF)] }
 
         let int16Value = try reduce(array: sequence)
-        return [UInt8(int16Value >> 8), UInt8(int16Value & 0x00ff)]
+        return [UInt8(int16Value >> 8), UInt8(int16Value & 0x00FF)]
     }
 
     /// Expands an unsigned 16 bit integer into a string composed of base45 characters
@@ -78,7 +77,7 @@ class Base45Encoder {
         var result = ""
         var integerNumber = Int(number)
 
-        for _ in 0..<count {
+        for _ in 0 ..< count {
             let base45Character = base45Table[integerNumber % 45] ?? ""
             result += base45Character
             integerNumber /= 45
@@ -93,12 +92,12 @@ class Base45Encoder {
     private func reduce(array: [UInt8]) throws -> UInt16 {
         var result: UInt16 = 0
 
-        for count in 0..<array.count {
-            if UInt16(array[count]).multipliedReportingOverflow(by: UInt16(pow(45, Double(count)))).overflow {
-                throw Base45DecodingError.overflow
-            } else {
-                result += UInt16(array[count]) * UInt16(pow(45, Double(count)))
-            }
+        for count in 0 ..< array.count {
+            let resMultiply = UInt16(array[count]).multipliedReportingOverflow(by: UInt16(pow(45, Double(count))))
+            if resMultiply.overflow { throw Base45DecodingError.overflow }
+            let resAdd = result.addingReportingOverflow(resMultiply.partialValue)
+            if resAdd.overflow { throw Base45DecodingError.overflow }
+            result = resAdd.partialValue
         }
 
         return result

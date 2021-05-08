@@ -6,62 +6,46 @@
 //
 
 import Foundation
-import XCTest
-import VaccinationUI
 @testable import VaccinationPass
+import VaccinationUI
+import XCTest
 
 class CertificateViewControllerTests: XCTestCase {
     // MARK: - Test Variables
-    
+
     var sut: CertificateViewController!
     var viewModel: MockCertificateViewModel!
-    
+
     // MARK: - Setup & Teardown
-    
+
     override func setUp() {
         super.setUp()
         viewModel = MockCertificateViewModel()
         sut = CertificateViewController(viewModel: viewModel)
         // Load View
-        let window = UIWindow(frame:  UIScreen.main.bounds)
+        let window = UIWindow(frame: UIScreen.main.bounds)
         window.makeKeyAndVisible()
         window.rootViewController = sut
     }
-    
+
     override func tearDown() {
         viewModel = nil
         sut = nil
         super.tearDown()
     }
-    
+
     // MARK: - Tests
-    
+
     func testSutNotNil() {
         XCTAssertNotNil(sut)
     }
-    
-    func testDotPageIndicator() {
-        XCTAssertNotNil(sut.dotPageIndicator.delegate)
-        XCTAssertEqual(sut.dotPageIndicator.numberOfDots, viewModel.certificates.count)
-        XCTAssertEqual(sut.dotPageIndicator.isHidden, true)
-    }
-    
-    func testSetupHeaderView() {
-        XCTAssertEqual(sut.headerView.attributedTitleText, viewModel.headlineTitle.styledAs(.header_2))
-        XCTAssertEqual(sut.headerView.image, viewModel.headlineButtonImage)
-    }
-    
+
     func testCollectionView() {
         XCTAssertNotNil(sut.collectionView.delegate)
         XCTAssertNotNil(sut.collectionView.dataSource)
     }
-    
-    func testSetupActionButton() {
-        XCTAssertEqual(sut.addButton.icon, viewModel?.addButtonImage)
-        XCTAssertNotNil(sut.addButton.action)
-    }
 
-    func testCellForRow() {
-        XCTAssertTrue( sut.collectionView(sut.collectionView, cellForItemAt: IndexPath(item: 0, section: 0)) is NoCertificateCollectionViewCell)
+    func testSetupActionButton() {
+        XCTAssertNotNil(sut.addButton.action)
     }
 }

@@ -1,6 +1,6 @@
 //
 //  OnboardingPageViewController.swift
-//  
+//
 //
 //  Copyright © 2021 IBM. All rights reserved.
 //
@@ -14,7 +14,7 @@ public class OnboardingPageViewController: UIViewController {
     @IBOutlet var imageView: UIImageView!
     @IBOutlet var headline: PlainLabel!
     @IBOutlet var descriptionText: PlainLabel!
-    
+
     // MARK: - Properties
 
     private(set) var viewModel: OnboardingPageViewModel
@@ -29,7 +29,7 @@ public class OnboardingPageViewController: UIViewController {
         super.init(nibName: String(describing: Self.self), bundle: .module)
     }
 
-    public override func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
         scrollView.contentInset.top = .space_70
         configureImageView()
@@ -45,12 +45,12 @@ public class OnboardingPageViewController: UIViewController {
     }
 
     private func configureHeadline() {
-        headline.attributedText = viewModel.title.styledAs(.header_2)
+        headline.attributedText = viewModel.title?.styledAs(.header_2)
         headline.layoutMargins = .init(top: .space_40, left: .space_24, bottom: .zero, right: .space_24)
     }
 
     private func configureParagraphView() {
-        descriptionText.attributedText = viewModel.info.styledAs(.body).colored(.onBackground70)
+        descriptionText.attributedText = viewModel.info?.styledAs(.body).colored(.onBackground70)
         descriptionText.layoutMargins = .init(top: .space_12, left: .space_24, bottom: .zero, right: .space_24)
     }
 }

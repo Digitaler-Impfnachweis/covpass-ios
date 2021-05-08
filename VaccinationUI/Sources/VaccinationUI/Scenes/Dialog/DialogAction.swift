@@ -21,8 +21,8 @@ public struct DialogAction {
         title: String,
         style: UIAlertAction.Style? = .default,
         isEnabled: Bool = true,
-        completion: ((Self) -> Void)? = nil) {
-
+        completion: ((Self) -> Void)? = nil
+    ) {
         self.title = title
         self.completion = completion
         self.style = style

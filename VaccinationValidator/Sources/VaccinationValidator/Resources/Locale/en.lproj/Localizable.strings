@@ -4,14 +4,14 @@
  * Language: en
  */
 
-/********** App **********/
+/********** app **********/
 
-"validator_app_name" = "Impfprüfer";
+"validator_app_name" = "CovPass Check";
 
 
-/********** Onboarding **********/
+/********** onboarding **********/
 
-"start_onboarding_title" = "Willkommen in der Prüf-App";
+"start_onboarding_title" = "Willkommen in der CovPassCheck-App";
 
 "start_onboarding_message" = "Finden Sie in wenigen Sekunden heraus, ob eine Person vollständig gegen Corona geimpft ist.";
 
@@ -23,17 +23,17 @@
 
 "next_onboarding_page_button_title" = "Weiter";
 
-"validation_first_onboarding_page_title" = "Erster Schritt: Das Prüfzertifikat mit der Prüf-App scannen";
+"validation_first_onboarding_page_title" = "Erster Schritt: Das Prüfzertifikat mit der CovPassCheck-App scannen";
 
-"validation_first_onboarding_page_message" = "Scannen Sie mit der Prüf-App das Prüfzertifikat. Halten Sie dafür das Smartphone über den QR-Code. Die Daten werden nur zur Prüfung angezeigt und nicht im Smartphone gespeichert. Sie sehen direkt in der Prüf-App, ob der Impfschutz der geimpften Person gültig ist. Hierfür ist nicht zwingend eine Internetverbindung nötig.";
+"validation_first_onboarding_page_message" = "Scannen Sie mit der CovPassCheck-App das Prüfzertifikat. Halten Sie dafür das Smartphone über den QR-Code. Die Daten werden nur zur Prüfung angezeigt und nicht im Smartphone gespeichert. Sie sehen direkt in der CovPassCheck-App, ob der Impfschutz der geimpften Person gültig ist. Hierfür ist nicht zwingend eine Internetverbindung nötig.";
 
 "validation_second_onboarding_page_title" = "Zweiter Schritt: Die Identität mit einem Ausweisdokument überprüfen";
 
-"validation_second_onboarding_page_message" = "Als prüfende Person sehen Sie in der Prüf-App nur den Impfstatus sowie den Namen und das Geburtsdatum der geimpften Person. Gleichen Sie die Informationen mit einem Ausweisdokument ab.";
+"validation_second_onboarding_page_message" = "Als prüfende Person sehen Sie in der CovPassCheck-App nur den Impfstatus sowie den Namen und das Geburtsdatum der geimpften Person. Gleichen Sie die Informationen mit einem Ausweisdokument ab.";
 
-"validation_fourth_onboarding_page_title" = "Zustimmung für die Nutzung der Prüf-App";
+"validation_fourth_onboarding_page_title" = "Zustimmung für die Nutzung der CovPassCheck-App";
 
-"validation_fourth_onboarding_page_message" = "Um die Prüf-App zu nutzen, müssen Sie bestätigen, dass Sie die Datenschutzerklärung zur Kenntnis genommen haben.";
+"validation_fourth_onboarding_page_message" = "Um die CovPassCheck-App zu nutzen, müssen Sie bestätigen, dass Sie die Datenschutzerklärung zur Kenntnis genommen haben.";
 
 "validation_fourth_onboarding_page_second_selection" = "Ich habe die Datenschutzerklärung zur Kenntnis genommen.";
 
@@ -41,24 +41,24 @@
 
 "error_connect_internet_for_scan_title" = "Flugzeugmodus ausschalten oder Wi-Fi für den Datenzugriff verwenden";
 
-"error_connect_internet_for_scan_Button_settings" = "Einstellungen";
+"error_connect_internet_for_scan_button_settings" = "Einstellungen";
 
-"error_connect_internet_for_scan_Button_ok" = "OK";
+"error_connect_internet_for_scan_button_ok" = "OK";
 
 
-/********** Start Screen **********/
+/********** start screen **********/
 
 "validation_start_screen_title" = "Übersicht";
 
-"validation_start_screen_Scan_title" = "Impfstatus prüfen";
+"validation_start_screen_scan_title" = "Impfstatus prüfen";
 
-"validation_start_screen_Scan_message" = "Scannen Sie jetzt das Prüfzertifikat. Sie sehen sofort, ob die Person vollständig gegen Corona geimpft ist.";
+"validation_start_screen_scan_message" = "Scannen Sie jetzt das Prüfzertifikat. Sie sehen sofort, ob die Person vollständig gegen Corona geimpft ist.";
 
-"validation_start_screen_Scan_action_button_title" = "Zertifikat scannen";
+"validation_start_screen_scan_action_button_title" = "Zertifikat scannen";
 
 "validation_start_screen_offline_modus_title" = "Offline-Modus";
 
-"validation_start_screen_offline_modus_message" = "Um offline prüfen zu können, halten Sie die Prüf-App auf dem aktuellsten Stand. Stellen Sie dafür ab und an eine Verbindung mit dem Internet her.";
+"validation_start_screen_offline_modus_message" = "Um offline prüfen zu können, halten Sie die CovPassCheck-App auf dem aktuellsten Stand. Stellen Sie dafür ab und an eine Verbindung mit dem Internet her.";
 
 "validation_start_screen_offline_modus_note_latest_version" = "Auf dem aktuellsten Stand";
 
@@ -68,22 +68,22 @@
 
 "validation_start_screen_offline_modus_note_update_pattern" = "Letztes Update: %@";
 
-"Error_old_version_title" = "App-Version veraltet";
+"error_old_version_title" = "App-Version veraltet";
 
-"Error_old_version_message" = "Um offline prüfen zu können, halten Sie die App auf dem aktuellsten Stand. Stellen Sie dafür eine Verbindung mit dem Internet her.";
+"error_old_version_message" = "Um offline prüfen zu können, halten Sie die CovPassCheck-App auf dem aktuellsten Stand. Stellen Sie dafür eine Verbindung mit dem Internet her.";
 
-"Error_old_version_button_title" = "OK";
+"error_old_version_button_title" = "OK";
 
 
-/********** Popup: Check vaccination **********/
+/********** popup: Check vaccination **********/
 
-"Error_camera_access_title" = "Die Prüf-App möchte auf Ihre Kamera zugreifen.";
+"error_camera_access_title" = "Die CovPassCheck-App möchte auf Ihre Kamera zugreifen.";
 
-"Error_camera_access_message" = "Erlauben Sie den Zugriff, um QR-Codes scannen zu können.";
+"error_camera_access_message" = "Erlauben Sie den Zugriff, um QR-Codes scannen zu können.";
 
-"Error_camera_access_button_do_not_allow" = "Nicht Erlauben";
+"error_camera_access_button_do_not_allow" = "Nicht Erlauben";
 
-"Error_camera_access_button_allow" = "Erlauben";
+"error_camera_access_button_allow" = "Erlauben";
 
 "validation_check_loading_screen_message" = "Impfschutz wird geprüft";
 
@@ -94,8 +94,6 @@
 "validation_check_popup_valid_vaccination_name" = "Name";
 
 "validation_check_popup_valid_vaccination_date_of_birth" = "Geburtsdatum";
-
-"validation_check_popup_button_title" = "Nächstes Zertifikat scannen";
 
 "validation_check_popup_valid_vaccination_button_title" = "Nächstes Zertifikat scannen";
 
@@ -121,9 +119,9 @@
 
 "validation_check_popup_unsuccessful_test_second_reason_title" = "Prüfzertifikat abgelaufen:";
 
-"validation_check_popup_unsuccessful_test_first_reason_body" = "Es sind keine Daten auf dem Prüfzertifikat der geimpften Person gespeichert. Sollten Sie sich im Offline-Modus befinden, aktualisieren Sie die Prüf-App.";
+"validation_check_popup_unsuccessful_test_first_reason_body" = "Es sind keine Daten auf dem Prüfzertifikat der geimpften Person gespeichert. Sollten Sie sich im Offline-Modus befinden, aktualisieren Sie die CovPassCheck-App.";
 
-"validation_check_popup_unsuccessful_test_second_reason_body" = "Das Prüfzertifikat ist nicht mehr gültig. Der aktuelle Status kann in der Impfnachweis-App eingesehen werden.";
+"validation_check_popup_unsuccessful_test_second_reason_body" = "Das Prüfzertifikat ist nicht mehr gültig. Der aktuelle Status kann in der CovPassCheck-App eingesehen werden.";
 
 "validation_check_popup_unsuccessful_test_button_title" = "Nächstes Zertifikat scannen";
 

@@ -5,11 +5,12 @@
 //  Copyright © 2021 IBM. All rights reserved.
 //
 
-import UIKit
 import PromiseKit
+import UIKit
 import VaccinationUI
 
-public protocol VaccinationDetailRouterProtocol: DialogRouterProtocol {
+protocol VaccinationDetailRouterProtocol: DialogRouterProtocol {
     func showScanner() -> Promise<ScanResult>
     func showCertificateOverview()
+    func showErrorDialog()
 }

@@ -5,28 +5,28 @@
 //  Copyright © 2021 IBM. All rights reserved.
 //
 
-import UIKit
 import PromiseKit
+import UIKit
 import VaccinationCommon
 import VaccinationUI
 
-public struct ValidationResultSceneFactory: SceneFactory {
+struct ValidationResultSceneFactory: SceneFactory {
     // MARK: - Properties
 
     let router: ValidationResultRouterProtocol
-    let certificate: CBORWebToken
+    let certificate: CBORWebToken?
 
     // MARK: - Lifecycle
 
-    public init(
+    init(
         router: ValidationResultRouterProtocol,
-        certificate: CBORWebToken) {
-
+        certificate: CBORWebToken?
+    ) {
         self.router = router
         self.certificate = certificate
     }
 
-    public func make() -> UIViewController {
+    func make() -> UIViewController {
         let viewModel = ValidationResultViewModel(
             router: router,
             certificate: certificate

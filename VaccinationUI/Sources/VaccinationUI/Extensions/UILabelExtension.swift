@@ -1,19 +1,19 @@
 //
 //  UILabelExtension.swift
-//  
+//
 //
 //  Copyright © 2021 IBM. All rights reserved.
 //
 
 import UIKit
 
-extension UILabel {
+public extension UILabel {
     /// Allows the `UILabel` to enlarge the font using the accessibility
     ///
     /// - Parameters:
     ///   - multiplier: Multiplier for `maximumPointSize`
     ///   - numberOfLines: Number of lines for `numberOfLines`
-    public func adjustsFontForContentSizeCategory(multiplier: CGFloat? = nil, numberOfLines: Int = 0) {
+    func adjustsFontForContentSizeCategory(multiplier: CGFloat? = nil, numberOfLines: Int = 0) {
         adjustsFontForContentSizeCategory = true
         self.numberOfLines = numberOfLines
         // create a new font to prevent crash on UIFontMetrics.default.scaledFont(for: font) when font is already scaled
@@ -36,9 +36,10 @@ extension UILabel {
     ///   - font: Simple font (not scaled with UIFontMetrics.default.scaledFont(for: font), which crash app)
     ///   - multiplier: Multiplier for `maximumPointSize`
     ///   - numberOfLines: Number of lines for `numberOfLines`
-    public func setupAdjustedFontWith(font: UIFont,
-                                      multiplier: CGFloat? = nil,
-                                      numberOfLines: Int = 0) {
+    func setupAdjustedFontWith(font: UIFont,
+                               multiplier: CGFloat? = nil,
+                               numberOfLines: Int = 0)
+    {
         adjustsFontForContentSizeCategory = true
         self.numberOfLines = numberOfLines
         multiplier

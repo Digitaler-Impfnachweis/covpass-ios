@@ -9,20 +9,19 @@ import UIKit
 
 @IBDesignable
 public class ActionTableViewCell: UITableViewCell {
-    
     // MARK: - IBOutlet
 
     @IBOutlet public var stackView: UIStackView!
     @IBOutlet public var labelHeadline: UILabel!
     @IBOutlet public var iconImageView: UIImageView!
-    
+
     // MARK: - Public
-    
+
     public static let identifier = "ActionTableViewCell"
-    
+
     // MARK: - Lifecycle
-    
-    public override func awakeFromNib() {
+
+    override public func awakeFromNib() {
         super.awakeFromNib()
         contentView.layoutMargins = .init(top: .space_12, left: .zero, bottom: .space_12, right: .zero)
         stackView.spacing = .space_6

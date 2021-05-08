@@ -1,13 +1,13 @@
 //
 //  DateUtils.swift
-//  
+//
 //
 //  Copyright © 2021 IBM. All rights reserved.
 //
 
 import Foundation
 
-public struct DateUtils {
+public enum DateUtils {
     public static let vaccinationDateFormatter = utcDateFormatter(format: "yyyy-MM-dd")
     public static let displayDateFormatter = utcDateFormatter(format: "dd.MM.yyyy")
 

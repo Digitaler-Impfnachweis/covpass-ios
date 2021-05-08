@@ -17,12 +17,12 @@ public protocol SceneDismissing {
 
 // MARK: - Optionals
 
-extension SceneDismissing {
-    public func pop(animated: Bool = true) {
+public extension SceneDismissing {
+    func pop(animated: Bool = true) {
         pop(animated: animated)
     }
 
-    public func dimiss(animated: Bool = true) {
+    func dimiss(animated: Bool = true) {
         dimiss(animated: animated)
     }
 }

@@ -5,10 +5,10 @@
 //  Copyright © 2021 IBM. All rights reserved.
 //
 
-import UIKit
 import PromiseKit
-import VaccinationUI
+import UIKit
 import VaccinationCommon
+import VaccinationUI
 
 struct VaccinationDetailSceneFactory: SceneFactory {
     // MARK: - Properties
@@ -22,8 +22,8 @@ struct VaccinationDetailSceneFactory: SceneFactory {
     init(
         router: VaccinationDetailRouterProtocol,
         repository: VaccinationRepositoryProtocol,
-        certificates: [ExtendedCBORWebToken]) {
-
+        certificates: [ExtendedCBORWebToken]
+    ) {
         self.router = router
         self.repository = repository
         self.certificates = certificates

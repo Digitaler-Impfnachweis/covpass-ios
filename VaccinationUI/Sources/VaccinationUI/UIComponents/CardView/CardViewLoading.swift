@@ -17,7 +17,9 @@ public class CardViewLoading: XibView {
     @IBOutlet public var subtitleLabel: PlainLabel!
     @IBOutlet public var loadingIndicator: DotPulseActivityIndicator!
 
-    public override func initView() {
+    // MARK: - Lifecycle
+
+    override public func initView() {
         super.initView()
         stackView.spacing = .space_12
         loadingIndicator.isHidden = true

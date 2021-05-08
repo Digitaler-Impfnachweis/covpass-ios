@@ -1,6 +1,6 @@
 //
 //  NoCertificateCollectionViewCell.swift
-//  
+//
 //
 //  Copyright © 2021 IBM. All rights reserved.
 //
@@ -8,8 +8,16 @@
 import Foundation
 import UIKit
 
+public typealias NoCertificateCardViewModelProtocol = CardViewModel & NoCertificateCardViewModelBase
+
+public protocol NoCertificateCardViewModelBase {
+    var title: String { get }
+    var subtitle: String { get }
+    var image: UIImage { get }
+}
+
 @IBDesignable
-public class NoCertificateCollectionViewCell: BaseCardCollectionViewCell {
+public class NoCertificateCollectionViewCell: CardCollectionViewCell {
     // MARK: - IBOutlet
 
     @IBOutlet public var containerView: UIView!
@@ -17,32 +25,46 @@ public class NoCertificateCollectionViewCell: BaseCardCollectionViewCell {
     @IBOutlet public var iconImageView: UIImageView!
     @IBOutlet public var headlineLabel: UILabel!
     @IBOutlet public var subHeadlineLabel: UILabel!
-    
+
+    // MARK: - Public Properties
+
+    override public var viewModel: CardViewModel? {
+        didSet {
+            updateView()
+        }
+    }
+
     // MARK: - Lifecycle
-    
-    public override func awakeFromNib() {
+
+    override public func awakeFromNib() {
         super.awakeFromNib()
 
-        containerView.layoutMargins = .init(top: .space_120, left: .space_24, bottom: .space_120, right: .space_24)
+        containerView.layoutMargins = .init(
+            top: .space_120,
+            left: .space_40,
+            bottom: .space_120,
+            right: .space_40
+        )
         containerView.layer.cornerRadius = 15
-        containerView.backgroundColor = .backgroundSecondary20
-        containerView.tintColor = .backgroundSecondary20
 
         stackView.spacing = .zero
         stackView.setCustomSpacing(.space_10, after: iconImageView)
     }
-}
 
-// MARK: - CellConfigutation
+    private func updateView() {
+        guard let vm = viewModel as? NoCertificateCardViewModelProtocol else { return }
 
-extension NoCertificateCollectionViewCell {
-    public typealias T = NoCertifiateConfiguration
-    
-    public func configure(with configuration: T) {
-        headlineLabel.attributedText = configuration.title?.styledAs(.header_3).aligned(to: .center)
-        subHeadlineLabel.attributedText = configuration.subtitle?.styledAs(.body).colored(.onBackground70).aligned(to: .center)
-        iconImageView.image = configuration.image
+        containerView.backgroundColor = vm.backgroundColor
+        containerView.tintColor = vm.backgroundColor
+        iconImageView.image = vm.image
 
-        layoutIfNeeded()
+        headlineLabel.attributedText = vm.title
+            .styledAs(.header_3)
+            .aligned(to: .center)
+
+        subHeadlineLabel.attributedText = vm.subtitle
+            .styledAs(.body)
+            .colored(.onBackground70)
+            .aligned(to: .center)
     }
 }

@@ -1,12 +1,12 @@
 //
 //  ScanSceneFactory.swift
-//  
+//
 //
 //  Copyright © 2021 IBM. All rights reserved.
 //
 
-import UIKit
 import PromiseKit
+import UIKit
 
 public struct ScanSceneFactory: ResolvableSceneFactory {
     // MARK: - Lifecycle
@@ -25,7 +25,6 @@ public struct ScanSceneFactory: ResolvableSceneFactory {
             resolvable: resolvable
         )
         let viewController = ScanViewController(viewModel: viewModel)
-        viewController.modalPresentationStyle = .fullScreen
         return viewController
     }
 }

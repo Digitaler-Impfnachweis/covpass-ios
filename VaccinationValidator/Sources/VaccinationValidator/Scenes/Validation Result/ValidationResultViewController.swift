@@ -8,17 +8,17 @@
 import UIKit
 import VaccinationUI
 
-public class ValidationResultViewController: UIViewController, ViewModelDelegate {
+class ValidationResultViewController: UIViewController {
     // MARK: - IBOutlet
 
-    @IBOutlet public var stackView: UIStackView!
-    @IBOutlet public var toolbarView: CustomToolbarView!
-    @IBOutlet public var headline: InfoHeaderView!
-    @IBOutlet public var imageContainerView: UIStackView!
-    @IBOutlet public var imageView: UIImageView!
-    @IBOutlet public var resultView: ParagraphView!
-    @IBOutlet public var nameView: ParagraphView!
-    @IBOutlet public var errorView: ParagraphView!
+    @IBOutlet var stackView: UIStackView!
+    @IBOutlet var toolbarView: CustomToolbarView!
+    @IBOutlet var headline: InfoHeaderView!
+    @IBOutlet var imageContainerView: UIStackView!
+    @IBOutlet var imageView: UIImageView!
+    @IBOutlet var resultView: ParagraphView!
+    @IBOutlet var nameView: ParagraphView!
+    @IBOutlet var errorView: ParagraphView!
 
     // MARK: - Properties
 
@@ -35,21 +35,13 @@ public class ValidationResultViewController: UIViewController, ViewModelDelegate
         self.viewModel.delegate = self
     }
 
-    public override func viewDidLoad() {
+    override func viewDidLoad() {
         super.viewDidLoad()
         configureImageView()
         configureHeadline()
         configureParagraphView()
         configureToolbarView()
         updateViews()
-    }
-
-    public func viewModelDidUpdate() {
-        updateViews()
-    }
-
-    public func viewModelUpdateDidFailWithError(_ error: Error) {
-        // TODO: Handle error
     }
 
     // MARK: - Private
@@ -62,13 +54,14 @@ public class ValidationResultViewController: UIViewController, ViewModelDelegate
 
         nameView.attributedTitleText = viewModel.nameTitle?.styledAs(.header_3)
         nameView.attributedBodyText = viewModel.nameBody?.styledAs(.body)
+        nameView.image = viewModel.nameIcon
 
         errorView.attributedTitleText = viewModel.errorTitle?.styledAs(.header_3)
         errorView.attributedBodyText = viewModel.errorBody?.styledAs(.body)
+        errorView.image = viewModel.errorIcon
     }
 
     private func configureImageView() {
-
         stackView.setCustomSpacing(.space_24, after: imageContainerView)
     }
 
@@ -77,13 +70,12 @@ public class ValidationResultViewController: UIViewController, ViewModelDelegate
         headline.action = { [weak self] in
             self?.viewModel.cancel()
         }
-        headline.image = viewModel.closeButtonImage
+        headline.image = .close
         stackView.setCustomSpacing(.space_24, after: headline)
     }
 
     private func configureParagraphView() {
         stackView.setCustomSpacing(.space_24, after: resultView)
-        nameView.image = .data
     }
 
     private func configureToolbarView() {
@@ -92,10 +84,20 @@ public class ValidationResultViewController: UIViewController, ViewModelDelegate
     }
 }
 
+// MARK: - ViewModelDelegate
+
+extension ValidationResultViewController: ViewModelDelegate {
+    public func viewModelDidUpdate() {
+        updateViews()
+    }
+
+    public func viewModelUpdateDidFailWithError(_: Error) {}
+}
+
 // MARK: - CustomToolbarViewDelegate
 
 extension ValidationResultViewController: CustomToolbarViewDelegate {
-    public func customToolbarView(_: CustomToolbarView, didTap buttonType: ButtonItemType) {
+    func customToolbarView(_: CustomToolbarView, didTap buttonType: ButtonItemType) {
         switch buttonType {
         case .textButton:
             viewModel.scanNextCertifcate()
@@ -108,11 +110,11 @@ extension ValidationResultViewController: CustomToolbarViewDelegate {
 // MARK: - ModalInteractiveDismissibleProtocol
 
 extension ValidationResultViewController: ModalInteractiveDismissibleProtocol {
-    public func canDismissModalViewController() -> Bool {
+    func canDismissModalViewController() -> Bool {
         viewModel.isCancellable()
     }
 
-    public func modalViewControllerDidDismiss() {
+    func modalViewControllerDidDismiss() {
         viewModel.cancel()
     }
 }

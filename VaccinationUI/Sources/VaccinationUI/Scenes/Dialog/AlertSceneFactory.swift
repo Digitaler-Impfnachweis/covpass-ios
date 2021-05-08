@@ -5,8 +5,8 @@
 //  Copyright © 2021 IBM. All rights reserved.
 //
 
-import UIKit
 import PromiseKit
+import UIKit
 
 public struct AlertSceneFactory: ResolvableSceneFactory {
     // MARK: - Properties
@@ -22,8 +22,8 @@ public struct AlertSceneFactory: ResolvableSceneFactory {
         title: String? = nil,
         message: String? = nil,
         actions: [DialogAction],
-        style: UIAlertController.Style = .alert) {
-
+        style: UIAlertController.Style = .alert
+    ) {
         self.title = title
         self.message = message
         self.actions = actions

@@ -1,6 +1,6 @@
 //
 //  CheckboxView.swift
-//  
+//
 //
 //  Copyright © 2021 IBM. All rights reserved.
 //
@@ -15,7 +15,7 @@ public class CheckboxView: XibView {
     var checked: Bool = false
     var didChangeState: ((Bool) -> Void)?
 
-    public override func initView() {
+    override public func initView() {
         super.initView()
 
         stackView.spacing = .space_12

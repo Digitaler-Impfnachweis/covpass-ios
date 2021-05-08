@@ -1,14 +1,15 @@
 //
 //  VaccinationDetailViewController.swift
-//  
+//
 //
 //  Copyright © 2021 IBM. All rights reserved.
 //
 
-import VaccinationUI
+import PromiseKit
+import Scanner
 import UIKit
 import VaccinationCommon
-import Scanner
+import VaccinationUI
 
 class VaccinationDetailViewController: UIViewController {
     // MARK: - Outlets
@@ -39,9 +40,10 @@ class VaccinationDetailViewController: UIViewController {
         self.viewModel = viewModel
         super.init(nibName: String(describing: Self.self), bundle: .module)
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel.delegate = self
         setupNavigationBar()
         setupView()
     }
@@ -76,7 +78,7 @@ class VaccinationDetailViewController: UIViewController {
         nameHeadline.layoutMargins = .init(top: .zero, left: .space_24, bottom: .zero, right: .space_24)
         stackView.setCustomSpacing(.space_24, after: nameHeadline)
     }
-    
+
     private func setupImmunizationView() {
         immunizationContainerView.layoutMargins.top = .space_24
         immunizationContainerView.layoutMargins.bottom = .space_24
@@ -126,16 +128,30 @@ class VaccinationDetailViewController: UIViewController {
             $0.removeFromSuperview()
             self.vaccinationsStackView.removeArrangedSubview($0)
         }
-        viewModel.vaccinations.forEach({
+        viewModel.vaccinations.forEach {
             vaccinationsStackView.addArrangedSubview(VaccinationView(viewModel: $0))
-        })
+        }
     }
 
     @objc private func onFavorite() {
-        viewModel.updateFavorite().done({
+        firstly {
+            viewModel.updateFavorite()
+        }
+        .done {
             self.setupNavigationBar()
-        }).catch({ error in
-            // TODO: Handle error
-        })
+        }
+        .catch { _ in
+            self.viewModel.showErrorDialog()
+        }
+    }
+}
+
+extension VaccinationDetailViewController: ViewModelDelegate {
+    func viewModelDidUpdate() {
+        setupView()
+    }
+
+    func viewModelUpdateDidFailWithError(_: Error) {
+        viewModel.showErrorDialog()
     }
 }

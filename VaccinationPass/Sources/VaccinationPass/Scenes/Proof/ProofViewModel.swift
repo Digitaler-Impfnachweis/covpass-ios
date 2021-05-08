@@ -1,67 +1,54 @@
 //
 //  ProofViewModel.swift
-//  
+//
 //
 //  Copyright © 2021 IBM. All rights reserved.
 //
 
-import UIKit
 import PromiseKit
+import UIKit
 import VaccinationUI
 
-public class ProofViewModel: BaseViewModel, CancellableViewModelProtocol {
+class ProofViewModel: BaseViewModel, CancellableViewModelProtocol {
     // MARK: - Properties
 
-    public weak var delegate: ViewModelDelegate?
+    weak var delegate: ViewModelDelegate?
     let router: ProofRouterProtocol
     let resolver: Resolver<Void>
 
-    public var image: UIImage? {
+    var image: UIImage? {
         .proofScreen
     }
 
-    public var title: String {
+    var title: String {
         "vaccination_add_popup_title".localized
     }
 
-    public var info: String {
+    var info: String {
         "vaccination_add_popup_message".localized
     }
-    
+
     var actionTitle: String {
         "vaccination_add_popup_action_title".localized
     }
-    
+
     var startButtonTitle: String { "vaccination_add_popup_scan_button_title".localized }
-    
-    var closeButtonImage: UIImage? {
-        .close
-    }
-    
-    var chevronRightImage: UIImage? {
-        .chevronRight
-    }
 
-    // MARK: - Settings
-
-    public var backgroundColor: UIColor { .backgroundPrimary }
-    var tintColor: UIColor { .brandAccent }
-    
     // MARK: - Lifecycle
 
-    public init(
+    init(
         router: ProofRouterProtocol,
-        resolvable: Resolver<Void>) {
-
+        resolvable: Resolver<Void>
+    ) {
         self.router = router
-        self.resolver = resolvable
+        resolver = resolvable
     }
 
     func done() {
         resolver.fulfill_()
     }
 
-    public func cancel() {
+    func cancel() {
         resolver.cancel()
     }
 

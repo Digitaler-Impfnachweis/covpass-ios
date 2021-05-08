@@ -1,6 +1,6 @@
 //
 //  ProofViewController.swift
-//  
+//
 //
 //  Copyright © 2021 IBM. All rights reserved.
 //
@@ -11,11 +11,11 @@ import VaccinationUI
 class ProofViewController: UIViewController {
     // MARK: - IBOutlet
 
-    @IBOutlet public var headline: InfoHeaderView!
-    @IBOutlet public var descriptionText: ParagraphView!
-    @IBOutlet public var imageView: UIImageView!
-    @IBOutlet public var actionView: InfoHeaderView!
-    @IBOutlet public var toolbarView: CustomToolbarView!
+    @IBOutlet var headline: InfoHeaderView!
+    @IBOutlet var descriptionText: ParagraphView!
+    @IBOutlet var imageView: UIImageView!
+    @IBOutlet var actionView: InfoHeaderView!
+    @IBOutlet var toolbarView: CustomToolbarView!
 
     // MARK: - Properties
 
@@ -54,16 +54,16 @@ class ProofViewController: UIViewController {
         headline.action = { [weak self] in
             self?.viewModel.cancel()
         }
-        headline.image = viewModel.closeButtonImage
+        headline.image = .close
     }
-    
+
     private func configureActionView() {
         actionView.attributedTitleText = viewModel.actionTitle.styledAs(.header_3)
         actionView.action = { [weak self] in
             self?.dismiss(animated: true, completion: nil)
         }
-        actionView.image = viewModel.chevronRightImage
-        actionView.tintColor = viewModel.tintColor
+        actionView.image = .chevronRight
+        actionView.tintColor = .brandAccent
         actionView.layoutMargins.top = .space_40
     }
 
@@ -72,7 +72,7 @@ class ProofViewController: UIViewController {
         descriptionText.layoutMargins.top = .space_18
         descriptionText.layoutMargins.bottom = .space_40
     }
-    
+
     private func configureToolbarView() {
         toolbarView.state = .confirm(viewModel.startButtonTitle)
         toolbarView.setUpLeftButton(leftButtonItem: .navigationArrow)
@@ -84,7 +84,7 @@ class ProofViewController: UIViewController {
 // MARK: - CustomToolbarViewDelegate
 
 extension ProofViewController: CustomToolbarViewDelegate {
-    public func customToolbarView(_: CustomToolbarView, didTap buttonType: ButtonItemType) {
+    func customToolbarView(_: CustomToolbarView, didTap buttonType: ButtonItemType) {
         switch buttonType {
         case .navigationArrow:
             viewModel.cancel()
@@ -99,7 +99,7 @@ extension ProofViewController: CustomToolbarViewDelegate {
 // MARK: - ModalInteractiveDismissibleProtocol
 
 extension ProofViewController: ModalInteractiveDismissibleProtocol {
-    public func modalViewControllerDidDismiss() {
+    func modalViewControllerDidDismiss() {
         viewModel.cancel()
     }
 }

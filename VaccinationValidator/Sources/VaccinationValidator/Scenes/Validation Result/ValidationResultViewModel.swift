@@ -5,23 +5,18 @@
 //  Copyright © 2021 IBM. All rights reserved.
 //
 
-import UIKit
 import PromiseKit
+import UIKit
 import VaccinationCommon
 import VaccinationUI
 
-open class ValidationResultViewModel: BaseViewModel, CancellableViewModelProtocol {
-    public weak var delegate: ViewModelDelegate?
-    let router: ValidationResultRouterProtocol
-    private let parser: QRCoder = QRCoder()
-    private var certificate: CBORWebToken?
+class ValidationResultViewModel: BaseViewModel, CancellableViewModelProtocol {
+    // MARK: - Properties
 
-    public init(
-        router: ValidationResultRouterProtocol,
-        certificate: CBORWebToken?) {
-        self.router = router
-        self.certificate = certificate
-    }
+    weak var delegate: ViewModelDelegate?
+    let router: ValidationResultRouterProtocol
+    private let parser = QRCoder()
+    private var certificate: CBORWebToken?
 
     private var immunizationState: ImmunizationState {
         guard let cert = certificate else {
@@ -30,7 +25,7 @@ open class ValidationResultViewModel: BaseViewModel, CancellableViewModelProtoco
         return immunizationState(for: cert.hcert.dgc)
     }
 
-    open var icon: UIImage? {
+    var icon: UIImage? {
         switch immunizationState {
         case .full:
             return .resultSuccess
@@ -39,7 +34,7 @@ open class ValidationResultViewModel: BaseViewModel, CancellableViewModelProtoco
         }
     }
 
-    open var resultTitle: String {
+    var resultTitle: String {
         switch immunizationState {
         case .full:
             return "validation_check_popup_valid_vaccination_title".localized
@@ -50,7 +45,7 @@ open class ValidationResultViewModel: BaseViewModel, CancellableViewModelProtoco
         }
     }
 
-    open var resultBody: String {
+    var resultBody: String {
         switch immunizationState {
         case .full:
             return "validation_check_popup_valid_vaccination_message".localized
@@ -61,7 +56,7 @@ open class ValidationResultViewModel: BaseViewModel, CancellableViewModelProtoco
         }
     }
 
-    open var nameTitle: String? {
+    var nameTitle: String? {
         switch immunizationState {
         case .full, .partial:
             return certificate?.hcert.dgc.nam.fullName
@@ -70,11 +65,11 @@ open class ValidationResultViewModel: BaseViewModel, CancellableViewModelProtoco
         }
     }
 
-    open var nameBody: String? {
+    var nameBody: String? {
         switch immunizationState {
         case .full, .partial:
             if let date = certificate?.hcert.dgc.dob {
-                return String(format: "%@ %@", "validation_check_popup_partial_valid_vaccination_date_of_birth_at".localized, DateUtils.displayDateFormatter.string(from: date))
+                return "\("validation_check_popup_partial_valid_vaccination_date_of_birth_at".localized) \(DateUtils.displayDateFormatter.string(from: date))"
             }
             return nil
         case .error:
@@ -82,7 +77,7 @@ open class ValidationResultViewModel: BaseViewModel, CancellableViewModelProtoco
         }
     }
 
-    open var errorTitle: String? {
+    var errorTitle: String? {
         switch immunizationState {
         case .full, .partial:
             return ""
@@ -91,7 +86,7 @@ open class ValidationResultViewModel: BaseViewModel, CancellableViewModelProtoco
         }
     }
 
-    open var errorBody: String? {
+    var errorBody: String? {
         switch immunizationState {
         case .full, .partial:
             return ""
@@ -100,8 +95,27 @@ open class ValidationResultViewModel: BaseViewModel, CancellableViewModelProtoco
         }
     }
 
-    var closeButtonImage: UIImage? {
-        .close
+    // MARK: - Lifecycle
+
+    init(
+        router: ValidationResultRouterProtocol,
+        certificate: CBORWebToken?
+    ) {
+        self.router = router
+        self.certificate = certificate
+    }
+
+    var nameIcon: UIImage? {
+        switch immunizationState {
+        case .full, .partial:
+            return .data
+        case .error:
+            return .validationSearch
+        }
+    }
+
+    var errorIcon: UIImage? {
+        .validationPending
     }
 
     // MARK: - Methods
@@ -126,8 +140,9 @@ open class ValidationResultViewModel: BaseViewModel, CancellableViewModelProtoco
         .done { _ in
             self.delegate?.viewModelDidUpdate()
         }
-        .catch {
-            self.delegate?.viewModelUpdateDidFailWithError($0)
+        .catch { _ in
+            self.certificate = nil
+            self.delegate?.viewModelDidUpdate()
         }
     }
 
@@ -135,26 +150,16 @@ open class ValidationResultViewModel: BaseViewModel, CancellableViewModelProtoco
         return parser.parse(payload)
     }
 
-    // TODO: Needs a common shared place
     private func payloadFromScannerResult(_ result: ScanResult) throws -> String {
         switch result {
-        case .success(let payload):
+        case let .success(payload):
             return payload
-        case .failure(let error):
+        case let .failure(error):
             throw error
         }
     }
 
     private func immunizationState(for certificate: DigitalGreenCertificate) -> ImmunizationState {
-        let calendar = Calendar.current
-        if certificate.fullImmunization,
-           let vaccinationDate = certificate.v.last?.dt,
-           let validDate = calendar.date(byAdding: .weekOfYear, value: 2, to: vaccinationDate),
-           let validTimestamp = calendar.date(bySettingHour: 23, minute: 59, second: 59, of: validDate),
-           validTimestamp >= Date() {
-            return .partial
-        }
-        return certificate.fullImmunization ? .full : .partial
+        return certificate.fullImmunizationValid ? .full : .partial
     }
 }
-

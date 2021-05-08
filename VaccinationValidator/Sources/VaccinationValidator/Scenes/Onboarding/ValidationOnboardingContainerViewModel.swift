@@ -8,35 +8,32 @@
 import UIKit
 import VaccinationUI
 
-public class ValidationOnboardingContainerViewModel: OnboardingContainerViewModel {
+class ValidationOnboardingContainerViewModel: OnboardingContainerViewModel {
     // MARK: - Properties
 
-    public var router: OnboardingRouterProtocol
-    public var items: [OnboardingPageViewModel]
-
-    public var startButtonTitle: String = "next_onboarding_page_button_title".localized
-    public var startButtonShadowColor: UIColor = .clear
+    let router: OnboardingRouterProtocol
+    let items: [OnboardingPageViewModel]
 
     // MARK: - Lifecycle
 
-    public init(
+    init(
         router: OnboardingRouterProtocol,
-        items: [OnboardingPageViewModel]) {
-
+        items: [OnboardingPageViewModel]
+    ) {
         self.router = router
         self.items = items
     }
 
     // MARK: - Methods
 
-    public func navigateToNextScene() {
+    func navigateToNextScene() {
         // User saw onboarding once, let's remember that for the next start
         UserDefaults.StartupInfo.set(true, forKey: .onboarding)
 
         router.showNextScene()
     }
 
-    public func navigateToPreviousScene() {
+    func navigateToPreviousScene() {
         router.showPreviousScene()
     }
 }

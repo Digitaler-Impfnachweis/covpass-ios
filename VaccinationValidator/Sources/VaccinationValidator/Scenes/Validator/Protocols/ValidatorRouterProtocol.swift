@@ -1,18 +1,18 @@
 //
 //  ValidatorRouterProtocol.swift
-//  
+//
 //
 //  Copyright © 2021 IBM. All rights reserved.
 //
 
-import UIKit
 import PromiseKit
-import VaccinationUI
-import VaccinationCommon
 import Scanner
+import UIKit
+import VaccinationCommon
+import VaccinationUI
 
-public protocol ValidatorRouterProtocol: RouterProtocol {
-    func scanQRCode() -> Promise<Swift.Result<String, ScanError>>
-    func showCertificate(_ certificate: CBORWebToken)
+protocol ValidatorRouterProtocol: RouterProtocol {
+    func scanQRCode() -> Promise<ScanResult>
+    func showCertificate(_ certificate: CBORWebToken?)
     func showAppInformation()
 }

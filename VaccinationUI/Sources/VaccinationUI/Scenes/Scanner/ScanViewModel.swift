@@ -5,14 +5,14 @@
 //  Copyright © 2021 IBM. All rights reserved.
 //
 
-import UIKit
 import PromiseKit
 import Scanner
+import UIKit
 
 public typealias ScanResult = Swift.Result<String, ScanError>
 
 public class ScanViewModel: CancellableViewModelProtocol {
-    // MARK - Properties
+    // MARK: - Properties
 
     private let cameraAccessProvider: CameraAccessProviderProtocol
     let resolver: Resolver<ScanResult>

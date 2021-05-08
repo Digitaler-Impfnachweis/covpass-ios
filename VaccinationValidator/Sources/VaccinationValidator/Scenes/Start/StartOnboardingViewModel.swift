@@ -11,42 +11,36 @@ import VaccinationUI
 class StartOnboardingViewModel: BaseViewModel {
     // MARK: - Properties
 
-    public weak var delegate: ViewModelDelegate?
+    weak var delegate: ViewModelDelegate?
     let router: StartRouterProtocol
 
-    open var image: UIImage? {
+    var image: UIImage? {
         .startScreen
     }
 
-    open var title: String {
+    var title: String {
         "start_onboarding_title".localized
     }
 
-    open var info: String {
+    var info: String {
         "start_onboarding_message".localized
     }
 
-    open var secureTitle: String {
+    var secureTitle: String {
         "start_onboarding_secure_title".localized
     }
 
-    open var secureText: String {
+    var secureText: String {
         "start_onboarding_secure_message".localized
     }
 
-    open var navigationButtonTitle: String {
+    var navigationButtonTitle: String {
         "start_onboarding_button_title".localized
     }
 
-    open var secureImage: UIImage? {
-        .lock
-    }
-
-    public var backgroundColor: UIColor { .backgroundPrimary }
-
     // MARK: - Lifecycle
 
-    public init(router: StartRouterProtocol) {
+    init(router: StartRouterProtocol) {
         self.router = router
     }
 
@@ -56,4 +50,3 @@ class StartOnboardingViewModel: BaseViewModel {
         router.showNextScene()
     }
 }
-

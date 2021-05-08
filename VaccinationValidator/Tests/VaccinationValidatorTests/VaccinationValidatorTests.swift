@@ -6,8 +6,8 @@
 //
 
 import Foundation
-import XCTest
 @testable import VaccinationValidator
+import XCTest
 
 class VaccinationValidatorTests: XCTestCase {
     func testHelloWorld() throws {

@@ -5,11 +5,11 @@
 //  Copyright © 2021 IBM. All rights reserved.
 //
 
-import UIKit
 import PromiseKit
-import VaccinationUI
-import VaccinationCommon
 import Scanner
+import UIKit
+import VaccinationCommon
+import VaccinationUI
 
 class ValidatorRouter: ValidatorRouterProtocol {
     // MARK: - Properties
@@ -30,7 +30,7 @@ class ValidatorRouter: ValidatorRouterProtocol {
         )
     }
 
-    func showCertificate(_ certificate: CBORWebToken) {
+    func showCertificate(_ certificate: CBORWebToken?) {
         sceneCoordinator.present(
             ValidationResultSceneFactory(
                 router: ValidationResultRouter(sceneCoordinator: sceneCoordinator),

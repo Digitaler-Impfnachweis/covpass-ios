@@ -1,6 +1,6 @@
 //
 //  StringExtension.swift
-//  
+//
 //
 //  Copyright © 2021 IBM. All rights reserved.
 //
@@ -11,8 +11,8 @@ let HC1 = "HC1:"
 
 public extension String {
     func stripPrefix() -> String {
-        if self.starts(with: HC1) {
-            return String(self.dropFirst(4))
+        if starts(with: HC1) {
+            return String(dropFirst(4))
         }
         return self
     }

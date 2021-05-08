@@ -10,9 +10,9 @@ import VaccinationUI
 
 class MockViewModelDelegate: ViewModelDelegate {
     var updateCalled = false
-    
+
     func viewModelDidUpdate() {
-        updateCalled = true 
+        updateCalled = true
     }
 
     var receivedError: Error?

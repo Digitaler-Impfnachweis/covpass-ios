@@ -1,6 +1,6 @@
 //
 //  ListItemView.swift
-//  
+//
 //
 //  Copyright © 2021 IBM. All rights reserved.
 //
@@ -26,7 +26,7 @@ public class ListItemView: XibView {
 
     // MARK: - Lifecycle
 
-    public override func initView() {
+    override public func initView() {
         super.initView()
         contentView?.layoutMargins = .init(top: .space_12, left: .space_24, bottom: .space_12, right: .space_24)
         backgroundColor = .neutralWhite
