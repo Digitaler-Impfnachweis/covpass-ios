@@ -11,13 +11,13 @@ import VaccinationUI
 import VaccinationCommon
 import PromiseKit
 
-public class DefaultCertificateViewModel: CertificateViewModel {
+class DefaultCertificateViewModel: CertificateViewModel {
     // MARK: - Parser
 
     private let router: CertificateRouterProtocol
     private let repository: VaccinationRepositoryProtocol
     
-    public init(
+    init(
         router: CertificateRouterProtocol,
         repository: VaccinationRepositoryProtocol) {
         self.router = router
@@ -26,22 +26,22 @@ public class DefaultCertificateViewModel: CertificateViewModel {
     
     // MARK: - HeadlineViewModel
     
-    public var headlineTitle = "vaccination_start_screen_title".localized
-    public var headlineButtonImage: UIImage? = .help
+    var headlineTitle = "vaccination_start_screen_title".localized
+    var headlineButtonImage: UIImage? = .help
     
     // MARK: - CertificateViewModel
     
-    public weak var delegate: CertificateViewModelDelegate?
-    public var addButtonImage: UIImage? = .plus
+    weak var delegate: CertificateViewModelDelegate?
+    var addButtonImage: UIImage? = .plus
 
-    public var certificates = [BaseCertifiateConfiguration]()
-    public var certificateList = VaccinationCertificateList(certificates: [])
-    public var matchedCertificates: [ExtendedCBORWebToken] {
+    var certificates = [BaseCertifiateConfiguration]()
+    var certificateList = VaccinationCertificateList(certificates: [])
+    var matchedCertificates: [ExtendedCBORWebToken] {
         let certs = self.sortFavorite(certificateList.certificates, favorite: certificateList.favoriteCertificateId ?? "")
         return self.matchCertificates(certs)
     }
 
-    public func process(payload: String) -> Promise<ExtendedCBORWebToken> {
+    func process(payload: String) -> Promise<ExtendedCBORWebToken> {
         return repository.scanVaccinationCertificate(payload).then({ cert in
             return self.repository.getVaccinationCertificateList().map({ list in
                 self.certificates = list.certificates.map { self.getCertficateConfiguration(for: $0) }
@@ -50,7 +50,7 @@ public class DefaultCertificateViewModel: CertificateViewModel {
         })
     }
 
-    public func loadCertificatesConfiguration() {
+    func loadCertificatesConfiguration() {
         repository.getVaccinationCertificateList().map({ list -> [ExtendedCBORWebToken] in
             self.certificateList = list
             return self.matchedCertificates
@@ -106,7 +106,7 @@ public class DefaultCertificateViewModel: CertificateViewModel {
     
     // MARK: - Collection View
     
-    public func configure<T: CellConfigutation>(cell: T, at indexPath: IndexPath)  {
+    func configure<T: CellConfigutation>(cell: T, at indexPath: IndexPath)  {
         guard certificates.indices.contains(indexPath.row) else { return }
         let configuration = certificates[indexPath.row]
         if let noCertificateCell = cell as? NoCertificateCollectionViewCell, let noCertificateConfig = configuration as? NoCertifiateConfiguration {
@@ -116,7 +116,7 @@ public class DefaultCertificateViewModel: CertificateViewModel {
         }
     }
     
-    public func reuseIdentifier(for indexPath: IndexPath) -> String {
+    func reuseIdentifier(for indexPath: IndexPath) -> String {
         guard certificates.indices.contains(indexPath.row) else {
             return "\(NoCertificateCollectionViewCell.self)"}
         return certificates[indexPath.row].identifier
@@ -183,13 +183,13 @@ public class DefaultCertificateViewModel: CertificateViewModel {
         return findCertificatePair(certificate, certificateList.certificates)
     }
 
-    public func showCertificate(at indexPath: IndexPath) {
+    func showCertificate(at indexPath: IndexPath) {
         showCertificates(
             certificatePair(for: indexPath)
         )
     }
 
-    public func showCertificate(_ certificate: ExtendedCBORWebToken) {
+    func showCertificate(_ certificate: ExtendedCBORWebToken) {
         showCertificates(
             certificatePair(for: certificate)
         )
@@ -202,7 +202,7 @@ public class DefaultCertificateViewModel: CertificateViewModel {
         router.showCertificates(certificates)
     }
 
-    public func scanCertificate() {
+    func scanCertificate() {
         firstly {
            router.showProof()
         }
@@ -254,7 +254,7 @@ public class DefaultCertificateViewModel: CertificateViewModel {
         }
     }
 
-    public func showAppInformation() {
+    func showAppInformation() {
         router.showAppInformation()
     }
 }

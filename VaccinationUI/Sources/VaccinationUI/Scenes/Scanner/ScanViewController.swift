@@ -56,7 +56,7 @@ class ScanViewController: UIViewController {
 // MARK: - CustomToolbarViewDelegate
 
 extension ScanViewController: CustomToolbarViewDelegate {
-    public func customToolbarView(_: CustomToolbarView, didTap buttonType: ButtonItemType) {
+    func customToolbarView(_: CustomToolbarView, didTap buttonType: ButtonItemType) {
         switch buttonType {
         case .navigationArrow:
             viewModel.cancel()
@@ -71,17 +71,17 @@ extension ScanViewController: CustomToolbarViewDelegate {
 // MARK: - ScannerDelegate
 
 extension ScanViewController: ScannerDelegate {
-    public func result(with value: Swift.Result<String, ScanError>) {
+    func result(with value: Swift.Result<String, ScanError>) {
         viewModel.onResult(value)
     }
 }
 
 extension ScanViewController: ModalInteractiveDismissibleProtocol {
-    public func canDismissModalViewController() -> Bool {
+    func canDismissModalViewController() -> Bool {
         viewModel.isCancellable()
     }
 
-    public func modalViewControllerDidDismiss() {
+    func modalViewControllerDidDismiss() {
         viewModel.cancel()
     }
 }

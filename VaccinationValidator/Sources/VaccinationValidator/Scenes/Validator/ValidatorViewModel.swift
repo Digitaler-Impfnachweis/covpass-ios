@@ -11,7 +11,7 @@ import UIKit
 import VaccinationCommon
 import PromiseKit
 
-public class ValidatorViewModel {
+class ValidatorViewModel {
     // MARK: - Private
 
     private let repository: VaccinationRepositoryProtocol
@@ -30,6 +30,7 @@ public class ValidatorViewModel {
             return "validation_start_screen_offline_modus_note_old_version".localized
         }
     }
+
     var offlineMessage: String {
         let date = "01.01.1970"
         return String(format: "%@ %@", "validation_start_screen_offline_modus_note_update".localized, date)
@@ -43,15 +44,15 @@ public class ValidatorViewModel {
 
     // MARK: - Lifecycle
 
-    public init(router: ValidatorRouterProtocol, repository: VaccinationRepositoryProtocol) {
+    init(router: ValidatorRouterProtocol, repository: VaccinationRepositoryProtocol) {
         self.router = router
         self.repository = repository
     }
 
     // MARK: - Actions
 
-    public func process(payload: String) -> Promise<CBORWebToken> {
-        return repository.checkValidationCertificate(payload)
+    func process(payload: String) -> Promise<CBORWebToken> {
+        repository.checkValidationCertificate(payload)
     }
 
     func startQRCodeValidation() {

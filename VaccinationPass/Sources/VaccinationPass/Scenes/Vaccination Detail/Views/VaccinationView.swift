@@ -9,8 +9,8 @@ import UIKit
 import VaccinationUI
 
 @IBDesignable
-public class VaccinationView: XibView {
-    @IBOutlet public var stackView: UIStackView!
+class VaccinationView: XibView {
+    @IBOutlet var stackView: UIStackView!
     @IBOutlet var immunizationHeadline: PlainLabel!
     @IBOutlet var dateView: ParagraphView!
     @IBOutlet var vaccineView: ParagraphView!
@@ -20,9 +20,9 @@ public class VaccinationView: XibView {
     @IBOutlet var countryView: ParagraphView!
     @IBOutlet var uvciView: ParagraphView!
 
-    public var viewModel: VaccinationViewModel?
+    var viewModel: VaccinationViewModel?
 
-    public init(viewModel: VaccinationViewModel) {
+    init(viewModel: VaccinationViewModel) {
         self.viewModel = viewModel
         super.init(frame: CGRect.zero)
         setupView()
@@ -38,12 +38,12 @@ public class VaccinationView: XibView {
         setupView()
     }
 
-    public override func initView() {
+    override func initView() {
         super.initView()
         setupView()
     }
     
-    internal func setupView() {
+    func setupView() {
         layoutMargins = .zero
         stackView.spacing = .zero
 

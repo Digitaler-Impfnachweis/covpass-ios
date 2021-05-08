@@ -8,17 +8,17 @@
 import UIKit
 import VaccinationUI
 
-public class ValidationResultViewController: UIViewController, ViewModelDelegate {
+class ValidationResultViewController: UIViewController, ViewModelDelegate {
     // MARK: - IBOutlet
 
-    @IBOutlet public var stackView: UIStackView!
-    @IBOutlet public var toolbarView: CustomToolbarView!
-    @IBOutlet public var headline: InfoHeaderView!
-    @IBOutlet public var imageContainerView: UIStackView!
-    @IBOutlet public var imageView: UIImageView!
-    @IBOutlet public var resultView: ParagraphView!
-    @IBOutlet public var nameView: ParagraphView!
-    @IBOutlet public var errorView: ParagraphView!
+    @IBOutlet var stackView: UIStackView!
+    @IBOutlet var toolbarView: CustomToolbarView!
+    @IBOutlet var headline: InfoHeaderView!
+    @IBOutlet var imageContainerView: UIStackView!
+    @IBOutlet var imageView: UIImageView!
+    @IBOutlet var resultView: ParagraphView!
+    @IBOutlet var nameView: ParagraphView!
+    @IBOutlet var errorView: ParagraphView!
 
     // MARK: - Properties
 
@@ -35,7 +35,7 @@ public class ValidationResultViewController: UIViewController, ViewModelDelegate
         self.viewModel.delegate = self
     }
 
-    public override func viewDidLoad() {
+    override func viewDidLoad() {
         super.viewDidLoad()
         configureImageView()
         configureHeadline()
@@ -44,11 +44,11 @@ public class ValidationResultViewController: UIViewController, ViewModelDelegate
         updateViews()
     }
 
-    public func viewModelDidUpdate() {
+    func viewModelDidUpdate() {
         updateViews()
     }
 
-    public func viewModelUpdateDidFailWithError(_ error: Error) {
+    func viewModelUpdateDidFailWithError(_ error: Error) {
         // TODO: Handle error
     }
 
@@ -77,7 +77,7 @@ public class ValidationResultViewController: UIViewController, ViewModelDelegate
         headline.action = { [weak self] in
             self?.viewModel.cancel()
         }
-        headline.image = viewModel.closeButtonImage
+        headline.image = .close
         stackView.setCustomSpacing(.space_24, after: headline)
     }
 
@@ -95,7 +95,7 @@ public class ValidationResultViewController: UIViewController, ViewModelDelegate
 // MARK: - CustomToolbarViewDelegate
 
 extension ValidationResultViewController: CustomToolbarViewDelegate {
-    public func customToolbarView(_: CustomToolbarView, didTap buttonType: ButtonItemType) {
+    func customToolbarView(_: CustomToolbarView, didTap buttonType: ButtonItemType) {
         switch buttonType {
         case .textButton:
             viewModel.scanNextCertifcate()
@@ -108,11 +108,11 @@ extension ValidationResultViewController: CustomToolbarViewDelegate {
 // MARK: - ModalInteractiveDismissibleProtocol
 
 extension ValidationResultViewController: ModalInteractiveDismissibleProtocol {
-    public func canDismissModalViewController() -> Bool {
+    func canDismissModalViewController() -> Bool {
         viewModel.isCancellable()
     }
 
-    public func modalViewControllerDidDismiss() {
+    func modalViewControllerDidDismiss() {
         viewModel.cancel()
     }
 }

@@ -11,8 +11,8 @@ import VaccinationUI
 import VaccinationCommon
 import Scanner
 
-public protocol ValidatorRouterProtocol: RouterProtocol {
-    func scanQRCode() -> Promise<Swift.Result<String, ScanError>>
+protocol ValidatorRouterProtocol: RouterProtocol {
+    func scanQRCode() -> Promise<ScanResult>
     func showCertificate(_ certificate: CBORWebToken)
     func showAppInformation()
 }

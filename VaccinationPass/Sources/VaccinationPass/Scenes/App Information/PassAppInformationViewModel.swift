@@ -8,27 +8,27 @@
 import Foundation
 import VaccinationUI
 
-public class PassAppInformationViewModel: AppInformationViewModelProtocol {
+class PassAppInformationViewModel: AppInformationViewModelProtocol {
     // MARK: - Properties
 
-    public let router: AppInformationRouterProtocol
+    let router: AppInformationRouterProtocol
 
-    public var title: String {
+    var title: String {
         "Informationen".localized
     }
 
-    public var descriptionText: String {
+    var descriptionText: String {
         "Alle Informationen zur Impfnachweis-App im Überblick:".localized
     }
 
-    public var appVersionText: String {
+    var appVersionText: String {
         String(
             format: "Version %@".localized,
             Bundle.module.appVersion()
         )
     }
 
-    public lazy var entries: [AppInformationEntry] = {
+    lazy var entries: [AppInformationEntry] = {
         [
             webEntry(
                 title: "Häufige Fragen".localized,
@@ -51,13 +51,13 @@ public class PassAppInformationViewModel: AppInformationViewModelProtocol {
 
     // MARK: - Lifecycle
 
-    public init(router: AppInformationRouterProtocol) {
+    init(router: AppInformationRouterProtocol) {
         self.router = router
     }
 
     // MARK: - Methods
 
-    public func showSceneForEntry(_ entry: AppInformationEntry) {
+    func showSceneForEntry(_ entry: AppInformationEntry) {
         router.showScene(entry.scene)
     }
 

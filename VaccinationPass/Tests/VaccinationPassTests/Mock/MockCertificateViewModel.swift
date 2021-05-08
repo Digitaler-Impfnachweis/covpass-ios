@@ -5,6 +5,7 @@
 //  Copyright © 2021 IBM. All rights reserved.
 //
 
+@testable import VaccinationPass
 import Foundation
 import UIKit
 import VaccinationPass
