@@ -97,9 +97,10 @@ class VaccinationDetailViewModel {
         }
         .then { list in
             self.repository.saveVaccinationCertificateList(list).asVoid()
-        }
-        .done {
+        }.then {
             self.router.showCertificateOverview()
+        }.done {
+            self.showDeletionSuccessDialog()
         }
         .catch { error in
             self.delegate?.viewModelUpdateDidFailWithError(error)
@@ -167,6 +168,14 @@ class VaccinationDetailViewModel {
                 style: .alert
             )
         }
+    }
+
+    private func showDeletionSuccessDialog() {
+        let confirm = DialogAction(title: "delete_result_dialog_positive_button_text".localized, style: .default)
+        self.router.showDialog(title: "delete_result_dialog_header".localized,
+                               message: "delete_result_dialog_message".localized,
+                               actions: [confirm],
+                               style: .alert)
     }
 
     private func scanNextCertificate() {
