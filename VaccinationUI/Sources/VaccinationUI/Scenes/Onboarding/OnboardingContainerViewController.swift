@@ -80,7 +80,7 @@ public class OnboardingContainerViewController: UIViewController, ViewModelDeleg
         let viewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: [:])
         addChild(viewController)
         containerView.addSubview(viewController.view)
-        viewController.view.pinEdges(to: view)
+        viewController.view.pinEdges(to: containerView)
         viewController.dataSource = self
         viewController.delegate = self
         viewController.setViewControllers([pages[currentIndex]], direction: .forward, animated: false, completion: nil)
