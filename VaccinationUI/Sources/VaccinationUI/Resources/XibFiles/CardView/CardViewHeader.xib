@@ -38,7 +38,7 @@
                                     </constraints>
                                     <state key="normal" image="star.fill" catalog="system"/>
                                     <connections>
-                                        <action selector="infoButtonPressedWithButton:" destination="-1" eventType="touchUpInside" id="Ctj-cd-tnD"/>
+                                        <action selector="infoButtonPressedWithButton:" destination="-1" eventType="touchUpInside" id="MHn-Kb-T6v"/>
                                     </connections>
                                 </button>
                             </subviews>
