@@ -119,6 +119,7 @@ extension OnboardingContainerViewController: UIPageViewControllerDelegate {
               let index = pages.firstIndex(of: currentViewController) else { return }
 
         currentIndex = index
+        updateToolbarForPage(at: index)
         pageIndicator.selectDot(withIndex: index)
     }
 }
