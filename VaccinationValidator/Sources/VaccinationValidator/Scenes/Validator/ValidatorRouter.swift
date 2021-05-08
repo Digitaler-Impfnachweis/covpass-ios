@@ -26,7 +26,11 @@ class ValidatorRouter: ValidatorRouterProtocol {
 
     func scanQRCode() -> Promise<ScanResult> {
         sceneCoordinator.present(
-            ScanSceneFactory()
+            ScanSceneFactory(
+                cameraAccessProvider: CameraAccessProvider(
+                    router: DialogRouter(sceneCoordinator: sceneCoordinator)
+                )
+            )
         )
     }
 

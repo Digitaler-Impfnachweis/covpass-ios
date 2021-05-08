@@ -23,7 +23,6 @@
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6p5-KI-vme" userLabel="Container">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="806"/>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                 </view>
                 <view contentMode="scaleToFill" placeholderIntrinsicWidth="240" placeholderIntrinsicHeight="56" translatesAutoresizingMaskIntoConstraints="NO" id="5cz-uG-cjm" customClass="CustomToolbarView" customModule="VaccinationUI">
                     <rect key="frame" x="0.0" y="806" width="414" height="56"/>

@@ -24,12 +24,19 @@ class VaccinationDetailRouter: VaccinationDetailRouterProtocol, DialogRouterProt
 
     func showScanner() -> Promise<ScanResult> {
         sceneCoordinator.present(
-            ScanSceneFactory()
+            ScanSceneFactory(
+                cameraAccessProvider: CameraAccessProvider(
+                    router: DialogRouter(sceneCoordinator: sceneCoordinator)
+                )
+            )
         )
     }
 
-    func showCertificateOverview() {
-        sceneCoordinator.pop()
+    func showCertificateOverview() -> Promise<Void> {
+        .init { seal in
+            sceneCoordinator.pop()
+            seal.fulfill_()
+        }
     }
 
     func showErrorDialog() {
