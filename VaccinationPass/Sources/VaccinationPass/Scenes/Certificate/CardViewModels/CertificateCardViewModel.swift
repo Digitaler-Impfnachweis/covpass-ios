@@ -64,7 +64,7 @@ struct CertificateCardViewModel: CertificateCardViewModelProtocol {
     }
 
     var actionImage: UIImage {
-        isFullImmunization ? .completness : .halfShield // TODO replace rename
+        isFullImmunization ? .completness : .halfShield
     }
 
     var isLoading: Bool {
