@@ -132,6 +132,21 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
     }
 
     public func checkValidationCertificate(_ data: String) -> Promise<CBORWebToken> {
-        return parser.parse(data)
+        firstly {
+            parser.parse(data)
+        }
+        .map { token in
+            let payload = data.stripPrefix()
+            let base45Decoded = try Base45Encoder().decode(payload)
+            guard let decompressedPayload = Compression.decompress(Data(base45Decoded)) else {
+                throw ApplicationError.general("Could not decompress QR Code data")
+            }
+
+            guard let cosePayload = try CoseSign1Parser().parse(decompressedPayload),
+                  HCert().verify(message: cosePayload, certificatePaths: ["dtrust_demo-bmg_seal_ubirch-02"]) else {
+                throw HCertError.verifyError
+            }
+            return token
+        }
     }
 }

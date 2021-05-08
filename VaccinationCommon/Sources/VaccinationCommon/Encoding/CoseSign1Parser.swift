@@ -14,6 +14,11 @@ enum CoseParsingError: Error {
     case general
 }
 
+enum CoseProtectedHeader: Int {
+    case alg = 1
+    case kid = 4
+}
+
 struct CoseSign1Message {
     var protected: [UInt8]
     var unprotected: Any?
