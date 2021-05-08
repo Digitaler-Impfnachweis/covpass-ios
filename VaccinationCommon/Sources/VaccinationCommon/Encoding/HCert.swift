@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import OpenSSL
 import SwiftCBOR
 
 import UIKit
@@ -268,16 +267,16 @@ public enum CryptoError: Error {
     case publicKeyParseFailed
 }
 
-func sha256(_ data: Data) -> [UInt8] {
-    var result = [UInt8](repeating: 0, count: Int(SHA256_DIGEST_LENGTH))
-    data.withUnsafeBytes { (ptr: UnsafeRawBufferPointer) in
-        SHA256(ptr.bindMemory(to: UInt8.self).baseAddress.unsafelyUnwrapped,
-               data.count,
-               &result)
-        return
-    }
-    return result
-}
+//func sha256(_ data: Data) -> [UInt8] {
+//    var result = [UInt8](repeating: 0, count: Int(SHA256_DIGEST_LENGTH))
+//    data.withUnsafeBytes { (ptr: UnsafeRawBufferPointer) in
+//        SHA256(ptr.bindMemory(to: UInt8.self).baseAddress.unsafelyUnwrapped,
+//               data.count,
+//               &result)
+//        return
+//    }
+//    return result
+//}
 
 public class HCert {
     let COSE_PHDR_KID = CBOR.unsignedInt(4)
@@ -354,15 +353,15 @@ public class HCert {
 //        return false
     }
 
-    private func getCertificate(from certString: String) -> OpaquePointer? {
-        let bio = BIO_new(BIO_s_mem())
-        defer {
-            BIO_free(bio)
-        }
-        BIO_write(bio, certString, Int32(certString.count))
-//        BIO_puts(bio, certString)
-        return PEM_read_bio_X509(bio, nil, nil, nil)
-    }
+//    private func getCertificate(from certString: String) -> OpaquePointer? {
+//        let bio = BIO_new(BIO_s_mem())
+//        defer {
+//            BIO_free(bio)
+//        }
+//        BIO_write(bio, certString, Int32(certString.count))
+////        BIO_puts(bio, certString)
+//        return PEM_read_bio_X509(bio, nil, nil, nil)
+//    }
 
     private func readFile(from resource: String) -> String {
         guard let url = Bundle.module.url(forResource: resource, withExtension: "pem") else { return "" }
