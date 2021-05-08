@@ -47,3 +47,14 @@
 "vaccination_full_immunization_loading_message_check_internet" = "Das Prüfzertifikat kann nicht geladen werden. Bitte überprüfen Sie Ihre Internetverbindung.";
 
 "vaccination_full_immunization_loading_message_error" = "Es ist ein unerwarteter Fehler aufgetreten. Das Prüfzertifikat kann aktuell nicht geladen werden.";
+
+
+/********** Camera No Permission Dialog **********/
+
+"error_missing_camera_permissions_title" = "Die CovPass-App möchte auf Ihre Kamera zugreifen.";
+
+"error_missing_camera_permissions_message" = "Erlauben Sie den Zugriff, um QR-Codes scannen zu können.";
+
+"error_missing_camera_permissions_actions_goto_settings" = "Erlauben";
+
+"error_missing_camera_permissions_actions_cancel" = "Nicht Erlauben";

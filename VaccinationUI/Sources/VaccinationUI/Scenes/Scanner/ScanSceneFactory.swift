@@ -11,12 +11,19 @@ import UIKit
 public struct ScanSceneFactory: ResolvableSceneFactory {
     // MARK: - Lifecycle
 
-    public init() {}
+    private let cameraAccessProvider: CameraAccessProviderProtocol
+
+    public init(cameraAccessProvider: CameraAccessProviderProtocol) {
+        self.cameraAccessProvider = cameraAccessProvider
+    }
 
     // MARK: - Methods
 
     public func make(resolvable: Resolver<ScanResult>) -> UIViewController {
-        let viewModel = ScanViewModel(resolvable: resolvable)
+        let viewModel = ScanViewModel(
+            cameraAccessProvider: cameraAccessProvider,
+            resolvable: resolvable
+        )
         let viewController = ScanViewController(viewModel: viewModel)
         return viewController
     }

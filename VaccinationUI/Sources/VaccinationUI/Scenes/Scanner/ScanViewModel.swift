@@ -9,24 +9,45 @@ import PromiseKit
 import Scanner
 import UIKit
 
-public typealias ScanResult = Swift.Result<String, ScanError>
-
-public class ScanViewModel: CancellableViewModelProtocol {
+class ScanViewModel: CancellableViewModelProtocol {
     // MARK: - Properties
 
+    private let cameraAccessProvider: CameraAccessProviderProtocol
     let resolver: Resolver<ScanResult>
 
-    // MARK: - Lifecycle
+    var onCameraAccess: (() -> Void)?
 
-    public init(resolvable: Resolver<ScanResult>) {
-        resolver = resolvable
+    // MARK - Lifecycle
+
+    init(
+        cameraAccessProvider: CameraAccessProviderProtocol,
+        resolvable: Resolver<ScanResult>) {
+
+        self.cameraAccessProvider = cameraAccessProvider
+        self.resolver = resolvable
     }
 
-    public func onResult(_ result: ScanResult) {
+    func requestCameraAccess() {
+        firstly {
+            cameraAccessProvider.requestAccess(for: .video)
+        }
+        .done {
+            self.onCameraAccess?()
+        }
+        .cancelled {
+            self.cancel()
+        }
+        .catch {
+            print($0)
+            self.cancel()
+        }
+    }
+
+    func onResult(_ result: ScanResult) {
         resolver.fulfill(result)
     }
 
-    public func cancel() {
+    func cancel() {
         resolver.cancel()
     }
 }
