@@ -14,6 +14,7 @@ extension Optional where Wrapped == NSAttributedString {
 }
 
 extension NSMutableAttributedString {
+    @discardableResult
     public func addLink(url: String, in range: String) -> NSMutableAttributedString {
         if let urlRange = self.string.range(of: range) {
             let nsUrlRange = NSRange(urlRange, in: self.string)

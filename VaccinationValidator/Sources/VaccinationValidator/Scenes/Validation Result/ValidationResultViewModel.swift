@@ -10,18 +10,13 @@ import PromiseKit
 import VaccinationCommon
 import VaccinationUI
 
-open class ValidationResultViewModel: BaseViewModel, CancellableViewModelProtocol {
-    public weak var delegate: ViewModelDelegate?
+class ValidationResultViewModel: BaseViewModel, CancellableViewModelProtocol {
+    // MARK: - Properties
+
+    weak var delegate: ViewModelDelegate?
     let router: ValidationResultRouterProtocol
     private let parser: QRCoder = QRCoder()
     private var certificate: CBORWebToken?
-
-    public init(
-        router: ValidationResultRouterProtocol,
-        certificate: CBORWebToken?) {
-        self.router = router
-        self.certificate = certificate
-    }
 
     private var immunizationState: ImmunizationState {
         guard let cert = certificate else {
@@ -30,7 +25,7 @@ open class ValidationResultViewModel: BaseViewModel, CancellableViewModelProtoco
         return immunizationState(for: cert.hcert.dgc)
     }
 
-    open var icon: UIImage? {
+    var icon: UIImage? {
         switch immunizationState {
         case .full:
             return .resultSuccess
@@ -39,7 +34,7 @@ open class ValidationResultViewModel: BaseViewModel, CancellableViewModelProtoco
         }
     }
 
-    open var resultTitle: String {
+    var resultTitle: String {
         switch immunizationState {
         case .full:
             return "validation_check_popup_valid_vaccination_title".localized
@@ -50,7 +45,7 @@ open class ValidationResultViewModel: BaseViewModel, CancellableViewModelProtoco
         }
     }
 
-    open var resultBody: String {
+    var resultBody: String {
         switch immunizationState {
         case .full:
             return "validation_check_popup_valid_vaccination_message".localized
@@ -61,7 +56,7 @@ open class ValidationResultViewModel: BaseViewModel, CancellableViewModelProtoco
         }
     }
 
-    open var nameTitle: String? {
+    var nameTitle: String? {
         switch immunizationState {
         case .full, .partial:
             return certificate?.hcert.dgc.nam.fullName
@@ -70,7 +65,7 @@ open class ValidationResultViewModel: BaseViewModel, CancellableViewModelProtoco
         }
     }
 
-    open var nameBody: String? {
+    var nameBody: String? {
         switch immunizationState {
         case .full, .partial:
             if let date = certificate?.hcert.dgc.dob {
@@ -82,7 +77,7 @@ open class ValidationResultViewModel: BaseViewModel, CancellableViewModelProtoco
         }
     }
 
-    open var errorTitle: String? {
+    var errorTitle: String? {
         switch immunizationState {
         case .full, .partial:
             return ""
@@ -91,7 +86,7 @@ open class ValidationResultViewModel: BaseViewModel, CancellableViewModelProtoco
         }
     }
 
-    open var errorBody: String? {
+    var errorBody: String? {
         switch immunizationState {
         case .full, .partial:
             return ""
@@ -100,8 +95,13 @@ open class ValidationResultViewModel: BaseViewModel, CancellableViewModelProtoco
         }
     }
 
-    var closeButtonImage: UIImage? {
-        .close
+    // MARK: - Lifecycle
+
+    init(
+        router: ValidationResultRouterProtocol,
+        certificate: CBORWebToken?) {
+        self.router = router
+        self.certificate = certificate
     }
 
     var nameIcon: UIImage? {

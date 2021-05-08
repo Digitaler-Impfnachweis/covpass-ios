@@ -9,12 +9,10 @@ import UIKit
 import VaccinationUI
 
 class ValidationOnboardingPageViewModel: OnboardingPageViewModel {
-    weak var delegate: ViewModelDelegate?
-    var type: OnboardingPageViewModelType
+    // MARK: - Properties
 
-    init(type: OnboardingPageViewModelType) {
-        self.type = type
-    }
+    weak var delegate: ViewModelDelegate?
+    let type: OnboardingPageViewModelType
 
     var image: UIImage? {
         switch self.type {
@@ -27,30 +25,35 @@ class ValidationOnboardingPageViewModel: OnboardingPageViewModel {
         }
     }
 
-    var title: String {
+    var title: String? {
         switch self.type {
         case .page1:
             return "validation_first_onboarding_page_title".localized
         case .page2:
             return "validation_second_onboarding_page_title".localized
         default:
-            return ""
+            return nil
         }
     }
 
-    var info: String {
+    var info: String? {
         switch self.type {
         case .page1:
             return "validation_first_onboarding_page_message".localized
         case .page2:
             return "validation_second_onboarding_page_message".localized
         default:
-            return ""
+            return nil
         }
     }
 
     var toolbarState: CustomToolbarState {
         .confirm("next_onboarding_page_button_title".localized)
     }
-}
 
+    // MARK: - Lifecycle
+
+    init(type: OnboardingPageViewModelType) {
+        self.type = type
+    }
+}

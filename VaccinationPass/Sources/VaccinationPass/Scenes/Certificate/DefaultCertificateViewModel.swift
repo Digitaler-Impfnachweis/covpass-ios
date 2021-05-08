@@ -11,7 +11,7 @@ import VaccinationUI
 import VaccinationCommon
 import PromiseKit
 
-public class DefaultCertificateViewModel: CertificateViewModel {
+class DefaultCertificateViewModel: CertificateViewModel {
 
     // MARK: - Private Properties
 
@@ -20,30 +20,30 @@ public class DefaultCertificateViewModel: CertificateViewModel {
 
     // MARK: - Lifecycle
     
-    public init(
+    init(
         router: CertificateRouterProtocol,
         repository: VaccinationRepositoryProtocol) {
         self.router = router
         self.repository = repository
     }
     
-    // MARK: - Public Properties
+    // MARK: - Properties
     
-    public weak var delegate: CertificateViewModelDelegate?
-    public var certificateViewModels = [CardViewModel]()
-    public var certificateList = VaccinationCertificateList(certificates: [])
-    public var matchedCertificates: [ExtendedCBORWebToken] {
+    weak var delegate: CertificateViewModelDelegate?
+    var certificateViewModels = [CardViewModel]()
+    var certificateList = VaccinationCertificateList(certificates: [])
+    var matchedCertificates: [ExtendedCBORWebToken] {
         let certs = self.sortFavorite(certificateList.certificates, favorite: certificateList.favoriteCertificateId ?? "")
         return self.matchCertificates(certs)
     }
 
-    // MARK: - Public Actions
+    // MARK: - Actions
 
-    public func process(payload: String) -> Promise<ExtendedCBORWebToken> {
+    func process(payload: String) -> Promise<ExtendedCBORWebToken> {
         return repository.scanVaccinationCertificate(payload)
     }
 
-    public func loadCertificates() {
+    func loadCertificates() {
         firstly {
             repository.getVaccinationCertificateList()
         }
@@ -69,19 +69,19 @@ public class DefaultCertificateViewModel: CertificateViewModel {
         }
     }
 
-    public func showCertificate(at indexPath: IndexPath) {
+    func showCertificate(at indexPath: IndexPath) {
         showCertificates(
             certificatePair(for: indexPath)
         )
     }
 
-    public func showCertificate(_ certificate: ExtendedCBORWebToken) {
+    func showCertificate(_ certificate: ExtendedCBORWebToken) {
         showCertificates(
             certificatePair(for: certificate)
         )
     }
 
-    public func scanCertificate() {
+    func scanCertificate() {
         firstly {
            router.showProof()
         }
@@ -105,11 +105,11 @@ public class DefaultCertificateViewModel: CertificateViewModel {
         }
     }
 
-    public func showAppInformation() {
+    func showAppInformation() {
         router.showAppInformation()
     }
 
-    public func showErrorDialog() {
+    func showErrorDialog() {
         router.showErrorDialog()
     }
 

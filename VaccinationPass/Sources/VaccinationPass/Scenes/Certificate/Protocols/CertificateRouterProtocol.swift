@@ -11,10 +11,10 @@ import VaccinationUI
 import VaccinationCommon
 import Scanner
 
-public protocol CertificateRouterProtocol: RouterProtocol {
+protocol CertificateRouterProtocol: RouterProtocol {
     func showCertificates(_ certificates: [ExtendedCBORWebToken])
     func showProof() -> Promise<Void>
-    func scanQRCode() -> Promise<Swift.Result<String, ScanError>>
+    func scanQRCode() -> Promise<ScanResult>
     func showAppInformation()
     func showErrorDialog()
 }

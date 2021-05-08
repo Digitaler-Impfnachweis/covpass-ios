@@ -9,7 +9,7 @@ import UIKit
 import PromiseKit
 import VaccinationUI
 
-public protocol ValidationResultRouterProtocol: RouterProtocol {
+protocol ValidationResultRouterProtocol: RouterProtocol {
     func showStart()
     func scanQRCode() -> Promise<ScanResult>
 }

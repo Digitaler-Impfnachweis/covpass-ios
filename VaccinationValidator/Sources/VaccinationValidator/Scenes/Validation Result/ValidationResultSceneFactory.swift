@@ -10,7 +10,7 @@ import PromiseKit
 import VaccinationCommon
 import VaccinationUI
 
-public struct ValidationResultSceneFactory: SceneFactory {
+struct ValidationResultSceneFactory: SceneFactory {
     // MARK: - Properties
 
     let router: ValidationResultRouterProtocol
@@ -18,7 +18,7 @@ public struct ValidationResultSceneFactory: SceneFactory {
 
     // MARK: - Lifecycle
 
-    public init(
+    init(
         router: ValidationResultRouterProtocol,
         certificate: CBORWebToken?) {
 
@@ -26,7 +26,7 @@ public struct ValidationResultSceneFactory: SceneFactory {
         self.certificate = certificate
     }
 
-    public func make() -> UIViewController {
+    func make() -> UIViewController {
         let viewModel = ValidationResultViewModel(
             router: router,
             certificate: certificate

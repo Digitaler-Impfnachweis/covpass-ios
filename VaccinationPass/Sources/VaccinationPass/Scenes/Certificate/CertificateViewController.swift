@@ -11,18 +11,18 @@ import VaccinationCommon
 import VaccinationUI
 import Scanner
 
-public class CertificateViewController: UIViewController {
+class CertificateViewController: UIViewController {
     
     // MARK: - IBOutlet
 
-    @IBOutlet public var headerView: InfoHeaderView!
-    @IBOutlet public var addButton: MainButton!
-    @IBOutlet public var collectionView: UICollectionView!
-    @IBOutlet public var dotPageIndicator: DotPageIndicator!
+    @IBOutlet var headerView: InfoHeaderView!
+    @IBOutlet var addButton: MainButton!
+    @IBOutlet var collectionView: UICollectionView!
+    @IBOutlet var dotPageIndicator: DotPageIndicator!
     
     // MARK: - Public
     
-    public private(set) var viewModel: CertificateViewModel
+    private(set) var viewModel: CertificateViewModel
 
     // MARK: - Lifecycle
 
@@ -35,7 +35,7 @@ public class CertificateViewController: UIViewController {
         self.viewModel.delegate = self
     }
     
-    override public func viewDidLoad() {
+    override func viewDidLoad() {
         super.viewDidLoad()
         title = ""
         setupHeaderView()
@@ -44,13 +44,13 @@ public class CertificateViewController: UIViewController {
         setupDotIndicator()
     }
 
-    public override func viewWillAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
         viewModel.loadCertificates()
     }
 
-    public override func viewWillDisappear(_ animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.setNavigationBarHidden(false, animated: animated)
     }
@@ -149,15 +149,15 @@ extension CertificateViewController: DotPageIndicatorDelegate {
 // MARK: - UpdateDelegate
 
 extension CertificateViewController: CertificateViewModelDelegate {
-    public func viewModelDidUpdate() {
+    func viewModelDidUpdate() {
         reloadCollectionView()
     }
 
-    public func viewModelDidUpdateFavorite() {
+    func viewModelDidUpdateFavorite() {
         collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .centeredHorizontally, animated: false)
     }
 
-    public func viewModelUpdateDidFailWithError(_ error: Error) {
+    func viewModelUpdateDidFailWithError(_ error: Error) {
         viewModel.showErrorDialog()
     }
 }

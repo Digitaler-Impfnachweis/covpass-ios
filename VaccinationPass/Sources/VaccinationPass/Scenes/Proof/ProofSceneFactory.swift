@@ -9,18 +9,18 @@ import UIKit
 import PromiseKit
 import VaccinationUI
 
-public struct ProofSceneFactory: ResolvableSceneFactory {
+struct ProofSceneFactory: ResolvableSceneFactory {
     // MARK: - Properties
 
     let router: ProofRouterProtocol
 
     // MARK: - Lifecycle
 
-    public init(router: ProofRouterProtocol) {
+    init(router: ProofRouterProtocol) {
         self.router = router
     }
 
-    public func make(resolvable: Resolver<Void>) -> UIViewController {
+    func make(resolvable: Resolver<Void>) -> UIViewController {
         let viewModel = ProofViewModel(
             router: router,
             resolvable: resolvable

@@ -8,10 +8,10 @@
 import UIKit
 import VaccinationUI
 
-public struct ValidatorAppInformationSceneFactory: SceneFactory {
+struct ValidatorAppInformationSceneFactory: SceneFactory {
     // MARK: - Properties
 
-    let router: AppInformationRouterProtocol
+    private let router: AppInformationRouterProtocol
 
     // MARK: - Lifecycle
 
@@ -19,7 +19,7 @@ public struct ValidatorAppInformationSceneFactory: SceneFactory {
         self.router = router
     }
 
-    public func make() -> UIViewController {
+    func make() -> UIViewController {
         let viewModel = ValidatorAppInformationViewModel(router: router)
         let viewController = AppInformationViewController(viewModel: viewModel)
         return viewController

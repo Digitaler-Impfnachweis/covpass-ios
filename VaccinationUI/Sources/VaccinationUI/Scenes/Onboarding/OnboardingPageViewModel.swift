@@ -16,11 +16,11 @@ public enum OnboardingPageViewModelType: CaseIterable {
 
 public protocol OnboardingPageViewModel {
     var delegate: ViewModelDelegate? { get set }
-    var type: OnboardingPageViewModelType { get set }
+    var type: OnboardingPageViewModelType { get }
     var toolbarState: CustomToolbarState { get }
     var image: UIImage? { get }
-    var title: String { get }
-    var info: String { get }
+    var title: String? { get }
+    var info: String? { get }
 }
 
 public protocol ConsentPageViewModel: OnboardingPageViewModel {

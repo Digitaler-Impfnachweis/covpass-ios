@@ -9,7 +9,7 @@ import UIKit
 import PromiseKit
 import VaccinationUI
 
-public protocol VaccinationDetailRouterProtocol: DialogRouterProtocol {
+protocol VaccinationDetailRouterProtocol: DialogRouterProtocol {
     func showScanner() -> Promise<ScanResult>
     func showCertificateOverview()
     func showErrorDialog()
