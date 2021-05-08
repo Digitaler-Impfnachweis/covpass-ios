@@ -39,3 +39,11 @@
 "vaccination_proof_popup_action_title" = "Sie haben keinen QR-Code erhalten?";
 
 "vaccination_proof_popup_scan_title" = "QR-Code Scannen";
+
+"vaccination_full_immunization_loading_message_14_days_title" = "Das Prüfzertifikat wird ab dem {Datum} hier angezeigt.";
+
+"vaccination_full_immunization_loading_message_14_days_message" = "Der Impfschutz ist erst 14 Tage nach der vollständigen Impfung wirksam.";
+
+"vaccination_full_immunization_loading_message_check_internet" = "Das Prüfzertifikat kann nicht geladen werden. Bitte überprüfen Sie Ihre Internetverbindung.";
+
+"vaccination_full_immunization_loading_message_error" = "Es ist ein unerwarteter Fehler aufgetreten. Das Prüfzertifikat kann aktuell nicht geladen werden.";

@@ -36,7 +36,7 @@ class DotPageIndicatorTests: XCTestCase {
         XCTAssertEqual(indicatorWithFrame.numberOfDots, numberOfDots, "Number of dots should match.")
         XCTAssertEqual(indicatorWithFrame.dots.count, numberOfDots, "Number of dots should match.")
         XCTAssertEqual(indicatorWithFrame.selectedDotIndex, 0, "Selected dot index should match.")
-        XCTAssertEqual(indicatorWithFrame.unselectedColor, UIConstants.BrandColor.brandAccent20, "Dot background color should match.")
+        XCTAssertEqual(indicatorWithFrame.unselectedColor, .brandAccent20, "Dot background color should match.")
         XCTAssertEqual(indicatorWithFrame.backgroundColor, UIColor.clear, "Background color should match.")
 
         // Init with frame, number of dots and dot background color.
@@ -60,10 +60,10 @@ class DotPageIndicatorTests: XCTestCase {
     }
 
     func testUnselectedColor() {
-        XCTAssertEqual(sut.unselectedColor, UIConstants.BrandColor.brandAccent20)
+        XCTAssertEqual(sut.unselectedColor, .brandAccent20)
     }
 
     func testSelectedColor() {
-        XCTAssertEqual(sut.selectedColor, UIConstants.BrandColor.brandAccent70)
+        XCTAssertEqual(sut.selectedColor, .brandAccent70)
     }
 }

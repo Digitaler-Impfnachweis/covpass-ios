@@ -6,70 +6,75 @@
 //
 
 import Foundation
-import UIKit
-import VaccinationPass
-import VaccinationUI
-import VaccinationCommon
 import PromiseKit
+import UIKit
+import VaccinationCommon
+@testable import VaccinationPass
+import VaccinationUI
 
 class MockCertificateViewModel: CertificateViewModel {
-
     // MARK: - Test Variables
-    
+
     var processCalled = false
     var configureCalled = false
-    
+
     // MARK: - CertificateViewModel
-    
-    weak var delegate: ViewModelDelegate?
-    
+
+    weak var delegate: CertificateViewModelDelegate?
+
     var addButtonImage: UIImage? = UIImage()
-    
-    var certificates: [BaseCertifiateConfiguration] = [
-        MockCellConfiguration.noCertificateConfiguration()
-    ]
-    
-    func process(payload: String, completion: ((Error) -> Void)?) {
+
+    var certificateViewModels: [CardViewModel] = []
+
+    func process(payload _: String, completion _: ((Error) -> Void)?) {
         processCalled = true
     }
-    
-    func configure<T>(cell: T, at indexPath: IndexPath) where T : CellConfigutation {
-        configureCalled = true
-    }
-    
+
     func reuseIdentifier(for indexPath: IndexPath) -> String {
-        certificates[indexPath.row].identifier
+        certificateViewModels[indexPath.row].reuseIdentifier
     }
-    
+
     var headlineTitle: String {
         "Title"
     }
-    
-    var headlineButtonInsets: UIEdgeInsets {
-        UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0 )
-    }
-    
-    var headlineFont: UIFont {
-        UIFont.systemFont(ofSize: 20)
-    }
-    
-    var headlineButtonImage: UIImage?{
+
+    var headlineButtonImage: UIImage? {
         nil
     }
 
-    func loadCertificatesConfiguration() {
-        certificates = [MockCellConfiguration.noCertificateConfiguration()]
+    func loadCertificates() {
+        certificateViewModels = [MockCardViewModel()]
     }
 
-    func process(payload: String) -> Promise<ExtendedVaccinationCertificate> {
-        return Promise.init(error: ApplicationError.unknownError)
+    func process(payload _: String) -> Promise<ExtendedCBORWebToken> {
+        return Promise(error: ApplicationError.unknownError)
     }
 
-    func detailViewModel(_ cert: ExtendedVaccinationCertificate) -> VaccinationDetailViewModel? {
+    func detailViewModel(_: ExtendedCBORWebToken) -> VaccinationDetailViewModel? {
         return nil
     }
 
-    func detailViewModel(_ indexPath: IndexPath) -> VaccinationDetailViewModel? {
+    func detailViewModel(_: IndexPath) -> VaccinationDetailViewModel? {
         return nil
+    }
+
+    func showCertificate(at _: IndexPath) {
+        // TODO: Add tests
+    }
+
+    func showCertificate(_: ExtendedCBORWebToken) {
+        // TODO: Add tests
+    }
+
+    func scanCertificate() {
+        // TODO: Add tests
+    }
+
+    func showAppInformation() {
+        // TODO: Add tests
+    }
+
+    func showErrorDialog() {
+        // TODO: Add tests
     }
 }

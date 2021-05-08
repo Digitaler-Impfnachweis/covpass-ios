@@ -7,11 +7,16 @@
 
 import Foundation
 import VaccinationUI
+
 class MockViewModelDelegate: ViewModelDelegate {
-    
     var updateCalled = false
-    
-    func shouldReload() {
-        updateCalled = true 
+
+    func viewModelDidUpdate() {
+        updateCalled = true
+    }
+
+    var receivedError: Error?
+    func viewModelUpdateDidFailWithError(_ error: Error) {
+        receivedError = error
     }
 }

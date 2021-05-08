@@ -25,10 +25,14 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .target(
             name: "VaccinationCommon",
-            dependencies: ["Keychain", "SwiftCBOR", "Scanner", "PromiseKit", "OpenSSL"],
+            dependencies: ["Keychain", "SwiftCBOR", "Scanner", "PromiseKit"],
             resources: [.process("Resources")]),
         .testTarget(
             name: "VaccinationCommonTests",
+            dependencies: ["VaccinationCommon"],
+            resources: [.process("Resources")]),
+        .testTarget(
+            name: "VaccinationCommonIntegrationTests",
             dependencies: ["VaccinationCommon"],
             resources: [.process("Resources")]),
     ]

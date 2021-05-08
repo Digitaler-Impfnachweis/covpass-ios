@@ -1,6 +1,6 @@
 //
 //  CardViewAction.swift
-//  
+//
 //
 //  Copyright © 2021 IBM. All rights reserved.
 //
@@ -16,20 +16,20 @@ public class CardViewAction: XibView {
     @IBOutlet public var titleLabel: UILabel!
     @IBOutlet public var actionButton: UIButton!
     @IBOutlet public var stateImageView: UIImageView!
-    
-    // MARK: - Variables
-    
+
+    // MARK: - Properties
+
     public var action: (() -> Void)?
     public var buttonImage: UIImage? { didSet { actionButton.setImage(buttonImage, for: .normal) } }
-    
-    // MARK: - IBAction
-    
-    @IBAction public func actionButtonPressed(button: UIButton) { action?() }
 
     // MARK: - Lifecycle
 
-    public override func initView() {
+    override public func initView() {
         super.initView()
-        stackView.spacing = 5
+        stackView.spacing = .space_6
     }
+
+    // MARK: - IBAction
+
+    @IBAction public func actionButtonPressed(button _: UIButton) { action?() }
 }

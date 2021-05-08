@@ -1,6 +1,6 @@
 //
 //  Base45EncoderTests.swift
-//  
+//
 //
 //  Copyright © 2021 IBM. All rights reserved.
 //
@@ -13,8 +13,8 @@ import XCTest
 
 class Base45EncoderTests: XCTestCase {
     var sut: Base45Encoder!
-    let rawToBase45: Dictionary<String, String> = [
-        "AB": "BB8", "Hello!!": "%69 VD92EX0", "base-45": "UJCLQE7W581", "ietf!": "QED8WEX0", "x": "U2", "":""
+    let rawToBase45: [String: String] = [
+        "AB": "BB8", "Hello!!": "%69 VD92EX0", "base-45": "UJCLQE7W581", "ietf!": "QED8WEX0", "x": "U2", "": ""
     ]
 
     override func setUp() {

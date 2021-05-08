@@ -32,7 +32,7 @@ open class XibView: UIView {
         // we need to call it in prepareForInterfaceBuilder as well.
     }
 
-    open override func awakeFromNib() {
+    override open func awakeFromNib() {
         super.awakeFromNib()
 
         initView()
@@ -44,7 +44,7 @@ open class XibView: UIView {
         initView()
     }
 
-    public required override init(frame: CGRect) {
+    override public required init(frame: CGRect) {
         super.init(frame: frame)
 
         xibSetup()
@@ -57,7 +57,7 @@ open class XibView: UIView {
         xibSetup()
     }
 
-    open override func prepareForInterfaceBuilder() {
+    override open func prepareForInterfaceBuilder() {
         super.prepareForInterfaceBuilder()
 
         initView()
@@ -76,6 +76,7 @@ open class XibView: UIView {
         addSubview(view)
         view.pinEdges([.all], to: layoutMarginsGuide, margins: .zero)
         contentView = view
+        backgroundColor = .clear
     }
 
     private func loadViewFromNib() -> UIView? {

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CheckboxView" customModule="VaccinationUI">
+            <connections>
+                <outlet property="checkbox" destination="MM5-8D-Dwd" id="xdV-8p-YD4"/>
+                <outlet property="stackView" destination="C11-l6-mWS" id="QJA-63-E4D"/>
+                <outlet property="textView" destination="67f-ZJ-jx0" id="QBQ-31-fpg"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="552" height="167"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" alignment="top" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="C11-l6-mWS">
+                    <rect key="frame" x="20" y="52" width="512" height="73"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MM5-8D-Dwd">
+                            <rect key="frame" x="0.0" y="0.0" width="25" height="25"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="25" id="9aI-8U-b0M"/>
+                                <constraint firstAttribute="height" constant="25" id="iZS-7p-1In"/>
+                            </constraints>
+                            <state key="normal">
+                                <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                            <connections>
+                                <action selector="checkboxPressed" destination="-1" eventType="touchUpInside" id="Vv2-Bw-nhR"/>
+                            </connections>
+                        </button>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="IR8-Gl-Fiz">
+                            <rect key="frame" x="45" y="0.0" width="467" height="70"/>
+                            <subviews>
+                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Ich habe die Datenschutzerklärung zur Kenntnis genommen." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="67f-ZJ-jx0">
+                                    <rect key="frame" x="0.0" y="0.0" width="467" height="70"/>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="70" id="swG-Dn-DkP"/>
+                                    </constraints>
+                                    <color key="textColor" systemColor="labelColor"/>
+                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                                </textView>
+                            </subviews>
+                        </stackView>
+                    </subviews>
+                </stackView>
+            </subviews>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstAttribute="trailingMargin" secondItem="C11-l6-mWS" secondAttribute="trailing" id="1rF-h4-Iku"/>
+                <constraint firstAttribute="bottomMargin" secondItem="C11-l6-mWS" secondAttribute="bottom" id="PqN-ca-Dav"/>
+                <constraint firstItem="C11-l6-mWS" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="topMargin" id="cIj-Xy-JrV"/>
+                <constraint firstItem="C11-l6-mWS" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leadingMargin" id="mzo-vx-nVa"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <edgeInsets key="layoutMargins" top="0.0" left="0.0" bottom="0.0" right="0.0"/>
+            <point key="canvasLocation" x="37.681159420289859" y="-71.316964285714278"/>
+        </view>
+    </objects>
+    <resources>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

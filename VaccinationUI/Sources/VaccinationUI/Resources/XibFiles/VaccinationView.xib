@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -13,7 +13,6 @@
                 <outlet property="dateView" destination="XGD-vt-dCq" id="dkf-Dv-T9g"/>
                 <outlet property="immunizationHeadline" destination="Vtu-0a-hp0" id="cc9-dr-0ax"/>
                 <outlet property="issuerView" destination="mmI-TM-IPt" id="lZq-p7-AjK"/>
-                <outlet property="locationView" destination="IKL-9R-NAf" id="BFM-qb-hP7"/>
                 <outlet property="manufacturerView" destination="9Hq-h1-plc" id="GkU-nF-iJe"/>
                 <outlet property="stackView" destination="oUb-Cv-MzU" id="Dlo-D8-gko"/>
                 <outlet property="uvciView" destination="dmy-b2-SUJ" id="gmJ-4I-9Qh"/>
@@ -25,25 +24,22 @@
         <view contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Emf-oB-Bnc">
             <rect key="frame" x="0.0" y="0.0" width="375" height="628"/>
             <subviews>
-                <stackView opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="oUb-Cv-MzU" customClass="ScrollableStackView" customModule="VaccinationUI">
+                <stackView opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="oUb-Cv-MzU">
                     <rect key="frame" x="16" y="52" width="343" height="568"/>
                     <subviews>
-                        <view contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="343" placeholderIntrinsicHeight="172" translatesAutoresizingMaskIntoConstraints="NO" id="Vtu-0a-hp0" userLabel="immunizationHeadline" customClass="Headline" customModule="VaccinationUI">
+                        <view contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="343" placeholderIntrinsicHeight="172" translatesAutoresizingMaskIntoConstraints="NO" id="Vtu-0a-hp0" userLabel="immunizationHeadline" customClass="PlainLabel" customModule="VaccinationUI">
                             <rect key="frame" x="0.0" y="0.0" width="343" height="172"/>
                         </view>
                         <view contentMode="scaleToFill" verticalHuggingPriority="249" placeholderIntrinsicWidth="343" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="XGD-vt-dCq" userLabel="dateView" customClass="ParagraphView" customModule="VaccinationUI">
-                            <rect key="frame" x="0.0" y="172" width="343" height="62"/>
+                            <rect key="frame" x="0.0" y="172" width="343" height="112"/>
                         </view>
                         <view contentMode="scaleToFill" placeholderIntrinsicWidth="343" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="RGm-nQ-hea" userLabel="vaccineView" customClass="ParagraphView" customModule="VaccinationUI">
-                            <rect key="frame" x="0.0" y="234" width="343" height="50"/>
-                        </view>
-                        <view contentMode="scaleToFill" placeholderIntrinsicWidth="343" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="9Hq-h1-plc" userLabel="manufacturerView" customClass="ParagraphView" customModule="VaccinationUI">
                             <rect key="frame" x="0.0" y="284" width="343" height="50"/>
                         </view>
-                        <view contentMode="scaleToFill" placeholderIntrinsicWidth="343" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="cQX-l9-Ytd" userLabel="vaccineCodeView" customClass="ParagraphView" customModule="VaccinationUI">
+                        <view contentMode="scaleToFill" placeholderIntrinsicWidth="343" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="9Hq-h1-plc" userLabel="manufacturerView" customClass="ParagraphView" customModule="VaccinationUI">
                             <rect key="frame" x="0.0" y="334" width="343" height="50"/>
                         </view>
-                        <view contentMode="scaleToFill" placeholderIntrinsicWidth="343" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="IKL-9R-NAf" userLabel="locationView" customClass="ParagraphView" customModule="VaccinationUI">
+                        <view contentMode="scaleToFill" placeholderIntrinsicWidth="343" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="cQX-l9-Ytd" userLabel="vaccineCodeView" customClass="ParagraphView" customModule="VaccinationUI">
                             <rect key="frame" x="0.0" y="384" width="343" height="50"/>
                         </view>
                         <view contentMode="scaleToFill" placeholderIntrinsicWidth="343" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="mmI-TM-IPt" userLabel="issuerView" customClass="ParagraphView" customModule="VaccinationUI">
@@ -73,9 +69,6 @@
     </objects>
     <designables>
         <designable name="9Hq-h1-plc">
-            <size key="intrinsicContentSize" width="343" height="50"/>
-        </designable>
-        <designable name="IKL-9R-NAf">
             <size key="intrinsicContentSize" width="343" height="50"/>
         </designable>
         <designable name="RGm-nQ-hea">

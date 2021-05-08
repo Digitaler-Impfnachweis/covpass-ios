@@ -1,6 +1,6 @@
 //
 //  NoCertificateCollectionViewCell.swift
-//  
+//
 //
 //  Copyright © 2021 IBM. All rights reserved.
 //
@@ -8,34 +8,63 @@
 import Foundation
 import UIKit
 
+public typealias NoCertificateCardViewModelProtocol = CardViewModel & NoCertificateCardViewModelBase
+
+public protocol NoCertificateCardViewModelBase {
+    var title: String { get }
+    var subtitle: String { get }
+    var image: UIImage { get }
+}
+
 @IBDesignable
-public class NoCertificateCollectionViewCell: BaseCardCollectionViewCell {
+public class NoCertificateCollectionViewCell: CardCollectionViewCell {
     // MARK: - IBOutlet
 
+    @IBOutlet public var containerView: UIView!
     @IBOutlet public var stackView: UIStackView!
     @IBOutlet public var iconImageView: UIImageView!
     @IBOutlet public var headlineLabel: UILabel!
     @IBOutlet public var subHeadlineLabel: UILabel!
-    
-    // MARK: - Lifecycle
-    
-    public override func awakeFromNib() {
-        super.awakeFromNib()
-        contentView.layoutMargins = .init(top: 0, left: 24, bottom: 0, right: 24)
-        stackView.spacing = 0
-        stackView.setCustomSpacing(30, after: iconImageView)
-        stackView.setCustomSpacing(15, after: headlineLabel)
+
+    // MARK: - Public Properties
+
+    override public var viewModel: CardViewModel? {
+        didSet {
+            updateView()
+        }
     }
-}
 
-// MARK: - CellConfigutation
+    // MARK: - Lifecycle
 
-extension NoCertificateCollectionViewCell {
-    public typealias T = NoCertifiateConfiguration
-    
-    public func configure(with configuration: T) {
-        headlineLabel.text = configuration.title
-        subHeadlineLabel.text = configuration.subtitle
-        iconImageView.image = configuration.image
+    override public func awakeFromNib() {
+        super.awakeFromNib()
+
+        containerView.layoutMargins = .init(
+            top: .space_120,
+            left: .space_40,
+            bottom: .space_120,
+            right: .space_40
+        )
+        containerView.layer.cornerRadius = 15
+
+        stackView.spacing = .zero
+        stackView.setCustomSpacing(.space_10, after: iconImageView)
+    }
+
+    private func updateView() {
+        guard let vm = viewModel as? NoCertificateCardViewModelProtocol else { return }
+
+        containerView.backgroundColor = vm.backgroundColor
+        containerView.tintColor = vm.backgroundColor
+        iconImageView.image = vm.image
+
+        headlineLabel.attributedText = vm.title
+            .styledAs(.header_3)
+            .aligned(to: .center)
+
+        subHeadlineLabel.attributedText = vm.subtitle
+            .styledAs(.body)
+            .colored(.onBackground70)
+            .aligned(to: .center)
     }
 }

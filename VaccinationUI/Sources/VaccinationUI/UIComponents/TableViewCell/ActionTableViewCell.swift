@@ -9,32 +9,30 @@ import UIKit
 
 @IBDesignable
 public class ActionTableViewCell: UITableViewCell {
-    
     // MARK: - IBOutlet
 
     @IBOutlet public var stackView: UIStackView!
     @IBOutlet public var labelHeadline: UILabel!
     @IBOutlet public var iconImageView: UIImageView!
-    
+
     // MARK: - Public
-    
-    public static let identifier = UIConstants.CellIdentifier.ActionTableViewCell
-    
+
+    public static let identifier = "ActionTableViewCell"
+
     // MARK: - Lifecycle
-    
-    public override func awakeFromNib() {
+
+    override public func awakeFromNib() {
         super.awakeFromNib()
-        contentView.layoutMargins = .init(top: 15, left: 0, bottom: 15, right: 0)
-        stackView.spacing = 5
-        labelHeadline.font = UIFont.ibmPlexSansSemiBold(with: 14)
+        contentView.layoutMargins = .init(top: .space_12, left: .zero, bottom: .space_12, right: .zero)
+        stackView.spacing = .space_6
     }
 }
 
 // MARK: - ActionCell
 
 extension ActionTableViewCell: ActionCell {
-    public func configure(title: String, iconName: String) {
-        labelHeadline.text = title
-        iconImageView.image = UIImage(named: iconName, in: Bundle.module, compatibleWith: nil)
+    public func configure(title: String, icon: UIImage) {
+        labelHeadline.attributedText = title.styledAs(.header_3)
+        iconImageView.image = icon
     }
 }

@@ -1,6 +1,6 @@
 //
 //  CoseSign1ParserTests.swift
-//  
+//
 //
 //  Copyright © 2021 IBM. All rights reserved.
 //
@@ -29,7 +29,7 @@ class CoseSign1ParserTests: XCTestCase {
 
     func testParsing() {
         let decompressedPayload = prepareData()
-        let coseSign1Message = try? sut.parse(decompressedPayload)
+        let coseSign1Message = try! sut.parse(decompressedPayload)
 
         guard let message = coseSign1Message else {
             XCTFail("Cose1SignMessage should not be nil")
@@ -45,7 +45,7 @@ class CoseSign1ParserTests: XCTestCase {
 
     func testMapping() throws {
         let decompressedPayload = prepareData()
-        let coseSign1Message = try? sut.parse(decompressedPayload)
+        let coseSign1Message = try sut.parse(decompressedPayload)
 
         guard let message = coseSign1Message else {
             XCTFail("Cose1SignMessage should not be nil")
@@ -53,30 +53,16 @@ class CoseSign1ParserTests: XCTestCase {
         }
         let mappedDictionary = sut.map(cborObject: try? CBOR.decode(message.payload))
 
-        XCTAssertEqual(mappedDictionary?["issuer"] as? String, "Landratsamt Altötting")
-        XCTAssertEqual(mappedDictionary?["identifier"] as? String, "C01X00T47")
-        XCTAssertNotNil(mappedDictionary?["vaccination"])
-        XCTAssertEqual(mappedDictionary?["id"] as? String, "01DE/84503/1119349007/DXSGWLWL40SU8ZFKIYIBK39A3#S")
+        XCTAssertEqual(mappedDictionary?["4"] as? UInt64, 1_620_652_117)
+        XCTAssertEqual(mappedDictionary?["1"] as? String, "DE")
+        XCTAssertEqual(mappedDictionary?["6"] as? UInt64, 1_619_167_131)
     }
 }
 
 extension CoseSign1ParserTests {
     func prepareData() -> Data {
-        let qrCodeString = "6BFXZ8J18OJ28S2$61XJGVNK3*KF HPCCQ*4IOR5-TOI9QF9 YH-R8XHHC11KTM54EV15**JP.C7P8JM7I32QI1VQ0JUQSM9J/1$N5SPPBFM3B21JBY/R5NU4OU$8IJ-F4FV28LYTG48M.5JU8T-0IV%DJQDOKM+1B+MQ$X34AD-VHNZ7S9D4:O0%B-*RAYOK8PZ$41Q0W:EY55472AQK/BIKV9NXP4H1DS8$8GZVQ/-6V-8TFGR-RX44/X1770G 7 LK+ P4-1WG2A9FT75KKGY%3K1S:49JNTNRLGO0LD0F/3BX4POU U0UB65B2KIR5T1BC4:8KHDJAXAXTRV1F/.AZPR*.GMF9MA2VGAFLEW:FQAPD+3%EK16WATE+:2-I4MQN6UC:AI0/L4MUX.AGS6MC80 7ZHC.N1RPASS0YE1L/GIZH4%2$A6DF2/ DZDIC05RC76EARPS.X50VFN6L2OP::D+62NDJ8/SX3J %0%T7WP4YEP.PHA*4QH99XKN/Q7Y35NATL4WC76QC1ZT$RU/.N4WE$INCHTC2UD/EF*0X9V4O7JZRHECAPCY5FATVS8J2998NR3ZHD-OC%MDP3L-KY9VXAEYKTY:PPFGA+2VEN*G9CWNYH98OCR0U68CPPAIQLNZ647G/RBV$7GIFY TA*AK/U/RL68HS4UQ:BJ$7DU4N2P:8QBVP6W1O$71AW7OU2CEX4WL2G-XR/-V-%NP3A*N5-3CUOF0RVSRKM2G7M18KP"
+        let qrCodeString = "6BFOXN*TS0BI$ZD4N9:9S6RCVN5+O30K3/XIV0W23NTDEXWK G2EP4J0BGJLOFJEIKVGAE%9ETMSA3/-2E%5VR5VVBJZILDBZ8D%JTQOL0EC7KD/ZL/8D:8DQVDLED0AC2AU/B2/+3HN2HPCT12IID*2T$/TVPTM*SQYDLADYR3JZIM-1U96UX4795L*KDYPWGO+9AKCO.BHOH63K5 *JAYUQJAGPENXUJRHQJA5G6VOE:OQPAU:IAJ0AZZ0OWCR/C+T4D-4HRVUMNMD3323R1392VC-4A+2XEN QT QTHC31M3+E3CP456L X4CZKHKB-43:C3J:R90JK.A5*G%DBZI9$JAQJKKIJX2MM+GWHKSKE MCAOI8%MQQK8+S4-R:KIIX0VJA$:O3HH:EF9NT6D7.Z8OMR-C137HZW2$XK6AL4%IYT0BUF1MFXZG$IV6$0+BN$MVYWV9Y4KCT7-S$ 0GKFCTR0KV4$0RCNV7J$%25I3HC3X83P47YOR40F80U8EHL%BP0CC9R$SEN59KYL 2O1/7*HVNY6:W0..DXJ5YKV4/J/JVZPRD*S0ZV+IR5H7*QS7%JX7HU0PA0PLY705JM/RA73CE3FBI"
         let base45Decoded = (try? base45Encoder.decode(qrCodeString)) ?? []
-
-        return decompress(Data(base45Decoded)) ?? Data()
-    }
-
-    func decompress(_ data: Data) -> Data? {
-        let size = 8_000_000
-        let buffer = UnsafeMutablePointer<UInt8>.allocate(capacity: size)
-        let result = data.subdata(in: 2 ..< data.count).withUnsafeBytes ({
-            let read = compression_decode_buffer(buffer, size, $0.baseAddress!.bindMemory(to: UInt8.self, capacity: 1),
-                                                 data.count - 2, nil, COMPRESSION_ZLIB)
-            return Data(bytes: buffer, count:read)
-        }) as Data
-        buffer.deallocate()
-        return result
+        return Compression.decompress(Data(base45Decoded)) ?? Data()
     }
 }

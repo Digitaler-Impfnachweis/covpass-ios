@@ -20,8 +20,8 @@ public class DotPageIndicator: UIView {
         }
     }
 
-    @IBInspectable public var unselectedColor: UIColor = UIConstants.BrandColor.brandAccent20
-    @IBInspectable public var selectedColor: UIColor = UIConstants.BrandColor.brandAccent70
+    @IBInspectable public var unselectedColor: UIColor = .brandAccent20
+    @IBInspectable public var selectedColor: UIColor = .brandAccent70
 
     private var dotSize: CGFloat = 8.0
     private var dotPadding: CGFloat = 10.0
@@ -33,7 +33,7 @@ public class DotPageIndicator: UIView {
 
     init(frame: CGRect, numberOfDots: Int, color: UIColor? = nil) {
         self.numberOfDots = numberOfDots
-        unselectedColor = color ?? UIConstants.BrandColor.brandAccent20
+        unselectedColor = color ?? .brandAccent20
         super.init(frame: frame)
         setupView()
     }
@@ -44,7 +44,7 @@ public class DotPageIndicator: UIView {
     }
 
     public func selectDot(withIndex index: Int) {
-        // If it's already selected, then it's no need to select again.
+        // If it is already selected, then there is no need to select it again
         guard selectedDotIndex != index else { return }
 
         deselectSelectedDot()
@@ -58,6 +58,7 @@ public class DotPageIndicator: UIView {
     }
 
     func deselectSelectedDot() {
+        guard selectedDotIndex < numberOfDots else { return }
         let selectedDot = dots[selectedDotIndex]
         UIView.animate(withDuration: 0.4) {
             selectedDot.backgroundColor = self.unselectedColor

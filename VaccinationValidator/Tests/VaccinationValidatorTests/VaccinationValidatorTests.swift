@@ -5,11 +5,12 @@
 //  Copyright © 2021 IBM. All rights reserved.
 //
 
-import XCTest
+import Foundation
 @testable import VaccinationValidator
+import XCTest
 
 class VaccinationValidatorTests: XCTestCase {
-    func testExample() {
-        XCTAssertEqual(VaccinationValidator().text, "Hello, World!")
+    func testHelloWorld() throws {
+        print("Hello World")
     }
 }

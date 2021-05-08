@@ -1,6 +1,6 @@
 //
 //  DotPulseActivityIndicator.swift
-// 
+//
 //
 //  Copyright © 2021 IBM. All rights reserved.
 //
@@ -27,9 +27,9 @@ import UIKit
  */
 
 public final class DotPulseActivityIndicator: UIView {
-    struct Defaults {
+    enum Defaults {
         /// Default color of activity indicator.
-        static let color: UIColor = UIConstants.BrandColor.brandAccent70
+        static let color: UIColor = .brandAccent70
         /// Default padding (0)
         static let padding: CGFloat = 0
     }
@@ -84,7 +84,7 @@ public final class DotPulseActivityIndicator: UIView {
         backgroundColor = .clear
     }
 
-    public override var intrinsicContentSize: CGSize {
+    override public var intrinsicContentSize: CGSize {
         return CGSize(width: bounds.width, height: bounds.height)
     }
 

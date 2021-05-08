@@ -7,89 +7,43 @@
 
 import UIKit
 
-@IBDesignable
 public class SecureContentView: XibView {
-    
+    //  MARK: - Properties
+
     @IBOutlet public var stackView: UIStackView!
-    @IBOutlet public var title: UILabel!
-    @IBOutlet public var body: LinkTextView!
+    @IBOutlet public var textStackView: UIStackView!
+    @IBOutlet public var titleLabel: UILabel!
+    @IBOutlet public var bodyLabel: UILabel!
     @IBOutlet public var imageView: UIImageView!
 
-    internal static let BodyLeftInset: CGFloat = -5
-
-    public var titleText: String? {
-        didSet {
-            if let text = titleText {
-                title.text = text
-                hasTitle = !text.isEmpty
-                checkVisibility()
-                setupAccessibility()
-            }
-        }
+    public var titleAttributedString: NSAttributedString? {
+        didSet { updateView() }
     }
 
-    public var spacing: CGFloat? {
-        didSet {
-            guard let spacing = spacing else { return }
-            stackView.spacing = spacing
-        }
+    public var bodyAttributedString: NSAttributedString? {
+        didSet { updateView() }
     }
 
-    public var bodyText: String? {
-        didSet {
-            body.linkText = bodyText
-            checkVisibility()
-            setupAccessibility()
-        }
-    }
+    //  MARK: - Lifecycle
 
-    public var bodyFont: UIFont? {
-        didSet {
-            guard let bodyFont = bodyFont else { return }
-            let newFont = UIFont(descriptor: bodyFont.fontDescriptor, size: bodyFont.fontDescriptor.pointSize)
-            body.adjustsFontForContentSizeCategory = true
-            body.linkTextFont = newFont
-        }
-    }
-
-    @IBInspectable internal var hasTitle: Bool = false {
-        didSet {
-            if !hasTitle {
-                title.removeFromSuperview()
-            }
-        }
-    }
-
-    required init(frame: CGRect) {
-        super.init(frame: frame)
-        setupView()
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        setupView()
-    }
-
-    public override func initView() {
+    override public func initView() {
         super.initView()
-        setupView()
+        stackView.spacing = .space_16
+        textStackView.spacing = .space_2
+        imageView.tintColor = .brandAccent
     }
 
-    private func checkVisibility() {
-        isHidden = (bodyText?.isEmpty ?? true) && !hasTitle
-    }
+    //  MARK: - Methods
 
     private func setupAccessibility() {
-        let accessibilityLabelText = "\(titleText ?? "") \(bodyText ?? "")"
+        let accessibilityLabelText = "\(titleAttributedString?.string ?? "") \(bodyAttributedString?.string ?? "")"
         enableAccessibility(label: accessibilityLabelText, traits: .staticText)
     }
 
-    internal func setupView() {
-        title.font = UIConstants.Font.semiBold
-        title.adjustsFontForContentSizeCategory()
-        title.textColor = UIConstants.BrandColor.onBackground100
-        bodyFont = UIConstants.Font.regular
-        body.textColor = UIConstants.BrandColor.onBackground100
-        imageView.tintColor = UIConstants.BrandColor.brandAccent
+    internal func updateView() {
+        titleLabel.attributedText = titleAttributedString
+        bodyLabel.attributedText = bodyAttributedString
+
+        setupAccessibility()
     }
 }

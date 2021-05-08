@@ -1,19 +1,19 @@
 //
 //  UIColorExtension.swift
-//  
+//
 //
 //  Copyright © 2021 IBM. All rights reserved.§
 //
 
 import UIKit
 
-extension UIColor {
+public extension UIColor {
     /// Create color by a hex representation of RGB
     ///
     /// - Parameter hex: a valid hex value like 'fff'
     /// - Returns: UIColor as specified
 
-    public convenience init(hexString: String) {
+    convenience init(hexString: String) {
         let scanner = Scanner(string: hexString.replacingOccurrences(of: "#", with: ""))
         scanner.scanLocation = 0
 
@@ -32,7 +32,7 @@ extension UIColor {
         )
     }
 
-    public var hex: String {
+    var hex: String {
         let r: CGFloat = cgColor.components?[0] ?? 0.0
         let g: CGFloat = cgColor.components?[1] ?? 0.0
         let b: CGFloat = cgColor.components?[2] ?? 0.0
