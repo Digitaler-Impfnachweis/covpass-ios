@@ -13,10 +13,12 @@ import PromiseKit
 
 public class DefaultCertificateViewModel: CertificateViewModel {
 
-    // MARK: - Parser
+    // MARK: - Private Properties
 
     private let router: CertificateRouterProtocol
     private let repository: VaccinationRepositoryProtocol
+
+    // MARK: - Lifecycle
     
     public init(
         router: CertificateRouterProtocol,
@@ -25,16 +27,9 @@ public class DefaultCertificateViewModel: CertificateViewModel {
         self.repository = repository
     }
     
-    // MARK: - HeadlineViewModel
-    
-    public var headlineTitle = "vaccination_start_screen_title".localized
-    public var headlineButtonImage: UIImage? = .help
-    
-    // MARK: - CertificateViewModel
+    // MARK: - Public Properties
     
     public weak var delegate: CertificateViewModelDelegate?
-    public var addButtonImage: UIImage? = .plus
-
     public var certificateViewModels = [CardViewModel]()
     public var certificateList = VaccinationCertificateList(certificates: [])
     public var matchedCertificates: [ExtendedCBORWebToken] {
@@ -42,15 +37,21 @@ public class DefaultCertificateViewModel: CertificateViewModel {
         return self.matchCertificates(certs)
     }
 
+    // MARK: - Public Actions
+
     public func process(payload: String) -> Promise<ExtendedCBORWebToken> {
         return repository.scanVaccinationCertificate(payload)
     }
 
     public func loadCertificates() {
-        repository.getVaccinationCertificateList().map({ list -> [ExtendedCBORWebToken] in
+        firstly {
+            repository.getVaccinationCertificateList()
+        }
+        .map { list -> [ExtendedCBORWebToken] in
             self.certificateList = list
             return self.matchedCertificates
-        }).done({ list in
+        }
+        .done { list in
             if list.isEmpty {
                 self.certificateViewModels = [NoCertificateCardViewModel()]
                 return
@@ -59,13 +60,60 @@ public class DefaultCertificateViewModel: CertificateViewModel {
                 let isFavorite = self.certificatePair(for: cert).contains(where: { $0.vaccinationCertificate.hcert.dgc.v.first?.ci == self.certificateList.favoriteCertificateId })
                 return CertificateCardViewModel(token: cert, isFavorite: isFavorite, onAction: self.onAction, onFavorite: self.onFavorite)
             }
-        }).catch({ error in
-            print(error)
+        }
+        .catch { error in
             self.certificateViewModels = [NoCertificateCardViewModel()]
-        }).finally({
+        }
+        .finally {
             self.delegate?.viewModelDidUpdate()
-        })
+        }
     }
+
+    public func showCertificate(at indexPath: IndexPath) {
+        showCertificates(
+            certificatePair(for: indexPath)
+        )
+    }
+
+    public func showCertificate(_ certificate: ExtendedCBORWebToken) {
+        showCertificates(
+            certificatePair(for: certificate)
+        )
+    }
+
+    public func scanCertificate() {
+        firstly {
+           router.showProof()
+        }
+        .then {
+           self.router.scanQRCode()
+        }
+        .map { result in
+           try self.payloadFromScannerResult(result)
+        }
+        .then { payload in
+           self.process(payload: payload)
+        }
+        .ensure {
+           self.loadCertificates()
+        }
+        .done { certificate in
+            self.showCertificate(certificate)
+        }
+        .catch { error in
+            self.delegate?.viewModelUpdateDidFailWithError(error)
+        }
+    }
+
+    public func showAppInformation() {
+        router.showAppInformation()
+    }
+
+    public func showErrorDialog() {
+        router.showErrorDialog()
+    }
+
+    // MARK: - Private Functions
 
     private func sortFavorite(_ certificates: [ExtendedCBORWebToken], favorite: String) -> [ExtendedCBORWebToken] {
         guard let favoriteCert = certificates.first(where: { $0.vaccinationCertificate.hcert.dgc.v.first?.ci == favorite }) else { return certificates }
@@ -117,58 +165,6 @@ public class DefaultCertificateViewModel: CertificateViewModel {
         return findCertificatePair(certificate, certificateList.certificates)
     }
 
-    public func showCertificate(at indexPath: IndexPath) {
-        showCertificates(
-            certificatePair(for: indexPath)
-        )
-    }
-
-    public func showCertificate(_ certificate: ExtendedCBORWebToken) {
-        showCertificates(
-            certificatePair(for: certificate)
-        )
-    }
-
-    private func showCertificates(_ certificates: [ExtendedCBORWebToken]) {
-        guard certificates.isEmpty == false else {
-            return
-        }
-        router.showCertificates(certificates)
-    }
-
-    public func scanCertificate() {
-        firstly {
-           router.showProof()
-        }
-        .then {
-           self.router.scanQRCode()
-        }
-        .map { result in
-           try self.payloadFromScannerResult(result)
-        }
-        .then { payload in
-           self.process(payload: payload)
-        }
-        .ensure {
-           self.loadCertificates()
-        }
-        .done { certificate in
-            self.showCertificate(certificate)
-        }
-        .catch { error in
-           print(error)
-           // TODO error handling
-        }
-    }
-
-
-
-    public func showAppInformation() {
-        router.showAppInformation()
-    }
-
-    // MARK: - Private Functions
-
     private func payloadFromScannerResult(_ result: ScanResult) throws -> String {
         switch result {
         case .success(let payload):
@@ -187,12 +183,18 @@ public class DefaultCertificateViewModel: CertificateViewModel {
             self.delegate?.viewModelDidUpdateFavorite()
         }
         .catch{ error in
-            print(error)
-            // TODO error handling
+            self.delegate?.viewModelUpdateDidFailWithError(error)
         }
     }
 
     private func onAction(_ certificate: ExtendedCBORWebToken) {
         self.showCertificate(certificate)
+    }
+
+    private func showCertificates(_ certificates: [ExtendedCBORWebToken]) {
+        guard certificates.isEmpty == false else {
+            return
+        }
+        router.showCertificates(certificates)
     }
 }

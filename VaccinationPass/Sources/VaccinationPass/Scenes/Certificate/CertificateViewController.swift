@@ -12,6 +12,7 @@ import VaccinationUI
 import Scanner
 
 public class CertificateViewController: UIViewController {
+    
     // MARK: - IBOutlet
 
     @IBOutlet public var headerView: InfoHeaderView!
@@ -63,8 +64,8 @@ public class CertificateViewController: UIViewController {
     }
     
     private func setupHeaderView() {
-        headerView.attributedTitleText = viewModel.headlineTitle.styledAs(.header_2)
-        headerView.image = viewModel.headlineButtonImage
+        headerView.attributedTitleText = "vaccination_start_screen_title".localized.styledAs(.header_2)
+        headerView.image = .help
         headerView.action = { [weak self] in
             self?.viewModel.showAppInformation()
         }
@@ -83,7 +84,7 @@ public class CertificateViewController: UIViewController {
     }
     
     private func setupActionButton() {
-        addButton.icon = viewModel.addButtonImage
+        addButton.icon = .plus
         addButton.action = { [weak self] in
             self?.viewModel.scanCertificate()
         }
@@ -157,6 +158,6 @@ extension CertificateViewController: CertificateViewModelDelegate {
     }
 
     public func viewModelUpdateDidFailWithError(_ error: Error) {
-        // TODO: Handle error
+        viewModel.showErrorDialog()
     }
 }

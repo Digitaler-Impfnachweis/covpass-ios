@@ -16,17 +16,14 @@ public protocol CertificateViewModelDelegate: AnyObject {
     func viewModelUpdateDidFailWithError(_ error: Error)
 }
 
-public protocol CertificateViewModel: HeadlineViewModel {
+public protocol CertificateViewModel {
     var delegate: CertificateViewModelDelegate? { get set }
-    var addButtonImage: UIImage? { get }
     var certificateViewModels: [CardViewModel] { get set }
-//    var certificates: [BaseCertifiateConfiguration] { get set }
     func process(payload: String) -> Promise<ExtendedCBORWebToken>
-//    func configure<T: CellConfigutation>(cell: T, at indexPath: IndexPath)
-//    func reuseIdentifier(for indexPath: IndexPath) -> String
     func loadCertificates()
     func showCertificate(at indexPath: IndexPath)
     func showCertificate(_ certificate: ExtendedCBORWebToken)
     func scanCertificate()
     func showAppInformation()
+    func showErrorDialog()
 }

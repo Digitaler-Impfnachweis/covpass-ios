@@ -16,4 +16,5 @@ public protocol CertificateRouterProtocol: RouterProtocol {
     func showProof() -> Promise<Void>
     func scanQRCode() -> Promise<Swift.Result<String, ScanError>>
     func showAppInformation()
+    func showErrorDialog()
 }

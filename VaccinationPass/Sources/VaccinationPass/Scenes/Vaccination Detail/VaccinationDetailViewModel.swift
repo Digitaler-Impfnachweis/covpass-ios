@@ -17,6 +17,8 @@ public class VaccinationDetailViewModel {
     private var certificates: [ExtendedCBORWebToken]
     public weak var delegate: ViewModelDelegate?
 
+    // MARK: - Lifecyle
+
     public init(
         router: VaccinationDetailRouterProtocol,
         repository: VaccinationRepositoryProtocol,
@@ -27,6 +29,8 @@ public class VaccinationDetailViewModel {
         self.certificates = certificates.sorted(by: { $0.vaccinationCertificate.hcert.dgc.v.first?.dn ?? 0 < $1.vaccinationCertificate.hcert.dgc.v.first?.dn ?? 0 })
     }
 
+    // MARK: - Public Actions
+
     public var fullImmunization: Bool {
         certificates.map({ $0.vaccinationCertificate.hcert.dgc.fullImmunization }).first(where: { $0 }) ?? false
     }
@@ -36,7 +40,6 @@ public class VaccinationDetailViewModel {
             let certList = try repository.getVaccinationCertificateList().wait()
             return certificates.contains(where: { $0.vaccinationCertificate.hcert.dgc.v.first?.ci == certList.favoriteCertificateId })
         } catch {
-            print(error)
             return false
         }
     }
@@ -76,30 +79,6 @@ public class VaccinationDetailViewModel {
             scanNextCertificate()
     }
 
-    private func scanNextCertificate() {
-        firstly {
-            router.showScanner()
-        }
-        .then { result -> Promise<Void> in
-            switch result {
-            case .success(let qrCode):
-                return self.process(payload: qrCode)
-            case.failure(let error):
-                throw error
-            }
-        }
-        .done { [weak self] in
-            self?.delegate?.viewModelDidUpdate()
-        }
-        .catch { [weak self] error in
-            self?.delegate?.viewModelUpdateDidFailWithError(error)
-        }
-    }
-
-    private func showCertificate() {
-        router.showCertificateOverview()
-    }
-
     public func delete() {
         firstly {
             showDeleteDialog()
@@ -124,32 +103,44 @@ public class VaccinationDetailViewModel {
             self.router.showCertificateOverview()
         }
         .catch { error in
-            print(error)
-            // TODO: Handle error
+            self.delegate?.viewModelUpdateDidFailWithError(error)
         }
     }
 
     public func updateFavorite() -> Promise<Void> {
-        return repository.getVaccinationCertificateList().map({ cert in
+        firstly {
+            repository.getVaccinationCertificateList()
+        }
+        .map { cert in
             var certList = cert
             guard let id = self.certificates.first?.vaccinationCertificate.hcert.dgc.v.first?.ci else {
                 return certList
             }
             certList.favoriteCertificateId = certList.favoriteCertificateId == id ? nil : id
             return certList
-        }).then({ cert in
+        }
+        .then { cert in
             return self.repository.saveVaccinationCertificateList(cert).asVoid()
-        })
+        }
     }
 
     public func process(payload: String) -> Promise<Void> {
-        return repository.scanVaccinationCertificate(payload).then({ cert in
+        firstly {
+            repository.scanVaccinationCertificate(payload)
+        }
+        .then { cert in
             return self.repository.getVaccinationCertificateList().then({ list -> Promise<Void> in
                 self.certificates = self.findCertificatePair(cert, list.certificates).sorted(by: { $0.vaccinationCertificate.hcert.dgc.v.first?.dn ?? 0 < $1.vaccinationCertificate.hcert.dgc.v.first?.dn ?? 0 })
                 return Promise.value(())
             })
-        })
+        }
     }
+
+    public func showErrorDialog() {
+        router.showErrorDialog()
+    }
+
+    // MARK: - Private Helper
 
     private func findCertificatePair(_ certificate: ExtendedCBORWebToken, _ certificates: [ExtendedCBORWebToken]) -> [ExtendedCBORWebToken] {
         var list = [certificate]
@@ -177,5 +168,29 @@ public class VaccinationDetailViewModel {
                 style: .alert
             )
         }
+    }
+
+    private func scanNextCertificate() {
+        firstly {
+            router.showScanner()
+        }
+        .then { result -> Promise<Void> in
+            switch result {
+            case .success(let qrCode):
+                return self.process(payload: qrCode)
+            case.failure(let error):
+                throw error
+            }
+        }
+        .done { [weak self] in
+            self?.delegate?.viewModelDidUpdate()
+        }
+        .catch { [weak self] error in
+            self?.delegate?.viewModelUpdateDidFailWithError(error)
+        }
+    }
+
+    private func showCertificate() {
+        router.showCertificateOverview()
     }
 }
