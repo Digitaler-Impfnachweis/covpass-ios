@@ -16,7 +16,7 @@ enum HCertError: Error {
 }
 
 class HCert {
-    func verify(message: CoseSign1Message, certificatePaths: [String]) throws -> Bool {
+    func verify(message: CoseSign1Message, certificatePaths: [String]) -> Bool {
         for path in certificatePaths {
             if let valid = try? verify(message: message, certificatePath: path), valid {
                 return true

@@ -39,6 +39,6 @@ class HCertTests: XCTestCase {
         }
         let cose1SignEncoder = CoseSign1Parser()
         let cosePayload = try! cose1SignEncoder.parse(decompressedPayload)!
-        XCTAssertTrue(try! sut.verify(message: cosePayload, certificatePath: "cert"))
+        XCTAssertTrue(sut.verify(message: cosePayload, certificatePaths: ["dtrust_demo-bmg_seal_ubirch-02"]))
     }
 }
