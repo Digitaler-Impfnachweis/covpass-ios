@@ -45,10 +45,9 @@ class PassAppInformationViewModel: AppInformationViewModelProtocol {
                 url: URL(string: "https://www.digitaler-impfnachweis-app.de/webviews/imprint/")!
             ),
 
-            // TODO: Needs a scene to display localized texts from bundle.
             webEntry(
                 title: "Open Source Lizenzen".localized,
-                url: URL(string: "https://www.digitaler-impfnachweis-app.de/")!
+                url: Bundle.commonBundle.url(forResource: "license", withExtension: "html")!
             )
         ]
     }()

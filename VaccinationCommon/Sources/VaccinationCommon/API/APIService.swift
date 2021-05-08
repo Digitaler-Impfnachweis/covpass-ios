@@ -15,14 +15,14 @@ public protocol APIServiceProtocol {
 
 public struct APIService: APIServiceProtocol {
     // TODO: get URL from config
-    private let url: String = "https://api.recertify.demo.ubirch.com/api/certify/v2/reissue/cbor"
+    private let url: String = XCConfiguration.value(String.self, forKey: "API_URL")
     private let contentType: String = "application/cbor+base45"
 
     // TODO: rename Encoder to Coder because an encoder does not decode
     private let encoder = Base45Encoder()
     private let sessionDelegate: URLSessionDelegate
 
-    public init(sessionDelegate: URLSessionDelegate = APIServiceDelegate(certFileName: "rsa-certify.demo.ubirch.com")) {
+    public init(sessionDelegate: URLSessionDelegate = APIServiceDelegate(certFileName: XCConfiguration.value(String.self, forKey: "TLS_CERTIFICATE_NAME"))) {
         self.sessionDelegate = sessionDelegate
     }
 

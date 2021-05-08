@@ -41,9 +41,12 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
     private let service: APIServiceProtocol
     private let parser: QRCoderProtocol
 
+    private let certificateSignatures: [String]
+
     public init(service: APIServiceProtocol, parser: QRCoderProtocol) {
         self.service = service
         self.parser = parser
+        certificateSignatures = XCConfiguration.value([String].self, forKey: "CA_CERTIFICATE_SIGNATURES")
     }
 
     public func getVaccinationCertificateList() -> Promise<VaccinationCertificateList> {
@@ -143,7 +146,7 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
             }
 
             guard let cosePayload = try CoseSign1Parser().parse(decompressedPayload),
-                  HCert().verify(message: cosePayload, certificatePaths: ["dtrust_demo-bmg_seal_ubirch-02"]) else {
+                  HCert().verify(message: cosePayload, certificatePaths: certificateSignatures) else {
                 throw HCertError.verifyError
             }
             return token
