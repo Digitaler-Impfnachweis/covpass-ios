@@ -171,7 +171,7 @@ class VaccinationDetailViewModel {
 
     private func scanNextCertificate() {
         firstly {
-            router.showProof()
+            router.showHowToScan()
         }
         .then {
             self.router.showScanner()

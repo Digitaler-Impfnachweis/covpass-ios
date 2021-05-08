@@ -8,7 +8,7 @@
 import UIKit
 import VaccinationUI
 
-class ProofViewController: UIViewController {
+class HowToScanViewController: UIViewController {
     // MARK: - IBOutlet
 
     @IBOutlet var headline: InfoHeaderView!
@@ -19,14 +19,14 @@ class ProofViewController: UIViewController {
 
     // MARK: - Properties
 
-    private(set) var viewModel: ProofViewModel
+    private(set) var viewModel: HowToScanViewModel
 
     // MARK: - Lifecycle
 
     @available(*, unavailable)
     required init?(coder _: NSCoder) { fatalError("init?(coder: NSCoder) not implemented yet") }
 
-    init(viewModel: ProofViewModel) {
+    init(viewModel: HowToScanViewModel) {
         self.viewModel = viewModel
         super.init(nibName: String(describing: Self.self), bundle: .module)
     }
@@ -83,7 +83,7 @@ class ProofViewController: UIViewController {
 
 // MARK: - CustomToolbarViewDelegate
 
-extension ProofViewController: CustomToolbarViewDelegate {
+extension HowToScanViewController: CustomToolbarViewDelegate {
     func customToolbarView(_: CustomToolbarView, didTap buttonType: ButtonItemType) {
         switch buttonType {
         case .navigationArrow:
@@ -98,7 +98,7 @@ extension ProofViewController: CustomToolbarViewDelegate {
 
 // MARK: - ModalInteractiveDismissibleProtocol
 
-extension ProofViewController: ModalInteractiveDismissibleProtocol {
+extension HowToScanViewController: ModalInteractiveDismissibleProtocol {
     func modalViewControllerDidDismiss() {
         viewModel.cancel()
     }

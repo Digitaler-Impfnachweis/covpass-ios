@@ -10,7 +10,7 @@ import UIKit
 import VaccinationUI
 
 protocol VaccinationDetailRouterProtocol: DialogRouterProtocol {
-    func showProof() -> Promise<Void>
+    func showHowToScan() -> Promise<Void>
     func showScanner() -> Promise<ScanResult>
     func showCertificateOverview()
     func showErrorDialog()
