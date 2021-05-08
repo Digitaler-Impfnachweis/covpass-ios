@@ -16,14 +16,14 @@ extension PMKError {
     static let cancellationHandled: Error = PromiseCancellationError.cancellationHandled
 }
 
-extension Resolver {
-    public func cancel() {
+public extension Resolver {
+    func cancel() {
         reject(PMKError.cancelled)
     }
 }
 
-extension Promise {
-    public func cancelled(_ body: @escaping () -> Void) -> Promise<T> {
+public extension Promise {
+    func cancelled(_ body: @escaping () -> Void) -> Promise<T> {
         Promise<T>.init { (resolver: Resolver<T>) in
             self.pipe { result in
                 switch result {
@@ -43,7 +43,7 @@ extension Promise {
     }
 
     @discardableResult
-    public func `catch`(_ body: @escaping (Error) -> Void) -> PMKFinalizer {
+    func `catch`(_ body: @escaping (Error) -> Void) -> PMKFinalizer {
         `catch`(policy: .allErrorsExceptCancellation) { error in
             switch error {
             case PromiseCancellationError.cancellationHandled:
@@ -55,13 +55,13 @@ extension Promise {
         }
     }
 
-    public func recover<U: Thenable>(_ body: @escaping (Error) -> U) -> Promise<T> where U.T == T {
+    func recover<U: Thenable>(_ body: @escaping (Error) -> U) -> Promise<T> where U.T == T {
         recover(policy: .allErrorsExceptCancellation, body)
     }
 }
 
-extension Thenable {
-    public var isCancelled: Bool {
+public extension Thenable {
+    var isCancelled: Bool {
         error?.localizedDescription == PMKError.cancelled.localizedDescription
     }
 }

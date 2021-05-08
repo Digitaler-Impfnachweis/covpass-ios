@@ -1,13 +1,13 @@
 //
 //  VaccinationRepository.swift
-//  
+//
 //
 //  Copyright © 2021 IBM. All rights reserved.
 //
 
 import Foundation
-import PromiseKit
 import Keychain
+import PromiseKit
 
 public protocol VaccinationRepositoryProtocol {
     // Return the vaccination certificate list
@@ -38,7 +38,6 @@ public protocol VaccinationRepositoryProtocol {
 }
 
 public struct VaccinationRepository: VaccinationRepositoryProtocol {
-
     private let service: APIServiceProtocol
     private let parser: QRCoderProtocol
 
@@ -79,10 +78,10 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
     }
 
     public func scanVaccinationCertificate(_ data: String) -> Promise<ExtendedCBORWebToken> {
-        return self.parser.parse(data).map({ certificate in
-            return ExtendedCBORWebToken(vaccinationCertificate: certificate, vaccinationQRCodeData: data)
-        }).then({ extendedCBORWebToken in
-            return self.getVaccinationCertificateList().then({ list -> Promise<Void> in
+        return parser.parse(data).map { certificate in
+            ExtendedCBORWebToken(vaccinationCertificate: certificate, vaccinationQRCodeData: data)
+        }.then { extendedCBORWebToken in
+            self.getVaccinationCertificateList().then { list -> Promise<Void> in
                 var certList = list
                 if certList.certificates.contains(where: { $0.vaccinationQRCodeData == data }) {
                     throw QRCodeError.qrCodeExists
@@ -95,34 +94,34 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
                 }
 
                 return self.saveVaccinationCertificateList(certList).asVoid()
-            })
-            .map({ return extendedCBORWebToken })
-            .then(self.reissueValidationCertificate) // TODO make this more resilient and hide errors that might occur (this will get handled on the start screen if it fails)
-        })
+            }
+            .map { extendedCBORWebToken }
+            .then(self.reissueValidationCertificate) // TODO: make this more resilient and hide errors that might occur (this will get handled on the start screen if it fails)
+        }
     }
 
     public func reissueValidationCertificate(_ certificate: ExtendedCBORWebToken) -> Promise<ExtendedCBORWebToken> {
-        return self.service.reissue(certificate.vaccinationQRCodeData).map({ validationCert in
+        return service.reissue(certificate.vaccinationQRCodeData).map { validationCert in
             var cert = certificate
             cert.validationQRCodeData = validationCert
             return cert
-        }).then({ cert in
-            return self.getVaccinationCertificateList().map({ list in
+        }.then { cert in
+            self.getVaccinationCertificateList().map { list in
                 var certList = list
-                certList.certificates = certList.certificates.map({
+                certList.certificates = certList.certificates.map {
                     if $0 == cert {
                         return cert
                     }
                     return $0
-                })
+                }
                 return certList
-            }).then(self.saveVaccinationCertificateList).map({ _ in
-                return cert
-            })
-        })
+            }.then(self.saveVaccinationCertificateList).map { _ in
+                cert
+            }
+        }
     }
 
     public func checkValidationCertificate(_ data: String) -> Promise<CBORWebToken> {
-        return self.parser.parse(data)
+        return parser.parse(data)
     }
 }

@@ -34,7 +34,7 @@ public class Name: Codable {
         case fnt
     }
 
-    required public init(from decoder: Decoder) throws {
+    public required init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         gn = try? values.decode(String.self, forKey: .gn)
         fn = try? values.decode(String.self, forKey: .fn)

@@ -62,7 +62,6 @@ class ValidationResultViewController: UIViewController {
     }
 
     private func configureImageView() {
-
         stackView.setCustomSpacing(.space_24, after: imageContainerView)
     }
 
@@ -92,7 +91,7 @@ extension ValidationResultViewController: ViewModelDelegate {
         updateViews()
     }
 
-    public func viewModelUpdateDidFailWithError(_ error: Error) {}
+    public func viewModelUpdateDidFailWithError(_: Error) {}
 }
 
 // MARK: - CustomToolbarViewDelegate

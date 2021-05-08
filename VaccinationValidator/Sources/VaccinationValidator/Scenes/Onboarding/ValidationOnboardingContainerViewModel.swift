@@ -18,8 +18,8 @@ class ValidationOnboardingContainerViewModel: OnboardingContainerViewModel {
 
     init(
         router: OnboardingRouterProtocol,
-        items: [OnboardingPageViewModel]) {
-
+        items: [OnboardingPageViewModel]
+    ) {
         self.router = router
         self.items = items
     }

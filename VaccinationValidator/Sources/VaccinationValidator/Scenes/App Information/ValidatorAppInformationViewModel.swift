@@ -1,13 +1,13 @@
 //
 //  ValidatorAppInformationViewModel.swift
-//  
+//
 //
 //  Copyright © 2021 IBM. All rights reserved.
 //
 
 import Foundation
-import VaccinationUI
 import VaccinationCommon
+import VaccinationUI
 
 class ValidatorAppInformationViewModel: AppInformationViewModelProtocol {
     // MARK: - Properties
@@ -33,20 +33,24 @@ class ValidatorAppInformationViewModel: AppInformationViewModelProtocol {
         [
             webEntry(
                 title: "Häufige Fragen".localized,
-                url: URL(string: "https://www.digitaler-impfnachweis-app.de/webviews/verification-app/faq/")!),
+                url: URL(string: "https://www.digitaler-impfnachweis-app.de/webviews/verification-app/faq/")!
+            ),
 
             webEntry(
                 title: "Datenschutzerklärung".localized,
-                url: URL(string: "https://www.digitaler-impfnachweis-app.de/webviews/verification-app/privacy/")!),
+                url: URL(string: "https://www.digitaler-impfnachweis-app.de/webviews/verification-app/privacy/")!
+            ),
 
             webEntry(
                 title: "Impressum".localized,
-                url: URL(string: "https://www.digitaler-impfnachweis-app.de/webviews/imprint/")!),
+                url: URL(string: "https://www.digitaler-impfnachweis-app.de/webviews/imprint/")!
+            ),
 
             // TODO: Needs a scene to display localized texts from bundle.
             webEntry(
                 title: "Open Source Lizenzen".localized,
-                url: URL(string: "https://www.digitaler-impfnachweis-app.de/")!)
+                url: URL(string: "https://www.digitaler-impfnachweis-app.de/")!
+            )
         ]
     }()
 

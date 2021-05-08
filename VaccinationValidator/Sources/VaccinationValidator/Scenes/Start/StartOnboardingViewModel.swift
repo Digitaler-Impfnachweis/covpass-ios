@@ -50,4 +50,3 @@ class StartOnboardingViewModel: BaseViewModel {
         router.showNextScene()
     }
 }
-

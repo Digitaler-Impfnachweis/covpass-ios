@@ -5,8 +5,8 @@
 //  Copyright © 2021 IBM. All rights reserved.
 //
 
-import UIKit
 import PromiseKit
+import UIKit
 import VaccinationUI
 
 class VaccinationDetailRouter: VaccinationDetailRouterProtocol, DialogRouterProtocol {

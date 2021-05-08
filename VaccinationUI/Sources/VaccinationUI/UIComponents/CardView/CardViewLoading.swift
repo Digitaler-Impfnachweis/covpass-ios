@@ -19,7 +19,7 @@ public class CardViewLoading: XibView {
 
     // MARK: - Lifecycle
 
-    public override func initView() {
+    override public func initView() {
         super.initView()
         stackView.spacing = .space_12
         loadingIndicator.isHidden = true

@@ -1,17 +1,16 @@
 //
 //  VaccinationDetailViewModel.swift
-//  
+//
 //
 //  Copyright © 2021 IBM. All rights reserved.
 //
 
-import UIKit
-import VaccinationUI
-import VaccinationCommon
 import PromiseKit
+import UIKit
+import VaccinationCommon
+import VaccinationUI
 
 class VaccinationDetailViewModel {
-
     private let router: VaccinationDetailRouterProtocol
     private let repository: VaccinationRepositoryProtocol
     private var certificates: [ExtendedCBORWebToken]
@@ -22,8 +21,8 @@ class VaccinationDetailViewModel {
     init(
         router: VaccinationDetailRouterProtocol,
         repository: VaccinationRepositoryProtocol,
-        certificates: [ExtendedCBORWebToken]) {
-
+        certificates: [ExtendedCBORWebToken]
+    ) {
         self.router = router
         self.repository = repository
         self.certificates = certificates.sorted(by: { $0.vaccinationCertificate.hcert.dgc.v.first?.dn ?? 0 < $1.vaccinationCertificate.hcert.dgc.v.first?.dn ?? 0 })
@@ -32,7 +31,7 @@ class VaccinationDetailViewModel {
     // MARK: - Actions
 
     var fullImmunization: Bool {
-        certificates.map({ $0.vaccinationCertificate.hcert.dgc.fullImmunization }).first(where: { $0 }) ?? false
+        certificates.map { $0.vaccinationCertificate.hcert.dgc.fullImmunization }.first(where: { $0 }) ?? false
     }
 
     var isFavorite: Bool {
@@ -52,25 +51,25 @@ class VaccinationDetailViewModel {
         guard let date = certificates.first?.vaccinationCertificate.hcert.dgc.dob else { return "" }
         return DateUtils.displayDateFormatter.string(from: date)
     }
-    
+
     var immunizationIcon: UIImage? {
         UIImage(named: fullImmunization ? "status_full" : "status_partial", in: UIConstants.bundle, compatibleWith: nil)
     }
-    
+
     var immunizationTitle: String {
         fullImmunization ? "vaccination_certificate_detail_view_complete_title".localized : String(format: "vaccination_certificate_detail_view_incomplete_title".localized, 1, 2)
     }
-    
+
     var immunizationBody: String {
         fullImmunization ? "vaccination_certificate_detail_view_complete_message".localized : "vaccination_certificate_detail_view_incomplete_message".localized
     }
-    
+
     var immunizationButton: String {
         fullImmunization ? "vaccination_certificate_detail_view_complete_action_button_title".localized : "vaccination_certificate_detail_view_incomplete_action_button_title".localized
     }
 
     var vaccinations: [VaccinationViewModel] {
-        certificates.map({ VaccinationViewModel(token: $0.vaccinationCertificate) })
+        certificates.map { VaccinationViewModel(token: $0.vaccinationCertificate) }
     }
 
     func immunizationButtonTapped() {
@@ -120,7 +119,7 @@ class VaccinationDetailViewModel {
             return certList
         }
         .then { cert in
-            return self.repository.saveVaccinationCertificateList(cert).asVoid()
+            self.repository.saveVaccinationCertificateList(cert).asVoid()
         }
     }
 
@@ -129,10 +128,10 @@ class VaccinationDetailViewModel {
             repository.scanVaccinationCertificate(payload)
         }
         .then { cert in
-            return self.repository.getVaccinationCertificateList().then({ list -> Promise<Void> in
+            self.repository.getVaccinationCertificateList().then { list -> Promise<Void> in
                 self.certificates = self.findCertificatePair(cert, list.certificates).sorted(by: { $0.vaccinationCertificate.hcert.dgc.v.first?.dn ?? 0 < $1.vaccinationCertificate.hcert.dgc.v.first?.dn ?? 0 })
                 return Promise.value(())
-            })
+            }
         }
     }
 
@@ -176,9 +175,9 @@ class VaccinationDetailViewModel {
         }
         .then { result -> Promise<Void> in
             switch result {
-            case .success(let qrCode):
+            case let .success(qrCode):
                 return self.process(payload: qrCode)
-            case.failure(let error):
+            case let .failure(error):
                 throw error
             }
         }

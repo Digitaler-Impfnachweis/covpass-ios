@@ -25,15 +25,15 @@ class OnboardingViewModel: BaseViewModel {
     var info: String {
         "validation_onboarding_body".localized
     }
-    
+
     var secureTitle: String {
         "validation_onboarding_secure_title".localized
     }
-    
+
     var secureText: String {
         "validation_onboarding_secure_body".localized
     }
-    
+
     var navigationButtonTitle: String {
         "validation_onboarding_start".localized
     }

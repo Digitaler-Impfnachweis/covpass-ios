@@ -1,6 +1,6 @@
 //
 //  NoCertificateCollectionViewCell.swift
-//  
+//
 //
 //  Copyright © 2021 IBM. All rights reserved.
 //
@@ -28,15 +28,15 @@ public class NoCertificateCollectionViewCell: CardCollectionViewCell {
 
     // MARK: - Public Properties
 
-    public override var viewModel: CardViewModel? {
+    override public var viewModel: CardViewModel? {
         didSet {
             updateView()
         }
     }
-    
+
     // MARK: - Lifecycle
-    
-    public override func awakeFromNib() {
+
+    override public func awakeFromNib() {
         super.awakeFromNib()
 
         containerView.layoutMargins = .init(

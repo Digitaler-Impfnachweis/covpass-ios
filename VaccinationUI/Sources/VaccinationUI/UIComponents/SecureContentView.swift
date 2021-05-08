@@ -26,7 +26,7 @@ public class SecureContentView: XibView {
 
     //  MARK: - Lifecycle
 
-    public override func initView() {
+    override public func initView() {
         super.initView()
         stackView.spacing = .space_16
         textStackView.spacing = .space_2

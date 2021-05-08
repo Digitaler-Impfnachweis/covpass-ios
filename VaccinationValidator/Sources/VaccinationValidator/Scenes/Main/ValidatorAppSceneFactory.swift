@@ -6,8 +6,8 @@
 //
 
 import UIKit
-import VaccinationUI
 import VaccinationCommon
+import VaccinationUI
 
 public struct ValidatorAppSceneFactory: SceneFactory {
     // MARK: - Properties

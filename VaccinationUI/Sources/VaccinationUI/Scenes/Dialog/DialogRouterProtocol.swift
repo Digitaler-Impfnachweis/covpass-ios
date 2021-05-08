@@ -5,8 +5,8 @@
 //  Copyright © 2021 IBM. All rights reserved.
 //
 
-import UIKit
 import PromiseKit
+import UIKit
 
 public protocol DialogRouterProtocol: RouterProtocol {
     func showDialog(
@@ -17,13 +17,13 @@ public protocol DialogRouterProtocol: RouterProtocol {
     )
 }
 
-extension DialogRouterProtocol {
-    public func showDialog(
+public extension DialogRouterProtocol {
+    func showDialog(
         title: String?,
         message: String?,
         actions: [DialogAction],
-        style: UIAlertController.Style) {
-
+        style: UIAlertController.Style
+    ) {
         sceneCoordinator.present(
             AlertSceneFactory(title: title, message: message, actions: actions, style: style)
         )

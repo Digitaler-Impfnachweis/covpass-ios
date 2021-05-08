@@ -5,21 +5,21 @@
 //  Copyright © 2021 IBM. All rights reserved.
 //
 
-import UIKit
 import PromiseKit
 import Scanner
+import UIKit
 
 public typealias ScanResult = Swift.Result<String, ScanError>
 
 public class ScanViewModel: CancellableViewModelProtocol {
-    // MARK - Properties
+    // MARK: - Properties
 
     let resolver: Resolver<ScanResult>
 
-    // MARK - Lifecycle
+    // MARK: - Lifecycle
 
     public init(resolvable: Resolver<ScanResult>) {
-        self.resolver = resolvable
+        resolver = resolvable
     }
 
     public func onResult(_ result: ScanResult) {

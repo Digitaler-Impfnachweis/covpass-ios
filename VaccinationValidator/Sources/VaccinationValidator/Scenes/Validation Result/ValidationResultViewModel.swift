@@ -5,8 +5,8 @@
 //  Copyright © 2021 IBM. All rights reserved.
 //
 
-import UIKit
 import PromiseKit
+import UIKit
 import VaccinationCommon
 import VaccinationUI
 
@@ -15,7 +15,7 @@ class ValidationResultViewModel: BaseViewModel, CancellableViewModelProtocol {
 
     weak var delegate: ViewModelDelegate?
     let router: ValidationResultRouterProtocol
-    private let parser: QRCoder = QRCoder()
+    private let parser = QRCoder()
     private var certificate: CBORWebToken?
 
     private var immunizationState: ImmunizationState {
@@ -99,7 +99,8 @@ class ValidationResultViewModel: BaseViewModel, CancellableViewModelProtocol {
 
     init(
         router: ValidationResultRouterProtocol,
-        certificate: CBORWebToken?) {
+        certificate: CBORWebToken?
+    ) {
         self.router = router
         self.certificate = certificate
     }
@@ -151,9 +152,9 @@ class ValidationResultViewModel: BaseViewModel, CancellableViewModelProtocol {
 
     private func payloadFromScannerResult(_ result: ScanResult) throws -> String {
         switch result {
-        case .success(let payload):
+        case let .success(payload):
             return payload
-        case .failure(let error):
+        case let .failure(error):
             throw error
         }
     }
@@ -162,4 +163,3 @@ class ValidationResultViewModel: BaseViewModel, CancellableViewModelProtocol {
         return certificate.fullImmunizationValid ? .full : .partial
     }
 }
-

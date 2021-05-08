@@ -1,6 +1,6 @@
 //
 //  APIService.swift
-//  
+//
 //
 //  Copyright © 2021 IBM. All rights reserved.
 //
@@ -14,12 +14,11 @@ public protocol APIServiceProtocol {
 }
 
 public struct APIService: APIServiceProtocol {
-
-    // TODO get URL from config
+    // TODO: get URL from config
     private let url: String = "https://api.recertify.demo.ubirch.com/api/certify/v2/reissue/cbor"
     private let contentType: String = "application/cbor+base45"
 
-    // TODO rename Encoder to Coder because an encoder does not decode
+    // TODO: rename Encoder to Coder because an encoder does not decode
     private let encoder = Base45Encoder()
 
     public init() {}
@@ -42,7 +41,7 @@ public struct APIService: APIServiceProtocol {
             request.httpBody = decompressedPayload
             request.addValue(contentType, forHTTPHeaderField: "Accept")
 
-            URLSession.shared.dataTask(with: request) { (data, response, error) in
+            URLSession.shared.dataTask(with: request) { data, response, error in
                 // Check for Error
                 if let error = error {
                     seal.reject(error)
@@ -52,7 +51,7 @@ public struct APIService: APIServiceProtocol {
                     seal.reject(ApplicationError.unknownError)
                     return
                 }
-                guard (200...299).contains(response.statusCode) else {
+                guard (200 ... 299).contains(response.statusCode) else {
                     print(String(data: data ?? Data(), encoding: .utf8) ?? "")
                     seal.reject(ApplicationError.unknownError)
                     return

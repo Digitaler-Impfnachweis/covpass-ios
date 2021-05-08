@@ -1,40 +1,40 @@
 //
 //  DefaultCertificateViewModel.swift
-//  
+//
 //
 //  Copyright © 2021 IBM. All rights reserved.
 //
 
 import Foundation
-import UIKit
-import VaccinationUI
-import VaccinationCommon
 import PromiseKit
+import UIKit
+import VaccinationCommon
+import VaccinationUI
 
 class DefaultCertificateViewModel: CertificateViewModel {
-
     // MARK: - Private Properties
 
     private let router: CertificateRouterProtocol
     private let repository: VaccinationRepositoryProtocol
 
     // MARK: - Lifecycle
-    
+
     init(
         router: CertificateRouterProtocol,
-        repository: VaccinationRepositoryProtocol) {
+        repository: VaccinationRepositoryProtocol
+    ) {
         self.router = router
         self.repository = repository
     }
-    
+
     // MARK: - Properties
-    
+
     weak var delegate: CertificateViewModelDelegate?
     var certificateViewModels = [CardViewModel]()
     var certificateList = VaccinationCertificateList(certificates: [])
     var matchedCertificates: [ExtendedCBORWebToken] {
-        let certs = self.sortFavorite(certificateList.certificates, favorite: certificateList.favoriteCertificateId ?? "")
-        return self.matchCertificates(certs)
+        let certs = sortFavorite(certificateList.certificates, favorite: certificateList.favoriteCertificateId ?? "")
+        return matchCertificates(certs)
     }
 
     // MARK: - Actions
@@ -61,7 +61,7 @@ class DefaultCertificateViewModel: CertificateViewModel {
                 return CertificateCardViewModel(token: cert, isFavorite: isFavorite, onAction: self.onAction, onFavorite: self.onFavorite)
             }
         }
-        .catch { error in
+        .catch { _ in
             self.certificateViewModels = [NoCertificateCardViewModel()]
         }
         .finally {
@@ -83,19 +83,19 @@ class DefaultCertificateViewModel: CertificateViewModel {
 
     func scanCertificate() {
         firstly {
-           router.showProof()
+            router.showProof()
         }
         .then {
-           self.router.scanQRCode()
+            self.router.scanQRCode()
         }
         .map { result in
-           try self.payloadFromScannerResult(result)
+            try self.payloadFromScannerResult(result)
         }
         .then { payload in
-           self.process(payload: payload)
+            self.process(payload: payload)
         }
         .ensure {
-           self.loadCertificates()
+            self.loadCertificates()
         }
         .done { certificate in
             self.showCertificate(certificate)
@@ -119,7 +119,7 @@ class DefaultCertificateViewModel: CertificateViewModel {
         guard let favoriteCert = certificates.first(where: { $0.vaccinationCertificate.hcert.dgc.v.first?.ci == favorite }) else { return certificates }
         var list = [ExtendedCBORWebToken]()
         list.append(favoriteCert)
-        list.append(contentsOf: certificates.filter({ $0 != favoriteCert }))
+        list.append(contentsOf: certificates.filter { $0 != favoriteCert })
         return list
     }
 
@@ -167,9 +167,9 @@ class DefaultCertificateViewModel: CertificateViewModel {
 
     private func payloadFromScannerResult(_ result: ScanResult) throws -> String {
         switch result {
-        case .success(let payload):
+        case let .success(payload):
             return payload
-        case .failure(let error):
+        case let .failure(error):
             throw error
         }
     }
@@ -182,13 +182,13 @@ class DefaultCertificateViewModel: CertificateViewModel {
         .done {
             self.delegate?.viewModelDidUpdateFavorite()
         }
-        .catch{ error in
+        .catch { error in
             self.delegate?.viewModelUpdateDidFailWithError(error)
         }
     }
 
     private func onAction(_ certificate: ExtendedCBORWebToken) {
-        self.showCertificate(certificate)
+        showCertificate(certificate)
     }
 
     private func showCertificates(_ certificates: [ExtendedCBORWebToken]) {

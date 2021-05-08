@@ -1,6 +1,6 @@
 //
 //  PassAppInformationViewModel.swift
-//  
+//
 //
 //  Copyright © 2021 IBM. All rights reserved.
 //
@@ -32,20 +32,24 @@ class PassAppInformationViewModel: AppInformationViewModelProtocol {
         [
             webEntry(
                 title: "Häufige Fragen".localized,
-                url: URL(string: "https://www.digitaler-impfnachweis-app.de/webviews/client-app/faq/")!),
+                url: URL(string: "https://www.digitaler-impfnachweis-app.de/webviews/client-app/faq/")!
+            ),
 
             webEntry(
                 title: "Datenschutzerklärung".localized,
-                url: URL(string: "https://www.digitaler-impfnachweis-app.de/webviews/client-app/privacy/")!),
+                url: URL(string: "https://www.digitaler-impfnachweis-app.de/webviews/client-app/privacy/")!
+            ),
 
             webEntry(
                 title: "Impressum".localized,
-                url: URL(string: "https://www.digitaler-impfnachweis-app.de/webviews/imprint/")!),
+                url: URL(string: "https://www.digitaler-impfnachweis-app.de/webviews/imprint/")!
+            ),
 
-            // TODO: Needs a scene to display localized texts from bundle. 
+            // TODO: Needs a scene to display localized texts from bundle.
             webEntry(
                 title: "Open Source Lizenzen".localized,
-                url: URL(string: "https://www.digitaler-impfnachweis-app.de/")!)
+                url: URL(string: "https://www.digitaler-impfnachweis-app.de/")!
+            )
         ]
     }()
 

@@ -1,6 +1,6 @@
 //
 //  HealthCertificateClaim.swift
-//  
+//
 //
 //  Copyright © 2021 IBM. All rights reserved.
 //
@@ -25,5 +25,3 @@ public struct HealthCertificateClaim: Codable {
         try container.encode(dgc, forKey: .dgc)
     }
 }
-
-

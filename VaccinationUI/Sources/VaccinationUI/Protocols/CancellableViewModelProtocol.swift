@@ -15,8 +15,8 @@ public protocol CancellableViewModelProtocol {
     func cancel()
 }
 
-extension CancellableViewModelProtocol {
-    public func isCancellable() -> Bool {
+public extension CancellableViewModelProtocol {
+    func isCancellable() -> Bool {
         true
     }
 }

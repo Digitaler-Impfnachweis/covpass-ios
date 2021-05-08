@@ -6,9 +6,9 @@
 //
 
 import Foundation
+import Scanner
 import UIKit
 import VaccinationUI
-import Scanner
 
 class ValidatorViewController: UIViewController {
     // MARK: - IBOutlet
@@ -46,9 +46,9 @@ class ValidatorViewController: UIViewController {
         super.viewWillDisappear(animated)
         navigationController?.setNavigationBarHidden(false, animated: animated)
     }
-    
+
     // MARK: - Methods
-    
+
     private func setupHeaderView() {
         headerView.attributedTitleText = viewModel.title.styledAs(.header_2)
         headerView.image = .help

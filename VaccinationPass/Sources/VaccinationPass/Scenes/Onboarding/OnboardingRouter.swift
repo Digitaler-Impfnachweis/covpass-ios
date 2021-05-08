@@ -1,14 +1,14 @@
 //
 //  OnboardingRouter.swift
-//  
+//
 //
 //  Copyright © 2021 IBM. All rights reserved.
 //
 
 import Foundation
 import UIKit
-import VaccinationUI
 import VaccinationCommon
+import VaccinationUI
 
 struct OnboardingRouter: OnboardingRouterProtocol {
     // MARK: - Properties

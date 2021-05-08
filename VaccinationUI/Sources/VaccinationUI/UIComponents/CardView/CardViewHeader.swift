@@ -1,6 +1,6 @@
 //
 //  CardViewHeader.swift
-//  
+//
 //
 //  Copyright © 2021 IBM. All rights reserved.
 //
@@ -16,20 +16,21 @@ public class CardViewHeader: XibView {
     @IBOutlet public var subtitleStackView: UIStackView!
     @IBOutlet public var subtitleLabel: UILabel!
     @IBOutlet public var leftButton: UIButton!
-    
+
     // MARK: - Properties
-    
+
     public var action: (() -> Void)?
     public var buttonImage: UIImage? {
         didSet { leftButton.setImage(buttonImage, for: .normal) }
     }
+
     public var buttonTint: UIColor? {
         didSet { leftButton.tintColor = buttonTint ?? .black }
     }
 
     // MARK: - Lifecycle
 
-    public override func initView() {
+    override public func initView() {
         super.initView()
         stackView.spacing = .space_24
         subtitleStackView.spacing = .space_12
@@ -37,7 +38,7 @@ public class CardViewHeader: XibView {
 
     // MARK: - IBAction
 
-    @IBAction public func infoButtonPressed(button: UIButton) {
+    @IBAction public func infoButtonPressed(button _: UIButton) {
         action?()
     }
 }

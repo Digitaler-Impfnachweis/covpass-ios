@@ -1,6 +1,6 @@
 //
 //  CoseSign1ParserTests.swift
-//  
+//
 //
 //  Copyright © 2021 IBM. All rights reserved.
 //
@@ -53,9 +53,9 @@ class CoseSign1ParserTests: XCTestCase {
         }
         let mappedDictionary = sut.map(cborObject: try? CBOR.decode(message.payload))
 
-        XCTAssertEqual(mappedDictionary?["4"] as? UInt64, 1620652117)
+        XCTAssertEqual(mappedDictionary?["4"] as? UInt64, 1_620_652_117)
         XCTAssertEqual(mappedDictionary?["1"] as? String, "DE")
-        XCTAssertEqual(mappedDictionary?["6"] as? UInt64, 1619167131)
+        XCTAssertEqual(mappedDictionary?["6"] as? UInt64, 1_619_167_131)
     }
 }
 

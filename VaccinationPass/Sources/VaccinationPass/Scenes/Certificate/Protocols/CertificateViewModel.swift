@@ -5,10 +5,10 @@
 //  Copyright © 2021 IBM. All rights reserved.
 //
 
-import UIKit
-import VaccinationUI
-import VaccinationCommon
 import PromiseKit
+import UIKit
+import VaccinationCommon
+import VaccinationUI
 
 protocol CertificateViewModel {
     var delegate: CertificateViewModelDelegate? { get set }

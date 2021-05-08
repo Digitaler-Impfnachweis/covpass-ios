@@ -1,6 +1,6 @@
 //
 //  ProofViewController.swift
-//  
+//
 //
 //  Copyright © 2021 IBM. All rights reserved.
 //
@@ -56,7 +56,7 @@ class ProofViewController: UIViewController {
         }
         headline.image = .close
     }
-    
+
     private func configureActionView() {
         actionView.attributedTitleText = viewModel.actionTitle.styledAs(.header_3)
         actionView.action = { [weak self] in
@@ -72,7 +72,7 @@ class ProofViewController: UIViewController {
         descriptionText.layoutMargins.top = .space_18
         descriptionText.layoutMargins.bottom = .space_40
     }
-    
+
     private func configureToolbarView() {
         toolbarView.state = .confirm(viewModel.startButtonTitle)
         toolbarView.setUpLeftButton(leftButtonItem: .navigationArrow)

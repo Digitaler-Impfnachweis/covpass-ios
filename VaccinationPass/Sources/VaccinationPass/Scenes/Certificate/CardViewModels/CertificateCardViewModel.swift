@@ -6,8 +6,8 @@
 //
 
 import UIKit
-import VaccinationUI
 import VaccinationCommon
+import VaccinationUI
 
 let NO_INTERNET = false
 let ERROR = false
@@ -27,7 +27,7 @@ struct CertificateCardViewModel: CertificateCardViewModelProtocol {
 
     init(token: ExtendedCBORWebToken, isFavorite: Bool, onAction: @escaping (ExtendedCBORWebToken) -> Void, onFavorite: @escaping (String) -> Void) {
         self.token = token
-        self.certificateIsFavorite = isFavorite
+        certificateIsFavorite = isFavorite
         self.onAction = onAction
         self.onFavorite = onFavorite
     }

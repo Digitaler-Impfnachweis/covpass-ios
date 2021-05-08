@@ -1,6 +1,6 @@
 //
 //  CustomToolbarViewTests.swift
-// 
+//
 //
 //  Copyright © 2021 IBM. All rights reserved.
 //
@@ -158,7 +158,7 @@ class CustomToolbarViewTests: XCTestCase {
         XCTAssertEqual(sut.primaryButton.innerButton.accessibilityLabel, "primaryLabel")
         XCTAssertEqual(sut.primaryButton.innerButton.accessibilityHint, "primaryHint")
         XCTAssertEqual(sut.primaryButton.innerButton.accessibilityTraits, [UIAccessibilityTraits.button,
-                                                                            UIAccessibilityTraits.notEnabled])
+                                                                           UIAccessibilityTraits.notEnabled])
 
         XCTAssertEqual(sut.leftButton.accessibilityLabel, "leftLabel")
         XCTAssertEqual(sut.leftButton.accessibilityHint, "leftHint")

@@ -1,6 +1,6 @@
 //
 //  StartOnboardingViewModel.swift
-//  
+//
 //
 //  Copyright © 2021 IBM. All rights reserved.
 //
@@ -25,15 +25,15 @@ class StartOnboardingViewModel: BaseViewModel {
     var info: String {
         "start_onboarding_message".localized
     }
-    
+
     var secureTitle: String {
         "start_onboarding_secure_title".localized
     }
-    
+
     var secureText: String {
         "start_onboarding_secure_message".localized
     }
-    
+
     var navigationButtonTitle: String {
         "start_onboarding_button_title".localized
     }

@@ -1,6 +1,6 @@
 //
 //  StartOnboardingViewController.swift
-//  
+//
 //
 //  Copyright © 2021 IBM. All rights reserved.
 //
@@ -17,7 +17,7 @@ class StartOnboardingViewController: UIViewController {
     @IBOutlet var headline: PlainLabel!
     @IBOutlet var subtitle: PlainLabel!
     @IBOutlet var secureContentView: SecureContentView!
-    
+
     // MARK: - Properties
 
     private(set) var viewModel: StartOnboardingViewModel
@@ -58,7 +58,7 @@ class StartOnboardingViewController: UIViewController {
         subtitle.attributedText = viewModel.info.styledAs(.subheader_1)
         subtitle.layoutMargins = .init(top: .space_12, left: .space_24, bottom: .space_40, right: .space_24)
     }
-    
+
     private func configureActionButton() {
         actionButton.title = viewModel.navigationButtonTitle
         actionButton.style = .primary
@@ -66,7 +66,7 @@ class StartOnboardingViewController: UIViewController {
             self?.viewModel.showNextScene()
         }
     }
-    
+
     private func configureSecureContentView() {
         secureContentView.titleAttributedString = viewModel.secureTitle.styledAs(.header_3)
         secureContentView.bodyAttributedString = viewModel.secureText.styledAs(.body).colored(.onBackground70)

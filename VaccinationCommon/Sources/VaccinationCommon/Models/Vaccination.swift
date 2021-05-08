@@ -1,6 +1,6 @@
 //
 //  Vaccination.swift
-//  
+//
 //
 //  Copyright © 2021 IBM. All rights reserved.
 //
@@ -54,7 +54,7 @@ public class Vaccination: Codable {
         case nd
     }
 
-    required public init(from decoder: Decoder) throws {
+    public required init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         tg = try values.decode(String.self, forKey: .tg)
         vp = try values.decode(String.self, forKey: .vp)
@@ -63,8 +63,9 @@ public class Vaccination: Codable {
         dn = try values.decode(Int.self, forKey: .dn)
         sd = try values.decode(Int.self, forKey: .sd)
         guard let dtDateString = try? values.decode(String.self, forKey: .dt),
-           let dtDate = DateUtils.vaccinationDateFormatter.date(from: dtDateString) else {
-            // TODO use other error
+              let dtDate = DateUtils.vaccinationDateFormatter.date(from: dtDateString)
+        else {
+            // TODO: use other error
             throw ApplicationError.missingData("Date String")
         }
         dt = dtDate
