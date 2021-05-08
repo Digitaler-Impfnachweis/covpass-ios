@@ -57,10 +57,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		210116F72646D18100B9E8FF /* release-rki.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "release-rki.xcconfig"; sourceTree = "<group>"; };
+		210116F72646D18100B9E8FF /* rki-release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "rki-release.xcconfig"; sourceTree = "<group>"; };
 		210116F82646D18100B9E8FF /* debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = debug.xcconfig; sourceTree = "<group>"; };
 		2101178C2646E86F00B9E8FF /* debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = debug.xcconfig; sourceTree = "<group>"; };
-		2101178D2646E86F00B9E8FF /* release-rki.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "release-rki.xcconfig"; sourceTree = "<group>"; };
+		2101178D2646E86F00B9E8FF /* rki-release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "rki-release.xcconfig"; sourceTree = "<group>"; };
 		381442092646ED5800207CFA /* release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = release.xcconfig; sourceTree = "<group>"; };
 		3814420B2646ED7600207CFA /* release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = release.xcconfig; sourceTree = "<group>"; };
 		6561AB43260CB02C00D3A7FF /* VaccinationUI */ = {isa = PBXFileReference; lastKnownFileType = folder; path = VaccinationUI; sourceTree = "<group>"; };
@@ -211,7 +211,7 @@
 			children = (
 				381442092646ED5800207CFA /* release.xcconfig */,
 				210116F82646D18100B9E8FF /* debug.xcconfig */,
-				210116F72646D18100B9E8FF /* release-rki.xcconfig */,
+				210116F72646D18100B9E8FF /* rki-release.xcconfig */,
 				88AB2A3825FA40CE00D4EA52 /* Assets.xcassets */,
 				88AB2A3B25FA40CE00D4EA52 /* AppDelegate.swift */,
 				6598186A260CB44D00776F70 /* Main.storyboard */,
@@ -244,7 +244,7 @@
 			children = (
 				3814420B2646ED7600207CFA /* release.xcconfig */,
 				2101178C2646E86F00B9E8FF /* debug.xcconfig */,
-				2101178D2646E86F00B9E8FF /* release-rki.xcconfig */,
+				2101178D2646E86F00B9E8FF /* rki-release.xcconfig */,
 				88AB2A4325FA40CE00D4EA52 /* Assets.xcassets */,
 				88AB2A4625FA40CE00D4EA52 /* AppDelegate.swift */,
 				65981872260CB45D00776F70 /* Main.storyboard */,
@@ -735,7 +735,7 @@
 		};
 		65D6D50125F8B8FC000CB339 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 210116F72646D18100B9E8FF /* release-rki.xcconfig */;
+			baseConfigurationReference = 210116F72646D18100B9E8FF /* rki-release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
@@ -893,7 +893,7 @@
 		};
 		65D6D53825F8B94E000CB339 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2101178D2646E86F00B9E8FF /* release-rki.xcconfig */;
+			baseConfigurationReference = 2101178D2646E86F00B9E8FF /* rki-release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
