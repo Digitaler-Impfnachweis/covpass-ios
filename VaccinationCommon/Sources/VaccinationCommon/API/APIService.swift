@@ -21,8 +21,11 @@ public struct APIService: APIServiceProtocol {
 
     // TODO rename Encoder to Coder because an encoder does not decode
     private let encoder = Base45Encoder()
+    private let sessionDelegate: URLSessionDelegate
 
-    public init() {}
+    public init(sessionDelegate: URLSessionDelegate = APIServiceDelegate(certFileName: "rsa-certify.demo.ubirch.com")) {
+        self.sessionDelegate = sessionDelegate
+    }
 
     public func reissue(_ vaccinationQRCode: String) -> Promise<String> {
         return Promise { seal in
@@ -43,7 +46,7 @@ public struct APIService: APIServiceProtocol {
             request.addValue(contentType, forHTTPHeaderField: "Accept")
 
             let session = URLSession(configuration: URLSessionConfiguration.ephemeral,
-                                     delegate: APIServiceDelegate(),
+                                     delegate: sessionDelegate,
                                      delegateQueue: nil)
 
             session.dataTask(with: request) { (data, response, error) in
@@ -73,8 +76,14 @@ public struct APIService: APIServiceProtocol {
     }
 }
 
-class APIServiceDelegate: NSObject, URLSessionDelegate {
-    func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
+public class APIServiceDelegate: NSObject, URLSessionDelegate {
+    private var certFileName: String
+
+    public init(certFileName: String) {
+        self.certFileName = certFileName
+    }
+
+    public func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
         if challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodServerTrust {
             if let serverTrust = challenge.protectionSpace.serverTrust {
                 var result = SecTrustResultType.invalid
@@ -89,7 +98,7 @@ class APIServiceDelegate: NSObject, URLSessionDelegate {
                     let size = CFDataGetLength(serverCertificateData)
                     if let dataBytes = CFDataGetBytePtr(serverCertificateData) {
                         let cert1 = NSData(bytes: dataBytes, length: size)
-                        if let cerFilePath = Bundle.module.url(forResource: "rsa-certify.demo.ubirch.com", withExtension: "der"),
+                        if let cerFilePath = Bundle.module.url(forResource: certFileName, withExtension: "der"),
                            let cert2 = try? Data(contentsOf: cerFilePath) {
                             if cert1.isEqual(to: cert2) {
                                 completionHandler(URLSession.AuthChallengeDisposition.useCredential, URLCredential(trust:serverTrust))
