@@ -1,5 +1,5 @@
 //
-//  ProofRouterProtocol.swift
+//  HowToScanRouterProtocol.swift
 //
 //
 //  Copyright © 2021 IBM. All rights reserved.
@@ -7,6 +7,6 @@
 
 import UIKit
 
-public protocol ProofRouterProtocol: RouterProtocol {
+public protocol HowToScanRouterProtocol: RouterProtocol {
     func showMoreInformation()
 }

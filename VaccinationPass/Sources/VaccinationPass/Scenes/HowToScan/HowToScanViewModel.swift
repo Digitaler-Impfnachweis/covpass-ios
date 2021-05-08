@@ -9,11 +9,11 @@ import PromiseKit
 import UIKit
 import VaccinationUI
 
-class ProofViewModel: BaseViewModel, CancellableViewModelProtocol {
+class HowToScanViewModel: BaseViewModel, CancellableViewModelProtocol {
     // MARK: - Properties
 
     weak var delegate: ViewModelDelegate?
-    let router: ProofRouterProtocol
+    let router: HowToScanRouterProtocol
     let resolver: Resolver<Void>
 
     var image: UIImage? {
@@ -37,7 +37,7 @@ class ProofViewModel: BaseViewModel, CancellableViewModelProtocol {
     // MARK: - Lifecycle
 
     init(
-        router: ProofRouterProtocol,
+        router: HowToScanRouterProtocol,
         resolvable: Resolver<Void>
     ) {
         self.router = router

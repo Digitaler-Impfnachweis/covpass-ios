@@ -10,7 +10,7 @@ import UIKit
 import VaccinationCommon
 import VaccinationUI
 
-class ProofRouter: ProofRouterProtocol {
+class HowToScanRouter: HowToScanRouterProtocol {
     // MARK: - Properties
 
     let sceneCoordinator: SceneCoordinator

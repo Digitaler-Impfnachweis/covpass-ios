@@ -180,7 +180,10 @@ class VaccinationDetailViewModel {
 
     private func scanNextCertificate() {
         firstly {
-            router.showScanner()
+            router.showHowToScan()
+        }
+        .then {
+            self.router.showScanner()
         }
         .then { result -> Promise<Void> in
             switch result {

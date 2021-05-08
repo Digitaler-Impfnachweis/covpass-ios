@@ -13,7 +13,7 @@ import VaccinationUI
 
 protocol CertificateRouterProtocol: RouterProtocol {
     func showCertificates(_ certificates: [ExtendedCBORWebToken])
-    func showProof() -> Promise<Void>
+    func showHowToScan() -> Promise<Void>
     func scanQRCode() -> Promise<ScanResult>
     func showAppInformation()
     func showErrorDialog()

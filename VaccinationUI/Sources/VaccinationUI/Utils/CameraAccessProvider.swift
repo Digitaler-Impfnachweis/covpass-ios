@@ -24,17 +24,18 @@ public class CameraAccessProvider: CameraAccessProviderProtocol {
 
         let wasNotDeterminedBefore = AVCaptureDevice.authorizationStatus(for: mediaType) == .notDetermined
 
-        return requestAvCaptureAccess(for: mediaType).then { status -> Promise<Void> in
-            switch status {
-            case .authorized:
-                return .value(())
-            case .denied where wasNotDeterminedBefore:
-                // Avoid presenting dialogs about permissions twice if this was the first time.
-                return Promise<Void> { $0.cancel() }
-            default:
-                return self.displayMissingAuthorizationDialog()
-            }
-        }
+        return requestAvCaptureAccess(for: mediaType)
+            .then(on: .main, flags: nil, { status -> Promise<Void> in
+                switch status {
+                case .authorized:
+                    return .value(())
+                case .denied where wasNotDeterminedBefore:
+                    // Avoid presenting error dialog directly after permission denied if this is the first time.
+                    return Promise<Void> { $0.cancel() }
+                default:
+                    return self.displayMissingAuthorizationDialog()
+                }
+            })
     }
 
     private func requestAvCaptureAccess(for mediaType: AVMediaType) -> Promise<AVAuthorizationStatus> {

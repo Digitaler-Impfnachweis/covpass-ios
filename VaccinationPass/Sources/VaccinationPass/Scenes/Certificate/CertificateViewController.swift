@@ -155,6 +155,7 @@ extension CertificateViewController: CertificateViewModelDelegate {
 
     func viewModelDidUpdateFavorite() {
         collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .centeredHorizontally, animated: false)
+        viewModel.loadCertificates()
     }
 
     func viewModelUpdateDidFailWithError(_: Error) {
