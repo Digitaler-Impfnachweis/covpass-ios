@@ -13,6 +13,6 @@ import Scanner
 
 protocol ValidatorRouterProtocol: RouterProtocol {
     func scanQRCode() -> Promise<ScanResult>
-    func showCertificate(_ certificate: CBORWebToken)
+    func showCertificate(_ certificate: CBORWebToken?)
     func showAppInformation()
 }

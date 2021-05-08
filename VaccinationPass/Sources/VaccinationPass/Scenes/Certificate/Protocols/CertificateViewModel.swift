@@ -10,13 +10,7 @@ import VaccinationUI
 import VaccinationCommon
 import PromiseKit
 
-public protocol CertificateViewModelDelegate: AnyObject {
-    func viewModelDidUpdate()
-    func viewModelDidUpdateFavorite()
-    func viewModelUpdateDidFailWithError(_ error: Error)
-}
-
-public protocol CertificateViewModel {
+protocol CertificateViewModel {
     var delegate: CertificateViewModelDelegate? { get set }
     var certificateViewModels: [CardViewModel] { get set }
     func process(payload: String) -> Promise<ExtendedCBORWebToken>

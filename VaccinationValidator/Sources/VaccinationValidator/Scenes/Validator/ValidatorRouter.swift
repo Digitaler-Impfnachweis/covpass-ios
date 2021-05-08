@@ -12,6 +12,7 @@ import VaccinationCommon
 import Scanner
 
 class ValidatorRouter: ValidatorRouterProtocol {
+
     // MARK: - Properties
 
     let sceneCoordinator: SceneCoordinator

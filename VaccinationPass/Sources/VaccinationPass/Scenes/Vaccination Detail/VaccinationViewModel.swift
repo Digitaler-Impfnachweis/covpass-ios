@@ -15,10 +15,6 @@ struct VaccinationViewModel {
     private var certificate: DigitalGreenCertificate { token.hcert.dgc }
     private var vaccination: Vaccination? { certificate.v.first }
 
-    init(token: CBORWebToken) {
-        self.token = token
-    }
-
     var headline: String {
         let number = vaccination?.dn ?? 0
         let total = vaccination?.sd ?? 0
