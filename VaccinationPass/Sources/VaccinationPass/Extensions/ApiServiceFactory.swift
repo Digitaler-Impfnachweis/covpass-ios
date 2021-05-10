@@ -9,7 +9,7 @@ import Foundation
 import VaccinationCommon
 
 extension APIService {
-    static func createService() -> APIService {
+    static func create() -> APIService {
         APIService(
             sessionDelegate: APIServiceDelegate(
                 certUrl: Bundle.commonBundle.url(forResource: XCConfiguration.value(String.self, forKey: "TLS_CERTIFICATE_NAME"), withExtension: "der")!
