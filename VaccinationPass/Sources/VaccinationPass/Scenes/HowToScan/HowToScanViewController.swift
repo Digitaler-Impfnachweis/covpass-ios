@@ -56,7 +56,7 @@ class HowToScanViewController: UIViewController {
         }
         headline.image = .close
     }
-    
+
     private func configureActionView() {
         actionView.attributedTitleText = viewModel.actionTitle.styledAs(.header_3)
         actionView.action = { [weak self] in
