@@ -202,6 +202,6 @@ class VaccinationDetailViewModel {
     }
 
     private func showCertificate() {
-        router.showCertificateOverview()
+        router.showCertificateOverview().cauterize()
     }
 }

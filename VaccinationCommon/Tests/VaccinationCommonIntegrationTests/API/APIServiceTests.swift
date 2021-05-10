@@ -43,7 +43,7 @@ class APIServiceTests: XCTestCase {
 
             // Parse and validate issued validation certificate
             let result = result.stripPrefix()
-            let base45Decoded = try Base45Encoder().decode(result)
+            let base45Decoded = try Base45Coder().decode(result)
             guard let decompressedPayload = Compression.decompress(Data(base45Decoded)) else {
                 XCTFail("Could not decompress QR Code data")
                 return

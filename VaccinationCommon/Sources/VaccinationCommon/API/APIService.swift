@@ -25,7 +25,7 @@ public struct APIService: APIServiceProtocol {
     private let contentType: String = "application/cbor+base45"
 
     // TODO: rename Encoder to Coder because an encoder does not decode
-    private let encoder = Base45Encoder()
+    private let encoder = Base45Coder()
     private let sessionDelegate: URLSessionDelegate
 
     public init(sessionDelegate: URLSessionDelegate, url: String) {

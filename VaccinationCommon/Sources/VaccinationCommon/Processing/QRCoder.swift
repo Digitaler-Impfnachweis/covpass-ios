@@ -15,7 +15,7 @@ public enum QRCodeError: Error {
 }
 
 public class QRCoder: QRCoderProtocol {
-    private let base45Encoder = Base45Encoder()
+    private let base45Encoder = Base45Coder()
     private let cose1SignParser = CoseSign1Parser()
     private let cert = HCert()
 
