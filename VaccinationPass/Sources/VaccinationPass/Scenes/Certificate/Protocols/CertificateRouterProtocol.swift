@@ -12,6 +12,7 @@ import VaccinationCommon
 import VaccinationUI
 
 protocol CertificateRouterProtocol: DialogRouterProtocol {
+    var delegate: CertificateDetailDelegate? { get set }
     func showCertificates(_ certificates: [ExtendedCBORWebToken])
     func showHowToScan() -> Promise<Void>
     func scanQRCode() -> Promise<ScanResult>

@@ -14,7 +14,7 @@ import VaccinationUI
 class DefaultCertificateViewModel: CertificateViewModel {
     // MARK: - Private Properties
 
-    private let router: CertificateRouterProtocol
+    private var router: CertificateRouterProtocol
     private let repository: VaccinationRepositoryProtocol
 
     // MARK: - Lifecycle
@@ -25,6 +25,7 @@ class DefaultCertificateViewModel: CertificateViewModel {
     ) {
         self.router = router
         self.repository = repository
+        self.router.delegate = self
     }
 
     // MARK: - Properties
@@ -196,5 +197,21 @@ class DefaultCertificateViewModel: CertificateViewModel {
             return
         }
         router.showCertificates(certificates)
+    }
+}
+
+// MARK: - CertificateDetailDelegate
+
+extension DefaultCertificateViewModel: CertificateDetailDelegate {
+    func didAddCertificate() {
+        loadCertificates()
+    }
+
+    func didAddFavoriteCertificate() {
+        delegate?.viewModelDidUpdateFavorite()
+    }
+
+    func didDeleteCertificate() {
+        delegate?.viewModelDidDeleteCertificate()
     }
 }

@@ -41,12 +41,12 @@ class CertificateViewController: UIViewController {
         setupActionButton()
         setupCollecttionView()
         setupDotIndicator()
+        viewModel.loadCertificates()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
-        viewModel.loadCertificates()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -146,7 +146,7 @@ extension CertificateViewController: DotPageIndicatorDelegate {
     }
 }
 
-// MARK: - UpdateDelegate
+// MARK: - ViewModelDelegate
 
 extension CertificateViewController: CertificateViewModelDelegate {
     func viewModelDidUpdate() {
@@ -154,6 +154,12 @@ extension CertificateViewController: CertificateViewModelDelegate {
     }
 
     func viewModelDidUpdateFavorite() {
+        collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .centeredHorizontally, animated: false)
+        dotPageIndicator.selectDot(withIndex: 0)
+        viewModel.loadCertificates()
+    }
+
+    func viewModelDidDeleteCertificate() {
         collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .centeredHorizontally, animated: false)
         dotPageIndicator.selectDot(withIndex: 0)
         viewModel.loadCertificates()
