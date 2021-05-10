@@ -28,7 +28,7 @@ class CertificateRouter: CertificateRouterProtocol, DialogRouterProtocol {
         sceneCoordinator.push(
             VaccinationDetailSceneFactory(
                 router: VaccinationDetailRouter(sceneCoordinator: sceneCoordinator),
-                repository: VaccinationRepository(service: APIService(), parser: QRCoder()),
+                repository: VaccinationRepository(service: APIService.createService(), parser: QRCoder()),
                 certificates: certificates
             )
         )
