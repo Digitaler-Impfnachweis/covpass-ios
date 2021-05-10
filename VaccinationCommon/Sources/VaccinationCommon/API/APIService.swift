@@ -14,16 +14,16 @@ public protocol APIServiceProtocol {
 }
 
 public struct APIService: APIServiceProtocol {
-    // TODO: get URL from config
-    private let url: String = XCConfiguration.value(String.self, forKey: "API_URL")
+    private let url: String
     private let contentType: String = "application/cbor+base45"
 
     // TODO: rename Encoder to Coder because an encoder does not decode
     private let encoder = Base45Encoder()
     private let sessionDelegate: URLSessionDelegate
 
-    public init(sessionDelegate: URLSessionDelegate = APIServiceDelegate(certFileName: XCConfiguration.value(String.self, forKey: "TLS_CERTIFICATE_NAME"))) {
+    public init(sessionDelegate: URLSessionDelegate, url: String) {
         self.sessionDelegate = sessionDelegate
+        self.url = url
     }
 
     public func reissue(_ vaccinationQRCode: String) -> Promise<String> {
@@ -76,10 +76,10 @@ public struct APIService: APIServiceProtocol {
 }
 
 public class APIServiceDelegate: NSObject, URLSessionDelegate {
-    private var certFileName: String
+    private var certUrl: URL
 
-    public init(certFileName: String) {
-        self.certFileName = certFileName
+    public init(certUrl: URL) {
+        self.certUrl = certUrl
     }
 
     public func urlSession(_: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
@@ -97,8 +97,7 @@ public class APIServiceDelegate: NSObject, URLSessionDelegate {
                     let size = CFDataGetLength(serverCertificateData)
                     if let dataBytes = CFDataGetBytePtr(serverCertificateData) {
                         let cert1 = NSData(bytes: dataBytes, length: size)
-                        if let cerFilePath = Bundle.module.url(forResource: certFileName, withExtension: "der"),
-                           let cert2 = try? Data(contentsOf: cerFilePath)
+                        if let cert2 = try? Data(contentsOf: certUrl)
                         {
                             if cert1.isEqual(to: cert2) {
                                 completionHandler(URLSession.AuthChallengeDisposition.useCredential, URLCredential(trust: serverTrust))

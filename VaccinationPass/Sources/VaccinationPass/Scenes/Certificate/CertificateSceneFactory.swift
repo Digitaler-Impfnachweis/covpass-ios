@@ -22,7 +22,7 @@ struct CertificateSceneFactory: SceneFactory {
     }
 
     func make() -> UIViewController {
-        let repository = VaccinationRepository(service: APIService(), parser: QRCoder())
+        let repository = VaccinationRepository(service: APIService.create(), parser: QRCoder())
         let viewModel = DefaultCertificateViewModel(
             router: router,
             repository: repository
