@@ -140,13 +140,14 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
         }
         .map { token in
             let payload = data.stripPrefix()
-            let base45Decoded = try Base45Encoder().decode(payload)
+            let base45Decoded = try Base45Coder().decode(payload)
             guard let decompressedPayload = Compression.decompress(Data(base45Decoded)) else {
                 throw ApplicationError.general("Could not decompress QR Code data")
             }
 
             guard let cosePayload = try CoseSign1Parser().parse(decompressedPayload),
-                  HCert().verify(message: cosePayload, certificatePaths: certificateSignatures) else {
+                  HCert().verify(message: cosePayload, certificatePaths: certificateSignatures)
+            else {
                 throw HCertError.verifyError
             }
             return token

@@ -1,6 +1,6 @@
 //
 //  ScanResult.swift
-//  
+//
 //
 //  Created by Sebastian Maschinski on 08.05.21.
 //

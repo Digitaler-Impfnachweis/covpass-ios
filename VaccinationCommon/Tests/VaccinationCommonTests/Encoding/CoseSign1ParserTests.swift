@@ -13,12 +13,12 @@ import XCTest
 
 class CoseSign1ParserTests: XCTestCase {
     var sut: CoseSign1Parser!
-    var base45Encoder: Base45Encoder!
+    var base45Encoder: Base45Coder!
 
     override func setUp() {
         super.setUp()
         sut = CoseSign1Parser()
-        base45Encoder = Base45Encoder()
+        base45Encoder = Base45Coder()
     }
 
     override func tearDown() {

@@ -6,8 +6,8 @@
 //
 
 import AVFoundation
-import UIKit
 import PromiseKit
+import UIKit
 
 public class CameraAccessProvider: CameraAccessProviderProtocol {
     // MARK: - Properties
@@ -21,11 +21,10 @@ public class CameraAccessProvider: CameraAccessProviderProtocol {
     }
 
     public func requestAccess(for mediaType: AVMediaType) -> Promise<Void> {
-
         let wasNotDeterminedBefore = AVCaptureDevice.authorizationStatus(for: mediaType) == .notDetermined
 
         return requestAvCaptureAccess(for: mediaType)
-            .then(on: .main, flags: nil, { status -> Promise<Void> in
+            .then(on: .main, flags: nil) { status -> Promise<Void> in
                 switch status {
                 case .authorized:
                     return .value(())
@@ -35,7 +34,7 @@ public class CameraAccessProvider: CameraAccessProviderProtocol {
                 default:
                     return self.displayMissingAuthorizationDialog()
                 }
-            })
+            }
     }
 
     private func requestAvCaptureAccess(for mediaType: AVMediaType) -> Promise<AVAuthorizationStatus> {
@@ -58,14 +57,16 @@ public class CameraAccessProvider: CameraAccessProviderProtocol {
         .init { seal in
             let delete = DialogAction(
                 title: "error_missing_camera_permissions_actions_goto_settings".localized,
-                style: .default) { _ in
+                style: .default
+            ) { _ in
 
                 self.showAppSettings()
                 seal.cancel()
             }
             let cancel = DialogAction(
                 title: "error_missing_camera_permissions_actions_cancel".localized,
-                style: .cancel) { _ in
+                style: .cancel
+            ) { _ in
 
                 seal.cancel()
             }

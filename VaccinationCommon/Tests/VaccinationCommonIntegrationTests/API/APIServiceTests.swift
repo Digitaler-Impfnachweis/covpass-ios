@@ -12,7 +12,6 @@ import SwiftCBOR
 import XCTest
 
 class APIServiceTests: XCTestCase {
-
     var sut: APIService!
 
     override func setUp() {
@@ -43,7 +42,7 @@ class APIServiceTests: XCTestCase {
 
             // Parse and validate issued validation certificate
             let result = result.stripPrefix()
-            let base45Decoded = try Base45Encoder().decode(result)
+            let base45Decoded = try Base45Coder().decode(result)
             guard let decompressedPayload = Compression.decompress(Data(base45Decoded)) else {
                 XCTFail("Could not decompress QR Code data")
                 return
@@ -72,7 +71,7 @@ class APIServiceTests: XCTestCase {
         sut.reissue(payload).done { _ in
             XCTFail("Reissue should fail with invalid data")
         }.catch { error in
-            XCTAssertEqual(error.localizedDescription, "UnexpectedError")
+            XCTAssertEqual(error.localizedDescription, APIError.invalidReponse.localizedDescription)
             exp.fulfill()
             // TODO: add custom errors for API
 //            XCTAssertEqual(error.localizedDescription, "Sorry, the incoming cose object is invalid.")
@@ -93,7 +92,7 @@ class APIServiceTests: XCTestCase {
         sut.reissue(payload).done { _ in
             XCTFail("Reissue should fail with cancelled")
         }.catch { error in
-            XCTAssertEqual(error.localizedDescription, "cancelled")
+            XCTAssertEqual(error.localizedDescription, APIError.requestCancelled.localizedDescription)
             exp.fulfill()
         }
 
