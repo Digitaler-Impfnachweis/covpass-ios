@@ -82,85 +82,33 @@ public class APIServiceDelegate: NSObject, URLSessionDelegate {
         self.certUrl = certUrl
     }
 
-//    public func urlSession(_: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
-//        if challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodServerTrust {
-//            if let serverTrust = challenge.protectionSpace.serverTrust {
-//                var result = SecTrustResultType.invalid
-//                let isTrustedServer = SecTrustEvaluate(serverTrust, &result)
-//
-//                if errSecSuccess == isTrustedServer {
-//                    guard let serverCertificate = SecTrustGetCertificateAtIndex(serverTrust, 0) else {
-//                        completionHandler(URLSession.AuthChallengeDisposition.cancelAuthenticationChallenge, nil)
-//                        return
-//                    }
-//                    let serverCertificateData = SecCertificateCopyData(serverCertificate)
-//                    let size = CFDataGetLength(serverCertificateData)
-//                    if let dataBytes = CFDataGetBytePtr(serverCertificateData) {
-//                        let cert1 = NSData(bytes: dataBytes, length: size)
-//                        if let cert2 = try? Data(contentsOf: certUrl)
-//                        {
-//                            if cert1.isEqual(to: cert2) {
-//                                completionHandler(URLSession.AuthChallengeDisposition.useCredential, URLCredential(trust: serverTrust))
-//                                return
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//
-//        completionHandler(URLSession.AuthChallengeDisposition.cancelAuthenticationChallenge, nil)
-//    }
-    public func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
-        guard
-          challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodServerTrust,
-          let serverTrust = challenge.protectionSpace.serverTrust
-        else {
-            completionHandler(URLSession.AuthChallengeDisposition.cancelAuthenticationChallenge, nil)
-            return
-        }
-        guard
-          self.validate(trust: serverTrust, with: SecPolicyCreateBasicX509()),
-          let serverCertificate = SecTrustGetCertificateAtIndex(serverTrust, 0)
-        else {
-          completionHandler(URLSession.AuthChallengeDisposition.cancelAuthenticationChallenge, nil)
-          return
-        }
+    public func urlSession(_: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
+        if challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodServerTrust {
+            if let serverTrust = challenge.protectionSpace.serverTrust {
+                var result = SecTrustResultType.invalid
+                let isTrustedServer = SecTrustEvaluate(serverTrust, &result)
 
-        let serverCertificateData = SecCertificateCopyData(serverCertificate) as CFData
-        let size = CFDataGetLength(serverCertificateData)
-        if let dataBytes = CFDataGetBytePtr(serverCertificateData) {
-            let cert1 = NSData(bytes: dataBytes, length: size)
-            if let cert2 = try? Data(contentsOf: certUrl)
-            {
-                if cert1.isEqual(to: cert2) {
-                    completionHandler(URLSession.AuthChallengeDisposition.useCredential, URLCredential(trust: serverTrust))
-                    return
+                if errSecSuccess == isTrustedServer {
+                    guard let serverCertificate = SecTrustGetCertificateAtIndex(serverTrust, 0) else {
+                        completionHandler(URLSession.AuthChallengeDisposition.cancelAuthenticationChallenge, nil)
+                        return
+                    }
+                    let serverCertificateData = SecCertificateCopyData(serverCertificate)
+                    let size = CFDataGetLength(serverCertificateData)
+                    if let dataBytes = CFDataGetBytePtr(serverCertificateData) {
+                        let cert1 = NSData(bytes: dataBytes, length: size)
+                        if let cert2 = try? Data(contentsOf: certUrl)
+                        {
+                            if cert1.isEqual(to: cert2) {
+                                completionHandler(URLSession.AuthChallengeDisposition.useCredential, URLCredential(trust: serverTrust))
+                                return
+                            }
+                        }
+                    }
                 }
             }
         }
 
-        completionHandler(URLSession.AuthChallengeDisposition.cancelAuthenticationChallenge,
-                          URLCredential(trust:serverTrust))
-
-//        completionHandler(URLSession.AuthChallengeDisposition.useCredential,
-//                          URLCredential(trust:serverTrust))
-      }
-      private func validate(trust: SecTrust, with policy: SecPolicy) -> Bool {
-        let status = SecTrustSetPolicies(trust, policy)
-        guard status == errSecSuccess else { return false }
-        return SecTrustEvaluateWithError(trust, nil)
-      }
-      private func publicKey(for certificate: SecCertificate) -> SecKey? {
-          var publicKey: SecKey?
-        var trust: SecTrust?
-          let trustCreationStatus = SecTrustCreateWithCertificates(certificate, SecPolicyCreateBasicX509(), &trust)
-          if let trust = trust, trustCreationStatus == errSecSuccess {
-              publicKey = SecTrustCopyPublicKey(trust)
-          }
-          return publicKey
-      }
-      private func certificateData(for certificates: [SecCertificate]) -> [Data] {
-          return certificates.map { SecCertificateCopyData($0) as Data }
-      }
+        completionHandler(URLSession.AuthChallengeDisposition.cancelAuthenticationChallenge, nil)
+    }
 }
