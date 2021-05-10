@@ -130,3 +130,18 @@
 "validation_check_popup_vaccination_not_completely_message" = "Das geprüfte Zertifikat weist keine vollständige Impfung nach.";
 
 "validation_check_popup_vaccination_not_completely_button_title" = "Nächstes Zertifikat scannen";
+
+
+/********** app information **********/
+
+"app_information_title" = "Informationen";
+
+"app_information_message" = "Hier finden Sie alle rechtlichen Informationen und Antworten auf die häufigsten Fragen rund um die CovPassCheck-App.";
+
+"app_information_title_faq" = "Häufige Fragen";
+
+"app_information_title_datenschutz" = "Datenschutz";
+
+"app_information_title_company_details" = "Impressum";
+
+"app_information_title_open_source" = "Open-Source-Lizenzen";

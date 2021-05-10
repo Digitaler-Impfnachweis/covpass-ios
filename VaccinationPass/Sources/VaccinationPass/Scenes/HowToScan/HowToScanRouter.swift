@@ -24,6 +24,7 @@ class HowToScanRouter: HowToScanRouterProtocol {
     // MARK: - Methods
 
     func showMoreInformation() {
-        // TBD
+        let webViewScene = WebviewSceneFactory(title: "Häufige Fragen".localized, url: URL(string: "https://www.digitaler-impfnachweis-app.de/webviews/client-app/faq/")!)
+        sceneCoordinator.present(webViewScene)
     }
 }
