@@ -1,5 +1,5 @@
 //
-//  Base45EncoderTests.swift
+//  Base45CoderTests.swift
 //
 //
 //  Copyright © 2021 IBM. All rights reserved.
@@ -11,15 +11,15 @@ import XCTest
 
 @testable import VaccinationCommon
 
-class Base45EncoderTests: XCTestCase {
-    var sut: Base45Encoder!
+class Base45CoderTests: XCTestCase {
+    var sut: Base45Coder!
     let rawToBase45: [String: String] = [
         "AB": "BB8", "Hello!!": "%69 VD92EX0", "base-45": "UJCLQE7W581", "ietf!": "QED8WEX0", "x": "U2", "": ""
     ]
 
     override func setUp() {
         super.setUp()
-        sut = Base45Encoder()
+        sut = Base45Coder()
     }
 
     override func tearDown() {
@@ -60,7 +60,7 @@ class Base45EncoderTests: XCTestCase {
                 try _ = sut.decode(entry)
                 XCTFail("Output for \(entry) should be invalid")
             } catch {
-                XCTAssertNotNil(error as? Base45DecodingError)
+                XCTAssertNotNil(error as? Base45CodingError)
             }
         }
     }

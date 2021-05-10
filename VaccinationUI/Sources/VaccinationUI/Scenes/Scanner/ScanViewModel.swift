@@ -17,14 +17,14 @@ class ScanViewModel: CancellableViewModelProtocol {
 
     var onCameraAccess: (() -> Void)?
 
-    // MARK - Lifecycle
+    // MARK: - Lifecycle
 
     init(
         cameraAccessProvider: CameraAccessProviderProtocol,
-        resolvable: Resolver<ScanResult>) {
-
+        resolvable: Resolver<ScanResult>
+    ) {
         self.cameraAccessProvider = cameraAccessProvider
-        self.resolver = resolvable
+        resolver = resolvable
     }
 
     func requestCameraAccess() {

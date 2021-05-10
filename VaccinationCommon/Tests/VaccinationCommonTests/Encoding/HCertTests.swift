@@ -1,6 +1,6 @@
 //
 //  HCertTests.swift
-//  
+//
 //
 //  Copyright © 2021 IBM. All rights reserved.
 //
@@ -13,13 +13,13 @@ import XCTest
 
 class HCertTests: XCTestCase {
     var sut: HCert!
-    var base45Encoder: Base45Encoder!
+    var base45Encoder: Base45Coder!
     var cose1SignParser: CoseSign1Parser!
 
     override func setUp() {
         super.setUp()
         sut = HCert()
-        base45Encoder = Base45Encoder()
+        base45Encoder = Base45Coder()
         cose1SignParser = CoseSign1Parser()
     }
 

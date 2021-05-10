@@ -1,8 +1,8 @@
 //
-//  File.swift
-//  
+//  BundleExtension.swift
 //
-//  Created by Timo Koenig on 08.05.21.
+//
+//  Copyright © 2021 IBM. All rights reserved.
 //
 
 import Foundation

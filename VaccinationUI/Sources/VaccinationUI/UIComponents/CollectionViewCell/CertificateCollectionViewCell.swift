@@ -127,7 +127,7 @@ public class CertificateCollectionViewCell: CardCollectionViewCell {
             .colored(.neutralWhite)
     }
 
-    public override func viewModelDidUpdate() {
+    override public func viewModelDidUpdate() {
         updateView()
     }
 

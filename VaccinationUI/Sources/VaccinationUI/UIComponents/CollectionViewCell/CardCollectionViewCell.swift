@@ -13,5 +13,5 @@ public class CardCollectionViewCell: UICollectionViewCell {
 
 extension CardCollectionViewCell: ViewModelDelegate {
     @objc public func viewModelDidUpdate() {}
-    @objc public func viewModelUpdateDidFailWithError(_ error: Error) {}
+    @objc public func viewModelUpdateDidFailWithError(_: Error) {}
 }

@@ -1,5 +1,5 @@
 //
-//  Base45Encoder.swift
+//  Base45Coder.swift
 //
 //
 //  Copyright © 2021 IBM. All rights reserved.
@@ -7,11 +7,11 @@
 
 import Foundation
 
-enum Base45DecodingError: Error {
+enum Base45CodingError: Error {
     case overflow
 }
 
-class Base45Encoder {
+class Base45Coder {
     private let base45Table: [Int: String] = [
         0: "0", 1: "1", 2: "2", 3: "3", 4: "4", 5: "5", 6: "6", 7: "7", 8: "8", 9: "9", 10: "A", 11: "B",
         12: "C", 13: "D", 14: "E", 15: "F", 16: "G", 17: "H", 18: "I", 19: "J", 20: "K", 21: "L", 22: "M",
@@ -94,9 +94,9 @@ class Base45Encoder {
 
         for count in 0 ..< array.count {
             let resMultiply = UInt16(array[count]).multipliedReportingOverflow(by: UInt16(pow(45, Double(count))))
-            if resMultiply.overflow { throw Base45DecodingError.overflow }
+            if resMultiply.overflow { throw Base45CodingError.overflow }
             let resAdd = result.addingReportingOverflow(resMultiply.partialValue)
-            if resAdd.overflow { throw Base45DecodingError.overflow }
+            if resAdd.overflow { throw Base45CodingError.overflow }
             result = resAdd.partialValue
         }
 

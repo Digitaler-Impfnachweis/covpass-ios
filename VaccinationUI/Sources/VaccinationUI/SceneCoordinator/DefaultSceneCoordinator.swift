@@ -108,8 +108,8 @@ public class DefaultSceneCoordinator: SceneCoordinator {
     func dismiss(
         _ viewController: UIViewController,
         _ animated: Bool,
-        completion: (() -> Void)? = nil) {
-
+        completion: (() -> Void)? = nil
+    ) {
         _ = modalSceneStack.popLast()
 
         viewController.dismiss(

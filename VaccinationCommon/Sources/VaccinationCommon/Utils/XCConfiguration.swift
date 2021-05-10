@@ -8,7 +8,7 @@
 import Foundation
 
 // `Info.plist` accessor utils
-public struct XCConfiguration {
+public enum XCConfiguration {
     public static func value<T>(_: T.Type, forKey key: String) -> T where T: RawRepresentable, T.RawValue == String {
         guard let object = Bundle.main.object(forInfoDictionaryKey: key) else {
             fatalError("No configuration found for key \(key)")
