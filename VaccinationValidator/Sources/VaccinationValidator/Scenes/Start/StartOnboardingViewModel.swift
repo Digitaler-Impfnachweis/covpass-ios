@@ -15,7 +15,7 @@ class StartOnboardingViewModel: BaseViewModel {
     let router: StartRouterProtocol
 
     var image: UIImage? {
-        .startScreen
+        .illustration1
     }
 
     var title: String {
