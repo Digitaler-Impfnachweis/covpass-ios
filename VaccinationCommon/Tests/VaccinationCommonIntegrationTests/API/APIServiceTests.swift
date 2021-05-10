@@ -8,11 +8,10 @@
 import Compression
 import Foundation
 import SwiftCBOR
-import XCTest
 @testable import VaccinationCommon
+import XCTest
 
 class APIServiceTests: XCTestCase {
-
     var sut: APIService!
 
     override func setUp() {

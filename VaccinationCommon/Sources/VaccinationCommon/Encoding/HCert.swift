@@ -1,14 +1,14 @@
 //
 //  HCert.swift
-//  
+//
 //
 //  Copyright © 2021 IBM. All rights reserved.
 //
 
 import Foundation
-import UIKit
-import SwiftCBOR
 import Security
+import SwiftCBOR
+import UIKit
 
 enum HCertError: Error {
     case publicKeyLoadError
@@ -27,18 +27,18 @@ class HCert {
 
     private func verify(message: CoseSign1Message, certificatePath: String) throws -> Bool {
         let signedPayload: [UInt8] = SwiftCBOR.CBOR.encode(
-          [
-            "Signature1",
-            SwiftCBOR.CBOR.byteString(message.protected),
-            SwiftCBOR.CBOR.byteString([UInt8]()),
-            SwiftCBOR.CBOR.byteString(message.payload),
-          ]
+            [
+                "Signature1",
+                SwiftCBOR.CBOR.byteString(message.protected),
+                SwiftCBOR.CBOR.byteString([UInt8]()),
+                SwiftCBOR.CBOR.byteString(message.payload)
+            ]
         )
 
         let publicKey = try loadPublicKey(from: certificatePath)
         let signature = Asn1Encoder.convertRawSignatureIntoAsn1(Data(message.signatures))
 
-        var error : Unmanaged<CFError>?
+        var error: Unmanaged<CFError>?
         let result = SecKeyVerifySignature(publicKey, .ecdsaSignatureMessageX962SHA256, Data(signedPayload) as CFData, signature as CFData, &error)
         if error != nil {
             throw HCertError.verifyError
@@ -64,7 +64,7 @@ class HCert {
     }
 }
 
-class Asn1Encoder {
+enum Asn1Encoder {
     static func convertRawSignatureIntoAsn1(_ data: Data, _ digestLengthInBytes: Int = 32) -> Data {
         let sigR = Asn1Encoder.encodeIntegerToAsn1(data.prefix(data.count - digestLengthInBytes))
         let sigS = Asn1Encoder.encodeIntegerToAsn1(data.suffix(digestLengthInBytes))
@@ -75,9 +75,9 @@ class Asn1Encoder {
     private static func encodeIntegerToAsn1(_ data: Data) -> Data {
         let firstBitIsSet: UInt8 = 0x80
         let tagInteger: UInt8 = 0x02
-        if (data.first! >= firstBitIsSet) {
+        if data.first! >= firstBitIsSet {
             return Data([tagInteger] + [UInt8(data.count + 1)] + [0x00] + data)
-        } else if (data.first! == 0x00) {
+        } else if data.first! == 0x00 {
             return Asn1Encoder.encodeIntegerToAsn1(data.dropFirst())
         } else {
             return Data([tagInteger] + [UInt8(data.count)] + data)

@@ -146,7 +146,8 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
             }
 
             guard let cosePayload = try CoseSign1Parser().parse(decompressedPayload),
-                  HCert().verify(message: cosePayload, certificatePaths: certificateSignatures) else {
+                  HCert().verify(message: cosePayload, certificatePaths: certificateSignatures)
+            else {
                 throw HCertError.verifyError
             }
             return token

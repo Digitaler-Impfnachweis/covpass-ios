@@ -172,10 +172,10 @@ class VaccinationDetailViewModel {
 
     private func showDeletionSuccessDialog() {
         let confirm = DialogAction(title: "delete_result_dialog_positive_button_text".localized, style: .default)
-        self.router.showDialog(title: "delete_result_dialog_header".localized,
-                               message: "delete_result_dialog_message".localized,
-                               actions: [confirm],
-                               style: .alert)
+        router.showDialog(title: "delete_result_dialog_header".localized,
+                          message: "delete_result_dialog_message".localized,
+                          actions: [confirm],
+                          style: .alert)
     }
 
     private func scanNextCertificate() {

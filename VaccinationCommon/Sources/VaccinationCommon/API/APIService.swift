@@ -112,8 +112,7 @@ public class APIServiceDelegate: NSObject, URLSessionDelegate {
                     let size = CFDataGetLength(serverCertificateData)
                     if let dataBytes = CFDataGetBytePtr(serverCertificateData) {
                         let cert1 = NSData(bytes: dataBytes, length: size)
-                        if let cert2 = try? Data(contentsOf: certUrl)
-                        {
+                        if let cert2 = try? Data(contentsOf: certUrl) {
                             if cert1.isEqual(to: cert2) {
                                 completionHandler(URLSession.AuthChallengeDisposition.useCredential, URLCredential(trust: serverTrust))
                                 return
