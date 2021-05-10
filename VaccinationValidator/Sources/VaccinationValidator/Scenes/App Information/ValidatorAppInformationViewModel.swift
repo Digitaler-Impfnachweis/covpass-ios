@@ -32,22 +32,22 @@ class ValidatorAppInformationViewModel: AppInformationViewModelProtocol {
     lazy var entries: [AppInformationEntry] = {
         [
             webEntry(
-                title: "Häufige Fragen".localized,
+                title: "app_information_title_faq".localized,
                 url: URL(string: "https://www.digitaler-impfnachweis-app.de/webviews/verification-app/faq/")!
             ),
 
             webEntry(
-                title: "Datenschutzerklärung".localized,
+                title: "app_information_title_datenschutz".localized,
                 url: URL(string: "https://www.digitaler-impfnachweis-app.de/webviews/verification-app/privacy/")!
             ),
 
             webEntry(
-                title: "Impressum".localized,
+                title: "app_information_title_company_details".localized,
                 url: URL(string: "https://www.digitaler-impfnachweis-app.de/webviews/imprint/")!
             ),
 
             webEntry(
-                title: "Open Source Lizenzen".localized,
+                title: "app_information_title_open_source".localized,
                 url: Bundle.commonBundle.url(forResource: "license", withExtension: "html")!
             )
         ]

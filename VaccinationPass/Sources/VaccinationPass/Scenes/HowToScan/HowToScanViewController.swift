@@ -60,7 +60,7 @@ class HowToScanViewController: UIViewController {
     private func configureActionView() {
         actionView.attributedTitleText = viewModel.actionTitle.styledAs(.header_3)
         actionView.action = { [weak self] in
-            self?.dismiss(animated: true, completion: nil)
+            self?.viewModel.showMoreInformation()
         }
         actionView.image = .chevronRight
         actionView.tintColor = .brandAccent

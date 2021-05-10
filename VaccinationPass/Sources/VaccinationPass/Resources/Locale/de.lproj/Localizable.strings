@@ -182,11 +182,11 @@
 
 /********** dialog: delete result **********/
 
-"delete_result_dialog_header" = "Nachweis entfernt";
+"delete_result_dialog_header" = "Erfolgreich gelöscht";
 
-"delete_result_dialog_message" = "Sie haben den Nachweis und alle enthaltenen Daten von diesem Telefon entfernt.";
+"delete_result_dialog_message" = "Die Daten zur Impfung wurden erfolgreich von diesem Gerät entfernt.";
 
-"delete_result_dialog_positive_button_text" = "Schließen";
+"delete_result_dialog_positive_button_text" = "OK";
 
 
 /********** dialog: duplicate certificate **********/
@@ -198,3 +198,18 @@
 "duplicate_certificate_dialog_positive_button_text" = "Erneut scannen";
 
 "duplicate_certificate_dialog_negative_button_text" = "Abbrechen";
+
+
+/********** app information **********/
+
+"app_information_title" = "Informationen";
+
+"app_information_message" = "Hier finden Sie alle rechtlichen Informationen und Antworten auf die häufigsten Fragen rund um die CovPass-App.";
+
+"app_information_title_faq" = "Häufige Fragen";
+
+"app_information_title_datenschutz" = "Datenschutz";
+
+"app_information_title_company_details" = "Impressum";
+
+"app_information_title_open_source" = "Open-Source-Lizenzen";
