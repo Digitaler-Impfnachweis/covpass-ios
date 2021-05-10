@@ -47,7 +47,7 @@ class ValidatorAppInformationViewModel: AppInformationViewModelProtocol {
             ),
 
             webEntry(
-                title: "app_information_title_open_source.localized,
+                title: "app_information_title_open_source".localized,
                 url: Bundle.commonBundle.url(forResource: "license", withExtension: "html")!
             )
         ]
