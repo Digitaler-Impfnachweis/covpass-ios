@@ -72,7 +72,7 @@ class APIServiceTests: XCTestCase {
         sut.reissue(payload).done { _ in
             XCTFail("Reissue should fail with invalid data")
         }.catch { error in
-            XCTAssertEqual(error.localizedDescription, "UnexpectedError")
+            XCTAssertEqual(error.localizedDescription, APIError.invalidReponse.localizedDescription)
             exp.fulfill()
             // TODO: add custom errors for API
 //            XCTAssertEqual(error.localizedDescription, "Sorry, the incoming cose object is invalid.")
@@ -93,7 +93,7 @@ class APIServiceTests: XCTestCase {
         sut.reissue(payload).done { _ in
             XCTFail("Reissue should fail with cancelled")
         }.catch { error in
-            XCTAssertEqual(error.localizedDescription, "cancelled")
+            XCTAssertEqual(error.localizedDescription, APIError.requestCancelled.localizedDescription)
             exp.fulfill()
         }
 
