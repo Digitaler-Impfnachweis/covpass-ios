@@ -10,8 +10,10 @@ import Foundation
 import VaccinationUI
 
 class MockCertificateViewModelDelegate: CertificateViewModelDelegate {
+
     var updateCalled = false
     var updateFavoriteCalled = false
+    var deleteCertificateCalled = false
 
     func viewModelDidUpdate() {
         updateCalled = true
@@ -19,6 +21,10 @@ class MockCertificateViewModelDelegate: CertificateViewModelDelegate {
 
     func viewModelDidUpdateFavorite() {
         updateFavoriteCalled = true
+    }
+
+    func viewModelDidDeleteCertificate() {
+        deleteCertificateCalled = true
     }
 
     var receivedError: Error?
