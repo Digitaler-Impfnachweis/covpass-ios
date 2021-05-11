@@ -8,15 +8,16 @@
 import Foundation
 
 public class Name: Codable {
-    // The given name(s) of the person addressed in the certificate
+    /// The given name(s) of the person addressed in the certificate
     public var gn: String?
-    // The family or primary name(s) of the person addressed in the certificate
+    /// The family or primary name(s) of the person addressed in the certificate
     public var fn: String?
-    // The given name(s) of the person transliterated
+    /// The given name(s) of the person transliterated
     public var gnt: String?
-    // The family name(s) of the person transliterated
+    /// The family name(s) of the person transliterated
     public var fnt: String
 
+    /// The full name of the person
     public var fullName: String {
         if let gn = gn, let fn = fn {
             return "\(gn) \(fn)"

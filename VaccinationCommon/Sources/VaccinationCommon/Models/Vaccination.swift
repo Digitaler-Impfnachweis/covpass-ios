@@ -29,7 +29,7 @@ public class Vaccination: Codable {
     /// Unique Certificate Identifier: UVCI
     public var ci: String
 
-    // True if full immunization is given
+    /// True if full immunization is given
     public var fullImmunization: Bool { dn == sd }
 
     enum CodingKeys: String, CodingKey {

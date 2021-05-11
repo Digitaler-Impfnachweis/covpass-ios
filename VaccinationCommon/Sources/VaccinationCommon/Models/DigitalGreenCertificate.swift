@@ -8,19 +8,19 @@
 import Foundation
 
 public struct DigitalGreenCertificate: Codable {
-    // Person name: Surname(s), given name(s) - in that order
+    /// Person name: Surname(s), given name(s) - in that order
     public var nam: Name
-    // Date of Birth of the person addressed in the DGC. ISO 8601 date format restricted to range 1900-2099"
+    /// Date of Birth of the person addressed in the DGC. ISO 8601 date format restricted to range 1900-2099"
     public var dob: Date?
-    // Vaccination Group (may contain multiple entries)
+    /// Vaccination Group (may contain multiple entries)
     public var v: [Vaccination]
-    // Version of the schema, according to Semantic versioning (ISO, https://semver.org/ version 2.0.0 or newer)"
+    /// Version of the schema, according to Semantic versioning (ISO, https://semver.org/ version 2.0.0 or newer)"
     public var ver: String
 
-    // True if full immunization is given
+    /// True if full immunization is given
     public var fullImmunization: Bool { v.first?.fullImmunization ?? false }
 
-    // Date when the full immunization is valid
+    /// Date when the full immunization is valid
     public var fullImmunizationValidFrom: Date? {
         if !fullImmunization { return nil }
         guard let vaccinationDate = v.first?.dt,
@@ -32,7 +32,7 @@ public struct DigitalGreenCertificate: Codable {
         return validFrom
     }
 
-    // True if full immunization is valid
+    /// True if full immunization is valid
     public var fullImmunizationValid: Bool {
         guard let date = fullImmunizationValidFrom else { return false }
         return Date() > date

@@ -12,7 +12,7 @@ extension Array {
     /// - parameter into: the size of the resulted chunks
     /// - returns: an array of arrays of size `into`
     func chunked(into size: Int) -> [[Element]] {
-        return stride(from: 0, to: count, by: size).map {
+        return stride(from: 0, to: count, by: size == 0 ? count : size).map {
             Array(self[$0 ..< Swift.min($0 + size, count)])
         }
     }

@@ -8,7 +8,7 @@
 import Foundation
 
 public struct HealthCertificateClaim: Codable {
-    // the digital green certificate
+    /// The digital green certificate
     public var dgc: DigitalGreenCertificate
 
     enum CodingKeys: String, CodingKey {
