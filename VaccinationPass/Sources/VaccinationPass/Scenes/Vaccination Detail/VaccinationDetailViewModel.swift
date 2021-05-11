@@ -15,17 +15,20 @@ class VaccinationDetailViewModel {
     private let repository: VaccinationRepositoryProtocol
     private var certificates: [ExtendedCBORWebToken]
     public weak var delegate: ViewModelDelegate?
+    public weak var detailDelegate: CertificateDetailDelegate?
 
     // MARK: - Lifecyle
 
     init(
         router: VaccinationDetailRouterProtocol,
         repository: VaccinationRepositoryProtocol,
-        certificates: [ExtendedCBORWebToken]
+        certificates: [ExtendedCBORWebToken],
+        detailDelegate: CertificateDetailDelegate?
     ) {
         self.router = router
         self.repository = repository
         self.certificates = certificates.sorted(by: { $0.vaccinationCertificate.hcert.dgc.v.first?.dn ?? 0 < $1.vaccinationCertificate.hcert.dgc.v.first?.dn ?? 0 })
+        self.detailDelegate = detailDelegate
     }
 
     // MARK: - Actions
@@ -97,6 +100,8 @@ class VaccinationDetailViewModel {
         }
         .then { list in
             self.repository.saveVaccinationCertificateList(list).asVoid()
+        }.ensure {
+            self.detailDelegate?.didDeleteCertificate()
         }.then {
             self.router.showCertificateOverview()
         }.done {
@@ -121,6 +126,8 @@ class VaccinationDetailViewModel {
         }
         .then { cert in
             self.repository.saveVaccinationCertificateList(cert).asVoid()
+        }.ensure {
+            self.detailDelegate?.didAddFavoriteCertificate()
         }
     }
 
@@ -192,6 +199,9 @@ class VaccinationDetailViewModel {
             case let .failure(error):
                 throw error
             }
+        }
+        .ensure { [weak self] in
+            self?.detailDelegate?.didAddCertificate()
         }
         .done { [weak self] in
             self?.delegate?.viewModelDidUpdate()

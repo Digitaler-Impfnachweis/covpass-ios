@@ -1,8 +1,8 @@
 //
-//  File.swift
+//  CertificateViewModelDelegate.swift
 //
 //
-//  Created by Sebastian Maschinski on 07.05.21.
+//  Copyright © 2021 IBM. All rights reserved.
 //
 
 import Foundation
@@ -10,5 +10,6 @@ import Foundation
 protocol CertificateViewModelDelegate: AnyObject {
     func viewModelDidUpdate()
     func viewModelDidUpdateFavorite()
+    func viewModelDidDeleteCertificate()
     func viewModelUpdateDidFailWithError(_ error: Error)
 }
