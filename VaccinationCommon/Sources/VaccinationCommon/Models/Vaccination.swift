@@ -28,12 +28,6 @@ public class Vaccination: Codable {
     public var `is`: String
     /// Unique Certificate Identifier: UVCI
     public var ci: String
-    /// Lot number (Only DE | not in ValidationCertificate)
-    public var ln: String?
-    /// Person performing the vaccination (Only DE | not in ValidationCertificate)
-    public var pf: String?
-    /// Next scheduled vaccination date (Only DE | not in ValidationCertificate)
-    public var nd: Date?
 
     // True if full immunization is given
     public var fullImmunization: Bool { dn == sd }
@@ -49,9 +43,6 @@ public class Vaccination: Codable {
         case co
         case `is`
         case ci
-        case ln
-        case pf
-        case nd
     }
 
     public required init(from decoder: Decoder) throws {
@@ -72,11 +63,6 @@ public class Vaccination: Codable {
         co = try values.decode(String.self, forKey: .co)
         `is` = try values.decode(String.self, forKey: .is)
         ci = try values.decode(String.self, forKey: .ci)
-        ln = try? values.decode(String.self, forKey: .ln)
-        pf = try? values.decode(String.self, forKey: .pf)
-        if let ndDateString = try? values.decode(String.self, forKey: .nd) {
-            nd = DateUtils.vaccinationDateFormatter.date(from: ndDateString)
-        }
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -92,11 +78,5 @@ public class Vaccination: Codable {
         try container.encode(co, forKey: .co)
         try container.encode(`is`, forKey: .is)
         try container.encode(ci, forKey: .ci)
-        try container.encode(ln, forKey: .ln)
-        try container.encode(pf, forKey: .pf)
-        if let nd = nd {
-            let ndDate = DateUtils.vaccinationDateFormatter.string(from: nd)
-            try container.encode(ndDate, forKey: .nd)
-        }
     }
 }
