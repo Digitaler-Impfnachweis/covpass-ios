@@ -34,6 +34,7 @@ class ConsentViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         scrollView.contentInset.top = .space_70
+        scrollView.contentInset.bottom = .space_120
         configureImageView()
         configureHeadline()
         configureParagraphView()

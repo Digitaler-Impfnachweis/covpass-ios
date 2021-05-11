@@ -10,6 +10,7 @@ import UIKit
 public class OnboardingContainerViewController: UIViewController, ViewModelDelegate {
     // MARK: - IBOutlets
 
+    @IBOutlet var bottomView: UIView!
     @IBOutlet var toolbarView: CustomToolbarView!
     @IBOutlet var pageIndicator: DotPageIndicator!
     @IBOutlet var containerView: UIView!
@@ -55,6 +56,7 @@ public class OnboardingContainerViewController: UIViewController, ViewModelDeleg
         configureToolbarView()
         configurePageIndicator()
         configurePageController()
+        configureBottomView()
     }
 
     public func viewModelDidUpdate() {
@@ -69,6 +71,13 @@ public class OnboardingContainerViewController: UIViewController, ViewModelDeleg
         updateToolbarForPage(at: currentIndex)
         toolbarView.setUpLeftButton(leftButtonItem: .navigationArrow)
         toolbarView.delegate = self
+    }
+
+    private func configureBottomView() {
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = bottomView.bounds
+        gradientLayer.colors = [UIColor(white: 1, alpha: 0).cgColor, UIColor(white: 1, alpha: 0.7).cgColor, UIColor.white.cgColor]
+        bottomView.layer.insertSublayer(gradientLayer, at: 0)
     }
 
     private func configurePageIndicator() {

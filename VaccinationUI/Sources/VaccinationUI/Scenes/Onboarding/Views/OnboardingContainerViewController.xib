@@ -5,12 +5,12 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OnboardingContainerViewController" customModule="VaccinationUI">
             <connections>
+                <outlet property="bottomView" destination="ZdT-6D-lu6" id="jKK-Sa-v0a"/>
                 <outlet property="containerView" destination="dMG-RP-Mln" id="Bhx-r6-ZgE"/>
                 <outlet property="pageIndicator" destination="p2T-lh-XqY" id="6fY-Y0-KmJ"/>
                 <outlet property="toolbarView" destination="zoa-K6-v97" id="e7s-aU-cjy"/>
@@ -23,7 +23,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dMG-RP-Mln">
-                    <rect key="frame" x="0.0" y="44" width="414" height="720"/>
+                    <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                 </containerView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZdT-6D-lu6" userLabel="Bottom Container View">
                     <rect key="frame" x="0.0" y="764" width="414" height="98"/>
@@ -40,7 +40,7 @@
                             </subviews>
                         </stackView>
                     </subviews>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="trailingMargin" secondItem="jlm-V5-zzK" secondAttribute="trailing" id="4f6-my-0q9"/>
                         <constraint firstItem="jlm-V5-zzK" firstAttribute="leading" secondItem="ZdT-6D-lu6" secondAttribute="leadingMargin" id="Hvx-II-i6s"/>
@@ -54,9 +54,9 @@
             <color key="backgroundColor" red="0.97647058819999999" green="0.97647058819999999" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="dMG-RP-Mln" firstAttribute="top" secondItem="muz-Zf-tYj" secondAttribute="top" id="0bK-BV-qRh"/>
+                <constraint firstItem="muz-Zf-tYj" firstAttribute="bottom" secondItem="dMG-RP-Mln" secondAttribute="bottom" id="IME-Ax-f5f"/>
                 <constraint firstItem="muz-Zf-tYj" firstAttribute="bottom" secondItem="ZdT-6D-lu6" secondAttribute="bottom" id="Jmb-V6-Ehc"/>
                 <constraint firstItem="ZdT-6D-lu6" firstAttribute="leading" secondItem="muz-Zf-tYj" secondAttribute="leading" id="TKp-JA-beg"/>
-                <constraint firstItem="ZdT-6D-lu6" firstAttribute="top" secondItem="dMG-RP-Mln" secondAttribute="bottom" id="Y3Q-3v-6qR"/>
                 <constraint firstItem="dMG-RP-Mln" firstAttribute="trailing" secondItem="muz-Zf-tYj" secondAttribute="trailing" id="h9f-7W-O5q"/>
                 <constraint firstItem="dMG-RP-Mln" firstAttribute="leading" secondItem="muz-Zf-tYj" secondAttribute="leading" id="l8Y-eR-uX6"/>
                 <constraint firstItem="muz-Zf-tYj" firstAttribute="trailing" secondItem="ZdT-6D-lu6" secondAttribute="trailing" id="mFU-nf-17m"/>
@@ -69,9 +69,4 @@
             <size key="intrinsicContentSize" width="240" height="56"/>
         </designable>
     </designables>
-    <resources>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-    </resources>
 </document>
