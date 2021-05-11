@@ -24,8 +24,7 @@ public struct APIService: APIServiceProtocol {
     private let url: String
     private let contentType: String = "application/cbor+base45"
 
-    // TODO: rename Encoder to Coder because an encoder does not decode
-    private let encoder = Base45Coder()
+    private let coder = Base45Coder()
     private let sessionDelegate: URLSessionDelegate
 
     public init(sessionDelegate: URLSessionDelegate, url: String) {
@@ -36,7 +35,7 @@ public struct APIService: APIServiceProtocol {
     public func reissue(_ vaccinationQRCode: String) -> Promise<String> {
         return Promise { seal in
             let code = vaccinationQRCode.stripPrefix()
-            let base45Decoded = try encoder.decode(code)
+            let base45Decoded = try coder.decode(code)
             guard let decompressedPayload = Compression.decompress(Data(base45Decoded)) else {
                 seal.reject(APIError.compressionFailed)
                 return
