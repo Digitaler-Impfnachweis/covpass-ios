@@ -11,6 +11,8 @@ import VaccinationUI
 class StartOnboardingViewController: UIViewController {
     // MARK: - IBOutlets
 
+    @IBOutlet var scrollView: UIScrollView!
+    @IBOutlet var bottomView: UIView!
     @IBOutlet var stackView: UIStackView!
     @IBOutlet var actionButton: MainButton!
     @IBOutlet var imageView: UIImageView!
@@ -35,6 +37,7 @@ class StartOnboardingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.setNavigationBarHidden(true, animated: false)
+        configureScrollView()
         configureImageView()
         configureHeadline()
         configureSubtitle()
@@ -43,6 +46,14 @@ class StartOnboardingViewController: UIViewController {
     }
 
     // MARK: - Methods
+
+    private func configureScrollView() {
+        scrollView.contentInset.bottom = .space_90
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = bottomView.bounds
+        gradientLayer.colors = [UIColor(white: 1, alpha: 0).cgColor, UIColor(white: 1, alpha: 0.7).cgColor, UIColor.white.cgColor]
+        bottomView.layer.insertSublayer(gradientLayer, at: 0)
+    }
 
     private func configureImageView() {
         imageView.image = viewModel.image

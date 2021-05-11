@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -11,8 +11,10 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="StartOnboardingViewController" customModule="VaccinationPass">
             <connections>
                 <outlet property="actionButton" destination="oFG-is-K2F" id="p74-h6-8HA"/>
+                <outlet property="bottomView" destination="sdT-h9-bwp" id="us6-Nm-ixH"/>
                 <outlet property="headline" destination="TtX-xs-eLu" id="lZZ-MC-zN9"/>
                 <outlet property="imageView" destination="aOj-O7-Bhw" id="PRu-zK-TUb"/>
+                <outlet property="scrollView" destination="x7g-aL-hMj" id="JuM-uk-kAk"/>
                 <outlet property="secureContentView" destination="I08-0S-dkG" id="dcF-wS-etA"/>
                 <outlet property="stackView" destination="yLl-Re-SBL" id="v5R-4V-OS7"/>
                 <outlet property="subtitle" destination="FO8-4h-RpZ" id="vof-nH-UXc"/>
@@ -25,7 +27,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x7g-aL-hMj">
-                    <rect key="frame" x="0.0" y="44" width="414" height="732"/>
+                    <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="yLl-Re-SBL">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="666"/>
@@ -82,7 +84,7 @@
                 <constraint firstItem="x7g-aL-hMj" firstAttribute="top" secondItem="Obu-IB-U25" secondAttribute="top" id="ODW-3x-Rg4"/>
                 <constraint firstItem="sdT-h9-bwp" firstAttribute="trailing" secondItem="Obu-IB-U25" secondAttribute="trailing" id="Qkm-Ns-iJB"/>
                 <constraint firstItem="sdT-h9-bwp" firstAttribute="leading" secondItem="Obu-IB-U25" secondAttribute="leading" id="ViI-V5-xqP"/>
-                <constraint firstItem="sdT-h9-bwp" firstAttribute="top" secondItem="x7g-aL-hMj" secondAttribute="bottom" id="sZp-uj-nA8"/>
+                <constraint firstItem="Obu-IB-U25" firstAttribute="bottom" secondItem="x7g-aL-hMj" secondAttribute="bottom" id="hc2-vc-zpf"/>
                 <constraint firstItem="x7g-aL-hMj" firstAttribute="leading" secondItem="Obu-IB-U25" secondAttribute="leading" id="wjI-Vq-ZzM"/>
             </constraints>
             <point key="canvasLocation" x="-233" y="-491"/>
