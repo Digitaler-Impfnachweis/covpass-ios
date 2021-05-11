@@ -9,7 +9,7 @@ import Foundation
 
 extension String {
     var localized: String {
-        return Localizer.localized(self, bundle: UIConstants.bundle)
+        return Localizer.localized(self, bundle: Bundle.uiBundle)
     }
 }
 

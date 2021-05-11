@@ -56,8 +56,7 @@ public class Vaccination: Codable {
         guard let dtDateString = try? values.decode(String.self, forKey: .dt),
               let dtDate = DateUtils.vaccinationDateFormatter.date(from: dtDateString)
         else {
-            // TODO: use other error
-            throw ApplicationError.missingData("Date String")
+            throw ApplicationError.missingData("Value is missing for Vaccination.dt")
         }
         dt = dtDate
         co = try values.decode(String.self, forKey: .co)
