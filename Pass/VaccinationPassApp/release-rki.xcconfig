@@ -25,3 +25,9 @@ TLS_CERTIFICATES_DESTINATION = VaccinationCommon/Sources/VaccinationCommon/Resou
 CA_CERTIFICATE_SIGNATURES = 20210507_BMG-Doctor-Offices_1971307,20210507_BMG-Vaccination-Centers_1971309
 CA_CERTIFICATE_FILES = Certificates/PROD/CA/
 CA_CERTIFICATES_DESTINATION = VaccinationCommon/Sources/VaccinationCommon/Resources/CA/
+
+// MODEL MAPPING
+
+VACCINE_MEDICINAL_PRODUCT = vaccine-medicinal-product
+VACCINE_PROPHYLAXIS = vaccine-prophylaxis
+VACCINE_MANUFACTURER = vaccine-mah-manf

@@ -2,6 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>VACCINE_MANUFACTURER</key>
+	<string>$(VACCINE_MANUFACTURER)</string>
+	<key>VACCINE_PROPHYLAXIS</key>
+	<string>$(VACCINE_PROPHYLAXIS)</string>
+	<key>VACCINE_MEDICINAL_PRODUCT</key>
+	<string>$(VACCINE_MEDICINAL_PRODUCT)</string>
 	<key>CA_CERTIFICATE_SIGNATURES</key>
 	<string>$(CA_CERTIFICATE_SIGNATURES)</string>
 	<key>TLS_CERTIFICATE_NAME</key>

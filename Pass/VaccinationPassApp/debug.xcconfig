@@ -25,3 +25,9 @@ TLS_CERTIFICATES_DESTINATION = VaccinationCommon/Sources/VaccinationCommon/Resou
 CA_CERTIFICATE_SIGNATURES = dtrust_demo-bmg_seal_ubirch-02
 CA_CERTIFICATE_FILES = Certificates/DEMO/CA/
 CA_CERTIFICATES_DESTINATION = VaccinationCommon/Sources/VaccinationCommon/Resources/CA/
+
+// MODEL MAPPING
+
+VACCINE_MEDICINAL_PRODUCT = vaccine-medicinal-product
+VACCINE_PROPHYLAXIS = vaccine-prophylaxis
+VACCINE_MANUFACTURER = vaccine-mah-manf

@@ -27,15 +27,15 @@ struct VaccinationViewModel {
     }
 
     var vaccine: String {
-        vaccination?.mp ?? ""
+        vaccination?.map(key: vaccination?.mp, from: Bundle.commonBundle.url(forResource: XCConfiguration.value(String.self, forKey: "VACCINE_MEDICINAL_PRODUCT"), withExtension: "json")) ?? vaccination?.mp ?? ""
     }
 
     var manufacturer: String {
-        vaccination?.ma ?? ""
+        vaccination?.map(key: vaccination?.ma, from: Bundle.commonBundle.url(forResource: XCConfiguration.value(String.self, forKey: "VACCINE_MANUFACTURER"), withExtension: "json")) ?? vaccination?.ma ?? ""
     }
 
     var vaccineCode: String {
-        vaccination?.vp ?? ""
+        vaccination?.map(key: vaccination?.vp, from: Bundle.commonBundle.url(forResource: XCConfiguration.value(String.self, forKey: "VACCINE_PROPHYLAXIS"), withExtension: "json")) ?? vaccination?.vp ?? ""
     }
 
     var issuer: String {

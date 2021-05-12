@@ -79,12 +79,15 @@ public class Vaccination: Codable {
         try container.encode(ci, forKey: .ci)
     }
 
-    public func map(key: String, from json: URL) throws -> String? {
-        guard let jsonData = Data(contentsOf: json) else {
-            throw ApplicationError.general("No content found at URL \(json)")
-            return nil
-        }
+    public func map(key: String?, from json: URL?) -> String? {
+        guard let key = key,
+              let jsonUrl = json,
+              let jsonData = try? Data(contentsOf: jsonUrl) else { return nil }
 
-        let rules = try JSONSerialization.jsonObject(with: jsonData)
+        guard let rules = try? JSONSerialization.jsonObject(with: jsonData) as? [String: Any],
+              let valueSet = rules["valueSetValues"] as? [String: Any],
+              let value = valueSet[key] as? [String: Any] else { return nil }
+
+        return value["display"] as? String
     }
 }
