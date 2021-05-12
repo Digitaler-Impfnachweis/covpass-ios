@@ -12,8 +12,8 @@ import Foundation
 import XCTest
 
 class HCertTests: XCTestCase {
-    let validCertificate = "dtrust_demo-bmg_seal_ubirch-02"
-    let invalidCertificate = "dtrust_demo-bmg_seal_ubirch-03"
+    let validCertificate = Bundle.module.url(forResource: "dtrust_demo-bmg_seal_ubirch-02", withExtension: "der")!
+    let invalidCertificate = Bundle.module.url(forResource: "rsa-certify.demo.ubirch.com", withExtension: "der")!
 
     var sut: HCert!
     var base45Encoder: Base45Coder!
@@ -42,7 +42,7 @@ class HCertTests: XCTestCase {
         }
         let cose1SignEncoder = CoseSign1Parser()
         let cosePayload = try! cose1SignEncoder.parse(decompressedPayload)!
-        XCTAssertTrue(sut.verify(message: cosePayload, certificatePaths: [validCertificate]))
+        XCTAssertTrue(sut.verify(message: cosePayload, certificates: [validCertificate]))
     }
 
     func testVerifiyFailsWithInvalidCertificate() {
@@ -54,7 +54,7 @@ class HCertTests: XCTestCase {
         }
         let cose1SignEncoder = CoseSign1Parser()
         let cosePayload = try! cose1SignEncoder.parse(decompressedPayload)!
-        XCTAssertFalse(sut.verify(message: cosePayload, certificatePaths: [invalidCertificate]))
+        XCTAssertFalse(sut.verify(message: cosePayload, certificates: [invalidCertificate]))
     }
 
     func testVerifiyFailsWithNoCertificate() {
@@ -66,6 +66,6 @@ class HCertTests: XCTestCase {
         }
         let cose1SignEncoder = CoseSign1Parser()
         let cosePayload = try! cose1SignEncoder.parse(decompressedPayload)!
-        XCTAssertFalse(sut.verify(message: cosePayload, certificatePaths: []))
+        XCTAssertFalse(sut.verify(message: cosePayload, certificates: []))
     }
 }
