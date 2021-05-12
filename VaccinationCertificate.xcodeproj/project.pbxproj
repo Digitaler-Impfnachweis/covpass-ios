@@ -276,10 +276,10 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 65D6D50625F8B8FC000CB339 /* Build configuration list for PBXNativeTarget "VaccinationPassApp" */;
 			buildPhases = (
+				210117072646D4BD00B9E8FF /* Copy Certificates */,
 				65D6D4DA25F8B8FB000CB339 /* Sources */,
 				65D6D4DB25F8B8FB000CB339 /* Frameworks */,
 				65D6D4DC25F8B8FB000CB339 /* Resources */,
-				210117072646D4BD00B9E8FF /* Copy Certificates */,
 			);
 			buildRules = (
 			);
@@ -333,6 +333,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 65D6D53625F8B94E000CB339 /* Build configuration list for PBXNativeTarget "VaccinationValidatorApp" */;
 			buildPhases = (
+				38960BC6264BE9BA003ADC46 /* Copy Certificates */,
 				65D6D51025F8B94D000CB339 /* Sources */,
 				65D6D51125F8B94D000CB339 /* Frameworks */,
 				65D6D51225F8B94D000CB339 /* Resources */,
@@ -498,6 +499,24 @@
 
 /* Begin PBXShellScriptBuildPhase section */
 		210117072646D4BD00B9E8FF /* Copy Certificates */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Certificates";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cp -r \"${SRCROOT}/${TLS_CERTIFICATE_FILES}\" \"${SRCROOT}/${TLS_CERTIFICATES_DESTINATION}\"\ncp -r \"${SRCROOT}/${CA_CERTIFICATE_FILES}\" \"${SRCROOT}/${CA_CERTIFICATES_DESTINATION}\"\n";
+		};
+		38960BC6264BE9BA003ADC46 /* Copy Certificates */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
