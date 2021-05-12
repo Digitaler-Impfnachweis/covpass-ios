@@ -79,54 +79,44 @@ class CoseSign1Parser {
         return result
     }
 
-    // TODO: refactor this method
     func map(key: CBOR, value: CBOR) -> (String, Any)? {
-        if case let .utf8String(keyString) = key, case let .utf8String(valueString) = value {
-            return (keyString, valueString)
-        } else if case let .utf8String(keyString) = key, case let .array(cborArray) = value {
-            let remappedResult = cborArray.map { self.map(cborObject: $0) }
-            return (keyString, remappedResult)
-        } else if case let .utf8String(keyString) = key, case let .unsignedInt(valueInt) = value {
-            return (keyString, valueInt)
-        } else if case let .utf8String(keyString) = key, case let .map(valueMap) = value {
-            var result = [String: Any]()
-            for (mapKey, mapValue) in valueMap {
-                if let (k, v) = map(key: mapKey, value: mapValue) {
-                    result.updateValue(v, forKey: k)
-                }
-            }
-            return (keyString, result)
-        } else if case let .unsignedInt(keyInt) = key, case let .utf8String(valueString) = value {
-            return (String(keyInt), valueString)
-        } else if case let .unsignedInt(keyInt) = key, case let .array(cborArray) = value {
-            let remappedResult = cborArray.map { self.map(cborObject: $0) }
-            return (String(keyInt), remappedResult)
-        } else if case let .unsignedInt(keyInt) = key, case let .unsignedInt(valueInt) = value {
-            return (String(keyInt), valueInt)
-        } else if case let .unsignedInt(keyInt) = key, case let .map(valueMap) = value {
-            var result = [String: Any]()
-            for (mapKey, mapValue) in valueMap {
-                if let (k, v) = map(key: mapKey, value: mapValue) {
-                    result.updateValue(v, forKey: k)
-                }
-            }
-            return (String(keyInt), result)
-        } else if case let .negativeInt(keyInt) = key, case let .utf8String(valueString) = value {
-            return ("-\(keyInt + 1)", valueString)
-        } else if case let .negativeInt(keyInt) = key, case let .array(cborArray) = value {
-            let remappedResult = cborArray.map { self.map(cborObject: $0) }
-            return ("-\(keyInt + 1)", remappedResult)
-        } else if case let .negativeInt(keyInt) = key, case let .unsignedInt(valueInt) = value {
-            return ("-\(keyInt + 1)", valueInt)
-        } else if case let .negativeInt(keyInt) = key, case let .map(valueMap) = value {
-            var result = [String: Any]()
-            for (mapKey, mapValue) in valueMap {
-                if let (k, v) = map(key: mapKey, value: mapValue) {
-                    result.updateValue(v, forKey: k)
-                }
-            }
-            return ("-\(keyInt + 1)", result)
+        var k: String
+        var v: Any
+
+        switch key {
+        case let .utf8String(keyString):
+            k = keyString
+        case let .unsignedInt(keyInt):
+            k = String(keyInt)
+        case let .negativeInt(keyInt):
+            // NOTE: Negative integers are decoded as NegativeInt(UInt), where the actual number is -1 - i (CBOR's negative integers can be larger than 64-bit signed integers).
+            k = "-\(keyInt + 1)"
+        default:
+            assertionFailure("CBOR key type not implemented, yet")
+            return nil
         }
-        return nil
+
+        switch value {
+        case let .utf8String(valueString):
+            v = valueString
+        case let .array(cborArray):
+            let remappedResult = cborArray.map { self.map(cborObject: $0) }
+            v = remappedResult
+        case let .unsignedInt(valueInt):
+            v = valueInt
+        case let .map(valueMap):
+            var result = [String: Any]()
+            for (mapKey, mapValue) in valueMap {
+                if let (k, v) = map(key: mapKey, value: mapValue) {
+                    result.updateValue(v, forKey: k)
+                }
+            }
+            v = result
+        default:
+            assertionFailure("CBOR value type not implemented, yet")
+            return nil
+        }
+
+        return (k, v)
     }
 }
