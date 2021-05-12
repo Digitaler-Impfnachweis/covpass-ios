@@ -36,7 +36,7 @@ class HCert {
         )
 
         let publicKey = try loadPublicKey(from: certificatePath)
-        let signature = Asn1Encoder.convertRawSignatureIntoAsn1(Data(message.signatures))
+        let signature = ECDSA.convertSignatureData(Data(message.signatures))
 
         var error: Unmanaged<CFError>?
         let result = SecKeyVerifySignature(publicKey, .ecdsaSignatureMessageX962SHA256, Data(signedPayload) as CFData, signature as CFData, &error)
@@ -61,26 +61,5 @@ class HCert {
     private func readCertificate(from resource: String) throws -> Data {
         guard let url = Bundle.module.url(forResource: resource, withExtension: "der") else { return Data() }
         return try Data(contentsOf: url)
-    }
-}
-
-enum Asn1Encoder {
-    static func convertRawSignatureIntoAsn1(_ data: Data, _ digestLengthInBytes: Int = 32) -> Data {
-        let sigR = Asn1Encoder.encodeIntegerToAsn1(data.prefix(data.count - digestLengthInBytes))
-        let sigS = Asn1Encoder.encodeIntegerToAsn1(data.suffix(digestLengthInBytes))
-        let tagSequence: UInt8 = 0x30
-        return Data([tagSequence] + [UInt8(sigR.count + sigS.count)] + sigR + sigS)
-    }
-
-    private static func encodeIntegerToAsn1(_ data: Data) -> Data {
-        let firstBitIsSet: UInt8 = 0x80
-        let tagInteger: UInt8 = 0x02
-        if data.first! >= firstBitIsSet {
-            return Data([tagInteger] + [UInt8(data.count + 1)] + [0x00] + data)
-        } else if data.first! == 0x00 {
-            return Asn1Encoder.encodeIntegerToAsn1(data.dropFirst())
-        } else {
-            return Data([tagInteger] + [UInt8(data.count)] + data)
-        }
     }
 }
