@@ -1,6 +1,6 @@
 ## Certifcate Pinning
-VaccinationCommon/Sources/VaccinationCommon/Resources/TLS
-VaccinationCommon/Sources/VaccinationCommon/Resources/CA
+# VaccinationCommon/Sources/VaccinationCommon/Resources/TLS
+# VaccinationCommon/Sources/VaccinationCommon/Resources/CA
 
 ## macOS
 .DS_Store
