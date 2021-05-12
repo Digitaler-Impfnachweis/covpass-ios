@@ -9,9 +9,6 @@ import UIKit
 import VaccinationCommon
 import VaccinationUI
 
-// TODO: implement this
-let NO_INTERNET = false
-
 class CertificateCardViewModel: CertificateCardViewModelProtocol {
     // MARK: - Private Properties
 
@@ -103,6 +100,7 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
     var errorSubtitle: String? {
         if !isFullImmunization { return nil }
         if token.validationQRCodeData == nil {
+            let NO_INTERNET = false
             if NO_INTERNET {
                 return "vaccination_full_immunization_loading_message_check_internet".localized
             }

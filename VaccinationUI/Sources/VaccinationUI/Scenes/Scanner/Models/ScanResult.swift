@@ -2,7 +2,7 @@
 //  ScanResult.swift
 //
 //
-//  Created by Sebastian Maschinski on 08.05.21.
+//  Copyright © 2021 IBM. All rights reserved.
 //
 
 import Scanner

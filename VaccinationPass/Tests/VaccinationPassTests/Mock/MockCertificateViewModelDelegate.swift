@@ -10,7 +10,6 @@ import Foundation
 import VaccinationUI
 
 class MockCertificateViewModelDelegate: CertificateViewModelDelegate {
-
     var updateCalled = false
     var updateFavoriteCalled = false
     var deleteCertificateCalled = false

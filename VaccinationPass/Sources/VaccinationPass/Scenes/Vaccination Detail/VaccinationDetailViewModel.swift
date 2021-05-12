@@ -56,7 +56,7 @@ class VaccinationDetailViewModel {
     }
 
     var immunizationIcon: UIImage? {
-        UIImage(named: fullImmunization ? "status_full" : "status_partial", in: UIConstants.bundle, compatibleWith: nil)
+        UIImage(named: fullImmunization ? "status_full" : "status_partial", in: Bundle.uiBundle, compatibleWith: nil)
     }
 
     var immunizationTitle: String {

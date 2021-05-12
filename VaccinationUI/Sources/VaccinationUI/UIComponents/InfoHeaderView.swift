@@ -2,7 +2,7 @@
 //  InfoHeaderView.swift
 //
 //
-//  Copyright © 2018 IBM. All rights reserved.
+//  Copyright © 2021 IBM. All rights reserved.
 //
 
 import Foundation
