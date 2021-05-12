@@ -35,7 +35,7 @@ class CertificateCollectionViewCellTests: XCTestCase {
     // MARK: - Mock Data
 
     private func createQrCertificateCell() -> CertificateCollectionViewCell? {
-        let nib = UIConstants.bundle.loadNibNamed("\(CertificateCollectionViewCell.self)", owner: nil, options: nil)
+        let nib = Bundle.uiBundle.loadNibNamed("\(CertificateCollectionViewCell.self)", owner: nil, options: nil)
         return nib?.first as? CertificateCollectionViewCell
     }
 }

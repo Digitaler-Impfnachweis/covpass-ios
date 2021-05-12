@@ -8,13 +8,13 @@
 import Foundation
 
 public struct CBORWebToken: Codable {
-    // issuer
+    /// issuer
     public var iss: String
-    // issued at time (seconds since epoch)
+    /// issued at time (seconds since epoch)
     public var iat: Date?
-    // expiration time (seconds since epoc)
+    /// expiration time (seconds since epoc)
     public var exp: Date?
-    // the health certificate claim
+    /// the health certificate claim
     public var hcert: HealthCertificateClaim
 
     enum CodingKeys: String, CodingKey {

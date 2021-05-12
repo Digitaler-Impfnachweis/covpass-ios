@@ -48,7 +48,7 @@ class CertificateViewModelTests: XCTestCase {
     // MARK: - Mock Data
 
     private func createNoCertificateCell() -> NoCertificateCollectionViewCell? {
-        let nib = UIConstants.bundle.loadNibNamed("\(NoCertificateCollectionViewCell.self)", owner: nil, options: nil)
+        let nib = Bundle.uiBundle.loadNibNamed("\(NoCertificateCollectionViewCell.self)", owner: nil, options: nil)
         return nib?.first as? NoCertificateCollectionViewCell
     }
 }

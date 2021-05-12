@@ -29,7 +29,7 @@ public class Vaccination: Codable {
     /// Unique Certificate Identifier: UVCI
     public var ci: String
 
-    // True if full immunization is given
+    /// True if full immunization is given
     public var fullImmunization: Bool { dn == sd }
 
     enum CodingKeys: String, CodingKey {
@@ -56,8 +56,7 @@ public class Vaccination: Codable {
         guard let dtDateString = try? values.decode(String.self, forKey: .dt),
               let dtDate = DateUtils.vaccinationDateFormatter.date(from: dtDateString)
         else {
-            // TODO: use other error
-            throw ApplicationError.missingData("Date String")
+            throw ApplicationError.missingData("Value is missing for Vaccination.dt")
         }
         dt = dtDate
         co = try values.decode(String.self, forKey: .co)

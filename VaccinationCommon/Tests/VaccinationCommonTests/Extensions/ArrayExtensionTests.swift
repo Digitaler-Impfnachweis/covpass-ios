@@ -15,5 +15,7 @@ class ArrayExtensionTests: XCTestCase {
 
     func testChunked() {
         XCTAssertEqual(sut.chunked(into: 3).count, 3)
+        XCTAssertEqual(sut.chunked(into: 10).count, 1)
+        XCTAssertEqual(sut.chunked(into: 0).count, 1)
     }
 }

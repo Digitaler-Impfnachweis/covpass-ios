@@ -73,8 +73,6 @@ class APIServiceTests: XCTestCase {
         }.catch { error in
             XCTAssertEqual(error.localizedDescription, APIError.invalidReponse.localizedDescription)
             exp.fulfill()
-            // TODO: add custom errors for API
-//            XCTAssertEqual(error.localizedDescription, "Sorry, the incoming cose object is invalid.")
         }
 
         wait(for: [exp], timeout: 10)

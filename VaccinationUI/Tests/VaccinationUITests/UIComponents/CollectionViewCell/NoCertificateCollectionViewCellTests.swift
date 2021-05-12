@@ -2,7 +2,7 @@
 //  NoCertificateCollectionViewCellTests.swift
 //
 //
-//  Created by Daniel on 19.04.2021.
+//  Copyright © 2021 IBM. All rights reserved.
 //
 
 import Foundation
@@ -35,7 +35,7 @@ class NoCertificateCollectionViewCellTests: XCTestCase {
     // MARK: - Mock Data
 
     private func createNoCertificateCell() -> NoCertificateCollectionViewCell? {
-        let nib = UIConstants.bundle.loadNibNamed("\(NoCertificateCollectionViewCell.self)", owner: nil, options: nil)
+        let nib = Bundle.uiBundle.loadNibNamed("\(NoCertificateCollectionViewCell.self)", owner: nil, options: nil)
         return nib?.first as? NoCertificateCollectionViewCell
     }
 }

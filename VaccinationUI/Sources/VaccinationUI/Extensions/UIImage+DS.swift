@@ -131,7 +131,7 @@ private struct ImageLoader {
     var wrappedValue: UIImage
 
     init(name: String) {
-        guard let image = UIImage(named: name, in: UIConstants.bundle, compatibleWith: nil) else {
+        guard let image = UIImage(named: name, in: Bundle.uiBundle, compatibleWith: nil) else {
             fatalError("Image: \(name) does not exist")
         }
         wrappedValue = image
