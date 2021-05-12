@@ -15,7 +15,6 @@ class VaccinationView: XibView {
     @IBOutlet var dateView: ParagraphView!
     @IBOutlet var vaccineView: ParagraphView!
     @IBOutlet var manufacturerView: ParagraphView!
-    @IBOutlet var vaccineCodeView: ParagraphView!
     @IBOutlet var issuerView: ParagraphView!
     @IBOutlet var countryView: ParagraphView!
     @IBOutlet var uvciView: ParagraphView!
@@ -60,7 +59,7 @@ class VaccinationView: XibView {
         dateView.showBottomBorder()
 
         vaccineView.attributedTitleText = "vaccination_certificate_detail_view_data_vaccine".localized.styledAs(.header_3)
-        vaccineView.attributedBodyText = viewModel?.vaccine.styledAs(.body)
+        vaccineView.attributedBodyText = viewModel?.fullVaccineProduct.styledAs(.body)
         vaccineView.isHidden = viewModel?.vaccine.isEmpty ?? true
         vaccineView.contentView?.layoutMargins = itemsMargins
         vaccineView.showBottomBorder()
@@ -70,12 +69,6 @@ class VaccinationView: XibView {
         manufacturerView.isHidden = viewModel?.manufacturer.isEmpty ?? true
         manufacturerView.contentView?.layoutMargins = itemsMargins
         manufacturerView.showBottomBorder()
-
-        vaccineCodeView.attributedTitleText = "vaccination_certificate_detail_view_data_bench_number".localized.styledAs(.header_3)
-        vaccineCodeView.attributedBodyText = viewModel?.vaccineCode.styledAs(.body)
-        vaccineCodeView.isHidden = viewModel?.vaccineCode.isEmpty ?? true
-        vaccineCodeView.contentView?.layoutMargins = itemsMargins
-        vaccineCodeView.showBottomBorder()
 
         issuerView.attributedTitleText = "vaccination_certificate_detail_view_data_exhibitor".localized.styledAs(.header_3)
         issuerView.attributedBodyText = viewModel?.issuer.styledAs(.body)

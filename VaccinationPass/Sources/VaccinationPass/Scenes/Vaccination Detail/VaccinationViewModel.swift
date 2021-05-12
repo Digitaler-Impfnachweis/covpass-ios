@@ -38,6 +38,10 @@ struct VaccinationViewModel {
         vaccination?.map(key: vaccination?.vp, from: Bundle.commonBundle.url(forResource: XCConfiguration.value(String.self, forKey: "VACCINE_PROPHYLAXIS"), withExtension: "json")) ?? vaccination?.vp ?? ""
     }
 
+    var fullVaccineProduct: String {
+        "\(vaccineCode)(\(vaccine))"
+    }
+
     var issuer: String {
         token.iss
     }
