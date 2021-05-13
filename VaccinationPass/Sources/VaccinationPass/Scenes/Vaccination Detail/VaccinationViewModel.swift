@@ -27,15 +27,19 @@ struct VaccinationViewModel {
     }
 
     var vaccine: String {
-        vaccination?.mp ?? ""
+        vaccination?.map(key: vaccination?.mp, from: Bundle.commonBundle.url(forResource: "vaccine-medicinal-product", withExtension: "json")) ?? vaccination?.mp ?? ""
     }
 
     var manufacturer: String {
-        vaccination?.ma ?? ""
+        vaccination?.map(key: vaccination?.ma, from: Bundle.commonBundle.url(forResource: "vaccine-mah-manf", withExtension: "json")) ?? vaccination?.ma ?? ""
     }
 
     var vaccineCode: String {
-        vaccination?.vp ?? ""
+        vaccination?.map(key: vaccination?.vp, from: Bundle.commonBundle.url(forResource: "vaccine-prophylaxis", withExtension: "json")) ?? vaccination?.vp ?? ""
+    }
+
+    var fullVaccineProduct: String {
+        "\(vaccineCode)(\(vaccine))"
     }
 
     var issuer: String {
@@ -43,7 +47,7 @@ struct VaccinationViewModel {
     }
 
     var country: String {
-        vaccination?.co ?? ""
+        vaccination?.map(key: vaccination?.co, from: Bundle.commonBundle.url(forResource: "country", withExtension: "json")) ?? vaccination?.co ?? ""
     }
 
     var uvci: String {

@@ -2,14 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>CA_CERTIFICATE_SIGNATURES</key>
-	<string>$(CA_CERTIFICATE_SIGNATURES)</string>
-	<key>TLS_CERTIFICATE_NAME</key>
-	<string>$(TLS_CERTIFICATE_NAME)</string>
 	<key>API_URL</key>
 	<string>$(API_URL)</string>
 	<key>BUNDLE_NAME</key>
 	<string>$(BUNDLE_NAME)</string>
+	<key>CA_CERTIFICATE_SIGNATURES</key>
+	<string>$(CA_CERTIFICATE_SIGNATURES)</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
@@ -34,6 +32,8 @@
 	<true/>
 	<key>NSCameraUsageDescription</key>
 	<string>QR code scanning</string>
+	<key>TLS_CERTIFICATE_NAME</key>
+	<string>$(TLS_CERTIFICATE_NAME)</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UILaunchScreen</key>
