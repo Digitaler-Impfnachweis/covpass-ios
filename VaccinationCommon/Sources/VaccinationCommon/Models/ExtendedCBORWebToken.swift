@@ -14,13 +14,9 @@ public struct ExtendedCBORWebToken: Codable {
     /// Raw QRCode data of the cbor web token vaccination certificate
     public var vaccinationQRCodeData: String
 
-    /// Raw QRCode data of the cbor web token validation certificate
-    public var validationQRCodeData: String?
-
-    public init(vaccinationCertificate: CBORWebToken, vaccinationQRCodeData: String, validationQRCodeData: String? = nil) {
+    public init(vaccinationCertificate: CBORWebToken, vaccinationQRCodeData: String) {
         self.vaccinationCertificate = vaccinationCertificate
         self.vaccinationQRCodeData = vaccinationQRCodeData
-        self.validationQRCodeData = validationQRCodeData
     }
 }
 

@@ -25,7 +25,7 @@ class PassConsentPageViewModelTests: XCTestCase {
         XCTAssertEqual(sut.image, .onboardingScreen4)
         XCTAssertEqual(sut.title, "vaccination_fourth_onboarding_page_title".localized)
         XCTAssertEqual(sut.info, "vaccination_fourth_onboarding_page_message".localized)
-        XCTAssertEqual(sut.dataPrivacyTitle, NSMutableAttributedString(string: "vaccination_fourth_onboarding_page_second_selection".localized).addLink(url: "https://www.digitaler-impfnachweis-app.de/webviews/client-app/privacy/", in: "Datenschutzerklärung").styledAs(.body))
+        XCTAssertEqual(sut.dataPrivacyTitle, NSMutableAttributedString(string: "fourth_onboarding_page_second_selection".localized).addLink(url: "https://www.digitaler-impfnachweis-app.de/webviews/client-app/privacy/", in: "Datenschutzerklärung").styledAs(.body))
         XCTAssertFalse(sut.isGranted)
         XCTAssertEqual(sut.toolbarState, .disabledWithText("confirmation_fourth_onboarding_page_button_title".localized))
     }

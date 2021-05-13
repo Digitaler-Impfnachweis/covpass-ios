@@ -8,6 +8,4 @@
 import Foundation
 import PromiseKit
 
-public protocol APIServiceProtocol {
-    func reissue(_ vaccinationQRCode: String) -> Promise<String>
-}
+public protocol APIServiceProtocol {}

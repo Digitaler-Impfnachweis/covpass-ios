@@ -15,14 +15,11 @@ public class CardViewLoading: XibView {
     @IBOutlet public var stackView: UIStackView!
     @IBOutlet public var titleLabel: PlainLabel!
     @IBOutlet public var subtitleLabel: PlainLabel!
-    @IBOutlet public var loadingIndicator: DotPulseActivityIndicator!
 
     // MARK: - Lifecycle
 
     override public func initView() {
         super.initView()
         stackView.spacing = .space_12
-        loadingIndicator.isHidden = true
-        loadingIndicator.color = .neutralWhite
     }
 }

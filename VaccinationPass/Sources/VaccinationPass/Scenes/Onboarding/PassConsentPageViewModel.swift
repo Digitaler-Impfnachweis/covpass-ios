@@ -33,7 +33,7 @@ class PassConsentPageViewModel: ConsentPageViewModel {
     }
 
     var dataPrivacyTitle: NSAttributedString {
-        NSMutableAttributedString(string: "vaccination_fourth_onboarding_page_second_selection".localized).addLink(url: "https://www.digitaler-impfnachweis-app.de/webviews/client-app/privacy/", in: "Datenschutzerklärung").styledAs(.body)
+        NSMutableAttributedString(string: "fourth_onboarding_page_second_selection".localized).addLink(url: "https://www.digitaler-impfnachweis-app.de/webviews/client-app/privacy/", in: "Datenschutzerklärung").styledAs(.body)
     }
 
     var isGranted: Bool = false {

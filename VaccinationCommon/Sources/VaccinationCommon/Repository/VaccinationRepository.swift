@@ -73,42 +73,10 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
                 return self.saveVaccinationCertificateList(certList).asVoid()
             }
             .map { extendedCBORWebToken }
-            .then { token in
-                Promise { seal in
-                    self.reissueValidationCertificate(token)
-                        .done { extendedToken in
-                            seal.fulfill(extendedToken)
-                        }
-                        .catch { _ in
-                            seal.fulfill(token)
-                        }
-                }
-            }
         }
     }
 
-    public func reissueValidationCertificate(_ certificate: ExtendedCBORWebToken) -> Promise<ExtendedCBORWebToken> {
-        return service.reissue(certificate.vaccinationQRCodeData).map { validationCert in
-            var cert = certificate
-            cert.validationQRCodeData = validationCert
-            return cert
-        }.then { cert in
-            self.getVaccinationCertificateList().map { list in
-                var certList = list
-                certList.certificates = certList.certificates.map {
-                    if $0 == cert {
-                        return cert
-                    }
-                    return $0
-                }
-                return certList
-            }.then(self.saveVaccinationCertificateList).map { _ in
-                cert
-            }
-        }
-    }
-
-    public func checkValidationCertificate(_ data: String) -> Promise<CBORWebToken> {
+    public func checkVaccinationCertificate(_ data: String) -> Promise<CBORWebToken> {
         firstly {
             parser.parse(data)
         }

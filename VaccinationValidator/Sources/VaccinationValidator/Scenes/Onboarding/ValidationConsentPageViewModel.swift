@@ -34,7 +34,7 @@ class ValidationConsentPageViewModel: ConsentPageViewModel {
 
     var dataPrivacyTitle: NSAttributedString {
         let attributedString = NSMutableAttributedString(
-            string: "validation_fourth_onboarding_page_second_selection".localized
+            string: "fourth_onboarding_page_second_selection".localized
         )
         attributedString.addLink(
             url: "https://www.digitaler-impfnachweis-app.de/webviews/client-app/privacy/",
