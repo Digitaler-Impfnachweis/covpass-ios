@@ -29,6 +29,14 @@ public class InfoHeaderView: XibView {
         }
     }
 
+    public var labelUserInteractionEnabled: Bool? {
+        didSet {
+            let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(InfoHeaderView.textButtonPressed))
+            textLabel.isUserInteractionEnabled = labelUserInteractionEnabled ?? false
+            textLabel.addGestureRecognizer(gestureRecognizer)
+        }
+    }
+
     public var action: (() -> Void)?
 
     // MARK: - Lifecycle
@@ -41,4 +49,6 @@ public class InfoHeaderView: XibView {
     // MARK: - IBAction
 
     @IBAction public func actionButtonPressed(button _: UIButton) { action?() }
+
+    @IBAction public func textButtonPressed(sender: UITapGestureRecognizer) { action?() }
 }

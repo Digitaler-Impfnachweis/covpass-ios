@@ -58,6 +58,7 @@ class HowToScanViewController: UIViewController {
     }
 
     private func configureActionView() {
+        actionView.labelUserInteractionEnabled = true
         actionView.attributedTitleText = viewModel.actionTitle.styledAs(.header_3)
         actionView.action = { [weak self] in
             self?.viewModel.showMoreInformation()
