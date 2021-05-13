@@ -14,7 +14,7 @@ class HowToScanViewController: UIViewController {
     @IBOutlet var headline: InfoHeaderView!
     @IBOutlet var descriptionText: ParagraphView!
     @IBOutlet var imageView: UIImageView!
-    @IBOutlet var actionView: InfoHeaderView!
+    @IBOutlet var actionView: ListItemView!
     @IBOutlet var toolbarView: CustomToolbarView!
 
     // MARK: - Properties
@@ -58,12 +58,10 @@ class HowToScanViewController: UIViewController {
     }
 
     private func configureActionView() {
-        actionView.labelUserInteractionEnabled = true
-        actionView.attributedTitleText = viewModel.actionTitle.styledAs(.header_3)
+        actionView.textLabel.attributedText = viewModel.actionTitle.styledAs(.header_3)
         actionView.action = { [weak self] in
             self?.viewModel.showMoreInformation()
         }
-        actionView.image = .chevronRight
         actionView.tintColor = .brandAccent
         actionView.layoutMargins.top = .space_40
     }
