@@ -47,7 +47,7 @@ struct VaccinationViewModel {
     }
 
     var country: String {
-        vaccination?.co ?? ""
+        vaccination?.map(key: vaccination?.co, from: Bundle.commonBundle.url(forResource: XCConfiguration.value(String.self, forKey: "VACCINATION_COUNTRY"), withExtension: "json")) ?? vaccination?.co ?? ""
     }
 
     var uvci: String {

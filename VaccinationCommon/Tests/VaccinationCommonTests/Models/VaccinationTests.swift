@@ -32,5 +32,6 @@ class VaccinationTests: XCTestCase {
         XCTAssertEqual(sut.map(key: sut.vp, from: Bundle.commonBundle.url(forResource: "vaccine-prophylaxis", withExtension: "json")), "SARS-CoV-2 mRNA vaccine")
         XCTAssertEqual(sut.map(key: sut.mp, from: Bundle.commonBundle.url(forResource: "vaccine-medicinal-product", withExtension: "json")), "Comirnaty")
         XCTAssertEqual(sut.map(key: sut.ma, from: Bundle.commonBundle.url(forResource: "vaccine-mah-manf", withExtension: "json")), "Biontech Manufacturing GmbH")
+        XCTAssertEqual(sut.map(key: sut.co, from: Bundle.commonBundle.url(forResource: "country", withExtension: "json")), "Deutschland")
     }
 }

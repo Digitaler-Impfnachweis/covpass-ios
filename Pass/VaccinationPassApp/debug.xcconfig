@@ -31,3 +31,4 @@ CA_CERTIFICATES_DESTINATION = VaccinationCommon/Sources/VaccinationCommon/Resour
 VACCINE_MEDICINAL_PRODUCT = vaccine-medicinal-product
 VACCINE_PROPHYLAXIS = vaccine-prophylaxis
 VACCINE_MANUFACTURER = vaccine-mah-manf
+VACCINATION_COUNTRY = country

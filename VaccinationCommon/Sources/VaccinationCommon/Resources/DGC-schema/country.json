@@ -1,0 +1,720 @@
+{
+  "valueSetId": "country",
+  "valueSetDate": "2021-04-27",
+  "valueSetValues": {
+    "AF": {
+      "display": "Afghanistan"
+    },
+    "EG":	{
+      "display": "Ägypten"
+    },
+    "AL": {
+      "display": "Albanien"
+    },
+    "DZ":	{
+      "display": "Algerien"
+    },
+    "AD":	{
+      "display": "Andorra"
+    },
+    "AO": {
+      "display": "Angola"
+    },
+    "AI": {
+      "display": "Anguilla"
+    },
+    "AQ": {
+      "display": "Antarktis"
+    },
+    "AG":	{
+      "display": "Antigua und Barbuda"
+    },
+    "GQ":	{
+      "display": "Äquatorial Guinea"
+    },
+    "AR":	{
+      "display": "Argentinien"
+    },
+    "AM":	{
+      "display": "Armenien"
+    },
+    "AW":	{
+      "display": "Aruba"
+    },
+    "AZ":	{
+      "display": "Aserbaidschan"
+    },
+    "ET":	{
+      "display": "Äthiopien"
+    },
+    "AU": {
+      "display": "Australien"
+    },
+    "BS":	{
+      "display": "Bahamas"
+    },
+    "BH": {
+      "display": "Bahrain"
+    },
+    "BD":	{
+      "display": "Bangladesh"
+    },
+    "BB":	{
+      "display": "Barbados"
+    },
+    "BE":	{
+      "display": "Belgien"
+    },
+    "BZ": {
+      "display": "Belize"
+    },
+    "BJ":	{
+      "display": "Benin"
+    },
+    "BM": {
+      "display": "Bermudas"
+    },
+    "BT":	{
+      "display": "Bhutan"
+    },
+    "MM":	{
+      "display": "Birma"
+    },
+    "BO":	{
+      "display": "Bolivien"
+    },
+    "BA":	{
+      "display": "Bosnien-Herzegowina"
+    },
+    "BW":	{
+      "display": "Botswana"
+    },
+    "BV":	{
+      "display": "Bouvet Inseln"
+    },
+    "BR":	{
+      "display": "Brasilien"
+    },
+    "IO":	{
+      "display": "Britisch-Indischer Ozean"
+    },
+    "BN":	{
+      "display": "Brunei"
+    },
+    "BG":	{
+      "display": "Bulgarien"
+    },
+    "BF":	{
+      "display": "Burkina Faso"
+    },
+    "BI": {
+      "display": "Burundi"
+    },
+    "CL":	{
+      "display": "Chile"
+    },
+    "CN": {
+      "display": "China"
+    },
+    "CX":	{
+      "display": "Christmas Island"
+    },
+    "CK":	{
+      "display": "Cook Inseln"
+    },
+    "CR":	{
+      "display": "Costa Rica"
+    },
+    "DK":	{
+      "display": "Dänemark"
+    },
+    "DE":	{
+      "display": "Deutschland"
+    },
+    "DJ":	{
+      "display": "Djibuti"
+    },
+    "DM":	{
+      "display": "Dominika"
+    },
+    "DO":	{
+      "display": "Dominikanische Republik"
+    },
+    "EC": {
+      "display": "Ecuador"
+    },
+    "SV":	{
+      "display": "El Salvador"
+    },
+    "CI": {
+      "display": "Elfenbeinküste"
+    },
+    "DZ":	{
+      "display": "Algerien"
+    },
+    "ER":	{
+      "display": "Eritrea"
+    },
+    "EE": {
+      "display": "Estland"
+    },
+    "FK": {
+      "display": "Falkland Inseln"
+    },
+    "FO":	{
+      "display": "Färöer Inseln"
+    },
+    "FJ": {
+      "display": "Fidschi"
+    },
+    "FI":	{
+      "display": "Finnland"
+    },
+    "FR":	{
+      "display": "Frankreich"
+    },
+    "GF": {
+      "display": "französisch Guyana"
+    },
+    "PF": {
+      "display": "Französisch Polynesien"
+    },
+    "TF":	{
+      "display": "Französisches Süd-Territorium"
+    },
+    "GA": {
+      "display": "Gabun"
+    },
+    "GM":	{
+      "display": "Gambia"
+    },
+    "GE":	{
+      "display": "Georgien"
+    },
+    "GH": {
+      "display": "Ghana"
+    },
+    "GI": {
+      "display": "Gibraltar"
+    },
+    "GD":	{
+      "display": "Grenada"
+    },
+    "GR": {
+      "display": "Griechenland"
+    },
+    "GL":	{
+      "display": "Grönland"
+    },
+    "UK":	{
+      "display": "Großbritannien"
+    },
+    "GB": {
+      "display": "Großbritannien (UK)"
+    },
+    "GP": {
+      "display": "Guadeloupe"
+    },
+    "GU":	{
+      "display": "Guam"
+    },
+    "GT": {
+      "display": "Guatemala"
+    },
+    "GN":	{
+      "display": "Guinea"
+    },
+    "GW":	{
+      "display": "Guinea Bissau"
+    },
+    "GY": {
+      "display": "Guyana"
+    },
+    "HT": {
+      "display": "Haiti"
+    },
+    "HM":	{
+      "display": "Heard und McDonald Islands"
+    },
+    "HN": {
+      "display": "Honduras"
+    },
+    "HK":	{
+      "display": "Hong Kong"
+    },
+    "IN":	{
+      "display": "Indien"
+    },
+    "ID": {
+      "display": "Indonesien"
+    },
+    "IQ": {
+      "display": "Irak"
+    },
+    "IR":	{
+      "display": "Iran"
+    },
+    "IE": {
+      "display": "Irland"
+    },
+    "IS":	{
+      "display": "Island"
+    },
+    "IL":	{
+      "display": "Israel"
+    },
+    "IT": {
+      "display": "Italien"
+    },
+    "JM": {
+      "display": "Jamaika"
+    },
+    "JP":	{
+      "display": "Japan"
+    },
+    "YE": {
+      "display": "Jemen"
+    },
+    "JO":	{
+      "display": "Jordanien"
+    },
+    "YU":	{
+      "display": "Jugoslawien"
+    },
+    "KY": {
+      "display": "Kaiman Inseln"
+    },
+    "KH": {
+      "display": "Kambodscha"
+    },
+    "CM":	{
+      "display": "Kamerun"
+    },
+    "CA": {
+      "display": "Kanada"
+    },
+    "CV":	{
+      "display": "Kap Verde"
+    },
+    "KZ":	{
+      "display": "Kasachstan"
+    },
+    "KE": {
+      "display": "Kenia"
+    },
+    "KG": {
+      "display": "Kirgisistan"
+    },
+    "KI":	{
+      "display": "Kiribati"
+    },
+    "CC": {
+      "display": "Kokosinseln"
+    },
+    "CO":	{
+      "display": "Kolumbien"
+    },
+    "KM":	{
+      "display": "Komoren"
+    },
+    "CG": {
+      "display": "Kongo"
+    },
+    "CD": {
+      "display": "Demokratische Republik Kongo"
+    },
+    "HR":	{
+      "display": "Kroatien"
+    },
+    "CU": {
+      "display": "Kuba"
+    },
+    "KW":	{
+      "display": "Kuwait"
+    },
+    "LA":	{
+      "display": "Laos"
+    },
+    "LS": {
+      "display": "Lesotho"
+    },
+    "LV": {
+      "display": "Lettland"
+    },
+    "LB":	{
+      "display": "Libanon"
+    },
+    "LR": {
+      "display": "Liberia"
+    },
+    "LY":	{
+      "display": "Libyen"
+    },
+    "LI":	{
+      "display": "Liechtenstein"
+    },
+    "LT": {
+      "display": "Litauen"
+    },
+    "LU": {
+      "display": "Luxemburg"
+    },
+    "MO": {
+      "display": "Macao"
+    },
+    "MG":	{
+      "display": "Madagaskar"
+    },
+    "MW": {
+      "display": "Malawi"
+    },
+    "MV":	{
+      "display": "Malediven"
+    },
+    "ML":	{
+      "display": "Mali"
+    },
+    "MT": {
+      "display": "Malta"
+    },
+    "MP": {
+      "display": "Marianen"
+    },
+    "MA":	{
+      "display": "Marokko"
+    },
+    "MH":	{
+      "display": "Marshall Inseln"
+    },
+    "MQ": {
+      "display": "Martinique"
+    },
+    "MR": {
+      "display": "Mauretanien"
+    },
+    "MU":	{
+      "display": "Mauritius"
+    },
+    "YT": {
+      "display": "Mayotte"
+    },
+    "MK":	{
+      "display": "Mazedonien"
+    },
+    "MX":	{
+      "display": "Mexiko"
+    },
+    "FM": {
+      "display": "Mikronesien"
+    },
+    "MZ": {
+      "display": "Mocambique"
+    },
+    "MD":	{
+      "display": "Moldavien"
+    },
+    "MC": {
+      "display": "Monaco"
+    },
+    "MN":	{
+      "display": "Mongolei"
+    },
+    "MS":	{
+      "display": "Montserrat"
+    },
+    "NA": {
+      "display": "Namibia"
+    },
+    "NR": {
+      "display": "Nauru"
+    },
+    "NP":	{
+      "display": "Nepal"
+    },
+    "NC": {
+      "display": "Neukaledonien"
+    },
+    "NZ":	{
+      "display": "Neuseeland"
+    },
+    "NI":	{
+      "display": "Nicaragua"
+    },
+    "NL": {
+      "display": "Niederlande"
+    },
+    "AN": {
+      "display": "Niederländische Antillen"
+    },
+    "NE": {
+      "display": "Niger"
+    },
+    "NG":	{
+      "display": "Nigeria"
+    },
+    "NU": {
+      "display": "Niue"
+    },
+    "KP":	{
+      "display": "Nord Korea"
+    },
+    "NF":	{
+      "display": "Norfolk Inseln"
+    },
+    "NO": {
+      "display": "Norwegen"
+    },
+    "OM":	{
+      "display": "Oman"
+    },
+    "AT": {
+      "display": "Österreich"
+    },
+    "PK":	{
+      "display": "Pakistan"
+    },
+    "PS": {
+      "display": "Palästina"
+    },
+    "PW":	{
+      "display": "Palau"
+    },
+    "PA":	{
+      "display": "Panama"
+    },
+    "PG": {
+      "display": "Papua Neuguinea"
+    },
+    "PY": {
+      "display": "Paraguay"
+    },
+    "PE":	{
+      "display": "Peru"
+    },
+    "PH": {
+      "display": "Philippinen"
+    },
+    "PN":	{
+      "display": "Polen"
+    },
+    "PT":	{
+      "display": "Portugal"
+    },
+    "PR": {
+      "display": "Puerto Rico"
+    },
+    "QA": {
+      "display": "Qatar"
+    },
+    "RE":	{
+      "display": "Reunion"
+    },
+    "RW": {
+      "display": "Ruanda"
+    },
+    "RO":	{
+      "display": "Rumänien"
+    },
+    "RU":	{
+      "display": "Russland"
+    },
+    "LC": {
+      "display": "Saint Lucia"
+    },
+    "ZM": {
+      "display": "Sambia"
+    },
+    "AS":	{
+      "display": "Samoa"
+    },
+    "WS": {
+      "display": "Samoa"
+    },
+    "SM":	{
+      "display": "San Marino"
+    },
+    "ST":	{
+      "display": "Sao Tome"
+    },
+    "SA": {
+      "display": "Saudi Arabien"
+    },
+    "SE": {
+      "display": "Schweden"
+    },
+    "CH":	{
+      "display": "Schweiz"
+    },
+    "SN": {
+      "display": "Senegal"
+    },
+    "SC":	{
+      "display": "Seychellen"
+    },
+    "SL":	{
+      "display": "Sierra Leone"
+    },
+    "SG": {
+      "display": "Singapur"
+    },
+    "SK": {
+      "display": "Slowakei"
+    },
+    "SI":	{
+      "display": "Slowenien"
+    },
+    "SB": {
+      "display": "Solomon Inseln"
+    },
+    "SO":	{
+      "display": "Somalia"
+    },
+    "GS":	{
+      "display": "Südgeorgien und die Südlichen Sandwichinseln"
+    },
+    "ES": {
+      "display": "Spanien"
+    },
+    "LK": {
+      "display": "Sri Lanka"
+    },
+    "SH":	{
+      "display": "St. Helena"
+    },
+    "KN": {
+      "display": "St. Kitts Nevis Anguilla"
+    },
+    "PM":	{
+      "display": "St. Pierre und Miquelon"
+    },
+    "VC":	{
+      "display": "St. Vincent"
+    },
+    "KR": {
+      "display": "Süd Korea"
+    },
+    "ZA": {
+      "display": "Südafrika"
+    },
+    "SD":	{
+      "display": "Sudan"
+    },
+    "SR": {
+      "display": "Surinam"
+    },
+    "SJ":	{
+      "display": "Svalbard und Jan Mayen Islands"
+    },
+    "SZ":	{
+      "display": "Swasiland"
+    },
+    "SY": {
+      "display": "Syrien"
+    },
+    "TJ": {
+      "display": "Tadschikistan"
+    },
+    "TW":	{
+      "display": "Taiwan"
+    },
+    "TZ": {
+      "display": "Tansania"
+    },
+    "TH":	{
+      "display": "Thailand"
+    },
+    "TP":	{
+      "display": "Timor"
+    },
+    "TG": {
+      "display": "Togo"
+    },
+    "TK": {
+      "display": "Tokelau"
+    },
+    "TO":	{
+      "display": "Tonga"
+    },
+    "TT": {
+      "display": "Trinidad Tobago"
+    },
+    "TD":	{
+      "display": "Tschad"
+    },
+    "CZ":	{
+      "display": "Tschechische Republik"
+    },
+    "TN": {
+      "display": "Tunesien"
+    },
+    "TR": {
+      "display": "Türkei"
+    },
+    "TM":	{
+      "display": "Turkmenistan"
+    },
+    "TC": {
+      "display": "Turks und Kaikos Inseln"
+    },
+    "TV":	{
+      "display": "Tuvalu"
+    },
+    "UG":	{
+      "display": "Uganda"
+    },
+    "UA": {
+      "display": "Ukraine"
+    },
+    "HU": {
+      "display": "Ungarn"
+    },
+    "UY":	{
+      "display": "Uruguay"
+    },
+    "UZ": {
+      "display": "Usbekistan"
+    },
+    "VU":	{
+      "display": "Vanuatu"
+    },
+    "VA":	{
+      "display": "Vatikan"
+    },
+    "VE": {
+      "display": "Venezuela"
+    },
+    "AE": {
+      "display": "Vereinigte Arabische Emirate"
+    },
+    "US": {
+      "display": "Vereinigte Staaten von Amerika"
+    },
+    "VN":	{
+      "display": "Vietnam"
+    },
+    "VG": {
+      "display": "Virgin Island (Brit.)"
+    },
+    "VI":	{
+      "display": "Virgin Island (USA)"
+    },
+    "WF":	{
+      "display": "Wallis et Futuna"
+    },
+    "BY": {
+      "display": "Weissrussland"
+    },
+    "EH": {
+      "display": "Westsahara"
+    },
+    "CF":	{
+      "display": "Zentralafrikanische Republik"
+    },
+    "ZW":	{
+      "display": "Zimbabwe"
+    },
+    "CY": {
+      "display": "Zypern"
+    }
+  }
+}
