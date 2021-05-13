@@ -23,23 +23,25 @@
 
 "next_onboarding_page_button_title" = "Weiter";
 
-"vaccination_first_onboarding_page_title" = "Erster Schritt: Die Corona-Impfungen per QR-Code hinzufügen";
+"vaccination_first_onboarding_page_title" = "Erster Schritt: Die Corona-Impfungen auf Ihr Smartphone übertragen";
 
-"vaccination_first_onboarding_page_message" = "Nach der Corona-Impfung erhalten Sie vom medizinischen Personal ein Impfzertifikat. Scannen Sie mit der CovPass-App das Impfzertifikat. Halten Sie dafür Ihr Smartphone über den QR-Code. Die Corona-Impfung wird direkt auf Ihrem Smartphone gespeichert. Sie können in der CovPass-App die Impfzertifikate für mehrere Personen verwalten.";
+"vaccination_first_onboarding_page_message" = "Nach der Corona-Impfung erhalten Sie vom medizinischen Personal ein Impfzertifikat. Scannen Sie mit der CovPass-App das Impfzertifikat. Halten Sie dafür die Kamera Ihres Smartphones über den QR-Code. Die Corona-Impfung wird direkt auf Ihrem Smartphone gespeichert. Sie können in der CovPass-App die Impfzertifikate für mehrere Personen verwalten.";
 
-"vaccination_second_onboarding_page_title" = "Zweiter Schritt: Die CovPass-App erstellt das Prüfzertifikat";
+"vaccination_second_onboarding_page_title" = "Zweiter Schritt: Die CovPass-App zeigt bei einem vollständigen Impfschutz den QR-Code an";
 
-"vaccination_second_onboarding_page_message" = "Das Prüfzertifikat wird automatisch in der CovPass-App erstellt. Es bestätigt den vollständigen Impfschutz. Bei einer Überprüfung werden nur der Impfstatus, der Name und das Geburtsdatum angezeigt. Laden Sie dafür alle notwendigen Corona-Impfungen auf Ihr Smartphone.";
+"vaccination_second_onboarding_page_message" = "Der QR-Code ist der Nachweis für den vollständigen Impfschutz. Dieser wird in der CovPass-App angezeigt. Laden Sie dafür alle notwendigen Impfzertifikate in die CovPass-App. Bitte beachten Sie: Der QR-Code kann erst angezeigt werden, wenn 14 Tage nach der letzten Impfung vergangen sind.";
 
-"vaccination_third_onboarding_page_title" = "Dritter Schritt: Das Prüfzertifikat bei Bedarf vorzeigen";
+"vaccination_third_onboarding_page_title" = "Dritter Schritt: Den QR-Code bei Bedarf vorzeigen";
 
-"vaccination_third_onboarding_page_message" = "Es können auch mehrere Prüfzertifikate von zum Beispiel Freunden und Angehörigen erstellt werden. Diese werden alle übersichtlich in der CovPass-App angezeigt. Lassen Sie das Prüfzertifikat ganz einfach von der prüfenden Person scannen. Bitte halten Sie ergänzend Ihr Ausweisdokument bzw. das Ausweisdokument der geimpften Person bereit.";
+"vaccination_third_onboarding_page_message" = "Lassen Sie den QR-Code in der CovPass-App ganz einfach von der prüfenden Person scannen. Bei einer Überprüfung werden nur der Impfstatus, der Name und das Geburtsdatum angezeigt. Bitte halten Sie ergänzend Ihr Ausweisdokument bzw. das Ausweisdokument der geimpften Person bereit.";
 
 "vaccination_fourth_onboarding_page_title" = "Zustimmung für die Nutzung der CovPass-App";
 
 "vaccination_fourth_onboarding_page_message" = "Um die CovPass-App zu nutzen, müssen Sie bestätigen, dass Sie die Datenschutzerklärung zur Kenntnis genommen haben.";
 
-"vaccination_fourth_onboarding_page_second_selection" = "Ich habe die Datenschutzerklärung zur Kenntnis genommen.";
+"fourth_onboarding_page_second_selection" = "Ich habe die Datenschutzerklärung zur Kenntnis genommen.";
+
+"fourth_onboarding_page_second_selection_linked" = "Ich habe die #Datenschutzerklärung::$0# zur Kenntnis genommen.";
 
 "confirmation_fourth_onboarding_page_button_title" = "Fertig";
 
@@ -59,9 +61,9 @@
 
 "vaccination_add_popup_message" = "Scannen Sie den QR-Code auf dem Impfzertifikat. Die Informationen werden direkt in die CovPass-App übertragen.";
 
-"vaccination_add_popup_action_title" = "Sie haben keinen QR-Code erhalten?";
+"vaccination_add_popup_action_title" = "Ich habe keinen QR-Code erhalten?";
 
-"vaccination_add_popup_action_title_linked" = "#Sie haben keinen QR-Code erhalten?::$0#";
+"vaccination_add_popup_action_title_linked" = "#Ich habe keinen QR-Code erhalten?::$0#";
 
 "vaccination_add_popup_scan_button_title" = "QR-Code scannen";
 
@@ -90,7 +92,7 @@
 
 /********** start screen: full immunization certificate **********/
 
-"vaccination_full_immunization_title" = "COVID-19-Prüfzertifikat";
+"vaccination_full_immunization_title" = "COVID-19-Impfzertifikat";
 
 "vaccination_full_immunization_action_button" = "Impfungen anzeigen";
 
@@ -100,17 +102,17 @@
 
 "error_connect_to_internet_button_settings" = "Einstellungen";
 
-"error_connect_to_internet_Button_ok" = "OK";
+"error_connect_to_internet_button_ok" = "OK";
 
-"vaccination_full_immunization_loading_message_no_internet" = "Das Prüfzertifikat wird angezeigt, sobald Ihr Gerät mit dem Internet verbunden ist.";
+"vaccination_full_immunization_loading_message_no_internet" = "Der QR-Code wird angezeigt, sobald Ihr Gerät mit dem Internet verbunden ist.";
 
-"vaccination_full_immunization_loading_message_check_internet" = "Das Prüfzertifikat kann nicht geladen werden. Bitte überprüfen Sie Ihre Internetverbindung.";
+"vaccination_full_immunization_loading_message_check_internet" = "Der QR-Code kann nicht geladen werden. Bitte überprüfen Sie Ihre Internetverbindung.";
 
-"vaccination_full_immunization_loading_message_error" = "Es ist ein unerwarteter Fehler aufgetreten. Das Prüfzertifikat kann aktuell nicht geladen werden.";
+"vaccination_full_immunization_loading_message_error" = "Es ist ein unerwarteter Fehler aufgetreten. Der QR-Code kann aktuell nicht geladen werden.";
 
-"vaccination_full_immunization_loading_message_14_days_title" = "Das Prüfzertifikat wird ab dem %@ hier angezeigt.";
+"vaccination_full_immunization_loading_message_14_days_title" = "Der QR-Code wird ab dem %@ hier angezeigt.";
 
-"vaccination_full_immunization_loading_message_14_days_title_pattern" = "Das Prüfzertifikat wird ab dem %@ hier angezeigt.";
+"vaccination_full_immunization_loading_message_14_days_title_pattern" = "Der QR-Code wird ab dem %@ hier angezeigt.";
 
 "vaccination_full_immunization_loading_message_14_days_message" = "Der Impfschutz ist erst 14 Tage nach der vollständigen Impfung wirksam.";
 
@@ -125,15 +127,15 @@
 
 "vaccination_certificate_detail_view_incomplete_title" = "%d von %d Impfungen vorhanden";
 
-"vaccination_certificate_detail_view_incomplete_message" = "Ihr Impfschutz ist nicht vollständig. Um ein Prüfzertifikat erstellen zu lassen, fügen Sie bitte die 2. Impfung hinzu.";
+"vaccination_certificate_detail_view_incomplete_message" = "Ihr Impfschutz ist nicht vollständig. Um den QR-Code als Nachweis für einen kompletten Impfschutz anzeigen zu können, fügen Sie bitte eine weitere Impfung hinzu.";
 
 "vaccination_certificate_detail_view_incomplete_action_button_title" = "Impfung hinzufügen";
 
 "vaccination_certificate_detail_view_complete_title" = "Impfschutz vollständig";
 
-"vaccination_certificate_detail_view_complete_message" = "Teilen Sie jetzt den Impfschutz sicher mit dem Prüfzertifikat. Zu sehen sind nur Impfstatus, Name und Geburtsdatum.";
+"vaccination_certificate_detail_view_complete_message" = "Zeigen Sie bei Bedarf den QR-Code vor. Halten Sie zudem ein Ausweisdokument bei der Überprüfung bereit.";
 
-"vaccination_certificate_detail_view_complete_action_button_title" = "Prüfzertifikat anzeigen";
+"vaccination_certificate_detail_view_complete_action_button_title" = "QR-Code anzeigen";
 
 "vaccination_certificate_detail_view_personal_data_title" = "Persönliche Daten";
 
@@ -175,9 +177,13 @@
 
 "error_standard_unexpected_message" = "Es ist ein unerwarteter Fehler aufgetreten. Bitte versuchen Sie es später erneut.";
 
+"error_standard_unexpected_button_title" = "OK";
+
 "error_no_connection_to_server_title" = "Verbindungsfehler";
 
 "error_no_connection_to_server_message" = "Bei der Verbindung zum Server ist ein Fehler aufgetreten. Bitte überprüfen Sie Ihre Internetverbindung.";
+
+"error_no_connection_to_server_button_title" = "OK";
 
 
 /********** dialog: delete result **********/
@@ -208,8 +214,16 @@
 
 "app_information_title_faq" = "Häufige Fragen";
 
+"app_information_title_faq_linked" = "#Häufige Fragen::$0#";
+
 "app_information_title_datenschutz" = "Datenschutz";
+
+"app_information_title_datenschutz_linked" = "#Datenschutz::$0#";
 
 "app_information_title_company_details" = "Impressum";
 
+"app_information_title_company_details_linked" = "#Impressum::$0#";
+
 "app_information_title_open_source" = "Open-Source-Lizenzen";
+
+"app_information_version_label" = "Version %@";

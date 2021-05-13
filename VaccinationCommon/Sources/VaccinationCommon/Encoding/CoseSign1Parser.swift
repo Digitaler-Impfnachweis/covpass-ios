@@ -104,6 +104,8 @@ class CoseSign1Parser {
             v = remappedResult
         case let .unsignedInt(valueInt):
             v = valueInt
+        case let .double(valueDouble):
+            v = valueDouble
         case let .map(valueMap):
             var result = [String: Any]()
             for (mapKey, mapValue) in valueMap {

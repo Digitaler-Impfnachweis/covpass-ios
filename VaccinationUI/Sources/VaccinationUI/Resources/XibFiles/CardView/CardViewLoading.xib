@@ -9,7 +9,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CardViewLoading" customModule="VaccinationUI">
             <connections>
-                <outlet property="loadingIndicator" destination="ChU-BI-3P8" id="0Su-S9-zRb"/>
                 <outlet property="stackView" destination="g4h-kf-P0z" id="iAb-Cx-ZjQ"/>
                 <outlet property="subtitleLabel" destination="bgQ-rb-5t0" id="efQ-C1-cPW"/>
                 <outlet property="titleLabel" destination="qnG-BF-vG1" id="Rhd-FM-m77"/>
@@ -22,31 +21,12 @@
                 <stackView opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="g4h-kf-P0z">
                     <rect key="frame" x="44" y="122" width="330" height="60"/>
                     <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z2P-z8-xOi">
-                            <rect key="frame" x="0.0" y="0.0" width="330" height="16"/>
-                            <subviews>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ChU-BI-3P8" customClass="DotPulseActivityIndicator" customModule="VaccinationUI">
-                                    <rect key="frame" x="135" y="0.0" width="60" height="16"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <constraints>
-                                        <constraint firstAttribute="width" constant="60" id="8Nt-z3-HCb"/>
-                                        <constraint firstAttribute="height" constant="16" id="9vc-63-mSV"/>
-                                    </constraints>
-                                </view>
-                            </subviews>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <constraints>
-                                <constraint firstItem="ChU-BI-3P8" firstAttribute="centerY" secondItem="Z2P-z8-xOi" secondAttribute="centerY" id="7cQ-9K-YWP"/>
-                                <constraint firstAttribute="height" constant="16" id="Vkx-Av-mnx"/>
-                                <constraint firstItem="ChU-BI-3P8" firstAttribute="centerX" secondItem="Z2P-z8-xOi" secondAttribute="centerX" id="wnc-Yl-2F2"/>
-                            </constraints>
-                        </view>
                         <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qnG-BF-vG1" customClass="PlainLabel" customModule="VaccinationUI">
-                            <rect key="frame" x="0.0" y="16" width="330" height="0.0"/>
+                            <rect key="frame" x="0.0" y="0.0" width="330" height="50"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
                         <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bgQ-rb-5t0" customClass="PlainLabel" customModule="VaccinationUI">
-                            <rect key="frame" x="0.0" y="16" width="330" height="44"/>
+                            <rect key="frame" x="0.0" y="50" width="330" height="10"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
                     </subviews>

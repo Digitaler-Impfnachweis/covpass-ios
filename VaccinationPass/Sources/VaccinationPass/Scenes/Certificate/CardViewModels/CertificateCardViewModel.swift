@@ -30,22 +30,6 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
         self.onAction = onAction
         self.onFavorite = onFavorite
         self.repository = repository
-
-        reissueCertificateIfNeeded()
-    }
-
-    func reissueCertificateIfNeeded() {
-        guard token.validationQRCodeData == nil else { return }
-        repository.reissueValidationCertificate(token)
-            .done { [weak self] cert in
-                self?.token = cert
-            }
-            .catch { [weak self] _ in
-                self?.didFailToUpdate = true
-            }
-            .finally { [weak self] in
-                self?.delegate?.viewModelDidUpdate()
-            }
     }
 
     // MARK: - Internal Properties
@@ -70,7 +54,7 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
 
     var qrCode: UIImage? {
         if !certificate.fullImmunizationValid { return nil }
-        return token.validationQRCodeData?.generateQRCode(size: UIScreen.main.bounds.size)
+        return token.vaccinationQRCodeData.generateQRCode(size: UIScreen.main.bounds.size)
     }
 
     var name: String {
@@ -85,13 +69,9 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
         isFullImmunization ? .completness : .halfShield
     }
 
-    var isLoading: Bool {
-        isFullImmunization && token.validationQRCodeData == nil
-    }
-
     var errorTitle: String? {
         if !isFullImmunization { return nil }
-        if token.validationQRCodeData == nil || certificate.fullImmunizationValid { return nil }
+        if certificate.fullImmunizationValid { return nil }
         guard let date = certificate.fullImmunizationValidFrom else { return nil }
         let dateString = DateUtils.displayDateFormatter.string(from: date)
         return String(format: "vaccination_full_immunization_loading_message_14_days_title".localized, dateString)
@@ -99,18 +79,8 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
 
     var errorSubtitle: String? {
         if !isFullImmunization { return nil }
-        if token.validationQRCodeData == nil {
-            let NO_INTERNET = false
-            if NO_INTERNET {
-                return "vaccination_full_immunization_loading_message_check_internet".localized
-            }
-            if didFailToUpdate {
-                return "vaccination_full_immunization_loading_message_error".localized
-            }
-        } else {
-            if !certificate.fullImmunizationValid {
-                return "vaccination_full_immunization_loading_message_14_days_message".localized
-            }
+        if !certificate.fullImmunizationValid {
+            return "vaccination_full_immunization_loading_message_14_days_message".localized
         }
         return nil
     }

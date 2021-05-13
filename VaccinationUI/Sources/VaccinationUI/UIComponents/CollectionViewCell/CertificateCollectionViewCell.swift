@@ -18,7 +18,6 @@ public protocol CertificateCardViewModelBase {
     var name: String { get }
     var actionTitle: String { get }
     var actionImage: UIImage { get }
-    var isLoading: Bool { get }
     var errorTitle: String? { get }
     var errorSubtitle: String? { get }
     var tintColor: UIColor { get }
@@ -27,7 +26,6 @@ public protocol CertificateCardViewModelBase {
     var delegate: ViewModelDelegate? { get set }
     func onClickAction()
     func onClickFavorite()
-    func reissueCertificateIfNeeded()
 }
 
 @IBDesignable
@@ -108,13 +106,7 @@ public class CertificateCollectionViewCell: CardCollectionViewCell {
         actionView.actionButton.tintColor = vm.tintColor
         actionView.tintColor = .neutralWhite
 
-        loadingView.isHidden = !vm.isLoading && vm.errorTitle == nil && vm.errorSubtitle == nil
-        loadingView.loadingIndicator.isHidden = vm.errorTitle != nil
-        if !loadingView.loadingIndicator.isHidden {
-            loadingView.loadingIndicator.startAnimating()
-        } else {
-            loadingView.loadingIndicator.stopAnimating()
-        }
+        loadingView.isHidden = vm.errorTitle == nil && vm.errorSubtitle == nil
         loadingView.titleLabel.isHidden = vm.errorTitle == nil
         loadingView.titleLabel.attributedText = vm.errorTitle?
             .styledAs(.header_3)

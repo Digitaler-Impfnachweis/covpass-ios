@@ -27,13 +27,7 @@ public struct VaccinationRepositoryMock: VaccinationRepositoryProtocol {
         }
     }
 
-    public func reissueValidationCertificate(_: ExtendedCBORWebToken) -> Promise<ExtendedCBORWebToken> {
-        return Promise { seal in
-            seal.reject(ApplicationError.unknownError)
-        }
-    }
-
-    public func checkValidationCertificate(_: String) -> Promise<CBORWebToken> {
+    public func checkVaccinationCertificate(_: String) -> Promise<CBORWebToken> {
         return Promise { seal in
             seal.reject(ApplicationError.unknownError)
         }

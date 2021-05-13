@@ -14,11 +14,11 @@ class PassAppInformationViewModel: AppInformationViewModelProtocol {
     let router: AppInformationRouterProtocol
 
     var title: String {
-        "Informationen".localized
+        "app_information_title".localized
     }
 
     var descriptionText: String {
-        "Alle Informationen zur Impfnachweis-App im Überblick:".localized
+        "app_information_message".localized
     }
 
     var appVersionText: String {
