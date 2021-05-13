@@ -57,13 +57,5 @@
 	</array>
 	<key>UIUserInterfaceStyle</key>
 	<string>Light</string>
-	<key>VACCINATION_COUNTRY</key>
-	<string>$(VACCINATION_COUNTRY)</string>
-	<key>VACCINE_MANUFACTURER</key>
-	<string>$(VACCINE_MANUFACTURER)</string>
-	<key>VACCINE_MEDICINAL_PRODUCT</key>
-	<string>$(VACCINE_MEDICINAL_PRODUCT)</string>
-	<key>VACCINE_PROPHYLAXIS</key>
-	<string>$(VACCINE_PROPHYLAXIS)</string>
 </dict>
 </plist>

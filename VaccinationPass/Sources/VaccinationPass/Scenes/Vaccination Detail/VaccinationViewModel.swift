@@ -27,15 +27,15 @@ struct VaccinationViewModel {
     }
 
     var vaccine: String {
-        vaccination?.map(key: vaccination?.mp, from: Bundle.commonBundle.url(forResource: XCConfiguration.value(String.self, forKey: "VACCINE_MEDICINAL_PRODUCT"), withExtension: "json")) ?? vaccination?.mp ?? ""
+        vaccination?.map(key: vaccination?.mp, from: Bundle.commonBundle.url(forResource: "vaccine-medicinal-product", withExtension: "json")) ?? vaccination?.mp ?? ""
     }
 
     var manufacturer: String {
-        vaccination?.map(key: vaccination?.ma, from: Bundle.commonBundle.url(forResource: XCConfiguration.value(String.self, forKey: "VACCINE_MANUFACTURER"), withExtension: "json")) ?? vaccination?.ma ?? ""
+        vaccination?.map(key: vaccination?.ma, from: Bundle.commonBundle.url(forResource: "vaccine-mah-manf", withExtension: "json")) ?? vaccination?.ma ?? ""
     }
 
     var vaccineCode: String {
-        vaccination?.map(key: vaccination?.vp, from: Bundle.commonBundle.url(forResource: XCConfiguration.value(String.self, forKey: "VACCINE_PROPHYLAXIS"), withExtension: "json")) ?? vaccination?.vp ?? ""
+        vaccination?.map(key: vaccination?.vp, from: Bundle.commonBundle.url(forResource: "vaccine-prophylaxis", withExtension: "json")) ?? vaccination?.vp ?? ""
     }
 
     var fullVaccineProduct: String {
@@ -47,7 +47,7 @@ struct VaccinationViewModel {
     }
 
     var country: String {
-        vaccination?.map(key: vaccination?.co, from: Bundle.commonBundle.url(forResource: XCConfiguration.value(String.self, forKey: "VACCINATION_COUNTRY"), withExtension: "json")) ?? vaccination?.co ?? ""
+        vaccination?.map(key: vaccination?.co, from: Bundle.commonBundle.url(forResource: "country", withExtension: "json")) ?? vaccination?.co ?? ""
     }
 
     var uvci: String {
