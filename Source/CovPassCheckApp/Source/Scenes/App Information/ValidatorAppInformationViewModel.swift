@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import VaccinationCommon
+import CovPassCommon
 import CovPassUI
 
 class ValidatorAppInformationViewModel: AppInformationViewModelProtocol {

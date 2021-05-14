@@ -8,7 +8,7 @@
 
 import Compression
 import Foundation
-@testable import VaccinationCommon
+@testable import CovPassCommon
 import XCTest
 
 class CompressionAlgorithmTests: XCTestCase {

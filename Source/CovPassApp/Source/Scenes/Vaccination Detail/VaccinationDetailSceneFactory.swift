@@ -8,7 +8,7 @@
 
 import PromiseKit
 import UIKit
-import VaccinationCommon
+import CovPassCommon
 import CovPassUI
 
 struct VaccinationDetailSceneFactory: SceneFactory {

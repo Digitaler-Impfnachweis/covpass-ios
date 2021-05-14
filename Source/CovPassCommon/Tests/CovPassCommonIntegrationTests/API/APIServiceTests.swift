@@ -9,7 +9,7 @@
 import Compression
 import Foundation
 import SwiftCBOR
-@testable import VaccinationCommon
+@testable import CovPassCommon
 import XCTest
 
 class APIServiceTests: XCTestCase {

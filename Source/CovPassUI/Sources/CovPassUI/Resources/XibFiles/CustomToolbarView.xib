@@ -9,21 +9,21 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CustomToolbarView" customModule="CovPassUI">
             <connections>
-                <outlet property="leftButton" destination="v34-Dd-H4r" id="sha-iU-kCe"/>
+                <outlet property="leftButton" destination="v34-Dd-H4r" id="tWi-1N-OUa"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iN0-l3-epB">
             <rect key="frame" x="0.0" y="0.0" width="498" height="82"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v34-Dd-H4r">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v34-Dd-H4r" userLabel="Left Button">
                     <rect key="frame" x="16" y="21" width="40" height="40"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="40" id="4kg-oN-XDb"/>
                         <constraint firstAttribute="height" constant="40" id="NmU-UG-2TQ"/>
                     </constraints>
                     <connections>
-                        <action selector="leftButtonPressed:" destination="-1" eventType="touchUpInside" id="9Zl-c3-bpe"/>
+                        <action selector="leftButtonPressed" destination="-1" eventType="touchUpInside" id="rNC-7M-T9b"/>
                     </connections>
                 </button>
             </subviews>

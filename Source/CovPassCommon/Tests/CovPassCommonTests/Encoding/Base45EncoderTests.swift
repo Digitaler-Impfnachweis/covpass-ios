@@ -10,7 +10,7 @@ import Foundation
 import SwiftCBOR
 import XCTest
 
-@testable import VaccinationCommon
+@testable import CovPassCommon
 
 class Base45CoderTests: XCTestCase {
     var sut: Base45Coder!

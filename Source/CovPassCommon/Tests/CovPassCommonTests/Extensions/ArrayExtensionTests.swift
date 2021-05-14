@@ -9,7 +9,7 @@
 import Foundation
 import XCTest
 
-@testable import VaccinationCommon
+@testable import CovPassCommon
 
 class ArrayExtensionTests: XCTestCase {
     let sut = [72, 101, 108, 108, 111, 33, 33]

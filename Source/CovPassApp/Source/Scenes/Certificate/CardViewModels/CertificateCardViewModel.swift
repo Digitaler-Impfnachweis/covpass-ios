@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import VaccinationCommon
+import CovPassCommon
 import CovPassUI
 
 class CertificateCardViewModel: CertificateCardViewModelProtocol {

@@ -273,7 +273,11 @@ public class CustomToolbarView: XibView {
 
     // MARK: Action Methods
 
-    @IBAction func leftButtonPressed(_: Any) {
+    @IBAction func leftButtonPressed() {
+        leftButtonAction?()
+    }
+
+    @objc func testLeftButtonPressed() {
         leftButtonAction?()
     }
 }

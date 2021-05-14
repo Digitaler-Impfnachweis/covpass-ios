@@ -9,7 +9,7 @@
 import PromiseKit
 import Scanner
 import UIKit
-import VaccinationCommon
+import CovPassCommon
 import CovPassUI
 
 class CertificateRouter: CertificateRouterProtocol, DialogRouterProtocol {

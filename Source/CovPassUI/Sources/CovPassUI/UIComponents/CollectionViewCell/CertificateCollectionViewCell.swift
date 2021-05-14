@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-import VaccinationCommon
+import CovPassCommon
 
 public typealias CertificateCardViewModelProtocol = CardViewModel & CertificateCardViewModelBase
 

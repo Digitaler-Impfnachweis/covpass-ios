@@ -9,7 +9,7 @@
 import Foundation
 import Scanner
 import UIKit
-import VaccinationCommon
+import CovPassCommon
 import CovPassUI
 
 class CertificateViewController: UIViewController {

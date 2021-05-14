@@ -4,13 +4,13 @@
 import PackageDescription
 
 let package = Package(
-    name: "VaccinationCommon",
+    name: "CovPassCommon",
     platforms: [.iOS(.v12)],
     products: [
         // Products define the executables and libraries a package produces, and make them visible to other packages.
         .library(
-            name: "VaccinationCommon",
-            targets: ["VaccinationCommon"]),
+            name: "CovPassCommon",
+            targets: ["CovPassCommon"]),
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
@@ -23,16 +23,16 @@ let package = Package(
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .target(
-            name: "VaccinationCommon",
+            name: "CovPassCommon",
             dependencies: ["Keychain", "SwiftCBOR", "Scanner", "PromiseKit"],
             resources: [.process("Resources")]),
         .testTarget(
-            name: "VaccinationCommonTests",
-            dependencies: ["VaccinationCommon"],
+            name: "CovPassCommonTests",
+            dependencies: ["CovPassCommon"],
             resources: [.process("Resources")]),
         .testTarget(
-            name: "VaccinationCommonIntegrationTests",
-            dependencies: ["VaccinationCommon"],
+            name: "CovPassCommonIntegrationTests",
+            dependencies: ["CovPassCommon"],
             resources: [.process("Resources")]),
     ]
 )

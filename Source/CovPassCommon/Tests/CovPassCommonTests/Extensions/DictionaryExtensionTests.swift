@@ -9,7 +9,7 @@
 import Foundation
 import XCTest
 
-@testable import VaccinationCommon
+@testable import CovPassCommon
 
 class DictionaryExtensionTests: XCTestCase {
     let sut: [Int: String] = [0: "A", 1: "B", 2: "C", 3: "D", 4: "A", 5: "B", 6: "F", 7: "G", 8: "H", 9: "R", 10: "A", 11: "B"]

@@ -10,7 +10,7 @@ import Compression
 import SwiftCBOR
 import XCTest
 
-@testable import VaccinationCommon
+@testable import CovPassCommon
 
 class CoseSign1ParserTests: XCTestCase {
     var sut: CoseSign1Parser!

@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import VaccinationCommon
+import CovPassCommon
 
 struct VaccinationViewModel {
     // MARK: - Properties

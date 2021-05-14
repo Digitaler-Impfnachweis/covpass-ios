@@ -8,7 +8,7 @@
 
 import Foundation
 import PromiseKit
-import VaccinationCommon
+import CovPassCommon
 import CovPassUI
 
 class MockQRCoder: QRCoderProtocol {

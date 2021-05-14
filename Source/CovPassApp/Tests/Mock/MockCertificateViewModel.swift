@@ -9,7 +9,7 @@
 import Foundation
 import PromiseKit
 import UIKit
-import VaccinationCommon
+import CovPassCommon
 @testable import CovPassApp
 import CovPassUI
 

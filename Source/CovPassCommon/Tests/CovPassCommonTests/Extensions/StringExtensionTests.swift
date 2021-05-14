@@ -9,7 +9,7 @@
 import Foundation
 import XCTest
 
-@testable import VaccinationCommon
+@testable import CovPassCommon
 
 class StringExtensionTests: XCTestCase {
     func testStripPrefix() {

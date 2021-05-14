@@ -6,7 +6,7 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-@testable import VaccinationCommon
+@testable import CovPassCommon
 
 import Foundation
 import XCTest

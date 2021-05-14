@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import VaccinationCommon
+import CovPassCommon
 
 extension APIService {
     static func create() -> APIService {

@@ -9,7 +9,7 @@
 import Foundation
 import PromiseKit
 import UIKit
-import VaccinationCommon
+import CovPassCommon
 import CovPassUI
 
 class ValidatorViewModel {

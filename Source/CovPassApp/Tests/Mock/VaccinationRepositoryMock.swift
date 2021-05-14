@@ -7,7 +7,7 @@
 //
 
 import PromiseKit
-import VaccinationCommon
+import CovPassCommon
 
 public struct VaccinationRepositoryMock: VaccinationRepositoryProtocol {
     public func getVaccinationCertificateList() -> Promise<VaccinationCertificateList> {
