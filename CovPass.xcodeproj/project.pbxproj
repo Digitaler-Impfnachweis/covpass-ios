@@ -268,9 +268,9 @@
 		216D1EEA264EF44500370F16 /* Configurations */ = {
 			isa = PBXGroup;
 			children = (
+				210116F82646D18100B9E8FF /* debug.xcconfig */,
 				381442092646ED5800207CFA /* release.xcconfig */,
 				381A13F32647DB580037B7F0 /* release-rki.xcconfig */,
-				210116F82646D18100B9E8FF /* debug.xcconfig */,
 			);
 			path = Configurations;
 			sourceTree = "<group>";
@@ -531,9 +531,9 @@
 		21FBCA30264F00F900CAEF44 /* Configurations */ = {
 			isa = PBXGroup;
 			children = (
+				2101178C2646E86F00B9E8FF /* debug.xcconfig */,
 				3814420B2646ED7600207CFA /* release.xcconfig */,
 				381A13F42647DB7B0037B7F0 /* release-rki.xcconfig */,
-				2101178C2646E86F00B9E8FF /* debug.xcconfig */,
 			);
 			path = Configurations;
 			sourceTree = "<group>";
@@ -727,8 +727,8 @@
 			isa = PBXGroup;
 			children = (
 				88AB2A3725FA40CE00D4EA52 /* Source */,
-				216D1F6B264EF54C00370F16 /* Supporting Files */,
 				88AB2A3E25FA40CE00D4EA52 /* Tests */,
+				216D1F6B264EF54C00370F16 /* Supporting Files */,
 				216D1F6C264EF59200370F16 /* CHANGELOG.md */,
 			);
 			path = CovPassApp;
@@ -760,8 +760,8 @@
 			isa = PBXGroup;
 			children = (
 				88AB2A4225FA40CE00D4EA52 /* Source */,
-				21FBCA2F264F00ED00CAEF44 /* Supporting Files */,
 				88AB2A5F25FA40CE00D4EA52 /* Tests */,
+				21FBCA2F264F00ED00CAEF44 /* Supporting Files */,
 				21FBCA6F264F013400CAEF44 /* CHANGELOG.md */,
 			);
 			path = CovPassCheckApp;
