@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol CertificateViewModelDelegate: AnyObject {
+protocol CertificatesOverviewViewModelDelegate: AnyObject {
     func viewModelDidUpdate()
     func viewModelDidUpdateFavorite()
     func viewModelDidDeleteCertificate()

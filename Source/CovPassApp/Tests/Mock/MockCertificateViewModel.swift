@@ -13,7 +13,7 @@ import CovPassCommon
 @testable import CovPassApp
 import CovPassUI
 
-class MockCertificateViewModel: CertificateViewModel {
+class MockCertificateViewModel: CertificatesOverviewViewModelProtocol {
     // MARK: - Test Variables
 
     var processCalled = false
@@ -21,7 +21,7 @@ class MockCertificateViewModel: CertificateViewModel {
 
     // MARK: - CertificateViewModel
 
-    weak var delegate: CertificateViewModelDelegate?
+    weak var delegate: CertificatesOverviewViewModelDelegate?
 
     var addButtonImage: UIImage? = UIImage()
 

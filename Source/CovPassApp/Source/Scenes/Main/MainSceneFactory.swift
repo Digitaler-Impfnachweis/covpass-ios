@@ -35,8 +35,8 @@ struct MainSceneFactory: SceneFactory {
     }
 
     private func mainViewController() -> UIViewController {
-        let router = CertificateRouter(sceneCoordinator: sceneCoordinator)
-        let factory = CertificateSceneFactory(router: router)
+        let router = CertificatesOverviewRouter(sceneCoordinator: sceneCoordinator)
+        let factory = CertificatesOverviewSceneFactory(router: router)
         let viewController = factory.make()
         return viewController
     }

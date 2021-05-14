@@ -14,10 +14,10 @@ import XCTest
 class CertificateViewModelTests: XCTestCase {
     // MARK: - Test Variables
 
-    var sut: DefaultCertificateViewModel!
+    var sut: CertificatesOverviewViewModel!
     var sutDelegate: MockCertificateViewModelDelegate!
     var sceneCoordinator: SceneCoordinatorMock!
-    var router: CertificateRouter!
+    var router: CertificatesOverviewRouter!
     var repository: VaccinationRepositoryMock!
 
     // MARK: - Setup & Teardown
@@ -25,9 +25,9 @@ class CertificateViewModelTests: XCTestCase {
     override func setUp() {
         super.setUp()
         sceneCoordinator = SceneCoordinatorMock()
-        router = CertificateRouter(sceneCoordinator: sceneCoordinator)
+        router = CertificatesOverviewRouter(sceneCoordinator: sceneCoordinator)
         repository = VaccinationRepositoryMock()
-        sut = DefaultCertificateViewModel(router: router, repository: repository)
+        sut = CertificatesOverviewViewModel(router: router, repository: repository)
         sutDelegate = MockCertificateViewModelDelegate()
         sut.delegate = sutDelegate
     }

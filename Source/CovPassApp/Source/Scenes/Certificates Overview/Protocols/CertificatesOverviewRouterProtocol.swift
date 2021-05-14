@@ -12,7 +12,7 @@ import UIKit
 import CovPassCommon
 import CovPassUI
 
-protocol CertificateRouterProtocol: DialogRouterProtocol {
+protocol CertificatesOverviewRouterProtocol: DialogRouterProtocol {
     var delegate: CertificateDetailDelegate? { get set }
     func showCertificates(_ certificates: [ExtendedCBORWebToken])
     func showHowToScan() -> Promise<Void>

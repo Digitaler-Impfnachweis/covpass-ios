@@ -11,24 +11,24 @@ import UIKit
 import CovPassCommon
 import CovPassUI
 
-struct CertificateSceneFactory: SceneFactory {
+struct CertificatesOverviewSceneFactory: SceneFactory {
     // MARK: - Properties
 
-    let router: CertificateRouterProtocol
+    let router: CertificatesOverviewRouterProtocol
 
     // MARK: - Lifecycle
 
-    init(router: CertificateRouterProtocol) {
+    init(router: CertificatesOverviewRouterProtocol) {
         self.router = router
     }
 
     func make() -> UIViewController {
         let repository = VaccinationRepository(service: APIService.create(), parser: QRCoder())
-        let viewModel = DefaultCertificateViewModel(
+        let viewModel = CertificatesOverviewViewModel(
             router: router,
             repository: repository
         )
-        let viewController = CertificateViewController(viewModel: viewModel)
+        let viewController = CertificatesOverviewViewController(viewModel: viewModel)
         let navigationController = UINavigationController(rootViewController: viewController)
         return navigationController
     }

@@ -10,7 +10,7 @@ import Foundation
 @testable import CovPassApp
 import CovPassUI
 
-class MockCertificateViewModelDelegate: CertificateViewModelDelegate {
+class MockCertificateViewModelDelegate: CertificatesOverviewViewModelDelegate {
     var updateCalled = false
     var updateFavoriteCalled = false
     var deleteCertificateCalled = false

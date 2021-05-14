@@ -1,5 +1,5 @@
 //
-//  DefaultCertificateViewModel.swift
+//  CertificatesOverviewViewModel.swift
 //
 //
 //  © Copyright IBM Deutschland GmbH 2021
@@ -12,16 +12,16 @@ import UIKit
 import CovPassCommon
 import CovPassUI
 
-class DefaultCertificateViewModel: CertificateViewModel {
+class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
     // MARK: - Private Properties
 
-    private var router: CertificateRouterProtocol
+    private var router: CertificatesOverviewRouterProtocol
     private let repository: VaccinationRepositoryProtocol
 
     // MARK: - Lifecycle
 
     init(
-        router: CertificateRouterProtocol,
+        router: CertificatesOverviewRouterProtocol,
         repository: VaccinationRepositoryProtocol
     ) {
         self.router = router
@@ -31,7 +31,7 @@ class DefaultCertificateViewModel: CertificateViewModel {
 
     // MARK: - Properties
 
-    weak var delegate: CertificateViewModelDelegate?
+    weak var delegate: CertificatesOverviewViewModelDelegate?
     var certificateViewModels = [CardViewModel]()
     var certificateList = VaccinationCertificateList(certificates: [])
     var matchedCertificates: [ExtendedCBORWebToken] {
@@ -203,7 +203,7 @@ class DefaultCertificateViewModel: CertificateViewModel {
 
 // MARK: - CertificateDetailDelegate
 
-extension DefaultCertificateViewModel: CertificateDetailDelegate {
+extension CertificatesOverviewViewModel: CertificateDetailDelegate {
     func didAddCertificate() {
         loadCertificates()
     }

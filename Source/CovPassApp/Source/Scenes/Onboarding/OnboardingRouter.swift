@@ -26,8 +26,8 @@ struct OnboardingRouter: OnboardingRouterProtocol {
 
     func showNextScene() {
         sceneCoordinator.asRoot(
-            CertificateSceneFactory(
-                router: CertificateRouter(sceneCoordinator: sceneCoordinator)
+            CertificatesOverviewSceneFactory(
+                router: CertificatesOverviewRouter(sceneCoordinator: sceneCoordinator)
             )
         )
     }

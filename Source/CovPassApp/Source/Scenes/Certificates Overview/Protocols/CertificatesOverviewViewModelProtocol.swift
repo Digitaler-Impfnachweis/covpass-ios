@@ -1,5 +1,5 @@
 //
-//  CertificateViewModel.swift
+//  CertificatesOverviewViewModelProtocol.swift
 //
 //
 //  © Copyright IBM Deutschland GmbH 2021
@@ -11,8 +11,8 @@ import UIKit
 import CovPassCommon
 import CovPassUI
 
-protocol CertificateViewModel {
-    var delegate: CertificateViewModelDelegate? { get set }
+protocol CertificatesOverviewViewModelProtocol {
+    var delegate: CertificatesOverviewViewModelDelegate? { get set }
     var certificateViewModels: [CardViewModel] { get set }
     func process(payload: String) -> Promise<ExtendedCBORWebToken>
     func loadCertificates()

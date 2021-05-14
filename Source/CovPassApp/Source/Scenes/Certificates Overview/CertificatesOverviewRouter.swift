@@ -12,7 +12,7 @@ import UIKit
 import CovPassCommon
 import CovPassUI
 
-class CertificateRouter: CertificateRouterProtocol, DialogRouterProtocol {
+class CertificatesOverviewRouter: CertificatesOverviewRouterProtocol, DialogRouterProtocol {
     // MARK: - Properties
 
     let sceneCoordinator: SceneCoordinator

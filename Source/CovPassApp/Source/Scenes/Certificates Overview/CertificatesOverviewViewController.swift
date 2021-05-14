@@ -12,7 +12,7 @@ import UIKit
 import CovPassCommon
 import CovPassUI
 
-class CertificateViewController: UIViewController {
+class CertificatesOverviewViewController: UIViewController {
     // MARK: - IBOutlet
 
     @IBOutlet var headerView: InfoHeaderView!
@@ -22,14 +22,14 @@ class CertificateViewController: UIViewController {
 
     // MARK: - Public
 
-    private(set) var viewModel: CertificateViewModel
+    private(set) var viewModel: CertificatesOverviewViewModelProtocol
 
     // MARK: - Lifecycle
 
     @available(*, unavailable)
     required init?(coder _: NSCoder) { fatalError("init?(coder: NSCoder) not implemented yet") }
 
-    init(viewModel: CertificateViewModel) {
+    init(viewModel: CertificatesOverviewViewModelProtocol) {
         self.viewModel = viewModel
         super.init(nibName: String(describing: Self.self), bundle: .main)
         self.viewModel.delegate = self
@@ -99,7 +99,7 @@ class CertificateViewController: UIViewController {
 
 // MARK: - UITableViewDataSource
 
-extension CertificateViewController: UICollectionViewDataSource {
+extension CertificatesOverviewViewController: UICollectionViewDataSource {
     public func numberOfSections(in _: UICollectionView) -> Int {
         1
     }
@@ -122,7 +122,7 @@ extension CertificateViewController: UICollectionViewDataSource {
 
 // MARK: - UITableViewDelegate
 
-extension CertificateViewController: UICollectionViewDelegate {
+extension CertificatesOverviewViewController: UICollectionViewDelegate {
     public func scrollViewDidEndDecelerating(_: UIScrollView) {
         let visibleRect = CGRect(origin: collectionView.contentOffset, size: collectionView.bounds.size)
         let visiblePoint = CGPoint(x: visibleRect.midX, y: visibleRect.midY)
@@ -133,7 +133,7 @@ extension CertificateViewController: UICollectionViewDelegate {
 
 // MARK: - UICollectionViewDelegateFlowLayout
 
-extension CertificateViewController: UICollectionViewDelegateFlowLayout {
+extension CertificatesOverviewViewController: UICollectionViewDelegateFlowLayout {
     public func collectionView(_ collectionView: UICollectionView, layout _: UICollectionViewLayout, sizeForItemAt _: IndexPath) -> CGSize {
         CGSize(width: collectionView.bounds.width - 40, height: collectionView.bounds.height)
     }
@@ -141,7 +141,7 @@ extension CertificateViewController: UICollectionViewDelegateFlowLayout {
 
 // MARK: - DotPageIndicatorDelegate
 
-extension CertificateViewController: DotPageIndicatorDelegate {
+extension CertificatesOverviewViewController: DotPageIndicatorDelegate {
     public func dotPageIndicator(_: DotPageIndicator, didTapDot index: Int) {
         collectionView.scrollToItem(at: IndexPath(item: index, section: 0), at: .left, animated: true)
     }
@@ -149,7 +149,7 @@ extension CertificateViewController: DotPageIndicatorDelegate {
 
 // MARK: - ViewModelDelegate
 
-extension CertificateViewController: CertificateViewModelDelegate {
+extension CertificatesOverviewViewController: CertificatesOverviewViewModelDelegate {
     func viewModelDidUpdate() {
         reloadCollectionView()
     }

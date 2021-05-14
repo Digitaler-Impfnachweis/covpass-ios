@@ -14,7 +14,7 @@ import XCTest
 class CertificateViewControllerTests: XCTestCase {
     // MARK: - Test Variables
 
-    var sut: CertificateViewController!
+    var sut: CertificatesOverviewViewController!
     var viewModel: MockCertificateViewModel!
 
     // MARK: - Setup & Teardown
@@ -22,7 +22,7 @@ class CertificateViewControllerTests: XCTestCase {
     override func setUp() {
         super.setUp()
         viewModel = MockCertificateViewModel()
-        sut = CertificateViewController(viewModel: viewModel)
+        sut = CertificatesOverviewViewController(viewModel: viewModel)
         // Load View
         let window = UIWindow(frame: UIScreen.main.bounds)
         window.makeKeyAndVisible()
