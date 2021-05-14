@@ -1,5 +1,5 @@
 //
-//  ValidatorAppInformationSceneFactory.swift
+//  AppInformationSceneFactory.swift
 //
 //
 //  © Copyright IBM Deutschland GmbH 2021
@@ -9,7 +9,7 @@
 import UIKit
 import CovPassUI
 
-struct ValidatorAppInformationSceneFactory: SceneFactory {
+struct AppInformationSceneFactory: SceneFactory {
     // MARK: - Properties
 
     private let router: AppInformationRouterProtocol
@@ -21,7 +21,7 @@ struct ValidatorAppInformationSceneFactory: SceneFactory {
     }
 
     func make() -> UIViewController {
-        let viewModel = ValidatorAppInformationViewModel(router: router)
+        let viewModel = AppInformationViewModel(router: router)
         let viewController = AppInformationViewController(viewModel: viewModel)
         return viewController
     }

@@ -46,7 +46,7 @@ class ValidatorRouter: ValidatorRouterProtocol {
 
     func showAppInformation() {
         sceneCoordinator.push(
-            ValidatorAppInformationSceneFactory(
+            AppInformationSceneFactory(
                 router: AppInformationRouter(sceneCoordinator: sceneCoordinator)
             )
         )

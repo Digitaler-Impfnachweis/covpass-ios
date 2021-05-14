@@ -57,7 +57,7 @@ class CertificateRouter: CertificateRouterProtocol, DialogRouterProtocol {
 
     func showAppInformation() {
         sceneCoordinator.push(
-            PassAppInformationSceneFactory(
+            AppInformationSceneFactory(
                 router: AppInformationRouter(sceneCoordinator: sceneCoordinator)
             )
         )

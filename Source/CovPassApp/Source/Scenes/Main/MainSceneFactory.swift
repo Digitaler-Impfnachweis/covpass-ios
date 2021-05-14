@@ -1,5 +1,5 @@
 //
-//  PassAppSceneFactory.swift
+//  MainSceneFactory.swift
 //
 //
 //  © Copyright IBM Deutschland GmbH 2021
@@ -10,20 +10,20 @@ import UIKit
 import CovPassCommon
 import CovPassUI
 
-public struct ValidatorAppSceneFactory: SceneFactory {
+struct MainSceneFactory: SceneFactory {
     // MARK: - Properties
 
     private let sceneCoordinator: SceneCoordinator
 
     // MARK: - Lifecycle
 
-    public init(sceneCoordinator: SceneCoordinator) {
+    init(sceneCoordinator: SceneCoordinator) {
         self.sceneCoordinator = sceneCoordinator
     }
 
-    public func make() -> UIViewController {
+    func make() -> UIViewController {
         UserDefaults.StartupInfo.bool(.onboarding) ?
-            validatorViewController() :
+            certificateViewController() :
             startViewController()
     }
 
@@ -34,9 +34,9 @@ public struct ValidatorAppSceneFactory: SceneFactory {
         return viewController
     }
 
-    private func validatorViewController() -> UIViewController {
-        let router = ValidatorRouter(sceneCoordinator: sceneCoordinator)
-        let factory = ValidatorSceneFactory(router: router)
+    private func certificateViewController() -> UIViewController {
+        let router = CertificateRouter(sceneCoordinator: sceneCoordinator)
+        let factory = CertificateSceneFactory(router: router)
         let viewController = factory.make()
         return viewController
     }

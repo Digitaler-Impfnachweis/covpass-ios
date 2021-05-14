@@ -1,5 +1,5 @@
 //
-//  PassAppInformationViewModel.swift
+//  AppInformationViewModel.swift
 //
 //
 //  © Copyright IBM Deutschland GmbH 2021
@@ -9,7 +9,7 @@
 import Foundation
 import CovPassUI
 
-class PassAppInformationViewModel: AppInformationViewModelProtocol {
+class AppInformationViewModel: AppInformationViewModelProtocol {
     // MARK: - Properties
 
     let router: AppInformationRouterProtocol

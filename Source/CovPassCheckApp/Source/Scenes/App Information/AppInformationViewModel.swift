@@ -1,5 +1,5 @@
 //
-//  ValidatorAppInformationViewModel.swift
+//  AppInformationViewModel.swift
 //
 //
 //  © Copyright IBM Deutschland GmbH 2021
@@ -10,7 +10,7 @@ import Foundation
 import CovPassCommon
 import CovPassUI
 
-class ValidatorAppInformationViewModel: AppInformationViewModelProtocol {
+class AppInformationViewModel: AppInformationViewModelProtocol {
     // MARK: - Properties
 
     let router: AppInformationRouterProtocol

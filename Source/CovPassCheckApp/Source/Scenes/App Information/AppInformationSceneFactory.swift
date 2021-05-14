@@ -1,5 +1,5 @@
 //
-//  PassAppInformationSceneFactory.swift
+//  AppInformationSceneFactory.swift
 //
 //
 //  © Copyright IBM Deutschland GmbH 2021
@@ -9,7 +9,7 @@
 import UIKit
 import CovPassUI
 
-struct PassAppInformationSceneFactory: SceneFactory {
+struct AppInformationSceneFactory: SceneFactory {
     // MARK: - Properties
 
     private let router: AppInformationRouterProtocol
@@ -21,7 +21,7 @@ struct PassAppInformationSceneFactory: SceneFactory {
     }
 
     func make() -> UIViewController {
-        let viewModel = PassAppInformationViewModel(router: router)
+        let viewModel = AppInformationViewModel(router: router)
         let viewController = AppInformationViewController(viewModel: viewModel)
         return viewController
     }

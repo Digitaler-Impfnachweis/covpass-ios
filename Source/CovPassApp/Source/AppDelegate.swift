@@ -27,7 +27,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
 
         let window = UIWindow(frame: UIScreen.main.bounds)
         let sceneCoordinator = DefaultSceneCoordinator(window: window)
-        let mainScene = PassAppSceneFactory(sceneCoordinator: sceneCoordinator)
+        let mainScene = MainSceneFactory(sceneCoordinator: sceneCoordinator)
         sceneCoordinator.asRoot(mainScene)
         window.rootViewController = sceneCoordinator.rootViewController
         window.makeKeyAndVisible()
