@@ -2,7 +2,8 @@
 //  ProofViewController.swift
 //
 //
-//  Copyright © 2021 IBM. All rights reserved.
+//  © Copyright IBM Deutschland GmbH 2021
+//  SPDX-License-Identifier: Apache-2.0
 //
 
 import UIKit
@@ -14,7 +15,7 @@ class HowToScanViewController: UIViewController {
     @IBOutlet var headline: InfoHeaderView!
     @IBOutlet var descriptionText: ParagraphView!
     @IBOutlet var imageView: UIImageView!
-    @IBOutlet var actionView: InfoHeaderView!
+    @IBOutlet var actionView: ListItemView!
     @IBOutlet var toolbarView: CustomToolbarView!
 
     // MARK: - Properties
@@ -58,11 +59,10 @@ class HowToScanViewController: UIViewController {
     }
 
     private func configureActionView() {
-        actionView.attributedTitleText = viewModel.actionTitle.styledAs(.header_3)
+        actionView.textLabel.attributedText = viewModel.actionTitle.styledAs(.header_3)
         actionView.action = { [weak self] in
             self?.viewModel.showMoreInformation()
         }
-        actionView.image = .chevronRight
         actionView.tintColor = .brandAccent
         actionView.layoutMargins.top = .space_40
     }

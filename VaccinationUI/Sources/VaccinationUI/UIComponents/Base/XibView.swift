@@ -8,7 +8,8 @@
 //  All constraints within a XibView need to have a priority lower
 //  than 1000 to prevent conflicts when hiding the view.
 //
-//  Copyright © 2021 IBM. All rights reserved.
+//  © Copyright IBM Deutschland GmbH 2021
+//  SPDX-License-Identifier: Apache-2.0
 //
 
 import UIKit

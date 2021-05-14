@@ -2,7 +2,8 @@
 //  VaccinationDetailViewController.swift
 //
 //
-//  Copyright © 2021 IBM. All rights reserved.
+//  © Copyright IBM Deutschland GmbH 2021
+//  SPDX-License-Identifier: Apache-2.0
 //
 
 import PromiseKit
@@ -90,7 +91,6 @@ class VaccinationDetailViewController: UIViewController {
         immunizationView.layoutMargins.bottom = .space_24
 
         immunizationButton.title = viewModel.immunizationButton
-        immunizationButton.backgroundColor = UIColor.white
 
         immunizationButton.action = { [weak self] in
             self?.viewModel.immunizationButtonTapped()
