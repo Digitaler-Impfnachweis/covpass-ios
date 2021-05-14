@@ -26,7 +26,3 @@ public struct HealthCertificateClaim: Codable {
         try container.encode(dgc, forKey: .dgc)
     }
 }
-
-
-*
-* SPDX-License-Identifier: Apache-2.0
