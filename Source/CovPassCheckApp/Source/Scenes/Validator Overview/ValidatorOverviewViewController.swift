@@ -1,5 +1,5 @@
 //
-//  ValidatorViewController.swift
+//  ValidatorOverviewViewController.swift
 //
 //
 //  © Copyright IBM Deutschland GmbH 2021
@@ -11,7 +11,7 @@ import Scanner
 import UIKit
 import CovPassUI
 
-class ValidatorViewController: UIViewController {
+class ValidatorOverviewViewController: UIViewController {
     // MARK: - IBOutlet
 
     @IBOutlet var headerView: InfoHeaderView!
@@ -20,14 +20,14 @@ class ValidatorViewController: UIViewController {
 
     // MARK: - Properties
 
-    private(set) var viewModel: ValidatorViewModel
+    private(set) var viewModel: ValidatorOverviewViewModel
 
     // MARK: - Lifecycle
 
     @available(*, unavailable)
     required init?(coder _: NSCoder) { fatalError("init?(coder: NSCoder) not implemented yet") }
 
-    init(viewModel: ValidatorViewModel) {
+    init(viewModel: ValidatorOverviewViewModel) {
         self.viewModel = viewModel
         super.init(nibName: String(describing: Self.self), bundle: .main)
     }

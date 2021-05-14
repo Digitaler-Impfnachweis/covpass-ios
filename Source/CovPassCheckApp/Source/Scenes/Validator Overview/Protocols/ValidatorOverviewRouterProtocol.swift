@@ -1,5 +1,5 @@
 //
-//  ValidatorRouterProtocol.swift
+//  ValidatorOverviewRouterProtocol.swift
 //
 //
 //  © Copyright IBM Deutschland GmbH 2021
@@ -12,7 +12,7 @@ import UIKit
 import CovPassCommon
 import CovPassUI
 
-protocol ValidatorRouterProtocol: RouterProtocol {
+protocol ValidatorOverviewRouterProtocol: RouterProtocol {
     func scanQRCode() -> Promise<ScanResult>
     func showCertificate(_ certificate: CBORWebToken?)
     func showAppInformation()

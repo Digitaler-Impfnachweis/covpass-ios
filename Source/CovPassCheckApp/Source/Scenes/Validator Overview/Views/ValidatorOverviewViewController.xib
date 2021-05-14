@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ValidatorViewController" customModule="CovPassCheckApp" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ValidatorOverviewViewController" customModule="CovPassCheckApp" customModuleProvider="target">
             <connections>
                 <outlet property="headerView" destination="zJo-A3-iFe" id="O25-eI-mKv"/>
                 <outlet property="offlineCard" destination="TTc-KS-yO5" id="UxL-Sz-hzu"/>

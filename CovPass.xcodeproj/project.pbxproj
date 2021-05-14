@@ -59,12 +59,12 @@
 		216D2037264EFA6C00370F16 /* MockCertificateViewModelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216D1F61264EF52400370F16 /* MockCertificateViewModelDelegate.swift */; };
 		216D203D264EFA7400370F16 /* PassOnboardingPageViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216D1F63264EF52400370F16 /* PassOnboardingPageViewModelTests.swift */; };
 		216D203E264EFA7400370F16 /* PassConsentPageViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216D1F64264EF52400370F16 /* PassConsentPageViewModelTests.swift */; };
-		2181C160264F035500DE7412 /* ValidatorSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FBCA39264F011800CAEF44 /* ValidatorSceneFactory.swift */; };
-		2181C161264F035500DE7412 /* ValidatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FBCA3B264F011800CAEF44 /* ValidatorViewController.swift */; };
-		2181C162264F035500DE7412 /* ValidatorRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FBCA3A264F011800CAEF44 /* ValidatorRouter.swift */; };
-		2181C163264F035500DE7412 /* ValidatorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FBCA38264F011800CAEF44 /* ValidatorViewModel.swift */; };
-		2181C168264F035A00DE7412 /* ValidatorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21FBCA3D264F011800CAEF44 /* ValidatorViewController.xib */; };
-		2181C16D264F035D00DE7412 /* ValidatorRouterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FBCA3F264F011800CAEF44 /* ValidatorRouterProtocol.swift */; };
+		2181C160264F035500DE7412 /* ValidatorOverviewSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FBCA39264F011800CAEF44 /* ValidatorOverviewSceneFactory.swift */; };
+		2181C161264F035500DE7412 /* ValidatorOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FBCA3B264F011800CAEF44 /* ValidatorOverviewViewController.swift */; };
+		2181C162264F035500DE7412 /* ValidatorOverviewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FBCA3A264F011800CAEF44 /* ValidatorOverviewRouter.swift */; };
+		2181C163264F035500DE7412 /* ValidatorOverviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FBCA38264F011800CAEF44 /* ValidatorOverviewViewModel.swift */; };
+		2181C168264F035A00DE7412 /* ValidatorOverviewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21FBCA3D264F011800CAEF44 /* ValidatorOverviewViewController.xib */; };
+		2181C16D264F035D00DE7412 /* ValidatorOverviewRouterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FBCA3F264F011800CAEF44 /* ValidatorOverviewRouterProtocol.swift */; };
 		2181C172264F037000DE7412 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FBCA41264F011800CAEF44 /* WelcomeViewController.swift */; };
 		2181C173264F037000DE7412 /* WelcomeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FBCA43264F011800CAEF44 /* WelcomeRouter.swift */; };
 		2181C174264F037000DE7412 /* WelcomeSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FBCA42264F011800CAEF44 /* WelcomeSceneFactory.swift */; };
@@ -177,12 +177,12 @@
 		2191E02F264F20D000316B48 /* CovPassCommon */ = {isa = PBXFileReference; lastKnownFileType = folder; path = CovPassCommon; sourceTree = "<group>"; };
 		21FBCA34264F011800CAEF44 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		21FBCA35264F011800CAEF44 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		21FBCA38264F011800CAEF44 /* ValidatorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatorViewModel.swift; sourceTree = "<group>"; };
-		21FBCA39264F011800CAEF44 /* ValidatorSceneFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatorSceneFactory.swift; sourceTree = "<group>"; };
-		21FBCA3A264F011800CAEF44 /* ValidatorRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatorRouter.swift; sourceTree = "<group>"; };
-		21FBCA3B264F011800CAEF44 /* ValidatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatorViewController.swift; sourceTree = "<group>"; };
-		21FBCA3D264F011800CAEF44 /* ValidatorViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ValidatorViewController.xib; sourceTree = "<group>"; };
-		21FBCA3F264F011800CAEF44 /* ValidatorRouterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatorRouterProtocol.swift; sourceTree = "<group>"; };
+		21FBCA38264F011800CAEF44 /* ValidatorOverviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatorOverviewViewModel.swift; sourceTree = "<group>"; };
+		21FBCA39264F011800CAEF44 /* ValidatorOverviewSceneFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatorOverviewSceneFactory.swift; sourceTree = "<group>"; };
+		21FBCA3A264F011800CAEF44 /* ValidatorOverviewRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatorOverviewRouter.swift; sourceTree = "<group>"; };
+		21FBCA3B264F011800CAEF44 /* ValidatorOverviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatorOverviewViewController.swift; sourceTree = "<group>"; };
+		21FBCA3D264F011800CAEF44 /* ValidatorOverviewViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ValidatorOverviewViewController.xib; sourceTree = "<group>"; };
+		21FBCA3F264F011800CAEF44 /* ValidatorOverviewRouterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatorOverviewRouterProtocol.swift; sourceTree = "<group>"; };
 		21FBCA41264F011800CAEF44 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		21FBCA42264F011800CAEF44 /* WelcomeSceneFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeSceneFactory.swift; sourceTree = "<group>"; };
 		21FBCA43264F011800CAEF44 /* WelcomeRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeRouter.swift; sourceTree = "<group>"; };
@@ -557,30 +557,30 @@
 				21FBCA55264F011800CAEF44 /* Main */,
 				21FBCA40264F011800CAEF44 /* Welcome */,
 				21FBCA57264F011800CAEF44 /* Onboarding */,
-				21FBCA37264F011800CAEF44 /* Validator */,
+				21FBCA37264F011800CAEF44 /* Validator Overview */,
 				21FBCA4A264F011800CAEF44 /* Validation Result */,
 				21FBCA47264F011800CAEF44 /* App Information */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
 		};
-		21FBCA37264F011800CAEF44 /* Validator */ = {
+		21FBCA37264F011800CAEF44 /* Validator Overview */ = {
 			isa = PBXGroup;
 			children = (
 				21FBCA3E264F011800CAEF44 /* Protocols */,
 				21FBCA3C264F011800CAEF44 /* Views */,
-				21FBCA3A264F011800CAEF44 /* ValidatorRouter.swift */,
-				21FBCA39264F011800CAEF44 /* ValidatorSceneFactory.swift */,
-				21FBCA38264F011800CAEF44 /* ValidatorViewModel.swift */,
-				21FBCA3B264F011800CAEF44 /* ValidatorViewController.swift */,
+				21FBCA3A264F011800CAEF44 /* ValidatorOverviewRouter.swift */,
+				21FBCA39264F011800CAEF44 /* ValidatorOverviewSceneFactory.swift */,
+				21FBCA38264F011800CAEF44 /* ValidatorOverviewViewModel.swift */,
+				21FBCA3B264F011800CAEF44 /* ValidatorOverviewViewController.swift */,
 			);
-			path = Validator;
+			path = "Validator Overview";
 			sourceTree = "<group>";
 		};
 		21FBCA3C264F011800CAEF44 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				21FBCA3D264F011800CAEF44 /* ValidatorViewController.xib */,
+				21FBCA3D264F011800CAEF44 /* ValidatorOverviewViewController.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -588,7 +588,7 @@
 		21FBCA3E264F011800CAEF44 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
-				21FBCA3F264F011800CAEF44 /* ValidatorRouterProtocol.swift */,
+				21FBCA3F264F011800CAEF44 /* ValidatorOverviewRouterProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -939,7 +939,7 @@
 				2181C179264F037400DE7412 /* WelcomeViewController.xib in Resources */,
 				2181C190264F03AA00DE7412 /* ValidationResultViewController.xib in Resources */,
 				2181C1BD264F053000DE7412 /* Localizable.strings in Resources */,
-				2181C168264F035A00DE7412 /* ValidatorViewController.xib in Resources */,
+				2181C168264F035A00DE7412 /* ValidatorOverviewViewController.xib in Resources */,
 				21FBCA79264F016E00CAEF44 /* LaunchScreen.storyboard in Resources */,
 				6507D7ED25FB5E0300D69F94 /* Assets.xcassets in Resources */,
 			);
@@ -1020,15 +1020,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2181C160264F035500DE7412 /* ValidatorSceneFactory.swift in Sources */,
+				2181C160264F035500DE7412 /* ValidatorOverviewSceneFactory.swift in Sources */,
 				2181C172264F037000DE7412 /* WelcomeViewController.swift in Sources */,
 				2181C188264F03A600DE7412 /* ValidationResultRouter.swift in Sources */,
-				2181C161264F035500DE7412 /* ValidatorViewController.swift in Sources */,
+				2181C161264F035500DE7412 /* ValidatorOverviewViewController.swift in Sources */,
 				2181C19F264F03B800DE7412 /* MainSceneFactory.swift in Sources */,
 				2181C1A5264F03BC00DE7412 /* OnboardingRouter.swift in Sources */,
 				2181C1B2264F040500DE7412 /* ApiServiceFactory.swift in Sources */,
 				2181C173264F037000DE7412 /* WelcomeRouter.swift in Sources */,
-				2181C163264F035500DE7412 /* ValidatorViewModel.swift in Sources */,
+				2181C163264F035500DE7412 /* ValidatorOverviewViewModel.swift in Sources */,
 				2181C1A9264F03BC00DE7412 /* OnboardingSceneFactory.swift in Sources */,
 				2181C1A4264F03BC00DE7412 /* ValidationOnboardingContainerViewModel.swift in Sources */,
 				2181C174264F037000DE7412 /* WelcomeSceneFactory.swift in Sources */,
@@ -1039,9 +1039,9 @@
 				88AB2AC025FA433F00D4EA52 /* AppDelegate.swift in Sources */,
 				2181C1A8264F03BC00DE7412 /* OnboardingViewModel.swift in Sources */,
 				2181C18B264F03A600DE7412 /* ValidationResultViewController.swift in Sources */,
-				2181C162264F035500DE7412 /* ValidatorRouter.swift in Sources */,
+				2181C162264F035500DE7412 /* ValidatorOverviewRouter.swift in Sources */,
 				2181C189264F03A600DE7412 /* ValidationResultViewModel.swift in Sources */,
-				2181C16D264F035D00DE7412 /* ValidatorRouterProtocol.swift in Sources */,
+				2181C16D264F035D00DE7412 /* ValidatorOverviewRouterProtocol.swift in Sources */,
 				2181C182264F039500DE7412 /* AppInformationSceneFactory.swift in Sources */,
 				2181C1B8264F046400DE7412 /* WelcomeViewModel.swift in Sources */,
 				2181C1A7264F03BC00DE7412 /* ValidationOnboardingPageViewModel.swift in Sources */,

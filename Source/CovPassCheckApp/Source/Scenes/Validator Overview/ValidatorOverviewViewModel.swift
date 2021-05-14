@@ -12,11 +12,11 @@ import UIKit
 import CovPassCommon
 import CovPassUI
 
-class ValidatorViewModel {
+class ValidatorOverviewViewModel {
     // MARK: - Private
 
     private let repository: VaccinationRepositoryProtocol
-    private let router: ValidatorRouterProtocol
+    private let router: ValidatorOverviewRouterProtocol
     private let parser = QRCoder()
 
     // MARK: - Internal
@@ -40,7 +40,7 @@ class ValidatorViewModel {
 
     // MARK: - Lifecycle
 
-    init(router: ValidatorRouterProtocol, repository: VaccinationRepositoryProtocol) {
+    init(router: ValidatorOverviewRouterProtocol, repository: VaccinationRepositoryProtocol) {
         self.router = router
         self.repository = repository
     }

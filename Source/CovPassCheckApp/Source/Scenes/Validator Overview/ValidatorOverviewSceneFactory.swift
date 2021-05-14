@@ -1,5 +1,5 @@
 //
-//  ValidatorSceneFactory.swift
+//  ValidatorOverviewSceneFactory.swift
 //
 //
 //  © Copyright IBM Deutschland GmbH 2021
@@ -11,21 +11,21 @@ import UIKit
 import CovPassCommon
 import CovPassUI
 
-struct ValidatorSceneFactory: SceneFactory {
+struct ValidatorOverviewSceneFactory: SceneFactory {
     // MARK: - Properties
 
-    let router: ValidatorRouterProtocol
+    let router: ValidatorOverviewRouterProtocol
 
     // MARK: - Lifecycle
 
-    init(router: ValidatorRouterProtocol) {
+    init(router: ValidatorOverviewRouterProtocol) {
         self.router = router
     }
 
     func make() -> UIViewController {
         let repository = VaccinationRepository(service: APIService.create(), parser: QRCoder())
-        let viewModel = ValidatorViewModel(router: router, repository: repository)
-        let viewController = ValidatorViewController(viewModel: viewModel)
+        let viewModel = ValidatorOverviewViewModel(router: router, repository: repository)
+        let viewController = ValidatorOverviewViewController(viewModel: viewModel)
         let navigationController = UINavigationController(rootViewController: viewController)
         return navigationController
     }

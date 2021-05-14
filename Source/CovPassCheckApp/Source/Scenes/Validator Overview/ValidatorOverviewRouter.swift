@@ -1,5 +1,5 @@
 //
-//  ValidatorRouter.swift
+//  ValidatorOverviewRouter.swift
 //
 //
 //  © Copyright IBM Deutschland GmbH 2021
@@ -12,7 +12,7 @@ import UIKit
 import CovPassCommon
 import CovPassUI
 
-class ValidatorRouter: ValidatorRouterProtocol {
+class ValidatorOverviewRouter: ValidatorOverviewRouterProtocol {
     // MARK: - Properties
 
     let sceneCoordinator: SceneCoordinator

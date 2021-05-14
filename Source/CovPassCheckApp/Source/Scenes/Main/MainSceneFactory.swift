@@ -35,8 +35,8 @@ struct MainSceneFactory: SceneFactory {
     }
 
     private func mainViewController() -> UIViewController {
-        let router = ValidatorRouter(sceneCoordinator: sceneCoordinator)
-        let factory = ValidatorSceneFactory(router: router)
+        let router = ValidatorOverviewRouter(sceneCoordinator: sceneCoordinator)
+        let factory = ValidatorOverviewSceneFactory(router: router)
         let viewController = factory.make()
         return viewController
     }
