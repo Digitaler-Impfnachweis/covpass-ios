@@ -32,7 +32,7 @@ class ValidationResultViewController: UIViewController {
 
     init(viewModel: ValidationResultViewModel) {
         self.viewModel = viewModel
-        super.init(nibName: String(describing: Self.self), bundle: .module)
+        super.init(nibName: String(describing: Self.self), bundle: .main)
         self.viewModel.delegate = self
     }
 

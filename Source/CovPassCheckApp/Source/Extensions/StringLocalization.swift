@@ -11,6 +11,6 @@ import VaccinationUI
 
 extension String {
     var localized: String {
-        return Localizer.localized(self, bundle: Bundle.module)
+        Localizer.localized(self, bundle: Bundle.main)
     }
 }

@@ -17,21 +17,21 @@
                BlueprintIdentifier = "VaccinationUI"
                BuildableName = "VaccinationUI"
                BlueprintName = "VaccinationUI"
-               ReferencedContainer = "container:VaccinationUI">
+               ReferencedContainer = "container:Source/VaccinationUI">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
             buildForTesting = "YES"
             buildForRunning = "YES"
-            buildForProfiling = "NO"
-            buildForArchiving = "NO"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "VaccinationUITests"
                BuildableName = "VaccinationUITests"
                BlueprintName = "VaccinationUITests"
-               ReferencedContainer = "container:VaccinationUI">
+               ReferencedContainer = "container:Source/VaccinationUI">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -50,22 +50,8 @@
                BlueprintIdentifier = "VaccinationUITests"
                BuildableName = "VaccinationUITests"
                BlueprintName = "VaccinationUITests"
-               ReferencedContainer = "container:VaccinationUI">
+               ReferencedContainer = "container:Source/VaccinationUI">
             </BuildableReference>
-            <SkippedTests>
-               <Test
-                  Identifier = "CustomToolbarViewTests/testLeftButtonAction()">
-               </Test>
-               <Test
-                  Identifier = "HeadlineTests/testInitView()">
-               </Test>
-               <Test
-                  Identifier = "PrimaryButtonContainerTests/testAction()">
-               </Test>
-               <Test
-                  Identifier = "PrimaryButtonContainerTests/testButtonAction()">
-               </Test>
-            </SkippedTests>
          </TestableReference>
       </Testables>
    </TestAction>
@@ -86,6 +72,15 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "VaccinationUI"
+            BuildableName = "VaccinationUI"
+            BlueprintName = "VaccinationUI"
+            ReferencedContainer = "container:Source/VaccinationUI">
+         </BuildableReference>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

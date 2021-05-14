@@ -26,7 +26,7 @@ class ValidatorAppInformationViewModel: AppInformationViewModelProtocol {
     var appVersionText: String {
         String(
             format: "Version %@".localized,
-            Bundle.module.appVersion()
+            Bundle.main.appVersion()
         )
     }
 

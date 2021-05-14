@@ -7,7 +7,6 @@
 
 import UIKit
 import VaccinationUI
-import VaccinationValidator
 
 @UIApplicationMain
 final class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -20,6 +19,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
         try? UIFont.loadCustomFonts()
+
+        guard NSClassFromString("XCTest") == nil else { return true }
 
         let window = UIWindow(frame: UIScreen.main.bounds)
         let sceneCoordinator = DefaultSceneCoordinator(window: window)

@@ -29,7 +29,7 @@ class ValidatorViewController: UIViewController {
 
     init(viewModel: ValidatorViewModel) {
         self.viewModel = viewModel
-        super.init(nibName: String(describing: Self.self), bundle: .module)
+        super.init(nibName: String(describing: Self.self), bundle: .main)
     }
 
     override func viewDidLoad() {

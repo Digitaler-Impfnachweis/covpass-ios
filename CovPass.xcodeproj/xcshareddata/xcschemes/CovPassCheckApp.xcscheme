@@ -33,9 +33,23 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "65D6D51325F8B94D000CB339"
-               BuildableName = "VaccinationValidatorApp.app"
-               BlueprintName = "VaccinationValidatorApp"
-               ReferencedContainer = "container:VaccinationCertificate.xcodeproj">
+               BuildableName = "CovPassCheckApp.app"
+               BlueprintName = "CovPassCheckApp"
+               ReferencedContainer = "container:CovPass.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "65D6D52325F8B94D000CB339"
+               BuildableName = "CovPassCheckAppTests.xctest"
+               BlueprintName = "CovPassCheckAppTests"
+               ReferencedContainer = "container:CovPass.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -44,26 +58,27 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES">
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      codeCoverageEnabled = "YES"
+      onlyGenerateCoverageForSpecifiedTargets = "YES">
+      <CodeCoverageTargets>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "65D6D51325F8B94D000CB339"
+            BuildableName = "CovPassCheckApp.app"
+            BlueprintName = "CovPassCheckApp"
+            ReferencedContainer = "container:CovPass.xcodeproj">
+         </BuildableReference>
+      </CodeCoverageTargets>
       <Testables>
          <TestableReference
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "65D6D52E25F8B94E000CB339"
-               BuildableName = "VaccinationValidatorAppUITests.xctest"
-               BlueprintName = "VaccinationValidatorAppUITests"
-               ReferencedContainer = "container:VaccinationCertificate.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
                BlueprintIdentifier = "65D6D52325F8B94D000CB339"
-               BuildableName = "VaccinationValidatorAppTests.xctest"
-               BlueprintName = "VaccinationValidatorAppTests"
-               ReferencedContainer = "container:VaccinationCertificate.xcodeproj">
+               BuildableName = "CovPassCheckAppTests.xctest"
+               BlueprintName = "CovPassCheckAppTests"
+               ReferencedContainer = "container:CovPass.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -83,20 +98,11 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "65D6D51325F8B94D000CB339"
-            BuildableName = "VaccinationValidatorApp.app"
-            BlueprintName = "VaccinationValidatorApp"
+            BuildableName = "CovPassCheckApp.app"
+            BlueprintName = "CovPassCheckApp"
             ReferencedContainer = "container:CovPass.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "65D6D51325F8B94D000CB339"
-            BuildableName = "VaccinationValidatorApp.app"
-            BlueprintName = "VaccinationValidatorApp"
-            ReferencedContainer = "container:VaccinationCertificate.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -104,16 +110,15 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "65D6D51325F8B94D000CB339"
-            BuildableName = "VaccinationValidatorApp.app"
-            BlueprintName = "VaccinationValidatorApp"
-            ReferencedContainer = "container:VaccinationCertificate.xcodeproj">
+            BuildableName = "CovPassCheckApp.app"
+            BlueprintName = "CovPassCheckApp"
+            ReferencedContainer = "container:CovPass.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
