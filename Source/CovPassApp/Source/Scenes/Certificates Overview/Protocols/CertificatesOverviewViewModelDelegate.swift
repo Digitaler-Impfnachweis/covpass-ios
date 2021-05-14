@@ -1,5 +1,5 @@
 //
-//  CertificateViewModelDelegate.swift
+//  CertificatesOverviewViewModelDelegate.swift
 //
 //
 //  © Copyright IBM Deutschland GmbH 2021

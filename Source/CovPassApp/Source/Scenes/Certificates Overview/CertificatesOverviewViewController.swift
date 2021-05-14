@@ -1,5 +1,5 @@
 //
-//  CertificateViewController.swift
+//  CertificatesOverviewViewController.swift
 //
 //
 //  © Copyright IBM Deutschland GmbH 2021

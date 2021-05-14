@@ -1,5 +1,5 @@
 //
-//  CertificateSceneFactory.swift
+//  CertificatesOverviewSceneFactory.swift
 //
 //
 //  © Copyright IBM Deutschland GmbH 2021
