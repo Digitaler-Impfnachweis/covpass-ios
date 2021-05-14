@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import VaccinationUI
+import CovPassUI
 
 struct NoCertificateCardViewModel: NoCertificateCardViewModelProtocol {
     // MARK: - Internal Properties

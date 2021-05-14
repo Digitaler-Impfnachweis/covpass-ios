@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import VaccinationUI
+import CovPassUI
 
 extension String {
     var localized: String {

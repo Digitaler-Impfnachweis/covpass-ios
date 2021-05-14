@@ -8,7 +8,7 @@
 
 import PromiseKit
 import UIKit
-import VaccinationUI
+import CovPassUI
 
 protocol VaccinationDetailRouterProtocol: DialogRouterProtocol {
     func showHowToScan() -> Promise<Void>

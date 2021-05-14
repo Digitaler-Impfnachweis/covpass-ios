@@ -8,7 +8,7 @@
 
 import UIKit
 import VaccinationCommon
-import VaccinationUI
+import CovPassUI
 
 class CertificateCardViewModel: CertificateCardViewModelProtocol {
     // MARK: - Private Properties

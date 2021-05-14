@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import VaccinationUI
+import CovPassUI
 
 @IBDesignable
 class VaccinationView: XibView {

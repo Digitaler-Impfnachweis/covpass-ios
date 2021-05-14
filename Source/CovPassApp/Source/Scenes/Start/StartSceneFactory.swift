@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import VaccinationUI
+import CovPassUI
 
 struct StartSceneFactory: SceneFactory {
     // MARK: - Properties

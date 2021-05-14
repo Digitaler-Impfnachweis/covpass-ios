@@ -11,7 +11,7 @@ import PromiseKit
 import UIKit
 import VaccinationCommon
 @testable import CovPassApp
-import VaccinationUI
+import CovPassUI
 
 class MockCertificateViewModel: CertificateViewModel {
     // MARK: - Test Variables

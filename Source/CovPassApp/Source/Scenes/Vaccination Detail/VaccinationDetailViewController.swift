@@ -10,7 +10,7 @@ import PromiseKit
 import Scanner
 import UIKit
 import VaccinationCommon
-import VaccinationUI
+import CovPassUI
 
 class VaccinationDetailViewController: UIViewController {
     // MARK: - Outlets

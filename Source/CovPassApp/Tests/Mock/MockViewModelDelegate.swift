@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import VaccinationUI
+import CovPassUI
 
 class MockViewModelDelegate: ViewModelDelegate {
     var updateCalled = false

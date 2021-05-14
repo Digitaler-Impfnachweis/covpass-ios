@@ -8,7 +8,7 @@
 import Keychain
 import UIKit
 import VaccinationCommon
-import VaccinationUI
+import CovPassUI
 
 @UIApplicationMain
 final class AppDelegate: UIResponder, UIApplicationDelegate {

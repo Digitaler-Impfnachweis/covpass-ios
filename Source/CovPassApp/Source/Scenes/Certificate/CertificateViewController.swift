@@ -10,7 +10,7 @@ import Foundation
 import Scanner
 import UIKit
 import VaccinationCommon
-import VaccinationUI
+import CovPassUI
 
 class CertificateViewController: UIViewController {
     // MARK: - IBOutlet

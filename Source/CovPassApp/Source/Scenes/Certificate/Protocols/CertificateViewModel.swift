@@ -9,7 +9,7 @@
 import PromiseKit
 import UIKit
 import VaccinationCommon
-import VaccinationUI
+import CovPassUI
 
 protocol CertificateViewModel {
     var delegate: CertificateViewModelDelegate? { get set }

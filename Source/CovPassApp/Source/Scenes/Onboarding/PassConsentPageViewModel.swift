@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import VaccinationUI
+import CovPassUI
 
 class PassConsentPageViewModel: ConsentPageViewModel {
     // MARK: - Properties

@@ -9,7 +9,7 @@
 import Foundation
 import PromiseKit
 import VaccinationCommon
-import VaccinationUI
+import CovPassUI
 
 class MockQRCoder: QRCoderProtocol {
     func parse(_: String) -> Promise<CBORWebToken> {

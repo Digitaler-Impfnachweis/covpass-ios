@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import VaccinationUI
+import CovPassUI
 
 class OnboardingViewModel: BaseViewModel {
     // MARK: - Properties

@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import VaccinationUI
+import CovPassUI
 
 struct MockCardViewModel: CardViewModel {
     var delegate: ViewModelDelegate?

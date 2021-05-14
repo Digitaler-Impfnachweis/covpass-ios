@@ -9,7 +9,7 @@
 import Foundation
 import Scanner
 import UIKit
-import VaccinationUI
+import CovPassUI
 
 class ValidatorViewController: UIViewController {
     // MARK: - IBOutlet

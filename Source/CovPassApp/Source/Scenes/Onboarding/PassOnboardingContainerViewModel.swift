@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import VaccinationUI
+import CovPassUI
 
 class PassOnboardingContainerViewModel: OnboardingContainerViewModel {
     // MARK: - Properties

@@ -8,7 +8,7 @@
 
 import Foundation
 import VaccinationCommon
-import VaccinationUI
+import CovPassUI
 
 class ValidatorAppInformationViewModel: AppInformationViewModelProtocol {
     // MARK: - Properties

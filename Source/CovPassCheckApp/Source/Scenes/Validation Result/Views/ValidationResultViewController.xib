@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ValidationResultViewController" customModule="VaccinationValidator">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ValidationResultViewController" customModule="CovPassCheckApp" customModuleProvider="target">
             <connections>
                 <outlet property="errorView" destination="Xfx-wN-fJV" id="bdM-g6-rkk"/>
                 <outlet property="headline" destination="5Zd-xw-4Zy" id="CJ4-zv-GyU"/>
@@ -27,7 +27,7 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="60" translatesAutoresizingMaskIntoConstraints="NO" id="5Zd-xw-4Zy" customClass="InfoHeaderView" customModule="VaccinationUI">
+                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="60" translatesAutoresizingMaskIntoConstraints="NO" id="5Zd-xw-4Zy" customClass="InfoHeaderView" customModule="CovPassUI">
                     <rect key="frame" x="0.0" y="64" width="414" height="60"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                 </view>
@@ -49,15 +49,15 @@
                                         </imageView>
                                     </subviews>
                                 </stackView>
-                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="Bik-p2-0B1" userLabel="Result View" customClass="ParagraphView" customModule="VaccinationUI">
+                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="Bik-p2-0B1" userLabel="Result View" customClass="ParagraphView" customModule="CovPassUI">
                                     <rect key="frame" x="0.0" y="150" width="414" height="128"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 </view>
-                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="vOJ-26-RLZ" userLabel="Name View" customClass="ParagraphView" customModule="VaccinationUI">
+                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="vOJ-26-RLZ" userLabel="Name View" customClass="ParagraphView" customModule="CovPassUI">
                                     <rect key="frame" x="0.0" y="278" width="414" height="128"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 </view>
-                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="Xfx-wN-fJV" userLabel="Error View" customClass="ParagraphView" customModule="VaccinationUI">
+                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="Xfx-wN-fJV" userLabel="Error View" customClass="ParagraphView" customModule="CovPassUI">
                                     <rect key="frame" x="0.0" y="406" width="414" height="128"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 </view>
@@ -77,7 +77,7 @@
                     <viewLayoutGuide key="contentLayoutGuide" id="yi7-T6-Cvu"/>
                     <viewLayoutGuide key="frameLayoutGuide" id="evq-Jj-6az"/>
                 </scrollView>
-                <view contentMode="scaleToFill" placeholderIntrinsicWidth="240" placeholderIntrinsicHeight="56" translatesAutoresizingMaskIntoConstraints="NO" id="a6B-vC-85H" customClass="CustomToolbarView" customModule="VaccinationUI">
+                <view contentMode="scaleToFill" placeholderIntrinsicWidth="240" placeholderIntrinsicHeight="56" translatesAutoresizingMaskIntoConstraints="NO" id="a6B-vC-85H" customClass="CustomToolbarView" customModule="CovPassUI">
                     <rect key="frame" x="0.0" y="802" width="414" height="60"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="60" id="p6h-0Q-RGl"/>

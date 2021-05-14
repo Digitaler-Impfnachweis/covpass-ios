@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		216D1F48264EF50300370F16 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 216D1F43264EF50300370F16 /* Localizable.strings */; };
 		216D1F49264EF50300370F16 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 216D1F46264EF50300370F16 /* Assets.xcassets */; };
-		216D1F4A264EF50300370F16 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 216D1F47264EF50300370F16 /* Main.storyboard */; };
 		216D1F87264EF6A800370F16 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 216D1F86264EF6A800370F16 /* LaunchScreen.storyboard */; };
 		216D1F98264EF73200370F16 /* PassAppSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216D1F24264EF4E400370F16 /* PassAppSceneFactory.swift */; };
 		216D1F9E264EF73D00370F16 /* StartOnboardingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 216D1F1E264EF4E400370F16 /* StartOnboardingViewController.xib */; };
@@ -50,7 +49,6 @@
 		216D1FFD264EF77C00370F16 /* PassAppInformationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216D1F22264EF4E400370F16 /* PassAppInformationViewModel.swift */; };
 		216D2003264EF7B500370F16 /* ApiServiceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216D1F39264EF4ED00370F16 /* ApiServiceFactory.swift */; };
 		216D2004264EF7B600370F16 /* StringLocalization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216D1F3A264EF4ED00370F16 /* StringLocalization.swift */; };
-		216D201A264EF88600370F16 /* VaccinationUI in Frameworks */ = {isa = PBXBuildFile; productRef = 216D2019264EF88600370F16 /* VaccinationUI */; };
 		216D202B264EFA6600370F16 /* CertificateViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216D1F58264EF52400370F16 /* CertificateViewControllerTests.swift */; };
 		216D202C264EFA6600370F16 /* CertificateViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216D1F5A264EF52400370F16 /* CertificateViewModelTests.swift */; };
 		216D2032264EFA6C00370F16 /* MockViewModelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216D1F5F264EF52400370F16 /* MockViewModelDelegate.swift */; };
@@ -61,7 +59,6 @@
 		216D2037264EFA6C00370F16 /* MockCertificateViewModelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216D1F61264EF52400370F16 /* MockCertificateViewModelDelegate.swift */; };
 		216D203D264EFA7400370F16 /* PassOnboardingPageViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216D1F63264EF52400370F16 /* PassOnboardingPageViewModelTests.swift */; };
 		216D203E264EFA7400370F16 /* PassConsentPageViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216D1F64264EF52400370F16 /* PassConsentPageViewModelTests.swift */; };
-		2181C153264F02F900DE7412 /* VaccinationUI in Frameworks */ = {isa = PBXBuildFile; productRef = 2181C152264F02F900DE7412 /* VaccinationUI */; };
 		2181C160264F035500DE7412 /* ValidatorSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FBCA39264F011800CAEF44 /* ValidatorSceneFactory.swift */; };
 		2181C161264F035500DE7412 /* ValidatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FBCA3B264F011800CAEF44 /* ValidatorViewController.swift */; };
 		2181C162264F035500DE7412 /* ValidatorRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FBCA3A264F011800CAEF44 /* ValidatorRouter.swift */; };
@@ -92,9 +89,10 @@
 		2181C1B3264F040500DE7412 /* StringLocalization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FBCA60264F011900CAEF44 /* StringLocalization.swift */; };
 		2181C1B8264F046400DE7412 /* StartOnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FBCA46264F011800CAEF44 /* StartOnboardingViewModel.swift */; };
 		2181C1BD264F053000DE7412 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 21FBCA33264F011800CAEF44 /* Localizable.strings */; };
+		21DAD6E1264F0B11003407FC /* CovPassUI in Frameworks */ = {isa = PBXBuildFile; productRef = 21DAD6E0264F0B11003407FC /* CovPassUI */; };
+		21DAD6E3264F0B19003407FC /* CovPassUI in Frameworks */ = {isa = PBXBuildFile; productRef = 21DAD6E2264F0B19003407FC /* CovPassUI */; };
 		21FBCA79264F016E00CAEF44 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21FBCA78264F016E00CAEF44 /* LaunchScreen.storyboard */; };
 		6507D7ED25FB5E0300D69F94 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 88AB2A4325FA40CE00D4EA52 /* Assets.xcassets */; };
-		65981892260CBA9400776F70 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65981872260CB45D00776F70 /* Main.storyboard */; };
 		88AB2A9725FA431100D4EA52 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88AB2A3B25FA40CE00D4EA52 /* AppDelegate.swift */; };
 		88AB2AA525FA431E00D4EA52 /* CovPassAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88AB2A3F25FA40CE00D4EA52 /* CovPassAppTests.swift */; };
 		88AB2AC025FA433F00D4EA52 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88AB2A4625FA40CE00D4EA52 /* AppDelegate.swift */; };
@@ -121,6 +119,7 @@
 /* Begin PBXFileReference section */
 		210116F82646D18100B9E8FF /* debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = debug.xcconfig; sourceTree = "<group>"; };
 		2101178C2646E86F00B9E8FF /* debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = debug.xcconfig; sourceTree = "<group>"; };
+		212E757D264F0D09007C0F3A /* CovPassUI */ = {isa = PBXFileReference; lastKnownFileType = folder; path = CovPassUI; sourceTree = "<group>"; };
 		216D1F00264EF4E400370F16 /* CertificateRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateRouter.swift; sourceTree = "<group>"; };
 		216D1F01264EF4E400370F16 /* CertificateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateViewController.swift; sourceTree = "<group>"; };
 		216D1F03264EF4E400370F16 /* CertificateCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateCardViewModel.swift; sourceTree = "<group>"; };
@@ -163,7 +162,6 @@
 		216D1F44264EF50300370F16 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		216D1F45264EF50300370F16 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		216D1F46264EF50300370F16 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		216D1F47264EF50300370F16 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		216D1F58264EF52400370F16 /* CertificateViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateViewControllerTests.swift; sourceTree = "<group>"; };
 		216D1F5A264EF52400370F16 /* CertificateViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateViewModelTests.swift; sourceTree = "<group>"; };
 		216D1F5C264EF52400370F16 /* MockQRCoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockQRCoder.swift; sourceTree = "<group>"; };
@@ -213,8 +211,6 @@
 		3814420B2646ED7600207CFA /* release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = release.xcconfig; sourceTree = "<group>"; };
 		381A13F32647DB580037B7F0 /* release-rki.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "release-rki.xcconfig"; sourceTree = "<group>"; };
 		381A13F42647DB7B0037B7F0 /* release-rki.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "release-rki.xcconfig"; sourceTree = "<group>"; };
-		6561AB43260CB02C00D3A7FF /* VaccinationUI */ = {isa = PBXFileReference; lastKnownFileType = folder; path = VaccinationUI; sourceTree = "<group>"; };
-		65981872260CB45D00776F70 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		65D6D4BF25F7AD8B000CB339 /* VaccinationCommon */ = {isa = PBXFileReference; lastKnownFileType = folder; path = VaccinationCommon; sourceTree = "<group>"; };
 		65D6D4DE25F8B8FB000CB339 /* CovPassApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CovPassApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		65D6D4EE25F8B8FB000CB339 /* CovPassAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CovPassAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -236,7 +232,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				216D201A264EF88600370F16 /* VaccinationUI in Frameworks */,
+				21DAD6E1264F0B11003407FC /* CovPassUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -251,7 +247,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2181C153264F02F900DE7412 /* VaccinationUI in Frameworks */,
+				21DAD6E3264F0B19003407FC /* CovPassUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -445,7 +441,6 @@
 			children = (
 				216D1F42264EF50300370F16 /* Locale */,
 				216D1F46264EF50300370F16 /* Assets.xcassets */,
-				216D1F47264EF50300370F16 /* Main.storyboard */,
 				216D1F86264EF6A800370F16 /* LaunchScreen.storyboard */,
 			);
 			path = Resources;
@@ -513,7 +508,7 @@
 			children = (
 				88AB2A1D25FA40CE00D4EA52 /* CovPassApp */,
 				88AB2A4125FA40CE00D4EA52 /* CovPassCheckApp */,
-				6561AB43260CB02C00D3A7FF /* VaccinationUI */,
+				212E757D264F0D09007C0F3A /* CovPassUI */,
 				65D6D4BF25F7AD8B000CB339 /* VaccinationCommon */,
 			);
 			path = Source;
@@ -543,7 +538,6 @@
 			children = (
 				21FBCA32264F011800CAEF44 /* Locale */,
 				88AB2A4325FA40CE00D4EA52 /* Assets.xcassets */,
-				65981872260CB45D00776F70 /* Main.storyboard */,
 				21FBCA78264F016E00CAEF44 /* LaunchScreen.storyboard */,
 			);
 			path = Resources;
@@ -804,7 +798,7 @@
 			);
 			name = CovPassApp;
 			packageProductDependencies = (
-				216D2019264EF88600370F16 /* VaccinationUI */,
+				21DAD6E0264F0B11003407FC /* CovPassUI */,
 			);
 			productName = VaccinationPassApp;
 			productReference = 65D6D4DE25F8B8FB000CB339 /* CovPassApp.app */;
@@ -842,7 +836,7 @@
 			);
 			name = CovPassCheckApp;
 			packageProductDependencies = (
-				2181C152264F02F900DE7412 /* VaccinationUI */,
+				21DAD6E2264F0B19003407FC /* CovPassUI */,
 			);
 			productName = VaccinationValidatorApp;
 			productReference = 65D6D51425F8B94D000CB339 /* CovPassCheckApp.app */;
@@ -927,7 +921,6 @@
 				216D1FF6264EF77600370F16 /* HowToScanViewController.xib in Resources */,
 				216D1F87264EF6A800370F16 /* LaunchScreen.storyboard in Resources */,
 				216D1F48264EF50300370F16 /* Localizable.strings in Resources */,
-				216D1F4A264EF50300370F16 /* Main.storyboard in Resources */,
 				216D1F9E264EF73D00370F16 /* StartOnboardingViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -944,7 +937,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				2181C179264F037400DE7412 /* StartOnboardingViewController.xib in Resources */,
-				65981892260CBA9400776F70 /* Main.storyboard in Resources */,
 				2181C190264F03AA00DE7412 /* ValidationResultViewController.xib in Resources */,
 				2181C1BD264F053000DE7412 /* Localizable.strings in Resources */,
 				2181C168264F035A00DE7412 /* ValidatorViewController.xib in Resources */,
@@ -1475,13 +1467,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		216D2019264EF88600370F16 /* VaccinationUI */ = {
+		21DAD6E0264F0B11003407FC /* CovPassUI */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = VaccinationUI;
+			productName = CovPassUI;
 		};
-		2181C152264F02F900DE7412 /* VaccinationUI */ = {
+		21DAD6E2264F0B19003407FC /* CovPassUI */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = VaccinationUI;
+			productName = CovPassUI;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 import VaccinationCommon
-import VaccinationUI
+import CovPassUI
 
 struct OnboardingRouter: OnboardingRouterProtocol {
     // MARK: - Properties

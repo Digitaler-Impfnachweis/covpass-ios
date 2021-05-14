@@ -8,7 +8,7 @@
 
 import Foundation
 @testable import CovPassApp
-import VaccinationUI
+import CovPassUI
 
 class MockCertificateViewModelDelegate: CertificateViewModelDelegate {
     var updateCalled = false

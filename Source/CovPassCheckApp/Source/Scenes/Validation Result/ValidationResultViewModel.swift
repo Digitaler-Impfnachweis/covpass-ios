@@ -9,7 +9,7 @@
 import PromiseKit
 import UIKit
 import VaccinationCommon
-import VaccinationUI
+import CovPassUI
 
 class ValidationResultViewModel: BaseViewModel, CancellableViewModelProtocol {
     // MARK: - Properties

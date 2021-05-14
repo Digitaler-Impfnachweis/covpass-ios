@@ -8,7 +8,7 @@
 
 import PromiseKit
 import UIKit
-import VaccinationUI
+import CovPassUI
 
 class VaccinationDetailRouter: VaccinationDetailRouterProtocol, DialogRouterProtocol {
     // MARK: - Properties

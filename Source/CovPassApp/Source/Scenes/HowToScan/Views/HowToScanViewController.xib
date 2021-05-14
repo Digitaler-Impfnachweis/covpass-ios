@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HowToScanViewController" customModule="VaccinationPass">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HowToScanViewController" customModule="CovPassApp" customModuleProvider="target">
             <connections>
                 <outlet property="actionView" destination="kiK-Qt-Oxb" id="HoU-TE-srx"/>
                 <outlet property="descriptionText" destination="czg-wL-cb7" id="KMZ-HX-ASj"/>
@@ -24,7 +24,7 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="60" translatesAutoresizingMaskIntoConstraints="NO" id="sKK-Se-ZAm" userLabel="Headline" customClass="InfoHeaderView" customModule="VaccinationUI">
+                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="60" translatesAutoresizingMaskIntoConstraints="NO" id="sKK-Se-ZAm" userLabel="Headline" customClass="InfoHeaderView" customModule="CovPassUI">
                     <rect key="frame" x="0.0" y="64" width="414" height="60"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
@@ -37,13 +37,13 @@
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="tNn-Ng-ZRx">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="418"/>
                             <subviews>
-                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="czg-wL-cb7" userLabel="Description Text" customClass="ParagraphView" customModule="VaccinationUI">
+                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="czg-wL-cb7" userLabel="Description Text" customClass="ParagraphView" customModule="CovPassUI">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="128"/>
                                 </view>
                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="250" translatesAutoresizingMaskIntoConstraints="NO" id="AQK-qG-0AQ">
                                     <rect key="frame" x="0.0" y="128" width="414" height="250"/>
                                 </imageView>
-                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="40" translatesAutoresizingMaskIntoConstraints="NO" id="kiK-Qt-Oxb" userLabel="Action View" customClass="ListItemView" customModule="VaccinationUI">
+                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="40" translatesAutoresizingMaskIntoConstraints="NO" id="kiK-Qt-Oxb" userLabel="Action View" customClass="ListItemView" customModule="CovPassUI">
                                     <rect key="frame" x="0.0" y="378" width="414" height="40"/>
                                 </view>
                             </subviews>
@@ -59,7 +59,7 @@
                     <viewLayoutGuide key="contentLayoutGuide" id="w70-w7-GLT"/>
                     <viewLayoutGuide key="frameLayoutGuide" id="kSY-DC-uwf"/>
                 </scrollView>
-                <view contentMode="scaleToFill" placeholderIntrinsicWidth="240" placeholderIntrinsicHeight="56" translatesAutoresizingMaskIntoConstraints="NO" id="Ym0-Wl-H3l" customClass="CustomToolbarView" customModule="VaccinationUI">
+                <view contentMode="scaleToFill" placeholderIntrinsicWidth="240" placeholderIntrinsicHeight="56" translatesAutoresizingMaskIntoConstraints="NO" id="Ym0-Wl-H3l" customClass="CustomToolbarView" customModule="CovPassUI">
                     <rect key="frame" x="0.0" y="806" width="414" height="56"/>
                 </view>
             </subviews>

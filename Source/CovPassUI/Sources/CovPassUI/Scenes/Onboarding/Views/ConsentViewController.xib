@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ConsentViewController" customModule="CovPassUI">
+            <connections>
+                <outlet property="dataPrivacyCheckbox" destination="IY5-fG-Iuh" id="s67-gF-kF2"/>
+                <outlet property="descriptionText" destination="eLm-3w-nkJ" id="mru-9c-kmu"/>
+                <outlet property="headline" destination="0e0-rd-9ve" id="mcP-5k-eVt"/>
+                <outlet property="imageView" destination="blq-EC-KHe" id="dd1-Bk-mG0"/>
+                <outlet property="scrollView" destination="ha7-P2-KHE" id="5Yj-ty-uVp"/>
+                <outlet property="view" destination="CuH-Wp-IB0" id="9IH-by-KqR"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="CuH-Wp-IB0">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ha7-P2-KHE">
+                    <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XeD-t4-s2m" userLabel="ContentView">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="566"/>
+                            <subviews>
+                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="s9A-cR-mPd">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="566"/>
+                                    <subviews>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="250" translatesAutoresizingMaskIntoConstraints="NO" id="blq-EC-KHe">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="250"/>
+                                        </imageView>
+                                        <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="60" translatesAutoresizingMaskIntoConstraints="NO" id="0e0-rd-9ve" userLabel="Headline" customClass="PlainLabel" customModule="CovPassUI">
+                                            <rect key="frame" x="0.0" y="250" width="414" height="60"/>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        </view>
+                                        <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="eLm-3w-nkJ" userLabel="Description Text" customClass="PlainLabel" customModule="CovPassUI">
+                                            <rect key="frame" x="0.0" y="310" width="414" height="128"/>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        </view>
+                                        <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="IY5-fG-Iuh" customClass="CheckboxView" customModule="CovPassUI">
+                                            <rect key="frame" x="0.0" y="438" width="414" height="128"/>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        </view>
+                                    </subviews>
+                                </stackView>
+                            </subviews>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <constraints>
+                                <constraint firstItem="s9A-cR-mPd" firstAttribute="top" secondItem="XeD-t4-s2m" secondAttribute="top" id="QEZ-Ov-MQ9"/>
+                                <constraint firstAttribute="trailing" secondItem="s9A-cR-mPd" secondAttribute="trailing" id="h4w-6A-7ev"/>
+                                <constraint firstItem="s9A-cR-mPd" firstAttribute="leading" secondItem="XeD-t4-s2m" secondAttribute="leading" id="jji-mF-XBX"/>
+                                <constraint firstAttribute="bottom" secondItem="s9A-cR-mPd" secondAttribute="bottom" priority="900" id="l9i-OB-tOO"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="XeD-t4-s2m" firstAttribute="width" secondItem="mPL-Q6-lSY" secondAttribute="width" id="6hY-p0-ZuV"/>
+                        <constraint firstItem="XeD-t4-s2m" firstAttribute="top" secondItem="GZc-v9-deG" secondAttribute="top" id="TTm-MS-Wlp"/>
+                        <constraint firstItem="XeD-t4-s2m" firstAttribute="leading" secondItem="GZc-v9-deG" secondAttribute="leading" id="Xr8-Z0-Rte"/>
+                        <constraint firstItem="XeD-t4-s2m" firstAttribute="trailing" secondItem="GZc-v9-deG" secondAttribute="trailing" id="a1X-eU-WJH"/>
+                        <constraint firstItem="XeD-t4-s2m" firstAttribute="bottom" secondItem="GZc-v9-deG" secondAttribute="bottom" id="wSv-jF-ZBv"/>
+                    </constraints>
+                    <viewLayoutGuide key="contentLayoutGuide" id="GZc-v9-deG"/>
+                    <viewLayoutGuide key="frameLayoutGuide" id="mPL-Q6-lSY"/>
+                </scrollView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="uyu-bv-cmB"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="uyu-bv-cmB" firstAttribute="bottom" secondItem="ha7-P2-KHE" secondAttribute="bottom" id="1Rx-AE-s4b"/>
+                <constraint firstItem="ha7-P2-KHE" firstAttribute="top" secondItem="uyu-bv-cmB" secondAttribute="top" id="Aws-Nx-1ZF"/>
+                <constraint firstItem="ha7-P2-KHE" firstAttribute="leading" secondItem="uyu-bv-cmB" secondAttribute="leading" id="BLF-GT-MMu"/>
+                <constraint firstItem="uyu-bv-cmB" firstAttribute="trailing" secondItem="ha7-P2-KHE" secondAttribute="trailing" id="CzM-vB-KnY"/>
+            </constraints>
+            <point key="canvasLocation" x="-52" y="-491"/>
+        </view>
+    </objects>
+    <designables>
+        <designable name="0e0-rd-9ve">
+            <size key="intrinsicContentSize" width="414" height="60"/>
+        </designable>
+        <designable name="IY5-fG-Iuh">
+            <size key="intrinsicContentSize" width="414" height="128"/>
+        </designable>
+        <designable name="eLm-3w-nkJ">
+            <size key="intrinsicContentSize" width="414" height="128"/>
+        </designable>
+    </designables>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import VaccinationUI
+import CovPassUI
 
 struct StartRouter: StartRouterProtocol {
     // MARK: - Properties

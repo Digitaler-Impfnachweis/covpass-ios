@@ -9,7 +9,7 @@
 import Foundation
 import PromiseKit
 import Scanner
-import VaccinationUI
+import CovPassUI
 
 struct ValidationResultRouter: ValidationResultRouterProtocol {
     // MARK: - Properties

@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import VaccinationUI
+import CovPassUI
 
 class ValidationResultViewController: UIViewController {
     // MARK: - IBOutlet

@@ -8,7 +8,7 @@
 
 import Foundation
 @testable import CovPassApp
-import VaccinationUI
+import CovPassUI
 import XCTest
 
 class CertificateViewModelTests: XCTestCase {

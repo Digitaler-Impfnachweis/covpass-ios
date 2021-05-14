@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -9,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CertificateViewController" customModule="VaccinationPass">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CertificateViewController" customModule="CovPassApp" customModuleProvider="target">
             <connections>
                 <outlet property="addButton" destination="wcE-wM-PY1" id="g67-cS-soM"/>
                 <outlet property="collectionView" destination="UkJ-ri-sjN" id="cZd-Ci-95N"/>
@@ -23,7 +24,7 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" placeholderIntrinsicWidth="374" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="qpg-K1-lgH" customClass="InfoHeaderView" customModule="VaccinationUI">
+                <view contentMode="scaleToFill" placeholderIntrinsicWidth="374" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="qpg-K1-lgH" customClass="InfoHeaderView" customModule="CovPassUI">
                     <rect key="frame" x="0.0" y="44" width="414" height="50"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -54,11 +55,11 @@
                         <stackView opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="nEz-ae-K9N">
                             <rect key="frame" x="0.0" y="10" width="414" height="78"/>
                             <subviews>
-                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="240" placeholderIntrinsicHeight="12" translatesAutoresizingMaskIntoConstraints="NO" id="fNK-Jd-P7z" customClass="DotPageIndicator" customModule="VaccinationUI">
+                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="240" placeholderIntrinsicHeight="12" translatesAutoresizingMaskIntoConstraints="NO" id="fNK-Jd-P7z" customClass="DotPageIndicator" customModule="CovPassUI">
                                     <rect key="frame" x="87" y="0.0" width="240" height="12"/>
                                     <color key="backgroundColor" red="0.023529411760000001" green="0.37254901959999998" blue="0.76862745099999996" alpha="1" colorSpace="calibratedRGB"/>
                                 </view>
-                                <view contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="56" placeholderIntrinsicHeight="56" translatesAutoresizingMaskIntoConstraints="NO" id="wcE-wM-PY1" customClass="MainButton" customModule="VaccinationUI">
+                                <view contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="56" placeholderIntrinsicHeight="56" translatesAutoresizingMaskIntoConstraints="NO" id="wcE-wM-PY1" customClass="MainButton" customModule="CovPassUI">
                                     <rect key="frame" x="179" y="22" width="56" height="56"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     <color key="tintColor" systemColor="systemBackgroundColor"/>

@@ -8,7 +8,7 @@
 
 import PromiseKit
 import UIKit
-import VaccinationUI
+import CovPassUI
 
 class HowToScanViewModel: BaseViewModel, CancellableViewModelProtocol {
     // MARK: - Properties
