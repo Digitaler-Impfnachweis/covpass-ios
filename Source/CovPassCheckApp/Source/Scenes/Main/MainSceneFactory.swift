@@ -23,18 +23,18 @@ struct MainSceneFactory: SceneFactory {
 
     func make() -> UIViewController {
         UserDefaults.StartupInfo.bool(.onboarding) ?
-            validatorViewController() :
-            startViewController()
+            mainViewController() :
+            welcomeViewController()
     }
 
-    private func startViewController() -> UIViewController {
-        let router = StartRouter(sceneCoordinator: sceneCoordinator)
-        let factory = StartSceneFactory(router: router)
+    private func welcomeViewController() -> UIViewController {
+        let router = WelcomeRouter(sceneCoordinator: sceneCoordinator)
+        let factory = WelcomeSceneFactory(router: router)
         let viewController = factory.make()
         return viewController
     }
 
-    private func validatorViewController() -> UIViewController {
+    private func mainViewController() -> UIViewController {
         let router = ValidatorRouter(sceneCoordinator: sceneCoordinator)
         let factory = ValidatorSceneFactory(router: router)
         let viewController = factory.make()

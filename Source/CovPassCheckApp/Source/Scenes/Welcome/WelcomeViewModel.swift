@@ -1,5 +1,5 @@
 //
-//  StartOnboardingViewModel.swift
+//  WelcomeViewModel.swift
 //
 //
 //  © Copyright IBM Deutschland GmbH 2021
@@ -9,7 +9,7 @@
 import UIKit
 import CovPassUI
 
-class StartOnboardingViewModel: BaseViewModel {
+class WelcomeViewModel: BaseViewModel {
     // MARK: - Properties
 
     weak var delegate: ViewModelDelegate?

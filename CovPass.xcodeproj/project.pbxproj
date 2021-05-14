@@ -11,11 +11,11 @@
 		216D1F49264EF50300370F16 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 216D1F46264EF50300370F16 /* Assets.xcassets */; };
 		216D1F87264EF6A800370F16 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 216D1F86264EF6A800370F16 /* LaunchScreen.storyboard */; };
 		216D1F98264EF73200370F16 /* MainSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216D1F24264EF4E400370F16 /* MainSceneFactory.swift */; };
-		216D1F9E264EF73D00370F16 /* StartOnboardingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 216D1F1E264EF4E400370F16 /* StartOnboardingViewController.xib */; };
-		216D1FA4264EF74100370F16 /* StartRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216D1F1C264EF4E400370F16 /* StartRouter.swift */; };
-		216D1FA5264EF74100370F16 /* StartOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216D1F1A264EF4E400370F16 /* StartOnboardingViewController.swift */; };
-		216D1FA6264EF74100370F16 /* StartSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216D1F1B264EF4E400370F16 /* StartSceneFactory.swift */; };
-		216D1FA7264EF74100370F16 /* StartOnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216D1F1F264EF4E400370F16 /* StartOnboardingViewModel.swift */; };
+		216D1F9E264EF73D00370F16 /* WelcomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 216D1F1E264EF4E400370F16 /* WelcomeViewController.xib */; };
+		216D1FA4264EF74100370F16 /* WelcomeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216D1F1C264EF4E400370F16 /* WelcomeRouter.swift */; };
+		216D1FA5264EF74100370F16 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216D1F1A264EF4E400370F16 /* WelcomeViewController.swift */; };
+		216D1FA6264EF74100370F16 /* WelcomeSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216D1F1B264EF4E400370F16 /* WelcomeSceneFactory.swift */; };
+		216D1FA7264EF74100370F16 /* WelcomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216D1F1F264EF4E400370F16 /* WelcomeViewModel.swift */; };
 		216D1FAD264EF74600370F16 /* PassOnboardingPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216D1F29264EF4E400370F16 /* PassOnboardingPageViewModel.swift */; };
 		216D1FAE264EF74600370F16 /* OnboardingSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216D1F2A264EF4E400370F16 /* OnboardingSceneFactory.swift */; };
 		216D1FAF264EF74600370F16 /* PassOnboardingContainerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216D1F27264EF4E400370F16 /* PassOnboardingContainerViewModel.swift */; };
@@ -65,10 +65,10 @@
 		2181C163264F035500DE7412 /* ValidatorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FBCA38264F011800CAEF44 /* ValidatorViewModel.swift */; };
 		2181C168264F035A00DE7412 /* ValidatorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21FBCA3D264F011800CAEF44 /* ValidatorViewController.xib */; };
 		2181C16D264F035D00DE7412 /* ValidatorRouterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FBCA3F264F011800CAEF44 /* ValidatorRouterProtocol.swift */; };
-		2181C172264F037000DE7412 /* StartOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FBCA41264F011800CAEF44 /* StartOnboardingViewController.swift */; };
-		2181C173264F037000DE7412 /* StartRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FBCA43264F011800CAEF44 /* StartRouter.swift */; };
-		2181C174264F037000DE7412 /* StartSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FBCA42264F011800CAEF44 /* StartSceneFactory.swift */; };
-		2181C179264F037400DE7412 /* StartOnboardingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21FBCA45264F011800CAEF44 /* StartOnboardingViewController.xib */; };
+		2181C172264F037000DE7412 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FBCA41264F011800CAEF44 /* WelcomeViewController.swift */; };
+		2181C173264F037000DE7412 /* WelcomeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FBCA43264F011800CAEF44 /* WelcomeRouter.swift */; };
+		2181C174264F037000DE7412 /* WelcomeSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FBCA42264F011800CAEF44 /* WelcomeSceneFactory.swift */; };
+		2181C179264F037400DE7412 /* WelcomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21FBCA45264F011800CAEF44 /* WelcomeViewController.xib */; };
 		2181C182264F039500DE7412 /* AppInformationSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FBCA48264F011800CAEF44 /* AppInformationSceneFactory.swift */; };
 		2181C183264F039500DE7412 /* AppInformationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FBCA49264F011800CAEF44 /* AppInformationViewModel.swift */; };
 		2181C188264F03A600DE7412 /* ValidationResultRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FBCA4B264F011800CAEF44 /* ValidationResultRouter.swift */; };
@@ -87,7 +87,7 @@
 		2181C1A9264F03BC00DE7412 /* OnboardingSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FBCA5C264F011800CAEF44 /* OnboardingSceneFactory.swift */; };
 		2181C1B2264F040500DE7412 /* ApiServiceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FBCA5F264F011900CAEF44 /* ApiServiceFactory.swift */; };
 		2181C1B3264F040500DE7412 /* StringLocalization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FBCA60264F011900CAEF44 /* StringLocalization.swift */; };
-		2181C1B8264F046400DE7412 /* StartOnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FBCA46264F011800CAEF44 /* StartOnboardingViewModel.swift */; };
+		2181C1B8264F046400DE7412 /* WelcomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FBCA46264F011800CAEF44 /* WelcomeViewModel.swift */; };
 		2181C1BD264F053000DE7412 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 21FBCA33264F011800CAEF44 /* Localizable.strings */; };
 		21DAD6E1264F0B11003407FC /* CovPassUI in Frameworks */ = {isa = PBXBuildFile; productRef = 21DAD6E0264F0B11003407FC /* CovPassUI */; };
 		21DAD6E3264F0B19003407FC /* CovPassUI in Frameworks */ = {isa = PBXBuildFile; productRef = 21DAD6E2264F0B19003407FC /* CovPassUI */; };
@@ -139,11 +139,11 @@
 		216D1F15264EF4E400370F16 /* VaccinationDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VaccinationDetailViewController.xib; sourceTree = "<group>"; };
 		216D1F17264EF4E400370F16 /* CertificateDetailDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateDetailDelegate.swift; sourceTree = "<group>"; };
 		216D1F18264EF4E400370F16 /* VaccinationDetailRouterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaccinationDetailRouterProtocol.swift; sourceTree = "<group>"; };
-		216D1F1A264EF4E400370F16 /* StartOnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartOnboardingViewController.swift; sourceTree = "<group>"; };
-		216D1F1B264EF4E400370F16 /* StartSceneFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartSceneFactory.swift; sourceTree = "<group>"; };
-		216D1F1C264EF4E400370F16 /* StartRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartRouter.swift; sourceTree = "<group>"; };
-		216D1F1E264EF4E400370F16 /* StartOnboardingViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StartOnboardingViewController.xib; sourceTree = "<group>"; };
-		216D1F1F264EF4E400370F16 /* StartOnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartOnboardingViewModel.swift; sourceTree = "<group>"; };
+		216D1F1A264EF4E400370F16 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
+		216D1F1B264EF4E400370F16 /* WelcomeSceneFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeSceneFactory.swift; sourceTree = "<group>"; };
+		216D1F1C264EF4E400370F16 /* WelcomeRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeRouter.swift; sourceTree = "<group>"; };
+		216D1F1E264EF4E400370F16 /* WelcomeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WelcomeViewController.xib; sourceTree = "<group>"; };
+		216D1F1F264EF4E400370F16 /* WelcomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewModel.swift; sourceTree = "<group>"; };
 		216D1F21264EF4E400370F16 /* AppInformationSceneFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInformationSceneFactory.swift; sourceTree = "<group>"; };
 		216D1F22264EF4E400370F16 /* AppInformationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInformationViewModel.swift; sourceTree = "<group>"; };
 		216D1F24264EF4E400370F16 /* MainSceneFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSceneFactory.swift; sourceTree = "<group>"; };
@@ -183,11 +183,11 @@
 		21FBCA3B264F011800CAEF44 /* ValidatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatorViewController.swift; sourceTree = "<group>"; };
 		21FBCA3D264F011800CAEF44 /* ValidatorViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ValidatorViewController.xib; sourceTree = "<group>"; };
 		21FBCA3F264F011800CAEF44 /* ValidatorRouterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatorRouterProtocol.swift; sourceTree = "<group>"; };
-		21FBCA41264F011800CAEF44 /* StartOnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartOnboardingViewController.swift; sourceTree = "<group>"; };
-		21FBCA42264F011800CAEF44 /* StartSceneFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartSceneFactory.swift; sourceTree = "<group>"; };
-		21FBCA43264F011800CAEF44 /* StartRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartRouter.swift; sourceTree = "<group>"; };
-		21FBCA45264F011800CAEF44 /* StartOnboardingViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StartOnboardingViewController.xib; sourceTree = "<group>"; };
-		21FBCA46264F011800CAEF44 /* StartOnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartOnboardingViewModel.swift; sourceTree = "<group>"; };
+		21FBCA41264F011800CAEF44 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
+		21FBCA42264F011800CAEF44 /* WelcomeSceneFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeSceneFactory.swift; sourceTree = "<group>"; };
+		21FBCA43264F011800CAEF44 /* WelcomeRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeRouter.swift; sourceTree = "<group>"; };
+		21FBCA45264F011800CAEF44 /* WelcomeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WelcomeViewController.xib; sourceTree = "<group>"; };
+		21FBCA46264F011800CAEF44 /* WelcomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewModel.swift; sourceTree = "<group>"; };
 		21FBCA48264F011800CAEF44 /* AppInformationSceneFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInformationSceneFactory.swift; sourceTree = "<group>"; };
 		21FBCA49264F011800CAEF44 /* AppInformationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInformationViewModel.swift; sourceTree = "<group>"; };
 		21FBCA4B264F011800CAEF44 /* ValidationResultRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationResultRouter.swift; sourceTree = "<group>"; };
@@ -275,7 +275,7 @@
 			isa = PBXGroup;
 			children = (
 				216D1F23264EF4E400370F16 /* Main */,
-				216D1F19264EF4E400370F16 /* Start */,
+				216D1F19264EF4E400370F16 /* Welcome */,
 				216D1F25264EF4E400370F16 /* Onboarding */,
 				216D1EFF264EF4E400370F16 /* Certificate */,
 				216D1F0D264EF4E400370F16 /* Vaccination Detail */,
@@ -358,22 +358,22 @@
 			path = Protocols;
 			sourceTree = "<group>";
 		};
-		216D1F19264EF4E400370F16 /* Start */ = {
+		216D1F19264EF4E400370F16 /* Welcome */ = {
 			isa = PBXGroup;
 			children = (
 				216D1F1D264EF4E400370F16 /* Views */,
-				216D1F1C264EF4E400370F16 /* StartRouter.swift */,
-				216D1F1B264EF4E400370F16 /* StartSceneFactory.swift */,
-				216D1F1F264EF4E400370F16 /* StartOnboardingViewModel.swift */,
-				216D1F1A264EF4E400370F16 /* StartOnboardingViewController.swift */,
+				216D1F1C264EF4E400370F16 /* WelcomeRouter.swift */,
+				216D1F1B264EF4E400370F16 /* WelcomeSceneFactory.swift */,
+				216D1F1F264EF4E400370F16 /* WelcomeViewModel.swift */,
+				216D1F1A264EF4E400370F16 /* WelcomeViewController.swift */,
 			);
-			path = Start;
+			path = Welcome;
 			sourceTree = "<group>";
 		};
 		216D1F1D264EF4E400370F16 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				216D1F1E264EF4E400370F16 /* StartOnboardingViewController.xib */,
+				216D1F1E264EF4E400370F16 /* WelcomeViewController.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -555,7 +555,7 @@
 			isa = PBXGroup;
 			children = (
 				21FBCA55264F011800CAEF44 /* Main */,
-				21FBCA40264F011800CAEF44 /* Start */,
+				21FBCA40264F011800CAEF44 /* Welcome */,
 				21FBCA57264F011800CAEF44 /* Onboarding */,
 				21FBCA37264F011800CAEF44 /* Validator */,
 				21FBCA4A264F011800CAEF44 /* Validation Result */,
@@ -593,22 +593,22 @@
 			path = Protocols;
 			sourceTree = "<group>";
 		};
-		21FBCA40264F011800CAEF44 /* Start */ = {
+		21FBCA40264F011800CAEF44 /* Welcome */ = {
 			isa = PBXGroup;
 			children = (
 				21FBCA44264F011800CAEF44 /* Views */,
-				21FBCA43264F011800CAEF44 /* StartRouter.swift */,
-				21FBCA42264F011800CAEF44 /* StartSceneFactory.swift */,
-				21FBCA46264F011800CAEF44 /* StartOnboardingViewModel.swift */,
-				21FBCA41264F011800CAEF44 /* StartOnboardingViewController.swift */,
+				21FBCA43264F011800CAEF44 /* WelcomeRouter.swift */,
+				21FBCA42264F011800CAEF44 /* WelcomeSceneFactory.swift */,
+				21FBCA46264F011800CAEF44 /* WelcomeViewModel.swift */,
+				21FBCA41264F011800CAEF44 /* WelcomeViewController.swift */,
 			);
-			path = Start;
+			path = Welcome;
 			sourceTree = "<group>";
 		};
 		21FBCA44264F011800CAEF44 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				21FBCA45264F011800CAEF44 /* StartOnboardingViewController.xib */,
+				21FBCA45264F011800CAEF44 /* WelcomeViewController.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -921,7 +921,7 @@
 				216D1FF6264EF77600370F16 /* HowToScanViewController.xib in Resources */,
 				216D1F87264EF6A800370F16 /* LaunchScreen.storyboard in Resources */,
 				216D1F48264EF50300370F16 /* Localizable.strings in Resources */,
-				216D1F9E264EF73D00370F16 /* StartOnboardingViewController.xib in Resources */,
+				216D1F9E264EF73D00370F16 /* WelcomeViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -936,7 +936,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2181C179264F037400DE7412 /* StartOnboardingViewController.xib in Resources */,
+				2181C179264F037400DE7412 /* WelcomeViewController.xib in Resources */,
 				2181C190264F03AA00DE7412 /* ValidationResultViewController.xib in Resources */,
 				2181C1BD264F053000DE7412 /* Localizable.strings in Resources */,
 				2181C168264F035A00DE7412 /* ValidatorViewController.xib in Resources */,
@@ -979,18 +979,18 @@
 				216D1FB7264EF74F00370F16 /* CertificateSceneFactory.swift in Sources */,
 				216D1FB0264EF74600370F16 /* PassConsentPageViewModel.swift in Sources */,
 				216D1F98264EF73200370F16 /* MainSceneFactory.swift in Sources */,
-				216D1FA6264EF74100370F16 /* StartSceneFactory.swift in Sources */,
+				216D1FA6264EF74100370F16 /* WelcomeSceneFactory.swift in Sources */,
 				216D1FEE264EF77200370F16 /* HowToScanRouter.swift in Sources */,
 				216D2003264EF7B500370F16 /* ApiServiceFactory.swift in Sources */,
 				216D1FCE264EF75D00370F16 /* CertificateViewModel.swift in Sources */,
-				216D1FA7264EF74100370F16 /* StartOnboardingViewModel.swift in Sources */,
+				216D1FA7264EF74100370F16 /* WelcomeViewModel.swift in Sources */,
 				216D1FF0264EF77200370F16 /* HowToScanViewModel.swift in Sources */,
 				216D1FD6264EF76400370F16 /* VaccinationViewModel.swift in Sources */,
-				216D1FA4264EF74100370F16 /* StartRouter.swift in Sources */,
+				216D1FA4264EF74100370F16 /* WelcomeRouter.swift in Sources */,
 				216D1FD9264EF76400370F16 /* VaccinationDetailViewController.swift in Sources */,
 				216D1FB9264EF74F00370F16 /* DefaultCertificateViewModel.swift in Sources */,
 				216D1FD7264EF76400370F16 /* VaccinationDetailSceneFactory.swift in Sources */,
-				216D1FA5264EF74100370F16 /* StartOnboardingViewController.swift in Sources */,
+				216D1FA5264EF74100370F16 /* WelcomeViewController.swift in Sources */,
 				216D1FB1264EF74600370F16 /* OnboardingRouter.swift in Sources */,
 				216D1FAD264EF74600370F16 /* PassOnboardingPageViewModel.swift in Sources */,
 				216D1FAF264EF74600370F16 /* PassOnboardingContainerViewModel.swift in Sources */,
@@ -1021,17 +1021,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				2181C160264F035500DE7412 /* ValidatorSceneFactory.swift in Sources */,
-				2181C172264F037000DE7412 /* StartOnboardingViewController.swift in Sources */,
+				2181C172264F037000DE7412 /* WelcomeViewController.swift in Sources */,
 				2181C188264F03A600DE7412 /* ValidationResultRouter.swift in Sources */,
 				2181C161264F035500DE7412 /* ValidatorViewController.swift in Sources */,
 				2181C19F264F03B800DE7412 /* MainSceneFactory.swift in Sources */,
 				2181C1A5264F03BC00DE7412 /* OnboardingRouter.swift in Sources */,
 				2181C1B2264F040500DE7412 /* ApiServiceFactory.swift in Sources */,
-				2181C173264F037000DE7412 /* StartRouter.swift in Sources */,
+				2181C173264F037000DE7412 /* WelcomeRouter.swift in Sources */,
 				2181C163264F035500DE7412 /* ValidatorViewModel.swift in Sources */,
 				2181C1A9264F03BC00DE7412 /* OnboardingSceneFactory.swift in Sources */,
 				2181C1A4264F03BC00DE7412 /* ValidationOnboardingContainerViewModel.swift in Sources */,
-				2181C174264F037000DE7412 /* StartSceneFactory.swift in Sources */,
+				2181C174264F037000DE7412 /* WelcomeSceneFactory.swift in Sources */,
 				2181C19A264F03B200DE7412 /* ValidationResultRouterProtocol.swift in Sources */,
 				2181C195264F03AF00DE7412 /* ImmunizationState.swift in Sources */,
 				2181C183264F039500DE7412 /* AppInformationViewModel.swift in Sources */,
@@ -1043,7 +1043,7 @@
 				2181C189264F03A600DE7412 /* ValidationResultViewModel.swift in Sources */,
 				2181C16D264F035D00DE7412 /* ValidatorRouterProtocol.swift in Sources */,
 				2181C182264F039500DE7412 /* AppInformationSceneFactory.swift in Sources */,
-				2181C1B8264F046400DE7412 /* StartOnboardingViewModel.swift in Sources */,
+				2181C1B8264F046400DE7412 /* WelcomeViewModel.swift in Sources */,
 				2181C1A7264F03BC00DE7412 /* ValidationOnboardingPageViewModel.swift in Sources */,
 				2181C1A6264F03BC00DE7412 /* ValidationConsentPageViewModel.swift in Sources */,
 				2181C18A264F03A600DE7412 /* ValidationResultSceneFactory.swift in Sources */,

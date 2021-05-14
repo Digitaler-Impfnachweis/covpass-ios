@@ -9,7 +9,7 @@
 import Foundation
 import CovPassUI
 
-struct StartRouter: StartRouterProtocol {
+struct WelcomeRouter: StartRouterProtocol {
     // MARK: - Properties
 
     let sceneCoordinator: SceneCoordinator

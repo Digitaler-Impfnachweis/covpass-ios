@@ -1,5 +1,5 @@
 //
-//  StartSceneFactory.swift
+//  WelcomeSceneFactory.swift
 //
 //
 //  © Copyright IBM Deutschland GmbH 2021
@@ -9,7 +9,7 @@
 import UIKit
 import CovPassUI
 
-struct StartSceneFactory: SceneFactory {
+struct WelcomeSceneFactory: SceneFactory {
     // MARK: - Properties
 
     let router: StartRouterProtocol
@@ -21,8 +21,8 @@ struct StartSceneFactory: SceneFactory {
     }
 
     func make() -> UIViewController {
-        let viewModel = StartOnboardingViewModel(router: router)
-        let viewController = StartOnboardingViewController(viewModel: viewModel)
+        let viewModel = WelcomeViewModel(router: router)
+        let viewController = WelcomeViewController(viewModel: viewModel)
         let navigationController = UINavigationController(rootViewController: viewController)
         return navigationController
     }

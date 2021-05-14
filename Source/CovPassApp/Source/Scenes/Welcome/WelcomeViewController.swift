@@ -1,5 +1,5 @@
 //
-//  StartOnboardingViewController.swift
+//  WelcomeViewController.swift
 //
 //
 //  © Copyright IBM Deutschland GmbH 2021
@@ -9,8 +9,8 @@
 import UIKit
 import CovPassUI
 
-class StartOnboardingViewController: UIViewController {
-    // MARK: - IBOutlets
+class WelcomeViewController: UIViewController {
+    // MARK: - UBOutlets
 
     @IBOutlet var scrollView: UIScrollView!
     @IBOutlet var bottomView: UIView!
@@ -23,14 +23,14 @@ class StartOnboardingViewController: UIViewController {
 
     // MARK: - Properties
 
-    private(set) var viewModel: StartOnboardingViewModel
+    private(set) var viewModel: WelcomeViewModel
 
     // MARK: - Lifecycle
 
     @available(*, unavailable)
     required init?(coder _: NSCoder) { fatalError("init?(coder: NSCoder) not implemented yet") }
 
-    init(viewModel: StartOnboardingViewModel) {
+    init(viewModel: WelcomeViewModel) {
         self.viewModel = viewModel
         super.init(nibName: String(describing: Self.self), bundle: .main)
     }
