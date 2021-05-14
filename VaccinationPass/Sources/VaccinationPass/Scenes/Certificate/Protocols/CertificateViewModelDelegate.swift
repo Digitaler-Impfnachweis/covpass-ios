@@ -10,6 +10,7 @@ import Foundation
 protocol CertificateViewModelDelegate: AnyObject {
     func viewModelDidUpdate()
     func viewModelDidUpdateFavorite()
+    func viewModelDidAddCertificate()
     func viewModelDidDeleteCertificate()
     func viewModelUpdateDidFailWithError(_ error: Error)
 }

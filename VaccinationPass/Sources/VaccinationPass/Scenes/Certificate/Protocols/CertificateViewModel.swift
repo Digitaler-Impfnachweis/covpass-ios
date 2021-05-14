@@ -14,7 +14,7 @@ protocol CertificateViewModel {
     var delegate: CertificateViewModelDelegate? { get set }
     var certificateViewModels: [CardViewModel] { get set }
     func process(payload: String) -> Promise<ExtendedCBORWebToken>
-    func loadCertificates()
+    func loadCertificates(newEntry: Bool)
     func showCertificate(at indexPath: IndexPath)
     func showCertificate(_ certificate: ExtendedCBORWebToken)
     func scanCertificate()
