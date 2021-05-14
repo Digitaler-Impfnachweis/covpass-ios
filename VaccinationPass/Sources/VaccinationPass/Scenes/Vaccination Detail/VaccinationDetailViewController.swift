@@ -91,7 +91,7 @@ class VaccinationDetailViewController: UIViewController {
         immunizationView.layoutMargins.bottom = .space_24
 
         immunizationButton.title = viewModel.immunizationButton
-        immunizationButton.backgroundColor = UIColor.white
+//        immunizationButton.backgroundColor = UIColor.white
 
         immunizationButton.action = { [weak self] in
             self?.viewModel.immunizationButtonTapped()
