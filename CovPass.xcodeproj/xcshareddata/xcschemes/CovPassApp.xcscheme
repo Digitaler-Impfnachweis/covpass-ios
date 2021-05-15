@@ -17,7 +17,7 @@
                      BlueprintIdentifier = "65D6D4DD25F8B8FB000CB339"
                      BuildableName = "CovPassApp.app"
                      BlueprintName = "CovPassApp"
-                     ReferencedContainer = "container:VaccinationCertificate.xcodeproj">
+                     ReferencedContainer = "container:CovPass.xcodeproj">
                   </BuildableReference>
                </EnvironmentBuildable>
             </ActionContent>
