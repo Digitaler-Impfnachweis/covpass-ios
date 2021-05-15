@@ -172,7 +172,6 @@
 		216D1F61264EF52400370F16 /* MockCertificateViewModelDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockCertificateViewModelDelegate.swift; sourceTree = "<group>"; };
 		216D1F63264EF52400370F16 /* PassOnboardingPageViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassOnboardingPageViewModelTests.swift; sourceTree = "<group>"; };
 		216D1F64264EF52400370F16 /* PassConsentPageViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassConsentPageViewModelTests.swift; sourceTree = "<group>"; };
-		216D1F6C264EF59200370F16 /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
 		216D1F86264EF6A800370F16 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2191E02F264F20D000316B48 /* CovPassCommon */ = {isa = PBXFileReference; lastKnownFileType = folder; path = CovPassCommon; sourceTree = "<group>"; };
 		21FBCA34264F011800CAEF44 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -206,7 +205,6 @@
 		21FBCA5D264F011800CAEF44 /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
 		21FBCA5F264F011900CAEF44 /* ApiServiceFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiServiceFactory.swift; sourceTree = "<group>"; };
 		21FBCA60264F011900CAEF44 /* StringLocalization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringLocalization.swift; sourceTree = "<group>"; };
-		21FBCA6F264F013400CAEF44 /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
 		21FBCA78264F016E00CAEF44 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		381442092646ED5800207CFA /* release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = release.xcconfig; sourceTree = "<group>"; };
 		3814420B2646ED7600207CFA /* release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = release.xcconfig; sourceTree = "<group>"; };
@@ -723,7 +721,6 @@
 				88AB2A3725FA40CE00D4EA52 /* Source */,
 				88AB2A3E25FA40CE00D4EA52 /* Tests */,
 				216D1F6B264EF54C00370F16 /* Supporting Files */,
-				216D1F6C264EF59200370F16 /* CHANGELOG.md */,
 			);
 			path = CovPassApp;
 			sourceTree = "<group>";
@@ -756,7 +753,6 @@
 				88AB2A4225FA40CE00D4EA52 /* Source */,
 				88AB2A5F25FA40CE00D4EA52 /* Tests */,
 				21FBCA2F264F00ED00CAEF44 /* Supporting Files */,
-				21FBCA6F264F013400CAEF44 /* CHANGELOG.md */,
 			);
 			path = CovPassCheckApp;
 			sourceTree = "<group>";
