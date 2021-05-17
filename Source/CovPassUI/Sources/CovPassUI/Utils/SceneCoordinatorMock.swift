@@ -39,6 +39,6 @@ public class SceneCoordinatorMock: SceneCoordinator {
         } else if let someResult = result as? Scene.Result {
             return .value(someResult)
         }
-        return .init(error: ScenePresentationError.notPresentable)
+        fatalError("Missing result")
     }
 }

@@ -9,18 +9,20 @@
 import PromiseKit
 import UIKit
 
-public class DefaultSceneCoordinator: SceneCoordinator {
+public class DefaultSceneCoordinator: NSObject, SceneCoordinator {
     // MARK: - Properties
 
     public private(set) var window: UIWindow?
     public private(set) var rootViewController: UIViewController?
-    private var modalSceneStack = [ModalSceneReference]()
+    private(set) var modalSceneStack = [ModalSceneReference]()
+    private(set) var navigationSceneStack = [NavigationSceneReference]()
 
     // MARK: - Lifecycle
 
     public init(window: UIWindow?, rootViewController: UIViewController? = nil) {
         self.window = window
         self.rootViewController = rootViewController
+        super.init()
     }
 
     // MARK: - Methods
@@ -31,17 +33,52 @@ public class DefaultSceneCoordinator: SceneCoordinator {
     }
 
     func push(
-        pushable: UIViewController?,
+        viewController: UIViewController,
         animated: Bool = true
     ) {
-        guard let viewController = pushable else {
-            fatalError(ScenePresentationError.notPresentable.localizedDescription)
-        }
         let navigationViewController = rootViewController?.mostTopViewController as? UINavigationController
         navigationViewController?.pushViewController(
             viewController,
             animated: animated
         )
+    }
+
+    func push<T>(
+        viewController: UIViewController,
+        promise: Promise<T>,
+        animated: Bool = true
+    ) -> Promise<T> {
+
+        push(viewController: viewController, animated: animated)
+
+        let (internalPromise, internalResolver) = Promise<T>.pending()
+        let navigationController = rootViewController?.mostTopViewController as? UINavigationController
+        navigationController?.delegate = self
+        let sceneReference = NavigationSceneReference(viewController: viewController)
+        navigationSceneStack.append(sceneReference)
+
+        sceneReference.didPop = { vc in
+
+            self.removeNavigationStackReferrenceIfNeeded(for: vc)
+
+            // if origin promise is still pending means the user canncelled the view by back button or swipe gesture.
+            guard promise.isPending == false else {
+                internalResolver.cancel()
+                return
+            }
+            // finally resolve internal promise
+            promise
+                .done(internalResolver.fulfill)
+                .cancelled(internalResolver.cancel)
+                .catch(internalResolver.reject)
+        }
+
+        promise
+            .done { _ in navigationController?.popViewController(animated: true) }
+            .cancelled { navigationController?.popViewController(animated: true) }
+            .catch { _ in navigationController?.popViewController(animated: true) }
+
+        return internalPromise
     }
 
     func popViewController(animated: Bool) {
@@ -95,23 +132,23 @@ public class DefaultSceneCoordinator: SceneCoordinator {
     }
 
     func dismissViewController(_ animated: Bool) {
-        guard let viewController = rootViewController?.mostTopViewController else {
-            return
+        if let viewController = rootViewController?.mostTopViewController {
+            dismiss(
+                viewController,
+                animated,
+                completion: nil
+            )
         }
-
-        dismiss(
-            viewController,
-            animated,
-            completion: nil
-        )
     }
 
-    func dismiss(
+    // MARK: - Helper
+
+    private func dismiss(
         _ viewController: UIViewController,
         _ animated: Bool,
         completion: (() -> Void)? = nil
     ) {
-        _ = modalSceneStack.popLast()
+        removeModalStackReferrenceIfNeeded(for: viewController)
 
         viewController.dismiss(
             animated: animated,
@@ -119,14 +156,25 @@ public class DefaultSceneCoordinator: SceneCoordinator {
         )
     }
 
-    // MARK: - Helper
+    /// Removes reference from navigation stack for given viewController
+    private func removeNavigationStackReferrenceIfNeeded(for viewController: UIViewController) {
+        if let index = navigationSceneStack.firstIndex(where: { $0.viewController == viewController }) {
+            navigationSceneStack.remove(at: index)
+        }
+    }
 
-    private func shouldCreateNavigationController(for viewController: UIViewController) -> Bool {
-        let blackList = [
-            UINavigationController.self,
-            UIAlertController.self
-        ]
-        let isOnBlackList = blackList.contains { type(of: viewController) == $0 }
-        return isOnBlackList == false
+    /// Removes reference from modal stack for given viewController
+    private func removeModalStackReferrenceIfNeeded(for viewController: UIViewController) {
+        if let index = modalSceneStack.firstIndex(where: { $0.viewController == viewController }) {
+            modalSceneStack.remove(at: index)
+        }
+    }
+}
+
+extension DefaultSceneCoordinator: UINavigationControllerDelegate {
+    public func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
+        navigationSceneStack.forEach {
+            $0.navigationController(navigationController, didShow: viewController, animated: animated)
+        }
     }
 }
