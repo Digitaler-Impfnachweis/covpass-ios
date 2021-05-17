@@ -29,6 +29,6 @@ public protocol VaccinationRepositoryProtocol {
 
     /// checkVaccinationCertificate validates the given QR code and returns the vaccinatino certificate when it's valid, otherwise an error
     ///
-    /// - USED BY VaccinationValidator App
+    /// - USED BY CovPassCheck App
     func checkVaccinationCertificate(_ data: String) -> Promise<CBORWebToken>
 }
