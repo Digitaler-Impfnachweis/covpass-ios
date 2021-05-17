@@ -145,23 +145,6 @@ class DefaultSceneCoordinatorTests: XCTestCase {
         XCTAssertEqual((sut as? DefaultSceneCoordinator)?.navigationSceneStack.count, 0)
     }
 
-    func test_resolver_should_cancel_if_scene_did_pop_programmatically() {
-        // given
-        let exp = expectation(description: "Did cancelled Promise")
-        let scene = ResolvableSceneFactoryMock(viewController: ViewControllerMock())
-        let result: Promise<String> = sut.push(scene)
-        result.cancelled { exp.fulfill() }.cauterize()
-
-        // when
-        sut.pop()
-
-        // then
-        wait(for: [exp], timeout: 2)
-        XCTAssertTrue(result.isCancelled)
-        XCTAssertEqual(rootViewController.currentViewControllers.count, 1)
-        XCTAssertEqual((sut as? DefaultSceneCoordinator)?.navigationSceneStack.count, 0)
-    }
-
     func test_should_pop_last__if_last_resolver_did_fulfill() {
         // given
         let exp1 = expectation(description: "Did pop ViewController")
@@ -192,6 +175,23 @@ class DefaultSceneCoordinatorTests: XCTestCase {
         XCTAssertEqual(receivedResult, expectedResult)
         XCTAssertEqual(rootViewController.currentViewControllers.count, 2)
         XCTAssertEqual((sut as? DefaultSceneCoordinator)?.navigationSceneStack.count, 1)
+    }
+
+    func test_resolver_should_cancel_if_scene_did_pop_programmatically() {
+        // given
+        let exp = expectation(description: "Did cancelled Promise")
+        let scene = ResolvableSceneFactoryMock(viewController: ViewControllerMock())
+        let result: Promise<String> = sut.push(scene)
+        result.cancelled { exp.fulfill() }.cauterize()
+
+        // when
+        sut.pop()
+
+        // then
+        wait(for: [exp], timeout: 2)
+        XCTAssertTrue(result.isCancelled)
+        XCTAssertEqual(rootViewController.currentViewControllers.count, 1)
+        XCTAssertEqual((sut as? DefaultSceneCoordinator)?.navigationSceneStack.count, 0)
     }
 
     func test_last_resolver_should_cancel__if_last_scene_did_pop_programmatically() {
