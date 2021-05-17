@@ -56,7 +56,22 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
     }
 
     public func scanVaccinationCertificate(_ data: String) -> Promise<ExtendedCBORWebToken> {
-        return parser.parse(data).map { certificate in
+        firstly {
+            parser.parse(data)
+        }
+        .map { certificate in
+            let base45Decoded = try Base45Coder().decode(data.stripPrefix())
+            guard let decompressedPayload = Compression.decompress(Data(base45Decoded)) else {
+                throw ApplicationError.general("Could not decompress QR Code data")
+            }
+            guard let cosePayload = try CoseSign1Parser().parse(decompressedPayload),
+                  HCert().verify(message: cosePayload, certificates: certificates)
+            else {
+                throw HCertError.verifyError
+            }
+            return certificate
+        }
+        .map { certificate in
             ExtendedCBORWebToken(vaccinationCertificate: certificate, vaccinationQRCodeData: data)
         }.then { extendedCBORWebToken in
             self.getVaccinationCertificateList().then { list -> Promise<Void> in
