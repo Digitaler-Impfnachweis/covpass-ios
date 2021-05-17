@@ -18,6 +18,7 @@ class MockCertificateViewModel: CertificatesOverviewViewModelProtocol {
 
     var processCalled = false
     var configureCalled = false
+    var selectedCertificateIndex: Int? = nil
 
     // MARK: - CertificateViewModel
 
