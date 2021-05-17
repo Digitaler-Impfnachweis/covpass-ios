@@ -38,6 +38,7 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
         let certs = sortFavorite(certificateList.certificates, favorite: certificateList.favoriteCertificateId ?? "")
         return matchCertificates(certs)
     }
+    var selectedCertificateIndex: Int?
 
     // MARK: - Actions
 
@@ -153,6 +154,16 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
         return list
     }
 
+    private func findCertificateIndex(for certificate: ExtendedCBORWebToken) -> Int? {
+        for (index, cer) in matchedCertificates.enumerated() {
+            if certificate.vaccinationCertificate.hcert.dgc == cer.vaccinationCertificate.hcert.dgc {
+                return index
+            }
+        }
+
+        return nil
+    }
+
     private func certificatePair(for indexPath: IndexPath) -> [ExtendedCBORWebToken] {
         if certificateList.certificates.isEmpty {
             return []
@@ -204,6 +215,11 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
 // MARK: - CertificateDetailDelegate
 
 extension CertificatesOverviewViewModel: CertificateDetailDelegate {
+    func select(certificates: [ExtendedCBORWebToken]) {
+        guard let certificate = certificates.last else { return }
+        selectedCertificateIndex = findCertificateIndex(for: certificate)
+    }
+    
     func didAddCertificate() {
         loadCertificates()
     }
@@ -213,6 +229,7 @@ extension CertificatesOverviewViewModel: CertificateDetailDelegate {
     }
 
     func didDeleteCertificate() {
+        selectedCertificateIndex = nil
         delegate?.viewModelDidDeleteCertificate()
     }
 }

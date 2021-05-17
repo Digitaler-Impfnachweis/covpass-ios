@@ -48,6 +48,10 @@ class CertificatesOverviewViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
+        if let selectedCertificateIndex = viewModel.selectedCertificateIndex {
+            collectionView.scrollToItem(at: IndexPath(item: selectedCertificateIndex, section: 0), at: .centeredHorizontally, animated: false)
+            dotPageIndicator.selectDot(withIndex: selectedCertificateIndex)
+        }
     }
 
     override func viewWillDisappear(_ animated: Bool) {
