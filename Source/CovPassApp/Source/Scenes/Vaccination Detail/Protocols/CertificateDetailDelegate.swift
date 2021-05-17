@@ -7,9 +7,11 @@
 //
 
 import Foundation
+import CovPassCommon
 
 protocol CertificateDetailDelegate: AnyObject {
     func didAddCertificate()
     func didAddFavoriteCertificate()
     func didDeleteCertificate()
+    func select(certificates: [ExtendedCBORWebToken])
 }

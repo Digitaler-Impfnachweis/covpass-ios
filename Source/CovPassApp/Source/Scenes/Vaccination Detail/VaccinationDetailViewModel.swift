@@ -213,6 +213,7 @@ class VaccinationDetailViewModel {
     }
 
     private func showCertificate() {
+        detailDelegate?.select(certificates: certificates)
         router.showCertificateOverview().cauterize()
     }
 }

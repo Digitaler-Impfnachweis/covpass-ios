@@ -14,6 +14,7 @@ import CovPassUI
 protocol CertificatesOverviewViewModelProtocol {
     var delegate: CertificatesOverviewViewModelDelegate? { get set }
     var certificateViewModels: [CardViewModel] { get set }
+    var selectedCertificateIndex: Int? { get set }
     func process(payload: String) -> Promise<ExtendedCBORWebToken>
     func loadCertificates()
     func showCertificate(at indexPath: IndexPath)
