@@ -42,7 +42,7 @@ class CertificatesOverviewViewController: UIViewController {
         setupActionButton()
         setupCollecttionView()
         setupDotIndicator()
-        viewModel.loadCertificates(newEntry: false)
+        viewModel.loadCertificates()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -161,19 +161,13 @@ extension CertificatesOverviewViewController: CertificatesOverviewViewModelDeleg
     func viewModelDidUpdateFavorite() {
         collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .centeredHorizontally, animated: false)
         dotPageIndicator.selectDot(withIndex: 0)
-        viewModel.loadCertificates(newEntry: false)
-    }
-
-    func viewModelDidAddCertificate() {
-        let index = dotPageIndicator.numberOfDots - 1
-        collectionView.scrollToItem(at: IndexPath(item: index, section: 0), at: .centeredHorizontally, animated: false)
-        dotPageIndicator.selectDot(withIndex: index)
+        viewModel.loadCertificates()
     }
     
     func viewModelDidDeleteCertificate() {
         collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .centeredHorizontally, animated: false)
         dotPageIndicator.selectDot(withIndex: 0)
-        viewModel.loadCertificates(newEntry: false)
+        viewModel.loadCertificates()
     }
 
     func viewModelUpdateDidFailWithError(_: Error) {
