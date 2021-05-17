@@ -61,7 +61,8 @@ public class DefaultSceneCoordinator: NSObject, SceneCoordinator {
 
             self.removeNavigationStackReferrenceIfNeeded(for: vc)
 
-            // if origin promise is still pending means the user canncelled the view by back button or swipe gesture.
+            // If viewController did pop and origin promise is still pending means the user cancelled the view by back button or swipe gesture.
+            // This is equal to real cancel. So let's cancel the internal resolver.
             guard promise.isPending == false else {
                 internalResolver.cancel()
                 return
@@ -73,6 +74,7 @@ public class DefaultSceneCoordinator: NSObject, SceneCoordinator {
                 .catch(internalResolver.reject)
         }
 
+        // pop viewController if origin promise gets resolved and resolve internal promise after viewController did pop.
         promise
             .done { _ in navigationController?.popViewController(animated: true) }
             .cancelled { navigationController?.popViewController(animated: true) }
@@ -107,6 +109,7 @@ public class DefaultSceneCoordinator: NSObject, SceneCoordinator {
         promise: Promise<T>,
         animated: Bool = true
     ) -> Promise<T> {
+
         present(viewController: viewController, animated: animated)
 
         // Map to an internal resolver to resolve only when view did dismiss.
