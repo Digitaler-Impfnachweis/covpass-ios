@@ -163,7 +163,7 @@ extension CertificatesOverviewViewController: CertificatesOverviewViewModelDeleg
         dotPageIndicator.selectDot(withIndex: 0)
         viewModel.loadCertificates()
     }
-    
+
     func viewModelDidDeleteCertificate() {
         collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .centeredHorizontally, animated: false)
         dotPageIndicator.selectDot(withIndex: 0)
