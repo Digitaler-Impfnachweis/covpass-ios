@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AppInformationViewController" customModule="CovPassUI">
+            <connections>
+                <outlet property="descriptionLabel" destination="o1e-73-NAg" id="uT9-wb-VYn"/>
+                <outlet property="entriesStackView" destination="ck2-r2-AjP" id="tfG-Kh-0nV"/>
+                <outlet property="stackView" destination="5WU-bn-YHG" id="vIS-Mj-Zpi"/>
+                <outlet property="versionLabel" destination="rTl-aT-fkg" id="DQ5-2E-RYS"/>
+                <outlet property="view" destination="xYK-sf-bd8" id="aN9-Q0-28g"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="xYK-sf-bd8">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AGC-KX-lBS">
+                    <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DU0-h6-0KX" userLabel="Content View">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="320"/>
+                            <subviews>
+                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="5WU-bn-YHG">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="320"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="60" translatesAutoresizingMaskIntoConstraints="NO" id="o1e-73-NAg" customClass="PlainLabel" customModule="CovPassUI">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="qx9-r7-pBa"/>
+                                            </constraints>
+                                        </view>
+                                        <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="398" placeholderIntrinsicHeight="200" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ck2-r2-AjP" userLabel="Entries Stack View">
+                                            <rect key="frame" x="0.0" y="60" width="414" height="200"/>
+                                        </stackView>
+                                        <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="60" translatesAutoresizingMaskIntoConstraints="NO" id="rTl-aT-fkg" customClass="PlainLabel" customModule="CovPassUI">
+                                            <rect key="frame" x="0.0" y="260" width="414" height="60"/>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="Ifp-sB-0r2"/>
+                                            </constraints>
+                                        </view>
+                                    </subviews>
+                                </stackView>
+                            </subviews>
+                            <constraints>
+                                <constraint firstItem="5WU-bn-YHG" firstAttribute="leading" secondItem="DU0-h6-0KX" secondAttribute="leadingMargin" id="FIY-m4-Ghq"/>
+                                <constraint firstAttribute="trailingMargin" secondItem="5WU-bn-YHG" secondAttribute="trailing" id="Yas-QC-Ow7"/>
+                                <constraint firstAttribute="bottomMargin" secondItem="5WU-bn-YHG" secondAttribute="bottom" id="gLk-xT-gyl"/>
+                                <constraint firstItem="5WU-bn-YHG" firstAttribute="top" secondItem="DU0-h6-0KX" secondAttribute="topMargin" id="hwW-uG-jk3"/>
+                            </constraints>
+                            <edgeInsets key="layoutMargins" top="0.0" left="0.0" bottom="0.0" right="0.0"/>
+                        </view>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="DU0-h6-0KX" firstAttribute="bottom" secondItem="PUx-wC-xyL" secondAttribute="bottom" id="Iw4-AW-TfN"/>
+                        <constraint firstItem="DU0-h6-0KX" firstAttribute="top" secondItem="PUx-wC-xyL" secondAttribute="top" id="KJ0-fI-lqn"/>
+                        <constraint firstItem="DU0-h6-0KX" firstAttribute="leading" secondItem="PUx-wC-xyL" secondAttribute="leading" id="hV3-E3-zid"/>
+                        <constraint firstItem="DU0-h6-0KX" firstAttribute="trailing" secondItem="PUx-wC-xyL" secondAttribute="trailing" id="kdp-cv-QW5"/>
+                        <constraint firstItem="DU0-h6-0KX" firstAttribute="width" secondItem="vta-Pt-LKM" secondAttribute="width" id="rQL-5n-Nw6"/>
+                    </constraints>
+                    <viewLayoutGuide key="contentLayoutGuide" id="PUx-wC-xyL"/>
+                    <viewLayoutGuide key="frameLayoutGuide" id="vta-Pt-LKM"/>
+                </scrollView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="Ij5-fs-Fs2"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="AGC-KX-lBS" firstAttribute="top" secondItem="Ij5-fs-Fs2" secondAttribute="top" id="BBw-Ae-ebs"/>
+                <constraint firstItem="Ij5-fs-Fs2" firstAttribute="bottom" secondItem="AGC-KX-lBS" secondAttribute="bottom" id="F44-lG-gey"/>
+                <constraint firstItem="AGC-KX-lBS" firstAttribute="trailing" secondItem="Ij5-fs-Fs2" secondAttribute="trailing" id="XTq-nP-I5J"/>
+                <constraint firstItem="AGC-KX-lBS" firstAttribute="leading" secondItem="Ij5-fs-Fs2" secondAttribute="leading" id="yUO-43-5YD"/>
+            </constraints>
+            <point key="canvasLocation" x="-1513" y="-52"/>
+        </view>
+    </objects>
+    <designables>
+        <designable name="o1e-73-NAg">
+            <size key="intrinsicContentSize" width="414" height="60"/>
+        </designable>
+        <designable name="rTl-aT-fkg">
+            <size key="intrinsicContentSize" width="414" height="60"/>
+        </designable>
+    </designables>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

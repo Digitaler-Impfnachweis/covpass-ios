@@ -57,13 +57,13 @@
     - [patch] Fixed a race condition that cause the request of `PoorObjects` to fail sometimes (EBH-2324).
 -->
 
-## VaccinationCommon
+## CovPassCommon
 
-## VaccinationUI
+## CovPassUI
 
-## VaccinationPass
+## CovPassApp
 
-## VaccinationValidator
+## CovPassCheckApp
 
 # Checklist
 <!--- 
