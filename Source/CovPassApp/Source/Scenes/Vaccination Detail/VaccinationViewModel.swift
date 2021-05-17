@@ -44,7 +44,7 @@ struct VaccinationViewModel {
     }
 
     var issuer: String {
-        token.iss
+        vaccination?.is ?? ""
     }
 
     var country: String {

@@ -11,6 +11,7 @@ import Foundation
 protocol CertificatesOverviewViewModelDelegate: AnyObject {
     func viewModelDidUpdate()
     func viewModelDidUpdateFavorite()
+    func viewModelDidAddCertificate()
     func viewModelDidDeleteCertificate()
     func viewModelUpdateDidFailWithError(_ error: Error)
 }

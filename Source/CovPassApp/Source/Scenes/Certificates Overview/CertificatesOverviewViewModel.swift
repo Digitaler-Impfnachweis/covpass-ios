@@ -46,7 +46,7 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
         return repository.scanVaccinationCertificate(payload)
     }
 
-    func loadCertificates() {
+    func loadCertificates(newEntry: Bool = false) {
         firstly {
             repository.getVaccinationCertificateList()
         }
@@ -69,6 +69,9 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
         }
         .finally {
             self.delegate?.viewModelDidUpdate()
+            if newEntry {
+                self.delegate?.viewModelDidAddCertificate()
+            }
         }
     }
 
@@ -98,7 +101,7 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
             self.process(payload: payload)
         }
         .ensure {
-            self.loadCertificates()
+            self.loadCertificates(newEntry: true)
         }
         .done { certificate in
             self.showCertificate(certificate)
