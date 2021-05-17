@@ -13,12 +13,16 @@ import SwiftCBOR
 
 public enum QRCodeError: Error {
     case qrCodeExists
+    case versionNotSupported
 }
 
 public class QRCoder: QRCoderProtocol {
     private let base45Encoder = Base45Coder()
     private let cose1SignParser = CoseSign1Parser()
     private let cert = HCert()
+
+    /// The current supported digital green certificate model version
+    var supportedDGCVersion = "1.0.0"
 
     public init() {}
 
@@ -34,6 +38,11 @@ public class QRCoder: QRCoderProtocol {
             let certificateJson = cose1SignParser.map(cborObject: cborDecodedPayload)
             let jsonData = try JSONSerialization.data(withJSONObject: certificateJson as Any)
             let certificate = try JSONDecoder().decode(CBORWebToken.self, from: jsonData)
+
+            if certificate.hcert.dgc.ver != supportedDGCVersion {
+                throw QRCodeError.versionNotSupported
+            }
+
             seal.fulfill(certificate)
         }
     }
