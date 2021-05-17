@@ -276,8 +276,4 @@ public class CustomToolbarView: XibView {
     @IBAction func leftButtonPressed() {
         leftButtonAction?()
     }
-
-    @objc func testLeftButtonPressed() {
-        leftButtonAction?()
-    }
 }
