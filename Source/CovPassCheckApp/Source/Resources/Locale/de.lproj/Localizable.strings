@@ -144,9 +144,9 @@
 
 "app_information_title_faq_linked" = "#Häufige Fragen::$0#";
 
-"app_information_title_datenschutz" = "Datenschutz";
+"app_information_title_datenschutz" = "Datenschutzerklärung";
 
-"app_information_title_datenschutz_linked" = "#Datenschutz::$0#";
+"app_information_title_datenschutz_linked" = "#Datenschutzerklärug::$0#";
 
 "app_information_title_company_details" = "Impressum";
 
@@ -170,3 +170,15 @@
 "error_no_connection_to_server_message" = "Bei der Verbindung zum Server ist ein Fehler aufgetreten. Bitte überprüfen Sie Ihre Internetverbindung.";
 
 "error_no_connection_to_server_button_title" = "OK";
+
+"error_scan_present_data_is_not_supported_title" = "Aktualisieren Sie die App";
+
+"error_scan_present_data_is_not_supported_message" = "Ihre aktuelle Version der App unterstützt das vorliegende Datenformat nicht. Bitte aktualisieren Sie die App.";
+
+"error_scan_present_data_is_not_supported_button_title" = "OK";
+
+"error_scan_qrcode_cannot_be_parsed_title" = "QR-Code wurde nicht erkannt";
+
+"error_scan_qrcode_cannot_be_parsed_message" = "Dieser QR-Code gehört offenbar nicht zu einem Impfzertifikat. Bitte scannen Sie den QR-Code des Impfzertifikats.";
+
+"error_scan_qrcode_cannot_be_parsed_button_title" = "OK";
