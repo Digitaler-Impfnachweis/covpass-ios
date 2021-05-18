@@ -12,6 +12,7 @@ import UIKit
 public protocol ScenePresenting {
     func asRoot(_ factory: SceneFactory)
     func push(_ factory: SceneFactory, animated: Bool)
+    func push<Scene: ResolvableSceneFactory>(_ factory: Scene, animated: Bool) -> Promise<Scene.Result>
     func present(_ factory: SceneFactory, animated: Bool)
     func present<Scene: ResolvableSceneFactory>(_ factory: Scene, animated: Bool) -> Promise<Scene.Result>
 }
@@ -20,6 +21,10 @@ public protocol ScenePresenting {
 
 public extension ScenePresenting {
     func push(_ factory: SceneFactory, animated: Bool = true) {
+        push(factory, animated: animated)
+    }
+
+    func push<Scene: ResolvableSceneFactory>(_ factory: Scene, animated: Bool = true) -> Promise<Scene.Result> {
         push(factory, animated: animated)
     }
 

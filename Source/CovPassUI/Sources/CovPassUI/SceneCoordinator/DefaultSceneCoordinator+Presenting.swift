@@ -18,7 +18,16 @@ extension DefaultSceneCoordinator: ScenePresenting {
 
     public func push(_ factory: SceneFactory, animated: Bool) {
         push(
-            pushable: factory.make(),
+            viewController: factory.make(),
+            animated: animated
+        )
+    }
+
+    public func push<Scene: ResolvableSceneFactory>(_ factory: Scene, animated: Bool) -> Promise<Scene.Result> {
+        let (promise, resolver) = Promise<Scene.Result>.pending()
+        return push(
+            viewController: factory.make(resolvable: resolver),
+            promise: promise,
             animated: animated
         )
     }

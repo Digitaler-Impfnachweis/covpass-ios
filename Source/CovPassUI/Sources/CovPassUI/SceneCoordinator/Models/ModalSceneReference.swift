@@ -9,9 +9,14 @@
 import UIKit
 
 class ModalSceneReference: NSObject, UIAdaptivePresentationControllerDelegate {
+    // MARK: - Properties
+
+    let viewController: UIViewController
+
     // MARK: - Lifecycle
 
     init(viewController: UIViewController) {
+        self.viewController = viewController
         super.init()
         viewController.presentationController?.delegate = self
     }
