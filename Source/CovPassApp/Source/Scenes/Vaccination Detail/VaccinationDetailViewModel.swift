@@ -208,7 +208,16 @@ class VaccinationDetailViewModel {
             self?.delegate?.viewModelDidUpdate()
         }
         .catch { [weak self] error in
-            self?.delegate?.viewModelUpdateDidFailWithError(error)
+            switch error {
+            case QRCodeError.versionNotSupported:
+                self?.router.showDialog(title: "error_scan_present_data_is_not_supported_title".localized, message: "error_scan_present_data_is_not_supported_message".localized, actions: [DialogAction.cancel("error_scan_present_data_is_not_supported_button_title".localized)], style: .alert)
+            case HCertError.verifyError:
+                self?.router.showDialog(title: "error_scan_qrcode_without_seal_title".localized, message: "error_scan_qrcode_without_seal_message".localized, actions: [DialogAction.cancel("error_scan_qrcode_without_seal_button_title".localized)], style: .alert)
+            case QRCodeError.qrCodeExists:
+                self?.router.showDialog(title: "duplicate_certificate_dialog_header".localized, message: "duplicate_certificate_dialog_message".localized, actions: [DialogAction.cancel("duplicate_certificate_dialog_button_title".localized)], style: .alert)
+            default:
+                self?.router.showDialog(title: "error_scan_qrcode_cannot_be_parsed_title".localized, message: "error_scan_qrcode_cannot_be_parsed_message".localized, actions: [DialogAction.cancel("error_scan_qrcode_cannot_be_parsed_button_title".localized)], style: .alert)
+            }
         }
     }
 

@@ -22,6 +22,6 @@ TLS_CERTIFICATES_DESTINATION = Source/CovPassCommon/Sources/CovPassCommon/Resour
 
 // SEAL VERIVICATION
 
-CA_CERTIFICATE_SIGNATURES = dtrust_demo-bmg_seal_ubirch-02
+CA_CERTIFICATE_SIGNATURES = dtrust_demo-bmg_seal_ubirch-02_8ede3316-d4da-4181-81f0-753affc6a3a3,dtrust_demo-bmg_seal_ubirch-03_aacefa41-a311-42b0-be6e-34d2d9ade648,dtrust_demo-bmg_seal_ubirch-05_b59de0da-2586-4273-916d-125f48479177
 CA_CERTIFICATE_FILES = Certificates/DEMO/CA/
 CA_CERTIFICATES_DESTINATION = Source/CovPassCommon/Sources/CovPassCommon/Resources/CA/

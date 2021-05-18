@@ -61,9 +61,9 @@
 
 "vaccination_add_popup_message" = "Scannen Sie den QR-Code auf dem Impfzertifikat. Die Informationen werden direkt in die CovPass-App übertragen.";
 
-"vaccination_add_popup_action_title" = "Ich habe keinen QR-Code erhalten?";
+"vaccination_add_popup_action_title" = "Sie haben keinen QR-Code erhalten?";
 
-"vaccination_add_popup_action_title_linked" = "#Ich habe keinen QR-Code erhalten?::$0#";
+"vaccination_add_popup_action_title_linked" = "#Sie haben keinen QR-Code erhalten?::$0#";
 
 "vaccination_add_popup_scan_button_title" = "QR-Code scannen";
 
@@ -170,6 +170,12 @@
 
 "dialog_delete_certificate_button_cancel" = "Abbrechen";
 
+"delete_result_dialog_header" = "Erfolgreich gelöscht";
+
+"delete_result_dialog_message" = "Die Daten zur Impfung wurden erfolgreich von diesem Gerät entfernt.";
+
+"delete_result_dialog_positive_button_text" = "OK";
+
 
 /********** error handling **********/
 
@@ -185,25 +191,41 @@
 
 "error_no_connection_to_server_button_title" = "OK";
 
+"error_scan_qrcode_cannot_be_parsed_title" = "QR-Code wurde nicht erkannt";
 
-/********** dialog: delete result **********/
+"error_scan_qrcode_cannot_be_parsed_message" = "Dieser QR-Code gehört offenbar nicht zu einem Impfzertifikat. Bitte scannen Sie den QR-Code des Impfzertifikats.";
 
-"delete_result_dialog_header" = "Erfolgreich gelöscht";
+"error_scan_qrcode_cannot_be_parsed_button_title" = "OK";
 
-"delete_result_dialog_message" = "Die Daten zur Impfung wurden erfolgreich von diesem Gerät entfernt.";
+"error_scan_present_data_is_not_supported_title" = "Aktualisieren Sie die App";
 
-"delete_result_dialog_positive_button_text" = "OK";
+"error_scan_present_data_is_not_supported_message" = "Ihre aktuelle Version der App unterstützt das vorliegende Datenformat nicht. Bitte aktualisieren Sie die App.";
+
+"error_scan_present_data_is_not_supported_button_title" = "OK";
+
+"error_scan_qrcode_without_seal_title" = "Ungültiges Impfzertifikat";
+
+"error_scan_qrcode_without_seal_message" = "Das gescannte Impfzertifikat enthält keine gültige Signatur. Das Impfzertifikat wurde wohl von einer nicht autorisierten Person erstellt und kann daher nicht gespeichert werden.";
+
+"error_scan_qrcode_without_seal_button_title" = "OK";
 
 
 /********** dialog: duplicate certificate **********/
 
 "duplicate_certificate_dialog_header" = "Impfzertifikat wurde bereits hinzugefügt";
 
-"duplicate_certificate_dialog_message" = "Haben Sie aus Versehen ein Zertifikat doppelt gescannt?";
+"duplicate_certificate_dialog_message" = "Das gescannte Impfzertifikat ist bereits in der App hinterlegt. Möglicherweise haben Sie das Impfzertifikat doppelt gescannt.";
 
-"duplicate_certificate_dialog_positive_button_text" = "Erneut scannen";
+"duplicate_certificate_dialog_button_title" = "OK";
 
-"duplicate_certificate_dialog_negative_button_text" = "Abbrechen";
+
+/********** dialog: certificate expired **********/
+
+"vaccination_certificate_expired_title" = "Impfzertifikat abgelaufen";
+
+"error_vaccination_certificate_expired_message" = "Setzen Sie sich mit Ihrem Arzt oder Ihrer Ärztin in Verbindung und frischen Sie die Impfungen in der App auf.";
+
+"error_vaccination_certificate_expired_title" = "OK";
 
 
 /********** app information **********/
@@ -216,9 +238,9 @@
 
 "app_information_title_faq_linked" = "#Häufige Fragen::$0#";
 
-"app_information_title_datenschutz" = "Datenschutz";
+"app_information_title_datenschutz" = "Datenschutzerklärung";
 
-"app_information_title_datenschutz_linked" = "#Datenschutz::$0#";
+"app_information_title_datenschutz_linked" = "#Datenschutzerklärung::$0#";
 
 "app_information_title_company_details" = "Impressum";
 

@@ -12,7 +12,7 @@ import UIKit
 import CovPassCommon
 import CovPassUI
 
-protocol ValidatorOverviewRouterProtocol: RouterProtocol {
+protocol ValidatorOverviewRouterProtocol: DialogRouterProtocol {
     func scanQRCode() -> Promise<ScanResult>
     func showCertificate(_ certificate: CBORWebToken?)
     func showAppInformation()

@@ -19,8 +19,6 @@ public protocol CertificateCardViewModelBase {
     var name: String { get }
     var actionTitle: String { get }
     var actionImage: UIImage { get }
-    var errorTitle: String? { get }
-    var errorSubtitle: String? { get }
     var tintColor: UIColor { get }
     var isFullImmunization: Bool { get }
     var vaccinationDate: Date? { get }
@@ -37,7 +35,6 @@ public class CertificateCollectionViewCell: CardCollectionViewCell {
     @IBOutlet public var contentStackView: UIStackView!
     @IBOutlet public var headerView: CardViewHeader!
     @IBOutlet public var actionView: CardViewAction!
-    @IBOutlet public var loadingView: CardViewLoading!
     @IBOutlet public var titleView: PlainLabel!
     @IBOutlet public var qrContainerView: QRContainerView!
 
@@ -106,18 +103,6 @@ public class CertificateCollectionViewCell: CardCollectionViewCell {
         actionView.stateImageView.tintColor = vm.tintColor
         actionView.actionButton.tintColor = vm.tintColor
         actionView.tintColor = .neutralWhite
-
-        loadingView.isHidden = vm.errorTitle == nil && vm.errorSubtitle == nil
-        loadingView.titleLabel.isHidden = vm.errorTitle == nil
-        loadingView.titleLabel.attributedText = vm.errorTitle?
-            .styledAs(.header_3)
-            .aligned(to: .center)
-            .colored(.neutralWhite)
-        loadingView.subtitleLabel.isHidden = vm.errorSubtitle == nil
-        loadingView.subtitleLabel.attributedText = vm.errorSubtitle?
-            .styledAs(.body)
-            .aligned(to: .center)
-            .colored(.neutralWhite)
     }
 
     override public func viewModelDidUpdate() {

@@ -11,7 +11,7 @@ import Security
 import SwiftCBOR
 import UIKit
 
-enum HCertError: Error {
+public enum HCertError: Error {
     case publicKeyLoadError
     case verifyError
 }
