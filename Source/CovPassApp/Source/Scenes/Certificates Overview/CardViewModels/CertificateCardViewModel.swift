@@ -70,22 +70,6 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
         isFullImmunization ? .completness : .halfShield
     }
 
-    var errorTitle: String? {
-        if !isFullImmunization { return nil }
-        if certificate.fullImmunizationValid { return nil }
-        guard let date = certificate.fullImmunizationValidFrom else { return nil }
-        let dateString = DateUtils.displayDateFormatter.string(from: date)
-        return String(format: "vaccination_full_immunization_loading_message_14_days_title".localized, dateString)
-    }
-
-    var errorSubtitle: String? {
-        if !isFullImmunization { return nil }
-        if !certificate.fullImmunizationValid {
-            return "vaccination_full_immunization_loading_message_14_days_message".localized
-        }
-        return nil
-    }
-
     var tintColor: UIColor {
         isFullImmunization ? .neutralWhite : .darkText
     }
