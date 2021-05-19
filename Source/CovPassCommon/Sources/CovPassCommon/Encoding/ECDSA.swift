@@ -14,7 +14,7 @@ struct ECDSA {
     static let firstBitIsSet: UInt8 = 0x80
     static let tagInteger: UInt8 = 0x02
     static let zero: UInt8 = 0x00
-    static let byteLength: Int = 256
+    static let byteLength: Int = 255
 
     static func convertSignatureData(_ data: Data) throws -> Data {
         let sigR = ECDSA.encodeInteger(data.prefix(data.count - length))
