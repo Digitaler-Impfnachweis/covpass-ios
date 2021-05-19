@@ -3,20 +3,20 @@
     "pins": [
       {
         "package": "Keychain",
-        "repositoryURL": "https://github.com/IBM/ios-keychain",
+        "repositoryURL": "git@github.com:IBM/ios-keychain.git",
         "state": {
           "branch": null,
-          "revision": "00de52b0f8b8faa8abeecd26125fb25c4f911f5b",
-          "version": "0.0.4"
+          "revision": "8d9c7aa57e53ab034f843da572f47df5955c72a4",
+          "version": "0.0.5"
         }
       },
       {
         "package": "Scanner",
-        "repositoryURL": "https://github.com/DanielMandea/ios-scanner.git",
+        "repositoryURL": "git@github.com:IBM/ios-scanner.git",
         "state": {
           "branch": null,
-          "revision": "0baeae98e7fc7e349d8366786b02fe33a7fc0a1e",
-          "version": "0.0.1"
+          "revision": "bc623cd7bab92f55bca479cf5e294484e604bcfe",
+          "version": "0.0.2"
         }
       },
       {
