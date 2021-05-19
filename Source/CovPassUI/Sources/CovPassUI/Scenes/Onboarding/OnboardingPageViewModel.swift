@@ -25,6 +25,7 @@ public protocol OnboardingPageViewModel {
 }
 
 public protocol ConsentPageViewModel: OnboardingPageViewModel {
+    var listItems: NSAttributedString { get }
     var dataPrivacyTitle: NSAttributedString { get }
-    var isGranted: Bool { get set }
+    var isScrolledToBottom: Bool { get set }
 }

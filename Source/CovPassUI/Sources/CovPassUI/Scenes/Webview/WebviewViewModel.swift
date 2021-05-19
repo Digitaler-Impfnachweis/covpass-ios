@@ -13,6 +13,7 @@ public class WebviewViewModel: WebviewViewModelProtocol {
 
     public let title: String?
     public let urlRequest: URLRequest
+    public var closeButtonShown: Bool = false
 
     // MARK: - Lifecycle
 

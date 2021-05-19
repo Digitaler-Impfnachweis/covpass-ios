@@ -47,6 +47,7 @@ public class OnboardingContainerViewController: UIViewController, ViewModelDeleg
             switch pageViewModel {
             case let consentViewModel as ConsentPageViewModel:
                 let viewController = ConsentViewController(viewModel: consentViewModel)
+                viewController.infoViewAction = viewModel.router.showDataPrivacyScene
                 pageViewController = viewController
             default:
                 let viewController = OnboardingPageViewController(viewModel: pageViewModel)

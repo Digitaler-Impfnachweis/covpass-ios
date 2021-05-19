@@ -15,12 +15,15 @@ class ConsentViewController: UIViewController {
     @IBOutlet var scrollView: UIScrollView!
     @IBOutlet var imageView: UIImageView!
     @IBOutlet var headline: PlainLabel!
+    @IBOutlet var listItems: PlainLabel!
     @IBOutlet var descriptionText: PlainLabel!
-    @IBOutlet var dataPrivacyCheckbox: CheckboxView!
+    @IBOutlet var dataPrivacyInfoView: ListItemView!
 
     // MARK: - Properties
 
     private(set) var viewModel: ConsentPageViewModel
+
+    public var infoViewAction: (() -> Void)?
 
     // MARK: - Lifecycle
 
@@ -34,15 +37,24 @@ class ConsentViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        scrollView.contentInset.top = .space_70
-        scrollView.contentInset.bottom = .space_120
+        configureScrollView()
         configureImageView()
         configureHeadline()
+        configureListItems()
         configureParagraphView()
-        configureCheckboxes()
+        configureInfoView()
     }
 
     // MARK: - Methods
+
+    private func configureScrollView() {
+        scrollView.contentInset.top = .space_70
+        scrollView.contentInset.bottom = .space_120
+        scrollView.delegate = self
+        if scrollView.isScrolledToBottom {
+            viewModel.isScrolledToBottom = true
+        }
+    }
 
     private func configureImageView() {
         imageView.image = viewModel.image
@@ -54,16 +66,26 @@ class ConsentViewController: UIViewController {
         headline.layoutMargins = .init(top: .space_40, left: .space_24, bottom: .zero, right: .space_24)
     }
 
+    private func configureListItems() {
+        listItems.layoutMargins = .init(top: .space_24, left: .space_24, bottom: .zero, right: .space_24)
+        listItems.attributedText = viewModel.listItems
+    }
+
     private func configureParagraphView() {
         descriptionText.attributedText = viewModel.info?.styledAs(.body).colored(.onBackground70)
         descriptionText.layoutMargins = .init(top: .space_12, left: .space_24, bottom: .zero, right: .space_24)
     }
 
-    private func configureCheckboxes() {
-        dataPrivacyCheckbox.textView.attributedText = viewModel.dataPrivacyTitle
-        dataPrivacyCheckbox.layoutMargins = .init(top: .space_40, left: .space_24, bottom: .zero, right: .space_24)
-        dataPrivacyCheckbox.didChangeState = { [weak self] in
-            self?.viewModel.isGranted = $0
-        }
+    private func configureInfoView() {
+        dataPrivacyInfoView.textLabel.attributedText = viewModel.dataPrivacyTitle
+        dataPrivacyInfoView.action = infoViewAction
+        dataPrivacyInfoView.showSeperator = true
+        dataPrivacyInfoView.layoutMargins = .init(top: .space_40, left: .zero, bottom: .zero, right: .zero)
+    }
+}
+
+extension ConsentViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        viewModel.isScrolledToBottom = scrollView.isScrolledToBottom
     }
 }
