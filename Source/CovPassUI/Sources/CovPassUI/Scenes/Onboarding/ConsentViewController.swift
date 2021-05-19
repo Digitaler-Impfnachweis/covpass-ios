@@ -73,14 +73,14 @@ class ConsentViewController: UIViewController {
 
     private func configureParagraphView() {
         descriptionText.attributedText = viewModel.info?.styledAs(.body).colored(.onBackground70)
-        descriptionText.layoutMargins = .init(top: .space_12, left: .space_24, bottom: .zero, right: .space_24)
+        descriptionText.layoutMargins = .init(top: .space_40, left: .space_24, bottom: .zero, right: .space_24)
     }
 
     private func configureInfoView() {
         dataPrivacyInfoView.textLabel.attributedText = viewModel.dataPrivacyTitle
         dataPrivacyInfoView.action = infoViewAction
         dataPrivacyInfoView.showSeperator = true
-        dataPrivacyInfoView.layoutMargins = .init(top: .space_40, left: .zero, bottom: .zero, right: .zero)
+        dataPrivacyInfoView.layoutMargins = .init(top: .space_24, left: .zero, bottom: .zero, right: .zero)
     }
 }
 
