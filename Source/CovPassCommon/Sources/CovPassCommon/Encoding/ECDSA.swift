@@ -14,10 +14,14 @@ struct ECDSA {
     static let firstBitIsSet: UInt8 = 0x80
     static let tagInteger: UInt8 = 0x02
     static let zero: UInt8 = 0x00
+    static let byteLength: Int = 256
 
-    static func convertSignatureData(_ data: Data) -> Data {
+    static func convertSignatureData(_ data: Data) throws -> Data {
         let sigR = ECDSA.encodeInteger(data.prefix(data.count - length))
         let sigS = ECDSA.encodeInteger(data.suffix(length))
+        if (sigS.count + sigR.count > byteLength) {
+            throw HCertError.verifyError
+        }
         return Data([tagSequence] + [UInt8(sigR.count + sigS.count)] + sigR + sigS)
     }
 
