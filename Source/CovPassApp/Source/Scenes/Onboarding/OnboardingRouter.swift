@@ -42,7 +42,7 @@ struct OnboardingRouter: OnboardingRouterProtocol {
 
     func showDataPrivacyScene() {
         let staticHtmlUrl = Bundle.main.url(forResource: "privacy-covpass", withExtension: "html")
-        let webViewScene = WebviewSceneFactory(title: "app_information_title_datenschutz_linked".localized, url: staticHtmlUrl!)
+        let webViewScene = WebviewSceneFactory(title: "app_information_title_datenschutz_linked".localized, url: staticHtmlUrl!, closeButtonShown: true)
         sceneCoordinator.present(webViewScene)
     }
 }

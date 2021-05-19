@@ -13,12 +13,13 @@ public class WebviewViewModel: WebviewViewModelProtocol {
 
     public let title: String?
     public let urlRequest: URLRequest
-    public var closeButtonShown: Bool = false
+    public var closeButtonShown: Bool
 
     // MARK: - Lifecycle
 
-    public init(title: String? = nil, url: URL) {
+    public init(title: String? = nil, url: URL, closeButtonShown: Bool) {
         self.title = title
+        self.closeButtonShown = closeButtonShown
         urlRequest = URLRequest(url: url)
     }
 }

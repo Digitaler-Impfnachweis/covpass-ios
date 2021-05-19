@@ -39,7 +39,7 @@ open class WebviewViewController: UIViewController {
         if viewModel.closeButtonShown {
             headline.image = .close
             headline.action = {
-                self.dismiss(animated: false)
+                self.dismiss(animated: true)
             }
         }
     }
