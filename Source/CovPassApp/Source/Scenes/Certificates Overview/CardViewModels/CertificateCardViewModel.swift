@@ -59,12 +59,12 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
 
     var qrCodeTitle: String? {
         if certificate.fullImmunizationValid {
-            return "vaccination_certificate_detail_view_complete_title".localized
+            return "vaccination_start_screen_qrcode_complete_subtitle".localized
         }
-        if certificate.fullImmunization {
-            return ""
+        if let date = certificate.fullImmunizationValidFrom, certificate.fullImmunization {
+            return String(format: "vaccination_start_screen_qrcode_complete_from_date_subtitle".localized, DateUtils.displayDateFormatter.string(from: date))
         }
-        return nil
+        return "vaccination_start_screen_qrcode_incomplete_subtitle".localized
     }
 
     var name: String {
