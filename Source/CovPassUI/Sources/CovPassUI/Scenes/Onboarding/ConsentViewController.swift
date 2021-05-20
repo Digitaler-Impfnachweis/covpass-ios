@@ -47,13 +47,14 @@ class ConsentViewController: UIViewController {
 
     // MARK: - Methods
 
+    public func scrollToBottom() {
+        scrollView.scroll(to: .bottom, with: .space_120, animated: true)
+    }
+
     private func configureScrollView() {
         scrollView.contentInset.top = .space_70
         scrollView.contentInset.bottom = .space_120
         scrollView.delegate = self
-        if scrollView.isScrolledToBottom {
-            viewModel.isScrolledToBottom = true
-        }
     }
 
     private func configureImageView() {

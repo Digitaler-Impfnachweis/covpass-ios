@@ -168,6 +168,8 @@ extension OnboardingContainerViewController: CustomToolbarViewDelegate {
             currentIndex += 1
             pageController?.setViewControllers([pages[currentIndex]], direction: .forward, animated: true, completion: nil)
             pageIndicator.selectDot(withIndex: currentIndex)
+        case .scrollButton:
+            (pages[currentIndex] as? ConsentViewController)?.scrollToBottom()
         default:
             return
         }
