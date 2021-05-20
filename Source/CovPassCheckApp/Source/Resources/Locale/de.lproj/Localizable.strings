@@ -31,15 +31,21 @@
 
 "validation_second_onboarding_page_message" = "Als prüfende Person sehen Sie in der CovPassCheck-App nur den Impfstatus sowie den Namen und das Geburtsdatum der geimpften Person. Gleichen Sie die Informationen mit einem Ausweisdokument ab.";
 
-"validation_fourth_onboarding_page_title" = "Zustimmung für die Nutzung der CovPassCheck-App";
+"validation_fourth_onboarding_page_title" = "Datenschutz und Datensicherheit";
 
-"validation_fourth_onboarding_page_message" = "Um die CovPassCheck-App zu nutzen, müssen Sie bestätigen, dass Sie die Datenschutzerklärung zur Kenntnis genommen haben.";
+"validation_fourth_onboarding_first_list_item" = "Die Überprüfung von QR-Codes anderer Personen und das Auslesen von Daten über die Corona-Impfung ist nur in den gesetzlich vorgesehenen Fällen zulässig.";
 
-"fourth_onboarding_page_second_selection" = "Ich habe die Datenschutzerklärung zur Kenntnis genommen.";
+"validation_fourth_onboarding_second_list_item" = "Die Daten aus fremden Impfzertifikaten dürfen nicht zu anderen Zwecken gespeichert, weitergegeben oder genutzt werden.";
 
-"fourth_onboarding_page_second_selection_linked" = "Ich habe die #Datenschutzerklärung::$0# zur Kenntnis genommen.";
+"validation_fourth_onboarding_third_list_item" = "Die Verwendung des digitalen Impfnachweises ist freiwillig. Niemand darf zur Nutzung gezwungen werden. Der Nachweis des vollständigen Impfschutzes kann auch auf andere Weise erbracht werden (z. B. mit dem gelben Impfpass).";
 
-"confirmation_fourth_onboarding_page_button_title" = "Fertig";
+"validation_fourth_onboarding_fourth_list_item" = "Die Impfnachweise enthalten Gesundheitsdaten. Zum Nachweis in den gesetzlich vorgesehenen Fällen ist nur das Scannen des QR-Codes zulässig. Weitere Daten aus der CovPass-App dürfen nicht verlangt werden. ";
+
+"vaccination_fourth_onboarding_page_message" = "Ausführliche Hinweise zur Datenverarbeitung finden Sie in der Datenschutzerklärung:";
+
+"confirmation_fourth_onboarding_page_button_title" = "Alles klar";
+
+"vaccination_privacy_policy_page_button_title" = "Schließen";
 
 "error_connect_internet_for_scan_title" = "Flugzeugmodus ausschalten oder Wi-Fi für den Datenzugriff verwenden";
 
@@ -121,7 +127,7 @@
 
 "validation_check_popup_unsuccessful_test_second_reason_title" = "Zertifikat abgelaufen:";
 
-"validation_check_popup_unsuccessful_test_first_reason_body" = "Es sind keine Daten auf dem QR-Code der geimpften Person gespeichert. Sollten Sie sich im Offline-Modus befinden, aktualisieren Sie die CovPassCheck-App.";
+"validation_check_popup_unsuccessful_test_first_reason_body" = "Es sind keine Daten auf dem QR-Code der geimpften Person gespeichert.";
 
 "validation_check_popup_unsuccessful_test_second_reason_body" = "Das Impfzertifikat ist nicht mehr gültig. Der aktuelle Status kann in der CovPass-App eingesehen werden.";
 
@@ -146,7 +152,7 @@
 
 "app_information_title_datenschutz" = "Datenschutzerklärung";
 
-"app_information_title_datenschutz_linked" = "#Datenschutzerklärug::$0#";
+"app_information_title_datenschutz_linked" = "Datenschutzerklärug";
 
 "app_information_title_company_details" = "Impressum";
 

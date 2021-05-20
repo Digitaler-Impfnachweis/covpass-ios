@@ -49,7 +49,6 @@ public class QRContainerView: XibView {
         )
         contentView?.layer.cornerRadius = 30
         contentView?.layer.masksToBounds = true
-        stackView.setCustomSpacing(.space_20, after: imageView)
     }
 
     private func updateViews() {
@@ -57,9 +56,9 @@ public class QRContainerView: XibView {
         contentView?.backgroundColor = imageView.image == nil ? .clear : .neutralWhite
 
         titleLabel.attributedText = title?.styledAs(.header_3)
-        titleLabel.isHidden = titleLabel.text.isNilOrEmpty
+        titleLabel.isHidden = titleLabel.attributedText.isNilOrEmpty
 
-        subtitleLabel.attributedText = title?.styledAs(.body)
-        subtitleLabel.isHidden = subtitleLabel.text.isNilOrEmpty
+        subtitleLabel.attributedText = subtitle?.styledAs(.body)
+        subtitleLabel.isHidden = subtitleLabel.attributedText.isNilOrEmpty
     }
 }

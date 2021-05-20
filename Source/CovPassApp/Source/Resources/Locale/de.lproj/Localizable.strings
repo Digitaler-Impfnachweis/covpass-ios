@@ -29,21 +29,29 @@
 
 "vaccination_second_onboarding_page_title" = "Zweiter Schritt: Die CovPass-App zeigt bei einem vollständigen Impfschutz den QR-Code an";
 
-"vaccination_second_onboarding_page_message" = "Der QR-Code ist der Nachweis für den vollständigen Impfschutz. Dieser wird in der CovPass-App angezeigt. Laden Sie dafür alle notwendigen Impfzertifikate in die CovPass-App. Bitte beachten Sie: Der QR-Code kann erst angezeigt werden, wenn 14 Tage nach der letzten Impfung vergangen sind.";
+"vaccination_second_onboarding_page_message" = "Der QR-Code ist der Nachweis für den vollständigen Impfschutz. Dieser wird in der CovPass-App angezeigt. Laden Sie dafür alle notwendigen Impfzertifikate in die CovPass-App. Bitte beachten Sie: Der QR-Code kann erst angezeigt werden, wenn 14 Tage nach der letzten notwendigen Impfung vergangen sind.";
 
 "vaccination_third_onboarding_page_title" = "Dritter Schritt: Den QR-Code bei Bedarf vorzeigen";
 
 "vaccination_third_onboarding_page_message" = "Lassen Sie den QR-Code in der CovPass-App ganz einfach von der prüfenden Person scannen. Bei einer Überprüfung werden nur der Impfstatus, der Name und das Geburtsdatum angezeigt. Bitte halten Sie ergänzend Ihr Ausweisdokument bzw. das Ausweisdokument der geimpften Person bereit.";
 
-"vaccination_fourth_onboarding_page_title" = "Zustimmung für die Nutzung der CovPass-App";
+"vaccination_fourth_onboarding_page_title" = "Datenschutz und Datensicherheit";
 
-"vaccination_fourth_onboarding_page_message" = "Um die CovPass-App zu nutzen, müssen Sie bestätigen, dass Sie die Datenschutzerklärung zur Kenntnis genommen haben.";
+"vaccination_fourth_onboarding_page_first_list_item" = "Die Verwendung der CovPass-App ist freiwillig. Der Nachweis des vollständigen Impfschutzes kann auch auf andere Weise erbracht werden (z. B. mit dem gelben Impfpass).";
 
-"fourth_onboarding_page_second_selection" = "Ich habe die Datenschutzerklärung zur Kenntnis genommen.";
+"vaccination_fourth_onboarding_page_second_list_item" = "Das Impfzertifikat enthält die Daten über Ihre Corona-Impfung. Zum Nachweis Ihres Impfschutzes in den gesetzlich vorgesehenen Fällen genügt das Vorzeigen des QR-Codes in der CovPass-App. Stellen Sie die Impfzertifikate und QR-Codes niemandem zur Verfügung, wenn Sie nicht wollen, dass die Daten ausgelesen werden. ";
 
-"fourth_onboarding_page_second_selection_linked" = "Ich habe die #Datenschutzerklärung::$0# zur Kenntnis genommen.";
+"vaccination_fourth_onboarding_page_third_list_item" = "Wenn Sie den QR-Code in der CovPass-App vorzeigen und dieser mit der offiziellen CovPassCheck-App gescannt wird, können andere Personen nachvollziehen, ob Ihr Impfschutz vollständig ist. Bei der Prüfung werden in der CovPassCheck-App auch Ihr Name, Ihr Vorname und Ihr Geburtsdatum angezeigt. ";
 
-"confirmation_fourth_onboarding_page_button_title" = "Fertig";
+"vaccination_fourth_onboarding_page_fourth_list_item" = "Sie haben jederzeit die Möglichkeit, Impfzertifikate in der App wieder zu entfernen. Bis dahin bleiben die Impfzertifikate auf Ihrem Smartphone gespeichert. ";
+
+"vaccination_fourth_onboarding_page_fith_list_item" = "Sie können auch Impfzertifikate anderer Personen in der CovPass-App speichern (z. B. von Familienmitgliedern). Es ist wichtig, dass Sie diese Personen zuvor über die Speicherung ihrer Impfzertifikate informieren. Verwenden Sie zudem die Impfzertifikate anderer Personen nur in den Fällen, die laut dem Gesetz vorgesehen sind.";
+
+"vaccination_fourth_onboarding_page_message" = "Ausführliche Hinweise zur Datenverarbeitung finden Sie in der Datenschutzerklärung:";
+
+"vaccination_fourth_onboarding_page_button_title" = "Alles klar";
+
+"vaccination_privacy_policy_page_button_title" = "Schließen";
 
 
 /********** start Screen **********/
@@ -53,6 +61,12 @@
 "vaccination_start_screen_note_title" = "Fügen Sie eine Impfung hinzu";
 
 "vaccination_start_screen_note_message" = "Sie haben aktuell keine Impfungen gespeichert. Drücken Sie auf das Plus-Symbol, um eine Impfung hinzuzufügen.";
+
+"vaccination_start_screen_qrcode_incomplete_subtitle" = "Unvollständiger Impfschutz";
+
+"vaccination_start_screen_qrcode_complete_from_date_subtitle" = "Vollständiger Impfschutz ab %@";
+
+"vaccination_start_screen_qrcode_complete_subtitle" = "Vollständiger Impfschutz";
 
 
 /********** popup: add vaccination **********/
@@ -127,7 +141,7 @@
 
 "vaccination_certificate_detail_view_incomplete_title" = "%d von %d Impfungen vorhanden";
 
-"vaccination_certificate_detail_view_incomplete_message" = "Ihr Impfschutz ist nicht vollständig. Um den QR-Code als Nachweis für einen kompletten Impfschutz anzeigen zu können, fügen Sie bitte eine weitere Impfung hinzu.";
+"vaccination_certificate_detail_view_incomplete_message" = "Ihr Impfschutz ist nicht vollständig. Um den QR-Code als Nachweis für einen kompletten Impfschutz vorzeigen zu können, fügen Sie bitte eine weitere Impfung hinzu.";
 
 "vaccination_certificate_detail_view_incomplete_action_button_title" = "Impfung hinzufügen";
 
@@ -135,7 +149,7 @@
 
 "vaccination_certificate_detail_view_complete_message" = "Zeigen Sie bei Bedarf den QR-Code vor. Halten Sie zudem ein Ausweisdokument bei der Überprüfung bereit.";
 
-"vaccination_certificate_detail_view_complete_action_button_title" = "QR-Code anzeigen";
+"vaccination_certificate_detail_view_complete_action_button_title" = "Aktuellen QR-Code anzeigen";
 
 "vaccination_certificate_detail_view_personal_data_title" = "Persönliche Daten";
 
@@ -157,12 +171,18 @@
 
 "vaccination_certificate_detail_view_data_identification_number" = "UVCI (Identifikationsnummer für das Zertifikat)";
 
-"vaccination_certificate_detail_view_delete_button_title" = "Zertifikat löschen";
+"vaccination_certificate_detail_view_qrcode_action_button_title" = "Zum QR-Code dieser Impfung";
+
+"vaccination_certificate_detail_view_qrcode_screen_title" = "Impfung %d von %d von %@";
+
+"vaccination_certificate_detail_view_qrcode_screen_message" = "Zeigen Sie bei Bedarf den QR-Code vor.";
+
+"vaccination_certificate_detail_view_qrcode_screen_action_button_title" = "Schließen";
 
 
 /********** certificate delete dialog **********/
 
-"dialog_delete_certificate_title" = "Möchten Sie das Zertifikat von %@ wirklich löschen?";
+"dialog_delete_certificate_title" = "Möchten Sie die Impfung %d von %d von %@ wirklich löschen?";
 
 "dialog_delete_certificate_message" = "Alle enthaltenen Daten werden rückstandslos von diesem Gerät entfernt. Die Wiederherstellung der Daten ist nicht möglich.";
 
@@ -240,7 +260,7 @@
 
 "app_information_title_datenschutz" = "Datenschutzerklärung";
 
-"app_information_title_datenschutz_linked" = "#Datenschutzerklärung::$0#";
+"app_information_title_datenschutz_linked" = "Datenschutzerklärug";
 
 "app_information_title_company_details" = "Impressum";
 

@@ -42,7 +42,7 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
     }
 
     var backgroundColor: UIColor {
-        isFullImmunization ? .onBrandAccent70 : .onBackground50
+        certificate.fullImmunizationValid ? .onBrandAccent70 : .onBackground50
     }
 
     var title: String {
@@ -54,8 +54,17 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
     }
 
     var qrCode: UIImage? {
-        if !certificate.fullImmunizationValid { return nil }
         return token.vaccinationQRCodeData.generateQRCode(size: UIScreen.main.bounds.size)
+    }
+
+    var qrCodeTitle: String? {
+        if certificate.fullImmunizationValid {
+            return "vaccination_start_screen_qrcode_complete_subtitle".localized
+        }
+        if let date = certificate.fullImmunizationValidFrom, certificate.fullImmunization {
+            return String(format: "vaccination_start_screen_qrcode_complete_from_date_subtitle".localized, DateUtils.displayDateFormatter.string(from: date))
+        }
+        return "vaccination_start_screen_qrcode_incomplete_subtitle".localized
     }
 
     var name: String {
@@ -71,7 +80,7 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
     }
 
     var tintColor: UIColor {
-        isFullImmunization ? .neutralWhite : .darkText
+        certificate.fullImmunizationValid ? .neutralWhite : .darkText
     }
 
     var isFullImmunization: Bool {
