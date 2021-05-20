@@ -16,6 +16,7 @@ public protocol CertificateCardViewModelBase {
     var title: String { get }
     var isFavorite: Bool { get }
     var qrCode: UIImage? { get }
+    var qrCodeTitle: String? { get }
     var name: String { get }
     var actionTitle: String { get }
     var actionImage: UIImage { get }
@@ -93,6 +94,8 @@ public class CertificateCollectionViewCell: CardCollectionViewCell {
         qrContainerView.image = vm.qrCode
         qrContainerView.layoutMargins = .init(top: .space_20, left: .zero, bottom: .space_20, right: .zero)
         qrContainerView.isHidden = vm.qrCode == nil
+        qrContainerView.titleLabel.attributedText = vm.qrCodeTitle?.styledAs(.body).colored(.onBackground70).aligned(to: .center)
+        qrContainerView.titleLabel.isHidden = vm.qrCodeTitle == nil
 
         titleView.textableView.attributedText = vm.name.styledAs(.header_1).colored(vm.tintColor)
         titleView.backgroundColor = .clear

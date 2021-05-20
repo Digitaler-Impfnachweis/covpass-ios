@@ -33,11 +33,13 @@
 
 "validation_fourth_onboarding_page_title" = "Datenschutz und Datensicherheit";
 
-"validation_fourth_onboarding_first_list_item" = "Die Prüfung von Impfzertifikaten anderer Personen ist nur in den Fällen zulässig, die laut Gesetz vorgesehen sind.";
+"validation_fourth_onboarding_first_list_item" = "Die Überprüfung von QR-Codes anderer Personen und das Auslesen von Daten über die Corona-Impfung ist nur in den gesetzlich vorgesehenen Fällen zulässig.";
 
 "validation_fourth_onboarding_second_list_item" = "Die Daten aus fremden Impfzertifikaten dürfen nicht zu anderen Zwecken gespeichert, weitergegeben oder genutzt werden.";
 
-"validation_fourth_onboarding_third_list_item" = "Die Verwendung der CovPass-App ist freiwillig. Niemand darf zur Nutzung gezwungen werden. Der Nachweis des vollständigen Impfschutzes kann auch auf eine andere Weise erbracht werden (z. B. mit dem gelben Impfpass).";
+"validation_fourth_onboarding_third_list_item" = "Die Verwendung des digitalen Impfnachweises ist freiwillig. Niemand darf zur Nutzung gezwungen werden. Der Nachweis des vollständigen Impfschutzes kann auch auf andere Weise erbracht werden (z. B. mit dem gelben Impfpass).";
+
+"validation_fourth_onboarding_fourth_list_item" = "Die Impfnachweise enthalten Gesundheitsdaten. Zum Nachweis in den gesetzlich vorgesehenen Fällen ist nur das Scannen des QR-Codes zulässig. Weitere Daten aus der CovPass-App dürfen nicht verlangt werden. ";
 
 "vaccination_fourth_onboarding_page_message" = "Ausführliche Hinweise zur Datenverarbeitung finden Sie in der Datenschutzerklärung:";
 

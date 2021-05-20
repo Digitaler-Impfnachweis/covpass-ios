@@ -37,7 +37,7 @@ class HCert {
         )
 
         let publicKey = try loadPublicKey(from: certificate)
-        let signature = ECDSA.convertSignatureData(Data(message.signatures))
+        let signature = try ECDSA.convertSignatureData(Data(message.signatures))
 
         var error: Unmanaged<CFError>?
         let result = SecKeyVerifySignature(publicKey, .ecdsaSignatureMessageX962SHA256, Data(signedPayload) as CFData, signature as CFData, &error)

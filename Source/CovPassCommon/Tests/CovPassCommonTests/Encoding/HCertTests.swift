@@ -34,7 +34,7 @@ class HCertTests: XCTestCase {
         super.tearDown()
     }
 
-    func testVerifiy() {
+    func testVerify() {
         let certificate = CertificateMock.validCertificate.stripPrefix()
         let base45Decoded = try! base45Encoder.decode(certificate)
         guard let decompressedPayload = Compression.decompress(Data(base45Decoded)) else {
@@ -46,7 +46,7 @@ class HCertTests: XCTestCase {
         XCTAssertTrue(sut.verify(message: cosePayload, certificates: [validCertificate]))
     }
 
-    func testVerifiyFailsWithInvalidCertificate() {
+    func testVerifyFailsWithInvalidCertificate() {
         let certificate = CertificateMock.validCertificate.stripPrefix()
         let base45Decoded = try! base45Encoder.decode(certificate)
         guard let decompressedPayload = Compression.decompress(Data(base45Decoded)) else {
@@ -58,8 +58,20 @@ class HCertTests: XCTestCase {
         XCTAssertFalse(sut.verify(message: cosePayload, certificates: [invalidCertificate]))
     }
 
-    func testVerifiyFailsWithNoCertificate() {
+    func testVerifyFailsWithNoCertificate() {
         let certificate = CertificateMock.validCertificate.stripPrefix()
+        let base45Decoded = try! base45Encoder.decode(certificate)
+        guard let decompressedPayload = Compression.decompress(Data(base45Decoded)) else {
+            XCTFail("Could not decompress QRCode data")
+            return
+        }
+        let cose1SignEncoder = CoseSign1Parser()
+        let cosePayload = try! cose1SignEncoder.parse(decompressedPayload)!
+        XCTAssertFalse(sut.verify(message: cosePayload, certificates: []))
+    }
+
+    func testVerifyFailsWithInvalidSignature() {
+        let certificate = CertificateMock.invalidCertificateInvalidSignature.stripPrefix()
         let base45Decoded = try! base45Encoder.decode(certificate)
         guard let decompressedPayload = Compression.decompress(Data(base45Decoded)) else {
             XCTFail("Could not decompress QRCode data")
