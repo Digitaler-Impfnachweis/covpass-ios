@@ -96,6 +96,22 @@ public extension NSAttributedString {
         }
     }
 
+    func appendBullets(_ bullets: [NSAttributedString], spacing: CGFloat? = nil) -> NSAttributedString {
+      let origin = NSMutableAttributedString(attributedString: self)
+      var list = NSAttributedString(string: "")
+      bullets.forEach { list = list.appendBullet($0, spacing: spacing) }
+      origin.append(list)
+      return origin
+    }
+
+    static func toBullets(_ bullets: [NSAttributedString]) -> NSAttributedString {
+      var list = NSAttributedString()
+      for (index, bullet) in bullets.enumerated() {
+        list = list.appendBullet(bullet, forceNewline: index != 0)
+      }
+      return list
+    }
+
     // Sets an attribute for a given range.
     // * If the range is nil it is applied to the whole string
     // * If the range is out of bounds nothing happens, no crash
@@ -124,4 +140,25 @@ public extension NSAttributedString {
         guard length > 0 else { return nil }
         return attribute(name, at: location ?? 0, effectiveRange: nil) as? Type
     }
+
+    private func appendBullet(_ string: NSAttributedString, forceNewline: Bool = true, spacing: CGFloat? = nil) -> NSAttributedString {
+        let list = NSMutableAttributedString(attributedString: self)
+        // re-attach attributes including the bullet point
+        let bulletAttributes = string.attributes(at: 0, effectiveRange: nil)
+        let newlineCharacter = forceNewline ? "\n" : ""
+        let bullet = NSMutableAttributedString(string: "\(newlineCharacter)•\t\(string.string)")
+        bullet.addAttributes(bulletAttributes, range: .init(location: 0, length: bullet.string.count))
+        list.append(bullet)
+        // Set list paragraph to current list. This will overrides the current if any
+        let font = (bulletAttributes[.font] as? UIFont) ?? UIFont.preferredFont(forTextStyle: .body)
+        let indentSize = font.pointSize
+        return list.paragraphStyled { style in
+          style.alignment = .left
+          style.tabStops = [NSTextTab(textAlignment: .left, location: indentSize, options: [:])]
+          style.defaultTabInterval = indentSize
+          style.headIndent = indentSize
+          style.paragraphSpacingBefore = spacing ?? font.lineHeight
+          style.firstLineHeadIndent = 0
+        }
+      }
 }

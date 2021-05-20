@@ -16,9 +16,9 @@ class PassConsentPageViewModel: ConsentPageViewModel {
     private(set) var type: OnboardingPageViewModelType
 
     var toolbarState: CustomToolbarState {
-        isGranted ?
-            .confirm("confirmation_fourth_onboarding_page_button_title".localized) :
-            .disabledWithText("confirmation_fourth_onboarding_page_button_title".localized)
+        isScrolledToBottom ?
+            .confirm("vaccination_fourth_onboarding_page_button_title".localized) :
+            .scrollAware
     }
 
     var image: UIImage? {
@@ -29,15 +29,25 @@ class PassConsentPageViewModel: ConsentPageViewModel {
         "vaccination_fourth_onboarding_page_title".localized
     }
 
+    var listItems: NSAttributedString {
+        NSAttributedString.toBullets(
+            [ "vaccination_fourth_onboarding_page_first_list_item".localized.styledAs(.body),
+              "vaccination_fourth_onboarding_page_second_list_item".localized.styledAs(.body),
+              "vaccination_fourth_onboarding_page_third_list_item".localized.styledAs(.body),
+              "vaccination_fourth_onboarding_page_fourth_list_item".localized.styledAs(.body)
+            ]
+        )
+    }
+
     var info: String? {
         "vaccination_fourth_onboarding_page_message".localized
     }
 
     var dataPrivacyTitle: NSAttributedString {
-        NSMutableAttributedString(string: "fourth_onboarding_page_second_selection".localized).addLink(url: "https://www.digitaler-impfnachweis-app.de/webviews/client-app/privacy/", in: "Datenschutzerklärung").styledAs(.body)
+        NSMutableAttributedString(string: "app_information_title_datenschutz_linked".localized).styledAs(.header_3)
     }
 
-    var isGranted: Bool = false {
+    var isScrolledToBottom: Bool = false {
         didSet {
             delegate?.viewModelDidUpdate()
         }

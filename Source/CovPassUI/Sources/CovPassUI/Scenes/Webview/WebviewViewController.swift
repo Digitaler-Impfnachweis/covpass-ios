@@ -14,6 +14,7 @@ open class WebviewViewController: UIViewController {
 
     let viewModel: WebviewViewModelProtocol
     @IBOutlet var webView: WKWebView!
+    @IBOutlet var headline: InfoHeaderView!
 
     // MARK: - Lifecycle
 
@@ -28,7 +29,19 @@ open class WebviewViewController: UIViewController {
     override public func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .neutralWhite
+        configureHeadline()
         webView.backgroundColor = .neutralWhite
         webView.load(viewModel.urlRequest)
+    }
+
+    private func configureHeadline() {
+        headline.layoutMargins = .init(top: .zero, left: .space_12, bottom: .zero, right: .space_12)
+        headline.attributedTitleText = viewModel.title?.styledAs(.header_2)
+        if viewModel.closeButtonShown {
+            headline.image = .close
+            headline.action = {
+                self.dismiss(animated: true)
+            }
+        }
     }
 }

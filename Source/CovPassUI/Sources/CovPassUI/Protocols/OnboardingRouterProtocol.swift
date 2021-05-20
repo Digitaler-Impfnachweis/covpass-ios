@@ -9,4 +9,5 @@
 public protocol OnboardingRouterProtocol: RouterProtocol {
     func showNextScene()
     func showPreviousScene()
+    func showDataPrivacyScene()
 }

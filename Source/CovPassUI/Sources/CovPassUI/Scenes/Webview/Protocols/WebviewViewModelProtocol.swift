@@ -11,4 +11,5 @@ import Foundation
 public protocol WebviewViewModelProtocol {
     var title: String? { get }
     var urlRequest: URLRequest { get }
+    var closeButtonShown: Bool { get set}
 }

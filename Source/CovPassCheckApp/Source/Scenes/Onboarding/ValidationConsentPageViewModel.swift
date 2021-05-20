@@ -16,9 +16,9 @@ class ValidationConsentPageViewModel: ConsentPageViewModel {
     let type: OnboardingPageViewModelType
 
     var toolbarState: CustomToolbarState {
-        isGranted ?
+        isScrolledToBottom ?
             .confirm("confirmation_fourth_onboarding_page_button_title".localized) :
-            .disabledWithText("confirmation_fourth_onboarding_page_button_title".localized)
+            .scrollAware
     }
 
     var image: UIImage? {
@@ -30,21 +30,23 @@ class ValidationConsentPageViewModel: ConsentPageViewModel {
     }
 
     var info: String? {
-        "validation_fourth_onboarding_page_message".localized
+        "vaccination_fourth_onboarding_page_message".localized
+    }
+
+    var listItems: NSAttributedString {
+        NSAttributedString.toBullets(
+            [ "validation_fourth_onboarding_first_list_item".localized.styledAs(.body),
+              "validation_fourth_onboarding_second_list_item".localized.styledAs(.body),
+              "validation_fourth_onboarding_third_list_item".localized.styledAs(.body)
+            ]
+        )
     }
 
     var dataPrivacyTitle: NSAttributedString {
-        let attributedString = NSMutableAttributedString(
-            string: "fourth_onboarding_page_second_selection".localized
-        )
-        attributedString.addLink(
-            url: "https://www.digitaler-impfnachweis-app.de/webviews/client-app/privacy/",
-            in: "Datenschutzerklärung"
-        )
-        return attributedString.styledAs(.body)
+        NSMutableAttributedString(string: "app_information_title_datenschutz_linked".localized).styledAs(.header_3)
     }
 
-    var isGranted: Bool = false {
+    var isScrolledToBottom: Bool = false {
         didSet {
             delegate?.viewModelDidUpdate()
         }

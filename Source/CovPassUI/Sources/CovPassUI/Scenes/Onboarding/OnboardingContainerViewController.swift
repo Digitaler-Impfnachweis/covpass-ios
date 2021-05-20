@@ -47,6 +47,7 @@ public class OnboardingContainerViewController: UIViewController, ViewModelDeleg
             switch pageViewModel {
             case let consentViewModel as ConsentPageViewModel:
                 let viewController = ConsentViewController(viewModel: consentViewModel)
+                viewController.infoViewAction = viewModel.router.showDataPrivacyScene
                 pageViewController = viewController
             default:
                 let viewController = OnboardingPageViewController(viewModel: pageViewModel)
@@ -167,6 +168,8 @@ extension OnboardingContainerViewController: CustomToolbarViewDelegate {
             currentIndex += 1
             pageController?.setViewControllers([pages[currentIndex]], direction: .forward, animated: true, completion: nil)
             pageIndicator.selectDot(withIndex: currentIndex)
+        case .scrollButton:
+            (pages[currentIndex] as? ConsentViewController)?.scrollToBottom()
         default:
             return
         }

@@ -97,6 +97,8 @@
 		88AB2AA525FA431E00D4EA52 /* CovPassAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88AB2A3F25FA40CE00D4EA52 /* CovPassAppTests.swift */; };
 		88AB2AC025FA433F00D4EA52 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88AB2A4625FA40CE00D4EA52 /* AppDelegate.swift */; };
 		88AB2ACE25FA434B00D4EA52 /* CovPassCheckAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88AB2A6025FA40CE00D4EA52 /* CovPassCheckAppTests.swift */; };
+		88BEE03B26550E0900479E5E /* privacy-covpass.html in Resources */ = {isa = PBXBuildFile; fileRef = 88BEE03A26550E0900479E5E /* privacy-covpass.html */; };
+		88BEE04226550E2500479E5E /* privacy-covpasscheck.html in Resources */ = {isa = PBXBuildFile; fileRef = 88BEE04126550E2500479E5E /* privacy-covpasscheck.html */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -223,6 +225,8 @@
 		88AB2A4725FA40CE00D4EA52 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		88AB2A6025FA40CE00D4EA52 /* CovPassCheckAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CovPassCheckAppTests.swift; sourceTree = "<group>"; };
 		88AB2A6125FA40CE00D4EA52 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		88BEE03A26550E0900479E5E /* privacy-covpass.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "privacy-covpass.html"; sourceTree = "<group>"; };
+		88BEE04126550E2500479E5E /* privacy-covpasscheck.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "privacy-covpasscheck.html"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -437,6 +441,7 @@
 		216D1F41264EF50300370F16 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				88BEE03926550DFD00479E5E /* Static */,
 				216D1F42264EF50300370F16 /* Locale */,
 				216D1F46264EF50300370F16 /* Assets.xcassets */,
 				216D1F86264EF6A800370F16 /* LaunchScreen.storyboard */,
@@ -534,6 +539,7 @@
 		21FBCA31264F011800CAEF44 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				88BEE04026550E1900479E5E /* Static */,
 				21FBCA32264F011800CAEF44 /* Locale */,
 				88AB2A4325FA40CE00D4EA52 /* Assets.xcassets */,
 				21FBCA78264F016E00CAEF44 /* LaunchScreen.storyboard */,
@@ -777,6 +783,22 @@
 			path = Tests;
 			sourceTree = "<group>";
 		};
+		88BEE03926550DFD00479E5E /* Static */ = {
+			isa = PBXGroup;
+			children = (
+				88BEE03A26550E0900479E5E /* privacy-covpass.html */,
+			);
+			path = Static;
+			sourceTree = "<group>";
+		};
+		88BEE04026550E1900479E5E /* Static */ = {
+			isa = PBXGroup;
+			children = (
+				88BEE04126550E2500479E5E /* privacy-covpasscheck.html */,
+			);
+			path = Static;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -912,6 +934,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				216D1FC0264EF75500370F16 /* CertificatesOverviewViewController.xib in Resources */,
+				88BEE03B26550E0900479E5E /* privacy-covpass.html in Resources */,
 				216D1FE0264EF76800370F16 /* VaccinationDetailViewController.xib in Resources */,
 				216D1F49264EF50300370F16 /* Assets.xcassets in Resources */,
 				216D1FF6264EF77600370F16 /* HowToScanViewController.xib in Resources */,
@@ -934,6 +957,7 @@
 			files = (
 				2181C179264F037400DE7412 /* WelcomeViewController.xib in Resources */,
 				2181C190264F03AA00DE7412 /* ValidationResultViewController.xib in Resources */,
+				88BEE04226550E2500479E5E /* privacy-covpasscheck.html in Resources */,
 				2181C1BD264F053000DE7412 /* Localizable.strings in Resources */,
 				2181C168264F035A00DE7412 /* ValidatorOverviewViewController.xib in Resources */,
 				21FBCA79264F016E00CAEF44 /* LaunchScreen.storyboard in Resources */,
