@@ -2,24 +2,6 @@
   "object": {
     "pins": [
       {
-        "package": "Keychain",
-        "repositoryURL": "git@github.com:IBM/ios-keychain.git",
-        "state": {
-          "branch": null,
-          "revision": "8d9c7aa57e53ab034f843da572f47df5955c72a4",
-          "version": "0.0.5"
-        }
-      },
-      {
-        "package": "Scanner",
-        "repositoryURL": "git@github.com:IBM/ios-scanner.git",
-        "state": {
-          "branch": null,
-          "revision": "bc623cd7bab92f55bca479cf5e294484e604bcfe",
-          "version": "0.0.2"
-        }
-      },
-      {
         "package": "PromiseKit",
         "repositoryURL": "https://github.com/mxcl/PromiseKit",
         "state": {
