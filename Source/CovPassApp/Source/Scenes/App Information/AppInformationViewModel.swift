@@ -38,7 +38,7 @@ class AppInformationViewModel: AppInformationViewModelProtocol {
 
             webEntry(
                 title: "app_information_title_datenschutz".localized,
-                url: URL(string: "https://www.digitaler-impfnachweis-app.de/webviews/client-app/privacy/")!
+                url: Bundle.main.url(forResource: "privacy-covpass", withExtension: "html")!
             ),
 
             webEntry(

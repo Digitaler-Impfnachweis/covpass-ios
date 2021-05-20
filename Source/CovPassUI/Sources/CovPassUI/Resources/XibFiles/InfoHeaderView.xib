@@ -32,7 +32,6 @@
                                 <constraint firstAttribute="width" secondItem="RSG-an-e0J" secondAttribute="height" id="4gk-UR-xF5"/>
                                 <constraint firstAttribute="width" constant="44" id="dFn-Cr-Q42"/>
                             </constraints>
-                            <state key="normal" image="gearshape" catalog="system"/>
                             <connections>
                                 <action selector="actionButtonPressedWithButton:" destination="-1" eventType="touchUpInside" id="qlZ-Ts-9i8"/>
                             </connections>
@@ -52,7 +51,4 @@
             <point key="canvasLocation" x="-546" y="-125"/>
         </view>
     </objects>
-    <resources>
-        <image name="gearshape" catalog="system" width="128" height="121"/>
-    </resources>
 </document>

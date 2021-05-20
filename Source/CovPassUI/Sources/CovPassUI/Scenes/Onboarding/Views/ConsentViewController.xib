@@ -11,10 +11,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ConsentViewController" customModule="CovPassUI">
             <connections>
-                <outlet property="dataPrivacyCheckbox" destination="IY5-fG-Iuh" id="s67-gF-kF2"/>
+                <outlet property="dataPrivacyInfoView" destination="IY5-fG-Iuh" id="wCb-xp-H4F"/>
                 <outlet property="descriptionText" destination="eLm-3w-nkJ" id="mru-9c-kmu"/>
                 <outlet property="headline" destination="0e0-rd-9ve" id="mcP-5k-eVt"/>
                 <outlet property="imageView" destination="blq-EC-KHe" id="dd1-Bk-mG0"/>
+                <outlet property="listItems" destination="yAk-j5-cLA" id="G16-o1-SDW"/>
                 <outlet property="scrollView" destination="ha7-P2-KHE" id="5Yj-ty-uVp"/>
                 <outlet property="view" destination="CuH-Wp-IB0" id="9IH-by-KqR"/>
             </connections>
@@ -24,14 +25,14 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ha7-P2-KHE">
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ha7-P2-KHE">
                     <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                     <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XeD-t4-s2m" userLabel="ContentView">
+                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XeD-t4-s2m" userLabel="ContentView">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="566"/>
                             <subviews>
-                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="s9A-cR-mPd">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="566"/>
+                                <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="s9A-cR-mPd">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="694"/>
                                     <subviews>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="250" translatesAutoresizingMaskIntoConstraints="NO" id="blq-EC-KHe">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="250"/>
@@ -40,12 +41,16 @@
                                             <rect key="frame" x="0.0" y="250" width="414" height="60"/>
                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         </view>
-                                        <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="eLm-3w-nkJ" userLabel="Description Text" customClass="PlainLabel" customModule="CovPassUI">
+                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yAk-j5-cLA" customClass="PlainLabel" customModule="CovPassUI">
                                             <rect key="frame" x="0.0" y="310" width="414" height="128"/>
                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         </view>
-                                        <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="IY5-fG-Iuh" customClass="CheckboxView" customModule="CovPassUI">
+                                        <view contentMode="scaleToFill" ambiguous="YES" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="eLm-3w-nkJ" userLabel="Description Text" customClass="PlainLabel" customModule="CovPassUI">
                                             <rect key="frame" x="0.0" y="438" width="414" height="128"/>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        </view>
+                                        <view contentMode="scaleToFill" ambiguous="YES" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="IY5-fG-Iuh" customClass="ListItemView" customModule="CovPassUI">
+                                            <rect key="frame" x="0.0" y="566" width="414" height="128"/>
                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         </view>
                                     </subviews>
