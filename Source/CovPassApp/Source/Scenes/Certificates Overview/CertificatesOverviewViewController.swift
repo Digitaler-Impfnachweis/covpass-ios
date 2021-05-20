@@ -90,7 +90,7 @@ class CertificatesOverviewViewController: UIViewController {
     private func setupActionButton() {
         addButton.icon = .plus
         addButton.action = { [weak self] in
-            self?.viewModel.scanCertificate()
+            self?.viewModel.scanCertificate(withIntroduction: true)
         }
     }
 
