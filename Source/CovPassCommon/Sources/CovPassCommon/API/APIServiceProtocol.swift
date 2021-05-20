@@ -9,4 +9,6 @@
 import Foundation
 import PromiseKit
 
-public protocol APIServiceProtocol {}
+public protocol APIServiceProtocol {
+    func fetchTrustList() -> Promise<TrustList>
+}

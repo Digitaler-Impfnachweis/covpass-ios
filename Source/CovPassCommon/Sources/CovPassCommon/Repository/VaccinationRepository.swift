@@ -19,9 +19,10 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
         self.service = service
         self.parser = parser
 
-        certificates = XCConfiguration.value([String].self, forKey: "CA_CERTIFICATE_SIGNATURES").compactMap {
-            Bundle.module.url(forResource: $0, withExtension: "der")
-        }
+//        certificates = XCConfiguration.value([String].self, forKey: "CA_CERTIFICATE_SIGNATURES").compactMap {
+//            Bundle.module.url(forResource: $0, withExtension: "der")
+//        }
+        certificates = []
     }
 
     public func getVaccinationCertificateList() -> Promise<VaccinationCertificateList> {
@@ -51,8 +52,37 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
     }
 
     public func refreshValidationCA() -> Promise<Void> {
-        // TOOD add implementation
-        return Promise.value(())
+//        firstly {
+//
+//        }
+        return service.fetchTrustList().map { trustList in
+            guard let trustListPublicKey = Bundle.module.url(forResource: "pubkey", withExtension: "pem") else {
+                throw ApplicationError.unknownError
+            }
+            let trustListPublicKeyData = try Data(contentsOf: trustListPublicKey)
+
+            let attributes: [String:Any] = [
+                kSecAttrKeyClass as String: kSecAttrKeyClassPublic,
+                kSecAttrKeyType as String: kSecAttrKeyTypeRSA,
+                kSecAttrKeySizeInBits as String: 2048,
+            ]
+
+            guard let publicKey = SecKeyCreateWithData(trustListPublicKeyData as CFData, attributes as CFDictionary, nil) else {
+                throw ApplicationError.unknownError
+            }
+
+            guard let signature = trustList.signature.data(using: .utf8) else {
+                throw ApplicationError.unknownError
+            }
+
+//            var error: Unmanaged<CFError>?
+//            let result = SecKeyVerifySignature(publicKey, .ecdsaSignatureMessageX962SHA256, Data() as CFData, signature as CFData, &error)
+//            if error != nil {
+//                throw HCertError.verifyError
+//            }
+//
+//            result
+        }
     }
 
     public func scanVaccinationCertificate(_ data: String) -> Promise<ExtendedCBORWebToken> {
