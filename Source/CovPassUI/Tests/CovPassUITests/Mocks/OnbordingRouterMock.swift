@@ -16,11 +16,9 @@ class OnboardingRouterMock: OnboardingRouterProtocol {
         self.sceneCoordinator = sceneCoordinator
     }
 
-    func showNextScene() {
-        // ..
-    }
+    func showNextScene() {}
 
-    func showPreviousScene() {
-        // ..
-    }
+    func showPreviousScene() {}
+
+    func showDataPrivacyScene() {}
 }
