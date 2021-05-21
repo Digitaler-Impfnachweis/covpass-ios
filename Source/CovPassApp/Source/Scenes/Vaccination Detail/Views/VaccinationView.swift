@@ -99,5 +99,8 @@ class VaccinationView: XibView {
         showQrCodeButton.title = "vaccination_certificate_detail_view_qrcode_action_button_title".localized
         showQrCodeButton.style = .secondary
         showQrCodeButton.icon = .scan
+        showQrCodeButton.action = {
+            self.viewModel?.showCertificate()
+        }
     }
 }

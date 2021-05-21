@@ -16,9 +16,10 @@ class VaccinationDetailViewModel {
     private let repository: VaccinationRepositoryProtocol
     private var certificates: [ExtendedCBORWebToken] {
         didSet {
-            vaccinations = certificates.map { VaccinationViewModel(token: $0.vaccinationCertificate,
-                                                        repository: VaccinationRepository(service: APIService.create(), parser: QRCoder()),
-                                                        delegate: self) }
+            vaccinations = certificates.map { VaccinationViewModel(token: $0,
+                                                                   repository: VaccinationRepository(service: APIService.create(), parser: QRCoder()),
+                                                                   delegate: self,
+                                                                   router: router) }
         }
     }
     public weak var delegate: ViewModelDelegate?
@@ -86,9 +87,10 @@ class VaccinationDetailViewModel {
 
     var vaccinations: [VaccinationViewModel] {
         get {
-            certificates.map { VaccinationViewModel(token: $0.vaccinationCertificate,
+            certificates.map { VaccinationViewModel(token: $0,
                                                     repository: VaccinationRepository(service: APIService.create(), parser: QRCoder()),
-                                                    delegate: self) }
+                                                    delegate: self,
+                                                    router: router) }
         } set {}
     }
 
