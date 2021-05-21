@@ -44,7 +44,7 @@ class PassConsentPageViewModel: ConsentPageViewModel {
     }
 
     var dataPrivacyTitle: NSAttributedString {
-        NSMutableAttributedString(string: "app_information_title_datenschutz_linked".localized).styledAs(.header_3)
+        NSMutableAttributedString(string: "app_information_title_datenschutz".localized).styledAs(.header_3)
     }
 
     var isScrolledToBottom: Bool = false {
