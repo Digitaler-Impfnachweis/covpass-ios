@@ -70,24 +70,24 @@ struct VaccinationViewModel {
     }
 
     func delete() {
-        self.delegate?.showDeleteDialog().then {
+        self.delegate?.didConfirmDeletion().then {
             self.repository.getVaccinationCertificateList()
         }.then { list -> Promise<VaccinationCertificateList> in
             var certList = list
             certList.certificates.removeAll(where: { cert in
-                if cert.vaccinationCertificate.hcert.dgc == self.certificate {
+                if cert.vaccinationCertificate.hcert.dgc.v.first?.ci == self.vaccination?.ci {
                     return true
                 }
                 return false
             })
             return Promise.value(certList)
         }
-        .then { list in
-            self.repository.saveVaccinationCertificateList(list).asVoid()
-        }.done {
-            self.delegate?.didDeleteCertificate()
-        }
-        .catch { error in
+        .then { list -> Promise<VaccinationCertificateList> in
+            self.repository.saveVaccinationCertificateList(list)
+        }.done { list in
+            let certList = list.certificates.filter { $0.vaccinationCertificate.hcert.dgc == self.token.hcert.dgc }
+            self.delegate?.didUpdateCertificates(certList)
+        }.catch { error in
             self.delegate?.updateDidFailWithError(error)
         }
     }

@@ -51,6 +51,9 @@ class VaccinationView: XibView {
 
         immunizationHeadline.attributedTitleText = viewModel?.headline.styledAs(.header_2)
         immunizationHeadline.image = .delete
+        immunizationHeadline.action = { [weak self] in
+            self?.viewModel?.delete()
+        }
         immunizationHeadline.layoutMargins = .init(top: .space_40, left: .space_24, bottom: .zero, right: .space_24)
         stackView.setCustomSpacing(.space_12, after: immunizationHeadline)
 
