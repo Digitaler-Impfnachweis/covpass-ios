@@ -1,5 +1,5 @@
 //
-//  StringExtension.swift
+//  WKWebViewExtension.swift
 //
 //
 //  © Copyright IBM Deutschland GmbH 2021
@@ -10,11 +10,13 @@ import Foundation
 import WebKit
 
 public extension WKWebView {
+    /// Enables text scaling for WKWebView
+    ///
+    /// The scaling factor is calculated based on UIFontMetricts for the body text style
+    /// Important the website needs to support proper text scaling and should not use fixed pixel values
     func enableTextScaling() {
-        let font = UIFont.systemFont(ofSize: 10.0)
         let fontMetrics = UIFontMetrics(forTextStyle: .body)
-        let scaledFont = fontMetrics.scaledFont(for: font, compatibleWith: traitCollection)
-        let scalingFactor = Int(((scaledFont.pointSize / font.pointSize) * 100))
+        let scalingFactor = Int(fontMetrics.scaledValue(for: 10)) * 10
         let cssStyle = """
             javascript:(function() {
             var parent = document.getElementsByTagName('head').item(0);
