@@ -47,10 +47,6 @@ class ValidatorOverviewViewModel {
 
     // MARK: - Actions
 
-    func process(payload: String) -> Promise<CBORWebToken> {
-        repository.checkVaccinationCertificate(payload)
-    }
-
     func startQRCodeValidation() {
         firstly {
             router.scanQRCode()
@@ -59,7 +55,7 @@ class ValidatorOverviewViewModel {
             try self.payloadFromScannerResult($0)
         }
         .then {
-            self.process(payload: $0)
+            self.repository.checkVaccinationCertificate($0)
         }
         .done {
             self.router.showCertificate($0)
