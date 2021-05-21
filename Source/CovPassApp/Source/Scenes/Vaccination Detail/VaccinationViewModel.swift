@@ -14,11 +14,12 @@ import PromiseKit
 struct VaccinationViewModel {
     // MARK: - Properties
 
-    private var token: CBORWebToken
-    private var certificate: DigitalGreenCertificate { token.hcert.dgc }
+    private var token: ExtendedCBORWebToken
+    private var certificate: DigitalGreenCertificate { token.vaccinationCertificate.hcert.dgc }
     private var vaccination: Vaccination? { certificate.v.first }
     private let repository: VaccinationRepositoryProtocol
     private let delegate: VaccinationDelegate?
+    private let router: VactinationViewRouterProtocol
 
     var headline: String {
         let number = vaccination?.dn ?? 0
@@ -61,12 +62,14 @@ struct VaccinationViewModel {
 
     // MARK: - Lifecycle
 
-    init(token: CBORWebToken,
+    init(token: ExtendedCBORWebToken,
          repository: VaccinationRepositoryProtocol,
-         delegate: VaccinationDelegate?) {
+         delegate: VaccinationDelegate?,
+         router: VactinationViewRouterProtocol) {
         self.token = token
         self.repository = repository
         self.delegate = delegate
+        self.router = router
     }
 
     func delete() {
@@ -88,6 +91,14 @@ struct VaccinationViewModel {
             self.delegate?.didDeleteCertificate()
         }
         .catch { error in
+            self.delegate?.updateDidFailWithError(error)
+        }
+    }
+    
+    func showCertificate() {
+        firstly {
+            router.showCertificate(for: token)
+        }.catch { error in
             self.delegate?.updateDidFailWithError(error)
         }
     }

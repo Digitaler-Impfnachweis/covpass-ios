@@ -73,9 +73,10 @@ class VaccinationDetailViewModel {
     }
 
     var vaccinations: [VaccinationViewModel] {
-        certificates.map { VaccinationViewModel(token: $0.vaccinationCertificate,
+        certificates.map { VaccinationViewModel(token: $0,
                                                 repository: VaccinationRepository(service: APIService.create(), parser: QRCoder()),
-                                                delegate: self) }
+                                                delegate: self,
+                                                router: router ) }
     }
 
     func immunizationButtonTapped() {
