@@ -93,6 +93,7 @@
 		21DAD6E3264F0B19003407FC /* CovPassUI in Frameworks */ = {isa = PBXBuildFile; productRef = 21DAD6E2264F0B19003407FC /* CovPassUI */; };
 		21FBCA79264F016E00CAEF44 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21FBCA78264F016E00CAEF44 /* LaunchScreen.storyboard */; };
 		6507D7ED25FB5E0300D69F94 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 88AB2A4325FA40CE00D4EA52 /* Assets.xcassets */; };
+		886EEF152657DDD000EBE17D /* VaccinationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886EEF142657DDD000EBE17D /* VaccinationDelegate.swift */; };
 		88AB2A9725FA431100D4EA52 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88AB2A3B25FA40CE00D4EA52 /* AppDelegate.swift */; };
 		88AB2AA525FA431E00D4EA52 /* CovPassAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88AB2A3F25FA40CE00D4EA52 /* CovPassAppTests.swift */; };
 		88AB2AC025FA433F00D4EA52 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88AB2A4625FA40CE00D4EA52 /* AppDelegate.swift */; };
@@ -216,6 +217,7 @@
 		65D6D4EE25F8B8FB000CB339 /* CovPassAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CovPassAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		65D6D51425F8B94D000CB339 /* CovPassCheckApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CovPassCheckApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		65D6D52425F8B94D000CB339 /* CovPassCheckAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CovPassCheckAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		886EEF142657DDD000EBE17D /* VaccinationDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VaccinationDelegate.swift; sourceTree = "<group>"; };
 		88AB2A3B25FA40CE00D4EA52 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		88AB2A3C25FA40CE00D4EA52 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		88AB2A3F25FA40CE00D4EA52 /* CovPassAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CovPassAppTests.swift; sourceTree = "<group>"; };
@@ -331,6 +333,7 @@
 		216D1F0D264EF4E400370F16 /* Vaccination Detail */ = {
 			isa = PBXGroup;
 			children = (
+				886EEF142657DDD000EBE17D /* VaccinationDelegate.swift */,
 				216D1F16264EF4E400370F16 /* Protocols */,
 				216D1F13264EF4E400370F16 /* Views */,
 				216D1F10264EF4E400370F16 /* VaccinationDetailRouter.swift */,
@@ -994,6 +997,7 @@
 				216D1FC6264EF75900370F16 /* NoCertificateCardViewModel.swift in Sources */,
 				216D1FC7264EF75900370F16 /* CertificateCardViewModel.swift in Sources */,
 				216D1FD5264EF76400370F16 /* VaccinationDetailRouter.swift in Sources */,
+				886EEF152657DDD000EBE17D /* VaccinationDelegate.swift in Sources */,
 				216D1FFD264EF77C00370F16 /* AppInformationViewModel.swift in Sources */,
 				216D1FBA264EF74F00370F16 /* CertificatesOverviewViewController.swift in Sources */,
 				216D1FB7264EF74F00370F16 /* CertificatesOverviewSceneFactory.swift in Sources */,

@@ -8,6 +8,8 @@
 
 import Foundation
 import CovPassCommon
+import CovPassUI
+import PromiseKit
 
 struct VaccinationViewModel {
     // MARK: - Properties
@@ -15,6 +17,8 @@ struct VaccinationViewModel {
     private var token: CBORWebToken
     private var certificate: DigitalGreenCertificate { token.hcert.dgc }
     private var vaccination: Vaccination? { certificate.v.first }
+    private let repository: VaccinationRepositoryProtocol
+    private let delegate: VaccinationDelegate?
 
     var headline: String {
         let number = vaccination?.dn ?? 0
@@ -57,7 +61,34 @@ struct VaccinationViewModel {
 
     // MARK: - Lifecycle
 
-    init(token: CBORWebToken) {
+    init(token: CBORWebToken,
+         repository: VaccinationRepositoryProtocol,
+         delegate: VaccinationDelegate?) {
         self.token = token
+        self.repository = repository
+        self.delegate = delegate
+    }
+
+    func delete() {
+        self.delegate?.showDeleteDialog().then {
+            self.repository.getVaccinationCertificateList()
+        }.then { list -> Promise<VaccinationCertificateList> in
+            var certList = list
+            certList.certificates.removeAll(where: { cert in
+                if cert.vaccinationCertificate.hcert.dgc == self.certificate {
+                    return true
+                }
+                return false
+            })
+            return Promise.value(certList)
+        }
+        .then { list in
+            self.repository.saveVaccinationCertificateList(list).asVoid()
+        }.done {
+            self.delegate?.didDeleteCertificate()
+        }
+        .catch { error in
+            self.delegate?.updateDidFailWithError(error)
+        }
     }
 }

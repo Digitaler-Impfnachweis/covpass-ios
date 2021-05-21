@@ -26,7 +26,6 @@ class VaccinationDetailViewController: UIViewController {
     @IBOutlet var personalDataHeadline: PlainLabel!
     @IBOutlet var nameView: ParagraphView!
     @IBOutlet var birtdateView: ParagraphView!
-    @IBOutlet var deleteButton: MainButton!
 
     // MARK: - Properties
 
@@ -70,7 +69,6 @@ class VaccinationDetailViewController: UIViewController {
         setupHeadline()
         setupImmunizationView()
         setupPersonalData()
-        setupDeleteButton()
         setupVaccinations()
     }
 
@@ -111,15 +109,6 @@ class VaccinationDetailViewController: UIViewController {
         birtdateView.attributedTitleText = "vaccination_certificate_detail_view_birthdate".localized.styledAs(.header_3)
         birtdateView.attributedBodyText = viewModel.birthDate.styledAs(.body)
         birtdateView.contentView?.layoutMargins = .init(top: .space_12, left: .space_24, bottom: .space_12, right: .space_24)
-    }
-
-    private func setupDeleteButton() {
-        deleteButton.title = "vaccination_certificate_detail_view_delete_button_title".localized
-        deleteButton.style = .secondary
-        deleteButton.icon = .delete
-        deleteButton.action = { [weak self] in
-            self?.viewModel.delete()
-        }
     }
 
     private func setupVaccinations() {
