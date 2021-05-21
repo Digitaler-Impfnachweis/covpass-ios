@@ -31,6 +31,7 @@ open class WebviewViewController: UIViewController {
         view.backgroundColor = .neutralWhite
         configureHeadline()
         webView.backgroundColor = .neutralWhite
+        webView.enableTextScaling()
         webView.load(viewModel.urlRequest)
     }
 
