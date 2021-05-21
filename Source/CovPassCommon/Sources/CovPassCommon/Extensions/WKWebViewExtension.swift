@@ -14,7 +14,7 @@ public extension WKWebView {
         let font = UIFont.systemFont(ofSize: 10.0)
         let fontMetrics = UIFontMetrics(forTextStyle: .body)
         let scaledFont = fontMetrics.scaledFont(for: font, compatibleWith: traitCollection)
-        let scalingFactor = Int(((scaledFont.pointSize / font.pointSize) * 100) - 100)
+        let scalingFactor = Int(((scaledFont.pointSize / font.pointSize) * 100))
         let cssStyle = """
             javascript:(function() {
             var parent = document.getElementsByTagName('head').item(0);
