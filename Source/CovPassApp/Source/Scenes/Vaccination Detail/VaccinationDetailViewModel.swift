@@ -73,7 +73,9 @@ class VaccinationDetailViewModel {
     }
 
     var vaccinations: [VaccinationViewModel] {
-        certificates.map { VaccinationViewModel(token: $0.vaccinationCertificate) }
+        certificates.map { VaccinationViewModel(token: $0.vaccinationCertificate,
+                                                repository: VaccinationRepository(service: APIService.create(), parser: QRCoder()),
+                                                delegate: self) }
     }
 
     func immunizationButtonTapped() {
@@ -138,7 +140,7 @@ class VaccinationDetailViewModel {
         }
         .then { cert in
             self.repository.getVaccinationCertificateList().then { list -> Promise<Void> in
-                self.certificates = self.findCertificatePair(cert, list.certificates).sorted(by: { $0.vaccinationCertificate.hcert.dgc.v.first?.dn ?? 0 < $1.vaccinationCertificate.hcert.dgc.v.first?.dn ?? 0 })
+                self.certificates = self.findCertificatePair(cert, list.certificates).sorted(by: { $0.vaccinationCertificate.hcert.dgc.v.first?.dn ?? 0 > $1.vaccinationCertificate.hcert.dgc.v.first?.dn ?? 0 })
                 return Promise.value(())
             }
         }
@@ -158,24 +160,6 @@ class VaccinationDetailViewModel {
             }
         }
         return list
-    }
-
-    private func showDeleteDialog() -> Promise<Void> {
-        .init { seal in
-            let delete = DialogAction(title: "dialog_delete_certificate_button_delete".localized, style: .destructive) { _ in
-                seal.fulfill_()
-            }
-            let cancel = DialogAction(title: "dialog_delete_certificate_button_cancel".localized, style: .cancel) { _ in
-                seal.cancel()
-            }
-            let title = String(format: "dialog_delete_certificate_title".localized, self.name)
-            self.router.showDialog(
-                title: title,
-                message: "dialog_delete_certificate_message".localized,
-                actions: [delete, cancel],
-                style: .alert
-            )
-        }
     }
 
     private func showDeletionSuccessDialog() {
@@ -224,5 +208,40 @@ class VaccinationDetailViewModel {
     private func showCertificate() {
         detailDelegate?.select(certificates: certificates)
         router.showCertificateOverview().cauterize()
+    }
+}
+
+extension VaccinationDetailViewModel: VaccinationDelegate {
+    func showDeleteDialog() -> Promise<Void> {
+        .init { seal in
+            let delete = DialogAction(title: "dialog_delete_certificate_button_delete".localized, style: .destructive) { _ in
+                seal.fulfill_()
+            }
+            let cancel = DialogAction(title: "dialog_delete_certificate_button_cancel".localized, style: .cancel) { _ in
+                seal.cancel()
+            }
+            let title = String(format: "dialog_delete_certificate_title".localized, self.name)
+            self.router.showDialog(
+                title: title,
+                message: "dialog_delete_certificate_message".localized,
+                actions: [delete, cancel],
+                style: .alert
+            )
+        }
+    }
+
+    func didDeleteCertificate() {
+        if !fullImmunization {
+            router.showCertificateOverview()
+                .done {
+                    self.showDeletionSuccessDialog()
+                }.catch { error in
+                    self.delegate?.viewModelUpdateDidFailWithError(error)
+                }
+        }
+    }
+    
+    func updateDidFailWithError(_ error: Error) {
+        self.delegate?.viewModelUpdateDidFailWithError(error)
     }
 }
