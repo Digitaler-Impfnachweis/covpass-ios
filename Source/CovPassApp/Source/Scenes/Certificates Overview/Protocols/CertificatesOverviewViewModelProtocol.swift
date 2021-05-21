@@ -19,7 +19,7 @@ protocol CertificatesOverviewViewModelProtocol {
     func loadCertificates()
     func showCertificate(at indexPath: IndexPath)
     func showCertificate(_ certificate: ExtendedCBORWebToken)
-    func scanCertificate()
+    func scanCertificate(withIntroduction: Bool)
     func showAppInformation()
     func showErrorDialog()
 }
