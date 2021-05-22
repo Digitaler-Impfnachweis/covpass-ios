@@ -11,7 +11,7 @@ import CovPassCommon
 import PromiseKit
 
 protocol VaccinationDelegate: AnyObject {
-    func didConfirmDeletion() -> Promise<Void>
+    func didPressDelete(_ vaccination: Vaccination) -> Promise<Void>
     func didUpdateCertificates(_ certificates: [ExtendedCBORWebToken])
     func updateDidFailWithError(_ error: Error)
 }

@@ -73,7 +73,8 @@ struct VaccinationViewModel {
     }
 
     func delete() {
-        self.delegate?.didConfirmDeletion().then {
+        guard let vaccination = token.vaccinationCertificate.hcert.dgc.v.first else { return }
+        self.delegate?.didPressDelete(vaccination).then {
             self.repository.getVaccinationCertificateList()
         }.then { list -> Promise<VaccinationCertificateList> in
             var certList = list

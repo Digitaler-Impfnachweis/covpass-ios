@@ -14,14 +14,7 @@ import CovPassUI
 class VaccinationDetailViewModel {
     private let router: VaccinationDetailRouterProtocol
     private let repository: VaccinationRepositoryProtocol
-    private var certificates: [ExtendedCBORWebToken] {
-        didSet {
-            vaccinations = certificates.map { VaccinationViewModel(token: $0,
-                                                                   repository: VaccinationRepository(service: APIService.create(), parser: QRCoder()),
-                                                                   delegate: self,
-                                                                   router: router) }
-        }
-    }
+    private var certificates: [ExtendedCBORWebToken]
     public weak var delegate: ViewModelDelegate?
     public weak var detailDelegate: CertificateDetailDelegate?
 
@@ -53,12 +46,6 @@ class VaccinationDetailViewModel {
             return false
         }
     }
-
-    var immunizationDose: String {
-        let number = certificates.first?.vaccinationCertificate.hcert.dgc.v.first?.dn ?? 0
-        let total = certificates.first?.vaccinationCertificate.hcert.dgc.v.first?.sd ?? 0
-        return String(format: "dialog_delete_certificate_title".localized, number, total)
-    }
     
     var name: String {
         certificates.first?.vaccinationCertificate.hcert.dgc.nam.fullName ?? ""
@@ -86,12 +73,10 @@ class VaccinationDetailViewModel {
     }
 
     var vaccinations: [VaccinationViewModel] {
-        get {
-            certificates.map { VaccinationViewModel(token: $0,
-                                                    repository: VaccinationRepository(service: APIService.create(), parser: QRCoder()),
-                                                    delegate: self,
-                                                    router: router) }
-        } set {}
+        certificates.map { VaccinationViewModel(token: $0,
+            repository: VaccinationRepository(service: APIService.create(), parser: QRCoder()),
+            delegate: self,
+            router: router) }
     }
 
     func immunizationButtonTapped() {
@@ -147,7 +132,7 @@ class VaccinationDetailViewModel {
         return list
     }
 
-    private func showDeleteDialog() -> Promise<Void> {
+    private func showDeleteDialog(_ vaccination: Vaccination) -> Promise<Void> {
         .init { seal in
             let delete = DialogAction(title: "dialog_delete_certificate_button_delete".localized, style: .destructive) { _ in
                 seal.fulfill_()
@@ -156,7 +141,7 @@ class VaccinationDetailViewModel {
                 seal.cancel()
             }
             self.router.showDialog(
-                title: self.immunizationDose,
+                title: String(format: "dialog_delete_certificate_title".localized, vaccination.dn, vaccination.sd),
                 message: "dialog_delete_certificate_message".localized,
                 actions: [delete, cancel],
                 style: .alert
@@ -214,8 +199,8 @@ class VaccinationDetailViewModel {
 }
 
 extension VaccinationDetailViewModel: VaccinationDelegate {
-    func didConfirmDeletion() -> Promise<Void> {
-        self.showDeleteDialog()
+    func didPressDelete(_ vaccination: Vaccination) -> Promise<Void> {
+        self.showDeleteDialog(vaccination)
     }
 
     func didUpdateCertificates(_ certificates: [ExtendedCBORWebToken]) {
