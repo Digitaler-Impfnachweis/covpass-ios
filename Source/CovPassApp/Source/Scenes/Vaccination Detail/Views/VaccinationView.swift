@@ -12,13 +12,15 @@ import CovPassUI
 @IBDesignable
 class VaccinationView: XibView {
     @IBOutlet var stackView: UIStackView!
-    @IBOutlet var immunizationHeadline: PlainLabel!
+    @IBOutlet var immunizationHeadline: InfoHeaderView!
     @IBOutlet var dateView: ParagraphView!
     @IBOutlet var vaccineView: ParagraphView!
     @IBOutlet var manufacturerView: ParagraphView!
     @IBOutlet var issuerView: ParagraphView!
     @IBOutlet var countryView: ParagraphView!
     @IBOutlet var uvciView: ParagraphView!
+    @IBOutlet var qrButtonStackView: UIStackView!
+    @IBOutlet var showQrCodeButton: MainButton!
 
     var viewModel: VaccinationViewModel?
 
@@ -47,7 +49,11 @@ class VaccinationView: XibView {
         layoutMargins = .zero
         stackView.spacing = .zero
 
-        immunizationHeadline.attributedText = viewModel?.headline.styledAs(.header_2)
+        immunizationHeadline.attributedTitleText = viewModel?.headline.styledAs(.header_2)
+        immunizationHeadline.image = .delete
+        immunizationHeadline.action = { [weak self] in
+            self?.viewModel?.delete()
+        }
         immunizationHeadline.layoutMargins = .init(top: .space_40, left: .space_24, bottom: .zero, right: .space_24)
         stackView.setCustomSpacing(.space_12, after: immunizationHeadline)
 
@@ -87,5 +93,14 @@ class VaccinationView: XibView {
         uvciView.attributedBodyText = viewModel?.uvci.styledAs(.body)
         uvciView.contentView?.layoutMargins = itemsMargins
         uvciView.isHidden = viewModel?.uvci.isEmpty ?? true
+        stackView.setCustomSpacing(.space_24, after: uvciView)
+
+        qrButtonStackView.layoutMargins = .init(top: .zero, left: .space_24, bottom: .zero, right: .space_24)
+        showQrCodeButton.title = "vaccination_certificate_detail_view_qrcode_action_button_title".localized
+        showQrCodeButton.style = .secondary
+        showQrCodeButton.icon = .scan
+        showQrCodeButton.action = {
+            self.viewModel?.showCertificate()
+        }
     }
 }

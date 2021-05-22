@@ -8,13 +8,18 @@
 
 import Foundation
 import CovPassCommon
+import CovPassUI
+import PromiseKit
 
 struct VaccinationViewModel {
     // MARK: - Properties
 
-    private var token: CBORWebToken
-    private var certificate: DigitalGreenCertificate { token.hcert.dgc }
+    private var token: ExtendedCBORWebToken
+    private var certificate: DigitalGreenCertificate { token.vaccinationCertificate.hcert.dgc }
     private var vaccination: Vaccination? { certificate.v.first }
+    private let repository: VaccinationRepositoryProtocol
+    private let delegate: VaccinationDelegate?
+    private let router: VactinationViewRouterProtocol
 
     var headline: String {
         let number = vaccination?.dn ?? 0
@@ -57,7 +62,45 @@ struct VaccinationViewModel {
 
     // MARK: - Lifecycle
 
-    init(token: CBORWebToken) {
+    init(token: ExtendedCBORWebToken,
+         repository: VaccinationRepositoryProtocol,
+         delegate: VaccinationDelegate?,
+         router: VactinationViewRouterProtocol) {
         self.token = token
+        self.repository = repository
+        self.delegate = delegate
+        self.router = router
+    }
+
+    func delete() {
+        guard let vaccination = token.vaccinationCertificate.hcert.dgc.v.first else { return }
+        self.delegate?.didPressDelete(vaccination).then {
+            self.repository.getVaccinationCertificateList()
+        }.then { list -> Promise<VaccinationCertificateList> in
+            var certList = list
+            certList.certificates.removeAll(where: { cert in
+                if cert.vaccinationCertificate.hcert.dgc.v.first?.ci == self.vaccination?.ci {
+                    return true
+                }
+                return false
+            })
+            return Promise.value(certList)
+        }
+        .then { list -> Promise<VaccinationCertificateList> in
+            self.repository.saveVaccinationCertificateList(list)
+        }.done { list in
+            let certList = list.certificates.filter { $0.vaccinationCertificate.hcert.dgc == self.token.hcert.dgc }
+            self.delegate?.didUpdateCertificates(certList)
+        }.catch { error in
+            self.delegate?.updateDidFailWithError(error)
+        }
+    }
+    
+    func showCertificate() {
+        firstly {
+            router.showCertificate(for: token)
+        }.catch { error in
+            self.delegate?.updateDidFailWithError(error)
+        }
     }
 }

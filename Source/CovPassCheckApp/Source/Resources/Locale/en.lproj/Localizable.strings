@@ -152,8 +152,6 @@
 
 "app_information_title_datenschutz" = "Datenschutzerklärung";
 
-"app_information_title_datenschutz_linked" = "Datenschutzerklärug";
-
 "app_information_title_company_details" = "Impressum";
 
 "app_information_title_company_details_linked" = "#Impressum::$0#";
