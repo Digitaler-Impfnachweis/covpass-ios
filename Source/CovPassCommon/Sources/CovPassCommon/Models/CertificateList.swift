@@ -16,4 +16,13 @@ public struct VaccinationCertificateList: Codable {
         self.certificates = certificates
         self.favoriteCertificateId = favoriteCertificateId
     }
+
+    public func isFavoriteCertificate(_ certificate: ExtendedCBORWebToken) -> Bool {
+        guard let id = favoriteCertificateId else {
+            return false
+        }
+        return certificates
+            .certificatePair(for: certificate)
+            .containsCertificateWithId(id)
+    }
 }

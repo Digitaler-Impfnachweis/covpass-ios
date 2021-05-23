@@ -17,6 +17,9 @@ public protocol VaccinationRepositoryProtocol {
     /// Save the vaccination certificate list
     func saveVaccinationCertificateList(_ certificateList: VaccinationCertificateList) -> Promise<VaccinationCertificateList>
 
+    /// Deletes the given vaccination from their certificate list
+    func deleteVaccination(_ vaccination: Vaccination) -> Promise<Void>
+
     /// Refreshes the local validation CA
     func refreshValidationCA() -> Promise<Void>
 
@@ -31,4 +34,11 @@ public protocol VaccinationRepositoryProtocol {
     ///
     /// - USED BY CovPassCheck App
     func checkVaccinationCertificate(_ data: String) -> Promise<CBORWebToken>
+
+    /// Toogles the favorite state and returns the updated flag
+    func toggleFavoriteStateForCertificateWithIdentifier(_ id: String) -> Promise<Bool>
+
+    /// Returns true if collection contains a favorite certificate. False otherwise.
+    func favoriteStateForCertificates(_ certificates: [ExtendedCBORWebToken]) -> Promise<Bool>
+
 }

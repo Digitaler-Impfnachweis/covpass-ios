@@ -14,34 +14,29 @@ import PromiseKit
 struct VaccinationViewModel {
     // MARK: - Properties
 
-    private var token: ExtendedCBORWebToken
-    private var certificate: DigitalGreenCertificate { token.vaccinationCertificate.hcert.dgc }
-    private var vaccination: Vaccination? { certificate.v.first }
-    private let repository: VaccinationRepositoryProtocol
-    private let delegate: VaccinationDelegate?
-    private let router: VactinationViewRouterProtocol
+    private let vaccination: Vaccination
+    private weak var delegate: VaccinationViewDelegate?
 
     var headline: String {
-        let number = vaccination?.dn ?? 0
-        let total = vaccination?.sd ?? 0
+        let number = vaccination.dn
+        let total = vaccination.sd
         return String(format: "vaccination_certificate_detail_view_vaccination_title".localized, number, total)
     }
 
     var date: String {
-        guard let occurrence = vaccination?.dt else { return "" }
-        return DateUtils.displayDateFormatter.string(from: occurrence)
+        DateUtils.displayDateFormatter.string(from: vaccination.dt)
     }
 
     var vaccine: String {
-        vaccination?.map(key: vaccination?.mp, from: Bundle.commonBundle.url(forResource: "vaccine-medicinal-product", withExtension: "json")) ?? vaccination?.mp ?? ""
+        vaccination.map(key: vaccination.mp, from: Bundle.commonBundle.url(forResource: "vaccine-medicinal-product", withExtension: "json")) ?? vaccination.mp
     }
 
     var manufacturer: String {
-        vaccination?.map(key: vaccination?.ma, from: Bundle.commonBundle.url(forResource: "vaccine-mah-manf", withExtension: "json")) ?? vaccination?.ma ?? ""
+        vaccination.map(key: vaccination.ma, from: Bundle.commonBundle.url(forResource: "vaccine-mah-manf", withExtension: "json")) ?? vaccination.ma
     }
 
     var vaccineCode: String {
-        vaccination?.map(key: vaccination?.vp, from: Bundle.commonBundle.url(forResource: "vaccine-prophylaxis", withExtension: "json")) ?? vaccination?.vp ?? ""
+        vaccination.map(key: vaccination.vp, from: Bundle.commonBundle.url(forResource: "vaccine-prophylaxis", withExtension: "json")) ?? vaccination.vp
     }
 
     var fullVaccineProduct: String {
@@ -49,30 +44,29 @@ struct VaccinationViewModel {
     }
 
     var issuer: String {
-        vaccination?.is ?? ""
+        vaccination.is
     }
 
     var country: String {
-        vaccination?.map(key: vaccination?.co, from: Bundle.commonBundle.url(forResource: "country", withExtension: "json")) ?? vaccination?.co ?? ""
+        vaccination.map(key: vaccination.co, from: Bundle.commonBundle.url(forResource: "country", withExtension: "json")) ?? vaccination.co
     }
 
     var uvci: String {
-        vaccination?.ci ?? ""
+        vaccination.ci
     }
 
     // MARK: - Lifecycle
 
-    init(token: ExtendedCBORWebToken,
-         repository: VaccinationRepositoryProtocol,
-         delegate: VaccinationDelegate?,
-         router: VactinationViewRouterProtocol) {
-        self.token = token
-        self.repository = repository
+    init(
+        vaccination: Vaccination,
+        delegate: VaccinationViewDelegate?
+    ) {
+        self.vaccination = vaccination
         self.delegate = delegate
-        self.router = router
     }
 
     func delete() {
+<<<<<<< HEAD
         guard let vaccination = token.vaccinationCertificate.hcert.dgc.v.first else { return }
         self.delegate?.didPressDelete(vaccination).then {
             self.repository.getVaccinationCertificateList()
@@ -94,13 +88,12 @@ struct VaccinationViewModel {
         }.catch { error in
             self.delegate?.updateDidFailWithError(error)
         }
+=======
+        delegate?.vaccinationViewDidPressDelete(vaccination)
+>>>>>>> 196ee5a3... Clean up viewmodels for VaccinationDetail scene and solve a Memory Leak
     }
     
     func showCertificate() {
-        firstly {
-            router.showCertificate(for: token)
-        }.catch { error in
-            self.delegate?.updateDidFailWithError(error)
-        }
+        delegate?.vaccinationViewDidPressShowQRCode(vaccination)
     }
 }
