@@ -13,16 +13,17 @@ import PromiseKit
 public struct VaccinationRepository: VaccinationRepositoryProtocol {
     private let service: APIServiceProtocol
     private let parser: QRCoderProtocol
-    private var trustList: TrustList?
+
+    private var trustList: TrustList? {
+        guard let trustListData = try? Keychain.fetchPassword(for: KeychainConfiguration.trustListKey),
+              let list = try? JSONDecoder().decode(TrustList.self, from: trustListData)
+        else { return nil }
+        return list
+    }
 
     public init(service: APIServiceProtocol, parser: QRCoderProtocol) {
         self.service = service
         self.parser = parser
-
-        guard let trustListData = try? Keychain.fetchPassword(for: KeychainConfiguration.trustListKey),
-              let trustList = try? JSONDecoder().decode(TrustList.self, from: trustListData)
-        else { return }
-        self.trustList = trustList
     }
 
     public func getVaccinationCertificateList() -> Promise<VaccinationCertificateList> {
