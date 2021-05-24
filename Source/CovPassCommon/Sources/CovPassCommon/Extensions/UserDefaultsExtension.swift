@@ -1,8 +1,9 @@
 //
-//  File.swift
+//  UserDefaultsExtension.swift
 //
 //
-//  Created by Timo Koenig on 24.05.21.
+//  © Copyright IBM Deutschland GmbH 2021
+//  SPDX-License-Identifier: Apache-2.0
 //
 
 import Foundation
