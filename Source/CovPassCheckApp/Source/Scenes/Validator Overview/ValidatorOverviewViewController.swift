@@ -34,6 +34,8 @@ class ValidatorOverviewViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel.delegate = self
+        viewModel.updateTrustList()
         setupHeaderView()
         setupCardView()
     }
@@ -69,7 +71,14 @@ class ValidatorOverviewViewController: UIViewController {
         offlineCard.titleLabel.attributedText = "validation_start_screen_offline_modus_title".localized.styledAs(.header_2)
         offlineCard.textLable.attributedText = "validation_start_screen_offline_modus_message".localized.styledAs(.body)
         offlineCard.infoLabel.attributedText = viewModel.offlineTitle.styledAs(.body)
-        offlineCard.infoImageView.image = .validationCheckmark
+        offlineCard.infoImageView.image = viewModel.offlineIcon
         offlineCard.dateLabel.attributedText = viewModel.offlineMessage.styledAs(.body).colored(.onBackground70)
     }
+}
+
+extension ValidatorOverviewViewController: ViewModelDelegate {
+    func viewModelDidUpdate() {
+        self.setupCardView()
+    }
+    func viewModelUpdateDidFailWithError(_ error: Error) {}
 }

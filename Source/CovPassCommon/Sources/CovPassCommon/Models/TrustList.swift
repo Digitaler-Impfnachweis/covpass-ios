@@ -10,5 +10,4 @@ import Foundation
 
 public struct TrustList: Codable {
     public var certificates: [TrustCertificate]
-    public var signature: String
 }

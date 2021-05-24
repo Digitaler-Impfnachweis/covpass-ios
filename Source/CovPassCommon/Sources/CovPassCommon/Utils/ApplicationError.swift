@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import PromiseKit
 
 public enum ApplicationError: Error {
     case unknownError
@@ -31,5 +32,11 @@ extension ApplicationError: Equatable {
     public static func == (lhs: ApplicationError, rhs: ApplicationError) -> Bool {
         if lhs.localizedDescription == rhs.localizedDescription { return true }
         return false
+    }
+}
+
+class PromiseCancelledError: CancellableError {
+    var isCancelled: Bool {
+        return true
     }
 }

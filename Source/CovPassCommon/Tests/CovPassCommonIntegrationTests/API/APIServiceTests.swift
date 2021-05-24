@@ -6,11 +6,11 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
+import XCTest
 import Compression
 import Foundation
 import SwiftCBOR
 @testable import CovPassCommon
-import XCTest
 
 class APIServiceTests: XCTestCase {
     var sut: APIService!
@@ -19,7 +19,7 @@ class APIServiceTests: XCTestCase {
         super.setUp()
         sut = APIService(
             sessionDelegate: APIServiceDelegate(
-                certUrl: Bundle.module.url(forResource: "rsa-certify.demo.ubirch.com", withExtension: "der")!
+                certUrl: Bundle.module.url(forResource: "de.test.dscg.ubirch.com.combined", withExtension: "der")!
             ),
             url: ""
         )
@@ -30,73 +30,73 @@ class APIServiceTests: XCTestCase {
         super.tearDown()
     }
 
-    func testFetchTrustList() {
-
-        if let filepath = Bundle.commonBundle.path(forResource: "pubkey", ofType: "pem") {
-                    do {
-                        var contents = try String(contentsOfFile: filepath)
-                        print(contents.debugDescription)
-
-                        // remove the header string
-                        let offset = String("-----BEGIN PUBLIC KEY-----").count
-                        let index = contents.index(contents.startIndex, offsetBy: offset+1)
-                        contents = String(contents.suffix(from: index))
-
-                       // remove end of line chars
-                       contents = contents.replacingOccurrences(of: "\n", with: "")
-
-                        // remove the tail string
-                        let tailWord = "-----END PUBLIC KEY-----"
-                        if let lowerBound = contents.range(of: tailWord)?.lowerBound {
-                            contents = String(contents.prefix(upTo: lowerBound))
-                        }
-
-                        print(contents.debugDescription)
-
-                        let data = NSData(base64Encoded: contents,
-                                          options:NSData.Base64DecodingOptions.ignoreUnknownCharacters)!
-
-                        var publicKey: SecKey?
-                        let attributes = [kSecAttrKeyType: kSecAttrKeyTypeRSA, kSecAttrKeyClass: kSecAttrKeyClassPublic] as CFDictionary
-                        let error = UnsafeMutablePointer<Unmanaged<CFError>?>.allocate(capacity: 1)
-                        publicKey = SecKeyCreateWithData(data, attributes, error)
-
-                        print(error.pointee.debugDescription)
-                        print(publicKey.debugDescription)
-
-                    } catch {
-                        print(error)
-                    }
-        }
-
-            return
+    func testTrustListUpdate() {
         do {
-//            let repo = VaccinationRepository(service: sut, parser: QRCoder())
-//            try repo.refreshValidationCA().wait()
             let trustList = try sut.fetchTrustList().wait()
 
-            guard let trustListPublicKey = Bundle.commonBundle.url(forResource: "pubkey", withExtension: "pem") else {
-                throw ApplicationError.unknownError
+            let seq = trustList.split(separator: "\n")
+            if seq.count != 2 {
+                XCTFail("failed")
             }
-            let trustListPublicKeyData = try Data(contentsOf: trustListPublicKey)
 
-            let attributes: [String:Any] = [
-                kSecAttrKeyClass as String: kSecAttrKeyClassPublic,
-//                kSecAttrKeyType as String: kSecAttrKeyTypeRSA,
-//                kSecAttrKeySizeInBits as String: 2048,
-            ]
+            guard let pubkeyPEM = Bundle.module.url(forResource: "pubkey", withExtension: "pem") else {
+                XCTFail()
+                return
+            }
+
+            // EC public key (prime256v1) sequence headers (26 blocks) needs to be stripped off
+            //   so it can be used with SecKeyCreateWithData
+            let pubkeyB64 = try String(contentsOf: pubkeyPEM)
+                .replacingOccurrences(of: "-----BEGIN PUBLIC KEY-----", with: "")
+                .replacingOccurrences(of: "-----END PUBLIC KEY-----", with: "")
+                .replacingOccurrences(of: "\n", with: "")
+            let pubkeyDER = Data(base64Encoded: pubkeyB64)!
+            let barekeyDER = pubkeyDER.suffix(from: 26)
 
             var error: Unmanaged<CFError>?
-            let publicKey = SecKeyCreateWithData(trustListPublicKeyData as CFData, attributes as CFDictionary, &error)
-            if error != nil {
-                throw HCertError.verifyError
+            guard let publicKey = SecKeyCreateWithData(
+                barekeyDER as CFData,
+                [
+                    kSecAttrKeyType: kSecAttrKeyTypeEC,
+                    kSecAttrKeyClass: kSecAttrKeyClassPublic
+                ] as CFDictionary,
+                &error
+            ) else {
+                if error != nil {
+                    XCTFail(error.debugDescription)
+                    return
+                }
+                XCTFail()
+                return
             }
 
-//            guard let signature = trustList.signature.data(using: .utf8) else {
-//                throw ApplicationError.unknownError
-//            }
+            guard var signature = Data(base64Encoded: String(seq[0])) else {
+                XCTFail()
+                return
+            }
+            signature = try ECDSA.convertSignatureData(signature)
+            guard let signedData = String(seq[1]).data(using: .utf8)?.sha256() else {
+                XCTFail()
+                return
+            }
 
-//            XCTAssert(list.certificates.count > 0)
+            let result = SecKeyVerifySignature(
+                publicKey, .ecdsaSignatureDigestX962SHA256,
+                signedData as CFData,
+                signature as CFData,
+                &error
+            )
+            if error != nil {
+                XCTFail(error.debugDescription)
+                return
+            }
+
+            if result {
+                print("VALID")
+            } else {
+                print("NOT VALID")
+            }
+
         } catch {
             XCTFail(error.localizedDescription)
         }

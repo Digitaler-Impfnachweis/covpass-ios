@@ -17,19 +17,33 @@ class ValidatorOverviewViewModel {
 
     private let repository: VaccinationRepositoryProtocol
     private let router: ValidatorOverviewRouterProtocol
-    private let parser = QRCoder()
 
     // MARK: - Internal
 
+    var delegate: ViewModelDelegate?
+
     var title: String { "validation_start_screen_title".localized }
 
+    var offlineAvailable: Bool {
+        guard let lastUpdated = repository.getLastUpdatedTrustList(),
+              let date = Calendar.current.date(byAdding: .day, value: 1, to: lastUpdated),
+              Date() < date else {
+            return false
+        }
+        return true
+    }
+
+    var offlineIcon: UIImage {
+        offlineAvailable ? .validationCheckmark : .warning
+    }
+
     var offlineTitle: String {
-        "validation_start_screen_offline_modus_note_latest_version".localized
+        offlineAvailable ? "validation_start_screen_offline_modus_note_latest_version".localized : "validation_start_screen_offline_modus_note_old_version".localized
     }
 
     var offlineMessage: String {
-        let date = "01.01.1970"
-        return String(format: "%@ %@", "validation_start_screen_offline_modus_note_update".localized, date)
+        let date = repository.getLastUpdatedTrustList() ?? Date.init(timeIntervalSince1970: 0)
+        return String(format: "%@ %@", "validation_start_screen_offline_modus_note_update".localized, DateUtils.displayDateFormatter.string(from: date))
     }
 
     // MARK: - UIConfigureation
@@ -49,6 +63,15 @@ class ValidatorOverviewViewModel {
 
     func process(payload: String) -> Promise<CBORWebToken> {
         repository.checkVaccinationCertificate(payload)
+    }
+
+    func updateTrustList() {
+        repository
+            .updateTrustList()
+            .done {
+                self.delegate?.viewModelDidUpdate()
+            }
+            .catch { _ in }
     }
 
     func startQRCodeValidation() {

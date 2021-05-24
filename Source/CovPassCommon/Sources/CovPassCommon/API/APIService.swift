@@ -22,7 +22,7 @@ public struct APIService: APIServiceProtocol {
         self.url = url
     }
 
-    public func fetchTrustList() -> Promise<TrustList> {
+    public func fetchTrustList() -> Promise<String> {
         let url = "https://de.test.dscg.ubirch.com/trustList/DSC/DE/"
         return Promise { seal in
              guard let requestUrl = URL(string: url) else {
@@ -33,7 +33,7 @@ public struct APIService: APIServiceProtocol {
              request.httpMethod = "GET"
 
              let session = URLSession(configuration: URLSessionConfiguration.ephemeral,
-                                      delegate: nil, // TODO enable url session delegate again
+                                      delegate: self.sessionDelegate,
                                       delegateQueue: nil)
 
              session.dataTask(with: request) { data, response, error in
@@ -59,12 +59,12 @@ public struct APIService: APIServiceProtocol {
                      return
                  }
 
-                guard let data = data, let trustList = try? JSONDecoder().decode(TrustList.self, from: data) else {
+                guard let data = data, let trustListResponse = String(data: data, encoding: .utf8) else {
                     seal.reject(APIError.invalidReponse)
                     return
                 }
 
-                seal.fulfill(trustList)
+                seal.fulfill(trustListResponse)
              }.resume()
          }
     }
