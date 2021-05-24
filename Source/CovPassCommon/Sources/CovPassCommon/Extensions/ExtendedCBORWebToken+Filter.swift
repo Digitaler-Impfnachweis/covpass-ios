@@ -41,7 +41,7 @@ extension Array where Element == ExtendedCBORWebToken {
         return pairableCertificates(for: certificate) + [certificate]
     }
 
-    /// Reduce all certificate to pairs and take either the full cert or the last known.
+    /// Reduce to certificate pairs by taking the first certificate wich is either full or the last known certificate.
     public func flatMapCertificatePairs() -> [Element] {
         reduce(into: [Element?]()) { result, certificate in
             let pair = certificatePair(for: certificate)
