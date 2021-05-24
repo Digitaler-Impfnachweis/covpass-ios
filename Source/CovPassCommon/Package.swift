@@ -10,7 +10,8 @@ let package = Package(
         // Products define the executables and libraries a package produces, and make them visible to other packages.
         .library(
             name: "CovPassCommon",
-            targets: ["CovPassCommon"]),
+            targets: ["CovPassCommon"]
+        )
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
@@ -25,14 +26,17 @@ let package = Package(
         .target(
             name: "CovPassCommon",
             dependencies: ["Keychain", "SwiftCBOR", "Scanner", "PromiseKit"],
-            resources: [.process("Resources")]),
+            resources: [.process("Resources")]
+        ),
         .testTarget(
             name: "CovPassCommonTests",
             dependencies: ["CovPassCommon"],
-            resources: [.process("Resources")]),
+            resources: [.process("Resources")]
+        ),
         .testTarget(
             name: "CovPassCommonIntegrationTests",
             dependencies: ["CovPassCommon"],
-            resources: [.process("Resources")]),
+            resources: [.process("Resources")]
+        )
     ]
 )

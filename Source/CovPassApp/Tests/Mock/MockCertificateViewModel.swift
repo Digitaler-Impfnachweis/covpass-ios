@@ -6,19 +6,19 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
+@testable import CovPassApp
+import CovPassCommon
+import CovPassUI
 import Foundation
 import PromiseKit
 import UIKit
-import CovPassCommon
-@testable import CovPassApp
-import CovPassUI
 
 class MockCertificateViewModel: CertificatesOverviewViewModelProtocol {
     // MARK: - Test Variables
 
     var processCalled = false
     var configureCalled = false
-    var selectedCertificateIndex: Int? = nil
+    var selectedCertificateIndex: Int?
 
     // MARK: - CertificateViewModel
 
@@ -31,6 +31,8 @@ class MockCertificateViewModel: CertificatesOverviewViewModelProtocol {
     func process(payload _: String, completion _: ((Error) -> Void)?) {
         processCalled = true
     }
+
+    func updateTrustList() {}
 
     func reuseIdentifier(for indexPath: IndexPath) -> String {
         certificateViewModels[indexPath.row].reuseIdentifier
@@ -68,7 +70,7 @@ class MockCertificateViewModel: CertificatesOverviewViewModelProtocol {
         // TODO: Add tests
     }
 
-    func scanCertificate(withIntroduction: Bool) {
+    func scanCertificate(withIntroduction _: Bool) {
         // TODO: Add tests
     }
 

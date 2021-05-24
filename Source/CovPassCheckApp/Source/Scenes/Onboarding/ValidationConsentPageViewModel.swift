@@ -6,8 +6,8 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-import UIKit
 import CovPassUI
+import UIKit
 
 class ValidationConsentPageViewModel: ConsentPageViewModel {
     // MARK: - Properties
@@ -35,10 +35,9 @@ class ValidationConsentPageViewModel: ConsentPageViewModel {
 
     var listItems: NSAttributedString {
         NSAttributedString.toBullets(
-            [ "validation_fourth_onboarding_first_list_item".localized.styledAs(.body),
-              "validation_fourth_onboarding_second_list_item".localized.styledAs(.body),
-              "validation_fourth_onboarding_third_list_item".localized.styledAs(.body)
-            ]
+            ["validation_fourth_onboarding_first_list_item".localized.styledAs(.body),
+             "validation_fourth_onboarding_second_list_item".localized.styledAs(.body),
+             "validation_fourth_onboarding_third_list_item".localized.styledAs(.body)]
         )
     }
 

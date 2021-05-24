@@ -6,10 +6,10 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
+import CovPassUI
 import Foundation
 import Scanner
 import UIKit
-import CovPassUI
 
 class ValidatorOverviewViewController: UIViewController {
     // MARK: - IBOutlet
@@ -78,7 +78,8 @@ class ValidatorOverviewViewController: UIViewController {
 
 extension ValidatorOverviewViewController: ViewModelDelegate {
     func viewModelDidUpdate() {
-        self.setupCardView()
+        setupCardView()
     }
-    func viewModelUpdateDidFailWithError(_ error: Error) {}
+
+    func viewModelUpdateDidFailWithError(_: Error) {}
 }

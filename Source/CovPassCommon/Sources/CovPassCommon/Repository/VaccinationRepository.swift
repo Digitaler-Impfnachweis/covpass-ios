@@ -59,7 +59,8 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
         firstly {
             Promise { seal in
                 if let lastUpdated = UserDefaults.standard.object(forKey: UserDefaults.keyLastUpdatedTrustList) as? Date,
-                   let date = Calendar.current.date(byAdding: .day, value: 1, to: lastUpdated) {
+                   let date = Calendar.current.date(byAdding: .day, value: 1, to: lastUpdated)
+                {
                     if Date() < date {
                         // Only update once a day
                         seal.reject(PromiseCancelledError())

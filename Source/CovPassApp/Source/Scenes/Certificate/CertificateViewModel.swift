@@ -6,11 +6,11 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
+import CovPassCommon
+import CovPassUI
 import Foundation
 import PromiseKit
 import UIKit
-import CovPassUI
-import CovPassCommon
 
 class CertificateViewModel: BaseViewModel, CancellableViewModelProtocol {
     // MARK: - Properties
@@ -28,7 +28,7 @@ class CertificateViewModel: BaseViewModel, CancellableViewModelProtocol {
         let total = token.vaccinationCertificate.hcert.dgc.v.first?.sd ?? 0
         return String(format: "vaccination_certificate_detail_view_vaccination_title".localized, number, total)
     }
-    
+
     // MARK: - Lifecycle
 
     init(

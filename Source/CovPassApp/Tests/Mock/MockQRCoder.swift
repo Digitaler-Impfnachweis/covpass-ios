@@ -6,10 +6,10 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-import Foundation
-import PromiseKit
 import CovPassCommon
 import CovPassUI
+import Foundation
+import PromiseKit
 
 class MockQRCoder: QRCoderProtocol {
     func parse(_: String) -> Promise<CBORWebToken> {

@@ -6,10 +6,10 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
+import CovPassCommon
+import CovPassUI
 import PromiseKit
 import UIKit
-import CovPassUI
-import CovPassCommon
 
 struct CertificateSceneFactory: ResolvableSceneFactory {
     // MARK: - Properties

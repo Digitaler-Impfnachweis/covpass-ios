@@ -6,11 +6,11 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
+import CovPassCommon
+import CovPassUI
 import Foundation
 import PromiseKit
 import UIKit
-import CovPassCommon
-import CovPassUI
 
 class ValidatorOverviewViewModel {
     // MARK: - Private
@@ -27,7 +27,8 @@ class ValidatorOverviewViewModel {
     var offlineAvailable: Bool {
         guard let lastUpdated = repository.getLastUpdatedTrustList(),
               let date = Calendar.current.date(byAdding: .day, value: 1, to: lastUpdated),
-              Date() < date else {
+              Date() < date
+        else {
             return false
         }
         return true
@@ -42,7 +43,7 @@ class ValidatorOverviewViewModel {
     }
 
     var offlineMessage: String {
-        let date = repository.getLastUpdatedTrustList() ?? Date.init(timeIntervalSince1970: 0)
+        let date = repository.getLastUpdatedTrustList() ?? Date(timeIntervalSince1970: 0)
         return String(format: "%@ %@", "validation_start_screen_offline_modus_note_update".localized, DateUtils.displayDateFormatter.string(from: date))
     }
 

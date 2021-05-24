@@ -6,11 +6,11 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-import XCTest
 import Compression
+@testable import CovPassCommon
 import Foundation
 import SwiftCBOR
-@testable import CovPassCommon
+import XCTest
 
 class APIServiceTests: XCTestCase {
     var sut: APIService!

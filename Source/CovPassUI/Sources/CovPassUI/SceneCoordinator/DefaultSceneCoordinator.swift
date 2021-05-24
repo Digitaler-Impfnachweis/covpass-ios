@@ -48,7 +48,6 @@ public class DefaultSceneCoordinator: NSObject, SceneCoordinator {
         promise: Promise<T>,
         animated: Bool = true
     ) -> Promise<T> {
-
         push(viewController: viewController, animated: animated)
 
         let (internalPromise, internalResolver) = Promise<T>.pending()
@@ -109,7 +108,6 @@ public class DefaultSceneCoordinator: NSObject, SceneCoordinator {
         promise: Promise<T>,
         animated: Bool = true
     ) -> Promise<T> {
-
         present(viewController: viewController, animated: animated)
 
         // Map to an internal resolver to resolve only when view did dismiss.
