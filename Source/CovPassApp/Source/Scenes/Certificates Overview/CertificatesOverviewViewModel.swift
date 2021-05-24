@@ -46,6 +46,15 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
         return repository.scanVaccinationCertificate(payload)
     }
 
+    func updateTrustList() {
+        repository
+            .updateTrustList()
+            .done {
+                self.delegate?.viewModelDidUpdate()
+            }
+            .catch { _ in }
+    }
+
     func loadCertificates() {
         firstly {
             repository.getVaccinationCertificateList()
