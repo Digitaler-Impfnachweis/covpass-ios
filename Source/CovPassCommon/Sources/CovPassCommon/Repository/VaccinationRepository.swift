@@ -19,7 +19,7 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
         self.service = service
         self.parser = parser
 
-        guard let trustListData = UserDefaults.standard.object(forKey: UserDefaults.keyLastUpdatedTrustList) as? Data,
+        guard let trustListData = try? Keychain.fetchPassword(for: KeychainConfiguration.trustListKey),
               let trustList = try? JSONDecoder().decode(TrustList.self, from: trustListData)
         else { return }
         self.trustList = trustList
