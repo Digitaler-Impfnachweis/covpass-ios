@@ -45,7 +45,7 @@ struct VaccinationViewModel {
     }
 
     var fullVaccineProduct: String {
-        "\(vaccineCode)(\(vaccine))"
+        "\(vaccineCode) (\(vaccine))"
     }
 
     var issuer: String {
