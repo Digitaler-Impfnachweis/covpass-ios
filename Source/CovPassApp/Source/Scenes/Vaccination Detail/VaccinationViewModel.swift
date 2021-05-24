@@ -6,9 +6,9 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-import Foundation
 import CovPassCommon
 import CovPassUI
+import Foundation
 import PromiseKit
 
 struct VaccinationViewModel {
@@ -65,7 +65,8 @@ struct VaccinationViewModel {
     init(token: ExtendedCBORWebToken,
          repository: VaccinationRepositoryProtocol,
          delegate: VaccinationDelegate?,
-         router: VactinationViewRouterProtocol) {
+         router: VactinationViewRouterProtocol)
+    {
         self.token = token
         self.repository = repository
         self.delegate = delegate
@@ -74,7 +75,7 @@ struct VaccinationViewModel {
 
     func delete() {
         guard let vaccination = token.vaccinationCertificate.hcert.dgc.v.first else { return }
-        self.delegate?.didPressDelete(vaccination).then {
+        delegate?.didPressDelete(vaccination).then {
             self.repository.getVaccinationCertificateList()
         }.then { list -> Promise<VaccinationCertificateList> in
             var certList = list
@@ -95,7 +96,7 @@ struct VaccinationViewModel {
             self.delegate?.updateDidFailWithError(error)
         }
     }
-    
+
     func showCertificate() {
         firstly {
             router.showCertificate(for: token)

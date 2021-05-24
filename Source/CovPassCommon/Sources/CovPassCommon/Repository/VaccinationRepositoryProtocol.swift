@@ -17,8 +17,11 @@ public protocol VaccinationRepositoryProtocol {
     /// Save the vaccination certificate list
     func saveVaccinationCertificateList(_ certificateList: VaccinationCertificateList) -> Promise<VaccinationCertificateList>
 
-    /// Refreshes the local validation CA
-    func refreshValidationCA() -> Promise<Void>
+    /// Get the date when the trust list got updated last
+    func getLastUpdatedTrustList() -> Date?
+
+    /// Update the local trust list once a day
+    func updateTrustList() -> Promise<Void>
 
     /// scanVaccinationCertificate validates the given QR code, parses it, and returns everything as an ExtendedCBORWebToken.
     ///

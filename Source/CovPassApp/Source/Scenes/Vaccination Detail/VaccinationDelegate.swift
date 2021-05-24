@@ -6,8 +6,8 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-import Foundation
 import CovPassCommon
+import Foundation
 import PromiseKit
 
 protocol VaccinationDelegate: AnyObject {

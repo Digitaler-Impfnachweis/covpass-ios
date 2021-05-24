@@ -6,10 +6,10 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-import Foundation
-import UIKit
 import CovPassCommon
 import CovPassUI
+import Foundation
+import UIKit
 
 struct OnboardingRouter: OnboardingRouterProtocol {
     // MARK: - Properties

@@ -21,4 +21,51 @@ public struct APIService: APIServiceProtocol {
         self.sessionDelegate = sessionDelegate
         self.url = url
     }
+
+    public func fetchTrustList() -> Promise<String> {
+        let url = "https://de.test.dscg.ubirch.com/trustList/DSC/DE/"
+        return Promise { seal in
+            guard let requestUrl = URL(string: url) else {
+                seal.reject(APIError.invalidUrl)
+                return
+            }
+            var request = URLRequest(url: requestUrl)
+            request.httpMethod = "GET"
+
+            let session = URLSession(configuration: URLSessionConfiguration.ephemeral,
+                                     delegate: self.sessionDelegate,
+                                     delegateQueue: nil)
+
+            session.dataTask(with: request) { data, response, error in
+                if let error = error {
+                    if let error = error as NSError?, error.code == NSURLErrorCancelled {
+                        seal.reject(APIError.requestCancelled)
+                        return
+                    }
+                    if let error = error as? URLError, error.isCancelled {
+                        seal.reject(APIError.requestCancelled)
+                        return
+                    }
+                    seal.reject(error)
+                    return
+                }
+                guard let response = response as? HTTPURLResponse else {
+                    seal.reject(APIError.invalidReponse)
+                    return
+                }
+                guard (200 ... 299).contains(response.statusCode) else {
+                    print(String(data: data ?? Data(), encoding: .utf8) ?? "")
+                    seal.reject(APIError.invalidReponse)
+                    return
+                }
+
+                guard let data = data, let trustListResponse = String(data: data, encoding: .utf8) else {
+                    seal.reject(APIError.invalidReponse)
+                    return
+                }
+
+                seal.fulfill(trustListResponse)
+            }.resume()
+        }
+    }
 }

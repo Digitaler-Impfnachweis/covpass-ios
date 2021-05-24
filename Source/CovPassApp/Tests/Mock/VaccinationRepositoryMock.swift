@@ -6,10 +6,19 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-import PromiseKit
 import CovPassCommon
+import Foundation
+import PromiseKit
 
 public struct VaccinationRepositoryMock: VaccinationRepositoryProtocol {
+    public func getLastUpdatedTrustList() -> Date? {
+        return nil
+    }
+
+    public func updateTrustList() -> Promise<Void> {
+        return Promise.value
+    }
+
     public func getVaccinationCertificateList() -> Promise<VaccinationCertificateList> {
         return Promise.value(VaccinationCertificateList(certificates: []))
     }

@@ -6,8 +6,8 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-import Foundation
 @testable import CovPassUI
+import Foundation
 import XCTest
 
 class NoCertificateCollectionViewCellTests: XCTestCase {

@@ -6,8 +6,8 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-import Foundation
 import CovPassUI
+import Foundation
 
 struct WelcomeRouter: StartRouterProtocol {
     // MARK: - Properties

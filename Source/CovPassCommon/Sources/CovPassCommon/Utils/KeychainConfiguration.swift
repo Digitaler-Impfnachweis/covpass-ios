@@ -10,4 +10,5 @@ import Foundation
 
 public enum KeychainConfiguration {
     public static let vaccinationCertificateKey = "VaccinationCertificateList"
+    public static let trustListKey = "TrustList"
 }

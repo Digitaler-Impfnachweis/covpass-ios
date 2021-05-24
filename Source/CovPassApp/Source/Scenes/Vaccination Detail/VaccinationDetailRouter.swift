@@ -6,10 +6,10 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
+import CovPassCommon
+import CovPassUI
 import PromiseKit
 import UIKit
-import CovPassUI
-import CovPassCommon
 
 class VaccinationDetailRouter: VaccinationDetailRouterProtocol, DialogRouterProtocol {
     // MARK: - Properties
@@ -41,7 +41,7 @@ class VaccinationDetailRouter: VaccinationDetailRouterProtocol, DialogRouterProt
             )
         )
     }
-    
+
     func showCertificate(for token: ExtendedCBORWebToken) -> Promise<Void> {
         sceneCoordinator.present(
             CertificateSceneFactory(token: token)

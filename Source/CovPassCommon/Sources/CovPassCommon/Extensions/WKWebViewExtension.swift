@@ -26,6 +26,6 @@ public extension WKWebView {
             parent.appendChild(style)})()
         """
         let script = WKUserScript(source: cssStyle, injectionTime: .atDocumentEnd, forMainFrameOnly: false)
-        self.configuration.userContentController.addUserScript(script)
+        configuration.userContentController.addUserScript(script)
     }
 }

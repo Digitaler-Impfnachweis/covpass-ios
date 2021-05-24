@@ -1,6 +1,6 @@
 //
 //  Keychain.swift
-//  
+//
 //
 //  Created by Daniel Mandea on 05/04/2020.
 //
@@ -8,8 +8,7 @@
 import Foundation
 import Security
 
-public class Keychain {
-    
+public enum Keychain {
     public struct Dependencies {
         public init() {}
         var itemCopyMatching: (CFDictionary, UnsafeMutablePointer<CFTypeRef?>?) -> OSStatus = SecItemCopyMatching
@@ -17,7 +16,7 @@ public class Keychain {
         var itemAdd: (CFDictionary, UnsafeMutablePointer<CFTypeRef?>?) -> OSStatus = SecItemAdd
         var itemDelete: (CFDictionary) -> OSStatus = SecItemDelete
     }
-    
+
     /// Use this method in order to store certain password or certificate securely
     /// - Parameters:
     ///   - data: Data contained by the password or certificate
@@ -36,8 +35,7 @@ public class Keychain {
         }
         guard status == noErr else { throw KeychainError.store }
     }
-    
-    
+
     /// Use this method in order to delete certain password or certificate stored securely
     /// - Parameters:
     ///   - key: Certain unique idenitifiable key used for identifying stored data
@@ -49,7 +47,7 @@ public class Keychain {
         let status: OSStatus = dependencies.itemDelete(query)
         guard status == noErr else { throw KeychainError.delete }
     }
-    
+
     /// Use this method in order to fetch certain password or certificate stored securely
     /// - Parameters:
     ///   - key: Certain unique idenitifiable key used for identifying stored data
@@ -64,8 +62,8 @@ public class Keychain {
         var result: CFTypeRef?
         let status = dependencies.itemCopyMatching(query, &result)
         guard let resultsDict = result as? NSDictionary,
-            let value = resultsDict.value(forKey: kSecValueData as String) as? Data,
-            status == noErr else { throw KeychainError.fetch }
+              let value = resultsDict.value(forKey: kSecValueData as String) as? Data,
+              status == noErr else { throw KeychainError.fetch }
         return value
     }
 

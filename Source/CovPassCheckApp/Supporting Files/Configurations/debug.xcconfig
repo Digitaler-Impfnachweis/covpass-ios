@@ -15,7 +15,7 @@ API_URL = https:/$()/api.recertify.demo.ubirch.com/api/certify/v2/reissue/cbor
 
 // TLS CERTIVICATE PINNING
 
-TLS_CERTIFICATE_NAME = rsa-certify.demo.ubirch.com
+TLS_CERTIFICATE_NAME = de.test.dscg.ubirch.com.combined
 TLS_CERTIFICATE_FILES = Certificates/DEMO/TLS/
 TLS_CERTIFICATES_DESTINATION = Source/CovPassCommon/Sources/CovPassCommon/Resources/TLS/
 

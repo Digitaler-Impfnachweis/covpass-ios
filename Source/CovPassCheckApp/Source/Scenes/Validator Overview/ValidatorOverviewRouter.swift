@@ -6,11 +6,11 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
+import CovPassCommon
+import CovPassUI
 import PromiseKit
 import Scanner
 import UIKit
-import CovPassCommon
-import CovPassUI
 
 class ValidatorOverviewRouter: ValidatorOverviewRouterProtocol {
     // MARK: - Properties

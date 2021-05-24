@@ -6,11 +6,11 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
+import CovPassCommon
+import CovPassUI
 import Foundation
 import PromiseKit
 import UIKit
-import CovPassCommon
-import CovPassUI
 
 class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
     // MARK: - Private Properties
@@ -38,12 +38,22 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
         let certs = sortFavorite(certificateList.certificates, favorite: certificateList.favoriteCertificateId ?? "")
         return matchCertificates(certs)
     }
+
     var selectedCertificateIndex: Int?
 
     // MARK: - Actions
 
     func process(payload: String) -> Promise<ExtendedCBORWebToken> {
         return repository.scanVaccinationCertificate(payload)
+    }
+
+    func updateTrustList() {
+        repository
+            .updateTrustList()
+            .done {
+                self.delegate?.viewModelDidUpdate()
+            }
+            .catch { _ in }
     }
 
     func loadCertificates() {
@@ -272,7 +282,7 @@ extension CertificatesOverviewViewModel: CertificateDetailDelegate {
         guard let certificate = certificates.last else { return }
         selectedCertificateIndex = findCertificateIndex(for: certificate)
     }
-    
+
     func didAddCertificate() {
         loadCertificates()
     }

@@ -6,11 +6,11 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
+import CovPassCommon
+import CovPassUI
 import Foundation
 import Scanner
 import UIKit
-import CovPassCommon
-import CovPassUI
 
 class CertificatesOverviewViewController: UIViewController {
     // MARK: - IBOutlet
@@ -38,6 +38,7 @@ class CertificatesOverviewViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = ""
+        viewModel.updateTrustList()
         setupHeaderView()
         setupActionButton()
         setupCollecttionView()
@@ -49,7 +50,7 @@ class CertificatesOverviewViewController: UIViewController {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if let selectedCertificateIndex = viewModel.selectedCertificateIndex {

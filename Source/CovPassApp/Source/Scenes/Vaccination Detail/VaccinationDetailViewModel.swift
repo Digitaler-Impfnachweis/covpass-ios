@@ -6,10 +6,10 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-import PromiseKit
-import UIKit
 import CovPassCommon
 import CovPassUI
+import PromiseKit
+import UIKit
 
 class VaccinationDetailViewModel {
     private let router: VaccinationDetailRouterProtocol
@@ -46,7 +46,7 @@ class VaccinationDetailViewModel {
             return false
         }
     }
-    
+
     var name: String {
         certificates.first?.vaccinationCertificate.hcert.dgc.nam.fullName ?? ""
     }
@@ -84,9 +84,9 @@ class VaccinationDetailViewModel {
 
     var vaccinations: [VaccinationViewModel] {
         certificates.map { VaccinationViewModel(token: $0,
-            repository: VaccinationRepository(service: APIService.create(), parser: QRCoder()),
-            delegate: self,
-            router: router) }
+                                                repository: VaccinationRepository(service: APIService.create(), parser: QRCoder()),
+                                                delegate: self,
+                                                router: router) }
     }
 
     func immunizationButtonTapped() {
@@ -210,12 +210,12 @@ class VaccinationDetailViewModel {
 
 extension VaccinationDetailViewModel: VaccinationDelegate {
     func didPressDelete(_ vaccination: Vaccination) -> Promise<Void> {
-        self.showDeleteDialog(vaccination)
+        showDeleteDialog(vaccination)
     }
 
     func didUpdateCertificates(_ certificates: [ExtendedCBORWebToken]) {
         self.certificates = certificates
-        
+
         if certificates.isEmpty {
             router.showCertificateOverview()
                 .done {
@@ -227,9 +227,9 @@ extension VaccinationDetailViewModel: VaccinationDelegate {
             deletionSuccessful()
         }
     }
-    
+
     func updateDidFailWithError(_ error: Error) {
-        self.delegate?.viewModelUpdateDidFailWithError(error)
+        delegate?.viewModelUpdateDidFailWithError(error)
     }
 
     private func deletionSuccessful() {

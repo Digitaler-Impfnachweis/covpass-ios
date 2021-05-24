@@ -6,9 +6,9 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
+import CovPassCommon
 import Foundation
 import UIKit
-import CovPassCommon
 
 public typealias CertificateCardViewModelProtocol = CardViewModel & CertificateCardViewModelBase
 

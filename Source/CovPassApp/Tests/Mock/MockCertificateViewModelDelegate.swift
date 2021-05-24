@@ -6,9 +6,9 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-import Foundation
 @testable import CovPassApp
 import CovPassUI
+import Foundation
 
 class MockCertificateViewModelDelegate: CertificatesOverviewViewModelDelegate {
     var updateCalled = false

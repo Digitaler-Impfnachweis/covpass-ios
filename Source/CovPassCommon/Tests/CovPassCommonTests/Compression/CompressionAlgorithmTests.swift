@@ -7,8 +7,8 @@
 //
 
 import Compression
-import Foundation
 @testable import CovPassCommon
+import Foundation
 import XCTest
 
 class CompressionAlgorithmTests: XCTestCase {

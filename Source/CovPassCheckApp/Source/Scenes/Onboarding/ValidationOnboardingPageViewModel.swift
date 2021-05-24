@@ -6,8 +6,8 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-import UIKit
 import CovPassUI
+import UIKit
 
 class ValidationOnboardingPageViewModel: OnboardingPageViewModel {
     // MARK: - Properties
