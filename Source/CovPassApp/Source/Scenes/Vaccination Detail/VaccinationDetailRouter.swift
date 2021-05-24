@@ -9,6 +9,7 @@
 import PromiseKit
 import UIKit
 import CovPassUI
+import CovPassCommon
 
 class VaccinationDetailRouter: VaccinationDetailRouterProtocol, DialogRouterProtocol {
     // MARK: - Properties
@@ -38,6 +39,12 @@ class VaccinationDetailRouter: VaccinationDetailRouterProtocol, DialogRouterProt
                     router: DialogRouter(sceneCoordinator: sceneCoordinator)
                 )
             )
+        )
+    }
+    
+    func showCertificate(for token: ExtendedCBORWebToken) -> Promise<Void> {
+        sceneCoordinator.present(
+            CertificateSceneFactory(token: token)
         )
     }
 

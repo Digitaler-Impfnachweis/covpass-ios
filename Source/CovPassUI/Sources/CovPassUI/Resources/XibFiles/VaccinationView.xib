@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -11,9 +12,11 @@
             <connections>
                 <outlet property="countryView" destination="j2F-gs-Xii" id="k2X-Wx-4zN"/>
                 <outlet property="dateView" destination="XGD-vt-dCq" id="dkf-Dv-T9g"/>
-                <outlet property="immunizationHeadline" destination="Vtu-0a-hp0" id="cc9-dr-0ax"/>
+                <outlet property="immunizationHeadline" destination="Vtu-0a-hp0" id="F1t-K8-LCk"/>
                 <outlet property="issuerView" destination="mmI-TM-IPt" id="lZq-p7-AjK"/>
                 <outlet property="manufacturerView" destination="9Hq-h1-plc" id="GkU-nF-iJe"/>
+                <outlet property="qrButtonStackView" destination="dKR-bv-PWV" id="9GE-Vx-YHR"/>
+                <outlet property="showQrCodeButton" destination="hHv-tq-x18" id="KuP-nP-xfT"/>
                 <outlet property="stackView" destination="oUb-Cv-MzU" id="Dlo-D8-gko"/>
                 <outlet property="uvciView" destination="dmy-b2-SUJ" id="gmJ-4I-9Qh"/>
                 <outlet property="vaccineView" destination="RGm-nQ-hea" id="tma-9J-SOa"/>
@@ -26,27 +29,37 @@
                 <stackView opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="oUb-Cv-MzU">
                     <rect key="frame" x="16" y="52" width="343" height="568"/>
                     <subviews>
-                        <view contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="343" placeholderIntrinsicHeight="172" translatesAutoresizingMaskIntoConstraints="NO" id="Vtu-0a-hp0" userLabel="immunizationHeadline" customClass="PlainLabel" customModule="CovPassUI">
+                        <view contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="343" placeholderIntrinsicHeight="172" translatesAutoresizingMaskIntoConstraints="NO" id="Vtu-0a-hp0" userLabel="immunizationHeadline" customClass="InfoHeaderView" customModule="CovPassUI">
                             <rect key="frame" x="0.0" y="0.0" width="343" height="172"/>
                         </view>
                         <view contentMode="scaleToFill" verticalHuggingPriority="249" placeholderIntrinsicWidth="343" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="XGD-vt-dCq" userLabel="dateView" customClass="ParagraphView" customModule="CovPassUI">
-                            <rect key="frame" x="0.0" y="172" width="343" height="162"/>
+                            <rect key="frame" x="0.0" y="172" width="343" height="50"/>
                         </view>
                         <view contentMode="scaleToFill" placeholderIntrinsicWidth="343" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="RGm-nQ-hea" userLabel="vaccineView" customClass="ParagraphView" customModule="CovPassUI">
-                            <rect key="frame" x="0.0" y="334" width="343" height="50"/>
+                            <rect key="frame" x="0.0" y="222" width="343" height="50"/>
                         </view>
                         <view contentMode="scaleToFill" placeholderIntrinsicWidth="343" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="9Hq-h1-plc" userLabel="manufacturerView" customClass="ParagraphView" customModule="CovPassUI">
-                            <rect key="frame" x="0.0" y="384" width="343" height="50"/>
+                            <rect key="frame" x="0.0" y="272" width="343" height="50"/>
                         </view>
                         <view contentMode="scaleToFill" placeholderIntrinsicWidth="343" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="mmI-TM-IPt" userLabel="issuerView" customClass="ParagraphView" customModule="CovPassUI">
-                            <rect key="frame" x="0.0" y="434" width="343" height="50"/>
+                            <rect key="frame" x="0.0" y="322" width="343" height="50"/>
                         </view>
                         <view contentMode="scaleToFill" placeholderIntrinsicWidth="343" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="j2F-gs-Xii" userLabel="countryView" customClass="ParagraphView" customModule="CovPassUI">
-                            <rect key="frame" x="0.0" y="484" width="343" height="50"/>
+                            <rect key="frame" x="0.0" y="372" width="343" height="50"/>
                         </view>
                         <view contentMode="scaleToFill" placeholderIntrinsicWidth="343" placeholderIntrinsicHeight="34" translatesAutoresizingMaskIntoConstraints="NO" id="dmy-b2-SUJ" userLabel="uvciView" customClass="ParagraphView" customModule="CovPassUI">
-                            <rect key="frame" x="0.0" y="534" width="343" height="34"/>
+                            <rect key="frame" x="0.0" y="422" width="343" height="34"/>
                         </view>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="dKR-bv-PWV">
+                            <rect key="frame" x="0.0" y="456" width="343" height="112"/>
+                            <subviews>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hHv-tq-x18" customClass="MainButton" customModule="CovPassUI">
+                                    <rect key="frame" x="8" y="8" width="327" height="96"/>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                </view>
+                            </subviews>
+                            <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
+                        </stackView>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </stackView>
@@ -86,4 +99,9 @@
             <size key="intrinsicContentSize" width="343" height="50"/>
         </designable>
     </designables>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>

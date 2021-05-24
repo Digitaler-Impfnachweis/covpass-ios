@@ -12,7 +12,6 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="VaccinationDetailViewController" customModule="CovPassApp" customModuleProvider="target">
             <connections>
                 <outlet property="birtdateView" destination="o8t-JG-hB0" id="xas-dA-uO0"/>
-                <outlet property="deleteButton" destination="vZQ-lt-HzX" id="Sfx-LQ-r8d"/>
                 <outlet property="immunizationButton" destination="U8I-bk-rPh" id="I8u-WB-uN5"/>
                 <outlet property="immunizationButtonContainerView" destination="Ukt-Bg-k00" id="bSD-n7-fJh"/>
                 <outlet property="immunizationContainerView" destination="j4t-Jg-zf5" id="VHN-gu-UQK"/>
@@ -35,7 +34,7 @@
                     <rect key="frame" x="0.0" y="24" width="414" height="858"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="4ka-qw-LRS">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="800"/>
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="672"/>
                             <subviews>
                                 <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="eZz-97-0Z9" userLabel="Name Headline" customClass="PlainLabel" customModule="CovPassUI">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
@@ -80,14 +79,6 @@
                                 <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="200" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="rhc-O6-hd2" userLabel="Vaccinations StackView">
                                     <rect key="frame" x="0.0" y="472" width="414" height="200"/>
                                 </stackView>
-                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="3ho-tf-7ns">
-                                    <rect key="frame" x="0.0" y="672" width="414" height="128"/>
-                                    <subviews>
-                                        <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="vZQ-lt-HzX" userLabel="Delete Button" customClass="MainButton" customModule="CovPassUI">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="128"/>
-                                        </view>
-                                    </subviews>
-                                </stackView>
                             </subviews>
                         </stackView>
                     </subviews>
@@ -131,9 +122,6 @@
         </designable>
         <designable name="o8t-JG-hB0">
             <size key="intrinsicContentSize" width="414" height="50"/>
-        </designable>
-        <designable name="vZQ-lt-HzX">
-            <size key="intrinsicContentSize" width="414" height="128"/>
         </designable>
     </designables>
     <resources>

@@ -48,8 +48,12 @@ class CertificatesOverviewViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         if let selectedCertificateIndex = viewModel.selectedCertificateIndex {
-            collectionView.scrollToItem(at: IndexPath(item: selectedCertificateIndex, section: 0), at: .centeredHorizontally, animated: false)
+            collectionView.scrollToItem(at: IndexPath(item: selectedCertificateIndex, section: 0), at: .centeredHorizontally, animated: true)
             dotPageIndicator.selectDot(withIndex: selectedCertificateIndex)
         }
     }
@@ -90,7 +94,7 @@ class CertificatesOverviewViewController: UIViewController {
     private func setupActionButton() {
         addButton.icon = .plus
         addButton.action = { [weak self] in
-            self?.viewModel.scanCertificate()
+            self?.viewModel.scanCertificate(withIntroduction: true)
         }
     }
 

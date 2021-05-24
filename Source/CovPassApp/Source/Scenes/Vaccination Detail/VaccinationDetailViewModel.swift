@@ -28,7 +28,7 @@ class VaccinationDetailViewModel {
     ) {
         self.router = router
         self.repository = repository
-        self.certificates = certificates.sorted(by: { $0.vaccinationCertificate.hcert.dgc.v.first?.dn ?? 0 < $1.vaccinationCertificate.hcert.dgc.v.first?.dn ?? 0 })
+        self.certificates = certificates.sorted(by: { $0.vaccinationCertificate.hcert.dgc.v.first?.dn ?? 0 > $1.vaccinationCertificate.hcert.dgc.v.first?.dn ?? 0 })
         self.detailDelegate = detailDelegate
     }
 
@@ -46,7 +46,7 @@ class VaccinationDetailViewModel {
             return false
         }
     }
-
+    
     var name: String {
         certificates.first?.vaccinationCertificate.hcert.dgc.nam.fullName ?? ""
     }
@@ -61,7 +61,17 @@ class VaccinationDetailViewModel {
     }
 
     var immunizationTitle: String {
-        fullImmunization ? "vaccination_certificate_detail_view_complete_title".localized : String(format: "vaccination_certificate_detail_view_incomplete_title".localized, 1, 2)
+        guard let cert = certificates.first?.vaccinationCertificate.hcert.dgc else {
+            return String(format: "vaccination_certificate_detail_view_incomplete_title".localized, 1, 2)
+        }
+
+        if cert.fullImmunizationValid {
+            return "vaccination_certificate_detail_view_complete_title".localized
+        } else if let date = cert.fullImmunizationValidFrom, fullImmunization {
+            return String(format: "vaccination_start_screen_qrcode_complete_from_date_subtitle".localized, DateUtils.displayDateFormatter.string(from: date))
+        }
+
+        return String(format: "vaccination_certificate_detail_view_incomplete_title".localized, 1, 2)
     }
 
     var immunizationBody: String {
@@ -73,44 +83,16 @@ class VaccinationDetailViewModel {
     }
 
     var vaccinations: [VaccinationViewModel] {
-        certificates.map { VaccinationViewModel(token: $0.vaccinationCertificate) }
+        certificates.map { VaccinationViewModel(token: $0,
+            repository: VaccinationRepository(service: APIService.create(), parser: QRCoder()),
+            delegate: self,
+            router: router) }
     }
 
     func immunizationButtonTapped() {
         fullImmunization ?
             showCertificate() :
             scanNextCertificate()
-    }
-
-    func delete() {
-        firstly {
-            showDeleteDialog()
-        }
-        .then {
-            self.repository.getVaccinationCertificateList()
-        }
-        .then { list -> Promise<VaccinationCertificateList> in
-            var certList = list
-            certList.certificates.removeAll(where: { certificate in
-                for cert in self.certificates where cert == certificate {
-                    return true
-                }
-                return false
-            })
-            return Promise.value(certList)
-        }
-        .then { list in
-            self.repository.saveVaccinationCertificateList(list).asVoid()
-        }.ensure {
-            self.detailDelegate?.didDeleteCertificate()
-        }.then {
-            self.router.showCertificateOverview()
-        }.done {
-            self.showDeletionSuccessDialog()
-        }
-        .catch { error in
-            self.delegate?.viewModelUpdateDidFailWithError(error)
-        }
     }
 
     func updateFavorite() -> Promise<Void> {
@@ -138,7 +120,7 @@ class VaccinationDetailViewModel {
         }
         .then { cert in
             self.repository.getVaccinationCertificateList().then { list -> Promise<Void> in
-                self.certificates = self.findCertificatePair(cert, list.certificates).sorted(by: { $0.vaccinationCertificate.hcert.dgc.v.first?.dn ?? 0 < $1.vaccinationCertificate.hcert.dgc.v.first?.dn ?? 0 })
+                self.certificates = self.findCertificatePair(cert, list.certificates).sorted(by: { $0.vaccinationCertificate.hcert.dgc.v.first?.dn ?? 0 > $1.vaccinationCertificate.hcert.dgc.v.first?.dn ?? 0 })
                 return Promise.value(())
             }
         }
@@ -160,7 +142,7 @@ class VaccinationDetailViewModel {
         return list
     }
 
-    private func showDeleteDialog() -> Promise<Void> {
+    private func showDeleteDialog(_ vaccination: Vaccination) -> Promise<Void> {
         .init { seal in
             let delete = DialogAction(title: "dialog_delete_certificate_button_delete".localized, style: .destructive) { _ in
                 seal.fulfill_()
@@ -168,9 +150,8 @@ class VaccinationDetailViewModel {
             let cancel = DialogAction(title: "dialog_delete_certificate_button_cancel".localized, style: .cancel) { _ in
                 seal.cancel()
             }
-            let title = String(format: "dialog_delete_certificate_title".localized, self.name)
             self.router.showDialog(
-                title: title,
+                title: String(format: "dialog_delete_certificate_title".localized, vaccination.dn, vaccination.sd),
                 message: "dialog_delete_certificate_message".localized,
                 actions: [delete, cancel],
                 style: .alert
@@ -224,5 +205,36 @@ class VaccinationDetailViewModel {
     private func showCertificate() {
         detailDelegate?.select(certificates: certificates)
         router.showCertificateOverview().cauterize()
+    }
+}
+
+extension VaccinationDetailViewModel: VaccinationDelegate {
+    func didPressDelete(_ vaccination: Vaccination) -> Promise<Void> {
+        self.showDeleteDialog(vaccination)
+    }
+
+    func didUpdateCertificates(_ certificates: [ExtendedCBORWebToken]) {
+        self.certificates = certificates
+        
+        if certificates.isEmpty {
+            router.showCertificateOverview()
+                .done {
+                    self.deletionSuccessful()
+                }.catch { error in
+                    self.delegate?.viewModelUpdateDidFailWithError(error)
+                }
+        } else {
+            deletionSuccessful()
+        }
+    }
+    
+    func updateDidFailWithError(_ error: Error) {
+        self.delegate?.viewModelUpdateDidFailWithError(error)
+    }
+
+    private func deletionSuccessful() {
+        showDeletionSuccessDialog()
+        detailDelegate?.didDeleteCertificate()
+        delegate?.viewModelDidUpdate()
     }
 }

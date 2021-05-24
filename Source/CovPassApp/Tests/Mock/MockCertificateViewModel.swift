@@ -68,7 +68,7 @@ class MockCertificateViewModel: CertificatesOverviewViewModelProtocol {
         // TODO: Add tests
     }
 
-    func scanCertificate() {
+    func scanCertificate(withIntroduction: Bool) {
         // TODO: Add tests
     }
 

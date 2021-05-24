@@ -16,7 +16,7 @@ class ValidationResultViewModel: BaseViewModel, CancellableViewModelProtocol {
 
     weak var delegate: ViewModelDelegate?
     let router: ValidationResultRouterProtocol
-    private let parser = QRCoder()
+    private let repository: VaccinationRepositoryProtocol
     private var certificate: CBORWebToken?
 
     private var immunizationState: ImmunizationState {
@@ -100,9 +100,11 @@ class ValidationResultViewModel: BaseViewModel, CancellableViewModelProtocol {
 
     init(
         router: ValidationResultRouterProtocol,
+        repository: VaccinationRepositoryProtocol,
         certificate: CBORWebToken?
     ) {
         self.router = router
+        self.repository = repository
         self.certificate = certificate
     }
 
@@ -133,7 +135,7 @@ class ValidationResultViewModel: BaseViewModel, CancellableViewModelProtocol {
             try self.payloadFromScannerResult($0)
         }
         .then {
-            self.process(payload: $0)
+            self.repository.checkVaccinationCertificate($0)
         }
         .get {
             self.certificate = $0
@@ -145,10 +147,6 @@ class ValidationResultViewModel: BaseViewModel, CancellableViewModelProtocol {
             self.certificate = nil
             self.delegate?.viewModelDidUpdate()
         }
-    }
-
-    private func process(payload: String) -> Promise<CBORWebToken> {
-        return parser.parse(payload)
     }
 
     private func payloadFromScannerResult(_ result: ScanResult) throws -> String {

@@ -28,8 +28,10 @@ struct ValidationResultSceneFactory: SceneFactory {
     }
 
     func make() -> UIViewController {
+        let repository = VaccinationRepository(service: APIService.create(), parser: QRCoder())
         let viewModel = ValidationResultViewModel(
             router: router,
+            repository: repository,
             certificate: certificate
         )
         let viewController = ValidationResultViewController(viewModel: viewModel)

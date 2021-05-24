@@ -26,7 +26,7 @@ class PassConsentPageViewModelTests: XCTestCase {
         XCTAssertEqual(sut.image, .onboardingScreen4)
         XCTAssertEqual(sut.title, "vaccination_fourth_onboarding_page_title".localized)
         XCTAssertEqual(sut.info, "vaccination_fourth_onboarding_page_message".localized)
-        XCTAssertEqual(sut.dataPrivacyTitle, NSMutableAttributedString(string: "app_information_title_datenschutz_linked".localized).styledAs(.header_3))
+        XCTAssertEqual(sut.dataPrivacyTitle, NSMutableAttributedString(string: "app_information_title_datenschutz".localized).styledAs(.header_3))
         XCTAssertFalse(sut.isScrolledToBottom)
         XCTAssertEqual(sut.toolbarState, .scrollAware)
     }
