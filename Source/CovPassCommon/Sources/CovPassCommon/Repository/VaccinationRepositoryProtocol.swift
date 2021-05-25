@@ -22,6 +22,7 @@ public protocol VaccinationRepositoryProtocol {
 
     /// Update the local trust list once a day
     func updateTrustList() -> Promise<Void>
+
     /// Deletes the given vaccination from their certificate list
     func deleteVaccination(_ vaccination: Vaccination) -> Promise<Void>
 

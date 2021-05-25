@@ -57,50 +57,16 @@ struct VaccinationViewModel {
 
     // MARK: - Lifecycle
 
-<<<<<<< HEAD
     init(
         vaccination: Vaccination,
         delegate: VaccinationViewDelegate?
     ) {
         self.vaccination = vaccination
-=======
-    init(token: ExtendedCBORWebToken,
-         repository: VaccinationRepositoryProtocol,
-         delegate: VaccinationDelegate?,
-         router: VactinationViewRouterProtocol)
-    {
-        self.token = token
-        self.repository = repository
->>>>>>> 1c2317d8558508a8a2a06d7ca3df664b4d47a433
         self.delegate = delegate
     }
 
     func delete() {
-<<<<<<< HEAD
-        guard let vaccination = token.vaccinationCertificate.hcert.dgc.v.first else { return }
-        delegate?.didPressDelete(vaccination).then {
-            self.repository.getVaccinationCertificateList()
-        }.then { list -> Promise<VaccinationCertificateList> in
-            var certList = list
-            certList.certificates.removeAll(where: { cert in
-                if cert.vaccinationCertificate.hcert.dgc.v.first?.ci == self.vaccination?.ci {
-                    return true
-                }
-                return false
-            })
-            return Promise.value(certList)
-        }
-        .then { list -> Promise<VaccinationCertificateList> in
-            self.repository.saveVaccinationCertificateList(list)
-        }.done { list in
-            let certList = list.certificates.filter { $0.vaccinationCertificate.hcert.dgc == self.token.hcert.dgc }
-            self.delegate?.didUpdateCertificates(certList)
-        }.catch { error in
-            self.delegate?.updateDidFailWithError(error)
-        }
-=======
         delegate?.vaccinationViewDidPressDelete(vaccination)
->>>>>>> 196ee5a3... Clean up viewmodels for VaccinationDetail scene and solve a Memory Leak
     }
 
     func showCertificate() {

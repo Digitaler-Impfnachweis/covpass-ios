@@ -45,12 +45,21 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
 
     func refresh() {
         firstly {
-            refreshCertificates()
+            self.refreshCertificates()
         }
         .catch { _ in
             // We should handle this error
             self.delegate?.viewModelDidUpdate()
         }
+    }
+
+    func updateTrustList() {
+        repository
+            .updateTrustList()
+            .done {
+                self.delegate?.viewModelDidUpdate()
+            }
+            .catch { _ in }
     }
 
     private func refreshCertificates() -> Promise<Void> {

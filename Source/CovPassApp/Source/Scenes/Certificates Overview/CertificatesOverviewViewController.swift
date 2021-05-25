@@ -36,11 +36,11 @@ class CertificatesOverviewViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = ""
-        viewModel.updateTrustList()
         setupHeaderView()
         setupActionButton()
         setupCollectionView()
         setupDotIndicator()
+        viewModel.updateTrustList()
         viewModel.refresh()
     }
 

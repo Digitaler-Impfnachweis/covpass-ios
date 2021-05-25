@@ -16,6 +16,7 @@ protocol CertificatesOverviewViewModelProtocol {
     var certificateViewModels: [CardViewModel] { get }
 
     func refresh()
+    func updateTrustList()
     func scanCertificate(withIntroduction: Bool)
     func showAppInformation()
     func showErrorDialog()

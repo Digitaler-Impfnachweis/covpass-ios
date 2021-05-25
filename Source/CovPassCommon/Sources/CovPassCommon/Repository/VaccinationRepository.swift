@@ -52,6 +52,102 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
         }
     }
 
+    public func getLastUpdatedTrustList() -> Date? {
+        UserDefaults.standard.object(forKey: UserDefaults.keyLastUpdatedTrustList) as? Date
+    }
+
+    public func updateTrustList() -> Promise<Void> {
+        firstly {
+            Promise { seal in
+                if let lastUpdated = UserDefaults.standard.object(forKey: UserDefaults.keyLastUpdatedTrustList) as? Date,
+                   let date = Calendar.current.date(byAdding: .day, value: 1, to: lastUpdated)
+                {
+                    if Date() < date {
+                        // Only update once a day
+                        seal.reject(PromiseCancelledError())
+                    }
+                    seal.fulfill_()
+                }
+                // Has never been updated before; load local list and then update it
+                if UserDefaults.standard.object(forKey: UserDefaults.keyLastUpdatedTrustList) == nil {
+                    guard let localTrustListURL = Bundle.module.url(forResource: "dsc", withExtension: "json") else {
+                        seal.reject(ApplicationError.unknownError)
+                        return
+                    }
+                    let localTrustList = try Data(contentsOf: localTrustListURL)
+                    try Keychain.storePassword(localTrustList, for: KeychainConfiguration.trustListKey)
+                }
+                seal.fulfill_()
+            }
+        }
+        .then {
+            service.fetchTrustList()
+        }
+        .map { trustList -> TrustList in
+            let seq = trustList.split(separator: "\n")
+            if seq.count != 2 {
+                throw HCertError.verifyError
+            }
+
+            guard let pubkeyPEM = Bundle.module.url(forResource: "pubkey", withExtension: "pem") else {
+                throw HCertError.verifyError
+            }
+
+            // EC public key (prime256v1) sequence headers (26 blocks) needs to be stripped off
+            //   so it can be used with SecKeyCreateWithData
+            let pubkeyB64 = try String(contentsOf: pubkeyPEM)
+                .replacingOccurrences(of: "-----BEGIN PUBLIC KEY-----", with: "")
+                .replacingOccurrences(of: "-----END PUBLIC KEY-----", with: "")
+                .replacingOccurrences(of: "\n", with: "")
+            let pubkeyDER = Data(base64Encoded: pubkeyB64)!
+            let barekeyDER = pubkeyDER.suffix(from: 26)
+
+            var error: Unmanaged<CFError>?
+            guard let publicKey = SecKeyCreateWithData(
+                barekeyDER as CFData,
+                [
+                    kSecAttrKeyType: kSecAttrKeyTypeEC,
+                    kSecAttrKeyClass: kSecAttrKeyClassPublic
+                ] as CFDictionary,
+                &error
+            ) else {
+                throw HCertError.verifyError
+            }
+
+            guard var signature = Data(base64Encoded: String(seq[0])) else {
+                throw HCertError.verifyError
+            }
+            signature = try ECDSA.convertSignatureData(signature)
+            guard let signedData = String(seq[1]).data(using: .utf8) else {
+                throw HCertError.verifyError
+            }
+            let signedDataHashed = signedData.sha256()
+
+            let result = SecKeyVerifySignature(
+                publicKey, .ecdsaSignatureDigestX962SHA256,
+                signedDataHashed as CFData,
+                signature as CFData,
+                &error
+            )
+            if error != nil {
+                throw HCertError.verifyError
+            }
+
+            if !result {
+                throw HCertError.verifyError
+            }
+
+            // Validation successful, save trust list
+            return try JSONDecoder().decode(TrustList.self, from: signedData)
+        }
+        .map { trustList in
+            let data = try JSONEncoder().encode(trustList)
+            try Keychain.storePassword(data, for: KeychainConfiguration.trustListKey)
+            UserDefaults.standard.setValue(Date(), forKey: UserDefaults.keyLastUpdatedTrustList)
+        }
+    }
+
+
     public func deleteVaccination(_ vaccination: Vaccination) -> Promise<Void> {
         firstly {
             getVaccinationCertificateList()
