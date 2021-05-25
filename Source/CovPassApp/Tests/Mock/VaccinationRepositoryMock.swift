@@ -10,7 +10,7 @@ import CovPassCommon
 import Foundation
 import PromiseKit
 
-public struct VaccinationRepositoryMock: VaccinationRepositoryProtocol {
+public class VaccinationRepositoryMock: VaccinationRepositoryProtocol {
     public func getLastUpdatedTrustList() -> Date? {
         return nil
     }
@@ -25,6 +25,20 @@ public struct VaccinationRepositoryMock: VaccinationRepositoryProtocol {
 
     public func saveVaccinationCertificateList(_: VaccinationCertificateList) -> Promise<VaccinationCertificateList> {
         return Promise.value(VaccinationCertificateList(certificates: []))
+    }
+
+    public func deleteVaccination(_ vaccination: Vaccination) -> Promise<Void> {
+        .value
+    }
+
+    var favoriteToggle = false
+    public func toggleFavoriteStateForCertificateWithIdentifier(_ id: String) -> Promise<Bool> {
+        favoriteToggle.toggle()
+        return .value(favoriteToggle)
+    }
+
+    public func favoriteStateForCertificates(_ certificates: [ExtendedCBORWebToken]) -> Promise<Bool> {
+        .value(favoriteToggle)
     }
 
     public func refreshValidationCA() -> Promise<Void> {
