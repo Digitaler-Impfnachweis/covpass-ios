@@ -1,8 +1,7 @@
-import XCTest
 @testable import Keychain
+import XCTest
 
 final class KeychainTests: XCTestCase {
-    
     func testBaseQuery() {
         let key = "some_key"
         let dictionary = Keychain.baseQuery(withKey: key, querySecClass: kSecClassCertificate)
@@ -11,6 +10,6 @@ final class KeychainTests: XCTestCase {
     }
 
     static var allTests = [
-        ("testExample", testBaseQuery),
+        ("testExample", testBaseQuery)
     ]
 }

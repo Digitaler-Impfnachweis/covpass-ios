@@ -6,11 +6,11 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
+import CovPassCommon
+import CovPassUI
 import Foundation
 import PromiseKit
 import UIKit
-import CovPassCommon
-import CovPassUI
 
 class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
     // MARK: - Properties

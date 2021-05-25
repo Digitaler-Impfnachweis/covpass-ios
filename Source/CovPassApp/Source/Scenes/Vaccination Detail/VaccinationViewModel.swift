@@ -6,9 +6,9 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-import Foundation
 import CovPassCommon
 import CovPassUI
+import Foundation
 import PromiseKit
 
 struct VaccinationViewModel {
@@ -40,7 +40,7 @@ struct VaccinationViewModel {
     }
 
     var fullVaccineProduct: String {
-        "\(vaccineCode)(\(vaccine))"
+        "\(vaccineCode) (\(vaccine))"
     }
 
     var issuer: String {
@@ -57,18 +57,28 @@ struct VaccinationViewModel {
 
     // MARK: - Lifecycle
 
+<<<<<<< HEAD
     init(
         vaccination: Vaccination,
         delegate: VaccinationViewDelegate?
     ) {
         self.vaccination = vaccination
+=======
+    init(token: ExtendedCBORWebToken,
+         repository: VaccinationRepositoryProtocol,
+         delegate: VaccinationDelegate?,
+         router: VactinationViewRouterProtocol)
+    {
+        self.token = token
+        self.repository = repository
+>>>>>>> 1c2317d8558508a8a2a06d7ca3df664b4d47a433
         self.delegate = delegate
     }
 
     func delete() {
 <<<<<<< HEAD
         guard let vaccination = token.vaccinationCertificate.hcert.dgc.v.first else { return }
-        self.delegate?.didPressDelete(vaccination).then {
+        delegate?.didPressDelete(vaccination).then {
             self.repository.getVaccinationCertificateList()
         }.then { list -> Promise<VaccinationCertificateList> in
             var certList = list
@@ -92,7 +102,7 @@ struct VaccinationViewModel {
         delegate?.vaccinationViewDidPressDelete(vaccination)
 >>>>>>> 196ee5a3... Clean up viewmodels for VaccinationDetail scene and solve a Memory Leak
     }
-    
+
     func showCertificate() {
         delegate?.vaccinationViewDidPressShowQRCode(vaccination)
     }

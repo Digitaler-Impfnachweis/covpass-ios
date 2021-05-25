@@ -6,8 +6,8 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-import UIKit
 import CovPassUI
+import UIKit
 
 class CertificateViewController: UIViewController {
     // MARK: - IBOutlet
@@ -15,7 +15,7 @@ class CertificateViewController: UIViewController {
     @IBOutlet var headline: InfoHeaderView!
     @IBOutlet var imageView: UIImageView!
     @IBOutlet var toolbarView: CustomToolbarView!
-    
+
     // MARK: - Properties
 
     private(set) var viewModel: CertificateViewModel

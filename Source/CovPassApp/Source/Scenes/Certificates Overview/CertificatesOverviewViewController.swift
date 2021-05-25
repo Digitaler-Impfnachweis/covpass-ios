@@ -6,11 +6,11 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
+import CovPassCommon
+import CovPassUI
 import Foundation
 import Scanner
 import UIKit
-import CovPassCommon
-import CovPassUI
 
 class CertificatesOverviewViewController: UIViewController {
     // MARK: - IBOutlet
@@ -36,6 +36,7 @@ class CertificatesOverviewViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = ""
+        viewModel.updateTrustList()
         setupHeaderView()
         setupActionButton()
         setupCollectionView()

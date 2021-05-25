@@ -5,21 +5,20 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-import Keychain
-import UIKit
 import CovPassCommon
 import CovPassUI
+import Keychain
+import UIKit
 
 @UIApplicationMain
 final class AppDelegate: UIResponder, UIApplicationDelegate {
-
     var window: UIWindow?
     var sceneCoordinator: DefaultSceneCoordinator?
 
     func application(
-        _ application: UIApplication,
-        didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-
+        _: UIApplication,
+        didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]?
+    ) -> Bool {
         try? clearKeychainOnFreshInstall()
         try? UIFont.loadCustomFonts()
 

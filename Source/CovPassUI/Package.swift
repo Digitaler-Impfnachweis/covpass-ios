@@ -11,7 +11,8 @@ let package = Package(
         // Products define the executables and libraries a package produces, and make them visible to other packages.
         .library(
             name: "CovPassUI",
-            targets: ["CovPassUI"]),
+            targets: ["CovPassUI"]
+        )
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
@@ -24,9 +25,11 @@ let package = Package(
         .target(
             name: "CovPassUI",
             dependencies: ["CovPassCommon"],
-            resources: [.process("Resources")]),
+            resources: [.process("Resources")]
+        ),
         .testTarget(
             name: "CovPassUITests",
-            dependencies: ["CovPassUI"]),
+            dependencies: ["CovPassUI"]
+        )
     ]
 )

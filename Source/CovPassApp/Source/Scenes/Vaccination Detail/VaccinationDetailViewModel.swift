@@ -10,6 +10,8 @@ import PromiseKit
 import UIKit
 import CovPassCommon
 import CovPassUI
+import PromiseKit
+import UIKit
 
 class VaccinationDetailViewModel: VaccinationDetailViewModelProtocol {
     // MARK: - Properties
@@ -28,7 +30,7 @@ class VaccinationDetailViewModel: VaccinationDetailViewModelProtocol {
     var favoriteIcon: UIImage? {
         isFavorite ? .starFull : .starPartial
     }
-    
+
     var name: String {
         certificates.first?.vaccinationCertificate.hcert.dgc.nam.fullName ?? ""
     }
@@ -43,9 +45,17 @@ class VaccinationDetailViewModel: VaccinationDetailViewModelProtocol {
     }
 
     var immunizationTitle: String {
-        fullImmunization ?
-            "vaccination_certificate_detail_view_complete_title".localized :
-            String(format: "vaccination_certificate_detail_view_incomplete_title".localized, 1, 2)
+        guard let cert = certificates.first?.vaccinationCertificate.hcert.dgc else {
+            return String(format: "vaccination_certificate_detail_view_incomplete_title".localized, 1, 2)
+        }
+
+        if cert.fullImmunizationValid {
+            return "vaccination_certificate_detail_view_complete_title".localized
+        } else if let date = cert.fullImmunizationValidFrom, fullImmunization {
+            return String(format: "vaccination_start_screen_qrcode_complete_from_date_subtitle".localized, DateUtils.displayDateFormatter.string(from: date))
+        }
+
+        return String(format: "vaccination_certificate_detail_view_incomplete_title".localized, 1, 2)
     }
 
     var immunizationBody: String {

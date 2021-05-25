@@ -17,16 +17,16 @@ public enum HCertError: Error {
 }
 
 class HCert {
-    func verify(message: CoseSign1Message, certificates: [URL]) -> Bool {
-        for cert in certificates {
-            if let valid = try? verify(message: message, certificate: cert), valid {
+    func verify(message: CoseSign1Message, trustList: TrustList) -> Bool {
+        for cert in trustList.certificates {
+            if let valid = try? verify(message: message, certificate: cert.rawData), valid {
                 return true
             }
         }
         return false
     }
 
-    private func verify(message: CoseSign1Message, certificate: URL) throws -> Bool {
+    private func verify(message: CoseSign1Message, certificate: String) throws -> Bool {
         let signedPayload: [UInt8] = SwiftCBOR.CBOR.encode(
             [
                 "Signature1",
@@ -47,10 +47,8 @@ class HCert {
         return result
     }
 
-    private func loadPublicKey(from resource: URL) throws -> SecKey {
-        let certificate = try Data(contentsOf: resource)
-        let certificateBase64 = certificate.base64EncodedString()
-        guard let certificateData = Data(base64Encoded: certificateBase64),
+    private func loadPublicKey(from data: String) throws -> SecKey {
+        guard let certificateData = Data(base64Encoded: data),
               let cert = SecCertificateCreateWithData(nil, certificateData as CFData),
               let publicKey = SecCertificateCopyKey(cert)
         else {

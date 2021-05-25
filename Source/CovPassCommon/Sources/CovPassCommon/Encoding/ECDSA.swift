@@ -19,7 +19,7 @@ struct ECDSA {
     static func convertSignatureData(_ data: Data) throws -> Data {
         let sigR = ECDSA.encodeInteger(data.prefix(data.count - length))
         let sigS = ECDSA.encodeInteger(data.suffix(length))
-        if (sigS.count + sigR.count > byteLength) {
+        if sigS.count + sigR.count > byteLength {
             throw HCertError.verifyError
         }
         return Data([tagSequence] + [UInt8(sigR.count + sigS.count)] + sigR + sigS)

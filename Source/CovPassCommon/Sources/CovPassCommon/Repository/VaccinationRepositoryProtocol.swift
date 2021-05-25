@@ -17,6 +17,11 @@ public protocol VaccinationRepositoryProtocol {
     /// Save the vaccination certificate list
     func saveVaccinationCertificateList(_ certificateList: VaccinationCertificateList) -> Promise<VaccinationCertificateList>
 
+    /// Get the date when the trust list got updated last
+    func getLastUpdatedTrustList() -> Date?
+
+    /// Update the local trust list once a day
+    func updateTrustList() -> Promise<Void>
     /// Deletes the given vaccination from their certificate list
     func deleteVaccination(_ vaccination: Vaccination) -> Promise<Void>
 

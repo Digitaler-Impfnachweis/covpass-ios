@@ -97,19 +97,19 @@ public extension NSAttributedString {
     }
 
     func appendBullets(_ bullets: [NSAttributedString], spacing: CGFloat? = nil) -> NSAttributedString {
-      let origin = NSMutableAttributedString(attributedString: self)
-      var list = NSAttributedString(string: "")
-      bullets.forEach { list = list.appendBullet($0, spacing: spacing) }
-      origin.append(list)
-      return origin
+        let origin = NSMutableAttributedString(attributedString: self)
+        var list = NSAttributedString(string: "")
+        bullets.forEach { list = list.appendBullet($0, spacing: spacing) }
+        origin.append(list)
+        return origin
     }
 
     static func toBullets(_ bullets: [NSAttributedString]) -> NSAttributedString {
-      var list = NSAttributedString()
-      for (index, bullet) in bullets.enumerated() {
-        list = list.appendBullet(bullet, forceNewline: index != 0)
-      }
-      return list
+        var list = NSAttributedString()
+        for (index, bullet) in bullets.enumerated() {
+            list = list.appendBullet(bullet, forceNewline: index != 0)
+        }
+        return list
     }
 
     // Sets an attribute for a given range.
@@ -153,12 +153,12 @@ public extension NSAttributedString {
         let font = (bulletAttributes[.font] as? UIFont) ?? UIFont.preferredFont(forTextStyle: .body)
         let indentSize = font.pointSize
         return list.paragraphStyled { style in
-          style.alignment = .left
-          style.tabStops = [NSTextTab(textAlignment: .left, location: indentSize, options: [:])]
-          style.defaultTabInterval = indentSize
-          style.headIndent = indentSize
-          style.paragraphSpacingBefore = spacing ?? font.lineHeight
-          style.firstLineHeadIndent = 0
+            style.alignment = .left
+            style.tabStops = [NSTextTab(textAlignment: .left, location: indentSize, options: [:])]
+            style.defaultTabInterval = indentSize
+            style.headIndent = indentSize
+            style.paragraphSpacingBefore = spacing ?? font.lineHeight
+            style.firstLineHeadIndent = 0
         }
-      }
+    }
 }

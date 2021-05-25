@@ -13,15 +13,17 @@ import PromiseKit
 public struct VaccinationRepository: VaccinationRepositoryProtocol {
     private let service: APIServiceProtocol
     private let parser: QRCoderProtocol
-    private let certificates: [URL]
+
+    private var trustList: TrustList? {
+        guard let trustListData = try? Keychain.fetchPassword(for: KeychainConfiguration.trustListKey),
+              let list = try? JSONDecoder().decode(TrustList.self, from: trustListData)
+        else { return nil }
+        return list
+    }
 
     public init(service: APIServiceProtocol, parser: QRCoderProtocol) {
         self.service = service
         self.parser = parser
-
-        certificates = XCConfiguration.value([String].self, forKey: "CA_CERTIFICATE_SIGNATURES").compactMap {
-            Bundle.module.url(forResource: $0, withExtension: "der")
-        }
     }
 
     public func getVaccinationCertificateList() -> Promise<VaccinationCertificateList> {
@@ -85,8 +87,11 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
             guard let decompressedPayload = Compression.decompress(Data(base45Decoded)) else {
                 throw ApplicationError.general("Could not decompress QR Code data")
             }
+            guard let trustList = self.trustList else {
+                throw ApplicationError.general("Missing TrustLIst")
+            }
             guard let cosePayload = try CoseSign1Parser().parse(decompressedPayload),
-                  HCert().verify(message: cosePayload, certificates: certificates)
+                  HCert().verify(message: cosePayload, trustList: trustList)
             else {
                 throw HCertError.verifyError
             }
@@ -123,9 +128,11 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
             guard let decompressedPayload = Compression.decompress(Data(base45Decoded)) else {
                 throw ApplicationError.general("Could not decompress QR Code data")
             }
-
+            guard let trustList = self.trustList else {
+                throw ApplicationError.general("Missing TrustLIst")
+            }
             guard let cosePayload = try CoseSign1Parser().parse(decompressedPayload),
-                  HCert().verify(message: cosePayload, certificates: certificates)
+                  HCert().verify(message: cosePayload, trustList: trustList)
             else {
                 throw HCertError.verifyError
             }

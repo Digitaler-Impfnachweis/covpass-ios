@@ -6,9 +6,9 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-import UIKit
 import CovPassCommon
 import CovPassUI
+import UIKit
 
 struct MainSceneFactory: SceneFactory {
     // MARK: - Properties
