@@ -41,10 +41,6 @@ public class VaccinationRepositoryMock: VaccinationRepositoryProtocol {
         .value(favoriteToggle)
     }
 
-    public func refreshValidationCA() -> Promise<Void> {
-        return Promise.value(())
-    }
-
     public func scanVaccinationCertificate(_: String) -> Promise<ExtendedCBORWebToken> {
         return Promise { seal in
             seal.reject(ApplicationError.unknownError)

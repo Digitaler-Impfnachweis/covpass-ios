@@ -26,9 +26,6 @@ public protocol VaccinationRepositoryProtocol {
     /// Deletes the given vaccination from their certificate list
     func deleteVaccination(_ vaccination: Vaccination) -> Promise<Void>
 
-    /// Refreshes the local validation CA
-    func refreshValidationCA() -> Promise<Void>
-
     /// scanVaccinationCertificate validates the given QR code, parses it, and returns everything as an ExtendedCBORWebToken.
     ///
     /// If an error occurs, the method will not return a certificate but an error

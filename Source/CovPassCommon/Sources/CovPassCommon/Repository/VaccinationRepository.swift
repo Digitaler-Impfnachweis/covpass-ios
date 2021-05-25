@@ -169,11 +169,6 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
         .asVoid()
     }
 
-    public func refreshValidationCA() -> Promise<Void> {
-        // TOOD add implementation
-        return Promise.value(())
-    }
-
     public func scanVaccinationCertificate(_ data: String) -> Promise<ExtendedCBORWebToken> {
         firstly {
             parser.parse(data)
