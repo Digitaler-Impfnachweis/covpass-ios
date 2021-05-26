@@ -27,7 +27,7 @@ public class VaccinationRepositoryMock: VaccinationRepositoryProtocol {
         return Promise.value(VaccinationCertificateList(certificates: []))
     }
 
-    public func deleteVaccination(_ vaccination: Vaccination) -> Promise<Void> {
+    public func delete(_ vaccination: Vaccination) -> Promise<Void> {
         .value
     }
 

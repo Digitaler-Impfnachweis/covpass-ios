@@ -175,7 +175,7 @@ class VaccinationDetailViewModel: VaccinationDetailViewModelProtocol {
         router.showUnexpectedErrorDialog()
     }
 
-    private func deleteVaccination(_ vaccination: Vaccination) {
+    private func delete(_ vaccination: Vaccination) {
         guard let certificate = certificates.first(for: vaccination) else {
             showErrorDialog()
             return
@@ -184,7 +184,7 @@ class VaccinationDetailViewModel: VaccinationDetailViewModelProtocol {
             showDeleteDialog(vaccination)
         }
         .then {
-            self.repository.deleteVaccination(vaccination)
+            self.repository.delete(vaccination)
         }
         .then {
             self.repository.getVaccinationCertificateList()
@@ -258,7 +258,7 @@ class VaccinationDetailViewModel: VaccinationDetailViewModelProtocol {
 
 extension VaccinationDetailViewModel: VaccinationViewDelegate {
     func vaccinationViewDidPressDelete(_ vaccination: Vaccination) {
-        deleteVaccination(vaccination)
+        delete(vaccination)
     }
 
     func vaccinationViewDidPressShowQRCode(_ vaccination: Vaccination) {

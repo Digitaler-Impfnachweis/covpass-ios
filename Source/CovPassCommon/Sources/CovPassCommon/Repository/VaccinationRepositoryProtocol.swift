@@ -24,7 +24,7 @@ public protocol VaccinationRepositoryProtocol {
     func updateTrustList() -> Promise<Void>
 
     /// Deletes the given vaccination from their certificate list
-    func deleteVaccination(_ vaccination: Vaccination) -> Promise<Void>
+    func delete(_ vaccination: Vaccination) -> Promise<Void>
 
     /// scanVaccinationCertificate validates the given QR code, parses it, and returns everything as an ExtendedCBORWebToken.
     ///

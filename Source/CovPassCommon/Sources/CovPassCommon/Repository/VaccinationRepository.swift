@@ -147,8 +147,7 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
         }
     }
 
-
-    public func deleteVaccination(_ vaccination: Vaccination) -> Promise<Void> {
+    public func delete(_ vaccination: Vaccination) -> Promise<Void> {
         firstly {
             getVaccinationCertificateList()
         }
