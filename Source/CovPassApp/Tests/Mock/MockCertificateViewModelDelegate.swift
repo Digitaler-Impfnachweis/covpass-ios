@@ -12,23 +12,18 @@ import Foundation
 
 class MockCertificateViewModelDelegate: CertificatesOverviewViewModelDelegate {
     var updateCalled = false
-    var updateFavoriteCalled = false
-    var deleteCertificateCalled = false
+    var needsFirstCertificateVisibleCalled = false
+    var needsCertificateVisibleAtIndex: Int?
 
     func viewModelDidUpdate() {
         updateCalled = true
     }
 
-    func viewModelDidUpdateFavorite() {
-        updateFavoriteCalled = true
+    func viewModelNeedsFirstCertificateVisible() {
+        needsFirstCertificateVisibleCalled = true
     }
 
-    func viewModelDidDeleteCertificate() {
-        deleteCertificateCalled = true
-    }
-
-    var receivedError: Error?
-    func viewModelUpdateDidFailWithError(_ error: Error) {
-        receivedError = error
+    func viewModelNeedsCertificateVisible(at index: Int) {
+        needsCertificateVisibleAtIndex = index
     }
 }

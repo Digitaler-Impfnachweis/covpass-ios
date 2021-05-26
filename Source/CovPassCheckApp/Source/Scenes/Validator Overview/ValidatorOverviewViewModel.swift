@@ -13,12 +13,10 @@ import PromiseKit
 import UIKit
 
 class ValidatorOverviewViewModel {
-    // MARK: - Private
+    // MARK: - Properties
 
     private let repository: VaccinationRepositoryProtocol
     private let router: ValidatorOverviewRouterProtocol
-
-    // MARK: - Internal
 
     var delegate: ViewModelDelegate?
 
@@ -60,7 +58,7 @@ class ValidatorOverviewViewModel {
         self.repository = repository
     }
 
-    // MARK: - Actions
+    // MARK: - Methods
 
     func updateTrustList() {
         repository

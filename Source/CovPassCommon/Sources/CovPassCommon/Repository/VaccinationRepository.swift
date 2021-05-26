@@ -147,6 +147,27 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
         }
     }
 
+    public func delete(_ vaccination: Vaccination) -> Promise<Void> {
+        firstly {
+            getVaccinationCertificateList()
+        }
+        .then { list -> Promise<VaccinationCertificateList> in
+            var certList = list
+            // delete favorite if needed
+            if certList.favoriteCertificateId == vaccination.ci {
+                certList.favoriteCertificateId = nil
+            }
+            certList.certificates.removeAll(where: { cert in
+                cert.vaccinationCertificate.hcert.dgc.v.first?.ci == vaccination.ci
+            })
+            return Promise.value(certList)
+        }
+        .then { list -> Promise<VaccinationCertificateList> in
+            saveVaccinationCertificateList(list)
+        }
+        .asVoid()
+    }
+
     public func scanVaccinationCertificate(_ data: String) -> Promise<ExtendedCBORWebToken> {
         firstly {
             parser.parse(data)
@@ -206,6 +227,32 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
                 throw HCertError.verifyError
             }
             return token
+        }
+    }
+
+    public func toggleFavoriteStateForCertificateWithIdentifier(_ id: String) -> Promise<Bool> {
+        firstly {
+            getVaccinationCertificateList()
+        }
+        .map { list in
+            var certList = list
+            certList.favoriteCertificateId = certList.favoriteCertificateId == id ? nil : id
+            return certList
+        }
+        .then { list in
+            self.saveVaccinationCertificateList(list)
+        }
+        .map { list in
+            list.favoriteCertificateId == id
+        }
+    }
+
+    public func favoriteStateForCertificates(_ certificates: [ExtendedCBORWebToken]) -> Promise<Bool> {
+        firstly {
+            getVaccinationCertificateList()
+        }
+        .map { currentList in
+            certificates.contains(where: { $0.vaccinationCertificate.hcert.dgc.v.first?.ci == currentList.favoriteCertificateId })
         }
     }
 }

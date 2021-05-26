@@ -29,14 +29,14 @@ class VaccinationDetailViewController: UIViewController {
 
     // MARK: - Properties
 
-    private(set) var viewModel: VaccinationDetailViewModel
+    private(set) var viewModel: VaccinationDetailViewModelProtocol
 
     // MARK: - Lifecycle
 
     @available(*, unavailable)
     required init?(coder _: NSCoder) { fatalError("init?(coder: NSCoder) not implemented yet") }
 
-    init(viewModel: VaccinationDetailViewModel) {
+    init(viewModel: VaccinationDetailViewModelProtocol) {
         self.viewModel = viewModel
         super.init(nibName: String(describing: Self.self), bundle: .main)
     }
@@ -44,23 +44,11 @@ class VaccinationDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.delegate = self
-        setupNavigationBar()
         setupView()
+        viewModel.refresh()
     }
 
     // MARK: - Methods
-
-    private func setupNavigationBar() {
-        title = "vaccination_certificate_detail_view_title".localized
-
-        navigationController?.navigationBar.backIndicatorImage = .arrowBack
-        navigationController?.navigationBar.backIndicatorTransitionMaskImage = .arrowBack
-        navigationController?.navigationBar.tintColor = .onBackground100
-
-        let favoriteIcon = UIBarButtonItem(image: viewModel.isFavorite ? .starFull : .starPartial, style: .plain, target: self, action: #selector(onFavorite))
-        favoriteIcon.tintColor = .onBackground100
-        navigationItem.rightBarButtonItem = favoriteIcon
-    }
 
     private func setupView() {
         view.backgroundColor = .backgroundPrimary
@@ -70,6 +58,19 @@ class VaccinationDetailViewController: UIViewController {
         setupImmunizationView()
         setupPersonalData()
         setupVaccinations()
+        setupNavigationBar()
+    }
+
+    private func setupNavigationBar() {
+        title = "vaccination_certificate_detail_view_title".localized
+
+        navigationController?.navigationBar.backIndicatorImage = .arrowBack
+        navigationController?.navigationBar.backIndicatorTransitionMaskImage = .arrowBack
+        navigationController?.navigationBar.tintColor = .onBackground100
+
+        let favoriteIcon = UIBarButtonItem(image: viewModel.favoriteIcon, style: .plain, target: self, action: #selector(toggleFavorite))
+        favoriteIcon.tintColor = .onBackground100
+        navigationItem.rightBarButtonItem = favoriteIcon
     }
 
     private func setupHeadline() {
@@ -122,16 +123,8 @@ class VaccinationDetailViewController: UIViewController {
         }
     }
 
-    @objc private func onFavorite() {
-        firstly {
-            viewModel.updateFavorite()
-        }
-        .done {
-            self.setupNavigationBar()
-        }
-        .catch { _ in
-            self.viewModel.showErrorDialog()
-        }
+    @objc private func toggleFavorite() {
+        viewModel.toggleFavorite()
     }
 }
 
@@ -141,6 +134,6 @@ extension VaccinationDetailViewController: ViewModelDelegate {
     }
 
     func viewModelUpdateDidFailWithError(_: Error) {
-        viewModel.showErrorDialog()
+        // already handled in ViewModel
     }
 }

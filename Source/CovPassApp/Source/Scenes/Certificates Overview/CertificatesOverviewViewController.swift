@@ -20,8 +20,6 @@ class CertificatesOverviewViewController: UIViewController {
     @IBOutlet var collectionView: UICollectionView!
     @IBOutlet var dotPageIndicator: DotPageIndicator!
 
-    // MARK: - Public
-
     private(set) var viewModel: CertificatesOverviewViewModelProtocol
 
     // MARK: - Lifecycle
@@ -38,25 +36,17 @@ class CertificatesOverviewViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = ""
-        viewModel.updateTrustList()
         setupHeaderView()
         setupActionButton()
-        setupCollecttionView()
+        setupCollectionView()
         setupDotIndicator()
-        viewModel.loadCertificates()
+        viewModel.updateTrustList()
+        viewModel.refresh()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        if let selectedCertificateIndex = viewModel.selectedCertificateIndex {
-            collectionView.scrollToItem(at: IndexPath(item: selectedCertificateIndex, section: 0), at: .centeredHorizontally, animated: true)
-            dotPageIndicator.selectDot(withIndex: selectedCertificateIndex)
-        }
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -80,7 +70,7 @@ class CertificatesOverviewViewController: UIViewController {
         }
     }
 
-    private func setupCollecttionView() {
+    private func setupCollectionView() {
         collectionView.clipsToBounds = false
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -95,7 +85,7 @@ class CertificatesOverviewViewController: UIViewController {
     private func setupActionButton() {
         addButton.icon = .plus
         addButton.action = { [weak self] in
-            self?.viewModel.scanCertificate(withIntroduction: true)
+            self?.viewModel.scanCertificate()
         }
     }
 
@@ -163,19 +153,13 @@ extension CertificatesOverviewViewController: CertificatesOverviewViewModelDeleg
         reloadCollectionView()
     }
 
-    func viewModelDidUpdateFavorite() {
-        collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .centeredHorizontally, animated: false)
+    func viewModelNeedsFirstCertificateVisible() {
+        collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .centeredHorizontally, animated: true)
         dotPageIndicator.selectDot(withIndex: 0)
-        viewModel.loadCertificates()
     }
 
-    func viewModelDidDeleteCertificate() {
-        collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .centeredHorizontally, animated: false)
-        dotPageIndicator.selectDot(withIndex: 0)
-        viewModel.loadCertificates()
-    }
-
-    func viewModelUpdateDidFailWithError(_: Error) {
-        viewModel.showErrorDialog()
+    func viewModelNeedsCertificateVisible(at index: Int) {
+        collectionView.scrollToItem(at: IndexPath(item: index, section: 0), at: .centeredHorizontally, animated: true)
+        dotPageIndicator.selectDot(withIndex: index)
     }
 }

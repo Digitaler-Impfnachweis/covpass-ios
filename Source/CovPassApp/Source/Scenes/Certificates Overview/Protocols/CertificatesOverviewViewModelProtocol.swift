@@ -13,14 +13,17 @@ import UIKit
 
 protocol CertificatesOverviewViewModelProtocol {
     var delegate: CertificatesOverviewViewModelDelegate? { get set }
-    var certificateViewModels: [CardViewModel] { get set }
-    var selectedCertificateIndex: Int? { get set }
-    func process(payload: String) -> Promise<ExtendedCBORWebToken>
+    var certificateViewModels: [CardViewModel] { get }
+
+    func refresh()
     func updateTrustList()
-    func loadCertificates()
-    func showCertificate(at indexPath: IndexPath)
-    func showCertificate(_ certificate: ExtendedCBORWebToken)
     func scanCertificate(withIntroduction: Bool)
     func showAppInformation()
     func showErrorDialog()
+}
+
+extension CertificatesOverviewViewModelProtocol {
+    func scanCertificate() {
+        scanCertificate(withIntroduction: true)
+    }
 }

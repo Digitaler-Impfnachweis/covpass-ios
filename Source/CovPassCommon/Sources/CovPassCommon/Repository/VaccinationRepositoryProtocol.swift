@@ -23,6 +23,9 @@ public protocol VaccinationRepositoryProtocol {
     /// Update the local trust list once a day
     func updateTrustList() -> Promise<Void>
 
+    /// Deletes the given vaccination from their certificate list
+    func delete(_ vaccination: Vaccination) -> Promise<Void>
+
     /// scanVaccinationCertificate validates the given QR code, parses it, and returns everything as an ExtendedCBORWebToken.
     ///
     /// If an error occurs, the method will not return a certificate but an error
@@ -34,4 +37,11 @@ public protocol VaccinationRepositoryProtocol {
     ///
     /// - USED BY CovPassCheck App
     func checkVaccinationCertificate(_ data: String) -> Promise<CBORWebToken>
+
+    /// Toogles the favorite state and returns the updated flag
+    func toggleFavoriteStateForCertificateWithIdentifier(_ id: String) -> Promise<Bool>
+
+    /// Returns true if collection contains a favorite certificate. False otherwise.
+    func favoriteStateForCertificates(_ certificates: [ExtendedCBORWebToken]) -> Promise<Bool>
+
 }
