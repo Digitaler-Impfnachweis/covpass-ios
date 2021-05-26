@@ -57,7 +57,7 @@ struct VaccinationViewModel {
     }
 
     var uvci: String {
-        vaccination?.ci.strip("URN:UVCI:") ?? ""
+        vaccination?.ci.strip(prefix: "URN:UVCI:") ?? ""
     }
 
     // MARK: - Lifecycle

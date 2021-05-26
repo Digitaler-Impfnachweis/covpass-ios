@@ -9,7 +9,7 @@
 import Foundation
 
 extension String {
-    func strip(_ prefix: String) -> String {
+    func strip(prefix: String) -> String {
         guard self.hasPrefix(prefix) else { return self }
         return String(self.dropFirst(prefix.count))
     }
