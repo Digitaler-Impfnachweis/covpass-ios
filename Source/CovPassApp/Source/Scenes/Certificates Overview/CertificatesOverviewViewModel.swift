@@ -140,13 +140,13 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
 
     private func onFavorite(_ id: String) {
         firstly {
-            repository.toggleFavoriteStateForCertificateWithIdentifier(id).asVoid()
+            repository.toggleFavoriteStateForCertificateWithIdentifier(id)
         }
-        .then {
-            self.refreshCertificates()
+        .then { isFavorite in
+            self.refreshCertificates().map { isFavorite }
         }
-        .done {
-            self.lastKnownFavoriteCertificateId = id
+        .done { isFavorite in
+            self.lastKnownFavoriteCertificateId = isFavorite ? id : nil
             self.delegate?.viewModelNeedsFirstCertificateVisible()
         }
         .catch { _ in
