@@ -37,6 +37,8 @@ public class QRContainerView: XibView {
         }
     }
 
+    private let cornerRadius: CGFloat = 30
+
     // MARK: - Lifecycle
 
     override public func initView() {
@@ -47,7 +49,7 @@ public class QRContainerView: XibView {
             bottom: .space_10,
             right: .space_10
         )
-        contentView?.layer.cornerRadius = 30
+        contentView?.layer.cornerRadius = cornerRadius
         contentView?.layer.masksToBounds = true
     }
 
