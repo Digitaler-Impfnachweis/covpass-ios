@@ -132,13 +132,13 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
                 token: certificate,
                 isFavorite: certificateList.isFavoriteCertificate(certificate),
                 onAction: showCertificate,
-                onFavorite: onFavorite,
+                onFavorite: toggleFavoriteStateForCertificateWithId,
                 repository: repository
             )
         }
     }
 
-    private func onFavorite(_ id: String) {
+    private func toggleFavoriteStateForCertificateWithId(_ id: String) {
         firstly {
             repository.toggleFavoriteStateForCertificateWithIdentifier(id)
         }
