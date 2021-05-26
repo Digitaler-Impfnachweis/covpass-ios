@@ -13,10 +13,23 @@ import PromiseKit
 import UIKit
 
 class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
-    // MARK: - Private Properties
+    // MARK: - Properties
 
+    weak var delegate: CertificatesOverviewViewModelDelegate?
     private var router: CertificatesOverviewRouterProtocol
     private let repository: VaccinationRepositoryProtocol
+    private var certificateList = VaccinationCertificateList(certificates: [])
+    private var lastKnownFavoriteCertificateId: String?
+
+    private var matchedCertificates: [ExtendedCBORWebToken] {
+        certificateList.certificates
+            .makeFirstWithId(certificateList.favoriteCertificateId)
+            .flatMapCertificatePairs()
+    }
+
+    var certificateViewModels: [CardViewModel] {
+        cardViewModels(for: matchedCertificates)
+    }
 
     // MARK: - Lifecycle
 
@@ -26,25 +39,18 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
     ) {
         self.router = router
         self.repository = repository
-        self.router.delegate = self
     }
 
-    // MARK: - Properties
+    // MARK: - Methods
 
-    weak var delegate: CertificatesOverviewViewModelDelegate?
-    var certificateViewModels = [CardViewModel]()
-    var certificateList = VaccinationCertificateList(certificates: [])
-    var matchedCertificates: [ExtendedCBORWebToken] {
-        let certs = sortFavorite(certificateList.certificates, favorite: certificateList.favoriteCertificateId ?? "")
-        return matchCertificates(certs)
-    }
-
-    var selectedCertificateIndex: Int?
-
-    // MARK: - Actions
-
-    func process(payload: String) -> Promise<ExtendedCBORWebToken> {
-        return repository.scanVaccinationCertificate(payload)
+    func refresh() {
+        firstly {
+            self.refreshCertificates()
+        }
+        .catch { _ in
+            // We should handle this error
+            self.delegate?.viewModelDidUpdate()
+        }
     }
 
     func updateTrustList() {
@@ -56,45 +62,25 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
             .catch { _ in }
     }
 
-    func loadCertificates() {
+    private func refreshCertificates() -> Promise<Void> {
         firstly {
             repository.getVaccinationCertificateList()
         }
-        .map { list -> [ExtendedCBORWebToken] in
-            self.certificateList = list
-            return self.matchedCertificates
+        .get {
+            self.certificateList = $0
         }
-        .done { list in
-            if list.isEmpty {
-                self.certificateViewModels = [NoCertificateCardViewModel()]
-                return
-            }
-            self.certificateViewModels = list.map { cert in
-                let isFavorite = self.certificatePair(for: cert).contains(where: { $0.vaccinationCertificate.hcert.dgc.v.first?.ci == self.certificateList.favoriteCertificateId })
-                return CertificateCardViewModel(token: cert, isFavorite: isFavorite, onAction: self.onAction, onFavorite: self.onFavorite, repository: self.repository)
-            }
-        }
-        .catch { _ in
-            self.certificateViewModels = [NoCertificateCardViewModel()]
-        }
-        .finally {
+        .map { list in
             self.delegate?.viewModelDidUpdate()
+            // scroll to favorite certificate if needed
+            if self.lastKnownFavoriteCertificateId != nil, self.lastKnownFavoriteCertificateId != list.favoriteCertificateId {
+                self.delegate?.viewModelNeedsFirstCertificateVisible()
+            }
+            self.lastKnownFavoriteCertificateId = list.favoriteCertificateId
         }
+        .asVoid()
     }
 
-    func showCertificate(at indexPath: IndexPath) {
-        showCertificates(
-            certificatePair(for: indexPath)
-        )
-    }
-
-    func showCertificate(_ certificate: ExtendedCBORWebToken) {
-        showCertificates(
-            certificatePair(for: certificate)
-        )
-    }
-
-    func scanCertificate(withIntroduction: Bool = true) {
+    func scanCertificate(withIntroduction: Bool) {
         firstly {
             withIntroduction ? router.showHowToScan() : Promise.value
         }
@@ -105,68 +91,17 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
             try self.payloadFromScannerResult(result)
         }
         .then { payload in
-            self.process(payload: payload)
+            self.repository.scanVaccinationCertificate(payload)
         }
         .ensure {
-            self.loadCertificates()
+            self.refresh()
         }
         .done { certificate in
             self.showCertificate(certificate)
         }
         .catch { error in
-            switch error {
-            case QRCodeError.versionNotSupported:
-                self.router.showDialog(
-                    title: "error_scan_present_data_is_not_supported_title".localized,
-                    message: "error_scan_present_data_is_not_supported_message".localized,
-                    actions: [
-                        DialogAction(
-                            title: "error_scan_present_data_is_not_supported_button_title".localized,
-                            style: .cancel,
-                            completion: { _ in self.scanCertificate(withIntroduction: false) }
-                        )
-                    ],
-                    style: .alert
-                )
-            case HCertError.verifyError:
-                self.router.showDialog(
-                    title: "error_scan_qrcode_without_seal_title".localized,
-                    message: "error_scan_qrcode_without_seal_message".localized,
-                    actions: [
-                        DialogAction(
-                            title: "error_scan_qrcode_without_seal_button_title".localized,
-                            style: .cancel,
-                            completion: { _ in self.scanCertificate(withIntroduction: false) }
-                        )
-                    ],
-                    style: .alert
-                )
-            case QRCodeError.qrCodeExists:
-                self.router.showDialog(
-                    title: "duplicate_certificate_dialog_header".localized,
-                    message: "duplicate_certificate_dialog_message".localized,
-                    actions: [
-                        DialogAction(
-                            title: "duplicate_certificate_dialog_button_title".localized,
-                            style: .cancel,
-                            completion: { _ in self.scanCertificate(withIntroduction: false) }
-                        )
-                    ],
-                    style: .alert
-                )
-            default:
-                self.router.showDialog(
-                    title: "error_scan_qrcode_cannot_be_parsed_title".localized,
-                    message: "error_scan_qrcode_cannot_be_parsed_message".localized,
-                    actions: [
-                        DialogAction(
-                            title: "error_scan_qrcode_cannot_be_parsed_button_title".localized,
-                            style: .cancel,
-                            completion: { _ in self.scanCertificate(withIntroduction: false) }
-                        )
-                    ],
-                    style: .alert
-                )
+            self.router.showDialogForScanError(error) { [weak self] in
+                self?.scanCertificate(withIntroduction: false)
             }
         }
     }
@@ -179,68 +114,6 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
         router.showUnexpectedErrorDialog()
     }
 
-    // MARK: - Private Functions
-
-    private func sortFavorite(_ certificates: [ExtendedCBORWebToken], favorite: String) -> [ExtendedCBORWebToken] {
-        guard let favoriteCert = certificates.first(where: { $0.vaccinationCertificate.hcert.dgc.v.first?.ci == favorite }) else { return certificates }
-        var list = [ExtendedCBORWebToken]()
-        list.append(favoriteCert)
-        list.append(contentsOf: certificates.filter { $0 != favoriteCert })
-        return list
-    }
-
-    private func matchCertificates(_ certificates: [ExtendedCBORWebToken]) -> [ExtendedCBORWebToken] {
-        var list = [ExtendedCBORWebToken]()
-        var certs: [ExtendedCBORWebToken] = certificates.reversed()
-        while certs.count > 0 {
-            guard let cert = certs.popLast() else { return list }
-            let pair = findCertificatePair(cert, certs)
-            certs.removeAll(where: { pair.contains($0) })
-
-            if let fullCert = pair.first(where: { $0.vaccinationCertificate.hcert.dgc.fullImmunization
-            }) {
-                list.append(fullCert)
-            } else if let partialCert = pair.last {
-                list.append(partialCert)
-            }
-        }
-        return list
-    }
-
-    private func findCertificatePair(_ certificate: ExtendedCBORWebToken, _ certificates: [ExtendedCBORWebToken]) -> [ExtendedCBORWebToken] {
-        var list = [certificate]
-        for cert in certificates where certificate.vaccinationCertificate.hcert.dgc == cert.vaccinationCertificate.hcert.dgc {
-            if !list.contains(cert) {
-                list.append(cert)
-            }
-        }
-        return list
-    }
-
-    private func findCertificateIndex(for certificate: ExtendedCBORWebToken) -> Int? {
-        for (index, cer) in matchedCertificates.enumerated() {
-            if certificate.vaccinationCertificate.hcert.dgc == cer.vaccinationCertificate.hcert.dgc {
-                return index
-            }
-        }
-
-        return nil
-    }
-
-    private func certificatePair(for indexPath: IndexPath) -> [ExtendedCBORWebToken] {
-        if certificateList.certificates.isEmpty {
-            return []
-        }
-        return findCertificatePair(matchedCertificates[indexPath.row], certificateList.certificates)
-    }
-
-    private func certificatePair(for certificate: ExtendedCBORWebToken) -> [ExtendedCBORWebToken] {
-        if certificateList.certificates.isEmpty {
-            return []
-        }
-        return findCertificatePair(certificate, certificateList.certificates)
-    }
-
     private func payloadFromScannerResult(_ result: ScanResult) throws -> String {
         switch result {
         case let .success(payload):
@@ -250,49 +123,84 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
         }
     }
 
-    private func onFavorite(_ id: String) {
-        certificateList.favoriteCertificateId = certificateList.favoriteCertificateId == id ? nil : id
-        firstly {
-            repository.saveVaccinationCertificateList(certificateList).asVoid()
+    private func cardViewModels(for certificates: [ExtendedCBORWebToken]) -> [CardViewModel] {
+        if certificates.isEmpty {
+            return [NoCertificateCardViewModel()]
         }
-        .done {
-            self.delegate?.viewModelDidUpdateFavorite()
-        }
-        .catch { error in
-            self.delegate?.viewModelUpdateDidFailWithError(error)
+        return certificates.map { certificate in
+            CertificateCardViewModel(
+                token: certificate,
+                isFavorite: certificateList.isFavoriteCertificate(certificate),
+                onAction: showCertificate,
+                onFavorite: toggleFavoriteStateForCertificateWithId,
+                repository: repository
+            )
         }
     }
 
-    private func onAction(_ certificate: ExtendedCBORWebToken) {
-        showCertificate(certificate)
+    private func toggleFavoriteStateForCertificateWithId(_ id: String) {
+        firstly {
+            repository.toggleFavoriteStateForCertificateWithIdentifier(id)
+        }
+        .then { isFavorite in
+            self.refreshCertificates().map { isFavorite }
+        }
+        .done { isFavorite in
+            self.lastKnownFavoriteCertificateId = isFavorite ? id : nil
+            self.delegate?.viewModelNeedsFirstCertificateVisible()
+        }
+        .catch { _ in
+            // Improve error handling
+            self.showErrorDialog()
+        }
+    }
+
+    func showCertificate(at indexPath: IndexPath) {
+        showCertificates(
+            certificateList.certificates.certificatePair(for: matchedCertificates[indexPath.row])
+        )
+    }
+
+    func showCertificate(_ certificate: ExtendedCBORWebToken) {
+        showCertificates(
+            certificateList.certificates.certificatePair(for: certificate)
+        )
     }
 
     private func showCertificates(_ certificates: [ExtendedCBORWebToken]) {
         guard certificates.isEmpty == false else {
             return
         }
-        router.showCertificates(certificates)
+        firstly {
+            router.showCertificates(certificates)
+        }
+        .cancelled {
+            // User cancelled by back button or swipe gesture.
+            // So refresh everything because we don't know what exactly changed here.
+            self.refresh()
+        }
+        .then { result in
+            // Make sure overview is up2date
+            self.refreshCertificates().map { result }
+        }
+        .done {
+            self.handleVaccinationDetailSceneResult($0)
+        }
+        .catch { _ in
+            // Improve error handling
+            self.showErrorDialog()
+        }
     }
-}
 
-// MARK: - CertificateDetailDelegate
+    private func handleVaccinationDetailSceneResult(_ result: VaccinationDetailSceneResult) {
+        switch result {
+        case .didDeleteCertificate:
+            router.showCertificateDidDeleteDialog()
+            delegate?.viewModelNeedsFirstCertificateVisible()
 
-extension CertificatesOverviewViewModel: CertificateDetailDelegate {
-    func select(certificates: [ExtendedCBORWebToken]) {
-        guard let certificate = certificates.last else { return }
-        selectedCertificateIndex = findCertificateIndex(for: certificate)
-    }
-
-    func didAddCertificate() {
-        loadCertificates()
-    }
-
-    func didAddFavoriteCertificate() {
-        delegate?.viewModelDidUpdateFavorite()
-    }
-
-    func didDeleteCertificate() {
-        selectedCertificateIndex = nil
-        delegate?.viewModelDidDeleteCertificate()
+        case .showCertificatesOnOverview(let certificates):
+            guard let index = matchedCertificates.firstIndex(of: certificates.last) else { return }
+            delegate?.viewModelNeedsCertificateVisible(at: index)
+        }
     }
 }

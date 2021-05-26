@@ -6,45 +6,29 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
+import PromiseKit
+import UIKit
 import CovPassCommon
 import CovPassUI
 import PromiseKit
 import UIKit
 
-class VaccinationDetailViewModel {
+class VaccinationDetailViewModel: VaccinationDetailViewModelProtocol {
+    // MARK: - Properties
+
+    weak var delegate: ViewModelDelegate?
     private let router: VaccinationDetailRouterProtocol
     private let repository: VaccinationRepositoryProtocol
     private var certificates: [ExtendedCBORWebToken]
-    public weak var delegate: ViewModelDelegate?
-    public weak var detailDelegate: CertificateDetailDelegate?
-
-    // MARK: - Lifecyle
-
-    init(
-        router: VaccinationDetailRouterProtocol,
-        repository: VaccinationRepositoryProtocol,
-        certificates: [ExtendedCBORWebToken],
-        detailDelegate: CertificateDetailDelegate?
-    ) {
-        self.router = router
-        self.repository = repository
-        self.certificates = certificates.sorted(by: { $0.vaccinationCertificate.hcert.dgc.v.first?.dn ?? 0 > $1.vaccinationCertificate.hcert.dgc.v.first?.dn ?? 0 })
-        self.detailDelegate = detailDelegate
-    }
-
-    // MARK: - Actions
+    private let resolver: Resolver<VaccinationDetailSceneResult>?
+    private var isFavorite = false
 
     var fullImmunization: Bool {
         certificates.map { $0.vaccinationCertificate.hcert.dgc.fullImmunization }.first(where: { $0 }) ?? false
     }
 
-    var isFavorite: Bool {
-        do {
-            let certList = try repository.getVaccinationCertificateList().wait()
-            return certificates.contains(where: { $0.vaccinationCertificate.hcert.dgc.v.first?.ci == certList.favoriteCertificateId })
-        } catch {
-            return false
-        }
+    var favoriteIcon: UIImage? {
+        isFavorite ? .starFull : .starPartial
     }
 
     var name: String {
@@ -57,7 +41,7 @@ class VaccinationDetailViewModel {
     }
 
     var immunizationIcon: UIImage? {
-        UIImage(named: fullImmunization ? "status_full" : "status_partial", in: Bundle.uiBundle, compatibleWith: nil)
+        fullImmunization ? .statusFull : .statusPartial
     }
 
     var immunizationTitle: String {
@@ -75,71 +59,174 @@ class VaccinationDetailViewModel {
     }
 
     var immunizationBody: String {
-        fullImmunization ? "vaccination_certificate_detail_view_complete_message".localized : "vaccination_certificate_detail_view_incomplete_message".localized
+        fullImmunization ?
+            "vaccination_certificate_detail_view_complete_message".localized :
+            "vaccination_certificate_detail_view_incomplete_message".localized
     }
 
     var immunizationButton: String {
-        fullImmunization ? "vaccination_certificate_detail_view_complete_action_button_title".localized : "vaccination_certificate_detail_view_incomplete_action_button_title".localized
+        fullImmunization ?
+            "vaccination_certificate_detail_view_complete_action_button_title".localized :
+            "vaccination_certificate_detail_view_incomplete_action_button_title".localized
     }
 
     var vaccinations: [VaccinationViewModel] {
-        certificates.map { VaccinationViewModel(token: $0,
-                                                repository: VaccinationRepository(service: APIService.create(), parser: QRCoder()),
-                                                delegate: self,
-                                                router: router) }
+        certificates
+            .flatMap { $0.vaccinationCertificate.hcert.dgc.v }
+            .sorted(by: { $0 < $1 }) // Sorted by dosage number of vaccination. The latest first.
+            .map {
+                VaccinationViewModel(
+                    vaccination: $0,
+                    delegate: self
+                )
+            }
+    }
+
+    // MARK: - Lifecyle
+
+    init(
+        router: VaccinationDetailRouterProtocol,
+        repository: VaccinationRepositoryProtocol,
+        certificates: [ExtendedCBORWebToken],
+        resolvable: Resolver<VaccinationDetailSceneResult>?
+    ) {
+        self.router = router
+        self.repository = repository
+        self.certificates = certificates
+        resolver = resolvable
+    }
+
+    // MARK: - Methods
+
+    func refresh() {
+        refreshFavoriteState()
     }
 
     func immunizationButtonTapped() {
         fullImmunization ?
-            showCertificate() :
-            scanNextCertificate()
+            showCertificatesOnOverview() :
+            scanNextCertificate(withIntroduction: true)
     }
 
-    func updateFavorite() -> Promise<Void> {
+    func toggleFavorite() {
+        guard let id = self.certificates.first?.vaccinationCertificate.hcert.dgc.v.first?.ci else {
+            self.showErrorDialog()
+            return
+        }
         firstly {
-            repository.getVaccinationCertificateList()
+            repository.toggleFavoriteStateForCertificateWithIdentifier(id)
         }
-        .map { cert in
-            var certList = cert
-            guard let id = self.certificates.first?.vaccinationCertificate.hcert.dgc.v.first?.ci else {
-                return certList
-            }
-            certList.favoriteCertificateId = certList.favoriteCertificateId == id ? nil : id
-            return certList
+        .get { isFavorite in
+            self.isFavorite = isFavorite
         }
-        .then { cert in
-            self.repository.saveVaccinationCertificateList(cert).asVoid()
-        }.ensure {
-            self.detailDelegate?.didAddFavoriteCertificate()
+        .done { _ in
+            self.delegate?.viewModelDidUpdate()
+        }
+        .catch { _ in
+            self.showErrorDialog()
         }
     }
 
-    func process(payload: String) -> Promise<Void> {
+    private func refreshFavoriteState() {
         firstly {
-            repository.scanVaccinationCertificate(payload)
+            repository.favoriteStateForCertificates(certificates)
         }
-        .then { cert in
-            self.repository.getVaccinationCertificateList().then { list -> Promise<Void> in
-                self.certificates = self.findCertificatePair(cert, list.certificates).sorted(by: { $0.vaccinationCertificate.hcert.dgc.v.first?.dn ?? 0 > $1.vaccinationCertificate.hcert.dgc.v.first?.dn ?? 0 })
-                return Promise.value(())
+        .get { isFavorite in
+            self.isFavorite = isFavorite
+        }
+        .done { _ in
+            self.delegate?.viewModelDidUpdate()
+        }
+        .catch { _ in
+            self.showErrorDialog()
+        }
+    }
+
+    private func processScanResult(_ result: ScanResult) -> Promise<Void> {
+        firstly {
+            readQRCodeFromScanResult(result)
+        }
+        .then {
+            self.repository.scanVaccinationCertificate($0)
+        }
+        .then { certificate in
+            self.repository.getVaccinationCertificateList().map {
+                (certificate, $0)
+            }
+        }
+        .map { certificate, certificateList in
+            self.certificates = certificateList.certificates.certificatePair(for: certificate)
+        }
+        .asVoid()
+    }
+
+    private func readQRCodeFromScanResult(_ result: ScanResult) -> Promise<String> {
+        .init { seal in
+            switch result {
+            case let .success(qrCode):
+                seal.fulfill(qrCode)
+            case let .failure(error):
+                seal.reject(error)
             }
         }
     }
 
-    func showErrorDialog() {
+    private func showErrorDialog() {
         router.showUnexpectedErrorDialog()
     }
 
-    // MARK: - Private Helper
-
-    private func findCertificatePair(_ certificate: ExtendedCBORWebToken, _ certificates: [ExtendedCBORWebToken]) -> [ExtendedCBORWebToken] {
-        var list = [certificate]
-        for cert in certificates where certificate.vaccinationCertificate.hcert.dgc == cert.vaccinationCertificate.hcert.dgc {
-            if !list.contains(cert) {
-                list.append(cert)
-            }
+    private func delete(_ vaccination: Vaccination) {
+        guard let certificate = certificates.first(for: vaccination) else {
+            showErrorDialog()
+            return
         }
-        return list
+        firstly {
+            showDeleteDialog(vaccination)
+        }
+        .then {
+            self.repository.delete(vaccination)
+        }
+        .then {
+            self.repository.getVaccinationCertificateList()
+        }
+        .map {
+            $0.certificates.pairableCertificates(for: certificate)
+        }
+        .done {
+            self.didUpdateCertificatesAfterDeletion($0)
+        }
+        .catch {
+            self.delegate?.viewModelUpdateDidFailWithError($0)
+        }
+    }
+
+    private func didUpdateCertificatesAfterDeletion(_ certificates: [ExtendedCBORWebToken]) {
+        self.certificates = certificates
+        delegate?.viewModelDidUpdate()
+
+        if certificates.isEmpty {
+            resolver?.fulfill(.didDeleteCertificate)
+        } else {
+            router.showCertificateDidDeleteDialog()
+        }
+    }
+
+    private func scanNextCertificate(withIntroduction: Bool) {
+        firstly {
+            withIntroduction ? router.showHowToScan() : Promise.value
+        }
+        .then {
+            self.router.showScanner()
+        }
+        .then {
+            self.processScanResult($0)
+        }
+        .done {
+            self.delegate?.viewModelDidUpdate()
+        }
+        .catch {
+            self.router.showDialogForScanError($0, completion: { self.scanNextCertificate(withIntroduction: false) })
+        }
     }
 
     private func showDeleteDialog(_ vaccination: Vaccination) -> Promise<Void> {
@@ -159,82 +246,22 @@ class VaccinationDetailViewModel {
         }
     }
 
-    private func showDeletionSuccessDialog() {
-        let confirm = DialogAction(title: "delete_result_dialog_positive_button_text".localized, style: .default)
-        router.showDialog(title: "delete_result_dialog_header".localized,
-                          message: "delete_result_dialog_message".localized,
-                          actions: [confirm],
-                          style: .alert)
+    private func showQRCodeForVaccination(_ vaccination: Vaccination) {
+        guard let certificate = certificates.first(for: vaccination) else { return }
+        router.showCertificate(for: certificate).cauterize()
     }
 
-    private func scanNextCertificate() {
-        firstly {
-            router.showHowToScan()
-        }
-        .then {
-            self.router.showScanner()
-        }
-        .then { result -> Promise<Void> in
-            switch result {
-            case let .success(qrCode):
-                return self.process(payload: qrCode)
-            case let .failure(error):
-                throw error
-            }
-        }
-        .ensure { [weak self] in
-            self?.detailDelegate?.didAddCertificate()
-        }
-        .done { [weak self] in
-            self?.delegate?.viewModelDidUpdate()
-        }
-        .catch { [weak self] error in
-            switch error {
-            case QRCodeError.versionNotSupported:
-                self?.router.showDialog(title: "error_scan_present_data_is_not_supported_title".localized, message: "error_scan_present_data_is_not_supported_message".localized, actions: [DialogAction.cancel("error_scan_present_data_is_not_supported_button_title".localized)], style: .alert)
-            case HCertError.verifyError:
-                self?.router.showDialog(title: "error_scan_qrcode_without_seal_title".localized, message: "error_scan_qrcode_without_seal_message".localized, actions: [DialogAction.cancel("error_scan_qrcode_without_seal_button_title".localized)], style: .alert)
-            case QRCodeError.qrCodeExists:
-                self?.router.showDialog(title: "duplicate_certificate_dialog_header".localized, message: "duplicate_certificate_dialog_message".localized, actions: [DialogAction.cancel("duplicate_certificate_dialog_button_title".localized)], style: .alert)
-            default:
-                self?.router.showDialog(title: "error_scan_qrcode_cannot_be_parsed_title".localized, message: "error_scan_qrcode_cannot_be_parsed_message".localized, actions: [DialogAction.cancel("error_scan_qrcode_cannot_be_parsed_button_title".localized)], style: .alert)
-            }
-        }
-    }
-
-    private func showCertificate() {
-        detailDelegate?.select(certificates: certificates)
-        router.showCertificateOverview().cauterize()
+    private func showCertificatesOnOverview() {
+        resolver?.fulfill(.showCertificatesOnOverview(certificates))
     }
 }
 
-extension VaccinationDetailViewModel: VaccinationDelegate {
-    func didPressDelete(_ vaccination: Vaccination) -> Promise<Void> {
-        showDeleteDialog(vaccination)
+extension VaccinationDetailViewModel: VaccinationViewDelegate {
+    func vaccinationViewDidPressDelete(_ vaccination: Vaccination) {
+        delete(vaccination)
     }
 
-    func didUpdateCertificates(_ certificates: [ExtendedCBORWebToken]) {
-        self.certificates = certificates
-
-        if certificates.isEmpty {
-            router.showCertificateOverview()
-                .done {
-                    self.deletionSuccessful()
-                }.catch { error in
-                    self.delegate?.viewModelUpdateDidFailWithError(error)
-                }
-        } else {
-            deletionSuccessful()
-        }
-    }
-
-    func updateDidFailWithError(_ error: Error) {
-        delegate?.viewModelUpdateDidFailWithError(error)
-    }
-
-    private func deletionSuccessful() {
-        showDeletionSuccessDialog()
-        detailDelegate?.didDeleteCertificate()
-        delegate?.viewModelDidUpdate()
+    func vaccinationViewDidPressShowQRCode(_ vaccination: Vaccination) {
+        showQRCodeForVaccination(vaccination)
     }
 }

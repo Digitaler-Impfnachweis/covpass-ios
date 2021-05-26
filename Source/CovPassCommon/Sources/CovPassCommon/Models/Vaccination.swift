@@ -92,3 +92,20 @@ public class Vaccination: Codable {
         return value["display"] as? String
     }
 }
+
+extension Vaccination: Hashable {
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(ci)
+    }
+
+    public static func == (lhs: Vaccination, rhs: Vaccination) -> Bool {
+        lhs.ci == rhs.ci
+    }
+}
+
+extension Vaccination: Comparable {
+    /// Sort by dose number
+    public static func < (lhs: Vaccination, rhs: Vaccination) -> Bool {
+        lhs.dn > rhs.dn
+    }
+}

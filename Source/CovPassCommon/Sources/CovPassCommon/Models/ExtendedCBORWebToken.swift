@@ -26,3 +26,10 @@ extension ExtendedCBORWebToken: Equatable {
         return lhs.vaccinationQRCodeData == rhs.vaccinationQRCodeData
     }
 }
+
+extension ExtendedCBORWebToken: Comparable {
+    /// Sort by dose number of first vaccination
+    public static func < (lhs: ExtendedCBORWebToken, rhs: ExtendedCBORWebToken) -> Bool {
+        lhs.vaccinationCertificate.hcert.dgc.v.first?.dn ?? 0 > rhs.vaccinationCertificate.hcert.dgc.v.first?.dn ?? 0
+    }
+}

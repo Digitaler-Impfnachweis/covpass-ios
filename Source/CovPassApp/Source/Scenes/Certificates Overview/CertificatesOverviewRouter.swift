@@ -16,7 +16,6 @@ class CertificatesOverviewRouter: CertificatesOverviewRouterProtocol, DialogRout
     // MARK: - Properties
 
     let sceneCoordinator: SceneCoordinator
-    weak var delegate: CertificateDetailDelegate?
 
     // MARK: - Lifecycle
 
@@ -26,13 +25,11 @@ class CertificatesOverviewRouter: CertificatesOverviewRouterProtocol, DialogRout
 
     // MARK: - Methods
 
-    func showCertificates(_ certificates: [ExtendedCBORWebToken]) {
+    func showCertificates(_ certificates: [ExtendedCBORWebToken]) -> Promise<VaccinationDetailSceneResult> {
         sceneCoordinator.push(
             VaccinationDetailSceneFactory(
                 router: VaccinationDetailRouter(sceneCoordinator: sceneCoordinator),
-                repository: VaccinationRepository(service: APIService.create(), parser: QRCoder()),
-                certificates: certificates,
-                delegate: delegate
+                certificates: certificates
             )
         )
     }

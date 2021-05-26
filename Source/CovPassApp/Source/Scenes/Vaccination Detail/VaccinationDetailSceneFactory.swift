@@ -11,34 +11,32 @@ import CovPassUI
 import PromiseKit
 import UIKit
 
-struct VaccinationDetailSceneFactory: SceneFactory {
+struct VaccinationDetailSceneFactory: ResolvableSceneFactory {
     // MARK: - Properties
 
     let router: VaccinationDetailRouterProtocol
-    let repository: VaccinationRepositoryProtocol
-    let certificates: [ExtendedCBORWebToken]
-    weak var delegate: CertificateDetailDelegate?
+    var certificates: [ExtendedCBORWebToken]
 
     // MARK: - Lifecycle
 
     init(
         router: VaccinationDetailRouterProtocol,
-        repository: VaccinationRepositoryProtocol,
-        certificates: [ExtendedCBORWebToken],
-        delegate: CertificateDetailDelegate?
+        certificates: [ExtendedCBORWebToken]
     ) {
         self.router = router
-        self.repository = repository
         self.certificates = certificates
-        self.delegate = delegate
     }
 
-    func make() -> UIViewController {
+    func make(resolvable: Resolver<VaccinationDetailSceneResult>) -> UIViewController {
+        let repository = VaccinationRepository(
+            service: APIService.create(),
+            parser: QRCoder()
+        )
         let viewModel = VaccinationDetailViewModel(
             router: router,
             repository: repository,
             certificates: certificates,
-            detailDelegate: delegate
+            resolvable: resolvable
         )
         let viewController = VaccinationDetailViewController(viewModel: viewModel)
         return viewController

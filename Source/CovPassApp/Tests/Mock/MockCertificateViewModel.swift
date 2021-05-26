@@ -16,6 +16,8 @@ import UIKit
 class MockCertificateViewModel: CertificatesOverviewViewModelProtocol {
     // MARK: - Test Variables
 
+
+    var refreshedCalled = false
     var processCalled = false
     var configureCalled = false
     var selectedCertificateIndex: Int?
@@ -27,6 +29,10 @@ class MockCertificateViewModel: CertificatesOverviewViewModelProtocol {
     var addButtonImage: UIImage? = UIImage()
 
     var certificateViewModels: [CardViewModel] = []
+
+    func refresh() {
+        refreshedCalled = true
+    }
 
     func process(payload _: String, completion _: ((Error) -> Void)?) {
         processCalled = true
