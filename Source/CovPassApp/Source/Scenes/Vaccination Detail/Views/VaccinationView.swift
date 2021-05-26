@@ -51,6 +51,7 @@ class VaccinationView: XibView {
 
         immunizationHeadline.attributedTitleText = viewModel?.headline.styledAs(.header_2)
         immunizationHeadline.image = .delete
+        immunizationHeadline.tintColor = .red
         immunizationHeadline.action = { [weak self] in
             self?.viewModel?.delete()
         }

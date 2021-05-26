@@ -105,7 +105,7 @@ class VaccinationDetailViewModel: VaccinationDetailViewModelProtocol {
     func immunizationButtonTapped() {
         fullImmunization ?
             showCertificatesOnOverview() :
-            scanNextCertificate()
+            scanNextCertificate(withIntroduction: true)
     }
 
     func toggleFavorite() {
@@ -211,9 +211,9 @@ class VaccinationDetailViewModel: VaccinationDetailViewModelProtocol {
         }
     }
 
-    private func scanNextCertificate() {
+    private func scanNextCertificate(withIntroduction: Bool) {
         firstly {
-            router.showHowToScan()
+            withIntroduction ? router.showHowToScan() : Promise.value
         }
         .then {
             self.router.showScanner()
@@ -225,7 +225,7 @@ class VaccinationDetailViewModel: VaccinationDetailViewModelProtocol {
             self.delegate?.viewModelDidUpdate()
         }
         .catch {
-            self.router.showDialogForScanError($0)
+            self.router.showDialogForScanError($0, completion: { self.scanNextCertificate(withIntroduction: false) })
         }
     }
 
