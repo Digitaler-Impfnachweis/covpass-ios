@@ -27,13 +27,15 @@ public class NoCertificateCollectionViewCell: CardCollectionViewCell {
     @IBOutlet public var headlineLabel: UILabel!
     @IBOutlet public var subHeadlineLabel: UILabel!
 
-    // MARK: - Public Properties
+    // MARK: - Properties
 
     override public var viewModel: CardViewModel? {
         didSet {
             updateView()
         }
     }
+
+    private let cornerRadius: CGFloat = 15
 
     // MARK: - Lifecycle
 
@@ -46,7 +48,7 @@ public class NoCertificateCollectionViewCell: CardCollectionViewCell {
             bottom: .space_120,
             right: .space_40
         )
-        containerView.layer.cornerRadius = 15
+        containerView.layer.cornerRadius = cornerRadius
 
         stackView.spacing = .zero
         stackView.setCustomSpacing(.space_10, after: iconImageView)
