@@ -99,6 +99,7 @@
 		65E0DB0C2657F31C004C660F /* CertificateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65E0DB082657F31C004C660F /* CertificateViewController.xib */; };
 		65E0DB0E2657F5A0004C660F /* CertificateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E0DB0D2657F5A0004C660F /* CertificateViewModel.swift */; };
 		886EEF152657DDD000EBE17D /* VaccinationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886EEF142657DDD000EBE17D /* VaccinationDelegate.swift */; };
+		887688FC265E8EF7005099BD /* String+Prefix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887688FB265E8EF7005099BD /* String+Prefix.swift */; };
 		88AB2A9725FA431100D4EA52 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88AB2A3B25FA40CE00D4EA52 /* AppDelegate.swift */; };
 		88AB2AA525FA431E00D4EA52 /* CovPassAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88AB2A3F25FA40CE00D4EA52 /* CovPassAppTests.swift */; };
 		88AB2AC025FA433F00D4EA52 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88AB2A4625FA40CE00D4EA52 /* AppDelegate.swift */; };
@@ -228,6 +229,7 @@
 		65E0DB082657F31C004C660F /* CertificateViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CertificateViewController.xib; sourceTree = "<group>"; };
 		65E0DB0D2657F5A0004C660F /* CertificateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateViewModel.swift; sourceTree = "<group>"; };
 		886EEF142657DDD000EBE17D /* VaccinationDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VaccinationDelegate.swift; sourceTree = "<group>"; };
+		887688FB265E8EF7005099BD /* String+Prefix.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Prefix.swift"; sourceTree = "<group>"; };
 		88AB2A3B25FA40CE00D4EA52 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		88AB2A3C25FA40CE00D4EA52 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		88AB2A3F25FA40CE00D4EA52 /* CovPassAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CovPassAppTests.swift; sourceTree = "<group>"; };
@@ -447,6 +449,7 @@
 		216D1F38264EF4ED00370F16 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				887688FB265E8EF7005099BD /* String+Prefix.swift */,
 				216D1F39264EF4ED00370F16 /* ApiServiceFactory.swift */,
 				216D1F3A264EF4ED00370F16 /* StringLocalization.swift */,
 			);
@@ -1048,6 +1051,7 @@
 				216D1FD9264EF76400370F16 /* VaccinationDetailViewController.swift in Sources */,
 				216D1FB9264EF74F00370F16 /* CertificatesOverviewViewModel.swift in Sources */,
 				216D1FD7264EF76400370F16 /* VaccinationDetailSceneFactory.swift in Sources */,
+				887688FC265E8EF7005099BD /* String+Prefix.swift in Sources */,
 				216D1FA5264EF74100370F16 /* WelcomeViewController.swift in Sources */,
 				65E0DB0A2657F31C004C660F /* CertificateSceneFactory.swift in Sources */,
 				216D1FB1264EF74600370F16 /* OnboardingRouter.swift in Sources */,
