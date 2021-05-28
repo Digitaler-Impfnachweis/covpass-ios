@@ -866,7 +866,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 65D6D50625F8B8FC000CB339 /* Build configuration list for PBXNativeTarget "CovPassApp" */;
 			buildPhases = (
-				38E94DEF26612B7C0015553C /* Copy Config Files */,
 				65D6D4DA25F8B8FB000CB339 /* Sources */,
 				65D6D4DB25F8B8FB000CB339 /* Frameworks */,
 				65D6D4DC25F8B8FB000CB339 /* Resources */,
@@ -1035,27 +1034,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		38E94DEF26612B7C0015553C /* Copy Config Files */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 12;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Config Files";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "cp -r \"${SRCROOT}/${TLS_CERTIFICATE_FILES}\" \"${SRCROOT}/${TLS_CERTIFICATE_DESTINATION}\"\ncp -a \"${SRCROOT}/${TLS_CERTIFICATE_FILES}/.\" \"${TARGET_BUILD_DIR}/CovPassCommon_CovPassCommon.bundle/\"\ncp -r \"${SRCROOT}/${TRUST_LIST_FILES}\" \"${SRCROOT}/${TRUST_LIST_DESTINATION}\"\ncp -a \"${SRCROOT}/${TRUST_LIST_FILES}/.\" \"${TARGET_BUILD_DIR}/CovPassCommon_CovPassCommon.bundle/\"\n";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		65D6D4DA25F8B8FB000CB339 /* Sources */ = {
