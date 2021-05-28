@@ -96,6 +96,8 @@
 		21DAD6E3264F0B19003407FC /* CovPassUI in Frameworks */ = {isa = PBXBuildFile; productRef = 21DAD6E2264F0B19003407FC /* CovPassUI */; };
 		21FBCA79264F016E00CAEF44 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21FBCA78264F016E00CAEF44 /* LaunchScreen.storyboard */; };
 		38DA7E81265EC9A70048AC93 /* VaccinationViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38DA7E80265EC9A70048AC93 /* VaccinationViewDelegate.swift */; };
+		38E94DE9266121D60015553C /* VaccinationRepositoryExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E94DE8266121D60015553C /* VaccinationRepositoryExtension.swift */; };
+		38E94DEC266123520015553C /* VaccinationRepositoryExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E94DEA266122E30015553C /* VaccinationRepositoryExtension.swift */; };
 		6507D7ED25FB5E0300D69F94 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 88AB2A4325FA40CE00D4EA52 /* Assets.xcassets */; };
 		653788F42658008500DEC364 /* VactinationViewRouterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653788F32658008500DEC364 /* VactinationViewRouterProtocol.swift */; };
 		65E0DB0A2657F31C004C660F /* CertificateSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E0DB052657F31C004C660F /* CertificateSceneFactory.swift */; };
@@ -226,6 +228,8 @@
 		381A13F32647DB580037B7F0 /* release-rki.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "release-rki.xcconfig"; sourceTree = "<group>"; };
 		381A13F42647DB7B0037B7F0 /* release-rki.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "release-rki.xcconfig"; sourceTree = "<group>"; };
 		38DA7E80265EC9A70048AC93 /* VaccinationViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VaccinationViewDelegate.swift; sourceTree = "<group>"; };
+		38E94DE8266121D60015553C /* VaccinationRepositoryExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaccinationRepositoryExtension.swift; sourceTree = "<group>"; };
+		38E94DEA266122E30015553C /* VaccinationRepositoryExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaccinationRepositoryExtension.swift; sourceTree = "<group>"; };
 		653788F32658008500DEC364 /* VactinationViewRouterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VactinationViewRouterProtocol.swift; sourceTree = "<group>"; };
 		65D6D4DE25F8B8FB000CB339 /* CovPassApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CovPassApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		65D6D4EE25F8B8FB000CB339 /* CovPassAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CovPassAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -461,6 +465,7 @@
 				216D1F3A264EF4ED00370F16 /* StringLocalization.swift */,
 				21A77A51265AFDE6002FEEF1 /* DialogRouterProtocol+ScanError.swift */,
 				21A77A53265B0033002FEEF1 /* DialogRouterProtocol+DidDeleteCertificate.swift */,
+				38E94DE8266121D60015553C /* VaccinationRepositoryExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -725,6 +730,7 @@
 			children = (
 				21FBCA5F264F011900CAEF44 /* ApiServiceFactory.swift */,
 				21FBCA60264F011900CAEF44 /* StringLocalization.swift */,
+				38E94DEA266122E30015553C /* VaccinationRepositoryExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -860,6 +866,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 65D6D50625F8B8FC000CB339 /* Build configuration list for PBXNativeTarget "CovPassApp" */;
 			buildPhases = (
+				38E94DEF26612B7C0015553C /* Copy Config Files */,
 				65D6D4DA25F8B8FB000CB339 /* Sources */,
 				65D6D4DB25F8B8FB000CB339 /* Frameworks */,
 				65D6D4DC25F8B8FB000CB339 /* Resources */,
@@ -1029,6 +1036,27 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		38E94DEF26612B7C0015553C /* Copy Config Files */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 12;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Config Files";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cp -r \"${SRCROOT}/${TLS_CERTIFICATE_FILES}\" \"${SRCROOT}/${TLS_CERTIFICATE_DESTINATION}\"\ncp -a \"${SRCROOT}/${TLS_CERTIFICATE_FILES}/.\" \"${TARGET_BUILD_DIR}/CovPassCommon_CovPassCommon.bundle/\"\ncp -r \"${SRCROOT}/${TRUST_LIST_FILES}\" \"${SRCROOT}/${TRUST_LIST_DESTINATION}\"\ncp -a \"${SRCROOT}/${TRUST_LIST_FILES}/.\" \"${TARGET_BUILD_DIR}/CovPassCommon_CovPassCommon.bundle/\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		65D6D4DA25F8B8FB000CB339 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -1043,6 +1071,7 @@
 				216D1FD8264EF76400370F16 /* VaccinationDetailViewModel.swift in Sources */,
 				216D2004264EF7B600370F16 /* StringLocalization.swift in Sources */,
 				216D1FCD264EF75D00370F16 /* CertificatesOverviewRouterProtocol.swift in Sources */,
+				38E94DE9266121D60015553C /* VaccinationRepositoryExtension.swift in Sources */,
 				216D1FFC264EF77C00370F16 /* AppInformationSceneFactory.swift in Sources */,
 				216D1FCF264EF75D00370F16 /* CertificatesOverviewViewModelDelegate.swift in Sources */,
 				65E0DB0B2657F31C004C660F /* CertificateViewController.swift in Sources */,
@@ -1119,6 +1148,7 @@
 				2181C19A264F03B200DE7412 /* ValidationResultRouterProtocol.swift in Sources */,
 				2181C195264F03AF00DE7412 /* ImmunizationState.swift in Sources */,
 				2181C183264F039500DE7412 /* AppInformationViewModel.swift in Sources */,
+				38E94DEC266123520015553C /* VaccinationRepositoryExtension.swift in Sources */,
 				2181C1B3264F040500DE7412 /* StringLocalization.swift in Sources */,
 				88AB2AC025FA433F00D4EA52 /* AppDelegate.swift in Sources */,
 				2181C1A8264F03BC00DE7412 /* OnboardingViewModel.swift in Sources */,
@@ -1295,10 +1325,10 @@
 			baseConfigurationReference = 210116F82646D18100B9E8FF /* debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 250;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = PJ6HS27C79;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Source/CovPassApp/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
@@ -1308,7 +1338,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.ega.VaccinationPass;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.ibm.ega.VaccinationPass";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1321,10 +1351,10 @@
 			baseConfigurationReference = 381442092646ED5800207CFA /* release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 250;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = PJ6HS27C79;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Source/CovPassApp/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
@@ -1334,7 +1364,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.ega.VaccinationPass;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.ibm.ega.VaccinationPass";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1399,10 +1429,10 @@
 			baseConfigurationReference = 2101178C2646E86F00B9E8FF /* debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 250;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = PJ6HS27C79;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Source/CovPassCheckApp/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
@@ -1413,7 +1443,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.ega.VaccinationValidator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.ibm.ega.VaccinationValidator";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1426,10 +1456,10 @@
 			baseConfigurationReference = 3814420B2646ED7600207CFA /* release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 250;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = PJ6HS27C79;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Source/CovPassCheckApp/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
@@ -1440,7 +1470,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.ega.VaccinationValidator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.ibm.ega.VaccinationValidator";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
