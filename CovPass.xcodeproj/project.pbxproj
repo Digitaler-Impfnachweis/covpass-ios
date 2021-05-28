@@ -98,6 +98,7 @@
 		38DA7E81265EC9A70048AC93 /* VaccinationViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38DA7E80265EC9A70048AC93 /* VaccinationViewDelegate.swift */; };
 		38E94DE9266121D60015553C /* VaccinationRepositoryExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E94DE8266121D60015553C /* VaccinationRepositoryExtension.swift */; };
 		38E94DEC266123520015553C /* VaccinationRepositoryExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E94DEA266122E30015553C /* VaccinationRepositoryExtension.swift */; };
+		38E94DF126613F350015553C /* SceneCoordinatorMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E94DF026613F350015553C /* SceneCoordinatorMock.swift */; };
 		6507D7ED25FB5E0300D69F94 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 88AB2A4325FA40CE00D4EA52 /* Assets.xcassets */; };
 		653788F42658008500DEC364 /* VactinationViewRouterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653788F32658008500DEC364 /* VactinationViewRouterProtocol.swift */; };
 		65E0DB0A2657F31C004C660F /* CertificateSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E0DB052657F31C004C660F /* CertificateSceneFactory.swift */; };
@@ -230,6 +231,7 @@
 		38DA7E80265EC9A70048AC93 /* VaccinationViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VaccinationViewDelegate.swift; sourceTree = "<group>"; };
 		38E94DE8266121D60015553C /* VaccinationRepositoryExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaccinationRepositoryExtension.swift; sourceTree = "<group>"; };
 		38E94DEA266122E30015553C /* VaccinationRepositoryExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaccinationRepositoryExtension.swift; sourceTree = "<group>"; };
+		38E94DF026613F350015553C /* SceneCoordinatorMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneCoordinatorMock.swift; sourceTree = "<group>"; };
 		653788F32658008500DEC364 /* VactinationViewRouterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VactinationViewRouterProtocol.swift; sourceTree = "<group>"; };
 		65D6D4DE25F8B8FB000CB339 /* CovPassApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CovPassApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		65D6D4EE25F8B8FB000CB339 /* CovPassAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CovPassAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -507,6 +509,7 @@
 				216D1F5F264EF52400370F16 /* MockViewModelDelegate.swift */,
 				216D1F60264EF52400370F16 /* MockCardViewModel.swift */,
 				216D1F61264EF52400370F16 /* MockCertificateViewModelDelegate.swift */,
+				38E94DF026613F350015553C /* SceneCoordinatorMock.swift */,
 			);
 			path = Mock;
 			sourceTree = "<group>";
@@ -1098,6 +1101,7 @@
 				216D2037264EFA6C00370F16 /* MockCertificateViewModelDelegate.swift in Sources */,
 				216D2033264EFA6C00370F16 /* MockQRCoder.swift in Sources */,
 				216D2036264EFA6C00370F16 /* MockCardViewModel.swift in Sources */,
+				38E94DF126613F350015553C /* SceneCoordinatorMock.swift in Sources */,
 				216D202B264EFA6600370F16 /* CertificateViewControllerTests.swift in Sources */,
 				88AB2AA525FA431E00D4EA52 /* CovPassAppTests.swift in Sources */,
 				216D2034264EFA6C00370F16 /* MockCertificateViewModel.swift in Sources */,
