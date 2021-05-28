@@ -28,10 +28,7 @@ struct VaccinationDetailSceneFactory: ResolvableSceneFactory {
     }
 
     func make(resolvable: Resolver<VaccinationDetailSceneResult>) -> UIViewController {
-        let repository = VaccinationRepository(
-            service: APIService.create(),
-            parser: QRCoder()
-        )
+        let repository = VaccinationRepository.create()
         let viewModel = VaccinationDetailViewModel(
             router: router,
             repository: repository,
