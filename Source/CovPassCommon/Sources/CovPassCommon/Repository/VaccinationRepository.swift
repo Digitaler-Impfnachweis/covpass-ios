@@ -13,6 +13,8 @@ import PromiseKit
 public struct VaccinationRepository: VaccinationRepositoryProtocol {
     private let service: APIServiceProtocol
     private let parser: QRCoderProtocol
+    private let publicKeyURL: URL
+    private let initialDataURL: URL
 
     private var trustList: TrustList? {
         guard let trustListData = try? Keychain.fetchPassword(for: KeychainConfiguration.trustListKey),
@@ -21,9 +23,11 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
         return list
     }
 
-    public init(service: APIServiceProtocol, parser: QRCoderProtocol) {
+    public init(service: APIServiceProtocol, parser: QRCoderProtocol, publicKeyURL: URL, initialDataURL: URL) {
         self.service = service
         self.parser = parser
+        self.publicKeyURL = publicKeyURL
+        self.initialDataURL = initialDataURL
     }
 
     public func getVaccinationCertificateList() -> Promise<VaccinationCertificateList> {
@@ -70,11 +74,7 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
                 }
                 // Has never been updated before; load local list and then update it
                 if UserDefaults.standard.object(forKey: UserDefaults.keyLastUpdatedTrustList) == nil {
-                    guard let localTrustListURL = Bundle.module.url(forResource: "dsc", withExtension: "json") else {
-                        seal.reject(ApplicationError.unknownError)
-                        return
-                    }
-                    let localTrustList = try Data(contentsOf: localTrustListURL)
+                    let localTrustList = try Data(contentsOf: self.initialDataURL)
                     try Keychain.storePassword(localTrustList, for: KeychainConfiguration.trustListKey)
                 }
                 seal.fulfill_()
@@ -89,13 +89,9 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
                 throw HCertError.verifyError
             }
 
-            guard let pubkeyPEM = Bundle.module.url(forResource: "pubkey", withExtension: "pem") else {
-                throw HCertError.verifyError
-            }
-
             // EC public key (prime256v1) sequence headers (26 blocks) needs to be stripped off
             //   so it can be used with SecKeyCreateWithData
-            let pubkeyB64 = try String(contentsOf: pubkeyPEM)
+            let pubkeyB64 = try String(contentsOf: self.publicKeyURL)
                 .replacingOccurrences(of: "-----BEGIN PUBLIC KEY-----", with: "")
                 .replacingOccurrences(of: "-----END PUBLIC KEY-----", with: "")
                 .replacingOccurrences(of: "\n", with: "")

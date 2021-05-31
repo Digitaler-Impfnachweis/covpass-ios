@@ -23,7 +23,7 @@ struct ValidatorOverviewSceneFactory: SceneFactory {
     }
 
     func make() -> UIViewController {
-        let repository = VaccinationRepository(service: APIService.create(), parser: QRCoder())
+        let repository = VaccinationRepository.create()
         let viewModel = ValidatorOverviewViewModel(router: router, repository: repository)
         let viewController = ValidatorOverviewViewController(viewModel: viewModel)
         let navigationController = UINavigationController(rootViewController: viewController)

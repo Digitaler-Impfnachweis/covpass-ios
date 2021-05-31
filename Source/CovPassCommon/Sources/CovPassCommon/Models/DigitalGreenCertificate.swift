@@ -25,12 +25,11 @@ public struct DigitalGreenCertificate: Codable {
     public var fullImmunizationValidFrom: Date? {
         if !fullImmunization { return nil }
         guard let vaccinationDate = v.first?.dt,
-              let validDate = Calendar.current.date(byAdding: .day, value: 15, to: vaccinationDate),
-              let validFrom = Calendar.current.date(bySettingHour: 0, minute: 0, second: 0, of: validDate)
+              let validDate = Calendar.current.date(byAdding: .day, value: 15, to: vaccinationDate)
         else {
             return nil
         }
-        return validFrom
+        return validDate
     }
 
     /// True if full immunization is valid

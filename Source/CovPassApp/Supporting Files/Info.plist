@@ -6,8 +6,8 @@
 	<string>$(API_URL)</string>
 	<key>BUNDLE_NAME</key>
 	<string>$(BUNDLE_NAME)</string>
-	<key>CA_CERTIFICATE_SIGNATURES</key>
-	<string>$(CA_CERTIFICATE_SIGNATURES)</string>
+	<key>TRUST_LIST_PUBLIC_KEY</key>
+	<string>$(TRUST_LIST_PUBLIC_KEY)</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
@@ -27,7 +27,7 @@
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
-	<string>248</string>
+	<string>254</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
@@ -57,5 +57,7 @@
 	</array>
 	<key>UIUserInterfaceStyle</key>
 	<string>Light</string>
+	<key>TRUST_LIST_STATIC_DATA</key>
+	<string>$(TRUST_LIST_STATIC_DATA)</string>
 </dict>
 </plist>

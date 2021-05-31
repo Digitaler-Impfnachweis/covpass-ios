@@ -10,7 +10,7 @@
             ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
             <ActionContent
                title = "Run Script"
-               scriptText = "cp -r &quot;${SRCROOT}/${TLS_CERTIFICATE_FILES}&quot; &quot;${SRCROOT}/${TLS_CERTIFICATES_DESTINATION}&quot;&#10;cp -r &quot;${SRCROOT}/${CA_CERTIFICATE_FILES}&quot; &quot;${SRCROOT}/${CA_CERTIFICATES_DESTINATION}&quot;&#10;">
+               scriptText = "&#10;">
                <EnvironmentBuildable>
                   <BuildableReference
                      BuildableIdentifier = "primary"

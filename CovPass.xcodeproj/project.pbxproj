@@ -96,6 +96,9 @@
 		21DAD6E3264F0B19003407FC /* CovPassUI in Frameworks */ = {isa = PBXBuildFile; productRef = 21DAD6E2264F0B19003407FC /* CovPassUI */; };
 		21FBCA79264F016E00CAEF44 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21FBCA78264F016E00CAEF44 /* LaunchScreen.storyboard */; };
 		38DA7E81265EC9A70048AC93 /* VaccinationViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38DA7E80265EC9A70048AC93 /* VaccinationViewDelegate.swift */; };
+		38E94DE9266121D60015553C /* VaccinationRepositoryExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E94DE8266121D60015553C /* VaccinationRepositoryExtension.swift */; };
+		38E94DEC266123520015553C /* VaccinationRepositoryExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E94DEA266122E30015553C /* VaccinationRepositoryExtension.swift */; };
+		38E94DF126613F350015553C /* SceneCoordinatorMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E94DF026613F350015553C /* SceneCoordinatorMock.swift */; };
 		6507D7ED25FB5E0300D69F94 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 88AB2A4325FA40CE00D4EA52 /* Assets.xcassets */; };
 		653788F42658008500DEC364 /* VactinationViewRouterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653788F32658008500DEC364 /* VactinationViewRouterProtocol.swift */; };
 		65E0DB0A2657F31C004C660F /* CertificateSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E0DB052657F31C004C660F /* CertificateSceneFactory.swift */; };
@@ -227,6 +230,9 @@
 		381A13F32647DB580037B7F0 /* release-rki.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "release-rki.xcconfig"; sourceTree = "<group>"; };
 		381A13F42647DB7B0037B7F0 /* release-rki.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "release-rki.xcconfig"; sourceTree = "<group>"; };
 		38DA7E80265EC9A70048AC93 /* VaccinationViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VaccinationViewDelegate.swift; sourceTree = "<group>"; };
+		38E94DE8266121D60015553C /* VaccinationRepositoryExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaccinationRepositoryExtension.swift; sourceTree = "<group>"; };
+		38E94DEA266122E30015553C /* VaccinationRepositoryExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaccinationRepositoryExtension.swift; sourceTree = "<group>"; };
+		38E94DF026613F350015553C /* SceneCoordinatorMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneCoordinatorMock.swift; sourceTree = "<group>"; };
 		653788F32658008500DEC364 /* VactinationViewRouterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VactinationViewRouterProtocol.swift; sourceTree = "<group>"; };
 		65D6D4DE25F8B8FB000CB339 /* CovPassApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CovPassApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		65D6D4EE25F8B8FB000CB339 /* CovPassAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CovPassAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -463,6 +469,7 @@
 				216D1F3A264EF4ED00370F16 /* StringLocalization.swift */,
 				21A77A51265AFDE6002FEEF1 /* DialogRouterProtocol+ScanError.swift */,
 				21A77A53265B0033002FEEF1 /* DialogRouterProtocol+DidDeleteCertificate.swift */,
+				38E94DE8266121D60015553C /* VaccinationRepositoryExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -504,6 +511,7 @@
 				216D1F5F264EF52400370F16 /* MockViewModelDelegate.swift */,
 				216D1F60264EF52400370F16 /* MockCardViewModel.swift */,
 				216D1F61264EF52400370F16 /* MockCertificateViewModelDelegate.swift */,
+				38E94DF026613F350015553C /* SceneCoordinatorMock.swift */,
 			);
 			path = Mock;
 			sourceTree = "<group>";
@@ -727,6 +735,7 @@
 			children = (
 				21FBCA5F264F011900CAEF44 /* ApiServiceFactory.swift */,
 				21FBCA60264F011900CAEF44 /* StringLocalization.swift */,
+				38E94DEA266122E30015553C /* VaccinationRepositoryExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1054,6 +1063,7 @@
 				216D1FD8264EF76400370F16 /* VaccinationDetailViewModel.swift in Sources */,
 				216D2004264EF7B600370F16 /* StringLocalization.swift in Sources */,
 				216D1FCD264EF75D00370F16 /* CertificatesOverviewRouterProtocol.swift in Sources */,
+				38E94DE9266121D60015553C /* VaccinationRepositoryExtension.swift in Sources */,
 				216D1FFC264EF77C00370F16 /* AppInformationSceneFactory.swift in Sources */,
 				216D1FCF264EF75D00370F16 /* CertificatesOverviewViewModelDelegate.swift in Sources */,
 				65E0DB0B2657F31C004C660F /* CertificateViewController.swift in Sources */,
@@ -1103,6 +1113,7 @@
 				216D2037264EFA6C00370F16 /* MockCertificateViewModelDelegate.swift in Sources */,
 				216D2033264EFA6C00370F16 /* MockQRCoder.swift in Sources */,
 				216D2036264EFA6C00370F16 /* MockCardViewModel.swift in Sources */,
+				38E94DF126613F350015553C /* SceneCoordinatorMock.swift in Sources */,
 				216D202B264EFA6600370F16 /* CertificateViewControllerTests.swift in Sources */,
 				88AB2AA525FA431E00D4EA52 /* CovPassAppTests.swift in Sources */,
 				216D2034264EFA6C00370F16 /* MockCertificateViewModel.swift in Sources */,
@@ -1131,6 +1142,7 @@
 				2181C19A264F03B200DE7412 /* ValidationResultRouterProtocol.swift in Sources */,
 				2181C195264F03AF00DE7412 /* ImmunizationState.swift in Sources */,
 				2181C183264F039500DE7412 /* AppInformationViewModel.swift in Sources */,
+				38E94DEC266123520015553C /* VaccinationRepositoryExtension.swift in Sources */,
 				2181C1B3264F040500DE7412 /* StringLocalization.swift in Sources */,
 				88AB2AC025FA433F00D4EA52 /* AppDelegate.swift in Sources */,
 				2181C1A8264F03BC00DE7412 /* OnboardingViewModel.swift in Sources */,
@@ -1309,7 +1321,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 248;
+				CURRENT_PROJECT_VERSION = 254;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Source/CovPassApp/Supporting Files/Info.plist";
@@ -1335,7 +1347,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 248;
+				CURRENT_PROJECT_VERSION = 254;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Source/CovPassApp/Supporting Files/Info.plist";
@@ -1413,7 +1425,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 248;
+				CURRENT_PROJECT_VERSION = 254;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Source/CovPassCheckApp/Supporting Files/Info.plist";
@@ -1440,7 +1452,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 248;
+				CURRENT_PROJECT_VERSION = 254;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Source/CovPassCheckApp/Supporting Files/Info.plist";

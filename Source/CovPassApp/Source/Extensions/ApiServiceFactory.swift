@@ -13,7 +13,10 @@ extension APIService {
     static func create() -> APIService {
         APIService(
             sessionDelegate: APIServiceDelegate(
-                certUrl: Bundle.commonBundle.url(forResource: XCConfiguration.value(String.self, forKey: "TLS_CERTIFICATE_NAME"), withExtension: "der")!
+                certUrl: Bundle.commonBundle.url(
+                    forResource: XCConfiguration.value(String.self, forKey: "TLS_CERTIFICATE_NAME"),
+                    withExtension: nil
+                )!
             ),
             url: XCConfiguration.value(String.self, forKey: "API_URL")
         )
