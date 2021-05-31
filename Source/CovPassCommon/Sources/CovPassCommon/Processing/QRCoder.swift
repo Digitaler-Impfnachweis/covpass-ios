@@ -21,9 +21,6 @@ public class QRCoder: QRCoderProtocol {
     private let cose1SignParser = CoseSign1Parser()
     private let cert = HCert()
 
-    /// The current supported digital green certificate model version
-    var supportedDGCVersion = "1.0.0"
-
     public init() {}
 
     public func parse(_ payload: String) -> Promise<CBORWebToken> {
@@ -39,7 +36,7 @@ public class QRCoder: QRCoderProtocol {
             let jsonData = try JSONSerialization.data(withJSONObject: certificateJson as Any)
             let certificate = try JSONDecoder().decode(CBORWebToken.self, from: jsonData)
 
-            if certificate.hcert.dgc.ver != supportedDGCVersion {
+            if !certificate.hcert.dgc.isSupportedVersion {
                 throw QRCodeError.versionNotSupported
             }
 
