@@ -28,16 +28,6 @@ class ScanViewController: UIViewController {
     init(viewModel: ScanViewModel) {
         self.viewModel = viewModel
         super.init(nibName: String(describing: Self.self), bundle: .module)
-
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(toggleScannerView),
-                                               name: UIApplication.didEnterBackgroundNotification,
-                                               object: nil)
-
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(toggleScannerView),
-                                               name: UIApplication.willEnterForegroundNotification,
-                                               object: nil)
     }
 
     override func viewDidLoad() {
@@ -67,10 +57,6 @@ class ScanViewController: UIViewController {
         toolbarView.state = .cancel
         toolbarView.layoutMargins.top = .space_24
         toolbarView.delegate = self
-    }
-
-    @objc private func toggleScannerView() {
-        scanViewController?.view.isHidden.toggle()
     }
 }
 

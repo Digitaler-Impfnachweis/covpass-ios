@@ -31,16 +31,6 @@ class CertificatesOverviewViewController: UIViewController {
         self.viewModel = viewModel
         super.init(nibName: String(describing: Self.self), bundle: .main)
         self.viewModel.delegate = self
-
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(hideImageView),
-                                               name: UIApplication.didEnterBackgroundNotification,
-                                               object: nil)
-
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(showImageView),
-                                               name: UIApplication.willEnterForegroundNotification,
-                                               object: nil)
     }
 
     override func viewDidLoad() {
@@ -103,14 +93,6 @@ class CertificatesOverviewViewController: UIViewController {
         collectionView.reloadData()
         dotPageIndicator.numberOfDots = viewModel.certificateViewModels.count
         dotPageIndicator.isHidden = viewModel.certificateViewModels.count == 1 ? true : false
-    }
-
-    @objc private func hideImageView() {
-        collectionView.isHidden = viewModel.certificateViewModels.first is NoCertificateCardViewModel ? false : true
-    }
-
-    @objc private func showImageView() {
-        collectionView.isHidden = false
     }
 }
 
