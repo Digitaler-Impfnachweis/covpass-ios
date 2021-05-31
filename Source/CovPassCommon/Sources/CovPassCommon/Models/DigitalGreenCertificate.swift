@@ -38,6 +38,12 @@ public struct DigitalGreenCertificate: Codable {
         return Date() > date
     }
 
+    /// Returns true if version is supported, otherwise false
+    /// Supported version is < 1.1.0
+    public var isSupportedVersion: Bool {
+        ver.compare("1.1.0", options: .numeric) == .orderedAscending
+    }
+
     enum CodingKeys: String, CodingKey {
         case nam
         case dob
