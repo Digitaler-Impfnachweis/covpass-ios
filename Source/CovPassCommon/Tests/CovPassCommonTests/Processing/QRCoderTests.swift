@@ -33,16 +33,6 @@ class QRCoderTests: XCTestCase {
         }
     }
 
-    func testParseValidCertificateWithOutdatedVersion() {
-        do {
-            sut.supportedDGCVersion = "2.0.0"
-            _ = try sut.parse(CertificateMock.validCertificate).wait()
-            XCTFail("Parse should fail")
-        } catch {
-            XCTAssertEqual(error.localizedDescription, QRCodeError.versionNotSupported.localizedDescription)
-        }
-    }
-
     func testParseValidCertificateWithNoPrefix() {
         do {
             let res = try sut.parse(CertificateMock.validCertificateNoPrefix).wait()

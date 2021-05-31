@@ -21,9 +21,6 @@ public class QRCoder: QRCoderProtocol {
     private let cose1SignParser = CoseSign1Parser()
     private let cert = HCert()
 
-    /// The current supported digital green certificate model version
-    var supportedDGCVersion = "1.0.0"
-
     public init() {}
 
     public func parse(_ payload: String) -> Promise<CBORWebToken> {
