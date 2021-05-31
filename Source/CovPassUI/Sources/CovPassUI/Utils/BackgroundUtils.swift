@@ -10,13 +10,13 @@ import UIKit
 
 public class BackgroundUtils {
     static let hideViewTag = 01_071_991
-    static let image
+    static let imageViewHeight: CGFloat = 300
 
     public static func addHideView(to window: UIWindow?) {
         guard let window = window else { return }
         let hideView = UIView(frame: window.frame)
         hideView.backgroundColor = .white
-        let imageView = UIImageView(frame: .init(x: 0, y: 0, width: hideView.frame.width, height: 300))
+        let imageView = UIImageView(frame: .init(x: 0, y: 0, width: hideView.frame.width, height: BackgroundUtils.imageViewHeight))
         imageView.image = .onboardingScreen1
         hideView.addSubview(imageView)
         hideView.tag = BackgroundUtils.hideViewTag
