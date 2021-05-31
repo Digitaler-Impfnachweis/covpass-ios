@@ -45,10 +45,12 @@ class VaccinationDetailViewModel: VaccinationDetailViewModelProtocol {
     }
 
     var immunizationTitle: String {
-        guard let cert = certificates.first?.vaccinationCertificate.hcert.dgc else {
+        guard let cert = certificates.sorted(by: { c, _ in c.vaccinationCertificate.hcert.dgc.fullImmunization }).first?.vaccinationCertificate.hcert.dgc else {
+            return ""
+        }
+        if !fullImmunization {
             return String(format: "vaccination_certificate_detail_view_incomplete_title".localized, 1, 2)
         }
-
         if cert.fullImmunizationValid {
             return "vaccination_certificate_detail_view_complete_title".localized
         } else if let date = cert.fullImmunizationValidFrom, fullImmunization {
