@@ -42,4 +42,12 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
             try Keychain.deletePassword(for: KeychainConfiguration.vaccinationCertificateKey)
         }
     }
+
+    func applicationWillResignActive(_: UIApplication) {
+        BackgroundUtils.addHideView(to: window)
+    }
+
+    func applicationDidBecomeActive(_: UIApplication) {
+        BackgroundUtils.removeHideView(from: window)
+    }
 }
