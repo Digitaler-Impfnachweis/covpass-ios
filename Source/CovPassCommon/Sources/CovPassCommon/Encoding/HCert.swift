@@ -17,16 +17,16 @@ public enum HCertError: Error {
 }
 
 class HCert {
-    func verify(message: CoseSign1Message, trustList: TrustList) -> Bool {
+    static func verify(message: CoseSign1Message, trustList: TrustList) throws {
         for cert in trustList.certificates {
             if let valid = try? verify(message: message, certificate: cert.rawData), valid {
-                return true
+                return
             }
         }
-        return false
+        throw HCertError.verifyError
     }
 
-    private func verify(message: CoseSign1Message, certificate: String) throws -> Bool {
+    private static func verify(message: CoseSign1Message, certificate: String) throws -> Bool {
         let signedPayload: [UInt8] = SwiftCBOR.CBOR.encode(
             [
                 "Signature1",
@@ -37,17 +37,24 @@ class HCert {
         )
 
         let publicKey = try loadPublicKey(from: certificate)
-        let signature = try ECDSA.convertSignatureData(Data(message.signatures))
+        let signature = try ECDSA.convertSignatureData(Data(message.signature))
+        var algo: SecKeyAlgorithm
+        switch message.signatureAlgorithm {
+        case .es256:
+            algo = .ecdsaSignatureMessageX962SHA256
+        case .ps256:
+            algo = .rsaSignatureMessagePSSSHA256
+        }
 
         var error: Unmanaged<CFError>?
-        let result = SecKeyVerifySignature(publicKey, .ecdsaSignatureMessageX962SHA256, Data(signedPayload) as CFData, signature as CFData, &error)
+        let result = SecKeyVerifySignature(publicKey, algo, Data(signedPayload) as CFData, signature as CFData, &error)
         if error != nil {
             throw HCertError.verifyError
         }
         return result
     }
 
-    private func loadPublicKey(from data: String) throws -> SecKey {
+    private static func loadPublicKey(from data: String) throws -> SecKey {
         guard let certificateData = Data(base64Encoded: data),
               let cert = SecCertificateCreateWithData(nil, certificateData as CFData),
               let publicKey = SecCertificateCopyKey(cert)

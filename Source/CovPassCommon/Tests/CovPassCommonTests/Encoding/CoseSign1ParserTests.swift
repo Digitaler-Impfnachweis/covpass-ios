@@ -13,50 +13,27 @@ import XCTest
 @testable import CovPassCommon
 
 class CoseSign1ParserTests: XCTestCase {
-    var sut: CoseSign1Parser!
-    var base45Encoder: Base45Coder!
-
     var testData: Data {
         let certificate = CertificateMock.validCertificateNoPrefix
-        let base45Decoded = (try? base45Encoder.decode(certificate)) ?? []
+        let base45Decoded = (try? Base45Coder.decode(certificate)) ?? []
         return Compression.decompress(Data(base45Decoded)) ?? Data()
     }
 
-    override func setUp() {
-        super.setUp()
-        sut = CoseSign1Parser()
-        base45Encoder = Base45Coder()
-    }
+    func testParsing() throws {
+        let coseSign1Message = try CoseSign1Message(decompressedPayload: testData)
 
-    override func tearDown() {
-        sut = nil
-        base45Encoder = nil
-        super.tearDown()
-    }
-
-    func testParsing() {
-        let coseSign1Message = try! sut.parse(testData)
-
-        guard let message = coseSign1Message else {
-            XCTFail("Cose1SignMessage should not be nil")
-            return
-        }
-        guard message.payload.count > 0 else {
+        guard coseSign1Message.payload.count > 0 else {
             XCTFail("Payload count should not be 0")
             return
         }
 
-        XCTAssertNotNil(try? CBOR.decode(message.payload))
+        XCTAssertNotNil(try? CBOR.decode(coseSign1Message.payload))
     }
 
     func testMapping() throws {
-        let coseSign1Message = try sut.parse(testData)
+        let coseSign1Message = try CoseSign1Message(decompressedPayload: testData)
 
-        guard let message = coseSign1Message else {
-            XCTFail("Cose1SignMessage should not be nil")
-            return
-        }
-        let mappedDictionary = sut.map(cborObject: try? CBOR.decode(message.payload))
+        let mappedDictionary = coseSign1Message.map(cborObject: try? CBOR.decode(coseSign1Message.payload))
 
         XCTAssertEqual(mappedDictionary?["4"] as? UInt64, 1_651_936_419)
         XCTAssertEqual(mappedDictionary?["1"] as? String, "DE")

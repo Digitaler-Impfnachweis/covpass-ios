@@ -12,7 +12,6 @@ import PromiseKit
 
 public struct VaccinationRepository: VaccinationRepositoryProtocol {
     private let service: APIServiceProtocol
-    private let parser: QRCoderProtocol
     private let publicKeyURL: URL
     private let initialDataURL: URL
 
@@ -23,9 +22,8 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
         return list
     }
 
-    public init(service: APIServiceProtocol, parser: QRCoderProtocol, publicKeyURL: URL, initialDataURL: URL) {
+    public init(service: APIServiceProtocol, publicKeyURL: URL, initialDataURL: URL) {
         self.service = service
-        self.parser = parser
         self.publicKeyURL = publicKeyURL
         self.initialDataURL = initialDataURL
     }
@@ -166,22 +164,10 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
 
     public func scanVaccinationCertificate(_ data: String) -> Promise<ExtendedCBORWebToken> {
         firstly {
-            parser.parse(data)
+            QRCoder.parse(data)
         }
-        .map { certificate in
-            let base45Decoded = try Base45Coder().decode(data.stripPrefix())
-            guard let decompressedPayload = Compression.decompress(Data(base45Decoded)) else {
-                throw ApplicationError.general("Could not decompress QR Code data")
-            }
-            guard let trustList = self.trustList else {
-                throw ApplicationError.general("Missing TrustLIst")
-            }
-            guard let cosePayload = try CoseSign1Parser().parse(decompressedPayload),
-                  HCert().verify(message: cosePayload, trustList: trustList)
-            else {
-                throw HCertError.verifyError
-            }
-            return certificate
+        .map {
+            try parseCertificate($0)
         }
         .map { certificate in
             ExtendedCBORWebToken(vaccinationCertificate: certificate, vaccinationQRCodeData: data)
@@ -206,23 +192,10 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
 
     public func checkVaccinationCertificate(_ data: String) -> Promise<CBORWebToken> {
         firstly {
-            parser.parse(data)
+            QRCoder.parse(data)
         }
-        .map { token in
-            let payload = data.stripPrefix()
-            let base45Decoded = try Base45Coder().decode(payload)
-            guard let decompressedPayload = Compression.decompress(Data(base45Decoded)) else {
-                throw ApplicationError.general("Could not decompress QR Code data")
-            }
-            guard let trustList = self.trustList else {
-                throw ApplicationError.general("Missing TrustLIst")
-            }
-            guard let cosePayload = try CoseSign1Parser().parse(decompressedPayload),
-                  HCert().verify(message: cosePayload, trustList: trustList)
-            else {
-                throw HCertError.verifyError
-            }
-            return token
+        .map {
+            try parseCertificate($0)
         }
     }
 
@@ -250,5 +223,23 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
         .map { currentList in
             certificates.contains(where: { $0.vaccinationCertificate.hcert.dgc.v.first?.ci == currentList.favoriteCertificateId })
         }
+    }
+
+    // MARK: - Private Helpers
+
+    func parseCertificate(_ cosePayload: CoseSign1Message) throws -> CBORWebToken {
+        let cosePayloadJsonData = try cosePayload.payloadJsonData()
+        let certificate = try JSONDecoder().decode(CBORWebToken.self, from: cosePayloadJsonData)
+
+        if !certificate.hcert.dgc.isSupportedVersion {
+            throw QRCodeError.versionNotSupported
+        }
+
+        guard let trustList = self.trustList else {
+            throw ApplicationError.general("Missing TrustList")
+        }
+        try HCert.verify(message: cosePayload, trustList: trustList)
+
+        return certificate
     }
 }
