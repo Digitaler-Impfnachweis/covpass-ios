@@ -154,7 +154,7 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
                 certList.favoriteCertificateId = nil
             }
             certList.certificates.removeAll(where: { cert in
-                cert.vaccinationCertificate.hcert.dgc.v.first?.ci == vaccination.ci
+                cert.vaccinationCertificate.hcert.dgc.v?.first?.ci == vaccination.ci
             })
             return Promise.value(certList)
         }
@@ -195,7 +195,7 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
 
                 // Mark first certificate as favorite
                 if certList.certificates.count == 1 {
-                    certList.favoriteCertificateId = extendedCBORWebToken.vaccinationCertificate.hcert.dgc.v.first?.ci
+                    certList.favoriteCertificateId = extendedCBORWebToken.vaccinationCertificate.hcert.dgc.v?.first?.ci
                 }
 
                 return self.saveVaccinationCertificateList(certList).asVoid()
@@ -248,7 +248,7 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
             getVaccinationCertificateList()
         }
         .map { currentList in
-            certificates.contains(where: { $0.vaccinationCertificate.hcert.dgc.v.first?.ci == currentList.favoriteCertificateId })
+            certificates.contains(where: { $0.vaccinationCertificate.hcert.dgc.v?.first?.ci == currentList.favoriteCertificateId })
         }
     }
 }

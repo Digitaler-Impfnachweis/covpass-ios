@@ -24,8 +24,8 @@ class CertificateViewModel: BaseViewModel, CancellableViewModelProtocol {
     }
 
     var title: String {
-        let number = token.vaccinationCertificate.hcert.dgc.v.first?.dn ?? 0
-        let total = token.vaccinationCertificate.hcert.dgc.v.first?.sd ?? 0
+        let number = token.vaccinationCertificate.hcert.dgc.v?.first?.dn ?? 0
+        let total = token.vaccinationCertificate.hcert.dgc.v?.first?.sd ?? 0
         return String(format: "vaccination_certificate_detail_view_vaccination_title".localized, number, total)
     }
 

@@ -8,13 +8,13 @@
 
 extension Array where Element == ExtendedCBORWebToken {
     public func firstCertificateWithId(_ id: String) -> Element? {
-        first(where: { $0.vaccinationCertificate.hcert.dgc.v.first?.ci == id })
+        first(where: { $0.vaccinationCertificate.hcert.dgc.v?.first?.ci == id })
     }
 
     public func containsCertificateWithId(_ id: String) -> Bool {
         contains(
             where: {
-                $0.vaccinationCertificate.hcert.dgc.v.first?.ci == id
+                $0.vaccinationCertificate.hcert.dgc.v?.first?.ci == id
             }
         )
     }
@@ -65,7 +65,7 @@ extension Array where Element == ExtendedCBORWebToken {
 
     public func first(for vaccination: Vaccination) -> Element? {
         first { certificate in
-            certificate.vaccinationCertificate.hcert.dgc.v.first(where: { $0 == vaccination }) != nil
+            certificate.vaccinationCertificate.hcert.dgc.v?.first(where: { $0 == vaccination }) != nil
         }
     }
 }
