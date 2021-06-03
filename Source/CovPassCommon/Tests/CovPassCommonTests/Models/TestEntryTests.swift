@@ -22,7 +22,8 @@ class TestEntryTests: XCTestCase {
         XCTAssertEqual(sut.sc, DateUtils.testDateTimeFormatter.date(from: "2021-05-30T10:12:22Z"))
         XCTAssertEqual(sut.tt, "LP217198-3")
         XCTAssertEqual(sut.tg, "840539006")
-        XCTAssertEqual(sut.tr, "Testzentrum K\\u00f6ln Hbf")
+        XCTAssertEqual(sut.tr, "260415000")
+        XCTAssertEqual(sut.tc, "Testzentrum Köln Hbf")
         XCTAssertEqual(sut.is, "Robert Koch-Institut")
         XCTAssertEqual(sut.tg, "840539006")
     }
