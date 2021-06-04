@@ -15,25 +15,40 @@ class VaccinationCertificateTests: XCTestCase {
 
     var sut: DigitalGreenCertificate!
 
-    override func setUp() {
-        super.setUp()
-        let jsonData = Data.json("DigitalGreenCertificate")
+    func testVaccinationDecoding() {
+        let jsonData = Data.json("DigitalGreenCertificateV")
         sut = try! JSONDecoder().decode(DigitalGreenCertificate.self, from: jsonData)
-    }
 
-    override func tearDown() {
-        sut = nil
-        super.tearDown()
-    }
-
-    func testDecoding() {
         XCTAssertEqual(sut.nam.fnt, "SCHMITT<MUSTERMANN")
         XCTAssertEqual(sut.dob, DateUtils.vaccinationDateFormatter.date(from: "1964-08-12"))
-        XCTAssertEqual(sut.v.count, 1)
+        XCTAssertEqual(sut.v?.count, 1)
+        XCTAssertEqual(sut.ver, "1.0.0")
+    }
+
+    func testTestDecoding() {
+        let jsonData = Data.json("DigitalGreenCertificateT")
+        sut = try! JSONDecoder().decode(DigitalGreenCertificate.self, from: jsonData)
+
+        XCTAssertEqual(sut.nam.fnt, "SCHMITT<MUSTERMANN")
+        XCTAssertEqual(sut.dob, DateUtils.vaccinationDateFormatter.date(from: "1964-08-12"))
+        XCTAssertEqual(sut.t?.count, 1)
+        XCTAssertEqual(sut.ver, "1.0.0")
+    }
+
+    func testRecoveryDecoding() {
+        let jsonData = Data.json("DigitalGreenCertificateR")
+        sut = try! JSONDecoder().decode(DigitalGreenCertificate.self, from: jsonData)
+
+        XCTAssertEqual(sut.nam.fnt, "SCHMITT<MUSTERMANN")
+        XCTAssertEqual(sut.dob, DateUtils.vaccinationDateFormatter.date(from: "1964-08-12"))
+        XCTAssertEqual(sut.r?.count, 1)
         XCTAssertEqual(sut.ver, "1.0.0")
     }
 
     func testSupportedVersion() {
+        let jsonData = Data.json("DigitalGreenCertificateV")
+        sut = try! JSONDecoder().decode(DigitalGreenCertificate.self, from: jsonData)
+
         sut.ver = "1.0.0"
         XCTAssert(sut.isSupportedVersion)
 

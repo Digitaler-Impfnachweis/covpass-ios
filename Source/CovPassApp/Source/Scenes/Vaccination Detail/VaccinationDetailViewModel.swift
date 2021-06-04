@@ -74,7 +74,7 @@ class VaccinationDetailViewModel: VaccinationDetailViewModelProtocol {
 
     var vaccinations: [VaccinationViewModel] {
         certificates
-            .flatMap { $0.vaccinationCertificate.hcert.dgc.v }
+            .flatMap { $0.vaccinationCertificate.hcert.dgc.v ?? [] }
             .sorted(by: { $0 < $1 }) // Sorted by dosage number of vaccination. The latest first.
             .map {
                 VaccinationViewModel(
@@ -111,7 +111,7 @@ class VaccinationDetailViewModel: VaccinationDetailViewModelProtocol {
     }
 
     func toggleFavorite() {
-        guard let id = self.certificates.first?.vaccinationCertificate.hcert.dgc.v.first?.ci else {
+        guard let id = self.certificates.first?.vaccinationCertificate.hcert.dgc.v?.first?.ci else {
             self.showErrorDialog()
             return
         }
