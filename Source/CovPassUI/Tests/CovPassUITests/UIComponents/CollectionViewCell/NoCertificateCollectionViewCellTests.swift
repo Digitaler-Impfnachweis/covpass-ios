@@ -38,7 +38,7 @@ class NoCertificateCollectionViewCellTests: XCTestCase {
         XCTAssertEqual(sut.containerView.layer.cornerRadius, 15)
 
         XCTAssertEqual(sut.stackView.spacing, .zero)
-        XCTAssertEqual(sut.stackView.customSpacing(after: sut.iconImageView), .space_10)
+        XCTAssertEqual(sut.stackView.customSpacing(after: sut.iconImageView), .space_30)
     }
 
     func testUpdateViews() {
