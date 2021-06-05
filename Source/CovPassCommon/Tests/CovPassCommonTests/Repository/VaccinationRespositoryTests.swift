@@ -19,7 +19,7 @@ class VaccinationRepositoryTests: XCTestCase {
         super.setUp()
 
         let trustListURL = Bundle.commonBundle.url(forResource: "dsc.json", withExtension: nil)!
-        sut = try! VaccinationRepository(service: APIServiceMock(), keychain: MockPersistence(), userDefaults: MockPersistence(), publicKeyURL: URL(fileURLWithPath: "pubkey.pem"), initialDataURL: trustListURL)
+        sut = VaccinationRepository(service: APIServiceMock(), keychain: MockPersistence(), userDefaults: MockPersistence(), publicKeyURL: URL(fileURLWithPath: "pubkey.pem"), initialDataURL: trustListURL)
     }
 
     override func tearDown() {
@@ -45,51 +45,4 @@ class VaccinationRepositoryTests: XCTestCase {
             XCTAssertEqual(error.localizedDescription, HCertError.verifyError.localizedDescription)
         }
     }
-
-    
-//
-//    func testCheckCertificate() {
-//        do {
-//            let res = try sut.checkVaccinationCertificate(<#T##data: String##String#>)(CertificateMock.validCertificate).wait()
-//            XCTAssertEqual(res.vaccinationCertificate.iss, "DE")
-//        } catch {
-//            XCTFail("Parse should succeed")
-//        }
-//    }
-
-//    func testCheckCertificate() {
-//        do {
-//            let res = try sut.checkVaccinationCertificate(CertificateMock.validCertificate).wait()
-//            XCTAssertEqual(res.iss, "DE")
-//        } catch {
-//            XCTFail("Parse should succeed")
-//        }
-//    }
-
-//    func testParseValidCertificate() {
-//        do {
-//            let res = try QRCoder.parse(CertificateMock.validCertificate).wait()
-//            _ = try res.payloadJsonData()
-//        } catch {
-//            XCTFail("Parse should succeed")
-//        }
-//    }
-//
-//    func testParseValidCertificateWithNoPrefix() {
-//        do {
-//            let res = try QRCoder.parse(CertificateMock.validCertificateNoPrefix).wait()
-//            _ = try res.payloadJsonData()
-//        } catch {
-//            XCTFail("Parse should succeed")
-//        }
-//    }
-//
-//    func testParseInvalidCertificate() {
-//        do {
-//            _ = try QRCoder.parse(CertificateMock.invalidCertificate).wait()
-//            XCTFail("Parse should fail")
-//        } catch {
-//            XCTAssertEqual(error.localizedDescription, CoseParsingError.wrongType.localizedDescription)
-//        }
-//    }
 }

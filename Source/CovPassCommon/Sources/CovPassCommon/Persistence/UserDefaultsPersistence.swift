@@ -10,6 +10,8 @@ import Foundation
 import Keychain
 
 public struct UserDefaultsPersistence: Persistence {
+    public init() {}
+
     public func store(_ key: String, value: Any) throws {
         UserDefaults.standard.setValue(value, forKey: key)
     }

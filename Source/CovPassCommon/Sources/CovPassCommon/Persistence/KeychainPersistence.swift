@@ -10,6 +10,8 @@ import Foundation
 import Keychain
 
 public struct KeychainPersistence: Persistence {
+    public init() {}
+
     public func store(_ key: String, value: Any) throws {
         guard let valueData = value as? Data else {
             throw ApplicationError.general("Value needs to be data")

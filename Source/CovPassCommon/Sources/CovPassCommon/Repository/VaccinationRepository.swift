@@ -24,18 +24,14 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
         return list
     }
 
-    public init(service: APIServiceProtocol, keychain: Persistence, userDefaults: Persistence, publicKeyURL: URL, initialDataURL: URL) throws {
+    public init(service: APIServiceProtocol, keychain: Persistence, userDefaults: Persistence, publicKeyURL: URL, initialDataURL: URL) {
         self.service = service
         self.keychain = keychain
         self.userDefaults = userDefaults
         self.publicKeyURL = publicKeyURL
         self.initialDataURL = initialDataURL
 
-        // Has never been updated before; load local list and then update it
-        if try userDefaults.fetch(UserDefaults.keyLastUpdatedTrustList) == nil {
-            let localTrustList = try Data(contentsOf: self.initialDataURL)
-            try keychain.store(KeychainConfiguration.trustListKey, value: localTrustList)
-        }
+        try? loadLocalTrustListIfNeeded()
     }
 
     public func getVaccinationCertificateList() -> Promise<VaccinationCertificateList> {
@@ -229,6 +225,14 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
     }
 
     // MARK: - Private Helpers
+
+    func loadLocalTrustListIfNeeded() throws {
+        // Has never been updated before; load local list and then update it
+        if try userDefaults.fetch(UserDefaults.keyLastUpdatedTrustList) == nil {
+            let localTrustList = try Data(contentsOf: self.initialDataURL)
+            try keychain.store(KeychainConfiguration.trustListKey, value: localTrustList)
+        }
+    }
 
     func parseCertificate(_ cosePayload: CoseSign1Message) throws -> CBORWebToken {
         let cosePayloadJsonData = try cosePayload.payloadJsonData()
