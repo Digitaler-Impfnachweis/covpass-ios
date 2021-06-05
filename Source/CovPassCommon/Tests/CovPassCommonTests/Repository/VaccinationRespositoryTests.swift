@@ -17,7 +17,9 @@ class VaccinationRepositoryTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
-        sut = VaccinationRepository(service: APIServiceMock(), publicKeyURL: URL(fileURLWithPath: "pubkey.pem"), initialDataURL: URL(fileURLWithPath: "dsc.json"))
+
+        let trustListURL = Bundle.commonBundle.url(forResource: "dsc.json", withExtension: nil)!
+        sut = try! VaccinationRepository(service: APIServiceMock(), keychain: MockPersistence(), userDefaults: MockPersistence(), publicKeyURL: URL(fileURLWithPath: "pubkey.pem"), initialDataURL: trustListURL)
     }
 
     override func tearDown() {
@@ -25,14 +27,26 @@ class VaccinationRepositoryTests: XCTestCase {
         super.tearDown()
     }
 
-    func testCert() {
+    func testCheckVaccinationCertificateValidEC() throws {
+        let res = try sut.checkVaccinationCertificate(CertificateMock.validCertificate).wait()
+        XCTAssertEqual(res.iss, "DE")
+    }
+
+    func testCheckVaccinationCertificateValidRSA() throws {
+        let res = try sut.checkVaccinationCertificate(CertificateMock.validCertifcateRSA).wait()
+        XCTAssertEqual(res.iss, "IS")
+    }
+
+    func testCheckVaccinationCertificateInvalidSignature() {
         do {
-            let res = try sut.checkVaccinationCertificate(CertificateMock.validCertificate).wait()
-            XCTAssertEqual(res.iss, "DE")
+            _ = try sut.checkVaccinationCertificate(CertificateMock.invalidCertificateInvalidSignature).wait()
+            XCTFail("Check should fail")
         } catch {
-            XCTFail("Check should succeed")
+            XCTAssertEqual(error.localizedDescription, HCertError.verifyError.localizedDescription)
         }
     }
+
+    
 //
 //    func testCheckCertificate() {
 //        do {

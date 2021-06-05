@@ -12,31 +12,18 @@ import XCTest
 @testable import CovPassCommon
 
 class QRCoderTests: XCTestCase {
-    func testParseCert1() {
-        do {
-            let res = try QRCoder.parse(CertificateMock.cert1).wait()
-            _ = try res.payloadJsonData()
-        } catch {
-            XCTFail("Parse should succeed")
-        }
+    func testParseValidCertificate() throws {
+        let res = try QRCoder.parse(CertificateMock.validCertificate).wait()
+        _ = try res.payloadJsonData()
+    }
+    func testParseValidCertificateRSA() throws {
+        let res = try QRCoder.parse(CertificateMock.validCertifcateRSA).wait()
+        _ = try res.payloadJsonData()
     }
 
-    func testParseValidCertificate() {
-        do {
-            let res = try QRCoder.parse(CertificateMock.validCertificate).wait()
-            _ = try res.payloadJsonData()
-        } catch {
-            XCTFail("Parse should succeed")
-        }
-    }
-
-    func testParseValidCertificateWithNoPrefix() {
-        do {
-            let res = try QRCoder.parse(CertificateMock.validCertificateNoPrefix).wait()
-            _ = try res.payloadJsonData()
-        } catch {
-            XCTFail("Parse should succeed")
-        }
+    func testParseValidCertificateWithNoPrefix() throws {
+        let res = try QRCoder.parse(CertificateMock.validCertificateNoPrefix).wait()
+        _ = try res.payloadJsonData()
     }
 
     func testParseInvalidCertificate() {

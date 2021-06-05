@@ -37,11 +37,12 @@ class HCert {
         )
 
         let publicKey = try loadPublicKey(from: certificate)
-        let signature = try ECDSA.convertSignatureData(Data(message.signature))
+        var signature = Data(message.signature)
         var algo: SecKeyAlgorithm
         switch message.signatureAlgorithm {
         case .es256:
             algo = .ecdsaSignatureMessageX962SHA256
+            signature = try ECDSA.convertSignatureData(signature)
         case .ps256:
             algo = .rsaSignatureMessagePSSSHA256
         }
