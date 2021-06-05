@@ -14,17 +14,21 @@ public struct DigitalGreenCertificate: Codable {
     /// Date of Birth of the person addressed in the DGC. ISO 8601 date format restricted to range 1900-2099"
     public var dob: Date?
     /// Vaccination Group (may contain multiple entries)
-    public var v: [Vaccination]
+    public var v: [Vaccination]?
+    /// Test Group (may contain multiple entries)
+    public var t: [Test]?
+    /// Recovery Group (may contain multiple entries)
+    public var r: [Recovery]?
     /// Version of the schema, according to Semantic versioning (ISO, https://semver.org/ version 2.0.0 or newer)"
     public var ver: String
 
     /// True if full immunization is given
-    public var fullImmunization: Bool { v.first?.fullImmunization ?? false }
+    public var fullImmunization: Bool { v?.first?.fullImmunization ?? false }
 
     /// Date when the full immunization is valid
     public var fullImmunizationValidFrom: Date? {
         if !fullImmunization { return nil }
-        guard let vaccinationDate = v.first?.dt,
+        guard let vaccinationDate = v?.first?.dt,
               let validDate = Calendar.current.date(byAdding: .day, value: 15, to: vaccinationDate)
         else {
             return nil
@@ -48,6 +52,8 @@ public struct DigitalGreenCertificate: Codable {
         case nam
         case dob
         case v
+        case t
+        case r
         case ver
     }
 
@@ -57,8 +63,14 @@ public struct DigitalGreenCertificate: Codable {
         if let dobDateString = try? values.decode(String.self, forKey: .dob) {
             dob = DateUtils.vaccinationDateFormatter.date(from: dobDateString)
         }
-        v = try values.decode([Vaccination].self, forKey: .v)
+        v = try? values.decode([Vaccination].self, forKey: .v)
+        t =  try? values.decode([Test].self, forKey: .t)
+        r =  try? values.decode([Recovery].self, forKey: .r)
         ver = try values.decode(String.self, forKey: .ver)
+        
+        guard v != nil ||
+                t != nil ||
+                r != nil else { throw ApplicationError.missingData("DigitalGreenCertificate doesn't contain any of the following: Vaccination, Test, Recovery") }
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -69,6 +81,8 @@ public struct DigitalGreenCertificate: Codable {
             try container.encode(dateString, forKey: .dob)
         }
         try container.encode(v, forKey: .v)
+        try container.encode(t, forKey: .t)
+        try container.encode(r, forKey: .r)
         try container.encode(ver, forKey: .ver)
     }
 }

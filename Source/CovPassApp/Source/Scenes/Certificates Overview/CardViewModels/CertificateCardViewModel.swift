@@ -84,11 +84,11 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
     }
 
     var isFullImmunization: Bool {
-        certificate.v.first?.fullImmunization ?? false
+        certificate.v?.first?.fullImmunization ?? false
     }
 
     var vaccinationDate: Date? {
-        certificate.v.first?.dt
+        certificate.v?.first?.dt
     }
 
     // MARK: - Actions
@@ -98,7 +98,7 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
     }
 
     func onClickFavorite() {
-        guard let id = certificate.v.first?.ci else { return }
+        guard let id = certificate.v?.first?.ci else { return }
         onFavorite(id)
     }
 }

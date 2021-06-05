@@ -32,4 +32,12 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
 
         return true
     }
+
+    func applicationWillResignActive(_: UIApplication) {
+        BackgroundUtils.addHideView(to: window)
+    }
+
+    func applicationDidBecomeActive(_: UIApplication) {
+        BackgroundUtils.removeHideView(from: window)
+    }
 }
