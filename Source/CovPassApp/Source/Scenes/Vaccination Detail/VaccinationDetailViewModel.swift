@@ -24,7 +24,7 @@ class VaccinationDetailViewModel: VaccinationDetailViewModelProtocol {
     private var isFavorite = false
 
     var fullImmunization: Bool {
-        certificates.map { $0.vaccinationCertificate.hcert.dgc.fullImmunization }.first(where: { $0 }) ?? false
+        certificates.map { $0.vaccinationCertificate.hcert.dgc.v?.first?.fullImmunization ?? false }.first(where: { $0 }) ?? false
     }
 
     var favoriteIcon: UIImage? {
@@ -45,7 +45,7 @@ class VaccinationDetailViewModel: VaccinationDetailViewModelProtocol {
     }
 
     var immunizationTitle: String {
-        guard let cert = certificates.sorted(by: { c, _ in c.vaccinationCertificate.hcert.dgc.fullImmunization }).first?.vaccinationCertificate.hcert.dgc else {
+        guard let cert = certificates.sorted(by: { c, _ in c.vaccinationCertificate.hcert.dgc.v?.first?.fullImmunization ?? false }).first?.vaccinationCertificate.hcert.dgc.v?.first else {
             return ""
         }
         if !fullImmunization {

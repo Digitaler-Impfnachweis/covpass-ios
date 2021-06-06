@@ -1,5 +1,5 @@
 //
-//  StartOnboardingViewModel.swift
+//  VaccinationResultViewModel.swift
 //
 //
 //  © Copyright IBM Deutschland GmbH 2021
@@ -11,7 +11,7 @@ import CovPassUI
 import PromiseKit
 import UIKit
 
-class ValidationResultViewModel: BaseViewModel, CancellableViewModelProtocol {
+class VaccinationResultViewModel: ValidationResultViewModel {
     // MARK: - Properties
 
     weak var delegate: ViewModelDelegate?
@@ -20,10 +20,10 @@ class ValidationResultViewModel: BaseViewModel, CancellableViewModelProtocol {
     private var certificate: CBORWebToken?
 
     private var immunizationState: ImmunizationState {
-        guard let cert = certificate else {
+        guard let cert = certificate?.hcert.dgc.v?.first else {
             return .error
         }
-        return immunizationState(for: cert.hcert.dgc)
+        return cert.fullImmunizationValid ? .full : .partial
     }
 
     var icon: UIImage? {
@@ -59,7 +59,9 @@ class ValidationResultViewModel: BaseViewModel, CancellableViewModelProtocol {
 
     var nameTitle: String? {
         switch immunizationState {
-        case .full, .partial:
+        case .partial:
+            return ""
+        case .full:
             return certificate?.hcert.dgc.nam.fullName
         case .error:
             return "validation_check_popup_unsuccessful_test_first_reason_title".localized
@@ -68,7 +70,9 @@ class ValidationResultViewModel: BaseViewModel, CancellableViewModelProtocol {
 
     var nameBody: String? {
         switch immunizationState {
-        case .full, .partial:
+        case .partial:
+            return ""
+        case .full:
             if let date = certificate?.hcert.dgc.dob {
                 return "\("validation_check_popup_partial_valid_vaccination_date_of_birth_at".localized) \(DateUtils.displayDateFormatter.string(from: date))"
             }
@@ -96,18 +100,6 @@ class ValidationResultViewModel: BaseViewModel, CancellableViewModelProtocol {
         }
     }
 
-    // MARK: - Lifecycle
-
-    init(
-        router: ValidationResultRouterProtocol,
-        repository: VaccinationRepositoryProtocol,
-        certificate: CBORWebToken?
-    ) {
-        self.router = router
-        self.repository = repository
-        self.certificate = certificate
-    }
-
     var nameIcon: UIImage? {
         switch immunizationState {
         case .full, .partial:
@@ -119,6 +111,18 @@ class ValidationResultViewModel: BaseViewModel, CancellableViewModelProtocol {
 
     var errorIcon: UIImage? {
         .validationPending
+    }
+
+    // MARK: - Lifecycle
+
+    init(
+        router: ValidationResultRouterProtocol,
+        repository: VaccinationRepositoryProtocol,
+        certificate: CBORWebToken?
+    ) {
+        self.router = router
+        self.repository = repository
+        self.certificate = certificate
     }
 
     // MARK: - Methods
@@ -156,9 +160,5 @@ class ValidationResultViewModel: BaseViewModel, CancellableViewModelProtocol {
         case let .failure(error):
             throw error
         }
-    }
-
-    private func immunizationState(for certificate: DigitalGreenCertificate) -> ImmunizationState {
-        return certificate.fullImmunizationValid ? .full : .partial
     }
 }

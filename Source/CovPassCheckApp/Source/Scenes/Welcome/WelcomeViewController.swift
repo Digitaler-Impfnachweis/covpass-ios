@@ -38,6 +38,7 @@ class WelcomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.setNavigationBarHidden(true, animated: false)
+        view.backgroundColor = UIColor.backgroundPrimary
         configureScrollView()
         configureImageView()
         configureHeadline()
@@ -52,7 +53,7 @@ class WelcomeViewController: UIViewController {
         scrollView.contentInset.bottom = .space_90
         let gradientLayer = CAGradientLayer()
         gradientLayer.frame = bottomView.bounds
-        gradientLayer.colors = [UIColor(white: 1, alpha: 0).cgColor, UIColor(white: 1, alpha: 0.7).cgColor, UIColor.white.cgColor]
+        gradientLayer.colors = [UIColor(white: 1, alpha: 0).cgColor, UIColor.backgroundPrimary.cgColor, UIColor.backgroundPrimary.cgColor]
         bottomView.layer.insertSublayer(gradientLayer, at: 0)
     }
 

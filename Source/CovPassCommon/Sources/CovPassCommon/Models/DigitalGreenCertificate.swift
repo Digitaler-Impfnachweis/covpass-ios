@@ -22,26 +22,6 @@ public struct DigitalGreenCertificate: Codable {
     /// Version of the schema, according to Semantic versioning (ISO, https://semver.org/ version 2.0.0 or newer)"
     public var ver: String
 
-    /// True if full immunization is given
-    public var fullImmunization: Bool { v?.first?.fullImmunization ?? false }
-
-    /// Date when the full immunization is valid
-    public var fullImmunizationValidFrom: Date? {
-        if !fullImmunization { return nil }
-        guard let vaccinationDate = v?.first?.dt,
-              let validDate = Calendar.current.date(byAdding: .day, value: 15, to: vaccinationDate)
-        else {
-            return nil
-        }
-        return validDate
-    }
-
-    /// True if full immunization is valid
-    public var fullImmunizationValid: Bool {
-        guard let date = fullImmunizationValidFrom else { return false }
-        return Date() > date
-    }
-
     /// Returns true if version is supported, otherwise false
     /// Supported version is < 1.1.0
     public var isSupportedVersion: Bool {

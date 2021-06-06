@@ -42,7 +42,8 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
     }
 
     var backgroundColor: UIColor {
-        certificate.fullImmunizationValid ? .onBrandAccent70 : .onBackground50
+        return .blue // TODO remove again
+//        certificate.fullImmunizationValid ? .onBrandAccent70 : .onBackground50
     }
 
     var title: String {
@@ -58,13 +59,14 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
     }
 
     var qrCodeTitle: String? {
-        if certificate.fullImmunizationValid {
-            return "vaccination_start_screen_qrcode_complete_subtitle".localized
-        }
-        if let date = certificate.fullImmunizationValidFrom, certificate.fullImmunization {
-            return String(format: "vaccination_start_screen_qrcode_complete_from_date_subtitle".localized, DateUtils.displayDateFormatter.string(from: date))
-        }
-        return "vaccination_start_screen_qrcode_incomplete_subtitle".localized
+        return nil // TODO remove again
+//        if certificate.fullImmunizationValid {
+//            return "vaccination_start_screen_qrcode_complete_subtitle".localized
+//        }
+//        if let date = certificate.fullImmunizationValidFrom, certificate.fullImmunization {
+//            return String(format: "vaccination_start_screen_qrcode_complete_from_date_subtitle".localized, DateUtils.displayDateFormatter.string(from: date))
+//        }
+//        return "vaccination_start_screen_qrcode_incomplete_subtitle".localized
     }
 
     var name: String {
@@ -80,7 +82,8 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
     }
 
     var tintColor: UIColor {
-        certificate.fullImmunizationValid ? .neutralWhite : .darkText
+        return .white // TODO remove again
+//        certificate.fullImmunizationValid ? .neutralWhite : .darkText
     }
 
     var isFullImmunization: Bool {

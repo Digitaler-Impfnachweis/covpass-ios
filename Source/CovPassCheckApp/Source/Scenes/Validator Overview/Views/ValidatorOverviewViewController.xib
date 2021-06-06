@@ -86,11 +86,6 @@
             <point key="canvasLocation" x="-52.173913043478265" y="10.714285714285714"/>
         </view>
     </objects>
-    <designables>
-        <designable name="zJo-A3-iFe">
-            <size key="intrinsicContentSize" width="366" height="100"/>
-        </designable>
-    </designables>
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

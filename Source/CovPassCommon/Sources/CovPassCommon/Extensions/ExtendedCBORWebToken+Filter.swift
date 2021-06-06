@@ -45,7 +45,7 @@ extension Array where Element == ExtendedCBORWebToken {
     public func flatMapCertificatePairs() -> [Element] {
         reduce(into: [Element?]()) { result, certificate in
             let pair = certificatePair(for: certificate)
-            let preferedCertificate = pair.first(where: { $0.vaccinationCertificate.hcert.dgc.fullImmunization }) ?? pair.last
+            let preferedCertificate = pair.first(where: { $0.vaccinationCertificate.hcert.dgc.v?.first?.fullImmunization ?? false }) ?? pair.last
             if result.contains(preferedCertificate) == false {
                 result.append(preferedCertificate)
             }

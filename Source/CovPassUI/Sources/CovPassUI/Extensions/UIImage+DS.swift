@@ -125,6 +125,9 @@ public extension UIImage {
 
     @ImageLoader(name: "search")
     private(set) static var validationSearch
+
+    @ImageLoader(name: "group")
+    private(set) static var group
 }
 
 @propertyWrapper

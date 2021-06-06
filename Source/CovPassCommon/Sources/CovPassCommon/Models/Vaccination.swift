@@ -33,6 +33,21 @@ public class Vaccination: Codable {
     /// True if full immunization is given
     public var fullImmunization: Bool { dn == sd }
 
+    /// Date when the full immunization is valid
+    public var fullImmunizationValidFrom: Date? {
+        if !fullImmunization { return nil }
+        guard let validDate = Calendar.current.date(byAdding: .day, value: 15, to: dt) else {
+            return nil
+        }
+        return validDate
+    }
+
+    /// True if full immunization is valid
+    public var fullImmunizationValid: Bool {
+        guard let date = fullImmunizationValidFrom else { return false }
+        return Date() > date
+    }
+
     enum CodingKeys: String, CodingKey {
         case tg
         case vp

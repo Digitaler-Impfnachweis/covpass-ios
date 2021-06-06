@@ -28,7 +28,7 @@ struct ValidationResultSceneFactory: SceneFactory {
     }
 
     func make() -> UIViewController {
-        let viewModel = ValidationResultViewModel(
+        let viewModel = ValidationResultFactory.createViewModel(
             router: router,
             repository: VaccinationRepository.create(),
             certificate: certificate

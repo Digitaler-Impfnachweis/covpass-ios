@@ -32,6 +32,27 @@ public class Test: Codable {
     /// Unique Certificate Identifier: UVCI
     public var ci: String
 
+    /// True if test result is from a PCR test
+    public var isPCR: Bool {
+        tt == "LP6464-4"
+    }
+
+    /// True if test is positive
+    public var isPositive: Bool {
+        tr == "260373001"
+    }
+
+    /// True if test is valid
+    /// PCR <= 72 hours
+    /// Rapid <= 48 hours
+    public var isValid: Bool {
+        let hours = isPCR ? 72 : 48
+        if let validUntil = Calendar.current.date(byAdding: .hour, value: hours, to: sc) {
+            return Date() <= validUntil
+        }
+        return false
+    }
+
     enum CodingKeys: String, CodingKey {
         case tg
         case tt

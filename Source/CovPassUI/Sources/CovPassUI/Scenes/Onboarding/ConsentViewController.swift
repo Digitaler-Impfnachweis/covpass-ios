@@ -78,6 +78,7 @@ class ConsentViewController: UIViewController {
     }
 
     private func configureInfoView() {
+        dataPrivacyInfoView.backgroundColor = UIColor.backgroundPrimary
         dataPrivacyInfoView.textLabel.attributedText = viewModel.dataPrivacyTitle
         dataPrivacyInfoView.action = infoViewAction
         dataPrivacyInfoView.showSeperator = true
