@@ -34,6 +34,7 @@ class ValidatorOverviewViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = UIColor.backgroundPrimary
         viewModel.delegate = self
         viewModel.updateTrustList()
         setupHeaderView()

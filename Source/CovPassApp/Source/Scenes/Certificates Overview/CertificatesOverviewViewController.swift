@@ -36,6 +36,8 @@ class CertificatesOverviewViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = ""
+        view.backgroundColor = UIColor.backgroundPrimary
+        collectionView.backgroundColor = UIColor.backgroundPrimary
         setupHeaderView()
         setupActionButton()
         setupCollectionView()

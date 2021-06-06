@@ -38,7 +38,7 @@ public class OnboardingContainerViewController: UIViewController, ViewModelDeleg
 
     override public func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .neutralWhite
+        view.backgroundColor = UIColor.backgroundPrimary
 
         viewModel.items.forEach { model in
             var pageViewModel = model
@@ -78,7 +78,7 @@ public class OnboardingContainerViewController: UIViewController, ViewModelDeleg
     private func configureBottomView() {
         let gradientLayer = CAGradientLayer()
         gradientLayer.frame = bottomView.bounds
-        gradientLayer.colors = [UIColor(white: 1, alpha: 0).cgColor, UIColor(white: 1, alpha: 0.7).cgColor, UIColor.white.cgColor]
+        gradientLayer.colors = [UIColor(white: 1, alpha: 0).cgColor, UIColor.backgroundPrimary.cgColor, UIColor.backgroundPrimary.cgColor]
         bottomView.layer.insertSublayer(gradientLayer, at: 0)
     }
 

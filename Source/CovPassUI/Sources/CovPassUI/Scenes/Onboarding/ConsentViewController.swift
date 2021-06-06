@@ -43,6 +43,7 @@ class ConsentViewController: UIViewController {
         configureListItems()
         configureParagraphView()
         configureInfoView()
+        view.backgroundColor = UIColor.backgroundPrimary
     }
 
     // MARK: - Methods

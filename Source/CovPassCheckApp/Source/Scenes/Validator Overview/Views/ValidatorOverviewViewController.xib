@@ -48,7 +48,7 @@
                                     </constraints>
                                 </view>
                             </subviews>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstItem="TTc-KS-yO5" firstAttribute="top" secondItem="0Le-DA-8MJ" secondAttribute="bottom" constant="48" id="70N-FU-pLv"/>
                                 <constraint firstItem="TTc-KS-yO5" firstAttribute="leading" secondItem="LPz-bQ-P6F" secondAttribute="leading" constant="24" id="8MX-R5-gRR"/>
@@ -60,6 +60,7 @@
                             </constraints>
                         </view>
                     </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstItem="LPz-bQ-P6F" firstAttribute="leading" secondItem="oYc-Hb-B6e" secondAttribute="leading" id="304-KO-M60"/>
                         <constraint firstItem="LPz-bQ-P6F" firstAttribute="trailing" secondItem="oYc-Hb-B6e" secondAttribute="trailing" id="d0p-2O-CdC"/>
