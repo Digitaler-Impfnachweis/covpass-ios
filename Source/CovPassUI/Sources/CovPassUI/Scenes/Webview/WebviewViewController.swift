@@ -31,6 +31,7 @@ open class WebviewViewController: UIViewController {
         view.backgroundColor = .neutralWhite
         configureHeadline()
         webView.backgroundColor = .neutralWhite
+        webView.navigationDelegate = self
         webView.enableTextScaling()
         webView.load(viewModel.urlRequest)
     }
@@ -44,5 +45,28 @@ open class WebviewViewController: UIViewController {
                 self.dismiss(animated: true)
             }
         }
+    }
+}
+
+extension WebviewViewController: WKNavigationDelegate {
+    public func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        if webView != self.webView {
+            decisionHandler(.allow)
+            return
+        }
+        if let url = navigationAction.request.url {
+            if navigationAction.targetFrame == nil, UIApplication.shared.canOpenURL(url) {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                decisionHandler(.cancel)
+                return
+            }
+            if url.scheme == "tel" || url.scheme == "mailto", UIApplication.shared.canOpenURL(url) {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                decisionHandler(.cancel)
+                return
+            }
+        }
+        decisionHandler(.allow)
+
     }
 }
