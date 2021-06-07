@@ -43,6 +43,7 @@ class ConsentViewController: UIViewController {
         configureListItems()
         configureParagraphView()
         configureInfoView()
+        view.backgroundColor = UIColor.backgroundPrimary
     }
 
     // MARK: - Methods
@@ -52,7 +53,6 @@ class ConsentViewController: UIViewController {
     }
 
     private func configureScrollView() {
-        scrollView.contentInset.top = .space_70
         scrollView.contentInset.bottom = .space_120
         scrollView.delegate = self
     }

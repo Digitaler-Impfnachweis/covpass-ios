@@ -51,7 +51,7 @@ public class NoCertificateCollectionViewCell: CardCollectionViewCell {
         containerView.layer.cornerRadius = cornerRadius
 
         stackView.spacing = .zero
-        stackView.setCustomSpacing(.space_10, after: iconImageView)
+        stackView.setCustomSpacing(.space_30, after: iconImageView)
     }
 
     private func updateView() {

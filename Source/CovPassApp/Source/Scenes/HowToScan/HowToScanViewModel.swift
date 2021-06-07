@@ -22,18 +22,18 @@ class HowToScanViewModel: BaseViewModel, CancellableViewModelProtocol {
     }
 
     var title: String {
-        "vaccination_add_popup_title".localized
+        "certificate_add_popup_title".localized
     }
 
     var info: String {
-        "vaccination_add_popup_message".localized
+        "certificate_add_popup_message".localized
     }
 
     var actionTitle: String {
-        "vaccination_add_popup_action_title".localized
+        "certificate_add_popup_action_title".localized
     }
 
-    var startButtonTitle: String { "vaccination_add_popup_scan_button_title".localized }
+    var startButtonTitle: String { "certificate_add_popup_scan_button_title".localized }
 
     // MARK: - Lifecycle
 

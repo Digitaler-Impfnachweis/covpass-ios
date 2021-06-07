@@ -32,7 +32,8 @@ public class OnboardingPageViewController: UIViewController {
 
     override public func viewDidLoad() {
         super.viewDidLoad()
-        scrollView.contentInset.top = .space_70
+        view.backgroundColor = UIColor.backgroundPrimary
+        scrollView.backgroundColor = UIColor.backgroundPrimary
         scrollView.contentInset.bottom = .space_120
         configureImageView()
         configureHeadline()

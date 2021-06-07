@@ -56,6 +56,7 @@ class HowToScanViewController: UIViewController {
             self?.viewModel.cancel()
         }
         headline.image = .close
+        headline.layoutMargins.bottom = .space_24
     }
 
     private func configureActionView() {
@@ -64,13 +65,12 @@ class HowToScanViewController: UIViewController {
             self?.viewModel.showMoreInformation()
         }
         actionView.tintColor = .brandAccent
-        actionView.layoutMargins.top = .space_40
     }
 
     private func configureDescriptionText() {
         descriptionText.attributedBodyText = viewModel.info.styledAs(.body)
-        descriptionText.layoutMargins.top = .space_18
-        descriptionText.layoutMargins.bottom = .space_40
+        descriptionText.layoutMargins.top = .space_24
+        descriptionText.layoutMargins.bottom = .space_24
     }
 
     private func configureToolbarView() {
