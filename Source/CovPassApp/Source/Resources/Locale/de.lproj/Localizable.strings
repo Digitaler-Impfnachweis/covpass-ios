@@ -25,27 +25,25 @@
 
 "vaccination_first_onboarding_page_title" = "Erster Schritt: Übertragen Sie das COVID-Zertifikat auf Ihr Smartphone";
 
-"vaccination_first_onboarding_page_message" = "Nach der Corona-Impfung, dem Corona-Test oder der Genesung von der Corona-Infektion erhalten Sie von Ihrer medizinischen Einrichtung ein EU Digitales COVID-Zertifikat. Öffnen Sie die CovPass-App und scannen Sie das COVID-Zertifikat. Halten Sie dafür die Kamera Ihres Smartphones über den QR-Code. Das COVID-Zertifikat wird sofort auf Ihr Smartphone übertragen.";
+"vaccination_first_onboarding_page_message" = "Scannen Sie mit der CovPass-App das EU Digitale COVID-Zertifikat für eine Corona-Impfung, ein negatives Corona-Testergebnis oder eine Genesung von der Corona-Infektion. Halten Sie dafür die Kamera Ihres Smartphones über den QR-Code. Das COVID-Zertifikat wird sofort auf Ihr Smartphone übertragen.";
 
 "vaccination_second_onboarding_page_title" = "Zweiter Schritt: Rufen Sie den QR-Code in der CovPass-App auf";
 
-"vaccination_second_onboarding_page_message" = "Nach dem Scannen wird der aktuelle QR-Code als Nachweis direkt in der CovPass-App angezeigt. Sie können für jedes weitere COVID-Zertifikat einen eigenen QR-Code aufrufen. Bitte beachten Sie, dass eine ausreichende Wirksamkeit des Impfschutzes erst etwa 14 Tage nach der letzten Impfung eintritt. Der QR-Code als Nachweis über den vollständigen Impfschutz ist daher erst nach Ablauf der 14 Tage gültig.";
+"vaccination_second_onboarding_page_message" = "Mit dem QR-Code können Sie eine Corona-Impfung, ein negatives Corona-Testergebnis oder eine Genesung von einer Corona-Infektion nachweisen. Nach dem Scannen wird der QR-Code direkt in der CovPass-App angezeigt. Bitte beachten Sie, dass eine ausreichende Wirksamkeit des Impfschutzes erst etwa 14 Tage nach der letzten Impfung eintritt. Der QR-Code für den vollständigen Impfschutz ist deshalb erst nach Ablauf der 14 Tage gültig.";
 
 "vaccination_third_onboarding_page_title" = "Dritter Schritt: Zeigen Sie den QR-Code bei Bedarf vor";
 
-"vaccination_third_onboarding_page_message" = "Bei Bedarf können Sie den QR-Code in der CovPass-App vorzeigen. Der QR-Code wird dann von der prüfenden Person gescannt. Halten Sie dazu ergänzend Ihr Ausweisdokument bereit. Eine Internetverbindung ist nicht notwendig.";
+"vaccination_third_onboarding_page_message" = "Bei Bedarf können Sie den QR-Code in der CovPass-App vorzeigen. Der QR-Code wird dann von der prüfenden Person gescannt. Halten Sie dazu ergänzend Ihr Ausweisdokument bereit. Da der QR-Code nur auf Ihrem Smartphone gespeichert ist, können Sie ihn jederzeit auch ohne Internetverbindung anzeigen lassen.";
 
 "vaccination_fourth_onboarding_page_title" = "Datenschutz und Datensicherheit";
 
-"vaccination_fourth_onboarding_page_first_list_item" = "Die Verwendung der CovPass-App ist freiwillig. Der Nachweis des vollständigen Impfschutzes kann auch auf andere Weise erbracht werden (z. B. mit dem gelben Impfpass).";
+"vaccination_fourth_onboarding_page_first_list_item" = "Die Nutzung der CovPass-App ist freiwillig. Sie können Ihre digitalen COVID-Zertifikate auch in Papierform verwenden.";
 
-"vaccination_fourth_onboarding_page_second_list_item" = "Das Impfzertifikat enthält die Daten über Ihre Corona-Impfung. Zum Nachweis Ihres Impfschutzes in den gesetzlich vorgesehenen Fällen genügt das Vorzeigen des QR-Codes in der CovPass-App. Stellen Sie die Impfzertifikate und QR-Codes niemandem zur Verfügung, wenn Sie nicht wollen, dass die Daten ausgelesen werden. ";
+"vaccination_fourth_onboarding_page_second_list_item" = "Zum Schutz vor Fälschungen oder Manipulationen werden die digitalen COVID-Zertifikate durch das RKI elektronisch signiert. Hierzu werden die notwendigen Daten einmalig verschlüsselt an das RKI übermittelt. Nach der Erstellung des digitalen COVID-Zertifikats werden Ihre Daten vom RKI sofort unwiderruflich gelöscht. Der QR-Code enthält in kodierter Form die auf dem digitalen COVID-Zertifikat enthaltenen Informationen und die elektronische Signatur des RKI.";
 
-"vaccination_fourth_onboarding_page_third_list_item" = "Wenn Sie den QR-Code in der CovPass-App vorzeigen und dieser mit der offiziellen CovPassCheck-App gescannt wird, können andere Personen nachvollziehen, ob Ihr Impfschutz vollständig ist. Bei der Prüfung werden in der CovPassCheck-App auch Ihr Name, Ihr Vorname und Ihr Geburtsdatum angezeigt. ";
+"vaccination_fourth_onboarding_page_third_list_item" = "Wenn Sie den QR-Code eines digitalen COVID-Zertifikats einer anderen Person zur Prüfung vorlegen, werden dem Prüfer der Name und das Geburtsdatum des Zertifikatsinhabers angezeigt. Bei der Prüfung ist gegebenenfalls ergänzend ein Ausweisdokument vorzulegen.";
 
-"vaccination_fourth_onboarding_page_fourth_list_item" = "Sie haben jederzeit die Möglichkeit, Impfzertifikate in der App wieder zu entfernen. Bis dahin bleiben die Impfzertifikate auf Ihrem Smartphone gespeichert. ";
-
-"vaccination_fourth_onboarding_page_fifth_list_item" = "Sie können auch Impfzertifikate anderer Personen in der CovPass-App speichern (z. B. von Familienmitgliedern). Es ist wichtig, dass Sie diese Personen zuvor über die Speicherung ihrer Impfzertifikate informieren. Verwenden Sie zudem die Impfzertifikate anderer Personen nur in den Fällen, die laut dem Gesetz vorgesehen sind.";
+"vaccination_fourth_onboarding_page_fourth_list_item" = "Die digitalen COVID-Zertifikate werden ausschließlich auf Ihrem Smartphone gespeichert. Sie haben jederzeit die Möglichkeit, die digitalen COVID-Zertifikate wieder zu entfernen.";
 
 "vaccination_fourth_onboarding_page_message" = "Ausführliche Hinweise zur Datenverarbeitung finden Sie in der Datenschutzerklärung:";
 
@@ -185,7 +183,7 @@
 
 "certificates_overview_personal_data_name" = "Name, Vorname / First name, surname";
 
-"certificates_overview_personal_data_date_of_birth" = "Geburtsdatum / Date of birth";
+"certificates_overview_personal_data_date_of_birth" = "Geburtsdatum / Date of birth (YYYY-MM-DD)";
 
 "certificates_overview_all_certificates_title" = "EU-Zertifikate";
 
@@ -221,7 +219,7 @@
 
 "vaccination_certificate_detail_view_data_name" = "Name, Vorname / First name, surname";
 
-"vaccination_certificate_detail_view_data_date_of_birth" = "Geburtsdatum / Date of birth";
+"vaccination_certificate_detail_view_data_date_of_birth" = "Geburtsdatum / Date of birth (YYYY-MM-DD)";
 
 "vaccination_certificate_detail_view_data_disease" = "Zielkrankheit oder -erreger / Disease or agent targeted";
 
@@ -259,7 +257,7 @@
 
 "test_certificate_detail_view_data_name" = "Name, Vorname / First name, surname";
 
-"test_certificate_detail_view_data_date_of_birth" = "Geburtsdatum / Date of birth";
+"test_certificate_detail_view_data_date_of_birth" = "Geburtsdatum / Date of birth (YYYY-MM-DD)";
 
 "test_certificate_detail_view_data_disease" = "Zielkrankheit oder -erreger / Disease or agent targeted";
 
@@ -301,7 +299,7 @@
 
 "recovery_certificate_detail_view_data_name" = "Name, Vorname / First name, surname";
 
-"recovery_certificate_detail_view_data_date_of_birth" = "Geburtsdatum / Date of birth";
+"recovery_certificate_detail_view_data_date_of_birth" = "Geburtsdatum / Date of birth (YYYY-MM-DD)";
 
 "recovery_certificate_detail_view_data_disease" = "Krankheit oder Erreger, von dem die Bürgerin oder der Bürger genesen ist / Disease or agent the citizen has recovered from";
 

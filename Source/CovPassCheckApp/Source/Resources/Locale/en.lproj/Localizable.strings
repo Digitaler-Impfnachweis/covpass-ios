@@ -211,7 +211,7 @@
 
 "validation_check_popup_recovery_proven_title" = "Genesenenzertifikat gültig";
 
-"validation_check_popup_recovery_proven_message" = "Gleichen Sie jetzt folgende Daten mit einem Ausweisdokument der geprüften Person ab.";
+"validation_check_popup_recovery_proven_message" = "Gleichen Sie jetzt folgende Daten mit einem Ausweisdokument der genesenen Person ab.";
 
 "validation_check_popup_recovery_proven_name" = "%@";
 
