@@ -13,20 +13,9 @@ import XCTest
 @testable import CovPassCommon
 
 class Base45CoderTests: XCTestCase {
-    var sut: Base45Coder!
     let rawToBase45: [String: String] = [
         "AB": "BB8", "Hello!!": "%69 VD92EX0", "base-45": "UJCLQE7W581", "ietf!": "QED8WEX0", "x": "U2", "": ""
     ]
-
-    override func setUp() {
-        super.setUp()
-        sut = Base45Coder()
-    }
-
-    override func tearDown() {
-        sut = nil
-        super.tearDown()
-    }
 
     func testSuccessfulEncoding() {
         rawToBase45.forEach { key, value in
@@ -36,7 +25,7 @@ class Base45CoderTests: XCTestCase {
                     asciiValues.append(asciiValue)
                 }
             }
-            XCTAssertEqual(sut.encode(asciiValues), value)
+            XCTAssertEqual(Base45Coder.encode(asciiValues), value)
         }
     }
 
@@ -44,7 +33,7 @@ class Base45CoderTests: XCTestCase {
         rawToBase45.forEach { key, value in
             var result = ""
             do {
-                try sut.decode(value).forEach { integer in
+                try Base45Coder.decode(value).forEach { integer in
                     result.append(Character(UnicodeScalar(integer)))
                 }
                 XCTAssertEqual(key, result)
@@ -58,7 +47,7 @@ class Base45CoderTests: XCTestCase {
         let base45Payload = [":::", "ZZZ", "+++"]
         base45Payload.forEach { entry in
             do {
-                try _ = sut.decode(entry)
+                try _ = Base45Coder.decode(entry)
                 XCTFail("Output for \(entry) should be invalid")
             } catch {
                 XCTAssertNotNil(error as? Base45CodingError)

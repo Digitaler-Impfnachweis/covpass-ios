@@ -51,7 +51,6 @@
 		216D202B264EFA6600370F16 /* CertificateViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216D1F58264EF52400370F16 /* CertificateViewControllerTests.swift */; };
 		216D202C264EFA6600370F16 /* CertificateViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216D1F5A264EF52400370F16 /* CertificateViewModelTests.swift */; };
 		216D2032264EFA6C00370F16 /* MockViewModelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216D1F5F264EF52400370F16 /* MockViewModelDelegate.swift */; };
-		216D2033264EFA6C00370F16 /* MockQRCoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216D1F5C264EF52400370F16 /* MockQRCoder.swift */; };
 		216D2034264EFA6C00370F16 /* MockCertificateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216D1F5D264EF52400370F16 /* MockCertificateViewModel.swift */; };
 		216D2035264EFA6C00370F16 /* VaccinationRepositoryMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216D1F5E264EF52400370F16 /* VaccinationRepositoryMock.swift */; };
 		216D2036264EFA6C00370F16 /* MockCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216D1F60264EF52400370F16 /* MockCardViewModel.swift */; };
@@ -178,7 +177,6 @@
 		216D1F46264EF50300370F16 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		216D1F58264EF52400370F16 /* CertificateViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateViewControllerTests.swift; sourceTree = "<group>"; };
 		216D1F5A264EF52400370F16 /* CertificateViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateViewModelTests.swift; sourceTree = "<group>"; };
-		216D1F5C264EF52400370F16 /* MockQRCoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockQRCoder.swift; sourceTree = "<group>"; };
 		216D1F5D264EF52400370F16 /* MockCertificateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockCertificateViewModel.swift; sourceTree = "<group>"; };
 		216D1F5E264EF52400370F16 /* VaccinationRepositoryMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaccinationRepositoryMock.swift; sourceTree = "<group>"; };
 		216D1F5F264EF52400370F16 /* MockViewModelDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockViewModelDelegate.swift; sourceTree = "<group>"; };
@@ -503,7 +501,6 @@
 		216D1F5B264EF52400370F16 /* Mock */ = {
 			isa = PBXGroup;
 			children = (
-				216D1F5C264EF52400370F16 /* MockQRCoder.swift */,
 				216D1F5D264EF52400370F16 /* MockCertificateViewModel.swift */,
 				216D1F5E264EF52400370F16 /* VaccinationRepositoryMock.swift */,
 				216D1F5F264EF52400370F16 /* MockViewModelDelegate.swift */,
@@ -1099,7 +1096,6 @@
 				216D202C264EFA6600370F16 /* CertificateViewModelTests.swift in Sources */,
 				216D203E264EFA7400370F16 /* PassConsentPageViewModelTests.swift in Sources */,
 				216D2037264EFA6C00370F16 /* MockCertificateViewModelDelegate.swift in Sources */,
-				216D2033264EFA6C00370F16 /* MockQRCoder.swift in Sources */,
 				216D2036264EFA6C00370F16 /* MockCardViewModel.swift in Sources */,
 				38E94DF126613F350015553C /* SceneCoordinatorMock.swift in Sources */,
 				216D202B264EFA6600370F16 /* CertificateViewControllerTests.swift in Sources */,

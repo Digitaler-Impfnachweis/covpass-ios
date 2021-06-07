@@ -9,10 +9,10 @@
 import Foundation
 import SwiftCBOR
 
-enum CoseParsingError: Error {
+public enum CoseParsingError: Error {
     case wrongType
     case wrongArrayLength
-    case general
+    case missingValue
 }
 
 enum CoseProtectedHeader: Int {
@@ -20,48 +20,64 @@ enum CoseProtectedHeader: Int {
     case kid = 4
 }
 
+enum CoseSignatureAlgorithm: Int {
+    case es256 = -7
+    case ps256 = -37
+}
+
 struct CoseSign1Message {
     var protected: [UInt8]
     var unprotected: Any?
     var payload: [UInt8]
-    var signatures: [UInt8]
+    var signature: [UInt8]
 
-    init(protected: [UInt8], unprotected: Any?, payload: [UInt8], signatures: [UInt8]) {
+    var signatureAlgorithm: CoseSignatureAlgorithm {
+         if let protectedCbor = try? CBOR.decode(protected),
+            let alg = protectedCbor[1],
+            alg == CBOR(integerLiteral: CoseSignatureAlgorithm.ps256.rawValue) {
+            return .ps256
+         }
+         return .es256
+     }
+
+    init(protected: [UInt8], unprotected: Any?, payload: [UInt8], signature: [UInt8]) {
         self.protected = protected
         self.unprotected = unprotected
         self.payload = payload
-        self.signatures = signatures
+        self.signature = signature
     }
-}
 
-class CoseSign1Parser {
+    /// Returns cose payload as json data
+    func payloadJsonData() throws -> Data {
+        let cborDecodedPayload = try CBOR.decode(payload)
+        let certificateJson = map(cborObject: cborDecodedPayload)
+        return try JSONSerialization.data(withJSONObject: certificateJson as Any)
+    }
+
+    /// MARK:  - CoseSign1Message parser
+
     /// Decodes the received data with CBOR and parses the resulting COSE structure
     /// - parameter decompressedPayload: the data containing a COSE object
     /// - parameter completion: a fallback in case an error occurs
     /// - returns a constructed object of type `CoseSign1Message`
-    func parse(_ decompressedPayload: Data) throws -> CoseSign1Message? {
+    init(decompressedPayload: Data) throws {
         let cbor = try CBOR.decode(([UInt8])(decompressedPayload))
 
-        switch cbor {
-        case let .tagged(_, cobr):
-            switch cobr {
-            case let .array(array):
-                guard array.count == 4 else { throw CoseParsingError.wrongArrayLength }
-                if case let .byteString(protectedValue) = array[0],
-                   case let .map(unprotectedValue) = array[1],
-                   case let .byteString(payloadValue) = array[2],
-                   case let .byteString(signaturesValue) = array[3]
-                {
-                    return CoseSign1Message(protected: protectedValue, unprotected: unprotectedValue, payload: payloadValue, signatures: signaturesValue)
-                }
-            default:
-                throw CoseParsingError.wrongType
-            }
-        default:
+        guard case let .tagged(_, tcbor) = cbor, case let .array(array) = tcbor else {
             throw CoseParsingError.wrongType
         }
-
-        return nil
+        guard array.count == 4 else { throw CoseParsingError.wrongArrayLength }
+        guard case let .byteString(protectedValue) = array[0],
+           case let .map(unprotectedValue) = array[1],
+           case let .byteString(payloadValue) = array[2],
+           case let .byteString(signatureValue) = array[3]
+        else {
+            throw CoseParsingError.missingValue
+        }
+        self.protected = protectedValue
+        self.unprotected = unprotectedValue
+        self.payload = payloadValue
+        self.signature = signatureValue
     }
 
     /// Parse a CBOR object into a readable String
@@ -80,7 +96,7 @@ class CoseSign1Parser {
         return result
     }
 
-    func map(key: CBOR, value: CBOR) -> (String, Any)? {
+    private func map(key: CBOR, value: CBOR) -> (String, Any)? {
         var k: String
         var v: Any
 

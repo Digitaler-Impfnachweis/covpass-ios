@@ -12,28 +12,32 @@ import PromiseKit
 
 public struct VaccinationRepository: VaccinationRepositoryProtocol {
     private let service: APIServiceProtocol
-    private let parser: QRCoderProtocol
+    private let keychain: Persistence
+    private let userDefaults: Persistence
     private let publicKeyURL: URL
     private let initialDataURL: URL
 
     private var trustList: TrustList? {
-        guard let trustListData = try? Keychain.fetchPassword(for: KeychainConfiguration.trustListKey),
+        guard let trustListData = try? keychain.fetch(KeychainConfiguration.trustListKey) as? Data,
               let list = try? JSONDecoder().decode(TrustList.self, from: trustListData)
         else { return nil }
         return list
     }
 
-    public init(service: APIServiceProtocol, parser: QRCoderProtocol, publicKeyURL: URL, initialDataURL: URL) {
+    public init(service: APIServiceProtocol, keychain: Persistence, userDefaults: Persistence, publicKeyURL: URL, initialDataURL: URL) {
         self.service = service
-        self.parser = parser
+        self.keychain = keychain
+        self.userDefaults = userDefaults
         self.publicKeyURL = publicKeyURL
         self.initialDataURL = initialDataURL
+
+        try? loadLocalTrustListIfNeeded()
     }
 
     public func getVaccinationCertificateList() -> Promise<VaccinationCertificateList> {
         return Promise { seal in
             do {
-                guard let data = try Keychain.fetchPassword(for: KeychainConfiguration.vaccinationCertificateKey) else {
+                guard let data = try keychain.fetch(KeychainConfiguration.vaccinationCertificateKey) as? Data else {
                     throw KeychainError.fetch
                 }
                 let certificate = try JSONDecoder().decode(VaccinationCertificateList.self, from: data)
@@ -51,31 +55,24 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
     public func saveVaccinationCertificateList(_ certificateList: VaccinationCertificateList) -> Promise<VaccinationCertificateList> {
         return Promise { seal in
             let data = try JSONEncoder().encode(certificateList)
-            try Keychain.storePassword(data, for: KeychainConfiguration.vaccinationCertificateKey)
+            try keychain.store(KeychainConfiguration.vaccinationCertificateKey, value: data)
             seal.fulfill(certificateList)
         }
     }
 
     public func getLastUpdatedTrustList() -> Date? {
-        UserDefaults.standard.object(forKey: UserDefaults.keyLastUpdatedTrustList) as? Date
+        try? userDefaults.fetch(UserDefaults.keyLastUpdatedTrustList) as? Date
     }
 
     public func updateTrustList() -> Promise<Void> {
         firstly {
             Promise { seal in
-                if let lastUpdated = UserDefaults.standard.object(forKey: UserDefaults.keyLastUpdatedTrustList) as? Date,
-                   let date = Calendar.current.date(byAdding: .day, value: 1, to: lastUpdated)
+                if let lastUpdated = try userDefaults.fetch(UserDefaults.keyLastUpdatedTrustList) as? Date,
+                   let date = Calendar.current.date(byAdding: .day, value: 1, to: lastUpdated),
+                   Date() < date
                 {
-                    if Date() < date {
-                        // Only update once a day
-                        seal.reject(PromiseCancelledError())
-                    }
-                    seal.fulfill_()
-                }
-                // Has never been updated before; load local list and then update it
-                if UserDefaults.standard.object(forKey: UserDefaults.keyLastUpdatedTrustList) == nil {
-                    let localTrustList = try Data(contentsOf: self.initialDataURL)
-                    try Keychain.storePassword(localTrustList, for: KeychainConfiguration.trustListKey)
+                    // Only update once a day
+                    seal.reject(PromiseCancelledError())
                 }
                 seal.fulfill_()
             }
@@ -138,7 +135,7 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
         }
         .map { trustList in
             let data = try JSONEncoder().encode(trustList)
-            try Keychain.storePassword(data, for: KeychainConfiguration.trustListKey)
+            try keychain.store(KeychainConfiguration.trustListKey, value: data)
             UserDefaults.standard.setValue(Date(), forKey: UserDefaults.keyLastUpdatedTrustList)
         }
     }
@@ -166,22 +163,10 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
 
     public func scanVaccinationCertificate(_ data: String) -> Promise<ExtendedCBORWebToken> {
         firstly {
-            parser.parse(data)
+            QRCoder.parse(data)
         }
-        .map { certificate in
-            let base45Decoded = try Base45Coder().decode(data.stripPrefix())
-            guard let decompressedPayload = Compression.decompress(Data(base45Decoded)) else {
-                throw ApplicationError.general("Could not decompress QR Code data")
-            }
-            guard let trustList = self.trustList else {
-                throw ApplicationError.general("Missing TrustLIst")
-            }
-            guard let cosePayload = try CoseSign1Parser().parse(decompressedPayload),
-                  HCert().verify(message: cosePayload, trustList: trustList)
-            else {
-                throw HCertError.verifyError
-            }
-            return certificate
+        .map(on: .global()) {
+            try parseCertificate($0)
         }
         .map { certificate in
             ExtendedCBORWebToken(vaccinationCertificate: certificate, vaccinationQRCodeData: data)
@@ -206,23 +191,10 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
 
     public func checkVaccinationCertificate(_ data: String) -> Promise<CBORWebToken> {
         firstly {
-            parser.parse(data)
+            QRCoder.parse(data)
         }
-        .map { token in
-            let payload = data.stripPrefix()
-            let base45Decoded = try Base45Coder().decode(payload)
-            guard let decompressedPayload = Compression.decompress(Data(base45Decoded)) else {
-                throw ApplicationError.general("Could not decompress QR Code data")
-            }
-            guard let trustList = self.trustList else {
-                throw ApplicationError.general("Missing TrustLIst")
-            }
-            guard let cosePayload = try CoseSign1Parser().parse(decompressedPayload),
-                  HCert().verify(message: cosePayload, trustList: trustList)
-            else {
-                throw HCertError.verifyError
-            }
-            return token
+        .map(on: .global()) {
+            try parseCertificate($0)
         }
     }
 
@@ -250,5 +222,31 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
         .map { currentList in
             certificates.contains(where: { $0.vaccinationCertificate.hcert.dgc.v?.first?.ci == currentList.favoriteCertificateId })
         }
+    }
+
+    // MARK: - Private Helpers
+
+    func loadLocalTrustListIfNeeded() throws {
+        // Has never been updated before; load local list and then update it
+        if try userDefaults.fetch(UserDefaults.keyLastUpdatedTrustList) == nil {
+            let localTrustList = try Data(contentsOf: self.initialDataURL)
+            try keychain.store(KeychainConfiguration.trustListKey, value: localTrustList)
+        }
+    }
+
+    func parseCertificate(_ cosePayload: CoseSign1Message) throws -> CBORWebToken {
+        let cosePayloadJsonData = try cosePayload.payloadJsonData()
+        let certificate = try JSONDecoder().decode(CBORWebToken.self, from: cosePayloadJsonData)
+
+        guard let trustList = self.trustList else {
+            throw ApplicationError.general("Missing TrustList")
+        }
+        try HCert.verify(message: cosePayload, trustList: trustList)
+
+        if !certificate.hcert.dgc.isSupportedVersion {
+            throw QRCodeError.versionNotSupported
+        }
+
+        return certificate
     }
 }

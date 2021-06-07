@@ -13,7 +13,8 @@ extension VaccinationRepository {
     static func create() -> VaccinationRepository {
         VaccinationRepository(
             service: APIService.create(),
-            parser: QRCoder(),
+            keychain: KeychainPersistence(),
+            userDefaults: UserDefaultsPersistence(),
             publicKeyURL: Bundle.commonBundle.url(forResource: XCConfiguration.value(String.self, forKey: "TRUST_LIST_PUBLIC_KEY"), withExtension: nil)!,
             initialDataURL: Bundle.commonBundle.url(forResource: XCConfiguration.value(String.self, forKey: "TRUST_LIST_STATIC_DATA"), withExtension: nil)!
         )
