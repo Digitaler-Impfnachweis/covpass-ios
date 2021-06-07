@@ -24,6 +24,11 @@ public class Recovery: Codable {
     /// Unique Certificate Identifier: UVCI
     public var ci: String
 
+    /// True if recovery is valid
+    public var isValid: Bool {
+        Date() >= df && Date() <= du
+    }
+
     enum CodingKeys: String, CodingKey {
         case tg
         case fr
