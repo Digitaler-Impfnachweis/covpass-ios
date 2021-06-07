@@ -32,14 +32,13 @@ struct CoseSign1Message {
     var signature: [UInt8]
 
     var signatureAlgorithm: CoseSignatureAlgorithm {
-        guard let protectedCbor = try? CBOR.decode(protected), let alg = protectedCbor[1] else {
-            return .es256
-        }
-        if alg == CBOR(integerLiteral: CoseSignatureAlgorithm.ps256.rawValue) {
+         if let protectedCbor = try? CBOR.decode(protected),
+            let alg = protectedCbor[1],
+            alg == CBOR(integerLiteral: CoseSignatureAlgorithm.ps256.rawValue) {
             return .ps256
-        }
-        return .es256
-    }
+         }
+         return .es256
+     }
 
     init(protected: [UInt8], unprotected: Any?, payload: [UInt8], signature: [UInt8]) {
         self.protected = protected
