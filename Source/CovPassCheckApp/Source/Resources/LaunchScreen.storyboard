@@ -39,7 +39,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="CovPassCheck" width="1024" height="1024"/>
+        <image name="CovPassCheck" width="200" height="200"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
