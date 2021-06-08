@@ -15,32 +15,42 @@
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CertificateCollectionViewCell" id="VBZ-4c-av2" userLabel="CertificateCollectionViewCell" customClass="CertificateCollectionViewCell" customModule="CovPassUI">
             <rect key="frame" x="0.0" y="0.0" width="414" height="590"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="4RZ-nW-lgh">
+            <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4RZ-nW-lgh">
                 <rect key="frame" x="0.0" y="0.0" width="414" height="590"/>
-                <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DgT-IF-arn" userLabel="Container View">
-                        <rect key="frame" x="20" y="44" width="374" height="546"/>
+                        <rect key="frame" x="0.0" y="0.0" width="422" height="590"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8UB-7x-Wld">
-                                <rect key="frame" x="0.0" y="0.0" width="374" height="546"/>
+                                <rect key="frame" x="0.0" y="0.0" width="422" height="590"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="T1V-OB-XnR">
-                                        <rect key="frame" x="0.0" y="34" width="374" height="532"/>
+                                        <rect key="frame" x="0.0" y="34" width="422" height="422"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" placeholderIntrinsicWidth="374" placeholderIntrinsicHeight="120" translatesAutoresizingMaskIntoConstraints="NO" id="pTs-ku-Q18" customClass="CardViewHeader" customModule="CovPassUI">
-                                                <rect key="frame" x="24" y="0.0" width="326" height="120"/>
-                                                <color key="tintColor" systemColor="systemBlueColor"/>
-                                            </view>
                                             <view contentMode="scaleToFill" placeholderIntrinsicWidth="358" placeholderIntrinsicHeight="246" translatesAutoresizingMaskIntoConstraints="NO" id="adP-Zh-FLt" customClass="QRContainerView" customModule="CovPassUI">
-                                                <rect key="frame" x="24" y="120" width="326" height="246"/>
+                                                <rect key="frame" x="24" y="18" width="374" height="246"/>
                                             </view>
-                                            <view contentMode="scaleToFill" placeholderIntrinsicWidth="326" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="oUs-2O-r3G" customClass="PlainLabel" customModule="CovPassUI">
-                                                <rect key="frame" x="24" y="366" width="326" height="128"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                            </view>
+                                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kmj-5K-aX3">
+                                                <rect key="frame" x="24" y="264" width="374" height="128"/>
+                                                <subviews>
+                                                    <view contentMode="scaleToFill" placeholderIntrinsicWidth="326" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="oUs-2O-r3G" customClass="PlainLabel" customModule="CovPassUI">
+                                                        <rect key="frame" x="0.0" y="0.0" width="344" height="128"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                    </view>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W12-Xq-xZM">
+                                                        <rect key="frame" x="344" y="0.0" width="30" height="128"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="30" id="eYD-c3-efv"/>
+                                                        </constraints>
+                                                        <state key="normal" image="star.fill" catalog="system"/>
+                                                        <connections>
+                                                            <action selector="onFavoriteAction" destination="VBZ-4c-av2" eventType="touchUpInside" id="EWh-CD-yNU"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
                                             <view contentMode="scaleToFill" placeholderIntrinsicWidth="374" placeholderIntrinsicHeight="30" translatesAutoresizingMaskIntoConstraints="NO" id="VUx-Xk-tTT" customClass="CardViewAction" customModule="CovPassUI">
-                                                <rect key="frame" x="24" y="494" width="326" height="30"/>
+                                                <rect key="frame" x="24" y="392" width="374" height="30"/>
                                                 <color key="tintColor" systemColor="systemBlueColor"/>
                                             </view>
                                         </subviews>
@@ -69,20 +79,25 @@
                     </view>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="bottom" secondItem="DgT-IF-arn" secondAttribute="bottom" id="9Jw-Gf-NlG"/>
-                    <constraint firstItem="DgT-IF-arn" firstAttribute="leading" secondItem="4RZ-nW-lgh" secondAttribute="leadingMargin" id="Wtz-85-rqk"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="DgT-IF-arn" secondAttribute="trailing" id="bsI-fy-UOn"/>
-                    <constraint firstItem="DgT-IF-arn" firstAttribute="top" secondItem="4RZ-nW-lgh" secondAttribute="topMargin" id="hll-7Q-EBG"/>
+                    <constraint firstAttribute="bottom" secondItem="DgT-IF-arn" secondAttribute="bottom" id="Sdd-2L-4h9"/>
+                    <constraint firstItem="DgT-IF-arn" firstAttribute="leading" secondItem="4RZ-nW-lgh" secondAttribute="leading" id="cKv-ke-3Dg"/>
+                    <constraint firstAttribute="trailing" secondItem="DgT-IF-arn" secondAttribute="trailing" id="evu-5q-dWf"/>
+                    <constraint firstItem="DgT-IF-arn" firstAttribute="top" secondItem="4RZ-nW-lgh" secondAttribute="top" id="pCY-cB-760"/>
                 </constraints>
-                <edgeInsets key="layoutMargins" top="0.0" left="0.0" bottom="0.0" right="0.0"/>
             </collectionViewCellContentView>
+            <constraints>
+                <constraint firstItem="4RZ-nW-lgh" firstAttribute="top" secondItem="VBZ-4c-av2" secondAttribute="top" id="ABL-Fw-LQ9"/>
+                <constraint firstItem="4RZ-nW-lgh" firstAttribute="leading" secondItem="VBZ-4c-av2" secondAttribute="leading" id="K35-Nf-bw5"/>
+                <constraint firstAttribute="bottom" secondItem="4RZ-nW-lgh" secondAttribute="bottom" id="pHc-i5-oWH"/>
+            </constraints>
             <size key="customSize" width="414" height="590"/>
             <connections>
                 <outlet property="actionView" destination="VUx-Xk-tTT" id="fvE-tJ-Jin"/>
                 <outlet property="containerView" destination="DgT-IF-arn" id="IOi-yc-BTS"/>
                 <outlet property="contentStackView" destination="T1V-OB-XnR" id="Bsf-ww-2o1"/>
-                <outlet property="headerView" destination="pTs-ku-Q18" id="NbY-zP-9wf"/>
+                <outlet property="favoriteButton" destination="W12-Xq-xZM" id="ipc-iF-Vvi"/>
                 <outlet property="qrContainerView" destination="adP-Zh-FLt" id="X1I-ay-Ezs"/>
+                <outlet property="titleStackView" destination="kmj-5K-aX3" id="UK1-7e-x5H"/>
                 <outlet property="titleView" destination="oUs-2O-r3G" id="wGh-Li-9mY"/>
             </connections>
             <point key="canvasLocation" x="-1049.2753623188407" y="225.66964285714283"/>
@@ -98,11 +113,9 @@
         <designable name="oUs-2O-r3G">
             <size key="intrinsicContentSize" width="326" height="128"/>
         </designable>
-        <designable name="pTs-ku-Q18">
-            <size key="intrinsicContentSize" width="374" height="120"/>
-        </designable>
     </designables>
     <resources>
+        <image name="star.fill" catalog="system" width="128" height="116"/>
         <namedColor name="OnBrandAccent70">
             <color red="0.024000000208616257" green="0.37299999594688416" blue="0.76899999380111694" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CardViewAction" customModule="CovPassUI">
             <connections>
-                <outlet property="actionButton" destination="0FL-M8-Ec7" id="C6t-rh-Zal"/>
+                <outlet property="actionImage" destination="xbk-XR-PAp" id="3wU-dR-lg8"/>
                 <outlet property="stackView" destination="VQ7-tU-XU8" id="aaM-c7-ybM"/>
-                <outlet property="stateImageView" destination="nvM-pl-dBr" id="YH0-xl-7Qj"/>
                 <outlet property="titleLabel" destination="BOL-p7-WNG" id="rT2-5s-Vp3"/>
             </connections>
         </placeholder>
@@ -22,32 +21,21 @@
                 <stackView opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="VQ7-tU-XU8">
                     <rect key="frame" x="20" y="52" width="374" height="52"/>
                     <subviews>
-                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shield.lefthalf.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="nvM-pl-dBr">
-                            <rect key="frame" x="0.0" y="14" width="25" height="24"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="25" id="l7r-dV-iS2"/>
-                                <constraint firstAttribute="width" constant="25" id="u3G-eA-wu9"/>
-                            </constraints>
-                        </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Impfschutz nicht komplett" textAlignment="natural" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BOL-p7-WNG">
-                            <rect key="frame" x="35" y="16" width="208.5" height="20.5"/>
+                            <rect key="frame" x="0.0" y="17.5" width="177" height="17"/>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0FL-M8-Ec7">
-                            <rect key="frame" x="253.5" y="11" width="30" height="30"/>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chevron.right" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="xbk-XR-PAp">
+                            <rect key="frame" x="187" y="18" width="20" height="16.5"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="30" id="bTr-Rc-u0w"/>
-                                <constraint firstAttribute="width" constant="30" id="rxA-ux-6bS"/>
+                                <constraint firstAttribute="height" constant="20" id="e75-3B-Z9c"/>
+                                <constraint firstAttribute="width" constant="20" id="mf8-UA-q0j"/>
                             </constraints>
-                            <state key="normal" image="chevron.right" catalog="system"/>
-                            <connections>
-                                <action selector="actionButtonPressedWithButton:" destination="-1" eventType="touchUpInside" id="qGA-BN-I3M"/>
-                            </connections>
-                        </button>
+                        </imageView>
                         <view contentMode="scaleToFill" horizontalHuggingPriority="1" verticalHuggingPriority="1" translatesAutoresizingMaskIntoConstraints="NO" id="ZwI-4p-FRc" userLabel="Flexible Space">
-                            <rect key="frame" x="293.5" y="1" width="80.5" height="50"/>
+                            <rect key="frame" x="217" y="1" width="157" height="50"/>
                         </view>
                     </subviews>
                 </stackView>
@@ -65,6 +53,5 @@
     </objects>
     <resources>
         <image name="chevron.right" catalog="system" width="96" height="128"/>
-        <image name="shield.lefthalf.fill" catalog="system" width="128" height="121"/>
     </resources>
 </document>

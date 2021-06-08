@@ -14,12 +14,12 @@ public typealias CertificateCardViewModelProtocol = CardViewModel & CertificateC
 
 public protocol CertificateCardViewModelBase {
     var title: String { get }
+    var subtitle: String { get }
+    var titleIcon: UIImage { get }
     var isFavorite: Bool { get }
     var qrCode: UIImage? { get }
-    var qrCodeTitle: String? { get }
     var name: String { get }
     var actionTitle: String { get }
-    var actionImage: UIImage { get }
     var tintColor: UIColor { get }
     var isFullImmunization: Bool { get }
     var vaccinationDate: Date? { get }
@@ -34,10 +34,11 @@ public class CertificateCollectionViewCell: CardCollectionViewCell {
 
     @IBOutlet public var containerView: UIView!
     @IBOutlet public var contentStackView: UIStackView!
-    @IBOutlet public var headerView: CardViewHeader!
+    @IBOutlet public var titleStackView: UIStackView!
     @IBOutlet public var actionView: CardViewAction!
     @IBOutlet public var titleView: PlainLabel!
     @IBOutlet public var qrContainerView: QRContainerView!
+    @IBOutlet public var favoriteButton: UIButton!
 
     // MARK: - Public Properties
 
@@ -66,12 +67,12 @@ public class CertificateCollectionViewCell: CardCollectionViewCell {
         contentView.layer.shadowOpacity = Float(shadowOpacity)
         contentView.layer.shadowOffset = shadowOffset
 
-        containerView.layoutMargins = .init(top: .space_30, left: .space_24, bottom: .space_30, right: .space_24)
+        containerView.layoutMargins = .init(top: .space_24, left: .space_24, bottom: .space_24, right: .space_24)
         containerView.tintColor = .brandAccent
         containerView.layer.cornerRadius = cornerRadius
         containerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onPressAction)))
 
-        contentStackView.setCustomSpacing(.space_20, after: actionView)
+        contentStackView.setCustomSpacing(.space_20, after: titleStackView)
     }
 
     override public func layoutSubviews() {
@@ -84,27 +85,22 @@ public class CertificateCollectionViewCell: CardCollectionViewCell {
 
         containerView.backgroundColor = vm.backgroundColor
 
-        headerView.action = vm.onClickFavorite
-        headerView.subtitleLabel.attributedText = vm.title.styledAs(.body).colored(vm.tintColor)
-        headerView.tintColor = vm.tintColor
-        headerView.buttonImage = (vm.isFavorite ? UIImage.starFull : UIImage.starPartial).withRenderingMode(.alwaysTemplate)
-        headerView.buttonTint = vm.tintColor
-        contentStackView.setCustomSpacing(.space_12, after: headerView)
+        qrContainerView.icon = vm.titleIcon
 
         qrContainerView.image = vm.qrCode
-        qrContainerView.layoutMargins = .init(top: .space_20, left: .zero, bottom: .space_20, right: .zero)
+        qrContainerView.layoutMargins.bottom = .space_20
         qrContainerView.isHidden = vm.qrCode == nil
-        qrContainerView.titleLabel.attributedText = vm.qrCodeTitle?.styledAs(.body).colored(.onBackground70).aligned(to: .center)
-        qrContainerView.titleLabel.isHidden = vm.qrCodeTitle == nil
+        qrContainerView.title = vm.title
+        qrContainerView.subtitle = vm.subtitle
 
         titleView.textableView.attributedText = vm.name.styledAs(.header_1).colored(vm.tintColor)
         titleView.backgroundColor = .clear
+        favoriteButton.tintColor = vm.tintColor
+        favoriteButton.setImage((vm.isFavorite ? UIImage.starFull : UIImage.starPartial).withRenderingMode(.alwaysTemplate), for: .normal)
         contentStackView.setCustomSpacing(.space_12, after: titleView)
 
-        actionView.stateImageView.image = vm.actionImage
-        actionView.titleLabel.attributedText = vm.actionTitle.styledAs(.header_3).colored(vm.tintColor)
-        actionView.stateImageView.tintColor = vm.tintColor
-        actionView.actionButton.tintColor = vm.tintColor
+        actionView.titleLabel.attributedText = vm.actionTitle.styledAs(.body).colored(vm.tintColor)
+        actionView.actionImage.tintColor = vm.tintColor
         actionView.tintColor = .neutralWhite
     }
 
@@ -116,5 +112,9 @@ public class CertificateCollectionViewCell: CardCollectionViewCell {
 
     @objc public func onPressAction() {
         (viewModel as? CertificateCardViewModelProtocol)?.onClickAction()
+    }
+
+    @IBAction public func onFavoriteAction() {
+        (viewModel as? CertificateCardViewModelProtocol)?.onClickFavorite()
     }
 }

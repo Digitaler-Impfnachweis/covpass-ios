@@ -56,7 +56,7 @@ open class CardFlowLayout: UICollectionViewFlowLayout {
 
         let yInset = (collectionSize.height - itemSize.height) / 2
         let xInset = (collectionSize.width - itemSize.width) / 2
-        sectionInset = UIEdgeInsets(top: yInset, left: 20, bottom: yInset, right: xInset)
+        sectionInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: xInset)
 
         let side = isHorizontal ? itemSize.width : itemSize.height
         let scaledItemOffset = (side - side * sideItemScale) / 2

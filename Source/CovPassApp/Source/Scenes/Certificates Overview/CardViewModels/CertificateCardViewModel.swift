@@ -42,12 +42,26 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
     }
 
     var backgroundColor: UIColor {
-        return .blue // TODO remove again
-//        certificate.fullImmunizationValid ? .onBrandAccent70 : .onBackground50
+        if certificate.r != nil {
+            return .onBrandAccent70
+        }
+        if certificate.t != nil {
+            return .onBrandAccent70
+        }
+        return certificate.v?.first?.fullImmunizationValid ?? false ? .onBrandAccent70 : .onBackground50
     }
 
     var title: String {
-        isFullImmunization ? "vaccination_full_immunization_title".localized : "vaccination_partial_immunization_title".localized
+        "Impfzertifikat" // TODO change after decision
+//        isFullImmunization ? "vaccination_full_immunization_title".localized : "vaccination_partial_immunization_title".localized
+    }
+
+    var subtitle: String {
+        "24.05.2021, 12:12" // TODO change after decision
+    }
+
+    var titleIcon: UIImage {
+        isFullImmunization ? .completness : .halfShield // TODO change after decision
     }
 
     var isFavorite: Bool {
@@ -58,31 +72,16 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
         return token.vaccinationQRCodeData.generateQRCode(size: UIScreen.main.bounds.size)
     }
 
-    var qrCodeTitle: String? {
-        return nil // TODO remove again
-//        if certificate.fullImmunizationValid {
-//            return "vaccination_start_screen_qrcode_complete_subtitle".localized
-//        }
-//        if let date = certificate.fullImmunizationValidFrom, certificate.fullImmunization {
-//            return String(format: "vaccination_start_screen_qrcode_complete_from_date_subtitle".localized, DateUtils.displayDateFormatter.string(from: date))
-//        }
-//        return "vaccination_start_screen_qrcode_incomplete_subtitle".localized
-    }
-
     var name: String {
         certificate.nam.fullName
     }
 
     var actionTitle: String {
-        isFullImmunization ? "vaccination_full_immunization_action_button".localized : "vaccination_partial_immunization_action_button".localized
-    }
-
-    var actionImage: UIImage {
-        isFullImmunization ? .completness : .halfShield
+        isFullImmunization ? "vaccination_full_immunization_action_button".localized : "vaccination_partial_immunization_action_button".localized // TODO change after decision
     }
 
     var tintColor: UIColor {
-        return .white // TODO remove again
+        return .white // TODO change after decision
 //        certificate.fullImmunizationValid ? .neutralWhite : .darkText
     }
 

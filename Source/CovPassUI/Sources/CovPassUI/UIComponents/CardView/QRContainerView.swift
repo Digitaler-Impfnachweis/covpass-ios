@@ -12,12 +12,18 @@ import UIKit
 public class QRContainerView: XibView {
     // MARK: - IBOutlet
 
-    @IBOutlet public var stackView: UIStackView!
+    @IBOutlet public var iconView: UIImageView!
     @IBOutlet public var imageView: UIImageView!
     @IBOutlet public var titleLabel: UILabel!
     @IBOutlet public var subtitleLabel: UILabel!
 
     // MARK: - Properties
+
+    public var icon: UIImage? {
+        didSet {
+            updateViews()
+        }
+    }
 
     public var image: UIImage? {
         didSet {
@@ -54,13 +60,15 @@ public class QRContainerView: XibView {
     }
 
     private func updateViews() {
+        iconView.image = icon
+
         imageView.image = image
         contentView?.backgroundColor = imageView.image == nil ? .clear : .neutralWhite
 
-        titleLabel.attributedText = title?.styledAs(.header_3)
+        titleLabel.attributedText = title?.styledAs(.header_2).colored(.neutralBlack)
         titleLabel.isHidden = titleLabel.attributedText.isNilOrEmpty
 
-        subtitleLabel.attributedText = subtitle?.styledAs(.body)
+        subtitleLabel.attributedText = subtitle?.styledAs(.body).colored(.neutralBlack)
         subtitleLabel.isHidden = subtitleLabel.attributedText.isNilOrEmpty
     }
 }
