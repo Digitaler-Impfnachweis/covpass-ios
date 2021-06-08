@@ -29,7 +29,7 @@ public extension UserDefaultsSettable where defaultKeys.RawValue == String {
 public extension UserDefaults {
     struct StartupInfo: UserDefaultsSettable {
         public enum defaultKeys: String {
-            case onboarding
+            case onboarding = "onboarding1"
             case appInstalled
         }
     }
