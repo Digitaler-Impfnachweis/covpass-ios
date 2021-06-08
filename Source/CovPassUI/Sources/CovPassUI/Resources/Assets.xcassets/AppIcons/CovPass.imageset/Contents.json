@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "CovPass_App_Icon.pdf",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

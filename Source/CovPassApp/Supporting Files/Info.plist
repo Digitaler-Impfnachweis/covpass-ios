@@ -6,8 +6,6 @@
 	<string>$(API_URL)</string>
 	<key>BUNDLE_NAME</key>
 	<string>$(BUNDLE_NAME)</string>
-	<key>TRUST_LIST_PUBLIC_KEY</key>
-	<string>$(TRUST_LIST_PUBLIC_KEY)</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
@@ -34,10 +32,12 @@
 	<string>QR code scanning</string>
 	<key>TLS_CERTIFICATE_NAME</key>
 	<string>$(TLS_CERTIFICATE_NAME)</string>
+	<key>TRUST_LIST_PUBLIC_KEY</key>
+	<string>$(TRUST_LIST_PUBLIC_KEY)</string>
+	<key>TRUST_LIST_STATIC_DATA</key>
+	<string>$(TRUST_LIST_STATIC_DATA)</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
-	<key>UILaunchScreen</key>
-	<dict/>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIRequiredDeviceCapabilities</key>
@@ -57,7 +57,5 @@
 	</array>
 	<key>UIUserInterfaceStyle</key>
 	<string>Light</string>
-	<key>TRUST_LIST_STATIC_DATA</key>
-	<string>$(TRUST_LIST_STATIC_DATA)</string>
 </dict>
 </plist>
