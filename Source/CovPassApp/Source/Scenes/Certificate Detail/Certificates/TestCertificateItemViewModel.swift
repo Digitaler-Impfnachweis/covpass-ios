@@ -49,7 +49,7 @@ struct TestCertificateItemViewModel: CertificateItemViewModel {
 
     var info: String {
         if let t = dgc.t?.first {
-            return String(format: "certificates_overview_test_certificate_date".localized, DateUtils.displayDateFormatter.string(from: t.sc))
+            return String(format: "certificates_overview_test_certificate_date".localized, DateUtils.displayDateTimeFormatter.string(from: t.sc))
         }
         return ""
     }

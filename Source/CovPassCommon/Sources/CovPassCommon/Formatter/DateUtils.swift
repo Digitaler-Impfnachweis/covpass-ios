@@ -11,6 +11,13 @@ import Foundation
 public enum DateUtils {
     public static let vaccinationDateFormatter = utcDateFormatter(format: "yyyy-MM-dd")
     public static let displayDateFormatter = utcDateFormatter(format: "dd.MM.yyyy")
+    public static var displayDateTimeFormatter: DateFormatter {
+        let formatter = DateFormatter()
+        formatter.calendar = Calendar(identifier: .iso8601)
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .short
+        return formatter
+    }
     public static let displayTimeFormatter = utcDateFormatter(format: "HH:mm")
     public static let displayTimeZoneFormatter = utcDateFormatter(format: "OOOO")
     public static let testDateTimeFormatter = utcDateFormatter(format: "yyyy-MM-dd'T'HH:mm:ssZ")
