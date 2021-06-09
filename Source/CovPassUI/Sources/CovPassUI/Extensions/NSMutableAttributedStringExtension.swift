@@ -16,9 +16,9 @@ extension Optional where Wrapped == NSAttributedString {
 
 extension String {
     func substring(with r: Range<Int>) -> String {
-        let startIndex = index(startIndex, offsetBy: r.lowerBound)
-        let endIndex = index(startIndex, offsetBy: r.upperBound)
-        return String(self[startIndex ..< endIndex])
+        let start = index(startIndex, offsetBy: r.lowerBound)
+        let end = index(startIndex, offsetBy: r.upperBound)
+        return String(self[start ..< end])
     }
 }
 
