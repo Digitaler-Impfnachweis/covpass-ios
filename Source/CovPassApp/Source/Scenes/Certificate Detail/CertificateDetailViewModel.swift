@@ -118,6 +118,7 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
                             self.certificates = self.certificates.filter({ $0 != cert })
                             if self.certificates.count > 0 {
                                 self.delegate?.viewModelDidUpdate()
+                                self.router.showCertificateDidDeleteDialog()
                             } else {
                                 self.resolver?.fulfill($0)
                             }
