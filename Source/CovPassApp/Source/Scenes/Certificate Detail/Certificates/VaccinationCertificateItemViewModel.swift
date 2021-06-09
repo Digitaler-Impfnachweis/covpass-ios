@@ -24,14 +24,20 @@ struct VaccinationCertificateItemViewModel: CertificateItemViewModel {
 
     var iconColor: UIColor {
         if !active {
-            return .onBackground100
+            return .onBackground40
+        }
+        if dgc.v?.first?.fullImmunization ?? true == false {
+            return .brandAccent
         }
         return .neutralWhite
     }
 
     var iconBackgroundColor: UIColor {
         if !active {
-            return .onBackground70
+            return .onBackground20
+        }
+        if dgc.v?.first?.fullImmunization ?? true == false {
+            return .brandAccent20
         }
         return .brandAccent
     }

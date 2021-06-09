@@ -24,14 +24,14 @@ struct TestCertificateItemViewModel: CertificateItemViewModel {
 
     var iconColor: UIColor {
         if !active {
-            return .onBackground100
+            return .onBackground40
         }
         return .neutralWhite
     }
 
     var iconBackgroundColor: UIColor {
         if !active {
-            return .onBackground70
+            return .onBackground20
         }
         return .brandAccentPurple
     }

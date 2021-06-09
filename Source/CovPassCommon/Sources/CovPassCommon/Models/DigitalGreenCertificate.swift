@@ -28,6 +28,20 @@ public struct DigitalGreenCertificate: Codable {
         ver.compare("1.1.0", options: .numeric) == .orderedAscending
     }
 
+    /// Returns the uvci from one of the Vaccination, Test, or Recovery entry
+    public var uvci: String {
+        if let v = v?.first {
+            return v.ci
+        }
+        if let t = t?.first {
+            return t.ci
+        }
+        if let r = r?.first {
+            return r.ci
+        }
+        return ""
+    }
+
     enum CodingKeys: String, CodingKey {
         case nam
         case dob

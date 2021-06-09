@@ -21,6 +21,8 @@ public extension UIColor {
 
     static let onBackground20 = UIColor("OnBackground20")
 
+    static let onBackground40 = UIColor("OnBackground40")
+
     static let onBackground50 = UIColor("OnBackground50")
 
     static let onBackground70 = UIColor("OnBackground70")

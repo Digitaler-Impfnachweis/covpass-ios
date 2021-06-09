@@ -108,51 +108,37 @@ class CertificateItemDetailViewModel: CertificateItemDetailViewModelProtocol {
 
     // MARK: - Methods
 
-    private func showErrorDialog() {
-        router.showUnexpectedErrorDialog()
+    func deleteCertificate() {
+        firstly {
+            showDeleteDialog()
+        }
+        .then {
+            self.repository.delete(self.certificate)
+        }
+        .done {
+            self.resolver?.fulfill(.didDeleteCertificate)
+        }
+        .catch { _ in
+            self.router.showUnexpectedErrorDialog()
+        }
     }
 
-    private func delete(_ vaccination: Vaccination) {
-//        guard let certificate = certificates.first(for: vaccination) else {
-//            showErrorDialog()
-//            return
-//        }
-//        firstly {
-//            showDeleteDialog(vaccination)
-//        }
-//        .then {
-//            self.repository.delete(vaccination)
-//        }
-//        .then {
-//            self.repository.getVaccinationCertificateList()
-//        }
-//        .map {
-//            $0.certificates.pairableCertificates(for: certificate)
-//        }
-//        .done {
-//            self.didUpdateCertificatesAfterDeletion($0)
-//        }
-//        .catch {
-//            self.delegate?.viewModelUpdateDidFailWithError($0)
-//        }
+    private func showDeleteDialog() -> Promise<Void> {
+        .init { seal in
+            let delete = DialogAction(title: "dialog_delete_certificate_button_delete".localized, style: .destructive) { _ in
+                seal.fulfill_()
+            }
+            let cancel = DialogAction(title: "dialog_delete_certificate_button_cancel".localized, style: .cancel) { _ in
+                seal.cancel()
+            }
+            self.router.showDialog(
+                title: "dialog_delete_certificate_title".localized,
+                message: "dialog_delete_certificate_message".localized,
+                actions: [delete, cancel],
+                style: .alert
+            )
+        }
     }
-
-//    private func showDeleteDialog(_ vaccination: Vaccination) -> Promise<Void> {
-//        .init { seal in
-//            let delete = DialogAction(title: "dialog_delete_certificate_button_delete".localized, style: .destructive) { _ in
-//                seal.fulfill_()
-//            }
-//            let cancel = DialogAction(title: "dialog_delete_certificate_button_cancel".localized, style: .cancel) { _ in
-//                seal.cancel()
-//            }
-//            self.router.showDialog(
-//                title: String(format: "dialog_delete_certificate_title".localized, vaccination.dn, vaccination.sd),
-//                message: "dialog_delete_certificate_message".localized,
-//                actions: [delete, cancel],
-//                style: .alert
-//            )
-//        }
-//    }
 
     func showQRCode() {
         router.showCertificate(for: certificate).cauterize()

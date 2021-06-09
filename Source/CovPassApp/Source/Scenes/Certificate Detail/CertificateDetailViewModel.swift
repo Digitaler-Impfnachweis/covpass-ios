@@ -23,6 +23,10 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
     private let resolver: Resolver<CertificateDetailSceneResult>?
     private var isFavorite = false
 
+    private var selectedCertificate: ExtendedCBORWebToken? {
+        CertificateSorter.sort(certificates).first
+    }
+
     var fullImmunization: Bool {
         certificates.map { $0.vaccinationCertificate.hcert.dgc.v?.first?.fullImmunization ?? false }.first(where: { $0 }) ?? false
     }
@@ -41,25 +45,23 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
     }
 
     var immunizationIcon: UIImage? {
-        // TODO fix first cert
-        if certificates.first?.vaccinationCertificate.hcert.dgc.r != nil {
+        if selectedCertificate?.vaccinationCertificate.hcert.dgc.r != nil {
             return .statusFull
         }
-        if certificates.first?.vaccinationCertificate.hcert.dgc.t != nil {
+        if selectedCertificate?.vaccinationCertificate.hcert.dgc.t != nil {
             return .statusFull
         }
         return fullImmunization ? .statusFull : .statusPartial
     }
 
     var immunizationTitle: String {
-        // TODO fix first cert
-        if let r = certificates.first?.vaccinationCertificate.hcert.dgc.r?.first {
+        if let r = selectedCertificate?.vaccinationCertificate.hcert.dgc.r?.first {
             if Date() < r.df {
                 return String(format: "recovery_certificate_overview_valid_from_title".localized, DateUtils.displayDateFormatter.string(from: r.df))
             }
             return String(format: "recovery_certificate_overview_valid_until_title".localized, DateUtils.displayDateFormatter.string(from: r.du))
         }
-        if let t = certificates.first?.vaccinationCertificate.hcert.dgc.t?.first {
+        if let t = selectedCertificate?.vaccinationCertificate.hcert.dgc.t?.first {
             if t.isPCR {
                 return String(format: "pcr_test_certificate_overview_title".localized, DateUtils.displayDateFormatter.string(from: t.sc))
             }
@@ -94,9 +96,8 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
 
     var items: [CertificateItem] {
         certificates
-            .reversed()
             .compactMap({ cert in
-                let active = true
+                let active = cert == selectedCertificate
                 var vm: CertificateItemViewModel?
                 if cert.vaccinationCertificate.hcert.dgc.r != nil {
                     vm = RecoveryCertificateItemViewModel(cert, active: active)
@@ -112,7 +113,16 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
                 }
                 return CertificateItem(viewModel: vm!, action: {
                     self.router.showDetail(for: cert).done({
-                        self.resolver?.fulfill($0)
+                        switch $0 {
+                        case .didDeleteCertificate:
+                            self.certificates = self.certificates.filter({ $0 != cert })
+                            if self.certificates.count > 0 {
+                                self.delegate?.viewModelDidUpdate()
+                            } else {
+                                self.resolver?.fulfill($0)
+                            }
+                        default: break
+                        }
                     }).cauterize()
                 })
             })
@@ -139,11 +149,11 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
     }
 
     func immunizationButtonTapped() {
-        showCertificatesOnOverview()
+        resolver?.fulfill(.showCertificatesOnOverview(certificates))
     }
 
     func toggleFavorite() {
-        guard let id = self.certificates.first?.vaccinationCertificate.hcert.dgc.v?.first?.ci else {
+        guard let id = certificates.first?.vaccinationCertificate.hcert.dgc.uvci else {
             self.showErrorDialog()
             return
         }
@@ -178,9 +188,5 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
 
     private func showErrorDialog() {
         router.showUnexpectedErrorDialog()
-    }
-
-    private func showCertificatesOnOverview() {
-        resolver?.fulfill(.showCertificatesOnOverview(certificates))
     }
 }

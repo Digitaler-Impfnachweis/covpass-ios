@@ -58,7 +58,7 @@ class CertificateDetailViewController: UIViewController {
         setupHeadline()
         setupImmunizationView()
         setupPersonalData()
-        setupVaccinations()
+        setupCertificates()
         setupNavigationBar()
     }
 
@@ -115,7 +115,7 @@ class CertificateDetailViewController: UIViewController {
         allCertificatesHeadline.layoutMargins = .init(top: .space_30, left: .space_24, bottom: .space_16, right: .space_24)
     }
 
-    private func setupVaccinations() {
+    private func setupCertificates() {
         vaccinationsStackView.subviews.forEach {
             $0.removeFromSuperview()
             self.vaccinationsStackView.removeArrangedSubview($0)

@@ -40,32 +40,4 @@ extension Array where Element == ExtendedCBORWebToken {
         }
         return pairableCertificates(for: certificate) + [certificate]
     }
-
-    /// Reduce to certificate pairs by taking the first certificate wich is either full or the last known certificate.
-    public func flatMapCertificatePairs() -> [Element] {
-        reduce(into: [Element?]()) { result, certificate in
-            let pair = certificatePair(for: certificate)
-            let preferedCertificate = pair.first(where: { $0.vaccinationCertificate.hcert.dgc.v?.first?.fullImmunization ?? false }) ?? pair.last
-            if result.contains(preferedCertificate) == false {
-                result.append(preferedCertificate)
-            }
-        }
-        .compactMap { $0 }
-    }
-
-    /// Brings the certificate with given id to the beginning of the given list.
-    public func makeFirstWithId(_ certificateId: String?) -> [Element] {
-        guard
-            let id = certificateId,
-            let favoriteCertificate = firstCertificateWithId(id) else {
-            return self
-        }
-        return [favoriteCertificate] + filter { $0 != favoriteCertificate }
-    }
-
-    public func first(for vaccination: Vaccination) -> Element? {
-        first { certificate in
-            certificate.vaccinationCertificate.hcert.dgc.v?.first(where: { $0 == vaccination }) != nil
-        }
-    }
 }

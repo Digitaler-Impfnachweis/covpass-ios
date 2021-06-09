@@ -141,18 +141,18 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
         }
     }
 
-    public func delete(_ vaccination: Vaccination) -> Promise<Void> {
+    public func delete(_ certificate: ExtendedCBORWebToken) -> Promise<Void> {
         firstly {
             getVaccinationCertificateList()
         }
         .then { list -> Promise<VaccinationCertificateList> in
             var certList = list
             // delete favorite if needed
-            if certList.favoriteCertificateId == vaccination.ci {
+            if certList.favoriteCertificateId == certificate.vaccinationCertificate.hcert.dgc.uvci {
                 certList.favoriteCertificateId = nil
             }
             certList.certificates.removeAll(where: { cert in
-                cert.vaccinationCertificate.hcert.dgc.v?.first?.ci == vaccination.ci
+                cert.vaccinationCertificate.hcert.dgc.uvci == certificate.vaccinationCertificate.hcert.dgc.uvci
             })
             return Promise.value(certList)
         }
@@ -221,7 +221,7 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
             getVaccinationCertificateList()
         }
         .map { currentList in
-            certificates.contains(where: { $0.vaccinationCertificate.hcert.dgc.v?.first?.ci == currentList.favoriteCertificateId })
+            certificates.contains(where: { $0.vaccinationCertificate.hcert.dgc.uvci == currentList.favoriteCertificateId })
         }
     }
 

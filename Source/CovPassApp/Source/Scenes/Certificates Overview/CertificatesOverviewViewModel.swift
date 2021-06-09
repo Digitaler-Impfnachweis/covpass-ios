@@ -12,6 +12,15 @@ import Foundation
 import PromiseKit
 import UIKit
 
+struct CertificatePair {
+    var certificates: [ExtendedCBORWebToken]
+    var isFavorite: Bool
+    init(certificates: [ExtendedCBORWebToken], isFavorite: Bool) {
+        self.certificates = certificates
+        self.isFavorite = isFavorite
+    }
+}
+
 class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
     // MARK: - Properties
 
@@ -21,14 +30,31 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
     private var certificateList = VaccinationCertificateList(certificates: [])
     private var lastKnownFavoriteCertificateId: String?
 
-    private var matchedCertificates: [ExtendedCBORWebToken] {
-        certificateList.certificates
-            .makeFirstWithId(certificateList.favoriteCertificateId)
-            .flatMapCertificatePairs()
+    private var matchedCertificates: [CertificatePair] {
+        var pairs = [CertificatePair]()
+        for cert in certificateList.certificates {
+            var exists = false
+            let isFavorite = certificateList.favoriteCertificateId == cert.vaccinationCertificate.hcert.dgc.uvci
+            for index in 0..<pairs.count {
+                if pairs[index].certificates.contains(where: {
+                    cert.vaccinationCertificate.hcert.dgc.nam == $0.vaccinationCertificate.hcert.dgc.nam && cert.vaccinationCertificate.hcert.dgc.dob == $0.vaccinationCertificate.hcert.dgc.dob
+                }) {
+                    exists = true
+                    pairs[index].certificates.append(cert)
+                    if isFavorite {
+                        pairs[index].isFavorite = true
+                    }
+                }
+            }
+            if !exists {
+                pairs.append(CertificatePair(certificates: [cert], isFavorite: isFavorite))
+            }
+        }
+        return pairs
     }
 
     var certificateViewModels: [CardViewModel] {
-        cardViewModels(for: matchedCertificates)
+        cardViewModels(for: matchedCertificates.sorted(by: { c, _ -> Bool in c.isFavorite }))
     }
 
     // MARK: - Lifecycle
@@ -124,14 +150,16 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
         }
     }
 
-    private func cardViewModels(for certificates: [ExtendedCBORWebToken]) -> [CardViewModel] {
+    private func cardViewModels(for certificates: [CertificatePair]) -> [CardViewModel] {
         if certificates.isEmpty {
             return [NoCertificateCardViewModel()]
         }
-        return certificates.map { certificate in
-            CertificateCardViewModel(
-                token: certificate,
-                isFavorite: certificateList.isFavoriteCertificate(certificate),
+        return certificates.compactMap { certificatePair in
+            let sortedCertificates = CertificateSorter.sort(certificatePair.certificates)
+            guard let cert = sortedCertificates.first else { return nil }
+            return CertificateCardViewModel(
+                token: cert,
+                isFavorite: certificatePair.isFavorite,
                 onAction: showCertificate,
                 onFavorite: toggleFavoriteStateForCertificateWithId,
                 repository: repository
@@ -158,7 +186,7 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
 
     func showCertificate(at indexPath: IndexPath) {
         showCertificates(
-            certificateList.certificates.certificatePair(for: matchedCertificates[indexPath.row])
+            matchedCertificates[indexPath.row].certificates
         )
     }
 
@@ -200,7 +228,7 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
             delegate?.viewModelNeedsFirstCertificateVisible()
 
         case .showCertificatesOnOverview(let certificates):
-            guard let index = matchedCertificates.firstIndex(of: certificates.last) else { return }
+            guard let index = matchedCertificates.firstIndex(where: { $0.certificates.elementsEqual(certificates) }) else { return }
             delegate?.viewModelNeedsCertificateVisible(at: index)
         }
     }

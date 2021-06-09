@@ -14,4 +14,5 @@ protocol CertificateItemDetailViewModelProtocol {
     var headline: String { get }
     var items: [(String, String)] { get }
     func showQRCode()
+    func deleteCertificate()
 }

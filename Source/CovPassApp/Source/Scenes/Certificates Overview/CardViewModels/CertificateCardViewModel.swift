@@ -134,7 +134,6 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
     }
 
     func onClickFavorite() {
-        guard let id = certificate.v?.first?.ci else { return }
-        onFavorite(id)
+        onFavorite(certificate.uvci)
     }
 }

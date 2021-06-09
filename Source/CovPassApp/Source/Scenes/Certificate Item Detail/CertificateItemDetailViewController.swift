@@ -99,6 +99,6 @@ class CertificateItemDetailViewController: UIViewController {
     }
 
     @objc private func deleteCertificate() {
-        print("delete")
+        viewModel.deleteCertificate()
     }
 }
