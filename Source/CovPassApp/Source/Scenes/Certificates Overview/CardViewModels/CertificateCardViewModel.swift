@@ -18,7 +18,6 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
     private var onAction: (ExtendedCBORWebToken) -> Void
     private var onFavorite: (String) -> Void
     private var repository: VaccinationRepositoryProtocol
-    private var didFailToUpdate: Bool = false
     private var certificate: DigitalGreenCertificate {
         token.vaccinationCertificate.hcert.dgc
     }

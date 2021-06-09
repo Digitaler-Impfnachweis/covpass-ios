@@ -33,6 +33,4 @@ struct NoCertificateCardViewModel: NoCertificateCardViewModelProtocol {
     var image: UIImage {
         .noCertificate
     }
-
-    func willMoveToWindow() {}
 }

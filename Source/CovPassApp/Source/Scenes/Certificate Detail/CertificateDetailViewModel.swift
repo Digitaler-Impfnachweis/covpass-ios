@@ -82,18 +82,6 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
         return String(format: "vaccination_certificate_overview_incomplete_title".localized, 1, 2)
     }
 
-    var immunizationBody: String {
-        fullImmunization ?
-            "vaccination_certificate_detail_view_complete_message".localized :
-            "vaccination_certificate_detail_view_incomplete_message".localized
-    }
-
-    var immunizationButton: String {
-        fullImmunization ?
-            "vaccination_certificate_detail_view_complete_action_button_title".localized :
-            "vaccination_certificate_detail_view_incomplete_action_button_title".localized
-    }
-
     var items: [CertificateItem] {
         certificates
             .compactMap({ cert in

@@ -24,30 +24,6 @@ class CertificateDetailRouter: CertificateDetailRouterProtocol, DialogRouterProt
 
     // MARK: - Methods
 
-    func showHowToScan() -> Promise<Void> {
-        sceneCoordinator.present(
-            HowToScanSceneFactory(
-                router: HowToScanRouter(sceneCoordinator: sceneCoordinator)
-            )
-        )
-    }
-
-    func showScanner() -> Promise<ScanResult> {
-        sceneCoordinator.present(
-            ScanSceneFactory(
-                cameraAccessProvider: CameraAccessProvider(
-                    router: DialogRouter(sceneCoordinator: sceneCoordinator)
-                )
-            )
-        )
-    }
-
-    func showCertificate(for token: ExtendedCBORWebToken) -> Promise<Void> {
-        sceneCoordinator.present(
-            CertificateSceneFactory(token: token)
-        )
-    }
-
     func showDetail(for certificate: ExtendedCBORWebToken) -> Promise<CertificateDetailSceneResult> {
         sceneCoordinator.push(
             CertificateItemDetailSceneFactory(
@@ -55,12 +31,5 @@ class CertificateDetailRouter: CertificateDetailRouterProtocol, DialogRouterProt
                 certificate: certificate
             )
         )
-    }
-
-    func showCertificateOverview() -> Promise<Void> {
-        .init { seal in
-            sceneCoordinator.pop()
-            seal.fulfill_()
-        }
     }
 }

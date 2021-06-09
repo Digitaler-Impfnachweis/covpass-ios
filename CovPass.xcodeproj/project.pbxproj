@@ -110,12 +110,10 @@
 		38E94DEC266123520015553C /* VaccinationRepositoryExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E94DEA266122E30015553C /* VaccinationRepositoryExtension.swift */; };
 		38E94DF126613F350015553C /* SceneCoordinatorMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E94DF026613F350015553C /* SceneCoordinatorMock.swift */; };
 		6507D7ED25FB5E0300D69F94 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 88AB2A4325FA40CE00D4EA52 /* Assets.xcassets */; };
-		653788F42658008500DEC364 /* CertificateViewRouterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653788F32658008500DEC364 /* CertificateViewRouterProtocol.swift */; };
 		65E0DB0A2657F31C004C660F /* CertificateSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E0DB052657F31C004C660F /* CertificateSceneFactory.swift */; };
 		65E0DB0B2657F31C004C660F /* CertificateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E0DB062657F31C004C660F /* CertificateViewController.swift */; };
 		65E0DB0C2657F31C004C660F /* CertificateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65E0DB082657F31C004C660F /* CertificateViewController.xib */; };
 		65E0DB0E2657F5A0004C660F /* CertificateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E0DB0D2657F5A0004C660F /* CertificateViewModel.swift */; };
-		887688FC265E8EF7005099BD /* String+Prefix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887688FB265E8EF7005099BD /* String+Prefix.swift */; };
 		88AB2A9725FA431100D4EA52 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88AB2A3B25FA40CE00D4EA52 /* AppDelegate.swift */; };
 		88AB2AA525FA431E00D4EA52 /* CovPassAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88AB2A3F25FA40CE00D4EA52 /* CovPassAppTests.swift */; };
 		88AB2AC025FA433F00D4EA52 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88AB2A4625FA40CE00D4EA52 /* AppDelegate.swift */; };
@@ -252,7 +250,6 @@
 		38E94DE8266121D60015553C /* VaccinationRepositoryExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaccinationRepositoryExtension.swift; sourceTree = "<group>"; };
 		38E94DEA266122E30015553C /* VaccinationRepositoryExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaccinationRepositoryExtension.swift; sourceTree = "<group>"; };
 		38E94DF026613F350015553C /* SceneCoordinatorMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneCoordinatorMock.swift; sourceTree = "<group>"; };
-		653788F32658008500DEC364 /* CertificateViewRouterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateViewRouterProtocol.swift; sourceTree = "<group>"; };
 		65D6D4DE25F8B8FB000CB339 /* CovPassApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CovPassApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		65D6D4EE25F8B8FB000CB339 /* CovPassAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CovPassAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		65D6D51425F8B94D000CB339 /* CovPassCheckApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CovPassCheckApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -261,7 +258,6 @@
 		65E0DB062657F31C004C660F /* CertificateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertificateViewController.swift; sourceTree = "<group>"; };
 		65E0DB082657F31C004C660F /* CertificateViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CertificateViewController.xib; sourceTree = "<group>"; };
 		65E0DB0D2657F5A0004C660F /* CertificateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateViewModel.swift; sourceTree = "<group>"; };
-		887688FB265E8EF7005099BD /* String+Prefix.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Prefix.swift"; sourceTree = "<group>"; };
 		88AB2A3B25FA40CE00D4EA52 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		88AB2A3C25FA40CE00D4EA52 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		88AB2A3F25FA40CE00D4EA52 /* CovPassAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CovPassAppTests.swift; sourceTree = "<group>"; };
@@ -403,7 +399,6 @@
 			isa = PBXGroup;
 			children = (
 				216D1F18264EF4E400370F16 /* CertificateDetailRouterProtocol.swift */,
-				653788F32658008500DEC364 /* CertificateViewRouterProtocol.swift */,
 				21A77A4F265AD986002FEEF1 /* CertificateDetailViewModelProtocol.swift */,
 			);
 			path = Protocols;
@@ -481,7 +476,6 @@
 		216D1F38264EF4ED00370F16 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				887688FB265E8EF7005099BD /* String+Prefix.swift */,
 				216D1F39264EF4ED00370F16 /* ApiServiceFactory.swift */,
 				216D1F3A264EF4ED00370F16 /* StringLocalization.swift */,
 				21A77A51265AFDE6002FEEF1 /* DialogRouterProtocol+ScanError.swift */,
@@ -1135,7 +1129,6 @@
 				3882AEAB266FD609000354CD /* VaccinationCertificateItemViewModel.swift in Sources */,
 				21A77A54265B0033002FEEF1 /* DialogRouterProtocol+DidDeleteCertificate.swift in Sources */,
 				216D2003264EF7B500370F16 /* ApiServiceFactory.swift in Sources */,
-				653788F42658008500DEC364 /* CertificateViewRouterProtocol.swift in Sources */,
 				216D1FCE264EF75D00370F16 /* CertificatesOverviewViewModelProtocol.swift in Sources */,
 				3882AEB7266FEBA3000354CD /* CertificateItemDetailViewModelProtocol.swift in Sources */,
 				216D1FA7264EF74100370F16 /* WelcomeViewModel.swift in Sources */,
@@ -1145,7 +1138,6 @@
 				216D1FD9264EF76400370F16 /* CertificateDetailViewController.swift in Sources */,
 				216D1FB9264EF74F00370F16 /* CertificatesOverviewViewModel.swift in Sources */,
 				216D1FD7264EF76400370F16 /* CertificateDetailSceneFactory.swift in Sources */,
-				887688FC265E8EF7005099BD /* String+Prefix.swift in Sources */,
 				216D1FA5264EF74100370F16 /* WelcomeViewController.swift in Sources */,
 				65E0DB0A2657F31C004C660F /* CertificateSceneFactory.swift in Sources */,
 				21A77A50265AD986002FEEF1 /* CertificateDetailViewModelProtocol.swift in Sources */,

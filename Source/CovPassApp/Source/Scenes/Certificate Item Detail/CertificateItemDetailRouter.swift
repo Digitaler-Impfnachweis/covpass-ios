@@ -24,13 +24,6 @@ class CertificateItemDetailRouter: CertificateItemDetailRouterProtocol, DialogRo
 
     // MARK: - Methods
 
-    func showCertificateDetail() -> Promise<Void> {
-        .init { seal in
-            sceneCoordinator.pop()
-            seal.fulfill_()
-        }
-    }
-
     func showCertificate(for token: ExtendedCBORWebToken) -> Promise<Void> {
         sceneCoordinator.present(
             CertificateSceneFactory(token: token)

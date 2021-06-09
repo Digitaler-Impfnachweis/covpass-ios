@@ -12,6 +12,5 @@ import PromiseKit
 import UIKit
 
 protocol CertificateItemDetailRouterProtocol: DialogRouterProtocol {
-    func showCertificateDetail() -> Promise<Void>
     func showCertificate(for token: ExtendedCBORWebToken) -> Promise<Void>
 }

@@ -183,12 +183,6 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
         }
     }
 
-    func showCertificate(at indexPath: IndexPath) {
-        showCertificates(
-            matchedCertificates[indexPath.row].certificates
-        )
-    }
-
     func showCertificate(_ certificate: ExtendedCBORWebToken) {
         showCertificates(
             certificateList.certificates.certificatePair(for: certificate)
