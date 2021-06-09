@@ -49,7 +49,7 @@ public class CertificateItem: XibView {
         infoLabel.attributedText = viewModel.info.styledAs(.body).colored(.onBackground70)
         activeLabel.attributedText = viewModel.activeTitle?.styledAs(.body).colored(.onBackground70)
         activeView.isHidden = viewModel.activeTitle == nil
-        chevron.tintColor = viewModel.iconBackgroundColor
+        chevron.tintColor = .brandAccent
 
         addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onPressItem)))
     }
