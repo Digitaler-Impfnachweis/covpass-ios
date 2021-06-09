@@ -58,11 +58,11 @@ public struct DigitalGreenCertificate: Codable {
             dob = DateUtils.vaccinationDateFormatter.date(from: dobDateString)
         }
         v = try? values.decode([Vaccination].self, forKey: .v)
-        t =  try? values.decode([Test].self, forKey: .t)
-        r =  try? values.decode([Recovery].self, forKey: .r)
+        t = try? values.decode([Test].self, forKey: .t)
+        r = try? values.decode([Recovery].self, forKey: .r)
         ver = try values.decode(String.self, forKey: .ver)
-        
-        if v == nil && t == nil && r == nil {
+
+        if v == nil, t == nil, r == nil {
             throw ApplicationError.missingData("DigitalGreenCertificate doesn't contain any of the following: Vaccination, Test, Recovery")
         }
     }

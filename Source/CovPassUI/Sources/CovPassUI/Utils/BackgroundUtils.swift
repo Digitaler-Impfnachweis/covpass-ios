@@ -1,6 +1,6 @@
 //
 //  BackgroundUtils.swift
-//  
+//
 //
 //  © Copyright IBM Deutschland GmbH 2021
 //  SPDX-License-Identifier: Apache-2.0
@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class BackgroundUtils {
+public enum BackgroundUtils {
     static let hideViewTag = 01_071_991
     static let imageViewSize: CGFloat = 100
 
@@ -16,8 +16,9 @@ public class BackgroundUtils {
         if let icons = Bundle.main.infoDictionary?["CFBundleIcons"] as? [String: Any],
            let primary = icons["CFBundlePrimaryIcon"] as? [String: Any],
            let files = primary["CFBundleIconFiles"] as? [String],
-           let icon = files.last {
-          return UIImage(named: icon)
+           let icon = files.last
+        {
+            return UIImage(named: icon)
         }
         return nil
     }

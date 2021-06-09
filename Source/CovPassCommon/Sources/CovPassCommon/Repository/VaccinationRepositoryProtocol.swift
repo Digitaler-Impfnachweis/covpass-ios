@@ -43,5 +43,4 @@ public protocol VaccinationRepositoryProtocol {
 
     /// Returns true if collection contains a favorite certificate. False otherwise.
     func favoriteStateForCertificates(_ certificates: [ExtendedCBORWebToken]) -> Promise<Bool>
-
 }

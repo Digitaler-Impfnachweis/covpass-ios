@@ -6,8 +6,6 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-import PromiseKit
-import UIKit
 import CovPassCommon
 import CovPassUI
 import PromiseKit
@@ -22,6 +20,7 @@ class CertificateItemDetailViewModel: CertificateItemDetailViewModelProtocol {
     private var dgc: DigitalGreenCertificate {
         certificate.vaccinationCertificate.hcert.dgc
     }
+
     private let resolver: Resolver<CertificateDetailSceneResult>?
 
     var title: String {
@@ -55,7 +54,7 @@ class CertificateItemDetailViewModel: CertificateItemDetailViewModelProtocol {
                 ("recovery_certificate_detail_view_data_issuer".localized, r.is),
                 ("recovery_certificate_detail_view_data_valid_from".localized, DateUtils.displayDateFormatter.string(from: r.df)),
                 ("recovery_certificate_detail_view_data_valid_until".localized, DateUtils.displayDateFormatter.string(from: r.du)),
-                ("recovery_certificate_detail_view_data_identifier".localized, r.ci),
+                ("recovery_certificate_detail_view_data_identifier".localized, r.ci)
             ]
         }
         if let t = dgc.t?.first {
@@ -71,7 +70,7 @@ class CertificateItemDetailViewModel: CertificateItemDetailViewModelProtocol {
                 ("test_certificate_detail_view_data_test_centre".localized, t.tc),
                 ("test_certificate_detail_view_data_test_country".localized, t.co),
                 ("test_certificate_detail_view_data_test_issuer".localized, t.is),
-                ("test_certificate_detail_view_data_test_identifier".localized, t.ci),
+                ("test_certificate_detail_view_data_test_identifier".localized, t.ci)
             ]
         }
         if let v = dgc.v?.first {
@@ -86,7 +85,7 @@ class CertificateItemDetailViewModel: CertificateItemDetailViewModelProtocol {
                 ("vaccination_certificate_detail_view_data_vaccine_date_".localized, DateUtils.displayDateFormatter.string(from: v.dt)),
                 ("vaccination_certificate_detail_view_data_vaccine_country".localized, v.map(key: v.co, from: Bundle.commonBundle.url(forResource: "country", withExtension: "json")) ?? v.co),
                 ("vaccination_certificate_detail_view_data_vaccine_issuer".localized, v.is),
-                ("vaccination_certificate_detail_view_data_vaccine_identifier".localized, v.ci),
+                ("vaccination_certificate_detail_view_data_vaccine_identifier".localized, v.ci)
             ]
         }
         return []

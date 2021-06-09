@@ -1,13 +1,13 @@
 //
 //  CertificateItemViewModel.swift
-//  
+//
 //
 //  Created by Timo Koenig on 08.06.21.
 //
 
+import CovPassCommon
 import Foundation
 import UIKit
-import CovPassCommon
 
 public protocol CertificateItemViewModel {
     var icon: UIImage { get }

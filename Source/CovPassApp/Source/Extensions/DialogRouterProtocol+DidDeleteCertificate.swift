@@ -6,8 +6,8 @@
 //  Copyright © 2021 IBM. All rights reserved.
 //
 
-import PromiseKit
 import CovPassUI
+import PromiseKit
 
 extension DialogRouterProtocol {
     func showCertificateDidDeleteDialog() {

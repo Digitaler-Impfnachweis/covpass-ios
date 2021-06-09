@@ -6,8 +6,6 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-import PromiseKit
-import UIKit
 import CovPassCommon
 import CovPassUI
 import PromiseKit
@@ -84,7 +82,7 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
 
     var items: [CertificateItem] {
         certificates
-            .compactMap({ cert in
+            .compactMap { cert in
                 let active = cert == selectedCertificate
                 var vm: CertificateItemViewModel?
                 if cert.vaccinationCertificate.hcert.dgc.r != nil {
@@ -100,10 +98,10 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
                     return nil
                 }
                 return CertificateItem(viewModel: vm!, action: {
-                    self.router.showDetail(for: cert).done({
+                    self.router.showDetail(for: cert).done {
                         switch $0 {
                         case .didDeleteCertificate:
-                            self.certificates = self.certificates.filter({ $0 != cert })
+                            self.certificates = self.certificates.filter { $0 != cert }
                             if self.certificates.count > 0 {
                                 self.delegate?.viewModelDidUpdate()
                                 self.router.showCertificateDidDeleteDialog()
@@ -112,9 +110,9 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
                             }
                         default: break
                         }
-                    }).cauterize()
+                    }.cauterize()
                 })
-            })
+            }
     }
 
     // MARK: - Lifecyle
@@ -143,7 +141,7 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
 
     func toggleFavorite() {
         guard let id = certificates.first?.vaccinationCertificate.hcert.dgc.uvci else {
-            self.showErrorDialog()
+            showErrorDialog()
             return
         }
         firstly {

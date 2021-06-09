@@ -18,6 +18,7 @@ public enum DateUtils {
         formatter.timeStyle = .short
         return formatter
     }
+
     public static let displayTimeFormatter = utcDateFormatter(format: "HH:mm")
     public static let displayTimeZoneFormatter = utcDateFormatter(format: "OOOO")
     public static let testDateTimeFormatter = utcDateFormatter(format: "yyyy-MM-dd'T'HH:mm:ssZ")

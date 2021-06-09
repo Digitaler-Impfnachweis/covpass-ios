@@ -6,16 +6,17 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
+import CovPassCommon
+import CovPassUI
 import Foundation
 import UIKit
-import CovPassUI
-import CovPassCommon
 
 struct RecoveryCertificateItemViewModel: CertificateItemViewModel {
     private let certificate: ExtendedCBORWebToken
     private var dgc: DigitalGreenCertificate {
         certificate.vaccinationCertificate.hcert.dgc
     }
+
     private let active: Bool
 
     var icon: UIImage {

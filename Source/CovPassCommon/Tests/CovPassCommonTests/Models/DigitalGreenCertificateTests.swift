@@ -12,7 +12,6 @@ import Foundation
 import XCTest
 
 class VaccinationCertificateTests: XCTestCase {
-
     var sut: DigitalGreenCertificate!
 
     func testVaccinationDecoding() {

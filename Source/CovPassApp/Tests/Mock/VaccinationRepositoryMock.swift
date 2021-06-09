@@ -27,17 +27,17 @@ public class VaccinationRepositoryMock: VaccinationRepositoryProtocol {
         return Promise.value(VaccinationCertificateList(certificates: []))
     }
 
-    public func delete(_ certificate: ExtendedCBORWebToken) -> Promise<Void> {
+    public func delete(_: ExtendedCBORWebToken) -> Promise<Void> {
         .value
     }
 
     var favoriteToggle = false
-    public func toggleFavoriteStateForCertificateWithIdentifier(_ id: String) -> Promise<Bool> {
+    public func toggleFavoriteStateForCertificateWithIdentifier(_: String) -> Promise<Bool> {
         favoriteToggle.toggle()
         return .value(favoriteToggle)
     }
 
-    public func favoriteStateForCertificates(_ certificates: [ExtendedCBORWebToken]) -> Promise<Bool> {
+    public func favoriteStateForCertificates(_: [ExtendedCBORWebToken]) -> Promise<Bool> {
         .value(favoriteToggle)
     }
 

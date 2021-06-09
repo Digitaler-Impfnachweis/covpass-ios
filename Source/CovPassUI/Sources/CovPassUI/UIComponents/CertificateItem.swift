@@ -20,7 +20,7 @@ public class CertificateItem: XibView {
     @IBOutlet public var activeLabel: UILabel!
     @IBOutlet public var chevron: UIImageView!
 
-    private let action: (() -> Void)
+    private let action: () -> Void
     private let viewModel: CertificateItemViewModel
 
     // MARK: - Lifecycle
@@ -32,11 +32,12 @@ public class CertificateItem: XibView {
         setupView()
     }
 
-    public required init?(coder aDecoder: NSCoder) {
+    @available(*, unavailable)
+    public required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    public required init(frame: CGRect) {
+    public required init(frame _: CGRect) {
         fatalError("init(frame:) has not been implemented")
     }
 

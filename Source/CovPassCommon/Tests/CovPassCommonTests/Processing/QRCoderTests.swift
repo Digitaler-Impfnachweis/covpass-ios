@@ -16,6 +16,7 @@ class QRCoderTests: XCTestCase {
         let res = try QRCoder.parse(CertificateMock.validCertificate).wait()
         _ = try res.payloadJsonData()
     }
+
     func testParseValidCertificateRSA() throws {
         let res = try QRCoder.parse(CertificateMock.validCertifcateRSA).wait()
         _ = try res.payloadJsonData()

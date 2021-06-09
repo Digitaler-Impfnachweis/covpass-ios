@@ -16,7 +16,7 @@ public enum HCertError: Error {
     case verifyError
 }
 
-class HCert {
+enum HCert {
     static func verify(message: CoseSign1Message, trustList: TrustList) throws {
         for cert in trustList.certificates {
             if let valid = try? verify(message: message, certificate: cert.rawData), valid {

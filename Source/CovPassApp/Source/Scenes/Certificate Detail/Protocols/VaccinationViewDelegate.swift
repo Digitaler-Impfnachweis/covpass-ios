@@ -6,8 +6,8 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-import Foundation
 import CovPassCommon
+import Foundation
 
 protocol VaccinationViewDelegate: AnyObject {
     func vaccinationViewDidPressDelete(_ vaccination: Vaccination)

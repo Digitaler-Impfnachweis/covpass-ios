@@ -15,7 +15,7 @@ public enum QRCodeError: Error {
     case versionNotSupported
 }
 
-struct QRCoder {
+enum QRCoder {
     static func parse(_ payload: String) -> Promise<CoseSign1Message> {
         return Promise { seal in
             let payload = payload.stripPrefix()

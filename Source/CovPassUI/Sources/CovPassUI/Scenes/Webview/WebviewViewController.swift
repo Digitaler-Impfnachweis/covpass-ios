@@ -67,6 +67,5 @@ extension WebviewViewController: WKNavigationDelegate {
             }
         }
         decisionHandler(.allow)
-
     }
 }

@@ -29,7 +29,7 @@ class TestResultViewModel: ValidationResultViewModel {
 
     var resultTitle: String {
         guard let testCert = certificate?.hcert.dgc.t?.first else {
-            return "" // TODO error
+            return "" // TODO: error
         }
         if isPCR {
             if testCert.isPositive {
@@ -53,9 +53,9 @@ class TestResultViewModel: ValidationResultViewModel {
 
     var resultBody: String {
         guard let testCert = certificate?.hcert.dgc.t?.first else {
-            return "" // TODO error
+            return "" // TODO: error
         }
-        if testCert.isPositive && !testCert.isPCR {
+        if testCert.isPositive, !testCert.isPCR {
             return "validation_check_popup_test_positive_message".localized
         }
         return "validation_check_popup_test_older_than_24_h_message".localized
@@ -63,9 +63,9 @@ class TestResultViewModel: ValidationResultViewModel {
 
     var nameTitle: String? {
         guard let testCert = certificate?.hcert.dgc.t?.first else {
-            return "" // TODO error
+            return "" // TODO: error
         }
-        if testCert.isPositive && !testCert.isPCR {
+        if testCert.isPositive, !testCert.isPCR {
             return nil
         }
         return certificate?.hcert.dgc.nam.fullName
@@ -73,9 +73,9 @@ class TestResultViewModel: ValidationResultViewModel {
 
     var nameBody: String? {
         guard let testCert = certificate?.hcert.dgc.t?.first else {
-            return "" // TODO error
+            return "" // TODO: error
         }
-        if testCert.isPositive && !testCert.isPCR {
+        if testCert.isPositive, !testCert.isPCR {
             return nil
         }
         if let date = certificate?.hcert.dgc.dob {
@@ -86,9 +86,9 @@ class TestResultViewModel: ValidationResultViewModel {
 
     var errorTitle: String? {
         guard let testCert = certificate?.hcert.dgc.t?.first else {
-            return "" // TODO error
+            return "" // TODO: error
         }
-        if testCert.isPositive && !testCert.isPCR {
+        if testCert.isPositive, !testCert.isPCR {
             return nil
         }
         return String(format: "validation_check_popup_pcr_test_positive_date_of_issue".localized, DateUtils.displayDateFormatter.string(from: testCert.sc), DateUtils.displayTimeFormatter.string(from: testCert.sc))
@@ -96,9 +96,9 @@ class TestResultViewModel: ValidationResultViewModel {
 
     var errorBody: String? {
         guard let testCert = certificate?.hcert.dgc.t?.first else {
-            return "" // TODO error
+            return "" // TODO: error
         }
-        if testCert.isPositive && !testCert.isPCR {
+        if testCert.isPositive, !testCert.isPCR {
             return nil
         }
         return DateUtils.displayTimeZoneFormatter.string(from: testCert.sc)
@@ -108,7 +108,7 @@ class TestResultViewModel: ValidationResultViewModel {
         guard let testCert = certificate?.hcert.dgc.t?.first else {
             return .validationSearch
         }
-        if testCert.isPositive && !testCert.isPCR {
+        if testCert.isPositive, !testCert.isPCR {
             return nil
         }
         return .data

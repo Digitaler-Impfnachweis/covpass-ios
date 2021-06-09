@@ -7,8 +7,8 @@
 //
 
 import Foundation
-import XCTest
 import PromiseKit
+import XCTest
 
 @testable import CovPassCommon
 

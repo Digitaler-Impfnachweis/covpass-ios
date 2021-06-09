@@ -11,7 +11,7 @@ import UIKit
 public class LinkLabel: XibView {
     @IBOutlet public var textableView: UITextView!
 
-    public override func initView() {
+    override public func initView() {
         super.initView()
         textableView.delegate = self
         textableView.isScrollEnabled = false
@@ -32,7 +32,7 @@ public class LinkLabel: XibView {
 }
 
 extension LinkLabel: UITextViewDelegate {
-    public func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
+    public func textView(_: UITextView, shouldInteractWith URL: URL, in _: NSRange, interaction _: UITextItemInteraction) -> Bool {
         UIApplication.shared.open(URL)
         return false
     }

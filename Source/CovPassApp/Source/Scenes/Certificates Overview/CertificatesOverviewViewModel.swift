@@ -35,7 +35,7 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
         for cert in certificateList.certificates {
             var exists = false
             let isFavorite = certificateList.favoriteCertificateId == cert.vaccinationCertificate.hcert.dgc.uvci
-            for index in 0..<pairs.count {
+            for index in 0 ..< pairs.count {
                 if pairs[index].certificates.contains(where: {
                     cert.vaccinationCertificate.hcert.dgc.nam == $0.vaccinationCertificate.hcert.dgc.nam && cert.vaccinationCertificate.hcert.dgc.dob == $0.vaccinationCertificate.hcert.dgc.dob
                 }) {
@@ -220,7 +220,7 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
             router.showCertificateDidDeleteDialog()
             delegate?.viewModelNeedsFirstCertificateVisible()
 
-        case .showCertificatesOnOverview(let certificates):
+        case let .showCertificatesOnOverview(certificates):
             guard let index = matchedCertificates.firstIndex(where: { $0.certificates.elementsEqual(certificates) }) else { return }
             delegate?.viewModelNeedsCertificateVisible(at: index)
         }

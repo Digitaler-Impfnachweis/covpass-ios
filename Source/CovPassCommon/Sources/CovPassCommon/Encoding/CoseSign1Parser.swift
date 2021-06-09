@@ -32,13 +32,14 @@ struct CoseSign1Message {
     var signature: [UInt8]
 
     var signatureAlgorithm: CoseSignatureAlgorithm {
-         if let protectedCbor = try? CBOR.decode(protected),
-            let alg = protectedCbor[1],
-            alg == CBOR(integerLiteral: CoseSignatureAlgorithm.ps256.rawValue) {
+        if let protectedCbor = try? CBOR.decode(protected),
+           let alg = protectedCbor[1],
+           alg == CBOR(integerLiteral: CoseSignatureAlgorithm.ps256.rawValue)
+        {
             return .ps256
-         }
-         return .es256
-     }
+        }
+        return .es256
+    }
 
     init(protected: [UInt8], unprotected: Any?, payload: [UInt8], signature: [UInt8]) {
         self.protected = protected
@@ -54,7 +55,7 @@ struct CoseSign1Message {
         return try JSONSerialization.data(withJSONObject: certificateJson as Any)
     }
 
-    /// MARK:  - CoseSign1Message parser
+    // MARK: - CoseSign1Message parser
 
     /// Decodes the received data with CBOR and parses the resulting COSE structure
     /// - parameter decompressedPayload: the data containing a COSE object
@@ -68,16 +69,16 @@ struct CoseSign1Message {
         }
         guard array.count == 4 else { throw CoseParsingError.wrongArrayLength }
         guard case let .byteString(protectedValue) = array[0],
-           case let .map(unprotectedValue) = array[1],
-           case let .byteString(payloadValue) = array[2],
-           case let .byteString(signatureValue) = array[3]
+              case let .map(unprotectedValue) = array[1],
+              case let .byteString(payloadValue) = array[2],
+              case let .byteString(signatureValue) = array[3]
         else {
             throw CoseParsingError.missingValue
         }
-        self.protected = protectedValue
-        self.unprotected = unprotectedValue
-        self.payload = payloadValue
-        self.signature = signatureValue
+        protected = protectedValue
+        unprotected = unprotectedValue
+        payload = payloadValue
+        signature = signatureValue
     }
 
     /// Parse a CBOR object into a readable String

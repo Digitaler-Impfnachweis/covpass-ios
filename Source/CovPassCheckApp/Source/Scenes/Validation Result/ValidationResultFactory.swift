@@ -6,8 +6,8 @@
 //  Copyright © 2021 IBM. All rights reserved.
 //
 
-import Foundation
 import CovPassCommon
+import Foundation
 
 struct ValidationResultFactory {
     static func createViewModel(router: ValidationResultRouterProtocol, repository: VaccinationRepositoryProtocol, certificate: CBORWebToken?) -> ValidationResultViewModel {

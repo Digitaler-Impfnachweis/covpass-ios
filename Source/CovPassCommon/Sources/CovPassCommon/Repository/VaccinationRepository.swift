@@ -240,7 +240,7 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
     func loadLocalTrustListIfNeeded() throws {
         // Has never been updated before; load local list and then update it
         if try userDefaults.fetch(UserDefaults.keyLastUpdatedTrustList) == nil {
-            let localTrustList = try Data(contentsOf: self.initialDataURL)
+            let localTrustList = try Data(contentsOf: initialDataURL)
             try keychain.store(KeychainConfiguration.trustListKey, value: localTrustList)
         }
     }

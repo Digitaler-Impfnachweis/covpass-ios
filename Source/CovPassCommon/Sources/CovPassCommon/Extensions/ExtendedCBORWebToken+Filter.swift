@@ -6,12 +6,12 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-extension Array where Element == ExtendedCBORWebToken {
-    public func firstCertificateWithId(_ id: String) -> Element? {
+public extension Array where Element == ExtendedCBORWebToken {
+    func firstCertificateWithId(_ id: String) -> Element? {
         first(where: { $0.vaccinationCertificate.hcert.dgc.v?.first?.ci == id })
     }
 
-    public func containsCertificateWithId(_ id: String) -> Bool {
+    func containsCertificateWithId(_ id: String) -> Bool {
         contains(
             where: {
                 $0.vaccinationCertificate.hcert.dgc.v?.first?.ci == id
@@ -19,13 +19,13 @@ extension Array where Element == ExtendedCBORWebToken {
         )
     }
 
-    public func firstIndex(of certificate: Element?) -> Int? {
+    func firstIndex(of certificate: Element?) -> Int? {
         firstIndex {
             $0.vaccinationCertificate.hcert.dgc == certificate?.vaccinationCertificate.hcert.dgc
         }
     }
 
-    public func pairableCertificates(for certificate: Element) -> [Element] {
+    func pairableCertificates(for certificate: Element) -> [Element] {
         filter {
             $0 != certificate
         }
@@ -34,7 +34,7 @@ extension Array where Element == ExtendedCBORWebToken {
         }
     }
 
-    public func certificatePair(for certificate: Element) -> [Element] {
+    func certificatePair(for certificate: Element) -> [Element] {
         if isEmpty {
             return []
         }

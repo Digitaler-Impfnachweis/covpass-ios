@@ -1,6 +1,6 @@
 //
 //  Test.swift
-//  
+//
 //
 //  © Copyright IBM Deutschland GmbH 2021
 //  SPDX-License-Identifier: Apache-2.0
@@ -80,7 +80,8 @@ public class Test: Codable {
         }
         sc = scDate
         if let drDateString = try? values.decode(String.self, forKey: .dr),
-           let drDate = DateUtils.testDateTimeFormatter.date(from: drDateString) {
+           let drDate = DateUtils.testDateTimeFormatter.date(from: drDateString)
+        {
             dr = drDate
         }
         tr = try values.decode(String.self, forKey: .tr)

@@ -10,7 +10,7 @@ import CovPassCommon
 import CovPassUI
 
 extension DialogRouterProtocol {
-    func showDialogForScanError(_ error: Error, completion: (()-> Void)? = nil) {
+    func showDialogForScanError(_ error: Error, completion: (() -> Void)? = nil) {
         switch error {
         case QRCodeError.versionNotSupported:
             showDialog(

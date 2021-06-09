@@ -16,7 +16,6 @@ import UIKit
 class MockCertificateViewModel: CertificatesOverviewViewModelProtocol {
     // MARK: - Test Variables
 
-
     var refreshedCalled = false
     var processCalled = false
     var configureCalled = false
