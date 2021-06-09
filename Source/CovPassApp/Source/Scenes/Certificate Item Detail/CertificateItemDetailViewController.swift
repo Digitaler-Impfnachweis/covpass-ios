@@ -20,8 +20,8 @@ class CertificateItemDetailViewController: UIViewController {
     @IBOutlet var itemStackView: UIStackView!
     @IBOutlet var titleLabel: PlainLabel!
     @IBOutlet var qrCodeButton: MainButton!
-    @IBOutlet var infoLabel1: PlainLabel!
-    @IBOutlet var infoLabel2: PlainLabel!
+    @IBOutlet var infoLabel1: LinkLabel!
+    @IBOutlet var infoLabel2: LinkLabel!
 
     // MARK: - Properties
 

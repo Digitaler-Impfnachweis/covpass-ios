@@ -48,11 +48,11 @@
                                     </subviews>
                                     <edgeInsets key="layoutMargins" top="40" left="24" bottom="40" right="24"/>
                                 </stackView>
-                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8lP-8f-hEk" userLabel="Info 1" customClass="PlainLabel" customModule="CovPassUI">
+                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8lP-8f-hEk" userLabel="Info 1" customClass="LinkLabel" customModule="CovPassUI">
                                     <rect key="frame" x="0.0" y="458" width="414" height="128"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 </view>
-                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fHs-Y7-col" userLabel="Info 2" customClass="PlainLabel" customModule="CovPassUI">
+                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fHs-Y7-col" userLabel="Info 2" customClass="LinkLabel" customModule="CovPassUI">
                                     <rect key="frame" x="0.0" y="586" width="414" height="128"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 </view>
@@ -81,6 +81,11 @@
             <point key="canvasLocation" x="-52" y="-522"/>
         </view>
     </objects>
+    <designables>
+        <designable name="eZz-97-0Z9">
+            <size key="intrinsicContentSize" width="414" height="50"/>
+        </designable>
+    </designables>
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
