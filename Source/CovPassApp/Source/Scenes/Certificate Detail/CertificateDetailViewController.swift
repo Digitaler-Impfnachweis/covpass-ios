@@ -84,6 +84,7 @@ class CertificateDetailViewController: UIViewController {
         immunizationContainerView.layoutMargins.bottom = .space_24
         immunizationContainerView.backgroundColor = .neutralWhite
         immunizationView.stackView.alignment = .top
+        immunizationView.bottomBorder.isHidden = true
         immunizationView.image = viewModel.immunizationIcon
         immunizationView.attributedTitleText = viewModel.immunizationTitle.styledAs(.header_3)
         immunizationView.attributedBodyText = "recovery_certificate_overview_message".localized.styledAs(.body).colored(.onBackground70)
@@ -105,7 +106,6 @@ class CertificateDetailViewController: UIViewController {
         nameView.attributedTitleText = "certificates_overview_personal_data_name".localized.styledAs(.header_3)
         nameView.attributedBodyText = viewModel.name.styledAs(.body)
         nameView.contentView?.layoutMargins = .init(top: .space_12, left: .space_24, bottom: .space_12, right: .space_24)
-        nameView.showBottomBorder()
 
         birtdateView.attributedTitleText = "certificates_overview_personal_data_date_of_birth".localized.styledAs(.header_3)
         birtdateView.attributedBodyText = viewModel.birthDate.styledAs(.body)

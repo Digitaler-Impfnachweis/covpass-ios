@@ -64,31 +64,26 @@ class VaccinationView: XibView {
         dateView.attributedBodyText = viewModel?.date.styledAs(.body)
         dateView.isHidden = viewModel?.date.isEmpty ?? true
         dateView.contentView?.layoutMargins = itemsMargins
-        dateView.showBottomBorder()
 
         vaccineView.attributedTitleText = "vaccination_certificate_detail_view_data_vaccine".localized.styledAs(.header_3)
         vaccineView.attributedBodyText = viewModel?.fullVaccineProduct.styledAs(.body)
         vaccineView.isHidden = viewModel?.vaccine.isEmpty ?? true
         vaccineView.contentView?.layoutMargins = itemsMargins
-        vaccineView.showBottomBorder()
 
         manufacturerView.attributedTitleText = "vaccination_certificate_detail_view_data_producer".localized.styledAs(.header_3)
         manufacturerView.attributedBodyText = viewModel?.manufacturer.styledAs(.body)
         manufacturerView.isHidden = viewModel?.manufacturer.isEmpty ?? true
         manufacturerView.contentView?.layoutMargins = itemsMargins
-        manufacturerView.showBottomBorder()
 
         issuerView.attributedTitleText = "vaccination_certificate_detail_view_data_exhibitor".localized.styledAs(.header_3)
         issuerView.attributedBodyText = viewModel?.issuer.styledAs(.body)
         issuerView.isHidden = viewModel?.issuer.isEmpty ?? true
         issuerView.contentView?.layoutMargins = itemsMargins
-        issuerView.showBottomBorder()
 
         countryView.attributedTitleText = "vaccination_certificate_detail_view_data_country".localized.styledAs(.header_3)
         countryView.attributedBodyText = viewModel?.country.styledAs(.body)
         countryView.isHidden = viewModel?.country.isEmpty ?? true
         countryView.contentView?.layoutMargins = itemsMargins
-        countryView.showBottomBorder()
 
         uvciView.attributedTitleText = "vaccination_certificate_detail_view_data_identification_number".localized.styledAs(.header_3)
         uvciView.attributedBodyText = viewModel?.uvci.styledAs(.body)

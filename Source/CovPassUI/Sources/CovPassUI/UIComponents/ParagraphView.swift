@@ -37,10 +37,6 @@ public class ParagraphView: XibView {
 
     // MARK: - Methods
 
-    public func showBottomBorder() {
-        bottomBorder.isHidden = false
-    }
-
     private func setupAccessibility() {
         let accessibilityLabelText = "\(attributedTitleText?.string ?? "") \(attributedBodyText?.string ?? "")"
         enableAccessibility(label: accessibilityLabelText, traits: .staticText)

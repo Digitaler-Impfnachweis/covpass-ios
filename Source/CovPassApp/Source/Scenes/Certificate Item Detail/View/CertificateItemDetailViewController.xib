@@ -30,7 +30,7 @@
                     <rect key="frame" x="0.0" y="24" width="414" height="858"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="4ka-qw-LRS">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="634"/>
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="714"/>
                             <subviews>
                                 <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="eZz-97-0Z9" userLabel="Headline" customClass="PlainLabel" customModule="CovPassUI">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
@@ -38,16 +38,22 @@
                                 <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="200" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="rhc-O6-hd2" userLabel="Item StackView">
                                     <rect key="frame" x="0.0" y="50" width="414" height="200"/>
                                 </stackView>
-                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="F9o-pz-Rvg" userLabel="QRCode Button" customClass="MainButton" customModule="CovPassUI">
-                                    <rect key="frame" x="0.0" y="250" width="414" height="128"/>
-                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                </view>
+                                <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ir9-gh-Ice">
+                                    <rect key="frame" x="0.0" y="250" width="414" height="208"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="F9o-pz-Rvg" userLabel="QRCode Button" customClass="MainButton" customModule="CovPassUI">
+                                            <rect key="frame" x="24" y="40" width="366" height="128"/>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        </view>
+                                    </subviews>
+                                    <edgeInsets key="layoutMargins" top="40" left="24" bottom="40" right="24"/>
+                                </stackView>
                                 <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8lP-8f-hEk" userLabel="Info 1" customClass="PlainLabel" customModule="CovPassUI">
-                                    <rect key="frame" x="0.0" y="378" width="414" height="128"/>
+                                    <rect key="frame" x="0.0" y="458" width="414" height="128"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 </view>
                                 <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fHs-Y7-col" userLabel="Info 2" customClass="PlainLabel" customModule="CovPassUI">
-                                    <rect key="frame" x="0.0" y="506" width="414" height="128"/>
+                                    <rect key="frame" x="0.0" y="586" width="414" height="128"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 </view>
                             </subviews>

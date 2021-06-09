@@ -77,12 +77,12 @@ class CertificateItemDetailViewController: UIViewController {
             let view = ParagraphView()
             view.attributedTitleText = item.0.styledAs(.header_3)
             view.attributedBodyText = item.1.styledAs(.body)
+            view.layoutMargins.top = .space_12
             itemStackView.addArrangedSubview(view)
         }
     }
 
     private func setupButton() {
-        qrCodeButton.layoutMargins = .init(top: .zero, left: .space_24, bottom: .zero, right: .space_24)
         qrCodeButton.title = "vaccination_certificate_detail_view_qrcode_action_button_title".localized
         qrCodeButton.style = .secondary
         qrCodeButton.icon = .scan
@@ -91,6 +91,8 @@ class CertificateItemDetailViewController: UIViewController {
 
     private func setupInfo() {
         infoLabel1.attributedText = "vaccination_certificate_detail_view_data_vaccine_note_de".localized.styledAs(.body)
+        infoLabel1.layoutMargins = .init(top: .zero, left: .space_24, bottom: .space_24, right: .space_24)
         infoLabel2.attributedText = "vaccination_certificate_detail_view_data_vaccine_note_en".localized.styledAs(.body)
+        infoLabel2.layoutMargins = .init(top: .zero, left: .space_24, bottom: .space_40, right: .space_24)
     }
 }
