@@ -107,8 +107,6 @@
 
 "validation_check_popup_partial_valid_vaccination_message" = "Gleichen Sie jetzt folgende Daten mit einem Ausweisdokument der geimpften Person ab.";
 
-"validation_check_popup_partial_valid_vaccination_name" = "%@";
-
 "validation_check_popup_partial_valid_vaccination_date_of_birth" = "Geboren am %@";
 
 "validation_check_popup_partial_valid_vaccination_date_of_birth_at" = "Geboren am";
@@ -141,11 +139,9 @@
 
 "validation_check_popup_test_older_than_24_h_message" = "Gleichen Sie jetzt folgende Daten mit einem Ausweisdokument der geprüften Person ab.";
 
-"validation_check_popup_test_older_than_24_h_name" = "%@";
-
 "validation_check_popup_test_older_than_24_h_date_of_birth" = "Geboren am %@";
 
-"validation_check_popup_test_older_than_24_h_date_of_issue" = "Getestet am %@, %@ Uhr";
+"validation_check_popup_test_older_than_24_h_date_of_issue" = "Getestet am %@";
 
 "validation_check_popup_test_older_than_24_h_utc" = "UTC %@";
 
@@ -155,11 +151,9 @@
 
 "validation_check_popup_test_less_than_24_h_message" = "Gleichen Sie jetzt folgende Daten mit einem Ausweisdokument der geprüften Person ab.";
 
-"validation_check_popup_test_less_than_24_h_name" = "%@";
-
 "validation_check_popup_test_less_than_24_h_date_of_birth" = "Geboren am %@";
 
-"validation_check_popup_test_less_than_24_h_date_of_issue" = "Getestet am %@, %@ Uhr";
+"validation_check_popup_test_less_than_24_h_date_of_issue" = "Getestet am %@";
 
 "validation_check_popup_test_less_than_24_h_utc" = "UTC %@";
 
@@ -175,11 +169,9 @@
 
 "validation_check_popup_pcr_test_positive_message" = "Gleichen Sie jetzt folgende Daten mit einem Ausweisdokument der geprüften Person ab.";
 
-"validation_check_popup_pcr_test_positive_name" = "%@";
-
 "validation_check_popup_pcr_test_positive_date_of_birth" = "Geboren am %@";
 
-"validation_check_popup_pcr_test_positive_date_of_issue" = "Probenahme am %@, %@ Uhr";
+"validation_check_popup_pcr_test_positive_date_of_issue" = "Probenahme am %@";
 
 "validation_check_popup_pcr_test_positive_utc" = "UTC %@";
 
@@ -189,11 +181,9 @@
 
 "validation_check_popup_valid_pcr_test_less_than_72_h_message" = "Gleichen Sie jetzt folgende Daten mit einem Ausweisdokument der geprüften Person ab.";
 
-"validation_check_popup_valid_pcr_test_less_than_72_h_name" = "%@";
-
 "validation_check_popup_valid_pcr_test_less_than_72_h_date_of_birth" = "Geboren am %@";
 
-"validation_check_popup_valid_pcr_test_less_than_72_h_date_of_issue" = "Probenahme am %@, %@ Uhr";
+"validation_check_popup_valid_pcr_test_less_than_72_h_date_of_issue" = "Probenahme am %@";
 
 "validation_check_popup_valid_pcr_test_less_than_72_h_utc" = "UTC %@";
 
@@ -203,11 +193,9 @@
 
 "validation_check_popup_valid_pcr_test_older_than_72_h_message" = "Gleichen Sie jetzt folgende Daten mit einem Ausweisdokument der geprüften Person ab.";
 
-"validation_check_popup_valid_pcr_test_older_than_72_h_name" = "%@";
-
 "validation_check_popup_valid_pcr_test_older_than_72_h_date_of_birth" = "Geboren am %@";
 
-"validation_check_popup_valid_pcr_test_older_than_72_h_date_of_issue" = "Probenahme am %@, %@ Uhr";
+"validation_check_popup_valid_pcr_test_older_than_72_h_date_of_issue" = "Probenahme am %@";
 
 "validation_check_popup_valid_pcr_test_older_than_72_h_utc" = "UTC %@";
 
@@ -216,8 +204,6 @@
 "validation_check_popup_recovery_proven_title" = "Genesenenzertifikat gültig";
 
 "validation_check_popup_recovery_proven_message" = "Gleichen Sie jetzt folgende Daten mit einem Ausweisdokument der genesenen Person ab.";
-
-"validation_check_popup_recovery_proven_name" = "%@";
 
 "validation_check_popup_recovery_proven_date_of_birth" = "Geboren am %@";
 

@@ -128,6 +128,15 @@ public extension UIImage {
 
     @ImageLoader(name: "group")
     private(set) static var group
+
+    @ImageLoader(name: "status_full_detail")
+    private(set) static var statusFullDetail
+
+    @ImageLoader(name: "status_partial_detail")
+    private(set) static var statusPartialDetail
+
+    @ImageLoader(name: "icon_test")
+    private(set) static var iconTest
 }
 
 @propertyWrapper

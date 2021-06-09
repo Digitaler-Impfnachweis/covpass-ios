@@ -43,6 +43,7 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
                 let certificate = try JSONDecoder().decode(VaccinationCertificateList.self, from: data)
                 seal.fulfill(certificate)
             } catch {
+                print(error)
                 if case KeychainError.fetch = error {
                     seal.fulfill(VaccinationCertificateList(certificates: []))
                     return

@@ -21,10 +21,10 @@ public class Name: Codable {
     /// The full name of the person
     public var fullName: String {
         if let gn = gn, let fn = fn {
-            return "\(gn) \(fn)"
+            return "\(fn) \(gn)"
         }
         if let gnt = gnt {
-            return"\(gnt) \(fnt)"
+            return"\(fnt) \(gnt)"
         }
         return fnt
     }

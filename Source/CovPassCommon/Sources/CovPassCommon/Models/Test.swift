@@ -96,10 +96,10 @@ public class Test: Codable {
         try container.encode(tt, forKey: .tt)
         try container.encode(nm, forKey: .nm)
         try container.encode(ma, forKey: .ma)
-        let scDate = DateUtils.vaccinationDateFormatter.string(from: sc)
+        let scDate = DateUtils.testDateTimeFormatter.string(from: sc)
         try container.encode(scDate, forKey: .sc)
         if let drDateString = dr {
-            let drDate = DateUtils.vaccinationDateFormatter.string(from: drDateString)
+            let drDate = DateUtils.testDateTimeFormatter.string(from: drDateString)
             try container.encode(drDate, forKey: .dr)
         }
         try container.encode(tr, forKey: .tr)

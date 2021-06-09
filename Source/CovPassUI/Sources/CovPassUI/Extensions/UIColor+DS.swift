@@ -43,6 +43,10 @@ public extension UIColor {
 
     static let brandAccent70 = UIColor("BrandAccent70")
 
+    static let brandAccentPurple = UIColor("BrandAccentPurple")
+
+    static let brandAccentBlue = UIColor("BrandAccentBlue")
+
     static let primaryButtonShadow = UIColor("PrimaryButtonShadow")
 
     // MARK: - Neutral Colors

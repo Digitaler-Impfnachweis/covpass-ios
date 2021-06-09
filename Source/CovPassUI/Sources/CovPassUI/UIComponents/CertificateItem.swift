@@ -41,7 +41,7 @@ public class CertificateItem: XibView {
     }
 
     private func setupView() {
-        icon.image = viewModel.icon
+        icon.image = viewModel.icon.withRenderingMode(.alwaysTemplate)
         icon.tintColor = viewModel.iconColor
         iconView.backgroundColor = viewModel.iconBackgroundColor
         titleLabel.attributedText = viewModel.title.styledAs(.header_3)

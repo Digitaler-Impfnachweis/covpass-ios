@@ -103,14 +103,10 @@
 
 /********** start Screen: partial immunization certificate **********/
 
-"vaccination_partial_immunization_title" = "Impfzertifikat";
-
 "vaccination_partial_immunization_action_button" = "Zertifikate anzeigen";
 
 
 /********** start screen: full immunization certificate **********/
-
-"vaccination_full_immunization_title" = "Impfzertifikat";
 
 "vaccination_full_immunization_action_button" = "Zertifikate anzeigen";
 
@@ -119,20 +115,15 @@
 
 /********** start screen: test certificate **********/
 
-"test_certification_title" = "Antigen-Schnelltest";
-
-"test_certificate_time_of_test" = "%@, %d:%d Uhr";
-
 "test_certificate_action_button" = "Zertifikate anzeigen";
 
 
+/********** start screen: pcr test certificate **********/
+
+"pcr_test_certificate_action_button" = "Zertifikate anzeigen";
+
+
 /********** start screen: recovery certificate **********/
-
-"recovery_certificate_title" = "Genesenenzertifikat";
-
-"recovery_certificate_valid_until_date" = "Gültig bis %@";
-
-"recovery_certificate_valid_from_date" = "Gültig ab %@";
 
 "recovery_certificate_action_button" = "Zertifikate anzeigen";
 
@@ -163,17 +154,27 @@
 
 "vaccination_certificate_detail_view_incomplete_action_button_title" = "Impfung hinzufügen";
 
-"vaccination_certificate_overview_complete_title" = "Vollständiger Impfschutz ab %@";
+"vaccination_certificate_overview_complete_from_title" = "Vollständiger Impfschutz ab %@";
 
-"vaccination_certificate_overview_complete_message" = "Ihr Impfschutz ist noch nicht vollständig. Der Impfschutz ist erst 14 Tage nach der letzten Impfung vollständig.";
+"vaccination_certificate_overview_complete_from_message" = "Ihr Impfschutz ist noch nicht vollständig. Der Impfschutz ist erst 14 Tage nach der letzten Impfung vollständig.";
+
+"vaccination_certificate_overview_complete_title" = "Vollständiger Impfschutz";
+
+"vaccination_certificate_overview_complete_message" = "Zeigen Sie bei Bedarf den QR-Code vor. Halten Sie zudem ein Ausweisdokument bei der Überprüfung bereit.";
 
 "vaccination_certificate_overview_complete_action_button_title" = "Aktuellen QR-Code anzeigen";
 
-"test_certificate_overview_title" = "Negativer Antigen-Schnelltest vom %@, %d:%d Uhr";
+"test_certificate_overview_title" = "Negativer Antigen-Schnelltest vom %@";
 
 "test_certificate_overview_message" = "Zeigen Sie bei Bedarf den QR-Code vor. Halten Sie zudem ein Ausweisdokument bei der Überprüfung bereit.";
 
 "test_certificate_overview_action_button_title" = "Aktuellen QR-Code anzeigen";
+
+"pcr_test_certificate_overview_title" = "Negativer PCR-Test vom %@";
+
+"pcr_test_certificate_overview_message" = "Zeigen Sie bei Bedarf den QR-Code vor. Halten Sie zudem ein Ausweisdokument bei der Überprüfung bereit.";
+
+"pcr_test_certificate_overview_action_button_title" = "Aktuellen QR-Code anzeigen";
 
 "recovery_certificate_overview_valid_until_title" = "Genesung gültig bis %@";
 
@@ -211,13 +212,13 @@
 
 "certificates_overview_test_certificate_message" = "Antigen-Schnelltest";
 
-"certificates_overview_test_certificate_date" = "Getestet am %@, %d:%d Uhr";
+"certificates_overview_test_certificate_date" = "Getestet am %@";
 
 "certificates_overview_pcr_test_certificate_title" = "Testzertifikat";
 
 "certificates_overview_pcr_test_certificate_message" = "PCR-Test";
 
-"certificates_overview_pcr_test_certificate_date" = "Probenahme am %@, %d:%d Uhr";
+"certificates_overview_pcr_test_certificate_date" = "Probenahme am %@";
 
 
 /********** detail view: delete certificate **********/
@@ -302,8 +303,6 @@
 "test_certificate_detail_view_test_qrcode_screen_title" = "Antigen-Schnelltest";
 
 "test_certificate_detail_view_pcr_test_qrcode_screen_title" = "PCR-Test";
-
-"test_certificate_detail_view_qrcode_screen_message" = "%@, %d:%d Uhr";
 
 "test_certificate_detail_view_qrcode_screen_action_button_title" = "Schließen";
 

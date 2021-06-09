@@ -41,10 +41,30 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
     }
 
     var immunizationIcon: UIImage? {
-        fullImmunization ? .statusFull : .statusPartial
+        // TODO fix first cert
+        if certificates.first?.vaccinationCertificate.hcert.dgc.r != nil {
+            return .statusFull
+        }
+        if certificates.first?.vaccinationCertificate.hcert.dgc.t != nil {
+            return .statusFull
+        }
+        return fullImmunization ? .statusFull : .statusPartial
     }
 
     var immunizationTitle: String {
+        // TODO fix first cert
+        if let r = certificates.first?.vaccinationCertificate.hcert.dgc.r?.first {
+            if Date() < r.df {
+                return String(format: "recovery_certificate_overview_valid_from_title".localized, DateUtils.displayDateFormatter.string(from: r.df))
+            }
+            return String(format: "recovery_certificate_overview_valid_until_title".localized, DateUtils.displayDateFormatter.string(from: r.du))
+        }
+        if let t = certificates.first?.vaccinationCertificate.hcert.dgc.t?.first {
+            if t.isPCR {
+                return String(format: "pcr_test_certificate_overview_title".localized, DateUtils.displayDateFormatter.string(from: t.sc))
+            }
+            return String(format: "test_certificate_overview_title".localized, DateUtils.displayDateFormatter.string(from: t.sc))
+        }
         guard let cert = certificates.sorted(by: { c, _ in c.vaccinationCertificate.hcert.dgc.v?.first?.fullImmunization ?? false }).first?.vaccinationCertificate.hcert.dgc.v?.first else {
             return ""
         }
@@ -74,10 +94,23 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
 
     var items: [CertificateItem] {
         certificates
-            .sorted(by: { $0.vaccinationCertificate.iat ?? Date() < $1.vaccinationCertificate.iat ?? Date() })
-            .map({ cert in
-                let vm = VaccinationCertificateItemViewModel(cert)
-                return CertificateItem(viewModel: vm, action: {
+            .reversed()
+            .compactMap({ cert in
+                let active = true
+                var vm: CertificateItemViewModel?
+                if cert.vaccinationCertificate.hcert.dgc.r != nil {
+                    vm = RecoveryCertificateItemViewModel(cert, active: active)
+                }
+                if cert.vaccinationCertificate.hcert.dgc.t != nil {
+                    vm = TestCertificateItemViewModel(cert, active: active)
+                }
+                if cert.vaccinationCertificate.hcert.dgc.v != nil {
+                    vm = VaccinationCertificateItemViewModel(cert, active: active)
+                }
+                if vm == nil {
+                    return nil
+                }
+                return CertificateItem(viewModel: vm!, action: {
                     self.router.showDetail(for: cert).done({
                         self.resolver?.fulfill($0)
                     }).cauterize()

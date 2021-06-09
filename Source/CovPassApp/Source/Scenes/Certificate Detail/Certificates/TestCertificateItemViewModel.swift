@@ -12,35 +12,54 @@ import CovPassUI
 import CovPassCommon
 
 struct TestCertificateItemViewModel: CertificateItemViewModel {
+    private let certificate: ExtendedCBORWebToken
+    private var dgc: DigitalGreenCertificate {
+        certificate.vaccinationCertificate.hcert.dgc
+    }
+    private let active: Bool
+
     var icon: UIImage {
-        .completness
+        .iconTest
     }
 
     var iconColor: UIColor {
-        .neutralWhite
+        if !active {
+            return .onBackground100
+        }
+        return .neutralWhite
     }
 
     var iconBackgroundColor: UIColor {
-        .brandAccent
+        if !active {
+            return .onBackground70
+        }
+        return .brandAccentPurple
     }
 
     var title: String {
-        "Testcert"
+        return "certificates_overview_test_certificate_title".localized
     }
 
     var subtitle: String {
-        "Antigen-Schnelltest"
+        if let t = dgc.t?.first {
+            return t.isPCR ? "certificates_overview_pcr_test_certificate_message".localized : "certificates_overview_test_certificate_message".localized
+        }
+        return ""
     }
 
     var info: String {
-        "Getestet am 123.123.123, 12:12"
+        if let t = dgc.t?.first {
+            return String(format: "certificates_overview_test_certificate_date".localized, DateUtils.displayDateFormatter.string(from: t.sc))
+        }
+        return ""
     }
 
     var activeTitle: String? {
-        "Aktuell verwendetes Zertifikat"
+        active ? "certificates_overview_currently_uses_certificate_note".localized : nil
     }
 
-    init(_ certificate: ExtendedCBORWebToken) {
-        
+    init(_ certificate: ExtendedCBORWebToken, active: Bool = false) {
+        self.certificate = certificate
+        self.active = active
     }
 }

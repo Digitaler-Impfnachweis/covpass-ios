@@ -61,9 +61,9 @@ class CertificateItemDetailViewController: UIViewController {
         navigationController?.navigationBar.backIndicatorTransitionMaskImage = .arrowBack
         navigationController?.navigationBar.tintColor = .onBackground100
 
-//        let favoriteIcon = UIBarButtonItem(image: viewModel.favoriteIcon, style: .plain, target: self, action: #selector(toggleFavorite))
-//        favoriteIcon.tintColor = .onBackground100
-//        navigationItem.rightBarButtonItem = favoriteIcon
+        let deleteIcon = UIBarButtonItem(image: .delete, style: .plain, target: self, action: #selector(deleteCertificate))
+        deleteIcon.tintColor = .error
+        navigationItem.rightBarButtonItem = deleteIcon
     }
 
     private func setupHeadline() {
@@ -74,11 +74,13 @@ class CertificateItemDetailViewController: UIViewController {
 
     private func setupList() {
         viewModel.items.forEach { item in
-            let view = ParagraphView()
-            view.attributedTitleText = item.0.styledAs(.header_3)
-            view.attributedBodyText = item.1.styledAs(.body)
-            view.layoutMargins.top = .space_12
-            itemStackView.addArrangedSubview(view)
+            if !item.1.isEmpty {
+                let view = ParagraphView()
+                view.attributedTitleText = item.0.styledAs(.header_3)
+                view.attributedBodyText = item.1.styledAs(.body)
+                view.layoutMargins.top = .space_12
+                itemStackView.addArrangedSubview(view)
+            }
         }
     }
 
@@ -94,5 +96,9 @@ class CertificateItemDetailViewController: UIViewController {
         infoLabel1.layoutMargins = .init(top: .zero, left: .space_24, bottom: .space_24, right: .space_24)
         infoLabel2.attributedText = "vaccination_certificate_detail_view_data_vaccine_note_en".localized.styledAs(.body)
         infoLabel2.layoutMargins = .init(top: .zero, left: .space_24, bottom: .space_40, right: .space_24)
+    }
+
+    @objc private func deleteCertificate() {
+        print("delete")
     }
 }

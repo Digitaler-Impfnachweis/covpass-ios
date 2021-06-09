@@ -85,8 +85,8 @@ public class CertificateCollectionViewCell: CardCollectionViewCell {
 
         containerView.backgroundColor = vm.backgroundColor
 
-        qrContainerView.icon = vm.titleIcon
-
+        qrContainerView.icon = vm.titleIcon.withRenderingMode(.alwaysTemplate)
+        qrContainerView.iconView?.tintColor = vm.backgroundColor
         qrContainerView.image = vm.qrCode
         qrContainerView.layoutMargins.bottom = .space_20
         qrContainerView.isHidden = vm.qrCode == nil

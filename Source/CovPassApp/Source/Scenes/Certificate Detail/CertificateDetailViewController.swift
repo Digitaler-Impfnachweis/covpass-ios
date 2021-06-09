@@ -116,12 +116,13 @@ class CertificateDetailViewController: UIViewController {
     }
 
     private func setupVaccinations() {
-//        stackView.setCustomSpacing(.space_40, after: vaccinationsStackView)
         vaccinationsStackView.subviews.forEach {
             $0.removeFromSuperview()
             self.vaccinationsStackView.removeArrangedSubview($0)
         }
-        viewModel.items.map({ self.vaccinationsStackView.addArrangedSubview($0) })
+        viewModel.items.forEach {
+            self.vaccinationsStackView.addArrangedSubview($0)
+        }
     }
 
     @objc private func toggleFavorite() {

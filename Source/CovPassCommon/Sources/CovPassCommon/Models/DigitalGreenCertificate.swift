@@ -48,9 +48,9 @@ public struct DigitalGreenCertificate: Codable {
         r =  try? values.decode([Recovery].self, forKey: .r)
         ver = try values.decode(String.self, forKey: .ver)
         
-        guard v != nil ||
-                t != nil ||
-                r != nil else { throw ApplicationError.missingData("DigitalGreenCertificate doesn't contain any of the following: Vaccination, Test, Recovery") }
+        if v == nil && t == nil && r == nil {
+            throw ApplicationError.missingData("DigitalGreenCertificate doesn't contain any of the following: Vaccination, Test, Recovery")
+        }
     }
 
     public func encode(to encoder: Encoder) throws {
