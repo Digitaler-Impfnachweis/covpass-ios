@@ -40,10 +40,10 @@ class QRContainerViewTests: XCTestCase {
         XCTAssertEqual(sut.imageView.image, .arrowBack)
         XCTAssertEqual(sut.contentView?.backgroundColor, .neutralWhite)
 
-        XCTAssertEqual(sut.titleLabel.attributedText, "Test title".styledAs(.header_3))
+        XCTAssertEqual(sut.titleLabel.attributedText, "Test title".styledAs(.header_2).colored(.neutralBlack))
         XCTAssertFalse(sut.titleLabel.isHidden)
 
-        XCTAssertEqual(sut.subtitleLabel.attributedText, "Test subtitle".styledAs(.body))
+        XCTAssertEqual(sut.subtitleLabel.attributedText, "Test subtitle".styledAs(.body).colored(.neutralBlack))
         XCTAssertFalse(sut.subtitleLabel.isHidden)
     }
 }

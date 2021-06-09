@@ -29,22 +29,5 @@ class CardViewActionTests: XCTestCase {
     func testInit() {
         XCTAssertNotNil(sut.titleLabel)
         XCTAssertNotNil(sut.contentView)
-        XCTAssertNotNil(sut.actionButton)
-        XCTAssertNotNil(sut.stateImageView)
-    }
-
-    func testButtonImage() {
-        let image = UIImage()
-        sut.buttonImage = image
-        XCTAssertTrue(sut.buttonImage === sut.actionButton.currentImage)
-    }
-
-    func testButtonAction() {
-        var buttonTapped = false
-        sut.action = {
-            buttonTapped = true
-        }
-        sut.actionButtonPressed(button: UIButton())
-        XCTAssertTrue(buttonTapped)
     }
 }

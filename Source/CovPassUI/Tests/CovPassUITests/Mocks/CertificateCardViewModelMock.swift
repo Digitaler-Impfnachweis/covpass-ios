@@ -23,6 +23,14 @@ class CertificateCardViewModelMock: CertificateCardViewModelProtocol {
     var title: String {
         "Vaccination Title"
     }
+
+    var subtitle: String {
+        "subtitle"
+    }
+
+    var titleIcon: UIImage {
+        .card
+    }
     
     var isFavorite: Bool = true
     
