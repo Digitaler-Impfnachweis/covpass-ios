@@ -18,9 +18,6 @@ protocol CertificateDetailViewModelProtocol {
     var birthDate: String { get }
     var immunizationIcon: UIImage? { get }
     var immunizationTitle: String { get }
-//    var immunizationBody: String { get }
-//    var immunizationButton: String { get }
-//    var vaccinations: [VaccinationViewModel] { get }
     var items: [CertificateItem] { get }
 
     func refresh()

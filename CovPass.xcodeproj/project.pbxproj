@@ -32,11 +32,9 @@
 		216D1FCE264EF75D00370F16 /* CertificatesOverviewViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216D1F0C264EF4E400370F16 /* CertificatesOverviewViewModelProtocol.swift */; };
 		216D1FCF264EF75D00370F16 /* CertificatesOverviewViewModelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216D1F0A264EF4E400370F16 /* CertificatesOverviewViewModelDelegate.swift */; };
 		216D1FD5264EF76400370F16 /* CertificateDetailRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216D1F10264EF4E400370F16 /* CertificateDetailRouter.swift */; };
-		216D1FD6264EF76400370F16 /* VaccinationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216D1F0E264EF4E400370F16 /* VaccinationViewModel.swift */; };
 		216D1FD7264EF76400370F16 /* CertificateDetailSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216D1F11264EF4E400370F16 /* CertificateDetailSceneFactory.swift */; };
 		216D1FD8264EF76400370F16 /* CertificateDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216D1F12264EF4E400370F16 /* CertificateDetailViewModel.swift */; };
 		216D1FD9264EF76400370F16 /* CertificateDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216D1F0F264EF4E400370F16 /* CertificateDetailViewController.swift */; };
-		216D1FDF264EF76800370F16 /* VaccinationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216D1F14264EF4E400370F16 /* VaccinationView.swift */; };
 		216D1FE0264EF76800370F16 /* CertificateDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 216D1F15264EF4E400370F16 /* CertificateDetailViewController.xib */; };
 		216D1FE7264EF76D00370F16 /* CertificateDetailRouterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216D1F18264EF4E400370F16 /* CertificateDetailRouterProtocol.swift */; };
 		216D1FED264EF77200370F16 /* HowToScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216D1F2D264EF4E400370F16 /* HowToScanViewController.swift */; };
@@ -157,12 +155,10 @@
 		216D1F0A264EF4E400370F16 /* CertificatesOverviewViewModelDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificatesOverviewViewModelDelegate.swift; sourceTree = "<group>"; };
 		216D1F0B264EF4E400370F16 /* CertificatesOverviewRouterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificatesOverviewRouterProtocol.swift; sourceTree = "<group>"; };
 		216D1F0C264EF4E400370F16 /* CertificatesOverviewViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificatesOverviewViewModelProtocol.swift; sourceTree = "<group>"; };
-		216D1F0E264EF4E400370F16 /* VaccinationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaccinationViewModel.swift; sourceTree = "<group>"; };
 		216D1F0F264EF4E400370F16 /* CertificateDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateDetailViewController.swift; sourceTree = "<group>"; };
 		216D1F10264EF4E400370F16 /* CertificateDetailRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateDetailRouter.swift; sourceTree = "<group>"; };
 		216D1F11264EF4E400370F16 /* CertificateDetailSceneFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateDetailSceneFactory.swift; sourceTree = "<group>"; };
 		216D1F12264EF4E400370F16 /* CertificateDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateDetailViewModel.swift; sourceTree = "<group>"; };
-		216D1F14264EF4E400370F16 /* VaccinationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaccinationView.swift; sourceTree = "<group>"; };
 		216D1F15264EF4E400370F16 /* CertificateDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CertificateDetailViewController.xib; sourceTree = "<group>"; };
 		216D1F18264EF4E400370F16 /* CertificateDetailRouterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateDetailRouterProtocol.swift; sourceTree = "<group>"; };
 		216D1F1A264EF4E400370F16 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
@@ -390,7 +386,6 @@
 				216D1F10264EF4E400370F16 /* CertificateDetailRouter.swift */,
 				216D1F11264EF4E400370F16 /* CertificateDetailSceneFactory.swift */,
 				216D1F12264EF4E400370F16 /* CertificateDetailViewModel.swift */,
-				216D1F0E264EF4E400370F16 /* VaccinationViewModel.swift */,
 				216D1F0F264EF4E400370F16 /* CertificateDetailViewController.swift */,
 			);
 			path = "Certificate Detail";
@@ -399,7 +394,6 @@
 		216D1F13264EF4E400370F16 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				216D1F14264EF4E400370F16 /* VaccinationView.swift */,
 				216D1F15264EF4E400370F16 /* CertificateDetailViewController.xib */,
 			);
 			path = Views;
@@ -1117,7 +1111,6 @@
 				216D1FEF264EF77200370F16 /* HowToScanSceneFactory.swift in Sources */,
 				216D1FE7264EF76D00370F16 /* CertificateDetailRouterProtocol.swift in Sources */,
 				216D1FB8264EF74F00370F16 /* CertificatesOverviewRouter.swift in Sources */,
-				216D1FDF264EF76800370F16 /* VaccinationView.swift in Sources */,
 				216D1FD8264EF76400370F16 /* CertificateDetailViewModel.swift in Sources */,
 				216D2004264EF7B600370F16 /* StringLocalization.swift in Sources */,
 				216D1FCD264EF75D00370F16 /* CertificatesOverviewRouterProtocol.swift in Sources */,
@@ -1147,7 +1140,6 @@
 				3882AEB7266FEBA3000354CD /* CertificateItemDetailViewModelProtocol.swift in Sources */,
 				216D1FA7264EF74100370F16 /* WelcomeViewModel.swift in Sources */,
 				216D1FF0264EF77200370F16 /* HowToScanViewModel.swift in Sources */,
-				216D1FD6264EF76400370F16 /* VaccinationViewModel.swift in Sources */,
 				216D1FA4264EF74100370F16 /* WelcomeRouter.swift in Sources */,
 				3882AEB5266FEB75000354CD /* CertificateItemDetailViewModel.swift in Sources */,
 				216D1FD9264EF76400370F16 /* CertificateDetailViewController.swift in Sources */,
