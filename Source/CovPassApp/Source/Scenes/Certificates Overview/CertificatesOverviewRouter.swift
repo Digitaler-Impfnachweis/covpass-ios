@@ -25,10 +25,10 @@ class CertificatesOverviewRouter: CertificatesOverviewRouterProtocol, DialogRout
 
     // MARK: - Methods
 
-    func showCertificates(_ certificates: [ExtendedCBORWebToken]) -> Promise<VaccinationDetailSceneResult> {
+    func showCertificates(_ certificates: [ExtendedCBORWebToken]) -> Promise<CertificateDetailSceneResult> {
         sceneCoordinator.push(
-            VaccinationDetailSceneFactory(
-                router: VaccinationDetailRouter(sceneCoordinator: sceneCoordinator),
+            CertificateDetailSceneFactory(
+                router: CertificateDetailRouter(sceneCoordinator: sceneCoordinator),
                 certificates: certificates
             )
         )

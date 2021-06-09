@@ -52,9 +52,9 @@ class VaccinationView: XibView {
         immunizationHeadline.attributedTitleText = viewModel?.headline.styledAs(.header_2)
         immunizationHeadline.image = .delete
         immunizationHeadline.tintColor = .red
-        immunizationHeadline.action = { [weak self] in
-            self?.viewModel?.delete()
-        }
+//        immunizationHeadline.action = { [weak self] in
+//            self?.viewModel?.delete()
+//        }
         immunizationHeadline.layoutMargins = .init(top: .space_40, left: .space_24, bottom: .zero, right: .space_24)
         stackView.setCustomSpacing(.space_12, after: immunizationHeadline)
 
@@ -100,8 +100,8 @@ class VaccinationView: XibView {
         showQrCodeButton.title = "vaccination_certificate_detail_view_qrcode_action_button_title".localized
         showQrCodeButton.style = .secondary
         showQrCodeButton.icon = .scan
-        showQrCodeButton.action = {
-            self.viewModel?.showCertificate()
-        }
+//        showQrCodeButton.action = {
+//            self.viewModel?.showCertificate()
+//        }
     }
 }

@@ -60,11 +60,11 @@ class MockCertificateViewModel: CertificatesOverviewViewModelProtocol {
         return Promise(error: ApplicationError.unknownError)
     }
 
-    func detailViewModel(_: ExtendedCBORWebToken) -> VaccinationDetailViewModel? {
+    func detailViewModel(_: ExtendedCBORWebToken) -> CertificateDetailViewModel? {
         return nil
     }
 
-    func detailViewModel(_: IndexPath) -> VaccinationDetailViewModel? {
+    func detailViewModel(_: IndexPath) -> CertificateDetailViewModel? {
         return nil
     }
 

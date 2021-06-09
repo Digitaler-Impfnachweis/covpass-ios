@@ -13,7 +13,7 @@ import Scanner
 import UIKit
 
 protocol CertificatesOverviewRouterProtocol: DialogRouterProtocol {
-    func showCertificates(_ certificates: [ExtendedCBORWebToken]) -> Promise<VaccinationDetailSceneResult>
+    func showCertificates(_ certificates: [ExtendedCBORWebToken]) -> Promise<CertificateDetailSceneResult>
     func showHowToScan() -> Promise<Void>
     func scanQRCode() -> Promise<ScanResult>
     func showAppInformation()

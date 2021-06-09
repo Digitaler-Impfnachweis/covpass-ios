@@ -184,7 +184,7 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
             self.refreshCertificates().map { result }
         }
         .done {
-            self.handleVaccinationDetailSceneResult($0)
+            self.handleCertificateDetailSceneResult($0)
         }
         .catch { _ in
             // Improve error handling
@@ -192,7 +192,7 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
         }
     }
 
-    private func handleVaccinationDetailSceneResult(_ result: VaccinationDetailSceneResult) {
+    private func handleCertificateDetailSceneResult(_ result: CertificateDetailSceneResult) {
         switch result {
         case .didDeleteCertificate:
             router.showCertificateDidDeleteDialog()

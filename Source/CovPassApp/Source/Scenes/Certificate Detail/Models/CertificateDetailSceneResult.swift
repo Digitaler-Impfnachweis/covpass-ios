@@ -1,5 +1,5 @@
 //
-//  VaccinationDetailSceneResult.swift
+// CertificateDetailSceneResult.swift
 //
 //
 //  © Copyright IBM Deutschland GmbH 2021
@@ -9,7 +9,7 @@
 import CovPassCommon
 import Foundation
 
-enum VaccinationDetailSceneResult {
+enum CertificateDetailSceneResult {
     case didDeleteCertificate
     case showCertificatesOnOverview([ExtendedCBORWebToken])
 }

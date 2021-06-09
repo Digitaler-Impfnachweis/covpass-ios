@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="VaccinationDetailViewController" customModule="CovPassApp" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CertificateDetailViewController">
             <connections>
+                <outlet property="allCertificatesHeadline" destination="INh-B1-2sv" id="Uek-TH-AIn"/>
                 <outlet property="birtdateView" destination="o8t-JG-hB0" id="xas-dA-uO0"/>
                 <outlet property="immunizationButton" destination="U8I-bk-rPh" id="I8u-WB-uN5"/>
                 <outlet property="immunizationButtonContainerView" destination="Ukt-Bg-k00" id="bSD-n7-fJh"/>
@@ -34,7 +35,7 @@
                     <rect key="frame" x="0.0" y="24" width="414" height="858"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="4ka-qw-LRS">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="672"/>
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="722"/>
                             <subviews>
                                 <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="eZz-97-0Z9" userLabel="Name Headline" customClass="PlainLabel" customModule="CovPassUI">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
@@ -76,8 +77,11 @@
                                 <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="o8t-JG-hB0" userLabel="Birtdate View" customClass="ParagraphView" customModule="CovPassUI">
                                     <rect key="frame" x="0.0" y="422" width="414" height="50"/>
                                 </view>
+                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="INh-B1-2sv" userLabel="All Certificates Headline" customClass="PlainLabel" customModule="CovPassUI">
+                                    <rect key="frame" x="0.0" y="472" width="414" height="50"/>
+                                </view>
                                 <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="200" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="rhc-O6-hd2" userLabel="Vaccinations StackView">
-                                    <rect key="frame" x="0.0" y="472" width="414" height="200"/>
+                                    <rect key="frame" x="0.0" y="522" width="414" height="200"/>
                                 </stackView>
                             </subviews>
                         </stackView>
@@ -107,6 +111,9 @@
     <designables>
         <designable name="Fc7-Ur-FVx">
             <size key="intrinsicContentSize" width="414" height="128"/>
+        </designable>
+        <designable name="INh-B1-2sv">
+            <size key="intrinsicContentSize" width="414" height="50"/>
         </designable>
         <designable name="U8I-bk-rPh">
             <size key="intrinsicContentSize" width="414" height="128"/>

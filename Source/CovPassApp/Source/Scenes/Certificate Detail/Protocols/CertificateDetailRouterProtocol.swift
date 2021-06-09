@@ -11,8 +11,9 @@ import CovPassUI
 import PromiseKit
 import UIKit
 
-protocol VaccinationDetailRouterProtocol: DialogRouterProtocol, VactinationViewRouterProtocol {
+protocol CertificateDetailRouterProtocol: DialogRouterProtocol, CertificateViewRouterProtocol {
     func showHowToScan() -> Promise<Void>
     func showScanner() -> Promise<ScanResult>
+    func showDetail(for certificate: ExtendedCBORWebToken) -> Promise<CertificateDetailSceneResult>
     func showCertificateOverview() -> Promise<Void>
 }

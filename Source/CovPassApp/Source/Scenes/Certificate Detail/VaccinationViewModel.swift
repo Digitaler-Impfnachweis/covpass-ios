@@ -15,7 +15,6 @@ struct VaccinationViewModel {
     // MARK: - Properties
 
     private let vaccination: Vaccination
-    private weak var delegate: VaccinationViewDelegate?
 
     var headline: String {
         let number = vaccination.dn
@@ -58,11 +57,9 @@ struct VaccinationViewModel {
     // MARK: - Lifecycle
 
     init(
-        vaccination: Vaccination,
-        delegate: VaccinationViewDelegate?
+        vaccination: Vaccination
     ) {
         self.vaccination = vaccination
-        self.delegate = delegate
     }
 
     func delete() {

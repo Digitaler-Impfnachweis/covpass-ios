@@ -1,5 +1,5 @@
 //
-//  CertificateRouter.swift
+//  CertificateDetailRouter.swift
 //
 //
 //  © Copyright IBM Deutschland GmbH 2021
@@ -11,7 +11,7 @@ import CovPassUI
 import PromiseKit
 import UIKit
 
-class VaccinationDetailRouter: VaccinationDetailRouterProtocol, DialogRouterProtocol {
+class CertificateDetailRouter: CertificateDetailRouterProtocol, DialogRouterProtocol {
     // MARK: - Properties
 
     let sceneCoordinator: SceneCoordinator
@@ -45,6 +45,15 @@ class VaccinationDetailRouter: VaccinationDetailRouterProtocol, DialogRouterProt
     func showCertificate(for token: ExtendedCBORWebToken) -> Promise<Void> {
         sceneCoordinator.present(
             CertificateSceneFactory(token: token)
+        )
+    }
+
+    func showDetail(for certificate: ExtendedCBORWebToken) -> Promise<CertificateDetailSceneResult> {
+        sceneCoordinator.push(
+            CertificateItemDetailSceneFactory(
+                router: CertificateItemDetailRouter(sceneCoordinator: sceneCoordinator),
+                certificate: certificate
+            )
         )
     }
 
