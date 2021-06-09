@@ -132,7 +132,7 @@ class TestResultViewModel: ValidationResultViewModel {
 
     // MARK: - Methods
 
-    public func cancel() {
+    func cancel() {
         router.showStart()
     }
 

@@ -127,7 +127,7 @@ class VaccinationResultViewModel: ValidationResultViewModel {
 
     // MARK: - Methods
 
-    public func cancel() {
+    func cancel() {
         router.showStart()
     }
 

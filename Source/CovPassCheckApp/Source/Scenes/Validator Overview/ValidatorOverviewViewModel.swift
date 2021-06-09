@@ -45,12 +45,6 @@ class ValidatorOverviewViewModel {
         return String(format: "%@ %@", "validation_start_screen_offline_modus_note_update".localized, DateUtils.displayDateFormatter.string(from: date))
     }
 
-    // MARK: - UIConfigureation
-
-    let continerCornerRadius: CGFloat = 20
-    let continerHeight: CGFloat = 200
-    var headerButtonInsets = UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 0)
-
     // MARK: - Lifecycle
 
     init(router: ValidatorOverviewRouterProtocol, repository: VaccinationRepositoryProtocol) {
