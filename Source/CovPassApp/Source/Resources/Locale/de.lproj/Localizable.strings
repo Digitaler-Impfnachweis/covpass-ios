@@ -62,9 +62,9 @@
 
 "vaccination_start_screen_qrcode_incomplete_subtitle" = "Unvollständiger Impfschutz";
 
-"vaccination_start_screen_qrcode_complete_from_date_subtitle" = "Vollständiger Impfschutz ab %@";
+"vaccination_start_screen_qrcode_complete_from_date_subtitle" = "Vollständig ab %@";
 
-"vaccination_start_screen_qrcode_complete_subtitle" = "Vollständiger Impfschutz";
+"vaccination_start_screen_qrcode_complete_protection_subtitle" = "Vollständiger Impfschutz";
 
 
 /********** popup: add certification **********/
@@ -130,7 +130,9 @@
 
 "recovery_certificate_title" = "Genesenenzertifikat";
 
-"recovery_certificate_validity_date" = "Gültig bis %@";
+"recovery_certificate_valid_until_date" = "Gültig bis %@";
+
+"recovery_certificate_valid_from_date" = "Gültig ab %@";
 
 "recovery_certificate_action_button" = "Zertifikate anzeigen";
 
@@ -173,7 +175,9 @@
 
 "test_certificate_overview_action_button_title" = "Aktuellen QR-Code anzeigen";
 
-"recovery_certificate_overview_title" = "Genesung gültig bis %@";
+"recovery_certificate_overview_valid_until_title" = "Genesung gültig bis %@";
+
+"recovery_certificate_overview_valid_from_title" = "Genesung gültig ab %@";
 
 "recovery_certificate_overview_message" = "Zeigen Sie bei Bedarf den QR-Code vor. Halten Sie zudem ein Ausweisdokument bei der Überprüfung bereit.";
 
@@ -181,7 +185,7 @@
 
 "certificates_overview_personal_data_title" = "Persönliche Daten";
 
-"certificates_overview_personal_data_name" = "Name, Vorname / First name, surname";
+"certificates_overview_personal_data_name" = "Name, Vorname / Name, first name";
 
 "certificates_overview_personal_data_date_of_birth" = "Geburtsdatum / Date of birth (YYYY-MM-DD)";
 
@@ -199,7 +203,9 @@
 
 "certificates_overview_recovery_certificate_message" = "Vollständige Genesung";
 
-"certificates_overview_recovery_certificate_date" = "Gültig bis %@";
+"certificates_overview_recovery_certificate_valid_until_date" = "Gültig bis %@";
+
+"certificates_overview_recovery_certificate_valid_from_date" = "Gültig ab %@";
 
 "certificates_overview_test_certificate_title" = "Testzertifikat";
 
@@ -213,11 +219,19 @@
 
 "certificates_overview_pcr_test_certificate_date" = "Probenahme am %@, %d:%d Uhr";
 
+
+/********** detail view: delete certificate **********/
+
+"certificate_delete_button_hint" = "Löschen";
+
+
+/********** detail view: certificate **********/
+
 "vaccination_certificate_detail_view_vaccination_title" = "Impfung %d von %d";
 
 "vaccination_certificate_detail_view_vaccination_headline" = "EU Digitales COVID-Impfzertifikat";
 
-"vaccination_certificate_detail_view_data_name" = "Name, Vorname / First name, surname";
+"vaccination_certificate_detail_view_data_name" = "Name, Vorname / Name, first name";
 
 "vaccination_certificate_detail_view_data_date_of_birth" = "Geburtsdatum / Date of birth (YYYY-MM-DD)";
 
@@ -231,7 +245,7 @@
 
 "vaccination_certificate_detail_view_data_vaccine_number" = "Nummer der Impfung / Number in a series of vaccinations/doses";
 
-"vaccination_certificate_detail_view_data_vaccine_date_" = "Datum der Impfung / Date of vaccination";
+"vaccination_certificate_detail_view_data_vaccine_date_" = "Datum der Impfung / Date of vaccination (YYYY-MM-DD)";
 
 "vaccination_certificate_detail_view_data_vaccine_country" = "Land der Impfung / Member State of vaccination";
 
@@ -239,9 +253,9 @@
 
 "vaccination_certificate_detail_view_data_vaccine_identifier" = "Zertifikatkennung / Unique certificate identifier";
 
-"vaccination_certificate_detail_view_data_vaccine_note_de" = "Diese Bescheinigung ist kein Reisedokument. Die wissenschaftlichen Erkenntnisse zu COVID-19 in den Bereichen Impfung, Testung und Genesung entwickeln sich fortlaufend weiter, auch im Hinblick auf neue besorgniserregende Virusvarianten. Bitte informieren Sie sich vor Reiseantritt über die am Zielort geltenden Gesundheitsmaßnahmen und entsprechenden Beschränkungen. Informationen über die in den jeweiligen EU-Ländern geltenden Einreisebestimmungen finden Sie unter https://reopen.europa.eu/de.";
+"vaccination_certificate_detail_view_data_vaccine_note_de" = "Diese Bescheinigung ist kein Reisedokument. Die wissenschaftlichen Erkenntnisse zu COVID-19 in den Bereichen Impfung, Testung und Genesung entwickeln sich fortlaufend weiter, auch im Hinblick auf neue besorgniserregende Virusvarianten. Bitte informieren Sie sich vor Reiseantritt über die am Zielort geltenden Gesundheitsmaßnahmen und entsprechenden Beschränkungen. Informationen über die in den jeweiligen EU-Ländern geltenden Einreisebestimmungen finden Sie unter #https://reopen.europa.eu/de::https://reopen.europa.eu/de#.";
 
-"vaccination_certificate_detail_view_data_vaccine_note_en" = "This certificate is not a travel document. The scientific evidence on COVID-19 vaccination, testing and recovery continues to evolve, also in view of new variants of concern of the virus. Before travelling, please check the applicable public health measures and related restrictions applied at the point of destination. Information on the current travel restrictions that apply to EU countries can be found via https://reopen.europa.eu/de.";
+"vaccination_certificate_detail_view_data_vaccine_note_en" = "This certificate is not a travel document. The scientific evidence on COVID-19 vaccination, testing and recovery continues to evolve, also in view of new variants of concern of the virus. Before travelling, please check the applicable public health measures and related restrictions applied at the point of destination. Information on the current travel restrictions that apply to EU countries can be found via #https://reopen.europa.eu/de::https://reopen.europa.eu/de#.";
 
 "vaccination_certificate_detail_view_qrcode_action_button_title" = "QR-Code anzeigen";
 
@@ -255,7 +269,7 @@
 
 "test_certificate_detail_view_headline" = "EU Digitales COVID-Testzertifikat";
 
-"test_certificate_detail_view_data_name" = "Name, Vorname / First name, surname";
+"test_certificate_detail_view_data_name" = "Name, Vorname / Name, first name";
 
 "test_certificate_detail_view_data_date_of_birth" = "Geburtsdatum / Date of birth (YYYY-MM-DD)";
 
@@ -267,7 +281,7 @@
 
 "test_certificate_detail_view_data_test_manufactur" = "Testhersteller / Test manufacturer";
 
-"test_certificate_detail_view_data_test_date_and_time" = "Datum und Uhrzeit der Probenahme / Date and time of the sample collection";
+"test_certificate_detail_view_data_test_date_and_time" = "Datum und Uhrzeit der Probenahme / Date and time of the sample collection (YYYY-MM-DD)";
 
 "test_certificate_detail_view_data_test_results" = "Testergebnis / Test result";
 
@@ -279,9 +293,9 @@
 
 "test_certificate_detail_view_data_test_identifier" = "Zertifikatkennung / Unique certificate identifier";
 
-"test_certificate_detail_view_data_test_note_de" = "Diese Bescheinigung ist kein Reisedokument. Die wissenschaftlichen Erkenntnisse zu COVID-19 in den Bereichen Impfung, Testung und Genesung entwickeln sich fortlaufend weiter, auch im Hinblick auf neue besorgniserregende Virusvarianten. Bitte informieren Sie sich vor Reiseantritt über die am Zielort geltenden Gesundheitsmaßnahmen und entsprechenden Beschränkungen. Informationen über die in den jeweiligen EU-Ländern geltenden Einreisebestimmungen finden Sie unter https://reopen.europa.eu/de.";
+"test_certificate_detail_view_data_test_note_de" = "Diese Bescheinigung ist kein Reisedokument. Die wissenschaftlichen Erkenntnisse zu COVID-19 in den Bereichen Impfung, Testung und Genesung entwickeln sich fortlaufend weiter, auch im Hinblick auf neue besorgniserregende Virusvarianten. Bitte informieren Sie sich vor Reiseantritt über die am Zielort geltenden Gesundheitsmaßnahmen und entsprechenden Beschränkungen. Informationen über die in den jeweiligen EU-Ländern geltenden Einreisebestimmungen finden Sie unter #https://reopen.europa.eu/de::https://reopen.europa.eu/de#.";
 
-"test_certificate_detail_view_data_test_note_en" = "This certificate is not a travel document. The scientific evidence on COVID-19 vaccination, testing and recovery continues to evolve, also in view of new variants of concern of the virus. Before travelling, please check the applicable public health measures and related restrictions applied at the point of destination. Information on the current travel restrictions that apply to EU countries can be found via https://reopen.europa.eu/de.";
+"test_certificate_detail_view_data_test_note_en" = "This certificate is not a travel document. The scientific evidence on COVID-19 vaccination, testing and recovery continues to evolve, also in view of new variants of concern of the virus. Before travelling, please check the applicable public health measures and related restrictions applied at the point of destination. Information on the current travel restrictions that apply to EU countries can be found via #https://reopen.europa.eu/de::https://reopen.europa.eu/de#.";
 
 "test_certificate_detail_view_qrcode_action_button_title" = "QR-Code anzeigen";
 
@@ -297,27 +311,27 @@
 
 "recovery_certificate_detail_view_headline" = "EU Digitales COVID-Genesenenzertifikat";
 
-"recovery_certificate_detail_view_data_name" = "Name, Vorname / First name, surname";
+"recovery_certificate_detail_view_data_name" = "Name, Vorname / Name, first name";
 
 "recovery_certificate_detail_view_data_date_of_birth" = "Geburtsdatum / Date of birth (YYYY-MM-DD)";
 
 "recovery_certificate_detail_view_data_disease" = "Krankheit oder Erreger, von dem die Bürgerin oder der Bürger genesen ist / Disease or agent the citizen has recovered from";
 
-"recovery_certificate_detail_view_data_date_first_positive_result" = "Datum des ersten positiven Testergebnisses / Date of first positive test result";
+"recovery_certificate_detail_view_data_date_first_positive_result" = "Datum des ersten positiven Testergebnisses / Date of first positive test result (YYYY-MM-DD)";
 
 "recovery_certificate_detail_view_data_country" = "Land der Testung / Member State of test";
 
 "recovery_certificate_detail_view_data_issuer" = "Zertifikataussteller / Certificate issuer";
 
-"recovery_certificate_detail_view_data_valid_from" = "Zertifikat gültig ab / Certificate valid from";
+"recovery_certificate_detail_view_data_valid_from" = "Zertifikat gültig ab / Certificate valid from (YYYY-MM-DD)";
 
 "recovery_certificate_detail_view_data_valid_until" = "Zertifikat gültig bis (höchstens 180 Tage ab dem Datum des ersten positiven Testergebnisses) / Certificate valid until (no more than 180 days after the date of first positive test result)";
 
 "recovery_certificate_detail_view_data_identifier" = "Zertifikatkennung / Unique certificate identifier";
 
-"recovery_certificate_detail_view_data_test_note_de" = "Diese Bescheinigung ist kein Reisedokument. Die wissenschaftlichen Erkenntnisse zu COVID-19 in den Bereichen Impfung, Testung und Genesung entwickeln sich fortlaufend weiter, auch im Hinblick auf neue besorgniserregende Virusvarianten. Bitte informieren Sie sich vor Reiseantritt über die am Zielort geltenden Gesundheitsmaßnahmen und entsprechenden Beschränkungen. Informationen über die in den jeweiligen EU-Ländern geltenden Einreisebestimmungen finden Sie unter https://reopen.europa.eu/de.";
+"recovery_certificate_detail_view_data_test_note_de" = "Diese Bescheinigung ist kein Reisedokument. Die wissenschaftlichen Erkenntnisse zu COVID-19 in den Bereichen Impfung, Testung und Genesung entwickeln sich fortlaufend weiter, auch im Hinblick auf neue besorgniserregende Virusvarianten. Bitte informieren Sie sich vor Reiseantritt über die am Zielort geltenden Gesundheitsmaßnahmen und entsprechenden Beschränkungen. Informationen über die in den jeweiligen EU-Ländern geltenden Einreisebestimmungen finden Sie unter #https://reopen.europa.eu/de::https://reopen.europa.eu/de#.";
 
-"recovery_certificate_detail_view_data_test_note_en" = "This certificate is not a travel document. The scientific evidence on COVID-19 vaccination, testing and recovery continues to evolve, also in view of new variants of concern of the virus. Before travelling, please check the applicable public health measures and related restrictions applied at the point of destination. Information on the current travel restrictions that apply to EU countries can be found via https://reopen.europa.eu/de.";
+"recovery_certificate_detail_view_data_test_note_en" = "This certificate is not a travel document. The scientific evidence on COVID-19 vaccination, testing and recovery continues to evolve, also in view of new variants of concern of the virus. Before travelling, please check the applicable public health measures and related restrictions applied at the point of destination. Information on the current travel restrictions that apply to EU countries can be found via #https://reopen.europa.eu/de::https://reopen.europa.eu/de#.";
 
 "recovery_certificate_detail_view_qrcode_action_button_title" = "QR-Code anzeigen";
 
@@ -332,7 +346,7 @@
 
 "dialog_delete_certificate_title" = "Möchten Sie das COVID-Zertifikat wirklich löschen?";
 
-"dialog_delete_certificate_message" = "Alle enthaltenen Daten werden rückstandslos von diesem Gerät entfernt. Die Wiederherstellung der Daten ist nicht möglich.";
+"dialog_delete_certificate_message" = "Die Daten werden rückstandslos von diesem Gerät entfernt. Die Wiederherstellung der Daten ist nicht möglich.";
 
 "dialog_delete_certificate_button_delete" = "Löschen";
 
@@ -367,7 +381,7 @@
 
 "error_scan_present_data_is_not_supported_title" = "Aktualisieren Sie die App";
 
-"error_scan_present_data_is_not_supported_message" = "Ihre aktuelle Version der App unterstützt das vorliegende Datenformat nicht. Bitte aktualisieren Sie die App.";
+"error_scan_present_data_is_not_supported_message" = "Ihre aktuelle Version der App unterstützt das vorliegende Datenformat nicht. Bitte überprüfen Sie, ob Sie die aktuelle Version der App aus dem App Store auf Ihrem Smartphone installiert haben.";
 
 "error_scan_present_data_is_not_supported_button_title" = "OK";
 

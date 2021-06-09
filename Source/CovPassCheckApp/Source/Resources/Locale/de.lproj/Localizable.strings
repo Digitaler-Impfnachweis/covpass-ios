@@ -195,6 +195,8 @@
 
 "validation_check_popup_valid_pcr_test_less_than_72_h_date_of_issue" = "Probenahme am %@, %@ Uhr";
 
+"validation_check_popup_valid_pcr_test_less_than_72_h_utc" = "UTC %@";
+
 "validation_check_popup_valid_pcr_test_less_than_72_h_button_title" = "Weiteres Zertifikat scannen";
 
 "validation_check_popup_valid_pcr_test_older_than_72_h_title" = "Negativer PCR-Test vom %@";
@@ -206,6 +208,8 @@
 "validation_check_popup_valid_pcr_test_older_than_72_h_date_of_birth" = "Geboren am %@";
 
 "validation_check_popup_valid_pcr_test_older_than_72_h_date_of_issue" = "Probenahme am %@, %@ Uhr";
+
+"validation_check_popup_valid_pcr_test_older_than_72_h_utc" = "UTC %@";
 
 "validation_check_popup_valid_pcr_test_older_than_72_h_button_title" = "Weiteres Zertifikat scannen";
 
@@ -263,12 +267,12 @@
 
 "error_scan_present_data_is_not_supported_title" = "Aktualisieren Sie die App";
 
-"error_scan_present_data_is_not_supported_message" = "Ihre aktuelle Version der App unterstützt das vorliegende Datenformat nicht. Bitte aktualisieren Sie die App.";
+"error_scan_present_data_is_not_supported_message" = "Ihre aktuelle Version der App unterstützt das vorliegende Datenformat nicht. Bitte überprüfen Sie, ob Sie die aktuelle Version der App aus dem App Store auf Ihrem Smartphone installiert haben.";
 
 "error_scan_present_data_is_not_supported_button_title" = "OK";
 
 "error_scan_qrcode_cannot_be_parsed_title" = "QR-Code wurde nicht erkannt";
 
-"error_scan_qrcode_cannot_be_parsed_message" = "Dieser QR-Code gehört offenbar nicht zu einem Impfzertifikat. Bitte scannen Sie den QR-Code des Impfzertifikats.";
+"error_scan_qrcode_cannot_be_parsed_message" = "Dieser QR-Code gehört offenbar nicht zu einem COVID-Zertifikat. Bitte scannen Sie den QR-Code eines COVID-Zertifikats.";
 
 "error_scan_qrcode_cannot_be_parsed_button_title" = "OK";

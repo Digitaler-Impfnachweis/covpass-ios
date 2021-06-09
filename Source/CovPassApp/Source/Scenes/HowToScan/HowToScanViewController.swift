@@ -71,6 +71,7 @@ class HowToScanViewController: UIViewController {
         descriptionText.attributedBodyText = viewModel.info.styledAs(.body)
         descriptionText.layoutMargins.top = .space_24
         descriptionText.layoutMargins.bottom = .space_24
+        descriptionText.bottomBorder.isHidden =  true
     }
 
     private func configureToolbarView() {
