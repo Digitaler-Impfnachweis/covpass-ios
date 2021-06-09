@@ -126,7 +126,6 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
             self.showCertificate(certificate)
         }
         .catch { error in
-            print(error)
             self.router.showDialogForScanError(error) { [weak self] in
                 self?.scanCertificate(withIntroduction: false)
             }

@@ -51,6 +51,19 @@ extension DialogRouterProtocol {
                 ],
                 style: .alert
             )
+        case CertificateError.positiveResult:
+            showDialog(
+                title: "error_test_certificate_not_valid_title".localized,
+                message: "error_test_certificate_not_valid_message".localized,
+                actions: [
+                    DialogAction(
+                        title: "error_test_certificate_not_valid_button_title".localized,
+                        style: .cancel,
+                        completion: { _ in completion?() }
+                    )
+                ],
+                style: .alert
+            )
         default:
             showDialog(
                 title: "error_scan_qrcode_cannot_be_parsed_title".localized,

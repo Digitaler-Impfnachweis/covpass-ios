@@ -10,6 +10,10 @@ import Foundation
 import Keychain
 import PromiseKit
 
+public enum CertificateError: Error {
+    case positiveResult
+}
+
 public struct VaccinationRepository: VaccinationRepositoryProtocol {
     private let service: APIServiceProtocol
     private let keychain: Persistence
@@ -168,6 +172,12 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
         }
         .map(on: .global()) {
             try parseCertificate($0)
+        }
+        .map { certificate in
+            if let t = certificate.hcert.dgc.t?.first, t.isPositive {
+                throw CertificateError.positiveResult
+            }
+            return certificate
         }
         .map { certificate in
             ExtendedCBORWebToken(vaccinationCertificate: certificate, vaccinationQRCodeData: data)
