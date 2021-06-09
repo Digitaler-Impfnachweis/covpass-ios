@@ -81,11 +81,6 @@
             <point key="canvasLocation" x="-52" y="-522"/>
         </view>
     </objects>
-    <designables>
-        <designable name="eZz-97-0Z9">
-            <size key="intrinsicContentSize" width="414" height="50"/>
-        </designable>
-    </designables>
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
