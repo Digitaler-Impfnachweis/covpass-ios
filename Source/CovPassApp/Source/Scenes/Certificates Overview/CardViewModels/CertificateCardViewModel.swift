@@ -68,7 +68,7 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
             return String(format: "certificates_overview_recovery_certificate_valid_until_date".localized, DateUtils.displayDateFormatter.string(from: r.du))
         }
         if let t = certificate.t?.first {
-            return DateUtils.displayDateFormatter.string(from: t.sc)
+            return DateUtils.displayDateTimeFormatter.string(from: t.sc)
         }
         if let v = certificate.v?.first {
             if !v.fullImmunization {

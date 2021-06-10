@@ -18,9 +18,9 @@ class RecoveryTests: XCTestCase {
 
         XCTAssertEqual(sut.ci, "URN:UVCI:01DE/5CWLU12RNOB9RXSEOP6FG8#W")
         XCTAssertEqual(sut.co, "DE")
-        XCTAssertEqual(sut.df, DateUtils.vaccinationDateFormatter.date(from: "2021-05-29"))
-        XCTAssertEqual(sut.du, DateUtils.vaccinationDateFormatter.date(from: "2021-06-15"))
-        XCTAssertEqual(sut.fr, DateUtils.vaccinationDateFormatter.date(from: "2021-01-10"))
+        XCTAssertEqual(sut.df, DateUtils.isoDateFormatter.date(from: "2021-05-29"))
+        XCTAssertEqual(sut.du, DateUtils.isoDateFormatter.date(from: "2021-06-15"))
+        XCTAssertEqual(sut.fr, DateUtils.isoDateFormatter.date(from: "2021-01-10"))
         XCTAssertEqual(sut.is, "Robert Koch-Institut")
         XCTAssertEqual(sut.tg, "840539006")
     }

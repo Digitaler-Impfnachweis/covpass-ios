@@ -39,7 +39,7 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
 
     var birthDate: String {
         guard let date = certificates.first?.vaccinationCertificate.hcert.dgc.dob else { return "" }
-        return DateUtils.displayDateFormatter.string(from: date)
+        return DateUtils.isoDateFormatter.string(from: date)
     }
 
     var immunizationIcon: UIImage? {
@@ -61,9 +61,9 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
         }
         if let t = selectedCertificate?.vaccinationCertificate.hcert.dgc.t?.first {
             if t.isPCR {
-                return String(format: "pcr_test_certificate_overview_title".localized, DateUtils.displayDateFormatter.string(from: t.sc))
+                return String(format: "pcr_test_certificate_overview_title".localized, DateUtils.displayDateTimeFormatter.string(from: t.sc))
             }
-            return String(format: "test_certificate_overview_title".localized, DateUtils.displayDateFormatter.string(from: t.sc))
+            return String(format: "test_certificate_overview_title".localized, DateUtils.displayDateTimeFormatter.string(from: t.sc))
         }
         guard let cert = certificates.sorted(by: { c, _ in c.vaccinationCertificate.hcert.dgc.v?.first?.fullImmunization ?? false }).first?.vaccinationCertificate.hcert.dgc.v?.first else {
             return ""

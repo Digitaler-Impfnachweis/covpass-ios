@@ -55,7 +55,7 @@ public struct DigitalGreenCertificate: Codable {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         nam = try values.decode(Name.self, forKey: .nam)
         if let dobDateString = try? values.decode(String.self, forKey: .dob) {
-            dob = DateUtils.vaccinationDateFormatter.date(from: dobDateString)
+            dob = DateUtils.isoDateFormatter.date(from: dobDateString)
         }
         v = try? values.decode([Vaccination].self, forKey: .v)
         t = try? values.decode([Test].self, forKey: .t)
@@ -71,7 +71,7 @@ public struct DigitalGreenCertificate: Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(nam, forKey: .nam)
         if let dob = dob {
-            let dateString = DateUtils.vaccinationDateFormatter.string(from: dob)
+            let dateString = DateUtils.isoDateFormatter.string(from: dob)
             try container.encode(dateString, forKey: .dob)
         }
         try container.encode(v, forKey: .v)

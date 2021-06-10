@@ -22,7 +22,7 @@ class VaccinationTests: XCTestCase {
         XCTAssertEqual(sut.ma, "ORG-100030215")
         XCTAssertEqual(sut.dn, 2)
         XCTAssertEqual(sut.sd, 2)
-        XCTAssertEqual(sut.dt, DateUtils.vaccinationDateFormatter.date(from: "2021-02-02"))
+        XCTAssertEqual(sut.dt, DateUtils.isoDateFormatter.date(from: "2021-02-02"))
         XCTAssertEqual(sut.co, "DE")
     }
 

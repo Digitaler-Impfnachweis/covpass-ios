@@ -282,7 +282,7 @@
 
 "test_certificate_detail_view_data_test_manufactur" = "Testhersteller / Test manufacturer";
 
-"test_certificate_detail_view_data_test_date_and_time" = "Datum und Uhrzeit der Probenahme / Date and time of the sample collection (YYYY-MM-DD)";
+"test_certificate_detail_view_data_test_date_and_time" = "Datum und Uhrzeit der Probenahme / Date and time of the sample collection (YYYY-MM-DD, HH:MM)";
 
 "test_certificate_detail_view_data_test_results" = "Testergebnis / Test result";
 
