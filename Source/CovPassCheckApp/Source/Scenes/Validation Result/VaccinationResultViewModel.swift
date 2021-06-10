@@ -14,7 +14,7 @@ import UIKit
 class VaccinationResultViewModel: ValidationResultViewModel {
     // MARK: - Properties
 
-    weak var delegate: ViewModelDelegate?
+    weak var delegate: ResultViewModelDelegate?
     let router: ValidationResultRouterProtocol
     private let repository: VaccinationRepositoryProtocol
     private var certificate: CBORWebToken?
@@ -93,7 +93,12 @@ class VaccinationResultViewModel: ValidationResultViewModel {
             self.certificate = $0
         }
         .done { _ in
-            self.delegate?.viewModelDidUpdate()
+            let vm = ValidationResultFactory.createViewModel(
+                router: self.router,
+                repository: self.repository,
+                certificate: self.certificate
+            )
+            self.delegate?.viewModelDidChange(vm)
         }
         .catch { _ in
             self.certificate = nil

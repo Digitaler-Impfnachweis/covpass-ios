@@ -53,8 +53,10 @@ class ValidationResultViewController: UIViewController {
 
         resultView.attributedTitleText = viewModel.resultTitle.styledAs(.header_1)
         resultView.attributedBodyText = viewModel.resultBody.styledAs(.body)
+        resultView.bottomBorder.isHidden = true
 
         infoView.attributedText = viewModel.info?.styledAs(.body).colored(.onBackground40)
+        infoView.layoutMargins = .init(top: .zero, left: .space_24, bottom: .zero, right: .space_24)
 
         paragraphStackView.subviews.forEach {
             $0.removeFromSuperview()
@@ -64,7 +66,10 @@ class ValidationResultViewController: UIViewController {
             let p = ParagraphView()
             p.attributedTitleText = $0.title.styledAs(.header_3)
             p.attributedBodyText = $0.subtitle.styledAs(.body)
-            p.image = $0.icon
+            p.image = $0.icon?.withRenderingMode(.alwaysTemplate)
+            p.imageView.tintColor = .brandAccent
+            p.bottomBorder.isHidden = true
+            p.layoutMargins.bottom = .space_20
             self.paragraphStackView.addArrangedSubview(p)
         }
     }
@@ -86,12 +91,16 @@ class ValidationResultViewController: UIViewController {
 
 // MARK: - ViewModelDelegate
 
-extension ValidationResultViewController: ViewModelDelegate {
-    public func viewModelDidUpdate() {
+extension ValidationResultViewController: ResultViewModelDelegate {
+    func viewModelDidUpdate() {
         updateViews()
     }
 
-    public func viewModelUpdateDidFailWithError(_: Error) {}
+    func viewModelDidChange(_ newViewModel: ValidationResultViewModel) {
+        viewModel = newViewModel
+        viewModel.delegate = self
+        updateViews()
+    }
 }
 
 // MARK: - CustomToolbarViewDelegate

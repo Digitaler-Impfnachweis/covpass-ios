@@ -11,26 +11,25 @@ import CovPassUI
 import PromiseKit
 import UIKit
 
-typealias ValidationResultViewModel = ValidationViewModel & BaseViewModel & CancellableViewModelProtocol
-
 struct Paragraph {
     var icon: UIImage?
     var title: String
     var subtitle: String
 }
 
+typealias ValidationResultViewModel = ValidationViewModel & CancellableViewModelProtocol
+
+protocol ResultViewModelDelegate: AnyObject {
+    func viewModelDidUpdate()
+    func viewModelDidChange(_ newViewModel: ValidationResultViewModel)
+}
+
 protocol ValidationViewModel {
+    var delegate: ResultViewModelDelegate? { get set }
     var icon: UIImage? { get }
     var resultTitle: String { get }
     var resultBody: String { get }
     var paragraphs: [Paragraph] { get }
     var info: String? { get }
-//    var nameTitle: String? { get }
-//    var nameBody: String? { get }
-//    var errorTitle: String? { get }
-//    var errorBody: String? { get }
-//    var nameIcon: UIImage? { get }
-//    var errorIcon: UIImage? { get }
-
     func scanNextCertifcate()
 }
