@@ -324,7 +324,7 @@
 
 "recovery_certificate_detail_view_data_valid_from" = "Zertifikat gültig ab / Certificate valid from (YYYY-MM-DD)";
 
-"recovery_certificate_detail_view_data_valid_until" = "Zertifikat gültig bis (höchstens 180 Tage ab dem Datum des ersten positiven Testergebnisses) / Certificate valid until (no more than 180 days after the date of first positive test result)";
+"recovery_certificate_detail_view_data_valid_until" = "Zertifikat gültig bis (höchstens 180 Tage ab dem Datum des ersten positiven Testergebnisses) / Certificate valid until (no more than 180 days after the date of first positive test result)(YYYY-MM-DD)";
 
 "recovery_certificate_detail_view_data_identifier" = "Zertifikatkennung / Unique certificate identifier";
 
