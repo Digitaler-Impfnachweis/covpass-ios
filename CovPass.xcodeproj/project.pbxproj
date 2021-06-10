@@ -682,16 +682,16 @@
 		21FBCA4A264F011800CAEF44 /* Validation Result */ = {
 			isa = PBXGroup;
 			children = (
-				38E91BEB266D7AF00044BD56 /* RecoveryResultViewModel.swift */,
-				38E91BEA266D7AF00044BD56 /* TestResultViewModel.swift */,
-				38E91BE8266D7AF00044BD56 /* VaccinationResultViewModel.swift */,
-				38E91BE9266D7AF00044BD56 /* ValidationResultFactory.swift */,
 				21FBCA53264F011800CAEF44 /* Protocols */,
 				21FBCA4D264F011800CAEF44 /* Models */,
 				21FBCA51264F011800CAEF44 /* Views */,
 				21FBCA4B264F011800CAEF44 /* ValidationResultRouter.swift */,
 				21FBCA4C264F011800CAEF44 /* ValidationResultSceneFactory.swift */,
 				21FBCA50264F011800CAEF44 /* ValidationResultViewController.swift */,
+				38E91BEB266D7AF00044BD56 /* RecoveryResultViewModel.swift */,
+				38E91BEA266D7AF00044BD56 /* TestResultViewModel.swift */,
+				38E91BE8266D7AF00044BD56 /* VaccinationResultViewModel.swift */,
+				38E91BE9266D7AF00044BD56 /* ValidationResultFactory.swift */,
 			);
 			path = "Validation Result";
 			sourceTree = "<group>";

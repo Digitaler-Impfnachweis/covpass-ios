@@ -19,31 +19,27 @@ class TestResultViewModel: ValidationResultViewModel {
     private let repository: VaccinationRepositoryProtocol
     private var certificate: CBORWebToken?
 
-    private var isPCR: Bool {
-        certificate?.hcert.dgc.t?.first?.isPCR ?? false
-    }
-
     var icon: UIImage? {
-        .group
+        guard let testCert = certificate?.hcert.dgc.t?.first, !testCert.isPositive else {
+            return .resultError
+        }
+        return .group
     }
 
     var resultTitle: String {
-        guard let testCert = certificate?.hcert.dgc.t?.first else {
-            return "" // TODO: error
+        // positive tests or error
+        guard let testCert = certificate?.hcert.dgc.t?.first, !testCert.isPositive else {
+            return "validation_check_popup_unsuccessful_certificate_title".localized
         }
-        if isPCR {
-            if testCert.isPositive {
-                return String(format: "validation_check_popup_pcr_test_positive_title".localized, DateUtils.displayDateFormatter.string(from: testCert.sc))
-            }
+        // negative pcr
+        if testCert.isPCR {
             if testCert.isValid {
                 let diffComponents = Calendar.current.dateComponents([.hour], from: testCert.sc, to: Date())
                 return String(format: "validation_check_popup_valid_pcr_test_less_than_72_h_title".localized, diffComponents.hour ?? 0)
             }
             return String(format: "validation_check_popup_valid_pcr_test_older_than_72_h_title".localized, DateUtils.displayDateFormatter.string(from: testCert.sc))
         }
-        if testCert.isPositive {
-            return ""
-        }
+        // negative rapid
         if testCert.isValid {
             let diffComponents = Calendar.current.dateComponents([.hour], from: testCert.sc, to: Date())
             return String(format: "validation_check_popup_test_less_than_24_h_title".localized, diffComponents.hour ?? 0)
@@ -52,70 +48,29 @@ class TestResultViewModel: ValidationResultViewModel {
     }
 
     var resultBody: String {
-        guard let testCert = certificate?.hcert.dgc.t?.first else {
-            return "" // TODO: error
+        guard let testCert = certificate?.hcert.dgc.t?.first, !testCert.isPositive else {
+            return "validation_check_popup_unsuccessful_certificate_message".localized
         }
-        if testCert.isPositive, !testCert.isPCR {
-            return "validation_check_popup_test_positive_message".localized
-        }
-        return "validation_check_popup_test_older_than_24_h_message".localized
+        return "validation_check_popup_valid_vaccination_recovery_message".localized
     }
 
-    var nameTitle: String? {
-        guard let testCert = certificate?.hcert.dgc.t?.first else {
-            return "" // TODO: error
+    var paragraphs: [Paragraph] {
+        guard let dob = certificate?.hcert.dgc.dob, let testCert = certificate?.hcert.dgc.t?.first, !testCert.isPositive else {
+            return [
+                Paragraph(icon: .timeHui, title: "validation_check_popup_unsuccessful_certificate__recovery_title".localized, subtitle: "validation_check_popup_unsuccessful_certificate_recovery_body".localized),
+                Paragraph(icon: .statusPartialDetail, title: "validation_check_popup_unsuccessful_certificate__vaccination_title".localized, subtitle: "validation_check_popup_unsuccessful_certificate_vaccination_body".localized),
+                Paragraph(icon: .iconTest, title: "validation_check_popup_unsuccessful_certificate__test_title".localized, subtitle: "validation_check_popup_unsuccessful_certificate_test_body".localized),
+                Paragraph(icon: .technicalError, title: "validation_check_popup_unsuccessful_certificate__problem_title".localized, subtitle: "validation_check_popup_unsuccessful_certificate_problem_body".localized)
+            ]
         }
-        if testCert.isPositive, !testCert.isPCR {
-            return nil
-        }
-        return certificate?.hcert.dgc.nam.fullName
+        return [
+            Paragraph(icon: .data, title: certificate?.hcert.dgc.nam.fullName ?? "", subtitle: String(format: "validation_check_popup_valid_pcr_test_less_than_72_h_date_of_birth".localized, DateUtils.displayDateFormatter.string(from: dob))),
+            Paragraph(icon: .calendar, title: String(format: "validation_check_popup_valid_pcr_test_less_than_72_h_date_of_issue".localized, DateUtils.displayDateTimeFormatter.string(from: testCert.sc)), subtitle: DateUtils.displayTimeZoneFormatter.string(from: testCert.sc))
+        ]
     }
 
-    var nameBody: String? {
-        guard let testCert = certificate?.hcert.dgc.t?.first else {
-            return "" // TODO: error
-        }
-        if testCert.isPositive, !testCert.isPCR {
-            return nil
-        }
-        if let date = certificate?.hcert.dgc.dob {
-            return String(format: "validation_check_popup_test_older_than_24_h_date_of_birth".localized, DateUtils.displayDateFormatter.string(from: date))
-        }
-        return nil
-    }
-
-    var errorTitle: String? {
-        guard let testCert = certificate?.hcert.dgc.t?.first else {
-            return "" // TODO: error
-        }
-        if testCert.isPositive, !testCert.isPCR {
-            return nil
-        }
-        return String(format: "validation_check_popup_pcr_test_positive_date_of_issue".localized, DateUtils.displayDateTimeFormatter.string(from: testCert.sc))
-    }
-
-    var errorBody: String? {
-        guard let testCert = certificate?.hcert.dgc.t?.first else {
-            return "" // TODO: error
-        }
-        if testCert.isPositive, !testCert.isPCR {
-            return nil
-        }
-        return DateUtils.displayDateTimeFormatter.string(from: testCert.sc)
-    }
-
-    var nameIcon: UIImage? {
-        guard let testCert = certificate?.hcert.dgc.t?.first else {
-            return .validationSearch
-        }
-        if testCert.isPositive, !testCert.isPCR {
-            return nil
-        }
-        return .data
-    }
-
-    var errorIcon: UIImage? {
-        .validationPending
+    var info: String? {
+        nil
     }
 
     // MARK: - Lifecycle

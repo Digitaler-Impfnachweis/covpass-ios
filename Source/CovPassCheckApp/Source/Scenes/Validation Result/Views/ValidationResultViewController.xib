@@ -11,11 +11,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ValidationResultViewController" customModule="CovPassCheckApp" customModuleProvider="target">
             <connections>
-                <outlet property="errorView" destination="Xfx-wN-fJV" id="bdM-g6-rkk"/>
                 <outlet property="headline" destination="5Zd-xw-4Zy" id="CJ4-zv-GyU"/>
                 <outlet property="imageContainerView" destination="gbm-mz-STE" id="gDi-l3-DRz"/>
                 <outlet property="imageView" destination="YG1-hQ-PYs" id="d0f-aY-Yq1"/>
-                <outlet property="nameView" destination="vOJ-26-RLZ" id="fjM-UV-lzu"/>
+                <outlet property="infoView" destination="l0H-jd-CpU" id="m9b-cl-1eB"/>
+                <outlet property="paragraphStackView" destination="Ba0-Bt-Y6p" id="0WS-As-LOh"/>
                 <outlet property="resultView" destination="Bik-p2-0B1" id="3rP-d2-Rbr"/>
                 <outlet property="stackView" destination="Yk1-DY-91Y" id="6vM-qh-eDf"/>
                 <outlet property="toolbarView" destination="a6B-vC-85H" id="GVl-aS-y18"/>
@@ -31,11 +31,11 @@
                     <rect key="frame" x="0.0" y="64" width="414" height="60"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                 </view>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JkM-ga-acx">
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JkM-ga-acx">
                     <rect key="frame" x="0.0" y="124" width="414" height="642"/>
                     <subviews>
-                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Yk1-DY-91Y">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="584"/>
+                        <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Yk1-DY-91Y">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="656"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="gbm-mz-STE">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="150"/>
@@ -53,16 +53,15 @@
                                     <rect key="frame" x="0.0" y="150" width="414" height="128"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 </view>
-                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="vOJ-26-RLZ" userLabel="Name View" customClass="ParagraphView" customModule="CovPassUI">
-                                    <rect key="frame" x="0.0" y="278" width="414" height="128"/>
+                                <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Ba0-Bt-Y6p">
+                                    <rect key="frame" x="0.0" y="278" width="414" height="200"/>
+                                </stackView>
+                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="l0H-jd-CpU" userLabel="Info View" customClass="PlainLabel" customModule="CovPassUI">
+                                    <rect key="frame" x="0.0" y="478" width="414" height="128"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 </view>
-                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="Xfx-wN-fJV" userLabel="Error View" customClass="ParagraphView" customModule="CovPassUI">
-                                    <rect key="frame" x="0.0" y="406" width="414" height="128"/>
-                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                </view>
-                                <view contentMode="scaleToFill" verticalHuggingPriority="1" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="Ghi-eu-wWd" userLabel="Flexible View">
-                                    <rect key="frame" x="0.0" y="534" width="414" height="50"/>
+                                <view contentMode="scaleToFill" verticalHuggingPriority="1" ambiguous="YES" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="Ghi-eu-wWd" userLabel="Flexible View">
+                                    <rect key="frame" x="0.0" y="606" width="414" height="50"/>
                                 </view>
                             </subviews>
                         </stackView>
@@ -108,14 +107,8 @@
         <designable name="Bik-p2-0B1">
             <size key="intrinsicContentSize" width="414" height="128"/>
         </designable>
-        <designable name="Xfx-wN-fJV">
-            <size key="intrinsicContentSize" width="414" height="128"/>
-        </designable>
         <designable name="a6B-vC-85H">
             <size key="intrinsicContentSize" width="240" height="56"/>
-        </designable>
-        <designable name="vOJ-26-RLZ">
-            <size key="intrinsicContentSize" width="414" height="128"/>
         </designable>
     </designables>
     <resources>

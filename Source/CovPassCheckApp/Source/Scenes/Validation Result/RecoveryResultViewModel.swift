@@ -19,50 +19,46 @@ class RecoveryResultViewModel: ValidationResultViewModel {
     private let repository: VaccinationRepositoryProtocol
     private var certificate: CBORWebToken?
 
-    private var validRecovery: Bool {
-        guard let du = certificate?.hcert.dgc.r?.first?.du, Date() > du else {
-            return false
-        }
-        return true
-    }
-
     var icon: UIImage? {
-        validRecovery ? .resultSuccess : .resultError
+        guard let rCert = certificate?.hcert.dgc.r?.first, rCert.isValid else {
+            return .resultError
+        }
+        return .resultSuccess
     }
 
     var resultTitle: String {
-        validRecovery ? "validation_check_popup_recovery_proven_title".localized : "validation_check_popup_recovery_expired_title".localized
+        guard let rCert = certificate?.hcert.dgc.r?.first, rCert.isValid else {
+            return "validation_check_popup_unsuccessful_certificate_title".localized
+        }
+        return "validation_check_popup_valid_vaccination_recovery_title".localized
     }
 
     var resultBody: String {
-        validRecovery ? "validation_check_popup_recovery_proven_message".localized : "validation_check_popup_recovery_expired_message".localized
-    }
-
-    var nameTitle: String? {
-        validRecovery ? certificate?.hcert.dgc.nam.fullName : nil
-    }
-
-    var nameBody: String? {
-        if validRecovery, let date = certificate?.hcert.dgc.dob {
-            return "\("validation_check_popup_partial_valid_vaccination_date_of_birth_at".localized) \(DateUtils.displayDateFormatter.string(from: date))"
+        guard let rCert = certificate?.hcert.dgc.r?.first, rCert.isValid else {
+            return "validation_check_popup_unsuccessful_certificate_message".localized
         }
-        return nil
+        return "validation_check_popup_valid_vaccination_recovery_message".localized
     }
 
-    var errorTitle: String? {
-        nil
+    var paragraphs: [Paragraph] {
+        guard let dob = certificate?.hcert.dgc.dob, let rCert = certificate?.hcert.dgc.r?.first, rCert.isValid else {
+            return [
+                Paragraph(icon: .timeHui, title: "validation_check_popup_unsuccessful_certificate__recovery_title".localized, subtitle: "validation_check_popup_unsuccessful_certificate_recovery_body".localized),
+                Paragraph(icon: .statusPartialDetail, title: "validation_check_popup_unsuccessful_certificate__vaccination_title".localized, subtitle: "validation_check_popup_unsuccessful_certificate_vaccination_body".localized),
+                Paragraph(icon: .iconTest, title: "validation_check_popup_unsuccessful_certificate__test_title".localized, subtitle: "validation_check_popup_unsuccessful_certificate_test_body".localized),
+                Paragraph(icon: .technicalError, title: "validation_check_popup_unsuccessful_certificate__problem_title".localized, subtitle: "validation_check_popup_unsuccessful_certificate_problem_body".localized)
+            ]
+        }
+        return [
+            Paragraph(icon: .data, title: certificate?.hcert.dgc.nam.fullName ?? "", subtitle: String(format: "validation_check_popup_valid_pcr_test_less_than_72_h_date_of_birth".localized, DateUtils.displayDateFormatter.string(from: dob))),
+        ]
     }
 
-    var errorBody: String? {
-        nil
-    }
-
-    var nameIcon: UIImage? {
-        validRecovery ? .data : nil
-    }
-
-    var errorIcon: UIImage? {
-        nil
+    var info: String? {
+        guard let rCert = certificate?.hcert.dgc.r?.first, rCert.isValid else {
+            return nil
+        }
+        return "validation_check_popup_valid_vaccination_recovery_note".localized
     }
 
     // MARK: - Lifecycle

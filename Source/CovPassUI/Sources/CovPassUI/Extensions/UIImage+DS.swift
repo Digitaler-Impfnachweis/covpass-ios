@@ -137,6 +137,15 @@ public extension UIImage {
 
     @ImageLoader(name: "icon_test")
     private(set) static var iconTest
+
+    @ImageLoader(name: "calendar")
+    private(set) static var calendar
+
+    @ImageLoader(name: "time_hui")
+    private(set) static var timeHui
+
+    @ImageLoader(name: "technical_error")
+    private(set) static var technicalError
 }
 
 @propertyWrapper

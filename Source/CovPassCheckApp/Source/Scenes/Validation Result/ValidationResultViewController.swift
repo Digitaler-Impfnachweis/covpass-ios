@@ -18,8 +18,8 @@ class ValidationResultViewController: UIViewController {
     @IBOutlet var imageContainerView: UIStackView!
     @IBOutlet var imageView: UIImageView!
     @IBOutlet var resultView: ParagraphView!
-    @IBOutlet var nameView: ParagraphView!
-    @IBOutlet var errorView: ParagraphView!
+    @IBOutlet var paragraphStackView: UIStackView!
+    @IBOutlet var infoView: PlainLabel!
 
     // MARK: - Properties
 
@@ -38,9 +38,7 @@ class ValidationResultViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureImageView()
         configureHeadline()
-        configureParagraphView()
         configureToolbarView()
         updateViews()
     }
@@ -48,22 +46,27 @@ class ValidationResultViewController: UIViewController {
     // MARK: - Private
 
     private func updateViews() {
+        stackView.setCustomSpacing(.space_24, after: imageContainerView)
+        stackView.setCustomSpacing(.space_24, after: resultView)
+
         imageView.image = viewModel.icon
 
         resultView.attributedTitleText = viewModel.resultTitle.styledAs(.header_1)
         resultView.attributedBodyText = viewModel.resultBody.styledAs(.body)
 
-        nameView.attributedTitleText = viewModel.nameTitle?.styledAs(.header_3)
-        nameView.attributedBodyText = viewModel.nameBody?.styledAs(.body)
-        nameView.image = viewModel.nameIcon
+        infoView.attributedText = viewModel.info?.styledAs(.body).colored(.onBackground40)
 
-        errorView.attributedTitleText = viewModel.errorTitle?.styledAs(.header_3)
-        errorView.attributedBodyText = viewModel.errorBody?.styledAs(.body)
-        errorView.image = viewModel.errorIcon
-    }
-
-    private func configureImageView() {
-        stackView.setCustomSpacing(.space_24, after: imageContainerView)
+        paragraphStackView.subviews.forEach {
+            $0.removeFromSuperview()
+            self.paragraphStackView.removeArrangedSubview($0)
+        }
+        viewModel.paragraphs.forEach {
+            let p = ParagraphView()
+            p.attributedTitleText = $0.title.styledAs(.header_3)
+            p.attributedBodyText = $0.subtitle.styledAs(.body)
+            p.image = $0.icon
+            self.paragraphStackView.addArrangedSubview(p)
+        }
     }
 
     private func configureHeadline() {
@@ -73,10 +76,6 @@ class ValidationResultViewController: UIViewController {
         }
         headline.image = .close
         stackView.setCustomSpacing(.space_24, after: headline)
-    }
-
-    private func configureParagraphView() {
-        stackView.setCustomSpacing(.space_24, after: resultView)
     }
 
     private func configureToolbarView() {

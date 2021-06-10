@@ -19,98 +19,46 @@ class VaccinationResultViewModel: ValidationResultViewModel {
     private let repository: VaccinationRepositoryProtocol
     private var certificate: CBORWebToken?
 
-    private var immunizationState: ImmunizationState {
-        guard let cert = certificate?.hcert.dgc.v?.first else {
-            return .error
-        }
-        return cert.fullImmunizationValid ? .full : .partial
-    }
-
     var icon: UIImage? {
-        switch immunizationState {
-        case .full:
-            return .resultSuccess
-        case .partial, .error:
+        guard let vCert = certificate?.hcert.dgc.v?.first, vCert.fullImmunizationValid else {
             return .resultError
         }
+        return .resultSuccess
     }
 
     var resultTitle: String {
-        switch immunizationState {
-        case .full:
-            return "validation_check_popup_valid_vaccination_title".localized
-        case .partial:
-            return "validation_check_popup_vaccination_not_completely_title".localized
-        case .error:
-            return "validation_check_popup_unsuccessful_test_title".localized
+        guard let vCert = certificate?.hcert.dgc.v?.first, vCert.fullImmunizationValid else {
+            return "validation_check_popup_unsuccessful_certificate_title".localized
         }
+        return "validation_check_popup_valid_vaccination_recovery_title".localized
     }
 
     var resultBody: String {
-        switch immunizationState {
-        case .full:
-            return "validation_check_popup_valid_vaccination_message".localized
-        case .partial:
-            return "validation_check_popup_vaccination_not_completely_message".localized
-        case .error:
-            return "validation_check_popup_unsuccessful_test_message".localized
+        guard let vCert = certificate?.hcert.dgc.v?.first, vCert.fullImmunizationValid else {
+            return "validation_check_popup_unsuccessful_certificate_message".localized
         }
+        return "validation_check_popup_valid_vaccination_recovery_message".localized
     }
 
-    var nameTitle: String? {
-        switch immunizationState {
-        case .partial:
-            return ""
-        case .full:
-            return certificate?.hcert.dgc.nam.fullName
-        case .error:
-            return "validation_check_popup_unsuccessful_test_first_reason_title".localized
+    var paragraphs: [Paragraph] {
+        guard let dob = certificate?.hcert.dgc.dob, let vCert = certificate?.hcert.dgc.v?.first, vCert.fullImmunizationValid else {
+            return [
+                Paragraph(icon: .timeHui, title: "validation_check_popup_unsuccessful_certificate__recovery_title".localized, subtitle: "validation_check_popup_unsuccessful_certificate_recovery_body".localized),
+                Paragraph(icon: .statusPartialDetail, title: "validation_check_popup_unsuccessful_certificate__vaccination_title".localized, subtitle: "validation_check_popup_unsuccessful_certificate_vaccination_body".localized),
+                Paragraph(icon: .iconTest, title: "validation_check_popup_unsuccessful_certificate__test_title".localized, subtitle: "validation_check_popup_unsuccessful_certificate_test_body".localized),
+                Paragraph(icon: .technicalError, title: "validation_check_popup_unsuccessful_certificate__problem_title".localized, subtitle: "validation_check_popup_unsuccessful_certificate_problem_body".localized)
+            ]
         }
+        return [
+            Paragraph(icon: .data, title: certificate?.hcert.dgc.nam.fullName ?? "", subtitle: String(format: "validation_check_popup_valid_pcr_test_less_than_72_h_date_of_birth".localized, DateUtils.displayDateFormatter.string(from: dob))),
+        ]
     }
 
-    var nameBody: String? {
-        switch immunizationState {
-        case .partial:
-            return ""
-        case .full:
-            if let date = certificate?.hcert.dgc.dob {
-                return "\("validation_check_popup_partial_valid_vaccination_date_of_birth_at".localized) \(DateUtils.displayDateFormatter.string(from: date))"
-            }
+    var info: String? {
+        guard let vCert = certificate?.hcert.dgc.v?.first, vCert.fullImmunizationValid else {
             return nil
-        case .error:
-            return "validation_check_popup_unsuccessful_test_first_reason_body".localized
         }
-    }
-
-    var errorTitle: String? {
-        switch immunizationState {
-        case .full, .partial:
-            return ""
-        case .error:
-            return "validation_check_popup_unsuccessful_test_second_reason_title".localized
-        }
-    }
-
-    var errorBody: String? {
-        switch immunizationState {
-        case .full, .partial:
-            return ""
-        case .error:
-            return "validation_check_popup_unsuccessful_test_second_reason_body".localized
-        }
-    }
-
-    var nameIcon: UIImage? {
-        switch immunizationState {
-        case .full, .partial:
-            return .data
-        case .error:
-            return .validationSearch
-        }
-    }
-
-    var errorIcon: UIImage? {
-        .validationPending
+        return "validation_check_popup_valid_vaccination_recovery_note".localized
     }
 
     // MARK: - Lifecycle
