@@ -50,7 +50,7 @@ class RecoveryResultViewModel: ValidationResultViewModel {
             ]
         }
         return [
-            Paragraph(icon: .data, title: certificate?.hcert.dgc.nam.fullName ?? "", subtitle: String(format: "validation_check_popup_valid_pcr_test_less_than_72_h_date_of_birth".localized, DateUtils.displayDateFormatter.string(from: dob))),
+            Paragraph(icon: .data, title: certificate?.hcert.dgc.nam.fullName ?? "", subtitle: String(format: "validation_check_popup_valid_pcr_test_less_than_72_h_date_of_birth".localized, DateUtils.displayDateFormatter.string(from: dob)))
         ]
     }
 
