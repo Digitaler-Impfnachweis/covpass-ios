@@ -25,11 +25,11 @@
 
 "validation_first_onboarding_page_title" = "Erster Schritt: Den QR-Code mit der CovPassCheck-App scannen";
 
-"validation_first_onboarding_page_message" = "Scannen Sie mit der CovPassCheck-App den QR-Code auf einem digitalen COVID-Zertifikat. Die QR-Codes der Papierversion enthalten die gleichen Informationen wie die QR-Codes der elektronische Version in der CovPass-App. Daher sind beide Zertifikatsversionen gleichwertig. Die Daten werden nur zur Prüfung angezeigt und nicht im Smartphone gespeichert. Sie sehen direkt in der CovPassCheck-App, ob das vorgelegte digitale COVID-Zertifikat gültig ist.";
+"validation_first_onboarding_page_message" = "Scannen Sie mit der CovPassCheck-App den QR-Code auf einem digitalen COVID-Zertifikat. Die QR-Codes der Papierversion enthalten die gleichen Informationen wie die QR-Codes der elektronische Version in der CovPass-App oder in anderen Apps, in denen digitale COVID-Zertifikate hinterlegt sind. Daher sind beide Zertifikatsversionen gleichwertig.";
 
 "validation_second_onboarding_page_title" = "Zweiter Schritt: Die Identität mit einem Ausweisdokument überprüfen";
 
-"validation_second_onboarding_page_message" = "Als prüfende Person sehen Sie in der CovPassCheck-App nur den Gültigkeitsstatus des digitalen COVID-Zertifikats sowie den Namen und das Geburtsdatum des Zertifikatsinhabers. Gleichen Sie diese Informationen mit einem Ausweisdokument (z. B. Personalausweis, Reisepass) ab. Eine aktive Internetverbindung ist für die Prüfung nicht erforderlich.";
+"validation_second_onboarding_page_message" = "Als prüfende Person sehen Sie in der CovPassCheck-App nur den Gültigkeitsstatus des digitalen COVID-Zertifikats sowie den Namen und das Geburtsdatum des Zertifikatsinhabers. Gleichen Sie diese Informationen mit einem Ausweisdokument (z. B. Personalausweis, Reisepass) ab. Eine aktive Internetverbindung ist für die Prüfung nicht erforderlich. Eine aktive Internetverbindung ist für die Prüfung nicht erforderlich.";
 
 "validation_fourth_onboarding_page_title" = "Datenschutz und Datensicherheit";
 
@@ -38,8 +38,6 @@
 "validation_fourth_onboarding_second_list_item" = "Eine Speicherung, Weitergabe oder Nutzung dieser Daten zu anderen Zwecken ist unzulässig.";
 
 "validation_fourth_onboarding_third_list_item" = "Die Verwendung der digitalen COVID-Zertifikate ist freiwillig. Niemand darf zur Nutzung gezwungen werden. Der Nachweis eines vollständigen Impfschutzes, eines negativen Testergebnisses oder einer durchgemachten COVID-Infektion kann auch auf andere Weise erbracht werden.";
-
-"validation_fourth_onboarding_fourth_list_item" = "Die digitalen COVID-Zertifikate enthalten Gesundheitsdaten. Zum Nachweis in den gesetzlich vorgesehenen Fällen ist nur das Scannen des QR-Codes zulässig. Weitere Daten aus der App dürfen nicht verlangt werden.";
 
 "vaccination_fourth_onboarding_page_message" = "Ausführliche Hinweise zur Datenverarbeitung finden Sie in der Datenschutzerklärung:";
 
@@ -93,47 +91,37 @@
 
 "error_camera_access_button_allow" = "Erlauben";
 
-"validation_check_popup_valid_vaccination_title" = "Impfstatus gültig";
+"validation_check_popup_valid_vaccination_recovery_title" = "Zertifikat gültig*";
 
-"validation_check_popup_valid_vaccination_message" = "Gleichen Sie jetzt folgende Daten mit einem Ausweisdokument der geimpften Person ab.";
-
-"validation_check_popup_valid_vaccination_name" = "Geboren am %@";
+"validation_check_popup_valid_vaccination_recovery_message" = "Gleichen Sie jetzt folgende Daten mit einem Ausweisdokument der geimpften oder genesenen Person ab.";
 
 "validation_check_popup_valid_vaccination_date_of_birth" = "Geboren am %@";
 
+"validation_check_popup_valid_vaccination_recovery_note" = "* Genesenen- oder Impfzertifikat liegt vor.";
+
 "validation_check_popup_valid_vaccination_button_title" = "Weiteres Zertifikat scannen";
 
-"validation_check_popup_partial_valid_vaccination_title" = "Teil-Impfschutz gültig";
+"validation_check_popup_unsuccessful_certificate_title" = "Zertifikat ungültig";
 
-"validation_check_popup_partial_valid_vaccination_message" = "Gleichen Sie jetzt folgende Daten mit einem Ausweisdokument der geimpften Person ab.";
+"validation_check_popup_unsuccessful_certificate_message" = "Das geprüfte Zertifikat ist aus einem der folgenden Gründe ungültig:";
 
-"validation_check_popup_partial_valid_vaccination_date_of_birth" = "Geboren am %@";
+"validation_check_popup_unsuccessful_certificate__recovery_title" = "Genesenenzertifikat";
 
-"validation_check_popup_partial_valid_vaccination_date_of_birth_at" = "Geboren am";
+"validation_check_popup_unsuccessful_certificate_recovery_body" = "Das Datum des ersten positiven Testergebnisses liegt mehr als 180 Tage zurück.";
 
-"validation_check_popup_date_of_birth_at_pattern" = "Geboren am %@";
+"validation_check_popup_unsuccessful_certificate__vaccination_title" = "Impfzertifikat";
 
-"validation_check_popup_partial_valid_vaccination_button_title" = "Weiteres Zertifikat scannen";
+"validation_check_popup_unsuccessful_certificate_vaccination_body" = "Das Zertifikat weist keine vollständige Impfung nach. Möglicherweise hat die Person noch nicht alle Impfdosen erhalten oder die letzte Impfung liegt weniger als 14 Tage zurück.";
 
-"validation_check_popup_unsuccessful_test_title" = "Prüfung nicht erfolgreich";
+"validation_check_popup_unsuccessful_certificate__test_title" = "Testzertifikat";
 
-"validation_check_popup_unsuccessful_test_message" = "Das kann folgende Gründe haben:";
+"validation_check_popup_unsuccessful_certificate_test_body" = "Das Zertifikat weist einen positiven PCR- oder Schnelltest nach.";
 
-"validation_check_popup_unsuccessful_test_first_reason_title" = "QR Code nicht lesbar:";
+"validation_check_popup_unsuccessful_certificate__problem_title" = "Technische Probleme";
 
-"validation_check_popup_unsuccessful_test_second_reason_title" = "Zertifikat nicht gültig:";
+"validation_check_popup_unsuccessful_certificate_problem_body" = "Die Signatur ist nicht gültig oder der QR-Code ist nicht lesbar.";
 
-"validation_check_popup_unsuccessful_test_first_reason_body" = "Prüfen Sie, ob das richtige Zertifikat vorgezeigt wurde.";
-
-"validation_check_popup_unsuccessful_test_second_reason_body" = "Das Zertifikat hat keine gültige Signatur. Unter Umständen muss die geprüfte Person das Zertifikat in der CovPass-App aktualisieren. Für diesen Vorgang ist eine Internetverbindung erforderlich.";
-
-"validation_check_popup_unsuccessful_test_button_title" = "Weiteres Zertifikat scannen";
-
-"validation_check_popup_vaccination_not_completely_title" = "Impfstatus nicht vollständig";
-
-"validation_check_popup_vaccination_not_completely_message" = "Das geprüfte Zertifikat weist keine vollständige Impfung nach: Möglicherweise hat die geprüfte Person noch nicht alle Impfdosen erhalten oder die letzte Impfung liegt weniger als 14 Tage zurück.";
-
-"validation_check_popup_vaccination_not_completely_button_title" = "Weiteres Zertifikat scannen";
+"validation_check_popup_unsuccessful_certificate_button_title" = "Weiteres Zertifikat scannen";
 
 "validation_check_popup_test_older_than_24_h_title" = "Negativer Schnelltest vom %@";
 
@@ -159,24 +147,6 @@
 
 "validation_check_popup_test_less_than_24_h_button_title" = "Weiteres Zertifikat scannen";
 
-"validation_check_popup_test_positive_title" = "Positiver Schnelltest vom %@";
-
-"validation_check_popup_test_positive_message" = "Das gescannte COVID-Zertifikat weist einen positiven Schnelltest nach.";
-
-"validation_check_popup_test_positive_button_title" = "Weiteres Zertifikat scannen";
-
-"validation_check_popup_pcr_test_positive_title" = "Positiver PCR-Test vom %@";
-
-"validation_check_popup_pcr_test_positive_message" = "Gleichen Sie jetzt folgende Daten mit einem Ausweisdokument der geprüften Person ab.";
-
-"validation_check_popup_pcr_test_positive_date_of_birth" = "Geboren am %@";
-
-"validation_check_popup_pcr_test_positive_date_of_issue" = "Probenahme am %@";
-
-"validation_check_popup_pcr_test_positive_utc" = "UTC %@";
-
-"validation_check_popup_pcr_test_positive_button_title" = "Weiteres Zertifikat scannen";
-
 "validation_check_popup_valid_pcr_test_less_than_72_h_title" = "Negativer PCR-Test von vor %d Stunden";
 
 "validation_check_popup_valid_pcr_test_less_than_72_h_message" = "Gleichen Sie jetzt folgende Daten mit einem Ausweisdokument der geprüften Person ab.";
@@ -200,20 +170,6 @@
 "validation_check_popup_valid_pcr_test_older_than_72_h_utc" = "UTC %@";
 
 "validation_check_popup_valid_pcr_test_older_than_72_h_button_title" = "Weiteres Zertifikat scannen";
-
-"validation_check_popup_recovery_proven_title" = "Genesenenzertifikat gültig";
-
-"validation_check_popup_recovery_proven_message" = "Gleichen Sie jetzt folgende Daten mit einem Ausweisdokument der genesenen Person ab.";
-
-"validation_check_popup_recovery_proven_date_of_birth" = "Geboren am %@";
-
-"validation_check_popup_recovery_proven_button_title" = "Weiteres Zertifikat scannen";
-
-"validation_check_popup_recovery_expired_title" = "Genesenenzertifikat abgelaufen";
-
-"validation_check_popup_recovery_expired_message" = "Das Datum des ersten positiven Testergebnisses liegt mehr als 180 Tage zurück.";
-
-"validation_check_popup_recovery_expired_button_title" = "Weiteres Zertifikat scannen";
 
 
 /********** app information **********/
