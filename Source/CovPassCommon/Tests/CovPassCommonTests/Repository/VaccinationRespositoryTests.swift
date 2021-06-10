@@ -27,19 +27,19 @@ class VaccinationRepositoryTests: XCTestCase {
         super.tearDown()
     }
 
-    func testCheckVaccinationCertificateValidEC() throws {
-        let res = try sut.checkVaccinationCertificate(CertificateMock.validCertificate).wait()
+    func testcheckCertificateValidEC() throws {
+        let res = try sut.checkCertificate(CertificateMock.validCertificate).wait()
         XCTAssertEqual(res.iss, "DE")
     }
 
-    func testCheckVaccinationCertificateValidRSA() throws {
-        let res = try sut.checkVaccinationCertificate(CertificateMock.validCertifcateRSA).wait()
+    func testcheckCertificateValidRSA() throws {
+        let res = try sut.checkCertificate(CertificateMock.validCertifcateRSA).wait()
         XCTAssertEqual(res.iss, "IS")
     }
 
-    func testCheckVaccinationCertificateInvalidSignature() {
+    func testcheckCertificateInvalidSignature() {
         do {
-            _ = try sut.checkVaccinationCertificate(CertificateMock.invalidCertificateInvalidSignature).wait()
+            _ = try sut.checkCertificate(CertificateMock.invalidCertificateInvalidSignature).wait()
             XCTFail("Check should fail")
         } catch {
             XCTAssertEqual(error.localizedDescription, HCertError.verifyError.localizedDescription)

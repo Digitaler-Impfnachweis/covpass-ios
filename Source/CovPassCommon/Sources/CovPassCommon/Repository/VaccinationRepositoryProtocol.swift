@@ -11,11 +11,11 @@ import Keychain
 import PromiseKit
 
 public protocol VaccinationRepositoryProtocol {
-    /// Return the vaccination certificate list
-    func getVaccinationCertificateList() -> Promise<VaccinationCertificateList>
+    /// Return the stored certificate list
+    func getCertificateList() -> Promise<CertificateList>
 
-    /// Save the vaccination certificate list
-    func saveVaccinationCertificateList(_ certificateList: VaccinationCertificateList) -> Promise<VaccinationCertificateList>
+    /// Save the certificate list
+    func saveCertificateList(_ certificateList: CertificateList) -> Promise<CertificateList>
 
     /// Get the date when the trust list got updated last
     func getLastUpdatedTrustList() -> Date?
@@ -26,17 +26,17 @@ public protocol VaccinationRepositoryProtocol {
     /// Deletes the given certificate from the certificate list
     func delete(_ certificate: ExtendedCBORWebToken) -> Promise<Void>
 
-    /// scanVaccinationCertificate validates the given QR code, parses it, and returns everything as an ExtendedCBORWebToken.
+    /// scanCertificate validates the given QR code, parses it, and returns everything as an ExtendedCBORWebToken.
     ///
     /// If an error occurs, the method will not return a certificate but an error
     ///
     /// - USED BY CovPass App
-    func scanVaccinationCertificate(_ data: String) -> Promise<ExtendedCBORWebToken>
+    func scanCertificate(_ data: String) -> Promise<ExtendedCBORWebToken>
 
-    /// checkVaccinationCertificate validates the given QR code and returns the vaccinatino certificate when it's valid, otherwise an error
+    /// checkCertificate validates the given QR code and returns the  certificate when it's valid, otherwise an error
     ///
     /// - USED BY CovPassCheck App
-    func checkVaccinationCertificate(_ data: String) -> Promise<CBORWebToken>
+    func checkCertificate(_ data: String) -> Promise<CBORWebToken>
 
     /// Toogles the favorite state and returns the updated flag
     func toggleFavoriteStateForCertificateWithIdentifier(_ id: String) -> Promise<Bool>

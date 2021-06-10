@@ -12,5 +12,5 @@ public enum APIError: Error {
     case requestCancelled
     case compressionFailed
     case invalidUrl
-    case invalidReponse
+    case invalidResponse
 }

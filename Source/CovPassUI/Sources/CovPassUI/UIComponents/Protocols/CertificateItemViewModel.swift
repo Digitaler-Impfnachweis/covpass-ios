@@ -2,7 +2,8 @@
 //  CertificateItemViewModel.swift
 //
 //
-//  Created by Timo Koenig on 08.06.21.
+//  © Copyright IBM Deutschland GmbH 2021
+//  SPDX-License-Identifier: Apache-2.0
 //
 
 import CovPassCommon

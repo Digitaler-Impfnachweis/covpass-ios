@@ -38,18 +38,18 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
         try? loadLocalTrustListIfNeeded()
     }
 
-    public func getVaccinationCertificateList() -> Promise<VaccinationCertificateList> {
+    public func getCertificateList() -> Promise<CertificateList> {
         return Promise { seal in
             do {
                 guard let data = try keychain.fetch(KeychainConfiguration.vaccinationCertificateKey) as? Data else {
                     throw KeychainError.fetch
                 }
-                let certificate = try JSONDecoder().decode(VaccinationCertificateList.self, from: data)
+                let certificate = try JSONDecoder().decode(CertificateList.self, from: data)
                 seal.fulfill(certificate)
             } catch {
                 print(error)
                 if case KeychainError.fetch = error {
-                    seal.fulfill(VaccinationCertificateList(certificates: []))
+                    seal.fulfill(CertificateList(certificates: []))
                     return
                 }
                 throw error
@@ -57,7 +57,7 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
         }
     }
 
-    public func saveVaccinationCertificateList(_ certificateList: VaccinationCertificateList) -> Promise<VaccinationCertificateList> {
+    public func saveCertificateList(_ certificateList: CertificateList) -> Promise<CertificateList> {
         return Promise { seal in
             let data = try JSONEncoder().encode(certificateList)
             try keychain.store(KeychainConfiguration.vaccinationCertificateKey, value: data)
@@ -147,9 +147,9 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
 
     public func delete(_ certificate: ExtendedCBORWebToken) -> Promise<Void> {
         firstly {
-            getVaccinationCertificateList()
+            getCertificateList()
         }
-        .then { list -> Promise<VaccinationCertificateList> in
+        .then { list -> Promise<CertificateList> in
             var certList = list
             // delete favorite if needed
             if certList.favoriteCertificateId == certificate.vaccinationCertificate.hcert.dgc.uvci {
@@ -160,13 +160,13 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
             })
             return Promise.value(certList)
         }
-        .then { list -> Promise<VaccinationCertificateList> in
-            saveVaccinationCertificateList(list)
+        .then { list -> Promise<CertificateList> in
+            saveCertificateList(list)
         }
         .asVoid()
     }
 
-    public func scanVaccinationCertificate(_ data: String) -> Promise<ExtendedCBORWebToken> {
+    public func scanCertificate(_ data: String) -> Promise<ExtendedCBORWebToken> {
         firstly {
             QRCoder.parse(data)
         }
@@ -182,7 +182,7 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
         .map { certificate in
             ExtendedCBORWebToken(vaccinationCertificate: certificate, vaccinationQRCodeData: data)
         }.then { extendedCBORWebToken in
-            self.getVaccinationCertificateList().then { list -> Promise<Void> in
+            self.getCertificateList().then { list -> Promise<Void> in
                 var certList = list
                 if certList.certificates.contains(where: { $0.vaccinationQRCodeData == data }) {
                     throw QRCodeError.qrCodeExists
@@ -194,13 +194,13 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
                     certList.favoriteCertificateId = extendedCBORWebToken.vaccinationCertificate.hcert.dgc.v?.first?.ci
                 }
 
-                return self.saveVaccinationCertificateList(certList).asVoid()
+                return self.saveCertificateList(certList).asVoid()
             }
             .map { extendedCBORWebToken }
         }
     }
 
-    public func checkVaccinationCertificate(_ data: String) -> Promise<CBORWebToken> {
+    public func checkCertificate(_ data: String) -> Promise<CBORWebToken> {
         firstly {
             QRCoder.parse(data)
         }
@@ -211,7 +211,7 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
 
     public func toggleFavoriteStateForCertificateWithIdentifier(_ id: String) -> Promise<Bool> {
         firstly {
-            getVaccinationCertificateList()
+            getCertificateList()
         }
         .map { list in
             var certList = list
@@ -219,7 +219,7 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
             return certList
         }
         .then { list in
-            self.saveVaccinationCertificateList(list)
+            self.saveCertificateList(list)
         }
         .map { list in
             list.favoriteCertificateId == id
@@ -228,7 +228,7 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
 
     public func favoriteStateForCertificates(_ certificates: [ExtendedCBORWebToken]) -> Promise<Bool> {
         firstly {
-            getVaccinationCertificateList()
+            getCertificateList()
         }
         .map { currentList in
             certificates.contains(where: { $0.vaccinationCertificate.hcert.dgc.uvci == currentList.favoriteCertificateId })

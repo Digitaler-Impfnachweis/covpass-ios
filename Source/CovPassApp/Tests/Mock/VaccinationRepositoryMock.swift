@@ -19,12 +19,12 @@ public class VaccinationRepositoryMock: VaccinationRepositoryProtocol {
         return Promise.value
     }
 
-    public func getVaccinationCertificateList() -> Promise<VaccinationCertificateList> {
-        return Promise.value(VaccinationCertificateList(certificates: []))
+    public func getCertificateList() -> Promise<CertificateList> {
+        return Promise.value(CertificateList(certificates: []))
     }
 
-    public func saveVaccinationCertificateList(_: VaccinationCertificateList) -> Promise<VaccinationCertificateList> {
-        return Promise.value(VaccinationCertificateList(certificates: []))
+    public func saveCertificateList(_: CertificateList) -> Promise<CertificateList> {
+        return Promise.value(CertificateList(certificates: []))
     }
 
     public func delete(_: ExtendedCBORWebToken) -> Promise<Void> {
@@ -41,13 +41,13 @@ public class VaccinationRepositoryMock: VaccinationRepositoryProtocol {
         .value(favoriteToggle)
     }
 
-    public func scanVaccinationCertificate(_: String) -> Promise<ExtendedCBORWebToken> {
+    public func scanCertificate(_: String) -> Promise<ExtendedCBORWebToken> {
         return Promise { seal in
             seal.reject(ApplicationError.unknownError)
         }
     }
 
-    public func checkVaccinationCertificate(_: String) -> Promise<CBORWebToken> {
+    public func checkCertificate(_: String) -> Promise<CBORWebToken> {
         return Promise { seal in
             seal.reject(ApplicationError.unknownError)
         }

@@ -71,7 +71,7 @@ class ValidatorOverviewViewModel {
             try self.payloadFromScannerResult($0)
         }
         .then {
-            self.repository.checkVaccinationCertificate($0)
+            self.repository.checkCertificate($0)
         }
         .done {
             self.router.showCertificate($0)

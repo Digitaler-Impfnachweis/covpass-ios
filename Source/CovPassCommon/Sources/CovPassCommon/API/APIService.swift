@@ -21,7 +21,6 @@ public struct APIService: APIServiceProtocol {
     }
 
     public func fetchTrustList() -> Promise<String> {
-        let url = "https://de.test.dscg.ubirch.com/trustList/DSC/"
         return Promise { seal in
             guard let requestUrl = URL(string: url) else {
                 seal.reject(APIError.invalidUrl)
@@ -48,17 +47,17 @@ public struct APIService: APIServiceProtocol {
                     return
                 }
                 guard let response = response as? HTTPURLResponse else {
-                    seal.reject(APIError.invalidReponse)
+                    seal.reject(APIError.invalidResponse)
                     return
                 }
                 guard (200 ... 299).contains(response.statusCode) else {
                     print(String(data: data ?? Data(), encoding: .utf8) ?? "")
-                    seal.reject(APIError.invalidReponse)
+                    seal.reject(APIError.invalidResponse)
                     return
                 }
 
                 guard let data = data, let trustListResponse = String(data: data, encoding: .utf8) else {
-                    seal.reject(APIError.invalidReponse)
+                    seal.reject(APIError.invalidResponse)
                     return
                 }
 

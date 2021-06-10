@@ -27,7 +27,7 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
     weak var delegate: CertificatesOverviewViewModelDelegate?
     private var router: CertificatesOverviewRouterProtocol
     private let repository: VaccinationRepositoryProtocol
-    private var certificateList = VaccinationCertificateList(certificates: [])
+    private var certificateList = CertificateList(certificates: [])
     private var lastKnownFavoriteCertificateId: String?
 
     private var matchedCertificates: [CertificatePair] {
@@ -90,7 +90,7 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
 
     private func refreshCertificates() -> Promise<Void> {
         firstly {
-            repository.getVaccinationCertificateList()
+            repository.getCertificateList()
         }
         .get {
             self.certificateList = $0
@@ -117,7 +117,7 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
             try self.payloadFromScannerResult(result)
         }
         .then { payload in
-            self.repository.scanVaccinationCertificate(payload)
+            self.repository.scanCertificate(payload)
         }
         .ensure {
             self.refresh()

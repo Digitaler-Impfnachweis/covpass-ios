@@ -87,7 +87,7 @@ class VaccinationResultViewModel: ValidationResultViewModel {
             try self.payloadFromScannerResult($0)
         }
         .then {
-            self.repository.checkVaccinationCertificate($0)
+            self.repository.checkCertificate($0)
         }
         .get {
             self.certificate = $0
