@@ -91,7 +91,7 @@ class TestResultViewModel: ValidationResultViewModel {
         if testCert.isPositive, !testCert.isPCR {
             return nil
         }
-        return String(format: "validation_check_popup_pcr_test_positive_date_of_issue".localized, DateUtils.displayDateFormatter.string(from: testCert.sc), DateUtils.displayTimeFormatter.string(from: testCert.sc))
+        return String(format: "validation_check_popup_pcr_test_positive_date_of_issue".localized, DateUtils.displayDateTimeFormatter.string(from: testCert.sc))
     }
 
     var errorBody: String? {
@@ -101,7 +101,7 @@ class TestResultViewModel: ValidationResultViewModel {
         if testCert.isPositive, !testCert.isPCR {
             return nil
         }
-        return DateUtils.displayTimeZoneFormatter.string(from: testCert.sc)
+        return DateUtils.displayDateTimeFormatter.string(from: testCert.sc)
     }
 
     var nameIcon: UIImage? {
