@@ -32,7 +32,7 @@
                     </constraints>
                 </view>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qf6-Rq-Unr">
-                    <rect key="frame" x="0.0" y="124" width="414" height="682"/>
+                    <rect key="frame" x="0.0" y="124" width="414" height="670"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="tNn-Ng-ZRx">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="418"/>
@@ -60,7 +60,7 @@
                     <viewLayoutGuide key="frameLayoutGuide" id="kSY-DC-uwf"/>
                 </scrollView>
                 <view contentMode="scaleToFill" placeholderIntrinsicWidth="240" placeholderIntrinsicHeight="56" translatesAutoresizingMaskIntoConstraints="NO" id="Ym0-Wl-H3l" customClass="CustomToolbarView" customModule="CovPassUI">
-                    <rect key="frame" x="0.0" y="806" width="414" height="56"/>
+                    <rect key="frame" x="0.0" y="794" width="414" height="56"/>
                 </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="aye-B2-vjU"/>
@@ -75,7 +75,7 @@
                 <constraint firstItem="Ym0-Wl-H3l" firstAttribute="leading" secondItem="aye-B2-vjU" secondAttribute="leading" id="hVe-jH-RPM"/>
                 <constraint firstItem="Ym0-Wl-H3l" firstAttribute="top" secondItem="Qf6-Rq-Unr" secondAttribute="bottom" id="ool-zM-sk7"/>
                 <constraint firstItem="sKK-Se-ZAm" firstAttribute="top" secondItem="aye-B2-vjU" secondAttribute="top" constant="20" id="xWv-Hq-W8v"/>
-                <constraint firstItem="Ym0-Wl-H3l" firstAttribute="bottom" secondItem="aye-B2-vjU" secondAttribute="bottom" id="ygL-2E-Kkx"/>
+                <constraint firstItem="aye-B2-vjU" firstAttribute="bottom" secondItem="Ym0-Wl-H3l" secondAttribute="bottom" constant="12" id="ygL-2E-Kkx"/>
             </constraints>
             <point key="canvasLocation" x="-1513" y="-52"/>
         </view>

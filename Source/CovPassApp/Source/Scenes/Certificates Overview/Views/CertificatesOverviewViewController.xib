@@ -30,7 +30,7 @@
                     <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="UkJ-ri-sjN">
-                    <rect key="frame" x="0.0" y="120" width="414" height="628"/>
+                    <rect key="frame" x="0.0" y="120" width="414" height="616"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="mNC-aH-BF7">
                         <size key="itemSize" width="128" height="128"/>
@@ -50,7 +50,7 @@
                     </cells>
                 </collectionView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PMf-RC-nLN" userLabel="Bottom Container View">
-                    <rect key="frame" x="0.0" y="774" width="414" height="88"/>
+                    <rect key="frame" x="0.0" y="762" width="414" height="88"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="nEz-ae-K9N">
                             <rect key="frame" x="0.0" y="10" width="414" height="78"/>
@@ -82,7 +82,7 @@
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="qpg-K1-lgH" firstAttribute="top" secondItem="PRk-Ue-LAv" secondAttribute="top" id="4dj-me-YRu"/>
-                <constraint firstItem="PRk-Ue-LAv" firstAttribute="bottom" secondItem="PMf-RC-nLN" secondAttribute="bottom" id="54S-ES-zjx"/>
+                <constraint firstItem="PRk-Ue-LAv" firstAttribute="bottom" secondItem="PMf-RC-nLN" secondAttribute="bottom" constant="12" id="54S-ES-zjx"/>
                 <constraint firstItem="UkJ-ri-sjN" firstAttribute="top" secondItem="qpg-K1-lgH" secondAttribute="bottom" constant="26" id="EMq-wj-JNe"/>
                 <constraint firstItem="UkJ-ri-sjN" firstAttribute="leading" secondItem="PRk-Ue-LAv" secondAttribute="leading" id="Jjb-WV-mo6"/>
                 <constraint firstItem="PRk-Ue-LAv" firstAttribute="trailing" secondItem="UkJ-ri-sjN" secondAttribute="trailing" id="TPl-Ni-Pka"/>
