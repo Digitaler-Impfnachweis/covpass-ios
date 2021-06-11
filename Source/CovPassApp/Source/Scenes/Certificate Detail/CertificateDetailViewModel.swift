@@ -34,7 +34,7 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
     }
 
     var name: String {
-        certificates.first?.vaccinationCertificate.hcert.dgc.nam.fullName ?? ""
+        certificates.first?.vaccinationCertificate.hcert.dgc.nam.fullNameReverse ?? ""
     }
 
     var birthDate: String {
@@ -79,6 +79,7 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
 
     var items: [CertificateItem] {
         certificates
+            .reversed()
             .compactMap { cert in
                 let active = cert == selectedCertificate
                 var vm: CertificateItemViewModel?

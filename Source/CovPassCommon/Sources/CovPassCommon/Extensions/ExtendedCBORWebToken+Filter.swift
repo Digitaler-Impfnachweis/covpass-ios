@@ -27,9 +27,6 @@ public extension Array where Element == ExtendedCBORWebToken {
 
     func pairableCertificates(for certificate: Element) -> [Element] {
         filter {
-            $0 != certificate
-        }
-        .filter {
             $0.vaccinationCertificate.hcert.dgc == certificate.vaccinationCertificate.hcert.dgc
         }
     }
@@ -38,6 +35,6 @@ public extension Array where Element == ExtendedCBORWebToken {
         if isEmpty {
             return []
         }
-        return pairableCertificates(for: certificate) + [certificate]
+        return pairableCertificates(for: certificate)
     }
 }
