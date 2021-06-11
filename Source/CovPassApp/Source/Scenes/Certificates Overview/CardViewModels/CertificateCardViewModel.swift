@@ -71,16 +71,13 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
             return DateUtils.displayDateTimeFormatter.string(from: t.sc)
         }
         if let v = certificate.v?.first {
-            if !v.fullImmunization {
-                return String(format: "vaccination_certificate_overview_incomplete_title".localized, 1, 2)
-            }
             if v.fullImmunizationValid {
                 return "vaccination_start_screen_qrcode_complete_protection_subtitle".localized
             } else if let date = v.fullImmunizationValidFrom, v.fullImmunization {
-                return String(format: "vaccination_certificate_overview_complete_title".localized, DateUtils.displayDateFormatter.string(from: date))
+                return String(format: "vaccination_start_screen_qrcode_complete_from_date_subtitle".localized, DateUtils.displayDateFormatter.string(from: date))
             }
 
-            return String(format: "vaccination_certificate_overview_incomplete_title".localized, 1, 2)
+            return String(format: "vaccination_start_screen_qrcode_incomplete_subtitle".localized, 1, 2)
         }
         return ""
     }
