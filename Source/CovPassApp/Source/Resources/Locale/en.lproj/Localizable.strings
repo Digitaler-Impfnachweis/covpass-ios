@@ -73,9 +73,9 @@
 
 "certificate_add_popup_message" = "Scannen Sie den QR-Code von einem Digitalen COVID-Zertifikat der EU. Der Nachweis wird direkt in die CovPass-App übertragen.";
 
-"certificate_add_popup_action_title" = "Wie erhalte ich einen QR-Code?";
+"certificate_add_popup_action_title" = "Welchen QR-Code kann ich einscannen?";
 
-"certificate_add_popup_action_title_linked" = "#Wie erhalte ich einen QR-Code?::$0#";
+"certificate_add_popup_action_title_linked" = "#Welchen QR-Code kann ich einscannen?::$0#";
 
 "certificate_add_popup_scan_button_title" = "QR-Code scannen";
 
@@ -152,7 +152,7 @@
 
 "vaccination_certificate_overview_incomplete_message" = "Ihr Impfschutz ist nicht vollständig. Um den QR-Code als Nachweis für einen kompletten Impfschutz vorzeigen zu können, fügen Sie bitte eine weitere Impfung hinzu.";
 
-"vaccination_certificate_detail_view_incomplete_action_button_title" = "Impfung hinzufügen";
+"vaccination_certificate_detail_view_incomplete_action_button_title" = "Aktuellen QR-Code anzeigen";
 
 "vaccination_certificate_overview_complete_from_title" = "Vollständiger Impfschutz ab %@";
 
@@ -374,7 +374,7 @@
 
 "error_scan_qrcode_cannot_be_parsed_title" = "QR-Code wurde nicht erkannt";
 
-"error_scan_qrcode_cannot_be_parsed_message" = "Dieser QR-Code gehört offenbar nicht zu einem Digitalen COVID-Zertifikat der EU. Bitte scannen Sie ein Digitales COVID-Zertifikat der EU.";
+"error_scan_qrcode_cannot_be_parsed_message" = "Der QR-Code gehört nicht zu einem Digitalen COVID-Zertifikat der EU. Sie erkennen das richtige Zertifikat in Deutschland daran, dass der Aussteller das Robert Koch-Institut ist.\n\nQR-Codes von zum Beispiel Impfbescheinigungen oder QR-Codes auf einigen Chargen-Aufklebern aus dem gelben Impfbuch können nicht hinzugefügt werden.";
 
 "error_scan_qrcode_cannot_be_parsed_button_title" = "OK";
 
