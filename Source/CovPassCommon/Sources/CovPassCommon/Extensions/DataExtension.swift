@@ -17,4 +17,8 @@ extension Data {
         }
         return Data(hash)
     }
+
+    func hexEncodedString() -> String {
+        return self.map { String(format: "%02hhx", $0) }.joined()
+    }
 }
