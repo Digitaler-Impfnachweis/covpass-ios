@@ -246,13 +246,15 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
     }
 
     func parseCertificate(_ cosePayload: CoseSign1Message) throws -> CBORWebToken {
-        let cosePayloadJsonData = try cosePayload.payloadJsonData()
-        let certificate = try JSONDecoder().decode(CBORWebToken.self, from: cosePayloadJsonData)
-
         guard let trustList = self.trustList else {
             throw ApplicationError.general("Missing TrustList")
         }
-        try HCert.verify(message: cosePayload, trustList: trustList)
+        let trustCert = try HCert.verify(message: cosePayload, trustList: trustList)
+
+        let cosePayloadJsonData = try cosePayload.payloadJsonData()
+        let certificate = try JSONDecoder().decode(CBORWebToken.self, from: cosePayloadJsonData)
+
+        try HCert.checkExtendedKeyUsage(certificate: certificate, trustCertificate: trustCert)
 
         if !certificate.hcert.dgc.isSupportedVersion {
             throw QRCodeError.versionNotSupported

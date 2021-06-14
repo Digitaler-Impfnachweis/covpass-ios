@@ -2,6 +2,15 @@
   "object": {
     "pins": [
       {
+        "package": "ASN1Decoder",
+        "repositoryURL": "https://github.com/filom/ASN1Decoder",
+        "state": {
+          "branch": null,
+          "revision": "3d472cf1b906bd3478378a10959f11751d9bbb99",
+          "version": "1.7.1"
+        }
+      },
+      {
         "package": "PromiseKit",
         "repositoryURL": "https://github.com/mxcl/PromiseKit",
         "state": {

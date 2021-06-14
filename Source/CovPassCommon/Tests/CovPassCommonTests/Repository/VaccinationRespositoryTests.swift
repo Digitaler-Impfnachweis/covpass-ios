@@ -27,17 +27,31 @@ class VaccinationRepositoryTests: XCTestCase {
         super.tearDown()
     }
 
-    func testcheckCertificateValidEC() throws {
+    func testCheckCertificateValidExtendedKeyUsage() throws {
+        let res = try sut.checkCertificate(CertificateMock.validExtendedKeyUsageGreece).wait()
+        XCTAssertEqual(res.iss, "GR")
+    }
+
+    func testCheckCertificateInvalidExtendedKeyUsage() {
+        do {
+            _ = try sut.checkCertificate(CertificateMock.invalidExtendedKeyUsagePoland).wait()
+            XCTFail("test should fail")
+        } catch {
+            XCTAssertEqual(error.localizedDescription, HCertError.illegalKeyUsage.localizedDescription)
+        }
+    }
+
+    func testCheckCertificateValidEC() throws {
         let res = try sut.checkCertificate(CertificateMock.validCertificate).wait()
         XCTAssertEqual(res.iss, "DE")
     }
 
-    func testcheckCertificateValidRSA() throws {
+    func testCheckCertificateValidRSA() throws {
         let res = try sut.checkCertificate(CertificateMock.validCertifcateRSA).wait()
         XCTAssertEqual(res.iss, "IS")
     }
 
-    func testcheckCertificateInvalidSignature() {
+    func testCheckCertificateInvalidSignature() {
         do {
             _ = try sut.checkCertificate(CertificateMock.invalidCertificateInvalidSignature).wait()
             XCTFail("Check should fail")
