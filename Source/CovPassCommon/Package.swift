@@ -33,11 +33,6 @@ let package = Package(
             name: "CovPassCommonTests",
             dependencies: ["CovPassCommon"],
             resources: [.process("Resources")]
-        ),
-        .testTarget(
-            name: "CovPassCommonIntegrationTests",
-            dependencies: ["CovPassCommon"],
-            resources: [.process("Resources")]
         )
     ]
 )
