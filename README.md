@@ -48,7 +48,7 @@ API documentation TBD
     * Add new detail view to list all different types of certificates
     * Check for extendedKeyUsage Oids
     * Bugfixes and smaller adjustments
-* 1.3.0
+* 1.2.0
     * Adjust DGC scheme validation for <= 1.1.0
 * 1.1.2
     * UI Adjustments
