@@ -43,6 +43,13 @@ API documentation TBD
 
 ## Release History
 
+* 1.3.0
+    * Add recovery and test certificates
+    * Add new detail view to list all different types of certificates
+    * Check for extendedKeyUsage Oids
+    * Bugfixes and smaller adjustments
+* 1.3.0
+    * Adjust DGC scheme validation for <= 1.1.0
 * 1.1.2
     * UI Adjustments
 * 1.1.1
