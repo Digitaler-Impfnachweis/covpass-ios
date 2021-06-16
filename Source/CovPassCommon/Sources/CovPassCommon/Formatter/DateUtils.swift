@@ -45,7 +45,13 @@ public enum DateUtils {
         if let date = dateFormatter(format: "yyyy-MM-dd").date(from: dateString) {
             return date
         }
+        if let date = dateFormatter(format: "yyyy-MM-dd'T'HH:mm:ss").date(from: dateString) {
+            return date
+        }
         if let date = dateFormatter(format: "yyyy-MM-dd'T'HH:mm:ssZ").date(from: dateString) {
+            return date
+        }
+        if let date = dateFormatter(format: "yyyy-MM-dd'T'HH:mm:ss.SSSS").date(from: dateString) {
             return date
         }
         if let date = dateFormatter(format: "yyyy-MM-dd'T'HH:mm:ss.SSSSZ").date(from: dateString) {
