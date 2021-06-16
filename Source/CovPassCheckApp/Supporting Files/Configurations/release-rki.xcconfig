@@ -10,12 +10,12 @@ APP_NAME = CovPass Check
 
 // API
 
-API_URL = https:/$()/de.test.dscg.ubirch.com/trustList/DSC/
+API_URL = https:/$()/de.dscg.ubirch.com/trustList/DSC/
 
 
 // TLS CERTIVICATE PINNING
 
-TLS_CERTIFICATE_NAME = de.test.dscg.ubirch.com.combined.der
+TLS_CERTIFICATE_NAME = rsa-certify.prod.ubirch.com-V3_1982645.der
 
 
 // SEAL VERIVICATION
