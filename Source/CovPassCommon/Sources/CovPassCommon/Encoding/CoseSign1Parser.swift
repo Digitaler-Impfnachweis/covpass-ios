@@ -133,7 +133,6 @@ struct CoseSign1Message {
             }
             v = result
         default:
-            assertionFailure("CBOR value type not implemented, yet")
             return nil
         }
 
