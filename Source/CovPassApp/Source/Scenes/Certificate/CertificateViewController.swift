@@ -47,7 +47,7 @@ class CertificateViewController: UIViewController {
     }
 
     private func configureHeadline() {
-        headline.attributedTitleText = viewModel.title.styledAs(.header_2)
+        headline.attributedTitleText = nil
         headline.action = { [weak self] in
             self?.viewModel.cancel()
         }
