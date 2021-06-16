@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CertificateCollectionViewCell" id="VBZ-4c-av2" userLabel="CertificateCollectionViewCell" customClass="CertificateCollectionViewCell" customModule="CovPassUI">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="590"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="4RZ-nW-lgh">
+                <rect key="frame" x="0.0" y="0.0" width="414" height="590"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DgT-IF-arn" userLabel="Container View">
+                        <rect key="frame" x="20" y="44" width="374" height="546"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8UB-7x-Wld">
+                                <rect key="frame" x="0.0" y="0.0" width="374" height="546"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="T1V-OB-XnR">
+                                        <rect key="frame" x="0.0" y="34" width="374" height="532"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" placeholderIntrinsicWidth="374" placeholderIntrinsicHeight="120" translatesAutoresizingMaskIntoConstraints="NO" id="pTs-ku-Q18" customClass="CardViewHeader" customModule="CovPassUI">
+                                                <rect key="frame" x="24" y="0.0" width="326" height="120"/>
+                                                <color key="tintColor" systemColor="systemBlueColor"/>
+                                            </view>
+                                            <view contentMode="scaleToFill" placeholderIntrinsicWidth="358" placeholderIntrinsicHeight="246" translatesAutoresizingMaskIntoConstraints="NO" id="adP-Zh-FLt" customClass="QRContainerView" customModule="CovPassUI">
+                                                <rect key="frame" x="24" y="120" width="326" height="246"/>
+                                            </view>
+                                            <view contentMode="scaleToFill" placeholderIntrinsicWidth="326" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="oUs-2O-r3G" customClass="PlainLabel" customModule="CovPassUI">
+                                                <rect key="frame" x="24" y="366" width="326" height="128"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                            </view>
+                                            <view contentMode="scaleToFill" placeholderIntrinsicWidth="374" placeholderIntrinsicHeight="30" translatesAutoresizingMaskIntoConstraints="NO" id="VUx-Xk-tTT" customClass="CardViewAction" customModule="CovPassUI">
+                                                <rect key="frame" x="24" y="494" width="326" height="30"/>
+                                                <color key="tintColor" systemColor="systemBlueColor"/>
+                                            </view>
+                                        </subviews>
+                                        <edgeInsets key="layoutMargins" top="0.0" left="24" bottom="0.0" right="24"/>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="T1V-OB-XnR" secondAttribute="trailing" id="0Wy-XA-YxV"/>
+                                    <constraint firstItem="T1V-OB-XnR" firstAttribute="top" secondItem="8UB-7x-Wld" secondAttribute="top" constant="34" id="KqA-lC-sOK"/>
+                                    <constraint firstItem="T1V-OB-XnR" firstAttribute="leading" secondItem="8UB-7x-Wld" secondAttribute="leading" id="Xmj-Xd-nFI"/>
+                                    <constraint firstAttribute="bottom" secondItem="T1V-OB-XnR" secondAttribute="bottom" constant="34" id="roh-W1-uUR"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="Z3p-F2-YpW"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="Avf-2N-heg"/>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" name="OnBrandAccent70"/>
+                        <constraints>
+                            <constraint firstItem="8UB-7x-Wld" firstAttribute="leading" secondItem="DgT-IF-arn" secondAttribute="leading" id="8Jg-nS-6ZF"/>
+                            <constraint firstItem="T1V-OB-XnR" firstAttribute="width" secondItem="DgT-IF-arn" secondAttribute="width" id="JgL-J3-n8V"/>
+                            <constraint firstAttribute="bottom" secondItem="8UB-7x-Wld" secondAttribute="bottom" id="PkU-Ro-Ug2"/>
+                            <constraint firstItem="8UB-7x-Wld" firstAttribute="top" secondItem="DgT-IF-arn" secondAttribute="top" id="bLy-fz-Acf"/>
+                            <constraint firstAttribute="trailing" secondItem="8UB-7x-Wld" secondAttribute="trailing" id="fdo-dS-NLS"/>
+                        </constraints>
+                        <edgeInsets key="layoutMargins" top="0.0" left="0.0" bottom="0.0" right="0.0"/>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="DgT-IF-arn" secondAttribute="bottom" id="9Jw-Gf-NlG"/>
+                    <constraint firstItem="DgT-IF-arn" firstAttribute="leading" secondItem="4RZ-nW-lgh" secondAttribute="leadingMargin" id="Wtz-85-rqk"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="DgT-IF-arn" secondAttribute="trailing" id="bsI-fy-UOn"/>
+                    <constraint firstItem="DgT-IF-arn" firstAttribute="top" secondItem="4RZ-nW-lgh" secondAttribute="topMargin" id="hll-7Q-EBG"/>
+                </constraints>
+                <edgeInsets key="layoutMargins" top="0.0" left="0.0" bottom="0.0" right="0.0"/>
+            </collectionViewCellContentView>
+            <size key="customSize" width="414" height="590"/>
+            <connections>
+                <outlet property="actionView" destination="VUx-Xk-tTT" id="fvE-tJ-Jin"/>
+                <outlet property="containerView" destination="DgT-IF-arn" id="IOi-yc-BTS"/>
+                <outlet property="contentStackView" destination="T1V-OB-XnR" id="Bsf-ww-2o1"/>
+                <outlet property="headerView" destination="pTs-ku-Q18" id="NbY-zP-9wf"/>
+                <outlet property="qrContainerView" destination="adP-Zh-FLt" id="X1I-ay-Ezs"/>
+                <outlet property="titleView" destination="oUs-2O-r3G" id="wGh-Li-9mY"/>
+            </connections>
+            <point key="canvasLocation" x="-1049.2753623188407" y="225.66964285714283"/>
+        </collectionViewCell>
+    </objects>
+    <designables>
+        <designable name="VUx-Xk-tTT">
+            <size key="intrinsicContentSize" width="374" height="30"/>
+        </designable>
+        <designable name="adP-Zh-FLt">
+            <size key="intrinsicContentSize" width="358" height="246"/>
+        </designable>
+        <designable name="oUs-2O-r3G">
+            <size key="intrinsicContentSize" width="326" height="128"/>
+        </designable>
+        <designable name="pTs-ku-Q18">
+            <size key="intrinsicContentSize" width="374" height="120"/>
+        </designable>
+    </designables>
+    <resources>
+        <namedColor name="OnBrandAccent70">
+            <color red="0.024000000208616257" green="0.37299999594688416" blue="0.76899999380111694" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBlueColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ValidatorOverviewViewController" customModule="CovPassCheckApp" customModuleProvider="target">
+            <connections>
+                <outlet property="headerView" destination="zJo-A3-iFe" id="O25-eI-mKv"/>
+                <outlet property="offlineCard" destination="TTc-KS-yO5" id="UxL-Sz-hzu"/>
+                <outlet property="scanCard" destination="0Le-DA-8MJ" id="hqR-DR-0ma"/>
+                <outlet property="view" destination="oRh-oW-Top" id="0bV-Tk-AFp"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="oRh-oW-Top">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" placeholderIntrinsicWidth="366" placeholderIntrinsicHeight="100" translatesAutoresizingMaskIntoConstraints="NO" id="zJo-A3-iFe" customClass="InfoHeaderView" customModule="CovPassUI">
+                    <rect key="frame" x="0.0" y="44" width="414" height="100"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hwU-UV-sBa">
+                    <rect key="frame" x="0.0" y="152" width="414" height="710"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LPz-bQ-P6F">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="656"/>
+                            <subviews>
+                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0Le-DA-8MJ" customClass="ScanCardView" customModule="CovPassUI">
+                                    <rect key="frame" x="24" y="8" width="366" height="350"/>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="350" id="wHQ-Hr-dqv"/>
+                                    </constraints>
+                                </view>
+                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TTc-KS-yO5" customClass="OfflineCardView" customModule="CovPassUI">
+                                    <rect key="frame" x="24" y="406" width="366" height="250"/>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="250" id="IiP-04-gia"/>
+                                    </constraints>
+                                </view>
+                            </subviews>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <constraints>
+                                <constraint firstItem="TTc-KS-yO5" firstAttribute="top" secondItem="0Le-DA-8MJ" secondAttribute="bottom" constant="48" id="70N-FU-pLv"/>
+                                <constraint firstItem="TTc-KS-yO5" firstAttribute="leading" secondItem="LPz-bQ-P6F" secondAttribute="leading" constant="24" id="8MX-R5-gRR"/>
+                                <constraint firstItem="0Le-DA-8MJ" firstAttribute="top" secondItem="LPz-bQ-P6F" secondAttribute="top" constant="32" id="Kck-gr-QKS"/>
+                                <constraint firstAttribute="bottom" secondItem="TTc-KS-yO5" secondAttribute="bottom" id="aWC-cg-fh3"/>
+                                <constraint firstAttribute="trailing" secondItem="TTc-KS-yO5" secondAttribute="trailing" constant="24" id="oDc-9Z-zVh"/>
+                                <constraint firstItem="0Le-DA-8MJ" firstAttribute="leading" secondItem="LPz-bQ-P6F" secondAttribute="leading" constant="24" id="t4O-H5-2fV"/>
+                                <constraint firstAttribute="trailing" secondItem="0Le-DA-8MJ" secondAttribute="trailing" constant="24" id="zz8-ap-gRh"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="LPz-bQ-P6F" firstAttribute="leading" secondItem="oYc-Hb-B6e" secondAttribute="leading" id="304-KO-M60"/>
+                        <constraint firstItem="LPz-bQ-P6F" firstAttribute="trailing" secondItem="oYc-Hb-B6e" secondAttribute="trailing" id="d0p-2O-CdC"/>
+                        <constraint firstItem="LPz-bQ-P6F" firstAttribute="bottom" secondItem="oYc-Hb-B6e" secondAttribute="bottom" id="ro3-TV-57y"/>
+                        <constraint firstItem="LPz-bQ-P6F" firstAttribute="top" secondItem="oYc-Hb-B6e" secondAttribute="top" id="sy0-rl-q9P"/>
+                    </constraints>
+                    <viewLayoutGuide key="contentLayoutGuide" id="oYc-Hb-B6e"/>
+                    <viewLayoutGuide key="frameLayoutGuide" id="W2o-wQ-M0V"/>
+                </scrollView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="q41-oh-bux"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="q41-oh-bux" firstAttribute="bottom" secondItem="hwU-UV-sBa" secondAttribute="bottom" id="6zU-uD-N87"/>
+                <constraint firstItem="q41-oh-bux" firstAttribute="trailing" secondItem="zJo-A3-iFe" secondAttribute="trailing" id="JUl-p1-C7u"/>
+                <constraint firstItem="q41-oh-bux" firstAttribute="trailing" secondItem="hwU-UV-sBa" secondAttribute="trailing" id="Q60-aD-bn7"/>
+                <constraint firstItem="zJo-A3-iFe" firstAttribute="leading" secondItem="q41-oh-bux" secondAttribute="leading" id="QgB-1M-6dn"/>
+                <constraint firstItem="hwU-UV-sBa" firstAttribute="leading" secondItem="q41-oh-bux" secondAttribute="leading" id="R0H-Vd-fC1"/>
+                <constraint firstItem="zJo-A3-iFe" firstAttribute="top" secondItem="q41-oh-bux" secondAttribute="top" id="eXL-YR-jsG"/>
+                <constraint firstItem="LPz-bQ-P6F" firstAttribute="width" secondItem="oRh-oW-Top" secondAttribute="width" id="irE-fG-hF3"/>
+                <constraint firstItem="hwU-UV-sBa" firstAttribute="top" secondItem="zJo-A3-iFe" secondAttribute="bottom" id="kSY-xF-ztB"/>
+            </constraints>
+            <point key="canvasLocation" x="-52.173913043478265" y="10.714285714285714"/>
+        </view>
+    </objects>
+    <designables>
+        <designable name="zJo-A3-iFe">
+            <size key="intrinsicContentSize" width="366" height="100"/>
+        </designable>
+    </designables>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

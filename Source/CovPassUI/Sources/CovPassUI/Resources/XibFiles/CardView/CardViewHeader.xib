@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CardViewHeader" customModule="CovPassUI">
+            <connections>
+                <outlet property="leftButton" destination="ZXp-jt-g9G" id="ReQ-Ab-kfW"/>
+                <outlet property="stackView" destination="g4h-kf-P0z" id="iAb-Cx-ZjQ"/>
+                <outlet property="subtitleLabel" destination="HCd-OX-ihK" id="TSc-9X-xDb"/>
+                <outlet property="subtitleStackView" destination="OLa-uq-atU" id="WZd-Wf-YHN"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="418" height="155"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="g4h-kf-P0z">
+                    <rect key="frame" x="20" y="52" width="378" height="61"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="OLa-uq-atU" userLabel="Header Stack View">
+                            <rect key="frame" x="0.0" y="0.0" width="378" height="61"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Covid - 19" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HCd-OX-ihK">
+                                    <rect key="frame" x="0.0" y="21" width="348" height="19.5"/>
+                                    <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZXp-jt-g9G">
+                                    <rect key="frame" x="348" y="19.5" width="30" height="22"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="30" id="fLa-dG-KGd"/>
+                                    </constraints>
+                                    <state key="normal" image="star.fill" catalog="system"/>
+                                    <connections>
+                                        <action selector="infoButtonPressedWithButton:" destination="-1" eventType="touchUpInside" id="MHn-Kb-T6v"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                        </stackView>
+                    </subviews>
+                </stackView>
+            </subviews>
+            <constraints>
+                <constraint firstItem="g4h-kf-P0z" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leadingMargin" id="EL4-h1-DaO"/>
+                <constraint firstAttribute="bottomMargin" secondItem="g4h-kf-P0z" secondAttribute="bottom" id="aAq-zA-7yg"/>
+                <constraint firstItem="g4h-kf-P0z" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="topMargin" id="d4d-PF-s89"/>
+                <constraint firstAttribute="trailingMargin" secondItem="g4h-kf-P0z" secondAttribute="trailing" id="oDZ-sV-p3V"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <edgeInsets key="layoutMargins" top="0.0" left="0.0" bottom="0.0" right="0.0"/>
+            <point key="canvasLocation" x="121.73913043478262" y="180.46875"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="star.fill" catalog="system" width="128" height="116"/>
+    </resources>
+</document>

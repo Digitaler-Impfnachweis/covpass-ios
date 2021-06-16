@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="VaccinationDetailViewController" customModule="CovPassApp" customModuleProvider="target">
+            <connections>
+                <outlet property="birtdateView" destination="o8t-JG-hB0" id="xas-dA-uO0"/>
+                <outlet property="immunizationButton" destination="U8I-bk-rPh" id="I8u-WB-uN5"/>
+                <outlet property="immunizationButtonContainerView" destination="Ukt-Bg-k00" id="bSD-n7-fJh"/>
+                <outlet property="immunizationContainerView" destination="j4t-Jg-zf5" id="VHN-gu-UQK"/>
+                <outlet property="immunizationView" destination="Fc7-Ur-FVx" id="aBE-xN-1Df"/>
+                <outlet property="nameHeadline" destination="eZz-97-0Z9" id="VpK-oP-hCO"/>
+                <outlet property="nameView" destination="axl-hz-02P" id="BK7-BD-z3I"/>
+                <outlet property="personalDataHeadline" destination="jt2-bl-Uis" id="VeQ-M5-IxV"/>
+                <outlet property="scrollView" destination="YDs-Va-mXX" id="rkd-dK-EbI"/>
+                <outlet property="stackView" destination="4ka-qw-LRS" id="bvG-dB-nlQ"/>
+                <outlet property="vaccinationsStackView" destination="rhc-O6-hd2" id="ehg-oL-Ggq"/>
+                <outlet property="view" destination="Dyt-0F-2nE" id="ak4-cW-x29"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="Dyt-0F-2nE">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YDs-Va-mXX">
+                    <rect key="frame" x="0.0" y="24" width="414" height="858"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="4ka-qw-LRS">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="672"/>
+                            <subviews>
+                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="eZz-97-0Z9" userLabel="Name Headline" customClass="PlainLabel" customModule="CovPassUI">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                                </view>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j4t-Jg-zf5" userLabel="Immunization ContainerView">
+                                    <rect key="frame" x="0.0" y="50" width="414" height="272"/>
+                                    <subviews>
+                                        <stackView opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="1rx-P9-x8s">
+                                            <rect key="frame" x="8" y="8" width="398" height="256"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="Fc7-Ur-FVx" userLabel="Immunization View" customClass="ParagraphView" customModule="CovPassUI">
+                                                    <rect key="frame" x="0.0" y="0.0" width="398" height="128"/>
+                                                </view>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Ukt-Bg-k00" userLabel="Immunization Button Container View">
+                                                    <rect key="frame" x="0.0" y="128" width="398" height="128"/>
+                                                    <subviews>
+                                                        <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="U8I-bk-rPh" userLabel="Immunization Button" customClass="MainButton" customModule="CovPassUI">
+                                                            <rect key="frame" x="0.0" y="0.0" width="398" height="128"/>
+                                                        </view>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                        </stackView>
+                                    </subviews>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <constraints>
+                                        <constraint firstAttribute="bottomMargin" secondItem="1rx-P9-x8s" secondAttribute="bottom" id="8Ug-lD-UCn"/>
+                                        <constraint firstItem="1rx-P9-x8s" firstAttribute="leading" secondItem="j4t-Jg-zf5" secondAttribute="leadingMargin" id="ILB-gK-5au"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="1rx-P9-x8s" secondAttribute="trailing" id="rpt-cc-XRo"/>
+                                        <constraint firstItem="1rx-P9-x8s" firstAttribute="top" secondItem="j4t-Jg-zf5" secondAttribute="topMargin" id="wjP-O2-ek5"/>
+                                    </constraints>
+                                </view>
+                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="jt2-bl-Uis" userLabel="Personal Data Headline" customClass="PlainLabel" customModule="CovPassUI">
+                                    <rect key="frame" x="0.0" y="322" width="414" height="50"/>
+                                </view>
+                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="axl-hz-02P" userLabel="Name View" customClass="ParagraphView" customModule="CovPassUI">
+                                    <rect key="frame" x="0.0" y="372" width="414" height="50"/>
+                                </view>
+                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="o8t-JG-hB0" userLabel="Birtdate View" customClass="ParagraphView" customModule="CovPassUI">
+                                    <rect key="frame" x="0.0" y="422" width="414" height="50"/>
+                                </view>
+                                <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="200" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="rhc-O6-hd2" userLabel="Vaccinations StackView">
+                                    <rect key="frame" x="0.0" y="472" width="414" height="200"/>
+                                </stackView>
+                            </subviews>
+                        </stackView>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="4ka-qw-LRS" firstAttribute="leading" secondItem="YDs-Va-mXX" secondAttribute="leading" id="HK3-zX-4Oy"/>
+                        <constraint firstAttribute="bottom" secondItem="4ka-qw-LRS" secondAttribute="bottom" priority="900" id="K80-Ga-1dm"/>
+                        <constraint firstAttribute="trailing" secondItem="4ka-qw-LRS" secondAttribute="trailing" id="gci-lm-WgT"/>
+                        <constraint firstItem="4ka-qw-LRS" firstAttribute="width" secondItem="YDs-Va-mXX" secondAttribute="width" id="gzb-0i-ifn"/>
+                        <constraint firstItem="4ka-qw-LRS" firstAttribute="top" secondItem="YDs-Va-mXX" secondAttribute="top" id="rlE-Ca-iLO"/>
+                    </constraints>
+                    <viewLayoutGuide key="contentLayoutGuide" id="oOk-ZY-LGb"/>
+                    <viewLayoutGuide key="frameLayoutGuide" id="taM-pc-801"/>
+                </scrollView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vuk-GN-uGc"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="YDs-Va-mXX" firstAttribute="top" secondItem="Dyt-0F-2nE" secondAttribute="top" constant="24" id="9bT-JC-hoO"/>
+                <constraint firstAttribute="bottom" secondItem="YDs-Va-mXX" secondAttribute="bottom" constant="14" id="HxY-W6-rsC"/>
+                <constraint firstItem="YDs-Va-mXX" firstAttribute="leading" secondItem="Dyt-0F-2nE" secondAttribute="leading" id="fHz-gv-wJd"/>
+                <constraint firstAttribute="trailing" secondItem="YDs-Va-mXX" secondAttribute="trailing" id="ruR-ZM-vqA"/>
+            </constraints>
+            <point key="canvasLocation" x="-52" y="-522"/>
+        </view>
+    </objects>
+    <designables>
+        <designable name="Fc7-Ur-FVx">
+            <size key="intrinsicContentSize" width="414" height="128"/>
+        </designable>
+        <designable name="U8I-bk-rPh">
+            <size key="intrinsicContentSize" width="414" height="128"/>
+        </designable>
+        <designable name="axl-hz-02P">
+            <size key="intrinsicContentSize" width="414" height="50"/>
+        </designable>
+        <designable name="eZz-97-0Z9">
+            <size key="intrinsicContentSize" width="414" height="50"/>
+        </designable>
+        <designable name="jt2-bl-Uis">
+            <size key="intrinsicContentSize" width="414" height="50"/>
+        </designable>
+        <designable name="o8t-JG-hB0">
+            <size key="intrinsicContentSize" width="414" height="50"/>
+        </designable>
+    </designables>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

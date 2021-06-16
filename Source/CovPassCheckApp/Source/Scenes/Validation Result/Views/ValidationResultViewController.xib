@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ValidationResultViewController" customModule="CovPassCheckApp" customModuleProvider="target">
+            <connections>
+                <outlet property="errorView" destination="Xfx-wN-fJV" id="bdM-g6-rkk"/>
+                <outlet property="headline" destination="5Zd-xw-4Zy" id="CJ4-zv-GyU"/>
+                <outlet property="imageContainerView" destination="gbm-mz-STE" id="gDi-l3-DRz"/>
+                <outlet property="imageView" destination="YG1-hQ-PYs" id="d0f-aY-Yq1"/>
+                <outlet property="nameView" destination="vOJ-26-RLZ" id="fjM-UV-lzu"/>
+                <outlet property="resultView" destination="Bik-p2-0B1" id="3rP-d2-Rbr"/>
+                <outlet property="stackView" destination="Yk1-DY-91Y" id="6vM-qh-eDf"/>
+                <outlet property="toolbarView" destination="a6B-vC-85H" id="GVl-aS-y18"/>
+                <outlet property="view" destination="t4C-5y-EmT" id="gWo-7g-qiL"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="t4C-5y-EmT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="60" translatesAutoresizingMaskIntoConstraints="NO" id="5Zd-xw-4Zy" customClass="InfoHeaderView" customModule="CovPassUI">
+                    <rect key="frame" x="0.0" y="64" width="414" height="60"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                </view>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JkM-ga-acx">
+                    <rect key="frame" x="0.0" y="124" width="414" height="654"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Yk1-DY-91Y">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="584"/>
+                            <subviews>
+                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="gbm-mz-STE">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="150"/>
+                                    <subviews>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="YG1-hQ-PYs">
+                                            <rect key="frame" x="132" y="0.0" width="150" height="150"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="150" id="RGR-1d-V0Q"/>
+                                                <constraint firstAttribute="width" secondItem="YG1-hQ-PYs" secondAttribute="height" id="gkk-Jc-5IU"/>
+                                            </constraints>
+                                        </imageView>
+                                    </subviews>
+                                </stackView>
+                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="Bik-p2-0B1" userLabel="Result View" customClass="ParagraphView" customModule="CovPassUI">
+                                    <rect key="frame" x="0.0" y="150" width="414" height="128"/>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                </view>
+                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="vOJ-26-RLZ" userLabel="Name View" customClass="ParagraphView" customModule="CovPassUI">
+                                    <rect key="frame" x="0.0" y="278" width="414" height="128"/>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                </view>
+                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="Xfx-wN-fJV" userLabel="Error View" customClass="ParagraphView" customModule="CovPassUI">
+                                    <rect key="frame" x="0.0" y="406" width="414" height="128"/>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                </view>
+                                <view contentMode="scaleToFill" verticalHuggingPriority="1" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="Ghi-eu-wWd" userLabel="Flexible View">
+                                    <rect key="frame" x="0.0" y="534" width="414" height="50"/>
+                                </view>
+                            </subviews>
+                        </stackView>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="Yk1-DY-91Y" firstAttribute="trailing" secondItem="yi7-T6-Cvu" secondAttribute="trailing" id="0wZ-yR-5hu"/>
+                        <constraint firstItem="Yk1-DY-91Y" firstAttribute="bottom" secondItem="yi7-T6-Cvu" secondAttribute="bottom" id="iJ0-H9-u1v"/>
+                        <constraint firstItem="Yk1-DY-91Y" firstAttribute="leading" secondItem="yi7-T6-Cvu" secondAttribute="leading" id="inQ-DX-kZS"/>
+                        <constraint firstItem="Yk1-DY-91Y" firstAttribute="width" secondItem="evq-Jj-6az" secondAttribute="width" id="oHV-df-m0t"/>
+                        <constraint firstItem="yi7-T6-Cvu" firstAttribute="top" secondItem="Yk1-DY-91Y" secondAttribute="top" id="ocM-sG-66N"/>
+                    </constraints>
+                    <viewLayoutGuide key="contentLayoutGuide" id="yi7-T6-Cvu"/>
+                    <viewLayoutGuide key="frameLayoutGuide" id="evq-Jj-6az"/>
+                </scrollView>
+                <view contentMode="scaleToFill" placeholderIntrinsicWidth="240" placeholderIntrinsicHeight="56" translatesAutoresizingMaskIntoConstraints="NO" id="a6B-vC-85H" customClass="CustomToolbarView" customModule="CovPassUI">
+                    <rect key="frame" x="0.0" y="802" width="414" height="60"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="60" id="p6h-0Q-RGl"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="GAV-T5-KlK"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="a6B-vC-85H" firstAttribute="top" secondItem="JkM-ga-acx" secondAttribute="bottom" constant="24" id="14h-Fa-081"/>
+                <constraint firstItem="a6B-vC-85H" firstAttribute="bottom" secondItem="GAV-T5-KlK" secondAttribute="bottom" id="1gN-Qg-ZK0"/>
+                <constraint firstItem="JkM-ga-acx" firstAttribute="trailing" secondItem="GAV-T5-KlK" secondAttribute="trailing" id="73R-Zz-cqF"/>
+                <constraint firstItem="a6B-vC-85H" firstAttribute="leading" secondItem="GAV-T5-KlK" secondAttribute="leading" id="IMD-Zp-vQy"/>
+                <constraint firstItem="5Zd-xw-4Zy" firstAttribute="trailing" secondItem="GAV-T5-KlK" secondAttribute="trailing" id="Mnt-Fp-KHY"/>
+                <constraint firstItem="5Zd-xw-4Zy" firstAttribute="top" secondItem="GAV-T5-KlK" secondAttribute="top" constant="20" id="am7-nm-ws6"/>
+                <constraint firstItem="JkM-ga-acx" firstAttribute="leading" secondItem="GAV-T5-KlK" secondAttribute="leading" id="cqG-zQ-EMx"/>
+                <constraint firstItem="5Zd-xw-4Zy" firstAttribute="leading" secondItem="GAV-T5-KlK" secondAttribute="leading" id="qmh-PK-wpq"/>
+                <constraint firstItem="JkM-ga-acx" firstAttribute="top" secondItem="5Zd-xw-4Zy" secondAttribute="bottom" id="qva-dS-5k1"/>
+                <constraint firstItem="a6B-vC-85H" firstAttribute="trailing" secondItem="GAV-T5-KlK" secondAttribute="trailing" id="ukR-cB-V4T"/>
+            </constraints>
+            <point key="canvasLocation" x="-2500" y="-52"/>
+        </view>
+    </objects>
+    <designables>
+        <designable name="5Zd-xw-4Zy">
+            <size key="intrinsicContentSize" width="414" height="60"/>
+        </designable>
+        <designable name="Bik-p2-0B1">
+            <size key="intrinsicContentSize" width="414" height="128"/>
+        </designable>
+        <designable name="Xfx-wN-fJV">
+            <size key="intrinsicContentSize" width="414" height="128"/>
+        </designable>
+        <designable name="a6B-vC-85H">
+            <size key="intrinsicContentSize" width="240" height="56"/>
+        </designable>
+        <designable name="vOJ-26-RLZ">
+            <size key="intrinsicContentSize" width="414" height="128"/>
+        </designable>
+    </designables>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

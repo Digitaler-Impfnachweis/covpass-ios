@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WebviewViewController" customModule="CovPassUI">
+            <connections>
+                <outlet property="headline" destination="RGY-8f-5lP" id="BtE-dW-UtZ"/>
+                <outlet property="view" destination="iN0-l3-epB" id="oo3-1e-Sid"/>
+                <outlet property="webView" destination="Nyu-1i-TvW" id="X4N-Dg-2Me"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="EF2-V9-VhC">
+                    <rect key="frame" x="0.0" y="68" width="414" height="794"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RGY-8f-5lP" customClass="InfoHeaderView" customModule="CovPassUI">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="128"/>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        </view>
+                        <wkWebView contentMode="scaleToFill" ambiguous="YES" allowsBackForwardNavigationGestures="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Nyu-1i-TvW">
+                            <rect key="frame" x="0.0" y="128" width="414" height="666"/>
+                            <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <wkWebViewConfiguration key="configuration">
+                                <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                <wkPreferences key="preferences"/>
+                            </wkWebViewConfiguration>
+                        </wkWebView>
+                    </subviews>
+                </stackView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="EF2-V9-VhC" secondAttribute="trailing" id="WsB-XV-fKg"/>
+                <constraint firstItem="EF2-V9-VhC" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="f2k-kt-RqF"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="EF2-V9-VhC" secondAttribute="bottom" id="qLe-D6-1fQ"/>
+                <constraint firstItem="EF2-V9-VhC" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="24" id="rs1-0P-aYL"/>
+            </constraints>
+            <point key="canvasLocation" x="-10" y="154"/>
+        </view>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
