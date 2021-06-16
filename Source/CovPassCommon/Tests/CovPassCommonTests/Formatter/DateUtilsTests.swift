@@ -33,7 +33,7 @@ class DateUtilsTests: XCTestCase {
     }
 
     func testDisplayIsoDateFormatter() {
-        XCTAssertEqual(DateUtils.displayIsoDateTimeFormatter.string(from: date), "1970-01-01 01:16")
+        XCTAssertEqual(DateUtils.displayIsoDateTimeFormatter.string(from: date), "1970-01-01, 01:16")
     }
 
     func testDisplayTimeZoneFormatter() {

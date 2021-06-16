@@ -43,21 +43,4 @@ class VaccinationCertificateTests: XCTestCase {
         XCTAssertEqual(sut.r?.count, 1)
         XCTAssertEqual(sut.ver, "1.0.0")
     }
-
-    func testSupportedVersion() {
-        let jsonData = Data.json("DigitalGreenCertificateV")
-        sut = try! JSONDecoder().decode(DigitalGreenCertificate.self, from: jsonData)
-
-        sut.ver = "1.0.0"
-        XCTAssert(sut.isSupportedVersion)
-
-        sut.ver = "1.0.1"
-        XCTAssert(sut.isSupportedVersion)
-
-        sut.ver = "1.1.0"
-        XCTAssertFalse(sut.isSupportedVersion)
-
-        sut.ver = "2.0.0"
-        XCTAssertFalse(sut.isSupportedVersion)
-    }
 }

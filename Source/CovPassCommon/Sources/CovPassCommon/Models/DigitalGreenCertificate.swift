@@ -22,12 +22,6 @@ public struct DigitalGreenCertificate: Codable {
     /// Version of the schema, according to Semantic versioning (ISO, https://semver.org/ version 2.0.0 or newer)"
     public var ver: String
 
-    /// Returns true if version is supported, otherwise false
-    /// Supported version is < 1.1.0
-    public var isSupportedVersion: Bool {
-        ver.compare("1.1.0", options: .numeric) == .orderedAscending
-    }
-
     /// Returns the uvci from one of the Vaccination, Test, or Recovery entry
     public var uvci: String {
         if let v = v?.first {

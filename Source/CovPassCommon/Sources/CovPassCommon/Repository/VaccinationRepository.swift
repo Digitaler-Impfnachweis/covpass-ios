@@ -78,6 +78,7 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
                 {
                     // Only update once a day
                     seal.reject(PromiseCancelledError())
+                    return
                 }
                 seal.fulfill_()
             }
@@ -255,10 +256,6 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
         let certificate = try JSONDecoder().decode(CBORWebToken.self, from: cosePayloadJsonData)
 
         try HCert.checkExtendedKeyUsage(certificate: certificate, trustCertificate: trustCert)
-
-        if !certificate.hcert.dgc.isSupportedVersion {
-            throw QRCodeError.versionNotSupported
-        }
 
         return certificate
     }
