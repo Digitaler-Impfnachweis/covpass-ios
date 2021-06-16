@@ -13,7 +13,7 @@ public enum DateUtils {
 
     public static let isoDateTimeFormatter = dateFormatter(format: "yyyy-MM-dd'T'HH:mm:ssZ")
 
-    public static let displayIsoDateTimeFormatter = dateFormatter(format: "yyyy-MM-dd HH:mm")
+    public static let displayIsoDateTimeFormatter = dateFormatter(format: "yyyy-MM-dd, HH:mm")
 
     public static let displayTimeZoneFormatter = dateFormatter(format: "ZZZZ")
 
