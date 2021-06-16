@@ -39,7 +39,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     private func clearKeychainOnFreshInstall() throws {
         if !UserDefaults.StartupInfo.bool(.appInstalled) {
             UserDefaults.StartupInfo.set(true, forKey: .appInstalled)
-            try Keychain.deletePassword(for: KeychainConfiguration.vaccinationCertificateKey)
+            try Keychain.deletePassword(for: KeychainConfiguration.certificateListKey)
         }
     }
 

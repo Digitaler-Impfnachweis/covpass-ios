@@ -41,7 +41,7 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
     public func getCertificateList() -> Promise<CertificateList> {
         return Promise { seal in
             do {
-                guard let data = try keychain.fetch(KeychainConfiguration.vaccinationCertificateKey) as? Data else {
+                guard let data = try keychain.fetch(KeychainConfiguration.certificateListKey) as? Data else {
                     throw KeychainError.fetch
                 }
                 let certificate = try JSONDecoder().decode(CertificateList.self, from: data)
@@ -60,7 +60,7 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
     public func saveCertificateList(_ certificateList: CertificateList) -> Promise<CertificateList> {
         return Promise { seal in
             let data = try JSONEncoder().encode(certificateList)
-            try keychain.store(KeychainConfiguration.vaccinationCertificateKey, value: data)
+            try keychain.store(KeychainConfiguration.certificateListKey, value: data)
             seal.fulfill(certificateList)
         }
     }
