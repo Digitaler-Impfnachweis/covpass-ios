@@ -52,6 +52,7 @@ class DateUtilsTests: XCTestCase {
         XCTAssertNotNil(DateUtils.parseDate("2021-04-26"))
         XCTAssertNotNil(DateUtils.parseDate("2021-04-26T15:05:00Z"))
         XCTAssertNotNil(DateUtils.parseDate("2021-04-26T15:05:00+02:00"))
+        XCTAssertNotNil(DateUtils.parseDate("2021-04-26T15:05:00.123+02:00"))
         XCTAssertNil(DateUtils.parseDate("15:05:00+02:00"))
         XCTAssertNil(DateUtils.parseDate("2021-04-26T15:05:00"))
         XCTAssertNil(DateUtils.parseDate("15:05:00"))
