@@ -40,4 +40,14 @@ public enum DateUtils {
         formatter.dateFormat = format
         return formatter
     }
+
+    public static func parseDate(_ dateString: String) -> Date? {
+         if let date = dateFormatter(format: "yyyy-MM-dd").date(from: dateString) {
+             return date
+         }
+         if let date = dateFormatter(format: "yyyy-MM-dd'T'HH:mm:ssZ").date(from: dateString) {
+             return date
+         }
+         return nil
+     }
 }

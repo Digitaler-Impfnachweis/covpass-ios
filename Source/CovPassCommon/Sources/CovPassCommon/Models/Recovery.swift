@@ -43,19 +43,19 @@ public class Recovery: Codable {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         tg = try values.decode(String.self, forKey: .tg)
         guard let frDateString = try? values.decode(String.self, forKey: .fr),
-              let frDate = DateUtils.isoDateFormatter.date(from: frDateString)
+              let frDate = DateUtils.parseDate(frDateString)
         else {
             throw ApplicationError.missingData("Value is missing for Test.sc")
         }
         fr = frDate
         guard let dfDateString = try? values.decode(String.self, forKey: .df),
-              let dfDate = DateUtils.isoDateFormatter.date(from: dfDateString)
+              let dfDate = DateUtils.parseDate(dfDateString)
         else {
             throw ApplicationError.missingData("Value is missing for Test.sc")
         }
         df = dfDate
         guard let duDateString = try? values.decode(String.self, forKey: .du),
-              let duDate = DateUtils.isoDateFormatter.date(from: duDateString)
+              let duDate = DateUtils.parseDate(duDateString)
         else {
             throw ApplicationError.missingData("Value is missing for Test.sc")
         }

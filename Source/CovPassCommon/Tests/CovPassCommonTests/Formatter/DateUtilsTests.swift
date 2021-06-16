@@ -47,4 +47,13 @@ class DateUtilsTests: XCTestCase {
     func testDisplayDateTimeFormatter() {
         XCTAssertEqual(DateUtils.displayDateTimeFormatter.string(from: date), "1/1/70, 1:16 AM")
     }
+
+    func testParseDate() {
+        XCTAssertNotNil(DateUtils.parseDate("2021-04-26"))
+        XCTAssertNotNil(DateUtils.parseDate("2021-04-26T15:05:00Z"))
+        XCTAssertNotNil(DateUtils.parseDate("2021-04-26T15:05:00+02:00"))
+        XCTAssertNil(DateUtils.parseDate("15:05:00+02:00"))
+        XCTAssertNil(DateUtils.parseDate("2021-04-26T15:05:00"))
+        XCTAssertNil(DateUtils.parseDate("15:05:00"))
+    }
 }

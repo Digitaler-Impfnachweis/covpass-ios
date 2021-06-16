@@ -74,13 +74,13 @@ public class Test: Codable {
         nm = try? values.decode(String.self, forKey: .nm)
         ma = try? values.decode(String.self, forKey: .ma)
         guard let scDateString = try? values.decode(String.self, forKey: .sc),
-              let scDate = DateUtils.isoDateTimeFormatter.date(from: scDateString)
+              let scDate = DateUtils.parseDate(scDateString)
         else {
             throw ApplicationError.missingData("Value is missing for Test.sc")
         }
         sc = scDate
         if let drDateString = try? values.decode(String.self, forKey: .dr),
-           let drDate = DateUtils.isoDateTimeFormatter.date(from: drDateString)
+           let drDate = DateUtils.parseDate(drDateString)
         {
             dr = drDate
         }
