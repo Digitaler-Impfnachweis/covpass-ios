@@ -38,7 +38,7 @@ class CertificateItemDetailViewModel: CertificateItemDetailViewModelProtocol {
             return "recovery_certificate_detail_view_headline".localized
         }
         if dgc.t != nil {
-            return "recovery_certificate_detail_view_headline".localized
+            return "test_certificate_detail_view_headline".localized
         }
         return "vaccination_certificate_detail_view_vaccination_headline".localized
     }
