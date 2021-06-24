@@ -20,7 +20,7 @@ public enum DateUtils {
     public static var displayDateFormatter: DateFormatter {
         let formatter = DateFormatter()
         formatter.calendar = Calendar(identifier: .iso8601)
-        formatter.dateStyle = .short
+        formatter.dateStyle = .medium
         formatter.timeStyle = .none
         return formatter
     }
@@ -28,7 +28,7 @@ public enum DateUtils {
     public static var displayDateTimeFormatter: DateFormatter {
         let formatter = DateFormatter()
         formatter.calendar = Calendar(identifier: .iso8601)
-        formatter.dateStyle = .short
+        formatter.dateStyle = .medium
         formatter.timeStyle = .short
         return formatter
     }
