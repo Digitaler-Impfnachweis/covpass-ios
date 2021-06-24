@@ -17,6 +17,9 @@ struct ECDSA {
     static let byteLength: Int = 255
 
     static func convertSignatureData(_ data: Data) throws -> Data {
+        if data.count <= length {
+            return data
+        }
         let sigR = ECDSA.encodeInteger(data.prefix(data.count - length))
         let sigS = ECDSA.encodeInteger(data.suffix(length))
         if sigS.count + sigR.count > byteLength {

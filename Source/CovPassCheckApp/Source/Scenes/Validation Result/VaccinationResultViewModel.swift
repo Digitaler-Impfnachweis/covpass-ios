@@ -41,7 +41,7 @@ class VaccinationResultViewModel: ValidationResultViewModel {
     }
 
     var paragraphs: [Paragraph] {
-        guard let dob = certificate?.hcert.dgc.dob, let vCert = certificate?.hcert.dgc.v?.first, vCert.fullImmunizationValid, vCert.validMp else {
+        guard let vCert = certificate?.hcert.dgc.v?.first, vCert.fullImmunizationValid, vCert.validMp else {
             return [
                 Paragraph(icon: .timeHui, title: "validation_check_popup_unsuccessful_certificate_not_valid_title".localized, subtitle: "validation_check_popup_unsuccessful_certificate_not_valid_message".localized),
                 Paragraph(icon: .technicalError, title: "validation_check_popup_unsuccessful_certificate_technical_problems_title".localized, subtitle: "validation_check_popup_unsuccessful_certificate_technical_problems_message".localized)

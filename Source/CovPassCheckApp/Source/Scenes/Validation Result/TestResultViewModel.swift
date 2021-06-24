@@ -49,7 +49,7 @@ class TestResultViewModel: ValidationResultViewModel {
     }
 
     var paragraphs: [Paragraph] {
-        guard let dob = certificate?.hcert.dgc.dob, let testCert = certificate?.hcert.dgc.t?.first, !testCert.isPositive, testCert.isValid, (testCert.isPCR || testCert.isAntigen) else {
+        guard let testCert = certificate?.hcert.dgc.t?.first, !testCert.isPositive, testCert.isValid, (testCert.isPCR || testCert.isAntigen) else {
             return [
                 Paragraph(icon: .timeHui, title: "validation_check_popup_unsuccessful_certificate_not_valid_title".localized, subtitle: "validation_check_popup_unsuccessful_certificate_not_valid_message".localized),
                 Paragraph(icon: .technicalError, title: "validation_check_popup_unsuccessful_certificate_technical_problems_title".localized, subtitle: "validation_check_popup_unsuccessful_certificate_technical_problems_message".localized)
