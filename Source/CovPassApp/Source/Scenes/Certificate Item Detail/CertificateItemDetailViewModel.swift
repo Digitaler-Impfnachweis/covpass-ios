@@ -43,11 +43,18 @@ class CertificateItemDetailViewModel: CertificateItemDetailViewModelProtocol {
         return "vaccination_certificate_detail_view_vaccination_headline".localized
     }
 
+    private var dob: String {
+        if let dobString = dgc.dobString {
+            return dobString
+        }
+        return DateUtils.isoDateFormatter.string(from: dgc.dob ?? Date())
+    }
+
     var items: [(String, String)] {
         if let r = dgc.r?.first {
             return [
                 ("recovery_certificate_detail_view_data_name".localized, dgc.nam.fullNameReverse),
-                ("recovery_certificate_detail_view_data_date_of_birth".localized, DateUtils.isoDateFormatter.string(from: dgc.dob ?? Date())),
+                ("recovery_certificate_detail_view_data_date_of_birth".localized, dob),
                 ("recovery_certificate_detail_view_data_disease".localized, r.map(key: r.tg, from: Bundle.commonBundle.url(forResource: "disease-agent-targeted", withExtension: "json")) ?? r.tg),
                 ("recovery_certificate_detail_view_data_date_first_positive_result".localized, DateUtils.isoDateFormatter.string(from: r.fr)),
                 ("recovery_certificate_detail_view_data_country".localized, r.co),
@@ -60,7 +67,7 @@ class CertificateItemDetailViewModel: CertificateItemDetailViewModelProtocol {
         if let t = dgc.t?.first {
             return [
                 ("test_certificate_detail_view_data_name".localized, dgc.nam.fullNameReverse),
-                ("test_certificate_detail_view_data_date_of_birth".localized, DateUtils.isoDateFormatter.string(from: dgc.dob ?? Date())),
+                ("test_certificate_detail_view_data_date_of_birth".localized, dob),
                 ("test_certificate_detail_view_data_disease".localized, t.map(key: t.tg, from: Bundle.commonBundle.url(forResource: "disease-agent-targeted", withExtension: "json")) ?? t.tg),
                 ("test_certificate_detail_view_data_test_type".localized, t.map(key: t.tt, from: Bundle.commonBundle.url(forResource: "test-type", withExtension: "json")) ?? t.tt),
                 ("test_certificate_detail_view_data_test_name".localized, t.nm ?? ""),
@@ -76,7 +83,7 @@ class CertificateItemDetailViewModel: CertificateItemDetailViewModelProtocol {
         if let v = dgc.v?.first {
             return [
                 ("vaccination_certificate_detail_view_data_name".localized, dgc.nam.fullNameReverse),
-                ("vaccination_certificate_detail_view_data_date_of_birth".localized, DateUtils.isoDateFormatter.string(from: dgc.dob ?? Date())),
+                ("vaccination_certificate_detail_view_data_date_of_birth".localized, dob),
                 ("vaccination_certificate_detail_view_data_disease".localized, v.map(key: v.tg, from: Bundle.commonBundle.url(forResource: "disease-agent-targeted", withExtension: "json")) ?? v.tg),
                 ("vaccination_certificate_detail_view_data_vaccine".localized, v.map(key: v.mp, from: Bundle.commonBundle.url(forResource: "vaccine-medicinal-product", withExtension: "json")) ?? v.mp),
                 ("vaccination_certificate_detail_view_data_vaccine_type".localized, v.map(key: v.vp, from: Bundle.commonBundle.url(forResource: "vaccine-prophylaxis", withExtension: "json")) ?? v.vp),

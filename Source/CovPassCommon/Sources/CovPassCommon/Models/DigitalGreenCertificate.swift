@@ -13,6 +13,8 @@ public struct DigitalGreenCertificate: Codable {
     public var nam: Name
     /// Date of Birth of the person addressed in the DGC. ISO 8601 date format restricted to range 1900-2099"
     public var dob: Date?
+    /// Date of Birth string
+    public var dobString: String?
     /// Vaccination Group (may contain multiple entries)
     public var v: [Vaccination]?
     /// Test Group (may contain multiple entries)
@@ -39,6 +41,7 @@ public struct DigitalGreenCertificate: Codable {
     enum CodingKeys: String, CodingKey {
         case nam
         case dob
+        case dobString
         case v
         case t
         case r
@@ -50,6 +53,10 @@ public struct DigitalGreenCertificate: Codable {
         nam = try values.decode(Name.self, forKey: .nam)
         if let dobDateString = try? values.decode(String.self, forKey: .dob) {
             dob = DateUtils.parseDate(dobDateString)
+        }
+        dobString = try? values.decode(String.self, forKey: .dobString)
+        if dobString == nil {
+            dobString = try? values.decode(String.self, forKey: .dob)
         }
         v = try? values.decode([Vaccination].self, forKey: .v)
         t = try? values.decode([Test].self, forKey: .t)
@@ -68,6 +75,7 @@ public struct DigitalGreenCertificate: Codable {
             let dateString = DateUtils.isoDateFormatter.string(from: dob)
             try container.encode(dateString, forKey: .dob)
         }
+        try container.encode(dobString, forKey: .dobString)
         try container.encode(v, forKey: .v)
         try container.encode(t, forKey: .t)
         try container.encode(r, forKey: .r)

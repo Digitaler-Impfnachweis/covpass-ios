@@ -47,8 +47,11 @@ class VaccinationResultViewModel: ValidationResultViewModel {
                 Paragraph(icon: .technicalError, title: "validation_check_popup_unsuccessful_certificate_technical_problems_title".localized, subtitle: "validation_check_popup_unsuccessful_certificate_technical_problems_message".localized)
             ]
         }
+        guard let dgc = certificate?.hcert.dgc else {
+            return []
+        }
         return [
-            Paragraph(icon: .data, title: certificate?.hcert.dgc.nam.fullName ?? "", subtitle: String(format: "validation_check_popup_valid_vaccination_date_of_birth".localized, DateUtils.displayDateFormatter.string(from: dob)))
+            Paragraph(icon: .data, title: dgc.nam.fullName, subtitle: String(format: "validation_check_popup_valid_vaccination_date_of_birth".localized, DateUtils.displayDateOfBirth(dgc)))
         ]
     }
 

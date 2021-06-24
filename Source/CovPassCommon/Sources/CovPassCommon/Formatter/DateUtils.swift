@@ -42,6 +42,12 @@ public enum DateUtils {
     }
 
     public static func parseDate(_ dateString: String) -> Date? {
+        if let date = dateFormatter(format: "yyyy").date(from: dateString) {
+            return date
+        }
+        if let date = dateFormatter(format: "yyyy-MM").date(from: dateString) {
+            return date
+        }
         if let date = dateFormatter(format: "yyyy-MM-dd").date(from: dateString) {
             return date
         }
@@ -58,5 +64,14 @@ public enum DateUtils {
             return date
         }
         return nil
+    }
+
+    public static func displayDateOfBirth(_ dgc: DigitalGreenCertificate) -> String {
+        if dateFormatter(format: "yyyy-MM-dd").date(from: dgc.dobString ?? "") != nil {
+            if let dob = dgc.dob {
+                return displayDateFormatter.string(from: dob)
+            }
+        }
+        return dgc.dobString ?? ""
     }
 }
