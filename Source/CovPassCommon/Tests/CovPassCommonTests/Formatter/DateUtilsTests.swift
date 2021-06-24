@@ -41,11 +41,11 @@ class DateUtilsTests: XCTestCase {
     }
 
     func testDisplayDateFormatter() {
-        XCTAssertEqual(DateUtils.displayDateFormatter.string(from: date), "1/1/70")
+        XCTAssertEqual(DateUtils.displayDateFormatter.string(from: date), "Jan 1, 1970")
     }
 
     func testDisplayDateTimeFormatter() {
-        XCTAssertEqual(DateUtils.displayDateTimeFormatter.string(from: date), "1/1/70, 1:16 AM")
+        XCTAssertEqual(DateUtils.displayDateTimeFormatter.string(from: date), "Jan 1, 1970 at 1:16 AM")
     }
 
     func testParseDate() {
