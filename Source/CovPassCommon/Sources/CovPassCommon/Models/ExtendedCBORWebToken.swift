@@ -31,7 +31,7 @@ extension ExtendedCBORWebToken: Comparable {
     /// Sort by dose number of first vaccination, result date of first test or valid until date of first recovery
     public static func < (lhs: ExtendedCBORWebToken, rhs: ExtendedCBORWebToken) -> Bool {
         lhs.vaccinationCertificate.hcert.dgc.v?.first?.dn ?? 0 > rhs.vaccinationCertificate.hcert.dgc.v?.first?.dn ?? 0 ||
-            lhs.vaccinationCertificate.hcert.dgc.t?.first?.dr ?? Date() > rhs.vaccinationCertificate.hcert.dgc.t?.first?.dr ?? Date() ||
+            lhs.vaccinationCertificate.hcert.dgc.t?.first?.sc ?? Date() > rhs.vaccinationCertificate.hcert.dgc.t?.first?.sc ?? Date() ||
             lhs.vaccinationCertificate.hcert.dgc.r?.first?.du ?? Date() > rhs.vaccinationCertificate.hcert.dgc.r?.first?.du ?? Date()
     }
 }
