@@ -25,7 +25,7 @@
 
 "validation_first_onboarding_page_title" = "Erster Schritt: Den QR-Code mit der CovPassCheck-App scannen";
 
-"validation_first_onboarding_page_message" = "Scannen Sie mit der CovPassCheck-App den QR-Code auf einem digitalen COVID-Zertifikat. Die QR-Codes der Papierversion enthalten die gleichen Informationen wie die QR-Codes der elektronische Version in der CovPass-App oder in anderen Apps, in denen digitale COVID-Zertifikate hinterlegt sind. Daher sind beide Zertifikatsversionen gleichwertig.";
+"validation_first_onboarding_page_message" = "Scannen Sie mit der CovPassCheck-App den QR-Code auf einem digitalen COVID-Zertifikat der EU. Die QR-Codes der Papierversion enthalten die gleichen Informationen wie die QR-Codes der elektronische Version in der CovPass-App oder in anderen Apps, in denen digitale COVID-Zertifikate der EU hinterlegt sind. Daher sind beide Zertifikatsversionen gleichwertig.";
 
 "validation_second_onboarding_page_title" = "Zweiter Schritt: Die Identität mit einem Ausweisdokument überprüfen";
 
@@ -58,13 +58,13 @@
 
 "validation_start_screen_scan_title" = "Zertifikat prüfen";
 
-"validation_start_screen_scan_message" = "Scannen Sie jetzt das EU Digitale COVID-Zertifikat. Sie sehen sofort, ob die geprüfte Person ein gültiges COVID-Zertifikat besitzt.";
+"validation_start_screen_scan_message" = "Scannen Sie jetzt das digitale COVID-Zertifikat der EU. Sie sehen sofort, ob die geprüfte Person ein gültiges COVID-Zertifikat besitzt.";
 
 "validation_start_screen_scan_action_button_title" = "Zertifikat scannen";
 
 "validation_start_screen_offline_modus_title" = "Offline-Modus";
 
-"validation_start_screen_offline_modus_message" = "Um offline prüfen zu können, halten Sie die CovPassCheck-App auf dem aktuellsten Stand. Stellen Sie dafür ab und an eine Verbindung mit dem Internet her.";
+"validation_start_screen_offline_modus_message" = "Um offline prüfen zu können, halten Sie die CovPassCheck-App auf dem aktuellen Stand. Stellen Sie dafür ab und an eine Verbindung mit dem Internet her.";
 
 "validation_start_screen_offline_modus_note_latest_version" = "Offline-Modus verfügbar";
 
@@ -76,12 +76,18 @@
 
 "error_old_version_title" = "Internetverbindung erforderlich";
 
-"error_old_version_message" = "Das letzte Update ist eine Weile her. Um offline prüfen zu können, halten Sie die CovPassCheck-App auf dem aktuellsten Stand. Stellen Sie dafür eine Verbindung mit dem Internet her.";
+"error_old_version_message" = "Das letzte Update ist eine Weile her. Um offline prüfen zu können, halten Sie die CovPassCheck-App auf dem aktuellen Stand. Stellen Sie dafür eine Verbindung mit dem Internet her.";
 
 "error_old_version_button_title" = "OK";
 
 
 /********** popup: Check vaccination **********/
+
+"scan_dialog_camera_access_title" = "Kamerazugriff benötigt";
+
+"scan_dialog_camera_access_message" = "Die CovPassCheck-App verwendet die Kamera Ihres Smartphones, um einen QR-Code scannen zu können.\n\nDer Zugriff auf Ihre Kamera erfolgt nur während der Nutzung der App und dann auch nur mit Ihrer Erlaubnis. Sie haben jederzeit die Möglichkeit, in den Einstellungen Ihres Smartphones die Berechtigung zu ändern.";
+
+"scan_dialog_camera_access_action_button" = "Zugriff erlauben";
 
 "error_camera_access_title" = "Die CovPassCheck-App möchte auf Ihre Kamera zugreifen.";
 
@@ -93,7 +99,7 @@
 
 "validation_check_popup_valid_vaccination_recovery_title" = "Zertifikat gültig*";
 
-"validation_check_popup_valid_vaccination_recovery_message" = "Gleichen Sie jetzt folgende Daten mit einem Ausweisdokument der geimpften oder genesenen Person ab.";
+"validation_check_popup_valid_vaccination_recovery_message" = "Gleichen Sie jetzt folgende Daten mit einem Ausweisdokument der geprüften Person ab.";
 
 "validation_check_popup_valid_vaccination_date_of_birth" = "Geboren am %@";
 
@@ -105,71 +111,35 @@
 
 "validation_check_popup_unsuccessful_certificate_message" = "Das geprüfte Zertifikat ist aus einem der folgenden Gründe ungültig:";
 
-"validation_check_popup_unsuccessful_certificate__recovery_title" = "Genesenenzertifikat";
+"validation_check_popup_unsuccessful_certificate_not_valid_title" = "Ungültiges Zertifikat";
 
-"validation_check_popup_unsuccessful_certificate_recovery_body" = "Das Datum des ersten positiven Testergebnisses liegt mehr als 180 Tage zurück.";
+"validation_check_popup_unsuccessful_certificate_not_valid_message" = "Das Zertifikat entspricht nicht den in Deutschland geltenden Regelungen für EU Digitale COVID-Zertifikate.";
 
-"validation_check_popup_unsuccessful_certificate__vaccination_title" = "Impfzertifikat";
+"validation_check_popup_unsuccessful_certificate_technical_problems_title" = "Technische Probleme";
 
-"validation_check_popup_unsuccessful_certificate_vaccination_body" = "Das Zertifikat weist keine vollständige Impfung nach. Möglicherweise hat die Person noch nicht alle Impfdosen erhalten oder die letzte Impfung liegt weniger als 14 Tage zurück.";
-
-"validation_check_popup_unsuccessful_certificate__test_title" = "Testzertifikat";
-
-"validation_check_popup_unsuccessful_certificate_test_body" = "Das Zertifikat weist einen positiven PCR- oder Schnelltest nach.";
-
-"validation_check_popup_unsuccessful_certificate__problem_title" = "Technische Probleme";
-
-"validation_check_popup_unsuccessful_certificate_problem_body" = "Die Signatur ist nicht gültig oder der QR-Code ist nicht lesbar.";
+"validation_check_popup_unsuccessful_certificate_technical_problems_message" = "Die Signatur ist nicht gültig oder der QR-Code ist nicht lesbar.";
 
 "validation_check_popup_unsuccessful_certificate_button_title" = "Weiteres Zertifikat scannen";
 
-"validation_check_popup_test_older_than_24_h_title" = "Negativer Schnelltest vom %@";
+"validation_check_popup_test_title" = "Negativer Schnelltest von vor %d Stunden";
 
-"validation_check_popup_test_older_than_24_h_message" = "Gleichen Sie jetzt folgende Daten mit einem Ausweisdokument der geprüften Person ab.";
+"validation_check_popup_test_message" = "Gleichen Sie jetzt folgende Daten mit einem Ausweisdokument der geprüften Person ab.";
 
-"validation_check_popup_test_older_than_24_h_date_of_birth" = "Geboren am %@";
+"validation_check_popup_test_date_of_birth" = "Geboren am %@";
 
-"validation_check_popup_test_older_than_24_h_date_of_issue" = "Getestet am %@";
+"validation_check_popup_test_date_of_issue" = "Zeitpunkt der Probenahme";
 
-"validation_check_popup_test_older_than_24_h_utc" = "UTC %@";
+"validation_check_popup_test_button_title" = "Weiteres Zertifikat scannen";
 
-"validation_check_popup_test_older_than_24_h_button_title" = "Weiteres Zertifikat scannen";
+"validation_check_popup_valid_pcr_test_title" = "Negativer PCR-Test von vor %d Stunden";
 
-"validation_check_popup_test_less_than_24_h_title" = "Negativer Schnelltest von vor %d Stunden";
+"validation_check_popup_valid_pcr_test_message" = "Gleichen Sie jetzt folgende Daten mit einem Ausweisdokument der geprüften Person ab.";
 
-"validation_check_popup_test_less_than_24_h_message" = "Gleichen Sie jetzt folgende Daten mit einem Ausweisdokument der geprüften Person ab.";
+"validation_check_popup_valid_pcr_test_date_of_birth" = "Geboren am %@";
 
-"validation_check_popup_test_less_than_24_h_date_of_birth" = "Geboren am %@";
+"validation_check_popup_valid_pcr_test_date_of_issue" = "Zeitpunkt der Probenahme";
 
-"validation_check_popup_test_less_than_24_h_date_of_issue" = "Getestet am %@";
-
-"validation_check_popup_test_less_than_24_h_utc" = "UTC %@";
-
-"validation_check_popup_test_less_than_24_h_button_title" = "Weiteres Zertifikat scannen";
-
-"validation_check_popup_valid_pcr_test_less_than_72_h_title" = "Negativer PCR-Test von vor %d Stunden";
-
-"validation_check_popup_valid_pcr_test_less_than_72_h_message" = "Gleichen Sie jetzt folgende Daten mit einem Ausweisdokument der geprüften Person ab.";
-
-"validation_check_popup_valid_pcr_test_less_than_72_h_date_of_birth" = "Geboren am %@";
-
-"validation_check_popup_valid_pcr_test_less_than_72_h_date_of_issue" = "Probenahme am %@";
-
-"validation_check_popup_valid_pcr_test_less_than_72_h_utc" = "UTC %@";
-
-"validation_check_popup_valid_pcr_test_less_than_72_h_button_title" = "Weiteres Zertifikat scannen";
-
-"validation_check_popup_valid_pcr_test_older_than_72_h_title" = "Negativer PCR-Test vom %@";
-
-"validation_check_popup_valid_pcr_test_older_than_72_h_message" = "Gleichen Sie jetzt folgende Daten mit einem Ausweisdokument der geprüften Person ab.";
-
-"validation_check_popup_valid_pcr_test_older_than_72_h_date_of_birth" = "Geboren am %@";
-
-"validation_check_popup_valid_pcr_test_older_than_72_h_date_of_issue" = "Probenahme am %@";
-
-"validation_check_popup_valid_pcr_test_older_than_72_h_utc" = "UTC %@";
-
-"validation_check_popup_valid_pcr_test_older_than_72_h_button_title" = "Weiteres Zertifikat scannen";
+"validation_check_popup_valid_pcr_test_button_title" = "Weiteres Zertifikat scannen";
 
 
 /********** app information **********/
@@ -189,6 +159,8 @@
 "app_information_title_company_details_linked" = "#Impressum::$0#";
 
 "app_information_title_open_source" = "Open-Source-Lizenzen";
+
+"app_information_message_open_source" = "Die App verwendet die folgenden Open-Source-Bibliotheken:";
 
 "app_information_version_label" = "Version %@";
 
@@ -215,6 +187,6 @@
 
 "error_scan_qrcode_cannot_be_parsed_title" = "QR-Code wurde nicht erkannt";
 
-"error_scan_qrcode_cannot_be_parsed_message" = "Der QR-Code gehört nicht zu einem Digitalen COVID-Zertifikat der EU. Sie erkennen das richtige Zertifikat in Deutschland daran, dass der Aussteller das Robert Koch-Institut ist.\n\nQR-Codes von zum Beispiel Impfbescheinigungen oder QR-Codes auf einigen Chargen-Aufklebern aus dem gelben Impfbuch können nicht hinzugefügt werden.";
+"error_scan_qrcode_cannot_be_parsed_message" = "Der QR-Code gehört nicht zu einem digitalen COVID-Zertifikat der EU. Sie erkennen das richtige Zertifikat in Deutschland daran, dass der Aussteller das Robert Koch-Institut ist.\n\nQR-Codes von zum Beispiel Impfbescheinigungen oder QR-Codes auf einigen Chargen-Aufklebern aus dem gelben Impfbuch können nicht hinzugefügt werden.";
 
 "error_scan_qrcode_cannot_be_parsed_button_title" = "OK";

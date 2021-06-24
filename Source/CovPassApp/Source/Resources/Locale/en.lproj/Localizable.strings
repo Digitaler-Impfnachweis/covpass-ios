@@ -13,7 +13,7 @@
 
 "start_onboarding_title" = "Willkommen in der CovPass-App";
 
-"start_onboarding_message" = "Weisen Sie EU Digitale COVID-Zertifikate ganz einfach mit dem Smartphone nach.";
+"start_onboarding_message" = "Weisen Sie digitale COVID-Zertifikate der EU ganz einfach mit dem Smartphone nach.";
 
 "start_onboarding_secure_title" = "Absolute Sicherheit Ihrer Daten";
 
@@ -25,7 +25,7 @@
 
 "vaccination_first_onboarding_page_title" = "Erster Schritt: Übertragen Sie das COVID-Zertifikat auf Ihr Smartphone";
 
-"vaccination_first_onboarding_page_message" = "Scannen Sie mit der CovPass-App das EU Digitale COVID-Zertifikat für eine Corona-Impfung, ein negatives Corona-Testergebnis oder eine Genesung von der Corona-Infektion. Halten Sie dafür die Kamera Ihres Smartphones über den QR-Code. Das COVID-Zertifikat wird sofort auf Ihr Smartphone übertragen.";
+"vaccination_first_onboarding_page_message" = "Scannen Sie mit der CovPass-App das digitale COVID-Zertifikat der EU für eine Corona-Impfung, ein negatives Corona-Testergebnis oder eine Genesung von der Corona-Infektion. Halten Sie dafür die Kamera Ihres Smartphones über den QR-Code. Das COVID-Zertifikat wird sofort auf Ihr Smartphone übertragen.";
 
 "vaccination_second_onboarding_page_title" = "Zweiter Schritt: Rufen Sie den QR-Code in der CovPass-App auf";
 
@@ -54,11 +54,11 @@
 
 /********** start Screen **********/
 
-"vaccination_start_screen_title" = "EU Digitales COVID-Zertifikat";
+"vaccination_start_screen_title" = "Digitale COVID-Zertifikate der EU";
 
 "vaccination_start_screen_note_title" = "Fügen Sie einen Nachweis hinzu";
 
-"vaccination_start_screen_note_message" = "Sie haben aktuell kein Digitales COVID-Zertifikat der EU gespeichert. Drücken Sie auf das Plus-Symbol, um einen digitalen Nachweis hinzuzufügen.";
+"vaccination_start_screen_note_message" = "Sie haben aktuell kein digitales COVID-Zertifikat der EU gespeichert. Drücken Sie auf das Plus-Symbol, um einen digitalen Nachweis hinzuzufügen.";
 
 "vaccination_start_screen_qrcode_incomplete_subtitle" = "Unvollständiger Impfschutz";
 
@@ -71,7 +71,7 @@
 
 "certificate_add_popup_title" = "Nachweis hinzufügen";
 
-"certificate_add_popup_message" = "Scannen Sie den QR-Code von einem Digitalen COVID-Zertifikat der EU. Der Nachweis wird direkt in die CovPass-App übertragen.";
+"certificate_add_popup_message" = "Scannen Sie den QR-Code von einem digitalen COVID-Zertifikat der EU. Der Nachweis wird direkt in die CovPass-App übertragen.";
 
 "certificate_add_popup_action_title" = "Welchen QR-Code kann ich einscannen?";
 
@@ -230,7 +230,7 @@
 
 "vaccination_certificate_detail_view_vaccination_title" = "Impfung %d von %d";
 
-"vaccination_certificate_detail_view_vaccination_headline" = "EU Digitales COVID-Impfzertifikat";
+"vaccination_certificate_detail_view_vaccination_headline" = "Digitales COVID-Impfzertifikat der EU";
 
 "vaccination_certificate_detail_view_data_name" = "Name, Vorname / Name, first name";
 
@@ -268,7 +268,7 @@
 
 "test_certificate_detail_view_pcr_test_title" = "PCR-Test";
 
-"test_certificate_detail_view_headline" = "EU Digitales COVID-Testzertifikat";
+"test_certificate_detail_view_headline" = "Digitales COVID-Testzertifikat der EU";
 
 "test_certificate_detail_view_data_name" = "Name, Vorname / Name, first name";
 
@@ -308,7 +308,7 @@
 
 "recovery_certificate_detail_view_title" = "Vollständige Genesung";
 
-"recovery_certificate_detail_view_headline" = "EU Digitales COVID-Genesenenzertifikat";
+"recovery_certificate_detail_view_headline" = "Digitales COVID-Genesenenzertifikat der EU";
 
 "recovery_certificate_detail_view_data_name" = "Name, Vorname / Name, first name";
 
@@ -353,7 +353,7 @@
 
 "delete_result_dialog_header" = "Erfolgreich gelöscht";
 
-"delete_result_dialog_message" = "Das Digitale COVID-Zertifikat wurde erfolgreich von diesem Gerät entfernt.";
+"delete_result_dialog_message" = "Das digitale COVID-Zertifikat der EU wurde erfolgreich von diesem Gerät entfernt.";
 
 "delete_result_dialog_positive_button_text" = "OK";
 
@@ -374,7 +374,7 @@
 
 "error_scan_qrcode_cannot_be_parsed_title" = "QR-Code wurde nicht erkannt";
 
-"error_scan_qrcode_cannot_be_parsed_message" = "Der QR-Code gehört nicht zu einem Digitalen COVID-Zertifikat der EU. Sie erkennen das richtige Zertifikat in Deutschland daran, dass der Aussteller das Robert Koch-Institut ist.\n\nQR-Codes von zum Beispiel Impfbescheinigungen oder QR-Codes auf einigen Chargen-Aufklebern aus dem gelben Impfbuch können nicht hinzugefügt werden.";
+"error_scan_qrcode_cannot_be_parsed_message" = "Der QR-Code gehört nicht zu einem digitalen COVID-Zertifikat der EU. Sie erkennen das richtige Zertifikat in Deutschland daran, dass der Aussteller das Robert Koch-Institut ist.\n\nQR-Codes von zum Beispiel Impfbescheinigungen oder QR-Codes auf einigen Chargen-Aufklebern aus dem gelben Impfbuch können nicht hinzugefügt werden.";
 
 "error_scan_qrcode_cannot_be_parsed_button_title" = "OK";
 
@@ -417,5 +417,7 @@
 "app_information_title_company_details_linked" = "#Impressum::$0#";
 
 "app_information_title_open_source" = "Open-Source-Lizenzen";
+
+"app_information_message_open_source" = "Die App verwendet die folgenden Open-Source-Bibliotheken:";
 
 "app_information_version_label" = "Version %@";
