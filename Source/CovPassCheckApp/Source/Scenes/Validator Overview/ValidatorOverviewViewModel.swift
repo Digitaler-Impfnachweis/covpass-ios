@@ -42,7 +42,7 @@ class ValidatorOverviewViewModel {
 
     var offlineMessage: String {
         let date = repository.getLastUpdatedTrustList() ?? Date(timeIntervalSince1970: 0)
-        return String(format: "%@ %@", "validation_start_screen_offline_modus_note_update".localized, DateUtils.displayDateFormatter.string(from: date))
+        return String(format: "%@ %@", "validation_start_screen_offline_modus_note_update".localized, DateUtils.displayDateTimeFormatter.string(from: date))
     }
 
     // MARK: - Lifecycle

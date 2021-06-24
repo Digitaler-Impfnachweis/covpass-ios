@@ -20,7 +20,7 @@ class TestResultViewModel: ValidationResultViewModel {
     private var certificate: CBORWebToken?
 
     var icon: UIImage? {
-        guard let testCert = certificate?.hcert.dgc.t?.first, !testCert.isPositive else {
+        guard let testCert = certificate?.hcert.dgc.t?.first, !testCert.isPositive, testCert.isValid, (testCert.isPCR || testCert.isAntigen) else {
             return .resultError
         }
         return .group
@@ -28,44 +28,36 @@ class TestResultViewModel: ValidationResultViewModel {
 
     var resultTitle: String {
         // positive tests or error
-        guard let testCert = certificate?.hcert.dgc.t?.first, !testCert.isPositive else {
+        guard let testCert = certificate?.hcert.dgc.t?.first, !testCert.isPositive, testCert.isValid, (testCert.isPCR || testCert.isAntigen) else {
             return "validation_check_popup_unsuccessful_certificate_title".localized
         }
         // negative pcr
         if testCert.isPCR {
-            if testCert.isValid {
-                let diffComponents = Calendar.current.dateComponents([.hour], from: testCert.sc, to: Date())
-                return String(format: "validation_check_popup_valid_pcr_test_less_than_72_h_title".localized, diffComponents.hour ?? 0)
-            }
-            return String(format: "validation_check_popup_valid_pcr_test_older_than_72_h_title".localized, DateUtils.displayDateFormatter.string(from: testCert.sc))
+            let diffComponents = Calendar.current.dateComponents([.hour], from: testCert.sc, to: Date())
+            return String(format: "validation_check_popup_valid_pcr_test_title".localized, diffComponents.hour ?? 0)
         }
         // negative rapid
-        if testCert.isValid {
-            let diffComponents = Calendar.current.dateComponents([.hour], from: testCert.sc, to: Date())
-            return String(format: "validation_check_popup_test_less_than_24_h_title".localized, diffComponents.hour ?? 0)
-        }
-        return String(format: "validation_check_popup_test_older_than_24_h_title".localized, DateUtils.displayDateFormatter.string(from: testCert.sc))
+        let diffComponents = Calendar.current.dateComponents([.hour], from: testCert.sc, to: Date())
+        return String(format: "validation_check_popup_test_title".localized, diffComponents.hour ?? 0)
     }
 
     var resultBody: String {
-        guard let testCert = certificate?.hcert.dgc.t?.first, !testCert.isPositive else {
+        guard let testCert = certificate?.hcert.dgc.t?.first, !testCert.isPositive, testCert.isValid, (testCert.isPCR || testCert.isAntigen) else {
             return "validation_check_popup_unsuccessful_certificate_message".localized
         }
         return "validation_check_popup_valid_vaccination_recovery_message".localized
     }
 
     var paragraphs: [Paragraph] {
-        guard let dob = certificate?.hcert.dgc.dob, let testCert = certificate?.hcert.dgc.t?.first, !testCert.isPositive else {
+        guard let dob = certificate?.hcert.dgc.dob, let testCert = certificate?.hcert.dgc.t?.first, !testCert.isPositive, testCert.isValid, (testCert.isPCR || testCert.isAntigen) else {
             return [
-                Paragraph(icon: .timeHui, title: "validation_check_popup_unsuccessful_certificate__recovery_title".localized, subtitle: "validation_check_popup_unsuccessful_certificate_recovery_body".localized),
-                Paragraph(icon: .statusPartialDetail, title: "validation_check_popup_unsuccessful_certificate__vaccination_title".localized, subtitle: "validation_check_popup_unsuccessful_certificate_vaccination_body".localized),
-                Paragraph(icon: .iconTest, title: "validation_check_popup_unsuccessful_certificate__test_title".localized, subtitle: "validation_check_popup_unsuccessful_certificate_test_body".localized),
-                Paragraph(icon: .technicalError, title: "validation_check_popup_unsuccessful_certificate__problem_title".localized, subtitle: "validation_check_popup_unsuccessful_certificate_problem_body".localized)
+                Paragraph(icon: .timeHui, title: "validation_check_popup_unsuccessful_certificate_not_valid_title".localized, subtitle: "validation_check_popup_unsuccessful_certificate_not_valid_message".localized),
+                Paragraph(icon: .technicalError, title: "validation_check_popup_unsuccessful_certificate_technical_problems_title".localized, subtitle: "validation_check_popup_unsuccessful_certificate_technical_problems_message".localized)
             ]
         }
         return [
-            Paragraph(icon: .data, title: certificate?.hcert.dgc.nam.fullName ?? "", subtitle: String(format: "validation_check_popup_valid_pcr_test_less_than_72_h_date_of_birth".localized, DateUtils.displayDateFormatter.string(from: dob))),
-            Paragraph(icon: .calendar, title: String(format: "validation_check_popup_valid_pcr_test_less_than_72_h_date_of_issue".localized, DateUtils.displayDateTimeFormatter.string(from: testCert.sc)), subtitle: DateUtils.displayTimeZoneFormatter.string(from: testCert.sc))
+            Paragraph(icon: .data, title: certificate?.hcert.dgc.nam.fullName ?? "", subtitle: String(format: "validation_check_popup_test_date_of_birth".localized, DateUtils.displayDateFormatter.string(from: dob))),
+            Paragraph(icon: .calendar, title: DateUtils.displayDateTimeFormatter.string(from: testCert.sc), subtitle: "validation_check_popup_test_date_of_issue".localized)
         ]
     }
 

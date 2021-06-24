@@ -37,6 +37,11 @@ public class Test: Codable {
         tt == "LP6464-4"
     }
 
+    /// True if test result is from a Antigen test
+    public var isAntigen: Bool {
+        tt == "LP217198-3"
+    }
+
     /// True if test is positive
     public var isPositive: Bool {
         tr == "260373001"

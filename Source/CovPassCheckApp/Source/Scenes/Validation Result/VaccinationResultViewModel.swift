@@ -20,42 +20,40 @@ class VaccinationResultViewModel: ValidationResultViewModel {
     private var certificate: CBORWebToken?
 
     var icon: UIImage? {
-        guard let vCert = certificate?.hcert.dgc.v?.first, vCert.fullImmunizationValid else {
+        guard let vCert = certificate?.hcert.dgc.v?.first, vCert.fullImmunizationValid, vCert.validMp else {
             return .resultError
         }
         return .resultSuccess
     }
 
     var resultTitle: String {
-        guard let vCert = certificate?.hcert.dgc.v?.first, vCert.fullImmunizationValid else {
+        guard let vCert = certificate?.hcert.dgc.v?.first, vCert.fullImmunizationValid, vCert.validMp else {
             return "validation_check_popup_unsuccessful_certificate_title".localized
         }
         return "validation_check_popup_valid_vaccination_recovery_title".localized
     }
 
     var resultBody: String {
-        guard let vCert = certificate?.hcert.dgc.v?.first, vCert.fullImmunizationValid else {
+        guard let vCert = certificate?.hcert.dgc.v?.first, vCert.fullImmunizationValid, vCert.validMp else {
             return "validation_check_popup_unsuccessful_certificate_message".localized
         }
         return "validation_check_popup_valid_vaccination_recovery_message".localized
     }
 
     var paragraphs: [Paragraph] {
-        guard let dob = certificate?.hcert.dgc.dob, let vCert = certificate?.hcert.dgc.v?.first, vCert.fullImmunizationValid else {
+        guard let dob = certificate?.hcert.dgc.dob, let vCert = certificate?.hcert.dgc.v?.first, vCert.fullImmunizationValid, vCert.validMp else {
             return [
-                Paragraph(icon: .timeHui, title: "validation_check_popup_unsuccessful_certificate__recovery_title".localized, subtitle: "validation_check_popup_unsuccessful_certificate_recovery_body".localized),
-                Paragraph(icon: .statusPartialDetail, title: "validation_check_popup_unsuccessful_certificate__vaccination_title".localized, subtitle: "validation_check_popup_unsuccessful_certificate_vaccination_body".localized),
-                Paragraph(icon: .iconTest, title: "validation_check_popup_unsuccessful_certificate__test_title".localized, subtitle: "validation_check_popup_unsuccessful_certificate_test_body".localized),
-                Paragraph(icon: .technicalError, title: "validation_check_popup_unsuccessful_certificate__problem_title".localized, subtitle: "validation_check_popup_unsuccessful_certificate_problem_body".localized)
+                Paragraph(icon: .timeHui, title: "validation_check_popup_unsuccessful_certificate_not_valid_title".localized, subtitle: "validation_check_popup_unsuccessful_certificate_not_valid_message".localized),
+                Paragraph(icon: .technicalError, title: "validation_check_popup_unsuccessful_certificate_technical_problems_title".localized, subtitle: "validation_check_popup_unsuccessful_certificate_technical_problems_message".localized)
             ]
         }
         return [
-            Paragraph(icon: .data, title: certificate?.hcert.dgc.nam.fullName ?? "", subtitle: String(format: "validation_check_popup_valid_pcr_test_less_than_72_h_date_of_birth".localized, DateUtils.displayDateFormatter.string(from: dob)))
+            Paragraph(icon: .data, title: certificate?.hcert.dgc.nam.fullName ?? "", subtitle: String(format: "validation_check_popup_valid_vaccination_date_of_birth".localized, DateUtils.displayDateFormatter.string(from: dob)))
         ]
     }
 
     var info: String? {
-        guard let vCert = certificate?.hcert.dgc.v?.first, vCert.fullImmunizationValid else {
+        guard let vCert = certificate?.hcert.dgc.v?.first, vCert.fullImmunizationValid, vCert.validMp else {
             return nil
         }
         return "validation_check_popup_valid_vaccination_recovery_note".localized

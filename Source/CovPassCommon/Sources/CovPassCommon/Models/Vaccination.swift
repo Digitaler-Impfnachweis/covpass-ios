@@ -30,6 +30,12 @@ public class Vaccination: Codable {
     /// Unique Certificate Identifier: UVCI
     public var ci: String
 
+    /// True if vaccination is valid medical product
+    public var validMp: Bool {
+        let validProducts = ["EU/1/20/1528", "EU/1/20/1507", "EU/1/21/1529", "EU/1/20/1525"]
+        return validProducts.contains(mp)
+    }
+
     /// True if full immunization is given
     public var fullImmunization: Bool { dn == sd }
 
@@ -42,10 +48,19 @@ public class Vaccination: Codable {
         return validDate
     }
 
+    /// Date until the full immunization is valid
+    public var fullImmunizationValidUntil: Date? {
+        if !fullImmunization { return nil }
+        guard let validDate = Calendar.current.date(byAdding: .day, value: 365, to: dt) else {
+            return nil
+        }
+        return validDate
+    }
+
     /// True if full immunization is valid
     public var fullImmunizationValid: Bool {
-        guard let date = fullImmunizationValidFrom else { return false }
-        return Date() > date
+        guard let dateValidFrom = fullImmunizationValidFrom, let dateValidUntil = fullImmunizationValidUntil else { return false }
+        return Date() > dateValidFrom && Date() <= dateValidUntil
     }
 
     enum CodingKeys: String, CodingKey {

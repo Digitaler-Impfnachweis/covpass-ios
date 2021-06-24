@@ -11,10 +11,10 @@ import Foundation
 
 struct ValidationResultFactory {
     static func createViewModel(router: ValidationResultRouterProtocol, repository: VaccinationRepositoryProtocol, certificate: CBORWebToken?) -> ValidationResultViewModel {
-        if certificate?.hcert.dgc.r != nil {
+        if certificate?.hcert.dgc.r?.isEmpty == false {
             return RecoveryResultViewModel(router: router, repository: repository, certificate: certificate)
         }
-        if certificate?.hcert.dgc.t != nil {
+        if certificate?.hcert.dgc.t?.isEmpty == false {
             return TestResultViewModel(router: router, repository: repository, certificate: certificate)
         }
         return VaccinationResultViewModel(router: router, repository: repository, certificate: certificate)
