@@ -19,7 +19,7 @@ class APIServiceTests: XCTestCase {
         super.setUp()
         sut = APIService(
             sessionDelegate: APIServiceDelegate(
-                certUrl: Bundle.module.url(forResource: "de.test.dscg.ubirch.com.combined", withExtension: "der")!
+                certUrl: Bundle.module.url(forResource: "rsa-certify.prod.ubirch.com-V3_1982645", withExtension: "der")!
             ),
             url: ""
         )

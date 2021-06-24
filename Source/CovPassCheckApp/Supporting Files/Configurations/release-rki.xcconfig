@@ -10,12 +10,12 @@ APP_NAME = CovPass Check
 
 // API
 
-API_URL = https:/$()/api.recertify.ubirch.com/api/certify/v2/reissue/cbor
+API_URL = https:/$()/de.dscg.ubirch.com/trustList/DSC/
 
 
 // TLS CERTIVICATE PINNING
 
-TLS_CERTIFICATE_NAME = rsa-certify.prod.ubirch.com
+TLS_CERTIFICATE_NAME = rsa-certify.prod.ubirch.com-V3_1982645
 TLS_CERTIFICATE_FILES = Certificates/PROD/TLS/
 TLS_CERTIFICATES_DESTINATION = Source/CovPassCommon/Sources/CovPassCommon/Resources/TLS/
 

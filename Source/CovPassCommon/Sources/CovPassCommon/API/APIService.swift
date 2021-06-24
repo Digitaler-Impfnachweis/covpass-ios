@@ -23,7 +23,7 @@ public struct APIService: APIServiceProtocol {
     }
 
     public func fetchTrustList() -> Promise<String> {
-        let url = "https://de.test.dscg.ubirch.com/trustList/DSC/DE/"
+        let url = "https://de.dscg.ubirch.com/trustList/DSC/"
         return Promise { seal in
             guard let requestUrl = URL(string: url) else {
                 seal.reject(APIError.invalidUrl)
