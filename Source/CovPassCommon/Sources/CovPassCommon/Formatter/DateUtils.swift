@@ -12,6 +12,16 @@ public enum DateUtils {
     public static let vaccinationDateFormatter = utcDateFormatter(format: "yyyy-MM-dd")
     public static let displayDateFormatter = utcDateFormatter(format: "dd.MM.yyyy")
 
+    public static func parseDate(_ dateString: String) -> Date? {
+        if let date = utcDateFormatter(format: "yyyy-MM-dd").date(from: dateString) {
+            return date
+        }
+        if let date = utcDateFormatter(format: "yyyy-MM-dd'T'HH:mm:ssZ").date(from: dateString) {
+            return date
+        }
+        return nil
+    }
+
     private static func utcDateFormatter(format: String) -> DateFormatter {
         let formatter = DateFormatter()
         formatter.calendar = Calendar(identifier: .iso8601)
