@@ -19,8 +19,6 @@ public class Test: Codable {
     public var ma: String?
     /// Date/Time of Sample Collection
     public var sc: Date
-    /// Date/Time of Test Result
-    public var dr: Date?
     /// Test Result
     public var tr: String
     /// Testing Centre
@@ -84,11 +82,6 @@ public class Test: Codable {
             throw ApplicationError.missingData("Value is missing for Test.sc")
         }
         sc = scDate
-        if let drDateString = try? values.decode(String.self, forKey: .dr),
-           let drDate = DateUtils.parseDate(drDateString)
-        {
-            dr = drDate
-        }
         tr = try values.decode(String.self, forKey: .tr)
         tc = try values.decode(String.self, forKey: .tc)
         co = try values.decode(String.self, forKey: .co)
@@ -104,10 +97,6 @@ public class Test: Codable {
         try container.encode(ma, forKey: .ma)
         let scDate = DateUtils.isoDateTimeFormatter.string(from: sc)
         try container.encode(scDate, forKey: .sc)
-        if let drDateString = dr {
-            let drDate = DateUtils.isoDateTimeFormatter.string(from: drDateString)
-            try container.encode(drDate, forKey: .dr)
-        }
         try container.encode(tr, forKey: .tr)
         try container.encode(tc, forKey: .tc)
         try container.encode(co, forKey: .co)

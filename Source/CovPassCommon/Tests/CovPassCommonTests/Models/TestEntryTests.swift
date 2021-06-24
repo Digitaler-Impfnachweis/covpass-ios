@@ -18,7 +18,6 @@ class TestEntryTests: XCTestCase {
 
         XCTAssertEqual(sut.ci, "URN:UVCI:01DE/IZ12345A/5CWLU12RNOB9RXSEOP6FG8#W")
         XCTAssertEqual(sut.co, "DE")
-        XCTAssertEqual(sut.dr, DateUtils.isoDateTimeFormatter.date(from: "2021-05-30T10:30:15Z"))
         XCTAssertEqual(sut.sc, DateUtils.isoDateTimeFormatter.date(from: "2021-05-30T10:12:22Z"))
         XCTAssertEqual(sut.tt, "LP217198-3")
         XCTAssertEqual(sut.tg, "840539006")
