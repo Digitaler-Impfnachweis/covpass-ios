@@ -6,7 +6,7 @@ BIRed='\033[1;91m'        # Red
 BIGreen='\033[1;92m'      # Green
 
 # Path
-path=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )
+path=$( pwd -P )
 
 #Urls
 twineRepoUrl="git@github.com:Digitaler-Impfnachweis/covpass-apps-i18n.git"
