@@ -12,6 +12,7 @@ import PromiseKit
 
 public enum CertificateError: Error {
     case positiveResult
+    case expiredCertifcate
 }
 
 public struct VaccinationRepository: VaccinationRepositoryProtocol {
@@ -254,6 +255,10 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
 
         let cosePayloadJsonData = try cosePayload.payloadJsonData()
         let certificate = try JSONDecoder().decode(CBORWebToken.self, from: cosePayloadJsonData)
+
+        if let exp = certificate.exp, Date() > exp {
+            throw CertificateError.expiredCertifcate
+        }
 
         try HCert.checkExtendedKeyUsage(certificate: certificate, trustCertificate: trustCert)
 
