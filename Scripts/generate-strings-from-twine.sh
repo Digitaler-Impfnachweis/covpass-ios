@@ -9,7 +9,7 @@ BIGreen='\033[1;92m'      # Green
 path=$( pwd -P )
 
 #Urls
-twineRepoUrl="git@github.com:Digitaler-Impfnachweis/covpass-apps-i18n.git"
+twineRepoUrl=$1
 echo -e "${BIGreen}▄▄▄█████▓ █     █░ ██▓ ███▄    █ ▓█████                                       ${Color_Off}";
 echo -e "${BIGreen}▓  ██▒ ▓▒▓█░ █ ░█░▓██▒ ██ ▀█   █ ▓█   ▀                                       ${Color_Off}";
 echo -e "${BIGreen}▒ ▓██░ ▒░▒█░ █ ░█ ▒██▒▓██  ▀█ ██▒▒███                                         ${Color_Off}";
