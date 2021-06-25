@@ -16,7 +16,7 @@
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/IBM/ios-scanner", from: "0.1.0"),
+    .package(url: "https://github.com/IBM/ios-keychain.git", from: "0.1.0"),
 ]
 
 ```
