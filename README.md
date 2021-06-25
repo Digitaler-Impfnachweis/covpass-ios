@@ -43,6 +43,10 @@ API documentation TBD
 
 ## Release History
 
+* 1.4.0
+    * Add static German rules for certificates
+    * Adjust date of birth to support custom format
+    * Bugfixes
 * 1.3.0
     * Add recovery and test certificates
     * Add new detail view to list all different types of certificates
