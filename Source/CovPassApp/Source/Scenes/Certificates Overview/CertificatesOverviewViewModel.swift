@@ -27,6 +27,7 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
     weak var delegate: CertificatesOverviewViewModelDelegate?
     private var router: CertificatesOverviewRouterProtocol
     private let repository: VaccinationRepositoryProtocol
+    private let favoriteRepository: VaccinationFavoriteRepositoryProtocol
     private var certificateList = CertificateList(certificates: [])
     private var lastKnownFavoriteCertificateId: String?
 
@@ -61,10 +62,12 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
 
     init(
         router: CertificatesOverviewRouterProtocol,
-        repository: VaccinationRepositoryProtocol
+        repository: VaccinationRepositoryProtocol,
+        favoriteRepository: VaccinationFavoriteRepositoryProtocol
     ) {
         self.router = router
         self.repository = repository
+        self.favoriteRepository = favoriteRepository
     }
 
     // MARK: - Methods
@@ -167,6 +170,12 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
     }
 
     private func toggleFavoriteStateForCertificateWithId(_ id: String) {
+        certificateList.favoriteCertificateId = certificateList.favoriteCertificateId == id ? nil : id
+        let certificate = certificateList.certificates.first {
+            $0.vaccinationCertificate.hcert.dgc.v?.first?.ci == certificateList.favoriteCertificateId
+        }
+        try? favoriteRepository.save(certificate)
+        
         firstly {
             repository.toggleFavoriteStateForCertificateWithIdentifier(id)
         }
