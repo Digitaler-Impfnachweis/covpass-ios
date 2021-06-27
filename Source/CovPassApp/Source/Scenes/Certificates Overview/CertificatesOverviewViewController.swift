@@ -61,7 +61,7 @@ class CertificatesOverviewViewController: UIViewController {
     private func setupDotIndicator() {
         dotPageIndicator.delegate = self
         dotPageIndicator.numberOfDots = viewModel.certificateViewModels.count
-        dotPageIndicator.isHidden = viewModel.certificateViewModels.count == 1 ? true : false
+        dotPageIndicator.isHidden = viewModel.certificateViewModels.count == 1
     }
 
     private func setupHeaderView() {
@@ -94,7 +94,9 @@ class CertificatesOverviewViewController: UIViewController {
     private func reloadCollectionView() {
         collectionView.reloadData()
         dotPageIndicator.numberOfDots = viewModel.certificateViewModels.count
-        dotPageIndicator.isHidden = viewModel.certificateViewModels.count == 1 ? true : false
+        let hasOnlyOneCertificate = viewModel.certificateViewModels.count == 1
+        dotPageIndicator.isHidden = hasOnlyOneCertificate
+        collectionView.isScrollEnabled = !hasOnlyOneCertificate
     }
 }
 
