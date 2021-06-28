@@ -33,6 +33,11 @@ class AppInformationViewModel: AppInformationViewModelProtocol {
     lazy var entries: [AppInformationEntry] = {
         [
             webEntry(
+                title: "app_information_title_contact".localized,
+                url:  Bundle.main.url(forResource: "contact-covpasscheck", withExtension: "html")!
+            ),
+
+            webEntry(
                 title: "app_information_title_faq".localized,
                 url: URL(string: "https://www.digitaler-impfnachweis-app.de/webviews/verification-app/faq/")!
             ),
