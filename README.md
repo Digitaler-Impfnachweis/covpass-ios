@@ -1,8 +1,8 @@
-# [iOS] CovPass & CovPass Check
+<h2 align="center">CovPass / CovPass Check</h2>
 <br />
 <p align="center">
   <a href="#">
-    <img src="Source/CovPassApp/Source/Resources/Assets.xcassets/AppIcon.appiconset/80.png" alt="Logo" width="80" height="80">
+    <img src="Resources/CovPass.png" alt="CovPass Icon" width="80" height="80">
   </a>
   <p align="center">
     <b>Einfach. Sicher. Papierlos.</b><br>
@@ -19,7 +19,7 @@
 
 ### Configuration
 
-Before you build the project, you need to copy the configuration files with `./copy-config-files.sh` and the parameter `debug`, or `release`. The configuration files contain public key, TLS certificate, and the initial DSC file.
+Before you build the project, you need to copy the configuration files with `./Scripts/copy-config-files.sh` and the parameter `debug`, or `release`. The configuration files contain public key, TLS certificate, and the initial DSC file.
 
 ## Application
 
@@ -43,14 +43,17 @@ API documentation TBD
 
 ## Release History
 
-* 1.3.0
-    * Add recovery and test certificates
-    * Add new detail view to list all different types of certificates
-    * Check for extendedKeyUsage Oids
-    * Bugfixes and smaller adjustments
-* 1.2.0
-    * Adjust DGC scheme validation for <= 1.1.0
-* 1.1.2
-    * UI Adjustments
-* 1.1.1
-    * Initial Project
+- 1.3.0
+  - Add recovery and test certificates
+  - Add new detail view to list all different types of certificates
+  - Check for extendedKeyUsage Oids
+  - Bugfixes and smaller adjustments
+- 1.1.4
+  - Remove schema version check to support more certificates from other countries
+- 1.1.3
+  - Update initial dgc.json list
+  - Update date parser to allow different formats
+- 1.1.2
+  - UI Adjustments
+- 1.1.1
+  - Initial Project
