@@ -64,6 +64,6 @@ public class Name: Codable {
 
 extension Name: Equatable {
     public static func == (lhs: Name, rhs: Name) -> Bool {
-        return lhs.fnt == rhs.fnt
+        return lhs.fullName == rhs.fullName
     }
 }
