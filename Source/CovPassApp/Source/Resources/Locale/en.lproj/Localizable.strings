@@ -258,6 +258,8 @@
 
 "vaccination_certificate_detail_view_data_vaccine_note_en" = "This certificate is not a travel document. The scientific evidence on COVID-19 vaccination, testing and recovery continues to evolve, also in view of new variants of concern of the virus. Before travelling, please check the applicable public health measures and related restrictions applied at the point of destination. Information on the current travel restrictions that apply to EU countries can be found via #https://reopen.europa.eu/de::https://reopen.europa.eu/de#.";
 
+"vaccination_certificate_detail_view_data_vaccine_recovery" = "Es handelt sich hier um einen Impfstoff, bei dem nur eine Impfdosis erforderlich ist, oder um eine Impfung für Genesene, die nur eine Impfdosis benötigt.";
+
 "vaccination_certificate_detail_view_qrcode_action_button_title" = "QR-Code anzeigen";
 
 "vaccination_certificate_detail_view_qrcode_screen_title" = "Impfung %d von %d";
