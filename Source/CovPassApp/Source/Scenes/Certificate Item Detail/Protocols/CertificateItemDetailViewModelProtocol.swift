@@ -11,6 +11,7 @@ import UIKit
 
 protocol CertificateItemDetailViewModelProtocol {
     var title: String { get }
+    var showSubtitle: Bool { get }
     var headline: String { get }
     var items: [(String, String)] { get }
     func showQRCode()
