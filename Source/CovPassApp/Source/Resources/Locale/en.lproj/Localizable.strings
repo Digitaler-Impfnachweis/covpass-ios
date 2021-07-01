@@ -11,226 +11,226 @@
 
 /********** onboarding **********/
 
-"start_onboarding_title" = "Willkommen in der CovPass-App";
+"start_onboarding_title" = "Welcome to the CovPass app";
 
-"start_onboarding_message" = "Weisen Sie digitale COVID-Zertifikate der EU ganz einfach mit dem Smartphone nach.";
+"start_onboarding_message" = "Verify EU digital COVID certificates easily with your smartphone.";
 
-"start_onboarding_secure_title" = "Absolute Sicherheit Ihrer Daten";
+"start_onboarding_secure_title" = "Absolute security for your data";
 
-"start_onboarding_secure_message" = "Ihre Daten werden nur lokal auf Ihrem Smartphone gespeichert. Sie entscheiden, wann und wem Sie Ihre Daten vorzeigen.";
+"start_onboarding_secure_message" = "Your data is only stored locally on your smartphone. You decide when and to whom you show your data.";
 
-"start_onboarding_button_title" = "Los geht's";
+"start_onboarding_button_title" = "Go";
 
-"next_onboarding_page_button_title" = "Weiter";
+"next_onboarding_page_button_title" = "Next";
 
-"vaccination_first_onboarding_page_title" = "Erster Schritt: Übertragen Sie das COVID-Zertifikat auf Ihr Smartphone";
+"vaccination_first_onboarding_page_title" = "First step: Transfer the COVID certificate to your smartphone";
 
-"vaccination_first_onboarding_page_message" = "Scannen Sie mit der CovPass-App das digitale COVID-Zertifikat der EU für eine Corona-Impfung, ein negatives Corona-Testergebnis oder eine Genesung von der Corona-Infektion. Halten Sie dafür die Kamera Ihres Smartphones über den QR-Code. Das COVID-Zertifikat wird sofort auf Ihr Smartphone übertragen.";
+"vaccination_first_onboarding_page_message" = "Scan the EU digital COVID vaccination certificate, a negative COVID test result or recovery from a COVID infection with the CovPass app. To do so, hold the camera of your smartphone over the QR code. The COVID certificate is immediately transferred to your smartphone.";
 
-"vaccination_second_onboarding_page_title" = "Zweiter Schritt: Rufen Sie den QR-Code in der CovPass-App auf";
+"vaccination_second_onboarding_page_title" = "Second step: Open the QR code in the CovPass app";
 
-"vaccination_second_onboarding_page_message" = "Mit dem QR-Code können Sie eine Corona-Impfung, ein negatives Corona-Testergebnis oder eine Genesung von einer Corona-Infektion nachweisen. Nach dem Scannen wird der QR-Code direkt in der CovPass-App angezeigt. Bitte beachten Sie, dass eine ausreichende Wirksamkeit des Impfschutzes erst etwa 14 Tage nach der letzten Impfung eintritt. Der QR-Code für den vollständigen Impfschutz ist deshalb erst nach Ablauf der 14 Tage gültig.";
+"vaccination_second_onboarding_page_message" = "With the QR code you can prove a COVID vaccination, a negative COVID test result or recovery from a COVID infection. After scanning, the QR code is displayed directly in the CovPass app. Please note that sufficient effectiveness of the vaccination protection only occurs about 14 days after the last vaccination. The QR code for full vaccination protection is therefore only valid after the 14 days have elapsed.";
 
-"vaccination_third_onboarding_page_title" = "Dritter Schritt: Zeigen Sie den QR-Code bei Bedarf vor";
+"vaccination_third_onboarding_page_title" = "Third step: Show the QR code if required";
 
-"vaccination_third_onboarding_page_message" = "Bei Bedarf können Sie den QR-Code in der CovPass-App vorzeigen. Der QR-Code wird dann von der prüfenden Person gescannt. Halten Sie dazu ergänzend Ihr Ausweisdokument bereit. Da der QR-Code nur auf Ihrem Smartphone gespeichert ist, können Sie ihn jederzeit auch ohne Internetverbindung anzeigen lassen.";
+"vaccination_third_onboarding_page_message" = "If required, you can show the QR code in the CovPass app. The QR code will then be scanned by the examiner. Please also have your identity document ready. As the QR code is only stored on your smartphone, you can display it at any time even without an internet connection.";
 
-"vaccination_fourth_onboarding_page_title" = "Datenschutz und Datensicherheit";
+"vaccination_fourth_onboarding_page_title" = "Data protection and data security";
 
-"vaccination_fourth_onboarding_page_first_list_item" = "Die Nutzung der CovPass-App ist freiwillig. Sie können Ihre digitalen COVID-Zertifikate auch in Papierform verwenden.";
+"vaccination_fourth_onboarding_page_first_list_item" = "The use of the CovPass app is voluntary. You can also use your digital COVID certificates in paper form.";
 
-"vaccination_fourth_onboarding_page_second_list_item" = "Zum Schutz vor Fälschungen oder Manipulationen werden die digitalen COVID-Zertifikate durch das RKI elektronisch signiert. Hierzu werden die notwendigen Daten einmalig verschlüsselt an das RKI übermittelt. Nach der Erstellung des digitalen COVID-Zertifikats werden Ihre Daten vom RKI sofort unwiderruflich gelöscht. Der QR-Code enthält in kodierter Form die auf dem digitalen COVID-Zertifikat enthaltenen Informationen und die elektronische Signatur des RKI.";
+"vaccination_fourth_onboarding_page_second_list_item" = "To protect against forgery or manipulation, the digital COVID certificates are electronically signed by the RKI. For this purpose, the necessary data is transmitted once in encrypted form to the RKI. After the digital COVID certificate has been created, your data is immediately and irrevocably deleted by the RKI. The QR code contains the information contained on the digital COVID certificate and the electronic signature of the RKI in encoded form.";
 
-"vaccination_fourth_onboarding_page_third_list_item" = "Wenn Sie den QR-Code eines digitalen COVID-Zertifikats einer anderen Person zur Prüfung vorlegen, werden dem Prüfer der Name und das Geburtsdatum des Zertifikatsinhabers angezeigt. Bei der Prüfung ist gegebenenfalls ergänzend ein Ausweisdokument vorzulegen.";
+"vaccination_fourth_onboarding_page_third_list_item" = "When you present the QR code of a COVID digital certificate to another person for verification, the name and date of birth of the certificate holder will be displayed to the examiner. If necessary, a supplementary identification document must be presented at the time of the examination.";
 
-"vaccination_fourth_onboarding_page_fourth_list_item" = "Die digitalen COVID-Zertifikate werden ausschließlich auf Ihrem Smartphone gespeichert. Sie haben jederzeit die Möglichkeit, die digitalen COVID-Zertifikate wieder zu entfernen.";
+"vaccination_fourth_onboarding_page_fourth_list_item" = "The digital COVID certificates are stored exclusively on your smartphone. You have the option to remove the digital COVID certificates at any time.";
 
-"vaccination_fourth_onboarding_page_message" = "Ausführliche Hinweise zur Datenverarbeitung finden Sie in der Datenschutzerklärung:";
+"vaccination_fourth_onboarding_page_message" = "Detailed information on data processing can be found in the privacy policy:";
 
-"vaccination_fourth_onboarding_page_button_title" = "Alles klar";
+"vaccination_fourth_onboarding_page_button_title" = "All clear";
 
-"vaccination_privacy_policy_page_button_title" = "Schließen";
+"vaccination_privacy_policy_page_button_title" = "Close";
 
 
 /********** start Screen **********/
 
-"vaccination_start_screen_title" = "Digitale COVID-Zertifikate der EU";
+"vaccination_start_screen_title" = "EU digital COVID certificates";
 
-"vaccination_start_screen_note_title" = "Fügen Sie einen Nachweis hinzu";
+"vaccination_start_screen_note_title" = "Add a certificate";v
 
-"vaccination_start_screen_note_message" = "Sie haben aktuell kein digitales COVID-Zertifikat der EU gespeichert. Drücken Sie auf das Plus-Symbol, um einen digitalen Nachweis hinzuzufügen.";
+"vaccination_start_screen_note_message" = "You do not currently have an EU digital COVID certificate saved. Tap the plus icon to add a digital certificate.";
 
-"vaccination_start_screen_qrcode_incomplete_subtitle" = "Unvollständiger Impfschutz";
+"vaccination_start_screen_qrcode_incomplete_subtitle" = "Incomplete vaccination protection";
 
-"vaccination_start_screen_qrcode_complete_from_date_subtitle" = "Vollständig ab %@";
+"vaccination_start_screen_qrcode_complete_from_date_subtitle" = "Complete from %@";
 
-"vaccination_start_screen_qrcode_complete_protection_subtitle" = "Vollständiger Impfschutz";
+"vaccination_start_screen_qrcode_complete_protection_subtitle" = "Complete vaccincation protection";
 
 
 /********** popup: add certification **********/
 
-"certificate_add_popup_title" = "Nachweis hinzufügen";
+"certificate_add_popup_title" = "Add certificate";
 
-"certificate_add_popup_message" = "Scannen Sie den QR-Code von einem digitalen COVID-Zertifikat der EU. Der Nachweis wird direkt in die CovPass-App übertragen.";
+"certificate_add_popup_message" = "Scan the QR code of an EU digital COVID certificate. The certificate is transferred directly into the CovPass app.";
 
-"certificate_add_popup_action_title" = "Welchen QR-Code kann ich einscannen?";
+"certificate_add_popup_action_title" = "Which QR code can I scan?";
 
-"certificate_add_popup_action_title_linked" = "#Welchen QR-Code kann ich einscannen?::$0#";
+"certificate_add_popup_action_title_linked" = "#Which QR code can I scan?::$0#";
 
-"certificate_add_popup_scan_button_title" = "QR-Code scannen";
+"certificate_add_popup_scan_button_title" = "Scan QR code";
 
-"error_camera_access_title" = "Die CovPass-App möchte auf Ihre Kamera zugreifen.";
+"error_camera_access_title" = "The CovPass app wants to access your camera.";
 
-"error_camera_access_message" = "Erlauben Sie den Zugriff, um QR-Codes scannen zu können.";
+"error_camera_access_message" = "Allow access to be able to scan QR codes.";
 
-"error_camera_access_button_do_not_allow" = "Nicht Erlauben";
+"error_camera_access_button_do_not_allow" = "Don’t allow";
 
-"error_camera_access_button_allow" = "Erlauben";
+"error_camera_access_button_allow" = "Allow";
 
-"error_test_certificate_not_valid_title" = "Das Testzertifikat kann nicht hinzugefügt werden";
+"error_test_certificate_not_valid_title" = "The test certificate cannot be added.";
 
-"error_test_certificate_not_valid_message" = "Der von Ihnen gescannte Nachweis für einen Corona-Test weist kein negatives Testergebnis nach. Die aktuelle Version der CovPass-App kann nur negative Corona-Testergebnisse speichern.";
+"error_test_certificate_not_valid_message" = "The certificate you scanned for a COVID test does not show a negative test result. The current version of the CovPass app can only store negative COVID test results.";
 
 "error_test_certificate_not_valid_button_title" = "OK";
 
-"certificate_add_loading_screen_message" = "Nachweis wird hinzugefügt";
+"certificate_add_loading_screen_message" = "Certificate is being added";
 
 
 /********** start Screen: favorite immunization certificate **********/
 
-"certificate_favorite_button_hint" = "Als Favorit markieren";
+"certificate_favorite_button_hint" = "Mark as favourite";
 
 
 /********** start Screen: partial immunization certificate **********/
 
-"vaccination_partial_immunization_action_button" = "Zertifikate anzeigen";
+"vaccination_partial_immunization_action_button" = "Show certificates";
 
 
 /********** start screen: full immunization certificate **********/
 
-"vaccination_full_immunization_action_button" = "Zertifikate anzeigen";
+"vaccination_full_immunization_action_button" = "Show certificates";
 
-"vaccination_full_immunization_status_expired" = "Abgelaufen";
+"vaccination_full_immunization_status_expired" = "Expired";
 
 
 /********** start screen: test certificate **********/
 
-"test_certificate_action_button" = "Zertifikate anzeigen";
+"test_certificate_action_button" = "Show certificates";
 
 
 /********** start screen: pcr test certificate **********/
 
-"pcr_test_certificate_action_button" = "Zertifikate anzeigen";
+"pcr_test_certificate_action_button" = "Show certificates";
 
 
 /********** start screen: recovery certificate **********/
 
-"recovery_certificate_action_button" = "Zertifikate anzeigen";
+"recovery_certificate_action_button" = "Show certificates";
 
-"error_connect_to_internet_title" = "Flugzeugmodus ausschalten oder WLAN für den Datenzugriff verwenden";
+"error_connect_to_internet_title" = "Turn off airplane mode or use Wi-Fi to access data";
 
-"error_connect_to_internet_button_settings" = "Einstellungen";
+"error_connect_to_internet_button_settings" = "Settings";
 
 "error_connect_to_internet_button_ok" = "OK";
 
-"vaccination_full_immunization_loading_message_no_internet" = "Der QR-Code wird angezeigt, sobald Ihr Gerät mit dem Internet verbunden ist.";
+"vaccination_full_immunization_loading_message_no_internet" = "The QR code is displayed as soon as your device is connected to the Internet.";
 
-"vaccination_full_immunization_loading_message_check_internet" = "Der QR-Code kann nicht geladen werden. Bitte überprüfen Sie Ihre Internetverbindung.";
+"vaccination_full_immunization_loading_message_check_internet" = "The QR code cannot be loaded. Please check your internet connection.";
 
-"vaccination_full_immunization_loading_message_error" = "Es ist ein unerwarteter Fehler aufgetreten. Der QR-Code kann aktuell nicht geladen werden.";
+"vaccination_full_immunization_loading_message_error" = "An unexpected error has occurred. The QR code cannot be loaded at the moment.";
 
-"vaccination_full_immunization_loading_message_14_days_title" = "Der QR-Code wird ab dem %@ hier angezeigt.";
+"vaccination_full_immunization_loading_message_14_days_title" = "The QR code will be displayed here from %@.";
 
-"vaccination_full_immunization_loading_message_14_days_title_pattern" = "Der QR-Code wird ab dem %@ hier angezeigt.";
+"vaccination_full_immunization_loading_message_14_days_title_pattern" = "The QR code will be displayed here from %@.";
 
-"vaccination_full_immunization_loading_message_14_days_message" = "Der Impfschutz ist erst 14 Tage nach der vollständigen Impfung wirksam.";
+"vaccination_full_immunization_loading_message_14_days_message" = "The vaccination protection is only effective 14 days after the complete vaccination.";
 
 
 /********** overview certificates **********/
 
-"vaccination_certificate_overview_incomplete_title" = "Unvollständig: %d von %d Impfungen";
+"vaccination_certificate_overview_incomplete_title" = "Uncomplete: %d of %d vaccinations";
 
-"vaccination_certificate_overview_incomplete_message" = "Ihr Impfschutz ist nicht vollständig. Um den QR-Code als Nachweis für einen kompletten Impfschutz vorzeigen zu können, fügen Sie bitte eine weitere Impfung hinzu.";
+"vaccination_certificate_overview_incomplete_message" = "Your vaccination protection is not complete. To be able to show the QR code as proof of complete vaccination protection, please add another vaccination.";
 
-"vaccination_certificate_detail_view_incomplete_action_button_title" = "Aktuellen QR-Code anzeigen";
+"vaccination_certificate_detail_view_incomplete_action_button_title" = "Show current QR code";
 
-"vaccination_certificate_overview_complete_from_title" = "Vollständiger Impfschutz ab %@";
+"vaccination_certificate_overview_complete_from_title" = "Complete vaccination protection from %@";
 
-"vaccination_certificate_overview_complete_from_message" = "Ihr Impfschutz ist noch nicht vollständig. Der Impfschutz ist erst 14 Tage nach der letzten Impfung vollständig.";
+"vaccination_certificate_overview_complete_from_message" = "Your vaccination protection is not yet complete. The vaccination protection is only complete 14 days after the last vaccination.";
 
-"vaccination_certificate_overview_complete_title" = "Vollständiger Impfschutz";
+"vaccination_certificate_overview_complete_title" = "Complete vaccination protection";
 
-"vaccination_certificate_overview_complete_message" = "Zeigen Sie bei Bedarf den QR-Code vor. Halten Sie zudem ein Ausweisdokument bei der Überprüfung bereit.";
+"vaccination_certificate_overview_complete_message" = "Show the QR code if required. Also have an identity document ready when you are checked.";
 
-"vaccination_certificate_overview_complete_action_button_title" = "Aktuellen QR-Code anzeigen";
+"vaccination_certificate_overview_complete_action_button_title" = "Show current QR code";
 
-"test_certificate_overview_title" = "Negativer Antigen-Schnelltest vom %@";
+"test_certificate_overview_title" = "Negative rapid antigen test from %@";
 
-"test_certificate_overview_message" = "Zeigen Sie bei Bedarf den QR-Code vor. Halten Sie zudem ein Ausweisdokument bei der Überprüfung bereit.";
+"test_certificate_overview_message" = "Show the QR code if required. Also have an identity document ready when you are checked.";
 
-"test_certificate_overview_action_button_title" = "Aktuellen QR-Code anzeigen";
+"test_certificate_overview_action_button_title" = "Show current QR code";
 
-"pcr_test_certificate_overview_title" = "Negativer PCR-Test vom %@";
+"pcr_test_certificate_overview_title" = "Negative PCR test from %@";
 
-"pcr_test_certificate_overview_message" = "Zeigen Sie bei Bedarf den QR-Code vor. Halten Sie zudem ein Ausweisdokument bei der Überprüfung bereit.";
+"pcr_test_certificate_overview_message" = "Show the QR code if required. Also have an identity document ready when you are checked.";
 
-"pcr_test_certificate_overview_action_button_title" = "Aktuellen QR-Code anzeigen";
+"pcr_test_certificate_overview_action_button_title" = "Show current QR code";
 
-"recovery_certificate_overview_valid_until_title" = "Genesung gültig bis %@";
+"recovery_certificate_overview_valid_until_title" = "Recovery valid until %@";
 
-"recovery_certificate_overview_valid_from_title" = "Genesung gültig ab %@";
+"recovery_certificate_overview_valid_from_title" = "Recovery valid from %@";
 
-"recovery_certificate_overview_message" = "Zeigen Sie bei Bedarf den QR-Code vor. Halten Sie zudem ein Ausweisdokument bei der Überprüfung bereit.";
+"recovery_certificate_overview_message" = "Show the QR code if required. Also have an identity document ready when you are checked.";
 
-"recovery_certificate_overview_action_button_title" = "Aktuellen QR-Code anzeigen";
+"recovery_certificate_overview_action_button_title" = "Show current QR code";
 
-"certificates_overview_personal_data_title" = "Persönliche Daten";
+"certificates_overview_personal_data_title" = "Personal data";
 
 "certificates_overview_personal_data_name" = "Name, Vorname / Name, first name";
 
 "certificates_overview_personal_data_date_of_birth" = "Geburtsdatum / Date of birth (YYYY-MM-DD)";
 
-"certificates_overview_all_certificates_title" = "EU-Zertifikate";
+"certificates_overview_all_certificates_title" = "EU certificates";
 
-"certificates_overview_currently_uses_certificate_note" = "Aktuell verwendetes Zertifikat";
+"certificates_overview_currently_uses_certificate_note" = "Currently used certificate";
 
-"certificates_overview_vaccination_certificate_title" = "Impfzertifikat";
+"certificates_overview_vaccination_certificate_title" = "Vaccination certificate";
 
-"certificates_overview_vaccination_certificate_message" = "Impfung %d von %d";
+"certificates_overview_vaccination_certificate_message" = "Vaccination %d of %d";
 
-"certificates_overview_vaccination_certificate_date" = "Geimpft am %@";
+"certificates_overview_vaccination_certificate_date" = "Vaccinated on %@";
 
-"certificates_overview_recovery_certificate_title" = "Genesenenzertifikat";
+"certificates_overview_recovery_certificate_title" = "Recovery certificate";
 
-"certificates_overview_recovery_certificate_message" = "Vollständige Genesung";
+"certificates_overview_recovery_certificate_message" = "Full recovery";
 
-"certificates_overview_recovery_certificate_valid_until_date" = "Gültig bis %@";
+"certificates_overview_recovery_certificate_valid_until_date" = "Valid until %@";
 
-"certificates_overview_recovery_certificate_valid_from_date" = "Gültig ab %@";
+"certificates_overview_recovery_certificate_valid_from_date" = "Valid from %@";
 
-"certificates_overview_test_certificate_title" = "Testzertifikat";
+"certificates_overview_test_certificate_title" = "Test certificate";
 
-"certificates_overview_test_certificate_message" = "Antigen-Schnelltest";
+"certificates_overview_test_certificate_message" = "Rapid antigen test";
 
-"certificates_overview_test_certificate_date" = "Getestet am %@";
+"certificates_overview_test_certificate_date" = "Tested on %@";
 
-"certificates_overview_pcr_test_certificate_title" = "Testzertifikat";
+"certificates_overview_pcr_test_certificate_title" = "Test certificate";
 
-"certificates_overview_pcr_test_certificate_message" = "PCR-Test";
+"certificates_overview_pcr_test_certificate_message" = "PCR test";
 
-"certificates_overview_pcr_test_certificate_date" = "Probenahme am %@";
+"certificates_overview_pcr_test_certificate_date" = "Sample taken on %@";
 
 
 /********** detail view: delete certificate **********/
 
-"certificate_delete_button_hint" = "Löschen";
+"certificate_delete_button_hint" = "Delete";
 
 
 /********** detail view: certificate **********/
 
-"vaccination_certificate_detail_view_vaccination_title" = "Impfung %d von %d";
+"vaccination_certificate_detail_view_vaccination_title" = "Vaccination %d of %d";
 
-"vaccination_certificate_detail_view_vaccination_headline" = "Digitales COVID-Impfzertifikat der EU";
+"vaccination_certificate_detail_view_vaccination_headline" = "EU digital COVID vaccination certificate";
 
 "vaccination_certificate_detail_view_data_name" = "Name, Vorname / Name, first name";
 
@@ -256,21 +256,21 @@
 
 "vaccination_certificate_detail_view_data_vaccine_note_de" = "Diese Bescheinigung ist kein Reisedokument. Die wissenschaftlichen Erkenntnisse zu COVID-19 in den Bereichen Impfung, Testung und Genesung entwickeln sich fortlaufend weiter, auch im Hinblick auf neue besorgniserregende Virusvarianten. Bitte informieren Sie sich vor Reiseantritt über die am Zielort geltenden Gesundheitsmaßnahmen und entsprechenden Beschränkungen. Informationen über die in den jeweiligen EU-Ländern geltenden Einreisebestimmungen finden Sie unter #https://reopen.europa.eu/de::https://reopen.europa.eu/de#.";
 
-"vaccination_certificate_detail_view_data_vaccine_note_en" = "This certificate is not a travel document. The scientific evidence on COVID-19 vaccination, testing and recovery continues to evolve, also in view of new variants of concern of the virus. Before travelling, please check the applicable public health measures and related restrictions applied at the point of destination. Information on the current travel restrictions that apply to EU countries can be found via #https://reopen.europa.eu/de::https://reopen.europa.eu/de#.";
+"vaccination_certificate_detail_view_data_vaccine_note_en" = "This certificate is not a travel document. The scientific evidence on COVID-19 vaccination, testing and recovery continues to evolve, also in view of new variants of concern of the virus. Before travelling, please check the applicable public health measures and related restrictions applied at the point of destination. Information on the current travel restrictions that apply to EU countries can be found via #https://reopen.europa.eu::https://reopen.europa.eu#.";
 
-"vaccination_certificate_detail_view_data_vaccine_recovery" = "Es handelt sich hier um einen Impfstoff, bei dem nur eine Impfdosis erforderlich ist, oder um eine Impfung für Genesene, die nur eine Impfdosis benötigt.";
+"vaccination_certificate_detail_view_data_vaccine_recovery" = "This is a vaccine that requires only one vaccine dose or a vaccine for convalescents that requires only one vaccine dose.";
 
-"vaccination_certificate_detail_view_qrcode_action_button_title" = "QR-Code anzeigen";
+"vaccination_certificate_detail_view_qrcode_action_button_title" = "Show QR code";
 
-"vaccination_certificate_detail_view_qrcode_screen_title" = "Impfung %d von %d";
+"vaccination_certificate_detail_view_qrcode_screen_title" = "Vaccination %d of %d";
 
-"vaccination_certificate_detail_view_qrcode_screen_action_button_title" = "Schließen";
+"vaccination_certificate_detail_view_qrcode_screen_action_button_title" = "Close";
 
-"test_certificate_detail_view_title" = "Antigen-Schnelltest";
+"test_certificate_detail_view_title" = "Rapid antigen test";
 
-"test_certificate_detail_view_pcr_test_title" = "PCR-Test";
+"test_certificate_detail_view_pcr_test_title" = "PCR test";
 
-"test_certificate_detail_view_headline" = "Digitales COVID-Testzertifikat der EU";
+"test_certificate_detail_view_headline" = "EU digital COVID test certificate";
 
 "test_certificate_detail_view_data_name" = "Name, Vorname / Name, first name";
 
@@ -298,19 +298,19 @@
 
 "test_certificate_detail_view_data_test_note_de" = "Diese Bescheinigung ist kein Reisedokument. Die wissenschaftlichen Erkenntnisse zu COVID-19 in den Bereichen Impfung, Testung und Genesung entwickeln sich fortlaufend weiter, auch im Hinblick auf neue besorgniserregende Virusvarianten. Bitte informieren Sie sich vor Reiseantritt über die am Zielort geltenden Gesundheitsmaßnahmen und entsprechenden Beschränkungen. Informationen über die in den jeweiligen EU-Ländern geltenden Einreisebestimmungen finden Sie unter #https://reopen.europa.eu/de::https://reopen.europa.eu/de#.";
 
-"test_certificate_detail_view_data_test_note_en" = "This certificate is not a travel document. The scientific evidence on COVID-19 vaccination, testing and recovery continues to evolve, also in view of new variants of concern of the virus. Before travelling, please check the applicable public health measures and related restrictions applied at the point of destination. Information on the current travel restrictions that apply to EU countries can be found via #https://reopen.europa.eu/de::https://reopen.europa.eu/de#.";
+"test_certificate_detail_view_data_test_note_en" = "This certificate is not a travel document. The scientific evidence on COVID-19 vaccination, testing and recovery continues to evolve, also in view of new variants of concern of the virus. Before travelling, please check the applicable public health measures and related restrictions applied at the point of destination. Information on the current travel restrictions that apply to EU countries can be found via #https://reopen.europa.eu::https://reopen.europa.eu#.";
 
-"test_certificate_detail_view_qrcode_action_button_title" = "QR-Code anzeigen";
+"test_certificate_detail_view_qrcode_action_button_title" = "Show QR code";
 
-"test_certificate_detail_view_test_qrcode_screen_title" = "Antigen-Schnelltest";
+"test_certificate_detail_view_test_qrcode_screen_title" = "Rapid antigen test";
 
-"test_certificate_detail_view_pcr_test_qrcode_screen_title" = "PCR-Test";
+"test_certificate_detail_view_pcr_test_qrcode_screen_title" = "PCR test";
 
-"test_certificate_detail_view_qrcode_screen_action_button_title" = "Schließen";
+"test_certificate_detail_view_qrcode_screen_action_button_title" = "Close";
 
-"recovery_certificate_detail_view_title" = "Vollständige Genesung";
+"recovery_certificate_detail_view_title" = "Full recovery";
 
-"recovery_certificate_detail_view_headline" = "Digitales COVID-Genesenenzertifikat der EU";
+"recovery_certificate_detail_view_headline" = "EU digital COVID certificate of recovery";
 
 "recovery_certificate_detail_view_data_name" = "Name, Vorname / Name, first name";
 
@@ -332,93 +332,93 @@
 
 "recovery_certificate_detail_view_data_test_note_de" = "Diese Bescheinigung ist kein Reisedokument. Die wissenschaftlichen Erkenntnisse zu COVID-19 in den Bereichen Impfung, Testung und Genesung entwickeln sich fortlaufend weiter, auch im Hinblick auf neue besorgniserregende Virusvarianten. Bitte informieren Sie sich vor Reiseantritt über die am Zielort geltenden Gesundheitsmaßnahmen und entsprechenden Beschränkungen. Informationen über die in den jeweiligen EU-Ländern geltenden Einreisebestimmungen finden Sie unter #https://reopen.europa.eu/de::https://reopen.europa.eu/de#.";
 
-"recovery_certificate_detail_view_data_test_note_en" = "This certificate is not a travel document. The scientific evidence on COVID-19 vaccination, testing and recovery continues to evolve, also in view of new variants of concern of the virus. Before travelling, please check the applicable public health measures and related restrictions applied at the point of destination. Information on the current travel restrictions that apply to EU countries can be found via #https://reopen.europa.eu/de::https://reopen.europa.eu/de#.";
+"recovery_certificate_detail_view_data_test_note_en" = "This certificate is not a travel document. The scientific evidence on COVID-19 vaccination, testing and recovery continues to evolve, also in view of new variants of concern of the virus. Before travelling, please check the applicable public health measures and related restrictions applied at the point of destination. Information on the current travel restrictions that apply to EU countries can be found via #https://reopen.europa.eu::https://reopen.europa.eu#.";
 
-"recovery_certificate_detail_view_qrcode_action_button_title" = "QR-Code anzeigen";
+"recovery_certificate_detail_view_qrcode_action_button_title" = "Show QR code";
 
-"recovery_certificate_detail_view_qrcode_screen_title" = "Vollständige Genesung";
+"recovery_certificate_detail_view_qrcode_screen_title" = "Full recovery";
 
-"recovery_certificate_detail_view_qrcode_screen_message" = "Gültig bis %@";
+"recovery_certificate_detail_view_qrcode_screen_message" = "Valid until %@";
 
-"recovery_certificate_detail_view_qrcode_screen_action_button_title" = "Schließen";
+"recovery_certificate_detail_view_qrcode_screen_action_button_title" = "Close";
 
 
 /********** certificate delete dialog **********/
 
-"dialog_delete_certificate_title" = "Möchten Sie das COVID-Zertifikat wirklich löschen?";
+"dialog_delete_certificate_title" = "Do you really want to delete this COVID certificate?";
 
-"dialog_delete_certificate_message" = "Die Daten werden rückstandslos von diesem Gerät entfernt. Die Wiederherstellung der Daten ist nicht möglich.";
+"dialog_delete_certificate_message" = "The data is removed from this device without leaving any residue. It is not possible to restore the data.";
 
-"dialog_delete_certificate_button_delete" = "Löschen";
+"dialog_delete_certificate_button_delete" = "Delete";
 
-"dialog_delete_certificate_button_cancel" = "Abbrechen";
+"dialog_delete_certificate_button_cancel" = "Cancel";
 
-"delete_result_dialog_header" = "Erfolgreich gelöscht";
+"delete_result_dialog_header" = "Deleted successfully";
 
-"delete_result_dialog_message" = "Das digitale COVID-Zertifikat der EU wurde erfolgreich von diesem Gerät entfernt.";
+"delete_result_dialog_message" = "The EU digital COVID certificate was successfully deleted from this device.";
 
 "delete_result_dialog_positive_button_text" = "OK";
 
 
 /********** error handling **********/
 
-"error_standard_unexpected_title" = "Entschuldigung";
+"error_standard_unexpected_title" = "Sorry";
 
-"error_standard_unexpected_message" = "Es ist ein unerwarteter Fehler aufgetreten. Bitte versuchen Sie es später erneut.";
+"error_standard_unexpected_message" = "An unexpected error has occurred. Please try again later.";
 
 "error_standard_unexpected_button_title" = "OK";
 
-"error_no_connection_to_server_title" = "Verbindungsfehler";
+"error_no_connection_to_server_title" = "Connection error";
 
-"error_no_connection_to_server_message" = "Bei der Verbindung zum Server ist ein Fehler aufgetreten. Bitte überprüfen Sie Ihre Internetverbindung.";
+"error_no_connection_to_server_message" = "An error occured while connecting to the server. Please check your internet connection.";
 
 "error_no_connection_to_server_button_title" = "OK";
 
-"error_scan_qrcode_cannot_be_parsed_title" = "QR-Code wurde nicht erkannt";
+"error_scan_qrcode_cannot_be_parsed_title" = "QR code was not recognised";
 
-"error_scan_qrcode_cannot_be_parsed_message" = "Der QR-Code gehört nicht zu einem digitalen COVID-Zertifikat der EU. Sie erkennen das richtige Zertifikat in Deutschland daran, dass der Aussteller das Robert Koch-Institut ist.\n\nQR-Codes von zum Beispiel Impfbescheinigungen oder QR-Codes auf einigen Chargen-Aufklebern aus dem gelben Impfbuch können nicht hinzugefügt werden.";
+"error_scan_qrcode_cannot_be_parsed_message" = "The QR code does not belong to an EU digital COVID certificate. You can recognise the correct certificate in Germany by the fact that the issuer is the Robert-Koch-Institut.\n\nQR codes from, for example, vaccination certificates or QR codes on some batch numbers from the yellow vaccination book cannot be added.";
 
 "error_scan_qrcode_cannot_be_parsed_button_title" = "OK";
 
-"error_scan_present_data_is_not_supported_title" = "Aktualisieren Sie die App";
+"error_scan_present_data_is_not_supported_title" = "Update the app";
 
-"error_scan_present_data_is_not_supported_message" = "Ihre aktuelle Version der App unterstützt das vorliegende Datenformat nicht. Bitte überprüfen Sie, ob Sie die aktuelle Version der App aus dem App Store auf Ihrem Smartphone installiert haben.";
+"error_scan_present_data_is_not_supported_message" = "Your current version of the app does not support the data format at hand. Please check whether you have installed the current version of the app from the App Store on your smartphone.";
 
 "error_scan_present_data_is_not_supported_button_title" = "OK";
 
-"error_scan_qrcode_without_seal_title" = "COVID-Zertifikat enthält keine gültige Signatur";
+"error_scan_qrcode_without_seal_title" = "COVID certificate does not contain a valid signature";
 
-"error_scan_qrcode_without_seal_message" = "Möglicherweise wurde das Zertifikat von einer nicht autorisierten Einrichtung erstellt oder die App ist nicht auf dem aktuellen Stand. Im zuletzt genannten Fall stellen Sie eine Verbindung mit dem Internet her und versuchen Sie es später erneut.";
+"error_scan_qrcode_without_seal_message" = "The certificate may have been created by an unauthorised institution or the app may not be up to date. In the latter case, connect to the internet and try again later.";
 
 "error_scan_qrcode_without_seal_button_title" = "OK";
 
 
 /********** dialog: duplicate certificate **********/
 
-"duplicate_certificate_dialog_header" = "COVID-Zertifikat wurde bereits hinzugefügt";
+"duplicate_certificate_dialog_header" = "COVID certificate has already been added";
 
-"duplicate_certificate_dialog_message" = "Das gescannte COVID-Zertifikat ist bereits in der App hinterlegt. Möglicherweise haben Sie das COVID-Zertifikat doppelt gescannt.";
+"duplicate_certificate_dialog_message" = "The scanned COVID certificate is already stored in the app. You may have scanned the COVID certificate twice.";
 
 "duplicate_certificate_dialog_button_title" = "OK";
 
 
 /********** app information **********/
 
-"app_information_title" = "Informationen";
+"app_information_title" = "Information";
 
-"app_information_message" = "Hier finden Sie alle rechtlichen Informationen und Antworten auf die häufigsten Fragen rund um die CovPass-App.";
+"app_information_message" = "Here you’ll find all the legal information and answers to frequently asked questions around the CovPass app.";
 
-"app_information_title_faq" = "Häufige Fragen";
+"app_information_title_faq" = "FAQ";
 
-"app_information_title_faq_linked" = "#Häufige Fragen::$0#";
+"app_information_title_faq_linked" = "#FAQ::$0#";
 
-"app_information_title_datenschutz" = "Datenschutzerklärung";
+"app_information_title_datenschutz" = "Privacy Policy";
 
-"app_information_title_company_details" = "Impressum";
+"app_information_title_company_details" = "Imprint";
 
-"app_information_title_company_details_linked" = "#Impressum::$0#";
+"app_information_title_company_details_linked" = "#Imprint::$0#";
 
-"app_information_title_open_source" = "Open-Source-Lizenzen";
+"app_information_title_open_source" = "Open source licenses";
 
 "app_information_message_open_source" = "Die App verwendet die folgenden Open-Source-Bibliotheken:";
 
