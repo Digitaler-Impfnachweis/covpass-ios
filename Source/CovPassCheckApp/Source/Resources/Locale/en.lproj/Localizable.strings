@@ -29,7 +29,7 @@
 
 "validation_second_onboarding_page_title" = "Second step: Verify identity with an identity document";
 
-"validation_second_onboarding_page_message" = "As the person checking, you will only see the validity status of the digital COVID certificate and the name and date of birth of the certificate holder in the CovPassCheck app. Match this information with an identification document (e.g. ID card, passport). An active internet connection is not required for the check.";
+"validation_second_onboarding_page_message" = "As the person checking, you will only see the validity status of the digital COVID certificate as well as the name and date of birth of the certificate holder in the CovPassCheck app. Match this information with an identification document (e.g. ID card, passport). An active internet connection is not required for the check.";
 
 "validation_fourth_onboarding_page_title" = "Data protection and data security";
 
@@ -56,6 +56,7 @@
 
 "validation_start_screen_title" = "Overview";
 
+"validation_start_screen_scan_title" = "Check certificate";
 
 "validation_start_screen_scan_message" = "Scan the EU digital COVID certificate now. You will immediately see whether the person being checked has a valid COVID certificate.";
 
@@ -186,6 +187,6 @@
 
 "error_scan_qrcode_cannot_be_parsed_title" = "QR code was not recognised";
 
-"error_scan_qrcode_cannot_be_parsed_message" = "The QR code does not belong to an EU digital COVID certificate. You can recognise the correct certificate in Germany by the fact that the issuer is the Robert-Koch-Institut.\n\nQR codes from, for example, vaccination certificates or QR codes on some batch numbers from the yellow vaccination book cannot be added.";
+"error_scan_qrcode_cannot_be_parsed_message" = "The QR code does not belong to an EU digital COVID certificate. You can recognise the correct certificate in Germany by the fact that the issuer is the Robert Koch Institute.\n\nQR codes from, for example, vaccination certificates or QR codes on some batch numbers from the yellow vaccination book cannot be added.";
 
 "error_scan_qrcode_cannot_be_parsed_button_title" = "OK";

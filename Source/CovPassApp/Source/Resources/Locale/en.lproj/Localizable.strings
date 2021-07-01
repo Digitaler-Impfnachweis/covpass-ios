@@ -13,7 +13,7 @@
 
 "start_onboarding_title" = "Welcome to the CovPass app";
 
-"start_onboarding_message" = "Verify EU digital COVID certificates easily with your smartphone.";
+"start_onboarding_message" = "Prove your EU digital COVID certificates easily with your smartphone.";
 
 "start_onboarding_secure_title" = "Absolute security for your data";
 
@@ -33,7 +33,7 @@
 
 "vaccination_third_onboarding_page_title" = "Third step: Show the QR code if required";
 
-"vaccination_third_onboarding_page_message" = "If required, you can show the QR code in the CovPass app. The QR code will then be scanned by the examiner. Please also have your identity document ready. As the QR code is only stored on your smartphone, you can display it at any time even without an internet connection.";
+"vaccination_third_onboarding_page_message" = "If required, you can show the QR code in the CovPass app. The QR code will then be scanned by the examiner. Please also have your identity document ready. As the QR code is only stored on your smartphone, you can display it at any time, even without an internet connection.";
 
 "vaccination_fourth_onboarding_page_title" = "Data protection and data security";
 
