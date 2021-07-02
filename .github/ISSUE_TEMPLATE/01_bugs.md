@@ -19,7 +19,7 @@ Also, be sure to check our documentation first: https://github.com/Digitaler-Imp
 ## Technical details
 
 - Device name:
-- iOS version:
+- OS version:
 - App version:
 
 ## Describe the bug
