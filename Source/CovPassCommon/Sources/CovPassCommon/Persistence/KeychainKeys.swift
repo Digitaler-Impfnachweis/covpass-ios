@@ -1,5 +1,5 @@
 //
-//  KeychainConfiguration.swift
+//  KeychainPersistence.swift
 //
 //
 //  © Copyright IBM Deutschland GmbH 2021
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public enum KeychainConfiguration {
+public extension KeychainPersistence {
     public static let certificateListKey = "VaccinationCertificateList"
     public static let trustListKey = "TrustList"
 }

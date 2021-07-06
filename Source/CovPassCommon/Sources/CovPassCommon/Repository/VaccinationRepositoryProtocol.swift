@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Keychain
 import PromiseKit
 
 public protocol VaccinationRepositoryProtocol {

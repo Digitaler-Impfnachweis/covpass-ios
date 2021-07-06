@@ -7,7 +7,6 @@
 
 import CovPassCommon
 import CovPassUI
-import Keychain
 import UIKit
 
 @UIApplicationMain
@@ -39,7 +38,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     private func clearKeychainOnFreshInstall() throws {
         if !UserDefaults.StartupInfo.bool(.appInstalled) {
             UserDefaults.StartupInfo.set(true, forKey: .appInstalled)
-            try Keychain.deletePassword(for: KeychainConfiguration.certificateListKey)
+            try KeychainPersistence().delete(KeychainPersistence.certificateListKey)
         }
     }
 

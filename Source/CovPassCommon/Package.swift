@@ -15,7 +15,6 @@ let package = Package(
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
-        .package(name: "Keychain", path: "../ios-keychain"),
         .package(name: "Scanner", path: "../ios-scanner"),
         .package(name: "PromiseKit", url: "https://github.com/mxcl/PromiseKit", from: "6.13.2"),
         .package(name: "SwiftCBOR", url: "https://github.com/unrelentingtech/SwiftCBOR", from: "0.1.0"),
@@ -26,7 +25,7 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .target(
             name: "CovPassCommon",
-            dependencies: ["Keychain", "SwiftCBOR", "Scanner", "PromiseKit", "ASN1Decoder"],
+            dependencies: ["SwiftCBOR", "Scanner", "PromiseKit", "ASN1Decoder"],
             resources: [.process("Resources")]
         ),
         .testTarget(
