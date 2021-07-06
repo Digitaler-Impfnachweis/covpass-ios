@@ -7,6 +7,7 @@
 //
 
 import CovPassUI
+import LocalAuthentication
 import PromiseKit
 import UIKit
 
@@ -34,6 +35,11 @@ class HowToScanViewModel: BaseViewModel, CancellableViewModelProtocol {
     }
 
     var startButtonTitle: String { "certificate_add_popup_scan_button_title".localized }
+
+    var showPasscodeHint: Bool {
+        // check if device passcode is set
+        return !LAContext().canEvaluatePolicy(.deviceOwnerAuthentication, error: nil)
+    }
 
     // MARK: - Lifecycle
 

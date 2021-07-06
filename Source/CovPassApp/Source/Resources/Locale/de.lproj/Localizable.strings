@@ -71,6 +71,10 @@
 
 "certificate_add_popup_title" = "Nachweis hinzufügen";
 
+"certificate_add_popup_note_title" = "Kein Sperrcode auf Ihrem Smartphone vorhanden";
+
+"certificate_add_popup_note_message" = "Die CovPass-App speichert sensible Daten auf Ihrem Smartphone. Um die Daten vor fremdem Zugriff zu schützen, empfehlen wir Ihnen, eine Code zum Entsperren Ihres Smartphones einzurichten.";
+
 "certificate_add_popup_message" = "Scannen Sie den QR-Code von einem digitalen COVID-Zertifikat der EU. Der Nachweis wird direkt in die CovPass-App übertragen.";
 
 "certificate_add_popup_action_title" = "Welchen QR-Code kann ich einscannen?";
