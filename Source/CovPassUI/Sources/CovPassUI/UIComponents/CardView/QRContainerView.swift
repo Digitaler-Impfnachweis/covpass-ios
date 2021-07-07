@@ -43,7 +43,7 @@ public class QRContainerView: XibView {
         }
     }
 
-    private let cornerRadius: CGFloat = 30
+    private let cornerRadius: CGFloat = 10
 
     // MARK: - Lifecycle
 
