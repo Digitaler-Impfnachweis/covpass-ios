@@ -50,6 +50,7 @@ API documentation TBD
   - Change keychain properties to support devices without passcode
   - Show hint for devices without passcode
   - Change camera usage description
+  - Update app icon
 - 1.4.0
   - Add static German rules for certificates
   - Adjust date of birth to support custom format
