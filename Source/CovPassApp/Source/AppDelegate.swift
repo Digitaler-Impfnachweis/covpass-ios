@@ -43,7 +43,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationWillResignActive(_: UIApplication) {
-        BackgroundUtils.addHideView(to: window)
+        BackgroundUtils.addHideView(to: window, image: UIImage(named: "CovPass"))
     }
 
     func applicationDidBecomeActive(_: UIApplication) {
