@@ -46,6 +46,10 @@ API documentation TBD
 - 1.4.1
   - Add contact for pass and check app
   - Change certificate matching for certificates with the same family name
+  - Adjust card layout for small devices
+  - Change keychain properties to support devices without passcode
+  - Show hint for devices without passcode
+  - Change camera usage description
 - 1.4.0
   - Add static German rules for certificates
   - Adjust date of birth to support custom format
