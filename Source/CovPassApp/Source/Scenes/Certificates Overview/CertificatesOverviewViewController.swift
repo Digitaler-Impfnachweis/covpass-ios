@@ -42,13 +42,13 @@ class CertificatesOverviewViewController: UIViewController {
         setupActionButton()
         setupCollectionView()
         setupDotIndicator()
-        viewModel.updateTrustList()
         viewModel.refresh()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
+        viewModel.updateTrustList()
     }
 
     override func viewWillDisappear(_ animated: Bool) {

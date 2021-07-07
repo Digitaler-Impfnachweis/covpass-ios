@@ -72,6 +72,7 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
     public func updateTrustList() -> Promise<Void> {
         firstly {
             Promise { seal in
+
                 if let lastUpdated = try userDefaults.fetch(UserDefaults.keyLastUpdatedTrustList) as? Date,
                    let date = Calendar.current.date(byAdding: .day, value: 1, to: lastUpdated),
                    Date() < date
@@ -240,7 +241,7 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
 
     func loadLocalTrustListIfNeeded() throws {
         // Has never been updated before; load local list and then update it
-        if try userDefaults.fetch(UserDefaults.keyLastUpdatedTrustList) == nil {
+        if try userDefaults.fetch(UserDefaults.keyLastUpdatedTrustList) == nil || trustList == nil {
             let localTrustList = try Data(contentsOf: initialDataURL)
             try keychain.store(KeychainPersistence.trustListKey, value: localTrustList)
         }
