@@ -7,6 +7,7 @@
 
 import CovPassUI
 import UIKit
+import CovPassCommon
 
 @UIApplicationMain
 final class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -17,6 +18,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         _: UIApplication,
         didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
+        try? clearKeychainOnFreshInstall()
         try? UIFont.loadCustomFonts()
 
         guard NSClassFromString("XCTest") == nil else { return true }
@@ -31,6 +33,15 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         self.sceneCoordinator = sceneCoordinator
 
         return true
+    }
+
+    private func clearKeychainOnFreshInstall() throws {
+        if !UserDefaults.StartupInfo.bool(.appInstalled) {
+            UserDefaults.StartupInfo.set(true, forKey: .appInstalled)
+            try KeychainPersistence().delete(KeychainPersistence.trustListKey)
+            try KeychainPersistence().delete(KeychainPersistence.certificateListKey)
+            print("Keychain deleted")
+        }
     }
 
     func applicationWillResignActive(_: UIApplication) {

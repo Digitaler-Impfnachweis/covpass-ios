@@ -38,6 +38,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     private func clearKeychainOnFreshInstall() throws {
         if !UserDefaults.StartupInfo.bool(.appInstalled) {
             UserDefaults.StartupInfo.set(true, forKey: .appInstalled)
+            try KeychainPersistence().delete(KeychainPersistence.trustListKey)
             try KeychainPersistence().delete(KeychainPersistence.certificateListKey)
         }
     }

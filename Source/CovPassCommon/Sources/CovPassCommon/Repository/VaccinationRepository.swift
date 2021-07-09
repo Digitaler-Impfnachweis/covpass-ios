@@ -22,10 +22,17 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
     private let initialDataURL: URL
 
     private var trustList: TrustList? {
-        guard let trustListData = try? keychain.fetch(KeychainPersistence.trustListKey) as? Data,
-              let list = try? JSONDecoder().decode(TrustList.self, from: trustListData)
-        else { return nil }
-        return list
+        // Try to load trust list from keychain
+        if let trustListData = try? keychain.fetch(KeychainPersistence.trustListKey) as? Data,
+           let list = try? JSONDecoder().decode(TrustList.self, from: trustListData) {
+            return list
+        }
+        // Try to load local trust list
+        if let localTrustList = try? Data(contentsOf: initialDataURL),
+           let list = try? JSONDecoder().decode(TrustList.self, from: localTrustList) {
+            return list
+        }
+        return nil
     }
 
     public init(service: APIServiceProtocol, keychain: Persistence, userDefaults: Persistence, publicKeyURL: URL, initialDataURL: URL) {
@@ -34,8 +41,6 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
         self.userDefaults = userDefaults
         self.publicKeyURL = publicKeyURL
         self.initialDataURL = initialDataURL
-
-        try? loadLocalTrustListIfNeeded()
     }
 
     public func getCertificateList() -> Promise<CertificateList> {
@@ -72,7 +77,6 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
     public func updateTrustList() -> Promise<Void> {
         firstly {
             Promise { seal in
-
                 if let lastUpdated = try userDefaults.fetch(UserDefaults.keyLastUpdatedTrustList) as? Date,
                    let date = Calendar.current.date(byAdding: .day, value: 1, to: lastUpdated),
                    Date() < date
@@ -238,14 +242,6 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
     }
 
     // MARK: - Private Helpers
-
-    func loadLocalTrustListIfNeeded() throws {
-        // Has never been updated before; load local list and then update it
-        if try userDefaults.fetch(UserDefaults.keyLastUpdatedTrustList) == nil || trustList == nil {
-            let localTrustList = try Data(contentsOf: initialDataURL)
-            try keychain.store(KeychainPersistence.trustListKey, value: localTrustList)
-        }
-    }
 
     func parseCertificate(_ cosePayload: CoseSign1Message) throws -> CBORWebToken {
         guard let trustList = self.trustList else {

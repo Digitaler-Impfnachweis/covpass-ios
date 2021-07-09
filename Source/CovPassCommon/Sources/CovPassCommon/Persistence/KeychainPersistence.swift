@@ -108,7 +108,7 @@ public struct KeychainPersistence: Persistence {
             kSecAttrAccessible as String: attrAccessible
         ]
         let status = SecItemDelete(query)
-        if status != noErr {
+        if status != noErr && status != errSecItemNotFound {
             throw KeychainError.deleteFailed
         }
     }
