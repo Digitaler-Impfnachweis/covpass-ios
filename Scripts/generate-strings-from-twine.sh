@@ -9,7 +9,7 @@ BIGreen='\033[1;92m'      # Green
 path=$( pwd -P )
 
 #Urls
-twineRepoUrl=$1
+twineRepoUrl="https://github.com/Digitaler-Impfnachweis/covpass-apps-i18n"
 echo -e "${BIGreen}▄▄▄█████▓ █     █░ ██▓ ███▄    █ ▓█████                                       ${Color_Off}";
 echo -e "${BIGreen}▓  ██▒ ▓▒▓█░ █ ░█░▓██▒ ██ ▀█   █ ▓█   ▀                                       ${Color_Off}";
 echo -e "${BIGreen}▒ ▓██░ ▒░▒█░ █ ░█ ▒██▒▓██  ▀█ ██▒▒███                                         ${Color_Off}";
@@ -62,10 +62,10 @@ sleep 0.5
 
 echo -ne "Generating strings file:     [${BIRed}#                             ${Color_Off}]"\\r
 # Twining
-twine generate-localization-file ./text-vaccination/twine-cert.txt $path/Source/CovPassApp/Source/Resources/Locale/de.lproj/Localizable.strings --format apple
-twine generate-localization-file ./text-vaccination/twine-cert.txt $path/Source/CovPassApp/Source/Resources/Locale/en.lproj/Localizable.strings --format apple
-twine generate-localization-file ./text-vaccination/twine-validator.txt $path/Source/CovPassCheckApp/Source/Resources/Locale/de.lproj/Localizable.strings --format apple
-twine generate-localization-file ./text-vaccination/twine-validator.txt $path/Source/CovPassCheckApp/Source/Resources/Locale/en.lproj/Localizable.strings --format apple
+twine generate-localization-file ./covpass-apps-i18n/twine-cert.txt $path/Source/CovPassApp/Source/Resources/Locale/de.lproj/Localizable.strings --format apple
+twine generate-localization-file ./covpass-apps-i18n/twine-cert.txt $path/Source/CovPassApp/Source/Resources/Locale/en.lproj/Localizable.strings --format apple
+twine generate-localization-file ./covpass-apps-i18n/twine-validator.txt $path/Source/CovPassCheckApp/Source/Resources/Locale/de.lproj/Localizable.strings --format apple
+twine generate-localization-file ./covpass-apps-i18n/twine-validator.txt $path/Source/CovPassCheckApp/Source/Resources/Locale/en.lproj/Localizable.strings --format apple
 sleep 0.5
 
 echo -ne "Generating strings file:     [${BIRed}##############                ${Color_Off}]"\\r
@@ -75,7 +75,7 @@ sleep 0.5
 
 echo -ne '\n\n'
 
-yes | rm -r $path/text-vaccination
+yes | rm -r $path/covpass-apps-i18n
 
 echo -ne "✅ 🎉 ${BIGreen}Everything done!${Color_Off}"
 afplay /System/Library/Sounds/Blow.aiff 
