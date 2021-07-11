@@ -19,6 +19,7 @@ protocol CertificatesOverviewViewModelProtocol {
     func updateTrustList()
     func scanCertificate(withIntroduction: Bool)
     func showAppInformation()
+    func showRuleCheck()
 }
 
 extension CertificatesOverviewViewModelProtocol {

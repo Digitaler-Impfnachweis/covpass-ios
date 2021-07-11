@@ -15,7 +15,7 @@ import UIKit
 class CertificatesOverviewViewController: UIViewController {
     // MARK: - IBOutlet
 
-    @IBOutlet var headerView: InfoHeaderView!
+    @IBOutlet var headerView: OverviewHeaderView!
     @IBOutlet var addButton: MainButton!
     @IBOutlet var collectionView: UICollectionView!
     @IBOutlet var dotPageIndicator: DotPageIndicator!
@@ -67,7 +67,9 @@ class CertificatesOverviewViewController: UIViewController {
     private func setupHeaderView() {
         headerView.attributedTitleText = "certificate_action_button_check_validity".localized.styledAs(.header_3).colored(.brandBase)
         headerView.image = .help
-        headerView.titleAction = {}
+        headerView.titleAction = { [weak self] in
+            self?.viewModel.showRuleCheck()
+        }
         headerView.action = { [weak self] in
             self?.viewModel.showAppInformation()
         }

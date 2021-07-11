@@ -102,6 +102,12 @@
 		3882AEBB26700646000354CD /* TestCertificateItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3882AEBA26700646000354CD /* TestCertificateItemViewModel.swift */; };
 		3882AEBD267006B4000354CD /* RecoveryCertificateItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3882AEBC267006B4000354CD /* RecoveryCertificateItemViewModel.swift */; };
 		3882AEC226700BB3000354CD /* CertificateItemDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3882AEC126700BB3000354CD /* CertificateItemDetailViewController.xib */; };
+		38E3625A269B712900DE6D4C /* RuleCheckRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E36254269B712900DE6D4C /* RuleCheckRouter.swift */; };
+		38E3625B269B712900DE6D4C /* RuleCheckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E36255269B712900DE6D4C /* RuleCheckViewController.swift */; };
+		38E3625C269B712900DE6D4C /* RuleCheckViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E36256269B712900DE6D4C /* RuleCheckViewModel.swift */; };
+		38E3625D269B712900DE6D4C /* RuleCheckViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38E36258269B712900DE6D4C /* RuleCheckViewController.xib */; };
+		38E3625E269B712900DE6D4C /* RuleCheckSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E36259269B712900DE6D4C /* RuleCheckSceneFactory.swift */; };
+		38E36261269B744700DE6D4C /* RuleCheckRouterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E36260269B744700DE6D4C /* RuleCheckRouterProtocol.swift */; };
 		38E91BE7266D7AD90044BD56 /* ValidationResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E91BE6266D7AD90044BD56 /* ValidationResultViewModel.swift */; };
 		38E91BEC266D7AF00044BD56 /* VaccinationResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E91BE8266D7AF00044BD56 /* VaccinationResultViewModel.swift */; };
 		38E91BED266D7AF00044BD56 /* ValidationResultFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E91BE9266D7AF00044BD56 /* ValidationResultFactory.swift */; };
@@ -244,6 +250,12 @@
 		3882AEBA26700646000354CD /* TestCertificateItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCertificateItemViewModel.swift; sourceTree = "<group>"; };
 		3882AEBC267006B4000354CD /* RecoveryCertificateItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecoveryCertificateItemViewModel.swift; sourceTree = "<group>"; };
 		3882AEC126700BB3000354CD /* CertificateItemDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CertificateItemDetailViewController.xib; sourceTree = "<group>"; };
+		38E36254269B712900DE6D4C /* RuleCheckRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RuleCheckRouter.swift; sourceTree = "<group>"; };
+		38E36255269B712900DE6D4C /* RuleCheckViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RuleCheckViewController.swift; sourceTree = "<group>"; };
+		38E36256269B712900DE6D4C /* RuleCheckViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RuleCheckViewModel.swift; sourceTree = "<group>"; };
+		38E36258269B712900DE6D4C /* RuleCheckViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RuleCheckViewController.xib; sourceTree = "<group>"; };
+		38E36259269B712900DE6D4C /* RuleCheckSceneFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RuleCheckSceneFactory.swift; sourceTree = "<group>"; };
+		38E36260269B744700DE6D4C /* RuleCheckRouterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleCheckRouterProtocol.swift; sourceTree = "<group>"; };
 		38E91BE6266D7AD90044BD56 /* ValidationResultViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidationResultViewModel.swift; sourceTree = "<group>"; };
 		38E91BE8266D7AF00044BD56 /* VaccinationResultViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VaccinationResultViewModel.swift; sourceTree = "<group>"; };
 		38E91BE9266D7AF00044BD56 /* ValidationResultFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidationResultFactory.swift; sourceTree = "<group>"; };
@@ -328,6 +340,7 @@
 				216D1F0D264EF4E400370F16 /* Certificate Detail */,
 				3882AEAC266FE7C6000354CD /* Certificate Item Detail */,
 				216D1F2B264EF4E400370F16 /* HowToScan */,
+				38E36253269B712900DE6D4C /* RuleCheck */,
 				216D1F20264EF4E400370F16 /* App Information */,
 			);
 			path = Scenes;
@@ -795,6 +808,35 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		38E36253269B712900DE6D4C /* RuleCheck */ = {
+			isa = PBXGroup;
+			children = (
+				38E3625F269B743000DE6D4C /* Protocols */,
+				38E36254269B712900DE6D4C /* RuleCheckRouter.swift */,
+				38E36255269B712900DE6D4C /* RuleCheckViewController.swift */,
+				38E36256269B712900DE6D4C /* RuleCheckViewModel.swift */,
+				38E36257269B712900DE6D4C /* Views */,
+				38E36259269B712900DE6D4C /* RuleCheckSceneFactory.swift */,
+			);
+			path = RuleCheck;
+			sourceTree = "<group>";
+		};
+		38E36257269B712900DE6D4C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				38E36258269B712900DE6D4C /* RuleCheckViewController.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		38E3625F269B743000DE6D4C /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				38E36260269B744700DE6D4C /* RuleCheckRouterProtocol.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
 		65D6D46525F7A631000CB339 = {
 			isa = PBXGroup;
 			children = (
@@ -1060,6 +1102,7 @@
 				88BEE03B26550E0900479E5E /* privacy-covpass.html in Resources */,
 				216D1FE0264EF76800370F16 /* CertificateDetailViewController.xib in Resources */,
 				216D1F49264EF50300370F16 /* Assets.xcassets in Resources */,
+				38E3625D269B712900DE6D4C /* RuleCheckViewController.xib in Resources */,
 				3882AEC226700BB3000354CD /* CertificateItemDetailViewController.xib in Resources */,
 				216D1FF6264EF77600370F16 /* HowToScanViewController.xib in Resources */,
 				65E0DB0C2657F31C004C660F /* CertificateViewController.xib in Resources */,
@@ -1110,6 +1153,8 @@
 				216D1FEF264EF77200370F16 /* HowToScanSceneFactory.swift in Sources */,
 				216D1FE7264EF76D00370F16 /* CertificateDetailRouterProtocol.swift in Sources */,
 				216D1FB8264EF74F00370F16 /* CertificatesOverviewRouter.swift in Sources */,
+				38E36261269B744700DE6D4C /* RuleCheckRouterProtocol.swift in Sources */,
+				38E3625A269B712900DE6D4C /* RuleCheckRouter.swift in Sources */,
 				216D1FD8264EF76400370F16 /* CertificateDetailViewModel.swift in Sources */,
 				216D2004264EF7B600370F16 /* StringLocalization.swift in Sources */,
 				216D1FCD264EF75D00370F16 /* CertificatesOverviewRouterProtocol.swift in Sources */,
@@ -1118,6 +1163,7 @@
 				3882AEBD267006B4000354CD /* RecoveryCertificateItemViewModel.swift in Sources */,
 				216D1FFC264EF77C00370F16 /* AppInformationSceneFactory.swift in Sources */,
 				216D1FCF264EF75D00370F16 /* CertificatesOverviewViewModelDelegate.swift in Sources */,
+				38E3625C269B712900DE6D4C /* RuleCheckViewModel.swift in Sources */,
 				3882AEAE266FE85C000354CD /* CertificateItemDetailSceneFactory.swift in Sources */,
 				65E0DB0B2657F31C004C660F /* CertificateViewController.swift in Sources */,
 				216D1FC6264EF75900370F16 /* NoCertificateCardViewModel.swift in Sources */,
@@ -1129,6 +1175,7 @@
 				216D1FB0264EF74600370F16 /* PassConsentPageViewModel.swift in Sources */,
 				216D1F98264EF73200370F16 /* MainSceneFactory.swift in Sources */,
 				216D1FA6264EF74100370F16 /* WelcomeSceneFactory.swift in Sources */,
+				38E3625E269B712900DE6D4C /* RuleCheckSceneFactory.swift in Sources */,
 				3882AEB9266FEE11000354CD /* CertificateItemDetailViewController.swift in Sources */,
 				216D1FEE264EF77200370F16 /* HowToScanRouter.swift in Sources */,
 				3882AEAB266FD609000354CD /* VaccinationCertificateItemViewModel.swift in Sources */,
@@ -1137,6 +1184,7 @@
 				216D1FCE264EF75D00370F16 /* CertificatesOverviewViewModelProtocol.swift in Sources */,
 				3882AEB7266FEBA3000354CD /* CertificateItemDetailViewModelProtocol.swift in Sources */,
 				216D1FA7264EF74100370F16 /* WelcomeViewModel.swift in Sources */,
+				38E3625B269B712900DE6D4C /* RuleCheckViewController.swift in Sources */,
 				216D1FF0264EF77200370F16 /* HowToScanViewModel.swift in Sources */,
 				216D1FA4264EF74100370F16 /* WelcomeRouter.swift in Sources */,
 				3882AEB5266FEB75000354CD /* CertificateItemDetailViewModel.swift in Sources */,

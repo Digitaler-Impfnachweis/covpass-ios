@@ -9,6 +9,6 @@
 import Foundation
 
 public extension KeychainPersistence {
-    public static let certificateListKey = "VaccinationCertificateList"
-    public static let trustListKey = "TrustList"
+    static let certificateListKey = "VaccinationCertificateList"
+    static let trustListKey = "TrustList"
 }

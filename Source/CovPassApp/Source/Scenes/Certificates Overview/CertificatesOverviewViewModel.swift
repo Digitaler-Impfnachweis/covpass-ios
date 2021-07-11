@@ -132,6 +132,10 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
         }
     }
 
+    func showRuleCheck() {
+        router.showRuleCheck().cauterize()
+    }
+
     func showAppInformation() {
         router.showAppInformation()
     }
