@@ -15,6 +15,7 @@ class HowToScanViewController: UIViewController {
     @IBOutlet var headline: InfoHeaderView!
     @IBOutlet var descriptionText: ParagraphView!
     @IBOutlet var imageView: UIImageView!
+    @IBOutlet var hintView: HintView!
     @IBOutlet var actionView: ListItemView!
     @IBOutlet var toolbarView: CustomToolbarView!
 
@@ -38,6 +39,7 @@ class HowToScanViewController: UIViewController {
         super.viewDidLoad()
         configureImageView()
         configureHeadline()
+        configureHintView()
         configureDescriptionText()
         configureToolbarView()
         configureActionView()
@@ -57,6 +59,12 @@ class HowToScanViewController: UIViewController {
         }
         headline.image = .close
         headline.layoutMargins.bottom = .space_24
+    }
+
+    private func configureHintView() {
+        hintView.titleLabel.attributedText = "certificate_add_popup_note_title".localized.styledAs(.header_3)
+        hintView.bodyLabel.attributedText = "certificate_add_popup_note_message".localized.styledAs(.body)
+        hintView.isHidden = !viewModel.showPasscodeHint
     }
 
     private func configureActionView() {

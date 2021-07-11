@@ -36,7 +36,6 @@ class ValidatorOverviewViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = UIColor.backgroundPrimary
         viewModel.delegate = self
-        viewModel.updateTrustList()
         setupHeaderView()
         setupCardView()
     }
@@ -44,6 +43,7 @@ class ValidatorOverviewViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
+        viewModel.updateTrustList()
     }
 
     override func viewWillDisappear(_ animated: Bool) {

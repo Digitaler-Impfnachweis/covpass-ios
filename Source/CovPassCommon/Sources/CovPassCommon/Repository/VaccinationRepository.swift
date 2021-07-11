@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Keychain
 import PromiseKit
 
 public enum CertificateError: Error {
@@ -23,10 +22,17 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
     private let initialDataURL: URL
 
     private var trustList: TrustList? {
-        guard let trustListData = try? keychain.fetch(KeychainConfiguration.trustListKey) as? Data,
-              let list = try? JSONDecoder().decode(TrustList.self, from: trustListData)
-        else { return nil }
-        return list
+        // Try to load trust list from keychain
+        if let trustListData = try? keychain.fetch(KeychainPersistence.trustListKey) as? Data,
+           let list = try? JSONDecoder().decode(TrustList.self, from: trustListData) {
+            return list
+        }
+        // Try to load local trust list
+        if let localTrustList = try? Data(contentsOf: initialDataURL),
+           let list = try? JSONDecoder().decode(TrustList.self, from: localTrustList) {
+            return list
+        }
+        return nil
     }
 
     public init(service: APIServiceProtocol, keychain: Persistence, userDefaults: Persistence, publicKeyURL: URL, initialDataURL: URL) {
@@ -35,21 +41,19 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
         self.userDefaults = userDefaults
         self.publicKeyURL = publicKeyURL
         self.initialDataURL = initialDataURL
-
-        try? loadLocalTrustListIfNeeded()
     }
 
     public func getCertificateList() -> Promise<CertificateList> {
         return Promise { seal in
             do {
-                guard let data = try keychain.fetch(KeychainConfiguration.certificateListKey) as? Data else {
-                    throw KeychainError.fetch
+                guard let data = try keychain.fetch(KeychainPersistence.certificateListKey) as? Data else {
+                    throw KeychainError.fetchFailed
                 }
                 let certificate = try JSONDecoder().decode(CertificateList.self, from: data)
                 seal.fulfill(certificate)
             } catch {
                 print(error)
-                if case KeychainError.fetch = error {
+                if case KeychainError.fetchFailed = error {
                     seal.fulfill(CertificateList(certificates: []))
                     return
                 }
@@ -61,7 +65,7 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
     public func saveCertificateList(_ certificateList: CertificateList) -> Promise<CertificateList> {
         return Promise { seal in
             let data = try JSONEncoder().encode(certificateList)
-            try keychain.store(KeychainConfiguration.certificateListKey, value: data)
+            try keychain.store(KeychainPersistence.certificateListKey, value: data)
             seal.fulfill(certificateList)
         }
     }
@@ -142,7 +146,7 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
         }
         .map { trustList in
             let data = try JSONEncoder().encode(trustList)
-            try keychain.store(KeychainConfiguration.trustListKey, value: data)
+            try keychain.store(KeychainPersistence.trustListKey, value: data)
             UserDefaults.standard.setValue(Date(), forKey: UserDefaults.keyLastUpdatedTrustList)
         }
     }
@@ -238,14 +242,6 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
     }
 
     // MARK: - Private Helpers
-
-    func loadLocalTrustListIfNeeded() throws {
-        // Has never been updated before; load local list and then update it
-        if try userDefaults.fetch(UserDefaults.keyLastUpdatedTrustList) == nil {
-            let localTrustList = try Data(contentsOf: initialDataURL)
-            try keychain.store(KeychainConfiguration.trustListKey, value: localTrustList)
-        }
-    }
 
     func parseCertificate(_ cosePayload: CoseSign1Message) throws -> CBORWebToken {
         guard let trustList = self.trustList else {

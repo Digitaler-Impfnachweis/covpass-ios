@@ -148,6 +148,8 @@
 
 "app_information_message" = "Hier finden Sie alle rechtlichen Informationen und Antworten auf die häufigsten Fragen rund um die CovPassCheck-App.";
 
+"app_information_title_contact" = "Kontakt";
+
 "app_information_title_faq" = "Häufige Fragen";
 
 "app_information_title_faq_linked" = "#Häufige Fragen::$0#";

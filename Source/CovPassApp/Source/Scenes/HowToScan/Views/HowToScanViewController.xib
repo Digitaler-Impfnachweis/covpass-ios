@@ -14,6 +14,7 @@
                 <outlet property="actionView" destination="kiK-Qt-Oxb" id="HoU-TE-srx"/>
                 <outlet property="descriptionText" destination="czg-wL-cb7" id="KMZ-HX-ASj"/>
                 <outlet property="headline" destination="sKK-Se-ZAm" id="Tul-uA-XuY"/>
+                <outlet property="hintView" destination="gbc-XM-dNV" id="ceL-GT-88g"/>
                 <outlet property="imageView" destination="AQK-qG-0AQ" id="vau-mg-aao"/>
                 <outlet property="toolbarView" destination="Ym0-Wl-H3l" id="JkV-4X-kdc"/>
                 <outlet property="view" destination="9Sf-rI-cgn" id="Tp4-Er-rhk"/>
@@ -31,20 +32,24 @@
                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="l0s-up-bK1"/>
                     </constraints>
                 </view>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qf6-Rq-Unr">
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qf6-Rq-Unr">
                     <rect key="frame" x="0.0" y="124" width="414" height="670"/>
                     <subviews>
-                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="tNn-Ng-ZRx">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="418"/>
+                        <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="tNn-Ng-ZRx">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="546"/>
                             <subviews>
                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="250" translatesAutoresizingMaskIntoConstraints="NO" id="AQK-qG-0AQ">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="250"/>
                                 </imageView>
-                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="czg-wL-cb7" userLabel="Description Text" customClass="ParagraphView" customModule="CovPassUI">
+                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gbc-XM-dNV" customClass="HintView" customModule="CovPassUI">
                                     <rect key="frame" x="0.0" y="250" width="414" height="128"/>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 </view>
-                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="40" translatesAutoresizingMaskIntoConstraints="NO" id="kiK-Qt-Oxb" userLabel="Action View" customClass="ListItemView" customModule="CovPassUI">
-                                    <rect key="frame" x="0.0" y="378" width="414" height="40"/>
+                                <view contentMode="scaleToFill" ambiguous="YES" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="czg-wL-cb7" userLabel="Description Text" customClass="ParagraphView" customModule="CovPassUI">
+                                    <rect key="frame" x="0.0" y="378" width="414" height="128"/>
+                                </view>
+                                <view contentMode="scaleToFill" ambiguous="YES" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="40" translatesAutoresizingMaskIntoConstraints="NO" id="kiK-Qt-Oxb" userLabel="Action View" customClass="ListItemView" customModule="CovPassUI">
+                                    <rect key="frame" x="0.0" y="506" width="414" height="40"/>
                                 </view>
                             </subviews>
                         </stackView>

@@ -23,12 +23,12 @@ public enum BackgroundUtils {
         return nil
     }
 
-    public static func addHideView(to window: UIWindow?) {
+    public static func addHideView(to window: UIWindow?, image: UIImage?) {
         guard let window = window else { return }
         let hideView = UIView(frame: window.frame)
         hideView.backgroundColor = .white
         let imageView = UIImageView(frame: .zero)
-        imageView.image = appIcon
+        imageView.image = image ?? appIcon
         hideView.addSubview(imageView)
         hideView.tag = BackgroundUtils.hideViewTag
         window.addSubview(hideView)

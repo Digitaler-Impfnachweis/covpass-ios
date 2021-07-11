@@ -51,6 +51,10 @@ public extension UIColor {
 
     static let primaryButtonShadow = UIColor("PrimaryButtonShadow")
 
+    static let infoAccent = UIColor("InfoAccent")
+
+    static let infoBackground = UIColor("InfoBackground")
+
     // MARK: - Neutral Colors
 
     static let neutralBlack = UIColor("NeutralBlack")

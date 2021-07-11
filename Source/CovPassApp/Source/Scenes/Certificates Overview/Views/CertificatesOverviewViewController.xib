@@ -30,7 +30,7 @@
                     <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="UkJ-ri-sjN">
-                    <rect key="frame" x="0.0" y="120" width="414" height="616"/>
+                    <rect key="frame" x="0.0" y="110" width="414" height="640"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="mNC-aH-BF7">
                         <size key="itemSize" width="128" height="128"/>
@@ -83,13 +83,13 @@
             <constraints>
                 <constraint firstItem="qpg-K1-lgH" firstAttribute="top" secondItem="PRk-Ue-LAv" secondAttribute="top" id="4dj-me-YRu"/>
                 <constraint firstItem="PRk-Ue-LAv" firstAttribute="bottom" secondItem="PMf-RC-nLN" secondAttribute="bottom" constant="12" id="54S-ES-zjx"/>
-                <constraint firstItem="UkJ-ri-sjN" firstAttribute="top" secondItem="qpg-K1-lgH" secondAttribute="bottom" constant="26" id="EMq-wj-JNe"/>
+                <constraint firstItem="UkJ-ri-sjN" firstAttribute="top" secondItem="qpg-K1-lgH" secondAttribute="bottom" constant="16" id="EMq-wj-JNe"/>
                 <constraint firstItem="UkJ-ri-sjN" firstAttribute="leading" secondItem="PRk-Ue-LAv" secondAttribute="leading" id="Jjb-WV-mo6"/>
                 <constraint firstItem="PRk-Ue-LAv" firstAttribute="trailing" secondItem="UkJ-ri-sjN" secondAttribute="trailing" id="TPl-Ni-Pka"/>
                 <constraint firstItem="PRk-Ue-LAv" firstAttribute="trailing" secondItem="qpg-K1-lgH" secondAttribute="trailing" id="YJ6-O5-U3a"/>
                 <constraint firstItem="PMf-RC-nLN" firstAttribute="leading" secondItem="PRk-Ue-LAv" secondAttribute="leading" id="a7S-xM-Ju4"/>
                 <constraint firstItem="qpg-K1-lgH" firstAttribute="leading" secondItem="PRk-Ue-LAv" secondAttribute="leading" id="cO3-zk-rc8"/>
-                <constraint firstItem="PMf-RC-nLN" firstAttribute="top" secondItem="UkJ-ri-sjN" secondAttribute="bottom" constant="26" id="cTf-PY-d1o"/>
+                <constraint firstItem="PMf-RC-nLN" firstAttribute="top" secondItem="UkJ-ri-sjN" secondAttribute="bottom" constant="12" id="cTf-PY-d1o"/>
                 <constraint firstItem="PRk-Ue-LAv" firstAttribute="trailing" secondItem="PMf-RC-nLN" secondAttribute="trailing" id="iAw-og-NmG"/>
             </constraints>
             <point key="canvasLocation" x="139" y="-491"/>

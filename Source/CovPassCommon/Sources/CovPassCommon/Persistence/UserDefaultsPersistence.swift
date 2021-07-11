@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Keychain
 
 public struct UserDefaultsPersistence: Persistence {
     public init() {}

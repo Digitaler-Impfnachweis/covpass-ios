@@ -23,13 +23,13 @@
 	<key>CFBundlePackageType</key>
 	<string>$(PRODUCT_BUNDLE_PACKAGE_TYPE)</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
+	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleVersion</key>
-	<string>272</string>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string>QR code scanning</string>
+	<string>Erlauben Sie den Zugriff, um QR Codes scannen zu können.</string>
 	<key>TLS_CERTIFICATE_NAME</key>
 	<string>$(TLS_CERTIFICATE_NAME)</string>
 	<key>TRUST_LIST_PUBLIC_KEY</key>

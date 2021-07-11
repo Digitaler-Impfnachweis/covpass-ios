@@ -50,10 +50,11 @@ public class CertificateCollectionViewCell: CardCollectionViewCell {
 
     // MARK: - Private Properties
 
-    private let cornerRadius: CGFloat = 14
+    private let cornerRadius: CGFloat = 26
     private let shadowRadius: CGFloat = 16
     private let shadowOpacity: CGFloat = 0.2
     private let shadowOffset: CGSize = .init(width: 0, height: -4)
+    private let titleLineHieght: CGFloat = 33
 
     // MARK: - Lifecycle
 
@@ -67,12 +68,11 @@ public class CertificateCollectionViewCell: CardCollectionViewCell {
         contentView.layer.shadowOpacity = Float(shadowOpacity)
         contentView.layer.shadowOffset = shadowOffset
 
-        containerView.layoutMargins = .init(top: .space_24, left: .space_24, bottom: .space_24, right: .space_24)
         containerView.tintColor = .brandAccent
         containerView.layer.cornerRadius = cornerRadius
         containerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onPressAction)))
 
-        contentStackView.setCustomSpacing(.space_20, after: titleStackView)
+        contentStackView.setCustomSpacing(.space_8, after: titleStackView)
     }
 
     override public func layoutSubviews() {
@@ -88,16 +88,16 @@ public class CertificateCollectionViewCell: CardCollectionViewCell {
         qrContainerView.icon = vm.titleIcon.withRenderingMode(.alwaysTemplate)
         qrContainerView.iconView?.tintColor = vm.backgroundColor
         qrContainerView.image = vm.qrCode
-        qrContainerView.layoutMargins.bottom = .space_20
+        qrContainerView.layoutMargins.bottom = .space_18
         qrContainerView.isHidden = vm.qrCode == nil
         qrContainerView.title = vm.title
         qrContainerView.subtitle = vm.subtitle
 
-        titleView.textableView.attributedText = vm.name.styledAs(.header_1).colored(vm.tintColor)
+        titleView.textableView.attributedText = vm.name.styledAs(.header_1).lineHeight(titleLineHieght).colored(vm.tintColor)
         titleView.backgroundColor = .clear
         favoriteButton.tintColor = vm.tintColor
         favoriteButton.setImage((vm.isFavorite ? UIImage.starFull : UIImage.starPartial).withRenderingMode(.alwaysTemplate), for: .normal)
-        contentStackView.setCustomSpacing(.space_12, after: titleView)
+        contentStackView.setCustomSpacing(.space_2, after: titleView)
 
         actionView.titleLabel.attributedText = vm.actionTitle.styledAs(.body).colored(vm.tintColor)
         actionView.actionImage.tintColor = vm.tintColor
