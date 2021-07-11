@@ -13,14 +13,14 @@ import UIKit
 public class InfoHeaderView: XibView {
     // MARK: - Outlets
 
-    @IBOutlet public var textLabel: UILabel!
+    @IBOutlet public var titleButton: UIButton!
     @IBOutlet public var actionButton: UIButton!
 
     // MARK: - Variables
 
     public var attributedTitleText: NSAttributedString? {
         didSet {
-            textLabel.attributedText = attributedTitleText
+            titleButton.setAttributedTitle(attributedTitleText, for: .normal)
         }
     }
 
@@ -30,6 +30,7 @@ public class InfoHeaderView: XibView {
         }
     }
 
+    public var titleAction: (() -> Void)?
     public var action: (() -> Void)?
 
     // MARK: - Lifecycle
@@ -40,6 +41,8 @@ public class InfoHeaderView: XibView {
     }
 
     // MARK: - IBAction
+
+    @IBAction public func titleButtonPressed(button _: UIButton) { titleAction?() }
 
     @IBAction public func actionButtonPressed(button _: UIButton) { action?() }
 }

@@ -150,6 +150,16 @@
 
 "app_information_title_contact" = "Kontakt";
 
+"app_information_message_contact_support" = "Kontakt bei technischen Fragen zur CovPassCheck-App";
+
+"app_information_message_contact_support_phone" = "Telefon: #0800–4747–002::tel:0800–4747–002#";
+
+"app_information_message_contact_support_mail" = "E-Mail: #support@covpasscheck-app.de::mailto:support@covpasscheck-app.de#";
+
+"app_information_message_contact_info" = "Kontakt bei sonstigen Fragen";
+
+"app_information_message_contact_info_mail" = "E-Mail: #info@covpass-app.de::mailto:info@covpass-app.de#";
+
 "app_information_title_faq" = "Häufige Fragen";
 
 "app_information_title_faq_linked" = "#Häufige Fragen::$0#";

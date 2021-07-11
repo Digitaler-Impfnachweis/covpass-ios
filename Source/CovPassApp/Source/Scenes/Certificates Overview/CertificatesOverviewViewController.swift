@@ -65,8 +65,9 @@ class CertificatesOverviewViewController: UIViewController {
     }
 
     private func setupHeaderView() {
-        headerView.attributedTitleText = "vaccination_start_screen_title".localized.styledAs(.header_2)
+        headerView.attributedTitleText = "certificate_action_button_check_validity".localized.styledAs(.header_3).colored(.brandBase)
         headerView.image = .help
+        headerView.titleAction = {}
         headerView.action = { [weak self] in
             self?.viewModel.showAppInformation()
         }

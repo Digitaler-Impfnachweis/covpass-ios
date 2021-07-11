@@ -23,9 +23,9 @@
 
 "next_onboarding_page_button_title" = "Weiter";
 
-"vaccination_first_onboarding_page_title" = "Erster Schritt: Übertragen Sie das COVID-Zertifikat auf Ihr Smartphone";
+"vaccination_first_onboarding_page_title" = "Erster Schritt: Übertragen Sie das digitale COVID-Zertifikat der EU auf Ihr Smartphone";
 
-"vaccination_first_onboarding_page_message" = "Scannen Sie mit der CovPass-App das digitale COVID-Zertifikat der EU für eine Corona-Impfung, ein negatives Corona-Testergebnis oder eine Genesung von der Corona-Infektion. Halten Sie dafür die Kamera Ihres Smartphones über den QR-Code. Das COVID-Zertifikat wird sofort auf Ihr Smartphone übertragen.";
+"vaccination_first_onboarding_page_message" = "Scannen Sie mit der CovPass-App das digitale COVID-Zertifikat der EU für eine Corona-Impfung, ein negatives Corona-Testergebnis oder eine Genesung von der Corona-Infektion. Halten Sie dafür die Kamera Ihres Smartphones über den QR-Code. Das digitale COVID-Zertifikat der EU wird sofort auf Ihr Smartphone übertragen.";
 
 "vaccination_second_onboarding_page_title" = "Zweiter Schritt: Rufen Sie den QR-Code in der CovPass-App auf";
 
@@ -37,13 +37,13 @@
 
 "vaccination_fourth_onboarding_page_title" = "Datenschutz und Datensicherheit";
 
-"vaccination_fourth_onboarding_page_first_list_item" = "Die Nutzung der CovPass-App ist freiwillig. Sie können Ihre digitalen COVID-Zertifikate auch in Papierform verwenden.";
+"vaccination_fourth_onboarding_page_first_list_item" = "Die Nutzung der CovPass-App ist freiwillig. Sie können Ihre digitalen COVID-Zertifikate der EU auch in Papierform verwenden.";
 
-"vaccination_fourth_onboarding_page_second_list_item" = "Zum Schutz vor Fälschungen oder Manipulationen werden die digitalen COVID-Zertifikate durch das RKI elektronisch signiert. Hierzu werden die notwendigen Daten einmalig verschlüsselt an das RKI übermittelt. Nach der Erstellung des digitalen COVID-Zertifikats werden Ihre Daten vom RKI sofort unwiderruflich gelöscht. Der QR-Code enthält in kodierter Form die auf dem digitalen COVID-Zertifikat enthaltenen Informationen und die elektronische Signatur des RKI.";
+"vaccination_fourth_onboarding_page_second_list_item" = "Zum Schutz vor Fälschungen oder Manipulationen werden die digitalen COVID-Zertifikate der EU durch das RKI elektronisch signiert. Hierzu werden die notwendigen Daten einmalig verschlüsselt an das RKI übermittelt. Nach der Erstellung des digitalen COVID-Zertifikats werden Ihre Daten vom RKI sofort unwiderruflich gelöscht. Der QR-Code enthält in kodierter Form die auf dem digitalen COVID-Zertifikat enthaltenen Informationen und die elektronische Signatur des RKI.";
 
-"vaccination_fourth_onboarding_page_third_list_item" = "Wenn Sie den QR-Code eines digitalen COVID-Zertifikats einer anderen Person zur Prüfung vorlegen, werden dem Prüfer der Name und das Geburtsdatum des Zertifikatsinhabers angezeigt. Bei der Prüfung ist gegebenenfalls ergänzend ein Ausweisdokument vorzulegen.";
+"vaccination_fourth_onboarding_page_third_list_item" = "Wenn Sie den QR-Code eines digitalen COVID-Zertifikats der EU einer anderen Person zur Prüfung vorlegen, werden dem Prüfer der Name und das Geburtsdatum des Zertifikatsinhabers angezeigt. Bei der Prüfung ist gegebenenfalls ergänzend ein Ausweisdokument vorzulegen.";
 
-"vaccination_fourth_onboarding_page_fourth_list_item" = "Die digitalen COVID-Zertifikate werden ausschließlich auf Ihrem Smartphone gespeichert. Sie haben jederzeit die Möglichkeit, die digitalen COVID-Zertifikate wieder zu entfernen.";
+"vaccination_fourth_onboarding_page_fourth_list_item" = "Die digitalen COVID-Zertifikate der EU werden ausschließlich auf Ihrem Smartphone gespeichert. Sie haben jederzeit die Möglichkeit, die digitalen COVID-Zertifikate der EU wieder zu entfernen.";
 
 "vaccination_fourth_onboarding_page_message" = "Ausführliche Hinweise zur Datenverarbeitung finden Sie in der Datenschutzerklärung:";
 
@@ -73,7 +73,7 @@
 
 "certificate_add_popup_note_title" = "Kein Sperrcode auf Ihrem Smartphone vorhanden";
 
-"certificate_add_popup_note_message" = "Die CovPass-App speichert sensible Daten auf Ihrem Smartphone. Um die Daten vor fremdem Zugriff zu schützen, empfehlen wir Ihnen, eine Code zum Entsperren Ihres Smartphones einzurichten.";
+"certificate_add_popup_note_message" = "Die CovPass-App speichert sensible Daten auf Ihrem Smartphone. Um die Daten vor fremdem Zugriff zu schützen, empfehlen wir Ihnen, eine Code zum Entsperren Ihres Smartphones einzurichten.";
 
 "certificate_add_popup_message" = "Scannen Sie den QR-Code von einem digitalen COVID-Zertifikat der EU. Der Nachweis wird direkt in die CovPass-App übertragen.";
 
@@ -103,6 +103,107 @@
 /********** start Screen: favorite immunization certificate **********/
 
 "certificate_favorite_button_hint" = "Als Favorit markieren";
+
+"certificate_action_button_check_validity" = "Gültigkeit prüfen";
+
+
+/********** Screen: check validity **********/
+
+"certificate_check_validity_title" = "Gültigkeit prüfen";
+
+"certificate_check_validity_message" = "Prüfen Sie vorab, ob Ihre Zertifikate in verschiedenen Ländern gültig sind. Hierfür werden die geltenden Einreiseregeln des gewählten Reiselands berücksichtigt.";
+
+"certificate_check_validity_selection_country" = "Land";
+
+"certificate_check_validity_selection_country_title" = "Reiseland wählen";
+
+"certificate_check_validity_selection_country_note" = "Sie finden Ihr Reiseland nicht? In einem mehrstufigen Prozess werden nach und nach mehr Länder verfügbar gemacht. \n\nMehr Informationen finden Sie in den #Häufigen Fragen::Häufigen Fragen# und unter #https://reopen.europa.eu/de::https://reopen.europa.eu/de#.";
+
+"certificate_check_validity_selection_country_action_button" = "Übernehmen";
+
+"certificate_check_validity_selection_date" = "Datum";
+
+"certificate_check_validity_selection_date_title" = "Datum wählen";
+
+"certificate_check_validity_selection_date_action_button" = "Weiter";
+
+"certificate_check_validity_selection_time_title" = "Zeit wählen";
+
+"certificate_check_validity_selection_time_action_button" = "OK";
+
+"certificate_check_validity_loading" = "Zertifikate werden geprüft";
+
+"certificate_check_validity_no_certificate_saved_title" = "Sie haben noch keine Zertifikate gespeichert";
+
+"certificate_check_validity_no_certificate_saved_message" = "Fügen Sie ein Zertifikat hinzu, um dessen Gültigkeit zu überprüfen.";
+
+"certificate_check_validity_vaccination" = "Impfzertifikat";
+
+"certificate_check_validity_test" = "Testzertifikat";
+
+"certificate_check_validity_recovery" = "Genesenenzertifikat";
+
+"certificate_check_validity_result_valid" = "Gültig";
+
+"certificate_check_validity_result_not_valid" = "Im Reiseland ungültig";
+
+"certificate_check_validity_result_not_testable" = "Nicht vollständig prüfbar";
+
+"certificate_check_validity_note" = "Beachten Sie, dass sich die Einreiseregeln ändern können. Prüfen Sie daher die Zertifikate mindestens 48 Stunden vorher. Es können in einzelnen Regionen oder bei Ihrer Rückkehr weitere Regeln oder Einschränkungen gelten. Zudem ist es möglich, dass weitere Dokumente für eine Einreise notwendig sind.\n\nMehr Informationen finden Sie in den #Häufigen Fragen::Häufigen Fragen# und unter #https://reopen.europa.eu/de::https://reopen.europa.eu/de#.";
+
+"certificate_check_validity_detail_view_vaccination_result_title" = "Digitales COVID-Impfzertifikat der EU";
+
+"certificate_check_validity_detail_view_vaccination_result_button" = "QR-Code anzeigen";
+
+"certificate_check_validity_detail_view_vaccination_result_note_de" = "Das Impfzertifikat gilt innerhalb der EU als gültiger Nachweis für Reisen. Die Mitgliedsländer haben unterschiedliche Einreisebedingungen. Mehr Informationen finden Sie in den #Häufigen Fragen::Häufigen Fragen#. Bitte informieren Sie sich vor Reiseantritt über die am Zielort geltenden Gesundheitsmaßnahmen und entsprechenden Beschränkungen.\n\nInformationen über die in den jeweiligen EU-Ländern geltenden Einreisebestimmungen finden Sie unter #https://reopen.europa.eu/de::https://reopen.europa.eu/de#.";
+
+"certificate_check_validity_detail_view_vaccination_result_note_en" = "The vaccination certificate is valid proof for travel within the EU. The member countries have different entry requirements. You can find more information in the #Frequently Asked Questions::Frequently Asked Questions#. Before travelling, please check the applicable public health measures and related restrictions applied at the point of destination.\n\nInformation on the current travel restrictions that apply to EU countries can be found via #https://reopen.europa.eu/de::https://reopen.europa.eu/de#.";
+
+"certificate_check_validity_detail_view_test_result_title" = "Digitales COVID-Testzertifikat der EU";
+
+"certificate_check_validity_detail_view_test_result_button" = "QR-Code anzeigen";
+
+"certificate_check_validity_detail_view_test_result_note_de" = "Das Testzertifikat gilt innerhalb der EU als gültiger Nachweis für Reisen. Die Mitgliedsländer haben unterschiedliche Einreisebedingungen. Mehr Informationen finden Sie in den #Häufigen Fragen::Häufigen Fragen#.  Bitte informieren Sie sich vor Reiseantritt über die am Zielort geltenden Gesundheitsmaßnahmen und entsprechenden Beschränkungen.\n\nInformationen über die in den jeweiligen EU-Ländern geltenden Einreisebestimmungen finden Sie unter #https://reopen.europa.eu/de::https://reopen.europa.eu/de#.";
+
+"certificate_check_validity_detail_view_test_result_note_en" = "The test certificate is valid proof for travel within the EU. The member countries have different entry requirements. You can find more information in the #Frequently Asked Questions::Frequently Asked Questions#. Before travelling, please check the applicable public health measures and related restrictions applied at the point of destination.\n\nInformation on the current travel restrictions that apply to EU countries can be found via #https://reopen.europa.eu/de::https://reopen.europa.eu/de#.";
+
+"certificate_check_validity_detail_view_recovery_result_title" = "Digitales COVID-Genesenenzertifikat der EU";
+
+"certificate_check_validity_detail_view_recovery_result_button" = "QR-Code anzeigen";
+
+"certificate_check_validity_detail_view_recovery_result_note_de" = "Das Genesenenzertifikat gilt innerhalb der EU als gültiger Nachweis für Reisen. Die Mitgliedsländer haben unterschiedliche Einreisebedingungen. Mehr Informationen finden Sie in den #Häufigen Fragen::Häufigen Fragen#. Bitte informieren Sie sich vor Reiseantritt über die am Zielort geltenden Gesundheitsmaßnahmen und entsprechenden Beschränkungen.\n\nInformationen über die in den jeweiligen EU-Ländern geltenden Einreisebestimmungen finden Sie unter #https://reopen.europa.eu/de::https://reopen.europa.eu/de#.";
+
+"certificate_check_validity_detail_view_recovery_result_note_en" = "The recovery certificate is valid proof for travel within the EU. The member countries have different entry requirements. You can find more information in the #Frequently Asked Questions::Frequently Asked Questions#. Before travelling, please check the applicable public health measures and related restrictions applied at the point of destination.\n\nInformation on the current travel restrictions that apply to EU countries can be found via #https://reopen.europa.eu/de::https://reopen.europa.eu/de#.";
+
+"certificate_check_validity_detail_view_result_valid_title" = "Dieses Zertifikat ist am Reisedatum gültig";
+
+"certificate_check_validity_detail_view_result_valid_message" = "Für %@, am %@";
+
+"certificate_check_validity_detail_view_result_not_testable_title" = "Dieses Zertifikat ist nicht vollständig prüfbar";
+
+"certificate_check_validity_detail_view_result_not_testable_first_message" = "Für %@, am %@";
+
+"certificate_check_validity_detail_view_result_not_testable_second_message" = "Leider ist eine automatische Prüfung nicht möglich. Überprüfen Sie die unten markierten Werte bitte selbst.";
+
+"certificate_check_validity_detail_view_result_not_testable_note_title" = "Überprüfen Sie diesen Wert";
+
+"certificate_check_validity_detail_view_result_not_testable_note_message" = "Regel des Ziellands: Ein Antigentest ist maximal 48 h gültig.";
+
+"certificate_check_validity_detail_view_result_not_valid_title" = "Dieses Zertifikat ist am Reisedatum nicht gültig";
+
+"certificate_check_validity_detail_view_result_not_valid_message" = "Für %@, am %@";
+
+"certificate_check_validity_detail_view_result_not_valid_note_title" = "Dieser Wert erfüllt nicht Regel „TR01\"";
+
+"certificate_check_validity_detail_view_result_not_valid_note_message" = "Regel des Ziellands: Genesenenzertifikate sind bis zu 180 Tage gültig.";
+
+"error_check_validity_no_internet_title" = "Keine Internetverbindung";
+
+"error_check_validity_no_internet_message" = "Um die Gültigkeit des Zertifikats prüfen zu können, stellen Sie bitte eine Verbindung mit dem Internet her.";
+
+"error_check_validity_no_internet_button_try_again" = "Nochmal versuchen";
+
+"error_check_validity_no_internet_button_cancel" = "Abbrechen";
 
 
 /********** start Screen: partial immunization certificate **********/
@@ -236,6 +337,8 @@
 
 "vaccination_certificate_detail_view_vaccination_headline" = "Digitales COVID-Impfzertifikat der EU";
 
+"vaccination_certificate_detail_view_vaccination_note" = "Es handelt sich hier um einen Impfstoff, bei dem nur eine Impfdosis erforderlich ist, oder um eine Impfung für Genesene, die nur eine Impfdosis benötigt.";
+
 "vaccination_certificate_detail_view_data_name" = "Name, Vorname / Name, first name";
 
 "vaccination_certificate_detail_view_data_date_of_birth" = "Geburtsdatum / Date of birth (YYYY-MM-DD)";
@@ -258,11 +361,9 @@
 
 "vaccination_certificate_detail_view_data_vaccine_identifier" = "Zertifikatkennung / Unique certificate identifier";
 
-"vaccination_certificate_detail_view_data_vaccine_note_de" = "Diese Bescheinigung ist kein Reisedokument. Die wissenschaftlichen Erkenntnisse zu COVID-19 in den Bereichen Impfung, Testung und Genesung entwickeln sich fortlaufend weiter, auch im Hinblick auf neue besorgniserregende Virusvarianten. Bitte informieren Sie sich vor Reiseantritt über die am Zielort geltenden Gesundheitsmaßnahmen und entsprechenden Beschränkungen. Informationen über die in den jeweiligen EU-Ländern geltenden Einreisebestimmungen finden Sie unter #https://reopen.europa.eu/de::https://reopen.europa.eu/de#.";
+"vaccination_certificate_detail_view_data_vaccine_note_de" = "Diese Bescheinigung ist kein Reisedokument. Die wissenschaftlichen Erkenntnisse zu COVID-19 in den Bereichen Impfung, Testung und Genesung entwickeln sich fortlaufend weiter, auch im Hinblick auf neue besorgniserregende Virusvarianten. Bitte informieren Sie sich vor Reiseantritt über die am Zielort geltenden Gesundheitsmaßnahmen und entsprechenden Beschränkungen.\n\nInformationen über die in den jeweiligen EU-Ländern geltenden Einreisebestimmungen finden Sie unter #https://reopen.europa.eu/de::https://reopen.europa.eu/de#.";
 
-"vaccination_certificate_detail_view_data_vaccine_note_en" = "This certificate is not a travel document. The scientific evidence on COVID-19 vaccination, testing and recovery continues to evolve, also in view of new variants of concern of the virus. Before travelling, please check the applicable public health measures and related restrictions applied at the point of destination. Information on the current travel restrictions that apply to EU countries can be found via #https://reopen.europa.eu/de::https://reopen.europa.eu/de#.";
-
-"vaccination_certificate_detail_view_data_vaccine_recovery" = "Es handelt sich hier um einen Impfstoff, bei dem nur eine Impfdosis erforderlich ist, oder um eine Impfung für Genesene, die nur eine Impfdosis benötigt.";
+"vaccination_certificate_detail_view_data_vaccine_note_en" = "This certificate is not a travel document. The scientific evidence on COVID-19 vaccination, testing and recovery continues to evolve, also in view of new variants of concern of the virus. Before travelling, please check the applicable public health measures and related restrictions applied at the point of destination.\n\nInformation on the current travel restrictions that apply to EU countries can be found via #https://reopen.europa.eu/de::https://reopen.europa.eu/de#.";
 
 "vaccination_certificate_detail_view_qrcode_action_button_title" = "QR-Code anzeigen";
 
@@ -300,9 +401,9 @@
 
 "test_certificate_detail_view_data_test_identifier" = "Zertifikatkennung / Unique certificate identifier";
 
-"test_certificate_detail_view_data_test_note_de" = "Diese Bescheinigung ist kein Reisedokument. Die wissenschaftlichen Erkenntnisse zu COVID-19 in den Bereichen Impfung, Testung und Genesung entwickeln sich fortlaufend weiter, auch im Hinblick auf neue besorgniserregende Virusvarianten. Bitte informieren Sie sich vor Reiseantritt über die am Zielort geltenden Gesundheitsmaßnahmen und entsprechenden Beschränkungen. Informationen über die in den jeweiligen EU-Ländern geltenden Einreisebestimmungen finden Sie unter #https://reopen.europa.eu/de::https://reopen.europa.eu/de#.";
+"test_certificate_detail_view_data_test_note_de" = "Diese Bescheinigung ist kein Reisedokument. Die wissenschaftlichen Erkenntnisse zu COVID-19 in den Bereichen Impfung, Testung und Genesung entwickeln sich fortlaufend weiter, auch im Hinblick auf neue besorgniserregende Virusvarianten. Bitte informieren Sie sich vor Reiseantritt über die am Zielort geltenden Gesundheitsmaßnahmen und entsprechenden Beschränkungen.\n\nInformationen über die in den jeweiligen EU-Ländern geltenden Einreisebestimmungen finden Sie unter #https://reopen.europa.eu/de::https://reopen.europa.eu/de#.";
 
-"test_certificate_detail_view_data_test_note_en" = "This certificate is not a travel document. The scientific evidence on COVID-19 vaccination, testing and recovery continues to evolve, also in view of new variants of concern of the virus. Before travelling, please check the applicable public health measures and related restrictions applied at the point of destination. Information on the current travel restrictions that apply to EU countries can be found via #https://reopen.europa.eu/de::https://reopen.europa.eu/de#.";
+"test_certificate_detail_view_data_test_note_en" = "This certificate is not a travel document. The scientific evidence on COVID-19 vaccination, testing and recovery continues to evolve, also in view of new variants of concern of the virus. Before travelling, please check the applicable public health measures and related restrictions applied at the point of destination.\n\nInformation on the current travel restrictions that apply to EU countries can be found via #https://reopen.europa.eu/de::https://reopen.europa.eu/de#.";
 
 "test_certificate_detail_view_qrcode_action_button_title" = "QR-Code anzeigen";
 
@@ -334,9 +435,9 @@
 
 "recovery_certificate_detail_view_data_identifier" = "Zertifikatkennung / Unique certificate identifier";
 
-"recovery_certificate_detail_view_data_test_note_de" = "Diese Bescheinigung ist kein Reisedokument. Die wissenschaftlichen Erkenntnisse zu COVID-19 in den Bereichen Impfung, Testung und Genesung entwickeln sich fortlaufend weiter, auch im Hinblick auf neue besorgniserregende Virusvarianten. Bitte informieren Sie sich vor Reiseantritt über die am Zielort geltenden Gesundheitsmaßnahmen und entsprechenden Beschränkungen. Informationen über die in den jeweiligen EU-Ländern geltenden Einreisebestimmungen finden Sie unter #https://reopen.europa.eu/de::https://reopen.europa.eu/de#.";
+"recovery_certificate_detail_view_data_test_note_de" = "Diese Bescheinigung ist kein Reisedokument. Die wissenschaftlichen Erkenntnisse zu COVID-19 in den Bereichen Impfung, Testung und Genesung entwickeln sich fortlaufend weiter, auch im Hinblick auf neue besorgniserregende Virusvarianten. Bitte informieren Sie sich vor Reiseantritt über die am Zielort geltenden Gesundheitsmaßnahmen und entsprechenden Beschränkungen.\n\nInformationen über die in den jeweiligen EU-Ländern geltenden Einreisebestimmungen finden Sie unter #https://reopen.europa.eu/de::https://reopen.europa.eu/de#.";
 
-"recovery_certificate_detail_view_data_test_note_en" = "This certificate is not a travel document. The scientific evidence on COVID-19 vaccination, testing and recovery continues to evolve, also in view of new variants of concern of the virus. Before travelling, please check the applicable public health measures and related restrictions applied at the point of destination. Information on the current travel restrictions that apply to EU countries can be found via #https://reopen.europa.eu/de::https://reopen.europa.eu/de#.";
+"recovery_certificate_detail_view_data_test_note_en" = "This certificate is not a travel document. The scientific evidence on COVID-19 vaccination, testing and recovery continues to evolve, also in view of new variants of concern of the virus. Before travelling, please check the applicable public health measures and related restrictions applied at the point of destination.\n\nInformation on the current travel restrictions that apply to EU countries can be found via #https://reopen.europa.eu/de::https://reopen.europa.eu/de#.";
 
 "recovery_certificate_detail_view_qrcode_action_button_title" = "QR-Code anzeigen";
 
@@ -413,6 +514,16 @@
 "app_information_message" = "Hier finden Sie alle rechtlichen Informationen und Antworten auf die häufigsten Fragen rund um die CovPass-App.";
 
 "app_information_title_contact" = "Kontakt";
+
+"app_information_message_contact_support" = "Kontakt bei technischen Fragen zur CovPass-App";
+
+"app_information_message_contact_support_phone" = "Telefon: #0800–4747–001::tel:0800–4747–001#";
+
+"app_information_message_contact_support_mail" = "E-Mail: #support@covpass-app.de::mailto:support@covpass-app.de#";
+
+"app_information_message_contact_info" = "Kontakt bei sonstigen Fragen";
+
+"app_information_message_contact_info_mail" = "E-Mail: #info@covpass-app.de::mailto:info@covpass-app.de#";
 
 "app_information_title_faq" = "Häufige Fragen";
 
