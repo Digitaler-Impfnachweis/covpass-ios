@@ -43,21 +43,21 @@ API documentation TBD
 
 ## Release History
 
-* 1.4.0
-    * Add static German rules for certificates
-    * Adjust date of birth to support custom format
-    * Bugfixes
-* 1.3.0
-    * Add recovery and test certificates
-    * Add new detail view to list all different types of certificates
-    * Check for extendedKeyUsage Oids
-    * Bugfixes and smaller adjustments
-* 1.1.4
-    * Remove schema version check to support more certificates from other countries
-* 1.1.3
-    * Update initial dgc.json list
-    * Update date parser to allow different formats
-* 1.1.2
-    * UI Adjustments
-* 1.1.1
-    * Initial Project
+- 1.4.0
+  - Add static German rules for certificates
+  - Adjust date of birth to support custom format
+  - Bugfixes
+- 1.3.0
+  - Add recovery and test certificates
+  - Add new detail view to list all different types of certificates
+  - Check for extendedKeyUsage Oids
+  - Bugfixes and smaller adjustments
+- 1.1.4
+  - Remove schema version check to support more certificates from other countries
+- 1.1.3
+  - Update initial dgc.json list
+  - Update date parser to allow different formats
+- 1.1.2
+  - UI Adjustments
+- 1.1.1
+  - Initial Project
