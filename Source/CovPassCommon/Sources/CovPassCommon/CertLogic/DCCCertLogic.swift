@@ -59,6 +59,10 @@ public struct DCCCertLogic {
         return list
     }
 
+    public func lastUpdatedDCCRules() -> Date? {
+        try? userDefaults.fetch(UserDefaults.keyLastUpdatedDCCRules) as? Date
+    }
+
     public init(initialDCCRulesURL: URL, service: DCCServiceProtocol, keychain: Persistence, userDefaults: Persistence) {
         self.initialDCCRulesURL = initialDCCRulesURL
         self.service = service
