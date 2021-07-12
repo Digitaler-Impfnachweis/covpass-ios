@@ -17,6 +17,7 @@ class ValidatorOverviewViewModel {
 
     private let repository: VaccinationRepositoryProtocol
     private let router: ValidatorOverviewRouterProtocol
+    private let certLogic: DCCCertLogic
 
     var delegate: ViewModelDelegate?
 
@@ -47,9 +48,10 @@ class ValidatorOverviewViewModel {
 
     // MARK: - Lifecycle
 
-    init(router: ValidatorOverviewRouterProtocol, repository: VaccinationRepositoryProtocol) {
+    init(router: ValidatorOverviewRouterProtocol, repository: VaccinationRepositoryProtocol, certLogic: DCCCertLogic) {
         self.router = router
         self.repository = repository
+        self.certLogic = certLogic
     }
 
     // MARK: - Methods
@@ -60,6 +62,13 @@ class ValidatorOverviewViewModel {
             .done {
                 self.delegate?.viewModelDidUpdate()
             }
+            .catch { _ in }
+    }
+
+    func updateDCCRules() {
+        certLogic
+            .updateRulesIfNeeded()
+            .done {}
             .catch { _ in }
     }
 

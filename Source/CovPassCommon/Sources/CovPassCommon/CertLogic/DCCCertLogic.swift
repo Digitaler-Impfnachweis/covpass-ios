@@ -33,6 +33,7 @@ public struct DCCCertLogic {
     private let initialDCCRulesURL: URL
     private let service: DCCServiceProtocol
     private let keychain: Persistence
+    private let userDefaults: Persistence
 
     var dccRules: [Rule]? {
         // Try to load rules from keychain
@@ -58,10 +59,11 @@ public struct DCCCertLogic {
         return list
     }
 
-    public init(initialDCCRulesURL: URL, service: DCCServiceProtocol, keychain: Persistence) {
+    public init(initialDCCRulesURL: URL, service: DCCServiceProtocol, keychain: Persistence, userDefaults: Persistence) {
         self.initialDCCRulesURL = initialDCCRulesURL
         self.service = service
         self.keychain = keychain
+        self.userDefaults = userDefaults
     }
 
     public func validate(countryCode: String, validationClock: Date, certificate: CBORWebToken) throws -> [ValidationResult] {
@@ -100,6 +102,25 @@ public struct DCCCertLogic {
         return engine.validate(filter: filter, external: external, payload: payload)
     }
 
+    public func updateRulesIfNeeded() -> Promise<Void> {
+        return firstly {
+            Promise { seal in
+                if let lastUpdated = try userDefaults.fetch(UserDefaults.keyLastUpdatedDCCRules) as? Date,
+                   let date = Calendar.current.date(byAdding: .day, value: 1, to: lastUpdated),
+                   Date() < date
+                {
+                    // Only update once a day
+                    seal.reject(PromiseCancelledError())
+                    return
+                }
+                seal.fulfill_()
+            }
+        }
+        .then {
+            updateRules()
+        }
+    }
+
     public func updateRules() -> Promise<Void> {
         return firstly {
             service.loadDCCRules()
@@ -113,6 +134,7 @@ public struct DCCCertLogic {
         .done(on: .global()) { rules in
             let data = try JSONEncoder().encode(rules)
             try keychain.store(KeychainPersistence.dccRulesKey, value: data)
+            try userDefaults.store(UserDefaults.keyLastUpdatedDCCRules, value: Date())
         }
     }
 

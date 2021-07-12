@@ -17,6 +17,7 @@ protocol CertificatesOverviewViewModelProtocol {
 
     func refresh()
     func updateTrustList()
+    func updateDCCRules()
     func scanCertificate(withIntroduction: Bool)
     func showAppInformation()
     func showRuleCheck()

@@ -27,6 +27,7 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
     weak var delegate: CertificatesOverviewViewModelDelegate?
     private var router: CertificatesOverviewRouterProtocol
     private let repository: VaccinationRepositoryProtocol
+    private let certLogic: DCCCertLogic
     private var certificateList = CertificateList(certificates: [])
     private var lastKnownFavoriteCertificateId: String?
 
@@ -61,10 +62,12 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
 
     init(
         router: CertificatesOverviewRouterProtocol,
-        repository: VaccinationRepositoryProtocol
+        repository: VaccinationRepositoryProtocol,
+        certLogic: DCCCertLogic
     ) {
         self.router = router
         self.repository = repository
+        self.certLogic = certLogic
     }
 
     // MARK: - Methods
@@ -85,6 +88,13 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
             .done {
                 self.delegate?.viewModelDidUpdate()
             }
+            .catch { _ in }
+    }
+
+    func updateDCCRules() {
+        certLogic
+            .updateRulesIfNeeded()
+            .done {}
             .catch { _ in }
     }
 

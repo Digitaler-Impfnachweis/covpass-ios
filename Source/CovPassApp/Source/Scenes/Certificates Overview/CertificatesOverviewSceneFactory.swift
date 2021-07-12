@@ -25,7 +25,8 @@ struct CertificatesOverviewSceneFactory: SceneFactory {
     func make() -> UIViewController {
         let viewModel = CertificatesOverviewViewModel(
             router: router,
-            repository: VaccinationRepository.create()
+            repository: VaccinationRepository.create(),
+            certLogic: DCCCertLogic.create()
         )
         let viewController = CertificatesOverviewViewController(viewModel: viewModel)
         let navigationController = UINavigationController(rootViewController: viewController)

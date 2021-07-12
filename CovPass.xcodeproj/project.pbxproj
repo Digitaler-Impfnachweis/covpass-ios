@@ -92,6 +92,8 @@
 		21FBCA79264F016E00CAEF44 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21FBCA78264F016E00CAEF44 /* LaunchScreen.storyboard */; };
 		38234167268A28BB00722A46 /* contact-covpass.html in Resources */ = {isa = PBXBuildFile; fileRef = 38234166268A28BB00722A46 /* contact-covpass.html */; };
 		3823416A268A2A3900722A46 /* contact-covpasscheck.html in Resources */ = {isa = PBXBuildFile; fileRef = 38234168268A28C500722A46 /* contact-covpasscheck.html */; };
+		3829A309269CFEA800B8346C /* DCCCertLogicExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3829A308269CFEA800B8346C /* DCCCertLogicExtension.swift */; };
+		3829A30C269CFF7F00B8346C /* DCCCertLogicExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3829A30A269CFF7C00B8346C /* DCCCertLogicExtension.swift */; };
 		3882AEAB266FD609000354CD /* VaccinationCertificateItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3882AEAA266FD609000354CD /* VaccinationCertificateItemViewModel.swift */; };
 		3882AEAE266FE85C000354CD /* CertificateItemDetailSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3882AEAD266FE85C000354CD /* CertificateItemDetailSceneFactory.swift */; };
 		3882AEB0266FE9EE000354CD /* CertificateItemDetailRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3882AEAF266FE9EE000354CD /* CertificateItemDetailRouter.swift */; };
@@ -240,6 +242,8 @@
 		381A13F42647DB7B0037B7F0 /* release-rki.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "release-rki.xcconfig"; sourceTree = "<group>"; };
 		38234166268A28BB00722A46 /* contact-covpass.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "contact-covpass.html"; sourceTree = "<group>"; };
 		38234168268A28C500722A46 /* contact-covpasscheck.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "contact-covpasscheck.html"; sourceTree = "<group>"; };
+		3829A308269CFEA800B8346C /* DCCCertLogicExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DCCCertLogicExtension.swift; sourceTree = "<group>"; };
+		3829A30A269CFF7C00B8346C /* DCCCertLogicExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DCCCertLogicExtension.swift; sourceTree = "<group>"; };
 		3882AEAA266FD609000354CD /* VaccinationCertificateItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaccinationCertificateItemViewModel.swift; sourceTree = "<group>"; };
 		3882AEAD266FE85C000354CD /* CertificateItemDetailSceneFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateItemDetailSceneFactory.swift; sourceTree = "<group>"; };
 		3882AEAF266FE9EE000354CD /* CertificateItemDetailRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateItemDetailRouter.swift; sourceTree = "<group>"; };
@@ -496,6 +500,7 @@
 				21A77A51265AFDE6002FEEF1 /* DialogRouterProtocol+ScanError.swift */,
 				21A77A53265B0033002FEEF1 /* DialogRouterProtocol+DidDeleteCertificate.swift */,
 				38E94DE8266121D60015553C /* VaccinationRepositoryExtension.swift */,
+				3829A308269CFEA800B8346C /* DCCCertLogicExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -764,6 +769,7 @@
 				21FBCA5F264F011900CAEF44 /* ApiServiceFactory.swift */,
 				21FBCA60264F011900CAEF44 /* StringLocalization.swift */,
 				38E94DEA266122E30015553C /* VaccinationRepositoryExtension.swift */,
+				3829A30A269CFF7C00B8346C /* DCCCertLogicExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1181,6 +1187,7 @@
 				3882AEAB266FD609000354CD /* VaccinationCertificateItemViewModel.swift in Sources */,
 				21A77A54265B0033002FEEF1 /* DialogRouterProtocol+DidDeleteCertificate.swift in Sources */,
 				216D2003264EF7B500370F16 /* ApiServiceFactory.swift in Sources */,
+				3829A309269CFEA800B8346C /* DCCCertLogicExtension.swift in Sources */,
 				216D1FCE264EF75D00370F16 /* CertificatesOverviewViewModelProtocol.swift in Sources */,
 				3882AEB7266FEBA3000354CD /* CertificateItemDetailViewModelProtocol.swift in Sources */,
 				216D1FA7264EF74100370F16 /* WelcomeViewModel.swift in Sources */,
@@ -1253,6 +1260,7 @@
 				38E91BED266D7AF00044BD56 /* ValidationResultFactory.swift in Sources */,
 				2181C162264F035500DE7412 /* ValidatorOverviewRouter.swift in Sources */,
 				2181C16D264F035D00DE7412 /* ValidatorOverviewRouterProtocol.swift in Sources */,
+				3829A30C269CFF7F00B8346C /* DCCCertLogicExtension.swift in Sources */,
 				2181C182264F039500DE7412 /* AppInformationSceneFactory.swift in Sources */,
 				2181C1B8264F046400DE7412 /* WelcomeViewModel.swift in Sources */,
 				2181C1A7264F03BC00DE7412 /* ValidationOnboardingPageViewModel.swift in Sources */,
