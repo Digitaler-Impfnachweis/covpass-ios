@@ -22,3 +22,9 @@ TLS_CERTIFICATE_NAME = rsa-certify.prod.ubirch.com-V3_1982645.der
 
 TRUST_LIST_PUBLIC_KEY = pubkey.pem
 TRUST_LIST_STATIC_DATA = dsc.json
+
+
+// DCC RULES
+
+DCC_RULES_URL = https:/$()/distribution-dfe4f5c711db.dcc-rules.de
+DCC_RULES_FILE = dcc-rules.json

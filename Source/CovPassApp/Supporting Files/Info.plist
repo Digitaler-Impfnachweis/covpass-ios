@@ -26,6 +26,10 @@
 	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<key>DCC_RULES_FILE</key>
+	<string>$(DCC_RULES_FILE)</string>
+	<key>DCC_RULES_URL</key>
+	<string>$(DCC_RULES_URL)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>

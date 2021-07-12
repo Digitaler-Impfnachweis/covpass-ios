@@ -16,3 +16,4 @@ echo "Copy configuration for ${CONFIG}"
 
 cp -r "Certificates/${CONFIG}/TLS/" "Source/CovPassCommon/Sources/CovPassCommon/Resources/TLS/"
 cp -r "Certificates/${CONFIG}/CA/" "Source/CovPassCommon/Sources/CovPassCommon/Resources/CA/"
+cp -r "Certificates/${CONFIG}/DCC/" "Source/CovPassCommon/Sources/CovPassCommon/Resources/DCC/"
