@@ -11,6 +11,24 @@
         }
       },
       {
+        "package": "CertLogic",
+        "repositoryURL": "https://github.com/timokoenig/dgc-certlogic-ios",
+        "state": {
+          "branch": "add-hash-encoding",
+          "revision": "c816cce7c0e0d993259ca8d7850a724b30059d15",
+          "version": null
+        }
+      },
+      {
+        "package": "jsonlogic",
+        "repositoryURL": "https://github.com/eu-digital-green-certificates/json-logic-swift.git",
+        "state": {
+          "branch": null,
+          "revision": "6c04fa0ccfcd8424986aaf2fc61ea458b3979cf1",
+          "version": "1.1.6"
+        }
+      },
+      {
         "package": "PromiseKit",
         "repositoryURL": "https://github.com/mxcl/PromiseKit",
         "state": {
@@ -26,6 +44,15 @@
           "branch": null,
           "revision": "668c26fc3373d5f1bccbaad7665ca6048797e324",
           "version": "0.4.3"
+        }
+      },
+      {
+        "package": "SwiftyJSON",
+        "repositoryURL": "https://github.com/SwiftyJSON/SwiftyJSON.git",
+        "state": {
+          "branch": null,
+          "revision": "b3dcd7dbd0d488e1a7077cb33b00f2083e382f07",
+          "version": "5.0.1"
         }
       }
     ]

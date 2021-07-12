@@ -1,6 +1,7 @@
 ## Static Config Files
 Source/CovPassCommon/Sources/CovPassCommon/Resources/TLS
 Source/CovPassCommon/Sources/CovPassCommon/Resources/CA
+Source/CovPassCommon/Sources/CovPassCommon/Resources/DCC
 
 ## macOS
 .DS_Store
