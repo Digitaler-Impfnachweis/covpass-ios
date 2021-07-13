@@ -24,13 +24,17 @@ class ValidatorOverviewViewModel {
     var title: String { "validation_start_screen_title".localized }
 
     var offlineAvailable: Bool {
-        guard let lastUpdated = repository.getLastUpdatedTrustList(),
-              let date = Calendar.current.date(byAdding: .day, value: 1, to: lastUpdated),
-              Date() < date
-        else {
-            return false
+        if let lastUpdated = repository.getLastUpdatedTrustList(),
+           let date = Calendar.current.date(byAdding: .day, value: 1, to: lastUpdated),
+           Date() < date {
+            return true
         }
-        return true
+        if let lastUpdated = certLogic.lastUpdatedDCCRules(),
+           let date = Calendar.current.date(byAdding: .day, value: 1, to: lastUpdated),
+           Date() < date {
+            return true
+        }
+        return false
     }
 
     var offlineIcon: UIImage {
