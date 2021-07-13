@@ -17,6 +17,7 @@ public protocol CertificateCardViewModelBase {
     var subtitle: String { get }
     var titleIcon: UIImage { get }
     var isFavorite: Bool { get }
+    var showFavorite: Bool { get set }
     var qrCode: UIImage? { get }
     var name: String { get }
     var actionTitle: String { get }
@@ -97,6 +98,7 @@ public class CertificateCollectionViewCell: CardCollectionViewCell {
         titleView.backgroundColor = .clear
         favoriteButton.tintColor = vm.tintColor
         favoriteButton.setImage((vm.isFavorite ? UIImage.starFull : UIImage.starPartial).withRenderingMode(.alwaysTemplate), for: .normal)
+        favoriteButton.isHidden = !vm.showFavorite
         contentStackView.setCustomSpacing(.space_2, after: titleView)
 
         actionView.titleLabel.attributedText = vm.actionTitle.styledAs(.body).colored(vm.tintColor)

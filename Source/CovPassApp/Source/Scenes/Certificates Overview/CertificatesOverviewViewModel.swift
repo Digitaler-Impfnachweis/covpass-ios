@@ -173,6 +173,7 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
             return CertificateCardViewModel(
                 token: cert,
                 isFavorite: certificatePair.isFavorite,
+                showFavorite: certificates.count > 1,
                 onAction: showCertificate,
                 onFavorite: toggleFavoriteStateForCertificateWithId,
                 repository: repository

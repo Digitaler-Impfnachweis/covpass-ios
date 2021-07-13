@@ -24,9 +24,10 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
 
     // MARK: - Lifecycle
 
-    init(token: ExtendedCBORWebToken, isFavorite: Bool, onAction: @escaping (ExtendedCBORWebToken) -> Void, onFavorite: @escaping (String) -> Void, repository: VaccinationRepositoryProtocol) {
+    init(token: ExtendedCBORWebToken, isFavorite: Bool, showFavorite: Bool, onAction: @escaping (ExtendedCBORWebToken) -> Void, onFavorite: @escaping (String) -> Void, repository: VaccinationRepositoryProtocol) {
         self.token = token
         certificateIsFavorite = isFavorite
+        self.showFavorite = showFavorite
         self.onAction = onAction
         self.onFavorite = onFavorite
         self.repository = repository
@@ -95,6 +96,9 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
     var isFavorite: Bool {
         certificateIsFavorite
     }
+
+    // Hide favorite button if this certificate is the only card that is shown
+    var showFavorite: Bool = true
 
     var qrCode: UIImage? {
         return token.vaccinationQRCodeData.generateQRCode(size: UIScreen.main.bounds.size)
