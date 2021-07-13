@@ -41,9 +41,14 @@ class ValidatorOverviewViewModel {
         offlineAvailable ? "validation_start_screen_offline_modus_note_latest_version".localized : "validation_start_screen_offline_modus_note_old_version".localized
     }
 
-    var offlineMessage: String {
+    var offlineMessageCertificates: String {
         let date = repository.getLastUpdatedTrustList() ?? Date(timeIntervalSince1970: 0)
-        return String(format: "%@ %@", "validation_start_screen_offline_modus_note_update".localized, DateUtils.displayDateTimeFormatter.string(from: date))
+        return String(format: "%@ %@", "validation_start_screen_offline_modus_certificates".localized, DateUtils.displayDateTimeFormatter.string(from: date))
+    }
+
+    var offlineMessageRules: String {
+        let date = certLogic.lastUpdatedDCCRules() ?? Date(timeIntervalSince1970: 0)
+        return String(format: "%@ %@", "validation_start_screen_offline_modus_rules".localized, DateUtils.displayDateTimeFormatter.string(from: date))
     }
 
     // MARK: - Lifecycle
@@ -59,8 +64,8 @@ class ValidatorOverviewViewModel {
     func updateTrustList() {
         repository
             .updateTrustList()
-            .done {
-                self.delegate?.viewModelDidUpdate()
+            .done { [weak self] in
+                self?.delegate?.viewModelDidUpdate()
             }
             .catch { _ in }
     }
@@ -68,7 +73,9 @@ class ValidatorOverviewViewModel {
     func updateDCCRules() {
         certLogic
             .updateRulesIfNeeded()
-            .done {}
+            .done { [weak self] in
+                self?.delegate?.viewModelDidUpdate()
+            }
             .catch { _ in }
     }
 

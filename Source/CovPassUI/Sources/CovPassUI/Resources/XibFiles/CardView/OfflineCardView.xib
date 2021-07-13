@@ -10,20 +10,22 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OfflineCardView" customModule="CovPassUI">
             <connections>
-                <outlet property="dateLabel" destination="VNN-es-BAs" id="KYv-y3-nmr"/>
+                <outlet property="certificatesDateLabel" destination="eox-Qy-6a6" id="8HL-B9-UDH"/>
+                <outlet property="dateTitle" destination="VNN-es-BAs" id="dwF-2v-PlS"/>
                 <outlet property="infoImageView" destination="06J-Ay-zYR" id="X8r-K8-50c"/>
                 <outlet property="infoLabel" destination="WKN-lr-q90" id="IK0-Uy-maU"/>
+                <outlet property="rulesDateLabel" destination="SiT-62-4rV" id="7l0-2F-Y90"/>
                 <outlet property="textLable" destination="EKc-Hh-BeX" id="YWo-Gc-YYU"/>
                 <outlet property="titleLabel" destination="VW2-PA-GY7" id="PSZ-ii-jQf"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="414" height="213"/>
+            <rect key="frame" x="0.0" y="0.0" width="414" height="251"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Flh-qW-5MS">
-                    <rect key="frame" x="0.0" y="0.0" width="414" height="213"/>
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="251"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Offline-Modus" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VW2-PA-GY7">
                             <rect key="frame" x="24" y="24" width="366" height="23"/>
@@ -77,22 +79,54 @@
                             </attributedString>
                             <nil key="highlightedColor"/>
                         </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" ambiguous="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eox-Qy-6a6" userLabel="Letztes Update Certificates">
+                            <rect key="frame" x="24" y="188" width="366" height="17"/>
+                            <attributedString key="attributedText">
+                                <fragment content="Letztes Update">
+                                    <attributes>
+                                        <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <font key="NSFont" metaFont="system" size="14"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                    </attributes>
+                                </fragment>
+                            </attributedString>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" ambiguous="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SiT-62-4rV" userLabel="Letztes Update Rules">
+                            <rect key="frame" x="24" y="210" width="366" height="17"/>
+                            <attributedString key="attributedText">
+                                <fragment content="Letztes Update">
+                                    <attributes>
+                                        <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <font key="NSFont" metaFont="system" size="14"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                    </attributes>
+                                </fragment>
+                            </attributedString>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                     <constraints>
+                        <constraint firstAttribute="trailing" secondItem="SiT-62-4rV" secondAttribute="trailing" constant="24" id="39J-SL-KEB"/>
                         <constraint firstItem="EKc-Hh-BeX" firstAttribute="leading" secondItem="VW2-PA-GY7" secondAttribute="leading" id="AkO-UG-BLg"/>
                         <constraint firstAttribute="trailing" secondItem="VW2-PA-GY7" secondAttribute="trailing" constant="24" id="Egh-dT-rvh"/>
+                        <constraint firstItem="eox-Qy-6a6" firstAttribute="leading" secondItem="Flh-qW-5MS" secondAttribute="leading" constant="24" id="FXO-yk-hbY"/>
                         <constraint firstItem="VNN-es-BAs" firstAttribute="leading" secondItem="Flh-qW-5MS" secondAttribute="leading" constant="24" id="Fhn-Op-GtR"/>
+                        <constraint firstAttribute="trailing" secondItem="eox-Qy-6a6" secondAttribute="trailing" constant="24" id="Glf-hw-7Xs"/>
                         <constraint firstItem="06J-Ay-zYR" firstAttribute="leading" secondItem="Flh-qW-5MS" secondAttribute="leading" constant="24" id="JsT-2T-GPy"/>
                         <constraint firstItem="EKc-Hh-BeX" firstAttribute="trailing" secondItem="VW2-PA-GY7" secondAttribute="trailing" id="Kgp-rr-Ly4"/>
+                        <constraint firstItem="SiT-62-4rV" firstAttribute="top" secondItem="eox-Qy-6a6" secondAttribute="bottom" id="Rdc-Fb-oTI"/>
                         <constraint firstAttribute="trailing" secondItem="VNN-es-BAs" secondAttribute="trailing" constant="24" id="Uz4-zx-oKo"/>
+                        <constraint firstItem="SiT-62-4rV" firstAttribute="leading" secondItem="Flh-qW-5MS" secondAttribute="leading" constant="24" id="Wv2-4Q-kGc"/>
                         <constraint firstItem="VW2-PA-GY7" firstAttribute="leading" secondItem="Flh-qW-5MS" secondAttribute="leading" constant="24" id="YKH-r5-D3v"/>
                         <constraint firstItem="VNN-es-BAs" firstAttribute="top" secondItem="WKN-lr-q90" secondAttribute="bottom" constant="20.5" id="crI-k3-H0m"/>
                         <constraint firstItem="WKN-lr-q90" firstAttribute="centerY" secondItem="06J-Ay-zYR" secondAttribute="centerY" id="fw7-xp-no4"/>
                         <constraint firstItem="WKN-lr-q90" firstAttribute="top" secondItem="EKc-Hh-BeX" secondAttribute="bottom" constant="24" id="gNe-gs-5Mz"/>
                         <constraint firstAttribute="trailing" secondItem="WKN-lr-q90" secondAttribute="trailing" constant="24" id="hG7-qv-goe"/>
+                        <constraint firstItem="eox-Qy-6a6" firstAttribute="top" secondItem="VNN-es-BAs" secondAttribute="bottom" id="msq-ki-xXi"/>
                         <constraint firstItem="EKc-Hh-BeX" firstAttribute="top" secondItem="VW2-PA-GY7" secondAttribute="bottom" constant="12" id="mxn-c3-YYs"/>
-                        <constraint firstAttribute="bottom" secondItem="VNN-es-BAs" secondAttribute="bottom" constant="24" id="oCa-ne-sWo"/>
                         <constraint firstItem="VW2-PA-GY7" firstAttribute="top" secondItem="Flh-qW-5MS" secondAttribute="top" constant="24" id="sPB-oJ-Npe"/>
+                        <constraint firstAttribute="bottom" secondItem="SiT-62-4rV" secondAttribute="bottom" constant="24" id="vg3-Uz-kub"/>
                         <constraint firstItem="WKN-lr-q90" firstAttribute="leading" secondItem="06J-Ay-zYR" secondAttribute="trailing" constant="6" id="ySE-um-lKQ"/>
                     </constraints>
                 </view>
@@ -106,7 +140,7 @@
                 <constraint firstItem="Flh-qW-5MS" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="rCx-5d-8r8"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="-291.304347826087" y="-88.727678571428569"/>
+            <point key="canvasLocation" x="-291.304347826087" y="-76.004464285714278"/>
         </view>
     </objects>
 </document>

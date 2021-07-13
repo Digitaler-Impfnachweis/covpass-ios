@@ -17,21 +17,9 @@ public enum DateUtils {
 
     public static let displayTimeZoneFormatter = dateFormatter(format: "ZZZZ")
 
-    public static var displayDateFormatter: DateFormatter {
-        let formatter = DateFormatter()
-        formatter.calendar = Calendar(identifier: .iso8601)
-        formatter.dateStyle = .medium
-        formatter.timeStyle = .none
-        return formatter
-    }
+    public static var displayDateFormatter = dateFormatter(format: "dd.MM.yyyy")
 
-    public static var displayDateTimeFormatter: DateFormatter {
-        let formatter = DateFormatter()
-        formatter.calendar = Calendar(identifier: .iso8601)
-        formatter.dateStyle = .medium
-        formatter.timeStyle = .short
-        return formatter
-    }
+    public static var displayDateTimeFormatter = dateFormatter(format: "dd.MM.yyyy, HH:mm")
 
     private static func dateFormatter(format: String) -> DateFormatter {
         let formatter = DateFormatter()

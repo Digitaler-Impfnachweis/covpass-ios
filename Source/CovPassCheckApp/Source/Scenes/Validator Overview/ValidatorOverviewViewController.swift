@@ -74,7 +74,9 @@ class ValidatorOverviewViewController: UIViewController {
         offlineCard.textLable.attributedText = "validation_start_screen_offline_modus_message".localized.styledAs(.body)
         offlineCard.infoLabel.attributedText = viewModel.offlineTitle.styledAs(.body)
         offlineCard.infoImageView.image = viewModel.offlineIcon
-        offlineCard.dateLabel.attributedText = viewModel.offlineMessage.styledAs(.body).colored(.onBackground70)
+        offlineCard.dateTitle.attributedText = "validation_start_screen_offline_modus_note_update".localized.styledAs(.body).colored(.onBackground70)
+        offlineCard.certificatesDateLabel.attributedText = viewModel.offlineMessageCertificates.styledAs(.body).colored(.onBackground70)
+        offlineCard.rulesDateLabel.attributedText = viewModel.offlineMessageRules.styledAs(.body).colored(.onBackground70)
         offlineCard.layoutMargins.bottom = .space_40
     }
 }
