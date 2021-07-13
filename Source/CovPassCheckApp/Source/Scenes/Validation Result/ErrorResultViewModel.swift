@@ -1,5 +1,5 @@
 //
-//  RecoveryResultViewModel.swift
+//  ErrorResultViewModel.swift
 //
 //
 //  © Copyright IBM Deutschland GmbH 2021
@@ -11,7 +11,7 @@ import CovPassUI
 import PromiseKit
 import UIKit
 
-class RecoveryResultViewModel: ValidationResultViewModel {
+class ErrorResultViewModel: ValidationResultViewModel {
     // MARK: - Properties
 
     weak var delegate: ResultViewModelDelegate?
@@ -20,28 +20,26 @@ class RecoveryResultViewModel: ValidationResultViewModel {
     var certificate: CBORWebToken?
 
     var icon: UIImage? {
-        .resultSuccess
+        .resultError
     }
 
     var resultTitle: String {
-        "validation_check_popup_valid_vaccination_recovery_title".localized
+        "validation_check_popup_unsuccessful_certificate_title".localized
     }
 
     var resultBody: String {
-        "validation_check_popup_valid_vaccination_recovery_message".localized
+        "validation_check_popup_unsuccessful_certificate_message".localized
     }
 
     var paragraphs: [Paragraph] {
-        guard let dgc = certificate?.hcert.dgc else {
-            return []
-        }
-        return [
-            Paragraph(icon: .data, title: dgc.nam.fullName, subtitle: String(format: "validation_check_popup_valid_vaccination_date_of_birth".localized, DateUtils.displayDateOfBirth(dgc)))
+        [
+            Paragraph(icon: .timeHui, title: "validation_check_popup_unsuccessful_certificate_not_valid_title".localized, subtitle: "validation_check_popup_unsuccessful_certificate_not_valid_message".localized),
+            Paragraph(icon: .technicalError, title: "validation_check_popup_unsuccessful_certificate_technical_problems_title".localized, subtitle: "validation_check_popup_unsuccessful_certificate_technical_problems_message".localized)
         ]
     }
 
     var info: String? {
-        "validation_check_popup_valid_vaccination_recovery_note".localized
+        nil
     }
 
     // MARK: - Lifecycle
@@ -49,7 +47,7 @@ class RecoveryResultViewModel: ValidationResultViewModel {
     init(
         router: ValidationResultRouterProtocol,
         repository: VaccinationRepositoryProtocol,
-        certificate: CBORWebToken?
+        certificate: CBORWebToken? = nil
     ) {
         self.router = router
         self.repository = repository

@@ -15,21 +15,17 @@ class TestResultViewModel: ValidationResultViewModel {
     // MARK: - Properties
 
     weak var delegate: ResultViewModelDelegate?
-    let router: ValidationResultRouterProtocol
-    private let repository: VaccinationRepositoryProtocol
-    private var certificate: CBORWebToken?
+    var router: ValidationResultRouterProtocol
+    var repository: VaccinationRepositoryProtocol
+    var certificate: CBORWebToken?
 
     var icon: UIImage? {
-        guard let testCert = certificate?.hcert.dgc.t?.first, !testCert.isPositive, testCert.isValid, (testCert.isPCR || testCert.isAntigen) else {
-            return .resultError
-        }
-        return .group
+        .group
     }
 
     var resultTitle: String {
-        // positive tests or error
-        guard let testCert = certificate?.hcert.dgc.t?.first, !testCert.isPositive, testCert.isValid, (testCert.isPCR || testCert.isAntigen) else {
-            return "validation_check_popup_unsuccessful_certificate_title".localized
+        guard let testCert = certificate?.hcert.dgc.t?.first else {
+            return ""
         }
         // negative pcr
         if testCert.isPCR {
@@ -42,20 +38,11 @@ class TestResultViewModel: ValidationResultViewModel {
     }
 
     var resultBody: String {
-        guard let testCert = certificate?.hcert.dgc.t?.first, !testCert.isPositive, testCert.isValid, (testCert.isPCR || testCert.isAntigen) else {
-            return "validation_check_popup_unsuccessful_certificate_message".localized
-        }
-        return "validation_check_popup_valid_vaccination_recovery_message".localized
+        "validation_check_popup_valid_vaccination_recovery_message".localized
     }
 
     var paragraphs: [Paragraph] {
-        guard let testCert = certificate?.hcert.dgc.t?.first, !testCert.isPositive, testCert.isValid, (testCert.isPCR || testCert.isAntigen) else {
-            return [
-                Paragraph(icon: .timeHui, title: "validation_check_popup_unsuccessful_certificate_not_valid_title".localized, subtitle: "validation_check_popup_unsuccessful_certificate_not_valid_message".localized),
-                Paragraph(icon: .technicalError, title: "validation_check_popup_unsuccessful_certificate_technical_problems_title".localized, subtitle: "validation_check_popup_unsuccessful_certificate_technical_problems_message".localized)
-            ]
-        }
-        guard let dgc = certificate?.hcert.dgc else {
+        guard let dgc = certificate?.hcert.dgc, let testCert = dgc.t?.first else {
             return []
         }
         return [
@@ -78,47 +65,5 @@ class TestResultViewModel: ValidationResultViewModel {
         self.router = router
         self.repository = repository
         self.certificate = certificate
-    }
-
-    // MARK: - Methods
-
-    func cancel() {
-        router.showStart()
-    }
-
-    func scanNextCertifcate() {
-        firstly {
-            router.scanQRCode()
-        }
-        .map {
-            try self.payloadFromScannerResult($0)
-        }
-        .then {
-            self.repository.checkCertificate($0)
-        }
-        .get {
-            self.certificate = $0
-        }
-        .done { _ in
-            let vm = ValidationResultFactory.createViewModel(
-                router: self.router,
-                repository: self.repository,
-                certificate: self.certificate
-            )
-            self.delegate?.viewModelDidChange(vm)
-        }
-        .catch { _ in
-            self.certificate = nil
-            self.delegate?.viewModelDidUpdate()
-        }
-    }
-
-    private func payloadFromScannerResult(_ result: ScanResult) throws -> String {
-        switch result {
-        case let .success(payload):
-            return payload
-        case let .failure(error):
-            throw error
-        }
     }
 }

@@ -25,6 +25,9 @@ protocol ResultViewModelDelegate: AnyObject {
 }
 
 protocol ValidationViewModel {
+    var router: ValidationResultRouterProtocol { get set }
+    var repository: VaccinationRepositoryProtocol { get set }
+    var certificate: CBORWebToken? { get set }
     var delegate: ResultViewModelDelegate? { get set }
     var icon: UIImage? { get }
     var resultTitle: String { get }
@@ -32,4 +35,47 @@ protocol ValidationViewModel {
     var paragraphs: [Paragraph] { get }
     var info: String? { get }
     func scanNextCertifcate()
+}
+
+extension ValidationViewModel {
+    func cancel() {
+        router.showStart()
+    }
+
+    func scanNextCertifcate() {
+        firstly {
+            router.scanQRCode()
+        }
+        .map {
+            try self.payloadFromScannerResult($0)
+        }
+        .then {
+            self.repository.checkCertificate($0)
+        }
+        .done { certificate in
+            let vm = ValidationResultFactory.createViewModel(
+                router: self.router,
+                repository: self.repository,
+                certificate: certificate
+            )
+            self.delegate?.viewModelDidChange(vm)
+        }
+        .catch { _ in
+            let vm = ValidationResultFactory.createViewModel(
+                router: self.router,
+                repository: self.repository,
+                certificate: nil
+            )
+            self.delegate?.viewModelDidChange(vm)
+        }
+    }
+
+    private func payloadFromScannerResult(_ result: ScanResult) throws -> String {
+        switch result {
+        case let .success(payload):
+            return payload
+        case let .failure(error):
+            throw error
+        }
+    }
 }

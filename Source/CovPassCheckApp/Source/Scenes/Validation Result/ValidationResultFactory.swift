@@ -10,13 +10,28 @@ import CovPassCommon
 import Foundation
 
 struct ValidationResultFactory {
-    static func createViewModel(router: ValidationResultRouterProtocol, repository: VaccinationRepositoryProtocol, certificate: CBORWebToken?) -> ValidationResultViewModel {
-        if certificate?.hcert.dgc.r?.isEmpty == false {
-            return RecoveryResultViewModel(router: router, repository: repository, certificate: certificate)
+    static func createViewModel(router: ValidationResultRouterProtocol, repository: VaccinationRepositoryProtocol, certificate: CBORWebToken?, certLogic: DCCCertLogic = DCCCertLogic.create()) -> ValidationResultViewModel {
+        guard let cert = certificate else {
+            return ErrorResultViewModel(router: router, repository: repository)
         }
-        if certificate?.hcert.dgc.t?.isEmpty == false {
-            return TestResultViewModel(router: router, repository: repository, certificate: certificate)
+
+        do {
+            // Validate given certificate based on GERMAN rules and users local time (CovPassCheck only)
+            let validationResult = try certLogic.validate(countryCode: "DE", validationClock: Date(), certificate: cert)
+            let valid = validationResult.contains(where: { $0.result != .passed }) == false
+
+            if !valid {
+                return ErrorResultViewModel(router: router, repository: repository, certificate: certificate)
+            }
+            if certificate?.hcert.dgc.r?.isEmpty == false {
+                return RecoveryResultViewModel(router: router, repository: repository, certificate: certificate)
+            }
+            if certificate?.hcert.dgc.t?.isEmpty == false {
+                return TestResultViewModel(router: router, repository: repository, certificate: certificate)
+            }
+            return VaccinationResultViewModel(router: router, repository: repository, certificate: certificate)
+        } catch {
+            return ErrorResultViewModel(router: router, repository: repository, certificate: certificate)
         }
-        return VaccinationResultViewModel(router: router, repository: repository, certificate: certificate)
     }
 }
