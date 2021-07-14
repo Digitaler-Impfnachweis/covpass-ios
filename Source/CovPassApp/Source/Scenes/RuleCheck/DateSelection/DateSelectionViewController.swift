@@ -50,9 +50,11 @@ class DateSelectionViewController: UIViewController {
 
         datePicker.date = viewModel.date
         datePicker.datePickerMode = viewModel.step == .One ? .date : .time
+        datePicker.minimumDate = Date()
         datePicker.addTarget(self, action: #selector(datePickerChanged(picker:)), for: .valueChanged)
 
-        toolbarView.state = viewModel.step == .One ? .confirm("certificate_check_validity_selection_date_action_button".localized) : .confirm("certificate_check_validity_selection_date_action_button".localized)
+        toolbarView.state = viewModel.step == .One ? .confirm("certificate_check_validity_selection_date_action_button".localized) : .confirm("certificate_check_validity_selection_time_action_button".localized)
+        toolbarView.setUpLeftButton(leftButtonItem: viewModel.step == .One ? nil : .navigationArrow)
         toolbarView.delegate = self
     }
 
