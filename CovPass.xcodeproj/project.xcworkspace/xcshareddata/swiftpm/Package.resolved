@@ -12,10 +12,10 @@
       },
       {
         "package": "CertLogic",
-        "repositoryURL": "https://github.com/timokoenig/dgc-certlogic-ios",
+        "repositoryURL": "https://github.com/eu-digital-green-certificates/dgc-certlogic-ios",
         "state": {
-          "branch": "add-hash-encoding",
-          "revision": "c816cce7c0e0d993259ca8d7850a724b30059d15",
+          "branch": null,
+          "revision": "bd7223fa142bdd3f3d5ad770b12e06ffbb9149b3",
           "version": null
         }
       },
