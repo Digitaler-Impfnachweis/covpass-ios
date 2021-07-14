@@ -40,9 +40,9 @@ class CertificateCollectionViewCellTests: XCTestCase {
         XCTAssertEqual(sut.contentView.layer.shadowOpacity, Float(0.2))
         XCTAssertEqual(sut.contentView.layer.shadowOffset, .init(width: 0, height: -4))
 
-        XCTAssertEqual(sut.containerView.layoutMargins, .init(top: .space_24, left: .space_24, bottom: .space_24, right: .space_24))
+        XCTAssertEqual(sut.containerView.layoutMargins, .init(top: .space_8, left: .space_8, bottom: .space_8, right: .space_8))
         XCTAssertEqual(sut.containerView.tintColor, .brandAccent)
-        XCTAssertEqual(sut.containerView.layer.cornerRadius, 14)
+        XCTAssertEqual(sut.containerView.layer.cornerRadius, 26)
     }
 
     func testLayoutSubviews() {
@@ -57,11 +57,11 @@ class CertificateCollectionViewCellTests: XCTestCase {
         XCTAssertEqual(sut.containerView.backgroundColor, viewModel?.backgroundColor)
 
         XCTAssertEqual(sut.qrContainerView.image, viewModel.qrCode)
-        XCTAssertEqual(sut.qrContainerView.layoutMargins, .init(top: .zero, left: .zero, bottom: .space_20, right: .zero))
+        XCTAssertEqual(sut.qrContainerView.layoutMargins, .init(top: .zero, left: .zero, bottom: .space_18, right: .zero))
         XCTAssertFalse(sut.qrContainerView.isHidden)
         XCTAssertFalse(sut.qrContainerView.titleLabel.isHidden)
 
-        XCTAssertEqual(sut.titleView.textableView.attributedText, viewModel.name.styledAs(.header_1).colored(viewModel.tintColor))
+        XCTAssertEqual(sut.titleView.textableView.attributedText, viewModel.name.styledAs(.header_1).lineHeight(33).colored(viewModel.tintColor))
         XCTAssertEqual(sut.titleView.backgroundColor, .clear)
 
         XCTAssertEqual(sut.actionView.tintColor, .neutralWhite)

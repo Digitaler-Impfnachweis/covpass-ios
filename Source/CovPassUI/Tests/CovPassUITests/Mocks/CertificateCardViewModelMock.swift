@@ -10,6 +10,8 @@ import CovPassUI
 import UIKit
 
 class CertificateCardViewModelMock: CertificateCardViewModelProtocol {
+    var showFavorite: Bool = false
+
     var reuseIdentifier: String {
         "\(CertificateCollectionViewCell.self)"
     }

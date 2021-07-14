@@ -11,6 +11,10 @@ import Foundation
 import PromiseKit
 
 public class VaccinationRepositoryMock: VaccinationRepositoryProtocol {
+    public func matchedCertificates(for certificateList: CertificateList) -> [CertificatePair] {
+        return []
+    }
+
     public func getLastUpdatedTrustList() -> Date? {
         return nil
     }

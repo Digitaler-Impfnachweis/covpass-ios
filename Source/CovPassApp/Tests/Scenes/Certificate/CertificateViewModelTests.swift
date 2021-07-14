@@ -10,6 +10,7 @@
 import CovPassUI
 import Foundation
 import XCTest
+import CovPassCommon
 
 class CertificateViewModelTests: XCTestCase {
     // MARK: - Test Variables
@@ -27,7 +28,8 @@ class CertificateViewModelTests: XCTestCase {
         sceneCoordinator = SceneCoordinatorMock()
         router = CertificatesOverviewRouter(sceneCoordinator: sceneCoordinator)
         repository = VaccinationRepositoryMock()
-        sut = CertificatesOverviewViewModel(router: router, repository: repository)
+        let dccCertLogic = DCCCertLogic(initialDCCRulesURL: Bundle.commonBundle.url(forResource: "dcc-rules", withExtension: "json")!, service: DCCServiceMock(), keychain: MockPersistence(), userDefaults: MockPersistence())
+        sut = CertificatesOverviewViewModel(router: router, repository: repository, certLogic: dccCertLogic)
         sutDelegate = MockCertificateViewModelDelegate()
         sut.delegate = sutDelegate
     }

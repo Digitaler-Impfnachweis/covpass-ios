@@ -28,7 +28,7 @@ class QRContainerViewTests: XCTestCase {
 
     func testInit() {
         XCTAssertEqual(sut.contentView?.layoutMargins, .init(top: .space_10, left: .space_10, bottom: .space_10, right: .space_10))
-        XCTAssertEqual(sut.contentView?.layer.cornerRadius, 30)
+        XCTAssertEqual(sut.contentView?.layer.cornerRadius, 10)
         XCTAssertEqual(sut.contentView?.layer.masksToBounds, true)
     }
 

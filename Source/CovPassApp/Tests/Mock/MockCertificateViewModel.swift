@@ -14,6 +14,7 @@ import PromiseKit
 import UIKit
 
 class MockCertificateViewModel: CertificatesOverviewViewModelProtocol {
+
     // MARK: - Test Variables
 
     var refreshedCalled = false
@@ -26,6 +27,8 @@ class MockCertificateViewModel: CertificatesOverviewViewModelProtocol {
     weak var delegate: CertificatesOverviewViewModelDelegate?
 
     var addButtonImage: UIImage? = UIImage()
+
+    var hasCertificates: Bool = false
 
     var certificateViewModels: [CardViewModel] = []
 
@@ -85,5 +88,13 @@ class MockCertificateViewModel: CertificatesOverviewViewModelProtocol {
 
     func showErrorDialog() {
         // TODO: Add tests
+    }
+
+    func updateDCCRules() {
+
+    }
+
+    func showRuleCheck() {
+
     }
 }
