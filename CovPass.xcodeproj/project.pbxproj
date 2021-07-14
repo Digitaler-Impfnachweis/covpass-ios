@@ -106,6 +106,11 @@
 		385FC1A2269ED63500D19AF8 /* DateSelectionRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385FC195269ED16600D19AF8 /* DateSelectionRouter.swift */; };
 		385FC1A3269ED63500D19AF8 /* DateSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385FC197269ED16600D19AF8 /* DateSelectionViewModel.swift */; };
 		385FC1A6269F19B900D19AF8 /* ResultItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385FC1A4269F18BA00D19AF8 /* ResultItemViewModel.swift */; };
+		385FC1AE269F21A200D19AF8 /* RuleCheckDetailSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385FC1A8269F21A200D19AF8 /* RuleCheckDetailSceneFactory.swift */; };
+		385FC1AF269F21A200D19AF8 /* RuleCheckDetailRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385FC1A9269F21A200D19AF8 /* RuleCheckDetailRouter.swift */; };
+		385FC1B0269F21A200D19AF8 /* RuleCheckDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385FC1AA269F21A200D19AF8 /* RuleCheckDetailViewController.swift */; };
+		385FC1B1269F21A200D19AF8 /* RuleCheckDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385FC1AB269F21A200D19AF8 /* RuleCheckDetailViewModel.swift */; };
+		385FC1B2269F21A200D19AF8 /* RuleCheckDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 385FC1AD269F21A200D19AF8 /* RuleCheckDetailViewController.xib */; };
 		3882AEAB266FD609000354CD /* VaccinationCertificateItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3882AEAA266FD609000354CD /* VaccinationCertificateItemViewModel.swift */; };
 		3882AEAE266FE85C000354CD /* CertificateItemDetailSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3882AEAD266FE85C000354CD /* CertificateItemDetailSceneFactory.swift */; };
 		3882AEB0266FE9EE000354CD /* CertificateItemDetailRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3882AEAF266FE9EE000354CD /* CertificateItemDetailRouter.swift */; };
@@ -268,6 +273,11 @@
 		385FC197269ED16600D19AF8 /* DateSelectionViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateSelectionViewModel.swift; sourceTree = "<group>"; };
 		385FC199269ED16600D19AF8 /* DateSelectionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DateSelectionViewController.xib; sourceTree = "<group>"; };
 		385FC1A4269F18BA00D19AF8 /* ResultItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultItemViewModel.swift; sourceTree = "<group>"; };
+		385FC1A8269F21A200D19AF8 /* RuleCheckDetailSceneFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RuleCheckDetailSceneFactory.swift; sourceTree = "<group>"; };
+		385FC1A9269F21A200D19AF8 /* RuleCheckDetailRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RuleCheckDetailRouter.swift; sourceTree = "<group>"; };
+		385FC1AA269F21A200D19AF8 /* RuleCheckDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RuleCheckDetailViewController.swift; sourceTree = "<group>"; };
+		385FC1AB269F21A200D19AF8 /* RuleCheckDetailViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RuleCheckDetailViewModel.swift; sourceTree = "<group>"; };
+		385FC1AD269F21A200D19AF8 /* RuleCheckDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RuleCheckDetailViewController.xib; sourceTree = "<group>"; };
 		3882AEAA266FD609000354CD /* VaccinationCertificateItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaccinationCertificateItemViewModel.swift; sourceTree = "<group>"; };
 		3882AEAD266FE85C000354CD /* CertificateItemDetailSceneFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateItemDetailSceneFactory.swift; sourceTree = "<group>"; };
 		3882AEAF266FE9EE000354CD /* CertificateItemDetailRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateItemDetailRouter.swift; sourceTree = "<group>"; };
@@ -839,6 +849,26 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		385FC1A7269F21A200D19AF8 /* RuleCheckDetail */ = {
+			isa = PBXGroup;
+			children = (
+				385FC1A8269F21A200D19AF8 /* RuleCheckDetailSceneFactory.swift */,
+				385FC1A9269F21A200D19AF8 /* RuleCheckDetailRouter.swift */,
+				385FC1AA269F21A200D19AF8 /* RuleCheckDetailViewController.swift */,
+				385FC1AB269F21A200D19AF8 /* RuleCheckDetailViewModel.swift */,
+				385FC1AC269F21A200D19AF8 /* Views */,
+			);
+			path = RuleCheckDetail;
+			sourceTree = "<group>";
+		};
+		385FC1AC269F21A200D19AF8 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				385FC1AD269F21A200D19AF8 /* RuleCheckDetailViewController.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		3882AEA9266FD5F9000354CD /* Certificates */ = {
 			isa = PBXGroup;
 			children = (
@@ -882,6 +912,7 @@
 		38E36253269B712900DE6D4C /* RuleCheck */ = {
 			isa = PBXGroup;
 			children = (
+				385FC1A7269F21A200D19AF8 /* RuleCheckDetail */,
 				385FC193269ED16600D19AF8 /* DateSelection */,
 				385FC182269EB4BE00D19AF8 /* CountrySelection */,
 				38E3625F269B743000DE6D4C /* Protocols */,
@@ -1185,6 +1216,7 @@
 				385FC19F269ED63500D19AF8 /* DateSelectionViewController.xib in Resources */,
 				216D1F48264EF50300370F16 /* Localizable.strings in Resources */,
 				216D1F9E264EF73D00370F16 /* WelcomeViewController.xib in Resources */,
+				385FC1B2269F21A200D19AF8 /* RuleCheckDetailViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1233,12 +1265,14 @@
 				38E36261269B744700DE6D4C /* RuleCheckRouterProtocol.swift in Sources */,
 				385FC190269EB6A800D19AF8 /* CountrySelectionViewController.swift in Sources */,
 				38E3625A269B712900DE6D4C /* RuleCheckRouter.swift in Sources */,
+				385FC1AE269F21A200D19AF8 /* RuleCheckDetailSceneFactory.swift in Sources */,
 				216D1FD8264EF76400370F16 /* CertificateDetailViewModel.swift in Sources */,
 				216D2004264EF7B600370F16 /* StringLocalization.swift in Sources */,
 				216D1FCD264EF75D00370F16 /* CertificatesOverviewRouterProtocol.swift in Sources */,
 				3882AEB0266FE9EE000354CD /* CertificateItemDetailRouter.swift in Sources */,
 				38E94DE9266121D60015553C /* VaccinationRepositoryExtension.swift in Sources */,
 				3882AEBD267006B4000354CD /* RecoveryCertificateItemViewModel.swift in Sources */,
+				385FC1B0269F21A200D19AF8 /* RuleCheckDetailViewController.swift in Sources */,
 				216D1FFC264EF77C00370F16 /* AppInformationSceneFactory.swift in Sources */,
 				216D1FCF264EF75D00370F16 /* CertificatesOverviewViewModelDelegate.swift in Sources */,
 				38E3625C269B712900DE6D4C /* RuleCheckViewModel.swift in Sources */,
@@ -1250,10 +1284,12 @@
 				216D1FC7264EF75900370F16 /* CertificateCardViewModel.swift in Sources */,
 				216D1FD5264EF76400370F16 /* CertificateDetailRouter.swift in Sources */,
 				216D1FFD264EF77C00370F16 /* AppInformationViewModel.swift in Sources */,
+				385FC1AF269F21A200D19AF8 /* RuleCheckDetailRouter.swift in Sources */,
 				216D1FBA264EF74F00370F16 /* CertificatesOverviewViewController.swift in Sources */,
 				216D1FB7264EF74F00370F16 /* CertificatesOverviewSceneFactory.swift in Sources */,
 				216D1FB0264EF74600370F16 /* PassConsentPageViewModel.swift in Sources */,
 				216D1F98264EF73200370F16 /* MainSceneFactory.swift in Sources */,
+				385FC1B1269F21A200D19AF8 /* RuleCheckDetailViewModel.swift in Sources */,
 				216D1FA6264EF74100370F16 /* WelcomeSceneFactory.swift in Sources */,
 				385FC1A0269ED63500D19AF8 /* DateSelectionViewController.swift in Sources */,
 				38E3625E269B712900DE6D4C /* RuleCheckSceneFactory.swift in Sources */,

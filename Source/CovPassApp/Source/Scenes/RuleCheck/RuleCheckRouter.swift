@@ -39,4 +39,15 @@ class RuleCheckRouter: RuleCheckRouterProtocol {
             )
         )
     }
+
+    func showResultDetail(result: CertificateResult, country: String, date: Date) -> Promise<Void> {
+        sceneCoordinator.present(
+            RuleCheckDetailSceneFactory(
+                router: RuleCheckDetailRouter(sceneCoordinator: sceneCoordinator),
+                result: result,
+                country: country,
+                date: date
+            )
+        )
+    }
 }

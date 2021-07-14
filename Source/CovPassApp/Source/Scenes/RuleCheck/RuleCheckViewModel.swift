@@ -134,4 +134,8 @@ class RuleCheckViewModel: BaseViewModel, CancellableViewModelProtocol {
                 print(error)
             }
     }
+
+    func showDetail(_ result: CertificateResult) {
+        router.showResultDetail(result: result, country: country, date: date).cauterize()
+    }
 }

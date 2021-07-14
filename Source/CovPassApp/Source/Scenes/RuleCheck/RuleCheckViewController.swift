@@ -101,7 +101,10 @@ class RuleCheckViewController: UIViewController {
         }
 
         viewModel.validationViewModels.forEach { vm in
-            stackView.addArrangedSubview(CertificateItem(viewModel: vm, action: { }))
+            stackView.addArrangedSubview(CertificateItem(viewModel: vm, action: {
+                guard let rvm = vm as? ResultItemViewModel else { return }
+                self.viewModel.showDetail(rvm.result)
+            }))
         }
     }
 }

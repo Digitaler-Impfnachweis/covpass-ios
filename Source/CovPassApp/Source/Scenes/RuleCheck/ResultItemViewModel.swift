@@ -13,7 +13,7 @@ import UIKit
 import CertLogic
 
 struct ResultItemViewModel: CertificateItemViewModel {
-    private let result: CertificateResult
+    let result: CertificateResult
 
     var icon: UIImage {
         if result.state == .open {
