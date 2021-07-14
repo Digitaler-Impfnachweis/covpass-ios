@@ -43,6 +43,10 @@ API documentation TBD
 
 ## Release History
 
+- 1.5.0
+  - Add EU business rules for CovPass and CovPassCheck
+  - Hide favorite icon with only one certificate
+  - Bugfixes
 - 1.4.1
   - Add contact for pass and check app
   - Change certificate matching for certificates with the same family name
