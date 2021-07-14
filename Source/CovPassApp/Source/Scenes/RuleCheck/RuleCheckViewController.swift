@@ -8,6 +8,7 @@
 
 import CovPassUI
 import UIKit
+import CovPassCommon
 
 class RuleCheckViewController: UIViewController {
     // MARK: - IBOutlet
@@ -61,9 +62,12 @@ class RuleCheckViewController: UIViewController {
         }
 
         dateSelection.titleLabel.attributedText = "certificate_check_validity_selection_date".localized.styledAs(.body)
-        dateSelection.valueLabel.attributedText = "hello".styledAs(.body)
+        dateSelection.valueLabel.attributedText = DateUtils.displayDateTimeFormatter.string(from: viewModel.date).styledAs(.body)
         dateSelection.iconView.image = UIImage.calendar.withRenderingMode(.alwaysTemplate)
         dateSelection.layoutMargins.bottom = .space_40
+        dateSelection.onClickAction = { [weak self] in
+            self?.viewModel.showDateSelection()
+        }
 
         info.attributedText = "certificate_check_validity_note".localized.styledAs(.body)
         info.layoutMargins = .init(top: .space_8, left: .space_8, bottom: .space_8, right: .space_8)

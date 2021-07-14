@@ -100,6 +100,11 @@
 		385FC190269EB6A800D19AF8 /* CountrySelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385FC186269EB4BE00D19AF8 /* CountrySelectionViewController.swift */; };
 		385FC191269EB6A900D19AF8 /* CountrySelectionSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385FC183269EB4BE00D19AF8 /* CountrySelectionSceneFactory.swift */; };
 		385FC192269EB6AE00D19AF8 /* CountrySelectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 385FC188269EB4BE00D19AF8 /* CountrySelectionViewController.xib */; };
+		385FC19F269ED63500D19AF8 /* DateSelectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 385FC199269ED16600D19AF8 /* DateSelectionViewController.xib */; };
+		385FC1A0269ED63500D19AF8 /* DateSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385FC196269ED16600D19AF8 /* DateSelectionViewController.swift */; };
+		385FC1A1269ED63500D19AF8 /* DateSelectionSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385FC194269ED16600D19AF8 /* DateSelectionSceneFactory.swift */; };
+		385FC1A2269ED63500D19AF8 /* DateSelectionRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385FC195269ED16600D19AF8 /* DateSelectionRouter.swift */; };
+		385FC1A3269ED63500D19AF8 /* DateSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385FC197269ED16600D19AF8 /* DateSelectionViewModel.swift */; };
 		3882AEAB266FD609000354CD /* VaccinationCertificateItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3882AEAA266FD609000354CD /* VaccinationCertificateItemViewModel.swift */; };
 		3882AEAE266FE85C000354CD /* CertificateItemDetailSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3882AEAD266FE85C000354CD /* CertificateItemDetailSceneFactory.swift */; };
 		3882AEB0266FE9EE000354CD /* CertificateItemDetailRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3882AEAF266FE9EE000354CD /* CertificateItemDetailRouter.swift */; };
@@ -256,6 +261,11 @@
 		385FC185269EB4BE00D19AF8 /* CountrySelectionViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountrySelectionViewModel.swift; sourceTree = "<group>"; };
 		385FC186269EB4BE00D19AF8 /* CountrySelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountrySelectionViewController.swift; sourceTree = "<group>"; };
 		385FC188269EB4BE00D19AF8 /* CountrySelectionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CountrySelectionViewController.xib; sourceTree = "<group>"; };
+		385FC194269ED16600D19AF8 /* DateSelectionSceneFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateSelectionSceneFactory.swift; sourceTree = "<group>"; };
+		385FC195269ED16600D19AF8 /* DateSelectionRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateSelectionRouter.swift; sourceTree = "<group>"; };
+		385FC196269ED16600D19AF8 /* DateSelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateSelectionViewController.swift; sourceTree = "<group>"; };
+		385FC197269ED16600D19AF8 /* DateSelectionViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateSelectionViewModel.swift; sourceTree = "<group>"; };
+		385FC199269ED16600D19AF8 /* DateSelectionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DateSelectionViewController.xib; sourceTree = "<group>"; };
 		3882AEAA266FD609000354CD /* VaccinationCertificateItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaccinationCertificateItemViewModel.swift; sourceTree = "<group>"; };
 		3882AEAD266FE85C000354CD /* CertificateItemDetailSceneFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateItemDetailSceneFactory.swift; sourceTree = "<group>"; };
 		3882AEAF266FE9EE000354CD /* CertificateItemDetailRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateItemDetailRouter.swift; sourceTree = "<group>"; };
@@ -807,6 +817,26 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		385FC193269ED16600D19AF8 /* DateSelection */ = {
+			isa = PBXGroup;
+			children = (
+				385FC194269ED16600D19AF8 /* DateSelectionSceneFactory.swift */,
+				385FC195269ED16600D19AF8 /* DateSelectionRouter.swift */,
+				385FC196269ED16600D19AF8 /* DateSelectionViewController.swift */,
+				385FC197269ED16600D19AF8 /* DateSelectionViewModel.swift */,
+				385FC198269ED16600D19AF8 /* Views */,
+			);
+			path = DateSelection;
+			sourceTree = "<group>";
+		};
+		385FC198269ED16600D19AF8 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				385FC199269ED16600D19AF8 /* DateSelectionViewController.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		3882AEA9266FD5F9000354CD /* Certificates */ = {
 			isa = PBXGroup;
 			children = (
@@ -850,6 +880,7 @@
 		38E36253269B712900DE6D4C /* RuleCheck */ = {
 			isa = PBXGroup;
 			children = (
+				385FC193269ED16600D19AF8 /* DateSelection */,
 				385FC182269EB4BE00D19AF8 /* CountrySelection */,
 				38E3625F269B743000DE6D4C /* Protocols */,
 				38E36257269B712900DE6D4C /* Views */,
@@ -1148,6 +1179,7 @@
 				216D1FF6264EF77600370F16 /* HowToScanViewController.xib in Resources */,
 				65E0DB0C2657F31C004C660F /* CertificateViewController.xib in Resources */,
 				216D1F87264EF6A800370F16 /* LaunchScreen.storyboard in Resources */,
+				385FC19F269ED63500D19AF8 /* DateSelectionViewController.xib in Resources */,
 				216D1F48264EF50300370F16 /* Localizable.strings in Resources */,
 				216D1F9E264EF73D00370F16 /* WelcomeViewController.xib in Resources */,
 			);
@@ -1193,6 +1225,7 @@
 				216D1FED264EF77200370F16 /* HowToScanViewController.swift in Sources */,
 				216D1FEF264EF77200370F16 /* HowToScanSceneFactory.swift in Sources */,
 				216D1FE7264EF76D00370F16 /* CertificateDetailRouterProtocol.swift in Sources */,
+				385FC1A1269ED63500D19AF8 /* DateSelectionSceneFactory.swift in Sources */,
 				216D1FB8264EF74F00370F16 /* CertificatesOverviewRouter.swift in Sources */,
 				38E36261269B744700DE6D4C /* RuleCheckRouterProtocol.swift in Sources */,
 				385FC190269EB6A800D19AF8 /* CountrySelectionViewController.swift in Sources */,
@@ -1219,6 +1252,7 @@
 				216D1FB0264EF74600370F16 /* PassConsentPageViewModel.swift in Sources */,
 				216D1F98264EF73200370F16 /* MainSceneFactory.swift in Sources */,
 				216D1FA6264EF74100370F16 /* WelcomeSceneFactory.swift in Sources */,
+				385FC1A0269ED63500D19AF8 /* DateSelectionViewController.swift in Sources */,
 				38E3625E269B712900DE6D4C /* RuleCheckSceneFactory.swift in Sources */,
 				3882AEB9266FEE11000354CD /* CertificateItemDetailViewController.swift in Sources */,
 				216D1FEE264EF77200370F16 /* HowToScanRouter.swift in Sources */,
@@ -1226,6 +1260,7 @@
 				3882AEAB266FD609000354CD /* VaccinationCertificateItemViewModel.swift in Sources */,
 				21A77A54265B0033002FEEF1 /* DialogRouterProtocol+DidDeleteCertificate.swift in Sources */,
 				216D2003264EF7B500370F16 /* ApiServiceFactory.swift in Sources */,
+				385FC1A3269ED63500D19AF8 /* DateSelectionViewModel.swift in Sources */,
 				3829A309269CFEA800B8346C /* DCCCertLogicExtension.swift in Sources */,
 				216D1FCE264EF75D00370F16 /* CertificatesOverviewViewModelProtocol.swift in Sources */,
 				3882AEB7266FEBA3000354CD /* CertificateItemDetailViewModelProtocol.swift in Sources */,
@@ -1236,6 +1271,7 @@
 				3882AEB5266FEB75000354CD /* CertificateItemDetailViewModel.swift in Sources */,
 				216D1FD9264EF76400370F16 /* CertificateDetailViewController.swift in Sources */,
 				216D1FB9264EF74F00370F16 /* CertificatesOverviewViewModel.swift in Sources */,
+				385FC1A2269ED63500D19AF8 /* DateSelectionRouter.swift in Sources */,
 				216D1FD7264EF76400370F16 /* CertificateDetailSceneFactory.swift in Sources */,
 				216D1FA5264EF74100370F16 /* WelcomeViewController.swift in Sources */,
 				65E0DB0A2657F31C004C660F /* CertificateSceneFactory.swift in Sources */,

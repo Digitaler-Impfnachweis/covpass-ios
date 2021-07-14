@@ -30,7 +30,7 @@ class CountrySelectionViewModel: BaseViewModel, CancellableViewModelProtocol {
     ) {
         self.router = router
         resolver = resolvable
-        self.countries = countries
+        self.countries = countries.sorted(by: { $0 < $1 })
         self.country = country
     }
 

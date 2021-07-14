@@ -6,9 +6,11 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
+import Foundation
 import CovPassUI
 import PromiseKit
 
 protocol RuleCheckRouterProtocol: DialogRouterProtocol {
     func showCountrySelection(countries: [String], country: String) -> Promise<String>
+    func showDateSelection(date: Date) -> Promise<Date>
 }

@@ -48,4 +48,15 @@ class RuleCheckViewModel: BaseViewModel, CancellableViewModelProtocol {
                 print(error)
             }
     }
+
+    func showDateSelection() {
+        router.showDateSelection(date: date)
+            .done { newDate in
+                self.date = newDate
+                self.delegate?.viewModelDidUpdate()
+            }
+            .catch { error in
+                print(error)
+            }
+    }
 }

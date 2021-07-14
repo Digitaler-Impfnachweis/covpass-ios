@@ -30,4 +30,13 @@ class RuleCheckRouter: RuleCheckRouterProtocol {
             )
         )
     }
+
+    func showDateSelection(date: Date) -> Promise<Date> {
+        sceneCoordinator.present(
+            DateSelectionSceneFactory(
+                router: DateSelectionRouter(sceneCoordinator: sceneCoordinator),
+                date: date
+            )
+        )
+    }
 }
