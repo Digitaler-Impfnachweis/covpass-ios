@@ -45,8 +45,7 @@ class CertificatesOverviewRouter: CertificatesOverviewRouterProtocol, DialogRout
     func showRuleCheck() -> Promise<Void> {
         sceneCoordinator.present(
             RuleCheckSceneFactory(
-                router: RuleCheckRouter(sceneCoordinator: sceneCoordinator),
-                certLogic: DCCCertLogic.create()
+                router: RuleCheckRouter(sceneCoordinator: sceneCoordinator)
             )
         )
     }

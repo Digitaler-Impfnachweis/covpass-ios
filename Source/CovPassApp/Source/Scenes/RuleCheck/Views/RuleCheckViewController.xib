@@ -17,6 +17,7 @@
                 <outlet property="info" destination="czg-wL-cb7" id="In0-6k-5je"/>
                 <outlet property="loadingIndicagtor" destination="t5O-y3-fRO" id="8BE-9o-Khm"/>
                 <outlet property="scrollView" destination="Qf6-Rq-Unr" id="GUA-vX-vm4"/>
+                <outlet property="stackView" destination="RNO-8L-IiI" id="MmI-tN-fMU"/>
                 <outlet property="subtitle" destination="gbc-XM-dNV" id="8H5-E1-hxk"/>
                 <outlet property="view" destination="9Sf-rI-cgn" id="Tp4-Er-rhk"/>
             </connections>
@@ -44,7 +45,7 @@
                     <rect key="frame" x="0.0" y="124" width="414" height="670"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="tNn-Ng-ZRx">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="512"/>
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="792"/>
                             <subviews>
                                 <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gbc-XM-dNV" customClass="PlainLabel" customModule="CovPassUI">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="128"/>
@@ -58,19 +59,22 @@
                                     <rect key="frame" x="0.0" y="256" width="414" height="128"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 </view>
+                                <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="RNO-8L-IiI">
+                                    <rect key="frame" x="0.0" y="384" width="414" height="200"/>
+                                </stackView>
                                 <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JbU-IC-eM5">
-                                    <rect key="frame" x="0.0" y="384" width="414" height="128"/>
+                                    <rect key="frame" x="0.0" y="584" width="414" height="208"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="czg-wL-cb7" userLabel="Description Text" customClass="LinkLabel" customModule="CovPassUI">
-                                            <rect key="frame" x="24" y="0.0" width="366" height="128"/>
+                                            <rect key="frame" x="24" y="40" width="366" height="128"/>
                                         </view>
                                     </subviews>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     <constraints>
                                         <constraint firstItem="czg-wL-cb7" firstAttribute="leading" secondItem="JbU-IC-eM5" secondAttribute="leading" constant="24" id="5op-Jz-gxH"/>
                                         <constraint firstAttribute="trailing" secondItem="czg-wL-cb7" secondAttribute="trailing" constant="24" id="7ME-0d-qq5"/>
-                                        <constraint firstItem="czg-wL-cb7" firstAttribute="top" secondItem="JbU-IC-eM5" secondAttribute="top" id="E2X-R6-gaE"/>
-                                        <constraint firstAttribute="bottom" secondItem="czg-wL-cb7" secondAttribute="bottom" id="goo-Fw-J2n"/>
+                                        <constraint firstItem="czg-wL-cb7" firstAttribute="top" secondItem="JbU-IC-eM5" secondAttribute="top" constant="40" id="E2X-R6-gaE"/>
+                                        <constraint firstAttribute="bottom" secondItem="czg-wL-cb7" secondAttribute="bottom" constant="40" id="goo-Fw-J2n"/>
                                     </constraints>
                                 </view>
                             </subviews>
@@ -98,7 +102,7 @@
                 <constraint firstItem="sKK-Se-ZAm" firstAttribute="leading" secondItem="aye-B2-vjU" secondAttribute="leading" id="aWy-O1-CG0"/>
                 <constraint firstItem="Qf6-Rq-Unr" firstAttribute="trailing" secondItem="aye-B2-vjU" secondAttribute="trailing" id="e75-0j-Tss"/>
                 <constraint firstItem="aye-B2-vjU" firstAttribute="trailing" secondItem="t5O-y3-fRO" secondAttribute="trailing" constant="87" id="fWR-jH-on2"/>
-                <constraint firstItem="aye-B2-vjU" firstAttribute="bottom" secondItem="Qf6-Rq-Unr" secondAttribute="bottom" constant="68" id="g9t-C1-52m"/>
+                <constraint firstAttribute="bottom" secondItem="Qf6-Rq-Unr" secondAttribute="bottom" id="g9t-C1-52m"/>
                 <constraint firstItem="sKK-Se-ZAm" firstAttribute="top" secondItem="aye-B2-vjU" secondAttribute="top" constant="20" id="xWv-Hq-W8v"/>
             </constraints>
             <point key="canvasLocation" x="-1513" y="-52"/>

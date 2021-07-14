@@ -105,6 +105,7 @@
 		385FC1A1269ED63500D19AF8 /* DateSelectionSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385FC194269ED16600D19AF8 /* DateSelectionSceneFactory.swift */; };
 		385FC1A2269ED63500D19AF8 /* DateSelectionRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385FC195269ED16600D19AF8 /* DateSelectionRouter.swift */; };
 		385FC1A3269ED63500D19AF8 /* DateSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385FC197269ED16600D19AF8 /* DateSelectionViewModel.swift */; };
+		385FC1A6269F19B900D19AF8 /* ResultItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385FC1A4269F18BA00D19AF8 /* ResultItemViewModel.swift */; };
 		3882AEAB266FD609000354CD /* VaccinationCertificateItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3882AEAA266FD609000354CD /* VaccinationCertificateItemViewModel.swift */; };
 		3882AEAE266FE85C000354CD /* CertificateItemDetailSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3882AEAD266FE85C000354CD /* CertificateItemDetailSceneFactory.swift */; };
 		3882AEB0266FE9EE000354CD /* CertificateItemDetailRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3882AEAF266FE9EE000354CD /* CertificateItemDetailRouter.swift */; };
@@ -266,6 +267,7 @@
 		385FC196269ED16600D19AF8 /* DateSelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateSelectionViewController.swift; sourceTree = "<group>"; };
 		385FC197269ED16600D19AF8 /* DateSelectionViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateSelectionViewModel.swift; sourceTree = "<group>"; };
 		385FC199269ED16600D19AF8 /* DateSelectionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DateSelectionViewController.xib; sourceTree = "<group>"; };
+		385FC1A4269F18BA00D19AF8 /* ResultItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultItemViewModel.swift; sourceTree = "<group>"; };
 		3882AEAA266FD609000354CD /* VaccinationCertificateItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaccinationCertificateItemViewModel.swift; sourceTree = "<group>"; };
 		3882AEAD266FE85C000354CD /* CertificateItemDetailSceneFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateItemDetailSceneFactory.swift; sourceTree = "<group>"; };
 		3882AEAF266FE9EE000354CD /* CertificateItemDetailRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateItemDetailRouter.swift; sourceTree = "<group>"; };
@@ -888,6 +890,7 @@
 				38E36255269B712900DE6D4C /* RuleCheckViewController.swift */,
 				38E36256269B712900DE6D4C /* RuleCheckViewModel.swift */,
 				38E36259269B712900DE6D4C /* RuleCheckSceneFactory.swift */,
+				385FC1A4269F18BA00D19AF8 /* ResultItemViewModel.swift */,
 			);
 			path = RuleCheck;
 			sourceTree = "<group>";
@@ -1284,6 +1287,7 @@
 				21A77A52265AFDE6002FEEF1 /* DialogRouterProtocol+ScanError.swift in Sources */,
 				216D1FAD264EF74600370F16 /* PassOnboardingPageViewModel.swift in Sources */,
 				216D1FAF264EF74600370F16 /* PassOnboardingContainerViewModel.swift in Sources */,
+				385FC1A6269F19B900D19AF8 /* ResultItemViewModel.swift in Sources */,
 				88AB2A9725FA431100D4EA52 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

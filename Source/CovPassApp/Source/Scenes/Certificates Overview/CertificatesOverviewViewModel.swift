@@ -12,15 +12,6 @@ import Foundation
 import PromiseKit
 import UIKit
 
-struct CertificatePair {
-    var certificates: [ExtendedCBORWebToken]
-    var isFavorite: Bool
-    init(certificates: [ExtendedCBORWebToken], isFavorite: Bool) {
-        self.certificates = certificates
-        self.isFavorite = isFavorite
-    }
-}
-
 class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
     // MARK: - Properties
 
@@ -31,31 +22,8 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
     private var certificateList = CertificateList(certificates: [])
     private var lastKnownFavoriteCertificateId: String?
 
-    private var matchedCertificates: [CertificatePair] {
-        var pairs = [CertificatePair]()
-        for cert in certificateList.certificates {
-            var exists = false
-            let isFavorite = certificateList.favoriteCertificateId == cert.vaccinationCertificate.hcert.dgc.uvci
-            for index in 0 ..< pairs.count {
-                if pairs[index].certificates.contains(where: {
-                    cert.vaccinationCertificate.hcert.dgc.nam == $0.vaccinationCertificate.hcert.dgc.nam && cert.vaccinationCertificate.hcert.dgc.dob == $0.vaccinationCertificate.hcert.dgc.dob
-                }) {
-                    exists = true
-                    pairs[index].certificates.append(cert)
-                    if isFavorite {
-                        pairs[index].isFavorite = true
-                    }
-                }
-            }
-            if !exists {
-                pairs.append(CertificatePair(certificates: [cert], isFavorite: isFavorite))
-            }
-        }
-        return pairs
-    }
-
     var certificateViewModels: [CardViewModel] {
-        cardViewModels(for: matchedCertificates.sorted(by: { c, _ -> Bool in c.isFavorite }))
+        cardViewModels(for: repository.matchedCertificates(for: certificateList).sorted(by: { c, _ -> Bool in c.isFavorite }))
     }
 
     // MARK: - Lifecycle
@@ -236,7 +204,7 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
             delegate?.viewModelNeedsFirstCertificateVisible()
 
         case let .showCertificatesOnOverview(certificates):
-            guard let index = matchedCertificates.firstIndex(where: { $0.certificates.elementsEqual(certificates) }) else { return }
+            guard let index = repository.matchedCertificates(for: certificateList).firstIndex(where: { $0.certificates.elementsEqual(certificates) }) else { return }
             delegate?.viewModelNeedsCertificateVisible(at: index)
         }
     }

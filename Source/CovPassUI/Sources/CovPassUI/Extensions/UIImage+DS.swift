@@ -96,6 +96,12 @@ public extension UIImage {
     @ImageLoader(name: "icon_card")
     private(set) static var card
 
+    @ImageLoader(name: "icon_red")
+    private(set) static var iconRed
+
+    @ImageLoader(name: "icon_yellow")
+    private(set) static var iconYellow
+
     @ImageLoader(name: "map")
     private(set) static var map
 

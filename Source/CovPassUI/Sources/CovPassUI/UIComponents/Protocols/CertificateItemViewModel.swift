@@ -18,5 +18,4 @@ public protocol CertificateItemViewModel {
     var subtitle: String { get }
     var info: String { get }
     var activeTitle: String? { get }
-    init(_ certificate: ExtendedCBORWebToken, active: Bool)
 }

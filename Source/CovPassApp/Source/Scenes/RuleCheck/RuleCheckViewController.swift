@@ -20,6 +20,7 @@ class RuleCheckViewController: UIViewController {
     @IBOutlet var info: LinkLabel!
     @IBOutlet var loadingIndicagtor: DotPulseActivityIndicator!
     @IBOutlet var scrollView: UIScrollView!
+    @IBOutlet var stackView: UIStackView!
 
     // MARK: - Properties
 
@@ -87,10 +88,20 @@ class RuleCheckViewController: UIViewController {
             loadingIndicagtor.isHidden = false
             loadingIndicagtor.startAnimating()
             scrollView.isHidden = true
-        } else {
-            loadingIndicagtor.stopAnimating()
-            loadingIndicagtor.isHidden = true
-            scrollView.isHidden = false
+            return
+        }
+
+        loadingIndicagtor.stopAnimating()
+        loadingIndicagtor.isHidden = true
+        scrollView.isHidden = false
+
+        stackView.subviews.forEach { subview in
+            subview.removeFromSuperview()
+            stackView.removeArrangedSubview(subview)
+        }
+
+        viewModel.validationViewModels.forEach { vm in
+            stackView.addArrangedSubview(CertificateItem(viewModel: vm, action: { }))
         }
     }
 }

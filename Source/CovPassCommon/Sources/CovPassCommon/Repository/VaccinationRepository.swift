@@ -241,6 +241,29 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
         }
     }
 
+    public func matchedCertificates(for certificateList: CertificateList) -> [CertificatePair] {
+        var pairs = [CertificatePair]()
+        for cert in certificateList.certificates {
+            var exists = false
+            let isFavorite = certificateList.favoriteCertificateId == cert.vaccinationCertificate.hcert.dgc.uvci
+            for index in 0 ..< pairs.count {
+                if pairs[index].certificates.contains(where: {
+                    cert.vaccinationCertificate.hcert.dgc.nam == $0.vaccinationCertificate.hcert.dgc.nam && cert.vaccinationCertificate.hcert.dgc.dob == $0.vaccinationCertificate.hcert.dgc.dob
+                }) {
+                    exists = true
+                    pairs[index].certificates.append(cert)
+                    if isFavorite {
+                        pairs[index].isFavorite = true
+                    }
+                }
+            }
+            if !exists {
+                pairs.append(CertificatePair(certificates: [cert], isFavorite: isFavorite))
+            }
+        }
+        return pairs
+    }
+
     // MARK: - Private Helpers
 
     func parseCertificate(_ cosePayload: CoseSign1Message) throws -> CBORWebToken {

@@ -70,6 +70,20 @@ public extension UIColor {
     static let warning = UIColor("Warning")
 
     static let info = UIColor("Info")
+
+    // MARK: - Result
+
+    static let resultGreen = UIColor("ResultGreen")
+
+    static let resultGreenBackground = UIColor("ResultGreenBackground")
+
+    static let resultYellow = UIColor("ResultYellow")
+
+    static let resultYellowBackground = UIColor("ResultYellowBackground")
+
+    static let resultRed = UIColor("ResultRed")
+
+    static let resultRedBackground = UIColor("ResultRedBackground")
 }
 
 private extension UIColor {

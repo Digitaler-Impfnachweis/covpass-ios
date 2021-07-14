@@ -15,20 +15,19 @@ struct RuleCheckSceneFactory: ResolvableSceneFactory {
     // MARK: - Properties
 
     let router: RuleCheckRouterProtocol
-    let certLogic: DCCCertLogic
 
     // MARK: - Lifecycle
 
-    init(router: RuleCheckRouterProtocol, certLogic: DCCCertLogic) {
+    init(router: RuleCheckRouterProtocol) {
         self.router = router
-        self.certLogic = certLogic
     }
 
     func make(resolvable: Resolver<Void>) -> UIViewController {
         let viewModel = RuleCheckViewModel(
             router: router,
             resolvable: resolvable,
-            certLogic: certLogic
+            repository: VaccinationRepository.create(),
+            certLogic: DCCCertLogic.create()
         )
         return RuleCheckViewController(viewModel: viewModel)
     }
