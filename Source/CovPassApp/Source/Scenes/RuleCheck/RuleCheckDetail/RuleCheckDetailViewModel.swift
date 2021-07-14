@@ -38,6 +38,58 @@ class RuleCheckDetailViewModel {
         }
         return "certificate_check_validity_detail_view_vaccination_result_title".localized
     }
+    
+    var resultIcon: UIImage {
+        switch result.state {
+        case .fail:
+            return .error
+        case .open:
+            return .warning
+        case .passed:
+            return .validationCheckmark
+        }
+    }
+
+    var resultColor: UIColor {
+        switch result.state {
+        case .fail:
+            return .resultRed
+        case .open:
+            return .resultYellow
+        case .passed:
+            return .resultGreen
+        }
+    }
+
+    var resultColorBackground: UIColor {
+        switch result.state {
+        case .fail:
+            return .resultRedBackground
+        case .open:
+            return .resultYellowBackground
+        case .passed:
+            return .resultGreenBackground
+        }
+    }
+
+    var resultTitle: String {
+        switch result.state {
+        case .fail:
+            return "certificate_check_validity_detail_view_result_not_valid_title".localized
+        case .open:
+            return "certificate_check_validity_detail_view_result_not_testable_title".localized
+        case .passed:
+            return "certificate_check_validity_detail_view_result_valid_title".localized
+        }
+    }
+
+    var resultSubtitle: String {
+        var subtitle = String(format: "certificate_check_validity_detail_view_result_valid_message".localized, country.localized, DateUtils.displayDateTimeFormatter.string(from: date))
+        if result.state == .open {
+            subtitle = String(format: "%@\n\n%@", subtitle, "certificate_check_validity_detail_view_result_not_testable_second_message".localized)
+        }
+        return subtitle
+    }
 
     var infoText1: String {
         if dgc.t?.isEmpty == false {

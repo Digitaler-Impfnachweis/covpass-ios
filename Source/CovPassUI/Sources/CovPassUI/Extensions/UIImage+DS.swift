@@ -155,6 +155,9 @@ public extension UIImage {
 
     @ImageLoader(name: "technical_error")
     private(set) static var technicalError
+
+    @ImageLoader(name: "error")
+    private(set) static var error
 }
 
 @propertyWrapper

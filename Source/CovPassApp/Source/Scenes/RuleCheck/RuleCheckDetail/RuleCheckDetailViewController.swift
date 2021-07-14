@@ -23,6 +23,7 @@ class RuleCheckDetailViewController: UIViewController {
     @IBOutlet var qrCodeButton: MainButton!
     @IBOutlet var infoLabel1: LinkLabel!
     @IBOutlet var infoLabel2: LinkLabel!
+    @IBOutlet var resultView: HintView!
 
     // MARK: - Properties
 
@@ -48,6 +49,7 @@ class RuleCheckDetailViewController: UIViewController {
         setupList()
         setupButton()
         setupInfo()
+        setupResultView()
     }
 
     // MARK: - Methods
@@ -61,7 +63,6 @@ class RuleCheckDetailViewController: UIViewController {
 
         subtitleLabel.attributedText = viewModel.subtitle.styledAs(.body).colored(.onBackground70)
         subtitleLabel.layoutMargins = .init(top: .zero, left: .space_24, bottom: .zero, right: .space_24)
-        stackView.setCustomSpacing(.space_24, after: subtitleLabel)
     }
 
     private func setupList() {
@@ -72,6 +73,10 @@ class RuleCheckDetailViewController: UIViewController {
                 view.attributedBodyText = item.1.styledAs(.body)
                 view.resultFail = item.2
                 view.resultOpen = item.3
+                view.image = !item.3.isEmpty ? .warning : nil
+                if !item.2.isEmpty {
+                    view.image = .error
+                }
                 itemStackView.addArrangedSubview(view)
             }
         }
@@ -89,5 +94,14 @@ class RuleCheckDetailViewController: UIViewController {
         infoLabel1.layoutMargins = .init(top: .zero, left: .space_24, bottom: .space_24, right: .space_24)
         infoLabel2.attributedText = viewModel.infoText2.styledAs(.body)
         infoLabel2.layoutMargins = .init(top: .zero, left: .space_24, bottom: .space_40, right: .space_24)
+    }
+
+    private func setupResultView() {
+        resultView.layoutMargins.bottom = .space_24
+        resultView.iconView.image = viewModel.resultIcon
+        resultView.titleLabel.attributedText = viewModel.resultTitle.styledAs(.header_3)
+        resultView.bodyLabel.attributedText = viewModel.resultSubtitle.styledAs(.body)
+        resultView.containerView?.backgroundColor = viewModel.resultColorBackground
+        resultView.containerView?.layer.borderColor = viewModel.resultColor.cgColor
     }
 }
