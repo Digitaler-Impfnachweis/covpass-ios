@@ -13,7 +13,15 @@ extension DCCCertLogic {
     static func create() -> DCCCertLogic {
         DCCCertLogic(
             initialDCCRulesURL:  Bundle.commonBundle.url(forResource: XCConfiguration.value(String.self, forKey: "DCC_RULES_FILE"), withExtension: nil)!,
-            service: DCCService(url: URL(string: XCConfiguration.value(String.self, forKey: "DCC_RULES_URL"))!),
+            service: DCCService(
+                url: URL(string: XCConfiguration.value(String.self, forKey: "DCC_RULES_URL"))!,
+                sessionDelegate: APIServiceDelegate(
+                    certUrl: Bundle.commonBundle.url(
+                        forResource: XCConfiguration.value(String.self, forKey: "DCC_RULES_TLS_CERTIFICATE_NAME"),
+                        withExtension: nil
+                    )!
+                )
+            ),
             keychain: KeychainPersistence(),
             userDefaults: UserDefaultsPersistence()
         )

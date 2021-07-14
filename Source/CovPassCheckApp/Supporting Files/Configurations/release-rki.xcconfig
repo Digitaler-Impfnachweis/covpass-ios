@@ -28,3 +28,4 @@ TRUST_LIST_STATIC_DATA = dsc.json
 
 DCC_RULES_URL = https:/$()/distribution-dfe4f5c711db.dcc-rules.de
 DCC_RULES_FILE = dcc-rules.json
+DCC_RULES_TLS_CERTIFICATE_NAME = DCC-Distr.int.tls.der

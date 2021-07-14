@@ -80,7 +80,9 @@ class ValidatorOverviewViewModel {
             .done { [weak self] in
                 self?.delegate?.viewModelDidUpdate()
             }
-            .catch { _ in }
+            .catch { error in
+                print(error)
+            }
     }
 
     func startQRCodeValidation() {
