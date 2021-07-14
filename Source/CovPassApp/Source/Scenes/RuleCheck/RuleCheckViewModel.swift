@@ -22,6 +22,8 @@ class RuleCheckViewModel: BaseViewModel, CancellableViewModelProtocol {
     var country = "DE"
     var date = Date()
 
+    var isLoading: Bool = true
+
     // MARK: - Lifecycle
 
     init(
@@ -32,6 +34,18 @@ class RuleCheckViewModel: BaseViewModel, CancellableViewModelProtocol {
         self.router = router
         resolver = resolvable
         self.certLogic = certLogic
+    }
+
+    func updateRules() {
+        certLogic.updateRules()
+            .done { _ in
+            self.isLoading = false
+            self.delegate?.viewModelDidUpdate()
+        }
+        .catch { error in
+            print(error)
+            self.cancel()
+        }
     }
 
     func cancel() {

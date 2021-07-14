@@ -18,6 +18,8 @@ class RuleCheckViewController: UIViewController {
     @IBOutlet var countrySelection: InputView!
     @IBOutlet var dateSelection: InputView!
     @IBOutlet var info: LinkLabel!
+    @IBOutlet var loadingIndicagtor: DotPulseActivityIndicator!
+    @IBOutlet var scrollView: UIScrollView!
 
     // MARK: - Properties
 
@@ -39,6 +41,11 @@ class RuleCheckViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureText()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.updateRules()
     }
 
     // MARK: - Private
@@ -75,6 +82,16 @@ class RuleCheckViewController: UIViewController {
         info.layer.borderWidth = 1.0
         info.layer.borderColor = UIColor.onBackground20.cgColor
         info.layer.cornerRadius = 12.0
+
+        if viewModel.isLoading {
+            loadingIndicagtor.isHidden = false
+            loadingIndicagtor.startAnimating()
+            scrollView.isHidden = true
+        } else {
+            loadingIndicagtor.stopAnimating()
+            loadingIndicagtor.isHidden = true
+            scrollView.isHidden = false
+        }
     }
 }
 

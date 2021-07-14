@@ -15,6 +15,8 @@
                 <outlet property="dateSelection" destination="XSF-W4-r5c" id="hQb-oN-Ec9"/>
                 <outlet property="headline" destination="sKK-Se-ZAm" id="Tul-uA-XuY"/>
                 <outlet property="info" destination="czg-wL-cb7" id="In0-6k-5je"/>
+                <outlet property="loadingIndicagtor" destination="t5O-y3-fRO" id="8BE-9o-Khm"/>
+                <outlet property="scrollView" destination="Qf6-Rq-Unr" id="GUA-vX-vm4"/>
                 <outlet property="subtitle" destination="gbc-XM-dNV" id="8H5-E1-hxk"/>
                 <outlet property="view" destination="9Sf-rI-cgn" id="Tp4-Er-rhk"/>
             </connections>
@@ -24,6 +26,13 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t5O-y3-fRO" customClass="DotPulseActivityIndicator" customModule="CovPassUI">
+                    <rect key="frame" x="87" y="164" width="240" height="16"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="16" id="BKF-cB-p73"/>
+                    </constraints>
+                </view>
                 <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="60" translatesAutoresizingMaskIntoConstraints="NO" id="sKK-Se-ZAm" userLabel="Headline" customClass="InfoHeaderView" customModule="CovPassUI">
                     <rect key="frame" x="0.0" y="64" width="414" height="60"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -81,11 +90,14 @@
             <viewLayoutGuide key="safeArea" id="aye-B2-vjU"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
+                <constraint firstItem="t5O-y3-fRO" firstAttribute="leading" secondItem="aye-B2-vjU" secondAttribute="leading" constant="87" id="6PI-ej-k0G"/>
                 <constraint firstItem="Qf6-Rq-Unr" firstAttribute="top" secondItem="sKK-Se-ZAm" secondAttribute="bottom" id="EEf-dk-D9a"/>
+                <constraint firstItem="t5O-y3-fRO" firstAttribute="top" secondItem="sKK-Se-ZAm" secondAttribute="bottom" constant="40" id="MR9-OF-gQN"/>
                 <constraint firstItem="sKK-Se-ZAm" firstAttribute="trailing" secondItem="aye-B2-vjU" secondAttribute="trailing" id="NeB-lg-50M"/>
                 <constraint firstItem="Qf6-Rq-Unr" firstAttribute="leading" secondItem="aye-B2-vjU" secondAttribute="leading" id="WHx-WI-vQO"/>
                 <constraint firstItem="sKK-Se-ZAm" firstAttribute="leading" secondItem="aye-B2-vjU" secondAttribute="leading" id="aWy-O1-CG0"/>
                 <constraint firstItem="Qf6-Rq-Unr" firstAttribute="trailing" secondItem="aye-B2-vjU" secondAttribute="trailing" id="e75-0j-Tss"/>
+                <constraint firstItem="aye-B2-vjU" firstAttribute="trailing" secondItem="t5O-y3-fRO" secondAttribute="trailing" constant="87" id="fWR-jH-on2"/>
                 <constraint firstItem="aye-B2-vjU" firstAttribute="bottom" secondItem="Qf6-Rq-Unr" secondAttribute="bottom" constant="68" id="g9t-C1-52m"/>
                 <constraint firstItem="sKK-Se-ZAm" firstAttribute="top" secondItem="aye-B2-vjU" secondAttribute="top" constant="20" id="xWv-Hq-W8v"/>
             </constraints>
