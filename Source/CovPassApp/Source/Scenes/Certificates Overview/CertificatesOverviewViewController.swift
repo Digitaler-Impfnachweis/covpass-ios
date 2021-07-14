@@ -67,6 +67,8 @@ class CertificatesOverviewViewController: UIViewController {
 
     private func setupHeaderView() {
         headerView.attributedTitleText = "certificate_action_button_check_validity".localized.styledAs(.header_3).colored(.brandBase)
+        headerView.titleButton.isHidden = !viewModel.hasCertificates
+        headerView.titleIcon.isHidden = !viewModel.hasCertificates
         headerView.image = .help
         headerView.titleAction = { [weak self] in
             self?.viewModel.showRuleCheck()
@@ -158,6 +160,7 @@ extension CertificatesOverviewViewController: DotPageIndicatorDelegate {
 
 extension CertificatesOverviewViewController: CertificatesOverviewViewModelDelegate {
     func viewModelDidUpdate() {
+        setupHeaderView()
         reloadCollectionView()
     }
 

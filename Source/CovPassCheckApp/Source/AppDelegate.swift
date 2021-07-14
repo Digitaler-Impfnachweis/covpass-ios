@@ -40,6 +40,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
             UserDefaults.StartupInfo.set(true, forKey: .appInstalled)
             try KeychainPersistence().delete(KeychainPersistence.trustListKey)
             try KeychainPersistence().delete(KeychainPersistence.certificateListKey)
+            try KeychainPersistence().delete(KeychainPersistence.dccRulesKey)
             print("Keychain deleted")
         }
     }

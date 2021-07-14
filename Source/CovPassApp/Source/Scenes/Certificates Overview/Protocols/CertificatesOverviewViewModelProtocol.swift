@@ -14,6 +14,7 @@ import UIKit
 protocol CertificatesOverviewViewModelProtocol {
     var delegate: CertificatesOverviewViewModelDelegate? { get set }
     var certificateViewModels: [CardViewModel] { get }
+    var hasCertificates: Bool { get }
 
     func refresh()
     func updateTrustList()

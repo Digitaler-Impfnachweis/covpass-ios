@@ -19,12 +19,13 @@ let rulesSummary = try! JSONDecoder().decode([RuleSimple].self, from: dataSummar
 var result = [[String: Any]]()
 for ruleSummary in rulesSummary {
     let data = try! Data(contentsOf: URL(string: baseURL + "/rules/\(ruleSummary.country)/\(ruleSummary.hash)")!)
-    let json = try! JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
+    var json = try! JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
+    json["hash"] = ruleSummary.hash
     result.append(json)
 }
 
 // Save json to file
 let jsonData = try! JSONSerialization.data(withJSONObject: result, options: [])
-try! jsonData.write(to: URL(fileURLWithPath: FileManager.default.currentDirectoryPath).appendingPathComponent("../Certificates/DEMO/DCC/dcc-rules.json"))
-try! jsonData.write(to: URL(fileURLWithPath: FileManager.default.currentDirectoryPath).appendingPathComponent("../Certificates/PROD/DCC/dcc-rules.json"))
-try! jsonData.write(to: URL(fileURLWithPath: FileManager.default.currentDirectoryPath).appendingPathComponent("../Certificates/PROD_RKI/DCC/dcc-rules.json"))
+try! jsonData.write(to: URL(fileURLWithPath: FileManager.default.currentDirectoryPath).appendingPathComponent("Certificates/DEMO/DCC/dcc-rules.json"))
+try! jsonData.write(to: URL(fileURLWithPath: FileManager.default.currentDirectoryPath).appendingPathComponent("Certificates/PROD/DCC/dcc-rules.json"))
+try! jsonData.write(to: URL(fileURLWithPath: FileManager.default.currentDirectoryPath).appendingPathComponent("Certificates/PROD_RKI/DCC/dcc-rules.json"))

@@ -15,6 +15,7 @@ public class OverviewHeaderView: XibView {
 
     @IBOutlet public var titleButton: UIButton!
     @IBOutlet public var actionButton: UIButton!
+    @IBOutlet public var titleIcon: UIImageView!
 
     // MARK: - Variables
 

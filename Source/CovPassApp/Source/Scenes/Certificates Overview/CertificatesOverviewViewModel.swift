@@ -26,6 +26,10 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
         cardViewModels(for: repository.matchedCertificates(for: certificateList).sorted(by: { c, _ -> Bool in c.isFavorite }))
     }
 
+    var hasCertificates: Bool {
+        certificateList.certificates.count > 0
+    }
+
     // MARK: - Lifecycle
 
     init(

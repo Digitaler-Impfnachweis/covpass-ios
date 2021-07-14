@@ -12,6 +12,7 @@
             <connections>
                 <outlet property="actionButton" destination="RSG-an-e0J" id="Q1H-u7-Uqh"/>
                 <outlet property="titleButton" destination="VjN-hP-nf7" id="ZWY-kc-1iR"/>
+                <outlet property="titleIcon" destination="3df-fF-xTG" id="qfd-PR-2wi"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>

@@ -12,7 +12,7 @@ import CertLogic
 
 public protocol DCCServiceProtocol {
     func loadDCCRules() -> Promise<[RuleSimple]>
-    func loadDCCRule(country: String, hash: String) -> Promise<Rule>
+    func loadDCCRule(country: String, hash: String) -> Promise<RuleExtension>
 }
 
 public enum DCCServiceError: Error {
@@ -38,7 +38,7 @@ public struct DCCService: DCCServiceProtocol {
         }
     }
 
-    public func loadDCCRule(country: String, hash: String) -> Promise<Rule> {
+    public func loadDCCRule(country: String, hash: String) -> Promise<RuleExtension> {
         return Promise { seal in
             guard let url = URL(string: "\(url.absoluteString)/rules/\(country)/\(hash)") else {
                 seal.reject(DCCServiceError.invalidURL)
@@ -46,7 +46,7 @@ public struct DCCService: DCCServiceProtocol {
             }
             let data = try Data(contentsOf: url)
             let res = try JSONDecoder().decode(Rule.self, from: data)
-            seal.fulfill(res)
+            seal.fulfill(RuleExtension(hash: hash, rule: res))
         }
     }
 }
