@@ -14,6 +14,8 @@ class RuleCheckViewController: UIViewController {
 
     @IBOutlet var headline: InfoHeaderView!
     @IBOutlet var subtitle: PlainLabel!
+    @IBOutlet var countrySelection: InputView!
+    @IBOutlet var dateSelection: InputView!
     @IBOutlet var info: LinkLabel!
 
     // MARK: - Properties
@@ -28,6 +30,7 @@ class RuleCheckViewController: UIViewController {
     init(viewModel: RuleCheckViewModel) {
         self.viewModel = viewModel
         super.init(nibName: String(describing: Self.self), bundle: .main)
+        self.viewModel.delegate = self
     }
 
     // MARK: - Lifecycle
@@ -50,11 +53,33 @@ class RuleCheckViewController: UIViewController {
         subtitle.attributedText = "certificate_check_validity_message".localized.styledAs(.body)
         subtitle.layoutMargins = .init(top: .zero, left: .space_24, bottom: .space_24, right: .space_24)
 
-        info.attributedText = "certificate_check_validity_selection_country_note".localized.styledAs(.body)
+        countrySelection.titleLabel.attributedText = "certificate_check_validity_selection_country".localized.styledAs(.body)
+        countrySelection.valueLabel.attributedText = viewModel.country.localized.styledAs(.body)
+        countrySelection.iconView.image = UIImage.map
+        countrySelection.onClickAction = { [weak self] in
+            self?.viewModel.showCountrySelection()
+        }
+
+        dateSelection.titleLabel.attributedText = "certificate_check_validity_selection_date".localized.styledAs(.body)
+        dateSelection.valueLabel.attributedText = "hello".styledAs(.body)
+        dateSelection.iconView.image = UIImage.calendar.withRenderingMode(.alwaysTemplate)
+        dateSelection.layoutMargins.bottom = .space_40
+
+        info.attributedText = "certificate_check_validity_note".localized.styledAs(.body)
         info.layoutMargins = .init(top: .space_8, left: .space_8, bottom: .space_8, right: .space_8)
         info.backgroundColor = .backgroundSecondary20
         info.layer.borderWidth = 1.0
         info.layer.borderColor = UIColor.onBackground20.cgColor
         info.layer.cornerRadius = 12.0
     }
+}
+
+// MARK: - ViewModelDelegate
+
+extension RuleCheckViewController: ViewModelDelegate {
+    func viewModelDidUpdate() {
+        configureText()
+    }
+
+    func viewModelUpdateDidFailWithError(_ error: Error) {}
 }

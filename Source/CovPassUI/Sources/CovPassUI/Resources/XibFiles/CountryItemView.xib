@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CountryItemView" customModule="CovPassUI">
+            <connections>
+                <outlet property="leftIcon" destination="cTM-Pm-4hP" id="IrJ-zH-fI8"/>
+                <outlet property="rightIcon" destination="KwH-bh-4Uf" id="Tnm-PQ-EFs"/>
+                <outlet property="seperatorView" destination="kcX-Gc-guN" id="ZR6-hX-P0S"/>
+                <outlet property="textLabel" destination="gf9-Wo-kDi" id="OUy-RD-lqR"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="394" height="165"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="FbP-c5-xmu">
+                    <rect key="frame" x="20" y="52" width="354" height="105"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cTM-Pm-4hP">
+                            <rect key="frame" x="0.0" y="40" width="25" height="25"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="25" id="DbR-jF-1Za"/>
+                                <constraint firstAttribute="width" secondItem="cTM-Pm-4hP" secondAttribute="height" multiplier="1:1" id="HdR-vK-U04"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gf9-Wo-kDi">
+                            <rect key="frame" x="33" y="42.5" width="288" height="20.5"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KwH-bh-4Uf">
+                            <rect key="frame" x="329" y="40" width="25" height="25"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="25" id="HY6-dY-bnx"/>
+                                <constraint firstAttribute="width" secondItem="KwH-bh-4Uf" secondAttribute="height" multiplier="1:1" id="VMz-We-jUl"/>
+                            </constraints>
+                        </imageView>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="cTM-Pm-4hP" firstAttribute="width" secondItem="cTM-Pm-4hP" secondAttribute="height" multiplier="1:1" id="Xfn-Xs-Dql"/>
+                    </constraints>
+                </stackView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kcX-Gc-guN" userLabel="Bottom Border">
+                    <rect key="frame" x="0.0" y="164" width="394" height="1"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="eQE-xt-hae"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="kcX-Gc-guN" secondAttribute="trailing" id="LBg-ug-lkR"/>
+                <constraint firstAttribute="bottom" secondItem="kcX-Gc-guN" secondAttribute="bottom" id="Obi-cI-1bC"/>
+                <constraint firstAttribute="trailingMargin" secondItem="FbP-c5-xmu" secondAttribute="trailing" id="SUi-ee-Jc1"/>
+                <constraint firstItem="kcX-Gc-guN" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="bIZ-QQ-iEe"/>
+                <constraint firstAttribute="bottomMargin" secondItem="FbP-c5-xmu" secondAttribute="bottom" id="lIE-Bx-UeI"/>
+                <constraint firstItem="FbP-c5-xmu" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="topMargin" id="ocD-oB-wC5"/>
+                <constraint firstItem="FbP-c5-xmu" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leadingMargin" id="pHg-Mg-Zse"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <edgeInsets key="layoutMargins" top="0.0" left="0.0" bottom="0.0" right="0.0"/>
+            <point key="canvasLocation" x="-24.637681159420293" y="-73.325892857142847"/>
+        </view>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

@@ -8,6 +8,7 @@
 
 import CovPassUI
 import UIKit
+import PromiseKit
 
 class RuleCheckRouter: RuleCheckRouterProtocol {
     // MARK: - Properties
@@ -18,5 +19,15 @@ class RuleCheckRouter: RuleCheckRouterProtocol {
 
     init(sceneCoordinator: SceneCoordinator) {
         self.sceneCoordinator = sceneCoordinator
+    }
+
+    func showCountrySelection(countries: [String], country: String) -> Promise<String> {
+        sceneCoordinator.present(
+            CountrySelectionSceneFactory(
+                router: CountrySelectionRouter(sceneCoordinator: sceneCoordinator),
+                countries: countries,
+                country: country
+            )
+        )
     }
 }

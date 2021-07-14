@@ -11,6 +11,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RuleCheckViewController" customModule="CovPassApp" customModuleProvider="target">
             <connections>
+                <outlet property="countrySelection" destination="9lD-1M-rKg" id="KwJ-QK-DLN"/>
+                <outlet property="dateSelection" destination="XSF-W4-r5c" id="hQb-oN-Ec9"/>
                 <outlet property="headline" destination="sKK-Se-ZAm" id="Tul-uA-XuY"/>
                 <outlet property="info" destination="czg-wL-cb7" id="In0-6k-5je"/>
                 <outlet property="subtitle" destination="gbc-XM-dNV" id="8H5-E1-hxk"/>
@@ -33,14 +35,22 @@
                     <rect key="frame" x="0.0" y="124" width="414" height="670"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="tNn-Ng-ZRx">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="256"/>
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="512"/>
                             <subviews>
                                 <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gbc-XM-dNV" customClass="PlainLabel" customModule="CovPassUI">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="128"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 </view>
-                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JbU-IC-eM5">
+                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9lD-1M-rKg" customClass="InputView" customModule="CovPassUI">
                                     <rect key="frame" x="0.0" y="128" width="414" height="128"/>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                </view>
+                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XSF-W4-r5c" customClass="InputView" customModule="CovPassUI">
+                                    <rect key="frame" x="0.0" y="256" width="414" height="128"/>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                </view>
+                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JbU-IC-eM5">
+                                    <rect key="frame" x="0.0" y="384" width="414" height="128"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="czg-wL-cb7" userLabel="Description Text" customClass="LinkLabel" customModule="CovPassUI">
                                             <rect key="frame" x="24" y="0.0" width="366" height="128"/>

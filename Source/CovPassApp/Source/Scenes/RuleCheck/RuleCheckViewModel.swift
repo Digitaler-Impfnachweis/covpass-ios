@@ -10,6 +10,7 @@ import CovPassUI
 import LocalAuthentication
 import PromiseKit
 import UIKit
+import CovPassCommon
 
 class RuleCheckViewModel: BaseViewModel, CancellableViewModelProtocol {
     // MARK: - Properties
@@ -17,18 +18,34 @@ class RuleCheckViewModel: BaseViewModel, CancellableViewModelProtocol {
     weak var delegate: ViewModelDelegate?
     let router: RuleCheckRouterProtocol
     let resolver: Resolver<Void>
+    let certLogic: DCCCertLogic
+    var country = "DE"
+    var date = Date()
 
     // MARK: - Lifecycle
 
     init(
         router: RuleCheckRouterProtocol,
-        resolvable: Resolver<Void>
+        resolvable: Resolver<Void>,
+        certLogic: DCCCertLogic
     ) {
         self.router = router
         resolver = resolvable
+        self.certLogic = certLogic
     }
 
     func cancel() {
         resolver.cancel()
+    }
+
+    func showCountrySelection() {
+        router.showCountrySelection(countries: certLogic.countries, country: country)
+            .done { newCountry in
+                self.country = newCountry
+                self.delegate?.viewModelDidUpdate()
+            }
+            .catch { error in
+                print(error)
+            }
     }
 }

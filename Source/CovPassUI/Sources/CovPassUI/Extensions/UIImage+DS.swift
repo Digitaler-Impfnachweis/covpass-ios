@@ -96,6 +96,9 @@ public extension UIImage {
     @ImageLoader(name: "icon_card")
     private(set) static var card
 
+    @ImageLoader(name: "map")
+    private(set) static var map
+
     @ImageLoader(name: "delete")
     private(set) static var delete
 
