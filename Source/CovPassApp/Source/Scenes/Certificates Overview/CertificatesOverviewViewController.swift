@@ -49,7 +49,6 @@ class CertificatesOverviewViewController: UIViewController {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
         viewModel.updateTrustList()
-        viewModel.updateDCCRules()
     }
 
     override func viewWillDisappear(_ animated: Bool) {

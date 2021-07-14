@@ -45,12 +45,10 @@ public struct DCCCertLogic {
         if let localRules = try? Data(contentsOf: initialDCCRulesURL),
            let ruleArray = try? JSONSerialization.jsonObject(with: localRules, options: .allowFragments) as? [[String: Any]] {
             return ruleArray.compactMap { ruleObj in
-                print("TRY decode")
                 guard let data = try? JSONSerialization.data(withJSONObject: ruleObj, options: .fragmentsAllowed),
                       let rule = try? JSONDecoder().decode(Rule.self, from: data),
                       let hash = ruleObj["hash"] as? String
-                else { print("NOOO"); return nil }
-                print("YESS with hash " + hash)
+                else { return nil }
                 return RuleExtension(hash: hash, rule: rule)
             }
         }
