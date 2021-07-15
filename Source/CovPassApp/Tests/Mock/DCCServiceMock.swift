@@ -18,7 +18,7 @@ public struct DCCServiceMock: DCCServiceProtocol {
         return Promise.value([])
     }
 
-    public func loadDCCRule(country: String, hash: String) -> Promise<RuleExtension> {
+    public func loadDCCRule(country: String, hash: String) -> Promise<Rule> {
         return Promise(error: ApplicationError.unknownError)
     }
 }

@@ -35,28 +35,18 @@ public struct DCCCertLogic {
     private let keychain: Persistence
     private let userDefaults: Persistence
 
-    var dccRulesWithHash: [RuleExtension]? {
+    var dccRules: [Rule]? {
         // Try to load rules from keychain
         if let rulesData = try? keychain.fetch(KeychainPersistence.dccRulesKey) as? Data,
-           let rules = try? JSONDecoder().decode([RuleExtension].self, from: rulesData) {
+           let rules = try? JSONDecoder().decode([Rule].self, from: rulesData) {
             return rules
         }
         // Try to load local rules
         if let localRules = try? Data(contentsOf: initialDCCRulesURL),
-           let ruleArray = try? JSONSerialization.jsonObject(with: localRules, options: .allowFragments) as? [[String: Any]] {
-            return ruleArray.compactMap { ruleObj in
-                guard let data = try? JSONSerialization.data(withJSONObject: ruleObj, options: .fragmentsAllowed),
-                      let rule = try? JSONDecoder().decode(Rule.self, from: data),
-                      let hash = ruleObj["hash"] as? String
-                else { return nil }
-                return RuleExtension(hash: hash, rule: rule)
-            }
+           let rules = try? JSONDecoder().decode([Rule].self, from: localRules) {
+            return rules
         }
         return nil
-    }
-
-    var dccRules: [Rule]? {
-        dccRulesWithHash?.map { $0.rule }
     }
 
     public var countries: [String] {
@@ -139,8 +129,8 @@ public struct DCCCertLogic {
         return firstly {
             service.loadDCCRules()
         }
-        .then(on: .global()) { (remoteRules: [RuleSimple]) throws -> Promise<[RuleExtension]> in
-            guard let rules = dccRulesWithHash else {
+        .then(on: .global()) { (remoteRules: [RuleSimple]) throws -> Promise<[Rule]> in
+            guard let rules = dccRules else {
                 throw DCCCertLogicError.noRules
             }
             return updateCountryRules(localRules: rules, remoteRules: remoteRules)
@@ -152,11 +142,11 @@ public struct DCCCertLogic {
         }
     }
 
-    private func updateCountryRules(localRules: [RuleExtension], remoteRules: [RuleSimple]) -> Promise<[RuleExtension]> {
+    private func updateCountryRules(localRules: [Rule], remoteRules: [RuleSimple]) -> Promise<[Rule]> {
         Promise { seal in
-            var updatedRules = [RuleExtension]()
+            var updatedRules = [Rule]()
             for remoteRule in remoteRules {
-                if let localRule = localRules.first(where: { $0.rule.countryCode == remoteRule.country && $0.hash == remoteRule.hash }) {
+                if let localRule = localRules.first(where: { $0.countryCode == remoteRule.country && $0.hash == remoteRule.hash }) {
                     updatedRules.append(localRule)
                 } else {
                     let rule = try service.loadDCCRule(country: remoteRule.country, hash: remoteRule.hash).wait()

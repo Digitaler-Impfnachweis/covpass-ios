@@ -47,7 +47,8 @@ class DCCCertLogicTests: XCTestCase {
 
         // Save one rule
         let rule = Rule(identifier: "", type: "", version: "", schemaVersion: "", engine: "", engineVersion: "", certificateType: "", description: [], validFrom: "", validTo: "", affectedString: [], logic: JSON(""), countryCode: "")
-        let data = try JSONEncoder().encode([RuleExtension(hash: "1", rule: rule)])
+        rule.hash = "1"
+        let data = try JSONEncoder().encode([rule])
         try keychain.store(KeychainPersistence.dccRulesKey, value: data)
 
         // Check saved rules
@@ -114,12 +115,12 @@ class DCCCertLogicTests: XCTestCase {
 
         // Update rules
         service.loadDCCRulesResult = Promise.value([RuleSimple(identifier: "", version: "", country: "DE", hash: "")])
-        service.loadDCCRuleResult = Promise.value(RuleExtension(hash: "", rule: Rule(identifier: "", type: "", version: "", schemaVersion: "", engine: "", engineVersion: "", certificateType: "", description: [], validFrom: "", validTo: "", affectedString: [], logic: JSON(""), countryCode: "DE")))
+        service.loadDCCRuleResult = Promise.value(Rule(identifier: "", type: "", version: "", schemaVersion: "", engine: "", engineVersion: "", certificateType: "", description: [], validFrom: "", validTo: "", affectedString: [], logic: JSON(""), countryCode: "DE"))
         try sut.updateRules().wait()
 
         // Keychain should have the new rules
         let data = try keychain.fetch(KeychainPersistence.dccRulesKey)! as! Data
-        let rules = try JSONDecoder().decode([RuleExtension].self, from: data)
+        let rules = try JSONDecoder().decode([Rule].self, from: data)
         XCTAssertEqual(rules.count, 1)
     }
 
@@ -127,24 +128,25 @@ class DCCCertLogicTests: XCTestCase {
         let rule = Rule(identifier: "", type: "", version: "", schemaVersion: "", engine: "", engineVersion: "", certificateType: "", description: [], validFrom: "", validTo: "", affectedString: [], logic: JSON(""), countryCode: "DE")
 
         // Load intial data
-        let initialData = try JSONEncoder().encode([RuleExtension(hash: "", rule: rule)])
+        let initialData = try JSONEncoder().encode([rule])
         try keychain.store(KeychainPersistence.dccRulesKey, value: initialData)
 
         // Update rules
         service.loadDCCRulesResult = Promise.value([RuleSimple(identifier: "", version: "", country: "DE", hash: "")])
-        service.loadDCCRuleResult = Promise.value(RuleExtension(hash: "", rule: rule))
+        service.loadDCCRuleResult = Promise.value(rule)
         try sut.updateRules().wait()
 
         // Keychain should have the new rules
         let data = try keychain.fetch(KeychainPersistence.dccRulesKey)! as! Data
-        let rules = try JSONDecoder().decode([RuleExtension].self, from: data)
+        let rules = try JSONDecoder().decode([Rule].self, from: data)
         XCTAssertEqual(rules.count, 1)
     }
 
     func testRuleUpdateNewRule() throws {
         // Load intial data
         let initialRule = Rule(identifier: "2", type: "", version: "", schemaVersion: "", engine: "", engineVersion: "", certificateType: "", description: [], validFrom: "", validTo: "", affectedString: [], logic: JSON(""), countryCode: "DE")
-        let initialData = try JSONEncoder().encode([RuleExtension(hash: "2", rule: initialRule)])
+        initialRule.hash = "2"
+        let initialData = try JSONEncoder().encode([initialRule])
         try keychain.store(KeychainPersistence.dccRulesKey, value: initialData)
 
         // Update rules
@@ -152,30 +154,34 @@ class DCCCertLogicTests: XCTestCase {
                                                     RuleSimple(identifier: "1", version: "", country: "DE", hash: "1"),
                                                     RuleSimple(identifier: "2", version: "", country: "DE", hash: "2")
         ])
-        service.loadDCCRuleResult = Promise.value(RuleExtension(hash: "1", rule: Rule(identifier: "1", type: "", version: "", schemaVersion: "", engine: "", engineVersion: "", certificateType: "", description: [], validFrom: "", validTo: "", affectedString: [], logic: JSON(""), countryCode: "DE")))
+        let rule = Rule(identifier: "1", type: "", version: "", schemaVersion: "", engine: "", engineVersion: "", certificateType: "", description: [], validFrom: "", validTo: "", affectedString: [], logic: JSON(""), countryCode: "DE")
+        rule.hash = "1"
+        service.loadDCCRuleResult = Promise.value(rule)
         try sut.updateRules().wait()
 
         // Keychain should have the new rules
         let data = try keychain.fetch(KeychainPersistence.dccRulesKey)! as! Data
-        let rules = try JSONDecoder().decode([RuleExtension].self, from: data)
+        let rules = try JSONDecoder().decode([Rule].self, from: data)
         XCTAssertEqual(rules.count, 2)
     }
 
     func testRuleUpdateDeleteOldRule() throws {
         // Load intial data
-        let initialData = try JSONEncoder().encode([RuleExtension(hash: "", rule: Rule(identifier: "2", type: "", version: "", schemaVersion: "", engine: "", engineVersion: "", certificateType: "", description: [], validFrom: "", validTo: "", affectedString: [], logic: JSON(""), countryCode: "DE"))])
+        let initialData = try JSONEncoder().encode([Rule(identifier: "2", type: "", version: "", schemaVersion: "", engine: "", engineVersion: "", certificateType: "", description: [], validFrom: "", validTo: "", affectedString: [], logic: JSON(""), countryCode: "DE")])
         try keychain.store(KeychainPersistence.dccRulesKey, value: initialData)
 
         // Update rules
         service.loadDCCRulesResult = Promise.value([RuleSimple(identifier: "1", version: "", country: "DE", hash: "1")])
-        service.loadDCCRuleResult = Promise.value(RuleExtension(hash: "1", rule: Rule(identifier: "1", type: "", version: "", schemaVersion: "", engine: "", engineVersion: "", certificateType: "", description: [], validFrom: "", validTo: "", affectedString: [], logic: JSON(""), countryCode: "DE")))
+        let rule = Rule(identifier: "1", type: "", version: "", schemaVersion: "", engine: "", engineVersion: "", certificateType: "", description: [], validFrom: "", validTo: "", affectedString: [], logic: JSON(""), countryCode: "DE")
+        rule.hash = "1"
+        service.loadDCCRuleResult = Promise.value(rule)
         try sut.updateRules().wait()
 
         // Keychain should have the new rules
         let data = try keychain.fetch(KeychainPersistence.dccRulesKey)! as! Data
-        let rules = try JSONDecoder().decode([RuleExtension].self, from: data)
+        let rules = try JSONDecoder().decode([Rule].self, from: data)
         XCTAssertEqual(rules.count, 1)
-        XCTAssertEqual(rules[0].rule.identifier, "1")
+        XCTAssertEqual(rules[0].identifier, "1")
     }
 
     // MARK: - Helpers

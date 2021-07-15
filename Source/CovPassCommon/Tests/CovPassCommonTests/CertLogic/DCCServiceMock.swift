@@ -21,8 +21,8 @@ class DCCServiceMock: DCCServiceProtocol {
         return loadDCCRulesResult ?? Promise.value([])
     }
 
-    var loadDCCRuleResult: Promise<RuleExtension>?
-    func loadDCCRule(country: String, hash: String) -> Promise<RuleExtension> {
+    var loadDCCRuleResult: Promise<Rule>?
+    func loadDCCRule(country: String, hash: String) -> Promise<Rule> {
         return loadDCCRuleResult ?? Promise.init(error: DCCServiceError.invalidURL)
     }
 }
