@@ -18,10 +18,10 @@ struct ResultItemViewModel: CertificateItemViewModel {
     var icon: UIImage {
         if result.state == .open {
             if result.certificate.vaccinationCertificate.hcert.dgc.t?.isEmpty == false {
-                return .iconYellow
-            }
-            if result.certificate.vaccinationCertificate.hcert.dgc.t?.isEmpty == false {
                 return .iconTest
+            }
+            if result.certificate.vaccinationCertificate.hcert.dgc.r?.isEmpty == false {
+                return .iconYellow
             }
             return .iconYellow
         }
@@ -29,10 +29,10 @@ struct ResultItemViewModel: CertificateItemViewModel {
             return .iconRed
         }
         if result.certificate.vaccinationCertificate.hcert.dgc.t?.isEmpty == false {
-            return .statusFullDetail
-        }
-        if result.certificate.vaccinationCertificate.hcert.dgc.t?.isEmpty == false {
             return .iconTest
+        }
+        if result.certificate.vaccinationCertificate.hcert.dgc.r?.isEmpty == false {
+            return .statusFullDetail
         }
         return .statusFullDetail
     }
