@@ -49,6 +49,43 @@ public struct DCCCertLogic {
         return nil
     }
 
+    let schema: String = {
+        guard let url = Bundle.commonBundle.url(forResource: "DCC.combined-schema", withExtension: "json"),
+              let string = try? String(contentsOf: url)
+        else {
+            return ""
+        }
+        return string
+    }()
+
+    let valueSets: [String: [String]] = {
+        [
+            "country-2-codes": valueSet("country-2-codes"),
+            "covid-19-lab-result": valueSet("covid-19-lab-result"),
+            "covid-19-lab-test-manufacturer-and-name": valueSet("covid-19-lab-test-manufacturer-and-name"),
+            "covid-19-lab-test-type": valueSet("covid-19-lab-test-type"),
+            "disease-agent-targeted": valueSet("disease-agent-targeted"),
+            "sct-vaccines-covid-19": valueSet("sct-vaccines-covid-19"),
+            "vaccines-covid-19-auth-holders": valueSet("vaccines-covid-19-auth-holders"),
+            "vaccines-covid-19-names": valueSet("vaccines-covid-19-names")
+        ]
+    }()
+
+    private static func valueSet(_ name: String) -> [String] {
+        guard let url = Bundle.commonBundle.url(forResource: name, withExtension: "json"),
+              let data = try? Data(contentsOf: url),
+              let arr = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: Any],
+              let setsArr = arr["valueSetValues"] as? [String: Any]
+        else {
+            return []
+        }
+        var valueSets = [String]()
+        for (k, _) in setsArr {
+            valueSets.append(k)
+        }
+        return valueSets
+    }
+
     public var countries: [String] {
         var list = [String]()
         for rule in dccRules ?? [] {
@@ -92,13 +129,13 @@ public struct DCCCertLogic {
         )
         let external = ExternalParameter(
             validationClock: validationClock,
-            valueSets: [:],
+            valueSets: valueSets,
             exp: certificate.exp ?? Date.distantFuture,
             iat: certificate.iat ?? Date.distantPast,
             issuerCountryCode: certificate.iss
         )
 
-        let engine = CertLogicEngine(schema: "", rules: rules)
+        let engine = CertLogicEngine(schema: schema, rules: rules)
         let data = try JSONEncoder().encode(certificate.hcert.dgc)
         guard let payload = String(data: data, encoding: .utf8) else {
             throw DCCCertLogicError.encodingError
