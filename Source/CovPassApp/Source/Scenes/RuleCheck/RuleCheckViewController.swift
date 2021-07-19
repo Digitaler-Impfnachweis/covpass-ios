@@ -42,10 +42,6 @@ class RuleCheckViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureText()
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         viewModel.updateRules()
     }
 

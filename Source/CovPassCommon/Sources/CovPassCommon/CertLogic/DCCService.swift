@@ -116,6 +116,7 @@ public struct DCCService: DCCServiceProtocol {
                     seal.reject(DCCServiceError.invalidResponse)
                     return
                 }
+                res.hash = hash
 
                 seal.fulfill(res)
             }.resume()

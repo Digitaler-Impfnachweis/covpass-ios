@@ -47,12 +47,12 @@ class ValidatorOverviewViewModel {
 
     var offlineMessageCertificates: String {
         let date = repository.getLastUpdatedTrustList() ?? Date(timeIntervalSince1970: 0)
-        return String(format: "%@ %@", "validation_start_screen_offline_modus_certificates".localized, DateUtils.displayDateTimeFormatter.string(from: date))
+        return String(format: "validation_start_screen_offline_modus_certificates".localized, DateUtils.displayDateTimeFormatter.string(from: date))
     }
 
     var offlineMessageRules: String {
         let date = certLogic.lastUpdatedDCCRules() ?? Date(timeIntervalSince1970: 0)
-        return String(format: "%@ %@", "validation_start_screen_offline_modus_rules".localized, DateUtils.displayDateTimeFormatter.string(from: date))
+        return String(format: "validation_start_screen_offline_modus_rules".localized, DateUtils.displayDateTimeFormatter.string(from: date))
     }
 
     // MARK: - Lifecycle

@@ -74,9 +74,9 @@
 
 "validation_start_screen_offline_modus_note_update_pattern" = "Letztes Update: %@";
 
-"validation_start_screen_offline_modus_certificates" = "Zertifikate:";
+"validation_start_screen_offline_modus_certificates" = "Zertifikate: %@";
 
-"validation_start_screen_offline_modus_rules" = "Regelsets:";
+"validation_start_screen_offline_modus_rules" = "Regelsets: %@";
 
 "error_old_version_title" = "Internetverbindung erforderlich";
 
