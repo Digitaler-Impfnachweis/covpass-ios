@@ -20,6 +20,7 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
     private var certificates: [ExtendedCBORWebToken]
     private let resolver: Resolver<CertificateDetailSceneResult>?
     private var isFavorite = false
+    private var showFavorite = false
 
     private var selectedCertificate: ExtendedCBORWebToken? {
         CertificateSorter.sort(certificates).first
@@ -30,7 +31,8 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
     }
 
     var favoriteIcon: UIImage? {
-        isFavorite ? .starFull : .starPartial
+        if !showFavorite { return nil }
+        return isFavorite ? .starFull : .starPartial
     }
 
     var name: String {
@@ -165,6 +167,12 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
         }
         .get { isFavorite in
             self.isFavorite = isFavorite
+        }
+        .then { _ in
+            self.repository.getCertificateList()
+        }
+        .get { certificateList in
+            self.showFavorite = certificateList.certificates.count > 1
         }
         .done { _ in
             self.delegate?.viewModelDidUpdate()

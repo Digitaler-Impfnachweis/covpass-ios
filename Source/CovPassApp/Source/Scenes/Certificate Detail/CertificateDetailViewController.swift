@@ -68,9 +68,11 @@ class CertificateDetailViewController: UIViewController {
         navigationController?.navigationBar.backIndicatorTransitionMaskImage = .arrowBack
         navigationController?.navigationBar.tintColor = .onBackground100
 
-        let favoriteIcon = UIBarButtonItem(image: viewModel.favoriteIcon, style: .plain, target: self, action: #selector(toggleFavorite))
-        favoriteIcon.tintColor = .onBackground100
-        navigationItem.rightBarButtonItem = favoriteIcon
+        if viewModel.favoriteIcon != nil {
+            let favoriteIcon = UIBarButtonItem(image: viewModel.favoriteIcon, style: .plain, target: self, action: #selector(toggleFavorite))
+            favoriteIcon.tintColor = .onBackground100
+            navigationItem.rightBarButtonItem = favoriteIcon
+        }
     }
 
     private func setupHeadline() {
