@@ -47,10 +47,10 @@ public class Name: Codable {
 
     public required init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
-        gn = try? values.decode(String.self, forKey: .gn)
-        fn = try? values.decode(String.self, forKey: .fn)
-        gnt = try? values.decode(String.self, forKey: .gnt)
-        fnt = try values.decode(String.self, forKey: .fnt)
+        gn = try? values.decode(String.self, forKey: .gn).trimmingCharacters(in: .whitespaces)
+        fn = try? values.decode(String.self, forKey: .fn).trimmingCharacters(in: .whitespaces)
+        gnt = try? values.decode(String.self, forKey: .gnt).trimmingCharacters(in: .whitespaces)
+        fnt = try values.decode(String.self, forKey: .fnt).trimmingCharacters(in: .whitespaces)
     }
 
     public func encode(to encoder: Encoder) throws {

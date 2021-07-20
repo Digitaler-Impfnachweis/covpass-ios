@@ -52,4 +52,19 @@ class NameTests: XCTestCase {
         name2.fnt = "foo"
         XCTAssertNotEqual(name1, name2)
     }
+
+    func testTrim() {
+        let obj = [
+            "fn": " foo ",
+            "fnt": " foo ",
+            "gn": " foo ",
+            "gnt": " foo "
+        ]
+        let data = try! JSONSerialization.data(withJSONObject: obj, options: .fragmentsAllowed)
+        let sut = try! JSONDecoder().decode(Name.self, from: data)
+        XCTAssertEqual(sut.gn, "foo")
+        XCTAssertEqual(sut.fn, "foo")
+        XCTAssertEqual(sut.gnt, "foo")
+        XCTAssertEqual(sut.fnt, "foo")
+    }
 }
