@@ -87,13 +87,39 @@ public struct DCCCertLogic {
     }
 
     public var countries: [String] {
-        var list = [String]()
-        for rule in dccRules ?? [] {
-            if !list.contains(rule.countryCode) {
-                list.append(rule.countryCode)
-            }
-        }
-        return list
+        return [
+            "IT",
+            "LT",
+            "DK",
+            "GR",
+            "CZ",
+            "HR",
+            "IS",
+            "PT",
+            "PL",
+            "BE",
+            "BG",
+            "DE",
+            "LU",
+            "EE",
+            "CY",
+            "ES",
+            "NL",
+            "AT",
+            "LV",
+            "LI",
+            "FI",
+            "SE",
+            "SI",
+            "RO",
+            "NO",
+            "SK",
+            "FR",
+            "MT",
+            "HU",
+            "IE",
+            "CH"
+        ]
     }
 
     public func lastUpdatedDCCRules() -> Date? {
