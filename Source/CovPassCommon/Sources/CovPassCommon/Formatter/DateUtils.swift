@@ -60,6 +60,13 @@ public enum DateUtils {
                 return displayDateFormatter.string(from: dob)
             }
         }
-        return dgc.dobString ?? ""
+        var dobString = dgc.dobString ?? ""
+        if dobString == "" {
+            dobString = "xxxx-xx-xx"
+        }
+        if let timeRange = dobString.range(of: "T") {
+            dobString.removeSubrange(timeRange.lowerBound..<dobString.endIndex)
+        }
+        return dobString
     }
 }
