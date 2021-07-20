@@ -62,7 +62,7 @@ public enum DateUtils {
         }
         var dobString = dgc.dobString ?? ""
         if dobString == "" {
-            dobString = "xxxx-xx-xx"
+            dobString = "XXXX-XX-XX"
         }
         if let timeRange = dobString.range(of: "T") {
             dobString.removeSubrange(timeRange.lowerBound..<dobString.endIndex)

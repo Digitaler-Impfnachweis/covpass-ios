@@ -68,7 +68,7 @@ class DateUtilsTests: XCTestCase {
         dgc.dobString = "1964"
         XCTAssertEqual(DateUtils.displayDateOfBirth(dgc), "1964")
         dgc.dobString = ""
-        XCTAssertEqual(DateUtils.displayDateOfBirth(dgc), "xxxx-xx-xx")
+        XCTAssertEqual(DateUtils.displayDateOfBirth(dgc), "XXXX-XX-XX")
         dgc.dobString = "2021-04-26T15:05:00"
         XCTAssertEqual(DateUtils.displayDateOfBirth(dgc), "2021-04-26")
     }
