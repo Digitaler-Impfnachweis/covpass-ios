@@ -11,39 +11,39 @@
 
 /********** onboarding **********/
 
-"start_onboarding_title" = "Willkommen in der CovPassCheck-App";
+"start_onboarding_title" = "Welcome to the CovPassCheck app";
 
-"start_onboarding_message" = "Finden Sie in wenigen Sekunden heraus, ob die geprüfte Person ein gültiges COVID-Zertifikat besitzt.";
+"start_onboarding_message" = "Find out in just a few seconds if the person you are checking has a valid EU Covid-19 certificate.";
 
-"start_onboarding_secure_title" = "Sicher und datensparsam";
+"start_onboarding_secure_title" = "Minimal data, maximum security";
 
-"start_onboarding_secure_message" = "Die Daten werden nur über den QR-Code eingelesen und nicht gespeichert. Sie sehen nur die notwendigen Informationen.";
+"start_onboarding_secure_message" = "Data is read using just the QR code. No data is stored. You only see the information that is necessary.";
 
-"start_onboarding_button_title" = "Los geht's";
+"start_onboarding_button_title" = "Get started";
 
-"next_onboarding_page_button_title" = "Weiter";
+"next_onboarding_page_button_title" = "Next";
 
-"validation_first_onboarding_page_title" = "Erster Schritt: Den QR-Code mit der CovPassCheck-App scannen";
+"validation_first_onboarding_page_title" = "Step one: scan the QR code with the CovPassCheck app";
 
-"validation_first_onboarding_page_message" = "Scannen Sie mit der CovPassCheck-App den QR-Code auf einem digitalen COVID-Zertifikat der EU. Die QR-Codes der Papierversion enthalten die gleichen Informationen wie die QR-Codes der elektronische Version in der CovPass-App oder in anderen Apps, in denen digitale COVID-Zertifikate der EU hinterlegt sind. Daher sind beide Zertifikatsversionen gleichwertig.";
+"validation_first_onboarding_page_message" = "Use the CovPassCheck app to scan the QR code on an EU Digital COVID Certificate. The QR codes on the paper version contain the same information as the QR codes in the electronic version in the CovPass app and other apps in which EU Digital COVID Certificates are saved. Both certificate versions are therefore equivalent to each other.";
 
-"validation_second_onboarding_page_title" = "Zweiter Schritt: Die Identität mit einem Ausweisdokument überprüfen";
+"validation_second_onboarding_page_title" = "Step two: check the person’s identity against an ID document";
 
-"validation_second_onboarding_page_message" = "Als prüfende Person sehen Sie in der CovPassCheck-App nur den Gültigkeitsstatus des digitalen COVID-Zertifikats sowie den Namen und das Geburtsdatum des Zertifikatsinhabers. Gleichen Sie diese Informationen mit einem Ausweisdokument (z. B. Personalausweis, Reisepass) ab. Eine aktive Internetverbindung ist für die Prüfung nicht erforderlich.";
+"validation_second_onboarding_page_message" = "As a checker, the CovPassCheck app only shows you if the Digital COVID Certificate is valid and the name and date of birth of the certificate holder. Check this information against an ID document (e.g. a national ID card or passport). An active internet connection is not required when checking.";
 
-"validation_fourth_onboarding_page_title" = "Datenschutz und Datensicherheit";
+"validation_fourth_onboarding_page_title" = "Data protection and security";
 
-"validation_fourth_onboarding_first_list_item" = "Die Überprüfung von QR-Codes anderer Personen und das Auslesen von Daten aus digitalen COVID-Zertifikaten ist nur in den gesetzlich vorgesehenen Fällen zulässig.";
+"validation_fourth_onboarding_first_list_item" = "It is only lawful to check other people’s QR codes and extract data from Digital COVID Certificates in legally specified situations.";
 
-"validation_fourth_onboarding_second_list_item" = "Eine Speicherung, Weitergabe oder Nutzung dieser Daten zu anderen Zwecken ist unzulässig.";
+"validation_fourth_onboarding_second_list_item" = "Saving, forwarding or using this data for other purposes is unlawful.";
 
-"validation_fourth_onboarding_third_list_item" = "Die Verwendung der digitalen COVID-Zertifikate ist freiwillig. Niemand darf zur Nutzung gezwungen werden. Der Nachweis eines vollständigen Impfschutzes, eines negativen Testergebnisses oder einer durchgemachten COVID-Infektion kann auch auf andere Weise erbracht werden.";
+"validation_fourth_onboarding_third_list_item" = "Using Digital COVID Certificates is voluntary. Nobody can be forced to use them. There are other methods for showing evidence of full vaccination, a negative test result or recovery from a Covid-19 infection.";
 
-"vaccination_fourth_onboarding_page_message" = "Ausführliche Hinweise zur Datenverarbeitung finden Sie in der Datenschutzerklärung:";
+"vaccination_fourth_onboarding_page_message" = "You can find detailed information about data processing in the privacy policy:";
 
-"confirmation_fourth_onboarding_page_button_title" = "Alles klar";
+"confirmation_fourth_onboarding_page_button_title" = "OK";
 
-"vaccination_privacy_policy_page_button_title" = "Schließen";
+"vaccination_privacy_policy_page_button_title" = "Close";
 
 "error_connect_internet_for_scan_title" = "Flugzeugmodus ausschalten oder WLAN für den Datenzugriff verwenden";
 
@@ -54,31 +54,31 @@
 
 /********** start screen **********/
 
-"validation_start_screen_title" = "Übersicht";
+"validation_start_screen_title" = "Overview";
 
-"validation_start_screen_scan_title" = "Zertifikat prüfen";
+"validation_start_screen_scan_title" = "Checking a certificate";
 
-"validation_start_screen_scan_message" = "Scannen Sie jetzt das digitale COVID-Zertifikat der EU. Sie sehen sofort, ob die geprüfte Person ein gültiges COVID-Zertifikat besitzt.";
+"validation_start_screen_scan_message" = "Scan the EU Digital COVID Certificate now. You see immediately if the person you are checking has a valid Covid-19 certificate.";
 
-"validation_start_screen_scan_action_button_title" = "Zertifikat scannen";
+"validation_start_screen_scan_action_button_title" = "Scan certificate";
 
-"validation_start_screen_offline_modus_title" = "Offline-Modus";
+"validation_start_screen_offline_modus_title" = "Offline mode";
 
-"validation_start_screen_offline_modus_message" = "Um offline prüfen zu können, halten Sie die CovPassCheck-App auf dem aktuellen Stand. Stellen Sie dafür ab und an eine Verbindung mit dem Internet her.";
+"validation_start_screen_offline_modus_message" = "Keep your CovPassCheck app updated in order to check certificates offline. To do this, connect to the internet from time to time.";
 
-"validation_start_screen_offline_modus_note_latest_version" = "Offline-Modus verfügbar";
+"validation_start_screen_offline_modus_note_latest_version" = "Offline mode available";
 
-"validation_start_screen_offline_modus_note_old_version" = "Internetverbindung erforderlich";
+"validation_start_screen_offline_modus_note_old_version" = "Internet connection needed";
 
-"validation_start_screen_offline_modus_note_update" = "Letztes Update";
+"validation_start_screen_offline_modus_note_update" = "Most recent update";
 
-"validation_start_screen_offline_modus_note_update_pattern" = "Letztes Update: %@";
+"validation_start_screen_offline_modus_note_update_pattern" = "Most recent update: %@";
 
-"validation_start_screen_offline_modus_certificates" = "Zertifikate: %@";
+"validation_start_screen_offline_modus_certificates" = "Certificates: %@";
 
-"validation_start_screen_offline_modus_rules" = "Regelsets: %@";
+"validation_start_screen_offline_modus_rules" = "Rules: %@";
 
-"error_old_version_title" = "Internetverbindung erforderlich";
+"error_old_version_title" = "Internet connection needed";
 
 "error_old_version_message" = "Das letzte Update ist eine Weile her. Um offline prüfen zu können, halten Sie die CovPassCheck-App auf dem aktuellen Stand. Stellen Sie dafür eine Verbindung mit dem Internet her.";
 
@@ -87,105 +87,105 @@
 
 /********** popup: Check vaccination **********/
 
-"scan_dialog_camera_access_title" = "Kamerazugriff benötigt";
+"scan_dialog_camera_access_title" = "Camera access needed";
 
-"scan_dialog_camera_access_message" = "Die CovPassCheck-App verwendet die Kamera Ihres Smartphones, um einen QR-Code scannen zu können.\n\nDer Zugriff auf Ihre Kamera erfolgt nur während der Nutzung der App und dann auch nur mit Ihrer Erlaubnis. Sie haben jederzeit die Möglichkeit, in den Einstellungen Ihres Smartphones die Berechtigung zu ändern.";
+"scan_dialog_camera_access_message" = "The CovPassCheck app uses your smartphone’s camera to scan QR codes.\n\nYour camera is only ever accessed while you use the app and only with your permission. You have the option to change this permission in your smartphone’s settings at any time.";
 
-"scan_dialog_camera_access_action_button" = "Zugriff erlauben";
+"scan_dialog_camera_access_action_button" = "Allow access";
 
-"error_camera_access_title" = "Die CovPassCheck-App möchte auf Ihre Kamera zugreifen.";
+"error_camera_access_title" = "The CovPassCheck app wants to access your camera.";
 
-"error_camera_access_message" = "Erlauben Sie den Zugriff, um QR-Codes scannen zu können.";
+"error_camera_access_message" = "Allow access to scan QR codes.";
 
-"error_camera_access_button_do_not_allow" = "Nicht Erlauben";
+"error_camera_access_button_do_not_allow" = "Do not allow";
 
-"error_camera_access_button_allow" = "Erlauben";
+"error_camera_access_button_allow" = "Allow";
 
-"validation_check_popup_valid_vaccination_recovery_title" = "Zertifikat gültig*";
+"validation_check_popup_valid_vaccination_recovery_title" = "Certificate valid*";
 
 "validation_check_popup_valid_vaccination_recovery_message" = "Gleichen Sie jetzt folgende Daten mit einem Ausweisdokument der geprüften Person ab.";
 
-"validation_check_popup_valid_vaccination_date_of_birth" = "Geboren am %@";
+"validation_check_popup_valid_vaccination_date_of_birth" = "Born on %@";
 
-"validation_check_popup_valid_vaccination_recovery_note" = "* Genesenen- oder Impfzertifikat liegt vor.";
+"validation_check_popup_valid_vaccination_recovery_note" = "* Person has recovery or vaccination certificate.";
 
-"validation_check_popup_valid_vaccination_button_title" = "Weiteres Zertifikat scannen";
+"validation_check_popup_valid_vaccination_button_title" = "Scan another certificate";
 
-"validation_check_popup_unsuccessful_certificate_title" = "Zertifikat ungültig";
+"validation_check_popup_unsuccessful_certificate_title" = "Certificate invalid";
 
-"validation_check_popup_unsuccessful_certificate_message" = "Das geprüfte Zertifikat ist aus einem der folgenden Gründe ungültig:";
+"validation_check_popup_unsuccessful_certificate_message" = "The certificate just checked is invalid for one of the following reasons:";
 
-"validation_check_popup_unsuccessful_certificate_not_valid_title" = "Ungültiges Zertifikat";
+"validation_check_popup_unsuccessful_certificate_not_valid_title" = "Invalid certificate";
 
-"validation_check_popup_unsuccessful_certificate_not_valid_message" = "Das Zertifikat entspricht nicht den in Deutschland geltenden Regelungen für EU Digitale COVID-Zertifikate.";
+"validation_check_popup_unsuccessful_certificate_not_valid_message" = "The certificate does not comply with German regulations that apply to EU Digital COVID Certificates.";
 
-"validation_check_popup_unsuccessful_certificate_technical_problems_title" = "Technische Probleme";
+"validation_check_popup_unsuccessful_certificate_technical_problems_title" = "Technical issues";
 
-"validation_check_popup_unsuccessful_certificate_technical_problems_message" = "Die Signatur ist nicht gültig oder der QR-Code ist nicht lesbar.";
+"validation_check_popup_unsuccessful_certificate_technical_problems_message" = "The signature is invalid or the QR code cannot be read.";
 
-"validation_check_popup_unsuccessful_certificate_button_title" = "Weiteres Zertifikat scannen";
+"validation_check_popup_unsuccessful_certificate_button_title" = "Scan another certificate";
 
-"validation_check_popup_test_title" = "Negativer Schnelltest von vor %d Stunden";
+"validation_check_popup_test_title" = "Negative rapid test from %d hours ago";
 
-"validation_check_popup_test_message" = "Gleichen Sie jetzt folgende Daten mit einem Ausweisdokument der geprüften Person ab.";
+"validation_check_popup_test_message" = "Check the following data against an ID document from the person you are checking.";
 
-"validation_check_popup_test_date_of_birth" = "Geboren am %@";
+"validation_check_popup_test_date_of_birth" = "Born on %@";
 
-"validation_check_popup_test_date_of_issue" = "Zeitpunkt der Probenahme";
+"validation_check_popup_test_date_of_issue" = "Time sample taken";
 
-"validation_check_popup_test_button_title" = "Weiteres Zertifikat scannen";
+"validation_check_popup_test_button_title" = "Scan another certificate";
 
-"validation_check_popup_valid_pcr_test_title" = "Negativer PCR-Test von vor %d Stunden";
+"validation_check_popup_valid_pcr_test_title" = "Negative PCR test from %d hours ago";
 
-"validation_check_popup_valid_pcr_test_message" = "Gleichen Sie jetzt folgende Daten mit einem Ausweisdokument der geprüften Person ab.";
+"validation_check_popup_valid_pcr_test_message" = "Check the following data against an ID document from the person you are checking.";
 
-"validation_check_popup_valid_pcr_test_date_of_birth" = "Geboren am %@";
+"validation_check_popup_valid_pcr_test_date_of_birth" = "Born on %@";
 
-"validation_check_popup_valid_pcr_test_date_of_issue" = "Zeitpunkt der Probenahme";
+"validation_check_popup_valid_pcr_test_date_of_issue" = "Time sample taken";
 
-"validation_check_popup_valid_pcr_test_button_title" = "Weiteres Zertifikat scannen";
+"validation_check_popup_valid_pcr_test_button_title" = "Scan another certificate";
 
 
 /********** app information **********/
 
-"app_information_title" = "Informationen";
+"app_information_title" = "Information";
 
-"app_information_message" = "Hier finden Sie alle rechtlichen Informationen und Antworten auf die häufigsten Fragen rund um die CovPassCheck-App.";
+"app_information_message" = "Here you can find all legal information and answers to the most frequent questions asked about the CovPassCheck app.";
 
-"app_information_title_contact" = "Kontakt";
+"app_information_title_contact" = "Contact";
 
-"app_information_message_contact_support" = "Kontakt bei technischen Fragen zur CovPassCheck-App";
+"app_information_message_contact_support" = "Contact for technical questions about the CovPassCheck app";
 
-"app_information_message_contact_support_phone" = "Telefon: #0800–4747–002::tel:0800–4747–002#";
+"app_information_message_contact_support_phone" = "Telephone: #0800–4747–002::tel:0800–4747–002#";
 
 "app_information_message_contact_support_mail" = "E-Mail: #support@covpasscheck-app.de::mailto:support@covpasscheck-app.de#";
 
-"app_information_message_contact_info" = "Kontakt bei sonstigen Fragen";
+"app_information_message_contact_info" = "Contact for other questions";
 
 "app_information_message_contact_info_mail" = "E-Mail: #info@covpass-app.de::mailto:info@covpass-app.de#";
 
-"app_information_title_faq" = "Häufige Fragen";
+"app_information_title_faq" = "Frequently asked questions";
 
-"app_information_title_faq_linked" = "#Häufige Fragen::$0#";
+"app_information_title_faq_linked" = "#Frequently asked questions::$0#";
 
-"app_information_title_datenschutz" = "Datenschutzerklärung";
+"app_information_title_datenschutz" = "Privacy policy";
 
-"app_information_title_company_details" = "Impressum";
+"app_information_title_company_details" = "Legal information";
 
-"app_information_title_company_details_linked" = "#Impressum::$0#";
+"app_information_title_company_details_linked" = "#Legal information::$0#";
 
-"app_information_title_open_source" = "Open-Source-Lizenzen";
+"app_information_title_open_source" = "Open-source licences";
 
-"app_information_message_open_source" = "Die App verwendet die folgenden Open-Source-Bibliotheken:";
+"app_information_message_open_source" = "The app uses the following open-source libraries:";
 
 "app_information_version_label" = "Version %@";
 
 
 /********** error handling **********/
 
-"error_standard_unexpected_title" = "Entschuldigung";
+"error_standard_unexpected_title" = "Sorry";
 
-"error_standard_unexpected_message" = "Es ist ein unerwarteter Fehler aufgetreten. Bitte versuchen Sie es später erneut.";
+"error_standard_unexpected_message" = "An unexpected error has occurred. Please try again later.";
 
 "error_standard_unexpected_button_title" = "OK";
 
