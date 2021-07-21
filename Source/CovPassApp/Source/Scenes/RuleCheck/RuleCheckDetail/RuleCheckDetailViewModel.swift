@@ -121,13 +121,10 @@ class RuleCheckDetailViewModel {
             .result
             .filter { $0.result == result && $0.rule?.affectedString.contains(pattern) ?? false }
             .compactMap { res in
-                if let trans = res.rule?.description.first(where: { $0.lang.lowercased() == "de" }) {
+                if let trans = res.rule?.description.first(where: { $0.lang.lowercased() == Locale.current.languageCode }) {
                     return trans.desc
                 }
-                if let trans = res.rule?.description.first(where: { $0.lang.lowercased() == "en" }) {
-                    return trans.desc
-                }
-                return nil
+                return res.rule?.description.first?.desc ?? nil
             }
     }
 
