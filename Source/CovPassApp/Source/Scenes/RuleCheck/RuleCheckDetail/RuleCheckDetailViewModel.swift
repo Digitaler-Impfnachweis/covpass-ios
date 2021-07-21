@@ -88,7 +88,8 @@ class RuleCheckDetailViewModel {
         if result.state == .open {
             subtitle = String(format: "%@\n\n%@", subtitle, "certificate_check_validity_detail_view_result_not_testable_second_message".localized)
         }
-        return subtitle
+        let ruleInfo = result.result.isEmpty ? "certificate_check_validity_detail_view_result_valid_info_no_rules".localized : String(format: "certificate_check_validity_detail_view_result_valid_info".localized, result.result.count)
+        return "\(subtitle)\n\n\(ruleInfo)"
     }
 
     var infoText1: String {

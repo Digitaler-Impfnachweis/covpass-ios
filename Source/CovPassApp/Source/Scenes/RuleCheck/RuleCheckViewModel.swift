@@ -41,20 +41,7 @@ class RuleCheckViewModel: BaseViewModel, CancellableViewModelProtocol {
 
     var isLoading: Bool = true
 
-    var validationViewModels: [CertificateItemViewModel] {
-        var items = [CertificateItemViewModel]()
-        let results = validateCertificates()
-        results.forEach { res in
-            if let passedResult = res.first(where: { $0.state == .passed }) {
-                // If we have a valid result, then we show it
-                items.append(ResultItemViewModel(passedResult))
-            } else if let firstResult = res.first {
-                // otherwise we show the first item in the list (which is based on CertificateSorter)
-                items.append(ResultItemViewModel(firstResult))
-            }
-        }
-        return items
-    }
+    var validationViewModels = [CertificateItemViewModel]()
 
     // MARK: - Lifecycle
 
@@ -79,34 +66,58 @@ class RuleCheckViewModel: BaseViewModel, CancellableViewModelProtocol {
             return self.certLogic.updateRules()
         }
         .done { _ in
-            self.isLoading = false
-            self.delegate?.viewModelDidUpdate()
+            self.validateCertificates()
         }
         .catch { error in
-            print(error)
             self.cancel()
         }
     }
 
-    func validateCertificates() -> [[CertificateResult]] {
-        guard let list = certificateList else {
-            return []
-        }
-        let certificatePairs = repository.matchedCertificates(for: list)
-        var validationResult = [[CertificateResult]]()
-        for pair in certificatePairs {
-            var results = [CertificateResult]()
-            for cert in CertificateSorter.sort(pair.certificates) {
-                do {
-                    let res = try certLogic.validate(countryCode: country.uppercased(), validationClock: date, certificate: cert.vaccinationCertificate)
-                    results.append(CertificateResult(certificate: cert, result: res))
-                } catch {
-                    print(error)
+    func validateCertificates() {
+        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+            guard let list = self?.certificateList else {
+                DispatchQueue.main.async {
+                    self?.delegate?.viewModelDidUpdate()
                 }
+                return
             }
-            validationResult.append(results)
+            let certificatePairs = self?.repository.matchedCertificates(for: list) ?? []
+            var validationResult = [[CertificateResult]]()
+            for pair in certificatePairs {
+                var results = [CertificateResult]()
+                for cert in CertificateSorter.sort(pair.certificates) {
+                    do {
+                        if let country = self?.country.uppercased(),
+                           let date = self?.date,
+                           let res = try self?.certLogic.validate(countryCode: country, validationClock: date, certificate: cert.vaccinationCertificate) {
+                            results.append(CertificateResult(certificate: cert, result: res))
+                        }
+                    } catch {
+                        print(error)
+                    }
+                }
+                validationResult.append(results)
+            }
+            DispatchQueue.main.async {
+                self?.createValidationViewModels(validationResult)
+            }
         }
-        return validationResult
+    }
+
+    private func createValidationViewModels(_ results: [[CertificateResult]]) {
+        var items = [CertificateItemViewModel]()
+        results.forEach { res in
+            if let passedResult = res.first(where: { $0.state == .passed }) {
+                // If we have a valid result, then we show it
+                items.append(ResultItemViewModel(passedResult))
+            } else if let firstResult = res.first {
+                // otherwise we show the first item in the list (which is based on CertificateSorter)
+                items.append(ResultItemViewModel(firstResult))
+            }
+        }
+        validationViewModels = items
+        isLoading = false
+        delegate?.viewModelDidUpdate()
     }
 
     func cancel() {
@@ -116,8 +127,10 @@ class RuleCheckViewModel: BaseViewModel, CancellableViewModelProtocol {
     func showCountrySelection() {
         router.showCountrySelection(countries: certLogic.countries, country: country)
             .done { newCountry in
+                self.isLoading = true
                 self.country = newCountry
                 self.delegate?.viewModelDidUpdate()
+                self.validateCertificates()
             }
             .catch { error in
                 print(error)
@@ -127,8 +140,10 @@ class RuleCheckViewModel: BaseViewModel, CancellableViewModelProtocol {
     func showDateSelection() {
         router.showDateSelection(date: date)
             .done { newDate in
+                self.isLoading = true
                 self.date = newDate
                 self.delegate?.viewModelDidUpdate()
+                self.validateCertificates()
             }
             .catch { error in
                 print(error)

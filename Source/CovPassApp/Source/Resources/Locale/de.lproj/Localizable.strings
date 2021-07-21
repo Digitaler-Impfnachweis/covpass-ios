@@ -54,6 +54,14 @@
 
 /********** start Screen **********/
 
+"dialog_start_screen_title" = "Neues Update verfügbar";
+
+"dialog_start_screen_message" = "Möchten Sie jetzt die CovPass-App aktualisieren?";
+
+"dialog_start_screen_button_later" = "Später";
+
+"dialog_start_screen_button_update" = "Aktualisieren";
+
 "vaccination_start_screen_title" = "Digitale COVID-Zertifikate der EU";
 
 "vaccination_start_screen_note_title" = "Fügen Sie einen Nachweis hinzu";
@@ -240,6 +248,10 @@
 "certificate_check_validity_detail_view_result_valid_title" = "Dieses Zertifikat ist am Reisedatum gültig";
 
 "certificate_check_validity_detail_view_result_valid_message" = "Für %@, am %@";
+
+"certificate_check_validity_detail_view_result_valid_info" = "Es wurden %d Regeln des Ziellandes erfolgreich überprüft.";
+
+"certificate_check_validity_detail_view_result_valid_info_no_rules" = "Für das gewählte Land und den gewählten Zeitpunkt sind für diesen Zertifikattyp derzeit keine Einreiseregeln vorhanden.";
 
 "certificate_check_validity_detail_view_result_not_testable_title" = "Dieses Zertifikat ist nicht vollständig prüfbar";
 
