@@ -48,10 +48,7 @@ class CertificateItemDetailViewModel: CertificateItemDetailViewModelProtocol {
     }
 
     private var dob: String {
-        if let dobString = dgc.dobString {
-            return dobString
-        }
-        return DateUtils.isoDateFormatter.string(from: dgc.dob ?? Date())
+        return DateUtils.displayDateOfBirth(dgc)
     }
 
     var items: [(String, String)] {

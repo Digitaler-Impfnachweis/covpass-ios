@@ -40,11 +40,8 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
     }
 
     var birthDate: String {
-        if let dobString = certificates.first?.vaccinationCertificate.hcert.dgc.dobString {
-            return dobString
-        }
-        guard let date = certificates.first?.vaccinationCertificate.hcert.dgc.dob else { return "" }
-        return DateUtils.isoDateFormatter.string(from: date)
+        guard let dgc = certificates.first?.vaccinationCertificate.hcert.dgc else { return "" }
+        return DateUtils.displayDateOfBirth(dgc)
     }
 
     var immunizationIcon: UIImage? {

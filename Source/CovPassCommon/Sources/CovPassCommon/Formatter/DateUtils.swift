@@ -55,9 +55,15 @@ public enum DateUtils {
     }
 
     public static func displayDateOfBirth(_ dgc: DigitalGreenCertificate) -> String {
-        if dateFormatter(format: "yyyy-MM-dd").date(from: dgc.dobString ?? "") != nil {
-            if let dob = dgc.dob {
-                return displayDateFormatter.string(from: dob)
+        if let dob = dgc.dob {
+            if dateFormatter(format: "yyyy-MM-dd").date(from: dgc.dobString ?? "") != nil {
+                return dateFormatter(format: "yyyy-MM-dd").string(from: dob)
+            }
+            if dateFormatter(format: "yyyy-MM").date(from: dgc.dobString ?? "") != nil {
+                return "\(dateFormatter(format: "yyyy-MM").string(from: dob))-XX"
+            }
+            if dateFormatter(format: "yyyy").date(from: dgc.dobString ?? "") != nil {
+                return "\(dateFormatter(format: "yyyy").string(from: dob))-XX-XX"
             }
         }
         var dobString = dgc.dobString ?? ""
