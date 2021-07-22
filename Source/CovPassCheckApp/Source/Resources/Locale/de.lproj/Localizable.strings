@@ -51,6 +51,14 @@
 
 "error_connect_internet_for_scan_button_ok" = "OK";
 
+"dialog_start_screen_title" = "Neues Update verfügbar";
+
+"dialog_start_screen_message" = "Möchten Sie jetzt die CovPassCheck-App aktualisieren?";
+
+"dialog_start_screen_button_later" = "Nicht jetzt";
+
+"dialog_start_screen_button_update" = "Aktualisieren";
+
 
 /********** start screen **********/
 

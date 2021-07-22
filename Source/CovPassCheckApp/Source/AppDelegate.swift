@@ -32,6 +32,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window = window
         self.sceneCoordinator = sceneCoordinator
 
+        appUpdateDialogIfNeeded()
+
         return true
     }
 
@@ -41,8 +43,20 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
             try KeychainPersistence().delete(KeychainPersistence.trustListKey)
             try KeychainPersistence().delete(KeychainPersistence.certificateListKey)
             try KeychainPersistence().delete(KeychainPersistence.dccRulesKey)
-            print("Keychain deleted")
         }
+    }
+
+    private func appUpdateDialogIfNeeded() {
+        CheckAppUpdate(
+            service: CheckAppUpdateService(bundleIdentifier: "de.rki.corona-impf-check"),
+            userDefaults: UserDefaultsPersistence(),
+            appStoreID: "id1566140314"
+        ).showUpdateDialogIfNeeded(
+            title: "dialog_start_screen_title".localized,
+            message: "dialog_start_screen_message".localized,
+            ok: "dialog_start_screen_button_update".localized,
+            cancel: "dialog_start_screen_button_later".localized
+        )
     }
 
     func applicationWillResignActive(_: UIApplication) {
