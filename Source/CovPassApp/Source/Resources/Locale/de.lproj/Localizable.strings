@@ -47,7 +47,7 @@
 
 "vaccination_fourth_onboarding_page_message" = "Ausführliche Hinweise zur Datenverarbeitung finden Sie in der Datenschutzerklärung:";
 
-"vaccination_fourth_onboarding_page_button_title" = "OK";
+"vaccination_fourth_onboarding_page_button_title" = "Alles klar";
 
 "vaccination_privacy_policy_page_button_title" = "Schließen";
 
@@ -55,7 +55,7 @@
 
 "dialog_start_screen_message" = "Möchten Sie jetzt die CovPass-App aktualisieren?";
 
-"dialog_start_screen_button_later" = "Später";
+"dialog_start_screen_button_later" = "Nicht jetzt";
 
 "dialog_start_screen_button_update" = "Aktualisieren";
 
@@ -309,18 +309,6 @@
 "error_connect_to_internet_button_settings" = "Einstellungen";
 
 "error_connect_to_internet_button_ok" = "OK";
-
-"vaccination_full_immunization_loading_message_no_internet" = "Der QR-Code wird angezeigt, sobald Ihr Gerät mit dem Internet verbunden ist.";
-
-"vaccination_full_immunization_loading_message_check_internet" = "Der QR-Code kann nicht geladen werden. Bitte überprüfen Sie Ihre Internetverbindung.";
-
-"vaccination_full_immunization_loading_message_error" = "Es ist ein unerwarteter Fehler aufgetreten. Der QR-Code kann aktuell nicht geladen werden.";
-
-"vaccination_full_immunization_loading_message_14_days_title" = "Der QR-Code wird ab dem %@ hier angezeigt.";
-
-"vaccination_full_immunization_loading_message_14_days_title_pattern" = "Der QR-Code wird ab dem %@ hier angezeigt.";
-
-"vaccination_full_immunization_loading_message_14_days_message" = "Der Impfschutz ist erst 14 Tage nach der vollständigen Impfung wirksam.";
 
 
 /********** overview certificates **********/

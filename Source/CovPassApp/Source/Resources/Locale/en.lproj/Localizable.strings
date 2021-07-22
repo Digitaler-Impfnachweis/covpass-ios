@@ -51,13 +51,13 @@
 
 "vaccination_privacy_policy_page_button_title" = "Close";
 
-"dialog_start_screen_title" = "Neues Update verfügbar";
+"dialog_start_screen_title" = "New update available";
 
-"dialog_start_screen_message" = "Möchten Sie jetzt die CovPass-App aktualisieren?";
+"dialog_start_screen_message" = "Would you like to update the CovPass-App now?";
 
-"dialog_start_screen_button_later" = "Später";
+"dialog_start_screen_button_later" = "Not now";
 
-"dialog_start_screen_button_update" = "Aktualisieren";
+"dialog_start_screen_button_update" = "Update";
 
 "vaccination_start_screen_title" = "EU Digital COVID Certificates";
 
@@ -247,9 +247,9 @@
 
 "certificate_check_validity_detail_view_result_valid_message" = "For %@ on %@";
 
-"certificate_check_validity_detail_view_result_valid_info" = "Es wurden %d Regeln des Ziellandes erfolgreich überprüft.";
+"certificate_check_validity_detail_view_result_valid_info" = "%d rules of the destination country were successfully checked.";
 
-"certificate_check_validity_detail_view_result_valid_info_no_rules" = "Für das gewählte Land und den gewählten Zeitpunkt sind für diesen Zertifikattyp derzeit keine Einreiseregeln vorhanden.";
+"certificate_check_validity_detail_view_result_valid_info_no_rules" = "There are currently no entry rules for this certificate type for the selected country and date.";
 
 "certificate_check_validity_detail_view_result_not_testable_title" = "This certificate cannot be checked automatically";
 
@@ -310,18 +310,6 @@
 
 "error_connect_to_internet_button_ok" = "OK";
 
-"vaccination_full_immunization_loading_message_no_internet" = "Der QR-Code wird angezeigt, sobald Ihr Gerät mit dem Internet verbunden ist.";
-
-"vaccination_full_immunization_loading_message_check_internet" = "Der QR-Code kann nicht geladen werden. Bitte überprüfen Sie Ihre Internetverbindung.";
-
-"vaccination_full_immunization_loading_message_error" = "Es ist ein unerwarteter Fehler aufgetreten. Der QR-Code kann aktuell nicht geladen werden.";
-
-"vaccination_full_immunization_loading_message_14_days_title" = "Der QR-Code wird ab dem %@ hier angezeigt.";
-
-"vaccination_full_immunization_loading_message_14_days_title_pattern" = "Der QR-Code wird ab dem %@ hier angezeigt.";
-
-"vaccination_full_immunization_loading_message_14_days_message" = "Der Impfschutz ist erst 14 Tage nach der vollständigen Impfung wirksam.";
-
 
 /********** overview certificates **********/
 
@@ -367,7 +355,7 @@
 
 "certificates_overview_personal_data_date_of_birth" = "Date of birth (YYYY-MM-DD)";
 
-"certificates_overview_all_certificates_title" = "EU-Zertifikate";
+"certificates_overview_all_certificates_title" = "EU certificates";
 
 "certificates_overview_currently_uses_certificate_note" = "Certificate currently in use";
 

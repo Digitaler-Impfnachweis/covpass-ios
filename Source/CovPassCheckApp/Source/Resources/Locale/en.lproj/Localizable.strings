@@ -103,7 +103,7 @@
 
 "validation_check_popup_valid_vaccination_recovery_title" = "Certificate valid*";
 
-"validation_check_popup_valid_vaccination_recovery_message" = "Gleichen Sie jetzt folgende Daten mit einem Ausweisdokument der geprüften Person ab.";
+"validation_check_popup_valid_vaccination_recovery_message" = "Check the following data against an ID document from the person you are checking.";
 
 "validation_check_popup_valid_vaccination_date_of_birth" = "Born on %@";
 
