@@ -32,6 +32,7 @@ public struct DCCService: DCCServiceProtocol {
 
     public func loadDCCRules() -> Promise<[RuleSimple]> {
         return Promise { seal in
+            print("\(url.absoluteString)/rules")
             guard let requestUrl = URL(string: "\(url.absoluteString)/rules") else {
                 seal.reject(DCCServiceError.invalidURL)
                 return
@@ -78,6 +79,7 @@ public struct DCCService: DCCServiceProtocol {
 
     public func loadDCCRule(country: String, hash: String) -> Promise<Rule> {
         return Promise { seal in
+            print("\(url.absoluteString)/rules/\(country)/\(hash)")
             guard let requestUrl = URL(string: "\(url.absoluteString)/rules/\(country)/\(hash)") else {
                 seal.reject(DCCServiceError.invalidURL)
                 return
