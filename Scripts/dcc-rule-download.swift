@@ -2,7 +2,7 @@
 
 import Foundation
 
-let baseURL = "https://distribution-dfe4f5c711db.dcc-rules.de"
+let baseURL = "https://distribution.dcc-rules.de"
 
 class RuleSimple: Codable {
     var identifier: String
