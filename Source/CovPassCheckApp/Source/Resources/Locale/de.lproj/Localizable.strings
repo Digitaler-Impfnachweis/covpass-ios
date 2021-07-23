@@ -86,12 +86,6 @@
 
 "validation_start_screen_offline_modus_rules" = "Regelsets: %@";
 
-"error_old_version_title" = "Internetverbindung erforderlich";
-
-"error_old_version_message" = "Das letzte Update ist eine Weile her. Um offline prüfen zu können, halten Sie die CovPassCheck-App auf dem aktuellen Stand. Stellen Sie dafür eine Verbindung mit dem Internet her.";
-
-"error_old_version_button_title" = "OK";
-
 
 /********** popup: Check vaccination **********/
 
