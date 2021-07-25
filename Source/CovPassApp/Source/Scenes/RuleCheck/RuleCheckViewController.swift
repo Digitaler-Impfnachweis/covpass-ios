@@ -6,9 +6,9 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
+import CovPassCommon
 import CovPassUI
 import UIKit
-import CovPassCommon
 
 class RuleCheckViewController: UIViewController {
     // MARK: - IBOutlet
@@ -119,5 +119,5 @@ extension RuleCheckViewController: ViewModelDelegate {
         configureText()
     }
 
-    func viewModelUpdateDidFailWithError(_ error: Error) {}
+    func viewModelUpdateDidFailWithError(_: Error) {}
 }

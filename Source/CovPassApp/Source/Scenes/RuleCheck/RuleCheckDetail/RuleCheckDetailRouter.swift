@@ -6,10 +6,10 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-import CovPassUI
-import UIKit
 import CovPassCommon
+import CovPassUI
 import PromiseKit
+import UIKit
 
 protocol RuleCheckDetailRouterProtocol: DialogRouterProtocol {
     func showCertificate(for token: ExtendedCBORWebToken) -> Promise<Void>

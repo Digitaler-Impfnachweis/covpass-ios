@@ -6,11 +6,11 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
+import ASN1Decoder
 import Foundation
 import Security
 import SwiftCBOR
 import UIKit
-import ASN1Decoder
 
 public enum HCertError: Error, ErrorCode {
     case publicKeyLoadError
@@ -60,12 +60,12 @@ enum HCert {
         let x509 = try X509Certificate(pem: pem)
         let allowedOids = extendedKeyUsageTestIssuer + extendedKeyUsageVaccinationIssuer + extendedKeyUsageRecoveryIssuer
 
-        let certOids = x509.extendedKeyUsage.filter({ allowedOids.contains($0) })
+        let certOids = x509.extendedKeyUsage.filter { allowedOids.contains($0) }
         if certOids.isEmpty {
             // fallback for certs without extendedKeyUsage oids
             return
         }
-        let typeOids = extendedKeyUsageForCertificate(certificate).filter({ certOids.contains($0) })
+        let typeOids = extendedKeyUsageForCertificate(certificate).filter { certOids.contains($0) }
         if typeOids.isEmpty {
             // no match, certificate got signed with key for different purpose
             throw HCertError.illegalKeyUsage

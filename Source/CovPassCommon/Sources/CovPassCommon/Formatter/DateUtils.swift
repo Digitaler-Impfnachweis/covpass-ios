@@ -71,7 +71,7 @@ public enum DateUtils {
             dobString = "XXXX-XX-XX"
         }
         if let timeRange = dobString.range(of: "T") {
-            dobString.removeSubrange(timeRange.lowerBound..<dobString.endIndex)
+            dobString.removeSubrange(timeRange.lowerBound ..< dobString.endIndex)
         }
         return dobString
     }

@@ -12,7 +12,7 @@ import Foundation
 extension DCCCertLogic {
     static func create() -> DCCCertLogic {
         DCCCertLogic(
-            initialDCCRulesURL:  Bundle.commonBundle.url(forResource: XCConfiguration.value(String.self, forKey: "DCC_RULES_FILE"), withExtension: nil)!,
+            initialDCCRulesURL: Bundle.commonBundle.url(forResource: XCConfiguration.value(String.self, forKey: "DCC_RULES_FILE"), withExtension: nil)!,
             service: DCCService(
                 url: URL(string: XCConfiguration.value(String.self, forKey: "DCC_RULES_URL"))!,
                 sessionDelegate: APIServiceDelegate(

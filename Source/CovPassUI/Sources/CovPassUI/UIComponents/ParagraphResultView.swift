@@ -58,7 +58,7 @@ public class ParagraphResultView: XibView {
         isHidden = titleLabel.isHidden && bodyLabel.isHidden
 
         infoStackView.isHidden = resultFail.isEmpty && resultOpen.isEmpty
-        infoStackView.subviews.forEach { subview  in
+        infoStackView.subviews.forEach { subview in
             subview.removeFromSuperview()
             infoStackView.removeArrangedSubview(subview)
         }

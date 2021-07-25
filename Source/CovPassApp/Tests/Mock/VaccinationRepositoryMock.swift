@@ -11,7 +11,7 @@ import Foundation
 import PromiseKit
 
 public class VaccinationRepositoryMock: VaccinationRepositoryProtocol {
-    public func matchedCertificates(for certificateList: CertificateList) -> [CertificatePair] {
+    public func matchedCertificates(for _: CertificateList) -> [CertificatePair] {
         return []
     }
 

@@ -7,10 +7,10 @@
 //
 
 @testable import CovPassApp
+import CovPassCommon
 import CovPassUI
 import Foundation
 import XCTest
-import CovPassCommon
 
 class CertificateViewModelTests: XCTestCase {
     // MARK: - Test Variables

@@ -6,9 +6,9 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
+import CertLogic
 import Foundation
 import PromiseKit
-import CertLogic
 
 public protocol DCCServiceProtocol {
     func loadDCCRules() -> Promise<[RuleSimple]>

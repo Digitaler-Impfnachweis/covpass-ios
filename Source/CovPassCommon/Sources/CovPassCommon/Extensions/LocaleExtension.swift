@@ -10,6 +10,6 @@ import Foundation
 
 public extension Locale {
     func isGerman() -> Bool {
-        self.languageCode?.lowercased() == "de"
+        languageCode?.lowercased() == "de"
     }
 }

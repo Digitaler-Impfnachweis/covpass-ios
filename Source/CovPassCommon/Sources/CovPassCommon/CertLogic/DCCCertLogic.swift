@@ -6,9 +6,9 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
+import CertLogic
 import Foundation
 import PromiseKit
-import CertLogic
 
 public class RuleSimple: Codable {
     var identifier: String
@@ -47,12 +47,14 @@ public struct DCCCertLogic {
     var dccRules: [Rule]? {
         // Try to load rules from keychain
         if let rulesData = try? keychain.fetch(KeychainPersistence.dccRulesKey) as? Data,
-           let rules = try? JSONDecoder().decode([Rule].self, from: rulesData) {
+           let rules = try? JSONDecoder().decode([Rule].self, from: rulesData)
+        {
             return rules
         }
         // Try to load local rules
         if let localRules = try? Data(contentsOf: initialDCCRulesURL),
-           let rules = try? JSONDecoder().decode([Rule].self, from: localRules) {
+           let rules = try? JSONDecoder().decode([Rule].self, from: localRules)
+        {
             return rules
         }
         return nil

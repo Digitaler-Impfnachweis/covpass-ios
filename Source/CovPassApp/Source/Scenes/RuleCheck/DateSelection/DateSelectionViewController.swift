@@ -59,7 +59,7 @@ class DateSelectionViewController: UIViewController {
     }
 
     @objc private func datePickerChanged(picker: UIDatePicker) {
-        self.viewModel.date = picker.date
+        viewModel.date = picker.date
     }
 }
 
@@ -70,7 +70,7 @@ extension DateSelectionViewController: ViewModelDelegate {
         configureText()
     }
 
-    func viewModelUpdateDidFailWithError(_ error: Error) {}
+    func viewModelUpdateDidFailWithError(_: Error) {}
 }
 
 // MARK: - CustomToolbarViewDelegate

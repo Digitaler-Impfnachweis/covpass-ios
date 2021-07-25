@@ -5,9 +5,9 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
+import CovPassCommon
 import CovPassUI
 import UIKit
-import CovPassCommon
 
 @UIApplicationMain
 final class AppDelegate: UIResponder, UIApplicationDelegate {

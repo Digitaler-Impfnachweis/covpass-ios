@@ -28,6 +28,7 @@ public class Name: Codable {
         }
         return fnt
     }
+
     public var fullNameReverse: String {
         if let gn = gn, let fn = fn {
             return "\(fn), \(gn)"

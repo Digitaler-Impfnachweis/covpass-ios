@@ -7,8 +7,8 @@
 //
 
 import CovPassUI
-import UIKit
 import PromiseKit
+import UIKit
 
 class RuleCheckRouter: RuleCheckRouterProtocol {
     // MARK: - Properties

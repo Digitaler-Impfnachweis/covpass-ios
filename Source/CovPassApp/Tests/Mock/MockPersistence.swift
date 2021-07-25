@@ -6,8 +6,8 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-import Foundation
 import CovPassCommon
+import Foundation
 
 class MockPersistence: Persistence {
     private var store = [String: Any]()

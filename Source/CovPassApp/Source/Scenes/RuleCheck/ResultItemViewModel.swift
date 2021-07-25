@@ -6,11 +6,11 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
+import CertLogic
 import CovPassCommon
 import CovPassUI
 import Foundation
 import UIKit
-import CertLogic
 
 struct ResultItemViewModel: CertificateItemViewModel {
     let result: CertificateResult

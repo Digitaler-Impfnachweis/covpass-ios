@@ -7,8 +7,8 @@
 //
 
 import Foundation
-import XCTest
 import PromiseKit
+import XCTest
 
 @testable import CovPassCommon
 
@@ -20,7 +20,6 @@ class CheckAppUpdateServiceMock: CheckAppUpdateServiceProtocol {
 }
 
 class CheckAppUpdateTests: XCTestCase {
-
     func testAppUpdate() throws {
         let service = CheckAppUpdateServiceMock()
         service.versionResult = Promise.value("1.0.1")

@@ -31,7 +31,6 @@ struct AppStoreResult: Codable {
 }
 
 public struct CheckAppUpdateService: CheckAppUpdateServiceProtocol {
-
     private let bundleIdentifier: String
 
     public init(bundleIdentifier: String) {
@@ -68,7 +67,6 @@ public struct CheckAppUpdateService: CheckAppUpdateServiceProtocol {
 public typealias VersionUpdate = (shouldUpdate: Bool, version: String, currentVersion: String)
 
 public struct CheckAppUpdate {
-
     private let service: CheckAppUpdateServiceProtocol
     private let userDefaults: Persistence
     var bundleVersion: String?
@@ -77,7 +75,7 @@ public struct CheckAppUpdate {
     public init(service: CheckAppUpdateServiceProtocol, userDefaults: Persistence, appStoreID: String) {
         self.service = service
         self.userDefaults = userDefaults
-        self.bundleVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
+        bundleVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
         self.appStoreID = appStoreID
     }
 
