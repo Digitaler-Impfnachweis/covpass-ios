@@ -6,12 +6,12 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
+import CertLogic
+import CovPassCommon
 import CovPassUI
 import LocalAuthentication
 import PromiseKit
 import UIKit
-import CovPassCommon
-import CertLogic
 
 struct CertificateResult {
     var certificate: ExtendedCBORWebToken
@@ -111,7 +111,8 @@ class RuleCheckViewModel: BaseViewModel, CancellableViewModelProtocol {
                     do {
                         if let country = self?.country.uppercased(),
                            let date = self?.date,
-                           let res = try self?.certLogic.validate(countryCode: country, validationClock: date, certificate: cert.vaccinationCertificate) {
+                           let res = try self?.certLogic.validate(countryCode: country, validationClock: date, certificate: cert.vaccinationCertificate)
+                        {
                             results.append(CertificateResult(certificate: cert, result: res))
                         }
                     } catch {

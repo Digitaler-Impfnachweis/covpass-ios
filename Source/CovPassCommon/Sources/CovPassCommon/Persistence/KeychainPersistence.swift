@@ -103,7 +103,7 @@ public struct KeychainPersistence: Persistence {
         }
     }
 
-    private func fetch(_ key: String, query: NSDictionary) throws -> Any? {
+    private func fetch(_: String, query: NSDictionary) throws -> Any? {
         var result: CFTypeRef?
         let status = SecItemCopyMatching(query, &result)
         guard let resultsDict = result as? NSDictionary,
@@ -125,7 +125,7 @@ public struct KeychainPersistence: Persistence {
             kSecAttrAccessible as String: attrAccessible
         ]
         let status = SecItemDelete(query)
-        if status != noErr && status != errSecItemNotFound {
+        if status != noErr, status != errSecItemNotFound {
             throw KeychainError.deleteFailed
         }
     }

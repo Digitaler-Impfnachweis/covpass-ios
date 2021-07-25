@@ -6,10 +6,10 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
+import CertLogic
+import CovPassCommon
 import Foundation
 import PromiseKit
-import CovPassCommon
-import CertLogic
 
 public enum DCCServiceMockError: Error {
     case invalidURL
@@ -22,7 +22,7 @@ class DCCServiceMock: DCCServiceProtocol {
     }
 
     var loadDCCRuleResult: Promise<Rule>?
-    func loadDCCRule(country: String, hash: String) -> Promise<Rule> {
-        return loadDCCRuleResult ?? Promise.init(error: DCCServiceMockError.invalidURL)
+    func loadDCCRule(country _: String, hash _: String) -> Promise<Rule> {
+        return loadDCCRuleResult ?? Promise(error: DCCServiceMockError.invalidURL)
     }
 }

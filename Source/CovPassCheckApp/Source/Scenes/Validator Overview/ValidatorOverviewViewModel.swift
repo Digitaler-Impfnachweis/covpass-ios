@@ -26,12 +26,14 @@ class ValidatorOverviewViewModel {
     var offlineAvailable: Bool {
         if let lastUpdated = repository.getLastUpdatedTrustList(),
            let date = Calendar.current.date(byAdding: .day, value: 1, to: lastUpdated),
-           Date() < date {
+           Date() < date
+        {
             return true
         }
         if let lastUpdated = certLogic.lastUpdatedDCCRules(),
            let date = Calendar.current.date(byAdding: .day, value: 1, to: lastUpdated),
-           Date() < date {
+           Date() < date
+        {
             return true
         }
         return false

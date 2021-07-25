@@ -33,12 +33,14 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
     private var trustList: TrustList? {
         // Try to load trust list from keychain
         if let trustListData = try? keychain.fetch(KeychainPersistence.trustListKey) as? Data,
-           let list = try? JSONDecoder().decode(TrustList.self, from: trustListData) {
+           let list = try? JSONDecoder().decode(TrustList.self, from: trustListData)
+        {
             return list
         }
         // Try to load local trust list
         if let localTrustList = try? Data(contentsOf: initialDataURL),
-           let list = try? JSONDecoder().decode(TrustList.self, from: localTrustList) {
+           let list = try? JSONDecoder().decode(TrustList.self, from: localTrustList)
+        {
             return list
         }
         return nil
@@ -196,7 +198,7 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
         }
         .map(on: .global()) { certificate in
             ExtendedCBORWebToken(vaccinationCertificate: certificate, vaccinationQRCodeData: data)
-        }.then (on: .global()){ extendedCBORWebToken in
+        }.then(on: .global()) { extendedCBORWebToken in
             self.getCertificateList()
                 .then(on: .global()) { list -> Promise<Void> in
                     var certList = list

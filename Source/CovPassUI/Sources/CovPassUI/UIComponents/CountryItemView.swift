@@ -30,7 +30,6 @@ public class CountryItemView: XibView {
         textLabel.text = ""
         rightIcon.image = .checkboxUnchecked
         seperatorView.backgroundColor = .onBackground20
-
     }
 
     // MARK: - Methods

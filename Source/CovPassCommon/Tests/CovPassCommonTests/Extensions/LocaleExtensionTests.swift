@@ -13,7 +13,7 @@ import XCTest
 
 class LocaleExtensionTests: XCTestCase {
     func testLocaleIsGerman() {
-        XCTAssert(Locale.init(identifier: "de").isGerman())
-        XCTAssertFalse(Locale.init(identifier: "en").isGerman())
+        XCTAssert(Locale(identifier: "de").isGerman())
+        XCTAssertFalse(Locale(identifier: "en").isGerman())
     }
 }

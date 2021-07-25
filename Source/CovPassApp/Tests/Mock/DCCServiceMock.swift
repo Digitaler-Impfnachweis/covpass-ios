@@ -6,10 +6,10 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-import Foundation
-import PromiseKit
 import CertLogic
 import CovPassCommon
+import Foundation
+import PromiseKit
 
 public struct DCCServiceMock: DCCServiceProtocol {
     public init() {}
@@ -18,7 +18,7 @@ public struct DCCServiceMock: DCCServiceProtocol {
         return Promise.value([])
     }
 
-    public func loadDCCRule(country: String, hash: String) -> Promise<Rule> {
+    public func loadDCCRule(country _: String, hash _: String) -> Promise<Rule> {
         return Promise(error: ApplicationError.unknownError)
     }
 }

@@ -6,11 +6,11 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
+import CertLogic
 import CovPassCommon
 import CovPassUI
 import PromiseKit
 import UIKit
-import CertLogic
 
 class RuleCheckDetailViewModel {
     // MARK: - Properties
@@ -38,7 +38,7 @@ class RuleCheckDetailViewModel {
         }
         return "certificate_check_validity_detail_view_vaccination_result_title".localized
     }
-    
+
     var resultIcon: UIImage {
         switch result.state {
         case .fail:

@@ -6,12 +6,12 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
+import CertLogic
 @testable import CovPassCommon
 import Foundation
-import XCTest
-import CertLogic
-import SwiftyJSON
 import PromiseKit
+import SwiftyJSON
+import XCTest
 
 class DCCCertLogicTests: XCTestCase {
     var keychain: MockPersistence!
@@ -190,8 +190,8 @@ class DCCCertLogicTests: XCTestCase {
 
         // Update rules
         service.loadDCCRulesResult = Promise.value([
-                                                    RuleSimple(identifier: "1", version: "", country: "DE", hash: "1"),
-                                                    RuleSimple(identifier: "2", version: "", country: "DE", hash: "2")
+            RuleSimple(identifier: "1", version: "", country: "DE", hash: "1"),
+            RuleSimple(identifier: "2", version: "", country: "DE", hash: "2")
         ])
         let rule = Rule(identifier: "1", type: "", version: "", schemaVersion: "", engine: "", engineVersion: "", certificateType: "", description: [], validFrom: "", validTo: "", affectedString: [], logic: JSON(""), countryCode: "DE")
         rule.hash = "1"
