@@ -122,10 +122,6 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
         router.showAppInformation()
     }
 
-    func showErrorDialog() {
-        router.showUnexpectedErrorDialog()
-    }
-
     private func payloadFromScannerResult(_ result: ScanResult) throws -> String {
         switch result {
         case let .success(payload):
@@ -164,9 +160,8 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
             self.lastKnownFavoriteCertificateId = isFavorite ? id : nil
             self.delegate?.viewModelNeedsFirstCertificateVisible()
         }
-        .catch { _ in
-            // Improve error handling
-            self.showErrorDialog()
+        .catch { [weak self] error in
+            self?.router.showUnexpectedErrorDialog(error)
         }
     }
 
@@ -195,9 +190,8 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
         .done {
             self.handleCertificateDetailSceneResult($0)
         }
-        .catch { _ in
-            // Improve error handling
-            self.showErrorDialog()
+        .catch { [weak self] error in
+            self?.router.showUnexpectedErrorDialog(error)
         }
     }
 

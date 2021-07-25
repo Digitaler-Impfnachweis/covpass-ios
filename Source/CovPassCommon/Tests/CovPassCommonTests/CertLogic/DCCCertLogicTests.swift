@@ -38,12 +38,12 @@ class DCCCertLogicTests: XCTestCase {
     }
 
     func testCountries() {
-        XCTAssertEqual(sut.countries.count, 6)
+        XCTAssertEqual(sut.countries.count, 31)
     }
 
     func testSavedAndLocalRules() throws {
         // Check local rules (no saved rules)
-        XCTAssertEqual(sut.dccRules?.count, 75)
+        XCTAssertEqual(sut.dccRules?.count, 74)
 
         // Save one rule
         let rule = Rule(identifier: "", type: "", version: "", schemaVersion: "", engine: "", engineVersion: "", certificateType: "", description: [], validFrom: "", validTo: "", affectedString: [], logic: JSON(""), countryCode: "")

@@ -15,7 +15,7 @@ extension DialogRouterProtocol {
         case QRCodeError.versionNotSupported:
             showDialog(
                 title: "error_scan_present_data_is_not_supported_title".localized,
-                message: "error_scan_present_data_is_not_supported_message".localized,
+                message: error.displayCodeWithMessage("error_scan_present_data_is_not_supported_message".localized),
                 actions: [
                     DialogAction(
                         title: "error_scan_present_data_is_not_supported_button_title".localized,
@@ -28,7 +28,7 @@ extension DialogRouterProtocol {
         case HCertError.verifyError:
             showDialog(
                 title: "error_scan_qrcode_without_seal_title".localized,
-                message: "error_scan_qrcode_without_seal_message".localized,
+                message: error.displayCodeWithMessage("error_scan_qrcode_without_seal_message".localized),
                 actions: [
                     DialogAction(
                         title: "error_scan_qrcode_without_seal_button_title".localized,
@@ -41,7 +41,7 @@ extension DialogRouterProtocol {
         case QRCodeError.qrCodeExists:
             showDialog(
                 title: "duplicate_certificate_dialog_header".localized,
-                message: "duplicate_certificate_dialog_message".localized,
+                message: error.displayCodeWithMessage("duplicate_certificate_dialog_message".localized),
                 actions: [
                     DialogAction(
                         title: "duplicate_certificate_dialog_button_title".localized,
@@ -54,7 +54,7 @@ extension DialogRouterProtocol {
         case CertificateError.positiveResult:
             showDialog(
                 title: "error_test_certificate_not_valid_title".localized,
-                message: "error_test_certificate_not_valid_message".localized,
+                message: error.displayCodeWithMessage("error_test_certificate_not_valid_message".localized),
                 actions: [
                     DialogAction(
                         title: "error_test_certificate_not_valid_button_title".localized,
@@ -67,7 +67,7 @@ extension DialogRouterProtocol {
         default:
             showDialog(
                 title: "error_scan_qrcode_cannot_be_parsed_title".localized,
-                message: "error_scan_qrcode_cannot_be_parsed_message".localized,
+                message: error.displayCodeWithMessage("error_scan_qrcode_cannot_be_parsed_message".localized),
                 actions: [
                     DialogAction(
                         title: "error_scan_qrcode_cannot_be_parsed_button_title".localized,

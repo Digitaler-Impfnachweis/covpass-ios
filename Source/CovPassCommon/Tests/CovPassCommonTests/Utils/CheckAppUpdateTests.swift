@@ -25,7 +25,7 @@ class CheckAppUpdateTests: XCTestCase {
         var service = CheckAppUpdateServiceMock()
         service.versionResult = Promise.value("1.0.1")
         let userDefaults = MockPersistence()
-        var sut = CheckAppUpdate(service, userDefaults)
+        var sut = CheckAppUpdate(service: service, userDefaults: userDefaults, appStoreID: "1")
         sut.bundleVersion = "1.0.0"
 
         let appUpdate = try sut.updateAvailable().wait()
@@ -37,7 +37,7 @@ class CheckAppUpdateTests: XCTestCase {
         var service = CheckAppUpdateServiceMock()
         service.versionResult = Promise.value("1.0.0")
         let userDefaults = MockPersistence()
-        var sut = CheckAppUpdate(service, userDefaults)
+        var sut = CheckAppUpdate(service: service, userDefaults: userDefaults, appStoreID: "1")
         sut.bundleVersion = "1.0.0"
 
         let appUpdate = try sut.updateAvailable().wait()
@@ -50,7 +50,7 @@ class CheckAppUpdateTests: XCTestCase {
             service.versionResult = Promise.value("1.0.1")
             let userDefaults = MockPersistence()
             try userDefaults.store(UserDefaults.keyCheckVersionUpdate, value: "1.0.0")
-            var sut = CheckAppUpdate(service, userDefaults)
+            var sut = CheckAppUpdate(service: service, userDefaults: userDefaults, appStoreID: "1")
             sut.bundleVersion = "1.0.0"
 
             _ = try sut.updateAvailable().wait()

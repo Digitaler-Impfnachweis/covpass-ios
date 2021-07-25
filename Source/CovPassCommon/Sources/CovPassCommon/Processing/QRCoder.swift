@@ -10,9 +10,18 @@ import Compression
 import Foundation
 import PromiseKit
 
-public enum QRCodeError: Error {
+public enum QRCodeError: Error, ErrorCode {
     case qrCodeExists
     case versionNotSupported
+
+    public var errorCode: Int {
+        switch self {
+        case .qrCodeExists:
+            return 201
+        case .versionNotSupported:
+            return 202
+        }
+    }
 }
 
 enum QRCoder {

@@ -8,13 +8,30 @@
 
 import Foundation
 
-public enum KeychainError: Error {
+public enum KeychainError: Error, ErrorCode {
     case valueNotData
     case storeUpdateFailed
     case storeAddFailed
     case fetchFailed
     case deleteFailed
     case migrationFailed
+
+    public var errorCode: Int {
+        switch self {
+        case .valueNotData:
+            return 501
+        case .storeUpdateFailed:
+            return 502
+        case .storeAddFailed:
+            return 503
+        case .fetchFailed:
+            return 504
+        case .deleteFailed:
+            return 505
+        case .migrationFailed:
+            return 506
+        }
+    }
 }
 
 public struct KeychainPersistence: Persistence {

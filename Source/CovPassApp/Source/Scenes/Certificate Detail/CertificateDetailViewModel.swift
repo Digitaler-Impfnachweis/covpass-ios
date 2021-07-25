@@ -141,7 +141,7 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
 
     func toggleFavorite() {
         guard let id = certificates.first?.vaccinationCertificate.hcert.dgc.uvci else {
-            showErrorDialog()
+            router.showUnexpectedErrorDialog(ApplicationError.unknownError)
             return
         }
         firstly {
@@ -153,8 +153,8 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
         .done { _ in
             self.delegate?.viewModelDidUpdate()
         }
-        .catch { _ in
-            self.showErrorDialog()
+        .catch { [weak self] error in
+            self?.router.showUnexpectedErrorDialog(error)
         }
     }
 
@@ -174,12 +174,8 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
         .done { _ in
             self.delegate?.viewModelDidUpdate()
         }
-        .catch { _ in
-            self.showErrorDialog()
+        .catch { [weak self] error in
+            self?.router.showUnexpectedErrorDialog(error)
         }
-    }
-
-    private func showErrorDialog() {
-        router.showUnexpectedErrorDialog()
     }
 }

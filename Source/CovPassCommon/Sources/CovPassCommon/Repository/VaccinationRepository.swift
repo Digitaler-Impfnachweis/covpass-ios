@@ -9,9 +9,18 @@
 import Foundation
 import PromiseKit
 
-public enum CertificateError: Error {
+public enum CertificateError: Error, ErrorCode {
     case positiveResult
     case expiredCertifcate
+
+    public var errorCode: Int {
+        switch self {
+        case .positiveResult:
+            return 421
+        case .expiredCertifcate:
+            return 422
+        }
+    }
 }
 
 public struct VaccinationRepository: VaccinationRepositoryProtocol {

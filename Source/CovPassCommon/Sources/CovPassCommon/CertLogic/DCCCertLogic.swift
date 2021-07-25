@@ -24,9 +24,18 @@ public class RuleSimple: Codable {
     }
 }
 
-public enum DCCCertLogicError: Error {
+public enum DCCCertLogicError: Error, ErrorCode {
     case noRules
     case encodingError
+
+    public var errorCode: Int {
+        switch self {
+        case .noRules:
+            return 401
+        case .encodingError:
+            return 402
+        }
+    }
 }
 
 public struct DCCCertLogic {

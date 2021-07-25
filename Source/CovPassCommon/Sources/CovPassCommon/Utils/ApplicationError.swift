@@ -9,10 +9,21 @@
 import Foundation
 import PromiseKit
 
-public enum ApplicationError: Error {
+public enum ApplicationError: Error, ErrorCode {
     case unknownError
     case general(String)
     case missingData(String)
+
+    public var errorCode: Int {
+        switch self {
+        case .unknownError:
+            return 901
+        case .general:
+            return 902
+        case .missingData:
+            return 903
+        }
+    }
 }
 
 extension ApplicationError: LocalizedError {

@@ -8,8 +8,15 @@
 
 import Foundation
 
-enum Base45CodingError: Error {
-    case overflow
+public enum Base45CodingError: Error, ErrorCode {
+    case base45Decoding
+
+    public var errorCode: Int {
+        switch self {
+        case .base45Decoding:
+            return 301
+        }
+    }
 }
 
 enum Base45Coder {
@@ -95,9 +102,9 @@ enum Base45Coder {
 
         for count in 0 ..< array.count {
             let resMultiply = UInt16(array[count]).multipliedReportingOverflow(by: UInt16(pow(45, Double(count))))
-            if resMultiply.overflow { throw Base45CodingError.overflow }
+            if resMultiply.overflow { throw Base45CodingError.base45Decoding }
             let resAdd = result.addingReportingOverflow(resMultiply.partialValue)
-            if resAdd.overflow { throw Base45CodingError.overflow }
+            if resAdd.overflow { throw Base45CodingError.base45Decoding }
             result = resAdd.partialValue
         }
 

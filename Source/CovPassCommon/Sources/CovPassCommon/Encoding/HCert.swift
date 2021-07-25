@@ -12,10 +12,21 @@ import SwiftCBOR
 import UIKit
 import ASN1Decoder
 
-public enum HCertError: Error {
+public enum HCertError: Error, ErrorCode {
     case publicKeyLoadError
     case verifyError
     case illegalKeyUsage
+
+    public var errorCode: Int {
+        switch self {
+        case .publicKeyLoadError:
+            return 411
+        case .verifyError:
+            return 412
+        case .illegalKeyUsage:
+            return 413
+        }
+    }
 }
 
 enum HCert {

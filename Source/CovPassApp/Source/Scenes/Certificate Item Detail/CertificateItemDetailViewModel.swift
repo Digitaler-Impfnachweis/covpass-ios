@@ -125,8 +125,8 @@ class CertificateItemDetailViewModel: CertificateItemDetailViewModelProtocol {
         .done {
             self.resolver?.fulfill(.didDeleteCertificate)
         }
-        .catch { _ in
-            self.router.showUnexpectedErrorDialog()
+        .catch { error in
+            self.router.showUnexpectedErrorDialog(error)
         }
     }
 

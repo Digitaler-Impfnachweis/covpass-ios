@@ -9,10 +9,21 @@
 import Foundation
 import SwiftCBOR
 
-public enum CoseParsingError: Error {
+public enum CoseParsingError: Error, ErrorCode {
     case wrongType
     case wrongArrayLength
     case missingValue
+
+    public var errorCode: Int {
+        switch self {
+        case .wrongType:
+            return 401
+        case .wrongArrayLength:
+            return 402
+        case .missingValue:
+            return 403
+        }
+    }
 }
 
 enum CoseProtectedHeader: Int {
