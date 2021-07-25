@@ -192,7 +192,7 @@ public struct DCCCertLogic {
                 seal.fulfill_()
             }
         }
-        .then {
+        .then(on: .global()) {
             updateRules()
         }
     }

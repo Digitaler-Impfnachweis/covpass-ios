@@ -11,7 +11,7 @@ import PromiseKit
 import CovPassCommon
 import CertLogic
 
-public enum DCCServiceError: Error {
+public enum DCCServiceMockError: Error {
     case invalidURL
 }
 
@@ -23,6 +23,6 @@ class DCCServiceMock: DCCServiceProtocol {
 
     var loadDCCRuleResult: Promise<Rule>?
     func loadDCCRule(country: String, hash: String) -> Promise<Rule> {
-        return loadDCCRuleResult ?? Promise.init(error: DCCServiceError.invalidURL)
+        return loadDCCRuleResult ?? Promise.init(error: DCCServiceMockError.invalidURL)
     }
 }

@@ -11,8 +11,9 @@ import PromiseKit
 
 @testable import CovPassCommon
 
-struct APIServiceMock: APIServiceProtocol {
+class APIServiceMock: APIServiceProtocol {
+    var trustListResult: Promise<String>?
     func fetchTrustList() -> Promise<String> {
-        Promise.value("")
+        trustListResult ?? Promise.value("")
     }
 }

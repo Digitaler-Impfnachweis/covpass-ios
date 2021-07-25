@@ -23,6 +23,12 @@ class HCertTests: XCTestCase {
         return TrustList(certificates: [TrustCertificate(certificateType: "", country: "", kid: "", rawData: invalidCertificate, signature: "", thumbprint: "", timestamp: "")])
     }
 
+    func testErrorCode() {
+        XCTAssertEqual(HCertError.publicKeyLoadError.errorCode, 411)
+        XCTAssertEqual(HCertError.verifyError.errorCode, 412)
+        XCTAssertEqual(HCertError.illegalKeyUsage.errorCode, 413)
+    }
+
     func testVerify() {
         let certificate = CertificateMock.validCertificate.stripPrefix()
         let base45Decoded = try! Base45Coder.decode(certificate)

@@ -12,6 +12,11 @@ import XCTest
 @testable import CovPassCommon
 
 class QRCoderTests: XCTestCase {
+    func testErrorCode() {
+        XCTAssertEqual(QRCodeError.qrCodeExists.errorCode, 201)
+        XCTAssertEqual(QRCodeError.versionNotSupported.errorCode, 202)
+    }
+
     func testParseValidCertificate() throws {
         let res = try QRCoder.parse(CertificateMock.validCertificate).wait()
         _ = try res.payloadJsonData()
