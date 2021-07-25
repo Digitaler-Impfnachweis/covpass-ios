@@ -68,8 +68,30 @@ class RuleCheckViewModel: BaseViewModel, CancellableViewModelProtocol {
         .done { _ in
             self.validateCertificates()
         }
-        .catch { error in
-            self.cancel()
+        .catch { _ in
+            self.router.showDialog(
+                title: "error_check_validity_no_internet_title".localized,
+                message: "error_check_validity_no_internet_message".localized,
+                actions: [
+                    DialogAction(
+                        title: "error_check_validity_no_internet_button_try_again".localized,
+                        style: .default,
+                        isEnabled: true,
+                        completion: { [weak self] _ in
+                            self?.updateRules()
+                        }
+                    ),
+                    DialogAction(
+                        title: "error_check_validity_no_internet_button_cancel".localized,
+                        style: .default,
+                        isEnabled: true,
+                        completion: { [weak self] _ in
+                            self?.cancel()
+                        }
+                    )
+                ],
+                style: .alert
+            )
         }
     }
 
