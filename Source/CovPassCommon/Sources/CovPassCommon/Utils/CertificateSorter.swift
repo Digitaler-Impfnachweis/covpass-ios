@@ -13,17 +13,17 @@ public enum CertificateSorter {
     public static func sort(_ certificates: [ExtendedCBORWebToken]) -> [ExtendedCBORWebToken] {
         var res = [ExtendedCBORWebToken]()
         // #1 Test certificate
-        //  Negative PCR Test not older than (=<)48h
+        //  Negative PCR Test not older than (=<)72h
         res.append(contentsOf: certificates.filter {
-            if let t = $0.vaccinationCertificate.hcert.dgc.t?.first, t.isPCR, !t.isPositive, Date() <= Calendar.current.date(byAdding: .hour, value: 48, to: t.sc) ?? Date() {
+            if let t = $0.vaccinationCertificate.hcert.dgc.t?.first, t.isPCR, !t.isPositive, Date() <= Calendar.current.date(byAdding: .hour, value: 72, to: t.sc) ?? Date() {
                 return true
             }
             return false
         })
         // #2 Test certificate
-        //  Negative quick test, not older than 24 hrs
+        //  Negative quick test, not older than 48 hrs
         res.append(contentsOf: certificates.filter {
-            if let t = $0.vaccinationCertificate.hcert.dgc.t?.first, !t.isPCR, !t.isPositive, Date() <= Calendar.current.date(byAdding: .hour, value: 24, to: t.sc) ?? Date() {
+            if let t = $0.vaccinationCertificate.hcert.dgc.t?.first, !t.isPCR, !t.isPositive, Date() <= Calendar.current.date(byAdding: .hour, value: 48, to: t.sc) ?? Date() {
                 return true
             }
             return false
@@ -74,7 +74,7 @@ public enum CertificateSorter {
             return false
         })
         // #8 Test certificate
-        //  Negative PCR-Test, older then (>) 48 Hrs, or negative quick test older then (>) 24 Hrs
+        //  Negative PCR-Test, older then (>) 72 Hrs, or negative quick test older then (>) 48 Hrs
         res.append(contentsOf: certificates.filter {
             if let t = $0.vaccinationCertificate.hcert.dgc.t?.first, !t.isPositive, !t.isValid {
                 return true
