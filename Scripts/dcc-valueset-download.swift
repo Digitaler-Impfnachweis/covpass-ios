@@ -13,7 +13,7 @@ class ValueSetSimple: Codable {
 let dataSummary = try! Data(contentsOf: URL(string: baseURL + "/valuesets")!)
 let valueSetsSummary = try! JSONDecoder().decode([ValueSetSimple].self, from: dataSummary)
 
-// Download all rules and group by country
+// Download all value sets
 for valueSetSummary in valueSetsSummary {
     let data = try! Data(contentsOf: URL(string: baseURL + "/valuesets/\(valueSetSummary.hash)")!)
     let json = try! JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]

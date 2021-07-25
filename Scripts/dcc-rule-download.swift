@@ -15,7 +15,7 @@ class RuleSimple: Codable {
 let dataSummary = try! Data(contentsOf: URL(string: baseURL + "/rules")!)
 let rulesSummary = try! JSONDecoder().decode([RuleSimple].self, from: dataSummary)
 
-// Download all rules and group by country
+// Download all rules
 var result = [[String: Any]]()
 for ruleSummary in rulesSummary {
     let data = try! Data(contentsOf: URL(string: baseURL + "/rules/\(ruleSummary.country)/\(ruleSummary.hash)")!)

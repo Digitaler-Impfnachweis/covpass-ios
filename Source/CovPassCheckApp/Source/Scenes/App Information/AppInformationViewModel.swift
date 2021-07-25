@@ -34,22 +34,22 @@ class AppInformationViewModel: AppInformationViewModelProtocol {
         [
             webEntry(
                 title: "app_information_title_contact".localized,
-                url:  Bundle.main.url(forResource: "contact-covpasscheck", withExtension: "html")!
+                url:  Bundle.main.url(forResource: Locale.current.isGerman() ? "contact-covpasscheck" : "contact-covpasscheck-en", withExtension: "html")!
             ),
 
             webEntry(
                 title: "app_information_title_faq".localized,
-                url: URL(string: "https://www.digitaler-impfnachweis-app.de/webviews/verification-app/faq/")!
+                url: URL(string: Locale.current.isGerman() ? "https://www.digitaler-impfnachweis-app.de/webviews/verification-app/faq/" : "https://www.digitaler-impfnachweis-app.de/en/webviews/client-app/faq/")!
             ),
 
             webEntry(
                 title: "app_information_title_datenschutz".localized,
-                url: Bundle.main.url(forResource: "privacy-covpasscheck", withExtension: "html")!
+                url: Bundle.main.url(forResource: Locale.current.isGerman() ? "privacy-covpasscheck" : "privacy-covpasscheck-en", withExtension: "html")!
             ),
 
             webEntry(
                 title: "app_information_title_company_details".localized,
-                url: URL(string: "https://www.digitaler-impfnachweis-app.de/webviews/imprint/")!
+                url: URL(string: Locale.current.isGerman() ? "https://www.digitaler-impfnachweis-app.de/webviews/imprint/" : "https://www.digitaler-impfnachweis-app.de/en/webviews/imprint/")!
             ),
 
             webEntry(

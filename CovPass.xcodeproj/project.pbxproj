@@ -113,6 +113,10 @@
 		385FC1B2269F21A200D19AF8 /* RuleCheckDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 385FC1AD269F21A200D19AF8 /* RuleCheckDetailViewController.xib */; };
 		385FC1B4269F577400D19AF8 /* MockPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385FC1B3269F577400D19AF8 /* MockPersistence.swift */; };
 		385FC1B6269F57BC00D19AF8 /* DCCServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385FC1B5269F57BC00D19AF8 /* DCCServiceMock.swift */; };
+		3876382826ADBED100FBCA47 /* contact-covpass-en.html in Resources */ = {isa = PBXBuildFile; fileRef = 3876382626ADBED100FBCA47 /* contact-covpass-en.html */; };
+		3876382926ADBED100FBCA47 /* privacy-covpass-en.html in Resources */ = {isa = PBXBuildFile; fileRef = 3876382726ADBED100FBCA47 /* privacy-covpass-en.html */; };
+		3876382E26ADBFE500FBCA47 /* contact-covpasscheck-en.html in Resources */ = {isa = PBXBuildFile; fileRef = 3876382B26ADBED900FBCA47 /* contact-covpasscheck-en.html */; };
+		3876382F26ADBFEC00FBCA47 /* privacy-covpasscheck-en.html in Resources */ = {isa = PBXBuildFile; fileRef = 3876382A26ADBED900FBCA47 /* privacy-covpasscheck-en.html */; };
 		3882AEAB266FD609000354CD /* VaccinationCertificateItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3882AEAA266FD609000354CD /* VaccinationCertificateItemViewModel.swift */; };
 		3882AEAE266FE85C000354CD /* CertificateItemDetailSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3882AEAD266FE85C000354CD /* CertificateItemDetailSceneFactory.swift */; };
 		3882AEB0266FE9EE000354CD /* CertificateItemDetailRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3882AEAF266FE9EE000354CD /* CertificateItemDetailRouter.swift */; };
@@ -282,6 +286,10 @@
 		385FC1AD269F21A200D19AF8 /* RuleCheckDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RuleCheckDetailViewController.xib; sourceTree = "<group>"; };
 		385FC1B3269F577400D19AF8 /* MockPersistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockPersistence.swift; sourceTree = "<group>"; };
 		385FC1B5269F57BC00D19AF8 /* DCCServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DCCServiceMock.swift; sourceTree = "<group>"; };
+		3876382626ADBED100FBCA47 /* contact-covpass-en.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "contact-covpass-en.html"; sourceTree = "<group>"; };
+		3876382726ADBED100FBCA47 /* privacy-covpass-en.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "privacy-covpass-en.html"; sourceTree = "<group>"; };
+		3876382A26ADBED900FBCA47 /* privacy-covpasscheck-en.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "privacy-covpasscheck-en.html"; sourceTree = "<group>"; };
+		3876382B26ADBED900FBCA47 /* contact-covpasscheck-en.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "contact-covpasscheck-en.html"; sourceTree = "<group>"; };
 		3882AEAA266FD609000354CD /* VaccinationCertificateItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaccinationCertificateItemViewModel.swift; sourceTree = "<group>"; };
 		3882AEAD266FE85C000354CD /* CertificateItemDetailSceneFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateItemDetailSceneFactory.swift; sourceTree = "<group>"; };
 		3882AEAF266FE9EE000354CD /* CertificateItemDetailRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateItemDetailRouter.swift; sourceTree = "<group>"; };
@@ -1059,6 +1067,8 @@
 		88BEE03926550DFD00479E5E /* Static */ = {
 			isa = PBXGroup;
 			children = (
+				3876382626ADBED100FBCA47 /* contact-covpass-en.html */,
+				3876382726ADBED100FBCA47 /* privacy-covpass-en.html */,
 				38234166268A28BB00722A46 /* contact-covpass.html */,
 				88BEE03A26550E0900479E5E /* privacy-covpass.html */,
 			);
@@ -1068,6 +1078,8 @@
 		88BEE04026550E1900479E5E /* Static */ = {
 			isa = PBXGroup;
 			children = (
+				3876382B26ADBED900FBCA47 /* contact-covpasscheck-en.html */,
+				3876382A26ADBED900FBCA47 /* privacy-covpasscheck-en.html */,
 				38234168268A28C500722A46 /* contact-covpasscheck.html */,
 				88BEE04126550E2500479E5E /* privacy-covpasscheck.html */,
 			);
@@ -1210,8 +1222,10 @@
 			files = (
 				216D1FC0264EF75500370F16 /* CertificatesOverviewViewController.xib in Resources */,
 				38234167268A28BB00722A46 /* contact-covpass.html in Resources */,
+				3876382826ADBED100FBCA47 /* contact-covpass-en.html in Resources */,
 				88BEE03B26550E0900479E5E /* privacy-covpass.html in Resources */,
 				385FC192269EB6AE00D19AF8 /* CountrySelectionViewController.xib in Resources */,
+				3876382926ADBED100FBCA47 /* privacy-covpass-en.html in Resources */,
 				216D1FE0264EF76800370F16 /* CertificateDetailViewController.xib in Resources */,
 				216D1F49264EF50300370F16 /* Assets.xcassets in Resources */,
 				38E3625D269B712900DE6D4C /* RuleCheckViewController.xib in Resources */,
@@ -1238,8 +1252,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				2181C179264F037400DE7412 /* WelcomeViewController.xib in Resources */,
+				3876382F26ADBFEC00FBCA47 /* privacy-covpasscheck-en.html in Resources */,
 				2181C190264F03AA00DE7412 /* ValidationResultViewController.xib in Resources */,
 				3823416A268A2A3900722A46 /* contact-covpasscheck.html in Resources */,
+				3876382E26ADBFE500FBCA47 /* contact-covpasscheck-en.html in Resources */,
 				88BEE04226550E2500479E5E /* privacy-covpasscheck.html in Resources */,
 				2181C1BD264F053000DE7412 /* Localizable.strings in Resources */,
 				2181C168264F035A00DE7412 /* ValidatorOverviewViewController.xib in Resources */,
