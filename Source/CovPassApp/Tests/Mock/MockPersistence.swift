@@ -7,8 +7,7 @@
 //
 
 import Foundation
-
-@testable import CovPassCommon
+import CovPassCommon
 
 class MockPersistence: Persistence {
     private var store = [String: Any]()
