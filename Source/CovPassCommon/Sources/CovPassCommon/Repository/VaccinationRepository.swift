@@ -97,10 +97,10 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
                 seal.fulfill_()
             }
         }
-        .then {
+        .then(on: .global()) {
             service.fetchTrustList()
         }
-        .map { trustList -> TrustList in
+        .map(on: .global()) { trustList -> TrustList in
             let seq = trustList.split(separator: "\n")
             if seq.count != 2 {
                 throw HCertError.verifyError
@@ -153,7 +153,7 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
             // Validation successful, save trust list
             return try JSONDecoder().decode(TrustList.self, from: signedData)
         }
-        .map { trustList in
+        .map(on: .global()) { trustList in
             let data = try JSONEncoder().encode(trustList)
             try keychain.store(KeychainPersistence.trustListKey, value: data)
             UserDefaults.standard.setValue(Date(), forKey: UserDefaults.keyLastUpdatedTrustList)
@@ -164,7 +164,7 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
         firstly {
             getCertificateList()
         }
-        .then { list -> Promise<CertificateList> in
+        .then(on: .global()) { list -> Promise<CertificateList> in
             var certList = list
             // delete favorite if needed
             if certList.favoriteCertificateId == certificate.vaccinationCertificate.hcert.dgc.uvci {
@@ -175,7 +175,7 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
             })
             return Promise.value(certList)
         }
-        .then { list -> Promise<CertificateList> in
+        .then(on: .global()) { list -> Promise<CertificateList> in
             saveCertificateList(list)
         }
         .asVoid()
@@ -188,30 +188,31 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
         .map(on: .global()) {
             try parseCertificate($0)
         }
-        .map { certificate in
+        .map(on: .global()) { certificate in
             if let t = certificate.hcert.dgc.t?.first, t.isPositive {
                 throw CertificateError.positiveResult
             }
             return certificate
         }
-        .map { certificate in
+        .map(on: .global()) { certificate in
             ExtendedCBORWebToken(vaccinationCertificate: certificate, vaccinationQRCodeData: data)
-        }.then { extendedCBORWebToken in
-            self.getCertificateList().then { list -> Promise<Void> in
-                var certList = list
-                if certList.certificates.contains(where: { $0.vaccinationQRCodeData == data }) {
-                    throw QRCodeError.qrCodeExists
-                }
-                certList.certificates.append(extendedCBORWebToken)
+        }.then (on: .global()){ extendedCBORWebToken in
+            self.getCertificateList()
+                .then(on: .global()) { list -> Promise<Void> in
+                    var certList = list
+                    if certList.certificates.contains(where: { $0.vaccinationQRCodeData == data }) {
+                        throw QRCodeError.qrCodeExists
+                    }
+                    certList.certificates.append(extendedCBORWebToken)
 
-                // Mark first certificate as favorite
-                if certList.certificates.count == 1 {
-                    certList.favoriteCertificateId = extendedCBORWebToken.vaccinationCertificate.hcert.dgc.v?.first?.ci
-                }
+                    // Mark first certificate as favorite
+                    if certList.certificates.count == 1 {
+                        certList.favoriteCertificateId = extendedCBORWebToken.vaccinationCertificate.hcert.dgc.v?.first?.ci
+                    }
 
-                return self.saveCertificateList(certList).asVoid()
-            }
-            .map { extendedCBORWebToken }
+                    return self.saveCertificateList(certList).asVoid()
+                }
+                .map(on: .global()) { extendedCBORWebToken }
         }
     }
 
@@ -228,15 +229,15 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
         firstly {
             getCertificateList()
         }
-        .map { list in
+        .map(on: .global()) { list in
             var certList = list
             certList.favoriteCertificateId = certList.favoriteCertificateId == id ? nil : id
             return certList
         }
-        .then { list in
+        .then(on: .global()) { list in
             self.saveCertificateList(list)
         }
-        .map { list in
+        .map(on: .global()) { list in
             list.favoriteCertificateId == id
         }
     }
@@ -245,7 +246,7 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
         firstly {
             getCertificateList()
         }
-        .map { currentList in
+        .map(on: .global()) { currentList in
             certificates.contains(where: { $0.vaccinationCertificate.hcert.dgc.uvci == currentList.favoriteCertificateId })
         }
     }

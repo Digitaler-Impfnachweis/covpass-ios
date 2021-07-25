@@ -49,6 +49,8 @@ class DateUtilsTests: XCTestCase {
     }
 
     func testParseDate() {
+        XCTAssertNotNil(DateUtils.parseDate("2021"))
+        XCTAssertNotNil(DateUtils.parseDate("2021-04"))
         XCTAssertNotNil(DateUtils.parseDate("2021-04-26"))
         XCTAssertNotNil(DateUtils.parseDate("2021-04-26T15:05:00"))
         XCTAssertNotNil(DateUtils.parseDate("2021-04-26T15:05:00Z"))

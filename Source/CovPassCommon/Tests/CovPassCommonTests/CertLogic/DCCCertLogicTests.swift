@@ -15,6 +15,7 @@ import PromiseKit
 
 class DCCCertLogicTests: XCTestCase {
     var keychain: MockPersistence!
+    var userDefaults: MockPersistence!
     var service: DCCServiceMock!
     var sut: DCCCertLogic!
     var repository: VaccinationRepositoryProtocol!
@@ -22,8 +23,9 @@ class DCCCertLogicTests: XCTestCase {
     override func setUp() {
         super.setUp()
         keychain = MockPersistence()
+        userDefaults = MockPersistence()
         service = DCCServiceMock()
-        sut = DCCCertLogic(initialDCCRulesURL: Bundle.commonBundle.url(forResource: "dcc-rules", withExtension: "json")!, service: service, keychain: keychain, userDefaults: MockPersistence())
+        sut = DCCCertLogic(initialDCCRulesURL: Bundle.commonBundle.url(forResource: "dcc-rules", withExtension: "json")!, service: service, keychain: keychain, userDefaults: userDefaults)
 
         let trustListURL = Bundle.commonBundle.url(forResource: "dsc.json", withExtension: nil)!
         repository = VaccinationRepository(service: APIServiceMock(), keychain: MockPersistence(), userDefaults: MockPersistence(), publicKeyURL: URL(fileURLWithPath: "pubkey.pem"), initialDataURL: trustListURL)
@@ -37,8 +39,45 @@ class DCCCertLogicTests: XCTestCase {
         super.tearDown()
     }
 
+    func testErrorCode() {
+        XCTAssertEqual(DCCCertLogicError.noRules.errorCode, 401)
+        XCTAssertEqual(DCCCertLogicError.encodingError.errorCode, 402)
+    }
+
     func testCountries() {
         XCTAssertEqual(sut.countries.count, 31)
+    }
+
+    func testValueTests() {
+        XCTAssertEqual(sut.valueSets.count, 8)
+        XCTAssertEqual(sut.valueSets["country-2-codes"]?.count, 249)
+        XCTAssertEqual(sut.valueSets["covid-19-lab-result"]?.count, 2)
+        XCTAssertEqual(sut.valueSets["covid-19-lab-test-manufacturer-and-name"]?.count, 128)
+        XCTAssertEqual(sut.valueSets["covid-19-lab-test-type"]?.count, 2)
+        XCTAssertEqual(sut.valueSets["disease-agent-targeted"]?.count, 1)
+        XCTAssertEqual(sut.valueSets["sct-vaccines-covid-19"]?.count, 3)
+        XCTAssertEqual(sut.valueSets["vaccines-covid-19-auth-holders"]?.count, 14)
+        XCTAssertEqual(sut.valueSets["vaccines-covid-19-names"]?.count, 12)
+    }
+
+    func testLastUpdatedDCCRules() throws {
+        XCTAssertNil(sut.lastUpdatedDCCRules())
+
+        let date = Date()
+        try userDefaults.store(UserDefaults.keyLastUpdatedDCCRules, value: date)
+
+        XCTAssertEqual(sut.lastUpdatedDCCRules(), date)
+    }
+
+    func testUpdateRulesIfNeeded() throws {
+        try sut.updateRulesIfNeeded().wait()
+
+        do {
+            try sut.updateRulesIfNeeded().wait()
+            XCTFail("Should fail")
+        } catch {
+            XCTAssertEqual(error.localizedDescription, PromiseCancelledError().localizedDescription)
+        }
     }
 
     func testSavedAndLocalRules() throws {

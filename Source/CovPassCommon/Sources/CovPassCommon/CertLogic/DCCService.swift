@@ -15,10 +15,21 @@ public protocol DCCServiceProtocol {
     func loadDCCRule(country: String, hash: String) -> Promise<Rule>
 }
 
-public enum DCCServiceError: Error {
+public enum DCCServiceError: Error, ErrorCode {
     case invalidURL
     case invalidResponse
     case requestCancelled
+
+    public var errorCode: Int {
+        switch self {
+        case .requestCancelled:
+            return 101
+        case .invalidURL:
+            return 103
+        case .invalidResponse:
+            return 104
+        }
+    }
 }
 
 public struct DCCService: DCCServiceProtocol {

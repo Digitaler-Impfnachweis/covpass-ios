@@ -19,6 +19,12 @@ class CoseSign1ParserTests: XCTestCase {
         return Compression.decompress(Data(base45Decoded)) ?? Data()
     }
 
+    func testErrorCode() {
+        XCTAssertEqual(CoseParsingError.wrongType.errorCode, 401)
+        XCTAssertEqual(CoseParsingError.wrongArrayLength.errorCode, 402)
+        XCTAssertEqual(CoseParsingError.missingValue.errorCode, 403)
+    }
+
     func testParsing() throws {
         let coseSign1Message = try CoseSign1Message(decompressedPayload: testData)
 
