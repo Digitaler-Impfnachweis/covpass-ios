@@ -18,6 +18,14 @@ extension Data {
         return Data(hash)
     }
 
+    func sha512() -> Data {
+        var hash = [UInt8](repeating: 0, count: Int(CC_SHA512_DIGEST_LENGTH))
+        withUnsafeBytes {
+            _ = CC_SHA512($0.baseAddress, CC_LONG(count), &hash)
+        }
+        return Data(hash)
+    }
+
     func hexEncodedString() -> String {
         return map { String(format: "%02hhx", $0) }.joined()
     }
