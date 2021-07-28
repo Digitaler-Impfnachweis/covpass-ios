@@ -80,6 +80,18 @@ class VaccinationRepositoryTests: XCTestCase {
         }
     }
 
+    func testCheckCertificateInvalidEntity() {
+        do {
+            let res = try sut.checkCertificate(CertificateMock.validCertificate).wait()
+            res.hcert.dgc.v?.first?.ci = "URN:UVCI:01DE/foobar/F4G7014KQQ2XD0NY8FJHSTDXZ#S"
+
+            try sut.validateEntity(res)
+            XCTFail("Should fail")
+        } catch {
+            XCTAssertEqual(error.localizedDescription, CertificateError.invalidEntity.localizedDescription)
+        }
+    }
+
     func testLastUpdatedTrustList() throws {
         XCTAssertNil(sut.getLastUpdatedTrustList())
 
