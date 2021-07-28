@@ -12,6 +12,7 @@ import PromiseKit
 public enum CertificateError: Error {
     case positiveResult
     case expiredCertifcate
+    case invalidEntity
 }
 
 public struct VaccinationRepository: VaccinationRepositoryProtocol {
@@ -20,6 +21,10 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
     private let userDefaults: Persistence
     private let publicKeyURL: URL
     private let initialDataURL: URL
+    private let entityBlacklist = [
+        "81d51278c45f29dbba6b243c9c25cb0266b3d32e425b7a9db1fa6fcd58ad308c5b3857be6470a84403680d833a3f28fb02fb8c809324811b573c131d1ae52599",
+        "75f6df21f51b4998740bf3e1cdaff1c76230360e1baf5ac0a2b9a383a1f9fa34dd77b6aa55a28cc5843d75b7c4a89bdbfc9a9177da244861c4068e76847dd150"
+    ]
 
     private var trustList: TrustList? {
         // Try to load trust list from keychain
@@ -258,6 +263,20 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
 
         try HCert.checkExtendedKeyUsage(certificate: certificate, trustCertificate: trustCert)
 
+        try validateEntity(certificate)
+
         return certificate
+    }
+
+    func validateEntity(_ certificate: CBORWebToken) throws {
+        let regex = try! NSRegularExpression(pattern: "[a-zA-Z]{2}\\/.+?(?=\\/)", options: NSRegularExpression.Options.caseInsensitive)
+        let range = NSMakeRange(0, certificate.hcert.dgc.uvci.count)
+        guard let match = regex.firstMatch(in: certificate.hcert.dgc.uvci, options: .withTransparentBounds, range: range),
+              let subRange = Range(match.range(at: 0), in: certificate.hcert.dgc.uvci),
+              let location = certificate.hcert.dgc.uvci[subRange.lowerBound ..< subRange.upperBound].data(using: .utf8)?.sha512().hexEncodedString()
+        else { return }
+        for entity in entityBlacklist where entity == location {
+            throw CertificateError.invalidEntity
+        }
     }
 }
