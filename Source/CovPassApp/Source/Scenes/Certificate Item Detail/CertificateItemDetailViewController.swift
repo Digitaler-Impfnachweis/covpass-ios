@@ -18,9 +18,11 @@ class CertificateItemDetailViewController: UIViewController {
     @IBOutlet var scrollView: UIScrollView!
     @IBOutlet var stackView: UIStackView!
     @IBOutlet var itemStackView: UIStackView!
+    @IBOutlet var buttonStackView: UIStackView!
     @IBOutlet var titleLabel: PlainLabel!
     @IBOutlet var subtitleLabel: PlainLabel!
     @IBOutlet var qrCodeButton: MainButton!
+    @IBOutlet var pdfExportButton: MainButton!
     @IBOutlet var infoLabel1: LinkLabel!
     @IBOutlet var infoLabel2: LinkLabel!
 
@@ -52,7 +54,7 @@ class CertificateItemDetailViewController: UIViewController {
         setupNavigationBar()
         setupHeadline()
         setupList()
-        setupButton()
+        setupButtons()
         setupInfo()
     }
 
@@ -88,11 +90,20 @@ class CertificateItemDetailViewController: UIViewController {
         }
     }
 
-    private func setupButton() {
+    private func setupButtons() {
+        buttonStackView.spacing = .space_24
+
         qrCodeButton.title = "vaccination_certificate_detail_view_qrcode_action_button_title".localized
-        qrCodeButton.style = .secondary
+        qrCodeButton.style = .primary
         qrCodeButton.icon = .scan
+        qrCodeButton.tintColor = .white
         qrCodeButton.action = viewModel.showQRCode
+
+        pdfExportButton.title = "vaccination_certificate_detail_view_export_pdf".localized
+        pdfExportButton.style = .secondary
+        #warning("TODO: icon")
+        pdfExportButton.icon = .none
+        pdfExportButton.action = viewModel.startPDFExport
     }
 
     private func setupInfo() {

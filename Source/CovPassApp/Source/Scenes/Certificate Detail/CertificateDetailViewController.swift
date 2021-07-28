@@ -23,7 +23,6 @@ class CertificateDetailViewController: UIViewController {
     @IBOutlet var immunizationView: ParagraphView!
     @IBOutlet var immunizationButtonContainerView: UIStackView!
     @IBOutlet var immunizationButton: MainButton!
-    @IBOutlet var pdfExportButton: MainButton!
     @IBOutlet var personalDataHeadline: PlainLabel!
     @IBOutlet var allCertificatesHeadline: PlainLabel!
     @IBOutlet var nameView: ParagraphView!
@@ -93,17 +92,10 @@ class CertificateDetailViewController: UIViewController {
         immunizationView.attributedBodyText = "recovery_certificate_overview_message".localized.styledAs(.body).colored(.onBackground70)
         immunizationView.layoutMargins.bottom = .space_24
 
-        immunizationButtonContainerView.spacing = .space_24
-
         immunizationButton.title = "recovery_certificate_overview_action_button_title".localized
+
         immunizationButton.action = { [weak self] in
             self?.viewModel.immunizationButtonTapped()
-        }
-
-        pdfExportButton.title = "vaccination_certificate_detail_view_export_pdf".localized
-        pdfExportButton.style = .secondary
-        pdfExportButton.action = { [weak self] in
-            self?.viewModel.pdfExportButtonTapped()
         }
         stackView.setCustomSpacing(.space_24, after: immunizationButtonContainerView)
     }

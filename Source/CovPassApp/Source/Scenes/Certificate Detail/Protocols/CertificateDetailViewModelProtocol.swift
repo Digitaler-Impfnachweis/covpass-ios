@@ -20,6 +20,5 @@ protocol CertificateDetailViewModelProtocol {
 
     func refresh()
     func immunizationButtonTapped()
-    func pdfExportButtonTapped()
     func toggleFavorite()
 }

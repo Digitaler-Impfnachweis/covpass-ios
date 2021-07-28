@@ -150,4 +150,8 @@ class CertificateItemDetailViewModel: CertificateItemDetailViewModelProtocol {
     func showQRCode() {
         router.showCertificate(for: certificate).cauterize()
     }
+
+    func startPDFExport() {
+        print("TODO: !!!")
+    }
 }
