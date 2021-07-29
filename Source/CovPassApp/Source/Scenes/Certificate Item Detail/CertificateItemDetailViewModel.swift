@@ -152,6 +152,6 @@ class CertificateItemDetailViewModel: CertificateItemDetailViewModelProtocol {
     }
 
     func startPDFExport() {
-        print("TODO: !!!")
+        router.showPDFExport(for: certificate).cauterize()
     }
 }

@@ -29,4 +29,10 @@ class CertificateItemDetailRouter: CertificateItemDetailRouterProtocol, DialogRo
             CertificateSceneFactory(token: token)
         )
     }
+
+    func showPDFExport(for token: ExtendedCBORWebToken) -> Promise<Void> {
+        sceneCoordinator.present(
+            PDFExportSceneFactory(token: token)
+        )
+    }
 }

@@ -13,4 +13,5 @@ import UIKit
 
 protocol CertificateItemDetailRouterProtocol: DialogRouterProtocol {
     func showCertificate(for token: ExtendedCBORWebToken) -> Promise<Void>
+    func showPDFExport(for token: ExtendedCBORWebToken) -> Promise<Void>
 }
