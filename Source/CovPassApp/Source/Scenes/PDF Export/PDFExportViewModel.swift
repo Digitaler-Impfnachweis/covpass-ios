@@ -1,5 +1,5 @@
 //
-//  CertificateViewModel.swift
+//  PDFExportViewModel.swift
 //
 //
 //  © Copyright IBM Deutschland GmbH 2021
@@ -38,7 +38,7 @@ class PDFExportViewModel: BaseViewModel, CancellableViewModelProtocol {
     }
 
     func generatePDF() {
-        
+
         print("TODO: PDF generation")
         //resolver.fulfill_()
     }
