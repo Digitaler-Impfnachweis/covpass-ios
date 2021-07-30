@@ -20,8 +20,11 @@ class PDFExportViewModel: BaseViewModel, CancellableViewModelProtocol {
     let resolver: Resolver<Void>
 
     var title: String {
-        "TODO"
-        //"".localized
+        "certificate_pdf_export_overview_title".localized
+    }
+
+    var exportButtonTitle: String {
+        "certificate_pdf_export_export_button_title".localized
     }
 
     // MARK: - Lifecycle
@@ -35,6 +38,7 @@ class PDFExportViewModel: BaseViewModel, CancellableViewModelProtocol {
     }
 
     func generatePDF() {
+        
         print("TODO: PDF generation")
         //resolver.fulfill_()
     }

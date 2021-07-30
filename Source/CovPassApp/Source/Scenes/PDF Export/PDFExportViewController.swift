@@ -51,7 +51,7 @@ class PDFExportViewController: UIViewController {
     }
 
     private func configureButtons() {
-        exportButton.title = "_EXPORT"
+        exportButton.title = viewModel.exportButtonTitle
         exportButton.action = { [weak self] in
             // generate ODF and present share sheet
             self?.viewModel.generatePDF()
