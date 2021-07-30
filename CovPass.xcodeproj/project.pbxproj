@@ -98,6 +98,7 @@
 		35F99E1C26B3F96400D3EFC3 /* RecoveryCertificateTemplate_v2_2021-06-03_02_DEMO.svg in Resources */ = {isa = PBXBuildFile; fileRef = 35F99E1926B3F96400D3EFC3 /* RecoveryCertificateTemplate_v2_2021-06-03_02_DEMO.svg */; };
 		35F99E1D26B3F96400D3EFC3 /* TestCertificateTemplate_v2_2021-06-03_02_DEMO.svg in Resources */ = {isa = PBXBuildFile; fileRef = 35F99E1A26B3F96400D3EFC3 /* TestCertificateTemplate_v2_2021-06-03_02_DEMO.svg */; };
 		35F99E1E26B3F96400D3EFC3 /* VaccinationCertificateTemplate_v2_2021-06-03_02_DEMO.svg in Resources */ = {isa = PBXBuildFile; fileRef = 35F99E1B26B3F96400D3EFC3 /* VaccinationCertificateTemplate_v2_2021-06-03_02_DEMO.svg */; };
+		35F99E2126B41B4400D3EFC3 /* Template.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F99E2026B41B4400D3EFC3 /* Template.swift */; };
 		38234167268A28BB00722A46 /* contact-covpass.html in Resources */ = {isa = PBXBuildFile; fileRef = 38234166268A28BB00722A46 /* contact-covpass.html */; };
 		3823416A268A2A3900722A46 /* contact-covpasscheck.html in Resources */ = {isa = PBXBuildFile; fileRef = 38234168268A28C500722A46 /* contact-covpasscheck.html */; };
 		3829A309269CFEA800B8346C /* DCCCertLogicExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3829A308269CFEA800B8346C /* DCCCertLogicExtension.swift */; };
@@ -275,6 +276,7 @@
 		35F99E1926B3F96400D3EFC3 /* RecoveryCertificateTemplate_v2_2021-06-03_02_DEMO.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "RecoveryCertificateTemplate_v2_2021-06-03_02_DEMO.svg"; sourceTree = "<group>"; };
 		35F99E1A26B3F96400D3EFC3 /* TestCertificateTemplate_v2_2021-06-03_02_DEMO.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "TestCertificateTemplate_v2_2021-06-03_02_DEMO.svg"; sourceTree = "<group>"; };
 		35F99E1B26B3F96400D3EFC3 /* VaccinationCertificateTemplate_v2_2021-06-03_02_DEMO.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "VaccinationCertificateTemplate_v2_2021-06-03_02_DEMO.svg"; sourceTree = "<group>"; };
+		35F99E2026B41B4400D3EFC3 /* Template.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Template.swift; sourceTree = "<group>"; };
 		381442092646ED5800207CFA /* release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = release.xcconfig; sourceTree = "<group>"; };
 		3814420B2646ED7600207CFA /* release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = release.xcconfig; sourceTree = "<group>"; };
 		381A13F32647DB580037B7F0 /* release-rki.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "release-rki.xcconfig"; sourceTree = "<group>"; };
@@ -848,7 +850,7 @@
 				35F99E0C26B2B60700D3EFC3 /* PDFExportSceneFactory.swift */,
 				35F99E0E26B2B67100D3EFC3 /* PDFExportViewModel.swift */,
 				35F99E1026B2B6F000D3EFC3 /* PDFExportViewController.swift */,
-				35F99E1626B2D63500D3EFC3 /* SVGPDFExporter.swift */,
+				35F99E1F26B41B3400D3EFC3 /* PDF Export */,
 			);
 			path = "PDF Export";
 			sourceTree = "<group>";
@@ -876,6 +878,15 @@
 				35F99E1B26B3F96400D3EFC3 /* VaccinationCertificateTemplate_v2_2021-06-03_02_DEMO.svg */,
 			);
 			path = "PDF templates";
+			sourceTree = "<group>";
+		};
+		35F99E1F26B41B3400D3EFC3 /* PDF Export */ = {
+			isa = PBXGroup;
+			children = (
+				35F99E1626B2D63500D3EFC3 /* SVGPDFExporter.swift */,
+				35F99E2026B41B4400D3EFC3 /* Template.swift */,
+			);
+			path = "PDF Export";
 			sourceTree = "<group>";
 		};
 		385FC182269EB4BE00D19AF8 /* CountrySelection */ = {
@@ -1411,6 +1422,7 @@
 				385FC1B4269F577400D19AF8 /* MockPersistence.swift in Sources */,
 				216D1FAD264EF74600370F16 /* PassOnboardingPageViewModel.swift in Sources */,
 				216D1FAF264EF74600370F16 /* PassOnboardingContainerViewModel.swift in Sources */,
+				35F99E2126B41B4400D3EFC3 /* Template.swift in Sources */,
 				385FC1A6269F19B900D19AF8 /* ResultItemViewModel.swift in Sources */,
 				88AB2A9725FA431100D4EA52 /* AppDelegate.swift in Sources */,
 			);
