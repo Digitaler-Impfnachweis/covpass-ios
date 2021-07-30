@@ -99,6 +99,8 @@
 		35F99E1D26B3F96400D3EFC3 /* TestCertificateTemplate_v2_2021-06-03_02_DEMO.svg in Resources */ = {isa = PBXBuildFile; fileRef = 35F99E1A26B3F96400D3EFC3 /* TestCertificateTemplate_v2_2021-06-03_02_DEMO.svg */; };
 		35F99E1E26B3F96400D3EFC3 /* VaccinationCertificateTemplate_v2_2021-06-03_02_DEMO.svg in Resources */ = {isa = PBXBuildFile; fileRef = 35F99E1B26B3F96400D3EFC3 /* VaccinationCertificateTemplate_v2_2021-06-03_02_DEMO.svg */; };
 		35F99E2126B41B4400D3EFC3 /* Template.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F99E2026B41B4400D3EFC3 /* Template.swift */; };
+		35F99E2426B4260A00D3EFC3 /* UIPrintPageRenderer+PDF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F99E2226B4260A00D3EFC3 /* UIPrintPageRenderer+PDF.swift */; };
+		35F99E2526B4260A00D3EFC3 /* WKWebView+PDF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F99E2326B4260A00D3EFC3 /* WKWebView+PDF.swift */; };
 		38234167268A28BB00722A46 /* contact-covpass.html in Resources */ = {isa = PBXBuildFile; fileRef = 38234166268A28BB00722A46 /* contact-covpass.html */; };
 		3823416A268A2A3900722A46 /* contact-covpasscheck.html in Resources */ = {isa = PBXBuildFile; fileRef = 38234168268A28C500722A46 /* contact-covpasscheck.html */; };
 		3829A309269CFEA800B8346C /* DCCCertLogicExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3829A308269CFEA800B8346C /* DCCCertLogicExtension.swift */; };
@@ -277,6 +279,8 @@
 		35F99E1A26B3F96400D3EFC3 /* TestCertificateTemplate_v2_2021-06-03_02_DEMO.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "TestCertificateTemplate_v2_2021-06-03_02_DEMO.svg"; sourceTree = "<group>"; };
 		35F99E1B26B3F96400D3EFC3 /* VaccinationCertificateTemplate_v2_2021-06-03_02_DEMO.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "VaccinationCertificateTemplate_v2_2021-06-03_02_DEMO.svg"; sourceTree = "<group>"; };
 		35F99E2026B41B4400D3EFC3 /* Template.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Template.swift; sourceTree = "<group>"; };
+		35F99E2226B4260A00D3EFC3 /* UIPrintPageRenderer+PDF.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIPrintPageRenderer+PDF.swift"; sourceTree = "<group>"; };
+		35F99E2326B4260A00D3EFC3 /* WKWebView+PDF.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "WKWebView+PDF.swift"; sourceTree = "<group>"; };
 		381442092646ED5800207CFA /* release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = release.xcconfig; sourceTree = "<group>"; };
 		3814420B2646ED7600207CFA /* release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = release.xcconfig; sourceTree = "<group>"; };
 		381A13F32647DB580037B7F0 /* release-rki.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "release-rki.xcconfig"; sourceTree = "<group>"; };
@@ -885,6 +889,8 @@
 			children = (
 				35F99E1626B2D63500D3EFC3 /* SVGPDFExporter.swift */,
 				35F99E2026B41B4400D3EFC3 /* Template.swift */,
+				35F99E2226B4260A00D3EFC3 /* UIPrintPageRenderer+PDF.swift */,
+				35F99E2326B4260A00D3EFC3 /* WKWebView+PDF.swift */,
 			);
 			path = "PDF Export";
 			sourceTree = "<group>";
@@ -1367,12 +1373,14 @@
 				3882AEBD267006B4000354CD /* RecoveryCertificateItemViewModel.swift in Sources */,
 				385FC1B0269F21A200D19AF8 /* RuleCheckDetailViewController.swift in Sources */,
 				216D1FFC264EF77C00370F16 /* AppInformationSceneFactory.swift in Sources */,
+				35F99E2526B4260A00D3EFC3 /* WKWebView+PDF.swift in Sources */,
 				35F99E0F26B2B67100D3EFC3 /* PDFExportViewModel.swift in Sources */,
 				216D1FCF264EF75D00370F16 /* CertificatesOverviewViewModelDelegate.swift in Sources */,
 				38E3625C269B712900DE6D4C /* RuleCheckViewModel.swift in Sources */,
 				385FC18F269EB6A800D19AF8 /* CountrySelectionViewModel.swift in Sources */,
 				3882AEAE266FE85C000354CD /* CertificateItemDetailSceneFactory.swift in Sources */,
 				385FC18E269EB6A800D19AF8 /* CountrySelectionRouter.swift in Sources */,
+				35F99E2426B4260A00D3EFC3 /* UIPrintPageRenderer+PDF.swift in Sources */,
 				65E0DB0B2657F31C004C660F /* CertificateViewController.swift in Sources */,
 				216D1FC6264EF75900370F16 /* NoCertificateCardViewModel.swift in Sources */,
 				216D1FC7264EF75900370F16 /* CertificateCardViewModel.swift in Sources */,
