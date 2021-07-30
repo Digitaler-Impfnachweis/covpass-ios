@@ -94,6 +94,10 @@
 		35F99E0F26B2B67100D3EFC3 /* PDFExportViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F99E0E26B2B67100D3EFC3 /* PDFExportViewModel.swift */; };
 		35F99E1126B2B6F000D3EFC3 /* PDFExportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F99E1026B2B6F000D3EFC3 /* PDFExportViewController.swift */; };
 		35F99E1426B2B75C00D3EFC3 /* PDFExportViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35F99E1326B2B75C00D3EFC3 /* PDFExportViewController.xib */; };
+		35F99E1726B2D63500D3EFC3 /* SVGPDFExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F99E1626B2D63500D3EFC3 /* SVGPDFExporter.swift */; };
+		35F99E1C26B3F96400D3EFC3 /* RecoveryCertificateTemplate_v2_2021-06-03_02_DEMO.svg in Resources */ = {isa = PBXBuildFile; fileRef = 35F99E1926B3F96400D3EFC3 /* RecoveryCertificateTemplate_v2_2021-06-03_02_DEMO.svg */; };
+		35F99E1D26B3F96400D3EFC3 /* TestCertificateTemplate_v2_2021-06-03_02_DEMO.svg in Resources */ = {isa = PBXBuildFile; fileRef = 35F99E1A26B3F96400D3EFC3 /* TestCertificateTemplate_v2_2021-06-03_02_DEMO.svg */; };
+		35F99E1E26B3F96400D3EFC3 /* VaccinationCertificateTemplate_v2_2021-06-03_02_DEMO.svg in Resources */ = {isa = PBXBuildFile; fileRef = 35F99E1B26B3F96400D3EFC3 /* VaccinationCertificateTemplate_v2_2021-06-03_02_DEMO.svg */; };
 		38234167268A28BB00722A46 /* contact-covpass.html in Resources */ = {isa = PBXBuildFile; fileRef = 38234166268A28BB00722A46 /* contact-covpass.html */; };
 		3823416A268A2A3900722A46 /* contact-covpasscheck.html in Resources */ = {isa = PBXBuildFile; fileRef = 38234168268A28C500722A46 /* contact-covpasscheck.html */; };
 		3829A309269CFEA800B8346C /* DCCCertLogicExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3829A308269CFEA800B8346C /* DCCCertLogicExtension.swift */; };
@@ -267,6 +271,10 @@
 		35F99E0E26B2B67100D3EFC3 /* PDFExportViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFExportViewModel.swift; sourceTree = "<group>"; };
 		35F99E1026B2B6F000D3EFC3 /* PDFExportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFExportViewController.swift; sourceTree = "<group>"; };
 		35F99E1326B2B75C00D3EFC3 /* PDFExportViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PDFExportViewController.xib; sourceTree = "<group>"; };
+		35F99E1626B2D63500D3EFC3 /* SVGPDFExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SVGPDFExporter.swift; sourceTree = "<group>"; };
+		35F99E1926B3F96400D3EFC3 /* RecoveryCertificateTemplate_v2_2021-06-03_02_DEMO.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "RecoveryCertificateTemplate_v2_2021-06-03_02_DEMO.svg"; sourceTree = "<group>"; };
+		35F99E1A26B3F96400D3EFC3 /* TestCertificateTemplate_v2_2021-06-03_02_DEMO.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "TestCertificateTemplate_v2_2021-06-03_02_DEMO.svg"; sourceTree = "<group>"; };
+		35F99E1B26B3F96400D3EFC3 /* VaccinationCertificateTemplate_v2_2021-06-03_02_DEMO.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "VaccinationCertificateTemplate_v2_2021-06-03_02_DEMO.svg"; sourceTree = "<group>"; };
 		381442092646ED5800207CFA /* release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = release.xcconfig; sourceTree = "<group>"; };
 		3814420B2646ED7600207CFA /* release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = release.xcconfig; sourceTree = "<group>"; };
 		381A13F32647DB580037B7F0 /* release-rki.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "release-rki.xcconfig"; sourceTree = "<group>"; };
@@ -840,6 +848,7 @@
 				35F99E0C26B2B60700D3EFC3 /* PDFExportSceneFactory.swift */,
 				35F99E0E26B2B67100D3EFC3 /* PDFExportViewModel.swift */,
 				35F99E1026B2B6F000D3EFC3 /* PDFExportViewController.swift */,
+				35F99E1626B2D63500D3EFC3 /* SVGPDFExporter.swift */,
 			);
 			path = "PDF Export";
 			sourceTree = "<group>";
@@ -857,6 +866,16 @@
 			children = (
 			);
 			path = Protocols;
+			sourceTree = "<group>";
+		};
+		35F99E1826B3F93E00D3EFC3 /* PDF templates */ = {
+			isa = PBXGroup;
+			children = (
+				35F99E1926B3F96400D3EFC3 /* RecoveryCertificateTemplate_v2_2021-06-03_02_DEMO.svg */,
+				35F99E1A26B3F96400D3EFC3 /* TestCertificateTemplate_v2_2021-06-03_02_DEMO.svg */,
+				35F99E1B26B3F96400D3EFC3 /* VaccinationCertificateTemplate_v2_2021-06-03_02_DEMO.svg */,
+			);
+			path = "PDF templates";
 			sourceTree = "<group>";
 		};
 		385FC182269EB4BE00D19AF8 /* CountrySelection */ = {
@@ -1103,6 +1122,7 @@
 		88BEE03926550DFD00479E5E /* Static */ = {
 			isa = PBXGroup;
 			children = (
+				35F99E1826B3F93E00D3EFC3 /* PDF templates */,
 				3876382626ADBED100FBCA47 /* contact-covpass-en.html */,
 				3876382726ADBED100FBCA47 /* privacy-covpass-en.html */,
 				38234166268A28BB00722A46 /* contact-covpass.html */,
@@ -1257,6 +1277,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				216D1FC0264EF75500370F16 /* CertificatesOverviewViewController.xib in Resources */,
+				35F99E1D26B3F96400D3EFC3 /* TestCertificateTemplate_v2_2021-06-03_02_DEMO.svg in Resources */,
 				38234167268A28BB00722A46 /* contact-covpass.html in Resources */,
 				3876382826ADBED100FBCA47 /* contact-covpass-en.html in Resources */,
 				88BEE03B26550E0900479E5E /* privacy-covpass.html in Resources */,
@@ -1264,6 +1285,7 @@
 				3876382926ADBED100FBCA47 /* privacy-covpass-en.html in Resources */,
 				216D1FE0264EF76800370F16 /* CertificateDetailViewController.xib in Resources */,
 				216D1F49264EF50300370F16 /* Assets.xcassets in Resources */,
+				35F99E1C26B3F96400D3EFC3 /* RecoveryCertificateTemplate_v2_2021-06-03_02_DEMO.svg in Resources */,
 				38E3625D269B712900DE6D4C /* RuleCheckViewController.xib in Resources */,
 				3882AEC226700BB3000354CD /* CertificateItemDetailViewController.xib in Resources */,
 				216D1FF6264EF77600370F16 /* HowToScanViewController.xib in Resources */,
@@ -1272,6 +1294,7 @@
 				385FC19F269ED63500D19AF8 /* DateSelectionViewController.xib in Resources */,
 				216D1F48264EF50300370F16 /* Localizable.strings in Resources */,
 				35F99E1426B2B75C00D3EFC3 /* PDFExportViewController.xib in Resources */,
+				35F99E1E26B3F96400D3EFC3 /* VaccinationCertificateTemplate_v2_2021-06-03_02_DEMO.svg in Resources */,
 				216D1F9E264EF73D00370F16 /* WelcomeViewController.xib in Resources */,
 				385FC1B2269F21A200D19AF8 /* RuleCheckDetailViewController.xib in Resources */,
 			);
@@ -1352,6 +1375,7 @@
 				385FC1B1269F21A200D19AF8 /* RuleCheckDetailViewModel.swift in Sources */,
 				216D1FA6264EF74100370F16 /* WelcomeSceneFactory.swift in Sources */,
 				385FC1A0269ED63500D19AF8 /* DateSelectionViewController.swift in Sources */,
+				35F99E1726B2D63500D3EFC3 /* SVGPDFExporter.swift in Sources */,
 				38E3625E269B712900DE6D4C /* RuleCheckSceneFactory.swift in Sources */,
 				3882AEB9266FEE11000354CD /* CertificateItemDetailViewController.swift in Sources */,
 				216D1FEE264EF77200370F16 /* HowToScanRouter.swift in Sources */,
