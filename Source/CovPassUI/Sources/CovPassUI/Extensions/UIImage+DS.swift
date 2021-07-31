@@ -96,10 +96,10 @@ public extension UIImage {
     @ImageLoader(name: "icon_card")
     private(set) static var card
 
-    @ImageLoader(name: "icon_red")
+    @ImageLoader(name: "invalid")
     private(set) static var iconRed
 
-    @ImageLoader(name: "icon_yellow")
+    @ImageLoader(name: "info")
     private(set) static var iconYellow
 
     @ImageLoader(name: "map")
