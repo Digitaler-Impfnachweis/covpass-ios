@@ -30,10 +30,10 @@ public class Name: Codable {
     }
     public var fullNameReverse: String {
         if let gn = gn, let fn = fn {
-            return "\(fn) \(gn)"
+            return "\(fn), \(gn)"
         }
         if let gnt = gnt {
-            return"\(fnt) \(gnt)"
+            return"\(fnt), \(gnt)"
         }
         return fnt
     }
