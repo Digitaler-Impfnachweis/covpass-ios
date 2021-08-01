@@ -55,9 +55,18 @@ class PDFExportViewController: UIViewController {
         exportButton.action = { [weak self] in
             // generate PDF and present share sheet
             self?.viewModel.generatePDF { [weak self] document in
-                guard let document = document else { return }
+                guard let document = document else {
+                    print("Could not generate PDF")
+                    return
+                }
 
-                let activityViewController = UIActivityViewController(activityItems: [document], applicationActivities: nil)
+                // create a temporary file to export
+                let temporaryDirectoryURL = URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
+                let pdfFile = temporaryDirectoryURL.appendingPathComponent("Certificate.pdf")
+                document.write(to: pdfFile)
+
+                // present 'share sheet'
+                let activityViewController = UIActivityViewController(activityItems: [pdfFile], applicationActivities: nil)
                 activityViewController.modalTransitionStyle = .coverVertical
                 self?.present(activityViewController, animated: true, completion: nil)
             }

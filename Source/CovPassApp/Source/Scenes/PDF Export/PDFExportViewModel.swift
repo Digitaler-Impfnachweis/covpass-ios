@@ -19,6 +19,9 @@ class PDFExportViewModel: BaseViewModel, CancellableViewModelProtocol {
     let token: ExtendedCBORWebToken
     let resolver: Resolver<Void>
 
+    // lazy reference to exporter (and it's web view)
+    private lazy var exporter = SVGPDFExporter()
+
     var title: String {
         "certificate_pdf_export_overview_title".localized
     }
@@ -38,18 +41,18 @@ class PDFExportViewModel: BaseViewModel, CancellableViewModelProtocol {
     }
 
     func generatePDF(completion: @escaping SVGPDFExporter.ExportHandler) {
-        let exporter = SVGPDFExporter()
-        
         guard
             let template = token.vaccinationCertificate.hcert.dgc.template,
-            let svgData = exporter.fill(template: template, with: token)
+            let svgData = try? exporter.fill(template: template, with: token)
         else {
             completion(nil)
             return
         }
 
         exporter.export(svgData) { document in
-            completion(document)
+            DispatchQueue.main.async {
+                completion(document)
+            }
         }
     }
 

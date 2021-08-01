@@ -16,6 +16,10 @@ final class SVGPDFExporter: NSObject, WKNavigationDelegate {
     typealias SVGData = Data
     typealias ExportHandler = (_ export: PDFDocument?) -> Void
 
+    enum ExportError: Error {
+        case invalidTemplate
+    }
+
     /// A web view that does not allow Javascript execution.
     private lazy var webView: WKWebView = {
         // JS is disabled as it's not used/required in our SVGs
@@ -42,12 +46,13 @@ final class SVGPDFExporter: NSObject, WKNavigationDelegate {
     ///   - template: The template to fill
     ///   - token: The health certificate(s) to use in the template
     /// - Returns: `Data` representing a SVG String
-    func fill(template: Template, with token: ExtendedCBORWebToken) -> SVGData? {
+    func fill(template: Template, with token: ExtendedCBORWebToken) throws -> SVGData? {
         let certificate = token.vaccinationCertificate.hcert.dgc
         guard
             let data = certificate.template?.data,
             var svg = String(data: data, encoding: .utf8)
         else {
+            assertionFailure()
             return nil
         }
 
@@ -60,8 +65,9 @@ final class SVGPDFExporter: NSObject, WKNavigationDelegate {
 
         switch template.type {
         case .recovery:
-            guard let recovery = certificate.latestRecovery else { return nil }
-
+            guard let recovery = certificate.latestRecovery else {
+                throw ExportError.invalidTemplate
+            }
             // date of first positive test result
             svg = svg.replacingOccurrences(of: "$fr", with: dateFormatter.string(from: recovery.fr))
             // valid from
@@ -69,8 +75,11 @@ final class SVGPDFExporter: NSObject, WKNavigationDelegate {
             // valid until
             svg = svg.replacingOccurrences(of: "$du", with: dateFormatter.string(from: recovery.du))
         case.test:
-            guard let test = certificate.latestTest else { return nil }
-
+            guard let test = certificate.latestTest else {
+                throw ExportError.invalidTemplate
+            }
+            // disease of agent targeted
+            svg = svg.replacingOccurrences(of: "$tg", with: test.tg)
             // test type
             svg = svg.replacingOccurrences(of: "$tt", with: test.tt)
             // test name
@@ -91,8 +100,9 @@ final class SVGPDFExporter: NSObject, WKNavigationDelegate {
             // certificate issue
             svg = svg.replacingOccurrences(of: "$is", with: test.is)
         case .vaccination:
-            guard let vaccination = certificate.latestVaccination else { return nil }
-
+            guard let vaccination = certificate.latestVaccination else {
+                throw ExportError.invalidTemplate
+            }
             // disease of agent targeted
             svg = svg.replacingOccurrences(of: "$tg", with: vaccination.tg)
             // vaccine
@@ -112,10 +122,18 @@ final class SVGPDFExporter: NSObject, WKNavigationDelegate {
             svg = svg.replacingOccurrences(of: "$is", with: vaccination.is)
         }
 
-        assert(svg.firstIndex(of: "$") == nil, "missed one placeholder!") // TODO: write test for this!
+        #if DEBUG
+        let regex = try! NSRegularExpression(pattern: "\\>\\$\\w+\\<")
+        let range = NSRange(location: 0, length: svg.utf16.count)
+        if let match = regex.firstMatch(in: svg, options: [], range: range) {
+            let nsString = svg as NSString
+            let matchString = nsString.substring(with: match.range) as String
+            assertionFailure("missed one placeholder: \(matchString)")
+        }
+        #endif
+
         return svg.data(using: .utf8)
     }
-
 
     /// Exports the given data as PDF document, if possible.
     ///
@@ -132,12 +150,19 @@ final class SVGPDFExporter: NSObject, WKNavigationDelegate {
         // completion is called after web view has loaded
         exportHandler = completion
 
+        // temporarily add the webview to the general view hierarchy
+        webView.frame = UIApplication.shared.keyWindow?.bounds ?? .zero
+        UIApplication.shared.keyWindow?.addSubview(webView)
+
         webView.loadHTMLString(string, baseURL: nil)
     }
 
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         guard webView == self.webView else { return }
 
+        defer {
+            webView.removeFromSuperview()
+        }
         do {
             let pdf = try webView.exportAsPDF()
             exportHandler?(pdf)
@@ -167,15 +192,15 @@ extension DigitalGreenCertificate {
     }
 
     var latestRecovery: Recovery? {
-        r?.filter({ $0.isValid}).sorted(by: { $0.df > $1.df }).first
+        r?.sorted(by: { $0.df > $1.df }).first
     }
 
     var latestTest: Test? {
-        t?.filter({ $0.isValid}).sorted(by: { $0.sc > $1.sc }).first
+        t?.sorted(by: { $0.sc > $1.sc }).first
     }
 
     var latestVaccination: Vaccination? {
-        v?.filter({ $0.validMp }).sorted(by: { $0.dt > $1.dt }).first
+        v?.sorted(by: { $0.dt > $1.dt }).first
     }
 }
 
@@ -198,7 +223,7 @@ extension DigitalGreenCertificate {
         }
 
         guard let name = name, let type = type else {
-            return nil
+            preconditionFailure("Could not determine template type")
         }
         guard
             let templateURL = Bundle.main.url(forResource: name, withExtension: "svg"),
