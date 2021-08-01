@@ -53,8 +53,14 @@ class PDFExportViewController: UIViewController {
     private func configureButtons() {
         exportButton.title = viewModel.exportButtonTitle
         exportButton.action = { [weak self] in
-            // generate ODF and present share sheet
-            self?.viewModel.generatePDF()
+            // generate PDF and present share sheet
+            self?.viewModel.generatePDF { [weak self] document in
+                guard let document = document else { return }
+
+                let activityViewController = UIActivityViewController(activityItems: [document], applicationActivities: nil)
+                activityViewController.modalTransitionStyle = .coverVertical
+                self?.present(activityViewController, animated: true, completion: nil)
+            }
         }
     }
 }

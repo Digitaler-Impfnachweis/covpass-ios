@@ -37,10 +37,19 @@ class PDFExportViewModel: BaseViewModel, CancellableViewModelProtocol {
         resolver = resolvable
     }
 
-    func generatePDF() {
+    func generatePDF(completion: @escaping SVGPDFExporter.ExportHandler) {
+        let exporter = SVGPDFExporter()
+        guard
+            let template = exporter.loadTemplate(for: token),
+            let svgData = exporter.fill(template: template, with: token)
+        else {
+            completion(nil)
+            return
+        }
 
-        print("TODO: PDF generation")
-        //resolver.fulfill_()
+        exporter.export(svgData) { document in
+            completion(document)
+        }
     }
 
     func cancel() {

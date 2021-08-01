@@ -11,7 +11,7 @@ import PDFKit
 import UIKit
 import WebKit
 
-final class SVGPDFExporter: WKNavigationDelegate {
+final class SVGPDFExporter: NSObject, WKNavigationDelegate {
 
     typealias SVGData = Data
     typealias ExportHandler = (_ export: PDFDocument?) -> Void
@@ -36,6 +36,15 @@ final class SVGPDFExporter: WKNavigationDelegate {
     }()
 
     private var exportHandler: ExportHandler?
+
+
+    func loadTemplate(for token: ExtendedCBORWebToken) -> Template? {
+        let templateName = token.vaccinationCertificate.hcert.dgc.templateName
+        guard let templateURL = Bundle.main.url(forResource: templateName, withExtension: "svg") else {
+            fatalError("no template found")
+        }
+        return templateURL
+    }
 
     /// Fill the given `Template` with the certificate data given.
     /// - Parameters:
@@ -183,6 +192,29 @@ private extension DigitalGreenCertificate {
         if let _ = t?.first { return "TestCertificateTemplate_v2_2021-06-03_02_DEMO" }
         if let _ = r?.first { return "RecoveryCertificateTemplate_v2_2021-06-03_02_DEMO" }
         return nil
+    }
+
+    var template: Template? {
+        var name: String? = nil
+        var type: Template.TemplateType? = .none
+        if let _ = v?.first {
+            name = "VaccinationCertificateTemplate_v2_2021-06-03_02_DEMO"
+            type = .vaccination
+        }
+        if let _ = t?.first {
+            name = "TestCertificateTemplate_v2_2021-06-03_02_DEMO"
+            type = .test
+        }
+        if let _ = r?.first {
+            name = "RecoveryCertificateTemplate_v2_2021-06-03_02_DEMO"
+            type = .recovery
+        }
+
+        guard let name = name, let type = type else {
+            return nil
+        }
+
+        return Template(svgString: "TODO!!!", type: type)
     }
 }
 
