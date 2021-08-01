@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// Helper structure to represent a SVG template plus meta information
 struct Template {
     enum TemplateType {
         case recovery, test, vaccination

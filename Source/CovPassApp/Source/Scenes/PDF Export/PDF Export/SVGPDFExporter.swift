@@ -7,9 +7,26 @@
 //
 
 import CovPassCommon
+import PDFKit
 import UIKit
+import WebKit
 
-final class SVGPDFExporter {
+final class SVGPDFExporter: WKNavigationDelegate {
+
+    typealias SVGData = Data
+    typealias ExportHandler = (_ export: PDFDocument?) -> Void
+
+    /// A web view that does not allow Javascript execution.
+    private lazy var webView: WKWebView = {
+        // JS is disabled as it's not used/required in our SVGs
+        let config = WKWebViewConfiguration()
+        config.preferences.javaScriptEnabled = false
+        if #available(iOS 14.0, *) {
+            config.defaultWebpagePreferences.allowsContentJavaScript = false
+        }
+        let webView = WKWebView(frame: .zero, configuration: config)
+        return webView
+    }()
 
     /// Date formated as `yyyy-MM-dd`.
     private lazy var dateFormatter: ISO8601DateFormatter = {
@@ -18,7 +35,14 @@ final class SVGPDFExporter {
         return formatter
     }()
 
-    func fill(template: Template, with token: ExtendedCBORWebToken) -> Data? {
+    private var exportHandler: ExportHandler?
+
+    /// Fill the given `Template` with the certificate data given.
+    /// - Parameters:
+    ///   - template: The template to fill
+    ///   - token: The health certificate(s) to use in the template
+    /// - Returns: `Data` representing a SVG String
+    func fill(template: Template, with token: ExtendedCBORWebToken) -> SVGData? {
         let certificate = token.vaccinationCertificate.hcert.dgc
 
         var svg = template.svgString
@@ -86,6 +110,37 @@ final class SVGPDFExporter {
 
         assert(svg.firstIndex(of: "$") == nil, "missed one placeholder!") // TODO: write test for this!
         return svg.data(using: .utf8)
+    }
+
+
+    /// Exports the given data as PDF document, if possible.
+    ///
+    /// The export is realized via an private web view which does NOT allow Javascript execution!
+    ///
+    /// - Parameters:
+    ///   - data: The data to export
+    ///   - completion: Handler to contain an optional `PDFDocument`
+    func export(_ data: SVGData, completion: ExportHandler?) {
+        guard let string = String(data: data, encoding: .utf8) else {
+            preconditionFailure("Expected a String")
+        }
+        webView.navigationDelegate = self
+        // completion is called after web view has loaded
+        exportHandler = completion
+
+        webView.loadHTMLString(string, baseURL: nil)
+    }
+
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        guard webView == self.webView else { return }
+
+        do {
+            let pdf = try webView.exportAsPDF()
+            exportHandler?(pdf)
+        } catch {
+            assertionFailure("Export error: \(error)")
+            exportHandler?(nil)
+        }
     }
 }
 
