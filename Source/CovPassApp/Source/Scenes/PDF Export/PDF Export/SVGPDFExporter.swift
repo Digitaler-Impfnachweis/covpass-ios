@@ -37,15 +37,6 @@ final class SVGPDFExporter: NSObject, WKNavigationDelegate {
 
     private var exportHandler: ExportHandler?
 
-
-    func loadTemplate(for token: ExtendedCBORWebToken) -> Template? {
-        let templateName = token.vaccinationCertificate.hcert.dgc.templateName
-        guard let templateURL = Bundle.main.url(forResource: templateName, withExtension: "svg") else {
-            fatalError("no template found")
-        }
-        return templateURL
-    }
-
     /// Fill the given `Template` with the certificate data given.
     /// - Parameters:
     ///   - template: The template to fill
@@ -53,8 +44,12 @@ final class SVGPDFExporter: NSObject, WKNavigationDelegate {
     /// - Returns: `Data` representing a SVG String
     func fill(template: Template, with token: ExtendedCBORWebToken) -> SVGData? {
         let certificate = token.vaccinationCertificate.hcert.dgc
-
-        var svg = template.svgString
+        guard
+            let data = certificate.template?.data,
+            var svg = String(data: data, encoding: .utf8)
+        else {
+            return nil
+        }
 
         // Common fields
         svg = svg.replacingOccurrences(of: "$nam", with: certificate.nam.fullName)
@@ -161,14 +156,14 @@ extension ExtendedCBORWebToken {
     /// 2. test
     /// 3. recovery
     var canExportToPDF: Bool {
-        vaccinationCertificate.hcert.dgc.templateName != nil
+        vaccinationCertificate.hcert.dgc.template != nil
     }
 }
 
 extension DigitalGreenCertificate {
     /// Checks if the given certificate can be exported
     var canExportToPDF: Bool {
-        templateName != nil
+        template != nil
     }
 
     var latestRecovery: Recovery? {
@@ -184,15 +179,7 @@ extension DigitalGreenCertificate {
     }
 }
 
-private extension DigitalGreenCertificate {
-    /// The template filename for the given certificate
-    var templateName: String? {
-        // ordered list (most to least important): [v]accination, [t]est, [r]ecery
-        if let _ = v?.first { return "VaccinationCertificateTemplate_v2_2021-06-03_02_DEMO" }
-        if let _ = t?.first { return "TestCertificateTemplate_v2_2021-06-03_02_DEMO" }
-        if let _ = r?.first { return "RecoveryCertificateTemplate_v2_2021-06-03_02_DEMO" }
-        return nil
-    }
+extension DigitalGreenCertificate {
 
     var template: Template? {
         var name: String? = nil
@@ -213,8 +200,13 @@ private extension DigitalGreenCertificate {
         guard let name = name, let type = type else {
             return nil
         }
-
-        return Template(svgString: "TODO!!!", type: type)
+        guard
+            let templateURL = Bundle.main.url(forResource: name, withExtension: "svg"),
+            let svgData = try? Data(contentsOf: templateURL)
+        else {
+            fatalError("no template found")
+        }
+        return Template(data: svgData, type: type)
     }
 }
 

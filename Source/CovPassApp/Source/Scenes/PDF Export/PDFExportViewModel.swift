@@ -39,8 +39,9 @@ class PDFExportViewModel: BaseViewModel, CancellableViewModelProtocol {
 
     func generatePDF(completion: @escaping SVGPDFExporter.ExportHandler) {
         let exporter = SVGPDFExporter()
+        
         guard
-            let template = exporter.loadTemplate(for: token),
+            let template = token.vaccinationCertificate.hcert.dgc.template,
             let svgData = exporter.fill(template: template, with: token)
         else {
             completion(nil)

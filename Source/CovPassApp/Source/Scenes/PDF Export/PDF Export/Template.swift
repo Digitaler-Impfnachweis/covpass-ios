@@ -14,6 +14,18 @@ struct Template {
         case recovery, test, vaccination
     }
 
-    let svgString: String
+    let data: Data
     let type: TemplateType
+
+    init(data: Data, type: TemplateType) {
+        self.data = data
+        self.type = type
+    }
+
+    init?(string: String, type: TemplateType) {
+        guard let data = string.data(using: .utf8) else {
+            return nil
+        }
+        self.init(data: data, type: type)
+    }
 }
