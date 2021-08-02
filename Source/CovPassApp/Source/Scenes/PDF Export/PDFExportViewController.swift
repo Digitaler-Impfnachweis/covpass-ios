@@ -10,10 +10,10 @@ import CovPassUI
 import UIKit
 
 class PDFExportViewController: UIViewController {
-    // MARK: - IBOutlet
 
+    // MARK: - IBOutlet
     @IBOutlet var headline: InfoHeaderView!
-    // ...
+    @IBOutlet var exportExplanationsView: ParagraphView!
     @IBOutlet var exportButton: MainButton!
 
     // MARK: - Properties
@@ -34,12 +34,16 @@ class PDFExportViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureHeadline()
-        // TODO: text
-        configureButtons()
+        setupView()
     }
 
     // MARK: - Private
+
+    private func setupView() {
+        configureHeadline()
+        configureText()
+        configureButtons()
+    }
 
     private func configureHeadline() {
         headline.attributedTitleText = viewModel.title.styledAs(.header_2)
@@ -48,6 +52,15 @@ class PDFExportViewController: UIViewController {
         }
         headline.image = .close
         headline.layoutMargins.bottom = .space_24
+    }
+
+    private func configureText() {
+        exportExplanationsView.attributedBodyText = NSAttributedString().appendBullets([
+            NSAttributedString(string: "pdf_export_disclaimer_bullet1".localized),
+            NSAttributedString(string: "pdf_export_disclaimer_bullet2".localized),
+            NSAttributedString(string: "pdf_export_disclaimer_bullet3".localized),
+        ])
+        exportExplanationsView.bottomBorder.isHidden = true
     }
 
     private func configureButtons() {
@@ -61,15 +74,25 @@ class PDFExportViewController: UIViewController {
                 }
 
                 // create a temporary file to export
-                let temporaryDirectoryURL = URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
+                //let temporaryDirectoryURL = URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
+                let temporaryDirectoryURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
                 let pdfFile = temporaryDirectoryURL.appendingPathComponent("Certificate.pdf")
                 document.write(to: pdfFile)
 
                 // present 'share sheet'
                 let activityViewController = UIActivityViewController(activityItems: [pdfFile], applicationActivities: nil)
+                activityViewController.completionWithItemsHandler = { _, _, _, _ in
+                    // completion handler will be called even if we modify the PDF ('markup') and return to share sheet
+                    // in that case we DON'T remove the pdf file
+                    if activityViewController.view.superview == nil {
+                        // cleanup
+                        try? FileManager.default.removeItem(at: pdfFile)
+                    }
+                }
                 activityViewController.modalTransitionStyle = .coverVertical
                 self?.present(activityViewController, animated: true, completion: nil)
             }
         }
+        exportButton.layoutMargins = .init(top: 0, left: .space_24, bottom: 0, right: .space_24)
     }
 }

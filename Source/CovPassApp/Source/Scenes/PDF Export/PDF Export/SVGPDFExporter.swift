@@ -68,6 +68,8 @@ final class SVGPDFExporter: NSObject, WKNavigationDelegate {
             guard let recovery = certificate.latestRecovery else {
                 throw ExportError.invalidTemplate
             }
+            // disease of agent targeted
+            svg = svg.replacingOccurrences(of: "$tg", with: recovery.tg)
             // date of first positive test result
             svg = svg.replacingOccurrences(of: "$fr", with: dateFormatter.string(from: recovery.fr))
             // valid from
@@ -152,6 +154,9 @@ final class SVGPDFExporter: NSObject, WKNavigationDelegate {
 
         // temporarily add the webview to the general view hierarchy
         webView.frame = UIApplication.shared.keyWindow?.bounds ?? .zero
+        // the webview has to be visible – nobody said how much…
+        // this HACK prevents the screen to 'blink' during page rendering and PDF export
+        webView.alpha = 0.01
         UIApplication.shared.keyWindow?.addSubview(webView)
 
         webView.loadHTMLString(string, baseURL: nil)

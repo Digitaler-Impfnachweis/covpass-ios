@@ -12,6 +12,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PDFExportViewController" customModule="CovPassApp" customModuleProvider="target">
             <connections>
                 <outlet property="exportButton" destination="pmz-rc-1Ub" id="baZ-qN-ygc"/>
+                <outlet property="exportExplanationsView" destination="n4b-vk-Wnt" id="e4U-OJ-Q0W"/>
                 <outlet property="headline" destination="t3g-u6-XEv" id="A5S-Cr-taR"/>
                 <outlet property="view" destination="iN0-l3-epB" id="g1m-Mf-aBg"/>
             </connections>
@@ -21,49 +22,66 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Uf-5q-LWW">
-                    <rect key="frame" x="0.0" y="24" width="414" height="818"/>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" contentInsetAdjustmentBehavior="never" translatesAutoresizingMaskIntoConstraints="NO" id="9Uf-5q-LWW">
+                    <rect key="frame" x="0.0" y="124" width="414" height="670"/>
                     <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pmz-rc-1Ub" customClass="MainButton" customModule="CovPassUI">
-                            <rect key="frame" x="24" y="754" width="366" height="44"/>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n4b-vk-Wnt" customClass="ParagraphView" customModule="CovPassUI">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="670"/>
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="44" id="I1d-dc-Vas"/>
-                            </constraints>
-                        </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t3g-u6-XEv" customClass="InfoHeaderView" customModule="CovPassUI">
-                            <rect key="frame" x="20" y="0.0" width="374" height="128"/>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="128" id="kMW-lv-bpv"/>
-                            </constraints>
                         </view>
                     </subviews>
                     <constraints>
-                        <constraint firstItem="t3g-u6-XEv" firstAttribute="centerX" secondItem="pmz-rc-1Ub" secondAttribute="centerX" id="02b-qu-eXy"/>
-                        <constraint firstItem="pmz-rc-1Ub" firstAttribute="leading" secondItem="LKO-07-NpE" secondAttribute="leading" constant="24" id="7Ed-KI-TI1"/>
-                        <constraint firstAttribute="bottom" secondItem="pmz-rc-1Ub" secondAttribute="bottom" constant="20" id="A1B-Ih-piy"/>
-                        <constraint firstItem="t3g-u6-XEv" firstAttribute="top" secondItem="LKO-07-NpE" secondAttribute="top" id="LuG-pi-Y7O"/>
-                        <constraint firstItem="LKO-07-NpE" firstAttribute="bottom" secondItem="pmz-rc-1Ub" secondAttribute="bottom" constant="20" id="hcw-YD-3R7"/>
-                        <constraint firstAttribute="trailing" secondItem="t3g-u6-XEv" secondAttribute="trailing" constant="20" id="l89-J7-NoS"/>
-                        <constraint firstItem="t3g-u6-XEv" firstAttribute="leading" secondItem="LKO-07-NpE" secondAttribute="leading" constant="20" id="s6M-SO-B7B"/>
-                        <constraint firstItem="t3g-u6-XEv" firstAttribute="centerX" secondItem="9Uf-5q-LWW" secondAttribute="centerX" id="tkk-lU-TuV"/>
+                        <constraint firstItem="n4b-vk-Wnt" firstAttribute="leading" secondItem="VPR-5f-XYc" secondAttribute="leading" id="5XN-nF-AB2"/>
+                        <constraint firstItem="mfg-H5-ngj" firstAttribute="bottom" secondItem="n4b-vk-Wnt" secondAttribute="bottom" placeholder="YES" id="COX-SF-2jW"/>
+                        <constraint firstItem="n4b-vk-Wnt" firstAttribute="top" secondItem="VPR-5f-XYc" secondAttribute="top" id="XBq-x4-26i"/>
+                        <constraint firstItem="n4b-vk-Wnt" firstAttribute="width" secondItem="mfg-H5-ngj" secondAttribute="width" id="ab7-o9-aeR"/>
+                        <constraint firstItem="n4b-vk-Wnt" firstAttribute="trailing" secondItem="VPR-5f-XYc" secondAttribute="trailing" id="m8f-zp-Obb"/>
+                        <constraint firstItem="n4b-vk-Wnt" firstAttribute="bottom" secondItem="VPR-5f-XYc" secondAttribute="bottom" id="vlF-N1-Ibx"/>
                     </constraints>
-                    <viewLayoutGuide key="contentLayoutGuide" id="O5j-M6-BDZ"/>
-                    <viewLayoutGuide key="frameLayoutGuide" id="LKO-07-NpE"/>
+                    <viewLayoutGuide key="contentLayoutGuide" id="VPR-5f-XYc"/>
+                    <viewLayoutGuide key="frameLayoutGuide" id="mfg-H5-ngj"/>
                 </scrollView>
+                <view contentMode="scaleToFill" verticalHuggingPriority="251" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="60" translatesAutoresizingMaskIntoConstraints="NO" id="t3g-u6-XEv" customClass="InfoHeaderView" customModule="CovPassUI">
+                    <rect key="frame" x="0.0" y="64" width="414" height="60"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="L7p-y9-WZB"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="44" translatesAutoresizingMaskIntoConstraints="NO" id="pmz-rc-1Ub" customClass="MainButton" customModule="CovPassUI">
+                    <rect key="frame" x="0.0" y="794" width="414" height="44"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="z3f-hh-4ic"/>
+                    </constraints>
+                </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="9Uf-5q-LWW" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="4Kr-6H-CE8"/>
-                <constraint firstItem="9Uf-5q-LWW" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Ajn-kQ-OY7"/>
-                <constraint firstItem="9Uf-5q-LWW" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="24" id="DS3-In-BTy"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="9Uf-5q-LWW" secondAttribute="bottom" constant="20" id="K5d-Xv-Yoe"/>
+                <constraint firstItem="pmz-rc-1Ub" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="vUN-kp-3ea" secondAttribute="leading" id="11u-3k-a6U"/>
+                <constraint firstItem="pmz-rc-1Ub" firstAttribute="top" secondItem="9Uf-5q-LWW" secondAttribute="bottom" id="3VK-Uo-g72"/>
+                <constraint firstItem="pmz-rc-1Ub" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="A5L-4p-NLc"/>
+                <constraint firstItem="t3g-u6-XEv" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="20" id="CQP-BX-p9n"/>
+                <constraint firstItem="pmz-rc-1Ub" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" constant="-24" id="SkM-Qs-KBE"/>
+                <constraint firstItem="9Uf-5q-LWW" firstAttribute="top" secondItem="t3g-u6-XEv" secondAttribute="bottom" id="ayG-pE-s3G"/>
+                <constraint firstItem="9Uf-5q-LWW" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="fs4-1m-IJi"/>
+                <constraint firstItem="pmz-rc-1Ub" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="kmJ-LZ-LZu"/>
+                <constraint firstItem="t3g-u6-XEv" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="nI6-g3-rqB"/>
+                <constraint firstItem="9Uf-5q-LWW" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="qcf-GJ-lVs"/>
+                <constraint firstItem="t3g-u6-XEv" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="vkV-Mu-VwQ"/>
             </constraints>
             <point key="canvasLocation" x="11.594202898550726" y="109.82142857142857"/>
         </view>
     </objects>
+    <designables>
+        <designable name="pmz-rc-1Ub">
+            <size key="intrinsicContentSize" width="414" height="44"/>
+        </designable>
+        <designable name="t3g-u6-XEv">
+            <size key="intrinsicContentSize" width="414" height="60"/>
+        </designable>
+    </designables>
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
