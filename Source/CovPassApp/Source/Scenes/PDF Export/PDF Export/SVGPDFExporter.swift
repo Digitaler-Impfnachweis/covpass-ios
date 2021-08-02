@@ -11,10 +11,7 @@ import PDFKit
 import UIKit
 import WebKit
 
-final class SVGPDFExporter: NSObject, WKNavigationDelegate {
-
-    typealias SVGData = Data
-    typealias ExportHandler = (_ export: PDFDocument?) -> Void
+final class SVGPDFExporter: NSObject, WKNavigationDelegate, SVGPDFExportProtocol {
 
     enum ExportError: Error {
         case invalidTemplate
@@ -41,11 +38,8 @@ final class SVGPDFExporter: NSObject, WKNavigationDelegate {
 
     private var exportHandler: ExportHandler?
 
-    /// Fill the given `Template` with the certificate data given.
-    /// - Parameters:
-    ///   - template: The template to fill
-    ///   - token: The health certificate(s) to use in the template
-    /// - Returns: `Data` representing a SVG String
+    // MARK: - SVGPDFExportProtocol
+
     func fill(template: Template, with token: ExtendedCBORWebToken) throws -> SVGData? {
         let certificate = token.vaccinationCertificate.hcert.dgc
         guard
@@ -137,13 +131,6 @@ final class SVGPDFExporter: NSObject, WKNavigationDelegate {
         return svg.data(using: .utf8)
     }
 
-    /// Exports the given data as PDF document, if possible.
-    ///
-    /// The export is realized via an private web view which does NOT allow Javascript execution!
-    ///
-    /// - Parameters:
-    ///   - data: The data to export
-    ///   - completion: Handler to contain an optional `PDFDocument`
     func export(_ data: SVGData, completion: ExportHandler?) {
         guard let string = String(data: data, encoding: .utf8) else {
             preconditionFailure("Expected a String")
@@ -162,6 +149,8 @@ final class SVGPDFExporter: NSObject, WKNavigationDelegate {
         webView.loadHTMLString(string, baseURL: nil)
     }
 
+    // MARK: - WKNavigationDelegate
+
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         guard webView == self.webView else { return }
 
@@ -177,6 +166,8 @@ final class SVGPDFExporter: NSObject, WKNavigationDelegate {
         }
     }
 }
+
+// MARK: – Helper Extensions
 
 extension ExtendedCBORWebToken {
     /// Checks if a certificate in the given token can be exported to PDF
