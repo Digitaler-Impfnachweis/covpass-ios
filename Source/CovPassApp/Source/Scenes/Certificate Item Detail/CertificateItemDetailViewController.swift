@@ -101,8 +101,7 @@ class CertificateItemDetailViewController: UIViewController {
 
         pdfExportButton.title = "vaccination_certificate_detail_view_export_pdf".localized
         pdfExportButton.style = .secondary
-        #warning("TODO: icon")
-        pdfExportButton.icon = .none
+        pdfExportButton.icon = .share
         pdfExportButton.action = viewModel.startPDFExport
     }
 

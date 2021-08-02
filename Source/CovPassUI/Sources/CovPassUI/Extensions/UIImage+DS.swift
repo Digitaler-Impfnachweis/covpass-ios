@@ -93,6 +93,9 @@ public extension UIImage {
     @ImageLoader(name: "icon_qr")
     private(set) static var scan
 
+    @ImageLoader(name: "icon_share")
+    private(set) static var share
+
     @ImageLoader(name: "icon_card")
     private(set) static var card
 
