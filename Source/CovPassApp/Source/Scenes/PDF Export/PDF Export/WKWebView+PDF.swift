@@ -30,23 +30,23 @@ extension WKWebView {
     }
 
     private func createPDFData() -> Data {
-        #warning("paper size, etc. needs fine tuning!")
-        let oldBounds = bounds
+        // A4 size
+        let pageSize = CGSize(width: 595.2, height: 841.8)
 
-        var printBounds = bounds
-        printBounds.size.height = scrollView.contentSize.height
-        bounds = printBounds
+        // some sensible margins
+        let pageMargins = UIEdgeInsets(top: 24, left: 24, bottom: 24, right: 24)
 
-        var printableRect = printBounds
-        printableRect.origin = .zero
+        // calculate the printable rect from the above two
+        let printableRect = CGRect(x: pageMargins.left, y: pageMargins.top, width: pageSize.width - pageMargins.left - pageMargins.right, height: pageSize.height - pageMargins.top - pageMargins.bottom)
+
+        // the overall paper rectangle
+        let paperRect = CGRect(x: 0, y: 0, width: pageSize.width, height: pageSize.height)
 
         let printRenderer = UIPrintPageRenderer()
         printRenderer.addPrintFormatter(viewPrintFormatter(), startingAtPageAt: 0)
-        // via: https://www.cl.cam.ac.uk/~mgk25/iso-paper-ps.txt
-        printRenderer.setValue(NSValue(cgRect: CGRect(x: 0, y: 0, width: 595, height: 842)), forKey: "paperRect")
+        printRenderer.setValue(NSValue(cgRect: paperRect), forKey: "paperRect")
         printRenderer.setValue(NSValue(cgRect: printableRect), forKey: "printableRect")
 
-        bounds = oldBounds
         return printRenderer.generatePDFData()
     }
 }
