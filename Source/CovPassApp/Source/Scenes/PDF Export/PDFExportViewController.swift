@@ -62,31 +62,37 @@ class PDFExportViewController: UIViewController {
     private func configureButtons() {
         exportButton.title = viewModel.exportButtonTitle
         exportButton.action = { [weak self] in
-            // generate PDF and present share sheet
-            self?.viewModel.generatePDF { [weak self] document in
-                guard let document = document else {
-                    print("Could not generate PDF")
-                    return
-                }
+            DispatchQueue.main.async {
+                self?.exportButton.startAnimating(makeCircle: true)
 
-                // create a temporary file to export
-                //let temporaryDirectoryURL = URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
-                let temporaryDirectoryURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-                let pdfFile = temporaryDirectoryURL.appendingPathComponent("Certificate.pdf")
-                document.write(to: pdfFile)
-
-                // present 'share sheet'
-                let activityViewController = UIActivityViewController(activityItems: [pdfFile], applicationActivities: nil)
-                activityViewController.completionWithItemsHandler = { _, _, _, _ in
-                    // completion handler will be called even if we modify the PDF ('markup') and return to share sheet
-                    // in that case we DON'T remove the pdf file
-                    if activityViewController.view.superview == nil {
-                        // cleanup
-                        try? FileManager.default.removeItem(at: pdfFile)
+                // generate PDF and present share sheet
+                self?.viewModel.generatePDF { [weak self] document in
+                    guard let document = document else {
+                        print("Could not generate PDF")
+                        return
                     }
+
+                    // create a temporary file to export
+                    //let temporaryDirectoryURL = URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
+                    let temporaryDirectoryURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+                    let pdfFile = temporaryDirectoryURL.appendingPathComponent("Certificate.pdf")
+                    document.write(to: pdfFile)
+
+                    // present 'share sheet'
+                    let activityViewController = UIActivityViewController(activityItems: [pdfFile], applicationActivities: nil)
+                    activityViewController.completionWithItemsHandler = { _, _, _, _ in
+                        // completion handler will be called even if we modify the PDF ('markup') and return to share sheet
+                        // in that case we DON'T remove the pdf file
+                        if activityViewController.view.superview == nil {
+                            // cleanup
+                            try? FileManager.default.removeItem(at: pdfFile)
+                        }
+                    }
+                    activityViewController.modalTransitionStyle = .coverVertical
+                    self?.present(activityViewController, animated: true, completion: nil)
+
+                    self?.exportButton.stopAnimating()
                 }
-                activityViewController.modalTransitionStyle = .coverVertical
-                self?.present(activityViewController, animated: true, completion: nil)
             }
         }
         exportButton.layoutMargins = .init(top: 0, left: .space_24, bottom: 0, right: .space_24)

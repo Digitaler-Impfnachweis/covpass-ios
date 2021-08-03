@@ -49,9 +49,10 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="44" translatesAutoresizingMaskIntoConstraints="NO" id="pmz-rc-1Ub" customClass="MainButton" customModule="CovPassUI">
-                    <rect key="frame" x="0.0" y="794" width="414" height="44"/>
+                    <rect key="frame" x="20" y="794" width="374" height="44"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="80" id="KDl-7G-RiS"/>
                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="z3f-hh-4ic"/>
                     </constraints>
                 </view>
@@ -59,9 +60,9 @@
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="pmz-rc-1Ub" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="vUN-kp-3ea" secondAttribute="leading" id="11u-3k-a6U"/>
+                <constraint firstItem="pmz-rc-1Ub" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="20" id="11u-3k-a6U"/>
                 <constraint firstItem="pmz-rc-1Ub" firstAttribute="top" secondItem="9Uf-5q-LWW" secondAttribute="bottom" id="3VK-Uo-g72"/>
-                <constraint firstItem="pmz-rc-1Ub" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="A5L-4p-NLc"/>
+                <constraint firstItem="pmz-rc-1Ub" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="vUN-kp-3ea" secondAttribute="trailing" constant="-20" id="A5L-4p-NLc"/>
                 <constraint firstItem="t3g-u6-XEv" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="20" id="CQP-BX-p9n"/>
                 <constraint firstItem="pmz-rc-1Ub" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" constant="-24" id="SkM-Qs-KBE"/>
                 <constraint firstItem="9Uf-5q-LWW" firstAttribute="top" secondItem="t3g-u6-XEv" secondAttribute="bottom" id="ayG-pE-s3G"/>
