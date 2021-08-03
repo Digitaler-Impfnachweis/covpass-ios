@@ -89,9 +89,9 @@ class PDFExportViewController: UIViewController {
                         }
                     }
                     activityViewController.modalTransitionStyle = .coverVertical
-                    self?.present(activityViewController, animated: true, completion: nil)
-
-                    self?.exportButton.stopAnimating()
+                    self?.present(activityViewController, animated: true, completion: {
+                        self?.exportButton.stopAnimating()
+                    })
                 }
             }
         }
