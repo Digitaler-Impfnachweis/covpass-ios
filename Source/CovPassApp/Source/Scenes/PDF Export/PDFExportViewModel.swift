@@ -23,11 +23,19 @@ class PDFExportViewModel: PDFExportViewModelProtocol, CancellableViewModelProtoc
     private lazy var exporter = SVGPDFExporter()
 
     var title: String {
-        "certificate_pdf_export_overview_title".localized
+        "certificate_create_pdf_headline".localized
     }
 
     var exportButtonTitle: String {
-        "certificate_pdf_export_export_button_title".localized
+        "certificate_create_pdf_list_button".localized
+    }
+
+    var disclaimerText: NSAttributedString {
+        NSAttributedString().appendBullets([
+            NSAttributedString(string: "certificate_create_pdf_first_list_item".localized),
+            NSAttributedString(string: "certificate_create_pdf_second_list_item".localized),
+            NSAttributedString(string: "certificate_create_pdf_third_list_item".localized)
+        ])
     }
 
     // MARK: - Lifecycle

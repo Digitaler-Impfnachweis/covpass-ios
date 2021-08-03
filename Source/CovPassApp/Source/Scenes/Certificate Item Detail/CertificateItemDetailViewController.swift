@@ -99,7 +99,7 @@ class CertificateItemDetailViewController: UIViewController {
         qrCodeButton.tintColor = .white
         qrCodeButton.action = viewModel.showQRCode
 
-        pdfExportButton.title = "vaccination_certificate_detail_view_export_pdf".localized
+        pdfExportButton.title = "vaccination_certificate_detail_view_pdf_action_button_title".localized
         pdfExportButton.style = .secondary
         pdfExportButton.icon = .share
         pdfExportButton.action = viewModel.startPDFExport

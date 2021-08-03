@@ -55,11 +55,7 @@ class PDFExportViewController: UIViewController {
     }
 
     private func configureText() {
-        exportExplanationsView.attributedBodyText = NSAttributedString().appendBullets([
-            NSAttributedString(string: "pdf_export_disclaimer_bullet1".localized),
-            NSAttributedString(string: "pdf_export_disclaimer_bullet2".localized),
-            NSAttributedString(string: "pdf_export_disclaimer_bullet3".localized),
-        ])
+        exportExplanationsView.attributedBodyText = viewModel.disclaimerText
         exportExplanationsView.bottomBorder.isHidden = true
     }
 
