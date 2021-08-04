@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CovPassCommon
 
 protocol PDFExportViewModelProtocol {
     func generatePDF(completion: @escaping SVGPDFExporter.ExportHandler)

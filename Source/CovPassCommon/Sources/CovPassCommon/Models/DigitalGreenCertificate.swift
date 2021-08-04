@@ -83,6 +83,38 @@ public struct DigitalGreenCertificate: Codable {
     }
 }
 
+// Used for PDF export
+public extension DigitalGreenCertificate {
+    /// The PDF template to match the current certificate
+    var template: Template? {
+        var name: String? = nil
+        var type: Template.TemplateType? = .none
+        if let _ = v?.first {
+            name = "VaccinationCertificateTemplate_v2_2021-06-03_02_DEMO"
+            type = .vaccination
+        }
+        if let _ = t?.first {
+            name = "TestCertificateTemplate_v2_2021-06-03_02_DEMO"
+            type = .test
+        }
+        if let _ = r?.first {
+            name = "RecoveryCertificateTemplate_v2_2021-06-03_02_DEMO"
+            type = .recovery
+        }
+
+        guard let name = name, let type = type else {
+            preconditionFailure("Could not determine template type")
+        }
+        guard
+            let templateURL = Bundle.module.url(forResource: name, withExtension: "svg"),
+            let svgData = try? Data(contentsOf: templateURL)
+        else {
+            fatalError("no template found")
+        }
+        return Template(data: svgData, type: type)
+    }
+}
+
 extension DigitalGreenCertificate: Equatable {
     public static func == (lhs: DigitalGreenCertificate, rhs: DigitalGreenCertificate) -> Bool {
         return lhs.nam == rhs.nam && lhs.dob == rhs.dob

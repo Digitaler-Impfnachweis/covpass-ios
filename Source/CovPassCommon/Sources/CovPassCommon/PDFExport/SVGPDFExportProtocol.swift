@@ -1,16 +1,15 @@
 //
-//  SVGPDFExporter.swift
+//  SVGPDFExportProtocol.swift
 //
 //
 //  © Copyright IBM Deutschland GmbH 2021
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-import CovPassCommon
 import Foundation
 import PDFKit
 
-protocol SVGPDFExportProtocol {
+public protocol SVGPDFExportProtocol {
 
     typealias SVGData = Data
     typealias ExportHandler = (_ export: PDFDocument?) -> Void
@@ -31,5 +30,4 @@ protocol SVGPDFExportProtocol {
     ///   - completion: Handler to contain an optional `PDFDocument`
     func export(_ data: SVGData, completion: ExportHandler?)
 
-    
 }

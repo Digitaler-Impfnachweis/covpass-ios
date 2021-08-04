@@ -6,14 +6,14 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-import CovPassCommon
 import PDFKit
 import UIKit
 import WebKit
 
-final class SVGPDFExporter: NSObject, WKNavigationDelegate, SVGPDFExportProtocol {
+/// PDF Exporter for SVG templates
+public final class SVGPDFExporter: NSObject, WKNavigationDelegate, SVGPDFExportProtocol {
 
-    enum ExportError: Error {
+    public enum ExportError: Error {
         case invalidTemplate
     }
 
@@ -40,7 +40,7 @@ final class SVGPDFExporter: NSObject, WKNavigationDelegate, SVGPDFExportProtocol
 
     // MARK: - SVGPDFExportProtocol
 
-    func fill(template: Template, with token: ExtendedCBORWebToken) throws -> SVGData? {
+    public func fill(template: Template, with token: ExtendedCBORWebToken) throws -> SVGData? {
         let certificate = token.vaccinationCertificate.hcert.dgc
         guard
             let data = certificate.template?.data,
@@ -133,7 +133,7 @@ final class SVGPDFExporter: NSObject, WKNavigationDelegate, SVGPDFExportProtocol
         return svg.data(using: .utf8)
     }
 
-    func export(_ data: SVGData, completion: ExportHandler?) {
+    public func export(_ data: SVGData, completion: ExportHandler?) {
         guard let string = String(data: data, encoding: .utf8) else {
             preconditionFailure("Expected a String")
         }
@@ -153,7 +153,7 @@ final class SVGPDFExporter: NSObject, WKNavigationDelegate, SVGPDFExportProtocol
 
     // MARK: - WKNavigationDelegate
 
-    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+    public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         guard webView == self.webView else { return }
 
         defer {
@@ -171,7 +171,7 @@ final class SVGPDFExporter: NSObject, WKNavigationDelegate, SVGPDFExportProtocol
 
 // MARK: – Helper Extensions
 
-extension ExtendedCBORWebToken {
+public extension ExtendedCBORWebToken {
     /// Checks if a certificate in the given token can be exported to PDF
     ///
     /// If multiple certificates are present the priotization is as follows (most to least important):
@@ -202,37 +202,19 @@ extension DigitalGreenCertificate {
     }
 }
 
-extension DigitalGreenCertificate {
-
-    var template: Template? {
-        var name: String? = nil
-        var type: Template.TemplateType? = .none
-        if let _ = v?.first {
-            name = "VaccinationCertificateTemplate_v2_2021-06-03_02_DEMO"
-            type = .vaccination
-        }
-        if let _ = t?.first {
-            name = "TestCertificateTemplate_v2_2021-06-03_02_DEMO"
-            type = .test
-        }
-        if let _ = r?.first {
-            name = "RecoveryCertificateTemplate_v2_2021-06-03_02_DEMO"
-            type = .recovery
-        }
-
-        guard let name = name, let type = type else {
-            preconditionFailure("Could not determine template type")
-        }
-        guard
-            let templateURL = Bundle.main.url(forResource: name, withExtension: "svg"),
-            let svgData = try? Data(contentsOf: templateURL)
-        else {
-            fatalError("no template found")
-        }
-        return Template(data: svgData, type: type)
-    }
-}
-
 private extension String {
     static let placeholder = "–"
+}
+
+// Provate copy of a snippet from CovPassUI
+private extension String {
+    func generateQRCode(size _: CGSize) -> UIImage? {
+        let data = self.data(using: String.Encoding.ascii)
+        guard let qrFilter = CIFilter(name: "CIQRCodeGenerator") else { return nil }
+        qrFilter.setValue(data, forKey: "inputMessage")
+        guard let qrImage = qrFilter.outputImage else { return nil }
+        let transform = CGAffineTransform(scaleX: 10, y: 10)
+        let scaledQrImage = qrImage.transformed(by: transform)
+        return UIImage(ciImage: scaledQrImage)
+    }
 }
