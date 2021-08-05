@@ -110,7 +110,7 @@ class CertificateItemDetailViewController: UIViewController {
 
             let disclaimer = SecureContentView()
             disclaimer.imageView.image = .info
-            disclaimer.bodyAttributedString = "test_certificate_detail_view_pdf_action_button_note".localized.styledAs(.body)
+            disclaimer.bodyAttributedString = "vaccination_certificate_detail_view_pdf_action_button_note".localized.styledAs(.body)
             buttonStackView.addArrangedSubview(disclaimer)
         }
     }
