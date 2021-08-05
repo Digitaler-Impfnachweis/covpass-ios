@@ -72,6 +72,10 @@ public final class SVGPDFExporter: NSObject, WKNavigationDelegate, SVGPDFExportP
             svg = svg.replacingOccurrences(of: "$df", with: dateFormatter.string(from: recovery.df))
             // valid until
             svg = svg.replacingOccurrences(of: "$du", with: dateFormatter.string(from: recovery.du))
+            // country
+            svg = svg.replacingOccurrences(of: "$co", with: recovery.co)
+            // certificate issue
+            svg = svg.replacingOccurrences(of: "$is", with: recovery.is)
         case.test:
             guard let test = certificate.latestTest else {
                 throw ExportError.invalidTemplate
