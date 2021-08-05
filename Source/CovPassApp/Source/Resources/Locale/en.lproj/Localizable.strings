@@ -429,6 +429,8 @@
 
 "vaccination_certificate_detail_view_pdf_action_button_title" = "Create EU printout";
 
+"vaccination_certificate_detail_view_pdf_action_button_note" = "You can only download German vaccination and recovery certificates as PDF files.";
+
 "vaccination_certificate_detail_view_qrcode_screen_title" = "Vaccine dose %d of %d";
 
 "vaccination_certificate_detail_view_qrcode_screen_action_button_title" = "Close";
@@ -469,8 +471,6 @@
 
 "test_certificate_detail_view_qrcode_action_button_title" = "Display QR code";
 
-"test_certificate_detail_view_create_pdf_action_button_title" = "Create EU printout";
-
 "test_certificate_detail_view_test_qrcode_screen_title" = "Rapid antigen test";
 
 "test_certificate_detail_view_pcr_test_qrcode_screen_title" = "PCR test";
@@ -507,6 +507,8 @@
 
 "recovery_certificate_detail_view_create_pdf_action_button_title" = "Create EU printout";
 
+"recovery_certificate_detail_view_pdf_action_button_note" = "You can only download German vaccination and recovery certificates as PDF files.";
+
 "recovery_certificate_detail_view_qrcode_screen_title" = "Full recovery";
 
 "recovery_certificate_detail_view_qrcode_screen_message" = "Valid until %@";
@@ -525,6 +527,8 @@
 "certificate_create_pdf_third_list_item" = "We recommend that you do not publish the PDF document and do not send it by email or share it via other apps.";
 
 "certificate_create_pdf_list_button" = "Next";
+
+"certificate_share_pdf_title_android" = "Share via";
 
 
 /********** certificate delete dialog **********/

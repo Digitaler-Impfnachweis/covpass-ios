@@ -429,6 +429,8 @@
 
 "vaccination_certificate_detail_view_pdf_action_button_title" = "EU-Ausdruck erstellen";
 
+"vaccination_certificate_detail_view_pdf_action_button_note" = "Sie können nur deutsche Impf- und Genesenenzertifikate als PDF herunterladen.";
+
 "vaccination_certificate_detail_view_qrcode_screen_title" = "Impfung %d von %d";
 
 "vaccination_certificate_detail_view_qrcode_screen_action_button_title" = "Schließen";
@@ -469,8 +471,6 @@
 
 "test_certificate_detail_view_qrcode_action_button_title" = "QR-Code anzeigen";
 
-"test_certificate_detail_view_create_pdf_action_button_title" = "EU-Ausdruck erstellen";
-
 "test_certificate_detail_view_test_qrcode_screen_title" = "Antigen-Schnelltest";
 
 "test_certificate_detail_view_pcr_test_qrcode_screen_title" = "PCR-Test";
@@ -507,6 +507,8 @@
 
 "recovery_certificate_detail_view_create_pdf_action_button_title" = "EU-Ausdruck erstellen";
 
+"recovery_certificate_detail_view_pdf_action_button_note" = "Sie können nur deutsche Impf- und Genesenenzertifikate als PDF herunterladen.";
+
 "recovery_certificate_detail_view_qrcode_screen_title" = "Vollständige Genesung";
 
 "recovery_certificate_detail_view_qrcode_screen_message" = "Gültig bis %@";
@@ -525,6 +527,8 @@
 "certificate_create_pdf_third_list_item" = "Wir empfehlen Ihnen, das PDF-Dokument nicht zu veröffentlichen und nicht per E-Mail zu versenden oder über andere Apps zu teilen.";
 
 "certificate_create_pdf_list_button" = "Weiter";
+
+"certificate_share_pdf_title_android" = "Teilen über";
 
 
 /********** certificate delete dialog **********/
