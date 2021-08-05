@@ -15,7 +15,7 @@ let package = Package(
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
-        .package(name: "Scanner", path: "../ios-scanner"),
+        .package(name: "Scanner", url: "https://github.com/IBM/ios-scanner", from: "1.0.5"),
         .package(name: "PromiseKit", url: "https://github.com/mxcl/PromiseKit", from: "6.13.2"),
         .package(name: "SwiftCBOR", url: "https://github.com/unrelentingtech/SwiftCBOR", from: "0.1.0"),
         .package(name: "ASN1Decoder", url: "https://github.com/filom/ASN1Decoder", from: "1.7.1"),

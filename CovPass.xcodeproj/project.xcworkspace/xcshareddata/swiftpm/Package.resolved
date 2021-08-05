@@ -20,6 +20,15 @@
         }
       },
       {
+        "package": "Scanner",
+        "repositoryURL": "https://github.com/IBM/ios-scanner",
+        "state": {
+          "branch": null,
+          "revision": "3c5eee0ce439b6ceb389c6c358061a24f1cac0f4",
+          "version": "1.0.7"
+        }
+      },
+      {
         "package": "jsonlogic",
         "repositoryURL": "https://github.com/eu-digital-green-certificates/json-logic-swift.git",
         "state": {
