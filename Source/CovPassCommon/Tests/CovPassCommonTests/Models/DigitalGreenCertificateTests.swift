@@ -43,4 +43,20 @@ class VaccinationCertificateTests: XCTestCase {
         XCTAssertEqual(sut.r?.count, 1)
         XCTAssertEqual(sut.ver, "1.0.0")
     }
+
+    func testPDFExportCapabilities() throws {
+        // can be exported
+        let vJsonData = Data.json("DigitalGreenCertificateV")
+        let v = try JSONDecoder().decode(DigitalGreenCertificate.self, from: vJsonData)
+        XCTAssertTrue(v.canExportToPDF)
+
+        let rJsonData = Data.json("DigitalGreenCertificateR")
+        let r = try JSONDecoder().decode(DigitalGreenCertificate.self, from: rJsonData)
+        XCTAssertTrue(r.canExportToPDF)
+
+        // cannot be exported
+        let tJsonData = Data.json("DigitalGreenCertificateT")
+        let t = try JSONDecoder().decode(DigitalGreenCertificate.self, from: tJsonData)
+        XCTAssertFalse(t.canExportToPDF)
+    }
 }
