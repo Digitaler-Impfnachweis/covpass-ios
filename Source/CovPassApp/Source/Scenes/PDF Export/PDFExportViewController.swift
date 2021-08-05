@@ -73,8 +73,7 @@ class PDFExportViewController: UIViewController {
                     }
 
                     // create a temporary file to export
-                    //let temporaryDirectoryURL = URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
-                    let temporaryDirectoryURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+                    let temporaryDirectoryURL = URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
 
                     // Customize export name
                     var name = self?.viewModel.token.vaccinationCertificate.hcert.dgc.nam.fullName
