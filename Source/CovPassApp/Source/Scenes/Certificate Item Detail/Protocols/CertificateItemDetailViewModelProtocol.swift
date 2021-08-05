@@ -14,6 +14,7 @@ protocol CertificateItemDetailViewModelProtocol {
     var showSubtitle: Bool { get }
     var headline: String { get }
     var items: [(String, String)] { get }
+    var canExportToPDF: Bool { get }
     func showQRCode()
     func startPDFExport()
     func deleteCertificate()

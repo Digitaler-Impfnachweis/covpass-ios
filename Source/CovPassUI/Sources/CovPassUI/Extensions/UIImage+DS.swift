@@ -161,6 +161,9 @@ public extension UIImage {
 
     @ImageLoader(name: "error")
     private(set) static var error
+
+    @ImageLoader(name: "info_hui")
+    private(set) static var info
 }
 
 @propertyWrapper

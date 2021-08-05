@@ -103,6 +103,15 @@ class CertificateItemDetailViewController: UIViewController {
         pdfExportButton.style = .secondary
         pdfExportButton.icon = .share
         pdfExportButton.action = viewModel.startPDFExport
+
+        if !viewModel.canExportToPDF {
+            pdfExportButton.disable()
+
+            let disclaimer = SecureContentView()
+            disclaimer.imageView.image = .info
+            disclaimer.bodyAttributedString = "test_certificate_detail_view_pdf_action_button_note".localized.styledAs(.body)
+            buttonStackView.addArrangedSubview(disclaimer)
+        }
     }
 
     private func setupInfo() {

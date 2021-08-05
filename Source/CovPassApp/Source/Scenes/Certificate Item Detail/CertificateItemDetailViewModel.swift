@@ -99,6 +99,10 @@ class CertificateItemDetailViewModel: CertificateItemDetailViewModelProtocol {
         return []
     }
 
+    var canExportToPDF: Bool {
+        certificate.canExportToPDF
+    }
+
     // MARK: - Lifecyle
 
     init(

@@ -48,7 +48,8 @@ public extension DigitalGreenCertificate {
         }
 
         guard let name = name, let type = type else {
-            preconditionFailure("Could not determine template type")
+            print("Certificate not valid for export")
+            return nil
         }
         guard
             let templateURL = Bundle.module.url(forResource: name, withExtension: "svg"),
