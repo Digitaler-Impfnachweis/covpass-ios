@@ -30,11 +30,7 @@ public final class SVGPDFExporter: NSObject, WKNavigationDelegate, SVGPDFExportP
     }()
 
     /// Date formated as `yyyy-MM-dd`.
-    private lazy var dateFormatter: ISO8601DateFormatter = {
-        let formatter = ISO8601DateFormatter()
-        formatter.formatOptions = [.withFullDate]
-        return formatter
-    }()
+    private lazy var dateFormatter = DateUtils.isoDateFormatter
 
     private var exportHandler: ExportHandler?
 
