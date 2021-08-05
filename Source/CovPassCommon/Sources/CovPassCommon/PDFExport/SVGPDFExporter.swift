@@ -87,7 +87,7 @@ public final class SVGPDFExporter: NSObject, WKNavigationDelegate, SVGPDFExportP
             // sample collection
             svg = svg.replacingOccurrences(of: "$sc", with: dateFormatter.string(from: test.sc))
             // date test result
-            #warning("no sign of `$dr` found!!")
+            // FIXME: no sign of `$dr` found!!
             svg = svg.replacingOccurrences(of: "$dr", with: String.placeholder)
             // test result
             svg = svg.replacingOccurrences(of: "$tr", with: test.tr)
