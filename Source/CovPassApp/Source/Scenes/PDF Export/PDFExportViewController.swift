@@ -75,8 +75,11 @@ class PDFExportViewController: UIViewController {
                     // create a temporary file to export
                     //let temporaryDirectoryURL = URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
                     let temporaryDirectoryURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-                    // certificate name could be extended with name, type, etc.
-                    let pdfFile = temporaryDirectoryURL.appendingPathComponent("Certificate.pdf")
+
+                    // Customize export name
+                    var name = self?.viewModel.token.vaccinationCertificate.hcert.dgc.nam.fullName
+                    name = name?.replacingOccurrences(of: " ", with: "-")
+                    let pdfFile = temporaryDirectoryURL.appendingPathComponent("Certificate-\(name ?? "").pdf")
                     document.write(to: pdfFile)
 
                     // present 'share sheet'
