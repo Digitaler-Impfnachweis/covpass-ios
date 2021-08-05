@@ -33,8 +33,8 @@ extension WKWebView {
         // A4 size
         let pageSize = CGSize(width: 595.2, height: 841.8)
 
-        // margins are defined in template layout
-        let pageMargins = UIEdgeInsets.zero
+        // some sensible margins - mostly to prevent an empty 2nd page in the resulting PDF
+        let pageMargins = UIEdgeInsets(top: 24, left: 24, bottom: 24, right: 24)
 
         // calculate the printable rect from the above two
         let printableRect = CGRect(x: pageMargins.left, y: pageMargins.top, width: pageSize.width - pageMargins.left - pageMargins.right, height: pageSize.height - pageMargins.top - pageMargins.bottom)
