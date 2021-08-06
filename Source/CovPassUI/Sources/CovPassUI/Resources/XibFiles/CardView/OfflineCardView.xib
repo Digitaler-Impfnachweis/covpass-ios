@@ -10,6 +10,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OfflineCardView" customModule="CovPassUI">
             <connections>
+                <outlet property="bottomConstraint" destination="crI-k3-H0m" id="P0N-fp-RCJ"/>
                 <outlet property="certificatesDateLabel" destination="eox-Qy-6a6" id="8HL-B9-UDH"/>
                 <outlet property="dateTitle" destination="VNN-es-BAs" id="dwF-2v-PlS"/>
                 <outlet property="infoImageView" destination="06J-Ay-zYR" id="X8r-K8-50c"/>
@@ -27,13 +28,13 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Flh-qW-5MS">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="251"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Offline-Modus" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VW2-PA-GY7">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Offline-Modus" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VW2-PA-GY7">
                             <rect key="frame" x="24" y="24" width="366" height="23"/>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                             <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" ambiguous="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EKc-Hh-BeX">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EKc-Hh-BeX">
                             <rect key="frame" x="24" y="59" width="366" height="50.5"/>
                             <attributedString key="attributedText">
                                 <fragment content="Stellen Sie sicher, dass die App auf dem aktuellsten Stand ist. Dazu verbinden Sie Ihr Gerät kurz mit dem Internet.">
@@ -46,8 +47,8 @@
                             </attributedString>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" ambiguous="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WKN-lr-q90">
-                            <rect key="frame" x="54" y="133.5" width="336" height="17"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WKN-lr-q90">
+                            <rect key="frame" x="54" y="133.5" width="336" height="22.5"/>
                             <attributedString key="attributedText">
                                 <fragment content="Aktualisieren Sie die App">
                                     <attributes>
@@ -59,15 +60,15 @@
                             </attributedString>
                             <nil key="highlightedColor"/>
                         </label>
-                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="06J-Ay-zYR">
-                            <rect key="frame" x="24" y="130" width="24" height="24"/>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="06J-Ay-zYR">
+                            <rect key="frame" x="24" y="133" width="24" height="24"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="24" id="3ex-ge-C6n"/>
                                 <constraint firstAttribute="height" constant="24" id="ggt-4d-MjK"/>
                             </constraints>
                         </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" ambiguous="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VNN-es-BAs">
-                            <rect key="frame" x="24" y="171" width="366" height="17"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VNN-es-BAs">
+                            <rect key="frame" x="24" y="176" width="366" height="17"/>
                             <attributedString key="attributedText">
                                 <fragment content="Letztes Update">
                                     <attributes>
@@ -79,8 +80,8 @@
                             </attributedString>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" ambiguous="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eox-Qy-6a6" userLabel="Letztes Update Certificates">
-                            <rect key="frame" x="24" y="188" width="366" height="17"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eox-Qy-6a6" userLabel="Letztes Update Certificates">
+                            <rect key="frame" x="24" y="193" width="366" height="17"/>
                             <attributedString key="attributedText">
                                 <fragment content="Letztes Update">
                                     <attributes>
@@ -92,7 +93,7 @@
                             </attributedString>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" ambiguous="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SiT-62-4rV" userLabel="Letztes Update Rules">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SiT-62-4rV" userLabel="Letztes Update Rules">
                             <rect key="frame" x="24" y="210" width="366" height="17"/>
                             <attributedString key="attributedText">
                                 <fragment content="Letztes Update">
@@ -115,11 +116,12 @@
                         <constraint firstAttribute="trailing" secondItem="eox-Qy-6a6" secondAttribute="trailing" constant="24" id="Glf-hw-7Xs"/>
                         <constraint firstItem="06J-Ay-zYR" firstAttribute="leading" secondItem="Flh-qW-5MS" secondAttribute="leading" constant="24" id="JsT-2T-GPy"/>
                         <constraint firstItem="EKc-Hh-BeX" firstAttribute="trailing" secondItem="VW2-PA-GY7" secondAttribute="trailing" id="Kgp-rr-Ly4"/>
+                        <constraint firstAttribute="bottom" secondItem="WKN-lr-q90" secondAttribute="bottom" priority="750" constant="24" id="MgY-Wu-Ing"/>
                         <constraint firstItem="SiT-62-4rV" firstAttribute="top" secondItem="eox-Qy-6a6" secondAttribute="bottom" id="Rdc-Fb-oTI"/>
                         <constraint firstAttribute="trailing" secondItem="VNN-es-BAs" secondAttribute="trailing" constant="24" id="Uz4-zx-oKo"/>
                         <constraint firstItem="SiT-62-4rV" firstAttribute="leading" secondItem="Flh-qW-5MS" secondAttribute="leading" constant="24" id="Wv2-4Q-kGc"/>
                         <constraint firstItem="VW2-PA-GY7" firstAttribute="leading" secondItem="Flh-qW-5MS" secondAttribute="leading" constant="24" id="YKH-r5-D3v"/>
-                        <constraint firstItem="VNN-es-BAs" firstAttribute="top" secondItem="WKN-lr-q90" secondAttribute="bottom" constant="20.5" id="crI-k3-H0m"/>
+                        <constraint firstItem="VNN-es-BAs" firstAttribute="top" secondItem="WKN-lr-q90" secondAttribute="bottom" constant="20" id="crI-k3-H0m"/>
                         <constraint firstItem="WKN-lr-q90" firstAttribute="centerY" secondItem="06J-Ay-zYR" secondAttribute="centerY" id="fw7-xp-no4"/>
                         <constraint firstItem="WKN-lr-q90" firstAttribute="top" secondItem="EKc-Hh-BeX" secondAttribute="bottom" constant="24" id="gNe-gs-5Mz"/>
                         <constraint firstAttribute="trailing" secondItem="WKN-lr-q90" secondAttribute="trailing" constant="24" id="hG7-qv-goe"/>

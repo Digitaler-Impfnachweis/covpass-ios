@@ -17,9 +17,12 @@ public class OfflineCardView: XibView {
     @IBOutlet public var textLable: UILabel!
     @IBOutlet public var infoImageView: UIImageView!
     @IBOutlet public var infoLabel: UILabel!
-    @IBOutlet public var dateTitle: UILabel!
-    @IBOutlet public var certificatesDateLabel: UILabel!
-    @IBOutlet public var rulesDateLabel: UILabel!
+
+    @IBOutlet public weak var dateTitle: UILabel!
+    @IBOutlet public weak var certificatesDateLabel: UILabel!
+    @IBOutlet public weak var rulesDateLabel: UILabel!
+
+    @IBOutlet private var bottomConstraint: NSLayoutConstraint!
 
     // MARK: - Private Properties
 
@@ -37,5 +40,10 @@ public class OfflineCardView: XibView {
         )
         contentView?.backgroundColor = .brandAccent10
         contentView?.layer.cornerRadius = cornerRadius
+    }
+
+    public func setUpdateLabel(hidden: Bool) {
+        bottomConstraint.isActive = !hidden
+        [dateTitle, certificatesDateLabel, rulesDateLabel].forEach { $0?.isHidden = hidden }
     }
 }

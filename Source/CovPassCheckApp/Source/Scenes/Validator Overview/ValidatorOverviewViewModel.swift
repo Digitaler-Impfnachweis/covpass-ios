@@ -47,13 +47,13 @@ class ValidatorOverviewViewModel {
         offlineAvailable ? "validation_start_screen_offline_modus_note_latest_version".localized : "validation_start_screen_offline_modus_note_old_version".localized
     }
 
-    var offlineMessageCertificates: String {
-        let date = repository.getLastUpdatedTrustList() ?? Date(timeIntervalSince1970: 0)
+    var offlineMessageCertificates: String? {
+        guard let date = repository.getLastUpdatedTrustList() else { return nil }
         return String(format: "validation_start_screen_offline_modus_certificates".localized, DateUtils.displayDateTimeFormatter.string(from: date))
     }
 
-    var offlineMessageRules: String {
-        let date = certLogic.lastUpdatedDCCRules() ?? Date(timeIntervalSince1970: 0)
+    var offlineMessageRules: String? {
+        guard let date = certLogic.lastUpdatedDCCRules() else { return nil }
         return String(format: "validation_start_screen_offline_modus_rules".localized, DateUtils.displayDateTimeFormatter.string(from: date))
     }
 
