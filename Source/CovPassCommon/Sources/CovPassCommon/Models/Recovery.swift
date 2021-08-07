@@ -91,3 +91,9 @@ public class Recovery: Codable {
         return value["display"] as? String
     }
 }
+
+public extension Recovery {
+    var tgDisplayName: String {
+        map(key: tg, from: Bundle.commonBundle.url(forResource: "disease-agent-targeted", withExtension: "json")) ?? tg
+    }
+}

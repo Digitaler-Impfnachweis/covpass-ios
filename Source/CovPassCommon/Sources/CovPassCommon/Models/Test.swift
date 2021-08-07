@@ -116,3 +116,21 @@ public class Test: Codable {
         return value["display"] as? String
     }
 }
+
+public extension Test {
+    var tgDisplayName: String {
+        map(key: tg, from: Bundle.commonBundle.url(forResource: "disease-agent-targeted", withExtension: "json")) ?? tg
+    }
+
+    var ttDisplayName: String {
+        map(key: tt, from: Bundle.commonBundle.url(forResource: "test-type", withExtension: "json")) ?? tt
+    }
+
+    var maDisplayName: String? {
+        map(key: ma, from: Bundle.commonBundle.url(forResource: "test-manf", withExtension: "json")) ?? ma
+    }
+
+    var trDisplayName: String {
+        map(key: tr, from: Bundle.commonBundle.url(forResource: "test-result", withExtension: "json")) ?? tr
+    }
+}

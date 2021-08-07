@@ -61,7 +61,7 @@ public final class SVGPDFExporter: NSObject, WKNavigationDelegate, SVGPDFExportP
                 throw ExportError.invalidTemplate
             }
             // disease of agent targeted
-            svg = svg.replacingOccurrences(of: "$tg", with: recovery.tg)
+            svg = svg.replacingOccurrences(of: "$tg", with: recovery.tgDisplayName)
             // date of first positive test result
             svg = svg.replacingOccurrences(of: "$fr", with: dateFormatter.string(from: recovery.fr))
             // valid from
@@ -77,17 +77,17 @@ public final class SVGPDFExporter: NSObject, WKNavigationDelegate, SVGPDFExportP
                 throw ExportError.invalidTemplate
             }
             // disease of agent targeted
-            svg = svg.replacingOccurrences(of: "$tg", with: test.tg)
+            svg = svg.replacingOccurrences(of: "$tg", with: test.tgDisplayName)
             // test type
-            svg = svg.replacingOccurrences(of: "$tt", with: test.tt)
+            svg = svg.replacingOccurrences(of: "$tt", with: test.ttDisplayName)
             // test name
             svg = svg.replacingOccurrences(of: "$nm", with: test.nm ?? .placeholder)
             // test manufacturer
-            svg = svg.replacingOccurrences(of: "$ma", with: test.ma ?? .placeholder)
+            svg = svg.replacingOccurrences(of: "$ma", with: test.maDisplayName ?? .placeholder)
             // sample collection
             svg = svg.replacingOccurrences(of: "$sc", with: dateFormatter.string(from: test.sc))
             // test result
-            svg = svg.replacingOccurrences(of: "$tr", with: test.tr)
+            svg = svg.replacingOccurrences(of: "$tr", with: test.trDisplayName)
             // testing center
             svg = svg.replacingOccurrences(of: "$tc", with: test.tc)
             // country

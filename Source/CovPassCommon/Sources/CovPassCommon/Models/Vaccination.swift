@@ -139,3 +139,21 @@ extension Vaccination: Comparable {
         lhs.dn > rhs.dn
     }
 }
+
+public extension Vaccination {
+    var tgDisplayName: String {
+        map(key: tg, from: Bundle.commonBundle.url(forResource: "disease-agent-targeted", withExtension: "json")) ?? tg
+    }
+
+    var vpDisplayName: String {
+        map(key: vp, from: Bundle.commonBundle.url(forResource: "vaccine-prophylaxis", withExtension: "json")) ?? vp
+    }
+
+    var maDisplayName: String {
+        map(key: ma, from: Bundle.commonBundle.url(forResource: "vaccine-mah-manf", withExtension: "json")) ?? ma
+    }
+
+    var coDisplayName: String {
+        map(key: co, from: Bundle.commonBundle.url(forResource: "country", withExtension: "json")) ?? co
+    }
+}

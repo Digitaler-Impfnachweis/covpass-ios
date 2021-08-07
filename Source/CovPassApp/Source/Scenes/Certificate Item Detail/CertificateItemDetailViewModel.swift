@@ -56,7 +56,7 @@ class CertificateItemDetailViewModel: CertificateItemDetailViewModelProtocol {
             return [
                 ("recovery_certificate_detail_view_data_name".localized, dgc.nam.fullNameReverse),
                 ("recovery_certificate_detail_view_data_date_of_birth".localized, dob),
-                ("recovery_certificate_detail_view_data_disease".localized, r.map(key: r.tg, from: Bundle.commonBundle.url(forResource: "disease-agent-targeted", withExtension: "json")) ?? r.tg),
+                ("recovery_certificate_detail_view_data_disease".localized, r.tgDisplayName),
                 ("recovery_certificate_detail_view_data_date_first_positive_result".localized, DateUtils.isoDateFormatter.string(from: r.fr)),
                 ("recovery_certificate_detail_view_data_country".localized, r.co),
                 ("recovery_certificate_detail_view_data_issuer".localized, r.is),
@@ -69,12 +69,12 @@ class CertificateItemDetailViewModel: CertificateItemDetailViewModelProtocol {
             return [
                 ("test_certificate_detail_view_data_name".localized, dgc.nam.fullNameReverse),
                 ("test_certificate_detail_view_data_date_of_birth".localized, dob),
-                ("test_certificate_detail_view_data_disease".localized, t.map(key: t.tg, from: Bundle.commonBundle.url(forResource: "disease-agent-targeted", withExtension: "json")) ?? t.tg),
-                ("test_certificate_detail_view_data_test_type".localized, t.map(key: t.tt, from: Bundle.commonBundle.url(forResource: "test-type", withExtension: "json")) ?? t.tt),
+                ("test_certificate_detail_view_data_disease".localized, t.tgDisplayName),
+                ("test_certificate_detail_view_data_test_type".localized, t.ttDisplayName),
                 ("test_certificate_detail_view_data_test_name".localized, t.nm ?? ""),
-                ("test_certificate_detail_view_data_test_manufactur".localized, t.map(key: t.ma, from: Bundle.commonBundle.url(forResource: "test-manf", withExtension: "json")) ?? t.ma ?? ""),
+                ("test_certificate_detail_view_data_test_manufactur".localized, t.maDisplayName ?? ""),
                 ("test_certificate_detail_view_data_test_date_and_time".localized, DateUtils.displayIsoDateTimeFormatter.string(from: t.sc)),
-                ("test_certificate_detail_view_data_test_results".localized, t.map(key: t.tr, from: Bundle.commonBundle.url(forResource: "test-result", withExtension: "json")) ?? t.tr),
+                ("test_certificate_detail_view_data_test_results".localized, t.trDisplayName),
                 ("test_certificate_detail_view_data_test_centre".localized, t.tc),
                 ("test_certificate_detail_view_data_test_country".localized, t.co),
                 ("test_certificate_detail_view_data_test_issuer".localized, t.is),
@@ -85,13 +85,13 @@ class CertificateItemDetailViewModel: CertificateItemDetailViewModelProtocol {
             return [
                 ("vaccination_certificate_detail_view_data_name".localized, dgc.nam.fullNameReverse),
                 ("vaccination_certificate_detail_view_data_date_of_birth".localized, dob),
-                ("vaccination_certificate_detail_view_data_disease".localized, v.map(key: v.tg, from: Bundle.commonBundle.url(forResource: "disease-agent-targeted", withExtension: "json")) ?? v.tg),
+                ("vaccination_certificate_detail_view_data_disease".localized, v.tgDisplayName),
                 ("vaccination_certificate_detail_view_data_vaccine".localized, v.map(key: v.mp, from: Bundle.commonBundle.url(forResource: "vaccine-medicinal-product", withExtension: "json")) ?? v.mp),
-                ("vaccination_certificate_detail_view_data_vaccine_type".localized, v.map(key: v.vp, from: Bundle.commonBundle.url(forResource: "vaccine-prophylaxis", withExtension: "json")) ?? v.vp),
-                ("vaccination_certificate_detail_view_data_vaccine_manufactur".localized, v.map(key: v.ma, from: Bundle.commonBundle.url(forResource: "vaccine-mah-manf", withExtension: "json")) ?? v.ma),
+                ("vaccination_certificate_detail_view_data_vaccine_type".localized, v.vpDisplayName),
+                ("vaccination_certificate_detail_view_data_vaccine_manufactur".localized, v.maDisplayName),
                 ("vaccination_certificate_detail_view_data_vaccine_number".localized, "\(v.dn) / \(v.sd)"),
                 ("vaccination_certificate_detail_view_data_vaccine_date_".localized, DateUtils.isoDateFormatter.string(from: v.dt)),
-                ("vaccination_certificate_detail_view_data_vaccine_country".localized, v.map(key: v.co, from: Bundle.commonBundle.url(forResource: "country", withExtension: "json")) ?? v.co),
+                ("vaccination_certificate_detail_view_data_vaccine_country".localized, v.coDisplayName),
                 ("vaccination_certificate_detail_view_data_vaccine_issuer".localized, v.is),
                 ("vaccination_certificate_detail_view_data_vaccine_identifier".localized, v.ci)
             ]
