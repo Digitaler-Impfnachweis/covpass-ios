@@ -99,20 +99,20 @@ public final class SVGPDFExporter: NSObject, WKNavigationDelegate, SVGPDFExportP
                 throw ExportError.invalidTemplate
             }
             // disease of agent targeted
-            svg = svg.replacingOccurrences(of: "$tg", with: vaccination.tg)
+            svg = svg.replacingOccurrences(of: "$tg", with: vaccination.tgDisplayName)
             // vaccine
-            svg = svg.replacingOccurrences(of: "$vp", with: vaccination.vp)
+            svg = svg.replacingOccurrences(of: "$vp", with: vaccination.vpDisplayName)
             // vaccine product name
             svg = svg.replacingOccurrences(of: "$mp", with: vaccination.mp)
             // marketing authorization
-            svg = svg.replacingOccurrences(of: "$ma", with: vaccination.ma)
+            svg = svg.replacingOccurrences(of: "$ma", with: vaccination.maDisplayName)
             // vaccination x of y - number format is not localized!
             svg = svg.replacingOccurrences(of: "$dn", with: vaccination.dn.description)
             svg = svg.replacingOccurrences(of: "$sd", with: vaccination.sd.description)
             // date vaccination
             svg = svg.replacingOccurrences(of: "$dt", with: dateFormatter.string(from: vaccination.dt))
             // country
-            svg = svg.replacingOccurrences(of: "$co", with: vaccination.co)
+            svg = svg.replacingOccurrences(of: "$co", with: vaccination.coDisplayName)
             // certificate issue
             svg = svg.replacingOccurrences(of: "$is", with: vaccination.is)
         }
