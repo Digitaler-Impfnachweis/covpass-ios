@@ -38,6 +38,12 @@ public enum DCCCertLogicError: Error, ErrorCode {
     }
 }
 
+public struct ValueSet: Codable {
+    var id: String
+    var hash: String
+    var data: Data
+}
+
 public struct DCCCertLogic {
     private let initialDCCRulesURL: URL
     private let service: DCCServiceProtocol
@@ -69,23 +75,39 @@ public struct DCCCertLogic {
         return string
     }()
 
-    let valueSets: [String: [String]] = {
-        [
-            "country-2-codes": valueSet("country-2-codes"),
-            "covid-19-lab-result": valueSet("covid-19-lab-result"),
-            "covid-19-lab-test-manufacturer-and-name": valueSet("covid-19-lab-test-manufacturer-and-name"),
-            "covid-19-lab-test-type": valueSet("covid-19-lab-test-type"),
-            "disease-agent-targeted": valueSet("disease-agent-targeted"),
-            "sct-vaccines-covid-19": valueSet("sct-vaccines-covid-19"),
-            "vaccines-covid-19-auth-holders": valueSet("vaccines-covid-19-auth-holders"),
-            "vaccines-covid-19-names": valueSet("vaccines-covid-19-names")
+    var valueSets: [String: [String]] {
+        // Try to load valueSets from userDefaults
+        if let valueSetData = try? userDefaults.fetch(UserDefaults.keyValueSets) as? Data,
+           let sets = try? JSONDecoder().decode([ValueSet].self, from: valueSetData)
+        {
+            var udValueSets = [String: [String]]()
+            sets.forEach { udValueSets[$0.id] = DCCCertLogic.valueSet($0.id, $0.data) }
+            return udValueSets
+        }
+        // Try to load local valueSets
+        return [
+            "country-2-codes": DCCCertLogic.valueSetFromFile("country-2-codes"),
+            "covid-19-lab-result": DCCCertLogic.valueSetFromFile("covid-19-lab-result"),
+            "covid-19-lab-test-manufacturer-and-name": DCCCertLogic.valueSetFromFile("covid-19-lab-test-manufacturer-and-name"),
+            "covid-19-lab-test-type": DCCCertLogic.valueSetFromFile("covid-19-lab-test-type"),
+            "disease-agent-targeted": DCCCertLogic.valueSetFromFile("disease-agent-targeted"),
+            "sct-vaccines-covid-19": DCCCertLogic.valueSetFromFile("sct-vaccines-covid-19"),
+            "vaccines-covid-19-auth-holders": DCCCertLogic.valueSetFromFile("vaccines-covid-19-auth-holders"),
+            "vaccines-covid-19-names": DCCCertLogic.valueSetFromFile("vaccines-covid-19-names")
         ]
-    }()
+    }
 
-    private static func valueSet(_ name: String) -> [String] {
+    private static func valueSetFromFile(_ name: String) -> [String] {
         guard let url = Bundle.commonBundle.url(forResource: name, withExtension: "json"),
-              let data = try? Data(contentsOf: url),
-              let arr = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: Any],
+              let data = try? Data(contentsOf: url)
+        else {
+            return []
+        }
+        return valueSet(name, data)
+    }
+
+    private static func valueSet(_ name: String, _ data: Data) -> [String] {
+        guard let arr = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: Any],
               let setsArr = arr["valueSetValues"] as? [String: Any]
         else {
             return []
@@ -209,10 +231,13 @@ public struct DCCCertLogic {
             }
             return updateCountryRules(localRules: rules, remoteRules: remoteRules)
         }
-        .done(on: .global()) { rules in
+        .map(on: .global()) { rules in
             let data = try JSONEncoder().encode(rules)
             try keychain.store(KeychainPersistence.dccRulesKey, value: data)
             try userDefaults.store(UserDefaults.keyLastUpdatedDCCRules, value: Date())
+        }
+        .then(on: .global()) {
+            updateValueSets()
         }
     }
 
@@ -228,6 +253,33 @@ public struct DCCCertLogic {
                 }
             }
             seal.fulfill(updatedRules)
+        }
+    }
+
+    private func updateValueSets() -> Promise<Void> {
+        firstly {
+            service.loadValueSets()
+        }
+        .then(on: .global()) { remoteValueSets in
+            Promise { seal in
+                var valueSets = [ValueSet]()
+                var updatedValueSets = [ValueSet]()
+                if let storedData = try userDefaults.fetch(UserDefaults.keyValueSets) as? Data {
+                    valueSets = try JSONDecoder().decode([ValueSet].self, from: storedData)
+                }
+                for remoteValueSet in remoteValueSets {
+                    guard let remoteId = remoteValueSet["id"], let remoteHash = remoteValueSet["hash"] else { continue }
+                    if let localValueSet = valueSets.first(where: { $0.id == remoteId && $0.hash == remoteHash }) {
+                        updatedValueSets.append(localValueSet)
+                    } else {
+                        let valueSet = try service.loadValueSet(id: remoteId, hash: remoteHash).wait()
+                        updatedValueSets.append(valueSet)
+                    }
+                }
+                let data = try JSONEncoder().encode(updatedValueSets)
+                try userDefaults.store(UserDefaults.keyValueSets, value: data)
+                seal.fulfill_()
+            }
         }
     }
 }

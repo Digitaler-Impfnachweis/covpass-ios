@@ -18,11 +18,21 @@ public enum DCCServiceMockError: Error {
 class DCCServiceMock: DCCServiceProtocol {
     var loadDCCRulesResult: Promise<[RuleSimple]>?
     func loadDCCRules() -> Promise<[RuleSimple]> {
-        return loadDCCRulesResult ?? Promise.value([])
+        loadDCCRulesResult ?? Promise.value([])
     }
 
     var loadDCCRuleResult: Promise<Rule>?
     func loadDCCRule(country _: String, hash _: String) -> Promise<Rule> {
-        return loadDCCRuleResult ?? Promise(error: DCCServiceMockError.invalidURL)
+        loadDCCRuleResult ?? Promise(error: DCCServiceMockError.invalidURL)
+    }
+
+    var loadValueSetsResult: Promise<[[String: String]]>?
+    func loadValueSets() -> Promise<[[String : String]]> {
+        loadValueSetsResult ?? Promise(error: DCCServiceMockError.invalidURL)
+    }
+
+    var loadValueSetResult: Promise<CovPassCommon.ValueSet>?
+    func loadValueSet(id: String, hash: String) -> Promise<CovPassCommon.ValueSet> {
+        loadValueSetResult ?? Promise(error: DCCServiceMockError.invalidURL)
     }
 }

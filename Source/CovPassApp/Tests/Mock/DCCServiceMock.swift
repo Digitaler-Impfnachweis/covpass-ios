@@ -21,4 +21,12 @@ public struct DCCServiceMock: DCCServiceProtocol {
     public func loadDCCRule(country _: String, hash _: String) -> Promise<Rule> {
         return Promise(error: ApplicationError.unknownError)
     }
+
+    public func loadValueSets() -> Promise<[[String: String]]> {
+        return Promise.value([])
+    }
+
+    public func loadValueSet(id: String, hash: String) -> Promise<CovPassCommon.ValueSet> {
+        return Promise(error: ApplicationError.unknownError)
+    }
 }

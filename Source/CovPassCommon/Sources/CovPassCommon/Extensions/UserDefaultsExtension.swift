@@ -12,4 +12,5 @@ extension UserDefaults {
     static let keyLastUpdatedTrustList = "keyLastUpdatedTrustList"
     static let keyLastUpdatedDCCRules = "keyLastUpdatedDCCRules"
     static let keyCheckVersionUpdate = "keyCheckVersionUpdate"
+    static let keyValueSets = "keyValueSets"
 }

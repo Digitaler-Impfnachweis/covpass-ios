@@ -48,7 +48,7 @@ class DCCCertLogicTests: XCTestCase {
         XCTAssertEqual(sut.countries.count, 31)
     }
 
-    func testValueTests() {
+    func testLocalValueSets() {
         XCTAssertEqual(sut.valueSets.count, 8)
         XCTAssertEqual(sut.valueSets["country-2-codes"]?.count, 249)
         XCTAssertEqual(sut.valueSets["covid-19-lab-result"]?.count, 2)
@@ -58,6 +58,14 @@ class DCCCertLogicTests: XCTestCase {
         XCTAssertEqual(sut.valueSets["sct-vaccines-covid-19"]?.count, 3)
         XCTAssertEqual(sut.valueSets["vaccines-covid-19-auth-holders"]?.count, 14)
         XCTAssertEqual(sut.valueSets["vaccines-covid-19-names"]?.count, 12)
+    }
+
+    func testRemoteValueSets() throws {
+        let data = try JSONEncoder().encode([ValueSet(id: "valueSet", hash: "1", data: Data())])
+        try userDefaults.store(UserDefaults.keyValueSets, value: data)
+
+        XCTAssertEqual(sut.valueSets.count, 1)
+        XCTAssertEqual(sut.valueSets["valueSet"]?.count, 0)
     }
 
     func testLastUpdatedDCCRules() throws {
@@ -70,6 +78,7 @@ class DCCCertLogicTests: XCTestCase {
     }
 
     func testUpdateRulesIfNeeded() throws {
+        service.loadValueSetsResult = Promise.value([])
         try sut.updateRulesIfNeeded().wait()
 
         do {
@@ -155,6 +164,7 @@ class DCCCertLogicTests: XCTestCase {
         // Update rules
         service.loadDCCRulesResult = Promise.value([RuleSimple(identifier: "", version: "", country: "DE", hash: "")])
         service.loadDCCRuleResult = Promise.value(Rule(identifier: "", type: "", version: "", schemaVersion: "", engine: "", engineVersion: "", certificateType: "", description: [], validFrom: "", validTo: "", affectedString: [], logic: JSON(""), countryCode: "DE"))
+        service.loadValueSetsResult = Promise.value([])
         try sut.updateRules().wait()
 
         // Keychain should have the new rules
@@ -173,6 +183,7 @@ class DCCCertLogicTests: XCTestCase {
         // Update rules
         service.loadDCCRulesResult = Promise.value([RuleSimple(identifier: "", version: "", country: "DE", hash: "")])
         service.loadDCCRuleResult = Promise.value(rule)
+        service.loadValueSetsResult = Promise.value([])
         try sut.updateRules().wait()
 
         // Keychain should have the new rules
@@ -196,6 +207,7 @@ class DCCCertLogicTests: XCTestCase {
         let rule = Rule(identifier: "1", type: "", version: "", schemaVersion: "", engine: "", engineVersion: "", certificateType: "", description: [], validFrom: "", validTo: "", affectedString: [], logic: JSON(""), countryCode: "DE")
         rule.hash = "1"
         service.loadDCCRuleResult = Promise.value(rule)
+        service.loadValueSetsResult = Promise.value([])
         try sut.updateRules().wait()
 
         // Keychain should have the new rules
@@ -214,6 +226,7 @@ class DCCCertLogicTests: XCTestCase {
         let rule = Rule(identifier: "1", type: "", version: "", schemaVersion: "", engine: "", engineVersion: "", certificateType: "", description: [], validFrom: "", validTo: "", affectedString: [], logic: JSON(""), countryCode: "DE")
         rule.hash = "1"
         service.loadDCCRuleResult = Promise.value(rule)
+        service.loadValueSetsResult = Promise.value([])
         try sut.updateRules().wait()
 
         // Keychain should have the new rules
@@ -221,6 +234,57 @@ class DCCCertLogicTests: XCTestCase {
         let rules = try JSONDecoder().decode([Rule].self, from: data)
         XCTAssertEqual(rules.count, 1)
         XCTAssertEqual(rules[0].identifier, "1")
+    }
+
+    func testValueSetUpdate() throws {
+        // Initial UserDefaults should be empty
+        let noData = try userDefaults.fetch(UserDefaults.keyValueSets)
+        XCTAssertNil(noData)
+
+        // Update valueSets
+        service.loadDCCRulesResult = Promise.value([])
+        service.loadValueSetsResult = Promise.value([["id": "1", "hash": "1"]])
+        service.loadValueSetResult = Promise.value(CovPassCommon.ValueSet(id: "1", hash: "1", data: Data()))
+        try sut.updateRules().wait()
+
+        // UserDefaults should have the new value sets
+        let data = try userDefaults.fetch(UserDefaults.keyValueSets)! as! Data
+        let valueSets = try JSONDecoder().decode([CovPassCommon.ValueSet].self, from: data)
+        XCTAssertEqual(valueSets.count, 1)
+    }
+
+    func testValueSetUpdateDeleteOldRule() throws {
+        // Load intial data
+        let initialData = try JSONEncoder().encode([CovPassCommon.ValueSet(id: "2", hash: "", data: Data())])
+        try userDefaults.store(UserDefaults.keyValueSets, value: initialData)
+
+        // Update valueSets
+        service.loadDCCRulesResult = Promise.value([])
+        service.loadValueSetsResult = Promise.value([["id": "1", "hash": "1"]])
+        service.loadValueSetResult = Promise.value(CovPassCommon.ValueSet(id: "1", hash: "1", data: Data()))
+        try sut.updateRules().wait()
+
+        // UserDefaults should have the new value sets
+        let data = try userDefaults.fetch(UserDefaults.keyValueSets)! as! Data
+        let valueSets = try JSONDecoder().decode([CovPassCommon.ValueSet].self, from: data)
+        XCTAssertEqual(valueSets.count, 1)
+        XCTAssertEqual(valueSets[0].id, "1")
+    }
+
+    func testValueSetUpdateNothingNew() throws {
+        // Load intial data
+        let initialData = try JSONEncoder().encode([CovPassCommon.ValueSet(id: "1", hash: "1", data: Data())])
+        try userDefaults.store(UserDefaults.keyValueSets, value: initialData)
+
+        // Update valueSets
+        service.loadDCCRulesResult = Promise.value([])
+        service.loadValueSetsResult = Promise.value([["id": "1", "hash": "1"]])
+        try sut.updateRules().wait()
+
+        // UserDefaults should have the new value sets
+        let data = try userDefaults.fetch(UserDefaults.keyValueSets)! as! Data
+        let valueSets = try JSONDecoder().decode([CovPassCommon.ValueSet].self, from: data)
+        XCTAssertEqual(valueSets.count, 1)
     }
 
     // MARK: - Helpers
