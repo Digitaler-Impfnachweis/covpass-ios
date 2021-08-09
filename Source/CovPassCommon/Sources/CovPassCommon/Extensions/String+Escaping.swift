@@ -8,12 +8,11 @@
 
 import Foundation
 
-extension String {
+public extension String {
 
     var sanitizedFileName: String {
-        let unreserved = "-._~/?"
         let allowed = NSMutableCharacterSet.alphanumeric()
-        allowed.addCharacters(in: unreserved)
+        allowed.addCharacters(in: "-._")
         return addingPercentEncoding(withAllowedCharacters: allowed as CharacterSet) ?? self
     }
 

@@ -7,6 +7,7 @@
 //
 
 import CovPassUI
+import CovPassCommon
 import UIKit
 
 class PDFExportViewController: UIViewController {
@@ -78,7 +79,8 @@ class PDFExportViewController: UIViewController {
                     // Customize export name
                     var name = self?.viewModel.token.vaccinationCertificate.hcert.dgc.nam.fullName
                     name = name?.replacingOccurrences(of: " ", with: "-")
-                    let pdfFile = temporaryDirectoryURL.appendingPathComponent("Certificate-\(name ?? "").pdf")
+                    let fileName = "Certificate-\(name ?? "").pdf".sanitizedFileName
+                    let pdfFile = temporaryDirectoryURL.appendingPathComponent(fileName)
                     document.write(to: pdfFile)
 
                     // present 'share sheet'
