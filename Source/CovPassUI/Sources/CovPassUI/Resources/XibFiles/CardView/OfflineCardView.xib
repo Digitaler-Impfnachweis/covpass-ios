@@ -48,7 +48,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WKN-lr-q90">
-                            <rect key="frame" x="54" y="133.5" width="336" height="22.5"/>
+                            <rect key="frame" x="54" y="133.5" width="336" height="17"/>
                             <attributedString key="attributedText">
                                 <fragment content="Aktualisieren Sie die App">
                                     <attributes>
@@ -61,14 +61,14 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="06J-Ay-zYR">
-                            <rect key="frame" x="24" y="133" width="24" height="24"/>
+                            <rect key="frame" x="24" y="130" width="24" height="24"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="24" id="3ex-ge-C6n"/>
                                 <constraint firstAttribute="height" constant="24" id="ggt-4d-MjK"/>
                             </constraints>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VNN-es-BAs">
-                            <rect key="frame" x="24" y="176" width="366" height="17"/>
+                            <rect key="frame" x="24" y="170.5" width="366" height="22.5"/>
                             <attributedString key="attributedText">
                                 <fragment content="Letztes Update">
                                     <attributes>
@@ -116,7 +116,6 @@
                         <constraint firstAttribute="trailing" secondItem="eox-Qy-6a6" secondAttribute="trailing" constant="24" id="Glf-hw-7Xs"/>
                         <constraint firstItem="06J-Ay-zYR" firstAttribute="leading" secondItem="Flh-qW-5MS" secondAttribute="leading" constant="24" id="JsT-2T-GPy"/>
                         <constraint firstItem="EKc-Hh-BeX" firstAttribute="trailing" secondItem="VW2-PA-GY7" secondAttribute="trailing" id="Kgp-rr-Ly4"/>
-                        <constraint firstAttribute="bottom" secondItem="WKN-lr-q90" secondAttribute="bottom" priority="750" constant="24" id="MgY-Wu-Ing"/>
                         <constraint firstItem="SiT-62-4rV" firstAttribute="top" secondItem="eox-Qy-6a6" secondAttribute="bottom" id="Rdc-Fb-oTI"/>
                         <constraint firstAttribute="trailing" secondItem="VNN-es-BAs" secondAttribute="trailing" constant="24" id="Uz4-zx-oKo"/>
                         <constraint firstItem="SiT-62-4rV" firstAttribute="leading" secondItem="Flh-qW-5MS" secondAttribute="leading" constant="24" id="Wv2-4Q-kGc"/>

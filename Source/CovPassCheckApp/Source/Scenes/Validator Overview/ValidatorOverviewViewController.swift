@@ -75,10 +75,6 @@ class ValidatorOverviewViewController: UIViewController {
         offlineCard.infoLabel.attributedText = viewModel.offlineTitle.styledAs(.body)
         offlineCard.infoImageView.image = viewModel.offlineIcon
 
-        // date labels are hidden if the app had no connection to fetch an initial set of data
-        let shouldHide = viewModel.offlineMessageCertificates == nil && viewModel.offlineMessageRules == nil
-        offlineCard.setUpdateLabel(hidden: shouldHide)
-
         offlineCard.dateTitle.attributedText = "validation_start_screen_offline_modus_note_update".localized.styledAs(.body).colored(.onBackground70)
         offlineCard.certificatesDateLabel.attributedText = viewModel.offlineMessageCertificates?.styledAs(.body).colored(.onBackground70)
         offlineCard.rulesDateLabel.attributedText = viewModel.offlineMessageRules?.styledAs(.body).colored(.onBackground70)
