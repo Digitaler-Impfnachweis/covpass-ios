@@ -153,6 +153,10 @@ public extension Vaccination {
         map(key: ma, from: Bundle.commonBundle.url(forResource: "vaccine-mah-manf", withExtension: "json")) ?? ma
     }
 
+    var mpDisplayName: String {
+        map(key: mp, from: Bundle.commonBundle.url(forResource: "vaccine-medicinal-product", withExtension: "json")) ?? mp
+    }
+
     var coDisplayName: String {
         map(key: co, from: Bundle.commonBundle.url(forResource: "country", withExtension: "json")) ?? co
     }
