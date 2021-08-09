@@ -74,7 +74,7 @@ class CertificateItemDetailViewController: UIViewController {
     private func setupHeadline() {
         titleLabel.attributedText = viewModel.headline.styledAs(.header_1).colored(.onBackground100)
         titleLabel.layoutMargins = .init(top: .zero, left: .space_24, bottom: .space_24, right: .space_24)
-        subtitleLabel.attributedText = "vaccination_certificate_detail_view_data_vaccine_recovery".localized.styledAs(.body).colored(.onBackground70)
+        subtitleLabel.attributedText = "vaccination_certificate_detail_view_vaccination_note".localized.styledAs(.body).colored(.onBackground70)
         subtitleLabel.layoutMargins = .init(top: .zero, left: .space_24, bottom: .zero, right: .space_24)
         subtitleLabel.isHidden = !viewModel.showSubtitle
         stackView.setCustomSpacing(.space_24, after: subtitleLabel)
