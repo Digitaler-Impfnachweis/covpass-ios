@@ -43,9 +43,15 @@ API documentation TBD
 
 ## Release History
 
-- 1.5.0
+- 1.7.0
+  - Show invalid and expired certificates
+  - PDF export for German certificates
+  - Show EU rule country list in alphabetical order
+  - Bugfixes
+- 1.6.0
   - Add EU business rules for CovPass and CovPassCheck
   - Hide favorite icon with only one certificate
+  - English translation for CovPass and CovPassCheck
   - Bugfixes
 - 1.4.1
   - Add contact for pass and check app
