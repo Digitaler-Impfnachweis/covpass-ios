@@ -36,7 +36,7 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
     }
 
     var name: String {
-        certificates.first?.vaccinationCertificate.hcert.dgc.nam.fullNameReverse ?? ""
+        certificates.first?.vaccinationCertificate.hcert.dgc.nam.fullName ?? ""
     }
 
     var birthDate: String {
