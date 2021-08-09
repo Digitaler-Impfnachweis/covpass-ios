@@ -103,7 +103,7 @@ public final class SVGPDFExporter: NSObject, WKNavigationDelegate, SVGPDFExportP
             // vaccine
             svg = svg.replacingOccurrences(of: "$vp", with: vaccination.vpDisplayName)
             // vaccine product name
-            svg = svg.replacingOccurrences(of: "$mp", with: vaccination.mp)
+            svg = svg.replacingOccurrences(of: "$mp", with: vaccination.mpDisplayName)
             // marketing authorization
             svg = svg.replacingOccurrences(of: "$ma", with: vaccination.maDisplayName)
             // vaccination x of y - number format is not localized!
