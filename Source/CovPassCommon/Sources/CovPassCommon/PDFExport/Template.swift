@@ -36,25 +36,25 @@ public extension DigitalGreenCertificate {
     ///
     /// A template for tests exists but is currently not used.
     var template: Template? {
-        var name: String? = nil
-        var type: Template.TemplateType? = .none
+        var templateName: String? = nil
+        var templateType: Template.TemplateType? = .none
         var country: String? = nil
 
         if let v = v?.first {
-            name = "VaccinationCertificateTemplate_v4.1"
-            type = .vaccination
+            templateName = "VaccinationCertificateTemplate_v4.1"
+            templateType = .vaccination
             country = v.co
         }
         if let r = r?.first {
-            name = "RecoveryCertificateTemplate_v4.1"
-            type = .recovery
+            templateName = "RecoveryCertificateTemplate_v4.1"
+            templateType = .recovery
             country = r.co
         }
 
         // Currently, only certificates issued in Germany are exportable.
         // Edge-case note: this check uses the country of vaccination/recovery.
         // If any issuer works cross-border, e.g. RKI in France, the export will be denied.
-        guard let name = name, let type = type, country?.uppercased() == "DE" else {
+        guard let name = templateName, let type = templateType, country?.uppercased() == "DE" else {
             print("Certificate not valid for export")
             return nil
         }
