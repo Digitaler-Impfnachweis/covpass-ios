@@ -85,12 +85,17 @@ class PDFExportViewController: UIViewController {
 
                     // present 'share sheet'
                     let activityViewController = UIActivityViewController(activityItems: [pdfFile], applicationActivities: nil)
-                    activityViewController.completionWithItemsHandler = { _, _, _, _ in
+                    activityViewController.completionWithItemsHandler = { _ /*type*/, completed, _/*returnedItems*/, _/*activityError*/ in
                         // completion handler will be called even if we modify the PDF ('markup') and return to share sheet
                         // in that case we DON'T remove the pdf file
                         if activityViewController.view.superview == nil {
                             // cleanup
                             try? FileManager.default.removeItem(at: pdfFile)
+                        }
+
+                        // dismiss export view on successful export
+                        if completed {
+                            self?.dismiss(animated: true, completion: nil)
                         }
                     }
                     activityViewController.modalTransitionStyle = .coverVertical
