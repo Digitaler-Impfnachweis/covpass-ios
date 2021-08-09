@@ -156,4 +156,9 @@ public extension Vaccination {
     var coDisplayName: String {
         map(key: co, from: Bundle.commonBundle.url(forResource: "country", withExtension: "json")) ?? co
     }
+
+    /// UVCI without `URN:UVCI:` prefix
+    var ciDisplayName: String {
+        return ci.stripUVCIPrefix()
+    }
 }

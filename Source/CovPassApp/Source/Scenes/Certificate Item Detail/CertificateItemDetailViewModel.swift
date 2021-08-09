@@ -62,7 +62,7 @@ class CertificateItemDetailViewModel: CertificateItemDetailViewModelProtocol {
                 ("recovery_certificate_detail_view_data_issuer".localized, r.is),
                 ("recovery_certificate_detail_view_data_valid_from".localized, DateUtils.isoDateFormatter.string(from: r.df)),
                 ("recovery_certificate_detail_view_data_valid_until".localized, DateUtils.isoDateFormatter.string(from: r.du)),
-                ("recovery_certificate_detail_view_data_identifier".localized, r.ci)
+                ("recovery_certificate_detail_view_data_identifier".localized, r.ciDisplayName)
             ]
         }
         if let t = dgc.t?.first {
@@ -78,7 +78,7 @@ class CertificateItemDetailViewModel: CertificateItemDetailViewModelProtocol {
                 ("test_certificate_detail_view_data_test_centre".localized, t.tc),
                 ("test_certificate_detail_view_data_test_country".localized, t.co),
                 ("test_certificate_detail_view_data_test_issuer".localized, t.is),
-                ("test_certificate_detail_view_data_test_identifier".localized, t.ci)
+                ("test_certificate_detail_view_data_test_identifier".localized, t.ciDisplayName)
             ]
         }
         if let v = dgc.v?.first {
@@ -93,7 +93,7 @@ class CertificateItemDetailViewModel: CertificateItemDetailViewModelProtocol {
                 ("vaccination_certificate_detail_view_data_vaccine_date_".localized, DateUtils.isoDateFormatter.string(from: v.dt)),
                 ("vaccination_certificate_detail_view_data_vaccine_country".localized, v.coDisplayName),
                 ("vaccination_certificate_detail_view_data_vaccine_issuer".localized, v.is),
-                ("vaccination_certificate_detail_view_data_vaccine_identifier".localized, v.ci)
+                ("vaccination_certificate_detail_view_data_vaccine_identifier".localized, v.ciDisplayName)
             ]
         }
         return []

@@ -17,4 +17,8 @@ public extension String {
         }
         return self
     }
+
+    func stripUVCIPrefix() -> String {
+        replacingOccurrences(of: "URN:UVCI:", with: "")
+    }
 }

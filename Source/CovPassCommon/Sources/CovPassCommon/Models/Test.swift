@@ -133,4 +133,9 @@ public extension Test {
     var trDisplayName: String {
         map(key: tr, from: Bundle.commonBundle.url(forResource: "test-result", withExtension: "json")) ?? tr
     }
+
+    /// UVCI without `URN:UVCI:` prefix
+    var ciDisplayName: String {
+        return ci.stripUVCIPrefix()
+    }
 }

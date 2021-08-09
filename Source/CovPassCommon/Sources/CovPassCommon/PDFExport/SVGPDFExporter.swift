@@ -49,7 +49,7 @@ public final class SVGPDFExporter: NSObject, WKNavigationDelegate, SVGPDFExportP
         // Common fields
         svg = svg.replacingOccurrences(of: "$nam", with: certificate.nam.fullName)
         svg = svg.replacingOccurrences(of: "$dob", with: certificate.dobString ?? .placeholder)
-        svg = svg.replacingOccurrences(of: "$ci", with: certificate.uvci)
+        svg = svg.replacingOccurrences(of: "$ci", with: certificate.uvci.stripUVCIPrefix())
 
         // QR code
         let qr = token.vaccinationQRCodeData.generateQRCode(size: CGSize(width: 1000, height: 1000))

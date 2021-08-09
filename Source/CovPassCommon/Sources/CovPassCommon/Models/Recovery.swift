@@ -96,4 +96,9 @@ public extension Recovery {
     var tgDisplayName: String {
         map(key: tg, from: Bundle.commonBundle.url(forResource: "disease-agent-targeted", withExtension: "json")) ?? tg
     }
+
+    /// UVCI without `URN:UVCI:` prefix
+    var ciDisplayName: String {
+        return ci.stripUVCIPrefix()
+    }
 }
