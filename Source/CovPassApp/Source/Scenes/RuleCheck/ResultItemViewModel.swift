@@ -81,6 +81,10 @@ struct ResultItemViewModel: CertificateItemViewModel {
         return "certificate_check_validity_result_valid".localized
     }
 
+    var info2: String? {
+        nil
+    }
+
     var activeTitle: String? { nil }
 
     init(_ result: CertificateResult) {

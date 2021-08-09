@@ -13,6 +13,9 @@ protocol CertificateItemDetailViewModelProtocol {
     var title: String { get }
     var showSubtitle: Bool { get }
     var headline: String { get }
+    var isExpired: Bool { get }
+    var expiresSoonDate: Date? { get }
+    var isInvalid: Bool { get }
     var items: [(String, String)] { get }
     var canExportToPDF: Bool { get }
     func showQRCode()

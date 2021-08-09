@@ -17,6 +17,26 @@ public struct CBORWebToken: Codable {
     public var exp: Date?
     /// the health certificate claim
     public var hcert: HealthCertificateClaim
+    /// true if certificate is invalid, e.g. DSC has been revoked
+    public var invalid: Bool?
+
+    /// True if certificate is expired
+    public var isExpired: Bool {
+        guard let exp = self.exp else { return false }
+        return Date() >= exp
+    }
+
+    /// True if certificate is invalid
+    public var isInvalid: Bool {
+        invalid ?? false
+    }
+
+    /// True if certificate expires soon
+    public var expiresSoon: Bool {
+        guard let exp = self.exp,
+              let expiresSoonDate = Calendar.current.date(byAdding: .day, value: -28, to: exp) else { return false }
+        return Date() >= expiresSoonDate
+    }
 
     enum CodingKeys: String, CodingKey {
         case iss = "1"

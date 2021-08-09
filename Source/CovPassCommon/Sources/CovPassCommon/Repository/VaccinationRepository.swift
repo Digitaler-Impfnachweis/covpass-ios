@@ -62,21 +62,44 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
     }
 
     public func getCertificateList() -> Promise<CertificateList> {
-        return Promise { seal in
-            do {
-                guard let data = try keychain.fetch(KeychainPersistence.certificateListKey) as? Data else {
-                    throw KeychainError.fetchFailed
+        firstly {
+            Promise { seal in
+                do {
+                    guard let data = try keychain.fetch(KeychainPersistence.certificateListKey) as? Data else {
+                        throw KeychainError.fetchFailed
+                    }
+                    let certificate = try JSONDecoder().decode(CertificateList.self, from: data)
+                    seal.fulfill(certificate)
+                } catch {
+                    if case KeychainError.fetchFailed = error {
+                        seal.fulfill(CertificateList(certificates: []))
+                        return
+                    }
+                    throw error
                 }
-                let certificate = try JSONDecoder().decode(CertificateList.self, from: data)
-                seal.fulfill(certificate)
-            } catch {
-                print(error)
-                if case KeychainError.fetchFailed = error {
-                    seal.fulfill(CertificateList(certificates: []))
-                    return
-                }
-                throw error
             }
+        }
+        .then(on: .global()) { list in
+            checkAndInvalidateCertificates(list)
+        }
+    }
+
+    // A certificate gets invalidated when
+    //    - it is expired
+    //    - the DSC has been revoked
+    //    - the entity is invalid
+    private func checkAndInvalidateCertificates(_ list: CertificateList) -> Promise<CertificateList> {
+        Promise { seal in
+            var list = list
+            var checkedCertificates = [ExtendedCBORWebToken]()
+            for var certificate in list.certificates {
+                if (try? checkCertificate(certificate.vaccinationQRCodeData).wait()) == nil {
+                    certificate.vaccinationCertificate.invalid = true
+                }
+                checkedCertificates.append(certificate)
+            }
+            list.certificates = checkedCertificates
+            seal.fulfill(list)
         }
     }
 

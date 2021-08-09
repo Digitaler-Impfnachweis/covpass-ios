@@ -16,6 +16,7 @@
                 <outlet property="chevron" destination="Kff-CU-pga" id="QEp-OI-Vr5"/>
                 <outlet property="icon" destination="nrd-Ac-Jce" id="9TR-Lx-jKw"/>
                 <outlet property="iconView" destination="dOm-kM-w5j" id="zsZ-xx-mIG"/>
+                <outlet property="info2Label" destination="bFO-ft-J9N" id="jLy-8E-dzp"/>
                 <outlet property="infoLabel" destination="2Vh-w9-vTh" id="E1r-Gc-WfQ"/>
                 <outlet property="subtitleLabel" destination="PjE-3t-II4" id="Ctk-Su-dJq"/>
                 <outlet property="titleLabel" destination="Fmi-qZ-kH4" id="fQ2-PY-z1k"/>
@@ -73,6 +74,10 @@
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         </view>
                         <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2Vh-w9-vTh" customClass="PlainLabel" customModule="CovPassUI">
+                            <rect key="frame" x="12" y="50" width="236" height="0.0"/>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        </view>
+                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bFO-ft-J9N" customClass="PlainLabel" customModule="CovPassUI">
                             <rect key="frame" x="12" y="50" width="236" height="0.0"/>
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         </view>

@@ -102,11 +102,47 @@ class VaccinationRepositoryTests: XCTestCase {
     }
 
     func testGetCertificateList() throws {
-        let data = try JSONEncoder().encode(CertificateList(certificates: [], favoriteCertificateId: "1"))
+        // Store one certficate in list
+        let data = try JSONEncoder().encode(
+            CertificateList(
+                certificates: [
+                    ExtendedCBORWebToken(
+                        vaccinationCertificate: try JSONDecoder().decode(CBORWebToken.self, from: Data.json("CBORWebToken")),
+                        vaccinationQRCodeData: CertificateMock.validCertificate
+                    )
+                ],
+                favoriteCertificateId: "1"
+            )
+        )
         try keychain.store(KeychainPersistence.certificateListKey, value: data)
 
+        // Get certificate list
         let list = try sut.getCertificateList().wait()
+
         XCTAssertEqual(list.favoriteCertificateId, "1")
+        XCTAssertEqual(list.certificates.first?.vaccinationCertificate.isInvalid, false)
+    }
+
+    func testGetCertificateListWithInvalidation() throws {
+        // Store one certficate in list
+        let data = try JSONEncoder().encode(
+            CertificateList(
+                certificates: [
+                    ExtendedCBORWebToken(
+                        vaccinationCertificate: try JSONDecoder().decode(CBORWebToken.self, from: Data.json("CBORWebToken")),
+                        vaccinationQRCodeData: CertificateMock.invalidCertificateInvalidSignature
+                    )
+                ],
+                favoriteCertificateId: "1"
+            )
+        )
+        try keychain.store(KeychainPersistence.certificateListKey, value: data)
+
+        // Get certificate list
+        let list = try sut.getCertificateList().wait()
+
+        XCTAssertEqual(list.favoriteCertificateId, "1")
+        XCTAssertEqual(list.certificates.first?.vaccinationCertificate.isInvalid, true)
     }
 
     func testGetCertificateListFailsWithWrongData() throws {

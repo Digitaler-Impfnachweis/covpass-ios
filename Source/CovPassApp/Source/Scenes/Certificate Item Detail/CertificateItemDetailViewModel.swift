@@ -47,6 +47,21 @@ class CertificateItemDetailViewModel: CertificateItemDetailViewModelProtocol {
         return "vaccination_certificate_detail_view_vaccination_headline".localized
     }
 
+    var isExpired: Bool {
+        certificate.vaccinationCertificate.isExpired
+    }
+
+    var expiresSoonDate: Date? {
+        if certificate.vaccinationCertificate.expiresSoon {
+            return certificate.vaccinationCertificate.exp
+        }
+        return nil
+    }
+
+    var isInvalid: Bool {
+        certificate.vaccinationCertificate.isInvalid
+    }
+
     private var dob: String {
         return DateUtils.displayDateOfBirth(dgc)
     }

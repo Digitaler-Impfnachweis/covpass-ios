@@ -21,6 +21,7 @@ class CertificateItemDetailViewController: UIViewController {
     @IBOutlet var buttonStackView: UIStackView!
     @IBOutlet var titleLabel: PlainLabel!
     @IBOutlet var subtitleLabel: PlainLabel!
+    @IBOutlet var hintView: HintView!
     @IBOutlet var qrCodeButton: MainButton!
     @IBOutlet var pdfExportButton: MainButton!
     @IBOutlet var infoLabel1: LinkLabel!
@@ -53,6 +54,7 @@ class CertificateItemDetailViewController: UIViewController {
 
         setupNavigationBar()
         setupHeadline()
+        setupHintView()
         setupList()
         setupButtons()
         setupInfo()
@@ -76,6 +78,33 @@ class CertificateItemDetailViewController: UIViewController {
         subtitleLabel.layoutMargins = .init(top: .zero, left: .space_24, bottom: .zero, right: .space_24)
         subtitleLabel.isHidden = !viewModel.showSubtitle
         stackView.setCustomSpacing(.space_24, after: subtitleLabel)
+    }
+
+    private func setupHintView() {
+        hintView.isHidden = true
+        hintView.iconView.image = .warning
+        hintView.containerView.backgroundColor = .infoBackground
+        hintView.containerView?.layer.borderColor = UIColor.infoAccent.cgColor
+        stackView.setCustomSpacing(.space_24, after: hintView)
+        if viewModel.isExpired {
+            hintView.isHidden = false
+            hintView.titleLabel.attributedText = "certificate_expired_detail_view_note_title".localized.styledAs(.header_3)
+            hintView.bodyLabel.attributedText = "certificate_expired_detail_view_note_message".localized.styledAs(.body)
+        }
+        if let date = viewModel.expiresSoonDate {
+            hintView.isHidden = false
+            hintView.iconView.image = .activity
+            hintView.titleLabel.attributedText = String(format: "certificate_expires_detail_view_note_title".localized, DateUtils.displayDateFormatter.string(from: date), DateUtils.displayTimeFormatter.string(from: date)).styledAs(.header_3)
+            hintView.bodyLabel.attributedText = "certificate_expires_detail_view_note_message".localized.styledAs(.body)
+            hintView.containerView.backgroundColor = .onBackground50
+            hintView.containerView.layer.borderColor = UIColor.onBrandBase.cgColor
+        }
+        if viewModel.isInvalid {
+            hintView.isHidden = false
+            hintView.titleLabel.attributedText = "certificate_invalid_detail_view_note_title".localized.styledAs(.header_3)
+            hintView.bodyLabel.attributedText = "certificate_invalid_detail_view_note_message".localized.styledAs(.body)
+
+        }
     }
 
     private func setupList() {

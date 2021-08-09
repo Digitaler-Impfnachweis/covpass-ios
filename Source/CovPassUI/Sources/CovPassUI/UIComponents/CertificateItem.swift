@@ -16,6 +16,7 @@ public class CertificateItem: XibView {
     @IBOutlet public var titleLabel: PlainLabel!
     @IBOutlet public var subtitleLabel: PlainLabel!
     @IBOutlet public var infoLabel: PlainLabel!
+    @IBOutlet public var info2Label: PlainLabel!
     @IBOutlet public var activeView: UIView!
     @IBOutlet public var activeLabel: UILabel!
     @IBOutlet public var chevron: UIImageView!
@@ -48,6 +49,8 @@ public class CertificateItem: XibView {
         titleLabel.attributedText = viewModel.title.styledAs(.header_3)
         subtitleLabel.attributedText = viewModel.subtitle.styledAs(.body)
         infoLabel.attributedText = viewModel.info.styledAs(.body).colored(.onBackground70)
+        info2Label.attributedText = viewModel.info2?.styledAs(.header_3).lineHeight(20)
+        info2Label.isHidden = viewModel.info2 == nil
         activeLabel.attributedText = viewModel.activeTitle?.styledAs(.body).colored(.onBackground70)
         activeView.isHidden = viewModel.activeTitle == nil
         chevron.tintColor = .brandAccent

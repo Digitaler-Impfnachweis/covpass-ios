@@ -349,6 +349,18 @@
 
 "recovery_certificate_overview_action_button_title" = "Aktuellen QR-Code anzeigen";
 
+"certificates_overview_expired_title" = "Zertifikat abgelaufen";
+
+"certificates_overview_expired_message" = "Das Ablaufdatum Ihrer Zertifikate wurde überschritten. Bitte bemühen Sie sich darum, einen neuen digitalen Nachweis ausstellen zu lassen.";
+
+"certificates_overview_expired_action_button_title" = "Neues Zertifikat hinzufügen";
+
+"certificates_overview_invalid_title" = "Zertifikat ungültig";
+
+"certificates_overview_invalid_message" = "Das Zertifikat wurde von der ausstellenden Behörde zurückgerufen. Bitte bemühen Sie sich darum, einen neuen digitalen Nachweis ausstellen zu lassen.";
+
+"certificates_overview_invalid_action_button_title" = "Neues Zertifikat hinzufügen";
+
 "certificates_overview_personal_data_title" = "Persönliche Daten";
 
 "certificates_overview_personal_data_name" = "Name, Vorname / Name, first name";
@@ -358,6 +370,12 @@
 "certificates_overview_all_certificates_title" = "EU-Zertifikate";
 
 "certificates_overview_currently_uses_certificate_note" = "Aktuell verwendetes Zertifikat";
+
+"certificates_overview_expires_soon_certificate_note" = "Zertifikat läuft bald ab";
+
+"certificates_overview_expired_certificate_note" = "Zertifikat abgelaufen";
+
+"certificates_overview_invalid_certificate_note" = "Zertifikat ungültig";
 
 "certificates_overview_vaccination_certificate_title" = "Impfzertifikat";
 
@@ -421,6 +439,12 @@
 
 "vaccination_certificate_detail_view_data_vaccine_identifier" = "Zertifikatkennung / Unique certificate identifier";
 
+"vaccination_certificate_detail_view_data_expiry_date" = "Technisches Ablaufdatum / Technical expiry date";
+
+"vaccination_certificate_detail_view_data_expiry_date_message" = "Gültig bis %@";
+
+"vaccination_certificate_detail_view_data_expiry_date_note" = "Bitte bemühen Sie sich rechtzeitig darum, einen neuen digitalen Nachweis ausstellen zu lassen.";
+
 "vaccination_certificate_detail_view_data_vaccine_note_de" = "Diese Bescheinigung ist kein Reisedokument. Die wissenschaftlichen Erkenntnisse zu COVID-19 in den Bereichen Impfung, Testung und Genesung entwickeln sich fortlaufend weiter, auch im Hinblick auf neue besorgniserregende Virusvarianten. Bitte informieren Sie sich vor Reiseantritt über die am Zielort geltenden Gesundheitsmaßnahmen und entsprechenden Beschränkungen.\n\nInformationen über die in den jeweiligen EU-Ländern geltenden Einreisebestimmungen finden Sie unter #https://reopen.europa.eu::https://reopen.europa.eu#.";
 
 "vaccination_certificate_detail_view_data_vaccine_note_en" = "This certificate is not a travel document. The scientific findings about Covid-19 and vaccination, testing and recovery are continuing to evolve, which includes findings about new, concerning virus variants. \n\nPlease inform yourself about the public-health measures and corresponding restrictions at your travel destination before you travel. You can find information about the travel restrictions applicable in each EU country at #https://reopen.europa.eu::https://reopen.europa.eu#.";
@@ -465,6 +489,12 @@
 
 "test_certificate_detail_view_data_test_identifier" = "Zertifikatkennung / Unique certificate identifier";
 
+"test_certificate_detail_view_data_expiry_date" = "Technisches Ablaufdatum / Technical expiry date";
+
+"text_certificate_detail_view_data_expiry_date_message" = "Gültig bis %@";
+
+"test_certificate_detail_view_data_expiry_date_note" = "Bitte bemühen Sie sich rechtzeitig darum, einen neuen digitalen Nachweis ausstellen zu lassen.";
+
 "test_certificate_detail_view_data_test_note_de" = "Diese Bescheinigung ist kein Reisedokument. Die wissenschaftlichen Erkenntnisse zu COVID-19 in den Bereichen Impfung, Testung und Genesung entwickeln sich fortlaufend weiter, auch im Hinblick auf neue besorgniserregende Virusvarianten. Bitte informieren Sie sich vor Reiseantritt über die am Zielort geltenden Gesundheitsmaßnahmen und entsprechenden Beschränkungen.\n\nInformationen über die in den jeweiligen EU-Ländern geltenden Einreisebestimmungen finden Sie unter #https://reopen.europa.eu::https://reopen.europa.eu#.";
 
 "test_certificate_detail_view_data_test_note_en" = "This certificate is not a travel document. The scientific findings about Covid-19 and vaccination, testing and recovery are continuing to evolve, which includes findings about new, concerning virus variants. \n\nPlease inform yourself about the public-health measures and corresponding restrictions at your travel destination before you travel. You can find information about the travel restrictions applicable in each EU country at #https://reopen.europa.eu::https://reopen.europa.eu#.";
@@ -499,6 +529,12 @@
 
 "recovery_certificate_detail_view_data_identifier" = "Zertifikatkennung / Unique certificate identifier";
 
+"recovery_certificate_detail_view_data_expiry_date" = "Technisches Ablaufdatum / Technical expiry date";
+
+"recovery_certificate_detail_view_data_expiry_date_message" = "Gültig bis %@";
+
+"recovery_certificate_detail_view_data_expiry_date_note" = "Bitte bemühen Sie sich rechtzeitig darum, einen neuen digitalen Nachweis ausstellen zu lassen.";
+
 "recovery_certificate_detail_view_data_test_note_de" = "Diese Bescheinigung ist kein Reisedokument. Die wissenschaftlichen Erkenntnisse zu COVID-19 in den Bereichen Impfung, Testung und Genesung entwickeln sich fortlaufend weiter, auch im Hinblick auf neue besorgniserregende Virusvarianten. Bitte informieren Sie sich vor Reiseantritt über die am Zielort geltenden Gesundheitsmaßnahmen und entsprechenden Beschränkungen.\n\nInformationen über die in den jeweiligen EU-Ländern geltenden Einreisebestimmungen finden Sie unter #https://reopen.europa.eu::https://reopen.europa.eu#.";
 
 "recovery_certificate_detail_view_data_test_note_en" = "This certificate is not a travel document. The scientific findings about Covid-19 and vaccination, testing and recovery are continuing to evolve, which includes findings about new, concerning virus variants. \n\nPlease inform yourself about the public-health measures and corresponding restrictions at your travel destination before you travel. You can find information about the travel restrictions applicable in each EU country at #https://reopen.europa.eu::https://reopen.europa.eu#.";
@@ -514,6 +550,33 @@
 "recovery_certificate_detail_view_qrcode_screen_message" = "Gültig bis %@";
 
 "recovery_certificate_detail_view_qrcode_screen_action_button_title" = "Schließen";
+
+"certificate_expires_detail_view_note_title" = "Zertifikat läuft am %@ um %@ ab";
+
+"certificate_expires_detail_view_note_message" = "Bitte bemühen Sie sich rechtzeitig darum, einen neuen digitalen Nachweis ausstellen zu lassen.";
+
+"certificate_invalid_detail_view_note_title" = "Zertifikat ungültig";
+
+"certificate_invalid_detail_view_note_message" = "Das Zertifikat wurde von der ausstellenden Behörde zurückgerufen. Bitte bemühen Sie sich darum, einen neuen digitalen Nachweis ausstellen zu lassen.";
+
+"certificate_expired_detail_view_note_title" = "Zertifikat abgelaufen";
+
+"certificate_expired_detail_view_note_message" = "Das Ablaufdatum wurde überschritten. Bitte bemühen Sie sich darum, einen neuen digitalen Nachweis ausstellen zu lassen.";
+
+
+/********** print certificate **********/
+
+"certificate_create_pdf_headline" = "EU-Ausdruck erstellen";
+
+"certificate_create_pdf_first_list_item" = "Sie können das Zertifikat als PDF-Dokument speichern. Die Speicherung ist freiwillig. Auf das PDF-Dokument haben zunächst nur Sie Zugriff.";
+
+"certificate_create_pdf_second_list_item" = "Beachten Sie, dass das PDF-Dokument sensible Informationen enthält. Wir empfehlen Ihnen, hiermit sorgsam umzugehen und es nur Personen vorzuzeigen, denen Sie vertrauen und die zur Prüfung des Nachweise berechtigt sind.";
+
+"certificate_create_pdf_third_list_item" = "Wir empfehlen Ihnen, das PDF-Dokument nicht zu veröffentlichen und nicht per E-Mail zu versenden oder über andere Apps zu teilen.";
+
+"certificate_create_pdf_list_button" = "Weiter";
+
+"certificate_share_pdf_title_android" = "Teilen über";
 
 
 /********** print certificate **********/
@@ -579,6 +642,12 @@
 "error_scan_qrcode_without_seal_message" = "Möglicherweise wurde das Zertifikat von einer nicht autorisierten Einrichtung erstellt oder die App ist nicht auf dem aktuellen Stand. Im zuletzt genannten Fall stellen Sie eine Verbindung mit dem Internet her und versuchen Sie es später erneut.";
 
 "error_scan_qrcode_without_seal_button_title" = "OK";
+
+"error_validity_check_certificates_title" = "Überprüfen Sie die Gültigkeit Ihrer Zertifikate";
+
+"error_validity_check_certificates_message" = "Die Gültigkeit Ihrer Zertifikate läuft bald ab oder ist bereits abgelaufen. Bitte bemühen Sie sich darum, einen neuen digitalen Nachweis ausstellen zu lassen.";
+
+"error_validity_check_certificates_button_title" = "OK";
 
 
 /********** dialog: duplicate certificate **********/

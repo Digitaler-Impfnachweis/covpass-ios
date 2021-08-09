@@ -16,6 +16,7 @@ public class QRContainerView: XibView {
     @IBOutlet public var imageView: UIImageView!
     @IBOutlet public var titleLabel: UILabel!
     @IBOutlet public var subtitleLabel: UILabel!
+    @IBOutlet public var overlay: UIView!
 
     // MARK: - Properties
 
@@ -38,6 +39,12 @@ public class QRContainerView: XibView {
     }
 
     public var subtitle: String? {
+        didSet {
+            updateViews()
+        }
+    }
+
+    public var showOverlay: Bool = false {
         didSet {
             updateViews()
         }
@@ -70,5 +77,7 @@ public class QRContainerView: XibView {
 
         subtitleLabel.attributedText = subtitle?.styledAs(.body).colored(.neutralBlack)
         subtitleLabel.isHidden = subtitleLabel.attributedText.isNilOrEmpty
+
+        overlay.isHidden = !showOverlay
     }
 }

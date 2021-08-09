@@ -19,6 +19,8 @@ public enum DateUtils {
 
     public static var displayDateFormatter = dateFormatter(format: "dd.MM.yyyy")
 
+    public static var displayTimeFormatter = dateFormatter(format: "HH:mm")
+
     public static var displayDateTimeFormatter = dateFormatter(format: "dd.MM.yyyy, HH:mm")
 
     private static func dateFormatter(format: String) -> DateFormatter {

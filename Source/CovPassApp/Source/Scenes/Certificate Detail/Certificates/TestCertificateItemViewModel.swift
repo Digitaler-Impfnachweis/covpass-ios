@@ -20,19 +20,31 @@ struct TestCertificateItemViewModel: CertificateItemViewModel {
     private let active: Bool
 
     var icon: UIImage {
-        .iconTest
+        if certificate.vaccinationCertificate.isExpired || certificate.vaccinationCertificate.isInvalid {
+            return .expired
+        }
+        if certificate.vaccinationCertificate.expiresSoon {
+            return .activity
+        }
+        return .iconTest
     }
 
     var iconColor: UIColor {
-        if !active {
+        if !active || certificate.vaccinationCertificate.isExpired || certificate.vaccinationCertificate.isInvalid {
             return .onBackground40
+        }
+        if dgc.v?.first?.fullImmunization ?? true == false {
+            return .brandAccent
         }
         return .neutralWhite
     }
 
     var iconBackgroundColor: UIColor {
-        if !active {
+        if !active || certificate.vaccinationCertificate.isExpired || certificate.vaccinationCertificate.isInvalid {
             return .onBackground20
+        }
+        if dgc.v?.first?.fullImmunization ?? true == false {
+            return .brandAccent20
         }
         return .brandAccentPurple
     }
@@ -53,6 +65,19 @@ struct TestCertificateItemViewModel: CertificateItemViewModel {
             return String(format: "certificates_overview_test_certificate_date".localized, DateUtils.displayDateTimeFormatter.string(from: t.sc))
         }
         return ""
+    }
+
+    var info2: String? {
+        if certificate.vaccinationCertificate.isExpired {
+            return "certificates_overview_expired_certificate_note".localized
+        }
+        if certificate.vaccinationCertificate.expiresSoon {
+            return "certificates_overview_expires_soon_certificate_note".localized
+        }
+        if certificate.vaccinationCertificate.isInvalid {
+            return "certificates_overview_invalid_certificate_note".localized
+        }
+        return nil
     }
 
     var activeTitle: String? {

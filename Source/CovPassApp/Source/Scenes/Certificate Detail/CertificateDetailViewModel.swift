@@ -45,6 +45,9 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
     }
 
     var immunizationIcon: UIImage? {
+        if selectedCertificate?.vaccinationCertificate.isExpired ?? false || selectedCertificate?.vaccinationCertificate.isInvalid ?? false {
+            return .statusExpired
+        }
         if selectedCertificate?.vaccinationCertificate.hcert.dgc.r != nil {
             return .statusFull
         }
@@ -55,6 +58,12 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
     }
 
     var immunizationTitle: String {
+        if selectedCertificate?.vaccinationCertificate.isExpired ?? false {
+            return "certificate_expired_detail_view_note_title".localized
+        }
+        if selectedCertificate?.vaccinationCertificate.isInvalid ?? false {
+            return "certificate_invalid_detail_view_note_title".localized
+        }
         if let r = selectedCertificate?.vaccinationCertificate.hcert.dgc.r?.first {
             if Date() < r.df {
                 return String(format: "recovery_certificate_overview_valid_from_title".localized, DateUtils.displayDateFormatter.string(from: r.df))
@@ -77,6 +86,16 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
         }
 
         return String(format: "vaccination_certificate_overview_incomplete_title".localized, 1, 2)
+    }
+
+    var immunizationBody: String {
+        if selectedCertificate?.vaccinationCertificate.isExpired ?? false {
+            return "certificates_overview_expired_message".localized
+        }
+        if selectedCertificate?.vaccinationCertificate.isInvalid ?? false {
+            return "certificates_overview_invalid_message".localized
+        }
+        return "recovery_certificate_overview_message".localized
     }
 
     var items: [CertificateItem] {

@@ -20,11 +20,17 @@ struct VaccinationCertificateItemViewModel: CertificateItemViewModel {
     private let active: Bool
 
     var icon: UIImage {
-        dgc.v?.first?.fullImmunization ?? false ? .statusFullDetail : .statusPartialDetail
+        if certificate.vaccinationCertificate.isExpired || certificate.vaccinationCertificate.isInvalid {
+            return .expired
+        }
+        if certificate.vaccinationCertificate.expiresSoon {
+            return .activity
+        }
+        return dgc.v?.first?.fullImmunization ?? false ? .statusFullDetail : .statusPartialDetail
     }
 
     var iconColor: UIColor {
-        if !active {
+        if !active || certificate.vaccinationCertificate.isExpired || certificate.vaccinationCertificate.isInvalid {
             return .onBackground40
         }
         if dgc.v?.first?.fullImmunization ?? true == false {
@@ -34,7 +40,7 @@ struct VaccinationCertificateItemViewModel: CertificateItemViewModel {
     }
 
     var iconBackgroundColor: UIColor {
-        if !active {
+        if !active || certificate.vaccinationCertificate.isExpired || certificate.vaccinationCertificate.isInvalid {
             return .onBackground20
         }
         if dgc.v?.first?.fullImmunization ?? true == false {
@@ -59,6 +65,19 @@ struct VaccinationCertificateItemViewModel: CertificateItemViewModel {
             return String(format: "certificates_overview_vaccination_certificate_date".localized, DateUtils.displayDateFormatter.string(from: v.dt))
         }
         return ""
+    }
+
+    var info2: String? {
+        if certificate.vaccinationCertificate.isExpired {
+            return "certificates_overview_expired_certificate_note".localized
+        }
+        if certificate.vaccinationCertificate.expiresSoon {
+            return "certificates_overview_expires_soon_certificate_note".localized
+        }
+        if certificate.vaccinationCertificate.isInvalid {
+            return "certificates_overview_invalid_certificate_note".localized
+        }
+        return nil
     }
 
     var activeTitle: String? {

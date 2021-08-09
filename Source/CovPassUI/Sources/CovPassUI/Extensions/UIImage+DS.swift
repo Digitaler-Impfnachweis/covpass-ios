@@ -162,6 +162,15 @@ public extension UIImage {
     @ImageLoader(name: "error")
     private(set) static var error
 
+    @ImageLoader(name: "expired")
+    private(set) static var expired
+
+    @ImageLoader(name: "activity")
+    private(set) static var activity
+
+    @ImageLoader(name: "status_expired")
+    private(set) static var statusExpired
+
     @ImageLoader(name: "info_hui")
     private(set) static var info
 }

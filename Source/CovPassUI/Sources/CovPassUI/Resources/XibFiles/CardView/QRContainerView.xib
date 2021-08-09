@@ -11,6 +11,7 @@
             <connections>
                 <outlet property="iconView" destination="ALc-6G-MIJ" id="78L-ws-xmM"/>
                 <outlet property="imageView" destination="PYE-Qs-ewR" id="nw2-td-lBf"/>
+                <outlet property="overlay" destination="cic-hw-Of0" id="qrm-tV-C9z"/>
                 <outlet property="subtitleLabel" destination="MfU-7S-Aoc" id="UtG-Ua-8Fe"/>
                 <outlet property="titleLabel" destination="Hih-1b-LF2" id="PNQ-dF-rRX"/>
             </connections>
@@ -50,14 +51,35 @@
                         <constraint firstAttribute="width" secondItem="PYE-Qs-ewR" secondAttribute="height" constant="1" id="U0W-Xz-PSJ"/>
                     </constraints>
                 </imageView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cic-hw-Of0">
+                    <rect key="frame" x="12" y="109" width="390" height="389"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="status_expired" translatesAutoresizingMaskIntoConstraints="NO" id="1II-Wx-0ga">
+                            <rect key="frame" x="157.5" y="157" width="75" height="75"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="75" id="4cg-mX-rwP"/>
+                                <constraint firstAttribute="width" constant="75" id="Qyh-lB-Hbt"/>
+                            </constraints>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="0.84999999999999998" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="1II-Wx-0ga" firstAttribute="centerY" secondItem="cic-hw-Of0" secondAttribute="centerY" id="Bba-Cu-KNE"/>
+                        <constraint firstItem="1II-Wx-0ga" firstAttribute="centerX" secondItem="cic-hw-Of0" secondAttribute="centerX" id="gBA-xY-3f2"/>
+                    </constraints>
+                </view>
             </subviews>
             <constraints>
                 <constraint firstItem="GdT-D2-fPq" firstAttribute="top" secondItem="Gyu-2q-STL" secondAttribute="top" constant="12" id="5KH-Dk-fZN"/>
+                <constraint firstItem="cic-hw-Of0" firstAttribute="centerX" secondItem="PYE-Qs-ewR" secondAttribute="centerX" id="Cch-QV-MB4"/>
                 <constraint firstItem="ALc-6G-MIJ" firstAttribute="top" secondItem="Gyu-2q-STL" secondAttribute="top" constant="20" id="E4H-Fq-HRN"/>
+                <constraint firstItem="cic-hw-Of0" firstAttribute="width" secondItem="PYE-Qs-ewR" secondAttribute="width" id="NgG-Qm-hew"/>
                 <constraint firstItem="PYE-Qs-ewR" firstAttribute="top" secondItem="GdT-D2-fPq" secondAttribute="bottom" constant="12" id="PP4-M9-jWA"/>
                 <constraint firstItem="GdT-D2-fPq" firstAttribute="leading" secondItem="ALc-6G-MIJ" secondAttribute="trailing" id="U8y-Zr-fyZ"/>
                 <constraint firstItem="PYE-Qs-ewR" firstAttribute="leading" secondItem="Gyu-2q-STL" secondAttribute="leading" constant="12" id="UXH-ep-ahR"/>
+                <constraint firstItem="cic-hw-Of0" firstAttribute="height" secondItem="PYE-Qs-ewR" secondAttribute="height" id="YOw-Rh-6T6"/>
                 <constraint firstAttribute="bottom" secondItem="PYE-Qs-ewR" secondAttribute="bottom" constant="12" id="j2r-03-SIA"/>
+                <constraint firstItem="cic-hw-Of0" firstAttribute="centerY" secondItem="PYE-Qs-ewR" secondAttribute="centerY" id="jL4-qL-tkH"/>
                 <constraint firstAttribute="trailing" secondItem="GdT-D2-fPq" secondAttribute="trailing" constant="12" id="wbS-Hu-1Wx"/>
                 <constraint firstItem="ALc-6G-MIJ" firstAttribute="leading" secondItem="Gyu-2q-STL" secondAttribute="leading" constant="12" id="yVz-Eb-tAm"/>
                 <constraint firstAttribute="trailing" secondItem="PYE-Qs-ewR" secondAttribute="trailing" constant="12" id="zhc-Yu-aS3"/>
@@ -67,4 +89,7 @@
             <point key="canvasLocation" x="-623.1884057971015" y="-1045.3125"/>
         </view>
     </objects>
+    <resources>
+        <image name="status_expired" width="32" height="32"/>
+    </resources>
 </document>

@@ -42,6 +42,9 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
     }
 
     var backgroundColor: UIColor {
+        if token.vaccinationCertificate.isExpired || token.vaccinationCertificate.isInvalid {
+            return .onBackground40
+        }
         if certificate.r != nil {
             return .brandAccentBlue
         }
@@ -62,6 +65,15 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
     }
 
     var subtitle: String {
+        if token.vaccinationCertificate.isExpired {
+            return "certificates_overview_expired_certificate_note".localized
+        }
+        if token.vaccinationCertificate.expiresSoon {
+            return "certificates_overview_expires_soon_certificate_note".localized
+        }
+        if token.vaccinationCertificate.isInvalid {
+            return "certificates_overview_invalid_certificate_note".localized
+        }
         if let r = certificate.r?.first {
             if Date() < r.df {
                 return String(format: "certificates_overview_recovery_certificate_valid_from_date".localized, DateUtils.displayDateFormatter.string(from: r.df))
@@ -95,6 +107,10 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
 
     var isFavorite: Bool {
         certificateIsFavorite
+    }
+
+    var isExpired: Bool {
+        token.vaccinationCertificate.isExpired || token.vaccinationCertificate.isInvalid
     }
 
     // Hide favorite button if this certificate is the only card that is shown

@@ -89,7 +89,7 @@ class CertificateDetailViewController: UIViewController {
         immunizationView.bottomBorder.isHidden = true
         immunizationView.image = viewModel.immunizationIcon
         immunizationView.attributedTitleText = viewModel.immunizationTitle.styledAs(.header_3)
-        immunizationView.attributedBodyText = "recovery_certificate_overview_message".localized.styledAs(.body).colored(.onBackground70)
+        immunizationView.attributedBodyText = viewModel.immunizationBody.styledAs(.body).colored(.onBackground70)
         immunizationView.layoutMargins.bottom = .space_24
 
         immunizationButton.title = "recovery_certificate_overview_action_button_title".localized

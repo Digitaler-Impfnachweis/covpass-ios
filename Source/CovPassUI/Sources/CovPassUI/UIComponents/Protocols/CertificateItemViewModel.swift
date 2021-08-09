@@ -17,5 +17,6 @@ public protocol CertificateItemViewModel {
     var title: String { get }
     var subtitle: String { get }
     var info: String { get }
+    var info2: String? { get }
     var activeTitle: String? { get }
 }
