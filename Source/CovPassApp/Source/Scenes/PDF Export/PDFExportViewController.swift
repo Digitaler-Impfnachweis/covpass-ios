@@ -56,7 +56,7 @@ class PDFExportViewController: UIViewController {
     }
 
     private func configureText() {
-        exportExplanationsView.attributedBodyText = viewModel.disclaimerText
+        exportExplanationsView.attributedBodyText = viewModel.disclaimerText.styledAs(.body)
         exportExplanationsView.bottomBorder.isHidden = true
     }
 
