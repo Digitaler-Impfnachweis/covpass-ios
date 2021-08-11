@@ -33,6 +33,11 @@ class StringFilenameTests: XCTestCase {
         let referenceDir = reference.standardizedFileURL.deletingLastPathComponent()
         XCTAssertEqual(tempDir.absoluteString, referenceDir.absoluteString)
 
+        // path traversal if not escaped
+        let reference2 = tempDir.appendingPathComponent("../file.txt")
+        let referenceDir2 = reference2.standardizedFileURL.deletingLastPathComponent()
+        XCTAssertNotEqual(tempDir.absoluteString, referenceDir2.absoluteString)
+
         // check if all escaped file names stay in `tempDir`
         BLNS.testStrings.forEach { string in
             let checkFile = tempDir.appendingPathComponent(string.sanitizedFileName)
