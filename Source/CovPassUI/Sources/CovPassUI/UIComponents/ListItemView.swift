@@ -25,20 +25,48 @@ public class ListItemView: XibView {
 
     public var action: (() -> Void)?
 
+    private var observation: [NSKeyValueObservation]?
+
     // MARK: - Lifecycle
 
     override public func initView() {
         super.initView()
         contentView?.layoutMargins = .init(top: .space_12, left: .space_24, bottom: .space_12, right: .space_24)
         backgroundColor = .neutralWhite
-        textLabel.text = ""
+        textLabel.text = nil
         imageView.image = .chevronRight
         seperatorView.backgroundColor = .onBackground20
+        setupAccessibility()
     }
 
     // MARK: - Methods
 
     @IBAction func didTapButton() {
         action?()
+    }
+}
+
+extension ListItemView {
+
+    public override var accessibilityLabel: String? {
+        didSet {
+            internalButton.accessibilityLabel = accessibilityLabel
+        }
+    }
+
+    private func setupAccessibility() {
+        // don't read out the icon
+        accessibilityElements = [internalButton!]
+
+        // `textLabel` defines `accessibilityLabel`
+        let obs1 = textLabel.observe(\UILabel.text, options: .new) { [unowned self] label, change in
+            self.accessibilityLabel = label.text
+            self.internalButton.accessibilityLabel = label.text
+        }
+        let obs2 = textLabel.observe(\UILabel.attributedText, options: .new) { [unowned self] label, change in
+            self.accessibilityLabel = label.attributedText?.string
+            self.internalButton.accessibilityLabel = label.attributedText?.string
+        }
+        observation = [obs1, obs2]
     }
 }
