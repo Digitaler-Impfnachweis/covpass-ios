@@ -38,6 +38,19 @@ public class OnboardingPageViewController: UIViewController {
         configureImageView()
         configureHeadline()
         configureParagraphView()
+
+        accessibilityLabel = headline.attributedText?.string
+    }
+
+    public override var accessibilityElements: [Any]? {
+        get {
+            let elements = [headline, descriptionText].compactMap({ $0 })
+            assert(!elements.isEmpty, "No accessibilityElements! View not loaded?")
+            return elements
+        }
+        set {
+            self.accessibilityElements = newValue
+        }
     }
 
     // MARK: - Methods
