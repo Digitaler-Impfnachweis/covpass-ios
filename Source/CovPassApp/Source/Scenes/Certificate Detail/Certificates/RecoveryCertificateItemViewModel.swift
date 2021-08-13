@@ -52,10 +52,12 @@ struct RecoveryCertificateItemViewModel: CertificateItemViewModel {
     var title: String {
         return "certificates_overview_recovery_certificate_title".localized
     }
+    var titleAccessibilityLabel: String? { title }
 
     var subtitle: String {
         return "certificates_overview_recovery_certificate_message".localized
     }
+    var subtitleAccessibilityLabel: String? { subtitle }
 
     var info: String {
         if let r = dgc.r?.first {
@@ -65,6 +67,10 @@ struct RecoveryCertificateItemViewModel: CertificateItemViewModel {
             return String(format: "certificates_overview_recovery_certificate_valid_until_date".localized, DateUtils.displayDateFormatter.string(from: r.du))
         }
         return ""
+    }
+    var infoAccessibilityLabel: String? {
+        #warning("TODO")
+        return info
     }
 
     var info2: String? {
@@ -79,6 +85,7 @@ struct RecoveryCertificateItemViewModel: CertificateItemViewModel {
         }
         return nil
     }
+    var info2AccessibilityLabel: String? { info2 }
 
     var activeTitle: String? {
         active ? "certificates_overview_currently_uses_certificate_note".localized : nil

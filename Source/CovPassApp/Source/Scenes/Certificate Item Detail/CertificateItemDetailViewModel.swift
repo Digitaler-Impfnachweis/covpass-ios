@@ -94,7 +94,7 @@ class CertificateItemDetailViewModel: CertificateItemDetailViewModelProtocol {
                 ContentItem("test_certificate_detail_view_data_test_name".localized, t.nm ?? ""),
                 ContentItem("test_certificate_detail_view_data_test_manufactur".localized, t.maDisplayName ?? ""),
                 ContentItem("test_certificate_detail_view_data_test_date_and_time".localized, DateUtils.displayIsoDateTimeFormatter.string(from: t.sc),
-                            accessibilityLabel(for: t.sc, label: "test_certificate_detail_view_data_test_date_and_time".localized)),
+                            accessibilityLabel(for: t.sc, label: "test_certificate_detail_view_data_test_date_and_time".localized, includesTime: true)),
                 ContentItem("test_certificate_detail_view_data_test_results".localized, t.trDisplayName),
                 ContentItem("test_certificate_detail_view_data_test_centre".localized, t.tc),
                 ContentItem("test_certificate_detail_view_data_test_country".localized, t.co),
@@ -186,11 +186,12 @@ class CertificateItemDetailViewModel: CertificateItemDetailViewModelProtocol {
 
     private func accessibilityLabel(for dateString: String, label: String) -> String {
         let dateStr = DateUtils.audioDate(dateString) ?? dateString
-        return "\(label) \(dateStr)"
+        return "\(label)\n\(dateStr)"
     }
 
-    private func accessibilityLabel(for date: Date, label: String) -> String {
-        let dobString = DateUtils.audioDateFormatter.string(from: date)
-        return "\(label) \(dobString)"
+    private func accessibilityLabel(for date: Date, label: String, includesTime: Bool = false) -> String {
+        let formatter = includesTime ? DateUtils.displayDateTimeFormatter : DateUtils.audioDateFormatter
+        let dateStr = formatter.string(from: date)
+        return "\(label)\n\(dateStr)"
     }
 }

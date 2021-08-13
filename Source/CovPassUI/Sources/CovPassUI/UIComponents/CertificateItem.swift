@@ -46,13 +46,23 @@ public class CertificateItem: XibView {
         icon.image = viewModel.icon.withRenderingMode(.alwaysTemplate)
         icon.tintColor = viewModel.iconColor
         iconView.backgroundColor = viewModel.iconBackgroundColor
+
         titleLabel.attributedText = viewModel.title.styledAs(.header_3)
+        titleLabel.accessibilityLabel = viewModel.titleAccessibilityLabel
+
         subtitleLabel.attributedText = viewModel.subtitle.styledAs(.body)
+        subtitleLabel.accessibilityLabel = viewModel.subtitleAccessibilityLabel
+
         infoLabel.attributedText = viewModel.info.styledAs(.body).colored(.onBackground70)
+        infoLabel.accessibilityLabel = viewModel.infoAccessibilityLabel
+
         info2Label.attributedText = viewModel.info2?.styledAs(.header_3).lineHeight(20)
         info2Label.isHidden = viewModel.info2 == nil
+        info2Label.accessibilityLabel = viewModel.info2AccessibilityLabel
+
         activeLabel.attributedText = viewModel.activeTitle?.styledAs(.body).colored(.onBackground70)
         activeView.isHidden = viewModel.activeTitle == nil
+
         chevron.tintColor = .brandAccent
 
         addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onPressItem)))

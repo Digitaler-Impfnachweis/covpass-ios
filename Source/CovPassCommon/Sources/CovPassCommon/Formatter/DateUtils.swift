@@ -17,7 +17,14 @@ public enum DateUtils {
         df.timeStyle = .none
         return df
     }()
-    
+
+    public static var audioDateTimeFormatter: DateFormatter = {
+        let df = DateFormatter()
+        df.dateStyle = .long
+        df.timeStyle = .long
+        return df
+    }()
+
     public static let isoDateFormatter = dateFormatter(format: "yyyy-MM-dd")
 
     public static let isoDateTimeFormatter = dateFormatter(format: "yyyy-MM-dd'T'HH:mm:ssZ")

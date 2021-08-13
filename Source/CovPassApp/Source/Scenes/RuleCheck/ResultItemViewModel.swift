@@ -60,6 +60,7 @@ struct ResultItemViewModel: CertificateItemViewModel {
     var title: String {
         result.certificate.vaccinationCertificate.hcert.dgc.nam.fullName
     }
+    var titleAccessibilityLabel: String? { title }
 
     var subtitle: String {
         if result.certificate.vaccinationCertificate.hcert.dgc.t?.isEmpty == false {
@@ -70,6 +71,7 @@ struct ResultItemViewModel: CertificateItemViewModel {
         }
         return "certificate_check_validity_vaccination".localized
     }
+    var subtitleAccessibilityLabel: String? { subtitle }
 
     var info: String {
         if result.state == .open {
@@ -80,10 +82,10 @@ struct ResultItemViewModel: CertificateItemViewModel {
         }
         return "certificate_check_validity_result_valid".localized
     }
+    var infoAccessibilityLabel: String? { info }
 
-    var info2: String? {
-        nil
-    }
+    var info2: String? { nil }
+    var info2AccessibilityLabel: String? { nil }
 
     var activeTitle: String? { nil }
 
