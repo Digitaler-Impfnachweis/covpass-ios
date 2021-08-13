@@ -149,6 +149,14 @@ class CertificateItemDetailViewModel: CertificateItemDetailViewModelProtocol {
         }
     }
 
+    func showQRCode() {
+        router.showCertificate(for: certificate).cauterize()
+    }
+
+    func startPDFExport() {
+        router.showPDFExport(for: certificate).cauterize()
+    }
+
     private func showDeleteDialog() -> Promise<Void> {
         .init { seal in
             let delete = DialogAction(title: "dialog_delete_certificate_button_delete".localized, style: .destructive) { _ in
@@ -166,11 +174,5 @@ class CertificateItemDetailViewModel: CertificateItemDetailViewModelProtocol {
         }
     }
 
-    func showQRCode() {
-        router.showCertificate(for: certificate).cauterize()
-    }
-
-    func startPDFExport() {
-        router.showPDFExport(for: certificate).cauterize()
     }
 }
