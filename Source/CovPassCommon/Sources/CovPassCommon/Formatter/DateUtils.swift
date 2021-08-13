@@ -9,6 +9,15 @@
 import Foundation
 
 public enum DateUtils {
+
+    /// A `DateFormatter` intended for VoiceOver use.
+    public static var audioDateFormatter: DateFormatter = {
+        let df = DateFormatter()
+        df.dateStyle = .long
+        df.timeStyle = .none
+        return df
+    }()
+    
     public static let isoDateFormatter = dateFormatter(format: "yyyy-MM-dd")
 
     public static let isoDateTimeFormatter = dateFormatter(format: "yyyy-MM-dd'T'HH:mm:ssZ")
@@ -76,5 +85,12 @@ public enum DateUtils {
             dobString.removeSubrange(timeRange.lowerBound ..< dobString.endIndex)
         }
         return dobString
+    }
+
+    // MARK: - VoiceOver helpers
+
+    public static func audioDate(_ string: String) -> String? {
+        guard let date = parseDate(string) else { return nil }
+        return audioDateFormatter.string(from: date)
     }
 }
