@@ -491,7 +491,7 @@
 
 "test_certificate_detail_view_data_expiry_date" = "Technisches Ablaufdatum / Technical expiry date";
 
-"text_certificate_detail_view_data_expiry_date_message" = "Gültig bis %@";
+"test_certificate_detail_view_data_expiry_date_message" = "Gültig bis %@";
 
 "test_certificate_detail_view_data_expiry_date_note" = "Bitte bemühen Sie sich rechtzeitig darum, einen neuen digitalen Nachweis ausstellen zu lassen.";
 

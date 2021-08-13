@@ -491,7 +491,7 @@
 
 "test_certificate_detail_view_data_expiry_date" = "Technical expiry date / Technical expiry date";
 
-"text_certificate_detail_view_data_expiry_date_message" = "Valid until %@";
+"test_certificate_detail_view_data_expiry_date_message" = "Valid until %@";
 
 "test_certificate_detail_view_data_expiry_date_note" = "Please make every effort to have a new digital certificate issued in good time.";
 
