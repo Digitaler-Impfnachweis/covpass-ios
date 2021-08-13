@@ -66,49 +66,57 @@ class CertificateItemDetailViewModel: CertificateItemDetailViewModelProtocol {
         return DateUtils.displayDateOfBirth(dgc)
     }
 
-    var items: [(String, String)] {
+    var items: [ContentItem] {
         if let r = dgc.r?.first {
             return [
-                ("recovery_certificate_detail_view_data_name".localized, dgc.nam.fullNameReverse),
-                ("recovery_certificate_detail_view_data_date_of_birth".localized, dob),
-                ("recovery_certificate_detail_view_data_disease".localized, r.tgDisplayName),
-                ("recovery_certificate_detail_view_data_date_first_positive_result".localized, DateUtils.isoDateFormatter.string(from: r.fr)),
-                ("recovery_certificate_detail_view_data_country".localized, r.co),
-                ("recovery_certificate_detail_view_data_issuer".localized, r.is),
-                ("recovery_certificate_detail_view_data_valid_from".localized, DateUtils.isoDateFormatter.string(from: r.df)),
-                ("recovery_certificate_detail_view_data_valid_until".localized, DateUtils.isoDateFormatter.string(from: r.du)),
-                ("recovery_certificate_detail_view_data_identifier".localized, r.ciDisplayName)
+                ContentItem("recovery_certificate_detail_view_data_name".localized, dgc.nam.fullNameReverse),
+                ContentItem("recovery_certificate_detail_view_data_date_of_birth".localized, dob,
+                            accessibilityLabel(for: dob, label: "recovery_certificate_detail_view_data_date_of_birth".localized)),
+                ContentItem("recovery_certificate_detail_view_data_disease".localized, r.tgDisplayName),
+                ContentItem("recovery_certificate_detail_view_data_date_first_positive_result".localized, DateUtils.isoDateFormatter.string(from: r.fr),
+                            accessibilityLabel(for: r.fr, label: "recovery_certificate_detail_view_data_date_first_positive_result".localized)),
+                ContentItem("recovery_certificate_detail_view_data_country".localized, r.co),
+                ContentItem("recovery_certificate_detail_view_data_issuer".localized, r.is),
+                ContentItem("recovery_certificate_detail_view_data_valid_from".localized, DateUtils.isoDateFormatter.string(from: r.df),
+                            accessibilityLabel(for: r.df, label: "recovery_certificate_detail_view_data_valid_from".localized)),
+                ContentItem("recovery_certificate_detail_view_data_valid_until".localized, DateUtils.isoDateFormatter.string(from: r.du),
+                            accessibilityLabel(for: r.du, label: "recovery_certificate_detail_view_data_valid_until".localized)),
+                ContentItem("recovery_certificate_detail_view_data_identifier".localized, r.ciDisplayName)
             ]
         }
         if let t = dgc.t?.first {
             return [
-                ("test_certificate_detail_view_data_name".localized, dgc.nam.fullNameReverse),
-                ("test_certificate_detail_view_data_date_of_birth".localized, dob),
-                ("test_certificate_detail_view_data_disease".localized, t.tgDisplayName),
-                ("test_certificate_detail_view_data_test_type".localized, t.ttDisplayName),
-                ("test_certificate_detail_view_data_test_name".localized, t.nm ?? ""),
-                ("test_certificate_detail_view_data_test_manufactur".localized, t.maDisplayName ?? ""),
-                ("test_certificate_detail_view_data_test_date_and_time".localized, DateUtils.displayIsoDateTimeFormatter.string(from: t.sc)),
-                ("test_certificate_detail_view_data_test_results".localized, t.trDisplayName),
-                ("test_certificate_detail_view_data_test_centre".localized, t.tc),
-                ("test_certificate_detail_view_data_test_country".localized, t.co),
-                ("test_certificate_detail_view_data_test_issuer".localized, t.is),
-                ("test_certificate_detail_view_data_test_identifier".localized, t.ciDisplayName)
+                ContentItem("test_certificate_detail_view_data_name".localized, dgc.nam.fullNameReverse),
+                ContentItem("test_certificate_detail_view_data_date_of_birth".localized, dob,
+                            accessibilityLabel(for: dob, label: "test_certificate_detail_view_data_date_of_birth".localized)),
+                ContentItem("test_certificate_detail_view_data_disease".localized, t.tgDisplayName),
+                ContentItem("test_certificate_detail_view_data_test_type".localized, t.ttDisplayName),
+                ContentItem("test_certificate_detail_view_data_test_name".localized, t.nm ?? ""),
+                ContentItem("test_certificate_detail_view_data_test_manufactur".localized, t.maDisplayName ?? ""),
+                ContentItem("test_certificate_detail_view_data_test_date_and_time".localized, DateUtils.displayIsoDateTimeFormatter.string(from: t.sc),
+                            accessibilityLabel(for: t.sc, label: "test_certificate_detail_view_data_test_date_and_time".localized)),
+                ContentItem("test_certificate_detail_view_data_test_results".localized, t.trDisplayName),
+                ContentItem("test_certificate_detail_view_data_test_centre".localized, t.tc),
+                ContentItem("test_certificate_detail_view_data_test_country".localized, t.co),
+                ContentItem("test_certificate_detail_view_data_test_issuer".localized, t.is),
+                ContentItem("test_certificate_detail_view_data_test_identifier".localized, t.ciDisplayName)
             ]
         }
         if let v = dgc.v?.first {
             return [
-                ("vaccination_certificate_detail_view_data_name".localized, dgc.nam.fullNameReverse),
-                ("vaccination_certificate_detail_view_data_date_of_birth".localized, dob),
-                ("vaccination_certificate_detail_view_data_disease".localized, v.tgDisplayName),
-                ("vaccination_certificate_detail_view_data_vaccine".localized, v.map(key: v.mp, from: Bundle.commonBundle.url(forResource: "vaccine-medicinal-product", withExtension: "json")) ?? v.mp),
-                ("vaccination_certificate_detail_view_data_vaccine_type".localized, v.vpDisplayName),
-                ("vaccination_certificate_detail_view_data_vaccine_manufactur".localized, v.maDisplayName),
-                ("vaccination_certificate_detail_view_data_vaccine_number".localized, "\(v.dn) / \(v.sd)"),
-                ("vaccination_certificate_detail_view_data_vaccine_date_".localized, DateUtils.isoDateFormatter.string(from: v.dt)),
-                ("vaccination_certificate_detail_view_data_vaccine_country".localized, v.coDisplayName),
-                ("vaccination_certificate_detail_view_data_vaccine_issuer".localized, v.is),
-                ("vaccination_certificate_detail_view_data_vaccine_identifier".localized, v.ciDisplayName)
+                ContentItem("vaccination_certificate_detail_view_data_name".localized, dgc.nam.fullNameReverse),
+                ContentItem("vaccination_certificate_detail_view_data_date_of_birth".localized, dob,
+                            accessibilityLabel(for: dob, label: "vaccination_certificate_detail_view_data_date_of_birth".localized)),
+                ContentItem("vaccination_certificate_detail_view_data_disease".localized, v.tgDisplayName),
+                ContentItem("vaccination_certificate_detail_view_data_vaccine".localized, v.map(key: v.mp, from: Bundle.commonBundle.url(forResource: "vaccine-medicinal-product", withExtension: "json")) ?? v.mp),
+                ContentItem("vaccination_certificate_detail_view_data_vaccine_type".localized, v.vpDisplayName),
+                ContentItem("vaccination_certificate_detail_view_data_vaccine_manufactur".localized, v.maDisplayName),
+                ContentItem("vaccination_certificate_detail_view_data_vaccine_number".localized, "\(v.dn) / \(v.sd)"),
+                ContentItem("vaccination_certificate_detail_view_data_vaccine_date_".localized, DateUtils.isoDateFormatter.string(from: v.dt),
+                            accessibilityLabel(for: v.dt, label: "vaccination_certificate_detail_view_data_vaccine_date_".localized)),
+                ContentItem("vaccination_certificate_detail_view_data_vaccine_country".localized, v.coDisplayName),
+                ContentItem("vaccination_certificate_detail_view_data_vaccine_issuer".localized, v.is),
+                ContentItem("vaccination_certificate_detail_view_data_vaccine_identifier".localized, v.ciDisplayName)
             ]
         }
         return []
@@ -174,5 +182,15 @@ class CertificateItemDetailViewModel: CertificateItemDetailViewModelProtocol {
         }
     }
 
+    // MARK: - Accessibility
+
+    private func accessibilityLabel(for dateString: String, label: String) -> String {
+        let dateStr = DateUtils.audioDate(dateString) ?? dateString
+        return "\(label) \(dateStr)"
+    }
+
+    private func accessibilityLabel(for date: Date, label: String) -> String {
+        let dobString = DateUtils.audioDateFormatter.string(from: date)
+        return "\(label) \(dobString)"
     }
 }
