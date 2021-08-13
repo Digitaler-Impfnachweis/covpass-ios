@@ -276,3 +276,12 @@ public class CustomToolbarView: XibView {
         leftButtonAction?()
     }
 }
+
+extension CustomToolbarView {
+    public override var accessibilityElements: [Any]? {
+        get {
+            [primaryButton as Any, leftButton as Any]
+        }
+        set { }
+    }
+}
