@@ -208,6 +208,7 @@ public class CustomToolbarView: XibView {
     private var scrollButton: MainButton {
         primaryButton = MainButton()
         primaryButton.icon = .arrowDown
+        primaryButton.innerButton.tintColor = .backgroundSecondary
         primaryButton.innerButton.accessibilityIdentifier = AccessibilityIdentifier.InputForms.scrollButton
         primaryButton.action = { [weak self] in
             guard let strongSelf = self else { return }

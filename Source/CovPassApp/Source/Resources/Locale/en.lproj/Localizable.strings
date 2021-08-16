@@ -491,7 +491,7 @@
 
 "test_certificate_detail_view_data_expiry_date" = "Technical expiry date / Technical expiry date";
 
-"text_certificate_detail_view_data_expiry_date_message" = "Valid until %@";
+"test_certificate_detail_view_data_expiry_date_message" = "Valid until %@";
 
 "test_certificate_detail_view_data_expiry_date_note" = "Please make every effort to have a new digital certificate issued in good time.";
 
@@ -562,21 +562,6 @@
 "certificate_expired_detail_view_note_title" = "Certificate expired";
 
 "certificate_expired_detail_view_note_message" = "The expiry date has been exceeded. Please make every effort to have a new digital certificate issued.";
-
-
-/********** print certificate **********/
-
-"certificate_create_pdf_headline" = "Create EU printout";
-
-"certificate_create_pdf_first_list_item" = "You can save the certificate as a PDF document. Saving is voluntary. Initially, only you have access to the PDF document.";
-
-"certificate_create_pdf_second_list_item" = "Please note that the PDF document contains sensitive information. We recommend that you handle it with care and only show it to people you trust and who are authorised to check the proof.";
-
-"certificate_create_pdf_third_list_item" = "We recommend that you do not publish the PDF document and do not send it by email or share it via other apps.";
-
-"certificate_create_pdf_list_button" = "Next";
-
-"certificate_share_pdf_title_android" = "Share via";
 
 
 /********** print certificate **********/

@@ -1,5 +1,5 @@
 //
-//  StringExtension.swift
+//  String+PrefixRemoval.swift
 //
 //
 //  © Copyright IBM Deutschland GmbH 2021

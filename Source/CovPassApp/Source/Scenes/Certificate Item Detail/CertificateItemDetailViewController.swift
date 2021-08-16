@@ -90,16 +90,14 @@ class CertificateItemDetailViewController: UIViewController {
             hintView.isHidden = false
             hintView.titleLabel.attributedText = "certificate_expired_detail_view_note_title".localized.styledAs(.header_3)
             hintView.bodyLabel.attributedText = "certificate_expired_detail_view_note_message".localized.styledAs(.body)
-        }
-        if let date = viewModel.expiresSoonDate {
+        } else if let date = viewModel.expiresSoonDate {
             hintView.isHidden = false
             hintView.iconView.image = .activity
             hintView.titleLabel.attributedText = String(format: "certificate_expires_detail_view_note_title".localized, DateUtils.displayDateFormatter.string(from: date), DateUtils.displayTimeFormatter.string(from: date)).styledAs(.header_3)
             hintView.bodyLabel.attributedText = "certificate_expires_detail_view_note_message".localized.styledAs(.body)
             hintView.containerView.backgroundColor = .onBackground50
             hintView.containerView.layer.borderColor = UIColor.onBrandBase.cgColor
-        }
-        if viewModel.isInvalid {
+        } else if viewModel.isInvalid {
             hintView.isHidden = false
             hintView.titleLabel.attributedText = "certificate_invalid_detail_view_note_title".localized.styledAs(.header_3)
             hintView.bodyLabel.attributedText = "certificate_invalid_detail_view_note_message".localized.styledAs(.body)

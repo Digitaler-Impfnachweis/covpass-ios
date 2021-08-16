@@ -129,6 +129,9 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
     }
 
     var tintColor: UIColor {
+        if token.vaccinationCertificate.isExpired || token.vaccinationCertificate.isInvalid {
+            return .darkText
+        }
         if let v = certificate.v?.first, !v.fullImmunizationValid {
             return .darkText
         }

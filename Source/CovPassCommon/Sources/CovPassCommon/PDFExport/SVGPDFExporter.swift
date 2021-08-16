@@ -47,9 +47,9 @@ public final class SVGPDFExporter: NSObject, WKNavigationDelegate, SVGPDFExportP
         }
 
         // Common fields
-        svg = svg.replacingOccurrences(of: "$nam", with: certificate.nam.fullName)
-        svg = svg.replacingOccurrences(of: "$dob", with: certificate.dobString ?? .placeholder)
-        svg = svg.replacingOccurrences(of: "$ci", with: certificate.uvci.stripUVCIPrefix())
+        svg = svg.replacingOccurrences(of: "$nam", with: certificate.nam.fullName.sanitizedXMLString)
+        svg = svg.replacingOccurrences(of: "$dob", with: certificate.dobString?.sanitizedXMLString ?? .placeholder)
+        svg = svg.replacingOccurrences(of: "$ci", with: certificate.uvci.stripUVCIPrefix().sanitizedXMLString)
 
         // QR code
         let qr = token.vaccinationQRCodeData.generateQRCode(size: CGSize(width: 1000, height: 1000))
@@ -61,7 +61,7 @@ public final class SVGPDFExporter: NSObject, WKNavigationDelegate, SVGPDFExportP
                 throw ExportError.invalidTemplate
             }
             // disease of agent targeted
-            svg = svg.replacingOccurrences(of: "$tg", with: recovery.tgDisplayName)
+            svg = svg.replacingOccurrences(of: "$tg", with: recovery.tgDisplayName.sanitizedXMLString)
             // date of first positive test result
             svg = svg.replacingOccurrences(of: "$fr", with: dateFormatter.string(from: recovery.fr))
             // valid from
@@ -69,52 +69,52 @@ public final class SVGPDFExporter: NSObject, WKNavigationDelegate, SVGPDFExportP
             // valid until
             svg = svg.replacingOccurrences(of: "$du", with: dateFormatter.string(from: recovery.du))
             // country
-            svg = svg.replacingOccurrences(of: "$co", with: recovery.co)
+            svg = svg.replacingOccurrences(of: "$co", with: recovery.co.sanitizedXMLString)
             // certificate issue
-            svg = svg.replacingOccurrences(of: "$is", with: recovery.is)
+            svg = svg.replacingOccurrences(of: "$is", with: recovery.is.sanitizedXMLString)
         case.test:
             guard let test = certificate.latestTest else {
                 throw ExportError.invalidTemplate
             }
             // disease of agent targeted
-            svg = svg.replacingOccurrences(of: "$tg", with: test.tgDisplayName)
+            svg = svg.replacingOccurrences(of: "$tg", with: test.tgDisplayName.sanitizedXMLString)
             // test type
-            svg = svg.replacingOccurrences(of: "$tt", with: test.ttDisplayName)
+            svg = svg.replacingOccurrences(of: "$tt", with: test.ttDisplayName.sanitizedXMLString)
             // test name
-            svg = svg.replacingOccurrences(of: "$nm", with: test.nm ?? .placeholder)
+            svg = svg.replacingOccurrences(of: "$nm", with: test.nm?.sanitizedXMLString ?? .placeholder)
             // test manufacturer
-            svg = svg.replacingOccurrences(of: "$ma", with: test.maDisplayName ?? .placeholder)
+            svg = svg.replacingOccurrences(of: "$ma", with: test.maDisplayName?.sanitizedXMLString ?? .placeholder)
             // sample collection
             svg = svg.replacingOccurrences(of: "$sc", with: dateFormatter.string(from: test.sc))
             // test result
-            svg = svg.replacingOccurrences(of: "$tr", with: test.trDisplayName)
+            svg = svg.replacingOccurrences(of: "$tr", with: test.trDisplayName.sanitizedXMLString)
             // testing center
-            svg = svg.replacingOccurrences(of: "$tc", with: test.tc)
+            svg = svg.replacingOccurrences(of: "$tc", with: test.tc.sanitizedXMLString)
             // country
-            svg = svg.replacingOccurrences(of: "$co", with: test.co)
+            svg = svg.replacingOccurrences(of: "$co", with: test.co.sanitizedXMLString)
             // certificate issue
-            svg = svg.replacingOccurrences(of: "$is", with: test.is)
+            svg = svg.replacingOccurrences(of: "$is", with: test.is.sanitizedXMLString)
         case .vaccination:
             guard let vaccination = certificate.latestVaccination else {
                 throw ExportError.invalidTemplate
             }
             // disease of agent targeted
-            svg = svg.replacingOccurrences(of: "$tg", with: vaccination.tgDisplayName)
+            svg = svg.replacingOccurrences(of: "$tg", with: vaccination.tgDisplayName.sanitizedXMLString)
             // vaccine
-            svg = svg.replacingOccurrences(of: "$vp", with: vaccination.vpDisplayName)
+            svg = svg.replacingOccurrences(of: "$vp", with: vaccination.vpDisplayName.sanitizedXMLString)
             // vaccine product name
-            svg = svg.replacingOccurrences(of: "$mp", with: vaccination.mpDisplayName)
+            svg = svg.replacingOccurrences(of: "$mp", with: vaccination.mpDisplayName.sanitizedXMLString)
             // marketing authorization
-            svg = svg.replacingOccurrences(of: "$ma", with: vaccination.maDisplayName)
+            svg = svg.replacingOccurrences(of: "$ma", with: vaccination.maDisplayName.sanitizedXMLString)
             // vaccination x of y - number format is not localized!
             svg = svg.replacingOccurrences(of: "$dn", with: vaccination.dn.description)
             svg = svg.replacingOccurrences(of: "$sd", with: vaccination.sd.description)
             // date vaccination
             svg = svg.replacingOccurrences(of: "$dt", with: dateFormatter.string(from: vaccination.dt))
             // country
-            svg = svg.replacingOccurrences(of: "$co", with: vaccination.coDisplayName)
+            svg = svg.replacingOccurrences(of: "$co", with: vaccination.coDisplayName.sanitizedXMLString)
             // certificate issue
-            svg = svg.replacingOccurrences(of: "$is", with: vaccination.is)
+            svg = svg.replacingOccurrences(of: "$is", with: vaccination.is.sanitizedXMLString)
         }
 
         #if DEBUG
