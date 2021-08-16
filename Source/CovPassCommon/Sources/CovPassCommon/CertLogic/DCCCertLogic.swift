@@ -31,9 +31,9 @@ public enum DCCCertLogicError: Error, ErrorCode {
     public var errorCode: Int {
         switch self {
         case .noRules:
-            return 401
+            return 601
         case .encodingError:
-            return 402
+            return 602
         }
     }
 }
