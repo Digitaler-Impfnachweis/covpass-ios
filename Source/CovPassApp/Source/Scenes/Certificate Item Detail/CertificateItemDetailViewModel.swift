@@ -70,6 +70,7 @@ class CertificateItemDetailViewModel: CertificateItemDetailViewModelProtocol {
         if let r = dgc.r?.first {
             return [
                 ContentItem("recovery_certificate_detail_view_data_name".localized, dgc.nam.fullNameReverse),
+                ContentItem("recovery_certificate_detail_view_data_name_standard".localized, dgc.nam.fullNameTransliteratedReverse),
                 ContentItem("recovery_certificate_detail_view_data_date_of_birth".localized, dob,
                             accessibilityLabel(for: dob, label: "recovery_certificate_detail_view_data_date_of_birth".localized)),
                 ContentItem("recovery_certificate_detail_view_data_disease".localized, r.tgDisplayName),
@@ -88,6 +89,7 @@ class CertificateItemDetailViewModel: CertificateItemDetailViewModelProtocol {
         if let t = dgc.t?.first {
             return [
                 ContentItem("test_certificate_detail_view_data_name".localized, dgc.nam.fullNameReverse),
+                ContentItem("test_certificate_detail_view_data_name_standard".localized, dgc.nam.fullNameTransliteratedReverse),
                 ContentItem("test_certificate_detail_view_data_date_of_birth".localized, dob,
                             accessibilityLabel(for: dob, label: "test_certificate_detail_view_data_date_of_birth".localized)),
                 ContentItem("test_certificate_detail_view_data_disease".localized, t.tgDisplayName),
@@ -108,6 +110,7 @@ class CertificateItemDetailViewModel: CertificateItemDetailViewModelProtocol {
         if let v = dgc.v?.first {
             return [
                 ContentItem("vaccination_certificate_detail_view_data_name".localized, dgc.nam.fullNameReverse),
+                ContentItem("vaccination_certificate_detail_view_data_name_standard".localized, dgc.nam.fullNameTransliteratedReverse),
                 ContentItem("vaccination_certificate_detail_view_data_date_of_birth".localized, dob,
                             accessibilityLabel(for: dob, label: "vaccination_certificate_detail_view_data_date_of_birth".localized)),
                 ContentItem("vaccination_certificate_detail_view_data_disease".localized, v.tgDisplayName),

@@ -24,7 +24,14 @@ public class Name: Codable {
             return "\(gn) \(fn)"
         }
         if let gnt = gnt {
-            return"\(gnt) \(fnt)"
+            return "\(gnt) \(fnt)"
+        }
+        return fnt
+    }
+
+    public var fullNameTransliterated: String {
+        if let gnt = gnt {
+            return "\(gnt) \(fnt)"
         }
         return fnt
     }
@@ -34,7 +41,14 @@ public class Name: Codable {
             return "\(fn), \(gn)"
         }
         if let gnt = gnt {
-            return"\(fnt), \(gnt)"
+            return "\(fnt), \(gnt)"
+        }
+        return fnt
+    }
+
+    public var fullNameTransliteratedReverse: String {
+        if let gnt = gnt {
+            return "\(fnt), \(gnt)"
         }
         return fnt
     }

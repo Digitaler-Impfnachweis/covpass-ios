@@ -39,6 +39,10 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
         certificates.first?.vaccinationCertificate.hcert.dgc.nam.fullName ?? ""
     }
 
+    var nameTransliterated: String {
+        certificates.first?.vaccinationCertificate.hcert.dgc.nam.fullNameTransliteratedReverse ?? ""
+    }
+
     var birthDate: String {
         guard let dgc = certificates.first?.vaccinationCertificate.hcert.dgc else { return "" }
         return DateUtils.displayDateOfBirth(dgc)

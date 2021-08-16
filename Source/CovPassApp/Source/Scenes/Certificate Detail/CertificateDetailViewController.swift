@@ -26,6 +26,7 @@ class CertificateDetailViewController: UIViewController {
     @IBOutlet var personalDataHeadline: PlainLabel!
     @IBOutlet var allCertificatesHeadline: PlainLabel!
     @IBOutlet var nameView: ParagraphView!
+    @IBOutlet var nameTransliteratedView: ParagraphView!
     @IBOutlet var birtdateView: ParagraphView!
 
     // MARK: - Properties
@@ -108,6 +109,10 @@ class CertificateDetailViewController: UIViewController {
         nameView.attributedTitleText = "certificates_overview_personal_data_name".localized.styledAs(.header_3)
         nameView.attributedBodyText = viewModel.name.styledAs(.body)
         nameView.contentView?.layoutMargins = .init(top: .space_12, left: .space_24, bottom: .space_12, right: .space_24)
+
+        nameTransliteratedView.attributedTitleText = "vaccination_certificate_detail_view_data_name_standard".localized.styledAs(.header_3)
+        nameTransliteratedView.attributedBodyText = viewModel.nameTransliterated.styledAs(.body)
+        nameTransliteratedView.contentView?.layoutMargins = .init(top: .space_12, left: .space_24, bottom: .space_12, right: .space_24)
 
         birtdateView.attributedTitleText = "certificates_overview_personal_data_date_of_birth".localized.styledAs(.header_3)
         birtdateView.attributedBodyText = viewModel.birthDate.styledAs(.body)

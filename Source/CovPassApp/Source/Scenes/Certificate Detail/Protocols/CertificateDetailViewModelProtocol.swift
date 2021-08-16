@@ -13,6 +13,7 @@ protocol CertificateDetailViewModelProtocol {
     var delegate: ViewModelDelegate? { get set }
     var favoriteIcon: UIImage? { get }
     var name: String { get }
+    var nameTransliterated: String { get }
     var birthDate: String { get }
     var immunizationIcon: UIImage? { get }
     var immunizationTitle: String { get }

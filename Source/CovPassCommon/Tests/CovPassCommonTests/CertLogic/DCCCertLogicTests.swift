@@ -40,8 +40,8 @@ class DCCCertLogicTests: XCTestCase {
     }
 
     func testErrorCode() {
-        XCTAssertEqual(DCCCertLogicError.noRules.errorCode, 401)
-        XCTAssertEqual(DCCCertLogicError.encodingError.errorCode, 402)
+        XCTAssertEqual(DCCCertLogicError.noRules.errorCode, 601)
+        XCTAssertEqual(DCCCertLogicError.encodingError.errorCode, 602)
     }
 
     func testCountries() {

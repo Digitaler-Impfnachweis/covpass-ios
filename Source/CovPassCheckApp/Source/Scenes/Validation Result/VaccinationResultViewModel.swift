@@ -36,7 +36,11 @@ class VaccinationResultViewModel: ValidationResultViewModel {
             return []
         }
         return [
-            Paragraph(icon: .data, title: dgc.nam.fullName, subtitle: String(format: "validation_check_popup_valid_vaccination_date_of_birth".localized, DateUtils.displayDateOfBirth(dgc)))
+            Paragraph(
+                icon: .data,
+                title: dgc.nam.fullName,
+                subtitle: "\(dgc.nam.fullNameTransliterated)\n\(String(format: "validation_check_popup_valid_vaccination_date_of_birth".localized, DateUtils.displayDateOfBirth(dgc)))"
+            )
         ]
     }
 

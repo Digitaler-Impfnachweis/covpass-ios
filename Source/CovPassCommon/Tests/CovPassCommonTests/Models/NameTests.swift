@@ -71,5 +71,7 @@ class NameTests: XCTestCase {
     func testFullName() {
         XCTAssertEqual(sut.fullName, "Erika Dörte Schmitt Mustermann")
         XCTAssertEqual(sut.fullNameReverse, "Schmitt Mustermann, Erika Dörte")
+        XCTAssertEqual(sut.fullNameTransliterated, "ERIKA<DOERTE SCHMITT<MUSTERMANN")
+        XCTAssertEqual(sut.fullNameTransliteratedReverse, "SCHMITT<MUSTERMANN, ERIKA<DOERTE")
     }
 }

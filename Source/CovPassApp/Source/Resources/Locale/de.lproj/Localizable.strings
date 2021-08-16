@@ -419,6 +419,8 @@
 
 "vaccination_certificate_detail_view_data_name" = "Name, Vorname / Name, first name";
 
+"vaccination_certificate_detail_view_data_name_standard" = "Standardisierter Name, Vorname / Standardized name, first name";
+
 "vaccination_certificate_detail_view_data_date_of_birth" = "Geburtsdatum / Date of birth (YYYY-MM-DD)";
 
 "vaccination_certificate_detail_view_data_disease" = "Zielkrankheit oder -erreger / Disease or pathogen";
@@ -467,6 +469,8 @@
 
 "test_certificate_detail_view_data_name" = "Name, Vorname / Name, first name";
 
+"test_certificate_detail_view_data_name_standard" = "Standardisierter Name, Vorname / Standardized name, first name";
+
 "test_certificate_detail_view_data_date_of_birth" = "Geburtsdatum / Date of birth (YYYY-MM-DD)";
 
 "test_certificate_detail_view_data_disease" = "Zielkrankheit oder -erreger / Disease or pathogen";
@@ -512,6 +516,8 @@
 "recovery_certificate_detail_view_headline" = "Digitales COVID-Genesenenzertifikat der EU";
 
 "recovery_certificate_detail_view_data_name" = "Name, Vorname / Name, first name";
+
+"recovery_certificate_detail_view_data_name_standard" = "Standardisierter Name, Vorname / Standardized name, first name";
 
 "recovery_certificate_detail_view_data_date_of_birth" = "Geburtsdatum / Date of birth (YYYY-MM-DD)";
 
