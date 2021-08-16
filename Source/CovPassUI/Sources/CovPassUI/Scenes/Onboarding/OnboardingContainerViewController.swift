@@ -24,7 +24,13 @@ public class OnboardingContainerViewController: UIViewController, ViewModelDeleg
 
     var pageController: UIPageViewController?
     var pages: [UIViewController] = []
-    var currentIndex: Int = 0
+    var currentIndex: Int = 0 {
+        didSet {
+            // brute force selection of the first element of an onboarding page
+            let first = pages[currentIndex].accessibilityElements?.first
+            UIAccessibility.post(notification: .layoutChanged, argument: first)
+        }
+    }
 
     // MARK: - Lifecycle
 
@@ -63,6 +69,14 @@ public class OnboardingContainerViewController: UIViewController, ViewModelDeleg
 
     public func viewModelDidUpdate() {
         updateToolbarForPage(at: currentIndex)
+    }
+
+    public override func viewWillAppear(_ animated: Bool) {
+        // brute force but works atm
+        let first = pages[currentIndex].accessibilityElements?.first
+        UIAccessibility.post(notification: .layoutChanged, argument: first)
+
+        super.viewWillAppear(animated)
     }
 
     public func viewModelUpdateDidFailWithError(_: Error) {}
@@ -157,16 +171,18 @@ extension OnboardingContainerViewController: CustomToolbarViewDelegate {
                 viewModel.navigateToPreviousScene()
                 return
             }
-            currentIndex -= 1
-            pageController?.setViewControllers([pages[currentIndex]], direction: .reverse, animated: true, completion: nil)
+            pageController?.setViewControllers([pages[currentIndex-1]], direction: .reverse, animated: true, completion: { [weak self] _ in
+                self?.currentIndex -= 1 // HACK: set here to prevent crashes due to unloaded view
+            })
             pageIndicator.selectDot(withIndex: currentIndex)
         case .textButton:
             guard currentIndex + 1 < pages.count else {
                 viewModel.navigateToNextScene()
                 return
             }
-            currentIndex += 1
-            pageController?.setViewControllers([pages[currentIndex]], direction: .forward, animated: true, completion: nil)
+            pageController?.setViewControllers([pages[currentIndex+1]], direction: .forward, animated: true, completion: { [weak self] _ in
+                self?.currentIndex += 1 // HACK: set here to prevent crashes due to unloaded view
+            })
             pageIndicator.selectDot(withIndex: currentIndex)
         case .scrollButton:
             (pages[currentIndex] as? ConsentViewController)?.scrollToBottom()

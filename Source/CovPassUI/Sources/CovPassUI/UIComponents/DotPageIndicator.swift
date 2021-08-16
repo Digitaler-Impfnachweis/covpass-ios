@@ -107,6 +107,8 @@ public class DotPageIndicator: UIView {
             dot.setConstant(size: CGSize(width: dotSize, height: dotSize))
             dots.append(dot)
         }
+
+        updateAccessibilityLabel()
     }
 
     @objc func didTapButton(_ sender: UIButton) {
@@ -115,6 +117,16 @@ public class DotPageIndicator: UIView {
                 delegate?.dotPageIndicator(self, didTapDot: index)
                 selectDot(withIndex: index)
             }
+        }
+    }
+
+    // MARK: - Accessibility
+
+    private func updateAccessibilityLabel() {
+        for (index, dot) in dots.enumerated() {
+            #warning("Seite X von Y")
+            //dot.accessibilityLabel = String(format: "", index+1, dots.count)
+            dot.accessibilityIdentifier = "page-indicator-\(index)"
         }
     }
 }

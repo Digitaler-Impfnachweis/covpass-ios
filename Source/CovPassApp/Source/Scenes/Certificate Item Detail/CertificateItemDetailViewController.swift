@@ -107,10 +107,12 @@ class CertificateItemDetailViewController: UIViewController {
 
     private func setupList() {
         viewModel.items.forEach { item in
-            if !item.1.isEmpty {
+            if !item.value.isEmpty {
                 let view = ParagraphView()
-                view.attributedTitleText = item.0.styledAs(.header_3)
-                view.attributedBodyText = item.1.styledAs(.body)
+                view.attributedTitleText = item.label.styledAs(.header_3)
+                view.attributedBodyText = item.value.styledAs(.body)
+                view.accessibilityLabel = item.accessibilityLabel
+                view.accessibilityIdentifier = item.accessibilityIdentifier
                 view.layoutMargins.top = .space_12
                 itemStackView.addArrangedSubview(view)
             }

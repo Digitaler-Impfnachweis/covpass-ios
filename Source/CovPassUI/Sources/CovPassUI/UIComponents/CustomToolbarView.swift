@@ -89,7 +89,6 @@ public class CustomToolbarView: XibView {
     }
 
     var leftButtonAction: (() -> Void)?
-    var rightButtonAction: (() -> Void)?
 
     public func setUpLeftButton(leftButtonItem: ButtonItemType?) {
         guard let leftButtonItem = leftButtonItem else {
@@ -276,5 +275,14 @@ public class CustomToolbarView: XibView {
 
     @IBAction func leftButtonPressed() {
         leftButtonAction?()
+    }
+}
+
+extension CustomToolbarView {
+    public override var accessibilityElements: [Any]? {
+        get {
+            [primaryButton as Any, leftButton as Any]
+        }
+        set { }
     }
 }

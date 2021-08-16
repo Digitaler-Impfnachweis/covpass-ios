@@ -38,7 +38,7 @@ public class ParagraphView: XibView {
     // MARK: - Methods
 
     private func setupAccessibility() {
-        let accessibilityLabelText = "\(attributedTitleText?.string ?? "") \(attributedBodyText?.string ?? "")"
+        let accessibilityLabelText = "\(attributedTitleText?.string ?? "")\n\(attributedBodyText?.string ?? "")"
         enableAccessibility(label: accessibilityLabelText, traits: .staticText)
     }
 

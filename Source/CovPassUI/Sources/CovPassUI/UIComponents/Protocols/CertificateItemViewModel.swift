@@ -15,8 +15,16 @@ public protocol CertificateItemViewModel {
     var iconColor: UIColor { get }
     var iconBackgroundColor: UIColor { get }
     var title: String { get }
+    var titleAccessibilityLabel: String? { get }
+
     var subtitle: String { get }
+    var subtitleAccessibilityLabel: String? { get }
+
     var info: String { get }
+    var infoAccessibilityLabel: String? { get }
+
     var info2: String? { get }
+    var info2AccessibilityLabel: String? { get }
+
     var activeTitle: String? { get }
 }

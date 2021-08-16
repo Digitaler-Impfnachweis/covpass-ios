@@ -38,6 +38,8 @@ public class OnboardingPageViewController: UIViewController {
         configureImageView()
         configureHeadline()
         configureParagraphView()
+
+        accessibilityLabel = headline.attributedText?.string
     }
 
     // MARK: - Methods
@@ -55,5 +57,20 @@ public class OnboardingPageViewController: UIViewController {
     private func configureParagraphView() {
         descriptionText.attributedText = viewModel.info?.styledAs(.body).colored(.onBackground70)
         descriptionText.layoutMargins = .init(top: .space_12, left: .space_24, bottom: .zero, right: .space_24)
+    }
+}
+
+extension OnboardingPageViewController {
+    // This will move to `viewDidLoad` later once all views are
+    // intitalized properly before accessing this
+    public override var accessibilityElements: [Any]? {
+        get {
+            let elements = [headline, descriptionText].compactMap({ $0 })
+            assert(!elements.isEmpty, "No accessibilityElements! View not loaded?")
+            return elements
+        }
+        set {
+            self.accessibilityElements = newValue
+        }
     }
 }

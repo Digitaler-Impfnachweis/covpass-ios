@@ -112,6 +112,7 @@ class CertificateDetailViewController: UIViewController {
         birtdateView.attributedTitleText = "certificates_overview_personal_data_date_of_birth".localized.styledAs(.header_3)
         birtdateView.attributedBodyText = viewModel.birthDate.styledAs(.body)
         birtdateView.contentView?.layoutMargins = .init(top: .space_12, left: .space_24, bottom: .space_12, right: .space_24)
+        birtdateView.accessibilityLabel = "\(birtdateView.attributedTitleText?.string ?? "")\n \(DateUtils.audioDate(viewModel.birthDate) ?? viewModel.birthDate)"
 
         allCertificatesHeadline.attributedText = "certificates_overview_all_certificates_title".localized.styledAs(.header_2)
         allCertificatesHeadline.layoutMargins = .init(top: .space_30, left: .space_24, bottom: .space_16, right: .space_24)

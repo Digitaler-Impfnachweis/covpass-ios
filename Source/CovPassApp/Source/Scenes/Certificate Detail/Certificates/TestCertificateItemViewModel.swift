@@ -52,6 +52,7 @@ struct TestCertificateItemViewModel: CertificateItemViewModel {
     var title: String {
         return "certificates_overview_test_certificate_title".localized
     }
+    var titleAccessibilityLabel: String? { title }
 
     var subtitle: String {
         if let t = dgc.t?.first {
@@ -59,12 +60,17 @@ struct TestCertificateItemViewModel: CertificateItemViewModel {
         }
         return ""
     }
+    var subtitleAccessibilityLabel: String? { subtitle }
 
     var info: String {
         if let t = dgc.t?.first {
             return String(format: "certificates_overview_test_certificate_date".localized, DateUtils.displayDateTimeFormatter.string(from: t.sc))
         }
         return ""
+    }
+    var infoAccessibilityLabel: String? {
+        guard let t = dgc.t?.first else { return info }
+        return String(format: "certificates_overview_vaccination_certificate_date".localized, DateUtils.audioDateFormatter.string(from: t.sc))
     }
 
     var info2: String? {
@@ -79,6 +85,7 @@ struct TestCertificateItemViewModel: CertificateItemViewModel {
         }
         return nil
     }
+    var info2AccessibilityLabel: String? { info2 }
 
     var activeTitle: String? {
         active ? "certificates_overview_currently_uses_certificate_note".localized : nil
