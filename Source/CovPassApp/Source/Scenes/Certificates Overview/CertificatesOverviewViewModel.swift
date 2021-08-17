@@ -101,10 +101,10 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
         .then { payload in
             self.repository.scanCertificate(payload)
         }
-        .ensure {
-            self.refresh()
-        }
         .done { certificate in
+            self.certificateList.certificates.append(certificate)
+            self.delegate?.viewModelDidUpdate()
+            self.handleCertificateDetailSceneResult(.showCertificatesOnOverview([certificate]))
             self.showCertificate(certificate)
         }
         .catch { error in
