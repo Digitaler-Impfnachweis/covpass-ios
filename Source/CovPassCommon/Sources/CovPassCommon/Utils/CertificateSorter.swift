@@ -30,9 +30,10 @@ public enum CertificateSorter {
         })
         // #3 Vaccination certificate
         //  Latest vaccination of a vaccination series (1/1, 2/2), older then (>) 14 days
+        //  This does NOT included Booster certificates!
         let vaccinationCertificates = certificates.filter { $0.vaccinationCertificate.hcert.dgc.v != nil }.sorted(by: { c1, c2 -> Bool in c1.vaccinationCertificate.hcert.dgc.v?.first?.dt ?? Date() > c2.vaccinationCertificate.hcert.dgc.v?.first?.dt ?? Date() })
         if let latestVaccination = vaccinationCertificates.first(where: {
-            if let v = $0.vaccinationCertificate.hcert.dgc.v?.first, v.fullImmunization, v.fullImmunizationValid {
+            if let v = $0.vaccinationCertificate.hcert.dgc.v?.first, v.fullImmunization, v.fullImmunizationValid, !v.isBoosted /* Boosters are currently lower prioritized (see 5.1) */ {
                 return true
             }
             return false
@@ -57,6 +58,16 @@ public enum CertificateSorter {
         }) {
             res.append(latestVaccination)
         }
+        // #5.1 Booster Certificate
+        //  Inofficial german (as of 08/2021) booster certificate for all vaccinations above the intended number of
+        //  vaccinations, i.e. (3/2, etc.)
+        res.append(contentsOf: certificates.filter({
+            if let v = $0.vaccinationCertificate.hcert.dgc.v?.first, v.isBoosted {
+                return true
+            }
+            return false
+        }))
+
         // #6. Vaccination Certificate
         //  Not-latest (partial immunization) of a vaccination series (1/2)
         res.append(contentsOf: certificates.filter {
