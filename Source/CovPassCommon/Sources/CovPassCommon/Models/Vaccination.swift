@@ -36,8 +36,11 @@ public class Vaccination: Codable {
         return validProducts.contains(mp)
     }
 
-    /// True if full immunization is given
-    public var fullImmunization: Bool { dn == sd }
+    /// True if full immunization (or booster) is given
+    public var fullImmunization: Bool { dn >= sd }
+
+    /// `True` if vaccination is 'boosted' above the total number of vaccinations in the series, i.e. (4/2, 3/2, 2/1, etc.)
+    public var isBoosted: Bool { dn > sd }
 
     /// Date when the full immunization is valid
     public var fullImmunizationValidFrom: Date? {
