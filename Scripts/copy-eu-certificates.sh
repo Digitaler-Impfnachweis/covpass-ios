@@ -1,6 +1,9 @@
 #!/bin/bash
 
+git clone git@github.com:eu-digital-green-certificates/dcc-quality-assurance.git
+
 FOLDER="Source/CovPassCommon/Tests/CovPassCommonTests/Resources/dcc-quality-assurance"
+
 rm -rf $FOLDER
 mkdir $FOLDER
 
