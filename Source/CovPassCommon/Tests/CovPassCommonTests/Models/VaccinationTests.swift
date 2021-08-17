@@ -30,9 +30,9 @@ class VaccinationTests: XCTestCase {
         let jsonData = Data.json("Vaccination")
         let sut = try! JSONDecoder().decode(Vaccination.self, from: jsonData)
 
-        XCTAssertEqual(sut.map(key: sut.vp, from: Bundle.commonBundle.url(forResource: "vaccine-prophylaxis", withExtension: "json")), "SARS-CoV-2 mRNA vaccine")
+        XCTAssertEqual(sut.map(key: sut.vp, from: Bundle.commonBundle.url(forResource: "sct-vaccines-covid-19", withExtension: "json")), "SARS-CoV-2 mRNA vaccine")
         XCTAssertEqual(sut.map(key: sut.mp, from: Bundle.commonBundle.url(forResource: "vaccine-medicinal-product", withExtension: "json")), "Comirnaty")
-        XCTAssertEqual(sut.map(key: sut.ma, from: Bundle.commonBundle.url(forResource: "vaccine-mah-manf", withExtension: "json")), "Biontech Manufacturing GmbH")
-        XCTAssertEqual(sut.map(key: sut.co, from: Bundle.commonBundle.url(forResource: "country", withExtension: "json")), "Deutschland")
+        XCTAssertEqual(sut.map(key: sut.ma, from: Bundle.commonBundle.url(forResource: "vaccines-covid-19-auth-holders", withExtension: "json")), "Biontech Manufacturing GmbH")
+        XCTAssertEqual(sut.map(key: sut.co, from: Bundle.commonBundle.url(forResource: "country-2-codes", withExtension: "json")), "Germany")
     }
 }

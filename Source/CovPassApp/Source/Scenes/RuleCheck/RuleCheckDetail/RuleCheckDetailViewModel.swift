@@ -171,7 +171,7 @@ class RuleCheckDetailViewModel {
                 ("vaccination_certificate_detail_view_data_vaccine_manufactur".localized, v.maDisplayName, results(for: .fail, and: "v.0.ma"), results(for: .open, and: "v.0.ma")),
                 ("vaccination_certificate_detail_view_data_vaccine_number".localized, "\(v.dn) / \(v.sd)", results(for: .fail, and: "v.0.sd"), results(for: .open, and: "v.0.sd")),
                 ("vaccination_certificate_detail_view_data_vaccine_date_".localized, DateUtils.isoDateFormatter.string(from: v.dt), results(for: .fail, and: "v.0.dt"), results(for: .open, and: "v.0.dt")),
-                ("vaccination_certificate_detail_view_data_vaccine_country".localized, v.coDisplayName, results(for: .fail, and: "v.0.co"), results(for: .open, and: "v.0.co")),
+                ("vaccination_certificate_detail_view_data_vaccine_country".localized, v.co.localized, results(for: .fail, and: "v.0.co"), results(for: .open, and: "v.0.co")),
                 ("vaccination_certificate_detail_view_data_vaccine_issuer".localized, v.is, results(for: .fail, and: "v.0.is"), results(for: .open, and: "v.0.is")),
                 ("vaccination_certificate_detail_view_data_vaccine_identifier".localized, v.ciDisplayName, results(for: .fail, and: "v.0.ci"), results(for: .open, and: "v.0.ci"))
             ]

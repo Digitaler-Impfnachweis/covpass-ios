@@ -29,7 +29,7 @@ class ListItemViewTests: XCTestCase {
     func testInit() {
         XCTAssertEqual(sut.contentView?.layoutMargins, .init(top: .space_12, left: .space_24, bottom: .space_12, right: .space_24))
         XCTAssertEqual(sut.backgroundColor, .neutralWhite)
-        XCTAssertEqual(sut.textLabel.text, "")
+        XCTAssertEqual(sut.textLabel.text, nil)
         XCTAssertEqual(sut.imageView.image, .chevronRight)
         XCTAssertEqual(sut.seperatorView.backgroundColor, .onBackground20)
         XCTAssertTrue(sut.seperatorView.isHidden)

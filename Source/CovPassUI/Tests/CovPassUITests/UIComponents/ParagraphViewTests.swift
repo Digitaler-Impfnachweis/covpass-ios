@@ -76,7 +76,7 @@ class ParagraphViewTests: XCTestCase {
 
         // Then
         XCTAssertTrue(sut.isAccessibilityElement)
-        XCTAssertEqual(sut.accessibilityLabel, "\(titleText) ")
+        XCTAssertEqual(sut.accessibilityLabel, "\(titleText)\n")
         XCTAssertNil(sut.accessibilityHint)
         XCTAssertEqual(sut.accessibilityTraits, .staticText)
     }
@@ -91,7 +91,7 @@ class ParagraphViewTests: XCTestCase {
 
         // Then
         XCTAssertTrue(sut.isAccessibilityElement)
-        XCTAssertEqual(sut.accessibilityLabel, " \(bodyText)")
+        XCTAssertEqual(sut.accessibilityLabel, "\n\(bodyText)")
         XCTAssertNil(sut.accessibilityHint)
         XCTAssertEqual(sut.accessibilityTraits, .staticText)
     }
@@ -107,7 +107,7 @@ class ParagraphViewTests: XCTestCase {
 
         // Then
         XCTAssertTrue(sut.isAccessibilityElement)
-        XCTAssertEqual(sut.accessibilityLabel, "\(titleText) \(bodyText)")
+        XCTAssertEqual(sut.accessibilityLabel, "\(titleText)\n\(bodyText)")
         XCTAssertNil(sut.accessibilityHint)
         XCTAssertEqual(sut.accessibilityTraits, .staticText)
     }

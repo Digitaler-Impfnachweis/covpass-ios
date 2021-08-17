@@ -52,12 +52,12 @@ class DCCCertLogicTests: XCTestCase {
         XCTAssertEqual(sut.valueSets.count, 8)
         XCTAssertEqual(sut.valueSets["country-2-codes"]?.count, 249)
         XCTAssertEqual(sut.valueSets["covid-19-lab-result"]?.count, 2)
-        XCTAssertEqual(sut.valueSets["covid-19-lab-test-manufacturer-and-name"]?.count, 128)
+        XCTAssertEqual(sut.valueSets["covid-19-lab-test-manufacturer-and-name"]?.count, 140)
         XCTAssertEqual(sut.valueSets["covid-19-lab-test-type"]?.count, 2)
         XCTAssertEqual(sut.valueSets["disease-agent-targeted"]?.count, 1)
         XCTAssertEqual(sut.valueSets["sct-vaccines-covid-19"]?.count, 3)
-        XCTAssertEqual(sut.valueSets["vaccines-covid-19-auth-holders"]?.count, 14)
-        XCTAssertEqual(sut.valueSets["vaccines-covid-19-names"]?.count, 12)
+        XCTAssertEqual(sut.valueSets["vaccines-covid-19-auth-holders"]?.count, 15)
+        XCTAssertEqual(sut.valueSets["vaccines-covid-19-names"]?.count, 13)
     }
 
     func testRemoteValueSets() throws {

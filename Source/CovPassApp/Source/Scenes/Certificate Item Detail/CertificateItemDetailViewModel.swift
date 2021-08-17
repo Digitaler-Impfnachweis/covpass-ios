@@ -120,7 +120,7 @@ class CertificateItemDetailViewModel: CertificateItemDetailViewModelProtocol {
                 ContentItem("vaccination_certificate_detail_view_data_vaccine_number".localized, "\(v.dn) / \(v.sd)"),
                 ContentItem("vaccination_certificate_detail_view_data_vaccine_date_".localized, DateUtils.isoDateFormatter.string(from: v.dt),
                             accessibilityLabel(for: v.dt, label: "vaccination_certificate_detail_view_data_vaccine_date_".localized)),
-                ContentItem("vaccination_certificate_detail_view_data_vaccine_country".localized, v.coDisplayName),
+                ContentItem("vaccination_certificate_detail_view_data_vaccine_country".localized, v.co.localized),
                 ContentItem("vaccination_certificate_detail_view_data_vaccine_issuer".localized, v.is),
                 ContentItem("vaccination_certificate_detail_view_data_vaccine_identifier".localized, v.ciDisplayName),
                 ContentItem("vaccination_certificate_detail_view_data_expiry_date".localized,

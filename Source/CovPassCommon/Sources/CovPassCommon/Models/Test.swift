@@ -123,15 +123,15 @@ public extension Test {
     }
 
     var ttDisplayName: String {
-        map(key: tt, from: Bundle.commonBundle.url(forResource: "test-type", withExtension: "json")) ?? tt
+        map(key: tt, from: Bundle.commonBundle.url(forResource: "covid-19-lab-test-type", withExtension: "json")) ?? tt
     }
 
     var maDisplayName: String? {
-        map(key: ma, from: Bundle.commonBundle.url(forResource: "test-manf", withExtension: "json")) ?? ma
+        map(key: ma, from: Bundle.commonBundle.url(forResource: "covid-19-lab-test-manufacturer-and-name", withExtension: "json")) ?? ma
     }
 
     var trDisplayName: String {
-        map(key: tr, from: Bundle.commonBundle.url(forResource: "test-result", withExtension: "json")) ?? tr
+        map(key: tr, from: Bundle.commonBundle.url(forResource: "covid-19-lab-result", withExtension: "json")) ?? tr
     }
 
     /// UVCI without `URN:UVCI:` prefix

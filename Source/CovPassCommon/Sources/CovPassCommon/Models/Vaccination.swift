@@ -149,11 +149,11 @@ public extension Vaccination {
     }
 
     var vpDisplayName: String {
-        map(key: vp, from: Bundle.commonBundle.url(forResource: "vaccine-prophylaxis", withExtension: "json")) ?? vp
+        map(key: vp, from: Bundle.commonBundle.url(forResource: "sct-vaccines-covid-19", withExtension: "json")) ?? vp
     }
 
     var maDisplayName: String {
-        map(key: ma, from: Bundle.commonBundle.url(forResource: "vaccine-mah-manf", withExtension: "json")) ?? ma
+        map(key: ma, from: Bundle.commonBundle.url(forResource: "vaccines-covid-19-auth-holders", withExtension: "json")) ?? ma
     }
 
     var mpDisplayName: String {
@@ -161,7 +161,7 @@ public extension Vaccination {
     }
 
     var coDisplayName: String {
-        map(key: co, from: Bundle.commonBundle.url(forResource: "country", withExtension: "json")) ?? co
+        map(key: co, from: Bundle.commonBundle.url(forResource: "country-2-codes", withExtension: "json")) ?? co
     }
 
     /// UVCI without `URN:UVCI:` prefix
