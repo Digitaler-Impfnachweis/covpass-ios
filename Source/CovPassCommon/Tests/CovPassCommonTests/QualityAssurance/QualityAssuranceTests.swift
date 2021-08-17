@@ -32,10 +32,10 @@ class QualityAssuranceTests: XCTestCase {
     }
 
     // Before executing this test you should use the script 'Scripts/copy-eu-certificates.sh' to copy the EU most recent EU certificates
-    func testAllEUCertificates() {
+    func testAllEUCertificates() throws {
         var certificateCount = 0
         var errors = [String]()
-        guard let files = try? FileManager.default.contentsOfDirectory(atPath: Bundle.module.bundlePath) else { return XCTFail() }
+        let files = try XCTUnwrap(FileManager.default.contentsOfDirectory(atPath: Bundle.module.bundlePath))
         for file in files where file.starts(with: "dcc-quality-assurance") {
             certificateCount += 1
             if let data = parseQRCode(file) {
@@ -56,8 +56,9 @@ class QualityAssuranceTests: XCTestCase {
 
     func testSingleEUCertificate() throws {
         let file = "" // e.g. dcc-quality-assurance_DE_1.0.0_VAC.png
+        try XCTSkipIf(file.isEmpty)
         guard let data = parseQRCode(file) else {
-            print("Cannot parse QR code from file \(file)")
+            XCTFail("Cannot parse QR code from file \(file)")
             return
         }
         _ = try repository.checkCertificate(data).wait()
