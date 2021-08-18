@@ -3,6 +3,9 @@ Source/CovPassCommon/Sources/CovPassCommon/Resources/TLS
 Source/CovPassCommon/Sources/CovPassCommon/Resources/CA
 Source/CovPassCommon/Sources/CovPassCommon/Resources/DCC
 
+## Test Files
+Source/CovPassCommon/Tests/CovPassCommonTests/Resources/dcc-quality-assurance
+
 ## macOS
 .DS_Store
 
