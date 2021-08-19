@@ -60,17 +60,10 @@ struct RecoveryCertificateItemViewModel: CertificateItemViewModel {
     var subtitleAccessibilityLabel: String? { subtitle }
 
     var info: String {
-        if let r = dgc.r?.first {
-            if Date() < r.df {
-                return String(format: "certificates_overview_recovery_certificate_valid_from_date".localized, DateUtils.displayDateFormatter.string(from: r.df))
-            }
-            return String(format: "certificates_overview_recovery_certificate_valid_until_date".localized, DateUtils.displayDateFormatter.string(from: r.du))
-        }
-        return ""
+        infoString(forAccessibility: false) ?? ""
     }
     var infoAccessibilityLabel: String? {
-        #warning("TODO")
-        return info
+        infoString(forAccessibility: true) ?? info
     }
 
     var info2: String? {
@@ -87,6 +80,10 @@ struct RecoveryCertificateItemViewModel: CertificateItemViewModel {
     }
     var info2AccessibilityLabel: String? { info2 }
 
+    var statusIcon: UIImage { .validationCheckmark }
+
+    var statusIconAccessibilityLabel: String? { nil }
+
     var activeTitle: String? {
         active ? "certificates_overview_currently_uses_certificate_note".localized : nil
     }
@@ -94,5 +91,17 @@ struct RecoveryCertificateItemViewModel: CertificateItemViewModel {
     init(_ certificate: ExtendedCBORWebToken, active: Bool = false) {
         self.certificate = certificate
         self.active = active
+    }
+
+    // MARK: - Helpers
+
+    private func infoString(forAccessibility accessibility: Bool) -> String? {
+        guard let r = dgc.r?.first else { return nil }
+
+        let formatter = accessibility ? DateUtils.audioDateFormatter : DateUtils.displayDateFormatter
+        if Date() < r.df {
+            return String(format: "certificates_overview_recovery_certificate_valid_from_date".localized, formatter.string(from: r.df))
+        }
+        return String(format: "certificates_overview_recovery_certificate_valid_until_date".localized, formatter.string(from: r.du))
     }
 }

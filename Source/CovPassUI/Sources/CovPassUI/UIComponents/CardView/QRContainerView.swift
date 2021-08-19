@@ -75,7 +75,24 @@ public class QRContainerView: XibView {
         titleLabel.attributedText = title?.styledAs(.header_2).colored(.neutralBlack)
         titleLabel.isHidden = titleLabel.attributedText.isNilOrEmpty
 
-        subtitleLabel.attributedText = subtitle?.styledAs(.body).colored(.neutralBlack)
+        // Quick hack to indicate a special booster-handling by ze germanz
+        if let subtitle = subtitle, subtitle.contains("🇩🇪") {
+            let attrString = subtitle.replacingOccurrences(of: "🇩🇪", with: "").styledAs(.body).colored(.neutralBlack)
+            let mutableText = NSMutableAttributedString(attributedString: attrString)
+
+            // add DE flag image and align vertically centered
+            if let font: UIFont = attrString.attribute(.font) {
+                let flag = NSTextAttachment()
+                let image = UIImage.flagDE
+                flag.bounds = CGRect(x: 0, y: (font.capHeight - image.size.height) / 2, width: image.size.width, height: image.size.height)
+                flag.image = image
+                mutableText.insert(NSAttributedString(attachment: flag), at: 0)
+            }
+            
+            subtitleLabel.attributedText = mutableText.aligned(to: .natural)
+        } else {
+            subtitleLabel.attributedText = subtitle?.styledAs(.body).colored(.neutralBlack)
+        }
         subtitleLabel.isHidden = subtitleLabel.attributedText.isNilOrEmpty
 
         overlay.isHidden = !showOverlay

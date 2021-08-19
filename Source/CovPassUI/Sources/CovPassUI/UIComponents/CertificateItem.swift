@@ -17,6 +17,7 @@ public class CertificateItem: XibView {
     @IBOutlet public var subtitleLabel: PlainLabel!
     @IBOutlet public var infoLabel: PlainLabel!
     @IBOutlet public var info2Label: PlainLabel!
+    @IBOutlet public var statusIcon: UIImageView!
     @IBOutlet public var activeView: UIView!
     @IBOutlet public var activeLabel: UILabel!
     @IBOutlet public var chevron: UIImageView!
@@ -60,6 +61,9 @@ public class CertificateItem: XibView {
         info2Label.isHidden = viewModel.info2 == nil
         info2Label.accessibilityLabel = viewModel.info2AccessibilityLabel
 
+        statusIcon.image = viewModel.statusIcon
+        statusIcon.accessibilityLabel = viewModel.statusIconAccessibilityLabel
+        
         activeLabel.attributedText = viewModel.activeTitle?.styledAs(.body).colored(.onBackground70)
         activeView.isHidden = viewModel.activeTitle == nil
 

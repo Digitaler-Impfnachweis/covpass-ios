@@ -38,6 +38,12 @@ public struct DigitalGreenCertificate: Codable {
         return ""
     }
 
+    /// Returns `true` if any vacciantion is marked as a booster, e.g. (3/2)
+    public var isVaccinationBoosted: Bool {
+        guard let result = v?.filter({ $0.isBoosted }) else { return false }
+        return !result.isEmpty
+    }
+
     enum CodingKeys: String, CodingKey {
         case nam
         case dob

@@ -87,6 +87,10 @@ struct TestCertificateItemViewModel: CertificateItemViewModel {
     }
     var info2AccessibilityLabel: String? { info2 }
 
+    var statusIcon: UIImage { .validationCheckmark }
+
+    var statusIconAccessibilityLabel: String? { nil }
+    
     var activeTitle: String? {
         active ? "certificates_overview_currently_uses_certificate_note".localized : nil
     }

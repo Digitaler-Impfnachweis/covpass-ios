@@ -49,7 +49,7 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
             self.refreshCertificates()
         }
         .catch { _ in
-            // We should handle this error
+            // FIXME: We should handle this error
             self.delegate?.viewModelDidUpdate()
         }
     }
@@ -105,7 +105,12 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
             self.certificateList.certificates.append(certificate)
             self.delegate?.viewModelDidUpdate()
             self.handleCertificateDetailSceneResult(.showCertificatesOnOverview([certificate]))
-            self.showCertificate(certificate)
+            
+            if certificate.vaccinationCertificate.hcert.dgc.isVaccinationBoosted {
+                self.showBoosterDisclaimer(certificate)
+            } else {
+                self.showCertificate(certificate)
+            }
         }
         .catch { error in
             self.router.showDialogForScanError(error) { [weak self] in
@@ -159,6 +164,18 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
         .done { isFavorite in
             self.lastKnownFavoriteCertificateId = isFavorite ? id : nil
             self.delegate?.viewModelNeedsFirstCertificateVisible()
+        }
+        .catch { [weak self] error in
+            self?.router.showUnexpectedErrorDialog(error)
+        }
+    }
+
+    func showBoosterDisclaimer(_ certificate: ExtendedCBORWebToken) {
+        firstly {
+            router.showBoosterDisclaimer()
+        }
+        .done {
+            self.showCertificate(certificate)
         }
         .catch { [weak self] error in
             self?.router.showUnexpectedErrorDialog(error)

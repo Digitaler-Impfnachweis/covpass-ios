@@ -18,4 +18,5 @@ protocol CertificatesOverviewRouterProtocol: DialogRouterProtocol {
     func showRuleCheck() -> Promise<Void>
     func scanQRCode() -> Promise<ScanResult>
     func showAppInformation()
+    func showBoosterDisclaimer() -> Promise<Void>
 }

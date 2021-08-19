@@ -13,6 +13,7 @@ import Scanner
 import UIKit
 
 class CertificatesOverviewRouter: CertificatesOverviewRouterProtocol, DialogRouterProtocol {
+
     // MARK: - Properties
 
     let sceneCoordinator: SceneCoordinator
@@ -66,5 +67,9 @@ class CertificatesOverviewRouter: CertificatesOverviewRouterProtocol, DialogRout
                 router: AppInformationRouter(sceneCoordinator: sceneCoordinator)
             )
         )
+    }
+
+    func showBoosterDisclaimer() -> Promise<Void> {
+        sceneCoordinator.present(BoosterDisclaimerSceneFactory())
     }
 }

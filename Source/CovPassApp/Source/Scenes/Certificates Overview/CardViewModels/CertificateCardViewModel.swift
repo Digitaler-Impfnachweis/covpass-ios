@@ -113,6 +113,10 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
         token.vaccinationCertificate.isExpired || token.vaccinationCertificate.isInvalid
     }
 
+    var isBoosted: Bool {
+        token.vaccinationCertificate.hcert.dgc.isVaccinationBoosted
+    }
+
     // Hide favorite button if this certificate is the only card that is shown
     var showFavorite: Bool = true
 

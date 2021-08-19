@@ -18,6 +18,7 @@
                 <outlet property="iconView" destination="dOm-kM-w5j" id="zsZ-xx-mIG"/>
                 <outlet property="info2Label" destination="bFO-ft-J9N" id="jLy-8E-dzp"/>
                 <outlet property="infoLabel" destination="2Vh-w9-vTh" id="E1r-Gc-WfQ"/>
+                <outlet property="statusIcon" destination="aub-us-H0Y" id="4oG-2B-GBo"/>
                 <outlet property="subtitleLabel" destination="PjE-3t-II4" id="Ctk-Su-dJq"/>
                 <outlet property="titleLabel" destination="Fmi-qZ-kH4" id="fQ2-PY-z1k"/>
             </connections>
@@ -84,7 +85,7 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qWv-6z-ny4">
                             <rect key="frame" x="12" y="50" width="236" height="28"/>
                             <subviews>
-                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkmark" translatesAutoresizingMaskIntoConstraints="NO" id="aub-us-H0Y">
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkmark" translatesAutoresizingMaskIntoConstraints="NO" id="aub-us-H0Y" userLabel="Status Icon">
                                     <rect key="frame" x="4" y="4" width="20" height="20"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="20" id="km3-dP-EOR"/>
