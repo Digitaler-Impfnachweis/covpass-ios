@@ -91,6 +91,7 @@
 		21DAD6E3264F0B19003407FC /* CovPassUI in Frameworks */ = {isa = PBXBuildFile; productRef = 21DAD6E2264F0B19003407FC /* CovPassUI */; };
 		21FBCA79264F016E00CAEF44 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21FBCA78264F016E00CAEF44 /* LaunchScreen.storyboard */; };
 		3520AA6C26B85AA900D22435 /* PDFExportViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3520AA6B26B85AA900D22435 /* PDFExportViewModelProtocol.swift */; };
+		3569924526CEB35D0054531A /* CertificateDetailViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3569924426CEB35D0054531A /* CertificateDetailViewModelTests.swift */; };
 		35BE613D26CCED950092566B /* BoosterDisclaimerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35BE613C26CCED950092566B /* BoosterDisclaimerViewModel.swift */; };
 		35BE613F26CCEDA80092566B /* BoosterDisclaimerSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35BE613E26CCEDA80092566B /* BoosterDisclaimerSceneFactory.swift */; };
 		35F2E0A826CC41480077E169 /* BoosterDisclaimerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35F2E0A726CC41480077E169 /* BoosterDisclaimerViewController.xib */; };
@@ -269,6 +270,7 @@
 		21FBCA60264F011900CAEF44 /* StringLocalization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringLocalization.swift; sourceTree = "<group>"; };
 		21FBCA78264F016E00CAEF44 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3520AA6B26B85AA900D22435 /* PDFExportViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFExportViewModelProtocol.swift; sourceTree = "<group>"; };
+		3569924426CEB35D0054531A /* CertificateDetailViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateDetailViewModelTests.swift; sourceTree = "<group>"; };
 		35BE613C26CCED950092566B /* BoosterDisclaimerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoosterDisclaimerViewModel.swift; sourceTree = "<group>"; };
 		35BE613E26CCEDA80092566B /* BoosterDisclaimerSceneFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoosterDisclaimerSceneFactory.swift; sourceTree = "<group>"; };
 		35F2E0A726CC41480077E169 /* BoosterDisclaimerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BoosterDisclaimerViewController.xib; sourceTree = "<group>"; };
@@ -610,6 +612,7 @@
 				38E94DF026613F350015553C /* SceneCoordinatorMock.swift */,
 				385FC1B3269F577400D19AF8 /* MockPersistence.swift */,
 				385FC1B5269F57BC00D19AF8 /* DCCServiceMock.swift */,
+				3569924426CEB35D0054531A /* CertificateDetailViewModelTests.swift */,
 			);
 			path = Mock;
 			sourceTree = "<group>";
@@ -1441,6 +1444,7 @@
 				88AB2AA525FA431E00D4EA52 /* CovPassAppTests.swift in Sources */,
 				216D2034264EFA6C00370F16 /* MockCertificateViewModel.swift in Sources */,
 				216D203D264EFA7400370F16 /* PassOnboardingPageViewModelTests.swift in Sources */,
+				3569924526CEB35D0054531A /* CertificateDetailViewModelTests.swift in Sources */,
 				216D2035264EFA6C00370F16 /* VaccinationRepositoryMock.swift in Sources */,
 				216D2032264EFA6C00370F16 /* MockViewModelDelegate.swift in Sources */,
 			);

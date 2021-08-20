@@ -39,6 +39,10 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
         certificates.first?.vaccinationCertificate.hcert.dgc.nam.fullName ?? ""
     }
 
+    var nameReversed: String {
+        certificates.first?.vaccinationCertificate.hcert.dgc.nam.fullNameReverse ?? ""
+    }
+
     var nameTransliterated: String {
         certificates.first?.vaccinationCertificate.hcert.dgc.nam.fullNameTransliteratedReverse ?? ""
     }
@@ -98,6 +102,9 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
         }
         if selectedCertificate?.vaccinationCertificate.isInvalid ?? false {
             return "certificates_overview_invalid_message".localized
+        }
+        if let cert = selectedCertificate?.vaccinationCertificate.hcert.dgc.v?.first(where: { $0.fullImmunization }), !cert.fullImmunizationValid {
+            return "vaccination_certificate_overview_complete_from_message".localized
         }
         return "recovery_certificate_overview_message".localized
     }

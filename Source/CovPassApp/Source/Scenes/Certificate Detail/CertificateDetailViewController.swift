@@ -107,7 +107,7 @@ class CertificateDetailViewController: UIViewController {
         personalDataHeadline.layoutMargins = .init(top: .space_30, left: .space_24, bottom: .zero, right: .space_24)
 
         nameView.attributedTitleText = "certificates_overview_personal_data_name".localized.styledAs(.header_3)
-        nameView.attributedBodyText = viewModel.name.styledAs(.body)
+        nameView.attributedBodyText = viewModel.nameReversed.styledAs(.body)
         nameView.contentView?.layoutMargins = .init(top: .space_12, left: .space_24, bottom: .space_12, right: .space_24)
 
         nameTransliteratedView.attributedTitleText = "vaccination_certificate_detail_view_data_name_standard".localized.styledAs(.header_3)
