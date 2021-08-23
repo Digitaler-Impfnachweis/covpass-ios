@@ -195,6 +195,8 @@
 
 "CH" = "Switzerland";
 
+"UA" = "Ukraine";
+
 "certificate_check_validity_selection_country_note" = "Is your destination not listed? More countries are progressively being added in stages. \n\nYou can find more information in the frequently asked questions and at #https://reopen.europa.eu::https://reopen.europa.eu#.";
 
 "certificate_check_validity_selection_country_action_button" = "Select";

@@ -151,7 +151,8 @@ public struct DCCCertLogic {
             "MT",
             "HU",
             "IE",
-            "CH"
+            "CH",
+            "UA"
         ]
     }
 
