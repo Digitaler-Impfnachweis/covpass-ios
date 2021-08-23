@@ -185,6 +185,8 @@
 
 "CH" = "Schweiz";
 
+"UA" = "Ukraine";
+
 "certificate_check_validity_selection_country_note" = "Sie finden Ihr Reiseland nicht? In einem mehrstufigen Prozess werden nach und nach mehr Länder verfügbar gemacht. \n\nMehr Informationen finden Sie in den Häufigen Fragen und unter #https://reopen.europa.eu::https://reopen.europa.eu#.";
 
 "certificate_check_validity_selection_country_action_button" = "Übernehmen";
