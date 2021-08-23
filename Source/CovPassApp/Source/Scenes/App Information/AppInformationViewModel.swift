@@ -33,7 +33,7 @@ class AppInformationViewModel: AppInformationViewModelProtocol {
         [
             webEntry(
                 title: "app_information_title_contact".localized,
-                url: Bundle.main.url(forResource: Locale.current.isGerman() ? "contact-covpass" : "contact-covpass-en", withExtension: "html")!
+                url: Bundle.main.url(forResource: Locale.current.isGerman() ? "contact-covpass-de" : "contact-covpass-en", withExtension: "html")!
             ),
 
             webEntry(
@@ -43,7 +43,7 @@ class AppInformationViewModel: AppInformationViewModelProtocol {
 
             webEntry(
                 title: "app_information_title_datenschutz".localized,
-                url: Bundle.main.url(forResource: Locale.current.isGerman() ? "privacy-covpass" : "privacy-covpass-en", withExtension: "html")!
+                url: Bundle.main.url(forResource: Locale.current.isGerman() ? "privacy-covpass-de" : "privacy-covpass-en", withExtension: "html")!
             ),
 
             webEntry(
