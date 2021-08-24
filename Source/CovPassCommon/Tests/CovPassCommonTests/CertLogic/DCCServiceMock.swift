@@ -6,7 +6,6 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-import CertLogic
 import CovPassCommon
 import Foundation
 import PromiseKit
