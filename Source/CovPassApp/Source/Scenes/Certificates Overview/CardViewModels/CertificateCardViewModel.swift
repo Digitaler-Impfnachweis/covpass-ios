@@ -96,6 +96,12 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
     }
 
     var titleIcon: UIImage {
+        if token.vaccinationCertificate.isExpired {
+            return .expired
+        }
+        if token.vaccinationCertificate.expiresSoon {
+            return .activity
+        }
         if certificate.r != nil {
             return .statusFullDetail
         }
@@ -130,7 +136,7 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
 
     var tintColor: UIColor {
         if token.vaccinationCertificate.isExpired || token.vaccinationCertificate.isInvalid {
-            return .darkText
+            return .neutralWhite
         }
         if let v = certificate.v?.first, !v.fullImmunizationValid {
             return .darkText

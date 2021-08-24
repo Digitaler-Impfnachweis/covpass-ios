@@ -181,7 +181,9 @@ public extension ExtendedCBORWebToken {
 }
 
 extension DigitalGreenCertificate {
-    /// Checks if the given certificate can be exported
+    /// Checks if the given certificate can be technically exported, i.e. has a PDF-template available
+    ///
+    /// **Important:** This does NOT check for any business rules or expiration dates!
     var canExportToPDF: Bool {
         template != nil
     }
