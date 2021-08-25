@@ -72,4 +72,8 @@ class CertificatesOverviewRouter: CertificatesOverviewRouterProtocol, DialogRout
     func showBoosterDisclaimer() -> Promise<Void> {
         sceneCoordinator.present(BoosterDisclaimerSceneFactory())
     }
+
+    func showBoosterNotification() -> Promise<Void> {
+        sceneCoordinator.present(BoosterNotificationSceneFactory())
+    }
 }

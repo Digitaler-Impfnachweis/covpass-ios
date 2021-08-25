@@ -170,6 +170,18 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
         }
     }
 
+    func showBoosterNotification() {
+        firstly {
+            router.showBoosterNotification()
+        }
+        .done {
+            #warning("tbd: on booster notification")
+        }
+        .catch { [weak self] error in
+            self?.router.showUnexpectedErrorDialog(error)
+        }
+    }
+
     func showCertificate(_ certificate: ExtendedCBORWebToken) {
         showCertificates(
             certificateList.certificates.certificatePair(for: certificate)

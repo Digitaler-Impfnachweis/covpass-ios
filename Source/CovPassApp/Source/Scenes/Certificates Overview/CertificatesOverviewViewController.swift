@@ -56,6 +56,14 @@ class CertificatesOverviewViewController: UIViewController {
         navigationController?.setNavigationBarHidden(false, animated: animated)
     }
 
+    #if DEBUG
+    override func motionBegan(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
+        if motion == .motionShake {
+            viewModel.showBoosterNotification()
+        }
+    }
+    #endif
+
     // MARK: - Private
 
     private func setupDotIndicator() {
