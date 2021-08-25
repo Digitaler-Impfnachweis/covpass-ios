@@ -170,18 +170,6 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
         }
     }
 
-    func showBoosterDisclaimer(_ certificate: ExtendedCBORWebToken) {
-        firstly {
-            router.showBoosterDisclaimer()
-        }
-        .done {
-            self.showCertificate(certificate)
-        }
-        .catch { [weak self] error in
-            self?.router.showUnexpectedErrorDialog(error)
-        }
-    }
-
     func showCertificate(_ certificate: ExtendedCBORWebToken) {
         showCertificates(
             certificateList.certificates.certificatePair(for: certificate)
@@ -221,6 +209,18 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
         case let .showCertificatesOnOverview(certificates):
             guard let index = repository.matchedCertificates(for: certificateList).firstIndex(where: { $0.certificates.elementsEqual(certificates) }) else { return }
             delegate?.viewModelNeedsCertificateVisible(at: index)
+        }
+    }
+
+    private func showBoosterDisclaimer(_ certificate: ExtendedCBORWebToken) {
+        firstly {
+            router.showBoosterDisclaimer()
+        }
+        .done {
+            self.showCertificate(certificate)
+        }
+        .catch { [weak self] error in
+            self?.router.showUnexpectedErrorDialog(error)
         }
     }
 }
