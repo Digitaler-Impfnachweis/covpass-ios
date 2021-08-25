@@ -13,21 +13,39 @@ public enum CertificateSorter {
     public static func sort(_ certificates: [ExtendedCBORWebToken]) -> [ExtendedCBORWebToken] {
         var res = [ExtendedCBORWebToken]()
         // #1 Test certificate
-        //  Negative PCR Test not older than (=<)72h
-        res.append(contentsOf: certificates.filter {
+        //  Negative PCR Test not older than (=<)72h, ordered by date (newest first)
+        let pcrTests = certificates.filter {
             if let t = $0.vaccinationCertificate.hcert.dgc.t?.first, t.isPCR, !t.isPositive, Date() <= Calendar.current.date(byAdding: .hour, value: 72, to: t.sc) ?? Date() {
                 return true
             }
             return false
-        })
+        }
+        res.append(contentsOf: pcrTests.sorted(by: {
+            guard
+                let lhs = $0.vaccinationCertificate.hcert.dgc.t?.first?.sc,
+                let rhs = $1.vaccinationCertificate.hcert.dgc.t?.first?.sc
+            else {
+                return false
+            }
+            return lhs > rhs
+        }))
         // #2 Test certificate
-        //  Negative quick test, not older than 48 hrs
-        res.append(contentsOf: certificates.filter {
+        //  Negative quick test, not older than 48 hrs, ordered by date (newest first)
+        let quickTests = certificates.filter {
             if let t = $0.vaccinationCertificate.hcert.dgc.t?.first, !t.isPCR, !t.isPositive, Date() <= Calendar.current.date(byAdding: .hour, value: 48, to: t.sc) ?? Date() {
                 return true
             }
             return false
-        })
+        }
+        res.append(contentsOf: quickTests.sorted(by: {
+            guard
+                let lhs = $0.vaccinationCertificate.hcert.dgc.t?.first?.sc,
+                let rhs = $1.vaccinationCertificate.hcert.dgc.t?.first?.sc
+            else {
+                return false
+            }
+            return lhs > rhs
+        }))
         // #3 Vaccination certificate
         //  Latest vaccination of a vaccination series (1/1, 2/2), older then (>) 14 days
         //  This does NOT included Booster certificates!
