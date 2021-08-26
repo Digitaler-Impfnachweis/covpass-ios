@@ -34,7 +34,7 @@ class AppInformationViewModel: AppInformationViewModelProtocol {
         [
             webEntry(
                 title: "app_information_title_contact".localized,
-                url: Bundle.main.url(forResource: Locale.current.isGerman() ? "contact-covpasscheck" : "contact-covpasscheck-en", withExtension: "html")!
+                url: Bundle.main.url(forResource: Locale.current.isGerman() ? "contact-covpasscheck-de" : "contact-covpasscheck-en", withExtension: "html")!
             ),
 
             webEntry(
@@ -44,7 +44,7 @@ class AppInformationViewModel: AppInformationViewModelProtocol {
 
             webEntry(
                 title: "app_information_title_datenschutz".localized,
-                url: Bundle.main.url(forResource: Locale.current.isGerman() ? "privacy-covpasscheck" : "privacy-covpasscheck-en", withExtension: "html")!
+                url: Bundle.main.url(forResource: Locale.current.isGerman() ? "privacy-covpasscheck-de" : "privacy-covpasscheck-en", withExtension: "html")!
             ),
 
             webEntry(
