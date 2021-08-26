@@ -35,4 +35,49 @@ class VaccinationTests: XCTestCase {
         XCTAssertEqual(sut.map(key: sut.ma, from: Bundle.commonBundle.url(forResource: "vaccines-covid-19-auth-holders", withExtension: "json")), "Biontech Manufacturing GmbH")
         XCTAssertEqual(sut.map(key: sut.co, from: Bundle.commonBundle.url(forResource: "country-2-codes", withExtension: "json")), "Germany")
     }
+
+    func testBooster() {
+        let jsonData = Data.json("Vaccination")
+        let sut = try! JSONDecoder().decode(Vaccination.self, from: jsonData)
+
+        sut.mp = MedicalProduct.johnsonjohnson.rawValue
+        sut.dn = 1
+        XCTAssertFalse(sut.isBoosted)
+        sut.mp = MedicalProduct.johnsonjohnson.rawValue
+        sut.dn = 2
+        XCTAssert(sut.isBoosted)
+        sut.mp = MedicalProduct.johnsonjohnson.rawValue
+        sut.dn = 3
+        XCTAssert(sut.isBoosted)
+
+        sut.mp = MedicalProduct.biontech.rawValue
+        sut.dn = 1
+        XCTAssertFalse(sut.isBoosted)
+        sut.mp = MedicalProduct.biontech.rawValue
+        sut.dn = 2
+        XCTAssertFalse(sut.isBoosted)
+        sut.mp = MedicalProduct.biontech.rawValue
+        sut.dn = 3
+        XCTAssert(sut.isBoosted)
+
+        sut.mp = MedicalProduct.astrazeneca.rawValue
+        sut.dn = 1
+        XCTAssertFalse(sut.isBoosted)
+        sut.mp = MedicalProduct.astrazeneca.rawValue
+        sut.dn = 2
+        XCTAssertFalse(sut.isBoosted)
+        sut.mp = MedicalProduct.astrazeneca.rawValue
+        sut.dn = 3
+        XCTAssert(sut.isBoosted)
+
+        sut.mp = MedicalProduct.moderna.rawValue
+        sut.dn = 1
+        XCTAssertFalse(sut.isBoosted)
+        sut.mp = MedicalProduct.moderna.rawValue
+        sut.dn = 2
+        XCTAssertFalse(sut.isBoosted)
+        sut.mp = MedicalProduct.moderna.rawValue
+        sut.dn = 3
+        XCTAssert(sut.isBoosted)
+    }
 }

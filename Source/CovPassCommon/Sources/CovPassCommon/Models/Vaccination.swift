@@ -30,17 +30,13 @@ public class Vaccination: Codable {
     /// Unique Certificate Identifier: UVCI
     public var ci: String
 
-    /// True if vaccination is valid medical product
-    public var validMp: Bool {
-        let validProducts = ["EU/1/20/1528", "EU/1/20/1507", "EU/1/21/1529", "EU/1/20/1525"]
-        return validProducts.contains(mp)
-    }
-
     /// True if full immunization (or booster) is given
     public var fullImmunization: Bool { dn >= sd }
 
     /// `True` if vaccination is 'boosted' above the total number of vaccinations in the series, i.e. (4/2, 3/2, 2/1, etc.)
-    public var isBoosted: Bool { dn > sd }
+    public var isBoosted: Bool {
+        (mp == MedicalProduct.johnsonjohnson.rawValue && dn >= 2) || dn >= 3
+    }
 
     /// Date when the full immunization is valid
     public var fullImmunizationValidFrom: Date? {
