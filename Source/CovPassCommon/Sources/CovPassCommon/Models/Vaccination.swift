@@ -31,7 +31,7 @@ public class Vaccination: Codable {
     public var ci: String
 
     /// True if full immunization (or booster) is given
-    public var fullImmunization: Bool { dn >= sd }
+    public var fullImmunization: Bool { dn >= sd || isBoosted }
 
     /// `True` if vaccination is 'boosted' above the total number of vaccinations in the series, i.e. (4/2, 3/2, 2/1, etc.)
     public var isBoosted: Bool {
@@ -41,6 +41,7 @@ public class Vaccination: Codable {
     /// Date when the full immunization is valid
     public var fullImmunizationValidFrom: Date? {
         if !fullImmunization { return nil }
+        if isBoosted { return dt }
         guard let validDate = Calendar.current.date(byAdding: .day, value: 15, to: dt) else {
             return nil
         }
@@ -59,6 +60,7 @@ public class Vaccination: Codable {
     /// True if full immunization is valid
     public var fullImmunizationValid: Bool {
         guard let dateValidFrom = fullImmunizationValidFrom, let dateValidUntil = fullImmunizationValidUntil else { return false }
+        if isBoosted { return true }
         return Date() > dateValidFrom && Date() <= dateValidUntil
     }
 
