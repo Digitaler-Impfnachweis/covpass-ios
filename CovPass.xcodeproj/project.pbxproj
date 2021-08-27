@@ -96,6 +96,7 @@
 		35F99E0F26B2B67100D3EFC3 /* PDFExportViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F99E0E26B2B67100D3EFC3 /* PDFExportViewModel.swift */; };
 		35F99E1126B2B6F000D3EFC3 /* PDFExportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F99E1026B2B6F000D3EFC3 /* PDFExportViewController.swift */; };
 		35F99E1426B2B75C00D3EFC3 /* PDFExportViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35F99E1326B2B75C00D3EFC3 /* PDFExportViewController.xib */; };
+		381EA91F26D8FD5C0014F2A5 /* privacy-covpass-de.html in Resources */ = {isa = PBXBuildFile; fileRef = 3509F33226CFD02500A078E5 /* privacy-covpass-de.html */; };
 		3823416A268A2A3900722A46 /* contact-covpasscheck-de.html in Resources */ = {isa = PBXBuildFile; fileRef = 38234168268A28C500722A46 /* contact-covpasscheck-de.html */; };
 		3829A309269CFEA800B8346C /* DCCCertLogicExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3829A308269CFEA800B8346C /* DCCCertLogicExtension.swift */; };
 		3829A30C269CFF7F00B8346C /* DCCCertLogicExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3829A30A269CFF7C00B8346C /* DCCCertLogicExtension.swift */; };
@@ -1260,6 +1261,7 @@
 			files = (
 				216D1FC0264EF75500370F16 /* CertificatesOverviewViewController.xib in Resources */,
 				3876382826ADBED100FBCA47 /* contact-covpass-en.html in Resources */,
+				381EA91F26D8FD5C0014F2A5 /* privacy-covpass-de.html in Resources */,
 				385FC192269EB6AE00D19AF8 /* CountrySelectionViewController.xib in Resources */,
 				3876382926ADBED100FBCA47 /* privacy-covpass-en.html in Resources */,
 				216D1FE0264EF76800370F16 /* CertificateDetailViewController.xib in Resources */,
