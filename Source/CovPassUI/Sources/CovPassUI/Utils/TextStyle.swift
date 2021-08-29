@@ -24,6 +24,9 @@ public enum TextStyle {
     /// size: 18 lineHeight: 27 letterSpacing: 0.13 type: semi-bold color: onBackground100
     case subheader_1
 
+    /// size: 14 lineHeight: 21 letterSpacing: 0.13 type: semi-bold color: onBackground70
+    case subheader_2
+
     /// size: 14 lineHeight: 21 letterSpacing: 0.13 type: regular color: onBackground100
     case body
 
@@ -64,6 +67,12 @@ public enum TextStyle {
                 .font(named: UIFont.sansRegular, size: 18.0, lineHeight: 27.0, textStyle: .headline)
                 .letterSpacing(0.13)
                 .colored(.onBackground100)
+
+        case .subheader_2:
+            return string
+                .font(named: UIFont.sansRegular, size: 14.0, lineHeight: 21.0, textStyle: .headline)
+                .letterSpacing(0.13)
+                .colored(.onBackground70)
 
         case .body:
             return string
