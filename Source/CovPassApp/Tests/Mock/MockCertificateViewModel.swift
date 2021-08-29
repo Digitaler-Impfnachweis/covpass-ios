@@ -92,4 +92,6 @@ class MockCertificateViewModel: CertificatesOverviewViewModelProtocol {
     func updateDCCRules() {}
 
     func showRuleCheck() {}
+
+    func showBoosterNotification() {}
 }

@@ -33,6 +33,15 @@ class CertificateDetailViewController: UIViewController {
 
     private(set) var viewModel: CertificateDetailViewModelProtocol
 
+    private lazy var hintView: HintView = {
+        let view = HintView()
+        #warning("Dummy values!")
+        view.iconView.image = .warning
+        view.containerView.backgroundColor = .neutralWhite
+        view.containerView?.layer.borderColor = UIColor.neutralWhite.cgColor
+        return view
+    }()
+
     // MARK: - Lifecycle
 
     @available(*, unavailable)
@@ -58,6 +67,7 @@ class CertificateDetailViewController: UIViewController {
 
         setupHeadline()
         setupImmunizationView()
+        setupBoosterHintView()
         setupPersonalData()
         setupCertificates()
         setupNavigationBar()
@@ -99,6 +109,21 @@ class CertificateDetailViewController: UIViewController {
             self?.viewModel.immunizationButtonTapped()
         }
         stackView.setCustomSpacing(.space_24, after: immunizationButtonContainerView)
+    }
+
+    private func setupBoosterHintView() {
+        if viewModel.isBoosterEligible {
+            if !stackView.arrangedSubviews.contains(hintView) {
+                let index = stackView.arrangedSubviews.firstIndex(of: immunizationButtonContainerView)
+                stackView.insertArrangedSubview(hintView, at: index?.advanced(by: 1) ?? 2) // `2` is according to current design
+            }
+            hintView.titleLabel.attributedText = "_Lorem Sollicitudin Porta Malesuada".localized.styledAs(.header_3)
+            hintView.subTitleLabel.attributedText = "_Ligula Porta Lorem".localized.styledAs(.subheader_2)
+            hintView.bodyLabel.attributedText = "_Nulla vitae elit libero, a pharetra augue. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.".localized.styledAs(.body)
+            #warning("TODO: add link")
+        } else if stackView.arrangedSubviews.contains(hintView) {
+            stackView.removeArrangedSubview(hintView)
+        }
     }
 
     private func setupPersonalData() {

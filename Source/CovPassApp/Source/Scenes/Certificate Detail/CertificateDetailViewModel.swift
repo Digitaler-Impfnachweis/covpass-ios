@@ -145,6 +145,11 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
             }
     }
 
+    var isBoosterEligible: Bool {
+        #warning("dummy code")
+        return true
+    }
+
     // MARK: - Lifecyle
 
     init(
