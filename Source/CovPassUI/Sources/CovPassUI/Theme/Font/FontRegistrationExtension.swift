@@ -12,12 +12,14 @@ import UIKit
 extension UIFont {
     // MARK: - Supported fonts name
 
-    static let sansSemiBold = "IBMPlexSans-SemiBold"
-    static let sansRegular = "IBMPlexSans"
+    static let sansBold = "OpenSans-Bold"
+    static let sansSemiBold = "OpenSans-SemiBold"
+    static let sansRegular = "OpenSans-Regular"
 
     // MARK: - Load and unload fonts
 
     public static func loadCustomFonts() throws {
+        try UIFont.register(with: sansBold, bundle: .module)
         try UIFont.register(with: sansSemiBold, bundle: .module)
         try UIFont.register(with: sansRegular, bundle: .module)
     }
