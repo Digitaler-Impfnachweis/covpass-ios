@@ -11,7 +11,10 @@ import UIKit
 public class HintView: XibView {
     // MARK: - IBOutlet
 
+    @IBOutlet public var iconStackView: UIStackView!
     @IBOutlet public var iconView: UIImageView!
+    @IBOutlet public var iconLabel: HighlightLabel!
+
     @IBOutlet public var titleLabel: UILabel!
     @IBOutlet public var subTitleLabel: UILabel!
     @IBOutlet public var bodyLabel: UILabel!
@@ -35,6 +38,9 @@ public class HintView: XibView {
         titleLabel.text = nil
         subTitleLabel.text = nil
         bodyLabel.text = nil
+
+        iconLabel.text = nil
+        //iconStackView.removeArrangedSubview(iconLabel)
     }
 
     public override func updateConstraints() {

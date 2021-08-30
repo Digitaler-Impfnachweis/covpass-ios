@@ -35,8 +35,12 @@ class CertificateDetailViewController: UIViewController {
 
     private lazy var hintView: HintView = {
         let view = HintView()
-        #warning("Dummy values!")
-        view.iconView.image = .warning
+
+        view.iconView.image = nil
+
+        view.iconLabel.text = "Neu".localized
+        view.iconStackView.removeArrangedSubview(view.iconView)
+
         view.containerView.backgroundColor = .neutralWhite
         view.containerView?.layer.borderColor = UIColor.neutralWhite.cgColor
         return view
