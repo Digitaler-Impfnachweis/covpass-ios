@@ -93,7 +93,7 @@ class CertificateDetailViewController: UIViewController {
         immunizationView.attributedBodyText = viewModel.immunizationBody.styledAs(.body).colored(.onBackground70)
         immunizationView.layoutMargins.bottom = .space_24
 
-        immunizationButton.title = "recovery_certificate_overview_action_button_title".localized
+        immunizationButton.title = viewModel.immunizationButton
 
         immunizationButton.action = { [weak self] in
             self?.viewModel.immunizationButtonTapped()
