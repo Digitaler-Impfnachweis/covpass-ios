@@ -115,6 +115,8 @@
 
 "dialogue_add_booster_vaccination_message" = "Bitte beachten Sie, dass dieses Zertifikat für die Auffrischungsimpfung gegebenenfalls zum jetzigen Zeitpunkt im Ausland nicht als gültiger Impfnachweis akzeptiert wird. Sofern Sie eine Reise außerhalb Deutschlands planen, nehmen Sie bitte auch den Nachweis für einen erstmals wirksamen Impfschutz oder für eine wirksame Impfung für Genesene mit.";
 
+"dialogue_add_booster_vaccination_action_button_title" = "OK";
+
 
 /********** start Screen: favorite immunization certificate **********/
 
@@ -399,7 +401,7 @@
 
 "certificates_overview_booster_vaccination_certificate_title" = "Impfzertifikat";
 
-"certificates_overview_booster_vaccination_certificate_message" = "%@ Auffrischungsimpfung";
+"certificates_overview_booster_vaccination_certificate_message" = "%@. Auffrischungsimpfung";
 
 "certificates_overview_booster_vaccination_certificate_date" = "Geimpft am %@";
 

@@ -115,6 +115,8 @@
 
 "dialogue_add_booster_vaccination_message" = "Please note that this certificate for the booster vaccination may not be accepted as valid proof of vaccination abroad at this time. If you are planning a trip outside of Germany, please also take the proof of a vaccination that is effective for the first time or for an effective vaccination for those who have recovered.";
 
+"dialogue_add_booster_vaccination_action_button_title" = "OK";
+
 
 /********** start Screen: favorite immunization certificate **********/
 
@@ -399,7 +401,7 @@
 
 "certificates_overview_booster_vaccination_certificate_title" = "Vaccination certificate";
 
-"certificates_overview_booster_vaccination_certificate_message" = "%@ booster vaccination";
+"certificates_overview_booster_vaccination_certificate_message" = "%@. booster vaccination";
 
 "certificates_overview_booster_vaccination_certificate_date" = "Vaccinated on %@";
 

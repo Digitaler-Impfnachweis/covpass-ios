@@ -13,15 +13,17 @@ final class BoosterNotificationViewModel {
     let resolver: Resolver<Void>
 
     var title: String {
-        "".localized
+        #warning("TODO: translation")
+        return "".localized
     }
 
     var actionButtonTitle: String {
-        "".localized
+        "dialogue_add_booster_vaccination_action_button_title".localized
     }
 
     var disclaimerText: String {
-        "".localized
+        #warning("TODO: translation")
+        return "".localized
     }
 
     init(resolvable: Resolver<Void>) {
