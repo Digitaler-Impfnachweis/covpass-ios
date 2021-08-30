@@ -204,6 +204,9 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
         case let .showCertificatesOnOverview(certificates):
             guard let index = repository.matchedCertificates(for: certificateList).firstIndex(where: { $0.certificates.elementsEqual(certificates) }) else { return }
             delegate?.viewModelNeedsCertificateVisible(at: index)
+
+        case .addNewCertificate:
+            scanCertificate(withIntroduction: true)
         }
     }
 }
