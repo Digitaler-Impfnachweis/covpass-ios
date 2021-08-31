@@ -1,0 +1,15 @@
+{
+  "images" : [
+    {
+      "filename" : "status_full_notification@1x.pdf",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  },
+  "properties" : {
+    "preserves-vector-representation" : true
+  }
+}
