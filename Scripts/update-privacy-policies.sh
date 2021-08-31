@@ -4,6 +4,11 @@ set -euo pipefail
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
+# don't bother with `realpath` being installed or not…
+realpath() {
+    [[ $1 = /* ]] && echo "$1" || echo "$PWD/${1#./}"
+}
+
 # fetch privacy policies
 for locale in "de" "en"; do
 
