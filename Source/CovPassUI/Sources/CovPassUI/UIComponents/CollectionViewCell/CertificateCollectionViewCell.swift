@@ -94,13 +94,7 @@ public class CertificateCollectionViewCell: CardCollectionViewCell {
         qrContainerView.layoutMargins.bottom = .space_18
         qrContainerView.isHidden = vm.qrCode == nil
         qrContainerView.title = vm.title
-
-        if vm.isBoosted {
-            // placeholder flag will be replaced in qrContainerView
-            qrContainerView.subtitle = "🇩🇪\(vm.subtitle)"
-        } else {
-            qrContainerView.subtitle = vm.subtitle
-        }
+        qrContainerView.subtitle = vm.subtitle
 
         qrContainerView.showOverlay = vm.isExpired
 
