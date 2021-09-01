@@ -98,6 +98,9 @@
 		3523616826D66AC90085B243 /* BoosterNotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3523616726D66AC90085B243 /* BoosterNotificationViewController.swift */; };
 		3523616C26D66BC50085B243 /* BoosterNotificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3523616B26D66BC50085B243 /* BoosterNotificationViewController.xib */; };
 		3569924526CEB35D0054531A /* CertificateDetailViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3569924426CEB35D0054531A /* CertificateDetailViewModelTests.swift */; };
+		359FBF4326DFA3A3004333BC /* ExtendedCBORWebToken+Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359FBF4226DFA3A3004333BC /* ExtendedCBORWebToken+Notification.swift */; };
+		359FBF4526DFAAF4004333BC /* BoosterNotificationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359FBF4426DFAAF4004333BC /* BoosterNotificationTests.swift */; };
+		359FBF4926DFB20E004333BC /* MockExtendedCBORWebToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359FBF4726DFB13B004333BC /* MockExtendedCBORWebToken.swift */; };
 		35BE613D26CCED950092566B /* BoosterDisclaimerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35BE613C26CCED950092566B /* BoosterDisclaimerViewModel.swift */; };
 		35BE613F26CCEDA80092566B /* BoosterDisclaimerSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35BE613E26CCEDA80092566B /* BoosterDisclaimerSceneFactory.swift */; };
 		35F2E0A826CC41480077E169 /* BoosterDisclaimerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35F2E0A726CC41480077E169 /* BoosterDisclaimerViewController.xib */; };
@@ -281,6 +284,9 @@
 		3523616726D66AC90085B243 /* BoosterNotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoosterNotificationViewController.swift; sourceTree = "<group>"; };
 		3523616B26D66BC50085B243 /* BoosterNotificationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BoosterNotificationViewController.xib; sourceTree = "<group>"; };
 		3569924426CEB35D0054531A /* CertificateDetailViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateDetailViewModelTests.swift; sourceTree = "<group>"; };
+		359FBF4226DFA3A3004333BC /* ExtendedCBORWebToken+Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ExtendedCBORWebToken+Notification.swift"; sourceTree = "<group>"; };
+		359FBF4426DFAAF4004333BC /* BoosterNotificationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoosterNotificationTests.swift; sourceTree = "<group>"; };
+		359FBF4726DFB13B004333BC /* MockExtendedCBORWebToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockExtendedCBORWebToken.swift; sourceTree = "<group>"; };
 		35BE613C26CCED950092566B /* BoosterDisclaimerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoosterDisclaimerViewModel.swift; sourceTree = "<group>"; };
 		35BE613E26CCEDA80092566B /* BoosterDisclaimerSceneFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoosterDisclaimerSceneFactory.swift; sourceTree = "<group>"; };
 		35F2E0A726CC41480077E169 /* BoosterDisclaimerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BoosterDisclaimerViewController.xib; sourceTree = "<group>"; };
@@ -578,6 +584,7 @@
 				21A77A53265B0033002FEEF1 /* DialogRouterProtocol+DidDeleteCertificate.swift */,
 				38E94DE8266121D60015553C /* VaccinationRepositoryExtension.swift */,
 				3829A308269CFEA800B8346C /* DCCCertLogicExtension.swift */,
+				359FBF4226DFA3A3004333BC /* ExtendedCBORWebToken+Notification.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -622,6 +629,7 @@
 				385FC1B3269F577400D19AF8 /* MockPersistence.swift */,
 				385FC1B5269F57BC00D19AF8 /* DCCServiceMock.swift */,
 				3569924426CEB35D0054531A /* CertificateDetailViewModelTests.swift */,
+				359FBF4726DFB13B004333BC /* MockExtendedCBORWebToken.swift */,
 			);
 			path = Mock;
 			sourceTree = "<group>";
@@ -1128,6 +1136,7 @@
 				216D1F5B264EF52400370F16 /* Mock */,
 				216D2025264EF95400370F16 /* Scenes */,
 				88AB2A4025FA40CE00D4EA52 /* Info.plist */,
+				359FBF4426DFAAF4004333BC /* BoosterNotificationTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -1427,6 +1436,7 @@
 				216D2003264EF7B500370F16 /* ApiServiceFactory.swift in Sources */,
 				385FC1A3269ED63500D19AF8 /* DateSelectionViewModel.swift in Sources */,
 				3829A309269CFEA800B8346C /* DCCCertLogicExtension.swift in Sources */,
+				359FBF4326DFA3A3004333BC /* ExtendedCBORWebToken+Notification.swift in Sources */,
 				3523616426D66A5F0085B243 /* BoosterNotificationSceneFactory.swift in Sources */,
 				216D1FCE264EF75D00370F16 /* CertificatesOverviewViewModelProtocol.swift in Sources */,
 				3882AEB7266FEBA3000354CD /* CertificateItemDetailViewModelProtocol.swift in Sources */,
@@ -1467,8 +1477,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				359FBF4526DFAAF4004333BC /* BoosterNotificationTests.swift in Sources */,
 				216D202C264EFA6600370F16 /* CertificateViewModelTests.swift in Sources */,
 				216D203E264EFA7400370F16 /* PassConsentPageViewModelTests.swift in Sources */,
+				359FBF4926DFB20E004333BC /* MockExtendedCBORWebToken.swift in Sources */,
 				216D2037264EFA6C00370F16 /* MockCertificateViewModelDelegate.swift in Sources */,
 				216D2036264EFA6C00370F16 /* MockCardViewModel.swift in Sources */,
 				38E94DF126613F350015553C /* SceneCoordinatorMock.swift in Sources */,
