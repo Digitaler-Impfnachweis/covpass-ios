@@ -116,7 +116,7 @@ class CertificateDetailViewController: UIViewController {
     }
 
     private func setupBoosterHintView() {
-        if viewModel.isBoosterEligible {
+        if viewModel.shouldShowBoosterNotification {
             if !stackView.arrangedSubviews.contains(hintView) {
                 let index = stackView.arrangedSubviews.firstIndex(of: immunizationButtonContainerView)
                 stackView.insertArrangedSubview(hintView, at: index?.advanced(by: 1) ?? 2) // `2` is according to current design

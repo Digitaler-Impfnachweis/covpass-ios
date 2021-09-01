@@ -167,7 +167,8 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
 
     /// Helper property to indicate news on this certificate
     private var hasNotification: Bool {
-        true // TODO: get this!
+        #warning("TODO: get notification status") // user defaults?
+        return true
     }
 
     // MARK: - Actions

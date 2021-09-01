@@ -21,7 +21,7 @@ protocol CertificateDetailViewModelProtocol {
     var immunizationBody: String { get }
     var items: [CertificateItem] { get }
 
-    var isBoosterEligible: Bool { get }
+    var shouldShowBoosterNotification: Bool { get }
 
     func refresh()
     func immunizationButtonTapped()

@@ -145,8 +145,8 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
             }
     }
 
-    var isBoosterEligible: Bool {
-        #warning("dummy code")
+    var shouldShowBoosterNotification: Bool {
+        #warning("dummy code!")
         return true
     }
 
