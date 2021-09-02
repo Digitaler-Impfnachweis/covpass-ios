@@ -48,7 +48,7 @@ public final class SVGPDFExporter: NSObject, WKNavigationDelegate, SVGPDFExportP
 
         // Common fields
         svg = svg.replacingOccurrences(of: "$nam", with: certificate.nam.fullName.sanitizedXMLString)
-        svg = svg.replacingOccurrences(of: "$dob", with: certificate.dobString?.sanitizedXMLString ?? .placeholder)
+        svg = svg.replacingOccurrences(of: "$dob", with: certificate.dobString?.sanitizedXMLString ?? "XXXX-XX-XX")
         svg = svg.replacingOccurrences(of: "$ci", with: certificate.uvci.stripUVCIPrefix().sanitizedXMLString)
 
         // QR code
