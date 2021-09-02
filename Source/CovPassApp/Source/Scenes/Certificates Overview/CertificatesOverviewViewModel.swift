@@ -21,6 +21,7 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
     private let certLogic: DCCCertLogic
     private var certificateList = CertificateList(certificates: [])
     private var lastKnownFavoriteCertificateId: String?
+    private var userDefaults: Persistence
 
     var certificateViewModels: [CardViewModel] {
         cardViewModels(for: repository.matchedCertificates(for: certificateList).sorted(by: { c, _ -> Bool in c.isFavorite }))
@@ -35,11 +36,13 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
     init(
         router: CertificatesOverviewRouterProtocol,
         repository: VaccinationRepositoryProtocol,
-        certLogic: DCCCertLogic
+        certLogic: DCCCertLogic,
+        userDefaults: Persistence
     ) {
         self.router = router
         self.repository = repository
         self.certLogic = certLogic
+        self.userDefaults = userDefaults
     }
 
     // MARK: - Methods
@@ -120,6 +123,14 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
 
     func showAppInformation() {
         router.showAppInformation()
+    }
+
+    func showAnnouncementIfNeeded() {
+        let announcementVersion = try? userDefaults.fetch(UserDefaults.keyAnnouncement) as? String ?? ""
+        let bundleVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
+        if announcementVersion == bundleVersion { return }
+        try? userDefaults.store(UserDefaults.keyAnnouncement, value: bundleVersion)
+        router.showAnnouncement().cauterize()
     }
 
     private func payloadFromScannerResult(_ result: ScanResult) throws -> String {

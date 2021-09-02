@@ -22,6 +22,7 @@ protocol CertificatesOverviewViewModelProtocol {
     func scanCertificate(withIntroduction: Bool)
     func showAppInformation()
     func showRuleCheck()
+    func showAnnouncementIfNeeded()
 }
 
 extension CertificatesOverviewViewModelProtocol {
