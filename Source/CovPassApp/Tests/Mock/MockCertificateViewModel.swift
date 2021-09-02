@@ -14,6 +14,7 @@ import PromiseKit
 import UIKit
 
 class MockCertificateViewModel: CertificatesOverviewViewModelProtocol {
+
     // MARK: - Test Variables
 
     var refreshedCalled = false
@@ -92,4 +93,6 @@ class MockCertificateViewModel: CertificatesOverviewViewModelProtocol {
     func updateDCCRules() {}
 
     func showRuleCheck() {}
+
+    func showAnnouncementIfNeeded() {}
 }

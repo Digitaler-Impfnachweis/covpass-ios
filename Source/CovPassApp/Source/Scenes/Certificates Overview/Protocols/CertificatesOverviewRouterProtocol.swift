@@ -13,6 +13,7 @@ import Scanner
 import UIKit
 
 protocol CertificatesOverviewRouterProtocol: DialogRouterProtocol {
+    func showAnnouncement() -> Promise<Void>
     func showCertificates(_ certificates: [ExtendedCBORWebToken]) -> Promise<CertificateDetailSceneResult>
     func showHowToScan() -> Promise<Void>
     func showRuleCheck() -> Promise<Void>
