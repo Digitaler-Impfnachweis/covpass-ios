@@ -30,6 +30,13 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
         certificates.map { $0.vaccinationCertificate.hcert.dgc.v?.first?.fullImmunization ?? false }.first(where: { $0 }) ?? false
     }
 
+    var immunizationButton: String {
+        if selectedCertificate?.vaccinationCertificate.isInvalid ?? false {
+            return "certificates_overview_expired_action_button_title".localized
+        }
+        return "recovery_certificate_overview_action_button_title".localized
+    }
+
     var favoriteIcon: UIImage? {
         if !showFavorite { return nil }
         return isFavorite ? .starFull : .starPartial
@@ -171,7 +178,11 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
     }
 
     func immunizationButtonTapped() {
-        resolver?.fulfill(.showCertificatesOnOverview(certificates))
+        if selectedCertificate?.vaccinationCertificate.isInvalid ?? false {
+            resolver?.fulfill(.addNewCertificate)
+        } else {
+            resolver?.fulfill(.showCertificatesOnOverview(certificates))
+        }
     }
 
     func toggleFavorite() {

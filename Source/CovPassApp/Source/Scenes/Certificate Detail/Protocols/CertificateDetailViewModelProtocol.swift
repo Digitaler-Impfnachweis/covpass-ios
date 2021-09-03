@@ -12,6 +12,7 @@ import UIKit
 protocol CertificateDetailViewModelProtocol {
     var delegate: ViewModelDelegate? { get set }
     var favoriteIcon: UIImage? { get }
+    var immunizationButton: String { get }
     var name: String { get }
     var nameReversed: String { get }
     var nameTransliterated: String { get }

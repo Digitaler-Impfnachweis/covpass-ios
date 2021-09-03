@@ -26,6 +26,16 @@ class CertificatesOverviewRouter: CertificatesOverviewRouterProtocol, DialogRout
 
     // MARK: - Methods
 
+    func showAnnouncement() -> Promise<Void> {
+        sceneCoordinator.present(
+            AnnouncementSceneFactory(
+                router: AnnouncementRouter(
+                    sceneCoordinator: sceneCoordinator
+                )
+            )
+        )
+    }
+
     func showCertificates(_ certificates: [ExtendedCBORWebToken]) -> Promise<CertificateDetailSceneResult> {
         sceneCoordinator.push(
             CertificateDetailSceneFactory(

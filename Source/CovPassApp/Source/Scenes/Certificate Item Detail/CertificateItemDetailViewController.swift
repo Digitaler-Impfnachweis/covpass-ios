@@ -133,9 +133,10 @@ class CertificateItemDetailViewController: UIViewController {
         pdfExportButton.icon = .share
         pdfExportButton.action = viewModel.startPDFExport
 
+        pdfExportButton.disable()
         if viewModel.canExportToPDF {
             // Some certificates such as tests or non-German ones cannot be exported
-            pdfExportButton.disable()
+            pdfExportButton.enable()
 
             let disclaimer = SecureContentView()
             disclaimer.imageView.image = .info

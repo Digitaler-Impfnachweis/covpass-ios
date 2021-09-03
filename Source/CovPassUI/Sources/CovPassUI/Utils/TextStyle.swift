@@ -40,32 +40,27 @@ public enum TextStyle {
         switch self {
         case .display:
             return string
-                .font(named: UIFont.sansSemiBold, size: 34.0, lineHeight: 51.0, textStyle: .title2)
-                .letterSpacing(0.13)
+                .font(named: UIFont.sansSemiBold, size: 36.0, lineHeight: 44.0, textStyle: .title2)
                 .colored(.onBackground100)
 
         case .header_1:
             return string
-                .font(named: UIFont.sansSemiBold, size: 28.0, lineHeight: 42.0, textStyle: .title3)
-                .letterSpacing(0.13)
+                .font(named: UIFont.sansBold, size: 26.0, lineHeight: 38.0, textStyle: .title3)
                 .colored(.onBackground100)
 
         case .header_2:
             return string
-                .font(named: UIFont.sansSemiBold, size: 18.0, lineHeight: 27.0, textStyle: .headline)
-                .letterSpacing(0.13)
+                .font(named: UIFont.sansBold, size: 18.0, lineHeight: 27.0, textStyle: .headline)
                 .colored(.onBackground100)
 
         case .header_3:
             return string
-                .font(named: UIFont.sansSemiBold, size: 14.0, lineHeight: 17.0, textStyle: .subheadline)
-                .letterSpacing(0.13)
+                .font(named: UIFont.sansSemiBold, size: 14.0, lineHeight: 21.0, textStyle: .subheadline)
                 .colored(.onBackground100)
 
         case .subheader_1:
             return string
                 .font(named: UIFont.sansRegular, size: 18.0, lineHeight: 27.0, textStyle: .headline)
-                .letterSpacing(0.13)
                 .colored(.onBackground100)
 
         case .subheader_2:
@@ -77,19 +72,16 @@ public enum TextStyle {
         case .body:
             return string
                 .font(named: UIFont.sansRegular, size: 14.0, lineHeight: 21.0, textStyle: .body)
-                .letterSpacing(0.13)
                 .colored(.onBackground100)
 
         case .label:
             return string
                 .font(named: UIFont.sansRegular, size: 12.0, lineHeight: 18.0, textStyle: .body)
-                .letterSpacing(0.13)
                 .colored(.onBackground100)
 
         case .mainButton:
             return string
-                .font(named: UIFont.sansSemiBold, size: 14.0, lineHeight: 18.0, textStyle: .headline)
-                .letterSpacing(0.13)
+                .font(named: UIFont.sansSemiBold, size: 14.0, lineHeight: 21.0, textStyle: .headline)
         }
     }
 }
