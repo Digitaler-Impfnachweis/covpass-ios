@@ -131,7 +131,7 @@ public final class SVGPDFExporter: NSObject, WKNavigationDelegate, SVGPDFExportP
     }
 
     public func export(_ data: SVGData, completion: ExportHandler?) {
-        guard let string = String(data: data, encoding: .utf8) else {
+        guard let svgString = String(data: data, encoding: .utf8) else {
             preconditionFailure("Expected a String")
         }
         webView.navigationDelegate = self
@@ -145,7 +145,22 @@ public final class SVGPDFExporter: NSObject, WKNavigationDelegate, SVGPDFExportP
         webView.alpha = 0.01
         UIApplication.shared.keyWindow?.addSubview(webView)
 
-        webView.loadHTMLString(string, baseURL: nil)
+        let header = """
+            <html>
+            <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <link rel="preconnect" href="https://fonts.googleapis.com">
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+            <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;1,600&display=swap" rel="stylesheet">
+            </head>
+            <div>
+            \(svgString)
+            </div>
+            </html>
+        """
+
+        webView.loadHTMLString(header, baseURL: nil)
     }
 
     // MARK: - WKNavigationDelegate
