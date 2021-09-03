@@ -59,10 +59,14 @@
 
 "dialog_start_screen_button_update" = "Aktualisieren";
 
-"vaccination_start_screen_title" = "Digitale COVID-Zertifikate der EU";
+"dialog_booster_vaccination_notification_title" = "Es gibt Neuigkeit zu Ihren Zertifikaten";
+
+"dialog_booster_vaccination_notification_message" = "Aufgrund Ihrer vorhandenen Impfzertifikate könnte eine Auffrischungsimpfung erforderlich sein. Bitte überprüfen Sie den Status Ihrer Impfzertifikate.";
 
 
 /********** start Screen **********/
+
+"vaccination_start_screen_title" = "Digitale COVID-Zertifikate der EU";
 
 "vaccination_start_screen_note_title" = "Fügen Sie einen Nachweis hinzu";
 
@@ -73,6 +77,14 @@
 "vaccination_start_screen_qrcode_complete_from_date_subtitle" = "Vollständig ab %@";
 
 "vaccination_start_screen_qrcode_complete_protection_subtitle" = "Vollständiger Impfschutz";
+
+"certificates_start_screen_qrcode_certificate_expires_subtitle" = "Läuft am %@ um %@ ab";
+
+"certificates_start_screen_qrcode_certificate_expired_subtitle" = "Abgelaufen";
+
+"certificates_start_screen_qrcode_certificate_invalid_subtitle" = "Ungültig";
+
+"vaccination_start_screen_qrcode_booster_vaccination_note_subtitle" = "Impfstatus überprüfen";
 
 
 /********** popup: add certification **********/
@@ -91,6 +103,12 @@
 
 "certificate_add_popup_scan_button_title" = "QR-Code scannen";
 
+"certificate_add_dialog_camera_access_title" = "Kamerazugriff benötigt";
+
+"certificate_add_dialog_camera_access_message" = "Die CovPass-App verwendet die Kamera Ihres Smartphones, um einen QR-Code scannen zu können.\n\nDer Zugriff auf Ihre Kamera erfolgt nur während der Nutzung der App und dann auch nur mit Ihrer Erlaubnis. Sie haben jederzeit die Möglichkeit, in den Einstellungen Ihres Smartphones die Berechtigung zu ändern.";
+
+"certificate_add_dialog_camera_access_action_button" = "Zugriff erlauben";
+
 "error_camera_access_title" = "Die CovPass-App möchte auf Ihre Kamera zugreifen.";
 
 "error_camera_access_message" = "Erlauben Sie den Zugriff, um QR-Codes scannen zu können.";
@@ -104,6 +122,12 @@
 "error_test_certificate_not_valid_message" = "Der von Ihnen gescannte Nachweis für einen Corona-Test weist kein negatives Testergebnis nach. Die aktuelle Version der CovPass-App kann nur negative Corona-Testergebnisse speichern.";
 
 "error_test_certificate_not_valid_button_title" = "OK";
+
+"dialogue_add_booster_vaccination_title" = "Auffrischungsimpfung hinzugefügt";
+
+"dialogue_add_booster_vaccination_message" = "Bitte beachten Sie, dass die Mitgliedstaaten der EU derzeit noch kein einheitliches Vorgehen zu COVID-Zertifikaten für die Auffrischungsimpfungen beschlossen haben. Auf Grund dessen kann nicht ausgeschlossen werden, dass dieses Zertifikat in anderen EU-Ländern nicht als gültig anerkannt wird. Sofern Sie eine Reise außerhalb Deutschlands planen, nehmen Sie daher bitte auch die ursprünglichen Impfzertifikate (oder einen anderen anerkannten Nachweis) mit, die Sie vor der Auffrischungsimpfung erhalten haben.";
+
+"dialogue_add_booster_vaccination_action_button_title" = "OK";
 
 
 /********** start Screen: favorite immunization certificate **********/
@@ -315,6 +339,12 @@
 
 /********** overview certificates **********/
 
+"booster_vaccination_certificate_overview_title" = "Auffrischungsimpfung: Aktuell nur in Deutschland nutzbar";
+
+"booster_vaccination_certificate_overview_message" = "Auffrischungsimpfungen können derzeit nur in Deutschland digital nachgewiesen und geprüft werden. Sobald sich dies ändert, werden Sie hier über den aktuellen Stand informiert.";
+
+"booster_vaccination_certificate_overview_action_button_title" = "Aktuellen QR-Code anzeigen";
+
 "vaccination_certificate_overview_incomplete_title" = "Unvollständig: %d von %d Impfungen";
 
 "vaccination_certificate_overview_incomplete_message" = "Ihr Impfschutz ist nicht vollständig. Um den QR-Code als Nachweis für einen kompletten Impfschutz vorzeigen zu können, fügen Sie bitte eine weitere Impfung hinzu.";
@@ -330,6 +360,14 @@
 "vaccination_certificate_overview_complete_message" = "Zeigen Sie bei Bedarf den QR-Code vor. Halten Sie zudem ein Ausweisdokument bei der Überprüfung bereit.";
 
 "vaccination_certificate_overview_complete_action_button_title" = "Aktuellen QR-Code anzeigen";
+
+"vaccination_certificate_overview_booster_vaccination_notification_icon_new" = "Neu";
+
+"vaccination_certificate_overview_booster_vaccination_notification_title" = "Aktueller Impfstatus";
+
+"vaccination_certificate_overview_booster_vaccination_notification_subtitle" = "Letzte Impfung vor 180 Tagen";
+
+"vaccination_certificate_overview_booster_vaccination_notification_message" = "Aufgrund Ihres vorhandenen Impfzertifikats könnte für Sie eine Auffrischungsimpfung erforderlich sein, da Ihr letztes Impfzertifikat älter als 6 Monate ist (Rule ID: %@).\n\nMehr Informationen finden Sie in den Häufigen Fragen.";
 
 "test_certificate_overview_title" = "Negativer Antigen-Schnelltest vom %@";
 
@@ -367,6 +405,8 @@
 
 "certificates_overview_personal_data_name" = "Name, Vorname / Name, first name";
 
+"certificates_overview_personal_data_standardized_name" = "Standardisierter Name, Vorname / Standardized name, first name";
+
 "certificates_overview_personal_data_date_of_birth" = "Geburtsdatum / Date of birth (YYYY-MM-DD)";
 
 "certificates_overview_all_certificates_title" = "EU-Zertifikate";
@@ -378,6 +418,14 @@
 "certificates_overview_expired_certificate_note" = "Zertifikat abgelaufen";
 
 "certificates_overview_invalid_certificate_note" = "Zertifikat ungültig";
+
+"certificates_overview_booster_vaccination_certificate_note" = "Aktuell nur in DE nutzbar";
+
+"certificates_overview_booster_vaccination_certificate_title" = "Impfzertifikat";
+
+"certificates_overview_booster_vaccination_certificate_message" = "%@. Auffrischungsimpfung";
+
+"certificates_overview_booster_vaccination_certificate_date" = "Geimpft am %@";
 
 "certificates_overview_vaccination_certificate_title" = "Impfzertifikat";
 
@@ -415,9 +463,15 @@
 
 "vaccination_certificate_detail_view_vaccination_title" = "Impfung %d von %d";
 
+"vaccination_certificate_detail_view_booster_vaccination_title" = "%d. Auffrischungsimpfung";
+
 "vaccination_certificate_detail_view_vaccination_headline" = "Digitales COVID-Impfzertifikat der EU";
 
+"vaccination_certificate_detail_view_booster_vaccination_headline" = "Digitales COVID-Impfzertifikat der EU";
+
 "vaccination_certificate_detail_view_vaccination_note" = "Es handelt sich hier um einen Impfstoff, bei dem nur eine Impfdosis erforderlich ist, oder um eine Impfung für Genesene, die nur eine Impfdosis benötigt.";
+
+"vaccination_certificate_detail_view_booster_vaccination_note" = "Bitte beachten Sie, dass die Mitgliedstaaten der EU derzeit noch kein einheitliches Vorgehen zu COVID-Zertifikaten für die Auffrischungsimpfungen beschlossen haben. Auf Grund dessen kann nicht ausgeschlossen werden, dass dieses Zertifikat in anderen EU-Ländern nicht als gültig anerkannt wird. Sofern Sie eine Reise außerhalb Deutschlands planen, nehmen Sie daher bitte auch die ursprünglichen Impfzertifikate (oder einen anderen anerkannten Nachweis) mit, die Sie vor der Auffrischungsimpfung erhalten haben.";
 
 "vaccination_certificate_detail_view_data_name" = "Name, Vorname / Name, first name";
 
