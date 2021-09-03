@@ -59,10 +59,14 @@
 
 "dialog_start_screen_button_update" = "Update";
 
-"vaccination_start_screen_title" = "EU Digital COVID Certificates";
+"dialog_booster_vaccination_notification_title" = "There is news about your certificates";
+
+"dialog_booster_vaccination_notification_message" = "Based on your existing vaccination certificates, a booster vaccination may be required. Please check the status of your vaccination certificates.";
 
 
 /********** start Screen **********/
+
+"vaccination_start_screen_title" = "EU Digital COVID Certificates";
 
 "vaccination_start_screen_note_title" = "Add a certificate";
 
@@ -73,6 +77,14 @@
 "vaccination_start_screen_qrcode_complete_from_date_subtitle" = "Fully vaccinated as of %@";
 
 "vaccination_start_screen_qrcode_complete_protection_subtitle" = "Fully vaccinated";
+
+"certificates_start_screen_qrcode_certificate_expires_subtitle" = "Expires on %@ at %@";
+
+"certificates_start_screen_qrcode_certificate_expired_subtitle" = "Expired";
+
+"certificates_start_screen_qrcode_certificate_invalid_subtitle" = "Invalid";
+
+"vaccination_start_screen_qrcode_booster_vaccination_note_subtitle" = "Check vaccination status";
 
 
 /********** popup: add certification **********/
@@ -113,7 +125,7 @@
 
 "dialogue_add_booster_vaccination_title" = "Booster vaccination added";
 
-"dialogue_add_booster_vaccination_message" = "Please note that this certificate for the booster vaccination may not be accepted as valid proof of vaccination abroad at this time. If you are planning a trip outside of Germany, please also take the proof of a vaccination that is effective for the first time or for an effective vaccination for those who have recovered.";
+"dialogue_add_booster_vaccination_message" = "Please note that the EU Member States have not yet adopted a uniform approach to COVID certificates for booster vaccinations. Because of this, it cannot be ruled out that this certificate will not be recognised as valid in other EU countries. Therefore, if you are planning a trip outside Germany, please also take the original vaccination certificates (or other recognised proof) that you received before the booster vaccination.";
 
 "dialogue_add_booster_vaccination_action_button_title" = "OK";
 
@@ -349,6 +361,14 @@
 
 "vaccination_certificate_overview_complete_action_button_title" = "Display current QR Code";
 
+"vaccination_certificate_overview_booster_vaccination_notification_icon_new" = "New";
+
+"vaccination_certificate_overview_booster_vaccination_notification_title" = "Current vaccination status";
+
+"vaccination_certificate_overview_booster_vaccination_notification_subtitle" = "Last vaccination 180 days ago";
+
+"vaccination_certificate_overview_booster_vaccination_notification_message" = "Based on your existing vaccination certificate, you might need a booster vaccination because your last vaccination certificate is older than 6 months (Rule ID: %@).\n\nYou can find more information in the FAQ.";
+
 "test_certificate_overview_title" = "Negative rapid antigen test from %@";
 
 "test_certificate_overview_message" = "Show this QR code when needed. Be ready to show ID when your QR code is checked.";
@@ -384,6 +404,8 @@
 "certificates_overview_personal_data_title" = "Personal details";
 
 "certificates_overview_personal_data_name" = "Name, Vorname / Name, first name";
+
+"certificates_overview_personal_data_standardized_name" = "Standardisierter Name, Vorname / Standardized name, first name";
 
 "certificates_overview_personal_data_date_of_birth" = "Geburtsdatum / Date of birth (YYYY-MM-DD)";
 
@@ -441,9 +463,15 @@
 
 "vaccination_certificate_detail_view_vaccination_title" = "Vaccine dose %d of %d";
 
+"vaccination_certificate_detail_view_booster_vaccination_title" = "%d. Booster vaccination";
+
 "vaccination_certificate_detail_view_vaccination_headline" = "EU Digital COVID Certificate of Vaccination";
 
+"vaccination_certificate_detail_view_booster_vaccination_headline" = "EU Digital COVID Certificate of Vaccination";
+
 "vaccination_certificate_detail_view_vaccination_note" = "This certificate is for a vaccine that only requires one dose or a vaccine for people who have recovered from an infection and only need one dose.";
+
+"vaccination_certificate_detail_view_booster_vaccination_note" = "Please note that the EU Member States have not yet adopted a uniform approach to COVID certificates for booster vaccinations. Because of this, it cannot be ruled out that this certificate will not be recognised as valid in other EU countries. Therefore, if you are planning a trip outside Germany, please also take the original vaccination certificates (or other recognised proof) that you received before the booster vaccination.";
 
 "vaccination_certificate_detail_view_data_name" = "Name, Vorname / Name, first name";
 
