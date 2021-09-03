@@ -85,7 +85,7 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
         }
         if let v = certificate.v?.first {
             if v.fullImmunizationValid, hasNotification {
-                return "_TODO".localized
+                return "vaccination_start_screen_qrcode_booster_vaccination_note_subtitle".localized
             } else if v.fullImmunizationValid {
                 return "vaccination_start_screen_qrcode_complete_protection_subtitle".localized
             } else if let date = v.fullImmunizationValidFrom, v.fullImmunization {
