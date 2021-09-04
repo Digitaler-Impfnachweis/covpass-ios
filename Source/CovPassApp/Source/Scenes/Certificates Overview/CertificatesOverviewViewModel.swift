@@ -186,7 +186,8 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
             router.showBoosterNotification()
         }
         .done {
-            #warning("tbd: on booster notification")
+            // currently no further action
+            // tbd: scroll to first certificate with notifications
         }
         .catch { [weak self] error in
             self?.router.showUnexpectedErrorDialog(error)

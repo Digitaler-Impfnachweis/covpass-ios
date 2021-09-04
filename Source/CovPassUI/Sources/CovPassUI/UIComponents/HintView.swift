@@ -40,7 +40,6 @@ public class HintView: XibView {
         bodyLabel.text = nil
 
         iconLabel.text = nil
-        //iconStackView.removeArrangedSubview(iconLabel)
     }
 
     public override func updateConstraints() {
