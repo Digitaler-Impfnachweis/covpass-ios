@@ -6,6 +6,7 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
+import CertLogic
 import CovPassCommon
 import CovPassUI
 import Foundation
@@ -19,6 +20,7 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
     private var router: CertificatesOverviewRouterProtocol
     private let repository: VaccinationRepositoryProtocol
     private let certLogic: DCCCertLogic
+    private let boosterLogic: BoosterCertLogic
     private var certificateList = CertificateList(certificates: [])
     private var lastKnownFavoriteCertificateId: String?
     private var userDefaults: Persistence
@@ -37,11 +39,13 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
         router: CertificatesOverviewRouterProtocol,
         repository: VaccinationRepositoryProtocol,
         certLogic: DCCCertLogic,
+        boosterLogic: BoosterCertLogic,
         userDefaults: Persistence
     ) {
         self.router = router
         self.repository = repository
         self.certLogic = certLogic
+        self.boosterLogic = boosterLogic
         self.userDefaults = userDefaults
     }
 
@@ -181,19 +185,6 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
         }
     }
 
-    func showBoosterNotification() {
-        firstly {
-            router.showBoosterNotification()
-        }
-        .done {
-            // currently no further action
-            // tbd: scroll to first certificate with notifications
-        }
-        .catch { [weak self] error in
-            self?.router.showUnexpectedErrorDialog(error)
-        }
-    }
-
     func showCertificate(_ certificate: ExtendedCBORWebToken) {
         showCertificates(
             certificateList.certificates.certificatePair(for: certificate)
@@ -249,5 +240,32 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
         .catch { [weak self] error in
             self?.router.showUnexpectedErrorDialog(error)
         }
+    }
+}
+
+// MARK: - Booster Notifications
+extension CertificatesOverviewViewModel {
+
+    func showBoosterNotification() {
+        firstly {
+            router.showBoosterNotification()
+        }
+        .done {
+            // currently no further action
+            // tbd: scroll to first certificate with notifications
+        }
+        .catch { [weak self] error in
+            self?.router.showUnexpectedErrorDialog(error)
+        }
+    }
+
+    func checkForVaccinationBooster(completion: (_ result: [ValidationResult]) -> Void) {
+        // TODO: throttle check
+
+        certificateList.certificates.forEach { token in
+            try? self.boosterLogic.validate(countryCode: "DE", validationClock: Date(), certificate: token.vaccinationCertificate)
+        }
+
+        completion([])
     }
 }

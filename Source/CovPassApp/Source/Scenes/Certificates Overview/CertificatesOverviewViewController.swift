@@ -50,7 +50,15 @@ class CertificatesOverviewViewController: UIViewController {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
         viewModel.updateTrustList()
+
         #warning("TODO: check for booster")
+        viewModel.checkForVaccinationBooster { result in
+            if result.contains(where: { item in
+                item.result == .passed
+            }) {
+                viewModel.showBoosterNotification()
+            }
+        }
     }
 
     override func viewWillDisappear(_ animated: Bool) {

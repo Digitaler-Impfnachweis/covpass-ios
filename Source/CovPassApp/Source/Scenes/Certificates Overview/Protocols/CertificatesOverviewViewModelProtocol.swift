@@ -6,6 +6,7 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
+import CertLogic
 import CovPassCommon
 import CovPassUI
 import PromiseKit
@@ -24,6 +25,8 @@ protocol CertificatesOverviewViewModelProtocol {
     func showRuleCheck()
     func showBoosterNotification()
     func showAnnouncementIfNeeded()
+
+    func checkForVaccinationBooster(completion: (_ result: [ValidationResult]) -> Void)
 }
 
 extension CertificatesOverviewViewModelProtocol {
