@@ -38,6 +38,17 @@ extension ExtendedCBORWebToken: Notifiable {
         }
     }
 
+    static func resetNotificationStates() {
+        UserDefaults.standard.removePersistentDomain(forName: Self.suite)
+    }
+
+    #if DEBUG
+    static func printNotificationStates() {
+        guard let defaults = UserDefaults(suiteName: Self.suite) else { return }
+        dump(defaults.dictionaryRepresentation())
+    }
+    #endif
+
     /// Certificate identifier as a hashed combination of name and date of birth.
     ///
     /// Currently only used here, so `private`.

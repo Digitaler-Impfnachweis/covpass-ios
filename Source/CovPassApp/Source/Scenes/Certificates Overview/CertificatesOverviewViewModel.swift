@@ -246,8 +246,25 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
 // MARK: - Booster Notifications
 extension CertificatesOverviewViewModel: BoosterHandling {
 
+    private static var lastBoosterCheck: Date = Date.distantPast
+
     func checkForVaccinationBooster(completion: (_ result: [ExtendedCBORWebToken]) -> Void) {
-        // TODO: throttle check (once per day, etc.)
+        // Simple throttle check to once per day (production)
+        let threshold = Calendar.autoupdatingCurrent.date(byAdding: .day, value: -1, to: Date()) ?? .distantPast
+        guard Self.lastBoosterCheck < threshold else {
+            print("Booster check skipped due to throttling")
+            completion([])
+            return
+        }
+        Self.lastBoosterCheck = Date()
+
+        #if DEBUG
+        // first vaccination(!) certificate should have notification
+        if ProcessInfo.processInfo.arguments.contains("-ForceBoosterNotification"), let first = certificateList.certificates.first(where: { $0.vaccinationCertificate.hcert.dgc.v != nil }) {
+            completion([first])
+            return
+        }
+        #endif
 
         var boosterCandidates = [ExtendedCBORWebToken]()
         certificateList.certificates.forEach { token in
@@ -257,7 +274,7 @@ extension CertificatesOverviewViewModel: BoosterHandling {
                     validationClock: Date(),
                     certificate: token.vaccinationCertificate)
             else { return }
-
+            #warning("pass result for display")
             if validation.contains(where: { $0.result == .passed}) {
                 boosterCandidates.append(token)
             }
@@ -268,8 +285,17 @@ extension CertificatesOverviewViewModel: BoosterHandling {
 
     func updateBoosterNotificationState(for certificates: [(ExtendedCBORWebToken, NotificationState)]) {
         for (var certificate, state) in certificates {
+            // prevent notifications for non-vaccination certificates
+            guard certificate.vaccinationCertificate.hcert.dgc.v != nil else {
+                continue
+            }
             certificate.notificationState = state
         }
+        #if DEBUG
+        certificateList.certificates.forEach { token in
+            print("📄 <<\(token.vaccinationCertificate.hcert.dgc.nam.fullNameTransliterated)>>: \(token.notificationState)")
+        }
+        #endif
     }
 
     func showBoosterNotification() {

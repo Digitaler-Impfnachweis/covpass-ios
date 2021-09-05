@@ -44,6 +44,12 @@ class CertificatesOverviewViewController: UIViewController {
         setupDotIndicator()
         viewModel.refresh()
         viewModel.showAnnouncementIfNeeded()
+
+        #if DEBUG
+        if ProcessInfo.processInfo.arguments.contains("-ResetNotificationStates") {
+            ExtendedCBORWebToken.resetNotificationStates()
+        }
+        #endif
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -51,30 +57,14 @@ class CertificatesOverviewViewController: UIViewController {
         navigationController?.setNavigationBarHidden(true, animated: animated)
         viewModel.updateTrustList()
 
-        #warning("WORK IN PROGRESS")
-        viewModel.checkForVaccinationBooster { result in
-            if result.isEmpty { return }
-
-            // store states
-            let state = result.map { ($0, NotificationState.new) }
-            viewModel.updateBoosterNotificationState(for: state)
-
-            viewModel.showBoosterNotification()
-        }
+        // HACK: reload cells to update to current state
+        reloadCollectionView()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.setNavigationBarHidden(false, animated: animated)
     }
-
-    #if DEBUG
-    override func motionBegan(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
-        if motion == .motionShake {
-            viewModel.showBoosterNotification()
-        }
-    }
-    #endif
 
     // MARK: - Private
 
@@ -181,6 +171,18 @@ extension CertificatesOverviewViewController: CertificatesOverviewViewModelDeleg
     func viewModelDidUpdate() {
         setupHeaderView()
         reloadCollectionView()
+
+        viewModel.checkForVaccinationBooster { result in
+            if result.isEmpty { return }
+
+            // store states
+            let state = result.map { ($0, NotificationState.new) }
+            viewModel.updateBoosterNotificationState(for: state)
+
+            viewModel.showBoosterNotification()
+
+            reloadCollectionView() // update cells to show notification markers
+        }
     }
 
     func viewModelNeedsFirstCertificateVisible() {

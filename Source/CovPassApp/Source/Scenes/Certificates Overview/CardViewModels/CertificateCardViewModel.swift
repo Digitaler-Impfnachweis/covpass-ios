@@ -84,7 +84,7 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
             return DateUtils.displayDateTimeFormatter.string(from: t.sc)
         }
         if let v = certificate.v?.first {
-            if v.fullImmunizationValid, hasNotification {
+            if v.fullImmunizationValid, token.notificationState == .new {
                 return "vaccination_start_screen_qrcode_booster_vaccination_note_subtitle".localized
             } else if v.fullImmunizationValid {
                 return "vaccination_start_screen_qrcode_complete_protection_subtitle".localized
@@ -110,8 +110,7 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
         if certificate.t != nil {
             return .iconTest.withRenderingMode(.alwaysTemplate)
         }
-
-        if isFullImmunization, hasNotification {
+        if isFullImmunization, token.notificationState == .new {
             return .statusFullNotfication.withRenderingMode(.alwaysOriginal) // !!!
         } else if isFullImmunization {
             return .statusFullDetail.withRenderingMode(.alwaysTemplate)
@@ -163,12 +162,6 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
 
     var vaccinationDate: Date? {
         certificate.v?.first?.dt
-    }
-
-    /// Helper property to indicate news on this certificate
-    private var hasNotification: Bool {
-        #warning("TODO: get notification status") // user defaults?
-        return true
     }
 
     // MARK: - Actions

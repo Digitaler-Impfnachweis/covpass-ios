@@ -152,9 +152,21 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
             }
     }
 
-    var shouldShowBoosterNotification: Bool {
-        #warning("dummy code!")
-        return true
+    var boosterNotificationState: NotificationState {
+        get {
+            selectedCertificate?.notificationState ?? .none
+        }
+        set {
+            guard
+                var cert = selectedCertificate,
+                cert.notificationState != newValue
+            else { return }
+
+            // FIXME: this prevents `Simultaneous accesses` error but should rather be prevented with a better state handling!
+            DispatchQueue.global(qos: .userInitiated).async {
+                cert.notificationState = newValue
+            }
+        }
     }
 
     // MARK: - Lifecyle
