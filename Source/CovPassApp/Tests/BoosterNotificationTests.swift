@@ -17,15 +17,17 @@ class BoosterNotificationTests: XCTestCase {
         var certificate = try ExtendedCBORWebToken.mock()
 
         XCTAssertNil(userDefaults.value(forKey: certificate.identifier))
-        XCTAssertFalse(certificate.hasNotifications)
+        XCTAssertEqual(certificate.notificationState, .none)
 
-        certificate.hasNotifications = true
-        XCTAssertTrue(certificate.hasNotifications)
-        XCTAssertTrue(userDefaults.bool(forKey: certificate.identifier))
+        for state in [NotificationState]([.new, .existing]) {
+            certificate.notificationState = state
+            XCTAssertEqual(certificate.notificationState, state)
+            XCTAssertTrue(userDefaults.bool(forKey: certificate.identifier))
+        }
 
-        certificate.hasNotifications = false
+        certificate.notificationState = .none
         XCTAssertNil(userDefaults.value(forKey: certificate.identifier))
-        XCTAssertFalse(certificate.hasNotifications)
+        XCTAssertEqual(certificate.notificationState, .none)
     }
 
 }
