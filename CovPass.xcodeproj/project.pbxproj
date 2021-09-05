@@ -93,6 +93,8 @@
 		3509F33526CFD04C00A078E5 /* contact-covpass-de.html in Resources */ = {isa = PBXBuildFile; fileRef = 3509F33426CFD04C00A078E5 /* contact-covpass-de.html */; };
 		351C6B4D26E15C2D00321B3C /* FileManager+Simulator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351C6B4C26E15C2D00321B3C /* FileManager+Simulator.swift */; };
 		3520AA6C26B85AA900D22435 /* PDFExportViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3520AA6B26B85AA900D22435 /* PDFExportViewModelProtocol.swift */; };
+		357B425E26E559B9009DDD55 /* styles.css in Resources */ = {isa = PBXBuildFile; fileRef = 357B425D26E559B9009DDD55 /* styles.css */; };
+		357B426326E56F09009DDD55 /* styles.css in Resources */ = {isa = PBXBuildFile; fileRef = 357B426126E56EF6009DDD55 /* styles.css */; };
 		35F99E0D26B2B60700D3EFC3 /* PDFExportSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F99E0C26B2B60700D3EFC3 /* PDFExportSceneFactory.swift */; };
 		35F99E0F26B2B67100D3EFC3 /* PDFExportViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F99E0E26B2B67100D3EFC3 /* PDFExportViewModel.swift */; };
 		35F99E1126B2B6F000D3EFC3 /* PDFExportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F99E1026B2B6F000D3EFC3 /* PDFExportViewController.swift */; };
@@ -274,6 +276,8 @@
 		3509F33426CFD04C00A078E5 /* contact-covpass-de.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "contact-covpass-de.html"; sourceTree = "<group>"; };
 		351C6B4C26E15C2D00321B3C /* FileManager+Simulator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+Simulator.swift"; sourceTree = "<group>"; };
 		3520AA6B26B85AA900D22435 /* PDFExportViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFExportViewModelProtocol.swift; sourceTree = "<group>"; };
+		357B425D26E559B9009DDD55 /* styles.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = styles.css; sourceTree = "<group>"; };
+		357B426126E56EF6009DDD55 /* styles.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = styles.css; sourceTree = "<group>"; };
 		35F99E0C26B2B60700D3EFC3 /* PDFExportSceneFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFExportSceneFactory.swift; sourceTree = "<group>"; };
 		35F99E0E26B2B67100D3EFC3 /* PDFExportViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFExportViewModel.swift; sourceTree = "<group>"; };
 		35F99E1026B2B6F000D3EFC3 /* PDFExportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFExportViewController.swift; sourceTree = "<group>"; };
@@ -1141,9 +1145,10 @@
 			isa = PBXGroup;
 			children = (
 				3509F33426CFD04C00A078E5 /* contact-covpass-de.html */,
-				3509F33226CFD02500A078E5 /* privacy-covpass-de.html */,
 				3876382626ADBED100FBCA47 /* contact-covpass-en.html */,
+				3509F33226CFD02500A078E5 /* privacy-covpass-de.html */,
 				3876382726ADBED100FBCA47 /* privacy-covpass-en.html */,
+				357B425D26E559B9009DDD55 /* styles.css */,
 			);
 			path = Static;
 			sourceTree = "<group>";
@@ -1151,10 +1156,11 @@
 		88BEE04026550E1900479E5E /* Static */ = {
 			isa = PBXGroup;
 			children = (
-				3876382B26ADBED900FBCA47 /* contact-covpasscheck-en.html */,
-				3876382A26ADBED900FBCA47 /* privacy-covpasscheck-en.html */,
 				38234168268A28C500722A46 /* contact-covpasscheck-de.html */,
+				3876382B26ADBED900FBCA47 /* contact-covpasscheck-en.html */,
 				88BEE04126550E2500479E5E /* privacy-covpasscheck-de.html */,
+				3876382A26ADBED900FBCA47 /* privacy-covpasscheck-en.html */,
+				357B426126E56EF6009DDD55 /* styles.css */,
 			);
 			path = Static;
 			sourceTree = "<group>";
@@ -1310,6 +1316,7 @@
 				216D1F48264EF50300370F16 /* Localizable.strings in Resources */,
 				3509F33526CFD04C00A078E5 /* contact-covpass-de.html in Resources */,
 				35F99E1426B2B75C00D3EFC3 /* PDFExportViewController.xib in Resources */,
+				357B425E26E559B9009DDD55 /* styles.css in Resources */,
 				216D1F9E264EF73D00370F16 /* WelcomeViewController.xib in Resources */,
 				385FC1B2269F21A200D19AF8 /* RuleCheckDetailViewController.xib in Resources */,
 			);
@@ -1332,6 +1339,7 @@
 				3823416A268A2A3900722A46 /* contact-covpasscheck-de.html in Resources */,
 				3876382E26ADBFE500FBCA47 /* contact-covpasscheck-en.html in Resources */,
 				88BEE04226550E2500479E5E /* privacy-covpasscheck-de.html in Resources */,
+				357B426326E56F09009DDD55 /* styles.css in Resources */,
 				2181C1BD264F053000DE7412 /* Localizable.strings in Resources */,
 				2181C168264F035A00DE7412 /* ValidatorOverviewViewController.xib in Resources */,
 				21FBCA79264F016E00CAEF44 /* LaunchScreen.storyboard in Resources */,
