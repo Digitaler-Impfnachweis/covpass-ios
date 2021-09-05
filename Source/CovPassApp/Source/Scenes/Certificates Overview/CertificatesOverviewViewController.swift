@@ -20,14 +20,14 @@ class CertificatesOverviewViewController: UIViewController {
     @IBOutlet var collectionView: UICollectionView!
     @IBOutlet var dotPageIndicator: DotPageIndicator!
 
-    private(set) var viewModel: CertificatesOverviewViewModelProtocol
+    private(set) var viewModel: CertificatesOverviewViewModelProtocol & BoosterHandling
 
     // MARK: - Lifecycle
 
     @available(*, unavailable)
     required init?(coder _: NSCoder) { fatalError("init?(coder: NSCoder) not implemented yet") }
 
-    init(viewModel: CertificatesOverviewViewModelProtocol) {
+    init(viewModel: CertificatesOverviewViewModelProtocol & BoosterHandling) {
         self.viewModel = viewModel
         super.init(nibName: String(describing: Self.self), bundle: .main)
         self.viewModel.delegate = self
@@ -51,13 +51,15 @@ class CertificatesOverviewViewController: UIViewController {
         navigationController?.setNavigationBarHidden(true, animated: animated)
         viewModel.updateTrustList()
 
-        #warning("TODO: check for booster")
+        #warning("WORK IN PROGRESS")
         viewModel.checkForVaccinationBooster { result in
-            if result.contains(where: { item in
-                item.result == .passed
-            }) {
-                viewModel.showBoosterNotification()
-            }
+            if result.isEmpty { return }
+
+            // store states
+            let state = result.map { ($0, NotificationState.new) }
+            viewModel.updateBoosterNotificationState(for: state)
+
+            viewModel.showBoosterNotification()
         }
     }
 

@@ -244,7 +244,33 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
 }
 
 // MARK: - Booster Notifications
-extension CertificatesOverviewViewModel {
+extension CertificatesOverviewViewModel: BoosterHandling {
+
+    func checkForVaccinationBooster(completion: (_ result: [ExtendedCBORWebToken]) -> Void) {
+        // TODO: throttle check (once per day, etc.)
+
+        var boosterCandidates = [ExtendedCBORWebToken]()
+        certificateList.certificates.forEach { token in
+            guard
+                let validation = try? self.boosterLogic.validate(
+                    countryCode: "DE",
+                    validationClock: Date(),
+                    certificate: token.vaccinationCertificate)
+            else { return }
+
+            if validation.contains(where: { $0.result == .passed}) {
+                boosterCandidates.append(token)
+            }
+        }
+
+        completion(boosterCandidates)
+    }
+
+    func updateBoosterNotificationState(for certificates: [(ExtendedCBORWebToken, NotificationState)]) {
+        for (var certificate, state) in certificates {
+            certificate.notificationState = state
+        }
+    }
 
     func showBoosterNotification() {
         firstly {
@@ -257,15 +283,5 @@ extension CertificatesOverviewViewModel {
         .catch { [weak self] error in
             self?.router.showUnexpectedErrorDialog(error)
         }
-    }
-
-    func checkForVaccinationBooster(completion: (_ result: [ValidationResult]) -> Void) {
-        // TODO: throttle check
-
-        certificateList.certificates.forEach { token in
-            try? self.boosterLogic.validate(countryCode: "DE", validationClock: Date(), certificate: token.vaccinationCertificate)
-        }
-
-        completion([])
     }
 }

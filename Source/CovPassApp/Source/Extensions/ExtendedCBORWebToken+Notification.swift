@@ -9,26 +9,38 @@ import Foundation
 import CovPassCommon
 
 protocol Notifiable {
-    var hasNotifications: Bool { get set }
+    var notificationState: NotificationState { get set }
+}
+
+enum NotificationState: Int {
+    /// No notification
+    case none
+    /// Notification already shown but somewhat present
+    case existing
+    /// New notification
+    case new
 }
 
 extension ExtendedCBORWebToken: Notifiable {
     private static let suite = "NotificationSettings"
 
-    var hasNotifications: Bool {
+    var notificationState: NotificationState {
         get {
-            UserDefaults(suiteName: Self.suite)?.bool(forKey: identifier) ?? false
+            let existing = UserDefaults(suiteName: Self.suite)?.integer(forKey: identifier) ?? NotificationState.none.rawValue
+            return NotificationState(rawValue: existing) ?? .none
         }
         set {
-            if newValue {
-                UserDefaults(suiteName: Self.suite)?.setValue(newValue, forKey: identifier)
-            } else {
+            if newValue.rawValue == NotificationState.none.rawValue {
                 UserDefaults(suiteName: Self.suite)?.removeObject(forKey: identifier)
+            } else {
+                UserDefaults(suiteName: Self.suite)?.setValue(newValue.rawValue, forKey: identifier)
             }
         }
     }
 
-    /// Certificate identifier as a hashed combination of name and date of birth
+    /// Certificate identifier as a hashed combination of name and date of birth.
+    ///
+    /// Currently only used here, so `private`.
     private var identifier: String {
         let name = vaccinationCertificate.hcert.dgc.nam.fullNameTransliterated
         let dob = vaccinationCertificate.hcert.dgc.dobString ?? ""
