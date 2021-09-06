@@ -14,6 +14,7 @@
                 <outlet property="actionButton" destination="pmz-rc-1Ub" id="6Pn-HP-sqV"/>
                 <outlet property="detailsView" destination="n4b-vk-Wnt" id="9el-zr-WXe"/>
                 <outlet property="headline" destination="t3g-u6-XEv" id="jWN-7m-E6C"/>
+                <outlet property="iconLabel" destination="aWt-uv-B0q" id="qSb-G3-7RQ"/>
                 <outlet property="view" destination="iN0-l3-epB" id="g1m-Mf-aBg"/>
             </connections>
         </placeholder>
@@ -40,13 +41,26 @@
                     <viewLayoutGuide key="contentLayoutGuide" id="VPR-5f-XYc"/>
                     <viewLayoutGuide key="frameLayoutGuide" id="mfg-H5-ngj"/>
                 </scrollView>
-                <view contentMode="scaleToFill" verticalHuggingPriority="251" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="60" translatesAutoresizingMaskIntoConstraints="NO" id="t3g-u6-XEv" customClass="InfoHeaderView" customModule="CovPassUI">
-                    <rect key="frame" x="0.0" y="64" width="414" height="60"/>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    <constraints>
-                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="L7p-y9-WZB"/>
-                    </constraints>
-                </view>
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="nDG-7x-yJB">
+                    <rect key="frame" x="0.0" y="64" width="394" height="60"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" horizontalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="t3g-u6-XEv" customClass="InfoHeaderView" customModule="CovPassUI">
+                            <rect key="frame" x="0.0" y="0.0" width="360" height="60"/>
+                            <constraints>
+                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="L7p-y9-WZB"/>
+                            </constraints>
+                        </view>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="250" text="New" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aWt-uv-B0q" customClass="HighlightLabel" customModule="CovPassUI">
+                            <rect key="frame" x="364" y="21.5" width="30" height="17"/>
+                            <accessibility key="accessibilityConfiguration">
+                                <accessibilityTraits key="traits" staticText="YES" notEnabled="YES"/>
+                            </accessibility>
+                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                </stackView>
                 <view contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="44" translatesAutoresizingMaskIntoConstraints="NO" id="pmz-rc-1Ub" customClass="MainButton" customModule="CovPassUI">
                     <rect key="frame" x="0.0" y="794" width="414" height="44"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -62,19 +76,22 @@
                 <constraint firstItem="pmz-rc-1Ub" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="vUN-kp-3ea" secondAttribute="leading" id="11u-3k-a6U"/>
                 <constraint firstItem="pmz-rc-1Ub" firstAttribute="top" secondItem="9Uf-5q-LWW" secondAttribute="bottom" id="3VK-Uo-g72"/>
                 <constraint firstItem="pmz-rc-1Ub" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="A5L-4p-NLc"/>
-                <constraint firstItem="t3g-u6-XEv" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="20" id="CQP-BX-p9n"/>
                 <constraint firstItem="pmz-rc-1Ub" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" constant="-24" id="SkM-Qs-KBE"/>
-                <constraint firstItem="9Uf-5q-LWW" firstAttribute="top" secondItem="t3g-u6-XEv" secondAttribute="bottom" id="ayG-pE-s3G"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="nDG-7x-yJB" secondAttribute="trailing" constant="20" id="XOb-ml-7P1"/>
+                <constraint firstItem="nDG-7x-yJB" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="20" id="Xdr-Ei-abe"/>
+                <constraint firstItem="nDG-7x-yJB" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="cmi-4M-hgM"/>
+                <constraint firstItem="9Uf-5q-LWW" firstAttribute="top" secondItem="nDG-7x-yJB" secondAttribute="bottom" id="e9x-EF-Qz4"/>
                 <constraint firstItem="9Uf-5q-LWW" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="fs4-1m-IJi"/>
                 <constraint firstItem="pmz-rc-1Ub" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="kmJ-LZ-LZu"/>
-                <constraint firstItem="t3g-u6-XEv" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="nI6-g3-rqB"/>
                 <constraint firstItem="9Uf-5q-LWW" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="qcf-GJ-lVs"/>
-                <constraint firstItem="t3g-u6-XEv" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="vkV-Mu-VwQ"/>
             </constraints>
             <point key="canvasLocation" x="11.594202898550726" y="109.82142857142857"/>
         </view>
     </objects>
     <designables>
+        <designable name="aWt-uv-B0q">
+            <size key="intrinsicContentSize" width="30" height="17"/>
+        </designable>
         <designable name="pmz-rc-1Ub">
             <size key="intrinsicContentSize" width="414" height="44"/>
         </designable>

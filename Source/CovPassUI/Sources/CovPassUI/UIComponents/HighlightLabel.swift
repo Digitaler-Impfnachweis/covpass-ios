@@ -8,6 +8,7 @@
 
 import UIKit
 
+@IBDesignable
 public class HighlightLabel: UILabel {
 
     public override func awakeFromNib() {

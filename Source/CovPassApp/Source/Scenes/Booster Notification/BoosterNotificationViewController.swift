@@ -11,6 +11,7 @@ import CovPassUI
 class BoosterNotificationViewController: UIViewController {
 
     @IBOutlet var headline: InfoHeaderView!
+    @IBOutlet var iconLabel: HighlightLabel!
     @IBOutlet var detailsView: ParagraphView!
     @IBOutlet var actionButton: MainButton!
 
@@ -32,6 +33,8 @@ class BoosterNotificationViewController: UIViewController {
         headline.attributedTitleText = viewModel.title.styledAs(.header_2)
         detailsView.attributedBodyText = viewModel.disclaimerText.styledAs(.body)
         detailsView.bottomBorder.isHidden = true
+
+        iconLabel.text = viewModel.highlightLabelText // no styling
 
         actionButton.title = viewModel.actionButtonTitle
         actionButton.action = { [weak self] in

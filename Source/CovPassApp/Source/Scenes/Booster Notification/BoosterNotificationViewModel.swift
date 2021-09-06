@@ -24,6 +24,10 @@ final class BoosterNotificationViewModel {
         "dialog_booster_vaccination_notification_message".localized
     }
 
+    var highlightLabelText: String {
+        "vaccination_certificate_overview_booster_vaccination_notification_icon_new".localized
+    }
+
     init(resolvable: Resolver<Void>) {
         resolver = resolvable
     }
