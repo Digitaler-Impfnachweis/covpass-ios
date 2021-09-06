@@ -69,8 +69,14 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
             return "certificates_overview_expired_certificate_note".localized
         }
         if token.vaccinationCertificate.expiresSoon {
-            return "certificates_overview_expires_soon_certificate_note".localized
+            guard let expireDate = token.vaccinationCertificate.exp else {
+                return "certificates_overview_expires_soon_certificate_note".localized
+            }
+            return String(format: "certificates_start_screen_qrcode_certificate_expires_subtitle".localized,
+                          DateUtils.displayDateFormatter.string(from: expireDate),
+                          DateUtils.displayTimeFormatter.string(from: expireDate))
         }
+
         if token.vaccinationCertificate.isInvalid {
             return "certificates_overview_invalid_certificate_note".localized
         }
