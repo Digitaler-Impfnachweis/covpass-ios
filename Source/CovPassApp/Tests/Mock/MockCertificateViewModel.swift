@@ -98,11 +98,15 @@ class MockCertificateViewModel: CertificatesOverviewViewModelProtocol {
 }
 
 extension MockCertificateViewModel: BoosterHandling {
-    func checkForVaccinationBooster(completion: ([ExtendedCBORWebToken]) -> Void) {
+    func checkForVaccinationBooster(completion: @escaping ([BoosterCandidate]) -> Void) {
         completion([])
     }
 
-    func updateBoosterNotificationState(for certificates: [(ExtendedCBORWebToken, NotificationState)]) {}
+    func updateBoosterNotificationState(for certificates: [(BoosterCandidate, NotificationState)]) {
+        //
+    }
 
-    func showBoosterNotification() {}
+    func showBoosterNotification() {
+        //
+    }
 }

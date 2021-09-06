@@ -248,7 +248,7 @@ extension CertificatesOverviewViewModel: BoosterHandling {
 
     private static var lastBoosterCheck: Date = Date.distantPast
 
-    func checkForVaccinationBooster(completion: (_ result: [BoosterCandidate]) -> Void) {
+    func checkForVaccinationBooster(completion: @escaping (_ result: [BoosterCandidate]) -> Void) {
         // Simple throttle check to once per day (production)
         let threshold = Calendar.autoupdatingCurrent.date(byAdding: .day, value: -1, to: Date()) ?? .distantPast
         guard Self.lastBoosterCheck < threshold else {
@@ -261,27 +261,34 @@ extension CertificatesOverviewViewModel: BoosterHandling {
         #if DEBUG
         // first vaccination(!) certificate should have notification
         if ProcessInfo.processInfo.arguments.contains("-ForceBoosterNotification"), let first = certificateList.certificates.first(where: { $0.vaccinationCertificate.hcert.dgc.v != nil }) {
-            completion([BoosterCandidate(token: first, rules: [])])
+            completion([BoosterCandidate(token: first, rules: [ValidationResult.mocked])])
             return
         }
         #endif
 
-        var boosterCandidates = [BoosterCandidate]()
-        certificateList.certificates.forEach { token in
-            guard
-                let validation = try? self.boosterLogic.validate(
-                    countryCode: "DE",
-                    validationClock: Date(),
-                    certificate: token.vaccinationCertificate)
-            else { return }
-            // pass result(s) for display
-            let passed = validation.filter({ $0.result == .passed })
-            if !passed.isEmpty {
-                boosterCandidates.append(BoosterCandidate(token: token, rules: passed))
+        DispatchQueue.global(qos: .userInitiated).async {
+            var boosterCandidates = [BoosterCandidate]()
+            self.certificateList.certificates.forEach { token in
+                do {
+                    let validation = try self.boosterLogic.validate(
+                        countryCode: "DE",
+                        validationClock: Date(),
+                        certificate: token.vaccinationCertificate)
+
+                    // pass result(s) for display
+                    let passed = validation.filter({ $0.result == .passed })
+                    if !passed.isEmpty {
+                        boosterCandidates.append(BoosterCandidate(token: token, rules: passed))
+                    }
+                } catch {
+                    print(error.localizedDescription)
+                    return
+                }
+            }
+            DispatchQueue.main.async {
+                completion(boosterCandidates)
             }
         }
-
-        completion(boosterCandidates)
     }
 
     func updateBoosterNotificationState(for certificates: [(BoosterCandidate, NotificationState)]) {
@@ -316,12 +323,17 @@ extension CertificatesOverviewViewModel: BoosterHandling {
 }
 
 // MARK: - Development
+
 #if DEBUG
 import JSON
 
+extension ValidationResult {
+    static let mocked: ValidationResult = ValidationResult(rule: Rule.mocked)
+}
+
 extension Rule {
     static var mocked: Rule {
-        Rule(identifier: "mockRule", type: "mock", version: "1.0.0", schemaVersion: "1.0.0", engine: "mock", engineVersion: "1.0.0", certificateType: "mock", description: [Description(lang: "de", desc: "mock")], validFrom: "", validTo: "", affectedString: [], logic: try! .init(data: Data()), countryCode: "de")
+        Rule(identifier: "MockRule", type: "mock", version: "1.0.0", schemaVersion: "1.0.0", engine: "mock", engineVersion: "1.0.0", certificateType: "mock", description: [Description(lang: "de", desc: "mock")], validFrom: "", validTo: "", affectedString: [], logic: try! .init(data: "{}".data(using: .utf8)!), countryCode: "de")
     }
 }
 #endif

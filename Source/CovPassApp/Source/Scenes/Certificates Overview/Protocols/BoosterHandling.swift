@@ -18,7 +18,7 @@ struct BoosterCandidate {
 protocol BoosterHandling {
 
     /// Check check!
-    func checkForVaccinationBooster(completion: (_ result: [BoosterCandidate]) -> Void)
+    func checkForVaccinationBooster(completion: @escaping (_ result: [BoosterCandidate]) -> Void)
 
     /// Marks the given certificates as 'has notification'
     ///

@@ -36,7 +36,7 @@ extension ExtendedCBORWebToken: Notifiable {
             if newValue.rawValue == NotificationState.none.rawValue {
                 UserDefaults(suiteName: Self.suite)?.removeObject(forKey: keyState)
             } else {
-                UserDefaults(suiteName: Self.suite)?.setValue(newValue.rawValue, forKey: identifier)
+                UserDefaults(suiteName: Self.suite)?.setValue(newValue.rawValue, forKey: keyState)
             }
         }
     }
