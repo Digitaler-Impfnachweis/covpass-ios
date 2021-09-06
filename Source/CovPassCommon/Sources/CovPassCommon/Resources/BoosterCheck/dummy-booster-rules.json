@@ -1,0 +1,33 @@
+[
+  {
+    "AffectedFields": [],
+    "CertificateType": "General",
+    "Country": "DE",
+    "Description": [
+      {
+        "desc": "All vaccination certificates.",
+        "lang": "en"
+      },
+      {
+        "desc": "Alle Impfzertifikate.",
+        "lang": "de"
+      }
+    ],
+    "Engine": "CERTLOGIC",
+    "EngineVersion": "1.0.0",
+    "Identifier": "BNR-DE-0000",
+    "Logic": {
+      ">=": [
+        {
+          "var": "payload.v.0.dn"
+        },
+        1
+      ]
+    },
+    "SchemaVersion": "1.0.0",
+    "Type": "BoosterNotification",
+    "ValidFrom": "2021-07-01T00:00:00Z",
+    "ValidTo": "2030-06-01T00:00:00Z",
+    "Version": "1.0.0"
+  }
+]
