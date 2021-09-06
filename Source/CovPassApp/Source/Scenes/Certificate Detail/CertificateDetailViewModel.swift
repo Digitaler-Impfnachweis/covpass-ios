@@ -152,6 +152,25 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
             }
     }
 
+    // MARK: - Booster Notifications
+
+    var boosterNotificationTitle: String {
+        "vaccination_certificate_overview_booster_vaccination_notification_title".localized
+    }
+
+    var boosterNotificationSubtitle: String {
+        "vaccination_certificate_overview_booster_vaccination_notification_subtitle".localized
+    }
+
+    var boosterNotificationBody: String {
+        let ruleID = selectedCertificate?.notificationRuleID ?? ""
+        return String(format: "vaccination_certificate_overview_booster_vaccination_notification_message".localized, ruleID)
+    }
+
+    var boosterNotificationHighlightText: String {
+        "vaccination_certificate_overview_booster_vaccination_notification_icon_new".localized
+    }
+
     var boosterNotificationState: NotificationState {
         get {
             selectedCertificate?.notificationState ?? .none

@@ -248,7 +248,7 @@ extension CertificatesOverviewViewModel: BoosterHandling {
 
     private static var lastBoosterCheck: Date = Date.distantPast
 
-    func checkForVaccinationBooster(completion: (_ result: [ExtendedCBORWebToken]) -> Void) {
+    func checkForVaccinationBooster(completion: (_ result: [BoosterCandidate]) -> Void) {
         // Simple throttle check to once per day (production)
         let threshold = Calendar.autoupdatingCurrent.date(byAdding: .day, value: -1, to: Date()) ?? .distantPast
         guard Self.lastBoosterCheck < threshold else {
@@ -261,12 +261,12 @@ extension CertificatesOverviewViewModel: BoosterHandling {
         #if DEBUG
         // first vaccination(!) certificate should have notification
         if ProcessInfo.processInfo.arguments.contains("-ForceBoosterNotification"), let first = certificateList.certificates.first(where: { $0.vaccinationCertificate.hcert.dgc.v != nil }) {
-            completion([first])
+            completion([BoosterCandidate(token: first, rules: [])])
             return
         }
         #endif
 
-        var boosterCandidates = [ExtendedCBORWebToken]()
+        var boosterCandidates = [BoosterCandidate]()
         certificateList.certificates.forEach { token in
             guard
                 let validation = try? self.boosterLogic.validate(
@@ -274,22 +274,25 @@ extension CertificatesOverviewViewModel: BoosterHandling {
                     validationClock: Date(),
                     certificate: token.vaccinationCertificate)
             else { return }
-            #warning("pass result for display")
-            if validation.contains(where: { $0.result == .passed}) {
-                boosterCandidates.append(token)
+            // pass result(s) for display
+            let passed = validation.filter({ $0.result == .passed })
+            if !passed.isEmpty {
+                boosterCandidates.append(BoosterCandidate(token: token, rules: passed))
             }
         }
 
         completion(boosterCandidates)
     }
 
-    func updateBoosterNotificationState(for certificates: [(ExtendedCBORWebToken, NotificationState)]) {
-        for (var certificate, state) in certificates {
+    func updateBoosterNotificationState(for certificates: [(BoosterCandidate, NotificationState)]) {
+        for (candidate, state) in certificates {
             // prevent notifications for non-vaccination certificates
-            guard certificate.vaccinationCertificate.hcert.dgc.v != nil else {
+            var token = candidate.token
+            guard token.vaccinationCertificate.hcert.dgc.v != nil else {
                 continue
             }
-            certificate.notificationState = state
+            token.notificationState = state
+            token.notificationRuleID = candidate.rules.first?.rule?.identifier
         }
         #if DEBUG
         certificateList.certificates.forEach { token in
@@ -311,3 +314,14 @@ extension CertificatesOverviewViewModel: BoosterHandling {
         }
     }
 }
+
+// MARK: - Development
+#if DEBUG
+import JSON
+
+extension Rule {
+    static var mocked: Rule {
+        Rule(identifier: "mockRule", type: "mock", version: "1.0.0", schemaVersion: "1.0.0", engine: "mock", engineVersion: "1.0.0", certificateType: "mock", description: [Description(lang: "de", desc: "mock")], validFrom: "", validTo: "", affectedString: [], logic: try! .init(data: Data()), countryCode: "de")
+    }
+}
+#endif

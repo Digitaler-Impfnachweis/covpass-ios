@@ -66,7 +66,7 @@ class CertificateDetailViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         // set status to 'shown'
         viewModel.boosterNotificationState = .existing
-        
+
         super.viewDidAppear(animated)
     }
 
@@ -128,15 +128,12 @@ class CertificateDetailViewController: UIViewController {
                 let index = stackView.arrangedSubviews.firstIndex(of: immunizationButtonContainerView)
                 stackView.insertArrangedSubview(hintView, at: index?.advanced(by: 1) ?? 2) // `2` is according to current design
             }
-            hintView.titleLabel.attributedText = "vaccination_certificate_overview_booster_vaccination_notification_title".localized.styledAs(.header_3)
-            hintView.subTitleLabel.attributedText = "vaccination_certificate_overview_booster_vaccination_notification_subtitle".localized.styledAs(.subheader_2)
-
-            #warning("inject booster rule")
-            let boosterText = String(format: "vaccination_certificate_overview_booster_vaccination_notification_message".localized, "-1")
-            hintView.bodyLabel.attributedText = boosterText.styledAs(.body)
+            hintView.titleLabel.attributedText = viewModel.boosterNotificationTitle.styledAs(.header_3)
+            hintView.subTitleLabel.attributedText = viewModel.boosterNotificationSubtitle.styledAs(.subheader_2)
+            hintView.bodyLabel.attributedText = viewModel.boosterNotificationBody.styledAs(.body)
 
             // 'new' icon
-            hintView.iconLabel.text = "vaccination_certificate_overview_booster_vaccination_notification_icon_new".localized // unique element, styled in xib
+            hintView.iconLabel.text = viewModel.boosterNotificationHighlightText // unique element, styled in xib
             hintView.iconLabel.isHidden = viewModel.boosterNotificationState != .new
         } else if stackView.arrangedSubviews.contains(hintView) {
             stackView.removeArrangedSubview(hintView)
