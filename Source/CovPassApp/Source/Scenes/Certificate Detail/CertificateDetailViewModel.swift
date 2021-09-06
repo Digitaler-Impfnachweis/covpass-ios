@@ -188,6 +188,10 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
         }
     }
 
+    var boosterFAQLink: URL {
+        URL(string: "https://reopen.europa.eu")!
+    }
+
     // MARK: - Lifecyle
 
     init(

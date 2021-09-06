@@ -46,6 +46,10 @@ class CertificateDetailViewController: UIViewController {
         return view
     }()
 
+    private lazy var tapRecognizer: UITapGestureRecognizer = {
+        UITapGestureRecognizer(target: self, action: #selector(onLinkTap(_:)))
+    }()
+
     // MARK: - Lifecycle
 
     @available(*, unavailable)
@@ -132,6 +136,11 @@ class CertificateDetailViewController: UIViewController {
             hintView.subTitleLabel.attributedText = viewModel.boosterNotificationSubtitle.styledAs(.subheader_2)
             hintView.bodyLabel.attributedText = viewModel.boosterNotificationBody.styledAs(.body)
 
+            #if DEBUG
+            hintView.bodyLabel.isUserInteractionEnabled = true
+            hintView.bodyLabel.addGestureRecognizer(tapRecognizer)
+            #endif
+
             // 'new' icon
             hintView.iconLabel.text = viewModel.boosterNotificationHighlightText // unique element, styled in xib
             hintView.iconLabel.isHidden = viewModel.boosterNotificationState != .new
@@ -174,6 +183,13 @@ class CertificateDetailViewController: UIViewController {
 
     @objc private func toggleFavorite() {
         viewModel.toggleFavorite()
+    }
+
+    @objc private func onLinkTap(_ sender: Any) {
+        let url = viewModel.boosterFAQLink
+        if UIApplication.shared.canOpenURL(url) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
     }
 }
 
