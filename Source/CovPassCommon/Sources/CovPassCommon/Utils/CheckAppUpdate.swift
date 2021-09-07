@@ -118,7 +118,8 @@ public struct CheckAppUpdate {
         }
         .map(on: .global()) { bundleVersion in
             let appStoreVersion = try service.getAppStoreVersion().wait()
-            return (shouldUpdate: bundleVersion != appStoreVersion, version: appStoreVersion, currentVersion: bundleVersion)
+            let shouldUpdate = bundleVersion.compare(appStoreVersion, options: .numeric) == .orderedAscending
+            return (shouldUpdate: shouldUpdate, version: appStoreVersion, currentVersion: bundleVersion)
         }
     }
 
