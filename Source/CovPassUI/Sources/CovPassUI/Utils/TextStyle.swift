@@ -66,7 +66,6 @@ public enum TextStyle {
         case .subheader_2:
             return string
                 .font(named: UIFont.sansRegular, size: 14.0, lineHeight: 21.0, textStyle: .headline)
-                .letterSpacing(0.13)
                 .colored(.onBackground70)
 
         case .body:
