@@ -173,6 +173,12 @@ public extension UIImage {
 
     @ImageLoader(name: "info_hui")
     private(set) static var info
+
+    @ImageLoader(name: "flag_de")
+    private(set) static var flagDE
+
+    @ImageLoader(name: "status_full_notification")
+    private(set) static var statusFullNotfication
 }
 
 @propertyWrapper

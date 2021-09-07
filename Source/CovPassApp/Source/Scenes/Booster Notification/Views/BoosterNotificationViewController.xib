@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BoosterNotificationViewController" customModule="CovPassApp" customModuleProvider="target">
+            <connections>
+                <outlet property="actionButton" destination="pmz-rc-1Ub" id="6Pn-HP-sqV"/>
+                <outlet property="detailsView" destination="n4b-vk-Wnt" id="9el-zr-WXe"/>
+                <outlet property="headline" destination="t3g-u6-XEv" id="jWN-7m-E6C"/>
+                <outlet property="iconLabel" destination="aWt-uv-B0q" id="qSb-G3-7RQ"/>
+                <outlet property="view" destination="iN0-l3-epB" id="g1m-Mf-aBg"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <subviews>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" contentInsetAdjustmentBehavior="never" translatesAutoresizingMaskIntoConstraints="NO" id="9Uf-5q-LWW">
+                    <rect key="frame" x="0.0" y="124" width="414" height="670"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n4b-vk-Wnt" customClass="ParagraphView" customModule="CovPassUI">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="670"/>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        </view>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="n4b-vk-Wnt" firstAttribute="leading" secondItem="VPR-5f-XYc" secondAttribute="leading" id="5XN-nF-AB2"/>
+                        <constraint firstItem="mfg-H5-ngj" firstAttribute="bottom" secondItem="n4b-vk-Wnt" secondAttribute="bottom" placeholder="YES" id="COX-SF-2jW"/>
+                        <constraint firstItem="n4b-vk-Wnt" firstAttribute="top" secondItem="VPR-5f-XYc" secondAttribute="top" id="XBq-x4-26i"/>
+                        <constraint firstItem="n4b-vk-Wnt" firstAttribute="width" secondItem="mfg-H5-ngj" secondAttribute="width" id="ab7-o9-aeR"/>
+                        <constraint firstItem="n4b-vk-Wnt" firstAttribute="trailing" secondItem="VPR-5f-XYc" secondAttribute="trailing" id="m8f-zp-Obb"/>
+                        <constraint firstItem="n4b-vk-Wnt" firstAttribute="bottom" secondItem="VPR-5f-XYc" secondAttribute="bottom" id="vlF-N1-Ibx"/>
+                    </constraints>
+                    <viewLayoutGuide key="contentLayoutGuide" id="VPR-5f-XYc"/>
+                    <viewLayoutGuide key="frameLayoutGuide" id="mfg-H5-ngj"/>
+                </scrollView>
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="nDG-7x-yJB">
+                    <rect key="frame" x="0.0" y="64" width="394" height="60"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" horizontalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="t3g-u6-XEv" customClass="InfoHeaderView" customModule="CovPassUI">
+                            <rect key="frame" x="0.0" y="0.0" width="360" height="60"/>
+                            <constraints>
+                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="L7p-y9-WZB"/>
+                            </constraints>
+                        </view>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="250" text="New" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aWt-uv-B0q" customClass="HighlightLabel" customModule="CovPassUI">
+                            <rect key="frame" x="364" y="21.5" width="30" height="17"/>
+                            <accessibility key="accessibilityConfiguration">
+                                <accessibilityTraits key="traits" staticText="YES" notEnabled="YES"/>
+                            </accessibility>
+                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                </stackView>
+                <view contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="44" translatesAutoresizingMaskIntoConstraints="NO" id="pmz-rc-1Ub" customClass="MainButton" customModule="CovPassUI">
+                    <rect key="frame" x="0.0" y="794" width="414" height="44"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="80" id="KDl-7G-RiS"/>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="z3f-hh-4ic"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="pmz-rc-1Ub" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="vUN-kp-3ea" secondAttribute="leading" id="11u-3k-a6U"/>
+                <constraint firstItem="pmz-rc-1Ub" firstAttribute="top" secondItem="9Uf-5q-LWW" secondAttribute="bottom" id="3VK-Uo-g72"/>
+                <constraint firstItem="pmz-rc-1Ub" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="A5L-4p-NLc"/>
+                <constraint firstItem="pmz-rc-1Ub" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" constant="-24" id="SkM-Qs-KBE"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="nDG-7x-yJB" secondAttribute="trailing" constant="20" id="XOb-ml-7P1"/>
+                <constraint firstItem="nDG-7x-yJB" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="20" id="Xdr-Ei-abe"/>
+                <constraint firstItem="nDG-7x-yJB" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="cmi-4M-hgM"/>
+                <constraint firstItem="9Uf-5q-LWW" firstAttribute="top" secondItem="nDG-7x-yJB" secondAttribute="bottom" id="e9x-EF-Qz4"/>
+                <constraint firstItem="9Uf-5q-LWW" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="fs4-1m-IJi"/>
+                <constraint firstItem="pmz-rc-1Ub" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="kmJ-LZ-LZu"/>
+                <constraint firstItem="9Uf-5q-LWW" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="qcf-GJ-lVs"/>
+            </constraints>
+            <point key="canvasLocation" x="11.594202898550726" y="109.82142857142857"/>
+        </view>
+    </objects>
+    <designables>
+        <designable name="aWt-uv-B0q">
+            <size key="intrinsicContentSize" width="30" height="17"/>
+        </designable>
+        <designable name="pmz-rc-1Ub">
+            <size key="intrinsicContentSize" width="414" height="44"/>
+        </designable>
+        <designable name="t3g-u6-XEv">
+            <size key="intrinsicContentSize" width="414" height="60"/>
+        </designable>
+    </designables>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

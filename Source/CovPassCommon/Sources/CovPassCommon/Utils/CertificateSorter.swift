@@ -65,7 +65,7 @@ public enum CertificateSorter {
         }) {
             res.append(latestVaccination)
         }
-        // 54 Recovery certificate
+        // #5 Recovery certificate
         //  Recovery after SARS-Cov-2-Infection, not older then (=<) 180 Days
         res.append(contentsOf: certificates.filter {
             if let r = $0.vaccinationCertificate.hcert.dgc.r?.first, Date() <= r.du {

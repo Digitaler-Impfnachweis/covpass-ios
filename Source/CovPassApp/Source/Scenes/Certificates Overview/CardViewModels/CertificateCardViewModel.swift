@@ -90,7 +90,9 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
             return DateUtils.displayDateTimeFormatter.string(from: t.sc)
         }
         if let v = certificate.v?.first {
-            if v.fullImmunizationValid {
+            if v.fullImmunizationValid, token.notificationState == .new {
+                return "vaccination_start_screen_qrcode_booster_vaccination_note_subtitle".localized
+            } else if v.fullImmunizationValid {
                 return "vaccination_start_screen_qrcode_complete_protection_subtitle".localized
             } else if let date = v.fullImmunizationValidFrom, v.fullImmunization {
                 return String(format: "vaccination_start_screen_qrcode_complete_from_date_subtitle".localized, DateUtils.displayDateFormatter.string(from: date))
@@ -103,18 +105,24 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
 
     var titleIcon: UIImage {
         if token.vaccinationCertificate.isExpired {
-            return .expired
+            return .expired.withRenderingMode(.alwaysTemplate)
         }
         if token.vaccinationCertificate.expiresSoon {
-            return .activity
+            return .activity.withRenderingMode(.alwaysTemplate)
         }
         if certificate.r != nil {
-            return .statusFullDetail
+            return .statusFullDetail.withRenderingMode(.alwaysTemplate)
         }
         if certificate.t != nil {
-            return .iconTest
+            return .iconTest.withRenderingMode(.alwaysTemplate)
         }
-        return isFullImmunization ? .statusFullDetail : .statusPartialDetail
+        if isFullImmunization, token.notificationState == .new {
+            return .statusFullNotfication.withRenderingMode(.alwaysOriginal) // !!!
+        } else if isFullImmunization {
+            return .statusFullDetail.withRenderingMode(.alwaysTemplate)
+        } else {
+            return .statusPartialDetail.withRenderingMode(.alwaysTemplate)
+        }
     }
 
     var isFavorite: Bool {
@@ -123,6 +131,10 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
 
     var isExpired: Bool {
         token.vaccinationCertificate.isExpired || token.vaccinationCertificate.isInvalid
+    }
+
+    var isBoosted: Bool {
+        token.vaccinationCertificate.hcert.dgc.isVaccinationBoosted
     }
 
     // Hide favorite button if this certificate is the only card that is shown

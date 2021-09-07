@@ -96,3 +96,17 @@ class MockCertificateViewModel: CertificatesOverviewViewModelProtocol {
 
     func showAnnouncementIfNeeded() {}
 }
+
+extension MockCertificateViewModel: BoosterHandling {
+    func checkForVaccinationBooster(completion: @escaping ([BoosterCandidate]) -> Void) {
+        completion([])
+    }
+
+    func updateBoosterNotificationState(for certificates: [(BoosterCandidate, NotificationState)]) {
+        //
+    }
+
+    func showBoosterNotification() {
+        //
+    }
+}

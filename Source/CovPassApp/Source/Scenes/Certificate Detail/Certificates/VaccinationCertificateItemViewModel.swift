@@ -17,6 +17,12 @@ struct VaccinationCertificateItemViewModel: CertificateItemViewModel {
         certificate.vaccinationCertificate.hcert.dgc
     }
 
+    private var formatter: NumberFormatter {
+        let nf = NumberFormatter()
+        nf.numberStyle = .ordinal
+        return nf
+    }
+
     private let active: Bool
 
     var icon: UIImage {
@@ -55,10 +61,14 @@ struct VaccinationCertificateItemViewModel: CertificateItemViewModel {
     var titleAccessibilityLabel: String? { title }
 
     var subtitle: String {
-        if let v = dgc.v?.first {
+        guard let v = dgc.v?.first else { return "" }
+        if v.isBoosted {
+            let value = NSNumber(integerLiteral: v.dn - v.sd)
+            let valueString = formatter.string(for: value) ?? value.stringValue
+            return String(format: "certificates_overview_booster_vaccination_certificate_message".localized, valueString)
+        } else {
             return String(format: "certificates_overview_vaccination_certificate_message".localized, v.dn, v.sd)
         }
-        return ""
     }
     var subtitleAccessibilityLabel: String? { subtitle }
 
@@ -74,6 +84,9 @@ struct VaccinationCertificateItemViewModel: CertificateItemViewModel {
     }
 
     var info2: String? {
+        if certificate.vaccinationCertificate.hcert.dgc.isVaccinationBoosted {
+            return "certificates_overview_booster_vaccination_certificate_note".localized
+        }
         if certificate.vaccinationCertificate.isExpired {
             return "certificates_overview_expired_certificate_note".localized
         }
@@ -86,6 +99,12 @@ struct VaccinationCertificateItemViewModel: CertificateItemViewModel {
         return nil
     }
     var info2AccessibilityLabel: String? { info2 }
+
+    var statusIcon: UIImage {
+        dgc.isVaccinationBoosted ? .flagDE : .validationCheckmark
+    }
+
+    var statusIconAccessibilityLabel: String? { nil }
 
     var activeTitle: String? {
         active ? "certificates_overview_currently_uses_certificate_note".localized : nil

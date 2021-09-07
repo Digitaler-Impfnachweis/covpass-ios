@@ -17,6 +17,7 @@ public protocol CertificateCardViewModelBase {
     var subtitle: String { get }
     var titleIcon: UIImage { get }
     var isExpired: Bool { get }
+    var isBoosted: Bool { get }
     var isFavorite: Bool { get }
     var showFavorite: Bool { get set }
     var qrCode: UIImage? { get }
@@ -87,13 +88,14 @@ public class CertificateCollectionViewCell: CardCollectionViewCell {
 
         containerView.backgroundColor = vm.backgroundColor
 
-        qrContainerView.icon = vm.titleIcon.withRenderingMode(.alwaysTemplate)
+        qrContainerView.icon = vm.titleIcon
         qrContainerView.iconView?.tintColor = vm.backgroundColor
         qrContainerView.image = vm.qrCode
         qrContainerView.layoutMargins.bottom = .space_18
         qrContainerView.isHidden = vm.qrCode == nil
         qrContainerView.title = vm.title
         qrContainerView.subtitle = vm.subtitle
+
         qrContainerView.showOverlay = vm.isExpired
 
         titleView.textableView.attributedText = vm.name.styledAs(.header_1).lineHeight(titleLineHieght).colored(vm.tintColor)

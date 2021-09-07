@@ -26,5 +26,8 @@ public protocol CertificateItemViewModel {
     var info2: String? { get }
     var info2AccessibilityLabel: String? { get }
 
+    var statusIcon: UIImage { get }
+    var statusIconAccessibilityLabel: String? { get }
+
     var activeTitle: String? { get }
 }

@@ -12,7 +12,7 @@ import Foundation
 import PromiseKit
 import UIKit
 
-class PDFExportViewModel: PDFExportViewModelProtocol, CancellableViewModelProtocol {
+final class PDFExportViewModel: PDFExportViewModelProtocol, CancellableViewModelProtocol {
     // MARK: - Properties
 
     weak var delegate: ViewModelDelegate?

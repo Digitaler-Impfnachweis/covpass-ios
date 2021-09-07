@@ -22,6 +22,13 @@ protocol CertificateDetailViewModelProtocol {
     var immunizationBody: String { get }
     var items: [CertificateItem] { get }
 
+    var boosterNotificationTitle: String { get }
+    var boosterNotificationSubtitle: String { get }
+    var boosterNotificationBody: String { get }
+    var boosterNotificationHighlightText: String { get }
+    var boosterNotificationState: NotificationState { get set }
+    var boosterFAQLink: URL { get }
+
     func refresh()
     func immunizationButtonTapped()
     func toggleFavorite()

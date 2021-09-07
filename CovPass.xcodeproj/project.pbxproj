@@ -93,6 +93,19 @@
 		3509F33526CFD04C00A078E5 /* contact-covpass-de.html in Resources */ = {isa = PBXBuildFile; fileRef = 3509F33426CFD04C00A078E5 /* contact-covpass-de.html */; };
 		351C6B4D26E15C2D00321B3C /* FileManager+Simulator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351C6B4C26E15C2D00321B3C /* FileManager+Simulator.swift */; };
 		3520AA6C26B85AA900D22435 /* PDFExportViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3520AA6B26B85AA900D22435 /* PDFExportViewModelProtocol.swift */; };
+		3523616426D66A5F0085B243 /* BoosterNotificationSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3523616326D66A5F0085B243 /* BoosterNotificationSceneFactory.swift */; };
+		3523616626D66ABC0085B243 /* BoosterNotificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3523616526D66ABC0085B243 /* BoosterNotificationViewModel.swift */; };
+		3523616826D66AC90085B243 /* BoosterNotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3523616726D66AC90085B243 /* BoosterNotificationViewController.swift */; };
+		3523616C26D66BC50085B243 /* BoosterNotificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3523616B26D66BC50085B243 /* BoosterNotificationViewController.xib */; };
+		3569924526CEB35D0054531A /* CertificateDetailViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3569924426CEB35D0054531A /* CertificateDetailViewModelTests.swift */; };
+		3579842426E4C03A002F89F2 /* BoosterHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3579842326E4C03A002F89F2 /* BoosterHandling.swift */; };
+		359FBF4326DFA3A3004333BC /* ExtendedCBORWebToken+Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359FBF4226DFA3A3004333BC /* ExtendedCBORWebToken+Notification.swift */; };
+		359FBF4526DFAAF4004333BC /* BoosterNotificationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359FBF4426DFAAF4004333BC /* BoosterNotificationTests.swift */; };
+		359FBF4926DFB20E004333BC /* MockExtendedCBORWebToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359FBF4726DFB13B004333BC /* MockExtendedCBORWebToken.swift */; };
+		35BE613D26CCED950092566B /* BoosterDisclaimerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35BE613C26CCED950092566B /* BoosterDisclaimerViewModel.swift */; };
+		35BE613F26CCEDA80092566B /* BoosterDisclaimerSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35BE613E26CCEDA80092566B /* BoosterDisclaimerSceneFactory.swift */; };
+		35F2E0A826CC41480077E169 /* BoosterDisclaimerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35F2E0A726CC41480077E169 /* BoosterDisclaimerViewController.xib */; };
+		35F2E0AA26CC42EC0077E169 /* BoosterDisclaimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F2E0A926CC42EC0077E169 /* BoosterDisclaimerViewController.swift */; };
 		357B425E26E559B9009DDD55 /* styles.css in Resources */ = {isa = PBXBuildFile; fileRef = 357B425D26E559B9009DDD55 /* styles.css */; };
 		357B426326E56F09009DDD55 /* styles.css in Resources */ = {isa = PBXBuildFile; fileRef = 357B426126E56EF6009DDD55 /* styles.css */; };
 		35F99E0D26B2B60700D3EFC3 /* PDFExportSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F99E0C26B2B60700D3EFC3 /* PDFExportSceneFactory.swift */; };
@@ -276,6 +289,19 @@
 		3509F33426CFD04C00A078E5 /* contact-covpass-de.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "contact-covpass-de.html"; sourceTree = "<group>"; };
 		351C6B4C26E15C2D00321B3C /* FileManager+Simulator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+Simulator.swift"; sourceTree = "<group>"; };
 		3520AA6B26B85AA900D22435 /* PDFExportViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFExportViewModelProtocol.swift; sourceTree = "<group>"; };
+		3523616326D66A5F0085B243 /* BoosterNotificationSceneFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoosterNotificationSceneFactory.swift; sourceTree = "<group>"; };
+		3523616526D66ABC0085B243 /* BoosterNotificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoosterNotificationViewModel.swift; sourceTree = "<group>"; };
+		3523616726D66AC90085B243 /* BoosterNotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoosterNotificationViewController.swift; sourceTree = "<group>"; };
+		3523616B26D66BC50085B243 /* BoosterNotificationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BoosterNotificationViewController.xib; sourceTree = "<group>"; };
+		3569924426CEB35D0054531A /* CertificateDetailViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateDetailViewModelTests.swift; sourceTree = "<group>"; };
+		3579842326E4C03A002F89F2 /* BoosterHandling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoosterHandling.swift; sourceTree = "<group>"; };
+		359FBF4226DFA3A3004333BC /* ExtendedCBORWebToken+Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ExtendedCBORWebToken+Notification.swift"; sourceTree = "<group>"; };
+		359FBF4426DFAAF4004333BC /* BoosterNotificationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoosterNotificationTests.swift; sourceTree = "<group>"; };
+		359FBF4726DFB13B004333BC /* MockExtendedCBORWebToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockExtendedCBORWebToken.swift; sourceTree = "<group>"; };
+		35BE613C26CCED950092566B /* BoosterDisclaimerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoosterDisclaimerViewModel.swift; sourceTree = "<group>"; };
+		35BE613E26CCEDA80092566B /* BoosterDisclaimerSceneFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoosterDisclaimerSceneFactory.swift; sourceTree = "<group>"; };
+		35F2E0A726CC41480077E169 /* BoosterDisclaimerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BoosterDisclaimerViewController.xib; sourceTree = "<group>"; };
+		35F2E0A926CC42EC0077E169 /* BoosterDisclaimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoosterDisclaimerViewController.swift; sourceTree = "<group>"; };
 		357B425D26E559B9009DDD55 /* styles.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = styles.css; sourceTree = "<group>"; };
 		357B426126E56EF6009DDD55 /* styles.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = styles.css; sourceTree = "<group>"; };
 		35F99E0C26B2B60700D3EFC3 /* PDFExportSceneFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFExportSceneFactory.swift; sourceTree = "<group>"; };
@@ -414,6 +440,8 @@
 				216D1F19264EF4E400370F16 /* Welcome */,
 				216D1F25264EF4E400370F16 /* Onboarding */,
 				216D1EFF264EF4E400370F16 /* Certificates Overview */,
+				35F2E0A526CC40FF0077E169 /* Booster Disclaimer */,
+				3523616226D66A020085B243 /* Booster Notification */,
 				216D1F0D264EF4E400370F16 /* Certificate Detail */,
 				3882AEAC266FE7C6000354CD /* Certificate Item Detail */,
 				35F99E0B26B2B01500D3EFC3 /* PDF Export */,
@@ -461,6 +489,7 @@
 				216D1F0A264EF4E400370F16 /* CertificatesOverviewViewModelDelegate.swift */,
 				216D1F0B264EF4E400370F16 /* CertificatesOverviewRouterProtocol.swift */,
 				216D1F0C264EF4E400370F16 /* CertificatesOverviewViewModelProtocol.swift */,
+				3579842326E4C03A002F89F2 /* BoosterHandling.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -575,6 +604,7 @@
 				21A77A53265B0033002FEEF1 /* DialogRouterProtocol+DidDeleteCertificate.swift */,
 				38E94DE8266121D60015553C /* VaccinationRepositoryExtension.swift */,
 				3829A308269CFEA800B8346C /* DCCCertLogicExtension.swift */,
+				359FBF4226DFA3A3004333BC /* ExtendedCBORWebToken+Notification.swift */,
 				351C6B4C26E15C2D00321B3C /* FileManager+Simulator.swift */,
 			);
 			path = Extensions;
@@ -619,6 +649,8 @@
 				38E94DF026613F350015553C /* SceneCoordinatorMock.swift */,
 				385FC1B3269F577400D19AF8 /* MockPersistence.swift */,
 				385FC1B5269F57BC00D19AF8 /* DCCServiceMock.swift */,
+				3569924426CEB35D0054531A /* CertificateDetailViewModelTests.swift */,
+				359FBF4726DFB13B004333BC /* MockExtendedCBORWebToken.swift */,
 			);
 			path = Mock;
 			sourceTree = "<group>";
@@ -850,6 +882,44 @@
 				3829A30A269CFF7C00B8346C /* DCCCertLogicExtension.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		3523616226D66A020085B243 /* Booster Notification */ = {
+			isa = PBXGroup;
+			children = (
+				3523616A26D66B9F0085B243 /* Views */,
+				3523616326D66A5F0085B243 /* BoosterNotificationSceneFactory.swift */,
+				3523616526D66ABC0085B243 /* BoosterNotificationViewModel.swift */,
+				3523616726D66AC90085B243 /* BoosterNotificationViewController.swift */,
+			);
+			path = "Booster Notification";
+			sourceTree = "<group>";
+		};
+		3523616A26D66B9F0085B243 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				3523616B26D66BC50085B243 /* BoosterNotificationViewController.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		35F2E0A526CC40FF0077E169 /* Booster Disclaimer */ = {
+			isa = PBXGroup;
+			children = (
+				35F2E0A626CC41320077E169 /* Views */,
+				35BE613E26CCEDA80092566B /* BoosterDisclaimerSceneFactory.swift */,
+				35BE613C26CCED950092566B /* BoosterDisclaimerViewModel.swift */,
+				35F2E0A926CC42EC0077E169 /* BoosterDisclaimerViewController.swift */,
+			);
+			path = "Booster Disclaimer";
+			sourceTree = "<group>";
+		};
+		35F2E0A626CC41320077E169 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				35F2E0A726CC41480077E169 /* BoosterDisclaimerViewController.xib */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		35F99E0B26B2B01500D3EFC3 /* PDF Export */ = {
@@ -1107,6 +1177,7 @@
 				216D1F5B264EF52400370F16 /* Mock */,
 				216D2025264EF95400370F16 /* Scenes */,
 				88AB2A4025FA40CE00D4EA52 /* Info.plist */,
+				359FBF4426DFAAF4004333BC /* BoosterNotificationTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -1301,6 +1372,7 @@
 			files = (
 				216D1FC0264EF75500370F16 /* CertificatesOverviewViewController.xib in Resources */,
 				3876382826ADBED100FBCA47 /* contact-covpass-en.html in Resources */,
+				35F2E0A826CC41480077E169 /* BoosterDisclaimerViewController.xib in Resources */,
 				3865B76D26DFE4C90053D1D3 /* AnnouncementViewController.xib in Resources */,
 				381EA91F26D8FD5C0014F2A5 /* privacy-covpass-de.html in Resources */,
 				385FC192269EB6AE00D19AF8 /* CountrySelectionViewController.xib in Resources */,
@@ -1313,6 +1385,7 @@
 				65E0DB0C2657F31C004C660F /* CertificateViewController.xib in Resources */,
 				216D1F87264EF6A800370F16 /* LaunchScreen.storyboard in Resources */,
 				385FC19F269ED63500D19AF8 /* DateSelectionViewController.xib in Resources */,
+				3523616C26D66BC50085B243 /* BoosterNotificationViewController.xib in Resources */,
 				216D1F48264EF50300370F16 /* Localizable.strings in Resources */,
 				3509F33526CFD04C00A078E5 /* contact-covpass-de.html in Resources */,
 				35F99E1426B2B75C00D3EFC3 /* PDFExportViewController.xib in Resources */,
@@ -1365,6 +1438,7 @@
 				216D1FED264EF77200370F16 /* HowToScanViewController.swift in Sources */,
 				216D1FEF264EF77200370F16 /* HowToScanSceneFactory.swift in Sources */,
 				216D1FE7264EF76D00370F16 /* CertificateDetailRouterProtocol.swift in Sources */,
+				3523616826D66AC90085B243 /* BoosterNotificationViewController.swift in Sources */,
 				385FC1A1269ED63500D19AF8 /* DateSelectionSceneFactory.swift in Sources */,
 				216D1FB8264EF74F00370F16 /* CertificatesOverviewRouter.swift in Sources */,
 				38E36261269B744700DE6D4C /* RuleCheckRouterProtocol.swift in Sources */,
@@ -1405,16 +1479,21 @@
 				216D1FEE264EF77200370F16 /* HowToScanRouter.swift in Sources */,
 				385FC191269EB6A900D19AF8 /* CountrySelectionSceneFactory.swift in Sources */,
 				3882AEAB266FD609000354CD /* VaccinationCertificateItemViewModel.swift in Sources */,
+				35F2E0AA26CC42EC0077E169 /* BoosterDisclaimerViewController.swift in Sources */,
 				21A77A54265B0033002FEEF1 /* DialogRouterProtocol+DidDeleteCertificate.swift in Sources */,
 				216D2003264EF7B500370F16 /* ApiServiceFactory.swift in Sources */,
 				385FC1A3269ED63500D19AF8 /* DateSelectionViewModel.swift in Sources */,
 				3829A309269CFEA800B8346C /* DCCCertLogicExtension.swift in Sources */,
+				359FBF4326DFA3A3004333BC /* ExtendedCBORWebToken+Notification.swift in Sources */,
+				3523616426D66A5F0085B243 /* BoosterNotificationSceneFactory.swift in Sources */,
 				216D1FCE264EF75D00370F16 /* CertificatesOverviewViewModelProtocol.swift in Sources */,
 				3882AEB7266FEBA3000354CD /* CertificateItemDetailViewModelProtocol.swift in Sources */,
 				216D1FA7264EF74100370F16 /* WelcomeViewModel.swift in Sources */,
 				38E3625B269B712900DE6D4C /* RuleCheckViewController.swift in Sources */,
 				216D1FF0264EF77200370F16 /* HowToScanViewModel.swift in Sources */,
 				35F99E1126B2B6F000D3EFC3 /* PDFExportViewController.swift in Sources */,
+				3523616626D66ABC0085B243 /* BoosterNotificationViewModel.swift in Sources */,
+				3579842426E4C03A002F89F2 /* BoosterHandling.swift in Sources */,
 				216D1FA4264EF74100370F16 /* WelcomeRouter.swift in Sources */,
 				3865B76626DFE4740053D1D3 /* AnnouncementSceneFactory.swift in Sources */,
 				3882AEB5266FEB75000354CD /* CertificateItemDetailViewModel.swift in Sources */,
@@ -1427,6 +1506,7 @@
 				65E0DB0A2657F31C004C660F /* CertificateSceneFactory.swift in Sources */,
 				21A77A50265AD986002FEEF1 /* CertificateDetailViewModelProtocol.swift in Sources */,
 				3882AEBB26700646000354CD /* TestCertificateItemViewModel.swift in Sources */,
+				35BE613F26CCEDA80092566B /* BoosterDisclaimerSceneFactory.swift in Sources */,
 				3882AEB3266FEA42000354CD /* CertificateItemDetailRouterProtocol.swift in Sources */,
 				21A77A3F265A8A1C002FEEF1 /* CertificateDetailSceneResult.swift in Sources */,
 				216D1FB1264EF74600370F16 /* OnboardingRouter.swift in Sources */,
@@ -1435,6 +1515,7 @@
 				21A77A52265AFDE6002FEEF1 /* DialogRouterProtocol+ScanError.swift in Sources */,
 				385FC1B6269F57BC00D19AF8 /* DCCServiceMock.swift in Sources */,
 				385FC1B4269F577400D19AF8 /* MockPersistence.swift in Sources */,
+				35BE613D26CCED950092566B /* BoosterDisclaimerViewModel.swift in Sources */,
 				216D1FAD264EF74600370F16 /* PassOnboardingPageViewModel.swift in Sources */,
 				3865B76A26DFE4960053D1D3 /* AnnouncementViewController.swift in Sources */,
 				216D1FAF264EF74600370F16 /* PassOnboardingContainerViewModel.swift in Sources */,
@@ -1448,8 +1529,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				359FBF4526DFAAF4004333BC /* BoosterNotificationTests.swift in Sources */,
 				216D202C264EFA6600370F16 /* CertificateViewModelTests.swift in Sources */,
 				216D203E264EFA7400370F16 /* PassConsentPageViewModelTests.swift in Sources */,
+				359FBF4926DFB20E004333BC /* MockExtendedCBORWebToken.swift in Sources */,
 				216D2037264EFA6C00370F16 /* MockCertificateViewModelDelegate.swift in Sources */,
 				216D2036264EFA6C00370F16 /* MockCardViewModel.swift in Sources */,
 				38E94DF126613F350015553C /* SceneCoordinatorMock.swift in Sources */,
@@ -1457,6 +1540,7 @@
 				88AB2AA525FA431E00D4EA52 /* CovPassAppTests.swift in Sources */,
 				216D2034264EFA6C00370F16 /* MockCertificateViewModel.swift in Sources */,
 				216D203D264EFA7400370F16 /* PassOnboardingPageViewModelTests.swift in Sources */,
+				3569924526CEB35D0054531A /* CertificateDetailViewModelTests.swift in Sources */,
 				216D2035264EFA6C00370F16 /* VaccinationRepositoryMock.swift in Sources */,
 				216D2032264EFA6C00370F16 /* MockViewModelDelegate.swift in Sources */,
 			);

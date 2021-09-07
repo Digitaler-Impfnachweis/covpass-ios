@@ -33,6 +33,23 @@ class CertificateDetailViewController: UIViewController {
 
     private(set) var viewModel: CertificateDetailViewModelProtocol
 
+    private lazy var hintView: HintView = {
+        let view = HintView()
+
+        view.iconView.image = nil
+
+        view.iconLabel.text = viewModel.boosterNotificationHighlightText // unique element, styled in xib
+        view.iconStackView.removeArrangedSubview(view.iconView)
+
+        view.containerView.backgroundColor = .neutralWhite
+        view.containerView?.layer.borderColor = UIColor.neutralWhite.cgColor
+        return view
+    }()
+
+    private lazy var tapRecognizer: UITapGestureRecognizer = {
+        UITapGestureRecognizer(target: self, action: #selector(onLinkTap(_:)))
+    }()
+
     // MARK: - Lifecycle
 
     @available(*, unavailable)
@@ -50,6 +67,13 @@ class CertificateDetailViewController: UIViewController {
         viewModel.refresh()
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        // set status to 'shown'
+        viewModel.boosterNotificationState = .existing
+
+        super.viewDidAppear(animated)
+    }
+
     // MARK: - Methods
 
     private func setupView() {
@@ -58,6 +82,7 @@ class CertificateDetailViewController: UIViewController {
 
         setupHeadline()
         setupImmunizationView()
+        setupBoosterHintView()
         setupPersonalData()
         setupCertificates()
         setupNavigationBar()
@@ -101,6 +126,29 @@ class CertificateDetailViewController: UIViewController {
         stackView.setCustomSpacing(.space_24, after: immunizationButtonContainerView)
     }
 
+    private func setupBoosterHintView() {
+        if viewModel.boosterNotificationState != .none {
+            if !stackView.arrangedSubviews.contains(hintView) {
+                let index = stackView.arrangedSubviews.firstIndex(of: immunizationButtonContainerView)
+                stackView.insertArrangedSubview(hintView, at: index?.advanced(by: 1) ?? 2) // `2` is according to current design
+            }
+            hintView.titleLabel.attributedText = viewModel.boosterNotificationTitle.styledAs(.header_3)
+            hintView.subTitleLabel.attributedText = viewModel.boosterNotificationSubtitle.styledAs(.subheader_2)
+            hintView.bodyLabel.attributedText = viewModel.boosterNotificationBody.styledAs(.body)
+
+            #if DEBUG
+            hintView.bodyLabel.isUserInteractionEnabled = true
+            hintView.bodyLabel.addGestureRecognizer(tapRecognizer)
+            #endif
+
+            // 'new' icon
+            hintView.iconLabel.text = viewModel.boosterNotificationHighlightText // unique element, styled in xib
+            hintView.iconLabel.isHidden = viewModel.boosterNotificationState != .new
+        } else if stackView.arrangedSubviews.contains(hintView) {
+            stackView.removeArrangedSubview(hintView)
+        }
+    }
+
     private func setupPersonalData() {
         stackView.setCustomSpacing(.space_12, after: personalDataHeadline)
         personalDataHeadline.attributedText = "certificates_overview_personal_data_title".localized.styledAs(.header_2)
@@ -135,6 +183,13 @@ class CertificateDetailViewController: UIViewController {
 
     @objc private func toggleFavorite() {
         viewModel.toggleFavorite()
+    }
+
+    @objc private func onLinkTap(_ sender: Any) {
+        let url = viewModel.boosterFAQLink
+        if UIApplication.shared.canOpenURL(url) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
     }
 }
 

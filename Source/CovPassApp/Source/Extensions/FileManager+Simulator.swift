@@ -16,9 +16,11 @@ extension FileManager {
     ///
     /// based on: https://gist.github.com/AvdLee/7fd62be9bc8fd11de499a49205d77369
     func printFileLocations() {
+        #if targetEnvironment(simulator)
         let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
         let simulatorFolder = paths.last ?? "–"
         let appGroupPath = containerURL(forSecurityApplicationGroupIdentifier: "group.com.your.app")?.path ?? "–"
         print("🗂 Simulator folder location: \(simulatorFolder) \n App Group Location: \(appGroupPath)")
+        #endif
     }
 }

@@ -136,7 +136,7 @@ public extension NSAttributedString {
         return attributedString
     }
 
-    private func attribute<Type>(_ name: NSAttributedString.Key, at location: Int? = nil) -> Type? {
+    func attribute<Type>(_ name: NSAttributedString.Key, at location: Int? = nil) -> Type? {
         guard length > 0 else { return nil }
         return attribute(name, at: location ?? 0, effectiveRange: nil) as? Type
     }
