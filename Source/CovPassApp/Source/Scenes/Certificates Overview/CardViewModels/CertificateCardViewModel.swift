@@ -105,23 +105,23 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
 
     var titleIcon: UIImage {
         if token.vaccinationCertificate.isExpired {
-            return .expired.withRenderingMode(.alwaysTemplate)
+            return UIImage.expired.withRenderingMode(.alwaysTemplate)
         }
         if token.vaccinationCertificate.expiresSoon {
-            return .activity.withRenderingMode(.alwaysTemplate)
+            return UIImage.activity.withRenderingMode(.alwaysTemplate)
         }
         if certificate.r != nil {
-            return .statusFullDetail.withRenderingMode(.alwaysTemplate)
+            return UIImage.statusFullDetail.withRenderingMode(.alwaysTemplate)
         }
         if certificate.t != nil {
-            return .iconTest.withRenderingMode(.alwaysTemplate)
+            return UIImage.iconTest.withRenderingMode(.alwaysTemplate)
         }
         if isFullImmunization, token.notificationState == .new {
-            return .statusFullNotfication.withRenderingMode(.alwaysOriginal) // !!!
+            return UIImage.statusFullNotfication.withRenderingMode(.alwaysOriginal) // !!!
         } else if isFullImmunization {
-            return .statusFullDetail.withRenderingMode(.alwaysTemplate)
+            return UIImage.statusFullDetail.withRenderingMode(.alwaysTemplate)
         } else {
-            return .statusPartialDetail.withRenderingMode(.alwaysTemplate)
+            return UIImage.statusPartialDetail.withRenderingMode(.alwaysTemplate)
         }
     }
 
