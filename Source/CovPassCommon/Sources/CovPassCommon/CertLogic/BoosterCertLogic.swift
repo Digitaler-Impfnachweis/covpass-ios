@@ -69,11 +69,7 @@ public struct BoosterCertLogic {
         else {
             return []
         }
-        var valueSets = [String]()
-        for (k, _) in setsArr {
-            valueSets.append(k)
-        }
-        return valueSets
+        return setsArr.map { $0.key }
     }
 
     public init(userDefaults: Persistence) {
