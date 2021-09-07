@@ -12,6 +12,7 @@ import XCTest
 @testable import CovPassCommon
 
 class ApiErrorTests: XCTestCase {
+
     func testErrorCode() {
         XCTAssertEqual(APIError.requestCancelled.errorCode, 101)
         XCTAssertEqual(APIError.compressionFailed.errorCode, 102)

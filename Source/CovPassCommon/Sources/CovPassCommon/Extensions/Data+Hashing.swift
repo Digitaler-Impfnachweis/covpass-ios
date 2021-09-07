@@ -9,7 +9,7 @@
 import CommonCrypto
 import Foundation
 
-extension Data {
+public extension Data {
     func sha256() -> Data {
         var hash = [UInt8](repeating: 0, count: Int(CC_SHA256_DIGEST_LENGTH))
         withUnsafeBytes {

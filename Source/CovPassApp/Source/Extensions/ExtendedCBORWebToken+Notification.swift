@@ -69,7 +69,10 @@ extension ExtendedCBORWebToken: Notifiable {
     private var identifier: String {
         let name = vaccinationCertificate.hcert.dgc.nam.fullNameTransliterated
         let dob = vaccinationCertificate.hcert.dgc.dobString ?? ""
-        return CustomHasher.sha256("\(name)\(dob)")
+        guard let data = "\(name)\(dob)".data(using: .utf8) else {
+            fatalError("Could not serialize String!")
+        }
+        return data.sha256().hexEncodedString()
     }
 
     private var keyState: String { "\(identifier)_state" }
