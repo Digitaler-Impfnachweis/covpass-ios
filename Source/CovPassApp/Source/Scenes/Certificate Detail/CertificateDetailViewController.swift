@@ -38,7 +38,7 @@ class CertificateDetailViewController: UIViewController {
 
         view.iconView.image = nil
 
-        view.iconLabel.text = "Neu".localized
+        view.iconLabel.text = viewModel.boosterNotificationHighlightText // unique element, styled in xib
         view.iconStackView.removeArrangedSubview(view.iconView)
 
         view.containerView.backgroundColor = .neutralWhite
