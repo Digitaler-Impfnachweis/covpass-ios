@@ -173,15 +173,17 @@ extension CertificatesOverviewViewController: CertificatesOverviewViewModelDeleg
         reloadCollectionView()
 
         viewModel.checkForVaccinationBooster { [weak self] result in
+            guard let self = self, !result.isEmpty else { return }
+
             if result.isEmpty { return }
             
             // store states
             let state = result.map { ($0, NotificationState.new) }
-            self?.viewModel.updateBoosterNotificationState(for: state)
+            self.viewModel.updateBoosterNotificationState(for: state)
             // notification pop-up
-            self?.viewModel.showBoosterNotification()
+            self.viewModel.showBoosterNotification()
             // update cells to show notification markers
-            self?.reloadCollectionView()
+            self.reloadCollectionView()
         }
     }
 
