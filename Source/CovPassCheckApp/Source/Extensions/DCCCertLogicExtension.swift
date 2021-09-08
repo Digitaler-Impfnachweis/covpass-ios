@@ -15,6 +15,7 @@ extension DCCCertLogic {
             initialDCCRulesURL: Bundle.commonBundle.url(forResource: XCConfiguration.value(String.self, forKey: "DCC_RULES_FILE"), withExtension: nil)!,
             service: DCCService(
                 url: URL(string: XCConfiguration.value(String.self, forKey: "DCC_RULES_URL"))!,
+                boosterURL: URL(string: XCConfiguration.value(String.self, forKey: "DCC_RULES_URL"))!,
                 sessionDelegate: APIServiceDelegate(
                     certUrl: Bundle.commonBundle.url(
                         forResource: XCConfiguration.value(String.self, forKey: "DCC_RULES_TLS_CERTIFICATE_NAME"),

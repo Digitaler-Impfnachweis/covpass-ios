@@ -18,7 +18,8 @@ extension APIService {
                     withExtension: nil
                 )!
             ),
-            url: XCConfiguration.value(String.self, forKey: "API_URL")
+            url: XCConfiguration.value(String.self, forKey: "API_URL"),
+            boosterURL: XCConfiguration.value(String.self, forKey: "BOOSTER_RULES_URL")
         )
     }
 }
