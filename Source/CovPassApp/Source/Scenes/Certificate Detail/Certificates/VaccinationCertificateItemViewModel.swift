@@ -62,13 +62,7 @@ struct VaccinationCertificateItemViewModel: CertificateItemViewModel {
 
     var subtitle: String {
         guard let v = dgc.v?.first else { return "" }
-        if v.isBoosted {
-            let value = NSNumber(integerLiteral: v.dn - v.sd)
-            let valueString = formatter.string(for: value) ?? value.stringValue
-            return String(format: "certificates_overview_booster_vaccination_certificate_message".localized, valueString)
-        } else {
-            return String(format: "certificates_overview_vaccination_certificate_message".localized, v.dn, v.sd)
-        }
+        return String(format: "certificates_overview_vaccination_certificate_message".localized, v.dn, v.sd)
     }
     var subtitleAccessibilityLabel: String? { subtitle }
 
