@@ -240,7 +240,6 @@ public struct DCCService: DCCServiceProtocol {
 
     public func loadBoosterRules() -> Promise<[RuleSimple]> {
         return Promise { seal in
-            print("\(url.absoluteString)/")
             guard let requestUrl = URL(string: "\(url.absoluteString)/") else {
                 seal.reject(DCCServiceError.invalidURL)
                 return
