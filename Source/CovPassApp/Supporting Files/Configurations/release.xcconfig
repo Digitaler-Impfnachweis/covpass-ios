@@ -32,5 +32,5 @@ DCC_RULES_TLS_CERTIFICATE_NAME = distribution.dcc-rules.de.der
 
 // BOOSTER (NOTIFICATION) RULES
 
-BOOSTER_RULES_URL = https:/$()/distribution.dcc-rules.de/bnrules/
+BOOSTER_RULES_URL = https:/$()/distribution-cff4f7147260.dcc-rules.de/bnrules/
 BOOSTER_RULES_FILE = booster-rules.json

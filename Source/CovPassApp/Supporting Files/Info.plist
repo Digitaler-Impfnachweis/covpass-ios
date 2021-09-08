@@ -37,12 +37,10 @@
 	<string>$(DCC_RULES_TLS_CERTIFICATE_NAME)</string>
 	<key>DCC_RULES_URL</key>
 	<string>$(DCC_RULES_URL)</string>
-
     <key>BOOSTER_RULES_FILE</key>
     <string>$(BOOSTER_RULES_FILE)</string>
     <key>BOOSTER_RULES_URL</key>
     <string>$(BOOSTER_RULES_URL)</string>
-
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
