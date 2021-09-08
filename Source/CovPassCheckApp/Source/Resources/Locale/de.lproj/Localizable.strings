@@ -25,7 +25,7 @@
 
 "accessibility_onboarding_pages_label_back" = "Zurück";
 
-"accessibility_onboarding_pages_label_page_number" = "Seite %d von %d";
+"accessibility_page_indicator" = "Seite %d von %d";
 
 "validation_first_onboarding_page_title" = "Erster Schritt: Den QR-Code mit der CovPassCheck-App scannen";
 
