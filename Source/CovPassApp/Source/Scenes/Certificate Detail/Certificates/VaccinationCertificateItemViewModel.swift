@@ -78,9 +78,6 @@ struct VaccinationCertificateItemViewModel: CertificateItemViewModel {
     }
 
     var info2: String? {
-        if certificate.vaccinationCertificate.hcert.dgc.isVaccinationBoosted {
-            return "certificates_overview_booster_vaccination_certificate_note".localized
-        }
         if certificate.vaccinationCertificate.isExpired {
             return "certificates_overview_expired_certificate_note".localized
         }
