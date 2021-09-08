@@ -29,4 +29,12 @@ public struct DCCServiceMock: DCCServiceProtocol {
     public func loadValueSet(id: String, hash: String) -> Promise<CovPassCommon.ValueSet> {
         return Promise(error: ApplicationError.unknownError)
     }
+
+    public func loadBoosterRules() -> Promise<[RuleSimple]> {
+        return Promise.value([])
+    }
+
+    public func loadBoosterRule(country: String, hash: String) -> Promise<Rule> {
+        return Promise(error: ApplicationError.unknownError)
+    }
 }

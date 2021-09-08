@@ -12,12 +12,14 @@ import SwiftCBOR
 
 public struct APIService: APIServiceProtocol {
     private let url: String
+    private let boosterURL: String
     private let contentType: String = "application/cbor+base45"
     private let sessionDelegate: URLSessionDelegate
 
-    public init(sessionDelegate: URLSessionDelegate, url: String) {
+    public init(sessionDelegate: URLSessionDelegate, url: String, boosterURL: String) {
         self.sessionDelegate = sessionDelegate
         self.url = url
+        self.boosterURL = boosterURL
     }
 
     public func fetchTrustList() -> Promise<String> {

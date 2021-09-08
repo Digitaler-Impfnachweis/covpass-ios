@@ -43,6 +43,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
             try KeychainPersistence().delete(KeychainPersistence.trustListKey)
             try KeychainPersistence().delete(KeychainPersistence.certificateListKey)
             try KeychainPersistence().delete(KeychainPersistence.dccRulesKey)
+            try KeychainPersistence().delete(KeychainPersistence.boosterRulesKey)
         }
     }
 

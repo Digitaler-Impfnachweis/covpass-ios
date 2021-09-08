@@ -12,10 +12,20 @@ import PromiseKit
 
 public struct BoosterCertLogic {
 
+    private let initialBoosterRulesURL: URL
+    private let service: DCCServiceProtocol
+    private let keychain: Persistence
     private let userDefaults: Persistence
 
-    var dccRules: [Rule]? {
-        if let localRules = try? Data(contentsOf: Bundle.commonBundle.url(forResource: "booster-rules", withExtension: "json")!),
+    var boosterRules: [Rule]? {
+        // Try to load rules from keychain
+        if let rulesData = try? keychain.fetch(KeychainPersistence.boosterRulesKey) as? Data,
+           let rules = try? JSONDecoder().decode([Rule].self, from: rulesData)
+        {
+            return rules
+        }
+        // Try to load local rules
+        if let localRules = try? Data(contentsOf: initialBoosterRulesURL),
            let rules = try? JSONDecoder().decode([Rule].self, from: localRules)
         {
             return rules
@@ -72,12 +82,15 @@ public struct BoosterCertLogic {
         return setsArr.map { $0.key }
     }
 
-    public init(userDefaults: Persistence) {
+    public init(initialBoosterRulesURL: URL, service: DCCServiceProtocol, keychain: Persistence, userDefaults: Persistence) {
+        self.initialBoosterRulesURL = initialBoosterRulesURL
+        self.service = service
+        self.keychain = keychain
         self.userDefaults = userDefaults
     }
 
     public func validate(countryCode: String, validationClock: Date, certificate: CBORWebToken) throws -> [ValidationResult] {
-        guard let rules = dccRules else {
+        guard let rules = boosterRules else {
             throw DCCCertLogicError.noRules
         }
 

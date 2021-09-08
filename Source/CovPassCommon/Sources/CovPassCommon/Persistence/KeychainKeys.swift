@@ -12,4 +12,5 @@ public extension KeychainPersistence {
     static let certificateListKey = "VaccinationCertificateList"
     static let trustListKey = "TrustList"
     static let dccRulesKey = "DCCRules"
+    static let boosterRulesKey = "BooterRules"
 }
