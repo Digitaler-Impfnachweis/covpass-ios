@@ -28,9 +28,9 @@ public enum HCertError: Error, ErrorCode {
         case .illegalKeyUsage:
             return 413
         case .failedSignature:
-            return 414 // todo check if 414 is still available
+            return 414
         case .privateKeyLoadError:
-            return 415 // todo check if 415 is still available
+            return 415
         }
     }
 }
