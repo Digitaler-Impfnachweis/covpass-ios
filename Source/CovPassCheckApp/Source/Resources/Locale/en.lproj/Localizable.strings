@@ -23,6 +23,10 @@
 
 "next_onboarding_page_button_title" = "Next";
 
+"accessibility_onboarding_pages_label_back" = "Back";
+
+"accessibility_onboarding_pages_label_page_number" = "Page %d of %d";
+
 "validation_first_onboarding_page_title" = "Step one: scan the QR code with the CovPassCheck app";
 
 "validation_first_onboarding_page_message" = "Use the CovPassCheck app to scan the QR code on an EU Digital COVID Certificate. The QR codes on the paper version contain the same information as the QR codes in the electronic version in the CovPass app and other apps in which EU Digital COVID Certificates are saved. Both certificate versions are therefore equivalent to each other.";
@@ -62,6 +66,8 @@
 
 /********** start screen **********/
 
+"accessibility_validation_start_screen_label_information" = "More information";
+
 "validation_start_screen_title" = "Overview";
 
 "validation_start_screen_scan_title" = "Checking a certificate";
@@ -95,6 +101,8 @@
 
 "scan_dialog_camera_access_action_button" = "Allow access";
 
+"accessibility_scan_dialog_camera_access_label_close" = "Close";
+
 "error_camera_access_title" = "The CovPassCheck app wants to access your camera.";
 
 "error_camera_access_message" = "Allow access to scan QR codes.";
@@ -113,6 +121,8 @@
 
 "validation_check_popup_valid_vaccination_button_title" = "Scan another certificate";
 
+"accessibility_validation_check_popup_valid_vaccination_label_close" = "Close";
+
 "validation_check_popup_unsuccessful_certificate_title" = "Certificate invalid";
 
 "validation_check_popup_unsuccessful_certificate_message" = "The certificate just checked is invalid for one of the following reasons:";
@@ -127,6 +137,8 @@
 
 "validation_check_popup_unsuccessful_certificate_button_title" = "Scan another certificate";
 
+"accessibility_validation_check_popup_unsuccessful_certificate_label_close" = "Close";
+
 "validation_check_popup_test_title" = "Negative rapid test from %d hours ago";
 
 "validation_check_popup_test_message" = "Check the following data against an ID document from the person you are checking.";
@@ -136,6 +148,8 @@
 "validation_check_popup_test_date_of_issue" = "Time sample taken";
 
 "validation_check_popup_test_button_title" = "Scan another certificate";
+
+"accessibility_validation_check_popup_test_label_close" = "Close";
 
 "validation_check_popup_valid_pcr_test_title" = "Negative PCR test from %d hours ago";
 
@@ -147,8 +161,12 @@
 
 "validation_check_popup_valid_pcr_test_button_title" = "Scan another certificate";
 
+"accessibility_validation_check_popup_valid_pcr_test_label_close" = "Close";
+
 
 /********** app information **********/
+
+"accessibility_app_information_label_back" = "Back to the start screen";
 
 "app_information_title" = "Information";
 
@@ -166,6 +184,8 @@
 
 "app_information_message_contact_info_mail" = "E-Mail: #info@covpass-app.de::mailto:info@covpass-app.de#";
 
+"accessibility_app_information_contact_label_back" = "Back";
+
 "app_information_title_faq" = "Frequently asked questions";
 
 "app_information_title_faq_linked" = "#Frequently asked questions::$0#";
@@ -179,6 +199,8 @@
 "app_information_title_open_source" = "Open-source licences";
 
 "app_information_message_open_source" = "The app uses the following open-source libraries:";
+
+"accessibility_app_information_open_source_label_back" = "Back";
 
 "app_information_version_label" = "Version %@";
 
