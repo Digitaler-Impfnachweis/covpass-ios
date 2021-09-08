@@ -99,15 +99,16 @@
 		3523616C26D66BC50085B243 /* BoosterNotificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3523616B26D66BC50085B243 /* BoosterNotificationViewController.xib */; };
 		3569924526CEB35D0054531A /* CertificateDetailViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3569924426CEB35D0054531A /* CertificateDetailViewModelTests.swift */; };
 		3579842426E4C03A002F89F2 /* BoosterHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3579842326E4C03A002F89F2 /* BoosterHandling.swift */; };
+		357B425E26E559B9009DDD55 /* styles.css in Resources */ = {isa = PBXBuildFile; fileRef = 357B425D26E559B9009DDD55 /* styles.css */; };
+		357B426326E56F09009DDD55 /* styles.css in Resources */ = {isa = PBXBuildFile; fileRef = 357B426126E56EF6009DDD55 /* styles.css */; };
 		359FBF4326DFA3A3004333BC /* ExtendedCBORWebToken+Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359FBF4226DFA3A3004333BC /* ExtendedCBORWebToken+Notification.swift */; };
 		359FBF4526DFAAF4004333BC /* BoosterNotificationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359FBF4426DFAAF4004333BC /* BoosterNotificationTests.swift */; };
 		359FBF4926DFB20E004333BC /* MockExtendedCBORWebToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359FBF4726DFB13B004333BC /* MockExtendedCBORWebToken.swift */; };
 		35BE613D26CCED950092566B /* BoosterDisclaimerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35BE613C26CCED950092566B /* BoosterDisclaimerViewModel.swift */; };
 		35BE613F26CCEDA80092566B /* BoosterDisclaimerSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35BE613E26CCEDA80092566B /* BoosterDisclaimerSceneFactory.swift */; };
+		35D0DEC426E8F66400B8D694 /* BoosterCertLogic+Init.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D0DEC326E8F66400B8D694 /* BoosterCertLogic+Init.swift */; };
 		35F2E0A826CC41480077E169 /* BoosterDisclaimerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35F2E0A726CC41480077E169 /* BoosterDisclaimerViewController.xib */; };
 		35F2E0AA26CC42EC0077E169 /* BoosterDisclaimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F2E0A926CC42EC0077E169 /* BoosterDisclaimerViewController.swift */; };
-		357B425E26E559B9009DDD55 /* styles.css in Resources */ = {isa = PBXBuildFile; fileRef = 357B425D26E559B9009DDD55 /* styles.css */; };
-		357B426326E56F09009DDD55 /* styles.css in Resources */ = {isa = PBXBuildFile; fileRef = 357B426126E56EF6009DDD55 /* styles.css */; };
 		35F99E0D26B2B60700D3EFC3 /* PDFExportSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F99E0C26B2B60700D3EFC3 /* PDFExportSceneFactory.swift */; };
 		35F99E0F26B2B67100D3EFC3 /* PDFExportViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F99E0E26B2B67100D3EFC3 /* PDFExportViewModel.swift */; };
 		35F99E1126B2B6F000D3EFC3 /* PDFExportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F99E1026B2B6F000D3EFC3 /* PDFExportViewController.swift */; };
@@ -295,15 +296,16 @@
 		3523616B26D66BC50085B243 /* BoosterNotificationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BoosterNotificationViewController.xib; sourceTree = "<group>"; };
 		3569924426CEB35D0054531A /* CertificateDetailViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateDetailViewModelTests.swift; sourceTree = "<group>"; };
 		3579842326E4C03A002F89F2 /* BoosterHandling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoosterHandling.swift; sourceTree = "<group>"; };
+		357B425D26E559B9009DDD55 /* styles.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = styles.css; sourceTree = "<group>"; };
+		357B426126E56EF6009DDD55 /* styles.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = styles.css; sourceTree = "<group>"; };
 		359FBF4226DFA3A3004333BC /* ExtendedCBORWebToken+Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ExtendedCBORWebToken+Notification.swift"; sourceTree = "<group>"; };
 		359FBF4426DFAAF4004333BC /* BoosterNotificationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoosterNotificationTests.swift; sourceTree = "<group>"; };
 		359FBF4726DFB13B004333BC /* MockExtendedCBORWebToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockExtendedCBORWebToken.swift; sourceTree = "<group>"; };
 		35BE613C26CCED950092566B /* BoosterDisclaimerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoosterDisclaimerViewModel.swift; sourceTree = "<group>"; };
 		35BE613E26CCEDA80092566B /* BoosterDisclaimerSceneFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoosterDisclaimerSceneFactory.swift; sourceTree = "<group>"; };
+		35D0DEC326E8F66400B8D694 /* BoosterCertLogic+Init.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BoosterCertLogic+Init.swift"; sourceTree = "<group>"; };
 		35F2E0A726CC41480077E169 /* BoosterDisclaimerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BoosterDisclaimerViewController.xib; sourceTree = "<group>"; };
 		35F2E0A926CC42EC0077E169 /* BoosterDisclaimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoosterDisclaimerViewController.swift; sourceTree = "<group>"; };
-		357B425D26E559B9009DDD55 /* styles.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = styles.css; sourceTree = "<group>"; };
-		357B426126E56EF6009DDD55 /* styles.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = styles.css; sourceTree = "<group>"; };
 		35F99E0C26B2B60700D3EFC3 /* PDFExportSceneFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFExportSceneFactory.swift; sourceTree = "<group>"; };
 		35F99E0E26B2B67100D3EFC3 /* PDFExportViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFExportViewModel.swift; sourceTree = "<group>"; };
 		35F99E1026B2B6F000D3EFC3 /* PDFExportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFExportViewController.swift; sourceTree = "<group>"; };
@@ -606,6 +608,7 @@
 				3829A308269CFEA800B8346C /* DCCCertLogicExtension.swift */,
 				359FBF4226DFA3A3004333BC /* ExtendedCBORWebToken+Notification.swift */,
 				351C6B4C26E15C2D00321B3C /* FileManager+Simulator.swift */,
+				35D0DEC326E8F66400B8D694 /* BoosterCertLogic+Init.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1436,6 +1439,7 @@
 			files = (
 				216D1FAE264EF74600370F16 /* OnboardingSceneFactory.swift in Sources */,
 				216D1FED264EF77200370F16 /* HowToScanViewController.swift in Sources */,
+				35D0DEC426E8F66400B8D694 /* BoosterCertLogic+Init.swift in Sources */,
 				216D1FEF264EF77200370F16 /* HowToScanSceneFactory.swift in Sources */,
 				216D1FE7264EF76D00370F16 /* CertificateDetailRouterProtocol.swift in Sources */,
 				3523616826D66AC90085B243 /* BoosterNotificationViewController.swift in Sources */,
