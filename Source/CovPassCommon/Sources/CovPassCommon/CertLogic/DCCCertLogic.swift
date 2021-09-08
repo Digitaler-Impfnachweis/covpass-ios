@@ -203,6 +203,8 @@ public struct DCCCertLogic {
         return engine.validate(filter: filter, external: external, payload: payload)
     }
 
+    // MARK: - Updating local rules and data
+
     public func updateRulesIfNeeded() -> Promise<Void> {
         return firstly {
             Promise { seal in
@@ -222,6 +224,7 @@ public struct DCCCertLogic {
         }
     }
 
+    /// Triggers a chain of downloads/updates for DCC rules, booster rules and value sets
     public func updateRules() -> Promise<Void> {
         return firstly {
             service.loadDCCRules()
@@ -238,7 +241,7 @@ public struct DCCCertLogic {
             try userDefaults.store(UserDefaults.keyLastUpdatedDCCRules, value: Date())
         }
         .then(on: .global()) {
-            updateValueSets()
+            updateBoosterRules()
         }
     }
 
@@ -250,6 +253,41 @@ public struct DCCCertLogic {
                     updatedRules.append(localRule)
                 } else {
                     let rule = try service.loadDCCRule(country: remoteRule.country, hash: remoteRule.hash).wait()
+                    updatedRules.append(rule)
+                }
+            }
+            seal.fulfill(updatedRules)
+        }
+    }
+
+    private func updateBoosterRules() -> Promise<Void> {
+        return firstly {
+            service.loadBoosterRules()
+        }
+        .then(on: .global()) { (remoteRules: [RuleSimple]) throws -> Promise<[Rule]> in
+            guard let rules = dccRules else {
+                throw DCCCertLogicError.noRules
+            }
+            return updateCountryBoosterRules(localRules: rules, remoteRules: remoteRules)
+        }
+        .map(on: .global()) { rules in
+            let data = try JSONEncoder().encode(rules)
+            try keychain.store(KeychainPersistence.boosterRulesKey, value: data)
+            // no 'last update' as we currently use this in parallel with the DCC rules
+        }
+        .then(on: .global()) {
+            updateValueSets()
+        }
+    }
+
+    private func updateCountryBoosterRules(localRules: [Rule], remoteRules: [RuleSimple]) -> Promise<[Rule]> {
+        Promise { seal in
+            var updatedRules = [Rule]()
+            for remoteRule in remoteRules {
+                if let localRule = localRules.first(where: { $0.countryCode == remoteRule.country && $0.hash == remoteRule.hash }) {
+                    updatedRules.append(localRule)
+                } else {
+                    let rule = try service.loadBoosterRule(country: remoteRule.country, hash: remoteRule.hash).wait()
                     updatedRules.append(rule)
                 }
             }

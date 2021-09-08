@@ -29,3 +29,7 @@ TRUST_LIST_STATIC_DATA = dsc.json
 DCC_RULES_URL = https:/$()/distribution.dcc-rules.de
 DCC_RULES_FILE = dcc-rules.json
 DCC_RULES_TLS_CERTIFICATE_NAME = distribution.dcc-rules.de.der
+
+// BOOSTER (NOTIFICATION) RULES
+
+BOOSTER_RULE_URL = https:/$()/distribution-cff4f7147260.dcc-rules.de/bnrules/
