@@ -59,13 +59,6 @@ struct CoseSign1Message {
         self.signature = signature
     }
 
-    /// Returns cose payload as json data
-    func payloadJsonData() throws -> Data {
-        let cborDecodedPayload = try CBOR.decode(payload)
-        let certificateJson = map(cborObject: cborDecodedPayload)
-        return try JSONSerialization.data(withJSONObject: certificateJson as Any)
-    }
-
     // MARK: - CoseSign1Message parser
 
     /// Decodes the received data with CBOR and parses the resulting COSE structure
@@ -74,8 +67,14 @@ struct CoseSign1Message {
     /// - returns a constructed object of type `CoseSign1Message`
     init(decompressedPayload: Data) throws {
         let cbor = try CBOR.decode(([UInt8])(decompressedPayload))
-
-        guard case let .tagged(_, tcbor) = cbor, case let .array(array) = tcbor else {
+        var array = [CBOR]()
+        if case let .tagged(_, tcbor) = cbor, case let .array(cborArray) = tcbor {
+            array = cborArray
+        }
+        if array.isEmpty, case let .array(cborArray) = cbor {
+            array = cborArray
+        }
+        if array.isEmpty {
             throw CoseParsingError.wrongType
         }
         guard array.count == 4 else { throw CoseParsingError.wrongArrayLength }
@@ -92,15 +91,112 @@ struct CoseSign1Message {
         signature = signatureValue
     }
 
-    /// Parse a CBOR object into a readable String
+    init(jsonData: Data) throws {
+        protected = []
+        unprotected = nil
+        payload = []
+        signature = []
+        guard let data = try JSONSerialization.jsonObject(with: jsonData, options: .allowFragments) as? [String: Any],
+              let cborData = encode(json: data) else {
+            throw CoseParsingError.missingValue
+        }
+        payload = CBOR.encode(cborData)
+
+    }
+
+    /// Returns cose payload as json data
+    func toJSON() throws -> Data {
+        let cborDecodedPayload = try CBOR.decode(payload)
+        let certificateJson = decode(cborObject: cborDecodedPayload)
+        return try JSONSerialization.data(withJSONObject: certificateJson as Any)
+    }
+
+    /// Returns CBOR object
+    func toCBOR() throws -> Data {
+        Data(
+            CBOR.encodeArray(
+                [
+                    CBOR.byteString(protected),
+                    CBOR.map(unprotected as? [CBOR: CBOR] ?? [:]),
+                    CBOR.byteString(payload),
+                    CBOR.byteString(signature)
+                ]
+            )
+        )
+    }
+
+    /// Encode CBOR object
     /// - parameter cborObject: the CBOR object to be parsed
     /// - returns a dictionary
-    func map(cborObject: CBOR?) -> [String: Any]? {
+    private func encode(json: [String: Any]) -> CBOR? {
+        var result = [CBOR: CBOR]()
+        for (key, value) in json {
+            if let (k, v) = encode(key: key, value: value) {
+                result.updateValue(v, forKey: k)
+            }
+        }
+
+        return CBOR.map(result)
+    }
+
+    private func encode(key: Any, value: Any) -> (CBOR, CBOR)? {
+        var k: CBOR
+        var v: CBOR
+
+        switch key {
+        case let keyInt as UInt64:
+            k = CBOR.unsignedInt(keyInt)
+        case let keyString as String:
+            k = CBOR.utf8String(keyString)
+        default:
+            assertionFailure("CBOR key type not implemented, yet")
+            return nil
+        }
+
+        switch value {
+        case let valueInt as UInt64:
+            v = CBOR.unsignedInt(valueInt)
+        case let valueDouble as Double:
+            v = CBOR.double(valueDouble)
+        case let cborArray as Array<[String: Any]>:
+            let remappedResult = cborArray.map { self.encode(cborObject: $0) }
+            v = CBOR.array(remappedResult)
+        case let cborMap as [String: Any]:
+            var result = [CBOR: CBOR]()
+            for (mapKey, mapValue) in cborMap {
+                if let (k, v) = encode(key: mapKey, value: mapValue) {
+                    result.updateValue(v, forKey: k)
+                }
+            }
+            v = CBOR.map(result)
+        case let valueString as String:
+            v = CBOR.utf8String(valueString)
+        default:
+            return nil
+        }
+
+        return (k, v)
+    }
+
+    private func encode(cborObject: [String: Any]) -> CBOR {
+        var result = [CBOR: CBOR]()
+        for (key, value) in cborObject {
+            if let (k, v) = encode(key: key, value: value) {
+                result.updateValue(v, forKey: k)
+            }
+        }
+        return CBOR.map(result)
+    }
+
+    /// Decode CBOR object
+    /// - parameter cborObject: the CBOR object to be parsed
+    /// - returns a dictionary
+    private func decode(cborObject: CBOR?) -> [String: Any]? {
         guard let cborData = cborObject, case let .map(cborMap) = cborData else { return nil }
 
         var result = [String: Any]()
         for (key, value) in cborMap {
-            if let (k, v) = map(key: key, value: value) {
+            if let (k, v) = decode(key: key, value: value) {
                 result.updateValue(v, forKey: k)
             }
         }
@@ -108,9 +204,8 @@ struct CoseSign1Message {
         return result
     }
 
-    private func map(key: CBOR, value: CBOR) -> (String, Any)? {
+    private func decode(key: CBOR, value: CBOR) -> (String, Any)? {
         var k: String
-        var v: Any
 
         switch key {
         case let .utf8String(keyString):
@@ -125,28 +220,37 @@ struct CoseSign1Message {
             return nil
         }
 
-        switch value {
-        case let .utf8String(valueString):
-            v = valueString
-        case let .array(cborArray):
-            let remappedResult = cborArray.map { self.map(cborObject: $0) }
-            v = remappedResult
-        case let .unsignedInt(valueInt):
-            v = valueInt
-        case let .double(valueDouble):
-            v = valueDouble
-        case let .map(valueMap):
-            var result = [String: Any]()
-            for (mapKey, mapValue) in valueMap {
-                if let (k, v) = map(key: mapKey, value: mapValue) {
-                    result.updateValue(v, forKey: k)
-                }
-            }
-            v = result
-        default:
+        guard let cborValue = decode(value: value) else {
+            assertionFailure("CBOR value type not implemented, yet")
             return nil
         }
 
-        return (k, v)
+        return (k, cborValue)
+    }
+
+    private func decode(value: CBOR) -> Any? {
+        switch value {
+        case let .utf8String(valueString):
+            return valueString
+        case let .array(cborArray):
+            let remappedResult = cborArray.map { self.decode(cborObject: $0) }
+            return remappedResult
+        case let .unsignedInt(valueInt):
+            return valueInt
+        case let .double(valueDouble):
+            return valueDouble
+        case let .map(valueMap):
+            var result = [String: Any]()
+            for (mapKey, mapValue) in valueMap {
+                if let (k, v) = decode(key: mapKey, value: mapValue) {
+                    result.updateValue(v, forKey: k)
+                }
+            }
+            return result
+        case let .tagged(_, cborValue):
+            return decode(value: cborValue)
+        default:
+            return nil
+        }
     }
 }

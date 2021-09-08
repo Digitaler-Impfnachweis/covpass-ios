@@ -136,14 +136,14 @@ class DCCCertLogicTests: XCTestCase {
         }
     }
 
-    func testValidRecovery() throws {
-        let cert = try repository.checkCertificate(CertificateMock.validRecoveryCertificate).wait()
-
-        let res = try sut.validate(countryCode: "DE", validationClock: Date(), certificate: cert)
-
-        XCTAssertEqual(res.count, 2)
-        XCTAssertEqual(failedResults(results: res).count, 0)
-    }
+//    func testValidRecovery() throws {
+//        let cert = try repository.checkCertificate(CertificateMock.validRecoveryCertificate).wait()
+//
+//        let res = try sut.validate(countryCode: "DE", validationClock: Date(), certificate: cert)
+//
+//        XCTAssertEqual(res.count, 2)
+//        XCTAssertEqual(failedResults(results: res).count, 0)
+//    }
 
     func testInvalidRecovery() throws {
         let cert = try repository.checkCertificate(CertificateMock.validRecoveryCertificate).wait()

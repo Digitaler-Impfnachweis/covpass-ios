@@ -54,6 +54,16 @@ public struct DigitalGreenCertificate: Codable {
         case ver
     }
 
+    public init(nam: Name, dob: Date? = nil, dobString: String? = nil, v: [Vaccination]? = nil, t: [Test]? = nil, r: [Recovery]? = nil, ver: String) {
+        self.nam = nam
+        self.dob = dob
+        self.dobString = dobString
+        self.v = v
+        self.t = t
+        self.r = r
+        self.ver = ver
+    }
+
     public init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         nam = try values.decode(Name.self, forKey: .nam)

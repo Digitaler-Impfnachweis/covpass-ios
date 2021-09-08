@@ -39,6 +39,16 @@ public class Recovery: Codable {
         case ci
     }
 
+    public init(tg: String, fr: Date, df: Date, du: Date, co: String, is: String, ci: String) {
+        self.tg = tg
+        self.fr = fr
+        self.df = df
+        self.du = du
+        self.co = co
+        self.is = `is`
+        self.ci = ci
+    }
+
     public required init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         tg = try values.decode(String.self, forKey: .tg)
