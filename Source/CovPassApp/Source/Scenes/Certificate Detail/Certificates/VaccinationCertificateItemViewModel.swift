@@ -101,7 +101,7 @@ struct VaccinationCertificateItemViewModel: CertificateItemViewModel {
     var info2AccessibilityLabel: String? { info2 }
 
     var statusIcon: UIImage {
-        dgc.isVaccinationBoosted ? .flagDE : .validationCheckmark
+        .validationCheckmark
     }
 
     var statusIconAccessibilityLabel: String? { nil }
