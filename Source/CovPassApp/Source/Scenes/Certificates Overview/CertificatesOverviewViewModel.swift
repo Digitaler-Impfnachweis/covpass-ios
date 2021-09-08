@@ -112,12 +112,7 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
             self.certificateList.certificates.append(certificate)
             self.delegate?.viewModelDidUpdate()
             self.handleCertificateDetailSceneResult(.showCertificatesOnOverview([certificate]))
-            
-            if certificate.vaccinationCertificate.hcert.dgc.isVaccinationBoosted {
-                self.showBoosterDisclaimer(certificate)
-            } else {
-                self.showCertificate(certificate)
-            }
+            self.showCertificate(certificate)
         }
         .catch { error in
             self.router.showDialogForScanError(error) { [weak self] in
@@ -227,18 +222,6 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
 
         case .addNewCertificate:
             scanCertificate(withIntroduction: true)
-        }
-    }
-
-    private func showBoosterDisclaimer(_ certificate: ExtendedCBORWebToken) {
-        firstly {
-            router.showBoosterDisclaimer()
-        }
-        .done {
-            self.showCertificate(certificate)
-        }
-        .catch { [weak self] error in
-            self?.router.showUnexpectedErrorDialog(error)
         }
     }
 }
