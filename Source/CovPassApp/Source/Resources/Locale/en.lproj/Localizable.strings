@@ -23,6 +23,8 @@
 
 "next_onboarding_page_button_title" = "Next";
 
+"accessibility_page_indicator" = "Page %d of %d";
+
 "vaccination_first_onboarding_page_title" = "Step one: upload your EU Digital COVID Certificate to your smartphone";
 
 "vaccination_first_onboarding_page_message" = "Use the CovPass app to scan the EU Digital COVID Certificate for a Covid-19 vaccination, a negative Covid-19 test result or recovery from a Covid-19 infection. To do this, hold your smartphone’s camera above the QR code. Your EU Digital COVID Certificate will be transferred to your smartphone immediately.";
