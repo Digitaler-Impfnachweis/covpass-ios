@@ -16,6 +16,7 @@ public enum DCCServiceMockError: Error {
 }
 
 class DCCServiceMock: DCCServiceProtocol {
+
     var loadDCCRulesResult: Promise<[RuleSimple]>?
     func loadDCCRules() -> Promise<[RuleSimple]> {
         loadDCCRulesResult ?? Promise.value([])
@@ -34,5 +35,15 @@ class DCCServiceMock: DCCServiceProtocol {
     var loadValueSetResult: Promise<CovPassCommon.ValueSet>?
     func loadValueSet(id: String, hash: String) -> Promise<CovPassCommon.ValueSet> {
         loadValueSetResult ?? Promise(error: DCCServiceMockError.invalidURL)
+    }
+
+    func loadBoosterRules() -> Promise<[RuleSimple]> {
+        #warning("remove")
+        fatalError()
+    }
+
+    func loadBoosterRule(country: String, hash: String) -> Promise<Rule> {
+        #warning("remove")
+        fatalError()
     }
 }
