@@ -28,10 +28,9 @@ class CertificateViewModelTests: XCTestCase {
         sceneCoordinator = SceneCoordinatorMock()
         router = CertificatesOverviewRouter(sceneCoordinator: sceneCoordinator)
         repository = VaccinationRepositoryMock()
-        let dccCertLogic = DCCCertLogic(initialDCCRulesURL: Bundle.commonBundle.url(forResource: "dcc-rules", withExtension: "json")!, initialBoosterRulesURL: Bundle.commonBundle.url(forResource: "booster-rules", withExtension: "json")!, service: DCCServiceMock(), keychain: MockPersistence(), userDefaults: MockPersistence())
-        let boosterLogic = BoosterCertLogic(initialBoosterRulesURL: Bundle.commonBundle.url(forResource: "booster-rules", withExtension: "json")!, service: DCCServiceMock(), keychain: MockPersistence(), userDefaults: MockPersistence())
+        let dccCertLogic = DCCCertLogic(initialDCCRulesURL: Bundle.commonBundle.url(forResource: "dcc-rules", withExtension: "json")!, service: DCCServiceMock(), keychain: MockPersistence(), userDefaults: MockPersistence())
 
-        sut = CertificatesOverviewViewModel(router: router, repository: repository, certLogic: dccCertLogic, boosterLogic: boosterLogic, userDefaults: MockPersistence())
+        sut = CertificatesOverviewViewModel(router: router, repository: repository, certLogic: dccCertLogic, userDefaults: MockPersistence())
         sutDelegate = MockCertificateViewModelDelegate()
         sut.delegate = sutDelegate
     }

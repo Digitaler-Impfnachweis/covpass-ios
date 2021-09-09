@@ -20,7 +20,6 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
     private var router: CertificatesOverviewRouterProtocol
     private let repository: VaccinationRepositoryProtocol
     private let certLogic: DCCCertLogic
-    private let boosterLogic: BoosterCertLogic
     private var certificateList = CertificateList(certificates: [])
     private var lastKnownFavoriteCertificateId: String?
     private var userDefaults: Persistence
@@ -39,13 +38,11 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
         router: CertificatesOverviewRouterProtocol,
         repository: VaccinationRepositoryProtocol,
         certLogic: DCCCertLogic,
-        boosterLogic: BoosterCertLogic,
         userDefaults: Persistence
     ) {
         self.router = router
         self.repository = repository
         self.certLogic = certLogic
-        self.boosterLogic = boosterLogic
         self.userDefaults = userDefaults
     }
 
@@ -253,7 +250,8 @@ extension CertificatesOverviewViewModel: BoosterHandling {
             var boosterCandidates = [BoosterCandidate]()
             self.certificateList.certificates.forEach { token in
                 do {
-                    let validation = try self.boosterLogic.validate(
+                    let validation = try self.certLogic.validate(
+                        type: .booster,
                         countryCode: "DE",
                         validationClock: Date(),
                         certificate: token.vaccinationCertificate)

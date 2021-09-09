@@ -158,13 +158,10 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
         "vaccination_certificate_overview_booster_vaccination_notification_title".localized
     }
 
-    var boosterNotificationSubtitle: String {
-        "vaccination_certificate_overview_booster_vaccination_notification_subtitle".localized
-    }
-
     var boosterNotificationBody: String {
         let ruleID = selectedCertificate?.notificationRuleID ?? ""
-        return String(format: "vaccination_certificate_overview_booster_vaccination_notification_message".localized, ruleID)
+        let rule = "" // TODO get rule description
+        return String(format: "vaccination_certificate_overview_booster_vaccination_notification_message".localized, rule, ruleID)
     }
 
     var boosterNotificationHighlightText: String {

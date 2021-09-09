@@ -133,7 +133,6 @@ class CertificateDetailViewController: UIViewController {
                 stackView.insertArrangedSubview(hintView, at: index?.advanced(by: 1) ?? 2) // `2` is according to current design
             }
             hintView.titleLabel.attributedText = viewModel.boosterNotificationTitle.styledAs(.header_3)
-            hintView.subTitleLabel.attributedText = viewModel.boosterNotificationSubtitle.styledAs(.subheader_2)
             hintView.bodyLabel.attributedText = viewModel.boosterNotificationBody.styledAs(.body)
 
             #if DEBUG

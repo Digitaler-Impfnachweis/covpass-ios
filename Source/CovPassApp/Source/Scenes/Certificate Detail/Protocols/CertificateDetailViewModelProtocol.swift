@@ -23,7 +23,6 @@ protocol CertificateDetailViewModelProtocol {
     var items: [CertificateItem] { get }
 
     var boosterNotificationTitle: String { get }
-    var boosterNotificationSubtitle: String { get }
     var boosterNotificationBody: String { get }
     var boosterNotificationHighlightText: String { get }
     var boosterNotificationState: NotificationState { get set }

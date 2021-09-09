@@ -13,7 +13,6 @@ extension DCCCertLogic {
     static func create() -> DCCCertLogic {
         DCCCertLogic(
             initialDCCRulesURL: Bundle.commonBundle.url(forResource: XCConfiguration.value(String.self, forKey: "DCC_RULES_FILE"), withExtension: nil)!,
-            initialBoosterRulesURL: Bundle.commonBundle.url(forResource: XCConfiguration.value(String.self, forKey: "BOOSTER_RULES_FILE"), withExtension: nil)!,
             service: DCCService(
                 url: URL(string: XCConfiguration.value(String.self, forKey: "DCC_RULES_URL"))!,
                 boosterURL: URL(string: XCConfiguration.value(String.self, forKey: "BOOSTER_RULES_URL"))!,
