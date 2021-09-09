@@ -286,10 +286,7 @@ public struct DCCService: DCCServiceProtocol {
 
     public func loadBoosterRule(country: String, hash: String) -> Promise<Rule> {
         return Promise { seal in
-            guard let requestUrl = URL(string: "\(boosterURL.absoluteString)/\(hash)") else {
-                seal.reject(DCCServiceError.invalidURL)
-                return
-            }
+            let requestUrl = boosterURL.appendingPathComponent(hash)
             var request = URLRequest(url: requestUrl)
             request.httpMethod = "GET"
 

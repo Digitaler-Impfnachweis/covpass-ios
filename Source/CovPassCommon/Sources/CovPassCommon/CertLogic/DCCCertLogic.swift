@@ -22,6 +22,19 @@ public class RuleSimple: Codable {
         self.country = country
         self.hash = hash
     }
+
+    public required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+
+        identifier = try container.decode(String.self, forKey: .identifier)
+        version = try container.decode(String.self, forKey: .version)
+        hash = try container.decode(String.self, forKey: .hash)
+        if let country = try container.decodeIfPresent(String.self, forKey: .country) {
+            self.country = country
+        } else {
+            self.country = "DE" // currently booster rules are DE only
+        }
+    }
 }
 
 public enum DCCCertLogicError: Error, ErrorCode {
@@ -46,6 +59,8 @@ public struct ValueSet: Codable {
 
 public struct DCCCertLogic {
     private let initialDCCRulesURL: URL
+    private let initialBoosterRulesURL: URL
+
     private let service: DCCServiceProtocol
     private let keychain: Persistence
     private let userDefaults: Persistence
@@ -59,6 +74,23 @@ public struct DCCCertLogic {
         }
         // Try to load local rules
         if let localRules = try? Data(contentsOf: initialDCCRulesURL),
+           let rules = try? JSONDecoder().decode([Rule].self, from: localRules)
+        {
+            return rules
+        }
+        return nil
+    }
+
+    // FIXME: redundant declaration with `BoosterCertLogic`. Refactoring scheduled!
+    var boosterRules: [Rule]? {
+        // Try to load rules from keychain
+        if let rulesData = try? keychain.fetch(KeychainPersistence.boosterRulesKey) as? Data,
+           let rules = try? JSONDecoder().decode([Rule].self, from: rulesData)
+        {
+            return rules
+        }
+        // Try to load local rules
+        if let localRules = try? Data(contentsOf: initialBoosterRulesURL),
            let rules = try? JSONDecoder().decode([Rule].self, from: localRules)
         {
             return rules
@@ -160,8 +192,9 @@ public struct DCCCertLogic {
         try? userDefaults.fetch(UserDefaults.keyLastUpdatedDCCRules) as? Date
     }
 
-    public init(initialDCCRulesURL: URL, service: DCCServiceProtocol, keychain: Persistence, userDefaults: Persistence) {
+    public init(initialDCCRulesURL: URL, initialBoosterRulesURL: URL, service: DCCServiceProtocol, keychain: Persistence, userDefaults: Persistence) {
         self.initialDCCRulesURL = initialDCCRulesURL
+        self.initialBoosterRulesURL = initialBoosterRulesURL
         self.service = service
         self.keychain = keychain
         self.userDefaults = userDefaults
@@ -272,7 +305,7 @@ public struct DCCCertLogic {
             service.loadBoosterRules()
         }
         .then(on: .global()) { (remoteRules: [RuleSimple]) throws -> Promise<[Rule]> in
-            guard let rules = dccRules else {
+            guard let rules = boosterRules else {
                 throw DCCCertLogicError.noRules
             }
             return updateCountryBoosterRules(localRules: rules, remoteRules: remoteRules)
