@@ -14,7 +14,7 @@ public final class APIServiceDelegate: NSObject {
     // MARK: - Creating a Delegate
 
 
-    /// Initializes a CWA Session delegate
+    /// Initializes an API Session delegate
     /// - Parameter publicKeyHashes: A list of SHA256 hashes of the certificates to pin
     public init(publicKeyHashes: [String]) {
         self.publicKeyHashes = publicKeyHashes
