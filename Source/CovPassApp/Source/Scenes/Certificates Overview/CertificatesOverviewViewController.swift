@@ -45,6 +45,8 @@ class CertificatesOverviewViewController: UIViewController {
         viewModel.refresh()
         viewModel.showAnnouncementIfNeeded()
 
+        viewModel.updateDCCRules()
+
         #if DEBUG
         if ProcessInfo.processInfo.arguments.contains("-ResetNotificationStates") {
             ExtendedCBORWebToken.resetNotificationStates()

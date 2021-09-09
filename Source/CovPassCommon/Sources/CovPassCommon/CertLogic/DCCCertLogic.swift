@@ -208,6 +208,12 @@ public struct DCCCertLogic {
     public func updateRulesIfNeeded() -> Promise<Void> {
         return firstly {
             Promise { seal in
+                #if DEBUG
+                if ProcessInfo.processInfo.arguments.contains("-ForceRuleUpdate") {
+                    seal.fulfill_()
+                    return
+                }
+                #else
                 if let lastUpdated = try userDefaults.fetch(UserDefaults.keyLastUpdatedDCCRules) as? Date,
                    let date = Calendar.current.date(byAdding: .day, value: 1, to: lastUpdated),
                    Date() < date
@@ -217,6 +223,7 @@ public struct DCCCertLogic {
                     return
                 }
                 seal.fulfill_()
+                #endif
             }
         }
         .then(on: .global()) {

@@ -23,12 +23,13 @@ TLS_CERTIFICATE_NAME = rsa-certify.prod.ubirch.com-V3_1982645.der
 TRUST_LIST_PUBLIC_KEY = pubkey.pem
 TRUST_LIST_STATIC_DATA = dsc.json
 
+// Certificate/public key pinning
+PINNING_HASHES = 35bc5ff1a9e64dde09042804e1502140c6cbbe24fba4d5d0b9417f007849aed5
 
 // DCC RULES
 
 DCC_RULES_URL = https:/$()/distribution.dcc-rules.de
 DCC_RULES_FILE = dcc-rules.json
-DCC_RULES_TLS_CERTIFICATE_NAME = distribution.dcc-rules.de.der
 
 // BOOSTER (NOTIFICATION) RULES
 

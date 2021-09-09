@@ -41,6 +41,8 @@
     <string>$(BOOSTER_RULES_FILE)</string>
     <key>BOOSTER_RULES_URL</key>
     <string>$(BOOSTER_RULES_URL)</string>
+    <key>PINNING_HASHES</key>
+    <string>$(PINNING_HASHES)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
