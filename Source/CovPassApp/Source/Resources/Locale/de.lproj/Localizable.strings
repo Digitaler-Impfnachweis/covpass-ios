@@ -23,15 +23,17 @@
 
 "next_onboarding_page_button_title" = "Weiter";
 
+"accessibility_onboarding_pages_label_back" = "Zurück";
+
 "accessibility_page_indicator" = "Seite %d von %d";
 
 "vaccination_first_onboarding_page_title" = "Erster Schritt: Übertragen Sie das digitale COVID-Zertifikat der EU auf Ihr Smartphone";
 
-"vaccination_first_onboarding_page_message" = "Scannen Sie mit der CovPass-App das digitale COVID-Zertifikat der EU für eine Corona-Impfung, ein negatives Corona-Testergebnis oder eine Genesung von der Corona-Infektion. Halten Sie dafür die Kamera Ihres Smartphones über den QR-Code. Das digitale COVID-Zertifikat der EU wird sofort auf Ihr Smartphone übertragen.";
+"vaccination_first_onboarding_page_message" = "Scannen Sie mit der CovPass-App das digitale COVID-Zertifikat der EU für eine Corona-Impfung oder eine Genesung von der Corona-Infektion. Halten Sie dafür die Kamera Ihres Smartphones über den QR-Code. Das digitale COVID-Zertifikat der EU wird sofort auf Ihr Smartphone übertragen.";
 
 "vaccination_second_onboarding_page_title" = "Zweiter Schritt: Rufen Sie den QR-Code in der CovPass-App auf";
 
-"vaccination_second_onboarding_page_message" = "Mit dem QR-Code können Sie eine Corona-Impfung, ein negatives Corona-Testergebnis oder eine Genesung von einer Corona-Infektion nachweisen. Nach dem Scannen wird der QR-Code direkt in der CovPass-App angezeigt. Bitte beachten Sie, dass eine ausreichende Wirksamkeit des Impfschutzes erst etwa 14 Tage nach der letzten Impfung eintritt. Der QR-Code für den vollständigen Impfschutz ist deshalb erst nach Ablauf der 14 Tage gültig.";
+"vaccination_second_onboarding_page_message" = "Mit dem QR-Code können Sie eine Corona-Impfung oder eine Genesung von einer Corona-Infektion nachweisen. Nach dem Scannen wird der QR-Code direkt in der CovPass-App angezeigt. Bitte beachten Sie, dass eine ausreichende Wirksamkeit des Impfschutzes erst etwa 14 Tage nach der letzten Impfung eintritt. Der QR-Code für den vollständigen Impfschutz ist deshalb erst nach Ablauf der 14 Tage gültig.";
 
 "vaccination_third_onboarding_page_title" = "Dritter Schritt: Zeigen Sie den QR-Code bei Bedarf vor";
 
@@ -53,6 +55,8 @@
 
 "vaccination_privacy_policy_page_button_title" = "Schließen";
 
+"accessibility_fourth_onboarding_page_label_scroll_to_end" = "Zum Ende scrollen";
+
 "dialog_start_screen_title" = "Neues Update verfügbar";
 
 "dialog_start_screen_message" = "Möchten Sie jetzt die CovPass-App aktualisieren?";
@@ -68,11 +72,17 @@
 
 /********** start Screen **********/
 
+"accessibility_vaccination_start_screen_label_information" = "Mehr Informationen";
+
+"accessibility_vaccination_start_screen_label_add_certificate" = "Nachweis hinzufügen";
+
 "vaccination_start_screen_title" = "Digitale COVID-Zertifikate der EU";
 
 "vaccination_start_screen_note_title" = "Fügen Sie einen Nachweis hinzu";
 
 "vaccination_start_screen_note_message" = "Sie haben aktuell kein digitales COVID-Zertifikat der EU gespeichert. Drücken Sie auf das Plus-Symbol, um einen digitalen Nachweis hinzuzufügen.";
+
+"accessibility_vaccination_start_screen_label_qrcode" = "Schwarzer QR-Code auf weißem Hintergrund";
 
 "vaccination_start_screen_qrcode_incomplete_subtitle" = "Unvollständiger Impfschutz";
 
@@ -90,6 +100,14 @@
 
 
 /********** popup: add certification **********/
+
+"accessibility_certificate_add_popup_label_close" = "Schließen";
+
+"accessibility_certificate_add_popup_label_torch_on" = "Taschenlampe anschalten";
+
+"accessibility_certificate_add_popup_label_torch_off" = "Taschenlampe ausschalten";
+
+"accessibility_certificate_add_popup_image" = "Bild: Person hält das Smartphone über drei unterschiedliche Zertifikate mit QR-Code";
 
 "certificate_add_popup_title" = "Nachweis hinzufügen";
 
@@ -111,6 +129,10 @@
 
 "certificate_add_dialog_camera_access_action_button" = "Zugriff erlauben";
 
+"accessibility_certificate_add_dialog_camera_access_label_close" = "Schließen";
+
+"accessibility_certificate_scan_mode_label_cancel" = "Abbrechen";
+
 "error_camera_access_title" = "Die CovPass-App möchte auf Ihre Kamera zugreifen.";
 
 "error_camera_access_message" = "Erlauben Sie den Zugriff, um QR-Codes scannen zu können.";
@@ -125,27 +147,31 @@
 
 "error_test_certificate_not_valid_button_title" = "OK";
 
-"dialogue_add_booster_vaccination_title" = "Auffrischungsimpfung hinzugefügt";
-
-"dialogue_add_booster_vaccination_message" = "Bitte beachten Sie, dass die Mitgliedstaaten der EU derzeit noch kein einheitliches Vorgehen zu COVID-Zertifikaten für die Auffrischungsimpfungen beschlossen haben. Auf Grund dessen kann nicht ausgeschlossen werden, dass dieses Zertifikat in anderen EU-Ländern nicht als gültig anerkannt wird. Sofern Sie eine Reise außerhalb Deutschlands planen, nehmen Sie daher bitte auch die ursprünglichen Impfzertifikate (oder einen anderen anerkannten Nachweis) mit, die Sie vor der Auffrischungsimpfung erhalten haben.";
-
-"dialogue_add_booster_vaccination_action_button_title" = "OK";
-
 
 /********** start Screen: favorite immunization certificate **********/
 
-"certificate_favorite_button_hint" = "Als Favorit markieren";
+"accessibility_certificate_favorite_button_label_active" = "Zertifikate dieser Person immer an erster Stelle anzeigen: aktiv";
+
+"accessibility_certificate_favorite_button_label_not_active" = "Zertifikate dieser Person immer an erster Stelle anzeigen: nicht aktiv";
 
 "certificate_action_button_check_validity" = "Gültigkeit prüfen";
 
 
 /********** Screen: check validity **********/
 
+"accessibility_certificate_check_validity_label_close" = "Schließen";
+
+"accessibility_certificate_check_validity_label_results" = "Ergebnisse der EU-Zertifikatsprüfung";
+
+"accessibility_certificate_check_validity_label_display_certificate" = "Zertifikat anzeigen";
+
 "certificate_check_validity_title" = "Gültigkeit prüfen";
 
 "certificate_check_validity_message" = "Prüfen Sie vorab, ob Ihre Zertifikate in verschiedenen Ländern gültig sind. Hierfür werden die geltenden Einreiseregeln des gewählten Reiselands berücksichtigt.";
 
 "certificate_check_validity_selection_country" = "Land";
+
+"accessibility_certificate_check_validity_selection_country_label_close" = "Schließen";
 
 "certificate_check_validity_selection_country_title" = "Reiseland wählen";
 
@@ -219,11 +245,15 @@
 
 "certificate_check_validity_selection_date" = "Datum";
 
+"accessibility_certificate_check_validity_selection_date_label_close" = "Schließen";
+
 "certificate_check_validity_selection_date_title" = "Datum wählen";
 
 "certificate_check_validity_selection_date_action_button" = "Weiter";
 
 "certificate_check_validity_selection_time_title" = "Zeit wählen";
+
+"accessibility_certificate_check_validity_selection_time_label_close" = "Schließen";
 
 "certificate_check_validity_selection_time_action_button" = "OK";
 
@@ -249,6 +279,8 @@
 
 "certificate_check_validity_detail_view_vaccination_result_title" = "Digitales COVID-Impfzertifikat der EU";
 
+"certificate_check_validity_detail_view_vaccination_result_headline_data" = "Geprüfte Zertifikatsdaten:";
+
 "certificate_check_validity_detail_view_vaccination_result_button" = "QR-Code anzeigen";
 
 "certificate_check_validity_detail_view_vaccination_result_note_de" = "Das Impfzertifikat gilt innerhalb der EU als gültiger Nachweis für Reisen. Die Mitgliedsländer haben unterschiedliche Einreisebedingungen. Mehr Informationen finden Sie in den Häufigen Fragen. Bitte informieren Sie sich vor Reiseantritt über die am Zielort geltenden Gesundheitsmaßnahmen und entsprechenden Beschränkungen.\n\nInformationen über die in den jeweiligen EU-Ländern geltenden Einreisebestimmungen finden Sie unter #https://reopen.europa.eu::https://reopen.europa.eu#.";
@@ -256,6 +288,8 @@
 "certificate_check_validity_detail_view_vaccination_result_note_en" = "A certificate of vaccination is valid proof for travel within the EU. The EU’s member countries have different travel restrictions. You can find more information in the Frequently Asked Questions. Before travelling, please check the applicable public health measures and related restrictions applied at the point of destination.\n\nPlease inform yourself about the public-health measures and corresponding restrictions at your travel destination before you travel. You can find information about the travel restrictions applicable in each EU country at #https://reopen.europa.eu::https://reopen.europa.eu#.";
 
 "certificate_check_validity_detail_view_test_result_title" = "Digitales COVID-Testzertifikat der EU";
+
+"certificate_check_validity_detail_view_test_result_headline_data" = "Geprüfte Zertifikatsdaten:";
 
 "certificate_check_validity_detail_view_test_result_button" = "QR-Code anzeigen";
 
@@ -265,11 +299,17 @@
 
 "certificate_check_validity_detail_view_recovery_result_title" = "Digitales COVID-Genesenenzertifikat der EU";
 
+"certificate_check_validity_detail_view_recovery_result_headline_data" = "Geprüfte Zertifikatsdaten:";
+
 "certificate_check_validity_detail_view_recovery_result_button" = "QR-Code anzeigen";
 
 "certificate_check_validity_detail_view_recovery_result_note_de" = "Das Genesenenzertifikat gilt innerhalb der EU als gültiger Nachweis für Reisen. Die Mitgliedsländer haben unterschiedliche Einreisebedingungen. Mehr Informationen finden Sie in den Häufigen Fragen. Bitte informieren Sie sich vor Reiseantritt über die am Zielort geltenden Gesundheitsmaßnahmen und entsprechenden Beschränkungen.\n\nInformationen über die in den jeweiligen EU-Ländern geltenden Einreisebestimmungen finden Sie unter #https://reopen.europa.eu::https://reopen.europa.eu#.";
 
 "certificate_check_validity_detail_view_recovery_result_note_en" = "A certificate of recovery is valid proof for travel within the EU. The EU’s member countries have different travel restrictions. You can find more information in the Frequently Asked Questions. Before travelling, please check the applicable public health measures and related restrictions applied at the point of destination.\n\nPlease inform yourself about the public-health measures and corresponding restrictions at your travel destination before you travel. You can find information about the travel restrictions applicable in each EU country at #https://reopen.europa.eu::https://reopen.europa.eu#.";
+
+"certificate_check_validity_detail_view_result_no_rules_title" = "Dieses Zertifikat ist nicht prüfbar";
+
+"certificate_check_validity_detail_view_result_no_rules_message" = "Für das gewählte Land und den gewählten Zeitpunkt stehen derzeit keine Einreiseregeln für die Prüfung in der App zur Verfügung.\n\nBitte informieren Sie sich unter #https://reopen.europa.eu::https://reopen.europa.eu#, ob das Zertifikat für die Einreise in das gewählte Land gültig ist.";
 
 "certificate_check_validity_detail_view_result_valid_title" = "Dieses Zertifikat ist am Reisedatum gültig";
 
@@ -296,6 +336,10 @@
 "certificate_check_validity_detail_view_result_not_valid_note_title" = "Dieser Wert erfüllt nicht Regel „TR01\"";
 
 "certificate_check_validity_detail_view_result_not_valid_note_message" = "Regel des Ziellands: Genesenenzertifikate sind bis zu 180 Tage gültig.";
+
+"accessibility_certificate_check_validity_detail_view_result_label_close" = "Schließen";
+
+"accessibility_certificate_check_validity_detail_view_result_label_marked_values" = "Dieser Wert ist zu überprüfen";
 
 "error_check_validity_no_internet_title" = "Keine Internetverbindung";
 
@@ -341,6 +385,14 @@
 
 /********** overview certificates **********/
 
+"accessibility_overview_certificates_label_back" = "Zurück zum Startbildschirm";
+
+"accessibility_overview_certificates_label_favourites_button_active" = "Zertifikate dieser Person immer an erster Stelle anzeigen: aktiv";
+
+"accessibility_overview_certificates_label_favourites_button_not_active" = "Zertifikate dieser Person immer an erster Stelle anzeigen: nicht aktiv";
+
+"accessibility_overview_certificates_label_display_certificate" = "Zertifikat anzeigen";
+
 "booster_vaccination_certificate_overview_title" = "Auffrischungsimpfung: Aktuell nur in Deutschland nutzbar";
 
 "booster_vaccination_certificate_overview_message" = "Auffrischungsimpfungen können derzeit nur in Deutschland digital nachgewiesen und geprüft werden. Sobald sich dies ändert, werden Sie hier über den aktuellen Stand informiert.";
@@ -367,9 +419,7 @@
 
 "vaccination_certificate_overview_booster_vaccination_notification_title" = "Aktueller Impfstatus";
 
-"vaccination_certificate_overview_booster_vaccination_notification_subtitle" = "Letzte Impfung vor 180 Tagen";
-
-"vaccination_certificate_overview_booster_vaccination_notification_message" = "Aufgrund Ihres vorhandenen Impfzertifikats könnte für Sie eine Auffrischungsimpfung erforderlich sein, da Ihr letztes Impfzertifikat älter als 6 Monate ist (Rule ID: %@).\n\nMehr Informationen finden Sie in den Häufigen Fragen.";
+"vaccination_certificate_overview_booster_vaccination_notification_message" = "%@ (Rule ID: %@).";
 
 "test_certificate_overview_title" = "Negativer Antigen-Schnelltest vom %@";
 
@@ -425,8 +475,6 @@
 
 "certificates_overview_booster_vaccination_certificate_title" = "Impfzertifikat";
 
-"certificates_overview_booster_vaccination_certificate_message" = "%@. Auffrischungsimpfung";
-
 "certificates_overview_booster_vaccination_certificate_date" = "Geimpft am %@";
 
 "certificates_overview_vaccination_certificate_title" = "Impfzertifikat";
@@ -458,14 +506,14 @@
 
 /********** detail view: delete certificate **********/
 
-"certificate_delete_button_hint" = "Löschen";
+"accessibility_certificate_detail_view_label_delete_button" = "Zertifikat löschen";
+
+"accessibility_certificate_detail_view_label_back" = "Zurück";
 
 
 /********** detail view: certificate **********/
 
 "vaccination_certificate_detail_view_vaccination_title" = "Impfung %d von %d";
-
-"vaccination_certificate_detail_view_booster_vaccination_title" = "%d. Auffrischungsimpfung";
 
 "vaccination_certificate_detail_view_vaccination_headline" = "Digitales COVID-Impfzertifikat der EU";
 
@@ -519,6 +567,8 @@
 
 "vaccination_certificate_detail_view_qrcode_screen_action_button_title" = "Schließen";
 
+"accessibility_vaccination_certificate_detail_view_qrcode_screen_label_close" = "Schließen";
+
 "test_certificate_detail_view_title" = "Antigen-Schnelltest";
 
 "test_certificate_detail_view_pcr_test_title" = "PCR-Test";
@@ -569,6 +619,8 @@
 
 "test_certificate_detail_view_qrcode_screen_action_button_title" = "Schließen";
 
+"accessibility_test_certificate_detail_view_qrcode_screen_label_close" = "Schließen";
+
 "recovery_certificate_detail_view_title" = "Vollständige Genesung";
 
 "recovery_certificate_detail_view_headline" = "Digitales COVID-Genesenenzertifikat der EU";
@@ -615,6 +667,8 @@
 
 "recovery_certificate_detail_view_qrcode_screen_action_button_title" = "Schließen";
 
+"accessibility_recovery_certificate_detail_view_qrcode_screen_label_close" = "Schließen";
+
 "certificate_expires_detail_view_note_title" = "Zertifikat läuft am %@ um %@ ab";
 
 "certificate_expires_detail_view_note_message" = "Bitte bemühen Sie sich rechtzeitig darum, einen neuen digitalen Nachweis ausstellen zu lassen.";
@@ -629,6 +683,8 @@
 
 
 /********** print certificate **********/
+
+"accessibility_certificate_create_pdf_label_close" = "Schließen";
 
 "certificate_create_pdf_headline" = "EU-Ausdruck erstellen";
 
@@ -710,6 +766,8 @@
 
 /********** app information **********/
 
+"accessibility_app_information_label_back" = "Zurück zum Startbildschirm";
+
 "app_information_title" = "Informationen";
 
 "app_information_message" = "Hier finden Sie alle rechtlichen Informationen und Antworten auf die häufigsten Fragen rund um die CovPass-App.";
@@ -726,6 +784,8 @@
 
 "app_information_message_contact_info_mail" = "E-Mail: #info@covpass-app.de::mailto:info@covpass-app.de#";
 
+"accessibility_app_information_contact_label_back" = "Zurück";
+
 "app_information_title_faq" = "Häufige Fragen";
 
 "app_information_title_faq_linked" = "#Häufige Fragen::$0#";
@@ -739,5 +799,7 @@
 "app_information_title_open_source" = "Open-Source-Lizenzen";
 
 "app_information_message_open_source" = "Die App verwendet die folgenden Open-Source-Bibliotheken:";
+
+"accessibility_app_information_open_source_label_back" = "Zurück";
 
 "app_information_version_label" = "Version %@";

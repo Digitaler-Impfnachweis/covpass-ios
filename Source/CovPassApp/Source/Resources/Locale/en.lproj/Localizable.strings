@@ -23,15 +23,17 @@
 
 "next_onboarding_page_button_title" = "Next";
 
+"accessibility_onboarding_pages_label_back" = "Back";
+
 "accessibility_page_indicator" = "Page %d of %d";
 
 "vaccination_first_onboarding_page_title" = "Step one: upload your EU Digital COVID Certificate to your smartphone";
 
-"vaccination_first_onboarding_page_message" = "Use the CovPass app to scan the EU Digital COVID Certificate for a Covid-19 vaccination, a negative Covid-19 test result or recovery from a Covid-19 infection. To do this, hold your smartphone’s camera above the QR code. Your EU Digital COVID Certificate will be transferred to your smartphone immediately.";
+"vaccination_first_onboarding_page_message" = "Use the CovPass app to scan the EU Digital COVID Certificate for a Covid-19 vaccination or recovery from a Covid-19 infection. To do this, hold your smartphone’s camera above the QR code. Your EU Digital COVID Certificate will be transferred to your smartphone immediately.";
 
 "vaccination_second_onboarding_page_title" = "Step two: open the QR code in the CovPass app";
 
-"vaccination_second_onboarding_page_message" = "Using the QR code, you can show evidence of a Covid-19 vaccination, a negative Covid-19 test result or recovery from a Covid-19 infection. The QR code is displayed directly in the CovPass app after scanning it. Please be aware that a vaccination only becomes sufficiently effective about 14 days after the final dose. For this reason, the QR code for full vaccination only becomes valid after 14 days have passed.";
+"vaccination_second_onboarding_page_message" = "Using the QR code, you can show evidence of a Covid-19 vaccination or recovery from a Covid-19 infection. The QR code is displayed directly in the CovPass app after scanning it. Please be aware that a vaccination only becomes sufficiently effective about 14 days after the final dose. For this reason, the QR code for full vaccination only becomes valid after 14 days have passed.";
 
 "vaccination_third_onboarding_page_title" = "Step three: show your QR code when needed";
 
@@ -53,6 +55,8 @@
 
 "vaccination_privacy_policy_page_button_title" = "Close";
 
+"accessibility_fourth_onboarding_page_label_scroll_to_end" = "Scroll to the end";
+
 "dialog_start_screen_title" = "New update available";
 
 "dialog_start_screen_message" = "Would you like to update the CovPass-App now?";
@@ -68,11 +72,17 @@
 
 /********** start Screen **********/
 
+"accessibility_vaccination_start_screen_label_information" = "More information";
+
+"accessibility_vaccination_start_screen_label_add_certificate" = "Add certificate";
+
 "vaccination_start_screen_title" = "EU Digital COVID Certificates";
 
 "vaccination_start_screen_note_title" = "Add a certificate";
 
 "vaccination_start_screen_note_message" = "You do not have any EU Digital COVID Certificate saved at the moment. Tap the plus symbol to add a digital certificate.";
+
+"accessibility_vaccination_start_screen_label_qrcode" = "Black QR code on white background";
 
 "vaccination_start_screen_qrcode_incomplete_subtitle" = "Not fully vaccinated";
 
@@ -90,6 +100,14 @@
 
 
 /********** popup: add certification **********/
+
+"accessibility_certificate_add_popup_label_close" = "Close";
+
+"accessibility_certificate_add_popup_label_torch_on" = "Switch on torch";
+
+"accessibility_certificate_add_popup_label_torch_off" = "Switch off torch";
+
+"accessibility_certificate_add_popup_image" = "Image: Person holds smartphone over three different certificates with QR code";
 
 "certificate_add_popup_title" = "Adding a certificate";
 
@@ -111,6 +129,10 @@
 
 "certificate_add_dialog_camera_access_action_button" = "Allow access";
 
+"accessibility_certificate_add_dialog_camera_access_label_close" = "Close";
+
+"accessibility_certificate_scan_mode_label_cancel" = "Cancel";
+
 "error_camera_access_title" = "The CovPass app wants to access your camera.";
 
 "error_camera_access_message" = "Allow access to scan QR codes.";
@@ -125,27 +147,31 @@
 
 "error_test_certificate_not_valid_button_title" = "OK";
 
-"dialogue_add_booster_vaccination_title" = "Booster vaccination added";
-
-"dialogue_add_booster_vaccination_message" = "Please note that the EU Member States have not yet adopted a uniform approach to COVID certificates for booster vaccinations. Because of this, it cannot be ruled out that this certificate will not be recognised as valid in other EU countries. Therefore, if you are planning a trip outside Germany, please also take the original vaccination certificates (or other recognised proof) that you received before the booster vaccination.";
-
-"dialogue_add_booster_vaccination_action_button_title" = "OK";
-
 
 /********** start Screen: favorite immunization certificate **********/
 
-"certificate_favorite_button_hint" = "Set as favourite";
+"accessibility_certificate_favorite_button_label_active" = "Always display this person's certificates in first place: active";
+
+"accessibility_certificate_favorite_button_label_not_active" = "Always display this person's certificates in first place: not active";
 
 "certificate_action_button_check_validity" = "Check validity";
 
 
 /********** Screen: check validity **********/
 
+"accessibility_certificate_check_validity_label_close" = "Close";
+
+"accessibility_certificate_check_validity_label_results" = "Results of the EU certificate examination";
+
+"accessibility_certificate_check_validity_label_display_certificate" = "Display certificate";
+
 "certificate_check_validity_title" = "Check validity";
 
 "certificate_check_validity_message" = "Check beforehand if your certificates are valid in different countries. This tool checks them against the travel regulations applicable in your chosen destination country.";
 
 "certificate_check_validity_selection_country" = "Country";
+
+"accessibility_certificate_check_validity_selection_country_label_close" = "Close";
 
 "certificate_check_validity_selection_country_title" = "Choose destination";
 
@@ -219,11 +245,15 @@
 
 "certificate_check_validity_selection_date" = "Date";
 
+"accessibility_certificate_check_validity_selection_date_label_close" = "Close";
+
 "certificate_check_validity_selection_date_title" = "Select Date";
 
 "certificate_check_validity_selection_date_action_button" = "Next";
 
 "certificate_check_validity_selection_time_title" = "Select time";
+
+"accessibility_certificate_check_validity_selection_time_label_close" = "Close";
 
 "certificate_check_validity_selection_time_action_button" = "OK";
 
@@ -249,6 +279,8 @@
 
 "certificate_check_validity_detail_view_vaccination_result_title" = "EU Digital COVID Certificate of Vaccination";
 
+"certificate_check_validity_detail_view_vaccination_result_headline_data" = "Verified certificate data:";
+
 "certificate_check_validity_detail_view_vaccination_result_button" = "Display QR code";
 
 "certificate_check_validity_detail_view_vaccination_result_note_de" = "Das Impfzertifikat gilt innerhalb der EU als gültiger Nachweis für Reisen. Die Mitgliedsländer haben unterschiedliche Einreisebedingungen. Mehr Informationen finden Sie in den Häufigen Fragen. Bitte informieren Sie sich vor Reiseantritt über die am Zielort geltenden Gesundheitsmaßnahmen und entsprechenden Beschränkungen.\n\nInformationen über die in den jeweiligen EU-Ländern geltenden Einreisebestimmungen finden Sie unter #https://reopen.europa.eu::https://reopen.europa.eu#.";
@@ -256,6 +288,8 @@
 "certificate_check_validity_detail_view_vaccination_result_note_en" = "A certificate of vaccination is valid proof for travel within the EU. The EU’s member countries have different travel restrictions. You can find more information in the Frequently Asked Questions. Before travelling, please check the applicable public health measures and related restrictions applied at the point of destination.\n\nPlease inform yourself about the public-health measures and corresponding restrictions at your travel destination before you travel. You can find information about the travel restrictions applicable in each EU country at #https://reopen.europa.eu::https://reopen.europa.eu#.";
 
 "certificate_check_validity_detail_view_test_result_title" = "EU Digital COVID Certificate of Test";
+
+"certificate_check_validity_detail_view_test_result_headline_data" = "Verified certificate data:";
 
 "certificate_check_validity_detail_view_test_result_button" = "Display QR code";
 
@@ -265,11 +299,17 @@
 
 "certificate_check_validity_detail_view_recovery_result_title" = "EU Digital COVID Certificate of Recovery";
 
+"certificate_check_validity_detail_view_recovery_result_headline_data" = "Verified certificate data:";
+
 "certificate_check_validity_detail_view_recovery_result_button" = "Display QR code";
 
 "certificate_check_validity_detail_view_recovery_result_note_de" = "Das Genesenenzertifikat gilt innerhalb der EU als gültiger Nachweis für Reisen. Die Mitgliedsländer haben unterschiedliche Einreisebedingungen. Mehr Informationen finden Sie in den Häufigen Fragen. Bitte informieren Sie sich vor Reiseantritt über die am Zielort geltenden Gesundheitsmaßnahmen und entsprechenden Beschränkungen.\n\nInformationen über die in den jeweiligen EU-Ländern geltenden Einreisebestimmungen finden Sie unter #https://reopen.europa.eu::https://reopen.europa.eu#.";
 
 "certificate_check_validity_detail_view_recovery_result_note_en" = "A certificate of recovery is valid proof for travel within the EU. The EU’s member countries have different travel restrictions. You can find more information in the Frequently Asked Questions. Before travelling, please check the applicable public health measures and related restrictions applied at the point of destination.\n\nPlease inform yourself about the public-health measures and corresponding restrictions at your travel destination before you travel. You can find information about the travel restrictions applicable in each EU country at #https://reopen.europa.eu::https://reopen.europa.eu#.";
+
+"certificate_check_validity_detail_view_result_no_rules_title" = "This certificate cannot be checked";
+
+"certificate_check_validity_detail_view_result_no_rules_message" = "For the selected country and date, there are currently no entry rules available for checking in the app.\n\nPlease check at #https://reopen.europa.eu::https://reopen.europa.eu# whether the certificate is valid for entry into the selected country.";
 
 "certificate_check_validity_detail_view_result_valid_title" = "This certificate is valid on your travel date";
 
@@ -279,7 +319,7 @@
 
 "certificate_check_validity_detail_view_result_valid_info_no_rules" = "There are currently no entry rules for this certificate type for the selected country and date.";
 
-"certificate_check_validity_detail_view_result_not_testable_title" = "This certificate cannot be checked automatically";
+"certificate_check_validity_detail_view_result_not_testable_title" = "This certificate cannot be fully verified";
 
 "certificate_check_validity_detail_view_result_not_testable_first_message" = "For %@ on %@";
 
@@ -296,6 +336,10 @@
 "certificate_check_validity_detail_view_result_not_valid_note_title" = "This does not satisfy rule ‘TR01’";
 
 "certificate_check_validity_detail_view_result_not_valid_note_message" = "Rule at destination: recovery certificates are valid for up to 180 days.";
+
+"accessibility_certificate_check_validity_detail_view_result_label_close" = "Close";
+
+"accessibility_certificate_check_validity_detail_view_result_label_marked_values" = "This value is to be checked";
 
 "error_check_validity_no_internet_title" = "Not connected to internet";
 
@@ -341,6 +385,14 @@
 
 /********** overview certificates **********/
 
+"accessibility_overview_certificates_label_back" = "Back to the start screen";
+
+"accessibility_overview_certificates_label_favourites_button_active" = "Always display this person's certificates in first place: active";
+
+"accessibility_overview_certificates_label_favourites_button_not_active" = "Always display this person's certificates in first place: not active";
+
+"accessibility_overview_certificates_label_display_certificate" = "Display certificate";
+
 "booster_vaccination_certificate_overview_title" = "Booster vaccination: Currently only usable in Germany";
 
 "booster_vaccination_certificate_overview_message" = "At present, booster vaccinations can only be digitally verified and checked in Germany. As soon as this changes, you will be informed here about the current status.";
@@ -367,9 +419,7 @@
 
 "vaccination_certificate_overview_booster_vaccination_notification_title" = "Current vaccination status";
 
-"vaccination_certificate_overview_booster_vaccination_notification_subtitle" = "Last vaccination 180 days ago";
-
-"vaccination_certificate_overview_booster_vaccination_notification_message" = "Based on your existing vaccination certificate, you might need a booster vaccination because your last vaccination certificate is older than 6 months (Rule ID: %@).\n\nYou can find more information in the FAQ.";
+"vaccination_certificate_overview_booster_vaccination_notification_message" = "%@ (Rule ID: %@).";
 
 "test_certificate_overview_title" = "Negative rapid antigen test from %@";
 
@@ -425,8 +475,6 @@
 
 "certificates_overview_booster_vaccination_certificate_title" = "Vaccination certificate";
 
-"certificates_overview_booster_vaccination_certificate_message" = "%@. booster vaccination";
-
 "certificates_overview_booster_vaccination_certificate_date" = "Vaccinated on %@";
 
 "certificates_overview_vaccination_certificate_title" = "Vaccination certificate";
@@ -458,14 +506,14 @@
 
 /********** detail view: delete certificate **********/
 
-"certificate_delete_button_hint" = "Delete";
+"accessibility_certificate_detail_view_label_delete_button" = "Delete certificate";
+
+"accessibility_certificate_detail_view_label_back" = "Back";
 
 
 /********** detail view: certificate **********/
 
 "vaccination_certificate_detail_view_vaccination_title" = "Vaccine dose %d of %d";
-
-"vaccination_certificate_detail_view_booster_vaccination_title" = "%d. Booster vaccination";
 
 "vaccination_certificate_detail_view_vaccination_headline" = "EU Digital COVID Certificate of Vaccination";
 
@@ -519,6 +567,8 @@
 
 "vaccination_certificate_detail_view_qrcode_screen_action_button_title" = "Close";
 
+"accessibility_vaccination_certificate_detail_view_qrcode_screen_label_close" = "Close";
+
 "test_certificate_detail_view_title" = "Rapid antigen test";
 
 "test_certificate_detail_view_pcr_test_title" = "PCR test";
@@ -569,6 +619,8 @@
 
 "test_certificate_detail_view_qrcode_screen_action_button_title" = "Close";
 
+"accessibility_test_certificate_detail_view_qrcode_screen_label_close" = "Close";
+
 "recovery_certificate_detail_view_title" = "Full recovery";
 
 "recovery_certificate_detail_view_headline" = "EU Digital COVID Certificate of Recovery";
@@ -615,6 +667,8 @@
 
 "recovery_certificate_detail_view_qrcode_screen_action_button_title" = "Close";
 
+"accessibility_recovery_certificate_detail_view_qrcode_screen_label_close" = "Close";
+
 "certificate_expires_detail_view_note_title" = "Certificate expires on %@ at %@";
 
 "certificate_expires_detail_view_note_message" = "Please make every effort to have a new digital certificate issued in good time.";
@@ -629,6 +683,8 @@
 
 
 /********** print certificate **********/
+
+"accessibility_certificate_create_pdf_label_close" = "Close";
 
 "certificate_create_pdf_headline" = "Create EU printout";
 
@@ -710,6 +766,8 @@
 
 /********** app information **********/
 
+"accessibility_app_information_label_back" = "Back to the start screen";
+
 "app_information_title" = "Information";
 
 "app_information_message" = "Here you can find all legal information and answers to the most frequent questions asked about the CovPass app.";
@@ -726,6 +784,8 @@
 
 "app_information_message_contact_info_mail" = "Email: #info@covpass-app.de::mailto:info@covpass-app.de#";
 
+"accessibility_app_information_contact_label_back" = "Back";
+
 "app_information_title_faq" = "Frequently asked questions";
 
 "app_information_title_faq_linked" = "#Frequently asked questions::$0#";
@@ -739,5 +799,7 @@
 "app_information_title_open_source" = "Open-source licences";
 
 "app_information_message_open_source" = "The app uses the following open-source libraries:";
+
+"accessibility_app_information_open_source_label_back" = "Back";
 
 "app_information_version_label" = "Version %@";
