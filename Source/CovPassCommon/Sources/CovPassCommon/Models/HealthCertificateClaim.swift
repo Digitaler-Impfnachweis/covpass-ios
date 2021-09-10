@@ -16,6 +16,10 @@ public struct HealthCertificateClaim: Codable {
         case dgc = "1"
     }
 
+    public init(dgc: DigitalGreenCertificate) {
+        self.dgc = dgc
+    }
+
     public init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         dgc = try values.decode(DigitalGreenCertificate.self, forKey: .dgc)

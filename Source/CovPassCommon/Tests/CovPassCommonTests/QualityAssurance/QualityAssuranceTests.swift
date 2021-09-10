@@ -14,6 +14,7 @@ import XCTest
 class QualityAssuranceTests: XCTestCase {
 
     var repository: VaccinationRepository!
+    var certLogic: DCCCertLogic!
 
     override func setUp() {
         super.setUp()
@@ -23,6 +24,13 @@ class QualityAssuranceTests: XCTestCase {
             userDefaults: MockPersistence(),
             publicKeyURL: Bundle.module.url(forResource: "pubkey.pem", withExtension: nil)!,
             initialDataURL: Bundle.commonBundle.url(forResource: "dsc.json", withExtension: nil)!
+        )
+
+        certLogic = DCCCertLogic(
+            initialDCCRulesURL: Bundle.commonBundle.url(forResource: "dcc-rules", withExtension: "json")!,
+            service: DCCServiceMock(),
+            keychain: MockPersistence(),
+            userDefaults: MockPersistence()
         )
     }
 
@@ -41,6 +49,38 @@ class QualityAssuranceTests: XCTestCase {
             if let data = parseQRCode(file) {
                 do {
                     _ = try repository.checkCertificate(data).wait()
+                } catch {
+                    errors.append("Failed to check certificate \(file) with\(error.displayCodeWithMessage(""))")
+                }
+            } else {
+                XCTFail("Cannot parse QR code from file \(file)")
+            }
+        }
+        errors.forEach { print($0) }
+        if !errors.isEmpty {
+            XCTFail("\(errors.count) out of \(certificateCount) failed to validate")
+        }
+    }
+
+    // Before executing this test you should use the script 'Scripts/copy-eu-certificates.sh' to copy the EU most recent EU certificates
+    // Note: This test takes about 5 minutes to complete
+    func testAllEUCertificatesWithGermanRules() throws {
+        var certificateCount = 0
+        var errors = [String]()
+        let files = try XCTUnwrap(FileManager.default.contentsOfDirectory(atPath: Bundle.module.bundlePath))
+        for file in files where file.starts(with: "dcc-quality-assurance") {
+            certificateCount += 1
+            if let data = parseQRCode(file) {
+                do {
+                    let certificate = try repository.checkCertificate(data).wait()
+                    do {
+                        let result = try certLogic.validate(countryCode: "DE", validationClock: Date(), certificate: certificate)
+                        if result.contains(where: { $0.result == .fail || $0.result == .open }) {
+                            errors.append("Invalid certificate \(file)  for Germany")
+                        }
+                    } catch {
+                        errors.append("Failed to validate certificate \(file) with\(error.displayCodeWithMessage(""))")
+                    }
                 } catch {
                     errors.append("Failed to check certificate \(file) with\(error.displayCodeWithMessage(""))")
                 }

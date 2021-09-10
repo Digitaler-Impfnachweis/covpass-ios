@@ -16,6 +16,8 @@ public enum HCertError: Error, ErrorCode {
     case publicKeyLoadError
     case verifyError
     case illegalKeyUsage
+    case failedSignature
+    case privateKeyLoadError
 
     public var errorCode: Int {
         switch self {
@@ -25,6 +27,10 @@ public enum HCertError: Error, ErrorCode {
             return 412
         case .illegalKeyUsage:
             return 413
+        case .failedSignature:
+            return 414
+        case .privateKeyLoadError:
+            return 415
         }
     }
 }
@@ -45,11 +51,26 @@ enum HCert {
 
     static func verify(message: CoseSign1Message, trustList: TrustList) throws -> TrustCertificate {
         for cert in trustList.certificates {
-            if let valid = try? verify(message: message, certificate: cert.rawData), valid {
+            if let publicKey = try? cert.loadPublicKey(), let valid = try? verify(message: message, publicKey: publicKey, skipConvertSignature: cert.rawData.isEmpty), valid {
                 return cert
             }
         }
         throw HCertError.verifyError
+    }
+
+    static func createSignature(message: CoseSign1Message, privateKey: SecKey) throws -> Data {
+        let signedPayload: [UInt8] = SwiftCBOR.CBOR.encode(
+            [
+                "Signature1",
+                SwiftCBOR.CBOR.byteString(message.protected),
+                SwiftCBOR.CBOR.byteString([UInt8]()),
+                SwiftCBOR.CBOR.byteString(message.payload)
+            ]
+        )
+        guard let result = SecKeyCreateSignature(privateKey, .ecdsaSignatureMessageX962SHA256, Data(signedPayload) as CFData, nil) else {
+            throw HCertError.failedSignature
+        }
+        return result as Data
     }
 
     public static func checkExtendedKeyUsage(certificate: CBORWebToken, trustCertificate: TrustCertificate) throws {
@@ -85,7 +106,7 @@ enum HCert {
         return []
     }
 
-    private static func verify(message: CoseSign1Message, certificate: String) throws -> Bool {
+    private static func verify(message: CoseSign1Message, publicKey: SecKey, skipConvertSignature: Bool) throws -> Bool {
         let signedPayload: [UInt8] = SwiftCBOR.CBOR.encode(
             [
                 "Signature1",
@@ -95,14 +116,14 @@ enum HCert {
             ]
         )
 
-        let publicKey = try loadPublicKey(from: certificate)
-
         var signature = Data(message.signature)
         var algo: SecKeyAlgorithm
         switch message.signatureAlgorithm {
         case .es256:
             algo = .ecdsaSignatureMessageX962SHA256
-            signature = try ECDSA.convertSignatureData(signature)
+            if !skipConvertSignature {
+                signature = try ECDSA.convertSignatureData(signature)
+            }
         case .ps256:
             algo = .rsaSignatureMessagePSSSHA256
         }
@@ -113,15 +134,5 @@ enum HCert {
             throw HCertError.verifyError
         }
         return result
-    }
-
-    private static func loadPublicKey(from data: String) throws -> SecKey {
-        guard let certificateData = Data(base64Encoded: data),
-              let cert = SecCertificateCreateWithData(nil, certificateData as CFData),
-              let publicKey = SecCertificateCopyKey(cert)
-        else {
-            throw HCertError.publicKeyLoadError
-        }
-        return publicKey
     }
 }

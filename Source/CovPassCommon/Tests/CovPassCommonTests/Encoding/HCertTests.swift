@@ -76,4 +76,16 @@ class HCertTests: XCTestCase {
         let trustCert = try? HCert.verify(message: cosePayload, trustList: trustListValid)
         XCTAssertNil(trustCert)
     }
+
+    func testMockCertificate() throws {
+        let mockCertificate = try CBORWebToken.mockVaccinationCertificate.generateQRCodeData()
+        let base45Decoded = try Base45Coder.decode(mockCertificate.stripPrefix())
+        guard let decompressedPayload = Data(base45Decoded).decompress(withAlgorithm: .zlib) else {
+            XCTFail("Could not decompress QRCode data")
+            return
+        }
+        let cosePayload = try CoseSign1Message(decompressedPayload: Data(decompressedPayload))
+        let trustCert = try HCert.verify(message: cosePayload, trustList: TrustList.mock)
+        XCTAssertNotNil(trustCert)
+    }
 }

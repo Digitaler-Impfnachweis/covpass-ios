@@ -19,17 +19,17 @@ class QRCoderTests: XCTestCase {
 
     func testParseValidCertificate() throws {
         let res = try QRCoder.parse(CertificateMock.validCertificate).wait()
-        _ = try res.payloadJsonData()
+        _ = try res.toJSON()
     }
 
     func testParseValidCertificateRSA() throws {
         let res = try QRCoder.parse(CertificateMock.validCertifcateRSA).wait()
-        _ = try res.payloadJsonData()
+        _ = try res.toJSON()
     }
 
     func testParseValidCertificateWithNoPrefix() throws {
         let res = try QRCoder.parse(CertificateMock.validCertificateNoPrefix).wait()
-        _ = try res.payloadJsonData()
+        _ = try res.toJSON()
     }
 
     func testParseInvalidCertificate() {
