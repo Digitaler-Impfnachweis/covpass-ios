@@ -98,9 +98,6 @@ public struct BoosterLogic {
                 // combine vaccination and recovery certificate for booster rule check
                 vaccinationCertificate.vaccinationCertificate.hcert.dgc.r = recoveryCertificate?.vaccinationCertificate.hcert.dgc.r
 
-                // skip validation if user already has a booster vaccination
-                if vaccinationCertificate.vaccinationCertificate.hcert.dgc.isVaccinationBoosted { continue }
-
                 do {
                     let result = try certLogic.validate(
                         type: .booster,
