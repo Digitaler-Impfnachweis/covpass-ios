@@ -40,4 +40,17 @@ class DataCompressionExtensionTests: XCTestCase {
         }
         XCTAssertEqual(strDecompressed, testString)
     }
+
+    func testZlibCompressionDecompression() throws {
+        guard let compressedData = testString.data(using: .utf8)?.compress(withAlgorithm: .zlib) else {
+            XCTFail("Should compress data")
+            return
+        }
+        XCTAssertEqual(compressedData.base64EncodedString(), "JcwxCsMwFAPQqyi7c4EshS5ZM+QCHyJi4/Z/cH5rfPvazSjxpC1pbgtWMuBZJGlAjeI4DM0+qKIOtxHdNJ3RHzdbsEfikjfhMemJyoH4ZWn4w4BtfGOG96p/uGTCOugLolp5HdMP")
+        guard let decompressedData = compressedData.decompress(withAlgorithm: .zlib) else {
+            XCTFail("Should decompress data")
+            return
+        }
+        XCTAssertEqual(String(data: decompressedData, encoding: .utf8), testString)
+    }
 }

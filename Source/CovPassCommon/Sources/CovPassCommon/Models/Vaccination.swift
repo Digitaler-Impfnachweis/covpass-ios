@@ -77,6 +77,19 @@ public class Vaccination: Codable {
         case ci
     }
 
+    public init(tg: String, vp: String, mp: String, ma: String, dn: Int, sd: Int, dt: Date, co: String, is: String, ci: String) {
+        self.tg = tg
+        self.vp = vp
+        self.mp = mp
+        self.ma = ma
+        self.dn = dn
+        self.sd = sd
+        self.dt = dt
+        self.co = co
+        self.is = `is`
+        self.ci = ci
+    }
+
     public required init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         tg = try values.decode(String.self, forKey: .tg)

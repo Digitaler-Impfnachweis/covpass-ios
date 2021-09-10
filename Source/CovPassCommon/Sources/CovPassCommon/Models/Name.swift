@@ -60,6 +60,13 @@ public class Name: Codable {
         case fnt
     }
 
+    public init(gn: String? = nil, fn: String? = nil, gnt: String? = nil, fnt: String) {
+        self.gn = gn
+        self.fn = fn
+        self.gnt = gnt
+        self.fnt = fnt
+    }
+
     public required init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         gn = try? values.decode(String.self, forKey: .gn).trimmingCharacters(in: .whitespaces)

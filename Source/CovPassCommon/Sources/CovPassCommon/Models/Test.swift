@@ -70,6 +70,19 @@ public class Test: Codable {
         case ci
     }
 
+    public init(tg: String, tt: String, nm: String? = nil, ma: String? = nil, sc: Date, tr: String, tc: String, co: String, is: String, ci: String) {
+        self.tg = tg
+        self.tt = tt
+        self.nm = nm
+        self.ma = ma
+        self.sc = sc
+        self.tr = tr
+        self.tc = tc
+        self.co = co
+        self.is = `is`
+        self.ci = ci
+    }
+
     public required init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         tg = try values.decode(String.self, forKey: .tg)

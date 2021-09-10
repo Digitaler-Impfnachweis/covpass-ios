@@ -45,6 +45,14 @@ public struct CBORWebToken: Codable {
         case hcert = "-260"
     }
 
+    public init(iss: String, iat: Date? = nil, exp: Date? = nil, hcert: HealthCertificateClaim, invalid: Bool? = nil) {
+        self.iss = iss
+        self.iat = iat
+        self.exp = exp
+        self.hcert = hcert
+        self.invalid = invalid
+    }
+
     public init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         iss = try values.decode(String.self, forKey: .iss)

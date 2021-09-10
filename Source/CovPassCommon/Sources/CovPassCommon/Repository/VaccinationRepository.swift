@@ -319,7 +319,7 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
         }
         let trustCert = try HCert.verify(message: cosePayload, trustList: trustList)
 
-        let cosePayloadJsonData = try cosePayload.payloadJsonData()
+        let cosePayloadJsonData = try cosePayload.toJSON()
         let certificate = try JSONDecoder().decode(CBORWebToken.self, from: cosePayloadJsonData)
 
         if let exp = certificate.exp, Date() > exp {
