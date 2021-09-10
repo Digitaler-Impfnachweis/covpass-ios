@@ -4,8 +4,6 @@
 <dict>
 	<key>API_URL</key>
 	<string>$(API_URL)</string>
-	<key>BOOSTER_RULES_FILE</key>
-	<string>$(BOOSTER_RULES_FILE)</string>
 	<key>BOOSTER_RULES_URL</key>
 	<string>$(BOOSTER_RULES_URL)</string>
 	<key>BUNDLE_NAME</key>
