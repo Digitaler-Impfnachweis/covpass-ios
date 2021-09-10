@@ -80,6 +80,10 @@ public struct BoosterLogic {
         .then(on: .global()) {
             checkForNewBoosterVaccinations(users)
         }
+        .map(on: .global()) { newBoosterVaccination in
+            try self.userDefaults.store(UserDefaults.keyLastCheckedBooster, value: Date())
+            return newBoosterVaccination
+        }
     }
 
     /// Check all users and their certificates for new booster vaccination qualifications
@@ -137,9 +141,10 @@ public struct BoosterLogic {
 
     /// Update the booster candidate
     public func updateBoosterCandidate(_ boosterCandidate: BoosterCandidate) {
-        guard let data = try? userDefaults.fetch(UserDefaults.keyBoosterCandidates) as? Data,
-           let boosterCandidates = try? JSONDecoder().decode([BoosterCandidate].self, from: data)
-        else { return }
+        var boosterCandidates = [BoosterCandidate]()
+        if let data = try? userDefaults.fetch(UserDefaults.keyBoosterCandidates) as? Data {
+            boosterCandidates = (try? JSONDecoder().decode([BoosterCandidate].self, from: data)) ?? []
+        }
         var updatedCandidates = boosterCandidates.map { $0 == boosterCandidate ? boosterCandidate : $0 }
         if !updatedCandidates.contains(boosterCandidate) {
             updatedCandidates.append(boosterCandidate)

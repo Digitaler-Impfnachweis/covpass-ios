@@ -247,9 +247,12 @@ extension CertificatesOverviewViewModel {
 // MARK: - Booster Notifications
 extension CertificatesOverviewViewModel {
     private func showBoosterNotificationIfNeeded() -> Promise<Void> {
-        let users = repository.matchedCertificates(for: certificateList)
-        return firstly {
-            boosterLogic.checkForNewBoosterVaccinationsIfNeeded(users)
+        firstly {
+            repository.getCertificateList()
+        }
+        .then { certificateList -> Promise<Bool> in
+            let users = self.repository.matchedCertificates(for: certificateList)
+            return self.boosterLogic.checkForNewBoosterVaccinationsIfNeeded(users)
         }
         .then { (showBoosterNotification: Bool) -> Promise<Void> in
             if !showBoosterNotification { return Promise.value }

@@ -69,6 +69,8 @@
 
 "dialog_booster_vaccination_notification_message" = "Bitte überprüfen Sie den Status Ihrer digitalen COVID-Zertifikate der EU.";
 
+"dialog_booster_vaccination_notification_button" = "OK";
+
 
 /********** start Screen **********/
 
@@ -415,7 +417,7 @@
 
 "vaccination_certificate_overview_booster_vaccination_notification_title" = "Aktueller Impfstatus";
 
-"vaccination_certificate_overview_booster_vaccination_notification_message" = "%@ (Rule ID: %@).";
+"vaccination_certificate_overview_booster_vaccination_notification_message" = "%@ (Rule ID: %@)";
 
 "test_certificate_overview_title" = "Negativer Antigen-Schnelltest vom %@";
 

@@ -31,6 +31,7 @@ class BoosterNotificationViewController: UIViewController {
         super.viewDidLoad()
 
         headline.attributedTitleText = viewModel.title.styledAs(.header_2)
+        headline.layoutMargins.bottom = .space_24
         detailsView.attributedBodyText = viewModel.disclaimerText.styledAs(.body)
         detailsView.bottomBorder.isHidden = true
 
