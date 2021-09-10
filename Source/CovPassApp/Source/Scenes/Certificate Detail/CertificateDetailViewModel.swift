@@ -18,6 +18,8 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
     var router: CertificateDetailRouterProtocol
     private let repository: VaccinationRepositoryProtocol
     private var certificates: [ExtendedCBORWebToken]
+    private let boosterLogic: BoosterLogic
+    private let boosterCandidate: BoosterCandidate?
     private let resolver: Resolver<CertificateDetailSceneResult>?
     private var isFavorite = false
     private var showFavorite = false
@@ -154,39 +156,29 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
 
     // MARK: - Booster Notifications
 
+    /// show booster notification until user uploads a new certificate
+    var showBoosterNotification: Bool {
+        boosterCandidate?.state != BoosterCandidate.BoosterState.none
+    }
+
+    /// show new booster notification hint only once
+    var showNewBoosterNotification: Bool {
+        boosterCandidate?.state == BoosterCandidate.BoosterState.new
+    }
+
     var boosterNotificationTitle: String {
         "vaccination_certificate_overview_booster_vaccination_notification_title".localized
     }
 
     var boosterNotificationBody: String {
-        let ruleID = selectedCertificate?.notificationRuleID ?? ""
-        let rule = "" // TODO get rule description
-        return String(format: "vaccination_certificate_overview_booster_vaccination_notification_message".localized, rule, ruleID)
+        guard let rule = boosterCandidate?.validationRules.first,
+              let description = rule.description.first(where: { $0.lang.lowercased() == Locale.current.languageCode })?.desc ?? rule.description.first?.desc
+        else { return "" }
+        return String(format: "vaccination_certificate_overview_booster_vaccination_notification_message".localized, description, rule.identifier)
     }
 
     var boosterNotificationHighlightText: String {
         "vaccination_certificate_overview_booster_vaccination_notification_icon_new".localized
-    }
-
-    var boosterNotificationState: NotificationState {
-        get {
-            selectedCertificate?.notificationState ?? .none
-        }
-        set {
-            guard
-                var cert = selectedCertificate,
-                cert.notificationState != newValue
-            else { return }
-
-            // FIXME: this prevents `Simultaneous accesses` error but should rather be prevented with a better state handling!
-            DispatchQueue.global(qos: .userInitiated).async {
-                cert.notificationState = newValue
-            }
-        }
-    }
-
-    var boosterFAQLink: URL {
-        URL(string: "https://reopen.europa.eu")!
     }
 
     // MARK: - Lifecyle
@@ -194,12 +186,15 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
     init(
         router: CertificateDetailRouterProtocol,
         repository: VaccinationRepositoryProtocol,
+        boosterLogic: BoosterLogic,
         certificates: [ExtendedCBORWebToken],
         resolvable: Resolver<CertificateDetailSceneResult>?
     ) {
         self.router = router
         self.repository = repository
+        self.boosterLogic = boosterLogic
         self.certificates = certificates
+        self.boosterCandidate = boosterLogic.checkCertificates(certificates)
         resolver = resolvable
     }
 
@@ -255,5 +250,11 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
         .catch { [weak self] error in
             self?.router.showUnexpectedErrorDialog(error)
         }
+    }
+
+    func updateBoosterCandiate() {
+        guard var candidate = boosterCandidate, candidate.state == .new else { return }
+        candidate.state = .qualified
+        boosterLogic.updateBoosterCandidate(candidate)
     }
 }

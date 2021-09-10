@@ -20,14 +20,14 @@ class CertificatesOverviewViewController: UIViewController {
     @IBOutlet var collectionView: UICollectionView!
     @IBOutlet var dotPageIndicator: DotPageIndicator!
 
-    private(set) var viewModel: CertificatesOverviewViewModelProtocol & BoosterHandling
+    private(set) var viewModel: CertificatesOverviewViewModelProtocol
 
     // MARK: - Lifecycle
 
     @available(*, unavailable)
     required init?(coder _: NSCoder) { fatalError("init?(coder: NSCoder) not implemented yet") }
 
-    init(viewModel: CertificatesOverviewViewModelProtocol & BoosterHandling) {
+    init(viewModel: CertificatesOverviewViewModelProtocol) {
         self.viewModel = viewModel
         super.init(nibName: String(describing: Self.self), bundle: .main)
         self.viewModel.delegate = self
@@ -43,24 +43,14 @@ class CertificatesOverviewViewController: UIViewController {
         setupCollectionView()
         setupDotIndicator()
         viewModel.refresh()
-        viewModel.showAnnouncementIfNeeded()
-
-        viewModel.updateDCCRules()
-
-        #if DEBUG
-        if ProcessInfo.processInfo.arguments.contains("-ResetNotificationStates") {
-            ExtendedCBORWebToken.resetNotificationStates()
-        }
-        #endif
+        viewModel.showNotificationsIfNeeded()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
         viewModel.updateTrustList()
-
-        // HACK: reload cells to update to current state
-        reloadCollectionView()
+        viewModel.updateDCCRules()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -173,20 +163,6 @@ extension CertificatesOverviewViewController: CertificatesOverviewViewModelDeleg
     func viewModelDidUpdate() {
         setupHeaderView()
         reloadCollectionView()
-
-        viewModel.checkForVaccinationBooster { [weak self] result in
-            guard let self = self, !result.isEmpty else { return }
-
-            if result.isEmpty { return }
-            
-            // store states
-            let state = result.map { ($0, NotificationState.new) }
-            self.viewModel.updateBoosterNotificationState(for: state)
-            // notification pop-up
-            self.viewModel.showBoosterNotification()
-            // update cells to show notification markers
-            self.reloadCollectionView()
-        }
     }
 
     func viewModelNeedsFirstCertificateVisible() {

@@ -33,7 +33,7 @@ public class Vaccination: Codable {
     /// True if full immunization (or booster) is given
     public var fullImmunization: Bool { dn >= sd || isBoosted }
 
-    /// `True` if vaccination is 'boosted' above the total number of vaccinations in the series, i.e. (4/2, 3/2, 2/1, etc.)
+    /// `True` if vaccination is a booster vaccination (J&J 2/2, all other vaccination 3/3)
     public var isBoosted: Bool {
         (mp == MedicalProduct.johnsonjohnson.rawValue && dn >= 2) || dn >= 3
     }

@@ -20,6 +20,7 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
     private var router: CertificatesOverviewRouterProtocol
     private let repository: VaccinationRepositoryProtocol
     private let certLogic: DCCCertLogic
+    private let boosterLogic: BoosterLogic
     private var certificateList = CertificateList(certificates: [])
     private var lastKnownFavoriteCertificateId: String?
     private var userDefaults: Persistence
@@ -38,11 +39,13 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
         router: CertificatesOverviewRouterProtocol,
         repository: VaccinationRepositoryProtocol,
         certLogic: DCCCertLogic,
+        boosterLogic: BoosterLogic,
         userDefaults: Persistence
     ) {
         self.router = router
         self.repository = repository
         self.certLogic = certLogic
+        self.boosterLogic = boosterLogic
         self.userDefaults = userDefaults
     }
 
@@ -126,12 +129,17 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
         router.showAppInformation()
     }
 
-    func showAnnouncementIfNeeded() {
-        let announcementVersion = try? userDefaults.fetch(UserDefaults.keyAnnouncement) as? String ?? ""
-        let bundleVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
-        if announcementVersion == bundleVersion { return }
-        try? userDefaults.store(UserDefaults.keyAnnouncement, value: bundleVersion)
-        router.showAnnouncement().cauterize()
+    /// Show notifications like announcements and booster notifications one after another
+    func showNotificationsIfNeeded() {
+        firstly {
+            showAnnouncementIfNeeded()
+        }
+        .then {
+            self.showBoosterNotificationIfNeeded()
+        }
+        .catch { error in
+            print(error.localizedDescription)
+        }
     }
 
     private func payloadFromScannerResult(_ result: ScanResult) throws -> String {
@@ -156,7 +164,8 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
                 showFavorite: certificates.count > 1,
                 onAction: showCertificate,
                 onFavorite: toggleFavoriteStateForCertificateWithId,
-                repository: repository
+                repository: repository,
+                boosterLogic: BoosterLogic.create()
             )
         }
     }
@@ -223,98 +232,32 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
     }
 }
 
+// MARK: - Update Announcements
+extension CertificatesOverviewViewModel {
+    /// Shows the announcement view if user downloaded a new version from the app store
+    private func showAnnouncementIfNeeded() -> Promise<Void> {
+        let announcementVersion = try? userDefaults.fetch(UserDefaults.keyAnnouncement) as? String ?? ""
+        let bundleVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
+        if announcementVersion == bundleVersion { return Promise.value }
+        try? userDefaults.store(UserDefaults.keyAnnouncement, value: bundleVersion)
+        return router.showAnnouncement()
+    }
+}
+
 // MARK: - Booster Notifications
-extension CertificatesOverviewViewModel: BoosterHandling {
-
-    private static var lastBoosterCheck: Date = Date.distantPast
-
-    func checkForVaccinationBooster(completion: @escaping (_ result: [BoosterCandidate]) -> Void) {
-        // Simple throttle check to once per day (production)
-        let threshold = Calendar.autoupdatingCurrent.date(byAdding: .day, value: -1, to: Date()) ?? .distantPast
-        guard Self.lastBoosterCheck < threshold else {
-            print("Booster check skipped due to throttling")
-            completion([])
-            return
+extension CertificatesOverviewViewModel {
+    private func showBoosterNotificationIfNeeded() -> Promise<Void> {
+        let users = repository.matchedCertificates(for: certificateList)
+        return firstly {
+            boosterLogic.checkForNewBoosterVaccinationsIfNeeded(users)
         }
-        Self.lastBoosterCheck = Date()
-
-        #if DEBUG
-        // first vaccination(!) certificate should have notification
-        if ProcessInfo.processInfo.arguments.contains("-ForceBoosterNotification"), let first = certificateList.certificates.first(where: { $0.vaccinationCertificate.hcert.dgc.v != nil }) {
-            completion([BoosterCandidate(token: first, rules: [ValidationResult.mocked])])
-            return
-        }
-        #endif
-
-        DispatchQueue.global(qos: .userInitiated).async {
-            var boosterCandidates = [BoosterCandidate]()
-            self.certificateList.certificates.forEach { token in
-                do {
-                    let validation = try self.certLogic.validate(
-                        type: .booster,
-                        countryCode: "DE",
-                        validationClock: Date(),
-                        certificate: token.vaccinationCertificate)
-
-                    // pass result(s) for display
-                    let passed = validation.filter({ $0.result == .passed })
-                    if !passed.isEmpty {
-                        boosterCandidates.append(BoosterCandidate(token: token, rules: passed))
-                    }
-                } catch {
-                    print(error.localizedDescription)
-                    return
+        .then { (showBoosterNotification: Bool) -> Promise<Void> in
+            if !showBoosterNotification { return Promise.value }
+            return self.refreshCertificates()
+                .then {
+                    self.router.showBoosterNotification()
                 }
-            }
-            DispatchQueue.main.async {
-                completion(boosterCandidates)
-            }
-        }
-    }
 
-    func updateBoosterNotificationState(for certificates: [(BoosterCandidate, NotificationState)]) {
-        for (candidate, state) in certificates {
-            // prevent notifications for non-vaccination certificates
-            var token = candidate.token
-            guard token.vaccinationCertificate.hcert.dgc.v != nil else {
-                continue
-            }
-            token.notificationState = state
-            token.notificationRuleID = candidate.rules.first?.rule?.identifier
-        }
-        #if DEBUG
-        certificateList.certificates.forEach { token in
-            print("📄 <<\(token.vaccinationCertificate.hcert.dgc.nam.fullNameTransliterated)>>: \(token.notificationState)")
-        }
-        #endif
-    }
-
-    func showBoosterNotification() {
-        firstly {
-            router.showBoosterNotification()
-        }
-        .done {
-            // currently no further action
-            // tbd: scroll to first certificate with notifications
-        }
-        .catch { [weak self] error in
-            self?.router.showUnexpectedErrorDialog(error)
         }
     }
 }
-
-// MARK: - Development
-
-#if DEBUG
-import JSON
-
-extension ValidationResult {
-    static let mocked: ValidationResult = ValidationResult(rule: Rule.mocked)
-}
-
-extension Rule {
-    static var mocked: Rule {
-        Rule(identifier: "MockRule", type: "mock", version: "1.0.0", schemaVersion: "1.0.0", engine: "mock", engineVersion: "1.0.0", certificateType: "mock", description: [Description(lang: "de", desc: "mock")], validFrom: "", validTo: "", affectedString: [], logic: try! .init(data: "{}".data(using: .utf8)!), countryCode: "de")
-    }
-}
-#endif

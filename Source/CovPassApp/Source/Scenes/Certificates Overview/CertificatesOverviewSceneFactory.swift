@@ -27,6 +27,7 @@ struct CertificatesOverviewSceneFactory: SceneFactory {
             router: router,
             repository: VaccinationRepository.create(),
             certLogic: DCCCertLogic.create(),
+            boosterLogic: BoosterLogic.create(),
             userDefaults: UserDefaultsPersistence()
         )
         let viewController = CertificatesOverviewViewController(viewModel: viewModel)
