@@ -67,7 +67,7 @@
 
 "dialog_booster_vaccination_notification_title" = "There is news about your certificates";
 
-"dialog_booster_vaccination_notification_message" = "Based on your existing vaccination certificates, a booster vaccination may be required. Please check the status of your vaccination certificates.";
+"dialog_booster_vaccination_notification_message" = "Please check the status of your EU Digital COVID Certificates.";
 
 
 /********** start Screen **********/
@@ -393,10 +393,6 @@
 
 "accessibility_overview_certificates_label_display_certificate" = "Display certificate";
 
-"booster_vaccination_certificate_overview_title" = "Booster vaccination: Currently only usable in Germany";
-
-"booster_vaccination_certificate_overview_message" = "At present, booster vaccinations can only be digitally verified and checked in Germany. As soon as this changes, you will be informed here about the current status.";
-
 "booster_vaccination_certificate_overview_action_button_title" = "Display current QR Code";
 
 "vaccination_certificate_overview_incomplete_title" = "Not fully vaccinated: %d of %d";
@@ -520,8 +516,6 @@
 "vaccination_certificate_detail_view_booster_vaccination_headline" = "EU Digital COVID Certificate of Vaccination";
 
 "vaccination_certificate_detail_view_vaccination_note" = "This certificate is for a vaccine that only requires one dose or a vaccine for people who have recovered from an infection and only need one dose.";
-
-"vaccination_certificate_detail_view_booster_vaccination_note" = "Please note that the EU Member States have not yet adopted a uniform approach to COVID certificates for booster vaccinations. Because of this, it cannot be ruled out that this certificate will not be recognised as valid in other EU countries. Therefore, if you are planning a trip outside Germany, please also take the original vaccination certificates (or other recognised proof) that you received before the booster vaccination.";
 
 "vaccination_certificate_detail_view_data_name" = "Name, Vorname / Name, first name";
 

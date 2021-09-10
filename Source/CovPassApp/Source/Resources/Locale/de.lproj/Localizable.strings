@@ -67,7 +67,7 @@
 
 "dialog_booster_vaccination_notification_title" = "Es gibt Neuigkeit zu Ihren Zertifikaten";
 
-"dialog_booster_vaccination_notification_message" = "Aufgrund Ihrer vorhandenen Impfzertifikate könnte eine Auffrischungsimpfung erforderlich sein. Bitte überprüfen Sie den Status Ihrer Impfzertifikate.";
+"dialog_booster_vaccination_notification_message" = "Bitte überprüfen Sie den Status Ihrer digitalen COVID-Zertifikate der EU.";
 
 
 /********** start Screen **********/
@@ -393,10 +393,6 @@
 
 "accessibility_overview_certificates_label_display_certificate" = "Zertifikat anzeigen";
 
-"booster_vaccination_certificate_overview_title" = "Auffrischungsimpfung: Aktuell nur in Deutschland nutzbar";
-
-"booster_vaccination_certificate_overview_message" = "Auffrischungsimpfungen können derzeit nur in Deutschland digital nachgewiesen und geprüft werden. Sobald sich dies ändert, werden Sie hier über den aktuellen Stand informiert.";
-
 "booster_vaccination_certificate_overview_action_button_title" = "Aktuellen QR-Code anzeigen";
 
 "vaccination_certificate_overview_incomplete_title" = "Unvollständig: %d von %d Impfungen";
@@ -520,8 +516,6 @@
 "vaccination_certificate_detail_view_booster_vaccination_headline" = "Digitales COVID-Impfzertifikat der EU";
 
 "vaccination_certificate_detail_view_vaccination_note" = "Es handelt sich hier um einen Impfstoff, bei dem nur eine Impfdosis erforderlich ist, oder um eine Impfung für Genesene, die nur eine Impfdosis benötigt.";
-
-"vaccination_certificate_detail_view_booster_vaccination_note" = "Bitte beachten Sie, dass die Mitgliedstaaten der EU derzeit noch kein einheitliches Vorgehen zu COVID-Zertifikaten für die Auffrischungsimpfungen beschlossen haben. Auf Grund dessen kann nicht ausgeschlossen werden, dass dieses Zertifikat in anderen EU-Ländern nicht als gültig anerkannt wird. Sofern Sie eine Reise außerhalb Deutschlands planen, nehmen Sie daher bitte auch die ursprünglichen Impfzertifikate (oder einen anderen anerkannten Nachweis) mit, die Sie vor der Auffrischungsimpfung erhalten haben.";
 
 "vaccination_certificate_detail_view_data_name" = "Name, Vorname / Name, first name";
 
