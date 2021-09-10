@@ -67,14 +67,17 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
             .done {
                 self.delegate?.viewModelDidUpdate()
             }
-            .catch { _ in }
+            .catch { error in
+                print(error.localizedDescription)
+            }
     }
 
     func updateDCCRules() {
         certLogic
             .updateRulesIfNeeded()
-            .done {}
-            .catch { _ in }
+            .catch { error in
+                print(error.localizedDescription)
+            }
     }
 
     private func refreshCertificates() -> Promise<Void> {

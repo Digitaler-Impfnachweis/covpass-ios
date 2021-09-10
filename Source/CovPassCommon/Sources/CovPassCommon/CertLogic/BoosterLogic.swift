@@ -52,7 +52,15 @@ extension BoosterCandidate: Equatable {
     }
 }
 
-public struct BoosterLogic {
+public protocol BoosterLogicProtocol {
+    func checkForNewBoosterVaccinationsIfNeeded(_ users: [CertificatePair]) -> Promise<Bool>
+    func checkForNewBoosterVaccinations(_ users: [CertificatePair]) -> Promise<Bool>
+    func checkCertificates(_ certificates: [ExtendedCBORWebToken]) -> BoosterCandidate?
+    func updateBoosterCandidate(_ boosterCandidate: BoosterCandidate)
+    func deleteBoosterCandidate(forCertificate certificate: ExtendedCBORWebToken)
+}
+
+public struct BoosterLogic: BoosterLogicProtocol {
 
     private let certLogic: DCCCertLogic
     private let userDefaults: Persistence

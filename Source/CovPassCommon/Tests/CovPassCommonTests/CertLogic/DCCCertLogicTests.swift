@@ -28,7 +28,14 @@ class DCCCertLogicTests: XCTestCase {
         sut = DCCCertLogic(initialDCCRulesURL: Bundle.commonBundle.url(forResource: "dcc-rules", withExtension: "json")!, service: service, keychain: keychain, userDefaults: userDefaults)
 
         let trustListURL = Bundle.commonBundle.url(forResource: "dsc.json", withExtension: nil)!
-        repository = VaccinationRepository(service: APIServiceMock(), keychain: MockPersistence(), userDefaults: MockPersistence(), publicKeyURL: URL(fileURLWithPath: "pubkey.pem"), initialDataURL: trustListURL)
+        repository = VaccinationRepository(
+            service: APIServiceMock(),
+            keychain: MockPersistence(),
+            userDefaults: MockPersistence(),
+            boosterLogic: BoosterLogicMock(),
+            publicKeyURL: URL(fileURLWithPath: "pubkey.pem"),
+            initialDataURL: trustListURL
+        )
     }
 
     override func tearDown() {

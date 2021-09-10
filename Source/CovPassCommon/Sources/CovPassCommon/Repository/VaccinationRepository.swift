@@ -30,7 +30,7 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
     private let service: APIServiceProtocol
     private let keychain: Persistence
     private let userDefaults: Persistence
-    private let boosterLogic: BoosterLogic
+    private let boosterLogic: BoosterLogicProtocol
     private let publicKeyURL: URL
     private let initialDataURL: URL
     private let entityBlacklist = [
@@ -54,7 +54,7 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
         return nil
     }
 
-    public init(service: APIServiceProtocol, keychain: Persistence, userDefaults: Persistence, boosterLogic: BoosterLogic, publicKeyURL: URL, initialDataURL: URL) {
+    public init(service: APIServiceProtocol, keychain: Persistence, userDefaults: Persistence, boosterLogic: BoosterLogicProtocol, publicKeyURL: URL, initialDataURL: URL) {
         self.service = service
         self.keychain = keychain
         self.userDefaults = userDefaults

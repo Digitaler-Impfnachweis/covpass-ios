@@ -28,6 +28,7 @@ class VaccinationRepositoryTests: XCTestCase {
             service: service,
             keychain: keychain,
             userDefaults: userDefaults,
+            boosterLogic: BoosterLogicMock(),
             publicKeyURL: Bundle.module.url(forResource: "pubkey.pem", withExtension: nil)!,
             initialDataURL: trustListURL
         )
