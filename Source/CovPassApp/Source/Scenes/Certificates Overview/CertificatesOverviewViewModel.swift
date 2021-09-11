@@ -25,8 +25,12 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
     private var lastKnownFavoriteCertificateId: String?
     private var userDefaults: Persistence
 
+    var certificatePairsSorted: [CertificatePair] {
+        repository.matchedCertificates(for: certificateList).sorted(by: { c, _ -> Bool in c.isFavorite })
+    }
+
     var certificateViewModels: [CardViewModel] {
-        cardViewModels(for: repository.matchedCertificates(for: certificateList).sorted(by: { c, _ -> Bool in c.isFavorite }))
+        cardViewModels(for: certificatePairsSorted)
     }
 
     var hasCertificates: Bool {
@@ -226,7 +230,7 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
             delegate?.viewModelNeedsFirstCertificateVisible()
 
         case let .showCertificatesOnOverview(certificates):
-            guard let index = repository.matchedCertificates(for: certificateList).firstIndex(where: { $0.certificates.elementsEqual(certificates) }) else { return }
+            guard let index = certificatePairsSorted.firstIndex(where: { $0.certificates.elementsEqual(certificates) }) else { return }
             delegate?.viewModelNeedsCertificateVisible(at: index)
 
         case .addNewCertificate:
