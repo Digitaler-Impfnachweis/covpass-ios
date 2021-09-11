@@ -62,10 +62,10 @@ public protocol BoosterLogicProtocol {
 
 public struct BoosterLogic: BoosterLogicProtocol {
 
-    private let certLogic: DCCCertLogic
+    private let certLogic: DCCCertLogicProtocol
     private let userDefaults: Persistence
 
-    public init(certLogic: DCCCertLogic, userDefaults: Persistence) {
+    public init(certLogic: DCCCertLogicProtocol, userDefaults: Persistence) {
         self.certLogic = certLogic
         self.userDefaults = userDefaults
     }

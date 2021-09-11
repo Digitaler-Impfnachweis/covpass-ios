@@ -144,14 +144,13 @@ class DCCCertLogicTests: XCTestCase {
         }
     }
 
-//    func testValidRecovery() throws {
-//        let cert = try repository.checkCertificate(CertificateMock.validRecoveryCertificate).wait()
-//
-//        let res = try sut.validate(countryCode: "DE", validationClock: Date(), certificate: cert)
-//
-//        XCTAssertEqual(res.count, 2)
-//        XCTAssertEqual(failedResults(results: res).count, 0)
-//    }
+    func testValidRecovery() throws {
+        let cert = CBORWebToken.mockRecoveryCertificate
+        let res = try sut.validate(countryCode: "DE", validationClock: Date(), certificate: cert)
+
+        XCTAssertEqual(res.count, 2)
+        XCTAssertEqual(failedResults(results: res).count, 0)
+    }
 
     func testInvalidRecovery() throws {
         let cert = try repository.checkCertificate(CertificateMock.validRecoveryCertificate).wait()
@@ -178,9 +177,12 @@ class DCCCertLogicTests: XCTestCase {
         try sut.updateRules().wait()
 
         // Keychain should have the new rules
-        let data = try keychain.fetch(KeychainPersistence.dccRulesKey)! as! Data
-        let rules = try JSONDecoder().decode([Rule].self, from: data)
-        XCTAssertEqual(rules.count, 1)
+        let dccData = try keychain.fetch(KeychainPersistence.dccRulesKey)! as! Data
+        let dccRules = try JSONDecoder().decode([Rule].self, from: dccData)
+        XCTAssertEqual(dccRules.count, 1)
+        let boosterData = try keychain.fetch(KeychainPersistence.boosterRulesKey)! as! Data
+        let boosterRules = try JSONDecoder().decode([Rule].self, from: boosterData)
+        XCTAssertEqual(boosterRules.count, 1)
     }
 
     func testRuleUpdateNothingNew() throws {
@@ -191,20 +193,25 @@ class DCCCertLogicTests: XCTestCase {
         // Update rules
         service.loadDCCRulesResult = Promise.value([RuleSimple.mock])
         service.loadDCCRuleResult = Promise.value(Rule.mock)
-        service.loadBoosterRulesResult = Promise.value([])
+        service.loadBoosterRulesResult = Promise.value([RuleSimple.mock])
+        service.loadBoosterRuleResult = Promise.value(Rule.mock)
         service.loadValueSetsResult = Promise.value([])
         try sut.updateRules().wait()
 
         // Keychain should have the new rules
-        let data = try keychain.fetch(KeychainPersistence.dccRulesKey)! as! Data
-        let rules = try JSONDecoder().decode([Rule].self, from: data)
-        XCTAssertEqual(rules.count, 1)
+        let dccData = try keychain.fetch(KeychainPersistence.dccRulesKey)! as! Data
+        let dccRules = try JSONDecoder().decode([Rule].self, from: dccData)
+        XCTAssertEqual(dccRules.count, 1)
+        let boosterData = try keychain.fetch(KeychainPersistence.boosterRulesKey)! as! Data
+        let boosterRules = try JSONDecoder().decode([Rule].self, from: boosterData)
+        XCTAssertEqual(boosterRules.count, 1)
     }
 
     func testRuleUpdateNewRule() throws {
         // Load intial data
         let initialData = try JSONEncoder().encode([Rule.mock.setIdentifier("2").setHash("2")])
         try keychain.store(KeychainPersistence.dccRulesKey, value: initialData)
+        try keychain.store(KeychainPersistence.boosterRulesKey, value: initialData)
 
         // Update rules
         service.loadDCCRulesResult = Promise.value([
@@ -213,32 +220,45 @@ class DCCCertLogicTests: XCTestCase {
         ])
         service.loadDCCRuleResult = Promise.value(Rule.mock.setIdentifier("1").setHash("1"))
         service.loadValueSetsResult = Promise.value([])
-        service.loadBoosterRulesResult = Promise.value([])
+        service.loadBoosterRulesResult = Promise.value([
+            RuleSimple.mock.setIdentifier("1").setHash("1"),
+            RuleSimple.mock.setIdentifier("2").setHash("2")
+        ])
+        service.loadBoosterRuleResult = Promise.value(Rule.mock.setIdentifier("1").setHash("1"))
         try sut.updateRules().wait()
 
         // Keychain should have the new rules
-        let data = try keychain.fetch(KeychainPersistence.dccRulesKey)! as! Data
-        let rules = try JSONDecoder().decode([Rule].self, from: data)
-        XCTAssertEqual(rules.count, 2)
+        let dccData = try keychain.fetch(KeychainPersistence.dccRulesKey)! as! Data
+        let dccRules = try JSONDecoder().decode([Rule].self, from: dccData)
+        XCTAssertEqual(dccRules.count, 2)
+        let boosterData = try keychain.fetch(KeychainPersistence.boosterRulesKey)! as! Data
+        let boosterRules = try JSONDecoder().decode([Rule].self, from: boosterData)
+        XCTAssertEqual(boosterRules.count, 2)
     }
 
     func testRuleUpdateDeleteOldRule() throws {
         // Load intial data
         let initialData = try JSONEncoder().encode([Rule.mock.setIdentifier("2")])
         try keychain.store(KeychainPersistence.dccRulesKey, value: initialData)
+        try keychain.store(KeychainPersistence.boosterRulesKey, value: initialData)
 
         // Update rules
         service.loadDCCRulesResult = Promise.value([RuleSimple.mock.setIdentifier("1").setHash("1")])
         service.loadDCCRuleResult = Promise.value(Rule.mock.setIdentifier("1").setHash("1"))
         service.loadValueSetsResult = Promise.value([])
-        service.loadBoosterRulesResult = Promise.value([])
+        service.loadBoosterRulesResult = Promise.value([RuleSimple.mock.setIdentifier("1").setHash("1")])
+        service.loadBoosterRuleResult = Promise.value(Rule.mock.setIdentifier("1").setHash("1"))
         try sut.updateRules().wait()
 
         // Keychain should have the new rules
-        let data = try keychain.fetch(KeychainPersistence.dccRulesKey)! as! Data
-        let rules = try JSONDecoder().decode([Rule].self, from: data)
-        XCTAssertEqual(rules.count, 1)
-        XCTAssertEqual(rules[0].identifier, "1")
+        let dccData = try keychain.fetch(KeychainPersistence.dccRulesKey)! as! Data
+        let dccRules = try JSONDecoder().decode([Rule].self, from: dccData)
+        XCTAssertEqual(dccRules.count, 1)
+        XCTAssertEqual(dccRules[0].identifier, "1")
+        let boosterData = try keychain.fetch(KeychainPersistence.boosterRulesKey)! as! Data
+        let boosterRules = try JSONDecoder().decode([Rule].self, from: boosterData)
+        XCTAssertEqual(boosterRules.count, 1)
+        XCTAssertEqual(boosterRules[0].identifier, "1")
     }
 
     func testValueSetUpdate() throws {

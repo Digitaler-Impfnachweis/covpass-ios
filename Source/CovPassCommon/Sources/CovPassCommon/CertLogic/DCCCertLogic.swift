@@ -57,7 +57,16 @@ public struct ValueSet: Codable {
     var data: Data
 }
 
-public struct DCCCertLogic {
+public protocol DCCCertLogicProtocol {
+    var countries: [String] { get }
+
+    func lastUpdatedDCCRules() -> Date?
+    func validate(type: DCCCertLogic.LogicType, countryCode: String, validationClock: Date, certificate: CBORWebToken) throws -> [ValidationResult]
+    func updateRulesIfNeeded() -> Promise<Void>
+    func updateRules() -> Promise<Void>
+}
+
+public struct DCCCertLogic: DCCCertLogicProtocol {
     private let initialDCCRulesURL: URL
 
     private let service: DCCServiceProtocol

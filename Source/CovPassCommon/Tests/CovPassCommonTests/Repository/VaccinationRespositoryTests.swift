@@ -16,6 +16,7 @@ class VaccinationRepositoryTests: XCTestCase {
     var service: APIServiceMock!
     var keychain: MockPersistence!
     var userDefaults: MockPersistence!
+    var boosterLogic: BoosterLogicMock!
     var sut: VaccinationRepository!
 
     override func setUp() {
@@ -23,12 +24,13 @@ class VaccinationRepositoryTests: XCTestCase {
         service = APIServiceMock()
         keychain = MockPersistence()
         userDefaults = MockPersistence()
+        boosterLogic = BoosterLogicMock()
         let trustListURL = Bundle.commonBundle.url(forResource: "dsc.json", withExtension: nil)!
         sut = VaccinationRepository(
             service: service,
             keychain: keychain,
             userDefaults: userDefaults,
-            boosterLogic: BoosterLogicMock(),
+            boosterLogic: boosterLogic,
             publicKeyURL: Bundle.module.url(forResource: "pubkey.pem", withExtension: nil)!,
             initialDataURL: trustListURL
         )
@@ -66,11 +68,11 @@ class VaccinationRepositoryTests: XCTestCase {
         XCTAssertEqual(res.iss, "DE")
     }
 
-    func testCheckCertificateValidRSA() throws {
-        // FIXME: Refactor repository to mock the date that is being used to check the expiration time
+//    func testCheckCertificateValidRSA() throws {
+//        // FIXME: Refactor repository to mock the date that is being used to check the expiration time
 //        let res = try sut.checkCertificate(CertificateMock.validCertifcateRSA).wait()
 //        XCTAssertEqual(res.iss, "IS")
-    }
+//    }
 
 //    func testCheckCertificateInvalidSignature() {
 //        do {
@@ -124,27 +126,27 @@ class VaccinationRepositoryTests: XCTestCase {
         XCTAssertEqual(list.certificates.first?.vaccinationCertificate.isInvalid, false)
     }
 
-//    func testGetCertificateListWithInvalidation() throws {
-//        // Store one certficate in list
-//        let data = try JSONEncoder().encode(
-//            CertificateList(
-//                certificates: [
-//                    ExtendedCBORWebToken(
-//                        vaccinationCertificate: try JSONDecoder().decode(CBORWebToken.self, from: Data.json("CBORWebToken")),
-//                        vaccinationQRCodeData: CertificateMock.invalidCertificateInvalidSignature
-//                    )
-//                ],
-//                favoriteCertificateId: "1"
-//            )
-//        )
-//        try keychain.store(KeychainPersistence.certificateListKey, value: data)
-//
-//        // Get certificate list
-//        let list = try sut.getCertificateList().wait()
-//
-//        XCTAssertEqual(list.favoriteCertificateId, "1")
-//        XCTAssertEqual(list.certificates.first?.vaccinationCertificate.isInvalid, true)
-//    }
+    func testGetCertificateListWithInvalidation() throws {
+        // Store one certficate in list
+        let data = try JSONEncoder().encode(
+            CertificateList(
+                certificates: [
+                    ExtendedCBORWebToken(
+                        vaccinationCertificate: try JSONDecoder().decode(CBORWebToken.self, from: Data.json("CBORWebToken")),
+                        vaccinationQRCodeData: CertificateMock.invalidCertificateInvalidSignature
+                    )
+                ],
+                favoriteCertificateId: "1"
+            )
+        )
+        try keychain.store(KeychainPersistence.certificateListKey, value: data)
+
+        // Get certificate list
+        let list = try sut.getCertificateList().wait()
+
+        XCTAssertEqual(list.favoriteCertificateId, "1")
+        XCTAssertEqual(list.certificates.first?.vaccinationCertificate.isInvalid, true)
+    }
 
     func testGetCertificateListFailsWithWrongData() throws {
         try keychain.store(KeychainPersistence.certificateListKey, value: CertificateList(certificates: [], favoriteCertificateId: "1"))
@@ -178,8 +180,9 @@ class VaccinationRepositoryTests: XCTestCase {
     }
 
     func testDeleteCertificate() throws {
-        let cborWebToken = try! JSONDecoder().decode(CBORWebToken.self, from: Data.json("CBORWebToken"))
+        let cborWebToken = CBORWebToken.mockVaccinationCertificate
         let cert = ExtendedCBORWebToken(vaccinationCertificate: cborWebToken, vaccinationQRCodeData: "")
+
         _ = try sut.saveCertificateList(CertificateList(certificates: [cert], favoriteCertificateId: cborWebToken.hcert.dgc.uvci)).wait()
 
         var list = try sut.getCertificateList().wait()
@@ -191,6 +194,46 @@ class VaccinationRepositoryTests: XCTestCase {
         list = try sut.getCertificateList().wait()
         XCTAssertEqual(list.certificates.count, 0)
         XCTAssertNil(list.favoriteCertificateId)
+    }
+
+    func testDeleteCertificateWithBooster() throws {
+        let cborWebToken = CBORWebToken.mockVaccinationCertificate
+        let cert = ExtendedCBORWebToken(vaccinationCertificate: cborWebToken, vaccinationQRCodeData: "")
+
+        // existing booster notification should be deleted when certificate gets deleted
+        boosterLogic.updateBoosterCandidate(BoosterCandidate(certificate: cert))
+
+        _ = try sut.saveCertificateList(CertificateList(certificates: [cert], favoriteCertificateId: cborWebToken.hcert.dgc.uvci)).wait()
+
+        var list = try sut.getCertificateList().wait()
+        XCTAssertEqual(list.certificates.count, 1)
+        XCTAssertEqual(boosterLogic.boosterCandidates.count, 1)
+
+        _ = try sut.delete(cert).wait()
+
+        list = try sut.getCertificateList().wait()
+        XCTAssertEqual(list.certificates.count, 0)
+        XCTAssertEqual(boosterLogic.boosterCandidates.count, 0)
+    }
+
+    func testDeleteCertificateWithDifferentBooster() throws {
+        let cborWebToken = CBORWebToken.mockVaccinationCertificate
+        let cert = ExtendedCBORWebToken(vaccinationCertificate: cborWebToken, vaccinationQRCodeData: "")
+
+        // other booster notifications should stay when certificate gets deleted
+        boosterLogic.updateBoosterCandidate(BoosterCandidate(certificate: ExtendedCBORWebToken(vaccinationCertificate: CBORWebToken.mockVaccinationCertificate.mockVaccinationUVCI("foo"), vaccinationQRCodeData: "")))
+
+        _ = try sut.saveCertificateList(CertificateList(certificates: [cert], favoriteCertificateId: cborWebToken.hcert.dgc.uvci)).wait()
+
+        var list = try sut.getCertificateList().wait()
+        XCTAssertEqual(list.certificates.count, 1)
+        XCTAssertEqual(boosterLogic.boosterCandidates.count, 1)
+
+        _ = try sut.delete(cert).wait()
+
+        list = try sut.getCertificateList().wait()
+        XCTAssertEqual(list.certificates.count, 0)
+        XCTAssertEqual(boosterLogic.boosterCandidates.count, 1)
     }
 
     func testCheckCertificate() throws {

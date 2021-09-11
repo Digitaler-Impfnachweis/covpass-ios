@@ -313,6 +313,7 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
 
     // MARK: - Private Helpers
 
+    /// Parse certificate payload, verify signature, check expiration, check extended key usage, and validate blacklisted entities
     func parseCertificate(_ cosePayload: CoseSign1Message) throws -> CBORWebToken {
         guard let trustList = self.trustList else {
             throw ApplicationError.general("Missing TrustList")

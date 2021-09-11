@@ -97,9 +97,9 @@ public extension CBORWebToken {
                     r: [
                         Recovery(
                             tg: "840539006",
-                            fr: DateUtils.isoDateFormatter.date(from: "2021-01-01")!,
-                            df: DateUtils.isoDateFormatter.date(from: "2021-01-29")!,
-                            du: DateUtils.isoDateFormatter.date(from: "2021-07-01")!,
+                            fr: DateUtils.isoDateFormatter.date(from: "2021-06-01")!,
+                            df: DateUtils.isoDateFormatter.date(from: "2021-06-29")!,
+                            du: DateUtils.isoDateFormatter.date(from: "2021-12-01")!,
                             co: "DE",
                             is: "Robert Koch-Institut iOS",
                             ci: "URN:UVCI:01DE/IBMT102/5Z0SOLAZ3PXOZYEA75E2E#D"

@@ -131,6 +131,7 @@
 		3865B76826DFE48C0053D1D3 /* AnnouncementViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3865B76726DFE48C0053D1D3 /* AnnouncementViewModel.swift */; };
 		3865B76A26DFE4960053D1D3 /* AnnouncementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3865B76926DFE4960053D1D3 /* AnnouncementViewController.swift */; };
 		3865B76D26DFE4C90053D1D3 /* AnnouncementViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3865B76C26DFE4C90053D1D3 /* AnnouncementViewController.xib */; };
+		386FDCFC26ED205900AC7639 /* BoosterNotificationViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 386FDCF926ED1F8B00AC7639 /* BoosterNotificationViewModelTests.swift */; };
 		3876382826ADBED100FBCA47 /* contact-covpass-en.html in Resources */ = {isa = PBXBuildFile; fileRef = 3876382626ADBED100FBCA47 /* contact-covpass-en.html */; };
 		3876382926ADBED100FBCA47 /* privacy-covpass-en.html in Resources */ = {isa = PBXBuildFile; fileRef = 3876382726ADBED100FBCA47 /* privacy-covpass-en.html */; };
 		3876382E26ADBFE500FBCA47 /* contact-covpasscheck-en.html in Resources */ = {isa = PBXBuildFile; fileRef = 3876382B26ADBED900FBCA47 /* contact-covpasscheck-en.html */; };
@@ -323,6 +324,7 @@
 		3865B76726DFE48C0053D1D3 /* AnnouncementViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementViewModel.swift; sourceTree = "<group>"; };
 		3865B76926DFE4960053D1D3 /* AnnouncementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementViewController.swift; sourceTree = "<group>"; };
 		3865B76C26DFE4C90053D1D3 /* AnnouncementViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AnnouncementViewController.xib; sourceTree = "<group>"; };
+		386FDCF926ED1F8B00AC7639 /* BoosterNotificationViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoosterNotificationViewModelTests.swift; sourceTree = "<group>"; };
 		3876382626ADBED100FBCA47 /* contact-covpass-en.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "contact-covpass-en.html"; sourceTree = "<group>"; };
 		3876382726ADBED100FBCA47 /* privacy-covpass-en.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "privacy-covpass-en.html"; sourceTree = "<group>"; };
 		3876382A26ADBED900FBCA47 /* privacy-covpasscheck-en.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "privacy-covpasscheck-en.html"; sourceTree = "<group>"; };
@@ -660,6 +662,7 @@
 		216D2025264EF95400370F16 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				386FDCF826ED1F7C00AC7639 /* BoosterNotification */,
 				216D1F59264EF52400370F16 /* Certificate */,
 				216D1F62264EF52400370F16 /* Onboarding */,
 			);
@@ -994,6 +997,14 @@
 				3865B76C26DFE4C90053D1D3 /* AnnouncementViewController.xib */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		386FDCF826ED1F7C00AC7639 /* BoosterNotification */ = {
+			isa = PBXGroup;
+			children = (
+				386FDCF926ED1F8B00AC7639 /* BoosterNotificationViewModelTests.swift */,
+			);
+			path = BoosterNotification;
 			sourceTree = "<group>";
 		};
 		3882AEA9266FD5F9000354CD /* Certificates */ = {
@@ -1497,6 +1508,7 @@
 				216D203D264EFA7400370F16 /* PassOnboardingPageViewModelTests.swift in Sources */,
 				3569924526CEB35D0054531A /* CertificateDetailViewModelTests.swift in Sources */,
 				216D2035264EFA6C00370F16 /* VaccinationRepositoryMock.swift in Sources */,
+				386FDCFC26ED205900AC7639 /* BoosterNotificationViewModelTests.swift in Sources */,
 				216D2032264EFA6C00370F16 /* MockViewModelDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
