@@ -15,4 +15,6 @@ public protocol Persistence {
     func fetch(_ key: String) throws -> Any?
     // Delete data from persistence
     func delete(_ key: String) throws
+    // Delete all data from persistence
+    func deleteAll() throws
 }

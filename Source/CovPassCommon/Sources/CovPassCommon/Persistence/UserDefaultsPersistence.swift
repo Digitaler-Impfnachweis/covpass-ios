@@ -22,4 +22,6 @@ public struct UserDefaultsPersistence: Persistence {
     public func delete(_ key: String) throws {
         UserDefaults.standard.removeObject(forKey: key)
     }
+
+    public func deleteAll() throws {}
 }

@@ -129,4 +129,12 @@ public struct KeychainPersistence: Persistence {
             throw KeychainError.deleteFailed
         }
     }
+
+    // Delete all data from keychain
+    public func deleteAll() throws {
+        try delete(Self.trustListKey)
+        try delete(Self.certificateListKey)
+        try delete(Self.dccRulesKey)
+        try delete(Self.boosterRulesKey)
+    }
 }

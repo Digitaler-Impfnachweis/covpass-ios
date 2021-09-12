@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "status_partial_notification.pdf",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

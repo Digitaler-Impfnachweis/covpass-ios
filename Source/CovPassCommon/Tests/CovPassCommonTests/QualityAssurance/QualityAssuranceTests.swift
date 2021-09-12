@@ -22,6 +22,7 @@ class QualityAssuranceTests: XCTestCase {
             service: APIServiceMock(),
             keychain: MockPersistence(),
             userDefaults: MockPersistence(),
+            boosterLogic: BoosterLogicMock(),
             publicKeyURL: Bundle.module.url(forResource: "pubkey.pem", withExtension: nil)!,
             initialDataURL: Bundle.commonBundle.url(forResource: "dsc.json", withExtension: nil)!
         )

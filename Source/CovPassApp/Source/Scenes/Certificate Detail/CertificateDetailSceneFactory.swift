@@ -28,10 +28,10 @@ struct CertificateDetailSceneFactory: ResolvableSceneFactory {
     }
 
     func make(resolvable: Resolver<CertificateDetailSceneResult>) -> UIViewController {
-        let repository = VaccinationRepository.create()
         let viewModel = CertificateDetailViewModel(
             router: router,
-            repository: repository,
+            repository: VaccinationRepository.create(),
+            boosterLogic: BoosterLogic.create(),
             certificates: certificates,
             resolvable: resolvable
         )
