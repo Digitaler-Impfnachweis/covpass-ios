@@ -14,7 +14,11 @@ public struct VoiceOverOptions {
         public var hint: String?
         public var traits: UIAccessibilityTraits?
 
-        public init() {}
+        public init(label: String? = nil, hint: String? = nil, traits: UIAccessibilityTraits? = nil) {
+            self.label = label
+            self.hint = hint
+            self.traits = traits
+        }
     }
 
     /// Options for custom voice over header strings

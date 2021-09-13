@@ -6,9 +6,18 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
+import AVFoundation
 import PromiseKit
 import Scanner
 import UIKit
+
+private enum Constants {
+    enum Accessibility {
+        static let close = VoiceOverOptions.Settings(label: "accessibility_button_scanner_label_close".localized)
+        static let torchOn = VoiceOverOptions.Settings(label: "accessibility_button_label_torch_off".localized)
+        static let torchOff = VoiceOverOptions.Settings(label: "accessibility_button_label_torch_on".localized)
+    }
+}
 
 class ScanViewModel: CancellableViewModelProtocol {
     // MARK: - Properties
@@ -18,6 +27,16 @@ class ScanViewModel: CancellableViewModelProtocol {
 
     var onCameraAccess: (() -> Void)?
 
+    var hasDeviceTorch = true
+    private let device: AVCaptureDevice?
+    private(set) var isFlashlightOn = false
+
+    var currentTorchVoiceOverOptions: VoiceOverOptions.Settings {
+        isFlashlightOn ? Constants.Accessibility.torchOn : Constants.Accessibility.torchOff
+    }
+    var closeVoiceOverOptions: VoiceOverOptions.Settings {
+        Constants.Accessibility.close
+    }
     // MARK: - Lifecycle
 
     init(
@@ -26,6 +45,13 @@ class ScanViewModel: CancellableViewModelProtocol {
     ) {
         self.cameraAccessProvider = cameraAccessProvider
         resolver = resolvable
+
+        guard let device = AVCaptureDevice.default(for: .video), device.hasTorch else {
+            hasDeviceTorch = false
+            device = nil
+            return
+        }
+        self.device = device
     }
 
     func requestCameraAccess() {
@@ -39,7 +65,7 @@ class ScanViewModel: CancellableViewModelProtocol {
             self.cancel()
         }
         .catch {
-            print($0)
+            debugPrint($0)
             self.cancel()
         }
     }
@@ -50,5 +76,15 @@ class ScanViewModel: CancellableViewModelProtocol {
 
     func cancel() {
         resolver.cancel()
+    }
+
+    func toggleFlashlight() {
+        guard let device = self.device, hasDeviceTorch else { return }
+        do {
+            try device.lockForConfiguration()
+            isFlashlightOn.toggle()
+            device.torchMode = isFlashlightOn ? .on : .off
+            device.unlockForConfiguration()
+        } catch {}
     }
 }

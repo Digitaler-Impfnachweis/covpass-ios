@@ -179,6 +179,12 @@ public extension UIImage {
 
     @ImageLoader(name: "status_full_notification")
     private(set) static var statusFullNotfication
+
+    @ImageLoader(name: "flash-on")
+    private(set) static var flashOn
+
+    @ImageLoader(name: "flash-off")
+    private(set) static var flashOff
 }
 
 @propertyWrapper

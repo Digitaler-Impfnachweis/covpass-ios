@@ -84,7 +84,6 @@ class HowToScanViewController: UIViewController {
 
     private func configureToolbarView() {
         toolbarView.state = .confirm(viewModel.startButtonTitle)
-        toolbarView.setUpLeftButton(leftButtonItem: .navigationArrow)
         toolbarView.layoutMargins.top = .space_24
         toolbarView.delegate = self
     }

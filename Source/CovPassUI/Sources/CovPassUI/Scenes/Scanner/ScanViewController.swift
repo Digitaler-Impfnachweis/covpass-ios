@@ -6,6 +6,7 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
+import AVFoundation
 import Scanner
 import UIKit
 
@@ -17,7 +18,7 @@ class ScanViewController: UIViewController {
 
     // MARK: - Properties
 
-    private(set) var viewModel: ScanViewModel
+    private(set) var viewModel: ScanViewModel    
     var scanViewController: ScannerViewController?
 
     // MARK: - Lifecycle
@@ -27,7 +28,7 @@ class ScanViewController: UIViewController {
 
     init(viewModel: ScanViewModel) {
         self.viewModel = viewModel
-        super.init(nibName: String(describing: Self.self), bundle: .module)
+        super.init(nibName: String(describing: Self.self), bundle: .module)        
     }
 
     override func viewDidLoad() {
@@ -38,9 +39,9 @@ class ScanViewController: UIViewController {
         configureToolbarView()
 
         viewModel.onCameraAccess = { [weak self] in
-            self?.configureScanView()
+            self?.configureScanView()            
         }
-        viewModel.requestCameraAccess()
+        viewModel.requestCameraAccess()        
     }
 
     // MARK: - Private
@@ -55,8 +56,18 @@ class ScanViewController: UIViewController {
 
     private func configureToolbarView() {
         toolbarView.state = .cancel
+        #if targetEnvironment(simulator)
+        toolbarView.setUpRightButton(rightButtonItem: .flashLight)
+
+        #else
+        if viewModel.hasDeviceTorch {
+            toolbarView.setUpRightButton(rightButtonItem: .flashLight)
+        }
+        #endif
         toolbarView.layoutMargins.top = .space_24
         toolbarView.delegate = self
+        toolbarView.primaryButtonVoiceOverSettings = viewModel.closeVoiceOverOptions
+        toolbarView.rightButtonVoiceOverSettings = viewModel.currentTorchVoiceOverOptions
     }
 }
 
@@ -67,6 +78,9 @@ extension ScanViewController: CustomToolbarViewDelegate {
         switch buttonType {
         case .cancelButton:
             viewModel.cancel()
+        case .flashLight:
+            viewModel.toggleFlashlight()
+            toolbarView.rightButtonVoiceOverSettings = viewModel.currentTorchVoiceOverOptions
         default:
             return
         }

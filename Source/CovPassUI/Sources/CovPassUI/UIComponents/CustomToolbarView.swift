@@ -8,6 +8,13 @@
 
 import UIKit
 
+private enum Constants {
+    enum Layout {
+        static let cancelButtonWidth: CGFloat = 54
+        static let cancelButtonHeight: CGFloat = 54
+    }
+}
+
 public protocol CustomToolbarViewDelegate: AnyObject {
     func customToolbarView(_: CustomToolbarView, didTap buttonType: ButtonItemType)
 }
@@ -22,6 +29,7 @@ public enum ButtonItemType {
     case progressActivity
     case scrollButton
     case disabledWithText
+    case flashLight
 }
 
 public enum CustomToolbarState: Equatable {
@@ -33,6 +41,7 @@ public enum CustomToolbarState: Equatable {
     case confirm(String)
     case disabled
     case disabledWithText(String)
+    case flashLight
 }
 
 /// A custom toolbar that supports multiple states
@@ -40,6 +49,7 @@ public class CustomToolbarView: XibView {
     public weak var delegate: CustomToolbarViewDelegate?
 
     @IBOutlet var leftButton: UIButton!
+    @IBOutlet var rightButton: UIButton!
     public var primaryButton: MainButton!
 
     public var state: CustomToolbarState {
@@ -64,6 +74,8 @@ public class CustomToolbarView: XibView {
                 setupDisabledButton()
             case let .disabledWithText(title):
                 setupDisabledButton(with: title)
+            case .flashLight:
+                setUpRightButton(rightButtonItem: .flashLight)
             }
         }
     }
@@ -88,7 +100,19 @@ public class CustomToolbarView: XibView {
         }
     }
 
+    public var rightButtonVoiceOverSettings: VoiceOverOptions.Settings? {
+        didSet {
+            rightButtonVoiceOverSettings.map {
+                rightButton.enableAccessibility(label: $0.label,
+                                                hint: $0.hint,
+                                                traits: $0.traits)
+
+            }
+        }
+    }
+
     var leftButtonAction: (() -> Void)?
+    var rightButtonAction: (() -> Void)?
 
     public func setUpLeftButton(leftButtonItem: ButtonItemType?) {
         guard let leftButtonItem = leftButtonItem else {
@@ -108,6 +132,33 @@ public class CustomToolbarView: XibView {
             }
         default:
             resetSecondary(button: leftButton)
+        }
+    }
+
+    public func setUpRightButton(rightButtonItem: ButtonItemType?) {
+        if case .flashLight = rightButtonItem {
+            rightButton.isHidden = false
+            enableRightButton(rightButtonItem: rightButtonItem)
+            rightButton.setImage(.flashOff, for: .normal)
+            rightButton.setImage(.flashOn, for: .selected)
+
+            rightButtonAction = { [weak self] in
+                guard let self = self  else { return }
+                self.rightButton.isSelected.toggle()
+                self.delegate?.customToolbarView(self, didTap: .flashLight)
+            }
+        }
+    }
+
+    public func disableRightButton(rightButtonItem: ButtonItemType?) {
+        if case .flashLight = rightButtonItem {
+            rightButton.isEnabled = false
+        }
+    }
+
+    public func enableRightButton(rightButtonItem: ButtonItemType?) {
+        if case .flashLight = rightButtonItem {
+            rightButton.isEnabled = true
         }
     }
 
@@ -154,6 +205,10 @@ public class CustomToolbarView: XibView {
             guard let strongSelf = self else { return }
             strongSelf.delegate?.customToolbarView(strongSelf, didTap: .cancelButton)
         }
+        NSLayoutConstraint.activate([
+            primaryButton.heightAnchor.constraint(equalToConstant: Constants.Layout.cancelButtonHeight),
+            primaryButton.widthAnchor.constraint(equalToConstant: Constants.Layout.cancelButtonWidth)
+        ])
         return primaryButton
     }
 
@@ -276,12 +331,16 @@ public class CustomToolbarView: XibView {
     @IBAction func leftButtonPressed() {
         leftButtonAction?()
     }
+
+    @IBAction func didTouchRightButton() {
+        rightButtonAction?()
+    }
 }
 
 extension CustomToolbarView {
     public override var accessibilityElements: [Any]? {
         get {
-            [primaryButton as Any, leftButton as Any]
+            [primaryButton as Any, leftButton as Any, rightButton as Any]
         }
         set { }
     }

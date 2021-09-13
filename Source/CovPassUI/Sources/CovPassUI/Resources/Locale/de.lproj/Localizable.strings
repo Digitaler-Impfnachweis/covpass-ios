@@ -64,3 +64,11 @@
 "error_standard_unexpected_message" = "Es ist ein unerwarteter Fehler aufgetreten. Bitte versuchen Sie es später erneut.";
 
 "error_connect_to_internet_Button_ok" = "OK";
+
+/********** Camera Accessibility **********/
+
+"accessibility_button_scanner_label_close" = "Scanner schließen";
+
+"accessibility_button_label_torch_on" = "Taschenlampe anschalten";
+
+"accessibility_button_label_torch_off" = "Taschenlampe ausschalten";
