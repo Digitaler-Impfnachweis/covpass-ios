@@ -23,4 +23,8 @@ class MockPersistence: Persistence {
     func delete(_ key: String) throws {
         store.removeValue(forKey: key)
     }
+
+    func deleteAll() throws {
+        store = [:]
+    }
 }

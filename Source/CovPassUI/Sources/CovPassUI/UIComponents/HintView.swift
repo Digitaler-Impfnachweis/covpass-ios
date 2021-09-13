@@ -40,6 +40,7 @@ public class HintView: XibView {
         bodyLabel.text = nil
 
         iconLabel.text = nil
+        iconLabel.isHidden = true
     }
 
     public override func updateConstraints() {

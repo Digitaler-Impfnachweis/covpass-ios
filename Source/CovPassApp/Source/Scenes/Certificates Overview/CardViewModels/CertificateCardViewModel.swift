@@ -18,19 +18,34 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
     private var onAction: (ExtendedCBORWebToken) -> Void
     private var onFavorite: (String) -> Void
     private var repository: VaccinationRepositoryProtocol
+    private var boosterLogic: BoosterLogic
     private var certificate: DigitalGreenCertificate {
         token.vaccinationCertificate.hcert.dgc
+    }
+    // Show notification to the user if he is qualified for a booster vaccination
+    private var showNotification: Bool {
+        guard let boosterCandidate = boosterLogic.checkCertificates([token]) else { return false }
+        return boosterCandidate.state == .new
     }
 
     // MARK: - Lifecycle
 
-    init(token: ExtendedCBORWebToken, isFavorite: Bool, showFavorite: Bool, onAction: @escaping (ExtendedCBORWebToken) -> Void, onFavorite: @escaping (String) -> Void, repository: VaccinationRepositoryProtocol) {
+    init(
+        token: ExtendedCBORWebToken,
+        isFavorite: Bool,
+        showFavorite: Bool,
+        onAction: @escaping (ExtendedCBORWebToken) -> Void,
+        onFavorite: @escaping (String) -> Void,
+        repository: VaccinationRepositoryProtocol,
+        boosterLogic: BoosterLogic
+    ) {
         self.token = token
         certificateIsFavorite = isFavorite
         self.showFavorite = showFavorite
         self.onAction = onAction
         self.onFavorite = onFavorite
         self.repository = repository
+        self.boosterLogic = boosterLogic
     }
 
     // MARK: - Internal Properties
@@ -90,7 +105,7 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
             return DateUtils.displayDateTimeFormatter.string(from: t.sc)
         }
         if let v = certificate.v?.first {
-            if v.fullImmunizationValid, token.notificationState == .new {
+            if v.fullImmunizationValid, showNotification {
                 return "vaccination_start_screen_qrcode_booster_vaccination_note_subtitle".localized
             } else if v.fullImmunizationValid {
                 return "vaccination_start_screen_qrcode_complete_protection_subtitle".localized
@@ -116,7 +131,7 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
         if certificate.t != nil {
             return UIImage.iconTest.withRenderingMode(.alwaysTemplate)
         }
-        if isFullImmunization, token.notificationState == .new {
+        if isFullImmunization, showNotification {
             return UIImage.statusFullNotfication.withRenderingMode(.alwaysOriginal) // !!!
         } else if isFullImmunization {
             return UIImage.statusFullDetail.withRenderingMode(.alwaysTemplate)

@@ -36,4 +36,12 @@ class MockPersistence: Persistence {
         }
         store.removeValue(forKey: key)
     }
+
+    var deleteAllError: Error?
+    func deleteAll() throws {
+        if let error = deleteAllError {
+            throw error
+        }
+        store = [:]
+    }
 }

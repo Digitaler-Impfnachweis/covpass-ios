@@ -30,6 +30,7 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
     private let service: APIServiceProtocol
     private let keychain: Persistence
     private let userDefaults: Persistence
+    private let boosterLogic: BoosterLogicProtocol
     private let publicKeyURL: URL
     private let initialDataURL: URL
     private let entityBlacklist = [
@@ -53,10 +54,11 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
         return nil
     }
 
-    public init(service: APIServiceProtocol, keychain: Persistence, userDefaults: Persistence, publicKeyURL: URL, initialDataURL: URL) {
+    public init(service: APIServiceProtocol, keychain: Persistence, userDefaults: Persistence, boosterLogic: BoosterLogicProtocol, publicKeyURL: URL, initialDataURL: URL) {
         self.service = service
         self.keychain = keychain
         self.userDefaults = userDefaults
+        self.boosterLogic = boosterLogic
         self.publicKeyURL = publicKeyURL
         self.initialDataURL = initialDataURL
     }
@@ -210,6 +212,9 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
         .then(on: .global()) { list -> Promise<CertificateList> in
             saveCertificateList(list)
         }
+        .map(on: .global()) { _ in
+            boosterLogic.deleteBoosterCandidate(forCertificate: certificate)
+        }
         .asVoid()
     }
 
@@ -308,6 +313,7 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
 
     // MARK: - Private Helpers
 
+    /// Parse certificate payload, verify signature, check expiration, check extended key usage, and validate blacklisted entities
     func parseCertificate(_ cosePayload: CoseSign1Message) throws -> CBORWebToken {
         guard let trustList = self.trustList else {
             throw ApplicationError.general("Missing TrustList")

@@ -23,6 +23,7 @@ class CertificateDetailViewController: UIViewController {
     @IBOutlet var immunizationView: ParagraphView!
     @IBOutlet var immunizationButtonContainerView: UIStackView!
     @IBOutlet var immunizationButton: MainButton!
+    @IBOutlet var hintView: HintView!
     @IBOutlet var personalDataHeadline: PlainLabel!
     @IBOutlet var allCertificatesHeadline: PlainLabel!
     @IBOutlet var nameView: ParagraphView!
@@ -32,23 +33,6 @@ class CertificateDetailViewController: UIViewController {
     // MARK: - Properties
 
     private(set) var viewModel: CertificateDetailViewModelProtocol
-
-    private lazy var hintView: HintView = {
-        let view = HintView()
-
-        view.iconView.image = nil
-
-        view.iconLabel.text = viewModel.boosterNotificationHighlightText // unique element, styled in xib
-        view.iconStackView.removeArrangedSubview(view.iconView)
-
-        view.containerView.backgroundColor = .neutralWhite
-        view.containerView?.layer.borderColor = UIColor.neutralWhite.cgColor
-        return view
-    }()
-
-    private lazy var tapRecognizer: UITapGestureRecognizer = {
-        UITapGestureRecognizer(target: self, action: #selector(onLinkTap(_:)))
-    }()
 
     // MARK: - Lifecycle
 
@@ -65,13 +49,7 @@ class CertificateDetailViewController: UIViewController {
         viewModel.delegate = self
         setupView()
         viewModel.refresh()
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        // set status to 'shown'
-        viewModel.boosterNotificationState = .existing
-
-        super.viewDidAppear(animated)
+        viewModel.updateBoosterCandiate()
     }
 
     // MARK: - Methods
@@ -127,26 +105,16 @@ class CertificateDetailViewController: UIViewController {
     }
 
     private func setupBoosterHintView() {
-        if viewModel.boosterNotificationState != .none {
-            if !stackView.arrangedSubviews.contains(hintView) {
-                let index = stackView.arrangedSubviews.firstIndex(of: immunizationButtonContainerView)
-                stackView.insertArrangedSubview(hintView, at: index?.advanced(by: 1) ?? 2) // `2` is according to current design
-            }
-            hintView.titleLabel.attributedText = viewModel.boosterNotificationTitle.styledAs(.header_3)
-            hintView.subTitleLabel.attributedText = viewModel.boosterNotificationSubtitle.styledAs(.subheader_2)
-            hintView.bodyLabel.attributedText = viewModel.boosterNotificationBody.styledAs(.body)
+        hintView.isHidden = !viewModel.showBoosterNotification
 
-            #if DEBUG
-            hintView.bodyLabel.isUserInteractionEnabled = true
-            hintView.bodyLabel.addGestureRecognizer(tapRecognizer)
-            #endif
+        hintView.iconView.image = nil
+        hintView.iconLabel.text = viewModel.boosterNotificationHighlightText
+        hintView.iconLabel.isHidden = !viewModel.showNewBoosterNotification
+        hintView.containerView.backgroundColor = .neutralWhite
+        hintView.containerView?.layer.borderColor = UIColor.neutralWhite.cgColor
 
-            // 'new' icon
-            hintView.iconLabel.text = viewModel.boosterNotificationHighlightText // unique element, styled in xib
-            hintView.iconLabel.isHidden = viewModel.boosterNotificationState != .new
-        } else if stackView.arrangedSubviews.contains(hintView) {
-            stackView.removeArrangedSubview(hintView)
-        }
+        hintView.titleLabel.attributedText = viewModel.boosterNotificationTitle.styledAs(.header_3)
+        hintView.bodyLabel.attributedText = viewModel.boosterNotificationBody.styledAs(.body)
     }
 
     private func setupPersonalData() {
@@ -183,13 +151,6 @@ class CertificateDetailViewController: UIViewController {
 
     @objc private func toggleFavorite() {
         viewModel.toggleFavorite()
-    }
-
-    @objc private func onLinkTap(_ sender: Any) {
-        let url = viewModel.boosterFAQLink
-        if UIApplication.shared.canOpenURL(url) {
-            UIApplication.shared.open(url, options: [:], completionHandler: nil)
-        }
     }
 }
 

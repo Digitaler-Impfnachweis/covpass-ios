@@ -17,7 +17,7 @@ final class BoosterNotificationViewModel {
     }
 
     var actionButtonTitle: String {
-        "dialogue_add_booster_vaccination_action_button_title".localized
+        "dialog_booster_vaccination_notification_button".localized
     }
 
     var disclaimerText: String {
