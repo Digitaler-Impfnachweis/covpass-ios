@@ -179,6 +179,9 @@ public extension UIImage {
 
     @ImageLoader(name: "status_full_notification")
     private(set) static var statusFullNotfication
+
+    @ImageLoader(name: "status_partial_notification")
+    private(set) static var statusPartialNotification
 }
 
 @propertyWrapper
