@@ -48,20 +48,11 @@ public class Vaccination: Codable {
         return validDate
     }
 
-    /// Date until the full immunization is valid
-    public var fullImmunizationValidUntil: Date? {
-        if !fullImmunization { return nil }
-        guard let validDate = Calendar.current.date(byAdding: .day, value: 365, to: dt) else {
-            return nil
-        }
-        return validDate
-    }
-
     /// True if full immunization is valid
     public var fullImmunizationValid: Bool {
-        guard let dateValidFrom = fullImmunizationValidFrom, let dateValidUntil = fullImmunizationValidUntil else { return false }
+        guard let dateValidFrom = fullImmunizationValidFrom else { return false }
         if isBoosted { return true }
-        return Date() > dateValidFrom && Date() <= dateValidUntil
+        return Date() > dateValidFrom
     }
 
     enum CodingKeys: String, CodingKey {
