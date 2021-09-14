@@ -315,7 +315,7 @@ public struct DCCCertLogic: DCCCertLogicProtocol {
                 let data = try JSONEncoder().encode(rules)
                 try keychain.store(KeychainPersistence.boosterRulesKey, value: data)
             }
-            .done {
+            .done(on: .global()) {
                 seal.fulfill_()
             }
             .catch { error in
