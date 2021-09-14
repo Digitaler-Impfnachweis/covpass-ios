@@ -304,15 +304,26 @@ public struct DCCCertLogic: DCCCertLogicProtocol {
     }
 
     private func updateBoosterRules() -> Promise<Void> {
-        return firstly {
-            service.loadBoosterRules()
-        }
-        .then(on: .global()) { (remoteRules: [RuleSimple]) throws -> Promise<[Rule]> in
-            updateCountryBoosterRules(localRules: boosterRules, remoteRules: remoteRules)
-        }
-        .map(on: .global()) { rules in
-            let data = try JSONEncoder().encode(rules)
-            try keychain.store(KeychainPersistence.boosterRulesKey, value: data)
+        return Promise { seal in
+            firstly {
+                service.loadBoosterRules()
+            }
+            .then(on: .global()) { (remoteRules: [RuleSimple]) throws -> Promise<[Rule]> in
+                updateCountryBoosterRules(localRules: boosterRules, remoteRules: remoteRules)
+            }
+            .map(on: .global()) { rules in
+                let data = try JSONEncoder().encode(rules)
+                try keychain.store(KeychainPersistence.boosterRulesKey, value: data)
+            }
+            .done {
+                seal.fulfill_()
+            }
+            .catch { error in
+                // We will not handle this at the moment because this will most likely fail until the service is available in production
+                // therefore we just skip any error and continue with the rule and valueset update
+                print(error.localizedDescription)
+                seal.fulfill_()
+            }
         }
         .then(on: .global()) {
             updateValueSets()

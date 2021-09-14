@@ -32,7 +32,7 @@ public struct APIService: APIServiceProtocol {
             request.httpMethod = "GET"
 
             let session = URLSession(configuration: URLSessionConfiguration.ephemeral,
-                                     delegate: nil,//self.sessionDelegate,
+                                     delegate: self.sessionDelegate,
                                      delegateQueue: nil)
 
             session.dataTask(with: request) { data, response, error in
