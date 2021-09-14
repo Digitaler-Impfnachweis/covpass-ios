@@ -17,7 +17,7 @@ public class HintView: XibView {
 
     @IBOutlet public var titleLabel: UILabel!
     @IBOutlet public var subTitleLabel: UILabel!
-    @IBOutlet public var bodyLabel: UILabel!
+    @IBOutlet public var bodyLabel: LinkLabel!
     @IBOutlet public var containerView: UIView!
 
     @IBOutlet public var subTitleConstraint: NSLayoutConstraint!
@@ -37,7 +37,7 @@ public class HintView: XibView {
         // remove placeholders
         titleLabel.text = nil
         subTitleLabel.text = nil
-        bodyLabel.text = nil
+        bodyLabel.attributedText = nil
 
         iconLabel.text = nil
         iconLabel.isHidden = true

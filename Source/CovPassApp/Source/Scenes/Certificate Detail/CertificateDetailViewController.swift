@@ -115,6 +115,9 @@ class CertificateDetailViewController: UIViewController {
 
         hintView.titleLabel.attributedText = viewModel.boosterNotificationTitle.styledAs(.header_3)
         hintView.bodyLabel.attributedText = viewModel.boosterNotificationBody.styledAs(.body)
+        hintView.bodyLabel.linkCallback = { [weak self] url in
+            self?.viewModel.router.showWebview(url)
+        }
     }
 
     private func setupPersonalData() {

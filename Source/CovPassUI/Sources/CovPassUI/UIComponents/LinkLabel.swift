@@ -10,6 +10,7 @@ import UIKit
 
 public class LinkLabel: XibView {
     @IBOutlet public var textableView: UITextView!
+    public var linkCallback: ((URL) -> Void)?
 
     override public func initView() {
         super.initView()
@@ -33,7 +34,11 @@ public class LinkLabel: XibView {
 
 extension LinkLabel: UITextViewDelegate {
     public func textView(_: UITextView, shouldInteractWith URL: URL, in _: NSRange, interaction _: UITextItemInteraction) -> Bool {
-        UIApplication.shared.open(URL)
+        if let callback = linkCallback {
+            callback(URL)
+        } else {
+            UIApplication.shared.open(URL)
+        }
         return false
     }
 }

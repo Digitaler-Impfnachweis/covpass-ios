@@ -34,13 +34,14 @@ public extension NSMutableAttributedString {
 
     @discardableResult
     func replaceLink() -> NSMutableAttributedString {
-        let regex = try! NSRegularExpression(pattern: "#.*::(.*)#", options: NSRegularExpression.Options.caseInsensitive)
+        let regex = try! NSRegularExpression(pattern: "#(.*)::(.*)#", options: NSRegularExpression.Options.caseInsensitive)
         let range = NSMakeRange(0, string.count)
         if let match = regex.firstMatch(in: string, options: .withTransparentBounds, range: range),
-           match.numberOfRanges == 2,
-           let subRange = Range(match.range(at: 1), in: string)
+           match.numberOfRanges == 3,
+           let subRange = Range(match.range(at: 1), in: string),
+           let subRangeLink = Range(match.range(at: 2), in: string)
         {
-            let subString = string[subRange.lowerBound ..< subRange.upperBound]
+            let subString = string[subRangeLink.lowerBound ..< subRangeLink.upperBound]
             replaceCharacters(in: match.range(at: 0), with: String(string[subRange.lowerBound ..< subRange.upperBound]))
             addAttribute(.link, value: subString, range: NSMakeRange(match.range(at: 0).lowerBound, match.range(at: 1).length))
         }

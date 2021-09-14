@@ -13,4 +13,5 @@ import UIKit
 
 protocol CertificateDetailRouterProtocol: DialogRouterProtocol {
     func showDetail(for certificate: ExtendedCBORWebToken) -> Promise<CertificateDetailSceneResult>
+    func showWebview(_ url: URL)
 }

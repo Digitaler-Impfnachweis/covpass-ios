@@ -10,6 +10,7 @@ import CovPassUI
 import UIKit
 
 protocol CertificateDetailViewModelProtocol {
+    var router: CertificateDetailRouterProtocol { get set }
     var delegate: ViewModelDelegate? { get set }
     var favoriteIcon: UIImage? { get }
     var immunizationButton: String { get }

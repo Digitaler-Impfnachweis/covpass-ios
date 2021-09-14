@@ -32,4 +32,8 @@ class CertificateDetailRouter: CertificateDetailRouterProtocol, DialogRouterProt
             )
         )
     }
+
+    func showWebview(_ url: URL) {
+        sceneCoordinator.present(WebviewSceneFactory(title: "app_information_title_faq".localized, url: url, closeButtonShown: true))
+    }
 }

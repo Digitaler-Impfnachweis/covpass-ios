@@ -51,6 +51,10 @@
 
 "vaccination_fourth_onboarding_page_message" = "Detailed information about this data processing is available in the privacy notice:";
 
+"vaccination_fourth_onboarding_page_message_for_us_citizens_title" = "Terms of Use for US citizens";
+
+"vaccination_fourth_onboarding_page_message_for_us_citizens_copy" = "If you are a US citizen, these Terms of Use apply to the App:";
+
 "vaccination_fourth_onboarding_page_button_title" = "OK";
 
 "vaccination_privacy_policy_page_button_title" = "Close";
@@ -418,6 +422,8 @@
 "vaccination_certificate_overview_booster_vaccination_notification_title" = "Current vaccination status";
 
 "vaccination_certificate_overview_booster_vaccination_notification_message" = "%@ (Rule ID: %@)";
+
+"vaccination_certificate_overview_faqlink" = "Please find more information in our #Frequently Asked Questions::https://www.digitaler-impfnachweis-app.de/en/faq#.";
 
 "test_certificate_overview_title" = "Negative rapid antigen test from %@";
 

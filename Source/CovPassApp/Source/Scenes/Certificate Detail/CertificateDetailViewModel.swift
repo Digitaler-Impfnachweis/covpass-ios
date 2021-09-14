@@ -174,7 +174,7 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
         guard let rule = boosterCandidate?.validationRules.first,
               let description = rule.description.first(where: { $0.lang.lowercased() == Locale.current.languageCode })?.desc ?? rule.description.first?.desc
         else { return "" }
-        return String(format: "vaccination_certificate_overview_booster_vaccination_notification_message".localized, description, rule.identifier)
+        return "\(String(format: "vaccination_certificate_overview_booster_vaccination_notification_message".localized, description, rule.identifier))\n\n\("vaccination_certificate_overview_faqlink".localized)"
     }
 
     var boosterNotificationHighlightText: String {

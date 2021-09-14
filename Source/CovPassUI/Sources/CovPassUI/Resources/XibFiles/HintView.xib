@@ -10,13 +10,13 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HintView" customModule="CovPassUI">
             <connections>
-                <outlet property="bodyLabel" destination="pB5-YI-Mnc" id="2ve-xc-0yr"/>
+                <outlet property="bodyLabel" destination="0cp-xi-c1o" id="ojD-d2-K2T"/>
                 <outlet property="containerView" destination="yCv-mX-bar" id="8ag-o0-Jo6"/>
                 <outlet property="iconLabel" destination="thL-pc-NaT" id="TyN-YG-3rC"/>
                 <outlet property="iconStackView" destination="mt4-wn-ryh" id="5ze-eh-MKL"/>
                 <outlet property="iconView" destination="FzW-WO-SYV" id="fJ1-iR-3hR"/>
-                <outlet property="subTitleConstraint" destination="6TF-nC-xrY" id="nNG-m1-hyb"/>
-                <outlet property="subTitleLabel" destination="tn2-MS-2e2" id="POJ-Om-kyw"/>
+                <outlet property="subTitleConstraint" destination="ma1-zb-lGN" id="RUR-sf-jTu"/>
+                <outlet property="subTitleLabel" destination="tn2-MS-2e2" id="SCo-5x-BkV"/>
                 <outlet property="titleLabel" destination="Shp-hj-0SD" id="m8f-g0-wHP"/>
             </connections>
         </placeholder>
@@ -64,33 +64,31 @@
                                 </imageView>
                             </subviews>
                         </stackView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Body" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pB5-YI-Mnc">
-                            <rect key="frame" x="15" y="68" width="297" height="131"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <nil key="textColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="752" text="SubTitle" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tn2-MS-2e2">
                             <rect key="frame" x="15" y="35.5" width="61.5" height="20.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0cp-xi-c1o" customClass="LinkLabel" customModule="CovPassUI">
+                            <rect key="frame" x="11" y="64" width="305" height="135"/>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        </view>
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
-                        <constraint firstItem="pB5-YI-Mnc" firstAttribute="top" secondItem="tn2-MS-2e2" secondAttribute="bottom" constant="12" id="6TF-nC-xrY"/>
+                        <constraint firstItem="0cp-xi-c1o" firstAttribute="top" secondItem="Shp-hj-0SD" secondAttribute="bottom" priority="750" constant="12" id="12T-Uf-zGP"/>
+                        <constraint firstItem="0cp-xi-c1o" firstAttribute="leading" secondItem="Shp-hj-0SD" secondAttribute="leading" constant="-4" id="2DB-kQ-jwb"/>
+                        <constraint firstItem="0cp-xi-c1o" firstAttribute="trailing" secondItem="FzW-WO-SYV" secondAttribute="trailing" constant="4" id="67w-Wp-0Iq"/>
                         <constraint firstItem="tn2-MS-2e2" firstAttribute="top" secondItem="Shp-hj-0SD" secondAttribute="bottom" id="EUf-JW-LfA"/>
                         <constraint firstItem="Shp-hj-0SD" firstAttribute="leading" secondItem="yCv-mX-bar" secondAttribute="leading" constant="15" id="FYb-Bn-70q"/>
-                        <constraint firstAttribute="bottom" secondItem="pB5-YI-Mnc" secondAttribute="bottom" constant="15" id="PZT-T7-T5h"/>
                         <constraint firstItem="mt4-wn-ryh" firstAttribute="firstBaseline" secondItem="Shp-hj-0SD" secondAttribute="firstBaseline" id="QMq-p3-tdl"/>
                         <constraint firstItem="tn2-MS-2e2" firstAttribute="leading" secondItem="Shp-hj-0SD" secondAttribute="leading" id="Y3v-qb-29i"/>
-                        <constraint firstItem="mt4-wn-ryh" firstAttribute="trailing" secondItem="pB5-YI-Mnc" secondAttribute="trailing" id="ewG-DK-Xgx"/>
+                        <constraint firstAttribute="bottom" secondItem="0cp-xi-c1o" secondAttribute="bottom" constant="15" id="bne-Fa-9QG"/>
                         <constraint firstItem="mt4-wn-ryh" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Shp-hj-0SD" secondAttribute="trailing" constant="4" id="hNL-Sw-QyG"/>
                         <constraint firstItem="Shp-hj-0SD" firstAttribute="top" secondItem="yCv-mX-bar" secondAttribute="top" constant="15" id="i5a-qC-ndj"/>
-                        <constraint firstItem="pB5-YI-Mnc" firstAttribute="top" secondItem="Shp-hj-0SD" secondAttribute="bottom" priority="750" constant="12" id="jiB-Eo-vCo"/>
+                        <constraint firstItem="0cp-xi-c1o" firstAttribute="top" secondItem="tn2-MS-2e2" secondAttribute="bottom" constant="8" symbolic="YES" id="ma1-zb-lGN"/>
                         <constraint firstAttribute="trailing" secondItem="mt4-wn-ryh" secondAttribute="trailing" constant="15" id="mas-y0-N06"/>
-                        <constraint firstItem="pB5-YI-Mnc" firstAttribute="leading" secondItem="Shp-hj-0SD" secondAttribute="leading" id="x4Z-BD-QYJ"/>
                         <constraint firstItem="tn2-MS-2e2" firstAttribute="trailing" secondItem="Shp-hj-0SD" secondAttribute="trailing" id="yvd-rS-jqu"/>
                     </constraints>
                 </view>
@@ -107,6 +105,11 @@
             <point key="canvasLocation" x="-231.15942028985509" y="-114.50892857142857"/>
         </view>
     </objects>
+    <designables>
+        <designable name="thL-pc-NaT">
+            <size key="intrinsicContentSize" width="37" height="17"/>
+        </designable>
+    </designables>
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
