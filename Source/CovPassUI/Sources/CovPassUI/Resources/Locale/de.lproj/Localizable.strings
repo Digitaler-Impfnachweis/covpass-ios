@@ -72,3 +72,5 @@
 "accessibility_button_label_torch_on" = "Taschenlampe anschalten";
 
 "accessibility_button_label_torch_off" = "Taschenlampe ausschalten";
+
+"button_back" = "Zurück";

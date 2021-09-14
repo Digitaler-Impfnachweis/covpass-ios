@@ -105,7 +105,7 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
             return DateUtils.displayDateTimeFormatter.string(from: t.sc)
         }
         if let v = certificate.v?.first {
-            if v.fullImmunizationValid, showNotification {
+            if showNotification {
                 return "vaccination_start_screen_qrcode_booster_vaccination_note_subtitle".localized
             } else if v.fullImmunizationValid {
                 return "vaccination_start_screen_qrcode_complete_protection_subtitle".localized
@@ -131,8 +131,8 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
         if certificate.t != nil {
             return UIImage.iconTest.withRenderingMode(.alwaysTemplate)
         }
-        if isFullImmunization, showNotification {
-            return UIImage.statusFullNotfication.withRenderingMode(.alwaysOriginal) // !!!
+        if showNotification {
+            return isFullImmunization ? UIImage.statusFullNotfication.withRenderingMode(.alwaysOriginal) : UIImage.statusPartialNotification.withRenderingMode(.alwaysOriginal) // !!!
         } else if isFullImmunization {
             return UIImage.statusFullDetail.withRenderingMode(.alwaysTemplate)
         } else {

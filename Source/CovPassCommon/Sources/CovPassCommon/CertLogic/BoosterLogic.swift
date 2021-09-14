@@ -75,7 +75,7 @@ public struct BoosterLogic: BoosterLogicProtocol {
         firstly {
             Promise { seal in
                 if let lastUpdated = try userDefaults.fetch(UserDefaults.keyLastCheckedBooster) as? Date,
-                   let date = Calendar.current.date(byAdding: .day, value: 1, to: lastUpdated),
+                   let date = Calendar.current.date(byAdding: .hour, value: 1, to: lastUpdated),
                    Date() < date
                 {
                     // Only check once a day

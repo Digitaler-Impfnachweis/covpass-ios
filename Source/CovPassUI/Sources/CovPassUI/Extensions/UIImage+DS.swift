@@ -185,6 +185,9 @@ public extension UIImage {
 
     @ImageLoader(name: "flash-off")
     private(set) static var flashOff
+
+    @ImageLoader(name: "status_partial_notification")
+    private(set) static var statusPartialNotification
 }
 
 @propertyWrapper
