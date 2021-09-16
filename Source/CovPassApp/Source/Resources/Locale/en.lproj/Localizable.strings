@@ -84,6 +84,8 @@
 
 "vaccination_start_screen_title" = "EU Digital COVID Certificates";
 
+"accessibility_vaccination_start_screen_title" = "EU Digital COVID Certificates. Sensible health data will follow. Please take care that nobody listens to or reads on your smartphone.";
+
 "vaccination_start_screen_note_title" = "Add a certificate";
 
 "vaccination_start_screen_note_message" = "You do not have any EU Digital COVID Certificate saved at the moment. Tap the plus symbol to add a digital certificate.";
@@ -137,9 +139,11 @@
 
 "accessibility_certificate_add_dialog_camera_access_label_close" = "Close";
 
+"accessibility_certificate_add_dialog_camera_announce" = "Camera has been opened";
+
 "accessibility_certificate_scan_mode_label_cancel" = "Cancel";
 
-"error_camera_access_title" = "The CovPass app wants to access your camera.";
+"error_camera_access_title" = "The CovPass App wants to access your camera.";
 
 "error_camera_access_message" = "Allow access to scan QR codes.";
 
@@ -171,7 +175,11 @@
 
 "accessibility_certificate_check_validity_label_display_certificate" = "Display certificate";
 
-"certificate_check_validity_title" = "Check validity";
+"certificate_check_validity_title" = "Check validity for travelling within the EU";
+
+"accessibility_certificate_check_validity_selection_country_selected" = "%s, selected";
+
+"accessibility_certificate_check_validity_selection_country_unselected" = "%s, selectable";
 
 "certificate_check_validity_message" = "Check beforehand if your certificates are valid in different countries. This tool checks them against the travel regulations applicable in your chosen destination country.";
 
@@ -180,6 +188,8 @@
 "accessibility_certificate_check_validity_selection_country_label_close" = "Close";
 
 "certificate_check_validity_selection_country_title" = "Choose destination";
+
+"accessibility_certificate_check_validity_selection_country" = "Country: %s";
 
 "IT" = "Italy";
 
@@ -251,6 +261,8 @@
 
 "certificate_check_validity_selection_date" = "Date";
 
+"accessibility_certificate_check_validity_selection_date" = "Date: %s";
+
 "accessibility_certificate_check_validity_selection_date_label_close" = "Close";
 
 "certificate_check_validity_selection_date_title" = "Select Date";
@@ -263,7 +275,11 @@
 
 "certificate_check_validity_selection_time_action_button" = "OK";
 
-"certificate_check_validity_loading" = "Certificates are being checked";
+"certificate_check_validity_loading" = "Certificates are being validated";
+
+"certificate_check_invalidity_error_title" = "Please check the validity of your certificates.";
+
+"certificate_check_invalidity_error_text" = "One ore multiple certificates are expired, or will expire soon.";
 
 "certificate_check_validity_no_certificate_saved_title" = "You have not saved any certificates yet";
 
@@ -279,11 +295,13 @@
 
 "certificate_check_validity_result_not_valid" = "Invalid in this country";
 
-"certificate_check_validity_result_not_testable" = "Full check not possible";
+"certificate_check_validity_result_not_testable" = "Not possible to validate";
 
 "certificate_check_validity_note" = "Please be aware that travel regulations can change. You should check your certificates at least 48 hours before you travel. Different regulations or restrictions might apply in some regions or when you return. You might also need additional documents to travel to a different country. \n\nYou can find more information in the frequently asked questions and at #https://reopen.europa.eu::https://reopen.europa.eu#.";
 
 "certificate_check_validity_detail_view_vaccination_result_title" = "EU Digital COVID Certificate of Vaccination";
+
+"accessbility_certificate_check_validity_detail_view_vaccination_result_title" = "EU Digital COVID Vaccination Certificates. Sensible health data will follow. Please take care that nobody listens to or reads on your Smartphone.";
 
 "certificate_check_validity_detail_view_vaccination_result_headline_data" = "Verified certificate data:";
 
@@ -293,7 +311,9 @@
 
 "certificate_check_validity_detail_view_vaccination_result_note_en" = "A certificate of vaccination is valid proof for travel within the EU. The EU’s member countries have different travel restrictions. You can find more information in the Frequently Asked Questions. Before travelling, please check the applicable public health measures and related restrictions applied at the point of destination.\n\nPlease inform yourself about the public-health measures and corresponding restrictions at your travel destination before you travel. You can find information about the travel restrictions applicable in each EU country at #https://reopen.europa.eu::https://reopen.europa.eu#.";
 
-"certificate_check_validity_detail_view_test_result_title" = "EU Digital COVID Certificate of Test";
+"certificate_check_validity_detail_view_test_result_title" = "EU Digital COVID Test Certificate";
+
+"accessibility_certificate_check_validity_detail_view_test_result_title" = "EU Digital COVID Test Certificates. Sensible health data will follow. Please take care that nobody listens to or reads on your smartphone.";
 
 "certificate_check_validity_detail_view_test_result_headline_data" = "Verified certificate data:";
 
@@ -305,6 +325,8 @@
 
 "certificate_check_validity_detail_view_recovery_result_title" = "EU Digital COVID Certificate of Recovery";
 
+"accessibility_certificate_check_validity_detail_view_recovery_result_title" = "EU Digital COVID Certificate of Recovery. Sensible health data will follow. Please take care that nobody listens to or reads on your Smartphone.";
+
 "certificate_check_validity_detail_view_recovery_result_headline_data" = "Verified certificate data:";
 
 "certificate_check_validity_detail_view_recovery_result_button" = "Display QR code";
@@ -313,9 +335,9 @@
 
 "certificate_check_validity_detail_view_recovery_result_note_en" = "A certificate of recovery is valid proof for travel within the EU. The EU’s member countries have different travel restrictions. You can find more information in the Frequently Asked Questions. Before travelling, please check the applicable public health measures and related restrictions applied at the point of destination.\n\nPlease inform yourself about the public-health measures and corresponding restrictions at your travel destination before you travel. You can find information about the travel restrictions applicable in each EU country at #https://reopen.europa.eu::https://reopen.europa.eu#.";
 
-"certificate_check_validity_detail_view_result_no_rules_title" = "This certificate cannot be checked";
+"certificate_check_validity_detail_view_result_no_rules_title" = "Certificate cannot be validated";
 
-"certificate_check_validity_detail_view_result_no_rules_message" = "For the selected country and date, there are currently no entry rules available for checking in the app.\n\nPlease check at #https://reopen.europa.eu::https://reopen.europa.eu# whether the certificate is valid for entry into the selected country.";
+"certificate_check_validity_detail_view_result_no_rules_message" = "For the selected country and date, there are currently no entry rules available to check for in the App. \n\nPlease check at #https://reopen.europa.eu::https://reopen.europa.eu# whether the certificate is valid for entry into the selected country.";
 
 "certificate_check_validity_detail_view_result_valid_title" = "This certificate is valid on your travel date";
 
@@ -323,9 +345,9 @@
 
 "certificate_check_validity_detail_view_result_valid_info" = "%d rules of the destination country were successfully checked.";
 
-"certificate_check_validity_detail_view_result_valid_info_no_rules" = "There are currently no entry rules for this certificate type for the selected country and date.";
+"certificate_check_validity_detail_view_result_valid_info_no_rules" = "There are currently no entry rules available for this certificate type and the selected country and date. Please note the following:";
 
-"certificate_check_validity_detail_view_result_not_testable_title" = "This certificate cannot be fully verified";
+"certificate_check_validity_detail_view_result_not_testable_title" = "This certificate cannot be completely verified.";
 
 "certificate_check_validity_detail_view_result_not_testable_first_message" = "For %@ on %@";
 
@@ -461,11 +483,19 @@
 
 "certificates_overview_personal_data_name" = "Name, Vorname / Name, first name";
 
+"accessibility_certificates_overview_personal_data_name" = "Name";
+
 "certificates_overview_personal_data_standardized_name" = "Standardisierter Name, Vorname / Standardized name, first name";
+
+"accessibility_certificates_overview_personal_data_standardized_name" = "Standardized name";
 
 "certificates_overview_personal_data_date_of_birth" = "Geburtsdatum / Date of birth (YYYY-MM-DD)";
 
+"accessibility_certificates_overview_personal_data_date_of_birth" = "Date of birth (Year-Month-Day)";
+
 "certificates_overview_all_certificates_title" = "EU certificates";
+
+"accessibility_certificates_overview_all_certificates_title" = "Check vaccination status. Sensible health data will follow. Please take care that nobody can listen to or read on your smartphone.";
 
 "certificates_overview_currently_uses_certificate_note" = "Certificate currently in use";
 
@@ -521,35 +551,61 @@
 
 "vaccination_certificate_detail_view_vaccination_headline" = "EU Digital COVID Certificate of Vaccination";
 
-"vaccination_certificate_detail_view_booster_vaccination_headline" = "EU Digital COVID Certificate of Vaccination";
+"accessibility_vaccination_certificate_detail_view_booster_vaccination_headline" = "EU Digital COVID Certificate of Vaccination. Sensible health data will follow. Please take care that nobody listens to or reads on your smartphone.";
 
 "vaccination_certificate_detail_view_vaccination_note" = "This certificate is for a vaccine that only requires one dose or a vaccine for people who have recovered from an infection and only need one dose.";
 
 "vaccination_certificate_detail_view_data_name" = "Name, Vorname / Name, first name";
 
+"accessibility_vaccination_certificate_detail_view_data_name" = "Name";
+
 "vaccination_certificate_detail_view_data_name_standard" = "Standardisierter Name, Vorname / Standardized name, first name";
+
+"accessibility_vaccination_certificate_detail_view_data_name_standard" = "Standardized name";
 
 "vaccination_certificate_detail_view_data_date_of_birth" = "Geburtsdatum / Date of birth (YYYY-MM-DD)";
 
+"accessibility_vaccination_certificate_detail_view_data_date_of_birth" = "Date of birth (Year-Month-Day)";
+
 "vaccination_certificate_detail_view_data_disease" = "Zielkrankheit oder -erreger / Disease or pathogen";
+
+"accessibility_vaccination_certificate_detail_view_data_disease" = "Disease or pathogen";
 
 "vaccination_certificate_detail_view_data_vaccine" = "Impfstoff / Vaccine";
 
+"accessibility_vaccination_certificate_detail_view_data_vaccine" = "Vaccine";
+
 "vaccination_certificate_detail_view_data_vaccine_type" = "Art des Impfstoffs / Vaccine Type";
+
+"accessibility_vaccination_certificate_detail_view_data_vaccine_type" = "Vaccine Type";
 
 "vaccination_certificate_detail_view_data_vaccine_manufactur" = "Hersteller / Manufacturer";
 
+"accessibility_vaccination_certificate_detail_view_data_vaccine_manufacturer" = "Manufacturer";
+
 "vaccination_certificate_detail_view_data_vaccine_number" = "Nummer der Impfung / Dose number";
+
+"accessibility_vaccination_certificate_detail_view_data_vaccine_number" = "Dose number";
 
 "vaccination_certificate_detail_view_data_vaccine_date_" = "Datum der Impfung / Date of vaccination (YYYY-MM-DD)";
 
+"accessibility_vaccination_certificate_detail_view_data_vaccine_date_" = "Date of vaccination (Year-Month-Day)";
+
 "vaccination_certificate_detail_view_data_vaccine_country" = "Land der Impfung / Country vaccinating";
+
+"accessibility_vaccination_certificate_detail_view_data_vaccine_country" = "Country vaccinating";
 
 "vaccination_certificate_detail_view_data_vaccine_issuer" = "Zertifikataussteller / Certificate issuer";
 
+"accessibility_vaccination_certificate_detail_view_data_vaccine_issuer" = "Certificate issuer";
+
 "vaccination_certificate_detail_view_data_vaccine_identifier" = "Zertifikatkennung / Unique certificate identifier";
 
+"accessibility_vaccination_certificate_detail_view_data_vaccine_identifier" = "Unique certificate identifier";
+
 "vaccination_certificate_detail_view_data_expiry_date" = "Technical expiry date / Technical expiry date";
+
+"accessibility_vaccination_certificate_detail_view_data_expiry_date" = "Technical expiry date";
 
 "vaccination_certificate_detail_view_data_expiry_date_message" = "Valid until %@";
 
@@ -577,33 +633,63 @@
 
 "test_certificate_detail_view_headline" = "EU Digital COVID Certificate of Test";
 
+"accessibility_test_certificate_detail_view_headline" = "EU Digital COVID Test Certificate. Sensible health data will follow. Please take care that nobody listens to or reads on your smartphone.";
+
 "test_certificate_detail_view_data_name" = "Name, Vorname / Name, first name";
+
+"accessibility_test_certificate_detail_view_data_name" = "Name";
 
 "test_certificate_detail_view_data_name_standard" = "Standardisierter Name, Vorname / Standardized name, first name";
 
+"accessibility_test_certificate_detail_view_data_name_standard" = "Standardized name";
+
 "test_certificate_detail_view_data_date_of_birth" = "Geburtsdatum / Date of birth (YYYY-MM-DD)";
+
+"accessibility_test_certificate_detail_view_data_date_of_birth" = "Date of birth (Year-Month-Day)";
 
 "test_certificate_detail_view_data_disease" = "Zielkrankheit oder -erreger / Disease or pathogen";
 
+"accessibility_test_certificate_detail_view_data_disease" = "Disease or pathogen";
+
 "test_certificate_detail_view_data_test_type" = "Art des Tests / Type of test";
+
+"accessibility_test_certificate_detail_view_data_test_type" = "Type of test";
 
 "test_certificate_detail_view_data_test_name" = "Produktname / Test name";
 
+"accessibility_test_certificate_detail_view_data_test_name" = "Test name";
+
 "test_certificate_detail_view_data_test_manufactur" = "Testhersteller / Test manufacturer";
+
+"accessibility_test_certificate_detail_view_data_test_manufacturer" = "Test manufacturer";
 
 "test_certificate_detail_view_data_test_date_and_time" = "Datum und Uhrzeit der Probenahme / Date and time of sample (YYYY-MM-DD, HH:MM)";
 
+"accessibility_test_certificate_detail_view_data_test_date_and_time" = "Date and time of sample (Year-Month-Day)";
+
 "test_certificate_detail_view_data_test_results" = "Testergebnis / Test result";
+
+"accessibility_test_certificate_detail_view_data_test_results" = "Test result";
 
 "test_certificate_detail_view_data_test_centre" = "Testzentrum oder -einrichtung / Testing centre or facility";
 
+"accessibility_test_certificate_detail_view_data_test_centre" = "Testing centre or facility";
+
 "test_certificate_detail_view_data_test_country" = "Land der Testung / Country performing test";
+
+"accessibility_test_certificate_detail_view_data_test_country" = "Country performing test";
 
 "test_certificate_detail_view_data_test_issuer" = "Zertifikataussteller / Certificate issuer";
 
+"accessibility_test_certificate_detail_view_data_test_issuer" = "Certificate issuer";
+
 "test_certificate_detail_view_data_test_identifier" = "Zertifikatkennung / Unique certificate identifier";
 
+"accessibility_test_certificate_detail_view_data_test_identifier" = "Unique certificate identifier";
+
 "test_certificate_detail_view_data_expiry_date" = "Technical expiry date / Technical expiry date";
+
+"accessibility_test_certificate_detail_view_data_expiry_date" = "Technical expiry date";
 
 "test_certificate_detail_view_data_expiry_date_message" = "Valid until %@";
 
@@ -627,27 +713,51 @@
 
 "recovery_certificate_detail_view_headline" = "EU Digital COVID Certificate of Recovery";
 
+"accessibility_recovery_certificate_detail_view_headline" = "EU Digital COVID Certificate of Recovery. Sensible health data will follow. Please take care that nobody listens to or reads on your smartphone.";
+
 "recovery_certificate_detail_view_data_name" = "Name, Vorname / Name, first name";
+
+"accessibility_recovery_certificate_detail_view_data_name" = "Name";
 
 "recovery_certificate_detail_view_data_name_standard" = "Standardisierter Name, Vorname / Standardized name, first name";
 
+"accessibility_recovery_certificate_detail_view_data_name_standard" = "Standardized name";
+
 "recovery_certificate_detail_view_data_date_of_birth" = "Geburtsdatum / Date of birth (YYYY-MM-DD)";
+
+"accessibility_recovery_certificate_detail_view_data_date_of_birth" = "Date of birth (Year-Month-Day)";
 
 "recovery_certificate_detail_view_data_disease" = "Krankheit oder Erreger, von dem die Bürgerin oder der Bürger genesen ist / Disease or pathogen that this person has recovered from";
 
+"accessibility_recovery_certificate_detail_view_data_disease" = "Disease or pathogen that this person has recovered from";
+
 "recovery_certificate_detail_view_data_date_first_positive_result" = "Datum des ersten positiven Testergebnisses / Date of first positive test result (YYYY-MM-DD)";
+
+"accessibility_recovery_certificate_detail_view_data_date_first_positive_result" = "Date of first positive test result (Year-Month-Day)";
 
 "recovery_certificate_detail_view_data_country" = "Land der Testung / Country performing test";
 
+"accessibility_recovery_certificate_detail_view_data_country" = "Country performing test";
+
 "recovery_certificate_detail_view_data_issuer" = "Zertifikataussteller / Certificate issuer";
+
+"accessibility_recovery_certificate_detail_view_data_issuer" = "Certificate issuer";
 
 "recovery_certificate_detail_view_data_valid_from" = "Zertifikat gültig ab / Certificate valid from (YYYY-MM-DD)";
 
+"accessibility_recovery_certificate_detail_view_data_valid_from" = "Certificate valid from (Year-Month-Day)";
+
 "recovery_certificate_detail_view_data_valid_until" = "Zertifikat gültig bis (höchstens 180 Tage ab dem Datum des ersten positiven Testergebnisses) / Certificate valid until (maximum 180 days after the date of the first positive test result)(YYYY-MM-DD)";
+
+"accessibility_recovery_certificate_detail_view_data_valid_until" = "Certificate valid until (maximum 180 days after the date of the first positive test result)(Year-Month-Day)";
 
 "recovery_certificate_detail_view_data_identifier" = "Zertifikatkennung / Unique certificate identifier";
 
+"accessibility_recovery_certificate_detail_view_data_identifier" = "Unique certificate identifier";
+
 "recovery_certificate_detail_view_data_expiry_date" = "Technical expiry date / Technical expiry date";
+
+"accessibility_recovery_certificate_detail_view_data_expiry_date" = "Technical expiry date";
 
 "recovery_certificate_detail_view_data_expiry_date_message" = "Valid until %@";
 
@@ -699,6 +809,8 @@
 "certificate_create_pdf_list_button" = "Next";
 
 "certificate_share_pdf_title_android" = "Share via";
+
+"certificate_share_pdf_shareitem_android" = "Save PDF";
 
 
 /********** certificate delete dialog **********/
@@ -805,3 +917,12 @@
 "accessibility_app_information_open_source_label_back" = "Back";
 
 "app_information_version_label" = "Version %@";
+
+/* generic key to be used as alt text for decorative images */
+"accessibility_image_alternative_text" = "Decorative";
+
+/* generic key to be used in both apps for close buttons */
+"accessibility_popup_label_close" = "Close";
+
+/* to be used as alt text for qr codes */
+"accessibility_qr_code" = "QR code";

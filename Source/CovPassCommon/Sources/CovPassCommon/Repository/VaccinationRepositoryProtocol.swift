@@ -40,6 +40,9 @@ public protocol VaccinationRepositoryProtocol {
     /// Toogles the favorite state and returns the updated flag
     func toggleFavoriteStateForCertificateWithIdentifier(_ id: String) -> Promise<Bool>
 
+    /// Set's the flag if the expiry alert view for the token should be shown or not
+    func setExpiryAlert(shown: Bool, token: ExtendedCBORWebToken) -> Promise<Void>
+
     /// Returns true if collection contains a favorite certificate. False otherwise.
     func favoriteStateForCertificates(_ certificates: [ExtendedCBORWebToken]) -> Promise<Bool>
 

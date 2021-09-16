@@ -15,6 +15,8 @@ public struct ExtendedCBORWebToken: Codable {
     /// Raw QRCode data of the cbor web token vaccination certificate
     public var vaccinationQRCodeData: String
 
+    public var wasExpiryAlertShown: Bool?
+
     public init(vaccinationCertificate: CBORWebToken, vaccinationQRCodeData: String) {
         self.vaccinationCertificate = vaccinationCertificate
         self.vaccinationQRCodeData = vaccinationQRCodeData
