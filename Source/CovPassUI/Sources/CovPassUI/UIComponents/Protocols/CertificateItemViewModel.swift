@@ -30,4 +30,6 @@ public protocol CertificateItemViewModel {
     var statusIconAccessibilityLabel: String? { get }
 
     var activeTitle: String? { get }
+
+    var certificateItemIsSelectableAccessibilityLabel: String { get }
 }

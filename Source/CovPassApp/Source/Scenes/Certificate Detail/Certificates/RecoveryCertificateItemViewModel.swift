@@ -80,6 +80,10 @@ struct RecoveryCertificateItemViewModel: CertificateItemViewModel {
     }
     var info2AccessibilityLabel: String? { info2 }
 
+    var certificateItemIsSelectableAccessibilityLabel: String {
+        "accessibility_overview_certificates_label_display_certificate".localized
+    }
+
     var statusIcon: UIImage { .validationCheckmark }
 
     var statusIconAccessibilityLabel: String? { nil }

@@ -49,20 +49,15 @@ public class CertificateItem: XibView {
         iconView.backgroundColor = viewModel.iconBackgroundColor
 
         titleLabel.attributedText = viewModel.title.styledAs(.header_3)
-        titleLabel.accessibilityLabel = viewModel.titleAccessibilityLabel
 
         subtitleLabel.attributedText = viewModel.subtitle.styledAs(.body)
-        subtitleLabel.accessibilityLabel = viewModel.subtitleAccessibilityLabel
 
         infoLabel.attributedText = viewModel.info.styledAs(.body).colored(.onBackground70)
-        infoLabel.accessibilityLabel = viewModel.infoAccessibilityLabel
 
         info2Label.attributedText = viewModel.info2?.styledAs(.header_3).lineHeight(20)
         info2Label.isHidden = viewModel.info2 == nil
-        info2Label.accessibilityLabel = viewModel.info2AccessibilityLabel
 
         statusIcon.image = viewModel.statusIcon
-        statusIcon.accessibilityLabel = viewModel.statusIconAccessibilityLabel
         
         activeLabel.attributedText = viewModel.activeTitle?.styledAs(.body).colored(.onBackground70)
         activeView.isHidden = viewModel.activeTitle == nil
@@ -70,6 +65,23 @@ public class CertificateItem: XibView {
         chevron.tintColor = .brandAccent
 
         addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onPressItem)))
+        
+        setupAccessibility()
+    }
+
+    private func setupAccessibility() {
+        isAccessibilityElement = true
+        titleLabel.accessibilityLabel = viewModel.titleAccessibilityLabel
+        subtitleLabel.accessibilityLabel = viewModel.subtitleAccessibilityLabel
+        infoLabel.accessibilityLabel = viewModel.infoAccessibilityLabel
+        info2Label.accessibilityLabel = viewModel.info2AccessibilityLabel
+        statusIcon.accessibilityLabel = viewModel.statusIconAccessibilityLabel
+        accessibilityLabel = [viewModel.titleAccessibilityLabel,
+                                   viewModel.subtitleAccessibilityLabel,
+                                   viewModel.infoAccessibilityLabel,
+                                   viewModel.info2AccessibilityLabel,
+                                   viewModel.statusIconAccessibilityLabel,
+                                   viewModel.certificateItemIsSelectableAccessibilityLabel].compactMap({$0}).joined(separator: ", ")
     }
 
     // MARK: - Methods

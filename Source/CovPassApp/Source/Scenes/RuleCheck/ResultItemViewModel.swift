@@ -83,6 +83,10 @@ struct ResultItemViewModel: CertificateItemViewModel {
     }
     var infoAccessibilityLabel: String? { info }
 
+    var certificateItemIsSelectableAccessibilityLabel: String {
+        "accessibility_overview_certificates_label_display_certificate".localized
+    }
+
     var info2: String? { nil }
     var info2AccessibilityLabel: String? { nil }
 

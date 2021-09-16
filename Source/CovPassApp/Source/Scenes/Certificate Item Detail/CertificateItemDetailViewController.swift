@@ -69,6 +69,7 @@ class CertificateItemDetailViewController: UIViewController {
         let deleteIcon = UIBarButtonItem(image: .delete, style: .plain, target: self, action: #selector(deleteCertificate))
         deleteIcon.tintColor = .error
         navigationItem.rightBarButtonItem = deleteIcon
+        navigationItem.rightBarButtonItem?.accessibilityLabel = String("accessibility_certificate_detail_view_label_delete_button".localized)
     }
 
     private func setupHeadline() {
