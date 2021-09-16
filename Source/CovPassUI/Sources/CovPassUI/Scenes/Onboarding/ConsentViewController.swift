@@ -96,7 +96,7 @@ class ConsentViewController: UIViewController {
         usTermsOfUse.bodyLabel.linkCallback = { [weak self] _ in
             self?.viewModel.router.showTermsOfUse()
         }
-        usTermsOfUse.isHidden = false
+        usTermsOfUse.isHidden = Locale.current.regionCode != "US"
     }
 }
 
