@@ -107,6 +107,8 @@
 
 "accessibility_scan_dialog_camera_access_label_close" = "Schließen";
 
+"accessibility_scan_dialog_camera_announce" = "Kamera-Ansicht wurde geöffnet";
+
 "error_camera_access_title" = "Die CovPassCheck-App möchte auf Ihre Kamera zugreifen.";
 
 "error_camera_access_message" = "Erlauben Sie den Zugriff, um QR-Codes scannen zu können.";
@@ -126,6 +128,38 @@
 "validation_check_popup_valid_vaccination_date_of_birth" = "Geboren am %@";
 
 "validation_check_popup_valid_vaccination_recovery_note" = "* Genesenen- oder Impfzertifikat liegt vor.";
+
+"technical_validation_check_popup_unsuccessful_certificate_title" = "Zertifikat nicht gültig";
+
+"technical_validation_check_popup_unsuccessful_certificate_subline" = "Das geprüfte Zertifikat ist aus einem der folgenden Gründe nicht gültig:";
+
+"technical_validation_check_popup_unsuccessful_certificate_signature_subheading" = "Ungültige Signatur";
+
+"technical_validation_check_popup_unsuccessful_certificate_signature_subline" = "Das Zertifikat wurde nicht von einer autorisierten Stelle ausgestellt oder gehört nicht zu einem Digitalen COVID-Zertifikat der EU.";
+
+"technical_validation_check_popup_unsuccessful_certificate_qrreadibility_subheading" = "QR-Code nicht lesbar";
+
+"technical_validation_check_popup_unsuccessful_certificate_qrreadibility_subline" = "Der QR-Code ist nicht lesbar. Bitte aktualisieren Sie die CovPassCheck-App, wenn dieses Problem häufiger auftritt.";
+
+"technical_validation_check_popup_valid_vaccination_button_title" = "Weiteres Zertifikat scannen";
+
+"functional_validation_check_popup_unsuccessful_certificate_title" = "Zertifikat erfüllt nicht alle Bedingungen";
+
+"functional_validation_check_popup_unsuccessful_certificate_subline" = "Die geprüfte Person kann den Grund z. B. in der CovPass-App einsehen. Die häufigsten Gründe:";
+
+"functional_validation_check_popup_unsuccessful_certificate_subheadline_expiration" = "Abgelaufener Test";
+
+"functional_validation_check_popup_unsuccessful_certificate_subheadline_expiration_text" = "Ein negativer Schnelltest ist für maximal 24 Stunden gültig. Ein negativer PCR-Test ist für maximal 72 Stunden gültig.";
+
+"functional_validation_check_popup_unsuccessful_certificate_subheadline_protection" = "Noch nicht gültiger Schutz";
+
+"functional_validation_check_popup_unsuccessful_certificate_subheadline_protection_text" = "Erst 14 Tage nach der Zweitimpfung gilt der Impfschutz als vollständig. Die Genesung von einer Corona-Infektion darf höchstens sechs Monate und mindestens 28 Tage alt sein.";
+
+"functional_validation_check_popup_unsuccessful_certificate_subheadline_uncompleted" = "Unvollständige Impfung";
+
+"functional_validation_check_popup_unsuccessful_certificate_subheadline_uncompleted_text" = "Je nach Impfstoff sind für die Erlangung des vollständigen Impfschutzes mehrere Impfdosen erforderlich.";
+
+"technical_validation_check_popup_valid_vaccination_button_further" = "Weiteres Zertifikat scannen";
 
 "validation_check_popup_valid_vaccination_button_title" = "Weiteres Zertifikat scannen";
 

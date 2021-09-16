@@ -279,6 +279,22 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
         }
     }
 
+    public func setExpiryAlert(shown: Bool, token: ExtendedCBORWebToken) -> Promise<Void> {
+        firstly {
+            getCertificateList()
+        }.map(on: .global()) { list in
+            var certList = list
+            if let index = list.certificates.firstIndex(of: token) {
+                certList.certificates[index].wasExpiryAlertShown = true
+            }
+            return certList
+        }
+        .then(on: .global()) { list in
+            self.saveCertificateList(list)
+        }
+        .asVoid()
+    }
+
     public func favoriteStateForCertificates(_ certificates: [ExtendedCBORWebToken]) -> Promise<Bool> {
         firstly {
             getCertificateList()

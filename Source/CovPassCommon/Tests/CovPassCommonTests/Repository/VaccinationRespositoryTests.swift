@@ -261,6 +261,28 @@ class VaccinationRepositoryTests: XCTestCase {
         XCTAssertEqual(list.favoriteCertificateId, "01DE/00100/1119349007/F4G7014KQQ2XD0NY8FJHSTDXZ#S")
     }
 
+    func testSetExpiryAlert() throws {
+        let cborWebToken = try! JSONDecoder().decode(CBORWebToken.self, from: Data.json("CBORWebToken"))
+        let cert = ExtendedCBORWebToken(vaccinationCertificate: cborWebToken, vaccinationQRCodeData: "")
+        _ = try sut.saveCertificateList(CertificateList(certificates: [cert])).wait()
+
+        // Get certificate list
+        var list = try sut.getCertificateList().wait()
+
+        // Get the first Token
+        var token = try XCTUnwrap(list.certificates.first)
+        XCTAssertNil(token.wasExpiryAlertShown)
+        // set that the expiry alert view is shown for this token
+        _ = try sut.setExpiryAlert(shown: true, token: token).wait()
+
+        // Get the list and check if the was expiry bool was shown is saved
+        list = try sut.getCertificateList().wait()
+        token = try XCTUnwrap(list.certificates.first)
+
+        XCTAssertNotNil(token.wasExpiryAlertShown)
+        XCTAssertTrue(try XCTUnwrap(token.wasExpiryAlertShown))
+    }
+
     func testFavoriteStateForCertificates() throws {
         let cborWebToken = try! JSONDecoder().decode(CBORWebToken.self, from: Data.json("CBORWebToken"))
         let cert = ExtendedCBORWebToken(vaccinationCertificate: cborWebToken, vaccinationQRCodeData: "")

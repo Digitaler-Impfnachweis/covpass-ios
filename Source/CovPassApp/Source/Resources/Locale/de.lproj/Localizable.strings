@@ -84,6 +84,8 @@
 
 "vaccination_start_screen_title" = "Digitale COVID-Zertifikate der EU";
 
+"accessibility_vaccination_start_screen_title" = "Digitale COVID-Zertifikate der EU. Es folgen sensible Gesundheitsdaten. Bitte achten Sie darauf, dass keine andere Person mithört oder mitliest.";
+
 "vaccination_start_screen_note_title" = "Fügen Sie einen Nachweis hinzu";
 
 "vaccination_start_screen_note_message" = "Sie haben aktuell kein digitales COVID-Zertifikat der EU gespeichert. Drücken Sie auf das Plus-Symbol, um einen digitalen Nachweis hinzuzufügen.";
@@ -137,6 +139,8 @@
 
 "accessibility_certificate_add_dialog_camera_access_label_close" = "Schließen";
 
+"accessibility_certificate_add_dialog_camera_announce" = "Kamera-Ansicht wurde geöffnet";
+
 "accessibility_certificate_scan_mode_label_cancel" = "Abbrechen";
 
 "error_camera_access_title" = "Die CovPass-App möchte auf Ihre Kamera zugreifen.";
@@ -173,6 +177,10 @@
 
 "certificate_check_validity_title" = "Gültigkeit für Reisen innerhalb der EU prüfen";
 
+"accessibility_certificate_check_validity_selection_country_selected" = "%s, ausgewählt";
+
+"accessibility_certificate_check_validity_selection_country_unselected" = "%s, auswählbar";
+
 "certificate_check_validity_message" = "Prüfen Sie vorab, ob Ihre Zertifikate in verschiedenen Ländern gültig sind. Hierfür werden die geltenden Einreiseregeln des gewählten Reiselands berücksichtigt.";
 
 "certificate_check_validity_selection_country" = "Land";
@@ -180,6 +188,8 @@
 "accessibility_certificate_check_validity_selection_country_label_close" = "Schließen";
 
 "certificate_check_validity_selection_country_title" = "Reiseland wählen";
+
+"accessibility_certificate_check_validity_selection_country" = "Land: %s";
 
 "IT" = "Italien";
 
@@ -251,6 +261,8 @@
 
 "certificate_check_validity_selection_date" = "Datum";
 
+"accessibility_certificate_check_validity_selection_date" = "Datum: %s";
+
 "accessibility_certificate_check_validity_selection_date_label_close" = "Schließen";
 
 "certificate_check_validity_selection_date_title" = "Datum wählen";
@@ -264,6 +276,10 @@
 "certificate_check_validity_selection_time_action_button" = "OK";
 
 "certificate_check_validity_loading" = "Zertifikate werden geprüft";
+
+"certificate_check_invalidity_error_title" = "Überprüfen Sie die Gültigkeit Ihrer Zertifikate.";
+
+"certificate_check_invalidity_error_text" = "Ein oder mehrere Zertifikate laufen bald ab oder sind abgelaufen.";
 
 "certificate_check_validity_no_certificate_saved_title" = "Sie haben noch keine Zertifikate gespeichert";
 
@@ -285,6 +301,8 @@
 
 "certificate_check_validity_detail_view_vaccination_result_title" = "Digitales COVID-Impfzertifikat der EU";
 
+"accessbility_certificate_check_validity_detail_view_vaccination_result_title" = "Digitale COVID Imofzertifikate der EU. Es folgen sensible Gesundheitsdaten. Bitte achten Sie darauf, dass keine andere Person mithört oder mitliest.";
+
 "certificate_check_validity_detail_view_vaccination_result_headline_data" = "Geprüfte Zertifikatsdaten:";
 
 "certificate_check_validity_detail_view_vaccination_result_button" = "QR-Code anzeigen";
@@ -295,6 +313,8 @@
 
 "certificate_check_validity_detail_view_test_result_title" = "Digitales COVID-Testzertifikat der EU";
 
+"accessibility_certificate_check_validity_detail_view_test_result_title" = "Digitale COVID-Testzertifikate der EU. Es folgen sensible Gesundheitsdaten. Bitte achten Sie darauf, dass keine andere Person mithört oder mitliest.";
+
 "certificate_check_validity_detail_view_test_result_headline_data" = "Geprüfte Zertifikatsdaten:";
 
 "certificate_check_validity_detail_view_test_result_button" = "QR-Code anzeigen";
@@ -304,6 +324,8 @@
 "certificate_check_validity_detail_view_test_result_note_en" = "A test certificate is valid proof for travel within the EU. The EU’s member countries have different travel restrictions. You can find more information in the Frequently Asked Questions. Before travelling, please check the applicable public health measures and related restrictions applied at the point of destination.\n\nPlease inform yourself about the public-health measures and corresponding restrictions at your travel destination before you travel. You can find information about the travel restrictions applicable in each EU country at #https://reopen.europa.eu::https://reopen.europa.eu#.";
 
 "certificate_check_validity_detail_view_recovery_result_title" = "Digitales COVID-Genesenenzertifikat der EU";
+
+"accessibility_certificate_check_validity_detail_view_recovery_result_title" = "Digitales COVID-Genesenenzertifikat der EU. Es folgen sensible Gesundheitsdaten. Bitte achten Sie darauf, dass keine andere Person mithört oder mitliest.";
 
 "certificate_check_validity_detail_view_recovery_result_headline_data" = "Geprüfte Zertifikatsdaten:";
 
@@ -461,11 +483,19 @@
 
 "certificates_overview_personal_data_name" = "Name, Vorname / Name, first name";
 
+"accessibility_certificates_overview_personal_data_name" = "Name";
+
 "certificates_overview_personal_data_standardized_name" = "Standardisierter Name, Vorname / Standardized name, first name";
+
+"accessibility_certificates_overview_personal_data_standardized_name" = "Standardisierter Name";
 
 "certificates_overview_personal_data_date_of_birth" = "Geburtsdatum / Date of birth (YYYY-MM-DD)";
 
+"accessibility_certificates_overview_personal_data_date_of_birth" = "Geburtsdatum (Jahr-Monat-Tag)";
+
 "certificates_overview_all_certificates_title" = "EU-Zertifikate";
+
+"accessibility_certificates_overview_all_certificates_title" = "Impfstatus überprüfen. Es folgen sensible Gesundheitsdaten. Bitte achten Sie darauf, dass keine andere Person mithört oder mitliest.";
 
 "certificates_overview_currently_uses_certificate_note" = "Aktuell verwendetes Zertifikat";
 
@@ -521,35 +551,61 @@
 
 "vaccination_certificate_detail_view_vaccination_headline" = "Digitales COVID-Impfzertifikat der EU";
 
-"vaccination_certificate_detail_view_booster_vaccination_headline" = "Digitales COVID-Impfzertifikat der EU";
+"accessibility_vaccination_certificate_detail_view_booster_vaccination_headline" = "Digitales COVID Impfzertifikat der EU. Es folgen sensible Gesundheitsdaten. Bitte achten Sie darauf, dass keine andere Person mithört oder mitliest.";
 
 "vaccination_certificate_detail_view_vaccination_note" = "Es handelt sich hier um einen Impfstoff, bei dem nur eine Impfdosis erforderlich ist, oder um eine Impfung für Genesene, die nur eine Impfdosis benötigt.";
 
 "vaccination_certificate_detail_view_data_name" = "Name, Vorname / Name, first name";
 
+"accessibility_vaccination_certificate_detail_view_data_name" = "Name";
+
 "vaccination_certificate_detail_view_data_name_standard" = "Standardisierter Name, Vorname / Standardized name, first name";
+
+"accessibility_vaccination_certificate_detail_view_data_name_standard" = "Standardisierter Name";
 
 "vaccination_certificate_detail_view_data_date_of_birth" = "Geburtsdatum / Date of birth (YYYY-MM-DD)";
 
+"accessibility_vaccination_certificate_detail_view_data_date_of_birth" = "Geburtsdatum (Jahr-Monat-Tag)";
+
 "vaccination_certificate_detail_view_data_disease" = "Zielkrankheit oder -erreger / Disease or pathogen";
+
+"accessibility_vaccination_certificate_detail_view_data_disease" = "Zielkrankheit oder -erreger";
 
 "vaccination_certificate_detail_view_data_vaccine" = "Impfstoff / Vaccine";
 
+"accessibility_vaccination_certificate_detail_view_data_vaccine" = "Impfstoff";
+
 "vaccination_certificate_detail_view_data_vaccine_type" = "Art des Impfstoffs / Vaccine Type";
+
+"accessibility_vaccination_certificate_detail_view_data_vaccine_type" = "Art des Impfstoffs";
 
 "vaccination_certificate_detail_view_data_vaccine_manufactur" = "Hersteller / Manufacturer";
 
+"accessibility_vaccination_certificate_detail_view_data_vaccine_manufacturer" = "Hersteller";
+
 "vaccination_certificate_detail_view_data_vaccine_number" = "Nummer der Impfung / Dose number";
+
+"accessibility_vaccination_certificate_detail_view_data_vaccine_number" = "Nummer der Impfung";
 
 "vaccination_certificate_detail_view_data_vaccine_date_" = "Datum der Impfung / Date of vaccination (YYYY-MM-DD)";
 
+"accessibility_vaccination_certificate_detail_view_data_vaccine_date_" = "Datum der Impfung (Jahr-Monat-Tag)";
+
 "vaccination_certificate_detail_view_data_vaccine_country" = "Land der Impfung / Country vaccinating";
+
+"accessibility_vaccination_certificate_detail_view_data_vaccine_country" = "Land der Impfung";
 
 "vaccination_certificate_detail_view_data_vaccine_issuer" = "Zertifikataussteller / Certificate issuer";
 
+"accessibility_vaccination_certificate_detail_view_data_vaccine_issuer" = "Zertifikataussteller";
+
 "vaccination_certificate_detail_view_data_vaccine_identifier" = "Zertifikatkennung / Unique certificate identifier";
 
+"accessibility_vaccination_certificate_detail_view_data_vaccine_identifier" = "Zertifikatkennung";
+
 "vaccination_certificate_detail_view_data_expiry_date" = "Technisches Ablaufdatum / Technical expiry date";
+
+"accessibility_vaccination_certificate_detail_view_data_expiry_date" = "Technisches Ablaufdatum";
 
 "vaccination_certificate_detail_view_data_expiry_date_message" = "Gültig bis %@";
 
@@ -577,33 +633,63 @@
 
 "test_certificate_detail_view_headline" = "Digitales COVID-Testzertifikat der EU";
 
+"accessibility_test_certificate_detail_view_headline" = "Digitales COVID Testzertifikat. Es folgen sensible Gesundheitsdaten. Bitte achten Sie darauf, dass keine andere Person mithört oder mitliest.";
+
 "test_certificate_detail_view_data_name" = "Name, Vorname / Name, first name";
+
+"accessibility_test_certificate_detail_view_data_name" = "Name";
 
 "test_certificate_detail_view_data_name_standard" = "Standardisierter Name, Vorname / Standardized name, first name";
 
+"accessibility_test_certificate_detail_view_data_name_standard" = "Standardisierter Name";
+
 "test_certificate_detail_view_data_date_of_birth" = "Geburtsdatum / Date of birth (YYYY-MM-DD)";
+
+"accessibility_test_certificate_detail_view_data_date_of_birth" = "Geburtsdatum (Jahr-Monat-Tag)";
 
 "test_certificate_detail_view_data_disease" = "Zielkrankheit oder -erreger / Disease or pathogen";
 
+"accessibility_test_certificate_detail_view_data_disease" = "Zielkrankheit oder -erreger";
+
 "test_certificate_detail_view_data_test_type" = "Art des Tests / Type of test";
+
+"accessibility_test_certificate_detail_view_data_test_type" = "Art des Tests";
 
 "test_certificate_detail_view_data_test_name" = "Produktname / Test name";
 
+"accessibility_test_certificate_detail_view_data_test_name" = "Produktname";
+
 "test_certificate_detail_view_data_test_manufactur" = "Testhersteller / Test manufacturer";
+
+"accessibility_test_certificate_detail_view_data_test_manufacturer" = "Testhersteller";
 
 "test_certificate_detail_view_data_test_date_and_time" = "Datum und Uhrzeit der Probenahme / Date and time of sample (YYYY-MM-DD, HH:MM)";
 
+"accessibility_test_certificate_detail_view_data_test_date_and_time" = "Datum und Uhrzeit der Probenahme (Jahr-Monat-Tag)";
+
 "test_certificate_detail_view_data_test_results" = "Testergebnis / Test result";
+
+"accessibility_test_certificate_detail_view_data_test_results" = "Testergebnis";
 
 "test_certificate_detail_view_data_test_centre" = "Testzentrum oder -einrichtung / Testing centre or facility";
 
+"accessibility_test_certificate_detail_view_data_test_centre" = "Testzentrum oder -einrichtung";
+
 "test_certificate_detail_view_data_test_country" = "Land der Testung / Country performing test";
+
+"accessibility_test_certificate_detail_view_data_test_country" = "Land der Testung";
 
 "test_certificate_detail_view_data_test_issuer" = "Zertifikataussteller / Certificate issuer";
 
+"accessibility_test_certificate_detail_view_data_test_issuer" = "Zertifikataussteller";
+
 "test_certificate_detail_view_data_test_identifier" = "Zertifikatkennung / Unique certificate identifier";
 
+"accessibility_test_certificate_detail_view_data_test_identifier" = "Zertifikatkennung";
+
 "test_certificate_detail_view_data_expiry_date" = "Technisches Ablaufdatum / Technical expiry date";
+
+"accessibility_test_certificate_detail_view_data_expiry_date" = "Technisches Ablaufdatum";
 
 "test_certificate_detail_view_data_expiry_date_message" = "Gültig bis %@";
 
@@ -627,27 +713,51 @@
 
 "recovery_certificate_detail_view_headline" = "Digitales COVID-Genesenenzertifikat der EU";
 
+"accessibility_recovery_certificate_detail_view_headline" = "Digitales COVID-Genesenenzertifikat der EU. Es folgen sensible Gesundheitsdaten. Bitte achten Sie darauf, dass keine andere Person mithört oder mitliest.";
+
 "recovery_certificate_detail_view_data_name" = "Name, Vorname / Name, first name";
+
+"accessibility_recovery_certificate_detail_view_data_name" = "Name";
 
 "recovery_certificate_detail_view_data_name_standard" = "Standardisierter Name, Vorname / Standardized name, first name";
 
+"accessibility_recovery_certificate_detail_view_data_name_standard" = "Standardisierter Name";
+
 "recovery_certificate_detail_view_data_date_of_birth" = "Geburtsdatum / Date of birth (YYYY-MM-DD)";
+
+"accessibility_recovery_certificate_detail_view_data_date_of_birth" = "Geburtsdatum (Jahr-Monat-Tag)";
 
 "recovery_certificate_detail_view_data_disease" = "Krankheit oder Erreger, von dem die Bürgerin oder der Bürger genesen ist / Disease or pathogen that this person has recovered from";
 
+"accessibility_recovery_certificate_detail_view_data_disease" = "Krankheit oder Erreger, von dem die Bürgerin oder der Bürger genesen ist";
+
 "recovery_certificate_detail_view_data_date_first_positive_result" = "Datum des ersten positiven Testergebnisses / Date of first positive test result (YYYY-MM-DD)";
+
+"accessibility_recovery_certificate_detail_view_data_date_first_positive_result" = "Datum des ersten positiven Testergebnisses (Jahr-Monat-Tag)";
 
 "recovery_certificate_detail_view_data_country" = "Land der Testung / Country performing test";
 
+"accessibility_recovery_certificate_detail_view_data_country" = "Land der Testung";
+
 "recovery_certificate_detail_view_data_issuer" = "Zertifikataussteller / Certificate issuer";
+
+"accessibility_recovery_certificate_detail_view_data_issuer" = "Zertifikataussteller";
 
 "recovery_certificate_detail_view_data_valid_from" = "Zertifikat gültig ab / Certificate valid from (YYYY-MM-DD)";
 
+"accessibility_recovery_certificate_detail_view_data_valid_from" = "Zertifikat gültig ab (Jahr-Monat-Tag)";
+
 "recovery_certificate_detail_view_data_valid_until" = "Zertifikat gültig bis (höchstens 180 Tage ab dem Datum des ersten positiven Testergebnisses) / Certificate valid until (maximum 180 days after the date of the first positive test result)(YYYY-MM-DD)";
+
+"accessibility_recovery_certificate_detail_view_data_valid_until" = "Zertifikat gültig bis (höchstens 180 Tage ab dem Datum des ersten positiven Testergebnisses) (Jahr-Monat-Tag)";
 
 "recovery_certificate_detail_view_data_identifier" = "Zertifikatkennung / Unique certificate identifier";
 
+"accessibility_recovery_certificate_detail_view_data_identifier" = "Zertifikatkennung";
+
 "recovery_certificate_detail_view_data_expiry_date" = "Technisches Ablaufdatum / Technical expiry date";
+
+"accessibility_recovery_certificate_detail_view_data_expiry_date" = "Technisches Ablaufdatum";
 
 "recovery_certificate_detail_view_data_expiry_date_message" = "Gültig bis %@";
 
@@ -807,3 +917,12 @@
 "accessibility_app_information_open_source_label_back" = "Zurück";
 
 "app_information_version_label" = "Version %@";
+
+/* generic key to be used as alt text for decorative images */
+"accessibility_image_alternative_text" = "Dekorativ";
+
+/* generic key to be used in both apps for close buttons */
+"accessibility_popup_label_close" = "Schließen";
+
+/* to be used as alt text for qr codes */
+"accessibility_qr_code" = "QR-Code";

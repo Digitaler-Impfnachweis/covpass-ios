@@ -54,7 +54,7 @@ class AppInformationViewModel: AppInformationViewModelProtocol {
 
             webEntry(
                 title: "app_information_title_open_source".localized,
-                url: Bundle.commonBundle.url(forResource: "license", withExtension: "html")!
+                url: Bundle.commonBundle.url(forResource: Locale.current.isGerman() ? "license_de" : "license_en", withExtension: "html")!
             )
         ]
     }()

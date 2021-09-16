@@ -98,6 +98,8 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
                 self.delegate?.viewModelNeedsFirstCertificateVisible()
             }
             self.lastKnownFavoriteCertificateId = list.favoriteCertificateId
+        }.then {
+            self.showExpiryAlertIfNeeded()
         }
         .asVoid()
     }
@@ -268,6 +270,35 @@ extension CertificatesOverviewViewModel {
                     self.router.showBoosterNotification()
                 }
 
+        }
+    }
+
+    private func showExpiryAlertIfNeeded() -> Promise<Void> {
+        Promise { seal in
+            let showAlert = certificatePairsSorted.contains { pair in
+                guard var cert = CertificateSorter.sort(pair.certificates).first,
+                      cert.vaccinationCertificate.hcert.dgc.t == nil
+                else { return false }
+                if let tests = cert.vaccinationCertificate.hcert.dgc.t, !tests.isEmpty {
+                    return false
+                }
+                let alreadyShown = cert.wasExpiryAlertShown ?? false
+                if (cert.vaccinationCertificate.expiresSoon || cert.vaccinationCertificate.isInvalid || cert.vaccinationCertificate.isExpired) && !alreadyShown {
+                    cert.wasExpiryAlertShown = true
+                    _ = repository.setExpiryAlert(shown: true, token: cert)
+                    return true
+                }
+                return false
+            }
+
+            if showAlert {
+                let action = DialogAction(title: "error_validity_check_certificates_button_title".localized)
+                self.router.showDialog(title: "certificate_check_invalidity_error_title".localized,
+                                       message: "certificate_check_invalidity_error_text".localized,
+                                       actions: [action],
+                                       style: .alert)
+            }
+            seal.fulfill_()
         }
     }
 }
