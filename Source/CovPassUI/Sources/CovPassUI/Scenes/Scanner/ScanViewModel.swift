@@ -48,7 +48,7 @@ class ScanViewModel: CancellableViewModelProtocol {
 
         guard let device = AVCaptureDevice.default(for: .video), device.hasTorch else {
             hasDeviceTorch = false
-            device = nil
+            self.device = nil
             return
         }
         self.device = device
