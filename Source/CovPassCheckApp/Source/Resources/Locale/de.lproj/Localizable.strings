@@ -153,9 +153,9 @@
 
 "functional_validation_check_popup_unsuccessful_certificate_subheadline_protection" = "Noch nicht gültiger Schutz";
 
-"functional_validation_check_popup_unsuccessful_certificate_subheadline_protection_text" = "Erst 14 Tage nach der Zweitimpfung gilt der Impfschutz als vollständig. Die Genesung von einer Corona-Infektion darf höchstens sechs Monate und mindestens 28 Tage alt sein.";
+"functional_validation_check_popup_unsuccessful_certificate_subheadline_protection_text" = "Erst 14 Tage nach der Zweitimpfung gilt der Impfschutz als vollständig. Die Genesung von einer Corona-Infektion muss mindestens 28 Tage alt sein.";
 
-"functional_validation_check_popup_unsuccessful_certificate_subheadline_uncompleted" = "Unvollständige Impfung";
+"functional_validation_check_popup_unsuccessful_certificate_subheadline_uncompleted" = "Unvollständige Impfserie";
 
 "functional_validation_check_popup_unsuccessful_certificate_subheadline_uncompleted_text" = "Je nach Impfstoff sind für die Erlangung des vollständigen Impfschutzes mehrere Impfdosen erforderlich.";
 

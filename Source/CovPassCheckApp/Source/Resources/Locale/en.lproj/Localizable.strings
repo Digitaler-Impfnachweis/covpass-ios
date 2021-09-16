@@ -153,9 +153,9 @@
 
 "functional_validation_check_popup_unsuccessful_certificate_subheadline_protection" = "Protection not yet valid";
 
-"functional_validation_check_popup_unsuccessful_certificate_subheadline_protection_text" = "Individuals are not completely protected until 14 days after the second vaccination. A recovery from a Corona infection has to be between at least 28 days and maximal 6 months in the past.";
+"functional_validation_check_popup_unsuccessful_certificate_subheadline_protection_text" = "Individuals are not completely protected until 14 days after the second vaccination. A recovery from a Corona infection has to be at least 28 days in the past.";
 
-"functional_validation_check_popup_unsuccessful_certificate_subheadline_uncompleted" = "Uncompleted Vaccination";
+"functional_validation_check_popup_unsuccessful_certificate_subheadline_uncompleted" = "Uncompleted vaccination series";
 
 "functional_validation_check_popup_unsuccessful_certificate_subheadline_uncompleted_text" = "Depending on the vaccine, multiple vaccine doses have to be administered for completed protection.";
 
