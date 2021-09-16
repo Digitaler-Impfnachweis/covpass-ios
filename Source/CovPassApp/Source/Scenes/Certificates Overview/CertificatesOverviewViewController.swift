@@ -12,6 +12,14 @@ import Foundation
 import Scanner
 import UIKit
 
+private enum Constants {
+    enum Accessibility {
+        static let addCertificate = VoiceOverOptions.Settings(label: "accessibility_vaccination_start_screen_label_add_certificate".localized)
+        static let moreInformation = VoiceOverOptions.Settings(label: "accessibility_vaccination_start_screen_label_information".localized)        
+    }
+}
+
+
 class CertificatesOverviewViewController: UIViewController {
     // MARK: - IBOutlet
 
@@ -71,6 +79,8 @@ class CertificatesOverviewViewController: UIViewController {
         headerView.titleButton.isHidden = !viewModel.hasCertificates
         headerView.titleIcon.isHidden = !viewModel.hasCertificates
         headerView.image = .help
+        headerView.actionButton.enableAccessibility(label: Constants.Accessibility.moreInformation.label)
+
         headerView.titleAction = { [weak self] in
             self?.viewModel.showRuleCheck()
         }
@@ -93,6 +103,7 @@ class CertificatesOverviewViewController: UIViewController {
 
     private func setupActionButton() {
         addButton.icon = .plus
+        addButton.enableAccessibility(label: Constants.Accessibility.addCertificate.label)
         addButton.action = { [weak self] in
             self?.viewModel.scanCertificate()
         }

@@ -495,7 +495,7 @@
 
 "certificates_overview_all_certificates_title" = "EU-Zertifikate";
 
-"accessibility_certificates_overview_all_certificates_title" = "Es folgen sensible Gesundheitsdaten. Bitte achten Sie darauf, dass keine andere Person mithört oder mitliest.";
+"accessibility_certificates_overview_all_certificates_title" = "Impfstatus überprüfen. Es folgen sensible Gesundheitsdaten. Bitte achten Sie darauf, dass keine andere Person mithört oder mitliest.";
 
 "certificates_overview_currently_uses_certificate_note" = "Aktuell verwendetes Zertifikat";
 

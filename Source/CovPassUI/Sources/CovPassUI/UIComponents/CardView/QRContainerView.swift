@@ -9,6 +9,12 @@
 import Foundation
 import UIKit
 
+private enum Constants {
+    enum Accessibility {
+        static let qrCode = VoiceOverOptions.Settings(label: "qrCode".localized)
+    }
+}
+
 public class QRContainerView: XibView {
     // MARK: - IBOutlet
 
@@ -64,6 +70,7 @@ public class QRContainerView: XibView {
         )
         contentView?.layer.cornerRadius = cornerRadius
         contentView?.layer.masksToBounds = true
+        imageView.enableAccessibility(label: Constants.Accessibility.qrCode.label)
     }
 
     private func updateViews() {
