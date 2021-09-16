@@ -75,3 +75,7 @@
 "accessibility_button_label_torch_off" = "Switch off torch";
 
 "button_back" = "Back";
+
+"vaccination_fourth_onboarding_page_message_for_us_citizens_title" = "Terms of Use for US citizens";
+
+"vaccination_fourth_onboarding_page_message_for_us_citizens_copy" = "If you are a US citizen, these Terms of Use apply to the App:";

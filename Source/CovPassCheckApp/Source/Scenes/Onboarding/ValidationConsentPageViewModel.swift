@@ -12,6 +12,7 @@ import UIKit
 class ValidationConsentPageViewModel: ConsentPageViewModel {
     // MARK: - Properties
 
+    var router: ConsentRouterProtocol
     weak var delegate: ViewModelDelegate?
     let type: OnboardingPageViewModelType
 
@@ -53,7 +54,8 @@ class ValidationConsentPageViewModel: ConsentPageViewModel {
 
     // MARK: - Lifecycle
 
-    init(type: OnboardingPageViewModelType) {
+    init(type: OnboardingPageViewModelType, router: ConsentRouterProtocol) {
         self.type = type
+        self.router = router
     }
 }

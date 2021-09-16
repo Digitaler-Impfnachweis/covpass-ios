@@ -24,7 +24,7 @@ struct OnboardingSceneFactory: SceneFactory {
         let pageModels: [OnboardingPageViewModel] = [
             ValidationOnboardingPageViewModel(type: .page1),
             ValidationOnboardingPageViewModel(type: .page2),
-            ValidationConsentPageViewModel(type: .page3)
+            ValidationConsentPageViewModel(type: .page3, router: ConsentRouter(sceneCoordinator: router.sceneCoordinator))
         ]
         let viewModel = ValidationOnboardingContainerViewModel(
             router: router,

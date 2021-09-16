@@ -25,7 +25,7 @@ struct OnboardingSceneFactory: SceneFactory {
             PassOnboardingPageViewModel(type: .page1),
             PassOnboardingPageViewModel(type: .page2),
             PassOnboardingPageViewModel(type: .page3),
-            PassConsentPageViewModel(type: .page4)
+            PassConsentPageViewModel(type: .page4, router: ConsentRouter(sceneCoordinator: router.sceneCoordinator))
         ]
         let viewModel = PassOnboardingContainerViewModel(
             router: router,

@@ -12,6 +12,7 @@ import UIKit
 class PassConsentPageViewModel: ConsentPageViewModel {
     // MARK: - Properties
 
+    var router: ConsentRouterProtocol
     weak var delegate: ViewModelDelegate?
     private(set) var type: OnboardingPageViewModelType
 
@@ -54,7 +55,8 @@ class PassConsentPageViewModel: ConsentPageViewModel {
 
     // MARK: - Lifecycle
 
-    init(type: OnboardingPageViewModelType) {
+    init(type: OnboardingPageViewModelType, router: ConsentRouter) {
         self.type = type
+        self.router = router
     }
 }
