@@ -47,7 +47,11 @@
 
 "confirmation_fourth_onboarding_page_button_title" = "OK";
 
+"accessibility_fourth_onboarding_page_label_scroll_to_end" = "Scroll to the end";
+
 "vaccination_privacy_policy_page_button_title" = "Close";
+
+"accessibility_popup_label_close" = "Close";
 
 "error_connect_internet_for_scan_title" = "Switch off airplane mode or use WLAN for data access";
 
@@ -110,6 +114,10 @@
 "error_camera_access_button_do_not_allow" = "Do not allow";
 
 "error_camera_access_button_allow" = "Allow";
+
+"accessibility_scan_dialog_camera_torch_on" = "Switch on torch";
+
+"accessibility_scan_dialog_camera_torch_off" = "Switch on torch";
 
 "validation_check_popup_valid_vaccination_recovery_title" = "Certificate valid*";
 
