@@ -17,6 +17,7 @@
                 <outlet property="imageView" destination="blq-EC-KHe" id="dd1-Bk-mG0"/>
                 <outlet property="listItems" destination="yAk-j5-cLA" id="G16-o1-SDW"/>
                 <outlet property="scrollView" destination="ha7-P2-KHE" id="5Yj-ty-uVp"/>
+                <outlet property="usTermsOfUse" destination="7hr-Yi-vwE" id="HGm-hN-Pyj"/>
                 <outlet property="view" destination="CuH-Wp-IB0" id="9IH-by-KqR"/>
             </connections>
         </placeholder>
@@ -32,7 +33,7 @@
                             <rect key="frame" x="0.0" y="0.0" width="414" height="566"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="s9A-cR-mPd">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="694"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="822"/>
                                     <subviews>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="250" translatesAutoresizingMaskIntoConstraints="NO" id="blq-EC-KHe">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="250"/>
@@ -52,6 +53,10 @@
                                         <view contentMode="scaleToFill" ambiguous="YES" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="IY5-fG-Iuh" customClass="ListItemView" customModule="CovPassUI">
                                             <rect key="frame" x="0.0" y="566" width="414" height="128"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </view>
+                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7hr-Yi-vwE" customClass="HintView" customModule="CovPassUI">
+                                            <rect key="frame" x="0.0" y="694" width="414" height="128"/>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         </view>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

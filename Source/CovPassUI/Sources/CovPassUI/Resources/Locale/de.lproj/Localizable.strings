@@ -74,3 +74,7 @@
 "accessibility_button_label_torch_off" = "Taschenlampe ausschalten";
 
 "button_back" = "Zurück";
+
+"vaccination_fourth_onboarding_page_message_for_us_citizens_title" = "Nutzungsbedingungen für US-Bürgerinnen und Bürger";
+
+"vaccination_fourth_onboarding_page_message_for_us_citizens_copy" = "Wenn Sie US-Bürgerin oder US-Bürger sind, gelten diese Nutzungsbedingungen für die App:";
