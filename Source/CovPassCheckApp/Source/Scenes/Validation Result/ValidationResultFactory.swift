@@ -20,7 +20,8 @@ struct ValidationResultFactory {
             let validationResult = try certLogic.validate(countryCode: "DE", validationClock: Date(), certificate: cert)
             let valid = validationResult.contains(where: { $0.result != .passed }) == false
 
-            if !valid {
+            // Show error dialog when at least one rule failed or there are no rules at all
+            if !valid || validationResult.isEmpty {
                 return ErrorResultViewModel(router: router, repository: repository, certificate: certificate)
             }
             if certificate?.hcert.dgc.r?.isEmpty == false {
