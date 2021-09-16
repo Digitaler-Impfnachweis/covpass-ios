@@ -77,6 +77,9 @@ class RuleCheckDetailViewModel {
         case .fail:
             return "certificate_check_validity_detail_view_result_not_valid_title".localized
         case .open:
+            if result.result.isEmpty {
+                return "certificate_check_validity_detail_view_result_no_rules_title".localized
+            }
             return "certificate_check_validity_detail_view_result_not_testable_title".localized
         case .passed:
             return "certificate_check_validity_detail_view_result_valid_title".localized
@@ -86,6 +89,9 @@ class RuleCheckDetailViewModel {
     var resultSubtitle: String {
         var subtitle = String(format: "certificate_check_validity_detail_view_result_valid_message".localized, country.localized, DateUtils.displayDateTimeFormatter.string(from: date))
         if result.state == .open {
+            if result.result.isEmpty {
+                return "certificate_check_validity_detail_view_result_no_rules_message".localized
+            }
             subtitle = String(format: "%@\n\n%@", subtitle, "certificate_check_validity_detail_view_result_not_testable_second_message".localized)
         }
         if result.state == .passed {
