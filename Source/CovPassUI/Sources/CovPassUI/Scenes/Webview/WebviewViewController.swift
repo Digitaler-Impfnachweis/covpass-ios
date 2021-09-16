@@ -61,13 +61,13 @@ extension WebviewViewController: WKNavigationDelegate {
         decisionHandler(.allow)
     }
 
-    public func webView(_ webView: WKWebView, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
+    public func webView(_: WKWebView, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
         guard let serverTrust = challenge.protectionSpace.serverTrust else {
             completionHandler(.cancelAuthenticationChallenge, nil)
             return
         }
         let exceptions = SecTrustCopyExceptions(serverTrust)
         SecTrustSetExceptions(serverTrust, exceptions)
-        completionHandler(.useCredential, URLCredential(trust: serverTrust));
+        completionHandler(.useCredential, URLCredential(trust: serverTrust))
     }
 }

@@ -6,8 +6,8 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-import UIKit
 import CovPassCommon
+import UIKit
 
 public protocol ConsentRouterProtocol: RouterProtocol {
     func showTermsOfUse()

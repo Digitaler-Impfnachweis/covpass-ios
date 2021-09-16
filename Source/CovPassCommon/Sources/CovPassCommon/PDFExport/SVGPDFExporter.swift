@@ -12,7 +12,6 @@ import WebKit
 
 /// PDF Exporter for SVG templates
 public final class SVGPDFExporter: NSObject, WKNavigationDelegate, SVGPDFExportProtocol {
-
     public enum ExportError: Error {
         case invalidTemplate
     }
@@ -72,7 +71,7 @@ public final class SVGPDFExporter: NSObject, WKNavigationDelegate, SVGPDFExportP
             svg = svg.replacingOccurrences(of: "$co", with: recovery.co.sanitizedXMLString)
             // certificate issue
             svg = svg.replacingOccurrences(of: "$is", with: recovery.is.sanitizedXMLString)
-        case.test:
+        case .test:
             guard let test = certificate.latestTest else {
                 throw ExportError.invalidTemplate
             }
@@ -118,13 +117,13 @@ public final class SVGPDFExporter: NSObject, WKNavigationDelegate, SVGPDFExportP
         }
 
         #if DEBUG
-        let regex = try! NSRegularExpression(pattern: "\\>\\$\\w+\\<")
-        let range = NSRange(location: 0, length: svg.utf16.count)
-        if let match = regex.firstMatch(in: svg, options: [], range: range) {
-            let nsString = svg as NSString
-            let matchString = nsString.substring(with: match.range) as String
-            assertionFailure("missed one placeholder: \(matchString)")
-        }
+            let regex = try! NSRegularExpression(pattern: "\\>\\$\\w+\\<")
+            let range = NSRange(location: 0, length: svg.utf16.count)
+            if let match = regex.firstMatch(in: svg, options: [], range: range) {
+                let nsString = svg as NSString
+                let matchString = nsString.substring(with: match.range) as String
+                assertionFailure("missed one placeholder: \(matchString)")
+            }
         #endif
 
         return svg.data(using: .utf8)
@@ -163,7 +162,7 @@ public final class SVGPDFExporter: NSObject, WKNavigationDelegate, SVGPDFExportP
 
     // MARK: - WKNavigationDelegate
 
-    public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+    public func webView(_ webView: WKWebView, didFinish _: WKNavigation!) {
         guard webView == self.webView else { return }
 
         defer {

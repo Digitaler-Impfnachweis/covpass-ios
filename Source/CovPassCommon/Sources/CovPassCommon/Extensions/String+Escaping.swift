@@ -9,7 +9,6 @@
 import Foundation
 
 public extension String {
-
     var sanitizedFileName: String {
         let allowed = NSMutableCharacterSet.alphanumeric()
         allowed.addCharacters(in: "-._")

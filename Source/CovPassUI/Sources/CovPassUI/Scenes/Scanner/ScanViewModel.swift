@@ -34,9 +34,11 @@ class ScanViewModel: CancellableViewModelProtocol {
     var currentTorchVoiceOverOptions: VoiceOverOptions.Settings {
         isFlashlightOn ? Constants.Accessibility.torchOn : Constants.Accessibility.torchOff
     }
+
     var closeVoiceOverOptions: VoiceOverOptions.Settings {
         Constants.Accessibility.close
     }
+
     // MARK: - Lifecycle
 
     init(

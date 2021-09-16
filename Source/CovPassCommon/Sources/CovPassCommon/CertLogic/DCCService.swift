@@ -284,7 +284,7 @@ public struct DCCService: DCCServiceProtocol {
         }
     }
 
-    public func loadBoosterRule(country: String, hash: String) -> Promise<Rule> {
+    public func loadBoosterRule(country _: String, hash: String) -> Promise<Rule> {
         return Promise { seal in
             let requestUrl = boosterURL.appendingPathComponent(hash)
             var request = URLRequest(url: requestUrl)

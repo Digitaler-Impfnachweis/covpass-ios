@@ -6,12 +6,11 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
+import CertLogic
 import Foundation
 import PromiseKit
-import CertLogic
 
 public struct BoosterCandidate: Codable {
-
     public enum BoosterState: String, Codable {
         // Not qualifified for a booster
         case none
@@ -61,7 +60,6 @@ public protocol BoosterLogicProtocol {
 }
 
 public struct BoosterLogic: BoosterLogicProtocol {
-
     private let certLogic: DCCCertLogicProtocol
     private let userDefaults: Persistence
 
@@ -118,16 +116,16 @@ public struct BoosterLogic: BoosterLogicProtocol {
                         certificate: vaccinationCertificate.vaccinationCertificate
                     )
                     var boosterCandiate = boosterCandidateForUser(certificate: vaccinationCertificate)
-                    let passedRules = result.filter({ $0.result == .passed }).compactMap({ $0.rule })
+                    let passedRules = result.filter { $0.result == .passed }.compactMap { $0.rule }
                     let rulesChanged = boosterCandiate.validationRules != passedRules
-                    if !passedRules.isEmpty && rulesChanged {
+                    if !passedRules.isEmpty, rulesChanged {
                         // user is qualified for a booster vaccination
                         boosterCandiate.vaccinationIdentifier = vaccinationCertificate.vaccinationCertificate.hcert.dgc.uvci
                         boosterCandiate.validationRules = passedRules
                         boosterCandiate.state = .new
                         updateBoosterCandidate(boosterCandiate)
                         newQualification = true
-                    } else if passedRules.isEmpty && !boosterCandiate.validationRules.isEmpty {
+                    } else if passedRules.isEmpty, !boosterCandiate.validationRules.isEmpty {
                         // rules changed and user is not qualified for a booster anymore
                         deleteBoosterCandidate(forCertificate: vaccinationCertificate)
                     }
@@ -164,7 +162,7 @@ public struct BoosterLogic: BoosterLogicProtocol {
     /// Delete booster candidate for user
     public func deleteBoosterCandidate(forCertificate certificate: ExtendedCBORWebToken) {
         guard let data = try? userDefaults.fetch(UserDefaults.keyBoosterCandidates) as? Data,
-           let boosterCandidates = try? JSONDecoder().decode([BoosterCandidate].self, from: data)
+              let boosterCandidates = try? JSONDecoder().decode([BoosterCandidate].self, from: data)
         else { return }
         let updatedCandidates = boosterCandidates.filter { $0.vaccinationIdentifier != certificate.vaccinationCertificate.hcert.dgc.uvci }
         guard let updatedData = try? JSONEncoder().encode(updatedCandidates) else { return }
@@ -182,7 +180,7 @@ public struct BoosterLogic: BoosterLogicProtocol {
 
     private func boosterCandidateForUser(name: String, birthdate: String) -> BoosterCandidate? {
         guard let data = try? userDefaults.fetch(UserDefaults.keyBoosterCandidates) as? Data,
-           let boosterCandidates = try? JSONDecoder().decode([BoosterCandidate].self, from: data)
+              let boosterCandidates = try? JSONDecoder().decode([BoosterCandidate].self, from: data)
         else { return nil }
         return boosterCandidates.first(where: { $0.name == name && $0.birthdate == birthdate })
     }

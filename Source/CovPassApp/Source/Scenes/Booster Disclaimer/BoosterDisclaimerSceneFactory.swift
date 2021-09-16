@@ -5,12 +5,11 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-import UIKit
-import PromiseKit
 import CovPassUI
+import PromiseKit
+import UIKit
 
 struct BoosterDisclaimerSceneFactory: ResolvableSceneFactory {
-
     // MARK: - Lifecycle
 
     func make(resolvable: Resolver<Void>) -> UIViewController {

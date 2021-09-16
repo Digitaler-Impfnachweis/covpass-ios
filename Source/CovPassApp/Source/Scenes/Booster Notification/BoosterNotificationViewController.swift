@@ -5,11 +5,10 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-import UIKit
 import CovPassUI
+import UIKit
 
 class BoosterNotificationViewController: UIViewController {
-
     @IBOutlet var headline: InfoHeaderView!
     @IBOutlet var iconLabel: HighlightLabel!
     @IBOutlet var detailsView: ParagraphView!
@@ -42,5 +41,4 @@ class BoosterNotificationViewController: UIViewController {
             self?.viewModel.resolver.fulfill_()
         }
     }
-
 }

@@ -36,9 +36,9 @@ public extension DigitalGreenCertificate {
     ///
     /// A template for tests exists but is currently not used.
     var template: Template? {
-        var templateName: String? = nil
+        var templateName: String?
         var templateType: Template.TemplateType? = .none
-        var country: String? = nil
+        var country: String?
 
         if let v = v?.first {
             templateName = "VaccinationCertificateTemplate_v4.1"

@@ -48,12 +48,12 @@ public enum CertificateSorter {
         }))
         // #3 Booster Certificate
         //  Latest booster vaccination of a vaccination series (3/3, 4/4, ...)
-        res.append(contentsOf: certificates.filter({
+        res.append(contentsOf: certificates.filter {
             if let v = $0.vaccinationCertificate.hcert.dgc.v?.first, v.isBoosted {
                 return true
             }
             return false
-        }))
+        })
         // #4 Vaccination certificate
         //  Latest vaccination of a vaccination series (1/1, 2/2), older then (>) 14 days
         let vaccinationCertificates = certificates.filter { $0.vaccinationCertificate.hcert.dgc.v != nil }.sorted(by: { c1, c2 -> Bool in c1.vaccinationCertificate.hcert.dgc.v?.first?.dt ?? Date() > c2.vaccinationCertificate.hcert.dgc.v?.first?.dt ?? Date() })

@@ -14,13 +14,15 @@ import XCTest
 
 extension CBORWebToken {
     func mockVaccinationUVCI(_ uvci: String) -> Self {
-        self.hcert.dgc.v?.first?.ci = uvci
+        hcert.dgc.v?.first?.ci = uvci
         return self
     }
+
     func mockVaccinationSetDate(_ date: Date) -> Self {
-        self.hcert.dgc.v?.first?.dt = date
+        hcert.dgc.v?.first?.dt = date
         return self
     }
+
     func extended() -> ExtendedCBORWebToken {
         ExtendedCBORWebToken(vaccinationCertificate: self, vaccinationQRCodeData: "")
     }

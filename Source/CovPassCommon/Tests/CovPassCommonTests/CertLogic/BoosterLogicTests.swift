@@ -140,7 +140,7 @@ class BoosterLogicTests: XCTestCase {
 
     private var userDefaultBoosterCandidates: [BoosterCandidate] {
         guard let data = try? userDefaults.fetch(UserDefaults.keyBoosterCandidates) as? Data,
-           let boosterCandidates = try? JSONDecoder().decode([BoosterCandidate].self, from: data)
+              let boosterCandidates = try? JSONDecoder().decode([BoosterCandidate].self, from: data)
         else { return [] }
         return boosterCandidates
     }

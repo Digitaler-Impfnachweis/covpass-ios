@@ -6,8 +6,8 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-import Foundation
 import CertLogic
+import Foundation
 
 extension Rule: Equatable {
     public static func == (lhs: Rule, rhs: Rule) -> Bool {

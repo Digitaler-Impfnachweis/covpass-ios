@@ -6,10 +6,10 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-import Foundation
 import CertLogic
-import SwiftyJSON
 @testable import CovPassCommon
+import Foundation
+import SwiftyJSON
 
 extension RuleSimple {
     static var mock: RuleSimple {

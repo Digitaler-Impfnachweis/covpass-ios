@@ -18,9 +18,9 @@ public class OfflineCardView: XibView {
     @IBOutlet public var infoImageView: UIImageView!
     @IBOutlet public var infoLabel: UILabel!
 
-    @IBOutlet public weak var dateTitle: UILabel!
-    @IBOutlet public weak var certificatesDateLabel: UILabel!
-    @IBOutlet public weak var rulesDateLabel: UILabel!
+    @IBOutlet public var dateTitle: UILabel!
+    @IBOutlet public var certificatesDateLabel: UILabel!
+    @IBOutlet public var rulesDateLabel: UILabel!
 
     @IBOutlet private var bottomConstraint: NSLayoutConstraint!
 

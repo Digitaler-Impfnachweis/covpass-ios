@@ -26,7 +26,7 @@ public struct DCCServiceMock: DCCServiceProtocol {
         return Promise.value([])
     }
 
-    public func loadValueSet(id: String, hash: String) -> Promise<CovPassCommon.ValueSet> {
+    public func loadValueSet(id _: String, hash _: String) -> Promise<CovPassCommon.ValueSet> {
         return Promise(error: ApplicationError.unknownError)
     }
 
@@ -34,7 +34,7 @@ public struct DCCServiceMock: DCCServiceProtocol {
         return Promise.value([])
     }
 
-    public func loadBoosterRule(country: String, hash: String) -> Promise<Rule> {
+    public func loadBoosterRule(country _: String, hash _: String) -> Promise<Rule> {
         return Promise(error: ApplicationError.unknownError)
     }
 }

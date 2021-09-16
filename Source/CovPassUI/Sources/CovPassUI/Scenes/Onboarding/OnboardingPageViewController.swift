@@ -60,12 +60,12 @@ public class OnboardingPageViewController: UIViewController {
     }
 }
 
-extension OnboardingPageViewController {
+public extension OnboardingPageViewController {
     // This will move to `viewDidLoad` later once all views are
     // intitalized properly before accessing this
-    public override var accessibilityElements: [Any]? {
+    override var accessibilityElements: [Any]? {
         get {
-            let elements = [headline, descriptionText].compactMap({ $0 })
+            let elements = [headline, descriptionText].compactMap { $0 }
             assert(!elements.isEmpty, "No accessibilityElements! View not loaded?")
             return elements
         }

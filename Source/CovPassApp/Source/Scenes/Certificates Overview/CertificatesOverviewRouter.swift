@@ -13,7 +13,6 @@ import Scanner
 import UIKit
 
 class CertificatesOverviewRouter: CertificatesOverviewRouterProtocol, DialogRouterProtocol {
-
     // MARK: - Properties
 
     let sceneCoordinator: SceneCoordinator

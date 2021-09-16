@@ -9,14 +9,13 @@
 import UIKit
 
 extension UIPrintPageRenderer {
-
     func generatePDFData() -> Data {
         let pdfData = NSMutableData()
         UIGraphicsBeginPDFContextToData(pdfData, paperRect, nil)
         prepare(forDrawingPages: NSMakeRange(0, numberOfPages))
         let printRect = UIGraphicsGetPDFContextBounds()
 
-        for pdfPage in 0..<numberOfPages {
+        for pdfPage in 0 ..< numberOfPages {
             UIGraphicsBeginPDFPage()
             drawPage(at: pdfPage, in: printRect)
         }

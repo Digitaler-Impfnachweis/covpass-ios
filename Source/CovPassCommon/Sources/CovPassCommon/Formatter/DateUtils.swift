@@ -9,7 +9,6 @@
 import Foundation
 
 public enum DateUtils {
-
     /// A `DateFormatter` intended for VoiceOver use.
     public static var audioDateFormatter: DateFormatter = {
         let df = DateFormatter()

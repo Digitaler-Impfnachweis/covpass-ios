@@ -13,7 +13,6 @@ public final class APIServiceDelegate: NSObject {
 
     // MARK: - Creating a Delegate
 
-
     /// Initializes an API Session delegate
     /// - Parameter publicKeyHashes: A list of SHA256 hashes of the certificates to pin
     public init(publicKeyHashes: [String]) {
@@ -60,14 +59,13 @@ extension APIServiceDelegate: URLSessionDelegate {
             let status = SecTrustEvaluate(trust, &secresult)
 
             if status == errSecSuccess {
-                self.evaluate(challenge: challenge, trust: trust, completionHandler: completionHandler)
+                evaluate(challenge: challenge, trust: trust, completionHandler: completionHandler)
             } else {
                 print("Evaluation failed with status: \(status)")
                 completionHandler(.cancelAuthenticationChallenge, /* credential */ nil)
             }
         }
     }
-
 
     /// Common evaluation, covering iOS versions 12.5 or 13.x
     /// - Parameters:
@@ -76,19 +74,19 @@ extension APIServiceDelegate: URLSessionDelegate {
     ///   - completionHandler: the completion handler to accept or reject the request
     private func evaluate(challenge: URLAuthenticationChallenge, trust: SecTrust, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
         #if DEBUG
-        // debug/review: print the chain
-        for i in 0..<SecTrustGetCertificateCount(trust) {
-            if let cert = SecTrustGetCertificateAtIndex(trust, i) {
-                print("certificate chain: [\(challenge.protectionSpace.host)] @ \(i): \(cert)")
+            // debug/review: print the chain
+            for i in 0 ..< SecTrustGetCertificateCount(trust) {
+                if let cert = SecTrustGetCertificateAtIndex(trust, i) {
+                    print("certificate chain: [\(challenge.protectionSpace.host)] @ \(i): \(cert)")
+                }
             }
-        }
         #endif
 
         if
             let serverCertificate = SecTrustGetCertificateAtIndex(trust, 0), // FIXME: don't pin to leaf!
             let serverPublicKey = SecCertificateCopyKey(serverCertificate),
-            let serverPublicKeyData = SecKeyCopyExternalRepresentation(serverPublicKey, nil ) as Data? {
-
+            let serverPublicKeyData = SecKeyCopyExternalRepresentation(serverPublicKey, nil) as Data?
+        {
             // Matching fingerprint?
             let keyHash = serverPublicKeyData.sha256().hexEncodedString()
             if publicKeyHashes.contains(keyHash) {
@@ -97,7 +95,7 @@ extension APIServiceDelegate: URLSessionDelegate {
                 return
             } else {
                 #if DEBUG
-                print("⛔️ \(keyHash) @ \(challenge.protectionSpace.host)")
+                    print("⛔️ \(keyHash) @ \(challenge.protectionSpace.host)")
                 #endif
             }
         }

@@ -22,6 +22,7 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
     private var certificate: DigitalGreenCertificate {
         token.vaccinationCertificate.hcert.dgc
     }
+
     // Show notification to the user if he is qualified for a booster vaccination
     private var showNotification: Bool {
         guard let boosterCandidate = boosterLogic.checkCertificates([token]) else { return false }

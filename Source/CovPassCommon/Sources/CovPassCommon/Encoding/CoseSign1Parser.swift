@@ -97,11 +97,11 @@ struct CoseSign1Message {
         payload = []
         signature = []
         guard let data = try JSONSerialization.jsonObject(with: jsonData, options: .allowFragments) as? [String: Any],
-              let cborData = encode(json: data) else {
+              let cborData = encode(json: data)
+        else {
             throw CoseParsingError.missingValue
         }
         payload = CBOR.encode(cborData)
-
     }
 
     /// Returns cose payload as json data
@@ -158,7 +158,7 @@ struct CoseSign1Message {
             v = CBOR.unsignedInt(valueInt)
         case let valueDouble as Double:
             v = CBOR.double(valueDouble)
-        case let cborArray as Array<[String: Any]>:
+        case let cborArray as [[String: Any]]:
             let remappedResult = cborArray.map { self.encode(cborObject: $0) }
             v = CBOR.array(remappedResult)
         case let cborMap as [String: Any]:

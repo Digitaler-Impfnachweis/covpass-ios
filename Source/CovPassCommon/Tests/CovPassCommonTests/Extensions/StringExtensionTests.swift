@@ -29,7 +29,7 @@ class StringExtensionTests: XCTestCase {
 
         XCTAssertEqual(" URN:UVCI:01:AT:10807843F94AEE0EE5093FBC254BD813#B".stripUVCIPrefix(),
                        " 01:AT:10807843F94AEE0EE5093FBC254BD813#B")
-        
+
         XCTAssertEqual("UVCI:01:AT:10807843F94AEE0EE5093FBC254BD813#B".stripUVCIPrefix(),
                        "UVCI:01:AT:10807843F94AEE0EE5093FBC254BD813#B")
     }

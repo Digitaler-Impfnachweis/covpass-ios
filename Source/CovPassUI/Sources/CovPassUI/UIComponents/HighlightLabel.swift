@@ -10,8 +10,7 @@ import UIKit
 
 @IBDesignable
 public class HighlightLabel: UILabel {
-
-    public override func awakeFromNib() {
+    override public func awakeFromNib() {
         super.awakeFromNib()
 
         textColor = .neutralWhite
@@ -25,7 +24,7 @@ public class HighlightLabel: UILabel {
         didSet { invalidateIntrinsicContentSize() }
     }
 
-    public override func textRect(forBounds bounds: CGRect, limitedToNumberOfLines numberOfLines: Int) -> CGRect {
+    override public func textRect(forBounds bounds: CGRect, limitedToNumberOfLines numberOfLines: Int) -> CGRect {
         let insetRect = bounds.inset(by: textInsets)
         let textRect = super.textRect(forBounds: insetRect, limitedToNumberOfLines: numberOfLines)
         let invertedInsets = UIEdgeInsets(top: -textInsets.top,
@@ -35,11 +34,11 @@ public class HighlightLabel: UILabel {
         return textRect.inset(by: invertedInsets)
     }
 
-    public override func drawText(in rect: CGRect) {
+    override public func drawText(in rect: CGRect) {
         super.drawText(in: rect.inset(by: textInsets))
     }
 
-    public override func layoutSubviews() {
+    override public func layoutSubviews() {
         super.layoutSubviews()
         layer.cornerRadius = bounds.height / 2
     }

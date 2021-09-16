@@ -12,7 +12,6 @@ import Foundation
 import UIKit
 
 struct VaccinationCertificateItemViewModel: CertificateItemViewModel {
-
     private let certificate: ExtendedCBORWebToken
     private var dgc: DigitalGreenCertificate {
         certificate.vaccinationCertificate.hcert.dgc
@@ -59,12 +58,14 @@ struct VaccinationCertificateItemViewModel: CertificateItemViewModel {
     var title: String {
         "certificates_overview_vaccination_certificate_title".localized
     }
+
     var titleAccessibilityLabel: String? { title }
 
     var subtitle: String {
         guard let v = dgc.v?.first else { return "" }
         return String(format: "certificates_overview_vaccination_certificate_message".localized, v.dn, v.sd)
     }
+
     var subtitleAccessibilityLabel: String? { subtitle }
 
     var info: String {
@@ -73,6 +74,7 @@ struct VaccinationCertificateItemViewModel: CertificateItemViewModel {
         }
         return ""
     }
+
     var infoAccessibilityLabel: String? {
         guard let v = dgc.v?.first else { return info }
         return String(format: "certificates_overview_vaccination_certificate_date".localized, DateUtils.audioDateFormatter.string(from: v.dt))
@@ -90,6 +92,7 @@ struct VaccinationCertificateItemViewModel: CertificateItemViewModel {
         }
         return nil
     }
+
     var info2AccessibilityLabel: String? { info2 }
 
     var certificateItemIsSelectableAccessibilityLabel: String {

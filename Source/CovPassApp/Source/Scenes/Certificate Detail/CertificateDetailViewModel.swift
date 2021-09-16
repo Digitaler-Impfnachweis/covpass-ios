@@ -194,7 +194,7 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
         self.repository = repository
         self.boosterLogic = boosterLogic
         self.certificates = certificates
-        self.boosterCandidate = boosterLogic.checkCertificates(certificates)
+        boosterCandidate = boosterLogic.checkCertificates(certificates)
         resolver = resolvable
     }
 

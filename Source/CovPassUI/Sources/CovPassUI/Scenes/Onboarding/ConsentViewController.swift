@@ -109,9 +109,9 @@ extension ConsentViewController: UIScrollViewDelegate {
 extension ConsentViewController {
     // This will move to `viewDidLoad` later once all views are
     // intitalized properly before accessing this
-    public override var accessibilityElements: [Any]? {
+    override public var accessibilityElements: [Any]? {
         get {
-            let elements = [headline, listItems, descriptionText, dataPrivacyInfoView].compactMap({ $0 })
+            let elements = [headline, listItems, descriptionText, dataPrivacyInfoView].compactMap { $0 }
             assert(!elements.isEmpty, "No accessibilityElements! View not loaded?")
             return elements
         }

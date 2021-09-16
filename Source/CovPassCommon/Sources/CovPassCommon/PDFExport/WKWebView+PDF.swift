@@ -6,12 +6,11 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
+import PDFKit
 import UIKit
 import WebKit
-import PDFKit
 
 extension WKWebView {
-
     enum PDFRenderError: Error {
         case stillLoading, invalidPDF
     }

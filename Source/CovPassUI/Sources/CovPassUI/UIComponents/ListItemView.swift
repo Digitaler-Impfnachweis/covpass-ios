@@ -47,8 +47,7 @@ public class ListItemView: XibView {
 }
 
 extension ListItemView {
-
-    public override var accessibilityLabel: String? {
+    override public var accessibilityLabel: String? {
         didSet {
             internalButton.accessibilityLabel = accessibilityLabel
         }
@@ -59,11 +58,11 @@ extension ListItemView {
         accessibilityElements = [internalButton!]
 
         // `textLabel` defines `accessibilityLabel`
-        let obs1 = textLabel.observe(\UILabel.text, options: .new) { [unowned self] label, change in
+        let obs1 = textLabel.observe(\UILabel.text, options: .new) { [unowned self] label, _ in
             self.accessibilityLabel = label.text
             self.internalButton.accessibilityLabel = label.text
         }
-        let obs2 = textLabel.observe(\UILabel.attributedText, options: .new) { [unowned self] label, change in
+        let obs2 = textLabel.observe(\UILabel.attributedText, options: .new) { [unowned self] label, _ in
             self.accessibilityLabel = label.attributedText?.string
             self.internalButton.accessibilityLabel = label.attributedText?.string
         }

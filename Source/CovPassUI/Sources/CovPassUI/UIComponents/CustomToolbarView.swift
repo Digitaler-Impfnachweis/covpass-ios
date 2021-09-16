@@ -106,7 +106,6 @@ public class CustomToolbarView: XibView {
                 rightButton.enableAccessibility(label: $0.label,
                                                 hint: $0.hint,
                                                 traits: $0.traits)
-
             }
         }
     }
@@ -143,7 +142,7 @@ public class CustomToolbarView: XibView {
             rightButton.setImage(.flashOn, for: .selected)
 
             rightButtonAction = { [weak self] in
-                guard let self = self  else { return }
+                guard let self = self else { return }
                 self.rightButton.isSelected.toggle()
                 self.delegate?.customToolbarView(self, didTap: .flashLight)
             }
@@ -337,11 +336,11 @@ public class CustomToolbarView: XibView {
     }
 }
 
-extension CustomToolbarView {
-    public override var accessibilityElements: [Any]? {
+public extension CustomToolbarView {
+    override var accessibilityElements: [Any]? {
         get {
             [primaryButton as Any, leftButton as Any, rightButton as Any]
         }
-        set { }
+        set {}
     }
 }

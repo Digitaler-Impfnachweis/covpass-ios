@@ -6,10 +6,10 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-import Foundation
-import CovPassCommon
-import PromiseKit
 import CertLogic
+import CovPassCommon
+import Foundation
+import PromiseKit
 
 class DCCCertLogicMock: DCCCertLogicProtocol {
     var countries: [String] {
@@ -22,7 +22,7 @@ class DCCCertLogicMock: DCCCertLogicProtocol {
 
     var validationError: Error?
     var validateResult: [ValidationResult]?
-    func validate(type: DCCCertLogic.LogicType, countryCode: String, validationClock: Date, certificate: CBORWebToken) throws -> [ValidationResult] {
+    func validate(type _: DCCCertLogic.LogicType, countryCode _: String, validationClock _: Date, certificate _: CBORWebToken) throws -> [ValidationResult] {
         if let err = validationError {
             throw err
         }

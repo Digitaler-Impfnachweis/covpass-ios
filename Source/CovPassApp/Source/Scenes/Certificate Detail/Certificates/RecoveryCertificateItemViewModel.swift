@@ -52,16 +52,19 @@ struct RecoveryCertificateItemViewModel: CertificateItemViewModel {
     var title: String {
         return "certificates_overview_recovery_certificate_title".localized
     }
+
     var titleAccessibilityLabel: String? { title }
 
     var subtitle: String {
         return "certificates_overview_recovery_certificate_message".localized
     }
+
     var subtitleAccessibilityLabel: String? { subtitle }
 
     var info: String {
         infoString(forAccessibility: false) ?? ""
     }
+
     var infoAccessibilityLabel: String? {
         infoString(forAccessibility: true) ?? info
     }
@@ -78,6 +81,7 @@ struct RecoveryCertificateItemViewModel: CertificateItemViewModel {
         }
         return nil
     }
+
     var info2AccessibilityLabel: String? { info2 }
 
     var certificateItemIsSelectableAccessibilityLabel: String {

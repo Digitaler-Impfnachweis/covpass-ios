@@ -71,7 +71,7 @@ public class OnboardingContainerViewController: UIViewController, ViewModelDeleg
         updateToolbarForPage(at: currentIndex)
     }
 
-    public override func viewWillAppear(_ animated: Bool) {
+    override public func viewWillAppear(_ animated: Bool) {
         // brute force but works atm
         let first = pages[currentIndex].accessibilityElements?.first
         UIAccessibility.post(notification: .layoutChanged, argument: first)
@@ -171,7 +171,7 @@ extension OnboardingContainerViewController: CustomToolbarViewDelegate {
                 viewModel.navigateToPreviousScene()
                 return
             }
-            pageController?.setViewControllers([pages[currentIndex-1]], direction: .reverse, animated: true, completion: { [weak self] _ in
+            pageController?.setViewControllers([pages[currentIndex - 1]], direction: .reverse, animated: true, completion: { [weak self] _ in
                 self?.currentIndex -= 1 // HACK: set here to prevent crashes due to unloaded view
             })
             pageIndicator.selectDot(withIndex: currentIndex)
@@ -180,7 +180,7 @@ extension OnboardingContainerViewController: CustomToolbarViewDelegate {
                 viewModel.navigateToNextScene()
                 return
             }
-            pageController?.setViewControllers([pages[currentIndex+1]], direction: .forward, animated: true, completion: { [weak self] _ in
+            pageController?.setViewControllers([pages[currentIndex + 1]], direction: .forward, animated: true, completion: { [weak self] _ in
                 self?.currentIndex += 1 // HACK: set here to prevent crashes due to unloaded view
             })
             pageIndicator.selectDot(withIndex: currentIndex)

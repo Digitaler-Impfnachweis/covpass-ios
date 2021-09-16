@@ -122,13 +122,13 @@ public struct KeyPair {
     }
 
     public static var `default`: KeyPair = {
-        var publicKey: SecKey? = nil
-        var privateKey: SecKey? = nil
+        var publicKey: SecKey?
+        var privateKey: SecKey?
         _ = SecKeyGeneratePair([
             kSecAttrApplicationTag as String: UUID().uuidString,
-            kSecAttrLabel as String:          UUID().uuidString,
-            kSecAttrKeyType as String:        kSecAttrKeyTypeECSECPrimeRandom,
-            kSecAttrKeySizeInBits as String:  256,
+            kSecAttrLabel as String: UUID().uuidString,
+            kSecAttrKeyType as String: kSecAttrKeyTypeECSECPrimeRandom,
+            kSecAttrKeySizeInBits as String: 256
         ] as NSDictionary, &publicKey, &privateKey)
         return KeyPair(publicKey: publicKey!, privateKey: privateKey!)
     }()
@@ -139,11 +139,11 @@ public class TrustCertificateMock: TrustCertificate {
         super.init(certificateType: "", country: "DE", kid: "", rawData: "", signature: "", thumbprint: "", timestamp: "")
     }
 
-    required init(from decoder: Decoder) throws {
+    required init(from _: Decoder) throws {
         fatalError("init(from:) has not been implemented")
     }
 
-    public override func loadPublicKey() throws -> SecKey {
+    override public func loadPublicKey() throws -> SecKey {
         KeyPair.default.publicKey
     }
 }

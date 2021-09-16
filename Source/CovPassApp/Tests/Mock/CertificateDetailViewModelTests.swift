@@ -8,7 +8,6 @@
 import XCTest
 
 class CertificateDetailViewModelTests: XCTestCase {
-
     func testImmunizationTitle() throws {
         throw XCTSkip("currently not implemented")
     }
@@ -16,5 +15,4 @@ class CertificateDetailViewModelTests: XCTestCase {
     func testImmunizationBody() throws {
         throw XCTSkip("currently not implemented")
     }
-
 }

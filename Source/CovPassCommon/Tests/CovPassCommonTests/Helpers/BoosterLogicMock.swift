@@ -6,21 +6,20 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-import Foundation
 import CovPassCommon
+import Foundation
 import PromiseKit
 
 class BoosterLogicMock: BoosterLogicProtocol {
-
     var boosterCandidates = [BoosterCandidate]()
 
     var checkForNewBoosterVaccinationsIfNeededResult: Promise<Bool>?
-    func checkForNewBoosterVaccinationsIfNeeded(_ users: [CertificatePair]) -> Promise<Bool> {
+    func checkForNewBoosterVaccinationsIfNeeded(_: [CertificatePair]) -> Promise<Bool> {
         checkForNewBoosterVaccinationsIfNeededResult ?? Promise.value(false)
     }
 
     var checkForNewBoosterVaccinationsResult: Promise<Bool>?
-    func checkForNewBoosterVaccinations(_ users: [CertificatePair]) -> Promise<Bool> {
+    func checkForNewBoosterVaccinations(_: [CertificatePair]) -> Promise<Bool> {
         checkForNewBoosterVaccinationsResult ?? Promise.value(false)
     }
 

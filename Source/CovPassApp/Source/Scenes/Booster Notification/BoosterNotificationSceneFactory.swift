@@ -11,7 +11,6 @@ import PromiseKit
 import UIKit
 
 struct BoosterNotificationSceneFactory: ResolvableSceneFactory {
-
     // MARK: - Lifecycle
 
     func make(resolvable: Resolver<Void>) -> UIViewController {

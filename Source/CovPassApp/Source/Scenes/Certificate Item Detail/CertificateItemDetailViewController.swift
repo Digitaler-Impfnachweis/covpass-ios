@@ -102,7 +102,6 @@ class CertificateItemDetailViewController: UIViewController {
             hintView.isHidden = false
             hintView.titleLabel.attributedText = "certificate_invalid_detail_view_note_title".localized.styledAs(.header_3)
             hintView.bodyLabel.attributedText = "certificate_invalid_detail_view_note_message".localized.styledAs(.body)
-
         }
     }
 

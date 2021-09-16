@@ -14,7 +14,6 @@ import XCTest
 @testable import CovPassCommon
 
 class StringFilenameTests: XCTestCase {
-
     func testFilenameSanitizer() {
         XCTAssertEqual("file.txt".sanitizedFileName, "file.txt")
 
@@ -45,7 +44,5 @@ class StringFilenameTests: XCTestCase {
 
             XCTAssertEqual(referenceDir.absoluteString, checkDir.absoluteString)
         }
-
     }
-
 }

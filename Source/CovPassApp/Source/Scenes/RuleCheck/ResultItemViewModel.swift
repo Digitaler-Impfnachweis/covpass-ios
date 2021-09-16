@@ -59,6 +59,7 @@ struct ResultItemViewModel: CertificateItemViewModel {
     var title: String {
         result.certificate.vaccinationCertificate.hcert.dgc.nam.fullName
     }
+
     var titleAccessibilityLabel: String? { title }
 
     var subtitle: String {
@@ -70,6 +71,7 @@ struct ResultItemViewModel: CertificateItemViewModel {
         }
         return "certificate_check_validity_vaccination".localized
     }
+
     var subtitleAccessibilityLabel: String? { subtitle }
 
     var info: String {
@@ -81,6 +83,7 @@ struct ResultItemViewModel: CertificateItemViewModel {
         }
         return "certificate_check_validity_result_valid".localized
     }
+
     var infoAccessibilityLabel: String? { info }
 
     var certificateItemIsSelectableAccessibilityLabel: String {

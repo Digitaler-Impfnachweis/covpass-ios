@@ -28,7 +28,7 @@ open class TrustCertificate: Codable {
     }
 
     open func loadPublicKey() throws -> SecKey {
-        guard let certificateData = Data(base64Encoded: self.rawData),
+        guard let certificateData = Data(base64Encoded: rawData),
               let cert = SecCertificateCreateWithData(nil, certificateData as CFData),
               let publicKey = SecCertificateCopyKey(cert)
         else {

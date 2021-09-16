@@ -125,7 +125,7 @@ public class DotPageIndicator: UIView {
     private func updateAccessibilityLabel() {
         for (index, dot) in dots.enumerated() {
             #warning("bring localizable strings into package!")
-            //dot.accessibilityLabel = String(format: "accessibility_page_indicator".localized, index+1, dots.count)
+            // dot.accessibilityLabel = String(format: "accessibility_page_indicator".localized, index+1, dots.count)
             dot.accessibilityIdentifier = "page-indicator-\(index)"
         }
     }

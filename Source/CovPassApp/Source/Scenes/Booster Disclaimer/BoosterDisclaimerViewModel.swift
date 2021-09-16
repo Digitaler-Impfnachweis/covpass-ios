@@ -9,7 +9,6 @@ import Foundation
 import PromiseKit
 
 final class BoosterDisclaimerViewModel {
-
     let resolver: Resolver<Void>
 
     var title: String {

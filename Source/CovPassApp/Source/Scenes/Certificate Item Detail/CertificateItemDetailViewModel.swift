@@ -83,7 +83,7 @@ class CertificateItemDetailViewModel: CertificateItemDetailViewModelProtocol {
                 ContentItem("recovery_certificate_detail_view_data_valid_until".localized, DateUtils.isoDateFormatter.string(from: r.du),
                             accessibilityLabel(for: r.du, label: "recovery_certificate_detail_view_data_valid_until".localized)),
                 ContentItem("recovery_certificate_detail_view_data_identifier".localized, r.ciDisplayName),
-                ContentItem("recovery_certificate_detail_view_data_expiry_date".localized, String(format: "\("recovery_certificate_detail_view_data_expiry_date_message".localized)\n\("recovery_certificate_detail_view_data_expiry_date_note".localized)", certificate.vaccinationCertificate.exp != nil ? DateUtils.displayDateTimeFormatter.string(from: certificate.vaccinationCertificate.exp!) : "") /* TODO: accessibility label */)
+                ContentItem("recovery_certificate_detail_view_data_expiry_date".localized, String(format: "\("recovery_certificate_detail_view_data_expiry_date_message".localized)\n\("recovery_certificate_detail_view_data_expiry_date_note".localized)", certificate.vaccinationCertificate.exp != nil ? DateUtils.displayDateTimeFormatter.string(from: certificate.vaccinationCertificate.exp!) : "") /* TODO: accessibility label */ )
             ]
         }
         if let t = dgc.t?.first {
@@ -104,7 +104,7 @@ class CertificateItemDetailViewModel: CertificateItemDetailViewModelProtocol {
                 ContentItem("test_certificate_detail_view_data_test_issuer".localized, t.is),
                 ContentItem("test_certificate_detail_view_data_test_identifier".localized, t.ciDisplayName),
                 ContentItem("test_certificate_detail_view_data_expiry_date".localized,
-                            String(format: "\("test_certificate_detail_view_data_expiry_date_message".localized)\n\("test_certificate_detail_view_data_expiry_date_note".localized)", certificate.vaccinationCertificate.exp != nil ? DateUtils.displayDateTimeFormatter.string(from: certificate.vaccinationCertificate.exp!) : "") /* TODO: accessibility label */)
+                            String(format: "\("test_certificate_detail_view_data_expiry_date_message".localized)\n\("test_certificate_detail_view_data_expiry_date_note".localized)", certificate.vaccinationCertificate.exp != nil ? DateUtils.displayDateTimeFormatter.string(from: certificate.vaccinationCertificate.exp!) : "") /* TODO: accessibility label */ )
             ]
         }
         if let v = dgc.v?.first {
@@ -124,9 +124,7 @@ class CertificateItemDetailViewModel: CertificateItemDetailViewModelProtocol {
                 ContentItem("vaccination_certificate_detail_view_data_vaccine_issuer".localized, v.is),
                 ContentItem("vaccination_certificate_detail_view_data_vaccine_identifier".localized, v.ciDisplayName),
                 ContentItem("vaccination_certificate_detail_view_data_expiry_date".localized,
-                String(format: "\("vaccination_certificate_detail_view_data_expiry_date_message".localized)\n\("vaccination_certificate_detail_view_data_expiry_date_note".localized)", certificate.vaccinationCertificate.exp != nil ? DateUtils.displayDateTimeFormatter.string(from: certificate.vaccinationCertificate.exp!) : "" /* TODO: accessibility label */)
-                )
-
+                            String(format: "\("vaccination_certificate_detail_view_data_expiry_date_message".localized)\n\("vaccination_certificate_detail_view_data_expiry_date_note".localized)", certificate.vaccinationCertificate.exp != nil ? DateUtils.displayDateTimeFormatter.string(from: certificate.vaccinationCertificate.exp!) : "" /* TODO: accessibility label */ ))
             ]
         }
         return []

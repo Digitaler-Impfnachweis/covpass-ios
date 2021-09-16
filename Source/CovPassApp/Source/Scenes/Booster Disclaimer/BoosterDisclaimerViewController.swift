@@ -5,11 +5,10 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-import UIKit
 import CovPassUI
+import UIKit
 
 class BoosterDisclaimerViewController: UIViewController {
-
     @IBOutlet var headline: InfoHeaderView!
     @IBOutlet var detailsView: ParagraphView!
     @IBOutlet var actionButton: MainButton!
@@ -38,5 +37,4 @@ class BoosterDisclaimerViewController: UIViewController {
             self?.viewModel.resolver.fulfill_()
         }
     }
-
 }

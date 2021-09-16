@@ -10,7 +10,6 @@ import Foundation
 import PDFKit
 
 public protocol SVGPDFExportProtocol {
-
     typealias SVGData = Data
     typealias ExportHandler = (_ export: PDFDocument?) -> Void
 
@@ -29,5 +28,4 @@ public protocol SVGPDFExportProtocol {
     ///   - data: The data to export
     ///   - completion: Handler to contain an optional `PDFDocument`
     func export(_ data: SVGData, completion: ExportHandler?)
-
 }

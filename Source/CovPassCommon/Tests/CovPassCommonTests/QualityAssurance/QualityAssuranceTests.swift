@@ -12,7 +12,6 @@ import XCTest
 @testable import CovPassCommon
 
 class QualityAssuranceTests: XCTestCase {
-
     var repository: VaccinationRepository!
     var certLogic: DCCCertLogic!
 

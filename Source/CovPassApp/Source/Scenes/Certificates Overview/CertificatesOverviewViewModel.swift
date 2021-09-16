@@ -242,6 +242,7 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
 }
 
 // MARK: - Update Announcements
+
 extension CertificatesOverviewViewModel {
     /// Shows the announcement view if user downloaded a new version from the app store
     private func showAnnouncementIfNeeded() -> Promise<Void> {
@@ -254,6 +255,7 @@ extension CertificatesOverviewViewModel {
 }
 
 // MARK: - Booster Notifications
+
 extension CertificatesOverviewViewModel {
     private func showBoosterNotificationIfNeeded() -> Promise<Void> {
         firstly {
@@ -269,7 +271,6 @@ extension CertificatesOverviewViewModel {
                 .then {
                     self.router.showBoosterNotification()
                 }
-
         }
     }
 
@@ -283,7 +284,7 @@ extension CertificatesOverviewViewModel {
                     return false
                 }
                 let alreadyShown = cert.wasExpiryAlertShown ?? false
-                if (cert.vaccinationCertificate.expiresSoon || cert.vaccinationCertificate.isInvalid || cert.vaccinationCertificate.isExpired) && !alreadyShown {
+                if cert.vaccinationCertificate.expiresSoon || cert.vaccinationCertificate.isInvalid || cert.vaccinationCertificate.isExpired, !alreadyShown {
                     cert.wasExpiryAlertShown = true
                     _ = repository.setExpiryAlert(shown: true, token: cert)
                     return true

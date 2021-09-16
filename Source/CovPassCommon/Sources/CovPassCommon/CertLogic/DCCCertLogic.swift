@@ -32,7 +32,7 @@ public class RuleSimple: Codable {
         if let country = try container.decodeIfPresent(String.self, forKey: .country) {
             self.country = country
         } else {
-            self.country = "DE" // currently booster rules are DE only
+            country = "DE" // currently booster rules are DE only
         }
     }
 }
@@ -146,7 +146,7 @@ public struct DCCCertLogic: DCCCertLogicProtocol {
         return valueSet(name, data)
     }
 
-    private static func valueSet(_ name: String, _ data: Data) -> [String] {
+    private static func valueSet(_: String, _ data: Data) -> [String] {
         guard let arr = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: Any],
               let setsArr = arr["valueSetValues"] as? [String: Any]
         else {

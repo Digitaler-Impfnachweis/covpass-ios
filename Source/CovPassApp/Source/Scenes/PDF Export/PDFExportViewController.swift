@@ -6,13 +6,13 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-import CovPassUI
 import CovPassCommon
+import CovPassUI
 import UIKit
 
 class PDFExportViewController: UIViewController {
-
     // MARK: - IBOutlet
+
     @IBOutlet var headline: InfoHeaderView!
     @IBOutlet var exportExplanationsView: ParagraphView!
     @IBOutlet var exportButton: MainButton!
@@ -85,7 +85,7 @@ class PDFExportViewController: UIViewController {
 
                     // present 'share sheet'
                     let activityViewController = UIActivityViewController(activityItems: [pdfFile], applicationActivities: nil)
-                    activityViewController.completionWithItemsHandler = { _ /*type*/, completed, _/*returnedItems*/, _/*activityError*/ in
+                    activityViewController.completionWithItemsHandler = { _ /* type */, completed, _ /* returnedItems */, _ /* activityError */ in
                         // completion handler will be called even if we modify the PDF ('markup') and return to share sheet
                         // in that case we DON'T remove the pdf file
                         if activityViewController.view.superview == nil {

@@ -12,7 +12,6 @@ import Foundation
 ///
 /// See: [Big List of Naughty Strings]( https://github.com/minimaxir/big-list-of-naughty-strings)
 struct BLNS {
-
     /// A small  subset of the blns
     static let testStrings = [
         "\\",

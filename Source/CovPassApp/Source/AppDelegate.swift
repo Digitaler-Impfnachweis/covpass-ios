@@ -35,7 +35,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         appUpdateDialogIfNeeded()
 
         #if targetEnvironment(simulator)
-        FileManager.default.printFileLocations()
+            FileManager.default.printFileLocations()
         #endif
 
         return true

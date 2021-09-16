@@ -6,11 +6,10 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-import XCTest
 @testable import CovPassCommon
+import XCTest
 
 class HTTPClientCertificatePinningTests: XCTestCase {
-
     /// Testing ~~certificate~~ public key pinning mechanism on a valid and invalid host.
     func testPinning() throws {
         let urlSessionDelegate = APIServiceDelegate(
@@ -53,6 +52,4 @@ class HTTPClientCertificatePinningTests: XCTestCase {
 
         waitForExpectations(timeout: 30)
     }
-
 }
-

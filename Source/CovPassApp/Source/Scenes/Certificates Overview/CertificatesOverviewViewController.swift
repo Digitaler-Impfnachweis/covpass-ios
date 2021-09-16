@@ -15,10 +15,9 @@ import UIKit
 private enum Constants {
     enum Accessibility {
         static let addCertificate = VoiceOverOptions.Settings(label: "accessibility_vaccination_start_screen_label_add_certificate".localized)
-        static let moreInformation = VoiceOverOptions.Settings(label: "accessibility_vaccination_start_screen_label_information".localized)        
+        static let moreInformation = VoiceOverOptions.Settings(label: "accessibility_vaccination_start_screen_label_information".localized)
     }
 }
-
 
 class CertificatesOverviewViewController: UIViewController {
     // MARK: - IBOutlet

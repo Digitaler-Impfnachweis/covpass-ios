@@ -9,8 +9,8 @@
 @testable import CovPassApp
 
 import Foundation
-import XCTest
 import PromiseKit
+import XCTest
 
 class BoosterNotificationViewModelTests: XCTestCase {
     private var sut: BoosterNotificationViewModel!

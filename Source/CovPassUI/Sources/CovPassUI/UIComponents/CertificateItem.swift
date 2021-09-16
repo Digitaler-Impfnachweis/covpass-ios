@@ -58,14 +58,14 @@ public class CertificateItem: XibView {
         info2Label.isHidden = viewModel.info2 == nil
 
         statusIcon.image = viewModel.statusIcon
-        
+
         activeLabel.attributedText = viewModel.activeTitle?.styledAs(.body).colored(.onBackground70)
         activeView.isHidden = viewModel.activeTitle == nil
 
         chevron.tintColor = .brandAccent
 
         addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onPressItem)))
-        
+
         setupAccessibility()
     }
 
@@ -77,11 +77,11 @@ public class CertificateItem: XibView {
         info2Label.accessibilityLabel = viewModel.info2AccessibilityLabel
         statusIcon.accessibilityLabel = viewModel.statusIconAccessibilityLabel
         accessibilityLabel = [viewModel.titleAccessibilityLabel,
-                                   viewModel.subtitleAccessibilityLabel,
-                                   viewModel.infoAccessibilityLabel,
-                                   viewModel.info2AccessibilityLabel,
-                                   viewModel.statusIconAccessibilityLabel,
-                                   viewModel.certificateItemIsSelectableAccessibilityLabel].compactMap({$0}).joined(separator: ", ")
+                              viewModel.subtitleAccessibilityLabel,
+                              viewModel.infoAccessibilityLabel,
+                              viewModel.info2AccessibilityLabel,
+                              viewModel.statusIconAccessibilityLabel,
+                              viewModel.certificateItemIsSelectableAccessibilityLabel].compactMap { $0 }.joined(separator: ", ")
     }
 
     // MARK: - Methods

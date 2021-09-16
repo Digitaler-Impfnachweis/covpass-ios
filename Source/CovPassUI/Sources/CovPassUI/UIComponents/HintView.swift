@@ -43,7 +43,7 @@ public class HintView: XibView {
         iconLabel.isHidden = true
     }
 
-    public override func updateConstraints() {
+    override public func updateConstraints() {
         // no subtitle? disable this constraint and align to `titleLabel`
         subTitleConstraint.isActive = !(subTitleLabel.text?.isEmpty ?? true)
         super.updateConstraints()
