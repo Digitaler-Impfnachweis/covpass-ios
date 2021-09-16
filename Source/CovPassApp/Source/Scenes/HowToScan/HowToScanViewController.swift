@@ -9,6 +9,13 @@
 import CovPassUI
 import UIKit
 
+private enum Constants {
+    enum Accessibility {
+        static let image = VoiceOverOptions.Settings(label: "accessibility_image_alternative_text".localized)
+        static let close = VoiceOverOptions.Settings(label: "accessibility_certificate_add_dialog_camera_access_label_close".localized)
+    }
+}
+
 class HowToScanViewController: UIViewController {
     // MARK: - IBOutlet
 
@@ -49,6 +56,7 @@ class HowToScanViewController: UIViewController {
 
     private func configureImageView() {
         imageView.image = viewModel.image
+        imageView.enableAccessibility(label: Constants.Accessibility.image.label)
         imageView.pinHeightToScaleAspectFit()
     }
 
@@ -58,6 +66,7 @@ class HowToScanViewController: UIViewController {
             self?.viewModel.cancel()
         }
         headline.image = .close
+        headline.actionButton.enableAccessibility(label: Constants.Accessibility.close.label)
         headline.layoutMargins.bottom = .space_24
     }
 
