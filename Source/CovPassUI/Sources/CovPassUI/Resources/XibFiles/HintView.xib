@@ -37,7 +37,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mt4-wn-ryh">
-                            <rect key="frame" x="251" y="17.5" width="61" height="24"/>
+                            <rect key="frame" x="251" y="13.5" width="61" height="24"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="752" verticalCompressionResistancePriority="752" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="thL-pc-NaT" customClass="HighlightLabel" customModule="CovPassUI">
                                     <rect key="frame" x="0.0" y="0.0" width="37" height="24"/>
@@ -82,7 +82,7 @@
                         <constraint firstItem="0cp-xi-c1o" firstAttribute="trailing" secondItem="FzW-WO-SYV" secondAttribute="trailing" constant="4" id="67w-Wp-0Iq"/>
                         <constraint firstItem="tn2-MS-2e2" firstAttribute="top" secondItem="Shp-hj-0SD" secondAttribute="bottom" id="EUf-JW-LfA"/>
                         <constraint firstItem="Shp-hj-0SD" firstAttribute="leading" secondItem="yCv-mX-bar" secondAttribute="leading" constant="15" id="FYb-Bn-70q"/>
-                        <constraint firstItem="mt4-wn-ryh" firstAttribute="firstBaseline" secondItem="Shp-hj-0SD" secondAttribute="firstBaseline" id="QMq-p3-tdl"/>
+                        <constraint firstItem="mt4-wn-ryh" firstAttribute="centerY" secondItem="Shp-hj-0SD" secondAttribute="centerY" id="GCr-7r-owF"/>
                         <constraint firstItem="tn2-MS-2e2" firstAttribute="leading" secondItem="Shp-hj-0SD" secondAttribute="leading" id="Y3v-qb-29i"/>
                         <constraint firstAttribute="bottom" secondItem="0cp-xi-c1o" secondAttribute="bottom" constant="15" id="bne-Fa-9QG"/>
                         <constraint firstItem="mt4-wn-ryh" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Shp-hj-0SD" secondAttribute="trailing" constant="4" id="hNL-Sw-QyG"/>

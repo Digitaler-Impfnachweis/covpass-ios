@@ -20,7 +20,7 @@ struct CertificateResult {
         if result.contains(where: { $0.result == .fail }) {
             return .fail
         }
-        if result.contains(where: { $0.result == .open }) {
+        if result.contains(where: { $0.result == .open }) || result.isEmpty {
             return .open
         }
         return .passed
