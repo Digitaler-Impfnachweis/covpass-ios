@@ -7,6 +7,7 @@
 //
 
 @testable import CovPassApp
+import CovPassUI
 import XCTest
 
 class PassConsentPageViewModelTests: XCTestCase {
@@ -14,7 +15,7 @@ class PassConsentPageViewModelTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
-        sut = PassConsentPageViewModel(type: .page4)
+        sut = PassConsentPageViewModel(type: .page4, router: ConsentRouter(sceneCoordinator: SceneCoordinatorMock()))
     }
 
     override func tearDown() {
