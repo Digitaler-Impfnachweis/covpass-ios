@@ -10,6 +10,15 @@ import CovPassCommon
 import CovPassUI
 import UIKit
 
+private enum Constants {
+    enum Accessibility {
+        static let close = VoiceOverOptions.Settings(label: "accessibility_popup_label_close".localized)
+        static let date = VoiceOverOptions.Settings(label: "accessibility_certificate_check_validity_selection_date".localized)
+        static let country = VoiceOverOptions.Settings(label: "accessibility_certificate_check_validity_selection_country".localized)
+        static let list = VoiceOverOptions.Settings(label: "accessibility_certificate_check_validity_label_results".localized)
+    }
+}
+
 class RuleCheckViewController: UIViewController {
     // MARK: - IBOutlet
 
@@ -52,6 +61,7 @@ class RuleCheckViewController: UIViewController {
             self?.viewModel.cancel()
         }
         headline.image = .close
+        headline.actionButton.enableAccessibility(label: Constants.Accessibility.close.label)
         headline.layoutMargins.bottom = .space_24
 
         subtitle.attributedText = "certificate_check_validity_message".localized.styledAs(.body)
@@ -92,11 +102,20 @@ class RuleCheckViewController: UIViewController {
         }
 
         viewModel.validationViewModels.forEach { vm in
-            stackView.addArrangedSubview(CertificateItem(viewModel: vm, action: {
+            let certificateItem = CertificateItem(viewModel: vm, action: {
                 guard let rvm = vm as? ResultItemViewModel else { return }
                 self.viewModel.showDetail(rvm.result)
-            }))
+            })
+            certificateItem.enableAccessibility(label: Constants.Accessibility.list.label, traits: .button)
+            stackView.addArrangedSubview(certificateItem)
         }
+
+        configureAccessibility()
+    }
+
+    private func configureAccessibility() {
+        dateSelection.enableAccessibility(label: String(format: Constants.Accessibility.date.label!, dateSelection.valueLabel.text!), traits: .button)
+        countrySelection.enableAccessibility(label: String(format: Constants.Accessibility.country.label!, countrySelection.valueLabel.text!), traits: .button)
     }
 
     private func addActivityIndicator() {

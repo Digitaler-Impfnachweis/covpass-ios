@@ -9,6 +9,19 @@
 import CovPassUI
 import UIKit
 
+private enum Constants {
+    enum Layout {
+        static let cornerRadius: CGFloat = 12.0
+        static let borderWith: CGFloat = 1.0
+    }
+    enum Accessibility {
+        static let select = VoiceOverOptions.Settings(label: "certificate_check_validity_selection_country_action_button".localized)
+        static let close = VoiceOverOptions.Settings(label: "accessibility_popup_label_close".localized)
+        static let countrySelected = VoiceOverOptions.Settings(label: "accessibility_certificate_check_validity_selection_country_selected".localized)
+        static let countryUnselected = VoiceOverOptions.Settings(label: "accessibility_certificate_check_validity_selection_country_unselected".localized)        
+    }
+}
+
 class CountrySelectionViewController: UIViewController {
     // MARK: - IBOutlet
 
@@ -35,25 +48,29 @@ class CountrySelectionViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureHeadline()
         configureText()
     }
 
     // MARK: - Private
 
-    private func configureText() {
+    private func configureHeadline() {
         headline.attributedTitleText = "certificate_check_validity_selection_country_title".localized.styledAs(.header_2)
         headline.action = { [weak self] in
             self?.viewModel.cancel()
         }
         headline.image = .close
         headline.layoutMargins.bottom = .space_24
+        headline.actionButton.enableAccessibility(label: Constants.Accessibility.close.label)
+    }
 
+    private func configureText() {
         info.attributedText = "certificate_check_validity_selection_country_note".localized.styledAs(.body)
         info.layoutMargins = .init(top: .space_8, left: .space_8, bottom: .space_8, right: .space_8)
         info.backgroundColor = .backgroundSecondary20
-        info.layer.borderWidth = 1.0
+        info.layer.borderWidth = Constants.Layout.borderWith
         info.layer.borderColor = UIColor.onBackground20.cgColor
-        info.layer.cornerRadius = 12.0
+        info.layer.cornerRadius = Constants.Layout.cornerRadius
 
         stackView.arrangedSubviews.forEach { subview in
             guard let item = subview as? CountryItemView else { return }
@@ -64,7 +81,16 @@ class CountrySelectionViewController: UIViewController {
             let countryView = CountryItemView()
             countryView.leftIcon.image = UIImage(named: country.uppercased(), in: Bundle.uiBundle, compatibleWith: nil)
             countryView.textLabel.attributedText = country.localized.styledAs(.header_3)
-            countryView.rightIcon.image = viewModel.country == country ? .checkboxChecked : .checkboxUnchecked
+
+            // We can use forced unwrapping because it's set via Constants
+            if viewModel.country == country {
+                countryView.rightIcon.image = .checkboxChecked
+                countryView.enableAccessibility(label: String(format: Constants.Accessibility.countrySelected.label!, country.localized), traits: .button)
+            } else {
+                countryView.rightIcon.image = .checkboxUnchecked
+                countryView.enableAccessibility(label: String(format: Constants.Accessibility.countryUnselected.label!, country.localized), traits: .button)
+            }
+
             countryView.action = {
                 self.viewModel.country = country
                 self.configureText()
@@ -72,7 +98,8 @@ class CountrySelectionViewController: UIViewController {
             stackView.addArrangedSubview(countryView)
         }
 
-        toolbarView.state = .confirm("certificate_check_validity_selection_country_action_button".localized)
+        // We can use forced unwrapping here because it's set via Constants
+        toolbarView.state = .confirm(Constants.Accessibility.close.label!)
         toolbarView.delegate = self
     }
 }

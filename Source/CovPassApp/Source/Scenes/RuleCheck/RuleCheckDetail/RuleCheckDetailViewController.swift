@@ -12,6 +12,12 @@ import PromiseKit
 import Scanner
 import UIKit
 
+private enum Constants {
+    enum Accessibility {
+        static let close = VoiceOverOptions.Settings(label: "accessibility_popup_label_close".localized)
+    }
+}
+
 class RuleCheckDetailViewController: UIViewController {
     // MARK: - Outlets
 
@@ -60,7 +66,7 @@ class RuleCheckDetailViewController: UIViewController {
             self?.viewModel.cancel()
         }
         headerView.image = .close
-
+        headerView.actionButton.enableAccessibility(label: Constants.Accessibility.close.label)
         subtitleLabel.attributedText = viewModel.subtitle.styledAs(.body).colored(.onBackground70)
         subtitleLabel.layoutMargins = .init(top: .zero, left: .space_24, bottom: .zero, right: .space_24)
     }

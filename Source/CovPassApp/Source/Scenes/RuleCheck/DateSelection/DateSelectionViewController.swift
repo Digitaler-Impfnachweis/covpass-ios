@@ -9,6 +9,12 @@
 import CovPassUI
 import UIKit
 
+private enum Constants {
+    enum Accessibility {
+        static let close = VoiceOverOptions.Settings(label: "accessibility_popup_label_close".localized)
+    }
+}
+
 class DateSelectionViewController: UIViewController {
     // MARK: - IBOutlet
 
@@ -46,7 +52,8 @@ class DateSelectionViewController: UIViewController {
             self?.viewModel.cancel()
         }
         headline.image = .close
-        headline.layoutMargins.bottom = .space_24
+        headline.actionButton.enableAccessibility(label: Constants.Accessibility.close.label)
+        headline.layoutMargins.bottom = .space_24        
 
         datePicker.date = viewModel.date
         datePicker.datePickerMode = viewModel.step == .One ? .date : .time
