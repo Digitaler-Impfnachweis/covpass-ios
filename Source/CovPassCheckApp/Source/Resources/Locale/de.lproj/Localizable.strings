@@ -53,6 +53,9 @@
 
 "accessibility_popup_label_close" = "Schließen";
 
+/* generic key to be used as alt text for decorative images */
+"accessibility_image_alternative_text" = "Dekorativ";
+
 "error_connect_internet_for_scan_title" = "Flugzeugmodus ausschalten oder WLAN für den Datenzugriff verwenden";
 
 "error_connect_internet_for_scan_button_settings" = "Einstellungen";
@@ -107,7 +110,7 @@
 
 "accessibility_scan_dialog_camera_access_label_close" = "Schließen";
 
-"accessibility_scan_dialog_camera_announce" = "Kamera-Ansicht wurde geöffnet";
+"accessibility_scan_camera_announce" = "Kamera-Ansicht wurde geöffnet";
 
 "error_camera_access_title" = "Die CovPassCheck-App möchte auf Ihre Kamera zugreifen.";
 
@@ -117,9 +120,9 @@
 
 "error_camera_access_button_allow" = "Erlauben";
 
-"accessibility_scan_dialog_camera_torch_on" = "Taschenlampe anschalten";
+"accessibility_scan_camera_torch_on" = "Taschenlampe anschalten";
 
-"accessibility_scan_dialog_camera_torch_off" = "Taschenlampe anschalten";
+"accessibility_scan_camera_torch_off" = "Taschenlampe ausschalten";
 
 "validation_check_popup_valid_vaccination_recovery_title" = "Zertifikat gültig*";
 

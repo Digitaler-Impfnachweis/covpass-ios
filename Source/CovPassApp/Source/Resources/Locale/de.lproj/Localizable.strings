@@ -111,9 +111,9 @@
 
 "accessibility_certificate_add_popup_label_close" = "Schließen";
 
-"accessibility_certificate_add_popup_label_torch_on" = "Taschenlampe anschalten";
+"accessibility_scan_camera_torch_on" = "Taschenlampe anschalten";
 
-"accessibility_certificate_add_popup_label_torch_off" = "Taschenlampe ausschalten";
+"accessibility_scan_camera_torch_off" = "Taschenlampe ausschalten";
 
 "accessibility_certificate_add_popup_image" = "Bild: Person hält das Smartphone über drei unterschiedliche Zertifikate mit QR-Code";
 
@@ -139,7 +139,7 @@
 
 "accessibility_certificate_add_dialog_camera_access_label_close" = "Schließen";
 
-"accessibility_certificate_add_dialog_camera_announce" = "Kamera-Ansicht wurde geöffnet";
+"accessibility_scan_camera_announce" = "Kamera-Ansicht wurde geöffnet";
 
 "accessibility_certificate_scan_mode_label_cancel" = "Abbrechen";
 
@@ -177,9 +177,9 @@
 
 "certificate_check_validity_title" = "Gültigkeit für Reisen innerhalb der EU prüfen";
 
-"accessibility_certificate_check_validity_selection_country_selected" = "%@, ausgewählt";
+"accessibility_certificate_check_validity_selection_country_selected" = "%s, ausgewählt";
 
-"accessibility_certificate_check_validity_selection_country_unselected" = "%@, auswählbar";
+"accessibility_certificate_check_validity_selection_country_unselected" = "%s, auswählbar";
 
 "certificate_check_validity_message" = "Prüfen Sie vorab, ob Ihre Zertifikate in verschiedenen Ländern gültig sind. Hierfür werden die geltenden Einreiseregeln des gewählten Reiselands berücksichtigt.";
 
@@ -189,7 +189,7 @@
 
 "certificate_check_validity_selection_country_title" = "Reiseland wählen";
 
-"accessibility_certificate_check_validity_selection_country" = "Land: %@";
+"accessibility_certificate_check_validity_selection_country" = "Land: %s";
 
 "IT" = "Italien";
 
@@ -261,7 +261,7 @@
 
 "certificate_check_validity_selection_date" = "Datum";
 
-"accessibility_certificate_check_validity_selection_date" = "Datum: %@";
+"accessibility_certificate_check_validity_selection_date" = "Datum: %s";
 
 "accessibility_certificate_check_validity_selection_date_label_close" = "Schließen";
 
@@ -495,7 +495,7 @@
 
 "certificates_overview_all_certificates_title" = "EU-Zertifikate";
 
-"accessibility_certificates_overview_all_certificates_title" = "Es folgen sensible Gesundheitsdaten. Bitte achten Sie darauf, dass keine andere Person mithört oder mitliest.";
+"accessibility_certificates_overview_all_certificates_title" = "EU-Zertifikate. Es folgen sensible Gesundheitsdaten. Bitte achten Sie darauf, dass keine andere Person mithört oder mitliest.";
 
 "certificates_overview_currently_uses_certificate_note" = "Aktuell verwendetes Zertifikat";
 

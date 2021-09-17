@@ -111,9 +111,9 @@
 
 "accessibility_certificate_add_popup_label_close" = "Close";
 
-"accessibility_certificate_add_popup_label_torch_on" = "Switch on torch";
+"accessibility_scan_camera_torch_on" = "Switch on torch";
 
-"accessibility_certificate_add_popup_label_torch_off" = "Switch off torch";
+"accessibility_scan_camera_torch_off" = "Switch off torch";
 
 "accessibility_certificate_add_popup_image" = "Image: Person holds smartphone over three different certificates with QR code";
 
@@ -139,7 +139,7 @@
 
 "accessibility_certificate_add_dialog_camera_access_label_close" = "Close";
 
-"accessibility_certificate_add_dialog_camera_announce" = "Camera has been opened";
+"accessibility_scan_camera_announce" = "Camera has been opened";
 
 "accessibility_certificate_scan_mode_label_cancel" = "Cancel";
 
@@ -279,7 +279,7 @@
 
 "certificate_check_invalidity_error_title" = "Please check the validity of your certificates.";
 
-"certificate_check_invalidity_error_text" = "One ore multiple certificates are expired, or will expire soon.";
+"certificate_check_invalidity_error_text" = "One or multiple certificates are expired, or will expire soon.";
 
 "certificate_check_validity_no_certificate_saved_title" = "You have not saved any certificates yet";
 
@@ -495,7 +495,7 @@
 
 "certificates_overview_all_certificates_title" = "EU certificates";
 
-"accessibility_certificates_overview_all_certificates_title" = "Sensible health data will follow. Please take care that nobody can listen to or read on your smartphone.";
+"accessibility_certificates_overview_all_certificates_title" = "EU certificates. Sensible health data will follow. Please take care that nobody can listen to or read on your smartphone.";
 
 "certificates_overview_currently_uses_certificate_note" = "Certificate currently in use";
 
