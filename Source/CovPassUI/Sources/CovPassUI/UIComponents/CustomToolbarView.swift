@@ -13,6 +13,11 @@ private enum Constants {
         static let cancelButtonWidth: CGFloat = 54
         static let cancelButtonHeight: CGFloat = 54
     }
+
+    enum Accessibility {
+        static let back = VoiceOverOptions.Settings(label: "accessibility_onboarding_pages_label_back".localized)
+        static let scrollToBottom = VoiceOverOptions.Settings(label: "accessibility_fourth_onboarding_page_label_scroll_to_end".localized)
+    }
 }
 
 public protocol CustomToolbarViewDelegate: AnyObject {
@@ -129,6 +134,7 @@ public class CustomToolbarView: XibView {
                 guard let strongSelf = self else { return }
                 strongSelf.delegate?.customToolbarView(strongSelf, didTap: .navigationArrow)
             }
+            leftButton.enableAccessibility(label: Constants.Accessibility.back.label)
         default:
             resetSecondary(button: leftButton)
         }
@@ -263,11 +269,15 @@ public class CustomToolbarView: XibView {
         primaryButton = MainButton()
         primaryButton.icon = .arrowDown
         primaryButton.innerButton.tintColor = .backgroundSecondary
-        primaryButton.innerButton.accessibilityIdentifier = AccessibilityIdentifier.InputForms.scrollButton
         primaryButton.action = { [weak self] in
             guard let strongSelf = self else { return }
             strongSelf.delegate?.customToolbarView(strongSelf, didTap: .scrollButton)
         }
+        enableAccessibility(label: Constants.Accessibility.scrollToBottom.label)
+        NSLayoutConstraint.activate([
+            primaryButton.heightAnchor.constraint(equalToConstant: Constants.Layout.cancelButtonHeight),
+            primaryButton.widthAnchor.constraint(equalToConstant: Constants.Layout.cancelButtonWidth)
+        ])
         return primaryButton
     }
 

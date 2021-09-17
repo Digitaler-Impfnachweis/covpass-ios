@@ -83,3 +83,12 @@
 
 "vaccination_fourth_onboarding_page_message_for_us_citizens_copy" = "Wenn Sie US-Bürgerin oder US-Bürger sind, gelten diese Nutzungsbedingungen für die App:";
 
+
+/* generic key to be used as alt text for decorative images */
+"accessibility_image_alternative_text" = "Dekorativ";
+
+"accessibility_onboarding_pages_label_back" = "Zurück";
+
+"accessibility_page_indicator" = "Seite %d von %d";
+
+"accessibility_fourth_onboarding_page_label_scroll_to_end" = "Zum Ende scrollen";

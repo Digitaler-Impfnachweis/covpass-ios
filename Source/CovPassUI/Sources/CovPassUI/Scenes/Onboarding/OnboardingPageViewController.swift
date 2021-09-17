@@ -8,6 +8,12 @@
 
 import UIKit
 
+private enum Constants {
+    enum Accessibility {
+        static let image = VoiceOverOptions.Settings(label: "accessibility_image_alternative_text".localized)
+    }
+}
+
 public class OnboardingPageViewController: UIViewController {
     // MARK: - IBOutlets
 
@@ -46,6 +52,7 @@ public class OnboardingPageViewController: UIViewController {
 
     private func configureImageView() {
         imageView.image = viewModel.image
+        imageView.enableAccessibility(label: Constants.Accessibility.image.label)
         imageView.pinHeightToScaleAspectFit()
     }
 
@@ -65,7 +72,7 @@ public extension OnboardingPageViewController {
     // intitalized properly before accessing this
     override var accessibilityElements: [Any]? {
         get {
-            let elements = [headline, descriptionText].compactMap { $0 }
+            let elements = [headline, descriptionText, imageView].compactMap { $0 }
             assert(!elements.isEmpty, "No accessibilityElements! View not loaded?")
             return elements
         }

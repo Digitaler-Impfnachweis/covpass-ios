@@ -83,3 +83,12 @@
 "vaccination_fourth_onboarding_page_message_for_us_citizens_title" = "Terms of Use for US citizens";
 
 "vaccination_fourth_onboarding_page_message_for_us_citizens_copy" = "If you are a US citizen, these Terms of Use apply to the App:";
+
+/* generic key to be used as alt text for decorative images */
+"accessibility_image_alternative_text" = "Decorative";
+
+"accessibility_onboarding_pages_label_back" = "Back";
+
+"accessibility_page_indicator" = "Page %d of %d";
+
+"accessibility_fourth_onboarding_page_label_scroll_to_end" = "Scroll to the end";

@@ -9,6 +9,12 @@
 import CovPassUI
 import UIKit
 
+private enum Constants {
+    enum Accessibility {
+        static let image = VoiceOverOptions.Settings(label: "accessibility_image_alternative_text".localized)
+    }
+}
+
 class WelcomeViewController: UIViewController {
     // MARK: - UBOutlets
 
@@ -60,6 +66,7 @@ class WelcomeViewController: UIViewController {
     private func configureImageView() {
         imageView.image = viewModel.image
         imageView.pinHeightToScaleAspectFit()
+        imageView.enableAccessibility(label: Constants.Accessibility.image.label)
     }
 
     private func configureHeadline() {

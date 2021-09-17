@@ -9,6 +9,12 @@
 import UIKit
 import WebKit
 
+private enum Constants {
+    enum Accessibility {
+        static let image = VoiceOverOptions.Settings(label: "accessibility_image_alternative_text".localized)
+    }
+}
+
 class ConsentViewController: UIViewController {
     // MARK: - IBOutlets
 
@@ -62,6 +68,7 @@ class ConsentViewController: UIViewController {
     private func configureImageView() {
         imageView.image = viewModel.image
         imageView.pinHeightToScaleAspectFit()
+        imageView.enableAccessibility(label: Constants.Accessibility.image.label)
     }
 
     private func configureHeadline() {
@@ -111,7 +118,7 @@ extension ConsentViewController {
     // intitalized properly before accessing this
     override public var accessibilityElements: [Any]? {
         get {
-            let elements = [headline, listItems, descriptionText, dataPrivacyInfoView].compactMap { $0 }
+            let elements = [headline, listItems, descriptionText, dataPrivacyInfoView, imageView].compactMap { $0 }
             assert(!elements.isEmpty, "No accessibilityElements! View not loaded?")
             return elements
         }
