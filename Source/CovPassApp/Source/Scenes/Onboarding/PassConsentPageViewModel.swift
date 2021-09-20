@@ -53,6 +53,10 @@ class PassConsentPageViewModel: ConsentPageViewModel {
         }
     }
 
+    var showUSTerms: Bool {
+        Locale.current.regionCode == "US"
+    }
+
     // MARK: - Lifecycle
 
     init(type: OnboardingPageViewModelType, router: ConsentRouter) {

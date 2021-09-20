@@ -52,6 +52,10 @@ class ValidationConsentPageViewModel: ConsentPageViewModel {
         }
     }
 
+    var showUSTerms: Bool {
+        false
+    }
+
     // MARK: - Lifecycle
 
     init(type: OnboardingPageViewModelType, router: ConsentRouterProtocol) {

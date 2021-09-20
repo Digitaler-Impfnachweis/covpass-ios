@@ -27,10 +27,11 @@ public struct ConsentRouter: ConsentRouterProtocol {
     // MARK: - Methods
 
     public func showTermsOfUse() {
+        guard let url = Bundle.uiBundle.url(forResource: "us-terms-of-use", withExtension: "html") else { return }
         sceneCoordinator.present(
             WebviewSceneFactory(
                 title: "vaccination_fourth_onboarding_page_message_for_us_citizens_title".localized,
-                url: URL(string: "https://digitaler-impfnachweis-app.de")!, // FIXME: Change when we have the production html file
+                url: url,
                 closeButtonShown: true
             ),
             animated: true
@@ -59,4 +60,5 @@ public protocol ConsentPageViewModel: OnboardingPageViewModel {
     var listItems: NSAttributedString { get }
     var dataPrivacyTitle: NSAttributedString { get }
     var isScrolledToBottom: Bool { get set }
+    var showUSTerms: Bool { get }
 }

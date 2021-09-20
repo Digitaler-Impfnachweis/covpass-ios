@@ -95,7 +95,7 @@ class ConsentViewController: UIViewController {
     }
 
     private func configureHintView() {
-        usTermsOfUse.iconView.image = .activity
+        usTermsOfUse.iconView.image = .info
         usTermsOfUse.containerView.backgroundColor = .onBackground50
         usTermsOfUse.containerView.layer.borderColor = UIColor.onBrandBase.cgColor
         usTermsOfUse.titleLabel.attributedText = "vaccination_fourth_onboarding_page_message_for_us_citizens_title".localized.styledAs(.header_3)
@@ -103,7 +103,7 @@ class ConsentViewController: UIViewController {
         usTermsOfUse.bodyLabel.linkCallback = { [weak self] _ in
             self?.viewModel.router.showTermsOfUse()
         }
-        usTermsOfUse.isHidden = Locale.current.regionCode != "US"
+        usTermsOfUse.isHidden = !viewModel.showUSTerms
     }
 }
 
