@@ -173,8 +173,9 @@ extension OnboardingContainerViewController: CustomToolbarViewDelegate {
             }
             pageController?.setViewControllers([pages[currentIndex - 1]], direction: .reverse, animated: true, completion: { [weak self] _ in
                 self?.currentIndex -= 1 // HACK: set here to prevent crashes due to unloaded view
+                self?.updateToolbarForPage(at: self?.currentIndex ?? 0)
             })
-            pageIndicator.selectDot(withIndex: currentIndex)
+            pageIndicator.selectDot(withIndex: currentIndex - 1)
         case .textButton:
             guard currentIndex + 1 < pages.count else {
                 viewModel.navigateToNextScene()
@@ -182,8 +183,9 @@ extension OnboardingContainerViewController: CustomToolbarViewDelegate {
             }
             pageController?.setViewControllers([pages[currentIndex + 1]], direction: .forward, animated: true, completion: { [weak self] _ in
                 self?.currentIndex += 1 // HACK: set here to prevent crashes due to unloaded view
+                self?.updateToolbarForPage(at: self?.currentIndex ?? 0)
             })
-            pageIndicator.selectDot(withIndex: currentIndex)
+            pageIndicator.selectDot(withIndex: currentIndex + 1)
         case .scrollButton:
             (pages[currentIndex] as? ConsentViewController)?.scrollToBottom()
         default:
