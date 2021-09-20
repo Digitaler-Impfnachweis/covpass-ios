@@ -177,9 +177,9 @@
 
 "certificate_check_validity_title" = "Gültigkeit für Reisen innerhalb der EU prüfen";
 
-"accessibility_certificate_check_validity_selection_country_selected" = "%s, ausgewählt";
+"accessibility_certificate_check_validity_selection_country_selected" = "%@, ausgewählt";
 
-"accessibility_certificate_check_validity_selection_country_unselected" = "%s, auswählbar";
+"accessibility_certificate_check_validity_selection_country_unselected" = "%@, auswählbar";
 
 "certificate_check_validity_message" = "Prüfen Sie vorab, ob Ihre Zertifikate in verschiedenen Ländern gültig sind. Hierfür werden die geltenden Einreiseregeln des gewählten Reiselands berücksichtigt.";
 
@@ -189,7 +189,7 @@
 
 "certificate_check_validity_selection_country_title" = "Reiseland wählen";
 
-"accessibility_certificate_check_validity_selection_country" = "Land: %s";
+"accessibility_certificate_check_validity_selection_country" = "Land: %@";
 
 "IT" = "Italien";
 
@@ -261,7 +261,7 @@
 
 "certificate_check_validity_selection_date" = "Datum";
 
-"accessibility_certificate_check_validity_selection_date" = "Datum: %s";
+"accessibility_certificate_check_validity_selection_date" = "Datum: %@";
 
 "accessibility_certificate_check_validity_selection_date_label_close" = "Schließen";
 

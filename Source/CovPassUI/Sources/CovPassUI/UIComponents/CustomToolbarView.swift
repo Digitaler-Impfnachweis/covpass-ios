@@ -273,11 +273,7 @@ public class CustomToolbarView: XibView {
             guard let strongSelf = self else { return }
             strongSelf.delegate?.customToolbarView(strongSelf, didTap: .scrollButton)
         }
-        enableAccessibility(label: Constants.Accessibility.scrollToBottom.label)
-        NSLayoutConstraint.activate([
-            primaryButton.heightAnchor.constraint(equalToConstant: Constants.Layout.cancelButtonHeight),
-            primaryButton.widthAnchor.constraint(equalToConstant: Constants.Layout.cancelButtonWidth)
-        ])
+        primaryButton.innerButton.accessibilityLabel = Constants.Accessibility.scrollToBottom.label
         return primaryButton
     }
 
