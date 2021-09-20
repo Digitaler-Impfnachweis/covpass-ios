@@ -138,3 +138,48 @@ public struct KeychainPersistence: Persistence {
         try delete(Self.boosterRulesKey)
     }
 }
+
+
+extension KeychainPersistence {
+
+
+    /// Updates `kSecAttrAccessible` for `KeychainPersistence.Keys` to `kSecAttrAccessibleWhenUnlocked` if `kSecAttrAccessibleWhenPasscodeSetThisDeviceOnly` is found.
+    /// This fixes potential loss of data for old versions where `kSecAttrAccessibleWhenPasscodeSetThisDeviceOnly` was used
+    /// - Throws: KeychainError
+    public static func migrateKeychainIfNeeded() throws {
+        let query: NSDictionary = [
+            kSecClass as String: kSecClassGenericPassword,
+            kSecMatchLimit as String: kSecMatchLimitAll,
+            kSecReturnAttributes as String: true,
+            kSecReturnRef as String: true,
+            kSecAttrAccessible as String: kSecAttrAccessibleWhenPasscodeSetThisDeviceOnly
+        ]
+        var itemsRef: CFTypeRef?
+        let status = SecItemCopyMatching(query, &itemsRef)
+
+        guard status != errSecItemNotFound else { return }
+
+        guard status == errSecSuccess,
+              let items = itemsRef as? Array<Dictionary<String, Any>>
+        else {
+            #if DEBUG
+            debugPrint("\(String(describing: SecCopyErrorMessageString(status, nil))) \(status)")
+            #endif
+            throw KeychainError.migrationFailed
+        }
+
+        try items.forEach { dict in
+            guard let serviceString = (dict[kSecAttrService as String] as? String),
+                  let service = KeychainPersistence.Keys(rawValue: serviceString),
+                  KeychainPersistence.Keys.allCases.contains(service) else { return }
+
+            let status = SecItemUpdate(dict as CFDictionary, [kSecAttrAccessible as String: kSecAttrAccessibleWhenUnlocked] as NSDictionary)
+            if status != noErr {
+                #if DEBUG
+                debugPrint("\(String(describing: SecCopyErrorMessageString(status, nil))) \(status)")
+                #endif
+                throw KeychainError.migrationFailed
+            }
+        }
+    }
+}

@@ -38,6 +38,12 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
             FileManager.default.printFileLocations()
         #endif
 
+        do {
+            try KeychainPersistence.migrateKeychainIfNeeded()
+        } catch {
+
+        }
+
         return true
     }
 
