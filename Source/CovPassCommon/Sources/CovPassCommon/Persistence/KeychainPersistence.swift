@@ -132,39 +132,41 @@ public struct KeychainPersistence: Persistence {
 
     // Delete all data from keychain
     public func deleteAll() throws {
-        try delete(Self.trustListKey)
-        try delete(Self.certificateListKey)
-        try delete(Self.dccRulesKey)
-        try delete(Self.boosterRulesKey)
+        try KeychainPersistence.Keys
+            .allCases
+            .forEach {
+                try delete($0.rawValue)
+            }
     }
 }
 
 
 extension KeychainPersistence {
 
-
-    /// Updates `kSecAttrAccessible` for `KeychainPersistence.Keys` to `kSecAttrAccessibleWhenUnlocked` if `kSecAttrAccessibleWhenPasscodeSetThisDeviceOnly` is found.
+    /// Updates `kSecAttrAccessible` for `KeychainPersistence.Keys`.
     /// This fixes potential loss of data for old versions where `kSecAttrAccessibleWhenPasscodeSetThisDeviceOnly` was used
     /// - Throws: KeychainError
-    public static func migrateKeychainIfNeeded() throws {
+    public static func migrateKeyAttributes(from oldSecAttrAccessible: CFString = kSecAttrAccessibleWhenPasscodeSetThisDeviceOnly, to newSecAttrAccessible: CFString = kSecAttrAccessibleWhenUnlocked) throws {
         let query: NSDictionary = [
             kSecClass as String: kSecClassGenericPassword,
             kSecMatchLimit as String: kSecMatchLimitAll,
             kSecReturnAttributes as String: true,
             kSecReturnRef as String: true,
-            kSecAttrAccessible as String: kSecAttrAccessibleWhenPasscodeSetThisDeviceOnly
+            kSecAttrAccessible as String: oldSecAttrAccessible
         ]
         var itemsRef: CFTypeRef?
         let status = SecItemCopyMatching(query, &itemsRef)
 
+        // No old value found
         guard status != errSecItemNotFound else { return }
 
+        // we found something
         guard status == errSecSuccess,
               let items = itemsRef as? Array<Dictionary<String, Any>>
         else {
-            #if DEBUG
+#if DEBUG
             debugPrint("\(String(describing: SecCopyErrorMessageString(status, nil))) \(status)")
-            #endif
+#endif
             throw KeychainError.migrationFailed
         }
 
@@ -173,11 +175,11 @@ extension KeychainPersistence {
                   let service = KeychainPersistence.Keys(rawValue: serviceString),
                   KeychainPersistence.Keys.allCases.contains(service) else { return }
 
-            let status = SecItemUpdate(dict as CFDictionary, [kSecAttrAccessible as String: kSecAttrAccessibleWhenUnlocked] as NSDictionary)
+            let status = SecItemUpdate(dict as CFDictionary, [kSecAttrAccessible as String: newSecAttrAccessible] as NSDictionary)
             if status != noErr {
-                #if DEBUG
+#if DEBUG
                 debugPrint("\(String(describing: SecCopyErrorMessageString(status, nil))) \(status)")
-                #endif
+#endif
                 throw KeychainError.migrationFailed
             }
         }
