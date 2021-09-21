@@ -68,6 +68,8 @@
 
 /********** Camera Accessibility **********/
 
+"accessibility_certificate_add_popup_label_close" = "Close";
+
 "accessibility_button_scanner_label_close" = "Close scanner";
 
 "accessibility_button_label_torch_on" = "Switch on torch";

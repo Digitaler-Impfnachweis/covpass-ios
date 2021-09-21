@@ -67,6 +67,8 @@
 
 /********** Camera Accessibility **********/
 
+"accessibility_certificate_add_popup_label_close" = "Schließen";
+
 "accessibility_button_scanner_label_close" = "Scanner schließen";
 
 "accessibility_button_label_torch_on" = "Taschenlampe anschalten";
