@@ -9,6 +9,15 @@
 import CovPassUI
 import UIKit
 
+private enum Constants {
+    static let confirmButtonLabel = "validation_check_popup_valid_vaccination_button_title".localized
+
+    enum Accessibility {
+        static let image = VoiceOverOptions.Settings(label: "accessibility_image_alternative_text".localized)
+        static let close = VoiceOverOptions.Settings(label: "accessibility_popup_label_close".localized)
+    }
+}
+
 class ValidationResultViewController: UIViewController {
     // MARK: - IBOutlet
 
@@ -50,7 +59,8 @@ class ValidationResultViewController: UIViewController {
         stackView.setCustomSpacing(.space_24, after: resultView)
 
         imageView.image = viewModel.icon
-
+        imageView.enableAccessibility(label: Constants.Accessibility.image.label)
+        
         resultView.attributedTitleText = viewModel.resultTitle.styledAs(.header_1)
         resultView.attributedBodyText = viewModel.resultBody.styledAs(.body)
         resultView.bottomBorder.isHidden = true
@@ -80,11 +90,12 @@ class ValidationResultViewController: UIViewController {
             self?.viewModel.cancel()
         }
         headline.image = .close
+        headline.actionButton.enableAccessibility(label: Constants.Accessibility.close.label)
         stackView.setCustomSpacing(.space_24, after: headline)
     }
 
     private func configureToolbarView() {
-        toolbarView.state = .confirm("validation_check_popup_valid_vaccination_button_title".localized)
+        toolbarView.state = .confirm(Constants.confirmButtonLabel)
         toolbarView.delegate = self
     }
 }
