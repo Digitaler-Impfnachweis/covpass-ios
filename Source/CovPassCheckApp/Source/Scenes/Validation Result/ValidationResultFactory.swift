@@ -10,9 +10,13 @@ import CovPassCommon
 import Foundation
 
 struct ValidationResultFactory {
-    static func createViewModel(router: ValidationResultRouterProtocol, repository: VaccinationRepositoryProtocol, certificate: CBORWebToken?, certLogic: DCCCertLogic = DCCCertLogic.create()) -> ValidationResultViewModel {
-        guard let cert = certificate else {
-            return ErrorResultViewModel(router: router, repository: repository)
+    static func createViewModel(router: ValidationResultRouterProtocol,
+                                repository: VaccinationRepositoryProtocol,
+                                certificate: CBORWebToken?,
+                                error: Error?,
+                                certLogic: DCCCertLogic = DCCCertLogic.create()) -> ValidationResultViewModel {
+        guard let cert = certificate, error != nil else {
+            return ErrorResultViewModel(router: router, repository: repository, error: error ?? CertificateError.invalidEntity)
         }
 
         do {
@@ -22,7 +26,7 @@ struct ValidationResultFactory {
 
             // Show error dialog when at least one rule failed or there are no rules at all
             if !valid || validationResult.isEmpty {
-                return ErrorResultViewModel(router: router, repository: repository, certificate: certificate)
+                return ErrorResultViewModel(router: router, repository: repository, certificate: certificate, error: CertificateError.invalidEntity)
             }
             if certificate?.hcert.dgc.r?.isEmpty == false {
                 return RecoveryResultViewModel(router: router, repository: repository, certificate: certificate)
@@ -32,7 +36,7 @@ struct ValidationResultFactory {
             }
             return VaccinationResultViewModel(router: router, repository: repository, certificate: certificate)
         } catch {
-            return ErrorResultViewModel(router: router, repository: repository, certificate: certificate)
+            return ErrorResultViewModel(router: router, repository: repository, certificate: certificate, error: CertificateError.invalidEntity)
         }
     }
 }

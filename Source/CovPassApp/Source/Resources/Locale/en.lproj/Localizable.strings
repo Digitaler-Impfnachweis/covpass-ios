@@ -96,7 +96,7 @@
 
 "vaccination_start_screen_qrcode_complete_from_date_subtitle" = "Fully vaccinated as of %@";
 
-"vaccination_start_screen_qrcode_complete_protection_subtitle" = "Fully vaccinated";
+"vaccination_start_screen_qrcode_complete_protection_subtitle" = "Complete since %@";
 
 "certificates_start_screen_qrcode_certificate_expires_subtitle" = "Expires on %@ at %@";
 
@@ -429,7 +429,7 @@
 
 "vaccination_certificate_detail_view_incomplete_action_button_title" = "Display current QR Code";
 
-"vaccination_certificate_overview_complete_from_title" = "Fully vaccinated as of %@";
+"vaccination_certificate_overview_complete_from_title" = "Fully vaccinated";
 
 "vaccination_certificate_overview_complete_from_message" = "You are not yet considered fully vaccinated. Full vaccination takes effect 14 days after the final dose.";
 

@@ -13,6 +13,7 @@ import Scanner
 import UIKit
 
 class ValidatorOverviewRouter: ValidatorOverviewRouterProtocol {
+
     // MARK: - Properties
 
     let sceneCoordinator: SceneCoordinator
@@ -39,7 +40,7 @@ class ValidatorOverviewRouter: ValidatorOverviewRouterProtocol {
         sceneCoordinator.present(
             ValidationResultSceneFactory(
                 router: ValidationResultRouter(sceneCoordinator: sceneCoordinator),
-                certificate: certificate
+                certificate: certificate, error: nil
             )
         )
     }
@@ -48,6 +49,15 @@ class ValidatorOverviewRouter: ValidatorOverviewRouterProtocol {
         sceneCoordinator.push(
             AppInformationSceneFactory(
                 router: AppInformationRouter(sceneCoordinator: sceneCoordinator)
+            )
+        )
+    }
+
+    func showError(error: Error) {
+        sceneCoordinator.present(
+            ValidationResultSceneFactory(
+                router: ValidationResultRouter(sceneCoordinator: sceneCoordinator),
+                certificate: nil, error: error
             )
         )
     }
