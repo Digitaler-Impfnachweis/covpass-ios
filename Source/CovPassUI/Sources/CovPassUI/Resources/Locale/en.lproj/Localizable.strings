@@ -94,3 +94,5 @@
 "accessibility_page_indicator" = "Page %d of %d";
 
 "accessibility_fourth_onboarding_page_label_scroll_to_end" = "Scroll to the end";
+
+"accessibility_button" = "Button";

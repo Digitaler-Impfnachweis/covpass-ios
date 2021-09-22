@@ -114,7 +114,7 @@ class RuleCheckViewController: UIViewController {
     }
 
     private func configureAccessibility() {
-        dateSelection.enableAccessibility(label: String(format: Constants.Accessibility.date.label!, dateSelection.valueLabel.text!), traits: .button)
+        dateSelection.enableAccessibility(label: String(format: Constants.Accessibility.date.label!, DateUtils.audioDateTimeFormatter.string(from: viewModel.date)), traits: .button)
         countrySelection.enableAccessibility(label: String(format: Constants.Accessibility.country.label!, countrySelection.valueLabel.text!), traits: .button)
     }
 
