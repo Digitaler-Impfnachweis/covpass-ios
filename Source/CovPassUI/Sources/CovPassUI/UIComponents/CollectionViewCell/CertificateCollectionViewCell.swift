@@ -10,6 +10,13 @@ import CovPassCommon
 import Foundation
 import UIKit
 
+private enum Constants {
+    static let qrInfoText = "Dieser QR-Code lässt sich verlässlich mit der CovPassCheck-App überprüfen.".localized
+    enum Accessibility {
+
+    }
+}
+
 public typealias CertificateCardViewModelProtocol = CardViewModel & CertificateCardViewModelBase
 
 public protocol CertificateCardViewModelBase {
@@ -89,12 +96,15 @@ public class CertificateCollectionViewCell: CardCollectionViewCell {
         containerView.backgroundColor = vm.backgroundColor
 
         qrContainerView.icon = vm.titleIcon
-        qrContainerView.iconView?.tintColor = vm.backgroundColor
+        qrContainerView.iconView?.tintColor = vm.iconTintColor
         qrContainerView.image = vm.qrCode
         qrContainerView.layoutMargins.bottom = .space_18
         qrContainerView.isHidden = vm.qrCode == nil
-        qrContainerView.title = vm.title
-        qrContainerView.subtitle = vm.subtitle
+        qrContainerView.titleLabel.attributedText = vm.title.styledAs(.header_2).colored(vm.textColor)
+        qrContainerView.subtitleLabel.attributedText = vm.subtitle.styledAs(.body).colored(vm.textColor)
+
+        qrContainerView.qrInfoText = Constants.qrInfoText
+
 
         qrContainerView.showOverlay = vm.isExpired
 
@@ -107,7 +117,7 @@ public class CertificateCollectionViewCell: CardCollectionViewCell {
 
         actionView.titleLabel.attributedText = vm.actionTitle.styledAs(.body).colored(vm.tintColor)
         actionView.titleLabel.accessibilityHint = "accessibility_button".localized
-        actionView.actionImage.tintColor = vm.tintColor
+        actionView.actionImage.tintColor = .neutralWhite
         actionView.tintColor = .neutralWhite
     }
 

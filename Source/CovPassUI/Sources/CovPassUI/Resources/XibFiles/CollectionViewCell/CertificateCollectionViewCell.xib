@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
@@ -33,12 +33,18 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kmj-5K-aX3">
                                                 <rect key="frame" x="20" y="278" width="374" height="128"/>
                                                 <subviews>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bpH-Uu-ANJ">
+                                                        <rect key="frame" x="0.0" y="0.0" width="5" height="128"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="5" id="sPi-1r-sN7"/>
+                                                        </constraints>
+                                                    </view>
                                                     <view contentMode="scaleToFill" placeholderIntrinsicWidth="326" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="oUs-2O-r3G" customClass="PlainLabel" customModule="CovPassUI">
-                                                        <rect key="frame" x="0.0" y="0.0" width="344" height="128"/>
+                                                        <rect key="frame" x="5" y="0.0" width="334" height="128"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     </view>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W12-Xq-xZM">
-                                                        <rect key="frame" x="344" y="0.0" width="30" height="128"/>
+                                                        <rect key="frame" x="339" y="0.0" width="30" height="128"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="30" id="eYD-c3-efv"/>
                                                         </constraints>
@@ -47,6 +53,12 @@
                                                             <action selector="onFavoriteAction" destination="VBZ-4c-av2" eventType="touchUpInside" id="EWh-CD-yNU"/>
                                                         </connections>
                                                     </button>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rV2-GX-8Na">
+                                                        <rect key="frame" x="369" y="0.0" width="5" height="128"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="5" id="pOu-C4-bTM"/>
+                                                        </constraints>
+                                                    </view>
                                                 </subviews>
                                             </stackView>
                                             <view contentMode="scaleToFill" placeholderIntrinsicWidth="374" placeholderIntrinsicHeight="30" translatesAutoresizingMaskIntoConstraints="NO" id="VUx-Xk-tTT" customClass="CardViewAction" customModule="CovPassUI">

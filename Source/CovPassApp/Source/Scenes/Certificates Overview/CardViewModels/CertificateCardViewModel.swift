@@ -70,6 +70,13 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
         return certificate.v?.first?.fullImmunizationValid ?? false ? .onBrandAccent70 : .onBackground50
     }
 
+    var iconTintColor: UIColor {
+        return backgroundColor == UIColor.onBackground50 ? .neutralBlack : .neutralWhite
+    }
+    var textColor: UIColor {
+        return backgroundColor == UIColor.onBackground50 ? .neutralBlack : .neutralWhite
+    }
+
     var title: String {
         if certificate.r != nil {
             return "certificates_overview_recovery_certificate_title".localized
@@ -169,13 +176,7 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
     }
 
     var tintColor: UIColor {
-        if token.vaccinationCertificate.isExpired || token.vaccinationCertificate.isInvalid {
-            return .neutralWhite
-        }
-        if let v = certificate.v?.first, !v.fullImmunizationValid {
-            return .darkText
-        }
-        return .neutralWhite
+        return textColor
     }
 
     var isFullImmunization: Bool {

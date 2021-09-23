@@ -23,6 +23,8 @@ public class QRContainerView: XibView {
     @IBOutlet public var titleLabel: UILabel!
     @IBOutlet public var subtitleLabel: UILabel!
     @IBOutlet public var overlay: UIView!
+    @IBOutlet weak var qrInfoLabel: UILabel!
+    @IBOutlet weak var qrContainerView: UIView!
 
     // MARK: - Properties
 
@@ -50,6 +52,12 @@ public class QRContainerView: XibView {
         }
     }
 
+    public var qrInfoText: String? {
+        didSet {
+            updateViews()
+        }
+    }
+
     public var showOverlay: Bool = false {
         didSet {
             updateViews()
@@ -62,28 +70,20 @@ public class QRContainerView: XibView {
 
     override public func initView() {
         super.initView()
-        contentView?.layoutMargins = .init(
-            top: .space_10,
-            left: .space_10,
-            bottom: .space_10,
-            right: .space_10
-        )
-        contentView?.layer.cornerRadius = cornerRadius
-        contentView?.layer.masksToBounds = true
+        qrContainerView?.layer.cornerRadius = cornerRadius
+        qrContainerView?.layer.masksToBounds = true
         imageView.enableAccessibility(label: Constants.Accessibility.qrCode.label, hint: Constants.Accessibility.qrCode.hint)
     }
 
     private func updateViews() {
         iconView.image = icon
-
         imageView.image = image
-        contentView?.backgroundColor = imageView.image == nil ? .clear : .neutralWhite
+        qrContainerView?.backgroundColor = imageView.image == nil ? .clear : .neutralWhite
 
-        titleLabel.attributedText = title?.styledAs(.header_2).colored(.neutralBlack)
         titleLabel.isHidden = titleLabel.attributedText.isNilOrEmpty
-
-        subtitleLabel.attributedText = subtitle?.styledAs(.body).colored(.neutralBlack)
         subtitleLabel.isHidden = subtitleLabel.attributedText.isNilOrEmpty
+
+        qrInfoLabel.attributedText = qrInfoText?.styledAs(.label).colored(.neutralBlack)
 
         overlay.isHidden = !showOverlay
     }

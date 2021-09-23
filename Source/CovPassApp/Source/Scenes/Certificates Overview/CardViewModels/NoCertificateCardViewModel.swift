@@ -33,4 +33,12 @@ struct NoCertificateCardViewModel: NoCertificateCardViewModelProtocol {
     var image: UIImage {
         .noCertificate
     }
+
+    var iconTintColor: UIColor {
+        return .neutralWhite
+    }
+
+    var textColor: UIColor {
+        return .neutralWhite
+    }
 }
