@@ -40,7 +40,8 @@ class ValidatorOverviewRouter: ValidatorOverviewRouterProtocol {
         sceneCoordinator.present(
             ValidationResultSceneFactory(
                 router: ValidationResultRouter(sceneCoordinator: sceneCoordinator),
-                certificate: certificate, error: nil
+                certificate: certificate,
+                error: nil
             )
         )
     }
@@ -57,7 +58,8 @@ class ValidatorOverviewRouter: ValidatorOverviewRouterProtocol {
         sceneCoordinator.present(
             ValidationResultSceneFactory(
                 router: ValidationResultRouter(sceneCoordinator: sceneCoordinator),
-                certificate: nil, error: error
+                certificate: nil,
+                error: error
             )
         )
     }

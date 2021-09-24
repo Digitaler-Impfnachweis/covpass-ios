@@ -60,7 +60,7 @@ class ErrorResultViewModel: ValidationResultViewModel {
     }
 
     var paragraphs: [Paragraph] {
-        switch self.error.mapToCertificateError() {
+        switch error.mapToCertificateError() {
         case .positiveResult, .expiredCertifcate:
             return Constants.Paragraphs.functionalIssues
         case .invalidEntity:
