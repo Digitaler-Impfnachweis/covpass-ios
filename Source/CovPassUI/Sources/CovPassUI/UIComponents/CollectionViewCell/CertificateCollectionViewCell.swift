@@ -117,7 +117,7 @@ public class CertificateCollectionViewCell: CardCollectionViewCell {
 
         actionView.titleLabel.attributedText = vm.actionTitle.styledAs(.body).colored(vm.tintColor)
         actionView.titleLabel.accessibilityHint = "accessibility_button".localized
-        actionView.actionImage.tintColor = .neutralWhite
+        actionView.actionImage.tintColor = vm.tintColor
         actionView.tintColor = .neutralWhite
     }
 
