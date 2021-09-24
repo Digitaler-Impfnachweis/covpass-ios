@@ -19,4 +19,12 @@ struct MockCardViewModel: CardViewModel {
     var backgroundColor: UIColor {
         .black
     }
+
+    var iconTintColor: UIColor {
+        return .white
+    }
+
+    var textColor: UIColor {
+        return .black
+    }
 }

@@ -10,6 +10,7 @@ import CovPassUI
 import UIKit
 
 class CertificateCardViewModelMock: CertificateCardViewModelProtocol {
+
     var isBoosted: Bool = false
 
     var isExpired: Bool = false
@@ -62,6 +63,14 @@ class CertificateCardViewModelMock: CertificateCardViewModelProtocol {
 
     var tintColor: UIColor {
         .backgroundPrimary
+    }
+
+    var iconTintColor: UIColor {
+        .white
+    }
+
+    var textColor: UIColor {
+        .black
     }
 
     var isFullImmunization: Bool = true

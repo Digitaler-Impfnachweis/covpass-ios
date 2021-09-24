@@ -10,6 +10,7 @@ import CovPassUI
 import UIKit
 
 class NoCertificateCardViewModelMock: NoCertificateCardViewModelProtocol {
+
     var reuseIdentifier: String {
         "\(NoCertificateCollectionViewCell.self)"
     }
@@ -30,5 +31,13 @@ class NoCertificateCardViewModelMock: NoCertificateCardViewModelProtocol {
 
     var image: UIImage {
         .scan
+    }
+
+    var iconTintColor: UIColor {
+        .white
+    }
+
+    var textColor: UIColor {
+        .black
     }
 }
