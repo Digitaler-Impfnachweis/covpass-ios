@@ -146,7 +146,8 @@ extension KeychainPersistence {
     /// Updates `kSecAttrAccessible` for `KeychainPersistence.Keys`.
     /// This fixes potential loss of data for old versions where `kSecAttrAccessibleWhenPasscodeSetThisDeviceOnly` was used
     /// - Throws: KeychainError
-    public static func migrateKeyAttributes(from oldSecAttrAccessible: CFString = kSecAttrAccessibleWhenPasscodeSetThisDeviceOnly, to newSecAttrAccessible: CFString = kSecAttrAccessibleWhenUnlocked) throws {
+    public static func migrateKeyAttributes(from oldSecAttrAccessible: CFString = kSecAttrAccessibleWhenPasscodeSetThisDeviceOnly,
+                                            to newSecAttrAccessible: CFString = kSecAttrAccessibleWhenUnlocked) throws {
         let query: NSDictionary = [
             kSecClass as String: kSecClassGenericPassword,
             kSecMatchLimit as String: kSecMatchLimitAll,
