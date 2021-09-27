@@ -75,6 +75,8 @@
 
 "dialog_booster_vaccination_notification_button" = "OK";
 
+"accessibility_update_info_announce" = "The view \"New features\" has been opened";
+
 
 /********** start Screen **********/
 
@@ -115,6 +117,10 @@
 
 "accessibility_scan_camera_torch_off" = "Switch off torch";
 
+"accessibility_certificate_add_popup_announce" = "The view \"Adding a certificate\" has been opened";
+
+"accessibility_scan_success_announce" = "The certificate was successfully added";
+
 "accessibility_certificate_add_popup_image" = "Image: Person holds smartphone over three different certificates with QR code";
 
 "certificate_add_popup_title" = "Adding a certificate";
@@ -139,7 +145,7 @@
 
 "accessibility_certificate_add_dialog_camera_access_label_close" = "Close";
 
-"accessibility_scan_camera_announce" = "Camera has been opened";
+"accessibility_certificate_add_dialog_camera_announce" = "Camera has been opened";
 
 "accessibility_certificate_scan_mode_label_cancel" = "Cancel";
 
@@ -175,6 +181,12 @@
 
 "accessibility_certificate_check_validity_label_display_certificate" = "Display certificate";
 
+"accessibility_certificate_check_validity_announce" = "The view \"Check validity\" has been opened";
+
+"accessibility_certificate_check_validity_selection_country_announce" = "The view \"Choose destination\" has been opened";
+
+"accessibility_certificate_check_validity_selection_date_announce" = "The view \"Select date\" has been opened";
+
 "certificate_check_validity_title" = "Check validity for travelling within the EU";
 
 "accessibility_certificate_check_validity_selection_country_selected" = "%@, selected";
@@ -190,6 +202,8 @@
 "certificate_check_validity_selection_country_title" = "Choose destination";
 
 "accessibility_certificate_check_validity_selection_country" = "Country: %@";
+
+"accessibility_certificate_check_validity_label_choose_country" = "Choose destination";
 
 "IT" = "Italy";
 
@@ -261,6 +275,8 @@
 
 "certificate_check_validity_selection_date" = "Date";
 
+"accessibility_certificate_check_validity_label_choose_date" = "Select date";
+
 "accessibility_certificate_check_validity_selection_date" = "Date: %@";
 
 "accessibility_certificate_check_validity_selection_date_label_close" = "Close";
@@ -318,6 +334,8 @@
 "certificate_check_validity_detail_view_test_result_headline_data" = "Verified certificate data:";
 
 "certificate_check_validity_detail_view_test_result_button" = "Display QR code";
+
+"certificate_check_validity_detail_view_test_result_button_disabled" = "You can only download German certificates as PDF documents";
 
 "certificate_check_validity_detail_view_test_result_note_de" = "Das Testzertifikat gilt innerhalb der EU als gültiger Nachweis für Reisen. Die Mitgliedsländer haben unterschiedliche Einreisebedingungen. Mehr Informationen finden Sie in den Häufigen Fragen. Bitte informieren Sie sich vor Reiseantritt über die am Zielort geltenden Gesundheitsmaßnahmen und entsprechenden Beschränkungen.\n\nInformationen über die in den jeweiligen EU-Ländern geltenden Einreisebestimmungen finden Sie unter #https://reopen.europa.eu::https://reopen.europa.eu#.";
 
@@ -495,7 +513,7 @@
 
 "certificates_overview_all_certificates_title" = "EU certificates";
 
-"accessibility_certificates_overview_all_certificates_title" = "EU certificates. Sensible health data will follow. Please take care that nobody can listen to or read on your smartphone.";
+"accessibility_certificates_overview_all_certificates_title" = "Check vaccination status. Sensible health data will follow. Please take care that nobody can listen to or read on your smartphone.";
 
 "certificates_overview_currently_uses_certificate_note" = "Certificate currently in use";
 
@@ -549,9 +567,13 @@
 
 "vaccination_certificate_detail_view_vaccination_title" = "Vaccine dose %d of %d";
 
+"accessibility_vaccination_certificate_detail_view_data_vaccine_number_readable_text" = "%1$d of %2$d";
+
 "vaccination_certificate_detail_view_vaccination_headline" = "EU Digital COVID Certificate of Vaccination";
 
 "accessibility_vaccination_certificate_detail_view_booster_vaccination_headline" = "EU Digital COVID Certificate of Vaccination. Sensible health data will follow. Please take care that nobody listens to or reads on your smartphone.";
+
+"accessibility_vaccination_certificate_detail_view_qrcode_screen_announce" = "QR-Code has been opened";
 
 "vaccination_certificate_detail_view_vaccination_note" = "This certificate is for a vaccine that only requires one dose or a vaccine for people who have recovered from an infection and only need one dose.";
 
@@ -796,6 +818,8 @@
 
 /********** print certificate **********/
 
+"accessibility_vaccination_certificate_detail_view_pdf_announce" = "The view \"Create EU printout\" has been opened";
+
 "accessibility_certificate_create_pdf_label_close" = "Close";
 
 "certificate_create_pdf_headline" = "Create EU printout";
@@ -879,6 +903,12 @@
 
 
 /********** app information **********/
+
+"accessibility_app_information_datenschutz_announce" = "Privacy policy has been opened";
+
+"accessibility_app_information_title_contact_announce" = "Contact has been opened";
+
+"accessibility_app_information_title_open_source_announce" = "Open-source licences";
 
 "accessibility_app_information_label_back" = "Back to the start screen";
 

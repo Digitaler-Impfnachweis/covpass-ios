@@ -115,8 +115,8 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
         if let v = certificate.v?.first {
             if showNotification {
                 return "vaccination_start_screen_qrcode_booster_vaccination_note_subtitle".localized
-            } else if v.fullImmunizationValid {
-                return "vaccination_start_screen_qrcode_complete_protection_subtitle".localized
+            } else if let date = v.fullImmunizationValidFrom, v.fullImmunizationValid {
+                return String(format: "vaccination_start_screen_qrcode_complete_protection_subtitle".localized, DateUtils.displayDateFormatter.string(from: date))
             } else if let date = v.fullImmunizationValidFrom, v.fullImmunization {
                 return String(format: "vaccination_start_screen_qrcode_complete_from_date_subtitle".localized, DateUtils.displayDateFormatter.string(from: date))
             }
