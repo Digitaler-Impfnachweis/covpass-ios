@@ -9,6 +9,12 @@
 import CovPassUI
 import UIKit
 
+private enum Constants {
+    enum Accessibility {
+        static let close = VoiceOverOptions.Settings(label: "accessibility_popup_label_close".localized)
+    }
+}
+
 class ValidationResultViewController: UIViewController {
     // MARK: - IBOutlet
 
@@ -40,6 +46,7 @@ class ValidationResultViewController: UIViewController {
         super.viewDidLoad()
         configureHeadline()
         configureToolbarView()
+        configureAccessibility()
         updateViews()
     }
 
@@ -72,6 +79,8 @@ class ValidationResultViewController: UIViewController {
             p.layoutMargins.bottom = .space_20
             self.paragraphStackView.addArrangedSubview(p)
         }
+        
+        UIAccessibility.post(notification: .layoutChanged, argument: self.resultView.titleLabel)
     }
 
     private func configureHeadline() {
@@ -86,6 +95,10 @@ class ValidationResultViewController: UIViewController {
     private func configureToolbarView() {
         toolbarView.state = .confirm("validation_check_popup_valid_vaccination_button_title".localized)
         toolbarView.delegate = self
+    }
+    
+    private func configureAccessibility() {
+        headline.actionButton.enableAccessibility(label: Constants.Accessibility.close.label)
     }
 }
 
