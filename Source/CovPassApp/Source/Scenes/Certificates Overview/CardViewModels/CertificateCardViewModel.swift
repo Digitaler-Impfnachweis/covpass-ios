@@ -73,6 +73,7 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
     var iconTintColor: UIColor {
         return backgroundColor == UIColor.onBackground50 ? .neutralBlack : .neutralWhite
     }
+
     var textColor: UIColor {
         return backgroundColor == UIColor.onBackground50 ? .neutralBlack : .neutralWhite
     }

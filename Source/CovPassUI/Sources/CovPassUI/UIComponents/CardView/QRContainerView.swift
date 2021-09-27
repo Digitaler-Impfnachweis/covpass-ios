@@ -23,8 +23,8 @@ public class QRContainerView: XibView {
     @IBOutlet public var titleLabel: UILabel!
     @IBOutlet public var subtitleLabel: UILabel!
     @IBOutlet public var overlay: UIView!
-    @IBOutlet weak var qrInfoLabel: UILabel!
-    @IBOutlet weak var qrContainerView: UIView!
+    @IBOutlet var qrInfoLabel: UILabel!
+    @IBOutlet var qrContainerView: UIView!
 
     // MARK: - Properties
 

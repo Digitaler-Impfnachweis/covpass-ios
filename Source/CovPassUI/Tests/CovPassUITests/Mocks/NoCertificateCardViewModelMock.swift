@@ -10,7 +10,6 @@ import CovPassUI
 import UIKit
 
 class NoCertificateCardViewModelMock: NoCertificateCardViewModelProtocol {
-
     var reuseIdentifier: String {
         "\(NoCertificateCollectionViewCell.self)"
     }

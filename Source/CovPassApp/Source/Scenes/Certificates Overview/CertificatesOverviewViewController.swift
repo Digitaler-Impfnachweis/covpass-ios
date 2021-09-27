@@ -102,7 +102,7 @@ class CertificatesOverviewViewController: UIViewController {
 
     private func setupActionButton() {
         addButton.icon = .plus
-        addButton.innerButton.accessibilityLabel =  Constants.Accessibility.addCertificate.label
+        addButton.innerButton.accessibilityLabel = Constants.Accessibility.addCertificate.label
         addButton.action = { [weak self] in
             self?.viewModel.scanCertificate()
         }

@@ -34,8 +34,8 @@ class QRContainerViewTests: XCTestCase {
 
     func testUpdateViews() {
         sut.image = .arrowBack
-        sut.titleLabel.attributedText =  "Test title".styledAs(.header_2).colored(.neutralBlack)
-        sut.subtitleLabel.attributedText =  "Test subtitle".styledAs(.body).colored(.neutralBlack)
+        sut.titleLabel.attributedText = "Test title".styledAs(.header_2).colored(.neutralBlack)
+        sut.subtitleLabel.attributedText = "Test subtitle".styledAs(.body).colored(.neutralBlack)
         sut.image = .arrowBack // Trigger updateviews
 
         XCTAssertEqual(sut.imageView.image, .arrowBack)

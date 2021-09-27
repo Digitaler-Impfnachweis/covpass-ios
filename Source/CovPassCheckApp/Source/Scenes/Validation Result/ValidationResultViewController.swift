@@ -79,8 +79,8 @@ class ValidationResultViewController: UIViewController {
             p.layoutMargins.bottom = .space_20
             self.paragraphStackView.addArrangedSubview(p)
         }
-        
-        UIAccessibility.post(notification: .layoutChanged, argument: self.resultView.titleLabel)
+
+        UIAccessibility.post(notification: .layoutChanged, argument: resultView.titleLabel)
     }
 
     private func configureHeadline() {
@@ -96,7 +96,7 @@ class ValidationResultViewController: UIViewController {
         toolbarView.state = .confirm("validation_check_popup_valid_vaccination_button_title".localized)
         toolbarView.delegate = self
     }
-    
+
     private func configureAccessibility() {
         headline.actionButton.enableAccessibility(label: Constants.Accessibility.close.label)
     }

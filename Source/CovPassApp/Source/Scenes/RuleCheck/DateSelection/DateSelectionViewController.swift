@@ -53,7 +53,7 @@ class DateSelectionViewController: UIViewController {
         }
         headline.image = .close
         headline.actionButton.enableAccessibility(label: Constants.Accessibility.close.label)
-        headline.layoutMargins.bottom = .space_24        
+        headline.layoutMargins.bottom = .space_24
 
         datePicker.date = viewModel.date
         datePicker.datePickerMode = viewModel.step == .One ? .date : .time

@@ -12,9 +12,7 @@ import UIKit
 
 private enum Constants {
     static let qrInfoText = "certificates_overview_qr_scan_hint".localized
-    enum Accessibility {
-
-    }
+    enum Accessibility {}
 }
 
 public typealias CertificateCardViewModelProtocol = CardViewModel & CertificateCardViewModelBase
@@ -104,7 +102,6 @@ public class CertificateCollectionViewCell: CardCollectionViewCell {
         qrContainerView.subtitleLabel.attributedText = vm.subtitle.styledAs(.body).colored(vm.textColor)
 
         qrContainerView.qrInfoText = Constants.qrInfoText
-
 
         qrContainerView.showOverlay = vm.isExpired
 

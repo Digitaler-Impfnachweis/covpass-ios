@@ -1,5 +1,7 @@
 <h2 align="center">CovPass / CovPass Check</h2>
+
 <br />
+
 <p align="center">
   <a href="#">
     <img src="Resources/CovPass.png" alt="CovPass Icon" width="80" height="80">
