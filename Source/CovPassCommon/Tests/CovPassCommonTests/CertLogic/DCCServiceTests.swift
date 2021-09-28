@@ -130,13 +130,3 @@ class DCCServiceTests: XCTestCase {
         }
     }
 }
-
-
-//func loadDCCRules() -> Promise<[RuleSimple]>
-//func loadDCCRule(country: String, hash: String) -> Promise<Rule>
-//
-//func loadValueSets() -> Promise<[[String: String]]>
-//func loadValueSet(id: String, hash: String) -> Promise<ValueSet>
-//
-//func loadBoosterRules() -> Promise<[RuleSimple]>
-//func loadBoosterRule(hash: String) -> Promise<Rule>
