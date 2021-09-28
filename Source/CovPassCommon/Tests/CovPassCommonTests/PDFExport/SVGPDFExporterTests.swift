@@ -45,7 +45,8 @@ class SVGPDFExporterTests: XCTestCase {
         XCTAssertEqual(try XCTUnwrap(CBORWebToken.mockVaccinationCertificate.hcert.dgc.template).data.count, 25752)
         XCTAssertEqual(try XCTUnwrap(CBORWebToken.mockRecoveryCertificate.hcert.dgc.template).type, .recovery)
         XCTAssertEqual(try XCTUnwrap(CBORWebToken.mockRecoveryCertificate.hcert.dgc.template).data.count, 159418)
-        XCTAssertNil(CBORWebToken.mockTestCertificate.hcert.dgc.template)
+        XCTAssertEqual(try XCTUnwrap(CBORWebToken.mockTestCertificate.hcert.dgc.template).type, .test)
+        XCTAssertEqual(try XCTUnwrap(CBORWebToken.mockTestCertificate.hcert.dgc.template).data.count, 95324)
 
         // Export of certificates from other countries should fail
         let cert = CBORWebToken.mockVaccinationCertificate
