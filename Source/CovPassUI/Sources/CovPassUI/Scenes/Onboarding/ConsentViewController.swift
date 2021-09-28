@@ -73,6 +73,7 @@ class ConsentViewController: UIViewController {
 
     private func configureHeadline() {
         headline.attributedText = viewModel.title?.styledAs(.header_2)
+        headline.textableView.accessibilityTraits = .header
         headline.layoutMargins = .init(top: .space_40, left: .space_24, bottom: .zero, right: .space_24)
     }
 
