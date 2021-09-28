@@ -20,7 +20,7 @@ class CertificateViewModel: BaseViewModel, CancellableViewModelProtocol {
     let resolver: Resolver<Void>
 
     var image: UIImage? {
-        token.vaccinationQRCodeData.generateQRCode(size: UIScreen.main.bounds.size)
+        token.vaccinationQRCodeData.generateQRCode()
     }
 
     // MARK: - Lifecycle

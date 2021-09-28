@@ -40,7 +40,7 @@ extension RuleSimple {
 extension Rule {
     static var mock: Rule {
         Rule(
-            identifier: "",
+            identifier: "rule-identifier",
             type: "",
             version: "",
             schemaVersion: "",

@@ -16,9 +16,9 @@ extension DCCCertLogic {
             service: DCCService(
                 url: URL(string: XCConfiguration.value(String.self, forKey: "DCC_RULES_URL"))!,
                 boosterURL: URL(string: XCConfiguration.value(String.self, forKey: "BOOSTER_RULES_URL"))!, // FIXME: not needed in check app
-                sessionDelegate: APIServiceDelegate(
+                customURLSession: CustomURLSession(sessionDelegate: APIServiceDelegate(
                     publicKeyHashes: XCConfiguration.value([String].self, forKey: "PINNING_HASHES")
-                )
+                ))
             ),
             keychain: KeychainPersistence(),
             userDefaults: UserDefaultsPersistence()

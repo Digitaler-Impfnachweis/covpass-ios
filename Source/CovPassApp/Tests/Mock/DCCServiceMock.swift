@@ -34,7 +34,7 @@ public struct DCCServiceMock: DCCServiceProtocol {
         return Promise.value([])
     }
 
-    public func loadBoosterRule(country _: String, hash _: String) -> Promise<Rule> {
+    public func loadBoosterRule(hash _: String) -> Promise<Rule> {
         return Promise(error: ApplicationError.unknownError)
     }
 }

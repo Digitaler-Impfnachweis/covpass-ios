@@ -51,7 +51,7 @@ public final class SVGPDFExporter: NSObject, WKNavigationDelegate, SVGPDFExportP
         svg = svg.replacingOccurrences(of: "$ci", with: certificate.uvci.stripUVCIPrefix().sanitizedXMLString)
 
         // QR code
-        let qr = token.vaccinationQRCodeData.generateQRCode(size: CGSize(width: 1000, height: 1000))
+        let qr = token.vaccinationQRCodeData.generateQRCode()
         svg = svg.replacingOccurrences(of: "$qr", with: qr?.pngData()?.base64EncodedString() ?? .placeholder)
 
         switch template.type {
