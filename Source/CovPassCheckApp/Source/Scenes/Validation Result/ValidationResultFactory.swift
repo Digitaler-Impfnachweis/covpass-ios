@@ -25,7 +25,10 @@ struct ValidationResultFactory {
             let valid = validationResult.contains(where: { $0.result != .passed }) == false
 
             // Show error dialog when at least one rule failed or there are no rules at all
-            if !valid || validationResult.isEmpty {
+            if !valid {
+                return ErrorResultViewModel(router: router, repository: repository, certificate: certificate, error: CertificateError.expiredCertifcate)
+            }
+            if !validationResult.isEmpty {
                 return ErrorResultViewModel(router: router, repository: repository, certificate: certificate, error: CertificateError.invalidEntity)
             }
             if certificate?.hcert.dgc.r?.isEmpty == false {
