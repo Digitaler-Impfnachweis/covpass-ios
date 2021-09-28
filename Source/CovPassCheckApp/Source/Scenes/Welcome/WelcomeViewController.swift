@@ -64,6 +64,7 @@ class WelcomeViewController: UIViewController {
 
     private func configureHeadline() {
         headline.attributedText = viewModel.title.styledAs(.display)
+        headline.textableView.accessibilityTraits = .header
         headline.layoutMargins = .init(top: .space_24, left: .space_24, bottom: .zero, right: .space_24)
     }
 
