@@ -37,7 +37,7 @@ public struct CustomURLSession: CustomURLSessionProtocol {
 
     public func request(_ urlRequest: URLRequest) -> Promise<String> {
         Promise { seal in
-            print("\(urlRequest.url?.absoluteString ?? "")/rules")
+            print(urlRequest.url?.absoluteString ?? "")
             let session = URLSession(configuration: URLSessionConfiguration.ephemeral,
                                     delegate: sessionDelegate,
                                     delegateQueue: nil)
