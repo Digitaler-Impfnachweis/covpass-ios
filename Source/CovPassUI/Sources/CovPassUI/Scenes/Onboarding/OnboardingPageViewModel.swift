@@ -32,7 +32,8 @@ public struct ConsentRouter: ConsentRouterProtocol {
             WebviewSceneFactory(
                 title: "vaccination_fourth_onboarding_page_message_for_us_citizens_title".localized,
                 url: url,
-                closeButtonShown: true
+                closeButtonShown: true,
+                embedInNavigationController: true
             ),
             animated: true
         )

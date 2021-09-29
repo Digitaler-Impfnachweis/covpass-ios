@@ -58,7 +58,7 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
 
     var birthDate: String {
         guard let dgc = certificates.first?.vaccinationCertificate.hcert.dgc else { return "" }
-        return DateUtils.displayDateOfBirth(dgc)
+        return DateUtils.displayIsoDateOfBirth(dgc)
     }
 
     var immunizationIcon: UIImage? {

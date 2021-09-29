@@ -14,23 +14,25 @@ public struct WebviewSceneFactory: SceneFactory {
     public let title: String
     public let url: URL
     public let closeButtonShown: Bool
+    public let embedInNavigationController: Bool
 
     // MARK: - Lifecycle
 
     public init(
         title: String,
         url: URL,
-        closeButtonShown: Bool = false
+        closeButtonShown: Bool = false,
+        embedInNavigationController: Bool = false
     ) {
         self.title = title
         self.url = url
         self.closeButtonShown = closeButtonShown
+        self.embedInNavigationController = embedInNavigationController
     }
 
     public func make() -> UIViewController {
         let viewModel = WebviewViewModel(title: title, url: url, closeButtonShown: closeButtonShown)
         let viewController = WebviewViewController(viewModel: viewModel)
-
-        return viewController
+        return embedInNavigationController ? UINavigationController(rootViewController: viewController) : viewController
     }
 }

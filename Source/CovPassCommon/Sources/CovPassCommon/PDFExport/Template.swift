@@ -50,6 +50,11 @@ public extension DigitalGreenCertificate {
             templateType = .recovery
             country = r.co
         }
+        if let t = t?.first {
+            templateName = "TestCertificateTemplate_v4.1"
+            templateType = .test
+            country = t.co
+        }
 
         // Currently, only certificates issued in Germany are exportable.
         // Edge-case note: this check uses the country of vaccination/recovery.

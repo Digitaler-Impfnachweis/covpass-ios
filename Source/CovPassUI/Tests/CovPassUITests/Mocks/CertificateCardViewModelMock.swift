@@ -64,6 +64,14 @@ class CertificateCardViewModelMock: CertificateCardViewModelProtocol {
         .backgroundPrimary
     }
 
+    var iconTintColor: UIColor {
+        .white
+    }
+
+    var textColor: UIColor {
+        .black
+    }
+
     var isFullImmunization: Bool = true
 
     var vaccinationDate: Date?

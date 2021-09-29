@@ -93,6 +93,7 @@ fastlane/Preview.html
 fastlane/screenshots/**/*.png
 fastlane/test_output
 fastlane/FastlaneRunner
+Reports
 
 # Code Injection
 #

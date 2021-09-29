@@ -11,5 +11,7 @@ import UIKit
 public protocol CardViewModel {
     var reuseIdentifier: String { get }
     var backgroundColor: UIColor { get }
+    var iconTintColor: UIColor { get }
+    var textColor: UIColor { get }
     var delegate: ViewModelDelegate? { get set }
 }

@@ -14,11 +14,12 @@ private enum Constants {
         static let cornerRadius: CGFloat = 12.0
         static let borderWith: CGFloat = 1.0
     }
+
     enum Accessibility {
         static let select = VoiceOverOptions.Settings(label: "certificate_check_validity_selection_country_action_button".localized)
         static let close = VoiceOverOptions.Settings(label: "accessibility_popup_label_close".localized)
         static let countrySelected = VoiceOverOptions.Settings(label: "accessibility_certificate_check_validity_selection_country_selected".localized)
-        static let countryUnselected = VoiceOverOptions.Settings(label: "accessibility_certificate_check_validity_selection_country_unselected".localized)        
+        static let countryUnselected = VoiceOverOptions.Settings(label: "accessibility_certificate_check_validity_selection_country_unselected".localized)
     }
 }
 

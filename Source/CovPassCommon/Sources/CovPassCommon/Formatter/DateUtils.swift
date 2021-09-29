@@ -32,11 +32,26 @@ public enum DateUtils {
 
     public static let displayTimeZoneFormatter = dateFormatter(format: "ZZZZ")
 
-    public static var displayDateFormatter = dateFormatter(format: "dd.MM.yyyy")
+    public static var displayDateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .none
+        return formatter
+    }()
 
-    public static var displayTimeFormatter = dateFormatter(format: "HH:mm")
+    public static var displayTimeFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .none
+        formatter.timeStyle = .short
+        return formatter
+    }()
 
-    public static var displayDateTimeFormatter = dateFormatter(format: "dd.MM.yyyy, HH:mm")
+    public static var displayDateTimeFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .short
+        return formatter
+    }()
 
     private static func dateFormatter(format: String) -> DateFormatter {
         let formatter = DateFormatter()
@@ -74,7 +89,29 @@ public enum DateUtils {
     public static func displayDateOfBirth(_ dgc: DigitalGreenCertificate) -> String {
         if let dob = dgc.dob {
             if dateFormatter(format: "yyyy-MM-dd").date(from: dgc.dobString ?? "") != nil {
-                return dateFormatter(format: "yyyy-MM-dd").string(from: dob)
+                return displayDateFormatter.string(from: dob)
+            }
+            if dateFormatter(format: "yyyy-MM").date(from: dgc.dobString ?? "") != nil {
+                return "\(dateFormatter(format: "yyyy-MM").string(from: dob))-XX"
+            }
+            if dateFormatter(format: "yyyy").date(from: dgc.dobString ?? "") != nil {
+                return "\(dateFormatter(format: "yyyy").string(from: dob))-XX-XX"
+            }
+        }
+        var dobString = dgc.dobString ?? ""
+        if dobString == "" {
+            dobString = "XXXX-XX-XX"
+        }
+        if let timeRange = dobString.range(of: "T") {
+            dobString.removeSubrange(timeRange.lowerBound ..< dobString.endIndex)
+        }
+        return dobString
+    }
+
+    public static func displayIsoDateOfBirth(_ dgc: DigitalGreenCertificate) -> String {
+        if let dob = dgc.dob {
+            if dateFormatter(format: "yyyy-MM-dd").date(from: dgc.dobString ?? "") != nil {
+                return isoDateFormatter.string(from: dob)
             }
             if dateFormatter(format: "yyyy-MM").date(from: dgc.dobString ?? "") != nil {
                 return "\(dateFormatter(format: "yyyy-MM").string(from: dob))-XX"

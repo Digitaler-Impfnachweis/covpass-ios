@@ -27,23 +27,21 @@ class QRContainerViewTests: XCTestCase {
     }
 
     func testInit() {
-        XCTAssertEqual(sut.contentView?.layoutMargins, .init(top: .space_10, left: .space_10, bottom: .space_10, right: .space_10))
-        XCTAssertEqual(sut.contentView?.layer.cornerRadius, 10)
-        XCTAssertEqual(sut.contentView?.layer.masksToBounds, true)
+        XCTAssertEqual(sut.qrContainerView?.layoutMargins, .init(top: .space_8, left: .space_8, bottom: .space_8, right: .space_8))
+        XCTAssertEqual(sut.qrContainerView?.layer.cornerRadius, 10)
+        XCTAssertEqual(sut.qrContainerView?.layer.masksToBounds, true)
     }
 
     func testUpdateViews() {
         sut.image = .arrowBack
-        sut.title = "Test title"
-        sut.subtitle = "Test subtitle"
+        sut.titleLabel.attributedText = "Test title".styledAs(.header_2).colored(.neutralBlack)
+        sut.subtitleLabel.attributedText = "Test subtitle".styledAs(.body).colored(.neutralBlack)
+        sut.image = .arrowBack // Trigger updateviews
 
         XCTAssertEqual(sut.imageView.image, .arrowBack)
-        XCTAssertEqual(sut.contentView?.backgroundColor, .neutralWhite)
+        XCTAssertEqual(sut.qrContainerView?.backgroundColor, .neutralWhite)
 
-        XCTAssertEqual(sut.titleLabel.attributedText, "Test title".styledAs(.header_2).colored(.neutralBlack))
         XCTAssertFalse(sut.titleLabel.isHidden)
-
-        XCTAssertEqual(sut.subtitleLabel.attributedText, "Test subtitle".styledAs(.body).colored(.neutralBlack))
         XCTAssertFalse(sut.subtitleLabel.isHidden)
     }
 }

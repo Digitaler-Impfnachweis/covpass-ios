@@ -57,6 +57,6 @@ class VaccinationCertificateTests: XCTestCase {
         // cannot be exported
         let tJsonData = Data.json("DigitalGreenCertificateT")
         let t = try JSONDecoder().decode(DigitalGreenCertificate.self, from: tJsonData)
-        XCTAssertFalse(t.canExportToPDF)
+        XCTAssertTrue(t.canExportToPDF)
     }
 }

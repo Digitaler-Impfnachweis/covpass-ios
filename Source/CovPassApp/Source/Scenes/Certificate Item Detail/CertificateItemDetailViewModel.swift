@@ -63,7 +63,7 @@ class CertificateItemDetailViewModel: CertificateItemDetailViewModelProtocol {
     }
 
     private var dob: String {
-        return DateUtils.displayDateOfBirth(dgc)
+        return DateUtils.displayIsoDateOfBirth(dgc)
     }
 
     var items: [ContentItem] {

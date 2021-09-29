@@ -29,14 +29,27 @@ open class WebviewViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .neutralWhite
         title = viewModel.title
-
-        let backBarBtnItem = UIBarButtonItem()
-        backBarBtnItem.title = "button_back".localized
-        navigationController?.navigationBar.topItem?.backBarButtonItem = backBarBtnItem
+        setupNavigationBar()
 
         webView.backgroundColor = .neutralWhite
         webView.navigationDelegate = self
         webView.load(viewModel.urlRequest)
+    }
+
+    private func setupNavigationBar() {
+        if navigationController?.navigationBar.backItem != nil { return }
+        let button = UIButton(type: .custom)
+        button.setImage(.close, for: .normal)
+        button.accessibilityLabel = "accessibility_certificate_add_popup_label_close".localized
+        button.addTarget(self, action: #selector(backButtonPressed), for: .touchUpInside)
+        button.frame = CGRect(x: 0, y: 0, width: 32, height: 32)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: button)
+        navigationController?.navigationBar.setValue(true, forKey: "hidesShadow")
+        navigationController?.navigationBar.barTintColor = .neutralWhite
+    }
+
+    @objc func backButtonPressed() {
+        dismiss(animated: true, completion: nil)
     }
 }
 

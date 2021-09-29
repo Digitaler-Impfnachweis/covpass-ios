@@ -49,6 +49,7 @@ class ValidationResultViewController: UIViewController {
         super.viewDidLoad()
         configureHeadline()
         configureToolbarView()
+        configureAccessibility()
         updateViews()
     }
 
@@ -82,6 +83,8 @@ class ValidationResultViewController: UIViewController {
             p.layoutMargins.bottom = .space_20
             self.paragraphStackView.addArrangedSubview(p)
         }
+
+        UIAccessibility.post(notification: .layoutChanged, argument: resultView.titleLabel)
     }
 
     private func configureHeadline() {
@@ -97,6 +100,10 @@ class ValidationResultViewController: UIViewController {
     private func configureToolbarView() {
         toolbarView.state = .confirm(Constants.confirmButtonLabel)
         toolbarView.delegate = self
+    }
+
+    private func configureAccessibility() {
+        headline.actionButton.enableAccessibility(label: Constants.Accessibility.close.label)
     }
 }
 

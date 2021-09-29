@@ -41,11 +41,11 @@ class DateUtilsTests: XCTestCase {
     }
 
     func testDisplayDateFormatter() {
-        XCTAssertEqual(DateUtils.displayDateFormatter.string(from: date), "01.01.1970")
+        XCTAssertEqual(DateUtils.displayDateFormatter.string(from: date), "Jan 1, 1970")
     }
 
     func testDisplayDateTimeFormatter() {
-        XCTAssertEqual(DateUtils.displayDateTimeFormatter.string(from: date), "01.01.1970, 01:16")
+        XCTAssertEqual(DateUtils.displayDateTimeFormatter.string(from: date), "Jan 1, 1970 at 1:16 AM")
     }
 
     func testParseDate() {
@@ -65,7 +65,7 @@ class DateUtilsTests: XCTestCase {
     func testDisplayDateOfBirth() {
         var dgc = try! JSONDecoder().decode(DigitalGreenCertificate.self, from: Data.json("DigitalGreenCertificateV"))
 
-        XCTAssertEqual(DateUtils.displayDateOfBirth(dgc), "1964-08-12")
+        XCTAssertEqual(DateUtils.displayDateOfBirth(dgc), "Aug 12, 1964")
         dgc.dobString = "1964-08"
         XCTAssertEqual(DateUtils.displayDateOfBirth(dgc), "1964-08-XX")
         dgc.dobString = "1964"

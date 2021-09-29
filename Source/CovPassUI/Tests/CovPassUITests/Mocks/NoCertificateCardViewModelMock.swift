@@ -31,4 +31,12 @@ class NoCertificateCardViewModelMock: NoCertificateCardViewModelProtocol {
     var image: UIImage {
         .scan
     }
+
+    var iconTintColor: UIColor {
+        .white
+    }
+
+    var textColor: UIColor {
+        .black
+    }
 }
