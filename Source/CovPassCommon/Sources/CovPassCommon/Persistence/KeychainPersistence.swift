@@ -132,9 +132,57 @@ public struct KeychainPersistence: Persistence {
 
     // Delete all data from keychain
     public func deleteAll() throws {
-        try delete(Self.trustListKey)
-        try delete(Self.certificateListKey)
-        try delete(Self.dccRulesKey)
-        try delete(Self.boosterRulesKey)
+        try KeychainPersistence.Keys
+            .allCases
+            .forEach {
+                try delete($0.rawValue)
+            }
+    }
+}
+
+
+extension KeychainPersistence {
+
+    /// Updates `kSecAttrAccessible` for `KeychainPersistence.Keys`.
+    /// This fixes potential loss of data for old versions where `kSecAttrAccessibleWhenPasscodeSetThisDeviceOnly` was used
+    /// - Throws: KeychainError
+    public static func migrateKeyAttributes(from oldSecAttrAccessible: CFString = kSecAttrAccessibleWhenPasscodeSetThisDeviceOnly,
+                                            to newSecAttrAccessible: CFString = kSecAttrAccessibleWhenUnlocked) throws {
+        let query: NSDictionary = [
+            kSecClass as String: kSecClassGenericPassword,
+            kSecMatchLimit as String: kSecMatchLimitAll,
+            kSecReturnAttributes as String: true,
+            kSecReturnRef as String: true,
+            kSecAttrAccessible as String: oldSecAttrAccessible
+        ]
+        var itemsRef: CFTypeRef?
+        let status = SecItemCopyMatching(query, &itemsRef)
+
+        // No old value found
+        guard status != errSecItemNotFound else { return }
+
+        // we found something
+        guard status == errSecSuccess,
+              let items = itemsRef as? Array<Dictionary<String, Any>>
+        else {
+#if DEBUG
+            debugPrint("\(String(describing: SecCopyErrorMessageString(status, nil))) \(status)")
+#endif
+            throw KeychainError.migrationFailed
+        }
+
+        try items.forEach { dict in
+            guard let serviceString = (dict[kSecAttrService as String] as? String),
+                  let service = KeychainPersistence.Keys(rawValue: serviceString),
+                  KeychainPersistence.Keys.allCases.contains(service) else { return }
+
+            let status = SecItemUpdate(dict as CFDictionary, [kSecAttrAccessible as String: newSecAttrAccessible] as NSDictionary)
+            if status != noErr {
+#if DEBUG
+                debugPrint("\(String(describing: SecCopyErrorMessageString(status, nil))) \(status)")
+#endif
+                throw KeychainError.migrationFailed
+            }
+        }
     }
 }

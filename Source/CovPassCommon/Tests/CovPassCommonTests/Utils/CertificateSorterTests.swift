@@ -13,6 +13,11 @@ import XCTest
 @testable import CovPassCommon
 
 extension CBORWebToken {
+    func mockName(_ name: Name) -> Self {
+        var token = self
+        token.hcert.dgc.nam = name
+        return token
+    }
     func mockVaccinationUVCI(_ uvci: String) -> Self {
         hcert.dgc.v?.first?.ci = uvci
         return self

@@ -42,7 +42,7 @@ class DCCServiceMock: DCCServiceProtocol {
     }
 
     var loadBoosterRuleResult: Promise<Rule>?
-    func loadBoosterRule(country _: String, hash _: String) -> Promise<Rule> {
+    func loadBoosterRule(hash _: String) -> Promise<Rule> {
         loadBoosterRuleResult ?? Promise(error: DCCServiceMockError.invalidURL)
     }
 }

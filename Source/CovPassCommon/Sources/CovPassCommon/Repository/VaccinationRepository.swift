@@ -40,7 +40,7 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
 
     private var trustList: TrustList? {
         // Try to load trust list from keychain
-        if let trustListData = try? keychain.fetch(KeychainPersistence.trustListKey) as? Data,
+        if let trustListData = try? keychain.fetch(KeychainPersistence.Keys.trustList.rawValue) as? Data,
            let list = try? JSONDecoder().decode(TrustList.self, from: trustListData)
         {
             return list
@@ -67,7 +67,7 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
         firstly {
             Promise { seal in
                 do {
-                    guard let data = try keychain.fetch(KeychainPersistence.certificateListKey) as? Data else {
+                    guard let data = try keychain.fetch(KeychainPersistence.Keys.certificateList.rawValue) as? Data else {
                         throw KeychainError.fetchFailed
                     }
                     let certificate = try JSONDecoder().decode(CertificateList.self, from: data)
@@ -108,7 +108,7 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
     public func saveCertificateList(_ certificateList: CertificateList) -> Promise<CertificateList> {
         return Promise { seal in
             let data = try JSONEncoder().encode(certificateList)
-            try keychain.store(KeychainPersistence.certificateListKey, value: data)
+            try keychain.store(KeychainPersistence.Keys.certificateList.rawValue, value: data)
             seal.fulfill(certificateList)
         }
     }
@@ -189,7 +189,7 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
         }
         .map(on: .global()) { trustList in
             let data = try JSONEncoder().encode(trustList)
-            try keychain.store(KeychainPersistence.trustListKey, value: data)
+            try keychain.store(KeychainPersistence.Keys.trustList.rawValue, value: data)
             UserDefaults.standard.setValue(Date(), forKey: UserDefaults.keyLastUpdatedTrustList)
         }
     }

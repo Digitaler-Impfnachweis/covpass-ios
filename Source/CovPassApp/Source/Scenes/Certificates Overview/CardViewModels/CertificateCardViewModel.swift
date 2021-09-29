@@ -165,7 +165,7 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
     var showFavorite: Bool = true
 
     var qrCode: UIImage? {
-        return token.vaccinationQRCodeData.generateQRCode(size: UIScreen.main.bounds.size)
+        return token.vaccinationQRCodeData.generateQRCode()
     }
 
     var name: String {

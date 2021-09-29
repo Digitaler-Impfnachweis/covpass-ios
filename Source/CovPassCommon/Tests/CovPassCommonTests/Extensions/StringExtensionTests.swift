@@ -50,4 +50,9 @@ class StringExtensionTests: XCTestCase {
         XCTAssertEqual("foo\"bar".sanitizedXMLString, "foo&quot;bar")
         XCTAssertEqual("🦠'💉".sanitizedXMLString, "🦠&apos;💉")
     }
+
+    func testQRCodeGeneration() {
+        XCTAssertNotNil("foo".generateQRCode())
+        XCTAssertNotNil(try CBORWebToken.mockVaccinationCertificate.generateQRCodeData(with: KeyPair.default).generateQRCode())
+    }
 }
