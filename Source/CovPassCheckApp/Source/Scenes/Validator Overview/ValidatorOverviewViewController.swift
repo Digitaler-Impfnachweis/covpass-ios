@@ -17,7 +17,8 @@ class ValidatorOverviewViewController: UIViewController {
     @IBOutlet var headerView: InfoHeaderView!
     @IBOutlet var scanCard: ScanCardView!
     @IBOutlet var offlineCard: OfflineCardView!
-
+    @IBOutlet var timeCard: HintView!
+    
     // MARK: - Properties
 
     private(set) var viewModel: ValidatorOverviewViewModel

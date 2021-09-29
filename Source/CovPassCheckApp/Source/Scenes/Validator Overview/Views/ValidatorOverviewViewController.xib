@@ -14,6 +14,7 @@
                 <outlet property="headerView" destination="zJo-A3-iFe" id="O25-eI-mKv"/>
                 <outlet property="offlineCard" destination="TTc-KS-yO5" id="UxL-Sz-hzu"/>
                 <outlet property="scanCard" destination="0Le-DA-8MJ" id="hqR-DR-0ma"/>
+                <outlet property="timeCard" destination="h6e-Af-Kqm" id="P7X-yU-uTr"/>
                 <outlet property="view" destination="oRh-oW-Top" id="0bV-Tk-AFp"/>
             </connections>
         </placeholder>
@@ -31,10 +32,10 @@
                     <rect key="frame" x="0.0" y="144" width="414" height="718"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LPz-bQ-P6F">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="624"/>
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="776"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="UmP-gd-ynO">
-                                    <rect key="frame" x="24" y="0.0" width="366" height="624"/>
+                                    <rect key="frame" x="24" y="0.0" width="366" height="776"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" placeholderIntrinsicWidth="366" placeholderIntrinsicHeight="350" translatesAutoresizingMaskIntoConstraints="NO" id="0Le-DA-8MJ" customClass="ScanCardView" customModule="CovPassUI">
                                             <rect key="frame" x="0.0" y="0.0" width="366" height="350"/>
@@ -43,8 +44,15 @@
                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="350" id="wHQ-Hr-dqv"/>
                                             </constraints>
                                         </view>
+                                        <view contentMode="scaleToFill" placeholderIntrinsicWidth="366" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="h6e-Af-Kqm" customClass="HintView" customModule="CovPassUI">
+                                            <rect key="frame" x="0.0" y="374" width="366" height="128"/>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="128" id="mxR-kh-HLg"/>
+                                            </constraints>
+                                        </view>
                                         <view contentMode="scaleToFill" placeholderIntrinsicWidth="366" placeholderIntrinsicHeight="250" translatesAutoresizingMaskIntoConstraints="NO" id="TTc-KS-yO5" customClass="OfflineCardView" customModule="CovPassUI">
-                                            <rect key="frame" x="0.0" y="374" width="366" height="250"/>
+                                            <rect key="frame" x="0.0" y="526" width="366" height="250"/>
                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="250" id="IiP-04-gia"/>
@@ -94,6 +102,9 @@
         </designable>
         <designable name="TTc-KS-yO5">
             <size key="intrinsicContentSize" width="366" height="250"/>
+        </designable>
+        <designable name="h6e-Af-Kqm">
+            <size key="intrinsicContentSize" width="366" height="128"/>
         </designable>
         <designable name="zJo-A3-iFe">
             <size key="intrinsicContentSize" width="366" height="100"/>
