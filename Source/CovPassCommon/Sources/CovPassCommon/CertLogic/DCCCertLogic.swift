@@ -82,7 +82,7 @@ public struct DCCCertLogic: DCCCertLogicProtocol {
 
     var dccRules: [Rule] {
         // Try to load rules from keychain
-        if let rulesData = try? keychain.fetch(KeychainPersistence.dccRulesKey) as? Data,
+        if let rulesData = try? keychain.fetch(KeychainPersistence.Keys.dccRules.rawValue) as? Data,
            let rules = try? JSONDecoder().decode([Rule].self, from: rulesData)
         {
             return rules
@@ -98,7 +98,7 @@ public struct DCCCertLogic: DCCCertLogicProtocol {
 
     var boosterRules: [Rule] {
         // Try to load rules from keychain
-        if let rulesData = try? keychain.fetch(KeychainPersistence.boosterRulesKey) as? Data,
+        if let rulesData = try? keychain.fetch(KeychainPersistence.Keys.boosterRules.rawValue) as? Data,
            let rules = try? JSONDecoder().decode([Rule].self, from: rulesData)
         {
             return rules
@@ -281,7 +281,7 @@ public struct DCCCertLogic: DCCCertLogicProtocol {
         }
         .map(on: .global()) { rules in
             let data = try JSONEncoder().encode(rules)
-            try keychain.store(KeychainPersistence.dccRulesKey, value: data)
+            try keychain.store(KeychainPersistence.Keys.dccRules.rawValue, value: data)
         }
         .then(on: .global()) {
             updateBoosterRules()
@@ -312,7 +312,7 @@ public struct DCCCertLogic: DCCCertLogicProtocol {
         }
         .map(on: .global()) { rules in
             let data = try JSONEncoder().encode(rules)
-            try keychain.store(KeychainPersistence.boosterRulesKey, value: data)
+            try keychain.store(KeychainPersistence.Keys.boosterRules.rawValue, value: data)
         }
         .then(on: .global()) {
             updateValueSets()
