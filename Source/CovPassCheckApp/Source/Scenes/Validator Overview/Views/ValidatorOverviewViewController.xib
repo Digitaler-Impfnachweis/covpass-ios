@@ -31,10 +31,10 @@
                     <rect key="frame" x="0.0" y="144" width="414" height="718"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LPz-bQ-P6F">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="680"/>
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="656"/>
                             <subviews>
-                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="48" translatesAutoresizingMaskIntoConstraints="NO" id="UmP-gd-ynO">
-                                    <rect key="frame" x="24" y="32" width="366" height="648"/>
+                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="UmP-gd-ynO">
+                                    <rect key="frame" x="24" y="32" width="366" height="624"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" placeholderIntrinsicWidth="366" placeholderIntrinsicHeight="350" translatesAutoresizingMaskIntoConstraints="NO" id="0Le-DA-8MJ" customClass="ScanCardView" customModule="CovPassUI">
                                             <rect key="frame" x="0.0" y="0.0" width="366" height="350"/>
@@ -44,7 +44,7 @@
                                             </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" placeholderIntrinsicWidth="366" placeholderIntrinsicHeight="250" translatesAutoresizingMaskIntoConstraints="NO" id="TTc-KS-yO5" customClass="OfflineCardView" customModule="CovPassUI">
-                                            <rect key="frame" x="0.0" y="398" width="366" height="250"/>
+                                            <rect key="frame" x="0.0" y="374" width="366" height="250"/>
                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="250" id="IiP-04-gia"/>
