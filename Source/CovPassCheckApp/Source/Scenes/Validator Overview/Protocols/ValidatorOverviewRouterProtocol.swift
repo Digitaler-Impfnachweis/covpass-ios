@@ -15,5 +15,6 @@ import UIKit
 protocol ValidatorOverviewRouterProtocol: DialogRouterProtocol {
     func scanQRCode() -> Promise<ScanResult>
     func showCertificate(_ certificate: CBORWebToken?)
+    func showError(error: Error)
     func showAppInformation()
 }

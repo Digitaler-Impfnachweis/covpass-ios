@@ -18,6 +18,7 @@ public class ParagraphView: XibView {
     @IBOutlet public var titleLabel: UILabel!
     @IBOutlet public var bodyLabel: UILabel!
     @IBOutlet public var bottomBorder: UIView!
+    @IBOutlet weak var imageContainerView: UIView!
 
     // MARK: - Properties
 
@@ -44,7 +45,7 @@ public class ParagraphView: XibView {
 
     private func updateView() {
         imageView.image = image
-        imageView.isHidden = image == nil
+        imageContainerView.isHidden = image == nil
         titleLabel.attributedText = attributedTitleText
         titleLabel.isHidden = attributedTitleText.isNilOrEmpty
         bodyLabel.attributedText = attributedBodyText

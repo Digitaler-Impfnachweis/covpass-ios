@@ -9,6 +9,12 @@
 import CovPassUI
 import UIKit
 
+private enum Constants {
+    enum Accessibility {
+        static let close = VoiceOverOptions.Settings(label: "accessibility_popup_label_close".localized)
+    }
+}
+
 class CertificateViewController: UIViewController {
     // MARK: - IBOutlet
 
@@ -52,6 +58,7 @@ class CertificateViewController: UIViewController {
             self?.viewModel.cancel()
         }
         headline.image = .close
+        headline.actionButton.enableAccessibility(label: Constants.Accessibility.close.label)
     }
 
     private func configureToolbarView() {

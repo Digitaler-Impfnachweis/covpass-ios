@@ -56,15 +56,17 @@ extension ValidationViewModel {
             let vm = ValidationResultFactory.createViewModel(
                 router: self.router,
                 repository: self.repository,
-                certificate: certificate
+                certificate: certificate,
+                error: nil
             )
             self.delegate?.viewModelDidChange(vm)
         }
-        .catch { _ in
+        .catch { error in
             let vm = ValidationResultFactory.createViewModel(
                 router: self.router,
                 repository: self.repository,
-                certificate: nil
+                certificate: nil,
+                error: error
             )
             self.delegate?.viewModelDidChange(vm)
         }

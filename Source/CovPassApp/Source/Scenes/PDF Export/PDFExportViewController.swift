@@ -10,6 +10,12 @@ import CovPassCommon
 import CovPassUI
 import UIKit
 
+private enum Constants {
+    enum Accessibility {
+        static let close = VoiceOverOptions.Settings(label: "accessibility_popup_label_close".localized)
+    }
+}
+
 class PDFExportViewController: UIViewController {
     // MARK: - IBOutlet
 
@@ -52,6 +58,7 @@ class PDFExportViewController: UIViewController {
             self?.viewModel.cancel()
         }
         headline.image = .close
+        headline.actionButton.enableAccessibility(label: Constants.Accessibility.close.label)
         headline.layoutMargins.bottom = .space_24
     }
 
