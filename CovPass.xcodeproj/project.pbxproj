@@ -172,6 +172,8 @@
 		88AB2AC025FA433F00D4EA52 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88AB2A4625FA40CE00D4EA52 /* AppDelegate.swift */; };
 		88AB2ACE25FA434B00D4EA52 /* CovPassCheckAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88AB2A6025FA40CE00D4EA52 /* CovPassCheckAppTests.swift */; };
 		88BEE04226550E2500479E5E /* privacy-covpasscheck-de.html in Resources */ = {isa = PBXBuildFile; fileRef = 88BEE04126550E2500479E5E /* privacy-covpasscheck-de.html */; };
+		95961E892703550B00E577A4 /* ValidationResultFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95961E872703545200E577A4 /* ValidationResultFactoryTests.swift */; };
+		95961E8B270450CA00E577A4 /* Mocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95961E8A270450CA00E577A4 /* Mocks.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -373,6 +375,8 @@
 		88AB2A6025FA40CE00D4EA52 /* CovPassCheckAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CovPassCheckAppTests.swift; sourceTree = "<group>"; };
 		88AB2A6125FA40CE00D4EA52 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		88BEE04126550E2500479E5E /* privacy-covpasscheck-de.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "privacy-covpasscheck-de.html"; sourceTree = "<group>"; };
+		95961E872703545200E577A4 /* ValidationResultFactoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationResultFactoryTests.swift; sourceTree = "<group>"; };
+		95961E8A270450CA00E577A4 /* Mocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mocks.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1184,6 +1188,8 @@
 			children = (
 				88AB2A6025FA40CE00D4EA52 /* CovPassCheckAppTests.swift */,
 				88AB2A6125FA40CE00D4EA52 /* Info.plist */,
+				95961E872703545200E577A4 /* ValidationResultFactoryTests.swift */,
+				95961E8A270450CA00E577A4 /* Mocks.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -1558,7 +1564,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				95961E892703550B00E577A4 /* ValidationResultFactoryTests.swift in Sources */,
 				88AB2ACE25FA434B00D4EA52 /* CovPassCheckAppTests.swift in Sources */,
+				95961E8B270450CA00E577A4 /* Mocks.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

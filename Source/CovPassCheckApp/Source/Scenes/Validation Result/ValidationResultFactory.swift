@@ -9,27 +9,33 @@
 import CovPassCommon
 import Foundation
 
+public enum ValidationResultError: Error {
+    case technical
+    case functional
+}
+
 struct ValidationResultFactory {
     static func createViewModel(router: ValidationResultRouterProtocol,
                                 repository: VaccinationRepositoryProtocol,
                                 certificate: CBORWebToken?,
                                 error: Error?,
-                                certLogic: DCCCertLogic = DCCCertLogic.create()) -> ValidationResultViewModel {
-        guard let cert = certificate, error != nil else {
-            return ErrorResultViewModel(router: router, repository: repository, error: error ?? CertificateError.invalidEntity)
+                                type: DCCCertLogic.LogicType = .eu,
+                                certLogic: DCCCertLogicProtocol = DCCCertLogic.create()) -> ValidationResultViewModel {
+        guard let cert = certificate, error == nil else {
+            return ErrorResultViewModel(router: router, repository: repository, error: error ?? ValidationResultError.technical)
         }
 
         do {
             // Validate given certificate based on GERMAN rules and users local time (CovPassCheck only)
-            let validationResult = try certLogic.validate(countryCode: "DE", validationClock: Date(), certificate: cert)
+            let validationResult = try certLogic.validate(type: type, countryCode: "DE", validationClock: Date(), certificate: cert)
             let valid = validationResult.contains(where: { $0.result != .passed }) == false
 
             // Show error dialog when at least one rule failed or there are no rules at all
             if !valid {
-                return ErrorResultViewModel(router: router, repository: repository, certificate: certificate, error: CertificateError.expiredCertifcate)
+                return ErrorResultViewModel(router: router, repository: repository, certificate: certificate, error: ValidationResultError.functional)
             }
-            if !validationResult.isEmpty {
-                return ErrorResultViewModel(router: router, repository: repository, certificate: certificate, error: CertificateError.invalidEntity)
+            if validationResult.isEmpty {
+                return ErrorResultViewModel(router: router, repository: repository, certificate: certificate, error: ValidationResultError.technical)
             }
             if certificate?.hcert.dgc.r?.isEmpty == false {
                 return RecoveryResultViewModel(router: router, repository: repository, certificate: certificate)
@@ -39,7 +45,7 @@ struct ValidationResultFactory {
             }
             return VaccinationResultViewModel(router: router, repository: repository, certificate: certificate)
         } catch {
-            return ErrorResultViewModel(router: router, repository: repository, certificate: certificate, error: CertificateError.invalidEntity)
+            return ErrorResultViewModel(router: router, repository: repository, certificate: certificate, error: ValidationResultError.technical)
         }
     }
 }

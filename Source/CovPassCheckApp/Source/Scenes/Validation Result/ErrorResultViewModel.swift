@@ -60,10 +60,10 @@ class ErrorResultViewModel: ValidationResultViewModel {
     }
 
     var paragraphs: [Paragraph] {
-        switch error.mapToCertificateError() {
-        case .positiveResult, .expiredCertifcate:
+        switch error.mapToValidationResultError() {
+        case .functional:
             return Constants.Paragraphs.functionalIssues
-        case .invalidEntity:
+        case .technical:
             return Constants.Paragraphs.technicalIssues
         }
     }
@@ -88,12 +88,12 @@ class ErrorResultViewModel: ValidationResultViewModel {
 }
 
 private extension Error {
-    func mapToCertificateError() -> CertificateError {
+    func mapToValidationResultError() -> ValidationResultError {
         switch self {
-        case is CertificateError:
-            return self as! CertificateError
+        case is ValidationResultError:
+            return self as! ValidationResultError
         default:
-            return .invalidEntity
+            return .technical
         }
     }
 }
