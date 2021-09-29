@@ -18,7 +18,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         _: UIApplication,
         didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
-        try? clearKeychainOnFreshInstall()
+
+        try? setupKeychain()
         try? UIFont.loadCustomFonts()
 
         guard NSClassFromString("XCTest") == nil else { return true }
@@ -37,14 +38,16 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         #if targetEnvironment(simulator)
             FileManager.default.printFileLocations()
         #endif
-
         return true
     }
 
-    private func clearKeychainOnFreshInstall() throws {
+    private func setupKeychain() throws {
         if !UserDefaults.StartupInfo.bool(.appInstalled) {
+            // clearKeychainOnFreshInstall
             UserDefaults.StartupInfo.set(true, forKey: .appInstalled)
             try KeychainPersistence().deleteAll()
+        } else {
+            try KeychainPersistence.migrateKeyAttributes()
         }
     }
 

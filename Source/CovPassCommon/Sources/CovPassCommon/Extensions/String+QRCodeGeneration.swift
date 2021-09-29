@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 public extension String {
-    func generateQRCode(size _: CGSize) -> UIImage? {
+    func generateQRCode() -> UIImage? {
         let data = self.data(using: String.Encoding.ascii)
         guard let qrFilter = CIFilter(name: "CIQRCodeGenerator") else { return nil }
         qrFilter.setValue(data, forKey: "inputMessage")

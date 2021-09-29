@@ -9,8 +9,10 @@
 import Foundation
 
 public extension KeychainPersistence {
-    static let certificateListKey = "VaccinationCertificateList"
-    static let trustListKey = "TrustList"
-    static let dccRulesKey = "DCCRules"
-    static let boosterRulesKey = "BooterRules"
+    enum Keys: String, CaseIterable {
+        case certificateList = "VaccinationCertificateList"
+        case trustList = "TrustList"
+        case dccRules = "DCCRules"
+        case boosterRules = "BooterRules"
+    }
 }

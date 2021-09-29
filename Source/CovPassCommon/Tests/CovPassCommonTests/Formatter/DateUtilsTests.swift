@@ -24,6 +24,14 @@ class DateUtilsTests: XCTestCase {
         super.tearDown()
     }
 
+    func testAudioDateFormatter() {
+        XCTAssertEqual(DateUtils.audioDateFormatter.string(from: date), "January 1, 1970")
+    }
+
+    func testAudioDateTimeFormatter() {
+        XCTAssertEqual(DateUtils.audioDateTimeFormatter.string(from: date), "January 1, 1970 at 1:16:40 AM GMT+1")
+    }
+
     func testIsoDateFormatter() {
         XCTAssertEqual(DateUtils.isoDateFormatter.string(from: date), "1970-01-01")
     }

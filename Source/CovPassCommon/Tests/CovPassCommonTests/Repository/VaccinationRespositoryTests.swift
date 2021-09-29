@@ -117,7 +117,7 @@ class VaccinationRepositoryTests: XCTestCase {
                 favoriteCertificateId: "1"
             )
         )
-        try keychain.store(KeychainPersistence.certificateListKey, value: data)
+        try keychain.store(KeychainPersistence.Keys.certificateList.rawValue, value: data)
 
         // Get certificate list
         let list = try sut.getCertificateList().wait()
@@ -139,7 +139,7 @@ class VaccinationRepositoryTests: XCTestCase {
                 favoriteCertificateId: "1"
             )
         )
-        try keychain.store(KeychainPersistence.certificateListKey, value: data)
+        try keychain.store(KeychainPersistence.Keys.certificateList.rawValue, value: data)
 
         // Get certificate list
         let list = try sut.getCertificateList().wait()
@@ -149,7 +149,7 @@ class VaccinationRepositoryTests: XCTestCase {
     }
 
     func testGetCertificateListFailsWithWrongData() throws {
-        try keychain.store(KeychainPersistence.certificateListKey, value: CertificateList(certificates: [], favoriteCertificateId: "1"))
+        try keychain.store(KeychainPersistence.Keys.certificateList.rawValue, value: CertificateList(certificates: [], favoriteCertificateId: "1"))
 
         let list = try sut.getCertificateList().wait()
         XCTAssertNil(list.favoriteCertificateId)
