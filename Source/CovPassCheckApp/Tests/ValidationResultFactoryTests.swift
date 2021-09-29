@@ -14,14 +14,6 @@ import CertLogic
 
 class ValidationResultFactoryTests: XCTestCase {
 
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
     func testValidationError_no_certificate_and_no_error() throws {
         let sut = ValidationResultFactory.createViewModel(router: ValidationResultRouterMock(),
                                                           repository: VaccinationRepositoryMock(),
@@ -124,13 +116,6 @@ class ValidationResultFactoryTests: XCTestCase {
         XCTAssertTrue(sut is TestResultViewModel, "Wrong Type: should be TestResultViewModel")
         let resultModel = try XCTUnwrap(sut as? TestResultViewModel)
         XCTAssertTrue(resultModel.certificate == expectedCertificate)
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
     }
 }
 
