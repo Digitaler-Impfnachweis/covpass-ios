@@ -82,6 +82,19 @@ class ValidatorOverviewViewController: UIViewController {
         offlineCard.rulesDateLabel.attributedText = viewModel.offlineMessageRules?.styledAs(.body).colored(.onBackground70)
 
         offlineCard.layoutMargins.bottom = .space_40
+        
+        setupTimeHintView()
+    }
+    
+    private func setupTimeHintView() {
+        timeCard.isHidden = !viewModel.timeHintHidden
+
+        timeCard.iconView.image = viewModel.timeHintIcon
+        timeCard.iconLabel.text = ""
+        timeCard.iconLabel.isHidden = true
+
+        timeCard.titleLabel.attributedText = viewModel.timeHintTitle.styledAs(.header_3)
+        timeCard.bodyLabel.attributedText = viewModel.timeHintSubTitle.styledAs(.body)
     }
 }
 
