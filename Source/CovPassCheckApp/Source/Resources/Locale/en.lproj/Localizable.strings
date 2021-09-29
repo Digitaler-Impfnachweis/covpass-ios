@@ -160,8 +160,6 @@
 
 "functional_validation_check_popup_unsuccessful_certificate_subheadline_protection" = "Protection not yet valid";
 
-"functional_validation_check_popup_unsuccessful_certificate_subheadline_uncompleted" = "Uncompleted Vaccination";
-
 "functional_validation_check_popup_unsuccessful_certificate_subheadline_protection_text" = "Individuals are not completely protected until 14 days after the second vaccination. A recovery from a Corona infection has to be at least 28 days in the past.";
 
 "functional_validation_check_popup_unsuccessful_certificate_subheadline_uncompleted" = "Uncompleted vaccination series";
@@ -251,9 +249,17 @@
 
 "app_information_title_company_details_linked" = "#Legal information::$0#";
 
+"app_information_title_company_easy_language_linked" = "#Leichte Sprache::$0#";
+
+"app_information_title_company_easy_language" = "Leichte Sprache";
+
 "app_information_title_open_source" = "Open-source licences";
 
 "accessibility_app_information_title_open_source_announce" = "The view \"Open-source licences\" has been opened";
+
+"accessibility_app_information_title_informationt_announce" = "Information has been opened";
+
+"accessibility_app_information_version_number_delimiter" = "point";
 
 "app_information_message_open_source" = "The app uses the following open-source libraries:";
 

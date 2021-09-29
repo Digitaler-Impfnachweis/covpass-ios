@@ -108,6 +108,21 @@
 
 "vaccination_start_screen_qrcode_booster_vaccination_note_subtitle" = "Check vaccination status";
 
+"certificates_start_screen_qr_code_app_reference_text" = "This QR code can be verified reliably with the CovPassCheck-App.";
+
+
+/********** popup: Remark within the app towards the CovPassCheck-App **********/
+
+"certificates_start_screen_pop_up_app_reference_title" = "Please scan!";
+
+"certificates_start_screen_pop_up_app_reference_text" = "Please insist to have your certificate scanned with the CovPassCheck-App. Only by scanning your QR code and showing your proof of identity the validity of your vaccination protection can be checked reliably while protecting your data.";
+
+"certificates_start_screen_pop_up_app_reference_hyperlink" = "Open the CovpassCheck-App (External Link)";
+
+"certificates_start_screen_pop_up_app_reference_button" = "OK";
+
+"accessibility_certificates_start_screen_pop_up_app_reference_label" = "Close Pop-up";
+
 
 /********** popup: add certification **********/
 
@@ -145,9 +160,21 @@
 
 "accessibility_certificate_add_dialog_camera_access_label_close" = "Close";
 
-"accessibility_certificate_add_dialog_camera_announce" = "Camera has been opened";
+"accessibility_scan_camera_announce" = "Camera has been opened";
 
 "accessibility_certificate_scan_mode_label_cancel" = "Cancel";
+
+"certificate_popup_checkapp_label_X" = "Close Pop-up";
+
+"certificate_popup_checkapp_headline" = "Please scan!";
+
+"certificate_popup_checkapp_copy" = "Please insist to have your certificate scanned with the CovPassCheck-App. Only by scanning your QR code and showing your proof of identity the validity of your vaccination protection can be checked reliably while protecting your data. The CovPassCheck app for anyone who needs to check certificates:";
+
+"certificate_popup_checkapp_link_label" = "External Link";
+
+"certificate_popup_checkapp_linked" = "Open the CovpassCheck-App (External Link)";
+
+"certificate_popup_checkapp_button" = "OK";
 
 "error_camera_access_title" = "The CovPass App wants to access your camera.";
 
@@ -447,11 +474,13 @@
 
 "vaccination_certificate_detail_view_incomplete_action_button_title" = "Display current QR Code";
 
-"vaccination_certificate_overview_complete_from_title" = "Fully vaccinated";
+"vaccination_certificate_overview_complete_from_title" = "Fully vaccinated as of %@";
 
 "vaccination_certificate_overview_complete_from_message" = "You are not yet considered fully vaccinated. Full vaccination takes effect 14 days after the final dose.";
 
 "vaccination_certificate_overview_complete_title" = "Fully vaccinated";
+
+"certificates_overview_qr_scan_hint" = "This QR code can be verified reliably with the CovPassCheck-App.";
 
 "vaccination_certificate_overview_complete_message" = "Show this QR code when needed. Be ready to show ID when your QR code is checked.";
 
@@ -512,6 +541,14 @@
 "accessibility_certificates_overview_personal_data_date_of_birth" = "Date of birth (Year-Month-Day)";
 
 "certificates_overview_all_certificates_title" = "EU certificates";
+
+"certificate_overview_info_massage_headline" = "Please scan!";
+
+"certificate_overview_info_massage_copy" = "Do not show this sensitive data to other people in restaurants, at events or in similar situations. Always have your QR code checked with the CovPassCheck-App.";
+
+"certificates_overview_all_certificates_app_reference_title" = "Please scan!";
+
+"certificates_overview_all_certificates_app_reference_text" = "Do not show this sensitive data to other people in restaurants, at events or in similar situations. Always have your QR code checked with the CovPassCheck-App.";
 
 "accessibility_certificates_overview_all_certificates_title" = "Check vaccination status. Sensible health data will follow. Please take care that nobody can listen to or read on your smartphone.";
 
@@ -641,7 +678,7 @@
 
 "vaccination_certificate_detail_view_pdf_action_button_title" = "Create EU printout";
 
-"vaccination_certificate_detail_view_pdf_action_button_note" = "You can only download German vaccination and recovery certificates as PDF files.";
+"vaccination_certificate_detail_view_pdf_action_button_note" = "You can only download German certificates as PDF files.";
 
 "vaccination_certificate_detail_view_qrcode_screen_title" = "Vaccine dose %d of %d";
 
@@ -908,9 +945,13 @@
 
 "accessibility_app_information_title_contact_announce" = "Contact has been opened";
 
-"accessibility_app_information_title_open_source_announce" = "Open-source licences";
+"accessibility_app_information_title_open_source_announce" = "The view \"Open-source licences\" has been opened";
 
 "accessibility_app_information_label_back" = "Back to the start screen";
+
+"accessibility_app_information_title_informationt_announce" = "Information has been opened";
+
+"accessibility_app_information_version_number_delimiter" = "point";
 
 "app_information_title" = "Information";
 
@@ -939,6 +980,10 @@
 "app_information_title_company_details" = "Legal information";
 
 "app_information_title_company_details_linked" = "#Legal information::$0#";
+
+"app_information_title_company_easy_language_linked" = "#Leichte Sprache::$0#";
+
+"app_information_title_company_easy_language" = "Leichte Sprache";
 
 "app_information_title_open_source" = "Open-source licences";
 

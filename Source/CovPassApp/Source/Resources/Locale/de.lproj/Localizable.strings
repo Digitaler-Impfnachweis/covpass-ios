@@ -108,6 +108,21 @@
 
 "vaccination_start_screen_qrcode_booster_vaccination_note_subtitle" = "Impfstatus überprüfen";
 
+"certificates_start_screen_qr_code_app_reference_text" = "Dieser QR-Code lässt sich verlässlich mit der CovPassCheck-App prüfen.";
+
+
+/********** popup: Remark within the app towards the CovPassCheck-App **********/
+
+"certificates_start_screen_pop_up_app_reference_title" = "Scannen bitte!";
+
+"certificates_start_screen_pop_up_app_reference_text" = "Bestehen Sie darauf, dass Ihr Zertifikat mit der CovPassCheck-App gescannt wird. Nur durch das Scannen des QR-Codes und das Vorzeigen eines Ausweisdokumentes kann die Gültigkeit Ihres Impfschutzes sicher geprüft und der Datenschutz eingehalten werden.";
+
+"certificates_start_screen_pop_up_app_reference_hyperlink" = "CovpassCheck-App öffnen (Externer Link)";
+
+"certificates_start_screen_pop_up_app_reference_button" = "OK";
+
+"accessibility_certificates_start_screen_pop_up_app_reference_label" = "Pop-up schließen";
+
 
 /********** popup: add certification **********/
 
@@ -145,9 +160,21 @@
 
 "accessibility_certificate_add_dialog_camera_access_label_close" = "Schließen";
 
-"accessibility_certificate_add_dialog_camera_announce" = "Kamera-Ansicht wurde geöffnet";
+"accessibility_scan_camera_announce" = "Kamera-Ansicht wurde geöffnet";
 
 "accessibility_certificate_scan_mode_label_cancel" = "Abbrechen";
+
+"certificate_popup_checkapp_label_X" = "Pop-up schließen";
+
+"certificate_popup_checkapp_headline" = "Scannen bitte!";
+
+"certificate_popup_checkapp_copy" = "Bestehen Sie darauf, dass Ihr Zertifikat mit der CovPassCheck-App gescannt wird. Nur durch das Scannen des QR-Codes und das Vorzeigen eines Ausweisdokumentes kann die Gültigkeit Ihres Impfschutzes sicher geprüft und der Datenschutz eingehalten werden. Die CovPassCheck-App für alle, die Zertifikate prüfen müssen:";
+
+"certificate_popup_checkapp_link_label" = "Externer Link";
+
+"certificate_popup_checkapp_linked" = "CovpassCheck-App öffnen (Externer Link)";
+
+"certificate_popup_checkapp_button" = "OK";
 
 "error_camera_access_title" = "Die CovPass-App möchte auf Ihre Kamera zugreifen.";
 
@@ -447,11 +474,13 @@
 
 "vaccination_certificate_detail_view_incomplete_action_button_title" = "Aktuellen QR-Code anzeigen";
 
-"vaccination_certificate_overview_complete_from_title" = "Vollständiger Impfschutz";
+"vaccination_certificate_overview_complete_from_title" = "Vollständiger Impfschutz ab %@";
 
 "vaccination_certificate_overview_complete_from_message" = "Ihr Impfschutz ist noch nicht vollständig. Der Impfschutz ist erst 14 Tage nach der letzten Impfung vollständig.";
 
 "vaccination_certificate_overview_complete_title" = "Vollständiger Impfschutz";
+
+"certificates_overview_qr_scan_hint" = "Dieser QR-Code lässt sich verlässlich mit der CovPassCheck-App überprüfen.";
 
 "vaccination_certificate_overview_complete_message" = "Zeigen Sie bei Bedarf den QR-Code vor. Halten Sie zudem ein Ausweisdokument bei der Überprüfung bereit.";
 
@@ -512,6 +541,14 @@
 "accessibility_certificates_overview_personal_data_date_of_birth" = "Geburtsdatum (Jahr-Monat-Tag)";
 
 "certificates_overview_all_certificates_title" = "EU-Zertifikate";
+
+"certificate_overview_info_massage_headline" = "Scannen bitte!";
+
+"certificate_overview_info_massage_copy" = "Zeigen Sie diese sensiblen Daten nicht in Gaststätten, bei Veranstaltungen oder in ähnlichen Situationen vor. Lassen Sie Ihren QR-Code immer mit der CovPassCheck-App prüfen.";
+
+"certificates_overview_all_certificates_app_reference_title" = "Scannen bitte!";
+
+"certificates_overview_all_certificates_app_reference_text" = "Zeigen Sie diese sensiblen Daten nicht in Gaststätten, bei Veranstaltungen oder in ähnlichen Situationen vor. Lassen Sie Ihren QR-Code immer mit der CovPassCheck-App prüfen.";
 
 "accessibility_certificates_overview_all_certificates_title" = "Impfstatus überprüfen. Es folgen sensible Gesundheitsdaten. Bitte achten Sie darauf, dass keine andere Person mithört oder mitliest.";
 
@@ -641,7 +678,7 @@
 
 "vaccination_certificate_detail_view_pdf_action_button_title" = "EU-Ausdruck erstellen";
 
-"vaccination_certificate_detail_view_pdf_action_button_note" = "Sie können nur deutsche Impf- und Genesenenzertifikate als PDF herunterladen.";
+"vaccination_certificate_detail_view_pdf_action_button_note" = "Sie können nur deutsche Zertifikate als PDF herunterladen.";
 
 "vaccination_certificate_detail_view_qrcode_screen_title" = "Impfung %d von %d";
 
@@ -908,9 +945,13 @@
 
 "accessibility_app_information_title_contact_announce" = "Kontakt-Ansicht wurde geöffnet";
 
-"accessibility_app_information_title_open_source_announce" = "Open-Source-Lizenzen";
+"accessibility_app_information_title_open_source_announce" = "Die Ansicht \"Open-Source-Lizenzen\" wurde geöffnet";
 
 "accessibility_app_information_label_back" = "Zurück zum Startbildschirm";
+
+"accessibility_app_information_title_informationt_announce" = "Die Ansicht \"Informationen\" wurde geöffnet";
+
+"accessibility_app_information_version_number_delimiter" = "Punkt";
 
 "app_information_title" = "Informationen";
 
@@ -939,6 +980,10 @@
 "app_information_title_company_details" = "Impressum";
 
 "app_information_title_company_details_linked" = "#Impressum::$0#";
+
+"app_information_title_company_easy_language_linked" = "#Leichte Sprache::$0#";
+
+"app_information_title_company_easy_language" = "Leichte Sprache";
 
 "app_information_title_open_source" = "Open-Source-Lizenzen";
 
