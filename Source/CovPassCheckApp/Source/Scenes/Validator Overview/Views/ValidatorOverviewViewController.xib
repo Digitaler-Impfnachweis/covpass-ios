@@ -33,30 +33,32 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LPz-bQ-P6F">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="680"/>
                             <subviews>
-                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="366" placeholderIntrinsicHeight="350" translatesAutoresizingMaskIntoConstraints="NO" id="0Le-DA-8MJ" customClass="ScanCardView" customModule="CovPassUI">
-                                    <rect key="frame" x="24" y="32" width="366" height="350"/>
-                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="350" id="wHQ-Hr-dqv"/>
-                                    </constraints>
-                                </view>
-                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="366" placeholderIntrinsicHeight="250" translatesAutoresizingMaskIntoConstraints="NO" id="TTc-KS-yO5" customClass="OfflineCardView" customModule="CovPassUI">
-                                    <rect key="frame" x="24" y="430" width="366" height="250"/>
-                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="250" id="IiP-04-gia"/>
-                                    </constraints>
-                                </view>
+                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="48" translatesAutoresizingMaskIntoConstraints="NO" id="UmP-gd-ynO">
+                                    <rect key="frame" x="24" y="32" width="366" height="648"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" placeholderIntrinsicWidth="366" placeholderIntrinsicHeight="350" translatesAutoresizingMaskIntoConstraints="NO" id="0Le-DA-8MJ" customClass="ScanCardView" customModule="CovPassUI">
+                                            <rect key="frame" x="0.0" y="0.0" width="366" height="350"/>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="350" id="wHQ-Hr-dqv"/>
+                                            </constraints>
+                                        </view>
+                                        <view contentMode="scaleToFill" placeholderIntrinsicWidth="366" placeholderIntrinsicHeight="250" translatesAutoresizingMaskIntoConstraints="NO" id="TTc-KS-yO5" customClass="OfflineCardView" customModule="CovPassUI">
+                                            <rect key="frame" x="0.0" y="398" width="366" height="250"/>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="250" id="IiP-04-gia"/>
+                                            </constraints>
+                                        </view>
+                                    </subviews>
+                                </stackView>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
-                                <constraint firstItem="TTc-KS-yO5" firstAttribute="top" secondItem="0Le-DA-8MJ" secondAttribute="bottom" constant="48" id="70N-FU-pLv"/>
-                                <constraint firstItem="TTc-KS-yO5" firstAttribute="leading" secondItem="LPz-bQ-P6F" secondAttribute="leading" constant="24" id="8MX-R5-gRR"/>
-                                <constraint firstItem="0Le-DA-8MJ" firstAttribute="top" secondItem="LPz-bQ-P6F" secondAttribute="top" constant="32" id="Kck-gr-QKS"/>
-                                <constraint firstAttribute="bottom" secondItem="TTc-KS-yO5" secondAttribute="bottom" id="aWC-cg-fh3"/>
-                                <constraint firstAttribute="trailing" secondItem="TTc-KS-yO5" secondAttribute="trailing" constant="24" id="oDc-9Z-zVh"/>
-                                <constraint firstItem="0Le-DA-8MJ" firstAttribute="leading" secondItem="LPz-bQ-P6F" secondAttribute="leading" constant="24" id="t4O-H5-2fV"/>
-                                <constraint firstAttribute="trailing" secondItem="0Le-DA-8MJ" secondAttribute="trailing" constant="24" id="zz8-ap-gRh"/>
+                                <constraint firstItem="UmP-gd-ynO" firstAttribute="leading" secondItem="LPz-bQ-P6F" secondAttribute="leading" constant="24" id="FeJ-si-zAs"/>
+                                <constraint firstAttribute="trailing" secondItem="UmP-gd-ynO" secondAttribute="trailing" constant="24" id="PGj-na-kZc"/>
+                                <constraint firstItem="UmP-gd-ynO" firstAttribute="top" secondItem="LPz-bQ-P6F" secondAttribute="top" constant="32" id="jmw-Vk-98W"/>
+                                <constraint firstAttribute="bottom" secondItem="UmP-gd-ynO" secondAttribute="bottom" id="yd1-On-oi9"/>
                             </constraints>
                         </view>
                     </subviews>
