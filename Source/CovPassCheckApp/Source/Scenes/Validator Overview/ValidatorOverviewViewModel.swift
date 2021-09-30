@@ -11,6 +11,7 @@ import CovPassUI
 import Foundation
 import PromiseKit
 import UIKit
+import Kronos
 
 class ValidatorOverviewViewModel {
     // MARK: - Properties
@@ -57,14 +58,60 @@ class ValidatorOverviewViewModel {
         return String(format: "validation_start_screen_offline_modus_rules".localized, DateUtils.displayDateTimeFormatter.string(from: date))
     }
 
+    var timeHintTitle: String {
+        "validation_start_screen_scan_sync_message_title"
+            .localized
+    }
+    
+    var timeHintSubTitle: String? {
+        guard let ntpDateFormatted = ntpDateFormatted else {
+            return nil
+        }
+        return "validation_start_screen_scan_sync_message_text"
+            .localized
+            .replacingOccurrences(of: "%@", with: ntpDateFormatted)
+    }
+    
+    var ntpDateFormatted: String? {
+        return DateUtils.displayDateTimeFormatter.string(from: ntpDate)
+    }
+    
+    var timeHintIcon: UIImage {
+        .warning
+    }
+    
+    var ntpDate: Date = Date() {
+        didSet {
+            self.delegate?.viewModelDidUpdate()
+        }
+    }
+    var ntpOffset: TimeInterval = 0.0
+    
+    var timeHintIsHidden: Bool {
+        get {
+            let twoHoursAsSeconds = 7200.0
+            return abs(ntpOffset) < twoHoursAsSeconds
+        }
+    }
+    
     // MARK: - Lifecycle
 
     init(router: ValidatorOverviewRouterProtocol, repository: VaccinationRepositoryProtocol, certLogic: DCCCertLogic) {
         self.router = router
         self.repository = repository
         self.certLogic = certLogic
+        self.setupTimer()
     }
 
+    private func setupTimer() {
+        self.tick()
+        Timer.scheduledTimer(timeInterval: 10.0,
+                             target: self,
+                             selector: #selector(ValidatorOverviewViewModel.tick),
+                             userInfo: nil,
+                             repeats: true)
+    }
+    
     // MARK: - Methods
 
     func updateTrustList() {
@@ -116,5 +163,15 @@ class ValidatorOverviewViewModel {
         case let .failure(error):
             throw error
         }
+    }
+    
+    // MARK: Kronos Usage
+    
+    @objc func tick() {
+        Clock.sync(completion: { [self] date, offset in
+            print("tick")
+            ntpDate = date ?? Date()
+            self.ntpOffset = offset ?? 0
+        })
     }
 }
