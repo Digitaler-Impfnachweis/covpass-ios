@@ -169,7 +169,6 @@ class ValidatorOverviewViewModel {
     
     @objc func tick() {
         Clock.sync(completion: { [self] date, offset in
-            print("tick")
             ntpDate = date ?? Date()
             self.ntpOffset = offset ?? 0
         })
