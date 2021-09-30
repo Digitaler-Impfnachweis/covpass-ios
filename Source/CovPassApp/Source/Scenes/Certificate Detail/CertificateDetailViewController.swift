@@ -12,6 +12,13 @@ import PromiseKit
 import Scanner
 import UIKit
 
+private enum Constants {
+    enum Text {
+        static let scanHintTitle = "certificates_start_screen_pop_up_app_reference_title".localized
+        static let scanHintText = "certificates_overview_all_certificates_app_reference_text".localized
+    }
+}
+
 class CertificateDetailViewController: UIViewController {
     // MARK: - Outlets
 
@@ -29,6 +36,7 @@ class CertificateDetailViewController: UIViewController {
     @IBOutlet var nameView: ParagraphView!
     @IBOutlet var nameTransliteratedView: ParagraphView!
     @IBOutlet var birtdateView: ParagraphView!
+    @IBOutlet var scanHintView: HintView!
 
     // MARK: - Properties
 
@@ -62,6 +70,7 @@ class CertificateDetailViewController: UIViewController {
         setupImmunizationView()
         setupBoosterHintView()
         setupPersonalData()
+        setupScanHintView()
         setupCertificates()
         setupNavigationBar()
     }
@@ -83,6 +92,17 @@ class CertificateDetailViewController: UIViewController {
         nameHeadline.attributedText = viewModel.name.styledAs(.header_1).colored(.onBackground100)
         nameHeadline.layoutMargins = .init(top: .zero, left: .space_24, bottom: .zero, right: .space_24)
         stackView.setCustomSpacing(.space_24, after: nameHeadline)
+    }
+
+    private func setupScanHintView() {
+        scanHintView.isHidden = false
+        scanHintView.iconView.image = .warning
+        scanHintView.containerView.backgroundColor = .infoBackground
+        scanHintView.containerView?.layer.borderColor = UIColor.infoAccent.cgColor
+        scanHintView.titleLabel.attributedText = Constants.Text.scanHintTitle.styledAs(.header_3)
+        scanHintView.bodyLabel.attributedText = Constants.Text.scanHintText.styledAs(.body)
+        stackView.setCustomSpacing(.space_24, after: scanHintView)
+        scanHintView.enableAccessibility(label: Constants.Text.scanHintTitle + Constants.Text.scanHintText, traits: .staticText)
     }
 
     private func setupImmunizationView() {
