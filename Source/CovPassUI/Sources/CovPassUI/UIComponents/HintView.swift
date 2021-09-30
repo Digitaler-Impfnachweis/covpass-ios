@@ -22,10 +22,10 @@ public class HintView: XibView {
 
     @IBOutlet public var subTitleConstraint: NSLayoutConstraint!
     
-    @IBOutlet weak var containerLeadingConstraint: NSLayoutConstraint!
-    @IBOutlet weak var containerTopConstraint: NSLayoutConstraint!
-    @IBOutlet weak var containerTrailingConstraint: NSLayoutConstraint!
-    @IBOutlet weak var containerBottomConstraint: NSLayoutConstraint!
+    @IBOutlet var containerLeadingConstraint: NSLayoutConstraint!
+    @IBOutlet var containerTopConstraint: NSLayoutConstraint!
+    @IBOutlet var containerTrailingConstraint: NSLayoutConstraint!
+    @IBOutlet var containerBottomConstraint: NSLayoutConstraint!
     
     // MARK: - Lifecycle
 
@@ -55,9 +55,9 @@ public class HintView: XibView {
     }
     
     public func setConstraintsToEdge() {
-        self.containerTopConstraint.constant = 0
-        self.containerLeadingConstraint.constant = 0
-        self.containerTrailingConstraint.constant = 0
-        self.containerBottomConstraint.constant = 0
+        containerTopConstraint.constant = 0
+        containerLeadingConstraint.constant = 0
+        containerTrailingConstraint.constant = 0
+        containerBottomConstraint.constant = 0
     }
 }

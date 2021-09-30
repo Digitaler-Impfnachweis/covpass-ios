@@ -12,117 +12,107 @@ import XCTest
 
 class ValidatorOverviewViewModelTests: XCTestCase {
     
-    var viewModel: ValidatorOverviewViewModel!
+    var sut: ValidatorOverviewViewModel!
     
     override func setUp() {
         super.setUp()
         let window = UIWindow(frame: UIScreen.main.bounds)
         let sceneCoordinator = DefaultSceneCoordinator(window: window)
         let repository = VaccinationRepository.create()
-        self.viewModel = ValidatorOverviewViewModel(router: ValidatorOverviewRouter(sceneCoordinator: sceneCoordinator),
-                                                    repository: repository,
-                                                    certLogic:  DCCCertLogic.create())
+        sut = ValidatorOverviewViewModel(router: ValidatorOverviewRouter(sceneCoordinator: sceneCoordinator),
+                                               repository: repository,
+                                               certLogic:  DCCCertLogic.create())
     }
     
     func testInitDate() throws {
         let title: String = Localizer.localized("validation_start_screen_scan_sync_message_title", bundle: Bundle.main)
-        XCTAssertNotNil(viewModel.ntpDate)
-        XCTAssertNotNil(viewModel.ntpOffset)
-        XCTAssertNotNil(viewModel.ntpDateFormatted)
-        XCTAssertNotNil(viewModel.timeHintIcon)
-        XCTAssertNotNil(viewModel.timeHintTitle)
-        XCTAssertNotNil(viewModel.timeHintSubTitle)
-        XCTAssertNotNil(viewModel.timeHintIsHidden)
-        XCTAssert(viewModel.ntpOffset == 0.0)
-        XCTAssert(viewModel.timeHintIcon == .warning)
-        XCTAssert(viewModel.timeHintTitle == title)
-        XCTAssert(viewModel.timeHintIsHidden == true)
+        XCTAssert(sut.ntpOffset == 0.0)
+        XCTAssert(sut.timeHintIcon == .warning)
+        XCTAssert(sut.timeHintTitle == title)
+        XCTAssert(sut.timeHintIsHidden == true)
     }
     
     func testNow() throws {
         let date = Date()
-        viewModel.ntpDate = date
-        viewModel.ntpOffset = 10
+        sut.ntpDate = date
+        sut.ntpOffset = 10
         let title: String = Localizer.localized("validation_start_screen_scan_sync_message_title", bundle: Bundle.main)
         let subTitle = Localizer.localized("validation_start_screen_scan_sync_message_text", bundle: Bundle.main)
             .replacingOccurrences(of: "%@",
-                                  with: viewModel.ntpDateFormatted)
-        XCTAssertNotNil(viewModel.ntpDate)
-        XCTAssertNotNil(viewModel.ntpOffset)
-        XCTAssertNotNil(viewModel.ntpDateFormatted)
-        XCTAssertNotNil(viewModel.timeHintIcon)
-        XCTAssertNotNil(viewModel.timeHintTitle)
-        XCTAssertNotNil(viewModel.timeHintSubTitle)
-        XCTAssertNotNil(viewModel.timeHintIsHidden)
-        XCTAssert(viewModel.ntpDate == date)
-        XCTAssert(viewModel.ntpOffset == 10.0)
-        XCTAssert(viewModel.timeHintIcon == .warning)
-        XCTAssert(viewModel.timeHintSubTitle == subTitle)
-        XCTAssert(viewModel.timeHintTitle == title)
-        XCTAssert(viewModel.timeHintIsHidden == true)
+                                  with: sut.ntpDateFormatted)
+        XCTAssert(sut.ntpDate == date)
+        XCTAssert(sut.ntpOffset == 10.0)
+        XCTAssert(sut.timeHintIcon == .warning)
+        XCTAssert(sut.timeHintSubTitle == subTitle)
+        XCTAssert(sut.timeHintTitle == title)
+        XCTAssert(sut.timeHintIsHidden == true)
     }
     
     func testBeforeTwoHours() throws {
         let date = Date()
-        viewModel.ntpDate = date
-        viewModel.ntpOffset = -7200
+        sut.ntpDate = date
+        sut.ntpOffset = -7200
         let title: String = Localizer.localized("validation_start_screen_scan_sync_message_title", bundle: Bundle.main)
         let subTitle = Localizer.localized("validation_start_screen_scan_sync_message_text", bundle: Bundle.main)
             .replacingOccurrences(of: "%@",
-                                  with: viewModel.ntpDateFormatted)
-        XCTAssertNotNil(viewModel.ntpDate)
-        XCTAssertNotNil(viewModel.ntpOffset)
-        XCTAssertNotNil(viewModel.ntpDateFormatted)
-        XCTAssertNotNil(viewModel.timeHintIcon)
-        XCTAssertNotNil(viewModel.timeHintTitle)
-        XCTAssertNotNil(viewModel.timeHintSubTitle)
-        XCTAssertNotNil(viewModel.timeHintIsHidden)
-        XCTAssert(viewModel.ntpDate == date)
-        XCTAssert(viewModel.ntpOffset == -7200)
-        XCTAssert(viewModel.timeHintIcon == .warning)
-        XCTAssert(viewModel.timeHintSubTitle == subTitle)
-        XCTAssert(viewModel.timeHintTitle == title)
-        XCTAssert(viewModel.timeHintIsHidden == false)
+                                  with: sut.ntpDateFormatted)
+        XCTAssert(sut.ntpDate == date)
+        XCTAssert(sut.ntpOffset == -7200)
+        XCTAssert(sut.timeHintIcon == .warning)
+        XCTAssert(sut.timeHintSubTitle == subTitle)
+        XCTAssert(sut.timeHintTitle == title)
+        XCTAssert(sut.timeHintIsHidden == false)
     }
     
     func testAfterTwoHours() throws {
         let date = Date()
-        viewModel.ntpDate = date
-        viewModel.ntpOffset = 7200
+        sut.ntpDate = date
+        sut.ntpOffset = 7200
         let title: String = Localizer.localized("validation_start_screen_scan_sync_message_title", bundle: Bundle.main)
         let subTitle = Localizer.localized("validation_start_screen_scan_sync_message_text", bundle: Bundle.main)
             .replacingOccurrences(of: "%@",
-                                  with: viewModel.ntpDateFormatted)
-        XCTAssertNotNil(viewModel.ntpDate)
-        XCTAssertNotNil(viewModel.ntpOffset)
-        XCTAssertNotNil(viewModel.ntpDateFormatted)
-        XCTAssertNotNil(viewModel.timeHintIcon)
-        XCTAssertNotNil(viewModel.timeHintTitle)
-        XCTAssertNotNil(viewModel.timeHintSubTitle)
-        XCTAssertNotNil(viewModel.timeHintIsHidden)
-        XCTAssert(viewModel.ntpDate == date)
-        XCTAssert(viewModel.ntpOffset == 7200)
-        XCTAssert(viewModel.timeHintIcon == .warning)
-        XCTAssert(viewModel.timeHintSubTitle == subTitle)
-        XCTAssert(viewModel.timeHintTitle == title)
-        XCTAssert(viewModel.timeHintIsHidden == false)
+                                  with: sut.ntpDateFormatted)
+        XCTAssert(sut.ntpDate == date)
+        XCTAssert(sut.ntpOffset == 7200)
+        XCTAssert(sut.timeHintIcon == .warning)
+        XCTAssert(sut.timeHintSubTitle == subTitle)
+        XCTAssert(sut.timeHintTitle == title)
+        XCTAssert(sut.timeHintIsHidden == false)
     }
     
-    func testAfterTwoHou2ewfrs() throws {
+    func testRandomOffsetsWhereHintShouldBeHidden() throws {
         for _ in 0...10 {
-            let random = Double.random(in: 0...7200)
-            viewModel.ntpOffset = random
-            XCTAssert(viewModel.ntpOffset == random)
-            XCTAssert(viewModel.timeHintIsHidden == true)
+            let random = Double.random(in: 0...7199)
+            sut.ntpOffset = random
+            XCTAssert(sut.ntpOffset == random)
+            XCTAssert(sut.timeHintIsHidden == true)
         }
     }
     
-    func testAfterTwoHgfou2ewfrs() throws {
+    func testRandomOffsetsWhereHintShouldBeNotHidden() throws {
         for _ in 0...10 {
-            let random = Double.random(in: 7201...20000)
-            viewModel.ntpOffset = random
-            XCTAssert(viewModel.ntpOffset == random)
-            XCTAssert(viewModel.timeHintIsHidden == false)
+            let random = Double.random(in: 7200...20000)
+            sut.ntpOffset = random
+            XCTAssert(sut.ntpOffset == random)
+            XCTAssert(sut.timeHintIsHidden == false)
+        }
+    }
+    
+    func testRandomOffsetsWhereHintShouldBeHiddenPast() throws {
+        for _ in 0...10 {
+            let random = Double.random(in: -7199 ... -0)
+            sut.ntpOffset = random
+            XCTAssert(sut.ntpOffset == random)
+            XCTAssert(sut.timeHintIsHidden == true)
+        }
+    }
+    
+    func testRandomOffsetsWhereHintShouldBeNotHiddenPast() throws {
+        for _ in 0...10 {
+            let random = Double.random(in: -20000 ... -7200)
+            sut.ntpOffset = random
+            XCTAssert(sut.ntpOffset == random)
+            XCTAssert(sut.timeHintIsHidden == false)
         }
     }
     
