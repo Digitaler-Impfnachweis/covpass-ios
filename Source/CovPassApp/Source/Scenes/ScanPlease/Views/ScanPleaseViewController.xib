@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina5_5" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ScanPleaseViewController" customModule="CovPassApp" customModuleProvider="target">
+            <connections>
+                <outlet property="actionView" destination="uEl-CN-uQA" id="ld7-dW-Nza"/>
+                <outlet property="contentStackView" destination="L1z-ri-tkf" id="Igm-NB-jpg"/>
+                <outlet property="headerImageView" destination="gCs-fc-NuC" id="HeF-Dd-ng3"/>
+                <outlet property="headline" destination="6Qe-RR-mK3" id="5Oe-vw-KmE"/>
+                <outlet property="linkDescriptionView" destination="dUr-cS-zkt" id="UGH-TG-P8z"/>
+                <outlet property="textView" destination="VQ2-bB-qu7" id="sIg-z7-pCp"/>
+                <outlet property="toolbarView" destination="08K-B9-Q7L" id="Xuo-Na-Qeb"/>
+                <outlet property="view" destination="iN0-l3-epB" id="Dae-5x-THs"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="60" translatesAutoresizingMaskIntoConstraints="NO" id="6Qe-RR-mK3" userLabel="Headline" customClass="InfoHeaderView" customModule="CovPassUI">
+                    <rect key="frame" x="0.0" y="20" width="414" height="60"/>
+                    <viewLayoutGuide key="safeArea" id="Om3-2H-JSZ"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                </view>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bOr-og-vlK">
+                    <rect key="frame" x="0.0" y="80" width="414" height="576"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="L1z-ri-tkf">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="552"/>
+                            <subviews>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="scan_please_illustration" translatesAutoresizingMaskIntoConstraints="NO" id="gCs-fc-NuC">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="256"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="256" id="aTA-d2-iUl"/>
+                                    </constraints>
+                                </imageView>
+                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="VQ2-bB-qu7" userLabel="Text" customClass="ParagraphView" customModule="CovPassUI">
+                                    <rect key="frame" x="0.0" y="256" width="414" height="128"/>
+                                </view>
+                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="dUr-cS-zkt" userLabel="Link Description" customClass="ParagraphView" customModule="CovPassUI">
+                                    <rect key="frame" x="0.0" y="384" width="414" height="128"/>
+                                </view>
+                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="40" translatesAutoresizingMaskIntoConstraints="NO" id="uEl-CN-uQA" userLabel="Link" customClass="ListItemView" customModule="CovPassUI">
+                                    <rect key="frame" x="0.0" y="512" width="414" height="40"/>
+                                </view>
+                            </subviews>
+                        </stackView>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="X6l-sU-yPn" firstAttribute="bottom" secondItem="L1z-ri-tkf" secondAttribute="bottom" id="3z6-Yg-0uW"/>
+                        <constraint firstItem="L1z-ri-tkf" firstAttribute="width" secondItem="HCn-ED-TJl" secondAttribute="width" id="8Oa-a8-NBI"/>
+                        <constraint firstItem="L1z-ri-tkf" firstAttribute="leading" secondItem="X6l-sU-yPn" secondAttribute="leading" id="GQI-Jy-ENp"/>
+                        <constraint firstItem="L1z-ri-tkf" firstAttribute="top" secondItem="X6l-sU-yPn" secondAttribute="top" id="XkM-BD-wMr"/>
+                        <constraint firstItem="X6l-sU-yPn" firstAttribute="trailing" secondItem="L1z-ri-tkf" secondAttribute="trailing" id="wEy-08-NJf"/>
+                    </constraints>
+                    <viewLayoutGuide key="contentLayoutGuide" id="X6l-sU-yPn"/>
+                    <viewLayoutGuide key="frameLayoutGuide" id="HCn-ED-TJl"/>
+                </scrollView>
+                <view contentMode="scaleToFill" placeholderIntrinsicWidth="240" placeholderIntrinsicHeight="56" translatesAutoresizingMaskIntoConstraints="NO" id="08K-B9-Q7L" customClass="CustomToolbarView" customModule="CovPassUI">
+                    <rect key="frame" x="0.0" y="656" width="414" height="56"/>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="08K-B9-Q7L" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="0dS-ey-Cxc"/>
+                <constraint firstItem="6Qe-RR-mK3" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="5ue-iA-hPn"/>
+                <constraint firstItem="6Qe-RR-mK3" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="20" id="KVc-J0-igs"/>
+                <constraint firstItem="08K-B9-Q7L" firstAttribute="top" secondItem="bOr-og-vlK" secondAttribute="bottom" id="SzX-EP-rOf"/>
+                <constraint firstItem="bOr-og-vlK" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="XP7-YP-O6J"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="08K-B9-Q7L" secondAttribute="bottom" constant="24" id="agg-cK-jEc"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="6Qe-RR-mK3" secondAttribute="trailing" id="cey-0I-Ie6"/>
+                <constraint firstItem="bOr-og-vlK" firstAttribute="top" secondItem="6Qe-RR-mK3" secondAttribute="bottom" id="cwd-Ne-8cA"/>
+                <constraint firstItem="bOr-og-vlK" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="skr-Aa-IQS"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="08K-B9-Q7L" secondAttribute="trailing" id="vg0-xm-ZqH"/>
+            </constraints>
+            <point key="canvasLocation" x="137.68115942028987" y="152.44565217391306"/>
+        </view>
+    </objects>
+    <designables>
+        <designable name="08K-B9-Q7L">
+            <size key="intrinsicContentSize" width="240" height="56"/>
+        </designable>
+        <designable name="6Qe-RR-mK3">
+            <size key="intrinsicContentSize" width="414" height="60"/>
+        </designable>
+        <designable name="VQ2-bB-qu7">
+            <size key="intrinsicContentSize" width="414" height="128"/>
+        </designable>
+        <designable name="dUr-cS-zkt">
+            <size key="intrinsicContentSize" width="414" height="128"/>
+        </designable>
+        <designable name="uEl-CN-uQA">
+            <size key="intrinsicContentSize" width="414" height="40"/>
+        </designable>
+    </designables>
+    <resources>
+        <image name="scan_please_illustration" width="375" height="256"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

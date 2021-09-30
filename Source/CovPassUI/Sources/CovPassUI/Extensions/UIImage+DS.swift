@@ -188,6 +188,9 @@ public extension UIImage {
 
     @ImageLoader(name: "status_partial_notification")
     private(set) static var statusPartialNotification
+
+    @ImageLoader(name: "scan_please_illustration")
+    private(set) static var scanPleaseIllustration
 }
 
 @propertyWrapper

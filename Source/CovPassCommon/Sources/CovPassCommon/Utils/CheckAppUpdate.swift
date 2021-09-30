@@ -85,7 +85,9 @@ public struct CheckAppUpdate {
         }
         .done { versionUpdate in
             if !versionUpdate.shouldUpdate { return }
+            #if DEBUG
             print("Show update dialog for version \(versionUpdate.version)")
+            #endif
             let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
             alertController.addAction(UIAlertAction(title: cancel, style: .default) { _ in
                 // User doesn't want to update the app, don't show the dialog until next version
