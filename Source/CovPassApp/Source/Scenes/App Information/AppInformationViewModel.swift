@@ -39,12 +39,7 @@ class AppInformationViewModel: AppInformationViewModelProtocol {
     }
 
     lazy var entries: [AppInformationEntry] = {
-        [
-            webEntry(
-                title: Constants.Text.leichteSprache,
-                url: Constants.WebLink.leichteSprache
-            ),
-
+        var _entries = [
             webEntry(
                 title: "app_information_title_contact".localized,
                 url: Bundle.main.url(forResource: Locale.current.isGerman() ? "contact-covpass-de" : "contact-covpass-en", withExtension: "html")!
@@ -70,6 +65,13 @@ class AppInformationViewModel: AppInformationViewModelProtocol {
                 url: Bundle.commonBundle.url(forResource: Locale.current.isGerman() ? "license_de" : "license_en", withExtension: "html")!
             )
         ]
+        if Locale.current.isGerman() {
+            _entries.insert(webEntry(
+                title: Constants.Text.leichteSprache,
+                url: Constants.WebLink.leichteSprache
+            ), at: 0)
+        }
+        return _entries
     }()
 
     // MARK: - Lifecycle
