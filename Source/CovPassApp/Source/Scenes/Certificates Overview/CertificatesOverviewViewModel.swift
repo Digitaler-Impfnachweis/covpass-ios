@@ -144,6 +144,9 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
             showAnnouncementIfNeeded()
         }
         .then {
+            self.showScanPleaseHint()
+        }
+        .then {
             self.showBoosterNotificationIfNeeded()
         }
         .catch { error in
@@ -251,6 +254,21 @@ extension CertificatesOverviewViewModel {
         if announcementVersion == bundleVersion { return Promise.value }
         try? userDefaults.store(UserDefaults.keyAnnouncement, value: bundleVersion)
         return router.showAnnouncement()
+    }
+}
+
+// MARK: Show Scan Please Hint
+
+private extension CertificatesOverviewViewModel {
+    func showScanPleaseHint() -> Promise<Void> {
+        guard !UserDefaults.StartupInfo.bool(.scanPleaseShown) else {
+            return .value
+        }
+        UserDefaults.StartupInfo.set(true, forKey: .scanPleaseShown)
+		#if DEBUG
+        UserDefaults.StartupInfo.set(false, forKey: .scanPleaseShown)
+        #endif
+        return router.showScanPleaseHint()
     }
 }
 

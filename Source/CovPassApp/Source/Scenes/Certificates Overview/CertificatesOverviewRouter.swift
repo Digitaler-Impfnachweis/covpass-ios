@@ -35,6 +35,16 @@ class CertificatesOverviewRouter: CertificatesOverviewRouterProtocol, DialogRout
         )
     }
 
+    func showScanPleaseHint() -> Promise<Void> {
+        sceneCoordinator.present(
+            ScanPleaseSceneFactory(
+                router: ScanPleaseRouter(
+                    sceneCoordinator: sceneCoordinator
+                )
+            )
+        )
+    }
+
     func showCertificates(_ certificates: [ExtendedCBORWebToken]) -> Promise<CertificateDetailSceneResult> {
         sceneCoordinator.push(
             CertificateDetailSceneFactory(

@@ -31,6 +31,7 @@ public extension UserDefaults {
         public enum defaultKeys: String {
             case onboarding = "onboarding1"
             case appInstalled
+            case scanPleaseShown
         }
     }
 }

@@ -11,6 +11,33 @@ import CovPassUI
 import PromiseKit
 import UIKit
 
+private enum Constants {
+    static let image = UIImage.resultError
+    static let title = "functional_validation_check_popup_unsuccessful_certificate_title".localized
+    static let subTitle = "functional_validation_check_popup_unsuccessful_certificate_subline".localized
+    enum Paragraphs {
+        static let technicalIssues = [
+            Paragraph(icon: .technicalError,
+                      title: "technical_validation_check_popup_unsuccessful_certificate_signature_subheading".localized,
+                      subtitle: "technical_validation_check_popup_unsuccessful_certificate_signature_subline".localized),
+            Paragraph(icon: .scan,
+                      title: "technical_validation_check_popup_unsuccessful_certificate_qrreadibility_subheading".localized,
+                      subtitle: "technical_validation_check_popup_unsuccessful_certificate_qrreadibility_subline".localized)
+        ]
+        static let functionalIssues = [
+            Paragraph(icon: .activity,
+                      title: "functional_validation_check_popup_unsuccessful_certificate_subheadline_expiration".localized,
+                      subtitle: "functional_validation_check_popup_unsuccessful_certificate_subheadline_expiration_text".localized),
+            Paragraph(icon: .calendar,
+                      title: "functional_validation_check_popup_unsuccessful_certificate_subheadline_protection".localized,
+                      subtitle: "functional_validation_check_popup_unsuccessful_certificate_subheadline_protection_text".localized),
+            Paragraph(icon: .statusPartialDetail,
+                      title: "functional_validation_check_popup_unsuccessful_certificate_subheadline_uncompleted".localized,
+                      subtitle: "functional_validation_check_popup_unsuccessful_certificate_subheadline_uncompleted_text".localized)
+        ]
+    }
+}
+
 class ErrorResultViewModel: ValidationResultViewModel {
     // MARK: - Properties
 
@@ -18,24 +45,27 @@ class ErrorResultViewModel: ValidationResultViewModel {
     var router: ValidationResultRouterProtocol
     var repository: VaccinationRepositoryProtocol
     var certificate: CBORWebToken?
+    var error: Error
 
     var icon: UIImage? {
-        .resultError
+        Constants.image
     }
 
     var resultTitle: String {
-        "validation_check_popup_unsuccessful_certificate_title".localized
+        Constants.title
     }
 
     var resultBody: String {
-        "validation_check_popup_unsuccessful_certificate_message".localized
+        Constants.subTitle
     }
 
     var paragraphs: [Paragraph] {
-        [
-            Paragraph(icon: .timeHui, title: "validation_check_popup_unsuccessful_certificate_not_valid_title".localized, subtitle: "validation_check_popup_unsuccessful_certificate_not_valid_message".localized),
-            Paragraph(icon: .technicalError, title: "validation_check_popup_unsuccessful_certificate_technical_problems_title".localized, subtitle: "validation_check_popup_unsuccessful_certificate_technical_problems_message".localized)
-        ]
+        switch error.mapToValidationResultError() {
+        case .functional:
+            return Constants.Paragraphs.functionalIssues
+        case .technical:
+            return Constants.Paragraphs.technicalIssues
+        }
     }
 
     var info: String? {
@@ -47,10 +77,23 @@ class ErrorResultViewModel: ValidationResultViewModel {
     init(
         router: ValidationResultRouterProtocol,
         repository: VaccinationRepositoryProtocol,
-        certificate: CBORWebToken? = nil
+        certificate: CBORWebToken? = nil,
+        error: Error
     ) {
         self.router = router
         self.repository = repository
         self.certificate = certificate
+        self.error = error
+    }
+}
+
+private extension Error {
+    func mapToValidationResultError() -> ValidationResultError {
+        switch self {
+        case is ValidationResultError:
+            return self as! ValidationResultError
+        default:
+            return .technical
+        }
     }
 }

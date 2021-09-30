@@ -10,6 +10,15 @@ import CovPassCommon
 import CovPassUI
 import Foundation
 
+private enum Constants {
+    enum Text {
+        static let leichteSprache = "app_information_title_company_easy_language".localized
+    }
+    enum WebLink {
+        static let leichteSprache = URL(string: "https://digitaler-impfnachweis-app.de/webviews/leichte-sprache/covpasscheckapp")!
+    }
+}
+
 class AppInformationViewModel: AppInformationViewModelProtocol {
     // MARK: - Properties
 
@@ -31,6 +40,7 @@ class AppInformationViewModel: AppInformationViewModelProtocol {
     }
 
     lazy var entries: [AppInformationEntry] = {
+        var _entries =
         [
             webEntry(
                 title: "app_information_title_contact".localized,
@@ -57,6 +67,13 @@ class AppInformationViewModel: AppInformationViewModelProtocol {
                 url: Bundle.commonBundle.url(forResource: Locale.current.isGerman() ? "license_de" : "license_en", withExtension: "html")!
             )
         ]
+        if Locale.current.isGerman() {
+            _entries.insert(webEntry(
+                title: Constants.Text.leichteSprache,
+                url: Constants.WebLink.leichteSprache
+            ), at: 0)
+        }
+        return _entries
     }()
 
     // MARK: - Lifecycle

@@ -16,22 +16,26 @@ struct ValidationResultSceneFactory: SceneFactory {
 
     let router: ValidationResultRouterProtocol
     let certificate: CBORWebToken?
+    let error: Error?
 
     // MARK: - Lifecycle
 
     init(
         router: ValidationResultRouterProtocol,
-        certificate: CBORWebToken?
+        certificate: CBORWebToken?,
+        error: Error?
     ) {
         self.router = router
         self.certificate = certificate
+        self.error = error
     }
 
     func make() -> UIViewController {
         let viewModel = ValidationResultFactory.createViewModel(
             router: router,
             repository: VaccinationRepository.create(),
-            certificate: certificate
+            certificate: certificate,
+            error: error
         )
         let viewController = ValidationResultViewController(viewModel: viewModel)
         return viewController

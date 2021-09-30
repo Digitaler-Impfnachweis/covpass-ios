@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -22,6 +22,7 @@
                 <outlet property="nameTransliteratedView" destination="KGk-1M-GC6" id="cZf-3K-KCC"/>
                 <outlet property="nameView" destination="axl-hz-02P" id="BK7-BD-z3I"/>
                 <outlet property="personalDataHeadline" destination="jt2-bl-Uis" id="VeQ-M5-IxV"/>
+                <outlet property="scanHintView" destination="lZf-yH-BZP" id="Z8q-xp-yae"/>
                 <outlet property="scrollView" destination="YDs-Va-mXX" id="rkd-dK-EbI"/>
                 <outlet property="stackView" destination="4ka-qw-LRS" id="bvG-dB-nlQ"/>
                 <outlet property="vaccinationsStackView" destination="rhc-O6-hd2" id="ehg-oL-Ggq"/>
@@ -37,7 +38,7 @@
                     <rect key="frame" x="0.0" y="24" width="414" height="858"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="4ka-qw-LRS">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="822"/>
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="872"/>
                             <subviews>
                                 <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="eZz-97-0Z9" userLabel="Name Headline" customClass="PlainLabel" customModule="CovPassUI">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
@@ -88,8 +89,11 @@
                                 <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="INh-B1-2sv" userLabel="All Certificates Headline" customClass="PlainLabel" customModule="CovPassUI">
                                     <rect key="frame" x="0.0" y="572" width="414" height="50"/>
                                 </view>
+                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="lZf-yH-BZP" userLabel="ScanHintView" customClass="HintView" customModule="CovPassUI">
+                                    <rect key="frame" x="0.0" y="622" width="414" height="50"/>
+                                </view>
                                 <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="200" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="rhc-O6-hd2" userLabel="Vaccinations StackView">
-                                    <rect key="frame" x="0.0" y="622" width="414" height="200"/>
+                                    <rect key="frame" x="0.0" y="672" width="414" height="200"/>
                                 </stackView>
                             </subviews>
                         </stackView>
@@ -139,6 +143,9 @@
             <size key="intrinsicContentSize" width="414" height="50"/>
         </designable>
         <designable name="jt2-bl-Uis">
+            <size key="intrinsicContentSize" width="414" height="50"/>
+        </designable>
+        <designable name="lZf-yH-BZP">
             <size key="intrinsicContentSize" width="414" height="50"/>
         </designable>
         <designable name="o8t-JG-hB0">

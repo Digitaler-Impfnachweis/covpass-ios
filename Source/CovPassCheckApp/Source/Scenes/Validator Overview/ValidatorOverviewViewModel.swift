@@ -144,8 +144,8 @@ class ValidatorOverviewViewModel {
         .done {
             self.router.showCertificate($0)
         }
-        .catch { _ in
-            self.router.showCertificate(nil)
+        .catch { error in
+            self.router.showError(error: error)
         }
     }
 
