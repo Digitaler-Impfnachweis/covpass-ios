@@ -24,6 +24,11 @@ class ValidatorOverviewViewModelTests: XCTestCase {
                                                certLogic:  DCCCertLogic.create())
     }
     
+    override func tearDown() {
+       sut = nil
+       super.tearDown()
+    }
+    
     func testInitDate() throws {
         let title: String = Localizer.localized("validation_start_screen_scan_sync_message_title", bundle: Bundle.main)
         XCTAssert(sut.ntpOffset == 0.0)
