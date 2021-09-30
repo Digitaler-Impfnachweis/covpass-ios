@@ -81,6 +81,10 @@
 
 "validation_start_screen_scan_title" = "Zertifikat prüfen";
 
+"validation_start_screen_scan_sync_message_title" = "Datum und Uhrzeit prüfen";
+
+"validation_start_screen_scan_sync_message_text" = "Bitte korrigieren Sie das Datum und die Uhrzeit Ihres Telefons. \n\n Soll: %@";
+
 "validation_start_screen_scan_message" = "Scannen Sie jetzt das digitale COVID-Zertifikat der EU. Sie sehen sofort, ob die geprüfte Person ein gültiges COVID-Zertifikat besitzt.";
 
 "accessibility_scan_result_announce" = "Überprüfungsergebnis wird angezeigt";
@@ -159,8 +163,6 @@
 "functional_validation_check_popup_unsuccessful_certificate_subheadline_expiration_text" = "Ein negativer Schnelltest ist für maximal 24 Stunden gültig. Ein negativer PCR-Test ist für maximal 72 Stunden gültig.";
 
 "functional_validation_check_popup_unsuccessful_certificate_subheadline_protection" = "Noch nicht gültiger Schutz";
-
-"functional_validation_check_popup_unsuccessful_certificate_subheadline_uncompleted" = "Unvollständige Impfung";
 
 "functional_validation_check_popup_unsuccessful_certificate_subheadline_protection_text" = "Erst 14 Tage nach der Zweitimpfung gilt der Impfschutz als vollständig. Die Genesung von einer Corona-Infektion muss mindestens 28 Tage alt sein.";
 
@@ -251,9 +253,17 @@
 
 "app_information_title_company_details_linked" = "#Impressum::$0#";
 
+"app_information_title_company_easy_language_linked" = "#Leichte Sprache::$0#";
+
+"app_information_title_company_easy_language" = "Leichte Sprache";
+
 "app_information_title_open_source" = "Open-Source-Lizenzen";
 
 "accessibility_app_information_title_open_source_announce" = "Die Ansicht \"Open-Source-Lizenzen\" wurde geöffnet";
+
+"accessibility_app_information_title_informationt_announce" = "Die Ansicht \"Informationen\" wurde geöffnet";
+
+"accessibility_app_information_version_number_delimiter" = "Punkt";
 
 "app_information_message_open_source" = "Die App verwendet die folgenden Open-Source-Bibliotheken:";
 

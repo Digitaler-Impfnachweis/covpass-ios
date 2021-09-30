@@ -64,7 +64,7 @@
 
 "dialog_start_screen_title" = "New update available";
 
-"dialog_start_screen_message" = "Would you like to update the CovPassCheck-App now?";
+"dialog_start_screen_message" = "Would you like to update the CovPassCheck app now?";
 
 "dialog_start_screen_button_later" = "Not now";
 
@@ -80,6 +80,10 @@
 "validation_start_screen_title" = "Overview";
 
 "validation_start_screen_scan_title" = "Checking a certificate";
+
+"validation_start_screen_scan_sync_message_title" = "Check date and time";
+
+"validation_start_screen_scan_sync_message_text" = "Please check the date and time of your phone. \n\n It should be: %@";
 
 "validation_start_screen_scan_message" = "Scan the EU Digital COVID Certificate now. You see immediately if the person you are checking has a valid Covid-19 certificate.";
 
@@ -159,8 +163,6 @@
 "functional_validation_check_popup_unsuccessful_certificate_subheadline_expiration_text" = "A negative rapid test has a maximal validity of 24 hours. A negative PCR test has a maximal validity of 72 hours.";
 
 "functional_validation_check_popup_unsuccessful_certificate_subheadline_protection" = "Protection not yet valid";
-
-"functional_validation_check_popup_unsuccessful_certificate_subheadline_uncompleted" = "Uncompleted Vaccination";
 
 "functional_validation_check_popup_unsuccessful_certificate_subheadline_protection_text" = "Individuals are not completely protected until 14 days after the second vaccination. A recovery from a Corona infection has to be at least 28 days in the past.";
 
@@ -251,9 +253,17 @@
 
 "app_information_title_company_details_linked" = "#Legal information::$0#";
 
+"app_information_title_company_easy_language_linked" = "#Leichte Sprache::$0#";
+
+"app_information_title_company_easy_language" = "Leichte Sprache";
+
 "app_information_title_open_source" = "Open-source licences";
 
 "accessibility_app_information_title_open_source_announce" = "The view \"Open-source licences\" has been opened";
+
+"accessibility_app_information_title_informationt_announce" = "Information has been opened";
+
+"accessibility_app_information_version_number_delimiter" = "point";
 
 "app_information_message_open_source" = "The app uses the following open-source libraries:";
 
