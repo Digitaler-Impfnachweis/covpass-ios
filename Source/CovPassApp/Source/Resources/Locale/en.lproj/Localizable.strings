@@ -4,9 +4,14 @@
  * Language: en
  */
 
-/********** App **********/
+/********** app **********/
 
 "cert_app_name" = "CovPass";
+
+
+/********** common **********/
+
+"ok" = "OK";
 
 
 /********** onboarding **********/
@@ -78,7 +83,7 @@
 "accessibility_update_info_announce" = "The view \"New features\" has been opened";
 
 
-/********** start Screen **********/
+/********** start screen **********/
 
 "accessibility_vaccination_start_screen_label_information" = "More information";
 
@@ -108,16 +113,16 @@
 
 "vaccination_start_screen_qrcode_booster_vaccination_note_subtitle" = "Check vaccination status";
 
-"certificates_start_screen_qr_code_app_reference_text" = "This QR code can be verified reliably with the CovPassCheck-App.";
+"certificates_start_screen_qr_code_app_reference_text" = "This QR code can be verified reliably with the CovPassCheck app.";
 
 
-/********** popup: Remark within the app towards the CovPassCheck-App **********/
+/********** popup: Remark within the app towards the CovPassCheck app **********/
 
-"certificates_start_screen_pop_up_app_reference_title" = "Please scan!";
+"certificates_overview_all_certificates_app_reference_title" = "Please scan!";
 
-"certificates_start_screen_pop_up_app_reference_text" = "Please insist to have your certificate scanned with the CovPassCheck-App. Only by scanning your QR code and showing your proof of identity the validity of your vaccination protection can be checked reliably while protecting your data.";
+"certificates_overview_all_certificates_app_reference_text" = "Do not show this sensitive data to other people in restaurants, at events or in similar situations. Always have your QR code checked with the CovPassCheck app.";
 
-"certificates_start_screen_pop_up_app_reference_hyperlink" = "Open the CovpassCheck-App (External Link)";
+"certificates_start_screen_pop_up_app_reference_hyperlink" = "Open the CovpassCheck app (External Link)";
 
 "certificates_start_screen_pop_up_app_reference_button" = "OK";
 
@@ -164,18 +169,6 @@
 
 "accessibility_certificate_scan_mode_label_cancel" = "Cancel";
 
-"certificate_popup_checkapp_label_X" = "Close Pop-up";
-
-"certificate_popup_checkapp_headline" = "Please scan!";
-
-"certificate_popup_checkapp_copy" = "Please insist to have your certificate scanned with the CovPassCheck-App. Only by scanning your QR code and showing your proof of identity the validity of your vaccination protection can be checked reliably while protecting your data. The CovPassCheck app for anyone who needs to check certificates:";
-
-"certificate_popup_checkapp_link_label" = "External Link";
-
-"certificate_popup_checkapp_linked" = "Open the CovpassCheck-App (External Link)";
-
-"certificate_popup_checkapp_button" = "OK";
-
 "error_camera_access_title" = "The CovPass App wants to access your camera.";
 
 "error_camera_access_message" = "Allow access to scan QR codes.";
@@ -200,7 +193,7 @@
 "certificate_action_button_check_validity" = "Check validity";
 
 
-/********** Screen: check validity **********/
+/********** screen: check validity **********/
 
 "accessibility_certificate_check_validity_label_close" = "Close";
 
@@ -231,6 +224,9 @@
 "accessibility_certificate_check_validity_selection_country" = "Country: %@";
 
 "accessibility_certificate_check_validity_label_choose_country" = "Choose destination";
+
+
+/********** country list names **********/
 
 "IT" = "Italy";
 
@@ -480,7 +476,7 @@
 
 "vaccination_certificate_overview_complete_title" = "Fully vaccinated";
 
-"certificates_overview_qr_scan_hint" = "This QR code can be verified reliably with the CovPassCheck-App.";
+"certificates_overview_qr_scan_hint" = "This QR code can be verified reliably with the CovPassCheck app.";
 
 "vaccination_certificate_overview_complete_message" = "Show this QR code when needed. Be ready to show ID when your QR code is checked.";
 
@@ -541,14 +537,6 @@
 "accessibility_certificates_overview_personal_data_date_of_birth" = "Date of birth (Year-Month-Day)";
 
 "certificates_overview_all_certificates_title" = "EU certificates";
-
-"certificate_overview_info_massage_headline" = "Please scan!";
-
-"certificate_overview_info_massage_copy" = "Do not show this sensitive data to other people in restaurants, at events or in similar situations. Always have your QR code checked with the CovPassCheck-App.";
-
-"certificates_overview_all_certificates_app_reference_title" = "Please scan!";
-
-"certificates_overview_all_certificates_app_reference_text" = "Do not show this sensitive data to other people in restaurants, at events or in similar situations. Always have your QR code checked with the CovPassCheck-App.";
 
 "accessibility_certificates_overview_all_certificates_title" = "Check vaccination status. Sensible health data will follow. Please take care that nobody can listen to or read on your smartphone.";
 
