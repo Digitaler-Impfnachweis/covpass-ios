@@ -4,9 +4,14 @@
  * Language: de
  */
 
-/********** App **********/
+/********** app **********/
 
 "cert_app_name" = "CovPass";
+
+
+/********** common **********/
+
+"ok" = "OK";
 
 
 /********** onboarding **********/
@@ -78,7 +83,7 @@
 "accessibility_update_info_announce" = "Die Ansicht \"Neue Funktionen\" wurde geöffnet";
 
 
-/********** start Screen **********/
+/********** start screen **********/
 
 "accessibility_vaccination_start_screen_label_information" = "Mehr Informationen";
 
@@ -111,11 +116,11 @@
 "certificates_start_screen_qr_code_app_reference_text" = "Dieser QR-Code lässt sich verlässlich mit der CovPassCheck-App prüfen.";
 
 
-/********** popup: Remark within the app towards the CovPassCheck-App **********/
+/********** popup: Remark within the app towards the CovPassCheck app **********/
 
-"certificates_start_screen_pop_up_app_reference_title" = "Scannen bitte!";
+"certificates_overview_all_certificates_app_reference_title" = "Scannen bitte!";
 
-"certificates_start_screen_pop_up_app_reference_text" = "Bestehen Sie darauf, dass Ihr Zertifikat mit der CovPassCheck-App gescannt wird. Nur durch das Scannen des QR-Codes und das Vorzeigen eines Ausweisdokumentes kann die Gültigkeit Ihres Impfschutzes sicher geprüft und der Datenschutz eingehalten werden.";
+"certificates_overview_all_certificates_app_reference_text" = "Zeigen Sie diese sensiblen Daten nicht in Gaststätten, bei Veranstaltungen oder in ähnlichen Situationen vor. Lassen Sie Ihren QR-Code immer mit der CovPassCheck-App prüfen.";
 
 "certificates_start_screen_pop_up_app_reference_hyperlink" = "CovpassCheck-App öffnen (Externer Link)";
 
@@ -164,18 +169,6 @@
 
 "accessibility_certificate_scan_mode_label_cancel" = "Abbrechen";
 
-"certificate_popup_checkapp_label_X" = "Pop-up schließen";
-
-"certificate_popup_checkapp_headline" = "Scannen bitte!";
-
-"certificate_popup_checkapp_copy" = "Bestehen Sie darauf, dass Ihr Zertifikat mit der CovPassCheck-App gescannt wird. Nur durch das Scannen des QR-Codes und das Vorzeigen eines Ausweisdokumentes kann die Gültigkeit Ihres Impfschutzes sicher geprüft und der Datenschutz eingehalten werden. Die CovPassCheck-App für alle, die Zertifikate prüfen müssen:";
-
-"certificate_popup_checkapp_link_label" = "Externer Link";
-
-"certificate_popup_checkapp_linked" = "CovpassCheck-App öffnen (Externer Link)";
-
-"certificate_popup_checkapp_button" = "OK";
-
 "error_camera_access_title" = "Die CovPass-App möchte auf Ihre Kamera zugreifen.";
 
 "error_camera_access_message" = "Erlauben Sie den Zugriff, um QR-Codes scannen zu können.";
@@ -200,7 +193,7 @@
 "certificate_action_button_check_validity" = "Gültigkeit prüfen";
 
 
-/********** Screen: check validity **********/
+/********** screen: check validity **********/
 
 "accessibility_certificate_check_validity_label_close" = "Schließen";
 
@@ -231,6 +224,9 @@
 "accessibility_certificate_check_validity_selection_country" = "Land: %@";
 
 "accessibility_certificate_check_validity_label_choose_country" = "Reiseland wählen";
+
+
+/********** country list names **********/
 
 "IT" = "Italien";
 
@@ -541,14 +537,6 @@
 "accessibility_certificates_overview_personal_data_date_of_birth" = "Geburtsdatum (Jahr-Monat-Tag)";
 
 "certificates_overview_all_certificates_title" = "EU-Zertifikate";
-
-"certificate_overview_info_massage_headline" = "Scannen bitte!";
-
-"certificate_overview_info_massage_copy" = "Zeigen Sie diese sensiblen Daten nicht in Gaststätten, bei Veranstaltungen oder in ähnlichen Situationen vor. Lassen Sie Ihren QR-Code immer mit der CovPassCheck-App prüfen.";
-
-"certificates_overview_all_certificates_app_reference_title" = "Scannen bitte!";
-
-"certificates_overview_all_certificates_app_reference_text" = "Zeigen Sie diese sensiblen Daten nicht in Gaststätten, bei Veranstaltungen oder in ähnlichen Situationen vor. Lassen Sie Ihren QR-Code immer mit der CovPassCheck-App prüfen.";
 
 "accessibility_certificates_overview_all_certificates_title" = "Impfstatus überprüfen. Es folgen sensible Gesundheitsdaten. Bitte achten Sie darauf, dass keine andere Person mithört oder mitliest.";
 
