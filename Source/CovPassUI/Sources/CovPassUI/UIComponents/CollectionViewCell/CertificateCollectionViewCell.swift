@@ -11,7 +11,7 @@ import Foundation
 import UIKit
 
 private enum Constants {
-    static let qrInfoText = "certificates_overview_qr_scan_hint".localized
+    static let qrInfoText = "certificates_start_screen_qr_code_app_reference_text".localized
     enum Accessibility {}
 }
 
