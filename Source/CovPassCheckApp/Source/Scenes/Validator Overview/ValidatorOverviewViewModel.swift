@@ -63,16 +63,13 @@ class ValidatorOverviewViewModel {
             .localized
     }
     
-    var timeHintSubTitle: String? {
-        guard let ntpDateFormatted = ntpDateFormatted else {
-            return nil
-        }
+    var timeHintSubTitle: String {
         return "validation_start_screen_scan_sync_message_text"
             .localized
             .replacingOccurrences(of: "%@", with: ntpDateFormatted)
     }
     
-    var ntpDateFormatted: String? {
+    var ntpDateFormatted: String {
         return DateUtils.displayDateTimeFormatter.string(from: ntpDate)
     }
     
