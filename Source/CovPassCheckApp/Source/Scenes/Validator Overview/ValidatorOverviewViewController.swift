@@ -97,6 +97,7 @@ class ValidatorOverviewViewController: UIViewController {
         timeHintView.iconLabel.isHidden = true
         timeHintView.titleLabel.attributedText = viewModel.timeHintTitle.styledAs(.header_3)
         timeHintView.subTitleLabel.attributedText = timeHintSubTitle.styledAs(.body)
+        timeHintView.setConstraintsToEdge()
     }
 }
 
