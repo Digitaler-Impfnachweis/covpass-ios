@@ -21,7 +21,12 @@ public class HintView: XibView {
     @IBOutlet public var containerView: UIView!
 
     @IBOutlet public var subTitleConstraint: NSLayoutConstraint!
-
+    
+    @IBOutlet weak var containerLeadingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var containerTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var containerTrailingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var containerBottomConstraint: NSLayoutConstraint!
+    
     // MARK: - Lifecycle
 
     override public func initView() {
