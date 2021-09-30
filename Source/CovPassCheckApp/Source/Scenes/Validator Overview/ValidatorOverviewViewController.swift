@@ -87,6 +87,10 @@ class ValidatorOverviewViewController: UIViewController {
     }
     
     private func setupTimeHintView() {
+        guard let timeHintSubTitle = viewModel.timeHintSubTitle else {
+            self.timeHintView.isHidden = true
+            return
+        }
         timeHintView.isHidden = !viewModel.timeHintIsHidden
         timeHintView.iconView.image = viewModel.timeHintIcon
         timeHintView.iconLabel.text = ""
