@@ -53,4 +53,11 @@ public class HintView: XibView {
         subTitleConstraint.isActive = !(subTitleLabel.text?.isEmpty ?? true)
         super.updateConstraints()
     }
+    
+    public func setConstraintsToEdge() {
+        self.containerTopConstraint.constant = 0
+        self.containerLeadingConstraint.constant = 0
+        self.containerTrailingConstraint.constant = 0
+        self.containerBottomConstraint.constant = 0
+    }
 }
