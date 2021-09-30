@@ -17,7 +17,7 @@ class ValidatorOverviewViewController: UIViewController {
     @IBOutlet var headerView: InfoHeaderView!
     @IBOutlet var scanCard: ScanCardView!
     @IBOutlet var offlineCard: OfflineCardView!
-    @IBOutlet var timeCard: HintView!
+    @IBOutlet var timeHintView: HintView!
     
     // MARK: - Properties
 
@@ -87,14 +87,12 @@ class ValidatorOverviewViewController: UIViewController {
     }
     
     private func setupTimeHintView() {
-        timeCard.isHidden = !viewModel.timeHintHidden
-
-        timeCard.iconView.image = viewModel.timeHintIcon
-        timeCard.iconLabel.text = ""
-        timeCard.iconLabel.isHidden = true
-
-        timeCard.titleLabel.attributedText = viewModel.timeHintTitle.styledAs(.header_3)
-        timeCard.bodyLabel.attributedText = viewModel.timeHintSubTitle.styledAs(.body)
+        timeHintView.isHidden = !viewModel.timeHintIsHidden
+        timeHintView.iconView.image = viewModel.timeHintIcon
+        timeHintView.iconLabel.text = ""
+        timeHintView.iconLabel.isHidden = true
+        timeHintView.titleLabel.attributedText = viewModel.timeHintTitle.styledAs(.header_3)
+        timeHintView.subTitleLabel.attributedText = timeHintSubTitle.styledAs(.body)
     }
 }
 
