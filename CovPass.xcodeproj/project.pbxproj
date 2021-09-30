@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0939EAB827043BD80086729C /* Kronos in Frameworks */ = {isa = PBXBuildFile; productRef = 0939EAB727043BD80086729C /* Kronos */; };
 		216D1F48264EF50300370F16 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 216D1F43264EF50300370F16 /* Localizable.strings */; };
 		216D1F49264EF50300370F16 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 216D1F46264EF50300370F16 /* Assets.xcassets */; };
 		216D1F87264EF6A800370F16 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 216D1F86264EF6A800370F16 /* LaunchScreen.storyboard */; };
@@ -395,6 +396,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0939EAB827043BD80086729C /* Kronos in Frameworks */,
 				21DAD6E3264F0B19003407FC /* CovPassUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1266,6 +1268,7 @@
 			name = CovPassCheckApp;
 			packageProductDependencies = (
 				21DAD6E2264F0B19003407FC /* CovPassUI */,
+				0939EAB727043BD80086729C /* Kronos */,
 			);
 			productName = VaccinationValidatorApp;
 			productReference = 65D6D51425F8B94D000CB339 /* CovPassCheckApp.app */;
@@ -1326,6 +1329,7 @@
 			);
 			mainGroup = 65D6D46525F7A631000CB339;
 			packageReferences = (
+				0939EAB627043BD80086729C /* XCRemoteSwiftPackageReference "Kronos" */,
 			);
 			productRefGroup = 65D6D47325F7A634000CB339 /* Products */;
 			projectDirPath = "";
@@ -1974,7 +1978,23 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCRemoteSwiftPackageReference section */
+		0939EAB627043BD80086729C /* XCRemoteSwiftPackageReference "Kronos" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/MobileNativeFoundation/Kronos.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
+		0939EAB727043BD80086729C /* Kronos */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0939EAB627043BD80086729C /* XCRemoteSwiftPackageReference "Kronos" */;
+			productName = Kronos;
+		};
 		21DAD6E0264F0B11003407FC /* CovPassUI */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = CovPassUI;
