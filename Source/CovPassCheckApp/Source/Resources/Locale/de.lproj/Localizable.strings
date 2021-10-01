@@ -107,6 +107,12 @@
 
 "validation_start_screen_offline_modus_rules" = "Regelsets: %@";
 
+"validation_start_screen_offline_modus_information_title" = "App Regelset";
+
+"validation_start_screen_offline_modus_information" = "Hier können Sie Ihr Regelset zur Verifizierung Ihrer Zertifikate manuell aktualisieren.";
+
+"validation_start_screen_offline_modus_button" = "Regelset aktualisieren";
+
 
 /********** popup: Check vaccination **********/
 

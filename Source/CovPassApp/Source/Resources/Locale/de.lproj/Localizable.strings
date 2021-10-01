@@ -118,15 +118,19 @@
 
 /********** popup: Remark within the app towards the CovPassCheck app **********/
 
-"certificates_overview_all_certificates_app_reference_title" = "Scannen bitte!";
+"certificates_start_screen_pop_up_app_reference_title" = "Scannen bitte!";
 
-"certificates_overview_all_certificates_app_reference_text" = "Zeigen Sie diese sensiblen Daten nicht in Gaststätten, bei Veranstaltungen oder in ähnlichen Situationen vor. Lassen Sie Ihren QR-Code immer mit der CovPassCheck-App prüfen.";
+"certificate_start_screen_pop_up_app_reference_text" = "Bestehen Sie darauf, dass Ihr Zertifikat mit der CovPassCheck-App gescannt wird. Zeigen Sie außerdem ein Ausweisdokument vor. Nur so kann die Gültigkeit Ihres Zertifikats datensicher geprüft werden.";
 
-"certificates_start_screen_pop_up_app_reference_hyperlink" = "CovpassCheck-App öffnen (Externer Link)";
+"certificate_popup_checkapp_link_label" = "Arbeiten Sie in der Gastronomie oder planen Sie eine Veranstaltung? Prüfen Sie schnell und sicher die Zertifikate Ihrer Gäste:";
+
+"certificates_start_screen_pop_up_app_reference_hyperlink" = "Zur CovPassCheck-App (Externer Link)";
 
 "certificates_start_screen_pop_up_app_reference_button" = "OK";
 
 "accessibility_certificates_start_screen_pop_up_app_reference_label" = "Pop-up schließen";
+
+"accessibility_certificate_popup_checkapp_announce" = "Die Ansicht \"Scannen bitte!\" wurde geöffnet";
 
 
 /********** popup: add certification **********/
@@ -693,6 +697,10 @@
 "test_certificate_detail_view_data_date_of_birth" = "Geburtsdatum / Date of birth (YYYY-MM-DD)";
 
 "accessibility_test_certificate_detail_view_data_date_of_birth" = "Geburtsdatum (Jahr-Monat-Tag)";
+
+"certificates_overview_all_certificates_app_reference_title" = "Scannen bitte!";
+
+"certificates_overview_all_certificates_app_reference_text" = "Zeigen Sie diese sensiblen Daten nicht in Gaststätten, bei Veranstaltungen oder in ähnlichen Situationen vor. Lassen Sie Ihren QR-Code immer mit der CovPassCheck-App prüfen.";
 
 "test_certificate_detail_view_data_disease" = "Zielkrankheit oder -erreger / Disease or pathogen";
 

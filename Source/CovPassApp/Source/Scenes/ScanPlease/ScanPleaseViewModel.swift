@@ -13,7 +13,7 @@ import UIKit
 private enum Constants {
     enum Text {
         static let popupTitle = "certificates_start_screen_pop_up_app_reference_title".localized
-        static let popupText = "certificates_start_screen_pop_up_app_reference_text".localized
+        static let popupText = "certificate_start_screen_pop_up_app_reference_text".localized
         static let popupLinkDescription = "certificate_popup_checkapp_link_label".localized
         static let popupLinkText = "certificates_start_screen_pop_up_app_reference_hyperlink".localized
     }

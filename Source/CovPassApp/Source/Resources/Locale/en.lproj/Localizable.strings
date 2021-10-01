@@ -113,20 +113,24 @@
 
 "vaccination_start_screen_qrcode_booster_vaccination_note_subtitle" = "Check vaccination status";
 
-"certificates_start_screen_qr_code_app_reference_text" = "This QR code can be verified reliably with the CovPassCheck app.";
+"certificates_start_screen_qr_code_app_reference_text" = "This QR code can be reliably verified with the CovPassCheck app.";
 
 
 /********** popup: Remark within the app towards the CovPassCheck app **********/
 
-"certificates_overview_all_certificates_app_reference_title" = "Please scan!";
+"certificates_start_screen_pop_up_app_reference_title" = "Please scan!";
 
-"certificates_overview_all_certificates_app_reference_text" = "Do not show this sensitive data to other people in restaurants, at events or in similar situations. Always have your QR code checked with the CovPassCheck app.";
+"certificate_start_screen_pop_up_app_reference_text" = "Please insist to have your certificate scanned with the CovPassCheck app. Only by scanning your QR code and showing your proof of identity the validity of your vaccination protection can be checked reliably while protecting your data.";
 
-"certificates_start_screen_pop_up_app_reference_hyperlink" = "Open the CovpassCheck app (External Link)";
+"certificate_popup_checkapp_link_label" = "Do you work in a restaurant or at events? Check your customers’ certificates with ease:";
+
+"certificates_start_screen_pop_up_app_reference_hyperlink" = "Download the CovPassCheck app (External Link)";
 
 "certificates_start_screen_pop_up_app_reference_button" = "OK";
 
 "accessibility_certificates_start_screen_pop_up_app_reference_label" = "Close Pop-up";
+
+"accessibility_certificate_popup_checkapp_announce" = "The view \"Please scan!\" has been opened";
 
 
 /********** popup: add certification **********/
@@ -693,6 +697,10 @@
 "test_certificate_detail_view_data_date_of_birth" = "Geburtsdatum / Date of birth (YYYY-MM-DD)";
 
 "accessibility_test_certificate_detail_view_data_date_of_birth" = "Date of birth (Year-Month-Day)";
+
+"certificates_overview_all_certificates_app_reference_title" = "Please scan!";
+
+"certificates_overview_all_certificates_app_reference_text" = "Do not show this sensitive data to other people in restaurants, at events or in similar situations. Always have your QR code checked with the CovPassCheck app.";
 
 "test_certificate_detail_view_data_disease" = "Zielkrankheit oder -erreger / Disease or pathogen";
 
