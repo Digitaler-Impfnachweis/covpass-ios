@@ -17,7 +17,8 @@ class ValidatorOverviewViewController: UIViewController {
     @IBOutlet var headerView: InfoHeaderView!
     @IBOutlet var scanCard: ScanCardView!
     @IBOutlet var offlineCard: OfflineCardView!
-
+    @IBOutlet var timeHintView: HintView!
+    
     // MARK: - Properties
 
     private(set) var viewModel: ValidatorOverviewViewModel
@@ -56,6 +57,7 @@ class ValidatorOverviewViewController: UIViewController {
 
     private func setupHeaderView() {
         headerView.attributedTitleText = viewModel.title.styledAs(.header_2)
+        headerView.textLabel.accessibilityTraits = .header
         headerView.image = .help
         headerView.action = { [weak self] in
             self?.viewModel.showAppInformation()
@@ -80,6 +82,18 @@ class ValidatorOverviewViewController: UIViewController {
         offlineCard.rulesDateLabel.attributedText = viewModel.offlineMessageRules?.styledAs(.body).colored(.onBackground70)
 
         offlineCard.layoutMargins.bottom = .space_40
+        
+        setupTimeHintView()
+    }
+    
+    private func setupTimeHintView() {
+        timeHintView.isHidden = viewModel.timeHintIsHidden
+        timeHintView.iconView.image = viewModel.timeHintIcon
+        timeHintView.iconLabel.text = ""
+        timeHintView.iconLabel.isHidden = true
+        timeHintView.titleLabel.attributedText = viewModel.timeHintTitle.styledAs(.header_3)
+        timeHintView.subTitleLabel.attributedText = viewModel.timeHintSubTitle.styledAs(.body)
+        timeHintView.setConstraintsToEdge()
     }
 }
 

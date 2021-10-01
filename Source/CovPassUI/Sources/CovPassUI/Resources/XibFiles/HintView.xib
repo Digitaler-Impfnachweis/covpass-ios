@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -11,6 +11,10 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HintView" customModule="CovPassUI">
             <connections>
                 <outlet property="bodyLabel" destination="0cp-xi-c1o" id="ojD-d2-K2T"/>
+                <outlet property="containerBottomConstraint" destination="dUx-9J-PEK" id="iAZ-cl-BRP"/>
+                <outlet property="containerLeadingConstraint" destination="1Pe-hY-vLS" id="hq5-dj-1i1"/>
+                <outlet property="containerTopConstraint" destination="OPW-2I-9aK" id="j80-H3-HMp"/>
+                <outlet property="containerTrailingConstraint" destination="b5u-Ce-uQP" id="NAR-3N-WJ4"/>
                 <outlet property="containerView" destination="yCv-mX-bar" id="8ag-o0-Jo6"/>
                 <outlet property="iconLabel" destination="thL-pc-NaT" id="TyN-YG-3rC"/>
                 <outlet property="iconStackView" destination="mt4-wn-ryh" id="5ze-eh-MKL"/>

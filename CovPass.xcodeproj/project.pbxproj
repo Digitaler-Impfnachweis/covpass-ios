@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		092090E027060FC30000713F /* ValidatorOverviewViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092090DF27060FC30000713F /* ValidatorOverviewViewModelTests.swift */; };
+		0939EAB827043BD80086729C /* Kronos in Frameworks */ = {isa = PBXBuildFile; productRef = 0939EAB727043BD80086729C /* Kronos */; };
 		216D1F48264EF50300370F16 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 216D1F43264EF50300370F16 /* Localizable.strings */; };
 		216D1F49264EF50300370F16 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 216D1F46264EF50300370F16 /* Assets.xcassets */; };
 		216D1F87264EF6A800370F16 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 216D1F86264EF6A800370F16 /* LaunchScreen.storyboard */; };
@@ -200,6 +202,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		092090DF27060FC30000713F /* ValidatorOverviewViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatorOverviewViewModelTests.swift; sourceTree = "<group>"; };
 		210116F82646D18100B9E8FF /* debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = debug.xcconfig; sourceTree = "<group>"; };
 		2101178C2646E86F00B9E8FF /* debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = debug.xcconfig; sourceTree = "<group>"; };
 		212E757D264F0D09007C0F3A /* CovPassUI */ = {isa = PBXFileReference; lastKnownFileType = folder; path = CovPassUI; sourceTree = "<group>"; };
@@ -411,6 +414,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0939EAB827043BD80086729C /* Kronos in Frameworks */,
 				21DAD6E3264F0B19003407FC /* CovPassUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1204,6 +1208,7 @@
 				88AB2A6125FA40CE00D4EA52 /* Info.plist */,
 				95961E872703545200E577A4 /* ValidationResultFactoryTests.swift */,
 				95961E8A270450CA00E577A4 /* Mocks.swift */,
+				092090DF27060FC30000713F /* ValidatorOverviewViewModelTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -1314,6 +1319,7 @@
 			name = CovPassCheckApp;
 			packageProductDependencies = (
 				21DAD6E2264F0B19003407FC /* CovPassUI */,
+				0939EAB727043BD80086729C /* Kronos */,
 			);
 			productName = VaccinationValidatorApp;
 			productReference = 65D6D51425F8B94D000CB339 /* CovPassCheckApp.app */;
@@ -1374,6 +1380,7 @@
 			);
 			mainGroup = 65D6D46525F7A631000CB339;
 			packageReferences = (
+				0939EAB627043BD80086729C /* XCRemoteSwiftPackageReference "Kronos" */,
 			);
 			productRefGroup = 65D6D47325F7A634000CB339 /* Products */;
 			projectDirPath = "";
@@ -1613,6 +1620,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				95961E892703550B00E577A4 /* ValidationResultFactoryTests.swift in Sources */,
+				092090E027060FC30000713F /* ValidatorOverviewViewModelTests.swift in Sources */,
 				88AB2ACE25FA434B00D4EA52 /* CovPassCheckAppTests.swift in Sources */,
 				95961E8B270450CA00E577A4 /* Mocks.swift in Sources */,
 			);
@@ -1776,7 +1784,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 4NKD98A4K8;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Source/CovPassApp/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
@@ -1803,7 +1811,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 4NKD98A4K8;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Source/CovPassApp/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
@@ -1882,7 +1890,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 4NKD98A4K8;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Source/CovPassCheckApp/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
@@ -1909,7 +1917,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 4NKD98A4K8;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Source/CovPassCheckApp/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
@@ -2030,7 +2038,23 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCRemoteSwiftPackageReference section */
+		0939EAB627043BD80086729C /* XCRemoteSwiftPackageReference "Kronos" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/MobileNativeFoundation/Kronos.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
+		0939EAB727043BD80086729C /* Kronos */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0939EAB627043BD80086729C /* XCRemoteSwiftPackageReference "Kronos" */;
+			productName = Kronos;
+		};
 		21DAD6E0264F0B11003407FC /* CovPassUI */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = CovPassUI;
