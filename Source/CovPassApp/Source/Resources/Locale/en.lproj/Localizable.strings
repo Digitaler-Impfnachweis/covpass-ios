@@ -113,7 +113,7 @@
 
 "vaccination_start_screen_qrcode_booster_vaccination_note_subtitle" = "Check vaccination status";
 
-"certificates_start_screen_qr_code_app_reference_text" = "This QR code can be verified reliably with the CovPassCheck app.";
+"certificates_start_screen_qr_code_app_reference_text" = "This QR code can be reliably verified with the CovPassCheck app.";
 
 
 /********** popup: Remark within the app towards the CovPassCheck app **********/
