@@ -10,6 +10,13 @@
 @testable import CovPassUI
 import XCTest
 
+private enum Constants {
+    enum Keys {
+        static var syncTitle = "validation_start_screen_scan_sync_message_title"
+        static var syncMessage = "validation_start_screen_scan_sync_message_text"
+    }
+}
+
 class ValidatorOverviewViewModelTests: XCTestCase {
     
     var sut: ValidatorOverviewViewModel!
@@ -30,7 +37,7 @@ class ValidatorOverviewViewModelTests: XCTestCase {
     }
     
     func testInitDate() throws {
-        let title: String = Localizer.localized("validation_start_screen_scan_sync_message_title", bundle: Bundle.main)
+        let title: String = Localizer.localized(Constants.Keys.syncTitle, bundle: Bundle.main)
         XCTAssert(sut.ntpOffset == 0.0)
         XCTAssert(sut.timeHintIcon == .warning)
         XCTAssert(sut.timeHintTitle == title)
@@ -41,10 +48,9 @@ class ValidatorOverviewViewModelTests: XCTestCase {
         let date = Date()
         sut.ntpDate = date
         sut.ntpOffset = 10
-        let title: String = Localizer.localized("validation_start_screen_scan_sync_message_title", bundle: Bundle.main)
-        let subTitle = Localizer.localized("validation_start_screen_scan_sync_message_text", bundle: Bundle.main)
-            .replacingOccurrences(of: "%@",
-                                  with: sut.ntpDateFormatted)
+        let title: String = Localizer.localized(Constants.Keys.syncTitle, bundle: Bundle.main)
+        let subTitle = String(format: Localizer.localized(Constants.Keys.syncMessage, bundle: Bundle.main),
+                              sut.ntpDateFormatted)
         XCTAssert(sut.ntpDate == date)
         XCTAssert(sut.ntpOffset == 10.0)
         XCTAssert(sut.timeHintIcon == .warning)
@@ -57,10 +63,9 @@ class ValidatorOverviewViewModelTests: XCTestCase {
         let date = Date()
         sut.ntpDate = date
         sut.ntpOffset = -7200
-        let title: String = Localizer.localized("validation_start_screen_scan_sync_message_title", bundle: Bundle.main)
-        let subTitle = Localizer.localized("validation_start_screen_scan_sync_message_text", bundle: Bundle.main)
-            .replacingOccurrences(of: "%@",
-                                  with: sut.ntpDateFormatted)
+        let title: String = Localizer.localized(Constants.Keys.syncTitle, bundle: Bundle.main)
+        let subTitle = String(format: Localizer.localized(Constants.Keys.syncMessage, bundle: Bundle.main),
+                              sut.ntpDateFormatted)
         XCTAssert(sut.ntpDate == date)
         XCTAssert(sut.ntpOffset == -7200)
         XCTAssert(sut.timeHintIcon == .warning)
@@ -73,10 +78,9 @@ class ValidatorOverviewViewModelTests: XCTestCase {
         let date = Date()
         sut.ntpDate = date
         sut.ntpOffset = 7200
-        let title: String = Localizer.localized("validation_start_screen_scan_sync_message_title", bundle: Bundle.main)
-        let subTitle = Localizer.localized("validation_start_screen_scan_sync_message_text", bundle: Bundle.main)
-            .replacingOccurrences(of: "%@",
-                                  with: sut.ntpDateFormatted)
+        let title: String = Localizer.localized(Constants.Keys.syncTitle, bundle: Bundle.main)
+        let subTitle = String(format: Localizer.localized(Constants.Keys.syncMessage, bundle: Bundle.main),
+                              sut.ntpDateFormatted)
         XCTAssert(sut.ntpDate == date)
         XCTAssert(sut.ntpOffset == 7200)
         XCTAssert(sut.timeHintIcon == .warning)

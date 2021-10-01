@@ -13,6 +13,16 @@ import PromiseKit
 import UIKit
 import Kronos
 
+private enum Constants {
+    enum Keys {
+        static let syncTitle = "validation_start_screen_scan_sync_message_title"
+        static let syncMessage = "validation_start_screen_scan_sync_message_text"
+    }
+    enum Config {
+        static let twoHoursAsSeconds = 7200.0
+    }
+}
+
 class ValidatorOverviewViewModel {
     // MARK: - Properties
 
@@ -59,14 +69,11 @@ class ValidatorOverviewViewModel {
     }
 
     var timeHintTitle: String {
-        "validation_start_screen_scan_sync_message_title"
-            .localized
+        Constants.Keys.syncTitle.localized
     }
     
     var timeHintSubTitle: String {
-        return "validation_start_screen_scan_sync_message_text"
-            .localized
-            .replacingOccurrences(of: "%@", with: ntpDateFormatted)
+        return String(format: Constants.Keys.syncMessage.localized, ntpDateFormatted)
     }
     
     var ntpDateFormatted: String {
@@ -82,12 +89,12 @@ class ValidatorOverviewViewModel {
             self.delegate?.viewModelDidUpdate()
         }
     }
+    
     var ntpOffset: TimeInterval = 0.0
     
     var timeHintIsHidden: Bool {
         get {
-            let twoHoursAsSeconds = 7200.0
-            return abs(ntpOffset) < twoHoursAsSeconds
+            return abs(ntpOffset) < Constants.Config.twoHoursAsSeconds
         }
     }
     
@@ -165,8 +172,11 @@ class ValidatorOverviewViewModel {
     // MARK: Kronos Usage
     
     @objc func tick() {
-        Clock.sync(completion: { [self] date, offset in
-            ntpDate = date ?? Date()
+        Clock.sync(completion: { [weak self]  date, offset in
+            guard let self = self else {
+                return
+            }
+            self.ntpDate = date ?? Date()
             self.ntpOffset = offset ?? 0
         })
     }
