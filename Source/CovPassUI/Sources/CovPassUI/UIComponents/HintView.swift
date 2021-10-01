@@ -21,7 +21,12 @@ public class HintView: XibView {
     @IBOutlet public var containerView: UIView!
 
     @IBOutlet public var subTitleConstraint: NSLayoutConstraint!
-
+    
+    @IBOutlet var containerLeadingConstraint: NSLayoutConstraint!
+    @IBOutlet var containerTopConstraint: NSLayoutConstraint!
+    @IBOutlet var containerTrailingConstraint: NSLayoutConstraint!
+    @IBOutlet var containerBottomConstraint: NSLayoutConstraint!
+    
     // MARK: - Lifecycle
 
     override public func initView() {
@@ -47,5 +52,12 @@ public class HintView: XibView {
         // no subtitle? disable this constraint and align to `titleLabel`
         subTitleConstraint.isActive = !(subTitleLabel.text?.isEmpty ?? true)
         super.updateConstraints()
+    }
+    
+    public func setConstraintsToEdge() {
+        containerTopConstraint.constant = 0
+        containerLeadingConstraint.constant = 0
+        containerTrailingConstraint.constant = 0
+        containerBottomConstraint.constant = 0
     }
 }

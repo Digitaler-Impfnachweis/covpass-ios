@@ -11,6 +11,19 @@ import CovPassUI
 import Foundation
 import PromiseKit
 import UIKit
+import Kronos
+
+private enum Constants {
+    enum Keys {
+        static let syncTitle = "validation_start_screen_scan_sync_message_title"
+        static let syncMessage = "validation_start_screen_scan_sync_message_text"
+    }
+    enum Config {
+        static let twoHoursAsSeconds = 7200.0
+        static let ntpOffsetInit = 0.0
+        static let schedulerIntervall = 10.0
+    }
+}
 
 class ValidatorOverviewViewModel {
     // MARK: - Properties
@@ -57,14 +70,60 @@ class ValidatorOverviewViewModel {
         return String(format: "validation_start_screen_offline_modus_rules".localized, DateUtils.displayDateTimeFormatter.string(from: date))
     }
 
+    var timeHintTitle: String {
+        Constants.Keys.syncTitle.localized
+    }
+    
+    var timeHintSubTitle: String {
+        return String(format: Constants.Keys.syncMessage.localized, ntpDateFormatted)
+    }
+    
+    var ntpDateFormatted: String {
+        return DateUtils.displayDateTimeFormatter.string(from: ntpDate)
+    }
+    
+    var timeHintIcon: UIImage {
+        .warning
+    }
+    
+    var ntpDate: Date = Date() {
+        didSet {
+            self.delegate?.viewModelDidUpdate()
+        }
+    }
+    
+    var ntpOffset: TimeInterval = Constants.Config.ntpOffsetInit
+    
+    var schedulerIntervall: TimeInterval
+
+    var timeHintIsHidden: Bool {
+        get {
+            return abs(ntpOffset) < Constants.Config.twoHoursAsSeconds
+        }
+    }
+    
     // MARK: - Lifecycle
 
-    init(router: ValidatorOverviewRouterProtocol, repository: VaccinationRepositoryProtocol, certLogic: DCCCertLogic) {
+    init(router: ValidatorOverviewRouterProtocol,
+         repository: VaccinationRepositoryProtocol,
+         certLogic: DCCCertLogic,
+         schedulerIntervall: TimeInterval = Constants.Config.schedulerIntervall) {
         self.router = router
         self.repository = repository
         self.certLogic = certLogic
+        self.schedulerIntervall = schedulerIntervall
+        self.setupTimer()
     }
 
+    private func setupTimer() {
+        self.tick()
+        Timer.scheduledTimer(timeInterval: schedulerIntervall,
+                             target: self,
+                             selector: #selector(ValidatorOverviewViewModel.tick),
+                             userInfo: nil,
+                             repeats: true)
+    }
+    
     // MARK: - Methods
 
     func updateTrustList() {
@@ -116,5 +175,18 @@ class ValidatorOverviewViewModel {
         case let .failure(error):
             throw error
         }
+    }
+    
+    // MARK: Kronos Usage
+    
+    @objc func tick(completion: (()->Void)? = nil) {
+        Clock.sync(completion: { [weak self]  date, offset in
+            guard let self = self else {
+                return
+            }
+            self.ntpDate = date ?? Date()
+            self.ntpOffset = offset ?? 0
+            completion?()
+        })
     }
 }
