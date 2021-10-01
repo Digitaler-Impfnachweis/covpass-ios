@@ -20,6 +20,8 @@ private enum Constants {
     }
     enum Config {
         static let twoHoursAsSeconds = 7200.0
+        static let ntpOffsetInit = 0.0
+        static let schedulerIntervall = 10.0
     }
 }
 
@@ -90,7 +92,7 @@ class ValidatorOverviewViewModel {
         }
     }
     
-    var ntpOffset: TimeInterval = 0.0
+    var ntpOffset: TimeInterval = Constants.Config.ntpOffsetInit
     
     var timeHintIsHidden: Bool {
         get {
@@ -109,7 +111,7 @@ class ValidatorOverviewViewModel {
 
     private func setupTimer() {
         self.tick()
-        Timer.scheduledTimer(timeInterval: 10.0,
+        Timer.scheduledTimer(timeInterval: Constants.Config.schedulerIntervall,
                              target: self,
                              selector: #selector(ValidatorOverviewViewModel.tick),
                              userInfo: nil,
