@@ -94,6 +94,8 @@ class ValidatorOverviewViewModel {
     
     var ntpOffset: TimeInterval = Constants.Config.ntpOffsetInit
     
+    var schedulerIntervall: TimeInterval
+
     var timeHintIsHidden: Bool {
         get {
             return abs(ntpOffset) < Constants.Config.twoHoursAsSeconds
@@ -102,16 +104,20 @@ class ValidatorOverviewViewModel {
     
     // MARK: - Lifecycle
 
-    init(router: ValidatorOverviewRouterProtocol, repository: VaccinationRepositoryProtocol, certLogic: DCCCertLogic) {
+    init(router: ValidatorOverviewRouterProtocol,
+         repository: VaccinationRepositoryProtocol,
+         certLogic: DCCCertLogic,
+         schedulerIntervall: TimeInterval = Constants.Config.schedulerIntervall) {
         self.router = router
         self.repository = repository
         self.certLogic = certLogic
+        self.schedulerIntervall = schedulerIntervall
         self.setupTimer()
     }
 
     private func setupTimer() {
         self.tick()
-        Timer.scheduledTimer(timeInterval: Constants.Config.schedulerIntervall,
+        Timer.scheduledTimer(timeInterval: schedulerIntervall,
                              target: self,
                              selector: #selector(ValidatorOverviewViewModel.tick),
                              userInfo: nil,

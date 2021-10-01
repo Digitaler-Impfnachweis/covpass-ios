@@ -27,8 +27,9 @@ class ValidatorOverviewViewModelTests: XCTestCase {
         let sceneCoordinator = DefaultSceneCoordinator(window: window)
         let repository = VaccinationRepository.create()
         sut = ValidatorOverviewViewModel(router: ValidatorOverviewRouter(sceneCoordinator: sceneCoordinator),
-                                               repository: repository,
-                                               certLogic:  DCCCertLogic.create())
+                                         repository: repository,
+                                         certLogic:  DCCCertLogic.create(),
+                                         schedulerIntervall: 0.5)
     }
     
     override func tearDown() {
@@ -127,10 +128,16 @@ class ValidatorOverviewViewModelTests: XCTestCase {
     
     func testTick() throws {
         let expectationOfTick = expectation(description: "Tick method has to be called and completed")
-        sut.tick {
+        let fakeDate = Date()
+        let fakeOffset = TimeInterval(-100)
+        sut.ntpDate = fakeDate
+        sut.ntpOffset = fakeOffset
+        sut.tick { [self] in
+            let dateHasChanged: Bool = sut.ntpDate != fakeDate
+            let offsetHasChanged: Bool = sut.ntpOffset != fakeOffset
+            XCTAssert(dateHasChanged && offsetHasChanged)
             expectationOfTick.fulfill()
         }
-        self.waitForExpectations(timeout: 5, handler: nil)
+        self.waitForExpectations(timeout: 1.0, handler: nil)
     }
-    
 }
