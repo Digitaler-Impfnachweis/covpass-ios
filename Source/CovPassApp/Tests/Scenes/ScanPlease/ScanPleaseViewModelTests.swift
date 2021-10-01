@@ -23,7 +23,7 @@ class ScanPleaseViewModelTests: XCTestCase {
 
     func testViewModel() throws {
         XCTAssertEqual(sut.title, "certificates_start_screen_pop_up_app_reference_title".localized)
-        XCTAssertEqual(sut.text, "certificates_start_screen_pop_up_app_reference_text".localized)
+        XCTAssertEqual(sut.text, "certificate_start_screen_pop_up_app_reference_text".localized)
         XCTAssertEqual(sut.linkDescription, "certificate_popup_checkapp_link_label".localized)
         XCTAssertEqual(sut.linkText, "certificates_start_screen_pop_up_app_reference_hyperlink".localized)
     }
