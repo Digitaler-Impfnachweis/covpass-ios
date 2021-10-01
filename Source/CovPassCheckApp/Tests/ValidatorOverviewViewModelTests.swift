@@ -125,4 +125,12 @@ class ValidatorOverviewViewModelTests: XCTestCase {
         }
     }
     
+    func testTick() throws {
+        let expectationOfTick = expectation(description: "Tick method has to be called and completed")
+        sut.tick {
+            expectationOfTick.fulfill()
+        }
+        self.waitForExpectations(timeout: 5, handler: nil)
+    }
+    
 }

@@ -173,13 +173,14 @@ class ValidatorOverviewViewModel {
     
     // MARK: Kronos Usage
     
-    @objc func tick() {
+    @objc func tick(completion: (()->Void)? = nil) {
         Clock.sync(completion: { [weak self]  date, offset in
             guard let self = self else {
                 return
             }
             self.ntpDate = date ?? Date()
             self.ntpOffset = offset ?? 0
+            completion?()
         })
     }
 }
