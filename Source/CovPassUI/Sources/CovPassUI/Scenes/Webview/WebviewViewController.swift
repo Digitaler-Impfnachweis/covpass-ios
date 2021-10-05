@@ -28,12 +28,22 @@ open class WebviewViewController: UIViewController {
     override public func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .neutralWhite
-        title = viewModel.title
+        setupTitle()
         setupNavigationBar()
 
         webView.backgroundColor = .neutralWhite
         webView.navigationDelegate = self
         webView.load(viewModel.urlRequest)
+    }
+
+    private func setupTitle() {
+        if navigationController?.navigationBar.backItem != nil {
+            title = viewModel.title
+            return
+        }
+        let label = UILabel()
+        label.attributedText = viewModel.title?.styledAs(.header_3)
+        navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: label)
     }
 
     private func setupNavigationBar() {

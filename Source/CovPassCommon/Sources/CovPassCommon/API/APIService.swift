@@ -39,9 +39,8 @@ public struct CustomURLSession: CustomURLSessionProtocol {
         Promise { seal in
             print(urlRequest.url?.absoluteString ?? "")
             let session = URLSession(configuration: URLSessionConfiguration.ephemeral,
-                                    delegate: sessionDelegate,
-                                    delegateQueue: nil)
-
+                                     delegate: self.sessionDelegate,
+                                     delegateQueue: nil)
             session.dataTask(with: urlRequest) { data, response, error in
                if let error = error {
                    if let error = error as NSError?, error.code == NSURLErrorCancelled {
