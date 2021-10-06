@@ -117,11 +117,10 @@ class ValidatorOverviewViewModel {
 
     private func setupTimer() {
         self.tick()
-        Timer.scheduledTimer(timeInterval: schedulerIntervall,
-                             target: self,
-                             selector: #selector(ValidatorOverviewViewModel.tick),
-                             userInfo: nil,
-                             repeats: true)
+        Timer.scheduledTimer(withTimeInterval: schedulerIntervall,
+                             repeats: true) { [weak self] _ in
+            self?.tick()
+        }
     }
     
     // MARK: - Methods
