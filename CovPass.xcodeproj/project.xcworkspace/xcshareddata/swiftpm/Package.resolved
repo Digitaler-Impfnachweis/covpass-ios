@@ -29,6 +29,15 @@
         }
       },
       {
+        "package": "FBSnapshotTestCase",
+        "repositoryURL": "https://github.com/uber/ios-snapshot-test-case",
+        "state": {
+          "branch": "main",
+          "revision": "f3140d1d4d650dc5bd14ce6ced4cf386594998fa",
+          "version": null
+        }
+      },
+      {
         "package": "jsonlogic",
         "repositoryURL": "https://github.com/eu-digital-green-certificates/json-logic-swift.git",
         "state": {

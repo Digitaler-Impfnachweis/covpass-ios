@@ -67,7 +67,7 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
 
     func updateTrustList() {
         repository
-            .updateTrustList()
+            .updateTrustListIfNeeded()
             .done {
                 self.delegate?.viewModelDidUpdate()
             }

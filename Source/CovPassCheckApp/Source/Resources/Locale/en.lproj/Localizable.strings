@@ -103,15 +103,15 @@
 
 "validation_start_screen_offline_modus_note_update_pattern" = "Most recent update: %@";
 
-"validation_start_screen_offline_modus_certificates" = "Certificates: %@";
+"validation_start_screen_offline_modus_certificates" = "List of certificate issuers: %@";
 
-"validation_start_screen_offline_modus_rules" = "Ruleset: %@";
+"validation_start_screen_offline_modus_rules" = "Rule set: %@";
 
-"validation_start_screen_offline_modus_information_title" = "App ruleset";
+"validation_start_screen_offline_modus_information_title" = "Update rule set";
 
-"validation_start_screen_offline_modus_information" = "Here you can manually update the ruleset to verify certificates.";
+"validation_start_screen_offline_modus_information" = "To verify scanned certificates, the app requires up-to-date lists of trusted certificate issuers as well as the current Corona rules in Germany.\n\nThese lists are updated automatically on a daily basis. You can also manually update them here at any time.";
 
-"validation_start_screen_offline_modus_button" = "Update ruleset";
+"validation_start_screen_offline_modus_button" = "Update";
 
 
 /********** popup: Check vaccination **********/

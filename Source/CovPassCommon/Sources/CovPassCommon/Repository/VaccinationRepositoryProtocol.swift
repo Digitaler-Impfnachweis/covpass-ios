@@ -19,6 +19,9 @@ public protocol VaccinationRepositoryProtocol {
     /// Get the date when the trust list got updated last
     func getLastUpdatedTrustList() -> Date?
 
+    /// Update the local trust list
+    func updateTrustListIfNeeded() -> Promise<Void>
+
     /// Update the local trust list once a day
     func updateTrustList() -> Promise<Void>
 

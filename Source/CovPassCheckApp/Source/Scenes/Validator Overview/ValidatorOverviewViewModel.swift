@@ -27,15 +27,15 @@ private enum Constants {
 
 class ValidatorOverviewViewModel {
     // MARK: - Properties
-
+    
     private let repository: VaccinationRepositoryProtocol
     private let router: ValidatorOverviewRouterProtocol
     private let certLogic: DCCCertLogic
-
+    
     var delegate: ViewModelDelegate?
-
+    
     var title: String { "validation_start_screen_title".localized }
-
+    
     var offlineAvailable: Bool {
         if let lastUpdated = repository.getLastUpdatedTrustList(),
            let date = Calendar.current.date(byAdding: .day, value: 1, to: lastUpdated),
@@ -51,25 +51,25 @@ class ValidatorOverviewViewModel {
         }
         return false
     }
-
+    
     var offlineIcon: UIImage {
         offlineAvailable ? .validationCheckmark : .warning
     }
-
+    
     var offlineTitle: String {
         offlineAvailable ? "validation_start_screen_offline_modus_note_latest_version".localized : "validation_start_screen_offline_modus_note_old_version".localized
     }
-
+    
     var offlineMessageCertificates: String? {
         guard let date = repository.getLastUpdatedTrustList() else { return nil }
         return String(format: "validation_start_screen_offline_modus_certificates".localized, DateUtils.displayDateTimeFormatter.string(from: date))
     }
-
+    
     var offlineMessageRules: String? {
         guard let date = certLogic.lastUpdatedDCCRules() else { return nil }
         return String(format: "validation_start_screen_offline_modus_rules".localized, DateUtils.displayDateTimeFormatter.string(from: date))
     }
-
+    
     var timeHintTitle: String {
         Constants.Keys.syncTitle.localized
     }
@@ -95,7 +95,7 @@ class ValidatorOverviewViewModel {
     var ntpOffset: TimeInterval = Constants.Config.ntpOffsetInit
     
     var schedulerIntervall: TimeInterval
-
+    
     var timeHintIsHidden: Bool {
         get {
             return abs(ntpOffset) < Constants.Config.twoHoursAsSeconds
@@ -103,7 +103,7 @@ class ValidatorOverviewViewModel {
     }
     
     // MARK: - Lifecycle
-
+    
     init(router: ValidatorOverviewRouterProtocol,
          repository: VaccinationRepositoryProtocol,
          certLogic: DCCCertLogic,
@@ -114,7 +114,7 @@ class ValidatorOverviewViewModel {
         self.schedulerIntervall = schedulerIntervall
         self.setupTimer()
     }
-
+    
     private func setupTimer() {
         self.tick()
         Timer.scheduledTimer(withTimeInterval: schedulerIntervall,
@@ -124,27 +124,25 @@ class ValidatorOverviewViewModel {
     }
     
     // MARK: - Methods
-
+    
     func updateTrustList() {
         repository
-            .updateTrustList()
+            .updateTrustListIfNeeded()
             .done { [weak self] in
                 self?.delegate?.viewModelDidUpdate()
             }
-            .catch { _ in }
+            .cauterize()
     }
-
+    
     func updateDCCRules() {
         certLogic
             .updateRulesIfNeeded()
             .done { [weak self] in
                 self?.delegate?.viewModelDidUpdate()
             }
-            .catch { error in
-                print(error)
-            }
+            .cauterize()
     }
-
+    
     func startQRCodeValidation() {
         firstly {
             router.scanQRCode()
@@ -162,11 +160,11 @@ class ValidatorOverviewViewModel {
             self.router.showError(error: error)
         }
     }
-
+    
     func showAppInformation() {
         router.showAppInformation()
     }
-
+    
     private func payloadFromScannerResult(_ result: ScanResult) throws -> String {
         switch result {
         case let .success(payload):

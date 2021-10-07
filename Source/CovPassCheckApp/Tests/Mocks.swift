@@ -29,13 +29,17 @@ struct ValidationResultRouterMock: ValidationResultRouterProtocol {
     var sceneCoordinator: SceneCoordinator = SceneCoordinatorMock()
 }
 
+
 class DCCCertLogicMock: DCCCertLogicProtocol {
+    
+    var lastUpdateDccrRules: Date?
+    
     var countries: [String] {
         ["DE"]
     }
 
     func lastUpdatedDCCRules() -> Date? {
-        nil
+        lastUpdateDccrRules
     }
 
     var validationError: Error?
@@ -50,31 +54,45 @@ class DCCCertLogicMock: DCCCertLogicProtocol {
     func updateRulesIfNeeded() -> Promise<Void> {
         Promise.value
     }
+    
+    var didUpdateRules: (()->Void)?
 
     func updateRules() -> Promise<Void> {
-        Promise.value
+        didUpdateRules?()
+        return Promise.value
     }
 }
 
+
 public class VaccinationRepositoryMock: VaccinationRepositoryProtocol {
+    
+    var lastUpdateTrustList: Date?
+
+    public func updateTrustListIfNeeded() -> Promise<Void> {
+        Promise.value
+    }
+    
     public func matchedCertificates(for _: CertificateList) -> [CertificatePair] {
-        return []
+        []
     }
 
     public func getLastUpdatedTrustList() -> Date? {
-        return nil
+        lastUpdateTrustList
     }
-
+    
+    var didUpdateTrustListHandler: (()->Void)?
+    
     public func updateTrustList() -> Promise<Void> {
+        didUpdateTrustListHandler?()
         return Promise.value
     }
 
     public func getCertificateList() -> Promise<CertificateList> {
-        return Promise.value(CertificateList(certificates: []))
+        Promise.value(CertificateList(certificates: []))
     }
 
     public func saveCertificateList(_: CertificateList) -> Promise<CertificateList> {
-        return Promise.value(CertificateList(certificates: []))
+        Promise.value(CertificateList(certificates: []))
     }
 
     public func delete(_: ExtendedCBORWebToken) -> Promise<Void> {
@@ -88,7 +106,7 @@ public class VaccinationRepositoryMock: VaccinationRepositoryProtocol {
     }
 
     public func setExpiryAlert(shown _: Bool, token _: ExtendedCBORWebToken) -> Promise<Void> {
-        return Promise.value
+        Promise.value
     }
 
     public func favoriteStateForCertificates(_: [ExtendedCBORWebToken]) -> Promise<Bool> {
@@ -107,6 +125,7 @@ public class VaccinationRepositoryMock: VaccinationRepositoryProtocol {
         }
     }
 }
+
 
 extension Rule {
     static var mock: Rule {
@@ -135,5 +154,19 @@ extension Rule {
     func setHash(_ hash: String) -> Rule {
         self.hash = hash
         return self
+    }
+}
+
+class ViewModelDelegateMock: ViewModelDelegate {
+    
+    var didUpdate: (()->Void)?
+    var didFail: ((Error)->Void)?
+
+    func viewModelDidUpdate() {
+        didUpdate?()
+    }
+    
+    func viewModelUpdateDidFailWithError(_ error: Error) {
+        didFail?(error)
     }
 }
