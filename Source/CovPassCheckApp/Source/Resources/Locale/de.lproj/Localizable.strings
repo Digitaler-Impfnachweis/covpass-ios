@@ -103,15 +103,15 @@
 
 "validation_start_screen_offline_modus_note_update_pattern" = "Letztes Update: %@";
 
-"validation_start_screen_offline_modus_certificates" = "Zertifikate: %@";
+"validation_start_screen_offline_modus_certificates" = "Liste der Zertifikatsaussteller: %@";
 
-"validation_start_screen_offline_modus_rules" = "Regelsets: %@";
+"validation_start_screen_offline_modus_rules" = "Prüfregeln: %@";
 
-"validation_start_screen_offline_modus_information_title" = "App Regelset";
+"validation_start_screen_offline_modus_information_title" = "Prüfregeln aktualisieren";
 
-"validation_start_screen_offline_modus_information" = "Hier können Sie Ihr Regelset zur Verifizierung Ihrer Zertifikate manuell aktualisieren.";
+"validation_start_screen_offline_modus_information" = "Zur Überprüfung eingescannter Zertifikate benötigt die App aktuelle Listen der vertrauenswürdigen Zertifikatsaussteller und der momentan in Deutschland geltenden Corona-Regeln.\n\nDiese Listen aktualisieren sich täglich automatisch. Sie können hier auch jederzeit eine manuelle Aktualisierung vornehmen.";
 
-"validation_start_screen_offline_modus_button" = "Regelset aktualisieren";
+"validation_start_screen_offline_modus_button" = "Aktualisieren";
 
 
 /********** popup: Check vaccination **********/
@@ -166,7 +166,7 @@
 
 "functional_validation_check_popup_unsuccessful_certificate_subheadline_expiration" = "Abgelaufener Test";
 
-"functional_validation_check_popup_unsuccessful_certificate_subheadline_expiration_text" = "Ein negativer Schnelltest ist für maximal 24 Stunden gültig. Ein negativer PCR-Test ist für maximal 72 Stunden gültig.";
+"functional_validation_check_popup_unsuccessful_certificate_subheadline_expiration_text" = "Ein negativer Schnelltest ist für maximal 48 Stunden gültig. Ein negativer PCR-Test ist für maximal 72 Stunden gültig.";
 
 "functional_validation_check_popup_unsuccessful_certificate_subheadline_protection" = "Noch nicht gültiger Schutz";
 
