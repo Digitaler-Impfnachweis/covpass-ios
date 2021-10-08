@@ -124,7 +124,9 @@
 
 "certificate_popup_checkapp_link_label" = "Arbeiten Sie in der Gastronomie oder planen Sie eine Veranstaltung? Prüfen Sie schnell und sicher die Zertifikate Ihrer Gäste:";
 
-"certificates_start_screen_pop_up_app_reference_hyperlink" = "#Zur CovPassCheck-App (Externer Link)::$0#";
+"certificates_start_screen_pop_up_app_reference_hyperlink" = "Zur CovPassCheck-App (Externer Link)";
+
+"certificates_start_screen_pop_up_app_reference_hyperlink_linked" = "#Zur CovPassCheck-App (Externer Link)::$0#";
 
 "certificates_start_screen_pop_up_app_reference_button" = "OK";
 
