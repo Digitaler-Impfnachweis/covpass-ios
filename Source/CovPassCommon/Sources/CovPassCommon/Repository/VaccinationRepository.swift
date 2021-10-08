@@ -117,7 +117,7 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
         try? userDefaults.fetch(UserDefaults.keyLastUpdatedTrustList) as? Date
     }
 
-    public func updateTrustList() -> Promise<Void> {
+    public func updateTrustListIfNeeded() -> Promise<Void> {
         firstly {
             Promise { seal in
                 if let lastUpdated = try userDefaults.fetch(UserDefaults.keyLastUpdatedTrustList) as? Date,
@@ -132,6 +132,13 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
             }
         }
         .then(on: .global()) {
+            updateTrustList()
+        }
+        
+    }
+    
+    public func updateTrustList() -> Promise<Void> {
+        firstly {
             service.fetchTrustList()
         }
         .map(on: .global()) { trustList -> TrustList in

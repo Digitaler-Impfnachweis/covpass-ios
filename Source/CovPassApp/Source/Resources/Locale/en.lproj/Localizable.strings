@@ -124,7 +124,7 @@
 
 "certificate_popup_checkapp_link_label" = "Do you work in a restaurant or at events? Check your customers’ certificates with ease:";
 
-"certificates_start_screen_pop_up_app_reference_hyperlink" = "Download the CovPassCheck app (External Link)";
+"certificates_start_screen_pop_up_app_reference_hyperlink" = "#Download the CovPassCheck app (External Link)::$0#";
 
 "certificates_start_screen_pop_up_app_reference_button" = "OK";
 

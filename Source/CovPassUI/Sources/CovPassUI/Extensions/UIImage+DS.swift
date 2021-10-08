@@ -170,10 +170,13 @@ public extension UIImage {
 
     @ImageLoader(name: "status_expired")
     private(set) static var statusExpired
-
+    
     @ImageLoader(name: "info_hui")
     private(set) static var info
-
+    
+    @ImageLoader(name: "signal_info_hui")
+    private(set) static var infoSignal
+    
     @ImageLoader(name: "flag_de")
     private(set) static var flagDE
 
