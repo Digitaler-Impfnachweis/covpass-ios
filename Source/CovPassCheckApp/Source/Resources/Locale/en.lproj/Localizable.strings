@@ -166,7 +166,7 @@
 
 "functional_validation_check_popup_unsuccessful_certificate_subheadline_expiration" = "Test expired";
 
-"functional_validation_check_popup_unsuccessful_certificate_subheadline_expiration_text" = "A negative rapid test has a maximal validity of 24 hours. A negative PCR test has a maximal validity of 72 hours.";
+"functional_validation_check_popup_unsuccessful_certificate_subheadline_expiration_text" = "A negative rapid test has a maximal validity of 48 hours. A negative PCR test has a maximal validity of 72 hours.";
 
 "functional_validation_check_popup_unsuccessful_certificate_subheadline_protection" = "Protection not yet valid";
 
