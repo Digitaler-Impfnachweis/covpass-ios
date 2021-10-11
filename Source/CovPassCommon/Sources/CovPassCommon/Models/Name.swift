@@ -69,10 +69,10 @@ public class Name: Codable {
 
     public required init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
-        gn = try? values.decode(String.self, forKey: .gn).trimmingCharacters(in: .whitespaces)
-        fn = try? values.decode(String.self, forKey: .fn).trimmingCharacters(in: .whitespaces)
-        gnt = try? values.decode(String.self, forKey: .gnt).trimmingCharacters(in: .whitespaces)
-        fnt = try values.decode(String.self, forKey: .fnt).trimmingCharacters(in: .whitespaces)
+        gn = try? values.decodeTrimmedString(forKey: .gn)
+        fn = try? values.decodeTrimmedString(forKey: .fn)
+        gnt = try? values.decodeTrimmedString(forKey: .gnt)
+        fnt = try values.decodeTrimmedString(forKey: .fnt)
     }
 
     public func encode(to encoder: Encoder) throws {

@@ -85,21 +85,21 @@ public class Test: Codable {
 
     public required init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
-        tg = try values.decode(String.self, forKey: .tg)
-        tt = try values.decode(String.self, forKey: .tt)
-        nm = try? values.decode(String.self, forKey: .nm)
-        ma = try? values.decode(String.self, forKey: .ma)
-        guard let scDateString = try? values.decode(String.self, forKey: .sc),
+        tg = try values.decodeTrimmedString(forKey: .tg)
+        tt = try values.decodeTrimmedString(forKey: .tt)
+        nm = try? values.decodeTrimmedString(forKey: .nm)
+        ma = try? values.decodeTrimmedString(forKey: .ma)
+        guard let scDateString = try? values.decodeTrimmedString(forKey: .sc),
               let scDate = DateUtils.parseDate(scDateString)
         else {
             throw ApplicationError.missingData("Value is missing for Test.sc")
         }
         sc = scDate
-        tr = try values.decode(String.self, forKey: .tr)
-        tc = try values.decode(String.self, forKey: .tc)
-        co = try values.decode(String.self, forKey: .co)
-        `is` = try values.decode(String.self, forKey: .is)
-        ci = try values.decode(String.self, forKey: .ci)
+        tr = try values.decodeTrimmedString(forKey: .tr)
+        tc = try values.decodeTrimmedString(forKey: .tc)
+        co = try values.decodeTrimmedString(forKey: .co)
+        `is` = try values.decodeTrimmedString(forKey: .is)
+        ci = try values.decodeTrimmedString(forKey: .ci)
     }
 
     public func encode(to encoder: Encoder) throws {

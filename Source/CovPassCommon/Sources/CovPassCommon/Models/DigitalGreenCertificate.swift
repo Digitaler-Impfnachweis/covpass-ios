@@ -67,17 +67,17 @@ public struct DigitalGreenCertificate: Codable {
     public init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         nam = try values.decode(Name.self, forKey: .nam)
-        if let dobDateString = try? values.decode(String.self, forKey: .dob) {
+        if let dobDateString = try? values.decodeTrimmedString(forKey: .dob) {
             dob = DateUtils.parseDate(dobDateString)
         }
-        dobString = try? values.decode(String.self, forKey: .dobString)
+        dobString = try? values.decodeTrimmedString(forKey: .dobString)
         if dobString == nil {
-            dobString = try? values.decode(String.self, forKey: .dob)
+            dobString = try? values.decodeTrimmedString(forKey: .dob)
         }
         v = try? values.decode([Vaccination].self, forKey: .v)
         t = try? values.decode([Test].self, forKey: .t)
         r = try? values.decode([Recovery].self, forKey: .r)
-        ver = try values.decode(String.self, forKey: .ver)
+        ver = try values.decodeTrimmedString(forKey: .ver)
 
         if v == nil, t == nil, r == nil {
             throw ApplicationError.missingData("DigitalGreenCertificate doesn't contain any of the following: Vaccination, Test, Recovery")

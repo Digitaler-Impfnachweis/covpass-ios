@@ -83,21 +83,21 @@ public class Vaccination: Codable {
 
     public required init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
-        tg = try values.decode(String.self, forKey: .tg)
-        vp = try values.decode(String.self, forKey: .vp)
-        mp = try values.decode(String.self, forKey: .mp)
-        ma = try values.decode(String.self, forKey: .ma)
+        tg = try values.decodeTrimmedString(forKey: .tg)
+        vp = try values.decodeTrimmedString(forKey: .vp)
+        mp = try values.decodeTrimmedString(forKey: .mp)
+        ma = try values.decodeTrimmedString(forKey: .ma)
         dn = try values.decode(Int.self, forKey: .dn)
         sd = try values.decode(Int.self, forKey: .sd)
-        guard let dtDateString = try? values.decode(String.self, forKey: .dt),
+        guard let dtDateString = try? values.decodeTrimmedString(forKey: .dt),
               let dtDate = DateUtils.parseDate(dtDateString)
         else {
             throw ApplicationError.missingData("Value is missing for Vaccination.dt")
         }
         dt = dtDate
-        co = try values.decode(String.self, forKey: .co)
-        `is` = try values.decode(String.self, forKey: .is)
-        ci = try values.decode(String.self, forKey: .ci)
+        co = try values.decodeTrimmedString(forKey: .co)
+        `is` = try values.decodeTrimmedString(forKey: .is)
+        ci = try values.decodeTrimmedString(forKey: .ci)
     }
 
     public func encode(to encoder: Encoder) throws {
