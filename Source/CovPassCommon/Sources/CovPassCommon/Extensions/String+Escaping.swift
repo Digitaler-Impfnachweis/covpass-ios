@@ -10,9 +10,10 @@ import Foundation
 
 public extension String {
     var sanitizedFileName: String {
-        let allowed = NSMutableCharacterSet.alphanumeric()
-        allowed.addCharacters(in: "-._")
-        return addingPercentEncoding(withAllowedCharacters: allowed as CharacterSet) ?? self
+        // Allow all letters, any digits, ., _, - and remove everything else
+        guard let regex = try? NSRegularExpression(pattern: "[^\\p{L}|\\d|\\.|_|-]", options: NSRegularExpression.Options.caseInsensitive) else { return self }
+        let range = NSMakeRange(0, self.count)
+        return regex.stringByReplacingMatches(in: self, options: [], range: range, withTemplate: "")
     }
 
     var sanitizedXMLString: String {
