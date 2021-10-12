@@ -16,14 +16,15 @@ import XCTest
 class StringFilenameTests: XCTestCase {
     func testFilenameSanitizer() {
         XCTAssertEqual("file.txt".sanitizedFileName, "file.txt")
-
-        XCTAssertEqual("file/.txt".sanitizedFileName, "file%2F.txt")
-        XCTAssertEqual("file\\.txt".sanitizedFileName, "file%5C.txt")
-        XCTAssertEqual("file^.txt".sanitizedFileName, "file%5E.txt")
+        XCTAssertEqual("file/.txt".sanitizedFileName, "file.txt")
+        XCTAssertEqual("file\\.txt".sanitizedFileName, "file.txt")
+        XCTAssertEqual("file^.txt".sanitizedFileName, "file.txt")
         XCTAssertEqual(".file.txt".sanitizedFileName, ".file.txt")
-
-        XCTAssertEqual("~/file.txt".sanitizedFileName, "%7E%2Ffile.txt")
-        XCTAssertEqual("/file.txt".sanitizedFileName, "%2Ffile.txt")
+        XCTAssertEqual("~/file.txt".sanitizedFileName, "file.txt")
+        XCTAssertEqual("/file.txt".sanitizedFileName, "file.txt")
+        XCTAssertEqual("_-file.txt".sanitizedFileName, "_-file.txt")
+        XCTAssertEqual("!@#%$^&*=~\"\\<>+{}()[]/:;'`?,".sanitizedFileName, "")
+        XCTAssertEqual("aouäöüÄÖÜß.pdf".sanitizedFileName, "aouäöüÄÖÜß.pdf")
     }
 
     func testPathTraversing() {
@@ -39,6 +40,7 @@ class StringFilenameTests: XCTestCase {
 
         // check if all escaped file names stay in `tempDir`
         BLNS.testStrings.forEach { string in
+            if string.sanitizedFileName.isEmpty { return }
             let checkFile = tempDir.appendingPathComponent(string.sanitizedFileName)
             let checkDir = checkFile.standardizedFileURL.deletingLastPathComponent()
 
