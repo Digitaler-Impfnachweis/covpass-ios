@@ -51,28 +51,28 @@ public class Recovery: Codable {
 
     public required init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
-        tg = try values.decode(String.self, forKey: .tg)
-        guard let frDateString = try? values.decode(String.self, forKey: .fr),
+        tg = try values.decodeTrimmedString(forKey: .tg)
+        guard let frDateString = try? values.decodeTrimmedString(forKey: .fr),
               let frDate = DateUtils.parseDate(frDateString)
         else {
             throw ApplicationError.missingData("Value is missing for Test.sc")
         }
         fr = frDate
-        guard let dfDateString = try? values.decode(String.self, forKey: .df),
+        guard let dfDateString = try? values.decodeTrimmedString(forKey: .df),
               let dfDate = DateUtils.parseDate(dfDateString)
         else {
             throw ApplicationError.missingData("Value is missing for Test.sc")
         }
         df = dfDate
-        guard let duDateString = try? values.decode(String.self, forKey: .du),
+        guard let duDateString = try? values.decodeTrimmedString(forKey: .du),
               let duDate = DateUtils.parseDate(duDateString)
         else {
             throw ApplicationError.missingData("Value is missing for Test.sc")
         }
         du = duDate
-        co = try values.decode(String.self, forKey: .co)
-        `is` = try values.decode(String.self, forKey: .is)
-        ci = try values.decode(String.self, forKey: .ci)
+        co = try values.decodeTrimmedString(forKey: .co)
+        `is` = try values.decodeTrimmedString(forKey: .is)
+        ci = try values.decodeTrimmedString(forKey: .ci)
     }
 
     public func encode(to encoder: Encoder) throws {

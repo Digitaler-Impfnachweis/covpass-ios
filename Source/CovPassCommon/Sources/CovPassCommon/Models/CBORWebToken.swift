@@ -55,7 +55,7 @@ public struct CBORWebToken: Codable {
 
     public init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
-        iss = try values.decode(String.self, forKey: .iss)
+        iss = try values.decodeTrimmedString(forKey: .iss)
         if let iatTimestamp = try? values.decode(Int.self, forKey: .iat) {
             iat = Date(timeIntervalSince1970: TimeInterval(iatTimestamp))
         }

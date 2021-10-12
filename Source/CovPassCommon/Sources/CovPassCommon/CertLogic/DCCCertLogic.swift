@@ -10,6 +10,10 @@ import CertLogic
 import Foundation
 import PromiseKit
 
+private enum Constants {
+    static let defaultCountry = "DE"
+}
+
 public class RuleSimple: Codable {
     var identifier: String
     var version: String
@@ -26,14 +30,10 @@ public class RuleSimple: Codable {
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
-        identifier = try container.decode(String.self, forKey: .identifier)
-        version = try container.decode(String.self, forKey: .version)
-        hash = try container.decode(String.self, forKey: .hash)
-        if let country = try container.decodeIfPresent(String.self, forKey: .country) {
-            self.country = country
-        } else {
-            country = "DE" // currently booster rules are DE only
-        }
+        identifier = try container.decodeTrimmedString(forKey: .identifier)
+        version = try container.decodeTrimmedString(forKey: .version)
+        hash = try container.decodeTrimmedString(forKey: .hash)
+        country = try container.decodeStringIfPresentOr(defaultValue: Constants.defaultCountry, forKey: .country) // currently booster rules are DE only
     }
 }
 
