@@ -13,8 +13,16 @@ import UIKit
 
 private enum Constants {
     static let image = UIImage.resultError
-    static let title = "functional_validation_check_popup_unsuccessful_certificate_title".localized
-    static let subTitle = "functional_validation_check_popup_unsuccessful_certificate_subline".localized
+
+    enum Title {
+        static let technical = "technical_validation_check_popup_unsuccessful_certificate_title".localized
+        static let functional = "functional_validation_check_popup_unsuccessful_certificate_title".localized
+    }
+    enum SubTitle {
+        static let technical = "technical_validation_check_popup_unsuccessful_certificate_subline".localized
+        static let functional = "functional_validation_check_popup_unsuccessful_certificate_subline".localized
+    }
+
     enum Paragraphs {
         static let technicalIssues = [
             Paragraph(icon: .technicalError,
@@ -47,25 +55,29 @@ class ErrorResultViewModel: ValidationResultViewModel {
     var certificate: CBORWebToken?
     var error: Error
 
+    private var validationResultError: ValidationResultError {
+        switch error {
+        case is ValidationResultError:
+            return error as! ValidationResultError
+        default:
+            return .technical
+        }
+    }
+
     var icon: UIImage? {
         Constants.image
     }
 
     var resultTitle: String {
-        Constants.title
+        validationResultError == .functional ? Constants.Title.functional : Constants.Title.technical
     }
 
     var resultBody: String {
-        Constants.subTitle
+        validationResultError == .functional ? Constants.SubTitle.functional : Constants.SubTitle.technical
     }
 
     var paragraphs: [Paragraph] {
-        switch error.mapToValidationResultError() {
-        case .functional:
-            return Constants.Paragraphs.functionalIssues
-        case .technical:
-            return Constants.Paragraphs.technicalIssues
-        }
+        validationResultError == .functional ? Constants.Paragraphs.functionalIssues : Constants.Paragraphs.technicalIssues
     }
 
     var info: String? {
@@ -84,16 +96,5 @@ class ErrorResultViewModel: ValidationResultViewModel {
         self.repository = repository
         self.certificate = certificate
         self.error = error
-    }
-}
-
-private extension Error {
-    func mapToValidationResultError() -> ValidationResultError {
-        switch self {
-        case is ValidationResultError:
-            return self as! ValidationResultError
-        default:
-            return .technical
-        }
     }
 }
