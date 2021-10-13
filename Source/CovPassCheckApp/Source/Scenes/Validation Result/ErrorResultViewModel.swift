@@ -56,12 +56,7 @@ class ErrorResultViewModel: ValidationResultViewModel {
     var error: Error
 
     private var validationResultError: ValidationResultError {
-        switch error {
-        case is ValidationResultError:
-            return error as! ValidationResultError
-        default:
-            return .technical
-        }
+        error as? ValidationResultError ?? .technical        
     }
 
     var icon: UIImage? {
