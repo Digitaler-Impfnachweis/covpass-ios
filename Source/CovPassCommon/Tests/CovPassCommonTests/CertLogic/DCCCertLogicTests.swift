@@ -52,7 +52,7 @@ class DCCCertLogicTests: XCTestCase {
     }
 
     func testCountries() {
-        XCTAssertEqual(sut.countries.count, 32)
+        XCTAssertEqual(sut.countries.count, 43)
     }
 
     func testLocalValueSets() {

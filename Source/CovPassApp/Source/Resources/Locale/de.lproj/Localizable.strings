@@ -89,13 +89,15 @@
 
 "accessibility_vaccination_start_screen_label_add_certificate" = "Nachweis hinzufügen";
 
+"accessibility_start_screen_info_announce" = "Der Startbildschirm wurde geöffnet";
+
 "vaccination_start_screen_title" = "Digitale COVID-Zertifikate der EU";
 
 "accessibility_vaccination_start_screen_title" = "Digitale COVID-Zertifikate der EU. Es folgen sensible Gesundheitsdaten. Bitte achten Sie darauf, dass keine andere Person mithört oder mitliest.";
 
 "vaccination_start_screen_note_title" = "Fügen Sie einen Nachweis hinzu";
 
-"vaccination_start_screen_note_message" = "Sie haben aktuell kein digitales COVID-Zertifikat der EU gespeichert. Drücken Sie auf das Plus-Symbol, um einen digitalen Nachweis hinzuzufügen.";
+"vaccination_start_screen_note_message" = "Sie haben aktuell kein digitales COVID-Zertifikat der EU gespeichert. Drücken Sie auf die Taste \"Nachweis hinzufügen\" (Plus-Symbol), um ein digitales COVID-Zertifikat der EU hinzuzufügen.";
 
 "accessibility_vaccination_start_screen_label_qrcode" = "Schwarzer QR-Code auf weißem Hintergrund";
 
@@ -145,7 +147,7 @@
 
 "accessibility_certificate_add_popup_announce" = "Die Ansicht \"Nachweis hinzufügen\" wurde geöffnet";
 
-"accessibility_scan_success_announce" = "Das Zertifikat wurde erfolgreich hinzugefügt";
+"accessibility_scan_success_announce" = "Zertifikat von %@ wurde erfolgreich hinzugefügt";
 
 "accessibility_certificate_add_popup_image" = "Bild: Person hält das Smartphone über drei unterschiedliche Zertifikate mit QR-Code";
 
@@ -170,6 +172,8 @@
 "certificate_add_dialog_camera_access_action_button" = "Zugriff erlauben";
 
 "accessibility_certificate_add_dialog_camera_access_label_close" = "Schließen";
+
+"accessibility_scan_dialog_camera_access_announce" = "Die Ansicht \"Kamerazugriff benötigt\" wurde geöffnet";
 
 "accessibility_scan_camera_announce" = "Kamera-Ansicht wurde geöffnet";
 
@@ -220,6 +224,10 @@
 "accessibility_certificate_check_validity_selection_country_unselected" = "%@, auswählbar";
 
 "certificate_check_validity_message" = "Prüfen Sie vorab, ob Ihre Zertifikate in verschiedenen Ländern gültig sind. Hierfür werden die geltenden Einreiseregeln des gewählten Reiselands berücksichtigt.";
+
+"certificate_check_validity_travel_rules_not_up_to_title" = "Reiseregeln nicht aktuell";
+
+"certificate_check_validity_travel_rules_not_up_to_message" = "Die Reiseregeln werden in der App alle 24 Stunden aktualisiert. Leider schlug die letzte Aktualisierung fehl. Stellen Sie sicher, dass Ihr Smartphone mit dem Internet verbunden ist und versuchen Sie es erneut.";
 
 "certificate_check_validity_selection_country" = "Land";
 
@@ -297,6 +305,120 @@
 "CH" = "Schweiz";
 
 "UA" = "Ukraine";
+
+"VA" = "Vatikanstadt";
+
+"SM" = "San Marino";
+
+"TR" = "Türkei";
+
+"MK" = "Nordmazedonien";
+
+"AD" = "Andorra";
+
+"MC" = "Monaco";
+
+"FO" = "Färöer-Inseln";
+
+"MA" = "Marokko";
+
+"AL" = "Albanien";
+
+"IL" = "Israel";
+
+"PA" = "Panama";
+
+"TG" = "Togo";
+
+"SG" = "Singapur";
+
+"GB" = "Großbritannien";
+
+"AM" = "Armenien";
+
+"GE" = "Georgien";
+
+"NZ" = "Neuseeland";
+
+"DZ" = "Algerien";
+
+"AZ" = "Aserbaidschan";
+
+"BH" = "Bahrain";
+
+"BJ" = "Benin";
+
+"BA" = "Bosnien und Herzegowina";
+
+"BR" = "Brasilien";
+
+"BI" = "Burundi ";
+
+"CV" = "Kap Verde";
+
+"CA" = "Kanada";
+
+"CL" = "Chile";
+
+"CO" = "Kolumbien";
+
+"DO" = "Dominikanische Republik";
+
+"SV" = "El Salvador";
+
+"EG" = "Ägypten";
+
+"HK" = "Hongkong";
+
+"JP" = "Japan";
+
+"JO" = "Jordanien";
+
+"KZ" = "Kasachstan";
+
+"KE" = "Kenia";
+
+"KR" = "Republik Korea";
+
+"XK" = "Kosovo";
+
+"KW" = "Kuwait";
+
+"LB" = "Libanon";
+
+"MY" = "Malaysia";
+
+"MN" = "Mongolei";
+
+"ME" = "Montenegro";
+
+"MD" = "Moldawien";
+
+"RU" = "Russland";
+
+"RW" = "Ruanda";
+
+"RS" = "Serbien";
+
+"SD" = "Sudan";
+
+"TW" = "Taiwan";
+
+"TZ" = "Tansania";
+
+"TH" = "Thailand";
+
+"TN" = "Tunesien";
+
+"AE" = "Vereinte Arabische Emirate";
+
+"UG" = "Uganda";
+
+"US" = "Vereinigte Staaten von Amerika";
+
+"UY" = "Uruguay";
+
+"VN" = "Vietnam";
 
 "certificate_check_validity_selection_country_note" = "Sie finden Ihr Reiseland nicht? In einem mehrstufigen Prozess werden nach und nach mehr Länder verfügbar gemacht. \n\nMehr Informationen finden Sie in den Häufigen Fragen und unter #https://reopen.europa.eu::https://reopen.europa.eu#.";
 
