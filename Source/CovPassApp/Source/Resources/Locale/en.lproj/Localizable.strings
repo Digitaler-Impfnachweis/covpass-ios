@@ -95,7 +95,7 @@
 
 "vaccination_start_screen_note_title" = "Add a certificate";
 
-"vaccination_start_screen_note_message" = "You do not have any EU Digital COVID Certificate saved at the moment. Tap the plus symbol to add a digital certificate.";
+"vaccination_start_screen_note_message" = "You do not have any EU Digital COVID Certificate saved at the moment. Tap the button \"Add a certificate\" (plus symbol) to add a Digital COVID Certificate.";
 
 "accessibility_vaccination_start_screen_label_qrcode" = "Black QR code on white background";
 
@@ -220,6 +220,10 @@
 "accessibility_certificate_check_validity_selection_country_unselected" = "%@, selectable";
 
 "certificate_check_validity_message" = "Check beforehand if your certificates are valid in different countries. This tool checks them against the travel regulations applicable in your chosen destination country.";
+
+"certificate_check_validity_travel_rules_not_up_to_title" = "Travel rules not up to date";
+
+"certificate_check_validity_travel_rules_not_up_to_message" = "The travel rules are updated in the app every 24 hours. Unfortunately, the last update failed. Make sure your smartphone is connected to the internet and try again.";
 
 "certificate_check_validity_selection_country" = "Country";
 
@@ -482,7 +486,7 @@
 
 "vaccination_certificate_overview_complete_title" = "Fully vaccinated";
 
-"certificates_overview_qr_scan_hint" = "This QR code can be verified reliably with the CovPassCheck app.";
+"certificates_overview_qr_scan_hint" = "This QR code can be reliably verified with the CovPassCheck app.";
 
 "vaccination_certificate_overview_complete_message" = "Show this QR code when needed. Be ready to show ID when your QR code is checked.";
 

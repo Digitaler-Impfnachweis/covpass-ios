@@ -12,28 +12,30 @@ import PromiseKit
 
 public class VaccinationRepositoryMock: VaccinationRepositoryProtocol {
     
+    var lastUpdatedTrustList: Date?
+
     public func matchedCertificates(for _: CertificateList) -> [CertificatePair] {
-        return []
+        []
     }
 
     public func getLastUpdatedTrustList() -> Date? {
-        return nil
+        lastUpdatedTrustList
     }
     
     public func updateTrustListIfNeeded() -> Promise<Void> {
-        return Promise.value
+        Promise.value
     }
 
     public func updateTrustList() -> Promise<Void> {
-        return Promise.value
+        Promise.value
     }
 
     public func getCertificateList() -> Promise<CertificateList> {
-        return Promise.value(CertificateList(certificates: []))
+        Promise.value(CertificateList(certificates: []))
     }
 
     public func saveCertificateList(_: CertificateList) -> Promise<CertificateList> {
-        return Promise.value(CertificateList(certificates: []))
+        Promise.value(CertificateList(certificates: []))
     }
 
     public func delete(_: ExtendedCBORWebToken) -> Promise<Void> {
@@ -47,7 +49,7 @@ public class VaccinationRepositoryMock: VaccinationRepositoryProtocol {
     }
 
     public func setExpiryAlert(shown _: Bool, token _: ExtendedCBORWebToken) -> Promise<Void> {
-        return Promise.value
+        Promise.value
     }
 
     public func favoriteStateForCertificates(_: [ExtendedCBORWebToken]) -> Promise<Bool> {
@@ -66,3 +68,4 @@ public class VaccinationRepositoryMock: VaccinationRepositoryProtocol {
         }
     }
 }
+

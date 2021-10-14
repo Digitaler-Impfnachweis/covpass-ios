@@ -13,6 +13,16 @@ import LocalAuthentication
 import PromiseKit
 import UIKit
 
+private enum Constants {
+    enum Keys {
+        static let timeHintTitle = "certificate_check_validity_travel_rules_not_up_to_title".localized
+        static let timeHintDescription = "certificate_check_validity_travel_rules_not_up_to_message".localized
+    }
+    enum Config {
+        static let dayToAdd = 1
+    }
+}
+
 struct CertificateResult {
     var certificate: ExtendedCBORWebToken
     var result: [ValidationResult]
@@ -29,72 +39,68 @@ struct CertificateResult {
 
 class RuleCheckViewModel: BaseViewModel, CancellableViewModelProtocol {
     // MARK: - Properties
-
+    
     private var certificateList: CertificateList?
     weak var delegate: ViewModelDelegate?
-    let router: RuleCheckRouterProtocol
-    let resolver: Resolver<Void>
+    let router: RuleCheckRouterProtocol?
+    let resolver: Resolver<Void>?
     let repository: VaccinationRepositoryProtocol
-    let certLogic: DCCCertLogic
+    let certLogic: DCCCertLogicProtocol
     var country = "DE"
     var date = Date()
-
+    
     var isLoading: Bool = true
-
+    
     var validationViewModels = [CertificateItemViewModel]()
-
+    
+    var timeHintTitle: String { Constants.Keys.timeHintTitle }
+    
+    var timeHintSubTitle: String { Constants.Keys.timeHintDescription }
+    
+    var timeHintIcon: UIImage { .warning }
+    
+    var timeHintIsHidden: Bool {
+        if let lastUpdated = repository.getLastUpdatedTrustList(),
+           let date = Calendar.current.date(byAdding: .day, value: Constants.Config.dayToAdd, to: lastUpdated),
+           Date() < date
+        {
+            return true
+        }
+        if let lastUpdated = certLogic.lastUpdatedDCCRules(),
+           let date = Calendar.current.date(byAdding: .day, value: Constants.Config.dayToAdd, to: lastUpdated),
+           Date() < date
+        {
+            return true
+        }
+        return false
+    }
+    
     // MARK: - Lifecycle
-
-    init(
-        router: RuleCheckRouterProtocol,
-        resolvable: Resolver<Void>,
-        repository: VaccinationRepositoryProtocol,
-        certLogic: DCCCertLogic
-    ) {
+    
+    init(router: RuleCheckRouterProtocol?,
+         resolvable: Resolver<Void>?,
+         repository: VaccinationRepositoryProtocol,
+         certLogic: DCCCertLogicProtocol) {
         self.router = router
         resolver = resolvable
         self.repository = repository
         self.certLogic = certLogic
     }
-
+    
     func updateRules() {
         firstly {
             repository.getCertificateList()
         }
         .then { (list: CertificateList) -> Promise<Void> in
             self.certificateList = list
-            return self.certLogic.updateRules()
+            return Promise.value
         }
         .done { _ in
             self.validateCertificates()
         }
-        .catch { _ in
-            self.router.showDialog(
-                title: "error_check_validity_no_internet_title".localized,
-                message: "error_check_validity_no_internet_message".localized,
-                actions: [
-                    DialogAction(
-                        title: "error_check_validity_no_internet_button_try_again".localized,
-                        style: .default,
-                        isEnabled: true,
-                        completion: { [weak self] _ in
-                            self?.updateRules()
-                        }
-                    ),
-                    DialogAction(
-                        title: "error_check_validity_no_internet_button_cancel".localized,
-                        style: .default,
-                        isEnabled: true,
-                        completion: { [weak self] _ in
-                            self?.cancel()
-                        }
-                    )
-                ],
-                style: .alert
-            )
-        }
+        .cauterize()
     }
-
+    
     func validateCertificates() {
         DispatchQueue.global(qos: .userInitiated).async { [weak self] in
             guard let list = self?.certificateList else {
@@ -111,7 +117,10 @@ class RuleCheckViewModel: BaseViewModel, CancellableViewModelProtocol {
                     do {
                         if let country = self?.country.uppercased(),
                            let date = self?.date,
-                           let res = try self?.certLogic.validate(countryCode: country, validationClock: date, certificate: cert.vaccinationCertificate)
+                           let res = try self?.certLogic.validate(type: .eu,
+                                                                  countryCode: country,
+                                                                  validationClock: date,
+                                                                  certificate: cert.vaccinationCertificate)
                         {
                             results.append(CertificateResult(certificate: cert, result: res))
                         }
@@ -126,7 +135,7 @@ class RuleCheckViewModel: BaseViewModel, CancellableViewModelProtocol {
             }
         }
     }
-
+    
     private func createValidationViewModels(_ results: [[CertificateResult]]) {
         var items = [CertificateItemViewModel]()
         results.forEach { res in
@@ -142,13 +151,13 @@ class RuleCheckViewModel: BaseViewModel, CancellableViewModelProtocol {
         isLoading = false
         delegate?.viewModelDidUpdate()
     }
-
+    
     func cancel() {
-        resolver.cancel()
+        resolver?.cancel()
     }
-
+    
     func showCountrySelection() {
-        router.showCountrySelection(countries: certLogic.countries, country: country)
+        router?.showCountrySelection(countries: certLogic.countries, country: country)
             .done { newCountry in
                 self.isLoading = true
                 self.country = newCountry
@@ -159,9 +168,9 @@ class RuleCheckViewModel: BaseViewModel, CancellableViewModelProtocol {
                 print(error)
             }
     }
-
+    
     func showDateSelection() {
-        router.showDateSelection(date: date)
+        router?.showDateSelection(date: date)
             .done { newDate in
                 self.isLoading = true
                 self.date = newDate
@@ -172,8 +181,8 @@ class RuleCheckViewModel: BaseViewModel, CancellableViewModelProtocol {
                 print(error)
             }
     }
-
+    
     func showDetail(_ result: CertificateResult) {
-        router.showResultDetail(result: result, country: country, date: date).cauterize()
+        router?.showResultDetail(result: result, country: country, date: date).cauterize()
     }
 }

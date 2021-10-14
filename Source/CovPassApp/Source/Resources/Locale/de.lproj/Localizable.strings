@@ -95,7 +95,7 @@
 
 "vaccination_start_screen_note_title" = "Fügen Sie einen Nachweis hinzu";
 
-"vaccination_start_screen_note_message" = "Sie haben aktuell kein digitales COVID-Zertifikat der EU gespeichert. Drücken Sie auf das Plus-Symbol, um einen digitalen Nachweis hinzuzufügen.";
+"vaccination_start_screen_note_message" = "Sie haben aktuell kein digitales COVID-Zertifikat der EU gespeichert. Drücken Sie auf die Taste \"Nachweis hinzufügen\" (Plus-Symbol), um ein digitales COVID-Zertifikat der EU hinzuzufügen.";
 
 "accessibility_vaccination_start_screen_label_qrcode" = "Schwarzer QR-Code auf weißem Hintergrund";
 
@@ -220,6 +220,10 @@
 "accessibility_certificate_check_validity_selection_country_unselected" = "%@, auswählbar";
 
 "certificate_check_validity_message" = "Prüfen Sie vorab, ob Ihre Zertifikate in verschiedenen Ländern gültig sind. Hierfür werden die geltenden Einreiseregeln des gewählten Reiselands berücksichtigt.";
+
+"certificate_check_validity_travel_rules_not_up_to_title" = "Reiseregeln nicht aktuell";
+
+"certificate_check_validity_travel_rules_not_up_to_message" = "Die Reiseregeln werden in der App alle 24 Stunden aktualisiert. Leider schlug die letzte Aktualisierung fehl. Stellen Sie sicher, dass Ihr Smartphone mit dem Internet verbunden ist und versuchen Sie es erneut.";
 
 "certificate_check_validity_selection_country" = "Land";
 

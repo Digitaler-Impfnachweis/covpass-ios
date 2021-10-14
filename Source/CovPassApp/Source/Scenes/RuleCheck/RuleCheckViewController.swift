@@ -17,6 +17,12 @@ private enum Constants {
         static let country = VoiceOverOptions.Settings(label: "accessibility_certificate_check_validity_selection_country".localized)
         static let list = VoiceOverOptions.Settings(label: "accessibility_certificate_check_validity_label_results".localized)
     }
+    enum Config {
+        enum RulesHintView {
+            static let topOffset: CGFloat = 0.0
+            static let bottomOffset: CGFloat = 12.0
+        }
+    }
 }
 
 class RuleCheckViewController: UIViewController {
@@ -29,7 +35,8 @@ class RuleCheckViewController: UIViewController {
     @IBOutlet var info: LinkLabel!
     @IBOutlet var scrollView: UIScrollView!
     @IBOutlet var stackView: UIStackView!
-
+    @IBOutlet var rulesHintView: HintView!
+    
     // MARK: - Properties
 
     private(set) var viewModel: RuleCheckViewModel
@@ -50,6 +57,7 @@ class RuleCheckViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureText()
+        setupTimeHintView()
         viewModel.updateRules()
     }
 
@@ -70,7 +78,6 @@ class RuleCheckViewController: UIViewController {
         countrySelection.titleLabel.attributedText = "certificate_check_validity_selection_country".localized.styledAs(.body)
         countrySelection.valueLabel.attributedText = viewModel.country.localized.styledAs(.body)
         countrySelection.iconView.image = UIImage.map
-        countrySelection.isHidden = viewModel.isLoading
         countrySelection.onClickAction = { [weak self] in
             self?.viewModel.showCountrySelection()
         }
@@ -79,7 +86,6 @@ class RuleCheckViewController: UIViewController {
         dateSelection.valueLabel.attributedText = DateUtils.displayDateTimeFormatter.string(from: viewModel.date).styledAs(.body)
         dateSelection.iconView.image = UIImage.calendar.withRenderingMode(.alwaysTemplate)
         dateSelection.layoutMargins.bottom = .space_40
-        dateSelection.isHidden = viewModel.isLoading
         dateSelection.onClickAction = { [weak self] in
             self?.viewModel.showDateSelection()
         }
@@ -95,6 +101,8 @@ class RuleCheckViewController: UIViewController {
             subview.removeFromSuperview()
             stackView.removeArrangedSubview(subview)
         }
+        
+        updateTimeHintView()
 
         if viewModel.isLoading {
             addActivityIndicator()
@@ -111,6 +119,21 @@ class RuleCheckViewController: UIViewController {
         }
 
         configureAccessibility()
+    }
+    
+    private func setupTimeHintView() {
+        rulesHintView.isHidden = viewModel.timeHintIsHidden
+        rulesHintView.iconView.image = viewModel.timeHintIcon
+        rulesHintView.iconLabel.text = ""
+        rulesHintView.iconLabel.isHidden = true
+        rulesHintView.titleLabel.attributedText = viewModel.timeHintTitle.styledAs(.header_3)
+        rulesHintView.bodyLabel.attributedText = viewModel.timeHintSubTitle.styledAs(.body)
+        rulesHintView.containerTopConstraint.constant = Constants.Config.RulesHintView.topOffset
+        rulesHintView.containerBottomConstraint.constant = Constants.Config.RulesHintView.bottomOffset
+    }
+    
+    private func updateTimeHintView() {
+        rulesHintView.isHidden = viewModel.timeHintIsHidden
     }
 
     private func configureAccessibility() {

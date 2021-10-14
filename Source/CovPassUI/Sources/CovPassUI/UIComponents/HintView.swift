@@ -22,10 +22,10 @@ public class HintView: XibView {
 
     @IBOutlet public var subTitleConstraint: NSLayoutConstraint!
     
-    @IBOutlet var containerLeadingConstraint: NSLayoutConstraint!
-    @IBOutlet var containerTopConstraint: NSLayoutConstraint!
-    @IBOutlet var containerTrailingConstraint: NSLayoutConstraint!
-    @IBOutlet var containerBottomConstraint: NSLayoutConstraint!
+    @IBOutlet public var containerLeadingConstraint: NSLayoutConstraint!
+    @IBOutlet public var containerTopConstraint: NSLayoutConstraint!
+    @IBOutlet public var containerTrailingConstraint: NSLayoutConstraint!
+    @IBOutlet public var containerBottomConstraint: NSLayoutConstraint!
     
     // MARK: - Lifecycle
 

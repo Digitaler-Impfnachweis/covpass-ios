@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -15,6 +15,7 @@
                 <outlet property="dateSelection" destination="XSF-W4-r5c" id="hQb-oN-Ec9"/>
                 <outlet property="headline" destination="sKK-Se-ZAm" id="Tul-uA-XuY"/>
                 <outlet property="info" destination="czg-wL-cb7" id="In0-6k-5je"/>
+                <outlet property="rulesHintView" destination="UY4-Mh-Ocn" id="HmN-dK-UWV"/>
                 <outlet property="scrollView" destination="Qf6-Rq-Unr" id="GUA-vX-vm4"/>
                 <outlet property="stackView" destination="RNO-8L-IiI" id="MmI-tN-fMU"/>
                 <outlet property="subtitle" destination="gbc-XM-dNV" id="8H5-E1-hxk"/>
@@ -33,29 +34,33 @@
                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="l0s-up-bK1"/>
                     </constraints>
                 </view>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qf6-Rq-Unr">
-                    <rect key="frame" x="0.0" y="124" width="414" height="670"/>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qf6-Rq-Unr">
+                    <rect key="frame" x="0.0" y="124" width="414" height="772"/>
                     <subviews>
-                        <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="tNn-Ng-ZRx">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="792"/>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="tNn-Ng-ZRx">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="920"/>
                             <subviews>
-                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gbc-XM-dNV" customClass="PlainLabel" customModule="CovPassUI">
+                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="gbc-XM-dNV" customClass="PlainLabel" customModule="CovPassUI">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="128"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 </view>
-                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9lD-1M-rKg" customClass="InputView" customModule="CovPassUI">
+                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="UY4-Mh-Ocn" customClass="HintView" customModule="CovPassUI">
                                     <rect key="frame" x="0.0" y="128" width="414" height="128"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 </view>
-                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XSF-W4-r5c" customClass="InputView" customModule="CovPassUI">
+                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="9lD-1M-rKg" customClass="InputView" customModule="CovPassUI">
                                     <rect key="frame" x="0.0" y="256" width="414" height="128"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 </view>
-                                <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="RNO-8L-IiI">
-                                    <rect key="frame" x="0.0" y="384" width="414" height="200"/>
+                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="XSF-W4-r5c" customClass="InputView" customModule="CovPassUI">
+                                    <rect key="frame" x="0.0" y="384" width="414" height="128"/>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                </view>
+                                <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="200" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="RNO-8L-IiI">
+                                    <rect key="frame" x="0.0" y="512" width="414" height="200"/>
                                 </stackView>
-                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JbU-IC-eM5">
-                                    <rect key="frame" x="0.0" y="584" width="414" height="208"/>
+                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="208" translatesAutoresizingMaskIntoConstraints="NO" id="JbU-IC-eM5">
+                                    <rect key="frame" x="0.0" y="712" width="414" height="208"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="czg-wL-cb7" userLabel="Description Text" customClass="LinkLabel" customModule="CovPassUI">
                                             <rect key="frame" x="24" y="40" width="366" height="128"/>
@@ -98,7 +103,19 @@
         </view>
     </objects>
     <designables>
+        <designable name="9lD-1M-rKg">
+            <size key="intrinsicContentSize" width="414" height="128"/>
+        </designable>
+        <designable name="UY4-Mh-Ocn">
+            <size key="intrinsicContentSize" width="414" height="128"/>
+        </designable>
+        <designable name="XSF-W4-r5c">
+            <size key="intrinsicContentSize" width="414" height="128"/>
+        </designable>
         <designable name="czg-wL-cb7">
+            <size key="intrinsicContentSize" width="414" height="128"/>
+        </designable>
+        <designable name="gbc-XM-dNV">
             <size key="intrinsicContentSize" width="414" height="128"/>
         </designable>
         <designable name="sKK-Se-ZAm">

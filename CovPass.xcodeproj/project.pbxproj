@@ -10,6 +10,21 @@
 		0904337E270EFEA50008267B /* BaseSnapShotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0904337D270EFEA50008267B /* BaseSnapShotTests.swift */; };
 		092090E027060FC30000713F /* ValidatorOverviewViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092090DF27060FC30000713F /* ValidatorOverviewViewModelTests.swift */; };
 		0939EAB827043BD80086729C /* Kronos in Frameworks */ = {isa = PBXBuildFile; productRef = 0939EAB727043BD80086729C /* Kronos */; };
+		09590D242715E519004410D7 /* RulesCheckSnapShotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09590D1A2715E2E8004410D7 /* RulesCheckSnapShotTests.swift */; };
+		09590D252715E51C004410D7 /* BaseSnapShotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09590D182715E2D6004410D7 /* BaseSnapShotTests.swift */; };
+		09590D302715E67F004410D7 /* MockCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216D1F60264EF52400370F16 /* MockCardViewModel.swift */; };
+		09590D312715E67F004410D7 /* SceneCoordinatorMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E94DF026613F350015553C /* SceneCoordinatorMock.swift */; };
+		09590D322715E67F004410D7 /* VaccinationRepositoryMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216D1F5E264EF52400370F16 /* VaccinationRepositoryMock.swift */; };
+		09590D332715E67F004410D7 /* DCCServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385FC1B5269F57BC00D19AF8 /* DCCServiceMock.swift */; };
+		09590D342715E67F004410D7 /* MockPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385FC1B3269F577400D19AF8 /* MockPersistence.swift */; };
+		09590D352715E67F004410D7 /* MockCertificateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216D1F5D264EF52400370F16 /* MockCertificateViewModel.swift */; };
+		09590D362715E67F004410D7 /* MockViewModelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216D1F5F264EF52400370F16 /* MockViewModelDelegate.swift */; };
+		09590D372715E67F004410D7 /* CertificateDetailViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3569924426CEB35D0054531A /* CertificateDetailViewModelTests.swift */; };
+		09590D382715E67F004410D7 /* MockExtendedCBORWebToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359FBF4726DFB13B004333BC /* MockExtendedCBORWebToken.swift */; };
+		09590D392715E67F004410D7 /* MockCertificateViewModelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216D1F61264EF52400370F16 /* MockCertificateViewModelDelegate.swift */; };
+		09590D3B27160BA7004410D7 /* FBSnapshotTestCase in Frameworks */ = {isa = PBXBuildFile; productRef = 09590D3A27160BA7004410D7 /* FBSnapshotTestCase */; };
+		09590D3D27160BA7004410D7 /* FBSnapshotTestCase in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 09590D3A27160BA7004410D7 /* FBSnapshotTestCase */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		09590D4027161182004410D7 /* CertLogicMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09590D3E2716117C004410D7 /* CertLogicMock.swift */; };
 		099E68FF270DE0C4002C6926 /* TrustedListDetailsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 099E68FE270DE0C3002C6926 /* TrustedListDetailsViewModelTests.swift */; };
 		099E6903270DED09002C6926 /* FBSnapshotTestCase in Frameworks */ = {isa = PBXBuildFile; productRef = 099E6902270DED09002C6926 /* FBSnapshotTestCase */; };
 		099E6905270DEEE7002C6926 /* TrustedListDetailsViewSnapShotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 099E6904270DEEE7002C6926 /* TrustedListDetailsViewSnapShotTests.swift */; };
@@ -59,11 +74,6 @@
 		216D2004264EF7B600370F16 /* StringLocalization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216D1F3A264EF4ED00370F16 /* StringLocalization.swift */; };
 		216D202B264EFA6600370F16 /* CertificateViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216D1F58264EF52400370F16 /* CertificateViewControllerTests.swift */; };
 		216D202C264EFA6600370F16 /* CertificateViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216D1F5A264EF52400370F16 /* CertificateViewModelTests.swift */; };
-		216D2032264EFA6C00370F16 /* MockViewModelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216D1F5F264EF52400370F16 /* MockViewModelDelegate.swift */; };
-		216D2034264EFA6C00370F16 /* MockCertificateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216D1F5D264EF52400370F16 /* MockCertificateViewModel.swift */; };
-		216D2035264EFA6C00370F16 /* VaccinationRepositoryMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216D1F5E264EF52400370F16 /* VaccinationRepositoryMock.swift */; };
-		216D2036264EFA6C00370F16 /* MockCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216D1F60264EF52400370F16 /* MockCardViewModel.swift */; };
-		216D2037264EFA6C00370F16 /* MockCertificateViewModelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216D1F61264EF52400370F16 /* MockCertificateViewModelDelegate.swift */; };
 		216D203D264EFA7400370F16 /* PassOnboardingPageViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216D1F63264EF52400370F16 /* PassOnboardingPageViewModelTests.swift */; };
 		216D203E264EFA7400370F16 /* PassConsentPageViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216D1F64264EF52400370F16 /* PassConsentPageViewModelTests.swift */; };
 		2181C160264F035500DE7412 /* ValidatorOverviewSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FBCA39264F011800CAEF44 /* ValidatorOverviewSceneFactory.swift */; };
@@ -108,8 +118,6 @@
 		3523616626D66ABC0085B243 /* BoosterNotificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3523616526D66ABC0085B243 /* BoosterNotificationViewModel.swift */; };
 		3523616826D66AC90085B243 /* BoosterNotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3523616726D66AC90085B243 /* BoosterNotificationViewController.swift */; };
 		3523616C26D66BC50085B243 /* BoosterNotificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3523616B26D66BC50085B243 /* BoosterNotificationViewController.xib */; };
-		3569924526CEB35D0054531A /* CertificateDetailViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3569924426CEB35D0054531A /* CertificateDetailViewModelTests.swift */; };
-		359FBF4926DFB20E004333BC /* MockExtendedCBORWebToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359FBF4726DFB13B004333BC /* MockExtendedCBORWebToken.swift */; };
 		35F99E0D26B2B60700D3EFC3 /* PDFExportSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F99E0C26B2B60700D3EFC3 /* PDFExportSceneFactory.swift */; };
 		35F99E0F26B2B67100D3EFC3 /* PDFExportViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F99E0E26B2B67100D3EFC3 /* PDFExportViewModel.swift */; };
 		35F99E1126B2B6F000D3EFC3 /* PDFExportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F99E1026B2B6F000D3EFC3 /* PDFExportViewController.swift */; };
@@ -135,8 +143,6 @@
 		385FC1B0269F21A200D19AF8 /* RuleCheckDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385FC1AA269F21A200D19AF8 /* RuleCheckDetailViewController.swift */; };
 		385FC1B1269F21A200D19AF8 /* RuleCheckDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385FC1AB269F21A200D19AF8 /* RuleCheckDetailViewModel.swift */; };
 		385FC1B2269F21A200D19AF8 /* RuleCheckDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 385FC1AD269F21A200D19AF8 /* RuleCheckDetailViewController.xib */; };
-		385FC1B4269F577400D19AF8 /* MockPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385FC1B3269F577400D19AF8 /* MockPersistence.swift */; };
-		385FC1B6269F57BC00D19AF8 /* DCCServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385FC1B5269F57BC00D19AF8 /* DCCServiceMock.swift */; };
 		3865B76426DFE4670053D1D3 /* AnnouncementRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3865B76326DFE4670053D1D3 /* AnnouncementRouter.swift */; };
 		3865B76626DFE4740053D1D3 /* AnnouncementSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3865B76526DFE4740053D1D3 /* AnnouncementSceneFactory.swift */; };
 		3865B76826DFE48C0053D1D3 /* AnnouncementViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3865B76726DFE48C0053D1D3 /* AnnouncementViewModel.swift */; };
@@ -171,7 +177,6 @@
 		38E91BEF266D7AF00044BD56 /* RecoveryResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E91BEB266D7AF00044BD56 /* RecoveryResultViewModel.swift */; };
 		38E94DE9266121D60015553C /* VaccinationRepositoryExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E94DE8266121D60015553C /* VaccinationRepositoryExtension.swift */; };
 		38E94DEC266123520015553C /* VaccinationRepositoryExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E94DEA266122E30015553C /* VaccinationRepositoryExtension.swift */; };
-		38E94DF126613F350015553C /* SceneCoordinatorMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E94DF026613F350015553C /* SceneCoordinatorMock.swift */; };
 		38FCEEC926EB9DD200D10A22 /* BoosterLogicFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38FCEEC826EB9DD200D10A22 /* BoosterLogicFactory.swift */; };
 		6507D7ED25FB5E0300D69F94 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 88AB2A4325FA40CE00D4EA52 /* Assets.xcassets */; };
 		65E0DB0A2657F31C004C660F /* CertificateSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E0DB052657F31C004C660F /* CertificateSceneFactory.swift */; };
@@ -210,9 +215,36 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		09590D1F2715E3ED004410D7 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		09590D3C27160BA7004410D7 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				09590D3D27160BA7004410D7 /* FBSnapshotTestCase in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		0904337D270EFEA50008267B /* BaseSnapShotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseSnapShotTests.swift; sourceTree = "<group>"; };
 		092090DF27060FC30000713F /* ValidatorOverviewViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatorOverviewViewModelTests.swift; sourceTree = "<group>"; };
+		09590D182715E2D6004410D7 /* BaseSnapShotTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseSnapShotTests.swift; sourceTree = "<group>"; };
+		09590D1A2715E2E8004410D7 /* RulesCheckSnapShotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesCheckSnapShotTests.swift; sourceTree = "<group>"; };
+		09590D3E2716117C004410D7 /* CertLogicMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertLogicMock.swift; sourceTree = "<group>"; };
 		099E68FE270DE0C3002C6926 /* TrustedListDetailsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrustedListDetailsViewModelTests.swift; sourceTree = "<group>"; };
 		099E6904270DEEE7002C6926 /* TrustedListDetailsViewSnapShotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrustedListDetailsViewSnapShotTests.swift; sourceTree = "<group>"; };
 		09A27BC9270F3A2C000FE4F9 /* TestExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestExtension.swift; sourceTree = "<group>"; };
@@ -424,6 +456,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				09590D3B27160BA7004410D7 /* FBSnapshotTestCase in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -447,13 +480,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0904337C270EFE920008267B /* SnapShotTessts */ = {
+		0904337C270EFE920008267B /* SnapShotTests */ = {
 			isa = PBXGroup;
 			children = (
 				0904337D270EFEA50008267B /* BaseSnapShotTests.swift */,
 				099E6904270DEEE7002C6926 /* TrustedListDetailsViewSnapShotTests.swift */,
 			);
-			path = SnapShotTessts;
+			path = SnapShotTests;
+			sourceTree = "<group>";
+		};
+		09590D172715E2B2004410D7 /* SnapShotTests */ = {
+			isa = PBXGroup;
+			children = (
+				09590D182715E2D6004410D7 /* BaseSnapShotTests.swift */,
+				09590D1A2715E2E8004410D7 /* RulesCheckSnapShotTests.swift */,
+			);
+			path = SnapShotTests;
 			sourceTree = "<group>";
 		};
 		09D17851270B321B00A03451 /* TrustedListDetails */ = {
@@ -695,6 +737,7 @@
 			isa = PBXGroup;
 			children = (
 				216D1F5D264EF52400370F16 /* MockCertificateViewModel.swift */,
+				09590D3E2716117C004410D7 /* CertLogicMock.swift */,
 				216D1F5E264EF52400370F16 /* VaccinationRepositoryMock.swift */,
 				216D1F5F264EF52400370F16 /* MockViewModelDelegate.swift */,
 				216D1F60264EF52400370F16 /* MockCardViewModel.swift */,
@@ -1219,6 +1262,7 @@
 		88AB2A3E25FA40CE00D4EA52 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				09590D172715E2B2004410D7 /* SnapShotTests */,
 				88AB2A3F25FA40CE00D4EA52 /* CovPassAppTests.swift */,
 				216D1F5B264EF52400370F16 /* Mock */,
 				216D2025264EF95400370F16 /* Scenes */,
@@ -1251,7 +1295,7 @@
 		88AB2A5F25FA40CE00D4EA52 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				0904337C270EFE920008267B /* SnapShotTessts */,
+				0904337C270EFE920008267B /* SnapShotTests */,
 				88AB2A6025FA40CE00D4EA52 /* CovPassCheckAppTests.swift */,
 				88AB2A6125FA40CE00D4EA52 /* Info.plist */,
 				95961E872703545200E577A4 /* ValidationResultFactoryTests.swift */,
@@ -1323,6 +1367,7 @@
 				65D6D4DA25F8B8FB000CB339 /* Sources */,
 				65D6D4DB25F8B8FB000CB339 /* Frameworks */,
 				65D6D4DC25F8B8FB000CB339 /* Resources */,
+				09590D1F2715E3ED004410D7 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1343,6 +1388,7 @@
 				65D6D4EA25F8B8FB000CB339 /* Sources */,
 				65D6D4EB25F8B8FB000CB339 /* Frameworks */,
 				65D6D4EC25F8B8FB000CB339 /* Resources */,
+				09590D3C27160BA7004410D7 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1350,6 +1396,9 @@
 				65D6D4F025F8B8FB000CB339 /* PBXTargetDependency */,
 			);
 			name = CovPassAppTests;
+			packageProductDependencies = (
+				09590D3A27160BA7004410D7 /* FBSnapshotTestCase */,
+			);
 			productName = VaccinationPassAppTests;
 			productReference = 65D6D4EE25F8B8FB000CB339 /* CovPassAppTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -1594,8 +1643,6 @@
 				65E0DB0E2657F5A0004C660F /* CertificateViewModel.swift in Sources */,
 				35F99E0D26B2B60700D3EFC3 /* PDFExportSceneFactory.swift in Sources */,
 				21A77A52265AFDE6002FEEF1 /* DialogRouterProtocol+ScanError.swift in Sources */,
-				385FC1B6269F57BC00D19AF8 /* DCCServiceMock.swift in Sources */,
-				385FC1B4269F577400D19AF8 /* MockPersistence.swift in Sources */,
 				216D1FAD264EF74600370F16 /* PassOnboardingPageViewModel.swift in Sources */,
 				3865B76A26DFE4960053D1D3 /* AnnouncementViewController.swift in Sources */,
 				216D1FAF264EF74600370F16 /* PassOnboardingContainerViewModel.swift in Sources */,
@@ -1613,19 +1660,24 @@
 			files = (
 				216D202C264EFA6600370F16 /* CertificateViewModelTests.swift in Sources */,
 				216D203E264EFA7400370F16 /* PassConsentPageViewModelTests.swift in Sources */,
-				359FBF4926DFB20E004333BC /* MockExtendedCBORWebToken.swift in Sources */,
-				216D2037264EFA6C00370F16 /* MockCertificateViewModelDelegate.swift in Sources */,
-				216D2036264EFA6C00370F16 /* MockCardViewModel.swift in Sources */,
-				38E94DF126613F350015553C /* SceneCoordinatorMock.swift in Sources */,
 				216D202B264EFA6600370F16 /* CertificateViewControllerTests.swift in Sources */,
+				09590D242715E519004410D7 /* RulesCheckSnapShotTests.swift in Sources */,
+				09590D302715E67F004410D7 /* MockCardViewModel.swift in Sources */,
 				88AB2AA525FA431E00D4EA52 /* CovPassAppTests.swift in Sources */,
-				216D2034264EFA6C00370F16 /* MockCertificateViewModel.swift in Sources */,
 				216D203D264EFA7400370F16 /* PassOnboardingPageViewModelTests.swift in Sources */,
-				3569924526CEB35D0054531A /* CertificateDetailViewModelTests.swift in Sources */,
-				216D2035264EFA6C00370F16 /* VaccinationRepositoryMock.swift in Sources */,
+				09590D362715E67F004410D7 /* MockViewModelDelegate.swift in Sources */,
+				09590D252715E51C004410D7 /* BaseSnapShotTests.swift in Sources */,
+				09590D332715E67F004410D7 /* DCCServiceMock.swift in Sources */,
+				09590D372715E67F004410D7 /* CertificateDetailViewModelTests.swift in Sources */,
+				09590D342715E67F004410D7 /* MockPersistence.swift in Sources */,
+				09590D4027161182004410D7 /* CertLogicMock.swift in Sources */,
+				09590D352715E67F004410D7 /* MockCertificateViewModel.swift in Sources */,
 				386FDCFC26ED205900AC7639 /* BoosterNotificationViewModelTests.swift in Sources */,
-				216D2032264EFA6C00370F16 /* MockViewModelDelegate.swift in Sources */,
+				09590D312715E67F004410D7 /* SceneCoordinatorMock.swift in Sources */,
 				95BB0D4F2702155600885BA3 /* ScanPleaseViewModelTests.swift in Sources */,
+				09590D392715E67F004410D7 /* MockCertificateViewModelDelegate.swift in Sources */,
+				09590D322715E67F004410D7 /* VaccinationRepositoryMock.swift in Sources */,
+				09590D382715E67F004410D7 /* MockExtendedCBORWebToken.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2124,6 +2176,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 0939EAB627043BD80086729C /* XCRemoteSwiftPackageReference "Kronos" */;
 			productName = Kronos;
+		};
+		09590D3A27160BA7004410D7 /* FBSnapshotTestCase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 099E6901270DED09002C6926 /* XCRemoteSwiftPackageReference "ios-snapshot-test-case" */;
+			productName = FBSnapshotTestCase;
 		};
 		099E6902270DED09002C6926 /* FBSnapshotTestCase */ = {
 			isa = XCSwiftPackageProductDependency;
