@@ -31,11 +31,11 @@ struct ValidationResultRouterMock: ValidationResultRouterProtocol {
 
 
 class DCCCertLogicMock: DCCCertLogicProtocol {
-    
+        
     var lastUpdateDccrRules: Date?
     
-    var countries: [String] {
-        ["DE"]
+    var countries: [Country] {
+        [Country("DE")]
     }
 
     func lastUpdatedDCCRules() -> Date? {

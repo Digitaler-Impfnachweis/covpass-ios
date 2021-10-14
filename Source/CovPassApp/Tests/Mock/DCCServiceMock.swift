@@ -37,4 +37,13 @@ public struct DCCServiceMock: DCCServiceProtocol {
     public func loadBoosterRule(hash _: String) -> Promise<Rule> {
         return Promise(error: ApplicationError.unknownError)
     }
+
+    public func loadCountryList() -> Promise<[Country]> {
+        let json =
+"""
+        ["IT","LT","DK","GR","CZ","HR","IS","PT","PL","BE","BG","DE","LU","EE","CY","ES","NL","AT","LV","LI","FI","SE","SI","RO","NO","SK","FR","MT","HU","IE","CH","VA","SM","UA","TR","MK","AD","MC","FO","MA","AL","IL","PA"]
+"""
+        let countries = try! JSONDecoder().decode([Country].self, from: json.data(using: .utf8)!)
+        return Promise.value(countries)
+    }
 }

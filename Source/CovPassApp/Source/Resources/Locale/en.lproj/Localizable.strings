@@ -89,6 +89,8 @@
 
 "accessibility_vaccination_start_screen_label_add_certificate" = "Add certificate";
 
+"accessibility_start_screen_info_announce" = "The start screen has been opened";
+
 "vaccination_start_screen_title" = "EU Digital COVID Certificates";
 
 "accessibility_vaccination_start_screen_title" = "EU Digital COVID Certificates. Sensible health data will follow. Please take care that nobody listens to or reads on your smartphone.";
@@ -145,7 +147,7 @@
 
 "accessibility_certificate_add_popup_announce" = "The view \"Adding a certificate\" has been opened";
 
-"accessibility_scan_success_announce" = "The certificate was successfully added";
+"accessibility_scan_success_announce" = "Certificate of %@ was added successfully";
 
 "accessibility_certificate_add_popup_image" = "Image: Person holds smartphone over three different certificates with QR code";
 
@@ -170,6 +172,8 @@
 "certificate_add_dialog_camera_access_action_button" = "Allow access";
 
 "accessibility_certificate_add_dialog_camera_access_label_close" = "Close";
+
+"accessibility_scan_dialog_camera_access_announce" = "The view \"Camera access needed\" has been opened";
 
 "accessibility_scan_camera_announce" = "Camera has been opened";
 
@@ -301,6 +305,120 @@
 "CH" = "Switzerland";
 
 "UA" = "Ukraine";
+
+"VA" = "Vatican City";
+
+"SM" = "San Marino";
+
+"TR" = "Turkey";
+
+"MK" = "North Macedonia";
+
+"AD" = "Andorra";
+
+"MC" = "Monaco";
+
+"FO" = "Faroe Islands";
+
+"MA" = "Morocco";
+
+"AL" = "Albania";
+
+"IL" = "Israel";
+
+"PA" = "Panama";
+
+"TG" = "Togo";
+
+"SG" = "Singapore";
+
+"GB" = "Great Britain";
+
+"AM" = "Armenia";
+
+"GE" = "Georgia";
+
+"NZ" = "New Zealand";
+
+"DZ" = "Algeria";
+
+"AZ" = "Azerbaijan";
+
+"BH" = "Bahrain";
+
+"BJ" = "Benin";
+
+"BA" = "Bosnia and Herzegovina";
+
+"BR" = "Brazil";
+
+"BI" = "Burundi";
+
+"CV" = "Cabo Verde";
+
+"CA" = "Canada";
+
+"CL" = "Chile";
+
+"CO" = "Colombia";
+
+"DO" = "Dominican Republic";
+
+"SV" = "El Salvador";
+
+"EG" = "Egypt";
+
+"HK" = "Hong Kong";
+
+"JP" = "Japan";
+
+"JO" = "Jordan";
+
+"KZ" = "Kazakhstan";
+
+"KE" = "Kenya";
+
+"KR" = "Korea (ROK)";
+
+"XK" = "Kosovo";
+
+"KW" = "Kuwait";
+
+"LB" = "Lebanon";
+
+"MY" = "Malaysia";
+
+"MN" = "Mongolia";
+
+"ME" = "Montenegro";
+
+"MD" = "Moldova";
+
+"RU" = "Russia";
+
+"RW" = "Rwanda";
+
+"RS" = "Serbia";
+
+"SD" = "South Sudan";
+
+"TW" = "Taiwan";
+
+"TZ" = "Tanzania";
+
+"TH" = "Thailand";
+
+"TN" = "Tunisia";
+
+"AE" = "UAE";
+
+"UG" = "Uganda";
+
+"US" = "United States";
+
+"UY" = "Uruguay";
+
+"VN" = "Vietnam";
 
 "certificate_check_validity_selection_country_note" = "Is your destination not listed? More countries are progressively being added in stages. \n\nYou can find more information in the frequently asked questions and at #https://reopen.europa.eu::https://reopen.europa.eu#.";
 

@@ -6,6 +6,7 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
+import CovPassCommon
 import CovPassUI
 import PromiseKit
 import UIKit
@@ -14,12 +15,12 @@ struct CountrySelectionSceneFactory: ResolvableSceneFactory {
     // MARK: - Properties
 
     let router: CountrySelectionRouterProtocol
-    let countries: [String]
+    let countries: [Country]
     let country: String
 
     // MARK: - Lifecycle
 
-    init(router: CountrySelectionRouterProtocol, countries: [String], country: String) {
+    init(router: CountrySelectionRouterProtocol, countries: [Country], country: String) {
         self.router = router
         self.countries = countries
         self.country = country

@@ -120,6 +120,8 @@
 
 "scan_dialog_camera_access_message" = "Die CovPassCheck-App verwendet die Kamera Ihres Smartphones, um einen QR-Code scannen zu können.\n\nDer Zugriff auf Ihre Kamera erfolgt nur während der Nutzung der App und dann auch nur mit Ihrer Erlaubnis. Sie haben jederzeit die Möglichkeit, in den Einstellungen Ihres Smartphones die Berechtigung zu ändern.";
 
+"accessibility_scan_dialog_camera_access_announce" = "Die Ansicht \"Kamerazugriff benötigt\" wurde geöffnet";
+
 "scan_dialog_camera_access_action_button" = "Zugriff erlauben";
 
 "accessibility_scan_dialog_camera_access_label_close" = "Schließen";

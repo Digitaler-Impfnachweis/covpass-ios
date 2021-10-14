@@ -58,7 +58,7 @@ public struct ValueSet: Codable {
 }
 
 public protocol DCCCertLogicProtocol {
-    var countries: [String] { get }
+    var countries: [Country] { get }
 
     func lastUpdatedDCCRules() -> Date?
     func validate(type: DCCCertLogic.LogicType, countryCode: String, validationClock: Date, certificate: CBORWebToken) throws -> [ValidationResult]
@@ -159,41 +159,8 @@ public struct DCCCertLogic: DCCCertLogicProtocol {
         return valueSets
     }
 
-    public var countries: [String] {
-        return [
-            "IT",
-            "LT",
-            "DK",
-            "GR",
-            "CZ",
-            "HR",
-            "IS",
-            "PT",
-            "PL",
-            "BE",
-            "BG",
-            "DE",
-            "LU",
-            "EE",
-            "CY",
-            "ES",
-            "NL",
-            "AT",
-            "LV",
-            "LI",
-            "FI",
-            "SE",
-            "SI",
-            "RO",
-            "NO",
-            "SK",
-            "FR",
-            "MT",
-            "HU",
-            "IE",
-            "CH",
-            "UA"
-        ]
+    public var countries: [Country] {
+        Countries.loadDefaultCountries()
     }
 
     public func lastUpdatedDCCRules() -> Date? {
@@ -274,6 +241,8 @@ public struct DCCCertLogic: DCCCertLogicProtocol {
     /// Triggers a chain of downloads/updates for DCC rules, booster rules and value sets
     public func updateRules() -> Promise<Void> {
         return firstly {
+            service.loadCountryList()
+        }.then(on: .global()) { _ in
             service.loadDCCRules()
         }
         .then(on: .global()) { (remoteRules: [RuleSimple]) throws -> Promise<[Rule]> in
@@ -362,3 +331,4 @@ public struct DCCCertLogic: DCCCertLogicProtocol {
         }
     }
 }
+

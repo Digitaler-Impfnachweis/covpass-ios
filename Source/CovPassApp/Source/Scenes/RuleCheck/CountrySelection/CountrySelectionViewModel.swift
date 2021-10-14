@@ -6,6 +6,7 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
+import CovPassCommon
 import CovPassUI
 import LocalAuthentication
 import PromiseKit
@@ -17,25 +18,25 @@ class CountrySelectionViewModel: BaseViewModel, CancellableViewModelProtocol {
     weak var delegate: ViewModelDelegate?
     let router: CountrySelectionRouterProtocol
     let resolver: Resolver<String>
-    let countries: [String]
-    var country: String
+    let countries: [Country]
+    var selectedCountry: String
 
     // MARK: - Lifecycle
 
     init(
         router: CountrySelectionRouterProtocol,
         resolvable: Resolver<String>,
-        countries: [String],
+        countries: [Country],
         country: String
     ) {
         self.router = router
         resolver = resolvable
-        self.countries = countries.sorted(by: { $0.localized < $1.localized })
-        self.country = country
+        self.countries = countries.sorted(by: { $0.code.localized < $1.code.localized })
+        self.selectedCountry = country
     }
 
     func done() {
-        resolver.fulfill(country)
+        resolver.fulfill(selectedCountry)
     }
 
     func cancel() {

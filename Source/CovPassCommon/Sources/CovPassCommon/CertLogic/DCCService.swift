@@ -19,6 +19,8 @@ public protocol DCCServiceProtocol {
 
     func loadBoosterRules() -> Promise<[RuleSimple]>
     func loadBoosterRule(hash: String) -> Promise<Rule>
+
+    func loadCountryList() -> Promise<[Country]>
 }
 
 public enum DCCServiceError: Error, ErrorCode {
@@ -128,6 +130,23 @@ public struct DCCService: DCCServiceProtocol {
                 }
                 res.hash = hash
                 return res
+            }
+    }
+
+    public func loadCountryList() -> Promise<[Country]> {
+        guard let requestUrl = URL(string: "\(url.absoluteString)/countrylist") else {
+            return Promise(error: APIError.invalidUrl)
+        }
+        return customURLSession
+            .request(requestUrl.urlRequest.GET)
+            .map(on: .global()) { response in
+                guard let data = response.data(using: .utf8),
+                      let saveURL = Countries.downloadURL,
+                      let countries: [Country] = try? JSONDecoder().decode([String].self, from: data).map({.init($0)}) else {
+                          throw DCCServiceError.invalidResponse
+                }
+                try data.write(to: saveURL)
+                return countries
             }
     }
 }

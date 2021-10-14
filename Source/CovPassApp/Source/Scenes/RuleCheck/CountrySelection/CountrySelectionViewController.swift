@@ -79,21 +79,24 @@ class CountrySelectionViewController: UIViewController {
             stackView.removeArrangedSubview(item)
         }
         viewModel.countries.forEach { country in
+            // If there's no localization don't show the country
+            guard country.code.localized != country.code else {
+                return
+            }
             let countryView = CountryItemView()
-            countryView.leftIcon.image = UIImage(named: country.uppercased(), in: Bundle.uiBundle, compatibleWith: nil)
-            countryView.textLabel.attributedText = country.localized.styledAs(.header_3)
+            countryView.leftIcon.image = UIImage(named: country.code.uppercased(), in: Bundle.uiBundle, compatibleWith: nil) ?? UIImage(named: "Oval", in: Bundle.uiBundle, compatibleWith: nil)
+            countryView.textLabel.attributedText = country.code.localized.styledAs(.header_3)
 
-            // We can use forced unwrapping because it's set via Constants
-            if viewModel.country == country {
+            if viewModel.selectedCountry == country.code {
                 countryView.rightIcon.image = .checkboxChecked
-                countryView.enableAccessibility(label: String(format: Constants.Accessibility.countrySelected.label!, country.localized), traits: .button)
+                countryView.enableAccessibility(label: String(format: Constants.Accessibility.countrySelected.label!, country.code.localized), traits: .button)
             } else {
                 countryView.rightIcon.image = .checkboxUnchecked
-                countryView.enableAccessibility(label: String(format: Constants.Accessibility.countryUnselected.label!, country.localized), traits: .button)
+                countryView.enableAccessibility(label: String(format: Constants.Accessibility.countryUnselected.label!, country.code.localized), traits: .button)
             }
 
             countryView.action = {
-                self.viewModel.country = country
+                self.viewModel.selectedCountry = country.code
                 self.configureText()
             }
             stackView.addArrangedSubview(countryView)

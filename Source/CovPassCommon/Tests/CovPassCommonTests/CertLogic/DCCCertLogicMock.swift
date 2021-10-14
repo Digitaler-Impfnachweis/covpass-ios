@@ -12,8 +12,9 @@ import Foundation
 import PromiseKit
 
 class DCCCertLogicMock: DCCCertLogicProtocol {
-    var countries: [String] {
-        ["DE"]
+    
+    var countries: [Country] {
+        [Country("DE")]
     }
 
     func lastUpdatedDCCRules() -> Date? {

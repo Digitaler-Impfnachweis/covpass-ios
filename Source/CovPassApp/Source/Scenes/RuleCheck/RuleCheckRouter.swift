@@ -6,11 +6,13 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
+import CovPassCommon
 import CovPassUI
 import PromiseKit
 import UIKit
 
-class RuleCheckRouter: RuleCheckRouterProtocol {
+class RuleCheckRouter: RuleCheckRouterProtocol {    
+
     // MARK: - Properties
 
     let sceneCoordinator: SceneCoordinator
@@ -21,7 +23,7 @@ class RuleCheckRouter: RuleCheckRouterProtocol {
         self.sceneCoordinator = sceneCoordinator
     }
 
-    func showCountrySelection(countries: [String], country: String) -> Promise<String> {
+    func showCountrySelection(countries: [Country], country: String) -> Promise<String> {
         sceneCoordinator.present(
             CountrySelectionSceneFactory(
                 router: CountrySelectionRouter(sceneCoordinator: sceneCoordinator),
