@@ -119,7 +119,9 @@ public class CertificateCollectionViewCell: CardCollectionViewCell {
     }
 
     override public func viewModelDidUpdate() {
-        updateView()
+        DispatchQueue.main.async {
+            self.updateView()
+        }
     }
 
     // MARK: - Actions
