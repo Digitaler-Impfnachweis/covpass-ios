@@ -31,27 +31,33 @@ public class Vaccination: Codable {
     public var ci: String
 
     /// True if full immunization (or booster) is given
-    public var fullImmunization: Bool { dn >= sd || isBoosted }
+    public var fullImmunization: Bool { dn >= sd || isBoosted || isFullImmunizationAfterRecovery }
 
     /// `True` if vaccination is a booster vaccination (J&J 2/2, all other vaccination 3/3)
     public var isBoosted: Bool {
         (mp == MedicalProduct.johnsonjohnson.rawValue && dn >= 2) || dn >= 3
     }
 
+    public var isFullImmunizationAfterRecovery: Bool {
+        let allExceptJJ = [MedicalProduct.biontech.rawValue, MedicalProduct.moderna.rawValue, MedicalProduct.astrazeneca.rawValue]
+        return (sd == 1 && dn == 1 && allExceptJJ.contains(mp))
+    }
+
     /// Date when the full immunization is valid
     public var fullImmunizationValidFrom: Date? {
         if !fullImmunization { return nil }
-        if isBoosted { return dt }
+        if isBoosted || isFullImmunizationAfterRecovery { return dt }
         guard let validDate = Calendar.current.date(byAdding: .day, value: 15, to: dt) else {
             return nil
         }
+
         return validDate
     }
 
     /// True if full immunization is valid
     public var fullImmunizationValid: Bool {
         guard let dateValidFrom = fullImmunizationValidFrom else { return false }
-        if isBoosted { return true }
+        if isBoosted || isFullImmunizationAfterRecovery { return true }
         return Date() > dateValidFrom
     }
 
