@@ -277,6 +277,24 @@
 
 "accessibility_app_information_open_source_label_back" = "Zurück";
 
+"app_information_title_update" = "Prüfregeln aktualisieren";
+
+"app_information_message_update" = "Zur Überprüfung eingescannter Zertifikate benötigt die App aktuelle Listen der vertrauenswürdigen Zertifikatsaussteller und der momentan in Deutschland geltenden Corona-Regeln.\n\nDiese Listen aktualisieren sich täglich automatisch. Sie können hier auch jederzeit eine manuelle Aktualisierung vornehmen.";
+
+"app_information_message_update_note" = "Letztes Update";
+
+"app_information_message_update_pattern" = "Letztes Update: %@";
+
+"app_information_message_update_certificates" = "Liste der Zertifikatsaussteller: %@";
+
+"app_information_message_update_rules" = "Prüfregeln: %@";
+
+"app_information_message_update_button" = "Aktualisieren";
+
+"accessibility_app_information_update_back" = "Zurück";
+
+"accessibility_app_information_title_update" = "Die Ansicht \"Prüfregeln aktualisieren\" wurde geöffnet";
+
 "app_information_version_label" = "Version %@";
 
 

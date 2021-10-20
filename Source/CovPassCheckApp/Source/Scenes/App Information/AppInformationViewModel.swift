@@ -68,7 +68,7 @@ class AppInformationViewModel: AppInformationViewModelProtocol {
             ),
             
             AppInformationEntry(
-                title: "validation_start_screen_offline_modus_information_title".localized,
+                title: "app_information_title_update".localized,
                 scene: TrustedListDetailsSceneFactory()
             )
         ]

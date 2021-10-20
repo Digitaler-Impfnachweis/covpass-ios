@@ -5,10 +5,9 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-@testable import CovPassCheckApp
 @testable import CovPassCommon
 import XCTest
-import FBSnapshotTestCaseCore
+import FBSnapshotTestCase
 
 class BaseSnapShotTests: FBSnapshotTestCase {
     override func setUp() {
@@ -18,10 +17,10 @@ class BaseSnapShotTests: FBSnapshotTestCase {
     }
     
     func vertifyView(vc: UIViewController) {
-        self.FBSnapshotVerifyViewController(vc,
-                                            identifier: Locale.preferredLanguages[0] ,
-                                            suffixes: NSOrderedSet(arrayLiteral: "_64"),
-                                            perPixelTolerance: 0.1)
+        FBSnapshotVerifyViewController(vc,
+                                       identifier: Locale.preferredLanguages[0] ,
+                                       suffixes: NSOrderedSet(arrayLiteral: "_64"),
+                                       perPixelTolerance: 0.1)
     }
     
     func verifyAsyc(vc: UIViewController,
