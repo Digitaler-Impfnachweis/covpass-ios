@@ -56,6 +56,8 @@ class ScanViewController: UIViewController {
 
     private func configureToolbarView() {
         toolbarView.state = .cancel
+        toolbarView.leftButton.isHidden = true
+        
         #if targetEnvironment(simulator)
             toolbarView.setUpRightButton(rightButtonItem: .flashLight)
 
