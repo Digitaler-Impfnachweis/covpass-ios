@@ -152,7 +152,7 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
         } else if isFullImmunization {
             return vaccinationCertificateIsValidNow ? UIImage.startStatusFullWhite: UIImage.startStatusFullBlue
         } else {
-            return UIImage.statusPartialDetail
+            return UIImage.statusPartial
         }
     }
 

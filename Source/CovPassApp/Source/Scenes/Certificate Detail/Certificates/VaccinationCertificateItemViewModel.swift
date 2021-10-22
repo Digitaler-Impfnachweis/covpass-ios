@@ -32,7 +32,7 @@ struct VaccinationCertificateItemViewModel: CertificateItemViewModel {
         if certificate.vaccinationCertificate.expiresSoon {
             return .activity
         }
-        return dgc.v?.first?.fullImmunization ?? false ? .statusFullDetail : .statusPartialDetail
+        return dgc.v?.first?.fullImmunization ?? false ? .statusFullDetail : .statusPartial
     }
 
     var iconColor: UIColor {

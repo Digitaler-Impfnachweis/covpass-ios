@@ -71,7 +71,7 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
         if selectedCertificate?.vaccinationCertificate.hcert.dgc.t != nil {
             return UIImage.detailStatusFull
         }
-        return fullImmunization ? UIImage.detailStatusFull : UIImage.statusPartial
+        return fullImmunization ? UIImage.detailStatusFull : UIImage.detailStatusPartial
     }
 
     var immunizationTitle: String {
