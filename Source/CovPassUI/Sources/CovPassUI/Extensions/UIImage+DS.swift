@@ -206,6 +206,9 @@ public extension UIImage {
 
     @ImageLoader(name: "start-status-full-white")
     private(set) static var startStatusFullWhite
+
+    @ImageLoader(name: "status-expired-circle")
+    private(set) static var statusExpiredCircle
 }
 
 @propertyWrapper
