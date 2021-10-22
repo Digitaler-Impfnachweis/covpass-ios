@@ -194,6 +194,15 @@ public extension UIImage {
 
     @ImageLoader(name: "scan_please_illustration")
     private(set) static var scanPleaseIllustration
+
+    @ImageLoader(name: "detail-status-full")
+    private(set) static var detailStatusFull
+
+    @ImageLoader(name: "start-status-full-blue")
+    private(set) static var startStatusFullBlue
+
+    @ImageLoader(name: "start-status-full-white")
+    private(set) static var startStatusFullWhite
 }
 
 @propertyWrapper

@@ -67,7 +67,11 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
         if certificate.t != nil {
             return .brandAccentPurple
         }
-        return certificate.v?.first?.fullImmunizationValid ?? false ? .onBrandAccent70 : .onBackground50
+        return vaccinationCertificateIsValidNow ? .onBrandAccent70 : .onBackground50
+    }
+
+    private var vaccinationCertificateIsValidNow: Bool {
+        certificate.v?.first?.fullImmunizationValid ?? false
     }
 
     var iconTintColor: UIColor {
@@ -132,7 +136,10 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
             return UIImage.expired
         }
         if token.vaccinationCertificate.expiresSoon {
-            return UIImage.activity
+            if certificate.r != nil {
+                return UIImage.activity.withRenderingMode(.alwaysTemplate)
+            }
+            return vaccinationCertificateIsValidNow ? UIImage.activity.withRenderingMode(.alwaysTemplate) : UIImage.activity.withRenderingMode(.alwaysOriginal)
         }
         if certificate.r != nil {
             return UIImage.statusFullDetail
@@ -143,7 +150,7 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
         if showNotification {
             return isFullImmunization ? UIImage.statusFullNotfication : UIImage.statusPartialNotification
         } else if isFullImmunization {
-            return UIImage.statusFullDetail
+            return vaccinationCertificateIsValidNow ? UIImage.startStatusFullWhite: UIImage.startStatusFullBlue
         } else {
             return UIImage.statusPartialDetail
         }
