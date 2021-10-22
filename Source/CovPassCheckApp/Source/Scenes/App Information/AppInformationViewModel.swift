@@ -69,7 +69,7 @@ class AppInformationViewModel: AppInformationViewModelProtocol {
             
             AppInformationEntry(
                 title: "validation_start_screen_offline_modus_information_title".localized,
-                scene: TrustedListDetailsSceneFactory()
+                scene: TrustedListDetailsSceneFactory(sceneCoordinator: router.sceneCoordinator)
             )
         ]
         if Locale.current.isGerman() {

@@ -34,6 +34,7 @@ class TrustedListDetailsViewModel {
 
     private let repository: VaccinationRepositoryProtocol
     private let certLogic: DCCCertLogicProtocol
+    private var router: TrustedListDetailsRouterProtocol?
 
     var delegate: ViewModelDelegate?
     
@@ -65,7 +66,12 @@ class TrustedListDetailsViewModel {
             updateTrustList()
         }
         .then(updateDCCRules)
-        .cauterize()
+        .catch({ error in
+            switch (error as NSError).code {
+            case -1009:self.router?.showNoInternetErrorDialog(error)
+            default: break
+            }
+        })
         .finally { [weak self] in
             self?.isLoading = false
             self?.delegate?.viewModelDidUpdate()
@@ -82,8 +88,10 @@ class TrustedListDetailsViewModel {
     
     // MARK: - Lifecycle
 
-    init(repository: VaccinationRepositoryProtocol,
+    init(router: TrustedListDetailsRouterProtocol? = nil,
+         repository: VaccinationRepositoryProtocol,
          certLogic: DCCCertLogicProtocol) {
+        self.router = router
         self.repository = repository
         self.certLogic = certLogic
     }

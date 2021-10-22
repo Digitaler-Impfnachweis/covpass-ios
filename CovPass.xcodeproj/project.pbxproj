@@ -29,6 +29,8 @@
 		099E6903270DED09002C6926 /* FBSnapshotTestCase in Frameworks */ = {isa = PBXBuildFile; productRef = 099E6902270DED09002C6926 /* FBSnapshotTestCase */; };
 		099E6905270DEEE7002C6926 /* TrustedListDetailsViewSnapShotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 099E6904270DEEE7002C6926 /* TrustedListDetailsViewSnapShotTests.swift */; };
 		09A27BCA270F3A2C000FE4F9 /* TestExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A27BC9270F3A2C000FE4F9 /* TestExtension.swift */; };
+		09C3E3992722921E00C5BFA9 /* TrustedListDetailsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C3E3982722921E00C5BFA9 /* TrustedListDetailsRouter.swift */; };
+		09C3E39B2722924800C5BFA9 /* TrustedListDetailsRouterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C3E39A2722924800C5BFA9 /* TrustedListDetailsRouterProtocol.swift */; };
 		09D17859270B328C00A03451 /* TrustedListDetailsSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D17858270B328C00A03451 /* TrustedListDetailsSceneFactory.swift */; };
 		09D1785B270B329500A03451 /* TrustedListDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D1785A270B329500A03451 /* TrustedListDetailsViewModel.swift */; };
 		09D1785D270B329C00A03451 /* TrustedListDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D1785C270B329C00A03451 /* TrustedListDetailsViewController.swift */; };
@@ -248,6 +250,8 @@
 		099E68FE270DE0C3002C6926 /* TrustedListDetailsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrustedListDetailsViewModelTests.swift; sourceTree = "<group>"; };
 		099E6904270DEEE7002C6926 /* TrustedListDetailsViewSnapShotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrustedListDetailsViewSnapShotTests.swift; sourceTree = "<group>"; };
 		09A27BC9270F3A2C000FE4F9 /* TestExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestExtension.swift; sourceTree = "<group>"; };
+		09C3E3982722921E00C5BFA9 /* TrustedListDetailsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrustedListDetailsRouter.swift; sourceTree = "<group>"; };
+		09C3E39A2722924800C5BFA9 /* TrustedListDetailsRouterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrustedListDetailsRouterProtocol.swift; sourceTree = "<group>"; };
 		09D17858270B328C00A03451 /* TrustedListDetailsSceneFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrustedListDetailsSceneFactory.swift; sourceTree = "<group>"; };
 		09D1785A270B329500A03451 /* TrustedListDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrustedListDetailsViewModel.swift; sourceTree = "<group>"; };
 		09D1785C270B329C00A03451 /* TrustedListDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrustedListDetailsViewController.swift; sourceTree = "<group>"; };
@@ -505,6 +509,8 @@
 				09D17858270B328C00A03451 /* TrustedListDetailsSceneFactory.swift */,
 				09D1785A270B329500A03451 /* TrustedListDetailsViewModel.swift */,
 				09D1785C270B329C00A03451 /* TrustedListDetailsViewController.swift */,
+				09C3E3982722921E00C5BFA9 /* TrustedListDetailsRouter.swift */,
+				09C3E39A2722924800C5BFA9 /* TrustedListDetailsRouterProtocol.swift */,
 			);
 			path = TrustedListDetails;
 			sourceTree = "<group>";
@@ -1690,6 +1696,7 @@
 				2181C160264F035500DE7412 /* ValidatorOverviewSceneFactory.swift in Sources */,
 				2181C172264F037000DE7412 /* WelcomeViewController.swift in Sources */,
 				2181C188264F03A600DE7412 /* ValidationResultRouter.swift in Sources */,
+				09C3E3992722921E00C5BFA9 /* TrustedListDetailsRouter.swift in Sources */,
 				2181C161264F035500DE7412 /* ValidatorOverviewViewController.swift in Sources */,
 				2181C19F264F03B800DE7412 /* MainSceneFactory.swift in Sources */,
 				09D1785B270B329500A03451 /* TrustedListDetailsViewModel.swift in Sources */,
@@ -1704,6 +1711,7 @@
 				2181C195264F03AF00DE7412 /* ImmunizationState.swift in Sources */,
 				38FCEEC926EB9DD200D10A22 /* BoosterLogicFactory.swift in Sources */,
 				2181C183264F039500DE7412 /* AppInformationViewModel.swift in Sources */,
+				09C3E39B2722924800C5BFA9 /* TrustedListDetailsRouterProtocol.swift in Sources */,
 				38E94DEC266123520015553C /* VaccinationRepositoryExtension.swift in Sources */,
 				09D1785D270B329C00A03451 /* TrustedListDetailsViewController.swift in Sources */,
 				38E91BEF266D7AF00044BD56 /* RecoveryResultViewModel.swift in Sources */,
