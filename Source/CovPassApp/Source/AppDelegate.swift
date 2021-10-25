@@ -47,7 +47,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
             UserDefaults.StartupInfo.set(true, forKey: .appInstalled)
             try KeychainPersistence().deleteAll()
         } else {
-            try KeychainPersistence.migrateKeyAttributes()
+//            try KeychainPersistence.migrateKeyAttributes()
         }
     }
 
