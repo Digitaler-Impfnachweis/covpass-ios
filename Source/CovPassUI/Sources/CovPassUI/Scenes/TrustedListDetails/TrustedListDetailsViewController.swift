@@ -5,16 +5,15 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-import CovPassUI
 import Foundation
 import Scanner
 import UIKit
 
-class TrustedListDetailsViewController: UIViewController {
+open class TrustedListDetailsViewController: UIViewController {
     // MARK: - IBOutlet
     @IBOutlet var headerView: PlainLabel!
     @IBOutlet var offlineCard: HintView!
-    @IBOutlet var mainButton: MainButton!
+    @IBOutlet public var mainButton: MainButton!
     let activityIndicator = DotPulseActivityIndicator(frame: CGRect(x: 0, y: 0, width: 100, height: 20))
 
     // MARK: - Properties
@@ -24,14 +23,14 @@ class TrustedListDetailsViewController: UIViewController {
     // MARK: - Lifecycle
     
     @available(*, unavailable)
-    required init?(coder _: NSCoder) { fatalError("init?(coder: NSCoder) not implemented yet") }
+    required public init?(coder _: NSCoder) { fatalError("init?(coder: NSCoder) not implemented yet") }
     
-    init(viewModel: TrustedListDetailsViewModel) {
+    public init(viewModel: TrustedListDetailsViewModel) {
         self.viewModel = viewModel
-        super.init(nibName: String(describing: Self.self), bundle: .main)
+        super.init(nibName: String(describing: Self.self), bundle: .uiBundle)
     }
     
-    override func viewDidLoad() {
+    open override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.delegate = self
         view.backgroundColor = .neutralWhite
@@ -105,9 +104,9 @@ class TrustedListDetailsViewController: UIViewController {
 }
 
 extension TrustedListDetailsViewController: ViewModelDelegate {
-    func viewModelDidUpdate() {
+    public func viewModelDidUpdate() {
         updateView()
     }
     
-    func viewModelUpdateDidFailWithError(_: Error) {}
+    public func viewModelUpdateDidFailWithError(_: Error) {}
 }

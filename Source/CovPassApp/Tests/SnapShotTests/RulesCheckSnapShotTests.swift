@@ -10,7 +10,6 @@
 @testable import CovPassUI
 import PromiseKit
 import XCTest
-import FBSnapshotTestCaseCore
 
 class RulesCheckSnapShotTests: BaseSnapShotTests {
     

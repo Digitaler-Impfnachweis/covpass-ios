@@ -5,9 +5,8 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-@testable import CovPassCheckApp
-@testable import CovPassCommon
-import FBSnapshotTestCase
+@testable import CovPassUI
+import CovPassCommon
 import XCTest
 
 class TrustedListDetailsViewModelTests: XCTestCase {

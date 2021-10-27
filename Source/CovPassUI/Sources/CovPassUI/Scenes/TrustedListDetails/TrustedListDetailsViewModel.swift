@@ -6,20 +6,18 @@
 //
 
 import CovPassCommon
-import CovPassUI
 import Foundation
 import PromiseKit
 import UIKit
-import Kronos
 
 private enum Constants {
     enum Keys {
-        static let title = "validation_start_screen_offline_modus_information_title".localized
-        static let offlineModusCerts = "validation_start_screen_offline_modus_certificates".localized
-        static let offlineModusRules = "validation_start_screen_offline_modus_rules".localized
-        static let offlineModusInformation = "validation_start_screen_offline_modus_information".localized
-        static let offlineModusNoteUpdate = "validation_start_screen_offline_modus_note_update".localized
-        static let offlineModusButton = "validation_start_screen_offline_modus_button".localized
+        static let title = "app_information_title_update".localized(bundle: .main)
+        static let offlineModusCerts = "app_information_message_update_certificates".localized(bundle: .main)
+        static let offlineModusRules = "app_information_message_update_rules".localized(bundle: .main)
+        static let offlineModusInformation = "app_information_message_update".localized(bundle: .main)
+        static let offlineModusNoteUpdate = "app_information_message_update_note".localized(bundle: .main)
+        static let offlineModusButton = "app_information_message_update_button".localized(bundle: .main)
     }
     enum Config {
         static let twoHoursAsSeconds = 7200.0
@@ -28,7 +26,7 @@ private enum Constants {
     }
 }
 
-class TrustedListDetailsViewModel {
+public class TrustedListDetailsViewModel {
     
     // MARK: - Properties
 
@@ -82,8 +80,8 @@ class TrustedListDetailsViewModel {
     
     // MARK: - Lifecycle
 
-    init(repository: VaccinationRepositoryProtocol,
-         certLogic: DCCCertLogicProtocol) {
+    public init(repository: VaccinationRepositoryProtocol,
+                certLogic: DCCCertLogicProtocol) {
         self.repository = repository
         self.certLogic = certLogic
     }

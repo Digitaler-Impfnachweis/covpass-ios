@@ -15,7 +15,7 @@ struct TrustedListDetailsSceneFactory: SceneFactory {
     func make() -> UIViewController {
         let repository = VaccinationRepository.create()
         let viewModel = TrustedListDetailsViewModel(repository: repository,
-                                                   certLogic: DCCCertLogic.create())
+                                                    certLogic: DCCCertLogic.create())
         let viewController = TrustedListDetailsViewController(viewModel: viewModel)
         return viewController
     }

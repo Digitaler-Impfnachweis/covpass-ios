@@ -25,7 +25,7 @@ class TrustedListDetailsViewSnapShotTests: BaseSnapShotTests {
         let certLogicMock = DCCCertLogicMock()
         certLogicMock.lastUpdateDccrRules = DateUtils.parseDate("2021-04-26T15:05:00")
         let vaccinationRepoMock = VaccinationRepositoryMock()
-        vaccinationRepoMock.lastUpdateTrustList = DateUtils.parseDate("2021-04-26T15:05:00")
+        vaccinationRepoMock.lastUpdatedTrustList = DateUtils.parseDate("2021-04-26T15:05:00")
         let sut = TrustedListDetailsViewModel(repository: vaccinationRepoMock,
                                               certLogic: certLogicMock)
         let vc: TrustedListDetailsViewController = TrustedListDetailsViewController(viewModel: sut)
@@ -37,7 +37,7 @@ class TrustedListDetailsViewSnapShotTests: BaseSnapShotTests {
         let certLogicMock = DCCCertLogicMock()
         certLogicMock.lastUpdateDccrRules = DateUtils.parseDate("2021-04-26T15:05:00")
         let vaccinationRepoMock = VaccinationRepositoryMock()
-        vaccinationRepoMock.lastUpdateTrustList = DateUtils.parseDate("2021-04-26T15:05:00")
+        vaccinationRepoMock.lastUpdatedTrustList = DateUtils.parseDate("2021-04-26T15:05:00")
         let sut = TrustedListDetailsViewModel(repository: vaccinationRepoMock,
                                               certLogic: certLogicMock)
         let vc: TrustedListDetailsViewController = TrustedListDetailsViewController(viewModel: sut)

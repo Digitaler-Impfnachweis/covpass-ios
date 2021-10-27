@@ -217,7 +217,7 @@
 
 "accessibility_certificate_check_validity_selection_date_announce" = "Die Ansicht \"Datum wählen\" wurde geöffnet";
 
-"certificate_check_validity_title" = "Gültigkeit für Reisen innerhalb der EU prüfen";
+"certificate_check_validity_title" = "Gültigkeit für Reisen prüfen";
 
 "accessibility_certificate_check_validity_selection_country_selected" = "%@, ausgewählt";
 
@@ -1061,6 +1061,8 @@
 
 /********** app information **********/
 
+"accessibility_app_information_title_update" = "Die Ansicht \"Reiseregeln aktualisieren\" wurde geöffnet";
+
 "accessibility_app_information_datenschutz_announce" = "Datenschutzerklärung-Ansicht wurde geöffnet";
 
 "accessibility_app_information_title_contact_announce" = "Kontakt-Ansicht wurde geöffnet";
@@ -1110,6 +1112,22 @@
 "app_information_message_open_source" = "Die App verwendet die folgenden Open-Source-Bibliotheken:";
 
 "accessibility_app_information_open_source_label_back" = "Zurück";
+
+"app_information_title_update" = "Reiseregeln aktualisieren";
+
+"app_information_message_update" = "Zur Überprüfung der Gültigkeit von Zertifikaten benötigt die App aktuelle Listen der vertrauenswürdigen Zertifikatsaussteller und der momentan geltenden Corona-Regeln in den entsprechenden Reiseländern.\n\nDiese Listen aktualisieren sich täglich automatisch. Sie können hier auch jederzeit eine manuelle Aktualisierung vornehmen. ";
+
+"app_information_message_update_note" = "Letztes Update";
+
+"app_information_message_update_pattern" = "Letztes Update: %@";
+
+"app_information_message_update_certificates" = "Liste der Zertifikatsaussteller: %@";
+
+"app_information_message_update_rules" = "Reiseregeln: %@";
+
+"app_information_message_update_button" = "Aktualisieren";
+
+"accessibility_app_information_update_back" = "Zurück";
 
 "app_information_version_label" = "Version %@";
 

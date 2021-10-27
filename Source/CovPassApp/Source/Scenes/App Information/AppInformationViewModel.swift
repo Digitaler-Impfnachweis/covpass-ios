@@ -63,6 +63,11 @@ class AppInformationViewModel: AppInformationViewModelProtocol {
             webEntry(
                 title: "app_information_title_open_source".localized,
                 url: Bundle.commonBundle.url(forResource: Locale.current.isGerman() ? "license_de" : "license_en", withExtension: "html")!
+            ),
+            
+            AppInformationEntry(
+                title: "app_information_title_update".localized,
+                scene: TrustedListDetailsSceneFactory()
             )
         ]
         if Locale.current.isGerman() {

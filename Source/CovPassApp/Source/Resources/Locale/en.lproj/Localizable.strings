@@ -217,7 +217,7 @@
 
 "accessibility_certificate_check_validity_selection_date_announce" = "The view \"Select date\" has been opened";
 
-"certificate_check_validity_title" = "Check validity for travelling within the EU";
+"certificate_check_validity_title" = "Check validity for travel";
 
 "accessibility_certificate_check_validity_selection_country_selected" = "%@, selected";
 
@@ -1061,6 +1061,8 @@
 
 /********** app information **********/
 
+"accessibility_app_information_title_update" = "The view \"Update travel rules\" has been opened";
+
 "accessibility_app_information_datenschutz_announce" = "Privacy policy has been opened";
 
 "accessibility_app_information_title_contact_announce" = "Contact has been opened";
@@ -1110,6 +1112,22 @@
 "app_information_message_open_source" = "The app uses the following open-source libraries:";
 
 "accessibility_app_information_open_source_label_back" = "Back";
+
+"app_information_title_update" = "Update travel rules";
+
+"app_information_message_update" = "To check the validity of certificates, the app requires up-to-date lists of trusted certificate issuers as well as the current Corona rules in the relevant travel countries.\n\nThese lists are updated automatically on a daily basis. You can also manually update them here at any time. ";
+
+"app_information_message_update_note" = "Most recent update";
+
+"app_information_message_update_pattern" = "Most recent update: %@";
+
+"app_information_message_update_certificates" = "List of certificate issuers: %@";
+
+"app_information_message_update_rules" = "Travel rules: %@";
+
+"app_information_message_update_button" = "Update";
+
+"accessibility_app_information_update_back" = "Back";
 
 "app_information_version_label" = "Version %@";
 
