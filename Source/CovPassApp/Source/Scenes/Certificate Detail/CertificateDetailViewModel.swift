@@ -63,15 +63,15 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
 
     var immunizationIcon: UIImage? {
         if selectedCertificate?.vaccinationCertificate.isExpired ?? false || selectedCertificate?.vaccinationCertificate.isInvalid ?? false {
-            return .statusExpired
+            return UIImage.statusExpiredCircle
         }
         if selectedCertificate?.vaccinationCertificate.hcert.dgc.r != nil {
-            return .statusFull
+            return UIImage.detailStatusFull
         }
         if selectedCertificate?.vaccinationCertificate.hcert.dgc.t != nil {
-            return .statusFull
+            return UIImage.detailStatusFull
         }
-        return fullImmunization ? .statusFull : .statusPartial
+        return fullImmunization ? UIImage.detailStatusFull : UIImage.detailStatusPartial
     }
 
     var immunizationTitle: String {
@@ -114,6 +114,9 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
         }
         if let cert = selectedCertificate?.vaccinationCertificate.hcert.dgc.v?.first(where: { $0.fullImmunization }), !cert.fullImmunizationValid {
             return "vaccination_certificate_overview_complete_from_message".localized
+        }
+        if !fullImmunization {
+            return "vaccination_certificate_overview_incomplete_message".localized
         }
         return "recovery_certificate_overview_message".localized
     }
