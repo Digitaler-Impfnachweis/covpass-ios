@@ -147,6 +147,8 @@
 
 "accessibility_certificate_add_popup_announce" = "The view \"Adding a certificate\" has been opened";
 
+"accessibility_certificate_add_popup_closing_announce" = "The view \"Adding a certificate\" has been closed";
+
 "accessibility_scan_success_announce" = "Certificate of %@ was added successfully";
 
 "accessibility_certificate_add_popup_image" = "Image: Person holds smartphone over three different certificates with QR code";
@@ -176,6 +178,8 @@
 "accessibility_scan_dialog_camera_access_announce" = "The view \"Camera access needed\" has been opened";
 
 "accessibility_scan_camera_announce" = "Camera has been opened";
+
+"accessibility_scan_camera_closing_announce" = "Camera has been closed";
 
 "accessibility_certificate_scan_mode_label_cancel" = "Cancel";
 
@@ -213,9 +217,19 @@
 
 "accessibility_certificate_check_validity_announce" = "The view \"Check validity\" has been opened";
 
+"accessibility_certificate_check_validity_closing_announce" = "The view \"Check validity\" has been closed";
+
 "accessibility_certificate_check_validity_selection_country_announce" = "The view \"Choose destination\" has been opened";
 
+"accessibility_certificate_check_validity_selection_country_closing_announce" = "The view \"Choose destination\" has been closed";
+
 "accessibility_certificate_check_validity_selection_date_announce" = "The view \"Select date\" has been opened";
+
+"accessibility_certificate_check_validity_selection_date_closing_announce" = "The view \"Select date\" has been closed";
+
+"accessibility_certificate_check_validity_selection_time_announce" = "The view \"Select time\" has been opened";
+
+"accessibility_certificate_check_validity_selection_time_closing_announce" = "The view \"Select time\" has been closed";
 
 "certificate_check_validity_title" = "Check validity for travel";
 
@@ -1063,7 +1077,11 @@
 
 "accessibility_app_information_title_update" = "The view \"Update travel rules\" has been opened";
 
+"accessibility_app_information_title_update_closing_announce" = "The view \"Update travel rules\" has been closed";
+
 "accessibility_app_information_datenschutz_announce" = "Privacy policy has been opened";
+
+"accessibility_app_information_datenschutz_closing_announce" = "Privacy policy has been closed";
 
 "accessibility_app_information_title_contact_announce" = "Contact has been opened";
 
