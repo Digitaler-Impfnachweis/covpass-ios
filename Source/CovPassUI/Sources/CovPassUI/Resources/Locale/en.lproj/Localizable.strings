@@ -78,6 +78,8 @@
 
 "button_back" = "Back";
 
+"accessibility_scan_camera_announce" = "Camera has been opened. The QR code will be scanned automatically.";
+
 /********** QRContainerView Accessibility **********/
 
 "qrCode" = "QR Code";

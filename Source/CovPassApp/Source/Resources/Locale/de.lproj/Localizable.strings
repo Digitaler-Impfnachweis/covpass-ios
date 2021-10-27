@@ -74,7 +74,7 @@
 
 "dialog_start_screen_button_update" = "Aktualisieren";
 
-"dialog_booster_vaccination_notification_title" = "Es gibt Neuigkeit zu Ihren Zertifikaten";
+"dialog_booster_vaccination_notification_title" = "Es gibt Neuigkeiten zu Ihren Zertifikaten";
 
 "dialog_booster_vaccination_notification_message" = "Bitte überprüfen Sie den Status Ihrer digitalen COVID-Zertifikate der EU.";
 
@@ -1113,9 +1113,9 @@
 
 "accessibility_app_information_open_source_label_back" = "Zurück";
 
-"app_information_title_update" = "Reiseregeln aktualisieren";
+"app_information_title_update" = "Einreiseregeln aktualisieren";
 
-"app_information_message_update" = "Zur Überprüfung der Gültigkeit von Zertifikaten benötigt die App aktuelle Listen der vertrauenswürdigen Zertifikatsaussteller und der momentan geltenden Corona-Regeln in den entsprechenden Reiseländern.\n\nDiese Listen aktualisieren sich täglich automatisch. Sie können hier auch jederzeit eine manuelle Aktualisierung vornehmen. ";
+"app_information_message_update" = "Zur Überprüfung der Gültigkeit von Zertifikaten benötigt die App aktuelle Listen der vertrauenswürdigen Zertifikatsaussteller und der momentan geltenden Corona-Einreiseregeln in den entsprechenden Ländern.\n\nDiese Listen aktualisieren sich täglich automatisch. Sie können hier auch jederzeit eine manuelle Aktualisierung vornehmen. ";
 
 "app_information_message_update_note" = "Letztes Update";
 
@@ -1123,7 +1123,7 @@
 
 "app_information_message_update_certificates" = "Liste der Zertifikatsaussteller: %@";
 
-"app_information_message_update_rules" = "Reiseregeln: %@";
+"app_information_message_update_rules" = "Einreiseregeln: %@";
 
 "app_information_message_update_button" = "Aktualisieren";
 

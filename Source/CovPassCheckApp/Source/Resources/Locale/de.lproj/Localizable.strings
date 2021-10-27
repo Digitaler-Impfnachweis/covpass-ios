@@ -83,7 +83,7 @@
 
 "validation_start_screen_scan_sync_message_title" = "Datum und Uhrzeit prüfen";
 
-"validation_start_screen_scan_sync_message_text" = "Bitte korrigieren Sie das Datum und die Uhrzeit Ihres Telefons. \n\n Soll: %@";
+"validation_start_screen_scan_sync_message_text" = "Bitte korrigieren Sie das Datum und die Uhrzeit Ihres Smartphones. \n\n Soll: %@";
 
 "validation_start_screen_scan_message" = "Scannen Sie jetzt das digitale COVID-Zertifikat der EU. Sie sehen sofort, ob die geprüfte Person ein gültiges COVID-Zertifikat besitzt.";
 

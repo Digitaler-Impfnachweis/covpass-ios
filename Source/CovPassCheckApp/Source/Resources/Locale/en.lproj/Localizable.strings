@@ -83,7 +83,7 @@
 
 "validation_start_screen_scan_sync_message_title" = "Check date and time";
 
-"validation_start_screen_scan_sync_message_text" = "Please check the date and time of your phone. \n\n It should be: %@";
+"validation_start_screen_scan_sync_message_text" = "Please check the date and time of your smartphone. \n\n It should be: %@";
 
 "validation_start_screen_scan_message" = "Scan the EU Digital COVID Certificate now. You see immediately if the person you are checking has a valid Covid-19 certificate.";
 

@@ -16,7 +16,7 @@ private enum Constants {
         static let close = VoiceOverOptions.Settings(label: "accessibility_button_scanner_label_close".localized)
         static let torchOn = VoiceOverOptions.Settings(label: "accessibility_button_label_torch_off".localized)
         static let torchOff = VoiceOverOptions.Settings(label: "accessibility_button_label_torch_on".localized)
-        static let scanner: String = "Automatischer Scan".localized
+        static let scanner: String = "accessibility_scan_camera_announce".localized
     }
 }
 

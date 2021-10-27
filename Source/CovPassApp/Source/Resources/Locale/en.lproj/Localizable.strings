@@ -74,7 +74,7 @@
 
 "dialog_start_screen_button_update" = "Update";
 
-"dialog_booster_vaccination_notification_title" = "There is news about your certificates";
+"dialog_booster_vaccination_notification_title" = "There are news about your certificates";
 
 "dialog_booster_vaccination_notification_message" = "Please check the status of your EU Digital COVID Certificates.";
 
@@ -1113,9 +1113,9 @@
 
 "accessibility_app_information_open_source_label_back" = "Back";
 
-"app_information_title_update" = "Update travel rules";
+"app_information_title_update" = "Update rules of entry";
 
-"app_information_message_update" = "To check the validity of certificates, the app requires up-to-date lists of trusted certificate issuers as well as the current Corona rules in the relevant travel countries.\n\nThese lists are updated automatically on a daily basis. You can also manually update them here at any time. ";
+"app_information_message_update" = "To check the validity of certificates, the app requires up-to-date lists of trusted certificate issuers as well as the current COVID-19 rules in the relevant travel countries.\n\nThese lists are updated automatically on a daily basis. You can also manually update them here at any time. ";
 
 "app_information_message_update_note" = "Most recent update";
 
@@ -1123,7 +1123,7 @@
 
 "app_information_message_update_certificates" = "List of certificate issuers: %@";
 
-"app_information_message_update_rules" = "Travel rules: %@";
+"app_information_message_update_rules" = "Rules of entry: %@";
 
 "app_information_message_update_button" = "Update";
 
