@@ -80,7 +80,7 @@ public enum TextStyle {
 
         case .mainButton:
             return string
-                .font(named: UIFont.sansSemiBold, size: 14.0, lineHeight: 21.0, textStyle: .headline)
+                .font(named: UIFont.sansSemiBold, size: 14.0, textStyle: .headline)
         }
     }
 }
