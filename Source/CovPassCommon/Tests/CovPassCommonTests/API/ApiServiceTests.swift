@@ -67,13 +67,13 @@ class ApiServiceTests: XCTestCase {
         XCTAssert(valueUserAgent.contains("build"))
         XCTAssert(valueUserAgent.contains("xctest"))
         XCTAssert(valueEncoding == "gzip;q=1.0, compress;q=0.5")
-        XCTAssert(valueLanguage == "en;q=1.0")
+        XCTAssert(valueLanguage.contains("en;q=1.0"))
     }
     
     func testUpdateEtagNil() throws {
         let urlString = "http://test.test"
         let url = URL(string: urlString)!
-        let urlResponse = URLResponse(url: url, mimeType: nil, expectedContentLength: 0, textEncodingName: nil)
+        let urlResponse = HTTPURLResponse(url: url, statusCode: 200, httpVersion: nil, headerFields: nil)
         UserDefaults.standard.setValue(nil, forKey: urlString)
         CustomURLSession.updateETag(urlResponse: urlResponse)
         let etag = APIService.eTagForURL(urlString: urlString)
