@@ -83,11 +83,13 @@
 
 "validation_start_screen_scan_sync_message_title" = "Check date and time";
 
-"validation_start_screen_scan_sync_message_text" = "Please check the date and time of your phone. \n\n It should be: %@";
+"validation_start_screen_scan_sync_message_text" = "Please check the date and time of your smartphone. \n\n It should be: %@";
 
 "validation_start_screen_scan_message" = "Scan the EU Digital COVID Certificate now. You see immediately if the person you are checking has a valid Covid-19 certificate.";
 
 "accessibility_scan_result_announce" = "Verification result is displayed";
+
+"accessibility_scan_result_closing_announce" = "The view \"Verification result“ has been closed";
 
 "validation_start_screen_scan_action_button_title" = "Scan certificate";
 
@@ -127,6 +129,8 @@
 "accessibility_scan_dialog_camera_access_label_close" = "Close";
 
 "accessibility_scan_camera_announce" = "Camera has been opened";
+
+"accessibility_scan_camera_closing_announce" = "Camera has been closed";
 
 "error_camera_access_title" = "The CovPassCheck app wants to access your camera.";
 
@@ -256,6 +260,8 @@
 "app_information_title_datenschutz" = "Privacy policy";
 
 "accessibility_app_information_datenschutz_announce" = "Privacy policy has been opened";
+
+"accessibility_app_information_datenschutz_closing_announce" = "Privacy policy has been closed";
 
 "app_information_title_company_details" = "Legal information";
 

@@ -74,7 +74,7 @@
 
 "dialog_start_screen_button_update" = "Aktualisieren";
 
-"dialog_booster_vaccination_notification_title" = "Es gibt Neuigkeit zu Ihren Zertifikaten";
+"dialog_booster_vaccination_notification_title" = "Es gibt Neuigkeiten zu Ihren Zertifikaten";
 
 "dialog_booster_vaccination_notification_message" = "Bitte überprüfen Sie den Status Ihrer digitalen COVID-Zertifikate der EU.";
 
@@ -147,6 +147,8 @@
 
 "accessibility_certificate_add_popup_announce" = "Die Ansicht \"Nachweis hinzufügen\" wurde geöffnet";
 
+"accessibility_certificate_add_popup_closing_announce" = "Die Ansicht \"Nachweis hinzufügen\" wurde geschlossen";
+
 "accessibility_scan_success_announce" = "Zertifikat von %@ wurde erfolgreich hinzugefügt";
 
 "accessibility_certificate_add_popup_image" = "Bild: Person hält das Smartphone über drei unterschiedliche Zertifikate mit QR-Code";
@@ -176,6 +178,8 @@
 "accessibility_scan_dialog_camera_access_announce" = "Die Ansicht \"Kamerazugriff benötigt\" wurde geöffnet";
 
 "accessibility_scan_camera_announce" = "Kamera-Ansicht wurde geöffnet";
+
+"accessibility_scan_camera_closing_announce" = "Kamera-Ansicht wurde geschlossen";
 
 "accessibility_certificate_scan_mode_label_cancel" = "Abbrechen";
 
@@ -213,9 +217,19 @@
 
 "accessibility_certificate_check_validity_announce" = "Die Ansicht \"Gültigkeit prüfen\" wurde geöffnet";
 
+"accessibility_certificate_check_validity_closing_announce" = "Die Ansicht \"Gültigkeit prüfen\" wurde geschlossen";
+
 "accessibility_certificate_check_validity_selection_country_announce" = "Die Ansicht \"Reiseland wählen\" wurde geöffnet";
 
+"accessibility_certificate_check_validity_selection_country_closing_announce" = "Die Ansicht \"Reiseland wählen\" wurde geschlossen";
+
 "accessibility_certificate_check_validity_selection_date_announce" = "Die Ansicht \"Datum wählen\" wurde geöffnet";
+
+"accessibility_certificate_check_validity_selection_date_closing_announce" = "Die Ansicht \"Datum wählen\" wurde geschlossen";
+
+"accessibility_certificate_check_validity_selection_time_announce" = "Die Ansicht \"Zeit wählen\" wurde geöffnet";
+
+"accessibility_certificate_check_validity_selection_time_closing_announce" = "Die Ansicht \"Zeit wählen\" wurde geschlossen";
 
 "certificate_check_validity_title" = "Gültigkeit für Reisen prüfen";
 
@@ -1061,9 +1075,13 @@
 
 /********** app information **********/
 
-"accessibility_app_information_title_update" = "Die Ansicht \"Reiseregeln aktualisieren\" wurde geöffnet";
+"accessibility_app_information_title_update" = "Die Ansicht \"Einreiseregeln aktualisieren\" wurde geöffnet";
 
-"accessibility_app_information_datenschutz_announce" = "Datenschutzerklärung-Ansicht wurde geöffnet";
+"accessibility_app_information_title_update_closing_announce" = "Die Ansicht \"Einreiseregeln aktualisieren\" wurde geschlossen";
+
+"accessibility_app_information_datenschutz_announce" = "Die Datenschutzerklärung wurde geöffnet";
+
+"accessibility_app_information_datenschutz_closing_announce" = "Die Datenschutzerklärung wurde geschlossen";
 
 "accessibility_app_information_title_contact_announce" = "Kontakt-Ansicht wurde geöffnet";
 
@@ -1113,9 +1131,9 @@
 
 "accessibility_app_information_open_source_label_back" = "Zurück";
 
-"app_information_title_update" = "Reiseregeln aktualisieren";
+"app_information_title_update" = "Einreiseregeln aktualisieren";
 
-"app_information_message_update" = "Zur Überprüfung der Gültigkeit von Zertifikaten benötigt die App aktuelle Listen der vertrauenswürdigen Zertifikatsaussteller und der momentan geltenden Corona-Regeln in den entsprechenden Reiseländern.\n\nDiese Listen aktualisieren sich täglich automatisch. Sie können hier auch jederzeit eine manuelle Aktualisierung vornehmen. ";
+"app_information_message_update" = "Zur Überprüfung der Gültigkeit von Zertifikaten benötigt die App aktuelle Listen der vertrauenswürdigen Zertifikatsaussteller und der momentan geltenden Corona-Einreiseregeln in den entsprechenden Ländern.\n\nDiese Listen aktualisieren sich täglich automatisch. Sie können hier auch jederzeit eine manuelle Aktualisierung vornehmen. ";
 
 "app_information_message_update_note" = "Letztes Update";
 
@@ -1123,7 +1141,7 @@
 
 "app_information_message_update_certificates" = "Liste der Zertifikatsaussteller: %@";
 
-"app_information_message_update_rules" = "Reiseregeln: %@";
+"app_information_message_update_rules" = "Einreiseregeln: %@";
 
 "app_information_message_update_button" = "Aktualisieren";
 
