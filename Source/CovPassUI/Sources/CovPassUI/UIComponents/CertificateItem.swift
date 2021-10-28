@@ -71,6 +71,7 @@ public class CertificateItem: XibView {
 
     private func setupAccessibility() {
         isAccessibilityElement = true
+        accessibilityTraits = .button
         titleLabel.accessibilityLabel = viewModel.titleAccessibilityLabel
         subtitleLabel.accessibilityLabel = viewModel.subtitleAccessibilityLabel
         infoLabel.accessibilityLabel = viewModel.infoAccessibilityLabel
