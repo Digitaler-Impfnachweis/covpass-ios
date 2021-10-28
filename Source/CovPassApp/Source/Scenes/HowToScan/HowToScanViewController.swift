@@ -14,6 +14,11 @@ private enum Constants {
         static let image = VoiceOverOptions.Settings(label: "accessibility_image_alternative_text".localized)
         static let close = VoiceOverOptions.Settings(label: "accessibility_certificate_add_dialog_camera_access_label_close".localized)
     }
+
+
+    enum Layout {
+        static let actionLineHeight: CGFloat = 17
+    }
 }
 
 class HowToScanViewController: UIViewController {
@@ -77,7 +82,7 @@ class HowToScanViewController: UIViewController {
     }
 
     private func configureActionView() {
-        actionView.textLabel.attributedText = viewModel.actionTitle.styledAs(.header_3)
+        actionView.textLabel.attributedText = viewModel.actionTitle.styledAs(.header_3).lineHeight(Constants.Layout.actionLineHeight)
         actionView.action = { [weak self] in
             self?.viewModel.showMoreInformation()
         }

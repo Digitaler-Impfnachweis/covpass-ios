@@ -12,7 +12,17 @@ import UIKit
 
 private enum Constants {
     static let qrInfoText = "certificates_start_screen_qr_code_app_reference_text".localized
-    enum Accessibility {}
+    enum Accessibility {
+        static let actionHint = "accessibility_button".localized
+    }
+    enum Layout {
+        static let cornerRadius: CGFloat = 26
+        static let shadowRadius: CGFloat = 16
+        static let shadowOpacity: CGFloat = 0.2
+        static let shadowOffset: CGSize = .init(width: 0, height: -4)
+        static let titleLineHeight: CGFloat = 33
+        static let actionLineHeight: CGFloat = 17
+    }
 }
 
 public typealias CertificateCardViewModelProtocol = CardViewModel & CertificateCardViewModelBase
@@ -56,14 +66,6 @@ public class CertificateCollectionViewCell: CardCollectionViewCell {
         }
     }
 
-    // MARK: - Private Properties
-
-    private let cornerRadius: CGFloat = 26
-    private let shadowRadius: CGFloat = 16
-    private let shadowOpacity: CGFloat = 0.2
-    private let shadowOffset: CGSize = .init(width: 0, height: -4)
-    private let titleLineHieght: CGFloat = 33
-
     // MARK: - Lifecycle
 
     override public func awakeFromNib() {
@@ -72,12 +74,12 @@ public class CertificateCollectionViewCell: CardCollectionViewCell {
 
         contentView.clipsToBounds = false
         contentView.layer.shadowColor = UIColor.neutralBlack.cgColor
-        contentView.layer.shadowRadius = shadowRadius
-        contentView.layer.shadowOpacity = Float(shadowOpacity)
-        contentView.layer.shadowOffset = shadowOffset
+        contentView.layer.shadowRadius = Constants.Layout.shadowRadius
+        contentView.layer.shadowOpacity = Float(Constants.Layout.shadowOpacity)
+        contentView.layer.shadowOffset = Constants.Layout.shadowOffset
 
         containerView.tintColor = .brandAccent
-        containerView.layer.cornerRadius = cornerRadius
+        containerView.layer.cornerRadius = Constants.Layout.cornerRadius
         containerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onPressAction)))
 
         contentStackView.setCustomSpacing(.space_8, after: titleStackView)
@@ -105,15 +107,15 @@ public class CertificateCollectionViewCell: CardCollectionViewCell {
 
         qrContainerView.showOverlay = vm.isExpired
 
-        titleView.textableView.attributedText = vm.name.styledAs(.header_1).lineHeight(titleLineHieght).colored(vm.tintColor)
+        titleView.textableView.attributedText = vm.name.styledAs(.header_1).lineHeight(Constants.Layout.titleLineHeight).colored(vm.tintColor)
         titleView.backgroundColor = .clear
         favoriteButton.tintColor = vm.tintColor
         favoriteButton.setImage((vm.isFavorite ? UIImage.starFull : UIImage.starPartial).withRenderingMode(.alwaysTemplate), for: .normal)
         favoriteButton.isHidden = !vm.showFavorite
         contentStackView.setCustomSpacing(.space_2, after: titleView)
 
-        actionView.titleLabel.attributedText = vm.actionTitle.styledAs(.body).colored(vm.tintColor)
-        actionView.titleLabel.accessibilityHint = "accessibility_button".localized
+        actionView.titleLabel.attributedText = vm.actionTitle.styledAs(.body).lineHeight(Constants.Layout.actionLineHeight).colored(vm.tintColor)
+        actionView.titleLabel.accessibilityHint = Constants.Accessibility.actionHint
         actionView.actionImage.tintColor = vm.tintColor
         actionView.tintColor = .neutralWhite
     }
