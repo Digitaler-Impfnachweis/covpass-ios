@@ -103,7 +103,7 @@ class CountrySelectionViewController: UIViewController {
         }
 
         // We can use forced unwrapping here because it's set via Constants
-        toolbarView.state = .confirm(Constants.Accessibility.close.label!)
+        toolbarView.state = .confirm(Constants.Accessibility.select.label!)
         toolbarView.delegate = self
     }
 }

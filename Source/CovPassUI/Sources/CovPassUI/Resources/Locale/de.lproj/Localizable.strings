@@ -63,7 +63,7 @@
 
 "error_standard_unexpected_message" = "Es ist ein unerwarteter Fehler aufgetreten. Bitte versuchen Sie es später erneut.";
 
-"error_connect_to_internet_Button_ok" = "OK";
+"error_connect_to_internet_button_ok" = "OK";
 
 /********** Camera Accessibility **********/
 

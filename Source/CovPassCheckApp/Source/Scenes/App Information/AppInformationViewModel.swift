@@ -69,7 +69,7 @@ class AppInformationViewModel: AppInformationViewModelProtocol {
             
             AppInformationEntry(
                 title: "app_information_title_update".localized,
-                scene: TrustedListDetailsSceneFactory()
+                scene: TrustedListDetailsSceneFactory(sceneCoordinator: router.sceneCoordinator)
             )
         ]
         if Locale.current.isGerman() {
