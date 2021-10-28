@@ -17,6 +17,10 @@ private enum Constants {
         static let image = VoiceOverOptions.Settings(label: "accessibility_image_alternative_text".localized)
         static let close = VoiceOverOptions.Settings(label: "accessibility_certificates_start_screen_pop_up_app_reference_label".localized)
     }
+
+    enum Layout {
+        static let actionLineHeight: CGFloat = 17
+    }
 }
 
 class ScanPleaseViewController: UIViewController {
@@ -70,7 +74,7 @@ class ScanPleaseViewController: UIViewController {
         linkDescriptionView.attributedBodyText = viewModel.linkDescription.styledAs(.body)
         linkDescriptionView.bottomBorder.isHidden = true
 
-        actionView.textLabel.attributedText = viewModel.linkText.styledAs(.header_3)
+        actionView.textLabel.attributedText = viewModel.linkText.styledAs(.header_3).lineHeight(Constants.Layout.actionLineHeight)
         actionView.action = { [weak self] in
             self?.viewModel.openCheckPassLink()
         }
