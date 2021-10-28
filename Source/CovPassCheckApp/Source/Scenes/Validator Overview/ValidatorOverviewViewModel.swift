@@ -131,7 +131,11 @@ class ValidatorOverviewViewModel {
             .done { [weak self] in
                 self?.delegate?.viewModelDidUpdate()
             }
-            .cauterize()
+            .catch { [weak self] error in
+                if let error = error as? APIError, error == .notModified {
+                    self?.delegate?.viewModelDidUpdate()
+                }
+            }
     }
     
     func updateDCCRules() {

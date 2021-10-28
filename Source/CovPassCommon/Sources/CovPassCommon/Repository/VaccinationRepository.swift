@@ -138,7 +138,7 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
     }
     
     public func updateTrustList() -> Promise<Void> {
-        firstly {
+        let promise = firstly {
             service.fetchTrustList()
         }
         .map(on: .global()) { trustList -> TrustList in
@@ -199,6 +199,14 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
             try keychain.store(KeychainPersistence.Keys.trustList.rawValue, value: data)
             UserDefaults.standard.setValue(Date(), forKey: UserDefaults.keyLastUpdatedTrustList)
         }
+        
+        promise.catch { error in
+            if let error = error as? APIError, error == .notModified {
+                UserDefaults.standard.setValue(Date(), forKey: UserDefaults.keyLastUpdatedTrustList)
+            }
+        }
+
+        return promise
     }
 
     public func delete(_ certificate: ExtendedCBORWebToken) -> Promise<Void> {

@@ -13,6 +13,7 @@ public enum APIError: Error, ErrorCode {
     case compressionFailed
     case invalidUrl
     case invalidResponse
+    case notModified
 
     public var errorCode: Int {
         switch self {
@@ -24,6 +25,8 @@ public enum APIError: Error, ErrorCode {
             return 103
         case .invalidResponse:
             return 104
+        case .notModified:
+            return 105
         }
     }
 }

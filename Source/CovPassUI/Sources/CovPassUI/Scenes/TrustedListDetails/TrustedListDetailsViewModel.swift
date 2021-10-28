@@ -61,9 +61,9 @@ public class TrustedListDetailsViewModel {
     func refresh() {
         isLoading = true
         firstly {
-            updateTrustList()
+            updateDCCRules()
         }
-        .then(updateDCCRules)
+        .then(updateTrustList)
         .catch({ error in
             switch (error as NSError).code {
             case -1009:self.router?.showNoInternetErrorDialog(error)

@@ -71,8 +71,10 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
             .done {
                 self.delegate?.viewModelDidUpdate()
             }
-            .catch { error in
-                print(error.localizedDescription)
+            .catch { [weak self] error in
+                if let error = error as? APIError, error == .notModified {
+                    self?.delegate?.viewModelDidUpdate()
+                }
             }
     }
 

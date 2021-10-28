@@ -63,11 +63,11 @@ class TrustedListDetailsViewModelTests: XCTestCase {
     
     func testRefresh() {
         // Given
-        let exp1 = expectation(description: "didRefresh vaccinationRepository")
-        let exp2 = expectation(description: "didRefresh certLogic")
+        let exp1 = expectation(description: "didRefresh didUpdateRules")
+        let exp2 = expectation(description: "didRefresh didUpdateTrustListHandler")
         let exp3 = expectation(description: "didUpdate viewModel")
-        vaccinationRepository.didUpdateTrustListHandler = { exp1.fulfill() }
-        certLogic.didUpdateRules = { exp2.fulfill() }
+        certLogic.didUpdateRules = { exp1.fulfill() }
+        vaccinationRepository.didUpdateTrustListHandler = { exp2.fulfill() }
         delegate.didUpdate = { exp3.fulfill() }
         
         // When
