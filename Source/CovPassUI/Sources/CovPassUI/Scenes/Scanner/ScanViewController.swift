@@ -52,10 +52,12 @@ class ScanViewController: UIViewController {
         container.addSubview(viewController.view)
         viewController.view.pinEdges(to: container)
         scanViewController = viewController
+        UIAccessibility.post(notification: .screenChanged, argument: viewModel.accessibilityScannerText)
     }
 
     private func configureToolbarView() {
         toolbarView.state = .cancel
+        toolbarView.leftButton.isHidden = true
         #if targetEnvironment(simulator)
             toolbarView.setUpRightButton(rightButtonItem: .flashLight)
 

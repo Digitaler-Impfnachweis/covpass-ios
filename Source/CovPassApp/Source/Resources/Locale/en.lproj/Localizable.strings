@@ -74,7 +74,7 @@
 
 "dialog_start_screen_button_update" = "Update";
 
-"dialog_booster_vaccination_notification_title" = "There is news about your certificates";
+"dialog_booster_vaccination_notification_title" = "There are news about your certificates";
 
 "dialog_booster_vaccination_notification_message" = "Please check the status of your EU Digital COVID Certificates.";
 
@@ -147,6 +147,8 @@
 
 "accessibility_certificate_add_popup_announce" = "The view \"Adding a certificate\" has been opened";
 
+"accessibility_certificate_add_popup_closing_announce" = "The view \"Adding a certificate\" has been closed";
+
 "accessibility_scan_success_announce" = "Certificate of %@ was added successfully";
 
 "accessibility_certificate_add_popup_image" = "Image: Person holds smartphone over three different certificates with QR code";
@@ -176,6 +178,8 @@
 "accessibility_scan_dialog_camera_access_announce" = "The view \"Camera access needed\" has been opened";
 
 "accessibility_scan_camera_announce" = "Camera has been opened";
+
+"accessibility_scan_camera_closing_announce" = "Camera has been closed";
 
 "accessibility_certificate_scan_mode_label_cancel" = "Cancel";
 
@@ -213,9 +217,19 @@
 
 "accessibility_certificate_check_validity_announce" = "The view \"Check validity\" has been opened";
 
+"accessibility_certificate_check_validity_closing_announce" = "The view \"Check validity\" has been closed";
+
 "accessibility_certificate_check_validity_selection_country_announce" = "The view \"Choose destination\" has been opened";
 
+"accessibility_certificate_check_validity_selection_country_closing_announce" = "The view \"Choose destination\" has been closed";
+
 "accessibility_certificate_check_validity_selection_date_announce" = "The view \"Select date\" has been opened";
+
+"accessibility_certificate_check_validity_selection_date_closing_announce" = "The view \"Select date\" has been closed";
+
+"accessibility_certificate_check_validity_selection_time_announce" = "The view \"Select time\" has been opened";
+
+"accessibility_certificate_check_validity_selection_time_closing_announce" = "The view \"Select time\" has been closed";
 
 "certificate_check_validity_title" = "Check validity for travel";
 
@@ -1063,7 +1077,11 @@
 
 "accessibility_app_information_title_update" = "The view \"Update travel rules\" has been opened";
 
+"accessibility_app_information_title_update_closing_announce" = "The view \"Update travel rules\" has been closed";
+
 "accessibility_app_information_datenschutz_announce" = "Privacy policy has been opened";
+
+"accessibility_app_information_datenschutz_closing_announce" = "Privacy policy has been closed";
 
 "accessibility_app_information_title_contact_announce" = "Contact has been opened";
 
@@ -1113,9 +1131,9 @@
 
 "accessibility_app_information_open_source_label_back" = "Back";
 
-"app_information_title_update" = "Update travel rules";
+"app_information_title_update" = "Update rules of entry";
 
-"app_information_message_update" = "To check the validity of certificates, the app requires up-to-date lists of trusted certificate issuers as well as the current Corona rules in the relevant travel countries.\n\nThese lists are updated automatically on a daily basis. You can also manually update them here at any time. ";
+"app_information_message_update" = "To check the validity of certificates, the app requires up-to-date lists of trusted certificate issuers as well as the current COVID-19 rules in the relevant travel countries.\n\nThese lists are updated automatically on a daily basis. You can also manually update them here at any time. ";
 
 "app_information_message_update_note" = "Most recent update";
 
@@ -1123,7 +1141,7 @@
 
 "app_information_message_update_certificates" = "List of certificate issuers: %@";
 
-"app_information_message_update_rules" = "Travel rules: %@";
+"app_information_message_update_rules" = "Rules of entry: %@";
 
 "app_information_message_update_button" = "Update";
 
