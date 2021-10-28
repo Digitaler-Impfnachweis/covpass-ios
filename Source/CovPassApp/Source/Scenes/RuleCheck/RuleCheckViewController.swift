@@ -130,6 +130,8 @@ class RuleCheckViewController: UIViewController {
         rulesHintView.bodyLabel.attributedText = viewModel.timeHintSubTitle.styledAs(.body)
         rulesHintView.containerTopConstraint.constant = Constants.Config.RulesHintView.topOffset
         rulesHintView.containerBottomConstraint.constant = Constants.Config.RulesHintView.bottomOffset
+        rulesHintView.enableAccessibility(label: "\(viewModel.timeHintTitle)\n\(viewModel.timeHintSubTitle)",
+                                          traits: .staticText)
     }
     
     private func updateTimeHintView() {

@@ -12,9 +12,21 @@ import UIKit
 
 struct TrustedListDetailsSceneFactory: SceneFactory {
 
+    // MARK: - Properties
+
+    let sceneCoordinator: SceneCoordinator
+
+    // MARK: - Lifecycle
+
+    init(sceneCoordinator: SceneCoordinator) {
+        self.sceneCoordinator = sceneCoordinator
+    }
+    
     func make() -> UIViewController {
         let repository = VaccinationRepository.create()
-        let viewModel = TrustedListDetailsViewModel(repository: repository,
+        let router = TrustedListDetailsRouter(sceneCoordinator: sceneCoordinator)
+        let viewModel = TrustedListDetailsViewModel(router: router,
+                                                    repository: repository,
                                                     certLogic: DCCCertLogic.create())
         let viewController = TrustedListDetailsViewController(viewModel: viewModel)
         return viewController

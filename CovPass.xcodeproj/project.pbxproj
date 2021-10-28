@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		0904337E270EFEA50008267B /* BaseSnapShotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0904337D270EFEA50008267B /* BaseSnapShotTests.swift */; };
+		091CEC342729A14700F8514F /* TrustedListDetailsSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091CEC332729A14700F8514F /* TrustedListDetailsSceneFactory.swift */; };
+		091CEC382729A20F00F8514F /* TrustedListDetailsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091CEC362729A20F00F8514F /* TrustedListDetailsRouter.swift */; };
+		091CEC392729A30A00F8514F /* TrustedListDetailsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0993330427299700000D6BF6 /* TrustedListDetailsRouter.swift */; };
+		091CEC3A2729A30A00F8514F /* TrustedListDetailsSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0993330327299700000D6BF6 /* TrustedListDetailsSceneFactory.swift */; };
 		092090E027060FC30000713F /* ValidatorOverviewViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092090DF27060FC30000713F /* ValidatorOverviewViewModelTests.swift */; };
 		0939EAB827043BD80086729C /* Kronos in Frameworks */ = {isa = PBXBuildFile; productRef = 0939EAB727043BD80086729C /* Kronos */; };
 		09590D242715E519004410D7 /* RulesCheckSnapShotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09590D1A2715E2E8004410D7 /* RulesCheckSnapShotTests.swift */; };
@@ -28,10 +32,6 @@
 		099E6903270DED09002C6926 /* FBSnapshotTestCase in Frameworks */ = {isa = PBXBuildFile; productRef = 099E6902270DED09002C6926 /* FBSnapshotTestCase */; };
 		099E6905270DEEE7002C6926 /* TrustedListDetailsViewSnapShotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 099E6904270DEEE7002C6926 /* TrustedListDetailsViewSnapShotTests.swift */; };
 		09A27BCA270F3A2C000FE4F9 /* TestExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A27BC9270F3A2C000FE4F9 /* TestExtension.swift */; };
-		09FA0832271F037000805629 /* TrustedListDetailsSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E5EB86271EBC3900365DF2 /* TrustedListDetailsSceneFactory.swift */; };
-		09FA0834271F038000805629 /* TrustedListDetailsSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09FA0833271F038000805629 /* TrustedListDetailsSceneFactory.swift */; };
-		09FA0836271F541100805629 /* TrustedListDetailsViewSnapShotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09FA0835271F541100805629 /* TrustedListDetailsViewSnapShotTests.swift */; };
-		09FA0838271F54A500805629 /* TestExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09FA0837271F54A500805629 /* TestExtension.swift */; };
 		216D1F48264EF50300370F16 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 216D1F43264EF50300370F16 /* Localizable.strings */; };
 		216D1F49264EF50300370F16 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 216D1F46264EF50300370F16 /* Assets.xcassets */; };
 		216D1F87264EF6A800370F16 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 216D1F86264EF6A800370F16 /* LaunchScreen.storyboard */; };
@@ -187,6 +187,7 @@
 		88AB2AC025FA433F00D4EA52 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88AB2A4625FA40CE00D4EA52 /* AppDelegate.swift */; };
 		88AB2ACE25FA434B00D4EA52 /* CovPassCheckAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88AB2A6025FA40CE00D4EA52 /* CovPassCheckAppTests.swift */; };
 		88BEE04226550E2500479E5E /* privacy-covpasscheck-de.html in Resources */ = {isa = PBXBuildFile; fileRef = 88BEE04126550E2500479E5E /* privacy-covpasscheck-de.html */; };
+		952B7AFB2729BCA8008F69D6 /* ScanPleaseSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952B7AFA2729BCA8008F69D6 /* ScanPleaseSnapshotTests.swift */; };
 		95961E892703550B00E577A4 /* ValidationResultFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95961E872703545200E577A4 /* ValidationResultFactoryTests.swift */; };
 		95961E8B270450CA00E577A4 /* Mocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95961E8A270450CA00E577A4 /* Mocks.swift */; };
 		95BB0D4827020EBE00885BA3 /* ScanPleaseSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95BB0D4227020EBE00885BA3 /* ScanPleaseSceneFactory.swift */; };
@@ -240,16 +241,16 @@
 
 /* Begin PBXFileReference section */
 		0904337D270EFEA50008267B /* BaseSnapShotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseSnapShotTests.swift; sourceTree = "<group>"; };
+		091CEC332729A14700F8514F /* TrustedListDetailsSceneFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrustedListDetailsSceneFactory.swift; sourceTree = "<group>"; };
+		091CEC362729A20F00F8514F /* TrustedListDetailsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrustedListDetailsRouter.swift; sourceTree = "<group>"; };
 		092090DF27060FC30000713F /* ValidatorOverviewViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatorOverviewViewModelTests.swift; sourceTree = "<group>"; };
 		09590D182715E2D6004410D7 /* BaseSnapShotTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseSnapShotTests.swift; sourceTree = "<group>"; };
 		09590D1A2715E2E8004410D7 /* RulesCheckSnapShotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesCheckSnapShotTests.swift; sourceTree = "<group>"; };
 		09590D3E2716117C004410D7 /* CertLogicMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertLogicMock.swift; sourceTree = "<group>"; };
+		0993330327299700000D6BF6 /* TrustedListDetailsSceneFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrustedListDetailsSceneFactory.swift; sourceTree = "<group>"; };
+		0993330427299700000D6BF6 /* TrustedListDetailsRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrustedListDetailsRouter.swift; sourceTree = "<group>"; };
 		099E6904270DEEE7002C6926 /* TrustedListDetailsViewSnapShotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrustedListDetailsViewSnapShotTests.swift; sourceTree = "<group>"; };
 		09A27BC9270F3A2C000FE4F9 /* TestExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestExtension.swift; sourceTree = "<group>"; };
-		09E5EB86271EBC3900365DF2 /* TrustedListDetailsSceneFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrustedListDetailsSceneFactory.swift; sourceTree = "<group>"; };
-		09FA0833271F038000805629 /* TrustedListDetailsSceneFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrustedListDetailsSceneFactory.swift; sourceTree = "<group>"; };
-		09FA0835271F541100805629 /* TrustedListDetailsViewSnapShotTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrustedListDetailsViewSnapShotTests.swift; sourceTree = "<group>"; };
-		09FA0837271F54A500805629 /* TestExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestExtension.swift; sourceTree = "<group>"; };
 		210116F82646D18100B9E8FF /* debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = debug.xcconfig; sourceTree = "<group>"; };
 		2101178C2646E86F00B9E8FF /* debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = debug.xcconfig; sourceTree = "<group>"; };
 		212E757D264F0D09007C0F3A /* CovPassUI */ = {isa = PBXFileReference; lastKnownFileType = folder; path = CovPassUI; sourceTree = "<group>"; };
@@ -431,6 +432,7 @@
 		88AB2A6025FA40CE00D4EA52 /* CovPassCheckAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CovPassCheckAppTests.swift; sourceTree = "<group>"; };
 		88AB2A6125FA40CE00D4EA52 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		88BEE04126550E2500479E5E /* privacy-covpasscheck-de.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "privacy-covpasscheck-de.html"; sourceTree = "<group>"; };
+		952B7AFA2729BCA8008F69D6 /* ScanPleaseSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanPleaseSnapshotTests.swift; sourceTree = "<group>"; };
 		95961E872703545200E577A4 /* ValidationResultFactoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationResultFactoryTests.swift; sourceTree = "<group>"; };
 		95961E8A270450CA00E577A4 /* Mocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mocks.swift; sourceTree = "<group>"; };
 		95BB0D4227020EBE00885BA3 /* ScanPleaseSceneFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanPleaseSceneFactory.swift; sourceTree = "<group>"; };
@@ -490,9 +492,9 @@
 		09590D172715E2B2004410D7 /* SnapShotTests */ = {
 			isa = PBXGroup;
 			children = (
-				09FA0835271F541100805629 /* TrustedListDetailsViewSnapShotTests.swift */,
 				09590D182715E2D6004410D7 /* BaseSnapShotTests.swift */,
 				09590D1A2715E2E8004410D7 /* RulesCheckSnapShotTests.swift */,
+				952B7AFA2729BCA8008F69D6 /* ScanPleaseSnapshotTests.swift */,
 			);
 			path = SnapShotTests;
 			sourceTree = "<group>";
@@ -500,7 +502,8 @@
 		09FA0830271F02F600805629 /* TrustedListUpdate */ = {
 			isa = PBXGroup;
 			children = (
-				09FA0833271F038000805629 /* TrustedListDetailsSceneFactory.swift */,
+				091CEC332729A14700F8514F /* TrustedListDetailsSceneFactory.swift */,
+				091CEC362729A20F00F8514F /* TrustedListDetailsRouter.swift */,
 			);
 			path = TrustedListUpdate;
 			sourceTree = "<group>";
@@ -508,7 +511,8 @@
 		09FA0831271F030200805629 /* TrustedListUpdate */ = {
 			isa = PBXGroup;
 			children = (
-				09E5EB86271EBC3900365DF2 /* TrustedListDetailsSceneFactory.swift */,
+				0993330427299700000D6BF6 /* TrustedListDetailsRouter.swift */,
+				0993330327299700000D6BF6 /* TrustedListDetailsSceneFactory.swift */,
 			);
 			path = TrustedListUpdate;
 			sourceTree = "<group>";
@@ -1259,7 +1263,6 @@
 		88AB2A3E25FA40CE00D4EA52 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				09FA0837271F54A500805629 /* TestExtension.swift */,
 				09590D172715E2B2004410D7 /* SnapShotTests */,
 				88AB2A3F25FA40CE00D4EA52 /* CovPassAppTests.swift */,
 				216D1F5B264EF52400370F16 /* Mock */,
@@ -1570,6 +1573,7 @@
 				216D1FB8264EF74F00370F16 /* CertificatesOverviewRouter.swift in Sources */,
 				38E36261269B744700DE6D4C /* RuleCheckRouterProtocol.swift in Sources */,
 				38A1978F26EB5AF800C0AC77 /* BoosterLogicFactory.swift in Sources */,
+				091CEC392729A30A00F8514F /* TrustedListDetailsRouter.swift in Sources */,
 				3865B76426DFE4670053D1D3 /* AnnouncementRouter.swift in Sources */,
 				385FC190269EB6A800D19AF8 /* CountrySelectionViewController.swift in Sources */,
 				38E3625A269B712900DE6D4C /* RuleCheckRouter.swift in Sources */,
@@ -1578,6 +1582,7 @@
 				351C6B4D26E15C2D00321B3C /* FileManager+Simulator.swift in Sources */,
 				216D2004264EF7B600370F16 /* StringLocalization.swift in Sources */,
 				216D1FCD264EF75D00370F16 /* CertificatesOverviewRouterProtocol.swift in Sources */,
+				091CEC3A2729A30A00F8514F /* TrustedListDetailsSceneFactory.swift in Sources */,
 				3882AEB0266FE9EE000354CD /* CertificateItemDetailRouter.swift in Sources */,
 				38E94DE9266121D60015553C /* VaccinationRepositoryExtension.swift in Sources */,
 				3882AEBD267006B4000354CD /* RecoveryCertificateItemViewModel.swift in Sources */,
@@ -1618,7 +1623,6 @@
 				3882AEB7266FEBA3000354CD /* CertificateItemDetailViewModelProtocol.swift in Sources */,
 				216D1FA7264EF74100370F16 /* WelcomeViewModel.swift in Sources */,
 				38E3625B269B712900DE6D4C /* RuleCheckViewController.swift in Sources */,
-				09FA0832271F037000805629 /* TrustedListDetailsSceneFactory.swift in Sources */,
 				216D1FF0264EF77200370F16 /* HowToScanViewModel.swift in Sources */,
 				35F99E1126B2B6F000D3EFC3 /* PDFExportViewController.swift in Sources */,
 				3523616626D66ABC0085B243 /* BoosterNotificationViewModel.swift in Sources */,
@@ -1658,13 +1662,13 @@
 				216D202C264EFA6600370F16 /* CertificateViewModelTests.swift in Sources */,
 				216D203E264EFA7400370F16 /* PassConsentPageViewModelTests.swift in Sources */,
 				216D202B264EFA6600370F16 /* CertificateViewControllerTests.swift in Sources */,
+				952B7AFB2729BCA8008F69D6 /* ScanPleaseSnapshotTests.swift in Sources */,
 				09FA0838271F54A500805629 /* TestExtension.swift in Sources */,
 				09590D242715E519004410D7 /* RulesCheckSnapShotTests.swift in Sources */,
 				09590D302715E67F004410D7 /* MockCardViewModel.swift in Sources */,
 				88AB2AA525FA431E00D4EA52 /* CovPassAppTests.swift in Sources */,
 				216D203D264EFA7400370F16 /* PassOnboardingPageViewModelTests.swift in Sources */,
 				09590D362715E67F004410D7 /* MockViewModelDelegate.swift in Sources */,
-				09FA0836271F541100805629 /* TrustedListDetailsViewSnapShotTests.swift in Sources */,
 				09590D252715E51C004410D7 /* BaseSnapShotTests.swift in Sources */,
 				09590D332715E67F004410D7 /* DCCServiceMock.swift in Sources */,
 				09590D372715E67F004410D7 /* CertificateDetailViewModelTests.swift in Sources */,
@@ -1694,6 +1698,7 @@
 				2181C1A5264F03BC00DE7412 /* OnboardingRouter.swift in Sources */,
 				2181C1B2264F040500DE7412 /* ApiServiceFactory.swift in Sources */,
 				2181C173264F037000DE7412 /* WelcomeRouter.swift in Sources */,
+				091CEC382729A20F00F8514F /* TrustedListDetailsRouter.swift in Sources */,
 				2181C163264F035500DE7412 /* ValidatorOverviewViewModel.swift in Sources */,
 				2181C1A9264F03BC00DE7412 /* OnboardingSceneFactory.swift in Sources */,
 				2181C1A4264F03BC00DE7412 /* ValidationOnboardingContainerViewModel.swift in Sources */,
@@ -1718,7 +1723,7 @@
 				2181C1A6264F03BC00DE7412 /* ValidationConsentPageViewModel.swift in Sources */,
 				2181C18A264F03A600DE7412 /* ValidationResultSceneFactory.swift in Sources */,
 				38E91BEE266D7AF00044BD56 /* TestResultViewModel.swift in Sources */,
-				09FA0834271F038000805629 /* TrustedListDetailsSceneFactory.swift in Sources */,
+				091CEC342729A14700F8514F /* TrustedListDetailsSceneFactory.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1894,7 +1899,6 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Source/CovPassApp/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;

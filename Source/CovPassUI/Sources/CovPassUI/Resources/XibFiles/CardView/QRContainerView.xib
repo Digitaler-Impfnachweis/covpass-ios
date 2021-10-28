@@ -60,7 +60,7 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qYw-W9-vMn" userLabel="overlay">
                             <rect key="frame" x="4" y="20.5" width="390" height="357"/>
                             <subviews>
-                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="status_expired" translatesAutoresizingMaskIntoConstraints="NO" id="zjz-4K-QwV">
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="status-expired-circle" translatesAutoresizingMaskIntoConstraints="NO" id="zjz-4K-QwV">
                                     <rect key="frame" x="157.5" y="141" width="75" height="75"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="75" id="0nK-N7-qY3"/>
@@ -119,7 +119,7 @@
         </view>
     </objects>
     <resources>
-        <image name="status_expired" width="32" height="32"/>
+        <image name="status-expired-circle" width="67" height="68"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
