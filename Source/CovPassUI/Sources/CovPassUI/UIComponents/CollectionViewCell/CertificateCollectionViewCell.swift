@@ -14,6 +14,8 @@ private enum Constants {
     static let qrInfoText = "certificates_start_screen_qr_code_app_reference_text".localized
     enum Accessibility {
         static let actionHint = "accessibility_button".localized
+        static let favoriteActive = "accessibility_certificate_favorite_button_label_active".localized(bundle: .main)
+        static let favoriteDeactive = "accessibility_certificate_favorite_button_label_not_active".localized(bundle: .main)
     }
     enum Layout {
         static let cornerRadius: CGFloat = 26
@@ -112,6 +114,8 @@ public class CertificateCollectionViewCell: CardCollectionViewCell {
         favoriteButton.tintColor = vm.tintColor
         favoriteButton.setImage((vm.isFavorite ? UIImage.starFull : UIImage.starPartial).withRenderingMode(.alwaysTemplate), for: .normal)
         favoriteButton.isHidden = !vm.showFavorite
+        let favoriteButtonAccessibilityText = vm.isFavorite ? Constants.Accessibility.favoriteActive : Constants.Accessibility.favoriteDeactive
+        favoriteButton.enableAccessibility(label: favoriteButtonAccessibilityText, traits: .button)
         contentStackView.setCustomSpacing(.space_2, after: titleView)
 
         actionView.titleLabel.attributedText = vm.actionTitle.styledAs(.body).lineHeight(Constants.Layout.actionLineHeight).colored(vm.tintColor)
