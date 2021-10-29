@@ -12,6 +12,7 @@ import UIKit
 private enum Constants {
     enum Accessibility {
         static let close = VoiceOverOptions.Settings(label: "accessibility_popup_label_close".localized)
+        static let heading = VoiceOverOptions.Settings(label: "accessibility_vaccination_certificate_detail_view_qrcode_screen_announce".localized)
     }
 }
 
@@ -43,6 +44,8 @@ class CertificateViewController: UIViewController {
         configureImageView()
         configureHeadline()
         configureToolbarView()
+        UIAccessibility.post(notification: .layoutChanged, argument: imageView)
+        
     }
 
     // MARK: - Private
@@ -54,6 +57,7 @@ class CertificateViewController: UIViewController {
 
     private func configureHeadline() {
         headline.attributedTitleText = nil
+        imageView.enableAccessibility(label: Constants.Accessibility.heading.label, traits: .header)
         headline.action = { [weak self] in
             self?.viewModel.cancel()
         }
