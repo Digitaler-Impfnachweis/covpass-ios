@@ -115,7 +115,7 @@ public class CertificateCollectionViewCell: CardCollectionViewCell {
         contentStackView.setCustomSpacing(.space_2, after: titleView)
 
         actionView.titleLabel.attributedText = vm.actionTitle.styledAs(.body).lineHeight(Constants.Layout.actionLineHeight).colored(vm.tintColor)
-        actionView.titleLabel.accessibilityHint = Constants.Accessibility.actionHint
+        actionView.enableAccessibility(label: vm.actionTitle, hint: Constants.Accessibility.actionHint, traits: .button)
         actionView.actionImage.tintColor = vm.tintColor
         actionView.tintColor = .neutralWhite
     }
