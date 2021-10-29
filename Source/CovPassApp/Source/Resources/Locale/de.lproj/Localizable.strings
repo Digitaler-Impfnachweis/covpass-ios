@@ -147,8 +147,6 @@
 
 "accessibility_certificate_add_popup_announce" = "Die Ansicht \"Nachweis hinzufügen\" wurde geöffnet";
 
-"accessibility_certificate_add_popup_closing_announce" = "Die Ansicht \"Nachweis hinzufügen\" wurde geschlossen";
-
 "accessibility_scan_success_announce" = "Zertifikat von %@ wurde erfolgreich hinzugefügt";
 
 "accessibility_certificate_add_popup_image" = "Bild: Person hält das Smartphone über drei unterschiedliche Zertifikate mit QR-Code";
@@ -157,7 +155,7 @@
 
 "certificate_add_popup_note_title" = "Kein Sperrcode auf Ihrem Smartphone vorhanden";
 
-"certificate_add_popup_note_message" = "Die CovPass-App speichert sensible Daten auf Ihrem Smartphone. Um die Daten vor fremdem Zugriff zu schützen, empfehlen wir Ihnen, eine Code zum Entsperren Ihres Smartphones einzurichten.";
+"certificate_add_popup_note_message" = "Die CovPass-App speichert sensible Daten auf Ihrem Smartphone. Um die Daten vor fremdem Zugriff zu schützen, empfehlen wir Ihnen, einen Code zum Entsperren Ihres Smartphones einzurichten.";
 
 "certificate_add_popup_message" = "Scannen Sie den QR-Code von einem digitalen COVID-Zertifikat der EU. Der Nachweis wird direkt in die CovPass-App übertragen.";
 
@@ -177,9 +175,7 @@
 
 "accessibility_scan_dialog_camera_access_announce" = "Die Ansicht \"Kamerazugriff benötigt\" wurde geöffnet";
 
-"accessibility_scan_camera_announce" = "Kamera-Ansicht wurde geöffnet";
-
-"accessibility_scan_camera_closing_announce" = "Kamera-Ansicht wurde geschlossen";
+"accessibility_scan_camera_announce" = "Kamera-Ansicht wurde geöffnet. Der QR-Code wird automatisch gescannt. ";
 
 "accessibility_certificate_scan_mode_label_cancel" = "Abbrechen";
 
@@ -217,19 +213,9 @@
 
 "accessibility_certificate_check_validity_announce" = "Die Ansicht \"Gültigkeit prüfen\" wurde geöffnet";
 
-"accessibility_certificate_check_validity_closing_announce" = "Die Ansicht \"Gültigkeit prüfen\" wurde geschlossen";
-
 "accessibility_certificate_check_validity_selection_country_announce" = "Die Ansicht \"Reiseland wählen\" wurde geöffnet";
 
-"accessibility_certificate_check_validity_selection_country_closing_announce" = "Die Ansicht \"Reiseland wählen\" wurde geschlossen";
-
 "accessibility_certificate_check_validity_selection_date_announce" = "Die Ansicht \"Datum wählen\" wurde geöffnet";
-
-"accessibility_certificate_check_validity_selection_date_closing_announce" = "Die Ansicht \"Datum wählen\" wurde geschlossen";
-
-"accessibility_certificate_check_validity_selection_time_announce" = "Die Ansicht \"Zeit wählen\" wurde geöffnet";
-
-"accessibility_certificate_check_validity_selection_time_closing_announce" = "Die Ansicht \"Zeit wählen\" wurde geschlossen";
 
 "certificate_check_validity_title" = "Gültigkeit für Reisen prüfen";
 
@@ -239,9 +225,9 @@
 
 "certificate_check_validity_message" = "Prüfen Sie vorab, ob Ihre Zertifikate in verschiedenen Ländern gültig sind. Hierfür werden die geltenden Einreiseregeln des gewählten Reiselands berücksichtigt.";
 
-"certificate_check_validity_travel_rules_not_up_to_title" = "Reiseregeln nicht aktuell";
+"certificate_check_validity_travel_rules_not_up_to_title" = "Einreiseregeln nicht aktuell";
 
-"certificate_check_validity_travel_rules_not_up_to_message" = "Die Reiseregeln werden in der App alle 24 Stunden aktualisiert. Leider schlug die letzte Aktualisierung fehl. Stellen Sie sicher, dass Ihr Smartphone mit dem Internet verbunden ist und versuchen Sie es erneut.";
+"certificate_check_validity_travel_rules_not_up_to_message" = "Die Einreiseregeln werden in der App alle 24 Stunden aktualisiert. Leider schlug die letzte Aktualisierung fehl. Stellen Sie sicher, dass Ihr Smartphone mit dem Internet verbunden ist und versuchen Sie es erneut.";
 
 "certificate_check_validity_selection_country" = "Land";
 
@@ -482,7 +468,7 @@
 
 "certificate_check_validity_detail_view_vaccination_result_title" = "Digitales COVID-Impfzertifikat der EU";
 
-"accessbility_certificate_check_validity_detail_view_vaccination_result_title" = "Digitale COVID Imofzertifikate der EU. Es folgen sensible Gesundheitsdaten. Bitte achten Sie darauf, dass keine andere Person mithört oder mitliest.";
+"accessbility_certificate_check_validity_detail_view_vaccination_result_title" = "Digitale COVID-Impfzertifikate der EU. Es folgen sensible Gesundheitsdaten. Bitte achten Sie darauf, dass keine andere Person mithört oder mitliest.";
 
 "certificate_check_validity_detail_view_vaccination_result_headline_data" = "Geprüfte Zertifikatsdaten:";
 
@@ -722,6 +708,10 @@
 
 "certificates_overview_pcr_test_certificate_date" = "Probenahme am %@";
 
+"certificates_overview_all_certificates_app_reference_title" = "Scannen bitte!";
+
+"certificates_overview_all_certificates_app_reference_text" = "Zeigen Sie diese sensiblen Daten nicht in Gaststätten, bei Veranstaltungen oder in ähnlichen Situationen vor. Lassen Sie Ihren QR-Code immer mit der CovPassCheck-App prüfen.";
+
 
 /********** detail view: delete certificate **********/
 
@@ -738,7 +728,7 @@
 
 "vaccination_certificate_detail_view_vaccination_headline" = "Digitales COVID-Impfzertifikat der EU";
 
-"accessibility_vaccination_certificate_detail_view_booster_vaccination_headline" = "Digitales COVID Impfzertifikat der EU. Es folgen sensible Gesundheitsdaten. Bitte achten Sie darauf, dass keine andere Person mithört oder mitliest.";
+"accessibility_vaccination_certificate_detail_view_booster_vaccination_headline" = "Digitales COVID-Impfzertifikat der EU. Es folgen sensible Gesundheitsdaten. Bitte achten Sie darauf, dass keine andere Person mithört oder mitliest.";
 
 "accessibility_vaccination_certificate_detail_view_qrcode_screen_announce" = "Die QR-Code-Ansicht wurde geöffnet";
 
@@ -784,9 +774,9 @@
 
 "accessibility_vaccination_certificate_detail_view_data_vaccine_country" = "Land der Impfung";
 
-"vaccination_certificate_detail_view_data_vaccine_issuer" = "Zertifikataussteller / Certificate issuer";
+"vaccination_certificate_detail_view_data_vaccine_issuer" = "Zertifikatsaussteller / Certificate issuer";
 
-"accessibility_vaccination_certificate_detail_view_data_vaccine_issuer" = "Zertifikataussteller";
+"accessibility_vaccination_certificate_detail_view_data_vaccine_issuer" = "Zertifikatsaussteller";
 
 "vaccination_certificate_detail_view_data_vaccine_identifier" = "Zertifikatkennung / Unique certificate identifier";
 
@@ -822,7 +812,7 @@
 
 "test_certificate_detail_view_headline" = "Digitales COVID-Testzertifikat der EU";
 
-"accessibility_test_certificate_detail_view_headline" = "Digitales COVID Testzertifikat. Es folgen sensible Gesundheitsdaten. Bitte achten Sie darauf, dass keine andere Person mithört oder mitliest.";
+"accessibility_test_certificate_detail_view_headline" = "Digitales COVID-Testzertifikat. Es folgen sensible Gesundheitsdaten. Bitte achten Sie darauf, dass keine andere Person mithört oder mitliest.";
 
 "test_certificate_detail_view_data_name" = "Name, Vorname / Name, first name";
 
@@ -835,10 +825,6 @@
 "test_certificate_detail_view_data_date_of_birth" = "Geburtsdatum / Date of birth (YYYY-MM-DD)";
 
 "accessibility_test_certificate_detail_view_data_date_of_birth" = "Geburtsdatum (Jahr-Monat-Tag)";
-
-"certificates_overview_all_certificates_app_reference_title" = "Scannen bitte!";
-
-"certificates_overview_all_certificates_app_reference_text" = "Zeigen Sie diese sensiblen Daten nicht in Gaststätten, bei Veranstaltungen oder in ähnlichen Situationen vor. Lassen Sie Ihren QR-Code immer mit der CovPassCheck-App prüfen.";
 
 "test_certificate_detail_view_data_disease" = "Zielkrankheit oder -erreger / Disease or pathogen";
 
@@ -1077,11 +1063,7 @@
 
 "accessibility_app_information_title_update" = "Die Ansicht \"Einreiseregeln aktualisieren\" wurde geöffnet";
 
-"accessibility_app_information_title_update_closing_announce" = "Die Ansicht \"Einreiseregeln aktualisieren\" wurde geschlossen";
-
-"accessibility_app_information_datenschutz_announce" = "Die Datenschutzerklärung wurde geöffnet";
-
-"accessibility_app_information_datenschutz_closing_announce" = "Die Datenschutzerklärung wurde geschlossen";
+"accessibility_app_information_datenschutz_announce" = "Datenschutzerklärung-Ansicht wurde geöffnet";
 
 "accessibility_app_information_title_contact_announce" = "Kontakt-Ansicht wurde geöffnet";
 

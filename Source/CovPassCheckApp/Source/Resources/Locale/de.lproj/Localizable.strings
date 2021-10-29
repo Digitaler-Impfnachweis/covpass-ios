@@ -29,7 +29,7 @@
 
 "validation_first_onboarding_page_title" = "Erster Schritt: Den QR-Code mit der CovPassCheck-App scannen";
 
-"validation_first_onboarding_page_message" = "Scannen Sie mit der CovPassCheck-App den QR-Code auf einem digitalen COVID-Zertifikat der EU. Die QR-Codes der Papierversion enthalten die gleichen Informationen wie die QR-Codes der elektronische Version in der CovPass-App oder in anderen Apps, in denen digitale COVID-Zertifikate der EU hinterlegt sind. Daher sind beide Zertifikatsversionen gleichwertig.";
+"validation_first_onboarding_page_message" = "Scannen Sie mit der CovPassCheck-App den QR-Code auf einem digitalen COVID-Zertifikat der EU. Die QR-Codes der Papierversion enthalten die gleichen Informationen wie die QR-Codes der elektronischen Version in der CovPass-App oder in anderen Apps, in denen digitale COVID-Zertifikate der EU hinterlegt sind. Daher sind beide Zertifikatsversionen gleichwertig.";
 
 "validation_second_onboarding_page_title" = "Zweiter Schritt: Die Identität mit einem Ausweisdokument überprüfen";
 
@@ -108,12 +108,6 @@
 "validation_start_screen_offline_modus_certificates" = "Liste der Zertifikatsaussteller: %@";
 
 "validation_start_screen_offline_modus_rules" = "Prüfregeln: %@";
-
-"validation_start_screen_offline_modus_information_title" = "Prüfregeln aktualisieren";
-
-"validation_start_screen_offline_modus_information" = "Zur Überprüfung eingescannter Zertifikate benötigt die App aktuelle Listen der vertrauenswürdigen Zertifikatsaussteller und der momentan in Deutschland geltenden Corona-Regeln.\n\nDiese Listen aktualisieren sich täglich automatisch. Sie können hier auch jederzeit eine manuelle Aktualisierung vornehmen.";
-
-"validation_start_screen_offline_modus_button" = "Aktualisieren";
 
 
 /********** popup: Check vaccination **********/

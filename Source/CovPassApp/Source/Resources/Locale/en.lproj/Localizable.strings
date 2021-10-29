@@ -68,7 +68,7 @@
 
 "dialog_start_screen_title" = "New update available";
 
-"dialog_start_screen_message" = "Would you like to update the CovPass-App now?";
+"dialog_start_screen_message" = "Would you like to update the CovPass app now?";
 
 "dialog_start_screen_button_later" = "Not now";
 
@@ -147,23 +147,21 @@
 
 "accessibility_certificate_add_popup_announce" = "The view \"Adding a certificate\" has been opened";
 
-"accessibility_certificate_add_popup_closing_announce" = "The view \"Adding a certificate\" has been closed";
-
 "accessibility_scan_success_announce" = "Certificate of %@ was added successfully";
 
 "accessibility_certificate_add_popup_image" = "Image: Person holds smartphone over three different certificates with QR code";
 
 "certificate_add_popup_title" = "Adding a certificate";
 
-"certificate_add_popup_note_title" = "Your phone is not protected by a code";
+"certificate_add_popup_note_title" = "Your smartphone is not protected by a code";
 
 "certificate_add_popup_note_message" = "The CovPass app saves sensitive data to your smartphone. To protect your data against access by strangers, we recommend that you set up an unlock code for your smartphone.";
 
 "certificate_add_popup_message" = "Scan the QR code on an EU Digital COVID Certificate. The certificate is transferred directly to the CovPass app.";
 
-"certificate_add_popup_action_title" = "Which QR code can I scan and save to my phone?";
+"certificate_add_popup_action_title" = "Which QR code can I scan and save to my smartphone?";
 
-"certificate_add_popup_action_title_linked" = "#Which QR code can I scan and save to my phone?::$0#";
+"certificate_add_popup_action_title_linked" = "#Which QR code can I scan and save to my smartphone?::$0#";
 
 "certificate_add_popup_scan_button_title" = "Scan QR code";
 
@@ -177,9 +175,7 @@
 
 "accessibility_scan_dialog_camera_access_announce" = "The view \"Camera access needed\" has been opened";
 
-"accessibility_scan_camera_announce" = "Camera has been opened";
-
-"accessibility_scan_camera_closing_announce" = "Camera has been closed";
+"accessibility_scan_camera_announce" = "Camera has been opened. The QR code will be scanned automatically.";
 
 "accessibility_certificate_scan_mode_label_cancel" = "Cancel";
 
@@ -217,19 +213,9 @@
 
 "accessibility_certificate_check_validity_announce" = "The view \"Check validity\" has been opened";
 
-"accessibility_certificate_check_validity_closing_announce" = "The view \"Check validity\" has been closed";
-
 "accessibility_certificate_check_validity_selection_country_announce" = "The view \"Choose destination\" has been opened";
 
-"accessibility_certificate_check_validity_selection_country_closing_announce" = "The view \"Choose destination\" has been closed";
-
 "accessibility_certificate_check_validity_selection_date_announce" = "The view \"Select date\" has been opened";
-
-"accessibility_certificate_check_validity_selection_date_closing_announce" = "The view \"Select date\" has been closed";
-
-"accessibility_certificate_check_validity_selection_time_announce" = "The view \"Select time\" has been opened";
-
-"accessibility_certificate_check_validity_selection_time_closing_announce" = "The view \"Select time\" has been closed";
 
 "certificate_check_validity_title" = "Check validity for travel";
 
@@ -239,9 +225,9 @@
 
 "certificate_check_validity_message" = "Check beforehand if your certificates are valid in different countries. This tool checks them against the travel regulations applicable in your chosen destination country.";
 
-"certificate_check_validity_travel_rules_not_up_to_title" = "Travel rules not up to date";
+"certificate_check_validity_travel_rules_not_up_to_title" = "Rules of entry not up to date";
 
-"certificate_check_validity_travel_rules_not_up_to_message" = "The travel rules are updated in the app every 24 hours. Unfortunately, the last update failed. Make sure your smartphone is connected to the internet and try again.";
+"certificate_check_validity_travel_rules_not_up_to_message" = "The rules of entry are updated in the app every 24 hours. Unfortunately, the last update failed. Make sure your smartphone is connected to the internet and try again.";
 
 "certificate_check_validity_selection_country" = "Country";
 
@@ -722,6 +708,10 @@
 
 "certificates_overview_pcr_test_certificate_date" = "Sample taken on %@";
 
+"certificates_overview_all_certificates_app_reference_title" = "Please scan!";
+
+"certificates_overview_all_certificates_app_reference_text" = "Do not show this sensitive data to other people in restaurants, at events or in similar situations. Always have your QR code checked with the CovPassCheck app.";
+
 
 /********** detail view: delete certificate **********/
 
@@ -784,7 +774,7 @@
 
 "accessibility_vaccination_certificate_detail_view_data_vaccine_country" = "Country vaccinating";
 
-"vaccination_certificate_detail_view_data_vaccine_issuer" = "Zertifikataussteller / Certificate issuer";
+"vaccination_certificate_detail_view_data_vaccine_issuer" = "Zertifikatsaussteller / Certificate issuer";
 
 "accessibility_vaccination_certificate_detail_view_data_vaccine_issuer" = "Certificate issuer";
 
@@ -835,10 +825,6 @@
 "test_certificate_detail_view_data_date_of_birth" = "Geburtsdatum / Date of birth (YYYY-MM-DD)";
 
 "accessibility_test_certificate_detail_view_data_date_of_birth" = "Date of birth (Year-Month-Day)";
-
-"certificates_overview_all_certificates_app_reference_title" = "Please scan!";
-
-"certificates_overview_all_certificates_app_reference_text" = "Do not show this sensitive data to other people in restaurants, at events or in similar situations. Always have your QR code checked with the CovPassCheck app.";
 
 "test_certificate_detail_view_data_disease" = "Zielkrankheit oder -erreger / Disease or pathogen";
 
@@ -1010,7 +996,7 @@
 
 /********** certificate delete dialog **********/
 
-"dialog_delete_certificate_title" = "Do you really want to delete this Covid certificate?";
+"dialog_delete_certificate_title" = "Do you really want to delete this COVID certificate?";
 
 "dialog_delete_certificate_message" = "The data will be permanently erased from this device. It will not be possible to recover the data.";
 
@@ -1051,7 +1037,7 @@
 
 "error_scan_present_data_is_not_supported_button_title" = "OK";
 
-"error_scan_qrcode_without_seal_title" = "Covid certificate does not have a valid signature";
+"error_scan_qrcode_without_seal_title" = "COVID certificate does not have a valid signature";
 
 "error_scan_qrcode_without_seal_message" = "This certificate might have been issued by an unauthorised organisation or the app might not have been updated. For the latter, please connect to the internet and try again later.";
 
@@ -1066,22 +1052,18 @@
 
 /********** dialog: duplicate certificate **********/
 
-"duplicate_certificate_dialog_header" = "Covid certificate already added";
+"duplicate_certificate_dialog_header" = "COVID certificate already added";
 
-"duplicate_certificate_dialog_message" = "The Covid certificate you have scanned is already in the app. You may potentially have scanned this Covid certificate twice.";
+"duplicate_certificate_dialog_message" = "The COVID certificate you have scanned is already in the app. You may potentially have scanned this COVID certificate twice.";
 
 "duplicate_certificate_dialog_button_title" = "OK";
 
 
 /********** app information **********/
 
-"accessibility_app_information_title_update" = "The view \"Update travel rules\" has been opened";
-
-"accessibility_app_information_title_update_closing_announce" = "The view \"Update travel rules\" has been closed";
+"accessibility_app_information_title_update" = "The view \"Update rules of entry\" has been opened";
 
 "accessibility_app_information_datenschutz_announce" = "Privacy policy has been opened";
-
-"accessibility_app_information_datenschutz_closing_announce" = "Privacy policy has been closed";
 
 "accessibility_app_information_title_contact_announce" = "Contact has been opened";
 
@@ -1133,7 +1115,7 @@
 
 "app_information_title_update" = "Update rules of entry";
 
-"app_information_message_update" = "To check the validity of certificates, the app requires up-to-date lists of trusted certificate issuers as well as the current COVID-19 rules in the relevant travel countries.\n\nThese lists are updated automatically on a daily basis. You can also manually update them here at any time. ";
+"app_information_message_update" = "To check the validity of certificates, the app requires up-to-date lists of trusted certificate issuers as well as the current Covid-19 rules in the relevant travel countries.\n\nThese lists are updated automatically on a daily basis. You can also manually update them here at any time. ";
 
 "app_information_message_update_note" = "Most recent update";
 
