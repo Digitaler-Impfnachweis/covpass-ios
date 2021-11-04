@@ -187,6 +187,7 @@
 		88AB2AC025FA433F00D4EA52 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88AB2A4625FA40CE00D4EA52 /* AppDelegate.swift */; };
 		88AB2ACE25FA434B00D4EA52 /* CovPassCheckAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88AB2A6025FA40CE00D4EA52 /* CovPassCheckAppTests.swift */; };
 		88BEE04226550E2500479E5E /* privacy-covpasscheck-de.html in Resources */ = {isa = PBXBuildFile; fileRef = 88BEE04126550E2500479E5E /* privacy-covpasscheck-de.html */; };
+		9514A5F22732A40E00987109 /* CertificateDetailViewControllerSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9514A5F12732A40E00987109 /* CertificateDetailViewControllerSnapshotTests.swift */; };
 		952B7AFB2729BCA8008F69D6 /* ScanPleaseSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952B7AFA2729BCA8008F69D6 /* ScanPleaseSnapshotTests.swift */; };
 		95961E892703550B00E577A4 /* ValidationResultFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95961E872703545200E577A4 /* ValidationResultFactoryTests.swift */; };
 		95961E8B270450CA00E577A4 /* Mocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95961E8A270450CA00E577A4 /* Mocks.swift */; };
@@ -432,6 +433,7 @@
 		88AB2A6025FA40CE00D4EA52 /* CovPassCheckAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CovPassCheckAppTests.swift; sourceTree = "<group>"; };
 		88AB2A6125FA40CE00D4EA52 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		88BEE04126550E2500479E5E /* privacy-covpasscheck-de.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "privacy-covpasscheck-de.html"; sourceTree = "<group>"; };
+		9514A5F12732A40E00987109 /* CertificateDetailViewControllerSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateDetailViewControllerSnapshotTests.swift; sourceTree = "<group>"; };
 		952B7AFA2729BCA8008F69D6 /* ScanPleaseSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanPleaseSnapshotTests.swift; sourceTree = "<group>"; };
 		95961E872703545200E577A4 /* ValidationResultFactoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationResultFactoryTests.swift; sourceTree = "<group>"; };
 		95961E8A270450CA00E577A4 /* Mocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mocks.swift; sourceTree = "<group>"; };
@@ -495,6 +497,7 @@
 				09590D182715E2D6004410D7 /* BaseSnapShotTests.swift */,
 				09590D1A2715E2E8004410D7 /* RulesCheckSnapShotTests.swift */,
 				952B7AFA2729BCA8008F69D6 /* ScanPleaseSnapshotTests.swift */,
+				9514A5F12732A40E00987109 /* CertificateDetailViewControllerSnapshotTests.swift */,
 			);
 			path = SnapShotTests;
 			sourceTree = "<group>";
@@ -1663,7 +1666,6 @@
 				216D203E264EFA7400370F16 /* PassConsentPageViewModelTests.swift in Sources */,
 				216D202B264EFA6600370F16 /* CertificateViewControllerTests.swift in Sources */,
 				952B7AFB2729BCA8008F69D6 /* ScanPleaseSnapshotTests.swift in Sources */,
-				09FA0838271F54A500805629 /* TestExtension.swift in Sources */,
 				09590D242715E519004410D7 /* RulesCheckSnapShotTests.swift in Sources */,
 				09590D302715E67F004410D7 /* MockCardViewModel.swift in Sources */,
 				88AB2AA525FA431E00D4EA52 /* CovPassAppTests.swift in Sources */,
@@ -1679,6 +1681,7 @@
 				09590D312715E67F004410D7 /* SceneCoordinatorMock.swift in Sources */,
 				95BB0D4F2702155600885BA3 /* ScanPleaseViewModelTests.swift in Sources */,
 				09590D392715E67F004410D7 /* MockCertificateViewModelDelegate.swift in Sources */,
+				9514A5F22732A40E00987109 /* CertificateDetailViewControllerSnapshotTests.swift in Sources */,
 				09590D322715E67F004410D7 /* VaccinationRepositoryMock.swift in Sources */,
 				09590D382715E67F004410D7 /* MockExtendedCBORWebToken.swift in Sources */,
 			);
