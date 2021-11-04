@@ -17,6 +17,10 @@ private enum Constants {
         static let addCertificate = VoiceOverOptions.Settings(label: "accessibility_vaccination_start_screen_label_add_certificate".localized)
         static let moreInformation = VoiceOverOptions.Settings(label: "accessibility_vaccination_start_screen_label_information".localized)
     }
+
+    enum Layout {
+        static let actionLineHeight: CGFloat = 17
+    }
 }
 
 class CertificatesOverviewViewController: UIViewController {
@@ -74,11 +78,11 @@ class CertificatesOverviewViewController: UIViewController {
     }
 
     private func setupHeaderView() {
-        headerView.attributedTitleText = "certificate_action_button_check_validity".localized.styledAs(.header_3).colored(.brandBase)
+        headerView.attributedTitleText = "certificate_action_button_check_validity".localized.styledAs(.header_3).colored(.brandBase).lineHeight(Constants.Layout.actionLineHeight)
         headerView.titleButton.isHidden = !viewModel.hasCertificates
         headerView.titleIcon.isHidden = !viewModel.hasCertificates
         headerView.image = .help
-        headerView.actionButton.enableAccessibility(label: Constants.Accessibility.moreInformation.label)
+        headerView.actionButton.enableAccessibility(label:  Constants.Accessibility.moreInformation.label)
 
         headerView.titleAction = { [weak self] in
             self?.viewModel.showRuleCheck()

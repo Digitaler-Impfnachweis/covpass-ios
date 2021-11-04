@@ -23,7 +23,21 @@ class BaseSnapShotTests: FBSnapshotTestCase {
                                        suffixes: NSOrderedSet(arrayLiteral: "_64"),
                                        perPixelTolerance: 0.1)
     }
-    
+
+    /// Snapshots the view with a given height
+    /// - Parameters:
+    ///   - view: the view to snapshot
+    ///   - record: record it or not
+    ///   - height: height of the view with should be recorded. Default is the main screen height
+    func verifyView(view: UIView, record: Bool = false, height: CGFloat = UIScreen.main.bounds.height) {
+        recordMode = record
+        view.frame.size = CGSize(width: UIScreen.main.bounds.width, height: height)
+        FBSnapshotVerifyView(view,
+                             identifier: Locale.preferredLanguages[0] ,
+                             suffixes: NSOrderedSet(arrayLiteral: "_64"),
+                             perPixelTolerance: 0.1)
+    }
+
     func verifyAsyc(vc: UIViewController,
                     wait: TimeInterval = 0.1,
                     record: Bool = false) {

@@ -12,7 +12,7 @@ import PromiseKit
 
 class ScanPleaseSnapshotTests: BaseSnapShotTests {
 
-    func testScanPlase() {
+    func testScanPlease() {
         let (_, resolver) = Promise<Void>.pending()
         let vm = ScanPleaseViewModel(router: ScanPleaseRouterMock(), resolvable: resolver)
         let vc = ScanPleaseViewController(viewModel: vm)
