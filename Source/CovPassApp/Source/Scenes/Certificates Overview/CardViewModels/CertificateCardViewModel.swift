@@ -142,7 +142,7 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
             return vaccinationCertificateIsValidNow ? UIImage.activity.withRenderingMode(.alwaysTemplate) : UIImage.activity.withRenderingMode(.alwaysOriginal)
         }
         if certificate.r != nil {
-            return UIImage.statusFullDetail
+            return showNotification ? UIImage.statusFullNotfication : UIImage.statusFullDetail
         }
         if certificate.t != nil {
             return UIImage.iconTest
