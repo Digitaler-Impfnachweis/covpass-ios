@@ -54,6 +54,6 @@ class CertificateOverviewSnapShotTests: BaseSnapShotTests {
         let viewController = CertificatesOverviewViewController(viewModel: viewModel)
         viewController.view.bounds = UIScreen.main.bounds
         RunLoop.current.run(for: 0.1)
-        vertifyView(vc: viewController)
+        verifyView(vc: viewController)
     }
 }

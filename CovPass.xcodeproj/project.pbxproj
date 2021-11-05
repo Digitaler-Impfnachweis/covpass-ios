@@ -196,6 +196,7 @@
 		952B7AFB2729BCA8008F69D6 /* ScanPleaseSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952B7AFA2729BCA8008F69D6 /* ScanPleaseSnapshotTests.swift */; };
 		95961E892703550B00E577A4 /* ValidationResultFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95961E872703545200E577A4 /* ValidationResultFactoryTests.swift */; };
 		95961E8B270450CA00E577A4 /* Mocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95961E8A270450CA00E577A4 /* Mocks.swift */; };
+		95A031EB27359AC60073FDD1 /* ValidationResultViewControllerSnapShotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A031E9273597880073FDD1 /* ValidationResultViewControllerSnapShotTests.swift */; };
 		95BB0D4827020EBE00885BA3 /* ScanPleaseSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95BB0D4227020EBE00885BA3 /* ScanPleaseSceneFactory.swift */; };
 		95BB0D4927020EBE00885BA3 /* ScanPleaseRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95BB0D4327020EBE00885BA3 /* ScanPleaseRouter.swift */; };
 		95BB0D4A27020EBE00885BA3 /* ScanPleaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95BB0D4427020EBE00885BA3 /* ScanPleaseViewController.swift */; };
@@ -447,6 +448,7 @@
 		952B7AFA2729BCA8008F69D6 /* ScanPleaseSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanPleaseSnapshotTests.swift; sourceTree = "<group>"; };
 		95961E872703545200E577A4 /* ValidationResultFactoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationResultFactoryTests.swift; sourceTree = "<group>"; };
 		95961E8A270450CA00E577A4 /* Mocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mocks.swift; sourceTree = "<group>"; };
+		95A031E9273597880073FDD1 /* ValidationResultViewControllerSnapShotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationResultViewControllerSnapShotTests.swift; sourceTree = "<group>"; };
 		95BB0D4227020EBE00885BA3 /* ScanPleaseSceneFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanPleaseSceneFactory.swift; sourceTree = "<group>"; };
 		95BB0D4327020EBE00885BA3 /* ScanPleaseRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanPleaseRouter.swift; sourceTree = "<group>"; };
 		95BB0D4427020EBE00885BA3 /* ScanPleaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanPleaseViewController.swift; sourceTree = "<group>"; };
@@ -497,6 +499,7 @@
 			children = (
 				0904337D270EFEA50008267B /* BaseSnapShotTests.swift */,
 				099E6904270DEEE7002C6926 /* TrustedListDetailsViewSnapShotTests.swift */,
+				95A031E9273597880073FDD1 /* ValidationResultViewControllerSnapShotTests.swift */,
 			);
 			path = SnapShotTests;
 			sourceTree = "<group>";
@@ -1754,6 +1757,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				95A031EB27359AC60073FDD1 /* ValidationResultViewControllerSnapShotTests.swift in Sources */,
 				95961E892703550B00E577A4 /* ValidationResultFactoryTests.swift in Sources */,
 				092090E027060FC30000713F /* ValidatorOverviewViewModelTests.swift in Sources */,
 				09A27BCA270F3A2C000FE4F9 /* TestExtension.swift in Sources */,

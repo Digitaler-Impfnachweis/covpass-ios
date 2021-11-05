@@ -12,23 +12,39 @@ import FBSnapshotTestCase
 class BaseSnapShotTests: FBSnapshotTestCase {
     override func setUp() {
         super.setUp()
-        recordMode = false
         fileNameOptions = .screenSize
     }
-    
-    func vertifyView(vc: UIViewController) {
+
+    func verifyView(vc: UIViewController, record: Bool = false) {
+        recordMode = record
         FBSnapshotVerifyViewController(vc,
                                        identifier: Locale.preferredLanguages[0] ,
                                        suffixes: NSOrderedSet(arrayLiteral: "_64"),
                                        perPixelTolerance: 0.1)
     }
-    
+
+    /// Snapshots the view with a given height
+    /// - Parameters:
+    ///   - view: the view to snapshot
+    ///   - record: record it or not
+    ///   - height: height of the view with should be recorded. Default is the main screen height
+    func verifyView(view: UIView, record: Bool = false, height: CGFloat = UIScreen.main.bounds.height) {
+        recordMode = record
+        view.frame.size = CGSize(width: UIScreen.main.bounds.width, height: height)
+        FBSnapshotVerifyView(view,
+                             identifier: Locale.preferredLanguages[0] ,
+                             suffixes: NSOrderedSet(arrayLiteral: "_64"),
+                             perPixelTolerance: 0.1)
+    }
+
     func verifyAsyc(vc: UIViewController,
-                    wait: TimeInterval = 0.1) {
+                    wait: TimeInterval = 0.1,
+                    record: Bool = false) {
+        recordMode = record
         let expectationHere = expectation(description: "Some Expectation")
         vc.view.bounds = UIScreen.main.bounds
         DispatchQueue.main.asyncAfter(deadline: .now() + wait) {
-            self.vertifyView(vc: vc)
+            self.verifyView(vc: vc)
             expectationHere.fulfill()
         }
         self.waitForExpectations(timeout: 1.0 + wait, handler: nil)
