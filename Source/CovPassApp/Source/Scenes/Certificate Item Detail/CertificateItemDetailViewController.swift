@@ -134,11 +134,14 @@ class CertificateItemDetailViewController: UIViewController {
         pdfExportButton.action = viewModel.startPDFExport
 
         pdfExportButton.disable()
-        pdfExportButton.isHidden = true
         if viewModel.canExportToPDF {
             // Some certificates such as tests or non-German ones cannot be exported
             pdfExportButton.enable()
-            pdfExportButton.isHidden = false            
+        } else {
+            let disclaimer = SecureContentView()
+            disclaimer.imageView.image = .info
+            disclaimer.bodyAttributedString = "vaccination_certificate_detail_view_pdf_action_button_note".localized.styledAs(.body)
+            buttonStackView.addArrangedSubview(disclaimer)
         }
     }
 
