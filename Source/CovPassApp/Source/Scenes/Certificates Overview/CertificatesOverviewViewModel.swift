@@ -19,8 +19,8 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
     weak var delegate: CertificatesOverviewViewModelDelegate?
     private var router: CertificatesOverviewRouterProtocol
     private let repository: VaccinationRepositoryProtocol
-    private let certLogic: DCCCertLogic
-    private let boosterLogic: BoosterLogic
+    private let certLogic: DCCCertLogicProtocol
+    private let boosterLogic: BoosterLogicProtocol
     private var certificateList = CertificateList(certificates: [])
     private var lastKnownFavoriteCertificateId: String?
     private var userDefaults: Persistence
@@ -42,8 +42,8 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
     init(
         router: CertificatesOverviewRouterProtocol,
         repository: VaccinationRepositoryProtocol,
-        certLogic: DCCCertLogic,
-        boosterLogic: BoosterLogic,
+        certLogic: DCCCertLogicProtocol,
+        boosterLogic: BoosterLogicProtocol,
         userDefaults: Persistence
     ) {
         self.router = router

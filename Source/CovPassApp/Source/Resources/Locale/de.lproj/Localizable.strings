@@ -82,6 +82,16 @@
 
 "accessibility_update_info_announce" = "Die Ansicht \"Neue Funktionen\" wurde geöffnet";
 
+"certificate_will_be_revoked_notification_icon_new" = "Neu";
+
+"certificate_will_be_revoked_notification_title" = "Ihr Zertifikat wird zum 11.11.2021 gesperrt";
+
+"certificate_will_be_revoked_notification_message" = " Aus Sicherheitsgründen müssen alle Zertifikate der von Ihnen besuchten Apotheke neu ausgestellt werden.\n\nIhr Zertifikat wird am 11.11.2021 gesperrt. Sie können sich unter Vorlage Ihres gelben Impfpasses und eines Lichtbildausweises in Ihrer Apotheke kostenfrei ein neues Impfzertifikat ausstellen lassen.";
+
+"certificate_will_be_revoked_notification_button" = "OK";
+
+"accessibility_certificate_will_be_revoked_info_announce" = "Die Ansicht \"Zertifikat wird gesperrt\" wurde geöffnet";
+
 
 /********** start screen **********/
 
@@ -114,6 +124,8 @@
 "certificates_start_screen_qrcode_certificate_invalid_subtitle" = "Ungültig";
 
 "vaccination_start_screen_qrcode_booster_vaccination_note_subtitle" = "Impfstatus überprüfen";
+
+"vaccination_start_screen_qrcode_certificate_will_be_revoked_subtitle" = "Zertifikat wird bald gesperrt";
 
 "certificates_start_screen_qr_code_app_reference_text" = "Dieser QR-Code lässt sich verlässlich mit der CovPassCheck-App prüfen.";
 

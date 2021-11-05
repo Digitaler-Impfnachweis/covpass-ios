@@ -109,6 +109,12 @@
 
 "validation_start_screen_offline_modus_rules" = "Rule set: %@";
 
+"validation_start_screen_offline_modus_information_title" = "Update rule set";
+
+"validation_start_screen_offline_modus_information" = "To verify scanned certificates, the app requires up-to-date lists of trusted certificate issuers as well as the current Corona rules in Germany.\n\nThese lists are updated automatically on a daily basis. You can also manually update them here at any time.";
+
+"validation_start_screen_offline_modus_button" = "Update";
+
 
 /********** popup: Check vaccination **********/
 
@@ -145,6 +151,8 @@
 "validation_check_popup_valid_vaccination_date_of_birth" = "Born on %@";
 
 "validation_check_popup_valid_vaccination_recovery_note" = "* Person has recovery or vaccination certificate.";
+
+"validation_check_popup_valid_vaccination_abda_incident_note" = " This is a valid certificate, but it will soon be revoked due to fraud investigations.\n\nPlease advise the certificate holder that he or she must present their yellow vaccination certificate and photo ID to a pharmacy by 11/11/2021. The pharmacy will issue a new vaccination certificate free of charge.";
 
 "technical_validation_check_popup_unsuccessful_certificate_title" = "Certificate not valid";
 

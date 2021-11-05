@@ -29,6 +29,11 @@
 		09590D3B27160BA7004410D7 /* FBSnapshotTestCase in Frameworks */ = {isa = PBXBuildFile; productRef = 09590D3A27160BA7004410D7 /* FBSnapshotTestCase */; };
 		09590D3D27160BA7004410D7 /* FBSnapshotTestCase in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 09590D3A27160BA7004410D7 /* FBSnapshotTestCase */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		09590D4027161182004410D7 /* CertLogicMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09590D3E2716117C004410D7 /* CertLogicMock.swift */; };
+		0994A4D02734319800B21FCF /* CertificateOverviewSnapShotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0994A4CE2734319800B21FCF /* CertificateOverviewSnapShotTests.swift */; };
+		0994A4D12734319800B21FCF /* TrustedListDetailsViewSnapShotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0994A4CF2734319800B21FCF /* TrustedListDetailsViewSnapShotTests.swift */; };
+		0994A4D5273431A500B21FCF /* TestUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0994A4D2273431A500B21FCF /* TestUtil.swift */; };
+		0994A4D6273431A500B21FCF /* WebTokenMockUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0994A4D3273431A500B21FCF /* WebTokenMockUtil.swift */; };
+		0994A4D7273431A500B21FCF /* BoosterLogicMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0994A4D4273431A500B21FCF /* BoosterLogicMock.swift */; };
 		099E6903270DED09002C6926 /* FBSnapshotTestCase in Frameworks */ = {isa = PBXBuildFile; productRef = 099E6902270DED09002C6926 /* FBSnapshotTestCase */; };
 		099E6905270DEEE7002C6926 /* TrustedListDetailsViewSnapShotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 099E6904270DEEE7002C6926 /* TrustedListDetailsViewSnapShotTests.swift */; };
 		09A27BCA270F3A2C000FE4F9 /* TestExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A27BC9270F3A2C000FE4F9 /* TestExtension.swift */; };
@@ -250,6 +255,11 @@
 		09590D3E2716117C004410D7 /* CertLogicMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertLogicMock.swift; sourceTree = "<group>"; };
 		0993330327299700000D6BF6 /* TrustedListDetailsSceneFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrustedListDetailsSceneFactory.swift; sourceTree = "<group>"; };
 		0993330427299700000D6BF6 /* TrustedListDetailsRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrustedListDetailsRouter.swift; sourceTree = "<group>"; };
+		0994A4CE2734319800B21FCF /* CertificateOverviewSnapShotTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertificateOverviewSnapShotTests.swift; sourceTree = "<group>"; };
+		0994A4CF2734319800B21FCF /* TrustedListDetailsViewSnapShotTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrustedListDetailsViewSnapShotTests.swift; sourceTree = "<group>"; };
+		0994A4D2273431A500B21FCF /* TestUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestUtil.swift; sourceTree = "<group>"; };
+		0994A4D3273431A500B21FCF /* WebTokenMockUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebTokenMockUtil.swift; sourceTree = "<group>"; };
+		0994A4D4273431A500B21FCF /* BoosterLogicMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoosterLogicMock.swift; sourceTree = "<group>"; };
 		099E6904270DEEE7002C6926 /* TrustedListDetailsViewSnapShotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrustedListDetailsViewSnapShotTests.swift; sourceTree = "<group>"; };
 		09A27BC9270F3A2C000FE4F9 /* TestExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestExtension.swift; sourceTree = "<group>"; };
 		210116F82646D18100B9E8FF /* debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = debug.xcconfig; sourceTree = "<group>"; };
@@ -494,6 +504,8 @@
 		09590D172715E2B2004410D7 /* SnapShotTests */ = {
 			isa = PBXGroup;
 			children = (
+				0994A4CE2734319800B21FCF /* CertificateOverviewSnapShotTests.swift */,
+				0994A4CF2734319800B21FCF /* TrustedListDetailsViewSnapShotTests.swift */,
 				09590D182715E2D6004410D7 /* BaseSnapShotTests.swift */,
 				09590D1A2715E2E8004410D7 /* RulesCheckSnapShotTests.swift */,
 				952B7AFA2729BCA8008F69D6 /* ScanPleaseSnapshotTests.swift */,
@@ -740,6 +752,9 @@
 		216D1F5B264EF52400370F16 /* Mock */ = {
 			isa = PBXGroup;
 			children = (
+				0994A4D4273431A500B21FCF /* BoosterLogicMock.swift */,
+				0994A4D2273431A500B21FCF /* TestUtil.swift */,
+				0994A4D3273431A500B21FCF /* WebTokenMockUtil.swift */,
 				216D1F5D264EF52400370F16 /* MockCertificateViewModel.swift */,
 				09590D3E2716117C004410D7 /* CertLogicMock.swift */,
 				216D1F5E264EF52400370F16 /* VaccinationRepositoryMock.swift */,
@@ -1668,6 +1683,10 @@
 				952B7AFB2729BCA8008F69D6 /* ScanPleaseSnapshotTests.swift in Sources */,
 				09590D242715E519004410D7 /* RulesCheckSnapShotTests.swift in Sources */,
 				09590D302715E67F004410D7 /* MockCardViewModel.swift in Sources */,
+				0994A4D6273431A500B21FCF /* WebTokenMockUtil.swift in Sources */,
+				0994A4D12734319800B21FCF /* TrustedListDetailsViewSnapShotTests.swift in Sources */,
+				0994A4D5273431A500B21FCF /* TestUtil.swift in Sources */,
+				0994A4D7273431A500B21FCF /* BoosterLogicMock.swift in Sources */,
 				88AB2AA525FA431E00D4EA52 /* CovPassAppTests.swift in Sources */,
 				216D203D264EFA7400370F16 /* PassOnboardingPageViewModelTests.swift in Sources */,
 				09590D362715E67F004410D7 /* MockViewModelDelegate.swift in Sources */,
@@ -1680,6 +1699,7 @@
 				386FDCFC26ED205900AC7639 /* BoosterNotificationViewModelTests.swift in Sources */,
 				09590D312715E67F004410D7 /* SceneCoordinatorMock.swift in Sources */,
 				95BB0D4F2702155600885BA3 /* ScanPleaseViewModelTests.swift in Sources */,
+				0994A4D02734319800B21FCF /* CertificateOverviewSnapShotTests.swift in Sources */,
 				09590D392715E67F004410D7 /* MockCertificateViewModelDelegate.swift in Sources */,
 				9514A5F22732A40E00987109 /* CertificateDetailViewControllerSnapshotTests.swift in Sources */,
 				09590D322715E67F004410D7 /* VaccinationRepositoryMock.swift in Sources */,

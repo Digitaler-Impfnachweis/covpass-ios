@@ -109,6 +109,12 @@
 
 "validation_start_screen_offline_modus_rules" = "Prüfregeln: %@";
 
+"validation_start_screen_offline_modus_information_title" = "Prüfregeln aktualisieren";
+
+"validation_start_screen_offline_modus_information" = "Zur Überprüfung eingescannter Zertifikate benötigt die App aktuelle Listen der vertrauenswürdigen Zertifikatsaussteller und der momentan in Deutschland geltenden Corona-Regeln.\n\nDiese Listen aktualisieren sich täglich automatisch. Sie können hier auch jederzeit eine manuelle Aktualisierung vornehmen.";
+
+"validation_start_screen_offline_modus_button" = "Aktualisieren";
+
 
 /********** popup: Check vaccination **********/
 
@@ -145,6 +151,8 @@
 "validation_check_popup_valid_vaccination_date_of_birth" = "Geboren am %@";
 
 "validation_check_popup_valid_vaccination_recovery_note" = "* Genesenen- oder Impfzertifikat liegt vor.";
+
+"validation_check_popup_valid_vaccination_abda_incident_note" = "Dies ist ein gültiges Zertifikat, das jedoch aufgrund von Betrugsermittlungen bald gesperrt werden wird.\n\nWeisen Sie den oder die Zertifikatsinhaber:in unbedingt darauf hin, dass er oder sie sich unter Vorlage des gelben Impfpasses und eines Lichtbildausweises bis zum 11.11.2021 in der Apotheke ein neues, kostenfreies Impfzertifikat ausstellen lassen muss. ";
 
 "technical_validation_check_popup_unsuccessful_certificate_title" = "Zertifikat nicht gültig";
 
