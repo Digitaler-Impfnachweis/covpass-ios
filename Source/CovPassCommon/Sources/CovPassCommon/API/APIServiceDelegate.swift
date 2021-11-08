@@ -83,7 +83,7 @@ extension APIServiceDelegate: URLSessionDelegate {
         #endif
 
         if
-            let serverCertificate = SecTrustGetCertificateAtIndex(trust, 0), // FIXME: don't pin to leaf!
+            let serverCertificate = SecTrustGetCertificateAtIndex(trust, 0),
             let serverPublicKey = SecCertificateCopyKey(serverCertificate),
             let serverPublicKeyData = SecKeyCopyExternalRepresentation(serverPublicKey, nil) as Data?
         {
