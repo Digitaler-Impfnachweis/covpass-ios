@@ -109,7 +109,9 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
             return "certificates_overview_invalid_certificate_note".localized
         }
         if let r = certificate.r?.first {
-            if Date() < r.df {
+            if showNotification {
+                return "vaccination_start_screen_qrcode_booster_vaccination_note_subtitle".localized
+            } else if Date() < r.df {
                 return String(format: "certificates_overview_recovery_certificate_valid_from_date".localized, DateUtils.displayDateFormatter.string(from: r.df))
             }
             return String(format: "certificates_overview_recovery_certificate_valid_until_date".localized, DateUtils.displayDateFormatter.string(from: r.du))
