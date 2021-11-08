@@ -17,7 +17,7 @@ class TrustedListDetailsViewSnapShotTests: BaseSnapShotTests {
         let sut = TrustedListDetailsViewModel(repository: vaccinationRepoMock,
                                               certLogic: certLogicMock)
         let vc: TrustedListDetailsViewController = TrustedListDetailsViewController(viewModel: sut)
-        vertifyView(vc: vc)
+        verifyView(vc: vc)
     }
     
     
@@ -29,7 +29,7 @@ class TrustedListDetailsViewSnapShotTests: BaseSnapShotTests {
         let sut = TrustedListDetailsViewModel(repository: vaccinationRepoMock,
                                               certLogic: certLogicMock)
         let vc: TrustedListDetailsViewController = TrustedListDetailsViewController(viewModel: sut)
-        vertifyView(vc: vc)
+        verifyView(vc: vc)
     }
     
     
@@ -44,7 +44,7 @@ class TrustedListDetailsViewSnapShotTests: BaseSnapShotTests {
         vc.view.bounds = UIScreen.main.bounds
         RunLoop.current.run(for: 0.1)
         vc.mainButton.innerButton.sendActions(for: .touchUpInside)
-        self.vertifyView(vc: vc)
+        verifyView(vc: vc)
     }
     
 }

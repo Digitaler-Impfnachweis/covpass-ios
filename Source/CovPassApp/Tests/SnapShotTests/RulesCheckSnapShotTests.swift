@@ -22,7 +22,7 @@ class RulesCheckSnapShotTests: BaseSnapShotTests {
                                      certLogic: certLogicMock)
         sut.date = DateUtils.parseDate("2021-04-26T15:05:00")!
         let vc = RuleCheckViewController(viewModel: sut)
-        vertifyView(vc: vc)
+        verifyView(vc: vc)
     }
     
     func testWithLastUpdateNow() {
@@ -37,7 +37,7 @@ class RulesCheckSnapShotTests: BaseSnapShotTests {
                                      certLogic: certLogicMock)
         sut.date = DateUtils.parseDate("2021-04-26T15:05:00")!
         let vc = RuleCheckViewController(viewModel: sut)
-        vertifyView(vc: vc)
+        verifyView(vc: vc)
     }
     
     func testWithoutLastUpdateAfterLoaded() {

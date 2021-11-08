@@ -77,7 +77,7 @@ class ValidationResultViewController: UIViewController {
             let p = ParagraphView()
             p.attributedTitleText = $0.title.styledAs(.header_3)
             p.attributedBodyText = $0.subtitle.styledAs(.body)
-            p.image = $0.icon?.withRenderingMode(.alwaysTemplate)
+            p.image = $0.icon
             p.imageView.tintColor = .brandAccent
             p.bottomBorder.isHidden = true
             p.layoutMargins.bottom = .space_20

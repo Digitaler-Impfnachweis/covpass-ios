@@ -16,7 +16,7 @@ class ScanPleaseSnapshotTests: BaseSnapShotTests {
         let (_, resolver) = Promise<Void>.pending()
         let vm = ScanPleaseViewModel(router: ScanPleaseRouterMock(), resolvable: resolver)
         let vc = ScanPleaseViewController(viewModel: vm)
-        vertifyView(vc: vc)
+        verifyView(vc: vc)
     }
 
 }

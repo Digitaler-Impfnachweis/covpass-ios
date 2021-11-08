@@ -16,7 +16,7 @@ class BaseSnapShotTests: FBSnapshotTestCase {
         fileNameOptions = .screenSize
     }
     
-    func vertifyView(vc: UIViewController, record: Bool = false) {
+    func verifyView(vc: UIViewController, record: Bool = false) {
         recordMode = record
         FBSnapshotVerifyViewController(vc,
                                        identifier: Locale.preferredLanguages[0] ,
@@ -45,7 +45,7 @@ class BaseSnapShotTests: FBSnapshotTestCase {
         let expectationHere = expectation(description: "Some Expectation")
         vc.view.bounds = UIScreen.main.bounds
         DispatchQueue.main.asyncAfter(deadline: .now() + wait) {
-            self.vertifyView(vc: vc)
+            self.verifyView(vc: vc)
             expectationHere.fulfill()
         }
         self.waitForExpectations(timeout: 1.0 + wait, handler: nil)
