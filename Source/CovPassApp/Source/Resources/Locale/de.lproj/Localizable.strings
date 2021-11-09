@@ -82,6 +82,8 @@
 
 "accessibility_update_info_announce" = "Die Ansicht \"Neue Funktionen\" wurde geöffnet";
 
+"dialog_update_info_notification_action_button" = "OK";
+
 "certificate_will_be_revoked_notification_icon_new" = "Neu";
 
 "certificate_will_be_revoked_notification_title" = "Ihr Zertifikat wird zum 11.11.2021 gesperrt";
