@@ -170,7 +170,7 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
             return [NoCertificateCardViewModel()]
         }
         return certificates.compactMap { certificatePair in
-            let sortedCertificates = CertificateSorter.sort(certificatePair.certificates)
+            let sortedCertificates = certificatePair.certificates.sortLatest()
             guard let cert = sortedCertificates.first else { return nil }
             return CertificateCardViewModel(
                 token: cert,
@@ -297,7 +297,7 @@ extension CertificatesOverviewViewModel {
     private func showExpiryAlertIfNeeded() -> Promise<Void> {
         Promise { seal in
             let showAlert = certificatePairsSorted.contains { pair in
-                guard var cert = CertificateSorter.sort(pair.certificates).first,
+                guard var cert = pair.certificates.sortLatest().first,
                       cert.vaccinationCertificate.hcert.dgc.t == nil
                 else { return false }
                 if let tests = cert.vaccinationCertificate.hcert.dgc.t, !tests.isEmpty {

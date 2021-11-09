@@ -99,7 +99,7 @@ public struct BoosterLogic: BoosterLogicProtocol {
         Promise { seal in
             var newQualification = false
             for user in users {
-                let sortedCertificates = CertificateSorter.sort(user.certificates)
+                let sortedCertificates = user.certificates.sortLatest()
                 // get most recent vaccination and recovery certificate
                 let mostRecentVaccinationCertificate = sortedCertificates.first(where: { $0.vaccinationCertificate.hcert.dgc.v?.isEmpty == false })
                 let recoveryCertificate = sortedCertificates.first(where: { $0.vaccinationCertificate.hcert.dgc.r?.isEmpty == false })

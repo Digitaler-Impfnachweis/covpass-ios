@@ -55,7 +55,7 @@ class CertificateSorterTests: XCTestCase {
                 .mockVaccinationSetDate(Calendar.current.date(byAdding: .day, value: -20, to: Date())!)
                 .extended()
         ]
-        let sortedCertifiates = CertificateSorter.sort(certificates)
+        let sortedCertifiates = certificates.sortLatest()
 
         XCTAssertEqual(sortedCertifiates.count, 2)
         XCTAssertEqual(sortedCertifiates[0].vaccinationCertificate.hcert.dgc.uvci, "2")
@@ -93,7 +93,7 @@ class CertificateSorterTests: XCTestCase {
         ]
         
         // WHEN
-        let sortedCertifiates = CertificateSorter.sort(certificates)
+        let sortedCertifiates = certificates.sortLatest()
 
         // THEN
         XCTAssertEqual(sortedCertifiates.count, 3)
@@ -139,7 +139,7 @@ class CertificateSorterTests: XCTestCase {
         ]
         
         // WHEN
-        let sortedCertifiates = CertificateSorter.sort(certificates)
+        let sortedCertifiates = certificates.sortLatest()
 
         // THEN
         XCTAssertEqual(sortedCertifiates.count, 4)
@@ -194,7 +194,7 @@ class CertificateSorterTests: XCTestCase {
         ]
         
         // WHEN
-        let sortedCertifiates = CertificateSorter.sort(certificates)
+        let sortedCertifiates = certificates.sortLatest()
 
         // THEN
         XCTAssertEqual(sortedCertifiates.count, 5)
@@ -261,7 +261,7 @@ class CertificateSorterTests: XCTestCase {
         ]
         
         // WHEN
-        let sortedCertifiates = CertificateSorter.sort(certificates)
+        let sortedCertifiates = certificates.sortLatest()
 
         // THEN
         XCTAssertEqual(sortedCertifiates.count, 6)
@@ -317,7 +317,7 @@ class CertificateSorterTests: XCTestCase {
         ]
         
         // WHEN
-        let sortedCertifiates = CertificateSorter.sort(certificates)
+        let sortedCertifiates = certificates.sortLatest()
 
         // THEN
         XCTAssertEqual(sortedCertifiates.count, 5)
@@ -373,7 +373,7 @@ class CertificateSorterTests: XCTestCase {
         ]
         
         // WHEN
-        let sortedCertifiates = CertificateSorter.sort(certificates)
+        let sortedCertifiates = certificates.sortLatest()
 
         // THEN
         XCTAssertEqual(sortedCertifiates.count, 5)
@@ -449,10 +449,344 @@ class CertificateSorterTests: XCTestCase {
         ]
         
         // WHEN
-        let sortedCertifiates = CertificateSorter.sort(certificates)
+        let sortedCertifiates = certificates.sortLatest()
 
         // THEN
         XCTAssertEqual(sortedCertifiates.count, 7)
         XCTAssertEqual(sortedCertifiates[0].vaccinationCertificate.hcert.dgc.uvci, "7")
+    }
+    
+    func testFilter() throws {
+        // GIVEN
+        let dateOfBirthString = "2021-04-26T15:05:00"
+        let dateOfBirth = DateUtils.parseDate(dateOfBirthString)
+        var firstCert: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended()
+        firstCert.vaccinationCertificate.hcert.dgc.dob = dateOfBirth
+        firstCert.vaccinationCertificate.hcert.dgc.dobString = dateOfBirthString
+
+        let secondCert: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended()
+        let thirdCert: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended()
+        let fourthCert: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended()
+        let fifthCert: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended()
+        let sixtCert: ExtendedCBORWebToken = CBORWebToken.mockTestCertificate.extended()
+        let seventhCert: ExtendedCBORWebToken = CBORWebToken.mockTestCertificate.extended()
+
+        let certificates = [
+            secondCert,
+            firstCert,
+            fifthCert,
+            sixtCert,
+            seventhCert,
+            thirdCert,
+            fourthCert
+        ]
+        
+        // WHEN
+        let sortedCertifiates = certificates.filter(type: .vaccination,
+                                                    givenName: "DOE",
+                                                    familyName: "JOHN",
+                                                    dob: dateOfBirthString)
+
+        // THEN
+        XCTAssertEqual(sortedCertifiates.count, 1)
+        XCTAssertEqual(sortedCertifiates.first, firstCert)
+    }
+    
+    func testFilterMatchingAllVaccination() throws {
+        // GIVEN
+        let firstCert: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended()
+        let secondCert: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended()
+        let thirdCert: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended()
+        let fourthCert: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended()
+        let fifthCert: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended()
+        let sixtCert: ExtendedCBORWebToken = CBORWebToken.mockTestCertificate.extended()
+        let seventhCert: ExtendedCBORWebToken = CBORWebToken.mockTestCertificate.extended()
+
+        let certificates = [
+            secondCert,
+            firstCert,
+            fifthCert,
+            sixtCert,
+            seventhCert,
+            thirdCert,
+            fourthCert
+        ]
+        
+        // WHEN
+        let sortedCertifiates = certificates.filter(type: .vaccination,
+                                                    givenName: "DOE",
+                                                    familyName: "JOHN",
+                                                    dob: "1990-01-01")
+
+        // THEN
+        XCTAssertEqual(sortedCertifiates.count, 5)
+    }
+    
+    func testFilterMatchingAllTests() throws {
+        // GIVEN
+        let firstCert: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended()
+        let secondCert: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended()
+        let thirdCert: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended()
+        let fourthCert: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended()
+        let fifthCert: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended()
+        let sixtCert: ExtendedCBORWebToken = CBORWebToken.mockTestCertificate.extended()
+        let seventhCert: ExtendedCBORWebToken = CBORWebToken.mockTestCertificate.extended()
+
+        let certificates = [
+            secondCert,
+            firstCert,
+            fifthCert,
+            sixtCert,
+            seventhCert,
+            thirdCert,
+            fourthCert
+        ]
+        
+        // WHEN
+        let sortedCertifiates = certificates.filter(type: .test,
+                                                    givenName: "DOE",
+                                                    familyName: "JOHN",
+                                                    dob: "1990-01-01")
+
+        // THEN
+        XCTAssertEqual(sortedCertifiates.count, 2)
+    }
+    
+    func testFilterMatchingAllRecoveries() throws {
+        // GIVEN
+        let firstCert: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended()
+        let secondCert: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended()
+        let thirdCert: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended()
+        let fourthCert: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended()
+        let fifthCert: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended()
+        let sixtCert: ExtendedCBORWebToken = CBORWebToken.mockTestCertificate.extended()
+        let seventhCert: ExtendedCBORWebToken = CBORWebToken.mockTestCertificate.extended()
+        let eightCert: ExtendedCBORWebToken = CBORWebToken.mockRecoveryCertificate.extended()
+
+        let certificates = [
+            secondCert,
+            firstCert,
+            fifthCert,
+            sixtCert,
+            eightCert,
+            seventhCert,
+            thirdCert,
+            fourthCert
+        ]
+        
+        // WHEN
+        let sortedCertifiates = certificates.filter(type: .recovery,
+                                                    givenName: "DOE",
+                                                    familyName: "JOHN",
+                                                    dob: "1990-01-01")
+
+        // THEN
+        XCTAssertEqual(sortedCertifiates.count, 1)
+    }
+    
+    func testFilterMissingDob() throws {
+        // GIVEN
+        let firstCert: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended()
+        let secondCert: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended()
+        let thirdCert: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended()
+        let fourthCert: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended()
+        let fifthCert: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended()
+        let sixtCert: ExtendedCBORWebToken = CBORWebToken.mockTestCertificate.extended()
+        let seventhCert: ExtendedCBORWebToken = CBORWebToken.mockTestCertificate.extended()
+
+        let certificates = [
+            secondCert,
+            firstCert,
+            fifthCert,
+            sixtCert,
+            seventhCert,
+            thirdCert,
+            fourthCert
+        ]
+        
+        // WHEN
+        let sortedCertifiates = certificates.filter(type: .vaccination,
+                                                    givenName: "DOE",
+                                                    familyName: "JOHN",
+                                                    dob: "")
+
+        // THEN
+        XCTAssertEqual(sortedCertifiates.count, 0)
+    }
+    
+    func testFilterMissingGivenName() throws {
+        // GIVEN
+        let firstCert: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended()
+        let secondCert: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended()
+        let thirdCert: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended()
+        let fourthCert: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended()
+        let fifthCert: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended()
+        let sixtCert: ExtendedCBORWebToken = CBORWebToken.mockTestCertificate.extended()
+        let seventhCert: ExtendedCBORWebToken = CBORWebToken.mockTestCertificate.extended()
+        let eightCert: ExtendedCBORWebToken = CBORWebToken.mockRecoveryCertificate.extended()
+
+        let certificates = [
+            secondCert,
+            firstCert,
+            fifthCert,
+            sixtCert,
+            eightCert,
+            seventhCert,
+            thirdCert,
+            fourthCert
+        ]
+        
+        // WHEN
+        let sortedCertifiates = certificates.filter(type: .recovery,
+                                                    givenName: "",
+                                                    familyName: "JOHN",
+                                                    dob: "1990-01-01")
+
+        // THEN
+        XCTAssertEqual(sortedCertifiates.count, 0)
+    }
+    
+    func testFilterMissingFamilyNameName() throws {
+        // GIVEN
+        let firstCert: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended()
+        let secondCert: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended()
+        let thirdCert: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended()
+        let fourthCert: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended()
+        let fifthCert: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended()
+        let sixtCert: ExtendedCBORWebToken = CBORWebToken.mockTestCertificate.extended()
+        let seventhCert: ExtendedCBORWebToken = CBORWebToken.mockTestCertificate.extended()
+        let eightCert: ExtendedCBORWebToken = CBORWebToken.mockRecoveryCertificate.extended()
+
+        let certificates = [
+            secondCert,
+            firstCert,
+            fifthCert,
+            sixtCert,
+            eightCert,
+            seventhCert,
+            thirdCert,
+            fourthCert
+        ]
+        
+        // WHEN
+        let sortedCertifiates = certificates.filter(type: .vaccination,
+                                                    givenName: "DOE",
+                                                    familyName: "",
+                                                    dob: "1990-01-01")
+
+        // THEN
+        XCTAssertEqual(sortedCertifiates.count, 0)
+    }
+    
+    func testFilterMissingAllVariables() throws {
+        // GIVEN
+        let firstCert: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended()
+        let secondCert: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended()
+        let thirdCert: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended()
+        let fourthCert: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended()
+        let fifthCert: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended()
+        let sixtCert: ExtendedCBORWebToken = CBORWebToken.mockTestCertificate.extended()
+        let seventhCert: ExtendedCBORWebToken = CBORWebToken.mockTestCertificate.extended()
+        let eightCert: ExtendedCBORWebToken = CBORWebToken.mockRecoveryCertificate.extended()
+
+        let certificates = [
+            secondCert,
+            firstCert,
+            fifthCert,
+            sixtCert,
+            eightCert,
+            seventhCert,
+            thirdCert,
+            fourthCert
+        ]
+        
+        // WHEN
+        let sortedCertifiates = certificates.filter(type: .vaccination,
+                                                    givenName: "",
+                                                    familyName: "",
+                                                    dob: "")
+
+        // THEN
+        XCTAssertEqual(sortedCertifiates.count, 0)
+    }
+    
+    func testFilterMissingSeveralPersonsCertificates() throws {
+        // GIVEN
+        let firstCert: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended()
+        firstCert.vaccinationCertificate.hcert.dgc.nam.fnt = "Person 1"
+        firstCert.vaccinationCertificate.hcert.dgc.nam.gnt = "Person 1"
+        let secondCert: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended()
+        let thirdCert: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended()
+        thirdCert.vaccinationCertificate.hcert.dgc.nam.fnt = "Person 2"
+        thirdCert.vaccinationCertificate.hcert.dgc.nam.gnt = "Person 2"
+        let fourthCert: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended()
+        let fifthCert: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended()
+        let sixtCert: ExtendedCBORWebToken = CBORWebToken.mockTestCertificate.extended()
+        let seventhCert: ExtendedCBORWebToken = CBORWebToken.mockTestCertificate.extended()
+        let eightCert: ExtendedCBORWebToken = CBORWebToken.mockRecoveryCertificate.extended()
+        eightCert.vaccinationCertificate.hcert.dgc.nam.fnt = "Person 2"
+        eightCert.vaccinationCertificate.hcert.dgc.nam.gnt = "Person 2"
+
+        let certificates = [
+            secondCert,
+            firstCert,
+            fifthCert,
+            sixtCert,
+            eightCert,
+            seventhCert,
+            thirdCert,
+            fourthCert
+        ]
+        
+        // WHEN
+        let sortedCertifiates = certificates.filter(type: .vaccination,
+                                                    givenName: "DOE",
+                                                    familyName: "JOHN",
+                                                    dob: "1990-01-01")
+
+        // THEN
+        XCTAssertEqual(sortedCertifiates.count, 3)
+        XCTAssertEqual(sortedCertifiates.first, secondCert)
+    }
+    
+    func testFilterMissingSeveralPersonsCertificatesDifferentArrayOrder() throws {
+        // GIVEN
+        let firstCert: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended()
+        firstCert.vaccinationCertificate.hcert.dgc.nam.fnt = "Person 1"
+        firstCert.vaccinationCertificate.hcert.dgc.nam.gnt = "Person 1"
+        let secondCert: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended()
+        let thirdCert: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended()
+        thirdCert.vaccinationCertificate.hcert.dgc.nam.fnt = "Person 2"
+        thirdCert.vaccinationCertificate.hcert.dgc.nam.gnt = "Person 2"
+        let fourthCert: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended()
+        let fifthCert: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended()
+        let sixtCert: ExtendedCBORWebToken = CBORWebToken.mockTestCertificate.extended()
+        let seventhCert: ExtendedCBORWebToken = CBORWebToken.mockTestCertificate.extended()
+        let eightCert: ExtendedCBORWebToken = CBORWebToken.mockRecoveryCertificate.extended()
+        eightCert.vaccinationCertificate.hcert.dgc.nam.fnt = "Person 2"
+        eightCert.vaccinationCertificate.hcert.dgc.nam.gnt = "Person 2"
+
+        let certificates = [
+            firstCert,
+            fifthCert,
+            sixtCert,
+            eightCert,
+            seventhCert,
+            thirdCert,
+            fourthCert,
+            secondCert
+        ]
+        
+        // WHEN
+        let sortedCertifiates = certificates.filter(type: .vaccination,
+                                                    givenName: "DOE",
+                                                    familyName: "JOHN",
+                                                    dob: "1990-01-01")
+
+        // THEN
+        XCTAssertEqual(sortedCertifiates.count, 3)
+        XCTAssertEqual(sortedCertifiates[0], secondCert)
+        XCTAssertEqual(sortedCertifiates[1], fifthCert)
+        XCTAssertEqual(sortedCertifiates[2], fourthCert)
     }
 }
