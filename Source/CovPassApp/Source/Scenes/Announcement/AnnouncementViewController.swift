@@ -46,7 +46,7 @@ class AnnouncementViewController: UIViewController {
     }
 
     private func configureToolbarView() {
-        toolbarView.state = .confirm("vaccination_fourth_onboarding_page_button_title".localized)
+        toolbarView.state = .confirm("dialog_update_info_notification_action_button".localized)
         toolbarView.layoutMargins.top = .space_24
         toolbarView.delegate = self
     }
