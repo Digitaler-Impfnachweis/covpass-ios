@@ -13,6 +13,13 @@
 		091CEC392729A30A00F8514F /* TrustedListDetailsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0993330427299700000D6BF6 /* TrustedListDetailsRouter.swift */; };
 		091CEC3A2729A30A00F8514F /* TrustedListDetailsSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0993330327299700000D6BF6 /* TrustedListDetailsSceneFactory.swift */; };
 		092090E027060FC30000713F /* ValidatorOverviewViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092090DF27060FC30000713F /* ValidatorOverviewViewModelTests.swift */; };
+		09331776273ABB2A0036DB2A /* ChooseCertificateRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09331765273ABB2A0036DB2A /* ChooseCertificateRouter.swift */; };
+		09331777273ABB2A0036DB2A /* ChooseCertificateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09331766273ABB2A0036DB2A /* ChooseCertificateViewModel.swift */; };
+		0933177C273ABB2A0036DB2A /* ChooseCertificateSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0933176D273ABB2A0036DB2A /* ChooseCertificateSceneFactory.swift */; };
+		0933177D273ABB2A0036DB2A /* ChooseCertificateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0933176E273ABB2A0036DB2A /* ChooseCertificateViewController.swift */; };
+		0933177E273ABB2A0036DB2A /* ChooseCertificateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09331770273ABB2A0036DB2A /* ChooseCertificateViewController.xib */; };
+		0933177F273ABB2A0036DB2A /* ChooseCertificateRouterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09331772273ABB2A0036DB2A /* ChooseCertificateRouterProtocol.swift */; };
+		09331781273ABB2A0036DB2A /* ChooseCertificateViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09331774273ABB2A0036DB2A /* ChooseCertificateViewModelProtocol.swift */; };
 		0939EAB827043BD80086729C /* Kronos in Frameworks */ = {isa = PBXBuildFile; productRef = 0939EAB727043BD80086729C /* Kronos */; };
 		09590D242715E519004410D7 /* RulesCheckSnapShotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09590D1A2715E2E8004410D7 /* RulesCheckSnapShotTests.swift */; };
 		09590D252715E51C004410D7 /* BaseSnapShotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09590D182715E2D6004410D7 /* BaseSnapShotTests.swift */; };
@@ -251,6 +258,13 @@
 		091CEC332729A14700F8514F /* TrustedListDetailsSceneFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrustedListDetailsSceneFactory.swift; sourceTree = "<group>"; };
 		091CEC362729A20F00F8514F /* TrustedListDetailsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrustedListDetailsRouter.swift; sourceTree = "<group>"; };
 		092090DF27060FC30000713F /* ValidatorOverviewViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatorOverviewViewModelTests.swift; sourceTree = "<group>"; };
+		09331765273ABB2A0036DB2A /* ChooseCertificateRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseCertificateRouter.swift; sourceTree = "<group>"; };
+		09331766273ABB2A0036DB2A /* ChooseCertificateViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseCertificateViewModel.swift; sourceTree = "<group>"; };
+		0933176D273ABB2A0036DB2A /* ChooseCertificateSceneFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseCertificateSceneFactory.swift; sourceTree = "<group>"; };
+		0933176E273ABB2A0036DB2A /* ChooseCertificateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseCertificateViewController.swift; sourceTree = "<group>"; };
+		09331770273ABB2A0036DB2A /* ChooseCertificateViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChooseCertificateViewController.xib; sourceTree = "<group>"; };
+		09331772273ABB2A0036DB2A /* ChooseCertificateRouterProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseCertificateRouterProtocol.swift; sourceTree = "<group>"; };
+		09331774273ABB2A0036DB2A /* ChooseCertificateViewModelProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseCertificateViewModelProtocol.swift; sourceTree = "<group>"; };
 		09590D182715E2D6004410D7 /* BaseSnapShotTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseSnapShotTests.swift; sourceTree = "<group>"; };
 		09590D1A2715E2E8004410D7 /* RulesCheckSnapShotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesCheckSnapShotTests.swift; sourceTree = "<group>"; };
 		09590D3E2716117C004410D7 /* CertLogicMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertLogicMock.swift; sourceTree = "<group>"; };
@@ -504,6 +518,44 @@
 			path = SnapShotTests;
 			sourceTree = "<group>";
 		};
+		09331763273ABB2A0036DB2A /* ChooseCertificate */ = {
+			isa = PBXGroup;
+			children = (
+				09331765273ABB2A0036DB2A /* ChooseCertificateRouter.swift */,
+				09331766273ABB2A0036DB2A /* ChooseCertificateViewModel.swift */,
+				0933176B273ABB2A0036DB2A /* Models */,
+				0933176D273ABB2A0036DB2A /* ChooseCertificateSceneFactory.swift */,
+				0933176E273ABB2A0036DB2A /* ChooseCertificateViewController.swift */,
+				0933176F273ABB2A0036DB2A /* Views */,
+				09331771273ABB2A0036DB2A /* Protocols */,
+			);
+			path = ChooseCertificate;
+			sourceTree = "<group>";
+		};
+		0933176B273ABB2A0036DB2A /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		0933176F273ABB2A0036DB2A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				09331770273ABB2A0036DB2A /* ChooseCertificateViewController.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		09331771273ABB2A0036DB2A /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				09331772273ABB2A0036DB2A /* ChooseCertificateRouterProtocol.swift */,
+				09331774273ABB2A0036DB2A /* ChooseCertificateViewModelProtocol.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
 		09590D172715E2B2004410D7 /* SnapShotTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -548,6 +600,7 @@
 		216D1EFE264EF4E400370F16 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				09331763273ABB2A0036DB2A /* ChooseCertificate */,
 				09FA0831271F030200805629 /* TrustedListUpdate */,
 				3865B76226DFE44B0053D1D3 /* Announcement */,
 				216D1F20264EF4E400370F16 /* App Information */,
@@ -1538,6 +1591,7 @@
 				65E0DB0C2657F31C004C660F /* CertificateViewController.xib in Resources */,
 				216D1F87264EF6A800370F16 /* LaunchScreen.storyboard in Resources */,
 				385FC19F269ED63500D19AF8 /* DateSelectionViewController.xib in Resources */,
+				0933177E273ABB2A0036DB2A /* ChooseCertificateViewController.xib in Resources */,
 				3523616C26D66BC50085B243 /* BoosterNotificationViewController.xib in Resources */,
 				216D1F48264EF50300370F16 /* Localizable.strings in Resources */,
 				3509F33526CFD04C00A078E5 /* contact-covpass-de.html in Resources */,
@@ -1595,6 +1649,7 @@
 				38E36261269B744700DE6D4C /* RuleCheckRouterProtocol.swift in Sources */,
 				38A1978F26EB5AF800C0AC77 /* BoosterLogicFactory.swift in Sources */,
 				091CEC392729A30A00F8514F /* TrustedListDetailsRouter.swift in Sources */,
+				0933177C273ABB2A0036DB2A /* ChooseCertificateSceneFactory.swift in Sources */,
 				3865B76426DFE4670053D1D3 /* AnnouncementRouter.swift in Sources */,
 				385FC190269EB6A800D19AF8 /* CountrySelectionViewController.swift in Sources */,
 				38E3625A269B712900DE6D4C /* RuleCheckRouter.swift in Sources */,
@@ -1603,6 +1658,7 @@
 				351C6B4D26E15C2D00321B3C /* FileManager+Simulator.swift in Sources */,
 				216D2004264EF7B600370F16 /* StringLocalization.swift in Sources */,
 				216D1FCD264EF75D00370F16 /* CertificatesOverviewRouterProtocol.swift in Sources */,
+				09331781273ABB2A0036DB2A /* ChooseCertificateViewModelProtocol.swift in Sources */,
 				091CEC3A2729A30A00F8514F /* TrustedListDetailsSceneFactory.swift in Sources */,
 				3882AEB0266FE9EE000354CD /* CertificateItemDetailRouter.swift in Sources */,
 				38E94DE9266121D60015553C /* VaccinationRepositoryExtension.swift in Sources */,
@@ -1627,6 +1683,7 @@
 				95BB0D4A27020EBE00885BA3 /* ScanPleaseViewController.swift in Sources */,
 				216D1F98264EF73200370F16 /* MainSceneFactory.swift in Sources */,
 				385FC1B1269F21A200D19AF8 /* RuleCheckDetailViewModel.swift in Sources */,
+				0933177F273ABB2A0036DB2A /* ChooseCertificateRouterProtocol.swift in Sources */,
 				216D1FA6264EF74100370F16 /* WelcomeSceneFactory.swift in Sources */,
 				385FC1A0269ED63500D19AF8 /* DateSelectionViewController.swift in Sources */,
 				95BB0D4927020EBE00885BA3 /* ScanPleaseRouter.swift in Sources */,
@@ -1645,6 +1702,7 @@
 				216D1FA7264EF74100370F16 /* WelcomeViewModel.swift in Sources */,
 				38E3625B269B712900DE6D4C /* RuleCheckViewController.swift in Sources */,
 				216D1FF0264EF77200370F16 /* HowToScanViewModel.swift in Sources */,
+				09331776273ABB2A0036DB2A /* ChooseCertificateRouter.swift in Sources */,
 				35F99E1126B2B6F000D3EFC3 /* PDFExportViewController.swift in Sources */,
 				3523616626D66ABC0085B243 /* BoosterNotificationViewModel.swift in Sources */,
 				216D1FA4264EF74100370F16 /* WelcomeRouter.swift in Sources */,
@@ -1656,6 +1714,7 @@
 				385FC1A2269ED63500D19AF8 /* DateSelectionRouter.swift in Sources */,
 				216D1FD7264EF76400370F16 /* CertificateDetailSceneFactory.swift in Sources */,
 				216D1FA5264EF74100370F16 /* WelcomeViewController.swift in Sources */,
+				09331777273ABB2A0036DB2A /* ChooseCertificateViewModel.swift in Sources */,
 				65E0DB0A2657F31C004C660F /* CertificateSceneFactory.swift in Sources */,
 				21A77A50265AD986002FEEF1 /* CertificateDetailViewModelProtocol.swift in Sources */,
 				3882AEBB26700646000354CD /* TestCertificateItemViewModel.swift in Sources */,
@@ -1670,6 +1729,7 @@
 				216D1FAF264EF74600370F16 /* PassOnboardingContainerViewModel.swift in Sources */,
 				3520AA6C26B85AA900D22435 /* PDFExportViewModelProtocol.swift in Sources */,
 				95BB0D4827020EBE00885BA3 /* ScanPleaseSceneFactory.swift in Sources */,
+				0933177D273ABB2A0036DB2A /* ChooseCertificateViewController.swift in Sources */,
 				385FC1A6269F19B900D19AF8 /* ResultItemViewModel.swift in Sources */,
 				88AB2A9725FA431100D4EA52 /* AppDelegate.swift in Sources */,
 				95BB0D4B27020EBE00885BA3 /* ScanPleaseViewModel.swift in Sources */,
