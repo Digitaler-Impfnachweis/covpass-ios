@@ -134,7 +134,7 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
     }
 
     var titleIcon: UIImage {
-        if token.vaccinationCertificate.isExpired {
+        if isExpired {
             return UIImage.expired
         }
         if token.vaccinationCertificate.expiresSoon {
