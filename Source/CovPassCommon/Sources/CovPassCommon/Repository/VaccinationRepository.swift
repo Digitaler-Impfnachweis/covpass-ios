@@ -234,7 +234,7 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
         .asVoid()
     }
 
-    public func scanCertificate(_ data: String) -> Promise<ExtendedCBORWebToken> {
+    public func scanCertificate(_ data: String) -> Promise<QRCodeScanable> {
         firstly {
             QRCoder.parse(data)
         }

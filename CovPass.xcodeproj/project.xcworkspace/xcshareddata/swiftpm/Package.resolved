@@ -47,6 +47,15 @@
         }
       },
       {
+        "package": "JWTDecode",
+        "repositoryURL": "https://github.com/auth0/JWTDecode.swift.git",
+        "state": {
+          "branch": null,
+          "revision": "3cd207fb9e943b6168a117baa3936c823204c2dc",
+          "version": "2.6.3"
+        }
+      },
+      {
         "package": "Kronos",
         "repositoryURL": "https://github.com/MobileNativeFoundation/Kronos.git",
         "state": {

@@ -113,17 +113,29 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
         .then {
             self.router.scanQRCode()
         }
-        .map { result in
+        .map { result in            
             try self.payloadFromScannerResult(result)
         }
-        .then { payload in
-            self.repository.scanCertificate(payload)
+        .then { payload -> Promise<QRCodeScanable> in
+            if let data = payload.data(using: .utf8),
+                let ticket = try? JSONDecoder().decode(ValidationServiceInitialisation.self, from: data) {
+                return .value(ticket)
+            }
+            return self.repository.scanCertificate(payload)
         }
         .done { certificate in
-            self.certificateList.certificates.append(certificate)
-            self.delegate?.viewModelDidUpdate()
-            self.handleCertificateDetailSceneResult(.showCertificatesOnOverview([certificate]))
-            self.showCertificate(certificate)
+            switch certificate {
+            case let certificate as ExtendedCBORWebToken:
+                self.certificateList.certificates.append(certificate)
+                self.delegate?.viewModelDidUpdate()
+                self.handleCertificateDetailSceneResult(.showCertificatesOnOverview([certificate]))
+                self.showCertificate(certificate)
+            case let validationServiceInitialisation as ValidationServiceInitialisation:
+                self.router.startValidationAsAService(with: validationServiceInitialisation)
+            default:
+                throw CertificateError.invalidEntity
+            }
+
         }
         .catch { error in
             self.router.showDialogForScanError(error) { [weak self] in
