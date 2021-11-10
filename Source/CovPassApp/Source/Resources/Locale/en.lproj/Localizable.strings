@@ -82,6 +82,8 @@
 
 "accessibility_update_info_announce" = "The view \"New features\" has been opened";
 
+"dialog_update_info_notification_action_button" = "OK";
+
 "certificate_will_be_revoked_notification_icon_new" = "New";
 
 "certificate_will_be_revoked_notification_title" = " Your certificate will be revoked by 11.11.2021";
