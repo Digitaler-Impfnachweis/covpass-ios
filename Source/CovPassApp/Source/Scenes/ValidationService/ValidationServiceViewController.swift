@@ -31,9 +31,6 @@ private enum Constants {
         static let headerViewHeight: CGFloat = 130
         static let footerViewHeight: CGFloat = 200
     }
-
-    static let reuseIdentifier = "cell"
-    static let reuseIdentifierHintCell = "hintCell"
 }
 
 class ValidationServiceViewController: UIViewController {
@@ -48,8 +45,9 @@ class ValidationServiceViewController: UIViewController {
         button.innerButton.setAttributedTitle(Constants.Text.confirmButton
                                                 .styledAs(.header_3)
                                                 .colored(.neutralWhite, in: nil), for: .normal)
-        button.action = {
-            self.dismiss(animated: true, completion: nil)
+        button.action = { [weak self] in
+            guard let this = self else {return}
+            this.cancel()
         }
         return button
     }()
@@ -85,6 +83,12 @@ class ValidationServiceViewController: UIViewController {
         return footerView
     }()
 
+    private lazy var chevronImageView: UIImageView = {
+        let imageView = UIImageView(image: .chevronRight)
+        imageView.tintColor = .onBackground100
+        return imageView
+    }()
+
     @available(*, unavailable)
     required init?(coder _: NSCoder) { fatalError("init?(coder: NSCoder) not implemented yet") }
 
@@ -99,8 +103,10 @@ class ValidationServiceViewController: UIViewController {
         tableView.tableHeaderView = headerView
         tableView.tableFooterView = footerView
 
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: Constants.reuseIdentifier)
-        tableView.register(HintTableViewCell.self, forCellReuseIdentifier: Constants.reuseIdentifierHintCell)
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: ValidationServiceViewModel.Rows.additionalInformation.reuseIdentifier)
+        tableView.register(HintTableViewCell.self, forCellReuseIdentifier: ValidationServiceViewModel.Rows.hintView.reuseIdentifier)
+        tableView.register(SubTitleCell.self, forCellReuseIdentifier: ValidationServiceViewModel.Rows.provider.reuseIdentifier)
+
         tableView.delegate = self
         tableView.dataSource = self
 
@@ -115,6 +121,10 @@ class ValidationServiceViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        navigationController?.setNavigationBarHidden(false, animated: animated)
     }
 
     @objc func cancel() {        
@@ -132,51 +142,41 @@ extension ValidationServiceViewController: UITableViewDelegate {
     }
 }
 
+
 extension ValidationServiceViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard var cell = tableView.dequeueReusableCell(withIdentifier: Constants.reuseIdentifier) else {
-            return UITableViewCell()
+        guard let reuseIdentifier = ValidationServiceViewModel.Rows(rawValue: indexPath.row)?.reuseIdentifier else {
+            fatalError("There's something wrong with the tableview - we don't have a reuseidentifier")
         }
-        cell.accessoryType = .none
-        cell.textLabel?.text = nil
-        cell.textLabel?.attributedText = nil
-        cell.detailTextLabel?.text = nil
-        cell.detailTextLabel?.attributedText = nil
+        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath)
+
         cell.textLabel?.numberOfLines = 0
+        cell.accessoryType = .none
+        cell.accessoryView = nil
         cell.isUserInteractionEnabled = false
 
         switch indexPath.row {
         case ValidationServiceViewModel.Rows.provider.rawValue:
-            cell = UITableViewCell(style: UITableViewCell.CellStyle.subtitle, reuseIdentifier: Constants.reuseIdentifier)
-            cell.accessoryType = .none
-            cell.isUserInteractionEnabled = false
             cell.textLabel?.attributedText = Constants.Text.Cell.providerTitle.styledAs(.header_3)
             cell.detailTextLabel?.attributedText = viewModel.initialisationData.serviceProvider.styledAs(.body)
         case ValidationServiceViewModel.Rows.subject.rawValue:
-            cell = UITableViewCell(style: UITableViewCell.CellStyle.subtitle, reuseIdentifier: Constants.reuseIdentifier)
-            cell.accessoryType = .none
-            cell.isUserInteractionEnabled = false
             cell.textLabel?.attributedText = Constants.Text.Cell.subjectTitle.styledAs(.header_3)
             cell.detailTextLabel?.attributedText = viewModel.initialisationData.subject.styledAs(.body)
         case ValidationServiceViewModel.Rows.consentHeader.rawValue:
-            cell.accessoryType = .none
             cell.textLabel?.attributedText = viewModel.initialisationData.consent.styledAs(.body)
         case ValidationServiceViewModel.Rows.hintView.rawValue:
-            guard let hintCell = tableView.dequeueReusableCell(withIdentifier: Constants.reuseIdentifierHintCell) as? HintTableViewCell else {
-                return UITableViewCell()
+            if let hintCell = cell as? HintTableViewCell {
+                hintCell.titleText = Constants.Text.HintView.title.localized.styledAs(.header_3)
+                hintCell.bodyText = viewModel.hintViewText
             }
-            hintCell.titleText = Constants.Text.HintView.title.localized.styledAs(.header_3)
-            hintCell.bodyText = viewModel.hintViewText
-            cell.isUserInteractionEnabled = false
-            return hintCell
         case ValidationServiceViewModel.Rows.additionalInformation.rawValue:
             cell.textLabel?.attributedText = viewModel.additionalInformation
         case ValidationServiceViewModel.Rows.privacyLink.rawValue:
-            cell.isUserInteractionEnabled = true            
+            cell.isUserInteractionEnabled = true
             cell.textLabel?.attributedText = Constants.Text.privacyPolicy.styledAs(.header_3)
             cell.accessoryType = .disclosureIndicator
-            cell.accessoryView = UIImageView(image: .chevronRight)
+            cell.accessoryView = chevronImageView
         default:
             return UITableViewCell()
         }
@@ -190,4 +190,19 @@ extension ValidationServiceViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.numberOfRows
     }
+}
+
+class SubTitleCell: UITableViewCell {
+
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
+    }
+
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) { fatalError("init?(coder: NSCoder) not implemented yet") }
+
+    override func prepareForReuse() {
+        super.prepareForReuse()
+    }
+
 }

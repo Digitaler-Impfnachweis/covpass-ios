@@ -9,6 +9,13 @@ import Foundation
 import CovPassCommon
 
 private enum Constants {
+
+    static let reuseIdentifier = "cell"
+    static let reuseIdentifierHintCell = "hintCell"
+    static let reuseIdentifierSubTitleCell = "subTitleCell"
+
+    static let numberOfSections = 1
+
     enum Text {
         static let additionalInformation1 = "Sie sind nicht verpflichtet, die Überprüfung Ihres Zertifikats mit der CovPass-App zu erlauben. Der Nachweis Ihres Impf-, Test- oder Genesungsstatus kann auch auf andere Weise erbracht werden."
         static let additionalInformation2 = "Die Anforderungen an das Zertifikat werden vom Anbieter festgelegt. Das RKI hat darauf keinen Einfluss. Weitere Informationen zu den Zertifikatsanforderungen erhalten Sie bei dem Anbieter."
@@ -26,8 +33,18 @@ private enum Constants {
 
 struct ValidationServiceViewModel {
 
-    enum Rows: Int {
+    enum Rows: Int, CaseIterable {
         case provider = 0, subject, consentHeader, hintView, additionalInformation, privacyLink
+        var reuseIdentifier: String {
+            switch self {
+            case .provider, .subject:
+                return Constants.reuseIdentifierSubTitleCell
+            case .hintView:
+                return Constants.reuseIdentifierHintCell
+            default:
+                return Constants.reuseIdentifier
+            }
+        }
     }
 
     let router: ValidationServiceRouter
@@ -46,9 +63,10 @@ struct ValidationServiceViewModel {
                                                           Constants.Text.additionalInformation4.styledAs(.body)],
                                                          spacing: nil)
         let attrString = NSMutableAttributedString(attributedString: bullets)
+
         attrString.append(NSAttributedString(string: "\n\n"))
 
-        attrString.append(Constants.Text.additionalInformation5.styledAs(.body))
+        attrString.append(Constants.Text.additionalInformation5.styledAs(.body).colored(.onBackground70, in: nil))
         return attrString
     }
 
@@ -59,10 +77,10 @@ struct ValidationServiceViewModel {
     }
 
     var numberOfSections: Int {
-        1
+        Constants.numberOfSections
     }
 
     var numberOfRows: Int {
-        6
+        Rows.allCases.count
     }
 }

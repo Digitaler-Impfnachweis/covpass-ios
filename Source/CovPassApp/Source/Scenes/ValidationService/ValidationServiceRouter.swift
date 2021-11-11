@@ -57,7 +57,7 @@ struct ValidationServiceRouter: ValidationServiceRoutable {
 
     func routeToPrivacyStatement(url: String) {
         let webViewScene = WebviewSceneFactory(title: "app_information_title_faq".localized,
-                                               url: URL(string: url)!, closeButtonShown: true, embedInNavigationController: true)
-        sceneCoordinator.present(webViewScene)
+                                               url: URL(string: url)!)        
+        sceneCoordinator.push(webViewScene)
     }
 }
