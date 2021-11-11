@@ -13,16 +13,13 @@ import UIKit
 struct ValidationServiceFactory: SceneFactory {
 
     // MARK: - Properties
-
-    let sceneCoordinator: SceneCoordinator
     let initialisationData: ValidationServiceInitialisation
     let router: ValidationServiceRouter
 
     // MARK: - Lifecycle
 
-    init(router: ValidationServiceRouter, sceneCoordinator: SceneCoordinator, initialisationData: ValidationServiceInitialisation) {
+    init(router: ValidationServiceRouter, initialisationData: ValidationServiceInitialisation) {
         self.router = router
-        self.sceneCoordinator = sceneCoordinator
         self.initialisationData = initialisationData
     }
 

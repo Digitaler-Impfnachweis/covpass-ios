@@ -94,6 +94,8 @@ class CertificatesOverviewRouter: CertificatesOverviewRouterProtocol, DialogRout
     }
 
     func startValidationAsAService(with data: ValidationServiceInitialisation) {
-        sceneCoordinator.present(ValidationServiceFactory(router: ValidationServiceRouter(sceneCoordinator: sceneCoordinator), sceneCoordinator: sceneCoordinator, initialisationData: data))
+        sceneCoordinator.present(
+            ValidationServiceFactory(router: ValidationServiceRouter(sceneCoordinator: sceneCoordinator),                                     
+                                     initialisationData: data))
     }
 }

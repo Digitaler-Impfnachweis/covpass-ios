@@ -26,9 +26,12 @@ protocol ValidationServiceRoutable: DialogRouterProtocol {
     func routeToWarning()
     func routeToSelectCertificate()
     func routeToCertificateConsent()
+    func routeToPrivacyStatement(url: String)
 }
 
 struct ValidationServiceRouter: ValidationServiceRoutable {
+    var sceneCoordinator: SceneCoordinator
+
     func routeToConsentGeneralConsent() {
 
     }
@@ -52,5 +55,9 @@ struct ValidationServiceRouter: ValidationServiceRoutable {
 
     }
 
-    var sceneCoordinator: SceneCoordinator
+    func routeToPrivacyStatement(url: String) {
+        let webViewScene = WebviewSceneFactory(title: "app_information_title_faq".localized,
+                                               url: URL(string: url)!, closeButtonShown: true, embedInNavigationController: true)
+        sceneCoordinator.present(webViewScene)
+    }
 }
