@@ -194,6 +194,12 @@
 		88BEE04226550E2500479E5E /* privacy-covpasscheck-de.html in Resources */ = {isa = PBXBuildFile; fileRef = 88BEE04126550E2500479E5E /* privacy-covpasscheck-de.html */; };
 		9514A5F22732A40E00987109 /* CertificateDetailViewControllerSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9514A5F12732A40E00987109 /* CertificateDetailViewControllerSnapshotTests.swift */; };
 		952B7AFB2729BCA8008F69D6 /* ScanPleaseSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952B7AFA2729BCA8008F69D6 /* ScanPleaseSnapshotTests.swift */; };
+		957454A3273D5889009B25B0 /* ValidationServiceRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9574549D273D5889009B25B0 /* ValidationServiceRouter.swift */; };
+		957454A4273D5889009B25B0 /* ValidationServiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9574549E273D5889009B25B0 /* ValidationServiceViewController.swift */; };
+		957454A5273D5889009B25B0 /* ValidationServiceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9574549F273D5889009B25B0 /* ValidationServiceViewModel.swift */; };
+		957454A6273D5889009B25B0 /* ValidationServiceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957454A0273D5889009B25B0 /* ValidationServiceFactory.swift */; };
+		957454A7273D5889009B25B0 /* ValidationServiceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 957454A2273D5889009B25B0 /* ValidationServiceViewController.xib */; };
+		957454A9273D58AE009B25B0 /* HintTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957454A8273D58AE009B25B0 /* HintTableViewCell.swift */; };
 		95961E892703550B00E577A4 /* ValidationResultFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95961E872703545200E577A4 /* ValidationResultFactoryTests.swift */; };
 		95961E8B270450CA00E577A4 /* Mocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95961E8A270450CA00E577A4 /* Mocks.swift */; };
 		95A031EB27359AC60073FDD1 /* ValidationResultViewControllerSnapShotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A031E9273597880073FDD1 /* ValidationResultViewControllerSnapShotTests.swift */; };
@@ -446,6 +452,12 @@
 		88BEE04126550E2500479E5E /* privacy-covpasscheck-de.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "privacy-covpasscheck-de.html"; sourceTree = "<group>"; };
 		9514A5F12732A40E00987109 /* CertificateDetailViewControllerSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateDetailViewControllerSnapshotTests.swift; sourceTree = "<group>"; };
 		952B7AFA2729BCA8008F69D6 /* ScanPleaseSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanPleaseSnapshotTests.swift; sourceTree = "<group>"; };
+		9574549D273D5889009B25B0 /* ValidationServiceRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidationServiceRouter.swift; sourceTree = "<group>"; };
+		9574549E273D5889009B25B0 /* ValidationServiceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidationServiceViewController.swift; sourceTree = "<group>"; };
+		9574549F273D5889009B25B0 /* ValidationServiceViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidationServiceViewModel.swift; sourceTree = "<group>"; };
+		957454A0273D5889009B25B0 /* ValidationServiceFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidationServiceFactory.swift; sourceTree = "<group>"; };
+		957454A2273D5889009B25B0 /* ValidationServiceViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ValidationServiceViewController.xib; sourceTree = "<group>"; };
+		957454A8273D58AE009B25B0 /* HintTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HintTableViewCell.swift; sourceTree = "<group>"; };
 		95961E872703545200E577A4 /* ValidationResultFactoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationResultFactoryTests.swift; sourceTree = "<group>"; };
 		95961E8A270450CA00E577A4 /* Mocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mocks.swift; sourceTree = "<group>"; };
 		95A031E9273597880073FDD1 /* ValidationResultViewControllerSnapShotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationResultViewControllerSnapShotTests.swift; sourceTree = "<group>"; };
@@ -562,6 +574,7 @@
 				35F99E0B26B2B01500D3EFC3 /* PDF Export */,
 				38E36253269B712900DE6D4C /* RuleCheck */,
 				95BB0D4127020EBE00885BA3 /* ScanPlease */,
+				9574549C273D5889009B25B0 /* ValidationService */,
 				216D1F19264EF4E400370F16 /* Welcome */,
 			);
 			path = Scenes;
@@ -1350,6 +1363,27 @@
 			path = Static;
 			sourceTree = "<group>";
 		};
+		9574549C273D5889009B25B0 /* ValidationService */ = {
+			isa = PBXGroup;
+			children = (
+				9574549D273D5889009B25B0 /* ValidationServiceRouter.swift */,
+				9574549E273D5889009B25B0 /* ValidationServiceViewController.swift */,
+				9574549F273D5889009B25B0 /* ValidationServiceViewModel.swift */,
+				957454A0273D5889009B25B0 /* ValidationServiceFactory.swift */,
+				957454A1273D5889009B25B0 /* Views */,
+			);
+			path = ValidationService;
+			sourceTree = "<group>";
+		};
+		957454A1273D5889009B25B0 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				957454A2273D5889009B25B0 /* ValidationServiceViewController.xib */,
+				957454A8273D58AE009B25B0 /* HintTableViewCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		95BB0D4127020EBE00885BA3 /* ScanPlease */ = {
 			isa = PBXGroup;
 			children = (
@@ -1544,6 +1578,7 @@
 				35F99E1426B2B75C00D3EFC3 /* PDFExportViewController.xib in Resources */,
 				216D1F9E264EF73D00370F16 /* WelcomeViewController.xib in Resources */,
 				385FC1B2269F21A200D19AF8 /* RuleCheckDetailViewController.xib in Resources */,
+				957454A7273D5889009B25B0 /* ValidationServiceViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1587,6 +1622,7 @@
 			files = (
 				216D1FAE264EF74600370F16 /* OnboardingSceneFactory.swift in Sources */,
 				216D1FED264EF77200370F16 /* HowToScanViewController.swift in Sources */,
+				957454A5273D5889009B25B0 /* ValidationServiceViewModel.swift in Sources */,
 				216D1FEF264EF77200370F16 /* HowToScanSceneFactory.swift in Sources */,
 				216D1FE7264EF76D00370F16 /* CertificateDetailRouterProtocol.swift in Sources */,
 				3523616826D66AC90085B243 /* BoosterNotificationViewController.swift in Sources */,
@@ -1594,6 +1630,7 @@
 				216D1FB8264EF74F00370F16 /* CertificatesOverviewRouter.swift in Sources */,
 				38E36261269B744700DE6D4C /* RuleCheckRouterProtocol.swift in Sources */,
 				38A1978F26EB5AF800C0AC77 /* BoosterLogicFactory.swift in Sources */,
+				957454A3273D5889009B25B0 /* ValidationServiceRouter.swift in Sources */,
 				091CEC392729A30A00F8514F /* TrustedListDetailsRouter.swift in Sources */,
 				3865B76426DFE4670053D1D3 /* AnnouncementRouter.swift in Sources */,
 				385FC190269EB6A800D19AF8 /* CountrySelectionViewController.swift in Sources */,
@@ -1640,8 +1677,11 @@
 				385FC1A3269ED63500D19AF8 /* DateSelectionViewModel.swift in Sources */,
 				3829A309269CFEA800B8346C /* DCCCertLogicFactory.swift in Sources */,
 				3523616426D66A5F0085B243 /* BoosterNotificationSceneFactory.swift in Sources */,
+				957454A6273D5889009B25B0 /* ValidationServiceFactory.swift in Sources */,
 				216D1FCE264EF75D00370F16 /* CertificatesOverviewViewModelProtocol.swift in Sources */,
+				957454A4273D5889009B25B0 /* ValidationServiceViewController.swift in Sources */,
 				3882AEB7266FEBA3000354CD /* CertificateItemDetailViewModelProtocol.swift in Sources */,
+				957454A9273D58AE009B25B0 /* HintTableViewCell.swift in Sources */,
 				216D1FA7264EF74100370F16 /* WelcomeViewModel.swift in Sources */,
 				38E3625B269B712900DE6D4C /* RuleCheckViewController.swift in Sources */,
 				216D1FF0264EF77200370F16 /* HowToScanViewModel.swift in Sources */,
@@ -1926,6 +1966,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Source/CovPassApp/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;

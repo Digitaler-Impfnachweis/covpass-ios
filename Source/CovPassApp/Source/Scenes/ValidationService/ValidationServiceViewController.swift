@@ -140,28 +140,35 @@ extension ValidationServiceViewController: UITableViewDataSource {
         }
         cell.accessoryType = .none
         cell.textLabel?.text = nil
+        cell.textLabel?.attributedText = nil
         cell.detailTextLabel?.text = nil
+        cell.detailTextLabel?.attributedText = nil
         cell.textLabel?.numberOfLines = 0
         cell.isUserInteractionEnabled = false
 
         switch indexPath.row {
         case ValidationServiceViewModel.Rows.provider.rawValue:
             cell = UITableViewCell(style: UITableViewCell.CellStyle.subtitle, reuseIdentifier: Constants.reuseIdentifier)
+            cell.accessoryType = .none
             cell.isUserInteractionEnabled = false
             cell.textLabel?.attributedText = Constants.Text.Cell.providerTitle.styledAs(.header_3)
             cell.detailTextLabel?.attributedText = viewModel.initialisationData.serviceProvider.styledAs(.body)
         case ValidationServiceViewModel.Rows.subject.rawValue:
             cell = UITableViewCell(style: UITableViewCell.CellStyle.subtitle, reuseIdentifier: Constants.reuseIdentifier)
+            cell.accessoryType = .none
             cell.isUserInteractionEnabled = false
             cell.textLabel?.attributedText = Constants.Text.Cell.subjectTitle.styledAs(.header_3)
             cell.detailTextLabel?.attributedText = viewModel.initialisationData.subject.styledAs(.body)
         case ValidationServiceViewModel.Rows.consentHeader.rawValue:
-            cell.textLabel?.attributedText = viewModel.initialisationData.consent.styledAs(.body)        
+            cell.accessoryType = .none
+            cell.textLabel?.attributedText = viewModel.initialisationData.consent.styledAs(.body)
         case ValidationServiceViewModel.Rows.hintView.rawValue:
-            guard let hintCell = tableView.dequeueReusableCell(withIdentifier: "hintCell") as? HintTableViewCell else {
+            guard let hintCell = tableView.dequeueReusableCell(withIdentifier: Constants.reuseIdentifierHintCell) as? HintTableViewCell else {
                 return UITableViewCell()
             }
+            hintCell.titleText = Constants.Text.HintView.title.localized.styledAs(.header_3)
             hintCell.bodyText = viewModel.hintViewText
+            cell.isUserInteractionEnabled = false
             return hintCell
         case ValidationServiceViewModel.Rows.additionalInformation.rawValue:
             cell.textLabel?.attributedText = viewModel.additionalInformation
@@ -183,37 +190,4 @@ extension ValidationServiceViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.numberOfRows
     }
-}
-
-
-class HintTableViewCell: UITableViewCell {
-
-    private lazy var hintView: HintView = {
-        let view = HintView()
-        view.iconView.image = .infoSignal
-        view.containerView.backgroundColor = .brandAccent10
-        view.containerView?.layer.borderColor = UIColor.brandAccent20.cgColor
-        view.titleLabel.attributedText = Constants.Text.HintView.title.localized.styledAs(.header_3)
-        return view
-    }()
-
-    var bodyText: NSAttributedString? {
-        didSet {
-            hintView.bodyLabel.attributedText = bodyText
-        }
-    }
-
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: .default, reuseIdentifier: reuseIdentifier)
-        contentView.addSubview(hintView)
-        hintView.pinEdges(to: contentView)
-    }
-
-    @available(*, unavailable)
-    required init?(coder _: NSCoder) { fatalError("init?(coder: NSCoder) not implemented yet") }
-
-    override func prepareForReuse() {
-        super.prepareForReuse()
-    }
-
 }

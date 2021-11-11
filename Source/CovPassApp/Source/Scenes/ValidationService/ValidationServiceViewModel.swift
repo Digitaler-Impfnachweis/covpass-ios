@@ -27,7 +27,7 @@ private enum Constants {
 struct ValidationServiceViewModel {
 
     enum Rows: Int {
-        case provider = 0, subject = 1, consentHeader = 2, hintView = 3, additionalInformation = 4, privacyLink = 5
+        case provider = 0, subject, consentHeader, hintView, additionalInformation, privacyLink
     }
 
     let router: ValidationServiceRouter
@@ -47,13 +47,15 @@ struct ValidationServiceViewModel {
                                                          spacing: nil)
         let attrString = NSMutableAttributedString(attributedString: bullets)
         attrString.append(NSAttributedString(string: "\n\n"))
-        attrString.append(Constants.Text.additionalInformation5.styledAs(.body).colored(.onBackground70, in: nil))
+
+        attrString.append(Constants.Text.additionalInformation5.styledAs(.body))
         return attrString
     }
 
     var hintViewText: NSAttributedString {
         Constants.Text.HintView.introText.styledAs(.body)
-            .appendBullets([Constants.Text.HintView.bulletText1.styledAs(.body), Constants.Text.HintView.bulletText2.styledAs(.body)], spacing: 12)
+            .appendBullets([Constants.Text.HintView.bulletText1.styledAs(.body),
+                            Constants.Text.HintView.bulletText2.styledAs(.body)], spacing: 12)
     }
 
     var numberOfSections: Int {
