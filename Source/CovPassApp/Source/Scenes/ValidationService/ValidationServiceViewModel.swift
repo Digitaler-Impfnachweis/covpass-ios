@@ -7,6 +7,7 @@
 
 import Foundation
 import CovPassCommon
+import CovPassUI
 
 private enum Constants {
 
@@ -17,24 +18,50 @@ private enum Constants {
     static let numberOfSections = 1
 
     enum Text {
-        static let additionalInformation1 = "Sie sind nicht verpflichtet, die Überprüfung Ihres Zertifikats mit der CovPass-App zu erlauben. Der Nachweis Ihres Impf-, Test- oder Genesungsstatus kann auch auf andere Weise erbracht werden."
-        static let additionalInformation2 = "Die Anforderungen an das Zertifikat werden vom Anbieter festgelegt. Das RKI hat darauf keinen Einfluss. Weitere Informationen zu den Zertifikatsanforderungen erhalten Sie bei dem Anbieter."
-        static let additionalInformation3 = "Die Ermittlung der geeigneten Zertifikate erfolgt lokal auf Ihrem Smartphone. Es werden dabei keine Daten an das RKI oder den Anbieter übermittelt."
-        static let additionalInformation4 = "Das RKI erfährt die Daten zu Ihrer Buchung oder den von Ihnen gespeicherten Zertifikaten nicht."
-        static let additionalInformation5 = "Ausführliche Hinweise zur Datenverarbeitung finden Sie in der Datenschutzerklärung:"
+        static let additionalInformation1 = "share_certificate_notes_first_list_item".localized
+        static let additionalInformation2 = "share_certificate_notes_second_list_item".localized
+        static let additionalInformation3 = "share_certificate_notes_third_list_item".localized
+        static let additionalInformation4 = "share_certificate_notes_fourth_list_item".localized
+        static let additionalInformation5 = "share_certificate_note_privacy_notice".localized
 
         enum HintView {
-            static let introText = "Durch Antippen von „Einverstanden“ willigen Sie in die folgenden Schritte ein:"
-            static let bulletText1 = "Die App ruft vom Anbieter „Anbietername“ den Namen und das Geburtsdatum der bei Buchung angegebenen Person, die für die Prüfung relevanten Buchungsdetails (z. B. Zielland und Reisedatum) und die vom Anbieter zu Ihrer Buchung festgelegten Anforderungen an das Zertifikat ab."
-            static let bulletText2 = "Die abgerufenen Daten werden von der App genutzt, um festzustellen, welche Ihrer gespeicherten Zertifikate verwendet werden können."
+            static let title = "share_certificate_transmission_consent_title".localized
+            static let introText = "share_certificate_consent_message".localized
+            static let bulletText1 = "share_certificate_consent_first_list_item".localized
+            static let bulletText2 = "share_certificate_consent_second_list_item".localized
+        }
+
+        enum Cell {
+            static let providerTitle = "share_certificate_transmission_details_provider".localized
+            static let subjectTitle = "share_certificate_transmission_details_booking".localized
         }
     }
 }
 
 struct ValidationServiceViewModel {
 
+    enum Accessibility {
+        static let close = VoiceOverOptions.Settings(label: "accessibility_share_certificate_label_close".localized)
+        static let openViewController = VoiceOverOptions.Settings(label: "accessibility_share_certificate_announce".localized)
+        static let closeViewController = VoiceOverOptions.Settings(label: "accessibility_share_certificate_closing_announce".localized)
+    }
+
     enum Rows: Int, CaseIterable {
         case provider = 0, subject, consentHeader, hintView, additionalInformation, privacyLink
+
+        var cellTitle: String {
+            switch self {
+            case .provider:
+                return Constants.Text.Cell.providerTitle
+            case .subject:
+                return Constants.Text.Cell.subjectTitle
+            case .hintView:
+                return Constants.Text.HintView.title
+            default:
+                return ""
+            }
+        }
+
         var reuseIdentifier: String {
             switch self {
             case .provider, .subject:
@@ -45,14 +72,10 @@ struct ValidationServiceViewModel {
                 return Constants.reuseIdentifier
             }
         }
+
     }
 
     let router: ValidationServiceRouter
-
-    internal init(router: ValidationServiceRouter, initialisationData: ValidationServiceInitialisation) {
-        self.router = router
-        self.initialisationData = initialisationData
-    }
 
     let initialisationData: ValidationServiceInitialisation
 
@@ -72,7 +95,8 @@ struct ValidationServiceViewModel {
 
     var hintViewText: NSAttributedString {
         Constants.Text.HintView.introText.styledAs(.body)
-            .appendBullets([Constants.Text.HintView.bulletText1.styledAs(.body),
+
+            .appendBullets([String(format: Constants.Text.HintView.bulletText1, initialisationData.serviceProvider).styledAs(.body),
                             Constants.Text.HintView.bulletText2.styledAs(.body)], spacing: 12)
     }
 
@@ -82,5 +106,14 @@ struct ValidationServiceViewModel {
 
     var numberOfRows: Int {
         Rows.allCases.count
+    }
+
+    internal init(router: ValidationServiceRouter, initialisationData: ValidationServiceInitialisation) {
+        self.router = router
+        self.initialisationData = initialisationData
+    }
+
+    func routeToPrivacyStatement() {
+        router.routeToPrivacyStatement(url: initialisationData.privacyUrl)
     }
 }

@@ -200,6 +200,7 @@
 		957454A6273D5889009B25B0 /* ValidationServiceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957454A0273D5889009B25B0 /* ValidationServiceFactory.swift */; };
 		957454A7273D5889009B25B0 /* ValidationServiceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 957454A2273D5889009B25B0 /* ValidationServiceViewController.xib */; };
 		957454A9273D58AE009B25B0 /* HintTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957454A8273D58AE009B25B0 /* HintTableViewCell.swift */; };
+		957454AB273E80BC009B25B0 /* SubTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957454AA273E80BC009B25B0 /* SubTitleCell.swift */; };
 		95961E892703550B00E577A4 /* ValidationResultFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95961E872703545200E577A4 /* ValidationResultFactoryTests.swift */; };
 		95961E8B270450CA00E577A4 /* Mocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95961E8A270450CA00E577A4 /* Mocks.swift */; };
 		95A031EB27359AC60073FDD1 /* ValidationResultViewControllerSnapShotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A031E9273597880073FDD1 /* ValidationResultViewControllerSnapShotTests.swift */; };
@@ -458,6 +459,7 @@
 		957454A0273D5889009B25B0 /* ValidationServiceFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidationServiceFactory.swift; sourceTree = "<group>"; };
 		957454A2273D5889009B25B0 /* ValidationServiceViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ValidationServiceViewController.xib; sourceTree = "<group>"; };
 		957454A8273D58AE009B25B0 /* HintTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HintTableViewCell.swift; sourceTree = "<group>"; };
+		957454AA273E80BC009B25B0 /* SubTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubTitleCell.swift; sourceTree = "<group>"; };
 		95961E872703545200E577A4 /* ValidationResultFactoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationResultFactoryTests.swift; sourceTree = "<group>"; };
 		95961E8A270450CA00E577A4 /* Mocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mocks.swift; sourceTree = "<group>"; };
 		95A031E9273597880073FDD1 /* ValidationResultViewControllerSnapShotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationResultViewControllerSnapShotTests.swift; sourceTree = "<group>"; };
@@ -1380,6 +1382,7 @@
 			children = (
 				957454A2273D5889009B25B0 /* ValidationServiceViewController.xib */,
 				957454A8273D58AE009B25B0 /* HintTableViewCell.swift */,
+				957454AA273E80BC009B25B0 /* SubTitleCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1683,6 +1686,7 @@
 				3882AEB7266FEBA3000354CD /* CertificateItemDetailViewModelProtocol.swift in Sources */,
 				957454A9273D58AE009B25B0 /* HintTableViewCell.swift in Sources */,
 				216D1FA7264EF74100370F16 /* WelcomeViewModel.swift in Sources */,
+				957454AB273E80BC009B25B0 /* SubTitleCell.swift in Sources */,
 				38E3625B269B712900DE6D4C /* RuleCheckViewController.swift in Sources */,
 				216D1FF0264EF77200370F16 /* HowToScanViewModel.swift in Sources */,
 				35F99E1126B2B6F000D3EFC3 /* PDFExportViewController.swift in Sources */,

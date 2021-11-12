@@ -10,19 +10,10 @@ import CovPassUI
 
 private enum Constants {
     enum Text {
-        static let headerText = "Ihre Zertifikate zu Buchungszwecken freigeben"
-        static let confirmButton = "Einverstanden"
-        static let cancelButton = "Abbrechen"
-        static let privacyPolicy = "Datenschutzerklärung"
-
-        enum HintView {
-            static let title = "Ihr Einverständnis"
-        }
-
-        enum Cell {
-            static let providerTitle = "Provider"
-            static let subjectTitle = "Subject"
-        }
+        static let headerText = "share_certificate_title".localized
+        static let confirmButton = "share_certificate_action_button_agree".localized
+        static let cancelButton = "share_certificate_action_button_cancel".localized
+        static let privacyPolicy = "app_information_title_datenschutz".localized     
     }
 
     enum Layout {
@@ -46,8 +37,7 @@ class ValidationServiceViewController: UIViewController {
                                                 .styledAs(.header_3)
                                                 .colored(.neutralWhite, in: nil), for: .normal)
         button.action = { [weak self] in
-            guard let this = self else {return}
-            this.cancel()
+            self?.cancel()
         }
         return button
     }()
@@ -69,9 +59,10 @@ class ValidationServiceViewController: UIViewController {
         view.frame.size.height = Constants.Layout.headerViewHeight
         view.attributedTitleText = Constants.Text.headerText.styledAs(.header_3)
         view.action = { [weak self] in
-            guard let this = self else {return}
-            this.cancel()
+            self?.cancel()
         }
+        view.actionButton.enableAccessibility(label: ValidationServiceViewModel.Accessibility.close.label)
+        
         return view
     }()
 
@@ -94,7 +85,7 @@ class ValidationServiceViewController: UIViewController {
 
     init(viewModel: ValidationServiceViewModel) {
         self.viewModel = viewModel
-        super.init(nibName: String(describing: Self.self), bundle: .main)
+        super.init(nibName: String(describing: Self.self), bundle: .main)        
     }
 
     override func viewDidLoad() {
@@ -121,13 +112,15 @@ class ValidationServiceViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.setNavigationBarHidden(true, animated: animated)
+        UIAccessibility.post(notification: .layoutChanged, argument: ValidationServiceViewModel.Accessibility.openViewController)
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         navigationController?.setNavigationBarHidden(false, animated: animated)
+        UIAccessibility.post(notification: .layoutChanged, argument: ValidationServiceViewModel.Accessibility.closeViewController)
     }
 
-    @objc func cancel() {        
+    @objc func cancel() {
         viewModel.router.routeToWarning()
     }
 }
@@ -135,6 +128,9 @@ class ValidationServiceViewController: UIViewController {
 extension ValidationServiceViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
+        if indexPath.row == ValidationServiceViewModel.Rows.privacyLink.rawValue {
+            viewModel.routeToPrivacyStatement()
+        }
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -158,23 +154,31 @@ extension ValidationServiceViewController: UITableViewDataSource {
 
         switch indexPath.row {
         case ValidationServiceViewModel.Rows.provider.rawValue:
-            cell.textLabel?.attributedText = Constants.Text.Cell.providerTitle.styledAs(.header_3)
-            cell.detailTextLabel?.attributedText = viewModel.initialisationData.serviceProvider.styledAs(.body)
+
+            cell.textLabel?.attributedText = ValidationServiceViewModel.Rows.provider.cellTitle
+                .styledAs(.header_3)
+            cell.detailTextLabel?.attributedText = viewModel.initialisationData.serviceProvider
+                .styledAs(.body)
         case ValidationServiceViewModel.Rows.subject.rawValue:
-            cell.textLabel?.attributedText = Constants.Text.Cell.subjectTitle.styledAs(.header_3)
-            cell.detailTextLabel?.attributedText = viewModel.initialisationData.subject.styledAs(.body)
+            cell.textLabel?.attributedText = ValidationServiceViewModel.Rows.subject.cellTitle
+                .styledAs(.header_3)
+            cell.detailTextLabel?.attributedText = viewModel.initialisationData.subject
+                .styledAs(.body)
         case ValidationServiceViewModel.Rows.consentHeader.rawValue:
-            cell.textLabel?.attributedText = viewModel.initialisationData.consent.styledAs(.body)
+            cell.textLabel?.attributedText = viewModel.initialisationData.consent
+                .styledAs(.body)
         case ValidationServiceViewModel.Rows.hintView.rawValue:
             if let hintCell = cell as? HintTableViewCell {
-                hintCell.titleText = Constants.Text.HintView.title.localized.styledAs(.header_3)
+                hintCell.titleText = ValidationServiceViewModel.Rows.hintView.cellTitle
+                    .styledAs(.header_3)
                 hintCell.bodyText = viewModel.hintViewText
             }
         case ValidationServiceViewModel.Rows.additionalInformation.rawValue:
             cell.textLabel?.attributedText = viewModel.additionalInformation
         case ValidationServiceViewModel.Rows.privacyLink.rawValue:
             cell.isUserInteractionEnabled = true
-            cell.textLabel?.attributedText = Constants.Text.privacyPolicy.styledAs(.header_3)
+            cell.textLabel?.attributedText = Constants.Text.privacyPolicy
+                .styledAs(.header_3)
             cell.accessoryType = .disclosureIndicator
             cell.accessoryView = chevronImageView
         default:
@@ -190,19 +194,4 @@ extension ValidationServiceViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.numberOfRows
     }
-}
-
-class SubTitleCell: UITableViewCell {
-
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
-    }
-
-    @available(*, unavailable)
-    required init?(coder _: NSCoder) { fatalError("init?(coder: NSCoder) not implemented yet") }
-
-    override func prepareForReuse() {
-        super.prepareForReuse()
-    }
-
 }

@@ -19,6 +19,7 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
     weak var delegate: CertificatesOverviewViewModelDelegate?
     private var router: CertificatesOverviewRouterProtocol
     private let repository: VaccinationRepositoryProtocol
+    private let vaasRepository: VAASRepositoryProtocol
     private let certLogic: DCCCertLogicProtocol
     private let boosterLogic: BoosterLogicProtocol
     private var certificateList = CertificateList(certificates: [])
@@ -42,12 +43,14 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
     init(
         router: CertificatesOverviewRouterProtocol,
         repository: VaccinationRepositoryProtocol,
+        vaasRepository: VAASRepositoryProtocol,
         certLogic: DCCCertLogicProtocol,
         boosterLogic: BoosterLogicProtocol,
         userDefaults: Persistence
     ) {
         self.router = router
         self.repository = repository
+        self.vaasRepository = vaasRepository
         self.certLogic = certLogic
         self.boosterLogic = boosterLogic
         self.userDefaults = userDefaults
@@ -117,8 +120,7 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
             try self.payloadFromScannerResult(result)
         }
         .then { payload -> Promise<QRCodeScanable> in
-            if let data = payload.data(using: .utf8),
-                let ticket = try? JSONDecoder().decode(ValidationServiceInitialisation.self, from: data) {
+            if let ticket = self.vaasRepository.decodeInitialisationQRCode(payload: payload) {
                 return .value(ticket)
             }
             return self.repository.scanCertificate(payload)

@@ -26,6 +26,7 @@ struct CertificatesOverviewSceneFactory: SceneFactory {
         let viewModel = CertificatesOverviewViewModel(
             router: router,
             repository: VaccinationRepository.create(),
+            vaasRepository: VAASRepository(),
             certLogic: DCCCertLogic.create(),
             boosterLogic: BoosterLogic.create(),
             userDefaults: UserDefaultsPersistence()

@@ -14,9 +14,9 @@ import UIKit
 private enum Constants {
     enum Text {
         enum Alert {
-            static let message = "Wollen Sie den Vorgang wirklich beenden?"
-            static let ok = "Nicht jetzt"
-            static let cancel = "Ja, beenden"
+            static let message = "cancellation_share_certificate_title".localized
+            static let ok = "cancellation_share_certificate_action_button_no".localized
+            static let cancel = "cancellation_share_certificate_action_button_yes".localized
         }
     }
 }
@@ -26,7 +26,7 @@ protocol ValidationServiceRoutable: DialogRouterProtocol {
     func routeToWarning()
     func routeToSelectCertificate()
     func routeToCertificateConsent()
-    func routeToPrivacyStatement(url: String)
+    func routeToPrivacyStatement(url: URL)
 }
 
 struct ValidationServiceRouter: ValidationServiceRoutable {
@@ -55,9 +55,9 @@ struct ValidationServiceRouter: ValidationServiceRoutable {
 
     }
 
-    func routeToPrivacyStatement(url: String) {
-        let webViewScene = WebviewSceneFactory(title: "app_information_title_faq".localized,
-                                               url: URL(string: url)!)        
+    func routeToPrivacyStatement(url: URL) {
+        let webViewScene = WebviewSceneFactory(title: "app_information_title_datenschutz".localized,
+                                               url: url)
         sceneCoordinator.push(webViewScene)
     }
 }
