@@ -18,8 +18,11 @@ class ChooseCertificateViewController: UIViewController {
     @IBOutlet var scrollView: UIScrollView!
     @IBOutlet var stackView: UIStackView!
     @IBOutlet var vaccinationsStackView: UIStackView!
-    @IBOutlet var nameHeadline: PlainLabel!
-
+    @IBOutlet var headline: InfoHeaderView!
+    @IBOutlet var subtitleLabel: PlainLabel!
+    @IBOutlet var certDetailsLabel: PlainLabel!
+    @IBOutlet var toolbarView: CustomToolbarView!
+    
     // MARK: - Properties
 
     private(set) var viewModel: ChooseCertificateViewModelProtocol
@@ -37,34 +40,47 @@ class ChooseCertificateViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.delegate = self
-        setupView()
+        setupConstants()
+        updateView()
         viewModel.refreshCertificates()
     }
 
     // MARK: - Methods
 
-    private func setupView() {
+    private func setupConstants() {
+        setupTitle()
+        setupSubtitle()
         view.backgroundColor = .backgroundPrimary
         scrollView.contentInset = .init(top: .space_24, left: .zero, bottom: .space_70, right: .zero)
-        setupHeadline()
-        setupCertificates()
-        setupNavigationBar()
-    }
-
-    private func setupNavigationBar() {
-        title = ""
-        navigationController?.navigationBar.backIndicatorImage = .arrowBack
-        navigationController?.navigationBar.backIndicatorTransitionMaskImage = .arrowBack
-        navigationController?.navigationBar.tintColor = .onBackground100
     }
     
-    private func setupHeadline() {
-        nameHeadline.attributedText = viewModel.name.styledAs(.header_1).colored(.onBackground100)
-        nameHeadline.layoutMargins = .init(top: .zero, left: .space_24, bottom: .zero, right: .space_24)
-        stackView.setCustomSpacing(.space_24, after: nameHeadline)
+    private func setupTitle() {
+        headline.attributedTitleText = viewModel.title.styledAs(.header_2)
+        headline.action = { [weak self] in
+            self?.viewModel.cancel()
+        }
+        headline.image = .close
+        headline.actionButton.enableAccessibility(label: Constant.Accessibility.labelClose)
     }
     
-    private func setupCertificates() {
+    private func setupSubtitle() {
+        subtitleLabel.attributedText = viewModel.subtitle.styledAs(.header_3)
+        subtitleLabel.layoutMargins = .init(top: .zero, left: .space_24, bottom: .zero, right: .space_24)
+    }
+    
+    private func updateView() {
+        updateCertDetails()
+        updateCertificates()
+        updateToolbarView()
+    }
+    
+    private func updateCertDetails() {
+        certDetailsLabel.attributedText = viewModel.certdetails.styledAs(.subheader_2).colored(.onBackground100)
+        certDetailsLabel.layoutMargins = .init(top: .zero, left: .space_24, bottom: .zero, right: .space_24)
+        stackView.setCustomSpacing(40, after: certDetailsLabel)
+    }
+    
+    private func updateCertificates() {
         vaccinationsStackView.subviews.forEach {
             $0.removeFromSuperview()
             self.vaccinationsStackView.removeArrangedSubview($0)
@@ -73,15 +89,37 @@ class ChooseCertificateViewController: UIViewController {
             self.vaccinationsStackView.addArrangedSubview($0)
         }
     }
-
+    
+    private func updateToolbarView() {
+        toolbarView.state = .confirm(Constant.Keys.NoMatch.actionButton)
+        toolbarView.setUpLeftButton(leftButtonItem: .navigationArrow)
+        toolbarView.layoutMargins.top = .space_24
+        toolbarView.delegate = self
+        toolbarView.primaryButton.isHidden = viewModel.certificatesAvailable
+    }
 }
 
 extension ChooseCertificateViewController: ViewModelDelegate {
     func viewModelDidUpdate() {
-        setupView()
+        updateView()
     }
 
     func viewModelUpdateDidFailWithError(_: Error) {
         // already handled in ViewModel
+    }
+}
+
+// MARK: - CustomToolbarViewDelegate
+
+extension ChooseCertificateViewController: CustomToolbarViewDelegate {
+    func customToolbarView(_: CustomToolbarView, didTap buttonType: ButtonItemType) {
+        switch buttonType {
+        case .navigationArrow:
+            viewModel.cancel()
+        case .textButton:
+            viewModel.cancel()
+        default:
+            return
+        }
     }
 }

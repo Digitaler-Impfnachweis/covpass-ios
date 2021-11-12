@@ -522,10 +522,9 @@
 			isa = PBXGroup;
 			children = (
 				09331765273ABB2A0036DB2A /* ChooseCertificateRouter.swift */,
-				09331766273ABB2A0036DB2A /* ChooseCertificateViewModel.swift */,
-				0933176B273ABB2A0036DB2A /* Models */,
-				0933176D273ABB2A0036DB2A /* ChooseCertificateSceneFactory.swift */,
 				0933176E273ABB2A0036DB2A /* ChooseCertificateViewController.swift */,
+				0933176D273ABB2A0036DB2A /* ChooseCertificateSceneFactory.swift */,
+				0933176B273ABB2A0036DB2A /* Models */,
 				0933176F273ABB2A0036DB2A /* Views */,
 				09331771273ABB2A0036DB2A /* Protocols */,
 			);
@@ -535,6 +534,7 @@
 		0933176B273ABB2A0036DB2A /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				09331766273ABB2A0036DB2A /* ChooseCertificateViewModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";

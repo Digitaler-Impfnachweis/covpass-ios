@@ -11,9 +11,12 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ChooseCertificateViewController">
             <connections>
-                <outlet property="nameHeadline" destination="eZz-97-0Z9" id="VpK-oP-hCO"/>
+                <outlet property="certDetailsLabel" destination="cPb-uE-241" id="yrH-8A-DaE"/>
+                <outlet property="headline" destination="eZz-97-0Z9" id="lla-0m-FOn"/>
                 <outlet property="scrollView" destination="YDs-Va-mXX" id="rkd-dK-EbI"/>
                 <outlet property="stackView" destination="4ka-qw-LRS" id="bvG-dB-nlQ"/>
+                <outlet property="subtitleLabel" destination="bKh-SZ-k8g" id="n5O-17-Rkb"/>
+                <outlet property="toolbarView" destination="yft-Om-LNM" id="ifz-ah-oxx"/>
                 <outlet property="vaccinationsStackView" destination="rhc-O6-hd2" id="ehg-oL-Ggq"/>
                 <outlet property="view" destination="Dyt-0F-2nE" id="ak4-cW-x29"/>
             </connections>
@@ -23,26 +26,39 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YDs-Va-mXX">
-                    <rect key="frame" x="0.0" y="24" width="414" height="858"/>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YDs-Va-mXX">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="882"/>
                     <subviews>
-                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="4ka-qw-LRS">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="250"/>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="4ka-qw-LRS">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="386"/>
                             <subviews>
-                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="eZz-97-0Z9" userLabel="Name Headline" customClass="PlainLabel" customModule="CovPassUI">
+                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="eZz-97-0Z9" userLabel="Title" customClass="InfoHeaderView" customModule="CovPassUI">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
                                 </view>
+                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="bKh-SZ-k8g" userLabel="Subtitle" customClass="PlainLabel" customModule="CovPassUI">
+                                    <rect key="frame" x="0.0" y="62" width="414" height="50"/>
+                                </view>
+                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="cPb-uE-241" userLabel="Cert Details" customClass="PlainLabel" customModule="CovPassUI">
+                                    <rect key="frame" x="0.0" y="124" width="414" height="50"/>
+                                </view>
                                 <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="200" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="rhc-O6-hd2" userLabel="Vaccinations StackView">
-                                    <rect key="frame" x="0.0" y="50" width="414" height="200"/>
+                                    <rect key="frame" x="0.0" y="186" width="414" height="200"/>
                                 </stackView>
                             </subviews>
                         </stackView>
+                        <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="yft-Om-LNM" customClass="CustomToolbarView" customModule="CovPassUI">
+                            <rect key="frame" x="0.0" y="722" width="414" height="128"/>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        </view>
                     </subviews>
                     <constraints>
+                        <constraint firstItem="yft-Om-LNM" firstAttribute="top" relation="greaterThanOrEqual" secondItem="4ka-qw-LRS" secondAttribute="bottom" constant="32" id="4Nj-jG-Taa"/>
+                        <constraint firstItem="taM-pc-801" firstAttribute="bottom" secondItem="yft-Om-LNM" secondAttribute="bottom" constant="32" id="H6f-Gf-udq"/>
                         <constraint firstItem="4ka-qw-LRS" firstAttribute="leading" secondItem="YDs-Va-mXX" secondAttribute="leading" id="HK3-zX-4Oy"/>
-                        <constraint firstAttribute="bottom" secondItem="4ka-qw-LRS" secondAttribute="bottom" priority="900" id="K80-Ga-1dm"/>
+                        <constraint firstItem="yft-Om-LNM" firstAttribute="leading" secondItem="taM-pc-801" secondAttribute="leading" id="Wfp-X8-hn3"/>
                         <constraint firstAttribute="trailing" secondItem="4ka-qw-LRS" secondAttribute="trailing" id="gci-lm-WgT"/>
                         <constraint firstItem="4ka-qw-LRS" firstAttribute="width" secondItem="YDs-Va-mXX" secondAttribute="width" id="gzb-0i-ifn"/>
+                        <constraint firstItem="yft-Om-LNM" firstAttribute="trailing" secondItem="taM-pc-801" secondAttribute="trailing" id="oQI-9S-HZ7"/>
                         <constraint firstItem="4ka-qw-LRS" firstAttribute="top" secondItem="YDs-Va-mXX" secondAttribute="top" id="rlE-Ca-iLO"/>
                     </constraints>
                     <viewLayoutGuide key="contentLayoutGuide" id="oOk-ZY-LGb"/>
@@ -52,7 +68,7 @@
             <viewLayoutGuide key="safeArea" id="vuk-GN-uGc"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="YDs-Va-mXX" firstAttribute="top" secondItem="Dyt-0F-2nE" secondAttribute="top" constant="24" id="9bT-JC-hoO"/>
+                <constraint firstItem="YDs-Va-mXX" firstAttribute="top" secondItem="Dyt-0F-2nE" secondAttribute="top" id="9bT-JC-hoO"/>
                 <constraint firstAttribute="bottom" secondItem="YDs-Va-mXX" secondAttribute="bottom" constant="14" id="HxY-W6-rsC"/>
                 <constraint firstItem="YDs-Va-mXX" firstAttribute="leading" secondItem="Dyt-0F-2nE" secondAttribute="leading" id="fHz-gv-wJd"/>
                 <constraint firstAttribute="trailing" secondItem="YDs-Va-mXX" secondAttribute="trailing" id="ruR-ZM-vqA"/>
@@ -61,8 +77,17 @@
         </view>
     </objects>
     <designables>
+        <designable name="bKh-SZ-k8g">
+            <size key="intrinsicContentSize" width="414" height="50"/>
+        </designable>
+        <designable name="cPb-uE-241">
+            <size key="intrinsicContentSize" width="414" height="50"/>
+        </designable>
         <designable name="eZz-97-0Z9">
             <size key="intrinsicContentSize" width="414" height="50"/>
+        </designable>
+        <designable name="yft-Om-LNM">
+            <size key="intrinsicContentSize" width="414" height="128"/>
         </designable>
     </designables>
     <resources>
