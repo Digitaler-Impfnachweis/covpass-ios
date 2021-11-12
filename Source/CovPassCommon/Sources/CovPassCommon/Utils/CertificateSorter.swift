@@ -33,15 +33,7 @@ extension ExtendedCBORWebToken {
 }
 
 extension Array where Element == ExtendedCBORWebToken {
-    
-    public enum CertType {
-        case recovery, test, vaccination
-    }
-    
-    public enum Property {
-        case givenName, familyName, dateOfBirth
-    }
-    
+
     public func filter(types: [CertType],
                        givenName: String,
                        familyName: String,

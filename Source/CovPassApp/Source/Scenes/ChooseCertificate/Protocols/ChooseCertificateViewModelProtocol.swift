@@ -17,6 +17,9 @@ protocol ChooseCertificateViewModelProtocol {
     var title: String { get }
     var subtitle: String { get }
     var certdetails: String { get }
+    var NoMatchTitle: String { get }
+    var NoMatchSubtitle: String { get }
+    var NoMatchImage: UIImage { get }
     var certificatesAvailable: Bool { get }
     func refreshCertificates() -> Promise<Void>
     func cancel()

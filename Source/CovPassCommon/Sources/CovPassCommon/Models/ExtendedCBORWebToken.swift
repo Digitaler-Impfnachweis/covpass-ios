@@ -8,7 +8,16 @@
 
 import Foundation
 
+public enum CertType {
+    case recovery, test, vaccination
+}
+
+public enum Property {
+    case givenName, familyName, dateOfBirth
+}
+
 public struct ExtendedCBORWebToken: Codable {
+
     /// CBOR web token vaccination certificate
     public var vaccinationCertificate: CBORWebToken
 

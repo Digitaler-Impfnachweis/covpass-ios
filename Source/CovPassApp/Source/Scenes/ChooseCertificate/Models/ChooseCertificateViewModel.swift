@@ -43,7 +43,26 @@ class ChooseCertificateViewModel: ChooseCertificateViewModelProtocol {
     private var certificateList = CertificateList(certificates: [])
 
     private var filteredCertificates: [ExtendedCBORWebToken] {
-        certificates?.filter(types: [.vaccination], givenName: "ERIKA<DOERTEs", familyName: "SCHMITT<MUSTERMANN", dob: "1964-08-12") ?? []
+        certificates?.filter(types: typeFilter,
+                             givenName: givenNameFilter,
+                             familyName: familyNameFilter,
+                             dob: dobFilter) ?? []
+    }
+    
+    var typeFilter: [CertType] {
+        return [.vaccination, .recovery]
+    }
+    
+    var givenNameFilter: String {
+        return "ERIKA<DOERTE"
+    }
+    
+    var familyNameFilter: String {
+        return "SCHMITT<MUSTERMANN"
+    }
+    
+    var dobFilter: String {
+        return "1964-08-12"
     }
     
     var title: String {
@@ -68,11 +87,34 @@ class ChooseCertificateViewModel: ChooseCertificateViewModelProtocol {
     }
     
     var availableCertTypes: String {
-        "\("certificate_check_validity_vaccination".localized)"
+        var string = ""
+        typeFilter.forEach { certType in
+            switch certType {
+            case .recovery: string.append("certificates_overview_recovery_certificate_title".localized)
+            case .test: string.append("certificates_overview_test_certificate_title".localized)
+            case .vaccination: string.append("certificates_overview_vaccination_certificate_title".localized)
+            }
+            if typeFilter.last != certType {
+                string.append(", ")
+            }
+        }
+        return string
     }
     
     var certificatesAvailable: Bool {
-        certificates?.count ?? 0 > 0
+        filteredCertificates.count > 0
+    }
+    
+    var NoMatchTitle: String {
+        return Constant.Keys.NoMatch.title
+    }
+    
+    var NoMatchSubtitle: String {
+        return Constant.Keys.NoMatch.subtitle
+    }
+
+    var NoMatchImage: UIImage {
+        return Constant.Keys.NoMatch.image
     }
     
     var items: [CertificateItem] {
@@ -81,13 +123,13 @@ class ChooseCertificateViewModel: ChooseCertificateViewModelProtocol {
             .compactMap { cert in
                 var vm: CertificateItemViewModel?
                 if cert.vaccinationCertificate.hcert.dgc.r != nil {
-                    vm = RecoveryCertificateItemViewModel(cert)
+                    vm = RecoveryCertificateItemViewModel(cert, active: true)
                 }
                 if cert.vaccinationCertificate.hcert.dgc.t != nil {
-                    vm = TestCertificateItemViewModel(cert)
+                    vm = TestCertificateItemViewModel(cert, active: true)
                 }
                 if cert.vaccinationCertificate.hcert.dgc.v != nil {
-                    vm = VaccinationCertificateItemViewModel(cert)
+                    vm = VaccinationCertificateItemViewModel(cert, active: true)
                 }
                 if vm == nil {
                     return nil

@@ -23,6 +23,12 @@ class ChooseCertificateViewController: UIViewController {
     @IBOutlet var certDetailsLabel: PlainLabel!
     @IBOutlet var toolbarView: CustomToolbarView!
     
+    @IBOutlet weak var noMatchInfoView: UIView!
+    @IBOutlet weak var noMatchImageView: UIImageView!
+    @IBOutlet weak var notMatchTitleLabel: UILabel!
+    @IBOutlet weak var noMatchSubtitleLabel: UILabel!
+    
+    
     // MARK: - Properties
 
     private(set) var viewModel: ChooseCertificateViewModelProtocol
@@ -72,6 +78,11 @@ class ChooseCertificateViewController: UIViewController {
         updateCertDetails()
         updateCertificates()
         updateToolbarView()
+        
+        noMatchInfoView.isHidden = viewModel.certificatesAvailable
+        noMatchImageView.image = viewModel.NoMatchImage
+        notMatchTitleLabel.attributedText = viewModel.NoMatchTitle.styledAs(.mainButton).aligned(to: .center)
+        noMatchSubtitleLabel.attributedText = viewModel.NoMatchSubtitle.styledAs(.body).aligned(to: .center)
     }
     
     private func updateCertDetails() {
