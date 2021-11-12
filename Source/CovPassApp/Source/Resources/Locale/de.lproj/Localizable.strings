@@ -159,21 +159,21 @@
 
 "accessibility_scan_camera_torch_off" = "Taschenlampe ausschalten";
 
-"accessibility_certificate_add_popup_announce" = "Die Ansicht \"Nachweis hinzufügen\" wurde geöffnet";
+"accessibility_certificate_add_popup_announce" = "Die Ansicht \"QR-Code scannen\" wurde geöffnet";
 
-"accessibility_certificate_add_popup_closing_announce" = "Die Ansicht \"Nachweis hinzufügen\" wurde geschlossen";
+"accessibility_certificate_add_popup_closing_announce" = "Die Ansicht \"QR-Code scannen\" wurde geschlossen";
 
 "accessibility_scan_success_announce" = "Zertifikat von %@ wurde erfolgreich hinzugefügt";
 
 "accessibility_certificate_add_popup_image" = "Bild: Person hält das Smartphone über drei unterschiedliche Zertifikate mit QR-Code";
 
-"certificate_add_popup_title" = "Nachweis hinzufügen";
+"certificate_add_popup_title" = "QR-Code scannen";
 
 "certificate_add_popup_note_title" = "Kein Sperrcode auf Ihrem Smartphone vorhanden";
 
 "certificate_add_popup_note_message" = "Die CovPass-App speichert sensible Daten auf Ihrem Smartphone. Um die Daten vor fremdem Zugriff zu schützen, empfehlen wir Ihnen, einen Code zum Entsperren Ihres Smartphones einzurichten.";
 
-"certificate_add_popup_message" = "Scannen Sie den QR-Code von einem digitalen COVID-Zertifikat der EU. Der Nachweis wird direkt in die CovPass-App übertragen.";
+"certificate_add_popup_message" = "Scannen Sie den QR-Code von einem digitalen COVID-Zertifikat der EU. Der Nachweis wird direkt in die CovPass-App übertragen.\n\nZu Buchungszwecken (z. B. Flug und Hotel) können Sie Ihr hinzugefügtes COVID-Zertifikat online an den Anbieter übermitteln. Scannen Sie dazu den QR-Code, der bei der Buchung angezeigt wird.";
 
 "certificate_add_popup_action_title" = "Welchen QR-Code kann ich einscannen?";
 
@@ -1173,3 +1173,160 @@
 "accessibility_qr_code" = "QR-Code";
 
 "accessibility_button" = "Taste";
+
+
+/********** popup: share certification **********/
+
+"share_certificate_title" = "Ihre Zertifikate zu Buchungszwecken freigeben";
+
+"share_certificate_details_provider" = "Anbieter";
+
+"share_certificate_details_booking" = "Buchung";
+
+"share_certificate_message" = "Der Anbieter möchte sicherstellen, dass ein gültiges Zertifikat zu Ihrer Buchung vorliegt. Für den Abruf Ihrer Buchungsdetails vom Anbieter und die Freigabe Ihrer gespeicherten Zertifikate ist Ihr Einverständnis erforderlich.";
+
+"share_certificate_consent_title" = "Ihr Einverständnis";
+
+"share_certificate_consent_message" = "Durch Antippen von „Einverstanden“ willigen Sie in die folgenden Schritte ein:";
+
+"share_certificate_consent_first_list_item" = "Die App ruft vom Anbieter %@ den Namen und das Geburtsdatum der bei Buchung angegebenen Person, die für die Prüfung relevanten Buchungsdetails (z. B. Zielland und Reisedatum) und die vom Anbieter zu Ihrer Buchung festgelegten Anforderungen an das Zertifikat ab.";
+
+"share_certificate_consent_second_list_item" = "Die abgerufenen Daten werden von der App genutzt, um festzustellen, welche Ihrer gespeicherten Zertifikate verwendet werden können.";
+
+"share_certificate_notes_first_list_item" = "Sie sind nicht verpflichtet, die Überprüfung Ihres Zertifikats mit der CovPass-App zu erlauben. Der Nachweis Ihres Impf-, Test- oder Genesungsstatus kann auch auf andere Weise erbracht werden.";
+
+"share_certificate_notes_second_list_item" = "Die Anforderungen an das Zertifikat werden vom Anbieter festgelegt. Das RKI hat darauf keinen Einfluss. Weitere Informationen zu den Zertifikatsanforderungen erhalten Sie bei dem Anbieter.";
+
+"share_certificate_notes_third_list_item" = "Die Ermittlung der geeigneten Zertifikate erfolgt lokal auf Ihrem Smartphone. Es werden dabei keine Daten an das RKI oder den Anbieter übermittelt.";
+
+"share_certificate_notes_fourth_list_item" = "Das RKI erfährt die Daten zu Ihrer Buchung oder den von Ihnen gespeicherten Zertifikaten nicht.";
+
+"share_certificate_note_privacy_notice" = "Ausführliche Hinweise zur Datenverarbeitung finden Sie in der Datenschutzerklärung:";
+
+"share_certificate_action_button_agree" = "Einverstanden";
+
+"share_certificate_action_button_cancel" = "Abbrechen";
+
+"accessibility_share_certificate_label_close" = "Schließen";
+
+"accessibility_share_certificate_label_back" = "Zurück";
+
+"accessibility_share_certificate_announce" = "Die Ansicht \"Zertifikate zu Buchungszwecken freigeben\" wurde geöffnet.";
+
+"accessibility_share_certificate_closing_announce" = "Die Ansicht \"Zertifikate zu Buchungszwecken freigeben\" wurde geschlossen.";
+
+"share_certificate_selection_title" = "Zertifikat auswählen";
+
+"share_certificate_selection_message" = "Ihr Zertifikat muss folgenden Anforderungen entsprechen:";
+
+"accessibility_share_certificate_selection_label_close" = "Schließen";
+
+"accessibility_share_certificate_selection_label_back" = "Zurück";
+
+"accessibility_share_certificate_selection_announce" = "Die Ansicht \"Zertifikat auswählen\" wurde geöffnet.";
+
+"accessibility_share_certificate_selection_closing_announce" = "Die Ansicht \"Zertifikat auswählen\" wurde geschlossen.";
+
+"share_certificate_selection_no_match_title" = "Kein Zertifikat stimmt mit den oben genannten Anforderungen überein.";
+
+"share_certificate_selection_no_match_subline" = "Bitte prüfen Sie, ob Ihr in der App hinterlegtes Zertifikat den Anforderungen entspricht.";
+
+"share_certificate_selection_no_match_action button" = "Schließen";
+
+"share_certificate_transmission_title" = "Übermittlung Ihres Zertifikats zur Prüfung";
+
+"share_certificate_transmission_details_provider" = "Anbieter";
+
+"share_certificate_transmission_details_booking" = "Buchung";
+
+"share_certificate_transmission_message" = "Das ausgewählte Zertifikat und Ihre Buchungsdaten werden nun an den Prüfpartner des Anbieters übermittelt. Für die Übermittlung Ihrer Daten an den Überprüfungsservice ist Ihr Einverständnis erforderlich.";
+
+"share_certificate_transmission_consent_title" = "Ihr Einverständnis";
+
+"share_certificate_transmission_consent_message" = "Durch Antippen von „Einverstanden“ willigen Sie in die Übermittlung der folgenden Daten an den Überprüfungsservice von %@ ein:";
+
+"share_certificate_transmission_consent_first_list_item" = "Zertifikatsinhalt und elektronische Signatur des ausgewählten Zertifikats (u. a. Name und Geburtsdatum des Zertifikatsinhabers, Gültigkeitsdauer, Aussteller und Ausstellungsdatum, Angaben zu Impfstoff/Test/Genesung).";
+
+"share_certificate_transmission_consent_second_list_item" = "Die bei dem Anbieter %@ abgerufenen Buchungsdaten:";
+
+"share_certificate_transmission_consent_second_list_item_first_subitem" = "Zeitraum, in dem das Zertifikat gültig sein muss (Reisedauer oder Veranstaltungsdatum)";
+
+"share_certificate_transmission_consent_second_list_item_second_subitem" = "Bei Reisebuchungen: Ausgangsland und Zielland der Reise";
+
+"share_certificate_transmission_consent_second_list_item_third_subitem" = "Bei grenzüberschreitenden Reisen: Anforderungen des Ziellandes an das Zertifikat";
+
+"share_certificate_transmission_consent_second_list_item_fourth_subitem" = "Weitere Anforderungen des Anbieters an das Zertifikat (z. B. welche Impfstoffe oder Testverfahren akzeptiert werden)";
+
+"share_certificate_transmission_notes_first_list_item" = "Der Prüfpartner überprüft, ob die elektronische Signatur echt und das technische Ablaufdatum des Zertifikats noch nicht erreicht ist. Das technische Ablaufdatum und die übermittelten Zertifikatsinhalte können Sie in der App in der Detailansicht des Zertifikats einsehen.";
+
+"share_certificate_transmission_notes_second_list_item" = "Die Zertifikate enthalten sensible Gesundheitsdaten. Erlauben Sie daher nur solchen Anbietern die Überprüfung, die Ihnen bekannt sind und denen Sie vertrauen.";
+
+"share_certificate_transmission_notes_third_list_item" = "Für die Datenverarbeitung durch den Anbieter und den Prüfpartner ist das RKI nicht verantwortlich. Lesen Sie bitte deren Datenschutzhinweise, damit Sie wissen, wozu und wie Ihre Daten verwendet werden.";
+
+"share_certificate_transmission_notes_fourth_list_item" = "Der Prüfpartner teilt dem Anbieter sofort das Prüfungsergebnis mit. Es wird nur mitgeteilt, ob die Prüfung erfolgreich war oder nicht.";
+
+"share_certificate_transmission_note_privacy_notice" = "Ausführliche Hinweise zur Datenverarbeitung finden Sie in der Datenschutzerklärung:";
+
+"share_certificate_transmission_action_button_agree" = "Einverstanden";
+
+"accessibility_share_certificate_transmission_label_close" = "Schließen";
+
+"accessibility_share_certificate_transmission_label_back" = "Zurück";
+
+"accessibility_share_certificate_transmission_announce" = "Die Ansicht \"Übermittlung Ihres Zertifikats zur Prüfung\" wurde geöffnet.";
+
+"accessibility_share_certificate_transmission_closing_announce" = "Die Ansicht \"Übermittlung Ihres Zertifikats zur Prüfung\" wurde geschlossen.";
+
+"share_certificate_detail_view_requirements_met_title" = "Zertifikat entspricht den Anforderungen des Anbieters";
+
+"share_certificate_detail_view_requirements_met_subline" = "Geprüft von %@";
+
+"share_certificate_detail_view_requirements_met_message" = "Bei Fragen wenden Sie sich bitte an den Anbieter %@.";
+
+"share_certificate_detail_view_requirements_not_verifiable_title" = "Zertifikat ist nicht vollständig prüfbar";
+
+"share_certificate_detail_view_requirements_not_verifiable_subline" = "Geprüft von %@";
+
+"share_certificate_detail_view_requirements_not_verifiable_message" = "Leider ist eine automatische Prüfung nicht möglich. Überprüfen Sie die gelb markierten Angaben bitte selbst.\n\nBei Fragen wenden Sie sich bitte an den Anbieter %@.";
+
+"share_certificate_detail_view_requirements_not_met_title" = "Zertifikat entspricht nicht den Anforderungen des Anbieters";
+
+"share_certificate_detail_view_requirements_not_met_subline" = "Geprüft von %@";
+
+"share_certificate_detail_view_requirements_not_met_message" = "Die Angaben, die nicht den Anforderungen entsprechen, sind unterhalb rot markiert.\n\nBei Fragen wenden Sie sich bitte an den Anbieter %@.";
+
+"error_share_certificate_qr_code_not_recognized_title" = "QR-Code wurde nicht erkannt";
+
+"error_share_certificate_qr_code_not_recognized_message" = "Der eingescannte QR-Code gilt nicht für diese Buchung. Bitte überprüfen Sie, ob der QR-Code für die CovPass-App vorgesehen ist.\n\nMehr Informationen finden Sie in den Häufigen Fragen.";
+
+"error_share_certificate_qr_code_not_recognized_action_button" = "OK";
+
+"error_share_certificate_provider_not_verified_title" = "Die Identität des Anbieters konnte nicht überprüft werden";
+
+"error_share_certificate_provider_not_verified_message" = "Bei der Prüfung der Identität des Anbieters %@ kam es leider zu einem Fehler. Bitte versuchen Sie es zu einem späteren Zeitpunkt noch einmal.";
+
+"error_share_certificate_provider_not_verified_action_button" = "OK";
+
+"error_share_certificate_test_partner_not_verified_title" = "Die Identität des Prüfpartners konnte nicht überprüft werden";
+
+"error_share_certificate_test_partner_not_verified_message" = "Das Buchungsportal schlägt vor, Ihr Zertifikat mit folgendem Prüfpartner zu teilen: %@. Dieser Prüfpartner ist uns nicht bekannt.\n\nEine Liste der unterstützten Prüfpartner finden Sie in den Häufigen Fragen.";
+
+"error_share_certificate_test_partner_not_verified_action_button" = "OK";
+
+"error_share_certificate_no_connection_to_provider_title" = "Es konnte keine Verbindung zum Anbieter hergestellt werden";
+
+"error_share_certificate_no_connection_to_provider_message" = "Überprüfen Sie, ob Ihr Smartphone mit dem Internet verbunden ist und probieren Sie es noch einmal.";
+
+"error_share_certificate_no_connection_to_provider_action_button" = "OK";
+
+"error_share_certificate_no_verification_possible_title" = "Das Zertifikat konnte nicht überprüft werden";
+
+"error_share_certificate_no_verification_possible_message" = "Leider konnte die Prüfung nicht erfolgreich abgeschlossen werden. Mögliche Gründe dazu finden Sie in den Häufigen Fragen. Bitte versuchen Sie es zu einem späteren Zeitpunkt noch einmal.";
+
+"error_share_certificate_no_verification_possible_action_button" = "OK";
+
+"cancellation_share_certificate_title" = "Wollen Sie den Vorgang wirklich beenden?";
+
+"cancellation_share_certificate_action_button_no" = "Nicht jetzt";
+
+"cancellation_share_certificate_action_button_yes" = "Ja, beenden";
