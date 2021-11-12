@@ -96,7 +96,7 @@ public class VaccinationRepositoryMock: VaccinationRepositoryProtocol {
         .value(favoriteToggle)
     }
 
-    public func scanCertificate(_: String) -> Promise<ExtendedCBORWebToken> {
+    public func scanCertificate(_: String) -> Promise<QRCodeScanable> {
         return Promise { seal in
             seal.reject(ApplicationError.unknownError)
         }
