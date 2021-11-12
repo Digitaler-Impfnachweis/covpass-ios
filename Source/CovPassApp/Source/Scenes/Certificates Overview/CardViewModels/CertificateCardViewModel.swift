@@ -94,7 +94,7 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
 
     var subtitle: String {
         if token.vaccinationCertificate.isExpired {
-            return "certificates_overview_expired_certificate_note".localized
+            return "certificates_start_screen_qrcode_certificate_expired_subtitle".localized
         }
         if token.vaccinationCertificate.expiresSoon {
             guard let expireDate = token.vaccinationCertificate.exp else {
@@ -106,7 +106,7 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
         }
 
         if token.vaccinationCertificate.isInvalid {
-            return "certificates_overview_invalid_certificate_note".localized
+            return "certificates_start_screen_qrcode_certificate_invalid_subtitle".localized
         }
         if let r = certificate.r?.first {
             if showNotification {
@@ -134,7 +134,7 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
     }
 
     var titleIcon: UIImage {
-        if token.vaccinationCertificate.isExpired {
+        if isExpired {
             return UIImage.expired
         }
         if token.vaccinationCertificate.expiresSoon {

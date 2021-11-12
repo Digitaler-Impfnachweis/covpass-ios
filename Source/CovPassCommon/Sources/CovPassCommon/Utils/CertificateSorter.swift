@@ -42,14 +42,22 @@ extension Array where Element == ExtendedCBORWebToken {
         case givenName, familyName, dateOfBirth
     }
     
-    public func filter(type: CertType,
+    public func filter(types: [CertType],
                        givenName: String,
                        familyName: String,
                        dob: String) -> [ExtendedCBORWebToken] {
-        return filter(by: type)
+        return filter(by: types)
                 .filter(by: .givenName, for: givenName)
                 .filter(by: .familyName, for: familyName)
                 .filter(by: .dateOfBirth, for: dob)
+    }
+    
+    func filter(by types: [CertType]) -> [ExtendedCBORWebToken] {
+        var filteredCerts = [ExtendedCBORWebToken]()
+        types.forEach { type in
+            filteredCerts.append(contentsOf: filter(by: type))
+        }
+        return filteredCerts
     }
     
     func filter(by type: CertType) -> [ExtendedCBORWebToken] {
