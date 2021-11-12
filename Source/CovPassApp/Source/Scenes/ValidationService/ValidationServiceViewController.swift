@@ -68,9 +68,18 @@ class ValidationServiceViewController: UIViewController {
 
     private lazy var footerView: UIView = {
         let footerView = UIView()
+        footerView.frame.size.height = Constants.Layout.footerViewHeight
+
+        let borderView = UIView()
+        borderView.backgroundColor = .divider
+        borderView.setConstant(height: 1)
+
+        footerView.addSubview(borderView)
         footerView.addSubview(mainButton)
         footerView.addSubview(cancelButton)
-        footerView.frame.size.height = Constants.Layout.footerViewHeight
+
+        NSLayoutConstraint.activate([borderView.topAnchor.constraint(equalTo: footerView.topAnchor),
+                                     borderView.widthAnchor.constraint(equalTo: footerView.widthAnchor)])
         return footerView
     }()
 
@@ -100,6 +109,8 @@ class ValidationServiceViewController: UIViewController {
 
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.separatorStyle = .singleLine
+        tableView.separatorColor = .divider
 
         NSLayoutConstraint.activate([
             mainButton.topAnchor.constraint(equalTo: footerView.topAnchor, constant: 40),
@@ -111,13 +122,18 @@ class ValidationServiceViewController: UIViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
-        UIAccessibility.post(notification: .layoutChanged, argument: ValidationServiceViewModel.Accessibility.openViewController)
+        UIAccessibility.post(notification: .announcement, argument: ValidationServiceViewModel.Accessibility.openViewController.label)
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
     }
 
     override func viewWillDisappear(_ animated: Bool) {
-        navigationController?.setNavigationBarHidden(false, animated: animated)
-        UIAccessibility.post(notification: .layoutChanged, argument: ValidationServiceViewModel.Accessibility.closeViewController)
+        super.viewWillDisappear(animated)
+        UIAccessibility.post(notification: .announcement, argument: ValidationServiceViewModel.Accessibility.closeViewController.label)
     }
 
     @objc func cancel() {
@@ -159,14 +175,17 @@ extension ValidationServiceViewController: UITableViewDataSource {
                 .styledAs(.header_3)
             cell.detailTextLabel?.attributedText = viewModel.initialisationData.serviceProvider
                 .styledAs(.body)
+            cell.separatorInset = UIEdgeInsets.zero
         case ValidationServiceViewModel.Rows.subject.rawValue:
             cell.textLabel?.attributedText = ValidationServiceViewModel.Rows.subject.cellTitle
                 .styledAs(.header_3)
             cell.detailTextLabel?.attributedText = viewModel.initialisationData.subject
                 .styledAs(.body)
+            cell.separatorInset = UIEdgeInsets.zero
         case ValidationServiceViewModel.Rows.consentHeader.rawValue:
             cell.textLabel?.attributedText = viewModel.initialisationData.consent
                 .styledAs(.body)
+            cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: .greatestFiniteMagnitude)
         case ValidationServiceViewModel.Rows.hintView.rawValue:
             if let hintCell = cell as? HintTableViewCell {
                 hintCell.titleText = ValidationServiceViewModel.Rows.hintView.cellTitle
@@ -175,6 +194,7 @@ extension ValidationServiceViewController: UITableViewDataSource {
             }
         case ValidationServiceViewModel.Rows.additionalInformation.rawValue:
             cell.textLabel?.attributedText = viewModel.additionalInformation
+            cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: .greatestFiniteMagnitude)
         case ValidationServiceViewModel.Rows.privacyLink.rawValue:
             cell.isUserInteractionEnabled = true
             cell.textLabel?.attributedText = Constants.Text.privacyPolicy

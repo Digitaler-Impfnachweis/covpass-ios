@@ -130,7 +130,7 @@ class MainButtonTests: XCTestCase {
         // Then
         XCTAssertTrue(sut.isEnabled, "Button should be enabled.")
         XCTAssertEqual(sut.innerButton.attributedTitle(for: .disabled), expectedText)
-        XCTAssertEqual(sut.backgroundColor, .brandAccent, "Button background color should match.")
+        XCTAssertEqual(sut.backgroundColor, .brandBase, "Button background color should match.")
     }
 
     func testDisable() {

@@ -27,7 +27,6 @@ struct ValidationServiceFactory: SceneFactory {
         let viewModel = ValidationServiceViewModel(router: router, initialisationData: initialisationData)
         let viewController = ValidationServiceViewController(viewModel: viewModel)
         let navigationController = UINavigationController(rootViewController: viewController)
-        navig
         return navigationController
     }
 }

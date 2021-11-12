@@ -14,6 +14,7 @@ open class WebviewViewController: UIViewController {
 
     let viewModel: WebviewViewModelProtocol
     @IBOutlet var webView: WKWebView!
+    @IBOutlet weak var toolbar: CustomToolbarView!
 
     // MARK: - Lifecycle
 
@@ -28,12 +29,14 @@ open class WebviewViewController: UIViewController {
     override public func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .neutralWhite
+
         setupTitle()
         setupNavigationBar()
 
         webView.backgroundColor = .neutralWhite
         webView.navigationDelegate = self
         webView.load(viewModel.urlRequest)
+
     }
 
     private func setupTitle() {
@@ -47,6 +50,13 @@ open class WebviewViewController: UIViewController {
     }
 
     private func setupNavigationBar() {
+        toolbar.isHidden = !viewModel.isToolbarShown
+        if viewModel.isToolbarShown {
+            toolbar.delegate = self
+            toolbar.setUpLeftButton(leftButtonItem: .navigationArrow)
+            return
+        }
+
         if navigationController?.navigationBar.backItem != nil { return }
         let button = UIButton(type: .custom)
         button.setImage(.close, for: .normal)
@@ -92,5 +102,16 @@ extension WebviewViewController: WKNavigationDelegate {
         let exceptions = SecTrustCopyExceptions(serverTrust)
         SecTrustSetExceptions(serverTrust, exceptions)
         completionHandler(.useCredential, URLCredential(trust: serverTrust))
+    }
+}
+
+extension WebviewViewController: CustomToolbarViewDelegate {
+    public func customToolbarView(_: CustomToolbarView, didTap buttonType: ButtonItemType) {
+        switch buttonType {
+        case .navigationArrow:
+            navigationController?.popViewController(animated: true)
+        default:
+            break
+        }
     }
 }

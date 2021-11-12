@@ -55,6 +55,8 @@ public extension UIColor {
 
     static let infoBackground = UIColor("InfoBackground")
 
+    static let divider = UIColor("Divider")
+
     // MARK: - Neutral Colors
 
     static let neutralBlack = UIColor("NeutralBlack")

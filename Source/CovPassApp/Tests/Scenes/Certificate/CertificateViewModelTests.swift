@@ -41,6 +41,7 @@ class CertificateViewModelTests: XCTestCase {
         sut = CertificatesOverviewViewModel(
             router: router,
             repository: repository,
+            vaasRepository: VAASRepositoryMock(),
             certLogic: dccCertLogic,
             boosterLogic: boosterLogic,
             userDefaults: MockPersistence()

@@ -75,7 +75,7 @@ struct ValidationServiceViewModel {
 
     }
 
-    let router: ValidationServiceRouter
+    let router: ValidationServiceRoutable
 
     let initialisationData: ValidationServiceInitialisation
 
@@ -108,7 +108,7 @@ struct ValidationServiceViewModel {
         Rows.allCases.count
     }
 
-    internal init(router: ValidationServiceRouter, initialisationData: ValidationServiceInitialisation) {
+    internal init(router: ValidationServiceRoutable, initialisationData: ValidationServiceInitialisation) {
         self.router = router
         self.initialisationData = initialisationData
     }
