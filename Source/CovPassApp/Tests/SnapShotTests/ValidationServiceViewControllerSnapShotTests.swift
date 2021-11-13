@@ -16,7 +16,7 @@ class ValidationServiceViewControllerSnapShotTests: BaseSnapShotTests {
         let vm = ValidationServiceViewModel(router: ValidationServiceRouterMock(), initialisationData: ValidationServiceInitialisation.mock)
         let vc = ValidationServiceViewController(viewModel: vm)
 
-        verifyView(view: vc.view, height: 1323)
+        verifyView(view: vc.view, height: 1300)
     }
 }
 
