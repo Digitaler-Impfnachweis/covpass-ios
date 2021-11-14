@@ -203,6 +203,10 @@
 		95BB0D4B27020EBE00885BA3 /* ScanPleaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95BB0D4527020EBE00885BA3 /* ScanPleaseViewModel.swift */; };
 		95BB0D4C27020EBE00885BA3 /* ScanPleaseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95BB0D4727020EBE00885BA3 /* ScanPleaseViewController.xib */; };
 		95BB0D4F2702155600885BA3 /* ScanPleaseViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95BB0D4E2702155600885BA3 /* ScanPleaseViewModelTests.swift */; };
+		E951725027419141006274FC /* Font+CustomFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = E951724F27419141006274FC /* Font+CustomFonts.swift */; };
+		E95172662741B251006274FC /* OpenSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E95172632741B251006274FC /* OpenSans-SemiBold.ttf */; };
+		E95172672741B251006274FC /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E95172642741B251006274FC /* OpenSans-Bold.ttf */; };
+		E95172682741B251006274FC /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E95172652741B251006274FC /* OpenSans-Regular.ttf */; };
 		E977D362272C1195008DFF9C /* QRCodeWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E977D360272C1180008DFF9C /* QRCodeWidgetView.swift */; };
 		E977D364272C1254008DFF9C /* QRCodeWidgetEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = E977D363272C1254008DFF9C /* QRCodeWidgetEntry.swift */; };
 		E99F4ED427408368009E3E1F /* String+QRCodeGeneration.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99F4ED327408368009E3E1F /* String+QRCodeGeneration.swift */; };
@@ -491,6 +495,10 @@
 		95BB0D4527020EBE00885BA3 /* ScanPleaseViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanPleaseViewModel.swift; sourceTree = "<group>"; };
 		95BB0D4727020EBE00885BA3 /* ScanPleaseViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScanPleaseViewController.xib; sourceTree = "<group>"; };
 		95BB0D4E2702155600885BA3 /* ScanPleaseViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanPleaseViewModelTests.swift; sourceTree = "<group>"; };
+		E951724F27419141006274FC /* Font+CustomFonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+CustomFonts.swift"; sourceTree = "<group>"; };
+		E95172632741B251006274FC /* OpenSans-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-SemiBold.ttf"; sourceTree = "<group>"; };
+		E95172642741B251006274FC /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Bold.ttf"; sourceTree = "<group>"; };
+		E95172652741B251006274FC /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
 		E977D360272C1180008DFF9C /* QRCodeWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeWidgetView.swift; sourceTree = "<group>"; };
 		E977D363272C1254008DFF9C /* QRCodeWidgetEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeWidgetEntry.swift; sourceTree = "<group>"; };
 		E99F4ED327408368009E3E1F /* String+QRCodeGeneration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+QRCodeGeneration.swift"; sourceTree = "<group>"; };
@@ -1442,6 +1450,16 @@
 			path = ScanPlease;
 			sourceTree = "<group>";
 		};
+		E95172622741B251006274FC /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				E95172632741B251006274FC /* OpenSans-SemiBold.ttf */,
+				E95172642741B251006274FC /* OpenSans-Bold.ttf */,
+				E95172652741B251006274FC /* OpenSans-Regular.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		E977D35F272C1163008DFF9C /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -1465,6 +1483,7 @@
 			children = (
 				E99F4ED327408368009E3E1F /* String+QRCodeGeneration.swift */,
 				E9B523302741241E0014DE3E /* Color+CovPassColors.swift */,
+				E951724F27419141006274FC /* Font+CustomFonts.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1472,6 +1491,7 @@
 		E9B523342741269D0014DE3E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				E95172622741B251006274FC /* Fonts */,
 				E9B52335274126BE0014DE3E /* Locale */,
 				E9B52332274125D20014DE3E /* Assets.xcassets */,
 			);
@@ -1745,8 +1765,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E95172662741B251006274FC /* OpenSans-SemiBold.ttf in Resources */,
 				E9B52333274125D20014DE3E /* Assets.xcassets in Resources */,
 				E9B52338274127020014DE3E /* Localizable.strings in Resources */,
+				E95172672741B251006274FC /* OpenSans-Bold.ttf in Resources */,
+				E95172682741B251006274FC /* OpenSans-Regular.ttf in Resources */,
 				E99F4ED727408E88009E3E1F /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1949,6 +1972,7 @@
 				E9A9CECA272B346000EF6EC5 /* DCCCertLogicFactory.swift in Sources */,
 				E977D362272C1195008DFF9C /* QRCodeWidgetView.swift in Sources */,
 				E977D364272C1254008DFF9C /* QRCodeWidgetEntry.swift in Sources */,
+				E951725027419141006274FC /* Font+CustomFonts.swift in Sources */,
 				E99F4ED427408368009E3E1F /* String+QRCodeGeneration.swift in Sources */,
 				E9B523312741241E0014DE3E /* Color+CovPassColors.swift in Sources */,
 				E9B5232F274123A60014DE3E /* BrandHeaderView.swift in Sources */,

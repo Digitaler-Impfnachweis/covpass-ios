@@ -21,7 +21,8 @@ struct EmptyQRCodeView: View {
             Text("qr_widget_nothing_to_show")
                 .foregroundColor(.onBrandBase)
                 .multilineTextAlignment(.center)
-                .minimumScaleFactor(0.8)
+                .minimumScaleFactor(0.7)
+                .font(.sansRegular(size: 16.0, relativeTo: .body))
             
             Spacer()
         }

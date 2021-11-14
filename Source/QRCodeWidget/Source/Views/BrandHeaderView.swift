@@ -10,7 +10,7 @@ import WidgetKit
 
 struct BrandHeaderView: View {
     var body: some View {
-        VStack(alignment: .leading) {
+        VStack(spacing: 8.0) {
             HStack(spacing: 8) {
                 Image(uiImage: UIImage(named: "CovPass")!)
                     .resizable()
@@ -20,6 +20,7 @@ struct BrandHeaderView: View {
                 
                 Text("CovPass")
                     .foregroundColor(.onBrandBase)
+                    .font(.sansBold(size: 20.0, relativeTo: .body))
             }
             
             Rectangle()

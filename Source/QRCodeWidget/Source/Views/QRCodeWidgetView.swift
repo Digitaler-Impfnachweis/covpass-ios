@@ -37,6 +37,7 @@ struct QRCodeWidgetView: View {
         Text("qr_widget_tap_for_more_details")
             .foregroundColor(.onBrandBase)
             .multilineTextAlignment(.center)
+            .font(.sansRegular(size: 16.0, relativeTo: .body))
     }
     
     @ViewBuilder
