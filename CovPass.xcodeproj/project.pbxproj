@@ -203,6 +203,24 @@
 		95BB0D4B27020EBE00885BA3 /* ScanPleaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95BB0D4527020EBE00885BA3 /* ScanPleaseViewModel.swift */; };
 		95BB0D4C27020EBE00885BA3 /* ScanPleaseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95BB0D4727020EBE00885BA3 /* ScanPleaseViewController.xib */; };
 		95BB0D4F2702155600885BA3 /* ScanPleaseViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95BB0D4E2702155600885BA3 /* ScanPleaseViewModelTests.swift */; };
+		E977D362272C1195008DFF9C /* QRCodeWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E977D360272C1180008DFF9C /* QRCodeWidgetView.swift */; };
+		E977D364272C1254008DFF9C /* QRCodeWidgetEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = E977D363272C1254008DFF9C /* QRCodeWidgetEntry.swift */; };
+		E99F4ED427408368009E3E1F /* String+QRCodeGeneration.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99F4ED327408368009E3E1F /* String+QRCodeGeneration.swift */; };
+		E99F4ED62740888D009E3E1F /* CovPassUI in Frameworks */ = {isa = PBXBuildFile; productRef = E99F4ED52740888D009E3E1F /* CovPassUI */; };
+		E99F4ED727408E88009E3E1F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 216D1F46264EF50300370F16 /* Assets.xcassets */; };
+		E9A9CEC8272B345600EF6EC5 /* VaccinationRepositoryExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E94DE8266121D60015553C /* VaccinationRepositoryExtension.swift */; };
+		E9A9CEC9272B345B00EF6EC5 /* BoosterLogicFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A1978E26EB5AF800C0AC77 /* BoosterLogicFactory.swift */; };
+		E9A9CECA272B346000EF6EC5 /* DCCCertLogicFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3829A308269CFEA800B8346C /* DCCCertLogicFactory.swift */; };
+		E9A9CECB272B346900EF6EC5 /* ApiServiceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216D1F39264EF4ED00370F16 /* ApiServiceFactory.swift */; };
+		E9B5232D2741238C0014DE3E /* EmptyQRCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9B5232C2741238C0014DE3E /* EmptyQRCodeView.swift */; };
+		E9B5232F274123A60014DE3E /* BrandHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9B5232E274123A60014DE3E /* BrandHeaderView.swift */; };
+		E9B523312741241E0014DE3E /* Color+CovPassColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9B523302741241E0014DE3E /* Color+CovPassColors.swift */; };
+		E9B52333274125D20014DE3E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E9B52332274125D20014DE3E /* Assets.xcassets */; };
+		E9B52338274127020014DE3E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E9B5233A274127020014DE3E /* Localizable.strings */; };
+		E9C33C4E272B08FF003C454C /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9C33C4D272B08FF003C454C /* WidgetKit.framework */; platformFilter = maccatalyst; };
+		E9C33C50272B0900003C454C /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9C33C4F272B0900003C454C /* SwiftUI.framework */; platformFilter = maccatalyst; };
+		E9C33C53272B0900003C454C /* QRCodeWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C33C52272B0900003C454C /* QRCodeWidget.swift */; };
+		E9C33C5C272B0902003C454C /* QRCodeWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = E9C33C4C272B08FF003C454C /* QRCodeWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -219,6 +237,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 65D6D51325F8B94D000CB339;
 			remoteInfo = VaccinationValidatorApp;
+		};
+		E9C33C5A272B0902003C454C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 65D6D46625F7A631000CB339 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E9C33C4B272B08FF003C454C;
+			remoteInfo = QRCodeWidgetExtension;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -242,6 +267,17 @@
 				09590D3D27160BA7004410D7 /* FBSnapshotTestCase in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E9C33C5D272B0902003C454C /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				E9C33C5C272B0902003C454C /* QRCodeWidgetExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -455,6 +491,20 @@
 		95BB0D4527020EBE00885BA3 /* ScanPleaseViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanPleaseViewModel.swift; sourceTree = "<group>"; };
 		95BB0D4727020EBE00885BA3 /* ScanPleaseViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScanPleaseViewController.xib; sourceTree = "<group>"; };
 		95BB0D4E2702155600885BA3 /* ScanPleaseViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanPleaseViewModelTests.swift; sourceTree = "<group>"; };
+		E977D360272C1180008DFF9C /* QRCodeWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeWidgetView.swift; sourceTree = "<group>"; };
+		E977D363272C1254008DFF9C /* QRCodeWidgetEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeWidgetEntry.swift; sourceTree = "<group>"; };
+		E99F4ED327408368009E3E1F /* String+QRCodeGeneration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+QRCodeGeneration.swift"; sourceTree = "<group>"; };
+		E9B5232C2741238C0014DE3E /* EmptyQRCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyQRCodeView.swift; sourceTree = "<group>"; };
+		E9B5232E274123A60014DE3E /* BrandHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandHeaderView.swift; sourceTree = "<group>"; };
+		E9B523302741241E0014DE3E /* Color+CovPassColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+CovPassColors.swift"; sourceTree = "<group>"; };
+		E9B52332274125D20014DE3E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		E9B52339274127020014DE3E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		E9B5233B274127030014DE3E /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
+		E9C33C4C272B08FF003C454C /* QRCodeWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = QRCodeWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		E9C33C4D272B08FF003C454C /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		E9C33C4F272B0900003C454C /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		E9C33C52272B0900003C454C /* QRCodeWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeWidget.swift; sourceTree = "<group>"; };
+		E9C33C57272B0902003C454C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -488,6 +538,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				099E6903270DED09002C6926 /* FBSnapshotTestCase in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E9C33C49272B08FF003C454C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E9C33C50272B0900003C454C /* SwiftUI.framework in Frameworks */,
+				E99F4ED62740888D009E3E1F /* CovPassUI in Frameworks */,
+				E9C33C4E272B08FF003C454C /* WidgetKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -809,6 +869,7 @@
 				88AB2A4125FA40CE00D4EA52 /* CovPassCheckApp */,
 				212E757D264F0D09007C0F3A /* CovPassUI */,
 				2191E02F264F20D000316B48 /* CovPassCommon */,
+				E9C33C51272B0900003C454C /* QRCodeWidget */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -1230,6 +1291,7 @@
 				65D6D4EE25F8B8FB000CB339 /* CovPassAppTests.xctest */,
 				65D6D51425F8B94D000CB339 /* CovPassCheckApp.app */,
 				65D6D52425F8B94D000CB339 /* CovPassCheckAppTests.xctest */,
+				E9C33C4C272B08FF003C454C /* QRCodeWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1237,6 +1299,8 @@
 		65D6D4B625F7A6E2000CB339 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E9C33C4D272B08FF003C454C /* WidgetKit.framework */,
+				E9C33C4F272B0900003C454C /* SwiftUI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1378,6 +1442,79 @@
 			path = ScanPlease;
 			sourceTree = "<group>";
 		};
+		E977D35F272C1163008DFF9C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E977D360272C1180008DFF9C /* QRCodeWidgetView.swift */,
+				E9B5232C2741238C0014DE3E /* EmptyQRCodeView.swift */,
+				E9B5232E274123A60014DE3E /* BrandHeaderView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		E977D365272C1262008DFF9C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E977D363272C1254008DFF9C /* QRCodeWidgetEntry.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		E99F4ED227408350009E3E1F /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				E99F4ED327408368009E3E1F /* String+QRCodeGeneration.swift */,
+				E9B523302741241E0014DE3E /* Color+CovPassColors.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		E9B523342741269D0014DE3E /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				E9B52335274126BE0014DE3E /* Locale */,
+				E9B52332274125D20014DE3E /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		E9B52335274126BE0014DE3E /* Locale */ = {
+			isa = PBXGroup;
+			children = (
+				E9B5233A274127020014DE3E /* Localizable.strings */,
+			);
+			path = Locale;
+			sourceTree = "<group>";
+		};
+		E9B5233C274128B60014DE3E /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				E9C33C52272B0900003C454C /* QRCodeWidget.swift */,
+				E977D365272C1262008DFF9C /* Model */,
+				E977D35F272C1163008DFF9C /* Views */,
+				E99F4ED227408350009E3E1F /* Extensions */,
+				E9B523342741269D0014DE3E /* Resources */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		E9B5233D274128BD0014DE3E /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				E9C33C57272B0902003C454C /* Info.plist */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		E9C33C51272B0900003C454C /* QRCodeWidget */ = {
+			isa = PBXGroup;
+			children = (
+				E9B5233C274128B60014DE3E /* Source */,
+				E9B5233D274128BD0014DE3E /* Supporting Files */,
+			);
+			path = QRCodeWidget;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1389,10 +1526,12 @@
 				65D6D4DB25F8B8FB000CB339 /* Frameworks */,
 				65D6D4DC25F8B8FB000CB339 /* Resources */,
 				09590D1F2715E3ED004410D7 /* Embed Frameworks */,
+				E9C33C5D272B0902003C454C /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				E9C33C5B272B0902003C454C /* PBXTargetDependency */,
 			);
 			name = CovPassApp;
 			packageProductDependencies = (
@@ -1466,13 +1605,33 @@
 			productReference = 65D6D52425F8B94D000CB339 /* CovPassCheckAppTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		E9C33C4B272B08FF003C454C /* QRCodeWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E9C33C60272B0902003C454C /* Build configuration list for PBXNativeTarget "QRCodeWidgetExtension" */;
+			buildPhases = (
+				E9C33C48272B08FF003C454C /* Sources */,
+				E9C33C49272B08FF003C454C /* Frameworks */,
+				E9C33C4A272B08FF003C454C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = QRCodeWidgetExtension;
+			packageProductDependencies = (
+				E99F4ED52740888D009E3E1F /* CovPassUI */,
+			);
+			productName = QRCodeWidgetExtension;
+			productReference = E9C33C4C272B08FF003C454C /* QRCodeWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		65D6D46625F7A631000CB339 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1240;
+				LastSwiftUpdateCheck = 1310;
 				LastUpgradeCheck = 1250;
 				ORGANIZATIONNAME = IBM;
 				TargetAttributes = {
@@ -1489,6 +1648,9 @@
 					65D6D52325F8B94D000CB339 = {
 						CreatedOnToolsVersion = 12.4;
 						TestTargetID = 65D6D51325F8B94D000CB339;
+					};
+					E9C33C4B272B08FF003C454C = {
+						CreatedOnToolsVersion = 13.1;
 					};
 				};
 			};
@@ -1514,6 +1676,7 @@
 				65D6D4ED25F8B8FB000CB339 /* CovPassAppTests */,
 				65D6D51325F8B94D000CB339 /* CovPassCheckApp */,
 				65D6D52325F8B94D000CB339 /* CovPassCheckAppTests */,
+				E9C33C4B272B08FF003C454C /* QRCodeWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -1575,6 +1738,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E9C33C4A272B08FF003C454C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E9B52333274125D20014DE3E /* Assets.xcassets in Resources */,
+				E9B52338274127020014DE3E /* Localizable.strings in Resources */,
+				E99F4ED727408E88009E3E1F /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1768,6 +1941,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E9C33C48272B08FF003C454C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E9A9CECB272B346900EF6EC5 /* ApiServiceFactory.swift in Sources */,
+				E9A9CECA272B346000EF6EC5 /* DCCCertLogicFactory.swift in Sources */,
+				E977D362272C1195008DFF9C /* QRCodeWidgetView.swift in Sources */,
+				E977D364272C1254008DFF9C /* QRCodeWidgetEntry.swift in Sources */,
+				E99F4ED427408368009E3E1F /* String+QRCodeGeneration.swift in Sources */,
+				E9B523312741241E0014DE3E /* Color+CovPassColors.swift in Sources */,
+				E9B5232F274123A60014DE3E /* BrandHeaderView.swift in Sources */,
+				E9A9CEC9272B345B00EF6EC5 /* BoosterLogicFactory.swift in Sources */,
+				E9C33C53272B0900003C454C /* QRCodeWidget.swift in Sources */,
+				E9B5232D2741238C0014DE3E /* EmptyQRCodeView.swift in Sources */,
+				E9A9CEC8272B345600EF6EC5 /* VaccinationRepositoryExtension.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -1780,6 +1971,11 @@
 			isa = PBXTargetDependency;
 			target = 65D6D51325F8B94D000CB339 /* CovPassCheckApp */;
 			targetProxy = 65D6D52525F8B94D000CB339 /* PBXContainerItemProxy */;
+		};
+		E9C33C5B272B0902003C454C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E9C33C4B272B08FF003C454C /* QRCodeWidgetExtension */;
+			targetProxy = E9C33C5A272B0902003C454C /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1798,6 +1994,15 @@
 			children = (
 				21FBCA34264F011800CAEF44 /* de */,
 				21FBCA35264F011800CAEF44 /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		E9B5233A274127020014DE3E /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E9B52339274127020014DE3E /* en */,
+				E9B5233B274127030014DE3E /* de */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -1922,10 +2127,13 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 210116F82646D18100B9E8FF /* debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = CovPassApp.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Source/CovPassApp/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
@@ -1948,7 +2156,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 381442092646ED5800207CFA /* release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = CovPassApp.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -2129,6 +2339,73 @@
 			};
 			name = Release;
 		};
+		E9C33C5E272B0902003C454C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 210116F82646D18100B9E8FF /* debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_ENTITLEMENTS = QRCodeWidgetExtension.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Source/QRCodeWidget/Supporting Files/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "$(APP_NAME)";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2021 IBM. All rights reserved.";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.ega.VaccinationPass.QRCodeWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		E9C33C5F272B0902003C454C /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 381442092646ED5800207CFA /* release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_ENTITLEMENTS = QRCodeWidgetExtension.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Source/QRCodeWidget/Supporting Files/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "$(APP_NAME)";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2021 IBM. All rights reserved.";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.ega.VaccinationPass.QRCodeWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -2177,6 +2454,15 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		E9C33C60272B0902003C454C /* Build configuration list for PBXNativeTarget "QRCodeWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E9C33C5E272B0902003C454C /* Debug */,
+				E9C33C5F272B0902003C454C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
@@ -2219,6 +2505,10 @@
 			productName = CovPassUI;
 		};
 		21DAD6E2264F0B19003407FC /* CovPassUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CovPassUI;
+		};
+		E99F4ED52740888D009E3E1F /* CovPassUI */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = CovPassUI;
 		};

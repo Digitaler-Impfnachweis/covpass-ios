@@ -10,6 +10,7 @@ import CovPassCommon
 import CovPassUI
 import PromiseKit
 import UIKit
+import WidgetKit
 
 class CertificateItemDetailViewModel: CertificateItemDetailViewModelProtocol {
     // MARK: - Properties
@@ -159,6 +160,10 @@ class CertificateItemDetailViewModel: CertificateItemDetailViewModelProtocol {
         }
         .done {
             self.resolver?.fulfill(.didDeleteCertificate)
+            
+            if #available(iOS 14.0, *) {
+                WidgetCenter.shared.reloadAllTimelines()
+            }
         }
         .catch { error in
             self.router.showUnexpectedErrorDialog(error)

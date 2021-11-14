@@ -66,6 +66,8 @@ twine generate-localization-file ./covpass-apps-i18n/twine-cert.txt $path/Source
 twine generate-localization-file ./covpass-apps-i18n/twine-cert.txt $path/Source/CovPassApp/Source/Resources/Locale/en.lproj/Localizable.strings --format apple
 twine generate-localization-file ./covpass-apps-i18n/twine-validator.txt $path/Source/CovPassCheckApp/Source/Resources/Locale/de.lproj/Localizable.strings --format apple
 twine generate-localization-file ./covpass-apps-i18n/twine-validator.txt $path/Source/CovPassCheckApp/Source/Resources/Locale/en.lproj/Localizable.strings --format apple
+twine generate-localization-file ./covpass-apps-i18n/twine-ios-qr-widget.txt $path/Source/QRCodeWidget/Source/Resources/Locale/de.lproj/Localizable.strings --format apple
+twine generate-localization-file ./covpass-apps-i18n/twine-ios-qr-widget.txt $path/Source/QRCodeWidget/Source/Resources/Locale/en.lproj/Localizable.strings --format apple
 sleep 0.5
 
 echo -ne "Generating strings file:     [${BIRed}##############                ${Color_Off}]"\\r
