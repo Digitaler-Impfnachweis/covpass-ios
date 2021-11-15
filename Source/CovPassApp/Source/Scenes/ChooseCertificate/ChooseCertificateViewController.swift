@@ -27,7 +27,8 @@ class ChooseCertificateViewController: UIViewController {
     @IBOutlet weak var noMatchImageView: UIImageView!
     @IBOutlet weak var notMatchTitleLabel: UILabel!
     @IBOutlet weak var noMatchSubtitleLabel: UILabel!
-    
+    let activityIndicator = DotPulseActivityIndicator(frame: CGRect(x: 0, y: 0, width: 100, height: 20))
+
     
     // MARK: - Properties
 
@@ -47,8 +48,8 @@ class ChooseCertificateViewController: UIViewController {
         super.viewDidLoad()
         viewModel.delegate = self
         setupConstants()
-        updateView()
         viewModel.refreshCertificates()
+        updateView()
     }
 
     // MARK: - Methods
@@ -58,6 +59,22 @@ class ChooseCertificateViewController: UIViewController {
         setupSubtitle()
         view.backgroundColor = .backgroundPrimary
         scrollView.contentInset = .init(top: .space_24, left: .zero, bottom: .space_70, right: .zero)
+        addActivityIndicator()
+        updateView()
+    }
+    
+    private func addActivityIndicator() {
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        let activityIndicatorContainer = UIView()
+        activityIndicatorContainer.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicatorContainer.addSubview(activityIndicator)
+        scrollView.addSubview(activityIndicatorContainer)
+        activityIndicatorContainer.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor).isActive = true
+        activityIndicatorContainer.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor).isActive = true
+        activityIndicator.topAnchor.constraint(equalTo: activityIndicatorContainer.topAnchor, constant: 40).isActive = true
+        activityIndicator.bottomAnchor.constraint(equalTo: activityIndicatorContainer.bottomAnchor, constant: -40.0).isActive = true
+        activityIndicator.leftAnchor.constraint(equalTo: activityIndicatorContainer.leftAnchor, constant: 40.0).isActive = true
+        activityIndicator.rightAnchor.constraint(equalTo: activityIndicatorContainer.rightAnchor, constant: -40.0).isActive = true
     }
     
     private func setupTitle() {
@@ -70,7 +87,7 @@ class ChooseCertificateViewController: UIViewController {
     }
     
     private func setupSubtitle() {
-        subtitleLabel.attributedText = viewModel.subtitle.styledAs(.header_3)
+        subtitleLabel.attributedText = viewModel.subtitle.styledAs(.body)
         subtitleLabel.layoutMargins = .init(top: .zero, left: .space_24, bottom: .zero, right: .space_24)
     }
     
@@ -79,19 +96,23 @@ class ChooseCertificateViewController: UIViewController {
         updateCertificates()
         updateToolbarView()
         
-        noMatchInfoView.isHidden = viewModel.certificatesAvailable
+        noMatchInfoView.isHidden = viewModel.certificatesAvailable || viewModel.isLoading
         noMatchImageView.image = viewModel.NoMatchImage
         notMatchTitleLabel.attributedText = viewModel.NoMatchTitle.styledAs(.mainButton).aligned(to: .center)
-        noMatchSubtitleLabel.attributedText = viewModel.NoMatchSubtitle.styledAs(.body).aligned(to: .center)
+        noMatchSubtitleLabel.attributedText = viewModel.NoMatchSubtitle.styledAs(.subheader_2).aligned(to: .center)
+        
+        viewModel.isLoading ? activityIndicator.startAnimating() : activityIndicator.stopAnimating()
     }
     
     private func updateCertDetails() {
-        certDetailsLabel.attributedText = viewModel.certdetails.styledAs(.subheader_2).colored(.onBackground100)
+        certDetailsLabel.isHidden = viewModel.isLoading
+        certDetailsLabel.attributedText = viewModel.certdetails.styledAs(.subheader_2)
         certDetailsLabel.layoutMargins = .init(top: .zero, left: .space_24, bottom: .zero, right: .space_24)
         stackView.setCustomSpacing(40, after: certDetailsLabel)
     }
     
     private func updateCertificates() {
+        vaccinationsStackView.isHidden = viewModel.isLoading
         vaccinationsStackView.subviews.forEach {
             $0.removeFromSuperview()
             self.vaccinationsStackView.removeArrangedSubview($0)
