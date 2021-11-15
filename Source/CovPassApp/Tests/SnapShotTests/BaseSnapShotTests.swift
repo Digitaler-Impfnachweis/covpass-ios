@@ -30,8 +30,8 @@ class BaseSnapShotTests: FBSnapshotTestCase {
     ///   - record: record it or not
     ///   - height: height of the view with should be recorded. Default is the main screen height
     func verifyView(view: UIView, record: Bool = false, height: CGFloat = UIScreen.main.bounds.height) {
-        recordMode = record
-        view.bounds.size = CGSize(width: UIScreen.main.bounds.width, height: height)
+        recordMode = record        
+        view.frame.size = CGSize(width: UIScreen.main.bounds.width, height: height)
         FBSnapshotVerifyView(view,
                              identifier: Locale.preferredLanguages[0] ,
                              suffixes: NSOrderedSet(arrayLiteral: "_64"),
