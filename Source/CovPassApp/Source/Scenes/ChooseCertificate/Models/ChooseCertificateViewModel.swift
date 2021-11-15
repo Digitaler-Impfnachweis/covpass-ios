@@ -15,6 +15,10 @@ public enum Constant {
     enum Keys {
         static var title = "share_certificate_selection_title".localized
         static var subtitle = "share_certificate_selection_message".localized
+        static var dobLabel = "share_certificate_selection_requirements_date_of_birth".localized
+        static var recoveryLabel = "certificates_overview_recovery_certificate_title".localized
+        static var testLabel = "certificates_overview_test_certificate_title".localized
+        static var vaccinationLabel = "certificates_overview_vaccination_certificate_title".localized
         enum NoMatch {
             static var title = "share_certificate_selection_no_match_title".localized
             static var subtitle = "share_certificate_selection_no_match_subline".localized
@@ -34,14 +38,11 @@ class ChooseCertificateViewModel: ChooseCertificateViewModelProtocol {
     // MARK: - Properties
 
     weak var delegate: ViewModelDelegate?
-    var router: ChooseCertificateRouterProtocol
+    var router: ChooseCertificateRouterProtocol?
     private let repository: VaccinationRepositoryProtocol
-    private var certificates: [ExtendedCBORWebToken]? {
-        certificateList.certificates
-    }
     private let resolver: Resolver<Void>?
+    private var certificates: [ExtendedCBORWebToken]? { certificateList.certificates }
     private var certificateList = CertificateList(certificates: [])
-
     private var filteredCertificates: [ExtendedCBORWebToken] {
         certificates?.filter(types: typeFilter,
                              givenName: givenNameFilter,
@@ -49,21 +50,13 @@ class ChooseCertificateViewModel: ChooseCertificateViewModelProtocol {
                              dob: dobFilter) ?? []
     }
     
-    var typeFilter: [CertType] {
-        return [.vaccination, .recovery, .test]
-    }
+    var typeFilter: [CertType]
     
-    var givenNameFilter: String {
-        return "ERIKA<DOERTE"
-    }
+    var givenNameFilter: String
     
-    var familyNameFilter: String {
-        return "SCHMITT<MUSTERMANN"
-    }
+    var familyNameFilter: String
     
-    var dobFilter: String {
-        return "1964-08-12"
-    }
+    var dobFilter: String
     
     var title: String {
         return Constant.Keys.title
@@ -73,26 +66,21 @@ class ChooseCertificateViewModel: ChooseCertificateViewModelProtocol {
         return Constant.Keys.subtitle
     }
     
+    var dobLabel: String {
+        return Constant.Keys.dobLabel
+    }
+    
     var certdetails: String {
-        return "\(givenNameFilter) \(familyNameFilter)\n\(dobFilter)\n\(availableCertTypes)"
-    }
-
-    var name: String {
-        certificates?.first?.vaccinationCertificate.hcert.dgc.nam.fullNameTransliterated ?? ""
-    }
-
-    var dateOfBirth: String {
-        guard let dgc = certificates?.first?.vaccinationCertificate.hcert.dgc else { return "" }
-        return DateUtils.displayIsoDateOfBirth(dgc)
+        return "\(givenNameFilter) \(familyNameFilter)\n\(dobLabel): \(dobFilter)\n\(availableCertTypes)"
     }
     
     var availableCertTypes: String {
         var string = ""
         typeFilter.forEach { certType in
             switch certType {
-            case .recovery: string.append("certificates_overview_recovery_certificate_title".localized)
-            case .test: string.append("certificates_overview_test_certificate_title".localized)
-            case .vaccination: string.append("certificates_overview_vaccination_certificate_title".localized)
+            case .recovery: string.append(Constant.Keys.recoveryLabel)
+            case .test: string.append(Constant.Keys.testLabel)
+            case .vaccination: string.append(Constant.Keys.vaccinationLabel)
             }
             if typeFilter.last != certType {
                 string.append(", ")
@@ -105,16 +93,16 @@ class ChooseCertificateViewModel: ChooseCertificateViewModelProtocol {
         filteredCertificates.count > 0
     }
     
-    var NoMatchTitle: String {
-        return Constant.Keys.NoMatch.title
+    var noMatchTitle: String {
+        Constant.Keys.NoMatch.title
     }
     
-    var NoMatchSubtitle: String {
-        return Constant.Keys.NoMatch.subtitle
+    var noMatchSubtitle: String {
+        Constant.Keys.NoMatch.subtitle
     }
 
-    var NoMatchImage: UIImage {
-        return Constant.Keys.NoMatch.image
+    var noMatchImage: UIImage {
+        Constant.Keys.NoMatch.image
     }
     
     var items: [CertificateItem] {
@@ -145,12 +133,21 @@ class ChooseCertificateViewModel: ChooseCertificateViewModelProtocol {
     
     // MARK: - Lifecyle
 
-    init(router: ChooseCertificateRouterProtocol,
+    init(router: ChooseCertificateRouterProtocol?,
          repository: VaccinationRepositoryProtocol,
-         resolvable: Resolver<Void>?) {
+         resolvable: Resolver<Void>?,
+         givenNameFilter: String = "ERIKA<DOERTE",
+         familyNameFilter: String = "SCHMITT<MUSTERMANN",
+         dobFilter: String = "1964-08-12",
+         typeFilter: [CertType] =  [.vaccination, .recovery, .test]) {
         self.router = router
         self.repository = repository
         resolver = resolvable
+        
+        self.givenNameFilter = givenNameFilter
+        self.familyNameFilter = familyNameFilter
+        self.dobFilter = dobFilter
+        self.typeFilter = typeFilter
     }
 
     // MARK: - Methods

@@ -35,7 +35,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="414" height="882"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="4ka-qw-LRS">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="690"/>
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="590"/>
                             <subviews>
                                 <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="eZz-97-0Z9" userLabel="Title" customClass="InfoHeaderView" customModule="CovPassUI">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
@@ -46,13 +46,13 @@
                                 <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="cPb-uE-241" userLabel="Cert Details" customClass="PlainLabel" customModule="CovPassUI">
                                     <rect key="frame" x="0.0" y="124" width="414" height="50"/>
                                 </view>
-                                <view contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ALO-6i-Edh">
+                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="292" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ALO-6i-Edh">
                                     <rect key="frame" x="0.0" y="186" width="414" height="292"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" axis="vertical" alignment="center" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="H2w-9F-Si1">
                                             <rect key="frame" x="60" y="32" width="294" height="228"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7FD-Oi-bCk">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="80" placeholderIntrinsicHeight="80" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7FD-Oi-bCk">
                                                     <rect key="frame" x="107" y="0.0" width="80" height="80"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="80" id="LHl-Jo-Q4X"/>
@@ -81,19 +81,20 @@
                                         <constraint firstAttribute="bottom" secondItem="H2w-9F-Si1" secondAttribute="bottom" constant="32" id="bxO-3h-bBn"/>
                                     </constraints>
                                 </view>
-                                <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="200" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="rhc-O6-hd2" userLabel="Vaccinations StackView">
-                                    <rect key="frame" x="0.0" y="490" width="414" height="200"/>
+                                <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="100" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="rhc-O6-hd2" userLabel="Vaccinations StackView">
+                                    <rect key="frame" x="0.0" y="490" width="414" height="100"/>
                                 </stackView>
                             </subviews>
                         </stackView>
                         <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="yft-Om-LNM" customClass="CustomToolbarView" customModule="CovPassUI">
-                            <rect key="frame" x="0.0" y="722" width="414" height="128"/>
+                            <rect key="frame" x="0.0" y="682" width="414" height="128"/>
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         </view>
                     </subviews>
+                    <viewLayoutGuide key="safeArea" id="1VK-Cl-hM4"/>
                     <constraints>
                         <constraint firstItem="yft-Om-LNM" firstAttribute="top" relation="greaterThanOrEqual" secondItem="4ka-qw-LRS" secondAttribute="bottom" constant="32" id="4Nj-jG-Taa"/>
-                        <constraint firstItem="taM-pc-801" firstAttribute="bottom" secondItem="yft-Om-LNM" secondAttribute="bottom" constant="32" id="H6f-Gf-udq"/>
+                        <constraint firstItem="1VK-Cl-hM4" firstAttribute="bottom" secondItem="yft-Om-LNM" secondAttribute="bottom" constant="32" id="H6f-Gf-udq"/>
                         <constraint firstItem="4ka-qw-LRS" firstAttribute="leading" secondItem="YDs-Va-mXX" secondAttribute="leading" id="HK3-zX-4Oy"/>
                         <constraint firstItem="yft-Om-LNM" firstAttribute="leading" secondItem="taM-pc-801" secondAttribute="leading" id="Wfp-X8-hn3"/>
                         <constraint firstAttribute="trailing" secondItem="4ka-qw-LRS" secondAttribute="trailing" id="gci-lm-WgT"/>
@@ -109,7 +110,7 @@
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="YDs-Va-mXX" firstAttribute="top" secondItem="Dyt-0F-2nE" secondAttribute="top" id="9bT-JC-hoO"/>
-                <constraint firstAttribute="bottom" secondItem="YDs-Va-mXX" secondAttribute="bottom" constant="14" id="HxY-W6-rsC"/>
+                <constraint firstItem="vuk-GN-uGc" firstAttribute="bottom" secondItem="YDs-Va-mXX" secondAttribute="bottom" constant="20" id="HxY-W6-rsC"/>
                 <constraint firstItem="YDs-Va-mXX" firstAttribute="leading" secondItem="Dyt-0F-2nE" secondAttribute="leading" id="fHz-gv-wJd"/>
                 <constraint firstAttribute="trailing" secondItem="YDs-Va-mXX" secondAttribute="trailing" id="ruR-ZM-vqA"/>
             </constraints>

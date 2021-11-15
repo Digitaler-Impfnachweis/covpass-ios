@@ -97,9 +97,9 @@ class ChooseCertificateViewController: UIViewController {
         updateToolbarView()
         
         noMatchInfoView.isHidden = viewModel.certificatesAvailable || viewModel.isLoading
-        noMatchImageView.image = viewModel.NoMatchImage
-        notMatchTitleLabel.attributedText = viewModel.NoMatchTitle.styledAs(.mainButton).aligned(to: .center)
-        noMatchSubtitleLabel.attributedText = viewModel.NoMatchSubtitle.styledAs(.subheader_2).aligned(to: .center)
+        noMatchImageView.image = viewModel.noMatchImage
+        notMatchTitleLabel.attributedText = viewModel.noMatchTitle.styledAs(.mainButton).aligned(to: .center)
+        noMatchSubtitleLabel.attributedText = viewModel.noMatchSubtitle.styledAs(.subheader_2).aligned(to: .center)
         
         viewModel.isLoading ? activityIndicator.startAnimating() : activityIndicator.stopAnimating()
     }
