@@ -113,7 +113,7 @@ class RuleCheckViewModel: BaseViewModel, CancellableViewModelProtocol {
             var validationResult = [[CertificateResult]]()
             for pair in certificatePairs {
                 var results = [CertificateResult]()
-                for cert in CertificateSorter.sort(pair.certificates) {
+                for cert in pair.certificates.sortLatest() {
                     do {
                         if let country = self?.country.uppercased(),
                            let date = self?.date,

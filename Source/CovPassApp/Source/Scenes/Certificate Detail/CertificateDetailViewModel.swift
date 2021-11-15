@@ -25,7 +25,7 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
     private var showFavorite = false
 
     private var selectedCertificate: ExtendedCBORWebToken? {
-        CertificateSorter.sort(certificates).first
+        certificates.sortLatest().first
     }
 
     var fullImmunization: Bool {
