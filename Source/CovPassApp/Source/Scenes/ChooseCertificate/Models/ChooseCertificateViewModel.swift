@@ -50,7 +50,7 @@ class ChooseCertificateViewModel: ChooseCertificateViewModelProtocol {
     }
     
     var typeFilter: [CertType] {
-        return [.vaccination, .recovery]
+        return [.vaccination, .recovery, .test]
     }
     
     var givenNameFilter: String {
@@ -74,7 +74,7 @@ class ChooseCertificateViewModel: ChooseCertificateViewModelProtocol {
     }
     
     var certdetails: String {
-        return "\(name)\n\(dateOfBirth)\n\(availableCertTypes)"
+        return "\(givenNameFilter) \(familyNameFilter)\n\(dobFilter)\n\(availableCertTypes)"
     }
 
     var name: String {
@@ -123,13 +123,13 @@ class ChooseCertificateViewModel: ChooseCertificateViewModelProtocol {
             .compactMap { cert in
                 var vm: CertificateItemViewModel?
                 if cert.vaccinationCertificate.hcert.dgc.r != nil {
-                    vm = RecoveryCertificateItemViewModel(cert, active: true)
+                    vm = RecoveryCertificateItemViewModel(cert, active: true, neutral: true)
                 }
                 if cert.vaccinationCertificate.hcert.dgc.t != nil {
-                    vm = TestCertificateItemViewModel(cert, active: true)
+                    vm = TestCertificateItemViewModel(cert, active: true, neutral: true)
                 }
                 if cert.vaccinationCertificate.hcert.dgc.v != nil {
-                    vm = VaccinationCertificateItemViewModel(cert, active: true)
+                    vm = VaccinationCertificateItemViewModel(cert, active: true, neutral: true)
                 }
                 if vm == nil {
                     return nil
@@ -140,6 +140,8 @@ class ChooseCertificateViewModel: ChooseCertificateViewModelProtocol {
                 })
             }
     }
+    
+    var isLoading = false
     
     // MARK: - Lifecyle
 
@@ -153,17 +155,19 @@ class ChooseCertificateViewModel: ChooseCertificateViewModelProtocol {
 
     // MARK: - Methods
     
-    func refreshCertificates() -> Promise<Void> {
+    func refreshCertificates() {
+        isLoading = true
         firstly {
             repository.getCertificateList()
         }
         .get {
             self.certificateList = $0
         }
-        .map { list in
-            self.delegate?.viewModelDidUpdate()
+        .map {  [weak self] list in
+            self?.isLoading = false
+            self?.delegate?.viewModelDidUpdate()
         }
-        .asVoid()
+        .cauterize()
     }
     
     func cancel() {
