@@ -55,14 +55,15 @@ class ValidationServiceViewController: UIViewController {
     private lazy var headerView: InfoHeaderView = {
         let view = InfoHeaderView()
         view.image = .close
-        view.layoutMargins.bottom = .space_24
         view.frame.size.height = Constants.Layout.headerViewHeight
-        view.attributedTitleText = Constants.Text.headerText.styledAs(.header_3)
+        view.textLabel.numberOfLines = 0
+        view.attributedTitleText = Constants.Text.headerText.styledAs(.header_16)
         view.action = { [weak self] in
             self?.cancel()
         }
         view.actionButton.enableAccessibility(label: ValidationServiceViewModel.Accessibility.close.label)
-        
+        view.actionButton.contentVerticalAlignment = .top
+        view.actionButton.contentHorizontalAlignment = .right        
         return view
     }()
 
@@ -111,6 +112,7 @@ class ValidationServiceViewController: UIViewController {
         tableView.dataSource = self
         tableView.separatorStyle = .singleLine
         tableView.separatorColor = .divider
+        tableView.layoutMargins = .init(top: .zero, left: .space_24, bottom: .zero, right: .space_24)
 
         NSLayoutConstraint.activate([
             mainButton.topAnchor.constraint(equalTo: footerView.topAnchor, constant: 40),
@@ -170,7 +172,6 @@ extension ValidationServiceViewController: UITableViewDataSource {
 
         switch indexPath.row {
         case ValidationServiceViewModel.Rows.provider.rawValue:
-
             cell.textLabel?.attributedText = ValidationServiceViewModel.Rows.provider.cellTitle
                 .styledAs(.header_3)
             cell.detailTextLabel?.attributedText = viewModel.initialisationData.serviceProvider
