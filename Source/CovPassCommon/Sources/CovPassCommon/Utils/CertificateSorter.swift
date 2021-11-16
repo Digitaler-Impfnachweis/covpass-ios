@@ -129,7 +129,7 @@ extension Array where Element == ExtendedCBORWebToken {
 
         return res
     }
-    
+
     var sortByIssuedAtTime: [ExtendedCBORWebToken] {
         sorted(by: { c1, c2 -> Bool in
             guard let c1Iat = c1.vaccinationCertificate.iat else {

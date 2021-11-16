@@ -13,6 +13,7 @@ import Scanner
 import UIKit
 
 class CertificatesOverviewRouter: CertificatesOverviewRouterProtocol, DialogRouterProtocol {
+
     // MARK: - Properties
 
     let sceneCoordinator: SceneCoordinator
@@ -90,5 +91,11 @@ class CertificatesOverviewRouter: CertificatesOverviewRouterProtocol, DialogRout
 
     func showBoosterNotification() -> Promise<Void> {
         sceneCoordinator.present(BoosterNotificationSceneFactory())
+    }
+
+    func startValidationAsAService(with data: ValidationServiceInitialisation) {
+        sceneCoordinator.present(
+            ValidationServiceFactory(router: ValidationServiceRouter(sceneCoordinator: sceneCoordinator),                                     
+                                     initialisationData: data))
     }
 }

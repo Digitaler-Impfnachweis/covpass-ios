@@ -19,7 +19,7 @@ class ChooseCertificateSnapShotTests: BaseSnapShotTests {
         let vc = ChooseCertificateViewController(viewModel: vm)
         vc.view.bounds = UIScreen.main.bounds
         RunLoop.current.run(for: 0.1)
-        verifyView(vc: vc, record: false)
+        verifyView(vc: vc)
     }
     
     func testMatchFive() {
@@ -73,7 +73,7 @@ class ChooseCertificateSnapShotTests: BaseSnapShotTests {
         let vc = ChooseCertificateViewController(viewModel: vm)
         vc.view.bounds = UIScreen.main.bounds
         RunLoop.current.run(for: 0.1)
-        verifyView(vc: vc, record: false)
+        verifyView(vc: vc)
     }
     
     func testMatchOne() {
@@ -97,7 +97,7 @@ class ChooseCertificateSnapShotTests: BaseSnapShotTests {
         let vc = ChooseCertificateViewController(viewModel: vm)
         vc.view.bounds = UIScreen.main.bounds
         RunLoop.current.run(for: 0.1)
-        verifyView(vc: vc, record: false)
+        verifyView(vc: vc)
     }
     
     
@@ -128,7 +128,6 @@ class ChooseCertificateSnapShotTests: BaseSnapShotTests {
         cert4.vaccinationCertificate.hcert.dgc.nam.gnt = "Andrea"
         cert4.vaccinationCertificate.hcert.dgc.dobString = "1990-07-12"
         cert4.vaccinationCertificate.hcert.dgc.v!.first!.dn = 1
-        var cert5: ExtendedCBORWebToken = CBORWebToken.mockTestCertificate.extended()
         
         let certs = [cert1,
                      cert2,
@@ -145,7 +144,7 @@ class ChooseCertificateSnapShotTests: BaseSnapShotTests {
         let vc = ChooseCertificateViewController(viewModel: vm)
         vc.view.bounds = UIScreen.main.bounds
         RunLoop.current.run(for: 0.1)
-        verifyView(vc: vc, record: false)
+        verifyView(vc: vc)
     }
 
 }

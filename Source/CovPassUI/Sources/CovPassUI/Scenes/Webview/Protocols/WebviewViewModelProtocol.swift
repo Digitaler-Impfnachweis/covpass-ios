@@ -12,4 +12,5 @@ public protocol WebviewViewModelProtocol {
     var title: String? { get }
     var urlRequest: URLRequest { get }
     var closeButtonShown: Bool { get set }
+    var isToolbarShown: Bool { get set }
 }

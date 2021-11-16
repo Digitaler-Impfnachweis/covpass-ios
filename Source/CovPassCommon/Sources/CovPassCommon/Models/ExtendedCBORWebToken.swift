@@ -16,7 +16,7 @@ public enum Property {
     case givenName, familyName, dateOfBirth
 }
 
-public struct ExtendedCBORWebToken: Codable {
+public struct ExtendedCBORWebToken: Codable, QRCodeScanable {
 
     /// CBOR web token vaccination certificate
     public var vaccinationCertificate: CBORWebToken

@@ -20,6 +20,7 @@ class CertificateOverviewSnapShotTests: BaseSnapShotTests {
         let viewModel = CertificatesOverviewViewModel(
             router: router,
             repository: VaccinationRepositoryMock(),
+            vaasRepository: VAASRepositoryMock(),
             certLogic: DCCCertLogicMock(),
             boosterLogic: BoosterLogicMock(),
             userDefaults: UserDefaultsPersistence()
@@ -47,6 +48,7 @@ class CertificateOverviewSnapShotTests: BaseSnapShotTests {
         let viewModel = CertificatesOverviewViewModel(
             router: router,
             repository: vacinationRepoMock,
+            vaasRepository: VAASRepositoryMock(),
             certLogic: DCCCertLogicMock(),
             boosterLogic: BoosterLogicMock(),
             userDefaults: UserDefaultsPersistence()

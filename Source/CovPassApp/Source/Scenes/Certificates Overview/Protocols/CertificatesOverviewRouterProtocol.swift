@@ -21,4 +21,6 @@ protocol CertificatesOverviewRouterProtocol: DialogRouterProtocol {
     func showAppInformation()
     func showBoosterNotification() -> Promise<Void>
     func showScanPleaseHint() -> Promise<Void>
+
+    func startValidationAsAService(with data: ValidationServiceInitialisation)
 }

@@ -585,8 +585,11 @@
 				09590D1A2715E2E8004410D7 /* RulesCheckSnapShotTests.swift */,
 				952B7AFA2729BCA8008F69D6 /* ScanPleaseSnapshotTests.swift */,
 				9514A5F12732A40E00987109 /* CertificateDetailViewControllerSnapshotTests.swift */,
-				95FE37B3273EF1B7000899A3 /* ValidationServiceViewControllerSnapShotTests.swift */,
+<<<<<<< HEAD
 				096873F027430A4200DB5837 /* ChooseCertificateSnapShotTests.swift */,
+=======
+				95FE37B3273EF1B7000899A3 /* ValidationServiceViewControllerSnapShotTests.swift */,
+>>>>>>> dca803b1951093300f78a397feeb2f79abcd1d78
 			);
 			path = SnapShotTests;
 			sourceTree = "<group>";

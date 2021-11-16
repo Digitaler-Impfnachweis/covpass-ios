@@ -19,6 +19,7 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
     weak var delegate: CertificatesOverviewViewModelDelegate?
     private var router: CertificatesOverviewRouterProtocol
     private let repository: VaccinationRepositoryProtocol
+    private let vaasRepository: VAASRepositoryProtocol
     private let certLogic: DCCCertLogicProtocol
     private let boosterLogic: BoosterLogicProtocol
     private var certificateList = CertificateList(certificates: [])
@@ -42,12 +43,14 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
     init(
         router: CertificatesOverviewRouterProtocol,
         repository: VaccinationRepositoryProtocol,
+        vaasRepository: VAASRepositoryProtocol,
         certLogic: DCCCertLogicProtocol,
         boosterLogic: BoosterLogicProtocol,
         userDefaults: Persistence
     ) {
         self.router = router
         self.repository = repository
+        self.vaasRepository = vaasRepository
         self.certLogic = certLogic
         self.boosterLogic = boosterLogic
         self.userDefaults = userDefaults
@@ -113,17 +116,28 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
         .then {
             self.router.scanQRCode()
         }
-        .map { result in
+        .map { result in            
             try self.payloadFromScannerResult(result)
         }
-        .then { payload in
-            self.repository.scanCertificate(payload)
+        .then { payload -> Promise<QRCodeScanable> in
+            if let ticket = self.vaasRepository.decodeInitialisationQRCode(payload: payload) {
+                return .value(ticket)
+            }
+            return self.repository.scanCertificate(payload)
         }
         .done { certificate in
-            self.certificateList.certificates.append(certificate)
-            self.delegate?.viewModelDidUpdate()
-            self.handleCertificateDetailSceneResult(.showCertificatesOnOverview([certificate]))
-            self.showCertificate(certificate)
+            switch certificate {
+            case let certificate as ExtendedCBORWebToken:
+                self.certificateList.certificates.append(certificate)
+                self.delegate?.viewModelDidUpdate()
+                self.handleCertificateDetailSceneResult(.showCertificatesOnOverview([certificate]))
+                self.showCertificate(certificate)
+            case let validationServiceInitialisation as ValidationServiceInitialisation:
+                self.router.startValidationAsAService(with: validationServiceInitialisation)
+            default:
+                throw CertificateError.invalidEntity
+            }
+
         }
         .catch { error in
             self.router.showDialogForScanError(error) { [weak self] in

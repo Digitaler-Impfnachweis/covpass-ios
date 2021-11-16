@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WebviewViewController" customModule="CovPassUI">
             <connections>
+                <outlet property="toolbar" destination="cto-gA-sKY" id="LoT-H7-XqA"/>
                 <outlet property="view" destination="iN0-l3-epB" id="oo3-1e-Sid"/>
                 <outlet property="webView" destination="Nyu-1i-TvW" id="X4N-Dg-2Me"/>
             </connections>
@@ -20,23 +21,35 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <wkWebView contentMode="scaleToFill" allowsBackForwardNavigationGestures="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Nyu-1i-TvW">
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="iVc-kL-mym">
                     <rect key="frame" x="0.0" y="44" width="414" height="818"/>
-                    <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <wkWebViewConfiguration key="configuration">
-                        <dataDetectorTypes key="dataDetectorTypes" none="YES"/>
-                        <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
-                        <wkPreferences key="preferences"/>
-                    </wkWebViewConfiguration>
-                </wkWebView>
+                    <subviews>
+                        <wkWebView contentMode="scaleToFill" allowsBackForwardNavigationGestures="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Nyu-1i-TvW">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="708"/>
+                            <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <wkWebViewConfiguration key="configuration">
+                                <dataDetectorTypes key="dataDetectorTypes" none="YES"/>
+                                <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                <wkPreferences key="preferences"/>
+                            </wkWebViewConfiguration>
+                        </wkWebView>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cto-gA-sKY" customClass="CustomToolbarView" customModule="CovPassUI">
+                            <rect key="frame" x="0.0" y="708" width="414" height="110"/>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="110" id="y4N-do-sIk"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                </stackView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="Nyu-1i-TvW" secondAttribute="bottom" id="3jv-Zg-bSi"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Nyu-1i-TvW" secondAttribute="trailing" id="A9R-kZ-0R2"/>
-                <constraint firstItem="Nyu-1i-TvW" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="Bfq-7D-Fe3"/>
-                <constraint firstItem="Nyu-1i-TvW" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="OaZ-Wm-Qyi"/>
+                <constraint firstItem="iVc-kL-mym" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="03J-EP-nBI"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="iVc-kL-mym" secondAttribute="trailing" id="0Jb-yr-h6q"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="iVc-kL-mym" secondAttribute="bottom" id="93m-0P-4uo"/>
+                <constraint firstItem="iVc-kL-mym" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="qyq-b4-i3d"/>
             </constraints>
             <point key="canvasLocation" x="-10" y="154"/>
         </view>
