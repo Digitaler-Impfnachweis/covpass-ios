@@ -153,4 +153,8 @@ public struct APIService: APIServiceProtocol {
         }
         return customURLSession.request(request)
     }
+
+    public func vaasListOfServices(initialisationData: ValidationServiceInitialisation) -> Promise<IdentityDocument> {
+        
+    }
 }
