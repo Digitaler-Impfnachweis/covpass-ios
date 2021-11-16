@@ -417,7 +417,7 @@ class VaccinationRepositoryTests: XCTestCase {
 
     func testScanCertificate() throws {
         let token = try sut.scanCertificate(CertificateMock.validCertificate).wait()
-        XCTAssertEqual(token.vaccinationCertificate.hcert.dgc.uvci, "01DE/00100/1119349007/F4G7014KQQ2XD0NY8FJHSTDXZ#S")
+        XCTAssertEqual((token as! ExtendedCBORWebToken).vaccinationCertificate.hcert.dgc.uvci, "01DE/00100/1119349007/F4G7014KQQ2XD0NY8FJHSTDXZ#S")
     }
 
     func testScanCertificateFailsPositive() {

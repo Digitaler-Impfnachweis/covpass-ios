@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct ExtendedCBORWebToken: Codable {
+public struct ExtendedCBORWebToken: Codable, QRCodeScanable {
     /// CBOR web token vaccination certificate
     public var vaccinationCertificate: CBORWebToken
 
