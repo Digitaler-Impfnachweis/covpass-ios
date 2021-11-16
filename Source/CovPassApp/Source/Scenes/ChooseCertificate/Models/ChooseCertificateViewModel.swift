@@ -76,18 +76,14 @@ class ChooseCertificateViewModel: ChooseCertificateViewModelProtocol {
     }
     
     var availableCertTypes: String {
-        var string = ""
-        typeFilter.forEach { certType in
-            switch certType {
-            case .recovery: string.append(Constant.Keys.recoveryLabel)
-            case .test: string.append(Constant.Keys.testLabel)
-            case .vaccination: string.append(Constant.Keys.vaccinationLabel)
-            }
-            if typeFilter.last != certType {
-                string.append(", ")
+        typeFilter.map {
+            switch $0 {
+            case .recovery: return Constant.Keys.recoveryLabel
+            case .test: return Constant.Keys.testLabel
+            case .vaccination: return Constant.Keys.vaccinationLabel
             }
         }
-        return string
+        .joined(separator: ", ")
     }
     
     var certificatesAvailable: Bool {
