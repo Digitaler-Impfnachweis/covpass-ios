@@ -22,7 +22,7 @@ public enum Constant {
         enum NoMatch {
             static var title = "share_certificate_selection_no_match_title".localized
             static var subtitle = "share_certificate_selection_no_match_subline".localized
-            static var actionButton = "share_certificate_selection_no_match_action button".localized
+            static var actionButton = "share_certificate_selection_no_match_action_button".localized
             static var image = UIImage.prevention
         }
     }
