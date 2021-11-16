@@ -42,6 +42,7 @@ class ChooseCertificateSnapShotTests: BaseSnapShotTests {
         cert3.vaccinationCertificate.hcert.dgc.nam.fnt = "Schneider"
         cert3.vaccinationCertificate.hcert.dgc.nam.gnt = "Andrea"
         cert3.vaccinationCertificate.hcert.dgc.dobString = "1990-07-12"
+        cert3.vaccinationCertificate.hcert.dgc.t!.first!.sc = DateUtils.isoDateFormatter.date(from: "2020-01-01")!
         var cert4: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended()
         cert4.vaccinationCertificate.hcert.dgc.nam.fn = "Schneider"
         cert4.vaccinationCertificate.hcert.dgc.nam.gn = "Andrea"
@@ -56,6 +57,7 @@ class ChooseCertificateSnapShotTests: BaseSnapShotTests {
         cert5.vaccinationCertificate.hcert.dgc.nam.gnt = "Andrea"
         cert5.vaccinationCertificate.hcert.dgc.dobString = "1990-07-12"
         cert5.vaccinationCertificate.hcert.dgc.t!.first!.tt = "LP217198-3"
+        cert5.vaccinationCertificate.hcert.dgc.t!.first!.sc = DateUtils.isoDateFormatter.date(from: "2020-01-01")!
         
         let certs = [cert1,
                      cert2,
@@ -121,6 +123,7 @@ class ChooseCertificateSnapShotTests: BaseSnapShotTests {
         cert3.vaccinationCertificate.hcert.dgc.nam.fnt = "Schneider"
         cert3.vaccinationCertificate.hcert.dgc.nam.gnt = "Andrea"
         cert3.vaccinationCertificate.hcert.dgc.dobString = "1990-07-12"
+        cert3.vaccinationCertificate.hcert.dgc.t!.first!.sc = DateUtils.isoDateFormatter.date(from: "2020-01-01")!
         var cert4: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended()
         cert4.vaccinationCertificate.hcert.dgc.nam.fn = "Schneider"
         cert4.vaccinationCertificate.hcert.dgc.nam.gn = "Andrea"
