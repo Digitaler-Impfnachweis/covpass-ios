@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ChooseCertificateViewController">
+            <connections>
+                <outlet property="certDetailsLabel" destination="cPb-uE-241" id="yrH-8A-DaE"/>
+                <outlet property="headline" destination="eZz-97-0Z9" id="lla-0m-FOn"/>
+                <outlet property="noMatchImageView" destination="7FD-Oi-bCk" id="Qsv-mL-TyP"/>
+                <outlet property="noMatchInfoView" destination="ALO-6i-Edh" id="ffd-CL-7Oe"/>
+                <outlet property="noMatchSubtitleLabel" destination="pKz-yj-bnu" id="cVj-0I-0sp"/>
+                <outlet property="notMatchTitleLabel" destination="NjQ-6h-VOe" id="pLM-W3-VHx"/>
+                <outlet property="scrollView" destination="YDs-Va-mXX" id="rkd-dK-EbI"/>
+                <outlet property="stackView" destination="4ka-qw-LRS" id="bvG-dB-nlQ"/>
+                <outlet property="subtitleLabel" destination="bKh-SZ-k8g" id="n5O-17-Rkb"/>
+                <outlet property="toolbarView" destination="yft-Om-LNM" id="ifz-ah-oxx"/>
+                <outlet property="vaccinationsStackView" destination="rhc-O6-hd2" id="ehg-oL-Ggq"/>
+                <outlet property="view" destination="Dyt-0F-2nE" id="ak4-cW-x29"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="Dyt-0F-2nE">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YDs-Va-mXX">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="714"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="4ka-qw-LRS">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="590"/>
+                            <subviews>
+                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="eZz-97-0Z9" userLabel="Title" customClass="InfoHeaderView" customModule="CovPassUI">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                                </view>
+                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="bKh-SZ-k8g" userLabel="Subtitle" customClass="PlainLabel" customModule="CovPassUI">
+                                    <rect key="frame" x="0.0" y="62" width="414" height="50"/>
+                                </view>
+                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="cPb-uE-241" userLabel="Cert Details" customClass="PlainLabel" customModule="CovPassUI">
+                                    <rect key="frame" x="0.0" y="124" width="414" height="50"/>
+                                </view>
+                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="292" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ALO-6i-Edh">
+                                    <rect key="frame" x="0.0" y="186" width="414" height="292"/>
+                                    <subviews>
+                                        <stackView opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" axis="vertical" alignment="center" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="H2w-9F-Si1">
+                                            <rect key="frame" x="60" y="32" width="294" height="228"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="80" placeholderIntrinsicHeight="80" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7FD-Oi-bCk">
+                                                    <rect key="frame" x="107" y="0.0" width="80" height="80"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="80" id="LHl-Jo-Q4X"/>
+                                                        <constraint firstAttribute="width" secondItem="7FD-Oi-bCk" secondAttribute="height" id="Lqn-Wh-Qn8"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" preservesSuperviewLayoutMargins="YES" text="Kein Nachweis hinzugefügt" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NjQ-6h-VOe">
+                                                    <rect key="frame" x="44" y="84" width="206" height="20.5"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" preservesSuperviewLayoutMargins="YES" text="Scannen Sie eine Bescheinigung mit QR Code, um hier Ihren Nachweis zu sehen" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pKz-yj-bnu">
+                                                    <rect key="frame" x="16.5" y="108.5" width="261" height="119.5"/>
+                                                    <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="14"/>
+                                                    <color key="textColor" name="OnBackground70"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </stackView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="H2w-9F-Si1" firstAttribute="leading" secondItem="ALO-6i-Edh" secondAttribute="leading" constant="60" id="9cW-Al-onI"/>
+                                        <constraint firstItem="H2w-9F-Si1" firstAttribute="top" secondItem="ALO-6i-Edh" secondAttribute="top" constant="32" id="EKz-Tx-jTd"/>
+                                        <constraint firstAttribute="trailing" secondItem="H2w-9F-Si1" secondAttribute="trailing" constant="60" id="K82-Ki-sMT"/>
+                                        <constraint firstAttribute="bottom" secondItem="H2w-9F-Si1" secondAttribute="bottom" constant="32" id="bxO-3h-bBn"/>
+                                    </constraints>
+                                </view>
+                                <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="100" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="rhc-O6-hd2" userLabel="Vaccinations StackView">
+                                    <rect key="frame" x="0.0" y="490" width="414" height="100"/>
+                                </stackView>
+                            </subviews>
+                        </stackView>
+                    </subviews>
+                    <viewLayoutGuide key="safeArea" id="1VK-Cl-hM4"/>
+                    <constraints>
+                        <constraint firstItem="4ka-qw-LRS" firstAttribute="leading" secondItem="YDs-Va-mXX" secondAttribute="leading" id="HK3-zX-4Oy"/>
+                        <constraint firstAttribute="bottom" secondItem="4ka-qw-LRS" secondAttribute="bottom" id="Ym5-h1-dLr"/>
+                        <constraint firstAttribute="trailing" secondItem="4ka-qw-LRS" secondAttribute="trailing" id="gci-lm-WgT"/>
+                        <constraint firstItem="4ka-qw-LRS" firstAttribute="width" secondItem="YDs-Va-mXX" secondAttribute="width" id="gzb-0i-ifn"/>
+                        <constraint firstItem="4ka-qw-LRS" firstAttribute="top" secondItem="YDs-Va-mXX" secondAttribute="top" id="rlE-Ca-iLO"/>
+                    </constraints>
+                    <viewLayoutGuide key="contentLayoutGuide" id="oOk-ZY-LGb"/>
+                    <viewLayoutGuide key="frameLayoutGuide" id="taM-pc-801"/>
+                </scrollView>
+                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="yft-Om-LNM" customClass="CustomToolbarView" customModule="CovPassUI">
+                    <rect key="frame" x="0.0" y="714" width="414" height="128"/>
+                    <color key="backgroundColor" name="AccentColor"/>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vuk-GN-uGc"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="YDs-Va-mXX" firstAttribute="top" secondItem="Dyt-0F-2nE" secondAttribute="top" id="9bT-JC-hoO"/>
+                <constraint firstItem="vuk-GN-uGc" firstAttribute="bottom" secondItem="yft-Om-LNM" secondAttribute="bottom" constant="20" id="CAk-NE-Ts3"/>
+                <constraint firstItem="yft-Om-LNM" firstAttribute="trailing" secondItem="vuk-GN-uGc" secondAttribute="trailing" id="EtD-KF-FZX"/>
+                <constraint firstItem="yft-Om-LNM" firstAttribute="leading" secondItem="vuk-GN-uGc" secondAttribute="leading" id="FeY-i7-qDa"/>
+                <constraint firstItem="YDs-Va-mXX" firstAttribute="leading" secondItem="Dyt-0F-2nE" secondAttribute="leading" id="fHz-gv-wJd"/>
+                <constraint firstAttribute="trailing" secondItem="YDs-Va-mXX" secondAttribute="trailing" id="ruR-ZM-vqA"/>
+                <constraint firstItem="yft-Om-LNM" firstAttribute="top" secondItem="YDs-Va-mXX" secondAttribute="bottom" id="tRp-MP-T3p"/>
+            </constraints>
+            <point key="canvasLocation" x="-52.173913043478265" y="-522.32142857142856"/>
+        </view>
+    </objects>
+    <designables>
+        <designable name="bKh-SZ-k8g">
+            <size key="intrinsicContentSize" width="414" height="50"/>
+        </designable>
+        <designable name="cPb-uE-241">
+            <size key="intrinsicContentSize" width="414" height="50"/>
+        </designable>
+        <designable name="eZz-97-0Z9">
+            <size key="intrinsicContentSize" width="414" height="50"/>
+        </designable>
+        <designable name="yft-Om-LNM">
+            <size key="intrinsicContentSize" width="414" height="128"/>
+        </designable>
+    </designables>
+    <resources>
+        <namedColor name="AccentColor">
+            <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="OnBackground70">
+            <color red="0.33300000429153442" green="0.40799999237060547" blue="0.46700000762939453" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

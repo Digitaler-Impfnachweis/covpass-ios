@@ -33,15 +33,7 @@ extension ExtendedCBORWebToken {
 }
 
 extension Array where Element == ExtendedCBORWebToken {
-    
-    public enum CertType {
-        case recovery, test, vaccination
-    }
-    
-    public enum Property {
-        case givenName, familyName, dateOfBirth
-    }
-    
+
     public func filter(types: [CertType],
                        givenName: String,
                        familyName: String,
@@ -137,7 +129,7 @@ extension Array where Element == ExtendedCBORWebToken {
 
         return res
     }
-    
+
     var sortByIssuedAtTime: [ExtendedCBORWebToken] {
         sorted(by: { c1, c2 -> Bool in
             guard let c1Iat = c1.vaccinationCertificate.iat else {

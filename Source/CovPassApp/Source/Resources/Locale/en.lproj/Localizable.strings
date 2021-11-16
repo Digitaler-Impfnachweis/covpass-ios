@@ -84,16 +84,6 @@
 
 "dialog_update_info_notification_action_button" = "OK";
 
-"certificate_will_be_revoked_notification_icon_new" = "New";
-
-"certificate_will_be_revoked_notification_title" = " Your certificate will be revoked by 11.11.2021";
-
-"certificate_will_be_revoked_notification_message" = "For security reasons, all certificates coming from the pharmacy you visited must be reissued.\n\nYour certificate will be revoked on 11/11/2021. You can have a new vaccination certificate issued free of charge at your pharmacy by presenting your yellow vaccination certificate and a photo ID.";
-
-"certificate_will_be_revoked_notification_button" = "OK";
-
-"accessibility_certificate_will_be_revoked_info_announce" = "The view \"Certificate will be revoked\" has been opened";
-
 
 /********** start screen **********/
 
@@ -1093,9 +1083,9 @@
 
 "accessibility_app_information_title_update_closing_announce" = "The view \"Update travel rules\" has been closed";
 
-"accessibility_app_information_datenschutz_announce" = "Privacy policy has been opened";
+"accessibility_app_information_datenschutz_announce" = "Privacy notice has been opened";
 
-"accessibility_app_information_datenschutz_closing_announce" = "Privacy policy has been closed";
+"accessibility_app_information_datenschutz_closing_announce" = "Privacy notice has been closed";
 
 "accessibility_app_information_title_contact_announce" = "Contact has been opened";
 
@@ -1129,7 +1119,7 @@
 
 "app_information_title_faq_linked" = "#Frequently asked questions::$0#";
 
-"app_information_title_datenschutz" = "Privacy policy";
+"app_information_title_datenschutz" = "Privacy notice";
 
 "app_information_title_company_details" = "Legal information";
 
@@ -1187,23 +1177,27 @@
 
 "share_certificate_consent_title" = "Your consent";
 
-"share_certificate_consent_message" = "By tapping ‘I agree’, you consent to the following steps:";
+"share_certificate_consent_message" = "By tapping on “Accept”, you consent to the following steps:";
 
-"share_certificate_consent_first_list_item" = "The app calls up the name and date of birth of the person specified when booking from provider %@, the booking details relevant for verification (e.g. destination country and travel date), and the certificate requirements specified by the provider for your booking.";
+"share_certificate_consent_first_list_item" = "The app will retrieve from the provider %@ the name and date of birth of the person specified at the time of booking, the booking details relevant to the verification (e.g. destination country and date of travel) and the certificate requirements specified by the provider for your booking.";
 
-"share_certificate_consent_second_list_item" = "The retrieved data is used by the app to determine which of your stored certificates can be used.";
+"share_certificate_consent_second_list_item" = "Once retrieved, the app will use this data to determine which of your stored certificates can be used";
 
-"share_certificate_notes_first_list_item" = "You are not obliged to allow your certificate to be verified with the CovPass app. Proof of your vaccination, testing or recovery status may be provided by other means.";
+"share_certificate_notes_first_list_item" = "You are not obliged to allow your certificate to be verified with the CovPass app. There are other ways to prove that you have been vaccinated, tested negative or recovered from coronavirus.";
 
-"share_certificate_notes_second_list_item" = "The requirements for the certificate are defined by the provider. The RKI has no control over this. For more information on certificate requirements, contact the provider.";
+"share_certificate_notes_second_list_item" = "The requirements for the certificate are set by the provider. The RKI has no influence on this. Please contact the provider for more information about the certificate requirements.";
 
-"share_certificate_notes_third_list_item" = "The determination of suitable certificates takes place locally on your smartphone. No data is transmitted to the RKI or the provider in the process.";
+"share_certificate_notes_third_list_item" = "The determination of suitable certificates takes place locally on your smartphone. No data will be transmitted to the RKI or the provider.";
 
-"share_certificate_notes_fourth_list_item" = "The RKI does not learn the data about your booking or the certificates you have saved.";
+"share_certificate_notes_fourth_list_item" = "The RKI does not receive the information about your booking or about the certificates you have stored.";
 
 "share_certificate_note_privacy_notice" = "Detailed information about this data processing is available in the privacy notice:";
 
-"share_certificate_action_button_agree" = "Agree";
+"share_certificate_privacy_notice_title" = "Privacy notice";
+
+"share_certificate_privacy_notice_linked" = "#Privacy notice::$0#";
+
+"share_certificate_action_button_agree" = "Accept";
 
 "share_certificate_action_button_cancel" = "Cancel";
 
@@ -1219,6 +1213,8 @@
 
 "share_certificate_selection_message" = "Your certificate must meet the following requirements:";
 
+"share_certificate_selection_requirements_date_of_birth" = "Date of birth";
+
 "accessibility_share_certificate_selection_label_close" = "Close";
 
 "accessibility_share_certificate_selection_label_back" = "Back";
@@ -1231,7 +1227,7 @@
 
 "share_certificate_selection_no_match_subline" = "Please check if your certificate stored in the app matches the requirements.";
 
-"share_certificate_selection_no_match_action button" = "Close";
+"share_certificate_selection_no_match_action_button" = "Close";
 
 "share_certificate_transmission_title" = "Submitting your certificate for verification";
 
@@ -1243,31 +1239,35 @@
 
 "share_certificate_transmission_consent_title" = "Your consent";
 
-"share_certificate_transmission_consent_message" = "By tapping ‘I agree’, you consent to the following data being transmitted to the verification service of %@:";
+"share_certificate_transmission_consent_message" = "By tapping on “Accept”, you consent to the transfer of the following data to the verification partner of %@:";
 
-"share_certificate_transmission_consent_first_list_item" = "Certificate content and electronic signature of the selected certificate (including name and date of birth of the certificate holder, validity period, issuer and date of issue, vaccine/test/recovery details).";
+"share_certificate_transmission_consent_first_list_item" = "Content and electronic signature of the selected certificate (including name and date of birth of the certificate holder, validity period, issuer and date of issue, vaccine/test/recovery details).";
 
-"share_certificate_transmission_consent_second_list_item" = "The booking data retrieved from the provider %@:";
+"share_certificate_transmission_consent_second_list_item" = "The booking details retrieved from the provider %@:";
 
 "share_certificate_transmission_consent_second_list_item_first_subitem" = "Period during which the certificate must be valid (travel duration or event date)";
 
-"share_certificate_transmission_consent_second_list_item_second_subitem" = "For travel bookings: Country of origin and country of destination of the trip";
+"share_certificate_transmission_consent_second_list_item_second_subitem" = "For travel bookings: Country of origin and country of destination or journey";
 
-"share_certificate_transmission_consent_second_list_item_third_subitem" = "For cross-border travel: Requirements of the destination country for the certificate";
+"share_certificate_transmission_consent_second_list_item_third_subitem" = "For cross-border travel: Certificate requirements imposed by the destination country";
 
-"share_certificate_transmission_consent_second_list_item_fourth_subitem" = "Additional requirements of the provider for the certificate (e.g. which vaccines or test procedures are accepted)";
+"share_certificate_transmission_consent_second_list_item_fourth_subitem" = "Further certificate requirements on the part of the provider (e.g. which vaccines or test procedures are accepted)";
 
-"share_certificate_transmission_notes_first_list_item" = "The verification partner verifies that the electronic Signature is genuine and that the technical expiration date of the certificate has not yet been reached. You can view the technical expiration date and the transmitted certificate contents in the app in the detailed view of the certificate.";
+"share_certificate_transmission_notes_first_list_item" = "The verification partner will check whether the electronic signature is genuine and that the technical expiration date has not passed. You can view the technical expiration date and the transmitted certificate contents in the app when viewing the certificate in full.";
 
-"share_certificate_transmission_notes_second_list_item" = "The certificates contain sensitive health data. Therefore, only allow verification by providers that you know and trust.";
+"share_certificate_transmission_notes_second_list_item" = "The certificates contain sensitive data concerning health. You should therefore only allow providers to verify certificates if you know and trust them.";
 
-"share_certificate_transmission_notes_third_list_item" = "The RKI is not responsible for the data processing by the provider and the verification partner. Please read their privacy notices so you know what your data will be used for and how.";
+"share_certificate_transmission_notes_third_list_item" = "The RKI is not responsible for the data processing performed by the provider and the verification partner. Please read their privacy notices so that you know what your data is used for and how it is used.";
 
-"share_certificate_transmission_notes_fourth_list_item" = "The testing partner will immediately notify the provider of the test result. It will only be communicated whether the test was successful or not.";
+"share_certificate_transmission_notes_fourth_list_item" = "The verification partner will immediately inform the provider of the result of this verification. The only information communicated will be whether the verification was successful or not.";
 
 "share_certificate_transmission_note_privacy_notice" = "Detailed information about this data processing is available in the privacy notice:";
 
-"share_certificate_transmission_action_button_agree" = "Agree";
+"share_certificate_transmission_privacy_notice_title" = "Privacy notice";
+
+"share_certificate_transmission_privacy_notice_linked" = "#Privacy notice::$0#";
+
+"share_certificate_transmission_action_button_agree" = "Accept";
 
 "accessibility_share_certificate_transmission_label_close" = "Close";
 
