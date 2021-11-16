@@ -12,5 +12,4 @@ struct VerificationMethod: Codable {
     var type: String
     var controller: URL
     var publicKeyJwk: JWK
-    var verificationMethods: [String]
 }

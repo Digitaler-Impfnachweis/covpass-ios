@@ -40,6 +40,7 @@ class ChooseCertificateViewModel: ChooseCertificateViewModelProtocol {
     weak var delegate: ViewModelDelegate?
     var router: ChooseCertificateRouterProtocol?
     private let repository: VaccinationRepositoryProtocol
+    private let vaasRepository: VAASRepositoryProtocol
     private let resolver: Resolver<Void>?
     private var certificates: [ExtendedCBORWebToken]? { certificateList.certificates }
     private var certificateList = CertificateList(certificates: [])
@@ -135,6 +136,7 @@ class ChooseCertificateViewModel: ChooseCertificateViewModelProtocol {
 
     init(router: ChooseCertificateRouterProtocol?,
          repository: VaccinationRepositoryProtocol,
+         vaasRepository: VAASRepositoryProtocol,
          resolvable: Resolver<Void>?,
          givenNameFilter: String = "ERIKA<DOERTE",
          familyNameFilter: String = "SCHMITT<MUSTERMANN",
@@ -142,8 +144,8 @@ class ChooseCertificateViewModel: ChooseCertificateViewModelProtocol {
          typeFilter: [CertType] =  [.vaccination, .recovery, .test]) {
         self.router = router
         self.repository = repository
-        resolver = resolvable
-        
+        self.resolver = resolvable
+        self.vaasRepository = vaasRepository
         self.givenNameFilter = givenNameFilter
         self.familyNameFilter = familyNameFilter
         self.dobFilter = dobFilter
@@ -152,7 +154,7 @@ class ChooseCertificateViewModel: ChooseCertificateViewModelProtocol {
 
     // MARK: - Methods
     
-    func refreshCertificates() {
+    func goLive() {
         isLoading = true
         firstly {
             repository.getCertificateList()
@@ -160,7 +162,10 @@ class ChooseCertificateViewModel: ChooseCertificateViewModelProtocol {
         .get {
             self.certificateList = $0
         }
-        .map {  [weak self] list in
+        .map { [weak self] _ in
+            self?.vaasRepository.fetchValidationService()
+        }
+        .map {  [weak self] in
             self?.isLoading = false
             self?.delegate?.viewModelDidUpdate()
         }

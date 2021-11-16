@@ -33,7 +33,7 @@ public protocol CustomURLSessionProtocol {
 public struct CustomURLSession: CustomURLSessionProtocol {
     private let sessionDelegate: URLSessionDelegate?
     public static let apiHeaderETag: String = "Etag"
-
+    
     public init(sessionDelegate: URLSessionDelegate?) {
         self.sessionDelegate = sessionDelegate
     }
@@ -153,8 +153,13 @@ public struct APIService: APIServiceProtocol {
         }
         return customURLSession.request(request)
     }
-
-    public func vaasListOfServices(initialisationData: ValidationServiceInitialisation) -> Promise<IdentityDocument> {
-        
+    
+    public func vaasListOfServices(initialisationData: ValidationServiceInitialisation) -> Promise<String> {
+        let requestUrl = initialisationData.serviceIdentity
+        var request = requestUrl.urlRequest.GET
+        if let etag = APIService.eTagForURL(urlString: request.url?.absoluteString ?? "") {
+            request.addValue(etag, forHTTPHeaderField: apiHeaderNoneMatch)
+        }
+        return customURLSession.request(request)
     }
 }

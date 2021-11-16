@@ -24,18 +24,18 @@ private enum Constants {
 protocol ValidationServiceRoutable: DialogRouterProtocol {
     func routeToConsentGeneralConsent()
     func routeToWarning()
-    func routeToSelectCertificate()
+    func routeToSelectCertificate(ticket: ValidationServiceInitialisation)
     func routeToCertificateConsent()
     func routeToPrivacyStatement(url: URL)
 }
 
 struct ValidationServiceRouter: ValidationServiceRoutable {
     var sceneCoordinator: SceneCoordinator
-
+    
     func routeToConsentGeneralConsent() {
-
+        
     }
-
+    
     public func routeToWarning() {
         showDialog(title: "",
                    message: Constants.Text.Alert.message,
@@ -46,15 +46,22 @@ struct ValidationServiceRouter: ValidationServiceRoutable {
                     })],
                    style: .alert)
     }
-
-    func routeToSelectCertificate() {
-
+    
+    func routeToSelectCertificate(ticket: ValidationServiceInitialisation) {
+        sceneCoordinator.push(
+            ChooseCertificateSceneFactory(
+                router: ChooseCertificateRouter(
+                    sceneCoordinator: sceneCoordinator
+                ),
+                ticket: ticket
+            ),
+            animated: true)
     }
-
+    
     func routeToCertificateConsent() {
-
+        
     }
-
+    
     func routeToPrivacyStatement(url: URL) {
         let webViewScene = WebviewSceneFactory(title: "app_information_title_datenschutz".localized,
                                                url: url, isToolbarShown: true)

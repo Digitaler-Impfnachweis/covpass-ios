@@ -13,19 +13,29 @@ import UIKit
 
 struct ChooseCertificateSceneFactory: ResolvableSceneFactory {
     // MARK: - Properties
-
+    
     let router: ChooseCertificateRouterProtocol
-
+    let ticket: ValidationServiceInitialisation
+    
     // MARK: - Lifecycle
-
-    init(router: ChooseCertificateRouterProtocol) {
+    
+    init(router: ChooseCertificateRouterProtocol, ticket: ValidationServiceInitialisation) {
         self.router = router
+        self.ticket = ticket
     }
-
+    
     func make(resolvable: Resolver<Void>) -> UIViewController {
+        let apiService = APIService(
+            customURLSession: CustomURLSession(sessionDelegate: APIServiceDelegate(
+                publicKeyHashes: XCConfiguration.value([String].self, forKey: "PINNING_HASHES")
+            )),
+            url: XCConfiguration.value(String.self, forKey: "API_URL")
+        )
         let viewModel = ChooseCertificateViewModel(
             router: router,
             repository: VaccinationRepository.create(),
+            vaasRepository: VAASRepository(service: apiService,
+                                           ticket: ticket),
             resolvable: resolvable
         )
         let viewController = ChooseCertificateViewController(viewModel: viewModel)

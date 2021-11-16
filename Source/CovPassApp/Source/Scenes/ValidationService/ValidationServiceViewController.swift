@@ -37,7 +37,7 @@ class ValidationServiceViewController: UIViewController {
                                                 .styledAs(.header_3)
                                                 .colored(.neutralWhite, in: nil), for: .normal)
         button.action = { [weak self] in
-            self?.cancel()
+            self?.accept()
         }
         return button
     }()
@@ -140,6 +140,10 @@ class ValidationServiceViewController: UIViewController {
 
     @objc func cancel() {
         viewModel.router.routeToWarning()
+    }
+    
+    @objc func accept() {
+        viewModel.router.routeToSelectCertificate(ticket: viewModel.initialisationData)
     }
 }
 

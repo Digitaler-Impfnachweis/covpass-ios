@@ -11,5 +11,5 @@ import PromiseKit
 
 public protocol APIServiceProtocol {
     func fetchTrustList() -> Promise<String>
-    func vaasListOfServices(initialisationData: ValidationServiceInitialisation) -> Promise<IdentityDocument>
+    func vaasListOfServices(initialisationData: ValidationServiceInitialisation) -> Promise<String>
 }
