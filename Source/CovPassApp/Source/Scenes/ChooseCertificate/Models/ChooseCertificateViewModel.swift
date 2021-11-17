@@ -87,7 +87,7 @@ class ChooseCertificateViewModel: ChooseCertificateViewModelProtocol {
     }
     
     var certificatesAvailable: Bool {
-        filteredCertificates.count > 0
+        !filteredCertificates.isEmpty
     }
     
     var noMatchTitle: String {
