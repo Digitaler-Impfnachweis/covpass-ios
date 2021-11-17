@@ -25,7 +25,12 @@ public struct VAASRepository: VAASRepositoryProtocol {
     
     private func identityDocument(identityString: String) -> Promise<IdentityDocument> {
         Promise { seal in
-            seal.fulfill(try! JSONDecoder().decode(IdentityDocument.self, from: identityString.data(using: .utf8)!))
+            do {
+                let document = try JSONDecoder().decode(IdentityDocument.self, from: identityString.data(using: .utf8)!)
+                seal.fulfill(document)
+            } catch {
+                seal.reject(error)
+            }
         }
     }
     
@@ -37,6 +42,9 @@ public struct VAASRepository: VAASRepositoryProtocol {
             identityDocument(identityString: stringResponse)
         }
         .map { identityDocument in
+            if identityDocument.isRejected {
+                print("Decoding Error")
+            }
             // HERE WE GO
         }
     }
