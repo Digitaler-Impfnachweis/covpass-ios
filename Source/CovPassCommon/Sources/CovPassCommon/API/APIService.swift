@@ -185,38 +185,6 @@ public struct APIService: APIServiceProtocol {
                                         "content-type": "application/json"]
 
         return self.customURLSession.request(request)
-//        let session = URLSession.shared.dataTask(with: request, completionHandler: { data,response,error in
-//          var accessTokenResponse : AccessTokenResponse?
-//
-//          guard let responseData = data,
-//                let tokenJWT = String(data: responseData, encoding: .utf8),
-//                responseData.count > 0 else {
-//                    throw APIError.invalidResponse
-//                }
-//
-//          guard let decodedToken = try? decode(jwt: tokenJWT),
-//                let jsonData = try? JSONSerialization.data(withJSONObject: decodedToken.body)
-//          else {
-//              throw APIError.invalidResponse
-//            return
-//          }
-//
-//          let decoder = JSONDecoder()
-//          do {
-//            accessTokenResponse = try decoder.decode(AccessTokenResponse.self, from: jsonData)
-//          } catch let parseError {
-//            print(parseError)
-//          }
-//
-//          if let httpResponse = response as? HTTPURLResponse {
-//            UserDefaults.standard.set(httpResponse.allHeaderFields["x-nonce"], forKey: "xnonce")
-//          }
-//
-//          UserDefaults.standard.set(tokenJWT, forKey: "AccessToken")
-//          completion(accessTokenResponse)
-//
-//        })
-//        session.resume()
     }
 }
 
