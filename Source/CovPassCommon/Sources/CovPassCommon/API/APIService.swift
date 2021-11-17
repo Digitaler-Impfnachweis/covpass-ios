@@ -156,6 +156,7 @@ public struct APIService: APIServiceProtocol {
     
     public func vaasListOfServices(initialisationData: ValidationServiceInitialisation) -> Promise<String> {
         let requestUrl = initialisationData.serviceIdentity
+        UserDefaults.standard.set(initialisationData.token.string, forKey: "TicketingToken")
         return vaasListOfServices(url: requestUrl)
     }
     
@@ -183,71 +184,76 @@ public struct APIService: APIServiceProtocol {
                                         "X-Version": "1.0.0",
                                         "content-type": "application/json"]
 
-//        var accessTokenResponse : AccessTokenResponse?
+        return self.customURLSession.request(request)
+//        let session = URLSession.shared.dataTask(with: request, completionHandler: { data,response,error in
+//          var accessTokenResponse : AccessTokenResponse?
 //
-//        guard let responseData = data,
-//              let tokenJWT = String(data: responseData, encoding: .utf8),
-//              responseData.count > 0 else {
-//                  throw APIError.invalidResponse
-//              }
+//          guard let responseData = data,
+//                let tokenJWT = String(data: responseData, encoding: .utf8),
+//                responseData.count > 0 else {
+//                    throw APIError.invalidResponse
+//                }
 //
-//        guard let decodedToken = try? decode(jwt: tokenJWT),
-//              let jsonData = try? JSONSerialization.data(withJSONObject: decodedToken.body)
-//        else {
-//            throw APIError.invalidResponse
-//        }
+//          guard let decodedToken = try? decode(jwt: tokenJWT),
+//                let jsonData = try? JSONSerialization.data(withJSONObject: decodedToken.body)
+//          else {
+//              throw APIError.invalidResponse
+//            return
+//          }
 //
-//        let decoder = JSONDecoder()
-//        do {
+//          let decoder = JSONDecoder()
+//          do {
 //            accessTokenResponse = try decoder.decode(AccessTokenResponse.self, from: jsonData)
-//        } catch let parseError {
+//          } catch let parseError {
 //            print(parseError)
-//        }
+//          }
 //
-//        if let httpResponse = response as? HTTPURLResponse {
+//          if let httpResponse = response as? HTTPURLResponse {
 //            UserDefaults.standard.set(httpResponse.allHeaderFields["x-nonce"], forKey: "xnonce")
-//        }
+//          }
 //
-//        UserDefaults.standard.set(tokenJWT, forKey: "AccessToken")
-//        completion(accessTokenResponse)
-        return customURLSession.request(request)
+//          UserDefaults.standard.set(tokenJWT, forKey: "AccessToken")
+//          completion(accessTokenResponse)
+//
+//        })
+//        session.resume()
     }
 }
 
 public struct AccessTokenResponse : Codable {
-  var jti           : String?
-  var lss           : String?
-  var iat           : Int?
-  var sub           : String?
-  var aud           : String?
-  var exp           : Int?
-  var t             : Int?
-  var v             : String?
-  var confirmation  : String?
-  var vc            : ValidationCertificate?
-  var result        : String?
-  var results       : [LimitationInfo]?
+  public var jti           : String?
+    public var lss           : String?
+    public var iat           : Int?
+    public var sub           : String?
+    public var aud           : String?
+    public var exp           : Int?
+    public var t             : Int?
+    public var v             : String?
+    public var confirmation  : String?
+    public var vc            : ValidationCertificate?
+    public var result        : String?
+    public var results       : [LimitationInfo]?
 }
 
 public struct LimitationInfo : Codable {
-  var identifier  : String?
-  var result      : String?
-  var type        : String?
-  var details     : String?
+    public var identifier  : String?
+    public var result      : String?
+    public var type        : String?
+    public var details     : String?
 }
 
 public struct ValidationCertificate : Codable {
-  var lang            : String?
-  var fnt             : String?
-  var gnt             : String?
-  var dob             : String?
-  var coa             : String?
-  var cod             : String?
-  var roa             : String?
-  var rod             : String?
-  var type            : [String]?
-  var category        : [String]?
-  var validationClock : String?
-  var validFrom       : String?
-  var validTo         : String?
+  public var lang            : String?
+  public var fnt             : String?
+  public var gnt             : String?
+  public var dob             : String?
+  public var coa             : String?
+  public var cod             : String?
+  public var roa             : String?
+  public var rod             : String?
+  public var type            : [String]?
+  public var category        : [String]?
+  public var validationClock : String?
+  public var validFrom       : String?
+  public var validTo         : String?
 }

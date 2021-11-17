@@ -8,8 +8,8 @@
 
 import Foundation
 
-public enum CertType {
-    case recovery, test, vaccination
+public enum CertType: String {
+    case recovery = "r", test = "t", vaccination = "v"
 }
 
 public enum Property {

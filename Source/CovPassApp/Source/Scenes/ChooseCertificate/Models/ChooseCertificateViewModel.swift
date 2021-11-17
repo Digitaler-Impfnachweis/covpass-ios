@@ -155,17 +155,22 @@ class ChooseCertificateViewModel: ChooseCertificateViewModelProtocol {
         firstly {
             repository.getCertificateList()
         }
-        .get {
-            self.certificateList = $0
+        .map { certificateList in
+            self.certificateList = certificateList
         }
-        .map { [weak self] _ in
-            self?.vaasRepository.fetchValidationService()
+        .then {
+            self.vaasRepository.fetchValidationService()
         }
-        .map {  [weak self] in
-            self?.isLoading = false
-            self?.delegate?.viewModelDidUpdate()
+        .map { accessToken in
+            self.givenNameFilter = accessToken.vc?.gnt ?? ""
+            self.familyNameFilter = accessToken.vc?.fnt ?? ""
+            self.dobFilter = accessToken.vc?.dob ?? ""
+            self.typeFilter = accessToken.vc?.type?.compactMap{ CertType(rawValue: $0) } ?? []
         }
-        .cauterize()
+        .done { () in
+            self.isLoading = false
+            self.delegate?.viewModelDidUpdate()
+        }
     }
     
     func cancel() {
