@@ -84,16 +84,6 @@
 
 "dialog_update_info_notification_action_button" = "OK";
 
-"certificate_will_be_revoked_notification_icon_new" = "Neu";
-
-"certificate_will_be_revoked_notification_title" = "Ihr Zertifikat wird zum 11.11.2021 gesperrt";
-
-"certificate_will_be_revoked_notification_message" = " Aus Sicherheitsgründen müssen alle Zertifikate der von Ihnen besuchten Apotheke neu ausgestellt werden.\n\nIhr Zertifikat wird am 11.11.2021 gesperrt. Sie können sich unter Vorlage Ihres gelben Impfpasses und eines Lichtbildausweises in Ihrer Apotheke kostenfrei ein neues Impfzertifikat ausstellen lassen.";
-
-"certificate_will_be_revoked_notification_button" = "OK";
-
-"accessibility_certificate_will_be_revoked_info_announce" = "Die Ansicht \"Zertifikat wird gesperrt\" wurde geöffnet";
-
 
 /********** start screen **********/
 
@@ -1203,6 +1193,10 @@
 
 "share_certificate_note_privacy_notice" = "Ausführliche Hinweise zur Datenverarbeitung finden Sie in der Datenschutzerklärung:";
 
+"share_certificate_privacy_notice_title" = "Datenschutzerklärung";
+
+"share_certificate_privacy_notice_linked" = "#Datenschutzerklärung::$0#";
+
 "share_certificate_action_button_agree" = "Einverstanden";
 
 "share_certificate_action_button_cancel" = "Abbrechen";
@@ -1219,6 +1213,8 @@
 
 "share_certificate_selection_message" = "Ihr Zertifikat muss folgenden Anforderungen entsprechen:";
 
+"share_certificate_selection_requirements_date_of_birth" = "Geburtsdatum";
+
 "accessibility_share_certificate_selection_label_close" = "Schließen";
 
 "accessibility_share_certificate_selection_label_back" = "Zurück";
@@ -1231,7 +1227,7 @@
 
 "share_certificate_selection_no_match_subline" = "Bitte prüfen Sie, ob Ihr in der App hinterlegtes Zertifikat den Anforderungen entspricht.";
 
-"share_certificate_selection_no_match_action button" = "Schließen";
+"share_certificate_selection_no_match_action_button" = "Schließen";
 
 "share_certificate_transmission_title" = "Übermittlung Ihres Zertifikats zur Prüfung";
 
@@ -1266,6 +1262,10 @@
 "share_certificate_transmission_notes_fourth_list_item" = "Der Prüfpartner teilt dem Anbieter sofort das Prüfungsergebnis mit. Es wird nur mitgeteilt, ob die Prüfung erfolgreich war oder nicht.";
 
 "share_certificate_transmission_note_privacy_notice" = "Ausführliche Hinweise zur Datenverarbeitung finden Sie in der Datenschutzerklärung:";
+
+"share_certificate_transmission_privacy_notice_title" = "Datenschutzerklärung";
+
+"share_certificate_transmission_privacy_notice_linked" = "#Datenschutzerklärung::$0#";
 
 "share_certificate_transmission_action_button_agree" = "Einverstanden";
 

@@ -56,12 +56,15 @@ struct VaccinationCertificateItemViewModel: CertificateItemViewModel {
     }
 
     var title: String {
-        "certificates_overview_vaccination_certificate_title".localized
+        neutral ? dgc.nam.fullName : "certificates_overview_vaccination_certificate_title".localized
     }
 
     var titleAccessibilityLabel: String? { title }
 
     var subtitle: String {
+        if neutral {
+            return "certificates_overview_vaccination_certificate_title".localized
+        }
         guard let v = dgc.v?.first else { return "" }
         return String(format: "certificates_overview_vaccination_certificate_message".localized, v.dn, v.sd)
     }
@@ -69,6 +72,10 @@ struct VaccinationCertificateItemViewModel: CertificateItemViewModel {
     var subtitleAccessibilityLabel: String? { subtitle }
 
     var info: String {
+        if neutral {
+            guard let v = dgc.v?.first else { return "" }
+            return String(format: "certificates_overview_vaccination_certificate_message".localized, v.dn, v.sd)
+        }
         if let v = dgc.v?.first {
             return String(format: "certificates_overview_vaccination_certificate_date".localized, DateUtils.displayDateFormatter.string(from: v.dt))
         }
@@ -99,18 +106,26 @@ struct VaccinationCertificateItemViewModel: CertificateItemViewModel {
         "accessibility_overview_certificates_label_display_certificate".localized
     }
 
-    var statusIcon: UIImage {
-        .validationCheckmark
-    }
+    var statusIcon: UIImage? { neutral ? nil : .validationCheckmark }
+    
+    var statusIconHidden: Bool { statusIcon == nil }
 
     var statusIconAccessibilityLabel: String? { activeTitle }
 
     var activeTitle: String? {
-        active ? "certificates_overview_currently_uses_certificate_note".localized : nil
+        if neutral {
+            if let v = dgc.v?.first {
+                return String(format: "certificates_overview_vaccination_certificate_date".localized, DateUtils.displayDateFormatter.string(from: v.dt))
+            }
+        }
+        return active ? "certificates_overview_currently_uses_certificate_note".localized : nil
     }
+    
+    var neutral: Bool
 
-    init(_ certificate: ExtendedCBORWebToken, active: Bool = false) {
+    init(_ certificate: ExtendedCBORWebToken, active: Bool = false, neutral: Bool = false) {
         self.certificate = certificate
         self.active = active
+        self.neutral = neutral
     }
 }

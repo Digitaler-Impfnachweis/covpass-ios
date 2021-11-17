@@ -93,7 +93,8 @@ struct ResultItemViewModel: CertificateItemViewModel {
     var info2: String? { nil }
     var info2AccessibilityLabel: String? { nil }
 
-    var statusIcon: UIImage { .validationCheckmark }
+    var statusIcon: UIImage? { .validationCheckmark }
+    var statusIconHidden: Bool { statusIcon == nil }
     var statusIconAccessibilityLabel: String? { nil }
 
     var activeTitle: String? { nil }

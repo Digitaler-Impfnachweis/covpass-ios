@@ -83,9 +83,12 @@ public extension UIImage {
 
     @ImageLoader(name: "star_48px")
     private(set) static var starEmpty
-
+    
     @ImageLoader(name: "prevention_label")
     private(set) static var completness
+    
+    @ImageLoader(name: "prevention")
+    private(set) static var prevention
 
     @ImageLoader(name: "shield_lefthalf_fill")
     private(set) static var halfShield

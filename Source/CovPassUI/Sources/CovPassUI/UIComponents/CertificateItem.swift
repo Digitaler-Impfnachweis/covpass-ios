@@ -21,7 +21,10 @@ public class CertificateItem: XibView {
     @IBOutlet public var activeView: UIView!
     @IBOutlet public var activeLabel: UILabel!
     @IBOutlet public var chevron: UIImageView!
-
+    @IBOutlet weak var statusIconWrapper: UIView!
+    @IBOutlet weak var statusIconLeadingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var statusIconTopConstraint: NSLayoutConstraint!
+    
     private let action: () -> Void
     private let viewModel: CertificateItemViewModel
 
@@ -58,6 +61,10 @@ public class CertificateItem: XibView {
         info2Label.isHidden = viewModel.info2 == nil
 
         statusIcon.image = viewModel.statusIcon
+        statusIcon.isHidden = viewModel.statusIconHidden
+        statusIconWrapper.isHidden = viewModel.statusIconHidden
+        statusIconLeadingConstraint.constant = viewModel.statusIconHidden ? 0 : 4
+        statusIconTopConstraint.constant = viewModel.statusIconHidden ? 0 : 5
 
         activeLabel.attributedText = viewModel.activeTitle?.styledAs(.body).colored(.onBackground70)
         activeView.isHidden = viewModel.activeTitle == nil

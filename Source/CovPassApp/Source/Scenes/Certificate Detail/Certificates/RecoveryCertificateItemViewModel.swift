@@ -50,19 +50,19 @@ struct RecoveryCertificateItemViewModel: CertificateItemViewModel {
     }
 
     var title: String {
-        return "certificates_overview_recovery_certificate_title".localized
+        return neutral ? dgc.nam.fullName : "certificates_overview_recovery_certificate_title".localized
     }
 
     var titleAccessibilityLabel: String? { title }
 
     var subtitle: String {
-        return "certificates_overview_recovery_certificate_message".localized
+        neutral ? "certificates_overview_recovery_certificate_title".localized : "certificates_overview_recovery_certificate_message".localized
     }
 
     var subtitleAccessibilityLabel: String? { subtitle }
 
     var info: String {
-        infoString(forAccessibility: false) ?? ""
+        neutral ?  "certificates_overview_recovery_certificate_message".localized : infoString(forAccessibility: false) ?? ""
     }
 
     var infoAccessibilityLabel: String? {
@@ -88,17 +88,22 @@ struct RecoveryCertificateItemViewModel: CertificateItemViewModel {
         "accessibility_overview_certificates_label_display_certificate".localized
     }
 
-    var statusIcon: UIImage { .validationCheckmark }
+    var statusIcon: UIImage? { neutral ? nil : .validationCheckmark }
+    
+    var statusIconHidden: Bool { statusIcon == nil }
 
     var statusIconAccessibilityLabel: String? { nil }
 
     var activeTitle: String? {
-        active ? "certificates_overview_currently_uses_certificate_note".localized : nil
+        neutral ? infoString(forAccessibility: false) ?? "" : active ? "certificates_overview_currently_uses_certificate_note".localized : nil
     }
+    
+    var neutral: Bool
 
-    init(_ certificate: ExtendedCBORWebToken, active: Bool = false) {
+    init(_ certificate: ExtendedCBORWebToken, active: Bool = false, neutral: Bool = false) {
         self.certificate = certificate
         self.active = active
+        self.neutral = neutral
     }
 
     // MARK: - Helpers
