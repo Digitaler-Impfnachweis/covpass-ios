@@ -26,7 +26,12 @@ public class VAASRepository: VAASRepositoryProtocol {
     
     private func identityDocument(identityString: String) -> Promise<IdentityDocument> {
         Promise { seal in
-            seal.fulfill(try! JSONDecoder().decode(IdentityDocument.self, from: identityString.data(using: .utf8)!))
+            do {
+                let document = try JSONDecoder().decode(IdentityDocument.self, from: identityString.data(using: .utf8)!)
+                seal.fulfill(document)
+            } catch {
+                seal.reject(error)
+            }
         }
     }
     
@@ -37,7 +42,13 @@ public class VAASRepository: VAASRepositoryProtocol {
         .then { stringResponse in
             self.identityDocument(identityString: stringResponse)
         }
+        .map{ identityDocument -> Promise<String> in
+            if identityDocument.isRejected {
+                print("Decoding Error")
+            }
+        }
         .then { identityDocument -> Promise<String> in
+            
             // HERE WE GO
             let serverListInfo = identityDocument
             self.identityDocumentDecorator = identityDocument
