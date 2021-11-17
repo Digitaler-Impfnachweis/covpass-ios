@@ -13,10 +13,11 @@ public protocol VAASRepositoryProtocol {
     func fetchValidationService() -> Promise<Void>
 }
 
-public struct VAASRepository: VAASRepositoryProtocol {
+public class VAASRepository: VAASRepositoryProtocol {
     
     private let service: APIServiceProtocol
     private var ticket: ValidationServiceInitialisation
+    var identityDocumentDecorator: IdentityDocument
     
     public init(service: APIServiceProtocol, ticket: ValidationServiceInitialisation) {
         self.service = service
@@ -34,41 +35,46 @@ public struct VAASRepository: VAASRepositoryProtocol {
             service.vaasListOfServices(initialisationData: ticket)
         }
         .then { stringResponse in
-            identityDocument(identityString: stringResponse)
+            self.identityDocument(identityString: stringResponse)
         }
         .then { identityDocument -> Promise<String> in
             // HERE WE GO
             let serverListInfo = identityDocument
+            self.identityDocumentDecorator = identityDocument
             guard var services = serverListInfo.service else { throw APIError.invalidResponse }
             services[0].isSelected = true
             guard let service = services.filter({ $0.isSelected ?? false }).first else {  throw APIError.invalidResponse }
-            guard let accessTokenService = services.first(where: { $0.type == "AccessTokenService" }) else {  throw APIError.invalidResponse }
-            guard let url = URL(string: accessTokenService.serviceEndpoint) else {  throw APIError.invalidResponse }
             guard let serviceURL = URL(string: service.serviceEndpoint)  else {  throw APIError.invalidResponse }
             return self.service.vaasListOfServices(url: serviceURL)
         }
         .then { stringResponse -> Promise<IdentityDocument> in
-            return identityDocument(identityString: stringResponse)
+            return self.identityDocument(identityString: stringResponse)
         }
-//        .then { identityDocument in
+        .then { identityDocument -> Promise<Void> in
+            
+            guard let services = self.identityDocumentDecorator.service?.filter({ $0.isSelected ?? false }) else {  throw APIError.invalidResponse }
+            guard let accessTokenService = services.first(where: { $0.type == "AccessTokenService" }) else {  throw APIError.invalidResponse }
+            guard let url = URL(string: accessTokenService.serviceEndpoint) else {  throw APIError.invalidResponse }
+
+
+            return Promise.value
+//            guard let serviceInfo = validationServiceInfo else { return }
 //
-////            guard let serviceInfo = validationServiceInfo else { return }
-////
-////            let pubKey = (X509.derPubKey(for: privateKey) ?? Data()).base64EncodedString()
-////
-////            GatewayConnection.getAccessTokenFor(url: url,servicePath: service.id, publicKey: pubKey) { response in
-////                DispatchQueue.main.async { [weak self] in
-////                    self?.performSegue(withIdentifier: Constants.showCertificatesList, sender: (serviceInfo, response))
-////                }
-////            }
-//        }
+//            let pubKey = (X509.derPubKey(for: privateKey) ?? Data()).base64EncodedString()
+//
+//            GatewayConnection.getAccessTokenFor(url: url,servicePath: service.id, publicKey: pubKey) { response in
+//                DispatchQueue.main.async { [weak self] in
+//                    self?.performSegue(withIdentifier: Constants.showCertificatesList, sender: (serviceInfo, response))
+//                }
+//            }
+        }
         .done { identityDocument in
             
         }
 
     }
     
-    public mutating func decodeInitialisationQRCode(payload: String) -> ValidationServiceInitialisation? {
+    public func decodeInitialisationQRCode(payload: String) -> ValidationServiceInitialisation? {
         guard let data = payload.data(using: .utf8),
               let ticket = try? JSONDecoder().decode(ValidationServiceInitialisation.self, from: data) else {
                   return nil
