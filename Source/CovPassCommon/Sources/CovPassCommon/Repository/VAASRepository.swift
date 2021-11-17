@@ -17,21 +17,16 @@ public class VAASRepository: VAASRepositoryProtocol {
     
     private let service: APIServiceProtocol
     private var ticket: ValidationServiceInitialisation
-    var identityDocumentDecorator: IdentityDocument
+    var identityDocumentDecorator: IdentityDocument?
     
     public init(service: APIServiceProtocol, ticket: ValidationServiceInitialisation) {
         self.service = service
         self.ticket = ticket
     }
-    
-    private func identityDocument(identityString: String) -> Promise<IdentityDocument> {
+
+    private func identityDocument(identityString: String) throws -> Promise<IdentityDocument> {
         Promise { seal in
-            do {
-                let document = try JSONDecoder().decode(IdentityDocument.self, from: identityString.data(using: .utf8)!)
-                seal.fulfill(document)
-            } catch {
-                seal.reject(error)
-            }
+            seal.fulfill(try JSONDecoder().decode(IdentityDocument.self, from: identityString.data(using: .utf8)!))
         }
     }
     
@@ -40,15 +35,9 @@ public class VAASRepository: VAASRepositoryProtocol {
             service.vaasListOfServices(initialisationData: ticket)
         }
         .then { stringResponse in
-            self.identityDocument(identityString: stringResponse)
-        }
-        .map{ identityDocument -> Promise<String> in
-            if identityDocument.isRejected {
-                print("Decoding Error")
-            }
+            try self.identityDocument(identityString: stringResponse)
         }
         .then { identityDocument -> Promise<String> in
-            
             // HERE WE GO
             let serverListInfo = identityDocument
             self.identityDocumentDecorator = identityDocument
@@ -59,14 +48,12 @@ public class VAASRepository: VAASRepositoryProtocol {
             return self.service.vaasListOfServices(url: serviceURL)
         }
         .then { stringResponse -> Promise<IdentityDocument> in
-            return self.identityDocument(identityString: stringResponse)
+            return try self.identityDocument(identityString: stringResponse)
         }
         .then { identityDocument -> Promise<Void> in
-            
-            guard let services = self.identityDocumentDecorator.service?.filter({ $0.isSelected ?? false }) else {  throw APIError.invalidResponse }
+            guard let services = identityDocument.service?.filter({ $0.isSelected ?? false }) else {  throw APIError.invalidResponse }
             guard let accessTokenService = services.first(where: { $0.type == "AccessTokenService" }) else {  throw APIError.invalidResponse }
             guard let url = URL(string: accessTokenService.serviceEndpoint) else {  throw APIError.invalidResponse }
-
 
             return Promise.value
 //            guard let serviceInfo = validationServiceInfo else { return }

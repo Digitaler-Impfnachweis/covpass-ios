@@ -13,4 +13,5 @@ public protocol APIServiceProtocol {
     func fetchTrustList() -> Promise<String>
     func vaasListOfServices(initialisationData: ValidationServiceInitialisation) -> Promise<String>
     func vaasListOfServices(url: URL) -> Promise<String>
+    func getAccessTokenFor(url : URL, servicePath : String, publicKey : String) -> Promise<String>
 }

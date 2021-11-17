@@ -169,7 +169,7 @@ public struct APIService: APIServiceProtocol {
     
     public func getAccessTokenFor(url : URL,
                                   servicePath : String,
-                                  publicKey : String) -> Promise<AccessTokenResponse> {
+                                  publicKey : String) -> Promise<String> {
         let json: [String: Any] = ["service": servicePath, "pubKey": publicKey]
         
         let jsonData = try? JSONSerialization.data(withJSONObject: json,options: .prettyPrinted)
@@ -182,42 +182,39 @@ public struct APIService: APIServiceProtocol {
         request.allHTTPHeaderFields  = ["Authorization" : "Bearer " + token,
                                         "X-Version": "1.0.0",
                                         "content-type": "application/json"]
-        
-        let session = URLSession.shared.dataTask(with: request, completionHandler: { data, response, error in
-            var accessTokenResponse : AccessTokenResponse?
-            
-            guard let responseData = data,
-                  let tokenJWT = String(data: responseData, encoding: .utf8),
-                  responseData.count > 0 else {
-                      throw APIError.invalidResponse
-                  }
-            
-            guard let decodedToken = try? decode(jwt: tokenJWT),
-                  let jsonData = try? JSONSerialization.data(withJSONObject: decodedToken.body)
-            else {
-                throw APIError.invalidResponse
-            }
-            
-            let decoder = JSONDecoder()
-            do {
-                accessTokenResponse = try decoder.decode(AccessTokenResponse.self, from: jsonData)
-            } catch let parseError {
-                print(parseError)
-            }
-            
-            if let httpResponse = response as? HTTPURLResponse {
-                UserDefaults.standard.set(httpResponse.allHeaderFields["x-nonce"], forKey: "xnonce")
-            }
-            
-            UserDefaults.standard.set(tokenJWT, forKey: "AccessToken")
-            completion(accessTokenResponse)
-            
-        })
-        session.resume()
+
+//        var accessTokenResponse : AccessTokenResponse?
+//
+//        guard let responseData = data,
+//              let tokenJWT = String(data: responseData, encoding: .utf8),
+//              responseData.count > 0 else {
+//                  throw APIError.invalidResponse
+//              }
+//
+//        guard let decodedToken = try? decode(jwt: tokenJWT),
+//              let jsonData = try? JSONSerialization.data(withJSONObject: decodedToken.body)
+//        else {
+//            throw APIError.invalidResponse
+//        }
+//
+//        let decoder = JSONDecoder()
+//        do {
+//            accessTokenResponse = try decoder.decode(AccessTokenResponse.self, from: jsonData)
+//        } catch let parseError {
+//            print(parseError)
+//        }
+//
+//        if let httpResponse = response as? HTTPURLResponse {
+//            UserDefaults.standard.set(httpResponse.allHeaderFields["x-nonce"], forKey: "xnonce")
+//        }
+//
+//        UserDefaults.standard.set(tokenJWT, forKey: "AccessToken")
+//        completion(accessTokenResponse)
+        return customURLSession.request(request)
     }
 }
 
-struct AccessTokenResponse : Codable {
+public struct AccessTokenResponse : Codable {
   var jti           : String?
   var lss           : String?
   var iat           : Int?
@@ -232,14 +229,14 @@ struct AccessTokenResponse : Codable {
   var results       : [LimitationInfo]?
 }
 
-struct LimitationInfo : Codable {
+public struct LimitationInfo : Codable {
   var identifier  : String?
   var result      : String?
   var type        : String?
   var details     : String?
 }
 
-struct ValidationCertificate : Codable {
+public struct ValidationCertificate : Codable {
   var lang            : String?
   var fnt             : String?
   var gnt             : String?
