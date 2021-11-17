@@ -33,12 +33,39 @@ public struct VAASRepository: VAASRepositoryProtocol {
         firstly {
             service.vaasListOfServices(initialisationData: ticket)
         }
-        .map{ stringResponse in
+        .then { stringResponse in
             identityDocument(identityString: stringResponse)
         }
-        .map { identityDocument in
+        .then { identityDocument -> Promise<String> in
             // HERE WE GO
+            let serverListInfo = identityDocument
+            guard var services = serverListInfo.service else { throw APIError.invalidResponse }
+            services[0].isSelected = true
+            guard let service = services.filter({ $0.isSelected ?? false }).first else {  throw APIError.invalidResponse }
+            guard let accessTokenService = services.first(where: { $0.type == "AccessTokenService" }) else {  throw APIError.invalidResponse }
+            guard let url = URL(string: accessTokenService.serviceEndpoint) else {  throw APIError.invalidResponse }
+            guard let serviceURL = URL(string: service.serviceEndpoint)  else {  throw APIError.invalidResponse }
+            return self.service.vaasListOfServices(url: serviceURL)
         }
+        .then { stringResponse -> Promise<IdentityDocument> in
+            return identityDocument(identityString: stringResponse)
+        }
+//        .then { identityDocument in
+//
+////            guard let serviceInfo = validationServiceInfo else { return }
+////
+////            let pubKey = (X509.derPubKey(for: privateKey) ?? Data()).base64EncodedString()
+////
+////            GatewayConnection.getAccessTokenFor(url: url,servicePath: service.id, publicKey: pubKey) { response in
+////                DispatchQueue.main.async { [weak self] in
+////                    self?.performSegue(withIdentifier: Constants.showCertificatesList, sender: (serviceInfo, response))
+////                }
+////            }
+//        }
+        .done { identityDocument in
+            
+        }
+
     }
     
     public mutating func decodeInitialisationQRCode(payload: String) -> ValidationServiceInitialisation? {
