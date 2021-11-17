@@ -156,7 +156,11 @@ public struct APIService: APIServiceProtocol {
     
     public func vaasListOfServices(initialisationData: ValidationServiceInitialisation) -> Promise<String> {
         let requestUrl = initialisationData.serviceIdentity
-        var request = requestUrl.urlRequest.GET
+        return vaasListOfServices(url: requestUrl)
+    }
+    
+    public func vaasListOfServices(url: URL) -> Promise<String> {
+        var request = url.urlRequest.GET
         if let etag = APIService.eTagForURL(urlString: request.url?.absoluteString ?? "") {
             request.addValue(etag, forHTTPHeaderField: apiHeaderNoneMatch)
         }
