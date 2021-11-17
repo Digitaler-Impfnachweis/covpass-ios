@@ -10,6 +10,6 @@ import Foundation
 public struct JWK : Codable {
   public var kid : String
   public var alg : String
-  public var x5c : String
+  public var x5c : [String]
   public var use : String
 }
