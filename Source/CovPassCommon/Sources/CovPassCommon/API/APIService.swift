@@ -157,7 +157,7 @@ public struct APIService: APIServiceProtocol {
         }
         return customURLSession.request(request)
     }
-
+    
     public func vaasListOfServices(url: URL) -> Promise<String> {
         var request = url.urlRequest.GET
         if let etag = APIService.eTagForURL(urlString: request.url?.absoluteString ?? "") {
@@ -181,7 +181,27 @@ public struct APIService: APIServiceProtocol {
         request.allHTTPHeaderFields  = ["Authorization" : "Bearer " + ticketToken,
                                         "X-Version": "1.0.0",
                                         "content-type": "application/json"]
-
-        return self.customURLSession.request(request)
+        
+        return customURLSession.request(request)
+    }
+    
+    public func validateTicketing(url : URL,
+                                  parameters : [String: String]?,
+                                  accessToken: String) -> Promise<String> {
+        let headers = ["Authorization": "Bearer " + accessToken,
+                       "X-Version": "1.0.0",
+                       "content-type": "application/json"]
+        
+        let encoder = JSONEncoder()
+        guard let parametersData = try? encoder.encode(parameters) else {
+            return Promise.init(error: APIError.invalidResponse)
+        }
+        
+        var request = URLRequest(url: url)
+        request.allHTTPHeaderFields = headers
+        request.httpMethod = "POST"
+        request.httpBody = parametersData
+        
+        return customURLSession.request(request)
     }
 }

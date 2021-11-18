@@ -26,7 +26,8 @@ public class VAASRepository: VAASRepositoryProtocol {
     var identityDocumentDecorator: IdentityDocument?
     var identityDocumentValidationService: IdentityDocument?
     var accessTokenInfo: AccessTokenResponse?
-
+    var accessTokenJWT: String?
+    
     public init(service: APIServiceProtocol, ticket: ValidationServiceInitialisation) {
         self.service = service
         self.ticket = ticket
@@ -81,40 +82,41 @@ public class VAASRepository: VAASRepositoryProtocol {
         }
         .then { [weak self] stringResponse -> Promise<AccessTokenResponse> in
             let accessTokenResponse = try self?.accessToken(string: stringResponse) ?? .init(error: APIError.requestCancelled)
+            self?.accessTokenJWT = stringResponse
             self?.accessTokenInfo = accessTokenResponse.value
             return accessTokenResponse
         }
     }
     
-    public func validateTicketing (choosenCert cert: ExtendedCBORWebToken) throws -> Promise<Void> {
-        guard let urlPath = accessTokenInfo?.aud,
+    public func validateTicketing (choosenCert certificate: ExtendedCBORWebToken) throws -> Promise<Void> {
+        guard let urlPath = self.accessTokenInfo?.aud,
               let url = URL(string: urlPath),
-              let iv = UserDefaults.standard.object(forKey: "xnonce"),
-              let verificationMethod = identityDocumentValidationService?.verificationMethod?.first(where: { $0.publicKeyJwk?.use == "enc" }) else  {
-                  throw APIError.invalidResponse
-                  
-              }
-              let certificate = cert
+              let iv = UserDefaults.standard.object(forKey: "xnonce") as? String,
+              let verificationMethod = identityDocumentValidationService?.verificationMethod?.first(where: { $0.publicKeyJwk?.use == "enc" })
+        else {
+            throw APIError.invalidResponse
+        }
         
-        guard let dccData = encodeDCC(dgcString: certificate.vaccinationQRCodeData, iv: iv as! String),
-              let privateKey = Enclave.loadOrGenerateKey(with: "validationKey") else { throw APIError.invalidResponse }
+        guard let dccData = encodeDCC(dgcString: certificate.vaccinationQRCodeData, iv: iv),
+              let privateKey = Enclave.loadOrGenerateKey(with: "validationKey")
+        else {
+            throw APIError.invalidResponse
+        }
         
-        var sig = Data()
-        
-        Enclave.sign(data: dccData.0, with: privateKey, using: SecKeyAlgorithm.ecdsaSignatureMessageX962SHA256, completion: { (signature,error) in
-            if let sign = signature {
-                sig = sign
-                let parameters = ["kid" : verificationMethod.publicKeyJwk!.kid, "dcc" : dccData.0.base64EncodedString(),
-                                  "sig": sig.base64EncodedString(),"encKey" : dccData.1.base64EncodedString(),
-                                  "sigAlg" : "SHA256withECDSA", "encScheme" : "RSAOAEPWithSHA256AESGCM"]
-                
-//                GatewayConnection.validateTicketing(url: url, parameters: parameters) { [weak self] responseModel in
-//                    DispatchQueue.main.async {
-//                        self?.stopActivity()
-//                        self?.performSegue(withIdentifier: Constants.showValidationResult, sender: responseModel)
-//                    }
-//                }
+        Enclave.sign(data: dccData.0, with: privateKey, using: SecKeyAlgorithm.ecdsaSignatureMessageX962SHA256, completion: { (signature, error) in
+            guard error == nil else {
+                return
             }
+            guard let sign = signature else {
+                return
+            }
+            guard let accessTokenJWT = self.accessTokenJWT else {
+                return
+            }
+            let parameters = ["kid" : verificationMethod.publicKeyJwk!.kid, "dcc" : dccData.0.base64EncodedString(),
+                              "sig": sign.base64EncodedString(),"encKey" : dccData.1.base64EncodedString(),
+                              "sigAlg" : "SHA256withECDSA", "encScheme" : "RSAOAEPWithSHA256AESGCM"]
+            self.service.validateTicketing(url: url, parameters: parameters, accessToken: accessTokenJWT)
         })
         
         return Promise.value
@@ -122,7 +124,8 @@ public class VAASRepository: VAASRepositoryProtocol {
     
     private func encodeDCC(dgcString : String, iv: String) -> (Data,Data)? {
         guard (iv.count > 16 || iv.count < 16 || iv.count % 8 > 0) else { return nil }
-        guard let verificationMethod = identityDocumentDecorator!.verificationMethod!.first(where: { $0.publicKeyJwk?.use == "enc" }) else { return nil }
+        guard let verificationMethod = identityDocumentValidationService?.verificationMethod?.first(where: { $0.publicKeyJwk?.use == "enc" })
+        else { return nil }
         
         let ivData : [UInt8] = Array(base64: iv)
         let dgcData : [UInt8] = Array(dgcString.utf8)
@@ -135,56 +138,53 @@ public class VAASRepository: VAASRepositoryProtocol {
         
         /* Generate a key from a `password`. Optional if you already have a key */
         let key = try! PKCS5.PBKDF2(password: password, salt: salt, iterations: 4096, keyLength: 32, /* AES-256 */
-                                    variant: .sha2(.sha256)
-        ).calculate()
+                                    variant: .sha2(.sha256)).calculate()
         
-        let publicSecKey = VAASRepository.pubKey(from: verificationMethod.publicKeyJwk!.x5c.first!)
-        
+        guard let b64EncodedCert = verificationMethod.publicKeyJwk?.x5c.first else {
+            // TODO: complete error
+            return nil
+        }
+        let publicSecKey = pubKey(from: b64EncodedCert)
         do {
             let gcm = GCM(iv: ivData, mode: .combined)
             let aes = try AES(key: key, blockMode: gcm, padding: .noPadding)
             encryptedDgcData = try aes.encrypt(dgcData)
-            //        let tag = gcm.authenticationTag
+            let encryptedKeyData = encrypt(data: Data(key), with: publicSecKey!)
+            return (Data(encryptedDgcData), encryptedKeyData.0!)
             
         } catch {
             print(error.localizedDescription)
+            return nil
         }
-        let encryptedKeyData = VAASRepository.encrypt(data: Data(key), with: publicSecKey!)
-        return (Data(encryptedDgcData), encryptedKeyData.0!)
     }
     
-    private static func encrypt(data: Data, with key: SecKey) -> (Data?, String?) {
-        guard let publicKey = SecKeyCopyPublicKey(key) else {
-            return (nil, ("err.pub-key-irretrievable"))
-        }
+    private  func encrypt(data: Data, with key: SecKey) -> (Data?, String?) {
+        guard let publicKey = SecKeyCopyPublicKey(key) else { return (nil, ("err.pub-key-irretrievable")) }
         guard SecKeyIsAlgorithmSupported(publicKey, .encrypt, SecKeyAlgorithm.rsaEncryptionOAEPSHA256) else {
             return (nil, ("err.alg-not-supported"))
         }
         var error: Unmanaged<CFError>?
-        let cipherData = SecKeyCreateEncryptedData(publicKey, SecKeyAlgorithm.rsaEncryptionOAEPSHA256,
-                                                   data as CFData, &error) as Data?
+        let cipherData = SecKeyCreateEncryptedData(publicKey,
+                                                   SecKeyAlgorithm.rsaEncryptionOAEPSHA256, data as CFData, &error) as Data?
         let err = error?.takeRetainedValue().localizedDescription
         return (cipherData, err)
     }
     
     private func keyFromData(_ data: Data) throws -> SecKey {
         let options: [String: Any] = [kSecAttrKeyType as String: kSecAttrKeyTypeRSA,
-                                      kSecAttrKeyClass as String: kSecAttrKeyClassPublic,
-                                      kSecAttrKeySizeInBits as String : 4096]
+                                      kSecAttrKeyClass as String: kSecAttrKeyClassPublic, kSecAttrKeySizeInBits as String : 4096]
         
         var error: Unmanaged<CFError>?
-        guard let key = SecKeyCreateWithData(data as CFData,
-                                             options as CFDictionary, &error) else {
-            throw error!.takeRetainedValue() as Error
-        }
+        
+        guard let key = SecKeyCreateWithData(data as CFData, options as CFDictionary, &error)
+        else { throw error!.takeRetainedValue() as Error }
         return key
     }
     
-    private static func pubKey(from b64EncodedCert: String) -> SecKey? {
-        guard
-            let encodedCertData = Data(base64Encoded: b64EncodedCert),
-            let cert = SecCertificateCreateWithData(nil, encodedCertData as CFData),
-            let publicKey = SecCertificateCopyKey(cert)
+    private func pubKey(from b64EncodedCert: String) -> SecKey? {
+        guard let encodedCertData = Data(base64Encoded: b64EncodedCert),
+              let cert = SecCertificateCreateWithData(nil, encodedCertData as CFData),
+              let publicKey = SecCertificateCopyKey(cert)
         else { return nil }
         return publicKey
     }
