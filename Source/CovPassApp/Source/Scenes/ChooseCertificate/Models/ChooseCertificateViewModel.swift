@@ -170,6 +170,9 @@ class ChooseCertificateViewModel: ChooseCertificateViewModelProtocol {
         .done { () in
             self.isLoading = false
             self.delegate?.viewModelDidUpdate()
+        }.catch { Error in
+            self.isLoading = false
+            self.delegate?.viewModelDidUpdate()
         }
     }
     
