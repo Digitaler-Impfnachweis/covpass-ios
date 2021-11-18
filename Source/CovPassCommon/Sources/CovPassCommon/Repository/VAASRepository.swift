@@ -12,6 +12,7 @@ import Foundation
 import Security
 import SwiftCBOR
 import JWTDecode
+import CryptoSwift
 
 public protocol VAASRepositoryProtocol {
     func fetchValidationService() -> Promise<AccessTokenResponse>
@@ -23,6 +24,7 @@ public class VAASRepository: VAASRepositoryProtocol {
     private let service: APIServiceProtocol
     private var ticket: ValidationServiceInitialisation
     var identityDocumentDecorator: IdentityDocument?
+    var identityDocumentValidationService: IdentityDocument?
     var accessTokenInfo: AccessTokenResponse?
 
     public init(service: APIServiceProtocol, ticket: ValidationServiceInitialisation) {
@@ -59,7 +61,9 @@ public class VAASRepository: VAASRepositoryProtocol {
             return self?.service.vaasListOfServices(url: serviceURL) ?? .init(error: APIError.requestCancelled)
         }
         .then { [weak self] stringResponse -> Promise<IdentityDocument> in
-            return try self?.identityDocument(identityString: stringResponse) ?? .init(error: APIError.requestCancelled)
+            let identityDocumentValidationService = try self?.identityDocument(identityString: stringResponse) ?? .init(error: APIError.requestCancelled)
+            self?.identityDocumentValidationService = identityDocumentValidationService.value
+            return identityDocumentValidationService
         }
         .then { [weak self] identityDocument -> Promise<String> in
             guard var services = self?.identityDocumentDecorator?.service else { throw APIError.invalidResponse }
@@ -83,10 +87,13 @@ public class VAASRepository: VAASRepositoryProtocol {
     }
     
     public func validateTicketing (choosenCert cert: ExtendedCBORWebToken) throws -> Promise<Void> {
-        guard let urlPath = accessTokenInfo?.aud!,
+        guard let urlPath = accessTokenInfo?.aud,
               let url = URL(string: urlPath),
               let iv = UserDefaults.standard.object(forKey: "xnonce"),
-              let verificationMethod = identityDocumentDecorator?.verificationMethod?.first(where: { $0.publicKeyJwk?.use == "enc" }) else  { throw APIError.invalidResponse }
+              let verificationMethod = identityDocumentValidationService?.verificationMethod?.first(where: { $0.publicKeyJwk?.use == "enc" }) else  {
+                  throw APIError.invalidResponse
+                  
+              }
               let certificate = cert
         
         guard let dccData = encodeDCC(dgcString: certificate.vaccinationQRCodeData, iv: iv as! String),

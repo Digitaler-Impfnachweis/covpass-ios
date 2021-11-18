@@ -62,6 +62,9 @@ public struct CustomURLSession: CustomURLSessionProtocol {
                                      delegateQueue: nil)
             session.dataTask(with: urlRequest) { data, response, error in
                 CustomURLSession.updateETag(urlResponse: response)
+                if let httpResponse = response as? HTTPURLResponse, let xNonece = httpResponse.allHeaderFields["x-nonce"] {
+                    UserDefaults.standard.set(xNonece, forKey: "xnonce")
+                }
                 if let error = error {
                     if let error = error as NSError?, error.code == NSURLErrorCancelled {
                         seal.reject(APIError.requestCancelled)
