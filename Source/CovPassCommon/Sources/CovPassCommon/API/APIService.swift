@@ -129,6 +129,7 @@ public struct CustomURLSession: CustomURLSessionProtocol {
 }
 
 public struct APIService: APIServiceProtocol {
+    
     private let url: String
     private let contentType: String = "application/cbor+base45"
     private let customURLSession: CustomURLSessionProtocol
@@ -153,13 +154,7 @@ public struct APIService: APIServiceProtocol {
         }
         return customURLSession.request(request)
     }
-    
-    public func vaasListOfServices(initialisationData: ValidationServiceInitialisation) -> Promise<String> {
-        let requestUrl = initialisationData.serviceIdentity
-        UserDefaults.standard.set(initialisationData.token.string, forKey: "TicketingToken")
-        return vaasListOfServices(url: requestUrl)
-    }
-    
+
     public func vaasListOfServices(url: URL) -> Promise<String> {
         var request = url.urlRequest.GET
         if let etag = APIService.eTagForURL(urlString: request.url?.absoluteString ?? "") {
@@ -170,7 +165,8 @@ public struct APIService: APIServiceProtocol {
     
     public func getAccessTokenFor(url : URL,
                                   servicePath : String,
-                                  publicKey : String) -> Promise<String> {
+                                  publicKey : String,
+                                  ticketToken: String) -> Promise<String> {
         let json: [String: Any] = ["service": servicePath, "pubKey": publicKey]
         
         let jsonData = try? JSONSerialization.data(withJSONObject: json,options: .prettyPrinted)
@@ -178,9 +174,8 @@ public struct APIService: APIServiceProtocol {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.httpBody = jsonData
-        let token = UserDefaults.standard.object(forKey: "TicketingToken") as! String
         
-        request.allHTTPHeaderFields  = ["Authorization" : "Bearer " + token,
+        request.allHTTPHeaderFields  = ["Authorization" : "Bearer " + ticketToken,
                                         "X-Version": "1.0.0",
                                         "content-type": "application/json"]
 
