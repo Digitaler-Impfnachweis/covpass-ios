@@ -11,6 +11,15 @@
         }
       },
       {
+        "package": "CryptoSwift",
+        "repositoryURL": "https://github.com/krzyzanowskim/CryptoSwift.git",
+        "state": {
+          "branch": null,
+          "revision": "4b0565384d3c4c588af09e660535b2c7c9bf5b39",
+          "version": "1.4.2"
+        }
+      },
+      {
         "package": "CertLogic",
         "repositoryURL": "https://github.com/eu-digital-green-certificates/dgc-certlogic-ios",
         "state": {
@@ -29,11 +38,11 @@
         }
       },
       {
-        "package": "FBSnapshotTestCase",
+        "package": "iOSSnapshotTestCase",
         "repositoryURL": "https://github.com/uber/ios-snapshot-test-case",
         "state": {
           "branch": "main",
-          "revision": "f3140d1d4d650dc5bd14ce6ced4cf386594998fa",
+          "revision": "444c218adaa6a99ba0536b4ec9ad5500047d9051",
           "version": null
         }
       },
@@ -69,8 +78,8 @@
         "repositoryURL": "https://github.com/mxcl/PromiseKit",
         "state": {
           "branch": null,
-          "revision": "d2f7ba14bcdc45e18f4f60ad9df883fb9055f081",
-          "version": "6.15.3"
+          "revision": "00afea5360bf1c02ac83209c2c8991f73b5a4e7d",
+          "version": "6.16.1"
         }
       },
       {
@@ -78,8 +87,8 @@
         "repositoryURL": "https://github.com/unrelentingtech/SwiftCBOR",
         "state": {
           "branch": null,
-          "revision": "668c26fc3373d5f1bccbaad7665ca6048797e324",
-          "version": "0.4.3"
+          "revision": "895c9aa84ce3b04106905e398ac870e0cca59d26",
+          "version": "0.4.4"
         }
       },
       {
