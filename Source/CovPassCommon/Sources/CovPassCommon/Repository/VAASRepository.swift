@@ -23,12 +23,13 @@ public class VAASRepository: VAASRepositoryProtocol {
     private let service: APIServiceProtocol
     private var ticket: ValidationServiceInitialisation
     var identityDocumentDecorator: IdentityDocument?
-    
+    var accessTokenInfo: AccessTokenResponse?
+
     public init(service: APIServiceProtocol, ticket: ValidationServiceInitialisation) {
         self.service = service
         self.ticket = ticket
     }
-
+    
     private func identityDocument(identityString: String) throws -> Promise<IdentityDocument> {
         Promise { seal in
             seal.fulfill(try JSONDecoder().decode(IdentityDocument.self, from: identityString.data(using: .utf8)!))
@@ -45,7 +46,7 @@ public class VAASRepository: VAASRepositoryProtocol {
     
     public func fetchValidationService() -> Promise<AccessTokenResponse> {
         firstly {
-            service.vaasListOfServices(initialisationData: ticket)
+            service.vaasListOfServices(url: ticket.serviceIdentity)
         }
         .then { [weak self] stringResponse in
             try (self?.identityDocument(identityString: stringResponse) ?? .init(error: APIError.requestCancelled))
@@ -67,11 +68,17 @@ public class VAASRepository: VAASRepositoryProtocol {
             guard let accessTokenService = services.first(where: { $0.type == "AccessTokenService" }) else {  throw APIError.invalidResponse }
             guard let url = URL(string: accessTokenService.serviceEndpoint) else {  throw APIError.invalidResponse }
             guard let privateKey = Enclave.loadOrGenerateKey(with: "validationKey") else { throw APIError.invalidResponse  }
+            guard let ticketToken = self?.ticket.token.string else { throw APIError.invalidResponse  }
             let pubKey = (X509.derPubKey(for: privateKey) ?? Data()).base64EncodedString()
-            return self?.service.getAccessTokenFor(url: url, servicePath: validationService.id, publicKey: pubKey) ?? .init(error: APIError.requestCancelled)
+            return self?.service.getAccessTokenFor(url: url,
+                                                   servicePath: validationService.id,
+                                                   publicKey: pubKey,
+                                                   ticketToken: ticketToken) ?? .init(error: APIError.requestCancelled)
         }
         .then { [weak self] stringResponse -> Promise<AccessTokenResponse> in
-            return try self?.accessToken(string: stringResponse) ?? .init(error: APIError.requestCancelled)
+            let accessTokenResponse = try self?.accessToken(string: stringResponse) ?? .init(error: APIError.requestCancelled)
+            self?.accessTokenInfo = accessTokenResponse.value
+            return accessTokenResponse
         }
     }
     
