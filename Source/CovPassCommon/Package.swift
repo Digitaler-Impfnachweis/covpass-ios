@@ -28,7 +28,7 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .target(
             name: "CovPassCommon",
-            dependencies: ["SwiftCBOR", "Scanner", "PromiseKit", "ASN1Decoder", "CertLogic", "JWTDecode"],
+            dependencies: ["SwiftCBOR", "Scanner", "PromiseKit", "ASN1Decoder", "CertLogic", "JWTDecode", "CryptoSwift"],
             resources: [.process("Resources")]
         ),
         .testTarget(
