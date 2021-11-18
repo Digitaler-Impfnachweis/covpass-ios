@@ -120,8 +120,7 @@ class ChooseCertificateViewModel: ChooseCertificateViewModelProtocol {
                     return nil
                 }
                 return CertificateItem(viewModel: vm!, action: {
-                    
-                    
+                    self.chooseSert(cert: cert)
                 })
             }
     }
@@ -178,5 +177,14 @@ class ChooseCertificateViewModel: ChooseCertificateViewModelProtocol {
     
     func cancel() {
         resolver?.cancel()
+    }
+    
+    func chooseSert(cert: ExtendedCBORWebToken) {
+        firstly {
+            try vaasRepository.validateTicketing(choosenCert: cert)
+        }
+        .done { () in
+            
+        }
     }
 }
