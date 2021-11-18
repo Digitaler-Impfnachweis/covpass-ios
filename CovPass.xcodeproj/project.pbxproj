@@ -12,6 +12,7 @@
 		091CEC382729A20F00F8514F /* TrustedListDetailsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091CEC362729A20F00F8514F /* TrustedListDetailsRouter.swift */; };
 		091CEC392729A30A00F8514F /* TrustedListDetailsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0993330427299700000D6BF6 /* TrustedListDetailsRouter.swift */; };
 		091CEC3A2729A30A00F8514F /* TrustedListDetailsSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0993330327299700000D6BF6 /* TrustedListDetailsSceneFactory.swift */; };
+		091D878727463D800097C80D /* CryptoSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 091D878627463D800097C80D /* CryptoSwift */; };
 		092090E027060FC30000713F /* ValidatorOverviewViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092090DF27060FC30000713F /* ValidatorOverviewViewModelTests.swift */; };
 		09331776273ABB2A0036DB2A /* ChooseCertificateRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09331765273ABB2A0036DB2A /* ChooseCertificateRouter.swift */; };
 		09331777273ABB2A0036DB2A /* ChooseCertificateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09331766273ABB2A0036DB2A /* ChooseCertificateViewModel.swift */; };
@@ -497,6 +498,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				21DAD6E1264F0B11003407FC /* CovPassUI in Frameworks */,
+				091D878727463D800097C80D /* CryptoSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1496,6 +1498,7 @@
 			name = CovPassApp;
 			packageProductDependencies = (
 				21DAD6E0264F0B11003407FC /* CovPassUI */,
+				091D878627463D800097C80D /* CryptoSwift */,
 			);
 			productName = VaccinationPassApp;
 			productReference = 65D6D4DE25F8B8FB000CB339 /* CovPassApp.app */;
@@ -1604,6 +1607,7 @@
 			packageReferences = (
 				0939EAB627043BD80086729C /* XCRemoteSwiftPackageReference "Kronos" */,
 				099E6901270DED09002C6926 /* XCRemoteSwiftPackageReference "ios-snapshot-test-case" */,
+				091D878527463D800097C80D /* XCRemoteSwiftPackageReference "CryptoSwift" */,
 			);
 			productRefGroup = 65D6D47325F7A634000CB339 /* Products */;
 			projectDirPath = "";
@@ -2297,6 +2301,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		091D878527463D800097C80D /* XCRemoteSwiftPackageReference "CryptoSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/krzyzanowskim/CryptoSwift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 		0939EAB627043BD80086729C /* XCRemoteSwiftPackageReference "Kronos" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/MobileNativeFoundation/Kronos.git";
@@ -2316,6 +2328,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		091D878627463D800097C80D /* CryptoSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 091D878527463D800097C80D /* XCRemoteSwiftPackageReference "CryptoSwift" */;
+			productName = CryptoSwift;
+		};
 		0939EAB727043BD80086729C /* Kronos */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 0939EAB627043BD80086729C /* XCRemoteSwiftPackageReference "Kronos" */;
