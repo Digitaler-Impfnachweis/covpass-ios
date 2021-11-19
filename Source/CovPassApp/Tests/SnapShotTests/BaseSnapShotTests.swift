@@ -29,9 +29,10 @@ class BaseSnapShotTests: FBSnapshotTestCase {
     ///   - view: the view to snapshot
     ///   - record: record it or not
     ///   - height: height of the view with should be recorded. Default is the main screen height
-    func verifyView(view: UIView, record: Bool = false, height: CGFloat = UIScreen.main.bounds.height) {
+    func verifyView(view: UIView, record: Bool = true, height: CGFloat = UIScreen.main.bounds.height, waitAfter: TimeInterval = 0.0) {
         recordMode = record
         view.frame.size = CGSize(width: UIScreen.main.bounds.width, height: height)
+        RunLoop.current.run(for: waitAfter)
         FBSnapshotVerifyView(view,
                              identifier: Locale.preferredLanguages[0] ,
                              suffixes: NSOrderedSet(arrayLiteral: "_64"),
@@ -45,7 +46,7 @@ class BaseSnapShotTests: FBSnapshotTestCase {
         let expectationHere = expectation(description: "Some Expectation")
         vc.view.bounds = UIScreen.main.bounds
         DispatchQueue.main.asyncAfter(deadline: .now() + wait) {
-            self.verifyView(vc: vc)
+            self.verifyView(vc: vc, record: record)
             expectationHere.fulfill()
         }
         self.waitForExpectations(timeout: 1.0 + wait, handler: nil)
