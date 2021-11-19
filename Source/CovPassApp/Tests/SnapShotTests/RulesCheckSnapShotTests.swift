@@ -600,7 +600,7 @@ class RulesCheckSnapShotTests: BaseSnapShotTests {
                                      certLogic: certLogicMock)
         sut.date = DateUtils.parseDate("2021-04-26T15:05:00")!
         let vc = RuleCheckViewController(viewModel: sut)
-        verifyView(view: vc.view, height: 1300, waitAfter: 2.2)
+        verifyView(view: vc.view, height: 1300, waitAfter: 0.2)
     }
 }
 
