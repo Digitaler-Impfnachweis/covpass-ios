@@ -113,15 +113,16 @@ class RuleCheckViewModel: BaseViewModel, CancellableViewModelProtocol {
     
     func validateCertificates() {
         DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-            guard let list = self?.certificateList else {
+            guard var list = self?.certificateList else {
                 DispatchQueue.main.async {
                     self?.delegate?.viewModelDidUpdate()
                 }
                 return
             }
-            var certificatePairs = self?.repository.matchedCertificates(for: list) ?? []
-            certificatePairs = certificatePairs.filter({ $0.certificates.contains(where: { !$0.vaccinationCertificate.isInvalid && $0.vaccinationCertificate.isExpired || !$0.vaccinationCertificate.isInvalid }) })
-            self?.filteredCertsIsHidden = certificatePairs.count == list.certificates.count
+            let orginalCount = list.certificates.count
+            list.certificates = list.certificates.filterValidAndNotExpiredCerts
+            self?.filteredCertsIsHidden = orginalCount == list.certificates.count
+            let certificatePairs = self?.repository.matchedCertificates(for: list) ?? []
             var validationResult = [[CertificateResult]]()
             for pair in certificatePairs {
                 var results = [CertificateResult]()
