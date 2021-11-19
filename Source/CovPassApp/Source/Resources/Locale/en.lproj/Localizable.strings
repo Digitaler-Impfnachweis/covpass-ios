@@ -84,16 +84,6 @@
 
 "dialog_update_info_notification_action_button" = "OK";
 
-"certificate_will_be_revoked_notification_icon_new" = "New";
-
-"certificate_will_be_revoked_notification_title" = " Your certificate will be revoked by 11.11.2021";
-
-"certificate_will_be_revoked_notification_message" = "For security reasons, all certificates coming from the pharmacy you visited must be reissued.\n\nYour certificate will be revoked on 11/11/2021. You can have a new vaccination certificate issued free of charge at your pharmacy by presenting your yellow vaccination certificate and a photo ID.";
-
-"certificate_will_be_revoked_notification_button" = "OK";
-
-"accessibility_certificate_will_be_revoked_info_announce" = "The view \"Certificate will be revoked\" has been opened";
-
 
 /********** start screen **********/
 
@@ -159,21 +149,21 @@
 
 "accessibility_scan_camera_torch_off" = "Switch off torch";
 
-"accessibility_certificate_add_popup_announce" = "The view \"Adding a certificate\" has been opened";
+"accessibility_certificate_add_popup_announce" = "The view \"Scan QR code\" has been opened";
 
-"accessibility_certificate_add_popup_closing_announce" = "The view \"Adding a certificate\" has been closed";
+"accessibility_certificate_add_popup_closing_announce" = "The view \"Scan QR code\" has been closed";
 
 "accessibility_scan_success_announce" = "Certificate of %@ was added successfully";
 
 "accessibility_certificate_add_popup_image" = "Image: Person holds smartphone over three different certificates with QR code";
 
-"certificate_add_popup_title" = "Adding a certificate";
+"certificate_add_popup_title" = "Scan QR code";
 
 "certificate_add_popup_note_title" = "Your smartphone is not protected by a code";
 
 "certificate_add_popup_note_message" = "The CovPass app saves sensitive data to your smartphone. To protect your data against access by strangers, we recommend that you set up an unlock code for your smartphone.";
 
-"certificate_add_popup_message" = "Scan the QR code on an EU Digital COVID Certificate. The certificate is transferred directly to the CovPass app.";
+"certificate_add_popup_message" = "Scan the QR code on an EU Digital COVID Certificate. The certificate is transferred directly to the CovPass app.\n\nFor booking purposes (e.g. flight and hotel), you can submit your added COVID certificate to the provider online. To do so, scan the QR code displayed during the booking process.";
 
 "certificate_add_popup_action_title" = "Which QR code can I scan and save to my smartphone?";
 
@@ -258,6 +248,16 @@
 "certificate_check_validity_travel_rules_not_up_to_message" = "The rules of entry are updated in the app every 24 hours. Unfortunately, the last update failed. Make sure your smartphone is connected to the internet and try again.";
 
 "certificate_check_validity_selection_country" = "Country";
+
+"no_cert_applicable_for_validation_dialog_header" = "No check possible";
+
+"no_cert_applicable_for_validation_dialog_message" = "A validity check of your currently deposited certificates is unfortunately not possible.";
+
+"no_cert_applicable_for_validation_positive_button_text" = "OK";
+
+"certificate_check_validity_not_all_certs_checkable_title" = "Unfortunately not all certificates are checkable!";
+
+"certificate_check_validity_not_all_certs_checkable_message" = "Unfortunately, a validity check is not possible for some of your deposited certificates. These will be excluded from the check.";
 
 "accessibility_certificate_check_validity_selection_country_label_close" = "Close";
 
@@ -464,11 +464,15 @@
 
 "certificate_check_validity_selection_date_action_button" = "Next";
 
+"accessibility_certificate_check_validity_selection_date_label_action_button" = "Confirm date and continue to time selection";
+
 "certificate_check_validity_selection_time_title" = "Select time";
 
 "accessibility_certificate_check_validity_selection_time_label_close" = "Close";
 
 "certificate_check_validity_selection_time_action_button" = "OK";
+
+"accessibility_certificate_check_validity_selection_time_label_action_button" = "Confirm time";
 
 "certificate_check_validity_loading" = "Certificates are being validated";
 
@@ -1093,9 +1097,9 @@
 
 "accessibility_app_information_title_update_closing_announce" = "The view \"Update travel rules\" has been closed";
 
-"accessibility_app_information_datenschutz_announce" = "Privacy policy has been opened";
+"accessibility_app_information_datenschutz_announce" = "Privacy notice has been opened";
 
-"accessibility_app_information_datenschutz_closing_announce" = "Privacy policy has been closed";
+"accessibility_app_information_datenschutz_closing_announce" = "Privacy notice has been closed";
 
 "accessibility_app_information_title_contact_announce" = "Contact has been opened";
 
@@ -1129,7 +1133,7 @@
 
 "app_information_title_faq_linked" = "#Frequently asked questions::$0#";
 
-"app_information_title_datenschutz" = "Privacy policy";
+"app_information_title_datenschutz" = "Privacy notice";
 
 "app_information_title_company_details" = "Legal information";
 
@@ -1173,3 +1177,170 @@
 "accessibility_qr_code" = "QR code";
 
 "accessibility_button" = "Button";
+
+
+/********** popup: share certification **********/
+
+"share_certificate_title" = "Share your certificates for booking purposes";
+
+"share_certificate_details_provider" = "Provider";
+
+"share_certificate_details_booking" = "Booking";
+
+"share_certificate_message" = "The provider wants to ensure that a valid certificate is available for your booking. Your consent is required for the provider to retrieve your booking details and release your stored certificates.";
+
+"share_certificate_consent_title" = "Your consent";
+
+"share_certificate_consent_message" = "By tapping on “Accept”, you consent to the following steps:";
+
+"share_certificate_consent_first_list_item" = "The app will retrieve from the provider %@ the name and date of birth of the person specified at the time of booking, the booking details relevant to the verification (e.g. destination country and date of travel) and the certificate requirements specified by the provider for your booking.";
+
+"share_certificate_consent_second_list_item" = "Once retrieved, the app will use this data to determine which of your stored certificates can be used";
+
+"share_certificate_notes_first_list_item" = "You are not obliged to allow your certificate to be verified with the CovPass app. There are other ways to prove that you have been vaccinated, tested negative or recovered from coronavirus.";
+
+"share_certificate_notes_second_list_item" = "The requirements for the certificate are set by the provider. The RKI has no influence on this. Please contact the provider for more information about the certificate requirements.";
+
+"share_certificate_notes_third_list_item" = "The determination of suitable certificates takes place locally on your smartphone. No data will be transmitted to the RKI or the provider.";
+
+"share_certificate_notes_fourth_list_item" = "The RKI does not receive the information about your booking or about the certificates you have stored.";
+
+"share_certificate_note_privacy_notice" = "Detailed information about this data processing is available in the privacy notice:";
+
+"share_certificate_privacy_notice_title" = "Privacy notice";
+
+"share_certificate_privacy_notice_linked" = "#Privacy notice::$0#";
+
+"share_certificate_action_button_agree" = "Accept";
+
+"share_certificate_action_button_cancel" = "Cancel";
+
+"accessibility_share_certificate_label_close" = "Close";
+
+"accessibility_share_certificate_label_back" = "Back";
+
+"accessibility_share_certificate_announce" = "The \"Release certificates for booking purposes\" view has been opened.";
+
+"accessibility_share_certificate_closing_announce" = "The \"Release certificates for booking purposes\" view has been closed.";
+
+"share_certificate_selection_title" = "Select certificate";
+
+"share_certificate_selection_message" = "Your certificate must meet the following requirements:";
+
+"share_certificate_selection_requirements_date_of_birth" = "Date of birth";
+
+"accessibility_share_certificate_selection_label_close" = "Close";
+
+"accessibility_share_certificate_selection_label_back" = "Back";
+
+"accessibility_share_certificate_selection_announce" = "The \"Select certificate\" view has been opened.";
+
+"accessibility_share_certificate_selection_closing_announce" = "The \"Select certificate\" view has been closed.";
+
+"share_certificate_selection_no_match_title" = "No certificate matches the above requirements.";
+
+"share_certificate_selection_no_match_subline" = "Please check if your certificate stored in the app matches the requirements.";
+
+"share_certificate_selection_no_match_action_button" = "Close";
+
+"share_certificate_transmission_title" = "Submitting your certificate for verification";
+
+"share_certificate_transmission_details_provider" = "Provider";
+
+"share_certificate_transmission_details_booking" = "Booking";
+
+"share_certificate_transmission_message" = "The selected certificate and your booking data will now be transmitted to the provider's verification partner. Your consent is required for the transmission of your data to the verification service.";
+
+"share_certificate_transmission_consent_title" = "Your consent";
+
+"share_certificate_transmission_consent_message" = "By tapping on “Accept”, you consent to the transfer of the following data to the verification partner of %@:";
+
+"share_certificate_transmission_consent_first_list_item" = "Content and electronic signature of the selected certificate (including name and date of birth of the certificate holder, validity period, issuer and date of issue, vaccine/test/recovery details).";
+
+"share_certificate_transmission_consent_second_list_item" = "The booking details retrieved from the provider %@:";
+
+"share_certificate_transmission_consent_second_list_item_first_subitem" = "Period during which the certificate must be valid (travel duration or event date)";
+
+"share_certificate_transmission_consent_second_list_item_second_subitem" = "For travel bookings: Country of origin and country of destination or journey";
+
+"share_certificate_transmission_consent_second_list_item_third_subitem" = "For cross-border travel: Certificate requirements imposed by the destination country";
+
+"share_certificate_transmission_consent_second_list_item_fourth_subitem" = "Further certificate requirements on the part of the provider (e.g. which vaccines or test procedures are accepted)";
+
+"share_certificate_transmission_notes_first_list_item" = "The verification partner will check whether the electronic signature is genuine and that the technical expiration date has not passed. You can view the technical expiration date and the transmitted certificate contents in the app when viewing the certificate in full.";
+
+"share_certificate_transmission_notes_second_list_item" = "The certificates contain sensitive data concerning health. You should therefore only allow providers to verify certificates if you know and trust them.";
+
+"share_certificate_transmission_notes_third_list_item" = "The RKI is not responsible for the data processing performed by the provider and the verification partner. Please read their privacy notices so that you know what your data is used for and how it is used.";
+
+"share_certificate_transmission_notes_fourth_list_item" = "The verification partner will immediately inform the provider of the result of this verification. The only information communicated will be whether the verification was successful or not.";
+
+"share_certificate_transmission_note_privacy_notice" = "Detailed information about this data processing is available in the privacy notice:";
+
+"share_certificate_transmission_privacy_notice_title" = "Privacy notice";
+
+"share_certificate_transmission_privacy_notice_linked" = "#Privacy notice::$0#";
+
+"share_certificate_transmission_action_button_agree" = "Accept";
+
+"accessibility_share_certificate_transmission_label_close" = "Close";
+
+"accessibility_share_certificate_transmission_label_back" = "Back";
+
+"accessibility_share_certificate_transmission_announce" = "The \"Submitting your certificate for verification\" view has been opened.";
+
+"accessibility_share_certificate_transmission_closing_announce" = "The \"Submitting your certificate for verification\" view has been closed.";
+
+"share_certificate_detail_view_requirements_met_title" = "Certificate meets the requirements of the provider";
+
+"share_certificate_detail_view_requirements_met_subline" = "Verified by %@";
+
+"share_certificate_detail_view_requirements_met_message" = "If you have any questions, please contact the provider %@.";
+
+"share_certificate_detail_view_requirements_not_verifiable_title" = "Certificate is not fully auditable";
+
+"share_certificate_detail_view_requirements_not_verifiable_subline" = "Verified by %@";
+
+"share_certificate_detail_view_requirements_not_verifiable_message" = "Unfortunately, an automatic check is not possible. Please check the information marked in yellow yourself.\n\nIf you have any questions, please contact the provider %@.";
+
+"share_certificate_detail_view_requirements_not_met_title" = "Certificate does not meet the requirements of the provider";
+
+"share_certificate_detail_view_requirements_not_met_subline" = "Verified by %@";
+
+"share_certificate_detail_view_requirements_not_met_message" = "The information that does not meet the requirements is marked in red below.\n\nIf you have any questions, please contact the provider %@.";
+
+"error_share_certificate_qr_code_not_recognized_title" = "QR code was not recognized";
+
+"error_share_certificate_qr_code_not_recognized_message" = "The scanned QR code is not valid for this booking. Please check if the QR code is intended for the CovPass app.\n\nYou can find more information in the Frequently Asked Questions.";
+
+"error_share_certificate_qr_code_not_recognized_action_button" = "OK";
+
+"error_share_certificate_provider_not_verified_title" = "The identity of the provider could not be verified";
+
+"error_share_certificate_provider_not_verified_message" = "Unfortunately, an error occurred while verifying the identity of the provider %@. Please try again later.";
+
+"error_share_certificate_provider_not_verified_action_button" = "OK";
+
+"error_share_certificate_test_partner_not_verified_title" = "The identity of the test partner could not be verified";
+
+"error_share_certificate_test_partner_not_verified_message" = "The booking portal suggests sharing your certificate with the following verification partner: %@. We do not know this verification partner.\n\nFor a list of supported verification partners, see the Frequently Asked Questions.";
+
+"error_share_certificate_test_partner_not_verified_action_button" = "OK";
+
+"error_share_certificate_no_connection_to_provider_title" = "Could not connect to the provider";
+
+"error_share_certificate_no_connection_to_provider_message" = "Check if your smartphone is connected to the Internet and try again.";
+
+"error_share_certificate_no_connection_to_provider_action_button" = "OK";
+
+"error_share_certificate_no_verification_possible_title" = "The certificate could not be verified";
+
+"error_share_certificate_no_verification_possible_message" = "Unfortunately, the verification could not be completed successfully. Possible reasons can be found in the Frequently Asked Questions. Please try again at a later time.";
+
+"error_share_certificate_no_verification_possible_action_button" = "OK";
+
+"cancellation_share_certificate_title" = "Do you really want to end the process?";
+
+"cancellation_share_certificate_action_button_no" = "Not now";
+
+"cancellation_share_certificate_action_button_yes" = "Yes, finish";
