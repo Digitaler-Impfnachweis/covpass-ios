@@ -17,6 +17,8 @@ private enum Constants {
     enum Keys {
         static let timeHintTitle = "certificate_check_validity_travel_rules_not_up_to_title".localized
         static let timeHintDescription = "certificate_check_validity_travel_rules_not_up_to_message".localized
+        static let filteredCertsTitle = "certificate_check_validity_not_all_certs_checkable_title".localized
+        static let filteredCertstDescription = "certificate_check_validity_not_all_certs_checkable_message".localized
     }
     enum Config {
         static let dayToAdd = 1
@@ -75,6 +77,14 @@ class RuleCheckViewModel: BaseViewModel, CancellableViewModelProtocol {
         return false
     }
     
+    var filteredCertsTitle: String { Constants.Keys.filteredCertsTitle }
+    
+    var filteredCertsSubTitle: String { Constants.Keys.filteredCertstDescription }
+    
+    var filteredCertsIcon: UIImage { .warning }
+    
+    var filteredCertsIsHidden: Bool = true
+    
     // MARK: - Lifecycle
     
     init(router: RuleCheckRouterProtocol?,
@@ -111,6 +121,7 @@ class RuleCheckViewModel: BaseViewModel, CancellableViewModelProtocol {
             }
             var certificatePairs = self?.repository.matchedCertificates(for: list) ?? []
             certificatePairs = certificatePairs.filter({ $0.certificates.contains(where: { $0.vaccinationCertificate.isExpired || !$0.vaccinationCertificate.isInvalid }) })
+            self?.filteredCertsIsHidden = !certificatePairs.filter({ $0.certificates.contains(where: { $0.vaccinationCertificate.isExpired }) }).isEmpty
             var validationResult = [[CertificateResult]]()
             for pair in certificatePairs {
                 var results = [CertificateResult]()

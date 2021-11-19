@@ -22,6 +22,10 @@ private enum Constants {
             static let topOffset: CGFloat = 0.0
             static let bottomOffset: CGFloat = 12.0
         }
+        enum FilteredCertsView {
+            static let topOffset: CGFloat = 0.0
+            static let bottomOffset: CGFloat = 12.0
+        }
     }
 }
 
@@ -36,7 +40,8 @@ class RuleCheckViewController: UIViewController {
     @IBOutlet var scrollView: UIScrollView!
     @IBOutlet var stackView: UIStackView!
     @IBOutlet var rulesHintView: HintView!
-    
+    @IBOutlet var filteredCertsHintView: HintView!
+
     // MARK: - Properties
 
     private(set) var viewModel: RuleCheckViewModel
@@ -58,6 +63,7 @@ class RuleCheckViewController: UIViewController {
         super.viewDidLoad()
         configureText()
         setupTimeHintView()
+        setupFilteredCertsView()
         viewModel.updateRules()
     }
 
@@ -103,6 +109,7 @@ class RuleCheckViewController: UIViewController {
         }
         
         updateTimeHintView()
+        updateFilteredCertsView()
 
         if viewModel.isLoading {
             addActivityIndicator()
@@ -132,6 +139,23 @@ class RuleCheckViewController: UIViewController {
         rulesHintView.containerBottomConstraint.constant = Constants.Config.RulesHintView.bottomOffset
         rulesHintView.enableAccessibility(label: "\(viewModel.timeHintTitle)\n\(viewModel.timeHintSubTitle)",
                                           traits: .staticText)
+    }
+    
+    private func setupFilteredCertsView() {
+        filteredCertsHintView.isHidden = viewModel.filteredCertsIsHidden
+        filteredCertsHintView.iconView.image = viewModel.filteredCertsIcon
+        filteredCertsHintView.iconLabel.text = ""
+        filteredCertsHintView.iconLabel.isHidden = true
+        filteredCertsHintView.titleLabel.attributedText = viewModel.filteredCertsTitle.styledAs(.header_3)
+        filteredCertsHintView.bodyLabel.attributedText = viewModel.filteredCertsSubTitle.styledAs(.body)
+        filteredCertsHintView.containerTopConstraint.constant = Constants.Config.FilteredCertsView.topOffset
+        filteredCertsHintView.containerBottomConstraint.constant = Constants.Config.FilteredCertsView.bottomOffset
+        filteredCertsHintView.enableAccessibility(label: "\(viewModel.filteredCertsTitle)\n\(viewModel.filteredCertsSubTitle)",
+                                                  traits: .staticText)
+    }
+    
+    private func updateFilteredCertsView() {
+        filteredCertsHintView.isHidden = viewModel.filteredCertsIsHidden
     }
     
     private func updateTimeHintView() {
