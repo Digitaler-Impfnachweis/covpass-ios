@@ -121,7 +121,7 @@ class RuleCheckViewModel: BaseViewModel, CancellableViewModelProtocol {
             }
             var certificatePairs = self?.repository.matchedCertificates(for: list) ?? []
             certificatePairs = certificatePairs.filter({ $0.certificates.contains(where: { $0.vaccinationCertificate.isExpired || !$0.vaccinationCertificate.isInvalid }) })
-            self?.filteredCertsIsHidden = !certificatePairs.filter({ $0.certificates.contains(where: { $0.vaccinationCertificate.isExpired }) }).isEmpty
+            self?.filteredCertsIsHidden = !certificatePairs.filter({ $0.certificates.contains(where: { $0.vaccinationCertificate.isExpired }) }).isEmpty || certificatePairs.isEmpty
             var validationResult = [[CertificateResult]]()
             for pair in certificatePairs {
                 var results = [CertificateResult]()
