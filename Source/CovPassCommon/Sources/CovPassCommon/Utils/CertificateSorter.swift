@@ -139,8 +139,8 @@ extension Array where Element == ExtendedCBORWebToken {
         }
     }
     
-    public var filterValidAndNotExpiredCerts: [ExtendedCBORWebToken] {
-        self.filter({ !$0.vaccinationCertificate.isInvalid && $0.vaccinationCertificate.isExpired || !$0.vaccinationCertificate.isInvalid  })
+    public var filterValidAndNotExpiredCertsWhichArenNotFraud: [ExtendedCBORWebToken] {
+        self.filter({ ($0.vaccinationCertificate.isExpired && !$0.vaccinationCertificate.isFraud) || !$0.vaccinationCertificate.isInvalid  })
     }
 }
 

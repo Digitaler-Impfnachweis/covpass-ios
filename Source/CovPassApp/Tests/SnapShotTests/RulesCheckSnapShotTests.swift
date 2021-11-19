@@ -132,7 +132,8 @@ class RulesCheckSnapShotTests: BaseSnapShotTests {
                                                               gnt: "STEFAN",
                                                               fnt: "BAUER")
         firstCert.vaccinationCertificate.exp = Date().addingTimeInterval(-1000)
-        
+        firstCert.vaccinationCertificate.invalid = true
+
         var secondCert: ExtendedCBORWebToken = CBORWebToken
             .mockVaccinationCertificate
             .mockVaccinationUVCI("2")
@@ -249,75 +250,6 @@ class RulesCheckSnapShotTests: BaseSnapShotTests {
         verifyView(view: vc.view, height: 1300, waitAfter: 0.2)
     }
     
-    
-    func testWithCertificatesWithFraudCertIsExpired() {
-        let certLogicMock = DCCCertLogicMock()
-        let vaccinationRepoMock = VaccinationRepositoryMock()
-        
-        let vacinationDate = DateUtils.parseDate("2021-04-26T15:05:00")!
-        var firstCert: ExtendedCBORWebToken = CBORWebToken
-            .mockVaccinationCertificate
-            .mockVaccinationUVCI("1")
-            .mockVaccinationSetDate(vacinationDate)
-            .extended(vaccinationQRCodeData:"1")
-        firstCert.vaccinationCertificate.hcert.dgc.nam = Name(gn: "Stefan ",
-                                                              fn: "Bauer (EXPIRED AND INVALID)",
-                                                              gnt: "STEFAN",
-                                                              fnt: "BAUER")
-        firstCert.vaccinationCertificate.invalid = true
-        firstCert.vaccinationCertificate.exp = Date().addingTimeInterval(-1000)
-
-        var secondCert: ExtendedCBORWebToken = CBORWebToken
-            .mockVaccinationCertificate
-            .mockVaccinationUVCI("2")
-            .mockVaccinationSetDate(vacinationDate)
-            .extended(vaccinationQRCodeData:"2")
-        secondCert.vaccinationCertificate.hcert.dgc.nam = Name(gn: "Samuel T.",
-                                                               fn: "Hamilton",
-                                                               gnt: "Samuel T.",
-                                                               fnt: "Hamilton")
-        
-        var thirdCert: ExtendedCBORWebToken = CBORWebToken
-            .mockTestCertificate
-            .mockVaccinationUVCI("2")
-            .mockVaccinationSetDate(vacinationDate)
-            .extended(vaccinationQRCodeData:"2")
-        thirdCert.vaccinationCertificate.hcert.dgc.nam = Name(gn: "Tim",
-                                                              fn: "Berg",
-                                                              gnt: "Tim",
-                                                              fnt: "Berg")
-        
-        var fourthCert: ExtendedCBORWebToken = CBORWebToken
-            .mockRecoveryCertificate
-            .mockVaccinationUVCI("2")
-            .mockVaccinationSetDate(vacinationDate)
-            .extended(vaccinationQRCodeData:"2")
-        fourthCert.vaccinationCertificate.hcert.dgc.nam = Name(gn: "Sabrina",
-                                                               fn: "Vogler",
-                                                               gnt: "Sabrina",
-                                                               fnt: "Vogler")
-        
-        let certificates = [
-            fourthCert,
-            thirdCert,
-            firstCert,
-            secondCert
-        ]
-        
-        vaccinationRepoMock.certificates = certificates
-        certLogicMock.validateResult = .init(arrayLiteral: .init(rule: nil,
-                                                                 result: .init(rawValue: 1)!,
-                                                                 validationErrors: nil))
-        let sut = RuleCheckViewModel(router: nil,
-                                     resolvable: nil,
-                                     repository: vaccinationRepoMock,
-                                     certLogic: certLogicMock)
-        sut.date = DateUtils.parseDate("2021-04-26T15:05:00")!
-        let vc = RuleCheckViewController(viewModel: sut)
-        verifyView(view: vc.view, height: 1300, waitAfter: 0.2)
-    }
-    
-    
     func testWithCertificatesWithFraudCertAndExpired() {
         let certLogicMock = DCCCertLogicMock()
         let vaccinationRepoMock = VaccinationRepositoryMock()
@@ -333,6 +265,7 @@ class RulesCheckSnapShotTests: BaseSnapShotTests {
                                                               gnt: "STEFAN",
                                                               fnt: "BAUER")
         firstCert.vaccinationCertificate.exp = Date().addingTimeInterval(-1000)
+        firstCert.vaccinationCertificate.invalid = true
 
         var secondCert: ExtendedCBORWebToken = CBORWebToken
             .mockVaccinationCertificate
@@ -434,6 +367,7 @@ class RulesCheckSnapShotTests: BaseSnapShotTests {
                                                               gnt: "STEFAN",
                                                               fnt: "BAUER")
         firstCert.vaccinationCertificate.exp = Date().addingTimeInterval(-1000)
+        firstCert.vaccinationCertificate.invalid = true
 
         var secondCert: ExtendedCBORWebToken = CBORWebToken
             .mockVaccinationCertificate
@@ -445,6 +379,7 @@ class RulesCheckSnapShotTests: BaseSnapShotTests {
                                                                gnt: "Samuel T.",
                                                                fnt: "Hamilton")
         secondCert.vaccinationCertificate.exp = Date().addingTimeInterval(-1000)
+        secondCert.vaccinationCertificate.invalid = true
 
         var thirdCert: ExtendedCBORWebToken = CBORWebToken
             .mockTestCertificate
@@ -456,6 +391,7 @@ class RulesCheckSnapShotTests: BaseSnapShotTests {
                                                               gnt: "Tim",
                                                               fnt: "Berg")
         thirdCert.vaccinationCertificate.exp = Date().addingTimeInterval(-1000)
+        thirdCert.vaccinationCertificate.invalid = true
 
         var fourthCert: ExtendedCBORWebToken = CBORWebToken
             .mockRecoveryCertificate
@@ -467,6 +403,7 @@ class RulesCheckSnapShotTests: BaseSnapShotTests {
                                                                gnt: "Sabrina",
                                                                fnt: "Vogler")
         fourthCert.vaccinationCertificate.exp = Date().addingTimeInterval(-1000)
+        fourthCert.vaccinationCertificate.invalid = true
 
         let certificates = [
             fourthCert,

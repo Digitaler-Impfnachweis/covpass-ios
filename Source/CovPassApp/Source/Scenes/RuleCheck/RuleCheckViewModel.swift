@@ -120,9 +120,9 @@ class RuleCheckViewModel: BaseViewModel, CancellableViewModelProtocol {
                 return
             }
             let orginalCount = list.certificates.count
-            list.certificates = list.certificates.filterValidAndNotExpiredCerts
-            self?.filteredCertsIsHidden = orginalCount == list.certificates.count
+            list.certificates = list.certificates.filterValidAndNotExpiredCertsWhichArenNotFraud
             let certificatePairs = self?.repository.matchedCertificates(for: list) ?? []
+            self?.filteredCertsIsHidden = orginalCount == list.certificates.count
             var validationResult = [[CertificateResult]]()
             for pair in certificatePairs {
                 var results = [CertificateResult]()
