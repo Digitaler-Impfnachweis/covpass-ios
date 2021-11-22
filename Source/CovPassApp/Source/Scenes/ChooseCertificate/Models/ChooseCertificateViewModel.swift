@@ -45,19 +45,25 @@ class ChooseCertificateViewModel: ChooseCertificateViewModelProtocol {
     private var certificates: [ExtendedCBORWebToken]? { certificateList.certificates }
     private var certificateList = CertificateList(certificates: [])
     private var filteredCertificates: [ExtendedCBORWebToken] {
-        certificates?.filter(types: typeFilter,
-                             givenName: givenNameFilter,
-                             familyName: familyNameFilter,
-                             dob: dobFilter) ?? []
+        guard let typeFilter = typeFilter,
+              let givenNameFilter = givenNameFilter,
+              let familyNameFilter = familyNameFilter,
+              let dobFilter = dobFilter else {
+                  return []
+              }
+        return certificates?.filter(types: typeFilter,
+                                    givenName: givenNameFilter,
+                                    familyName: familyNameFilter,
+                                    dob: dobFilter) ?? []
     }
     
-    var typeFilter: [CertType]
+    var typeFilter: [CertType]?
     
-    var givenNameFilter: String
+    var givenNameFilter: String?
     
-    var familyNameFilter: String
+    var familyNameFilter: String?
     
-    var dobFilter: String
+    var dobFilter: String?
     
     var title: String {
         return Constant.Keys.title
@@ -72,11 +78,19 @@ class ChooseCertificateViewModel: ChooseCertificateViewModelProtocol {
     }
     
     var certdetails: String {
+        guard let givenNameFilter = givenNameFilter,
+              let familyNameFilter = familyNameFilter,
+              let dobFilter = dobFilter else {
+                  return ""
+              }
         return "\(givenNameFilter) \(familyNameFilter)\n\(dobLabel): \(dobFilter)\n\(availableCertTypes)"
     }
     
     var availableCertTypes: String {
-        typeFilter.map {
+        guard let typeFilter = typeFilter else {
+            return ""
+        }
+        return typeFilter.map {
             switch $0 {
             case .recovery: return Constant.Keys.recoveryLabel
             case .test: return Constant.Keys.testLabel
@@ -120,7 +134,7 @@ class ChooseCertificateViewModel: ChooseCertificateViewModelProtocol {
                     return nil
                 }
                 return CertificateItem(viewModel: vm!, action: {
-                    self.chooseSert(cert: cert)
+                    //self.chooseSert(cert: cert)
                 })
             }
     }
@@ -132,19 +146,11 @@ class ChooseCertificateViewModel: ChooseCertificateViewModelProtocol {
     init(router: ChooseCertificateRouterProtocol?,
          repository: VaccinationRepositoryProtocol,
          vaasRepository: VAASRepositoryProtocol,
-         resolvable: Resolver<Void>?,
-         givenNameFilter: String = "ERIKA<DOERTE",
-         familyNameFilter: String = "SCHMITT<MUSTERMANN",
-         dobFilter: String = "1964-08-12",
-         typeFilter: [CertType] =  [.vaccination, .recovery, .test]) {
+         resolvable: Resolver<Void>?) {
         self.router = router
         self.repository = repository
         self.resolver = resolvable
         self.vaasRepository = vaasRepository
-        self.givenNameFilter = givenNameFilter
-        self.familyNameFilter = familyNameFilter
-        self.dobFilter = dobFilter
-        self.typeFilter = typeFilter
     }
 
     // MARK: - Methods
@@ -169,7 +175,7 @@ class ChooseCertificateViewModel: ChooseCertificateViewModelProtocol {
         .done { () in
             self.isLoading = false
             self.delegate?.viewModelDidUpdate()
-        }.catch { Error in
+        }.catch { error in
             self.isLoading = false
             self.delegate?.viewModelDidUpdate()
         }
