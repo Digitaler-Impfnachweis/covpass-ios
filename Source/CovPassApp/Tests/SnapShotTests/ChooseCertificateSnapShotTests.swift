@@ -8,13 +8,12 @@
 import XCTest
 @testable import CovPassApp
 @testable import CovPassCommon
-import FBSnapshotTestCaseCore
 
 class ChooseCertificateSnapShotTests: BaseSnapShotTests {
     
     func testNoMatch() {
         let vm = ChooseCertificateViewModel(router: nil,
-                                            repository: VaccinationRepositoryMock(),
+                                            repository: VaccinationRepositoryMock(), vaasRepository: VAASRepositoryMock(),
                                             resolvable: nil)
         let vc = ChooseCertificateViewController(viewModel: vm)
         vc.view.bounds = UIScreen.main.bounds
@@ -67,11 +66,8 @@ class ChooseCertificateSnapShotTests: BaseSnapShotTests {
         vacinationRepoMock.certificates = certs
         let vm = ChooseCertificateViewModel(router: nil,
                                             repository: vacinationRepoMock,
-                                            resolvable: nil,
-                                            givenNameFilter: "Andrea",
-                                            familyNameFilter: "Schneider",
-                                            dobFilter: "1990-07-12",
-                                            typeFilter: [.vaccination, .recovery,  .test])
+                                            vaasRepository: VAASRepositoryMock(),
+                                            resolvable: nil)
         let vc = ChooseCertificateViewController(viewModel: vm)
         vc.view.bounds = UIScreen.main.bounds
         RunLoop.current.run(for: 0.1)
@@ -91,11 +87,8 @@ class ChooseCertificateSnapShotTests: BaseSnapShotTests {
         vacinationRepoMock.certificates = certs
         let vm = ChooseCertificateViewModel(router: nil,
                                             repository: vacinationRepoMock,
-                                            resolvable: nil,
-                                            givenNameFilter: "Andrea",
-                                            familyNameFilter: "Schneider",
-                                            dobFilter: "1990-07-12",
-                                            typeFilter: [.vaccination, .recovery,  .test])
+                                            vaasRepository: VAASRepositoryMock(),
+                                            resolvable: nil)
         let vc = ChooseCertificateViewController(viewModel: vm)
         vc.view.bounds = UIScreen.main.bounds
         RunLoop.current.run(for: 0.1)
@@ -139,11 +132,8 @@ class ChooseCertificateSnapShotTests: BaseSnapShotTests {
         vacinationRepoMock.certificates = certs
         let vm = ChooseCertificateViewModel(router: nil,
                                             repository: vacinationRepoMock,
-                                            resolvable: nil,
-                                            givenNameFilter: "Andrea",
-                                            familyNameFilter: "Schneider",
-                                            dobFilter: "1990-07-12",
-                                            typeFilter: [.vaccination, .recovery,  .test])
+                                            vaasRepository: VAASRepositoryMock(),
+                                            resolvable: nil)
         let vc = ChooseCertificateViewController(viewModel: vm)
         vc.view.bounds = UIScreen.main.bounds
         RunLoop.current.run(for: 0.1)

@@ -15,6 +15,8 @@ import JWTDecode
 import CryptoSwift
 
 public protocol VAASRepositoryProtocol {
+    var ticket: ValidationServiceInitialisation {get}
+    var selectedValidationService: ValidationService? {get}
     func fetchValidationService() -> Promise<AccessTokenResponse>
     func validateTicketing (choosenCert cert: ExtendedCBORWebToken) throws -> Promise<Void>
 }
@@ -22,10 +24,11 @@ public protocol VAASRepositoryProtocol {
 public class VAASRepository: VAASRepositoryProtocol {
     
     private let service: APIServiceProtocol
-    private var ticket: ValidationServiceInitialisation
+    public private(set) var ticket: ValidationServiceInitialisation
     var identityDocumentDecorator: IdentityDocument?
     var identityDocumentValidationService: IdentityDocument?
     var accessTokenInfo: AccessTokenResponse?
+    public private(set) var selectedValidationService: ValidationService?
     var accessTokenJWT: String?
     
     public init(service: APIServiceProtocol, ticket: ValidationServiceInitialisation) {
@@ -69,6 +72,7 @@ public class VAASRepository: VAASRepositoryProtocol {
         .then { [weak self] identityDocument -> Promise<String> in
             guard var services = self?.identityDocumentDecorator?.service else { throw APIError.invalidResponse }
             guard let validationService = services.filter({ $0.type == "ValidationService" }).first else { throw APIError.invalidResponse }
+            self?.selectedValidationService = validationService
             services[0].isSelected = true
             guard let accessTokenService = services.first(where: { $0.type == "AccessTokenService" }) else {  throw APIError.invalidResponse }
             guard let url = URL(string: accessTokenService.serviceEndpoint) else {  throw APIError.invalidResponse }

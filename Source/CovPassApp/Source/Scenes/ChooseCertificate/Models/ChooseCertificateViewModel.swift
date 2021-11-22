@@ -38,7 +38,7 @@ class ChooseCertificateViewModel: ChooseCertificateViewModelProtocol {
     // MARK: - Properties
 
     weak var delegate: ViewModelDelegate?
-    var router: ChooseCertificateRouterProtocol?
+    var router: ValidationServiceRoutable?
     private let repository: VaccinationRepositoryProtocol
     private let vaasRepository: VAASRepositoryProtocol
     private let resolver: Resolver<Void>?
@@ -62,8 +62,9 @@ class ChooseCertificateViewModel: ChooseCertificateViewModelProtocol {
     var givenNameFilter: String?
     
     var familyNameFilter: String?
-    
     var dobFilter: String?
+    var validationServiceName: String = ""
+
     
     var title: String {
         return Constant.Keys.title
@@ -143,7 +144,7 @@ class ChooseCertificateViewModel: ChooseCertificateViewModelProtocol {
     
     // MARK: - Lifecyle
 
-    init(router: ChooseCertificateRouterProtocol?,
+    init(router: ValidationServiceRoutable?,
          repository: VaccinationRepositoryProtocol,
          vaasRepository: VAASRepositoryProtocol,
          resolvable: Resolver<Void>?) {
@@ -186,11 +187,12 @@ class ChooseCertificateViewModel: ChooseCertificateViewModelProtocol {
     }
     
     func chooseSert(cert: ExtendedCBORWebToken) {
-        firstly {
-            try vaasRepository.validateTicketing(choosenCert: cert)
-        }
-        .done { () in
-            
-        }
+        router?.routeToCertificateConsent(ticket: vaasRepository.ticket, certificate: cert, vaasRepository: self.vaasRepository)
+//        firstly {
+//            try vaasRepository.validateTicketing(choosenCert: cert)
+//        }
+//        .done { () in
+//            
+//        }
     }
 }

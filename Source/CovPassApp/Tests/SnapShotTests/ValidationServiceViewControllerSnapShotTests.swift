@@ -28,9 +28,29 @@ class ValidationServiceViewControllerSnapShotTests: BaseSnapShotTests {
 
         verifyView(view: vc.view)
     }
+
+    func testValidationConsentScreen() {
+        let vm = ConsentExchangeViewModel(router: ValidationServiceRouterMock(), vaasRepository: VAASRepositoryMock(),
+                                          initialisationData: ValidationServiceInitialisation.mock,
+                                          certificate: try! ExtendedCBORWebToken.mock())
+        let vc = ConsentExchangeViewController(viewModel: vm)
+        verifyView(view: vc.view, height: 1850)
+    }
 }
 
 struct ValidationServiceRouterMock: ValidationServiceRoutable {
+    func routeToSelectCertificate(ticket: ValidationServiceInitialisation) {
+
+    }
+
+    func routeToCertificateConsent(ticket: ValidationServiceInitialisation, certificate: ExtendedCBORWebToken, vaasRepository: VAASRepositoryProtocol) {
+
+    }
+
+    func routeToCertificateValidation(for certificate: ExtendedCBORWebToken) {
+
+    }
+
     func routeToConsentGeneralConsent() {
 
     }

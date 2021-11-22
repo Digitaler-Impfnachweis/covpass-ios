@@ -14,12 +14,12 @@ import UIKit
 struct ChooseCertificateSceneFactory: ResolvableSceneFactory {
     // MARK: - Properties
     
-    let router: ChooseCertificateRouterProtocol
+    let router: ValidationServiceRoutable
     let ticket: ValidationServiceInitialisation
     
     // MARK: - Lifecycle
     
-    init(router: ChooseCertificateRouterProtocol, ticket: ValidationServiceInitialisation) {
+    init(router: ValidationServiceRoutable, ticket: ValidationServiceInitialisation) {
         self.router = router
         self.ticket = ticket
     }

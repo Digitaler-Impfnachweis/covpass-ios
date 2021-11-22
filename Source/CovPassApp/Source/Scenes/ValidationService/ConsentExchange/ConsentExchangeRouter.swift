@@ -1,5 +1,5 @@
 //
-//  ValidationServiceRouter.swift
+//  ConsentExchangeRouter.swift
 //
 //  © Copyright IBM Deutschland GmbH 2021
 //  SPDX-License-Identifier: Apache-2.0
@@ -21,22 +21,14 @@ private enum Constants {
     }
 }
 
-protocol ValidationServiceRoutable: DialogRouterProtocol {
-    func routeToConsentGeneralConsent()
+protocol ConsentExchangeRoutable: DialogRouterProtocol {
     func routeToWarning()
-    func routeToSelectCertificate(ticket: ValidationServiceInitialisation)
-    func routeToCertificateConsent(ticket: ValidationServiceInitialisation, certificate: ExtendedCBORWebToken, vaasRepository: VAASRepositoryProtocol)
     func routeToPrivacyStatement(url: URL)
-    func routeToCertificateValidation(for certificate: ExtendedCBORWebToken)
 }
 
-struct ValidationServiceRouter: ValidationServiceRoutable {
+struct ConsentExchangeRouter: ConsentExchangeRoutable {
     var sceneCoordinator: SceneCoordinator
-    
-    func routeToConsentGeneralConsent() {
-        
-    }
-    
+
     public func routeToWarning() {
         showDialog(title: "",
                    message: Constants.Text.Alert.message,
@@ -47,32 +39,10 @@ struct ValidationServiceRouter: ValidationServiceRoutable {
                     })],
                    style: .alert)
     }
-    
-    func routeToSelectCertificate(ticket: ValidationServiceInitialisation) {
-        sceneCoordinator.push(
-            ChooseCertificateSceneFactory(
-                router: self,
-                ticket: ticket
-            ),
-            animated: true)
-    }
-    
-    func routeToCertificateConsent(ticket: ValidationServiceInitialisation, certificate: ExtendedCBORWebToken, vaasRepository: VAASRepositoryProtocol) {
-        sceneCoordinator.push(ConsentExchangeFactory(router: self, vaasRepository: vaasRepository, initialisationData: ticket, certificate: certificate))
-    }
-    
+
     func routeToPrivacyStatement(url: URL) {
         let webViewScene = WebviewSceneFactory(title: "app_information_title_datenschutz".localized,
                                                url: url, isToolbarShown: true)
         sceneCoordinator.push(webViewScene)
-    }
-
-    func routeToCertificateValidation(for certificate: ExtendedCBORWebToken) {
-        sceneCoordinator.push(
-            CertificateItemDetailSceneFactory(
-                router: CertificateItemDetailRouter(sceneCoordinator: sceneCoordinator),
-                certificate: certificate
-            )
-        )
     }
 }

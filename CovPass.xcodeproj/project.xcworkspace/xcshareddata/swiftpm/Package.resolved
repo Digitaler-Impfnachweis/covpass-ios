@@ -41,9 +41,9 @@
         "package": "iOSSnapshotTestCase",
         "repositoryURL": "https://github.com/uber/ios-snapshot-test-case",
         "state": {
-          "branch": "main",
-          "revision": "444c218adaa6a99ba0536b4ec9ad5500047d9051",
-          "version": null
+          "branch": null,
+          "revision": "7b10770333a961be6e5a41c9ce04b8c6d3990126",
+          "version": "8.0.0"
         }
       },
       {

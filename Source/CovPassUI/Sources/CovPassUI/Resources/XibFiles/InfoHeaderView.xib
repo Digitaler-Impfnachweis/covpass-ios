@@ -10,7 +10,10 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="InfoHeaderView" customModule="CovPassUI">
             <connections>
                 <outlet property="actionButton" destination="RSG-an-e0J" id="Q1H-u7-Uqh"/>
+                <outlet property="bottomConstraint" destination="Rt4-Fn-YC4" id="snI-Wh-XOP"/>
+                <outlet property="stackView" destination="wwI-KP-np5" id="10F-5c-IQF"/>
                 <outlet property="textLabel" destination="jYL-ZW-bpk" id="f2g-m7-enc"/>
+                <outlet property="topConstraint" destination="sN5-B5-vos" id="gFY-iV-xlx"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>

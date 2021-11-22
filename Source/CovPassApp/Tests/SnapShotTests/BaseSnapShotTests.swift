@@ -7,7 +7,8 @@
 
 @testable import CovPassCommon
 import XCTest
-import FBSnapshotTestCase
+import iOSSnapshotTestCase
+import iOSSnapshotTestCaseCore
 
 class BaseSnapShotTests: FBSnapshotTestCase {
     

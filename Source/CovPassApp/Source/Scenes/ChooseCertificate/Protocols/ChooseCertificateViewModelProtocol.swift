@@ -12,7 +12,7 @@ import PromiseKit
 import CovPassCommon
 
 protocol ChooseCertificateViewModelProtocol {
-    var router: ChooseCertificateRouterProtocol? { get set }
+    var router: ValidationServiceRoutable? { get set }
     var delegate: ViewModelDelegate? { get set }
     var items: [CertificateItem] { get }
     var typeFilter: [CertType]? { get set }
