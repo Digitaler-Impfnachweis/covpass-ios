@@ -249,6 +249,16 @@
 
 "certificate_check_validity_selection_country" = "Land";
 
+"no_cert_applicable_for_validation_dialog_header" = "Keine Prüfung möglich";
+
+"no_cert_applicable_for_validation_dialog_message" = "Eine Gültigkeitsprüfung Ihrer aktuell gespeicherten Zertifikate ist leider nicht möglich.";
+
+"no_cert_applicable_for_validation_positive_button_text" = "OK";
+
+"certificate_check_validity_not_all_certs_checkable_title" = "Leider können nicht alle Zertifikate geprüft werden!";
+
+"certificate_check_validity_not_all_certs_checkable_message" = "Eine Gültigkeitsprüfung ist für manche Ihrer gespeicherten Zertifikate leider nicht möglich. Diese werden bei der Prüfung ausgeschlossen.";
+
 "accessibility_certificate_check_validity_selection_country_label_close" = "Schließen";
 
 "certificate_check_validity_selection_country_title" = "Reiseland wählen";
@@ -454,11 +464,15 @@
 
 "certificate_check_validity_selection_date_action_button" = "Weiter";
 
+"accessibility_certificate_check_validity_selection_date_label_action_button" = "Datum bestätigen und weiter zur Zeitauswahl";
+
 "certificate_check_validity_selection_time_title" = "Zeit wählen";
 
 "accessibility_certificate_check_validity_selection_time_label_close" = "Schließen";
 
 "certificate_check_validity_selection_time_action_button" = "OK";
+
+"accessibility_certificate_check_validity_selection_time_label_action_button" = "Uhrzeit bestätigen";
 
 "certificate_check_validity_loading" = "Zertifikate werden geprüft";
 
