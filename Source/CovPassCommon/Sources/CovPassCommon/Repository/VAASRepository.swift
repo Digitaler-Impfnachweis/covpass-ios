@@ -14,15 +14,23 @@ import SwiftCBOR
 import JWTDecode
 import CryptoSwift
 
+public enum VAASStep {
+    case downloadIdentityDecorator
+    case downloadIdentityService
+    case downloadAccessToken
+}
+
 public protocol VAASRepositoryProtocol {
     var ticket: ValidationServiceInitialisation {get}
     var selectedValidationService: ValidationService? {get}
+    var step: VAASStep { get set }
     func fetchValidationService() -> Promise<AccessTokenResponse>
     func validateTicketing (choosenCert cert: ExtendedCBORWebToken) throws -> Promise<Void>
 }
 
 public class VAASRepository: VAASRepositoryProtocol {
     
+    public var step: VAASStep
     private let service: APIServiceProtocol
     public private(set) var ticket: ValidationServiceInitialisation
     var identityDocumentDecorator: IdentityDocument?
@@ -34,6 +42,7 @@ public class VAASRepository: VAASRepositoryProtocol {
     public init(service: APIServiceProtocol, ticket: ValidationServiceInitialisation) {
         self.service = service
         self.ticket = ticket
+        self.step = .downloadIdentityDecorator
     }
     
     private func identityDocument(identityString: String) throws -> Promise<IdentityDocument> {
@@ -51,18 +60,20 @@ public class VAASRepository: VAASRepositoryProtocol {
     }
     
     public func fetchValidationService() -> Promise<AccessTokenResponse> {
-        firstly {
-            service.vaasListOfServices(url: ticket.serviceIdentity)
+        self.step = .downloadIdentityDecorator
+        return firstly {
+            return service.vaasListOfServices(url: ticket.serviceIdentity)
         }
         .then { [weak self] stringResponse in
-            try (self?.identityDocument(identityString: stringResponse) ?? .init(error: APIError.requestCancelled))
+            try (self?.identityDocument(identityString: stringResponse) ?? .init(error: APIError.invalidResponse))
         }
         .then { [weak self] identityDocument -> Promise<String> in
+            self?.step = .downloadIdentityService
             guard let service = identityDocument.service?.first,
                   let serviceURL = URL(string: service.serviceEndpoint)
             else { throw APIError.invalidResponse }
             self?.identityDocumentDecorator = identityDocument
-            return self?.service.vaasListOfServices(url: serviceURL) ?? .init(error: APIError.requestCancelled)
+            return self?.service.vaasListOfServices(url: serviceURL) ?? .init(error: APIError.invalidResponse)
         }
         .then { [weak self] stringResponse -> Promise<IdentityDocument> in
             let identityDocumentValidationService = try self?.identityDocument(identityString: stringResponse) ?? .init(error: APIError.requestCancelled)
@@ -70,6 +81,7 @@ public class VAASRepository: VAASRepositoryProtocol {
             return identityDocumentValidationService
         }
         .then { [weak self] identityDocument -> Promise<String> in
+            self?.step = .downloadAccessToken
             guard var services = self?.identityDocumentDecorator?.service else { throw APIError.invalidResponse }
             guard let validationService = services.filter({ $0.type == "ValidationService" }).first else { throw APIError.invalidResponse }
             self?.selectedValidationService = validationService

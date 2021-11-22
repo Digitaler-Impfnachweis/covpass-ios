@@ -177,6 +177,46 @@ class ChooseCertificateViewModel: ChooseCertificateViewModelProtocol {
             self.isLoading = false
             self.delegate?.viewModelDidUpdate()
         }.catch { error in
+            
+            self.vaasRepository.step
+            
+            switch self.vaasRepository.step {
+            case .downloadIdentityDecorator:
+                // Step 1
+                // 1. Error during download: (Error Message 2 – Identity of Service Provider cannot be verified + Error Code + Trigger Cancellation Process).
+                if error is APIError {
+                    self.router?.showError2(error: error)
+                }
+                
+                //  If not in Allow-List error message "The Validation Service is not trusted - please contact xy" (Cancellation Screen 2 – Validation Service cannot be trusted + Trigger Cancellation Process). Show this only if there is no other listed Validation Service which is a trusted one (should there be an indication that some are not trusted?).
+                
+                
+            case .downloadIdentityService:
+                // Step2
+                // a) Not found: Error message "Validation Service not identifiable" or
+                // b) Error during download: (Error Message 3 - – Identity of Validation Service cannot be verified + Error Code + Trigger Cancellation Process)
+                if error is APIError {
+                    self.router?.showError3(error: error)
+                }
+            case .downloadAccessToken:
+                
+                // Step 5
+                // The endpoint returns an access token for the validation service which contains the information of the booking session. If error occurs: Display error message "Connection to service provider failed. Access for validation service could not be requested + error code from Reponse". (Or similar text) (Error Message 4 –Cannot connect to Service Provider + Error Code + Trigger Cancellation Process).
+                if error is APIError {
+                    self.router?.showError4(error: error)
+                }
+            }
+            
+
+
+            
+            // Step 4
+            // 4.) Check AccessTokenServiceKey-X against AccessTokenService“-Endpoint -> If fails: (Error Message 3 - – Identity of Validation Service cannot be verified + Trigger Cancellation Process).
+      
+            
+            // Step 6
+            // -> If fails: Error message: „Validation Service not valid anymore? “ (Error Message 3 - – Identity of Validation Service cannot be verified + Trigger Cancellation Process).
+            
             self.isLoading = false
             self.delegate?.viewModelDidUpdate()
         }
