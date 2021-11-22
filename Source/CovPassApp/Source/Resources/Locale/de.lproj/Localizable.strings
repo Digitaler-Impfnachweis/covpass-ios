@@ -251,13 +251,13 @@
 
 "no_cert_applicable_for_validation_dialog_header" = "Keine Prüfung möglich";
 
-"no_cert_applicable_for_validation_dialog_message" = "Eine Gültigkeitsprüfung Ihrer aktuell hinterlegten Zertifikate ist leider nicht möglich.";
+"no_cert_applicable_for_validation_dialog_message" = "Eine Gültigkeitsprüfung Ihrer aktuell gespeicherten Zertifikate ist leider nicht möglich.";
 
 "no_cert_applicable_for_validation_positive_button_text" = "OK";
 
-"certificate_check_validity_not_all_certs_checkable_title" = "Leider sind nicht alle Zertifikate prüfbar!";
+"certificate_check_validity_not_all_certs_checkable_title" = "Leider können nicht alle Zertifikate geprüft werden!";
 
-"certificate_check_validity_not_all_certs_checkable_message" = "Eine Gültigkeitsprüfung ist für manche Ihrer hinterlegten Zertifikate leider nicht möglich. Diese werden bei der Prüfung ausgeschlossen.";
+"certificate_check_validity_not_all_certs_checkable_message" = "Eine Gültigkeitsprüfung ist für manche Ihrer gespeicherten Zertifikate leider nicht möglich. Diese werden bei der Prüfung ausgeschlossen.";
 
 "accessibility_certificate_check_validity_selection_country_label_close" = "Schließen";
 
