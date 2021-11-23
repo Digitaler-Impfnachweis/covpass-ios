@@ -192,7 +192,7 @@ extension Fastfile {
             }
 
             githubApi(
-                serverUrl: "https://api.github.ibmgcloud.net",
+                serverUrl: "https://github.ibmgcloud.net/api/v3",
                 apiToken: .userDefined(githubOauthToken),
                 httpMethod: "POST",
                 body: [
