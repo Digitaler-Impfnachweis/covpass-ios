@@ -12,6 +12,7 @@ import CovPassUI
 import Foundation
 import PromiseKit
 import UIKit
+import WidgetKit
 
 class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
     // MARK: - Properties
@@ -124,6 +125,10 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
             self.delegate?.viewModelDidUpdate()
             self.handleCertificateDetailSceneResult(.showCertificatesOnOverview([certificate]))
             self.showCertificate(certificate)
+            
+            if #available(iOS 14.0, *) {
+                WidgetCenter.shared.reloadAllTimelines()
+            }
         }
         .catch { error in
             self.router.showDialogForScanError(error) { [weak self] in
