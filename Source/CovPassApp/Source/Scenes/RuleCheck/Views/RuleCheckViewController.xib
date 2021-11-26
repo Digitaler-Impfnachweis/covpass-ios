@@ -13,6 +13,7 @@
             <connections>
                 <outlet property="countrySelection" destination="9lD-1M-rKg" id="KwJ-QK-DLN"/>
                 <outlet property="dateSelection" destination="XSF-W4-r5c" id="hQb-oN-Ec9"/>
+                <outlet property="filteredCertsHintView" destination="IET-Cj-50e" id="X9P-yI-nce"/>
                 <outlet property="headline" destination="sKK-Se-ZAm" id="Tul-uA-XuY"/>
                 <outlet property="info" destination="czg-wL-cb7" id="In0-6k-5je"/>
                 <outlet property="rulesHintView" destination="UY4-Mh-Ocn" id="HmN-dK-UWV"/>
@@ -38,7 +39,7 @@
                     <rect key="frame" x="0.0" y="124" width="414" height="772"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="tNn-Ng-ZRx">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="920"/>
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="1048"/>
                             <subviews>
                                 <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="gbc-XM-dNV" customClass="PlainLabel" customModule="CovPassUI">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="128"/>
@@ -48,19 +49,23 @@
                                     <rect key="frame" x="0.0" y="128" width="414" height="128"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 </view>
-                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="9lD-1M-rKg" customClass="InputView" customModule="CovPassUI">
+                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="IET-Cj-50e" customClass="HintView" customModule="CovPassUI">
                                     <rect key="frame" x="0.0" y="256" width="414" height="128"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 </view>
-                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="XSF-W4-r5c" customClass="InputView" customModule="CovPassUI">
+                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="9lD-1M-rKg" customClass="InputView" customModule="CovPassUI">
                                     <rect key="frame" x="0.0" y="384" width="414" height="128"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 </view>
+                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="XSF-W4-r5c" customClass="InputView" customModule="CovPassUI">
+                                    <rect key="frame" x="0.0" y="512" width="414" height="128"/>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                </view>
                                 <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="200" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="RNO-8L-IiI">
-                                    <rect key="frame" x="0.0" y="512" width="414" height="200"/>
+                                    <rect key="frame" x="0.0" y="640" width="414" height="200"/>
                                 </stackView>
                                 <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="208" translatesAutoresizingMaskIntoConstraints="NO" id="JbU-IC-eM5">
-                                    <rect key="frame" x="0.0" y="712" width="414" height="208"/>
+                                    <rect key="frame" x="0.0" y="840" width="414" height="208"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="czg-wL-cb7" userLabel="Description Text" customClass="LinkLabel" customModule="CovPassUI">
                                             <rect key="frame" x="24" y="40" width="366" height="128"/>
@@ -106,7 +111,7 @@
         <designable name="9lD-1M-rKg">
             <size key="intrinsicContentSize" width="414" height="128"/>
         </designable>
-        <designable name="UY4-Mh-Ocn">
+        <designable name="IET-Cj-50e">
             <size key="intrinsicContentSize" width="414" height="128"/>
         </designable>
         <designable name="XSF-W4-r5c">

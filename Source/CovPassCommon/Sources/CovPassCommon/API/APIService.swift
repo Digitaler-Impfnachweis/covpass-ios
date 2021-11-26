@@ -117,7 +117,7 @@ public struct CustomURLSession: CustomURLSessionProtocol {
                 }()
                 return "\(executable)/\(appVersion) (\(bundle); build:\(appBuild); \(osNameVersion))"
             }
-            return "Alamofire"
+            return "CovPass"
         }()
         return [
             "Accept-Encoding": acceptEncoding,

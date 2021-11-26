@@ -5,11 +5,12 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-@testable import CovPassCommon
 import XCTest
-import FBSnapshotTestCase
+import iOSSnapshotTestCaseCore
+import iOSSnapshotTestCase
 
 class BaseSnapShotTests: FBSnapshotTestCase {
+    
     override func setUp() {
         super.setUp()
         fileNameOptions = .screenSize

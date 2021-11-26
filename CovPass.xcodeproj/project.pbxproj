@@ -33,16 +33,17 @@
 		09590D372715E67F004410D7 /* CertificateDetailViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3569924426CEB35D0054531A /* CertificateDetailViewModelTests.swift */; };
 		09590D382715E67F004410D7 /* MockExtendedCBORWebToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359FBF4726DFB13B004333BC /* MockExtendedCBORWebToken.swift */; };
 		09590D392715E67F004410D7 /* MockCertificateViewModelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216D1F61264EF52400370F16 /* MockCertificateViewModelDelegate.swift */; };
-		09590D3B27160BA7004410D7 /* FBSnapshotTestCase in Frameworks */ = {isa = PBXBuildFile; productRef = 09590D3A27160BA7004410D7 /* FBSnapshotTestCase */; };
-		09590D3D27160BA7004410D7 /* FBSnapshotTestCase in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 09590D3A27160BA7004410D7 /* FBSnapshotTestCase */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		09590D4027161182004410D7 /* CertLogicMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09590D3E2716117C004410D7 /* CertLogicMock.swift */; };
 		096873F127430A4200DB5837 /* ChooseCertificateSnapShotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096873F027430A4200DB5837 /* ChooseCertificateSnapShotTests.swift */; };
+		096CDB2E274F05BC00056C64 /* iOSSnapshotTestCase in Frameworks */ = {isa = PBXBuildFile; productRef = 096CDB2D274F05BC00056C64 /* iOSSnapshotTestCase */; };
+		096CDB30274F05BC00056C64 /* iOSSnapshotTestCase in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 096CDB2D274F05BC00056C64 /* iOSSnapshotTestCase */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		096CDB32274F05CB00056C64 /* iOSSnapshotTestCase in Frameworks */ = {isa = PBXBuildFile; productRef = 096CDB31274F05CB00056C64 /* iOSSnapshotTestCase */; };
+		096CDB33274F05CB00056C64 /* iOSSnapshotTestCase in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 096CDB31274F05CB00056C64 /* iOSSnapshotTestCase */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		0994A4D02734319800B21FCF /* CertificateOverviewSnapShotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0994A4CE2734319800B21FCF /* CertificateOverviewSnapShotTests.swift */; };
 		0994A4D12734319800B21FCF /* TrustedListDetailsViewSnapShotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0994A4CF2734319800B21FCF /* TrustedListDetailsViewSnapShotTests.swift */; };
 		0994A4D5273431A500B21FCF /* TestUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0994A4D2273431A500B21FCF /* TestUtil.swift */; };
 		0994A4D6273431A500B21FCF /* WebTokenMockUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0994A4D3273431A500B21FCF /* WebTokenMockUtil.swift */; };
 		0994A4D7273431A500B21FCF /* BoosterLogicMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0994A4D4273431A500B21FCF /* BoosterLogicMock.swift */; };
-		099E6903270DED09002C6926 /* FBSnapshotTestCase in Frameworks */ = {isa = PBXBuildFile; productRef = 099E6902270DED09002C6926 /* FBSnapshotTestCase */; };
 		099E6905270DEEE7002C6926 /* TrustedListDetailsViewSnapShotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 099E6904270DEEE7002C6926 /* TrustedListDetailsViewSnapShotTests.swift */; };
 		09A27BCA270F3A2C000FE4F9 /* TestExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A27BC9270F3A2C000FE4F9 /* TestExtension.swift */; };
 		216D1F48264EF50300370F16 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 216D1F43264EF50300370F16 /* Localizable.strings */; };
@@ -256,7 +257,18 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				09590D3D27160BA7004410D7 /* FBSnapshotTestCase in Embed Frameworks */,
+				096CDB33274F05CB00056C64 /* iOSSnapshotTestCase in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		096CDB2F274F05BC00056C64 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				096CDB30274F05BC00056C64 /* iOSSnapshotTestCase in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -504,7 +516,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				09590D3B27160BA7004410D7 /* FBSnapshotTestCase in Frameworks */,
+				096CDB32274F05CB00056C64 /* iOSSnapshotTestCase in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -521,7 +533,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				099E6903270DED09002C6926 /* FBSnapshotTestCase in Frameworks */,
+				096CDB2E274F05BC00056C64 /* iOSSnapshotTestCase in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1517,7 +1529,7 @@
 			);
 			name = CovPassAppTests;
 			packageProductDependencies = (
-				09590D3A27160BA7004410D7 /* FBSnapshotTestCase */,
+				096CDB31274F05CB00056C64 /* iOSSnapshotTestCase */,
 			);
 			productName = VaccinationPassAppTests;
 			productReference = 65D6D4EE25F8B8FB000CB339 /* CovPassAppTests.xctest */;
@@ -1551,6 +1563,7 @@
 				65D6D52025F8B94D000CB339 /* Sources */,
 				65D6D52125F8B94D000CB339 /* Frameworks */,
 				65D6D52225F8B94D000CB339 /* Resources */,
+				096CDB2F274F05BC00056C64 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1559,7 +1572,7 @@
 			);
 			name = CovPassCheckAppTests;
 			packageProductDependencies = (
-				099E6902270DED09002C6926 /* FBSnapshotTestCase */,
+				096CDB2D274F05BC00056C64 /* iOSSnapshotTestCase */,
 			);
 			productName = VaccinationValidatorAppTests;
 			productReference = 65D6D52425F8B94D000CB339 /* CovPassCheckAppTests.xctest */;
@@ -2321,15 +2334,15 @@
 			package = 0939EAB627043BD80086729C /* XCRemoteSwiftPackageReference "Kronos" */;
 			productName = Kronos;
 		};
-		09590D3A27160BA7004410D7 /* FBSnapshotTestCase */ = {
+		096CDB2D274F05BC00056C64 /* iOSSnapshotTestCase */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 099E6901270DED09002C6926 /* XCRemoteSwiftPackageReference "ios-snapshot-test-case" */;
-			productName = FBSnapshotTestCase;
+			productName = iOSSnapshotTestCase;
 		};
-		099E6902270DED09002C6926 /* FBSnapshotTestCase */ = {
+		096CDB31274F05CB00056C64 /* iOSSnapshotTestCase */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 099E6901270DED09002C6926 /* XCRemoteSwiftPackageReference "ios-snapshot-test-case" */;
-			productName = FBSnapshotTestCase;
+			productName = iOSSnapshotTestCase;
 		};
 		21DAD6E0264F0B11003407FC /* CovPassUI */ = {
 			isa = XCSwiftPackageProductDependency;

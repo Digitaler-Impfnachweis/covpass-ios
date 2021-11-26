@@ -8,7 +8,6 @@
 import XCTest
 @testable import CovPassApp
 @testable import CovPassCommon
-import FBSnapshotTestCaseCore
 
 class ChooseCertificateSnapShotTests: BaseSnapShotTests {
     

@@ -147,7 +147,11 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
     }
 
     func showRuleCheck() {
-        router.showRuleCheck().cauterize()
+        if self.certificateList.certificates.filterValidAndNotExpiredCertsWhichArenNotFraud.isEmpty {
+            self.router.showFilteredCertsErrorDialog()
+        } else {
+            router.showRuleCheck().cauterize()
+        }
     }
 
     func showAppInformation() {
