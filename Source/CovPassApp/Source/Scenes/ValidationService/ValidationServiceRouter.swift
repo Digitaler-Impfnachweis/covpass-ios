@@ -14,9 +14,41 @@ import UIKit
 private enum Constants {
     enum Text {
         enum Alert {
-            static let message = "cancellation_share_certificate_title".localized
-            static let ok = "cancellation_share_certificate_action_button_no".localized
-            static let cancel = "cancellation_share_certificate_action_button_yes".localized
+            enum Cancellation {
+                static let message = "cancellation_share_certificate_title".localized
+                static let ok = "cancellation_share_certificate_action_button_no".localized
+                static let cancel = "cancellation_share_certificate_action_button_yes".localized
+            }
+            enum ProviderNotVerified {
+                static let title = "error_share_certificate_provider_not_verified_title".localized
+                static let message = "error_share_certificate_provider_not_verified_message".localized
+                static let button = "error_share_certificate_provider_not_verified_action_button".localized
+            }
+            enum TestPartnerNotVerified {
+                static let title = "error_share_certificate_test_partner_not_verified_title".localized
+                static let message = "error_share_certificate_test_partner_not_verified_message".localized
+                static let button = "error_share_certificate_test_partner_not_verified_action_button".localized
+            }
+            enum NoVerificationPossible {
+                static let title = "error_share_certificate_no_verification_possible_title".localized
+                static let message = "error_share_certificate_no_verification_possible_message".localized
+                static let button = "error_share_certificate_no_verification_possible_action_button".localized
+            }
+            enum NoVerificationSubmissionPossible {
+                static let title = "error_share_certificate_no_verification_submission_possible_title".localized
+                static let message = "error_share_certificate_no_verification_submission_possible_message".localized
+                static let button = "error_share_certificate_no_verification_submission_possible_action_button".localized
+            }
+            enum AccessTokenNotProcessed {
+                static let title = "error_share_certificate_access_token_not_processed_title".localized
+                static let message = "error_share_certificate_access_token_not_processed_message".localized
+                static let button = "error_share_certificate_access_token_not_processed_action_button".localized
+            }
+            enum AccessTokenNotRetrieved {
+                static let title = "error_share_certificate_access_token_not_retrieved_title".localized
+                static let message = "error_share_certificate_access_token_not_retrieved_message".localized
+                static let button = "error_share_certificate_access_token_not_retrieved_action_button".localized
+            }
         }
     }
 }
@@ -24,40 +56,146 @@ private enum Constants {
 protocol ValidationServiceRoutable: DialogRouterProtocol {
     func routeToConsentGeneralConsent()
     func routeToWarning()
-    func routeToSelectCertificate()
-    func routeToCertificateConsent()
+    func showIdentityDocumentApiError(error: Error)
+    func showIdentityDocumentVAASError(error: Error)
+    func accessTokenNotRetrieved(error: Error)
+    func showNoVerificationPossible(error: Error)
+    func showNoVerificationSubmissionPossible(error: Error)
+    func showAccessTokenNotProcessed(error: Error)
+    func routeToSelectCertificate(ticket: ValidationServiceInitialisation)
+    func routeToCertificateConsent(ticket: ValidationServiceInitialisation, certificate: ExtendedCBORWebToken, vaasRepository: VAASRepositoryProtocol)
     func routeToPrivacyStatement(url: URL)
+    func routeToCertificateValidationResult(for certificate: ExtendedCBORWebToken, with result: VAASValidaitonResultToken)
 }
 
 struct ValidationServiceRouter: ValidationServiceRoutable {
     var sceneCoordinator: SceneCoordinator
-
+    
     func routeToConsentGeneralConsent() {
-
+        
     }
-
+    
     public func routeToWarning() {
         showDialog(title: "",
-                   message: Constants.Text.Alert.message,
+                   message: Constants.Text.Alert.Cancellation.message,
                    actions: [
-                    DialogAction(title: Constants.Text.Alert.ok, style: UIAlertAction.Style.default, isEnabled: true, completion: nil),
-                    DialogAction(title: Constants.Text.Alert.cancel, style: UIAlertAction.Style.destructive, isEnabled: true, completion: { _ in
+                    DialogAction(title: Constants.Text.Alert.Cancellation.ok, style: UIAlertAction.Style.default, isEnabled: true, completion: nil),
+                    DialogAction(title: Constants.Text.Alert.Cancellation.cancel, style: UIAlertAction.Style.destructive, isEnabled: true, completion: { _ in
                         sceneCoordinator.dimiss(animated: true)
                     })],
                    style: .alert)
+    }    
+    
+    func showIdentityDocumentApiError(error: Error) {
+        showDialog(title: Constants.Text.Alert.ProviderNotVerified.title,
+                   message: error.displayCodeWithMessage(Constants.Text.Alert.ProviderNotVerified.message),
+                   actions: [
+                    DialogAction(title: Constants.Text.Alert.ProviderNotVerified.button,
+                                 style: UIAlertAction.Style.default,
+                                 isEnabled: true,
+                                 completion: { _ in
+                                     routeToWarning()
+                                 })
+                    ],
+                   style: .alert)
     }
-
-    func routeToSelectCertificate() {
-
+    
+    func showIdentityDocumentVAASError(error: Error) {
+        showDialog(title: Constants.Text.Alert.TestPartnerNotVerified.title,
+                   message: error.displayCodeWithMessage(Constants.Text.Alert.TestPartnerNotVerified.message),
+                   actions: [
+                    DialogAction(title: Constants.Text.Alert.TestPartnerNotVerified.button,
+                                 style: UIAlertAction.Style.default,
+                                 isEnabled: true,
+                                 completion: { _ in
+                                     routeToWarning()
+                                 })
+                    ],
+                   style: .alert)
     }
-
-    func routeToCertificateConsent() {
-
+    
+    func accessTokenNotRetrieved(error: Error) {
+        showDialog(title: Constants.Text.Alert.AccessTokenNotRetrieved.title,
+                   message: error.displayCodeWithMessage(Constants.Text.Alert.AccessTokenNotRetrieved.message),
+                   actions: [
+                    DialogAction(title: Constants.Text.Alert.AccessTokenNotRetrieved.button,
+                                 style: UIAlertAction.Style.default,
+                                 isEnabled: true,
+                                 completion: { _ in
+                                     routeToWarning()
+                                 })
+                    ],
+                   style: .alert)
     }
-
+    
+    func showNoVerificationPossible(error: Error) {
+        showDialog(title: Constants.Text.Alert.NoVerificationPossible.title,
+                   message: error.displayCodeWithMessage(Constants.Text.Alert.NoVerificationPossible.message),
+                   actions: [
+                    DialogAction(title: Constants.Text.Alert.NoVerificationPossible.button,
+                                 style: UIAlertAction.Style.default,
+                                 isEnabled: true,
+                                 completion: { _ in
+                                     routeToWarning()
+                                 })
+                    ],
+                   style: .alert)
+    }
+    
+    func showNoVerificationSubmissionPossible(error: Error) {
+        showDialog(title: Constants.Text.Alert.NoVerificationSubmissionPossible.title,
+                   message: error.displayCodeWithMessage(Constants.Text.Alert.NoVerificationSubmissionPossible.message),
+                   actions: [
+                    DialogAction(title: Constants.Text.Alert.NoVerificationSubmissionPossible.button,
+                                 style: UIAlertAction.Style.default,
+                                 isEnabled: true,
+                                 completion: { _ in
+                                     routeToWarning()
+                                 })
+                    ],
+                   style: .alert)
+    }
+    
+    func showAccessTokenNotProcessed(error: Error) {
+        showDialog(title: Constants.Text.Alert.AccessTokenNotProcessed.title,
+                   message: error.displayCodeWithMessage(Constants.Text.Alert.AccessTokenNotProcessed.message),
+                   actions: [
+                    DialogAction(title: Constants.Text.Alert.AccessTokenNotProcessed.button,
+                                 style: UIAlertAction.Style.default,
+                                 isEnabled: true,
+                                 completion: { _ in
+                                     routeToWarning()
+                                 })
+                    ],
+                   style: .alert)
+    }
+    
+    func routeToSelectCertificate(ticket: ValidationServiceInitialisation) {
+        sceneCoordinator.push(
+            ChooseCertificateSceneFactory(
+                router: self,
+                ticket: ticket
+            ),
+            animated: true)
+    }
+    
+    func routeToCertificateConsent(ticket: ValidationServiceInitialisation, certificate: ExtendedCBORWebToken, vaasRepository: VAASRepositoryProtocol) {
+        sceneCoordinator.push(ConsentExchangeFactory(router: self, vaasRepository: vaasRepository, initialisationData: ticket, certificate: certificate))
+    }
+    
     func routeToPrivacyStatement(url: URL) {
         let webViewScene = WebviewSceneFactory(title: "app_information_title_datenschutz".localized,
                                                url: url, isToolbarShown: true)
         sceneCoordinator.push(webViewScene)
+    }
+    
+    func routeToCertificateValidationResult(for certificate: ExtendedCBORWebToken, with result: VAASValidaitonResultToken) {
+        sceneCoordinator.push(
+            CertificateItemDetailSceneFactory(
+                router: CertificateItemDetailRouter(sceneCoordinator: sceneCoordinator),
+                certificate: certificate,
+                vaasResult: result
+            )
+        )
     }
 }

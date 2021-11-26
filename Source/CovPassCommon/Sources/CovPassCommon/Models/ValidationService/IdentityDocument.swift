@@ -8,8 +8,8 @@
 
 import Foundation
 
-struct IdentityDocument: Decodable {
+public struct IdentityDocument: Decodable {
     var id: String
-    var verificationMethod: [VerificationMethod]
-    var service: [ValidationService]
+    var verificationMethod: [VerificationMethod]?
+    var service: [ValidationService]?
 }

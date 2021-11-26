@@ -8,6 +8,7 @@
 
 import CovPassUI
 import UIKit
+import CovPassCommon
 
 protocol CertificateItemDetailViewModelProtocol {
     var title: String { get }
@@ -18,6 +19,8 @@ protocol CertificateItemDetailViewModelProtocol {
     var isInvalid: Bool { get }
     var items: [ContentItem] { get }
     var canExportToPDF: Bool { get }
+    var vaasResultToken: VAASValidaitonResultToken? { get }
+    var hasValidationResult: Bool { get }
     func showQRCode()
     func startPDFExport()
     func deleteCertificate()

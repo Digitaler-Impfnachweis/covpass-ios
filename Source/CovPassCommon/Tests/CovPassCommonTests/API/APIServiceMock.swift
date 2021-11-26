@@ -12,8 +12,31 @@ import PromiseKit
 @testable import CovPassCommon
 
 class APIServiceMock: APIServiceProtocol {
+    
+    var vaasListOfServicesResponse: Promise<String>?
+    func vaasListOfServices(url: URL) -> Promise<String> {
+        vaasListOfServicesResponse ?? Promise.value("")
+    }
+    
+    var accesTokenResponse: Promise<String>?
+    func getAccessTokenFor(url: URL, servicePath: String, publicKey: String) -> Promise<String> {
+        accesTokenResponse ?? Promise.value("")
+    }
+    
     var trustListResult: Promise<String>?
     func fetchTrustList() -> Promise<String> {
         trustListResult ?? Promise.value("")
+    }
+    
+    func getAccessTokenFor(url: URL, servicePath: String, publicKey: String, ticketToken: String) -> Promise<String> {
+        .value("")
+    }
+    
+    func validateTicketing(url: URL, parameters: [String : String]?, accessToken: String) -> Promise<String> {
+        .value("")
+    }
+    
+    func cancellTicket(url: URL, ticketToken: String) -> Promise<String> {
+        .value("")
     }
 }

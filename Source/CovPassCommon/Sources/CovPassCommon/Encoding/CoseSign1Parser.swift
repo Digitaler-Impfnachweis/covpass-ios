@@ -221,7 +221,7 @@ struct CoseSign1Message {
         }
 
         guard let cborValue = decode(value: value) else {
-            assertionFailure("CBOR value type not implemented, yet")
+            //assertionFailure("CBOR value type not implemented, yet")
             return nil
         }
 

@@ -10,6 +10,7 @@
 @testable import CovPassUI
 import XCTest
 import PromiseKit
+import JWTDecode
 
 class ValidationServiceViewControllerSnapShotTests: BaseSnapShotTests {
     func testConsentScreen() {
@@ -28,9 +29,97 @@ class ValidationServiceViewControllerSnapShotTests: BaseSnapShotTests {
 
         verifyView(view: vc.view)
     }
+
+    func testValidationConsentScreen() {
+        let vm = ConsentExchangeViewModel(router: ValidationServiceRouterMock(), vaasRepository: VAASRepositoryMock(step: .downloadAccessToken),
+                                          initialisationData: ValidationServiceInitialisation.mock,
+                                          certificate: try! ExtendedCBORWebToken.mock())
+        let vc = ConsentExchangeViewController(viewModel: vm)
+        verifyView(view: vc.view, height: 1850)
+    }
+
+    func test_validation_result_passed() {
+        var vaasValidationResultToken = VAASValidaitonResultToken.mock
+        vaasValidationResultToken.result = .passed
+        vaasValidationResultToken.provider = "Lufthansa"
+        vaasValidationResultToken.verifyingService = "Booking Demo Validation Service TSI"
+        let vm = CertificateItemDetailViewModel(router: CertificateItemDetailRouterMock(), repository: VaccinationRepositoryMock(), certificate: try! ExtendedCBORWebToken.mock(), resolvable: nil, vaasResultToken: vaasValidationResultToken)
+        let vc = CertificateItemDetailViewController(viewModel: vm)
+        verifyView(view: vc.view, height: 2200)
+    }
+
+    func test_validation_result_cross_check() {
+        var vaasValidationResultToken = VAASValidaitonResultToken.mock
+        vaasValidationResultToken.result = .crossCheck
+        vaasValidationResultToken.provider = "Lufthansa"
+        vaasValidationResultToken.verifyingService = "Betreiber_Validationservice"
+        let vm = CertificateItemDetailViewModel(router: CertificateItemDetailRouterMock(), repository: VaccinationRepositoryMock(), certificate: try! ExtendedCBORWebToken.mock(), resolvable: nil, vaasResultToken: vaasValidationResultToken)
+        let vc = CertificateItemDetailViewController(viewModel: vm)
+        verifyView(view: vc.view, height: 2200)
+    }
+
+    func test_validation_result_fail() {
+        var vaasValidationResultToken = VAASValidaitonResultToken.mock
+        vaasValidationResultToken.result = .fail
+        vaasValidationResultToken.provider = "Lufthansa"
+        vaasValidationResultToken.verifyingService = "Betreiber_Validationservice"
+        let vm = CertificateItemDetailViewModel(router: CertificateItemDetailRouterMock(), repository: VaccinationRepositoryMock(), certificate: try! ExtendedCBORWebToken.mock(), resolvable: nil, vaasResultToken: vaasValidationResultToken)
+        let vc = CertificateItemDetailViewController(viewModel: vm)
+        verifyView(view: vc.view, height: 2200)
+    }
 }
 
+struct CertificateItemDetailRouterMock: CertificateItemDetailRouterProtocol {
+    func showCertificate(for token: ExtendedCBORWebToken) -> Promise<Void> {
+        .value(())
+    }
+
+    func showPDFExport(for token: ExtendedCBORWebToken) -> Promise<Void> {
+        .value(())
+    }
+
+    var sceneCoordinator: SceneCoordinator = SceneCoordinatorMock()
+}
+
+
 struct ValidationServiceRouterMock: ValidationServiceRoutable {
+    func showIdentityDocumentApiError(error: Error) {
+        
+    }
+    
+    func showIdentityDocumentVAASError(error: Error) {
+        
+    }
+    
+    func accessTokenNotRetrieved(error: Error) {
+        
+    }
+    
+    func showNoVerificationPossible(error: Error) {
+        
+    }
+    
+    func showNoVerificationSubmissionPossible(error: Error) {
+        
+    }
+    
+    func showAccessTokenNotProcessed(error: Error) {
+        
+    }
+    
+
+    func routeToSelectCertificate(ticket: ValidationServiceInitialisation) {
+
+    }
+
+    func routeToCertificateConsent(ticket: ValidationServiceInitialisation, certificate: ExtendedCBORWebToken, vaasRepository: VAASRepositoryProtocol) {
+
+    }
+
+    func routeToCertificateValidationResult(for certificate: ExtendedCBORWebToken, with result: VAASValidaitonResultToken) {
+        
+    }
+
     func routeToConsentGeneralConsent() {
 
     }
@@ -49,6 +138,19 @@ struct ValidationServiceRouterMock: ValidationServiceRoutable {
 
     func routeToPrivacyStatement(url: URL) {
 
+    }
+
+    func showError2(error: Error) {
+    }
+
+    func showError3(error: Error) {
+
+    }
+
+    func showError4(error: Error) {
+    }
+
+    func showError5(error: Error) {
     }
 
 
@@ -72,5 +174,17 @@ extension ValidationServiceInitialisation {
         }
         """.data(using: .utf8)!
         return try! JSONDecoder().decode(ValidationServiceInitialisation.self, from: data)
+    }
+}
+
+extension VAASValidaitonResultToken {
+    static var mock: VAASValidaitonResultToken {
+        let validationResultJWT = """
+        eyJ0eXAiOiJKV1QiLCJraWQiOiJSQU0yU3R3N0VrRT0iLCJhbGciOiJFUzI1NiJ9.eyJzdWIiOiIyMDI3YTE5ZC1lMzVhLTQxYjUtOWRlZi00NzEyMTFmMGNjZWUiLCJpc3MiOiJodHRwczovL2RnY2EtdmFsaWRhdGlvbi1zZXJ2aWNlLWV1LXRlc3QuY2ZhcHBzLmV1MTAuaGFuYS5vbmRlbWFuZC5jb20iLCJpYXQiOjE2Mzc3NDYwNTIsImV4cCI6MTYzNzgzMjQ1MiwiY2F0ZWdvcnkiOlsiU3RhbmRhcmQiXSwiY29uZmlybWF0aW9uIjoiZXlKcmFXUWlPaUpTUVUweVUzUjNOMFZyUlQwaUxDSmhiR2NpT2lKRlV6STFOaUo5LmV5SnFkR2tpT2lKaE9USTROV1EyTWkwMll6QTJMVFJsT0RVdE9UZ3lOeTB6WVdJeVpHSTVNR0ZsTVdVaUxDSnpkV0lpT2lJeU1ESTNZVEU1WkMxbE16VmhMVFF4WWpVdE9XUmxaaTAwTnpFeU1URm1NR05qWldVaUxDSnBjM01pT2lKb2RIUndjem92TDJSblkyRXRkbUZzYVdSaGRHbHZiaTF6WlhKMmFXTmxMV1YxTFhSbGMzUXVZMlpoY0hCekxtVjFNVEF1YUdGdVlTNXZibVJsYldGdVpDNWpiMjBpTENKcFlYUWlPakUyTXpjM05EWXdOVElzSW1WNGNDSTZNVFl6Tnpnek1qUTFNaXdpY21WemRXeDBJam9pVDBzaUxDSmpZWFJsWjI5eWVTSTZXeUpUZEdGdVpHRnlaQ0pkZlEuUHV0X2RkQlBNMmtMVFZkTWF0dVNTYjFVM0RTYnNORTJhMkh1WjVLMmZ5UVVITnM4NlBuYjh4MzFja1J3aUxmVWczTGVxcTBkNUhxNXJaN3IzTFk5WXciLCJyZXN1bHRzIjpbXSwicmVzdWx0IjoiT0sifQ.BdQr1acy81yHqBKTuVbbbO9ATYIhbT1XNit0mE3VIO-D-SLOwc-_is4_mEp8k1wD6zAMqNYk_Gl7srm5LFkz3Q
+        """
+        let decodedJWT = try! decode(jwt: validationResultJWT)
+        let jsondata = try! JSONSerialization.data(withJSONObject: decodedJWT.body)
+        let vaasValidationResultToken = try! JSONDecoder().decode(VAASValidaitonResultToken.self, from: jsondata)
+        return vaasValidationResultToken
     }
 }

@@ -12,6 +12,7 @@ import PromiseKit
 import UIKit
 
 class CertificateItemDetailViewModel: CertificateItemDetailViewModelProtocol {
+
     // MARK: - Properties
 
     let router: CertificateItemDetailRouterProtocol
@@ -134,18 +135,25 @@ class CertificateItemDetailViewModel: CertificateItemDetailViewModelProtocol {
         certificate.canExportToPDF
     }
 
+    var vaasResultToken: VAASValidaitonResultToken?
+    var hasValidationResult: Bool {
+        vaasResultToken != nil
+    }
+
     // MARK: - Lifecyle
 
     init(
         router: CertificateItemDetailRouterProtocol,
         repository: VaccinationRepositoryProtocol,
         certificate: ExtendedCBORWebToken,
-        resolvable: Resolver<CertificateDetailSceneResult>?
+        resolvable: Resolver<CertificateDetailSceneResult>?,
+        vaasResultToken: VAASValidaitonResultToken?
     ) {
         self.router = router
         self.repository = repository
         self.certificate = certificate
         resolver = resolvable
+        self.vaasResultToken = vaasResultToken
     }
 
     // MARK: - Methods

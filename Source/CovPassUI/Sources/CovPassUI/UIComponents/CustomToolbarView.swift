@@ -21,7 +21,7 @@ private enum Constants {
 }
 
 public protocol CustomToolbarViewDelegate: AnyObject {
-    func customToolbarView(_: CustomToolbarView, didTap buttonType: ButtonItemType)
+    func customToolbarView(_ view: CustomToolbarView, didTap buttonType: ButtonItemType)
 }
 
 public enum ButtonItemType {

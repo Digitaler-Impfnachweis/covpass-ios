@@ -16,15 +16,18 @@ struct CertificateItemDetailSceneFactory: ResolvableSceneFactory {
 
     let router: CertificateItemDetailRouterProtocol
     var certificate: ExtendedCBORWebToken
+    let vaasResult: VAASValidaitonResultToken?
 
     // MARK: - Lifecycle
 
     init(
         router: CertificateItemDetailRouterProtocol,
-        certificate: ExtendedCBORWebToken
+        certificate: ExtendedCBORWebToken,
+        vaasResult: VAASValidaitonResultToken? = nil
     ) {
         self.router = router
         self.certificate = certificate
+        self.vaasResult = vaasResult
     }
 
     func make(resolvable: Resolver<CertificateDetailSceneResult>) -> UIViewController {
@@ -33,7 +36,8 @@ struct CertificateItemDetailSceneFactory: ResolvableSceneFactory {
             router: router,
             repository: repository,
             certificate: certificate,
-            resolvable: resolvable
+            resolvable: resolvable,
+            vaasResultToken: vaasResult
         )
         let viewController = CertificateItemDetailViewController(viewModel: viewModel)
         return viewController

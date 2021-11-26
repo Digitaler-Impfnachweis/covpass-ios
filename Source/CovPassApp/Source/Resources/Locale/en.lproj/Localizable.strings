@@ -187,7 +187,7 @@
 
 "accessibility_certificate_scan_mode_label_cancel" = "Cancel";
 
-"error_camera_access_title" = "The CovPass App wants to access your camera.";
+"error_camera_access_title" = "The CovPass app wants to access your camera.";
 
 "error_camera_access_message" = "Allow access to scan QR codes.";
 
@@ -447,6 +447,10 @@
 "UY" = "Uruguay";
 
 "VN" = "Vietnam";
+
+"ARG" = "Argentina";
+
+"MEX" = "Mexico";
 
 "certificate_check_validity_selection_country_note" = "Is your destination not listed? More countries are progressively being added in stages. \n\nYou can find more information in the frequently asked questions and at #https://reopen.europa.eu::https://reopen.europa.eu#.";
 
@@ -1321,11 +1325,29 @@
 
 "error_share_certificate_provider_not_verified_action_button" = "OK";
 
-"error_share_certificate_test_partner_not_verified_title" = "The identity of the test partner could not be verified";
+"error_share_certificate_validation_partner_not_verified_title" = "The identity of the test partner could not be verified";
 
-"error_share_certificate_test_partner_not_verified_message" = "The booking portal suggests sharing your certificate with the following verification partner: %@. We do not know this verification partner.\n\nFor a list of supported verification partners, see the Frequently Asked Questions.";
+"error_share_certificate_validation_partner_not_verified_message" = "The booking portal suggests sharing your certificate with the following validation partner: %@. We do not know this validation partner.\n\nFor a list of supported validation partners, see the Frequently Asked Questions.";
 
-"error_share_certificate_test_partner_not_verified_action_button" = "OK";
+"error_share_certificate_validation_partner_not_verified_action_button" = "OK";
+
+"error_share_certificate_validation_partner_not_verified_title2" = "The identity of the validation partner could not be verified";
+
+"error_share_certificate_validation_partner_not_verified_message2" = "Unfortunately, an error occurred while verifying the identity of the validation partner. Please try again later.";
+
+"error_share_certificate_validation_partner_not_verified_action_button2" = "OK";
+
+"error_share_certificate_access_token_not_retrieved_title" = "The booking data could not be retrieved";
+
+"error_share_certificate_access_token_not_retrieved_message" = "Unfortunately, an error occurred while loading the booking data. Please try again later.";
+
+"error_share_certificate_access_token_not_retrieved_action_button" = "OK";
+
+"error_share_certificate_access_token_not_processed_title" = "The booking data could not be processed";
+
+"error_share_certificate_access_token_not_processed_message" = "Unfortunately, an error occurred while processing the booking data. Please try again later.";
+
+"error_share_certificate_access_token_not_processed_action_button" = "OK";
 
 "error_share_certificate_no_connection_to_provider_title" = "Could not connect to the provider";
 
@@ -1338,6 +1360,12 @@
 "error_share_certificate_no_verification_possible_message" = "Unfortunately, the verification could not be completed successfully. Possible reasons can be found in the Frequently Asked Questions. Please try again at a later time.";
 
 "error_share_certificate_no_verification_possible_action_button" = "OK";
+
+"error_share_certificate_no_verification_submission_possible_title" = "The certificate could not be submitted for validation";
+
+"error_share_certificate_no_verification_submission_possible_message" = "Unfortunately, the verification could not be submitted to the validation partner. Possible reasons can be found in the Frequently Asked Questions. Please try again at a later time.";
+
+"error_share_certificate_no_verification_submission_possible_action_button" = "OK";
 
 "cancellation_share_certificate_title" = "Do you really want to end the process?";
 

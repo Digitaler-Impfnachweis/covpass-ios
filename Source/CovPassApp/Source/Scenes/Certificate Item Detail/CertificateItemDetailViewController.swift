@@ -31,6 +31,8 @@ class CertificateItemDetailViewController: UIViewController {
 
     private(set) var viewModel: CertificateItemDetailViewModelProtocol
 
+    private let toolbar: CustomToolbarView = CustomToolbarView(frame: .zero)
+
     // MARK: - Lifecycle
 
     @available(*, unavailable)
@@ -54,10 +56,21 @@ class CertificateItemDetailViewController: UIViewController {
 
         setupNavigationBar()
         setupHeadline()
-        setupHintView()
+        if viewModel.hasValidationResult {
+            setupVAASResultHintView()
+        } else {
+            setupHintView()
+        }
         setupList()
         setupButtons()
         setupInfo()
+        if viewModel.hasValidationResult {
+            toolbar.delegate = self
+            toolbar.state = .confirm("vaccination_certificate_detail_view_qrcode_screen_action_button_title".localized)
+            toolbar.setUpLeftButton(leftButtonItem: .navigationArrow)
+            toolbar.primaryButton.isHidden = false
+            stackView.addArrangedSubview(toolbar)
+        }
     }
 
     private func setupNavigationBar() {
@@ -73,6 +86,15 @@ class CertificateItemDetailViewController: UIViewController {
     }
 
     private func setupHeadline() {
+        if viewModel.hasValidationResult {
+            titleLabel.attributedText = viewModel.items.first?.value.styledAs(.header_2)
+            titleLabel.layoutMargins = .init(top: .zero, left: .space_24, bottom: .space_2, right: .space_24)
+            subtitleLabel.attributedText = viewModel.headline.styledAs(.body).colored(.onBackground70)
+            subtitleLabel.layoutMargins = .init(top: .zero, left: .space_24, bottom: .zero, right: .space_24)
+            subtitleLabel.isHidden = false
+            stackView.setCustomSpacing(.space_24, after: subtitleLabel)
+            return
+        }
         titleLabel.attributedText = viewModel.headline.styledAs(.header_1).colored(.onBackground100)
         titleLabel.layoutMargins = .init(top: .zero, left: .space_24, bottom: .space_24, right: .space_24)
         subtitleLabel.attributedText = "vaccination_certificate_detail_view_vaccination_note".localized.styledAs(.body).colored(.onBackground70)
@@ -102,6 +124,44 @@ class CertificateItemDetailViewController: UIViewController {
             hintView.isHidden = false
             hintView.titleLabel.attributedText = "certificate_invalid_detail_view_note_title".localized.styledAs(.header_3)
             hintView.bodyLabel.attributedText = "certificate_invalid_detail_view_note_message".localized.styledAs(.body)
+        }
+    }
+
+    private func setupVAASResultHintView() {
+        hintView.isHidden = true
+        switch viewModel.vaasResultToken?.result {
+        case .passed:
+            hintView.isHidden = false
+            hintView.iconView.image = .validationCheckmark
+            hintView.containerView.backgroundColor = .resultGreenBackground
+            hintView.containerView?.layer.borderColor = UIColor.resultGreen.cgColor
+            hintView.titleLabel.attributedText = "share_certificate_detail_view_requirements_met_title".localized.styledAs(.header_3)
+            hintView.subTitleLabel.attributedText =
+            String(format: "share_certificate_detail_view_requirements_met_subline".localized, viewModel.vaasResultToken?.verifyingService ?? "").styledAs(.body).colored(.onBackground70)
+            hintView.bodyLabel.layoutMargins = .init(top: .space_24, left: .zero, bottom: .zero, right: .zero)
+            hintView.bodyLabel.attributedText = String(format: "share_certificate_detail_view_requirements_met_message".localized, viewModel.vaasResultToken?.provider ?? "").styledAs(.body)
+        case .crossCheck:
+            hintView.isHidden = false
+            hintView.iconView.image = .warning
+            hintView.containerView.backgroundColor = .resultYellowBackground
+            hintView.containerView?.layer.borderColor = UIColor.resultYellow.cgColor
+            hintView.titleLabel.attributedText = "share_certificate_detail_view_requirements_not_verifiable_title".localized.styledAs(.header_3)
+            hintView.subTitleLabel.attributedText =
+            String(format: "share_certificate_detail_view_requirements_not_verifiable_subline".localized, viewModel.vaasResultToken?.verifyingService ?? "").styledAs(.body).colored(.onBackground70)
+            hintView.bodyLabel.layoutMargins = .init(top: .space_14, left: .zero, bottom: .zero, right: .zero)
+            hintView.bodyLabel.attributedText = String(format: "share_certificate_detail_view_requirements_not_verifiable_message".localized, viewModel.vaasResultToken?.provider ?? "").styledAs(.body)
+        case .fail:
+            hintView.isHidden = false
+            hintView.iconView.image = .error
+            hintView.containerView.backgroundColor = .resultRedBackground
+            hintView.containerView?.layer.borderColor = UIColor.resultRed.cgColor
+            hintView.titleLabel.attributedText = "share_certificate_detail_view_requirements_not_met_title".localized.styledAs(.header_3)
+            hintView.subTitleLabel.attributedText =
+            String(format: "share_certificate_detail_view_requirements_not_met_subline".localized, viewModel.vaasResultToken?.verifyingService ?? "").styledAs(.body).colored(.onBackground70)
+            hintView.bodyLabel.layoutMargins = .init(top: .space_14, left: .zero, bottom: .zero, right: .zero)
+            hintView.bodyLabel.attributedText = String(format: "share_certificate_detail_view_requirements_not_met_message".localized, viewModel.vaasResultToken?.provider ?? "").styledAs(.body)
+        default:
+            break
         }
     }
 
@@ -154,5 +214,19 @@ class CertificateItemDetailViewController: UIViewController {
 
     @objc private func deleteCertificate() {
         viewModel.deleteCertificate()
+    }
+}
+
+
+extension CertificateItemDetailViewController: CustomToolbarViewDelegate {
+    func customToolbarView(_: CustomToolbarView, didTap buttonType: ButtonItemType) {
+        switch buttonType {
+        case .navigationArrow:
+            navigationController?.popViewController(animated: true)
+        case .textButton:
+            dismiss(animated: true, completion: nil)
+        default:
+            return
+        }
     }
 }

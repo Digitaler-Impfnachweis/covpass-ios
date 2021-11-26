@@ -14,6 +14,7 @@ public enum APIError: Error, ErrorCode {
     case invalidUrl
     case invalidResponse
     case notModified
+    case trustList
 
     public var errorCode: Int {
         switch self {
@@ -27,6 +28,8 @@ public enum APIError: Error, ErrorCode {
             return 104
         case .notModified:
             return 105
+        case .trustList:
+            return 106
         }
     }
 }

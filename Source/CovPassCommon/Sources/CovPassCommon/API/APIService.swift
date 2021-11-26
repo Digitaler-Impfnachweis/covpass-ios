@@ -33,7 +33,7 @@ public protocol CustomURLSessionProtocol {
 public struct CustomURLSession: CustomURLSessionProtocol {
     private let sessionDelegate: URLSessionDelegate?
     public static let apiHeaderETag: String = "Etag"
-
+    
     public init(sessionDelegate: URLSessionDelegate?) {
         self.sessionDelegate = sessionDelegate
     }
@@ -62,9 +62,12 @@ public struct CustomURLSession: CustomURLSessionProtocol {
                                      delegateQueue: nil)
             session.dataTask(with: urlRequest) { data, response, error in
                 CustomURLSession.updateETag(urlResponse: response)
+                if let httpResponse = response as? HTTPURLResponse, let xNonece = httpResponse.allHeaderFields["x-nonce"] {
+                    UserDefaults.standard.set(xNonece, forKey: "xnonce")
+                }
                 if let error = error {
                     if let error = error as NSError?, error.code == NSURLErrorCancelled {
-                        seal.reject(APIError.requestCancelled)
+                        seal.reject(APIError.trustList)
                         return
                     }
                     if let error = error as? URLError, error.isCancelled {
@@ -129,6 +132,7 @@ public struct CustomURLSession: CustomURLSessionProtocol {
 }
 
 public struct APIService: APIServiceProtocol {
+    
     private let url: String
     private let contentType: String = "application/cbor+base45"
     private let customURLSession: CustomURLSessionProtocol
@@ -151,6 +155,65 @@ public struct APIService: APIServiceProtocol {
         if let etag = APIService.eTagForURL(urlString: request.url?.absoluteString ?? "") {
             request.addValue(etag, forHTTPHeaderField: apiHeaderNoneMatch)
         }
+        return customURLSession.request(request)
+    }
+    
+    public func vaasListOfServices(url: URL) -> Promise<String> {
+        var request = url.urlRequest.GET
+        if let etag = APIService.eTagForURL(urlString: request.url?.absoluteString ?? "") {
+            request.addValue(etag, forHTTPHeaderField: apiHeaderNoneMatch)
+        }
+        return customURLSession.request(request)
+    }
+    
+    public func getAccessTokenFor(url : URL,
+                                  servicePath : String,
+                                  publicKey : String,
+                                  ticketToken: String) -> Promise<String> {
+        let json: [String: Any] = ["service": servicePath, "pubKey": publicKey]
+        
+        let jsonData = try? JSONSerialization.data(withJSONObject: json,options: .prettyPrinted)
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.httpBody = jsonData
+        
+        request.allHTTPHeaderFields  = ["Authorization" : "Bearer " + ticketToken,
+                                        "X-Version": "1.0.0",
+                                        "content-type": "application/json"]
+        
+        return customURLSession.request(request)
+    }
+    
+    public func cancellTicket(url : URL,
+                              ticketToken: String) -> Promise<String> {        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        
+        request.allHTTPHeaderFields  = ["Authorization" : "Bearer " + ticketToken,
+                                        "X-Version": "1.0.0",
+                                        "content-type": "application/json"]
+        
+        return customURLSession.request(request)
+    }
+    
+    public func validateTicketing(url : URL,
+                                  parameters : [String: String]?,
+                                  accessToken: String) -> Promise<String> {
+        let headers = ["Authorization": "Bearer " + accessToken,
+                       "X-Version": "1.0.0",
+                       "content-type": "application/json"]
+        
+        let encoder = JSONEncoder()
+        guard let parametersData = try? encoder.encode(parameters) else {
+            return Promise.init(error: APIError.invalidResponse)
+        }
+        
+        var request = URLRequest(url: url)
+        request.allHTTPHeaderFields = headers
+        request.httpMethod = "POST"
+        request.httpBody = parametersData
+        
         return customURLSession.request(request)
     }
 }

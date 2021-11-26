@@ -15,6 +15,9 @@ public class InfoHeaderView: XibView {
 
     @IBOutlet public var textLabel: UILabel!
     @IBOutlet public var actionButton: UIButton!
+    @IBOutlet public var stackView: UIStackView!
+    @IBOutlet public var topConstraint: NSLayoutConstraint!
+    @IBOutlet public var bottomConstraint: NSLayoutConstraint!
 
     // MARK: - Variables
 

@@ -448,6 +448,10 @@
 
 "VN" = "Vietnam";
 
+"ARG" = "Argentinien";
+
+"MEX" = "Mexiko";
+
 "certificate_check_validity_selection_country_note" = "Sie finden Ihr Reiseland nicht? In einem mehrstufigen Prozess werden nach und nach mehr Länder verfügbar gemacht. \n\nMehr Informationen finden Sie in den Häufigen Fragen und unter #https://reopen.europa.eu::https://reopen.europa.eu#.";
 
 "certificate_check_validity_selection_country_action_button" = "Übernehmen";
@@ -1321,11 +1325,29 @@
 
 "error_share_certificate_provider_not_verified_action_button" = "OK";
 
-"error_share_certificate_test_partner_not_verified_title" = "Die Identität des Prüfpartners konnte nicht überprüft werden";
+"error_share_certificate_validation_partner_not_verified_title" = "Die Identität des Prüfpartners konnte nicht überprüft werden";
 
-"error_share_certificate_test_partner_not_verified_message" = "Das Buchungsportal schlägt vor, Ihr Zertifikat mit folgendem Prüfpartner zu teilen: %@. Dieser Prüfpartner ist uns nicht bekannt.\n\nEine Liste der unterstützten Prüfpartner finden Sie in den Häufigen Fragen.";
+"error_share_certificate_validation_partner_not_verified_message" = "Das Buchungsportal schlägt vor, Ihr Zertifikat mit folgendem Prüfpartner zu teilen: %@. Dieser Prüfpartner ist uns nicht bekannt.\n\nEine Liste der unterstützten Prüfpartner finden Sie in den Häufigen Fragen.";
 
-"error_share_certificate_test_partner_not_verified_action_button" = "OK";
+"error_share_certificate_validation_partner_not_verified_action_button" = "OK";
+
+"error_share_certificate_validation_partner_not_verified_title2" = "Die Identität des Prüfpartners konnte nicht überprüft werden";
+
+"error_share_certificate_validation_partner_not_verified_message2" = "Bei der Prüfung der Identität des Prüfpartners kam es leider zu einem Fehler. Bitte versuchen Sie es zu einem späteren Zeitpunkt noch einmal.";
+
+"error_share_certificate_validation_partner_not_verified_action_button2" = "OK";
+
+"error_share_certificate_access_token_not_retrieved_title" = "Die Buchungsdaten konnten nicht geladen werden";
+
+"error_share_certificate_access_token_not_retrieved_message" = "Bei der Übertragung der Buchungsdaten kam es leider zu einem Fehler. Bitte versuchen Sie es zu einem späteren Zeitpunkt noch einmal.";
+
+"error_share_certificate_access_token_not_retrieved_action_button" = "OK";
+
+"error_share_certificate_access_token_not_processed_title" = "Die Buchungsdaten konnten nicht verarbeitet werden";
+
+"error_share_certificate_access_token_not_processed_message" = "Bei der Verarbeitung der Buchungsdaten kam es leider zu einem Fehler. Bitte versuchen Sie es zu einem späteren Zeitpunkt noch einmal.";
+
+"error_share_certificate_access_token_not_processed_action_button" = "OK";
 
 "error_share_certificate_no_connection_to_provider_title" = "Es konnte keine Verbindung zum Anbieter hergestellt werden";
 
@@ -1338,6 +1360,12 @@
 "error_share_certificate_no_verification_possible_message" = "Leider konnte die Prüfung nicht erfolgreich abgeschlossen werden. Mögliche Gründe dazu finden Sie in den Häufigen Fragen. Bitte versuchen Sie es zu einem späteren Zeitpunkt noch einmal.";
 
 "error_share_certificate_no_verification_possible_action_button" = "OK";
+
+"error_share_certificate_no_verification_submission_possible_title" = "Das Zertifikat konnte nicht zur Prüfung übermittelt werden";
+
+"error_share_certificate_no_verification_submission_possible_message" = "Leider konnte das Zertifikat nicht an den Prüfpartner übermittelt werden. Mögliche Gründe dazu finden Sie in den Häufigen Fragen. Bitte versuchen Sie es zu einem späteren Zeitpunkt noch einmal.";
+
+"error_share_certificate_no_verification_submission_possible_action_button" = "OK";
 
 "cancellation_share_certificate_title" = "Wollen Sie den Vorgang wirklich beenden?";
 

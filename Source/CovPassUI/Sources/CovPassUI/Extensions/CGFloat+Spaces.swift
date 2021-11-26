@@ -15,6 +15,7 @@ public extension CGFloat {
     static let space_8: CGFloat = 8
     static let space_10: CGFloat = 10
     static let space_12: CGFloat = 12
+    static let space_14: CGFloat = 14
     static let space_16: CGFloat = 16
     static let space_18: CGFloat = 18
     static let space_20: CGFloat = 20

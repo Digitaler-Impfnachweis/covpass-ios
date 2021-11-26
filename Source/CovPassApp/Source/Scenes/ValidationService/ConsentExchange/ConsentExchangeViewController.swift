@@ -1,5 +1,5 @@
 //
-//  ValidationServiceViewController.swift
+//  ConsentExchangeViewController.swift
 //
 //  © Copyright IBM Deutschland GmbH 2021
 //  SPDX-License-Identifier: Apache-2.0
@@ -10,25 +10,28 @@ import CovPassUI
 
 private enum Constants {
     enum Text {
-        static let headerText = "share_certificate_title".localized
+        static let headerText = "share_certificate_transmission_title".localized
         static let confirmButton = "share_certificate_action_button_agree".localized
         static let cancelButton = "share_certificate_action_button_cancel".localized
-        static let privacyPolicy = "app_information_title_datenschutz".localized     
+        static let privacyPolicy = "app_information_title_datenschutz".localized
     }
 
     enum Layout {
         static let cancelButtonHeight: CGFloat = 21
         static let mainButtonSize = CGSize(width: 177, height: 56)
-        static let headerViewHeight: CGFloat = 130
+        static let headerViewHeight: CGFloat = 245
         static let footerViewHeight: CGFloat = 200
     }
 }
 
-class ValidationServiceViewController: UIViewController {
+class ConsentExchangeViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
 
-    private let viewModel: ValidationServiceViewModel
+    private let viewModel: ConsentExchangeViewModel
+
+    private let toolbar: CustomToolbarView = CustomToolbarView(frame: .zero)
+    private let toolbarCancel: CustomToolbarView = CustomToolbarView(frame: .zero)
 
     private lazy var mainButton: MainButton = {
         let button = MainButton()
@@ -65,7 +68,32 @@ class ValidationServiceViewController: UIViewController {
         }
         view.actionButton.enableAccessibility(label: ValidationServiceViewModel.Accessibility.close.label)
         view.actionButton.contentVerticalAlignment = .top
-        view.actionButton.contentHorizontalAlignment = .right        
+        view.actionButton.contentHorizontalAlignment = .right
+
+
+        var vm: CertificateItemViewModel?
+        if viewModel.certificate.vaccinationCertificate.hcert.dgc.r != nil {
+            vm = RecoveryCertificateItemViewModel(viewModel.certificate, active: true, neutral: true)
+        }
+        if viewModel.certificate.vaccinationCertificate.hcert.dgc.t != nil {
+            vm = TestCertificateItemViewModel(viewModel.certificate, active: true, neutral: true)
+        }
+        if viewModel.certificate.vaccinationCertificate.hcert.dgc.v != nil {
+            vm = VaccinationCertificateItemViewModel(viewModel.certificate, active: true, neutral: true)
+        }
+        if vm != nil {
+            let item = CertificateItem(viewModel: vm!, action: {})
+            view.addSubview(item)
+            view.bottomConstraint.isActive = false
+            view.topConstraint.constant = 24
+            item.chevron.isHidden = true
+            item.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([
+                item.widthAnchor.constraint(equalTo: view.widthAnchor),
+                item.topAnchor.constraint(equalTo: view.textLabel.bottomAnchor, constant: 16)
+            ])
+        }
+
         return view
     }()
 
@@ -78,11 +106,28 @@ class ValidationServiceViewController: UIViewController {
         borderView.setConstant(height: 1)
 
         footerView.addSubview(borderView)
-        footerView.addSubview(mainButton)
-        footerView.addSubview(cancelButton)
+        footerView.addSubview(toolbar)
+        footerView.addSubview(toolbarCancel)
 
+        toolbar.delegate = self
+        toolbar.state = .confirm("share_certificate_transmission_action_button_agree".localized)
+        toolbar.primaryButton.isHidden = false
+
+        toolbarCancel.delegate = self
+        toolbarCancel.state = .confirm("share_certificate_action_button_cancel".localized)
+        toolbarCancel.setUpLeftButton(leftButtonItem: .navigationArrow)
+        toolbarCancel.primaryButton.isHidden = false
+
+        toolbar.translatesAutoresizingMaskIntoConstraints = false
+        toolbarCancel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([borderView.topAnchor.constraint(equalTo: footerView.topAnchor),
-                                     borderView.widthAnchor.constraint(equalTo: footerView.widthAnchor)])
+                                     borderView.widthAnchor.constraint(equalTo: footerView.widthAnchor),
+                                     toolbar.topAnchor.constraint(equalTo: borderView.bottomAnchor, constant: .space_50),
+                                     toolbar.widthAnchor.constraint(equalTo: footerView.widthAnchor),
+                                     toolbar.heightAnchor.constraint(equalToConstant: Constants.Layout.mainButtonSize.height),
+                                     toolbarCancel.topAnchor.constraint(equalTo: toolbar.bottomAnchor, constant: .space_24),
+                                     toolbarCancel.widthAnchor.constraint(equalTo: footerView.widthAnchor),
+                                     toolbarCancel.heightAnchor.constraint(equalToConstant: Constants.Layout.mainButtonSize.height)])
         return footerView
     }()
 
@@ -95,9 +140,9 @@ class ValidationServiceViewController: UIViewController {
     @available(*, unavailable)
     required init?(coder _: NSCoder) { fatalError("init?(coder: NSCoder) not implemented yet") }
 
-    init(viewModel: ValidationServiceViewModel) {
+    init(viewModel: ConsentExchangeViewModel) {
         self.viewModel = viewModel
-        super.init(nibName: String(describing: Self.self), bundle: .main)        
+        super.init(nibName: String(describing: Self.self), bundle: .main)
     }
 
     override func viewDidLoad() {
@@ -115,12 +160,6 @@ class ValidationServiceViewController: UIViewController {
         tableView.separatorStyle = .singleLine
         tableView.separatorColor = .divider
         tableView.layoutMargins = .init(top: .zero, left: .space_24, bottom: .zero, right: .space_24)
-
-        NSLayoutConstraint.activate([
-            mainButton.topAnchor.constraint(equalTo: footerView.topAnchor, constant: 40),
-            mainButton.centerXAnchor.constraint(equalTo: footerView.centerXAnchor),
-            cancelButton.centerXAnchor.constraint(equalTo: footerView.centerXAnchor),
-            cancelButton.topAnchor.constraint(equalTo: mainButton.bottomAnchor, constant: 24)])
 
         self.tableView.reloadData()
     }
@@ -143,13 +182,13 @@ class ValidationServiceViewController: UIViewController {
     @objc func cancel() {
         viewModel.router.routeToWarning()
     }
-    
+
     @objc func accept() {
-        viewModel.router.routeToSelectCertificate(ticket: viewModel.initialisationData)
+        viewModel.routeToValidation()
     }
 }
 
-extension ValidationServiceViewController: UITableViewDelegate {
+extension ConsentExchangeViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
         if indexPath.row == ValidationServiceViewModel.Rows.privacyLink.rawValue {
@@ -163,7 +202,7 @@ extension ValidationServiceViewController: UITableViewDelegate {
 }
 
 
-extension ValidationServiceViewController: UITableViewDataSource {
+extension ConsentExchangeViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let reuseIdentifier = ValidationServiceViewModel.Rows(rawValue: indexPath.row)?.reuseIdentifier else {
@@ -177,32 +216,32 @@ extension ValidationServiceViewController: UITableViewDataSource {
         cell.isUserInteractionEnabled = false
 
         switch indexPath.row {
-        case ValidationServiceViewModel.Rows.provider.rawValue:
-            cell.textLabel?.attributedText = ValidationServiceViewModel.Rows.provider.cellTitle
+        case ConsentExchangeViewModel.Rows.provider.rawValue:
+            cell.textLabel?.attributedText = ConsentExchangeViewModel.Rows.provider.cellTitle
+                .styledAs(.header_3)
+            cell.detailTextLabel?.attributedText = viewModel.validationServiceName
+                .styledAs(.body)
+            cell.separatorInset = UIEdgeInsets.zero
+        case ConsentExchangeViewModel.Rows.subject.rawValue:
+            cell.textLabel?.attributedText = ConsentExchangeViewModel.Rows.subject.cellTitle
                 .styledAs(.header_3)
             cell.detailTextLabel?.attributedText = viewModel.initialisationData.serviceProvider
                 .styledAs(.body)
             cell.separatorInset = UIEdgeInsets.zero
-        case ValidationServiceViewModel.Rows.subject.rawValue:
-            cell.textLabel?.attributedText = ValidationServiceViewModel.Rows.subject.cellTitle
-                .styledAs(.header_3)
-            cell.detailTextLabel?.attributedText = viewModel.initialisationData.subject
-                .styledAs(.body)
-            cell.separatorInset = UIEdgeInsets.zero
-        case ValidationServiceViewModel.Rows.consentHeader.rawValue:
-            cell.textLabel?.attributedText = viewModel.initialisationData.consent
+        case ConsentExchangeViewModel.Rows.consentHeader.rawValue:
+            cell.textLabel?.attributedText = "share_certificate_transmission_message".localized
                 .styledAs(.body)
             cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: .greatestFiniteMagnitude)
-        case ValidationServiceViewModel.Rows.hintView.rawValue:
+        case ConsentExchangeViewModel.Rows.hintView.rawValue:
             if let hintCell = cell as? HintTableViewCell {
-                hintCell.titleText = ValidationServiceViewModel.Rows.hintView.cellTitle
+                hintCell.titleText = ConsentExchangeViewModel.Rows.hintView.cellTitle
                     .styledAs(.header_3)
                 hintCell.bodyText = viewModel.hintViewText
             }
-        case ValidationServiceViewModel.Rows.additionalInformation.rawValue:
+        case ConsentExchangeViewModel.Rows.additionalInformation.rawValue:
             cell.textLabel?.attributedText = viewModel.additionalInformation
             cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: .greatestFiniteMagnitude)
-        case ValidationServiceViewModel.Rows.privacyLink.rawValue:
+        case ConsentExchangeViewModel.Rows.privacyLink.rawValue:
             cell.isUserInteractionEnabled = true
             cell.textLabel?.attributedText = Constants.Text.privacyPolicy
                 .styledAs(.header_3)
@@ -220,5 +259,27 @@ extension ValidationServiceViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.numberOfRows
+    }
+}
+
+
+// MARK: - CustomToolbarViewDelegate
+
+extension ConsentExchangeViewController: CustomToolbarViewDelegate {
+    func customToolbarView(_ view: CustomToolbarView, didTap buttonType: ButtonItemType) {
+        switch buttonType {
+        case .navigationArrow:
+            navigationController?.popViewController(animated: true)
+        case .cancelButton:
+            self.cancel()
+        case .textButton:
+            if view == toolbar {
+                viewModel.routeToValidation()
+            } else {
+                self.cancel()
+            }
+        default:
+            return
+        }
     }
 }

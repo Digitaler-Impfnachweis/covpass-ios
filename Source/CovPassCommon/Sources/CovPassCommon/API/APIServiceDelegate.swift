@@ -9,7 +9,7 @@
 import Foundation
 
 public final class APIServiceDelegate: NSObject {
-    private let publicKeyHashes: [String]
+    private var publicKeyHashes: [String]
 
     // MARK: - Creating a Delegate
 
@@ -17,6 +17,10 @@ public final class APIServiceDelegate: NSObject {
     /// - Parameter publicKeyHashes: A list of SHA256 hashes of the certificates to pin
     public init(publicKeyHashes: [String]) {
         self.publicKeyHashes = publicKeyHashes
+    }
+    
+    public func extend(hash: String) {
+        self.publicKeyHashes.append(hash)
     }
 }
 

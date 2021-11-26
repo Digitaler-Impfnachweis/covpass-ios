@@ -12,13 +12,13 @@ import PromiseKit
 import CovPassCommon
 
 protocol ChooseCertificateViewModelProtocol {
-    var router: ChooseCertificateRouterProtocol? { get set }
+    var router: ValidationServiceRoutable? { get set }
     var delegate: ViewModelDelegate? { get set }
     var items: [CertificateItem] { get }
-    var typeFilter: [CertType]  { get set }
-    var givenNameFilter: String { get set }
-    var familyNameFilter: String  { get set }
-    var dobFilter: String  { get set}
+    var typeFilter: [CertType]? { get set }
+    var givenNameFilter: String? { get set }
+    var familyNameFilter: String? { get set }
+    var dobFilter: String? { get set}
     var title: String { get }
     var subtitle: String { get }
     var certdetails: String { get }
@@ -27,6 +27,6 @@ protocol ChooseCertificateViewModelProtocol {
     var noMatchImage: UIImage { get }
     var certificatesAvailable: Bool { get }
     var isLoading: Bool { get }
-    func refreshCertificates()
+    func goLive()
     func cancel()
 }

@@ -38,25 +38,33 @@ class ChooseCertificateViewModel: ChooseCertificateViewModelProtocol {
     // MARK: - Properties
 
     weak var delegate: ViewModelDelegate?
-    var router: ChooseCertificateRouterProtocol?
+    var router: ValidationServiceRoutable?
     private let repository: VaccinationRepositoryProtocol
+    private let vaasRepository: VAASRepositoryProtocol
     private let resolver: Resolver<Void>?
     private var certificates: [ExtendedCBORWebToken]? { certificateList.certificates }
     private var certificateList = CertificateList(certificates: [])
     private var filteredCertificates: [ExtendedCBORWebToken] {
-        certificates?.filter(types: typeFilter,
-                             givenName: givenNameFilter,
-                             familyName: familyNameFilter,
-                             dob: dobFilter) ?? []
+        guard let typeFilter = typeFilter,
+              let givenNameFilter = givenNameFilter,
+              let familyNameFilter = familyNameFilter,
+              let dobFilter = dobFilter else {
+                  return []
+              }
+        return certificates?.filter(types: typeFilter,
+                                    givenName: givenNameFilter,
+                                    familyName: familyNameFilter,
+                                    dob: dobFilter) ?? []
     }
     
-    var typeFilter: [CertType]
+    var typeFilter: [CertType]?
     
-    var givenNameFilter: String
+    var givenNameFilter: String?
     
-    var familyNameFilter: String
-    
-    var dobFilter: String
+    var familyNameFilter: String?
+    var dobFilter: String?
+    var validationServiceName: String = ""
+
     
     var title: String {
         return Constant.Keys.title
@@ -71,26 +79,30 @@ class ChooseCertificateViewModel: ChooseCertificateViewModelProtocol {
     }
     
     var certdetails: String {
+        guard let givenNameFilter = givenNameFilter,
+              let familyNameFilter = familyNameFilter,
+              let dobFilter = dobFilter else {
+                  return ""
+              }
         return "\(givenNameFilter) \(familyNameFilter)\n\(dobLabel): \(dobFilter)\n\(availableCertTypes)"
     }
     
     var availableCertTypes: String {
-        var string = ""
-        typeFilter.forEach { certType in
-            switch certType {
-            case .recovery: string.append(Constant.Keys.recoveryLabel)
-            case .test: string.append(Constant.Keys.testLabel)
-            case .vaccination: string.append(Constant.Keys.vaccinationLabel)
-            }
-            if typeFilter.last != certType {
-                string.append(", ")
+        guard let typeFilter = typeFilter else {
+            return ""
+        }
+        return typeFilter.map {
+            switch $0 {
+            case .recovery: return Constant.Keys.recoveryLabel
+            case .test: return Constant.Keys.testLabel
+            case .vaccination: return Constant.Keys.vaccinationLabel
             }
         }
-        return string
+        .joined(separator: ", ")
     }
     
     var certificatesAvailable: Bool {
-        filteredCertificates.count > 0
+        !filteredCertificates.isEmpty
     }
     
     var noMatchTitle: String {
@@ -123,8 +135,7 @@ class ChooseCertificateViewModel: ChooseCertificateViewModelProtocol {
                     return nil
                 }
                 return CertificateItem(viewModel: vm!, action: {
-                    
-                    
+                    self.chooseSert(cert: cert)
                 })
             }
     }
@@ -133,41 +144,77 @@ class ChooseCertificateViewModel: ChooseCertificateViewModelProtocol {
     
     // MARK: - Lifecyle
 
-    init(router: ChooseCertificateRouterProtocol?,
+    init(router: ValidationServiceRoutable?,
          repository: VaccinationRepositoryProtocol,
-         resolvable: Resolver<Void>?,
-         givenNameFilter: String = "ERIKA<DOERTE",
-         familyNameFilter: String = "SCHMITT<MUSTERMANN",
-         dobFilter: String = "1964-08-12",
-         typeFilter: [CertType] =  [.vaccination, .recovery, .test]) {
+         vaasRepository: VAASRepositoryProtocol,
+         resolvable: Resolver<Void>?) {
         self.router = router
         self.repository = repository
-        resolver = resolvable
-        
-        self.givenNameFilter = givenNameFilter
-        self.familyNameFilter = familyNameFilter
-        self.dobFilter = dobFilter
-        self.typeFilter = typeFilter
+        self.resolver = resolvable
+        self.vaasRepository = vaasRepository
     }
 
     // MARK: - Methods
     
-    func refreshCertificates() {
+    func goLive() {
         isLoading = true
         firstly {
             repository.getCertificateList()
         }
-        .get {
-            self.certificateList = $0
+        .map { certificateList in
+            self.certificateList = certificateList
         }
-        .map {  [weak self] list in
-            self?.isLoading = false
-            self?.delegate?.viewModelDidUpdate()
+        .then {
+            self.vaasRepository.fetchValidationService()
         }
-        .cauterize()
+        .map { accessToken in
+            self.givenNameFilter = accessToken.vc?.gnt ?? ""
+            self.familyNameFilter = accessToken.vc?.fnt ?? ""
+            self.dobFilter = accessToken.vc?.dob ?? ""
+            self.typeFilter = accessToken.vc?.type?.compactMap{ CertType(rawValue: $0) } ?? []
+        }
+        .done { () in
+            self.isLoading = false
+            self.delegate?.viewModelDidUpdate()
+        }.catch { error in
+                        
+            switch self.vaasRepository.step {
+            case .downloadIdentityDecorator:
+                if error is APIError {
+                    self.router?.showIdentityDocumentApiError(error: error)
+                } else if error is VAASErrors {
+                    self.router?.showIdentityDocumentVAASError(error: error)
+                } else {
+                    self.router?.showUnexpectedErrorDialog(error)
+                }
+            case .downloadIdentityService:
+                if error is APIError {
+                    self.router?.showIdentityDocumentApiError(error: error)
+                } else {
+                    self.router?.showUnexpectedErrorDialog(error)
+                }
+            case .downloadAccessToken:
+                if error is APIError {
+                    self.router?.accessTokenNotRetrieved(error: error)
+                } else if error is VAASErrors {
+                    self.router?.showAccessTokenNotProcessed(error: error)
+                } else {
+                    self.router?.showUnexpectedErrorDialog(error)
+                }
+            }
+            
+
+            self.isLoading = false
+            self.delegate?.viewModelDidUpdate()
+        }
+        
     }
     
     func cancel() {
         resolver?.cancel()
+    }
+    
+    func chooseSert(cert: ExtendedCBORWebToken) {
+        router?.routeToCertificateConsent(ticket: vaasRepository.ticket, certificate: cert, vaasRepository: self.vaasRepository)
     }
 }
