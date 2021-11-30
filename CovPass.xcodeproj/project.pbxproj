@@ -196,9 +196,7 @@
 		65E0DB0C2657F31C004C660F /* CertificateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65E0DB082657F31C004C660F /* CertificateViewController.xib */; };
 		65E0DB0E2657F5A0004C660F /* CertificateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E0DB0D2657F5A0004C660F /* CertificateViewModel.swift */; };
 		88AB2A9725FA431100D4EA52 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88AB2A3B25FA40CE00D4EA52 /* AppDelegate.swift */; };
-		88AB2AA525FA431E00D4EA52 /* CovPassAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88AB2A3F25FA40CE00D4EA52 /* CovPassAppTests.swift */; };
 		88AB2AC025FA433F00D4EA52 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88AB2A4625FA40CE00D4EA52 /* AppDelegate.swift */; };
-		88AB2ACE25FA434B00D4EA52 /* CovPassCheckAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88AB2A6025FA40CE00D4EA52 /* CovPassCheckAppTests.swift */; };
 		88BEE04226550E2500479E5E /* privacy-covpasscheck-de.html in Resources */ = {isa = PBXBuildFile; fileRef = 88BEE04126550E2500479E5E /* privacy-covpasscheck-de.html */; };
 		950629E22746CCA400138EBE /* ConsentExchangeFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 950629E12746CCA400138EBE /* ConsentExchangeFactory.swift */; };
 		950629E42746CD5B00138EBE /* ConsentExchangeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 950629E32746CD5B00138EBE /* ConsentExchangeRouter.swift */; };
@@ -479,12 +477,10 @@
 		65E0DB0D2657F5A0004C660F /* CertificateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateViewModel.swift; sourceTree = "<group>"; };
 		88AB2A3B25FA40CE00D4EA52 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		88AB2A3C25FA40CE00D4EA52 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		88AB2A3F25FA40CE00D4EA52 /* CovPassAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CovPassAppTests.swift; sourceTree = "<group>"; };
 		88AB2A4025FA40CE00D4EA52 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		88AB2A4325FA40CE00D4EA52 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		88AB2A4625FA40CE00D4EA52 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		88AB2A4725FA40CE00D4EA52 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		88AB2A6025FA40CE00D4EA52 /* CovPassCheckAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CovPassCheckAppTests.swift; sourceTree = "<group>"; };
 		88AB2A6125FA40CE00D4EA52 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		88BEE04126550E2500479E5E /* privacy-covpasscheck-de.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "privacy-covpasscheck-de.html"; sourceTree = "<group>"; };
 		950629E12746CCA400138EBE /* ConsentExchangeFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsentExchangeFactory.swift; sourceTree = "<group>"; };
@@ -1386,7 +1382,6 @@
 			isa = PBXGroup;
 			children = (
 				09590D172715E2B2004410D7 /* SnapShotTests */,
-				88AB2A3F25FA40CE00D4EA52 /* CovPassAppTests.swift */,
 				216D1F5B264EF52400370F16 /* Mock */,
 				216D2025264EF95400370F16 /* Scenes */,
 				88AB2A4025FA40CE00D4EA52 /* Info.plist */,
@@ -1419,7 +1414,6 @@
 			isa = PBXGroup;
 			children = (
 				0904337C270EFE920008267B /* SnapShotTests */,
-				88AB2A6025FA40CE00D4EA52 /* CovPassCheckAppTests.swift */,
 				88AB2A6125FA40CE00D4EA52 /* Info.plist */,
 				95961E872703545200E577A4 /* ValidationResultFactoryTests.swift */,
 				95961E8A270450CA00E577A4 /* Mocks.swift */,
@@ -1849,7 +1843,6 @@
 				0994A4D5273431A500B21FCF /* TestUtil.swift in Sources */,
 				0994A4D7273431A500B21FCF /* BoosterLogicMock.swift in Sources */,
 				096873F127430A4200DB5837 /* ChooseCertificateSnapShotTests.swift in Sources */,
-				88AB2AA525FA431E00D4EA52 /* CovPassAppTests.swift in Sources */,
 				95FE37B4273EF1B7000899A3 /* ValidationServiceViewControllerSnapShotTests.swift in Sources */,
 				216D203D264EFA7400370F16 /* PassOnboardingPageViewModelTests.swift in Sources */,
 				09590D362715E67F004410D7 /* MockViewModelDelegate.swift in Sources */,
@@ -1922,7 +1915,6 @@
 				95961E892703550B00E577A4 /* ValidationResultFactoryTests.swift in Sources */,
 				092090E027060FC30000713F /* ValidatorOverviewViewModelTests.swift in Sources */,
 				09A27BCA270F3A2C000FE4F9 /* TestExtension.swift in Sources */,
-				88AB2ACE25FA434B00D4EA52 /* CovPassCheckAppTests.swift in Sources */,
 				95961E8B270450CA00E577A4 /* Mocks.swift in Sources */,
 				099E6905270DEEE7002C6926 /* TrustedListDetailsViewSnapShotTests.swift in Sources */,
 				0904337E270EFEA50008267B /* BaseSnapShotTests.swift in Sources */,
