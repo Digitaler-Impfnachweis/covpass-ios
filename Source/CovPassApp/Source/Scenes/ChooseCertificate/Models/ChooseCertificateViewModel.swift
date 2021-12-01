@@ -168,8 +168,8 @@ class ChooseCertificateViewModel: ChooseCertificateViewModelProtocol {
             self.vaasRepository.fetchValidationService()
         }
         .map { accessToken in
-            self.givenNameFilter = accessToken.vc?.gnt ?? ""
-            self.familyNameFilter = accessToken.vc?.fnt ?? ""
+            self.givenNameFilter = accessToken.vc?.gnt?.trimmingCharacters(in: .whitespaces) ?? ""
+            self.familyNameFilter = accessToken.vc?.fnt?.trimmingCharacters(in: .whitespaces) ?? ""
             self.dobFilter = accessToken.vc?.dob ?? ""
             self.typeFilter = accessToken.vc?.type?.compactMap{ CertType(rawValue: $0) } ?? []
         }
