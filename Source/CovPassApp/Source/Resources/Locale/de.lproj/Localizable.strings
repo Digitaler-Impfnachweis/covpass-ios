@@ -202,6 +202,29 @@
 "error_test_certificate_not_valid_button_title" = "OK";
 
 
+/********** popup: import qr code from photo library **********/
+
+"accessibility_scan_camera_select_file" = "Datei auswählen";
+
+"error_scan_code_not_recognized_title" = "QR-Code wurde nicht erkannt";
+
+"error_scan_code_not_recognized_message" = "In der ausgewählten Datei wurde kein QR-Code gefunden. Bitte wählen Sie eine Datei oder ein Foto mit einem QR-Code aus.";
+
+"error_scan_code_not_recognized_action_button" = "OK";
+
+"error_scan_file_could_not_be_read_title" = "Die Datei konnte nicht gelesen werden";
+
+"error_scan_file_could_not_be_read_message" = "Die gewählte Datei ist möglicherweise beschädigt oder passwortgeschützt. Bitte wählen Sie eine andere Datei aus.";
+
+"error_scan_file_could_not_be_read_action_button" = "OK";
+
+"error_scan_code_not_suitable_title" = "QR-Code ist nicht geeignet";
+
+"error_scan_code_not_suitable_message" = "Der QR-Code kann nicht in die CovPass-App übertragen werden, da dieser z. B. keine gültige Signatur besitzt. Möglicherweise ist der QR-Code auch nicht lesbar, weil mehrere QR-Codes in der Datei vorhanden sind. Bitte wählen Sie eine Datei mit einem zulässigen QR-Code aus.";
+
+"error_scan_code_not_suitable_action_button" = "OK";
+
+
 /********** start Screen: favorite immunization certificate **********/
 
 "accessibility_certificate_favorite_button_label_active" = "Zertifikate dieser Person immer an erster Stelle anzeigen: aktiv";
@@ -448,9 +471,9 @@
 
 "VN" = "Vietnam";
 
-"ARG" = "Argentinien";
+"AR" = "Argentinien";
 
-"MEX" = "Mexiko";
+"MX" = "Mexiko";
 
 "certificate_check_validity_selection_country_note" = "Sie finden Ihr Reiseland nicht? In einem mehrstufigen Prozess werden nach und nach mehr Länder verfügbar gemacht. \n\nMehr Informationen finden Sie in den Häufigen Fragen und unter #https://reopen.europa.eu::https://reopen.europa.eu#.";
 
