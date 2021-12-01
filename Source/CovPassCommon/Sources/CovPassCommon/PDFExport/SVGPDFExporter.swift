@@ -111,7 +111,7 @@ public final class SVGPDFExporter: NSObject, WKNavigationDelegate, SVGPDFExportP
             // date vaccination
             svg = svg.replacingOccurrences(of: "$dt", with: dateFormatter.string(from: vaccination.dt))
             // country
-            svg = svg.replacingOccurrences(of: "$co", with: vaccination.coDisplayName.sanitizedXMLString)
+            svg = svg.replacingOccurrences(of: "$co", with: vaccination.co.sanitizedXMLString)
             // certificate issue
             svg = svg.replacingOccurrences(of: "$is", with: vaccination.is.sanitizedXMLString)
         }
