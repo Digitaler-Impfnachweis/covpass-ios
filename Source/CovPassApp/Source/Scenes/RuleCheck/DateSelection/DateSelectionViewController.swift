@@ -47,7 +47,10 @@ class DateSelectionViewController: UIViewController {
     // MARK: - Private
 
     private func configureText() {
-        headline.attributedTitleText = "certificate_check_validity_selection_date_title".localized.styledAs(.header_2)
+        let titleText = viewModel.step == .One ? "certificate_check_validity_selection_date_title".localized : "certificate_check_validity_selection_time_title".localized
+        let titleTextAttributed = titleText.styledAs(.header_2)
+        headline.attributedTitleText = titleTextAttributed
+        headline.enableAccessibility(label: titleText, traits: .header)
         headline.action = { [weak self] in
             self?.viewModel.cancel()
         }
