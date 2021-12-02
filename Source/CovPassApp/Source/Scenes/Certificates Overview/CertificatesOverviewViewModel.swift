@@ -17,7 +17,7 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
     // MARK: - Properties
 
     weak var delegate: CertificatesOverviewViewModelDelegate?
-    private var router: CertificatesOverviewRouterProtocol
+    private var router: CertificatesOverviewRouterProtocol?
     private let repository: VaccinationRepositoryProtocol
     private let certLogic: DCCCertLogicProtocol
     private let boosterLogic: BoosterLogicProtocol
@@ -40,7 +40,7 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
     // MARK: - Lifecycle
 
     init(
-        router: CertificatesOverviewRouterProtocol,
+        router: CertificatesOverviewRouterProtocol?,
         repository: VaccinationRepositoryProtocol,
         certLogic: DCCCertLogicProtocol,
         boosterLogic: BoosterLogicProtocol,
@@ -108,10 +108,10 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
 
     func scanCertificate(withIntroduction: Bool) {
         firstly {
-            withIntroduction ? router.showHowToScan() : Promise.value
+            withIntroduction ? router?.showHowToScan() ?? Promise.value : Promise.value
         }
         .then {
-            self.router.scanQRCode()
+            self.router?.scanQRCode() ?? Promise.init(error: APIError.invalidUrl)
         }
         .map { result in            
             try self.payloadFromScannerResult(result)
@@ -131,14 +131,14 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
                 self.handleCertificateDetailSceneResult(.showCertificatesOnOverview([certificate]))
                 self.showCertificate(certificate)
             case let validationServiceInitialisation as ValidationServiceInitialisation:
-                self.router.startValidationAsAService(with: validationServiceInitialisation)
+                self.router?.startValidationAsAService(with: validationServiceInitialisation)
             default:
                 throw CertificateError.invalidEntity
             }
 
         }
         .catch { error in
-            self.router.showDialogForScanError(error) { [weak self] in
+            self.router?.showDialogForScanError(error) { [weak self] in
                 self?.scanCertificate(withIntroduction: false)
             }
         }
@@ -146,14 +146,14 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
 
     func showRuleCheck() {
         if self.certificateList.certificates.filterValidAndNotExpiredCertsWhichArenNotFraud.isEmpty {
-            self.router.showFilteredCertsErrorDialog()
+            self.router?.showFilteredCertsErrorDialog()
         } else {
-            router.showRuleCheck().cauterize()
+            router?.showRuleCheck().cauterize()
         }
     }
 
     func showAppInformation() {
-        router.showAppInformation()
+        router?.showAppInformation()
     }
 
     /// Show notifications like announcements and booster notifications one after another
@@ -212,7 +212,7 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
             self.delegate?.viewModelNeedsFirstCertificateVisible()
         }
         .catch { [weak self] error in
-            self?.router.showUnexpectedErrorDialog(error)
+            self?.router?.showUnexpectedErrorDialog(error)
         }
     }
 
@@ -227,7 +227,7 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
             return
         }
         firstly {
-            router.showCertificates(certificates)
+            router?.showCertificates(certificates) ?? Promise.init(error: APIError.invalidUrl)
         }
         .cancelled {
             // User cancelled by back button or swipe gesture.
@@ -242,14 +242,14 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
             self.handleCertificateDetailSceneResult($0)
         }
         .catch { [weak self] error in
-            self?.router.showUnexpectedErrorDialog(error)
+            self?.router?.showUnexpectedErrorDialog(error)
         }
     }
 
     private func handleCertificateDetailSceneResult(_ result: CertificateDetailSceneResult) {
         switch result {
         case .didDeleteCertificate:
-            router.showCertificateDidDeleteDialog()
+            router?.showCertificateDidDeleteDialog()
             delegate?.viewModelNeedsFirstCertificateVisible()
 
         case let .showCertificatesOnOverview(certificates):
@@ -271,7 +271,7 @@ extension CertificatesOverviewViewModel {
         let bundleVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
         if announcementVersion == bundleVersion { return Promise.value }
         try? userDefaults.store(UserDefaults.keyAnnouncement, value: bundleVersion)
-        return router.showAnnouncement()
+        return router?.showAnnouncement()  ?? Promise.init(error: APIError.invalidUrl)
     }
 }
 
@@ -286,7 +286,7 @@ private extension CertificatesOverviewViewModel {
 		#if DEBUG
         UserDefaults.StartupInfo.set(false, forKey: .scanPleaseShown)
         #endif
-        return router.showScanPleaseHint()
+        return router?.showScanPleaseHint() ?? Promise.init(error: APIError.invalidUrl)
     }
 }
 
@@ -305,7 +305,7 @@ extension CertificatesOverviewViewModel {
             if !showBoosterNotification { return Promise.value }
             return self.refreshCertificates()
                 .then {
-                    self.router.showBoosterNotification()
+                    self.router?.showBoosterNotification() ?? Promise.init(error: APIError.invalidUrl)
                 }
         }
     }
@@ -330,7 +330,7 @@ extension CertificatesOverviewViewModel {
 
             if showAlert {
                 let action = DialogAction(title: "error_validity_check_certificates_button_title".localized)
-                self.router.showDialog(title: "certificate_check_invalidity_error_title".localized,
+                self.router?.showDialog(title: "certificate_check_invalidity_error_title".localized,
                                        message: "certificate_check_invalidity_error_text".localized,
                                        actions: [action],
                                        style: .alert)

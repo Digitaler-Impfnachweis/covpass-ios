@@ -59,6 +59,7 @@
 		09AC1E062757B6C9008356CD /* ValidationResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09AC1DFF2757B6C9008356CD /* ValidationResultViewModel.swift */; };
 		09AC1E072757B6C9008356CD /* VaccinationResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09AC1E002757B6C9008356CD /* VaccinationResultViewModel.swift */; };
 		09AC1E082757B6C9008356CD /* TestResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09AC1E012757B6C9008356CD /* TestResultViewModel.swift */; };
+		09C1DD922759727500BC0B36 /* CertificateCardsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C1DD912759727500BC0B36 /* CertificateCardsTests.swift */; };
 		216D1F48264EF50300370F16 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 216D1F43264EF50300370F16 /* Localizable.strings */; };
 		216D1F49264EF50300370F16 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 216D1F46264EF50300370F16 /* Assets.xcassets */; };
 		216D1F87264EF6A800370F16 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 216D1F86264EF6A800370F16 /* LaunchScreen.storyboard */; };
@@ -320,6 +321,7 @@
 		09AC1DFF2757B6C9008356CD /* ValidationResultViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidationResultViewModel.swift; sourceTree = "<group>"; };
 		09AC1E002757B6C9008356CD /* VaccinationResultViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VaccinationResultViewModel.swift; sourceTree = "<group>"; };
 		09AC1E012757B6C9008356CD /* TestResultViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestResultViewModel.swift; sourceTree = "<group>"; };
+		09C1DD912759727500BC0B36 /* CertificateCardsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateCardsTests.swift; sourceTree = "<group>"; };
 		210116F82646D18100B9E8FF /* debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = debug.xcconfig; sourceTree = "<group>"; };
 		2101178C2646E86F00B9E8FF /* debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = debug.xcconfig; sourceTree = "<group>"; };
 		212E757D264F0D09007C0F3A /* CovPassUI */ = {isa = PBXFileReference; lastKnownFileType = folder; path = CovPassUI; sourceTree = "<group>"; };
@@ -877,6 +879,7 @@
 			children = (
 				216D1F5A264EF52400370F16 /* CertificateViewModelTests.swift */,
 				216D1F58264EF52400370F16 /* CertificateViewControllerTests.swift */,
+				09C1DD912759727500BC0B36 /* CertificateCardsTests.swift */,
 			);
 			path = Certificate;
 			sourceTree = "<group>";
@@ -1847,6 +1850,7 @@
 				09590D372715E67F004410D7 /* CertificateDetailViewModelTests.swift in Sources */,
 				09590D342715E67F004410D7 /* MockPersistence.swift in Sources */,
 				09590D4027161182004410D7 /* CertLogicMock.swift in Sources */,
+				09C1DD922759727500BC0B36 /* CertificateCardsTests.swift in Sources */,
 				09590D352715E67F004410D7 /* MockCertificateViewModel.swift in Sources */,
 				95FE37B6273EF4FC000899A3 /* VAASRepositoryMock.swift in Sources */,
 				386FDCFC26ED205900AC7639 /* BoosterNotificationViewModelTests.swift in Sources */,
