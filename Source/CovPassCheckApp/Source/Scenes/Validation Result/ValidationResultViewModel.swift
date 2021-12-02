@@ -11,33 +11,16 @@ import CovPassUI
 import PromiseKit
 import UIKit
 
-struct Paragraph {
-    var icon: UIImage?
-    var title: String
-    var subtitle: String
-}
-
-typealias ValidationResultViewModel = ValidationViewModel & CancellableViewModelProtocol
-
-protocol ResultViewModelDelegate: AnyObject {
-    func viewModelDidUpdate()
-    func viewModelDidChange(_ newViewModel: ValidationResultViewModel)
-}
-
-protocol ValidationViewModel {
-    var router: ValidationResultRouterProtocol { get set }
-    var repository: VaccinationRepositoryProtocol { get set }
-    var certificate: CBORWebToken? { get set }
-    var delegate: ResultViewModelDelegate? { get set }
-    var icon: UIImage? { get }
-    var resultTitle: String { get }
-    var resultBody: String { get }
-    var paragraphs: [Paragraph] { get }
-    var info: String? { get }
-    func scanNextCertifcate()
+private enum Constants {
+    static let confirmButtonLabel = "validation_check_popup_valid_vaccination_button_title".localized
 }
 
 extension ValidationViewModel {
+    
+    var toolbarState: CustomToolbarState {
+        return .confirm(Constants.confirmButtonLabel)
+    }
+    
     func cancel() {
         router.showStart()
     }
@@ -57,7 +40,8 @@ extension ValidationViewModel {
                 router: self.router,
                 repository: self.repository,
                 certificate: certificate,
-                error: nil
+                error: nil,
+                certLogic: DCCCertLogic.create()
             )
             self.delegate?.viewModelDidChange(vm)
         }
@@ -66,7 +50,8 @@ extension ValidationViewModel {
                 router: self.router,
                 repository: self.repository,
                 certificate: nil,
-                error: error
+                error: error,
+                certLogic: DCCCertLogic.create()
             )
             self.delegate?.viewModelDidChange(vm)
         }

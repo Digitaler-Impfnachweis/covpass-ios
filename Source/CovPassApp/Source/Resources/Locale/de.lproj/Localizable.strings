@@ -1318,23 +1318,23 @@
 
 "accessibility_share_certificate_transmission_closing_announce" = "Die Ansicht \"Übermittlung Ihres Zertifikats zur Prüfung\" wurde geschlossen.";
 
-"share_certificate_detail_view_requirements_met_title" = "Zertifikat entspricht den Anforderungen des Anbieters";
+"share_certificate_detail_view_requirements_met_title" = "Zertifikat entspricht den Anforderungen";
 
 "share_certificate_detail_view_requirements_met_subline" = "Geprüft von %@";
 
-"share_certificate_detail_view_requirements_met_message" = "Bei Fragen wenden Sie sich bitte an den Anbieter %@.";
+"share_certificate_detail_view_requirements_met_message" = "Der Anbieter wurde über die erfolgreiche Prüfung informiert. Bei Fragen wenden Sie sich bitte an den Anbieter %@.";
 
-"share_certificate_detail_view_requirements_not_verifiable_title" = "Zertifikat ist nicht vollständig prüfbar";
+"share_certificate_detail_view_requirements_not_verifiable_title" = "Zertifikat nicht prüfbar";
 
 "share_certificate_detail_view_requirements_not_verifiable_subline" = "Geprüft von %@";
 
-"share_certificate_detail_view_requirements_not_verifiable_message" = "Leider ist eine automatische Prüfung nicht möglich. Überprüfen Sie die gelb markierten Angaben bitte selbst.\n\nBei Fragen wenden Sie sich bitte an den Anbieter %@.";
+"share_certificate_detail_view_requirements_not_verifiable_message" = "Leider ist eine automatische Prüfung nicht möglich. Überprüfen Sie die gelb markierten Angaben bitte selbst. Bei Fragen wenden Sie sich bitte an den Anbieter %@.";
 
-"share_certificate_detail_view_requirements_not_met_title" = "Zertifikat entspricht nicht den Anforderungen des Anbieters";
+"share_certificate_detail_view_requirements_not_met_title" = "Zertifikat entspricht nicht den Anforderungen";
 
 "share_certificate_detail_view_requirements_not_met_subline" = "Geprüft von %@";
 
-"share_certificate_detail_view_requirements_not_met_message" = "Die Angaben, die nicht den Anforderungen entsprechen, sind unterhalb rot markiert.\n\nBei Fragen wenden Sie sich bitte an den Anbieter %@.";
+"share_certificate_detail_view_requirements_not_met_message" = "Bei Fragen wenden Sie sich bitte an den Anbieter %@.";
 
 "error_share_certificate_qr_code_not_recognized_title" = "QR-Code wurde nicht erkannt";
 

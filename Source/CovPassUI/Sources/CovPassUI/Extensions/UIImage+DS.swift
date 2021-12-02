@@ -125,6 +125,9 @@ public extension UIImage {
 
     @ImageLoader(name: "result_success")
     private(set) static var resultSuccess
+    
+    @ImageLoader(name: "result_open")
+    private(set) static var resultOpen
 
     @ImageLoader(name: "result_error")
     private(set) static var resultError

@@ -7,12 +7,9 @@
 //
 
 import CovPassCommon
+import CovPassUI
 import Foundation
 
-public enum ValidationResultError: Error {
-    case technical
-    case functional
-}
 
 struct ValidationResultFactory {
     static func createViewModel(router: ValidationResultRouterProtocol,
@@ -20,16 +17,16 @@ struct ValidationResultFactory {
                                 certificate: CBORWebToken?,
                                 error: Error?,
                                 type: DCCCertLogic.LogicType = .eu,
-                                certLogic: DCCCertLogicProtocol = DCCCertLogic.create()) -> ValidationResultViewModel {
+                                certLogic: DCCCertLogicProtocol) -> ValidationResultViewModel {
         guard let cert = certificate, error == nil else {
             return ErrorResultViewModel(router: router, repository: repository, error: error ?? ValidationResultError.technical)
         }
-
+        
         do {
             // Validate given certificate based on GERMAN rules and users local time (CovPassCheck only)
             let validationResult = try certLogic.validate(type: type, countryCode: "DE", validationClock: Date(), certificate: cert)
             let valid = validationResult.contains(where: { $0.result != .passed }) == false
-
+            
             // Show error dialog when at least one rule failed or there are no rules at all
             if !valid {
                 return ErrorResultViewModel(router: router, repository: repository, certificate: certificate, error: ValidationResultError.functional)

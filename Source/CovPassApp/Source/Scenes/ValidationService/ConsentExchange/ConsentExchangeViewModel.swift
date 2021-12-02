@@ -140,7 +140,7 @@ struct ConsentExchangeViewModel {
             try vaasRepository.validateTicketing(choosenCert: certificate)
         }
         .done { accessToken in            
-            router.routeToCertificateValidationResult(for: self.certificate, with: accessToken)
+            router.showCertificate(self.certificate, with: accessToken)
         }
         .catch { error in
             

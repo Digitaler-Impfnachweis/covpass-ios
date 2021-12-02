@@ -6,21 +6,56 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-import CovPassUI
 import UIKit
+import CovPassCommon
+
+public struct Paragraph {
+    var icon: UIImage?
+    var title: String
+    var subtitle: String
+    
+    public init (icon: UIImage?,
+                 title: String,
+                 subtitle: String) {
+        self.icon = icon
+        self.title = title
+        self.subtitle = subtitle
+    }
+}
+
+public typealias ValidationResultViewModel = ValidationViewModel & CancellableViewModelProtocol
+
+public protocol ResultViewModelDelegate: AnyObject {
+    func viewModelDidUpdate()
+    func viewModelDidChange(_ newViewModel: ValidationResultViewModel)
+}
+
+public protocol ValidationViewModel {
+    var router: ValidationResultRouterProtocol { get set }
+    var repository: VaccinationRepositoryProtocol { get set }
+    var certificate: CBORWebToken? { get set }
+    var delegate: ResultViewModelDelegate? { get set }
+    var toolbarState: CustomToolbarState { get }
+    var icon: UIImage? { get }
+    var resultTitle: String { get }
+    var resultBody: String { get }
+    var paragraphs: [Paragraph] { get }
+    var info: String? { get }
+    func scanNextCertifcate()
+}
 
 private enum Constants {
     static let confirmButtonLabel = "validation_check_popup_valid_vaccination_button_title".localized
-
+    
     enum Accessibility {
         static let image = VoiceOverOptions.Settings(label: "accessibility_image_alternative_text".localized)
         static let close = VoiceOverOptions.Settings(label: "accessibility_popup_label_close".localized)
     }
 }
 
-class ValidationResultViewController: UIViewController {
+public class ValidationResultViewController: UIViewController {
     // MARK: - IBOutlet
-
+    
     @IBOutlet var stackView: UIStackView!
     @IBOutlet var toolbarView: CustomToolbarView!
     @IBOutlet var headline: InfoHeaderView!
@@ -29,46 +64,46 @@ class ValidationResultViewController: UIViewController {
     @IBOutlet var resultView: ParagraphView!
     @IBOutlet var paragraphStackView: UIStackView!
     @IBOutlet var infoView: PlainLabel!
-
+    
     // MARK: - Properties
-
+    
     private(set) var viewModel: ValidationResultViewModel
-
+    
     // MARK: - Lifecycle
-
+    
     @available(*, unavailable)
     required init?(coder _: NSCoder) { fatalError("init?(coder: NSCoder) not implemented yet") }
-
-    init(viewModel: ValidationResultViewModel) {
+    
+    public init(viewModel: ValidationResultViewModel) {
         self.viewModel = viewModel
-        super.init(nibName: String(describing: Self.self), bundle: .main)
+        super.init(nibName: String(describing: Self.self), bundle: .uiBundle)
         self.viewModel.delegate = self
     }
-
-    override func viewDidLoad() {
+    
+    public override func viewDidLoad() {
         super.viewDidLoad()
         configureHeadline()
         configureToolbarView()
         configureAccessibility()
         updateViews()
     }
-
+    
     // MARK: - Private
-
+    
     private func updateViews() {
         stackView.setCustomSpacing(.space_24, after: imageContainerView)
         stackView.setCustomSpacing(.space_24, after: resultView)
-
+        
         imageView.image = viewModel.icon
         imageView.enableAccessibility(label: Constants.Accessibility.image.label)
         
         resultView.attributedTitleText = viewModel.resultTitle.styledAs(.header_1)
         resultView.attributedBodyText = viewModel.resultBody.styledAs(.body)
         resultView.bottomBorder.isHidden = true
-
+        
         infoView.attributedText = viewModel.info?.styledAs(.body).colored(.onBackground40)
         infoView.layoutMargins = .init(top: .zero, left: .space_24, bottom: .zero, right: .space_24)
-
+        
         paragraphStackView.subviews.forEach {
             $0.removeFromSuperview()
             self.paragraphStackView.removeArrangedSubview($0)
@@ -83,10 +118,10 @@ class ValidationResultViewController: UIViewController {
             p.layoutMargins.bottom = .space_20
             self.paragraphStackView.addArrangedSubview(p)
         }
-
+        
         UIAccessibility.post(notification: .layoutChanged, argument: resultView.titleLabel)
     }
-
+    
     private func configureHeadline() {
         headline.attributedTitleText = "".styledAs(.header_3)
         headline.action = { [weak self] in
@@ -96,12 +131,12 @@ class ValidationResultViewController: UIViewController {
         headline.actionButton.enableAccessibility(label: Constants.Accessibility.close.label)
         stackView.setCustomSpacing(.space_24, after: headline)
     }
-
+    
     private func configureToolbarView() {
-        toolbarView.state = .confirm(Constants.confirmButtonLabel)
+        toolbarView.state = viewModel.toolbarState
         toolbarView.delegate = self
     }
-
+    
     private func configureAccessibility() {
         headline.actionButton.enableAccessibility(label: Constants.Accessibility.close.label)
     }
@@ -110,11 +145,11 @@ class ValidationResultViewController: UIViewController {
 // MARK: - ViewModelDelegate
 
 extension ValidationResultViewController: ResultViewModelDelegate {
-    func viewModelDidUpdate() {
+    public func viewModelDidUpdate() {
         updateViews()
     }
-
-    func viewModelDidChange(_ newViewModel: ValidationResultViewModel) {
+    
+    public func viewModelDidChange(_ newViewModel: ValidationResultViewModel) {
         viewModel = newViewModel
         viewModel.delegate = self
         updateViews()
@@ -124,7 +159,7 @@ extension ValidationResultViewController: ResultViewModelDelegate {
 // MARK: - CustomToolbarViewDelegate
 
 extension ValidationResultViewController: CustomToolbarViewDelegate {
-    func customToolbarView(_: CustomToolbarView, didTap buttonType: ButtonItemType) {
+    public func customToolbarView(_: CustomToolbarView, didTap buttonType: ButtonItemType) {
         switch buttonType {
         case .textButton:
             viewModel.scanNextCertifcate()
@@ -137,11 +172,11 @@ extension ValidationResultViewController: CustomToolbarViewDelegate {
 // MARK: - ModalInteractiveDismissibleProtocol
 
 extension ValidationResultViewController: ModalInteractiveDismissibleProtocol {
-    func canDismissModalViewController() -> Bool {
+    public func canDismissModalViewController() -> Bool {
         viewModel.isCancellable()
     }
-
-    func modalViewControllerDidDismiss() {
+    
+    public func modalViewControllerDidDismiss() {
         viewModel.cancel()
     }
 }

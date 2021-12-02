@@ -65,7 +65,7 @@ protocol ValidationServiceRoutable: DialogRouterProtocol {
     func routeToSelectCertificate(ticket: ValidationServiceInitialisation)
     func routeToCertificateConsent(ticket: ValidationServiceInitialisation, certificate: ExtendedCBORWebToken, vaasRepository: VAASRepositoryProtocol)
     func routeToPrivacyStatement(url: URL)
-    func routeToCertificateValidationResult(for certificate: ExtendedCBORWebToken, with result: VAASValidaitonResultToken)
+    func showCertificate(_ certificate: ExtendedCBORWebToken, with result: VAASValidaitonResultToken)
 }
 
 struct ValidationServiceRouter: ValidationServiceRoutable {
@@ -189,12 +189,13 @@ struct ValidationServiceRouter: ValidationServiceRoutable {
         sceneCoordinator.push(webViewScene)
     }
     
-    func routeToCertificateValidationResult(for certificate: ExtendedCBORWebToken, with result: VAASValidaitonResultToken) {
+    func showCertificate(_ certificate: ExtendedCBORWebToken, with result: VAASValidaitonResultToken) {
         sceneCoordinator.push(
-            CertificateItemDetailSceneFactory(
-                router: CertificateItemDetailRouter(sceneCoordinator: sceneCoordinator),
+            ValidationResultSceneFactory(
+                router: ValidationResultRouter(sceneCoordinator: sceneCoordinator),
                 certificate: certificate,
-                vaasResult: result
+                error: nil,
+                token: result
             )
         )
     }
