@@ -73,6 +73,7 @@ public protocol VAASRepositoryProtocol {
     var step: VAASStep { get set }
     func fetchValidationService() -> Promise<AccessTokenResponse>
     func validateTicketing (choosenCert cert: ExtendedCBORWebToken) throws -> Promise<VAASValidaitonResultToken>
+    func cancellation()
 }
 
 public class VAASRepository: VAASRepositoryProtocol {
@@ -288,7 +289,7 @@ public class VAASRepository: VAASRepositoryProtocol {
                     }
                 }
             }
-            next(validationServices.reversed())
+            next(validationServices)
         }
     }
     

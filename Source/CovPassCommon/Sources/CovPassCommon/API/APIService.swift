@@ -188,7 +188,7 @@ public struct APIService: APIServiceProtocol {
     public func cancellTicket(url : URL,
                               ticketToken: String) -> Promise<String> {        
         var request = URLRequest(url: url)
-        request.httpMethod = "POST"
+        request.httpMethod = "GET"
         
         request.allHTTPHeaderFields  = ["Authorization" : "Bearer " + ticketToken,
                                         "X-Version": "1.0.0",

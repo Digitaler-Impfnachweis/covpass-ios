@@ -16,20 +16,20 @@ class ValidationServiceViewControllerSnapShotTests: BaseSnapShotTests {
     func testConsentScreen() {
         let vm = ValidationServiceViewModel(router: ValidationServiceRouterMock(), initialisationData: ValidationServiceInitialisation.mock)
         let vc = ValidationServiceViewController(viewModel: vm)
-
+        
         verifyView(view: vc.view, height: 1350)
     }
-
+    
     func testWebViewScreen() {
         let vm = WebviewViewModel(title: "app_information_title_datenschutz".localized(bundle: Bundle.uiBundle),
                                   url: ValidationServiceInitialisation.mock.privacyUrl,
                                   closeButtonShown: false,
                                   isToolbarShown: true)
         let vc = WebviewViewController(viewModel: vm)
-
+        
         verifyView(view: vc.view)
     }
-
+    
     func testValidationConsentScreen() {
         let vm = ConsentExchangeViewModel(router: ValidationServiceRouterMock(), vaasRepository: VAASRepositoryMock(step: .downloadAccessToken),
                                           initialisationData: ValidationServiceInitialisation.mock,
@@ -37,7 +37,7 @@ class ValidationServiceViewControllerSnapShotTests: BaseSnapShotTests {
         let vc = ConsentExchangeViewController(viewModel: vm)
         verifyView(view: vc.view, height: 1850)
     }
-
+    
     func test_validation_result_passed() {
         var vaasValidationResultToken = VAASValidaitonResultToken.mock
         vaasValidationResultToken.result = .passed
@@ -47,7 +47,7 @@ class ValidationServiceViewControllerSnapShotTests: BaseSnapShotTests {
         let vc = CertificateItemDetailViewController(viewModel: vm)
         verifyView(view: vc.view, height: 2200)
     }
-
+    
     func test_validation_result_cross_check() {
         var vaasValidationResultToken = VAASValidaitonResultToken.mock
         vaasValidationResultToken.result = .crossCheck
@@ -57,7 +57,7 @@ class ValidationServiceViewControllerSnapShotTests: BaseSnapShotTests {
         let vc = CertificateItemDetailViewController(viewModel: vm)
         verifyView(view: vc.view, height: 2200)
     }
-
+    
     func test_validation_result_fail() {
         var vaasValidationResultToken = VAASValidaitonResultToken.mock
         vaasValidationResultToken.result = .fail
@@ -73,91 +73,105 @@ struct CertificateItemDetailRouterMock: CertificateItemDetailRouterProtocol {
     func showCertificate(for token: ExtendedCBORWebToken) -> Promise<Void> {
         .value(())
     }
-
+    
     func showPDFExport(for token: ExtendedCBORWebToken) -> Promise<Void> {
         .value(())
     }
-
+    
     var sceneCoordinator: SceneCoordinator = SceneCoordinatorMock()
 }
 
 
 struct ValidationServiceRouterMock: ValidationServiceRoutable {
     func showCertificate(_ certificate: ExtendedCBORWebToken, with result: VAASValidaitonResultToken) {
-    
-    }
-    
-    func showIdentityDocumentApiError(error: Error) {
         
     }
     
-    func showIdentityDocumentVAASError(error: Error) {
-        
+    func showIdentityDocumentApiError(error: Error) -> Promise<Bool>  {
+        .init { resolver in
+            resolver.fulfill(true)
+        }
     }
     
-    func accessTokenNotRetrieved(error: Error) {
-        
+    func showIdentityDocumentVAASError(error: Error) -> Promise<Bool>  {
+        .init { resolver in
+            resolver.fulfill(true)
+        }
     }
     
-    func showNoVerificationPossible(error: Error) {
-        
+    func accessTokenNotRetrieved(error: Error) -> Promise<Bool>  {
+        .init { resolver in
+            resolver.fulfill(true)
+        }
     }
     
-    func showNoVerificationSubmissionPossible(error: Error) {
-        
+    func showNoVerificationPossible(error: Error) -> Promise<Bool>  {
+        .init { resolver in
+            resolver.fulfill(true)
+        }
     }
     
-    func showAccessTokenNotProcessed(error: Error) {
-        
+    func showNoVerificationSubmissionPossible(error: Error) -> Promise<Bool>  {
+        .init { resolver in
+            resolver.fulfill(true)
+        }
     }
     
-
+    func showAccessTokenNotProcessed(error: Error) -> Promise<Bool>  {
+        .init { resolver in
+            resolver.fulfill(true)
+        }
+    }
+    
+    
     func routeToSelectCertificate(ticket: ValidationServiceInitialisation) {
-
+        
     }
-
+    
     func routeToCertificateConsent(ticket: ValidationServiceInitialisation, certificate: ExtendedCBORWebToken, vaasRepository: VAASRepositoryProtocol) {
-
+        
     }
-
+    
     func routeToCertificateValidationResult(for certificate: ExtendedCBORWebToken, with result: VAASValidaitonResultToken) {
         
     }
-
+    
     func routeToConsentGeneralConsent() {
-
+        
     }
-
-    func routeToWarning() {
-
+    
+    func routeToWarning() -> Promise<Bool>  {
+        .init { resolver in
+            resolver.fulfill(true)
+        }
     }
-
+    
     func routeToSelectCertificate() {
-
+        
     }
-
+    
     func routeToCertificateConsent() {
-
+        
     }
-
+    
     func routeToPrivacyStatement(url: URL) {
-
+        
     }
-
+    
     func showError2(error: Error) {
     }
-
+    
     func showError3(error: Error) {
-
+        
     }
-
+    
     func showError4(error: Error) {
     }
-
+    
     func showError5(error: Error) {
     }
-
-
+    
+    
     var sceneCoordinator: SceneCoordinator = SceneCoordinatorMock()
 }
 

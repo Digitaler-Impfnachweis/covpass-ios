@@ -182,28 +182,56 @@ class ChooseCertificateViewModel: ChooseCertificateViewModelProtocol {
             case .downloadIdentityDecorator:
                 if error is APIError {
                     self.router?.showIdentityDocumentApiError(error: error)
+                        .done { canceled in
+                            if canceled {
+                                self.vaasRepository.cancellation()
+                            }
+                        }
+                        .cauterize()
                 } else if error is VAASErrors {
                     self.router?.showIdentityDocumentVAASError(error: error)
+                        .done { canceled in
+                            if canceled {
+                                self.vaasRepository.cancellation()
+                            }
+                        }
+                        .cauterize()
                 } else {
                     self.router?.showUnexpectedErrorDialog(error)
                 }
             case .downloadIdentityService:
                 if error is APIError {
                     self.router?.showIdentityDocumentApiError(error: error)
+                        .done { canceled in
+                            if canceled {
+                                self.vaasRepository.cancellation()
+                            }
+                        }
+                        .cauterize()
                 } else {
                     self.router?.showUnexpectedErrorDialog(error)
                 }
             case .downloadAccessToken:
                 if error is APIError {
                     self.router?.accessTokenNotRetrieved(error: error)
+                        .done { canceled in
+                            if canceled {
+                                self.vaasRepository.cancellation()
+                            }
+                        }
+                        .cauterize()
                 } else if error is VAASErrors {
                     self.router?.showAccessTokenNotProcessed(error: error)
+                        .done { canceled in
+                            if canceled {
+                                self.vaasRepository.cancellation()
+                            }
+                        }
+                        .cauterize()
                 } else {
                     self.router?.showUnexpectedErrorDialog(error)
                 }
             }
-            
-
             self.isLoading = false
             self.delegate?.viewModelDidUpdate()
         }
@@ -211,7 +239,20 @@ class ChooseCertificateViewModel: ChooseCertificateViewModelProtocol {
     }
     
     func cancel() {
+        firstly {
+            router?.routeToWarning() ?? .init(error: APIError.invalidResponse)
+        }
+        .done { canceled in
+            if canceled {
+                self.vaasRepository.cancellation()
+            }
+        }
+        .cauterize()
+    }
+    
+    func back() {
         resolver?.cancel()
+        vaasRepository.cancellation()
     }
     
     func chooseSert(cert: ExtendedCBORWebToken) {
