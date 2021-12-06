@@ -27,18 +27,6 @@ class CertificateCardsTests: XCTestCase {
         sut = nil
         super.tearDown()
     }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
     
     func testTestCertificate() {
         // Given
@@ -67,10 +55,8 @@ class CertificateCardsTests: XCTestCase {
         XCTAssertEqual(.brandAccentPurple, model.backgroundColor)
         XCTAssertEqual(.neutralWhite, model.tintColor)
         XCTAssertEqual(.iconTest, model.titleIcon)
-        XCTAssertEqual(false, model.isBoosted)
         XCTAssertEqual(false, model.isExpired)
         XCTAssertEqual(false, model.isFavorite)
-        XCTAssertEqual(false, model.isFullImmunization)
     }
     
     func testTestCertificateNotPCR() {
@@ -101,10 +87,8 @@ class CertificateCardsTests: XCTestCase {
         XCTAssertEqual(.brandAccentPurple, model.backgroundColor)
         XCTAssertEqual(.neutralWhite, model.tintColor)
         XCTAssertEqual(.iconTest, model.titleIcon)
-        XCTAssertEqual(false, model.isBoosted)
         XCTAssertEqual(false, model.isExpired)
         XCTAssertEqual(false, model.isFavorite)
-        XCTAssertEqual(false, model.isFullImmunization)
     }
     
     func testVaccinationCertificate() {
@@ -134,10 +118,8 @@ class CertificateCardsTests: XCTestCase {
         XCTAssertEqual(.onBrandAccent70, model.backgroundColor)
         XCTAssertEqual(.neutralWhite, model.tintColor)
         XCTAssertEqual(.startStatusFullWhite, model.titleIcon)
-        XCTAssertEqual(false, model.isBoosted)
         XCTAssertEqual(false, model.isExpired)
         XCTAssertEqual(false, model.isFavorite)
-        XCTAssertEqual(true, model.isFullImmunization)
     }
     
     func testVaccinationCertificatePartly() {
@@ -168,10 +150,8 @@ class CertificateCardsTests: XCTestCase {
         XCTAssertEqual(.onBackground50, model.backgroundColor)
         XCTAssertEqual(.neutralBlack, model.tintColor)
         XCTAssertEqual(.statusPartial, model.titleIcon)
-        XCTAssertEqual(false, model.isBoosted)
         XCTAssertEqual(false, model.isExpired)
         XCTAssertEqual(false, model.isFavorite)
-        XCTAssertEqual(false, model.isFullImmunization)
     }
     
     func testRecoveryCertificate() {
@@ -201,10 +181,8 @@ class CertificateCardsTests: XCTestCase {
         XCTAssertEqual(.brandAccentBlue, model.backgroundColor)
         XCTAssertEqual(.neutralWhite, model.tintColor)
         XCTAssertEqual(.statusFullDetail, model.titleIcon)
-        XCTAssertEqual(false, model.isBoosted)
         XCTAssertEqual(false, model.isExpired)
         XCTAssertEqual(false, model.isFavorite)
-        XCTAssertEqual(false, model.isFullImmunization)
     }
     
     func testRecoveryCertificateInvalid() {
@@ -235,10 +213,8 @@ class CertificateCardsTests: XCTestCase {
         XCTAssertEqual(.onBackground40, model.backgroundColor)
         XCTAssertEqual(.neutralWhite, model.tintColor)
         XCTAssertEqual(.expired, model.titleIcon)
-        XCTAssertEqual(false, model.isBoosted)
         XCTAssertEqual(true, model.isExpired)
         XCTAssertEqual(false, model.isFavorite)
-        XCTAssertEqual(false, model.isFullImmunization)
     }
     
     func testRecoveryCertificateExpired() {
@@ -269,9 +245,7 @@ class CertificateCardsTests: XCTestCase {
         XCTAssertEqual(.onBackground40, model.backgroundColor)
         XCTAssertEqual(.neutralWhite, model.tintColor)
         XCTAssertEqual(.expired, model.titleIcon)
-        XCTAssertEqual(false, model.isBoosted)
         XCTAssertEqual(true, model.isExpired)
         XCTAssertEqual(false, model.isFavorite)
-        XCTAssertEqual(false, model.isFullImmunization)
     }
 }
