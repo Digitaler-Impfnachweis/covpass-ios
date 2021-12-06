@@ -101,23 +101,15 @@
 
 "vaccination_start_screen_note_message" = "Sie haben aktuell kein digitales COVID-Zertifikat der EU gespeichert. Drücken Sie auf die Taste \"Nachweis hinzufügen\" (Plus-Symbol), um ein digitales COVID-Zertifikat der EU hinzuzufügen.";
 
+"startscreen_card_button" = "Zertifikate anzeigen";
+
 "accessibility_vaccination_start_screen_label_qrcode" = "Schwarzer QR-Code auf weißem Hintergrund";
-
-"vaccination_start_screen_qrcode_incomplete_subtitle" = "Unvollständiger Impfschutz";
-
-"vaccination_start_screen_qrcode_complete_from_date_subtitle" = "Vollständig ab %@";
-
-"vaccination_start_screen_qrcode_complete_protection_subtitle" = "Vollständig seit %@";
-
-"certificates_start_screen_qrcode_certificate_expires_subtitle" = "Läuft am %@ um %@ ab";
 
 "certificates_start_screen_qrcode_certificate_expired_subtitle" = "Abgelaufen";
 
 "certificates_start_screen_qrcode_certificate_invalid_subtitle" = "Ungültig";
 
-"vaccination_start_screen_qrcode_booster_vaccination_note_subtitle" = "Impfstatus überprüfen";
-
-"vaccination_start_screen_qrcode_certificate_will_be_revoked_subtitle" = "Zertifikat wird bald gesperrt";
+"vaccination_start_screen_qrcode_booster_vaccination_note_subtitle" = "Status überprüfen";
 
 "certificates_start_screen_qr_code_app_reference_text" = "Dieser QR-Code lässt sich verlässlich mit der CovPassCheck-App prüfen.";
 
@@ -605,33 +597,6 @@
 
 "error_check_validity_no_internet_button_cancel" = "Abbrechen";
 
-
-/********** start Screen: partial immunization certificate **********/
-
-"vaccination_partial_immunization_action_button" = "Zertifikate anzeigen";
-
-
-/********** start screen: full immunization certificate **********/
-
-"vaccination_full_immunization_action_button" = "Zertifikate anzeigen";
-
-"vaccination_full_immunization_status_expired" = "Abgelaufen";
-
-
-/********** start screen: test certificate **********/
-
-"test_certificate_action_button" = "Zertifikate anzeigen";
-
-
-/********** start screen: pcr test certificate **********/
-
-"pcr_test_certificate_action_button" = "Zertifikate anzeigen";
-
-
-/********** start screen: recovery certificate **********/
-
-"recovery_certificate_action_button" = "Zertifikate anzeigen";
-
 "error_connect_to_internet_title" = "Flugzeugmodus ausschalten oder WLAN für den Datenzugriff verwenden";
 
 "error_connect_to_internet_button_settings" = "Einstellungen";
@@ -651,7 +616,7 @@
 
 "booster_vaccination_certificate_overview_action_button_title" = "Aktuellen QR-Code anzeigen";
 
-"vaccination_certificate_overview_incomplete_title" = "Unvollständig: %d von %d Impfungen";
+"vaccination_certificate_overview_incomplete_title" = "Unvollständiger Impfschutz: %d von %d";
 
 "vaccination_certificate_overview_incomplete_message" = "Ihr Impfschutz ist nicht vollständig. Um den QR-Code als Nachweis für einen kompletten Impfschutz vorzeigen zu können, fügen Sie bitte eine weitere Impfung hinzu.";
 
@@ -661,7 +626,7 @@
 
 "vaccination_certificate_overview_complete_from_message" = "Ihr Impfschutz ist noch nicht vollständig. Der Impfschutz ist erst 14 Tage nach der letzten Impfung vollständig.";
 
-"vaccination_certificate_overview_complete_title" = "Vollständiger Impfschutz";
+"vaccination_certificate_overview_complete_title" = "Vollständiger Impfschutz seit %@";
 
 "certificates_overview_qr_scan_hint" = "Dieser QR-Code lässt sich verlässlich mit der CovPassCheck-App überprüfen.";
 
@@ -1318,23 +1283,23 @@
 
 "accessibility_share_certificate_transmission_closing_announce" = "Die Ansicht \"Übermittlung Ihres Zertifikats zur Prüfung\" wurde geschlossen.";
 
-"share_certificate_detail_view_requirements_met_title" = "Zertifikat entspricht den Anforderungen";
+"share_certificate_detail_view_requirements_met_title" = "Zertifikat entspricht den Anforderungen des Anbieters";
 
 "share_certificate_detail_view_requirements_met_subline" = "Geprüft von %@";
 
-"share_certificate_detail_view_requirements_met_message" = "Der Anbieter wurde über die erfolgreiche Prüfung informiert. Bei Fragen wenden Sie sich bitte an den Anbieter %@.";
+"share_certificate_detail_view_requirements_met_message" = "Bei Fragen wenden Sie sich bitte an den Anbieter %@.";
 
-"share_certificate_detail_view_requirements_not_verifiable_title" = "Zertifikat nicht prüfbar";
+"share_certificate_detail_view_requirements_not_verifiable_title" = "Zertifikat ist nicht vollständig prüfbar";
 
 "share_certificate_detail_view_requirements_not_verifiable_subline" = "Geprüft von %@";
 
-"share_certificate_detail_view_requirements_not_verifiable_message" = "Leider ist eine automatische Prüfung nicht möglich. Überprüfen Sie die gelb markierten Angaben bitte selbst. Bei Fragen wenden Sie sich bitte an den Anbieter %@.";
+"share_certificate_detail_view_requirements_not_verifiable_message" = "Leider ist eine automatische Prüfung nicht möglich. Überprüfen Sie die gelb markierten Angaben bitte selbst.\n\nBei Fragen wenden Sie sich bitte an den Anbieter %@.";
 
-"share_certificate_detail_view_requirements_not_met_title" = "Zertifikat entspricht nicht den Anforderungen";
+"share_certificate_detail_view_requirements_not_met_title" = "Zertifikat entspricht nicht den Anforderungen des Anbieters";
 
 "share_certificate_detail_view_requirements_not_met_subline" = "Geprüft von %@";
 
-"share_certificate_detail_view_requirements_not_met_message" = "Bei Fragen wenden Sie sich bitte an den Anbieter %@.";
+"share_certificate_detail_view_requirements_not_met_message" = "Die Angaben, die nicht den Anforderungen entsprechen, sind unterhalb rot markiert.\n\nBei Fragen wenden Sie sich bitte an den Anbieter %@.";
 
 "error_share_certificate_qr_code_not_recognized_title" = "QR-Code wurde nicht erkannt";
 
