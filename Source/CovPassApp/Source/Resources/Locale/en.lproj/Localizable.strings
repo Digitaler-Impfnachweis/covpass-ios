@@ -101,6 +101,8 @@
 
 "vaccination_start_screen_note_message" = "You do not have any EU Digital COVID Certificate saved at the moment. Tap the button \"Add a certificate\" (plus symbol) to add a Digital COVID Certificate.";
 
+"startscreen_card_title" = "EU Digital COVID Certificate";
+
 "startscreen_card_button" = "Display certificates";
 
 "accessibility_vaccination_start_screen_label_qrcode" = "Black QR code on white background";

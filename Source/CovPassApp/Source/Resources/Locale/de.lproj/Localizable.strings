@@ -101,6 +101,8 @@
 
 "vaccination_start_screen_note_message" = "Sie haben aktuell kein digitales COVID-Zertifikat der EU gespeichert. Drücken Sie auf die Taste \"Nachweis hinzufügen\" (Plus-Symbol), um ein digitales COVID-Zertifikat der EU hinzuzufügen.";
 
+"startscreen_card_title" = "Digitales COVID-Zertifikat der EU";
+
 "startscreen_card_button" = "Zertifikate anzeigen";
 
 "accessibility_vaccination_start_screen_label_qrcode" = "Schwarzer QR-Code auf weißem Hintergrund";
