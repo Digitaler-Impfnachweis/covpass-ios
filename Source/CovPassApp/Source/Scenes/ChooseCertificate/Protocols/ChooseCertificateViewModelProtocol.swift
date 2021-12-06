@@ -29,4 +29,5 @@ protocol ChooseCertificateViewModelProtocol {
     var isLoading: Bool { get }
     func goLive()
     func cancel()
+    func back()
 }

@@ -130,7 +130,19 @@ struct ConsentExchangeViewModel {
         self.certificate = certificate
         self.vaasRepository = vaasRepository
     }
-
+    
+    
+    func cancel() {
+        firstly {
+            router.routeToWarning()
+        }
+        .done { canceled in
+            if canceled {
+                self.vaasRepository.cancellation()
+            }
+        }
+    }
+    
     func routeToPrivacyStatement() {
         router.routeToPrivacyStatement(url: initialisationData.privacyUrl)
     }
@@ -146,8 +158,20 @@ struct ConsentExchangeViewModel {
             
             if error is APIError {
                 self.router.showNoVerificationSubmissionPossible(error: error)
+                    .done { canceled in
+                        if canceled {
+                            self.vaasRepository.cancellation()
+                        }
+                    }
+                    .cauterize()
             } else if error is VAASErrors {
                 self.router.showNoVerificationPossible(error: error)
+                    .done { canceled in
+                        if canceled {
+                            self.vaasRepository.cancellation()
+                        }
+                    }
+                    .cauterize()
             } else {
                 router.showUnexpectedErrorDialog(error)
             }

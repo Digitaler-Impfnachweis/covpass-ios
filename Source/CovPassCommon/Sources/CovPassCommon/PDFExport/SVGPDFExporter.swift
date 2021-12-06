@@ -84,7 +84,7 @@ public final class SVGPDFExporter: NSObject, WKNavigationDelegate, SVGPDFExportP
             // test manufacturer
             svg = svg.replacingOccurrences(of: "$ma", with: test.maDisplayName?.sanitizedXMLString ?? .placeholder)
             // sample collection
-            svg = svg.replacingOccurrences(of: "$sc", with: dateFormatter.string(from: test.sc))
+            svg = svg.replacingOccurrences(of: "$sc", with: DateUtils.isoDateTimeFormatter.string(from: test.sc))
             // test result
             svg = svg.replacingOccurrences(of: "$tr", with: test.trDisplayName.sanitizedXMLString)
             // testing center

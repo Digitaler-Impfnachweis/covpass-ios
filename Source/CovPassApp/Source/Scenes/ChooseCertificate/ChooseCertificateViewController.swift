@@ -147,7 +147,7 @@ extension ChooseCertificateViewController: CustomToolbarViewDelegate {
     func customToolbarView(_: CustomToolbarView, didTap buttonType: ButtonItemType) {
         switch buttonType {
         case .navigationArrow:
-            viewModel.cancel()
+            viewModel.back()
         case .textButton:
             viewModel.cancel()
         default:
