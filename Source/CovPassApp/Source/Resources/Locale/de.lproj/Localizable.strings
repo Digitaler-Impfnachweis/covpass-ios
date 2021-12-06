@@ -670,6 +670,10 @@
 
 "certificates_overview_expired_action_button_title" = "Neues Zertifikat hinzufügen";
 
+"certificates_overview_soon_expiring_title" = "Aktuelles Zertifikat läuft am %@ um %@ ab";
+
+"certificates_overview_soon_expiring_subtitle" = "Bitte bemühen Sie sich rechtzeitig darum, einen neuen digitalen Nachweis ausstellen zu lassen.";
+
 "certificates_overview_invalid_title" = "Zertifikat ungültig";
 
 "certificates_overview_invalid_message" = "Das Zertifikat wurde von der ausstellenden Behörde zurückgerufen. Bitte bemühen Sie sich darum, einen neuen digitalen Nachweis ausstellen zu lassen.";

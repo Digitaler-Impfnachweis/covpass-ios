@@ -670,6 +670,10 @@
 
 "certificates_overview_expired_action_button_title" = "Add new certificate";
 
+"certificates_overview_soon_expiring_title" = "Current certificate expires on %@ at %@";
+
+"certificates_overview_soon_expiring_subtitle" = "Please make every effort to have a new digital certificate issued. ";
+
 "certificates_overview_invalid_title" = "Certificate invalid";
 
 "certificates_overview_invalid_message" = "The certificate has been recalled by the issuing authority. Please make every effort to have a new digital certificate issued.";
