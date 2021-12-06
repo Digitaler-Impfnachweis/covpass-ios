@@ -46,15 +46,15 @@ class CertificateCardsTests: XCTestCase {
         }
         
         // THEN
-        XCTAssertEqual("PCR test", model.title)
-        XCTAssertEqual("Apr 26, 2021 at 3:05 PM", model.subtitle)
+        XCTAssertEqual("EU Digital COVID Certificate", model.title)
+        XCTAssertEqual("", model.subtitle)
         XCTAssertEqual("Display certificates", model.actionTitle)
         XCTAssertEqual("Doe John 1", model.name)
         XCTAssertEqual(.neutralWhite, model.iconTintColor)
         XCTAssertEqual(.neutralWhite, model.textColor)
-        XCTAssertEqual(.brandAccentPurple, model.backgroundColor)
+        XCTAssertEqual(.onBrandAccent70, model.backgroundColor)
         XCTAssertEqual(.neutralWhite, model.tintColor)
-        XCTAssertEqual(.iconTest, model.titleIcon)
+        XCTAssertEqual(.statusFullDetail, model.titleIcon)
         XCTAssertEqual(false, model.isExpired)
         XCTAssertEqual(false, model.isFavorite)
     }
@@ -78,15 +78,15 @@ class CertificateCardsTests: XCTestCase {
         }
         
         // THEN
-        XCTAssertEqual("Rapid antigen test", model.title)
-        XCTAssertEqual("Apr 26, 2021 at 3:05 PM", model.subtitle)
+        XCTAssertEqual("EU Digital COVID Certificate", model.title)
+        XCTAssertEqual("", model.subtitle)
         XCTAssertEqual("Display certificates", model.actionTitle)
         XCTAssertEqual("Doe John 1", model.name)
         XCTAssertEqual(.neutralWhite, model.iconTintColor)
         XCTAssertEqual(.neutralWhite, model.textColor)
-        XCTAssertEqual(.brandAccentPurple, model.backgroundColor)
+        XCTAssertEqual(.onBrandAccent70, model.backgroundColor)
         XCTAssertEqual(.neutralWhite, model.tintColor)
-        XCTAssertEqual(.iconTest, model.titleIcon)
+        XCTAssertEqual(.statusFullDetail, model.titleIcon)
         XCTAssertEqual(false, model.isExpired)
         XCTAssertEqual(false, model.isFavorite)
     }
@@ -109,15 +109,15 @@ class CertificateCardsTests: XCTestCase {
         }
         
         // THEN
-        XCTAssertEqual("Vaccination certificate", model.title)
-        XCTAssertEqual("Complete since May 11, 2021", model.subtitle)
+        XCTAssertEqual("EU Digital COVID Certificate", model.title)
+        XCTAssertEqual("", model.subtitle)
         XCTAssertEqual("Display certificates", model.actionTitle)
         XCTAssertEqual("Doe John 1", model.name)
         XCTAssertEqual(.neutralWhite, model.iconTintColor)
         XCTAssertEqual(.neutralWhite, model.textColor)
         XCTAssertEqual(.onBrandAccent70, model.backgroundColor)
         XCTAssertEqual(.neutralWhite, model.tintColor)
-        XCTAssertEqual(.startStatusFullWhite, model.titleIcon)
+        XCTAssertEqual(.statusFullDetail, model.titleIcon)
         XCTAssertEqual(false, model.isExpired)
         XCTAssertEqual(false, model.isFavorite)
     }
@@ -141,15 +141,15 @@ class CertificateCardsTests: XCTestCase {
         }
         
         // THEN
-        XCTAssertEqual("Vaccination certificate", model.title)
-        XCTAssertEqual("Not fully vaccinated", model.subtitle)
+        XCTAssertEqual("EU Digital COVID Certificate", model.title)
+        XCTAssertEqual("", model.subtitle)
         XCTAssertEqual("Display certificates", model.actionTitle)
         XCTAssertEqual("Doe John 1", model.name)
-        XCTAssertEqual(.neutralBlack, model.iconTintColor)
-        XCTAssertEqual(.neutralBlack, model.textColor)
-        XCTAssertEqual(.onBackground50, model.backgroundColor)
-        XCTAssertEqual(.neutralBlack, model.tintColor)
-        XCTAssertEqual(.statusPartial, model.titleIcon)
+        XCTAssertEqual(.neutralWhite, model.iconTintColor)
+        XCTAssertEqual(.neutralWhite, model.textColor)
+        XCTAssertEqual(.onBrandAccent70, model.backgroundColor)
+        XCTAssertEqual(.neutralWhite, model.tintColor)
+        XCTAssertEqual(.statusFullDetail, model.titleIcon)
         XCTAssertEqual(false, model.isExpired)
         XCTAssertEqual(false, model.isFavorite)
     }
@@ -172,13 +172,13 @@ class CertificateCardsTests: XCTestCase {
         }
         
         // THEN
-        XCTAssertEqual("Recovery certificate", model.title)
-        XCTAssertEqual("Valid until Apr 26, 2021", model.subtitle)
+        XCTAssertEqual("EU Digital COVID Certificate", model.title)
+        XCTAssertEqual("", model.subtitle)
         XCTAssertEqual("Display certificates", model.actionTitle)
         XCTAssertEqual("Doe John 1", model.name)
         XCTAssertEqual(.neutralWhite, model.iconTintColor)
         XCTAssertEqual(.neutralWhite, model.textColor)
-        XCTAssertEqual(.brandAccentBlue, model.backgroundColor)
+        XCTAssertEqual(.onBrandAccent70, model.backgroundColor)
         XCTAssertEqual(.neutralWhite, model.tintColor)
         XCTAssertEqual(.statusFullDetail, model.titleIcon)
         XCTAssertEqual(false, model.isExpired)
@@ -204,8 +204,8 @@ class CertificateCardsTests: XCTestCase {
         }
         
         // THEN
-        XCTAssertEqual("Recovery certificate", model.title)
-        XCTAssertEqual("Invalid", model.subtitle)
+        XCTAssertEqual("EU Digital COVID Certificate", model.title)
+        XCTAssertEqual("Expired", model.subtitle)
         XCTAssertEqual("Display certificates", model.actionTitle)
         XCTAssertEqual("Doe John 1", model.name)
         XCTAssertEqual(.neutralWhite, model.iconTintColor)
@@ -236,7 +236,7 @@ class CertificateCardsTests: XCTestCase {
         }
         
         // THEN
-        XCTAssertEqual("Recovery certificate", model.title)
+        XCTAssertEqual("EU Digital COVID Certificate", model.title)
         XCTAssertEqual("Expired", model.subtitle)
         XCTAssertEqual("Display certificates", model.actionTitle)
         XCTAssertEqual("Doe John 1", model.name)
