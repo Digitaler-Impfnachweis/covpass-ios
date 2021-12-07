@@ -223,7 +223,10 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
         if selectedCertificate?.vaccinationCertificate.isInvalid ?? false {
             resolver?.fulfill(.addNewCertificate)
         } else {
-            resolver?.fulfill(.showCertificatesOnOverview(certificates))
+            guard let cert = certificates.sortLatest().first else {
+                return
+            }
+            router.showCertificate(for: cert)
         }
     }
 
