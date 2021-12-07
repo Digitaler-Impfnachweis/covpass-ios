@@ -202,6 +202,29 @@
 "error_test_certificate_not_valid_button_title" = "OK";
 
 
+/********** popup: import qr code from photo library **********/
+
+"accessibility_scan_camera_select_file" = "Select file";
+
+"error_scan_code_not_recognized_title" = "QR code was not recognized";
+
+"error_scan_code_not_recognized_message" = "No QR code was found in the selected file. Please select a file or photo with a QR code.";
+
+"error_scan_code_not_recognized_action_button" = "OK";
+
+"error_scan_file_could_not_be_read_title" = "The file could not be read";
+
+"error_scan_file_could_not_be_read_message" = "The selected file may be corrupted, or password protected. Please select another file.";
+
+"error_scan_file_could_not_be_read_action_button" = "OK";
+
+"error_scan_code_not_suitable_title" = "QR code is not suitable";
+
+"error_scan_code_not_suitable_message" = "The QR code cannot be transferred to the CovPass app because it is, for example, it does not have a valid signature. The QR code may also not be readable because there are multiple QR codes in the file. Please select a file with a valid QR code.";
+
+"error_scan_code_not_suitable_action_button" = "OK";
+
+
 /********** start Screen: favorite immunization certificate **********/
 
 "accessibility_certificate_favorite_button_label_active" = "Always display this person's certificates in first place: active";
@@ -448,9 +471,9 @@
 
 "VN" = "Vietnam";
 
-"ARG" = "Argentina";
+"AR" = "Argentina";
 
-"MEX" = "Mexico";
+"MX" = "Mexico";
 
 "certificate_check_validity_selection_country_note" = "Is your destination not listed? More countries are progressively being added in stages. \n\nYou can find more information in the frequently asked questions and at #https://reopen.europa.eu::https://reopen.europa.eu#.";
 
@@ -1295,23 +1318,23 @@
 
 "accessibility_share_certificate_transmission_closing_announce" = "The \"Submitting your certificate for verification\" view has been closed.";
 
-"share_certificate_detail_view_requirements_met_title" = "Certificate meets the requirements of the provider";
+"share_certificate_detail_view_requirements_met_title" = "Certificate meets the requirements";
 
 "share_certificate_detail_view_requirements_met_subline" = "Verified by %@";
 
-"share_certificate_detail_view_requirements_met_message" = "If you have any questions, please contact the provider %@.";
+"share_certificate_detail_view_requirements_met_message" = "The provider was informed about the successful check. If you have any questions, please contact the provider %@.";
 
-"share_certificate_detail_view_requirements_not_verifiable_title" = "Certificate is not fully auditable";
+"share_certificate_detail_view_requirements_not_verifiable_title" = "Certificate is not auditable";
 
 "share_certificate_detail_view_requirements_not_verifiable_subline" = "Verified by %@";
 
-"share_certificate_detail_view_requirements_not_verifiable_message" = "Unfortunately, an automatic check is not possible. Please check the information marked in yellow yourself.\n\nIf you have any questions, please contact the provider %@.";
+"share_certificate_detail_view_requirements_not_verifiable_message" = "Unfortunately, an automatic check is not possible. Please check the information marked in yellow yourself. If you have any questions, please contact the provider %@.";
 
-"share_certificate_detail_view_requirements_not_met_title" = "Certificate does not meet the requirements of the provider";
+"share_certificate_detail_view_requirements_not_met_title" = "Certificate does not meet the requirements";
 
 "share_certificate_detail_view_requirements_not_met_subline" = "Verified by %@";
 
-"share_certificate_detail_view_requirements_not_met_message" = "The information that does not meet the requirements is marked in red below.\n\nIf you have any questions, please contact the provider %@.";
+"share_certificate_detail_view_requirements_not_met_message" = "If you have any questions, please contact the provider %@.";
 
 "error_share_certificate_qr_code_not_recognized_title" = "QR code was not recognized";
 

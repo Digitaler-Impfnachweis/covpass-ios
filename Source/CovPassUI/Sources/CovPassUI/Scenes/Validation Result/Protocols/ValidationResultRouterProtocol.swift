@@ -6,11 +6,10 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-import CovPassUI
 import PromiseKit
 import UIKit
 
-protocol ValidationResultRouterProtocol: RouterProtocol {
+public protocol ValidationResultRouterProtocol: RouterProtocol {
     func showStart()
     func scanQRCode() -> Promise<ScanResult>
 }

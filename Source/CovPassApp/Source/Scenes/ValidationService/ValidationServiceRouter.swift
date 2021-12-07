@@ -55,17 +55,17 @@ private enum Constants {
 
 protocol ValidationServiceRoutable: DialogRouterProtocol {
     func routeToConsentGeneralConsent()
-    func routeToWarning()
-    func showIdentityDocumentApiError(error: Error)
-    func showIdentityDocumentVAASError(error: Error)
-    func accessTokenNotRetrieved(error: Error)
-    func showNoVerificationPossible(error: Error)
-    func showNoVerificationSubmissionPossible(error: Error)
-    func showAccessTokenNotProcessed(error: Error)
+    func routeToWarning() -> Promise<Bool>
+    func showIdentityDocumentApiError(error: Error) -> Promise<Bool>
+    func showIdentityDocumentVAASError(error: Error) -> Promise<Bool>
+    func accessTokenNotRetrieved(error: Error) -> Promise<Bool>
+    func showNoVerificationPossible(error: Error) -> Promise<Bool>
+    func showNoVerificationSubmissionPossible(error: Error) -> Promise<Bool>
+    func showAccessTokenNotProcessed(error: Error) -> Promise<Bool>
     func routeToSelectCertificate(ticket: ValidationServiceInitialisation)
     func routeToCertificateConsent(ticket: ValidationServiceInitialisation, certificate: ExtendedCBORWebToken, vaasRepository: VAASRepositoryProtocol)
     func routeToPrivacyStatement(url: URL)
-    func routeToCertificateValidationResult(for certificate: ExtendedCBORWebToken, with result: VAASValidaitonResultToken)
+    func showCertificate(_ certificate: ExtendedCBORWebToken, with result: VAASValidaitonResultToken)
 }
 
 struct ValidationServiceRouter: ValidationServiceRoutable {
@@ -75,18 +75,25 @@ struct ValidationServiceRouter: ValidationServiceRoutable {
         
     }
     
-    public func routeToWarning() {
-        showDialog(title: "",
-                   message: Constants.Text.Alert.Cancellation.message,
-                   actions: [
-                    DialogAction(title: Constants.Text.Alert.Cancellation.ok, style: UIAlertAction.Style.default, isEnabled: true, completion: nil),
-                    DialogAction(title: Constants.Text.Alert.Cancellation.cancel, style: UIAlertAction.Style.destructive, isEnabled: true, completion: { _ in
-                        sceneCoordinator.dimiss(animated: true)
-                    })],
-                   style: .alert)
+    public func routeToWarning() -> Promise<Bool> {
+        .init { resolver in
+            showDialog(title: "",
+                       message: Constants.Text.Alert.Cancellation.message,
+                       actions: [
+                        DialogAction(title: Constants.Text.Alert.Cancellation.ok, style: UIAlertAction.Style.default, isEnabled: true, completion: { _ in
+                            return resolver.fulfill(false)
+                        }),
+                        DialogAction(title: Constants.Text.Alert.Cancellation.cancel, style: UIAlertAction.Style.destructive, isEnabled: true, completion: { _ in
+                            sceneCoordinator.dimiss(animated: true)
+                            return resolver.fulfill(true)
+                        })],
+                       style: .alert)
+        }
+
     }    
     
-    func showIdentityDocumentApiError(error: Error) {
+    func showIdentityDocumentApiError(error: Error) -> Promise<Bool> {
+        Promise { resolver in
         showDialog(title: Constants.Text.Alert.ProviderNotVerified.title,
                    message: error.displayCodeWithMessage(Constants.Text.Alert.ProviderNotVerified.message),
                    actions: [
@@ -94,13 +101,18 @@ struct ValidationServiceRouter: ValidationServiceRoutable {
                                  style: UIAlertAction.Style.default,
                                  isEnabled: true,
                                  completion: { _ in
-                                     routeToWarning()
+                                     routeToWarning().done { canceled in
+                                         resolver.fulfill(canceled)
+                                     }
+                                     .cauterize()
                                  })
                     ],
                    style: .alert)
+        }
     }
     
-    func showIdentityDocumentVAASError(error: Error) {
+    func showIdentityDocumentVAASError(error: Error) -> Promise<Bool> {
+        Promise { resolver in
         showDialog(title: Constants.Text.Alert.TestPartnerNotVerified.title,
                    message: error.displayCodeWithMessage(Constants.Text.Alert.TestPartnerNotVerified.message),
                    actions: [
@@ -108,13 +120,18 @@ struct ValidationServiceRouter: ValidationServiceRoutable {
                                  style: UIAlertAction.Style.default,
                                  isEnabled: true,
                                  completion: { _ in
-                                     routeToWarning()
+                                     routeToWarning().done { canceled in
+                                         resolver.fulfill(canceled)
+                                     }
+                                     .cauterize()
                                  })
                     ],
                    style: .alert)
+        }
     }
     
-    func accessTokenNotRetrieved(error: Error) {
+    func accessTokenNotRetrieved(error: Error) -> Promise<Bool> {
+        Promise { resolver in
         showDialog(title: Constants.Text.Alert.AccessTokenNotRetrieved.title,
                    message: error.displayCodeWithMessage(Constants.Text.Alert.AccessTokenNotRetrieved.message),
                    actions: [
@@ -122,13 +139,18 @@ struct ValidationServiceRouter: ValidationServiceRoutable {
                                  style: UIAlertAction.Style.default,
                                  isEnabled: true,
                                  completion: { _ in
-                                     routeToWarning()
+                                     routeToWarning().done { canceled in
+                                         resolver.fulfill(canceled)
+                                     }
+                                     .cauterize()
                                  })
                     ],
                    style: .alert)
+        }
     }
     
-    func showNoVerificationPossible(error: Error) {
+    func showNoVerificationPossible(error: Error) -> Promise<Bool> {
+        Promise { resolver in
         showDialog(title: Constants.Text.Alert.NoVerificationPossible.title,
                    message: error.displayCodeWithMessage(Constants.Text.Alert.NoVerificationPossible.message),
                    actions: [
@@ -136,13 +158,18 @@ struct ValidationServiceRouter: ValidationServiceRoutable {
                                  style: UIAlertAction.Style.default,
                                  isEnabled: true,
                                  completion: { _ in
-                                     routeToWarning()
+                                     routeToWarning().done { canceled in
+                                         resolver.fulfill(canceled)
+                                     }
+                                     .cauterize()
                                  })
                     ],
                    style: .alert)
+        }
     }
     
-    func showNoVerificationSubmissionPossible(error: Error) {
+    func showNoVerificationSubmissionPossible(error: Error) -> Promise<Bool> {
+        Promise { resolver in
         showDialog(title: Constants.Text.Alert.NoVerificationSubmissionPossible.title,
                    message: error.displayCodeWithMessage(Constants.Text.Alert.NoVerificationSubmissionPossible.message),
                    actions: [
@@ -150,24 +177,33 @@ struct ValidationServiceRouter: ValidationServiceRoutable {
                                  style: UIAlertAction.Style.default,
                                  isEnabled: true,
                                  completion: { _ in
-                                     routeToWarning()
+                                     routeToWarning().done { canceled in
+                                         resolver.fulfill(canceled)
+                                     }
+                                     .cauterize()
                                  })
                     ],
                    style: .alert)
+        }
     }
     
-    func showAccessTokenNotProcessed(error: Error) {
-        showDialog(title: Constants.Text.Alert.AccessTokenNotProcessed.title,
-                   message: error.displayCodeWithMessage(Constants.Text.Alert.AccessTokenNotProcessed.message),
-                   actions: [
-                    DialogAction(title: Constants.Text.Alert.AccessTokenNotProcessed.button,
-                                 style: UIAlertAction.Style.default,
-                                 isEnabled: true,
-                                 completion: { _ in
-                                     routeToWarning()
-                                 })
-                    ],
-                   style: .alert)
+    func showAccessTokenNotProcessed(error: Error) -> Promise<Bool> {
+        Promise { resolver in
+            showDialog(title: Constants.Text.Alert.AccessTokenNotProcessed.title,
+                       message: error.displayCodeWithMessage(Constants.Text.Alert.AccessTokenNotProcessed.message),
+                       actions: [
+                        DialogAction(title: Constants.Text.Alert.AccessTokenNotProcessed.button,
+                                     style: UIAlertAction.Style.default,
+                                     isEnabled: true,
+                                     completion: { _ in
+                                         routeToWarning().done { canceled in
+                                             resolver.fulfill(canceled)
+                                         }
+                                         .cauterize()
+                                     })
+                        ],
+                       style: .alert)
+        }
     }
     
     func routeToSelectCertificate(ticket: ValidationServiceInitialisation) {
@@ -189,12 +225,13 @@ struct ValidationServiceRouter: ValidationServiceRoutable {
         sceneCoordinator.push(webViewScene)
     }
     
-    func routeToCertificateValidationResult(for certificate: ExtendedCBORWebToken, with result: VAASValidaitonResultToken) {
+    func showCertificate(_ certificate: ExtendedCBORWebToken, with result: VAASValidaitonResultToken) {
         sceneCoordinator.push(
-            CertificateItemDetailSceneFactory(
-                router: CertificateItemDetailRouter(sceneCoordinator: sceneCoordinator),
+            ValidationResultSceneFactory(
+                router: ValidationResultRouter(sceneCoordinator: sceneCoordinator),
                 certificate: certificate,
-                vaasResult: result
+                error: nil,
+                token: result
             )
         )
     }

@@ -11,6 +11,11 @@ import CovPassUI
 import PromiseKit
 import UIKit
 
+enum ValidationResultError: Error {
+    case technical
+    case functional
+}
+
 private enum Constants {
     static let image = UIImage.resultError
 

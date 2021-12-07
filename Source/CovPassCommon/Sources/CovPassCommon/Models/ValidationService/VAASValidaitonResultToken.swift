@@ -15,14 +15,14 @@ public enum VAASValidationResultStatus: String, Decodable {
 }
 
 public struct VAASValidaitonResultToken: Decodable {
-    var sub: String
-    var iss: String
-    var iat: Int
-    var exp: Int
-    var category: [String]
-    var confirmation: VAASValidationConfirmation
+    public var sub: String
+    public var iss: String
+    public var iat: Int
+    public var exp: Int
+    public var category: [String]
+    public var confirmation: VAASValidationConfirmation
     public var result: VAASValidationResultStatus
-    var results: [VAASValidationResult]
+    public var results: [VAASValidationResult]
 
     public var provider: String?
     public var verifyingService: String?
@@ -53,16 +53,19 @@ public struct VAASValidaitonResultToken: Decodable {
     }
 }
 
-struct VAASValidationResult: Decodable {
-    var identifier: String
+public struct VAASValidationResult: Decodable {
+    public var identifier: String
+    public var result: VAASValidationResultStatus
+    public var type: String
+    public var details: String
 }
 
-struct VAASValidationConfirmation: Decodable {
-    var jti: String
-    var sub: String
-    var iss: String
-    var iat: Int
-    var exp: Int
-    var result: VAASValidationResultStatus
-    var category: [String]
+public struct VAASValidationConfirmation: Decodable {
+    public var jti: String
+    public var sub: String
+    public var iss: String
+    public var iat: Int
+    public var exp: Int
+    public var result: VAASValidationResultStatus
+    public var category: [String]
 }

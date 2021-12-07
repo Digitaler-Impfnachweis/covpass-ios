@@ -84,7 +84,7 @@ public final class SVGPDFExporter: NSObject, WKNavigationDelegate, SVGPDFExportP
             // test manufacturer
             svg = svg.replacingOccurrences(of: "$ma", with: test.maDisplayName?.sanitizedXMLString ?? .placeholder)
             // sample collection
-            svg = svg.replacingOccurrences(of: "$sc", with: dateFormatter.string(from: test.sc))
+            svg = svg.replacingOccurrences(of: "$sc", with: DateUtils.isoDateTimeFormatter.string(from: test.sc))
             // test result
             svg = svg.replacingOccurrences(of: "$tr", with: test.trDisplayName.sanitizedXMLString)
             // testing center
@@ -111,7 +111,7 @@ public final class SVGPDFExporter: NSObject, WKNavigationDelegate, SVGPDFExportP
             // date vaccination
             svg = svg.replacingOccurrences(of: "$dt", with: dateFormatter.string(from: vaccination.dt))
             // country
-            svg = svg.replacingOccurrences(of: "$co", with: vaccination.coDisplayName.sanitizedXMLString)
+            svg = svg.replacingOccurrences(of: "$co", with: vaccination.co.sanitizedXMLString)
             // certificate issue
             svg = svg.replacingOccurrences(of: "$is", with: vaccination.is.sanitizedXMLString)
         }

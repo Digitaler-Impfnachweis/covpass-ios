@@ -180,7 +180,7 @@ class ConsentExchangeViewController: UIViewController {
     }
 
     @objc func cancel() {
-        viewModel.router.routeToWarning()
+        viewModel.cancel()
     }
 
     @objc func accept() {

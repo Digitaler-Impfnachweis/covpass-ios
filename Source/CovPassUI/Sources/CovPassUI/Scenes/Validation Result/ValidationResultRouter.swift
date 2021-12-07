@@ -6,29 +6,28 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-import CovPassUI
 import Foundation
 import PromiseKit
 import Scanner
 
-struct ValidationResultRouter: ValidationResultRouterProtocol {
+public struct ValidationResultRouter: ValidationResultRouterProtocol {
     // MARK: - Properties
-
-    let sceneCoordinator: SceneCoordinator
-
+    
+    public let sceneCoordinator: SceneCoordinator
+    
     // MARK: - Lifecycle
-
-    init(sceneCoordinator: SceneCoordinator) {
+    
+    public init(sceneCoordinator: SceneCoordinator) {
         self.sceneCoordinator = sceneCoordinator
     }
-
+    
     // MARK: - Methods
-
-    func showStart() {
+    
+    public func showStart() {
         sceneCoordinator.dimiss()
     }
-
-    func scanQRCode() -> Promise<ScanResult> {
+    
+    public func scanQRCode() -> Promise<ScanResult> {
         sceneCoordinator.present(
             ScanSceneFactory(
                 cameraAccessProvider: CameraAccessProvider(

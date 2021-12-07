@@ -15,18 +15,21 @@ struct ValidationResultSceneFactory: SceneFactory {
     // MARK: - Properties
 
     let router: ValidationResultRouterProtocol
-    let certificate: CBORWebToken?
+    let certificate: ExtendedCBORWebToken
+    let token: VAASValidaitonResultToken
     let error: Error?
 
     // MARK: - Lifecycle
 
     init(
         router: ValidationResultRouterProtocol,
-        certificate: CBORWebToken?,
-        error: Error?
+        certificate: ExtendedCBORWebToken,
+        error: Error?,
+        token: VAASValidaitonResultToken
     ) {
         self.router = router
         self.certificate = certificate
+        self.token = token
         self.error = error
     }
 
@@ -34,9 +37,9 @@ struct ValidationResultSceneFactory: SceneFactory {
         let viewModel = ValidationResultFactory.createViewModel(
             router: router,
             repository: VaccinationRepository.create(),
-            certificate: certificate,
+            certificate: certificate.vaccinationCertificate,
             error: error,
-            certLogic: DCCCertLogic.create()
+            token: token
         )
         let viewController = ValidationResultViewController(viewModel: viewModel)
         return viewController

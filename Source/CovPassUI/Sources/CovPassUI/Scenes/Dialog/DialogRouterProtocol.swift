@@ -41,7 +41,7 @@ public extension DialogRouterProtocol {
         let scene = AlertSceneFactory(
             title: "error_standard_unexpected_title".localized,
             message: error.displayCodeWithMessage("error_standard_unexpected_message".localized),
-            actions: [DialogAction(title: "error_connect_to_internet_Button_ok".localized)],
+            actions: [DialogAction(title: "error_connect_to_internet_button_ok".localized)],
             style: .alert
         )
         sceneCoordinator.present(scene).cauterize()
