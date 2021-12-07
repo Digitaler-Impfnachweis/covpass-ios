@@ -99,7 +99,7 @@ public class CertificateCollectionViewCell: CardCollectionViewCell {
         qrContainerView.image = vm.qrCode
         qrContainerView.layoutMargins.bottom = .space_18
         qrContainerView.isHidden = vm.qrCode == nil
-        qrContainerView.titleLabel.attributedText = vm.title.styledAs(.header_2).colored(vm.textColor)
+        qrContainerView.titleLabel.attributedText = vm.title.styledAs(.header_3).colored(vm.textColor)
         qrContainerView.subtitleLabel.attributedText = vm.subtitle.styledAs(.body).colored(vm.textColor)
 
         qrContainerView.qrInfoText = Constants.qrInfoText

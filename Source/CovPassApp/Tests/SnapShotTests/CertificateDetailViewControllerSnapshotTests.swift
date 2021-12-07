@@ -311,6 +311,10 @@ class CertificateDetailViewControllerSnapshotTests: BaseSnapShotTests {
 }
 
 struct CertificateDetailRouterMock: CertificateDetailRouterProtocol {
+    func showCertificate(for token: ExtendedCBORWebToken) -> Promise<Void> {
+        .value
+    }
+    
     func showDetail(for certificate: ExtendedCBORWebToken) -> Promise<CertificateDetailSceneResult> {
         .value(.addNewCertificate)
     }
