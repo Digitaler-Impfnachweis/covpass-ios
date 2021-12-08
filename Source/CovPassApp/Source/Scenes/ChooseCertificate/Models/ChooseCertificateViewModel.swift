@@ -156,7 +156,7 @@ class ChooseCertificateViewModel: ChooseCertificateViewModelProtocol {
     
     // MARK: - Methods
     
-    func goLive() {
+    func runMainProcess() {
         isLoading = true
         firstly {
             repository.getCertificateList()

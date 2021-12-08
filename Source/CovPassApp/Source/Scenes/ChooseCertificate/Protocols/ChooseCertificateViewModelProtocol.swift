@@ -27,7 +27,7 @@ protocol ChooseCertificateViewModelProtocol {
     var noMatchImage: UIImage { get }
     var certificatesAvailable: Bool { get }
     var isLoading: Bool { get }
-    func goLive()
+    func runMainProcess()
     func cancel()
     func back()
 }
