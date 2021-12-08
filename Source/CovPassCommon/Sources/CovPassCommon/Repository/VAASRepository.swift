@@ -96,7 +96,8 @@ public class VAASRepository: VAASRepositoryProtocol {
     public func fetchValidationService() -> Promise<AccessTokenResponse> {
         self.step = .downloadIdentityDecorator
         return firstly {
-            return service.vaasListOfServices(url: ticket.serviceIdentity)
+            return callValidationDecorator(url: URL(string: "https://google.de")!)
+//            return callValidationDecorator(url: ticket.serviceIdentity)
         }
         .then { [weak self] stringResponse in
             try self?.identityDocument(identityString: stringResponse) ?? .init(error: APIError.invalidResponse)
@@ -281,29 +282,54 @@ public class VAASRepository: VAASRepositoryProtocol {
                     seal.reject(VAASErrors.validationServicesNotFound)
                     return
                 }
-                callValidationService(validationService: services.removeFirst()) { response in
+                callValidationService(validationService: services.removeFirst()) { response, error in
                     if let response = response {
                         seal.fulfill(response)
                     } else {
-                        next(services)
+                        if let error = error as? APIError, error == .trustList {
+                            next(services)
+                        } else {
+                            seal.reject(error!)
+                        }
+                        
                     }
                 }
             }
-            next(validationServices)
+            next(validationServices.reversed())
         }
     }
     
-    private func callValidationService(validationService: ValidationService, completion: ((String?) -> Void)?) {
+    private func callValidationDecorator(url: URL) -> Promise<String> {
+        Promise { seal in
+            callUrl(url: url) { response, error in
+                if let response = response {
+                    seal.fulfill(response)
+                } else {
+                    seal.reject(error!)
+                }
+            }
+        }
+    }
+    
+    private func callValidationService(validationService: ValidationService, completion: ((String?, Error?) throws -> Void)?) {
         guard let serviceURL = URL(string: validationService.serviceEndpoint) else {
-            completion?(nil)
+            try? completion?(nil, APIError.invalidUrl)
             return
         }
-        service.vaasListOfServices(url: serviceURL).done {
-            self.selectedValidationService = validationService
-            completion?($0)
+        callUrl(url: serviceURL) { response, error in
+            if response != nil {
+                self.selectedValidationService = validationService
+            }
+            try? completion?(response, error)
+        }
+    }
+    
+    private func callUrl(url: URL, completion: ((String?, Error?) throws -> Void)?) {
+        service.vaasListOfServices(url: url).done {
+            try? completion?($0, nil)
         }
         .catch { error in
-            completion?(nil)
+            try? completion?(nil, error)
         }
     }
     

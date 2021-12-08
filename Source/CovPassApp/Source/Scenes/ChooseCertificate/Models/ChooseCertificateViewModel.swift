@@ -36,7 +36,7 @@ public enum Constant {
 
 class ChooseCertificateViewModel: ChooseCertificateViewModelProtocol {
     // MARK: - Properties
-
+    
     weak var delegate: ViewModelDelegate?
     var router: ValidationServiceRoutable?
     private let repository: VaccinationRepositoryProtocol
@@ -64,7 +64,7 @@ class ChooseCertificateViewModel: ChooseCertificateViewModelProtocol {
     var familyNameFilter: String?
     var dobFilter: String?
     var validationServiceName: String = ""
-
+    
     
     var title: String {
         return Constant.Keys.title
@@ -112,7 +112,7 @@ class ChooseCertificateViewModel: ChooseCertificateViewModelProtocol {
     var noMatchSubtitle: String {
         Constant.Keys.NoMatch.subtitle
     }
-
+    
     var noMatchImage: UIImage {
         Constant.Keys.NoMatch.image
     }
@@ -143,7 +143,7 @@ class ChooseCertificateViewModel: ChooseCertificateViewModelProtocol {
     var isLoading = false
     
     // MARK: - Lifecyle
-
+    
     init(router: ValidationServiceRoutable?,
          repository: VaccinationRepositoryProtocol,
          vaasRepository: VAASRepositoryProtocol,
@@ -153,7 +153,7 @@ class ChooseCertificateViewModel: ChooseCertificateViewModelProtocol {
         self.resolver = resolvable
         self.vaasRepository = vaasRepository
     }
-
+    
     // MARK: - Methods
     
     func goLive() {
@@ -177,17 +177,21 @@ class ChooseCertificateViewModel: ChooseCertificateViewModelProtocol {
             self.isLoading = false
             self.delegate?.viewModelDidUpdate()
         }.catch { error in
-                        
+            
             switch self.vaasRepository.step {
             case .downloadIdentityDecorator:
-                if error is APIError {
-                    self.router?.showIdentityDocumentApiError(error: error)
-                        .done { canceled in
-                            if canceled {
-                                self.vaasRepository.cancellation()
+                if let error = error as? APIError {
+                    if error == .trustList {
+                        // Show Popup
+                    } else {
+                        self.router?.showIdentityDocumentApiError(error: error)
+                            .done { canceled in
+                                if canceled {
+                                    self.vaasRepository.cancellation()
+                                }
                             }
-                        }
-                        .cauterize()
+                            .cauterize()
+                    }
                 } else if error is VAASErrors {
                     self.router?.showIdentityDocumentVAASError(error: error)
                         .done { canceled in
