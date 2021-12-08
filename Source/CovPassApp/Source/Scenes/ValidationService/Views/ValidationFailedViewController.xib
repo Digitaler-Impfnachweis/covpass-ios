@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ValidationFailedViewController" customModule="CovPassApp" customModuleProvider="target">
+            <connections>
+                <outlet property="acceptButton" destination="l3f-it-Xfx" id="eBZ-bT-PRv"/>
+                <outlet property="cancelButton" destination="6T3-Vd-7X0" id="6vO-aX-W7K"/>
+                <outlet property="descriptionLabel" destination="jpN-qj-PRw" id="VDh-0j-RVo"/>
+                <outlet property="headerLabel" destination="nOO-3R-3Hz" id="WSW-bV-kb0"/>
+                <outlet property="hintView" destination="aaG-Tr-DHC" id="Rc2-oB-98q"/>
+                <outlet property="view" destination="iN0-l3-epB" id="MEJ-fc-LYG"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="muf-2j-xCP">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="2gq-ma-6LN">
+                            <rect key="frame" x="8" y="8" width="414" height="673"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nOO-3R-3Hz">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="20.5"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jpN-qj-PRw">
+                                    <rect key="frame" x="0.0" y="28.5" width="414" height="20.5"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="aaG-Tr-DHC" customClass="HintView" customModule="CovPassUI">
+                                    <rect key="frame" x="0.0" y="57" width="414" height="128"/>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                </view>
+                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="Js8-U3-gPV">
+                                    <rect key="frame" x="0.0" y="193" width="414" height="128"/>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                </view>
+                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="168" translatesAutoresizingMaskIntoConstraints="NO" id="30T-Qd-PCb">
+                                    <rect key="frame" x="0.0" y="329" width="414" height="168"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="l3f-it-Xfx" customClass="MainButton" customModule="CovPassUI">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="168"/>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        </view>
+                                    </subviews>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <constraints>
+                                        <constraint firstItem="l3f-it-Xfx" firstAttribute="centerX" secondItem="30T-Qd-PCb" secondAttribute="centerX" id="0g7-yQ-XgU"/>
+                                        <constraint firstAttribute="bottom" secondItem="l3f-it-Xfx" secondAttribute="bottom" id="OjN-ay-YNQ"/>
+                                        <constraint firstItem="l3f-it-Xfx" firstAttribute="top" secondItem="30T-Qd-PCb" secondAttribute="top" id="vn6-i7-Ilq"/>
+                                        <constraint firstItem="l3f-it-Xfx" firstAttribute="centerY" secondItem="30T-Qd-PCb" secondAttribute="centerY" id="xR1-2m-6wE"/>
+                                    </constraints>
+                                </view>
+                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="168" translatesAutoresizingMaskIntoConstraints="NO" id="yc4-sF-EEh">
+                                    <rect key="frame" x="0.0" y="505" width="414" height="168"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="6T3-Vd-7X0" customClass="MainButton" customModule="CovPassUI">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="168"/>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        </view>
+                                    </subviews>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="6T3-Vd-7X0" secondAttribute="bottom" id="Izt-Ci-fIW"/>
+                                        <constraint firstItem="6T3-Vd-7X0" firstAttribute="centerY" secondItem="yc4-sF-EEh" secondAttribute="centerY" id="MaI-ZA-4Ds"/>
+                                        <constraint firstItem="6T3-Vd-7X0" firstAttribute="centerX" secondItem="yc4-sF-EEh" secondAttribute="centerX" id="O9Z-kQ-2NR"/>
+                                        <constraint firstItem="6T3-Vd-7X0" firstAttribute="top" secondItem="yc4-sF-EEh" secondAttribute="top" id="pkT-0O-CVG"/>
+                                    </constraints>
+                                </view>
+                            </subviews>
+                        </stackView>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="2gq-ma-6LN" firstAttribute="top" secondItem="muf-2j-xCP" secondAttribute="top" constant="8" id="EFa-pT-vud"/>
+                        <constraint firstAttribute="bottom" secondItem="2gq-ma-6LN" secondAttribute="bottom" constant="8" id="L9Y-59-7GO"/>
+                        <constraint firstAttribute="trailing" secondItem="2gq-ma-6LN" secondAttribute="trailing" constant="8" id="Tv4-VC-zYN"/>
+                        <constraint firstItem="2gq-ma-6LN" firstAttribute="leading" secondItem="muf-2j-xCP" secondAttribute="leading" constant="8" id="cIl-9Y-CMf"/>
+                        <constraint firstItem="2gq-ma-6LN" firstAttribute="width" secondItem="muf-2j-xCP" secondAttribute="width" id="pqt-E1-Min"/>
+                    </constraints>
+                </scrollView>
+            </subviews>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="muf-2j-xCP" secondAttribute="trailing" id="3WW-45-E8n"/>
+                <constraint firstItem="muf-2j-xCP" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="6X6-e3-H4O"/>
+                <constraint firstAttribute="bottom" secondItem="muf-2j-xCP" secondAttribute="bottom" id="XGE-sT-uUg"/>
+                <constraint firstItem="muf-2j-xCP" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="hc1-rT-LyA"/>
+                <constraint firstItem="muf-2j-xCP" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="tlz-vo-RRS"/>
+            </constraints>
+            <point key="canvasLocation" x="96" y="-50"/>
+        </view>
+    </objects>
+    <designables>
+        <designable name="6T3-Vd-7X0">
+            <size key="intrinsicContentSize" width="414" height="128"/>
+        </designable>
+        <designable name="l3f-it-Xfx">
+            <size key="intrinsicContentSize" width="414" height="128"/>
+        </designable>
+    </designables>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
