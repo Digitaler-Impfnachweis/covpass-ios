@@ -44,7 +44,7 @@ private enum Constants {
 }
 }
 
-struct ConsentExchangeViewModel {
+class ConsentExchangeViewModel {
 
     enum Accessibility {
         static let close = VoiceOverOptions.Settings(label: "accessibility_share_certificate_label_close".localized)
@@ -81,6 +81,7 @@ struct ConsentExchangeViewModel {
 
     }
 
+    weak var delegate: ViewModelDelegate?
     let router: ValidationServiceRoutable
     let initialisationData: ValidationServiceInitialisation
     let certificate: ExtendedCBORWebToken
@@ -123,6 +124,8 @@ struct ConsentExchangeViewModel {
     var validationServiceName: String {
         vaasRepository.selectedValidationService?.name ?? ""
     }
+    
+    var isLoading = false
 
     internal init(router: ValidationServiceRoutable, vaasRepository: VAASRepositoryProtocol, initialisationData: ValidationServiceInitialisation, certificate: ExtendedCBORWebToken) {
         self.router = router
@@ -148,14 +151,19 @@ struct ConsentExchangeViewModel {
     }
 
     func routeToValidation() {
+        self.isLoading = true
+        self.delegate?.viewModelDidUpdate()
         firstly {
             try vaasRepository.validateTicketing(choosenCert: certificate)
         }
-        .done { accessToken in            
-            router.showCertificate(self.certificate, with: accessToken)
+        .done { accessToken in
+            self.isLoading = false
+            self.delegate?.viewModelDidUpdate()
+            self.router.showCertificate(self.certificate, with: accessToken)
         }
         .catch { error in
-            
+            self.isLoading = false
+            self.delegate?.viewModelDidUpdate()
             if error is APIError {
                 self.router.showNoVerificationSubmissionPossible(error: error)
                     .done { canceled in
@@ -173,7 +181,7 @@ struct ConsentExchangeViewModel {
                     }
                     .cauterize()
             } else {
-                router.showUnexpectedErrorDialog(error)
+                self.router.showUnexpectedErrorDialog(error)
             }
         }
     }
