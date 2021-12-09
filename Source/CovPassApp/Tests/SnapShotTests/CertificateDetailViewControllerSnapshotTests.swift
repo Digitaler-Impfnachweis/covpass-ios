@@ -93,6 +93,24 @@ class CertificateDetailViewControllerSnapshotTests: BaseSnapShotTests {
         verifyView(view: vc.view, height: 1100)
     }
     
+    func testCertificateDetail_Recovery_From() {
+        let vacinationRepoMock: VaccinationRepositoryMock = VaccinationRepositoryMock()
+        let cert: ExtendedCBORWebToken = CBORWebToken.mockRecoveryCertificate.extended()
+        cert.vaccinationCertificate.hcert.dgc.nam.fn = "John 1"
+        cert.vaccinationCertificate.hcert.dgc.r!.first!.df = Date().addingTimeInterval(1000)
+        let certs = [cert]
+        vacinationRepoMock.certificates = certs
+        let bl = BoosterLogic.init(certLogic: DCCCertLogicMock(),
+                                   userDefaults: MockPersistence())
+        let vm = CertificateDetailViewModel(router: CertificateDetailRouterMock(),
+                                            repository: VaccinationRepositoryMock(),
+                                            boosterLogic: bl,
+                                            certificates: certs,
+                                            resolvable: nil)
+        let vc = CertificateDetailViewController(viewModel: vm)
+        verifyView(view: vc.view, height: 1100)
+    }
+    
     func testCertificateDetail_test() {
         let vacinationRepoMock: VaccinationRepositoryMock = VaccinationRepositoryMock()
         let cert: ExtendedCBORWebToken = CBORWebToken.mockTestCertificate.extended()

@@ -205,7 +205,7 @@ class CertificateCardsTests: XCTestCase {
         
         // THEN
         XCTAssertEqual("EU Digital COVID Certificate", model.title)
-        XCTAssertEqual("Expired", model.subtitle)
+        XCTAssertEqual("Invalid", model.subtitle)
         XCTAssertEqual("Display certificates", model.actionTitle)
         XCTAssertEqual("Doe John 1", model.name)
         XCTAssertEqual(.neutralWhite, model.iconTintColor)

@@ -127,6 +127,9 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
         if let cert = selectedCertificate?.vaccinationCertificate.hcert.dgc.v?.first(where: { $0.fullImmunization }), !cert.fullImmunizationValid {
             return "vaccination_certificate_overview_complete_from_message".localized
         }
+        if (selectedCertificate?.vaccinationCertificate.hcert.dgc.r?.first) != nil {
+            return "recovery_certificate_overview_message".localized
+        }
         if !fullImmunization {
             return "vaccination_certificate_overview_incomplete_message".localized
         }

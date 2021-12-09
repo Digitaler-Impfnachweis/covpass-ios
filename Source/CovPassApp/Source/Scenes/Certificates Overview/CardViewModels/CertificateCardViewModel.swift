@@ -77,8 +77,11 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
     }
 
     var subtitle: String {
-        if isExpired {
+        if token.vaccinationCertificate.isExpired {
             return "certificates_start_screen_qrcode_certificate_expired_subtitle".localized
+        }
+        if token.vaccinationCertificate.isInvalid {
+            return "certificates_start_screen_qrcode_certificate_invalid_subtitle".localized
         }
         if showNotification {
             return "vaccination_start_screen_qrcode_booster_vaccination_note_subtitle".localized
