@@ -17,12 +17,12 @@ class ValidationFailedViewController: UIViewController {
     @IBOutlet weak var acceptButton: MainButton!
     @IBOutlet weak var cancelButton: MainButton!
     
-    private let viewModel: ValidationFailedViewModel
+    private let viewModel: ValidationFailedViewModelProtocol
 
     @available(*, unavailable)
     required init?(coder _: NSCoder) { fatalError("init?(coder: NSCoder) not implemented yet") }
 
-    init(viewModel: ValidationFailedViewModel) {
+    init(viewModel: ValidationFailedViewModelProtocol) {
         self.viewModel = viewModel
         super.init(nibName: String(describing: Self.self), bundle: .main)
     }
@@ -30,12 +30,12 @@ class ValidationFailedViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        headerLabel.attributedText = "Unbekannter Anbieter".styledAs(.header_1)
-        descriptionLabel.attributedText = "Der Anbieter %@ ist uns nicht bekannt. Falls Sie fortfahren, überprüfen Sie bitte die Herkunft des QR-Codes und vergewissern Sie sich, ob Sie dem Anbieter Ihr Zertifikat übermitteln möchten".styledAs(.body)
+        headerLabel.attributedText = viewModel.title.styledAs(.header_1)
+        descriptionLabel.attributedText = viewModel.description.styledAs(.body)
         acceptButton.style = .primary
         cancelButton.style = .primary
-        acceptButton.title = "Trotzdem weiter"
-        cancelButton.title = "Abbrechen"
+        acceptButton.title = viewModel.acceptButtonText
+        cancelButton.title = viewModel.cancelButtonText
         acceptButton.action = {
             self.viewModel.continueProcess()
         }
@@ -45,18 +45,9 @@ class ValidationFailedViewController: UIViewController {
         hintView.containerView.backgroundColor = .brandAccent10
         hintView.containerView?.layer.borderColor = UIColor.onBackground50.cgColor
         hintView.iconView.image = .infoSignal
-        hintView.titleLabel.attributedText = "Achten Sie besonders auf:".styledAs(.mainButton)
-        hintView.bodyLabel.attributedText = hintViewText.styledAs(.mainButton)
+        hintView.titleLabel.attributedText = viewModel.hintTitle.styledAs(.mainButton)
+        hintView.bodyLabel.attributedText = viewModel.hintText
         hintView.setConstraintsToEdge()
-    }
-    
-    var hintViewText: NSAttributedString {
-        "Das RKI erklärt:".styledAs(.body)
-            .appendBullets([
-                "Datenschutzhinweis des RKI".styledAs(.body),
-                "Datenschutzhinweis des RKI".styledAs(.body),
-                "Datenschutzhinweis des RKI".styledAs(.body)
-            ], spacing: 12)
     }
 
     override func viewWillAppear(_ animated: Bool) {

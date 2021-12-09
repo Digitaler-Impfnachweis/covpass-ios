@@ -42,6 +42,7 @@
 		0993B15F27610FC300217884 /* ValidationFailedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0993B15E27610FC300217884 /* ValidationFailedViewModel.swift */; };
 		0993B16127610FCB00217884 /* ValidationFailedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0993B16027610FCB00217884 /* ValidationFailedViewController.swift */; };
 		0993B167276116EC00217884 /* ValidationFailedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0993B166276116EC00217884 /* ValidationFailedViewController.xib */; };
+		0993B1692762090A00217884 /* ValidationFailedSnapShotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0993B1682762090A00217884 /* ValidationFailedSnapShotTests.swift */; };
 		0994A4D02734319800B21FCF /* CertificateOverviewSnapShotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0994A4CE2734319800B21FCF /* CertificateOverviewSnapShotTests.swift */; };
 		0994A4D12734319800B21FCF /* TrustedListDetailsViewSnapShotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0994A4CF2734319800B21FCF /* TrustedListDetailsViewSnapShotTests.swift */; };
 		0994A4D5273431A500B21FCF /* TestUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0994A4D2273431A500B21FCF /* TestUtil.swift */; };
@@ -307,6 +308,7 @@
 		0993B15E27610FC300217884 /* ValidationFailedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationFailedViewModel.swift; sourceTree = "<group>"; };
 		0993B16027610FCB00217884 /* ValidationFailedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationFailedViewController.swift; sourceTree = "<group>"; };
 		0993B166276116EC00217884 /* ValidationFailedViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ValidationFailedViewController.xib; sourceTree = "<group>"; };
+		0993B1682762090A00217884 /* ValidationFailedSnapShotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationFailedSnapShotTests.swift; sourceTree = "<group>"; };
 		0994A4CE2734319800B21FCF /* CertificateOverviewSnapShotTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertificateOverviewSnapShotTests.swift; sourceTree = "<group>"; };
 		0994A4CF2734319800B21FCF /* TrustedListDetailsViewSnapShotTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrustedListDetailsViewSnapShotTests.swift; sourceTree = "<group>"; };
 		0994A4D2273431A500B21FCF /* TestUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestUtil.swift; sourceTree = "<group>"; };
@@ -619,6 +621,7 @@
 				9514A5F12732A40E00987109 /* CertificateDetailViewControllerSnapshotTests.swift */,
 				95FE37B3273EF1B7000899A3 /* ValidationServiceViewControllerSnapShotTests.swift */,
 				096873F027430A4200DB5837 /* ChooseCertificateSnapShotTests.swift */,
+				0993B1682762090A00217884 /* ValidationFailedSnapShotTests.swift */,
 			);
 			path = SnapShotTests;
 			sourceTree = "<group>";
@@ -1855,6 +1858,7 @@
 				216D202C264EFA6600370F16 /* CertificateViewModelTests.swift in Sources */,
 				216D203E264EFA7400370F16 /* PassConsentPageViewModelTests.swift in Sources */,
 				216D202B264EFA6600370F16 /* CertificateViewControllerTests.swift in Sources */,
+				0993B1692762090A00217884 /* ValidationFailedSnapShotTests.swift in Sources */,
 				952B7AFB2729BCA8008F69D6 /* ScanPleaseSnapshotTests.swift in Sources */,
 				09590D242715E519004410D7 /* RulesCheckSnapShotTests.swift in Sources */,
 				09590D302715E67F004410D7 /* MockCardViewModel.swift in Sources */,

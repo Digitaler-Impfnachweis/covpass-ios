@@ -42,11 +42,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <view contentMode="scaleToFill" verticalHuggingPriority="249" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="aaG-Tr-DHC" customClass="HintView" customModule="CovPassUI">
-                                    <rect key="frame" x="0.0" y="73" width="350" height="247"/>
-                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                </view>
-                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="Js8-U3-gPV" userLabel="spacerview">
-                                    <rect key="frame" x="0.0" y="336" width="350" height="128"/>
+                                    <rect key="frame" x="0.0" y="73" width="350" height="391"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 </view>
                                 <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="168" translatesAutoresizingMaskIntoConstraints="NO" id="30T-Qd-PCb" userLabel="continuebutton">
@@ -99,7 +95,7 @@
                 <constraint firstAttribute="trailing" secondItem="muf-2j-xCP" secondAttribute="trailing" id="3WW-45-E8n"/>
                 <constraint firstItem="muf-2j-xCP" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="6X6-e3-H4O"/>
                 <constraint firstAttribute="bottom" secondItem="muf-2j-xCP" secondAttribute="bottom" id="XGE-sT-uUg"/>
-                <constraint firstAttribute="bottom" secondItem="yc4-sF-EEh" secondAttribute="bottom" constant="32" id="dWn-gb-ICm"/>
+                <constraint firstAttribute="bottom" secondItem="yc4-sF-EEh" secondAttribute="bottom" priority="250" constant="32" id="dWn-gb-ICm"/>
                 <constraint firstItem="muf-2j-xCP" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="tlz-vo-RRS"/>
             </constraints>
             <point key="canvasLocation" x="96" y="-50"/>
