@@ -26,34 +26,34 @@
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="muf-2j-xCP">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                     <subviews>
-                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="2gq-ma-6LN">
-                            <rect key="frame" x="8" y="8" width="414" height="673"/>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="2gq-ma-6LN">
+                            <rect key="frame" x="32" y="32" width="350" height="832"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nOO-3R-3Hz">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="20.5"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nOO-3R-3Hz">
+                                    <rect key="frame" x="0.0" y="0.0" width="350" height="20.5"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jpN-qj-PRw">
-                                    <rect key="frame" x="0.0" y="28.5" width="414" height="20.5"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jpN-qj-PRw">
+                                    <rect key="frame" x="0.0" y="36.5" width="350" height="20.5"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="aaG-Tr-DHC" customClass="HintView" customModule="CovPassUI">
-                                    <rect key="frame" x="0.0" y="57" width="414" height="128"/>
+                                <view contentMode="scaleToFill" verticalHuggingPriority="249" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="aaG-Tr-DHC" customClass="HintView" customModule="CovPassUI">
+                                    <rect key="frame" x="0.0" y="73" width="350" height="247"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 </view>
-                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="Js8-U3-gPV">
-                                    <rect key="frame" x="0.0" y="193" width="414" height="128"/>
+                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="Js8-U3-gPV" userLabel="spacerview">
+                                    <rect key="frame" x="0.0" y="336" width="350" height="128"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 </view>
-                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="168" translatesAutoresizingMaskIntoConstraints="NO" id="30T-Qd-PCb">
-                                    <rect key="frame" x="0.0" y="329" width="414" height="168"/>
+                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="168" translatesAutoresizingMaskIntoConstraints="NO" id="30T-Qd-PCb" userLabel="continuebutton">
+                                    <rect key="frame" x="0.0" y="480" width="350" height="168"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="l3f-it-Xfx" customClass="MainButton" customModule="CovPassUI">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="168"/>
+                                            <rect key="frame" x="-32" y="0.0" width="414" height="168"/>
                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         </view>
                                     </subviews>
@@ -65,11 +65,11 @@
                                         <constraint firstItem="l3f-it-Xfx" firstAttribute="centerY" secondItem="30T-Qd-PCb" secondAttribute="centerY" id="xR1-2m-6wE"/>
                                     </constraints>
                                 </view>
-                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="168" translatesAutoresizingMaskIntoConstraints="NO" id="yc4-sF-EEh">
-                                    <rect key="frame" x="0.0" y="505" width="414" height="168"/>
+                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="168" translatesAutoresizingMaskIntoConstraints="NO" id="yc4-sF-EEh" userLabel="cancelbutton">
+                                    <rect key="frame" x="0.0" y="664" width="350" height="168"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="6T3-Vd-7X0" customClass="MainButton" customModule="CovPassUI">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="168"/>
+                                            <rect key="frame" x="-32" y="0.0" width="414" height="168"/>
                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         </view>
                                     </subviews>
@@ -85,20 +85,21 @@
                         </stackView>
                     </subviews>
                     <constraints>
-                        <constraint firstItem="2gq-ma-6LN" firstAttribute="top" secondItem="muf-2j-xCP" secondAttribute="top" constant="8" id="EFa-pT-vud"/>
-                        <constraint firstAttribute="bottom" secondItem="2gq-ma-6LN" secondAttribute="bottom" constant="8" id="L9Y-59-7GO"/>
-                        <constraint firstAttribute="trailing" secondItem="2gq-ma-6LN" secondAttribute="trailing" constant="8" id="Tv4-VC-zYN"/>
-                        <constraint firstItem="2gq-ma-6LN" firstAttribute="leading" secondItem="muf-2j-xCP" secondAttribute="leading" constant="8" id="cIl-9Y-CMf"/>
-                        <constraint firstItem="2gq-ma-6LN" firstAttribute="width" secondItem="muf-2j-xCP" secondAttribute="width" id="pqt-E1-Min"/>
+                        <constraint firstItem="2gq-ma-6LN" firstAttribute="top" secondItem="muf-2j-xCP" secondAttribute="top" constant="32" id="EFa-pT-vud"/>
+                        <constraint firstAttribute="bottom" secondItem="2gq-ma-6LN" secondAttribute="bottom" constant="32" id="L9Y-59-7GO"/>
+                        <constraint firstAttribute="trailing" secondItem="2gq-ma-6LN" secondAttribute="trailing" constant="32" id="Tv4-VC-zYN"/>
+                        <constraint firstItem="2gq-ma-6LN" firstAttribute="leading" secondItem="muf-2j-xCP" secondAttribute="leading" constant="32" id="cIl-9Y-CMf"/>
+                        <constraint firstItem="2gq-ma-6LN" firstAttribute="width" secondItem="muf-2j-xCP" secondAttribute="width" constant="-64" id="jHD-Kc-4ek"/>
                     </constraints>
                 </scrollView>
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
+                <constraint firstItem="muf-2j-xCP" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="1dh-t1-obB"/>
                 <constraint firstAttribute="trailing" secondItem="muf-2j-xCP" secondAttribute="trailing" id="3WW-45-E8n"/>
                 <constraint firstItem="muf-2j-xCP" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="6X6-e3-H4O"/>
                 <constraint firstAttribute="bottom" secondItem="muf-2j-xCP" secondAttribute="bottom" id="XGE-sT-uUg"/>
-                <constraint firstItem="muf-2j-xCP" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="hc1-rT-LyA"/>
+                <constraint firstAttribute="bottom" secondItem="yc4-sF-EEh" secondAttribute="bottom" constant="32" id="dWn-gb-ICm"/>
                 <constraint firstItem="muf-2j-xCP" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="tlz-vo-RRS"/>
             </constraints>
             <point key="canvasLocation" x="96" y="-50"/>
@@ -106,6 +107,9 @@
     </objects>
     <designables>
         <designable name="6T3-Vd-7X0">
+            <size key="intrinsicContentSize" width="414" height="128"/>
+        </designable>
+        <designable name="aaG-Tr-DHC">
             <size key="intrinsicContentSize" width="414" height="128"/>
         </designable>
         <designable name="l3f-it-Xfx">

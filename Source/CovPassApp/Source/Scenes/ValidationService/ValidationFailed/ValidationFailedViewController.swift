@@ -31,7 +31,7 @@ class ValidationFailedViewController: UIViewController {
         super.viewDidLoad()
         
         headerLabel.attributedText = "Unbekannter Anbieter".styledAs(.header_1)
-        headerLabel.attributedText = "Bla bLa".styledAs(.body)
+        descriptionLabel.attributedText = "Der Anbieter %@ ist uns nicht bekannt. Falls Sie fortfahren, überprüfen Sie bitte die Herkunft des QR-Codes und vergewissern Sie sich, ob Sie dem Anbieter Ihr Zertifikat übermitteln möchten".styledAs(.body)
         acceptButton.style = .primary
         cancelButton.style = .primary
         acceptButton.title = "Trotzdem weiter"
@@ -42,6 +42,21 @@ class ValidationFailedViewController: UIViewController {
         cancelButton.action = {
             self.viewModel.cancelProcess()
         }
+        hintView.containerView.backgroundColor = .brandAccent10
+        hintView.containerView?.layer.borderColor = UIColor.onBackground50.cgColor
+        hintView.iconView.image = .infoSignal
+        hintView.titleLabel.attributedText = "Achten Sie besonders auf:".styledAs(.mainButton)
+        hintView.bodyLabel.attributedText = hintViewText.styledAs(.mainButton)
+        hintView.setConstraintsToEdge()
+    }
+    
+    var hintViewText: NSAttributedString {
+        "Das RKI erklärt:".styledAs(.body)
+            .appendBullets([
+                "Datenschutzhinweis des RKI".styledAs(.body),
+                "Datenschutzhinweis des RKI".styledAs(.body),
+                "Datenschutzhinweis des RKI".styledAs(.body)
+            ], spacing: 12)
     }
 
     override func viewWillAppear(_ animated: Bool) {
