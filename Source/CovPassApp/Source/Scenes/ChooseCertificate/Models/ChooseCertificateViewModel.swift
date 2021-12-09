@@ -40,7 +40,7 @@ class ChooseCertificateViewModel: ChooseCertificateViewModelProtocol {
     weak var delegate: ViewModelDelegate?
     var router: ValidationServiceRoutable?
     private let repository: VaccinationRepositoryProtocol
-    private let vaasRepository: VAASRepositoryProtocol
+    private var vaasRepository: VAASRepositoryProtocol
     private let resolver: Resolver<Void>?
     private var certificates: [ExtendedCBORWebToken]? { certificateList.certificates }
     private var certificateList = CertificateList(certificates: [])
@@ -158,6 +158,7 @@ class ChooseCertificateViewModel: ChooseCertificateViewModelProtocol {
     
     func runMainProcess() {
         isLoading = true
+        self.delegate?.viewModelDidUpdate()
         firstly {
             repository.getCertificateList()
         }
@@ -182,7 +183,17 @@ class ChooseCertificateViewModel: ChooseCertificateViewModelProtocol {
             case .downloadIdentityDecorator:
                 if let error = error as? APIError {
                     if error == .trustList {
-                        // Show Popup
+                        self.router?.showValidationFailed(ticket: self.vaasRepository.ticket)
+                            .done{ shouldContinue in
+                                if shouldContinue {
+                                    self.vaasRepository.useUnsecureApi = true
+                                    self.runMainProcess()
+                                } else {
+                                    self.cancel()
+                                }
+                                
+                            }
+                            .cauterize()
                     } else {
                         self.router?.showIdentityDocumentApiError(error: error)
                             .done { canceled in

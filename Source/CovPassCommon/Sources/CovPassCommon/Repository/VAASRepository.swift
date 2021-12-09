@@ -74,30 +74,33 @@ public protocol VAASRepositoryProtocol {
     func fetchValidationService() -> Promise<AccessTokenResponse>
     func validateTicketing (choosenCert cert: ExtendedCBORWebToken) throws -> Promise<VAASValidaitonResultToken>
     func cancellation()
+    var useUnsecureApi: Bool { get set }
 }
 
 public class VAASRepository: VAASRepositoryProtocol {
     
-    public var step: VAASStep
-    private let service: APIServiceProtocol
-    public private(set) var ticket: ValidationServiceInitialisation
     var identityDocumentDecorator: IdentityDocument?
     var identityDocumentValidationService: IdentityDocument?
     var accessTokenInfo: AccessTokenResponse?
-    public private(set) var selectedValidationService: ValidationService?
     var accessTokenJWT: String?
+    public var step: VAASStep
+    public var useUnsecureApi: Bool = false
+    public private(set) var selectedValidationService: ValidationService?
+    public private(set) var ticket: ValidationServiceInitialisation
+    private let service: APIServiceProtocol
+    private let unsecureService: APIServiceProtocol
 
     public init(service: APIServiceProtocol, ticket: ValidationServiceInitialisation) {
         self.service = service
         self.ticket = ticket
         self.step = .downloadIdentityDecorator
+        self.unsecureService = APIService(customURLSession: CustomURLSession(sessionDelegate: nil), url: "")
     }
     
     public func fetchValidationService() -> Promise<AccessTokenResponse> {
         self.step = .downloadIdentityDecorator
         return firstly {
-            return callValidationDecorator(url: URL(string: "https://google.de")!)
-//            return callValidationDecorator(url: ticket.serviceIdentity)
+            return callValidationDecorator(url: ticket.serviceIdentity)
         }
         .then { [weak self] stringResponse in
             try self?.identityDocument(identityString: stringResponse) ?? .init(error: APIError.invalidResponse)
@@ -302,6 +305,7 @@ public class VAASRepository: VAASRepositoryProtocol {
     private func callValidationDecorator(url: URL) -> Promise<String> {
         Promise { seal in
             callUrl(url: url) { response, error in
+                self.useUnsecureApi = false
                 if let response = response {
                     seal.fulfill(response)
                 } else {
@@ -325,7 +329,9 @@ public class VAASRepository: VAASRepositoryProtocol {
     }
     
     private func callUrl(url: URL, completion: ((String?, Error?) throws -> Void)?) {
-        service.vaasListOfServices(url: url).done {
+        let service = useUnsecureApi ? unsecureService : service
+        service.vaasListOfServices(url: url)
+        .done {
             try? completion?($0, nil)
         }
         .catch { error in
