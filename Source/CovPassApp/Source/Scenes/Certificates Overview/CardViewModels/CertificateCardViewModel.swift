@@ -65,15 +65,15 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
     }
 
     var iconTintColor: UIColor {
-        return .neutralWhite
+        .neutralWhite
     }
 
     var textColor: UIColor {
-        return .neutralWhite
+        .neutralWhite
     }
 
     var title: String {
-        return "startscreen_card_title".localized
+        "startscreen_card_title".localized
     }
 
     var subtitle: String {
@@ -107,7 +107,7 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
     var showFavorite: Bool = true
 
     var qrCode: UIImage? {
-        return token.vaccinationQRCodeData.generateQRCode()
+        token.vaccinationQRCodeData.generateQRCode()
     }
 
     var name: String {

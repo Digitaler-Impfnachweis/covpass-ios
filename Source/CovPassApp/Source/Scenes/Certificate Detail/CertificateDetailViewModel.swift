@@ -101,7 +101,14 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
             }
             return String(format: "test_certificate_overview_title".localized, DateUtils.displayDateTimeFormatter.string(from: t.sc))
         }
-        guard let cert = certificates.sorted(by: { c, _ in c.vaccinationCertificate.hcert.dgc.v != nil }).sorted(by: { c, _ in c.vaccinationCertificate.hcert.dgc.v?.first?.fullImmunization ?? false }).first?.vaccinationCertificate.hcert.dgc.v?.first else {
+
+        let sortedByVacs = certificates.sorted(by: { c, _ in
+            c.vaccinationCertificate.hcert.dgc.v != nil
+        })
+        let sortedByFullImmunization = sortedByVacs.sorted(by: { c, _ in
+            c.vaccinationCertificate.hcert.dgc.v?.first?.fullImmunization ?? false
+        })
+        guard let cert = sortedByFullImmunization.first?.vaccinationCertificate.hcert.dgc.v?.first else {
             return "vaccination_certificate_overview_incomplete_title".localized
         }
         if let date = cert.fullImmunizationValidFrom, cert.fullImmunizationValid {
