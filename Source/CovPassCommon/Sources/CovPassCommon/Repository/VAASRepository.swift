@@ -34,7 +34,7 @@ public enum VAASErrors: Error, ErrorCode {
     case signingDCCFailed
     case accessTokenJWTNotFound
     case accessTokenJWKNotFound
-
+    
     public var errorCode: Int {
         switch self {
         case .identityDocumentDecoratorNotFound:
@@ -89,7 +89,7 @@ public class VAASRepository: VAASRepositoryProtocol {
     public private(set) var ticket: ValidationServiceInitialisation
     private let service: APIServiceProtocol
     private let unsecureService: APIServiceProtocol
-
+    
     public init(service: APIServiceProtocol, ticket: ValidationServiceInitialisation) {
         self.service = service
         self.ticket = ticket
@@ -165,7 +165,7 @@ public class VAASRepository: VAASRepositoryProtocol {
             guard let pubKey = X509.derPubKey(for: privateKey)?.base64EncodedString() else {
                 throw VAASErrors.fetchingPublicKeyFromPrivatKeyFailed
             }
-
+            
             return self.service.getAccessTokenFor(url: url, servicePath: servicePath, publicKey: pubKey, ticketToken: self.ticket.token.string)
         }
         .then { [weak self] stringResponse -> Promise<AccessTokenResponse> in
@@ -187,7 +187,7 @@ public class VAASRepository: VAASRepositoryProtocol {
         }
         .then { [weak self] stringResponse -> Promise<VAASValidaitonResultToken> in
             guard let decodedJWT = try? decode(jwt: stringResponse),
-            let jsondata = try? JSONSerialization.data(withJSONObject: decodedJWT.body),
+                  let jsondata = try? JSONSerialization.data(withJSONObject: decodedJWT.body),
                   var vaasValidationResultToken = try? JSONDecoder().decode(VAASValidaitonResultToken.self, from: jsondata) else {
                       return .init(error: APIError.requestCancelled)
                   }
@@ -201,7 +201,7 @@ public class VAASRepository: VAASRepositoryProtocol {
         guard let identityDocumentValidationService = identityDocumentValidationService else {
             throw VAASErrors.identityValidationServiceNotFound
         }
-
+        
         guard let urlPath = self.accessTokenInfo?.aud, let url = URL(string: urlPath) else {
             throw APIError.invalidUrl
         }
@@ -251,9 +251,9 @@ public class VAASRepository: VAASRepositoryProtocol {
     
     public func cancellation() {
         guard let urlString = self.identityDocumentDecorator?.service?.first(where: { $0.type == "CancellationService" })?.serviceEndpoint,
-                let url = URL(string: urlString) else {
-            return
-        }
+              let url = URL(string: urlString) else {
+                  return
+              }
         _ = service.cancellTicket(url: url, ticketToken: self.ticket.token.string)
     }
     
@@ -329,14 +329,14 @@ public class VAASRepository: VAASRepositoryProtocol {
     }
     
     private func callUrl(url: URL, completion: ((String?, Error?) throws -> Void)?) {
-        let service = useUnsecureApi ? unsecureService : service
-        service.vaasListOfServices(url: url)
-        .done {
-            try? completion?($0, nil)
-        }
-        .catch { error in
-            try? completion?(nil, error)
-        }
+        let apiService = useUnsecureApi ? unsecureService : service
+        apiService.vaasListOfServices(url: url)
+            .done {
+                try? completion?($0, nil)
+            }
+            .catch { error in
+                try? completion?(nil, error)
+            }
     }
     
     private func encodeDCC(dgcString : String, iv: String) -> (Data,Data)? {
