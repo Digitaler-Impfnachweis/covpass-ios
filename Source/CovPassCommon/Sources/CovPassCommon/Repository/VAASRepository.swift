@@ -298,7 +298,7 @@ public class VAASRepository: VAASRepositoryProtocol {
                     }
                 }
             }
-            next(validationServices.reversed())
+            next(validationServices)
         }
     }
     

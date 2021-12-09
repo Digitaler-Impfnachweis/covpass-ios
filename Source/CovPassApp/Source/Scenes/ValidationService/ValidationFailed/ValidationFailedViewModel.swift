@@ -11,14 +11,15 @@ import Foundation
 
 private enum Constants {
     enum Keys {
-        static let title = "title_key".localized
-        static let description = "description_key %@".localized
-        static let accept = "accepts_button_key".localized
-        static let cancel = "cancel_button_key".localized
-        static let hintTitle = "hint_title_key".localized
-        static let bulletOne = "bullet_one_key".localized
-        static let bulletTwo = "bullet_two_key".localized
-        static let bulletThree = "bullet_three_key".localized
+        static let title = "warning_unknown_provider_title".localized
+        static let description = "warning_unknown_provider_copy".localized
+        static let accept = "warning_unknown_provider_box_button_primary".localized
+        static let cancel = "warning_unknown_provider_box_button_secondary".localized
+        static let hintTitle = "warning_unknown_provider_box_title".localized
+        static let bulletOne = "warning_unknown_provider_box_item_1".localized
+        static let bulletTwo = "warning_unknown_provider_box_item_2".localized
+        static let bulletThree = "warning_unknown_provider_box_item_3".localized
+        static let bulletFour = "warning_unknown_provider_box_item_4".localized
     }
 }
 
@@ -46,9 +47,11 @@ struct ValidationFailedViewModel: ValidationFailedViewModelProtocol {
         let bulletOne = Constants.Keys.bulletOne.styledAs(.body)
         let bulletTwo = Constants.Keys.bulletTwo.styledAs(.body)
         let bulletThree = Constants.Keys.bulletThree.styledAs(.body)
+        let bulletFour = Constants.Keys.bulletFour.styledAs(.body)
         return NSAttributedString.toBullets([bulletOne,
                                              bulletTwo,
-                                             bulletThree])
+                                             bulletThree,
+                                             bulletFour])
     }
     
     internal init(resolvable: Resolver<Bool>, ticket: ValidationServiceInitialisation) {

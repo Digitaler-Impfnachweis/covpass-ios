@@ -13,6 +13,10 @@
 
 "ok" = "OK";
 
+"close" = "Close";
+
+"cancel" = "Cancel";
+
 
 /********** onboarding **********/
 
@@ -101,23 +105,17 @@
 
 "vaccination_start_screen_note_message" = "You do not have any EU Digital COVID Certificate saved at the moment. Tap the button \"Add a certificate\" (plus symbol) to add a Digital COVID Certificate.";
 
+"startscreen_card_title" = "EU Digital COVID Certificate";
+
+"startscreen_card_button" = "Display certificates";
+
 "accessibility_vaccination_start_screen_label_qrcode" = "Black QR code on white background";
-
-"vaccination_start_screen_qrcode_incomplete_subtitle" = "Not fully vaccinated";
-
-"vaccination_start_screen_qrcode_complete_from_date_subtitle" = "Fully vaccinated as of %@";
-
-"vaccination_start_screen_qrcode_complete_protection_subtitle" = "Complete since %@";
-
-"certificates_start_screen_qrcode_certificate_expires_subtitle" = "Expires on %@ at %@";
 
 "certificates_start_screen_qrcode_certificate_expired_subtitle" = "Expired";
 
 "certificates_start_screen_qrcode_certificate_invalid_subtitle" = "Invalid";
 
-"vaccination_start_screen_qrcode_booster_vaccination_note_subtitle" = "Check vaccination status";
-
-"vaccination_start_screen_qrcode_certificate_will_be_revoked_subtitle" = " Certificate will be revoked soon";
+"vaccination_start_screen_qrcode_booster_vaccination_note_subtitle" = "Check status";
 
 "certificates_start_screen_qr_code_app_reference_text" = "This QR code can be reliably verified with the CovPassCheck app.";
 
@@ -605,33 +603,6 @@
 
 "error_check_validity_no_internet_button_cancel" = "Cancel";
 
-
-/********** start Screen: partial immunization certificate **********/
-
-"vaccination_partial_immunization_action_button" = "Display certificates";
-
-
-/********** start screen: full immunization certificate **********/
-
-"vaccination_full_immunization_action_button" = "Display certificates";
-
-"vaccination_full_immunization_status_expired" = "Expired";
-
-
-/********** start screen: test certificate **********/
-
-"test_certificate_action_button" = "Display certificates";
-
-
-/********** start screen: pcr test certificate **********/
-
-"pcr_test_certificate_action_button" = "Display certificates";
-
-
-/********** start screen: recovery certificate **********/
-
-"recovery_certificate_action_button" = "Display certificates";
-
 "error_connect_to_internet_title" = "Turn off Airplane Mode or use Wi-Fi to access data";
 
 "error_connect_to_internet_button_settings" = "Settings";
@@ -661,7 +632,7 @@
 
 "vaccination_certificate_overview_complete_from_message" = "You are not yet considered fully vaccinated. Full vaccination takes effect 14 days after the final dose.";
 
-"vaccination_certificate_overview_complete_title" = "Fully vaccinated";
+"vaccination_certificate_overview_complete_title" = "Fully vaccinated since %@";
 
 "certificates_overview_qr_scan_hint" = "This QR code can be reliably verified with the CovPassCheck app.";
 
@@ -702,6 +673,10 @@
 "certificates_overview_expired_message" = "The expiry date of your certificates has passed. Please make every effort to have a new digital certificate issued. ";
 
 "certificates_overview_expired_action_button_title" = "Add new certificate";
+
+"certificates_overview_soon_expiring_title" = "Current certificate expires on %@ at %@";
+
+"certificates_overview_soon_expiring_subtitle" = "Please make every effort to have a new digital certificate issued. ";
 
 "certificates_overview_invalid_title" = "Certificate invalid";
 
@@ -1246,6 +1221,27 @@
 
 "accessibility_share_certificate_label_back" = "Back";
 
+
+/********** Warning: Unknown service provider **********/
+
+"warning_unknown_provider_title" = "Unknown provider";
+
+"warning_unknown_provider_copy" = "The provider \"%@\" is not known to us. If you proceed, please check the origin of the QR code and make sure you want to submit your certificate to the provider.";
+
+"warning_unknown_provider_box_title" = "Pay particular attention to:";
+
+"warning_unknown_provider_box_item_1" = "The name of the provider should be familiar to you.";
+
+"warning_unknown_provider_box_item_2" = "The name of the provider should match the name on the booking portal.";
+
+"warning_unknown_provider_box_item_3" = "If you have any doubts about the seriousness of the provider, it is better to cancel the process.";
+
+"warning_unknown_provider_box_item_4" = "If you have any further questions, please contact the provider.";
+
+"warning_unknown_provider_box_button_primary" = "Continue anyway";
+
+"warning_unknown_provider_box_button_secondary" = "Cancel";
+
 "accessibility_share_certificate_announce" = "The \"Release certificates for booking purposes\" view has been opened.";
 
 "accessibility_share_certificate_closing_announce" = "The \"Release certificates for booking purposes\" view has been closed.";
@@ -1318,23 +1314,23 @@
 
 "accessibility_share_certificate_transmission_closing_announce" = "The \"Submitting your certificate for verification\" view has been closed.";
 
-"share_certificate_detail_view_requirements_met_title" = "Certificate meets the requirements";
+"share_certificate_detail_view_requirements_met_title" = "Certificate meets the requirements of the provider";
 
 "share_certificate_detail_view_requirements_met_subline" = "Verified by %@";
 
-"share_certificate_detail_view_requirements_met_message" = "The provider was informed about the successful check. If you have any questions, please contact the provider %@.";
+"share_certificate_detail_view_requirements_met_message" = "If you have any questions, please contact the provider %@.";
 
-"share_certificate_detail_view_requirements_not_verifiable_title" = "Certificate is not auditable";
+"share_certificate_detail_view_requirements_not_verifiable_title" = "Certificate is not fully auditable";
 
 "share_certificate_detail_view_requirements_not_verifiable_subline" = "Verified by %@";
 
-"share_certificate_detail_view_requirements_not_verifiable_message" = "Unfortunately, an automatic check is not possible. Please check the information marked in yellow yourself. If you have any questions, please contact the provider %@.";
+"share_certificate_detail_view_requirements_not_verifiable_message" = "Unfortunately, an automatic check is not possible. Please check the information marked in yellow yourself.\n\nIf you have any questions, please contact the provider %@.";
 
-"share_certificate_detail_view_requirements_not_met_title" = "Certificate does not meet the requirements";
+"share_certificate_detail_view_requirements_not_met_title" = "Certificate does not meet the requirements of the provider";
 
 "share_certificate_detail_view_requirements_not_met_subline" = "Verified by %@";
 
-"share_certificate_detail_view_requirements_not_met_message" = "If you have any questions, please contact the provider %@.";
+"share_certificate_detail_view_requirements_not_met_message" = "The information that does not meet the requirements is marked in red below.\n\nIf you have any questions, please contact the provider %@.";
 
 "error_share_certificate_qr_code_not_recognized_title" = "QR code was not recognized";
 
