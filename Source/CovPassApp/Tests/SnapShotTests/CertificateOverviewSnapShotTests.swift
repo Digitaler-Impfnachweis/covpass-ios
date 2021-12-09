@@ -56,4 +56,122 @@ class CertificateOverviewSnapShotTests: BaseSnapShotTests {
         RunLoop.current.run(for: 0.1)
         verifyView(vc: viewController)
     }
+    
+    func testCertificateOverviewCertificates_Vaccination() {
+        let vacinationRepoMock: VaccinationRepositoryMock = VaccinationRepositoryMock()
+        let cert: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended()
+        cert.vaccinationCertificate.hcert.dgc.nam.fn = "John 1"
+        let certs = [cert]
+        vacinationRepoMock.certificates = certs
+        let viewModel = CertificatesOverviewViewModel(router: nil,
+                                                      repository: vacinationRepoMock,
+                                                      certLogic: DCCCertLogicMock(),
+                                                      boosterLogic: BoosterLogicMock(),
+                                                      userDefaults: UserDefaultsPersistence())
+        let viewController = CertificatesOverviewViewController(viewModel: viewModel)
+        let window = UIWindow(frame: UIScreen.main.bounds)
+        window.rootViewController = viewController
+        window.makeKeyAndVisible()
+        RunLoop.current.run(for: 0.2)
+        verifyView(view: viewController.collectionView.cellForItem(at: IndexPath(row: 0, section: 0))!)
+    }
+    
+    func testCertificateOverviewCertificates_Vaccination_Partly() {
+        let vacinationRepoMock: VaccinationRepositoryMock = VaccinationRepositoryMock()
+        let cert: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended()
+        cert.vaccinationCertificate.hcert.dgc.nam.fn = "John 1"
+        cert.vaccinationCertificate.hcert.dgc.v!.first!.dn = 1
+        let certs = [cert]
+        vacinationRepoMock.certificates = certs
+        let viewModel = CertificatesOverviewViewModel(router: nil,
+                                                      repository: vacinationRepoMock,
+                                                      certLogic: DCCCertLogicMock(),
+                                                      boosterLogic: BoosterLogicMock(),
+                                                      userDefaults: UserDefaultsPersistence())
+        let viewController = CertificatesOverviewViewController(viewModel: viewModel)
+        let window = UIWindow(frame: UIScreen.main.bounds)
+        window.rootViewController = viewController
+        window.makeKeyAndVisible()
+        RunLoop.current.run(for: 0.2)
+        verifyView(view: viewController.collectionView.cellForItem(at: IndexPath(row: 0, section: 0))!)
+    }
+    
+    func testCertificateOverviewCertificates_Recovery() {
+        let vacinationRepoMock: VaccinationRepositoryMock = VaccinationRepositoryMock()
+        let cert: ExtendedCBORWebToken = CBORWebToken.mockRecoveryCertificate.extended()
+        cert.vaccinationCertificate.hcert.dgc.nam.fn = "John 1"
+        let certs = [cert]
+        vacinationRepoMock.certificates = certs
+        let viewModel = CertificatesOverviewViewModel(router: nil,
+                                                      repository: vacinationRepoMock,
+                                                      certLogic: DCCCertLogicMock(),
+                                                      boosterLogic: BoosterLogicMock(),
+                                                      userDefaults: UserDefaultsPersistence())
+        let viewController = CertificatesOverviewViewController(viewModel: viewModel)
+        let window = UIWindow(frame: UIScreen.main.bounds)
+        window.rootViewController = viewController
+        window.makeKeyAndVisible()
+        RunLoop.current.run(for: 0.2)
+        verifyView(view: viewController.collectionView.cellForItem(at: IndexPath(row: 0, section: 0))!)
+    }
+    
+    func testCertificateOverviewCertificates_Test() {
+        let vacinationRepoMock: VaccinationRepositoryMock = VaccinationRepositoryMock()
+        let cert: ExtendedCBORWebToken = CBORWebToken.mockTestCertificate.extended()
+        cert.vaccinationCertificate.hcert.dgc.t!.first!.sc = DateUtils.parseDate("2021-04-26T15:05:00")!
+        cert.vaccinationCertificate.hcert.dgc.nam.fn = "John 1"
+        let certs = [cert]
+        vacinationRepoMock.certificates = certs
+        let viewModel = CertificatesOverviewViewModel(router: nil,
+                                                      repository: vacinationRepoMock,
+                                                      certLogic: DCCCertLogicMock(),
+                                                      boosterLogic: BoosterLogicMock(),
+                                                      userDefaults: UserDefaultsPersistence())
+        let viewController = CertificatesOverviewViewController(viewModel: viewModel)
+        let window = UIWindow(frame: UIScreen.main.bounds)
+        window.rootViewController = viewController
+        window.makeKeyAndVisible()
+        RunLoop.current.run(for: 0.2)
+        verifyView(view: viewController.collectionView.cellForItem(at: IndexPath(row: 0, section: 0))!)
+    }
+    
+    func testCertificateOverviewCertificates_IsExpired() {
+        let vacinationRepoMock: VaccinationRepositoryMock = VaccinationRepositoryMock()
+        var cert: ExtendedCBORWebToken = CBORWebToken.mockTestCertificate.extended()
+        cert.vaccinationCertificate.hcert.dgc.nam.fn = "John 1"
+        cert.vaccinationCertificate.exp = Calendar.current.date(byAdding: .year, value: -2, to: Date())
+        let certs = [cert]
+        vacinationRepoMock.certificates = certs
+        let viewModel = CertificatesOverviewViewModel(router: nil,
+                                                      repository: vacinationRepoMock,
+                                                      certLogic: DCCCertLogicMock(),
+                                                      boosterLogic: BoosterLogicMock(),
+                                                      userDefaults: UserDefaultsPersistence())
+        let viewController = CertificatesOverviewViewController(viewModel: viewModel)
+        let window = UIWindow(frame: UIScreen.main.bounds)
+        window.rootViewController = viewController
+        window.makeKeyAndVisible()
+        RunLoop.current.run(for: 0.2)
+        verifyView(view: viewController.collectionView.cellForItem(at: IndexPath(row: 0, section: 0))!)
+    }
+    
+    func testCertificateOverviewCertificates_IsInvalid() {
+        let vacinationRepoMock: VaccinationRepositoryMock = VaccinationRepositoryMock()
+        var cert: ExtendedCBORWebToken = CBORWebToken.mockTestCertificate.extended()
+        cert.vaccinationCertificate.hcert.dgc.nam.fn = "John 1"
+        cert.vaccinationCertificate.invalid = true
+        let certs = [cert]
+        vacinationRepoMock.certificates = certs
+        let viewModel = CertificatesOverviewViewModel(router: nil,
+                                                      repository: vacinationRepoMock,
+                                                      certLogic: DCCCertLogicMock(),
+                                                      boosterLogic: BoosterLogicMock(),
+                                                      userDefaults: UserDefaultsPersistence())
+        let viewController = CertificatesOverviewViewController(viewModel: viewModel)
+        let window = UIWindow(frame: UIScreen.main.bounds)
+        window.rootViewController = viewController
+        window.makeKeyAndVisible()
+        RunLoop.current.run(for: 0.2)
+        verifyView(view: viewController.collectionView.cellForItem(at: IndexPath(row: 0, section: 0))!)
+    }
 }

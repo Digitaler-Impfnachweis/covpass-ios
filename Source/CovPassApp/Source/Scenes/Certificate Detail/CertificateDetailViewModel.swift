@@ -78,6 +78,14 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
         if selectedCertificate?.vaccinationCertificate.isExpired ?? false {
             return "certificate_expired_detail_view_note_title".localized
         }
+        if selectedCertificate?.vaccinationCertificate.expiresSoon ?? false {
+            guard let expireDate = selectedCertificate?.vaccinationCertificate.exp else {
+                return "certificates_overview_expires_soon_certificate_note".localized
+            }
+            return String(format: "certificates_overview_soon_expiring_title".localized,
+                          DateUtils.displayDateFormatter.string(from: expireDate),
+                          DateUtils.displayTimeFormatter.string(from: expireDate))
+        }
         if selectedCertificate?.vaccinationCertificate.isInvalid ?? false {
             return "certificate_invalid_detail_view_note_title".localized
         }
@@ -93,11 +101,12 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
             }
             return String(format: "test_certificate_overview_title".localized, DateUtils.displayDateTimeFormatter.string(from: t.sc))
         }
-        guard let cert = certificates.sorted(by: { c, _ in c.vaccinationCertificate.hcert.dgc.v?.first?.fullImmunization ?? false }).first?.vaccinationCertificate.hcert.dgc.v?.first else {
-            return String(format: "vaccination_certificate_overview_incomplete_title".localized, 1, 2)
+        guard let cert = certificates.sorted(by: { c, _ in c.vaccinationCertificate.hcert.dgc.v != nil }).sorted(by: { c, _ in c.vaccinationCertificate.hcert.dgc.v?.first?.fullImmunization ?? false }).first?.vaccinationCertificate.hcert.dgc.v?.first else {
+            return "vaccination_certificate_overview_incomplete_title".localized
         }
-        if cert.fullImmunizationValid {
-            return "vaccination_certificate_overview_complete_title".localized
+        if let date = cert.fullImmunizationValidFrom, cert.fullImmunizationValid {
+            return String(format: "vaccination_certificate_overview_complete_title".localized,
+                          DateUtils.displayDateFormatter.string(from: date))
         } else if let date = cert.fullImmunizationValidFrom, fullImmunization {
             return String(format: "vaccination_certificate_overview_complete_from_title".localized, DateUtils.displayDateFormatter.string(from: date))
         }
@@ -109,11 +118,17 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
         if selectedCertificate?.vaccinationCertificate.isExpired ?? false {
             return "certificates_overview_expired_message".localized
         }
+        if selectedCertificate?.vaccinationCertificate.expiresSoon ?? false {
+            return "certificates_overview_soon_expiring_subtitle".localized
+        }
         if selectedCertificate?.vaccinationCertificate.isInvalid ?? false {
             return "certificates_overview_invalid_message".localized
         }
         if let cert = selectedCertificate?.vaccinationCertificate.hcert.dgc.v?.first(where: { $0.fullImmunization }), !cert.fullImmunizationValid {
             return "vaccination_certificate_overview_complete_from_message".localized
+        }
+        if (selectedCertificate?.vaccinationCertificate.hcert.dgc.r?.first) != nil {
+            return "recovery_certificate_overview_message".localized
         }
         if !fullImmunization {
             return "vaccination_certificate_overview_incomplete_message".localized
@@ -211,7 +226,10 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
         if selectedCertificate?.vaccinationCertificate.isInvalid ?? false {
             resolver?.fulfill(.addNewCertificate)
         } else {
-            resolver?.fulfill(.showCertificatesOnOverview(certificates))
+            guard let cert = certificates.sortLatest().first else {
+                return
+            }
+            router.showCertificate(for: cert)
         }
     }
 

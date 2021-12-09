@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -23,7 +23,7 @@
         <view contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Gyu-2q-STL">
             <rect key="frame" x="0.0" y="0.0" width="414" height="494"/>
             <subviews>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ALc-6G-MIJ">
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ALc-6G-MIJ" userLabel="iconview">
                     <rect key="frame" x="8" y="20" width="24" height="24"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="24" id="5z0-sh-nIk"/>
@@ -31,7 +31,7 @@
                     </constraints>
                 </imageView>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="GdT-D2-fPq">
-                    <rect key="frame" x="32" y="12" width="370" height="34"/>
+                    <rect key="frame" x="32" y="12" width="370" height="32"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hih-1b-LF2" userLabel="Title">
                             <rect key="frame" x="15" y="32" width="355" height="0.0"/>
@@ -40,7 +40,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="249" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MfU-7S-Aoc" userLabel="Subtitle">
-                            <rect key="frame" x="15" y="32" width="355" height="2"/>
+                            <rect key="frame" x="15" y="32" width="355" height="0.0"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -49,7 +49,7 @@
                     <edgeInsets key="layoutMargins" top="0.0" left="15" bottom="0.0" right="0.0"/>
                 </stackView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vTI-EJ-iKv" userLabel="QRContainerView">
-                    <rect key="frame" x="8" y="58" width="398" height="428"/>
+                    <rect key="frame" x="8" y="56" width="398" height="430"/>
                     <subviews>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="N51-Ce-JsW" userLabel="qrCode">
                             <rect key="frame" x="18" y="18" width="362" height="362"/>
@@ -75,11 +75,11 @@
                             </constraints>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LlY-3B-soM" userLabel="qrInfo">
-                            <rect key="frame" x="18" y="386" width="362" height="28"/>
+                            <rect key="frame" x="18" y="386" width="362" height="30"/>
                             <attributedString key="attributedText">
                                 <fragment content="Dieser QR-Code lässt sich verlässlich mit der CovPassCheck-App überprüfen.">
                                     <attributes>
-                                        <font key="NSFont" size="12" name="OpenSans"/>
+                                        <font key="NSFont" metaFont="cellTitle"/>
                                     </attributes>
                                 </fragment>
                             </attributedString>
@@ -106,6 +106,7 @@
                 <constraint firstAttribute="bottom" secondItem="vTI-EJ-iKv" secondAttribute="bottom" constant="8" id="4bQ-ff-kaR"/>
                 <constraint firstItem="GdT-D2-fPq" firstAttribute="top" secondItem="Gyu-2q-STL" secondAttribute="top" constant="12" id="5KH-Dk-fZN"/>
                 <constraint firstItem="ALc-6G-MIJ" firstAttribute="leading" secondItem="vTI-EJ-iKv" secondAttribute="leading" id="5qh-h8-tBZ"/>
+                <constraint firstItem="vTI-EJ-iKv" firstAttribute="top" secondItem="ALc-6G-MIJ" secondAttribute="bottom" priority="500" constant="12" id="6z6-rX-v7w"/>
                 <constraint firstItem="ALc-6G-MIJ" firstAttribute="top" secondItem="Gyu-2q-STL" secondAttribute="top" constant="20" id="E4H-Fq-HRN"/>
                 <constraint firstItem="vTI-EJ-iKv" firstAttribute="leading" secondItem="Gyu-2q-STL" secondAttribute="leading" constant="8" id="Lv4-lq-HCh"/>
                 <constraint firstItem="GdT-D2-fPq" firstAttribute="leading" secondItem="ALc-6G-MIJ" secondAttribute="trailing" id="U8y-Zr-fyZ"/>
