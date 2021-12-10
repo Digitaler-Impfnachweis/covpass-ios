@@ -32,6 +32,8 @@ class ConsentExchangeViewController: UIViewController {
 
     private let toolbar: CustomToolbarView = CustomToolbarView(frame: .zero)
     private let toolbarCancel: CustomToolbarView = CustomToolbarView(frame: .zero)
+    private let activityIndicator = DotPulseActivityIndicator(frame: CGRect(x: 0, y: 0, width: 100, height: 20))
+    private let activityIndicatorContainer = UIView()
 
     private lazy var mainButton: MainButton = {
         let button = MainButton()
@@ -147,6 +149,7 @@ class ConsentExchangeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel.delegate = self
 
         tableView.tableHeaderView = headerView
         tableView.tableFooterView = footerView
@@ -161,7 +164,15 @@ class ConsentExchangeViewController: UIViewController {
         tableView.separatorColor = .divider
         tableView.layoutMargins = .init(top: .zero, left: .space_24, bottom: .zero, right: .space_24)
 
-        self.tableView.reloadData()
+        updateView()
+        
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicatorContainer.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicatorContainer.addSubview(activityIndicator)
+        activityIndicator.topAnchor.constraint(equalTo: activityIndicatorContainer.topAnchor, constant: 40).isActive = true
+        activityIndicator.bottomAnchor.constraint(equalTo: activityIndicatorContainer.bottomAnchor, constant: -40.0).isActive = true
+        activityIndicator.leftAnchor.constraint(equalTo: activityIndicatorContainer.leftAnchor, constant: 40.0).isActive = true
+        activityIndicator.rightAnchor.constraint(equalTo: activityIndicatorContainer.rightAnchor, constant: -40.0).isActive = true
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -177,6 +188,11 @@ class ConsentExchangeViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         UIAccessibility.post(notification: .announcement, argument: ValidationServiceViewModel.Accessibility.closeViewController.label)
+    }
+    
+    func updateView() {
+        tableView.reloadData()
+        viewModel.isLoading ? toolbar.primaryButton.disable() : toolbar.primaryButton.enable() 
     }
 
     @objc func cancel() {
@@ -214,6 +230,19 @@ extension ConsentExchangeViewController: UITableViewDataSource {
         cell.accessoryType = .none
         cell.accessoryView = nil
         cell.isUserInteractionEnabled = false
+        
+        activityIndicator.stopAnimating()
+        guard !viewModel.isLoading else {
+            cell.textLabel?.text = ""
+            cell.detailTextLabel?.text = ""
+            cell.detailTextLabel?.text = ""
+            activityIndicatorContainer.removeFromSuperview()
+            cell.contentView.addSubview(activityIndicatorContainer)
+            activityIndicatorContainer.centerXAnchor.constraint(equalTo: cell.contentView.centerXAnchor).isActive = true
+            activityIndicatorContainer.centerYAnchor.constraint(equalTo: cell.contentView.centerYAnchor).isActive = true
+            activityIndicator.startAnimating()
+            return cell
+        }
 
         switch indexPath.row {
         case ConsentExchangeViewModel.Rows.provider.rawValue:
@@ -258,7 +287,7 @@ extension ConsentExchangeViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.numberOfRows
+        return viewModel.isLoading ? 1 : viewModel.numberOfRows
     }
 }
 
@@ -281,5 +310,17 @@ extension ConsentExchangeViewController: CustomToolbarViewDelegate {
         default:
             return
         }
+    }
+}
+
+// MARK: - ViewModelDelegate
+
+extension ConsentExchangeViewController: ViewModelDelegate {
+    func viewModelDidUpdate() {
+        updateView()
+    }
+
+    func viewModelUpdateDidFailWithError(_: Error) {
+        // already handled in ViewModel
     }
 }
