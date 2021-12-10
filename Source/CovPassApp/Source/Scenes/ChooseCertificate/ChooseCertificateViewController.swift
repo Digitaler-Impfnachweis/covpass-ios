@@ -48,7 +48,7 @@ class ChooseCertificateViewController: UIViewController {
         super.viewDidLoad()
         viewModel.delegate = self
         setupConstants()
-        viewModel.goLive()
+        viewModel.runMainProcess()
         updateView()
     }
 

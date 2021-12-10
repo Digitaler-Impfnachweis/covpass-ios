@@ -66,6 +66,7 @@ protocol ValidationServiceRoutable: DialogRouterProtocol {
     func routeToCertificateConsent(ticket: ValidationServiceInitialisation, certificate: ExtendedCBORWebToken, vaasRepository: VAASRepositoryProtocol)
     func routeToPrivacyStatement(url: URL)
     func showCertificate(_ certificate: ExtendedCBORWebToken, with result: VAASValidaitonResultToken)
+    func showValidationFailed(ticket: ValidationServiceInitialisation) -> Promise<Bool>
 }
 
 struct ValidationServiceRouter: ValidationServiceRoutable {
@@ -233,6 +234,12 @@ struct ValidationServiceRouter: ValidationServiceRoutable {
                 error: nil,
                 token: result
             )
+        )
+    }
+    
+    func showValidationFailed(ticket: ValidationServiceInitialisation) -> Promise<Bool>  {
+        sceneCoordinator.present(
+            ValidationFailedFactory(ticket: ticket)
         )
     }
 }

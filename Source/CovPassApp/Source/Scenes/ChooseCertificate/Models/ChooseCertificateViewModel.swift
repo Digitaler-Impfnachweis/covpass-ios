@@ -36,11 +36,11 @@ public enum Constant {
 
 class ChooseCertificateViewModel: ChooseCertificateViewModelProtocol {
     // MARK: - Properties
-
+    
     weak var delegate: ViewModelDelegate?
     var router: ValidationServiceRoutable?
     private let repository: VaccinationRepositoryProtocol
-    private let vaasRepository: VAASRepositoryProtocol
+    private var vaasRepository: VAASRepositoryProtocol
     private let resolver: Resolver<Void>?
     private var certificates: [ExtendedCBORWebToken]? { certificateList.certificates }
     private var certificateList = CertificateList(certificates: [])
@@ -64,7 +64,7 @@ class ChooseCertificateViewModel: ChooseCertificateViewModelProtocol {
     var familyNameFilter: String?
     var dobFilter: String?
     var validationServiceName: String = ""
-
+    
     
     var title: String {
         return Constant.Keys.title
@@ -112,7 +112,7 @@ class ChooseCertificateViewModel: ChooseCertificateViewModelProtocol {
     var noMatchSubtitle: String {
         Constant.Keys.NoMatch.subtitle
     }
-
+    
     var noMatchImage: UIImage {
         Constant.Keys.NoMatch.image
     }
@@ -143,7 +143,7 @@ class ChooseCertificateViewModel: ChooseCertificateViewModelProtocol {
     var isLoading = false
     
     // MARK: - Lifecyle
-
+    
     init(router: ValidationServiceRoutable?,
          repository: VaccinationRepositoryProtocol,
          vaasRepository: VAASRepositoryProtocol,
@@ -153,11 +153,12 @@ class ChooseCertificateViewModel: ChooseCertificateViewModelProtocol {
         self.resolver = resolvable
         self.vaasRepository = vaasRepository
     }
-
+    
     // MARK: - Methods
     
-    func goLive() {
+    func runMainProcess() {
         isLoading = true
+        self.delegate?.viewModelDidUpdate()
         firstly {
             repository.getCertificateList()
         }
@@ -177,17 +178,31 @@ class ChooseCertificateViewModel: ChooseCertificateViewModelProtocol {
             self.isLoading = false
             self.delegate?.viewModelDidUpdate()
         }.catch { error in
-                        
+            
             switch self.vaasRepository.step {
             case .downloadIdentityDecorator:
-                if error is APIError {
-                    self.router?.showIdentityDocumentApiError(error: error)
-                        .done { canceled in
-                            if canceled {
-                                self.vaasRepository.cancellation()
+                if let error = error as? APIError {
+                    if error == .trustList {
+                        self.router?.showValidationFailed(ticket: self.vaasRepository.ticket)
+                            .done{ shouldContinue in
+                                if shouldContinue {
+                                    self.vaasRepository.useUnsecureApi = true
+                                    self.runMainProcess()
+                                } else {
+                                    self.cancel()
+                                }
+                                
                             }
-                        }
-                        .cauterize()
+                            .cauterize()
+                    } else {
+                        self.router?.showIdentityDocumentApiError(error: error)
+                            .done { canceled in
+                                if canceled {
+                                    self.vaasRepository.cancellation()
+                                }
+                            }
+                            .cauterize()
+                    }
                 } else if error is VAASErrors {
                     self.router?.showIdentityDocumentVAASError(error: error)
                         .done { canceled in

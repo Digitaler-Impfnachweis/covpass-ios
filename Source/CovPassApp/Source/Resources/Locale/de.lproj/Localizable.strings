@@ -13,6 +13,10 @@
 
 "ok" = "OK";
 
+"close" = "Schließen";
+
+"cancel" = "Abbrechen";
+
 
 /********** onboarding **********/
 
@@ -1216,6 +1220,27 @@
 "accessibility_share_certificate_label_close" = "Schließen";
 
 "accessibility_share_certificate_label_back" = "Zurück";
+
+
+/********** Warning: Unknown service provider **********/
+
+"warning_unknown_provider_title" = "Unbekannter Anbieter";
+
+"warning_unknown_provider_copy" = "Der Anbieter „%@“ ist uns nicht bekannt. Falls Sie fortfahren, überprüfen Sie bitte die Herkunft des QR-Codes und vergewissern Sie sich, ob Sie dem Anbieter Ihr Zertifikat übermitteln wollen.";
+
+"warning_unknown_provider_box_title" = "Achten Sie besonders auf:";
+
+"warning_unknown_provider_box_item_1" = "Der Name des Anbieters sollte Ihnen bekannt sein.";
+
+"warning_unknown_provider_box_item_2" = "Der Name des Anbieters sollte mit dem Namen auf dem Buchungsportal übereinstimmen.";
+
+"warning_unknown_provider_box_item_3" = "Sollten Sie Zweifel an der Seriösität des Anbieters haben, brechen Sie den Vorgang lieber ab.";
+
+"warning_unknown_provider_box_item_4" = "Sollten Sie weitere Fragen haben, wenden Sie sich an den Anbieter.";
+
+"warning_unknown_provider_box_button_primary" = "Trotzdem weiter";
+
+"warning_unknown_provider_box_button_secondary" = "Abbrechen";
 
 "accessibility_share_certificate_announce" = "Die Ansicht \"Zertifikate zu Buchungszwecken freigeben\" wurde geöffnet.";
 

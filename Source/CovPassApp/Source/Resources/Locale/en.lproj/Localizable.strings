@@ -13,6 +13,10 @@
 
 "ok" = "OK";
 
+"close" = "Close";
+
+"cancel" = "Cancel";
+
 
 /********** onboarding **********/
 
@@ -1216,6 +1220,27 @@
 "accessibility_share_certificate_label_close" = "Close";
 
 "accessibility_share_certificate_label_back" = "Back";
+
+
+/********** Warning: Unknown service provider **********/
+
+"warning_unknown_provider_title" = "Unknown provider";
+
+"warning_unknown_provider_copy" = "The provider \"%@\" is not known to us. If you proceed, please check the origin of the QR code and make sure you want to submit your certificate to the provider.";
+
+"warning_unknown_provider_box_title" = "Pay particular attention to:";
+
+"warning_unknown_provider_box_item_1" = "The name of the provider should be familiar to you.";
+
+"warning_unknown_provider_box_item_2" = "The name of the provider should match the name on the booking portal.";
+
+"warning_unknown_provider_box_item_3" = "If you have any doubts about the seriousness of the provider, it is better to cancel the process.";
+
+"warning_unknown_provider_box_item_4" = "If you have any further questions, please contact the provider.";
+
+"warning_unknown_provider_box_button_primary" = "Continue anyway";
+
+"warning_unknown_provider_box_button_secondary" = "Cancel";
 
 "accessibility_share_certificate_announce" = "The \"Release certificates for booking purposes\" view has been opened.";
 

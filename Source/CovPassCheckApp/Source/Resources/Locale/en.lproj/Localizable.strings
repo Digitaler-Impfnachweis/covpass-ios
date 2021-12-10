@@ -168,7 +168,7 @@
 
 "technical_validation_check_popup_valid_vaccination_button_title" = "Scan another certificate";
 
-"functional_validation_check_popup_unsuccessful_certificate_title" = "Certificate does not fulfil all conditions";
+"functional_validation_check_popup_unsuccessful_certificate_title" = "Certificate does not fulfill all conditions";
 
 "functional_validation_check_popup_unsuccessful_certificate_subline" = "The checked person can see the reason in their CovPass App. The most common reasons:";
 

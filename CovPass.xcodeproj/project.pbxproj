@@ -38,6 +38,11 @@
 		09590D392715E67F004410D7 /* MockCertificateViewModelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216D1F61264EF52400370F16 /* MockCertificateViewModelDelegate.swift */; };
 		09590D4027161182004410D7 /* CertLogicMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09590D3E2716117C004410D7 /* CertLogicMock.swift */; };
 		096873F127430A4200DB5837 /* ChooseCertificateSnapShotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096873F027430A4200DB5837 /* ChooseCertificateSnapShotTests.swift */; };
+		0993B15B27610C5900217884 /* ValidationFailedFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0993B15A27610C5900217884 /* ValidationFailedFactory.swift */; };
+		0993B15F27610FC300217884 /* ValidationFailedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0993B15E27610FC300217884 /* ValidationFailedViewModel.swift */; };
+		0993B16127610FCB00217884 /* ValidationFailedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0993B16027610FCB00217884 /* ValidationFailedViewController.swift */; };
+		0993B167276116EC00217884 /* ValidationFailedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0993B166276116EC00217884 /* ValidationFailedViewController.xib */; };
+		0993B1692762090A00217884 /* ValidationFailedSnapShotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0993B1682762090A00217884 /* ValidationFailedSnapShotTests.swift */; };
 		0994A4D02734319800B21FCF /* CertificateOverviewSnapShotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0994A4CE2734319800B21FCF /* CertificateOverviewSnapShotTests.swift */; };
 		0994A4D12734319800B21FCF /* TrustedListDetailsViewSnapShotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0994A4CF2734319800B21FCF /* TrustedListDetailsViewSnapShotTests.swift */; };
 		0994A4D5273431A500B21FCF /* TestUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0994A4D2273431A500B21FCF /* TestUtil.swift */; };
@@ -314,6 +319,11 @@
 		096873F027430A4200DB5837 /* ChooseCertificateSnapShotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseCertificateSnapShotTests.swift; sourceTree = "<group>"; };
 		0993330327299700000D6BF6 /* TrustedListDetailsSceneFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrustedListDetailsSceneFactory.swift; sourceTree = "<group>"; };
 		0993330427299700000D6BF6 /* TrustedListDetailsRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrustedListDetailsRouter.swift; sourceTree = "<group>"; };
+		0993B15A27610C5900217884 /* ValidationFailedFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationFailedFactory.swift; sourceTree = "<group>"; };
+		0993B15E27610FC300217884 /* ValidationFailedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationFailedViewModel.swift; sourceTree = "<group>"; };
+		0993B16027610FCB00217884 /* ValidationFailedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationFailedViewController.swift; sourceTree = "<group>"; };
+		0993B166276116EC00217884 /* ValidationFailedViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ValidationFailedViewController.xib; sourceTree = "<group>"; };
+		0993B1682762090A00217884 /* ValidationFailedSnapShotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationFailedSnapShotTests.swift; sourceTree = "<group>"; };
 		0994A4CE2734319800B21FCF /* CertificateOverviewSnapShotTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertificateOverviewSnapShotTests.swift; sourceTree = "<group>"; };
 		0994A4CF2734319800B21FCF /* TrustedListDetailsViewSnapShotTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrustedListDetailsViewSnapShotTests.swift; sourceTree = "<group>"; };
 		0994A4D2273431A500B21FCF /* TestUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestUtil.swift; sourceTree = "<group>"; };
@@ -641,8 +651,19 @@
 				9514A5F12732A40E00987109 /* CertificateDetailViewControllerSnapshotTests.swift */,
 				95FE37B3273EF1B7000899A3 /* ValidationServiceViewControllerSnapShotTests.swift */,
 				096873F027430A4200DB5837 /* ChooseCertificateSnapShotTests.swift */,
+				0993B1682762090A00217884 /* ValidationFailedSnapShotTests.swift */,
 			);
 			path = SnapShotTests;
+			sourceTree = "<group>";
+		};
+		0993B15927610B3B00217884 /* ValidationFailed */ = {
+			isa = PBXGroup;
+			children = (
+				0993B15A27610C5900217884 /* ValidationFailedFactory.swift */,
+				0993B15E27610FC300217884 /* ValidationFailedViewModel.swift */,
+				0993B16027610FCB00217884 /* ValidationFailedViewController.swift */,
+			);
+			path = ValidationFailed;
 			sourceTree = "<group>";
 		};
 		09AC1DE52757ACCE008356CD /* Validation Result */ = {
@@ -1480,6 +1501,7 @@
 		9574549C273D5889009B25B0 /* ValidationService */ = {
 			isa = PBXGroup;
 			children = (
+				0993B15927610B3B00217884 /* ValidationFailed */,
 				950629E02746C37200138EBE /* ConsentExchange */,
 				9574549D273D5889009B25B0 /* ValidationServiceRouter.swift */,
 				9574549E273D5889009B25B0 /* ValidationServiceViewController.swift */,
@@ -1497,6 +1519,7 @@
 				957454A8273D58AE009B25B0 /* HintTableViewCell.swift */,
 				957454AA273E80BC009B25B0 /* SubTitleCell.swift */,
 				950629E92746D35300138EBE /* ConsentExchangeViewController.xib */,
+				0993B166276116EC00217884 /* ValidationFailedViewController.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1678,6 +1701,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				216D1FC0264EF75500370F16 /* CertificatesOverviewViewController.xib in Resources */,
+				0993B167276116EC00217884 /* ValidationFailedViewController.xib in Resources */,
 				3876382826ADBED100FBCA47 /* contact-covpass-en.html in Resources */,
 				950629EA2746D35300138EBE /* ConsentExchangeViewController.xib in Resources */,
 				3865B76D26DFE4C90053D1D3 /* AnnouncementViewController.xib in Resources */,
@@ -1757,6 +1781,7 @@
 				957454A3273D5889009B25B0 /* ValidationServiceRouter.swift in Sources */,
 				091CEC392729A30A00F8514F /* TrustedListDetailsRouter.swift in Sources */,
 				0933177C273ABB2A0036DB2A /* ChooseCertificateSceneFactory.swift in Sources */,
+				0993B15B27610C5900217884 /* ValidationFailedFactory.swift in Sources */,
 				3865B76426DFE4670053D1D3 /* AnnouncementRouter.swift in Sources */,
 				385FC190269EB6A800D19AF8 /* CountrySelectionViewController.swift in Sources */,
 				38E3625A269B712900DE6D4C /* RuleCheckRouter.swift in Sources */,
@@ -1802,6 +1827,7 @@
 				950629E22746CCA400138EBE /* ConsentExchangeFactory.swift in Sources */,
 				216D1FEE264EF77200370F16 /* HowToScanRouter.swift in Sources */,
 				385FC191269EB6A900D19AF8 /* CountrySelectionSceneFactory.swift in Sources */,
+				0993B15F27610FC300217884 /* ValidationFailedViewModel.swift in Sources */,
 				3882AEAB266FD609000354CD /* VaccinationCertificateItemViewModel.swift in Sources */,
 				21A77A54265B0033002FEEF1 /* DialogRouterProtocol+DidDeleteCertificate.swift in Sources */,
 				216D2003264EF7B500370F16 /* ApiServiceFactory.swift in Sources */,
@@ -1833,6 +1859,7 @@
 				216D1FD7264EF76400370F16 /* CertificateDetailSceneFactory.swift in Sources */,
 				216D1FA5264EF74100370F16 /* WelcomeViewController.swift in Sources */,
 				09331777273ABB2A0036DB2A /* ChooseCertificateViewModel.swift in Sources */,
+				0993B16127610FCB00217884 /* ValidationFailedViewController.swift in Sources */,
 				65E0DB0A2657F31C004C660F /* CertificateSceneFactory.swift in Sources */,
 				21A77A50265AD986002FEEF1 /* CertificateDetailViewModelProtocol.swift in Sources */,
 				3882AEBB26700646000354CD /* TestCertificateItemViewModel.swift in Sources */,
@@ -1862,6 +1889,7 @@
 				216D202C264EFA6600370F16 /* CertificateViewModelTests.swift in Sources */,
 				216D203E264EFA7400370F16 /* PassConsentPageViewModelTests.swift in Sources */,
 				216D202B264EFA6600370F16 /* CertificateViewControllerTests.swift in Sources */,
+				0993B1692762090A00217884 /* ValidationFailedSnapShotTests.swift in Sources */,
 				952B7AFB2729BCA8008F69D6 /* ScanPleaseSnapshotTests.swift in Sources */,
 				09590D242715E519004410D7 /* RulesCheckSnapShotTests.swift in Sources */,
 				09590D302715E67F004410D7 /* MockCardViewModel.swift in Sources */,
