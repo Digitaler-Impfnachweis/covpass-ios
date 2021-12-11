@@ -30,12 +30,12 @@ class NameTests: XCTestCase {
 
         name1 = sut
         name2 = sut
-        name2.gn = "foo"
+        name2.gnt = "foo"
         XCTAssertNotEqual(name1, name2)
 
         name1 = sut
         name2 = sut
-        name2.fn = "foo"
+        name2.fnt = "foo"
         XCTAssertNotEqual(name1, name2)
 
         name1 = sut
@@ -51,6 +51,26 @@ class NameTests: XCTestCase {
         name2.gn = nil
         name2.fnt = "foo"
         XCTAssertNotEqual(name1, name2)
+
+        name1 = sut
+        name2 = sut
+        name1.fn = "FOO"
+        name1.fnt = "FOO"
+        name2.fn = "foo"
+        name2.fnt = "FOO"
+        XCTAssertEqual(name1, name2)
+
+        name1 = sut
+        name2 = sut
+        let name3 = sut
+        name1.fn = "Dörte"
+        name1.fnt = "DOERTE"
+        name2.fn = "Dorte"
+        name2.fnt = "DOERTE"
+        name3.fn = "Doerte"
+        name3.fnt = "DOERTE"
+        XCTAssertEqual(name1, name2)
+        XCTAssertEqual(name1, name3)
     }
 
     func testTrim() {
