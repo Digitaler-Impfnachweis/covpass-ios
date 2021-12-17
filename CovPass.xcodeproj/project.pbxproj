@@ -67,6 +67,7 @@
 		09B5D242276ABF16005F8FCE /* ScanCountWarningViewSnapShotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B5D241276ABF16005F8FCE /* ScanCountWarningViewSnapShotTests.swift */; };
 		09D6E818276CA66200134FBA /* ScanCountWarningViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D6E817276CA66200134FBA /* ScanCountWarningViewModelProtocol.swift */; };
 		09D6E81A276CC96600134FBA /* ScanCountRouterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D6E819276CC96600134FBA /* ScanCountRouterProtocol.swift */; };
+		09D6E81C276CE56700134FBA /* ValidationServiceRoutableProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D6E81B276CE56700134FBA /* ValidationServiceRoutableProtocol.swift */; };
 		216D1F48264EF50300370F16 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 216D1F43264EF50300370F16 /* Localizable.strings */; };
 		216D1F49264EF50300370F16 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 216D1F46264EF50300370F16 /* Assets.xcassets */; };
 		216D1F87264EF6A800370F16 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 216D1F86264EF6A800370F16 /* LaunchScreen.storyboard */; };
@@ -336,6 +337,7 @@
 		09B5D241276ABF16005F8FCE /* ScanCountWarningViewSnapShotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanCountWarningViewSnapShotTests.swift; sourceTree = "<group>"; };
 		09D6E817276CA66200134FBA /* ScanCountWarningViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanCountWarningViewModelProtocol.swift; sourceTree = "<group>"; };
 		09D6E819276CC96600134FBA /* ScanCountRouterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanCountRouterProtocol.swift; sourceTree = "<group>"; };
+		09D6E81B276CE56700134FBA /* ValidationServiceRoutableProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationServiceRoutableProtocol.swift; sourceTree = "<group>"; };
 		210116F82646D18100B9E8FF /* debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = debug.xcconfig; sourceTree = "<group>"; };
 		2101178C2646E86F00B9E8FF /* debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = debug.xcconfig; sourceTree = "<group>"; };
 		212E757D264F0D09007C0F3A /* CovPassUI */ = {isa = PBXFileReference; lastKnownFileType = folder; path = CovPassUI; sourceTree = "<group>"; };
@@ -1491,6 +1493,7 @@
 			children = (
 				950629E02746C37200138EBE /* ConsentExchange */,
 				9574549D273D5889009B25B0 /* ValidationServiceRouter.swift */,
+				09D6E81B276CE56700134FBA /* ValidationServiceRoutableProtocol.swift */,
 				9574549E273D5889009B25B0 /* ValidationServiceViewController.swift */,
 				9574549F273D5889009B25B0 /* ValidationServiceViewModel.swift */,
 				957454A0273D5889009B25B0 /* ValidationServiceFactory.swift */,
@@ -1793,6 +1796,7 @@
 				65E0DB0B2657F31C004C660F /* CertificateViewController.swift in Sources */,
 				216D1FC6264EF75900370F16 /* NoCertificateCardViewModel.swift in Sources */,
 				216D1FC7264EF75900370F16 /* CertificateCardViewModel.swift in Sources */,
+				09D6E81C276CE56700134FBA /* ValidationServiceRoutableProtocol.swift in Sources */,
 				216D1FD5264EF76400370F16 /* CertificateDetailRouter.swift in Sources */,
 				216D1FFD264EF77C00370F16 /* AppInformationViewModel.swift in Sources */,
 				385FC1AF269F21A200D19AF8 /* RuleCheckDetailRouter.swift in Sources */,

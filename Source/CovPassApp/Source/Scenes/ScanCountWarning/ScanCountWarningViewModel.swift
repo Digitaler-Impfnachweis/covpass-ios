@@ -30,6 +30,7 @@ struct ScanCountWarningViewModel: ScanCountWarningViewModelProtocol {
     
     private let resolvable: Resolver<Bool>?
     private let router: ScanCountRouterProtocol?
+
     var headerImage: UIImage { return Constants.Images.headerImage }
     var title: String { return Constants.Keys.title }
     var description: String { return Constants.Keys.description }

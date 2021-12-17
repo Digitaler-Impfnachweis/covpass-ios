@@ -96,6 +96,5 @@ class ScanCountWarningViewController: UIViewController {
             self?.viewModel.routeToSafari(url: url)
         }
     }
-
 }
 

@@ -477,7 +477,6 @@ class VaccinationRepositoryTests: XCTestCase {
     }
     
     func testCountRule_Enabled_10TimesSamePerson() {
-        
         let validCert1 = CertificateMock.validCertificate
         let validCert2 = CertificateMock.validCertificate.appending("B")
         let validCert3 = CertificateMock.validCertificate.appending("C")
@@ -507,7 +506,6 @@ class VaccinationRepositoryTests: XCTestCase {
     }
     
     func testCountRule_Disabled_10TimesSamePerson() {
-        
         let validCert1 = CertificateMock.validCertificate
         let validCert2 = CertificateMock.validCertificate.appending("B")
         let validCert3 = CertificateMock.validCertificate.appending("C")
