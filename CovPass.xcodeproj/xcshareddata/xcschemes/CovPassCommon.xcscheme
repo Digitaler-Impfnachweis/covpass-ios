@@ -47,6 +47,11 @@
                BlueprintName = "CovPassCommonTests"
                ReferencedContainer = "container:Source/CovPassCommon">
             </BuildableReference>
+            <SkippedTests>
+               <Test
+                  Identifier = "QualityAssuranceTests">
+               </Test>
+            </SkippedTests>
          </TestableReference>
       </Testables>
    </TestAction>

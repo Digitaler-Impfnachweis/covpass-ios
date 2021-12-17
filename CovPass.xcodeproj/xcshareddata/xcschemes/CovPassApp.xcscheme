@@ -66,6 +66,9 @@
                <Test
                   Identifier = "CertificateOverviewSnapShotTests/testCertificateOverviewCertificatesScrolledTo1()">
                </Test>
+               <Test
+                  Identifier = "ValidationServiceViewControllerSnapShotTests">
+               </Test>
             </SkippedTests>
          </TestableReference>
       </Testables>

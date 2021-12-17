@@ -153,6 +153,32 @@
 
 "accessibility_certificate_add_popup_closing_announce" = "The view \"Scan QR code\" has been closed";
 
+"accessibility_certificate_add_warning_maximum_announce" = "The view \"Are you authorized?\" has been opened";
+
+"accessibility_certificate_add_warning_maximum_image" = "Image: Two people are facing each other. One person shows her smartphone with a QR code. The other person scans the QR code and sees a green check mark.";
+
+"certificate_add_warning_maximum_title" = "Warning: Are you really authorized?";
+
+"certificate_add_warning_maximum_copy_ios" = "Please make sure that you are authorized to add the certificate of another person, e.g. for your children or relatives. You can find more information in the #Frequently Asked Questions::https://www.digitaler-impfnachweis-app.de/en/faq#.\n\n Do you only want to check the validity? Please use the #CovPassCheck app::https://apps.apple.com/en/app/covpass-check/id1566140314# for that.";
+
+"certificate_add_warning_maximum_copy_android" = "Please make sure that you are authorized to add the certificate of another person, e.g. for your children or relatives. You can find more information in the #Frequently Asked Questions::https://www.digitaler-impfnachweis-app.de/en/faq#.\n\n Do you only want to check the validity? Please use the #CovPassCheck app::https://play.google.com/store/apps/details?id=de.rki.covpass.checkapp# for that.";
+
+"certificate_add_warning_maximum_button_primary" = "Add certificate";
+
+"certificate_add_warning_maximum_button_secondary" = "Cancel";
+
+"accessibility_certificate_add_error_maximum_announce" = "An error dialog was opened";
+
+"certificate_add_error_maximum_title" = "Certificate cannot be added";
+
+"certificate_add_error_maximum_copy" = "To prevent misuse, certificates from a maximum of 20 different people can be added.\n\nThe CovPass app is not suitable for checking third-party certificates. Use only the CovPassCheck app for verification.";
+
+"certificate_add_error_maximum_button_1" = "Download CovPassCheck app";
+
+"certificate_add_error_maximum_button_2" = "FAQ for the certificate check";
+
+"certificate_add_error_maximum_button_3" = "OK";
+
 "accessibility_scan_success_announce" = "Certificate of %@ was added successfully";
 
 "accessibility_certificate_add_popup_image" = "Image: Person holds smartphone over three different certificates with QR code";
@@ -231,7 +257,7 @@
 
 "accessibility_certificate_favorite_button_label_not_active" = "Always display this person's certificates in first place: not active";
 
-"certificate_action_button_check_validity" = "Check validity";
+"certificate_action_button_check_validity" = "Check for travel";
 
 
 /********** screen: check validity **********/
