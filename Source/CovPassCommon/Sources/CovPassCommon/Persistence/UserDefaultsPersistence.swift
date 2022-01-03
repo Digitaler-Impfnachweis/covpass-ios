@@ -36,4 +36,14 @@ public extension Persistence {
             try? store(UserDefaults.keyAnnouncement, value: newValue as Any)
         }
     }
+    
+    var privacyHash: String? {
+        get {
+            let value = try? fetch(UserDefaults.keyPrivacy) as? String
+            return value
+        }
+        set {
+            try? store(UserDefaults.keyPrivacy, value: newValue as Any)
+        }
+    }
 }

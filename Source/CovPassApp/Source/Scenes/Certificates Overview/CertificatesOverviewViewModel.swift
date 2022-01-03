@@ -13,6 +13,14 @@ import Foundation
 import PromiseKit
 import UIKit
 
+private enum Constants {
+    enum Config {
+        static let privacySrcDe = "privacy-covpass-de"
+        static let privacySrcEn = "privacy-covpass-en"
+        static let privacySrcExt = "html"
+    }
+}
+
 class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
     // MARK: - Properties
     
@@ -35,6 +43,25 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
     
     var hasCertificates: Bool {
         certificateList.certificates.count > 0
+    }
+    
+    private var privacyFileUrl: URL? {
+        let srcFileName = Locale.current.isGerman() ? Constants.Config.privacySrcDe : Constants.Config.privacySrcEn
+        guard let url =  Bundle.main.url(forResource: srcFileName,
+                                         withExtension: Constants.Config.privacySrcExt) else {
+            return nil
+        }
+        return url
+    }
+    
+    private var currentDataPrivacyHash: String? {
+        guard let url = privacyFileUrl else {
+            return nil
+        }
+        guard let dataPrivacyHash = try? String(contentsOf: url).sha256() else {
+            return nil
+        }
+        return dataPrivacyHash
     }
     
     // MARK: - Lifecycle
@@ -219,7 +246,10 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
     /// Show notifications like announcements and booster notifications one after another
     func showNotificationsIfNeeded() {
         firstly {
-            showAnnouncementIfNeeded()
+            showDataPrivacyIfNeeded()
+        }
+        .then {
+            self.showAnnouncementIfNeeded()
         }
         .then {
             self.showScanPleaseHint()
@@ -335,6 +365,30 @@ extension CertificatesOverviewViewModel {
         if announcementVersion == bundleVersion { return Promise.value }
         userDefaults.announcementVersion = bundleVersion
         return router.showAnnouncement()
+    }
+    
+    private func storeUserDefaults(_ currentDataPrivacyHash: String) -> ()? {
+        return userDefaults.privacyHash = currentDataPrivacyHash
+    }
+    
+    /// Shows the dataprivacy view if user downloaded a new version from the app store
+    private func showDataPrivacyIfNeeded() -> Promise<Void> {
+        guard let currentDataPrivacyHash = currentDataPrivacyHash else {
+            return .value
+        }
+        guard let dataPrivacyShownWhileOnboarding = userDefaults.announcementVersion?.isEmpty, !dataPrivacyShownWhileOnboarding else {
+            storeUserDefaults(currentDataPrivacyHash)
+            return .value
+        }
+        guard let lastDataPrivacyHash = userDefaults.privacyHash, !lastDataPrivacyHash.isEmpty else {
+            storeUserDefaults(currentDataPrivacyHash)
+            return .value
+        }
+        guard currentDataPrivacyHash != lastDataPrivacyHash else {
+            return .value
+        }
+        storeUserDefaults(currentDataPrivacyHash)
+        return router.showDataPrivacy()
     }
 }
 

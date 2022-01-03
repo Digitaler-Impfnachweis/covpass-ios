@@ -34,7 +34,7 @@ class CertificatesOverviewRouter: CertificatesOverviewRouterProtocol, DialogRout
     }
 
     // MARK: - Methods
-
+    
     func showAnnouncement() -> Promise<Void> {
         sceneCoordinator.present(
             AnnouncementSceneFactory(
@@ -44,7 +44,17 @@ class CertificatesOverviewRouter: CertificatesOverviewRouterProtocol, DialogRout
             )
         )
     }
-
+    
+    func showDataPrivacy() -> Promise<Void> {
+        sceneCoordinator.present(
+            DataPrivacySceneFactory(
+                router: DataPrivacyRouter(
+                    sceneCoordinator: sceneCoordinator
+                )
+            )
+        )
+    }
+    
     func showScanPleaseHint() -> Promise<Void> {
         sceneCoordinator.present(
             ScanPleaseSceneFactory(
