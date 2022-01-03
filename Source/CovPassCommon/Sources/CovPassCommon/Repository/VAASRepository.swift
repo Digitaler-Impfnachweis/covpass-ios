@@ -191,7 +191,7 @@ public class VAASRepository: VAASRepositoryProtocol {
                   var vaasValidationResultToken = try? JSONDecoder().decode(VAASValidaitonResultToken.self, from: jsondata) else {
                       return .init(error: APIError.requestCancelled)
                   }
-            vaasValidationResultToken.provider = self?.ticket.subject
+            vaasValidationResultToken.provider = self?.ticket.serviceProvider
             vaasValidationResultToken.verifyingService = self?.selectedValidationService?.name
             return .value(vaasValidationResultToken)
         }

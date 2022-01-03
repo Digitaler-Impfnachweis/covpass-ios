@@ -15,5 +15,6 @@ public extension UserDefaults {
     static let keyCheckVersionUpdate = "keyCheckVersionUpdate"
     static let keyValueSets = "keyValueSets"
     static let keyAnnouncement = "keyAnnouncement"
+    static let keyPrivacy = "keyPrivacy"
     static let keyBoosterCandidates = "keyBoosterCandidates"
 }

@@ -53,22 +53,6 @@ private enum Constants {
     }
 }
 
-protocol ValidationServiceRoutable: DialogRouterProtocol {
-    func routeToConsentGeneralConsent()
-    func routeToWarning() -> Promise<Bool>
-    func showIdentityDocumentApiError(error: Error) -> Promise<Bool>
-    func showIdentityDocumentVAASError(error: Error) -> Promise<Bool>
-    func accessTokenNotRetrieved(error: Error) -> Promise<Bool>
-    func showNoVerificationPossible(error: Error) -> Promise<Bool>
-    func showNoVerificationSubmissionPossible(error: Error) -> Promise<Bool>
-    func showAccessTokenNotProcessed(error: Error) -> Promise<Bool>
-    func routeToSelectCertificate(ticket: ValidationServiceInitialisation)
-    func routeToCertificateConsent(ticket: ValidationServiceInitialisation, certificate: ExtendedCBORWebToken, vaasRepository: VAASRepositoryProtocol)
-    func routeToPrivacyStatement(url: URL)
-    func showCertificate(_ certificate: ExtendedCBORWebToken, with result: VAASValidaitonResultToken)
-    func showValidationFailed(ticket: ValidationServiceInitialisation) -> Promise<Bool>
-}
-
 struct ValidationServiceRouter: ValidationServiceRoutable {
     var sceneCoordinator: SceneCoordinator
     
@@ -93,10 +77,12 @@ struct ValidationServiceRouter: ValidationServiceRoutable {
 
     }    
     
-    func showIdentityDocumentApiError(error: Error) -> Promise<Bool> {
+    func showIdentityDocumentApiError(error: Error, provider: String) -> Promise<Bool> {
         Promise { resolver in
-        showDialog(title: Constants.Text.Alert.ProviderNotVerified.title,
-                   message: error.displayCodeWithMessage(Constants.Text.Alert.ProviderNotVerified.message),
+            let textKey = Constants.Text.Alert.ProviderNotVerified.message
+            let formattedString = String(format: textKey, provider)
+            showDialog(title: Constants.Text.Alert.ProviderNotVerified.title,
+                       message: error.displayCodeWithMessage(formattedString),
                    actions: [
                     DialogAction(title: Constants.Text.Alert.ProviderNotVerified.button,
                                  style: UIAlertAction.Style.default,

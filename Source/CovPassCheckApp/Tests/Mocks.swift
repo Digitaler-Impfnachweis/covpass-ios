@@ -113,7 +113,7 @@ public class VaccinationRepositoryMock: VaccinationRepositoryProtocol {
         .value(favoriteToggle)
     }
 
-    public func scanCertificate(_: String) -> Promise<QRCodeScanable> {
+    public func scanCertificate(_ data: String, isCountRuleEnabled: Bool) -> Promise<QRCodeScanable> {
         return Promise { seal in
             seal.reject(ApplicationError.unknownError)
         }

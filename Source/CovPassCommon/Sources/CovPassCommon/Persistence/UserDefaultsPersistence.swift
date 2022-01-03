@@ -25,3 +25,25 @@ public struct UserDefaultsPersistence: Persistence {
 
     public func deleteAll() throws {}
 }
+
+public extension Persistence {
+    var announcementVersion: String? {
+        get {
+            let value = try? fetch(UserDefaults.keyAnnouncement) as? String
+            return value
+        }
+        set {
+            try? store(UserDefaults.keyAnnouncement, value: newValue as Any)
+        }
+    }
+    
+    var privacyHash: String? {
+        get {
+            let value = try? fetch(UserDefaults.keyPrivacy) as? String
+            return value
+        }
+        set {
+            try? store(UserDefaults.keyPrivacy, value: newValue as Any)
+        }
+    }
+}

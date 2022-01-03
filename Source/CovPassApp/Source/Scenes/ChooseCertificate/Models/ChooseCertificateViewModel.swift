@@ -191,11 +191,10 @@ class ChooseCertificateViewModel: ChooseCertificateViewModelProtocol {
                                 } else {
                                     self.cancel()
                                 }
-                                
                             }
                             .cauterize()
                     } else {
-                        self.router?.showIdentityDocumentApiError(error: error)
+                        self.router?.showIdentityDocumentApiError(error: error, provider: self.vaasRepository.ticket.serviceProvider)
                             .done { canceled in
                                 if canceled {
                                     self.vaasRepository.cancellation()
@@ -216,7 +215,7 @@ class ChooseCertificateViewModel: ChooseCertificateViewModelProtocol {
                 }
             case .downloadIdentityService:
                 if error is APIError {
-                    self.router?.showIdentityDocumentApiError(error: error)
+                    self.router?.showIdentityDocumentApiError(error: error, provider: self.vaasRepository.ticket.serviceProvider)
                         .done { canceled in
                             if canceled {
                                 self.vaasRepository.cancellation()

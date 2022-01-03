@@ -26,8 +26,8 @@ struct ChooseCertificateSceneFactory: ResolvableSceneFactory {
     
     func make(resolvable: Resolver<Void>) -> UIViewController {
         let apiService = APIService(
-            customURLSession: CustomURLSession(sessionDelegate: APIServiceDelegate(
-                publicKeyHashes: XCConfiguration.value([String].self, forKey: "PINNING_HASHES")
+            customURLSession: CustomURLSession(sessionDelegate: APIServiceVAASDelegate(
+                publicKeyHashes: XCConfiguration.value([String].self, forKey: "PINNING_HASHES_VAAS")
             )),
             url: XCConfiguration.value(String.self, forKey: "API_URL")
         )
