@@ -11,7 +11,7 @@ import Foundation
 import PromiseKit
 
 public class VaccinationRepositoryMock: VaccinationRepositoryProtocol {
-    
+
     var lastUpdatedTrustList: Date?
     var certificates: [ExtendedCBORWebToken] = []
     var certPair: [CertificatePair] = []
@@ -78,7 +78,7 @@ public class VaccinationRepositoryMock: VaccinationRepositoryProtocol {
         .value(favoriteToggle)
     }
 
-    public func scanCertificate(_: String) -> Promise<QRCodeScanable> {
+    public func scanCertificate(_: String, isCountRuleEnabled: Bool) -> Promise<QRCodeScanable> {
         return Promise { seal in
             seal.reject(ApplicationError.unknownError)
         }

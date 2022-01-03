@@ -9,6 +9,7 @@
 @testable import CovPassCommon
 @testable import CovPassUI
 import XCTest
+import PromiseKit
 
 class CertificateCardsTests: XCTestCase {
     
@@ -16,11 +17,12 @@ class CertificateCardsTests: XCTestCase {
     let vacinationRepoMock: VaccinationRepositoryMock = VaccinationRepositoryMock()
 
     override func setUpWithError() throws {
-        sut = CertificatesOverviewViewModel(router: nil,
-                                                      repository: vacinationRepoMock,
-                                                      certLogic: DCCCertLogicMock(),
-                                                      boosterLogic: BoosterLogicMock(),
-                                                      userDefaults: UserDefaultsPersistence())
+        let window = UIWindow(frame: UIScreen.main.bounds)
+        sut = CertificatesOverviewViewModel(router: CertificatesOverviewRouter(sceneCoordinator: DefaultSceneCoordinator(window: window)),
+                                            repository: vacinationRepoMock,
+                                            certLogic: DCCCertLogicMock(),
+                                            boosterLogic: BoosterLogicMock(),
+                                            userDefaults: UserDefaultsPersistence())
     }
 
     override func tearDownWithError() throws {

@@ -13,6 +13,8 @@ import PromiseKit
 public enum QRCodeError: Error, ErrorCode {
     case qrCodeExists
     case versionNotSupported
+    case warningCountOfCertificates
+    case errorCountOfCertificatesReached
 
     public var errorCode: Int {
         switch self {
@@ -20,6 +22,10 @@ public enum QRCodeError: Error, ErrorCode {
             return 201
         case .versionNotSupported:
             return 202
+        case .warningCountOfCertificates:
+            return 203
+        case .errorCountOfCertificatesReached:
+            return 204
         }
     }
 }

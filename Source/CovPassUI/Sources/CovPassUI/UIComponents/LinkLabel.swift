@@ -27,7 +27,7 @@ public class LinkLabel: XibView {
                 textableView.attributedText = nil
                 return
             }
-            textableView.attributedText = NSMutableAttributedString(attributedString: nv).replaceLink()
+            textableView.attributedText = NSMutableAttributedString(attributedString: nv).replaceLink().replaceLink()
         }
     }
 }

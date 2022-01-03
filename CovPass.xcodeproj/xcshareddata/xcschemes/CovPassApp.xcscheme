@@ -67,13 +67,7 @@
                   Identifier = "CertificateOverviewSnapShotTests/testCertificateOverviewCertificatesScrolledTo1()">
                </Test>
                <Test
-                  Identifier = "ValidationServiceViewControllerSnapShotTests/test_validation_result_cross_check()">
-               </Test>
-               <Test
-                  Identifier = "ValidationServiceViewControllerSnapShotTests/test_validation_result_fail()">
-               </Test>
-               <Test
-                  Identifier = "ValidationServiceViewControllerSnapShotTests/test_validation_result_passed()">
+                  Identifier = "ValidationServiceViewControllerSnapShotTests">
                </Test>
             </SkippedTests>
          </TestableReference>

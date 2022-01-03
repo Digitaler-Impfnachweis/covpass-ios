@@ -234,7 +234,7 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
         .asVoid()
     }
 
-    public func scanCertificate(_ data: String) -> Promise<QRCodeScanable> {
+    public func scanCertificate(_ data: String, isCountRuleEnabled: Bool) -> Promise<QRCodeScanable> {
         firstly {
             QRCoder.parse(data)
         }
@@ -256,8 +256,29 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
                     if certList.certificates.contains(where: { $0.vaccinationQRCodeData == data }) {
                         throw QRCodeError.qrCodeExists
                     }
+                    
                     certList.certificates.append(extendedCBORWebToken)
-
+     
+                    let personsCount: Int = {
+                        self.matchedCertificates(for: certList).count
+                    }()
+                    
+                    var warnAddingPersonReachedIfNeeded: Bool {
+                        (personsCount == 2 || personsCount == 10) && isCountRuleEnabled
+                    }
+                    
+                    if warnAddingPersonReachedIfNeeded {
+                        throw QRCodeError.warningCountOfCertificates
+                    }
+                    
+                    var errorAddingPersonReachedIfNeeded: Bool {
+                        personsCount > 20 && isCountRuleEnabled
+                    }
+                    
+                    if errorAddingPersonReachedIfNeeded {
+                        throw QRCodeError.errorCountOfCertificatesReached
+                    }
+                    
                     // Mark first certificate as favorite
                     if certList.certificates.count == 1 {
                         certList.favoriteCertificateId = extendedCBORWebToken.vaccinationCertificate.hcert.dgc.v?.first?.ci

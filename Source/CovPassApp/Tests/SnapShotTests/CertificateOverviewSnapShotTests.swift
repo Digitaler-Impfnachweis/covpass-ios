@@ -63,7 +63,7 @@ class CertificateOverviewSnapShotTests: BaseSnapShotTests {
         cert.vaccinationCertificate.hcert.dgc.nam.fn = "John 1"
         let certs = [cert]
         vacinationRepoMock.certificates = certs
-        let viewModel = CertificatesOverviewViewModel(router: nil,
+        let viewModel = CertificatesOverviewViewModel(router: MockRouter(),
                                                       repository: vacinationRepoMock,
                                                       certLogic: DCCCertLogicMock(),
                                                       boosterLogic: BoosterLogicMock(),
@@ -83,7 +83,7 @@ class CertificateOverviewSnapShotTests: BaseSnapShotTests {
         cert.vaccinationCertificate.hcert.dgc.v!.first!.dn = 1
         let certs = [cert]
         vacinationRepoMock.certificates = certs
-        let viewModel = CertificatesOverviewViewModel(router: nil,
+        let viewModel = CertificatesOverviewViewModel(router: MockRouter(),
                                                       repository: vacinationRepoMock,
                                                       certLogic: DCCCertLogicMock(),
                                                       boosterLogic: BoosterLogicMock(),
@@ -102,7 +102,7 @@ class CertificateOverviewSnapShotTests: BaseSnapShotTests {
         cert.vaccinationCertificate.hcert.dgc.nam.fn = "John 1"
         let certs = [cert]
         vacinationRepoMock.certificates = certs
-        let viewModel = CertificatesOverviewViewModel(router: nil,
+        let viewModel = CertificatesOverviewViewModel(router: MockRouter(),
                                                       repository: vacinationRepoMock,
                                                       certLogic: DCCCertLogicMock(),
                                                       boosterLogic: BoosterLogicMock(),
@@ -122,7 +122,7 @@ class CertificateOverviewSnapShotTests: BaseSnapShotTests {
         cert.vaccinationCertificate.hcert.dgc.nam.fn = "John 1"
         let certs = [cert]
         vacinationRepoMock.certificates = certs
-        let viewModel = CertificatesOverviewViewModel(router: nil,
+        let viewModel = CertificatesOverviewViewModel(router: MockRouter(),
                                                       repository: vacinationRepoMock,
                                                       certLogic: DCCCertLogicMock(),
                                                       boosterLogic: BoosterLogicMock(),
@@ -142,7 +142,7 @@ class CertificateOverviewSnapShotTests: BaseSnapShotTests {
         cert.vaccinationCertificate.exp = Calendar.current.date(byAdding: .year, value: -2, to: Date())
         let certs = [cert]
         vacinationRepoMock.certificates = certs
-        let viewModel = CertificatesOverviewViewModel(router: nil,
+        let viewModel = CertificatesOverviewViewModel(router: MockRouter(),
                                                       repository: vacinationRepoMock,
                                                       certLogic: DCCCertLogicMock(),
                                                       boosterLogic: BoosterLogicMock(),
@@ -162,7 +162,7 @@ class CertificateOverviewSnapShotTests: BaseSnapShotTests {
         cert.vaccinationCertificate.invalid = true
         let certs = [cert]
         vacinationRepoMock.certificates = certs
-        let viewModel = CertificatesOverviewViewModel(router: nil,
+        let viewModel = CertificatesOverviewViewModel(router: MockRouter(),
                                                       repository: vacinationRepoMock,
                                                       certLogic: DCCCertLogicMock(),
                                                       boosterLogic: BoosterLogicMock(),
@@ -173,5 +173,63 @@ class CertificateOverviewSnapShotTests: BaseSnapShotTests {
         window.makeKeyAndVisible()
         RunLoop.current.run(for: 0.2)
         verifyView(view: viewController.collectionView.cellForItem(at: IndexPath(row: 0, section: 0))!)
+    }
+    
+    class MockRouter: CertificatesOverviewRouterProtocol {
+        func showAnnouncement() -> Promise<Void> {
+            .value
+        }
+        
+        func showCertificates(_ certificates: [ExtendedCBORWebToken]) -> Promise<CertificateDetailSceneResult> {
+            .value(.addNewCertificate)
+        }
+        
+        func showHowToScan() -> Promise<Void> {
+            .value
+        }
+        
+        func showScanCountWarning() -> Promise<Bool> {
+            .value(true)
+        }
+        
+        func showScanCountError() -> Promise<ScanCountErrorResponse> {
+            .value(.download)
+        }
+        
+        func showRuleCheck() -> Promise<Void> {
+            .value
+        }
+        
+        func scanQRCode() -> Promise<ScanResult> {
+            .value(.success(""))
+        }
+        
+        func showAppInformation() {
+            
+        }
+        
+        func showBoosterNotification() -> Promise<Void> {
+            .value
+        }
+        
+        func showScanPleaseHint() -> Promise<Void> {
+            .value
+        }
+        
+        func toAppstoreCheckApp() {
+            
+        }
+        
+        func toFaqWebsite() {
+            
+        }
+        
+        func startValidationAsAService(with data: ValidationServiceInitialisation) {
+            
+        }
+        
+        var sceneCoordinator: SceneCoordinator = SceneCoordinatorMock()
+        
+        
     }
 }
