@@ -327,10 +327,13 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
 extension CertificatesOverviewViewModel {
     /// Shows the announcement view if user downloaded a new version from the app store
     private func showAnnouncementIfNeeded() -> Promise<Void> {
-        let announcementVersion = try? userDefaults.fetch(UserDefaults.keyAnnouncement) as? String ?? ""
         let bundleVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
+        guard let announcementVersion = userDefaults.announcementVersion else {
+            userDefaults.announcementVersion = bundleVersion
+            return Promise.value
+        }
         if announcementVersion == bundleVersion { return Promise.value }
-        try? userDefaults.store(UserDefaults.keyAnnouncement, value: bundleVersion)
+        userDefaults.announcementVersion = bundleVersion
         return router.showAnnouncement()
     }
 }
