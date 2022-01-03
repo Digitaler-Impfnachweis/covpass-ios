@@ -13,7 +13,8 @@ private enum Constants {
         static let headerText = "share_certificate_title".localized
         static let confirmButton = "share_certificate_action_button_agree".localized
         static let cancelButton = "share_certificate_action_button_cancel".localized
-        static let privacyPolicy = "app_information_title_datenschutz".localized     
+        static let privacyPolicy = "app_information_title_datenschutz".localized
+        static let consentHeader = "share_certificate_message".localized
     }
 
     enum Layout {
@@ -190,8 +191,7 @@ extension ValidationServiceViewController: UITableViewDataSource {
                 .styledAs(.body)
             cell.separatorInset = UIEdgeInsets.zero
         case ValidationServiceViewModel.Rows.consentHeader.rawValue:
-            cell.textLabel?.attributedText = viewModel.initialisationData.consent
-                .styledAs(.body)
+            cell.textLabel?.attributedText = Constants.Text.consentHeader.styledAs(.body)
             cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: .greatestFiniteMagnitude)
         case ValidationServiceViewModel.Rows.hintView.rawValue:
             if let hintCell = cell as? HintTableViewCell {

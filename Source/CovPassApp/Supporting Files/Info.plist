@@ -45,6 +45,8 @@
 	<string>Erlauben Sie den Zugriff, um QR Codes scannen zu können.</string>
 	<key>PINNING_HASHES</key>
 	<string>$(PINNING_HASHES)</string>
+	<key>PINNING_HASHES_VAAS</key>
+	<string>$(PINNING_HASHES_VAAS)</string>
 	<key>TLS_CERTIFICATE_NAME</key>
 	<string>$(TLS_CERTIFICATE_NAME)</string>
 	<key>TRUST_LIST_PUBLIC_KEY</key>
