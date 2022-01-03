@@ -9,6 +9,7 @@
 @testable import CovPassCommon
 @testable import CovPassUI
 import XCTest
+import PromiseKit
 
 class CertificateCardsTests: XCTestCase {
     

@@ -176,6 +176,7 @@ class CertificateOverviewSnapShotTests: BaseSnapShotTests {
     }
     
     class MockRouter: CertificatesOverviewRouterProtocol {
+
         func showDataPrivacy() -> Promise<Void> {
             .value
         }
@@ -233,8 +234,5 @@ class CertificateOverviewSnapShotTests: BaseSnapShotTests {
         }
         
         var sceneCoordinator: SceneCoordinator = SceneCoordinatorMock()
-        
-        
     }
-    
 }
