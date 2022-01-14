@@ -58,77 +58,30 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
     }
 
     var backgroundColor: UIColor {
-        if token.vaccinationCertificate.isExpired || token.vaccinationCertificate.isInvalid {
-            return .onBackground40
-        }
-        if certificate.r != nil {
-            return .brandAccentBlue
-        }
-        if certificate.t != nil {
-            return .brandAccentPurple
-        }
-        return vaccinationCertificateIsValidNow ? .onBrandAccent70 : .onBackground50
-    }
-
-    private var vaccinationCertificateIsValidNow: Bool {
-        certificate.v?.first?.fullImmunizationValid ?? false
+        isExpired ? .onBackground40 : .onBrandAccent70
     }
 
     var iconTintColor: UIColor {
-        return backgroundColor == UIColor.onBackground50 ? .neutralBlack : .neutralWhite
+        .neutralWhite
     }
 
     var textColor: UIColor {
-        return backgroundColor == UIColor.onBackground50 ? .neutralBlack : .neutralWhite
+        .neutralWhite
     }
 
     var title: String {
-        if certificate.r != nil {
-            return "certificates_overview_recovery_certificate_title".localized
-        }
-        if let t = certificate.t?.first {
-            return t.isPCR ? "certificates_overview_pcr_test_certificate_message".localized : "certificates_overview_test_certificate_message".localized
-        }
-        return "certificates_overview_vaccination_certificate_title".localized
+        "startscreen_card_title".localized
     }
 
     var subtitle: String {
         if token.vaccinationCertificate.isExpired {
             return "certificates_start_screen_qrcode_certificate_expired_subtitle".localized
         }
-        if token.vaccinationCertificate.expiresSoon {
-            guard let expireDate = token.vaccinationCertificate.exp else {
-                return "certificates_overview_expires_soon_certificate_note".localized
-            }
-            return String(format: "certificates_start_screen_qrcode_certificate_expires_subtitle".localized,
-                          DateUtils.displayDateFormatter.string(from: expireDate),
-                          DateUtils.displayTimeFormatter.string(from: expireDate))
-        }
-
         if token.vaccinationCertificate.isInvalid {
             return "certificates_start_screen_qrcode_certificate_invalid_subtitle".localized
         }
-        if let r = certificate.r?.first {
-            if showNotification {
-                return "vaccination_start_screen_qrcode_booster_vaccination_note_subtitle".localized
-            } else if Date() < r.df {
-                return String(format: "certificates_overview_recovery_certificate_valid_from_date".localized, DateUtils.displayDateFormatter.string(from: r.df))
-            }
-            return String(format: "certificates_overview_recovery_certificate_valid_until_date".localized, DateUtils.displayDateFormatter.string(from: r.du))
-        }
-        if let t = certificate.t?.first {
-            return DateUtils.displayDateTimeFormatter.string(from: t.sc)
-        }
-        if let v = certificate.v?.first {
-            if showNotification {
-                return "vaccination_start_screen_qrcode_booster_vaccination_note_subtitle".localized
-            } else if let date = v.fullImmunizationValidFrom, v.fullImmunizationValid {
-                return String(format: "vaccination_start_screen_qrcode_complete_protection_subtitle".localized, DateUtils.displayDateFormatter.string(from: date))
-            } else if let date = v.fullImmunizationValidFrom, v.fullImmunization {
-                return String(format: "vaccination_start_screen_qrcode_complete_from_date_subtitle".localized, DateUtils.displayDateFormatter.string(from: date))
-            }
-
-            return String(format: "vaccination_start_screen_qrcode_incomplete_subtitle".localized, 1, 2)
+        if showNotification {
+            return "vaccination_start_screen_qrcode_booster_vaccination_note_subtitle".localized
         }
         return ""
     }
@@ -137,25 +90,7 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
         if isExpired {
             return UIImage.expired
         }
-        if token.vaccinationCertificate.expiresSoon {
-            if certificate.r != nil {
-                return UIImage.activity.withRenderingMode(.alwaysTemplate)
-            }
-            return vaccinationCertificateIsValidNow ? UIImage.activity.withRenderingMode(.alwaysTemplate) : UIImage.activity.withRenderingMode(.alwaysOriginal)
-        }
-        if certificate.r != nil {
-            return showNotification ? UIImage.statusFullNotfication : UIImage.statusFullDetail
-        }
-        if certificate.t != nil {
-            return UIImage.iconTest
-        }
-        if showNotification {
-            return isFullImmunization ? UIImage.statusFullNotfication : UIImage.statusPartialNotification
-        } else if isFullImmunization {
-            return vaccinationCertificateIsValidNow ? UIImage.startStatusFullWhite: UIImage.startStatusFullBlue
-        } else {
-            return UIImage.statusPartial
-        }
+        return showNotification ? UIImage.statusFullNotfication : UIImage.statusFullDetail
     }
 
     var isFavorite: Bool {
@@ -166,15 +101,10 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
         token.vaccinationCertificate.isExpired || token.vaccinationCertificate.isInvalid
     }
 
-    var isBoosted: Bool {
-        token.vaccinationCertificate.hcert.dgc.isVaccinationBoosted
-    }
-
-    // Hide favorite button if this certificate is the only card that is shown
     var showFavorite: Bool = true
 
     var qrCode: UIImage? {
-        return token.vaccinationQRCodeData.generateQRCode()
+        token.vaccinationQRCodeData.generateQRCode()
     }
 
     var name: String {
@@ -182,19 +112,11 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
     }
 
     var actionTitle: String {
-        "vaccination_full_immunization_action_button".localized
+        "startscreen_card_button".localized
     }
 
     var tintColor: UIColor {
         return textColor
-    }
-
-    var isFullImmunization: Bool {
-        certificate.v?.first?.fullImmunization ?? false
-    }
-
-    var vaccinationDate: Date? {
-        certificate.v?.first?.dt
     }
 
     // MARK: - Actions

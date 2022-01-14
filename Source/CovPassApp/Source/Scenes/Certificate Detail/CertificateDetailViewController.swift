@@ -103,6 +103,7 @@ class CertificateDetailViewController: UIViewController {
         scanHintView.bodyLabel.attributedText = Constants.Text.scanHintText.styledAs(.body)
         stackView.setCustomSpacing(.space_24, after: scanHintView)
         scanHintView.enableAccessibility(label: Constants.Text.scanHintTitle + Constants.Text.scanHintText, traits: .staticText)
+        scanHintView.containerTopConstraint.constant = 0
     }
 
     private func setupImmunizationView() {

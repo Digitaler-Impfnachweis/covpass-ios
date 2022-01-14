@@ -317,7 +317,7 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
             return
         }
         firstly {
-            router.showCertificates(certificates)
+            router.showCertificates(certificates) 
         }
         .cancelled {
             // User cancelled by back button or swipe gesture.
@@ -422,7 +422,7 @@ extension CertificatesOverviewViewModel {
             if !showBoosterNotification { return Promise.value }
             return self.refreshCertificates()
                 .then {
-                    self.router.showBoosterNotification()
+                    self.router.showBoosterNotification() 
                 }
         }
     }

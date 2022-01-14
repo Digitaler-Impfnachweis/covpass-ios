@@ -34,15 +34,12 @@ public protocol CertificateCardViewModelBase {
     var subtitle: String { get }
     var titleIcon: UIImage { get }
     var isExpired: Bool { get }
-    var isBoosted: Bool { get }
     var isFavorite: Bool { get }
     var showFavorite: Bool { get set }
     var qrCode: UIImage? { get }
     var name: String { get }
     var actionTitle: String { get }
     var tintColor: UIColor { get }
-    var isFullImmunization: Bool { get }
-    var vaccinationDate: Date? { get }
     var delegate: ViewModelDelegate? { get set }
     func onClickAction()
     func onClickFavorite()
@@ -102,7 +99,7 @@ public class CertificateCollectionViewCell: CardCollectionViewCell {
         qrContainerView.image = vm.qrCode
         qrContainerView.layoutMargins.bottom = .space_18
         qrContainerView.isHidden = vm.qrCode == nil
-        qrContainerView.titleLabel.attributedText = vm.title.styledAs(.header_2).colored(vm.textColor)
+        qrContainerView.titleLabel.attributedText = vm.title.styledAs(.header_3).colored(vm.textColor)
         qrContainerView.subtitleLabel.attributedText = vm.subtitle.styledAs(.body).colored(vm.textColor)
 
         qrContainerView.qrInfoText = Constants.qrInfoText
