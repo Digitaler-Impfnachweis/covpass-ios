@@ -1340,23 +1340,23 @@
 
 "accessibility_share_certificate_transmission_closing_announce" = "The \"Submitting your certificate for verification\" view has been closed.";
 
-"share_certificate_detail_view_requirements_met_title" = "Certificate meets the requirements of the provider";
+"share_certificate_detail_view_requirements_met_title" = "Certificate meets the requirements";
 
 "share_certificate_detail_view_requirements_met_subline" = "Verified by %@";
 
-"share_certificate_detail_view_requirements_met_message" = "If you have any questions, please contact the provider %@.";
+"share_certificate_detail_view_requirements_met_message" = "The provider was informed about the successful check. If you have any questions, please contact the provider %@.";
 
-"share_certificate_detail_view_requirements_not_verifiable_title" = "Certificate is not fully auditable";
+"share_certificate_detail_view_requirements_not_verifiable_title" = "Certificate is not auditable";
 
 "share_certificate_detail_view_requirements_not_verifiable_subline" = "Verified by %@";
 
-"share_certificate_detail_view_requirements_not_verifiable_message" = "Unfortunately, an automatic check is not possible. Please check the information marked in yellow yourself.\n\nIf you have any questions, please contact the provider %@.";
+"share_certificate_detail_view_requirements_not_verifiable_message" = "Unfortunately, an automatic check is not possible. Please check the information marked in yellow yourself. If you have any questions, please contact the provider %@.";
 
-"share_certificate_detail_view_requirements_not_met_title" = "Certificate does not meet the requirements of the provider";
+"share_certificate_detail_view_requirements_not_met_title" = "Certificate does not meet the requirements";
 
 "share_certificate_detail_view_requirements_not_met_subline" = "Verified by %@";
 
-"share_certificate_detail_view_requirements_not_met_message" = "The information that does not meet the requirements is marked in red below.\n\nIf you have any questions, please contact the provider %@.";
+"share_certificate_detail_view_requirements_not_met_message" = "If you have any questions, please contact the provider %@.";
 
 "error_share_certificate_qr_code_not_recognized_title" = "QR code was not recognized";
 
