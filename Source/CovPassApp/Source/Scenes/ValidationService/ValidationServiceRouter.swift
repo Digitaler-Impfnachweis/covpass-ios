@@ -222,4 +222,10 @@ struct ValidationServiceRouter: ValidationServiceRoutable {
             )
         )
     }
+    
+    func showValidationFailed(ticket: ValidationServiceInitialisation) -> Promise<Bool>  {
+        sceneCoordinator.present(
+            ValidationFailedFactory(ticket: ticket)
+        )
+    }
 }

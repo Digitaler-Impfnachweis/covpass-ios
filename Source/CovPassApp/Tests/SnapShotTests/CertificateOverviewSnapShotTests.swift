@@ -12,14 +12,14 @@ import UIKit
 import PromiseKit
 
 class CertificateOverviewSnapShotTests: BaseSnapShotTests {
-
+    
     func testCertificateOverviewDefault() {
         let window = UIWindow(frame: UIScreen.main.bounds)
         let sceneCoordinator = DefaultSceneCoordinator(window: window)
         let router = CertificatesOverviewRouter(sceneCoordinator: sceneCoordinator)
         let viewModel = CertificatesOverviewViewModel(
             router: router,
-            repository: VaccinationRepositoryMock(),            
+            repository: VaccinationRepositoryMock(),
             certLogic: DCCCertLogicMock(),
             boosterLogic: BoosterLogicMock(),
             userDefaults: UserDefaultsPersistence()
@@ -233,7 +233,5 @@ class CertificateOverviewSnapShotTests: BaseSnapShotTests {
         }
         
         var sceneCoordinator: SceneCoordinator = SceneCoordinatorMock()
-        
-        
     }
 }

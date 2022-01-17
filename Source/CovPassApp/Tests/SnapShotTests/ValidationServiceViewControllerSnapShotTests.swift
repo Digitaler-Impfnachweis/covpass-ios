@@ -84,6 +84,12 @@ struct CertificateItemDetailRouterMock: CertificateItemDetailRouterProtocol {
 
 struct ValidationServiceRouterMock: ValidationServiceRoutable {
     
+    func showValidationFailed(ticket: ValidationServiceInitialisation) -> Promise<Bool> {
+        .init { resolver in
+            resolver.fulfill(true)
+        }
+    }
+
     func showIdentityDocumentApiError(error: Error, provider: String) -> Promise<Bool> {
         .init { resolver in
             resolver.fulfill(true)
