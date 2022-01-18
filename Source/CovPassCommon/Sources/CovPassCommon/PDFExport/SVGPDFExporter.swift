@@ -180,18 +180,6 @@ public final class SVGPDFExporter: NSObject, WKNavigationDelegate, SVGPDFExportP
 
 // MARK: – Helper Extensions
 
-public extension ExtendedCBORWebToken {
-    /// Checks if a certificate in the given token can be exported to PDF
-    ///
-    /// If multiple certificates are present the priotization is as follows (most to least important):
-    /// 1. vaccination
-    /// 2. test
-    /// 3. recovery
-    var canExportToPDF: Bool {
-        vaccinationCertificate.hcert.dgc.template != nil
-    }
-}
-
 extension DigitalGreenCertificate {
     /// Checks if the given certificate can be technically exported, i.e. has a PDF-template available
     ///

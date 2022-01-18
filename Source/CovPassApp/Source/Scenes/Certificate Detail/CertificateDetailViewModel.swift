@@ -95,7 +95,7 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
             }
             return String(format: "recovery_certificate_overview_valid_until_title".localized, DateUtils.displayDateFormatter.string(from: r.du))
         }
-        if let t = selectedCertificate?.vaccinationCertificate.hcert.dgc.t?.first {
+        if let t = selectedCertificate?.firstTest {
             if t.isPCR {
                 return String(format: "pcr_test_certificate_overview_title".localized, DateUtils.displayDateTimeFormatter.string(from: t.sc))
             }
@@ -136,6 +136,9 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
         }
         if (selectedCertificate?.vaccinationCertificate.hcert.dgc.r?.first) != nil {
             return "recovery_certificate_overview_message".localized
+        }
+        if let t = selectedCertificate?.firstTest {
+            return t.isPCR ? "pcr_test_certificate_overview_message".localized : "test_certificate_overview_message".localized
         }
         if !fullImmunization {
             return "vaccination_certificate_overview_incomplete_message".localized

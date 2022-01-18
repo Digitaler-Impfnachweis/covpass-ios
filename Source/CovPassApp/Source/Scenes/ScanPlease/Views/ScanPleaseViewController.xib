@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina5_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -32,7 +32,7 @@
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                 </view>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bOr-og-vlK">
-                    <rect key="frame" x="0.0" y="80" width="414" height="576"/>
+                    <rect key="frame" x="0.0" y="80" width="414" height="632"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="L1z-ri-tkf">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="552"/>
@@ -56,7 +56,7 @@
                         </stackView>
                     </subviews>
                     <constraints>
-                        <constraint firstItem="X6l-sU-yPn" firstAttribute="bottom" secondItem="L1z-ri-tkf" secondAttribute="bottom" id="3z6-Yg-0uW"/>
+                        <constraint firstItem="X6l-sU-yPn" firstAttribute="bottom" secondItem="L1z-ri-tkf" secondAttribute="bottom" constant="96" id="3z6-Yg-0uW"/>
                         <constraint firstItem="L1z-ri-tkf" firstAttribute="width" secondItem="HCn-ED-TJl" secondAttribute="width" id="8Oa-a8-NBI"/>
                         <constraint firstItem="L1z-ri-tkf" firstAttribute="leading" secondItem="X6l-sU-yPn" secondAttribute="leading" id="GQI-Jy-ENp"/>
                         <constraint firstItem="L1z-ri-tkf" firstAttribute="top" secondItem="X6l-sU-yPn" secondAttribute="top" id="XkM-BD-wMr"/>
@@ -75,7 +75,7 @@
                 <constraint firstItem="08K-B9-Q7L" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="0dS-ey-Cxc"/>
                 <constraint firstItem="6Qe-RR-mK3" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="5ue-iA-hPn"/>
                 <constraint firstItem="6Qe-RR-mK3" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="20" id="KVc-J0-igs"/>
-                <constraint firstItem="08K-B9-Q7L" firstAttribute="top" secondItem="bOr-og-vlK" secondAttribute="bottom" id="SzX-EP-rOf"/>
+                <constraint firstItem="08K-B9-Q7L" firstAttribute="bottom" secondItem="bOr-og-vlK" secondAttribute="bottom" id="SzX-EP-rOf"/>
                 <constraint firstItem="bOr-og-vlK" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="XP7-YP-O6J"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="08K-B9-Q7L" secondAttribute="bottom" constant="24" id="agg-cK-jEc"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="6Qe-RR-mK3" secondAttribute="trailing" id="cey-0I-Ie6"/>
