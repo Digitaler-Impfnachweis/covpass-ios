@@ -100,7 +100,7 @@ extension Array where Element == ExtendedCBORWebToken {
         res.append(contentsOf: quickTests)
         // #3 Booster Certificate
         //  Latest booster vaccination of a vaccination series (3/3, 4/4, ...)
-        res.append(contentsOf: filterBoosted)
+        res.append(contentsOf: filterBoosted.sortByVaccinationDate)
         // #4 Vaccination certificate
         //  Latest vaccination of a vaccination series (1/1, 2/2), older then (>) 14 days, and where the iat is the latest
         let vaccinationCertificates = filterVaccinations.sortByIssuedAtTime.sortByVaccinationDate
