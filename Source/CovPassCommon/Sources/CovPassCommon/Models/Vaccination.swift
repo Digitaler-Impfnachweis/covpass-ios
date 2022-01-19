@@ -34,7 +34,7 @@ public class Vaccination: Codable {
 
     /// `True` if vaccination is a booster vaccination (J&J 2/2, all other vaccination 3/3)
     public var isBoosted: Bool {
-        (mp == MedicalProduct.johnsonjohnson.rawValue && dn >= 2) || dn >= 3
+        (mp == MedicalProduct.johnsonjohnson.rawValue && dn >= 2) || dn >= 3 || dn > sd
     }
 
     public var isFullImmunizationAfterRecovery: Bool {
