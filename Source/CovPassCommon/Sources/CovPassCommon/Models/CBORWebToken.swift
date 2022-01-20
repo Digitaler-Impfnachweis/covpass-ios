@@ -93,4 +93,28 @@ extension CBORWebToken {
         }
         return false
     }
+    
+    public var isVaccination: Bool {
+        hcert.dgc.v != nil
+    }
+    
+    public var isNotVaccination: Bool {
+        !isVaccination
+    }
+    
+    public var isRecovery: Bool {
+        hcert.dgc.r != nil
+    }
+    
+    public var isNotRecovery: Bool {
+       !isRecovery
+    }
+    
+    public var isTest: Bool {
+        hcert.dgc.t != nil
+    }
+    
+    public var isNotTest: Bool {
+       !isTest
+    }
 }

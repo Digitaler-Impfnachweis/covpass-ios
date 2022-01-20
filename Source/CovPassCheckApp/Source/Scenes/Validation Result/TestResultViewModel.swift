@@ -62,6 +62,8 @@ class TestResultViewModel: ValidationResultViewModel {
     var info: String? {
         nil
     }
+    
+    var buttonHidden: Bool = false
 
     // MARK: - Lifecycle
 

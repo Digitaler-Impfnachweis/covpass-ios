@@ -52,6 +52,7 @@ private enum Constants {
 }
 
 class ErrorResultViewModel: ValidationResultViewModel {
+    
     // MARK: - Properties
 
     weak var delegate: ResultViewModelDelegate?
@@ -83,6 +84,8 @@ class ErrorResultViewModel: ValidationResultViewModel {
     var info: String? {
         nil
     }
+    
+    var buttonHidden: Bool = false
 
     // MARK: - Lifecycle
 

@@ -45,6 +45,8 @@ class RecoveryResultViewModel: ValidationResultViewModel {
     var info: String? {
         return nil
     }
+    
+    var buttonHidden: Bool = false
 
     // MARK: - Lifecycle
     

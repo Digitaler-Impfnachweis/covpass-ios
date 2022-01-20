@@ -16,6 +16,24 @@ class DCCCertLogicMock: DCCCertLogicProtocol {
     var countries: [Country] {
         [Country("DE")]
     }
+    
+    func updateBoosterRules() -> Promise<Void> {
+        .value
+    }
+
+    public func rulesShouldBeUpdated() -> Promise<Bool> {
+        .value(rulesShouldBeUpdated())
+    }
+
+    public func rulesShouldBeUpdated() -> Bool {
+        if let lastUpdated = self.lastUpdatedDCCRules(),
+           let date = Calendar.current.date(byAdding: .day, value: 1, to: lastUpdated),
+           Date() < date
+        {
+            return false
+        }
+        return true
+    }
 
     func lastUpdatedDCCRules() -> Date? {
         nil

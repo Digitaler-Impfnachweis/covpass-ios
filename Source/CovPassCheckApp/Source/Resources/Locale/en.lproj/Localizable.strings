@@ -9,6 +9,15 @@
 "validator_app_name" = "CovPass Check";
 
 
+/********** common **********/
+
+"ok" = "OK";
+
+"close" = "Close";
+
+"cancel" = "Cancel";
+
+
 /********** onboarding **********/
 
 "start_onboarding_title" = "Welcome to the CovPassCheck app";
@@ -79,13 +88,17 @@
 
 "validation_start_screen_title" = "Overview";
 
-"validation_start_screen_scan_title" = "Checking a certificate";
+"validation_start_screen_scan_title" = "Check 3G";
+
+"validation_start_screen_scan_title_2G" = "Check 2G+";
+
+"validation_start_screen_scan_message" = "Scan a G-Proof according to the 3G rules. Which rule applies depends on the federal state you are in.";
+
+"validation_start_screen_scan_message_2G" = "Scan the necessary evidence for 2G+ one by one.";
 
 "validation_start_screen_scan_sync_message_title" = "Check date and time";
 
 "validation_start_screen_scan_sync_message_text" = "Please check the date and time of your smartphone. \n\n It should be: %@";
-
-"validation_start_screen_scan_message" = "Scan the EU Digital COVID Certificate now. You see immediately if the person you are checking has a valid Covid-19 certificate.";
 
 "accessibility_scan_result_announce" = "Verification result is displayed";
 
@@ -231,6 +244,67 @@
 "accessibility_validation_check_popup_valid_pcr_test_label_close" = "Close";
 
 
+/********** 2G+ check results **********/
+
+"accessibility_scan_result_announce_2G" = "Verification result for 2G+ is displayed";
+
+"accessibility_scan_result_closing_announce_2G" = "The view \"Verification result for 2G+“ has been closed";
+
+"result_2G_title" = "2G+ check";
+
+"result_2G_close" = "Close";
+
+"result_2G_footnote" = "* Basic immunization, booster vaccination or recovery.";
+
+"result_2G_button_scan_test" = "Scan test certificate";
+
+"result_2G_button_scan_gproof" = "Scan 2G proof";
+
+"result_2G_button_retry" = "Try again";
+
+"result_2G_button_startover" = "New check";
+
+"result_2G_gproof_empty" = "2G proof*";
+
+"result_2G_gproof_valid" = "Valid 2G proof*";
+
+"result_2G_gproof_invalid" = "Invalid 2G proof*";
+
+"result_2G_test_empty" = "Test certificate";
+
+"result_2G_test_invalid" = "Invalid test certificate";
+
+"result_2G_invalid_subtitle" = "Show details";
+
+"result_2G_empty_subtitle" = "Not checked yet";
+
+"warning_2G_names_title" = "Deviating details";
+
+"warning_2G_names_subtitle" = "The personal details of the two scanned certificates do not match:";
+
+"warning_2G_names_label_1stcert" = "2G proof";
+
+"warning_2G_names_label_2ndcert" = "Test certificate";
+
+"warning_2G_names_ignore_title" = "Not an error?";
+
+"warning_2G_names_ignore_copy" = "If you think this is not an error (e.g. a typo), you can ignore the discrepancy and continue the check.";
+
+"warning_2G_names_ignore_link" = "Ignore the discrepancy";
+
+"error_2G_scanned_twice_title" = "Certificate already scanned";
+
+"error_2G_scanned_twice_copy" = "You have just scanned this certificate. For 2G+, there is usually one test certificate and one vaccination or recovery certificate to check.";
+
+"error_2G_scanned_twice_button" = "OK";
+
+"error_2G_unexpected_type_title" = "Wrong certificate type";
+
+"error_2G_unexpected_type_copy" = "The scanned certificate does not match the expected certificate type. For 2G+, you must scan a 2G proof (recovery or vaccination certificate) and a test certificate.";
+
+"error_2G_unexpected_type_button" = "OK";
+
+
 /********** app information **********/
 
 "accessibility_app_information_label_back" = "Back to the start screen";
@@ -274,6 +348,8 @@
 "app_information_title_company_easy_language" = "Leichte Sprache";
 
 "app_information_title_open_source" = "Open-source licences";
+
+"app_information_title_accessibility_statement" = "Accessibility statement";
 
 "accessibility_app_information_title_open_source_announce" = "The view \"Open-source licences\" has been opened";
 

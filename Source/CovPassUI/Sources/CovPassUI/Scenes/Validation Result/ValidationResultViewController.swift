@@ -41,6 +41,7 @@ public protocol ValidationViewModel {
     var resultBody: String { get }
     var paragraphs: [Paragraph] { get }
     var info: String? { get }
+    var buttonHidden: Bool { get set }
     func scanNextCertifcate()
 }
 
@@ -91,6 +92,8 @@ public class ValidationResultViewController: UIViewController {
     // MARK: - Private
     
     private func updateViews() {
+        toolbarView.primaryButton.isHidden = viewModel.buttonHidden
+        
         stackView.setCustomSpacing(.space_24, after: imageContainerView)
         stackView.setCustomSpacing(.space_24, after: resultView)
         

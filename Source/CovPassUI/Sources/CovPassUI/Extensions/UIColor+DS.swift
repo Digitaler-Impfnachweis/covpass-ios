@@ -34,9 +34,11 @@ public extension UIColor {
     static let backgroundSecondary = UIColor("BackgroundSecondary")
 
     static let backgroundSecondary20 = UIColor("BackgroundSecondary20")
+    
+    static let backgroundSecondary30 = UIColor("BackgroundSecondary30")
 
     static let backgroundPrimary100 = UIColor("backgroundSecondary100")
-
+    
     static let brandAccent = UIColor("BrandAccent")
 
     static let brandAccent10 = UIColor("BrandAccent10")

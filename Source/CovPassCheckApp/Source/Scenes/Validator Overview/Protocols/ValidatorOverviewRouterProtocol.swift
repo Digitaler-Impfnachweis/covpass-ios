@@ -17,4 +17,7 @@ protocol ValidatorOverviewRouterProtocol: DialogRouterProtocol {
     func showCertificate(_ certificate: CBORWebToken?)
     func showError(error: Error)
     func showAppInformation()
+    func showGproof(initialToken: CBORWebToken,
+                    repository: VaccinationRepositoryProtocol,
+                    certLogic: DCCCertLogicProtocol)
 }

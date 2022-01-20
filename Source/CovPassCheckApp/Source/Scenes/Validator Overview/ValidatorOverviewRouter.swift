@@ -13,19 +13,19 @@ import Scanner
 import UIKit
 
 class ValidatorOverviewRouter: ValidatorOverviewRouterProtocol {
-
+    
     // MARK: - Properties
-
+    
     let sceneCoordinator: SceneCoordinator
-
+    
     // MARK: - Lifecycle
-
+    
     init(sceneCoordinator: SceneCoordinator) {
         self.sceneCoordinator = sceneCoordinator
     }
-
+    
     // MARK: - Methods
-
+    
     func scanQRCode() -> Promise<ScanResult> {
         sceneCoordinator.present(
             ScanSceneFactory(
@@ -35,7 +35,7 @@ class ValidatorOverviewRouter: ValidatorOverviewRouterProtocol {
             )
         )
     }
-
+    
     func showCertificate(_ certificate: CBORWebToken?) {
         sceneCoordinator.present(
             ValidationResultSceneFactory(
@@ -45,7 +45,7 @@ class ValidatorOverviewRouter: ValidatorOverviewRouterProtocol {
             )
         )
     }
-
+    
     func showAppInformation() {
         sceneCoordinator.push(
             AppInformationSceneFactory(
@@ -53,7 +53,7 @@ class ValidatorOverviewRouter: ValidatorOverviewRouterProtocol {
             )
         )
     }
-
+    
     func showError(error: Error) {
         sceneCoordinator.present(
             ValidationResultSceneFactory(
@@ -61,6 +61,17 @@ class ValidatorOverviewRouter: ValidatorOverviewRouterProtocol {
                 certificate: nil,
                 error: error
             )
+        )
+    }
+    
+    func showGproof(initialToken: CBORWebToken,
+                    repository: VaccinationRepositoryProtocol,
+                    certLogic: DCCCertLogicProtocol) {
+        sceneCoordinator.present(
+            GProofSceneFactory(initialToken: initialToken,
+                               router: GProofRouter(sceneCoordinator: sceneCoordinator),
+                               repository: repository,
+                               certLogic: certLogic)
         )
     }
 }

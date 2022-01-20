@@ -26,6 +26,11 @@ public enum CertificateError: Error, ErrorCode {
     }
 }
 
+public enum ScanType: Int {
+    case _3G = 0
+    case _2G = 1
+}
+
 public struct VaccinationRepository: VaccinationRepositoryProtocol {
     private let service: APIServiceProtocol
     private let keychain: Persistence
@@ -117,25 +122,30 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
     public func getLastUpdatedTrustList() -> Date? {
         try? userDefaults.fetch(UserDefaults.keyLastUpdatedTrustList) as? Date
     }
-
+    
+    public func trustListShouldBeUpdated() -> Bool {
+        if let lastUpdated = self.getLastUpdatedTrustList(),
+           let date = Calendar.current.date(byAdding: .day, value: 1, to: lastUpdated),
+           Date() < date
+        {
+            return false
+        }
+        return true
+    }
+    
+    public func trustListShouldBeUpdated() -> Promise<Bool> {
+        return Promise { seal in
+            seal.fulfill(trustListShouldBeUpdated())
+        }
+    }
+    
     public func updateTrustListIfNeeded() -> Promise<Void> {
         firstly {
-            Promise { seal in
-                if let lastUpdated = try userDefaults.fetch(UserDefaults.keyLastUpdatedTrustList) as? Date,
-                   let date = Calendar.current.date(byAdding: .day, value: 1, to: lastUpdated),
-                   Date() < date
-                {
-                    // Only update once a day
-                    seal.reject(PromiseCancelledError())
-                    return
-                }
-                seal.fulfill_()
-            }
+            trustListShouldBeUpdated()
         }
-        .then(on: .global()) {
-            updateTrustList()
+        .then(on: .global()) { trustListShouldBeUpdated in
+            trustListShouldBeUpdated ? updateTrustList() : .value
         }
-        
     }
     
     public func updateTrustList() -> Promise<Void> {

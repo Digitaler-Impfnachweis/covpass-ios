@@ -36,9 +36,9 @@
 
 "accessibility_page_indicator" = "Seite %d von %d";
 
-"vaccination_first_onboarding_page_title" = "Erster Schritt: Übertragen Sie das digitale COVID-Zertifikat der EU auf Ihr Smartphone";
+"vaccination_first_onboarding_page_title" = "Erster Schritt: Übertragen Sie das digitale COVID-Zertifikat der EU auf Ihr Smartphone";
 
-"vaccination_first_onboarding_page_message" = "Scannen Sie mit der CovPass-App das digitale COVID-Zertifikat der EU für eine Corona-Impfung oder eine Genesung von der Corona-Infektion. Halten Sie dafür die Kamera Ihres Smartphones über den QR-Code. Das digitale COVID-Zertifikat der EU wird sofort auf Ihr Smartphone übertragen.";
+"vaccination_first_onboarding_page_message" = "Scannen Sie mit der CovPass-App das digitale COVID-Zertifikat der EU für eine Corona-Impfung oder eine Genesung von der Corona-Infektion. Halten Sie dafür die Kamera Ihres Smartphones über den QR-Code. Das digitale COVID-Zertifikat der EU wird sofort auf Ihr Smartphone übertragen.";
 
 "vaccination_second_onboarding_page_title" = "Zweiter Schritt: Rufen Sie den QR-Code in der CovPass-App auf";
 
@@ -46,7 +46,7 @@
 
 "vaccination_third_onboarding_page_title" = "Dritter Schritt: Zeigen Sie den QR-Code bei Bedarf vor";
 
-"vaccination_third_onboarding_page_message" = "Bei Bedarf können Sie den QR-Code in der CovPass-App vorzeigen. Der QR-Code wird dann von der prüfenden Person gescannt. Halten Sie dazu ergänzend Ihr Ausweisdokument bereit. Da der QR-Code nur auf Ihrem Smartphone gespeichert ist, können Sie ihn jederzeit auch ohne Internetverbindung anzeigen lassen.";
+"vaccination_third_onboarding_page_message" = "Bei Bedarf können Sie den QR-Code in der CovPass-App vorzeigen. Der QR-Code wird dann von der prüfenden Person gescannt. Halten Sie dazu ergänzend Ihr Ausweisdokument bereit. Da der QR-Code nur auf Ihrem Smartphone gespeichert ist, können Sie ihn jederzeit auch ohne Internetverbindung anzeigen lassen.";
 
 "vaccination_fourth_onboarding_page_title" = "Datenschutz und Datensicherheit";
 
@@ -185,7 +185,7 @@
 
 "certificate_add_popup_note_title" = "Kein Sperrcode auf Ihrem Smartphone vorhanden";
 
-"certificate_add_popup_note_message" = "Die CovPass-App speichert sensible Daten auf Ihrem Smartphone. Um die Daten vor fremdem Zugriff zu schützen, empfehlen wir Ihnen, einen Code zum Entsperren Ihres Smartphones einzurichten.";
+"certificate_add_popup_note_message" = "Die CovPass-App speichert sensible Daten auf Ihrem Smartphone. Um die Daten vor fremdem Zugriff zu schützen, empfehlen wir Ihnen, einen Code zum Entsperren Ihres Smartphones einzurichten.";
 
 "certificate_add_popup_message" = "Scannen Sie den QR-Code von einem digitalen COVID-Zertifikat der EU. Der Nachweis wird direkt in die CovPass-App übertragen.\n\nZu Buchungszwecken (z. B. Flug und Hotel) können Sie Ihr hinzugefügtes COVID-Zertifikat online an den Anbieter übermitteln. Scannen Sie dazu den QR-Code, der bei der Buchung angezeigt wird.";
 
@@ -205,7 +205,7 @@
 
 "accessibility_scan_dialog_camera_access_announce" = "Die Ansicht \"Kamerazugriff benötigt\" wurde geöffnet";
 
-"accessibility_scan_camera_announce" = "Kamera-Ansicht wurde geöffnet. Der QR-Code wird automatisch gescannt. ";
+"accessibility_scan_camera_announce" = "Kamera-Ansicht wurde geöffnet. Der QR-Code wird automatisch gescannt.";
 
 "accessibility_scan_camera_closing_announce" = "Kamera-Ansicht wurde geschlossen";
 
@@ -244,7 +244,7 @@
 
 "error_scan_code_not_suitable_title" = "QR-Code ist nicht geeignet";
 
-"error_scan_code_not_suitable_message" = "Der QR-Code kann nicht in die CovPass-App übertragen werden, da dieser z. B. keine gültige Signatur besitzt. Möglicherweise ist der QR-Code auch nicht lesbar, weil mehrere QR-Codes in der Datei vorhanden sind. Bitte wählen Sie eine Datei mit einem zulässigen QR-Code aus.";
+"error_scan_code_not_suitable_message" = "Der QR-Code kann nicht in die CovPass-App übertragen werden, da dieser z. B. keine gültige Signatur besitzt. Möglicherweise ist der QR-Code auch nicht lesbar, weil mehrere QR-Codes in der Datei vorhanden sind. Bitte wählen Sie eine Datei mit einem zulässigen QR-Code aus.";
 
 "error_scan_code_not_suitable_action_button" = "OK";
 
@@ -427,7 +427,7 @@
 
 "BR" = "Brasilien";
 
-"BI" = "Burundi ";
+"BI" = "Burundi";
 
 "CV" = "Kap Verde";
 
@@ -1177,9 +1177,11 @@
 
 "accessibility_app_information_open_source_label_back" = "Zurück";
 
+"app_information_title_accessibility_statement" = "Barrierefreiheitserklärung";
+
 "app_information_title_update" = "Einreiseregeln aktualisieren";
 
-"app_information_message_update" = "Zur Überprüfung der Gültigkeit von Zertifikaten benötigt die App aktuelle Listen der vertrauenswürdigen Zertifikatsaussteller und der momentan geltenden Corona-Einreiseregeln in den entsprechenden Ländern.\n\nDiese Listen aktualisieren sich täglich automatisch. Sie können hier auch jederzeit eine manuelle Aktualisierung vornehmen. ";
+"app_information_message_update" = "Zur Überprüfung der Gültigkeit von Zertifikaten benötigt die App aktuelle Listen der vertrauenswürdigen Zertifikatsaussteller und der momentan geltenden Corona-Einreiseregeln in den entsprechenden Ländern.\n\nDiese Listen aktualisieren sich täglich automatisch. Sie können hier auch jederzeit eine manuelle Aktualisierung vornehmen.";
 
 "app_information_message_update_note" = "Letztes Update";
 

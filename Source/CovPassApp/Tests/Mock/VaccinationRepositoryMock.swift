@@ -38,7 +38,21 @@ public class VaccinationRepositoryMock: VaccinationRepositoryProtocol {
         }
         return pairs
     }
-
+    
+    public func trustListShouldBeUpdated() -> Promise<Bool> {
+        .value(trustListShouldBeUpdated())
+    }
+    
+    public func trustListShouldBeUpdated() -> Bool {
+        if let lastUpdated = self.getLastUpdatedTrustList(),
+           let date = Calendar.current.date(byAdding: .day, value: 1, to: lastUpdated),
+           Date() < date
+        {
+            return false
+        }
+        return true
+    }
+    
     public func getLastUpdatedTrustList() -> Date? {
         lastUpdatedTrustList
     }

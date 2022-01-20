@@ -35,7 +35,7 @@
                     <rect key="frame" x="0.0" y="80" width="414" height="632"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="L1z-ri-tkf">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="552"/>
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="592"/>
                             <subviews>
                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="scan_please_illustration" translatesAutoresizingMaskIntoConstraints="NO" id="gCs-fc-NuC">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="256"/>
@@ -49,8 +49,20 @@
                                 <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="dUr-cS-zkt" userLabel="Link Description" customClass="ParagraphView" customModule="CovPassUI">
                                     <rect key="frame" x="0.0" y="384" width="414" height="128"/>
                                 </view>
-                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="40" translatesAutoresizingMaskIntoConstraints="NO" id="uEl-CN-uQA" userLabel="Link" customClass="ListItemView" customModule="CovPassUI">
-                                    <rect key="frame" x="0.0" y="512" width="414" height="40"/>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xcF-Wu-D82">
+                                    <rect key="frame" x="0.0" y="512" width="414" height="80"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="40" translatesAutoresizingMaskIntoConstraints="NO" id="uEl-CN-uQA" userLabel="Link" customClass="ListItemView" customModule="CovPassUI">
+                                            <rect key="frame" x="24" y="10" width="366" height="70"/>
+                                        </view>
+                                    </subviews>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <constraints>
+                                        <constraint firstItem="uEl-CN-uQA" firstAttribute="leading" secondItem="xcF-Wu-D82" secondAttribute="leading" constant="24" id="hhY-QG-L3n"/>
+                                        <constraint firstAttribute="trailing" secondItem="uEl-CN-uQA" secondAttribute="trailing" constant="24" id="m6a-hI-4gv"/>
+                                        <constraint firstItem="uEl-CN-uQA" firstAttribute="top" secondItem="xcF-Wu-D82" secondAttribute="top" constant="10" id="mUI-Lg-85I"/>
+                                        <constraint firstAttribute="bottom" secondItem="uEl-CN-uQA" secondAttribute="bottom" id="pHT-UF-GhA"/>
+                                    </constraints>
                                 </view>
                             </subviews>
                         </stackView>

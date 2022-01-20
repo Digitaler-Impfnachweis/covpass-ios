@@ -47,6 +47,8 @@ class RecoveryResultViewModel: ValidationResultViewModel {
     var info: String? {
         "validation_check_popup_valid_vaccination_recovery_note".localized
     }
+    
+    var buttonHidden: Bool = false
 
     // MARK: - Lifecycle
 

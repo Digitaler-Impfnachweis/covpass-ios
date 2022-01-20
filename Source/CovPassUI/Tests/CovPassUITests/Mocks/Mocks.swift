@@ -20,6 +20,25 @@ class DCCCertLogicMock: DCCCertLogicProtocol {
     var countries: [Country] {
         [Country("DE")]
     }
+    
+    func updateBoosterRules() -> Promise<Void> {
+        .value
+    }
+    
+    func rulesShouldBeUpdated() -> Promise<Bool> {
+        .value(rulesShouldBeUpdated())
+    }
+    
+    public func rulesShouldBeUpdated() -> Bool {
+        if let lastUpdated = self.lastUpdatedDCCRules(),
+           let date = Calendar.current.date(byAdding: .day, value: 1, to: lastUpdated),
+           Date() < date
+        {
+            return false
+        }
+        return true
+    }
+    
 
     func lastUpdatedDCCRules() -> Date? {
         lastUpdateDccrRules
@@ -53,6 +72,20 @@ public class VaccinationRepositoryMock: VaccinationRepositoryProtocol {
 
     public func updateTrustListIfNeeded() -> Promise<Void> {
         Promise.value
+    }
+    
+    public func trustListShouldBeUpdated() -> Promise<Bool> {
+        .value(trustListShouldBeUpdated())
+    }
+    
+    public func trustListShouldBeUpdated() -> Bool {
+        if let lastUpdated = self.getLastUpdatedTrustList(),
+           let date = Calendar.current.date(byAdding: .day, value: 1, to: lastUpdated),
+           Date() < date
+        {
+            return false
+        }
+        return true
     }
     
     public func matchedCertificates(for _: CertificateList) -> [CertificatePair] {
