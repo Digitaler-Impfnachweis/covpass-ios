@@ -70,12 +70,12 @@
                 <constraint firstItem="nnN-bZ-C8z" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="3A4-rh-Kia"/>
                 <constraint firstAttribute="trailing" secondItem="kcX-Gc-guN" secondAttribute="trailing" id="LBg-ug-lkR"/>
                 <constraint firstAttribute="bottom" secondItem="kcX-Gc-guN" secondAttribute="bottom" id="Obi-cI-1bC"/>
-                <constraint firstAttribute="trailing" secondItem="FbP-c5-xmu" secondAttribute="trailing" id="SUi-ee-Jc1"/>
+                <constraint firstAttribute="trailingMargin" secondItem="FbP-c5-xmu" secondAttribute="trailing" id="SUi-ee-Jc1"/>
                 <constraint firstAttribute="bottom" secondItem="nnN-bZ-C8z" secondAttribute="bottom" id="Ti4-Ju-x6w"/>
                 <constraint firstItem="kcX-Gc-guN" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="bIZ-QQ-iEe"/>
-                <constraint firstAttribute="bottom" secondItem="FbP-c5-xmu" secondAttribute="bottom" id="lIE-Bx-UeI"/>
-                <constraint firstItem="FbP-c5-xmu" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="ocD-oB-wC5"/>
-                <constraint firstItem="FbP-c5-xmu" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="pHg-Mg-Zse"/>
+                <constraint firstAttribute="bottomMargin" secondItem="FbP-c5-xmu" secondAttribute="bottom" id="lIE-Bx-UeI"/>
+                <constraint firstItem="FbP-c5-xmu" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="topMargin" id="ocD-oB-wC5"/>
+                <constraint firstItem="FbP-c5-xmu" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leadingMargin" id="pHg-Mg-Zse"/>
                 <constraint firstAttribute="trailing" secondItem="nnN-bZ-C8z" secondAttribute="trailing" id="pWc-we-cGf"/>
                 <constraint firstItem="nnN-bZ-C8z" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="woX-iN-K4z"/>
             </constraints>
