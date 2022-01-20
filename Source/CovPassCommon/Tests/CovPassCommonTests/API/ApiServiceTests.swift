@@ -67,7 +67,8 @@ class ApiServiceTests: XCTestCase {
         XCTAssert(valueUserAgent.contains("build"))
         XCTAssert(valueUserAgent.contains("xctest"))
         XCTAssert(valueEncoding == "gzip;q=1.0, compress;q=0.5")
-        XCTAssert(valueLanguage.contains("q=1.0") && valueLanguage.contains("en"))
+        XCTAssert(valueLanguage.contains("en"))
+        XCTAssert(valueLanguage.contains("q=1.0"))
     }
     
     func testUpdateEtagNil() throws {
