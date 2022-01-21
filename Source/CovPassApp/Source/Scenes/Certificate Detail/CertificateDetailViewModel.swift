@@ -65,6 +65,9 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
         if selectedCertificate?.vaccinationCertificate.isExpired ?? false || selectedCertificate?.vaccinationCertificate.isInvalid ?? false {
             return UIImage.statusExpiredCircle
         }
+        if selectedCertificate?.vaccinationCertificate.expiresSoon ?? false {
+            return UIImage.activity
+        }
         if selectedCertificate?.vaccinationCertificate.hcert.dgc.r != nil {
             return UIImage.detailStatusFull
         }
