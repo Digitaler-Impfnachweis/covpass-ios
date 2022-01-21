@@ -13,12 +13,14 @@ import UIKit
 
 private enum Constants {
     static let confirmButtonLabel = "validation_check_popup_valid_vaccination_button_title".localized
+    static let confirmButtonLabel2G = "result_2G_button_startover".localized
 }
 
 extension ValidationViewModel {
     
     var toolbarState: CustomToolbarState {
-        return .confirm(Constants.confirmButtonLabel)
+        let buttonText = _2GContext ? Constants.confirmButtonLabel2G : Constants.confirmButtonLabel
+        return .confirm(buttonText)
     }
     
     func cancel() {
@@ -41,7 +43,8 @@ extension ValidationViewModel {
                 repository: self.repository,
                 certificate: certificate,
                 error: nil,
-                certLogic: DCCCertLogic.create()
+                certLogic: DCCCertLogic.create(),
+                _2GContext: _2GContext
             )
             self.delegate?.viewModelDidChange(vm)
         }
@@ -51,7 +54,8 @@ extension ValidationViewModel {
                 repository: self.repository,
                 certificate: nil,
                 error: error,
-                certLogic: DCCCertLogic.create()
+                certLogic: DCCCertLogic.create(),
+                _2GContext: _2GContext
             )
             self.delegate?.viewModelDidChange(vm)
         }

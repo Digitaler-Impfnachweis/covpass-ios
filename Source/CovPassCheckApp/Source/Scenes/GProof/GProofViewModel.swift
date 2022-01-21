@@ -161,7 +161,8 @@ class GProofViewModel: GProofViewModelProtocol {
     private let certLogic: DCCCertLogicProtocol
     private let error: Error? = nil
     private let jsonEncoder: JSONEncoder = JSONEncoder()
-
+    private var lastTriedCertType: CertType? = nil
+    
     init(initialToken: CBORWebToken,
          router: GProofRouterProtocol,
          repository: VaccinationRepositoryProtocol,
@@ -170,6 +171,7 @@ class GProofViewModel: GProofViewModelProtocol {
         self.certLogic = certLogic
         self.router = router
         self.initialToken = initialToken
+        lastTriedCertType = initialToken.isTest ? .test : .vaccination
         _ = self.setResultViewModel(newToken: initialToken)
         self.delegate?.viewModelDidUpdate()
     }
@@ -197,7 +199,14 @@ class GProofViewModel: GProofViewModelProtocol {
             self.delegate?.viewModelDidUpdate()
         }
         .catch { error in
-            self.router.showError(error: error)
+            if (error as? QRCodeError) == .qrCodeExists {
+                self.router.showError(error: error)
+            } else {
+                _ = self.setResultViewModel(newToken: nil)
+                self.delegate?.viewModelDidUpdate()
+            }
+
+            
         }
     }
     
@@ -234,17 +243,18 @@ class GProofViewModel: GProofViewModelProtocol {
         return .value(newToken)
     }
     
-    private func setResultViewModel(newToken: CBORWebToken) -> Promise<Void> {
+    private func setResultViewModel(newToken: CBORWebToken?) -> Promise<Void> {
         let validationResultViewModel = ValidationResultFactory.createViewModel(router: router,
-                                                                                repository: self.repository,
+                                                                                repository: repository,
                                                                                 certificate: newToken,
-                                                                                error: self.error,
-                                                                                certLogic: self.certLogic)
+                                                                                error: error,
+                                                                                certLogic: certLogic,
+                                                                                _2GContext: true)
         switch validationResultViewModel {
         case is VaccinationResultViewModel, is RecoveryResultViewModel: self.gProofResultViewModel = validationResultViewModel
         case is TestResultViewModel: self.testResultViewModel = validationResultViewModel
         case is ErrorResultViewModel:
-            if newToken.hcert.dgc.t != nil {
+            if lastTriedCertType == .test {
                 self.testResultViewModel = validationResultViewModel
             } else {
                 self.gProofResultViewModel = validationResultViewModel
@@ -289,14 +299,22 @@ class GProofViewModel: GProofViewModelProtocol {
     }
     
     func scanTest() {
+        lastTriedCertType = .test
         startQRCodeValidation(for: ._2G)
     }
     
     func scan2GProof() {
+        lastTriedCertType = .vaccination
         startQRCodeValidation(for: ._2G)
     }
     
     func retry() {
+        if lastTriedCertType == .test {
+            testResultViewModel = nil
+        } else {
+            gProofResultViewModel = nil
+        }
+        delegate?.viewModelDidUpdate()
         startQRCodeValidation(for: ._2G)
     }
     
@@ -313,10 +331,12 @@ class GProofViewModel: GProofViewModelProtocol {
     }
     
     func showResultGProof() {
-        router.showCertificate(gProofResultViewModel?.certificate)
+        router.showCertificate(gProofResultViewModel?.certificate,
+                               _2GContext: true)
     }
     
     func showResultTestProof() {
-        router.showCertificate(testResultViewModel?.certificate)
+        router.showCertificate(testResultViewModel?.certificate,
+                               _2GContext: true)
     }
 }

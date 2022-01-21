@@ -168,12 +168,12 @@ class ValidatorOverviewViewModel {
             self.repository.checkCertificate($0)
         }
         .done {
-            scanType == ._3G ? self.router.showCertificate($0) : self.router.showGproof(initialToken: $0,
-                                                                                        repository: self.repository,
-                                                                                        certLogic: self.certLogic)
+            scanType == ._3G ? self.router.showCertificate($0, _2GContext: false) : self.router.showGproof(initialToken: $0,
+                                                                                                           repository: self.repository,
+                                                                                                           certLogic: self.certLogic)
         }
         .catch { error in
-            self.router.showError(error: error)
+            self.router.showError(error: error, _2GContext: scanType == ._2G)
         }
     }
     

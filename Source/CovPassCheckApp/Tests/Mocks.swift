@@ -208,7 +208,7 @@ class ViewModelDelegateMock: ViewModelDelegate {
 }
 
 class GProofMockRouter: GProofRouterProtocol {
-    
+
     var errorShown = false
     var certificateShown = false
     var showDifferentPersonShown = false
@@ -218,7 +218,7 @@ class GProofMockRouter: GProofRouterProtocol {
         .value(.success(""))
     }
     
-    func showCertificate(_ certificate: CBORWebToken?) {
+    func showCertificate(_ certificate: CBORWebToken?, _2GContext: Bool) {
         certificateShown = true
     }
     
@@ -237,6 +237,8 @@ class GProofMockRouter: GProofRouterProtocol {
 }
 
 class ValidatorMockRouter: ValidatorOverviewRouterProtocol {
+    
+    
     func showGproof(initialToken: CBORWebToken, repository: VaccinationRepositoryProtocol, certLogic: DCCCertLogicProtocol) {
         
     }
@@ -245,11 +247,11 @@ class ValidatorMockRouter: ValidatorOverviewRouterProtocol {
         .value(.success(""))
     }
     
-    func showCertificate(_ certificate: CBORWebToken?) {
-        
+    func showCertificate(_ certificate: CBORWebToken?, _2GContext: Bool) {
+
     }
     
-    func showError(error: Error) {
+    func showError(error: Error, _2GContext: Bool) {
         
     }
     

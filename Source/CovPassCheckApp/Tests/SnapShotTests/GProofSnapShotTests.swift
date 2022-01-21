@@ -96,7 +96,7 @@ class GProofSnapShotTests: BaseSnapShotTests {
         let vc = GProofViewController(viewModel: vm)
         certLogicMock.validateResult = [.init(rule: nil, result: .fail, validationErrors: nil)]
         vaccinationRepoMock.checkedCert = CBORWebToken.mockVaccinationCertificate
-        vm.scanTest()
+        vm.scan2GProof()
         verifyAsyc(vc: vc, wait: 0.1)
     }
     

@@ -63,6 +63,8 @@ public class CertResultCard: XibView {
     // MARK: - Methods
     
     @IBAction func linkTapped(_ sender: Any) {
-        action?()
+        if linkImage != nil {
+            action?()
+        }
     }
 }

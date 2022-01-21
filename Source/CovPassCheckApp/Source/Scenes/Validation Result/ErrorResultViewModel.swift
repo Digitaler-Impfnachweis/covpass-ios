@@ -86,6 +86,7 @@ class ErrorResultViewModel: ValidationResultViewModel {
     }
     
     var buttonHidden: Bool = false
+    var _2GContext: Bool
 
     // MARK: - Lifecycle
 
@@ -93,11 +94,13 @@ class ErrorResultViewModel: ValidationResultViewModel {
         router: ValidationResultRouterProtocol,
         repository: VaccinationRepositoryProtocol,
         certificate: CBORWebToken? = nil,
-        error: Error
+        error: Error,
+        _2GContext: Bool
     ) {
         self.router = router
         self.repository = repository
         self.certificate = certificate
         self.error = error
+        self._2GContext = _2GContext
     }
 }

@@ -36,12 +36,14 @@ class ValidatorOverviewRouter: ValidatorOverviewRouterProtocol {
         )
     }
     
-    func showCertificate(_ certificate: CBORWebToken?) {
+    func showCertificate(_ certificate: CBORWebToken?,
+                         _2GContext: Bool) {
         sceneCoordinator.present(
             ValidationResultSceneFactory(
                 router: ValidationResultRouter(sceneCoordinator: sceneCoordinator),
                 certificate: certificate,
-                error: nil
+                error: nil,
+                _2GContext: _2GContext
             )
         )
     }
@@ -54,12 +56,14 @@ class ValidatorOverviewRouter: ValidatorOverviewRouterProtocol {
         )
     }
     
-    func showError(error: Error) {
+    func showError(error: Error,
+                   _2GContext: Bool) {
         sceneCoordinator.present(
             ValidationResultSceneFactory(
                 router: ValidationResultRouter(sceneCoordinator: sceneCoordinator),
                 certificate: nil,
-                error: error
+                error: error,
+                _2GContext: _2GContext
             )
         )
     }

@@ -69,7 +69,8 @@ class GProofViewController: UIViewController {
         buttonRetry.title = viewModel.buttonRetry
         buttonRetry.isHidden = viewModel.buttonRetryIsHidden
         buttonRetry.action = viewModel.retry
-        buttonStartOver.style = .alternative
+        let allOtherThreeButtonsAreHidden = viewModel.buttonScanTestIsHidden && viewModel.buttonRetryIsHidden && viewModel.buttonScan2GIsHidden
+        buttonStartOver.style = allOtherThreeButtonsAreHidden ? .primary : .alternative
         buttonStartOver.title = viewModel.buttonStartOver
         buttonStartOver.isHidden = viewModel.buttonStartOverIsHidden
         buttonStartOver.action = viewModel.startover
