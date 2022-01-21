@@ -16,7 +16,6 @@ import UIKit
 private enum Constants {
     enum Config {
         static let privacySrcDe = "privacy-covpass-de"
-        static let privacySrcEn = "privacy-covpass-en"
         static let privacySrcExt = "html"
     }
 }
@@ -46,8 +45,7 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
     }
     
     private var privacyFileUrl: URL? {
-        let srcFileName = Locale.current.isGerman() ? Constants.Config.privacySrcDe : Constants.Config.privacySrcEn
-        guard let url =  Bundle.main.url(forResource: srcFileName,
+        guard let url =  Bundle.main.url(forResource: Constants.Config.privacySrcDe,
                                          withExtension: Constants.Config.privacySrcExt) else {
             return nil
         }
