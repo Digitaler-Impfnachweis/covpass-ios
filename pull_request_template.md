@@ -50,7 +50,7 @@
   Describe what has changed in terms _they_ can understand.
 
   Format/Example:
-    - Add an option to `FancyCustomView` to specify the font size (BARMER-4321).
+    - Add an option to `FancyCustomView` to specify the font size (BVC-4321).
 -->
 
 # Checklist
