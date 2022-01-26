@@ -27,10 +27,9 @@
 -->
 
 - [ ] Unit Tests 
-- [ ] UI Tests
 - [ ] Snapshot-Test
-- [ ] Manual testing (Mock)
-- [ ] Manual testing (Modell)
+- [ ] Manual testing (Simulator)
+- [ ] Manual testing (Device)
 
 # Screenshots
 <!--- If appropriate. -->
