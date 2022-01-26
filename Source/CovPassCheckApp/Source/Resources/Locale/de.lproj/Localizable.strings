@@ -96,6 +96,8 @@
 
 "validation_start_screen_scan_message_2G" = "Scannen Sie nacheinander die notwendigen Nachweise für 2G+.";
 
+"validation_start_screen_scan_message_2G_toggle" = "Bei Auffrischungsimpfungen ist kein Test nötig";
+
 "validation_start_screen_scan_sync_message_title" = "Datum und Uhrzeit prüfen";
 
 "validation_start_screen_scan_sync_message_text" = "Bitte korrigieren Sie das Datum und die Uhrzeit Ihres Smartphones. \n\n Soll: %@";
@@ -233,7 +235,7 @@
 
 "validation_check_popup_valid_pcr_test_title" = "Negativer PCR-Test von vor %d Stunden";
 
-"validation_check_popup_valid_pcr_test_message" = "Gleichen Sie folgende Daten mit einem Ausweisdokument der geprüften Person ab.";
+"validation_check_popup_valid_pcr_test_message" = "Gleichen Sie folgende Daten mit einem Ausweisdokument der geprüften Person ab:";
 
 "validation_check_popup_valid_pcr_test_date_of_birth" = "Geboren am %@";
 
@@ -268,6 +270,8 @@
 
 "result_2G_gproof_valid" = "2G-Nachweis gültig*";
 
+"result_2G_booster_valid" = "Auffrischungsimpfung gültig";
+
 "result_2G_gproof_invalid" = "2G-Nachweis ungültig*";
 
 "result_2G_test_empty" = "Testzertifikat";
@@ -277,6 +281,10 @@
 "result_2G_invalid_subtitle" = "Details anzeigen";
 
 "result_2G_empty_subtitle" = "Noch nicht geprüft";
+
+"accessibility_warning_2G_names_announce_open" = "Fehlermeldung \"Abweichende Daten\" wurde geöffnet";
+
+"accessibility_warning_2G_names_announce_close" = "Fehlermeldung \"Abweichende Daten\" wurde geschlossen";
 
 "warning_2G_names_title" = "Abweichende Daten";
 
