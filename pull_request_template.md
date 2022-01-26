@@ -1,7 +1,7 @@
 <!--- 
   Provide a general summary of your changes in the Title above ⬆.
   Format: 
-    BARMER-1234: Short summary of the changes
+    BVC-1234: Short summary of the changes
 -->
 
 # Description
@@ -47,7 +47,6 @@
 # Changelog
 <!--- 
   This part will be automatically added to the `CHANGELOG.md` files of the components.
-  The changelogs will be consumed by BARMER.
   Describe what has changed in terms _they_ can understand.
 
   Format/Example:
