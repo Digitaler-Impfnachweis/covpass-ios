@@ -80,7 +80,7 @@ class GProofSnapShotTests: BaseSnapShotTests {
         let vc = GProofViewController(viewModel: vm)
         vaccinationRepoMock.checkedCert = CBORWebToken.mockTestCertificate
         vm.scanTest()
-        verifyAsyc(vc: vc, wait: 0.1)
+        verifyAsync(vc: vc, wait: 0.1)
     }
     
     func testInitWithSuccessfulTestAndScannedFailingVaccination() {
@@ -97,7 +97,7 @@ class GProofSnapShotTests: BaseSnapShotTests {
         certLogicMock.validateResult = [.init(rule: nil, result: .fail, validationErrors: nil)]
         vaccinationRepoMock.checkedCert = CBORWebToken.mockVaccinationCertificate
         vm.scan2GProof()
-        verifyAsyc(vc: vc, wait: 0.1)
+        verifyAsync(vc: vc, wait: 0.1)
     }
     
     func testInitWithSuccessfulVaccinationAndScannedFailingTest() {
@@ -114,6 +114,6 @@ class GProofSnapShotTests: BaseSnapShotTests {
         certLogicMock.validateResult = [.init(rule: nil, result: .fail, validationErrors: nil)]
         vaccinationRepoMock.checkedCert = CBORWebToken.mockTestCertificate
         vm.scanTest()
-        verifyAsyc(vc: vc, wait: 0.1)
+        verifyAsync(vc: vc, wait: 0.1)
     }
 }

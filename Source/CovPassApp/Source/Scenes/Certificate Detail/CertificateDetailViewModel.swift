@@ -114,9 +114,8 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
         guard let cert = sortedByFullImmunization.first?.vaccinationCertificate.hcert.dgc.v?.first else {
             return "vaccination_certificate_overview_incomplete_title".localized
         }
-        if let date = cert.fullImmunizationValidFrom, cert.fullImmunizationValid {
-            return String(format: "vaccination_certificate_overview_complete_title".localized,
-                          DateUtils.displayDateFormatter.string(from: date))
+        if cert.fullImmunizationValid {
+            return "vaccination_certificate_overview_complete_title".localized
         } else if let date = cert.fullImmunizationValidFrom, fullImmunization {
             return String(format: "vaccination_certificate_overview_complete_from_title".localized, DateUtils.displayDateFormatter.string(from: date))
         }

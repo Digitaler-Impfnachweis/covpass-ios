@@ -26,7 +26,7 @@ class CertificateOverviewSnapShotTests: BaseSnapShotTests {
         )
         let viewController = CertificatesOverviewViewController(viewModel: viewModel)
         let navigationController = UINavigationController(rootViewController: viewController)
-        verifyAsyc(vc: navigationController)
+        verifyAsync(vc: navigationController)
     }
     
     func testCertificateOverviewCertificates() {

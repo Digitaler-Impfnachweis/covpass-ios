@@ -38,14 +38,14 @@ class BaseSnapShotTests: FBSnapshotTestCase {
                              perPixelTolerance: 0.1)
     }
 
-    func verifyAsyc(vc: UIViewController,
+    func verifyAsync(vc: UIViewController,
                     wait: TimeInterval = 0.1,
                     record: Bool = false) {
         recordMode = record
         let expectationHere = expectation(description: "Some Expectation")
         vc.view.bounds = UIScreen.main.bounds
         DispatchQueue.main.asyncAfter(deadline: .now() + wait) {
-            self.verifyView(vc: vc)
+            self.verifyView(vc: vc, record: record)
             expectationHere.fulfill()
         }
         self.waitForExpectations(timeout: 1.0 + wait, handler: nil)

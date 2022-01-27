@@ -206,7 +206,7 @@ class GProofViewModelTests: XCTestCase {
         XCTAssert(sut.testResultViewModel != nil)
         
         XCTAssertEqual(sut.title, "2G+ check")
-        XCTAssertEqual(sut.checkIdMessage, "Check the following data against an ID document from the person you are checking.")
+        XCTAssertEqual(sut.checkIdMessage, "Check the following data against an ID document from the person you are checking:")
         XCTAssertEqual(sut.footnote, "* Basic immunization, booster vaccination or recovery.")
         
         XCTAssertEqual(sut.buttonScanTest, "Scan test certificate")
@@ -538,7 +538,7 @@ class GProofViewModelTests: XCTestCase {
         XCTAssert(sut.testResultViewModel != nil)
         
         XCTAssertEqual(sut.title, "2G+ check")
-        XCTAssertEqual(sut.checkIdMessage, "Check the following data against an ID document from the person you are checking.")
+        XCTAssertEqual(sut.checkIdMessage, "Check the following data against an ID document from the person you are checking:")
         XCTAssertEqual(sut.footnote, "* Basic immunization, booster vaccination or recovery.")
         
         XCTAssertEqual(sut.buttonScanTest, "Scan test certificate")
