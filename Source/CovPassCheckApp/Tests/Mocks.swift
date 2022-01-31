@@ -238,8 +238,7 @@ class GProofMockRouter: GProofRouterProtocol {
 
 class ValidatorMockRouter: ValidatorOverviewRouterProtocol {
     
-    
-    func showGproof(initialToken: CBORWebToken, repository: VaccinationRepositoryProtocol, certLogic: DCCCertLogicProtocol) {
+    func showGproof(initialToken: CBORWebToken, repository: VaccinationRepositoryProtocol, certLogic: DCCCertLogicProtocol, boosterAsTest: Bool) {
         
     }
     

@@ -26,7 +26,8 @@ class GProofViewModelTests: XCTestCase {
         sut = GProofViewModel(initialToken: initialToken,
                               router: routerMock,
                               repository: vaccinationRepoMock,
-                              certLogic: certLogicMock)
+                              certLogic: certLogicMock,
+                              boosterAsTest: false)
     }
     
     override func tearDown() {
@@ -45,7 +46,8 @@ class GProofViewModelTests: XCTestCase {
         let sut = GProofViewModel(initialToken: initialToken,
                                   router: routerMock,
                                   repository: vaccinationRepoMock,
-                                  certLogic: certLogicMock)
+                                  certLogic: certLogicMock,
+                                  boosterAsTest: false)
         
         // WHEN
         

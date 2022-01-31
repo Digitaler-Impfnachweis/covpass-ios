@@ -12,13 +12,15 @@ public extension UIColor {
     // MARK: - Primary Colors
 
     static let brandBase = UIColor("BrandBase")
+    
+    static let brandBase80 = UIColor("BrandBase80")
 
     static let onBrandBase = UIColor("OnBrandBase")
 
     static let onBrandAccent = UIColor("OnBrandAccent")
 
     static let onBrandAccent70 = UIColor("OnBrandAccent70")
-
+    
     static let onBackground20 = UIColor("OnBackground20")
 
     static let onBackground40 = UIColor("OnBackground40")

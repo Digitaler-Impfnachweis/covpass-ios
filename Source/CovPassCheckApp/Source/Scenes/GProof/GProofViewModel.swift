@@ -25,6 +25,7 @@ private enum Constants {
         static let validation_check_popup_valid_pcr_test_message = "validation_check_popup_valid_pcr_test_message".localized
         static let result_2G_gproof_empty = "result_2G_gproof_empty".localized
         static let result_2G_gproof_valid = "result_2G_gproof_valid".localized
+        static let result_2G_gproof_valid_boosted = "result_2G_booster_valid".localized
         static let result_2G_gproof_invalid = "result_2G_gproof_invalid".localized
         static let result_2G_test_empty = "result_2G_test_empty".localized
         static let result_2G_test_invalid = "result_2G_test_invalid".localized
@@ -65,7 +66,8 @@ class GProofViewModel: GProofViewModelProtocol {
     var resultGProofTitle: String {
         switch gProofResultViewModel {
         case is ErrorResultViewModel: return Constants.Keys.result_2G_gproof_invalid
-        case is VaccinationResultViewModel, is RecoveryResultViewModel: return Constants.Keys.result_2G_gproof_valid
+        case is VaccinationResultViewModel, is RecoveryResultViewModel:
+            return initialTokenIsBoosted ? Constants.Keys.result_2G_gproof_valid_boosted : Constants.Keys.result_2G_gproof_valid
         default: return Constants.Keys.result_2G_gproof_empty
         }
     }
@@ -135,8 +137,11 @@ class GProofViewModel: GProofViewModelProtocol {
         }
         return String(format: Constants.Keys.validation_check_popup_test_date_of_birth, DateUtils.displayDateOfBirth(dgc))
     }
+    var testResultViewIsHidden: Bool {
+        initialTokenIsBoosted && !(gProofResultViewModel is ErrorResultViewModel)
+    }
     var buttonScanTestIsHidden: Bool {
-        if testResultViewModel != nil || someIsFailed {
+        if testResultViewModel != nil || someIsFailed || testResultViewIsHidden {
             return true
         }
         return false
@@ -157,20 +162,25 @@ class GProofViewModel: GProofViewModelProtocol {
     let router: GProofRouterProtocol
     internal var delegate: ViewModelDelegate?
     private var initialToken: CBORWebToken?
+    private var initialTokenIsBoosted: Bool
     private let repository: VaccinationRepositoryProtocol
     private let certLogic: DCCCertLogicProtocol
     private let error: Error? = nil
     private let jsonEncoder: JSONEncoder = JSONEncoder()
     private var lastTriedCertType: CertType? = nil
-    
+    private var boosterAsTest: Bool
+
     init(initialToken: CBORWebToken,
          router: GProofRouterProtocol,
          repository: VaccinationRepositoryProtocol,
-         certLogic: DCCCertLogicProtocol) {
+         certLogic: DCCCertLogicProtocol,
+         boosterAsTest: Bool) {
         self.repository = repository
         self.certLogic = certLogic
         self.router = router
         self.initialToken = initialToken
+        self.boosterAsTest = boosterAsTest
+        initialTokenIsBoosted = initialToken.hcert.dgc.isVaccinationBoosted && boosterAsTest
         lastTriedCertType = initialToken.isTest ? .test : .vaccination
         _ = self.setResultViewModel(newToken: initialToken)
         self.delegate?.viewModelDidUpdate()
@@ -205,8 +215,6 @@ class GProofViewModel: GProofViewModelProtocol {
                 _ = self.setResultViewModel(newToken: nil)
                 self.delegate?.viewModelDidUpdate()
             }
-
-            
         }
     }
     
@@ -262,6 +270,7 @@ class GProofViewModel: GProofViewModelProtocol {
         default:
             break
         }
+        initialTokenIsBoosted = newToken?.hcert.dgc.isVaccinationBoosted ?? false && boosterAsTest
         if initialToken == nil {
             initialToken = newToken
         }
@@ -309,12 +318,6 @@ class GProofViewModel: GProofViewModelProtocol {
     }
     
     func retry() {
-        if lastTriedCertType == .test {
-            testResultViewModel = nil
-        } else {
-            gProofResultViewModel = nil
-        }
-        delegate?.viewModelDidUpdate()
         startQRCodeValidation(for: ._2G)
     }
     

@@ -21,7 +21,8 @@ class GProofSnapShotTests: BaseSnapShotTests {
         let vm = GProofViewModel(initialToken: initialToken,
                                  router: routerMock,
                                  repository: vaccinationRepoMock,
-                                 certLogic: certLogicMock)
+                                 certLogic: certLogicMock,
+                                 boosterAsTest: false)
         let vc = GProofViewController(viewModel: vm)
         verifyView(vc: vc)
     }
@@ -35,7 +36,8 @@ class GProofSnapShotTests: BaseSnapShotTests {
         let vm = GProofViewModel(initialToken: initialToken,
                                  router: routerMock,
                                  repository: vaccinationRepoMock,
-                                 certLogic: certLogicMock)
+                                 certLogic: certLogicMock,
+                                 boosterAsTest: false)
         let vc = GProofViewController(viewModel: vm)
         verifyView(vc: vc)
     }
@@ -48,7 +50,8 @@ class GProofSnapShotTests: BaseSnapShotTests {
         let vm = GProofViewModel(initialToken: initialToken,
                                  router: routerMock,
                                  repository: vaccinationRepoMock,
-                                 certLogic: certLogicMock)
+                                 certLogic: certLogicMock,
+                                 boosterAsTest: false)
         let vc = GProofViewController(viewModel: vm)
         verifyView(vc: vc)
     }
@@ -62,7 +65,8 @@ class GProofSnapShotTests: BaseSnapShotTests {
         let vm = GProofViewModel(initialToken: initialToken,
                                  router: routerMock,
                                  repository: vaccinationRepoMock,
-                                 certLogic: certLogicMock)
+                                 certLogic: certLogicMock,
+                                 boosterAsTest: false)
         let vc = GProofViewController(viewModel: vm)
         verifyView(vc: vc)
     }
@@ -76,7 +80,8 @@ class GProofSnapShotTests: BaseSnapShotTests {
         let vm = GProofViewModel(initialToken: initialToken,
                                  router: routerMock,
                                  repository: vaccinationRepoMock,
-                                 certLogic: certLogicMock)
+                                 certLogic: certLogicMock,
+                                 boosterAsTest: false)
         let vc = GProofViewController(viewModel: vm)
         vaccinationRepoMock.checkedCert = CBORWebToken.mockTestCertificate
         vm.scanTest()
@@ -92,7 +97,8 @@ class GProofSnapShotTests: BaseSnapShotTests {
         let vm = GProofViewModel(initialToken: initialToken,
                                  router: routerMock,
                                  repository: vaccinationRepoMock,
-                                 certLogic: certLogicMock)
+                                 certLogic: certLogicMock,
+                                 boosterAsTest: false)
         let vc = GProofViewController(viewModel: vm)
         certLogicMock.validateResult = [.init(rule: nil, result: .fail, validationErrors: nil)]
         vaccinationRepoMock.checkedCert = CBORWebToken.mockVaccinationCertificate
@@ -109,7 +115,8 @@ class GProofSnapShotTests: BaseSnapShotTests {
         let vm = GProofViewModel(initialToken: initialToken,
                                  router: routerMock,
                                  repository: vaccinationRepoMock,
-                                 certLogic: certLogicMock)
+                                 certLogic: certLogicMock,
+                                 boosterAsTest: false)
         let vc = GProofViewController(viewModel: vm)
         certLogicMock.validateResult = [.init(rule: nil, result: .fail, validationErrors: nil)]
         vaccinationRepoMock.checkedCert = CBORWebToken.mockTestCertificate

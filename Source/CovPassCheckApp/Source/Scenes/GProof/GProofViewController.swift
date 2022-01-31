@@ -85,6 +85,7 @@ class GProofViewController: UIViewController {
     private func configureContent() {
         personStack.isHidden = viewModel.onlyOneIsScannedAndThisFailed
         pageFooter.attributedText = viewModel.footnote.styledAs(.subheader_2)
+        pageFooter.isHidden = viewModel.testResultViewIsHidden
         personStackHeadline.attributedText = viewModel.checkIdMessage.styledAs(.subheader_2)
         let resultTitleStyle: TextStyle = .header_2
         
@@ -106,6 +107,7 @@ class GProofViewController: UIViewController {
         resultGProof.linkImage = viewModel.resultGProofLinkImage
         resultGProof.bottomText = viewModel.resultGProofFooter?.styledAs(.header_1)
         
+        resultTest.isHidden = viewModel.testResultViewIsHidden
         resultTest.resultImage = viewModel.resultTestImage
         resultTest.title = viewModel.resultTestTitle.styledAs(resultTitleStyle)
         resultTest.subtitle = viewModel.resultTestSubtitle?.styledAs(subTitleStyleTestProof).colored(subTitleColorTestProof)

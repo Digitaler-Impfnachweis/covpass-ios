@@ -38,6 +38,7 @@ protocol GProofViewModelProtocol {
     var resultPersonTitle: String? { get }
     var resultPersonSubtitle: String? { get }
     var resultPersonFooter: String? { get }
+    var testResultViewIsHidden: Bool { get }
     var someIsFailed: Bool  { get }
     var areBothScanned: Bool { get }
     var delegate: ViewModelDelegate? { get set }

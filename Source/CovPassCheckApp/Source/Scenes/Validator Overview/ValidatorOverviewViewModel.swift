@@ -23,6 +23,9 @@ private enum Constants {
             static let validation_start_screen_scan_message = "validation_start_screen_scan_message".localized
             static let validation_start_screen_scan_message_2G = "validation_start_screen_scan_message_2G".localized
         }
+        enum Toggle {
+            static let validation_start_screen_scan_message_2G_toggle = "validation_start_screen_scan_message_2G_toggle".localized
+        }
     }
     enum Config {
         static let twoHoursAsSeconds = 7200.0
@@ -112,6 +115,12 @@ class ValidatorOverviewViewModel {
         Constants.Keys.ScanType.validation_start_screen_scan_message_2G
     }
     
+    var switchText: String {
+        Constants.Keys.Toggle.validation_start_screen_scan_message_2G_toggle
+    }
+    
+    var boosterAsTest = false
+    
     // MARK: - Lifecycle
     
     init(router: ValidatorOverviewRouterProtocol,
@@ -170,7 +179,8 @@ class ValidatorOverviewViewModel {
         .done {
             scanType == ._3G ? self.router.showCertificate($0, _2GContext: false) : self.router.showGproof(initialToken: $0,
                                                                                                            repository: self.repository,
-                                                                                                           certLogic: self.certLogic)
+                                                                                                           certLogic: self.certLogic,
+                                                                                                           boosterAsTest: self.boosterAsTest)
         }
         .catch { error in
             self.router.showError(error: error, _2GContext: scanType == ._2G)

@@ -70,12 +70,14 @@ class ValidatorOverviewRouter: ValidatorOverviewRouterProtocol {
     
     func showGproof(initialToken: CBORWebToken,
                     repository: VaccinationRepositoryProtocol,
-                    certLogic: DCCCertLogicProtocol) {
+                    certLogic: DCCCertLogicProtocol,
+                    boosterAsTest: Bool) {
         sceneCoordinator.present(
             GProofSceneFactory(initialToken: initialToken,
                                router: GProofRouter(sceneCoordinator: sceneCoordinator),
                                repository: repository,
-                               certLogic: certLogic)
+                               certLogic: certLogic,
+                               boosterAsTest: boosterAsTest)
         )
     }
 }
