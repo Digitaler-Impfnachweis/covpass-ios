@@ -36,6 +36,11 @@ open class AppInformationViewController: UIViewController {
         configureAppVersion()
         configureEntries()
     }
+    
+    open override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        configureEntries()
+    }
 
     // MARK: - Methods
 
@@ -50,6 +55,9 @@ open class AppInformationViewController: UIViewController {
     }
 
     private func configureEntries() {
+        entriesStackView.subviews.forEach { subview in
+            subview.removeFromSuperview()
+        }
         viewModel.entries.forEach { entry in
             entriesStackView.addArrangedSubview(entryView(for: entry))
         }
@@ -62,6 +70,7 @@ open class AppInformationViewController: UIViewController {
     private func entryView(for entry: AppInformationEntry) -> UIView {
         let view = ListItemView()
         view.textLabel.attributedText = entry.title.styledAs(.header_3)
+        view.rightTextLabel.attributedText = entry.rightTitle?.styledAs(.header_3)
         view.showSeperator = true
         view.action = { [weak self] in
             self?.viewModel.showSceneForEntry(entry)

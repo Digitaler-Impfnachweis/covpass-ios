@@ -13,34 +13,34 @@ import UIKit
 
 struct ValidationResultSceneFactory: SceneFactory {
     // MARK: - Properties
-
+    
     let router: ValidationResultRouterProtocol
     let certificate: ExtendedCBORWebToken
     let token: VAASValidaitonResultToken
     let error: Error?
-
+    let userDefaults: Persistence
+    
     // MARK: - Lifecycle
-
-    init(
-        router: ValidationResultRouterProtocol,
-        certificate: ExtendedCBORWebToken,
-        error: Error?,
-        token: VAASValidaitonResultToken
-    ) {
+    
+    init(router: ValidationResultRouterProtocol,
+         certificate: ExtendedCBORWebToken,
+         error: Error?,
+         token: VAASValidaitonResultToken,
+         userDefaults: Persistence) {
         self.router = router
         self.certificate = certificate
         self.token = token
         self.error = error
+        self.userDefaults = userDefaults
     }
-
+    
     func make() -> UIViewController {
-        let viewModel = ValidationResultFactory.createViewModel(
-            router: router,
-            repository: VaccinationRepository.create(),
-            certificate: certificate.vaccinationCertificate,
-            error: error,
-            token: token
-        )
+        let viewModel = ValidationResultFactory.createViewModel( router: router,
+                                                                 repository: VaccinationRepository.create(),
+                                                                 certificate: certificate.vaccinationCertificate,
+                                                                 error: error,
+                                                                 token: token,
+                                                                 userDefaults: userDefaults)
         let viewController = ValidationResultViewController(viewModel: viewModel)
         return viewController
     }

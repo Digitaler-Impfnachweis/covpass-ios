@@ -19,6 +19,9 @@ public protocol DCCServiceProtocol {
 
     func loadBoosterRules() -> Promise<[RuleSimple]>
     func loadBoosterRule(hash: String) -> Promise<Rule>
+    
+    func loadDomesticRules() -> Promise<[RuleSimple]>
+    func loadDomesticRule(hash: String) -> Promise<Rule>
 
     func loadCountryList() -> Promise<[Country]>
 }
@@ -43,11 +46,16 @@ public enum DCCServiceError: Error, ErrorCode {
 public struct DCCService: DCCServiceProtocol {
     private let url: URL
     private let boosterURL: URL
+    private let domesticURL: URL
     private let customURLSession: CustomURLSessionProtocol
 
-    public init(url: URL, boosterURL: URL, customURLSession: CustomURLSessionProtocol) {
+    public init(url: URL,
+                boosterURL: URL,
+                domesticURL: URL,
+                customURLSession: CustomURLSessionProtocol) {
         self.url = url
         self.boosterURL = boosterURL
+        self.domesticURL = domesticURL
         self.customURLSession = customURLSession
     }
 
@@ -124,6 +132,32 @@ public struct DCCService: DCCServiceProtocol {
     public func loadBoosterRule(hash: String) -> Promise<Rule> {
         return customURLSession
             .request(boosterURL.appendingPathComponent(hash).urlRequest.GET)
+            .map(on: .global()) { response in
+                guard let data = response.data(using: .utf8), let res = try? JSONDecoder().decode(Rule.self, from: data) else {
+                    throw DCCServiceError.invalidResponse
+                }
+                res.hash = hash
+                return res
+            }
+    }
+    
+    public func loadDomesticRules() -> Promise<[RuleSimple]> {
+        guard let requestUrl = URL(string: "\(domesticURL.absoluteString)") else {
+            return Promise(error: APIError.invalidUrl)
+        }
+        return customURLSession
+            .request(requestUrl.urlRequest.GET)
+            .map(on: .global()) { response in
+                guard let data = response.data(using: .utf8), let res = try? JSONDecoder().decode([RuleSimple].self, from: data) else {
+                    throw DCCServiceError.invalidResponse
+                }
+                return res
+            }
+    }
+    
+    public func loadDomesticRule(hash: String) -> Promise<Rule> {
+        return customURLSession
+            .request(domesticURL.appendingPathComponent(hash).urlRequest.GET)
             .map(on: .global()) { response in
                 guard let data = response.data(using: .utf8), let res = try? JSONDecoder().decode(Rule.self, from: data) else {
                     throw DCCServiceError.invalidResponse

@@ -86,6 +86,7 @@ class ConsentExchangeViewModel {
     let initialisationData: ValidationServiceInitialisation
     let certificate: ExtendedCBORWebToken
     private let vaasRepository: VAASRepositoryProtocol
+    private let userDefaults = UserDefaultsPersistence()
     
     var additionalInformation: NSAttributedString {
         let bullets = NSAttributedString().appendBullets([Constants.Text.additionalInformation1.styledAs(.body),
@@ -194,7 +195,9 @@ class ConsentExchangeViewModel {
             self?.delegate?.viewModelDidUpdate()
         }
         .done { accessToken in
-            self.router.showCertificate(self.certificate, with: accessToken)
+            self.router.showCertificate(self.certificate,
+                                        with: accessToken,
+                                        userDefaults: self.userDefaults)
         }
         .catch { error in
             self.errorHandling(error)

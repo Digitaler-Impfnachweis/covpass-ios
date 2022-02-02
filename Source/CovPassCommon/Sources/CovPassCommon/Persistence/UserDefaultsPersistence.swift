@@ -46,4 +46,25 @@ public extension Persistence {
             try? store(UserDefaults.keyPrivacy, value: newValue as Any)
         }
     }
+    
+    var selectedLogicType: DCCCertLogic.LogicType {
+        get {
+            let value = try? fetch(UserDefaults.keySelectedLogicType) as? String
+            let valueLogicType = DCCCertLogic.LogicType(rawValue: value ?? "")
+            return valueLogicType ?? .de
+        }
+        set {
+            try? store(UserDefaults.keySelectedLogicType, value: newValue.rawValue as Any)
+        }
+    }
+    
+    var onboardingSelectedLogicTypeAlreadySeen: Bool? {
+        get {
+            let value = try? fetch(UserDefaults.keyOnboardingSelectedLogicTypeAlreadySeen) as? Bool
+            return value
+        }
+        set {
+            try? store(UserDefaults.keyOnboardingSelectedLogicTypeAlreadySeen, value: newValue as Any)
+        }
+    }
 }

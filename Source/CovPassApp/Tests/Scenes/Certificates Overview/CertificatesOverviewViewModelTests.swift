@@ -1,5 +1,5 @@
 //
-//  CertificateCardsTests.swift
+//  CertificatesOverviewViewModelTests.swift
 //
 //  © Copyright IBM Deutschland GmbH 2021
 //  SPDX-License-Identifier: Apache-2.0
@@ -11,22 +11,27 @@
 import XCTest
 import PromiseKit
 
-class CertificateCardsTests: XCTestCase {
+class CertificatesOverviewViewModelTests: XCTestCase {
     
     var sut: CertificatesOverviewViewModel!
-    let vacinationRepoMock: VaccinationRepositoryMock = VaccinationRepositoryMock()
+    var userDefaults: UserDefaultsPersistence!
+    var vaccinationRepository: VaccinationRepositoryMock!
     
     override func setUpWithError() throws {
         let window = UIWindow(frame: UIScreen.main.bounds)
+        userDefaults = UserDefaultsPersistence()
+        vaccinationRepository = VaccinationRepositoryMock()
         sut = CertificatesOverviewViewModel(router: CertificatesOverviewRouter(sceneCoordinator: DefaultSceneCoordinator(window: window)),
-                                            repository: vacinationRepoMock,
+                                            repository: vaccinationRepository,
                                             certLogic: DCCCertLogicMock(),
                                             boosterLogic: BoosterLogicMock(),
-                                            userDefaults: UserDefaultsPersistence())
+                                            userDefaults: userDefaults)
     }
     
     override func tearDownWithError() throws {
         sut = nil
+        userDefaults = nil
+        vaccinationRepository = nil
         super.tearDown()
     }
     
@@ -36,7 +41,7 @@ class CertificateCardsTests: XCTestCase {
         cert.vaccinationCertificate.hcert.dgc.nam.fn = "John 1"
         cert.vaccinationCertificate.hcert.dgc.t!.first!.sc = DateUtils.parseDate("2021-04-26T15:05:00")!
         let certs = [cert]
-        vacinationRepoMock.certificates = certs
+        vaccinationRepository.certificates = certs
         
         // WHEN
         sut.refresh()
@@ -68,7 +73,7 @@ class CertificateCardsTests: XCTestCase {
         cert.vaccinationCertificate.hcert.dgc.t!.first!.sc = DateUtils.parseDate("2021-04-26T15:05:00")!
         cert.vaccinationCertificate.hcert.dgc.t!.first!.tt = "LP217198-3"
         let certs = [cert]
-        vacinationRepoMock.certificates = certs
+        vaccinationRepository.certificates = certs
         
         // WHEN
         sut.refresh()
@@ -99,7 +104,7 @@ class CertificateCardsTests: XCTestCase {
         cert.vaccinationCertificate.hcert.dgc.nam.fn = "John 1"
         cert.vaccinationCertificate.hcert.dgc.v!.first!.dt = DateUtils.parseDate("2021-04-26T15:05:00")!
         let certs = [cert]
-        vacinationRepoMock.certificates = certs
+        vaccinationRepository.certificates = certs
         
         // WHEN
         sut.refresh()
@@ -131,7 +136,7 @@ class CertificateCardsTests: XCTestCase {
         cert.vaccinationCertificate.hcert.dgc.v!.first!.dt = DateUtils.parseDate("2021-04-26T15:05:00")!
         cert.vaccinationCertificate.hcert.dgc.v!.first!.dn = 1
         let certs = [cert]
-        vacinationRepoMock.certificates = certs
+        vaccinationRepository.certificates = certs
         
         // WHEN
         sut.refresh()
@@ -162,7 +167,7 @@ class CertificateCardsTests: XCTestCase {
         cert.vaccinationCertificate.hcert.dgc.nam.fn = "John 1"
         cert.vaccinationCertificate.hcert.dgc.r!.first!.du = DateUtils.parseDate("2021-04-26T15:05:00")!
         let certs = [cert]
-        vacinationRepoMock.certificates = certs
+        vaccinationRepository.certificates = certs
         
         // WHEN
         sut.refresh()
@@ -194,7 +199,7 @@ class CertificateCardsTests: XCTestCase {
         cert.vaccinationCertificate.hcert.dgc.r!.first!.du = DateUtils.parseDate("2021-04-26T15:05:00")!
         cert.vaccinationCertificate.invalid = true
         let certs = [cert]
-        vacinationRepoMock.certificates = certs
+        vaccinationRepository.certificates = certs
         
         // WHEN
         sut.refresh()
@@ -226,7 +231,7 @@ class CertificateCardsTests: XCTestCase {
         cert.vaccinationCertificate.hcert.dgc.r!.first!.du = DateUtils.parseDate("2021-04-26T15:05:00")!
         cert.vaccinationCertificate.exp = Calendar.current.date(byAdding: .year, value: -2, to: Date())
         let certs = [cert]
-        vacinationRepoMock.certificates = certs
+        vaccinationRepository.certificates = certs
         
         // WHEN
         sut.refresh()
@@ -249,5 +254,25 @@ class CertificateCardsTests: XCTestCase {
         XCTAssertEqual(.expired, model.titleIcon)
         XCTAssertEqual(true, model.isExpired)
         XCTAssertEqual(false, model.isFavorite)
+    }
+
+    func testShowNotificationsIfNeeded_showCheckSituationIfNeeded_shown() {
+        // Given
+        userDefaults.onboardingSelectedLogicTypeAlreadySeen = false
+        let router = CertificatesOverviewRouterMock()
+        sut = .init(
+            router: router,
+            repository: vaccinationRepository,
+            certLogic: DCCCertLogicMock(),
+            boosterLogic: BoosterLogicMock(),
+            userDefaults: userDefaults
+        )
+        
+        // When
+        sut.showNotificationsIfNeeded()
+
+        // Then
+        wait(for: [router.showCheckSituationExpectation], timeout: 2)
+        XCTAssertEqual(userDefaults.onboardingSelectedLogicTypeAlreadySeen, true)
     }
 }

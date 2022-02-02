@@ -168,15 +168,18 @@ class GProofViewModel: GProofViewModelProtocol {
     private let error: Error? = nil
     private let jsonEncoder: JSONEncoder = JSONEncoder()
     private var lastTriedCertType: CertType? = nil
+    private var userDefaults: Persistence
     private var boosterAsTest: Bool
 
     init(initialToken: CBORWebToken,
          router: GProofRouterProtocol,
          repository: VaccinationRepositoryProtocol,
          certLogic: DCCCertLogicProtocol,
+         userDefaults: Persistence,
          boosterAsTest: Bool) {
         self.repository = repository
         self.certLogic = certLogic
+        self.userDefaults = userDefaults
         self.router = router
         self.initialToken = initialToken
         self.boosterAsTest = boosterAsTest
@@ -256,8 +259,10 @@ class GProofViewModel: GProofViewModelProtocol {
                                                                                 repository: repository,
                                                                                 certificate: newToken,
                                                                                 error: error,
+                                                                                type: userDefaults.selectedLogicType,
                                                                                 certLogic: certLogic,
-                                                                                _2GContext: true)
+                                                                                _2GContext: true,
+                                                                                userDefaults: userDefaults)
         switch validationResultViewModel {
         case is VaccinationResultViewModel, is RecoveryResultViewModel: self.gProofResultViewModel = validationResultViewModel
         case is TestResultViewModel: self.testResultViewModel = validationResultViewModel
@@ -318,6 +323,12 @@ class GProofViewModel: GProofViewModelProtocol {
     }
     
     func retry() {
+        if lastTriedCertType == .test {
+            testResultViewModel = nil
+        } else {
+            gProofResultViewModel = nil
+        }
+        delegate?.viewModelDidUpdate()
         startQRCodeValidation(for: ._2G)
     }
     
@@ -335,11 +346,13 @@ class GProofViewModel: GProofViewModelProtocol {
     
     func showResultGProof() {
         router.showCertificate(gProofResultViewModel?.certificate,
-                               _2GContext: true)
+                               _2GContext: true,
+                               userDefaults: userDefaults)
     }
     
     func showResultTestProof() {
         router.showCertificate(testResultViewModel?.certificate,
-                               _2GContext: true)
+                               _2GContext: true,
+                               userDefaults: userDefaults)
     }
 }

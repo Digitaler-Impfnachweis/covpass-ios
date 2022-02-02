@@ -9,9 +9,10 @@
 import CovPassCommon
 import Foundation
 import PromiseKit
+import XCTest
 
 public class VaccinationRepositoryMock: VaccinationRepositoryProtocol {
-
+    let getCertificateListExpectation = XCTestExpectation(description: "getCertificateListExpectation")
     var lastUpdatedTrustList: Date?
     var certificates: [ExtendedCBORWebToken] = []
     var certPair: [CertificatePair] = []
@@ -66,6 +67,7 @@ public class VaccinationRepositoryMock: VaccinationRepositoryProtocol {
     }
 
     public func getCertificateList() -> Promise<CertificateList> {
+        getCertificateListExpectation.fulfill()
         let certList = CertificateList(certificates: certificates)
         return Promise.value(certList)
     }

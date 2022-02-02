@@ -88,6 +88,18 @@
 
 "dialog_update_info_notification_action_button" = "OK";
 
+"accessibility_dialog_local_rulecheck_title_announce" = "Die Ansicht \"Neue Inlandsregeln\" wurde geöffnet";
+
+"dialog_local_rulecheck_title" = "Sind Ihre Zertifikate in Deutschland gültig?";
+
+"dialog_local_rulecheck_image" = "Abbildung von zwei Menschen in einer Prüfsituation. Eine Person scannt das Zertifikat einer anderen Person. Darüber ist die EU-Flagge abgebildet.";
+
+"dialog_local_rulecheck_subtitle" = "Wenn Ihre Zertifikate innerhalb Deutschlands geprüft werden, gelten mitunter strengere Regeln als bei Reisen in der EU.";
+
+"dialog_local_rulecheck_copy" = "Zum Beispiel sind Genesenenzertifikate in Deutschland kürzer gültig als in der EU. Außerdem gilt eine einmalige Impfung mit Johnson & Johnson nicht mehr als vollständige Grundimmunisierung.\nSie können ab jetzt auf dem Startbildschirm unter „Gültigkeit prüfen“ eine Vorschau sehen, ob Ihre Zertifikate nach den Inlandsregeln in Deutschland gültig sind.";
+
+"dialog_local_rulecheck_button" = "OK";
+
 
 /********** start screen **********/
 
@@ -339,7 +351,9 @@
 
 "BG" = "Bulgarien";
 
-"DE" = "Deutschland";
+"DE" = "Deutschland — Einreiseregeln";
+
+"DE2" = "Deutschland – Inlandsregeln";
 
 "LU" = "Luxemburg";
 
@@ -534,6 +548,8 @@
 "certificate_check_validity_no_certificate_saved_title" = "Sie haben noch keine Zertifikate gespeichert";
 
 "certificate_check_validity_no_certificate_saved_message" = "Fügen Sie ein Zertifikat hinzu, um dessen Gültigkeit zu überprüfen.";
+
+"certificate_check_german_infobox" = "Innerhalb Deutschlands gelten andere Regeln als für die Einreise nach Deutschland. Sie können Ihre Auswahl oberhalb ändern.";
 
 "certificate_check_validity_vaccination" = "Impfzertifikat";
 
@@ -1087,7 +1103,7 @@
 
 "error_scan_qrcode_cannot_be_parsed_title" = "QR-Code wurde nicht erkannt";
 
-"error_scan_qrcode_cannot_be_parsed_message" = "Der QR-Code gehört nicht zu einem digitalen COVID-Zertifikat der EU. Sie erkennen das richtige Zertifikat in Deutschland daran, dass der Aussteller das Robert Koch-Institut ist.\n\nQR-Codes von zum Beispiel Impfbescheinigungen oder QR-Codes auf einigen Chargen-Aufklebern aus dem gelben Impfbuch können nicht hinzugefügt werden.";
+"error_scan_qrcode_cannot_be_parsed_message" = "Der gescannte QR-Code konnte nicht als COVID-Zertifikat der EU oder als Nachweis für Ticketbuchungen erkannt werden. Bitte scannen Sie einen geeigneten QR-Code.";
 
 "error_scan_qrcode_cannot_be_parsed_button_title" = "OK";
 

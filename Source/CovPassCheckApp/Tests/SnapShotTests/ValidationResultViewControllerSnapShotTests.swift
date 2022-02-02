@@ -9,6 +9,7 @@
 import XCTest
 import CovPassUI
 import PromiseKit
+import CovPassCommon
 
 class ValidationResultViewControllerSnapShotTests: BaseSnapShotTests {
     
@@ -17,7 +18,8 @@ class ValidationResultViewControllerSnapShotTests: BaseSnapShotTests {
                                       repository: VaccinationRepositoryMock(),
                                       certificate: nil,
                                       error: ValidationResultError.technical,
-                                      _2GContext: false)
+                                      _2GContext: false,
+                                      userDefaults: UserDefaultsPersistence())
         let vc = ValidationResultViewController(viewModel: vm)
         verifyView(vc: vc)
     }
@@ -27,7 +29,8 @@ class ValidationResultViewControllerSnapShotTests: BaseSnapShotTests {
                                       repository: VaccinationRepositoryMock(),
                                       certificate: nil,
                                       error: ValidationResultError.functional,
-                                      _2GContext: false)
+                                      _2GContext: false,
+                                      userDefaults: UserDefaultsPersistence())
         let vc = ValidationResultViewController(viewModel: vm)
         verifyView(vc: vc)
     }
@@ -37,7 +40,8 @@ class ValidationResultViewControllerSnapShotTests: BaseSnapShotTests {
                                       repository: VaccinationRepositoryMock(),
                                       certificate: nil,
                                       error: ValidationResultError.technical,
-                                      _2GContext: true)
+                                      _2GContext: true,
+                                      userDefaults: UserDefaultsPersistence())
         let vc = ValidationResultViewController(viewModel: vm)
         verifyView(vc: vc)
     }
@@ -47,7 +51,8 @@ class ValidationResultViewControllerSnapShotTests: BaseSnapShotTests {
                                       repository: VaccinationRepositoryMock(),
                                       certificate: nil,
                                       error: ValidationResultError.functional,
-                                      _2GContext: true)
+                                      _2GContext: true,
+                                      userDefaults: UserDefaultsPersistence())
         let vc = ValidationResultViewController(viewModel: vm)
         verifyView(vc: vc)
     }

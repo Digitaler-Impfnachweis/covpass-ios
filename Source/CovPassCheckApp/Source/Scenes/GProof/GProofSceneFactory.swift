@@ -18,18 +18,22 @@ struct GProofSceneFactory: ResolvableSceneFactory {
     private let repository: VaccinationRepositoryProtocol
     private let certLogic: DCCCertLogicProtocol
     private let router: GProofRouterProtocol
+    private let userDefaults: Persistence
     private let boosterAsTest: Bool
+    
     // MARK: - Lifecycle
     
     init(initialToken: CBORWebToken,
          router: GProofRouterProtocol,
          repository: VaccinationRepositoryProtocol,
          certLogic: DCCCertLogicProtocol,
+         userDefaults: Persistence,
          boosterAsTest: Bool) {
         self.initialToken = initialToken
         self.router = router
         self.repository = repository
         self.certLogic = certLogic
+        self.userDefaults = userDefaults
         self.boosterAsTest = boosterAsTest
     }
 
@@ -38,6 +42,7 @@ struct GProofSceneFactory: ResolvableSceneFactory {
                                         router: router,
                                         repository: repository,
                                         certLogic: certLogic,
+                                        userDefaults: userDefaults,
                                         boosterAsTest: boosterAsTest)
         let viewController = GProofViewController(viewModel: viewModel)
         return viewController

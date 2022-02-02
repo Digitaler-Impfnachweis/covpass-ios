@@ -14,23 +14,28 @@ public class HintView: XibView {
     @IBOutlet public var iconStackView: UIStackView!
     @IBOutlet public var iconView: UIImageView!
     @IBOutlet public var iconLabel: HighlightLabel!
-
     @IBOutlet public var titleLabel: UILabel!
     @IBOutlet public var subTitleLabel: UILabel!
     @IBOutlet public var bodyLabel: LinkLabel!
     @IBOutlet public var containerView: UIView!
-
     @IBOutlet public var subTitleConstraint: NSLayoutConstraint!
-    
     @IBOutlet public var containerLeadingConstraint: NSLayoutConstraint!
     @IBOutlet public var containerTopConstraint: NSLayoutConstraint!
     @IBOutlet public var containerTrailingConstraint: NSLayoutConstraint!
     @IBOutlet public var containerBottomConstraint: NSLayoutConstraint!
+    @IBOutlet public var iconStackviewCenterYConstraint: NSLayoutConstraint!
+    @IBOutlet public var iconStackViewAlignToTopTile: NSLayoutConstraint!
+    @IBOutlet public var titleSuperViewBottomConstraint: NSLayoutConstraint!
+    
     
     // MARK: - Lifecycle
 
     override public func initView() {
         super.initView()
+
+        iconStackviewCenterYConstraint.isActive = true
+        iconStackViewAlignToTopTile.isActive = false
+        titleSuperViewBottomConstraint.isActive = false
 
         containerView.backgroundColor = .infoBackground
         containerView?.layer.borderWidth = 1.0

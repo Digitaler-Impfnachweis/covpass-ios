@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CheckSituationViewController" customModule="CovPassUI">
+            <connections>
+                <outlet property="descriptionLabel" destination="jkW-LO-gqs" id="kbe-ym-Y4t"/>
+                <outlet property="descriptionTextWrapper" destination="ADv-Ie-vgD" id="3gP-E1-l8y"/>
+                <outlet property="hStackView" destination="Giw-oM-J5h" id="g3z-y6-Ha4"/>
+                <outlet property="newBadgeView" destination="wRY-0P-Zji" id="FLM-U4-Eoa"/>
+                <outlet property="newBadgeWrapper" destination="TzD-hJ-tms" id="wKQ-bY-VU9"/>
+                <outlet property="optionOneTravel" destination="jWq-CT-Ywy" id="zck-Ij-eNf"/>
+                <outlet property="optionTwoDomestic" destination="Kf6-3f-TRg" id="b5b-M1-0Ks"/>
+                <outlet property="pageImageView" destination="fI0-wE-LDZ" id="i0u-bi-lyy"/>
+                <outlet property="saveButton" destination="inb-gF-Tlw" id="2zV-l8-e8l"/>
+                <outlet property="stackview" destination="AB7-iK-S63" id="D5F-U3-98G"/>
+                <outlet property="subTitleLabel" destination="QWY-Rx-qtn" id="dBK-2z-26a"/>
+                <outlet property="subTitleTextWrapper" destination="Spj-B7-Q0A" id="qcl-PP-bt8"/>
+                <outlet property="titleLabel" destination="KI2-Ug-rxI" id="T2e-gl-1V4"/>
+                <outlet property="view" destination="iN0-l3-epB" id="5bK-nm-zTi"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Wg-Ev-lHI">
+                    <rect key="frame" x="0.0" y="44" width="414" height="852"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="AB7-iK-S63">
+                            <rect key="frame" x="0.0" y="32" width="414" height="1056"/>
+                            <subviews>
+                                <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Giw-oM-J5h">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="168"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8bh-Ne-JOa">
+                                            <rect key="frame" x="0.0" y="0.0" width="282" height="168"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="KI2-Ug-rxI" userLabel="TitleLabel" customClass="PlainLabel" customModule="CovPassUI">
+                                                    <rect key="frame" x="24" y="0.0" width="234" height="168"/>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                </view>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstItem="KI2-Ug-rxI" firstAttribute="leading" secondItem="8bh-Ne-JOa" secondAttribute="leading" constant="24" id="5eZ-nK-OgK"/>
+                                                <constraint firstItem="KI2-Ug-rxI" firstAttribute="top" secondItem="8bh-Ne-JOa" secondAttribute="top" id="BLo-i7-2FB"/>
+                                                <constraint firstAttribute="bottom" secondItem="KI2-Ug-rxI" secondAttribute="bottom" id="OTY-9M-K1s"/>
+                                                <constraint firstAttribute="trailing" secondItem="KI2-Ug-rxI" secondAttribute="trailing" constant="24" id="aXG-iD-PA0"/>
+                                            </constraints>
+                                        </view>
+                                        <view contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="TzD-hJ-tms" userLabel="Wrapper">
+                                            <rect key="frame" x="282" y="0.0" width="132" height="168"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" placeholderIntrinsicWidth="100" placeholderIntrinsicHeight="100" translatesAutoresizingMaskIntoConstraints="NO" id="wRY-0P-Zji" userLabel="New Badge Label" customClass="HighlightLabel" customModule="CovPassUI">
+                                                    <rect key="frame" x="8" y="0.0" width="100" height="100"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </view>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="wRY-0P-Zji" secondAttribute="bottom" id="WV9-BR-rfO"/>
+                                                <constraint firstAttribute="trailing" secondItem="wRY-0P-Zji" secondAttribute="trailing" constant="24" id="k9i-FY-rs6"/>
+                                                <constraint firstItem="wRY-0P-Zji" firstAttribute="top" secondItem="TzD-hJ-tms" secondAttribute="top" id="pFc-6y-sbv"/>
+                                                <constraint firstItem="wRY-0P-Zji" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="TzD-hJ-tms" secondAttribute="leading" constant="8" id="yG6-TF-QJn"/>
+                                            </constraints>
+                                        </view>
+                                    </subviews>
+                                </stackView>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="fI0-wE-LDZ" userLabel="Page Image">
+                                    <rect key="frame" x="0.0" y="168" width="414" height="128"/>
+                                </imageView>
+                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="jWq-CT-Ywy" customClass="CountryItemView" customModule="CovPassUI">
+                                    <rect key="frame" x="0.0" y="296" width="414" height="128"/>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                </view>
+                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="Kf6-3f-TRg" customClass="CountryItemView" customModule="CovPassUI">
+                                    <rect key="frame" x="0.0" y="424" width="414" height="128"/>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                </view>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Spj-B7-Q0A">
+                                    <rect key="frame" x="0.0" y="552" width="414" height="168"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="QWY-Rx-qtn" userLabel="SubTitle" customClass="PlainLabel" customModule="CovPassUI">
+                                            <rect key="frame" x="24" y="0.0" width="366" height="156"/>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        </view>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstItem="QWY-Rx-qtn" firstAttribute="leading" secondItem="Spj-B7-Q0A" secondAttribute="leading" constant="24" id="r1A-aV-dBY"/>
+                                        <constraint firstAttribute="bottom" secondItem="QWY-Rx-qtn" secondAttribute="bottom" constant="12" id="vTd-1S-UQM"/>
+                                        <constraint firstItem="QWY-Rx-qtn" firstAttribute="top" secondItem="Spj-B7-Q0A" secondAttribute="top" id="wFC-Wt-XZA"/>
+                                        <constraint firstAttribute="trailing" secondItem="QWY-Rx-qtn" secondAttribute="trailing" constant="24" id="zu4-TU-2ko"/>
+                                    </constraints>
+                                </view>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ADv-Ie-vgD">
+                                    <rect key="frame" x="0.0" y="720" width="414" height="168"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="jkW-LO-gqs" userLabel="Description Label" customClass="PlainLabel" customModule="CovPassUI">
+                                            <rect key="frame" x="24" y="0.0" width="366" height="168"/>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        </view>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstItem="jkW-LO-gqs" firstAttribute="leading" secondItem="ADv-Ie-vgD" secondAttribute="leading" constant="24" id="COD-zb-czi"/>
+                                        <constraint firstAttribute="trailing" secondItem="jkW-LO-gqs" secondAttribute="trailing" constant="24" id="Cvu-GI-HTH"/>
+                                        <constraint firstItem="jkW-LO-gqs" firstAttribute="top" secondItem="ADv-Ie-vgD" secondAttribute="top" id="JFY-MY-JLs"/>
+                                        <constraint firstAttribute="bottom" secondItem="jkW-LO-gqs" secondAttribute="bottom" id="TQ2-nZ-DPm"/>
+                                    </constraints>
+                                </view>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NUh-as-M7g">
+                                    <rect key="frame" x="0.0" y="888" width="414" height="168"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="inb-gF-Tlw" userLabel="Save Button" customClass="MainButton" customModule="CovPassUI">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="168"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </view>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="inb-gF-Tlw" secondAttribute="bottom" id="Apo-cj-Xly"/>
+                                        <constraint firstItem="inb-gF-Tlw" firstAttribute="centerX" secondItem="NUh-as-M7g" secondAttribute="centerX" id="LLz-Pe-aif"/>
+                                        <constraint firstItem="inb-gF-Tlw" firstAttribute="top" secondItem="NUh-as-M7g" secondAttribute="top" id="wMt-3i-mKr"/>
+                                    </constraints>
+                                </view>
+                            </subviews>
+                        </stackView>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="AB7-iK-S63" firstAttribute="top" secondItem="4Wg-Ev-lHI" secondAttribute="top" constant="32" id="1Pr-8V-rvX"/>
+                        <constraint firstItem="AB7-iK-S63" firstAttribute="leading" secondItem="4Wg-Ev-lHI" secondAttribute="leading" id="MWb-ru-VjR"/>
+                        <constraint firstItem="AB7-iK-S63" firstAttribute="width" secondItem="4Wg-Ev-lHI" secondAttribute="width" id="NdF-HW-GrM"/>
+                        <constraint firstAttribute="trailing" secondItem="AB7-iK-S63" secondAttribute="trailing" id="gsa-XE-smX"/>
+                        <constraint firstAttribute="bottom" secondItem="AB7-iK-S63" secondAttribute="bottom" id="mP3-Od-5Lk"/>
+                    </constraints>
+                </scrollView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="QWB-FE-Ghr"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="4Wg-Ev-lHI" secondAttribute="trailing" id="RGQ-74-88c"/>
+                <constraint firstAttribute="bottom" secondItem="4Wg-Ev-lHI" secondAttribute="bottom" id="dYi-bb-5hy"/>
+                <constraint firstItem="4Wg-Ev-lHI" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="jKW-oK-Aaz"/>
+                <constraint firstItem="4Wg-Ev-lHI" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="snf-zt-bGf"/>
+                <constraint firstItem="4Wg-Ev-lHI" firstAttribute="top" secondItem="QWB-FE-Ghr" secondAttribute="top" id="y3a-wt-po7"/>
+            </constraints>
+            <point key="canvasLocation" x="139" y="153"/>
+        </view>
+    </objects>
+    <designables>
+        <designable name="KI2-Ug-rxI">
+            <size key="intrinsicContentSize" width="414" height="128"/>
+        </designable>
+        <designable name="Kf6-3f-TRg">
+            <size key="intrinsicContentSize" width="414" height="128"/>
+        </designable>
+        <designable name="QWY-Rx-qtn">
+            <size key="intrinsicContentSize" width="414" height="128"/>
+        </designable>
+        <designable name="inb-gF-Tlw">
+            <size key="intrinsicContentSize" width="414" height="128"/>
+        </designable>
+        <designable name="jWq-CT-Ywy">
+            <size key="intrinsicContentSize" width="414" height="128"/>
+        </designable>
+        <designable name="jkW-LO-gqs">
+            <size key="intrinsicContentSize" width="414" height="128"/>
+        </designable>
+        <designable name="wRY-0P-Zji">
+            <size key="intrinsicContentSize" width="100" height="100"/>
+        </designable>
+    </designables>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

@@ -6,6 +6,8 @@
 	<string>$(API_URL)</string>
 	<key>BOOSTER_RULES_URL</key>
 	<string>$(BOOSTER_RULES_URL)</string>
+	<key>DOMESTIC_RULES_URL</key>
+	<string>$(DOMESTIC_RULES_URL)</string>
 	<key>BUNDLE_NAME</key>
 	<string>$(BUNDLE_NAME)</string>
 	<key>CFBundleDevelopmentRegion</key>
@@ -35,6 +37,8 @@
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>DCC_RULES_FILE</key>
 	<string>$(DCC_RULES_FILE)</string>
+	<key>DCC_DOMESTIC_RULES_FILE</key>
+	<string>$(DCC_DOMESTIC_RULES_FILE)</string>
 	<key>DCC_RULES_TLS_CERTIFICATE_NAME</key>
 	<string>$(DCC_RULES_TLS_CERTIFICATE_NAME)</string>
 	<key>DCC_RULES_URL</key>

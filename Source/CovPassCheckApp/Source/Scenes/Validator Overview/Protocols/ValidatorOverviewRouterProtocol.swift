@@ -15,13 +15,16 @@ import UIKit
 protocol ValidatorOverviewRouterProtocol: DialogRouterProtocol {
     func scanQRCode() -> Promise<ScanResult>
     func showCertificate(_ certificate: CBORWebToken?,
-                         _2GContext: Bool)
+                         _2GContext: Bool,
+                         userDefaults: Persistence)
     func showError(error: Error,
-                   _2GContext: Bool
-    )
-    func showAppInformation()
+                   _2GContext: Bool,
+                   userDefaults: Persistence)
+    func showAppInformation(userDefaults: Persistence)
     func showGproof(initialToken: CBORWebToken,
                     repository: VaccinationRepositoryProtocol,
                     certLogic: DCCCertLogicProtocol,
+                    userDefaults: Persistence,
                     boosterAsTest: Bool)
+    func showCheckSituation(userDefaults: Persistence) -> Promise<Void>
 }

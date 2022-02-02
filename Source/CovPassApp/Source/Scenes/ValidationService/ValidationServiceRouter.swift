@@ -212,13 +212,16 @@ struct ValidationServiceRouter: ValidationServiceRoutable {
         sceneCoordinator.push(webViewScene)
     }
     
-    func showCertificate(_ certificate: ExtendedCBORWebToken, with result: VAASValidaitonResultToken) {
+    func showCertificate(_ certificate: ExtendedCBORWebToken,
+                         with result: VAASValidaitonResultToken,
+                         userDefaults: Persistence) {
         sceneCoordinator.push(
             ValidationResultSceneFactory(
                 router: ValidationResultRouter(sceneCoordinator: sceneCoordinator),
                 certificate: certificate,
                 error: nil,
-                token: result
+                token: result,
+                userDefaults: userDefaults
             )
         )
     }

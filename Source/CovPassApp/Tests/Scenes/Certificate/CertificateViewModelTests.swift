@@ -30,6 +30,7 @@ class CertificateViewModelTests: XCTestCase {
         repository = VaccinationRepositoryMock()
         let dccCertLogic = DCCCertLogic(
             initialDCCRulesURL: Bundle.commonBundle.url(forResource: "dcc-rules", withExtension: "json")!,
+            initialDomesticDCCRulesURL: Bundle.commonBundle.url(forResource: "dcc-domestic-rules", withExtension: "json")!,
             service: DCCServiceMock(),
             keychain: MockPersistence(),
             userDefaults: MockPersistence()

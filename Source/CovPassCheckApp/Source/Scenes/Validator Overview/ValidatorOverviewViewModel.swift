@@ -23,6 +23,10 @@ private enum Constants {
             static let validation_start_screen_scan_message = "validation_start_screen_scan_message".localized
             static let validation_start_screen_scan_message_2G = "validation_start_screen_scan_message_2G".localized
         }
+        enum CheckSituation {
+            static let deText = "🇩🇪 " + "startscreen_rules_tag_local".localized
+            static let euText = "🇪🇺 " + "startscreen_rules_tag_europe".localized
+        }
         enum Toggle {
             static let validation_start_screen_scan_message_2G_toggle = "validation_start_screen_scan_message_2G_toggle".localized
         }
@@ -40,7 +44,8 @@ class ValidatorOverviewViewModel {
     private let repository: VaccinationRepositoryProtocol
     private let router: ValidatorOverviewRouterProtocol
     private let certLogic: DCCCertLogicProtocol
-    
+    private var userDefaults: Persistence
+
     var delegate: ViewModelDelegate?
     
     var title: String { "validation_start_screen_title".localized }
@@ -115,6 +120,14 @@ class ValidatorOverviewViewModel {
         Constants.Keys.ScanType.validation_start_screen_scan_message_2G
     }
     
+    var checkSituationText: String {
+        switch userDefaults.selectedLogicType {
+        case .eu: return Constants.Keys.CheckSituation.euText
+        case .de: return Constants.Keys.CheckSituation.deText
+        case .booster: return ""
+        }
+    }
+    
     var switchText: String {
         Constants.Keys.Toggle.validation_start_screen_scan_message_2G_toggle
     }
@@ -126,10 +139,12 @@ class ValidatorOverviewViewModel {
     init(router: ValidatorOverviewRouterProtocol,
          repository: VaccinationRepositoryProtocol,
          certLogic: DCCCertLogicProtocol,
+         userDefaults: Persistence,
          schedulerIntervall: TimeInterval = Constants.Config.schedulerIntervall) {
         self.router = router
         self.repository = repository
         self.certLogic = certLogic
+        self.userDefaults = userDefaults
         self.schedulerIntervall = schedulerIntervall
         self.setupTimer()
     }
@@ -177,18 +192,23 @@ class ValidatorOverviewViewModel {
             self.repository.checkCertificate($0)
         }
         .done {
-            scanType == ._3G ? self.router.showCertificate($0, _2GContext: false) : self.router.showGproof(initialToken: $0,
-                                                                                                           repository: self.repository,
-                                                                                                           certLogic: self.certLogic,
-                                                                                                           boosterAsTest: self.boosterAsTest)
+            scanType == ._3G ? self.router.showCertificate($0,
+                                                           _2GContext: false,
+                                                           userDefaults: self.userDefaults) : self.router.showGproof(initialToken: $0,
+                                                                                                                     repository: self.repository,
+                                                                                                                     certLogic: self.certLogic,
+                                                                                                                     userDefaults: self.userDefaults,
+                                                                                                                     boosterAsTest: self.boosterAsTest)
         }
         .catch { error in
-            self.router.showError(error: error, _2GContext: scanType == ._2G)
+            self.router.showError(error: error,
+                                  _2GContext: scanType == ._2G,
+                                  userDefaults: self.userDefaults)
         }
     }
     
     func showAppInformation() {
-        router.showAppInformation()
+        router.showAppInformation(userDefaults: userDefaults)
     }
     
     private func payloadFromScannerResult(_ result: ScanResult) throws -> String {
@@ -198,6 +218,26 @@ class ValidatorOverviewViewModel {
         case let .failure(error):
             throw error
         }
+    }
+    
+    func showNotificationsIfNeeded() {
+        firstly {
+            showCheckSituationIfNeeded()
+        }
+        .done {
+            self.delegate?.viewModelDidUpdate()
+        }
+        .catch { error in
+            print(error.localizedDescription)
+        }
+    }
+    
+    private func showCheckSituationIfNeeded() -> Promise<Void> {
+        if userDefaults.onboardingSelectedLogicTypeAlreadySeen ?? false {
+            return .value
+        }
+        userDefaults.onboardingSelectedLogicTypeAlreadySeen = true
+        return router.showCheckSituation(userDefaults: userDefaults)
     }
     
     // MARK: Kronos Usage

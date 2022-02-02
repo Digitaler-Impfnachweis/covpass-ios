@@ -16,6 +16,16 @@ public enum DCCServiceMockError: Error {
 }
 
 class DCCServiceMock: DCCServiceProtocol {
+    
+    var loadDomesticDCCRulesResult: Promise<[RuleSimple]>?
+    func loadDomesticRules() -> Promise<[RuleSimple]> {
+        loadDomesticDCCRulesResult ?? Promise.value([])
+    }
+    
+    var loadDomesticDCCRuleResult: Promise<Rule>?
+    func loadDomesticRule(hash: String) -> Promise<Rule> {
+        loadDomesticDCCRuleResult ?? Promise(error: DCCServiceMockError.invalidURL)
+    }
 
     var loadDCCRulesResult: Promise<[RuleSimple]>?
     func loadDCCRules() -> Promise<[RuleSimple]> {

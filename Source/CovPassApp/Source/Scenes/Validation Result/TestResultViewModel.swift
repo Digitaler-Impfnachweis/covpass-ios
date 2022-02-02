@@ -48,18 +48,19 @@ class TestResultViewModel: ValidationResultViewModel {
     
     var buttonHidden: Bool = false
     var _2GContext: Bool = false
-
+    var userDefaults: Persistence
+    
     // MARK: - Lifecycle
     
-    init(
-        router: ValidationResultRouterProtocol,
-        repository: VaccinationRepositoryProtocol,
-        certificate: CBORWebToken?,
-        token: VAASValidaitonResultToken?
-    ) {
+    init(router: ValidationResultRouterProtocol,
+         repository: VaccinationRepositoryProtocol,
+         certificate: CBORWebToken?,
+         token: VAASValidaitonResultToken?,
+         userDefaults: Persistence ) {
         self.router = router
         self.repository = repository
         self.certificate = certificate
         self.token = token
+        self.userDefaults = userDefaults
     }
 }

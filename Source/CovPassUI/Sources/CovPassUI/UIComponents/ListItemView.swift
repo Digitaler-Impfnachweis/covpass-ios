@@ -14,6 +14,7 @@ public class ListItemView: XibView {
     @IBOutlet public var stackView: UIStackView!
     @IBOutlet public var imageView: UIImageView!
     @IBOutlet public var textLabel: UILabel!
+    @IBOutlet public var rightTextLabel: UILabel!
     @IBOutlet var seperatorView: UIView!
     @IBOutlet var internalButton: UIButton!
 
@@ -34,6 +35,7 @@ public class ListItemView: XibView {
         contentView?.layoutMargins = .init(top: .space_12, left: .space_24, bottom: .space_12, right: .space_24)
         backgroundColor = .neutralWhite
         textLabel.text = nil
+        rightTextLabel.text = nil
         imageView.image = .chevronRight
         seperatorView.backgroundColor = .onBackground20
         setupAccessibility()

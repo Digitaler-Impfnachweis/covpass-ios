@@ -27,6 +27,7 @@ class GProofViewModelTests: XCTestCase {
                               router: routerMock,
                               repository: vaccinationRepoMock,
                               certLogic: certLogicMock,
+                              userDefaults: UserDefaultsPersistence(),
                               boosterAsTest: false)
     }
     
@@ -47,6 +48,7 @@ class GProofViewModelTests: XCTestCase {
                                   router: routerMock,
                                   repository: vaccinationRepoMock,
                                   certLogic: certLogicMock,
+                                  userDefaults: UserDefaultsPersistence(),
                                   boosterAsTest: false)
         
         // WHEN

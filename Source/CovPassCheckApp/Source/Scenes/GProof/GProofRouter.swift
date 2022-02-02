@@ -44,14 +44,16 @@ class GProofRouter: GProofRouterProtocol {
     }
     
     func showCertificate(_ certificate: CBORWebToken?,
-                         _2GContext: Bool) {
+                         _2GContext: Bool,
+                         userDefaults: Persistence) {
         sceneCoordinator.present(
             ValidationResultSceneFactory(
                 router: ValidationResultRouter(sceneCoordinator: sceneCoordinator),
                 certificate: certificate,
                 error: nil,
                 buttonHidden: true,
-                _2GContext: _2GContext
+                _2GContext: _2GContext,
+                userDefaults: userDefaults
             )
         )
     }

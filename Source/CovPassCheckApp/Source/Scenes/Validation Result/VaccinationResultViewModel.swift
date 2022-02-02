@@ -12,6 +12,7 @@ import PromiseKit
 import UIKit
 
 class VaccinationResultViewModel: ValidationResultViewModel {
+    
     // MARK: - Properties
 
     weak var delegate: ResultViewModelDelegate?
@@ -50,6 +51,7 @@ class VaccinationResultViewModel: ValidationResultViewModel {
 
     var buttonHidden: Bool = false
     var _2GContext: Bool
+    var userDefaults: Persistence
     
     // MARK: - Lifecycle
 
@@ -57,11 +59,13 @@ class VaccinationResultViewModel: ValidationResultViewModel {
         router: ValidationResultRouterProtocol,
         repository: VaccinationRepositoryProtocol,
         certificate: CBORWebToken?,
-        _2GContext: Bool
+        _2GContext: Bool,
+        userDefaults: Persistence
     ) {
         self.router = router
         self.repository = repository
         self.certificate = certificate
         self._2GContext = _2GContext
+        self.userDefaults = userDefaults
     }
 }

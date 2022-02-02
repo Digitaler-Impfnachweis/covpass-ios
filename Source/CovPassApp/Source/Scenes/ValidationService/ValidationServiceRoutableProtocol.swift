@@ -20,8 +20,12 @@ protocol ValidationServiceRoutable: DialogRouterProtocol {
     func showNoVerificationSubmissionPossible(error: Error) -> Promise<Bool>
     func showAccessTokenNotProcessed(error: Error) -> Promise<Bool>
     func routeToSelectCertificate(ticket: ValidationServiceInitialisation)
-    func routeToCertificateConsent(ticket: ValidationServiceInitialisation, certificate: ExtendedCBORWebToken, vaasRepository: VAASRepositoryProtocol)
+    func routeToCertificateConsent(ticket: ValidationServiceInitialisation,
+                                   certificate: ExtendedCBORWebToken,
+                                   vaasRepository: VAASRepositoryProtocol)
     func routeToPrivacyStatement(url: URL)
-    func showCertificate(_ certificate: ExtendedCBORWebToken, with result: VAASValidaitonResultToken)
+    func showCertificate(_ certificate: ExtendedCBORWebToken,
+                         with result: VAASValidaitonResultToken,
+                         userDefaults: Persistence)
     func showValidationFailed(ticket: ValidationServiceInitialisation) -> Promise<Bool>
 }

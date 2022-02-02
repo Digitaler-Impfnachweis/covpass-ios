@@ -29,6 +29,7 @@ class ValidatorOverviewViewModelTests: XCTestCase {
         sut = ValidatorOverviewViewModel(router: ValidatorOverviewRouter(sceneCoordinator: sceneCoordinator),
                                          repository: repository,
                                          certLogic:  DCCCertLogic.create(),
+                                         userDefaults: UserDefaultsPersistence(),
                                          schedulerIntervall: 0.5)
     }
     

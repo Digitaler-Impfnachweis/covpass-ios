@@ -249,6 +249,9 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
         .then {
             self.showAnnouncementIfNeeded()
         }
+        .then{
+            self.showCheckSituationIfNeeded()
+        }
         .then {
             self.showScanPleaseHint()
         }
@@ -258,6 +261,14 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
         .catch { error in
             print(error.localizedDescription)
         }
+    }
+    
+    private func showCheckSituationIfNeeded() -> Promise<Void> {
+        if userDefaults.onboardingSelectedLogicTypeAlreadySeen ?? false {
+            return .value
+        }
+        userDefaults.onboardingSelectedLogicTypeAlreadySeen = true
+        return router.showCheckSituation(userDefaults: userDefaults)
     }
     
     private func payloadFromScannerResult(_ result: ScanResult) throws -> String {
