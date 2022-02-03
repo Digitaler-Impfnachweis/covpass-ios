@@ -96,7 +96,7 @@
 
 "dialog_local_rulecheck_subtitle" = "Wenn Ihre Zertifikate innerhalb Deutschlands geprüft werden, gelten mitunter strengere Regeln als bei Reisen in der EU.";
 
-"dialog_local_rulecheck_copy" = "Zum Beispiel sind Genesenenzertifikate in Deutschland kürzer gültig als in der EU. Außerdem gilt eine einmalige Impfung mit Johnson & Johnson nicht mehr als vollständige Grundimmunisierung.\nSie können ab jetzt auf dem Startbildschirm unter „Gültigkeit prüfen“ eine Vorschau sehen, ob Ihre Zertifikate nach den Inlandsregeln in Deutschland gültig sind.";
+"dialog_local_rulecheck_copy" = "Zum Beispiel sind Genesenenzertifikate in Deutschland kürzer gültig als in der EU. Außerdem gilt eine einmalige Impfung mit Johnson & Johnson nicht mehr als vollständige Grundimmunisierung.\n\nSie können ab jetzt auf dem Startbildschirm unter „Gültigkeit prüfen“ eine Vorschau sehen, ob Ihre Zertifikate nach den Inlandsregeln in Deutschland gültig sind.";
 
 "dialog_local_rulecheck_button" = "OK";
 

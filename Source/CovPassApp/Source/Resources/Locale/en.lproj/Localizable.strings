@@ -96,7 +96,7 @@
 
 "dialog_local_rulecheck_subtitle" = "When your certificates are checked within Germany, stricter rules sometimes apply than when traveling within the EU.";
 
-"dialog_local_rulecheck_copy" = "For example, certificates of recovery are valid for a shorter period in Germany than in the EU. In addition, a single vaccination with Johnson & Johnson no longer counts as complete basic immunization.\nFrom now on, you can preview whether your certificates are valid in Germany according to the domestic rules under \"Check validity\" on the start screen.";
+"dialog_local_rulecheck_copy" = "For example, certificates of recovery are valid for a shorter period in Germany than in the EU. In addition, a single vaccination with Johnson & Johnson no longer counts as complete basic immunization.\n\nFrom now on, you can preview whether your certificates are valid in Germany according to the domestic rules under \"Check validity\" on the start screen.";
 
 "dialog_local_rulecheck_button" = "OK";
 
