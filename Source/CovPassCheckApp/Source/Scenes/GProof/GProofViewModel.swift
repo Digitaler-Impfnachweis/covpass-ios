@@ -212,6 +212,11 @@ class GProofViewModel: GProofViewModelProtocol {
         .done {
             self.delegate?.viewModelDidUpdate()
         }
+        .cancelled {
+            if self.testResultViewModel == nil && self.gProofResultViewModel == nil {
+                self.router.sceneCoordinator.dimiss(animated: true)
+            }
+        }
         .catch { error in
             if (error as? QRCodeError) == .qrCodeExists {
                 self.router.showError(error: error)

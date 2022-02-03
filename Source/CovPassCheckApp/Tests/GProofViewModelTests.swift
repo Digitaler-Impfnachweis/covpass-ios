@@ -17,13 +17,14 @@ class GProofViewModelTests: XCTestCase {
     var sut: GProofViewModel!
     var vaccinationRepoMock: VaccinationRepositoryMock!
     var certLogicMock: DCCCertLogicMock!
-    
+    var routerMock: GProofMockRouter!
+
     override func setUp() {
         super.setUp()
         let initialToken = CBORWebToken.mockTestCertificate
-        let routerMock = GProofMockRouter()
         vaccinationRepoMock = VaccinationRepositoryMock()
         certLogicMock = DCCCertLogicMock()
+        routerMock = GProofMockRouter()
         sut = GProofViewModel(initialToken: initialToken,
                               router: routerMock,
                               repository: vaccinationRepoMock,
@@ -34,6 +35,9 @@ class GProofViewModelTests: XCTestCase {
     
     override func tearDown() {
         sut = nil
+        vaccinationRepoMock = nil
+        certLogicMock = nil
+        routerMock = nil
         super.tearDown()
     }
     
@@ -625,5 +629,22 @@ class GProofViewModelTests: XCTestCase {
         XCTAssertFalse((sut.router as! GProofMockRouter).certificateShown)
         sut.showResultTestProof()
         XCTAssertTrue((sut.router as! GProofMockRouter).certificateShown)
+    }
+    
+    func testDismissSceneAfterStartOverOnClosingCamera() {
+        // GIVEN
+        routerMock.qrCodeScanShouldCanceled = true
+        (routerMock.sceneCoordinator as? SceneCoordinatorMock)?.sceneDissmissed = false
+
+        // WHEN
+        sut.startover()
+
+        // THEN
+        do {
+            let sceneDissmissed = try XCTUnwrap((routerMock.sceneCoordinator as? SceneCoordinatorMock)?.sceneDissmissed)
+            XCTAssertTrue(sceneDissmissed)
+        } catch {
+            XCTFail()
+        }
     }
 }

@@ -12,13 +12,14 @@ import PromiseKit
 
 class GProofMockRouter: GProofRouterProtocol {
 
+    var qrCodeScanShouldCanceled = false
     var errorShown = false
     var certificateShown = false
     var showDifferentPersonShown = false
     var sceneCoordinator: SceneCoordinator = SceneCoordinatorMock()
 
     func scanQRCode() -> Promise<ScanResult> {
-        .value(.success(""))
+        qrCodeScanShouldCanceled ? .init { resolver in resolver.cancel() } : .value(.success(""))
     }
     
     func showCertificate(_ certificate: CBORWebToken?, _2GContext: Bool, userDefaults: Persistence) {

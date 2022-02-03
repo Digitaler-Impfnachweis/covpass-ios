@@ -13,8 +13,14 @@ import PromiseKit
 import CertLogic
 import SwiftyJSON
 
-struct SceneCoordinatorMock: SceneCoordinator {
+class SceneCoordinatorMock: SceneCoordinator {
+    var sceneDissmissed = false
+
     func asRoot(_ factory: SceneFactory) {
+    }
+    
+    func dimiss(animated: Bool = true) {
+        sceneDissmissed = true
     }
 }
 
