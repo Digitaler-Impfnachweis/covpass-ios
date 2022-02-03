@@ -99,6 +99,10 @@
 		09C1DD922759727500BC0B36 /* CertificatesOverviewViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C1DD912759727500BC0B36 /* CertificatesOverviewViewModelTests.swift */; };
 		09CE6C9B27AB40430048BDA4 /* HowToScanViewControllerSnapShotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09CE6C9A27AB40430048BDA4 /* HowToScanViewControllerSnapShotTests.swift */; };
 		09CE6C9D27AB40700048BDA4 /* HowToScanRouterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09CE6C9C27AB40700048BDA4 /* HowToScanRouterMock.swift */; };
+		09CE6C9227AB31920048BDA4 /* CountrySelectionViewControllerSnapShotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09CE6C9127AB31920048BDA4 /* CountrySelectionViewControllerSnapShotTests.swift */; };
+		09CE6C9427AB31D50048BDA4 /* CountrySelectionRouterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09CE6C9327AB31D50048BDA4 /* CountrySelectionRouterMock.swift */; };
+		09CE6C9727AB354D0048BDA4 /* CountrySelectionViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09CE6C9627AB354D0048BDA4 /* CountrySelectionViewModelTests.swift */; };
+		09CE6C9927AB35D00048BDA4 /* CountrySelectionMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09CE6C9827AB35D00048BDA4 /* CountrySelectionMock.swift */; };
 		09D6E818276CA66200134FBA /* ScanCountWarningViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D6E817276CA66200134FBA /* ScanCountWarningViewModelProtocol.swift */; };
 		09D6E81A276CC96600134FBA /* ScanCountRouterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D6E819276CC96600134FBA /* ScanCountRouterProtocol.swift */; };
 		09D6E81C276CE56700134FBA /* ValidationServiceRoutableProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D6E81B276CE56700134FBA /* ValidationServiceRoutableProtocol.swift */; };
@@ -409,6 +413,10 @@
 		09C1DD912759727500BC0B36 /* CertificatesOverviewViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificatesOverviewViewModelTests.swift; sourceTree = "<group>"; };
 		09CE6C9A27AB40430048BDA4 /* HowToScanViewControllerSnapShotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToScanViewControllerSnapShotTests.swift; sourceTree = "<group>"; };
 		09CE6C9C27AB40700048BDA4 /* HowToScanRouterMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToScanRouterMock.swift; sourceTree = "<group>"; };
+		09CE6C9127AB31920048BDA4 /* CountrySelectionViewControllerSnapShotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountrySelectionViewControllerSnapShotTests.swift; sourceTree = "<group>"; };
+		09CE6C9327AB31D50048BDA4 /* CountrySelectionRouterMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountrySelectionRouterMock.swift; sourceTree = "<group>"; };
+		09CE6C9627AB354D0048BDA4 /* CountrySelectionViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountrySelectionViewModelTests.swift; sourceTree = "<group>"; };
+		09CE6C9827AB35D00048BDA4 /* CountrySelectionMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountrySelectionMock.swift; sourceTree = "<group>"; };
 		09D6E817276CA66200134FBA /* ScanCountWarningViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanCountWarningViewModelProtocol.swift; sourceTree = "<group>"; };
 		09D6E819276CC96600134FBA /* ScanCountRouterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanCountRouterProtocol.swift; sourceTree = "<group>"; };
 		09D6E81B276CE56700134FBA /* ValidationServiceRoutableProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationServiceRoutableProtocol.swift; sourceTree = "<group>"; };
@@ -747,6 +755,7 @@
 				0993B1682762090A00217884 /* ValidationFailedSnapShotTests.swift */,
 				09E85432279992450051AEEE /* AppInformationViewControllerSnapShotTests.swift */,
 				09CE6C9A27AB40430048BDA4 /* HowToScanViewControllerSnapShotTests.swift */,
+				09CE6C9127AB31920048BDA4 /* CountrySelectionViewControllerSnapShotTests.swift */,
 			);
 			path = SnapShotTests;
 			sourceTree = "<group>";
@@ -829,6 +838,14 @@
 				09AC1DFF2757B6C9008356CD /* ValidationResultViewModel.swift */,
 			);
 			path = "Validation Result";
+			sourceTree = "<group>";
+		};
+		09CE6C9527AB35380048BDA4 /* CountrySelection */ = {
+			isa = PBXGroup;
+			children = (
+				09CE6C9627AB354D0048BDA4 /* CountrySelectionViewModelTests.swift */,
+			);
+			path = CountrySelection;
 			sourceTree = "<group>";
 		};
 		09D6E816276CA65300134FBA /* Protocols */ = {
@@ -1114,6 +1131,8 @@
 				95FE37B5273EF4FC000899A3 /* VAASRepositoryMock.swift */,
 				09E85434279992DC0051AEEE /* AppInformationRouterMock.swift */,
 				09CE6C9C27AB40700048BDA4 /* HowToScanRouterMock.swift */,
+				09CE6C9327AB31D50048BDA4 /* CountrySelectionRouterMock.swift */,
+				09CE6C9827AB35D00048BDA4 /* CountrySelectionMock.swift */,
 			);
 			path = Mock;
 			sourceTree = "<group>";
@@ -1139,6 +1158,7 @@
 		216D2025264EF95400370F16 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				09CE6C9527AB35380048BDA4 /* CountrySelection */,
 				386FDCF826ED1F7C00AC7639 /* BoosterNotification */,
 				216D1F59264EF52400370F16 /* Certificate */,
 				E70C3EA127A9877B001F07FF /* Certificates Overview */,
@@ -2101,6 +2121,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				09CE6C9727AB354D0048BDA4 /* CountrySelectionViewModelTests.swift in Sources */,
 				E70C3E9D27A955CC001F07FF /* RuleCheckRouterMock.swift in Sources */,
 				095D3F9A27AABA9D00DC398F /* CheckSituationViewControllerSnapShotTests.swift in Sources */,
 				09CE6C9D27AB40700048BDA4 /* HowToScanRouterMock.swift in Sources */,
@@ -2114,6 +2135,7 @@
 				09590D302715E67F004410D7 /* MockCardViewModel.swift in Sources */,
 				0994A4D6273431A500B21FCF /* WebTokenMockUtil.swift in Sources */,
 				0994A4D12734319800B21FCF /* TrustedListDetailsViewSnapShotTests.swift in Sources */,
+				09CE6C9927AB35D00048BDA4 /* CountrySelectionMock.swift in Sources */,
 				0994A4D5273431A500B21FCF /* TestUtil.swift in Sources */,
 				0994A4D7273431A500B21FCF /* BoosterLogicMock.swift in Sources */,
 				096873F127430A4200DB5837 /* ChooseCertificateSnapShotTests.swift in Sources */,
@@ -2137,6 +2159,8 @@
 				0994A4D02734319800B21FCF /* CertificateOverviewSnapShotTests.swift in Sources */,
 				09590D392715E67F004410D7 /* MockCertificateViewModelDelegate.swift in Sources */,
 				9514A5F22732A40E00987109 /* CertificateDetailViewControllerSnapshotTests.swift in Sources */,
+				09CE6C9427AB31D50048BDA4 /* CountrySelectionRouterMock.swift in Sources */,
+				09CE6C9227AB31920048BDA4 /* CountrySelectionViewControllerSnapShotTests.swift in Sources */,
 				09590D322715E67F004410D7 /* VaccinationRepositoryMock.swift in Sources */,
 				09590D382715E67F004410D7 /* MockExtendedCBORWebToken.swift in Sources */,
 				09E85435279992DC0051AEEE /* AppInformationRouterMock.swift in Sources */,

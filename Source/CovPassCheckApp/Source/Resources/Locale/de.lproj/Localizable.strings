@@ -308,6 +308,24 @@
 
 "result_2G_empty_subtitle" = "Noch nicht geprüft";
 
+"result_2G_2nd_recovery_valid" = "Genesung";
+
+"result_2G_2nd_basic_valid" = "Grundimmunisierung";
+
+"result_2G_2nd_booster_valid" = "Auffrischungsimpfung";
+
+"result_2G_2nd_rapidtest_valid" = "Negativer Schnelltest";
+
+"result_2G_2nd_pcrtest_valid" = "Negativer PCR-Test";
+
+"result_2G_2nd_empty" = "Kann für 2G+ notwendig sein";
+
+"result_2G_2nd_timestamp_hours" = "Vor %d Stunden";
+
+"result_2G_2nd_timestamp_days" = "Vor %d Tagen";
+
+"result_2G_2nd_timestamp_months" = "Vor %d Monaten";
+
 "accessibility_warning_2G_names_announce_open" = "Fehlermeldung \"Abweichende Daten\" wurde geöffnet";
 
 "accessibility_warning_2G_names_announce_close" = "Fehlermeldung \"Abweichende Daten\" wurde geschlossen";

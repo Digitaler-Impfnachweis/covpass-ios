@@ -308,6 +308,24 @@
 
 "result_2G_empty_subtitle" = "Not checked yet";
 
+"result_2G_2nd_recovery_valid" = "Recovery";
+
+"result_2G_2nd_basic_valid" = "Basic immunisation";
+
+"result_2G_2nd_booster_valid" = "Booster vaccination";
+
+"result_2G_2nd_rapidtest_valid" = "Negative rapid test";
+
+"result_2G_2nd_pcrtest_valid" = "Negative PCR test";
+
+"result_2G_2nd_empty" = "May be required for 2G+";
+
+"result_2G_2nd_timestamp_hours" = "%d hours ago";
+
+"result_2G_2nd_timestamp_days" = "%d days ago";
+
+"result_2G_2nd_timestamp_months" = "%d months ago";
+
 "accessibility_warning_2G_names_announce_open" = "Error message \"Deviating data\" was opened";
 
 "accessibility_warning_2G_names_announce_close" = "Error message \"Deviating data\" was closed";
