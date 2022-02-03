@@ -10,6 +10,7 @@
 @testable import CovPassUI
 import XCTest
 import PromiseKit
+import Scanner
 
 class GProofViewModelTests: XCTestCase {
     
@@ -594,6 +595,24 @@ class GProofViewModelTests: XCTestCase {
         
         // THEN
         XCTAssertTrue((sut.router as! GProofMockRouter).showDifferentPersonShown)
+    }
+    
+    func testNotDCCScanned() {
+        // GIVEN
+        vaccinationRepoMock.checkedCert = CBORWebToken.mockTestCertificate
+        certLogicMock.validateResult = [.init(rule: nil, result: .passed, validationErrors: nil)]
+        sut.startover()
+        RunLoop.current.run(for: 0.1)
+        vaccinationRepoMock.checkedCert = nil
+        vaccinationRepoMock.checkedCertError = ScanError.badOutput
+        certLogicMock.validateResult = [.init(rule: nil, result: .passed, validationErrors: nil)]
+
+        // WHEN
+        sut.scan2GProof()
+        RunLoop.current.run(for: 0.1)
+
+        // THEN
+        XCTAssertTrue((sut.router as! GProofMockRouter).certificateShown)
     }
     
     func testShowResultGProof() {

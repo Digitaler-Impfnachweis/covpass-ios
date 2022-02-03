@@ -81,10 +81,11 @@ public class VaccinationRepositoryMock: VaccinationRepositoryProtocol {
     }
 
     var checkedCert: CBORWebToken? = nil
+    var checkedCertError: Error = ApplicationError.unknownError
 
     public func checkCertificate(_: String) -> Promise<CBORWebToken> {
         return Promise { seal in
-            checkedCert != nil ? seal.fulfill(checkedCert!) : seal.reject(ApplicationError.unknownError)
+            checkedCert != nil ? seal.fulfill(checkedCert!) : seal.reject(checkedCertError)
         }
     }
 }

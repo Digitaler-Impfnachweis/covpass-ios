@@ -10,6 +10,7 @@ import UIKit
 import CovPassCommon
 import CovPassUI
 import PromiseKit
+import Scanner
 
 private enum Constants {
     enum Keys {
@@ -214,6 +215,11 @@ class GProofViewModel: GProofViewModelProtocol {
         .catch { error in
             if (error as? QRCodeError) == .qrCodeExists {
                 self.router.showError(error: error)
+            } else if (error as? ScanError) == .badOutput {
+                let showCert = self.lastTriedCertType == .test ? self.testResultViewModel?.certificate : self.gProofResultViewModel?.certificate
+                self.router.showCertificate(showCert,
+                                            _2GContext: true,
+                                            userDefaults: self.userDefaults)
             } else {
                 _ = self.setResultViewModel(newToken: nil)
                 self.delegate?.viewModelDidUpdate()
