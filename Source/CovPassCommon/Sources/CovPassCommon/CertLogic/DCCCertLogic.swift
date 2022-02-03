@@ -57,15 +57,6 @@ public struct ValueSet: Codable {
     var data: Data
 }
 
-public protocol DCCCertLogicProtocol {
-    var countries: [Country] { get }
-
-    func lastUpdatedDCCRules() -> Date?
-    func validate(type: DCCCertLogic.LogicType, countryCode: String, validationClock: Date, certificate: CBORWebToken) throws -> [ValidationResult]
-    func updateRulesIfNeeded() -> Promise<Void>
-    func updateRules() -> Promise<Void>
-}
-
 public struct DCCCertLogic: DCCCertLogicProtocol {
     private let initialDCCRulesURL: URL
 
@@ -218,23 +209,29 @@ public struct DCCCertLogic: DCCCertLogicProtocol {
     }
 
     // MARK: - Updating local rules and data
-
+    
+    public func rulesShouldBeUpdated() -> Bool {
+        if let lastUpdated = lastUpdatedDCCRules(),
+           let date = Calendar.current.date(byAdding: .day, value: 1, to: lastUpdated),
+           Date() < date
+        {
+            return false
+        }
+        return true
+    }
+    
+    public func rulesShouldBeUpdated() -> Promise<Bool> {
+        Promise { seal in
+            seal.fulfill(rulesShouldBeUpdated())
+        }
+    }
+    
     public func updateRulesIfNeeded() -> Promise<Void> {
         return firstly {
-            Promise { seal in
-                if let lastUpdated = try userDefaults.fetch(UserDefaults.keyLastUpdatedDCCRules) as? Date,
-                   let date = Calendar.current.date(byAdding: .day, value: 1, to: lastUpdated),
-                   Date() < date
-                {
-                    // Only update once a day
-                    seal.reject(PromiseCancelledError())
-                    return
-                }
-                seal.fulfill_()
-            }
+            return rulesShouldBeUpdated()
         }
-        .then(on: .global()) {
-            updateRules()
+        .then(on: .global()) { rulesShouldBeUpdated in
+            rulesShouldBeUpdated ? updateRules() : .value
         }
     }
 
@@ -272,7 +269,7 @@ public struct DCCCertLogic: DCCCertLogicProtocol {
         }
     }
 
-    private func updateBoosterRules() -> Promise<Void> {
+    public func updateBoosterRules() -> Promise<Void> {
         return firstly {
             service.loadBoosterRules()
         }

@@ -30,20 +30,6 @@ public protocol ResultViewModelDelegate: AnyObject {
     func viewModelDidChange(_ newViewModel: ValidationResultViewModel)
 }
 
-public protocol ValidationViewModel {
-    var router: ValidationResultRouterProtocol { get set }
-    var repository: VaccinationRepositoryProtocol { get set }
-    var certificate: CBORWebToken? { get set }
-    var delegate: ResultViewModelDelegate? { get set }
-    var toolbarState: CustomToolbarState { get }
-    var icon: UIImage? { get }
-    var resultTitle: String { get }
-    var resultBody: String { get }
-    var paragraphs: [Paragraph] { get }
-    var info: String? { get }
-    func scanNextCertifcate()
-}
-
 private enum Constants {
     static let confirmButtonLabel = "validation_check_popup_valid_vaccination_button_title".localized
     
@@ -91,6 +77,8 @@ public class ValidationResultViewController: UIViewController {
     // MARK: - Private
     
     private func updateViews() {
+        toolbarView.primaryButton.isHidden = viewModel.buttonHidden
+        
         stackView.setCustomSpacing(.space_24, after: imageContainerView)
         stackView.setCustomSpacing(.space_24, after: resultView)
         

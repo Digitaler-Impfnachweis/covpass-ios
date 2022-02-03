@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -21,20 +21,20 @@
         <view contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iN0-l3-epB">
             <rect key="frame" x="0.0" y="0.0" width="414" height="254"/>
             <subviews>
-                <stackView opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="WCh-CY-QiR">
+                <stackView opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="WCh-CY-QiR">
                     <rect key="frame" x="20" y="52" width="374" height="194"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="ks6-On-fMn" userLabel="Text Stack View">
-                            <rect key="frame" x="3" y="0.0" width="368" height="67"/>
+                            <rect key="frame" x="0.0" y="0.0" width="374" height="63.5"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Impfschutz prüfen" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VW2-PA-GY7">
-                                    <rect key="frame" x="0.0" y="0.0" width="218.5" height="33.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="195" height="30"/>
                                     <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Scannen Sie jetzt das Prüfzertifikat. Sie sehen sofort, ob die Person geimpft ist." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EKc-Hh-BeX">
-                                    <rect key="frame" x="0.0" y="33.5" width="368" height="33.5"/>
+                                    <rect key="frame" x="0.0" y="30" width="367" height="33.5"/>
                                     <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="14"/>
                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                     <nil key="highlightedColor"/>
@@ -42,13 +42,13 @@
                             </subviews>
                         </stackView>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="5Td-zH-uHB" userLabel="MainAction Container View">
-                            <rect key="frame" x="0.0" y="67" width="374" height="127"/>
+                            <rect key="frame" x="0.0" y="63.5" width="374" height="130.5"/>
                             <subviews>
                                 <view contentMode="scaleToFill" verticalHuggingPriority="1" placeholderIntrinsicWidth="374" placeholderIntrinsicHeight="79" translatesAutoresizingMaskIntoConstraints="NO" id="jUQ-kI-VEE" userLabel="Flexible View">
-                                    <rect key="frame" x="0.0" y="0.0" width="374" height="79"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="374" height="80.5"/>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pP8-Zv-hAB" customClass="MainButton" customModule="CovPassUI">
-                                    <rect key="frame" x="0.0" y="79" width="374" height="48"/>
+                                    <rect key="frame" x="0.0" y="80.5" width="374" height="50"/>
                                     <color key="backgroundColor" systemColor="systemBlueColor"/>
                                 </view>
                             </subviews>

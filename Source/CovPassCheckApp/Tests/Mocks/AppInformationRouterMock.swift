@@ -1,0 +1,17 @@
+//
+//  AppInformationRouterMock.swift
+//
+//  © Copyright IBM Deutschland GmbH 2021
+//  SPDX-License-Identifier: Apache-2.0
+//
+
+import CovPassUI
+
+class AppInformationRouterMock: AppInformationRouterProtocol {
+    
+    var sceneCoordinator: SceneCoordinator = SceneCoordinatorMock()
+
+    func showScene(_ scene: SceneFactory) {
+        
+    }
+}

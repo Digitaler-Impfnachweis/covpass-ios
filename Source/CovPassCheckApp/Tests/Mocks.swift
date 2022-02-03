@@ -37,6 +37,24 @@ class DCCCertLogicMock: DCCCertLogicProtocol {
     var countries: [Country] {
         [Country("DE")]
     }
+    
+    func updateBoosterRules() -> Promise<Void> {
+        .value
+    }
+
+    public func rulesShouldBeUpdated() -> Promise<Bool> {
+        .value(rulesShouldBeUpdated())
+    }
+
+    public func rulesShouldBeUpdated() -> Bool {
+        if let lastUpdated = self.lastUpdatedDCCRules(),
+           let date = Calendar.current.date(byAdding: .day, value: 1, to: lastUpdated),
+           Date() < date
+        {
+            return false
+        }
+        return true
+    }
 
     func lastUpdatedDCCRules() -> Date? {
         lastUpdateDccrRules
@@ -75,7 +93,23 @@ public class VaccinationRepositoryMock: VaccinationRepositoryProtocol {
     public func matchedCertificates(for _: CertificateList) -> [CertificatePair] {
         []
     }
-
+    
+    public func trustListShouldBeUpdated() -> Promise<Bool> {
+        .value(trustListShouldBeUpdated())
+    }
+    
+    var currentDate = Date()
+    
+    public func trustListShouldBeUpdated() -> Bool {
+        if let lastUpdated = self.getLastUpdatedTrustList(),
+           let date = Calendar.current.date(byAdding: .day, value: 1, to: lastUpdated),
+           currentDate < date
+        {
+            return false
+        }
+        return true
+    }
+    
     public func getLastUpdatedTrustList() -> Date? {
         lastUpdateTrustList
     }
@@ -119,9 +153,11 @@ public class VaccinationRepositoryMock: VaccinationRepositoryProtocol {
         }
     }
 
+    var checkedCert: CBORWebToken? = nil
+
     public func checkCertificate(_: String) -> Promise<CBORWebToken> {
         return Promise { seal in
-            seal.reject(ApplicationError.unknownError)
+            checkedCert != nil ? seal.fulfill(checkedCert!) : seal.reject(ApplicationError.unknownError)
         }
     }
 }
@@ -169,4 +205,61 @@ class ViewModelDelegateMock: ViewModelDelegate {
     func viewModelUpdateDidFailWithError(_ error: Error) {
         didFail?(error)
     }
+}
+
+class GProofMockRouter: GProofRouterProtocol {
+
+    var errorShown = false
+    var certificateShown = false
+    var showDifferentPersonShown = false
+    var sceneCoordinator: SceneCoordinator = SceneCoordinatorMock()
+
+    func scanQRCode() -> Promise<ScanResult> {
+        .value(.success(""))
+    }
+    
+    func showCertificate(_ certificate: CBORWebToken?, _2GContext: Bool) {
+        certificateShown = true
+    }
+    
+    func showError(error: Error) {
+        errorShown = true
+    }
+    
+    func showDifferentPerson(gProofToken: CBORWebToken, testProofToken: CBORWebToken) -> Promise<GProofResult> {
+        showDifferentPersonShown = true
+        return .value(.cancel)
+    }
+    
+    func showStart() {
+        
+    }
+}
+
+class ValidatorMockRouter: ValidatorOverviewRouterProtocol {
+    
+    
+    func showGproof(initialToken: CBORWebToken, repository: VaccinationRepositoryProtocol, certLogic: DCCCertLogicProtocol) {
+        
+    }
+    
+    func scanQRCode() -> Promise<ScanResult> {
+        .value(.success(""))
+    }
+    
+    func showCertificate(_ certificate: CBORWebToken?, _2GContext: Bool) {
+
+    }
+    
+    func showError(error: Error, _2GContext: Bool) {
+        
+    }
+    
+    func showAppInformation() {
+        
+    }
+    
+    var sceneCoordinator: SceneCoordinator = SceneCoordinatorMock()
+    
+    
 }

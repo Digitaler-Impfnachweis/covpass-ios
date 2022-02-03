@@ -9,6 +9,15 @@
 "validator_app_name" = "CovPass Check";
 
 
+/********** common **********/
+
+"ok" = "OK";
+
+"close" = "Schließen";
+
+"cancel" = "Abbrechen";
+
+
 /********** onboarding **********/
 
 "start_onboarding_title" = "Willkommen in der CovPassCheck-App";
@@ -79,13 +88,19 @@
 
 "validation_start_screen_title" = "Übersicht";
 
-"validation_start_screen_scan_title" = "Zertifikat prüfen";
+"validation_start_screen_scan_title" = "3G prüfen";
+
+"validation_start_screen_scan_title_2G" = "2G+ prüfen";
+
+"validation_start_screen_scan_message" = "Scannen Sie einen G-Nachweis nach den 3G-Regeln. Welche Regelung gilt, ist abhängig vom Bundesland in dem Sie sich befinden.";
+
+"validation_start_screen_scan_message_2G" = "Scannen Sie nacheinander die notwendigen Nachweise für 2G+.";
+
+"validation_start_screen_scan_message_2G_toggle" = "Bei Auffrischungsimpfungen ist kein Test nötig";
 
 "validation_start_screen_scan_sync_message_title" = "Datum und Uhrzeit prüfen";
 
 "validation_start_screen_scan_sync_message_text" = "Bitte korrigieren Sie das Datum und die Uhrzeit Ihres Smartphones. \n\n Soll: %@";
-
-"validation_start_screen_scan_message" = "Scannen Sie jetzt das digitale COVID-Zertifikat der EU. Sie sehen sofort, ob die geprüfte Person ein gültiges COVID-Zertifikat besitzt.";
 
 "accessibility_scan_result_announce" = "Überprüfungsergebnis wird angezeigt";
 
@@ -220,7 +235,7 @@
 
 "validation_check_popup_valid_pcr_test_title" = "Negativer PCR-Test von vor %d Stunden";
 
-"validation_check_popup_valid_pcr_test_message" = "Gleichen Sie jetzt folgende Daten mit einem Ausweisdokument der geprüften Person ab.";
+"validation_check_popup_valid_pcr_test_message" = "Gleichen Sie folgende Daten mit einem Ausweisdokument der geprüften Person ab:";
 
 "validation_check_popup_valid_pcr_test_date_of_birth" = "Geboren am %@";
 
@@ -229,6 +244,73 @@
 "validation_check_popup_valid_pcr_test_button_title" = "Weiteres Zertifikat scannen";
 
 "accessibility_validation_check_popup_valid_pcr_test_label_close" = "Schließen";
+
+
+/********** 2G+ check results **********/
+
+"accessibility_scan_result_announce_2G" = "Überprüfungsergebnis für 2G+ wird angezeigt";
+
+"accessibility_scan_result_closing_announce_2G" = "Die Ansicht Überprüfungsergebnis für 2G+ wurde geschlossen";
+
+"result_2G_title" = "Prüfung 2G+";
+
+"result_2G_close" = "Schließen";
+
+"result_2G_footnote" = "* Grundimmunisierung, Auffrischungsimpfung oder Genesung";
+
+"result_2G_button_scan_test" = "Testzertifikat scannen";
+
+"result_2G_button_scan_gproof" = "2G-Nachweis scannen";
+
+"result_2G_button_retry" = "Nochmal versuchen";
+
+"result_2G_button_startover" = "Neue Prüfung";
+
+"result_2G_gproof_empty" = "2G-Nachweis*";
+
+"result_2G_gproof_valid" = "2G-Nachweis gültig*";
+
+"result_2G_booster_valid" = "Auffrischungsimpfung gültig";
+
+"result_2G_gproof_invalid" = "2G-Nachweis ungültig*";
+
+"result_2G_test_empty" = "Testzertifikat";
+
+"result_2G_test_invalid" = "Testzertifikat ungültig";
+
+"result_2G_invalid_subtitle" = "Details anzeigen";
+
+"result_2G_empty_subtitle" = "Noch nicht geprüft";
+
+"accessibility_warning_2G_names_announce_open" = "Fehlermeldung \"Abweichende Daten\" wurde geöffnet";
+
+"accessibility_warning_2G_names_announce_close" = "Fehlermeldung \"Abweichende Daten\" wurde geschlossen";
+
+"warning_2G_names_title" = "Abweichende Daten";
+
+"warning_2G_names_subtitle" = "Die persönlichen Daten der beiden gescannten Nachweise stimmen nicht überein:";
+
+"warning_2G_names_label_1stcert" = "2G-Nachweis";
+
+"warning_2G_names_label_2ndcert" = "Testzertifikat";
+
+"warning_2G_names_ignore_title" = "Kein Fehler?";
+
+"warning_2G_names_ignore_copy" = "Sollte es sich Ihrer Ansicht zum Beispiel um einen Tippfehler handeln, können Sie diese Abweichung ignorieren und die Prüfung fortsetzen.";
+
+"warning_2G_names_ignore_link" = "Abweichung ignorieren";
+
+"error_2G_scanned_twice_title" = "Zertifikat bereits gescannt";
+
+"error_2G_scanned_twice_copy" = "Sie haben dieses Zertifikat gerade gescannt. Für 2G+ sind meist jeweils ein Test- und ein Impf- oder Genesenenzertifikat zu prüfen.";
+
+"error_2G_scanned_twice_button" = "OK";
+
+"error_2G_unexpected_type_title" = "Falscher Zertifikatstyp";
+
+"error_2G_unexpected_type_copy" = "Das gescannte Zertifikat entspricht nicht dem erwarteten Zertifikatstyp. Für 2G+ müssen Sie einen 2G-Nachweis (Genesenen- oder Impfzertifikat) und ein Testzertifikat scannen.";
+
+"error_2G_unexpected_type_button" = "OK";
 
 
 /********** app information **********/
@@ -274,6 +356,8 @@
 "app_information_title_company_easy_language" = "Leichte Sprache";
 
 "app_information_title_open_source" = "Open-Source-Lizenzen";
+
+"app_information_title_accessibility_statement" = "Barrierefreiheitserklärung";
 
 "accessibility_app_information_title_open_source_announce" = "Die Ansicht \"Open-Source-Lizenzen\" wurde geöffnet";
 

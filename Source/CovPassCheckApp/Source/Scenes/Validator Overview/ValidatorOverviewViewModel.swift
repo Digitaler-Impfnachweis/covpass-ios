@@ -15,8 +15,14 @@ import Kronos
 
 private enum Constants {
     enum Keys {
-        static let syncTitle = "validation_start_screen_scan_sync_message_title"
-        static let syncMessage = "validation_start_screen_scan_sync_message_text"
+        static let syncTitle = "validation_start_screen_scan_sync_message_title".localized
+        static let syncMessage = "validation_start_screen_scan_sync_message_text".localized
+        enum ScanType {
+            static let validation_start_screen_scan_title = "validation_start_screen_scan_title".localized
+            static let validation_start_screen_scan_title_2G = "validation_start_screen_scan_title_2G".localized
+            static let validation_start_screen_scan_message = "validation_start_screen_scan_message".localized
+            static let validation_start_screen_scan_message_2G = "validation_start_screen_scan_message_2G".localized
+        }
     }
     enum Config {
         static let twoHoursAsSeconds = 7200.0
@@ -30,26 +36,14 @@ class ValidatorOverviewViewModel {
     
     private let repository: VaccinationRepositoryProtocol
     private let router: ValidatorOverviewRouterProtocol
-    private let certLogic: DCCCertLogic
+    private let certLogic: DCCCertLogicProtocol
     
     var delegate: ViewModelDelegate?
     
     var title: String { "validation_start_screen_title".localized }
     
     var offlineAvailable: Bool {
-        if let lastUpdated = repository.getLastUpdatedTrustList(),
-           let date = Calendar.current.date(byAdding: .day, value: 1, to: lastUpdated),
-           Date() < date
-        {
-            return true
-        }
-        if let lastUpdated = certLogic.lastUpdatedDCCRules(),
-           let date = Calendar.current.date(byAdding: .day, value: 1, to: lastUpdated),
-           Date() < date
-        {
-            return true
-        }
-        return false
+        !repository.trustListShouldBeUpdated() || !certLogic.rulesShouldBeUpdated()
     }
     
     var offlineIcon: UIImage {
@@ -71,15 +65,15 @@ class ValidatorOverviewViewModel {
     }
     
     var timeHintTitle: String {
-        Constants.Keys.syncTitle.localized
+        Constants.Keys.syncTitle
     }
     
     var timeHintSubTitle: String {
-        return String(format: Constants.Keys.syncMessage.localized, ntpDateFormatted)
+        String(format: Constants.Keys.syncMessage, ntpDateFormatted)
     }
     
     var ntpDateFormatted: String {
-        return DateUtils.displayDateTimeFormatter.string(from: ntpDate)
+        DateUtils.displayDateTimeFormatter.string(from: ntpDate)
     }
     
     var timeHintIcon: UIImage {
@@ -102,11 +96,27 @@ class ValidatorOverviewViewModel {
         }
     }
     
+    var segment3GTitle: String {
+        Constants.Keys.ScanType.validation_start_screen_scan_title
+    }
+    
+    var segment3GMessage: String {
+        Constants.Keys.ScanType.validation_start_screen_scan_message
+    }
+    
+    var segment2GTitle: String {
+        Constants.Keys.ScanType.validation_start_screen_scan_title_2G
+    }
+    
+    var segment2GMessage: String {
+        Constants.Keys.ScanType.validation_start_screen_scan_message_2G
+    }
+    
     // MARK: - Lifecycle
     
     init(router: ValidatorOverviewRouterProtocol,
          repository: VaccinationRepositoryProtocol,
-         certLogic: DCCCertLogic,
+         certLogic: DCCCertLogicProtocol,
          schedulerIntervall: TimeInterval = Constants.Config.schedulerIntervall) {
         self.router = router
         self.repository = repository
@@ -147,7 +157,7 @@ class ValidatorOverviewViewModel {
             .cauterize()
     }
     
-    func startQRCodeValidation() {
+    func startQRCodeValidation(for scanType: ScanType) {
         firstly {
             router.scanQRCode()
         }
@@ -158,10 +168,12 @@ class ValidatorOverviewViewModel {
             self.repository.checkCertificate($0)
         }
         .done {
-            self.router.showCertificate($0)
+            scanType == ._3G ? self.router.showCertificate($0, _2GContext: false) : self.router.showGproof(initialToken: $0,
+                                                                                                           repository: self.repository,
+                                                                                                           certLogic: self.certLogic)
         }
         .catch { error in
-            self.router.showError(error: error)
+            self.router.showError(error: error, _2GContext: scanType == ._2G)
         }
     }
     

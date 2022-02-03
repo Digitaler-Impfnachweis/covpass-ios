@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -32,40 +32,38 @@
                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="l0s-up-bK1"/>
                     </constraints>
                 </view>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qf6-Rq-Unr">
-                    <rect key="frame" x="0.0" y="124" width="414" height="670"/>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qf6-Rq-Unr">
+                    <rect key="frame" x="0.0" y="124" width="414" height="738"/>
                     <subviews>
-                        <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="tNn-Ng-ZRx">
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="tNn-Ng-ZRx">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="546"/>
                             <subviews>
                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="250" translatesAutoresizingMaskIntoConstraints="NO" id="AQK-qG-0AQ">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="250"/>
                                 </imageView>
-                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gbc-XM-dNV" customClass="HintView" customModule="CovPassUI">
+                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="gbc-XM-dNV" customClass="HintView" customModule="CovPassUI">
                                     <rect key="frame" x="0.0" y="250" width="414" height="128"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 </view>
-                                <view contentMode="scaleToFill" ambiguous="YES" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="czg-wL-cb7" userLabel="Description Text" customClass="ParagraphView" customModule="CovPassUI">
+                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="czg-wL-cb7" userLabel="Description Text" customClass="ParagraphView" customModule="CovPassUI">
                                     <rect key="frame" x="0.0" y="378" width="414" height="128"/>
                                 </view>
-                                <view contentMode="scaleToFill" ambiguous="YES" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="40" translatesAutoresizingMaskIntoConstraints="NO" id="kiK-Qt-Oxb" userLabel="Action View" customClass="ListItemView" customModule="CovPassUI">
+                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="40" translatesAutoresizingMaskIntoConstraints="NO" id="kiK-Qt-Oxb" userLabel="Action View" customClass="ListItemView" customModule="CovPassUI">
                                     <rect key="frame" x="0.0" y="506" width="414" height="40"/>
                                 </view>
                             </subviews>
                         </stackView>
                     </subviews>
                     <constraints>
-                        <constraint firstItem="tNn-Ng-ZRx" firstAttribute="leading" secondItem="w70-w7-GLT" secondAttribute="leading" id="0k5-pX-j4k"/>
-                        <constraint firstItem="w70-w7-GLT" firstAttribute="top" secondItem="tNn-Ng-ZRx" secondAttribute="top" id="L47-4t-ONL"/>
-                        <constraint firstItem="tNn-Ng-ZRx" firstAttribute="bottom" secondItem="w70-w7-GLT" secondAttribute="bottom" id="WsD-lP-Lmd"/>
-                        <constraint firstItem="tNn-Ng-ZRx" firstAttribute="trailing" secondItem="w70-w7-GLT" secondAttribute="trailing" id="Yce-mG-e1v"/>
-                        <constraint firstItem="tNn-Ng-ZRx" firstAttribute="width" secondItem="kSY-DC-uwf" secondAttribute="width" id="cp1-sP-29c"/>
+                        <constraint firstItem="tNn-Ng-ZRx" firstAttribute="leading" secondItem="Qf6-Rq-Unr" secondAttribute="leading" id="0k5-pX-j4k"/>
+                        <constraint firstAttribute="top" secondItem="tNn-Ng-ZRx" secondAttribute="top" id="L47-4t-ONL"/>
+                        <constraint firstItem="tNn-Ng-ZRx" firstAttribute="bottom" secondItem="Qf6-Rq-Unr" secondAttribute="bottom" constant="-96" id="WsD-lP-Lmd"/>
+                        <constraint firstItem="tNn-Ng-ZRx" firstAttribute="trailing" secondItem="Qf6-Rq-Unr" secondAttribute="trailing" id="Yce-mG-e1v"/>
+                        <constraint firstItem="tNn-Ng-ZRx" firstAttribute="width" secondItem="Qf6-Rq-Unr" secondAttribute="width" id="cp1-sP-29c"/>
                     </constraints>
-                    <viewLayoutGuide key="contentLayoutGuide" id="w70-w7-GLT"/>
-                    <viewLayoutGuide key="frameLayoutGuide" id="kSY-DC-uwf"/>
                 </scrollView>
                 <view contentMode="scaleToFill" placeholderIntrinsicWidth="240" placeholderIntrinsicHeight="56" translatesAutoresizingMaskIntoConstraints="NO" id="Ym0-Wl-H3l" customClass="CustomToolbarView" customModule="CovPassUI">
-                    <rect key="frame" x="0.0" y="794" width="414" height="56"/>
+                    <rect key="frame" x="0.0" y="806" width="414" height="56"/>
                 </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="aye-B2-vjU"/>
@@ -78,9 +76,9 @@
                 <constraint firstItem="sKK-Se-ZAm" firstAttribute="leading" secondItem="aye-B2-vjU" secondAttribute="leading" id="aWy-O1-CG0"/>
                 <constraint firstItem="Qf6-Rq-Unr" firstAttribute="trailing" secondItem="aye-B2-vjU" secondAttribute="trailing" id="e75-0j-Tss"/>
                 <constraint firstItem="Ym0-Wl-H3l" firstAttribute="leading" secondItem="aye-B2-vjU" secondAttribute="leading" id="hVe-jH-RPM"/>
-                <constraint firstItem="Ym0-Wl-H3l" firstAttribute="top" secondItem="Qf6-Rq-Unr" secondAttribute="bottom" id="ool-zM-sk7"/>
+                <constraint firstItem="aye-B2-vjU" firstAttribute="bottom" secondItem="Qf6-Rq-Unr" secondAttribute="bottom" id="ke5-WF-hsa"/>
                 <constraint firstItem="sKK-Se-ZAm" firstAttribute="top" secondItem="aye-B2-vjU" secondAttribute="top" constant="20" id="xWv-Hq-W8v"/>
-                <constraint firstItem="aye-B2-vjU" firstAttribute="bottom" secondItem="Ym0-Wl-H3l" secondAttribute="bottom" constant="12" id="ygL-2E-Kkx"/>
+                <constraint firstItem="aye-B2-vjU" firstAttribute="bottom" secondItem="Ym0-Wl-H3l" secondAttribute="bottom" id="ygL-2E-Kkx"/>
             </constraints>
             <point key="canvasLocation" x="-1513" y="-52"/>
         </view>
@@ -90,6 +88,9 @@
             <size key="intrinsicContentSize" width="240" height="56"/>
         </designable>
         <designable name="czg-wL-cb7">
+            <size key="intrinsicContentSize" width="414" height="128"/>
+        </designable>
+        <designable name="gbc-XM-dNV">
             <size key="intrinsicContentSize" width="414" height="128"/>
         </designable>
         <designable name="kiK-Qt-Oxb">

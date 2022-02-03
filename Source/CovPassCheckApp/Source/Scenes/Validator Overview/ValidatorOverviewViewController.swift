@@ -7,6 +7,7 @@
 //
 
 import CovPassUI
+import CovPassCommon
 import Foundation
 import Scanner
 import UIKit
@@ -18,6 +19,7 @@ class ValidatorOverviewViewController: UIViewController {
     @IBOutlet var scanCard: ScanCardView!
     @IBOutlet var offlineCard: OfflineCardView!
     @IBOutlet var timeHintView: HintView!
+    @IBOutlet var scanTypeSegment: UISegmentedControl!
     
     // MARK: - Properties
 
@@ -39,6 +41,7 @@ class ValidatorOverviewViewController: UIViewController {
         viewModel.delegate = self
         setupHeaderView()
         setupCardView()
+        setupSegmentControl()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -65,13 +68,6 @@ class ValidatorOverviewViewController: UIViewController {
     }
 
     private func setupCardView() {
-        scanCard.titleLabel.attributedText = "validation_start_screen_scan_title".localized.styledAs(.header_1).colored(.backgroundSecondary)
-        scanCard.textLabel.attributedText = "validation_start_screen_scan_message".localized.styledAs(.body).colored(.backgroundSecondary)
-        scanCard.actionButton.title = "validation_start_screen_scan_action_button_title".localized
-        scanCard.actionButton.action = { [weak self] in
-            self?.viewModel.startQRCodeValidation()
-        }
-
         offlineCard.titleLabel.attributedText = "validation_start_screen_offline_modus_title".localized.styledAs(.header_2)
         offlineCard.textLable.attributedText = "validation_start_screen_offline_modus_message".localized.styledAs(.body)
         offlineCard.infoLabel.attributedText = viewModel.offlineTitle.styledAs(.body)
@@ -95,6 +91,37 @@ class ValidatorOverviewViewController: UIViewController {
         timeHintView.bodyLabel.attributedText = viewModel.timeHintSubTitle.styledAs(.body)
         timeHintView.setConstraintsToEdge()
     }
+    
+    private func setupSegmentControl() {
+        scanCard.titleLabel.attributedText = viewModel.segment3GTitle.styledAs(.header_1).colored(.backgroundSecondary)
+        scanCard.textLabel.attributedText = viewModel.segment3GMessage.styledAs(.body).colored(.backgroundSecondary)
+        scanCard.actionButton.title = "validation_start_screen_scan_action_button_title".localized
+        scanCard.actionButton.action = { [weak self] in
+            guard let self = self else {
+                return
+            }
+            guard let scanType = ScanType(rawValue: self.scanTypeSegment.selectedSegmentIndex) else {
+                return
+            }
+            self.viewModel.startQRCodeValidation(for: scanType)
+        }
+        
+        scanTypeSegment.setTitle(viewModel.segment3GTitle, forSegmentAt: ScanType._3G.rawValue)
+        scanTypeSegment.setTitle(viewModel.segment2GTitle, forSegmentAt: ScanType._2G.rawValue)
+    }
+    
+    @IBAction func segmentChanged(_ sender: UISegmentedControl) {
+        switch ScanType(rawValue:sender.selectedSegmentIndex) {
+        case ._3G:
+            scanCard.titleLabel.attributedText = viewModel.segment3GTitle.styledAs(.header_1).colored(.backgroundSecondary)
+            scanCard.textLabel.attributedText = viewModel.segment3GMessage.styledAs(.body).colored(.backgroundSecondary)
+        case ._2G:
+            scanCard.titleLabel.attributedText = viewModel.segment2GTitle.styledAs(.header_1).colored(.backgroundSecondary)
+            scanCard.textLabel.attributedText = viewModel.segment2GMessage.styledAs(.body).colored(.backgroundSecondary)
+        default: break
+        }
+    }
+    
 }
 
 extension ValidatorOverviewViewController: ViewModelDelegate {

@@ -77,6 +77,9 @@ class ErrorResultViewModel: ValidationResultViewModel {
         nil
     }
     
+    var buttonHidden: Bool = false
+    var _2GContext: Bool = false
+
     // MARK: - Lifecycle
     
     init(

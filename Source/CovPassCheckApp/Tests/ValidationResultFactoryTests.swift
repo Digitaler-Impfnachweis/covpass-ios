@@ -19,7 +19,8 @@ class ValidationResultFactoryTests: XCTestCase {
                                                           repository: VaccinationRepositoryMock(),
                                                           certificate: nil,
                                                           error: nil,
-                                                          certLogic: DCCCertLogicMock())
+                                                          certLogic: DCCCertLogicMock(),
+                                                          _2GContext: false)
         let expectedError = ValidationResultError.technical
         XCTAssertTrue(sut is ErrorResultViewModel, "Wrong Type: should be ErrorResultViewModel")
         let errorModel = sut as! ErrorResultViewModel
@@ -33,7 +34,8 @@ class ValidationResultFactoryTests: XCTestCase {
                                                           repository: VaccinationRepositoryMock(),
                                                           certificate: CBORWebToken.mockTestCertificate,
                                                           error: nil,
-                                                          certLogic: DCCCertLogicMock())
+                                                          certLogic: DCCCertLogicMock(),
+                                                          _2GContext: false)
         let expectedError = ValidationResultError.technical
 
         XCTAssertTrue(sut is ErrorResultViewModel, "Wrong Type: should be ErrorResultViewModel")
@@ -48,7 +50,8 @@ class ValidationResultFactoryTests: XCTestCase {
                                                           repository: VaccinationRepositoryMock(),
                                                           certificate: CBORWebToken.mockTestCertificate,
                                                           error: CertificateError.expiredCertifcate,
-                                                          certLogic: DCCCertLogicMock())
+                                                          certLogic: DCCCertLogicMock(),
+                                                          _2GContext: false)
         let expectedError = CertificateError.expiredCertifcate
 
         XCTAssertTrue(sut is ErrorResultViewModel, "Wrong Type: should be ErrorResultViewModel")
@@ -65,7 +68,8 @@ class ValidationResultFactoryTests: XCTestCase {
                                                           repository: VaccinationRepositoryMock(),
                                                           certificate: CBORWebToken.mockVaccinationCertificate,
                                                           error: nil,
-                                                          certLogic: certLogic)
+                                                          certLogic: certLogic,
+                                                          _2GContext: false)
         let expectedError = ValidationResultError.technical
 
         XCTAssertTrue(sut is ErrorResultViewModel, "Wrong Type: should be ErrorResultViewModel")
@@ -81,7 +85,8 @@ class ValidationResultFactoryTests: XCTestCase {
                                                           certificate: CBORWebToken.mockVaccinationCertificate,
                                                           error: nil,
                                                           type: .booster,
-                                                          certLogic: DCCCertLogicMock())
+                                                          certLogic: DCCCertLogicMock(),
+                                                          _2GContext: false)
         let expectedError = ValidationResultError.technical
 
         XCTAssertTrue(sut is ErrorResultViewModel, "Wrong Type: should be ErrorResultViewModel")
@@ -99,7 +104,8 @@ class ValidationResultFactoryTests: XCTestCase {
                                                           repository: VaccinationRepositoryMock(),
                                                           certificate: expectedCertificate,
                                                           error: nil,
-                                                          certLogic: certLogic)
+                                                          certLogic: certLogic,
+                                                          _2GContext: false)
 
         XCTAssertTrue(sut is RecoveryResultViewModel, "Wrong Type: should be RecoveryResultViewModel")
         let resultModel = try XCTUnwrap(sut as? RecoveryResultViewModel)
@@ -114,7 +120,8 @@ class ValidationResultFactoryTests: XCTestCase {
                                                           repository: VaccinationRepositoryMock(),
                                                           certificate: expectedCertificate,
                                                           error: nil,
-                                                          certLogic: certLogic)
+                                                          certLogic: certLogic,
+                                                          _2GContext: false)
 
         XCTAssertTrue(sut is TestResultViewModel, "Wrong Type: should be TestResultViewModel")
         let resultModel = try XCTUnwrap(sut as? TestResultViewModel)

@@ -37,6 +37,7 @@ class CertificateDetailRouter: CertificateDetailRouterProtocol, DialogRouterProt
         sceneCoordinator.present(WebviewSceneFactory(title: "app_information_title_faq".localized, url: url, closeButtonShown: true))
     }
     
+    @discardableResult
     func showCertificate(for token: ExtendedCBORWebToken) -> Promise<Void> {
         sceneCoordinator.present(
             CertificateSceneFactory(token: token)

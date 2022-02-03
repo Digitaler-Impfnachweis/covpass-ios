@@ -58,10 +58,7 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
     }
 
     var backgroundColor: UIColor {
-        if isExpired {
-            return .onBackground40
-        }
-        return .onBrandAccent70
+        isExpired ? .onBackground40 : .onBrandAccent70
     }
 
     var iconTintColor: UIColor {

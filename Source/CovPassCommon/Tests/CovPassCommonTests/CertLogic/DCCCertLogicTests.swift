@@ -80,22 +80,37 @@ class DCCCertLogicTests: XCTestCase {
 
         let date = Date()
         try userDefaults.store(UserDefaults.keyLastUpdatedDCCRules, value: date)
-
+        
         XCTAssertEqual(sut.lastUpdatedDCCRules(), date)
     }
-
-    func testUpdateRulesIfNeeded() throws {
-        service.loadValueSetsResult = Promise.value([])
+    
+    func testUpdateRulesIfNeededTrue() throws {
+        let dateDefault = Date().addingTimeInterval(-100000000)
+        try userDefaults.store(UserDefaults.keyLastUpdatedDCCRules, value: dateDefault)
         service.loadBoosterRulesResult = Promise.value([])
+        
+        let lastUpdateDateBefore = try userDefaults.fetch(UserDefaults.keyLastUpdatedDCCRules) as! Date
+        XCTAssertEqual(dateDefault, lastUpdateDateBefore)
+        service.loadValueSetsResult = Promise.value([])
         try sut.updateRulesIfNeeded().wait()
-
-        do {
-            try sut.updateRulesIfNeeded().wait()
-            XCTFail("Should fail")
-        } catch {
-            XCTAssertEqual(error.localizedDescription, PromiseCancelledError().localizedDescription)
-        }
+        let lastUpdateDateAfter = try userDefaults.fetch(UserDefaults.keyLastUpdatedDCCRules) as! Date
+        XCTAssertNotNil(lastUpdateDateAfter)
+        XCTAssertNotEqual(dateDefault, lastUpdateDateAfter)
     }
+    
+    func testUpdateRulesIfNeededFalse() throws {
+        let dateDefault = Date()
+        try userDefaults.store(UserDefaults.keyLastUpdatedDCCRules, value: dateDefault)
+        service.loadBoosterRulesResult = Promise.value([])
+        
+        let lastUpdateDateBefore = try userDefaults.fetch(UserDefaults.keyLastUpdatedDCCRules) as! Date
+        XCTAssertEqual(dateDefault, lastUpdateDateBefore)
+        try sut.updateRulesIfNeeded().wait()
+        let lastUpdateDateAfter = try userDefaults.fetch(UserDefaults.keyLastUpdatedDCCRules) as! Date
+        XCTAssertNotNil(lastUpdateDateAfter)
+        XCTAssertEqual(dateDefault, lastUpdateDateAfter)
+    }
+
 
     func testSavedAndLocalRules() throws {
         // Check local rules (no saved rules)
