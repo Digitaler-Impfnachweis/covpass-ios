@@ -97,6 +97,8 @@
 		09B5D240276A194C005F8FCE /* ScanCountRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B5D23F276A194C005F8FCE /* ScanCountRouter.swift */; };
 		09B5D242276ABF16005F8FCE /* ScanCountWarningViewSnapShotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B5D241276ABF16005F8FCE /* ScanCountWarningViewSnapShotTests.swift */; };
 		09C1DD922759727500BC0B36 /* CertificatesOverviewViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C1DD912759727500BC0B36 /* CertificatesOverviewViewModelTests.swift */; };
+		09CE6C9B27AB40430048BDA4 /* HowToScanViewControllerSnapShotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09CE6C9A27AB40430048BDA4 /* HowToScanViewControllerSnapShotTests.swift */; };
+		09CE6C9D27AB40700048BDA4 /* HowToScanRouterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09CE6C9C27AB40700048BDA4 /* HowToScanRouterMock.swift */; };
 		09D6E818276CA66200134FBA /* ScanCountWarningViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D6E817276CA66200134FBA /* ScanCountWarningViewModelProtocol.swift */; };
 		09D6E81A276CC96600134FBA /* ScanCountRouterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D6E819276CC96600134FBA /* ScanCountRouterProtocol.swift */; };
 		09D6E81C276CE56700134FBA /* ValidationServiceRoutableProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D6E81B276CE56700134FBA /* ValidationServiceRoutableProtocol.swift */; };
@@ -405,6 +407,8 @@
 		09B5D23F276A194C005F8FCE /* ScanCountRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanCountRouter.swift; sourceTree = "<group>"; };
 		09B5D241276ABF16005F8FCE /* ScanCountWarningViewSnapShotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanCountWarningViewSnapShotTests.swift; sourceTree = "<group>"; };
 		09C1DD912759727500BC0B36 /* CertificatesOverviewViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificatesOverviewViewModelTests.swift; sourceTree = "<group>"; };
+		09CE6C9A27AB40430048BDA4 /* HowToScanViewControllerSnapShotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToScanViewControllerSnapShotTests.swift; sourceTree = "<group>"; };
+		09CE6C9C27AB40700048BDA4 /* HowToScanRouterMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToScanRouterMock.swift; sourceTree = "<group>"; };
 		09D6E817276CA66200134FBA /* ScanCountWarningViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanCountWarningViewModelProtocol.swift; sourceTree = "<group>"; };
 		09D6E819276CC96600134FBA /* ScanCountRouterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanCountRouterProtocol.swift; sourceTree = "<group>"; };
 		09D6E81B276CE56700134FBA /* ValidationServiceRoutableProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationServiceRoutableProtocol.swift; sourceTree = "<group>"; };
@@ -742,6 +746,7 @@
 				09B5D241276ABF16005F8FCE /* ScanCountWarningViewSnapShotTests.swift */,
 				0993B1682762090A00217884 /* ValidationFailedSnapShotTests.swift */,
 				09E85432279992450051AEEE /* AppInformationViewControllerSnapShotTests.swift */,
+				09CE6C9A27AB40430048BDA4 /* HowToScanViewControllerSnapShotTests.swift */,
 			);
 			path = SnapShotTests;
 			sourceTree = "<group>";
@@ -1108,6 +1113,7 @@
 				359FBF4726DFB13B004333BC /* MockExtendedCBORWebToken.swift */,
 				95FE37B5273EF4FC000899A3 /* VAASRepositoryMock.swift */,
 				09E85434279992DC0051AEEE /* AppInformationRouterMock.swift */,
+				09CE6C9C27AB40700048BDA4 /* HowToScanRouterMock.swift */,
 			);
 			path = Mock;
 			sourceTree = "<group>";
@@ -2097,11 +2103,13 @@
 			files = (
 				E70C3E9D27A955CC001F07FF /* RuleCheckRouterMock.swift in Sources */,
 				095D3F9A27AABA9D00DC398F /* CheckSituationViewControllerSnapShotTests.swift in Sources */,
+				09CE6C9D27AB40700048BDA4 /* HowToScanRouterMock.swift in Sources */,
 				216D203E264EFA7400370F16 /* PassConsentPageViewModelTests.swift in Sources */,
 				216D202B264EFA6600370F16 /* CertificateViewControllerTests.swift in Sources */,
 				E70C3E9A27A95523001F07FF /* RuleCheckViewModelTests.swift in Sources */,
 				0993B1692762090A00217884 /* ValidationFailedSnapShotTests.swift in Sources */,
 				952B7AFB2729BCA8008F69D6 /* ScanPleaseSnapshotTests.swift in Sources */,
+				09CE6C9B27AB40430048BDA4 /* HowToScanViewControllerSnapShotTests.swift in Sources */,
 				09590D242715E519004410D7 /* RuleCheckViewControllerSnapshotTests.swift in Sources */,
 				09590D302715E67F004410D7 /* MockCardViewModel.swift in Sources */,
 				0994A4D6273431A500B21FCF /* WebTokenMockUtil.swift in Sources */,

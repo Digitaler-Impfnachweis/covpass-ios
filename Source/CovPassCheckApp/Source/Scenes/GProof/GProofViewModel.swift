@@ -132,8 +132,8 @@ class GProofViewModel: GProofViewModelProtocol {
         return gProofResultViewModel?.certificate?.hcert.dgc.nam.fullNameTransliterated ?? testResultViewModel?.certificate?.hcert.dgc.nam.fullNameTransliterated
     }
     var resultPersonFooter: String? {
-        let resultViewModel = gProofResultViewModel ?? testResultViewModel
-        guard let dgc = resultViewModel?.certificate?.hcert.dgc else {
+        let digitalGreenCert = gProofResultViewModel?.certificate?.hcert.dgc ?? testResultViewModel?.certificate?.hcert.dgc
+        guard let dgc = digitalGreenCert else {
             return nil
         }
         return String(format: Constants.Keys.validation_check_popup_test_date_of_birth, DateUtils.displayDateOfBirth(dgc))
