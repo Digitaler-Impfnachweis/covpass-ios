@@ -44,6 +44,76 @@ public extension CBORWebToken {
         )
     }
 
+    static var mockVaccinationCertificate3Of2: CBORWebToken {
+        CBORWebToken(
+            iss: "DE",
+            iat: Date(),
+            exp: Calendar.current.date(byAdding: .year, value: 1, to: Date()),
+            hcert: HealthCertificateClaim(
+                dgc: DigitalGreenCertificate(
+                    nam: Name(
+                        gn: "Doe",
+                        fn: "John",
+                        gnt: "DOE",
+                        fnt: "JOHN"
+                    ),
+                    dob: DateUtils.isoDateFormatter.date(from: "1990-01-01"),
+                    dobString: "1990-01-01",
+                    v: [
+                        Vaccination(
+                            tg: "840539006",
+                            vp: "1119349007",
+                            mp: "EU/1/20/1528",
+                            ma: "ORG-100001699",
+                            dn: 3,
+                            sd: 2,
+                            dt: DateUtils.isoDateFormatter.date(from: "2021-01-01")!,
+                            co: "DE",
+                            is: "Robert Koch-Institut iOS",
+                            ci: "URN:UVCI:01DE/IZ12345A/4O2O25ZXNQED2R69JTL6FQ#P"
+                        )
+                    ],
+                    ver: "1.0.0"
+                )
+            )
+        )
+    }
+
+    static var mockVaccinationCertificateWithOtherName: CBORWebToken {
+        CBORWebToken(
+            iss: "DE",
+            iat: Date(),
+            exp: Calendar.current.date(byAdding: .year, value: 1, to: Date()),
+            hcert: HealthCertificateClaim(
+                dgc: DigitalGreenCertificate(
+                    nam: Name(
+                        gn: "Katami",
+                        fn: "Ella",
+                        gnt: "KATAMI",
+                        fnt: "ELLA"
+                    ),
+                    dob: DateUtils.isoDateFormatter.date(from: "1990-01-01"),
+                    dobString: "1990-01-01",
+                    v: [
+                        Vaccination(
+                            tg: "840539006",
+                            vp: "1119349007",
+                            mp: "EU/1/20/1528",
+                            ma: "ORG-100001699",
+                            dn: 3,
+                            sd: 2,
+                            dt: DateUtils.isoDateFormatter.date(from: "2021-01-01")!,
+                            co: "DE",
+                            is: "Robert Koch-Institut iOS",
+                            ci: "URN:UVCI:01DE/IZ12345A/4O2O25ZXNQED2R69JTL6FQ#P"
+                        )
+                    ],
+                    ver: "1.0.0"
+                )
+            )
+        )
+    }
+
     static var mockTestCertificate: CBORWebToken {
         CBORWebToken(
             iss: "DE",
