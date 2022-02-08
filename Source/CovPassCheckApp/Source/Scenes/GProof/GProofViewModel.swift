@@ -31,6 +31,7 @@ private enum Constants {
         static let result_2G_test_empty = "result_2G_test_empty".localized
         static let result_2G_test_invalid = "result_2G_test_invalid".localized
         static let validation_check_popup_test_title = "validation_check_popup_test_title".localized
+        static let validation_check_popup_valid_pcr_test_title = "validation_check_popup_valid_pcr_test_title".localized
         static let validation_check_popup_test_date_of_birth = "validation_check_popup_test_date_of_birth".localized
         static let result_2G_invalid_subtitle = "result_2G_invalid_subtitle".localized
         static let result_2G_empty_subtitle = "result_2G_empty_subtitle".localized
@@ -99,11 +100,12 @@ class GProofViewModel: GProofViewModelProtocol {
         switch testResultViewModel {
         case is ErrorResultViewModel: return Constants.Keys.result_2G_test_invalid
         case is TestResultViewModel:
-            guard let sc = testResultViewModel?.certificate?.hcert.dgc.t?.first?.sc else {
+            guard let test = testResultViewModel?.certificate?.hcert.dgc.t?.first else {
                 return ""
             }
-            let diffComponents = Calendar.current.dateComponents([.hour], from: sc, to: Date())
-            return String(format: Constants.Keys.validation_check_popup_test_title, diffComponents.hour ?? 0)
+            let diffComponents = Calendar.current.dateComponents([.hour], from: test.sc, to: Date())
+            let formatString = test.isPCR ? Constants.Keys.validation_check_popup_valid_pcr_test_title : Constants.Keys.validation_check_popup_test_title
+            return String(format: formatString, diffComponents.hour ?? 0)
         default: return Constants.Keys.result_2G_test_empty
         }
     }
