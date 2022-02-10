@@ -34,31 +34,6 @@ class BoosterLogicTests: XCTestCase {
         super.tearDown()
     }
 
-    func testBoosterCandidate() {
-        let cert = CBORWebToken.mockVaccinationCertificate.extended()
-        let sut = BoosterCandidate(certificate: cert)
-        XCTAssertEqual(sut.name, cert.vaccinationCertificate.hcert.dgc.nam.fullName)
-        XCTAssertEqual(sut.birthdate, cert.vaccinationCertificate.hcert.dgc.dobString)
-        XCTAssertEqual(sut.vaccinationIdentifier, cert.vaccinationCertificate.hcert.dgc.uvci)
-        XCTAssertEqual(sut.state, .none)
-        XCTAssertEqual(sut.validationRules, [])
-    }
-
-    func testBoosterCandidateEquatable() {
-        XCTAssertEqual(
-            BoosterCandidate(name: "foo", birthdate: "bar", vaccinationIdentifier: "", state: .none, validationRules: []),
-            BoosterCandidate(name: "foo", birthdate: "bar", vaccinationIdentifier: "", state: .none, validationRules: [])
-        )
-        XCTAssertNotEqual(
-            BoosterCandidate(name: "foo", birthdate: "bar", vaccinationIdentifier: "", state: .none, validationRules: []),
-            BoosterCandidate(name: "foo1", birthdate: "bar", vaccinationIdentifier: "", state: .none, validationRules: [])
-        )
-        XCTAssertNotEqual(
-            BoosterCandidate(name: "foo", birthdate: "bar", vaccinationIdentifier: "", state: .none, validationRules: []),
-            BoosterCandidate(name: "foo", birthdate: "bar1", vaccinationIdentifier: "", state: .none, validationRules: [])
-        )
-    }
-
     func testCheckForNewBoosterVaccinationsIfNeeded() throws {
         XCTAssertNil(try userDefaults.fetch(UserDefaults.keyLastCheckedBooster) as? Date)
 
@@ -181,10 +156,8 @@ class BoosterLogicTests: XCTestCase {
         sut.checkForNewBoosterVaccinations([certificatePair3of2])
             .done { result in
                 let candidates = self.userDefaultBoosterCandidates
-                let candidate = try XCTUnwrap(candidates.first)
                 XCTAssertFalse(result)
                 XCTAssertEqual(candidates.count, 1)
-                XCTAssertEqual(candidate.name, "Katami Ella")
                 expectation.fulfill()
             }
             .cauterize()

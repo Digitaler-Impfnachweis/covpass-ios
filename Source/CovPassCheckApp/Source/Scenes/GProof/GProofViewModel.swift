@@ -299,7 +299,7 @@ class GProofViewModel: GProofViewModelProtocol {
         guard areBothScanned else {
             return .value
         }
-        guard gProofResultViewModel?.certificate?.hcert.dgc.nam.fullNameTransliterated != testResultViewModel?.certificate?.hcert.dgc.nam.fullNameTransliterated || gProofResultViewModel?.certificate?.hcert.dgc.dob != testResultViewModel?.certificate?.hcert.dgc.dob  else {
+        guard certificateAndTestNameOrDateOfBirthAreNotMatching else {
             return .value
         }
         guard let gProofToken = gProofResultViewModel?.certificate else {
@@ -323,6 +323,10 @@ class GProofViewModel: GProofViewModelProtocol {
         .cauterize()
         
         return .value
+    }
+
+    private var certificateAndTestNameOrDateOfBirthAreNotMatching: Bool {
+        gProofResultViewModel?.certificate?.hcert.dgc != testResultViewModel?.certificate?.hcert.dgc
     }
     
     func scanTest() {

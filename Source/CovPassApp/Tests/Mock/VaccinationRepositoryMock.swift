@@ -23,9 +23,8 @@ public class VaccinationRepositoryMock: VaccinationRepositoryProtocol {
             var exists = false
             let isFavorite = certificateList.favoriteCertificateId == cert.vaccinationCertificate.hcert.dgc.uvci
             for index in 0 ..< pairs.count {
-                if pairs[index].certificates.contains(where: {
-                    cert.vaccinationCertificate.hcert.dgc.nam == $0.vaccinationCertificate.hcert.dgc.nam && cert.vaccinationCertificate.hcert.dgc.dob == $0.vaccinationCertificate.hcert.dgc.dob
-                }) {
+                let certDgc = cert.vaccinationCertificate.hcert.dgc
+                if pairs[index].certificates.map(\.vaccinationCertificate.hcert.dgc).contains(certDgc) {
                     exists = true
                     pairs[index].certificates.append(cert)
                     if isFavorite {
