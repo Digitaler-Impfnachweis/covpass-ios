@@ -85,19 +85,21 @@ class GProofViewController: UIViewController {
     private func configureContent() {
         personStack.isHidden = viewModel.onlyOneIsScannedAndThisFailed
         pageFooter.attributedText = viewModel.footnote.styledAs(.subheader_2)
-        pageFooter.isHidden = viewModel.testResultViewIsHidden
+        pageFooter.isHidden = viewModel.pageFooterIsHidden
         personStackHeadline.attributedText = viewModel.checkIdMessage.styledAs(.subheader_2)
         let resultTitleStyle: TextStyle = .header_2
         
         let linkIsAvailabelForGProof = viewModel.resultGProofLinkImage != nil
         let linkIsAvailabelForTestProof = viewModel.resultTestLinkImage != nil
+        let defaultSubTitleStyleGProof: TextStyle = viewModel.gProofResultViewModel != nil ? .header_2 : .subheader_2
+        let defaultSubTitleStyleTestProof: TextStyle = viewModel.testResultViewModel != nil ? .header_2 : .subheader_2
         let defaultSubTitleStyle: TextStyle = .subheader_2
         let linkBottomTextStyle: TextStyle = .header_3
         let defaultSubTitleColor: UIColor = .gray
         let linkBottomColor: UIColor = .brandAccent
         
-        let subTitleStyleGProof: TextStyle = linkIsAvailabelForGProof ? linkBottomTextStyle : defaultSubTitleStyle
-        let subTitleStyleTestProof: TextStyle = linkIsAvailabelForTestProof ? linkBottomTextStyle : defaultSubTitleStyle
+        let subTitleStyleGProof: TextStyle = linkIsAvailabelForGProof ? linkBottomTextStyle : defaultSubTitleStyleGProof
+        let subTitleStyleTestProof: TextStyle = linkIsAvailabelForTestProof ? linkBottomTextStyle : defaultSubTitleStyleTestProof
         let subTitleColorGProof: UIColor = linkIsAvailabelForGProof ? linkBottomColor : defaultSubTitleColor
         let subTitleColorTestProof: UIColor = linkIsAvailabelForTestProof ? linkBottomColor : defaultSubTitleColor
 

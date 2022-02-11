@@ -104,3 +104,10 @@ extension DigitalGreenCertificate: Equatable {
         return lhs.nam == rhs.nam && lhs.dob == rhs.dob
     }
 }
+
+extension DigitalGreenCertificate {
+    public var isFullyImmunized: Bool {
+        guard let result = v?.filter({ $0.fullImmunization }) else { return false }
+        return !result.isEmpty
+    }
+}

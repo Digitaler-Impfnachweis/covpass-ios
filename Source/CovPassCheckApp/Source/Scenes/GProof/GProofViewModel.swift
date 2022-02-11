@@ -13,6 +13,7 @@ import PromiseKit
 import Scanner
 
 private enum Constants {
+    static let footnoteSignal = "*"
     enum Keys {
         static let accessibility_scan_result_announce_2G = "accessibility_scan_result_announce_2G".localized
         static let accessibility_scan_result_closing_announce_2G = "accessibility_scan_result_closing_announce_2G".localized
@@ -25,8 +26,15 @@ private enum Constants {
         static let result_2G_button_startover = "result_2G_button_startover".localized
         static let validation_check_popup_valid_pcr_test_message = "validation_check_popup_valid_pcr_test_message".localized
         static let result_2G_gproof_empty = "result_2G_gproof_empty".localized
-        static let result_2G_gproof_valid = "result_2G_gproof_valid".localized
-        static let result_2G_gproof_valid_boosted = "result_2G_booster_valid".localized
+        static let result_2G_2nd_gproof_valid_boosted = "result_2G_2nd_booster_valid".localized
+        static let result_2G_2nd_gproof_valid_recovery = "result_2G_2nd_recovery_valid".localized
+        static let result_2G_2nd_gproof_valid_basic = "result_2G_2nd_basic_valid".localized
+        static let result_2G_2nd_gproof_valid_rapidtest = "result_2G_2nd_rapidtest_valid".localized
+        static let result_2G_2nd_gproof_valid_pcrtest = "result_2G_2nd_pcrtest_valid".localized
+        static let result_2G_2nd_empty = "result_2G_2nd_empty".localized
+        static let result_2G_2nd_timestamp_hours = "result_2G_2nd_timestamp_hours".localized
+        static let result_2G_2nd_timestamp_days = "result_2G_2nd_timestamp_days".localized
+        static let result_2G_2nd_timestamp_months = "result_2G_2nd_timestamp_months".localized
         static let result_2G_gproof_invalid = "result_2G_gproof_invalid".localized
         static let result_2G_test_empty = "result_2G_test_empty".localized
         static let result_2G_test_invalid = "result_2G_test_invalid".localized
@@ -66,17 +74,60 @@ class GProofViewModel: GProofViewModelProtocol {
         }
     }
     var resultGProofTitle: String {
-        switch gProofResultViewModel {
+        guard let result = gProofResultViewModel else {
+            return Constants.Keys.result_2G_gproof_empty
+        }
+        guard let certificate = result.certificate else {
+            return Constants.Keys.result_2G_gproof_empty
+        }
+        switch result {
         case is ErrorResultViewModel: return Constants.Keys.result_2G_gproof_invalid
         case is VaccinationResultViewModel, is RecoveryResultViewModel:
-            return initialTokenIsBoosted ? Constants.Keys.result_2G_gproof_valid_boosted : Constants.Keys.result_2G_gproof_valid
+            if initialTokenIsBoosted {
+                return Constants.Keys.result_2G_2nd_gproof_valid_boosted
+            } else if certificate.isVaccination && certificate.hcert.dgc.isVaccinationBoosted {
+                return Constants.Keys.result_2G_2nd_gproof_valid_boosted
+            }  else if certificate.isRecovery {
+                return Constants.Keys.result_2G_2nd_gproof_valid_recovery
+            } else if certificate.isVaccination && certificate.hcert.dgc.isFullyImmunized {
+                return Constants.Keys.result_2G_2nd_gproof_valid_basic
+            } else {
+                return Constants.Keys.result_2G_gproof_empty
+            }
         default: return Constants.Keys.result_2G_gproof_empty
         }
     }
     var resultGProofSubtitle: String? {
+        guard let result = gProofResultViewModel else {
+            return Constants.Keys.result_2G_empty_subtitle
+        }
+        guard let certificate = result.certificate else {
+            return Constants.Keys.result_2G_empty_subtitle
+        }
         switch gProofResultViewModel {
         case is ErrorResultViewModel: return Constants.Keys.result_2G_invalid_subtitle
-        case is VaccinationResultViewModel, is RecoveryResultViewModel: return nil
+        case is VaccinationResultViewModel, is RecoveryResultViewModel:
+            var stringWithPlaceholder = Constants.Keys.result_2G_empty_subtitle
+            var componentToUse: Set<Calendar.Component> = [.month]
+            var fromDate = certificate.hcert.dgc.v?.first?.fullImmunizationValidFrom
+            if initialTokenIsBoosted {
+                return nil
+            } else if certificate.isVaccination && certificate.hcert.dgc.isVaccinationBoosted {
+                stringWithPlaceholder = Constants.Keys.result_2G_2nd_timestamp_days
+                componentToUse = [.day]
+            }  else if certificate.isRecovery {
+                stringWithPlaceholder = Constants.Keys.result_2G_2nd_timestamp_months
+                fromDate = certificate.hcert.dgc.r?.first?.df
+            } else if certificate.isVaccination && certificate.hcert.dgc.isFullyImmunized {
+                stringWithPlaceholder = Constants.Keys.result_2G_2nd_timestamp_months
+            }
+            guard let fromDateUnwrapped = fromDate else {
+                return nil
+            }
+            let diffComponents = Calendar.current.dateComponents(componentToUse,
+                                                                 from: fromDateUnwrapped,
+                                                                 to: Date())
+            return String(format: stringWithPlaceholder, diffComponents.hour ?? 0)
         default: return Constants.Keys.result_2G_empty_subtitle
         }
     }
@@ -103,17 +154,21 @@ class GProofViewModel: GProofViewModelProtocol {
             guard let test = testResultViewModel?.certificate?.hcert.dgc.t?.first else {
                 return ""
             }
-            let diffComponents = Calendar.current.dateComponents([.hour], from: test.sc, to: Date())
-            let formatString = test.isPCR ? Constants.Keys.validation_check_popup_valid_pcr_test_title : Constants.Keys.validation_check_popup_test_title
-            return String(format: formatString, diffComponents.hour ?? 0)
+            return test.isPCR ? Constants.Keys.result_2G_2nd_gproof_valid_pcrtest : Constants.Keys.result_2G_2nd_gproof_valid_rapidtest
         default: return Constants.Keys.result_2G_test_empty
         }
     }
     var resultTestSubtitle: String? {
         switch testResultViewModel {
         case is ErrorResultViewModel: return Constants.Keys.result_2G_invalid_subtitle
-        case is TestResultViewModel: return nil
-        default: return Constants.Keys.result_2G_empty_subtitle
+        case is TestResultViewModel:
+            guard let test = testResultViewModel?.certificate?.hcert.dgc.t?.first else {
+                return ""
+            }
+            let diffComponents = Calendar.current.dateComponents([.hour], from: test.sc, to: Date())
+            let formatString = Constants.Keys.result_2G_2nd_timestamp_hours
+            return String(format: formatString, diffComponents.hour ?? 0)
+        default: return Constants.Keys.result_2G_2nd_empty
         }
     }
     var resultTestLinkImage: UIImage? {
@@ -157,6 +212,7 @@ class GProofViewModel: GProofViewModelProtocol {
     }
     var buttonRetryIsHidden: Bool { areBothScanned && someIsFailed ? false : true }
     var buttonStartOverIsHidden: Bool { false }
+    var pageFooterIsHidden: Bool { testResultViewIsHidden || !resultGProofTitle.contains(Constants.footnoteSignal) }
     var onlyOneIsScannedAndThisFailed: Bool { !areBothScanned && someIsFailed }
     var someIsFailed: Bool { testResultViewModel is ErrorResultViewModel || gProofResultViewModel is ErrorResultViewModel  }
     var areBothScanned: Bool { gProofResultViewModel != nil && testResultViewModel != nil}
