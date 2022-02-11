@@ -64,12 +64,12 @@ class DCCCertLogicTests: XCTestCase {
         XCTAssertEqual(sut.valueSets.count, 8)
         XCTAssertEqual(sut.valueSets["country-2-codes"]?.count, 250)
         XCTAssertEqual(sut.valueSets["covid-19-lab-result"]?.count, 2)
-        XCTAssertEqual(sut.valueSets["covid-19-lab-test-manufacturer-and-name"]?.count, 190)
+        XCTAssertEqual(sut.valueSets["covid-19-lab-test-manufacturer-and-name"]?.count, 199)
         XCTAssertEqual(sut.valueSets["covid-19-lab-test-type"]?.count, 2)
         XCTAssertEqual(sut.valueSets["disease-agent-targeted"]?.count, 1)
         XCTAssertEqual(sut.valueSets["sct-vaccines-covid-19"]?.count, 3)
-        XCTAssertEqual(sut.valueSets["vaccines-covid-19-auth-holders"]?.count, 22)
-        XCTAssertEqual(sut.valueSets["vaccines-covid-19-names"]?.count, 22)
+        XCTAssertEqual(sut.valueSets["vaccines-covid-19-auth-holders"]?.count, 24)
+        XCTAssertEqual(sut.valueSets["vaccines-covid-19-names"]?.count, 28)
     }
 
     func testRemoteValueSets() throws {
@@ -119,7 +119,7 @@ class DCCCertLogicTests: XCTestCase {
 
     func testSavedAndLocalRules() throws {
         // Check local rules (no saved rules)
-        XCTAssertEqual(sut.dccRules.count, 242)
+        XCTAssertEqual(sut.dccRules.count, 297)
 
         // Save one rule
         let rule = Rule(identifier: "", type: "", version: "", schemaVersion: "", engine: "", engineVersion: "", certificateType: "", description: [], validFrom: "", validTo: "", affectedString: [], logic: JSON(""), countryCode: "")
@@ -391,7 +391,6 @@ class DCCCertLogicTests: XCTestCase {
         // THEN
         XCTAssertEqual(results.count, 2)
         XCTAssertEqual(results.result(ofRule: "RR-DE-0001"), .passed)
-        XCTAssertEqual(results.result(ofRule: "RR-DE-0002"), .fail)
     }
     
     func testEURules181DaysAfterRecovery() {
@@ -429,7 +428,6 @@ class DCCCertLogicTests: XCTestCase {
         // THEN
         XCTAssertEqual(results.count, 2)
         XCTAssertEqual(results.result(ofRule: "RR-DE-0001"), .passed)
-        XCTAssertEqual(results.result(ofRule: "RR-DE-0002"), .fail)
     }
     
     func testEURules91DaysAfterRecovery() {
@@ -467,7 +465,6 @@ class DCCCertLogicTests: XCTestCase {
         // THEN
         XCTAssertEqual(results.count, 2)
         XCTAssertEqual(results.result(ofRule: "RR-DE-0001"), .passed)
-        XCTAssertEqual(results.result(ofRule: "RR-DE-0002"), .passed)
     }
     
     func testEURules29DaysAfterRecovery() {
@@ -505,7 +502,6 @@ class DCCCertLogicTests: XCTestCase {
         // THEN
         XCTAssertEqual(results.count, 2)
         XCTAssertEqual(results.result(ofRule: "RR-DE-0001"), .fail)
-        XCTAssertEqual(results.result(ofRule: "RR-DE-0002"), .passed)
     }
     
     func testEURules2DaysAfterRecovery() {
