@@ -11,13 +11,13 @@ import CovPassCommon
 import Foundation
 
 class AppInformationViewControllerSnapShotTests: BaseSnapShotTests {
-
     func testDefault() {
-        let vm = AppInformationViewModel(router: AppInformationRouterMock(),
-                                         userDefaults: UserDefaultsPersistence())
+        let vm = EnglishAppInformationViewModel(
+            router: AppInformationRouterMock(),
+            userDefaults: UserDefaultsPersistence()
+        )
         UserDefaults.standard.set(nil, forKey: UserDefaults.keySelectedLogicType)
         let vc = AppInformationViewController(viewModel: vm)
         verifyView(vc: vc)
     }
-
 }

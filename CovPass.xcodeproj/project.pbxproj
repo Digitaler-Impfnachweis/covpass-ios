@@ -280,6 +280,8 @@
 		E70C3E9D27A955CC001F07FF /* RuleCheckRouterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70C3E9C27A955CC001F07FF /* RuleCheckRouterMock.swift */; };
 		E70C3EA427A98A5C001F07FF /* CertificatesOverviewRouterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70C3EA327A98A5C001F07FF /* CertificatesOverviewRouterMock.swift */; };
 		E76B998927AAE8220029FCB1 /* CertificateDetailViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76B998827AAE8220029FCB1 /* CertificateDetailViewModelTests.swift */; };
+		E7CB54B327B53296002FA55E /* AppInformationViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CB54B227B53296002FA55E /* AppInformationViewModelTests.swift */; };
+		E7CB54B927B5563E002FA55E /* AppInformationViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CB54B627B55436002FA55E /* AppInformationViewModelTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -618,6 +620,8 @@
 		E70C3E9C27A955CC001F07FF /* RuleCheckRouterMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleCheckRouterMock.swift; sourceTree = "<group>"; };
 		E70C3EA327A98A5C001F07FF /* CertificatesOverviewRouterMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificatesOverviewRouterMock.swift; sourceTree = "<group>"; };
 		E76B998827AAE8220029FCB1 /* CertificateDetailViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateDetailViewModelTests.swift; sourceTree = "<group>"; };
+		E7CB54B227B53296002FA55E /* AppInformationViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInformationViewModelTests.swift; sourceTree = "<group>"; };
+		E7CB54B627B55436002FA55E /* AppInformationViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInformationViewModelTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1157,6 +1161,7 @@
 		216D2025264EF95400370F16 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				E7CB54B127B5324E002FA55E /* App Information */,
 				E76B998727AAE7F60029FCB1 /* Certificate Detail */,
 				09CE6C9527AB35380048BDA4 /* CountrySelection */,
 				386FDCF826ED1F7C00AC7639 /* BoosterNotification */,
@@ -1642,6 +1647,7 @@
 		88AB2A5F25FA40CE00D4EA52 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				E7CB54B427B55407002FA55E /* Scenes */,
 				09E854382799933F0051AEEE /* Mocks */,
 				0904337C270EFE920008267B /* SnapShotTests */,
 				88AB2A6125FA40CE00D4EA52 /* Info.plist */,
@@ -1783,6 +1789,30 @@
 				E76B998827AAE8220029FCB1 /* CertificateDetailViewModelTests.swift */,
 			);
 			path = "Certificate Detail";
+			sourceTree = "<group>";
+		};
+		E7CB54B127B5324E002FA55E /* App Information */ = {
+			isa = PBXGroup;
+			children = (
+				E7CB54B227B53296002FA55E /* AppInformationViewModelTests.swift */,
+			);
+			path = "App Information";
+			sourceTree = "<group>";
+		};
+		E7CB54B427B55407002FA55E /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				E7CB54B527B55411002FA55E /* App Information */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		E7CB54B527B55411002FA55E /* App Information */ = {
+			isa = PBXGroup;
+			children = (
+				E7CB54B627B55436002FA55E /* AppInformationViewModelTests.swift */,
+			);
+			path = "App Information";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -2140,6 +2170,7 @@
 				952B7AFB2729BCA8008F69D6 /* ScanPleaseSnapshotTests.swift in Sources */,
 				09CE6C9B27AB40430048BDA4 /* HowToScanViewControllerSnapShotTests.swift in Sources */,
 				09590D242715E519004410D7 /* RuleCheckViewControllerSnapshotTests.swift in Sources */,
+				E7CB54B327B53296002FA55E /* AppInformationViewModelTests.swift in Sources */,
 				09590D302715E67F004410D7 /* MockCardViewModel.swift in Sources */,
 				0994A4D6273431A500B21FCF /* WebTokenMockUtil.swift in Sources */,
 				0994A4D12734319800B21FCF /* TrustedListDetailsViewSnapShotTests.swift in Sources */,
@@ -2234,6 +2265,7 @@
 				95A031EB27359AC60073FDD1 /* ValidationResultViewControllerSnapShotTests.swift in Sources */,
 				0957848227A2D1CF00E8206C /* ValidatorMockRouter.swift in Sources */,
 				95961E892703550B00E577A4 /* ValidationResultFactoryTests.swift in Sources */,
+				E7CB54B927B5563E002FA55E /* AppInformationViewModelTests.swift in Sources */,
 				092090E027060FC30000713F /* ValidatorOverviewViewModelTests.swift in Sources */,
 				09E854372799932A0051AEEE /* AppInformationViewControllerSnapShotTests.swift in Sources */,
 				0928183127A2C3B900A0199F /* CheckSituationViewControllerSnapShotTests.swift in Sources */,
@@ -2410,7 +2442,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Source/CovPassApp/Supporting Files/Info.plist";
@@ -2419,7 +2451,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.11;
+				MARKETING_VERSION = 1.18;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.ega.VaccinationPass;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2437,7 +2469,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Source/CovPassApp/Supporting Files/Info.plist";
@@ -2446,7 +2478,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.11;
+				MARKETING_VERSION = 1.18;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.ega.VaccinationPass;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2516,7 +2548,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Source/CovPassCheckApp/Supporting Files/Info.plist";
@@ -2525,7 +2557,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.11;
+				MARKETING_VERSION = 1.18;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.ega.VaccinationValidator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2543,7 +2575,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Source/CovPassCheckApp/Supporting Files/Info.plist";
@@ -2552,7 +2584,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.11;
+				MARKETING_VERSION = 1.18;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.ega.VaccinationValidator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

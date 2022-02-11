@@ -10,111 +10,84 @@ import CovPassCommon
 import CovPassUI
 import Foundation
 
-private enum Constants {
-    enum Text {
-        static let leichteSprache = "app_information_title_company_easy_language".localized
+class CheckAppInformationBaseViewModel: AppInformationBaseViewModel {
+    override var entries: [AppInformationEntry] {
+        super.entries + [checkSituationEntry]
     }
-    enum WebLink {
-        static let leichteSprache = URL(string: "https://digitaler-impfnachweis-app.de/webviews/leichte-sprache/covpasscheckapp")!
+
+    private let userDefaults: Persistence
+    private var checkSituationEntry: AppInformationEntry {
+        let checkSituationInfo = userDefaults.selectedLogicType.checkSituationInfo
+        let scene = CheckSituationSceneFactory(contextType: .settings, userDefaults: userDefaults)
+        return AppInformationEntry(title: LocalText.rulesTitle, scene: scene, rightTitle: checkSituationInfo)
+    }
+
+    init(router:AppInformationRouterProtocol, entries: [AppInformationEntry], userDefaults: Persistence) {
+        self.userDefaults = userDefaults
+        super.init(router: router, entries: entries)
     }
 }
 
-class AppInformationViewModel: AppInformationViewModelProtocol {
-    // MARK: - Properties
-
-    let router: AppInformationRouterProtocol
-    private let userDefaults: Persistence
-
-    var title: String {
-        "app_information_title".localized
+class GermanAppInformationViewModel: CheckAppInformationBaseViewModel {
+    init(
+        router: AppInformationRouterProtocol,
+        userDefaults: Persistence,
+        mainBundle: Bundle = .main,
+        licenseBundle: Bundle = .commonBundle
+    ) {
+        let entries: [AppInformationEntry] = [
+            .webEntry(title: Texts.leichteSprache, url: URL(string: "https://digitaler-impfnachweis-app.de/webviews/leichte-sprache/covpasscheckapp")!),
+            .webEntry(title: Texts.contactTitle, url: mainBundle.url(forResource: "contact-covpasscheck-de", withExtension: "html")!),
+            .webEntry(title: Texts.faqTitle, url: URL(string: "https://www.digitaler-impfnachweis-app.de/webviews/verification-app/faq/")!),
+            .webEntry(title: Texts.datenschutzTitle, url: mainBundle.url(forResource: "privacy-covpasscheck-de", withExtension: "html")!),
+            .webEntry(title: Texts.companyDetailsTitle, url: URL(string: "https://www.digitaler-impfnachweis-app.de/webviews/imprint/")!),
+            .webEntry(title: Texts.openSourceLicenseTitle, url: licenseBundle.url(forResource: "license_de" , withExtension: "html")!),
+            .webEntry(title: Texts.accessibilityStatementTitle, url: URL(string: "https://www.digitaler-impfnachweis-app.de/webviews/covpasscheck-app-ios-barrierefreiheitserklaerung/")!),
+            AppInformationEntry(title: Texts.appInformationTitle, scene: TrustedListDetailsSceneFactory(sceneCoordinator: router.sceneCoordinator)),
+        ]
+        super.init(router: router, entries: entries, userDefaults: userDefaults)
     }
+}
 
-    var descriptionText: String {
-        "app_information_message".localized
+class EnglishAppInformationViewModel: CheckAppInformationBaseViewModel {
+    init(
+        router: AppInformationRouterProtocol,
+        userDefaults: Persistence,
+        mainBundle: Bundle = .main,
+        licenseBundle: Bundle = .commonBundle
+    ) {
+        let entries: [AppInformationEntry] = [
+            .webEntry(title: Texts.contactTitle, url: mainBundle.url(forResource: "contact-covpasscheck-en", withExtension: "html")!),
+            .webEntry(title: Texts.faqTitle, url: URL(string: "https://www.digitaler-impfnachweis-app.de/en/webviews/client-app/faq/")!),
+            .webEntry(title: Texts.datenschutzTitle, url: mainBundle.url(forResource: "privacy-covpasscheck-en", withExtension: "html")!),
+            .webEntry(title: Texts.companyDetailsTitle, url: URL(string: "https://www.digitaler-impfnachweis-app.de/en/webviews/imprint/")!),
+            .webEntry(title: Texts.openSourceLicenseTitle, url: licenseBundle.url(forResource: "license_en" , withExtension: "html")!),
+            .webEntry(title: Texts.accessibilityStatementTitle, url: URL(string: "https://www.digitaler-impfnachweis-app.de/en/webviews/covpasscheck-app-ios-accessibility-statement/")!),
+            AppInformationEntry(title: Texts.appInformationTitle, scene: TrustedListDetailsSceneFactory(sceneCoordinator: router.sceneCoordinator)),
+        ]
+        super.init(router: router, entries: entries, userDefaults: userDefaults)
     }
+}
 
-    var appVersionText: String {
-        String(
-            format: "Version %@".localized,
-            Bundle.main.appVersion()
+private enum LocalText {
+    static let rulesTitle = "app_information_title_local_rules".localized
+}
+
+private extension AppInformationEntry {
+    static func webEntry(title: String, url: URL) -> AppInformationEntry {
+        .init(
+            title: title,
+            scene: WebviewSceneFactory(title: title, url: url)
         )
     }
+}
 
-    var entries: [AppInformationEntry] {
-        var _entries =
-        [
-            webEntry(
-                title: "app_information_title_contact".localized,
-                url: Bundle.main.url(forResource: Locale.current.isGerman() ? "contact-covpasscheck-de" : "contact-covpasscheck-en", withExtension: "html")!
-            ),
-
-            webEntry(
-                title: "app_information_title_faq".localized,
-                url: URL(string: Locale.current.isGerman() ? "https://www.digitaler-impfnachweis-app.de/webviews/verification-app/faq/" : "https://www.digitaler-impfnachweis-app.de/en/webviews/client-app/faq/")!
-            ),
-
-            webEntry(
-                title: "app_information_title_datenschutz".localized,
-                url: Bundle.main.url(forResource: Locale.current.isGerman() ? "privacy-covpasscheck-de" : "privacy-covpasscheck-en", withExtension: "html")!
-            ),
-
-            webEntry(
-                title: "app_information_title_company_details".localized,
-                url: URL(string: Locale.current.isGerman() ? "https://www.digitaler-impfnachweis-app.de/webviews/imprint/" : "https://www.digitaler-impfnachweis-app.de/en/webviews/imprint/")!
-            ),
-
-            webEntry(
-                title: "app_information_title_open_source".localized,
-                url: Bundle.commonBundle.url(forResource: Locale.current.isGerman() ? "license_de" : "license_en", withExtension: "html")!
-            ),
-            
-            AppInformationEntry(
-                title: "app_information_title_update".localized,
-                scene: TrustedListDetailsSceneFactory(sceneCoordinator: router.sceneCoordinator)
-            ),
-            
-            AppInformationEntry(
-                title: "app_information_title_local_rules".localized,
-                scene: CheckSituationSceneFactory(contextType: .settings,
-                                                  userDefaults: userDefaults),
-                rightTitle: checkSituationInfo
-            )
-        ]
-        if Locale.current.isGerman() {
-            _entries.insert(webEntry(
-                title: Constants.Text.leichteSprache,
-                url: Constants.WebLink.leichteSprache
-            ), at: 0)
-        }
-        return _entries
-    }
-    
-    private var checkSituationInfo: String {
-        switch userDefaults.selectedLogicType {
+private extension DCCCertLogic.LogicType {
+    var checkSituationInfo: String {
+        switch self {
         case .de: return "app_information_title_local_rules_status_DE".localized
         case .eu: return "app_information_title_local_rules_status_EU".localized
         case .booster: return ""
         }
-    }
-
-    // MARK: - Lifecycle
-
-    init(router: AppInformationRouterProtocol,
-         userDefaults: Persistence) {
-        self.router = router
-        self.userDefaults = userDefaults
-    }
-
-    // MARK: - Methods
-
-    func showSceneForEntry(_ entry: AppInformationEntry) {
-        router.showScene(entry.scene)
-    }
-
-    private func webEntry(title: String, url: URL) -> AppInformationEntry {
-        AppInformationEntry(
-            title: title,
-            scene: WebviewSceneFactory(title: title, url: url)
-        )
     }
 }
