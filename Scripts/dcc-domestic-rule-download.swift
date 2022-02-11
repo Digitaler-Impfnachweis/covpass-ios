@@ -7,18 +7,17 @@ let baseURL = "https://distribution.dcc-rules.de"
 class RuleSimple: Codable {
     var identifier: String
     var version: String
-    var country: String
     var hash: String
 }
 
 // Download list of rules
-let dataSummary = try! Data(contentsOf: URL(string: baseURL + "/domnestic")!)
+let dataSummary = try! Data(contentsOf: URL(string: baseURL + "/domesticrules")!)
 let rulesSummary = try! JSONDecoder().decode([RuleSimple].self, from: dataSummary)
 
 // Download all rules
 var result = [[String: Any]]()
 for ruleSummary in rulesSummary {
-    let data = try! Data(contentsOf: URL(string: baseURL + "/rules/\(ruleSummary.country)/\(ruleSummary.hash)")!)
+    let data = try! Data(contentsOf: URL(string: baseURL + "/domesticrules/\(ruleSummary.hash)")!)
     var json = try! JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
     json["hash"] = ruleSummary.hash
     result.append(json)
