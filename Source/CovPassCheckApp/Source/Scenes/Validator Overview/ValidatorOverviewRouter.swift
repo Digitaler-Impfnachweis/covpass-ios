@@ -61,7 +61,7 @@ class ValidatorOverviewRouter: ValidatorOverviewRouterProtocol {
     
     func showError(error: Error,
                    _2GContext: Bool,
-                   userDefaults: Persistence) {
+                   userDefaults: Persistence) -> Promise<CBORWebToken>  {
         sceneCoordinator.present(
             ValidationResultSceneFactory(
                 router: ValidationResultRouter(sceneCoordinator: sceneCoordinator),

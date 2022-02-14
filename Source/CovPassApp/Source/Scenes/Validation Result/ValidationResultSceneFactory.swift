@@ -11,7 +11,8 @@ import CovPassUI
 import PromiseKit
 import UIKit
 
-struct ValidationResultSceneFactory: SceneFactory {
+struct ValidationResultSceneFactory: ResolvableSceneFactory {
+    
     // MARK: - Properties
     
     let router: ValidationResultRouterProtocol
@@ -34,13 +35,14 @@ struct ValidationResultSceneFactory: SceneFactory {
         self.userDefaults = userDefaults
     }
     
-    func make() -> UIViewController {
-        let viewModel = ValidationResultFactory.createViewModel( router: router,
-                                                                 repository: VaccinationRepository.create(),
-                                                                 certificate: certificate.vaccinationCertificate,
-                                                                 error: error,
-                                                                 token: token,
-                                                                 userDefaults: userDefaults)
+    func make(resolvable: Resolver<CBORWebToken>) -> UIViewController {
+        let viewModel = ValidationResultFactory.createViewModel(resolvable: resolvable,
+                                                                router: router,
+                                                                repository: VaccinationRepository.create(),
+                                                                certificate: certificate.vaccinationCertificate,
+                                                                error: error,
+                                                                token: token,
+                                                                userDefaults: userDefaults)
         let viewController = ValidationResultViewController(viewModel: viewModel)
         return viewController
     }

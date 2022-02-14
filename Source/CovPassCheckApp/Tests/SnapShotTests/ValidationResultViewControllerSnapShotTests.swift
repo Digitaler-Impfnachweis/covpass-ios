@@ -13,8 +13,11 @@ import CovPassCommon
 
 class ValidationResultViewControllerSnapShotTests: BaseSnapShotTests {
     
+    let (_, resolver) = Promise<CBORWebToken>.pending()
+
     func testValidationResultViewControllerWithTechnicalError() {
-        let vm = ErrorResultViewModel(router: ValidationResultRouterMock(),
+        let vm = ErrorResultViewModel(resolvable: resolver,
+                                      router: ValidationResultRouterMock(),
                                       repository: VaccinationRepositoryMock(),
                                       certificate: nil,
                                       error: ValidationResultError.technical,
@@ -25,7 +28,8 @@ class ValidationResultViewControllerSnapShotTests: BaseSnapShotTests {
     }
 
     func testValidationResultViewControllerWithFunctionalError() {
-        let vm = ErrorResultViewModel(router: ValidationResultRouterMock(),
+        let vm = ErrorResultViewModel(resolvable: resolver,
+                                      router: ValidationResultRouterMock(),
                                       repository: VaccinationRepositoryMock(),
                                       certificate: nil,
                                       error: ValidationResultError.functional,
@@ -36,7 +40,8 @@ class ValidationResultViewControllerSnapShotTests: BaseSnapShotTests {
     }
     
     func testValidationResultViewControllerWithTechnicalError2GContext() {
-        let vm = ErrorResultViewModel(router: ValidationResultRouterMock(),
+        let vm = ErrorResultViewModel(resolvable: resolver,
+                                      router: ValidationResultRouterMock(),
                                       repository: VaccinationRepositoryMock(),
                                       certificate: nil,
                                       error: ValidationResultError.technical,
@@ -47,7 +52,8 @@ class ValidationResultViewControllerSnapShotTests: BaseSnapShotTests {
     }
 
     func testValidationResultViewControllerWithFunctionalError2GContext() {
-        let vm = ErrorResultViewModel(router: ValidationResultRouterMock(),
+        let vm = ErrorResultViewModel(resolvable: resolver,
+                                      router: ValidationResultRouterMock(),
                                       repository: VaccinationRepositoryMock(),
                                       certificate: nil,
                                       error: ValidationResultError.functional,

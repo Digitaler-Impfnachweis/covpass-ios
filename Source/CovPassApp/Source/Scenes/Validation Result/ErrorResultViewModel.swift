@@ -17,9 +17,11 @@ enum ValidationResultError: Error {
 }
 
 class ErrorResultViewModel: ValidationResultViewModel {
+    
     // MARK: - Properties
     
     weak var delegate: ResultViewModelDelegate?
+    var resolvable: Resolver<CBORWebToken>
     var router: ValidationResultRouterProtocol
     var repository: VaccinationRepositoryProtocol
     var certificate: CBORWebToken?
@@ -83,17 +85,19 @@ class ErrorResultViewModel: ValidationResultViewModel {
     
     // MARK: - Lifecycle
     
-    init( router: ValidationResultRouterProtocol,
-        repository: VaccinationRepositoryProtocol,
-        certificate: CBORWebToken? = nil,
-        error: Error,
-        token: VAASValidaitonResultToken?,
-        userDefaults: Persistence) {
+    init(resolvable: Resolver<CBORWebToken>,
+         router: ValidationResultRouterProtocol,
+         repository: VaccinationRepositoryProtocol,
+         certificate: CBORWebToken? = nil,
+         error: Error,
+         token: VAASValidaitonResultToken?,
+         userDefaults: Persistence) {
         self.router = router
         self.repository = repository
         self.certificate = certificate
         self.error = error
         self.token = token
         self.userDefaults = userDefaults
+        self.resolvable = resolvable
     }
 }

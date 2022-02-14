@@ -18,6 +18,7 @@ class GProofViewModelTests: XCTestCase {
     var vaccinationRepoMock: VaccinationRepositoryMock!
     var certLogicMock: DCCCertLogicMock!
     var routerMock: GProofMockRouter!
+    let (_, resolver) = Promise<CBORWebToken>.pending()
 
     override func setUp() {
         super.setUp()
@@ -25,7 +26,8 @@ class GProofViewModelTests: XCTestCase {
         vaccinationRepoMock = VaccinationRepositoryMock()
         certLogicMock = DCCCertLogicMock()
         routerMock = GProofMockRouter()
-        sut = GProofViewModel(initialToken: initialToken,
+        sut = GProofViewModel(resolvable: resolver,
+                              initialToken: initialToken,
                               router: routerMock,
                               repository: vaccinationRepoMock,
                               certLogic: certLogicMock,
@@ -49,7 +51,8 @@ class GProofViewModelTests: XCTestCase {
         let routerMock = GProofMockRouter()
         vaccinationRepoMock.checkedCert = CBORWebToken.mockTestCertificate
         certLogicMock.validateResult = [.init(rule: nil, result: .passed, validationErrors: nil)]
-        let sut = GProofViewModel(initialToken: initialToken,
+        let sut = GProofViewModel(resolvable: resolver,
+                                  initialToken: initialToken,
                                   router: routerMock,
                                   repository: vaccinationRepoMock,
                                   certLogic: certLogicMock,
@@ -669,6 +672,7 @@ class GProofViewModelTests: XCTestCase {
             .init(rule: nil, result: .passed, validationErrors: nil)
         ]
         sut = .init(
+            resolvable: resolver,
             initialToken: token,
             router: routerMock,
             repository: vaccinationRepoMock,

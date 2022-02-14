@@ -229,13 +229,15 @@ class GProofViewModel: GProofViewModelProtocol {
     private var lastTriedCertType: CertType? = nil
     private var userDefaults: Persistence
     private var boosterAsTest: Bool
-
-    init(initialToken: CBORWebToken,
+    private var resolvable: Resolver<CBORWebToken>
+    init(resolvable: Resolver<CBORWebToken>,
+         initialToken: CBORWebToken,
          router: GProofRouterProtocol,
          repository: VaccinationRepositoryProtocol,
          certLogic: DCCCertLogicProtocol,
          userDefaults: Persistence,
          boosterAsTest: Bool) {
+        self.resolvable = resolvable
         self.repository = repository
         self.certLogic = certLogic
         self.userDefaults = userDefaults
@@ -324,7 +326,8 @@ class GProofViewModel: GProofViewModelProtocol {
     }
     
     private func setResultViewModel(newToken: CBORWebToken?) -> Promise<Void> {
-        let validationResultViewModel = ValidationResultFactory.createViewModel(router: router,
+        let validationResultViewModel = ValidationResultFactory.createViewModel(resolvable: resolvable,
+                                                                                router: router,
                                                                                 repository: repository,
                                                                                 certificate: newToken,
                                                                                 error: error,

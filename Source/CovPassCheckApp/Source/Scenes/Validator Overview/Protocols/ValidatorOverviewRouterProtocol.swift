@@ -19,7 +19,7 @@ protocol ValidatorOverviewRouterProtocol: DialogRouterProtocol {
                          userDefaults: Persistence)
     func showError(error: Error,
                    _2GContext: Bool,
-                   userDefaults: Persistence)
+                   userDefaults: Persistence) -> Promise<CBORWebToken>
     func showAppInformation(userDefaults: Persistence)
     func showGproof(initialToken: CBORWebToken,
                     repository: VaccinationRepositoryProtocol,

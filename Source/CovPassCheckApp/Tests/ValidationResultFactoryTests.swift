@@ -13,9 +13,12 @@ import PromiseKit
 import CertLogic
 
 class ValidationResultFactoryTests: XCTestCase {
+    
+    let (_, resolver) = Promise<CBORWebToken>.pending()
 
     func testValidationError_no_certificate_and_no_error() throws {
-        let sut = ValidationResultFactory.createViewModel(router: ValidationResultRouterMock(),
+        let sut = ValidationResultFactory.createViewModel(resolvable: resolver,
+                                                          router: ValidationResultRouterMock(),
                                                           repository: VaccinationRepositoryMock(),
                                                           certificate: nil,
                                                           error: nil,
@@ -32,7 +35,8 @@ class ValidationResultFactoryTests: XCTestCase {
     }
 
     func testValidationError_certificate_and_no_error() throws {
-        let sut = ValidationResultFactory.createViewModel(router: ValidationResultRouterMock(),
+        let sut = ValidationResultFactory.createViewModel(resolvable: resolver,
+                                                          router: ValidationResultRouterMock(),
                                                           repository: VaccinationRepositoryMock(),
                                                           certificate: CBORWebToken.mockTestCertificate,
                                                           error: nil,
@@ -50,7 +54,8 @@ class ValidationResultFactoryTests: XCTestCase {
     }
 
     func testValidationError_certificate_and_error() throws {
-        let sut = ValidationResultFactory.createViewModel(router: ValidationResultRouterMock(),
+        let sut = ValidationResultFactory.createViewModel(resolvable: resolver,
+                                                          router: ValidationResultRouterMock(),
                                                           repository: VaccinationRepositoryMock(),
                                                           certificate: CBORWebToken.mockTestCertificate,
                                                           error: CertificateError.expiredCertifcate,
@@ -70,7 +75,8 @@ class ValidationResultFactoryTests: XCTestCase {
     func testValidationError_certificate_and_no_error_validationResult_isEmpty_technical_Error() throws {
         let certLogic = DCCCertLogicMock()
         certLogic.validateResult = []
-        let sut = ValidationResultFactory.createViewModel(router: ValidationResultRouterMock(),
+        let sut = ValidationResultFactory.createViewModel(resolvable: resolver,
+                                                          router: ValidationResultRouterMock(),
                                                           repository: VaccinationRepositoryMock(),
                                                           certificate: CBORWebToken.mockVaccinationCertificate,
                                                           error: nil,
@@ -88,7 +94,8 @@ class ValidationResultFactoryTests: XCTestCase {
     }
 
     func testValidationError_certificate_and_no_error_catch_technical_Error() throws {
-        let sut = ValidationResultFactory.createViewModel(router: ValidationResultRouterMock(),
+        let sut = ValidationResultFactory.createViewModel(resolvable: resolver,
+                                                          router: ValidationResultRouterMock(),
                                                           repository: VaccinationRepositoryMock(),
                                                           certificate: CBORWebToken.mockVaccinationCertificate,
                                                           error: nil,
@@ -109,7 +116,8 @@ class ValidationResultFactoryTests: XCTestCase {
         let expectedCertificate = CBORWebToken.mockRecoveryCertificate
         let certLogic = DCCCertLogicMock()
         certLogic.validateResult = [ValidationResult(rule: .mock, result: .passed, validationErrors: nil)]
-        let sut = ValidationResultFactory.createViewModel(router: ValidationResultRouterMock(),
+        let sut = ValidationResultFactory.createViewModel(resolvable: resolver,
+                                                          router: ValidationResultRouterMock(),
                                                           repository: VaccinationRepositoryMock(),
                                                           certificate: expectedCertificate,
                                                           error: nil,
@@ -127,7 +135,8 @@ class ValidationResultFactoryTests: XCTestCase {
         let expectedCertificate = CBORWebToken.mockTestCertificate
         let certLogic = DCCCertLogicMock()
         certLogic.validateResult = [ValidationResult(rule: .mock, result: .passed, validationErrors: nil)]
-        let sut = ValidationResultFactory.createViewModel(router: ValidationResultRouterMock(),
+        let sut = ValidationResultFactory.createViewModel(resolvable: resolver,
+                                                          router: ValidationResultRouterMock(),
                                                           repository: VaccinationRepositoryMock(),
                                                           certificate: expectedCertificate,
                                                           error: nil,
