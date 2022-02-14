@@ -37,8 +37,9 @@ struct GProofSceneFactory: ResolvableSceneFactory {
         self.boosterAsTest = boosterAsTest
     }
 
-    func make(resolvable: Resolver<GProofResult>) -> UIViewController {
-        let viewModel = GProofViewModel(initialToken: initialToken,
+    func make(resolvable: Resolver<CBORWebToken>) -> UIViewController {
+        let viewModel = GProofViewModel(resolvable: resolvable,
+                                        initialToken: initialToken,
                                         router: router,
                                         repository: repository,
                                         certLogic: certLogic,

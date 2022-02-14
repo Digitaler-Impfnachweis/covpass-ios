@@ -11,7 +11,7 @@ import CovPassUI
 import PromiseKit
 
 class ValidatorMockRouter: ValidatorOverviewRouterProtocol {
-
+    
     var sceneCoordinator: SceneCoordinator = SceneCoordinatorMock()
 
     func showAppInformation(userDefaults: Persistence) {
@@ -37,7 +37,7 @@ class ValidatorMockRouter: ValidatorOverviewRouterProtocol {
 
     }
     
-    func showError(error: Error, _2GContext: Bool, userDefaults: Persistence) {
-
+    func showError(error: Error, _2GContext: Bool, userDefaults: Persistence) -> Promise<CBORWebToken> {
+        .value(CBORWebToken.mockTestCertificate)
     }
 }

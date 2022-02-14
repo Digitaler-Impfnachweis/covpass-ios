@@ -38,7 +38,13 @@ extension ValidationViewModel {
             self.repository.checkCertificate($0)
         }
         .done { certificate in
+            
+            if self._2GContext {
+                resolvable.fulfill(certificate)
+            }
+            
             let vm = ValidationResultFactory.createViewModel(
+                resolvable: resolvable,
                 router: self.router,
                 repository: self.repository,
                 certificate: certificate,
@@ -52,6 +58,7 @@ extension ValidationViewModel {
         }
         .catch { error in
             let vm = ValidationResultFactory.createViewModel(
+                resolvable: resolvable,
                 router: self.router,
                 repository: self.repository,
                 certificate: nil,

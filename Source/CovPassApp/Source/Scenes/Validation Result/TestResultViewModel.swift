@@ -12,9 +12,11 @@ import PromiseKit
 import UIKit
 
 class TestResultViewModel: ValidationResultViewModel {
+    
     // MARK: - Properties
 
     weak var delegate: ResultViewModelDelegate?
+    var resolvable: Resolver<CBORWebToken>
     var router: ValidationResultRouterProtocol
     var repository: VaccinationRepositoryProtocol
     var certificate: CBORWebToken?
@@ -52,7 +54,8 @@ class TestResultViewModel: ValidationResultViewModel {
     
     // MARK: - Lifecycle
     
-    init(router: ValidationResultRouterProtocol,
+    init(resolvable: Resolver<CBORWebToken>,
+         router: ValidationResultRouterProtocol,
          repository: VaccinationRepositoryProtocol,
          certificate: CBORWebToken?,
          token: VAASValidaitonResultToken?,
@@ -62,5 +65,6 @@ class TestResultViewModel: ValidationResultViewModel {
         self.certificate = certificate
         self.token = token
         self.userDefaults = userDefaults
+        self.resolvable = resolvable
     }
 }

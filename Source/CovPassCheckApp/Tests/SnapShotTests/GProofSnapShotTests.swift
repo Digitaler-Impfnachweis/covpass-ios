@@ -13,12 +13,15 @@ import PromiseKit
 
 class GProofSnapShotTests: BaseSnapShotTests {
     
+    let (_, resolver) = Promise<CBORWebToken>.pending()
+
     func testInitWithFailingTest() {
         let vaccinationRepoMock = VaccinationRepositoryMock()
         let certLogicMock = DCCCertLogicMock()
         let initialToken = CBORWebToken.mockTestCertificate
         let routerMock = GProofMockRouter()
-        let vm = GProofViewModel(initialToken: initialToken,
+        let vm = GProofViewModel(resolvable: resolver,
+                                 initialToken: initialToken,
                                  router: routerMock,
                                  repository: vaccinationRepoMock,
                                  certLogic: certLogicMock,
@@ -34,7 +37,8 @@ class GProofSnapShotTests: BaseSnapShotTests {
         certLogicMock.validateResult = [.init(rule: nil, result: .passed, validationErrors: nil)]
         let initialToken = rapidTestToken()
         let routerMock = GProofMockRouter()
-        let vm = GProofViewModel(initialToken: initialToken,
+        let vm = GProofViewModel(resolvable: resolver,
+                                 initialToken: initialToken,
                                  router: routerMock,
                                  repository: vaccinationRepoMock,
                                  certLogic: certLogicMock,
@@ -49,7 +53,8 @@ class GProofSnapShotTests: BaseSnapShotTests {
         let certLogicMock = DCCCertLogicMock()
         let initialToken = CBORWebToken.mockVaccinationCertificate
         let routerMock = GProofMockRouter()
-        let vm = GProofViewModel(initialToken: initialToken,
+        let vm = GProofViewModel(resolvable: resolver,
+                                 initialToken: initialToken,
                                  router: routerMock,
                                  repository: vaccinationRepoMock,
                                  certLogic: certLogicMock,
@@ -65,7 +70,8 @@ class GProofSnapShotTests: BaseSnapShotTests {
         certLogicMock.validateResult = [.init(rule: nil, result: .passed, validationErrors: nil)]
         let initialToken = CBORWebToken.mockVaccinationCertificate
         let routerMock = GProofMockRouter()
-        let vm = GProofViewModel(initialToken: initialToken,
+        let vm = GProofViewModel(resolvable: resolver,
+                                 initialToken: initialToken,
                                  router: routerMock,
                                  repository: vaccinationRepoMock,
                                  certLogic: certLogicMock,
@@ -81,7 +87,8 @@ class GProofSnapShotTests: BaseSnapShotTests {
         certLogicMock.validateResult = [.init(rule: nil, result: .passed, validationErrors: nil)]
         let initialToken = CBORWebToken.mockVaccinationCertificate
         let routerMock = GProofMockRouter()
-        let vm = GProofViewModel(initialToken: initialToken,
+        let vm = GProofViewModel(resolvable: resolver,
+                                 initialToken: initialToken,
                                  router: routerMock,
                                  repository: vaccinationRepoMock,
                                  certLogic: certLogicMock,
@@ -99,7 +106,8 @@ class GProofSnapShotTests: BaseSnapShotTests {
         certLogicMock.validateResult = [.init(rule: nil, result: .passed, validationErrors: nil)]
         let initialToken = rapidTestToken()
         let routerMock = GProofMockRouter()
-        let vm = GProofViewModel(initialToken: initialToken,
+        let vm = GProofViewModel(resolvable: resolver,
+                                 initialToken: initialToken,
                                  router: routerMock,
                                  repository: vaccinationRepoMock,
                                  certLogic: certLogicMock,
@@ -118,7 +126,8 @@ class GProofSnapShotTests: BaseSnapShotTests {
         certLogicMock.validateResult = [.init(rule: nil, result: .passed, validationErrors: nil)]
         let initialToken = CBORWebToken.mockVaccinationCertificate
         let routerMock = GProofMockRouter()
-        let vm = GProofViewModel(initialToken: initialToken,
+        let vm = GProofViewModel(resolvable: resolver,
+                                 initialToken: initialToken,
                                  router: routerMock,
                                  repository: vaccinationRepoMock,
                                  certLogic: certLogicMock,

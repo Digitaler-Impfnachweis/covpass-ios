@@ -45,7 +45,7 @@ class ValidatorOverviewViewModel {
     private let router: ValidatorOverviewRouterProtocol
     private let certLogic: DCCCertLogicProtocol
     private var userDefaults: Persistence
-
+    
     var delegate: ViewModelDelegate?
     
     var title: String { "validation_start_screen_title".localized }
@@ -192,19 +192,35 @@ class ValidatorOverviewViewModel {
             self.repository.checkCertificate($0)
         }
         .done {
-            scanType == ._3G ? self.router.showCertificate($0,
-                                                           _2GContext: false,
-                                                           userDefaults: self.userDefaults) : self.router.showGproof(initialToken: $0,
-                                                                                                                     repository: self.repository,
-                                                                                                                     certLogic: self.certLogic,
-                                                                                                                     userDefaults: self.userDefaults,
-                                                                                                                     boosterAsTest: self.boosterAsTest)
+            if scanType == ._3G {
+                self.router.showCertificate($0,
+                                            _2GContext: false,
+                                            userDefaults: self.userDefaults)
+            } else {
+                self.router.showGproof(initialToken: $0,
+                                       repository: self.repository,
+                                       certLogic: self.certLogic,
+                                       userDefaults: self.userDefaults,
+                                       boosterAsTest: self.boosterAsTest)
+            }
         }
         .catch { error in
-            self.router.showError(error: error,
-                                  _2GContext: scanType == ._2G,
-                                  userDefaults: self.userDefaults)
+            self.errorHandling(error: error, scanType: scanType)
         }
+    }
+    
+    func errorHandling(error: Error, scanType: ScanType) {
+        self.router.showError(error: error,
+                              _2GContext: scanType == ._2G,
+                              userDefaults: self.userDefaults)
+            .done { token in
+                self.router.showGproof(initialToken: token,
+                                       repository: self.repository,
+                                       certLogic: self.certLogic,
+                                       userDefaults: self.userDefaults,
+                                       boosterAsTest: self.boosterAsTest)
+            }
+            .cauterize()
     }
     
     func showAppInformation() {
@@ -247,8 +263,8 @@ class ValidatorOverviewViewModel {
             guard let self = self,
                   let date = date,
                   let offset = offset else {
-                return
-            }
+                      return
+                  }
             self.ntpDate = date
             self.ntpOffset = offset
             completion?()

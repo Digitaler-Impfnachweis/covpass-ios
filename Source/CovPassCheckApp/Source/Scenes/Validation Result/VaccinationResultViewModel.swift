@@ -16,6 +16,7 @@ class VaccinationResultViewModel: ValidationResultViewModel {
     // MARK: - Properties
 
     weak var delegate: ResultViewModelDelegate?
+    var resolvable: Resolver<CBORWebToken>
     var router: ValidationResultRouterProtocol
     var repository: VaccinationRepositoryProtocol
     var certificate: CBORWebToken?
@@ -55,13 +56,14 @@ class VaccinationResultViewModel: ValidationResultViewModel {
     
     // MARK: - Lifecycle
 
-    init(
+    init(resolvable: Resolver<CBORWebToken>,
         router: ValidationResultRouterProtocol,
         repository: VaccinationRepositoryProtocol,
         certificate: CBORWebToken?,
         _2GContext: Bool,
         userDefaults: Persistence
     ) {
+        self.resolvable = resolvable
         self.router = router
         self.repository = repository
         self.certificate = certificate
