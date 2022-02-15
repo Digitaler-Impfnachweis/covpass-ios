@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -11,18 +9,18 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GProofDifferentPersonViewController" customModule="CovPassCheckApp" customModuleProvider="target">
             <connections>
+                <outlet property="firstResultCard" destination="54t-Rn-hAg" id="d3r-vt-mLb"/>
+                <outlet property="firstResultHeadlineLabel" destination="Bg1-cI-nHB" id="7i4-f1-JcF"/>
                 <outlet property="footerHeadline" destination="qTo-Nw-26Q" id="dhw-2u-efZ"/>
                 <outlet property="footerLink" destination="WnI-om-6IF" id="8n9-ez-MXc"/>
                 <outlet property="footerStack" destination="Pze-tc-qnF" id="Q3Y-w9-bdg"/>
                 <outlet property="footerText" destination="bBG-PZ-D9T" id="qnC-T5-KOL"/>
-                <outlet property="gProofHeadline" destination="Bg1-cI-nHB" id="7i4-f1-JcF"/>
-                <outlet property="gProofResults" destination="54t-Rn-hAg" id="d3r-vt-mLb"/>
                 <outlet property="headline" destination="rPT-fc-LXq" id="nfZ-U2-3Yh"/>
                 <outlet property="retryButton" destination="DGl-Sc-nGO" id="Wig-oo-Qrw"/>
+                <outlet property="secondResultCard" destination="Sxb-44-nxk" id="j9e-Kb-fPh"/>
+                <outlet property="secondResultHeadlineLabel" destination="twY-Xp-giH" id="Z9M-Qi-ieH"/>
                 <outlet property="startOverButton" destination="zKZ-k3-xca" id="5RD-Jq-LiN"/>
-                <outlet property="subtitle" destination="4lc-e8-VRv" id="0QN-Pm-aGE"/>
-                <outlet property="testProofHeadline" destination="twY-Xp-giH" id="Z9M-Qi-ieH"/>
-                <outlet property="testProofResults" destination="Sxb-44-nxk" id="j9e-Kb-fPh"/>
+                <outlet property="subtitleLabel" destination="4lc-e8-VRv" id="0QN-Pm-aGE"/>
                 <outlet property="view" destination="tsk-8d-S15" id="PvJ-We-xGu"/>
             </connections>
         </placeholder>
@@ -171,23 +169,6 @@
             </connections>
         </tapGestureRecognizer>
     </objects>
-    <designables>
-        <designable name="54t-Rn-hAg">
-            <size key="intrinsicContentSize" width="414" height="110"/>
-        </designable>
-        <designable name="DGl-Sc-nGO">
-            <size key="intrinsicContentSize" width="414" height="128"/>
-        </designable>
-        <designable name="Sxb-44-nxk">
-            <size key="intrinsicContentSize" width="414" height="106"/>
-        </designable>
-        <designable name="rPT-fc-LXq">
-            <size key="intrinsicContentSize" width="414" height="60"/>
-        </designable>
-        <designable name="zKZ-k3-xca">
-            <size key="intrinsicContentSize" width="414" height="128"/>
-        </designable>
-    </designables>
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

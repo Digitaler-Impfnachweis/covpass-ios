@@ -96,7 +96,7 @@ class GProofSnapShotTests: BaseSnapShotTests {
                                  boosterAsTest: false)
         let vc = GProofViewController(viewModel: vm)
         vaccinationRepoMock.checkedCert = rapidTestToken()
-        vm.scanTest()
+        vm.scanNext()
         verifyAsync(vc: vc, wait: 0.1)
     }
     
@@ -116,7 +116,7 @@ class GProofSnapShotTests: BaseSnapShotTests {
         let vc = GProofViewController(viewModel: vm)
         certLogicMock.validateResult = [.init(rule: nil, result: .fail, validationErrors: nil)]
         vaccinationRepoMock.checkedCert = CBORWebToken.mockVaccinationCertificate
-        vm.scan2GProof()
+        vm.scanNext()
         verifyAsync(vc: vc, wait: 0.1)
     }
     
@@ -136,8 +136,46 @@ class GProofSnapShotTests: BaseSnapShotTests {
         let vc = GProofViewController(viewModel: vm)
         certLogicMock.validateResult = [.init(rule: nil, result: .fail, validationErrors: nil)]
         vaccinationRepoMock.checkedCert = CBORWebToken.mockTestCertificate
-        vm.scanTest()
+        vm.scanNext()
         verifyAsync(vc: vc, wait: 0.1)
+    }
+    
+    func testBoostedVaccinationWhereBosterCannotReplaceTest() {
+        let vaccinationRepoMock = VaccinationRepositoryMock()
+        let certLogicMock = DCCCertLogicMock()
+        certLogicMock.validateResult = [.init(rule: nil, result: .passed, validationErrors: nil)]
+        let initialToken = CBORWebToken.mockVaccinationCertificate
+        initialToken.hcert.dgc.v!.first!.dn = 3
+        initialToken.hcert.dgc.v!.first!.sd = 2
+        let routerMock = GProofMockRouter()
+        let vm = GProofViewModel(resolvable: resolver,
+                                 initialToken: initialToken,
+                                 router: routerMock,
+                                 repository: vaccinationRepoMock,
+                                 certLogic: certLogicMock,
+                                 userDefaults: UserDefaultsPersistence(),
+                                 boosterAsTest: false)
+        let vc = GProofViewController(viewModel: vm)
+        verifyView(vc: vc)
+    }
+    
+    func testBoostedVaccinationWhereBosterCanReplaceTest() {
+        let vaccinationRepoMock = VaccinationRepositoryMock()
+        let certLogicMock = DCCCertLogicMock()
+        certLogicMock.validateResult = [.init(rule: nil, result: .passed, validationErrors: nil)]
+        let initialToken = CBORWebToken.mockVaccinationCertificate
+        initialToken.hcert.dgc.v!.first!.dn = 3
+        initialToken.hcert.dgc.v!.first!.sd = 2
+        let routerMock = GProofMockRouter()
+        let vm = GProofViewModel(resolvable: resolver,
+                                 initialToken: initialToken,
+                                 router: routerMock,
+                                 repository: vaccinationRepoMock,
+                                 certLogic: certLogicMock,
+                                 userDefaults: UserDefaultsPersistence(),
+                                 boosterAsTest: true)
+        let vc = GProofViewController(viewModel: vm)
+        verifyView(vc: vc)
     }
 
     private func rapidTestToken() -> CBORWebToken {

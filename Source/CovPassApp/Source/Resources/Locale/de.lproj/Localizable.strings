@@ -1195,6 +1195,8 @@
 
 "app_information_title_accessibility_statement" = "Barrierefreiheitserklärung";
 
+"app_information_title_accessibility_statement_linked" = "#Barrierefreiheitserklärung::$0#";
+
 "app_information_title_update" = "Einreiseregeln aktualisieren";
 
 "app_information_message_update" = "Zur Überprüfung der Gültigkeit von Zertifikaten benötigt die App aktuelle Listen der vertrauenswürdigen Zertifikatsaussteller und der momentan geltenden Corona-Einreiseregeln in den entsprechenden Ländern.\n\nDiese Listen aktualisieren sich täglich automatisch. Sie können hier auch jederzeit eine manuelle Aktualisierung vornehmen.";

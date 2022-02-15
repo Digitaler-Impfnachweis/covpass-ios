@@ -71,11 +71,11 @@ class GProofRouter: GProofRouterProtocol {
                    style: .alert)
     }
     
-    func showDifferentPerson(gProofToken: CBORWebToken,
-                             testProofToken: CBORWebToken) -> Promise<GProofResult> {
+    func showDifferentPerson(firstResultCert: CBORWebToken,
+                             scondResultCert: CBORWebToken) -> Promise<GProofResult> {
         sceneCoordinator.present(
-            GProofDifferentPersonSceneFactory(gProofToken: gProofToken,
-                                              testProofToken: testProofToken)
+            GProofDifferentPersonSceneFactory(firstResultCert: firstResultCert,
+                                              secondResultCert: scondResultCert)
         )
     }
     

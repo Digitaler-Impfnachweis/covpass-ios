@@ -326,6 +326,16 @@
 
 "result_2G_2nd_timestamp_months" = "Vor %d Monaten";
 
+"result_2G_3rd_test_vacc_empty" = "Test oder Impfung*";
+
+"result_2G_3rd_test_recov_empty" = "Test oder Genesung";
+
+"result_2G_3rd_vacc_recov_empty" = "Impfung* oder Genesung";
+
+"result_2G__3rd_footnote" = "* Erwartet Grundimmunisierung oder Auffrischungsimpfung";
+
+"result_2G__3rd_button" = "Zweites Zertifikat scannen";
+
 "accessibility_warning_2G_names_announce_open" = "Fehlermeldung \"Abweichende Daten\" wurde geöffnet";
 
 "accessibility_warning_2G_names_announce_close" = "Fehlermeldung \"Abweichende Daten\" wurde geschlossen";
@@ -402,6 +412,8 @@
 "app_information_title_open_source" = "Open-Source-Lizenzen";
 
 "app_information_title_accessibility_statement" = "Barrierefreiheitserklärung";
+
+"app_information_title_accessibility_statement_linked" = "#Barrierefreiheitserklärung::$0#";
 
 "accessibility_app_information_title_open_source_announce" = "Die Ansicht \"Open-Source-Lizenzen\" wurde geöffnet";
 

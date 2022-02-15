@@ -14,11 +14,11 @@ class GProofDifferentPersonViewController: UIViewController {
     // MARK: - Properties
     
     @IBOutlet weak var headline: InfoHeaderView!
-    @IBOutlet weak var subtitle: UILabel!
-    @IBOutlet weak var gProofHeadline: UILabel!
-    @IBOutlet weak var gProofResults: CertResultCard!
-    @IBOutlet weak var testProofHeadline: UILabel!
-    @IBOutlet weak var testProofResults: CertResultCard!
+    @IBOutlet weak var subtitleLabel: UILabel!
+    @IBOutlet weak var firstResultHeadlineLabel: UILabel!
+    @IBOutlet weak var firstResultCard: CertResultCard!
+    @IBOutlet weak var secondResultHeadlineLabel: UILabel!
+    @IBOutlet weak var secondResultCard: CertResultCard!
     @IBOutlet weak var footerHeadline: UILabel!
     @IBOutlet weak var footerText: UILabel!
     @IBOutlet weak var footerLink: UILabel!
@@ -73,7 +73,7 @@ class GProofDifferentPersonViewController: UIViewController {
     }
     
     private func configureContent() {
-        subtitle.attributedText = viewModel.subtitle.styledAs(.body)
+        subtitleLabel.attributedText = viewModel.subtitle.styledAs(.body)
         footerHeadline.attributedText = viewModel.footerHeadline.styledAs(.header_3)
         footerText.attributedText = viewModel.footerText.styledAs(.body)
         footerLink.attributedText = viewModel.footerLinkText.styledAs(.header_3).colored(.brandAccent)
@@ -82,22 +82,22 @@ class GProofDifferentPersonViewController: UIViewController {
         let resultTitleStyle: TextStyle = .header_2
         let resultSubTitleStyle: TextStyle = .subheader_2
 
-        gProofHeadline.attributedText = viewModel.gProofTitle.styledAs(.subheader_2)
-        gProofResults.resultImage = viewModel.gProofCardImage
-        gProofResults.title = viewModel.gProofName.styledAs(resultTitleStyle)
-        gProofResults.subtitle = viewModel.gProofNameTranslittered.styledAs(resultSubTitleStyle)
-        gProofResults.linkImage = nil
-        gProofResults.bottomText = viewModel.gProofDateOfBirth.styledAs(.body)
+        firstResultHeadlineLabel.attributedText = viewModel.firstResultTitle.styledAs(.subheader_2)
+        firstResultCard.resultImage = viewModel.firstResultCardImage
+        firstResultCard.title = viewModel.firstResultName.styledAs(resultTitleStyle)
+        firstResultCard.subtitle = viewModel.firstResultNameTranslittered.styledAs(resultSubTitleStyle)
+        firstResultCard.linkImage = nil
+        firstResultCard.bottomText = viewModel.firstResultDateOfBirth.styledAs(.body)
         
-        testProofHeadline.attributedText = viewModel.testProofTitle.styledAs(.subheader_2)
-        testProofResults.resultImage = viewModel.testProofCardImage
-        testProofResults.title = viewModel.testProofName.styledAs(resultTitleStyle)
-        testProofResults.subtitle = viewModel.testProofNameTranslittered.styledAs(resultSubTitleStyle)
-        testProofResults.linkImage = nil
-        testProofResults.bottomText = viewModel.testProofDateOfBirth.styledAs(.body)
-        testProofResults.contentView?.backgroundColor = .resultYellowBackground
-        testProofResults.contentView?.layer.borderColor = UIColor.resultYellow.cgColor
-        testProofResults.contentView?.layer.borderWidth = 2
+        secondResultHeadlineLabel.attributedText = viewModel.secondResultTitle.styledAs(.subheader_2)
+        secondResultCard.resultImage = viewModel.SecondResultCardImage
+        secondResultCard.title = viewModel.secondResultName.styledAs(resultTitleStyle)
+        secondResultCard.subtitle = viewModel.secondResultNameTranslittered.styledAs(resultSubTitleStyle)
+        secondResultCard.linkImage = nil
+        secondResultCard.bottomText = viewModel.secondResultDateOfBirth.styledAs(.body)
+        secondResultCard.contentView?.backgroundColor = .resultYellowBackground
+        secondResultCard.contentView?.layer.borderColor = UIColor.resultYellow.cgColor
+        secondResultCard.contentView?.layer.borderWidth = 2
     }
     
     private func configureAccessiblity() {

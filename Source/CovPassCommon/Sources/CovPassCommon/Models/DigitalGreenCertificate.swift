@@ -110,4 +110,9 @@ extension DigitalGreenCertificate {
         guard let result = v?.filter({ $0.fullImmunization }) else { return false }
         return !result.isEmpty
     }
-}
+    
+    public var isPCR: Bool {
+        guard let result = t?.filter({ $0.isPCR }) else { return false }
+        return !result.isEmpty
+    }
+ }

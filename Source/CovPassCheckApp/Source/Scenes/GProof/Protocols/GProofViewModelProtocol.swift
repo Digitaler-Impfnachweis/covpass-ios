@@ -13,43 +13,40 @@ protocol GProofViewModelProtocol {
     var title: String { get }
     var checkIdMessage: String { get }
     var footnote: String { get }
-    var buttonScanTest: String { get }
-    var buttonScanTestIsHidden: Bool { get }
+    var buttonScanNextTitle: String { get }
+    var scanNextButtonIsHidden: Bool { get }
     var onlyOneIsScannedAndThisFailed: Bool { get }
     var buttonRetry: String { get }
     var buttonRetryIsHidden: Bool { get }
     var buttonStartOver: String { get }
     var buttonStartOverIsHidden: Bool { get }
-    var buttonScan2G: String { get }
-    var buttonScan2GIsHidden: Bool { get }
     var accessibilityResultAnnounce: String { get }
     var accessibilityResultAnnounceClose: String { get }
-    var resultGProofImage: UIImage { get }
-    var resultGProofTitle: String { get }
-    var resultGProofSubtitle: String? { get }
-    var resultGProofLinkImage: UIImage? { get }
-    var resultGProofFooter: String? { get }
-    var resultTestImage: UIImage { get }
-    var resultTestTitle: String { get }
-    var resultTestSubtitle: String? { get }
-    var resultTestLinkImage: UIImage? { get }
-    var resultTestFooter: String? { get }
+    var firstResultImage: UIImage { get }
+    var firstResultTitle: String { get }
+    var firstResultSubtitle: String? { get }
+    var firstResultLinkImage: UIImage? { get }
+    var firstResultFooterText: String? { get }
+    var secondResultImage: UIImage { get }
+    var secondResultTitle: String { get }
+    var seconResultSubtitle: String? { get }
+    var seconResultLinkImage: UIImage? { get }
+    var seconResultFooterText: String? { get }
     var resultPersonIcon: UIImage { get }
     var resultPersonTitle: String? { get }
     var resultPersonSubtitle: String? { get }
     var resultPersonFooter: String? { get }
-    var testResultViewIsHidden: Bool { get }
+    var seconResultViewIsHidden: Bool { get }
     var pageFooterIsHidden: Bool { get }
     var someIsFailed: Bool  { get }
     var areBothScanned: Bool { get }
     var delegate: ViewModelDelegate? { get set }
-    var gProofResultViewModel: ValidationResultViewModel?  { get set }
-    var testResultViewModel: ValidationResultViewModel?  { get set }
-    func scanTest()
-    func scan2GProof()
+    var firstResult: ValidationResultViewModel?  { get set }
+    var secondResult: ValidationResultViewModel?  { get set }
+    func scanNext()
     func retry()
     func startover()
     func cancel()
-    func showResultTestProof()
-    func showResultGProof()
+    func showSecondCardResult()
+    func showFirstCardResult()
 }

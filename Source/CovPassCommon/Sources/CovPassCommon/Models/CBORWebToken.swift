@@ -117,4 +117,8 @@ extension CBORWebToken {
     public var isNotTest: Bool {
        !isTest
     }
+    
+    public var certType: CertType {
+        isTest ? .test : isRecovery ? .recovery : .vaccination
+    }
 }

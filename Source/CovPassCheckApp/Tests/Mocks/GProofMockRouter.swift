@@ -30,7 +30,7 @@ class GProofMockRouter: GProofRouterProtocol {
         errorShown = true
     }
     
-    func showDifferentPerson(gProofToken: CBORWebToken, testProofToken: CBORWebToken) -> Promise<GProofResult> {
+    func showDifferentPerson(firstResultCert: CBORWebToken, scondResultCert: CBORWebToken) -> Promise<GProofResult> {
         showDifferentPersonShown = true
         return .value(.cancel)
     }

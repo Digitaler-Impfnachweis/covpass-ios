@@ -21,6 +21,6 @@ protocol GProofRouterProtocol: DialogRouterProtocol, ValidationResultRouterProto
                          _2GContext: Bool,
                          userDefaults: Persistence)
     func showError(error: Error)
-    func showDifferentPerson(gProofToken: CBORWebToken,
-                             testProofToken: CBORWebToken) -> Promise<GProofResult>
+    func showDifferentPerson(firstResultCert: CBORWebToken,
+                             scondResultCert: CBORWebToken) -> Promise<GProofResult>
 }
