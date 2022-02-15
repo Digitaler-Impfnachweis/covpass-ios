@@ -55,6 +55,7 @@ extension CBORWebToken {
         let diffComponents = Calendar.current.dateComponents(componentToUse,
                                                              from: fromDate,
                                                              to: Date())
-        return String(format: stringWithPlaceholder, diffComponents.hour ?? 0)
+        let component = componentToUse.first == .month ? diffComponents.month : diffComponents.day
+        return String(format: stringWithPlaceholder, component ?? 0)
     }
 }

@@ -190,7 +190,7 @@ class GProofViewModelTests: XCTestCase {
         XCTAssertEqual(sut.seconResultLinkImage, nil)
         XCTAssertEqual(sut.secondResultTitle, "Basic immunisation")
         XCTAssertEqual(sut.seconResultFooterText, nil)
-        XCTAssertEqual(sut.seconResultSubtitle, "0 months ago")
+        XCTAssertEqual(sut.seconResultSubtitle, "12 months ago")
         
         XCTAssertEqual(sut.resultPersonTitle!, "Doe John")
         XCTAssertEqual(sut.resultPersonSubtitle!, "DOE JOHN")
@@ -380,7 +380,7 @@ class GProofViewModelTests: XCTestCase {
         XCTAssertEqual(sut.firstResultLinkImage, nil)
         XCTAssertEqual(sut.firstResultTitle, "Basic immunisation")
         XCTAssertEqual(sut.firstResultFooterText, nil)
-        XCTAssertEqual(sut.firstResultSubtitle!, "0 months ago")
+        XCTAssertEqual(sut.firstResultSubtitle!, "12 months ago")
         
         XCTAssertEqual(sut.secondResultImage, UIImage.detailStatusFullEmpty)
         XCTAssertEqual(sut.seconResultLinkImage, nil)
@@ -420,7 +420,7 @@ class GProofViewModelTests: XCTestCase {
         XCTAssertEqual(sut.firstResultImage, UIImage.detailStatusFull)
         XCTAssertEqual(sut.firstResultLinkImage, nil)
         XCTAssertEqual(sut.firstResultTitle, "Basic immunisation")
-        XCTAssertEqual(sut.firstResultSubtitle!, "0 months ago")
+        XCTAssertEqual(sut.firstResultSubtitle!, "12 months ago")
         
         XCTAssertEqual(sut.secondResultImage, UIImage.detailStatusTest)
         XCTAssertEqual(sut.seconResultLinkImage, nil)
