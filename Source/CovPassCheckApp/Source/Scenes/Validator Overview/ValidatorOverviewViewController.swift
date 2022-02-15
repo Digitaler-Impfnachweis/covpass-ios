@@ -76,7 +76,7 @@ class ValidatorOverviewViewController: UIViewController {
         offlineCard.infoLabel.attributedText = viewModel.offlineTitle.styledAs(.body)
         offlineCard.infoImageView.image = viewModel.offlineIcon
 
-        offlineCard.dateTitle.text = ""
+        offlineCard.dateTitle.text = viewModel.updateTitle
         offlineCard.certificatesDateLabel.attributedText = viewModel.offlineMessageCertificates?.styledAs(.body).colored(.onBackground70)
         offlineCard.rulesDateLabel.attributedText = viewModel.offlineMessageRules?.styledAs(.body).colored(.onBackground70)
 

@@ -17,6 +17,7 @@ private enum Constants {
     enum Keys {
         static let syncTitle = "validation_start_screen_scan_sync_message_title".localized
         static let syncMessage = "validation_start_screen_scan_sync_message_text".localized
+        static let updateTitle = "validation_start_screen_offline_modus_note_update".localized
         enum ScanType {
             static let validation_start_screen_scan_title = "validation_start_screen_scan_title".localized
             static let validation_start_screen_scan_title_2G = "validation_start_screen_scan_title_2G".localized
@@ -130,6 +131,14 @@ class ValidatorOverviewViewModel {
     
     var switchText: String {
         Constants.Keys.Toggle.validation_start_screen_scan_message_2G_toggle
+    }
+
+    var updateTitle: String {
+        showUpdateTitle ? Constants.Keys.updateTitle : ""
+    }  
+
+    private var showUpdateTitle: Bool {
+        offlineMessageCertificates != nil || offlineMessageRules != nil
     }
     
     var boosterAsTest = false
