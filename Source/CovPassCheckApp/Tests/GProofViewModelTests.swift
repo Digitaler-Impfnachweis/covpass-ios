@@ -574,7 +574,7 @@ class GProofViewModelTests: XCTestCase {
             XCTFail()
         }
     }
-
+    
     func testResultTestTitle_rapid_test() {
         // Given
         let test = Test(
@@ -610,5 +610,41 @@ class GProofViewModelTests: XCTestCase {
 
         // Then
         XCTAssertEqual(resultTestTitle, "Vaccination* or recovery")
+    }
+    
+    fileprivate func test_scan_basic_then_booster(boosterAsTest: Bool) {
+        // Given
+        let basicVaccination = CBORWebToken.mockVaccinationCertificate
+        basicVaccination.hcert.dgc.v!.first!.sd = 2
+        basicVaccination.hcert.dgc.v!.first!.dn = 2
+        let boosterVaccination = CBORWebToken.mockVaccinationCertificate
+        boosterVaccination.hcert.dgc.v!.first!.sd = 2
+        boosterVaccination.hcert.dgc.v!.first!.dn = 3
+        vaccinationRepoMock.checkedCert = basicVaccination
+        certLogicMock.validateResult = [.init(rule: nil, result: .passed, validationErrors: nil)]
+        sut = .init(resolvable: resolver,
+                    initialToken: basicVaccination,
+                    router: routerMock,
+                    repository: vaccinationRepoMock,
+                    certLogic: certLogicMock,
+                    userDefaults: UserDefaultsPersistence(),
+                    boosterAsTest: boosterAsTest)
+        
+        // When
+        vaccinationRepoMock.checkedCert = boosterVaccination
+        sut.scanNext()
+        RunLoop.current.run(for: 0.1)
+
+        // Then
+        let errorShown = (sut.router as! GProofMockRouter).errorShown
+        XCTAssertEqual(!boosterAsTest, errorShown)
+    }
+    
+    func test_scan_basic_then_booster_boosterAsTestOff() {
+        test_scan_basic_then_booster(boosterAsTest: false)
+    }
+    
+    func test_scan_basic_then_booster_boosterAsTestOn() {
+        test_scan_basic_then_booster(boosterAsTest: true)
     }
 }

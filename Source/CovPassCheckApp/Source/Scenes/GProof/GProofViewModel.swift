@@ -165,11 +165,11 @@ class GProofViewModel: GProofViewModelProtocol {
     }
     
     private func preventSettingSameQRCode(_ newToken: CBORWebToken) throws -> Promise<CBORWebToken> {
-        
-        guard firstResult?.certificate?.certType != newToken.certType else {
+        let certTypeIsNotAlreadyScanned = firstResult?.certificate?.certType != newToken.certType
+        let exceptionBoosterWillReplaceCurrent = (newToken.hcert.dgc.isVaccinationBoosted && boosterAsTest)
+        guard certTypeIsNotAlreadyScanned || exceptionBoosterWillReplaceCurrent else {
             throw QRCodeError.qrCodeExists
         }
-        
         return .value(newToken)
     }
     
