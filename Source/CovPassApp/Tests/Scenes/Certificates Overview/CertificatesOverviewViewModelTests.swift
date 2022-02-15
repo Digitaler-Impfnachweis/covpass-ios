@@ -380,6 +380,41 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         // Then
         wait(for: [router.showDialogExpectation], timeout: 2)
     }
+
+    func testRefresh_setExpiryAlert_called() throws {
+        // Given
+        let tokens: [ExtendedCBORWebToken] = [
+            .expired
+        ]
+        let router = CertificatesOverviewRouterMock()
+        configureSutAndRepository(with: router, certificates: tokens)
+
+        // When
+        sut.refresh()
+
+        // Then
+        wait(for: [vaccinationRepository.setExpiryAlertExpectation], timeout: 2)
+        let value = try XCTUnwrap(vaccinationRepository.setExpiryAlertValue)
+        XCTAssertTrue(value.shown)
+        XCTAssertEqual(value.token, tokens[0])
+    }
+
+    func testRefresh_setExpiryAlert_called_for_all_expired_tokens() throws {
+        // Given
+        let tokens: [ExtendedCBORWebToken] = [
+            .expired,
+            .invalid
+        ]
+        let router = CertificatesOverviewRouterMock()
+        vaccinationRepository.setExpiryAlertExpectation.expectedFulfillmentCount = 2
+        configureSutAndRepository(with: router, certificates: tokens)
+
+        // When
+        sut.refresh()
+
+        // Then
+        wait(for: [vaccinationRepository.setExpiryAlertExpectation], timeout: 2)
+    }
 }
 
 private extension ExtendedCBORWebToken {

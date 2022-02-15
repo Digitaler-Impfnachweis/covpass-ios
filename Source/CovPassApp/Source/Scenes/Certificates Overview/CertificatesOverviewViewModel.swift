@@ -437,20 +437,23 @@ extension CertificatesOverviewViewModel {
     }
     
     private func showExpiryAlertIfNeeded() -> Promise<Void> {
-        if var token = someTokenToShowExpirationAlertFor() {
+        let tokens = tokensToShowExpirationAlertFor()
+        for var token in tokens {
             token.wasExpiryAlertShown = true
             _ = repository.setExpiryAlert(shown: true, token: token)
+        }
+        if !tokens.isEmpty {
             showExpiryAlert()
         }
         return .value
     }
 
-    private func someTokenToShowExpirationAlertFor() -> ExtendedCBORWebToken? {
+    private func tokensToShowExpirationAlertFor() -> [ExtendedCBORWebToken] {
         certificatePairsSorted
             .map(\.certificates)
             .compactMap { $0.sortLatest().first }
             .filter(\.vaccinationCertificate.isNotTest)
-            .first { extendedToken in
+            .filter { extendedToken in
                 let alreadyShown = extendedToken.wasExpiryAlertShown ?? false
                 let token = extendedToken.vaccinationCertificate
                 let showAlert = !alreadyShown && (token.expiresSoon || token.isInvalid || token.isExpired)

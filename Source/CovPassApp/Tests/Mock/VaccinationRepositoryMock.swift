@@ -13,6 +13,7 @@ import XCTest
 
 public class VaccinationRepositoryMock: VaccinationRepositoryProtocol {
     let getCertificateListExpectation = XCTestExpectation(description: "getCertificateListExpectation")
+    let setExpiryAlertExpectation = XCTestExpectation(description: "setExpiryAlertExpectation")
     var lastUpdatedTrustList: Date?
     var certificates: [ExtendedCBORWebToken] = []
     var certPair: [CertificatePair] = []
@@ -85,8 +86,11 @@ public class VaccinationRepositoryMock: VaccinationRepositoryProtocol {
         return .value(favoriteToggle)
     }
 
-    public func setExpiryAlert(shown _: Bool, token _: ExtendedCBORWebToken) -> Promise<Void> {
-        Promise.value
+    var setExpiryAlertValue: (shown: Bool, token: ExtendedCBORWebToken)?
+    public func setExpiryAlert(shown: Bool, token : ExtendedCBORWebToken) -> Promise<Void> {
+        setExpiryAlertValue = (shown, token)
+        setExpiryAlertExpectation.fulfill()
+        return Promise.value
     }
 
     public func favoriteStateForCertificates(_: [ExtendedCBORWebToken]) -> Promise<Bool> {
