@@ -19,6 +19,7 @@ private enum Constants {
 }
 
 extension CBORWebToken {
+    
     var testSubtitle: String? {
         guard let test = hcert.dgc.t?.first else {
             return ""

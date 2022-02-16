@@ -43,13 +43,16 @@ class GProofViewModelTests: XCTestCase {
         super.tearDown()
     }
     
-    func testCustom() {
+    func testCustom() throws {
         // GIVEN
         let initialToken = CBORWebToken.mockTestCertificate
         let vaccinationRepoMock = VaccinationRepositoryMock()
         let certLogicMock = DCCCertLogicMock()
         let routerMock = GProofMockRouter()
-        vaccinationRepoMock.checkedCert = CBORWebToken.mockTestCertificate
+        let token: CBORWebToken = CBORWebToken.mockTestCertificate
+        let dateForTwelveMonthAgo = Calendar.current.date(byAdding: .month, value: -13, to: Date())
+        token.hcert.dgc.t!.first!.sc = try XCTUnwrap(dateForTwelveMonthAgo)
+        vaccinationRepoMock.checkedCert = token
         certLogicMock.validateResult = [.init(rule: nil, result: .passed, validationErrors: nil)]
         let sut = GProofViewModel(resolvable: resolver,
                                   initialToken: initialToken,
@@ -74,9 +77,9 @@ class GProofViewModelTests: XCTestCase {
         XCTAssertEqual(sut.seconResultFooterText, nil)
         XCTAssertEqual(sut.seconResultSubtitle, "May be required for 2G+")
 
-        XCTAssertEqual(sut.resultPersonTitle!, "Doe John")
-        XCTAssertEqual(sut.resultPersonSubtitle!, "DOE JOHN")
-        XCTAssertEqual(sut.resultPersonFooter!, "Born on Jan 1, 1990")
+        XCTAssertEqual(try XCTUnwrap(sut.resultPersonTitle), "Doe John")
+        XCTAssertEqual(try XCTUnwrap(sut.resultPersonSubtitle), "DOE JOHN")
+        XCTAssertEqual(try XCTUnwrap(sut.resultPersonFooter), "Born on Jan 1, 1990")
         XCTAssertEqual(sut.resultPersonIcon, UIImage.iconCardInverse)
         
         XCTAssertFalse((sut.router as! GProofMockRouter).errorShown)
@@ -99,9 +102,9 @@ class GProofViewModelTests: XCTestCase {
         XCTAssertEqual(sut.seconResultFooterText, nil)
         XCTAssertEqual(sut.seconResultSubtitle, "May be required for 2G+")
 
-        XCTAssertEqual(sut.resultPersonTitle!, "Doe John")
-        XCTAssertEqual(sut.resultPersonSubtitle!, "DOE JOHN")
-        XCTAssertEqual(sut.resultPersonFooter!, "Born on Jan 1, 1990")
+        XCTAssertEqual(try XCTUnwrap(sut.resultPersonTitle), "Doe John")
+        XCTAssertEqual(try XCTUnwrap(sut.resultPersonSubtitle), "DOE JOHN")
+        XCTAssertEqual(try XCTUnwrap(sut.resultPersonFooter), "Born on Jan 1, 1990")
         XCTAssertEqual(sut.resultPersonIcon, UIImage.iconCardInverse)
         
         XCTAssertTrue((sut.router as! GProofMockRouter).errorShown)
@@ -129,9 +132,9 @@ class GProofViewModelTests: XCTestCase {
         XCTAssertEqual(sut.seconResultFooterText, nil)
         XCTAssertEqual(sut.seconResultSubtitle, "May be required for 2G+")
 
-        XCTAssertEqual(sut.resultPersonTitle!, "Doe John")
-        XCTAssertEqual(sut.resultPersonSubtitle!, "DOE JOHN")
-        XCTAssertEqual(sut.resultPersonFooter!, "Born on Jan 1, 1990")
+        XCTAssertEqual(try XCTUnwrap(sut.resultPersonTitle), "Doe John")
+        XCTAssertEqual(try XCTUnwrap(sut.resultPersonSubtitle), "DOE JOHN")
+        XCTAssertEqual(try XCTUnwrap(sut.resultPersonFooter), "Born on Jan 1, 1990")
         XCTAssertEqual(sut.resultPersonIcon, UIImage.iconCardInverse)
         
         XCTAssertTrue((sut.router as! GProofMockRouter).errorShown)
@@ -160,9 +163,9 @@ class GProofViewModelTests: XCTestCase {
         XCTAssertEqual(sut.seconResultFooterText, nil)
         XCTAssertEqual(sut.seconResultSubtitle, "Show details")
         
-        XCTAssertEqual(sut.resultPersonTitle!, "Doe John")
-        XCTAssertEqual(sut.resultPersonSubtitle!, "DOE JOHN")
-        XCTAssertEqual(sut.resultPersonFooter!, "Born on Jan 1, 1990")
+        XCTAssertEqual(try XCTUnwrap(sut.resultPersonTitle), "Doe John")
+        XCTAssertEqual(try XCTUnwrap(sut.resultPersonSubtitle), "DOE JOHN")
+        XCTAssertEqual(try XCTUnwrap(sut.resultPersonFooter), "Born on Jan 1, 1990")
         XCTAssertEqual(sut.resultPersonIcon, UIImage.iconCardInverse)
         
         XCTAssertFalse((sut.router as! GProofMockRouter).errorShown)
@@ -172,6 +175,8 @@ class GProofViewModelTests: XCTestCase {
         XCTAssertFalse((sut.router as! GProofMockRouter).errorShown)
 
         let vacToken2: CBORWebToken = CBORWebToken.mockVaccinationCertificate
+        vacToken2.hcert.dgc.v!.first!.dt = try XCTUnwrap(dateForTwelveMonthAgo)
+
         vacToken2.hcert.dgc.nam.fnt = "MARC"
         vaccinationRepoMock.checkedCert = vacToken2
         certLogicMock.validateResult = [.init(rule: nil, result: .passed, validationErrors: nil)]
@@ -192,9 +197,9 @@ class GProofViewModelTests: XCTestCase {
         XCTAssertEqual(sut.seconResultFooterText, nil)
         XCTAssertEqual(sut.seconResultSubtitle, "12 months ago")
         
-        XCTAssertEqual(sut.resultPersonTitle!, "Doe John")
-        XCTAssertEqual(sut.resultPersonSubtitle!, "DOE JOHN")
-        XCTAssertEqual(sut.resultPersonFooter!, "Born on Jan 1, 1990")
+        XCTAssertEqual(try XCTUnwrap(sut.resultPersonTitle), "Doe John")
+        XCTAssertEqual(try XCTUnwrap(sut.resultPersonSubtitle), "DOE JOHN")
+        XCTAssertEqual(try XCTUnwrap(sut.resultPersonFooter), "Born on Jan 1, 1990")
         XCTAssertEqual(sut.resultPersonIcon, UIImage.iconCardInverse)
         
         XCTAssertFalse((sut.router as! GProofMockRouter).errorShown)
@@ -356,12 +361,15 @@ class GProofViewModelTests: XCTestCase {
         XCTAssertEqual(sut.resultPersonIcon, UIImage.iconCardInverse)
     }
     
-    func testDefaultStartOverWithScaningSuccessfulVaccinationCert() {
+    func testDefaultStartOverWithScaningSuccessfulVaccinationCert() throws {
         // GIVEN
         // A Test Cert in setUp which fails after startover successful vaccination Cert Scanned
-        vaccinationRepoMock.checkedCert = CBORWebToken.mockVaccinationCertificate
+        let token: CBORWebToken = CBORWebToken.mockVaccinationCertificate
+        let dateForTwelveMonthAgo = Calendar.current.date(byAdding: .month, value: -13, to: Date())
+        token.hcert.dgc.v!.first!.dt = try XCTUnwrap(dateForTwelveMonthAgo)
+        vaccinationRepoMock.checkedCert = token
         certLogicMock.validateResult = [.init(rule: nil, result: .passed, validationErrors: nil)]
-        
+
         // WHEN
         sut.startover()
         RunLoop.current.run(for: 0.1)
@@ -380,7 +388,7 @@ class GProofViewModelTests: XCTestCase {
         XCTAssertEqual(sut.firstResultLinkImage, nil)
         XCTAssertEqual(sut.firstResultTitle, "Basic immunisation")
         XCTAssertEqual(sut.firstResultFooterText, nil)
-        XCTAssertEqual(sut.firstResultSubtitle!, "12 months ago")
+        XCTAssertEqual(try XCTUnwrap(sut.firstResultSubtitle), "12 months ago")
         
         XCTAssertEqual(sut.secondResultImage, UIImage.detailStatusFullEmpty)
         XCTAssertEqual(sut.seconResultLinkImage, nil)
@@ -388,17 +396,20 @@ class GProofViewModelTests: XCTestCase {
         XCTAssertEqual(sut.seconResultFooterText, nil)
         XCTAssertEqual(try XCTUnwrap(sut.seconResultSubtitle), "May be required for 2G+")
         
-        XCTAssertEqual(sut.resultPersonTitle!, "Doe John")
-        XCTAssertEqual(sut.resultPersonSubtitle!, "DOE JOHN")
-        XCTAssertEqual(sut.resultPersonFooter!, "Born on Jan 1, 1990")
+        XCTAssertEqual(try XCTUnwrap(sut.resultPersonTitle), "Doe John")
+        XCTAssertEqual(try XCTUnwrap(sut.resultPersonSubtitle), "DOE JOHN")
+        XCTAssertEqual(try XCTUnwrap(sut.resultPersonFooter), "Born on Jan 1, 1990")
         XCTAssertEqual(sut.resultPersonIcon, UIImage.iconCardInverse)
     }
     
-    func testScaningTwoSuccessfulOneTestOneVaccination() {
+    func testScaningTwoSuccessfulOneTestOneVaccination() throws {
         // GIVEN
         certLogicMock.validateResult = [.init(rule: nil, result: .passed, validationErrors: nil)]
 
-        vaccinationRepoMock.checkedCert = CBORWebToken.mockVaccinationCertificate
+        let token: CBORWebToken = CBORWebToken.mockVaccinationCertificate
+        let dateForTwelveMonthAgo = Calendar.current.date(byAdding: .month, value: -13, to: Date())
+        token.hcert.dgc.v!.first!.dt = try XCTUnwrap(dateForTwelveMonthAgo)
+        vaccinationRepoMock.checkedCert = token
         
         // WHEN
         sut.startover()
@@ -420,7 +431,7 @@ class GProofViewModelTests: XCTestCase {
         XCTAssertEqual(sut.firstResultImage, UIImage.detailStatusFull)
         XCTAssertEqual(sut.firstResultLinkImage, nil)
         XCTAssertEqual(sut.firstResultTitle, "Basic immunisation")
-        XCTAssertEqual(sut.firstResultSubtitle!, "12 months ago")
+        XCTAssertEqual(try XCTUnwrap(sut.firstResultSubtitle), "12 months ago")
         
         XCTAssertEqual(sut.secondResultImage, UIImage.detailStatusTest)
         XCTAssertEqual(sut.seconResultLinkImage, nil)
@@ -428,9 +439,9 @@ class GProofViewModelTests: XCTestCase {
         XCTAssertEqual(sut.seconResultFooterText, nil)
         XCTAssertEqual(sut.seconResultSubtitle, "0 hours ago")
         
-        XCTAssertEqual(sut.resultPersonTitle!, "Doe John")
-        XCTAssertEqual(sut.resultPersonSubtitle!, "DOE JOHN")
-        XCTAssertEqual(sut.resultPersonFooter!, "Born on Jan 1, 1990")
+        XCTAssertEqual(try XCTUnwrap(sut.resultPersonTitle), "Doe John")
+        XCTAssertEqual(try XCTUnwrap(sut.resultPersonSubtitle), "DOE JOHN")
+        XCTAssertEqual(try XCTUnwrap(sut.resultPersonFooter), "Born on Jan 1, 1990")
         XCTAssertEqual(sut.resultPersonIcon, UIImage.iconCardInverse)
     }
     

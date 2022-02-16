@@ -64,11 +64,14 @@ class GProofSnapShotTests: BaseSnapShotTests {
         verifyView(vc: vc)
     }
     
-    func testInitWithSuccessfulVaccination() {
+    func testInitWithSuccessfulVaccination() throws {
         let vaccinationRepoMock = VaccinationRepositoryMock()
         let certLogicMock = DCCCertLogicMock()
         certLogicMock.validateResult = [.init(rule: nil, result: .passed, validationErrors: nil)]
         let initialToken = CBORWebToken.mockVaccinationCertificate
+        let dateForTwelveMonthAgo = Calendar.current.date(byAdding: .month, value: -13, to: Date())
+        initialToken.hcert.dgc.v!.first!.dt = try XCTUnwrap(dateForTwelveMonthAgo)
+
         let routerMock = GProofMockRouter()
         let vm = GProofViewModel(resolvable: resolver,
                                  initialToken: initialToken,
@@ -81,11 +84,13 @@ class GProofSnapShotTests: BaseSnapShotTests {
         verifyView(vc: vc)
     }
     
-    func testInitWithSuccessfulVaccinationAndScannedSuccessfulTest() {
+    func testInitWithSuccessfulVaccinationAndScannedSuccessfulTest() throws {
         let vaccinationRepoMock = VaccinationRepositoryMock()
         let certLogicMock = DCCCertLogicMock()
         certLogicMock.validateResult = [.init(rule: nil, result: .passed, validationErrors: nil)]
         let initialToken = CBORWebToken.mockVaccinationCertificate
+        let dateForTwelveMonthAgo = Calendar.current.date(byAdding: .month, value: -13, to: Date())
+        initialToken.hcert.dgc.v!.first!.dt = try XCTUnwrap(dateForTwelveMonthAgo)
         let routerMock = GProofMockRouter()
         let vm = GProofViewModel(resolvable: resolver,
                                  initialToken: initialToken,
@@ -120,11 +125,13 @@ class GProofSnapShotTests: BaseSnapShotTests {
         verifyAsync(vc: vc, wait: 0.1)
     }
     
-    func testInitWithSuccessfulVaccinationAndScannedFailingTest() {
+    func testInitWithSuccessfulVaccinationAndScannedFailingTest() throws {
         let vaccinationRepoMock = VaccinationRepositoryMock()
         let certLogicMock = DCCCertLogicMock()
         certLogicMock.validateResult = [.init(rule: nil, result: .passed, validationErrors: nil)]
         let initialToken = CBORWebToken.mockVaccinationCertificate
+        let dateForTwelveMonthAgo = Calendar.current.date(byAdding: .month, value: -13, to: Date())
+        initialToken.hcert.dgc.v!.first!.dt = try XCTUnwrap(dateForTwelveMonthAgo)
         let routerMock = GProofMockRouter()
         let vm = GProofViewModel(resolvable: resolver,
                                  initialToken: initialToken,
@@ -140,13 +147,15 @@ class GProofSnapShotTests: BaseSnapShotTests {
         verifyAsync(vc: vc, wait: 0.1)
     }
     
-    func testBoostedVaccinationWhereBosterCannotReplaceTest() {
+    func testBoostedVaccinationWhereBosterCannotReplaceTest() throws {
         let vaccinationRepoMock = VaccinationRepositoryMock()
         let certLogicMock = DCCCertLogicMock()
         certLogicMock.validateResult = [.init(rule: nil, result: .passed, validationErrors: nil)]
         let initialToken = CBORWebToken.mockVaccinationCertificate
         initialToken.hcert.dgc.v!.first!.dn = 3
         initialToken.hcert.dgc.v!.first!.sd = 2
+        let dateFor410DaysAgo = Calendar.current.date(byAdding: .day, value: -410, to: Date())
+        initialToken.hcert.dgc.v!.first!.dt = try XCTUnwrap(dateFor410DaysAgo)
         let routerMock = GProofMockRouter()
         let vm = GProofViewModel(resolvable: resolver,
                                  initialToken: initialToken,
@@ -159,13 +168,14 @@ class GProofSnapShotTests: BaseSnapShotTests {
         verifyView(vc: vc)
     }
     
-    func testBoostedVaccinationWhereBosterCanReplaceTest() {
+    func testBoostedVaccinationWhereBosterCanReplaceTest() throws {
         let vaccinationRepoMock = VaccinationRepositoryMock()
         let certLogicMock = DCCCertLogicMock()
         certLogicMock.validateResult = [.init(rule: nil, result: .passed, validationErrors: nil)]
         let initialToken = CBORWebToken.mockVaccinationCertificate
         initialToken.hcert.dgc.v!.first!.dn = 3
         initialToken.hcert.dgc.v!.first!.sd = 2
+        initialToken.hcert.dgc.v!.first!.dt = DateUtils.isoDateFormatter.date(from: "2021-01-01")! + 86400
         let routerMock = GProofMockRouter()
         let vm = GProofViewModel(resolvable: resolver,
                                  initialToken: initialToken,
