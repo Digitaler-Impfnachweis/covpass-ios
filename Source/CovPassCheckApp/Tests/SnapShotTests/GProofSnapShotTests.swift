@@ -175,7 +175,8 @@ class GProofSnapShotTests: BaseSnapShotTests {
         let initialToken = CBORWebToken.mockVaccinationCertificate
         initialToken.hcert.dgc.v!.first!.dn = 3
         initialToken.hcert.dgc.v!.first!.sd = 2
-        initialToken.hcert.dgc.v!.first!.dt = DateUtils.isoDateFormatter.date(from: "2021-01-01")! + 86400
+        let dateFor410DaysAgo = Calendar.current.date(byAdding: .day, value: -410, to: Date())
+        initialToken.hcert.dgc.v!.first!.dt = try XCTUnwrap(dateFor410DaysAgo)
         let routerMock = GProofMockRouter()
         let vm = GProofViewModel(resolvable: resolver,
                                  initialToken: initialToken,
