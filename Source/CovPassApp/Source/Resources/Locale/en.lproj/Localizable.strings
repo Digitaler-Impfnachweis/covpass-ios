@@ -267,7 +267,7 @@
 
 "accessibility_certificate_favorite_button_label_not_active" = "Always display this person's certificates in first place: not active";
 
-"certificate_action_button_check_validity" = "Check for travel";
+"certificate_action_button_check_validity" = "Check validity";
 
 
 /********** screen: check validity **********/
@@ -294,7 +294,7 @@
 
 "accessibility_certificate_check_validity_selection_time_closing_announce" = "The view \"Select time\" has been closed";
 
-"certificate_check_validity_title" = "Check validity for travel";
+"certificate_check_validity_title" = "Check validity";
 
 "accessibility_certificate_check_validity_selection_country_selected" = "%@, selected";
 
@@ -847,6 +847,8 @@
 "accessibility_vaccination_certificate_detail_view_data_vaccine_date_" = "Date of vaccination (Year-Month-Day)";
 
 "vaccination_certificate_detail_view_data_vaccine_country" = "Land der Impfung / Country vaccinating";
+
+"vaccination_certificate_detail_view_data_vaccine_country_germany" = "Germany";
 
 "accessibility_vaccination_certificate_detail_view_data_vaccine_country" = "Country vaccinating";
 
