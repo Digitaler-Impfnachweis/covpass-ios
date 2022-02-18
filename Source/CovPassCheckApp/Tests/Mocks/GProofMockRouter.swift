@@ -11,7 +11,6 @@ import CovPassUI
 import PromiseKit
 
 class GProofMockRouter: GProofRouterProtocol {
-
     var qrCodeScanShouldCanceled = false
     var errorShown = false
     var certificateShown = false
@@ -22,8 +21,12 @@ class GProofMockRouter: GProofRouterProtocol {
         qrCodeScanShouldCanceled ? .init { resolver in resolver.cancel() } : .value(.success(""))
     }
     
-    func showCertificate(_ certificate: CBORWebToken?, _2GContext: Bool, userDefaults: Persistence) {
+    func showCertificate(_ certificate: CBORWebToken?,
+                         _2GContext: Bool,
+                         userDefaults: Persistence,
+                         buttonHidden: Bool) -> Promise<CBORWebToken> {
         certificateShown = true
+        return .value(CBORWebToken.mockVaccinationCertificate)
     }
     
     func showError(error: Error) {

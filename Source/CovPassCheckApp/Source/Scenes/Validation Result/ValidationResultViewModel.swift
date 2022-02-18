@@ -25,6 +25,7 @@ extension ValidationViewModel {
     
     func cancel() {
         router.showStart()
+        resolvable.cancel()
     }
 
     func scanNextCertifcate() {
@@ -41,6 +42,7 @@ extension ValidationViewModel {
             
             if self._2GContext {
                 resolvable.fulfill(certificate)
+                return
             }
             
             let vm = ValidationResultFactory.createViewModel(
