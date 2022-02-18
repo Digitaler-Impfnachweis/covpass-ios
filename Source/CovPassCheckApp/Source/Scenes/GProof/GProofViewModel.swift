@@ -96,7 +96,7 @@ class GProofViewModel: GProofViewModelProtocol {
     private var userDefaults: Persistence
     private var boosterAsTest: Bool
     private var resolvable: Resolver<CBORWebToken>
-    private var firstScan: Bool { firstResult == nil }
+    private var isFirstScan: Bool { firstResult == nil }
     init(resolvable: Resolver<CBORWebToken>,
          initialToken: CBORWebToken,
          router: GProofRouterProtocol,
@@ -111,7 +111,6 @@ class GProofViewModel: GProofViewModelProtocol {
         self.router = router
         self.boosterAsTest = boosterAsTest
         _ = self.setResultViewModel(newToken: initialToken)
-        self.delegate?.viewModelDidUpdate()
     }
     
     private func startQRCodeValidation(for scanType: ScanType) {
@@ -124,8 +123,23 @@ class GProofViewModel: GProofViewModelProtocol {
         .then {
             self.repository.checkCertificate($0)
         }
-        .then {
-            try self.preventSettingSameQRCode($0)
+        .done {
+            self.validationToken(token: $0)
+        }
+        .cancelled {
+            if self.isFirstScan {
+                self.router.sceneCoordinator.dimiss(animated: true)
+            }
+        }
+        .catch {
+            self.errorHandling($0)
+        }
+
+    }
+    
+    private func validationToken(token: CBORWebToken) {
+        firstly {
+            try self.preventSettingSameQRCode(token)
         }
         .then {
             self.setResultViewModel(newToken: $0)
@@ -137,37 +151,40 @@ class GProofViewModel: GProofViewModelProtocol {
             self.delegate?.viewModelDidUpdate()
         }
         .cancelled {
-            if self.firstScan {
+            if self.isFirstScan {
                 self.router.sceneCoordinator.dimiss(animated: true)
             }
         }
-        .catch { error in
-            self.errorHandling(error)
+        .catch {
+            self.errorHandling($0)
         }
-    }
-    
-    fileprivate func resultPageCancelled() {
-        if firstScan {
-            router.sceneCoordinator.dimiss(animated: true)
-        }
-    }
-    
-    private func showResultPage() {
-        let showCert = lastTriedCertType == .test ? secondResult?.certificate : firstResult?.certificate
-        router.showCertificate(showCert, _2GContext: true, userDefaults: userDefaults)
-            .cancelled {
-                self.resultPageCancelled()
-            }.cauterize()
     }
     
     private func errorHandling(_ error: Error) {
         if (error as? QRCodeError) == .qrCodeExists {
             router.showError(error: error)
-        } else if firstScan && ((error as? ScanError) == .badOutput || (error as? Base45CodingError) == .base45Decoding) {
-            showResultPage()
+        } else if isFirstScan && ((error as? ScanError) == .badOutput || (error as? Base45CodingError) == .base45Decoding) {
+            showErorResultPage()
         } else {
             setResultViewModel(newToken: nil).cauterize()
-            delegate?.viewModelDidUpdate()
+        }
+    }
+    
+    private func showErorResultPage() {
+        let showCert = lastTriedCertType == .test ? secondResult?.certificate : firstResult?.certificate
+        let shouldShowStartOverButton = !isFirstScan
+        router.showCertificate(showCert, _2GContext: true, userDefaults: userDefaults, buttonHidden: shouldShowStartOverButton)
+            .done{ token in
+                self.validationToken(token: token)
+            }
+            .cancelled {
+                self.resultPageCancelled()
+            }.cauterize()
+    }
+    
+    private func resultPageCancelled() {
+        if isFirstScan {
+            router.sceneCoordinator.dimiss(animated: true)
         }
     }
     
@@ -206,6 +223,7 @@ class GProofViewModel: GProofViewModelProtocol {
         } else {
             secondResult = validationResultViewModel
         }
+        delegate?.viewModelDidUpdate()
         return .value
     }
     
@@ -276,13 +294,15 @@ class GProofViewModel: GProofViewModelProtocol {
     func showFirstCardResult() {
         router.showCertificate(firstResult?.certificate,
                                _2GContext: true,
-                               userDefaults: userDefaults)
+                               userDefaults: userDefaults,
+                               buttonHidden: true)
     }
     
     func showSecondCardResult() {
         router.showCertificate(secondResult?.certificate,
                                _2GContext: true,
-                               userDefaults: userDefaults)
+                               userDefaults: userDefaults,
+                               buttonHidden: true)
     }
     
 

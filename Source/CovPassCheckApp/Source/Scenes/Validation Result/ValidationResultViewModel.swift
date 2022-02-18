@@ -42,6 +42,7 @@ extension ValidationViewModel {
             
             if self._2GContext {
                 resolvable.fulfill(certificate)
+                return
             }
             
             let vm = ValidationResultFactory.createViewModel(

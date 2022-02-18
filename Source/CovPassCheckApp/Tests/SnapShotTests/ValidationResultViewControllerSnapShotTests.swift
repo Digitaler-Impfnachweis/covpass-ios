@@ -14,7 +14,7 @@ import CovPassCommon
 class ValidationResultViewControllerSnapShotTests: BaseSnapShotTests {
     
     let (_, resolver) = Promise<CBORWebToken>.pending()
-
+    
     func testValidationResultViewControllerWithTechnicalError() {
         let vm = ErrorResultViewModel(resolvable: resolver,
                                       router: ValidationResultRouterMock(),
@@ -50,7 +50,7 @@ class ValidationResultViewControllerSnapShotTests: BaseSnapShotTests {
         let vc = ValidationResultViewController(viewModel: vm)
         verifyView(vc: vc)
     }
-
+    
     func testValidationResultViewControllerWithFunctionalError2GContext() {
         let vm = ErrorResultViewModel(resolvable: resolver,
                                       router: ValidationResultRouterMock(),
@@ -62,5 +62,17 @@ class ValidationResultViewControllerSnapShotTests: BaseSnapShotTests {
         let vc = ValidationResultViewController(viewModel: vm)
         verifyView(vc: vc)
     }
-
+    
+    func testValidationResultViewControllerWithFunctionalError2GContextButtonHidden() {
+        let vm = ErrorResultViewModel(resolvable: resolver,
+                                      router: ValidationResultRouterMock(),
+                                      repository: VaccinationRepositoryMock(),
+                                      certificate: nil,
+                                      error: ValidationResultError.functional,
+                                      _2GContext: true,
+                                      userDefaults: UserDefaultsPersistence())
+        vm.buttonHidden = true
+        let vc = ValidationResultViewController(viewModel: vm)
+        verifyView(vc: vc)
+    }
 }
