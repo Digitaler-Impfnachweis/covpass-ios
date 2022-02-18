@@ -86,18 +86,15 @@ public extension Optional where Wrapped == ValidationResultViewModel {
     }
     
     var subtitle: String? {
-        guard let certificate = self?.certificate else {
-            return Constants.Keys.result_2G_2nd_empty
-        }
         switch self {
         case is ErrorResultViewModel:
-            return certificate.isTest ? Constants.Keys.result_2G_invalid_subtitle : Constants.Keys.result_2G_invalid_subtitle
+            return Constants.Keys.result_2G_invalid_subtitle
         case is RecoveryResultViewModel:
-            return certificate.recoverySubtitle
+            return self?.certificate?.recoverySubtitle
         case is VaccinationResultViewModel:
-            return certificate.vaccinationSubtitle
+            return self?.certificate?.vaccinationSubtitle
         case is TestResultViewModel:
-            return certificate.testSubtitle
+            return self?.certificate?.testSubtitle
         default: return Constants.Keys.result_2G_2nd_empty
         }
     }
