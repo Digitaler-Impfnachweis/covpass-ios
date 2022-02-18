@@ -539,7 +539,22 @@ class GProofViewModelTests: XCTestCase {
         XCTAssertTrue((sut.router as! GProofMockRouter).showDifferentPersonShown)
     }
     
-    func testNotDCCScanned() {
+    func testNotDCCScannedAtFirstScan() {
+        // GIVEN
+        vaccinationRepoMock.checkedCert = nil
+        vaccinationRepoMock.checkedCertError = ScanError.badOutput
+        certLogicMock.validateResult = [.init(rule: nil, result: .passed, validationErrors: nil)]
+        sut.startover()
+
+        // WHEN
+        sut.scanNext()
+        RunLoop.current.run(for: 0.1)
+
+        // THEN
+        XCTAssertTrue((sut.router as! GProofMockRouter).certificateShown)
+    }
+    
+    func testNotDCCScannedAtSecondScan() {
         // GIVEN
         vaccinationRepoMock.checkedCert = CBORWebToken.mockTestCertificate
         certLogicMock.validateResult = [.init(rule: nil, result: .passed, validationErrors: nil)]
@@ -554,7 +569,7 @@ class GProofViewModelTests: XCTestCase {
         RunLoop.current.run(for: 0.1)
 
         // THEN
-        XCTAssertTrue((sut.router as! GProofMockRouter).certificateShown)
+        XCTAssertFalse((sut.router as! GProofMockRouter).certificateShown)
     }
     
     func testShowResultGProof() {

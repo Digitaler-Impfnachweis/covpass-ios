@@ -22,8 +22,9 @@ class GProofMockRouter: GProofRouterProtocol {
         qrCodeScanShouldCanceled ? .init { resolver in resolver.cancel() } : .value(.success(""))
     }
     
-    func showCertificate(_ certificate: CBORWebToken?, _2GContext: Bool, userDefaults: Persistence) {
+    func showCertificate(_ certificate: CBORWebToken?, _2GContext: Bool, userDefaults: Persistence) -> Promise<CBORWebToken> {
         certificateShown = true
+        return .value(CBORWebToken.mockVaccinationCertificate)
     }
     
     func showError(error: Error) {

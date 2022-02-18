@@ -25,6 +25,7 @@ extension ValidationViewModel {
     
     func cancel() {
         router.showStart()
+        resolvable.cancel()
     }
 
     func scanNextCertifcate() {

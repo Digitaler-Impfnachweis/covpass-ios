@@ -96,6 +96,7 @@ class GProofViewModel: GProofViewModelProtocol {
     private var userDefaults: Persistence
     private var boosterAsTest: Bool
     private var resolvable: Resolver<CBORWebToken>
+    private var firstScan: Bool { firstResult == nil }
     init(resolvable: Resolver<CBORWebToken>,
          initialToken: CBORWebToken,
          router: GProofRouterProtocol,
@@ -136,22 +137,37 @@ class GProofViewModel: GProofViewModelProtocol {
             self.delegate?.viewModelDidUpdate()
         }
         .cancelled {
-            if self.secondResult == nil && self.firstResult == nil {
+            if self.firstScan {
                 self.router.sceneCoordinator.dimiss(animated: true)
             }
         }
         .catch { error in
-            if (error as? QRCodeError) == .qrCodeExists {
-                self.router.showError(error: error)
-            } else if (error as? ScanError) == .badOutput || (error as? Base45CodingError) == .base45Decoding {
-                let showCert = self.lastTriedCertType == .test ? self.secondResult?.certificate : self.firstResult?.certificate
-                self.router.showCertificate(showCert,
-                                            _2GContext: true,
-                                            userDefaults: self.userDefaults)
-            } else {
-                _ = self.setResultViewModel(newToken: nil)
-                self.delegate?.viewModelDidUpdate()
-            }
+            self.errorHandling(error)
+        }
+    }
+    
+    fileprivate func resultPageCancelled() {
+        if firstScan {
+            router.sceneCoordinator.dimiss(animated: true)
+        }
+    }
+    
+    private func showResultPage() {
+        let showCert = lastTriedCertType == .test ? secondResult?.certificate : firstResult?.certificate
+        router.showCertificate(showCert, _2GContext: true, userDefaults: userDefaults)
+            .cancelled {
+                self.resultPageCancelled()
+            }.cauterize()
+    }
+    
+    private func errorHandling(_ error: Error) {
+        if (error as? QRCodeError) == .qrCodeExists {
+            router.showError(error: error)
+        } else if firstScan && ((error as? ScanError) == .badOutput || (error as? Base45CodingError) == .base45Decoding) {
+            showResultPage()
+        } else {
+            setResultViewModel(newToken: nil).cauterize()
+            delegate?.viewModelDidUpdate()
         }
     }
     
@@ -186,9 +202,9 @@ class GProofViewModel: GProofViewModelProtocol {
         initialTokenIsBoosted = newToken?.hcert.dgc.isVaccinationBoosted ?? false && boosterAsTest
         
         if lastTriedCertType == nil || initialTokenIsBoosted {
-            self.firstResult = validationResultViewModel
+            firstResult = validationResultViewModel
         } else {
-            self.secondResult = validationResultViewModel
+            secondResult = validationResultViewModel
         }
         return .value
     }
