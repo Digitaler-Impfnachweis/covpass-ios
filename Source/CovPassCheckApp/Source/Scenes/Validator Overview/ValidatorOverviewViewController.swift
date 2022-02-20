@@ -20,6 +20,7 @@ class ValidatorOverviewViewController: UIViewController {
     @IBOutlet var offlineCard: OfflineCardView!
     @IBOutlet var timeHintView: HintView!
     @IBOutlet var scanTypeSegment: UISegmentedControl!
+    @IBOutlet var checkSituationLabel: UILabel!
     
     // MARK: - Properties
 
@@ -42,6 +43,7 @@ class ValidatorOverviewViewController: UIViewController {
         setupHeaderView()
         setupCardView()
         setupSegmentControl()
+        viewModel.showNotificationsIfNeeded()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -49,6 +51,7 @@ class ValidatorOverviewViewController: UIViewController {
         navigationController?.setNavigationBarHidden(true, animated: animated)
         viewModel.updateTrustList()
         viewModel.updateDCCRules()
+        setupCheckSituationView()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -80,6 +83,7 @@ class ValidatorOverviewViewController: UIViewController {
         offlineCard.layoutMargins.bottom = .space_40
         
         setupTimeHintView()
+        setupCheckSituationView()
     }
     
     private func setupTimeHintView() {
@@ -93,6 +97,12 @@ class ValidatorOverviewViewController: UIViewController {
     }
     
     private func setupSegmentControl() {
+        scanCard.switchWrapperViewIsHidden = true
+        scanCard.uiSwitch.isOn = viewModel.boosterAsTest
+        scanCard.switchAction = { isOn in
+            self.viewModel.boosterAsTest = isOn
+        }
+        scanCard.switchTextLabel.attributedText = viewModel.switchText.styledAs(.body).colored(.backgroundSecondary)
         scanCard.titleLabel.attributedText = viewModel.segment3GTitle.styledAs(.header_1).colored(.backgroundSecondary)
         scanCard.textLabel.attributedText = viewModel.segment3GMessage.styledAs(.body).colored(.backgroundSecondary)
         scanCard.actionButton.title = "validation_start_screen_scan_action_button_title".localized
@@ -110,14 +120,20 @@ class ValidatorOverviewViewController: UIViewController {
         scanTypeSegment.setTitle(viewModel.segment2GTitle, forSegmentAt: ScanType._2G.rawValue)
     }
     
+    private func setupCheckSituationView() {
+        checkSituationLabel.attributedText = viewModel.checkSituationText.styledAs(.body).aligned(to: .center)
+    }
+    
     @IBAction func segmentChanged(_ sender: UISegmentedControl) {
         switch ScanType(rawValue:sender.selectedSegmentIndex) {
         case ._3G:
             scanCard.titleLabel.attributedText = viewModel.segment3GTitle.styledAs(.header_1).colored(.backgroundSecondary)
             scanCard.textLabel.attributedText = viewModel.segment3GMessage.styledAs(.body).colored(.backgroundSecondary)
+            scanCard.switchWrapperViewIsHidden = true
         case ._2G:
             scanCard.titleLabel.attributedText = viewModel.segment2GTitle.styledAs(.header_1).colored(.backgroundSecondary)
             scanCard.textLabel.attributedText = viewModel.segment2GMessage.styledAs(.body).colored(.backgroundSecondary)
+            scanCard.switchWrapperViewIsHidden = false
         default: break
         }
     }

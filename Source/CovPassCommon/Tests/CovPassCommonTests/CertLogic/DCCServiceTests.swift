@@ -19,7 +19,10 @@ class DCCServiceTests: XCTestCase {
     override func setUp() {
         super.setUp()
         sessionMock = CustomURLSessionMock()
-        sut = DCCService(url: URL(string: "https://digitaler-impfnachweis-app.de")!, boosterURL: URL(string: "https://digitaler-impfnachweis-app.de")!, customURLSession: sessionMock)
+        sut = DCCService(url: URL(string: "https://digitaler-impfnachweis-app.de")!,
+                         boosterURL: URL(string: "https://digitaler-impfnachweis-app.de")!,
+                         domesticURL: URL(string: "https://digitaler-impfnachweis-app.de")!,
+                         customURLSession: sessionMock)
     }
 
     override func tearDown() {
@@ -97,11 +100,33 @@ class DCCServiceTests: XCTestCase {
             XCTAssertEqual(error.localizedDescription, APIError.invalidResponse.localizedDescription)
         }
     }
-
+    
     func testLoadBoosterRules() throws {
         sessionMock.requestResponse = Promise.value(try XCTUnwrap(String(data: try JSONEncoder().encode([RuleSimple.mock]), encoding: .utf8)))
         let res = try sut.loadBoosterRules().wait()
         XCTAssertEqual(res.count, 1)
+    }
+    
+    func testLoadDomesticRules() throws {
+        // GIVEN
+        sessionMock.requestResponse = Promise.value(try XCTUnwrap(String(data: try JSONEncoder().encode([RuleSimple.mock]), encoding: .utf8)))
+        // WHEN
+        let res = try sut.loadDomesticRules().wait()
+        // THEN
+        XCTAssertEqual(res.count, 1)
+    }
+    
+    func testLoadDomesticRulesInvalidResponse() throws {
+        // GIVEN
+        sessionMock.requestResponse = Promise.value(try XCTUnwrap("FOO"))
+        do {
+            // WHEN
+            _ = try sut.loadDomesticRules().wait()
+            XCTFail("Should fail")
+        } catch {
+            // THEN
+            XCTAssertEqual(error.localizedDescription, DCCServiceError.invalidResponse.localizedDescription)
+        }
     }
 
     func testLoadBoosterRulesFails() throws {
@@ -113,11 +138,33 @@ class DCCServiceTests: XCTestCase {
             XCTAssertEqual(error.localizedDescription, APIError.invalidResponse.localizedDescription)
         }
     }
-
+    
     func testLoadBoosterRule() throws {
         sessionMock.requestResponse = Promise.value(try XCTUnwrap(String(data: try JSONEncoder().encode(Rule.mock), encoding: .utf8)))
         let res = try sut.loadBoosterRule(hash: "foo").wait()
         XCTAssertEqual(res.identifier, "rule-identifier")
+    }
+    
+    func testLoadDomesticRule() throws {
+        // GIVEN
+        sessionMock.requestResponse = Promise.value(try XCTUnwrap(String(data: try JSONEncoder().encode(Rule.mock), encoding: .utf8)))
+        // WHEN
+        let res = try sut.loadDomesticRule(hash: "foo").wait()
+        // THEN
+        XCTAssertEqual(res.identifier, "rule-identifier")
+    }
+    
+    func testLoadDomesticRuleInvalidResponse() throws {
+        // GIVEN
+        sessionMock.requestResponse = Promise.value(try XCTUnwrap(String("FOO")))
+        do {
+            // WHEN
+            _ = try sut.loadDomesticRule(hash: "foo").wait()
+            XCTFail("Should fail")
+        } catch {
+            // THEN
+            XCTAssertEqual(error.localizedDescription, DCCServiceError.invalidResponse.localizedDescription)
+        }
     }
 
     func testLoadBoosterRulesFail() throws {

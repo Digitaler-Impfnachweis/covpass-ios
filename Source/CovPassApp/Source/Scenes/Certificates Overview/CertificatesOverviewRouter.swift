@@ -163,4 +163,11 @@ class CertificatesOverviewRouter: CertificatesOverviewRouterProtocol, DialogRout
             ValidationServiceFactory(router: ValidationServiceRouter(sceneCoordinator: sceneCoordinator),                                     
                                      initialisationData: data))
     }
+    
+    func showCheckSituation(userDefaults: Persistence) -> Promise<Void> {
+        sceneCoordinator.present(
+            CheckSituationResolvableSceneFactory(contextType: .information,
+                                                 userDefaults: userDefaults)
+        )
+    }
 }

@@ -12,8 +12,17 @@ import Foundation
 import PromiseKit
 
 public struct DCCServiceMock: DCCServiceProtocol {
+    
     public init() {}
 
+    public func loadDomesticRules() -> Promise<[RuleSimple]> {
+        return Promise.value([])
+    }
+    
+    public func loadDomesticRule(hash: String) -> Promise<Rule> {
+        return Promise(error: ApplicationError.unknownError)
+    }
+    
     public func loadDCCRules() -> Promise<[RuleSimple]> {
         return Promise.value([])
     }

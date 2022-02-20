@@ -10,6 +10,7 @@ import UIKit
 import CovPassCommon
 import CovPassUI
 import PromiseKit
+import Scanner
 
 private enum Constants {
     enum Keys {
@@ -25,10 +26,12 @@ private enum Constants {
         static let validation_check_popup_valid_pcr_test_message = "validation_check_popup_valid_pcr_test_message".localized
         static let result_2G_gproof_empty = "result_2G_gproof_empty".localized
         static let result_2G_gproof_valid = "result_2G_gproof_valid".localized
+        static let result_2G_gproof_valid_boosted = "result_2G_booster_valid".localized
         static let result_2G_gproof_invalid = "result_2G_gproof_invalid".localized
         static let result_2G_test_empty = "result_2G_test_empty".localized
         static let result_2G_test_invalid = "result_2G_test_invalid".localized
         static let validation_check_popup_test_title = "validation_check_popup_test_title".localized
+        static let validation_check_popup_valid_pcr_test_title = "validation_check_popup_valid_pcr_test_title".localized
         static let validation_check_popup_test_date_of_birth = "validation_check_popup_test_date_of_birth".localized
         static let result_2G_invalid_subtitle = "result_2G_invalid_subtitle".localized
         static let result_2G_empty_subtitle = "result_2G_empty_subtitle".localized
@@ -65,7 +68,8 @@ class GProofViewModel: GProofViewModelProtocol {
     var resultGProofTitle: String {
         switch gProofResultViewModel {
         case is ErrorResultViewModel: return Constants.Keys.result_2G_gproof_invalid
-        case is VaccinationResultViewModel, is RecoveryResultViewModel: return Constants.Keys.result_2G_gproof_valid
+        case is VaccinationResultViewModel, is RecoveryResultViewModel:
+            return initialTokenIsBoosted ? Constants.Keys.result_2G_gproof_valid_boosted : Constants.Keys.result_2G_gproof_valid
         default: return Constants.Keys.result_2G_gproof_empty
         }
     }
@@ -96,11 +100,12 @@ class GProofViewModel: GProofViewModelProtocol {
         switch testResultViewModel {
         case is ErrorResultViewModel: return Constants.Keys.result_2G_test_invalid
         case is TestResultViewModel:
-            guard let sc = testResultViewModel?.certificate?.hcert.dgc.t?.first?.sc else {
+            guard let test = testResultViewModel?.certificate?.hcert.dgc.t?.first else {
                 return ""
             }
-            let diffComponents = Calendar.current.dateComponents([.hour], from: sc, to: Date())
-            return String(format: Constants.Keys.validation_check_popup_test_title, diffComponents.hour ?? 0)
+            let diffComponents = Calendar.current.dateComponents([.hour], from: test.sc, to: Date())
+            let formatString = test.isPCR ? Constants.Keys.validation_check_popup_valid_pcr_test_title : Constants.Keys.validation_check_popup_test_title
+            return String(format: formatString, diffComponents.hour ?? 0)
         default: return Constants.Keys.result_2G_test_empty
         }
     }
@@ -129,14 +134,17 @@ class GProofViewModel: GProofViewModelProtocol {
         return gProofResultViewModel?.certificate?.hcert.dgc.nam.fullNameTransliterated ?? testResultViewModel?.certificate?.hcert.dgc.nam.fullNameTransliterated
     }
     var resultPersonFooter: String? {
-        let resultViewModel = gProofResultViewModel ?? testResultViewModel
-        guard let dgc = resultViewModel?.certificate?.hcert.dgc else {
+        let digitalGreenCert = gProofResultViewModel?.certificate?.hcert.dgc ?? testResultViewModel?.certificate?.hcert.dgc
+        guard let dgc = digitalGreenCert else {
             return nil
         }
         return String(format: Constants.Keys.validation_check_popup_test_date_of_birth, DateUtils.displayDateOfBirth(dgc))
     }
+    var testResultViewIsHidden: Bool {
+        initialTokenIsBoosted && !(gProofResultViewModel is ErrorResultViewModel)
+    }
     var buttonScanTestIsHidden: Bool {
-        if testResultViewModel != nil || someIsFailed {
+        if testResultViewModel != nil || someIsFailed || testResultViewIsHidden {
             return true
         }
         return false
@@ -157,20 +165,30 @@ class GProofViewModel: GProofViewModelProtocol {
     let router: GProofRouterProtocol
     internal var delegate: ViewModelDelegate?
     private var initialToken: CBORWebToken?
+    private var initialTokenIsBoosted: Bool
     private let repository: VaccinationRepositoryProtocol
     private let certLogic: DCCCertLogicProtocol
     private let error: Error? = nil
     private let jsonEncoder: JSONEncoder = JSONEncoder()
     private var lastTriedCertType: CertType? = nil
-    
-    init(initialToken: CBORWebToken,
+    private var userDefaults: Persistence
+    private var boosterAsTest: Bool
+    private var resolvable: Resolver<CBORWebToken>
+    init(resolvable: Resolver<CBORWebToken>,
+         initialToken: CBORWebToken,
          router: GProofRouterProtocol,
          repository: VaccinationRepositoryProtocol,
-         certLogic: DCCCertLogicProtocol) {
+         certLogic: DCCCertLogicProtocol,
+         userDefaults: Persistence,
+         boosterAsTest: Bool) {
+        self.resolvable = resolvable
         self.repository = repository
         self.certLogic = certLogic
+        self.userDefaults = userDefaults
         self.router = router
         self.initialToken = initialToken
+        self.boosterAsTest = boosterAsTest
+        initialTokenIsBoosted = initialToken.hcert.dgc.isVaccinationBoosted && boosterAsTest
         lastTriedCertType = initialToken.isTest ? .test : .vaccination
         _ = self.setResultViewModel(newToken: initialToken)
         self.delegate?.viewModelDidUpdate()
@@ -198,15 +216,23 @@ class GProofViewModel: GProofViewModelProtocol {
         .done {
             self.delegate?.viewModelDidUpdate()
         }
+        .cancelled {
+            if self.testResultViewModel == nil && self.gProofResultViewModel == nil {
+                self.router.sceneCoordinator.dimiss(animated: true)
+            }
+        }
         .catch { error in
             if (error as? QRCodeError) == .qrCodeExists {
                 self.router.showError(error: error)
+            } else if (error as? ScanError) == .badOutput {
+                let showCert = self.lastTriedCertType == .test ? self.testResultViewModel?.certificate : self.gProofResultViewModel?.certificate
+                self.router.showCertificate(showCert,
+                                            _2GContext: true,
+                                            userDefaults: self.userDefaults)
             } else {
                 _ = self.setResultViewModel(newToken: nil)
                 self.delegate?.viewModelDidUpdate()
             }
-
-            
         }
     }
     
@@ -244,12 +270,15 @@ class GProofViewModel: GProofViewModelProtocol {
     }
     
     private func setResultViewModel(newToken: CBORWebToken?) -> Promise<Void> {
-        let validationResultViewModel = ValidationResultFactory.createViewModel(router: router,
+        let validationResultViewModel = ValidationResultFactory.createViewModel(resolvable: resolvable,
+                                                                                router: router,
                                                                                 repository: repository,
                                                                                 certificate: newToken,
                                                                                 error: error,
+                                                                                type: userDefaults.selectedLogicType,
                                                                                 certLogic: certLogic,
-                                                                                _2GContext: true)
+                                                                                _2GContext: true,
+                                                                                userDefaults: userDefaults)
         switch validationResultViewModel {
         case is VaccinationResultViewModel, is RecoveryResultViewModel: self.gProofResultViewModel = validationResultViewModel
         case is TestResultViewModel: self.testResultViewModel = validationResultViewModel
@@ -262,6 +291,7 @@ class GProofViewModel: GProofViewModelProtocol {
         default:
             break
         }
+        initialTokenIsBoosted = newToken?.hcert.dgc.isVaccinationBoosted ?? false && boosterAsTest
         if initialToken == nil {
             initialToken = newToken
         }
@@ -332,11 +362,13 @@ class GProofViewModel: GProofViewModelProtocol {
     
     func showResultGProof() {
         router.showCertificate(gProofResultViewModel?.certificate,
-                               _2GContext: true)
+                               _2GContext: true,
+                               userDefaults: userDefaults)
     }
     
     func showResultTestProof() {
         router.showCertificate(testResultViewModel?.certificate,
-                               _2GContext: true)
+                               _2GContext: true,
+                               userDefaults: userDefaults)
     }
 }

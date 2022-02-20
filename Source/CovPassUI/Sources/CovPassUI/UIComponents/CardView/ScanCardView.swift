@@ -17,9 +17,19 @@ public class ScanCardView: XibView {
     @IBOutlet public var titleLabel: UILabel!
     @IBOutlet public var textLabel: UILabel!
     @IBOutlet public var actionButton: MainButton!
-
+    @IBOutlet var switchWrapperView: UIView!
+    @IBOutlet public var switchTextLabel: UILabel!
+    @IBOutlet public var uiSwitch: UISwitch!
+    
     // MARK: - Properties
-
+    
+    public var switchAction: ((Bool) -> Void)?
+    public var switchWrapperViewIsHidden: Bool = true {
+        didSet {
+            switchWrapperView.isHidden = switchWrapperViewIsHidden
+            contentView?.clipsToBounds = !switchWrapperViewIsHidden
+        }
+    }
     private let cornerRadius: CGFloat = 14
     private let shadowRadius: CGFloat = 16
     private let shadowOpacity: CGFloat = 0.2
@@ -29,12 +39,6 @@ public class ScanCardView: XibView {
 
     override public func initView() {
         super.initView()
-        contentView?.layoutMargins = .init(
-            top: .space_18,
-            left: .space_24,
-            bottom: .space_40,
-            right: .space_24
-        )
         contentView?.backgroundColor = .brandBase
 
         contentView?.layer.cornerRadius = cornerRadius
@@ -45,5 +49,18 @@ public class ScanCardView: XibView {
 
         actionButton.style = .secondary
         actionButton.icon = .scan
+        
+        switchWrapperView.backgroundColor = .brandBase80
+        switchWrapperView.isHidden = switchWrapperViewIsHidden
+        uiSwitch.tintColor = .backgroundSecondary
+        uiSwitch.layer.cornerRadius = uiSwitch.frame.height / 2.0
+        uiSwitch.backgroundColor = .backgroundSecondary
+        uiSwitch.clipsToBounds = true
+        contentView?.clipsToBounds = !switchWrapperViewIsHidden
     }
+    
+    @IBAction func switchValueChanged(_ sender: UISwitch) {
+        switchAction?(sender.isOn)
+    }
+    
 }

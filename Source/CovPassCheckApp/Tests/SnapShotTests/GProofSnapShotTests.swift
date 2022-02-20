@@ -13,15 +13,20 @@ import PromiseKit
 
 class GProofSnapShotTests: BaseSnapShotTests {
     
+    let (_, resolver) = Promise<CBORWebToken>.pending()
+
     func testInitWithFailingTest() {
         let vaccinationRepoMock = VaccinationRepositoryMock()
         let certLogicMock = DCCCertLogicMock()
         let initialToken = CBORWebToken.mockTestCertificate
         let routerMock = GProofMockRouter()
-        let vm = GProofViewModel(initialToken: initialToken,
+        let vm = GProofViewModel(resolvable: resolver,
+                                 initialToken: initialToken,
                                  router: routerMock,
                                  repository: vaccinationRepoMock,
-                                 certLogic: certLogicMock)
+                                 certLogic: certLogicMock,
+                                 userDefaults: UserDefaultsPersistence(),
+                                 boosterAsTest: false)
         let vc = GProofViewController(viewModel: vm)
         verifyView(vc: vc)
     }
@@ -30,25 +35,31 @@ class GProofSnapShotTests: BaseSnapShotTests {
         let vaccinationRepoMock = VaccinationRepositoryMock()
         let certLogicMock = DCCCertLogicMock()
         certLogicMock.validateResult = [.init(rule: nil, result: .passed, validationErrors: nil)]
-        let initialToken = CBORWebToken.mockTestCertificate
+        let initialToken = rapidTestToken()
         let routerMock = GProofMockRouter()
-        let vm = GProofViewModel(initialToken: initialToken,
+        let vm = GProofViewModel(resolvable: resolver,
+                                 initialToken: initialToken,
                                  router: routerMock,
                                  repository: vaccinationRepoMock,
-                                 certLogic: certLogicMock)
+                                 certLogic: certLogicMock,
+                                 userDefaults: UserDefaultsPersistence(),
+                                 boosterAsTest: false)
         let vc = GProofViewController(viewModel: vm)
         verifyView(vc: vc)
     }
-    
+
     func testInitWithFailingVaccination() {
         let vaccinationRepoMock = VaccinationRepositoryMock()
         let certLogicMock = DCCCertLogicMock()
         let initialToken = CBORWebToken.mockVaccinationCertificate
         let routerMock = GProofMockRouter()
-        let vm = GProofViewModel(initialToken: initialToken,
+        let vm = GProofViewModel(resolvable: resolver,
+                                 initialToken: initialToken,
                                  router: routerMock,
                                  repository: vaccinationRepoMock,
-                                 certLogic: certLogicMock)
+                                 certLogic: certLogicMock,
+                                 userDefaults: UserDefaultsPersistence(),
+                                 boosterAsTest: false)
         let vc = GProofViewController(viewModel: vm)
         verifyView(vc: vc)
     }
@@ -59,26 +70,32 @@ class GProofSnapShotTests: BaseSnapShotTests {
         certLogicMock.validateResult = [.init(rule: nil, result: .passed, validationErrors: nil)]
         let initialToken = CBORWebToken.mockVaccinationCertificate
         let routerMock = GProofMockRouter()
-        let vm = GProofViewModel(initialToken: initialToken,
+        let vm = GProofViewModel(resolvable: resolver,
+                                 initialToken: initialToken,
                                  router: routerMock,
                                  repository: vaccinationRepoMock,
-                                 certLogic: certLogicMock)
+                                 certLogic: certLogicMock,
+                                 userDefaults: UserDefaultsPersistence(),
+                                 boosterAsTest: false)
         let vc = GProofViewController(viewModel: vm)
         verifyView(vc: vc)
     }
-
+    
     func testInitWithSuccessfulVaccinationAndScannedSuccessfulTest() {
         let vaccinationRepoMock = VaccinationRepositoryMock()
         let certLogicMock = DCCCertLogicMock()
         certLogicMock.validateResult = [.init(rule: nil, result: .passed, validationErrors: nil)]
         let initialToken = CBORWebToken.mockVaccinationCertificate
         let routerMock = GProofMockRouter()
-        let vm = GProofViewModel(initialToken: initialToken,
+        let vm = GProofViewModel(resolvable: resolver,
+                                 initialToken: initialToken,
                                  router: routerMock,
                                  repository: vaccinationRepoMock,
-                                 certLogic: certLogicMock)
+                                 certLogic: certLogicMock,
+                                 userDefaults: UserDefaultsPersistence(),
+                                 boosterAsTest: false)
         let vc = GProofViewController(viewModel: vm)
-        vaccinationRepoMock.checkedCert = CBORWebToken.mockTestCertificate
+        vaccinationRepoMock.checkedCert = rapidTestToken()
         vm.scanTest()
         verifyAsync(vc: vc, wait: 0.1)
     }
@@ -87,12 +104,15 @@ class GProofSnapShotTests: BaseSnapShotTests {
         let vaccinationRepoMock = VaccinationRepositoryMock()
         let certLogicMock = DCCCertLogicMock()
         certLogicMock.validateResult = [.init(rule: nil, result: .passed, validationErrors: nil)]
-        let initialToken = CBORWebToken.mockTestCertificate
+        let initialToken = rapidTestToken()
         let routerMock = GProofMockRouter()
-        let vm = GProofViewModel(initialToken: initialToken,
+        let vm = GProofViewModel(resolvable: resolver,
+                                 initialToken: initialToken,
                                  router: routerMock,
                                  repository: vaccinationRepoMock,
-                                 certLogic: certLogicMock)
+                                 certLogic: certLogicMock,
+                                 userDefaults: UserDefaultsPersistence(),
+                                 boosterAsTest: false)
         let vc = GProofViewController(viewModel: vm)
         certLogicMock.validateResult = [.init(rule: nil, result: .fail, validationErrors: nil)]
         vaccinationRepoMock.checkedCert = CBORWebToken.mockVaccinationCertificate
@@ -106,14 +126,36 @@ class GProofSnapShotTests: BaseSnapShotTests {
         certLogicMock.validateResult = [.init(rule: nil, result: .passed, validationErrors: nil)]
         let initialToken = CBORWebToken.mockVaccinationCertificate
         let routerMock = GProofMockRouter()
-        let vm = GProofViewModel(initialToken: initialToken,
+        let vm = GProofViewModel(resolvable: resolver,
+                                 initialToken: initialToken,
                                  router: routerMock,
                                  repository: vaccinationRepoMock,
-                                 certLogic: certLogicMock)
+                                 certLogic: certLogicMock,
+                                 userDefaults: UserDefaultsPersistence(),
+                                 boosterAsTest: false)
         let vc = GProofViewController(viewModel: vm)
         certLogicMock.validateResult = [.init(rule: nil, result: .fail, validationErrors: nil)]
         vaccinationRepoMock.checkedCert = CBORWebToken.mockTestCertificate
         vm.scanTest()
         verifyAsync(vc: vc, wait: 0.1)
+    }
+
+    private func rapidTestToken() -> CBORWebToken {
+        var token = CBORWebToken.mockTestCertificate
+        token.hcert.dgc.t = [
+            Test(
+                tg: "840539006",
+                tt: "LP217198-3",
+                nm: "SARS-CoV-2 Rapid Test",
+                ma: "1360",
+                sc: Date(),
+                tr: "260373001",
+                tc: "Test Center",
+                co: "DE",
+                is: "Robert Koch-Institut iOS",
+                ci: "URN:UVCI:01DE/IBMT102/18Q12HTUJ45NO7ZTR2RGAS#C"
+            )
+        ]
+        return token
     }
 }

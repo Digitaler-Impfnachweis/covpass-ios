@@ -19,13 +19,18 @@ class DCCCertLogicTests: XCTestCase {
     var service: DCCServiceMock!
     var sut: DCCCertLogic!
     var repository: VaccinationRepositoryProtocol!
+    let jsonDecoder = JSONDecoder()
 
     override func setUp() {
         super.setUp()
         keychain = MockPersistence()
         userDefaults = MockPersistence()
         service = DCCServiceMock()
-        sut = DCCCertLogic(initialDCCRulesURL: Bundle.commonBundle.url(forResource: "dcc-rules", withExtension: "json")!, service: service, keychain: keychain, userDefaults: userDefaults)
+        sut = DCCCertLogic(initialDCCRulesURL: Bundle.commonBundle.url(forResource: "dcc-rules", withExtension: "json")!,
+                           initialDomesticDCCRulesURL: Bundle.commonBundle.url(forResource: "dcc-domestic-rules", withExtension: "json")!,
+                           service: service,
+                           keychain: keychain,
+                           userDefaults: userDefaults)
 
         let trustListURL = Bundle.commonBundle.url(forResource: "dsc.json", withExtension: nil)!
         repository = VaccinationRepository(
@@ -59,12 +64,12 @@ class DCCCertLogicTests: XCTestCase {
         XCTAssertEqual(sut.valueSets.count, 8)
         XCTAssertEqual(sut.valueSets["country-2-codes"]?.count, 250)
         XCTAssertEqual(sut.valueSets["covid-19-lab-result"]?.count, 2)
-        XCTAssertEqual(sut.valueSets["covid-19-lab-test-manufacturer-and-name"]?.count, 190)
+        XCTAssertEqual(sut.valueSets["covid-19-lab-test-manufacturer-and-name"]?.count, 207)
         XCTAssertEqual(sut.valueSets["covid-19-lab-test-type"]?.count, 2)
         XCTAssertEqual(sut.valueSets["disease-agent-targeted"]?.count, 1)
         XCTAssertEqual(sut.valueSets["sct-vaccines-covid-19"]?.count, 3)
-        XCTAssertEqual(sut.valueSets["vaccines-covid-19-auth-holders"]?.count, 22)
-        XCTAssertEqual(sut.valueSets["vaccines-covid-19-names"]?.count, 22)
+        XCTAssertEqual(sut.valueSets["vaccines-covid-19-auth-holders"]?.count, 24)
+        XCTAssertEqual(sut.valueSets["vaccines-covid-19-names"]?.count, 28)
     }
 
     func testRemoteValueSets() throws {
@@ -89,11 +94,11 @@ class DCCCertLogicTests: XCTestCase {
         try userDefaults.store(UserDefaults.keyLastUpdatedDCCRules, value: dateDefault)
         service.loadBoosterRulesResult = Promise.value([])
         
-        let lastUpdateDateBefore = try userDefaults.fetch(UserDefaults.keyLastUpdatedDCCRules) as! Date
+        let lastUpdateDateBefore = try XCTUnwrap(userDefaults.fetch(UserDefaults.keyLastUpdatedDCCRules) as? Date)
         XCTAssertEqual(dateDefault, lastUpdateDateBefore)
         service.loadValueSetsResult = Promise.value([])
         try sut.updateRulesIfNeeded().wait()
-        let lastUpdateDateAfter = try userDefaults.fetch(UserDefaults.keyLastUpdatedDCCRules) as! Date
+        let lastUpdateDateAfter = try XCTUnwrap(userDefaults.fetch(UserDefaults.keyLastUpdatedDCCRules) as? Date)
         XCTAssertNotNil(lastUpdateDateAfter)
         XCTAssertNotEqual(dateDefault, lastUpdateDateAfter)
     }
@@ -103,10 +108,10 @@ class DCCCertLogicTests: XCTestCase {
         try userDefaults.store(UserDefaults.keyLastUpdatedDCCRules, value: dateDefault)
         service.loadBoosterRulesResult = Promise.value([])
         
-        let lastUpdateDateBefore = try userDefaults.fetch(UserDefaults.keyLastUpdatedDCCRules) as! Date
+        let lastUpdateDateBefore = try XCTUnwrap(userDefaults.fetch(UserDefaults.keyLastUpdatedDCCRules) as? Date)
         XCTAssertEqual(dateDefault, lastUpdateDateBefore)
         try sut.updateRulesIfNeeded().wait()
-        let lastUpdateDateAfter = try userDefaults.fetch(UserDefaults.keyLastUpdatedDCCRules) as! Date
+        let lastUpdateDateAfter = try (userDefaults.fetch(UserDefaults.keyLastUpdatedDCCRules) as? Date)
         XCTAssertNotNil(lastUpdateDateAfter)
         XCTAssertEqual(dateDefault, lastUpdateDateAfter)
     }
@@ -114,13 +119,13 @@ class DCCCertLogicTests: XCTestCase {
 
     func testSavedAndLocalRules() throws {
         // Check local rules (no saved rules)
-        XCTAssertEqual(sut.dccRules.count, 242)
+        XCTAssertEqual(sut.dccRules.count, 323)
 
         // Save one rule
         let rule = Rule(identifier: "", type: "", version: "", schemaVersion: "", engine: "", engineVersion: "", certificateType: "", description: [], validFrom: "", validTo: "", affectedString: [], logic: JSON(""), countryCode: "")
         rule.hash = "1"
         let data = try JSONEncoder().encode([rule])
-        try keychain.store(KeychainPersistence.Keys.dccRules.rawValue, value: data)
+        try XCTUnwrap(keychain.store(KeychainPersistence.Keys.dccRules.rawValue, value: data))
 
         // Check saved rules
         XCTAssertEqual(sut.dccRules.count, 1)
@@ -143,12 +148,16 @@ class DCCCertLogicTests: XCTestCase {
 
         XCTAssertEqual(res.count, 4)
         XCTAssertEqual(failedResults(results: res).count, 1)
-        XCTAssertEqual(failedResults(results: res)[0].rule?.identifier, "VR-DE-0004")
+        XCTAssertEqual(failedResults(results: res).first?.rule?.identifier, "VR-DE-0004")
     }
 
     func testValidVaccinationWithoutRules() {
         do {
-            let sut = DCCCertLogic(initialDCCRulesURL: Bundle.commonBundle.url(forResource: "dsc", withExtension: "json")!, service: DCCServiceMock(), keychain: MockPersistence(), userDefaults: MockPersistence())
+            let sut = DCCCertLogic(initialDCCRulesURL: Bundle.commonBundle.url(forResource: "dsc", withExtension: "json")!,
+                                   initialDomesticDCCRulesURL: Bundle.commonBundle.url(forResource: "dcc-domestic-rules", withExtension: "json")!,
+                                   service: DCCServiceMock(),
+                                   keychain: MockPersistence(),
+                                   userDefaults: MockPersistence())
             let cert = try repository.checkCertificate(CertificateMock.validCertificate).wait()
 
             _ = try sut.validate(countryCode: "DE", validationClock: Date(), certificate: cert)
@@ -175,7 +184,7 @@ class DCCCertLogicTests: XCTestCase {
 
         XCTAssertEqual(res.count, 2)
         XCTAssertEqual(failedResults(results: res).count, 1)
-        XCTAssertEqual(failedResults(results: res)[0].rule?.identifier, "RR-DE-0002")
+        XCTAssertEqual(failedResults(results: res).first?.rule?.identifier, "RR-DE-0002")
     }
 
     func testRuleUpdate() throws {
@@ -188,45 +197,56 @@ class DCCCertLogicTests: XCTestCase {
         service.loadDCCRuleResult = Promise.value(Rule.mock)
         service.loadBoosterRulesResult = Promise.value([RuleSimple.mock])
         service.loadBoosterRuleResult = Promise.value(Rule.mock)
+        service.loadDomesticDCCRulesResult = Promise.value([RuleSimple.mock])
+        service.loadDomesticDCCRuleResult = Promise.value(Rule.mock)
         service.loadValueSetsResult = Promise.value([])
         try sut.updateRules().wait()
 
         // Keychain should have the new rules
-        let dccData = try keychain.fetch(KeychainPersistence.Keys.dccRules.rawValue)! as! Data
-        let dccRules = try JSONDecoder().decode([Rule].self, from: dccData)
+        let dccData = try XCTUnwrap(keychain.fetch(KeychainPersistence.Keys.dccRules.rawValue) as? Data)
+        let dccRules = try jsonDecoder.decode([Rule].self, from: dccData)
         XCTAssertEqual(dccRules.count, 1)
-        let boosterData = try keychain.fetch(KeychainPersistence.Keys.boosterRules.rawValue)! as! Data
-        let boosterRules = try JSONDecoder().decode([Rule].self, from: boosterData)
+        let boosterData = try XCTUnwrap(keychain.fetch(KeychainPersistence.Keys.boosterRules.rawValue) as? Data)
+        let boosterRules = try jsonDecoder.decode([Rule].self, from: boosterData)
         XCTAssertEqual(boosterRules.count, 1)
+        let domesticData = try XCTUnwrap(keychain.fetch(KeychainPersistence.Keys.dccDomesticRules.rawValue) as? Data)
+        let domesticRules = try jsonDecoder.decode([Rule].self, from: domesticData)
+        XCTAssertEqual(domesticRules.count, 1)
     }
 
     func testRuleUpdateNothingNew() throws {
         // Load intial data
         let initialData = try JSONEncoder().encode([Rule.mock])
-        try keychain.store(KeychainPersistence.Keys.dccRules.rawValue, value: initialData)
+        try XCTUnwrap(keychain.store(KeychainPersistence.Keys.dccRules.rawValue, value: initialData))
 
         // Update rules
         service.loadDCCRulesResult = Promise.value([RuleSimple.mock])
         service.loadDCCRuleResult = Promise.value(Rule.mock)
         service.loadBoosterRulesResult = Promise.value([RuleSimple.mock])
         service.loadBoosterRuleResult = Promise.value(Rule.mock)
+        service.loadDomesticDCCRulesResult = Promise.value([RuleSimple.mock])
+        service.loadDomesticDCCRuleResult = Promise.value(Rule.mock)
         service.loadValueSetsResult = Promise.value([])
         try sut.updateRules().wait()
 
         // Keychain should have the new rules
-        let dccData = try keychain.fetch(KeychainPersistence.Keys.dccRules.rawValue)! as! Data
-        let dccRules = try JSONDecoder().decode([Rule].self, from: dccData)
+        let dccData = try XCTUnwrap(keychain.fetch(KeychainPersistence.Keys.dccRules.rawValue) as? Data)
+        let dccRules = try jsonDecoder.decode([Rule].self, from: dccData)
         XCTAssertEqual(dccRules.count, 1)
-        let boosterData = try keychain.fetch(KeychainPersistence.Keys.boosterRules.rawValue)! as! Data
-        let boosterRules = try JSONDecoder().decode([Rule].self, from: boosterData)
+        let boosterData = try XCTUnwrap(keychain.fetch(KeychainPersistence.Keys.boosterRules.rawValue) as? Data)
+        let boosterRules = try jsonDecoder.decode([Rule].self, from: boosterData)
         XCTAssertEqual(boosterRules.count, 1)
+        let domesticData = try XCTUnwrap(keychain.fetch(KeychainPersistence.Keys.dccDomesticRules.rawValue) as? Data)
+        let domesticRules = try jsonDecoder.decode([Rule].self, from: domesticData)
+        XCTAssertEqual(domesticRules.count, 1)
     }
 
     func testRuleUpdateNewRule() throws {
         // Load intial data
         let initialData = try JSONEncoder().encode([Rule.mock.setIdentifier("2").setHash("2")])
-        try keychain.store(KeychainPersistence.Keys.dccRules.rawValue, value: initialData)
-        try keychain.store(KeychainPersistence.Keys.boosterRules.rawValue, value: initialData)
+        try XCTUnwrap(keychain.store(KeychainPersistence.Keys.dccRules.rawValue, value: initialData))
+        try XCTUnwrap(keychain.store(KeychainPersistence.Keys.dccDomesticRules.rawValue, value: initialData))
+        try XCTUnwrap(keychain.store(KeychainPersistence.Keys.boosterRules.rawValue, value: initialData))
 
         // Update rules
         service.loadDCCRulesResult = Promise.value([
@@ -240,40 +260,55 @@ class DCCCertLogicTests: XCTestCase {
             RuleSimple.mock.setIdentifier("2").setHash("2")
         ])
         service.loadBoosterRuleResult = Promise.value(Rule.mock.setIdentifier("1").setHash("1"))
+        service.loadDomesticDCCRulesResult = Promise.value([
+            RuleSimple.mock.setIdentifier("3").setHash("3"),
+            RuleSimple.mock.setIdentifier("4").setHash("4")
+        ])
+        service.loadDomesticDCCRuleResult = Promise.value(Rule.mock.setIdentifier("3").setHash("3"))
         try sut.updateRules().wait()
 
         // Keychain should have the new rules
-        let dccData = try keychain.fetch(KeychainPersistence.Keys.dccRules.rawValue)! as! Data
-        let dccRules = try JSONDecoder().decode([Rule].self, from: dccData)
+        let dccData = try XCTUnwrap(keychain.fetch(KeychainPersistence.Keys.dccRules.rawValue) as? Data)
+        let dccRules = try jsonDecoder.decode([Rule].self, from: dccData)
         XCTAssertEqual(dccRules.count, 2)
-        let boosterData = try keychain.fetch(KeychainPersistence.Keys.boosterRules.rawValue)! as! Data
-        let boosterRules = try JSONDecoder().decode([Rule].self, from: boosterData)
+        let boosterData = try XCTUnwrap(keychain.fetch(KeychainPersistence.Keys.boosterRules.rawValue) as? Data)
+        let boosterRules = try jsonDecoder.decode([Rule].self, from: boosterData)
         XCTAssertEqual(boosterRules.count, 2)
+        let domesticData = try XCTUnwrap(keychain.fetch(KeychainPersistence.Keys.dccDomesticRules.rawValue) as? Data)
+        let domesticRules = try jsonDecoder.decode([Rule].self, from: domesticData)
+        XCTAssertEqual(domesticRules.count, 2)
     }
 
     func testRuleUpdateDeleteOldRule() throws {
         // Load intial data
         let initialData = try JSONEncoder().encode([Rule.mock.setIdentifier("2")])
-        try keychain.store(KeychainPersistence.Keys.dccRules.rawValue, value: initialData)
-        try keychain.store(KeychainPersistence.Keys.boosterRules.rawValue, value: initialData)
+        try XCTUnwrap(keychain.store(KeychainPersistence.Keys.dccRules.rawValue, value: initialData))
+        try XCTUnwrap(keychain.store(KeychainPersistence.Keys.boosterRules.rawValue, value: initialData))
 
         // Update rules
         service.loadDCCRulesResult = Promise.value([RuleSimple.mock.setIdentifier("1").setHash("1")])
         service.loadDCCRuleResult = Promise.value(Rule.mock.setIdentifier("1").setHash("1"))
+        service.loadDomesticDCCRulesResult = Promise.value([RuleSimple.mock.setIdentifier("2").setHash("2")])
+        service.loadDomesticDCCRuleResult = Promise.value(Rule.mock.setIdentifier("2").setHash("2"))
         service.loadValueSetsResult = Promise.value([])
         service.loadBoosterRulesResult = Promise.value([RuleSimple.mock.setIdentifier("1").setHash("1")])
         service.loadBoosterRuleResult = Promise.value(Rule.mock.setIdentifier("1").setHash("1"))
         try sut.updateRules().wait()
 
         // Keychain should have the new rules
-        let dccData = try keychain.fetch(KeychainPersistence.Keys.dccRules.rawValue)! as! Data
-        let dccRules = try JSONDecoder().decode([Rule].self, from: dccData)
+        let dccData = try XCTUnwrap(keychain.fetch(KeychainPersistence.Keys.dccRules.rawValue) as? Data)
+        let dccRules = try jsonDecoder.decode([Rule].self, from: dccData)
         XCTAssertEqual(dccRules.count, 1)
         XCTAssertEqual(dccRules[0].identifier, "1")
-        let boosterData = try keychain.fetch(KeychainPersistence.Keys.boosterRules.rawValue)! as! Data
-        let boosterRules = try JSONDecoder().decode([Rule].self, from: boosterData)
+        let dccDomesticData = try XCTUnwrap(keychain.fetch(KeychainPersistence.Keys.dccDomesticRules.rawValue) as? Data)
+        let dccDomesticRules = try jsonDecoder.decode([Rule].self, from: dccDomesticData)
+        XCTAssertEqual(dccDomesticRules.count, 1)
+        XCTAssertEqual(dccDomesticRules[0].identifier, "2")
+        let boosterData = try XCTUnwrap(keychain.fetch(KeychainPersistence.Keys.boosterRules.rawValue) as? Data)
+        let boosterRules = try jsonDecoder.decode([Rule].self, from: boosterData)
         XCTAssertEqual(boosterRules.count, 1)
         XCTAssertEqual(boosterRules[0].identifier, "1")
+
     }
 
     func testValueSetUpdate() throws {
@@ -286,11 +321,12 @@ class DCCCertLogicTests: XCTestCase {
         service.loadValueSetsResult = Promise.value([["id": "1", "hash": "1"]])
         service.loadValueSetResult = Promise.value(CovPassCommon.ValueSet(id: "1", hash: "1", data: Data()))
         service.loadBoosterRulesResult = Promise.value([])
+        service.loadDomesticDCCRulesResult = Promise.value([])
         try sut.updateRules().wait()
 
         // UserDefaults should have the new value sets
-        let data = try userDefaults.fetch(UserDefaults.keyValueSets)! as! Data
-        let valueSets = try JSONDecoder().decode([CovPassCommon.ValueSet].self, from: data)
+        let data = try XCTUnwrap(userDefaults.fetch(UserDefaults.keyValueSets) as? Data)
+        let valueSets = try jsonDecoder.decode([CovPassCommon.ValueSet].self, from: data)
         XCTAssertEqual(valueSets.count, 1)
     }
 
@@ -304,11 +340,12 @@ class DCCCertLogicTests: XCTestCase {
         service.loadValueSetsResult = Promise.value([["id": "1", "hash": "1"]])
         service.loadValueSetResult = Promise.value(CovPassCommon.ValueSet(id: "1", hash: "1", data: Data()))
         service.loadBoosterRulesResult = Promise.value([])
+        service.loadDomesticDCCRulesResult = Promise.value([])
         try sut.updateRules().wait()
 
         // UserDefaults should have the new value sets
-        let data = try userDefaults.fetch(UserDefaults.keyValueSets)! as! Data
-        let valueSets = try JSONDecoder().decode([CovPassCommon.ValueSet].self, from: data)
+        let data = try XCTUnwrap(userDefaults.fetch(UserDefaults.keyValueSets) as? Data)
+        let valueSets = try jsonDecoder.decode([CovPassCommon.ValueSet].self, from: data)
         XCTAssertEqual(valueSets.count, 1)
         XCTAssertEqual(valueSets[0].id, "1")
     }
@@ -322,12 +359,183 @@ class DCCCertLogicTests: XCTestCase {
         service.loadDCCRulesResult = Promise.value([])
         service.loadValueSetsResult = Promise.value([["id": "1", "hash": "1"]])
         service.loadBoosterRulesResult = Promise.value([])
+        service.loadDomesticDCCRulesResult = Promise.value([])
         try sut.updateRules().wait()
 
         // UserDefaults should have the new value sets
-        let data = try userDefaults.fetch(UserDefaults.keyValueSets)! as! Data
-        let valueSets = try JSONDecoder().decode([CovPassCommon.ValueSet].self, from: data)
+        let data = try XCTUnwrap(userDefaults.fetch(UserDefaults.keyValueSets) as? Data)
+        let valueSets = try jsonDecoder.decode([CovPassCommon.ValueSet].self, from: data)
         XCTAssertEqual(valueSets.count, 1)
+    }
+    
+    // MARK: Domestic vs EU Rules
+    // Some Background:
+    //  RR-DE-0001 Domestic -> older than 28 Days
+    //  RR-DE-0001 EU       -> older than 28 Days
+    //  RR-DE-0002 Domestic -> The positive NAA test result (e.g., PCR) must be no older than 3 ( 90 days) months.
+    //  RR-DE-0002 EU       -> The positive NAA test result (e.g., PCR) must be no older than 6 (180 days) months.
+    
+    func testDomesticRules181DaysAfterRecovery() {
+        // GIVEN
+        let now = Date()
+        let dateAfter91Days = now.addingTimeInterval(60*60*24*181)
+        let token = CBORWebToken.mockRecoveryCertificate.extended()
+        token.firstRecovery?.fr = now
+        
+        // WHEN
+        let results = try! sut.validate(type: .de,
+                                        countryCode: "DE",
+                                        validationClock: dateAfter91Days,
+                                        certificate: token.vaccinationCertificate)
+        
+        // THEN
+        XCTAssertEqual(results.count, 2)
+        XCTAssertEqual(results.result(ofRule: "RR-DE-0001"), .passed)
+    }
+    
+    func testEURules181DaysAfterRecovery() {
+        // GIVEN
+        let now = Date()
+        let dateAfter91Days = now.addingTimeInterval(60*60*24*181)
+        let token = CBORWebToken.mockRecoveryCertificate.extended()
+        token.firstRecovery?.fr = now
+        
+        // WHEN
+        let results = try! sut.validate(type: .eu,
+                                        countryCode: "DE",
+                                        validationClock: dateAfter91Days,
+                                        certificate: token.vaccinationCertificate)
+        
+        // THEN
+        XCTAssertEqual(results.count, 2)
+        XCTAssertEqual(results.result(ofRule: "RR-DE-0001"), .passed)
+        XCTAssertEqual(results.result(ofRule: "RR-DE-0002"), .fail)
+    }
+    
+    func testDomesticRules91DaysAfterRecovery() {
+        // GIVEN
+        let now = Date()
+        let dateAfter91Days = now.addingTimeInterval(60*60*24*91)
+        let token = CBORWebToken.mockRecoveryCertificate.extended()
+        token.firstRecovery?.fr = now
+        
+        // WHEN
+        let results = try! sut.validate(type: .de,
+                                        countryCode: "DE",
+                                        validationClock: dateAfter91Days,
+                                        certificate: token.vaccinationCertificate)
+        
+        // THEN
+        XCTAssertEqual(results.count, 2)
+        XCTAssertEqual(results.result(ofRule: "RR-DE-0001"), .passed)
+    }
+    
+    func testEURules91DaysAfterRecovery() {
+        // GIVEN
+        let now = Date()
+        let dateAfter91Days = now.addingTimeInterval(60*60*24*91)
+        let token = CBORWebToken.mockRecoveryCertificate.extended()
+        token.firstRecovery?.fr = now
+        
+        // WHEN
+        let results = try! sut.validate(type: .eu,
+                                        countryCode: "DE",
+                                        validationClock: dateAfter91Days,
+                                        certificate: token.vaccinationCertificate)
+        
+        // THEN
+        XCTAssertEqual(results.count, 2)
+        XCTAssertEqual(results.result(ofRule: "RR-DE-0001"), .passed)
+        XCTAssertEqual(results.result(ofRule: "RR-DE-0002"), .passed)
+    }
+    
+    func testDomesticRules29DaysAfterRecovery() {
+        // GIVEN
+        let now = Date()
+        let dateAfter29Days = now.addingTimeInterval(60*60*24*29)
+        let token = CBORWebToken.mockRecoveryCertificate.extended()
+        token.firstRecovery?.fr = now
+        
+        // WHEN
+        let results = try! sut.validate(type: .de,
+                                        countryCode: "DE",
+                                        validationClock: dateAfter29Days,
+                                        certificate: token.vaccinationCertificate)
+        
+        // THEN
+        XCTAssertEqual(results.count, 2)
+        XCTAssertEqual(results.result(ofRule: "RR-DE-0001"), .passed)
+    }
+    
+    func testEURules29DaysAfterRecovery() {
+        // GIVEN
+        let now = Date()
+        let dateAfter29Days = now.addingTimeInterval(60*60*24*29)
+        let token = CBORWebToken.mockRecoveryCertificate.extended()
+        token.firstRecovery?.fr = now
+        
+        // WHEN
+        let results = try! sut.validate(type: .eu,
+                                        countryCode: "DE",
+                                        validationClock: dateAfter29Days,
+                                        certificate: token.vaccinationCertificate)
+        
+        // THEN
+        XCTAssertEqual(results.count, 2)
+        XCTAssertEqual(results.result(ofRule: "RR-DE-0001"), .passed)
+        XCTAssertEqual(results.result(ofRule: "RR-DE-0002"), .passed)
+    }
+    
+    func testDomesticRules2DaysAfterRecovery() {
+        // GIVEN
+        let now = Date()
+        let dateAfter2Days = now.addingTimeInterval(60*60*24*2)
+        let token = CBORWebToken.mockRecoveryCertificate.extended()
+        token.firstRecovery?.fr = now
+        
+        // WHEN
+        let results = try! sut.validate(type: .de,
+                                        countryCode: "DE",
+                                        validationClock: dateAfter2Days,
+                                        certificate: token.vaccinationCertificate)
+        
+        // THEN
+        XCTAssertEqual(results.count, 2)
+        XCTAssertEqual(results.result(ofRule: "RR-DE-0001"), .fail)
+    }
+    
+    func testEURules2DaysAfterRecovery() {
+        // GIVEN
+        let now = Date()
+        let dateAfter2Days = now.addingTimeInterval(60*60*24*2)
+        let token = CBORWebToken.mockRecoveryCertificate.extended()
+        token.firstRecovery?.fr = now
+        
+        // WHEN
+        let results = try! sut.validate(type: .eu,
+                                        countryCode: "DE",
+                                        validationClock: dateAfter2Days,
+                                        certificate: token.vaccinationCertificate)
+        
+        // THEN
+        XCTAssertEqual(results.count, 2)
+        XCTAssertEqual(results.result(ofRule: "RR-DE-0001"), .fail)
+        XCTAssertEqual(results.result(ofRule: "RR-DE-0002"), .passed)
+    }
+    
+    func testUpdateDomesticRules() throws {
+        // GIVEN
+        try XCTUnwrap(keychain.store(KeychainPersistence.Keys.dccDomesticRules.rawValue, value: []))
+        service.loadDomesticDCCRulesResult = Promise.value([RuleSimple.mock])
+        service.loadDomesticDCCRuleResult = Promise.value(Rule.mock)
+        
+        // WHEN
+        try sut.updateDomesticRules().wait()
+        
+        // THEN
+        let domesticData = try XCTUnwrap(keychain.fetch(KeychainPersistence.Keys.dccDomesticRules.rawValue) as? Data)
+        let domesticRules = try jsonDecoder.decode([Rule].self, from: domesticData)
+        XCTAssertEqual(domesticRules.count, 1)
     }
 
     // MARK: - Helpers

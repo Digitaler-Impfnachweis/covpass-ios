@@ -12,14 +12,52 @@ import XCTest
 @testable import CovPassCommon
 
 class UserDefaultsPersistenceTests: XCTestCase {
+    
+    var sut: UserDefaultsPersistence!
+
+    override func setUp() {
+        super.setUp()
+        sut = UserDefaultsPersistence()
+    }
+    
+    override func tearDown() {
+        sut = nil
+        super.tearDown()
+    }
+    
     func testUserDefaultsPersistence() {
         let randomKey = "\(Date().timeIntervalSince1970.rounded())"
-        let sut = UserDefaultsPersistence()
-
         XCTAssertNil(try sut.fetch(randomKey))
         XCTAssertNoThrow(try sut.store(randomKey, value: "1"))
         XCTAssertEqual(try sut.fetch(randomKey) as? String, "1")
         XCTAssertNoThrow(try sut.delete(randomKey))
         XCTAssertNil(try sut.fetch(randomKey))
+    }
+    
+    func testSetLogicTypeEu() {
+        // GIVEN
+        sut.selectedLogicType = .eu
+        // WHEN
+        let selectedLogicType = sut.selectedLogicType
+        // THEN
+        XCTAssertEqual(selectedLogicType, .eu)
+    }
+    
+    func testSetLogicTypeDe() {
+        // GIVEN
+        sut.selectedLogicType = .de
+        // WHEN
+        let selectedLogicType = sut.selectedLogicType
+        // THEN
+        XCTAssertEqual(selectedLogicType, .de)
+    }
+    
+    func testSetLogicTypeBooster() {
+        // GIVEN
+        sut.selectedLogicType = .booster
+        // WHEN
+        let selectedLogicType = sut.selectedLogicType
+        // THEN
+        XCTAssertEqual(selectedLogicType, .booster)
     }
 }

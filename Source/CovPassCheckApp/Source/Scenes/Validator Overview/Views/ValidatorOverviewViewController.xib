@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ValidatorOverviewViewController" customModule="CovPassCheckApp" customModuleProvider="target">
             <connections>
+                <outlet property="checkSituationLabel" destination="SaM-1L-4r5" id="E5L-q5-Rqe"/>
                 <outlet property="headerView" destination="zJo-A3-iFe" id="O25-eI-mKv"/>
                 <outlet property="offlineCard" destination="TTc-KS-yO5" id="UxL-Sz-hzu"/>
                 <outlet property="scanCard" destination="0Le-DA-8MJ" id="hqR-DR-0ma"/>
@@ -33,10 +34,10 @@
                             <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LPz-bQ-P6F">
-                            <rect key="frame" x="0.0" y="100" width="414" height="843"/>
+                            <rect key="frame" x="0.0" y="100" width="414" height="887.5"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="UmP-gd-ynO">
-                                    <rect key="frame" x="24" y="12" width="366" height="831"/>
+                                    <rect key="frame" x="24" y="12" width="366" height="875.5"/>
                                     <subviews>
                                         <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="7SU-cs-ahY">
                                             <rect key="frame" x="0.0" y="0.0" width="366" height="32"/>
@@ -55,15 +56,21 @@
                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="350" id="wHQ-Hr-dqv"/>
                                             </constraints>
                                         </view>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SaM-1L-4r5" userLabel="Check Situation Label">
+                                            <rect key="frame" x="0.0" y="429" width="366" height="20.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                         <view contentMode="scaleToFill" placeholderIntrinsicWidth="366" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="h6e-Af-Kqm" customClass="HintView" customModule="CovPassUI">
-                                            <rect key="frame" x="0.0" y="429" width="366" height="128"/>
+                                            <rect key="frame" x="0.0" y="473.5" width="366" height="128"/>
                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="128" id="mxR-kh-HLg"/>
                                             </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" placeholderIntrinsicWidth="366" placeholderIntrinsicHeight="250" translatesAutoresizingMaskIntoConstraints="NO" id="TTc-KS-yO5" customClass="OfflineCardView" customModule="CovPassUI">
-                                            <rect key="frame" x="0.0" y="581" width="366" height="250"/>
+                                            <rect key="frame" x="0.0" y="625.5" width="366" height="250"/>
                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="250" id="IiP-04-gia"/>

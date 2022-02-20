@@ -30,7 +30,9 @@ PINNING_HASHES = 99cbc210bec8bad16f0827e733b1972e2a7b110cfbbc01e749c2b8572ddbf30
 
 DCC_RULES_URL = https:/$()/distribution.dcc-rules.de
 DCC_RULES_FILE = dcc-rules.json
+DCC_DOMESTIC_RULES_FILE = dcc-domestic-rules.json
 
 // BOOSTER (NOTIFICATION) RULES
 
 BOOSTER_RULES_URL = https:/$()/distribution-cff4f7147260.dcc-rules.de/bnrules
+DOMESTIC_RULES_URL = https:/$()/distribution-cff4f7147260.dcc-rules.de/domesticrules

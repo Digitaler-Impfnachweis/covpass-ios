@@ -33,7 +33,7 @@
                     </constraints>
                 </view>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qf6-Rq-Unr">
-                    <rect key="frame" x="0.0" y="124" width="414" height="738"/>
+                    <rect key="frame" x="0.0" y="124" width="414" height="714"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="tNn-Ng-ZRx">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="546"/>
@@ -63,7 +63,7 @@
                     </constraints>
                 </scrollView>
                 <view contentMode="scaleToFill" placeholderIntrinsicWidth="240" placeholderIntrinsicHeight="56" translatesAutoresizingMaskIntoConstraints="NO" id="Ym0-Wl-H3l" customClass="CustomToolbarView" customModule="CovPassUI">
-                    <rect key="frame" x="0.0" y="806" width="414" height="56"/>
+                    <rect key="frame" x="0.0" y="782" width="414" height="56"/>
                 </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="aye-B2-vjU"/>
@@ -76,25 +76,19 @@
                 <constraint firstItem="sKK-Se-ZAm" firstAttribute="leading" secondItem="aye-B2-vjU" secondAttribute="leading" id="aWy-O1-CG0"/>
                 <constraint firstItem="Qf6-Rq-Unr" firstAttribute="trailing" secondItem="aye-B2-vjU" secondAttribute="trailing" id="e75-0j-Tss"/>
                 <constraint firstItem="Ym0-Wl-H3l" firstAttribute="leading" secondItem="aye-B2-vjU" secondAttribute="leading" id="hVe-jH-RPM"/>
-                <constraint firstItem="aye-B2-vjU" firstAttribute="bottom" secondItem="Qf6-Rq-Unr" secondAttribute="bottom" id="ke5-WF-hsa"/>
+                <constraint firstItem="aye-B2-vjU" firstAttribute="bottom" secondItem="Qf6-Rq-Unr" secondAttribute="bottom" constant="24" id="ke5-WF-hsa"/>
                 <constraint firstItem="sKK-Se-ZAm" firstAttribute="top" secondItem="aye-B2-vjU" secondAttribute="top" constant="20" id="xWv-Hq-W8v"/>
-                <constraint firstItem="aye-B2-vjU" firstAttribute="bottom" secondItem="Ym0-Wl-H3l" secondAttribute="bottom" id="ygL-2E-Kkx"/>
+                <constraint firstItem="aye-B2-vjU" firstAttribute="bottom" secondItem="Ym0-Wl-H3l" secondAttribute="bottom" constant="24" id="ygL-2E-Kkx"/>
             </constraints>
             <point key="canvasLocation" x="-1513" y="-52"/>
         </view>
     </objects>
     <designables>
-        <designable name="Ym0-Wl-H3l">
-            <size key="intrinsicContentSize" width="240" height="56"/>
-        </designable>
         <designable name="czg-wL-cb7">
             <size key="intrinsicContentSize" width="414" height="128"/>
         </designable>
         <designable name="gbc-XM-dNV">
             <size key="intrinsicContentSize" width="414" height="128"/>
-        </designable>
-        <designable name="kiK-Qt-Oxb">
-            <size key="intrinsicContentSize" width="414" height="40"/>
         </designable>
         <designable name="sKK-Se-ZAm">
             <size key="intrinsicContentSize" width="414" height="60"/>

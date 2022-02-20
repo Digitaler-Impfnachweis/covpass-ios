@@ -81,6 +81,28 @@
 
 "accessibility_update_info_announce" = "Die Ansicht \"Neue Funktionen\" wurde geöffnet";
 
+"accessibility_check_context_onboarding_announce_open" = "Die Ansicht “Wann nutzen Sie die CovPassCheck-App?” wurde geöffnet.";
+
+"accessibility_check_context_onboarding_announce_close" = "Die Ansicht “Wann nutzen Sie die CovPassCheck-App?” wurde geschlossen.";
+
+"check_context_onboarding_title" = "Wann nutzen Sie die CovPassCheck-App?";
+
+"check_context_onboarding_tag" = "Neu";
+
+"check_context_onboarding_image" = "Abbildung von zwei Menschen in einer Prüfsituation. Eine Person scannt das Zertifikat einer anderen Person. Darüber ist die EU-Flagge abgebildet.";
+
+"check_context_onboarding_option1_title" = "Ich prüfe bei Einreisen";
+
+"check_context_onboarding_option1_subtitle" = "Zum Beispiel am Flughafen oder Bahnhof";
+
+"check_context_onboarding_option2_title" = "Ich prüfe innerhalb Deutschlands";
+
+"check_context_onboarding_option2_subtitle" = "Zum Beispiel in Geschäften oder in der Gastronomie";
+
+"check_context_onboarding_footnote" = "Anhand dieser Angabe werden die Regeln angepasst, nach denen Zertifikate als Gültig oder Ungültig ausgewiesen werden. Sie können die Angabe jederzeit in den Einstellungen ändern.";
+
+"check_context_onboarding_button" = "OK";
+
 
 /********** start screen **********/
 
@@ -107,6 +129,10 @@
 "accessibility_scan_result_closing_announce" = "Die Ansicht Überprüfungsergebnis wurde geschlossen";
 
 "validation_start_screen_scan_action_button_title" = "Zertifikat scannen";
+
+"startscreen_rules_tag_local" = "Prüfung innerhalb Deutschlands";
+
+"startscreen_rules_tag_europe" = "Prüfung bei Einreisen nach Deutschland";
 
 "validation_start_screen_offline_modus_title" = "Offline-Modus";
 
@@ -282,6 +308,24 @@
 
 "result_2G_empty_subtitle" = "Noch nicht geprüft";
 
+"result_2G_2nd_recovery_valid" = "Genesung";
+
+"result_2G_2nd_basic_valid" = "Grundimmunisierung";
+
+"result_2G_2nd_booster_valid" = "Auffrischungsimpfung";
+
+"result_2G_2nd_rapidtest_valid" = "Negativer Schnelltest";
+
+"result_2G_2nd_pcrtest_valid" = "Negativer PCR-Test";
+
+"result_2G_2nd_empty" = "Kann für 2G+ notwendig sein";
+
+"result_2G_2nd_timestamp_hours" = "Vor %d Stunden";
+
+"result_2G_2nd_timestamp_days" = "Vor %d Tagen";
+
+"result_2G_2nd_timestamp_months" = "Vor %d Monaten";
+
 "accessibility_warning_2G_names_announce_open" = "Fehlermeldung \"Abweichende Daten\" wurde geöffnet";
 
 "accessibility_warning_2G_names_announce_close" = "Fehlermeldung \"Abweichende Daten\" wurde geschlossen";
@@ -386,6 +430,16 @@
 "accessibility_app_information_update_back" = "Zurück";
 
 "accessibility_app_information_title_update" = "Die Ansicht \"Prüfregeln aktualisieren\" wurde geöffnet";
+
+"accessibility_app_information_title_local_rules" = "Die Ansicht \"Prüfsituation\" wurde geöffnet";
+
+"app_information_title_local_rules" = "Prüfsituation";
+
+"app_information_title_local_rules_button" = "Übernehmen";
+
+"app_information_title_local_rules_status_DE" = "Innerhalb DE";
+
+"app_information_title_local_rules_status_EU" = "Einreise";
 
 "app_information_beep_when_checking_title" = "Signalton beim Scannen";
 

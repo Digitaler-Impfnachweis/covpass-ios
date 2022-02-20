@@ -26,7 +26,8 @@ struct ValidatorOverviewSceneFactory: SceneFactory {
         let repository = VaccinationRepository.create()
         let viewModel = ValidatorOverviewViewModel(router: router,
                                                    repository: repository,
-                                                   certLogic: DCCCertLogic.create())
+                                                   certLogic: DCCCertLogic.create(),
+                                                   userDefaults: UserDefaultsPersistence())
         let viewController = ValidatorOverviewViewController(viewModel: viewModel)
         let navigationController = UINavigationController(rootViewController: viewController)
         return navigationController

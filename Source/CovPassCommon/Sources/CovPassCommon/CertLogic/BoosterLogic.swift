@@ -62,6 +62,8 @@ public protocol BoosterLogicProtocol {
 public struct BoosterLogic: BoosterLogicProtocol {
     private let certLogic: DCCCertLogicProtocol
     private let userDefaults: Persistence
+    private let jsonDecoder = JSONDecoder()
+    private let jsonEncoder = JSONEncoder()
 
     public init(certLogic: DCCCertLogicProtocol, userDefaults: Persistence) {
         self.certLogic = certLogic
@@ -115,19 +117,22 @@ public struct BoosterLogic: BoosterLogicProtocol {
                         validationClock: Date(),
                         certificate: vaccinationCertificate.vaccinationCertificate
                     )
-                    var boosterCandiate = boosterCandidateForUser(certificate: vaccinationCertificate)
+                    var boosterCandidate = boosterCandidateForUser(certificate: vaccinationCertificate)
                     let passedRules = result.filter { $0.result == .passed }.compactMap { $0.rule }
-                    let rulesChanged = boosterCandiate.validationRules != passedRules
+                    let rulesChanged = boosterCandidate.validationRules != passedRules
                     if !passedRules.isEmpty, rulesChanged {
                         // user is qualified for a booster vaccination
-                        boosterCandiate.vaccinationIdentifier = vaccinationCertificate.vaccinationCertificate.hcert.dgc.uvci
-                        boosterCandiate.validationRules = passedRules
-                        boosterCandiate.state = .new
-                        updateBoosterCandidate(boosterCandiate)
+                        boosterCandidate.vaccinationIdentifier = vaccinationCertificate.vaccinationCertificate.hcert.dgc.uvci
+                        boosterCandidate.validationRules = passedRules
+                        boosterCandidate.state = .new
+                        updateBoosterCandidate(boosterCandidate)
                         newQualification = true
-                    } else if passedRules.isEmpty, !boosterCandiate.validationRules.isEmpty {
+                    } else if passedRules.isEmpty, !boosterCandidate.validationRules.isEmpty {
                         // rules changed and user is not qualified for a booster anymore
-                        deleteBoosterCandidate(forCertificate: vaccinationCertificate)
+                        try? deleteUserDefaultsBoosterCandidates(
+                            with: boosterCandidate.name,
+                            birthdate: boosterCandidate.birthdate
+                        )
                     }
 
                 } catch {
@@ -147,26 +152,22 @@ public struct BoosterLogic: BoosterLogicProtocol {
 
     /// Update the booster candidate
     public func updateBoosterCandidate(_ boosterCandidate: BoosterCandidate) {
-        var boosterCandidates = [BoosterCandidate]()
-        if let data = try? userDefaults.fetch(UserDefaults.keyBoosterCandidates) as? Data {
-            boosterCandidates = (try? JSONDecoder().decode([BoosterCandidate].self, from: data)) ?? []
-        }
-        var updatedCandidates = boosterCandidates.map { $0 == boosterCandidate ? boosterCandidate : $0 }
-        if !updatedCandidates.contains(boosterCandidate) {
-            updatedCandidates.append(boosterCandidate)
-        }
-        guard let updatedData = try? JSONEncoder().encode(updatedCandidates) else { return }
-        try? userDefaults.store(UserDefaults.keyBoosterCandidates, value: updatedData)
+        var boosterCandidates = userDefaultsBoosterCandidates()
+        boosterCandidates.replace(boosterCandidate)
+        boosterCandidates.appendIfNotContained(boosterCandidate)
+        try? updateUserDefaultsBoosterCandidates(boosterCandidates)
+    }
+
+    private func updateUserDefaultsBoosterCandidates(_ boosterCandidates: [BoosterCandidate]) throws {
+        let data = try jsonEncoder.encode(boosterCandidates)
+        try userDefaults.store(UserDefaults.keyBoosterCandidates, value: data)
     }
 
     /// Delete booster candidate for user
     public func deleteBoosterCandidate(forCertificate certificate: ExtendedCBORWebToken) {
-        guard let data = try? userDefaults.fetch(UserDefaults.keyBoosterCandidates) as? Data,
-              let boosterCandidates = try? JSONDecoder().decode([BoosterCandidate].self, from: data)
-        else { return }
+        let boosterCandidates = userDefaultsBoosterCandidates()
         let updatedCandidates = boosterCandidates.filter { $0.vaccinationIdentifier != certificate.vaccinationCertificate.hcert.dgc.uvci }
-        guard let updatedData = try? JSONEncoder().encode(updatedCandidates) else { return }
-        try? userDefaults.store(UserDefaults.keyBoosterCandidates, value: updatedData)
+        try? updateUserDefaultsBoosterCandidates(updatedCandidates)
     }
 
     // MARK: - Helpers
@@ -175,13 +176,42 @@ public struct BoosterLogic: BoosterLogicProtocol {
     private func boosterCandidateForUser(certificate: ExtendedCBORWebToken) -> BoosterCandidate {
         let name = certificate.vaccinationCertificate.hcert.dgc.nam.fullName
         let birthdate = certificate.vaccinationCertificate.hcert.dgc.dobString ?? ""
-        return boosterCandidateForUser(name: name, birthdate: birthdate) ?? BoosterCandidate(certificate: certificate)
+        return userDefaultsBoosterCandidate(with: name, birthdate: birthdate) ?? BoosterCandidate(certificate: certificate)
     }
 
-    private func boosterCandidateForUser(name: String, birthdate: String) -> BoosterCandidate? {
-        guard let data = try? userDefaults.fetch(UserDefaults.keyBoosterCandidates) as? Data,
-              let boosterCandidates = try? JSONDecoder().decode([BoosterCandidate].self, from: data)
-        else { return nil }
+    private func userDefaultsBoosterCandidate(with name: String, birthdate: String) -> BoosterCandidate? {
+        let boosterCandidates = userDefaultsBoosterCandidates()
         return boosterCandidates.first(where: { $0.name == name && $0.birthdate == birthdate })
+    }
+
+    private func userDefaultsBoosterCandidates() -> [BoosterCandidate] {
+        guard let data = try? userDefaults.fetch(UserDefaults.keyBoosterCandidates) as? Data else {
+            return []
+        }
+        let boosterCandidates = try? jsonDecoder.decode(
+            [BoosterCandidate].self,
+            from: data
+        )
+        return boosterCandidates ?? []
+    }
+
+    private func deleteUserDefaultsBoosterCandidates(with name: String, birthdate: String) throws {
+        let candidates = userDefaultsBoosterCandidates()
+            .filter { candidate in
+                candidate.name != name || candidate.birthdate != birthdate
+            }
+        try updateUserDefaultsBoosterCandidates(candidates)
+    }
+}
+
+private extension Array where Element == BoosterCandidate {
+    mutating func replace(_ candidate: BoosterCandidate) {
+        self = map { $0 == candidate ? candidate : $0 }
+    }
+
+    mutating func appendIfNotContained(_ candidate: BoosterCandidate) {
+        if !contains(candidate) {
+            append(candidate)
+        }
     }
 }

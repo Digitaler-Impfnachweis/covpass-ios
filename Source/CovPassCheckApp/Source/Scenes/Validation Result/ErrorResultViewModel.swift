@@ -56,6 +56,7 @@ class ErrorResultViewModel: ValidationResultViewModel {
     // MARK: - Properties
 
     weak var delegate: ResultViewModelDelegate?
+    var resolvable: Resolver<CBORWebToken>
     var router: ValidationResultRouterProtocol
     var repository: VaccinationRepositoryProtocol
     var certificate: CBORWebToken?
@@ -87,20 +88,23 @@ class ErrorResultViewModel: ValidationResultViewModel {
     
     var buttonHidden: Bool = false
     var _2GContext: Bool
-
+    var userDefaults: Persistence
+    
     // MARK: - Lifecycle
-
-    init(
-        router: ValidationResultRouterProtocol,
-        repository: VaccinationRepositoryProtocol,
-        certificate: CBORWebToken? = nil,
-        error: Error,
-        _2GContext: Bool
-    ) {
+    
+    init(resolvable: Resolver<CBORWebToken>,
+         router: ValidationResultRouterProtocol,
+         repository: VaccinationRepositoryProtocol,
+         certificate: CBORWebToken? = nil,
+         error: Error,
+         _2GContext: Bool,
+         userDefaults: Persistence) {
+        self.resolvable = resolvable
         self.router = router
         self.repository = repository
         self.certificate = certificate
         self.error = error
         self._2GContext = _2GContext
+        self.userDefaults = userDefaults
     }
 }

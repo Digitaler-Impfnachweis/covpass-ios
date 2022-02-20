@@ -10,27 +10,36 @@
 @testable import CovPassUI
 import XCTest
 import PromiseKit
+import Scanner
 
 class GProofViewModelTests: XCTestCase {
     
     var sut: GProofViewModel!
     var vaccinationRepoMock: VaccinationRepositoryMock!
     var certLogicMock: DCCCertLogicMock!
-    
+    var routerMock: GProofMockRouter!
+    let (_, resolver) = Promise<CBORWebToken>.pending()
+
     override func setUp() {
         super.setUp()
         let initialToken = CBORWebToken.mockTestCertificate
-        let routerMock = GProofMockRouter()
         vaccinationRepoMock = VaccinationRepositoryMock()
         certLogicMock = DCCCertLogicMock()
-        sut = GProofViewModel(initialToken: initialToken,
+        routerMock = GProofMockRouter()
+        sut = GProofViewModel(resolvable: resolver,
+                              initialToken: initialToken,
                               router: routerMock,
                               repository: vaccinationRepoMock,
-                              certLogic: certLogicMock)
+                              certLogic: certLogicMock,
+                              userDefaults: UserDefaultsPersistence(),
+                              boosterAsTest: false)
     }
     
     override func tearDown() {
         sut = nil
+        vaccinationRepoMock = nil
+        certLogicMock = nil
+        routerMock = nil
         super.tearDown()
     }
     
@@ -42,10 +51,13 @@ class GProofViewModelTests: XCTestCase {
         let routerMock = GProofMockRouter()
         vaccinationRepoMock.checkedCert = CBORWebToken.mockTestCertificate
         certLogicMock.validateResult = [.init(rule: nil, result: .passed, validationErrors: nil)]
-        let sut = GProofViewModel(initialToken: initialToken,
+        let sut = GProofViewModel(resolvable: resolver,
+                                  initialToken: initialToken,
                                   router: routerMock,
                                   repository: vaccinationRepoMock,
-                                  certLogic: certLogicMock)
+                                  certLogic: certLogicMock,
+                                  userDefaults: UserDefaultsPersistence(),
+                                  boosterAsTest: false)
         
         // WHEN
         
@@ -58,7 +70,7 @@ class GProofViewModelTests: XCTestCase {
         
         XCTAssertEqual(sut.resultTestImage, UIImage.detailStatusTest)
         XCTAssertEqual(sut.resultTestLinkImage, nil)
-        XCTAssertEqual(sut.resultTestTitle, "Negative rapid test from 0 hours ago")
+        XCTAssertEqual(sut.resultTestTitle, "Negative PCR test from 0 hours ago")
         XCTAssertEqual(sut.resultTestFooter, nil)
         XCTAssertEqual(sut.resultTestSubtitle, nil)
         
@@ -83,7 +95,7 @@ class GProofViewModelTests: XCTestCase {
         
         XCTAssertEqual(sut.resultTestImage, UIImage.detailStatusTest)
         XCTAssertEqual(sut.resultTestLinkImage, nil)
-        XCTAssertEqual(sut.resultTestTitle, "Negative rapid test from 0 hours ago")
+        XCTAssertEqual(sut.resultTestTitle, "Negative PCR test from 0 hours ago")
         XCTAssertEqual(sut.resultTestFooter, nil)
         XCTAssertEqual(sut.resultTestSubtitle, nil)
         
@@ -113,7 +125,7 @@ class GProofViewModelTests: XCTestCase {
         
         XCTAssertEqual(sut.resultTestImage, UIImage.detailStatusTest)
         XCTAssertEqual(sut.resultTestLinkImage, nil)
-        XCTAssertEqual(sut.resultTestTitle, "Negative rapid test from 0 hours ago")
+        XCTAssertEqual(sut.resultTestTitle, "Negative PCR test from 0 hours ago")
         XCTAssertEqual(sut.resultTestFooter, nil)
         XCTAssertEqual(sut.resultTestSubtitle, nil)
         
@@ -144,7 +156,7 @@ class GProofViewModelTests: XCTestCase {
         
         XCTAssertEqual(sut.resultTestImage, UIImage.detailStatusTest)
         XCTAssertEqual(sut.resultTestLinkImage, nil)
-        XCTAssertEqual(sut.resultTestTitle, "Negative rapid test from 0 hours ago")
+        XCTAssertEqual(sut.resultTestTitle, "Negative PCR test from 0 hours ago")
         XCTAssertEqual(sut.resultTestFooter, nil)
         XCTAssertEqual(sut.resultTestSubtitle, nil)
         
@@ -176,7 +188,7 @@ class GProofViewModelTests: XCTestCase {
         
         XCTAssertEqual(sut.resultTestImage, UIImage.detailStatusTest)
         XCTAssertEqual(sut.resultTestLinkImage, nil)
-        XCTAssertEqual(sut.resultTestTitle, "Negative rapid test from 0 hours ago")
+        XCTAssertEqual(sut.resultTestTitle, "Negative PCR test from 0 hours ago")
         XCTAssertEqual(sut.resultTestFooter, nil)
         XCTAssertEqual(sut.resultTestSubtitle, nil)
         
@@ -339,7 +351,7 @@ class GProofViewModelTests: XCTestCase {
         
         XCTAssertEqual(sut.resultTestImage, UIImage.detailStatusTest)
         XCTAssertEqual(sut.resultTestLinkImage, nil)
-        XCTAssertEqual(sut.resultTestTitle, "Negative rapid test from 0 hours ago")
+        XCTAssertEqual(sut.resultTestTitle, "Negative PCR test from 0 hours ago")
         XCTAssertEqual(sut.resultTestFooter, nil)
         XCTAssertEqual(sut.resultTestSubtitle, nil)
         
@@ -420,7 +432,7 @@ class GProofViewModelTests: XCTestCase {
         
         XCTAssertEqual(sut.resultTestImage, UIImage.detailStatusTest)
         XCTAssertEqual(sut.resultTestLinkImage, nil)
-        XCTAssertEqual(sut.resultTestTitle, "Negative rapid test from 0 hours ago")
+        XCTAssertEqual(sut.resultTestTitle, "Negative PCR test from 0 hours ago")
         XCTAssertEqual(sut.resultTestFooter, nil)
         XCTAssertEqual(sut.resultTestSubtitle, nil)
         
@@ -466,7 +478,7 @@ class GProofViewModelTests: XCTestCase {
         
         XCTAssertEqual(sut.resultTestImage, UIImage.detailStatusTest)
         XCTAssertEqual(sut.resultTestLinkImage, nil)
-        XCTAssertEqual(sut.resultTestTitle, "Negative rapid test from 0 hours ago")
+        XCTAssertEqual(sut.resultTestTitle, "Negative PCR test from 0 hours ago")
         XCTAssertEqual(sut.resultTestFooter, nil)
         XCTAssertEqual(sut.resultTestSubtitle, nil)
         
@@ -592,6 +604,24 @@ class GProofViewModelTests: XCTestCase {
         XCTAssertTrue((sut.router as! GProofMockRouter).showDifferentPersonShown)
     }
     
+    func testNotDCCScanned() {
+        // GIVEN
+        vaccinationRepoMock.checkedCert = CBORWebToken.mockTestCertificate
+        certLogicMock.validateResult = [.init(rule: nil, result: .passed, validationErrors: nil)]
+        sut.startover()
+        RunLoop.current.run(for: 0.1)
+        vaccinationRepoMock.checkedCert = nil
+        vaccinationRepoMock.checkedCertError = ScanError.badOutput
+        certLogicMock.validateResult = [.init(rule: nil, result: .passed, validationErrors: nil)]
+
+        // WHEN
+        sut.scan2GProof()
+        RunLoop.current.run(for: 0.1)
+
+        // THEN
+        XCTAssertTrue((sut.router as! GProofMockRouter).certificateShown)
+    }
+    
     func testShowResultGProof() {
         XCTAssertFalse((sut.router as! GProofMockRouter).certificateShown)
         sut.showResultGProof()
@@ -602,5 +632,59 @@ class GProofViewModelTests: XCTestCase {
         XCTAssertFalse((sut.router as! GProofMockRouter).certificateShown)
         sut.showResultTestProof()
         XCTAssertTrue((sut.router as! GProofMockRouter).certificateShown)
+    }
+    
+    func testDismissSceneAfterStartOverOnClosingCamera() {
+        // GIVEN
+        routerMock.qrCodeScanShouldCanceled = true
+        (routerMock.sceneCoordinator as? SceneCoordinatorMock)?.sceneDissmissed = false
+
+        // WHEN
+        sut.startover()
+
+        // THEN
+        do {
+            let sceneDissmissed = try XCTUnwrap((routerMock.sceneCoordinator as? SceneCoordinatorMock)?.sceneDissmissed)
+            XCTAssertTrue(sceneDissmissed)
+        } catch {
+            XCTFail()
+        }
+    }
+
+    func testResultTestTitle_rapid_test() {
+        // Given
+        let test = Test(
+            tg: "840539006",
+            tt: "LP217198-3",
+            nm: "SARS-CoV-2 Negative Rapid Test",
+            ma: "1360",
+            sc: Date(),
+            tr: "260415000",
+            tc: "Test Center",
+            co: "DE",
+            is: "Robert Koch-Institut iOS",
+            ci: "URN:UVCI:01DE/IBMT102/18Q12HTUJ45NO7ZTR2RGAS#C"
+        )
+        var token = CBORWebToken.mockTestCertificate
+        token.hcert.dgc.t = [test]
+        vaccinationRepoMock.checkedCert = CBORWebToken.mockTestCertificate
+        certLogicMock.validateResult = [
+            .init(rule: nil, result: .passed, validationErrors: nil)
+        ]
+        sut = .init(
+            resolvable: resolver,
+            initialToken: token,
+            router: routerMock,
+            repository: vaccinationRepoMock,
+            certLogic: certLogicMock,
+            userDefaults: UserDefaultsPersistence(),
+            boosterAsTest: false
+        )
+
+        // When
+        let resultTestTitle = sut.resultTestTitle
+
+        // Then
+        XCTAssertEqual(resultTestTitle, "Negative rapid test from 0 hours ago")
     }
 }

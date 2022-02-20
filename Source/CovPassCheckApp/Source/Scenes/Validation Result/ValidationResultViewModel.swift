@@ -17,7 +17,7 @@ private enum Constants {
 }
 
 extension ValidationViewModel {
-    
+        
     var toolbarState: CustomToolbarState {
         let buttonText = _2GContext ? Constants.confirmButtonLabel2G : Constants.confirmButtonLabel
         return .confirm(buttonText)
@@ -38,24 +38,35 @@ extension ValidationViewModel {
             self.repository.checkCertificate($0)
         }
         .done { certificate in
+            
+            if self._2GContext {
+                resolvable.fulfill(certificate)
+            }
+            
             let vm = ValidationResultFactory.createViewModel(
+                resolvable: resolvable,
                 router: self.router,
                 repository: self.repository,
                 certificate: certificate,
                 error: nil,
+                type: UserDefaultsPersistence().selectedLogicType,
                 certLogic: DCCCertLogic.create(),
-                _2GContext: _2GContext
+                _2GContext: _2GContext,
+                userDefaults: userDefaults
             )
             self.delegate?.viewModelDidChange(vm)
         }
         .catch { error in
             let vm = ValidationResultFactory.createViewModel(
+                resolvable: resolvable,
                 router: self.router,
                 repository: self.repository,
                 certificate: nil,
                 error: error,
+                type: UserDefaultsPersistence().selectedLogicType,
                 certLogic: DCCCertLogic.create(),
-                _2GContext: _2GContext
+                _2GContext: _2GContext,
+                userDefaults: userDefaults
             )
             self.delegate?.viewModelDidChange(vm)
         }

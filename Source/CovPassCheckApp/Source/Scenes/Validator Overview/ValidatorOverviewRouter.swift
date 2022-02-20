@@ -37,45 +37,61 @@ class ValidatorOverviewRouter: ValidatorOverviewRouterProtocol {
     }
     
     func showCertificate(_ certificate: CBORWebToken?,
-                         _2GContext: Bool) {
+                         _2GContext: Bool,
+                         userDefaults: Persistence) {
         sceneCoordinator.present(
             ValidationResultSceneFactory(
                 router: ValidationResultRouter(sceneCoordinator: sceneCoordinator),
                 certificate: certificate,
                 error: nil,
-                _2GContext: _2GContext
+                _2GContext: _2GContext,
+                userDefaults: userDefaults
             )
         )
     }
     
-    func showAppInformation() {
+    func showAppInformation(userDefaults: Persistence) {
         sceneCoordinator.push(
             AppInformationSceneFactory(
-                router: AppInformationRouter(sceneCoordinator: sceneCoordinator)
+                router: AppInformationRouter(sceneCoordinator: sceneCoordinator),
+                userDefaults: userDefaults
             )
         )
     }
     
     func showError(error: Error,
-                   _2GContext: Bool) {
+                   _2GContext: Bool,
+                   userDefaults: Persistence) -> Promise<CBORWebToken>  {
         sceneCoordinator.present(
             ValidationResultSceneFactory(
                 router: ValidationResultRouter(sceneCoordinator: sceneCoordinator),
                 certificate: nil,
                 error: error,
-                _2GContext: _2GContext
+                _2GContext: _2GContext,
+                userDefaults: userDefaults
             )
         )
     }
     
     func showGproof(initialToken: CBORWebToken,
                     repository: VaccinationRepositoryProtocol,
-                    certLogic: DCCCertLogicProtocol) {
+                    certLogic: DCCCertLogicProtocol,
+                    userDefaults: Persistence,
+                    boosterAsTest: Bool) {
         sceneCoordinator.present(
             GProofSceneFactory(initialToken: initialToken,
                                router: GProofRouter(sceneCoordinator: sceneCoordinator),
                                repository: repository,
-                               certLogic: certLogic)
+                               certLogic: certLogic,
+                               userDefaults: userDefaults,
+                               boosterAsTest: boosterAsTest)
+        )
+    }
+    
+    func showCheckSituation(userDefaults: Persistence) -> Promise<Void> {
+        sceneCoordinator.present(
+            CheckSituationResolvableSceneFactory(contextType: .onboarding,
+                                                 userDefaults: userDefaults)
         )
     }
 }

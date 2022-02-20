@@ -13,6 +13,7 @@ public extension KeychainPersistence {
         case certificateList = "VaccinationCertificateList"
         case trustList = "TrustList"
         case dccRules = "DCCRules"
+        case dccDomesticRules = "DCCDomesticRules"
         case boosterRules = "BooterRules"
     }
 }

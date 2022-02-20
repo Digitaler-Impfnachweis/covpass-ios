@@ -29,6 +29,7 @@ class BoosterLogicTests: XCTestCase {
     override func tearDown() {
         userDefaults = nil
         certLogic = nil
+        repository = nil
         sut = nil
         super.tearDown()
     }
@@ -136,6 +137,62 @@ class BoosterLogicTests: XCTestCase {
         XCTAssertEqual(userDefaultBoosterCandidates.count, 0)
     }
 
+    func testCheckForNewBoosterVaccinations_no_booster() throws {
+        // Given
+        let certificate = CBORWebToken.mockVaccinationCertificate.extended()
+        let certificatePair = CertificatePair(certificates: [certificate])
+        let expectation = XCTestExpectation()
+        let result = ValidationResult(rule: .mock)
+        result.result = .passed
+        certLogic.validateResult = [result]
+
+        // When
+        sut.checkForNewBoosterVaccinations([certificatePair])
+            .done { result in
+                // Then
+                let candidates = self.userDefaultBoosterCandidates
+                let candidate = try XCTUnwrap(candidates.first)
+                XCTAssertTrue(result)
+                XCTAssertEqual(candidates.count, 1)
+                XCTAssertEqual(candidate.vaccinationIdentifier, certificate.vaccinationCertificate.hcert.dgc.uvci)
+                expectation.fulfill()
+            }
+            .cauterize()
+        wait(for: [expectation], timeout: 2)
+    }
+
+    func testCheckForNewBoosterVaccinations_with_booster() throws {
+        // Given
+        let certificate2of2 = CBORWebToken.mockVaccinationCertificate.extended()
+        let certificate3of2 = CBORWebToken.mockVaccinationCertificate3Of2.extended()
+        let certificateWithOtherName = CBORWebToken.mockVaccinationCertificateWithOtherName.extended()
+        let certificatePair2of2 = CertificatePair(certificates: [certificate2of2])
+        let certificatePair3of2 = CertificatePair(certificates: [certificate3of2])
+        let expectation = XCTestExpectation()
+
+        try storeBoosterCandidates([.init(certificate: certificateWithOtherName)])
+        let result = ValidationResult(rule: .mock)
+        result.result = .passed
+        certLogic.validateResult = [result]
+        _ = try sut.checkForNewBoosterVaccinations([certificatePair2of2]).wait()
+        certLogic.validateResult = nil
+
+        // When
+        sut.checkForNewBoosterVaccinations([certificatePair3of2])
+            .done { result in
+                let candidates = self.userDefaultBoosterCandidates
+                let candidate = try XCTUnwrap(candidates.first)
+                XCTAssertFalse(result)
+                XCTAssertEqual(candidates.count, 1)
+                XCTAssertEqual(candidate.name, "Katami Ella")
+                expectation.fulfill()
+            }
+            .cauterize()
+
+        // Then
+        wait(for: [expectation], timeout: 2)
+    }
+
     // MARK: - Helpers
 
     private var userDefaultBoosterCandidates: [BoosterCandidate] {
@@ -143,5 +200,10 @@ class BoosterLogicTests: XCTestCase {
               let boosterCandidates = try? JSONDecoder().decode([BoosterCandidate].self, from: data)
         else { return [] }
         return boosterCandidates
+    }
+
+    private func storeBoosterCandidates(_ boosterCandidates: [BoosterCandidate]) throws {
+        let data = try JSONEncoder().encode(boosterCandidates)
+        try userDefaults.store(UserDefaults.keyBoosterCandidates, value: data)
     }
 }

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -13,6 +13,7 @@
             <connections>
                 <outlet property="countrySelection" destination="9lD-1M-rKg" id="KwJ-QK-DLN"/>
                 <outlet property="dateSelection" destination="XSF-W4-r5c" id="hQb-oN-Ec9"/>
+                <outlet property="domesticRulesHintView" destination="YVN-bQ-d3w" id="lVH-XT-ife"/>
                 <outlet property="filteredCertsHintView" destination="IET-Cj-50e" id="X9P-yI-nce"/>
                 <outlet property="headline" destination="sKK-Se-ZAm" id="Tul-uA-XuY"/>
                 <outlet property="info" destination="czg-wL-cb7" id="In0-6k-5je"/>
@@ -39,7 +40,7 @@
                     <rect key="frame" x="0.0" y="124" width="414" height="772"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="tNn-Ng-ZRx">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="1048"/>
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="1176"/>
                             <subviews>
                                 <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="gbc-XM-dNV" customClass="PlainLabel" customModule="CovPassUI">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="128"/>
@@ -61,11 +62,15 @@
                                     <rect key="frame" x="0.0" y="512" width="414" height="128"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 </view>
+                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="YVN-bQ-d3w" customClass="HintView" customModule="CovPassUI">
+                                    <rect key="frame" x="0.0" y="640" width="414" height="128"/>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                </view>
                                 <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="200" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="RNO-8L-IiI">
-                                    <rect key="frame" x="0.0" y="640" width="414" height="200"/>
+                                    <rect key="frame" x="0.0" y="768" width="414" height="200"/>
                                 </stackView>
                                 <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="208" translatesAutoresizingMaskIntoConstraints="NO" id="JbU-IC-eM5">
-                                    <rect key="frame" x="0.0" y="840" width="414" height="208"/>
+                                    <rect key="frame" x="0.0" y="968" width="414" height="208"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="czg-wL-cb7" userLabel="Description Text" customClass="LinkLabel" customModule="CovPassUI">
                                             <rect key="frame" x="24" y="40" width="366" height="128"/>
@@ -114,7 +119,13 @@
         <designable name="IET-Cj-50e">
             <size key="intrinsicContentSize" width="414" height="128"/>
         </designable>
+        <designable name="UY4-Mh-Ocn">
+            <size key="intrinsicContentSize" width="414" height="128"/>
+        </designable>
         <designable name="XSF-W4-r5c">
+            <size key="intrinsicContentSize" width="414" height="128"/>
+        </designable>
+        <designable name="YVN-bQ-d3w">
             <size key="intrinsicContentSize" width="414" height="128"/>
         </designable>
         <designable name="czg-wL-cb7">

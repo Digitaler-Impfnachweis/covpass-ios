@@ -14,10 +14,10 @@ class DCCCertLogicMock: DCCCertLogicProtocol {
     
     var lastUpdateDccrRules: Date?
     
-    var countries: [Country] {
-        [Country("DE")]
-    }
-    
+    var countries: [Country] = [
+        Country("DE")
+    ]
+
     func updateBoosterRules() -> Promise<Void> {
         .value
     }

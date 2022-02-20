@@ -40,6 +40,7 @@ class RuleCheckViewController: UIViewController {
     @IBOutlet var scrollView: UIScrollView!
     @IBOutlet var stackView: UIStackView!
     @IBOutlet var rulesHintView: HintView!
+    @IBOutlet var domesticRulesHintView: HintView!
     @IBOutlet var filteredCertsHintView: HintView!
 
     // MARK: - Properties
@@ -63,6 +64,7 @@ class RuleCheckViewController: UIViewController {
         super.viewDidLoad()
         configureText()
         setupTimeHintView()
+        setupDomesticRulesHintView()
         setupFilteredCertsView()
         viewModel.updateRules()
     }
@@ -109,6 +111,7 @@ class RuleCheckViewController: UIViewController {
         }
         
         updateTimeHintView()
+        setupDomesticRulesHintView()
         updateFilteredCertsView()
 
         if viewModel.isLoading {
@@ -139,6 +142,25 @@ class RuleCheckViewController: UIViewController {
         rulesHintView.containerBottomConstraint.constant = Constants.Config.RulesHintView.bottomOffset
         rulesHintView.enableAccessibility(label: "\(viewModel.timeHintTitle)\n\(viewModel.timeHintSubTitle)",
                                           traits: .staticText)
+    }
+    
+    private func setupDomesticRulesHintView() {
+        domesticRulesHintView.isHidden = viewModel.domesticRulesHintIshidden
+        domesticRulesHintView.containerView.backgroundColor = .brandAccent10
+        domesticRulesHintView.containerView.layer.borderColor = UIColor.brandAccent20.cgColor
+        domesticRulesHintView.iconView.image = viewModel.domesticRulesHintIcon
+        domesticRulesHintView.iconLabel.text = ""
+        domesticRulesHintView.iconLabel.isHidden = true
+        domesticRulesHintView.titleLabel.attributedText = viewModel.germanInfoBoxText.styledAs(.body)
+        domesticRulesHintView.containerTopConstraint.constant = 0
+        domesticRulesHintView.containerBottomConstraint.constant = 24
+        domesticRulesHintView.enableAccessibility(label: "\(viewModel.timeHintTitle)\n\(viewModel.timeHintSubTitle)",
+                                          traits: .staticText)
+        domesticRulesHintView.subTitleLabel.isHidden = true
+        domesticRulesHintView.bodyLabel.isHidden = true
+        domesticRulesHintView.iconStackviewCenterYConstraint.isActive = false
+        domesticRulesHintView.iconStackViewAlignToTopTile.isActive = true
+        domesticRulesHintView.titleSuperViewBottomConstraint.isActive = true
     }
     
     private func setupFilteredCertsView() {

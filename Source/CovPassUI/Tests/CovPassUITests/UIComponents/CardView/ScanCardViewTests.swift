@@ -27,7 +27,7 @@ class ScanCardViewTests: XCTestCase {
     }
 
     func testInit() {
-        XCTAssertEqual(sut.contentView?.layoutMargins, .init(top: .space_18, left: .space_24, bottom: .space_40, right: .space_24))
+        XCTAssertEqual(sut.contentView?.layoutMargins, .init(top: 0, left: 0, bottom: 0, right: 0))
         XCTAssertEqual(sut.contentView?.backgroundColor, .brandBase)
         XCTAssertEqual(sut.contentView?.layer.cornerRadius, 14)
         XCTAssertEqual(sut.contentView?.layer.shadowColor, UIColor.neutralBlack.cgColor)

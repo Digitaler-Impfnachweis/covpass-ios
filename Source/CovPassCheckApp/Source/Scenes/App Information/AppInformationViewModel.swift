@@ -23,6 +23,7 @@ class AppInformationViewModel: AppInformationViewModelProtocol {
     // MARK: - Properties
 
     let router: AppInformationRouterProtocol
+    private let userDefaults: Persistence
 
     var title: String {
         "app_information_title".localized
@@ -39,7 +40,7 @@ class AppInformationViewModel: AppInformationViewModelProtocol {
         )
     }
 
-    lazy var entries: [AppInformationEntry] = {
+    var entries: [AppInformationEntry] {
         var _entries =
         [
             webEntry(
@@ -70,6 +71,13 @@ class AppInformationViewModel: AppInformationViewModelProtocol {
             AppInformationEntry(
                 title: "app_information_title_update".localized,
                 scene: TrustedListDetailsSceneFactory(sceneCoordinator: router.sceneCoordinator)
+            ),
+            
+            AppInformationEntry(
+                title: "app_information_title_local_rules".localized,
+                scene: CheckSituationSceneFactory(contextType: .settings,
+                                                  userDefaults: userDefaults),
+                rightTitle: checkSituationInfo
             )
         ]
         if Locale.current.isGerman() {
@@ -79,12 +87,22 @@ class AppInformationViewModel: AppInformationViewModelProtocol {
             ), at: 0)
         }
         return _entries
-    }()
+    }
+    
+    private var checkSituationInfo: String {
+        switch userDefaults.selectedLogicType {
+        case .de: return "app_information_title_local_rules_status_DE".localized
+        case .eu: return "app_information_title_local_rules_status_EU".localized
+        case .booster: return ""
+        }
+    }
 
     // MARK: - Lifecycle
 
-    init(router: AppInformationRouterProtocol) {
+    init(router: AppInformationRouterProtocol,
+         userDefaults: Persistence) {
         self.router = router
+        self.userDefaults = userDefaults
     }
 
     // MARK: - Methods

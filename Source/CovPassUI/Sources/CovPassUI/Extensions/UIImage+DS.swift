@@ -41,10 +41,13 @@ public extension UIImage {
 
     @ImageLoader(name: "illustration_2")
     private(set) static var illustration2
-
+    
     @ImageLoader(name: "illustration_3")
     private(set) static var illustration3
-
+    
+    @ImageLoader(name: "Illustration_4")
+    private(set) static var illustration4
+    
     @ImageLoader(name: "start_screen_1")
     private(set) static var startScreen
 

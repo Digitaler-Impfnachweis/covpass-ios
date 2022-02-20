@@ -19,9 +19,12 @@ private enum Constants {
         static let timeHintDescription = "certificate_check_validity_travel_rules_not_up_to_message".localized
         static let filteredCertsTitle = "certificate_check_validity_not_all_certs_checkable_title".localized
         static let filteredCertstDescription = "certificate_check_validity_not_all_certs_checkable_message".localized
+        static let germanInfoBox = "certificate_check_german_infobox".localized
     }
     enum Config {
         static let dayToAdd = 1
+        static let domesticDeCountryCode = "DE2"
+        static let defaultDeCountryCode = "DE"
     }
 }
 
@@ -41,25 +44,22 @@ struct CertificateResult {
 
 class RuleCheckViewModel: BaseViewModel, CancellableViewModelProtocol {
     // MARK: - Properties
-    
-    private var certificateList: CertificateList?
+
     weak var delegate: ViewModelDelegate?
-    let router: RuleCheckRouterProtocol?
-    let resolver: Resolver<Void>?
-    let repository: VaccinationRepositoryProtocol
-    let certLogic: DCCCertLogicProtocol
-    var country = "DE"
+    var country = "DE2"
     var date = Date()
-    
     var isLoading: Bool = true
-    
     var validationViewModels = [CertificateItemViewModel]()
-    
-    var timeHintTitle: String { Constants.Keys.timeHintTitle }
-    
-    var timeHintSubTitle: String { Constants.Keys.timeHintDescription }
-    
-    var timeHintIcon: UIImage { .warning }
+    let timeHintTitle = Constants.Keys.timeHintTitle
+    let timeHintSubTitle = Constants.Keys.timeHintDescription
+    let timeHintIcon = UIImage.warning
+    let filteredCertsTitle = Constants.Keys.filteredCertsTitle
+    let filteredCertsSubTitle = Constants.Keys.filteredCertstDescription
+    let filteredCertsIcon = UIImage.warning
+    var filteredCertsIsHidden = true
+    lazy var domesticRulesHintIshidden = !country.contains(Constants.Config.defaultDeCountryCode)
+    let domesticRulesHintIcon = UIImage.infoSignal
+    let germanInfoBoxText = Constants.Keys.germanInfoBox
     
     var timeHintIsHidden: Bool {
         if let lastUpdated = repository.getLastUpdatedTrustList(),
@@ -76,15 +76,12 @@ class RuleCheckViewModel: BaseViewModel, CancellableViewModelProtocol {
         }
         return false
     }
-    
-    var filteredCertsTitle: String { Constants.Keys.filteredCertsTitle }
-    
-    var filteredCertsSubTitle: String { Constants.Keys.filteredCertstDescription }
-    
-    var filteredCertsIcon: UIImage { .warning }
-    
-    var filteredCertsIsHidden: Bool = true
-    
+    private var certificateList: CertificateList?
+    private let router: RuleCheckRouterProtocol?
+    private let resolver: Resolver<Void>?
+    private let repository: VaccinationRepositoryProtocol
+    private let certLogic: DCCCertLogicProtocol
+
     // MARK: - Lifecycle
     
     init(router: RuleCheckRouterProtocol?,
@@ -96,6 +93,8 @@ class RuleCheckViewModel: BaseViewModel, CancellableViewModelProtocol {
         self.repository = repository
         self.certLogic = certLogic
     }
+
+    // MARK: - Functions
     
     func updateRules() {
         firstly {
@@ -111,7 +110,7 @@ class RuleCheckViewModel: BaseViewModel, CancellableViewModelProtocol {
         .cauterize()
     }
     
-    func validateCertificates() {
+    private func validateCertificates() {
         DispatchQueue.global(qos: .userInitiated).async { [weak self] in
             guard var list = self?.certificateList else {
                 DispatchQueue.main.async {
@@ -128,14 +127,18 @@ class RuleCheckViewModel: BaseViewModel, CancellableViewModelProtocol {
                 var results = [CertificateResult]()
                 for cert in pair.certificates.sortLatest() {
                     do {
-                        if let country = self?.country.uppercased(),
-                           let date = self?.date,
-                           let res = try self?.certLogic.validate(type: .eu,
-                                                                  countryCode: country,
-                                                                  validationClock: date,
-                                                                  certificate: cert.vaccinationCertificate)
-                        {
-                            results.append(CertificateResult(certificate: cert, result: res))
+                        if var country = self?.country.uppercased(), let date = self?.date {
+                            var logicType: DCCCertLogic.LogicType = .eu
+                            if country == Constants.Config.domesticDeCountryCode {
+                                country = Constants.Config.defaultDeCountryCode
+                                logicType = .de
+                            }
+                            if let res = try self?.certLogic.validate(type: logicType,
+                                                                      countryCode: country,
+                                                                      validationClock: date,
+                                                                      certificate: cert.vaccinationCertificate) {
+                                results.append(CertificateResult(certificate: cert, result: res))
+                            }
                         }
                     } catch {
                         print(error)
@@ -170,7 +173,10 @@ class RuleCheckViewModel: BaseViewModel, CancellableViewModelProtocol {
     }
     
     func showCountrySelection() {
-        router?.showCountrySelection(countries: certLogic.countries, country: country)
+        var countries: [Country] = certLogic.countries
+        let domesticDeCountry = Country(Constants.Config.domesticDeCountryCode)
+        countries.append(domesticDeCountry)
+        router?.showCountrySelection(countries: countries, country: country)
             .done { newCountry in
                 self.isLoading = true
                 self.country = newCountry

@@ -95,7 +95,7 @@ extension CBORWebToken {
     }
     
     public var isVaccination: Bool {
-        hcert.dgc.v != nil
+        hcert.dgc.v?.isEmpty == false
     }
     
     public var isNotVaccination: Bool {
@@ -103,7 +103,7 @@ extension CBORWebToken {
     }
     
     public var isRecovery: Bool {
-        hcert.dgc.r != nil
+        hcert.dgc.r?.isEmpty == false
     }
     
     public var isNotRecovery: Bool {
@@ -111,7 +111,7 @@ extension CBORWebToken {
     }
     
     public var isTest: Bool {
-        hcert.dgc.t != nil
+        hcert.dgc.t?.isEmpty == false
     }
     
     public var isNotTest: Bool {

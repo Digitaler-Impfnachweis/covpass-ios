@@ -83,6 +83,9 @@ struct CertificateItemDetailRouterMock: CertificateItemDetailRouterProtocol {
 
 
 struct ValidationServiceRouterMock: ValidationServiceRoutable {
+    func showCertificate(_ certificate: ExtendedCBORWebToken, with result: VAASValidaitonResultToken, userDefaults: Persistence) {
+        
+    }
     
     func showValidationFailed(ticket: ValidationServiceInitialisation) -> Promise<Bool> {
         .init { resolver in
@@ -94,10 +97,6 @@ struct ValidationServiceRouterMock: ValidationServiceRoutable {
         .init { resolver in
             resolver.fulfill(true)
         }
-    }
-    
-    func showCertificate(_ certificate: ExtendedCBORWebToken, with result: VAASValidaitonResultToken) {
-        
     }
     
     func showIdentityDocumentVAASError(error: Error) -> Promise<Bool>  {

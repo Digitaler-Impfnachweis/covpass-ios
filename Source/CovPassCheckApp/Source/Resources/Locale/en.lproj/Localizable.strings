@@ -81,6 +81,28 @@
 
 "accessibility_update_info_announce" = "The view \"New features\" has been opened";
 
+"accessibility_check_context_onboarding_announce_open" = "The view \"When do you use the CovPassCheck app?\" has been opened.";
+
+"accessibility_check_context_onboarding_announce_close" = "The view \"When do you use the CovPassCheck app?\" has been closed.";
+
+"check_context_onboarding_title" = "When do you use the CovPassCheck app?";
+
+"check_context_onboarding_tag" = "New";
+
+"check_context_onboarding_image" = "Illustration of two people in a checking situation. One person is scanning the certificate of another person. The EU flag is depicted above it.";
+
+"check_context_onboarding_option1_title" = "I check at entries into Germany";
+
+"check_context_onboarding_option1_subtitle" = "For example at the airport or train station";
+
+"check_context_onboarding_option2_title" = "I check within Germany";
+
+"check_context_onboarding_option2_subtitle" = "For example, in stores or in the gastronomy";
+
+"check_context_onboarding_footnote" = "This information is used to adjust the rules according to which certificates are shown as valid or invalid. You can change the specification at any time in the settings.";
+
+"check_context_onboarding_button" = "OK";
+
 
 /********** start screen **********/
 
@@ -107,6 +129,10 @@
 "accessibility_scan_result_closing_announce" = "The view \"Verification result“ has been closed";
 
 "validation_start_screen_scan_action_button_title" = "Scan certificate";
+
+"startscreen_rules_tag_local" = "Checking within Germany";
+
+"startscreen_rules_tag_europe" = "Checking at entries into Germany";
 
 "validation_start_screen_offline_modus_title" = "Offline mode";
 
@@ -282,6 +308,24 @@
 
 "result_2G_empty_subtitle" = "Not checked yet";
 
+"result_2G_2nd_recovery_valid" = "Recovery";
+
+"result_2G_2nd_basic_valid" = "Basic immunisation";
+
+"result_2G_2nd_booster_valid" = "Booster vaccination";
+
+"result_2G_2nd_rapidtest_valid" = "Negative rapid test";
+
+"result_2G_2nd_pcrtest_valid" = "Negative PCR test";
+
+"result_2G_2nd_empty" = "May be required for 2G+";
+
+"result_2G_2nd_timestamp_hours" = "%d hours ago";
+
+"result_2G_2nd_timestamp_days" = "%d days ago";
+
+"result_2G_2nd_timestamp_months" = "%d months ago";
+
 "accessibility_warning_2G_names_announce_open" = "Error message \"Deviating data\" was opened";
 
 "accessibility_warning_2G_names_announce_close" = "Error message \"Deviating data\" was closed";
@@ -386,6 +430,16 @@
 "accessibility_app_information_update_back" = "Back";
 
 "accessibility_app_information_title_update" = "The view \"Update rule set\" has been opened";
+
+"accessibility_app_information_title_local_rules" = "The view \"Check situation\" has been opened";
+
+"app_information_title_local_rules" = "Check situation";
+
+"app_information_title_local_rules_button" = "Apply";
+
+"app_information_title_local_rules_status_DE" = "Within DE";
+
+"app_information_title_local_rules_status_EU" = "Entering DE";
 
 "app_information_beep_when_checking_title" = "Beep when checking";
 
