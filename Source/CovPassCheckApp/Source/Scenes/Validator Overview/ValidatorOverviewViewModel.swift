@@ -64,12 +64,12 @@ class ValidatorOverviewViewModel {
     }
     
     var offlineMessageCertificates: String? {
-        guard let date = repository.getLastUpdatedTrustList() else { return nil }
+        guard let date = userDefaults.lastUpdatedTrustList else { return nil }
         return String(format: "validation_start_screen_offline_modus_certificates".localized, DateUtils.displayDateTimeFormatter.string(from: date))
     }
     
     var offlineMessageRules: String? {
-        guard let date = certLogic.lastUpdatedDCCRules() else { return nil }
+        guard let date = userDefaults.lastUpdatedDCCRules else { return nil }
         return String(format: "validation_start_screen_offline_modus_rules".localized, DateUtils.displayDateTimeFormatter.string(from: date))
     }
     
@@ -188,6 +188,10 @@ class ValidatorOverviewViewModel {
                 self?.delegate?.viewModelDidUpdate()
             }
             .cauterize()
+    }
+    
+    func updateValueSets() {
+        certLogic.updateValueSetsIfNeeded().cauterize()
     }
     
     func startQRCodeValidation(for scanType: ScanType) {

@@ -14,6 +14,7 @@ import PromiseKit
 import UIKit
 
 class MockCertificateViewModel: CertificatesOverviewViewModelProtocol {
+
     // MARK: - Test Variables
 
     var refreshedCalled = false
@@ -31,6 +32,10 @@ class MockCertificateViewModel: CertificatesOverviewViewModelProtocol {
 
     var certificateViewModels: [CardViewModel] = []
 
+    func updateBoosterRules() {
+        
+    }
+    
     func refresh() {
         refreshedCalled = true
     }
@@ -38,9 +43,11 @@ class MockCertificateViewModel: CertificatesOverviewViewModelProtocol {
     func process(payload _: String, completion _: ((Error) -> Void)?) {
         processCalled = true
     }
-
+    
     func updateTrustList() {}
-
+    
+    func updateValueSets() {}
+    
     func reuseIdentifier(for indexPath: IndexPath) -> String {
         certificateViewModels[indexPath.row].reuseIdentifier
     }
@@ -88,8 +95,6 @@ class MockCertificateViewModel: CertificatesOverviewViewModelProtocol {
     func showErrorDialog() {
         // TODO: Add tests
     }
-
-    func updateDCCRules() {}
 
     func showRuleCheck() {}
 

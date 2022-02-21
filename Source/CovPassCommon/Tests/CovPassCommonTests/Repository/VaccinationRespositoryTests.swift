@@ -178,15 +178,6 @@ class VaccinationRepositoryTests: XCTestCase {
         }
     }
 
-    func testLastUpdatedTrustList() throws {
-        XCTAssertNil(sut.getLastUpdatedTrustList())
-
-        let date = Date()
-        try userDefaults.store(UserDefaults.keyLastUpdatedTrustList, value: date)
-
-        XCTAssertEqual(sut.getLastUpdatedTrustList(), date)
-    }
-
     func testGetCertificateList() throws {
         // Store one certficate in list
         let data = try JSONEncoder().encode(

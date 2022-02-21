@@ -21,12 +21,13 @@ private enum Constants {
 }
 
 class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
+
     // MARK: - Properties
     
     weak var delegate: CertificatesOverviewViewModelDelegate?
     private var router: CertificatesOverviewRouterProtocol
     private let repository: VaccinationRepositoryProtocol
-    private let certLogic: DCCCertLogicProtocol
+    private var certLogic: DCCCertLogicProtocol
     private let boosterLogic: BoosterLogicProtocol
     private var certificateList = CertificateList(certificates: [])
     private var lastKnownFavoriteCertificateId: String?
@@ -91,8 +92,7 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
     }
     
     func updateTrustList() {
-        repository
-            .updateTrustListIfNeeded()
+        repository.updateTrustListIfNeeded()
             .done {
                 self.delegate?.viewModelDidUpdate()
             }
@@ -103,12 +103,12 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
             }
     }
     
-    func updateDCCRules() {
-        certLogic
-            .updateRulesIfNeeded()
-            .catch { error in
-                print(error.localizedDescription)
-            }
+    func updateBoosterRules() {
+        certLogic.updateBoosterRulesIfNeeded().cauterize()
+    }
+    
+    func updateValueSets() {
+        certLogic.updateValueSetsIfNeeded().cauterize()
     }
     
     private func refreshCertificates() -> Promise<Void> {

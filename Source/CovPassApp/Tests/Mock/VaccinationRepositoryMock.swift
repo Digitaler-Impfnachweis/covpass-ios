@@ -12,12 +12,14 @@ import PromiseKit
 import XCTest
 
 public class VaccinationRepositoryMock: VaccinationRepositoryProtocol {
+
     let getCertificateListExpectation = XCTestExpectation(description: "getCertificateListExpectation")
     let setExpiryAlertExpectation = XCTestExpectation(description: "setExpiryAlertExpectation")
     var lastUpdatedTrustList: Date?
     var certificates: [ExtendedCBORWebToken] = []
     var certPair: [CertificatePair] = []
-
+    var shouldTrustListUpdate: Bool = true
+    
     public func matchedCertificates(for certificateList: CertificateList) -> [CertificatePair] {
         var pairs = [CertificatePair]()
         for cert in certificateList.certificates {
@@ -45,17 +47,7 @@ public class VaccinationRepositoryMock: VaccinationRepositoryProtocol {
     }
     
     public func trustListShouldBeUpdated() -> Bool {
-        if let lastUpdated = self.getLastUpdatedTrustList(),
-           let date = Calendar.current.date(byAdding: .day, value: 1, to: lastUpdated),
-           Date() < date
-        {
-            return false
-        }
-        return true
-    }
-    
-    public func getLastUpdatedTrustList() -> Date? {
-        lastUpdatedTrustList
+        shouldTrustListUpdate
     }
     
     public func updateTrustListIfNeeded() -> Promise<Void> {

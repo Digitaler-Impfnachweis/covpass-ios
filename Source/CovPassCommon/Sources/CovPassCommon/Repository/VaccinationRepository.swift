@@ -31,10 +31,10 @@ public enum ScanType: Int {
     case _2G = 1
 }
 
-public struct VaccinationRepository: VaccinationRepositoryProtocol {
+public class VaccinationRepository: VaccinationRepositoryProtocol {
     private let service: APIServiceProtocol
     private let keychain: Persistence
-    private let userDefaults: Persistence
+    private var userDefaults: Persistence
     private let boosterLogic: BoosterLogicProtocol
     private let publicKeyURL: URL
     private let initialDataURL: URL
@@ -88,7 +88,7 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
             }
         }
         .then(on: .global()) { list in
-            checkAndInvalidateCertificates(list)
+            self.checkAndInvalidateCertificates(list)
         }
     }
 
@@ -119,12 +119,8 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
         }
     }
 
-    public func getLastUpdatedTrustList() -> Date? {
-        try? userDefaults.fetch(UserDefaults.keyLastUpdatedTrustList) as? Date
-    }
-    
     public func trustListShouldBeUpdated() -> Bool {
-        if let lastUpdated = self.getLastUpdatedTrustList(),
+        if let lastUpdated = userDefaults.lastUpdatedTrustList,
            let date = Calendar.current.date(byAdding: .day, value: 1, to: lastUpdated),
            Date() < date
         {
@@ -144,7 +140,7 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
             trustListShouldBeUpdated()
         }
         .then(on: .global()) { trustListShouldBeUpdated in
-            trustListShouldBeUpdated ? updateTrustList() : .value
+            trustListShouldBeUpdated ? self.updateTrustList() : .value
         }
     }
     
@@ -207,13 +203,13 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
         }
         .map(on: .global()) { trustList in
             let data = try JSONEncoder().encode(trustList)
-            try keychain.store(KeychainPersistence.Keys.trustList.rawValue, value: data)
-            UserDefaults.standard.setValue(Date(), forKey: UserDefaults.keyLastUpdatedTrustList)
+            try self.keychain.store(KeychainPersistence.Keys.trustList.rawValue, value: data)
+            self.userDefaults.lastUpdatedTrustList = Date()
         }
         
         promise.catch { error in
             if let error = error as? APIError, error == .notModified {
-                UserDefaults.standard.setValue(Date(), forKey: UserDefaults.keyLastUpdatedTrustList)
+                self.userDefaults.lastUpdatedTrustList = Date()
             }
         }
 
@@ -236,10 +232,10 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
             return Promise.value(certList)
         }
         .then(on: .global()) { list -> Promise<CertificateList> in
-            saveCertificateList(list)
+            self.saveCertificateList(list)
         }
         .map(on: .global()) { _ in
-            boosterLogic.deleteBoosterCandidate(forCertificate: certificate)
+            self.boosterLogic.deleteBoosterCandidate(forCertificate: certificate)
         }
         .asVoid()
     }
@@ -249,7 +245,7 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
             QRCoder.parse(data)
         }
         .map(on: .global()) {
-            try parseCertificate($0)
+            try self.parseCertificate($0)
         }
         .map(on: .global()) { certificate in
             if let t = certificate.hcert.dgc.t?.first, t.isPositive {
@@ -305,7 +301,7 @@ public struct VaccinationRepository: VaccinationRepositoryProtocol {
             QRCoder.parse(data)
         }
         .map(on: .global()) {
-            try parseCertificate($0)
+            try self.parseCertificate($0)
         }
     }
 

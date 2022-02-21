@@ -41,7 +41,7 @@ class RuleCheckRouter: RuleCheckRouterProtocol {
             )
         )
     }
-
+    
     func showResultDetail(result: CertificateResult, country: String, date: Date) -> Promise<Void> {
         sceneCoordinator.present(
             RuleCheckDetailSceneFactory(
@@ -51,5 +51,33 @@ class RuleCheckRouter: RuleCheckRouterProtocol {
                 date: date
             )
         )
+    }
+    
+    func showInternetConnectionDialog() -> Promise<Void> {
+        .init { resolver in
+            showDialog(
+                title: "error_check_validity_no_internet_title".localized,
+                message: "error_check_validity_no_internet_message".localized,
+                actions: [
+                    DialogAction(
+                        title: "error_check_validity_no_internet_button_try_again".localized,
+                        style: .default,
+                        isEnabled: true,
+                        completion: { _ in
+                            resolver.fulfill_()
+                        }
+                    ),
+                    DialogAction(
+                        title: "error_check_validity_no_internet_button_cancel".localized,
+                        style: .default,
+                        isEnabled: true,
+                        completion: { _ in
+                            resolver.cancel()
+                        }
+                    )
+                ],
+                style: .alert
+            )
+        }
     }
 }

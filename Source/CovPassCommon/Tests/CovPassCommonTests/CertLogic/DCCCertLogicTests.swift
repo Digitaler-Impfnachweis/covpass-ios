@@ -74,44 +74,35 @@ class DCCCertLogicTests: XCTestCase {
 
     func testRemoteValueSets() throws {
         let data = try JSONEncoder().encode([ValueSet(id: "valueSet", hash: "1", data: Data())])
-        try userDefaults.store(UserDefaults.keyValueSets, value: data)
+        userDefaults.valueSets = data
 
         XCTAssertEqual(sut.valueSets.count, 1)
         XCTAssertEqual(sut.valueSets["valueSet"]?.count, 0)
     }
-
-    func testLastUpdatedDCCRules() throws {
-        XCTAssertNil(sut.lastUpdatedDCCRules())
-
-        let date = Date()
-        try userDefaults.store(UserDefaults.keyLastUpdatedDCCRules, value: date)
-        
-        XCTAssertEqual(sut.lastUpdatedDCCRules(), date)
-    }
     
     func testUpdateRulesIfNeededTrue() throws {
         let dateDefault = Date().addingTimeInterval(-100000000)
-        try userDefaults.store(UserDefaults.keyLastUpdatedDCCRules, value: dateDefault)
+        userDefaults.lastUpdatedDCCRules = dateDefault
         service.loadBoosterRulesResult = Promise.value([])
         
-        let lastUpdateDateBefore = try XCTUnwrap(userDefaults.fetch(UserDefaults.keyLastUpdatedDCCRules) as? Date)
+        let lastUpdateDateBefore = try XCTUnwrap(userDefaults.lastUpdatedDCCRules)
         XCTAssertEqual(dateDefault, lastUpdateDateBefore)
         service.loadValueSetsResult = Promise.value([])
         try sut.updateRulesIfNeeded().wait()
-        let lastUpdateDateAfter = try XCTUnwrap(userDefaults.fetch(UserDefaults.keyLastUpdatedDCCRules) as? Date)
+        let lastUpdateDateAfter = try XCTUnwrap(userDefaults.lastUpdatedDCCRules)
         XCTAssertNotNil(lastUpdateDateAfter)
         XCTAssertNotEqual(dateDefault, lastUpdateDateAfter)
     }
     
     func testUpdateRulesIfNeededFalse() throws {
         let dateDefault = Date()
-        try userDefaults.store(UserDefaults.keyLastUpdatedDCCRules, value: dateDefault)
+        userDefaults.lastUpdatedDCCRules = dateDefault
         service.loadBoosterRulesResult = Promise.value([])
         
-        let lastUpdateDateBefore = try XCTUnwrap(userDefaults.fetch(UserDefaults.keyLastUpdatedDCCRules) as? Date)
+        let lastUpdateDateBefore = try XCTUnwrap(userDefaults.lastUpdatedDCCRules)
         XCTAssertEqual(dateDefault, lastUpdateDateBefore)
         try sut.updateRulesIfNeeded().wait()
-        let lastUpdateDateAfter = try (userDefaults.fetch(UserDefaults.keyLastUpdatedDCCRules) as? Date)
+        let lastUpdateDateAfter = userDefaults.lastUpdatedDCCRules
         XCTAssertNotNil(lastUpdateDateAfter)
         XCTAssertEqual(dateDefault, lastUpdateDateAfter)
     }
@@ -201,6 +192,7 @@ class DCCCertLogicTests: XCTestCase {
         service.loadDomesticDCCRuleResult = Promise.value(Rule.mock)
         service.loadValueSetsResult = Promise.value([])
         try sut.updateRules().wait()
+        try sut.updateBoosterRules().wait()
 
         // Keychain should have the new rules
         let dccData = try XCTUnwrap(keychain.fetch(KeychainPersistence.Keys.dccRules.rawValue) as? Data)
@@ -228,6 +220,7 @@ class DCCCertLogicTests: XCTestCase {
         service.loadDomesticDCCRuleResult = Promise.value(Rule.mock)
         service.loadValueSetsResult = Promise.value([])
         try sut.updateRules().wait()
+        try sut.updateBoosterRules().wait()
 
         // Keychain should have the new rules
         let dccData = try XCTUnwrap(keychain.fetch(KeychainPersistence.Keys.dccRules.rawValue) as? Data)
@@ -266,6 +259,7 @@ class DCCCertLogicTests: XCTestCase {
         ])
         service.loadDomesticDCCRuleResult = Promise.value(Rule.mock.setIdentifier("3").setHash("3"))
         try sut.updateRules().wait()
+        try sut.updateBoosterRules().wait()
 
         // Keychain should have the new rules
         let dccData = try XCTUnwrap(keychain.fetch(KeychainPersistence.Keys.dccRules.rawValue) as? Data)
@@ -294,6 +288,7 @@ class DCCCertLogicTests: XCTestCase {
         service.loadBoosterRulesResult = Promise.value([RuleSimple.mock.setIdentifier("1").setHash("1")])
         service.loadBoosterRuleResult = Promise.value(Rule.mock.setIdentifier("1").setHash("1"))
         try sut.updateRules().wait()
+        try sut.updateBoosterRules().wait()
 
         // Keychain should have the new rules
         let dccData = try XCTUnwrap(keychain.fetch(KeychainPersistence.Keys.dccRules.rawValue) as? Data)
@@ -313,19 +308,16 @@ class DCCCertLogicTests: XCTestCase {
 
     func testValueSetUpdate() throws {
         // Initial UserDefaults should be empty
-        let noData = try userDefaults.fetch(UserDefaults.keyValueSets)
+        let noData = userDefaults.valueSets
         XCTAssertNil(noData)
 
         // Update valueSets
-        service.loadDCCRulesResult = Promise.value([])
         service.loadValueSetsResult = Promise.value([["id": "1", "hash": "1"]])
         service.loadValueSetResult = Promise.value(CovPassCommon.ValueSet(id: "1", hash: "1", data: Data()))
-        service.loadBoosterRulesResult = Promise.value([])
-        service.loadDomesticDCCRulesResult = Promise.value([])
-        try sut.updateRules().wait()
+        try sut.updateValueSets().wait()
 
         // UserDefaults should have the new value sets
-        let data = try XCTUnwrap(userDefaults.fetch(UserDefaults.keyValueSets) as? Data)
+        let data = try XCTUnwrap(userDefaults.valueSets)
         let valueSets = try jsonDecoder.decode([CovPassCommon.ValueSet].self, from: data)
         XCTAssertEqual(valueSets.count, 1)
     }
@@ -333,18 +325,15 @@ class DCCCertLogicTests: XCTestCase {
     func testValueSetUpdateDeleteOldRule() throws {
         // Load intial data
         let initialData = try JSONEncoder().encode([CovPassCommon.ValueSet(id: "2", hash: "", data: Data())])
-        try userDefaults.store(UserDefaults.keyValueSets, value: initialData)
+        userDefaults.valueSets = initialData
 
         // Update valueSets
-        service.loadDCCRulesResult = Promise.value([])
         service.loadValueSetsResult = Promise.value([["id": "1", "hash": "1"]])
         service.loadValueSetResult = Promise.value(CovPassCommon.ValueSet(id: "1", hash: "1", data: Data()))
-        service.loadBoosterRulesResult = Promise.value([])
-        service.loadDomesticDCCRulesResult = Promise.value([])
-        try sut.updateRules().wait()
+        try sut.updateValueSets().wait()
 
         // UserDefaults should have the new value sets
-        let data = try XCTUnwrap(userDefaults.fetch(UserDefaults.keyValueSets) as? Data)
+        let data = try XCTUnwrap(userDefaults.valueSets)
         let valueSets = try jsonDecoder.decode([CovPassCommon.ValueSet].self, from: data)
         XCTAssertEqual(valueSets.count, 1)
         XCTAssertEqual(valueSets[0].id, "1")
@@ -353,7 +342,7 @@ class DCCCertLogicTests: XCTestCase {
     func testValueSetUpdateNothingNew() throws {
         // Load intial data
         let initialData = try JSONEncoder().encode([CovPassCommon.ValueSet(id: "1", hash: "1", data: Data())])
-        try userDefaults.store(UserDefaults.keyValueSets, value: initialData)
+        userDefaults.valueSets = initialData
 
         // Update valueSets
         service.loadDCCRulesResult = Promise.value([])
@@ -363,7 +352,7 @@ class DCCCertLogicTests: XCTestCase {
         try sut.updateRules().wait()
 
         // UserDefaults should have the new value sets
-        let data = try XCTUnwrap(userDefaults.fetch(UserDefaults.keyValueSets) as? Data)
+        let data = try XCTUnwrap(userDefaults.valueSets)
         let valueSets = try jsonDecoder.decode([CovPassCommon.ValueSet].self, from: data)
         XCTAssertEqual(valueSets.count, 1)
     }
@@ -536,6 +525,94 @@ class DCCCertLogicTests: XCTestCase {
         let domesticData = try XCTUnwrap(keychain.fetch(KeychainPersistence.Keys.dccDomesticRules.rawValue) as? Data)
         let domesticRules = try jsonDecoder.decode([Rule].self, from: domesticData)
         XCTAssertEqual(domesticRules.count, 1)
+    }
+    
+    func testBoosterRulesShouldUpdate() {
+        let exp = expectation(description: "Booster Rules should update")
+        // GIVEN
+        userDefaults.lastUpdatedBoosterRules = Date().addingTimeInterval(60*60*24 * (-1))
+        // WHEN
+        sut.boosterRulesShouldBeUpdated()
+            .done{
+                // THEN
+                if $0 {
+                    exp.fulfill()
+                } else {
+                    XCTFail()
+                }
+            }.cauterize()
+        wait(for: [exp], timeout: 0.1)
+    }
+    
+    func testBoosterRulesShoulNotdUpdate() {
+        let exp = expectation(description: "Booster Rules should not update")
+        // GIVEN
+        userDefaults.lastUpdatedBoosterRules = Date()
+        // WHEN
+        sut.boosterRulesShouldBeUpdated()
+            .done{
+                if !$0 {
+                    // THEN
+                    exp.fulfill()
+                }
+            }.cauterize()
+        wait(for: [exp], timeout: 0.1, enforceOrder: true)
+    }
+    
+    func testUpdateBoosterRuleIfNeeded() {
+        let exp = expectation(description: "Update If Needed")
+        // GIVEN
+        userDefaults.lastUpdatedBoosterRules = Date()
+        // WHEN
+        sut.updateBoosterRulesIfNeeded()
+            .done{
+                // THEN
+                exp.fulfill()
+            }.cauterize()
+        wait(for: [exp], timeout: 0.1, enforceOrder: true)
+    }
+    
+    func testValueSetsShouldUpdate() {
+        let exp = expectation(description: "Booster Rules should update")
+        // GIVEN
+        userDefaults.lastUpdatedValueSets = Date().addingTimeInterval(60*60*24 * (-1))
+        // WHEN
+        sut.valueSetsShouldBeUpdated()
+            .done{
+                if $0 {
+                    // THEN
+                    exp.fulfill()
+                }
+            }.cauterize()
+        wait(for: [exp], timeout: 0.1, enforceOrder: true)
+    }
+    
+    func testValueSetsShoulNotdUpdate() {
+        let exp = expectation(description: "Booster Rules should not update")
+        // GIVEN
+        userDefaults.lastUpdatedValueSets = Date()
+        // WHEN
+        sut.valueSetsShouldBeUpdated()
+            .done{
+                if !$0 {
+                    // THEN
+                    exp.fulfill()
+                }
+            }.cauterize()
+        wait(for: [exp], timeout: 0.1, enforceOrder: true)
+    }
+    
+    func testUpdateValueSetIfNeeded() {
+        let exp = expectation(description: "Update If Needed")
+        // GIVEN
+        userDefaults.lastUpdatedValueSets = Date()
+        // WHEN
+        sut.updateValueSetsIfNeeded()
+            .done{
+                // THEN
+                exp.fulfill()
+            }.cauterize()
+        wait(for: [exp], timeout: 0.1, enforceOrder: true)
     }
 
     // MARK: - Helpers

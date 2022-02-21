@@ -43,8 +43,8 @@ struct CertificateResult {
 }
 
 class RuleCheckViewModel: BaseViewModel, CancellableViewModelProtocol {
+    
     // MARK: - Properties
-
     weak var delegate: ViewModelDelegate?
     var country = "DE2"
     var date = Date()
@@ -57,25 +57,10 @@ class RuleCheckViewModel: BaseViewModel, CancellableViewModelProtocol {
     let filteredCertsSubTitle = Constants.Keys.filteredCertstDescription
     let filteredCertsIcon = UIImage.warning
     var filteredCertsIsHidden = true
-    lazy var domesticRulesHintIshidden = !country.contains(Constants.Config.defaultDeCountryCode)
+    var domesticRulesHintIshidden: Bool { !country.contains(Constants.Config.defaultDeCountryCode) }
     let domesticRulesHintIcon = UIImage.infoSignal
     let germanInfoBoxText = Constants.Keys.germanInfoBox
-    
-    var timeHintIsHidden: Bool {
-        if let lastUpdated = repository.getLastUpdatedTrustList(),
-           let date = Calendar.current.date(byAdding: .day, value: Constants.Config.dayToAdd, to: lastUpdated),
-           Date() < date
-        {
-            return true
-        }
-        if let lastUpdated = certLogic.lastUpdatedDCCRules(),
-           let date = Calendar.current.date(byAdding: .day, value: Constants.Config.dayToAdd, to: lastUpdated),
-           Date() < date
-        {
-            return true
-        }
-        return false
-    }
+    var timeHintIsHidden: Bool {  !repository.trustListShouldBeUpdated() || !certLogic.rulesShouldBeUpdated() || isLoading }
     private var certificateList: CertificateList?
     private let router: RuleCheckRouterProtocol?
     private let resolver: Resolver<Void>?
@@ -96,20 +81,37 @@ class RuleCheckViewModel: BaseViewModel, CancellableViewModelProtocol {
 
     // MARK: - Functions
     
+    private func errorHandling(_ error: Error) {
+        self.isLoading = false
+        self.delegate?.viewModelDidUpdate()
+        if (error as? APIError) != .notModified {
+            router?.showInternetConnectionDialog()
+                .done{ [weak self] in
+                    self?.updateRules()
+                }
+                .cancelled { [weak self] in
+                    self?.cancel()
+                }
+                .cauterize()
+        }
+    }
+    
     func updateRules() {
         firstly {
             repository.getCertificateList()
         }
         .then { (list: CertificateList) -> Promise<Void> in
             self.certificateList = list
-            return Promise.value
+            return self.certLogic.updateRulesIfNeeded()
         }
-        .done { _ in
+        .done {
             self.validateCertificates()
         }
-        .cauterize()
+        .catch { error in
+            self.errorHandling(error)
+        }
     }
-    
+
     private func validateCertificates() {
         DispatchQueue.global(qos: .userInitiated).async { [weak self] in
             guard var list = self?.certificateList else {

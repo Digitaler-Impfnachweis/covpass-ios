@@ -13,7 +13,7 @@ import CertLogic
 import XCTest
 
 class RuleCheckViewControllerSnapshotTests: BaseSnapShotTests {
-    
+
     func testWithoutLastUpdate() {
         let certLogicMock = DCCCertLogicMock()
         let vaccinationRepoMock = VaccinationRepositoryMock()
@@ -26,12 +26,23 @@ class RuleCheckViewControllerSnapshotTests: BaseSnapShotTests {
         verifyView(vc: vc)
     }
     
+    func testWithoutLastUpdateAfterLoading() {
+        let certLogicMock = DCCCertLogicMock()
+        let vaccinationRepoMock = VaccinationRepositoryMock()
+        let sut = RuleCheckViewModel(router: nil,
+                                     resolvable: nil,
+                                     repository: vaccinationRepoMock,
+                                     certLogic: certLogicMock)
+        sut.date = DateUtils.parseDate("2021-04-26T15:05:00")!
+        let vc = RuleCheckViewController(viewModel: sut)
+        verifyView(view: vc.view, waitAfter: 0.1)
+    }
+    
     func testWithLastUpdateNow() {
         let certLogicMock = DCCCertLogicMock()
-        certLogicMock.lastUpdateDccrRules = Date()
+        certLogicMock.rulesShouldUpdate = true
         let vaccinationRepoMock = VaccinationRepositoryMock()
         vaccinationRepoMock.lastUpdatedTrustList = Date()
-        
         let sut = RuleCheckViewModel(router: nil,
                                      resolvable: nil,
                                      repository: vaccinationRepoMock,
@@ -56,7 +67,7 @@ class RuleCheckViewControllerSnapshotTests: BaseSnapShotTests {
     func testWithCertificates() {
         let certLogicMock = DCCCertLogicMock()
         let vaccinationRepoMock = VaccinationRepositoryMock()
-        
+
         let vacinationDate = DateUtils.parseDate("2021-04-26T15:05:00")!
         var firstCert: ExtendedCBORWebToken = CBORWebToken
             .mockVaccinationCertificate
@@ -119,7 +130,7 @@ class RuleCheckViewControllerSnapshotTests: BaseSnapShotTests {
     func testWithCertificatesWithExpiredCert() {
         let certLogicMock = DCCCertLogicMock()
         let vaccinationRepoMock = VaccinationRepositoryMock()
-        
+
         let vacinationDate = DateUtils.parseDate("2021-04-26T15:05:00")!
         var firstCert: ExtendedCBORWebToken = CBORWebToken
             .mockVaccinationCertificate
@@ -184,7 +195,7 @@ class RuleCheckViewControllerSnapshotTests: BaseSnapShotTests {
     func testWithCertificatesWithFraudCert() {
         let certLogicMock = DCCCertLogicMock()
         let vaccinationRepoMock = VaccinationRepositoryMock()
-        
+
         let vacinationDate = DateUtils.parseDate("2021-04-26T15:05:00")!
         var firstCert: ExtendedCBORWebToken = CBORWebToken
             .mockVaccinationCertificate
@@ -248,7 +259,7 @@ class RuleCheckViewControllerSnapshotTests: BaseSnapShotTests {
     func testWithCertificatesWithFraudCertAndExpired() {
         let certLogicMock = DCCCertLogicMock()
         let vaccinationRepoMock = VaccinationRepositoryMock()
-        
+
         let vacinationDate = DateUtils.parseDate("2021-04-26T15:05:00")!
         var firstCert: ExtendedCBORWebToken = CBORWebToken
             .mockVaccinationCertificate
@@ -314,7 +325,7 @@ class RuleCheckViewControllerSnapshotTests: BaseSnapShotTests {
     func testWithCertificatesWithOnlyFraud() {
         let certLogicMock = DCCCertLogicMock()
         let vaccinationRepoMock = VaccinationRepositoryMock()
-        
+
         let vacinationDate = DateUtils.parseDate("2021-04-26T15:05:00")!
         var firstCert: ExtendedCBORWebToken = CBORWebToken
             .mockVaccinationCertificate
@@ -346,7 +357,7 @@ class RuleCheckViewControllerSnapshotTests: BaseSnapShotTests {
     func testWithCertificatesWithAllExpiredAndRulesOlderThan24Hours() {
         let certLogicMock = DCCCertLogicMock()
         let vaccinationRepoMock = VaccinationRepositoryMock()
-        
+
         let vacinationDate = DateUtils.parseDate("2021-04-26T15:05:00")!
         var firstCert: ExtendedCBORWebToken = CBORWebToken
             .mockVaccinationCertificate
@@ -417,7 +428,7 @@ class RuleCheckViewControllerSnapshotTests: BaseSnapShotTests {
     func testWithCertificatesWithAllFraudAndRulesOlderThan24Hours() {
         let certLogicMock = DCCCertLogicMock()
         let vaccinationRepoMock = VaccinationRepositoryMock()
-        
+
         let vacinationDate = DateUtils.parseDate("2021-04-26T15:05:00")!
         var firstCert: ExtendedCBORWebToken = CBORWebToken
             .mockVaccinationCertificate
@@ -484,7 +495,7 @@ class RuleCheckViewControllerSnapshotTests: BaseSnapShotTests {
     func testWithCertifcatesOnePersonTwoCertificatesOneFraudOneValid() {
         let certLogicMock = DCCCertLogicMock()
         let vaccinationRepoMock = VaccinationRepositoryMock()
-        
+
         let vacinationDate = DateUtils.parseDate("2021-04-26T15:05:00")!
 
         var fourthCert: ExtendedCBORWebToken = CBORWebToken

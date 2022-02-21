@@ -12,35 +12,42 @@ import XCTest
 class TrustedListDetailsViewSnapShotTests: BaseSnapShotTests {
     
     func testWithoutLastUpdate() {
+        let userDefaults = UserDefaultsPersistence()
+        try? userDefaults.delete(UserDefaults.keyLastUpdatedTrustList)
+        try? userDefaults.delete(UserDefaults.keyLastUpdatedDCCRules)
         let certLogicMock = DCCCertLogicMock()
         let vaccinationRepoMock = VaccinationRepositoryMock()
         let sut = TrustedListDetailsViewModel(repository: vaccinationRepoMock,
                                               certLogic: certLogicMock)
-        let vc: TrustedListDetailsViewController = TrustedListDetailsViewController(viewModel: sut)
+        let vc = TrustedListDetailsViewController(viewModel: sut)
         verifyView(vc: vc)
     }
     
     
     func testWithLastUpdate() {
+        var userDefaults = UserDefaultsPersistence()
+        userDefaults.lastUpdatedTrustList = DateUtils.parseDate("2021-04-26T15:05:00")
+        userDefaults.lastUpdatedDCCRules = DateUtils.parseDate("2021-04-26T15:05:00")
         let certLogicMock = DCCCertLogicMock()
-        certLogicMock.lastUpdateDccrRules = DateUtils.parseDate("2021-04-26T15:05:00")
         let vaccinationRepoMock = VaccinationRepositoryMock()
-        vaccinationRepoMock.lastUpdatedTrustList = DateUtils.parseDate("2021-04-26T15:05:00")
+        vaccinationRepoMock.shouldTrustListUpdate = true
         let sut = TrustedListDetailsViewModel(repository: vaccinationRepoMock,
                                               certLogic: certLogicMock)
-        let vc: TrustedListDetailsViewController = TrustedListDetailsViewController(viewModel: sut)
+        let vc = TrustedListDetailsViewController(viewModel: sut)
         verifyView(vc: vc)
     }
     
     
     func testWithLastUpdateTapOnRefresh() {
+        var userDefaults = UserDefaultsPersistence()
+        userDefaults.lastUpdatedTrustList = DateUtils.parseDate("2021-04-26T15:05:00")
+        userDefaults.lastUpdatedDCCRules = DateUtils.parseDate("2021-04-26T15:05:00")
         let certLogicMock = DCCCertLogicMock()
-        certLogicMock.lastUpdateDccrRules = DateUtils.parseDate("2021-04-26T15:05:00")
         let vaccinationRepoMock = VaccinationRepositoryMock()
-        vaccinationRepoMock.lastUpdatedTrustList = DateUtils.parseDate("2021-04-26T15:05:00")
+        vaccinationRepoMock.shouldTrustListUpdate = true
         let sut = TrustedListDetailsViewModel(repository: vaccinationRepoMock,
                                               certLogic: certLogicMock)
-        let vc: TrustedListDetailsViewController = TrustedListDetailsViewController(viewModel: sut)
+        let vc = TrustedListDetailsViewController(viewModel: sut)
         vc.view.bounds = UIScreen.main.bounds
         RunLoop.current.run(for: 0.1)
         vc.mainButton.innerButton.sendActions(for: .touchUpInside)

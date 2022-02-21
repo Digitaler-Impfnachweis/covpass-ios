@@ -160,8 +160,11 @@ class ValidatorOverviewViewModelTests: XCTestCase {
         XCTAssertEqual(title, expectedTitle)
     }
 
-    func testUpdateTitle_offlineMessageCertificates_and_offlineMessageRules_nil() {
+    func testUpdateTitle_offlineMessageCertificates_and_offlineMessageRules_nil() throws {
         // Given
+        let userDefaults = UserDefaultsPersistence()
+        try userDefaults.delete(UserDefaults.keyLastUpdatedDCCRules)
+        try userDefaults.delete(UserDefaults.keyLastUpdatedTrustList)
         prepareSut()
 
         // When
@@ -174,13 +177,18 @@ class ValidatorOverviewViewModelTests: XCTestCase {
     private func prepareSut(lastUpdateTrustList: Date? = nil, lastUpdateDccrRules: Date? = nil) {
         let repository = VaccinationRepositoryMock()
         let certLogic = DCCCertLogicMock()
-        repository.lastUpdateTrustList = lastUpdateTrustList
-        certLogic.lastUpdateDccrRules = lastUpdateDccrRules
+        var userDefaults = UserDefaultsPersistence()
+        if let lastUpdateTrustList = lastUpdateTrustList {
+            userDefaults.lastUpdatedTrustList = lastUpdateTrustList
+        }
+        if let lastUpdateDccrRules = lastUpdateDccrRules {
+            userDefaults.lastUpdatedDCCRules = lastUpdateDccrRules
+        }
         sut = .init(
             router: ValidatorMockRouter(),
             repository: repository,
             certLogic: certLogic,
-            userDefaults: UserDefaultsPersistence()
+            userDefaults: userDefaults
         )
     }
 

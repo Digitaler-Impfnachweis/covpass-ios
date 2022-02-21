@@ -12,6 +12,7 @@ import PromiseKit
 import XCTest
 
 class RuleCheckRouterMock: RuleCheckRouterProtocol {
+    
     let showCountrySelectionExpectation = XCTestExpectation(description: "showCountrySelectionExpectation")
     let showDateSelectionExpectation = XCTestExpectation(description: "showDateSelectionExpectation")
     let showResultDetailExpectation = XCTestExpectation(description: "showResultDetailExpectation")
@@ -28,6 +29,10 @@ class RuleCheckRouterMock: RuleCheckRouterProtocol {
         return .value(countryToReturn)
     }
 
+    func showInternetConnectionDialog() -> Promise<Void> {
+        .value
+    }
+    
     func showDateSelection(date: Date) -> Promise<Date> {
         showDateSelectionExpectation.fulfill()
         return .value(Date())
