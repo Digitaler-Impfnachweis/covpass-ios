@@ -18,7 +18,7 @@ public class ListItemView: XibView {
     @IBOutlet var seperatorView: UIView!
     @IBOutlet var internalButton: UIButton!
 
-    var showSeperator: Bool = false {
+    public var showSeperator: Bool = false {
         didSet {
             seperatorView.isHidden = showSeperator == false
         }

@@ -50,6 +50,9 @@ public extension UIImage {
     
     @ImageLoader(name: "start_screen_1")
     private(set) static var startScreen
+    
+    @ImageLoader(name: "reissue")
+    private(set) static var reissue
 
     @ImageLoader(name: "icon_lock")
     private(set) static var lock
