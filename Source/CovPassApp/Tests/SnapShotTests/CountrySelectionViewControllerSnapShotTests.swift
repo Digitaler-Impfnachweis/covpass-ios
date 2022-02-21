@@ -19,6 +19,6 @@ class CountrySelectionViewControllerSnapShotTests: BaseSnapShotTests {
                                            countries: CountrySelectionMock.countries,
                                            country: "DE")
         let vc = CountrySelectionViewController(viewModel: vm)
-        verifyView(vc: vc)
+        verifyView(view: vc.view)
     }
 }
