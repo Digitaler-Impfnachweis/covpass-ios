@@ -6,9 +6,7 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-import Foundation
-
-let HC1 = "HC1:"
+private let HC1 = "HC1:"
 
 public extension String {
     func stripPrefix() -> String {
@@ -16,6 +14,10 @@ public extension String {
             return String(dropFirst(4))
         }
         return self
+    }
+
+    func addPrefix() -> String {
+        HC1 + self
     }
 
     func stripUVCIPrefix() -> String {

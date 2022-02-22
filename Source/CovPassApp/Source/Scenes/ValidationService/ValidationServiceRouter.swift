@@ -194,12 +194,12 @@ struct ValidationServiceRouter: ValidationServiceRoutable {
     }
     
     func routeToSelectCertificate(ticket: ValidationServiceInitialisation) {
-        sceneCoordinator.push(
-            ChooseCertificateSceneFactory(
-                router: self,
-                ticket: ticket
-            ),
-            animated: true)
+        sceneCoordinator
+            .push(
+                ChooseCertificateSceneFactory(router: self, ticket: ticket),
+                animated: true
+            )
+            .cauterize()
     }
     
     func routeToCertificateConsent(ticket: ValidationServiceInitialisation, certificate: ExtendedCBORWebToken, vaasRepository: VAASRepositoryProtocol) {
@@ -215,15 +215,17 @@ struct ValidationServiceRouter: ValidationServiceRoutable {
     func showCertificate(_ certificate: ExtendedCBORWebToken,
                          with result: VAASValidaitonResultToken,
                          userDefaults: Persistence) {
-        sceneCoordinator.push(
-            ValidationResultSceneFactory(
-                router: ValidationResultRouter(sceneCoordinator: sceneCoordinator),
-                certificate: certificate,
-                error: nil,
-                token: result,
-                userDefaults: userDefaults
+        sceneCoordinator
+            .push(
+                ValidationResultSceneFactory(
+                    router: ValidationResultRouter(sceneCoordinator: sceneCoordinator),
+                    certificate: certificate,
+                    error: nil,
+                    token: result,
+                    userDefaults: userDefaults
+                )
             )
-        )
+            .cauterize()
     }
     
     func showValidationFailed(ticket: ValidationServiceInitialisation) -> Promise<Bool>  {

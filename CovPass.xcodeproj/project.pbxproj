@@ -313,9 +313,13 @@
 		E70C3E9A27A95523001F07FF /* RuleCheckViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70C3E9927A95523001F07FF /* RuleCheckViewModelTests.swift */; };
 		E70C3E9D27A955CC001F07FF /* RuleCheckRouterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70C3E9C27A955CC001F07FF /* RuleCheckRouterMock.swift */; };
 		E70C3EA427A98A5C001F07FF /* CertificatesOverviewRouterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70C3EA327A98A5C001F07FF /* CertificatesOverviewRouterMock.swift */; };
+		E76B96EA27C50F130030FC0C /* URLSession+CertificateReissue.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76B96E927C50F130030FC0C /* URLSession+CertificateReissue.swift */; };
+		E76B96EC27C5120A0030FC0C /* URLSession+CertificateReissueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76B96EB27C5120A0030FC0C /* URLSession+CertificateReissueTests.swift */; };
 		E76B998927AAE8220029FCB1 /* CertificateDetailViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76B998827AAE8220029FCB1 /* CertificateDetailViewModelTests.swift */; };
 		E7CB54B327B53296002FA55E /* AppInformationViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CB54B227B53296002FA55E /* AppInformationViewModelTests.swift */; };
 		E7CB54B927B5563E002FA55E /* AppInformationViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CB54B627B55436002FA55E /* AppInformationViewModelTests.swift */; };
+		E7F7817A27C4007D009AC907 /* CertificateReissueRepository+Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F7817927C4007D009AC907 /* CertificateReissueRepository+Factory.swift */; };
+		E7F7817D27C400BA009AC907 /* CertificateReissueRepository+FactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F7817C27C400BA009AC907 /* CertificateReissueRepository+FactoryTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -687,9 +691,13 @@
 		E70C3E9927A95523001F07FF /* RuleCheckViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleCheckViewModelTests.swift; sourceTree = "<group>"; };
 		E70C3E9C27A955CC001F07FF /* RuleCheckRouterMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleCheckRouterMock.swift; sourceTree = "<group>"; };
 		E70C3EA327A98A5C001F07FF /* CertificatesOverviewRouterMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificatesOverviewRouterMock.swift; sourceTree = "<group>"; };
+		E76B96E927C50F130030FC0C /* URLSession+CertificateReissue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+CertificateReissue.swift"; sourceTree = "<group>"; };
+		E76B96EB27C5120A0030FC0C /* URLSession+CertificateReissueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+CertificateReissueTests.swift"; sourceTree = "<group>"; };
 		E76B998827AAE8220029FCB1 /* CertificateDetailViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateDetailViewModelTests.swift; sourceTree = "<group>"; };
 		E7CB54B227B53296002FA55E /* AppInformationViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInformationViewModelTests.swift; sourceTree = "<group>"; };
 		E7CB54B627B55436002FA55E /* AppInformationViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInformationViewModelTests.swift; sourceTree = "<group>"; };
+		E7F7817927C4007D009AC907 /* CertificateReissueRepository+Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CertificateReissueRepository+Factory.swift"; sourceTree = "<group>"; };
+		E7F7817C27C400BA009AC907 /* CertificateReissueRepository+FactoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CertificateReissueRepository+FactoryTests.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1220,14 +1228,16 @@
 			isa = PBXGroup;
 			children = (
 				216D1F39264EF4ED00370F16 /* ApiServiceFactory.swift */,
-				216D1F3A264EF4ED00370F16 /* StringLocalization.swift */,
-				21A77A51265AFDE6002FEEF1 /* DialogRouterProtocol+ScanError.swift */,
-				21A77A53265B0033002FEEF1 /* DialogRouterProtocol+DidDeleteCertificate.swift */,
-				38E94DE8266121D60015553C /* VaccinationRepositoryExtension.swift */,
-				3829A308269CFEA800B8346C /* DCCCertLogicFactory.swift */,
-				351C6B4C26E15C2D00321B3C /* FileManager+Simulator.swift */,
 				38A1978E26EB5AF800C0AC77 /* BoosterLogicFactory.swift */,
+				E7F7817927C4007D009AC907 /* CertificateReissueRepository+Factory.swift */,
+				3829A308269CFEA800B8346C /* DCCCertLogicFactory.swift */,
+				21A77A53265B0033002FEEF1 /* DialogRouterProtocol+DidDeleteCertificate.swift */,
+				21A77A51265AFDE6002FEEF1 /* DialogRouterProtocol+ScanError.swift */,
 				09D5811A27C2735900CB50CB /* ExtendedCBORWebToken.swift */,
+				351C6B4C26E15C2D00321B3C /* FileManager+Simulator.swift */,
+				216D1F3A264EF4ED00370F16 /* StringLocalization.swift */,
+				E76B96E927C50F130030FC0C /* URLSession+CertificateReissue.swift */,
+				38E94DE8266121D60015553C /* VaccinationRepositoryExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1765,6 +1775,7 @@
 		88AB2A3E25FA40CE00D4EA52 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				E7F7817B27C40090009AC907 /* Extensions */,
 				09590D172715E2B2004410D7 /* SnapShotTests */,
 				216D1F5B264EF52400370F16 /* Mock */,
 				216D2025264EF95400370F16 /* Scenes */,
@@ -1963,6 +1974,15 @@
 				E7CB54B627B55436002FA55E /* AppInformationViewModelTests.swift */,
 			);
 			path = "App Information";
+			sourceTree = "<group>";
+		};
+		E7F7817B27C40090009AC907 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				E7F7817C27C400BA009AC907 /* CertificateReissueRepository+FactoryTests.swift */,
+				E76B96EB27C5120A0030FC0C /* URLSession+CertificateReissueTests.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -2244,7 +2264,9 @@
 				216D1FB0264EF74600370F16 /* PassConsentPageViewModel.swift in Sources */,
 				09AC1E052757B6C9008356CD /* ValidationResultFactory.swift in Sources */,
 				95BB0D4A27020EBE00885BA3 /* ScanPleaseViewController.swift in Sources */,
+				E7F7817A27C4007D009AC907 /* CertificateReissueRepository+Factory.swift in Sources */,
 				216D1F98264EF73200370F16 /* MainSceneFactory.swift in Sources */,
+				E76B96EA27C50F130030FC0C /* URLSession+CertificateReissue.swift in Sources */,
 				385FC1B1269F21A200D19AF8 /* RuleCheckDetailViewModel.swift in Sources */,
 				0933177F273ABB2A0036DB2A /* ChooseCertificateRouterProtocol.swift in Sources */,
 				216D1FA6264EF74100370F16 /* WelcomeSceneFactory.swift in Sources */,
@@ -2342,6 +2364,7 @@
 				E70C3E9A27A95523001F07FF /* RuleCheckViewModelTests.swift in Sources */,
 				0993B1692762090A00217884 /* ValidationFailedSnapShotTests.swift in Sources */,
 				09D5812127C27CB700CB50CB /* ReissueStartViewModelTests.swift in Sources */,
+				E76B96EC27C5120A0030FC0C /* URLSession+CertificateReissueTests.swift in Sources */,
 				952B7AFB2729BCA8008F69D6 /* ScanPleaseSnapshotTests.swift in Sources */,
 				09CE6C9B27AB40430048BDA4 /* HowToScanViewControllerSnapShotTests.swift in Sources */,
 				09590D242715E519004410D7 /* RuleCheckViewControllerSnapshotTests.swift in Sources */,
@@ -2353,6 +2376,7 @@
 				0968979F27C3A871009E2886 /* ReissueConsentViewModelTests.swift in Sources */,
 				09CE6C9927AB35D00048BDA4 /* CountrySelectionMock.swift in Sources */,
 				0994A4D5273431A500B21FCF /* TestUtil.swift in Sources */,
+				E7F7817D27C400BA009AC907 /* CertificateReissueRepository+FactoryTests.swift in Sources */,
 				0994A4D7273431A500B21FCF /* BoosterLogicMock.swift in Sources */,
 				09D580E127BFCDD900CB50CB /* CertificateItemDetailViewModelTests.swift in Sources */,
 				096873F127430A4200DB5837 /* ChooseCertificateSnapShotTests.swift in Sources */,

@@ -86,8 +86,7 @@ class VaccinationRepositoryTests: XCTestCase {
     func testValidateEntityValidRecoveryCertificate() {
         do {
             let res = try sut.checkCertificate(CertificateMock.validRecoveryCertificate).wait()
-            let cert = try sut.validateEntity(res)
-            XCTAssertNotNil(cert)
+            XCTAssertNoThrow(try sut.validateEntity(res))
         } catch {
             XCTFail("Should fail")
         }
@@ -96,8 +95,7 @@ class VaccinationRepositoryTests: XCTestCase {
     func testValidateEntityValidCertificateNoPrefix() {
         do {
             let res = try sut.checkCertificate(CertificateMock.validCertificateNoPrefix).wait()
-            let cert = try sut.validateEntity(res)
-            XCTAssertNotNil(cert)
+            XCTAssertNoThrow(try sut.validateEntity(res))
         } catch {
             XCTFail("Should fail")
         }
@@ -106,8 +104,7 @@ class VaccinationRepositoryTests: XCTestCase {
     func testValidateEntityValidExtendedKeyUsageGreece() {
         do {
             let res = try sut.checkCertificate(CertificateMock.validExtendedKeyUsageGreece).wait()
-            let cert = try sut.validateEntity(res)
-            XCTAssertNotNil(cert)
+            XCTAssertNoThrow(try sut.validateEntity(res))
         } catch {
             XCTFail("Should fail")
         }
@@ -118,7 +115,7 @@ class VaccinationRepositoryTests: XCTestCase {
             let res = try sut.checkCertificate(CertificateMock.validCertificate).wait()
             res.hcert.dgc.v?.first?.ci = "URN:UVCI:01DE/foobar/F4G7014KQQ2XD0NY8FJHSTDXZ#S"
 
-            try _ = sut.validateEntity(res)
+            try sut.validateEntity(res)
             XCTFail("Should fail")
         } catch {
             XCTAssertEqual(error.localizedDescription, CertificateError.invalidEntity.localizedDescription)
@@ -128,7 +125,7 @@ class VaccinationRepositoryTests: XCTestCase {
     func testValidateEntityInvalidCertificateInvalidSignature() {
         do {
             let res = try sut.checkCertificate(CertificateMock.invalidCertificateInvalidSignature).wait()
-            try _ = sut.validateEntity(res)
+            try sut.validateEntity(res)
             XCTFail("Should fail")
         } catch {
             XCTAssertEqual(error.localizedDescription, CertificateError.expiredCertifcate.localizedDescription)
@@ -138,7 +135,7 @@ class VaccinationRepositoryTests: XCTestCase {
     func testValidateEntityInvalidCertificate() {
         do {
             let res = try sut.checkCertificate(CertificateMock.invalidCertificate).wait()
-            try _ = sut.validateEntity(res)
+            try sut.validateEntity(res)
             XCTFail("Should fail")
         } catch {
             XCTAssertEqual(error.localizedDescription, CoseParsingError.wrongType.localizedDescription)
@@ -148,7 +145,7 @@ class VaccinationRepositoryTests: XCTestCase {
     func testValidateEntityInvalidCertificateOldFormat() {
         do {
             let res = try sut.checkCertificate(CertificateMock.invalidCertificateOldFormat).wait()
-            try _ = sut.validateEntity(res)
+            try sut.validateEntity(res)
             XCTFail("Should fail")
         } catch {
             print(error)
@@ -159,7 +156,7 @@ class VaccinationRepositoryTests: XCTestCase {
     func testValidateEntityInvalidExtendedKeyUsagePoland() {
         do {
             let res = try sut.checkCertificate(CertificateMock.invalidExtendedKeyUsagePoland).wait()
-            try _ = sut.validateEntity(res)
+            try sut.validateEntity(res)
             XCTFail("Should fail")
         } catch {
             print(error)
@@ -170,7 +167,7 @@ class VaccinationRepositoryTests: XCTestCase {
     func testValidateEntityValidCertifcateRSA() {
         do {
             let res = try sut.checkCertificate(CertificateMock.validCertifcateRSA).wait()
-            try _ = sut.validateEntity(res)
+            try sut.validateEntity(res)
             XCTFail("Should fail")
         } catch {
             print(error)

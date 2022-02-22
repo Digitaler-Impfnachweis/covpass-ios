@@ -79,3 +79,7 @@ struct Compression {
         return result
     }
 }
+
+extension Compression {
+    struct Error: Swift.Error {}
+}
