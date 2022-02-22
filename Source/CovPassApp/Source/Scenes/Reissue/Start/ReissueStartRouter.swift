@@ -16,7 +16,10 @@ class ReissueStartRouter: ReissueStartRouterProtocol {
     // MARK: - Methods
 
     func showNext(token: ExtendedCBORWebToken) {
-        // TODO: add route to next screen
+        sceneCoordinator
+            .push(ReissueConsentSceneFactory(router: ReissueConsentRouter(sceneCoordinator: sceneCoordinator),
+                                             token: token))
+            .cauterize()
     }
     
     func cancel() {

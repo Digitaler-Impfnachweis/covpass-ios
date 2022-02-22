@@ -18,7 +18,11 @@ class ReissueConsentRouter: ReissueConsentRouterProtocol {
     
     func showNext(newToken: ExtendedCBORWebToken,
                   oldToken: ExtendedCBORWebToken) {
-        // TODO: route to next screen
+        sceneCoordinator
+            .push(ReissueResultSceneFactory(router: ReissueResultRouter(sceneCoordinator: sceneCoordinator),
+                                            newToken: newToken,
+                                            oldToken: oldToken))
+            .cauterize()
     }
     
     func cancel() {
@@ -28,11 +32,7 @@ class ReissueConsentRouter: ReissueConsentRouterProtocol {
     
     func routeToPrivacyStatement() {
         sceneCoordinator
-            .push(
-                DataPrivacySceneFactory(
-                    router: DataPrivacyRouter(sceneCoordinator: sceneCoordinator)
-                )
-            )
+            .push(DataPrivacySceneFactory(router: DataPrivacyRouter(sceneCoordinator: sceneCoordinator)))
             .cauterize()
     }
 }
