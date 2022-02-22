@@ -11,6 +11,18 @@ import CovPassUI
 import PromiseKit
 import UIKit
 
+private enum Constants {
+    enum Keys {
+        enum Reissue {
+            static let headline = "certificate_renewal_startpage_headline".localized
+            static let description = "certificate_renewal_startpage_copy".localized
+            // TODO: clarify which key should be used
+            static let buttonTitle = "app_information_message_update_button".localized
+            static let newText = "vaccination_certificate_overview_booster_vaccination_notification_icon_new".localized
+        }
+    }
+}
+
 class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
     // MARK: - Properties
 
@@ -210,6 +222,16 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
     var boosterNotificationHighlightText: String {
         "vaccination_certificate_overview_booster_vaccination_notification_icon_new".localized
     }
+    
+    // MARK: Reissue Notification
+    
+    var showReissueNotification: Bool { false }
+
+    var reissueNotificationTitle: String { Constants.Keys.Reissue.headline }
+
+    var reissueNotificationBody: String { Constants.Keys.Reissue.description }
+
+    var reissueNotificationHighlightText: String { Constants.Keys.Reissue.newText }
 
     // MARK: - Lifecyle
 
@@ -289,5 +311,9 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
         guard var candidate = boosterCandidate, candidate.state == .new else { return }
         candidate.state = .qualified
         boosterLogic.updateBoosterCandidate(candidate)
+    }
+    
+    func triggerReissue() {
+        router.showReissue(for: nil)
     }
 }

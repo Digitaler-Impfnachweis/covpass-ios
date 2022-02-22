@@ -12,6 +12,7 @@ import PromiseKit
 import UIKit
 
 class CertificateDetailRouter: CertificateDetailRouterProtocol, DialogRouterProtocol {
+
     // MARK: - Properties
 
     let sceneCoordinator: SceneCoordinator
@@ -43,4 +44,9 @@ class CertificateDetailRouter: CertificateDetailRouterProtocol, DialogRouterProt
             CertificateSceneFactory(token: token)
         )
     }
+    
+    func showReissue(for token: ExtendedCBORWebToken? ) {
+        // TODO: route to reissue start; token optional above can be removed later
+    }
+    
 }

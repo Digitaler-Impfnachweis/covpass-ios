@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HintButton" customModule="CovPassUI">
+            <connections>
+                <outlet property="bodyTextView" destination="ZFb-hn-ywE" id="lWc-nE-Ygk"/>
+                <outlet property="button" destination="FyJ-hg-eoN" id="8ZQ-og-BfA"/>
+                <outlet property="containerView" destination="yCv-mX-bar" id="8ag-o0-Jo6"/>
+                <outlet property="titleLabel" destination="Shp-hj-0SD" id="m8f-g0-wHP"/>
+                <outlet property="topRightLabel" destination="t4R-Pz-YZh" id="Qvp-RV-v7j"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Emf-oB-Bnc">
+            <rect key="frame" x="0.0" y="0.0" width="381" height="432"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yCv-mX-bar">
+                    <rect key="frame" x="24" y="24" width="333" height="408"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="752" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Shp-hj-0SD">
+                            <rect key="frame" x="16" y="16" width="33" height="20.5"/>
+                            <accessibility key="accessibilityConfiguration">
+                                <accessibilityTraits key="traits" staticText="YES" header="YES"/>
+                            </accessibility>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="752" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t4R-Pz-YZh" customClass="HighlightLabel" customModule="CovPassUI">
+                            <rect key="frame" x="284.5" y="16" width="32.5" height="24"/>
+                            <accessibility key="accessibilityConfiguration">
+                                <accessibilityTraits key="traits" staticText="YES" header="YES"/>
+                            </accessibility>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="24" id="H8q-Mg-3LL"/>
+                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="24" id="uag-aZ-KAx"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ZFb-hn-ywE">
+                            <rect key="frame" x="16" y="52.5" width="301" height="233.5"/>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                            <color key="textColor" systemColor="labelColor"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES" calendarEvent="YES"/>
+                        </textView>
+                        <view contentMode="scaleToFill" placeholderIntrinsicWidth="264" placeholderIntrinsicHeight="75" translatesAutoresizingMaskIntoConstraints="NO" id="FyJ-hg-eoN" customClass="MainButton" customModule="CovPassUI">
+                            <rect key="frame" x="34.5" y="310" width="264" height="75"/>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstItem="t4R-Pz-YZh" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Shp-hj-0SD" secondAttribute="trailing" constant="4" id="2m5-gy-4oD"/>
+                        <constraint firstAttribute="trailing" secondItem="ZFb-hn-ywE" secondAttribute="trailing" constant="16" id="5h8-7H-qPx"/>
+                        <constraint firstItem="Shp-hj-0SD" firstAttribute="top" secondItem="yCv-mX-bar" secondAttribute="top" constant="16" id="NSx-4M-FhY"/>
+                        <constraint firstItem="Shp-hj-0SD" firstAttribute="leading" secondItem="yCv-mX-bar" secondAttribute="leading" constant="16" id="T76-jF-NPC"/>
+                        <constraint firstItem="t4R-Pz-YZh" firstAttribute="top" secondItem="yCv-mX-bar" secondAttribute="top" constant="16" id="ZGw-QY-jRn"/>
+                        <constraint firstItem="ZFb-hn-ywE" firstAttribute="leading" secondItem="yCv-mX-bar" secondAttribute="leading" constant="16" id="dcp-6m-pEz"/>
+                        <constraint firstItem="FyJ-hg-eoN" firstAttribute="top" secondItem="ZFb-hn-ywE" secondAttribute="bottom" constant="24" id="dpD-h6-rc5"/>
+                        <constraint firstItem="FyJ-hg-eoN" firstAttribute="centerX" secondItem="yCv-mX-bar" secondAttribute="centerX" id="jWY-Lt-jiB"/>
+                        <constraint firstAttribute="trailing" secondItem="t4R-Pz-YZh" secondAttribute="trailing" constant="16" id="kue-av-hUf"/>
+                        <constraint firstAttribute="bottom" secondItem="FyJ-hg-eoN" secondAttribute="bottom" constant="23" id="oec-kL-fr9"/>
+                        <constraint firstItem="ZFb-hn-ywE" firstAttribute="top" secondItem="Shp-hj-0SD" secondAttribute="bottom" constant="16" id="yRT-2H-96b"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="yCv-mX-bar" firstAttribute="leading" secondItem="Emf-oB-Bnc" secondAttribute="leading" constant="24" id="1Pe-hY-vLS"/>
+                <constraint firstItem="yCv-mX-bar" firstAttribute="top" secondItem="Emf-oB-Bnc" secondAttribute="top" constant="24" id="OPW-2I-9aK"/>
+                <constraint firstAttribute="trailing" secondItem="yCv-mX-bar" secondAttribute="trailing" constant="24" id="b5u-Ce-uQP"/>
+                <constraint firstAttribute="bottom" secondItem="yCv-mX-bar" secondAttribute="bottom" id="dUx-9J-PEK"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <edgeInsets key="layoutMargins" top="0.0" left="0.0" bottom="0.0" right="0.0"/>
+            <point key="canvasLocation" x="-226.81159420289856" y="-49.553571428571423"/>
+        </view>
+    </objects>
+    <designables>
+        <designable name="FyJ-hg-eoN">
+            <size key="intrinsicContentSize" width="264" height="75"/>
+        </designable>
+        <designable name="t4R-Pz-YZh">
+            <size key="intrinsicContentSize" width="32.5" height="14.5"/>
+        </designable>
+    </designables>
+    <resources>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

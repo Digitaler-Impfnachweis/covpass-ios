@@ -416,9 +416,26 @@ class CertificateDetailViewControllerSnapshotTests: BaseSnapShotTests {
         let vc = CertificateDetailViewController(viewModel: vm)
         verifyView(view: vc.view, height: 1100)
     }
+    
+    func testCertificateDetail_ShowReissueNotification() {
+        let cert: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended()
+        let certs = [cert]
+        let bl = BoosterLogic.init(certLogic: DCCCertLogicMock(),
+                                   userDefaults: MockPersistence())
+        let vm = CertificateDetailViewModel(router: CertificateDetailRouterMock(),
+                                            repository: VaccinationRepositoryMock(),
+                                            boosterLogic: bl,
+                                            certificates: certs,
+                                            resolvable: nil)
+        let vc = CertificateDetailViewController(viewModel: vm)
+        verifyView(view: vc.view, height: 1100)
+        // TODO: show notification, when logic to show and hide is ready in viewModel
+    }
 }
 
 struct CertificateDetailRouterMock: CertificateDetailRouterProtocol {
+    let expectationShowReissue = XCTestExpectation(description: "expectationShowReissue")
+    
     func showCertificate(for token: ExtendedCBORWebToken) -> Promise<Void> {
         .value
     }
@@ -429,6 +446,10 @@ struct CertificateDetailRouterMock: CertificateDetailRouterProtocol {
 
     func showWebview(_ url: URL) {
         
+    }
+    
+    func showReissue(for token: ExtendedCBORWebToken?) {
+        expectationShowReissue.fulfill()
     }
 
     var sceneCoordinator: SceneCoordinator = SceneCoordinatorMock()

@@ -82,7 +82,7 @@ class CertificateDetailViewModelTests: XCTestCase {
         // Then
         XCTAssertTrue(showBoosterNotification)
     }
-
+    
     func testShowBoosterNotification_booster_candidate_state_new() throws {
         // Given
         try configureSut(booosterState: .new)
@@ -92,5 +92,14 @@ class CertificateDetailViewModelTests: XCTestCase {
 
         // Then
         XCTAssertTrue(showBoosterNotification)
+    }
+    
+    func testStartReissue() throws {
+        // When
+        sut.triggerReissue()
+
+        // Then
+        let expectation1 = try XCTUnwrap((sut.router as? CertificateDetailRouterMock)?.expectationShowReissue)
+        wait(for: [expectation1], timeout: 0.1)
     }
 }
