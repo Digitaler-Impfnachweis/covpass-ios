@@ -99,7 +99,7 @@
 
 "check_context_onboarding_option2_subtitle" = "Zum Beispiel in Geschäften oder in der Gastronomie";
 
-"check_context_onboarding_footnote" = "Anhand dieser Angabe werden die Regeln angepasst, nach denen Zertifikate als Gültig oder Ungültig ausgewiesen werden. Sie können die Angabe jederzeit in den Einstellungen ändern.";
+"check_context_onboarding_footnote" = "Anhand dieser Angabe werden die Regeln angepasst, nach denen Zertifikate als gültig oder ungültig ausgewiesen werden. Sie können die Angabe jederzeit in den Einstellungen ändern.";
 
 "check_context_onboarding_button" = "OK";
 
@@ -303,6 +303,8 @@
 "result_2G_test_empty" = "Testzertifikat";
 
 "result_2G_test_invalid" = "Testzertifikat ungültig";
+
+"result_2G_certificate_invalid" = "Zertifikat ungültig";
 
 "result_2G_invalid_subtitle" = "Details anzeigen";
 

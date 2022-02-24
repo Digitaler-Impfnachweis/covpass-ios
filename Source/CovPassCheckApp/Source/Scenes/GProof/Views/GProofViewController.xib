@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -30,7 +32,7 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x4e-BG-quS">
-                    <rect key="frame" x="0.0" y="24" width="414" height="838"/>
+                    <rect key="frame" x="0.0" y="68" width="414" height="794"/>
                     <subviews>
                         <view contentMode="scaleToFill" verticalCompressionResistancePriority="751" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="60" translatesAutoresizingMaskIntoConstraints="NO" id="dnN-F6-21N" customClass="InfoHeaderView" customModule="CovPassUI">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
@@ -131,6 +133,29 @@
             <point key="canvasLocation" x="142.02898550724638" y="-11.383928571428571"/>
         </view>
     </objects>
+    <designables>
+        <designable name="DpY-jD-wtK">
+            <size key="intrinsicContentSize" width="414" height="128"/>
+        </designable>
+        <designable name="G4P-EB-l16">
+            <size key="intrinsicContentSize" width="414" height="128"/>
+        </designable>
+        <designable name="dha-9K-gai">
+            <size key="intrinsicContentSize" width="414" height="110"/>
+        </designable>
+        <designable name="dnN-F6-21N">
+            <size key="intrinsicContentSize" width="414" height="60"/>
+        </designable>
+        <designable name="e5g-Uh-iIv">
+            <size key="intrinsicContentSize" width="414" height="106"/>
+        </designable>
+        <designable name="r2L-zE-97I">
+            <size key="intrinsicContentSize" width="414" height="110"/>
+        </designable>
+        <designable name="tO6-PR-mb1">
+            <size key="intrinsicContentSize" width="414" height="128"/>
+        </designable>
+    </designables>
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
