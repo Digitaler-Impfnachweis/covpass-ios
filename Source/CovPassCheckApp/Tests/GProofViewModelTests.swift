@@ -159,7 +159,7 @@ class GProofViewModelTests: XCTestCase {
         
         XCTAssertEqual(sut.secondResultImage, UIImage.detailStatusFailed)
         XCTAssertEqual(sut.seconResultLinkImage, .FieldRight)
-        XCTAssertEqual(sut.secondResultTitle, "Invalid 2G proof*")
+        XCTAssertEqual(sut.secondResultTitle, "Invalid certificate")
         XCTAssertEqual(sut.seconResultFooterText, nil)
         XCTAssertEqual(sut.seconResultSubtitle, "Show details")
         
@@ -235,7 +235,7 @@ class GProofViewModelTests: XCTestCase {
         
         XCTAssertEqual(sut.firstResultImage, UIImage.detailStatusFailed)
         XCTAssertEqual(sut.firstResultLinkImage, UIImage.FieldRight)
-        XCTAssertEqual(sut.firstResultTitle, "Invalid test certificate")
+        XCTAssertEqual(sut.firstResultTitle, "Invalid certificate")
         XCTAssertEqual(sut.firstResultFooterText, nil)
         XCTAssertEqual(sut.firstResultSubtitle, "Show details")
         
@@ -270,13 +270,13 @@ class GProofViewModelTests: XCTestCase {
 
         XCTAssertEqual(sut.firstResultImage, UIImage.detailStatusFullEmpty)
         XCTAssertEqual(sut.firstResultLinkImage, nil)
-        XCTAssertEqual(sut.firstResultTitle, "Invalid 2G proof*")
+        XCTAssertEqual(sut.firstResultTitle, "Invalid certificate")
         XCTAssertEqual(sut.firstResultFooterText, nil)
         XCTAssertEqual(sut.firstResultSubtitle, "May be required for 2G+")
 
         XCTAssertEqual(sut.secondResultImage, UIImage.detailStatusFullEmpty)
         XCTAssertEqual(sut.seconResultLinkImage, nil)
-        XCTAssertEqual(sut.secondResultTitle, "Invalid 2G proof*")
+        XCTAssertEqual(sut.secondResultTitle, "Invalid certificate")
         XCTAssertEqual(sut.seconResultFooterText, nil)
         XCTAssertEqual(sut.seconResultSubtitle, "May be required for 2G+")
 
@@ -307,7 +307,7 @@ class GProofViewModelTests: XCTestCase {
   
         XCTAssertEqual(sut.firstResultImage, UIImage.detailStatusFailed)
         XCTAssertEqual(sut.firstResultLinkImage, UIImage.FieldRight)
-        XCTAssertEqual(sut.firstResultTitle, "Invalid test certificate")
+        XCTAssertEqual(sut.firstResultTitle, "Invalid certificate")
         XCTAssertEqual(sut.firstResultFooterText, nil)
         XCTAssertEqual(sut.firstResultSubtitle, "Show details")
         

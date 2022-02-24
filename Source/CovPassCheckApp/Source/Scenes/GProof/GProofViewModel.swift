@@ -15,7 +15,6 @@ import Scanner
 private enum Constants {
     static let footnoteSignal = "*"
     enum Keys {
-        static let result_2G_gproof_invalid = "result_2G_gproof_invalid".localized
         static let accessibility_scan_result_announce_2G = "accessibility_scan_result_announce_2G".localized
         static let accessibility_scan_result_closing_announce_2G = "accessibility_scan_result_closing_announce_2G".localized
         static let result_2G_title = "result_2G_title".localized
@@ -85,6 +84,8 @@ class GProofViewModel: GProofViewModelProtocol {
     var areBothScanned: Bool { firstResult != nil && secondResult != nil}
     var firstResult: ValidationResultViewModel? = nil
     var secondResult: ValidationResultViewModel? = nil
+    var firstIsFailedTechnicalReason: Bool { (firstResult is ErrorResultViewModel && firstResult?.certificate == nil) }
+    var secondIsFailedTechnicalReason: Bool { (secondResult is ErrorResultViewModel && secondResult?.certificate == nil) }
     let router: GProofRouterProtocol
     internal var delegate: ViewModelDelegate?
     private var initialTokenIsBoosted: Bool = false
@@ -165,6 +166,7 @@ class GProofViewModel: GProofViewModelProtocol {
             router.showError(error: error)
         } else if isFirstScan && ((error as? ScanError) == .badOutput || (error as? Base45CodingError) == .base45Decoding) {
             showErorResultPage()
+            setResultViewModel(newToken: nil).cauterize()
         } else {
             setResultViewModel(newToken: nil).cauterize()
         }

@@ -39,6 +39,8 @@ protocol GProofViewModelProtocol {
     var seconResultViewIsHidden: Bool { get }
     var pageFooterIsHidden: Bool { get }
     var someIsFailed: Bool  { get }
+    var firstIsFailedTechnicalReason: Bool { get }
+    var secondIsFailedTechnicalReason: Bool { get }
     var areBothScanned: Bool { get }
     var delegate: ViewModelDelegate? { get set }
     var firstResult: ValidationResultViewModel?  { get set }

@@ -11,13 +11,12 @@ import UIKit
 private enum Constants {
     static let footnoteSignal = "*"
     enum Keys {
-        static let result_2G_gproof_invalid = "result_2G_gproof_invalid".localized
+        static let result_2G_certificate_invalid = "result_2G_certificate_invalid".localized
         static let result_2G_2nd_gproof_valid_recovery = "result_2G_2nd_recovery_valid".localized
         static let result_2G_2nd_gproof_valid_boosted = "result_2G_2nd_booster_valid".localized
         static let result_2G_2nd_gproof_valid_rapidtest = "result_2G_2nd_rapidtest_valid".localized
         static let result_2G_2nd_gproof_valid_pcrtest = "result_2G_2nd_pcrtest_valid".localized
         static let result_2G_2nd_empty = "result_2G_2nd_empty".localized
-        static let result_2G_test_invalid = "result_2G_test_invalid".localized
         static let result_2G_invalid_subtitle = "result_2G_invalid_subtitle".localized
         static let result_2G_empty_subtitle = "result_2G_empty_subtitle".localized
         static let result_2G_3rd_test_vacc_empty = "result_2G_3rd_test_vacc_empty".localized
@@ -39,28 +38,32 @@ public extension Optional where Wrapped == ValidationResultViewModel {
     
     func title(theOtherResultVM: ValidationResultViewModel?,
                initialTokenIsBoosted: Bool) -> String {
-        guard let certificate = self?.certificate else {
-            return theOtherResultVM.errorTitle
-        }
         switch self {
         case is ErrorResultViewModel:
-            return certificate.isTest ? Constants.Keys.result_2G_test_invalid : Constants.Keys.result_2G_gproof_invalid
+            return Constants.Keys.result_2G_certificate_invalid
         case is RecoveryResultViewModel:
             return Constants.Keys.result_2G_2nd_gproof_valid_recovery
         case is VaccinationResultViewModel:
-            if initialTokenIsBoosted {
-                return Constants.Keys.result_2G_2nd_gproof_valid_boosted
-            } else if certificate.isVaccination && certificate.hcert.dgc.isVaccinationBoosted {
-                return Constants.Keys.result_2G_2nd_gproof_valid_boosted
-            } else if certificate.isVaccination && certificate.hcert.dgc.isFullyImmunized {
-                return Constants.Keys.result_2G_2nd_gproof_valid_basic
-            } else {
-                return Constants.Keys.result_2G_empty_subtitle
-            }
+            return vaccinationTitle(initialTokenIsBoosted: initialTokenIsBoosted)
         case  is TestResultViewModel:
-            return certificate.hcert.dgc.isPCR ? Constants.Keys.result_2G_2nd_gproof_valid_pcrtest : Constants.Keys.result_2G_2nd_gproof_valid_rapidtest
+            return self?.certificate?.hcert.dgc.isPCR ?? false ? Constants.Keys.result_2G_2nd_gproof_valid_pcrtest : Constants.Keys.result_2G_2nd_gproof_valid_rapidtest
         default:
             return theOtherResultVM.errorTitle
+        }
+    }
+    
+    func vaccinationTitle(initialTokenIsBoosted: Bool) -> String {
+        guard let cert = self?.certificate else {
+            return Constants.Keys.result_2G_empty_subtitle
+        }
+        if initialTokenIsBoosted {
+            return Constants.Keys.result_2G_2nd_gproof_valid_boosted
+        } else if cert.hcert.dgc.isVaccinationBoosted {
+            return Constants.Keys.result_2G_2nd_gproof_valid_boosted
+        } else if cert.hcert.dgc.isFullyImmunized {
+            return Constants.Keys.result_2G_2nd_gproof_valid_basic
+        } else {
+            return Constants.Keys.result_2G_empty_subtitle
         }
     }
     
@@ -72,7 +75,7 @@ public extension Optional where Wrapped == ValidationResultViewModel {
         } else if self?.certificate?.isRecovery ?? false {
             return Constants.Keys.result_2G_3rd_test_vacc_empty
         } else {
-            return Constants.Keys.result_2G_gproof_invalid
+            return Constants.Keys.result_2G_certificate_invalid
         }
     }
     
