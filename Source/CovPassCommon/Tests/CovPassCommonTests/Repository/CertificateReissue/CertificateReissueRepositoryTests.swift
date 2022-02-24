@@ -30,12 +30,12 @@ class CertificateReissueRepositoryTests: XCTestCase {
 
     func testReissue_returned_data_has_wrong_format() {
         // Given
-        let certificate = DigitalGreenCertificate.mock()
+        let cborWebToken = ""
         let expectation = XCTestExpectation()
 
         // When
-        sut.reissue([certificate])
-            .done { certificates in
+        sut.reissue([cborWebToken])
+            .done { _ in
                 XCTFail("Must not succeed.")
             }
             .catch { error in
@@ -58,14 +58,14 @@ class CertificateReissueRepositoryTests: XCTestCase {
 
     func testReissue_http_error() {
         // Given
-        let certificate = DigitalGreenCertificate.mock()
+        let cborWebToken = ""
         let expectation = XCTestExpectation()
         let expectedStatusCode = 542
         urlSession.error = CertificateReissueError.http(expectedStatusCode)
 
         // When
-        sut.reissue([certificate])
-            .done { certificates in
+        sut.reissue([cborWebToken])
+            .done { _ in
                 XCTFail("Must not succeed.")
             }
             .catch { error in
@@ -86,27 +86,6 @@ class CertificateReissueRepositoryTests: XCTestCase {
         wait(for: [expectation], timeout: 2)
     }
 
-    func testReissue_response_base_45_decoding_fails() throws {
-        // Given
-        let responseCertificate = "UNCOMPRESSED NON BASE45 STRING"
-        let certificate = DigitalGreenCertificate.mock()
-        let expectation = XCTestExpectation()
-        try prepareURLSession(with: responseCertificate)
-
-        // When
-        sut.reissue([certificate])
-            .done { certificates in
-                XCTFail("Must not succeed.")
-            }
-            .catch { error in
-                XCTAssertTrue(error is Base45CodingError)
-                expectation.fulfill()
-            }
-
-        // Then
-        wait(for: [expectation], timeout: 2)
-    }
-
     func prepareURLSession(with certificate: String) throws {
         let response: [CertificateReissueResponse] = [
             .init(
@@ -118,47 +97,21 @@ class CertificateReissueRepositoryTests: XCTestCase {
         urlSession.data = responseData
     }
 
-    func testReissue_response_uncompression_fails() throws {
-        // Given
-        let data = try XCTUnwrap("UNCOMPRESSED STRING".data(using: .ascii))
-        let responseCertificate = Base45Coder.encode([UInt8](data))
-        let certificate = DigitalGreenCertificate.mock()
-        let expectation = XCTestExpectation()
-        try prepareURLSession(with: responseCertificate)
-
-        // When
-        sut.reissue([certificate])
-            .done { certificates in
-                XCTFail("Must not succeed.")
-            }
-            .catch { error in
-                XCTAssertTrue(error is Compression.Error)
-                expectation.fulfill()
-            }
-
-        // Then
-        wait(for: [expectation], timeout: 2)
-    }
-
     func testReissue_success() throws {
         // Given
-        let responseDgc = DigitalGreenCertificate.mock()
-        let data = try XCTUnwrap(JSONEncoder().encode(responseDgc))
-        let compressedData = try XCTUnwrap(data.compress(withAlgorithm: .zlib))
-        let responseCertificate = Base45Coder.encode([UInt8](compressedData))
-        let certificate = DigitalGreenCertificate.mock()
+        let responseCBORWebTokenString = qrCodeData
         let expectation = XCTestExpectation()
-        try prepareURLSession(with: responseCertificate)
+        try prepareURLSession(with: responseCBORWebTokenString)
 
         // When
-        sut.reissue([certificate])
-            .done { certificates in
+        sut.reissue([responseCBORWebTokenString])
+            .done { certificateStrings in
                 guard let data = self.urlSession.receivedHTTPRequest?.httpBody,
                 let requestBody = try? JSONDecoder().decode(CertificateReissueRequestBody.self, from: data) else { return }
                 XCTAssertTrue(requestBody.certificates[0].starts(with: "HC1:"))
-                XCTAssertEqual(certificates.count, 1)
-                guard let certificate = certificates.first else { return }
-                XCTAssertEqual(certificate, responseDgc)
+                XCTAssertEqual(certificateStrings.count, 1)
+                guard let certificateString = certificateStrings.first else { return }
+                XCTAssertEqual(certificateString, responseCBORWebTokenString)
                 expectation.fulfill()
             }
             .catch { error in
@@ -205,3 +158,5 @@ private extension CertificateReissueResponse {
         )
     }
 }
+
+private let qrCodeData = "HC1:6BFOXN*TS0BI$ZD4N9:9S6RCVN5+O30K3/XIV0W23NTDEMWK4MI6UOS03CR83KLBKAVN74.CL91/8K6%KEG3983NS9SVBHABVCNN95SWMPHQUHQN%A400H%UBT16Y51Y9AT1:+P6YBKD0:XB7NGJQOIS7I$H%T5+XO8YJMVHBZJF 9NSG:PICIG%*47%S%*48YIZ73423ZQT-EJDG3XW44$22CLY.IE.KD+2H0D3ZCU7JI$2K3JQH5-Y3$PA$HSCHBI I7995R5ZFQETU 9R*PP:+P*.1D9RYO05QD/8D3FC:XIBEIVG395EP1E+WEDJL8FF3DE0OA0D9E2LBHHNHL$EQ+-CVYCMBB:AV5AL5:4A93MOJLWT.C3FDA.-B97U: KMZNKASADIMKN2GFLF9$HF.3O.X21FDLW4L4OVIOE1M24OR:FTNP8EFVMP9/HWKP/HLIJL8JF8JF172OTTHO9YW2E6LS7WGYNDDSHRSFXT*LMK8P*G8QWD8%P%5GPPMEVMTHDBESW2L.TN8BBBDR9+JLDR/1JGIF8BS0IKT8LB1T7WLA:FI%JI50H:EK1"

@@ -26,19 +26,13 @@ public class CertificateReissueRepository: CertificateReissueRepositoryProtocol 
         self.urlSession = urlSession
     }
 
-    public func reissue(_ certificates: [DigitalGreenCertificate]) -> Promise<CertificateReissueRepositoryResponse> {
-        compressAndEncode(certificates)
-            .map(\.certificateReissueRequestBody)
-            .then(jsonEncoder.encodePromise)
+    public func reissue(_ cborWebTokens: [String]) -> Promise<CertificateReissueRepositoryResponse> {
+        jsonEncoder
+            .encodePromise(cborWebTokens.certificateReissueRequestBody)
             .map(reissueRequest)
             .then(urlSession.httpRequest)
             .then(jsonDecoder.decode)
-            .then(certificateReissueRepositoryResponse)
-    }
-
-    private func compressAndEncode(_ dgcs: [DigitalGreenCertificate]) -> Promise<[String]> {
-        let promises = dgcs.map(compressAndEncode)
-        return when(fulfilled: promises)
+            .map(certificateReissueRepositoryResponse)
     }
 
     private func reissueRequest(_ body: Data) -> URLRequest {
@@ -48,25 +42,8 @@ public class CertificateReissueRepository: CertificateReissueRepositoryProtocol 
         return request
     }
 
-    private func compressAndEncode(dgc: DigitalGreenCertificate) -> Promise<String> {
-        jsonEncoder
-            .encodePromise(dgc)
-            .then(\.compressed)
-            .then(\.base45Encode)
-            .map { $0.addPrefix() }
-    }
-
-    private func certificateReissueRepositoryResponse(_ response: [CertificateReissueResponse]) -> Promise<CertificateReissueRepositoryResponse> {
-        let promises = response.map(digitalGreenCertificate)
-        return when(fulfilled: promises)
-    }
-
-    private func digitalGreenCertificate(from response: CertificateReissueResponse) -> Promise<DigitalGreenCertificate> {
-        response.certificate
-            .stripPrefix()
-            .decodedBase45
-            .then(\.decompressed)
-            .then(jsonDecoder.decode)
+    private func certificateReissueRepositoryResponse(_ response: [CertificateReissueResponse]) -> CertificateReissueRepositoryResponse {
+        response.map(\.certificate)
     }
 }
 
