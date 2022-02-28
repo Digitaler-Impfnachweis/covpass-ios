@@ -123,7 +123,7 @@ class DCCCertLogicTests: XCTestCase {
     }
 
     func testValidVaccination() throws {
-        let cert = try repository.checkCertificate(CertificateMock.validCertificate).wait()
+        let cert = try repository.checkCertificate(CertificateMock.validCertificate2).wait()
 
         let res = try sut.validate(countryCode: "DE", validationClock: Date(), certificate: cert)
 
