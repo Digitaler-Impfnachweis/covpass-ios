@@ -10,6 +10,7 @@ import Foundation
 import CovPassUI
 import CovPassCommon
 import XCTest
+import PromiseKit
 
 class ReissueConsentRouterMock: ReissueConsentRouterProtocol {
     var sceneCoordinator: SceneCoordinator = SceneCoordinatorMock()
@@ -21,8 +22,9 @@ class ReissueConsentRouterMock: ReissueConsentRouterProtocol {
         showNextExpectation.fulfill()
     }
     
-    func cancel() {
+    func cancel() -> Promise<Bool> {
         cancelExpectation.fulfill()
+        return .value(true)
     }
     
     func routeToPrivacyStatement() {
