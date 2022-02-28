@@ -10,6 +10,7 @@ protocol ReissueConsentViewModelProtocol {
     var titleText: String { get }
     var subTitleText: String { get }
     var descriptionText: String { get }
+    var privacyHeadlineText: String { get }
     var hintTitle: String { get }
     var hintText: NSAttributedString { get }
     var dataPrivacyText: String { get }

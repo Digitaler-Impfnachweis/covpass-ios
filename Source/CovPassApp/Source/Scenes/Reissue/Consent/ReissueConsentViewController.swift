@@ -1,6 +1,10 @@
 import UIKit
 import CovPassUI
 
+private enum Constants {
+    static var customSpacingAfterDescription: CGFloat = 12
+}
+
 class ReissueConsentViewController: UIViewController {
 
     // MARK: - Properties
@@ -10,9 +14,11 @@ class ReissueConsentViewController: UIViewController {
     @IBOutlet var certStack: UIStackView!
     @IBOutlet var hintView: HintView!
     @IBOutlet var descriptionLabel: UILabel!
+    @IBOutlet var privacyHeadlineLabel: UILabel!
     @IBOutlet var dataPrivacyLabel: ListItemView!
     @IBOutlet var agreeButton: MainButton!
     @IBOutlet var disagreeButton: MainButton!
+    @IBOutlet var bodyStackView: UIStackView!
     
     private(set) var viewModel: ReissueConsentViewModelProtocol
 
@@ -59,6 +65,8 @@ class ReissueConsentViewController: UIViewController {
         viewModel.certItems.forEach { certStack.addArrangedSubview($0) }
         configureHintView()
         descriptionLabel.attributedText = viewModel.descriptionText.styledAs(.body)
+        bodyStackView.setCustomSpacing(Constants.customSpacingAfterDescription, after: descriptionLabel)
+        privacyHeadlineLabel.attributedText = viewModel.privacyHeadlineText.styledAs(.body).colored(.onBackground70)
         dataPrivacyLabel.textLabel.attributedText = viewModel.dataPrivacyText.styledAs(.header_3)
         dataPrivacyLabel.imageView.image = viewModel.dataPrivacyChecvron
         dataPrivacyLabel.showSeperator = true

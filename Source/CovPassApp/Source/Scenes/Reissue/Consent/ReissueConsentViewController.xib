@@ -12,11 +12,13 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ReissueConsentViewController" customModule="CovPassApp" customModuleProvider="target">
             <connections>
                 <outlet property="agreeButton" destination="7wS-xe-63Y" id="e1h-Qh-dCQ"/>
+                <outlet property="bodyStackView" destination="5aa-3B-3i2" id="pY0-n0-Hkc"/>
                 <outlet property="certStack" destination="K1m-bv-jQ4" id="iKJ-Js-DVe"/>
                 <outlet property="dataPrivacyLabel" destination="6UF-zH-oSW" id="hTt-XX-6FT"/>
                 <outlet property="descriptionLabel" destination="ntg-2y-2EX" id="Jc9-GB-pFK"/>
                 <outlet property="disagreeButton" destination="utY-LV-wK7" id="HDP-cq-J5c"/>
                 <outlet property="hintView" destination="aj4-bS-4dc" id="iyg-Db-A0C"/>
+                <outlet property="privacyHeadlineLabel" destination="kjA-QY-soQ" id="Ip9-qN-Vrd"/>
                 <outlet property="subTitleLabel" destination="8Yy-lU-jaa" id="YGT-Qr-N5m"/>
                 <outlet property="titleLabel" destination="2P2-6P-o40" id="zJc-R3-ECg"/>
                 <outlet property="view" destination="iN0-l3-epB" id="hOk-pt-qLg"/>
@@ -31,7 +33,7 @@
                     <rect key="frame" x="0.0" y="44" width="414" height="852"/>
                     <subviews>
                         <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PIB-M8-Hfd">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="1171"/>
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="1195"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="18" translatesAutoresizingMaskIntoConstraints="NO" id="50Y-0D-fNK">
                                     <rect key="frame" x="24" y="32" width="366" height="59"/>
@@ -55,7 +57,7 @@
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </stackView>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="5aa-3B-3i2">
-                                    <rect key="frame" x="24" y="539" width="366" height="152"/>
+                                    <rect key="frame" x="24" y="539" width="366" height="176"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" placeholderIntrinsicWidth="366" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="aj4-bS-4dc" userLabel="hint" customClass="HintView" customModule="CovPassUI">
                                             <rect key="frame" x="0.0" y="0.0" width="366" height="128"/>
@@ -67,14 +69,20 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" placeholderIntrinsicWidth="366" placeholderIntrinsicHeight="0.0" text=" " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kjA-QY-soQ" userLabel="privacyHeadline">
+                                            <rect key="frame" x="0.0" y="176" width="366" height="0.0"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                 </stackView>
                                 <view contentMode="scaleToFill" placeholderIntrinsicWidth="366" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="6UF-zH-oSW" userLabel="Privacy" customClass="ListItemView" customModule="CovPassUI">
-                                    <rect key="frame" x="0.0" y="707" width="414" height="128"/>
+                                    <rect key="frame" x="0.0" y="731" width="414" height="128"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 </view>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="av5-BX-VgY" userLabel="button stack view">
-                                    <rect key="frame" x="57" y="867" width="300" height="280"/>
+                                    <rect key="frame" x="57" y="891" width="300" height="280"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" placeholderIntrinsicWidth="300" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="7wS-xe-63Y" userLabel="agree" customClass="MainButton" customModule="CovPassUI">
                                             <rect key="frame" x="0.0" y="0.0" width="300" height="128"/>

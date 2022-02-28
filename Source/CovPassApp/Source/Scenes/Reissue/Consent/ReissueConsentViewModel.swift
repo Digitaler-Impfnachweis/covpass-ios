@@ -14,6 +14,7 @@ private enum Constants {
         static var hintBulletPoint2 = "certificate_renewal_consent_page_transfer_certificates_consent_box_copy_list_item_2".localized
         static var hintBulletPoint3 = "certificate_renewal_consent_page_transfer_certificates_consent_box_copy_list_item_3".localized
         static var description = "certificate_renewal_consent_page_transfer_certificates_copy".localized
+        static var privacyHeadline = "certificate_renewal_consent_page_transfer_certificates_headline_privacy_policy".localized
         static var privacyText = "certificate_renewal_consent_page_transfer_certificates_button_link".localized
         static var agree = "certificate_renewal_consent_page_transfer_certificates_confirmation_button".localized
         static var disagree = "certificate_renewal_consent_page_transfer_certificates_cancel_button".localized
@@ -32,6 +33,7 @@ class ReissueConsentViewModel: ReissueConsentViewModelProtocol {
     let titleText = Constants.Keys.title
     let subTitleText = Constants.Keys.subTitle
     let descriptionText = Constants.Keys.description
+    let privacyHeadlineText = Constants.Keys.privacyHeadline
     let hintTitle = Constants.Keys.hintTitle
     let hintText: NSAttributedString
     let dataPrivacyText = Constants.Keys.privacyText
