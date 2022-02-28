@@ -134,7 +134,7 @@ class CertificateDetailViewController: UIViewController {
         reissueHintView.containerView?.layer.borderColor = UIColor.neutralWhite.cgColor
         reissueHintView.titleLabel.attributedText = viewModel.reissueNotificationTitle.styledAs(.header_3)
         reissueHintView.bodyTextView.attributedText = viewModel.reissueNotificationBody.styledAs(.body)
-        reissueHintView.button.title = "Aktualisieren"
+        reissueHintView.button.title = viewModel.reissueButtonTitle
         reissueHintView.button.style = .alternative
         reissueHintView.button.action = viewModel.triggerReissue
     }

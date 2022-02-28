@@ -16,9 +16,8 @@ private enum Constants {
         enum Reissue {
             static let headline = "certificate_renewal_startpage_headline".localized
             static let description = "certificate_renewal_startpage_copy".localized
-            // TODO: clarify which key should be used
-            static let buttonTitle = "app_information_message_update_button".localized
             static let newText = "vaccination_certificate_overview_booster_vaccination_notification_icon_new".localized
+            static let reissueButtonTitle = "certificate_renewal_detail_view_notification_box_secondary_button".localized
         }
     }
 }
@@ -232,6 +231,8 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
     var reissueNotificationBody: String { Constants.Keys.Reissue.description }
 
     var reissueNotificationHighlightText: String { Constants.Keys.Reissue.newText }
+   
+    var reissueButtonTitle: String { Constants.Keys.Reissue.reissueButtonTitle }
 
     // MARK: - Lifecyle
 
