@@ -17,10 +17,10 @@ public protocol CertificateReissueRepositoryProtocol {
     /// authenticity and the integrity of the certificate, checks some formal rules of the content of the
     /// certificate and re-issues a new certificate with a different validity and/or re-encoded specifics
     /// (i.e. series encoding) than the original certificate.
-    /// - Parameter cborWebTokens: Array of  web tokens (QR-Codes) to reissue.
+    /// - Parameter webTokens: Array of  extended CBOR web tokens to reissue.
     /// - Returns: A response object, if reissuing succeeded. A `PromiseKit` error, if anything went
     /// wrong.
-    func reissue(_ cborWebTokens: [String]) -> Promise<CertificateReissueRepositoryResponse>
+    func reissue(_ webTokens: [ExtendedCBORWebToken]) -> Promise<CertificateReissueRepositoryResponse>
 }
 
-public typealias CertificateReissueRepositoryResponse = [String]
+public typealias CertificateReissueRepositoryResponse = [ExtendedCBORWebToken]

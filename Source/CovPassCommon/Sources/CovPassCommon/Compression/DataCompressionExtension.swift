@@ -43,7 +43,7 @@ public extension Data {
     /// Promise for decompressed data.
     var decompressed: Promise<Data> {
         Promise { seal in
-            if let data = decompress(withAlgorithm: .zlib) {
+            if let data = Compression.decompress(self) {
                 seal.fulfill(data)
             } else {
                 seal.reject(Compression.Error())

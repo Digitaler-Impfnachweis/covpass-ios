@@ -8,24 +8,24 @@ struct ReissueResultSceneFactory: ResolvableSceneFactory {
     // MARK: - Properties
     
     let router: ReissueResultRouterProtocol
-    let newToken: ExtendedCBORWebToken
-    let oldToken: ExtendedCBORWebToken
+    let newTokens: [ExtendedCBORWebToken]
+    let oldTokens: [ExtendedCBORWebToken]
     
     // MARK: - Lifecycle
     
     init(router: ReissueResultRouterProtocol,
-         newToken: ExtendedCBORWebToken,
-         oldToken: ExtendedCBORWebToken) {
+         newTokens: [ExtendedCBORWebToken],
+         oldTokens: [ExtendedCBORWebToken]) {
         self.router = router
-        self.newToken = newToken
-        self.oldToken = oldToken
+        self.newTokens = newTokens
+        self.oldTokens = oldTokens
     }
     
     func make(resolvable: Resolver<Void>) -> UIViewController {
         let viewModel = ReissueResultViewModel(router: router,
                                                resolver: resolvable,
-                                               newToken: newToken,
-                                               oldToken: oldToken)
+                                               newTokens: newTokens,
+                                               oldTokens: oldTokens)
         let viewController = ReissueResultViewController(viewModel: viewModel)
         return viewController
     }

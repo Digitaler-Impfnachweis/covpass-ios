@@ -17,7 +17,7 @@ class ReissueStartViewControllerSnapShotTests: BaseSnapShotTests {
         let (_, resolver) = Promise<Void>.pending()
         let vm = ReissueStartViewModel(router: ReissueStartRouter(sceneCoordinator: SceneCoordinatorMock()),
                                        resolver: resolver,
-                                       token: token)
+                                       tokens: [token])
         let vc = ReissueStartViewController(viewModel: vm)
         verifyView(view: vc.view, height: 1000)
     }

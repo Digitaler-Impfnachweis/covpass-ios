@@ -3,7 +3,6 @@ import CovPassCommon
 
 protocol ReissueStartViewModelProtocol {
     var delegate: ViewModelDelegate? { get set }
-    var token: ExtendedCBORWebToken { get }
     var certItem: CertificateItem { get }
     var titleText: String { get }
     var descriptionText: String { get }

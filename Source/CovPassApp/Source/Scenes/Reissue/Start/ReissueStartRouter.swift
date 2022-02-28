@@ -15,14 +15,10 @@ class ReissueStartRouter: ReissueStartRouterProtocol {
 
     // MARK: - Methods
 
-    func showNext(token: ExtendedCBORWebToken) {
+    func showNext(tokens: [ExtendedCBORWebToken]) {
         sceneCoordinator
             .push(ReissueConsentSceneFactory(router: ReissueConsentRouter(sceneCoordinator: sceneCoordinator),
-                                             token: token))
+                                             tokens: tokens))
             .cauterize()
-    }
-    
-    func cancel() {
-        sceneCoordinator.dimiss(animated: true)
     }
 }

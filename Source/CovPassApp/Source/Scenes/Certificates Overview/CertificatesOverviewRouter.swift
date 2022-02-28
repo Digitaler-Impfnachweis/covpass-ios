@@ -170,4 +170,13 @@ class CertificatesOverviewRouter: CertificatesOverviewRouterProtocol, DialogRout
                                                  userDefaults: userDefaults)
         )
     }
+
+    func showCertificatesReissue(for cborWebTokens: [ExtendedCBORWebToken]) -> Promise<Void> {
+        sceneCoordinator.present(
+            ReissueStartSceneFactory(
+                router: ReissueStartRouter(sceneCoordinator: sceneCoordinator),
+                tokens: cborWebTokens
+            )
+        )
+    }
 }

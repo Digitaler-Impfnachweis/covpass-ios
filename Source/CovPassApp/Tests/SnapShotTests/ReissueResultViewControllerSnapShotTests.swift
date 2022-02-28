@@ -17,8 +17,8 @@ class ReissueResultViewControllerSnapShotTests: BaseSnapShotTests {
         let (_, resolver) = Promise<Void>.pending()
         let vm = ReissueResultViewModel(router: ReissueResultRouter(sceneCoordinator: SceneCoordinatorMock()),
                                         resolver: resolver,
-                                        newToken: token,
-                                        oldToken: token)
+                                        newTokens: [token],
+                                        oldTokens: [token])
         let vc = ReissueResultViewController(viewModel: vm)
         verifyView(view: vc.view, height: 1000)
     }

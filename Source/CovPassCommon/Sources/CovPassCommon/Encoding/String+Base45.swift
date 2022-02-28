@@ -8,7 +8,7 @@
 import Foundation
 import PromiseKit
 
-extension String {
+public extension String {
     var decodedBase45: Promise<Data> {
         var promise: Promise<Data>
         do {

@@ -348,25 +348,7 @@ public class VaccinationRepository: VaccinationRepositoryProtocol {
     }
 
     public func matchedCertificates(for certificateList: CertificateList) -> [CertificatePair] {
-        var pairs = [CertificatePair]()
-        for cert in certificateList.certificates {
-            var exists = false
-            let isFavorite = certificateList.favoriteCertificateId == cert.vaccinationCertificate.hcert.dgc.uvci
-            for index in 0 ..< pairs.count {
-                let certDgc = cert.vaccinationCertificate.hcert.dgc
-                if pairs[index].certificates.map(\.vaccinationCertificate.hcert.dgc).contains(certDgc) {
-                    exists = true
-                    pairs[index].certificates.append(cert)
-                    if isFavorite {
-                        pairs[index].isFavorite = true
-                    }
-                }
-            }
-            if !exists {
-                pairs.append(CertificatePair(certificates: [cert], isFavorite: isFavorite))
-            }
-        }
-        return pairs
+        certificateList.certificatePairs
     }
 
     // MARK: - Private Helpers
@@ -376,6 +358,7 @@ public class VaccinationRepository: VaccinationRepositoryProtocol {
         guard let trustList = self.trustList else {
             throw ApplicationError.general("Missing TrustList")
         }
+
         let trustCert = try HCert.verify(message: cosePayload, trustList: trustList)
 
         let cosePayloadJsonData = try cosePayload.toJSON()

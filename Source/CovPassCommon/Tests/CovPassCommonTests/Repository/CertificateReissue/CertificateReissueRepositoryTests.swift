@@ -15,10 +15,18 @@ class CertificateReissueRepositoryTests: XCTestCase {
     override func setUpWithError() throws {
         urlSession = CertificateReissueURLSessionMock()
         let url = try XCTUnwrap(URL(string: "http://localhost"))
+        let trustListURL = Bundle.commonBundle.url(
+            forResource: "dsc",
+            withExtension: "json"
+        )!
+        let jsonDecoder = JSONDecoder()
+        let trustListData = try Data(contentsOf: trustListURL)
+        let trustList = try jsonDecoder.decode(TrustList.self, from: trustListData)
         sut = .init(
             baseURL: url,
-            jsonDecoder: JSONDecoder(),
+            jsonDecoder: jsonDecoder,
             jsonEncoder: JSONEncoder(),
+            trustList: trustList,
             urlSession: urlSession
         )
     }
@@ -30,7 +38,7 @@ class CertificateReissueRepositoryTests: XCTestCase {
 
     func testReissue_returned_data_has_wrong_format() {
         // Given
-        let cborWebToken = ""
+        let cborWebToken = CBORWebToken.mockVaccinationCertificate.extended()
         let expectation = XCTestExpectation()
 
         // When
@@ -39,26 +47,20 @@ class CertificateReissueRepositoryTests: XCTestCase {
                 XCTFail("Must not succeed.")
             }
             .catch { error in
-                guard let certificateReissueError = error as? CertificateReissueError else {
+                guard error as? DecodingError != nil else {
                     XCTFail("Wrong error: \(error)")
                     return
-                }
-                switch certificateReissueError {
-                case .decoder:
-                    break
-                default:
-                    XCTFail("Wrong error: \(certificateReissueError)")
                 }
                 expectation.fulfill()
             }
 
         // Then
-        wait(for: [expectation], timeout: 200)
+        wait(for: [expectation], timeout: 2)
     }
 
     func testReissue_http_error() {
         // Given
-        let cborWebToken = ""
+        let cborWebToken = CBORWebToken.mockVaccinationCertificate.extended()
         let expectation = XCTestExpectation()
         let expectedStatusCode = 542
         urlSession.error = CertificateReissueError.http(expectedStatusCode)
@@ -99,19 +101,18 @@ class CertificateReissueRepositoryTests: XCTestCase {
 
     func testReissue_success() throws {
         // Given
-        let responseCBORWebTokenString = qrCodeData
         let expectation = XCTestExpectation()
-        try prepareURLSession(with: responseCBORWebTokenString)
+        try prepareURLSession(with: qrCodeData)
 
         // When
-        sut.reissue([responseCBORWebTokenString])
-            .done { certificateStrings in
+        sut.reissue([ExtendedCBORWebToken(vaccinationCertificate: .mockVaccinationCertificate, vaccinationQRCodeData: qrCodeData)])
+            .done { webTokens in
                 guard let data = self.urlSession.receivedHTTPRequest?.httpBody,
                 let requestBody = try? JSONDecoder().decode(CertificateReissueRequestBody.self, from: data) else { return }
                 XCTAssertTrue(requestBody.certificates[0].starts(with: "HC1:"))
-                XCTAssertEqual(certificateStrings.count, 1)
-                guard let certificateString = certificateStrings.first else { return }
-                XCTAssertEqual(certificateString, responseCBORWebTokenString)
+                XCTAssertEqual(webTokens.count, 1)
+                guard let certificateString = webTokens.first?.vaccinationQRCodeData else { return }
+                XCTAssertEqual(certificateString, qrCodeData)
                 expectation.fulfill()
             }
             .catch { error in
@@ -159,4 +160,4 @@ private extension CertificateReissueResponse {
     }
 }
 
-private let qrCodeData = "HC1:6BFOXN*TS0BI$ZD4N9:9S6RCVN5+O30K3/XIV0W23NTDEMWK4MI6UOS03CR83KLBKAVN74.CL91/8K6%KEG3983NS9SVBHABVCNN95SWMPHQUHQN%A400H%UBT16Y51Y9AT1:+P6YBKD0:XB7NGJQOIS7I$H%T5+XO8YJMVHBZJF 9NSG:PICIG%*47%S%*48YIZ73423ZQT-EJDG3XW44$22CLY.IE.KD+2H0D3ZCU7JI$2K3JQH5-Y3$PA$HSCHBI I7995R5ZFQETU 9R*PP:+P*.1D9RYO05QD/8D3FC:XIBEIVG395EP1E+WEDJL8FF3DE0OA0D9E2LBHHNHL$EQ+-CVYCMBB:AV5AL5:4A93MOJLWT.C3FDA.-B97U: KMZNKASADIMKN2GFLF9$HF.3O.X21FDLW4L4OVIOE1M24OR:FTNP8EFVMP9/HWKP/HLIJL8JF8JF172OTTHO9YW2E6LS7WGYNDDSHRSFXT*LMK8P*G8QWD8%P%5GPPMEVMTHDBESW2L.TN8BBBDR9+JLDR/1JGIF8BS0IKT8LB1T7WLA:FI%JI50H:EK1"
+private let qrCodeData = "HC1:6BFOXN*TS0BI$ZD-PH-RJ 9M$0W%1Q0IIRF5 43JUB/EBINILC3A4DAJ9AIV.5E/GPWBIMDBDCA6JCFN8GGBYPLR-S E10EQ928GEQW2DVJ5UL8W2B0I1BMA:PCGJ0X3DYNAJQEJ/53OC*I289R73D%5CA10V.27AV43T2%K:XFPIM.A5:S9395*CBVZ0G.8PZ0CWC.XI/VBVGTKOJQMI-ZJYIJGDBQMI.XI+OJ$BIJ9FZHI4RFOA69E4MZ6WP4:/6N9R%EPXCROGO3HOWGOKEQEC5L64HX6IAS3DS2980IQODPUHLW$GAHLW 70SO:GOLIROGO3T59YLLYP-HQLTQ9R0+L69/9L:9GJBV9C1QD1217LPMIH-O92UQME6ZPQSTL*SHOQ13UQ-H6%J62YUYJAHN6XZQ4H9CG0/T7DVBWVH/UIMEGS/4X6G/2264D1-ST*QGTA4W7.Y7N31RO45MBAP6VYIPS5XKJ XBI5H 2S61SB02/35CM7/TTMT8425Z0CZ.A7-U 8MD/R1DTRAOQ7SLJ6E%DCKQJW2BL0YIA0ZCS0G94C.0NX40VFPA2"

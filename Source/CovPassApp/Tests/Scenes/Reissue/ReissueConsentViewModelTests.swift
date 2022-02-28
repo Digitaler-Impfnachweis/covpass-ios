@@ -23,8 +23,10 @@ class ReissueConsentViewModelTests: XCTestCase {
         mockRouter = ReissueConsentRouterMock()
         token = CBORWebToken.mockVaccinationCertificate.extended()
         sut = ReissueConsentViewModel(router: mockRouter,
-                                    resolver: resolver,
-                                    token: token)
+                                      resolver: resolver,
+                                      tokens: [token],
+                                      repository: CertificateReissueRepositoryMock(),
+                                      decoder: JSONDecoder())
     }
     
     override func tearDownWithError() throws {

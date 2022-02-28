@@ -24,10 +24,10 @@ class ReissueResultViewModel: ReissueResultViewModelProtocol {
     let oldCertTitle = Constants.Keys.oldCertTitle
     let deleteOldCertButtonTitle = Constants.Keys.deleteOldCertTitle
     let deleteOldCertLaterButtonTitle = Constants.Keys.deleteOldCertLaterTitle
-    let newToken: ExtendedCBORWebToken
     let newCertItem: CertificateItem
-    let oldToken: ExtendedCBORWebToken
     let oldCertItem: CertificateItem
+    private let newTokens: [ExtendedCBORWebToken]
+    private let oldTokens: [ExtendedCBORWebToken]
     private let resolver: Resolver<Void>
     private let router: ReissueResultRouterProtocol
     
@@ -35,15 +35,15 @@ class ReissueResultViewModel: ReissueResultViewModelProtocol {
     
     init(router: ReissueResultRouterProtocol,
          resolver: Resolver<Void>,
-         newToken: ExtendedCBORWebToken,
-         oldToken: ExtendedCBORWebToken) {
+         newTokens: [ExtendedCBORWebToken],
+         oldTokens: [ExtendedCBORWebToken]) {
         self.router = router
         self.resolver = resolver
-        self.newToken = newToken
-        self.oldToken = oldToken
-        self.newCertItem = newToken.certItem
+        self.newTokens = newTokens
+        self.oldTokens = oldTokens
+        self.newCertItem = newTokens[0].certItem
         // TODO: old Cert item maybe has to be set gray status background -> has to be checked if final logic has been added
-        self.oldCertItem = oldToken.certItem
+        self.oldCertItem = oldTokens[0].certItem
     }
     
     // MARK: - Methods

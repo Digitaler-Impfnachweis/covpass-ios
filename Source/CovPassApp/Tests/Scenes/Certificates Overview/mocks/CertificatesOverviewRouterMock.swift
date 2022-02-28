@@ -14,6 +14,7 @@ import XCTest
 class CertificatesOverviewRouterMock: CertificatesOverviewRouterProtocol {
     let showCheckSituationExpectation = XCTestExpectation(description: "showCheckSituationExpectation")
     let showDialogExpectation = XCTestExpectation(description: "showDialogExpectation")
+    let showCertificatesReissueExpectation = XCTestExpectation(description: "showCertificatesReissueExpectation")
     var sceneCoordinator: SceneCoordinator = SceneCoordinatorMock()
     func showCheckSituation(userDefaults: Persistence) -> Promise<Void> {
         showCheckSituationExpectation.fulfill()
@@ -71,4 +72,8 @@ class CertificatesOverviewRouterMock: CertificatesOverviewRouterProtocol {
     func toAppstoreCheckApp() {}
     func toFaqWebsite() {}
     func startValidationAsAService(with data: ValidationServiceInitialisation) {}
+    func showCertificatesReissue(for cborWebTokens: [ExtendedCBORWebToken]) -> Promise<Void> {
+        showCertificatesReissueExpectation.fulfill()
+        return .value
+    }
 }

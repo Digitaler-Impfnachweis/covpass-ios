@@ -28,7 +28,6 @@ class ReissueConsentViewModel: ReissueConsentViewModelProtocol {
 
     // MARK: - Properties
     weak var delegate: ViewModelDelegate?
-    let tokens: [ExtendedCBORWebToken]
     let certItems: [CertificateItem]
     let titleText = Constants.Keys.title
     let subTitleText = Constants.Keys.subTitle
@@ -40,16 +39,23 @@ class ReissueConsentViewModel: ReissueConsentViewModelProtocol {
     let dataPrivacyChecvron = Constants.Images.privacyChevron
     let buttonAgreeTitle = Constants.Keys.agree
     let buttonDisagreeTitle = Constants.Keys.disagree
+    private let repository: CertificateReissueRepositoryProtocol
     private let resolver: Resolver<Void>
     private let router: ReissueConsentRouterProtocol
-    
+    private let tokens: [ExtendedCBORWebToken]
+    private let decoder: JSONDecoder
+    private lazy var qrCodeData: [String] = tokens.map(\.vaccinationQRCodeData)
+
     // MARK: - Lifecyle
     
     init(router: ReissueConsentRouterProtocol,
          resolver: Resolver<Void>,
-         token: ExtendedCBORWebToken) {
-        // TODO: in invissions tokens are an array of tokens, the page before shows only one, seems like here has to be loaded other certificates from the keychain?
-        self.tokens = [token]
+         tokens: [ExtendedCBORWebToken],
+         repository: CertificateReissueRepositoryProtocol,
+         decoder: JSONDecoder) {
+        self.tokens = tokens
+        self.repository = repository
+        self.decoder = decoder
         self.router = router
         self.resolver = resolver
         self.certItems = tokens.compactMap{ $0.certItem }
@@ -64,8 +70,24 @@ class ReissueConsentViewModel: ReissueConsentViewModelProtocol {
     // MARK: - Methods
     
     func processAgree() {
-        // TODO: tokens has to be replaced. newToken and oldToken parameters here are only for demo purposes. After call is integrated, new Token will be that new reissued one.
-        router.showNext(newToken: tokens.first!, oldToken: tokens.first!)
+        repository
+            .reissue(tokens)
+            .done { [weak self] in
+                self?.handle(tokens: $0)
+            }
+            .catch { [weak self] in
+                self?.handle(reissueError: $0)
+            }
+    }
+
+    private func handle(tokens: [ExtendedCBORWebToken]) {
+        delegate?.viewModelDidUpdate()
+        router.showNext(newTokens: tokens, oldTokens: self.tokens)
+    }
+
+    private func handle(reissueError: Error) {
+        print("\(#file):\(#function) Error: \(reissueError)")
+        delegate?.viewModelUpdateDidFailWithError(reissueError)
     }
     
     func processDisagree() {

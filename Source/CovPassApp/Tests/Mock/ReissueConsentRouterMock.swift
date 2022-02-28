@@ -18,7 +18,7 @@ class ReissueConsentRouterMock: ReissueConsentRouterProtocol {
     let cancelExpectation = XCTestExpectation(description: "cancelExpectation")
     let routeToPrivacyExpectation = XCTestExpectation(description: "routeToPrivacyExpectation")
 
-    func showNext(newToken: ExtendedCBORWebToken, oldToken: ExtendedCBORWebToken) {
+    func showNext(newTokens: [ExtendedCBORWebToken], oldTokens: [ExtendedCBORWebToken]) {
         showNextExpectation.fulfill()
     }
     

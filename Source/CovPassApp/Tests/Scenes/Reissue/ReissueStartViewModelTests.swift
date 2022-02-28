@@ -16,21 +16,24 @@ class ReissueStartViewModelTests: XCTestCase {
     private var sut: ReissueStartViewModel!
     private var mockRouter: ReissueStartRouterMock!
     private var token: ExtendedCBORWebToken!
+    private var promise: Promise<Void>!
     
     override func setUpWithError() throws {
         try super.setUpWithError()
-        let (_, resolver) = Promise<Void>.pending()
+        let (promise, resolver) = Promise<Void>.pending()
+        self.promise = promise
         mockRouter = ReissueStartRouterMock()
         token = CBORWebToken.mockVaccinationCertificate.extended()
         sut = ReissueStartViewModel(router: mockRouter,
                                     resolver: resolver,
-                                    token: token)
+                                    tokens: [token])
     }
     
     override func tearDownWithError() throws {
         token = nil
         mockRouter = nil
         sut = nil
+        promise = nil
     }
     
     func testShowNext() {
@@ -41,9 +44,15 @@ class ReissueStartViewModelTests: XCTestCase {
     }
     
     func testProcessLater() {
+        // GIVEN
+        let expectation = XCTestExpectation()
         // WHEN
         sut.processLater()
         // THEN
-        wait(for: [mockRouter.cancelExpectation], timeout: 0.1)
+        promise.done { _ in
+            expectation.fulfill()
+        }
+        .cauterize()
+        wait(for: [expectation], timeout: 1)
     }
 }

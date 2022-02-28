@@ -10,7 +10,8 @@ import PromiseKit
 public class CertificateReissueRepositoryMock: CertificateReissueRepositoryProtocol {
     var reissueResponse: CertificateReissueRepositoryResponse = []
     var error: CertificateReissueError?
-    public func reissue(_ cborWebTokens: [String]) -> Promise<CertificateReissueRepositoryResponse> {
+    public init() {}
+    public func reissue(_ cborWebTokens: [ExtendedCBORWebToken]) -> Promise<CertificateReissueRepositoryResponse> {
         if let error = error {
             return .init(error: error)
         }

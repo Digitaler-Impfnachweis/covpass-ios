@@ -17,7 +17,9 @@ class ReissueConsentViewControllerSnapShotTests: BaseSnapShotTests {
         let (_, resolver) = Promise<Void>.pending()
         let vm = ReissueConsentViewModel(router: ReissueConsentRouter(sceneCoordinator: SceneCoordinatorMock()),
                                          resolver: resolver,
-                                         token: token)
+                                         tokens: [token],
+                                         repository: CertificateReissueRepositoryMock(),
+                                         decoder: JSONDecoder())
         let vc = ReissueConsentViewController(viewModel: vm)
         verifyView(view: vc.view, height: 1000)
     }

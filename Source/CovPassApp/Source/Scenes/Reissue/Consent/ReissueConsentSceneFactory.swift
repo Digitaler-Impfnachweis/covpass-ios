@@ -7,21 +7,26 @@ struct ReissueConsentSceneFactory: ResolvableSceneFactory {
     
     // MARK: - Properties
     
-    let router: ReissueConsentRouterProtocol
-    let token: ExtendedCBORWebToken
+    private let router: ReissueConsentRouterProtocol
+    private let tokens: [ExtendedCBORWebToken]
 
     // MARK: - Lifecycle
     
     init(router: ReissueConsentRouterProtocol,
-         token: ExtendedCBORWebToken) {
+         tokens: [ExtendedCBORWebToken]) {
         self.router = router
-        self.token = token
+        self.tokens = tokens
     }
     
     func make(resolvable: Resolver<Void>) -> UIViewController {
+        guard let repository = CertificateReissueRepository() else {
+            fatalError("Failed to instantiate repository.")
+        }
         let viewModel = ReissueConsentViewModel(router: router,
                                                 resolver: resolvable,
-                                                token: token)
+                                                tokens: tokens,
+                                                repository: repository,
+                                                decoder: JSONDecoder())
         let viewController = ReissueConsentViewController(viewModel: viewModel)
         return viewController
     }

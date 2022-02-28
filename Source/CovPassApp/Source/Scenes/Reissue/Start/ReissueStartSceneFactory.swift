@@ -7,21 +7,21 @@ struct ReissueStartSceneFactory: ResolvableSceneFactory {
     
     // MARK: - Properties
     
-    let router: ReissueStartRouterProtocol
-    let token: ExtendedCBORWebToken
+    private let router: ReissueStartRouterProtocol
+    private let tokens: [ExtendedCBORWebToken]
 
     // MARK: - Lifecycle
     
     init(router: ReissueStartRouterProtocol,
-         token: ExtendedCBORWebToken) {
+         tokens: [ExtendedCBORWebToken]) {
         self.router = router
-        self.token = token
+        self.tokens = tokens
     }
     
     func make(resolvable: Resolver<Void>) -> UIViewController {
         let viewModel = ReissueStartViewModel(router: router,
                                               resolver: resolvable,
-                                              token: token)
+                                              tokens: tokens)
         let viewController = ReissueStartViewController(viewModel: viewModel)
         let navigationController = UINavigationController(rootViewController: viewController)
         return navigationController

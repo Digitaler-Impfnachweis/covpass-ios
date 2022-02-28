@@ -276,6 +276,27 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         XCTAssertEqual(userDefaults.onboardingSelectedLogicTypeAlreadySeen, true)
     }
 
+    // TODO: Uncomment when "qualified for reissue" is implemented.
+//    func testShowNotificationsIfNeeded_showCertificatesReissueIfNeeded_shown() throws {
+//        // Given
+//        let router = CertificatesOverviewRouterMock()
+//        router.showCertificatesReissueExpectation.expectedFulfillmentCount = 2
+//        try configureSutAndRepository(
+//            with: router,
+//            certificates: [
+//                .mock(),
+//                CBORWebToken.mockVaccinationCertificateWithOtherName.extended()
+//            ]
+//        )
+//        sut.refresh()
+//
+//        // When
+//        sut.showNotificationsIfNeeded()
+//
+//        // Then
+//        wait(for: [router.showCertificatesReissueExpectation], timeout: 2)
+//    }
+
     func testRefresh_expiry_notification_token_is_valid() throws {
         // Given
         let router = CertificatesOverviewRouterMock()

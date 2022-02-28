@@ -17,7 +17,6 @@ class ReissueStartViewModel: ReissueStartViewModelProtocol {
     
     // MARK: - Properties
     weak var delegate: ViewModelDelegate?
-    let token: ExtendedCBORWebToken
     let certItem: CertificateItem
     let titleText = Constants.Keys.title
     let descriptionText = Constants.Keys.description
@@ -26,25 +25,26 @@ class ReissueStartViewModel: ReissueStartViewModelProtocol {
     let buttonLaterTitle = Constants.Keys.later
     private let resolver: Resolver<Void>
     private let router: ReissueStartRouterProtocol
+    private let tokens: [ExtendedCBORWebToken]
     
     // MARK: - Lifecyle
     
     init(router: ReissueStartRouterProtocol,
          resolver: Resolver<Void>,
-         token: ExtendedCBORWebToken) {
+         tokens: [ExtendedCBORWebToken]) {
         self.router = router
         self.resolver = resolver
-        self.token = token
-        self.certItem = token.certItem
+        self.tokens = tokens
+        self.certItem = tokens[0].certItem
     }
     
     // MARK: - Methods
     
     func processStart() {
-        router.showNext(token: token)
+        router.showNext(tokens: tokens)
     }
     
     func processLater() {
-        router.cancel()
+        resolver.fulfill_()
     }
 }

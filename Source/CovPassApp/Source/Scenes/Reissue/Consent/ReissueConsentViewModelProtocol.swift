@@ -5,7 +5,6 @@ import UIKit
 
 protocol ReissueConsentViewModelProtocol {
     var delegate: ViewModelDelegate? { get set }
-    var tokens: [ExtendedCBORWebToken] { get }
     var certItems: [CertificateItem] { get }
     var titleText: String { get }
     var subTitleText: String { get }

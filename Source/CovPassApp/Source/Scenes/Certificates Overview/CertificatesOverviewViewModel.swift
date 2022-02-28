@@ -258,8 +258,11 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
         .then {
             self.showBoosterNotificationIfNeeded()
         }
+        .then {
+            self.showCertificatesReissueIfNeeded()
+        }
         .catch { error in
-            print(error.localizedDescription)
+            print("\(#file):\(#function) Error: \(error.localizedDescription)")
         }
     }
     
@@ -270,7 +273,22 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
         userDefaults.onboardingSelectedLogicTypeAlreadySeen = true
         return router.showCheckSituation(userDefaults: userDefaults)
     }
-    
+
+    private func showCertificatesReissueIfNeeded() -> Guarantee<Void> {
+        let partitions = certificateList.certificates.partitionedByOwner
+        let showCertificatesReissuePromises = partitions
+            .filter(\.qualifiedForReissue)
+            .map(router.showCertificatesReissue(for:))
+        let guarantee = when(
+            fulfilled: showCertificatesReissuePromises.makeIterator(),
+            concurrently: 1
+        ).recover { errors in
+            .value([])
+        }.asVoid()
+
+        return guarantee
+    }
+
     private func payloadFromScannerResult(_ result: ScanResult) throws -> String {
         switch result {
         case let .success(payload):
@@ -419,7 +437,7 @@ private extension CertificatesOverviewViewModel {
 // MARK: - Booster Notifications
 
 extension CertificatesOverviewViewModel {
-    private func showBoosterNotificationIfNeeded() -> Promise<Void> {
+    private func showBoosterNotificationIfNeeded() -> Guarantee<Void> {
         firstly {
             repository.getCertificateList()
         }
@@ -434,9 +452,12 @@ extension CertificatesOverviewViewModel {
                     self.router.showBoosterNotification() 
                 }
         }
+        .recover { error in
+            print("\(#file):\(#function) Error: \(error).")
+        }
     }
     
-    private func showExpiryAlertIfNeeded() -> Promise<Void> {
+    private func showExpiryAlertIfNeeded() -> Guarantee<Void> {
         let tokens = tokensToShowExpirationAlertFor()
         for var token in tokens {
             token.wasExpiryAlertShown = true
