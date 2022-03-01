@@ -45,8 +45,13 @@ class CertificateDetailRouter: CertificateDetailRouterProtocol, DialogRouterProt
         )
     }
     
-    func showReissue(for token: ExtendedCBORWebToken? ) {
-        // TODO: route to reissue start; token optional above can be removed later
+    func showReissue(for tokens: [ExtendedCBORWebToken]) -> Promise<Void> {
+        sceneCoordinator.present(
+            ReissueStartSceneFactory(
+                router: ReissueStartRouter(sceneCoordinator: sceneCoordinator),
+                tokens: tokens
+            )
+        )
     }
     
 }

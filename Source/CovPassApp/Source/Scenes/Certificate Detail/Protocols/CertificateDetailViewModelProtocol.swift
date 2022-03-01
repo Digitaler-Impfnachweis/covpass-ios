@@ -32,6 +32,7 @@ protocol CertificateDetailViewModelProtocol {
     var reissueNotificationBody: String { get }
     var reissueNotificationHighlightText: String { get }
     var reissueButtonTitle: String { get }
+    var reissueNew: Bool { get }
     func refresh()
     func immunizationButtonTapped()
     func toggleFavorite()

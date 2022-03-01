@@ -31,8 +31,8 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
     private let boosterLogic: BoosterLogicProtocol
     private var certificateList = CertificateList(certificates: [])
     private var lastKnownFavoriteCertificateId: String?
-    private var userDefaults: Persistence
-    
+    private var userDefaults: UserDefaultsPersistence
+
     var certificatePairsSorted: [CertificatePair] {
         repository.matchedCertificates(for: certificateList).sorted(by: { c, _ -> Bool in c.isFavorite })
     }
@@ -70,7 +70,7 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
         repository: VaccinationRepositoryProtocol,
         certLogic: DCCCertLogicProtocol,
         boosterLogic: BoosterLogicProtocol,
-        userDefaults: Persistence
+        userDefaults: UserDefaultsPersistence
     ) {
         self.router = router
         self.repository = repository
@@ -273,7 +273,7 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
         userDefaults.onboardingSelectedLogicTypeAlreadySeen = true
         return router.showCheckSituation(userDefaults: userDefaults)
     }
-
+    
     private func showCertificatesReissueIfNeeded() -> Guarantee<Void> {
         let partitions = certificateList.certificates.partitionedByOwner
         let showCertificatesReissuePromises = partitions
@@ -334,9 +334,7 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
     }
     
     func showCertificate(_ certificate: ExtendedCBORWebToken) {
-        showCertificates(
-            certificateList.certificates.certificatePair(for: certificate)
-        )
+        showCertificates(certificateList.certificates.certificatePair(for: certificate))
     }
     
     private func showCertificates(_ certificates: [ExtendedCBORWebToken]) {
@@ -344,7 +342,7 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
             return
         }
         firstly {
-            router.showCertificates(certificates) 
+            router.showCertificates(certificates)
         }
         .cancelled {
             // User cancelled by back button or swipe gesture.

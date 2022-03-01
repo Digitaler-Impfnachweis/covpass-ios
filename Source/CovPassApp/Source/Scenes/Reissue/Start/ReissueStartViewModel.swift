@@ -41,7 +41,7 @@ class ReissueStartViewModel: ReissueStartViewModelProtocol {
     // MARK: - Methods
     
     func processStart() {
-        router.showNext(tokens: tokens)
+        router.showNext(tokens: tokens, resolver: resolver)
     }
     
     func processLater() {

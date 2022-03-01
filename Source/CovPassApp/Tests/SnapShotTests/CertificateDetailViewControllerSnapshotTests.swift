@@ -434,6 +434,7 @@ class CertificateDetailViewControllerSnapshotTests: BaseSnapShotTests {
 }
 
 struct CertificateDetailRouterMock: CertificateDetailRouterProtocol {
+    
     let expectationShowReissue = XCTestExpectation(description: "expectationShowReissue")
     
     func showCertificate(for token: ExtendedCBORWebToken) -> Promise<Void> {
@@ -447,9 +448,10 @@ struct CertificateDetailRouterMock: CertificateDetailRouterProtocol {
     func showWebview(_ url: URL) {
         
     }
-    
-    func showReissue(for token: ExtendedCBORWebToken?) {
+
+    func showReissue(for tokens: [ExtendedCBORWebToken]) -> Promise<Void> {
         expectationShowReissue.fulfill()
+        return .value
     }
 
     var sceneCoordinator: SceneCoordinator = SceneCoordinatorMock()

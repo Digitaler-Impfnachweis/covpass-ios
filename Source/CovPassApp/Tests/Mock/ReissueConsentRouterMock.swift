@@ -13,12 +13,13 @@ import XCTest
 import PromiseKit
 
 class ReissueConsentRouterMock: ReissueConsentRouterProtocol {
+
     var sceneCoordinator: SceneCoordinator = SceneCoordinatorMock()
     let showNextExpectation = XCTestExpectation(description: "showNextExpectation")
     let cancelExpectation = XCTestExpectation(description: "cancelExpectation")
     let routeToPrivacyExpectation = XCTestExpectation(description: "routeToPrivacyExpectation")
 
-    func showNext(newTokens: [ExtendedCBORWebToken], oldTokens: [ExtendedCBORWebToken]) {
+    func showNext(newTokens: [ExtendedCBORWebToken], oldTokens: [ExtendedCBORWebToken], resolver: Resolver<Void>) {
         showNextExpectation.fulfill()
     }
     

@@ -10,6 +10,7 @@ import Foundation
 import CovPassUI
 import CovPassCommon
 import XCTest
+import PromiseKit
 
 class ReissueStartRouterMock: ReissueStartRouterProtocol {
     
@@ -17,7 +18,7 @@ class ReissueStartRouterMock: ReissueStartRouterProtocol {
     let showNextExpectation = XCTestExpectation(description: "showNextExpectation")
     let cancelExpectation = XCTestExpectation(description: "cancelExpectation")
 
-    func showNext(tokens: [ExtendedCBORWebToken]) {
+    func showNext(tokens: [ExtendedCBORWebToken], resolver: Resolver<Void>) {
         showNextExpectation.fulfill()
     }
     

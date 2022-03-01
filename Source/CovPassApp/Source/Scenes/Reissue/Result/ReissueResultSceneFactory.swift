@@ -3,29 +3,32 @@ import PromiseKit
 import CovPassUI
 import CovPassCommon
 
-struct ReissueResultSceneFactory: ResolvableSceneFactory {
+struct ReissueResultSceneFactory: SceneFactory {
     
     // MARK: - Properties
     
-    let router: ReissueResultRouterProtocol
-    let newTokens: [ExtendedCBORWebToken]
-    let oldTokens: [ExtendedCBORWebToken]
-    
+    private let router: ReissueResultRouterProtocol
+    private let newTokens: [ExtendedCBORWebToken]
+    private let oldTokens: [ExtendedCBORWebToken]
+    private let resolver: Resolver<Void>
+
     // MARK: - Lifecycle
     
     init(router: ReissueResultRouterProtocol,
          newTokens: [ExtendedCBORWebToken],
-         oldTokens: [ExtendedCBORWebToken]) {
+         oldTokens: [ExtendedCBORWebToken],
+         resolver: Resolver<Void>) {
         self.router = router
         self.newTokens = newTokens
         self.oldTokens = oldTokens
+        self.resolver = resolver
     }
     
-    func make(resolvable: Resolver<Void>) -> UIViewController {
+    func make() -> UIViewController {
         let repository = VaccinationRepository.create()
         let viewModel = ReissueResultViewModel(router: router,
                                                vaccinationRepository: repository,
-                                               resolver: resolvable,
+                                               resolver: resolver,
                                                newTokens: newTokens,
                                                oldTokens: oldTokens)
         let viewController = ReissueResultViewController(viewModel: viewModel)

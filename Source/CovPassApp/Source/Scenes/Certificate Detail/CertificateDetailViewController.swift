@@ -130,6 +130,7 @@ class CertificateDetailViewController: UIViewController {
     private func setupReissueHintView() {
         reissueHintView.isHidden = !viewModel.showReissueNotification
         reissueHintView.topRightLabel.text = viewModel.reissueNotificationHighlightText
+        reissueHintView.topRightLabel.isHidden = !viewModel.reissueNew
         reissueHintView.containerView.backgroundColor = .neutralWhite
         reissueHintView.containerView?.layer.borderColor = UIColor.neutralWhite.cgColor
         reissueHintView.titleLabel.attributedText = viewModel.reissueNotificationTitle.styledAs(.header_3)

@@ -87,7 +87,7 @@ class ReissueConsentViewModel: ReissueConsentViewModelProtocol {
 
     private func handle(tokens: [ExtendedCBORWebToken]) {
         delegate?.viewModelDidUpdate()
-        router.showNext(newTokens: tokens, oldTokens: self.tokens)
+        router.showNext(newTokens: tokens, oldTokens: self.tokens, resolver: resolver)
     }
 
     private func handle(reissueError: Error) {

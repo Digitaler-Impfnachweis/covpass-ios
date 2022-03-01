@@ -23,6 +23,7 @@ private enum Constants {
 }
 
 class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
+
     // MARK: - Properties
 
     weak var delegate: ViewModelDelegate?
@@ -226,13 +227,15 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
     
     var showReissueNotification: Bool { false }
 
-    var reissueNotificationTitle: String { Constants.Keys.Reissue.headline }
+    var reissueNotificationTitle = Constants.Keys.Reissue.headline
 
-    var reissueNotificationBody: String { Constants.Keys.Reissue.description }
+    var reissueNotificationBody = Constants.Keys.Reissue.description
 
-    var reissueNotificationHighlightText: String { Constants.Keys.Reissue.newText }
+    var reissueNotificationHighlightText = Constants.Keys.Reissue.newText
    
-    var reissueButtonTitle: String { Constants.Keys.Reissue.reissueButtonTitle }
+    var reissueButtonTitle = Constants.Keys.Reissue.reissueButtonTitle
+
+    var reissueNew: Bool
 
     // MARK: - Lifecyle
 
@@ -249,6 +252,8 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
         self.certificates = certificates
         boosterCandidate = boosterLogic.checkCertificates(certificates)
         resolver = resolvable
+        // TODO: add logic to reissue new
+        reissueNew = false
     }
 
     // MARK: - Methods
@@ -307,14 +312,19 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
             self?.router.showUnexpectedErrorDialog(error)
         }
     }
-
+    
     func updateBoosterCandiate() {
         guard var candidate = boosterCandidate, candidate.state == .new else { return }
         candidate.state = .qualified
         boosterLogic.updateBoosterCandidate(candidate)
     }
-    
+
     func triggerReissue() {
-        router.showReissue(for: nil)
+        // TODO: add .filterBoosterAfterVaccinationAfterRecovery after it is available
+        router.showReissue(for: certificates)
+            .ensure {
+                self.delegate?.viewModelDidUpdate()
+            }
+            .cauterize()
     }
 }
