@@ -34,12 +34,12 @@ public class Vaccination: Codable {
 
     /// `True` if vaccination is a booster vaccination (J&J 2/2, all other vaccination 3/3)
     public var isBoosted: Bool {
-        (mp == MedicalProduct.johnsonjohnson.rawValue && dn >= 2) || dn >= 3 || dn > sd
+        (isJohnsonJohnson && dn >= 2) || dn >= 3 || dn > sd
     }
 
     public var isFullImmunizationAfterRecovery: Bool {
         let allExceptJJ = [MedicalProduct.biontech.rawValue, MedicalProduct.moderna.rawValue, MedicalProduct.astrazeneca.rawValue]
-        return (sd == 1 && dn == 1 && allExceptJJ.contains(mp))
+        return (isSingleDoseComplete && allExceptJJ.contains(mp))
     }
 
     /// Date when the full immunization is valid
@@ -173,6 +173,30 @@ public extension Vaccination {
 
     /// UVCI without `URN:UVCI:` prefix
     var ciDisplayName: String {
-        return ci.stripUVCIPrefix()
+        ci.stripUVCIPrefix()
+    }
+    
+    var isSingleDoseComplete: Bool {
+        sd == 1 && dn == 1
+    }
+    
+    var isDoubleDoseComplete: Bool {
+        sd == 2 && dn == 2
+    }
+    
+    var isJohnsonJohnson: Bool {
+        mp == MedicalProduct.johnsonjohnson.rawValue
+    }
+    
+    var isModerna: Bool {
+        mp == MedicalProduct.moderna.rawValue
+    }
+    
+    var isBiontech: Bool {
+        mp == MedicalProduct.biontech.rawValue
+    }
+    
+    var isAstrazeneca: Bool {
+        mp == MedicalProduct.astrazeneca.rawValue
     }
 }

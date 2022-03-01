@@ -38,9 +38,19 @@ extension CBORWebToken {
         hcert.dgc.v?.first?.dt = date
         return self
     }
-
+    
     func doseNumber(_ dn: Int) -> Self {
         hcert.dgc.v?.first?.dn = dn
+        return self
+    }
+    
+    func seriesOfDoses(_ sd: Int) -> Self {
+        hcert.dgc.v?.first?.sd = sd
+        return self
+    }
+    
+    func medicalProduct(_ mp: MedicalProduct) -> Self {
+        hcert.dgc.v?.first?.mp = mp.rawValue
         return self
     }
 

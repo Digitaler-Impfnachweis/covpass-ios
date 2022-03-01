@@ -12,6 +12,121 @@ import Foundation
 import XCTest
 
 class VaccinationTests: XCTestCase {
+    
+    var sut: Vaccination!
+    
+    override func setUpWithError() throws {
+        sut = Vaccination(tg: "", vp: "", mp: "", ma: "", dn: 1, sd: 1, dt: Date(), co: "", is: "", ci: "")
+    }
+    
+    override func tearDownWithError() throws {
+        sut = nil
+    }
+    
+    func testIsJohnsonJohnson() {
+        // WHEN
+        sut.mp = "EU/1/20/1525"
+        // THEN
+        XCTAssertTrue(sut.isJohnsonJohnson)
+    }
+    
+    func testIsBiontech() {
+        // WHEN
+        sut.mp = "EU/1/20/1528"
+        // THEN
+        XCTAssertTrue(sut.isBiontech)
+    }
+    
+    func testIsModerna() {
+        // WHEN
+        sut.mp = "EU/1/20/1507"
+        // THEN
+        XCTAssertTrue(sut.isModerna)
+    }
+    
+    func testIsSingleDoseComplete() {
+        // WHEN
+        sut.dn = 1
+        sut.sd = 1
+        // THEN
+        XCTAssertTrue(sut.isSingleDoseComplete)
+    }
+    
+    func testIsDoubleDoseComplete() {
+        // WHEN
+        sut.dn = 2
+        sut.sd = 2
+        // THEN
+        XCTAssertTrue(sut.isDoubleDoseComplete)
+    }
+    
+    func testIsAstrazeneca() {
+        // WHEN
+        sut.mp = "EU/1/21/1529"
+        // THEN
+        XCTAssertTrue(sut.isAstrazeneca)
+    }
+    
+    func testIsNotJohnsonJohnson() {
+        // WHEN
+        sut.mp = "FOO"
+        // THEN
+        XCTAssertFalse(sut.isJohnsonJohnson)
+    }
+    
+    func testIsNotBiontech() {
+        // WHEN
+        sut.mp = "FOO"
+        // THEN
+        XCTAssertFalse(sut.isBiontech)
+    }
+    
+    func testIsNotModerna() {
+        // WHEN
+        sut.mp = "FOO"
+        // THEN
+        XCTAssertFalse(sut.isModerna)
+    }
+    
+    func testIsNotAstrazeneca() {
+        // WHEN
+        sut.mp = "FOO"
+        // THEN
+        XCTAssertFalse(sut.isAstrazeneca)
+    }
+    
+    func testIsNotSingleDoseComplete() {
+        // WHEN
+        sut.dn = 2
+        sut.sd = 1
+        // THEN
+        XCTAssertFalse(sut.isSingleDoseComplete)
+    }
+    
+    func testIsNotSingleDoseComplete2() {
+        // WHEN
+        sut.dn = 1
+        sut.sd = 2
+        // THEN
+        XCTAssertFalse(sut.isSingleDoseComplete)
+    }
+    
+    func testIsNotDoubleDoseComplete() {
+        // WHEN
+        sut.dn = 1
+        sut.sd = 2
+        // THEN
+        XCTAssertFalse(sut.isDoubleDoseComplete)
+    }
+    
+    func testIsNotDoubleDoseComplete2() {
+        // WHEN
+        sut.dn = 2
+        sut.sd = 1
+        // THEN
+        XCTAssertFalse(sut.isDoubleDoseComplete)
+    }
+    
     func testDecoding() {
         let jsonData = Data.json("Vaccination")
         let sut = try! JSONDecoder().decode(Vaccination.self, from: jsonData)

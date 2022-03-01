@@ -114,21 +114,3 @@ public struct DigitalGreenCertificate: Codable {
         try container.encode(ver, forKey: .ver)
     }
 }
-
-extension DigitalGreenCertificate: Equatable {
-    public static func == (lhs: DigitalGreenCertificate, rhs: DigitalGreenCertificate) -> Bool {
-        return lhs.nam == rhs.nam && lhs.dob == rhs.dob
-    }
-}
-
-extension DigitalGreenCertificate {
-    public var isFullyImmunized: Bool {
-        guard let result = v?.filter({ $0.fullImmunization }) else { return false }
-        return !result.isEmpty
-    }
-    
-    public var isPCR: Bool {
-        guard let result = t?.filter({ $0.isPCR }) else { return false }
-        return !result.isEmpty
-    }
- }
