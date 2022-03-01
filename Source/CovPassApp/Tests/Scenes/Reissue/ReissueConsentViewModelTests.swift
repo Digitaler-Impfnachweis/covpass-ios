@@ -25,7 +25,8 @@ class ReissueConsentViewModelTests: XCTestCase {
         sut = ReissueConsentViewModel(router: mockRouter,
                                       resolver: resolver,
                                       tokens: [token],
-                                      repository: CertificateReissueRepositoryMock(),
+                                      reissueRepository: CertificateReissueRepositoryMock(),
+                                      vaccinationRepository: VaccinationRepositoryMock(),
                                       decoder: JSONDecoder())
     }
     

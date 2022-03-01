@@ -29,14 +29,15 @@ class ReissueResultViewController: UIViewController {
         super.viewDidLoad()
         viewModel.delegate = self
         updateView()
+        configureActions()
     }
 
     // MARK: - Methods
     
     
     private func configureActions() {
-        deleteOldCertButton.action = viewModel.deleteOldToken
-        deleterOldCertLaterButton.action = viewModel.deleteOldToken
+        deleteOldCertButton.action = viewModel.deleteOldTokens
+        deleterOldCertLaterButton.action = viewModel.deleteOldTokensLater
     }
     
     func updateView() {

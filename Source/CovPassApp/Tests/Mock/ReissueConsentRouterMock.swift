@@ -22,9 +22,9 @@ class ReissueConsentRouterMock: ReissueConsentRouterProtocol {
         showNextExpectation.fulfill()
     }
     
-    func cancel() -> Promise<Bool> {
+    func cancel(resolver:Resolver<Void>)  {
         cancelExpectation.fulfill()
-        return .value(true)
+        resolver.fulfill_()
     }
     
     func routeToPrivacyStatement() {

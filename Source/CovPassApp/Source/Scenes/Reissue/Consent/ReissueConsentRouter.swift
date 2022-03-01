@@ -38,20 +38,16 @@ class ReissueConsentRouter: ReissueConsentRouterProtocol, DialogRouterProtocol {
             .cauterize()
     }
     
-    func cancel() -> Promise<Bool> {
-        .init { resolver in
-            showDialog(title: "",
-                       message: Constants.Text.Alert.Cancellation.message,
-                       actions: [
-                        DialogAction(title: Constants.Text.Alert.Cancellation.ok, style: UIAlertAction.Style.default, isEnabled: true, completion: { _ in
-                            return resolver.fulfill(false)
-                        }),
-                        DialogAction(title: Constants.Text.Alert.Cancellation.cancel, style: UIAlertAction.Style.destructive, isEnabled: true, completion: { _ in
-                            self.sceneCoordinator.dimiss(animated: true)
-                            return resolver.fulfill(true)
-                        })],
-                       style: .alert)
-        }
+    func cancel(resolver: Resolver<Void>) {
+        showDialog(title: "",
+                   message: Constants.Text.Alert.Cancellation.message,
+                   actions: [
+                    DialogAction(title: Constants.Text.Alert.Cancellation.ok, style: UIAlertAction.Style.default, isEnabled: true, completion: { _ in }),
+                    DialogAction(title: Constants.Text.Alert.Cancellation.cancel, style: UIAlertAction.Style.destructive, isEnabled: true, completion: { [weak self] _ in
+                        resolver.fulfill_()
+                        self?.sceneCoordinator.dimiss(animated: true)
+                    })],
+                   style: .alert)
     }
     
     func routeToPrivacyStatement() {

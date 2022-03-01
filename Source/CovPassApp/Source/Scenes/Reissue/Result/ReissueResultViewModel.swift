@@ -30,10 +30,12 @@ class ReissueResultViewModel: ReissueResultViewModelProtocol {
     private let oldTokens: [ExtendedCBORWebToken]
     private let resolver: Resolver<Void>
     private let router: ReissueResultRouterProtocol
+    private let repository: VaccinationRepositoryProtocol
     
     // MARK: - Lifecyle
     
     init(router: ReissueResultRouterProtocol,
+         vaccinationRepository: VaccinationRepositoryProtocol,
          resolver: Resolver<Void>,
          newTokens: [ExtendedCBORWebToken],
          oldTokens: [ExtendedCBORWebToken]) {
@@ -44,17 +46,24 @@ class ReissueResultViewModel: ReissueResultViewModelProtocol {
         self.newCertItem = newTokens[0].certItem
         // TODO: old Cert item maybe has to be set gray status background -> has to be checked if final logic has been added
         self.oldCertItem = oldTokens[0].certItem
+        self.repository = vaccinationRepository
     }
     
     // MARK: - Methods
     
-    func deleteOldToken() {
-        // TODO: delete old token
-        router.sceneCoordinator.dimiss(animated: true)
+    func deleteOldTokens() {
+        let promises = oldTokens.map(repository.delete(_:))
+        when(fulfilled: promises.makeIterator(), concurrently: 1)
+            .done { [weak self] _ in
+                self?.resolver.fulfill_()
+                self?.router.dismiss()
+            }
+            .catch { error in
+                print("\(#file):\(#function) Error: \(error).")
+            }
     }
     
-    func deleteOldTokenLater() {
-        // TODO: delete old token later
-        router.sceneCoordinator.dimiss(animated: true)
+    func deleteOldTokensLater() {
+        resolver.fulfill_()
     }
 }

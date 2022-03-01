@@ -16,6 +16,7 @@ class ReissueResultViewControllerSnapShotTests: BaseSnapShotTests {
         let token = CBORWebToken.mockVaccinationCertificate.extended()
         let (_, resolver) = Promise<Void>.pending()
         let vm = ReissueResultViewModel(router: ReissueResultRouter(sceneCoordinator: SceneCoordinatorMock()),
+                                        vaccinationRepository: VaccinationRepositoryMock(),
                                         resolver: resolver,
                                         newTokens: [token],
                                         oldTokens: [token])

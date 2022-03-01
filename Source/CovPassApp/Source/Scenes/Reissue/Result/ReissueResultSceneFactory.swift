@@ -22,7 +22,9 @@ struct ReissueResultSceneFactory: ResolvableSceneFactory {
     }
     
     func make(resolvable: Resolver<Void>) -> UIViewController {
+        let repository = VaccinationRepository.create()
         let viewModel = ReissueResultViewModel(router: router,
+                                               vaccinationRepository: repository,
                                                resolver: resolvable,
                                                newTokens: newTokens,
                                                oldTokens: oldTokens)

@@ -14,4 +14,7 @@ class ReissueResultRouter: ReissueResultRouterProtocol {
 
     // MARK: - Methods
 
+    func dismiss() {
+        sceneCoordinator.dimiss(animated: true)
+    }
 }

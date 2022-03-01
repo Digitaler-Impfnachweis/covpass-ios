@@ -6,6 +6,6 @@ import PromiseKit
 protocol ReissueConsentRouterProtocol: RouterProtocol {
     func showNext(newTokens: [ExtendedCBORWebToken],
                   oldTokens: [ExtendedCBORWebToken])
-    func cancel() -> Promise<Bool>
+    func cancel(resolver: Resolver<Void>)
     func routeToPrivacyStatement()
 }

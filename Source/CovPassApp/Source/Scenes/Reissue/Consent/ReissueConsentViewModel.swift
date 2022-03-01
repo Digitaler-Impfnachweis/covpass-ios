@@ -39,7 +39,8 @@ class ReissueConsentViewModel: ReissueConsentViewModelProtocol {
     let dataPrivacyChecvron = Constants.Images.privacyChevron
     let buttonAgreeTitle = Constants.Keys.agree
     let buttonDisagreeTitle = Constants.Keys.disagree
-    private let repository: CertificateReissueRepositoryProtocol
+    private let reissueRepository: CertificateReissueRepositoryProtocol
+    private let vaccinationRepository: VaccinationRepositoryProtocol
     private let resolver: Resolver<Void>
     private let router: ReissueConsentRouterProtocol
     private let tokens: [ExtendedCBORWebToken]
@@ -51,10 +52,12 @@ class ReissueConsentViewModel: ReissueConsentViewModelProtocol {
     init(router: ReissueConsentRouterProtocol,
          resolver: Resolver<Void>,
          tokens: [ExtendedCBORWebToken],
-         repository: CertificateReissueRepositoryProtocol,
+         reissueRepository: CertificateReissueRepositoryProtocol,
+         vaccinationRepository: VaccinationRepositoryProtocol,
          decoder: JSONDecoder) {
         self.tokens = tokens
-        self.repository = repository
+        self.reissueRepository = reissueRepository
+        self.vaccinationRepository = vaccinationRepository
         self.decoder = decoder
         self.router = router
         self.resolver = resolver
@@ -70,10 +73,12 @@ class ReissueConsentViewModel: ReissueConsentViewModelProtocol {
     // MARK: - Methods
     
     func processAgree() {
-        repository
+        reissueRepository
             .reissue(tokens)
-            .done { [weak self] in
-                self?.handle(tokens: $0)
+            .map { CertificateList(certificates: $0) }
+            .then(vaccinationRepository.saveCertificateList)
+            .done { [weak self] certificateList in
+                self?.handle(tokens: certificateList.certificates)
             }
             .catch { [weak self] in
                 self?.handle(reissueError: $0)
@@ -91,7 +96,7 @@ class ReissueConsentViewModel: ReissueConsentViewModelProtocol {
     }
     
     func processDisagree() {
-        router.cancel()
+        router.cancel(resolver: resolver)
     }
     
     func processPrivacyStatement() {

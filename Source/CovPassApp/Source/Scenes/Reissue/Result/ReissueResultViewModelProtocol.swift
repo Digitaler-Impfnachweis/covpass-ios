@@ -11,6 +11,6 @@ protocol ReissueResultViewModelProtocol {
     var oldCertItem: CertificateItem { get }
     var deleteOldCertButtonTitle: String { get }
     var deleteOldCertLaterButtonTitle: String { get }
-    func deleteOldToken()
-    func deleteOldTokenLater()
+    func deleteOldTokens()
+    func deleteOldTokensLater()
 }

@@ -19,13 +19,15 @@ struct ReissueConsentSceneFactory: ResolvableSceneFactory {
     }
     
     func make(resolvable: Resolver<Void>) -> UIViewController {
-        guard let repository = CertificateReissueRepository() else {
+        guard let reissueRepository = CertificateReissueRepository() else {
             fatalError("Failed to instantiate repository.")
         }
+        let vaccinationRepository = VaccinationRepository.create()
         let viewModel = ReissueConsentViewModel(router: router,
                                                 resolver: resolvable,
                                                 tokens: tokens,
-                                                repository: repository,
+                                                reissueRepository: reissueRepository,
+                                                vaccinationRepository: vaccinationRepository,
                                                 decoder: JSONDecoder())
         let viewController = ReissueConsentViewController(viewModel: viewModel)
         return viewController

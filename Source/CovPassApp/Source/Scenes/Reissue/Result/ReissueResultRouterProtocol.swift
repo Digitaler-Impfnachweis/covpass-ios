@@ -1,3 +1,5 @@
 import CovPassUI
 
-protocol ReissueResultRouterProtocol: RouterProtocol {}
+protocol ReissueResultRouterProtocol: RouterProtocol {
+    func dismiss()
+}
