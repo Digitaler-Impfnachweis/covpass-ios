@@ -294,17 +294,21 @@ class GProofViewModel: GProofViewModelProtocol {
     }
     
     func showFirstCardResult() {
-        router.showCertificate(firstResult?.certificate,
+        router
+            .showCertificate(firstResult?.certificate,
                                _2GContext: true,
                                userDefaults: userDefaults,
                                buttonHidden: true)
+            .cauterize()
     }
     
     func showSecondCardResult() {
-        router.showCertificate(secondResult?.certificate,
+        router
+            .showCertificate(secondResult?.certificate,
                                _2GContext: true,
                                userDefaults: userDefaults,
                                buttonHidden: true)
+            .cauterize()
     }
     
 

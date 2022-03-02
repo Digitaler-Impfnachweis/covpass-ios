@@ -39,15 +39,17 @@ class ValidatorOverviewRouter: ValidatorOverviewRouterProtocol {
     func showCertificate(_ certificate: CBORWebToken?,
                          _2GContext: Bool,
                          userDefaults: Persistence) {
-        sceneCoordinator.present(
-            ValidationResultSceneFactory(
-                router: ValidationResultRouter(sceneCoordinator: sceneCoordinator),
-                certificate: certificate,
-                error: nil,
-                _2GContext: _2GContext,
-                userDefaults: userDefaults
+        sceneCoordinator
+            .present(
+                ValidationResultSceneFactory(
+                    router: ValidationResultRouter(sceneCoordinator: sceneCoordinator),
+                    certificate: certificate,
+                    error: nil,
+                    _2GContext: _2GContext,
+                    userDefaults: userDefaults
+                )
             )
-        )
+            .cauterize()
     }
     
     func showAppInformation(userDefaults: Persistence) {
@@ -78,14 +80,16 @@ class ValidatorOverviewRouter: ValidatorOverviewRouterProtocol {
                     certLogic: DCCCertLogicProtocol,
                     userDefaults: Persistence,
                     boosterAsTest: Bool) {
-        sceneCoordinator.present(
-            GProofSceneFactory(initialToken: initialToken,
-                               router: GProofRouter(sceneCoordinator: sceneCoordinator),
-                               repository: repository,
-                               certLogic: certLogic,
-                               userDefaults: userDefaults,
-                               boosterAsTest: boosterAsTest)
-        )
+        sceneCoordinator
+            .present(
+                GProofSceneFactory(initialToken: initialToken,
+                                   router: GProofRouter(sceneCoordinator: sceneCoordinator),
+                                   repository: repository,
+                                   certLogic: certLogic,
+                                   userDefaults: userDefaults,
+                                   boosterAsTest: boosterAsTest)
+            )
+            .cauterize()
     }
     
     func showCheckSituation(userDefaults: Persistence) -> Promise<Void> {

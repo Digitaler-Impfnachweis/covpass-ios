@@ -91,8 +91,8 @@ class ReissueConsentViewModel: ReissueConsentViewModelProtocol {
     }
 
     private func handle(reissueError: Error) {
-        print("\(#file):\(#function) Error: \(reissueError)")
         delegate?.viewModelUpdateDidFailWithError(reissueError)
+        router.showError(reissueError, resolver: resolver)
     }
     
     func processDisagree() {

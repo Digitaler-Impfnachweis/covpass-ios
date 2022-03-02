@@ -19,6 +19,7 @@ public class VaccinationRepositoryMock: VaccinationRepositoryProtocol {
     var certificates: [ExtendedCBORWebToken] = []
     var certPair: [CertificatePair] = []
     var shouldTrustListUpdate: Bool = true
+    var deleteError: Error?
     
     public func matchedCertificates(for certificateList: CertificateList) -> [CertificatePair] {
         var pairs = [CertificatePair]()
@@ -69,7 +70,10 @@ public class VaccinationRepositoryMock: VaccinationRepositoryProtocol {
     }
 
     public func delete(_: ExtendedCBORWebToken) -> Promise<Void> {
-        .value
+        if let error = deleteError {
+            return .init(error: error)
+        }
+        return .value
     }
 
     var favoriteToggle = false

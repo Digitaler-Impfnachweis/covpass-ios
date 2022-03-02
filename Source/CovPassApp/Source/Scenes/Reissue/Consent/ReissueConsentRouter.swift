@@ -56,4 +56,16 @@ class ReissueConsentRouter: ReissueConsentRouterProtocol, DialogRouterProtocol {
             .push(DataPrivacySceneFactory(router: DataPrivacyRouter(sceneCoordinator: sceneCoordinator)))
             .cauterize()
     }
+
+    func showError(_ error: Error, resolver _: Resolver<Void>) {
+        print("\(#file):\(#function) Error: \(error)")
+        showDialog(
+            title: "error_standard_unexpected_title".localized,
+            message: "error_standard_unexpected_message".localized,
+            actions: [
+                .init(title: "error_standard_unexpected_button_title".localized)
+            ],
+            style: .alert
+        )
+    }
 }

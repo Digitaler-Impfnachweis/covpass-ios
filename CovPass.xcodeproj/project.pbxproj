@@ -313,6 +313,8 @@
 		E70C3E9A27A95523001F07FF /* RuleCheckViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70C3E9927A95523001F07FF /* RuleCheckViewModelTests.swift */; };
 		E70C3E9D27A955CC001F07FF /* RuleCheckRouterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70C3E9C27A955CC001F07FF /* RuleCheckRouterMock.swift */; };
 		E70C3EA427A98A5C001F07FF /* CertificatesOverviewRouterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70C3EA327A98A5C001F07FF /* CertificatesOverviewRouterMock.swift */; };
+		E75234DC27CE6EF200B744AB /* ReissueResultViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E75234DB27CE6EF200B744AB /* ReissueResultViewModelTests.swift */; };
+		E75234E127CE6FE700B744AB /* ReissueResultRouterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E75234E027CE6FE700B744AB /* ReissueResultRouterMock.swift */; };
 		E76B96EA27C50F130030FC0C /* URLSession+CertificateReissue.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76B96E927C50F130030FC0C /* URLSession+CertificateReissue.swift */; };
 		E76B96EC27C5120A0030FC0C /* URLSession+CertificateReissueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76B96EB27C5120A0030FC0C /* URLSession+CertificateReissueTests.swift */; };
 		E76B998927AAE8220029FCB1 /* CertificateDetailViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76B998827AAE8220029FCB1 /* CertificateDetailViewModelTests.swift */; };
@@ -691,6 +693,8 @@
 		E70C3E9927A95523001F07FF /* RuleCheckViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleCheckViewModelTests.swift; sourceTree = "<group>"; };
 		E70C3E9C27A955CC001F07FF /* RuleCheckRouterMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleCheckRouterMock.swift; sourceTree = "<group>"; };
 		E70C3EA327A98A5C001F07FF /* CertificatesOverviewRouterMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificatesOverviewRouterMock.swift; sourceTree = "<group>"; };
+		E75234DB27CE6EF200B744AB /* ReissueResultViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReissueResultViewModelTests.swift; sourceTree = "<group>"; };
+		E75234E027CE6FE700B744AB /* ReissueResultRouterMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReissueResultRouterMock.swift; sourceTree = "<group>"; };
 		E76B96E927C50F130030FC0C /* URLSession+CertificateReissue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+CertificateReissue.swift"; sourceTree = "<group>"; };
 		E76B96EB27C5120A0030FC0C /* URLSession+CertificateReissueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+CertificateReissueTests.swift"; sourceTree = "<group>"; };
 		E76B998827AAE8220029FCB1 /* CertificateDetailViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateDetailViewModelTests.swift; sourceTree = "<group>"; };
@@ -996,8 +1000,9 @@
 		09D5811E27C27CA600CB50CB /* Reissue */ = {
 			isa = PBXGroup;
 			children = (
-				09D5812027C27CB700CB50CB /* ReissueStartViewModelTests.swift */,
-				0968979E27C3A871009E2886 /* ReissueConsentViewModelTests.swift */,
+				E75234DD27CE6F0800B744AB /* Consent */,
+				E75234DA27CE6ECA00B744AB /* Result */,
+				E75234DE27CE6F2300B744AB /* Start */,
 			);
 			path = Reissue;
 			sourceTree = "<group>";
@@ -1944,6 +1949,39 @@
 			path = mocks;
 			sourceTree = "<group>";
 		};
+		E75234DA27CE6ECA00B744AB /* Result */ = {
+			isa = PBXGroup;
+			children = (
+				E75234DF27CE6FC600B744AB /* Mock */,
+				E75234DB27CE6EF200B744AB /* ReissueResultViewModelTests.swift */,
+			);
+			path = Result;
+			sourceTree = "<group>";
+		};
+		E75234DD27CE6F0800B744AB /* Consent */ = {
+			isa = PBXGroup;
+			children = (
+				0968979E27C3A871009E2886 /* ReissueConsentViewModelTests.swift */,
+			);
+			path = Consent;
+			sourceTree = "<group>";
+		};
+		E75234DE27CE6F2300B744AB /* Start */ = {
+			isa = PBXGroup;
+			children = (
+				09D5812027C27CB700CB50CB /* ReissueStartViewModelTests.swift */,
+			);
+			path = Start;
+			sourceTree = "<group>";
+		};
+		E75234DF27CE6FC600B744AB /* Mock */ = {
+			isa = PBXGroup;
+			children = (
+				E75234E027CE6FE700B744AB /* ReissueResultRouterMock.swift */,
+			);
+			path = Mock;
+			sourceTree = "<group>";
+		};
 		E76B998727AAE7F60029FCB1 /* Certificate Detail */ = {
 			isa = PBXGroup;
 			children = (
@@ -2369,6 +2407,7 @@
 				09CE6C9B27AB40430048BDA4 /* HowToScanViewControllerSnapShotTests.swift in Sources */,
 				09590D242715E519004410D7 /* RuleCheckViewControllerSnapshotTests.swift in Sources */,
 				096897B227C3E3D5009E2886 /* ReissueResultViewControllerSnapShotTests.swift in Sources */,
+				E75234DC27CE6EF200B744AB /* ReissueResultViewModelTests.swift in Sources */,
 				E7CB54B327B53296002FA55E /* AppInformationViewModelTests.swift in Sources */,
 				09590D302715E67F004410D7 /* MockCardViewModel.swift in Sources */,
 				0994A4D6273431A500B21FCF /* WebTokenMockUtil.swift in Sources */,
@@ -2382,6 +2421,7 @@
 				096873F127430A4200DB5837 /* ChooseCertificateSnapShotTests.swift in Sources */,
 				09E85433279992450051AEEE /* AppInformationViewControllerSnapShotTests.swift in Sources */,
 				95FE37B4273EF1B7000899A3 /* ValidationServiceViewControllerSnapShotTests.swift in Sources */,
+				E75234E127CE6FE700B744AB /* ReissueResultRouterMock.swift in Sources */,
 				E70C3EA427A98A5C001F07FF /* CertificatesOverviewRouterMock.swift in Sources */,
 				09D5812327C27DAD00CB50CB /* ReissueStartViewRouterMock.swift in Sources */,
 				216D203D264EFA7400370F16 /* PassOnboardingPageViewModelTests.swift in Sources */,

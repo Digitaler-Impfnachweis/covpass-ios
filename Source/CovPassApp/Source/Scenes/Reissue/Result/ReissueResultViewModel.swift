@@ -55,14 +55,22 @@ class ReissueResultViewModel: ReissueResultViewModelProtocol {
         let promises = oldTokens.map(repository.delete(_:))
         when(fulfilled: promises.makeIterator(), concurrently: 1)
             .done { [weak self] _ in
-                self?.resolver.fulfill_()
-                self?.router.dismiss()
+                self?.handleDone()
             }
-            .catch { error in
-                print("\(#file):\(#function) Error: \(error).")
+            .catch { [weak self] error in
+                self?.handle(error: error)
             }
     }
-    
+
+    private func handleDone() {
+        resolver.fulfill_()
+        router.dismiss()
+    }
+
+    private func handle(error: Error) {
+        router.showError(error, resolver: resolver)
+    }
+
     func deleteOldTokensLater() {
         resolver.fulfill_()
     }
