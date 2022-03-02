@@ -2,8 +2,8 @@
 name: "\U0001F6A8 Bug Report"
 about: Did you come across a bug or unexpected behaviour differing from the docs?
 labels: bug
-
 ---
+
 <!--
 Thanks for reporting a bug 🙌 ❤️
 
@@ -12,19 +12,15 @@ Before opening a new issue, please make sure that we do not have any duplicates 
 Also, be sure to check our documentation first: https://github.com/Digitaler-Impfnachweis/documentation
 -->
 
-## Avoid duplicates
-* [ ] Bug is not mentioned in the [FAQ](https://digitaler-impfnachweis-app.de/faq/)
-* [ ] Bug is not already reported in another issue
+## Describe the bug
+
+<!-- Describe your issue -->
 
 ## Technical details
 
 - Device name:
 - OS version:
 - App version:
-
-## Describe the bug
-
-<!-- Describe your issue -->
 
 ## Steps to reproduce the issue
 
@@ -48,3 +44,8 @@ Also, be sure to check our documentation first: https://github.com/Digitaler-Imp
 ## Additional context
 
 <!-- Add any other context about the problem here. -->
+
+## Avoid duplicates
+
+- [ ] Bug is not mentioned in the [FAQ](https://digitaler-impfnachweis-app.de/faq/)
+- [ ] Bug is not already reported in another issue
