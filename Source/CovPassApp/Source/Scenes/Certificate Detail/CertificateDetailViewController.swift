@@ -59,6 +59,7 @@ class CertificateDetailViewController: UIViewController {
         setupView()
         viewModel.refresh()
         viewModel.updateBoosterCandiate()
+        viewModel.updateReissueCandidate()
     }
 
     // MARK: - Methods

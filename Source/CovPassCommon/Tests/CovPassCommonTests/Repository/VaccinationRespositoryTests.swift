@@ -331,7 +331,7 @@ class VaccinationRepositoryTests: XCTestCase {
         list = try sut.getCertificateList().wait()
         XCTAssertEqual(list.favoriteCertificateId, "01DE/00100/1119349007/F4G7014KQQ2XD0NY8FJHSTDXZ#S")
     }
-
+    
     func testSetExpiryAlert() throws {
         let cborWebToken = try! JSONDecoder().decode(CBORWebToken.self, from: Data.json("CBORWebToken"))
         let cert = ExtendedCBORWebToken(vaccinationCertificate: cborWebToken, vaccinationQRCodeData: "")
@@ -352,6 +352,45 @@ class VaccinationRepositoryTests: XCTestCase {
 
         XCTAssertNotNil(token.wasExpiryAlertShown)
         XCTAssertTrue(try XCTUnwrap(token.wasExpiryAlertShown))
+    }
+    
+    func testSetReissueAlreadySeenInitialAndNewBadgeAlreadySeen() throws {
+        // GIVEN
+        let cborWebToken = CBORWebToken.mockVaccinationCertificate.extended()
+        _ = try sut.saveCertificateList(CertificateList(certificates: [cborWebToken])).wait()
+        var list = try sut.getCertificateList().wait()
+        var token = try XCTUnwrap(list.certificates.first)
+        
+        // WHEN
+        _ = try sut.setReissueProcess(initialAlreadySeen: true, newBadgeAlreadySeen: false, tokens: [cborWebToken]).wait()
+
+        // THEN
+        list = try sut.getCertificateList().wait()
+        token = try XCTUnwrap(list.certificates.first)
+        XCTAssertTrue(try XCTUnwrap(token.reissueProcessInitialAlreadySeen))
+        XCTAssertFalse(try XCTUnwrap(token.reissueProcessNewBadgeAlreadySeen))
+    }
+    
+    func testSetReissueAlreadySeenInitialAndNewBadgeAlreadySeenAlternative() throws {
+        // GIVEN
+        let expectationTest = XCTestExpectation()
+        let cborWebToken = CBORWebToken.mockVaccinationCertificate.extended()
+        _ = try sut.saveCertificateList(CertificateList(certificates: [cborWebToken])).wait()
+        sut.getCertificateList().done { list in
+            var token = try XCTUnwrap(list.certificates.first)
+            
+            // WHEN
+            _ = try self.sut.setReissueProcess(initialAlreadySeen: false, newBadgeAlreadySeen: true, tokens: [cborWebToken]).wait()
+
+            // THEN
+            self.sut.getCertificateList().done{ list in
+                token = try XCTUnwrap(list.certificates.first)
+                XCTAssertFalse(try XCTUnwrap(token.reissueProcessInitialAlreadySeen))
+                XCTAssertTrue(try XCTUnwrap(token.reissueProcessNewBadgeAlreadySeen))
+                expectationTest.fulfill()
+            }.cauterize()
+        }.cauterize()
+        wait(for: [expectationTest], timeout: 1.0)
     }
 
     func testFavoriteStateForCertificates() throws {

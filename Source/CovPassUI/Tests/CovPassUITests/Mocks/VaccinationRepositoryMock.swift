@@ -62,6 +62,12 @@ public class VaccinationRepositoryMock: VaccinationRepositoryProtocol {
     public func setExpiryAlert(shown _: Bool, token _: ExtendedCBORWebToken) -> Promise<Void> {
         Promise.value
     }
+    
+    public func setReissueProcess(initialAlreadySeen: Bool,
+                                   newBadgeAlreadySeen: Bool,
+                                   tokens: [ExtendedCBORWebToken]) -> Promise<Void> {
+         return .value
+     }
 
     public func favoriteStateForCertificates(_: [ExtendedCBORWebToken]) -> Promise<Bool> {
         .value(favoriteToggle)

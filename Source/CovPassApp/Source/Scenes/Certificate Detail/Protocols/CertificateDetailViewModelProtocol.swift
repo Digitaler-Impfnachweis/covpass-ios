@@ -37,5 +37,6 @@ protocol CertificateDetailViewModelProtocol {
     func immunizationButtonTapped()
     func toggleFavorite()
     func updateBoosterCandiate()
+    func updateReissueCandidate()
     func triggerReissue()
 }

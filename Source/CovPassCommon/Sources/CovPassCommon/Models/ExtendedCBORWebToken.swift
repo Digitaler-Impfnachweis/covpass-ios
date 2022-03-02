@@ -25,6 +25,10 @@ public struct ExtendedCBORWebToken: Codable, QRCodeScanable {
     public var vaccinationQRCodeData: String
 
     public var wasExpiryAlertShown: Bool?
+    
+    public var reissueProcessInitialAlreadySeen: Bool?
+    
+    public var reissueProcessNewBadgeAlreadySeen: Bool?
 
     public init(vaccinationCertificate: CBORWebToken, vaccinationQRCodeData: String) {
         self.vaccinationCertificate = vaccinationCertificate

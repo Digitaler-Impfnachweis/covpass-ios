@@ -33,6 +33,12 @@ public extension Array where Element == ExtendedCBORWebToken {
         }
         return !filterBoosterAfterVaccinationAfterRecovery.isEmpty
     }
+    
+    var reissueProcessInitialNotAlreadySeen: Bool { !reissueProcessInitialAlreadySeen }
+    
+    var reissueProcessInitialAlreadySeen: Bool { first(where: { $0.reissueProcessInitialAlreadySeen ?? false }) != nil }
+    
+    var reissueNewBadgeAlreadySeen: Bool { first(where: { $0.reissueProcessNewBadgeAlreadySeen ?? false }) != nil }
 
     var tokensOfVaccinationWithSingleDose: [ExtendedCBORWebToken] {
         filter {

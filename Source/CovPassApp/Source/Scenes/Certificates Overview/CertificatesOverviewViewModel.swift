@@ -278,15 +278,21 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
         let partitions = certificateList.certificates.partitionedByOwner
         let showCertificatesReissuePromises = partitions
             .filter(\.qualifiedForReissue)
-            .map(router.showCertificatesReissue(for:))
+            .filter(\.reissueProcessInitialNotAlreadySeen)
+            .map(showCertificatesReissue(tokens:))
         let guarantee = when(
             fulfilled: showCertificatesReissuePromises.makeIterator(),
             concurrently: 1
         ).recover { errors in
             .value([])
         }.asVoid()
-
+        
         return guarantee
+    }
+    
+    private func showCertificatesReissue(tokens: [ExtendedCBORWebToken]) -> Promise<Void> {
+        repository.setReissueProcess(initialAlreadySeen: true, newBadgeAlreadySeen: false, tokens: tokens).cauterize()
+        return router.showCertificatesReissue(for:tokens)
     }
 
     private func payloadFromScannerResult(_ result: ScanResult) throws -> String {

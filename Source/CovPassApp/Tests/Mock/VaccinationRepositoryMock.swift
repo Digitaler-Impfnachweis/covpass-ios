@@ -15,6 +15,7 @@ public class VaccinationRepositoryMock: VaccinationRepositoryProtocol {
 
     let getCertificateListExpectation = XCTestExpectation(description: "getCertificateListExpectation")
     let setExpiryAlertExpectation = XCTestExpectation(description: "setExpiryAlertExpectation")
+    let setReissueAlreadySeen = XCTestExpectation(description: "setReissueAlreadySeen")
     var lastUpdatedTrustList: Date?
     var certificates: [ExtendedCBORWebToken] = []
     var certPair: [CertificatePair] = []
@@ -87,6 +88,13 @@ public class VaccinationRepositoryMock: VaccinationRepositoryProtocol {
         setExpiryAlertValue = (shown, token)
         setExpiryAlertExpectation.fulfill()
         return Promise.value
+    }
+    
+    public func setReissueProcess(initialAlreadySeen: Bool,
+                                  newBadgeAlreadySeen: Bool,
+                                  tokens: [ExtendedCBORWebToken]) -> Promise<Void> {
+        setReissueAlreadySeen.fulfill()
+        return .value
     }
 
     public func favoriteStateForCertificates(_: [ExtendedCBORWebToken]) -> Promise<Bool> {

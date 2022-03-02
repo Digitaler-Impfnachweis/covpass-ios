@@ -417,9 +417,21 @@ class CertificateDetailViewControllerSnapshotTests: BaseSnapShotTests {
         verifyView(view: vc.view, height: 1100)
     }
     
+    var singleDoseImmunizationJohnsonCert = CBORWebToken.mockVaccinationCertificate
+        .mockVaccinationUVCI("1")
+        .medicalProduct(.johnsonjohnson)
+        .doseNumber(1)
+        .seriesOfDoses(1)
+        .extended(vaccinationQRCodeData: "1")
+    var vaccinationWithTwoShotsOfVaccine = CBORWebToken.mockVaccinationCertificate
+        .mockVaccinationUVCI("2")
+        .medicalProduct(.biontech)
+        .doseNumber(2)
+        .seriesOfDoses(2)
+        .extended(vaccinationQRCodeData: "2")
+    
     func testCertificateDetail_ShowReissueNotification() {
-        let cert: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended()
-        let certs = [cert]
+        let certs = [singleDoseImmunizationJohnsonCert, vaccinationWithTwoShotsOfVaccine]
         let bl = BoosterLogic.init(certLogic: DCCCertLogicMock(),
                                    userDefaults: MockPersistence())
         let vm = CertificateDetailViewModel(router: CertificateDetailRouterMock(),
@@ -429,7 +441,20 @@ class CertificateDetailViewControllerSnapshotTests: BaseSnapShotTests {
                                             resolvable: nil)
         let vc = CertificateDetailViewController(viewModel: vm)
         verifyView(view: vc.view, height: 1100)
-        // TODO: show notification, when logic to show and hide is ready in viewModel
+    }
+    
+    func testCertificateDetail_ShowReissueNotification_NewBadgeAlreadySeen() {
+        singleDoseImmunizationJohnsonCert.reissueProcessNewBadgeAlreadySeen = true
+        let certs = [singleDoseImmunizationJohnsonCert, vaccinationWithTwoShotsOfVaccine]
+        let bl = BoosterLogic.init(certLogic: DCCCertLogicMock(),
+                                   userDefaults: MockPersistence())
+        let vm = CertificateDetailViewModel(router: CertificateDetailRouterMock(),
+                                            repository: VaccinationRepositoryMock(),
+                                            boosterLogic: bl,
+                                            certificates: certs,
+                                            resolvable: nil)
+        let vc = CertificateDetailViewController(viewModel: vm)
+        verifyView(view: vc.view, height: 1100)
     }
 }
 
