@@ -75,14 +75,19 @@ class ReissueConsentViewModel: ReissueConsentViewModelProtocol {
     func processAgree() {
         reissueRepository
             .reissue(tokens)
-            .map { CertificateList(certificates: $0) }
-            .then(vaccinationRepository.saveCertificateList)
-            .done { [weak self] certificateList in
-                self?.handle(tokens: certificateList.certificates)
+            .then(save)
+            .done { [weak self] tokens in
+                self?.handle(tokens: tokens)
             }
             .catch { [weak self] in
                 self?.handle(reissueError: $0)
             }
+    }
+
+    private func save(tokens: [ExtendedCBORWebToken]) -> Promise<[ExtendedCBORWebToken]> {
+        vaccinationRepository
+            .add(tokens: tokens)
+            .map { tokens }
     }
 
     private func handle(tokens: [ExtendedCBORWebToken]) {

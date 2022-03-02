@@ -177,7 +177,7 @@ class VaccinationRepositoryTests: XCTestCase {
 
     func testGetCertificateList() throws {
         // Store one certficate in list
-        let data = try JSONEncoder().encode(
+        try keychain.store(
             CertificateList(
                 certificates: [
                     ExtendedCBORWebToken(
@@ -188,7 +188,6 @@ class VaccinationRepositoryTests: XCTestCase {
                 favoriteCertificateId: "1"
             )
         )
-        try keychain.store(KeychainPersistence.Keys.certificateList.rawValue, value: data)
 
         // Get certificate list
         let list = try sut.getCertificateList().wait()
@@ -199,7 +198,7 @@ class VaccinationRepositoryTests: XCTestCase {
 
     func testGetCertificateListWithInvalidation() throws {
         // Store one certficate in list
-        let data = try JSONEncoder().encode(
+        try keychain.store(
             CertificateList(
                 certificates: [
                     ExtendedCBORWebToken(
@@ -210,7 +209,6 @@ class VaccinationRepositoryTests: XCTestCase {
                 favoriteCertificateId: "1"
             )
         )
-        try keychain.store(KeychainPersistence.Keys.certificateList.rawValue, value: data)
 
         // Get certificate list
         let list = try sut.getCertificateList().wait()
@@ -248,6 +246,58 @@ class VaccinationRepositoryTests: XCTestCase {
         } catch {
             XCTAssertEqual(error.localizedDescription, ApplicationError.unknownError.localizedDescription)
         }
+    }
+
+    func testAdd_success() throws {
+        // Given
+        let tokens = [
+            CBORWebToken.mockVaccinationCertificate.extended(),
+            CBORWebToken.mockVaccinationCertificate.extended(),
+            CBORWebToken.mockVaccinationCertificate.extended()
+        ]
+        let certificateList = CertificateList(
+            certificates: tokens,
+            favoriteCertificateId: nil
+        )
+        try keychain.store(certificateList)
+        let expectation = XCTestExpectation()
+
+        // When
+        sut.add(tokens: tokens)
+            .done { _ in
+                let tokens = try self.keychain.fetchCertificateList().certificates
+                XCTAssertEqual(tokens.count, 6)
+                expectation.fulfill()
+            }
+            .catch { error in
+                XCTFail("Must not fail.")
+            }
+
+        // Then
+        wait(for: [expectation], timeout: 1)
+    }
+
+    func testAdd_error() throws {
+        // Given
+        let tokens = [
+            CBORWebToken.mockVaccinationCertificate.extended(),
+            CBORWebToken.mockVaccinationCertificate.extended(),
+            CBORWebToken.mockVaccinationCertificate.extended()
+        ]
+        keychain.storeError = NSError(domain: "TEST", code: 0, userInfo: nil)
+        let expectation = XCTestExpectation()
+
+        // When
+        sut.add(tokens: tokens)
+            .done { _ in
+                XCTFail("Must not succeed.")
+            }
+            .catch { error in
+                expectation.fulfill()
+            }
+
+        // Then
+        wait(for: [expectation], timeout: 1)
     }
 
     func testDeleteCertificate() throws {
@@ -561,4 +611,19 @@ class VaccinationRepositoryTests: XCTestCase {
         }
     }
     
+}
+
+private extension MockPersistence {
+    func store(_ certificateList: CertificateList) throws {
+        let data = try JSONEncoder().encode(certificateList)
+        try store(KeychainPersistence.Keys.certificateList.rawValue, value: data)
+    }
+
+    func fetchCertificateList() throws -> CertificateList {
+        guard let data = try? fetch(KeychainPersistence.Keys.certificateList.rawValue) as? Data else {
+            throw NSError(domain: "TEST", code: 0, userInfo: nil)
+        }
+        let certificateList = try JSONDecoder().decode(CertificateList.self, from: data)
+        return certificateList
+    }
 }

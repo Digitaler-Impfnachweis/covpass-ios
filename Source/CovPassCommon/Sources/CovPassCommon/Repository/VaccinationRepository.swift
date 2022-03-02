@@ -119,6 +119,18 @@ public class VaccinationRepository: VaccinationRepositoryProtocol {
         }
     }
 
+    public func add(tokens: [ExtendedCBORWebToken]) -> Promise<Void> {
+        getCertificateList()
+            .map { certificateList in
+                CertificateList(
+                    certificates: certificateList.certificates + tokens,
+                    favoriteCertificateId: certificateList.favoriteCertificateId
+                )
+            }
+            .then(saveCertificateList)
+            .asVoid()
+    }
+
     public func trustListShouldBeUpdated() -> Bool {
         if let lastUpdated = userDefaults.lastUpdatedTrustList,
            let date = Calendar.current.date(byAdding: .day, value: 1, to: lastUpdated),

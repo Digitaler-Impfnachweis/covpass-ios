@@ -10,7 +10,6 @@ import PromiseKit
 import Foundation
 
 public class VaccinationRepositoryMock: VaccinationRepositoryProtocol {
-    
     var lastUpdateTrustList: Date?
     var shouldTrustListUpdate: Bool = false
 
@@ -47,6 +46,10 @@ public class VaccinationRepositoryMock: VaccinationRepositoryProtocol {
 
     public func saveCertificateList(_: CertificateList) -> Promise<CertificateList> {
         Promise.value(CertificateList(certificates: []))
+    }
+
+    public func add(tokens: [ExtendedCBORWebToken]) -> Promise<Void> {
+        .value
     }
 
     public func delete(_: ExtendedCBORWebToken) -> Promise<Void> {

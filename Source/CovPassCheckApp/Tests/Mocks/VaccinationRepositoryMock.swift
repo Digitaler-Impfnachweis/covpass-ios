@@ -49,6 +49,10 @@ public class VaccinationRepositoryMock: VaccinationRepositoryProtocol {
         Promise.value(CertificateList(certificates: []))
     }
 
+    public func add(tokens: [ExtendedCBORWebToken]) -> Promise<Void> {
+        .value
+    }
+
     public func delete(_: ExtendedCBORWebToken) -> Promise<Void> {
         .value
     }

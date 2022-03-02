@@ -20,6 +20,8 @@ public class VaccinationRepositoryMock: VaccinationRepositoryProtocol {
     var certificates: [ExtendedCBORWebToken] = []
     var certPair: [CertificatePair] = []
     var shouldTrustListUpdate: Bool = true
+    var saveError: Error?
+    var receivedTokens = [ExtendedCBORWebToken]()
     var deleteError: Error?
     
     public func matchedCertificates(for certificateList: CertificateList) -> [CertificatePair] {
@@ -68,6 +70,14 @@ public class VaccinationRepositoryMock: VaccinationRepositoryProtocol {
 
     public func saveCertificateList(_: CertificateList) -> Promise<CertificateList> {
         Promise.value(CertificateList(certificates: []))
+    }
+
+    public func add(tokens: [ExtendedCBORWebToken]) -> Promise<Void> {
+        receivedTokens = tokens
+        if let error = saveError {
+            return .init(error: error)
+        }
+        return .value
     }
 
     public func delete(_: ExtendedCBORWebToken) -> Promise<Void> {

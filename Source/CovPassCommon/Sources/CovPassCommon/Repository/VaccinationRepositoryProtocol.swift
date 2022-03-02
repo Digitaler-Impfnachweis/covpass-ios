@@ -16,6 +16,10 @@ public protocol VaccinationRepositoryProtocol {
     /// Save the certificate list
     func saveCertificateList(_ certificateList: CertificateList) -> Promise<CertificateList>
 
+    /// Saves an array of tokens. Does not overwrite the existing tokens, but appends the new tokens.
+    /// It is not checked, if the tokens already exist.
+    func add(tokens: [ExtendedCBORWebToken]) -> Promise<Void>
+
     /// Update the local trust list
     func updateTrustListIfNeeded() -> Promise<Void>
 
