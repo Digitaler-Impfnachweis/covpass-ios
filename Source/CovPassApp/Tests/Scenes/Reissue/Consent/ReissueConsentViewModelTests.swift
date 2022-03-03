@@ -44,6 +44,7 @@ class ReissueConsentViewModelTests: XCTestCase {
         sut.processAgree()
         // THEN
         wait(for: [mockRouter.showNextExpectation], timeout: 0.1)
+        XCTAssertFalse(sut.isLoading)
     }
 
     func testProcessAgree_error() {
@@ -57,6 +58,7 @@ class ReissueConsentViewModelTests: XCTestCase {
         // Then
         wait(for: [mockRouter.showErrorExpectation], timeout: 1)
         XCTAssertTrue(mockRouter.receivedError is CertificateReissueError)
+        XCTAssertFalse(sut.isLoading)
     }
     
     func testProcessDisagree() {
@@ -71,5 +73,25 @@ class ReissueConsentViewModelTests: XCTestCase {
         sut.processPrivacyStatement()
         // THEN
         wait(for: [mockRouter.routeToPrivacyExpectation], timeout: 0.1)
+    }
+
+    func testIsLoading_default() {
+        // When
+        let isLoading = sut.isLoading
+
+        // Then
+        XCTAssertFalse(isLoading)
+    }
+
+    func testIsLoading_true() {
+        // Given
+        reissueRepository.responseDelay = 1
+        sut.processAgree()
+
+        // When
+        let isLoading = sut.isLoading
+
+        // Then
+        XCTAssertTrue(isLoading)
     }
 }

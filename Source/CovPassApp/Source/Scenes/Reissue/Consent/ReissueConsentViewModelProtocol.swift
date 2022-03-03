@@ -16,6 +16,7 @@ protocol ReissueConsentViewModelProtocol {
     var dataPrivacyChecvron: UIImage { get }
     var buttonAgreeTitle: String { get }
     var buttonDisagreeTitle: String { get }
+    var isLoading: Bool { get }
     func processAgree()
     func processDisagree()
     func processPrivacyStatement()

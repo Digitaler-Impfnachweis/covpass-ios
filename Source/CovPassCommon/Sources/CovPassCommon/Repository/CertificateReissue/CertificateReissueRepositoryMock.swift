@@ -6,15 +6,21 @@
 //
 
 import PromiseKit
+import Foundation
 
 public class CertificateReissueRepositoryMock: CertificateReissueRepositoryProtocol {
     public var reissueResponse: CertificateReissueRepositoryResponse = []
     public var error: CertificateReissueError?
+    public var responseDelay: TimeInterval = 0.0
     public init() {}
     public func reissue(_ cborWebTokens: [ExtendedCBORWebToken]) -> Promise<CertificateReissueRepositoryResponse> {
         if let error = error {
-            return .init(error: error)
+            return after(seconds: responseDelay).then {
+                Promise.init(error: error)
+            }
         }
-        return .value(reissueResponse)
+        return after(seconds: responseDelay).then {
+            Promise.value(self.reissueResponse)
+        }
     }
 }

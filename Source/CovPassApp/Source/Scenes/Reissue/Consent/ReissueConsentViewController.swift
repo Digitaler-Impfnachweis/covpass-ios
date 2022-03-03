@@ -19,7 +19,9 @@ class ReissueConsentViewController: UIViewController {
     @IBOutlet var agreeButton: MainButton!
     @IBOutlet var disagreeButton: MainButton!
     @IBOutlet var bodyStackView: UIStackView!
-    
+    @IBOutlet var activityIndicatorContainerView: UIView!
+    private let activityIndicator = DotPulseActivityIndicator(frame: .zero)
+
     private(set) var viewModel: ReissueConsentViewModelProtocol
 
     // MARK: - Lifecycle
@@ -37,6 +39,7 @@ class ReissueConsentViewController: UIViewController {
         viewModel.delegate = self
         updateView()
         configureActions()
+        configureActivityIndicator()
     }
 
     // MARK: - Methods
@@ -72,8 +75,26 @@ class ReissueConsentViewController: UIViewController {
         dataPrivacyLabel.showSeperator = true
         agreeButton.title = viewModel.buttonAgreeTitle
         disagreeButton.title = viewModel.buttonDisagreeTitle
+        showActivityIndicatorIfLoading()
     }
-    
+
+    private func showActivityIndicatorIfLoading() {
+        if viewModel.isLoading {
+            activityIndicator.startAnimating()
+        } else {
+            activityIndicator.stopAnimating()
+        }
+        activityIndicatorContainerView.isHidden = !viewModel.isLoading
+    }
+
+    private func configureActivityIndicator() {
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicatorContainerView.addSubview(activityIndicator)
+        activityIndicator.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        activityIndicator.widthAnchor.constraint(equalToConstant: 100).isActive = true
+        activityIndicator.centerXAnchor.constraint(equalTo: activityIndicatorContainerView.centerXAnchor).isActive = true
+        activityIndicator.centerYAnchor.constraint(equalTo: activityIndicatorContainerView.centerYAnchor).isActive = true
+    }
  }
 
 extension ReissueConsentViewController: ViewModelDelegate {
@@ -82,6 +103,6 @@ extension ReissueConsentViewController: ViewModelDelegate {
     }
 
     func viewModelUpdateDidFailWithError(_: Error) {
-        // already handled in ViewModel
+        updateView()
     }
 }

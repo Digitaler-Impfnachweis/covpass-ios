@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ReissueConsentViewController" customModule="CovPassApp" customModuleProvider="target">
             <connections>
+                <outlet property="activityIndicatorContainerView" destination="g5i-Kj-vla" id="JaR-yT-8Tq"/>
                 <outlet property="agreeButton" destination="7wS-xe-63Y" id="e1h-Qh-dCQ"/>
                 <outlet property="bodyStackView" destination="5aa-3B-3i2" id="pY0-n0-Hkc"/>
                 <outlet property="certStack" destination="K1m-bv-jQ4" id="iKJ-Js-DVe"/>
@@ -125,13 +126,21 @@
                     <viewLayoutGuide key="contentLayoutGuide" id="LIk-rk-4z4"/>
                     <viewLayoutGuide key="frameLayoutGuide" id="xsh-pL-3gB"/>
                 </scrollView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g5i-Kj-vla" userLabel="Activity Indicator Container View">
+                    <rect key="frame" x="0.0" y="44" width="414" height="852"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="1Hl-8e-McC"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="8gs-co-nmk" firstAttribute="bottom" secondItem="iN0-l3-epB" secondAttribute="bottom" id="Cig-A4-l0x"/>
                 <constraint firstItem="1Hl-8e-McC" firstAttribute="top" secondItem="8gs-co-nmk" secondAttribute="top" id="Cpb-hh-7xT"/>
+                <constraint firstItem="g5i-Kj-vla" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="RzC-Yo-SVK"/>
+                <constraint firstItem="g5i-Kj-vla" firstAttribute="top" secondItem="1Hl-8e-McC" secondAttribute="top" id="YXD-O4-3EE"/>
+                <constraint firstAttribute="bottom" secondItem="g5i-Kj-vla" secondAttribute="bottom" id="ZaC-TX-LLK"/>
                 <constraint firstItem="8gs-co-nmk" firstAttribute="trailing" secondItem="1Hl-8e-McC" secondAttribute="trailing" id="bQn-JI-3bb"/>
+                <constraint firstAttribute="trailing" secondItem="g5i-Kj-vla" secondAttribute="trailing" id="ndH-5g-VZK"/>
                 <constraint firstItem="1Hl-8e-McC" firstAttribute="leading" secondItem="8gs-co-nmk" secondAttribute="leading" id="vyo-07-moB"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

@@ -39,6 +39,7 @@ class ReissueConsentViewModel: ReissueConsentViewModelProtocol {
     let dataPrivacyChecvron = Constants.Images.privacyChevron
     let buttonAgreeTitle = Constants.Keys.agree
     let buttonDisagreeTitle = Constants.Keys.disagree
+    private(set) var isLoading = false
     private let reissueRepository: CertificateReissueRepositoryProtocol
     private let vaccinationRepository: VaccinationRepositoryProtocol
     private let resolver: Resolver<Void>
@@ -73,15 +74,24 @@ class ReissueConsentViewModel: ReissueConsentViewModelProtocol {
     // MARK: - Methods
     
     func processAgree() {
-        reissueRepository
-            .reissue(tokens)
+        showLoadingIndicator()
+            .then(reissueRepository.reissue)
             .then(save)
+            .ensure { [weak self] in
+                self?.isLoading = false
+            }
             .done { [weak self] tokens in
                 self?.handle(tokens: tokens)
             }
             .catch { [weak self] in
                 self?.handle(reissueError: $0)
             }
+    }
+
+    private func showLoadingIndicator() -> Guarantee<[ExtendedCBORWebToken]> {
+        isLoading = true
+        delegate?.viewModelDidUpdate()
+        return .value(tokens)
     }
 
     private func save(tokens: [ExtendedCBORWebToken]) -> Promise<[ExtendedCBORWebToken]> {
