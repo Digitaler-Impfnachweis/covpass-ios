@@ -33,38 +33,38 @@ class GProofDifferentPersonViewModel: GProofDifferentPersonViewModelProtocol {
 
     var title: String { Constants.Keys.warning_2G_names_title }
     var subtitle: String { Constants.Keys.warning_2G_names_subtitle }
-    var gProofCardImage: UIImage { Constants.Images.iconCardInverse }
-    var testProofCardImage: UIImage { Constants.Images.iconCardInverseWarning }
-    var gProofTitle: String { Constants.Keys.warning_2G_names_label_1stcert }
-    var testProofTitle: String { Constants.Keys.warning_2G_names_label_2ndcert }
+    var firstResultCardImage: UIImage { Constants.Images.iconCardInverse }
+    var SecondResultCardImage: UIImage { Constants.Images.iconCardInverseWarning }
+    var firstResultTitle: String { Constants.Keys.warning_2G_names_label_1stcert }
+    var secondResultTitle: String { Constants.Keys.warning_2G_names_label_2ndcert }
     var footerHeadline: String { Constants.Keys.warning_2G_names_ignore_title }
     var footerText: String { Constants.Keys.warning_2G_names_ignore_copy }
     var footerLinkText: String { Constants.Keys.warning_2G_names_ignore_link }
     var retryButton: String { Constants.Keys.result_2G_button_retry }
     var startOverButton: String { Constants.Keys.result_2G_button_startover }
-    var gProofName: String { gProofToken.hcert.dgc.nam.fullName }
-    var gProofNameTranslittered: String { gProofToken.hcert.dgc.nam.fullNameTransliterated }
-    var gProofDateOfBirth: String {
-        return String(format: Constants.Keys.validation_check_popup_test_date_of_birth, DateUtils.displayDateOfBirth(gProofToken.hcert.dgc))
+    var firstResultName: String { firstResultCert.hcert.dgc.nam.fullName }
+    var firstResultNameTranslittered: String { firstResultCert.hcert.dgc.nam.fullNameTransliterated }
+    var firstResultDateOfBirth: String {
+        return String(format: Constants.Keys.validation_check_popup_test_date_of_birth, DateUtils.displayDateOfBirth(firstResultCert.hcert.dgc))
     }
-    var testProofName: String { testProofToken.hcert.dgc.nam.fullName }
-    var testProofNameTranslittered: String { testProofToken.hcert.dgc.nam.fullNameTransliterated }
-    var testProofDateOfBirth: String {
-        return String(format: Constants.Keys.validation_check_popup_test_date_of_birth, DateUtils.displayDateOfBirth(testProofToken.hcert.dgc))
+    var secondResultName: String { secondResultCert.hcert.dgc.nam.fullName }
+    var secondResultNameTranslittered: String { secondResultCert.hcert.dgc.nam.fullNameTransliterated }
+    var secondResultDateOfBirth: String {
+        return String(format: Constants.Keys.validation_check_popup_test_date_of_birth, DateUtils.displayDateOfBirth(secondResultCert.hcert.dgc))
     }
-    var gProofToken: CBORWebToken
-    var testProofToken: CBORWebToken
+    var firstResultCert: CBORWebToken
+    var secondResultCert: CBORWebToken
     var delegate: ViewModelDelegate?
     var isDateOfBirthDifferent: Bool {
-        return gProofToken.hcert.dgc.dob != testProofToken.hcert.dgc.dob
+        return firstResultCert.hcert.dgc.dob != secondResultCert.hcert.dgc.dob
     }
     private var resolver: Resolver<GProofResult>
     
-    init(gProofToken: CBORWebToken,
-         testProofToken: CBORWebToken,
+    init(firstResultCert: CBORWebToken,
+         secondResultCert: CBORWebToken,
          resolver: Resolver<GProofResult>) {
-        self.gProofToken = gProofToken
-        self.testProofToken = testProofToken
+        self.firstResultCert = firstResultCert
+        self.secondResultCert = secondResultCert
         self.resolver = resolver
     }
     

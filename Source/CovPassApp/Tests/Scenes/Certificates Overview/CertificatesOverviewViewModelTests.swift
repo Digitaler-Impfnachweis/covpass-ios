@@ -275,4 +275,192 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         wait(for: [router.showCheckSituationExpectation], timeout: 2)
         XCTAssertEqual(userDefaults.onboardingSelectedLogicTypeAlreadySeen, true)
     }
+
+    func testRefresh_expiry_notification_token_is_valid() throws {
+        // Given
+        let router = CertificatesOverviewRouterMock()
+        try configureSutAndRepository(with: router, certificates: [.mock()])
+        router.showDialogExpectation.isInverted = true
+
+        // When
+        sut.refresh()
+
+        // Then
+        wait(for: [router.showDialogExpectation], timeout: 2)
+    }
+
+    private func configureSutAndRepository(with router: CertificatesOverviewRouterMock, certificates: [ExtendedCBORWebToken]) {
+        vaccinationRepository.certificates = certificates
+        sut = CertificatesOverviewViewModel(
+            router: router,
+            repository: vaccinationRepository,
+            certLogic: DCCCertLogicMock(),
+            boosterLogic: BoosterLogicMock(),
+            userDefaults: userDefaults)
+    }
+
+    func testRefresh_expiry_notification_token_is_test() throws {
+        // Given
+        let router = CertificatesOverviewRouterMock()
+        configureSutAndRepository(with: router, certificates: [.test])
+        router.showDialogExpectation.isInverted = true
+
+        // When
+        sut.refresh()
+
+        // Then
+        wait(for: [router.showDialogExpectation], timeout: 2)
+    }
+
+    func testRefresh_expiry_notification_token_is_invalid() throws {
+        // Given
+        let router = CertificatesOverviewRouterMock()
+        configureSutAndRepository(with: router, certificates: [.invalid])
+
+        // When
+        sut.refresh()
+
+        // Then
+        wait(for: [router.showDialogExpectation], timeout: 2)
+    }
+
+    func testRefresh_expiry_notification_token_is_expired() throws {
+        // Given
+        let router = CertificatesOverviewRouterMock()
+        configureSutAndRepository(with: router, certificates: [.expired])
+
+        // When
+        sut.refresh()
+
+        // Then
+        wait(for: [router.showDialogExpectation], timeout: 2)
+    }
+
+    func testRefresh_expiry_notification_token_expires_soon() throws {
+        // Given
+        let router = CertificatesOverviewRouterMock()
+        configureSutAndRepository(with: router, certificates: [.expiresSoon])
+
+        // When
+        sut.refresh()
+
+        // Then
+        wait(for: [router.showDialogExpectation], timeout: 2)
+    }
+
+    func testRefresh_expiry_notification_token_is_expired_expiry_already_shown() throws {
+        // Given
+        var token: ExtendedCBORWebToken = .expired
+        token.wasExpiryAlertShown = true
+        let router = CertificatesOverviewRouterMock()
+        configureSutAndRepository(with: router, certificates: [token])
+        router.showDialogExpectation.isInverted = true
+
+        // When
+        sut.refresh()
+
+        // Then
+        wait(for: [router.showDialogExpectation], timeout: 2)
+    }
+
+    func testRefresh_expiry_notification_multiple_tokens_one_is_valid() throws {
+        // Given
+        let tokens: [ExtendedCBORWebToken] = try [
+            .expired,
+            .invalid,
+            .test,
+            .mock()
+        ]
+        let router = CertificatesOverviewRouterMock()
+        configureSutAndRepository(with: router, certificates: tokens)
+
+        // When
+        sut.refresh()
+
+        // Then
+        wait(for: [router.showDialogExpectation], timeout: 2)
+    }
+
+    func testRefresh_setExpiryAlert_called() throws {
+        // Given
+        let tokens: [ExtendedCBORWebToken] = [
+            .expired
+        ]
+        let router = CertificatesOverviewRouterMock()
+        configureSutAndRepository(with: router, certificates: tokens)
+
+        // When
+        sut.refresh()
+
+        // Then
+        wait(for: [vaccinationRepository.setExpiryAlertExpectation], timeout: 2)
+        let value = try XCTUnwrap(vaccinationRepository.setExpiryAlertValue)
+        XCTAssertTrue(value.shown)
+        XCTAssertEqual(value.token, tokens[0])
+    }
+
+    func testRefresh_setExpiryAlert_called_for_all_expired_tokens() throws {
+        // Given
+        let tokens: [ExtendedCBORWebToken] = [
+            .expired,
+            .invalid
+        ]
+        let router = CertificatesOverviewRouterMock()
+        vaccinationRepository.setExpiryAlertExpectation.expectedFulfillmentCount = 2
+        configureSutAndRepository(with: router, certificates: tokens)
+
+        // When
+        sut.refresh()
+
+        // Then
+        wait(for: [vaccinationRepository.setExpiryAlertExpectation], timeout: 2)
+    }
+}
+
+private extension ExtendedCBORWebToken {
+    static var expired: ExtendedCBORWebToken {
+        .init(
+            vaccinationCertificate: .init(
+                iss: "",
+                iat: nil,
+                exp: .distantPast,
+                hcert: .init(dgc: .init(nam: .init(fnt: ""), ver: "1")),
+                invalid: false
+            ),
+            vaccinationQRCodeData: ""
+        )
+    }
+
+    static var expiresSoon: ExtendedCBORWebToken {
+        .init(
+            vaccinationCertificate: .init(
+                iss: "",
+                iat: nil,
+                exp: Date() + 60,
+                hcert: .init(dgc: .init(nam: .init(fnt: ""), ver: "1")),
+                invalid: false
+            ),
+            vaccinationQRCodeData: ""
+        )
+    }
+
+    static var invalid: ExtendedCBORWebToken {
+        .init(
+            vaccinationCertificate: .init(
+                iss: "",
+                iat: nil,
+                exp: nil,
+                hcert: .init(dgc: .init(nam: .init(fnt: ""), ver: "1")),
+                invalid: true
+            ),
+            vaccinationQRCodeData: ""
+        )
+    }
+
+    static var test: ExtendedCBORWebToken {
+        .init(
+            vaccinationCertificate: .mockTestCertificate,
+            vaccinationQRCodeData: ""
+        )
+    }
 }

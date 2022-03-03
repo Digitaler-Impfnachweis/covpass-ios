@@ -304,6 +304,8 @@
 
 "result_2G_test_invalid" = "Invalid test certificate";
 
+"result_2G_certificate_invalid" = "Invalid certificate";
+
 "result_2G_invalid_subtitle" = "Show details";
 
 "result_2G_empty_subtitle" = "Not checked yet";
@@ -325,6 +327,16 @@
 "result_2G_2nd_timestamp_days" = "%d days ago";
 
 "result_2G_2nd_timestamp_months" = "%d months ago";
+
+"result_2G_3rd_test_vacc_empty" = "Test or vaccination*";
+
+"result_2G_3rd_test_recov_empty" = "Test or recovery";
+
+"result_2G_3rd_vacc_recov_empty" = "Vaccination* or recovery";
+
+"result_2G__3rd_footnote" = "* Basic immunization or booster vaccination expected";
+
+"result_2G__3rd_button" = "Scan second certificate";
 
 "accessibility_warning_2G_names_announce_open" = "Error message \"Deviating data\" was opened";
 
@@ -402,6 +414,8 @@
 "app_information_title_open_source" = "Open-source licences";
 
 "app_information_title_accessibility_statement" = "Accessibility statement";
+
+"app_information_title_accessibility_statement_linked" = "#Accessibility statement::$0#";
 
 "accessibility_app_information_title_open_source_announce" = "The view \"Open-source licences\" has been opened";
 

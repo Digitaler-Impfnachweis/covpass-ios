@@ -1,5 +1,5 @@
 //
-//  ExtendedVaccinationTests.swift
+//  CBORWebTokenTests.swift
 //
 //
 //  © Copyright IBM Deutschland GmbH 2021
@@ -11,7 +11,7 @@
 import Foundation
 import XCTest
 
-class ExtendedVaccinationTests: XCTestCase {
+class CBORWebTokenTests: XCTestCase {
     func testDecoding() {
         let jsonData = Data.json("CBORWebToken")
         let sut = try! JSONDecoder().decode(CBORWebToken.self, from: jsonData)

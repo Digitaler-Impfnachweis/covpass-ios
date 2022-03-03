@@ -437,31 +437,38 @@ extension CertificatesOverviewViewModel {
     }
     
     private func showExpiryAlertIfNeeded() -> Promise<Void> {
-        Promise { seal in
-            let showAlert = certificatePairsSorted.contains { pair in
-                guard var cert = pair.certificates.sortLatest().first,
-                      cert.vaccinationCertificate.hcert.dgc.t == nil
-                else { return false }
-                if let tests = cert.vaccinationCertificate.hcert.dgc.t, !tests.isEmpty {
-                    return false
-                }
-                let alreadyShown = cert.wasExpiryAlertShown ?? false
-                if cert.vaccinationCertificate.expiresSoon || cert.vaccinationCertificate.isInvalid || cert.vaccinationCertificate.isExpired, !alreadyShown {
-                    cert.wasExpiryAlertShown = true
-                    _ = repository.setExpiryAlert(shown: true, token: cert)
-                    return true
-                }
-                return false
-            }
-            
-            if showAlert {
-                let action = DialogAction(title: "error_validity_check_certificates_button_title".localized)
-                self.router.showDialog(title: "certificate_check_invalidity_error_title".localized,
-                                       message: "certificate_check_invalidity_error_text".localized,
-                                       actions: [action],
-                                       style: .alert)
-            }
-            seal.fulfill_()
+        let tokens = tokensToShowExpirationAlertFor()
+        for var token in tokens {
+            token.wasExpiryAlertShown = true
+            _ = repository.setExpiryAlert(shown: true, token: token)
         }
+        if !tokens.isEmpty {
+            showExpiryAlert()
+        }
+        return .value
+    }
+
+    private func tokensToShowExpirationAlertFor() -> [ExtendedCBORWebToken] {
+        certificatePairsSorted
+            .map(\.certificates)
+            .compactMap { $0.sortLatest().first }
+            .filter(\.vaccinationCertificate.isNotTest)
+            .filter { extendedToken in
+                let alreadyShown = extendedToken.wasExpiryAlertShown ?? false
+                let token = extendedToken.vaccinationCertificate
+                let showAlert = !alreadyShown && (token.expiresSoon || token.isInvalid || token.isExpired)
+                return showAlert
+            }
+    }
+
+    private func showExpiryAlert() {
+        let action = DialogAction(
+            title: "error_validity_check_certificates_button_title".localized
+        )
+        router.showDialog(
+            title: "certificate_check_invalidity_error_title".localized,
+            message: "error_validity_check_certificates_message".localized,
+            actions: [action],
+            style: .alert)
     }
 }

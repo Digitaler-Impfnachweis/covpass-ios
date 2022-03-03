@@ -13,6 +13,7 @@ import XCTest
 
 class CertificatesOverviewRouterMock: CertificatesOverviewRouterProtocol {
     let showCheckSituationExpectation = XCTestExpectation(description: "showCheckSituationExpectation")
+    let showDialogExpectation = XCTestExpectation(description: "showDialogExpectation")
     var sceneCoordinator: SceneCoordinator = SceneCoordinatorMock()
     func showCheckSituation(userDefaults: Persistence) -> Promise<Void> {
         showCheckSituationExpectation.fulfill()
@@ -61,6 +62,10 @@ class CertificatesOverviewRouterMock: CertificatesOverviewRouterProtocol {
 
     func showScanPleaseHint() -> Promise<Void> {
         .value
+    }
+
+    func showDialog(title: String?, message: String?, actions: [DialogAction], style: UIAlertController.Style) {
+        showDialogExpectation.fulfill()
     }
 
     func toAppstoreCheckApp() {}

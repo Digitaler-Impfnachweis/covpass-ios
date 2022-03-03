@@ -30,16 +30,6 @@ class NameTests: XCTestCase {
 
         name1 = sut
         name2 = sut
-        name2.gn = "foo"
-        XCTAssertNotEqual(name1, name2)
-
-        name1 = sut
-        name2 = sut
-        name2.fn = "foo"
-        XCTAssertNotEqual(name1, name2)
-
-        name1 = sut
-        name2 = sut
         name2.fn = nil
         name2.gn = nil
         name2.gnt = "foo"
@@ -73,5 +63,149 @@ class NameTests: XCTestCase {
         XCTAssertEqual(sut.fullNameReverse, "Schmitt Mustermann, Erika Dörte")
         XCTAssertEqual(sut.fullNameTransliterated, "ERIKA<DOERTE SCHMITT<MUSTERMANN")
         XCTAssertEqual(sut.fullNameTransliteratedReverse, "SCHMITT<MUSTERMANN, ERIKA<DOERTE")
+    }
+
+    func testEquality_match() {
+        // Given
+        let sut1 = Name(gnt:"ERIKA", fnt: "MUSTERMANN")
+        let sut2 = Name(gnt:"ERIKA", fnt: "MUSTERMANN")
+
+        // When & Then
+        XCTAssertEqual(sut1, sut2)
+    }
+
+    func testEquality_no_match_in_gnt() {
+        // Given
+        let sut1 = Name(gnt:"ERIKA", fnt: "MUSTERMANN")
+        let sut2 = Name(gnt:"ANGELIKA", fnt: "MUSTERMANN")
+
+        // When & Then
+        XCTAssertNotEqual(sut1, sut2)
+    }
+
+    func testEquality_no_match_in_fnt() {
+        // Given
+        let sut1 = Name(gnt:"ERIKA", fnt: "MUSTERMANN")
+        let sut2 = Name(gnt:"ERIKA", fnt: "BEISPIELFRAU")
+
+        // When & Then
+        XCTAssertNotEqual(sut1, sut2)
+    }
+
+    func testEquality_match_despite_optional_middle_name() {
+        // Given
+        let sut1 = Name(gnt:"ERIKA", fnt: "MUSTERMANN")
+        let sut2 = Name(gnt:"ERIKA<MARIA", fnt: "MUSTERMANN")
+
+        // When & Then
+        XCTAssertEqual(sut1, sut2)
+    }
+
+    func testEquality_match_despite_last_name_addendum() {
+        // Given
+        let sut1 = Name(gnt:"ERIKA", fnt: "MUSTERMANN")
+        let sut2 = Name(gnt:"ERIKA", fnt: "MUSTERMANN<GABLER")
+
+        // When & Then
+        XCTAssertEqual(sut1, sut2)
+    }
+
+    func testEquality_match_for_twins_with_same_middle_name_false_positive() {
+        // Given
+        let sut1 = Name(gnt:"ERIKA<MARIA", fnt: "MUSTERMANN")
+        let sut2 = Name(gnt:"ANGELIKA<MARIA", fnt: "MUSTERMANN")
+
+        // When & Then
+        XCTAssertEqual(sut1, sut2)
+    }
+
+    func testEquality_match_despite_leading_and_trailing_chevron() {
+        // Given
+        let sut1 = Name(gnt:"ERIKA", fnt: "MUSTERMANN")
+        let sut2 = Name(gnt:"<ERIKA<", fnt: "<MUSTERMANN<")
+
+        // When & Then
+        XCTAssertEqual(sut1, sut2)
+    }
+
+    func testEquality_no_match_because_of_matching_chevrons() {
+        // Given
+        let sut1 = Name(gnt:"<ERIKA<", fnt: "<MUSTERMANN<")
+        let sut2 = Name(gnt:"<ANGELIKA<", fnt: "<MUSTERMANN<")
+
+        // When & Then
+        XCTAssertNotEqual(sut1, sut2)
+    }
+
+    func testEquality_match_despite_leading_and_trailing_whitespace() {
+        // Given
+        let sut1 = Name(gnt:"ERIKA", fnt: "MUSTERMANN")
+        let sut2 = Name(gnt:" ERIKA ", fnt: " MUSTERMANN ")
+
+        // When & Then
+        XCTAssertEqual(sut1, sut2)
+    }
+
+    func testEquality_no_match_because_of_matching_whitespace() {
+        // Given
+        let sut1 = Name(gnt:" ERIKA ", fnt: " MUSTERMANN ")
+        let sut2 = Name(gnt:" ANGELIKA ", fnt: " MUSTERMANN ")
+
+        // When & Then
+        XCTAssertNotEqual(sut1, sut2)
+    }
+
+    func testEquality_match_despite_doctors_degree_in_fnt() {
+        // Given
+        let sut1 = Name(gnt:"ERIKA", fnt: "MUSTERMANN")
+        let sut2 = Name(gnt:"ERIKA", fnt: "DR<MUSTERMANN")
+
+        // When & Then
+        XCTAssertEqual(sut1, sut2)
+    }
+
+    func testEquality_match_despite_doctors_degree_in_fnt_two_chevrons() {
+        // Given
+        let sut1 = Name(gnt:"ERIKA", fnt: "MUSTERMANN")
+        let sut2 = Name(gnt:"ERIKA", fnt: "DR<<MUSTERMANN")
+
+        // When & Then
+        XCTAssertEqual(sut1, sut2)
+    }
+
+    func testEquality_match_despite_doctors_degree_in_gnt() {
+        // Given
+        let sut1 = Name(gnt:"DR<ERIKA", fnt: "MUSTERMANN")
+        let sut2 = Name(gnt:"ERIKA", fnt: "MUSTERMANN")
+
+        // When & Then
+        XCTAssertEqual(sut1, sut2)
+    }
+
+    func testEquality_match_despite_doctors_degree_in_gnt_two_chevrons() {
+        // Given
+        let sut1 = Name(gnt:"DR<<ERIKA", fnt: "MUSTERMANN")
+        let sut2 = Name(gnt:"ERIKA", fnt: "DR<<MUSTERMANN")
+
+        // When & Then
+        XCTAssertEqual(sut1, sut2)
+    }
+
+    func testEquality_no_match_no_match_because_of_matching_doctors_degree_in_gnt() {
+        // Given
+        let sut1 = Name(gnt:"DR<<ERIKA", fnt: "MUSTERMANN")
+        let sut2 = Name(gnt:"DR<<ANGELIKA", fnt: "MUSTERMANN")
+
+        // When & Then
+        XCTAssertNotEqual(sut1, sut2)
+    }
+
+    func testEquality_no_match_no_match_because_of_matching_doctors_degree_in_fnt() {
+        // Given
+        let sut1 = Name(gnt:"ERIKA", fnt: "DR<<MUSTERMANN")
+        let sut2 = Name(gnt:"ERIKA", fnt: "DR<<BEISPIELFRAU")
+
+        // When & Then
+        XCTAssertNotEqual(sut1, sut2)
     }
 }

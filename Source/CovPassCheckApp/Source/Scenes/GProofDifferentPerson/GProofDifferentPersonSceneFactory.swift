@@ -13,20 +13,20 @@ import PromiseKit
 struct GProofDifferentPersonSceneFactory: ResolvableSceneFactory {
     
     // MARK: - Properties
-    var gProofToken: CBORWebToken
-    var testProofToken: CBORWebToken
+    var firstResultCert: CBORWebToken
+    var secondResultCert: CBORWebToken
     
     // MARK: - Lifecycle
     
-    init(gProofToken: CBORWebToken,
-         testProofToken: CBORWebToken) {
-        self.gProofToken = gProofToken
-        self.testProofToken = testProofToken
+    init(firstResultCert: CBORWebToken,
+         secondResultCert: CBORWebToken) {
+        self.firstResultCert = firstResultCert
+        self.secondResultCert = secondResultCert
     }
     
     func make(resolvable: Resolver<GProofResult>) -> UIViewController {
-        let viewModel = GProofDifferentPersonViewModel(gProofToken: gProofToken,
-                                                       testProofToken: testProofToken,
+        let viewModel = GProofDifferentPersonViewModel(firstResultCert: firstResultCert,
+                                                       secondResultCert: secondResultCert,
                                                        resolver: resolvable)
         let viewController = GProofDifferentPersonViewController(viewModel: viewModel)
         return viewController

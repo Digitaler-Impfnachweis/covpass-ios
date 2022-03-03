@@ -86,6 +86,42 @@ public class Name: Codable {
 
 extension Name: Equatable {
     public static func == (lhs: Name, rhs: Name) -> Bool {
-        return lhs.fullName == rhs.fullName
+        let fntMatches = lhs.fnt.matches(with: rhs.fnt)
+        guard fntMatches else {
+            return false
+        }
+        if let lhsGnt = lhs.gnt, let rhsGnt = rhs.gnt {
+             return lhsGnt.matches(with: rhsGnt)
+        }
+        return true
+    }
+}
+
+private extension String {
+    private func icaoSplitting() -> [String] {
+        let stringWithSingleChevron = replacingOccurrences(of: "<<", with: "<")
+        let components = stringWithSingleChevron.split(separator: "<")
+        let stringComponents = components.map { String($0) }
+
+        return stringComponents
+    }
+
+    func matches(with icaoName: String) -> Bool {
+        let components1 = icaoSplitting().trimming().removingDrTitle()
+        let components2 = icaoName.icaoSplitting().trimming().removingDrTitle()
+        let componentsSet1 = Set(components1)
+        let componentsSet2 = Set(components2)
+
+        return !componentsSet1.isDisjoint(with: componentsSet2)
+    }
+}
+
+private extension Array where Element == String {
+    func removingDrTitle() -> [Element] {
+        filter { $0 != "DR" }
+    }
+
+    func trimming() -> [String] {
+        map { $0.trimmingCharacters(in: .whitespaces) }
     }
 }

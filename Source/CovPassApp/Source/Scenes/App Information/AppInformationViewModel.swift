@@ -9,90 +9,48 @@
 import CovPassUI
 import Foundation
 
-private enum Constants {
-    enum Text {
-        static let leichteSprache = "app_information_title_company_easy_language".localized
-    }
-    enum WebLink {
-        static let leichteSprache = URL(string: "https://digitaler-impfnachweis-app.de/webviews/leichte-sprache/covpassapp")!
+class GermanAppInformationViewModel: AppInformationBaseViewModel {
+    init(
+        router: AppInformationRouterProtocol,
+        mainBundle: Bundle = .main,
+        licenseBundle: Bundle = .commonBundle
+    ) {
+        let entries = [
+            .webEntry(title: Texts.leichteSprache, url: URL(string: "https://digitaler-impfnachweis-app.de/webviews/leichte-sprache/covpassapp")!),
+            .webEntry(title: Texts.contactTitle, url: mainBundle.url(forResource: "contact-covpass-de", withExtension: "html")!),
+            .webEntry(title: Texts.faqTitle, url: URL(string: "https://www.digitaler-impfnachweis-app.de/webviews/client-app/faq/")!),
+            .webEntry(title: Texts.datenschutzTitle, url: mainBundle.url(forResource: "privacy-covpass-de", withExtension: "html")!),
+            .webEntry(title: Texts.companyDetailsTitle, url: URL(string: "https://www.digitaler-impfnachweis-app.de/webviews/imprint/")!),
+            .webEntry(title: Texts.openSourceLicenseTitle, url: licenseBundle.url(forResource: "license_de", withExtension: "html")!),
+            .webEntry(title: Texts.accessibilityStatementTitle, url: URL(string: "https://www.digitaler-impfnachweis-app.de/webviews/covpass-app-ios-barrierefreiheitserklaerung/")!),
+            AppInformationEntry(title: Texts.appInformationTitle, scene: TrustedListDetailsSceneFactory(sceneCoordinator: router.sceneCoordinator))
+        ]
+        super.init(router: router, entries: entries)
     }
 }
 
-class AppInformationViewModel: AppInformationViewModelProtocol {
-    // MARK: - Properties
-
-    let router: AppInformationRouterProtocol
-
-    var title: String {
-        "app_information_title".localized
-    }
-
-    var descriptionText: String {
-        "app_information_message".localized
-    }
-
-    var appVersionText: String {
-        String(
-            format: "Version %@".localized,
-            Bundle.main.appVersion()
-        )
-    }
-
-    lazy var entries: [AppInformationEntry] = {
-        var _entries = [
-            webEntry(
-                title: "app_information_title_contact".localized,
-                url: Bundle.main.url(forResource: Locale.current.isGerman() ? "contact-covpass-de" : "contact-covpass-en", withExtension: "html")!
-            ),
-
-            webEntry(
-                title: "app_information_title_faq".localized,
-                url: URL(string: Locale.current.isGerman() ? "https://www.digitaler-impfnachweis-app.de/webviews/client-app/faq/" : "https://www.digitaler-impfnachweis-app.de/en/webviews/client-app/faq/")!
-            ),
-
-            webEntry(
-                title: "app_information_title_datenschutz".localized,
-                url: Bundle.main.url(forResource: Locale.current.isGerman() ? "privacy-covpass-de" : "privacy-covpass-en", withExtension: "html")!
-            ),
-
-            webEntry(
-                title: "app_information_title_company_details".localized,
-                url: URL(string: Locale.current.isGerman() ? "https://www.digitaler-impfnachweis-app.de/webviews/imprint/" : "https://www.digitaler-impfnachweis-app.de/en/webviews/imprint/")!
-            ),
-
-            webEntry(
-                title: "app_information_title_open_source".localized,
-                url: Bundle.commonBundle.url(forResource: Locale.current.isGerman() ? "license_de" : "license_en", withExtension: "html")!
-            ),
-            
-            AppInformationEntry(
-                title: "app_information_title_update".localized,
-                scene: TrustedListDetailsSceneFactory(sceneCoordinator: router.sceneCoordinator)
-            )
+class EnglishAppInformationViewModel: AppInformationBaseViewModel {
+    init(
+        router: AppInformationRouterProtocol,
+        mainBundle: Bundle = .main,
+        licenseBundle: Bundle = .commonBundle
+    ) {
+        let entries = [
+            .webEntry(title: Texts.contactTitle, url: mainBundle.url(forResource: "contact-covpass-en", withExtension: "html")!),
+            .webEntry(title: Texts.faqTitle, url: URL(string: "https://www.digitaler-impfnachweis-app.de/en/webviews/client-app/faq/")!),
+            .webEntry(title: Texts.datenschutzTitle, url: mainBundle.url(forResource: "privacy-covpass-en", withExtension: "html")!),
+            .webEntry(title: Texts.companyDetailsTitle, url: URL(string: "https://www.digitaler-impfnachweis-app.de/en/webviews/imprint/")!),
+            .webEntry(title: Texts.openSourceLicenseTitle, url: licenseBundle.url(forResource: "license_en", withExtension: "html")!),
+            .webEntry(title: Texts.accessibilityStatementTitle, url: URL(string: "https://www.digitaler-impfnachweis-app.de/en/webviews/covpass-app-ios-accessibility-statement/")!),
+            AppInformationEntry(title: Texts.appInformationTitle, scene: TrustedListDetailsSceneFactory(sceneCoordinator: router.sceneCoordinator))
         ]
-        if Locale.current.isGerman() {
-            _entries.insert(webEntry(
-                title: Constants.Text.leichteSprache,
-                url: Constants.WebLink.leichteSprache
-            ), at: 0)
-        }
-        return _entries
-    }()
-
-    // MARK: - Lifecycle
-
-    init(router: AppInformationRouterProtocol) {
-        self.router = router
+        super.init(router: router, entries: entries)
     }
+}
 
-    // MARK: - Methods
-
-    func showSceneForEntry(_ entry: AppInformationEntry) {
-        router.showScene(entry.scene)
-    }
-
-    private func webEntry(title: String, url: URL) -> AppInformationEntry {
-        AppInformationEntry(
+private extension AppInformationEntry {
+    static func webEntry(title: String, url: URL) -> AppInformationEntry {
+        .init(
             title: title,
             scene: WebviewSceneFactory(title: title, url: url)
         )

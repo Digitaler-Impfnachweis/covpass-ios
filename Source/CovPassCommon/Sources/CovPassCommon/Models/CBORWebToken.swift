@@ -82,16 +82,11 @@ public struct CBORWebToken: Codable {
 extension CBORWebToken {
     
     public var isFraud: Bool {
-        let regex = try! NSRegularExpression(pattern: "[a-zA-Z]{2}\\/.+?(?=\\/)", options: NSRegularExpression.Options.caseInsensitive)
-        let range = NSMakeRange(0, hcert.dgc.uvci.count)
-        guard let match = regex.firstMatch(in: hcert.dgc.uvci, options: .withTransparentBounds, range: range),
-              let subRange = Range(match.range(at: 0), in: hcert.dgc.uvci),
-              let location = hcert.dgc.uvci[subRange.lowerBound ..< subRange.upperBound].data(using: .utf8)?.sha512().hexEncodedString()
-        else { return false }
-        for entity in VaccinationRepository.entityBlacklist where entity == location {
-            return true
+        guard let locationHash = hcert.dgc.uvciLocationHash else {
+            return false
         }
-        return false
+        let isFraud = VaccinationRepository.entityBlacklist.contains(locationHash)
+        return isFraud
     }
     
     public var isVaccination: Bool {
@@ -116,5 +111,9 @@ extension CBORWebToken {
     
     public var isNotTest: Bool {
        !isTest
+    }
+    
+    public var certType: CertType {
+        isTest ? .test : isRecovery ? .recovery : .vaccination
     }
 }

@@ -16,14 +16,13 @@ class GProofViewController: UIViewController {
     @IBOutlet var certStack: UIStackView!
     @IBOutlet var personStack: UIStackView!
     @IBOutlet var buttonStack: UIStackView!
-    @IBOutlet var buttonScanTest: MainButton!
+    @IBOutlet var buttonScanNext: MainButton!
     @IBOutlet var buttonStartOver: MainButton!
-    @IBOutlet var buttonScanGProof: MainButton!
     @IBOutlet var buttonRetry: MainButton!
     @IBOutlet var personStackHeadline: UILabel!
     @IBOutlet var pageFooter: UILabel!
-    @IBOutlet var resultGProof: CertResultCard!
-    @IBOutlet var resultTest: CertResultCard!
+    @IBOutlet var firstResultCard: CertResultCard!
+    @IBOutlet var seconResultCard: CertResultCard!
     @IBOutlet var resultPerson: CertResultCard!
     
     private(set) var viewModel: GProofViewModelProtocol
@@ -61,58 +60,55 @@ class GProofViewController: UIViewController {
     }
     
     private func configureButtons() {
-        buttonScanTest.style = .primary
-        buttonScanTest.title = viewModel.buttonScanTest
-        buttonScanTest.isHidden = viewModel.buttonScanTestIsHidden
-        buttonScanTest.action = viewModel.scanTest
+        buttonScanNext.style = .primary
+        buttonScanNext.title = viewModel.buttonScanNextTitle
+        buttonScanNext.isHidden = viewModel.scanNextButtonIsHidden
+        buttonScanNext.action = viewModel.scanNext
         buttonRetry.style = .primary
         buttonRetry.title = viewModel.buttonRetry
         buttonRetry.isHidden = viewModel.buttonRetryIsHidden
         buttonRetry.action = viewModel.retry
-        let allOtherThreeButtonsAreHidden = viewModel.buttonScanTestIsHidden && viewModel.buttonRetryIsHidden && viewModel.buttonScan2GIsHidden
-        buttonStartOver.style = allOtherThreeButtonsAreHidden ? .primary : .alternative
+        buttonStartOver.style = viewModel.scanNextButtonIsHidden && viewModel.buttonRetryIsHidden ? .primary : .alternative
         buttonStartOver.title = viewModel.buttonStartOver
         buttonStartOver.isHidden = viewModel.buttonStartOverIsHidden
         buttonStartOver.action = viewModel.startover
-        buttonScanGProof.style = .primary
-        buttonScanGProof.title = viewModel.buttonScan2G
-        buttonScanGProof.isHidden = viewModel.buttonScan2GIsHidden
-        buttonScanGProof.action = viewModel.scan2GProof
-        resultGProof.action = viewModel.showResultGProof
-        resultTest.action = viewModel.showResultTestProof
+        firstResultCard.action = viewModel.showFirstCardResult
+        seconResultCard.action = viewModel.showSecondCardResult
     }
     
     private func configureContent() {
-        personStack.isHidden = viewModel.onlyOneIsScannedAndThisFailed
+        personStack.isHidden = viewModel.firstIsFailedTechnicalReason
         pageFooter.attributedText = viewModel.footnote.styledAs(.subheader_2)
-        pageFooter.isHidden = viewModel.testResultViewIsHidden
+        pageFooter.isHidden = viewModel.pageFooterIsHidden
         personStackHeadline.attributedText = viewModel.checkIdMessage.styledAs(.subheader_2)
         let resultTitleStyle: TextStyle = .header_2
         
-        let linkIsAvailabelForGProof = viewModel.resultGProofLinkImage != nil
-        let linkIsAvailabelForTestProof = viewModel.resultTestLinkImage != nil
+        let linkIsAvailabelForFirstResult = viewModel.firstResultLinkImage != nil
+        let linkIsAvailabelForSecondResult = viewModel.seconResultLinkImage != nil
+        let defaultSubTitleStyleFirstResult: TextStyle = viewModel.firstResult != nil ? .header_2 : .subheader_2
+        let defaultSubTitleStyleSecondResult: TextStyle = viewModel.secondResult != nil ? .header_2 : .subheader_2
         let defaultSubTitleStyle: TextStyle = .subheader_2
         let linkBottomTextStyle: TextStyle = .header_3
         let defaultSubTitleColor: UIColor = .gray
         let linkBottomColor: UIColor = .brandAccent
         
-        let subTitleStyleGProof: TextStyle = linkIsAvailabelForGProof ? linkBottomTextStyle : defaultSubTitleStyle
-        let subTitleStyleTestProof: TextStyle = linkIsAvailabelForTestProof ? linkBottomTextStyle : defaultSubTitleStyle
-        let subTitleColorGProof: UIColor = linkIsAvailabelForGProof ? linkBottomColor : defaultSubTitleColor
-        let subTitleColorTestProof: UIColor = linkIsAvailabelForTestProof ? linkBottomColor : defaultSubTitleColor
-
-        resultGProof.resultImage = viewModel.resultGProofImage
-        resultGProof.title = viewModel.resultGProofTitle.styledAs(resultTitleStyle)
-        resultGProof.subtitle = viewModel.resultGProofSubtitle?.styledAs(subTitleStyleGProof).colored(subTitleColorGProof)
-        resultGProof.linkImage = viewModel.resultGProofLinkImage
-        resultGProof.bottomText = viewModel.resultGProofFooter?.styledAs(.header_1)
+        let subTitleStyleFirstResult: TextStyle = linkIsAvailabelForFirstResult ? linkBottomTextStyle : defaultSubTitleStyleFirstResult
+        let subTitleStyleSecondResult: TextStyle = linkIsAvailabelForSecondResult ? linkBottomTextStyle : defaultSubTitleStyleSecondResult
+        let subTitleColorFirstResult: UIColor = linkIsAvailabelForFirstResult ? linkBottomColor : defaultSubTitleColor
+        let subTitleColorSecondResult: UIColor = linkIsAvailabelForSecondResult ? linkBottomColor : defaultSubTitleColor
         
-        resultTest.isHidden = viewModel.testResultViewIsHidden
-        resultTest.resultImage = viewModel.resultTestImage
-        resultTest.title = viewModel.resultTestTitle.styledAs(resultTitleStyle)
-        resultTest.subtitle = viewModel.resultTestSubtitle?.styledAs(subTitleStyleTestProof).colored(subTitleColorTestProof)
-        resultTest.linkImage = viewModel.resultTestLinkImage
-        resultTest.bottomText = viewModel.resultTestFooter?.styledAs(.header_1)
+        firstResultCard.resultImage = viewModel.firstResultImage
+        firstResultCard.title = viewModel.firstResultTitle.styledAs(resultTitleStyle)
+        firstResultCard.subtitle = viewModel.firstResultSubtitle?.styledAs(subTitleStyleFirstResult).colored(subTitleColorFirstResult)
+        firstResultCard.linkImage = viewModel.firstResultLinkImage
+        firstResultCard.bottomText = viewModel.firstResultFooterText?.styledAs(.header_1)
+        
+        seconResultCard.isHidden = viewModel.seconResultViewIsHidden
+        seconResultCard.resultImage = viewModel.secondResultImage
+        seconResultCard.title = viewModel.secondResultTitle.styledAs(resultTitleStyle)
+        seconResultCard.subtitle = viewModel.seconResultSubtitle?.styledAs(subTitleStyleSecondResult).colored(subTitleColorSecondResult)
+        seconResultCard.linkImage = viewModel.seconResultLinkImage
+        seconResultCard.bottomText = viewModel.seconResultFooterText?.styledAs(.header_1)
         
         resultPerson.resultImage = viewModel.resultPersonIcon
         resultPerson.title = viewModel.resultPersonTitle?.styledAs(resultTitleStyle)

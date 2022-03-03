@@ -19,8 +19,9 @@ protocol GProofRouterProtocol: DialogRouterProtocol, ValidationResultRouterProto
     func scanQRCode() -> Promise<ScanResult>
     func showCertificate(_ certificate: CBORWebToken?,
                          _2GContext: Bool,
-                         userDefaults: Persistence)
+                         userDefaults: Persistence,
+                         buttonHidden: Bool) -> Promise<CBORWebToken>
     func showError(error: Error)
-    func showDifferentPerson(gProofToken: CBORWebToken,
-                             testProofToken: CBORWebToken) -> Promise<GProofResult>
+    func showDifferentPerson(firstResultCert: CBORWebToken,
+                             scondResultCert: CBORWebToken) -> Promise<GProofResult>
 }

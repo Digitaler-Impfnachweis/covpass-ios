@@ -38,6 +38,22 @@ public struct DigitalGreenCertificate: Codable {
         return ""
     }
 
+    public var uvciLocation: String? {
+        let pattern = String(cString: #"[a-zA-Z]{2}\/.+?(?=\/)"#, encoding: .utf8)!
+        let regex = try! NSRegularExpression(pattern: pattern, options: NSRegularExpression.Options.caseInsensitive)
+        let range = NSMakeRange(0, uvci.count)
+        guard let match = regex.firstMatch(in: uvci, options: .withTransparentBounds, range: range),
+              let subRange = Range(match.range(at: 0), in: uvci) else {
+            return nil
+        }
+        let location = uvci[subRange.lowerBound ..< subRange.upperBound]
+        return String(location)
+    }
+
+    public var uvciLocationHash: String? {
+        uvciLocation?.data(using: .utf8)?.sha512().hexEncodedString()
+    }
+
     /// Returns `true` if certificate is a booster vaccination
     public var isVaccinationBoosted: Bool {
         guard let result = v?.filter({ $0.isBoosted }) else { return false }
@@ -104,3 +120,15 @@ extension DigitalGreenCertificate: Equatable {
         return lhs.nam == rhs.nam && lhs.dob == rhs.dob
     }
 }
+
+extension DigitalGreenCertificate {
+    public var isFullyImmunized: Bool {
+        guard let result = v?.filter({ $0.fullImmunization }) else { return false }
+        return !result.isEmpty
+    }
+    
+    public var isPCR: Bool {
+        guard let result = t?.filter({ $0.isPCR }) else { return false }
+        return !result.isEmpty
+    }
+ }

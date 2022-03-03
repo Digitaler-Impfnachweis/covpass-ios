@@ -11,7 +11,9 @@
 class AppInformationViewControllerSnapShotTests: BaseSnapShotTests {
 
     func testDefault() {
-        let vm = AppInformationViewModel(router: AppInformationRouterMock())
+        let vm = EnglishAppInformationViewModel(
+            router: AppInformationRouterMock()
+        )
         let vc = AppInformationViewController(viewModel: vm)
         verifyView(vc: vc)
     }

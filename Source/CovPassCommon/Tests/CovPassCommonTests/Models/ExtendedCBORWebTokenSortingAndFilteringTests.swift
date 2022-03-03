@@ -39,6 +39,11 @@ extension CBORWebToken {
         return self
     }
 
+    func doseNumber(_ dn: Int) -> Self {
+        hcert.dgc.v?.first?.dn = dn
+        return self
+    }
+
     func extended(vaccinationQRCodeData: String = "") -> ExtendedCBORWebToken {
         ExtendedCBORWebToken(vaccinationCertificate: self,
                              vaccinationQRCodeData: vaccinationQRCodeData)
@@ -459,6 +464,29 @@ class CertificateSorterTests: XCTestCase {
         // THEN
         XCTAssertEqual(sortedCertifiates.count, 7)
         XCTAssertEqual(sortedCertifiates[0].vaccinationCertificate.hcert.dgc.uvci, "7")
+    }
+
+    func testSortLatest_booster_order() {
+        // Given
+        let sut = [
+            CBORWebToken.mockVaccinationCertificate.doseNumber(3).extended(),
+            CBORWebToken.mockVaccinationCertificate.doseNumber(1).extended(),
+            CBORWebToken.mockVaccinationCertificate.doseNumber(4).extended(),
+            CBORWebToken.mockVaccinationCertificate.doseNumber(2).extended()
+        ]
+
+        // When
+        let tokens = sut.sortLatest()
+
+        // Then
+        guard tokens.count > 3 else {
+            XCTFail("Number of tokens must be bigger 3.")
+            return
+        }
+        XCTAssertEqual(tokens[0].vaccinationCertificate.hcert.dgc.v!.first!.dn, 4)
+        XCTAssertEqual(tokens[1].vaccinationCertificate.hcert.dgc.v?.first?.dn, 3)
+        XCTAssertEqual(tokens[2].vaccinationCertificate.hcert.dgc.v?.first?.dn, 2)
+        XCTAssertEqual(tokens[3].vaccinationCertificate.hcert.dgc.v?.first?.dn, 1)
     }
     
     func testFilter() throws {

@@ -11,6 +11,13 @@ import CovPassUI
 import PromiseKit
 import UIKit
 
+private enum Constants {
+    static let germanyAbbreviation = "DE"
+    enum Keys {
+        static let germanyAbbreviationKey = "vaccination_certificate_detail_view_data_vaccine_country_germany".localized
+    }
+}
+
 class CertificateItemDetailViewModel: CertificateItemDetailViewModelProtocol {
 
     // MARK: - Properties
@@ -66,7 +73,7 @@ class CertificateItemDetailViewModel: CertificateItemDetailViewModelProtocol {
     private var dob: String {
         return DateUtils.displayIsoDateOfBirth(dgc)
     }
-
+    
     var items: [ContentItem] {
         if let r = dgc.r?.first {
             return [
@@ -77,7 +84,7 @@ class CertificateItemDetailViewModel: CertificateItemDetailViewModelProtocol {
                 ContentItem("recovery_certificate_detail_view_data_disease".localized, r.tgDisplayName),
                 ContentItem("recovery_certificate_detail_view_data_date_first_positive_result".localized, DateUtils.isoDateFormatter.string(from: r.fr),
                             accessibilityLabel(for: r.fr, label: "recovery_certificate_detail_view_data_date_first_positive_result".localized)),
-                ContentItem("recovery_certificate_detail_view_data_country".localized, r.co.localized),
+                ContentItem("recovery_certificate_detail_view_data_country".localized, countryLocalized(r)),
                 ContentItem("recovery_certificate_detail_view_data_issuer".localized, r.is),
                 ContentItem("recovery_certificate_detail_view_data_valid_from".localized, DateUtils.isoDateFormatter.string(from: r.df),
                             accessibilityLabel(for: r.df, label: "recovery_certificate_detail_view_data_valid_from".localized)),
@@ -101,7 +108,7 @@ class CertificateItemDetailViewModel: CertificateItemDetailViewModelProtocol {
                             accessibilityLabel(for: t.sc, label: "test_certificate_detail_view_data_test_date_and_time".localized, includesTime: true)),
                 ContentItem("test_certificate_detail_view_data_test_results".localized, t.trDisplayName),
                 ContentItem("test_certificate_detail_view_data_test_centre".localized, t.tc),
-                ContentItem("test_certificate_detail_view_data_test_country".localized, t.co.localized),
+                ContentItem("test_certificate_detail_view_data_test_country".localized, countryLocalized(t)),
                 ContentItem("test_certificate_detail_view_data_test_issuer".localized, t.is),
                 ContentItem("test_certificate_detail_view_data_test_identifier".localized, t.ciDisplayName),
                 ContentItem("test_certificate_detail_view_data_expiry_date".localized,
@@ -121,7 +128,7 @@ class CertificateItemDetailViewModel: CertificateItemDetailViewModelProtocol {
                 ContentItem("vaccination_certificate_detail_view_data_vaccine_number".localized, "\(v.dn) / \(v.sd)"),
                 ContentItem("vaccination_certificate_detail_view_data_vaccine_date_".localized, DateUtils.isoDateFormatter.string(from: v.dt),
                             accessibilityLabel(for: v.dt, label: "vaccination_certificate_detail_view_data_vaccine_date_".localized)),
-                ContentItem("vaccination_certificate_detail_view_data_vaccine_country".localized, v.co.localized),
+                ContentItem("vaccination_certificate_detail_view_data_vaccine_country".localized, countryLocalized(v)),
                 ContentItem("vaccination_certificate_detail_view_data_vaccine_issuer".localized, v.is),
                 ContentItem("vaccination_certificate_detail_view_data_vaccine_identifier".localized, v.ciDisplayName),
                 ContentItem("vaccination_certificate_detail_view_data_expiry_date".localized,
@@ -196,6 +203,25 @@ class CertificateItemDetailViewModel: CertificateItemDetailViewModelProtocol {
                 style: .alert
             )
         }
+    }
+    
+    private func countryLocalized(_ v: Vaccination) -> String {
+        countryLocalized(v.co)
+    }
+    
+    private func countryLocalized(_ r: Recovery) -> String {
+        countryLocalized(r.co)
+    }
+    
+    private func countryLocalized(_ t: Test) -> String {
+        countryLocalized(t.co)
+    }
+    
+    private func countryLocalized(_ co: String) -> String {
+        if co == Constants.germanyAbbreviation {
+            return Constants.Keys.germanyAbbreviationKey
+        }
+        return co.localized
     }
 
     // MARK: - Accessibility

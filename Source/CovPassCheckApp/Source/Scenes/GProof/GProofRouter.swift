@@ -45,13 +45,14 @@ class GProofRouter: GProofRouterProtocol {
     
     func showCertificate(_ certificate: CBORWebToken?,
                          _2GContext: Bool,
-                         userDefaults: Persistence) {
+                         userDefaults: Persistence,
+                         buttonHidden: Bool) -> Promise<CBORWebToken> {
         sceneCoordinator.present(
             ValidationResultSceneFactory(
                 router: ValidationResultRouter(sceneCoordinator: sceneCoordinator),
                 certificate: certificate,
                 error: nil,
-                buttonHidden: true,
+                buttonHidden: buttonHidden,
                 _2GContext: _2GContext,
                 userDefaults: userDefaults
             )
@@ -71,11 +72,11 @@ class GProofRouter: GProofRouterProtocol {
                    style: .alert)
     }
     
-    func showDifferentPerson(gProofToken: CBORWebToken,
-                             testProofToken: CBORWebToken) -> Promise<GProofResult> {
+    func showDifferentPerson(firstResultCert: CBORWebToken,
+                             scondResultCert: CBORWebToken) -> Promise<GProofResult> {
         sceneCoordinator.present(
-            GProofDifferentPersonSceneFactory(gProofToken: gProofToken,
-                                              testProofToken: testProofToken)
+            GProofDifferentPersonSceneFactory(firstResultCert: firstResultCert,
+                                              secondResultCert: scondResultCert)
         )
     }
     

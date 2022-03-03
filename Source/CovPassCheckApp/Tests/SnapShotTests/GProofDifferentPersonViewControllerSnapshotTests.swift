@@ -17,8 +17,8 @@ class GProofDifferentPersonViewControllerSnapshotTests: BaseSnapShotTests {
         let gProofToken = CBORWebToken.mockVaccinationCertificate
         let testToken = CBORWebToken.mockTestCertificate
         let (_, resolver) = Promise<GProofResult>.pending()
-        let vm = GProofDifferentPersonViewModel(gProofToken: gProofToken,
-                                                testProofToken: testToken,
+        let vm = GProofDifferentPersonViewModel(firstResultCert: gProofToken,
+                                                secondResultCert: testToken,
                                                 resolver: resolver)
         let vc = GProofDifferentPersonViewController(viewModel: vm)
         verifyView(vc: vc)
@@ -29,8 +29,8 @@ class GProofDifferentPersonViewControllerSnapshotTests: BaseSnapShotTests {
         var testToken = CBORWebToken.mockTestCertificate
         testToken.hcert.dgc.dob = DateUtils.parseDate("1999-04-26T15:05:00")!
         let (_, resolver) = Promise<GProofResult>.pending()
-        let vm = GProofDifferentPersonViewModel(gProofToken: gProofToken,
-                                                testProofToken: testToken,
+        let vm = GProofDifferentPersonViewModel(firstResultCert: gProofToken,
+                                                secondResultCert: testToken,
                                                 resolver: resolver)
         let vc = GProofDifferentPersonViewController(viewModel: vm)
         verifyView(vc: vc)

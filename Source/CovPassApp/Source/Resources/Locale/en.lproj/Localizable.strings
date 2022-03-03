@@ -267,7 +267,7 @@
 
 "accessibility_certificate_favorite_button_label_not_active" = "Always display this person's certificates in first place: not active";
 
-"certificate_action_button_check_validity" = "Check for travel";
+"certificate_action_button_check_validity" = "Check validity";
 
 
 /********** screen: check validity **********/
@@ -294,7 +294,7 @@
 
 "accessibility_certificate_check_validity_selection_time_closing_announce" = "The view \"Select time\" has been closed";
 
-"certificate_check_validity_title" = "Check validity for travel";
+"certificate_check_validity_title" = "Check validity";
 
 "accessibility_certificate_check_validity_selection_country_selected" = "%@, selected";
 
@@ -848,6 +848,8 @@
 
 "vaccination_certificate_detail_view_data_vaccine_country" = "Land der Impfung / Country vaccinating";
 
+"vaccination_certificate_detail_view_data_vaccine_country_germany" = "Germany";
+
 "accessibility_vaccination_certificate_detail_view_data_vaccine_country" = "Country vaccinating";
 
 "vaccination_certificate_detail_view_data_vaccine_issuer" = "Zertifikatsaussteller / Certificate issuer";
@@ -1195,6 +1197,8 @@
 
 "app_information_title_accessibility_statement" = "Accessibility statement";
 
+"app_information_title_accessibility_statement_linked" = "#Accessibility statement::$0#";
+
 "app_information_title_update" = "Update rules of entry";
 
 "app_information_message_update" = "To check the validity of certificates, the app requires up-to-date lists of trusted certificate issuers as well as the current Covid-19 rules in the relevant travel countries.\n\nThese lists are updated automatically on a daily basis. You can also manually update them here at any time.";
@@ -1435,3 +1439,50 @@
 "cancellation_share_certificate_action_button_no" = "Not now";
 
 "cancellation_share_certificate_action_button_yes" = "Yes, finish";
+
+
+/********** dcc renewal **********/
+
+"certificate_renewal_startpage_headline" = "Changes to your certificates";
+
+"certificate_renewal_startpage_copy" = "The EU specifications for certain vaccination certificates have been changed. This certificate does not correspond to the current numbering. It is still valid. However, if it is a certificate for a booster vaccination, it will not be recognized as such when checked. Therefore we recommend requesting a new certificate with the number 2/1 directly free of charge via the app.";
+
+"certificate_renewal_startpage_copy_box" = "The process is uncomplicated and takes only a few minutes. You can trigger the renewal also later in the detail view of your certificates.";
+
+"certificate_renewal_startpage_main_button" = "Renew now";
+
+"certificate_renewal_startpage_secondary_button" = "Renew later";
+
+"certificate_renewal_consent_page_transfer_certificates_headline" = "Consent to transmitting your certificates to the RKI";
+
+"certificate_renewal_consent_page_transfer_certificates_subline" = "Certificates transmitted once:";
+
+"certificate_renewal_consent_page_transfer_certificates_consent_box_subline" = "Your consent";
+
+"certificate_renewal_consent_page_transfer_certificates_consent_box_copy" = "By clicking \"Agree\" you agree to the following steps:";
+
+"certificate_renewal_consent_page_transfer_certificates_consent_box_copy_list_item_1" = "The app transmits the vaccination certificate to the RKI.";
+
+"certificate_renewal_consent_page_transfer_certificates_consent_box_copy_list_item_2" = "The RKI checks/verifies the certificate, issues an updated certificate and transmits it to the app.";
+
+"certificate_renewal_consent_page_transfer_certificates_consent_box_copy_list_item_3" = "To ensure that certificates can only be updated once, the identifier of the old certificate is documented by the RKI.";
+
+"certificate_renewal_consent_page_transfer_certificates_copy" = "The renewal of the certificate is voluntary and free of charge. Detailed information on data processing can be found in the privacy policy:";
+
+"certificate_renewal_consent_page_transfer_certificates_button_link" = "Privacy policy";
+
+"certificate_renewal_consent_page_transfer_certificates_confirmation_button" = "Agree";
+
+"certificate_renewal_consent_page_transfer_certificates_cancel_button" = "Cancel";
+
+"certificate_renewal_confirmation_page_headline" = "Your certificate was successfully renewed";
+
+"certificate_renewal_confirmation_page_copy" = "Your new certificate completely replaces the previous one. You can delete the old certificate now.";
+
+"certificate_renewal_confirmation_page_certificate_list_new" = "New certificate:";
+
+"certificate_renewal_confirmation_page_certificate_list_old" = "Old certificate:";
+
+"certificate_renewal_confirmation_page_certificate_delete_button" = "Delete old certificate";
+
+"certificate_renewal_confirmation_page_certificate_secondary_button" = "Delete later";

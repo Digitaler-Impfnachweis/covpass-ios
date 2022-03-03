@@ -43,13 +43,16 @@ class GProofViewModelTests: XCTestCase {
         super.tearDown()
     }
     
-    func testCustom() {
+    func testCustom() throws {
         // GIVEN
         let initialToken = CBORWebToken.mockTestCertificate
         let vaccinationRepoMock = VaccinationRepositoryMock()
         let certLogicMock = DCCCertLogicMock()
         let routerMock = GProofMockRouter()
-        vaccinationRepoMock.checkedCert = CBORWebToken.mockTestCertificate
+        let token: CBORWebToken = CBORWebToken.mockTestCertificate
+        let dateForTwelveMonthAgo = Calendar.current.date(byAdding: .month, value: -13, to: Date())
+        token.hcert.dgc.t!.first!.sc = try XCTUnwrap(dateForTwelveMonthAgo)
+        vaccinationRepoMock.checkedCert = token
         certLogicMock.validateResult = [.init(rule: nil, result: .passed, validationErrors: nil)]
         let sut = GProofViewModel(resolvable: resolver,
                                   initialToken: initialToken,
@@ -62,46 +65,46 @@ class GProofViewModelTests: XCTestCase {
         // WHEN
         
         // THEN
-        XCTAssertEqual(sut.resultGProofImage, UIImage.detailStatusFullEmpty)
-        XCTAssertEqual(sut.resultGProofLinkImage, nil)
-        XCTAssertEqual(sut.resultGProofTitle, "2G proof*")
-        XCTAssertEqual(sut.resultGProofFooter, nil)
-        XCTAssertEqual(sut.resultGProofSubtitle, "Not checked yet")
+        XCTAssertEqual(sut.firstResultImage, UIImage.detailStatusTest)
+        XCTAssertEqual(sut.firstResultLinkImage, nil)
+        XCTAssertEqual(sut.firstResultTitle, "Negative PCR test")
+        XCTAssertEqual(sut.firstResultFooterText, nil)
+        XCTAssertEqual(sut.firstResultSubtitle, "0 hours ago")
         
-        XCTAssertEqual(sut.resultTestImage, UIImage.detailStatusTest)
-        XCTAssertEqual(sut.resultTestLinkImage, nil)
-        XCTAssertEqual(sut.resultTestTitle, "Negative PCR test from 0 hours ago")
-        XCTAssertEqual(sut.resultTestFooter, nil)
-        XCTAssertEqual(sut.resultTestSubtitle, nil)
-        
-        XCTAssertEqual(sut.resultPersonTitle!, "Doe John")
-        XCTAssertEqual(sut.resultPersonSubtitle!, "DOE JOHN")
-        XCTAssertEqual(sut.resultPersonFooter!, "Born on Jan 1, 1990")
+        XCTAssertEqual(sut.secondResultImage, UIImage.detailStatusFullEmpty)
+        XCTAssertEqual(sut.seconResultLinkImage, nil)
+        XCTAssertEqual(sut.secondResultTitle, "Vaccination* or recovery")
+        XCTAssertEqual(sut.seconResultFooterText, nil)
+        XCTAssertEqual(sut.seconResultSubtitle, "May be required for 2G+")
+
+        XCTAssertEqual(try XCTUnwrap(sut.resultPersonTitle), "Doe John")
+        XCTAssertEqual(try XCTUnwrap(sut.resultPersonSubtitle), "DOE JOHN")
+        XCTAssertEqual(try XCTUnwrap(sut.resultPersonFooter), "Born on Jan 1, 1990")
         XCTAssertEqual(sut.resultPersonIcon, UIImage.iconCardInverse)
         
         XCTAssertFalse((sut.router as! GProofMockRouter).errorShown)
 
         // WHEN
         vaccinationRepoMock.checkedCert = CBORWebToken.mockTestCertificate
-        sut.scan2GProof()
+        sut.scanNext()
         RunLoop.current.run(for: 0.1)
         
         // THEN
-        XCTAssertEqual(sut.resultGProofImage, UIImage.detailStatusFullEmpty)
-        XCTAssertEqual(sut.resultGProofLinkImage, nil)
-        XCTAssertEqual(sut.resultGProofTitle, "2G proof*")
-        XCTAssertEqual(sut.resultGProofFooter, nil)
-        XCTAssertEqual(sut.resultGProofSubtitle, "Not checked yet")
+        XCTAssertEqual(sut.firstResultImage, UIImage.detailStatusTest)
+        XCTAssertEqual(sut.firstResultLinkImage, nil)
+        XCTAssertEqual(sut.firstResultTitle, "Negative PCR test")
+        XCTAssertEqual(sut.firstResultFooterText, nil)
+        XCTAssertEqual(sut.firstResultSubtitle, "0 hours ago")
         
-        XCTAssertEqual(sut.resultTestImage, UIImage.detailStatusTest)
-        XCTAssertEqual(sut.resultTestLinkImage, nil)
-        XCTAssertEqual(sut.resultTestTitle, "Negative PCR test from 0 hours ago")
-        XCTAssertEqual(sut.resultTestFooter, nil)
-        XCTAssertEqual(sut.resultTestSubtitle, nil)
-        
-        XCTAssertEqual(sut.resultPersonTitle!, "Doe John")
-        XCTAssertEqual(sut.resultPersonSubtitle!, "DOE JOHN")
-        XCTAssertEqual(sut.resultPersonFooter!, "Born on Jan 1, 1990")
+        XCTAssertEqual(sut.secondResultImage, UIImage.detailStatusFullEmpty)
+        XCTAssertEqual(sut.seconResultLinkImage, nil)
+        XCTAssertEqual(sut.secondResultTitle, "Vaccination* or recovery")
+        XCTAssertEqual(sut.seconResultFooterText, nil)
+        XCTAssertEqual(sut.seconResultSubtitle, "May be required for 2G+")
+
+        XCTAssertEqual(try XCTUnwrap(sut.resultPersonTitle), "Doe John")
+        XCTAssertEqual(try XCTUnwrap(sut.resultPersonSubtitle), "DOE JOHN")
+        XCTAssertEqual(try XCTUnwrap(sut.resultPersonFooter), "Born on Jan 1, 1990")
         XCTAssertEqual(sut.resultPersonIcon, UIImage.iconCardInverse)
         
         XCTAssertTrue((sut.router as! GProofMockRouter).errorShown)
@@ -113,25 +116,25 @@ class GProofViewModelTests: XCTestCase {
         let testToken: CBORWebToken = CBORWebToken.mockTestCertificate
         testToken.hcert.dgc.nam.fnt = "Bob"
         vaccinationRepoMock.checkedCert = testToken
-        sut.scan2GProof()
+        sut.scanNext()
         RunLoop.current.run(for: 0.1)
         
         // THEN
-        XCTAssertEqual(sut.resultGProofImage, UIImage.detailStatusFullEmpty)
-        XCTAssertEqual(sut.resultGProofLinkImage, nil)
-        XCTAssertEqual(sut.resultGProofTitle, "2G proof*")
-        XCTAssertEqual(sut.resultGProofFooter, nil)
-        XCTAssertEqual(sut.resultGProofSubtitle, "Not checked yet")
+        XCTAssertEqual(sut.firstResultImage, UIImage.detailStatusTest)
+        XCTAssertEqual(sut.firstResultLinkImage, nil)
+        XCTAssertEqual(sut.firstResultTitle, "Negative PCR test")
+        XCTAssertEqual(sut.firstResultFooterText, nil)
+        XCTAssertEqual(sut.firstResultSubtitle, "0 hours ago")
         
-        XCTAssertEqual(sut.resultTestImage, UIImage.detailStatusTest)
-        XCTAssertEqual(sut.resultTestLinkImage, nil)
-        XCTAssertEqual(sut.resultTestTitle, "Negative PCR test from 0 hours ago")
-        XCTAssertEqual(sut.resultTestFooter, nil)
-        XCTAssertEqual(sut.resultTestSubtitle, nil)
-        
-        XCTAssertEqual(sut.resultPersonTitle!, "Doe John")
-        XCTAssertEqual(sut.resultPersonSubtitle!, "DOE JOHN")
-        XCTAssertEqual(sut.resultPersonFooter!, "Born on Jan 1, 1990")
+        XCTAssertEqual(sut.secondResultImage, UIImage.detailStatusFullEmpty)
+        XCTAssertEqual(sut.seconResultLinkImage, nil)
+        XCTAssertEqual(sut.secondResultTitle, "Vaccination* or recovery")
+        XCTAssertEqual(sut.seconResultFooterText, nil)
+        XCTAssertEqual(sut.seconResultSubtitle, "May be required for 2G+")
+
+        XCTAssertEqual(try XCTUnwrap(sut.resultPersonTitle), "Doe John")
+        XCTAssertEqual(try XCTUnwrap(sut.resultPersonSubtitle), "DOE JOHN")
+        XCTAssertEqual(try XCTUnwrap(sut.resultPersonFooter), "Born on Jan 1, 1990")
         XCTAssertEqual(sut.resultPersonIcon, UIImage.iconCardInverse)
         
         XCTAssertTrue((sut.router as! GProofMockRouter).errorShown)
@@ -144,25 +147,25 @@ class GProofViewModelTests: XCTestCase {
         vaccinationRepoMock.checkedCert = vacToken
         certLogicMock.validateResult = [.init(rule: nil, result: .fail, validationErrors: nil)]
 
-        sut.scan2GProof()
+        sut.scanNext()
         RunLoop.current.run(for: 0.1)
         
         // THEN
-        XCTAssertEqual(sut.resultGProofImage, UIImage.detailStatusFailed)
-        XCTAssertEqual(sut.resultGProofLinkImage, .FieldRight)
-        XCTAssertEqual(sut.resultGProofTitle, "Invalid 2G proof*")
-        XCTAssertEqual(sut.resultGProofFooter, nil)
-        XCTAssertEqual(sut.resultGProofSubtitle!, "Show details")
+        XCTAssertEqual(sut.firstResultImage, UIImage.detailStatusTest)
+        XCTAssertEqual(sut.firstResultLinkImage, nil)
+        XCTAssertEqual(sut.firstResultTitle, "Negative PCR test")
+        XCTAssertEqual(sut.firstResultFooterText, nil)
+        XCTAssertEqual(sut.firstResultSubtitle!, "0 hours ago")
         
-        XCTAssertEqual(sut.resultTestImage, UIImage.detailStatusTest)
-        XCTAssertEqual(sut.resultTestLinkImage, nil)
-        XCTAssertEqual(sut.resultTestTitle, "Negative PCR test from 0 hours ago")
-        XCTAssertEqual(sut.resultTestFooter, nil)
-        XCTAssertEqual(sut.resultTestSubtitle, nil)
+        XCTAssertEqual(sut.secondResultImage, UIImage.detailStatusFailed)
+        XCTAssertEqual(sut.seconResultLinkImage, .FieldRight)
+        XCTAssertEqual(sut.secondResultTitle, "Invalid certificate")
+        XCTAssertEqual(sut.seconResultFooterText, nil)
+        XCTAssertEqual(sut.seconResultSubtitle, "Show details")
         
-        XCTAssertEqual(sut.resultPersonTitle!, "Doe John")
-        XCTAssertEqual(sut.resultPersonSubtitle!, "DOE JOHN")
-        XCTAssertEqual(sut.resultPersonFooter!, "Born on Jan 1, 1990")
+        XCTAssertEqual(try XCTUnwrap(sut.resultPersonTitle), "Doe John")
+        XCTAssertEqual(try XCTUnwrap(sut.resultPersonSubtitle), "DOE JOHN")
+        XCTAssertEqual(try XCTUnwrap(sut.resultPersonFooter), "Born on Jan 1, 1990")
         XCTAssertEqual(sut.resultPersonIcon, UIImage.iconCardInverse)
         
         XCTAssertFalse((sut.router as! GProofMockRouter).errorShown)
@@ -172,6 +175,8 @@ class GProofViewModelTests: XCTestCase {
         XCTAssertFalse((sut.router as! GProofMockRouter).errorShown)
 
         let vacToken2: CBORWebToken = CBORWebToken.mockVaccinationCertificate
+        vacToken2.hcert.dgc.v!.first!.dt = try XCTUnwrap(dateForTwelveMonthAgo)
+
         vacToken2.hcert.dgc.nam.fnt = "MARC"
         vaccinationRepoMock.checkedCert = vacToken2
         certLogicMock.validateResult = [.init(rule: nil, result: .passed, validationErrors: nil)]
@@ -180,21 +185,21 @@ class GProofViewModelTests: XCTestCase {
         RunLoop.current.run(for: 0.1)
         
         // THEN
-        XCTAssertEqual(sut.resultGProofImage, UIImage.detailStatusFull)
-        XCTAssertEqual(sut.resultGProofLinkImage, nil)
-        XCTAssertEqual(sut.resultGProofTitle, "Valid 2G proof*")
-        XCTAssertEqual(sut.resultGProofFooter, nil)
-        XCTAssertEqual(sut.resultGProofSubtitle, nil)
+        XCTAssertEqual(sut.firstResultImage, UIImage.detailStatusTest)
+        XCTAssertEqual(sut.firstResultLinkImage, nil)
+        XCTAssertEqual(sut.firstResultTitle, "Negative PCR test")
+        XCTAssertEqual(sut.firstResultFooterText, nil)
+        XCTAssertEqual(sut.firstResultSubtitle, "0 hours ago")
         
-        XCTAssertEqual(sut.resultTestImage, UIImage.detailStatusTest)
-        XCTAssertEqual(sut.resultTestLinkImage, nil)
-        XCTAssertEqual(sut.resultTestTitle, "Negative PCR test from 0 hours ago")
-        XCTAssertEqual(sut.resultTestFooter, nil)
-        XCTAssertEqual(sut.resultTestSubtitle, nil)
+        XCTAssertEqual(sut.secondResultImage, UIImage.detailStatusFull)
+        XCTAssertEqual(sut.seconResultLinkImage, nil)
+        XCTAssertEqual(sut.secondResultTitle, "Basic immunisation")
+        XCTAssertEqual(sut.seconResultFooterText, nil)
+        XCTAssertEqual(sut.seconResultSubtitle, "12 months ago")
         
-        XCTAssertEqual(sut.resultPersonTitle!, "Doe John")
-        XCTAssertEqual(sut.resultPersonSubtitle!, "DOE MARC")
-        XCTAssertEqual(sut.resultPersonFooter!, "Born on Jan 1, 1990")
+        XCTAssertEqual(try XCTUnwrap(sut.resultPersonTitle), "Doe John")
+        XCTAssertEqual(try XCTUnwrap(sut.resultPersonSubtitle), "DOE JOHN")
+        XCTAssertEqual(try XCTUnwrap(sut.resultPersonFooter), "Born on Jan 1, 1990")
         XCTAssertEqual(sut.resultPersonIcon, UIImage.iconCardInverse)
         
         XCTAssertFalse((sut.router as! GProofMockRouter).errorShown)
@@ -207,41 +212,39 @@ class GProofViewModelTests: XCTestCase {
         // WHEN
         
         // THEN
-        XCTAssert(sut.buttonScanTestIsHidden)
-        XCTAssert(sut.buttonScan2GIsHidden)
+        XCTAssert(sut.scanNextButtonIsHidden)
         XCTAssert(sut.buttonRetryIsHidden)
         XCTAssert(sut.buttonStartOverIsHidden == false)
         XCTAssert(sut.onlyOneIsScannedAndThisFailed)
         XCTAssert(sut.someIsFailed)
         XCTAssert(sut.areBothScanned == false)
-        XCTAssert(sut.gProofResultViewModel == nil)
-        XCTAssert(sut.testResultViewModel != nil)
+        XCTAssert(sut.firstResult != nil)
+        XCTAssert(sut.secondResult == nil)
         
         XCTAssertEqual(sut.title, "2G+ check")
         XCTAssertEqual(sut.checkIdMessage, "Check the following data against an ID document from the person you are checking:")
-        XCTAssertEqual(sut.footnote, "* Basic immunization, booster vaccination or recovery.")
+        XCTAssertEqual(sut.footnote, "* Basic immunization or booster vaccination expected")
         
-        XCTAssertEqual(sut.buttonScanTest, "Scan test certificate")
+        XCTAssertEqual(sut.buttonScanNextTitle, "Scan second certificate")
         XCTAssertEqual(sut.buttonRetry, "Try again")
         XCTAssertEqual(sut.buttonStartOver, "New check")
-        XCTAssertEqual(sut.buttonScan2G, "Scan 2G proof")
-        XCTAssertEqual(sut.footnote, "* Basic immunization, booster vaccination or recovery.")
+        XCTAssertEqual(sut.footnote, "* Basic immunization or booster vaccination expected")
         
         XCTAssertEqual(sut.accessibilityResultAnnounce, "Verification result for 2G+ is displayed")
         XCTAssertEqual(sut.accessibilityResultAnnounceClose, #"The view "Verification result for 2G+“ has been closed"#)
         
-        XCTAssertEqual(sut.resultGProofImage, UIImage.detailStatusFullEmpty)
-        XCTAssertEqual(sut.resultGProofLinkImage, nil)
-        XCTAssertEqual(sut.resultGProofTitle, "2G proof*")
-        XCTAssertEqual(sut.resultGProofFooter, nil)
-        XCTAssertEqual(sut.resultGProofSubtitle, "Not checked yet")
+        XCTAssertEqual(sut.firstResultImage, UIImage.detailStatusFailed)
+        XCTAssertEqual(sut.firstResultLinkImage, UIImage.FieldRight)
+        XCTAssertEqual(sut.firstResultTitle, "Invalid certificate")
+        XCTAssertEqual(sut.firstResultFooterText, nil)
+        XCTAssertEqual(sut.firstResultSubtitle, "Show details")
         
-        XCTAssertEqual(sut.resultTestImage, UIImage.detailStatusFailed)
-        XCTAssertEqual(sut.resultTestLinkImage, UIImage.FieldRight)
-        XCTAssertEqual(sut.resultTestTitle, "Invalid test certificate")
-        XCTAssertEqual(sut.resultTestFooter, nil)
-        XCTAssertEqual(sut.resultTestSubtitle, "Show details")
-        
+        XCTAssertEqual(sut.secondResultImage, UIImage.detailStatusFullEmpty)
+        XCTAssertEqual(sut.seconResultLinkImage, nil)
+        XCTAssertEqual(sut.secondResultTitle, "Vaccination* or recovery")
+        XCTAssertEqual(sut.seconResultFooterText, nil)
+        XCTAssertEqual(sut.seconResultSubtitle, "May be required for 2G+")
+
         XCTAssertEqual(sut.resultPersonTitle!, "Doe John")
         XCTAssertEqual(sut.resultPersonSubtitle!, "DOE JOHN")
         XCTAssertEqual(sut.resultPersonFooter!, "Born on Jan 1, 1990")
@@ -256,28 +259,27 @@ class GProofViewModelTests: XCTestCase {
         sut.startover()
         
         // THEN
-        XCTAssert(sut.buttonScanTestIsHidden == false)
-        XCTAssert(sut.buttonScan2GIsHidden == false)
+        XCTAssert(sut.scanNextButtonIsHidden == false)
         XCTAssert(sut.buttonRetryIsHidden)
         XCTAssert(sut.buttonStartOverIsHidden == false)
         XCTAssert(sut.onlyOneIsScannedAndThisFailed == false)
         XCTAssert(sut.someIsFailed == false)
         XCTAssert(sut.areBothScanned == false)
-        XCTAssert(sut.gProofResultViewModel == nil)
-        XCTAssert(sut.testResultViewModel == nil)
+        XCTAssert(sut.firstResult == nil)
+        XCTAssert(sut.secondResult == nil)
 
-        XCTAssertEqual(sut.resultGProofImage, UIImage.detailStatusFullEmpty)
-        XCTAssertEqual(sut.resultGProofLinkImage, nil)
-        XCTAssertEqual(sut.resultGProofTitle, "2G proof*")
-        XCTAssertEqual(sut.resultGProofFooter, nil)
-        XCTAssertEqual(sut.resultGProofSubtitle, "Not checked yet")
-        
-        XCTAssertEqual(sut.resultTestImage, UIImage.detailStatusTestEmpty)
-        XCTAssertEqual(sut.resultTestLinkImage, nil)
-        XCTAssertEqual(sut.resultTestTitle, "Test certificate")
-        XCTAssertEqual(sut.resultTestFooter, nil)
-        XCTAssertEqual(sut.resultTestSubtitle!, "Not checked yet")
-        
+        XCTAssertEqual(sut.firstResultImage, UIImage.detailStatusFullEmpty)
+        XCTAssertEqual(sut.firstResultLinkImage, nil)
+        XCTAssertEqual(sut.firstResultTitle, "Invalid certificate")
+        XCTAssertEqual(sut.firstResultFooterText, nil)
+        XCTAssertEqual(sut.firstResultSubtitle, "May be required for 2G+")
+
+        XCTAssertEqual(sut.secondResultImage, UIImage.detailStatusFullEmpty)
+        XCTAssertEqual(sut.seconResultLinkImage, nil)
+        XCTAssertEqual(sut.secondResultTitle, "Invalid certificate")
+        XCTAssertEqual(sut.seconResultFooterText, nil)
+        XCTAssertEqual(sut.seconResultSubtitle, "May be required for 2G+")
+
         XCTAssertEqual(sut.resultPersonTitle, nil)
         XCTAssertEqual(sut.resultPersonSubtitle, nil)
         XCTAssertEqual(sut.resultPersonFooter, nil)
@@ -294,27 +296,26 @@ class GProofViewModelTests: XCTestCase {
         RunLoop.current.run(for: 0.1)
         
         // THEN
-        XCTAssert(sut.buttonScanTestIsHidden)
-        XCTAssert(sut.buttonScan2GIsHidden)
+        XCTAssert(sut.scanNextButtonIsHidden)
         XCTAssert(sut.buttonRetryIsHidden)
         XCTAssert(sut.buttonStartOverIsHidden == false)
         XCTAssert(sut.onlyOneIsScannedAndThisFailed)
         XCTAssert(sut.someIsFailed)
         XCTAssert(sut.areBothScanned == false)
-        XCTAssert(sut.gProofResultViewModel == nil)
-        XCTAssert(sut.testResultViewModel != nil)
+        XCTAssert(sut.firstResult != nil)
+        XCTAssert(sut.secondResult == nil)
   
-        XCTAssertEqual(sut.resultGProofImage, UIImage.detailStatusFullEmpty)
-        XCTAssertEqual(sut.resultGProofLinkImage, nil)
-        XCTAssertEqual(sut.resultGProofTitle, "2G proof*")
-        XCTAssertEqual(sut.resultGProofFooter, nil)
-        XCTAssertEqual(sut.resultGProofSubtitle, "Not checked yet")
+        XCTAssertEqual(sut.firstResultImage, UIImage.detailStatusFailed)
+        XCTAssertEqual(sut.firstResultLinkImage, UIImage.FieldRight)
+        XCTAssertEqual(sut.firstResultTitle, "Invalid certificate")
+        XCTAssertEqual(sut.firstResultFooterText, nil)
+        XCTAssertEqual(sut.firstResultSubtitle, "Show details")
         
-        XCTAssertEqual(sut.resultTestImage, UIImage.detailStatusFailed)
-        XCTAssertEqual(sut.resultTestLinkImage, UIImage.FieldRight)
-        XCTAssertEqual(sut.resultTestTitle, "Invalid test certificate")
-        XCTAssertEqual(sut.resultTestFooter, nil)
-        XCTAssertEqual(sut.resultTestSubtitle, "Show details")
+        XCTAssertEqual(sut.secondResultImage, UIImage.detailStatusFullEmpty)
+        XCTAssertEqual(sut.seconResultLinkImage, nil)
+        XCTAssertEqual(sut.secondResultTitle, "Vaccination* or recovery")
+        XCTAssertEqual(sut.seconResultFooterText, nil)
+        XCTAssertEqual(sut.seconResultSubtitle, "May be required for 2G+")
         
         XCTAssertEqual(sut.resultPersonTitle!, "Doe John")
         XCTAssertEqual(sut.resultPersonSubtitle!, "DOE JOHN")
@@ -333,27 +334,26 @@ class GProofViewModelTests: XCTestCase {
         RunLoop.current.run(for: 0.1)
         
         // THEN
-        XCTAssert(sut.buttonScanTestIsHidden)
-        XCTAssert(sut.buttonScan2GIsHidden == false)
+        XCTAssertFalse(sut.scanNextButtonIsHidden)
         XCTAssert(sut.buttonRetryIsHidden)
         XCTAssert(sut.buttonStartOverIsHidden == false)
         XCTAssert(sut.onlyOneIsScannedAndThisFailed == false)
         XCTAssert(sut.someIsFailed == false)
         XCTAssert(sut.areBothScanned == false)
-        XCTAssert(sut.gProofResultViewModel == nil)
-        XCTAssert(sut.testResultViewModel != nil)
+        XCTAssertTrue(sut.firstResult != nil)
+        XCTAssertTrue(sut.secondResult == nil)
 
-        XCTAssertEqual(sut.resultGProofImage, UIImage.detailStatusFullEmpty)
-        XCTAssertEqual(sut.resultGProofLinkImage, nil)
-        XCTAssertEqual(sut.resultGProofTitle, "2G proof*")
-        XCTAssertEqual(sut.resultGProofFooter, nil)
-        XCTAssertEqual(sut.resultGProofSubtitle, "Not checked yet")
+        XCTAssertEqual(sut.firstResultImage, UIImage.detailStatusTest)
+        XCTAssertEqual(sut.firstResultLinkImage, nil)
+        XCTAssertEqual(sut.firstResultTitle, "Negative PCR test")
+        XCTAssertEqual(sut.firstResultFooterText, nil)
+        XCTAssertEqual(sut.firstResultSubtitle!, "0 hours ago")
         
-        XCTAssertEqual(sut.resultTestImage, UIImage.detailStatusTest)
-        XCTAssertEqual(sut.resultTestLinkImage, nil)
-        XCTAssertEqual(sut.resultTestTitle, "Negative PCR test from 0 hours ago")
-        XCTAssertEqual(sut.resultTestFooter, nil)
-        XCTAssertEqual(sut.resultTestSubtitle, nil)
+        XCTAssertEqual(sut.secondResultImage, UIImage.detailStatusFullEmpty)
+        XCTAssertEqual(sut.seconResultLinkImage, nil)
+        XCTAssertEqual(sut.secondResultTitle, "Vaccination* or recovery")
+        XCTAssertEqual(sut.seconResultFooterText, nil)
+        XCTAssertEqual(try XCTUnwrap(sut.seconResultSubtitle), "May be required for 2G+")
         
         XCTAssertEqual(sut.resultPersonTitle!, "Doe John")
         XCTAssertEqual(sut.resultPersonSubtitle!, "DOE JOHN")
@@ -361,84 +361,87 @@ class GProofViewModelTests: XCTestCase {
         XCTAssertEqual(sut.resultPersonIcon, UIImage.iconCardInverse)
     }
     
-    func testDefaultStartOverWithScaningSuccessfulVaccinationCert() {
+    func testDefaultStartOverWithScaningSuccessfulVaccinationCert() throws {
         // GIVEN
         // A Test Cert in setUp which fails after startover successful vaccination Cert Scanned
-        vaccinationRepoMock.checkedCert = CBORWebToken.mockVaccinationCertificate
+        let token: CBORWebToken = CBORWebToken.mockVaccinationCertificate
+        let dateForTwelveMonthAgo = Calendar.current.date(byAdding: .month, value: -13, to: Date())
+        token.hcert.dgc.v!.first!.dt = try XCTUnwrap(dateForTwelveMonthAgo)
+        vaccinationRepoMock.checkedCert = token
         certLogicMock.validateResult = [.init(rule: nil, result: .passed, validationErrors: nil)]
-        
+
         // WHEN
         sut.startover()
         RunLoop.current.run(for: 0.1)
         
         // THEN
-        XCTAssert(sut.buttonScanTestIsHidden == false)
-        XCTAssert(sut.buttonScan2GIsHidden)
+        XCTAssert(sut.scanNextButtonIsHidden == false)
         XCTAssert(sut.buttonRetryIsHidden)
         XCTAssert(sut.buttonStartOverIsHidden == false)
         XCTAssert(sut.onlyOneIsScannedAndThisFailed == false)
         XCTAssert(sut.someIsFailed == false)
         XCTAssert(sut.areBothScanned == false)
-        XCTAssert(sut.gProofResultViewModel != nil)
-        XCTAssert(sut.testResultViewModel == nil)
+        XCTAssert(sut.firstResult != nil)
+        XCTAssert(sut.secondResult == nil)
         
-        XCTAssertEqual(sut.resultGProofImage, UIImage.detailStatusFull)
-        XCTAssertEqual(sut.resultGProofLinkImage, nil)
-        XCTAssertEqual(sut.resultGProofTitle, "Valid 2G proof*")
-        XCTAssertEqual(sut.resultGProofFooter, nil)
-        XCTAssertEqual(sut.resultGProofSubtitle, nil)
+        XCTAssertEqual(sut.firstResultImage, UIImage.detailStatusFull)
+        XCTAssertEqual(sut.firstResultLinkImage, nil)
+        XCTAssertEqual(sut.firstResultTitle, "Basic immunisation")
+        XCTAssertEqual(sut.firstResultFooterText, nil)
+        XCTAssertEqual(try XCTUnwrap(sut.firstResultSubtitle), "12 months ago")
         
-        XCTAssertEqual(sut.resultTestImage, UIImage.detailStatusTestEmpty)
-        XCTAssertEqual(sut.resultTestLinkImage, nil)
-        XCTAssertEqual(sut.resultTestTitle, "Test certificate")
-        XCTAssertEqual(sut.resultTestFooter, nil)
-        XCTAssertEqual(sut.resultTestSubtitle, "Not checked yet")
+        XCTAssertEqual(sut.secondResultImage, UIImage.detailStatusFullEmpty)
+        XCTAssertEqual(sut.seconResultLinkImage, nil)
+        XCTAssertEqual(sut.secondResultTitle, "Test or recovery")
+        XCTAssertEqual(sut.seconResultFooterText, nil)
+        XCTAssertEqual(try XCTUnwrap(sut.seconResultSubtitle), "May be required for 2G+")
         
-        XCTAssertEqual(sut.resultPersonTitle!, "Doe John")
-        XCTAssertEqual(sut.resultPersonSubtitle!, "DOE JOHN")
-        XCTAssertEqual(sut.resultPersonFooter!, "Born on Jan 1, 1990")
+        XCTAssertEqual(try XCTUnwrap(sut.resultPersonTitle), "Doe John")
+        XCTAssertEqual(try XCTUnwrap(sut.resultPersonSubtitle), "DOE JOHN")
+        XCTAssertEqual(try XCTUnwrap(sut.resultPersonFooter), "Born on Jan 1, 1990")
         XCTAssertEqual(sut.resultPersonIcon, UIImage.iconCardInverse)
     }
     
-    func testScaningTwoSuccessfulOneTestOneVaccination() {
+    func testScaningTwoSuccessfulOneTestOneVaccination() throws {
         // GIVEN
         certLogicMock.validateResult = [.init(rule: nil, result: .passed, validationErrors: nil)]
 
-        vaccinationRepoMock.checkedCert = CBORWebToken.mockVaccinationCertificate
+        let token: CBORWebToken = CBORWebToken.mockVaccinationCertificate
+        let dateForTwelveMonthAgo = Calendar.current.date(byAdding: .month, value: -13, to: Date())
+        token.hcert.dgc.v!.first!.dt = try XCTUnwrap(dateForTwelveMonthAgo)
+        vaccinationRepoMock.checkedCert = token
         
         // WHEN
         sut.startover()
         RunLoop.current.run(for: 0.1)
         vaccinationRepoMock.checkedCert = CBORWebToken.mockTestCertificate
-        sut.scanTest()
+        sut.scanNext()
         RunLoop.current.run(for: 0.1)
         
         // THEN
-        XCTAssert(sut.buttonScanTestIsHidden)
-        XCTAssert(sut.buttonScan2GIsHidden)
+        XCTAssert(sut.scanNextButtonIsHidden)
         XCTAssert(sut.buttonRetryIsHidden)
         XCTAssert(sut.buttonStartOverIsHidden == false)
         XCTAssert(sut.onlyOneIsScannedAndThisFailed == false)
         XCTAssert(sut.someIsFailed == false)
         XCTAssert(sut.areBothScanned)
-        XCTAssert(sut.gProofResultViewModel != nil)
-        XCTAssert(sut.testResultViewModel != nil)
+        XCTAssert(sut.firstResult != nil)
+        XCTAssert(sut.secondResult != nil)
 
-        XCTAssertEqual(sut.resultGProofImage, UIImage.detailStatusFull)
-        XCTAssertEqual(sut.resultGProofLinkImage, nil)
-        XCTAssertEqual(sut.resultGProofTitle, "Valid 2G proof*")
-        XCTAssertEqual(sut.resultGProofFooter, nil)
-        XCTAssertEqual(sut.resultGProofSubtitle, nil)
+        XCTAssertEqual(sut.firstResultImage, UIImage.detailStatusFull)
+        XCTAssertEqual(sut.firstResultLinkImage, nil)
+        XCTAssertEqual(sut.firstResultTitle, "Basic immunisation")
+        XCTAssertEqual(try XCTUnwrap(sut.firstResultSubtitle), "12 months ago")
         
-        XCTAssertEqual(sut.resultTestImage, UIImage.detailStatusTest)
-        XCTAssertEqual(sut.resultTestLinkImage, nil)
-        XCTAssertEqual(sut.resultTestTitle, "Negative PCR test from 0 hours ago")
-        XCTAssertEqual(sut.resultTestFooter, nil)
-        XCTAssertEqual(sut.resultTestSubtitle, nil)
+        XCTAssertEqual(sut.secondResultImage, UIImage.detailStatusTest)
+        XCTAssertEqual(sut.seconResultLinkImage, nil)
+        XCTAssertEqual(sut.secondResultTitle, "Negative PCR test")
+        XCTAssertEqual(sut.seconResultFooterText, nil)
+        XCTAssertEqual(sut.seconResultSubtitle, "0 hours ago")
         
-        XCTAssertEqual(sut.resultPersonTitle!, "Doe John")
-        XCTAssertEqual(sut.resultPersonSubtitle!, "DOE JOHN")
-        XCTAssertEqual(sut.resultPersonFooter!, "Born on Jan 1, 1990")
+        XCTAssertEqual(try XCTUnwrap(sut.resultPersonTitle), "Doe John")
+        XCTAssertEqual(try XCTUnwrap(sut.resultPersonSubtitle), "DOE JOHN")
+        XCTAssertEqual(try XCTUnwrap(sut.resultPersonFooter), "Born on Jan 1, 1990")
         XCTAssertEqual(sut.resultPersonIcon, UIImage.iconCardInverse)
     }
     
@@ -456,31 +459,30 @@ class GProofViewModelTests: XCTestCase {
         vaccinationRepoMock.checkedCert = CBORWebToken.mockTestCertificate
         
         // WHEN
-        sut.scanTest()
+        sut.scanNext()
         RunLoop.current.run(for: 0.1)
         
         // THEN
-        XCTAssert(sut.buttonScanTestIsHidden)
-        XCTAssert(sut.buttonScan2GIsHidden)
+        XCTAssert(sut.scanNextButtonIsHidden)
         XCTAssert(sut.buttonRetryIsHidden)
         XCTAssert(sut.buttonStartOverIsHidden == false)
         XCTAssert(sut.onlyOneIsScannedAndThisFailed == false)
         XCTAssert(sut.someIsFailed == false)
         XCTAssert(sut.areBothScanned)
-        XCTAssert(sut.gProofResultViewModel != nil)
-        XCTAssert(sut.testResultViewModel != nil)
+        XCTAssert(sut.firstResult != nil)
+        XCTAssert(sut.secondResult != nil)
         
-        XCTAssertEqual(sut.resultGProofImage, UIImage.detailStatusFull)
-        XCTAssertEqual(sut.resultGProofLinkImage, nil)
-        XCTAssertEqual(sut.resultGProofTitle, "Valid 2G proof*")
-        XCTAssertEqual(sut.resultGProofFooter, nil)
-        XCTAssertEqual(sut.resultGProofSubtitle, nil)
+        XCTAssertEqual(sut.firstResultImage, UIImage.detailStatusFull)
+        XCTAssertEqual(sut.firstResultLinkImage, nil)
+        XCTAssertEqual(sut.firstResultTitle, "Recovery")
+        XCTAssertEqual(sut.firstResultFooterText, nil)
+        XCTAssertEqual(sut.firstResultSubtitle!, "0 months ago")
         
-        XCTAssertEqual(sut.resultTestImage, UIImage.detailStatusTest)
-        XCTAssertEqual(sut.resultTestLinkImage, nil)
-        XCTAssertEqual(sut.resultTestTitle, "Negative PCR test from 0 hours ago")
-        XCTAssertEqual(sut.resultTestFooter, nil)
-        XCTAssertEqual(sut.resultTestSubtitle, nil)
+        XCTAssertEqual(sut.secondResultImage, UIImage.detailStatusTest)
+        XCTAssertEqual(sut.seconResultLinkImage, nil)
+        XCTAssertEqual(sut.secondResultTitle, "Negative PCR test")
+        XCTAssertEqual(sut.seconResultFooterText, nil)
+        XCTAssertEqual(sut.seconResultSubtitle!, "0 hours ago")
         
         XCTAssertEqual(sut.resultPersonTitle!, "Doe John")
         XCTAssertEqual(sut.resultPersonSubtitle!, "DOE JOHN")
@@ -494,37 +496,10 @@ class GProofViewModelTests: XCTestCase {
         certLogicMock.validateResult = [.init(rule: nil, result: .passed, validationErrors: nil)]
 
         // WHEN
-        sut.scanTest()
+        sut.scanNext()
         RunLoop.current.run(for: 0.1)
         
         // THEN
-        XCTAssert(sut.buttonScanTestIsHidden)
-        XCTAssert(sut.buttonScan2GIsHidden)
-        XCTAssert(sut.buttonRetryIsHidden)
-        XCTAssert(sut.buttonStartOverIsHidden == false)
-        XCTAssert(sut.onlyOneIsScannedAndThisFailed)
-        XCTAssert(sut.someIsFailed)
-        XCTAssert(sut.areBothScanned == false)
-        XCTAssert(sut.gProofResultViewModel == nil)
-        XCTAssert(sut.testResultViewModel != nil)
-
-        XCTAssertEqual(sut.resultGProofImage, UIImage.detailStatusFullEmpty)
-        XCTAssertEqual(sut.resultGProofLinkImage, nil)
-        XCTAssertEqual(sut.resultGProofTitle, "2G proof*")
-        XCTAssertEqual(sut.resultGProofFooter, nil)
-        XCTAssertEqual(sut.resultGProofSubtitle!, "Not checked yet")
-        
-        XCTAssertEqual(sut.resultTestImage, UIImage.detailStatusFailed)
-        XCTAssertEqual(sut.resultTestLinkImage, .FieldRight)
-        XCTAssertEqual(sut.resultTestTitle, "Invalid test certificate")
-        XCTAssertEqual(sut.resultTestFooter, nil)
-        XCTAssertEqual(sut.resultTestSubtitle!, "Show details")
-        
-        XCTAssertEqual(sut.resultPersonTitle!, "Doe John")
-        XCTAssertEqual(sut.resultPersonSubtitle!, "DOE JOHN")
-        XCTAssertEqual(sut.resultPersonFooter!, "Born on Jan 1, 1990")
-        XCTAssertEqual(sut.resultPersonIcon, UIImage.iconCardInverse)
-        
         XCTAssertTrue((sut.router as! GProofMockRouter).errorShown)
     }
     
@@ -535,50 +510,10 @@ class GProofViewModelTests: XCTestCase {
         certLogicMock.validateResult = [.init(rule: nil, result: .passed, validationErrors: nil)]
 
         // WHEN
-        sut.scanTest()
+        sut.scanNext()
         RunLoop.current.run(for: 0.1)
         
         // THEN
-        XCTAssert(sut.buttonScanTestIsHidden)
-        XCTAssert(sut.buttonScan2GIsHidden)
-        XCTAssert(sut.buttonRetryIsHidden)
-        XCTAssert(sut.buttonStartOverIsHidden == false)
-        XCTAssert(sut.onlyOneIsScannedAndThisFailed)
-        XCTAssert(sut.someIsFailed)
-        XCTAssert(sut.areBothScanned == false)
-        XCTAssert(sut.gProofResultViewModel == nil)
-        XCTAssert(sut.testResultViewModel != nil)
-        
-        XCTAssertEqual(sut.title, "2G+ check")
-        XCTAssertEqual(sut.checkIdMessage, "Check the following data against an ID document from the person you are checking:")
-        XCTAssertEqual(sut.footnote, "* Basic immunization, booster vaccination or recovery.")
-        
-        XCTAssertEqual(sut.buttonScanTest, "Scan test certificate")
-        XCTAssertEqual(sut.buttonRetry, "Try again")
-        XCTAssertEqual(sut.buttonStartOver, "New check")
-        XCTAssertEqual(sut.buttonScan2G, "Scan 2G proof")
-        XCTAssertEqual(sut.footnote, "* Basic immunization, booster vaccination or recovery.")
-        
-        XCTAssertEqual(sut.accessibilityResultAnnounce, "Verification result for 2G+ is displayed")
-        XCTAssertEqual(sut.accessibilityResultAnnounceClose, #"The view "Verification result for 2G+“ has been closed"#)
-        
-        XCTAssertEqual(sut.resultGProofImage, UIImage.detailStatusFullEmpty)
-        XCTAssertEqual(sut.resultGProofLinkImage, nil)
-        XCTAssertEqual(sut.resultGProofTitle, "2G proof*")
-        XCTAssertEqual(sut.resultGProofFooter, nil)
-        XCTAssertEqual(sut.resultGProofSubtitle!, "Not checked yet")
-        
-        XCTAssertEqual(sut.resultTestImage, UIImage.detailStatusFailed)
-        XCTAssertEqual(sut.resultTestLinkImage, .FieldRight)
-        XCTAssertEqual(sut.resultTestTitle, "Invalid test certificate")
-        XCTAssertEqual(sut.resultTestFooter, nil)
-        XCTAssertEqual(sut.resultTestSubtitle!, "Show details")
-        
-        XCTAssertEqual(sut.resultPersonTitle!, "Doe John")
-        XCTAssertEqual(sut.resultPersonSubtitle!, "DOE JOHN")
-        XCTAssertEqual(sut.resultPersonFooter!, "Born on Jan 1, 1990")
-        XCTAssertEqual(sut.resultPersonIcon, UIImage.iconCardInverse)
-        
         XCTAssertTrue((sut.router as! GProofMockRouter).errorShown)
     }
     
@@ -597,14 +532,29 @@ class GProofViewModelTests: XCTestCase {
         certLogicMock.validateResult = [.init(rule: nil, result: .passed, validationErrors: nil)]
         
         // WHEN
-        sut.scan2GProof()
+        sut.scanNext()
         RunLoop.current.run(for: 0.1)
         
         // THEN
         XCTAssertTrue((sut.router as! GProofMockRouter).showDifferentPersonShown)
     }
     
-    func testNotDCCScanned() {
+    func testNotDCCScannedAtFirstScan() {
+        // GIVEN
+        vaccinationRepoMock.checkedCert = nil
+        vaccinationRepoMock.checkedCertError = ScanError.badOutput
+        certLogicMock.validateResult = [.init(rule: nil, result: .passed, validationErrors: nil)]
+        sut.startover()
+
+        // WHEN
+        sut.scanNext()
+        RunLoop.current.run(for: 0.1)
+
+        // THEN
+        XCTAssertTrue((sut.router as! GProofMockRouter).certificateShown)
+    }
+    
+    func testNotDCCScannedAtSecondScan() {
         // GIVEN
         vaccinationRepoMock.checkedCert = CBORWebToken.mockTestCertificate
         certLogicMock.validateResult = [.init(rule: nil, result: .passed, validationErrors: nil)]
@@ -615,22 +565,22 @@ class GProofViewModelTests: XCTestCase {
         certLogicMock.validateResult = [.init(rule: nil, result: .passed, validationErrors: nil)]
 
         // WHEN
-        sut.scan2GProof()
+        sut.scanNext()
         RunLoop.current.run(for: 0.1)
 
         // THEN
-        XCTAssertTrue((sut.router as! GProofMockRouter).certificateShown)
+        XCTAssertFalse((sut.router as! GProofMockRouter).certificateShown)
     }
     
     func testShowResultGProof() {
         XCTAssertFalse((sut.router as! GProofMockRouter).certificateShown)
-        sut.showResultGProof()
+        sut.showFirstCardResult()
         XCTAssertTrue((sut.router as! GProofMockRouter).certificateShown)
     }
     
     func testShowResultTestProof() {
         XCTAssertFalse((sut.router as! GProofMockRouter).certificateShown)
-        sut.showResultTestProof()
+        sut.showSecondCardResult()
         XCTAssertTrue((sut.router as! GProofMockRouter).certificateShown)
     }
     
@@ -650,7 +600,7 @@ class GProofViewModelTests: XCTestCase {
             XCTFail()
         }
     }
-
+    
     func testResultTestTitle_rapid_test() {
         // Given
         let test = Test(
@@ -682,9 +632,45 @@ class GProofViewModelTests: XCTestCase {
         )
 
         // When
-        let resultTestTitle = sut.resultTestTitle
+        let resultTestTitle = sut.secondResultTitle
 
         // Then
-        XCTAssertEqual(resultTestTitle, "Negative rapid test from 0 hours ago")
+        XCTAssertEqual(resultTestTitle, "Vaccination* or recovery")
+    }
+    
+    fileprivate func test_scan_basic_then_booster(boosterAsTest: Bool) {
+        // Given
+        let basicVaccination = CBORWebToken.mockVaccinationCertificate
+        basicVaccination.hcert.dgc.v!.first!.sd = 2
+        basicVaccination.hcert.dgc.v!.first!.dn = 2
+        let boosterVaccination = CBORWebToken.mockVaccinationCertificate
+        boosterVaccination.hcert.dgc.v!.first!.sd = 2
+        boosterVaccination.hcert.dgc.v!.first!.dn = 3
+        vaccinationRepoMock.checkedCert = basicVaccination
+        certLogicMock.validateResult = [.init(rule: nil, result: .passed, validationErrors: nil)]
+        sut = .init(resolvable: resolver,
+                    initialToken: basicVaccination,
+                    router: routerMock,
+                    repository: vaccinationRepoMock,
+                    certLogic: certLogicMock,
+                    userDefaults: UserDefaultsPersistence(),
+                    boosterAsTest: boosterAsTest)
+        
+        // When
+        vaccinationRepoMock.checkedCert = boosterVaccination
+        sut.scanNext()
+        RunLoop.current.run(for: 0.1)
+
+        // Then
+        let errorShown = (sut.router as! GProofMockRouter).errorShown
+        XCTAssertEqual(!boosterAsTest, errorShown)
+    }
+    
+    func test_scan_basic_then_booster_boosterAsTestOff() {
+        test_scan_basic_then_booster(boosterAsTest: false)
+    }
+    
+    func test_scan_basic_then_booster_boosterAsTestOn() {
+        test_scan_basic_then_booster(boosterAsTest: true)
     }
 }

@@ -6,50 +6,8 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-import CertLogic
 import Foundation
 import PromiseKit
-
-public struct BoosterCandidate: Codable {
-    public enum BoosterState: String, Codable {
-        // Not qualifified for a booster
-        case none
-        // New qualification for a booster
-        case new
-        // Qualified for a booster but already shown
-        case qualified
-    }
-
-    public var name: String
-    public var birthdate: String
-    // identifier is used to identify the vaccination on which the rules were checked on
-    public var vaccinationIdentifier: String
-    public var state: BoosterState
-    // All passed validation rules for this user
-    public var validationRules: [Rule]
-
-    public init(name: String, birthdate: String, vaccinationIdentifier: String, state: BoosterState, validationRules: [Rule]) {
-        self.name = name
-        self.birthdate = birthdate
-        self.vaccinationIdentifier = vaccinationIdentifier
-        self.state = state
-        self.validationRules = validationRules
-    }
-
-    public init(certificate: ExtendedCBORWebToken) {
-        name = certificate.vaccinationCertificate.hcert.dgc.nam.fullName
-        birthdate = certificate.vaccinationCertificate.hcert.dgc.dobString ?? ""
-        vaccinationIdentifier = certificate.vaccinationCertificate.hcert.dgc.uvci
-        state = .none
-        validationRules = []
-    }
-}
-
-extension BoosterCandidate: Equatable {
-    public static func == (lhs: BoosterCandidate, rhs: BoosterCandidate) -> Bool {
-        lhs.name == rhs.name && lhs.birthdate == rhs.birthdate
-    }
-}
 
 public protocol BoosterLogicProtocol {
     func checkForNewBoosterVaccinationsIfNeeded(_ users: [CertificatePair]) -> Promise<Bool>
@@ -130,8 +88,7 @@ public struct BoosterLogic: BoosterLogicProtocol {
                     } else if passedRules.isEmpty, !boosterCandidate.validationRules.isEmpty {
                         // rules changed and user is not qualified for a booster anymore
                         try? deleteUserDefaultsBoosterCandidates(
-                            with: boosterCandidate.name,
-                            birthdate: boosterCandidate.birthdate
+                            with: boosterCandidate.dgc
                         )
                     }
 
@@ -174,14 +131,12 @@ public struct BoosterLogic: BoosterLogicProtocol {
 
     /// Returns the booster candidate for given user
     private func boosterCandidateForUser(certificate: ExtendedCBORWebToken) -> BoosterCandidate {
-        let name = certificate.vaccinationCertificate.hcert.dgc.nam.fullName
-        let birthdate = certificate.vaccinationCertificate.hcert.dgc.dobString ?? ""
-        return userDefaultsBoosterCandidate(with: name, birthdate: birthdate) ?? BoosterCandidate(certificate: certificate)
+        userDefaultsBoosterCandidate(with: certificate.vaccinationCertificate.hcert.dgc) ?? BoosterCandidate(certificate: certificate)
     }
 
-    private func userDefaultsBoosterCandidate(with name: String, birthdate: String) -> BoosterCandidate? {
+    private func userDefaultsBoosterCandidate(with dgc: DigitalGreenCertificate) -> BoosterCandidate? {
         let boosterCandidates = userDefaultsBoosterCandidates()
-        return boosterCandidates.first(where: { $0.name == name && $0.birthdate == birthdate })
+        return boosterCandidates.first(where: { dgc == $0.dgc })
     }
 
     private func userDefaultsBoosterCandidates() -> [BoosterCandidate] {
@@ -195,10 +150,10 @@ public struct BoosterLogic: BoosterLogicProtocol {
         return boosterCandidates ?? []
     }
 
-    private func deleteUserDefaultsBoosterCandidates(with name: String, birthdate: String) throws {
+    private func deleteUserDefaultsBoosterCandidates(with dgc: DigitalGreenCertificate) throws {
         let candidates = userDefaultsBoosterCandidates()
             .filter { candidate in
-                candidate.name != name || candidate.birthdate != birthdate
+                candidate.dgc != dgc
             }
         try updateUserDefaultsBoosterCandidates(candidates)
     }

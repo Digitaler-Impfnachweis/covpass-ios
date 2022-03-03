@@ -40,6 +40,9 @@ class CertificateOverviewSnapShotTests: BaseSnapShotTests {
         cert2.vaccinationCertificate.hcert.dgc.nam.fn = "John 2"
         let cert3: ExtendedCBORWebToken = CBORWebToken.mockTestCertificate.extended()
         cert3.vaccinationCertificate.hcert.dgc.nam.fn = "John 3"
+        cert1.vaccinationCertificate.hcert.dgc.nam.fnt = "JOHN1"
+        cert2.vaccinationCertificate.hcert.dgc.nam.fnt = "JOHN2"
+        cert3.vaccinationCertificate.hcert.dgc.nam.fnt = "JOHN3"
         let certs = [cert1,
                      cert2,
                      cert3]

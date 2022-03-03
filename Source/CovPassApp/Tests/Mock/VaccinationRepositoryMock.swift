@@ -13,6 +13,7 @@ import XCTest
 
 public class VaccinationRepositoryMock: VaccinationRepositoryProtocol {
     let getCertificateListExpectation = XCTestExpectation(description: "getCertificateListExpectation")
+    let setExpiryAlertExpectation = XCTestExpectation(description: "setExpiryAlertExpectation")
     var lastUpdatedTrustList: Date?
     var certificates: [ExtendedCBORWebToken] = []
     var certPair: [CertificatePair] = []
@@ -23,9 +24,8 @@ public class VaccinationRepositoryMock: VaccinationRepositoryProtocol {
             var exists = false
             let isFavorite = certificateList.favoriteCertificateId == cert.vaccinationCertificate.hcert.dgc.uvci
             for index in 0 ..< pairs.count {
-                if pairs[index].certificates.contains(where: {
-                    cert.vaccinationCertificate.hcert.dgc.nam == $0.vaccinationCertificate.hcert.dgc.nam && cert.vaccinationCertificate.hcert.dgc.dob == $0.vaccinationCertificate.hcert.dgc.dob
-                }) {
+                let certDgc = cert.vaccinationCertificate.hcert.dgc
+                if pairs[index].certificates.map(\.vaccinationCertificate.hcert.dgc).contains(certDgc) {
                     exists = true
                     pairs[index].certificates.append(cert)
                     if isFavorite {
@@ -86,8 +86,11 @@ public class VaccinationRepositoryMock: VaccinationRepositoryProtocol {
         return .value(favoriteToggle)
     }
 
-    public func setExpiryAlert(shown _: Bool, token _: ExtendedCBORWebToken) -> Promise<Void> {
-        Promise.value
+    var setExpiryAlertValue: (shown: Bool, token: ExtendedCBORWebToken)?
+    public func setExpiryAlert(shown: Bool, token : ExtendedCBORWebToken) -> Promise<Void> {
+        setExpiryAlertValue = (shown, token)
+        setExpiryAlertExpectation.fulfill()
+        return Promise.value
     }
 
     public func favoriteStateForCertificates(_: [ExtendedCBORWebToken]) -> Promise<Bool> {
