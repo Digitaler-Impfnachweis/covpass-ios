@@ -122,7 +122,7 @@ class CertificateItemDetailViewModel: CertificateItemDetailViewModelProtocol {
                 ContentItem("vaccination_certificate_detail_view_data_date_of_birth".localized, dob,
                             accessibilityLabel(for: dob, label: "vaccination_certificate_detail_view_data_date_of_birth".localized)),
                 ContentItem("vaccination_certificate_detail_view_data_disease".localized, v.tgDisplayName),
-                ContentItem("vaccination_certificate_detail_view_data_vaccine".localized, v.map(key: v.mp, from: Bundle.commonBundle.url(forResource: "vaccine-medicinal-product", withExtension: "json")) ?? v.mp),
+                ContentItem("vaccination_certificate_detail_view_data_vaccine".localized, v.map(key: v.mp, from: Bundle.commonBundle.url(forResource: "vaccines-covid-19-names", withExtension: "json")) ?? v.mp),
                 ContentItem("vaccination_certificate_detail_view_data_vaccine_type".localized, v.vpDisplayName),
                 ContentItem("vaccination_certificate_detail_view_data_vaccine_manufactur".localized, v.maDisplayName),
                 ContentItem("vaccination_certificate_detail_view_data_vaccine_number".localized, "\(v.dn) / \(v.sd)"),
