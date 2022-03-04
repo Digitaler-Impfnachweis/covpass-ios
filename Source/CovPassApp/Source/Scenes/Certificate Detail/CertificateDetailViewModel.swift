@@ -57,19 +57,19 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
     }
 
     var name: String {
-        certificates.first?.vaccinationCertificate.hcert.dgc.nam.fullName ?? ""
+        selectedCertificate?.vaccinationCertificate.hcert.dgc.nam.fullName ?? ""
     }
 
     var nameReversed: String {
-        certificates.first?.vaccinationCertificate.hcert.dgc.nam.fullNameReverse ?? ""
+        selectedCertificate?.vaccinationCertificate.hcert.dgc.nam.fullNameReverse ?? ""
     }
 
     var nameTransliterated: String {
-        certificates.first?.vaccinationCertificate.hcert.dgc.nam.fullNameTransliteratedReverse ?? ""
+        selectedCertificate?.vaccinationCertificate.hcert.dgc.nam.fullNameTransliteratedReverse ?? ""
     }
 
     var birthDate: String {
-        guard let dgc = certificates.first?.vaccinationCertificate.hcert.dgc else { return "" }
+        guard let dgc = selectedCertificate?.vaccinationCertificate.hcert.dgc else { return "" }
         return DateUtils.displayIsoDateOfBirth(dgc)
     }
 
