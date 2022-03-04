@@ -43,28 +43,26 @@ class ReissueResultViewModel: ReissueResultViewModelProtocol {
         self.resolver = resolver
         self.newTokens = newTokens
         self.oldTokens = oldTokens
-        self.newCertItem = newTokens[0].certItem
-        // TODO: old Cert item maybe has to be set gray status background -> has to be checked if final logic has been added
-        self.oldCertItem = oldTokens[0].certItem
+        self.newCertItem = newTokens[0].certItem(active: true)
+        self.oldCertItem = oldTokens.sortedByDn[0].certItem(active: false)
         self.repository = vaccinationRepository
     }
     
     // MARK: - Methods
     
     func deleteOldTokens() {
-        let promises = oldTokens.map(repository.delete(_:))
-        when(fulfilled: promises.makeIterator(), concurrently: 1)
-            .done { [weak self] _ in
-                self?.handleDone()
-            }
-            .catch { [weak self] error in
-                self?.handle(error: error)
-            }
+        firstly {
+            repository.delete(oldTokens.sortedByDn[0])
+        }.done { [weak self] _ in
+            self?.handleDone()
+        }
+        .catch { [weak self] error in
+            self?.handle(error: error)
+        }
     }
 
     private func handleDone() {
         resolver.fulfill_()
-        router.dismiss()
     }
 
     private func handle(error: Error) {

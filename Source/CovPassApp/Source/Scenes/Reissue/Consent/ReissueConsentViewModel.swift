@@ -62,7 +62,7 @@ class ReissueConsentViewModel: ReissueConsentViewModelProtocol {
         self.decoder = decoder
         self.router = router
         self.resolver = resolver
-        self.certItems = tokens.compactMap{ $0.certItem }
+        self.certItems = tokens.compactMap{ $0.certItem(active: true) }
         self.hintText = Constants.Keys.hintText.styledAs(.body)
             .appendBullets([
                 Constants.Keys.hintBulletPoint1.styledAs(.body),

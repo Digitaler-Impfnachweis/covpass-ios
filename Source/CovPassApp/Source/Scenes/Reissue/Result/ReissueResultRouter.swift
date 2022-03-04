@@ -16,10 +16,6 @@ class ReissueResultRouter: ReissueResultRouterProtocol, DialogRouterProtocol {
 
     // MARK: - Methods
 
-    func dismiss() {
-        sceneCoordinator.dimiss(animated: true)
-    }
-
     func showError(_ error: Error, resolver _: Resolver<Void>) {
         print("\(#file):\(#function) Error: \(error)")
         showDialog(

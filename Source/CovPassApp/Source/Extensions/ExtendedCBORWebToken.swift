@@ -10,16 +10,16 @@ import CovPassCommon
 import CovPassUI
 
 extension ExtendedCBORWebToken {
-    var certItem: CertificateItem {
+    func certItem(active: Bool) -> CertificateItem {
             var vm: CertificateItemViewModel?
             if vaccinationCertificate.hcert.dgc.r != nil {
-                vm = RecoveryCertificateItemViewModel(self, active: true, neutral: true)
+                vm = RecoveryCertificateItemViewModel(self, active: active, neutral: true)
             }
             if vaccinationCertificate.hcert.dgc.t != nil {
-                vm = TestCertificateItemViewModel(self, active: true, neutral: true)
+                vm = TestCertificateItemViewModel(self, active: active, neutral: true)
             }
             if vaccinationCertificate.hcert.dgc.v != nil {
-                vm = VaccinationCertificateItemViewModel(self, active: true, neutral: true)
+                vm = VaccinationCertificateItemViewModel(self, active: active, neutral: true)
             }
             let certItem: CertificateItem = CertificateItem(viewModel: vm!, action: {
                 // Action on Cert Tap

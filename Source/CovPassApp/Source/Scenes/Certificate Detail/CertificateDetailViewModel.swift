@@ -276,10 +276,10 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
         }
     }
     
-    func updateReissueCandidate() {
+    func updateReissueCandidate(to value: Bool) {
         if certificates.qualifiedForReissue {
-            self.repository.setReissueProcess(initialAlreadySeen: true,
-                                              newBadgeAlreadySeen: true,
+            self.repository.setReissueProcess(initialAlreadySeen: value,
+                                              newBadgeAlreadySeen: value,
                                               tokens: self.certificates.filterBoosterAfterVaccinationAfterRecovery).cauterize()
         }
     }
@@ -314,7 +314,7 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
     
     private func removeReissueDataIfBoosterWasDeleted() {
         if certificates.filterBoosted.isEmpty {
-            updateReissueCandidate()
+            updateReissueCandidate(to: false)
         }
     }
     

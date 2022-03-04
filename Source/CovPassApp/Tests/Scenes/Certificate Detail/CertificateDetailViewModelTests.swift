@@ -197,7 +197,7 @@ class CertificateDetailViewModelTests: XCTestCase {
         configureCustomSut(certificates: certificates)
 
         // WHEN update reissues candidate it updates cert that they are already seen
-        sut.updateReissueCandidate()
+        sut.updateReissueCandidate(to: true)
         // THEN
         wait(for: [vaccinationRepo.setReissueAlreadySeen], timeout: 1)
     }

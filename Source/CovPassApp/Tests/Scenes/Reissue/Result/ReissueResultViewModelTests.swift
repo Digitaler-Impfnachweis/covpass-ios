@@ -50,14 +50,6 @@ class ReissueResultViewModelTests: XCTestCase {
         XCTAssertTrue(promise.isFulfilled)
     }
 
-    func testDeleteOldTokens_success() {
-        // When
-        sut.deleteOldTokens()
-
-        // Then
-        wait(for: [router.dismissExpectation], timeout: 1)
-        XCTAssertTrue(promise.isFulfilled)
-    }
 
     func testDeleteOldTokens_error() {
         // Given
