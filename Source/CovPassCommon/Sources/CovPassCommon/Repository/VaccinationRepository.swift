@@ -31,6 +31,11 @@ public enum ScanType: Int {
     case _2G = 1
 }
 
+private enum Constants {
+    static let firstLimit = 2
+    static let secondLimit = 10
+}
+
 public class VaccinationRepository: VaccinationRepositoryProtocol {
     private let service: APIServiceProtocol
     private let keychain: Persistence
@@ -275,14 +280,20 @@ public class VaccinationRepository: VaccinationRepositoryProtocol {
                         throw QRCodeError.qrCodeExists
                     }
                     
+                    let personsCountBeforeAddingNew: Int = {
+                        self.matchedCertificates(for: certList).count
+                    }()
+                    
                     certList.certificates.append(extendedCBORWebToken)
-     
+                    
                     let personsCount: Int = {
                         self.matchedCertificates(for: certList).count
                     }()
                     
                     var warnAddingPersonReachedIfNeeded: Bool {
-                        (personsCount == 2 || personsCount == 10) && isCountRuleEnabled
+                        let newCountMustBeTwoOrTen = personsCount == Constants.firstLimit || personsCount == Constants.secondLimit
+                        let oldCountMustNotBeTwoOrTen = personsCountBeforeAddingNew != Constants.firstLimit && personsCountBeforeAddingNew != Constants.secondLimit
+                        return newCountMustBeTwoOrTen && oldCountMustNotBeTwoOrTen && isCountRuleEnabled
                     }
                     
                     if warnAddingPersonReachedIfNeeded {
@@ -411,6 +422,6 @@ public class VaccinationRepository: VaccinationRepositoryProtocol {
     func validateEntity(_ certificate: CBORWebToken) throws {
         if certificate.isFraud {
             throw CertificateError.invalidEntity
-        } 
+        }
     }
 }

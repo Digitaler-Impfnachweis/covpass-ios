@@ -611,6 +611,41 @@ class VaccinationRepositoryTests: XCTestCase {
         }
     }
     
+    func testCountRule_Enabled_addingThirdCertWhichIsOfAnAlreadyAvailablePerson() {
+        
+        let person1Cert1 = CertificateMock.validCertificate3
+        let person2Cert1 = CertificateMock.validCertificate4
+        let person2Cert2 = CertificateMock.validCertificate6
+
+        do {
+            _ = try sut.scanCertificate(person1Cert1, isCountRuleEnabled: false).wait()
+            _ = try sut.scanCertificate(person2Cert1, isCountRuleEnabled: false).wait()
+            _ = try sut.scanCertificate(person2Cert2, isCountRuleEnabled: true).wait()
+            XCTAssert(true)
+        } catch {
+            print(error)
+            XCTFail("Should fail")
+        }
+    }
+    
+    func testCountRule_Enabled_addingFourthCertWhichIsANewPerson() {
+        
+        let person1Cert1 = CertificateMock.validCertificate3
+        let person2Cert1 = CertificateMock.validCertificate4
+        let person2Cert2 = CertificateMock.validCertificate6
+        let person3Cert1 = CertificateMock.validCertificate5
+
+        do {
+            _ = try sut.scanCertificate(person1Cert1, isCountRuleEnabled: false).wait()
+            _ = try sut.scanCertificate(person2Cert1, isCountRuleEnabled: false).wait()
+            _ = try sut.scanCertificate(person2Cert2, isCountRuleEnabled: false).wait()
+            _ = try sut.scanCertificate(person3Cert1, isCountRuleEnabled: true).wait()
+            XCTAssert(true)
+        } catch {
+            print(error)
+            XCTFail("Should fail")
+        }
+    }
 }
 
 private extension MockPersistence {
