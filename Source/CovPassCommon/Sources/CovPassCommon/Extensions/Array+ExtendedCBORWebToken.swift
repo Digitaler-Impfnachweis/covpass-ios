@@ -139,11 +139,13 @@ public extension Array where Element == ExtendedCBORWebToken {
 
     var sortedByDn: [ExtendedCBORWebToken] {
         sorted { token1, token2 in
-            if let vaccination1 = token1.vaccinationCertificate.hcert.dgc.v?.first,
-               let vaccination2 = token2.vaccinationCertificate.hcert.dgc.v?.first {
-                return vaccination1 < vaccination2
+            guard let vaccination1 = token1.vaccinationCertificate.hcert.dgc.v?.first else {
+                return false
             }
-            return false
+            guard let vaccination2 = token2.vaccinationCertificate.hcert.dgc.v?.first else {
+                return true
+            }
+            return vaccination1 < vaccination2
         }
     }
     

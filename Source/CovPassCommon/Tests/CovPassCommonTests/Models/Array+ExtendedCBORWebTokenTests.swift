@@ -417,6 +417,23 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
         XCTAssertFalse(reissueProcessInitialAlreadySeen)
         XCTAssertTrue(reissueProcessInitialNotAlreadySeen)
     }
+    
+    func testSortedByDnVacinationRecoveryAndTestCertficateMixed() {
+        // GIVEN
+        var certs = [singleDoseImmunizationJohnsonCert,
+                     recoveryCert,
+                     recoveryCert2,
+                     vaccinationWithTwoShotsOfVaccine]
+        
+        // WHEN
+        certs = certs.sortedByDn
+        
+        // THEN
+        XCTAssertEqual(certs[0], vaccinationWithTwoShotsOfVaccine)
+        XCTAssertEqual(certs[1], singleDoseImmunizationJohnsonCert)
+        XCTAssertEqual(certs[2], recoveryCert)
+        XCTAssertEqual(certs[3], recoveryCert2)
+    }
 }
 
 private extension DigitalGreenCertificate {
