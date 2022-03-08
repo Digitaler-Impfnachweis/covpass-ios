@@ -12,8 +12,17 @@ import XCTest
 @testable import CovPassCommon
 
 class SVGPDFExporterTests: XCTestCase {
+    var sut: SVGPDFExporter!
+
+    override func setUpWithError() throws {
+        sut = SVGPDFExporter(converter: SVGToPDFConverter())
+    }
+
+    override func tearDownWithError() throws {
+        sut = nil
+    }
+    
     func testVaccinationPDFExport() throws {
-        let sut = SVGPDFExporter()
         let template = try XCTUnwrap(Template(string: "", type: .vaccination))
         let cert = CBORWebToken.mockVaccinationCertificate.extended()
 
@@ -27,7 +36,6 @@ class SVGPDFExporterTests: XCTestCase {
     }
 
     func testRecoveryPDFExport() throws {
-        let sut = SVGPDFExporter()
         let template = try XCTUnwrap(Template(string: "", type: .recovery))
         let cert = CBORWebToken.mockRecoveryCertificate.extended()
 

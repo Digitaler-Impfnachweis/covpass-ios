@@ -23,9 +23,11 @@ struct PDFExportSceneFactory: ResolvableSceneFactory {
     }
 
     func make(resolvable: Resolver<Void>) -> UIViewController {
+        let exporter = SVGPDFExporter()!
         let viewModel = PDFExportViewModel(
             token: token,
-            resolvable: resolvable
+            resolvable: resolvable,
+            exporter: exporter
         )
         let viewController = PDFExportViewController(viewModel: viewModel)
         return viewController

@@ -318,6 +318,12 @@
 		E76B96EA27C50F130030FC0C /* URLSession+CertificateReissue.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76B96E927C50F130030FC0C /* URLSession+CertificateReissue.swift */; };
 		E76B96EC27C5120A0030FC0C /* URLSession+CertificateReissueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76B96EB27C5120A0030FC0C /* URLSession+CertificateReissueTests.swift */; };
 		E76B998927AAE8220029FCB1 /* CertificateDetailViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76B998827AAE8220029FCB1 /* CertificateDetailViewModelTests.swift */; };
+		E7AD8C6F27D0D69300220E9F /* RevocationPDFGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7AD8C6E27D0D69300220E9F /* RevocationPDFGenerator.swift */; };
+		E7AD8C7027D0D69800220E9F /* RevocationPDFGeneratorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7AD8C6C27D0D56100220E9F /* RevocationPDFGeneratorProtocol.swift */; };
+		E7AD8C7527D11A2E00220E9F /* SVGPDFExporter+Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7AD8C7327D1197600220E9F /* SVGPDFExporter+Factory.swift */; };
+		E7AD8C7727D120DE00220E9F /* RevocationPDFGenerator+Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7AD8C7127D0D80100220E9F /* RevocationPDFGenerator+Factory.swift */; };
+		E7AD8C7A27D12C6800220E9F /* RevocationInfoTemplate.svg in Resources */ = {isa = PBXBuildFile; fileRef = E7AD8C7927D12C6800220E9F /* RevocationInfoTemplate.svg */; };
+		E7AD8C7E27D1355B00220E9F /* RevocationPDFGeneratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7AD8C7C27D1324E00220E9F /* RevocationPDFGeneratorTests.swift */; };
 		E7CB54B327B53296002FA55E /* AppInformationViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CB54B227B53296002FA55E /* AppInformationViewModelTests.swift */; };
 		E7CB54B927B5563E002FA55E /* AppInformationViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CB54B627B55436002FA55E /* AppInformationViewModelTests.swift */; };
 		E7F7817A27C4007D009AC907 /* CertificateReissueRepository+Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F7817927C4007D009AC907 /* CertificateReissueRepository+Factory.swift */; };
@@ -698,6 +704,12 @@
 		E76B96E927C50F130030FC0C /* URLSession+CertificateReissue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+CertificateReissue.swift"; sourceTree = "<group>"; };
 		E76B96EB27C5120A0030FC0C /* URLSession+CertificateReissueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+CertificateReissueTests.swift"; sourceTree = "<group>"; };
 		E76B998827AAE8220029FCB1 /* CertificateDetailViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateDetailViewModelTests.swift; sourceTree = "<group>"; };
+		E7AD8C6C27D0D56100220E9F /* RevocationPDFGeneratorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RevocationPDFGeneratorProtocol.swift; sourceTree = "<group>"; };
+		E7AD8C6E27D0D69300220E9F /* RevocationPDFGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RevocationPDFGenerator.swift; sourceTree = "<group>"; };
+		E7AD8C7127D0D80100220E9F /* RevocationPDFGenerator+Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RevocationPDFGenerator+Factory.swift"; sourceTree = "<group>"; };
+		E7AD8C7327D1197600220E9F /* SVGPDFExporter+Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SVGPDFExporter+Factory.swift"; sourceTree = "<group>"; };
+		E7AD8C7927D12C6800220E9F /* RevocationInfoTemplate.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = RevocationInfoTemplate.svg; sourceTree = "<group>"; };
+		E7AD8C7C27D1324E00220E9F /* RevocationPDFGeneratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RevocationPDFGeneratorTests.swift; sourceTree = "<group>"; };
 		E7CB54B227B53296002FA55E /* AppInformationViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInformationViewModelTests.swift; sourceTree = "<group>"; };
 		E7CB54B627B55436002FA55E /* AppInformationViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInformationViewModelTests.swift; sourceTree = "<group>"; };
 		E7F7817927C4007D009AC907 /* CertificateReissueRepository+Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CertificateReissueRepository+Factory.swift"; sourceTree = "<group>"; };
@@ -1241,6 +1253,7 @@
 				09D5811A27C2735900CB50CB /* ExtendedCBORWebToken.swift */,
 				351C6B4C26E15C2D00321B3C /* FileManager+Simulator.swift */,
 				216D1F3A264EF4ED00370F16 /* StringLocalization.swift */,
+				E7AD8C7327D1197600220E9F /* SVGPDFExporter+Factory.swift */,
 				E76B96E927C50F130030FC0C /* URLSession+CertificateReissue.swift */,
 				38E94DE8266121D60015553C /* VaccinationRepositoryExtension.swift */,
 			);
@@ -1380,10 +1393,11 @@
 		21FBCA31264F011800CAEF44 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				88BEE04026550E1900479E5E /* Static */,
-				21FBCA32264F011800CAEF44 /* Locale */,
 				88AB2A4325FA40CE00D4EA52 /* Assets.xcassets */,
 				21FBCA78264F016E00CAEF44 /* LaunchScreen.storyboard */,
+				21FBCA32264F011800CAEF44 /* Locale */,
+				E7AD8C7827D12C4C00220E9F /* PDF Template */,
+				88BEE04026550E1900479E5E /* Static */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -1399,6 +1413,7 @@
 		21FBCA36264F011800CAEF44 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				E7AD8C6B27D0D4C600220E9F /* Revocation Info */,
 				092699E5278C4FF400331D77 /* GProofDifferentPerson */,
 				0969AB8C2787AA8000ECCA74 /* GProof */,
 				09AC1DE52757ACCE008356CD /* Validation Result */,
@@ -1494,10 +1509,10 @@
 			isa = PBXGroup;
 			children = (
 				21FBCA5F264F011900CAEF44 /* ApiServiceFactory.swift */,
+				38FCEEC826EB9DD200D10A22 /* BoosterLogicFactory.swift */,
+				3829A30A269CFF7C00B8346C /* DCCCertLogicExtension.swift */,
 				21FBCA60264F011900CAEF44 /* StringLocalization.swift */,
 				38E94DEA266122E30015553C /* VaccinationRepositoryExtension.swift */,
-				3829A30A269CFF7C00B8346C /* DCCCertLogicExtension.swift */,
-				38FCEEC826EB9DD200D10A22 /* BoosterLogicFactory.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1990,6 +2005,32 @@
 			path = "Certificate Detail";
 			sourceTree = "<group>";
 		};
+		E7AD8C6B27D0D4C600220E9F /* Revocation Info */ = {
+			isa = PBXGroup;
+			children = (
+				E7AD8C6E27D0D69300220E9F /* RevocationPDFGenerator.swift */,
+				E7AD8C7127D0D80100220E9F /* RevocationPDFGenerator+Factory.swift */,
+				E7AD8C6C27D0D56100220E9F /* RevocationPDFGeneratorProtocol.swift */,
+			);
+			path = "Revocation Info";
+			sourceTree = "<group>";
+		};
+		E7AD8C7827D12C4C00220E9F /* PDF Template */ = {
+			isa = PBXGroup;
+			children = (
+				E7AD8C7927D12C6800220E9F /* RevocationInfoTemplate.svg */,
+			);
+			path = "PDF Template";
+			sourceTree = "<group>";
+		};
+		E7AD8C7B27D1321400220E9F /* Revocation Info */ = {
+			isa = PBXGroup;
+			children = (
+				E7AD8C7C27D1324E00220E9F /* RevocationPDFGeneratorTests.swift */,
+			);
+			path = "Revocation Info";
+			sourceTree = "<group>";
+		};
 		E7CB54B127B5324E002FA55E /* App Information */ = {
 			isa = PBXGroup;
 			children = (
@@ -2001,6 +2042,7 @@
 		E7CB54B427B55407002FA55E /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				E7AD8C7B27D1321400220E9F /* Revocation Info */,
 				E7CB54B527B55411002FA55E /* App Information */,
 			);
 			path = Scenes;
@@ -2224,6 +2266,7 @@
 				2181C1BD264F053000DE7412 /* Localizable.strings in Resources */,
 				2181C168264F035A00DE7412 /* ValidatorOverviewViewController.xib in Resources */,
 				21FBCA79264F016E00CAEF44 /* LaunchScreen.storyboard in Resources */,
+				E7AD8C7A27D12C6800220E9F /* RevocationInfoTemplate.svg in Resources */,
 				6507D7ED25FB5E0300D69F94 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2371,6 +2414,7 @@
 				096897AB27C3E3C1009E2886 /* ReissueResultViewController.swift in Sources */,
 				216D1FB1264EF74600370F16 /* OnboardingRouter.swift in Sources */,
 				65E0DB0E2657F5A0004C660F /* CertificateViewModel.swift in Sources */,
+				E7AD8C7527D11A2E00220E9F /* SVGPDFExporter+Factory.swift in Sources */,
 				35F99E0D26B2B60700D3EFC3 /* PDFExportSceneFactory.swift in Sources */,
 				21A77A52265AFDE6002FEEF1 /* DialogRouterProtocol+ScanError.swift in Sources */,
 				216D1FAD264EF74600370F16 /* PassOnboardingPageViewModel.swift in Sources */,
@@ -2461,6 +2505,7 @@
 				2181C160264F035500DE7412 /* ValidatorOverviewSceneFactory.swift in Sources */,
 				2181C172264F037000DE7412 /* WelcomeViewController.swift in Sources */,
 				09AC1DF32757B423008356CD /* RecoveryResultViewModel.swift in Sources */,
+				E7AD8C7727D120DE00220E9F /* RevocationPDFGenerator+Factory.swift in Sources */,
 				09AC1DE92757ADAA008356CD /* ValidationResultSceneFactory.swift in Sources */,
 				2181C161264F035500DE7412 /* ValidatorOverviewViewController.swift in Sources */,
 				2181C19F264F03B800DE7412 /* MainSceneFactory.swift in Sources */,
@@ -2480,9 +2525,11 @@
 				09AC1DF92757B44C008356CD /* ValidationResultViewModel.swift in Sources */,
 				2181C174264F037000DE7412 /* WelcomeSceneFactory.swift in Sources */,
 				0991D92D27BBCDDB009C1CB2 /* CBORWebToken+GProofViewModel.swift in Sources */,
+				E7AD8C6F27D0D69300220E9F /* RevocationPDFGenerator.swift in Sources */,
 				092699F5278C55CC00331D77 /* GProofDifferentPersonSceneFactory.swift in Sources */,
 				0969AB932787AB1B00ECCA74 /* GProofViewModel.swift in Sources */,
 				38FCEEC926EB9DD200D10A22 /* BoosterLogicFactory.swift in Sources */,
+				E7AD8C7027D0D69800220E9F /* RevocationPDFGeneratorProtocol.swift in Sources */,
 				2181C183264F039500DE7412 /* AppInformationViewModel.swift in Sources */,
 				092699F1278C55BE00331D77 /* GProofDifferentPersonRouter.swift in Sources */,
 				38E94DEC266123520015553C /* VaccinationRepositoryExtension.swift in Sources */,
@@ -2509,6 +2556,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E7AD8C7E27D1355B00220E9F /* RevocationPDFGeneratorTests.swift in Sources */,
 				0957848627A2D28400E8206C /* ViewModelDelegateMock.swift in Sources */,
 				95A031EB27359AC60073FDD1 /* ValidationResultViewControllerSnapShotTests.swift in Sources */,
 				0957848227A2D1CF00E8206C /* ValidatorMockRouter.swift in Sources */,

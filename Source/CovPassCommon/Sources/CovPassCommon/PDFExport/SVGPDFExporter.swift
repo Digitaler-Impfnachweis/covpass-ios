@@ -6,32 +6,22 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-import PDFKit
-import UIKit
-import WebKit
+import Foundation
 
-/// PDF Exporter for SVG templates
-public final class SVGPDFExporter: NSObject, WKNavigationDelegate, SVGPDFExportProtocol {
+/// Certificate PDF Exporter for SVG templates.
+public final class SVGPDFExporter: SVGPDFExportProtocol {
     public enum ExportError: Error {
         case invalidTemplate
     }
 
-    /// A web view that does not allow Javascript execution.
-    private lazy var webView: WKWebView = {
-        // JS is disabled as it's not used/required in our SVGs
-        let config = WKWebViewConfiguration()
-        config.preferences.javaScriptEnabled = false
-        if #available(iOS 14.0, *) {
-            config.defaultWebpagePreferences.allowsContentJavaScript = false
-        }
-        let webView = WKWebView(frame: .zero, configuration: config)
-        return webView
-    }()
-
     /// Date formated as `yyyy-MM-dd`.
     private lazy var dateFormatter = DateUtils.isoDateFormatter
 
-    private var exportHandler: ExportHandler?
+    private let converter: SVGToPDFConverterProtocol
+
+    public init(converter: SVGToPDFConverterProtocol) {
+        self.converter = converter
+    }
 
     // MARK: - SVGPDFExportProtocol
 
@@ -131,51 +121,14 @@ public final class SVGPDFExporter: NSObject, WKNavigationDelegate, SVGPDFExportP
     }
 
     public func export(_ data: SVGData, completion: ExportHandler?) {
-        guard let svgString = String(data: data, encoding: .utf8) else {
-            preconditionFailure("Expected a String")
-        }
-        webView.navigationDelegate = self
-        // completion is called after web view has loaded
-        exportHandler = completion
-
-        // temporarily add the webview to the general view hierarchy
-        webView.frame = UIApplication.shared.keyWindow?.bounds ?? .zero
-        // the webview has to be visible – nobody said how much…
-        // this HACK prevents the screen to 'blink' during page rendering and PDF export
-        webView.alpha = 0.01
-        UIApplication.shared.keyWindow?.addSubview(webView)
-
-        let header = """
-            <html>
-            <head>
-            <meta charset="utf-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1">
-            <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;1,600&display=swap" rel="stylesheet">
-            </head>
-            <div>
-            \(svgString)
-            </div>
-            </html>
-        """
-
-        webView.loadHTMLString(header, baseURL: nil)
-    }
-
-    // MARK: - WKNavigationDelegate
-
-    public func webView(_ webView: WKWebView, didFinish _: WKNavigation!) {
-        guard webView == self.webView else { return }
-
-        defer {
-            webView.removeFromSuperview()
-        }
-        do {
-            let pdf = try webView.exportAsPDF()
-            exportHandler?(pdf)
-        } catch {
-            assertionFailure("Export error: \(error)")
-            exportHandler?(nil)
-        }
+        converter
+            .convert(data)
+            .done { pdfDocument in
+                completion?(pdfDocument)
+            }
+            .catch { _ in
+                completion?(nil)
+            }
     }
 }
 
