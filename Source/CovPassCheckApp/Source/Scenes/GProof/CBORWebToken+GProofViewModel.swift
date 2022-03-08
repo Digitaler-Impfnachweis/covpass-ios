@@ -38,7 +38,7 @@ extension CBORWebToken {
         let diffComponents = Calendar.current.dateComponents(componentToUse,
                                                              from: fromDate,
                                                              to: Date())
-        return String(format: stringWithPlaceholder, diffComponents.hour ?? 0)
+        return String(format: stringWithPlaceholder, diffComponents.month ?? 0)
     }
     
     var vaccinationSubtitle: String? {
