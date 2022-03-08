@@ -23,6 +23,10 @@ public extension Array where Element == ExtendedCBORWebToken {
         return partitions
     }
     
+    func filterMatching(_ extendedCBORWebToken: ExtendedCBORWebToken) -> [ExtendedCBORWebToken] {
+        filter { $0.matches(extendedCBORWebToken) }
+    }
+    
     private func containsMatching(_ extendedCBORWebToken: ExtendedCBORWebToken) -> Bool {
         contains { $0.matches(extendedCBORWebToken) }
     }

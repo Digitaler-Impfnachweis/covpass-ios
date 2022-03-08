@@ -295,7 +295,9 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
             self.repository.getCertificateList()
         }
         .map {
-            self.certificates = $0.certificates
+            if let selectedCertificate = self.selectedCertificate {
+                self.certificates = $0.certificates.filterMatching(selectedCertificate)
+            }
         }
         .done {
             self.delegate?.viewModelDidUpdate()

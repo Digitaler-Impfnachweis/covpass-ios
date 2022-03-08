@@ -285,7 +285,9 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
             concurrently: 1
         ).recover { errors in
             .value([])
-        }.asVoid()
+        }.done { _ in
+            self.refresh()
+        }
         
         return guarantee
     }
