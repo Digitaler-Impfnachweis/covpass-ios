@@ -11,6 +11,7 @@ import PromiseKit
 import Scanner
 
 public struct ValidationResultRouter: ValidationResultRouterProtocol {
+    
     // MARK: - Properties
     
     public let sceneCoordinator: SceneCoordinator
@@ -35,5 +36,9 @@ public struct ValidationResultRouter: ValidationResultRouterProtocol {
                 )
             )
         )
+    }
+    
+    public func showRevocation() {
+        // TODO: open new reissue page
     }
 }

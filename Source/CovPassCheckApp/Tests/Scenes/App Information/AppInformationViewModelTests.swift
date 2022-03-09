@@ -19,7 +19,7 @@ class CheckAppInformationBaseViewModelTests: XCTestCase {
         let entries = sut.entries
 
         // Then
-        XCTAssertEqual(entries.count, 1)
+        XCTAssertEqual(entries.count, 2)
     }
 
     private func prepareSut(with persistence: UserDefaultsPersistence) -> CheckAppInformationBaseViewModel {
@@ -41,7 +41,7 @@ class CheckAppInformationBaseViewModelTests: XCTestCase {
         let entries = sut.entries
 
         // Then
-        let entry = try XCTUnwrap(entries.last)
+        let entry = try XCTUnwrap(entries[0])
         XCTAssertEqual(entry.rightTitle, expectedTitle)
     }
 
@@ -56,10 +56,10 @@ class CheckAppInformationBaseViewModelTests: XCTestCase {
         let entries = sut.entries
 
         // Then
-        let entry = try XCTUnwrap(entries.last)
+        let entry = try XCTUnwrap(entries[0])
         XCTAssertEqual(entry.rightTitle, expectedTitle)
     }
-
+    
     func testEntries_selectedLogicType_eu() throws {
         // Given
         let expectedTitle = "app_information_title_local_rules_status_EU".localized
@@ -71,7 +71,7 @@ class CheckAppInformationBaseViewModelTests: XCTestCase {
         let entries = sut.entries
 
         // Then
-        let entry = try XCTUnwrap(entries.last)
+        let entry = try XCTUnwrap(entries[0])
         XCTAssertEqual(entry.rightTitle, expectedTitle)
     }
 
@@ -87,7 +87,55 @@ class CheckAppInformationBaseViewModelTests: XCTestCase {
         let entries = sut.entries
 
         // Then
-        let entry = try XCTUnwrap(entries.last)
+        let entry = try XCTUnwrap(entries[0])
+        XCTAssertEqual(entry.rightTitle, expectedTitle)
+    }
+    
+    func testEntries_expertMode_default() throws {
+        // Given
+        // TODO: replace with twine key
+        let expectedTitle = "Off".localized
+        let persistence = UserDefaultsPersistence()
+        try persistence.delete(UserDefaults.keyRevocationExpertMode)
+        let sut = prepareSut(with: persistence)
+
+        // When
+        let entries = sut.entries
+
+        // Then
+        let entry = try XCTUnwrap(entries[1])
+        XCTAssertEqual(entry.rightTitle, expectedTitle)
+    }
+    
+    func testEntries_expertMode_false() throws {
+        // Given
+        // TODO: replace with twine key
+        let expectedTitle = "Off".localized
+        var persistence = UserDefaultsPersistence()
+        persistence.revocationExpertMode = false
+        let sut = prepareSut(with: persistence)
+
+        // When
+        let entries = sut.entries
+
+        // Then
+        let entry = try XCTUnwrap(entries[1])
+        XCTAssertEqual(entry.rightTitle, expectedTitle)
+    }
+    
+    func testEntries_expertMode_true() throws {
+        // Given
+        // TODO: replace with twine key
+        let expectedTitle = "On".localized
+        var persistence = UserDefaultsPersistence()
+        persistence.revocationExpertMode = true
+        let sut = prepareSut(with: persistence)
+
+        // When
+        let entries = sut.entries
+
+        // Then
+        let entry = try XCTUnwrap(entries[1])
         XCTAssertEqual(entry.rightTitle, expectedTitle)
     }
 }
@@ -115,7 +163,7 @@ class GermanAppInformationViewModelTests: XCTestCase {
         let entries = sut.entries
 
         // Then
-        XCTAssertEqual(entries.count, 9)
+        XCTAssertEqual(entries.count, 10)
         for index in 0..<min(entries.count, expectedTitles.count) {
             XCTAssertEqual(entries[index].title, expectedTitles[index])
         }
@@ -144,7 +192,7 @@ class EnglishAppInformationViewModelTests: XCTestCase {
         let entries = sut.entries
 
         // Then
-        XCTAssertEqual(entries.count, 8)
+        XCTAssertEqual(entries.count, 9)
         for index in 0..<min(entries.count, expectedTitles.count) {
             XCTAssertEqual(entries[index].title, expectedTitles[index])
         }

@@ -32,7 +32,7 @@ public protocol ResultViewModelDelegate: AnyObject {
 
 private enum Constants {
     static let confirmButtonLabel = "validation_check_popup_valid_vaccination_button_title".localized
-    
+    static let revocationLinkTitle = "validation_check_popup_revoked_certificate_link_text".localized(bundle: .main)
     enum Accessibility {
         static let image = VoiceOverOptions.Settings(label: "accessibility_image_alternative_text".localized)
         static let close = VoiceOverOptions.Settings(label: "accessibility_popup_label_close".localized)
@@ -50,6 +50,7 @@ public class ValidationResultViewController: UIViewController {
     @IBOutlet var resultView: ParagraphView!
     @IBOutlet var paragraphStackView: UIStackView!
     @IBOutlet var infoView: PlainLabel!
+    @IBOutlet var linkExpertMode: UIButton!
     
     // MARK: - Properties
     
@@ -68,30 +69,60 @@ public class ValidationResultViewController: UIViewController {
     
     public override func viewDidLoad() {
         super.viewDidLoad()
-        configureHeadline()
-        configureToolbarView()
-        configureAccessibility()
+        configureView()
         updateViews()
     }
     
     // MARK: - Private
     
+    @objc
+    private func reissueButtonTapped() {
+        viewModel.revocationButtonTapped()
+    }
+    
+    private func configureLinkExpertModeButton() {
+        linkExpertMode.semanticContentAttribute = .forceRightToLeft
+        linkExpertMode.contentVerticalAlignment = .top
+        linkExpertMode.addTarget(self, action: #selector(reissueButtonTapped), for: .touchUpInside)
+        linkExpertMode.setAttributedTitle(Constants.revocationLinkTitle.styledAs(.header_3).colored(.brandAccent), for: .normal)
+    }
+    
+    private func configureView() {
+        configureLinkExpertModeButton()
+        configureHeadline()
+        configureToolbarView()
+        configureAccessibility()
+    }
+    
+    private func configureHeadline() {
+        headline.attributedTitleText = "".styledAs(.header_3)
+        headline.action = viewModel.cancel
+        headline.image = .close
+        headline.actionButton.enableAccessibility(label: Constants.Accessibility.close.label)
+        stackView.setCustomSpacing(.space_24, after: headline)
+    }
+    
+    private func configureToolbarView() {
+        toolbarView.state = viewModel.toolbarState
+        toolbarView.delegate = self
+    }
+    
+    private func configureAccessibility() {
+        headline.actionButton.enableAccessibility(label: Constants.Accessibility.close.label)
+    }
+    
     private func updateViews() {
+        linkExpertMode.isHidden = viewModel.linkIsHidden
         toolbarView.primaryButton.isHidden = viewModel.buttonHidden
-        
         stackView.setCustomSpacing(.space_24, after: imageContainerView)
         stackView.setCustomSpacing(.space_24, after: resultView)
-        
         imageView.image = viewModel.icon
         imageView.enableAccessibility(label: Constants.Accessibility.image.label)
-        
         resultView.attributedTitleText = viewModel.resultTitle.styledAs(.header_1)
         resultView.attributedBodyText = viewModel.resultBody.styledAs(.body)
         resultView.bottomBorder.isHidden = true
-        
         infoView.attributedText = viewModel.info?.styledAs(.body).colored(.onBackground40)
         infoView.layoutMargins = .init(top: .zero, left: .space_24, bottom: .zero, right: .space_24)
-        
         paragraphStackView.subviews.forEach {
             $0.removeFromSuperview()
             self.paragraphStackView.removeArrangedSubview($0)
@@ -106,27 +137,7 @@ public class ValidationResultViewController: UIViewController {
             p.layoutMargins.bottom = .space_20
             self.paragraphStackView.addArrangedSubview(p)
         }
-        
         UIAccessibility.post(notification: .layoutChanged, argument: resultView.titleLabel)
-    }
-    
-    private func configureHeadline() {
-        headline.attributedTitleText = "".styledAs(.header_3)
-        headline.action = { [weak self] in
-            self?.viewModel.cancel()
-        }
-        headline.image = .close
-        headline.actionButton.enableAccessibility(label: Constants.Accessibility.close.label)
-        stackView.setCustomSpacing(.space_24, after: headline)
-    }
-    
-    private func configureToolbarView() {
-        toolbarView.state = viewModel.toolbarState
-        toolbarView.delegate = self
-    }
-    
-    private func configureAccessibility() {
-        headline.actionButton.enableAccessibility(label: Constants.Accessibility.close.label)
     }
 }
 

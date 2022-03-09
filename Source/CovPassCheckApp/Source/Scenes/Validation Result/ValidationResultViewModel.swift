@@ -17,10 +17,18 @@ private enum Constants {
 }
 
 extension ValidationViewModel {
+    
+    var linkIsHidden: Bool {
+        !userDefaults.revocationExpertMode || _2GContext
+    }
         
     var toolbarState: CustomToolbarState {
         let buttonText = _2GContext ? Constants.confirmButtonLabel2G : Constants.confirmButtonLabel
         return .confirm(buttonText)
+    }
+    
+    func revocationButtonTapped() {
+        router.showRevocation()
     }
     
     func cancel() {

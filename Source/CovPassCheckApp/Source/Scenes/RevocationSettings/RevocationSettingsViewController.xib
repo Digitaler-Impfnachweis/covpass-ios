@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RevocationSettingsViewController" customModule="CovPassCheckApp" customModuleProvider="target">
+            <connections>
+                <outlet property="descriptionLabel" destination="2mQ-nh-wTS" id="4Vg-JN-v6q"/>
+                <outlet property="labelSwitchView" destination="22g-xj-Hk2" id="y2v-NF-SN1"/>
+                <outlet property="view" destination="iN0-l3-epB" id="FWl-tF-Qal"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2mQ-nh-wTS">
+                    <rect key="frame" x="24" y="68" width="366" height="20.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="22g-xj-Hk2" customClass="LabeledSwitch" customModule="CovPassUI">
+                    <rect key="frame" x="0.0" y="112.5" width="414" height="50"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3sf-7y-KsO">
+                    <rect key="frame" x="0.0" y="162.5" width="414" height="1"/>
+                    <color key="backgroundColor" name="Divider"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="XlC-ni-Hvn"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="2mQ-nh-wTS" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="24" id="ALp-RK-mSR"/>
+                <constraint firstAttribute="trailing" secondItem="2mQ-nh-wTS" secondAttribute="trailing" constant="24" id="GOX-qQ-rKE"/>
+                <constraint firstItem="3sf-7y-KsO" firstAttribute="top" secondItem="22g-xj-Hk2" secondAttribute="bottom" id="H9y-sB-yDR"/>
+                <constraint firstAttribute="trailing" secondItem="22g-xj-Hk2" secondAttribute="trailing" id="MCc-nr-DqD"/>
+                <constraint firstItem="22g-xj-Hk2" firstAttribute="top" secondItem="2mQ-nh-wTS" secondAttribute="bottom" constant="24" id="bgK-3X-a8r"/>
+                <constraint firstItem="2mQ-nh-wTS" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="24" id="ckd-Cw-yCF"/>
+                <constraint firstItem="3sf-7y-KsO" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="hzN-dp-Ev9"/>
+                <constraint firstItem="22g-xj-Hk2" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="o8V-BD-lLe"/>
+                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="22g-xj-Hk2" secondAttribute="bottom" constant="100" id="sm1-i5-Zc5"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="3sf-7y-KsO" secondAttribute="trailing" id="uz5-OA-IqS"/>
+            </constraints>
+            <point key="canvasLocation" x="141" y="154"/>
+        </view>
+    </objects>
+    <designables>
+        <designable name="22g-xj-Hk2">
+            <size key="intrinsicContentSize" width="414" height="50"/>
+        </designable>
+    </designables>
+    <resources>
+        <namedColor name="Divider">
+            <color red="0.89411764705882357" green="0.90980392156862744" blue="0.92549019607843142" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

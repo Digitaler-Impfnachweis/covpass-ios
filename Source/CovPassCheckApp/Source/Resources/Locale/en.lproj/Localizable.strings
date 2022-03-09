@@ -463,6 +463,12 @@
 
 "accessibility_information_beep_when_checking_off" = "Switch off beep";
 
+"app_information_authorities_function_title" = "Function for authorities";
+
+"app_information_authorities_function_state_on" = "On";
+
+"app_information_authorities_function_state_off" = "Off";
+
 "app_information_version_label" = "Version %@";
 
 
@@ -491,3 +497,14 @@
 "error_scan_qrcode_cannot_be_parsed_message" = "This QR code does not belong to an EU Digital COVID Certificate. In Germany, you can see that a certificate is correct when it has been issued by the Robert Koch Institute.\n\nYou cannot add QR codes from doctor-issued vaccination certificates or the QR codes on some batch labels in yellow vaccination booklets.";
 
 "error_scan_qrcode_cannot_be_parsed_button_title" = "OK";
+
+
+/********** revocation **********/
+
+"revocation_headline" = "Function for authorities";
+
+"revocation_copy" = "When this function is activated, information about the revocation of a certificate can be displayed. This is only relevant for authorities. Leave this function deactivated in normal use.";
+
+"revocation_toggle_text" = "Show revocation information";
+
+"validation_check_popup_revoked_certificate_link_text" = "Show revocation information";

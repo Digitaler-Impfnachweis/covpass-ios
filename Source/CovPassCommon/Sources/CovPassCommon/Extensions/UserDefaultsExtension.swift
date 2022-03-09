@@ -18,6 +18,7 @@ public extension UserDefaults {
     static let keyValueSets = "keyValueSets"
     static let keyAnnouncement = "keyAnnouncement"
     static let keyPrivacy = "keyPrivacy"
+    static let keyRevocationExpertMode = "keyRevocationSettingsType"
     static let keyBoosterCandidates = "keyBoosterCandidates"
     static let keySelectedLogicType = "keySelectedLogicType"
     static let keyOnboardingSelectedLogicTypeAlreadySeen = "keyOnboardingSelectedLogicTypeAlreadySeen"

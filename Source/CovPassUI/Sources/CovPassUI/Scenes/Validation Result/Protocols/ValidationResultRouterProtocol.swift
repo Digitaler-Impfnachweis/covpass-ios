@@ -11,5 +11,6 @@ import UIKit
 
 public protocol ValidationResultRouterProtocol: RouterProtocol {
     func showStart()
+    func showRevocation()
     func scanQRCode() -> Promise<ScanResult>
 }

@@ -83,4 +83,8 @@ class GProofRouter: GProofRouterProtocol {
     func showStart() {
         
     }
+    
+    public func showRevocation() {
+        // not covered by GProof
+    }
 }

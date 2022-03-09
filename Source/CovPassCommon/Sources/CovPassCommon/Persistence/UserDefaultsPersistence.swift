@@ -58,6 +58,16 @@ public extension Persistence {
         }
     }
     
+    var revocationExpertMode: Bool {
+        get {
+            let value = try? fetch(UserDefaults.keyRevocationExpertMode) as? Bool
+            return value ?? false
+        }
+        set {
+            try? store(UserDefaults.keyRevocationExpertMode, value: newValue as Any)
+        }
+    }
+    
     var onboardingSelectedLogicTypeAlreadySeen: Bool? {
         get {
             let value = try? fetch(UserDefaults.keyOnboardingSelectedLogicTypeAlreadySeen) as? Bool

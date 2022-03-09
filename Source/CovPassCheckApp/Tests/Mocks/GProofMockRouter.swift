@@ -11,6 +11,7 @@ import CovPassUI
 import PromiseKit
 
 class GProofMockRouter: GProofRouterProtocol {
+
     var qrCodeScanShouldCanceled = false
     var errorShown = false
     var certificateShown = false
@@ -39,6 +40,10 @@ class GProofMockRouter: GProofRouterProtocol {
     }
     
     func showStart() {
+        
+    }
+    
+    func showRevocation() {
         
     }
 }

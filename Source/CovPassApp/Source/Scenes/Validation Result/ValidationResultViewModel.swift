@@ -13,6 +13,14 @@ import UIKit
 
 
 extension ValidationViewModel {
+   
+    var linkIsHidden: Bool {
+        return true
+    }
+
+    func revocationButtonTapped() {
+        // not covered by CovPass
+    }
     
     var toolbarState: CustomToolbarState {
         .confirm("vaccination_certificate_detail_view_qrcode_screen_action_button_title".localized)

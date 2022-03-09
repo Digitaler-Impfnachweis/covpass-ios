@@ -7,14 +7,21 @@
 
 import CovPassUI
 import PromiseKit
+import XCTest
 
 struct ValidationResultRouterMock: ValidationResultRouterProtocol {
+    
+    var showRevocationExpectation = XCTestExpectation()
+    var sceneCoordinator: SceneCoordinator = SceneCoordinatorMock()
 
     func showStart() {}
 
     func scanQRCode() -> Promise<ScanResult> {
         .value(.success(""))
     }
+    
+    func showRevocation() {
+        showRevocationExpectation.fulfill()
+    }
 
-    var sceneCoordinator: SceneCoordinator = SceneCoordinatorMock()
 }

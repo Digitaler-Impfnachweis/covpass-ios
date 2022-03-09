@@ -78,6 +78,16 @@
 		0969AB952787AB2200ECCA74 /* GProofViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0969AB942787AB2200ECCA74 /* GProofViewController.swift */; };
 		0969AB9A2787AB6B00ECCA74 /* GProofViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0969AB992787AB6B00ECCA74 /* GProofViewController.xib */; };
 		0969AB9C2787ABAC00ECCA74 /* GProofSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0969AB9B2787ABAC00ECCA74 /* GProofSceneFactory.swift */; };
+		096EB4D927D768D3005CE76F /* RevocationSettingsSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096EB4D227D768D3005CE76F /* RevocationSettingsSceneFactory.swift */; };
+		096EB4DA27D768D3005CE76F /* RevocationSettingsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096EB4D327D768D3005CE76F /* RevocationSettingsRouter.swift */; };
+		096EB4DB27D768D3005CE76F /* RevocationSettingsViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096EB4D427D768D3005CE76F /* RevocationSettingsViewModelProtocol.swift */; };
+		096EB4DC27D768D3005CE76F /* RevocationSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096EB4D527D768D3005CE76F /* RevocationSettingsViewModel.swift */; };
+		096EB4DD27D768D3005CE76F /* RevocationSettingsRouterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096EB4D627D768D3005CE76F /* RevocationSettingsRouterProtocol.swift */; };
+		096EB4DE27D768D3005CE76F /* RevocationSettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 096EB4D727D768D3005CE76F /* RevocationSettingsViewController.xib */; };
+		096EB4DF27D768D3005CE76F /* RevocationSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096EB4D827D768D3005CE76F /* RevocationSettingsViewController.swift */; };
+		096EB4E227D76904005CE76F /* RevocationSettingsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096EB4E127D76904005CE76F /* RevocationSettingsViewModelTests.swift */; };
+		096EB4E427D7690F005CE76F /* RevocationSettingsMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096EB4E327D7690F005CE76F /* RevocationSettingsMocks.swift */; };
+		096EB4E627D76920005CE76F /* RevocationSettingsViewControllerSnapShotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096EB4E527D76920005CE76F /* RevocationSettingsViewControllerSnapShotTests.swift */; };
 		097A54452790C39200FD6F28 /* GProofViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097A54442790C39200FD6F28 /* GProofViewModelTests.swift */; };
 		097A54472790D76C00FD6F28 /* GProofSnapShotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097A54462790D76C00FD6F28 /* GProofSnapShotTests.swift */; };
 		097A54492790E77E00FD6F28 /* GProofDifferentPersonViewControllerSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097A54482790E77E00FD6F28 /* GProofDifferentPersonViewControllerSnapshotTests.swift */; };
@@ -439,6 +449,16 @@
 		0969AB942787AB2200ECCA74 /* GProofViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GProofViewController.swift; sourceTree = "<group>"; };
 		0969AB992787AB6B00ECCA74 /* GProofViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GProofViewController.xib; sourceTree = "<group>"; };
 		0969AB9B2787ABAC00ECCA74 /* GProofSceneFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GProofSceneFactory.swift; sourceTree = "<group>"; };
+		096EB4D227D768D3005CE76F /* RevocationSettingsSceneFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RevocationSettingsSceneFactory.swift; sourceTree = "<group>"; };
+		096EB4D327D768D3005CE76F /* RevocationSettingsRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RevocationSettingsRouter.swift; sourceTree = "<group>"; };
+		096EB4D427D768D3005CE76F /* RevocationSettingsViewModelProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RevocationSettingsViewModelProtocol.swift; sourceTree = "<group>"; };
+		096EB4D527D768D3005CE76F /* RevocationSettingsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RevocationSettingsViewModel.swift; sourceTree = "<group>"; };
+		096EB4D627D768D3005CE76F /* RevocationSettingsRouterProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RevocationSettingsRouterProtocol.swift; sourceTree = "<group>"; };
+		096EB4D727D768D3005CE76F /* RevocationSettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RevocationSettingsViewController.xib; sourceTree = "<group>"; };
+		096EB4D827D768D3005CE76F /* RevocationSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RevocationSettingsViewController.swift; sourceTree = "<group>"; };
+		096EB4E127D76904005CE76F /* RevocationSettingsViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RevocationSettingsViewModelTests.swift; sourceTree = "<group>"; };
+		096EB4E327D7690F005CE76F /* RevocationSettingsMocks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RevocationSettingsMocks.swift; sourceTree = "<group>"; };
+		096EB4E527D76920005CE76F /* RevocationSettingsViewControllerSnapShotTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RevocationSettingsViewControllerSnapShotTests.swift; sourceTree = "<group>"; };
 		097A54442790C39200FD6F28 /* GProofViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GProofViewModelTests.swift; sourceTree = "<group>"; };
 		097A54462790D76C00FD6F28 /* GProofSnapShotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GProofSnapShotTests.swift; sourceTree = "<group>"; };
 		097A54482790E77E00FD6F28 /* GProofDifferentPersonViewControllerSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GProofDifferentPersonViewControllerSnapshotTests.swift; sourceTree = "<group>"; };
@@ -757,6 +777,7 @@
 		0904337C270EFE920008267B /* SnapShotTests */ = {
 			isa = PBXGroup;
 			children = (
+				096EB4E527D76920005CE76F /* RevocationSettingsViewControllerSnapShotTests.swift */,
 				0904337D270EFEA50008267B /* BaseSnapShotTests.swift */,
 				099E6904270DEEE7002C6926 /* TrustedListDetailsViewSnapShotTests.swift */,
 				95A031E9273597880073FDD1 /* ValidationResultViewControllerSnapShotTests.swift */,
@@ -919,6 +940,28 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		096EB4D127D768D3005CE76F /* RevocationSettings */ = {
+			isa = PBXGroup;
+			children = (
+				096EB4D227D768D3005CE76F /* RevocationSettingsSceneFactory.swift */,
+				096EB4D327D768D3005CE76F /* RevocationSettingsRouter.swift */,
+				096EB4D427D768D3005CE76F /* RevocationSettingsViewModelProtocol.swift */,
+				096EB4D527D768D3005CE76F /* RevocationSettingsViewModel.swift */,
+				096EB4D627D768D3005CE76F /* RevocationSettingsRouterProtocol.swift */,
+				096EB4D727D768D3005CE76F /* RevocationSettingsViewController.xib */,
+				096EB4D827D768D3005CE76F /* RevocationSettingsViewController.swift */,
+			);
+			path = RevocationSettings;
+			sourceTree = "<group>";
+		};
+		096EB4E027D76904005CE76F /* RevocationSettings */ = {
+			isa = PBXGroup;
+			children = (
+				096EB4E127D76904005CE76F /* RevocationSettingsViewModelTests.swift */,
+			);
+			path = RevocationSettings;
+			sourceTree = "<group>";
+		};
 		09898B862768CC0800BB2801 /* ScanCountWarning */ = {
 			isa = PBXGroup;
 			children = (
@@ -1031,6 +1074,7 @@
 		09E854382799933F0051AEEE /* Mocks */ = {
 			isa = PBXGroup;
 			children = (
+				096EB4E327D7690F005CE76F /* RevocationSettingsMocks.swift */,
 				95961E8A270450CA00E577A4 /* SceneCoordinatorMock.swift */,
 				0957848127A2D1CF00E8206C /* ValidatorMockRouter.swift */,
 				09E85439279993470051AEEE /* AppInformationRouterMock.swift */,
@@ -1413,6 +1457,7 @@
 		21FBCA36264F011800CAEF44 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				096EB4D127D768D3005CE76F /* RevocationSettings */,
 				E7AD8C6B27D0D4C600220E9F /* Revocation Info */,
 				092699E5278C4FF400331D77 /* GProofDifferentPerson */,
 				0969AB8C2787AA8000ECCA74 /* GProof */,
@@ -2042,6 +2087,7 @@
 		E7CB54B427B55407002FA55E /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				096EB4E027D76904005CE76F /* RevocationSettings */,
 				E7AD8C7B27D1321400220E9F /* Revocation Info */,
 				E7CB54B527B55411002FA55E /* App Information */,
 			);
@@ -2256,6 +2302,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				096EB4DE27D768D3005CE76F /* RevocationSettingsViewController.xib in Resources */,
 				092699ED278C55A200331D77 /* GProofDifferentPersonViewController.xib in Resources */,
 				2181C179264F037400DE7412 /* WelcomeViewController.xib in Resources */,
 				3876382F26ADBFEC00FBCA47 /* privacy-covpasscheck-en.html in Resources */,
@@ -2500,17 +2547,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				096EB4D927D768D3005CE76F /* RevocationSettingsSceneFactory.swift in Sources */,
 				09AC1DF42757B423008356CD /* VaccinationResultViewModel.swift in Sources */,
+				096EB4DC27D768D3005CE76F /* RevocationSettingsViewModel.swift in Sources */,
 				0969AB912787AAF600ECCA74 /* GProofViewModelProtocol.swift in Sources */,
 				2181C160264F035500DE7412 /* ValidatorOverviewSceneFactory.swift in Sources */,
+				096EB4DF27D768D3005CE76F /* RevocationSettingsViewController.swift in Sources */,
+				096EB4DA27D768D3005CE76F /* RevocationSettingsRouter.swift in Sources */,
 				2181C172264F037000DE7412 /* WelcomeViewController.swift in Sources */,
 				09AC1DF32757B423008356CD /* RecoveryResultViewModel.swift in Sources */,
 				E7AD8C7727D120DE00220E9F /* RevocationPDFGenerator+Factory.swift in Sources */,
+				096EB4DD27D768D3005CE76F /* RevocationSettingsRouterProtocol.swift in Sources */,
 				09AC1DE92757ADAA008356CD /* ValidationResultSceneFactory.swift in Sources */,
 				2181C161264F035500DE7412 /* ValidatorOverviewViewController.swift in Sources */,
 				2181C19F264F03B800DE7412 /* MainSceneFactory.swift in Sources */,
 				2181C1A5264F03BC00DE7412 /* OnboardingRouter.swift in Sources */,
 				0969AB952787AB2200ECCA74 /* GProofViewController.swift in Sources */,
+				096EB4DB27D768D3005CE76F /* RevocationSettingsViewModelProtocol.swift in Sources */,
 				092699EF278C55A900331D77 /* GProofDifferentPersonViewController.swift in Sources */,
 				2181C1B2264F040500DE7412 /* ApiServiceFactory.swift in Sources */,
 				0969AB9C2787ABAC00ECCA74 /* GProofSceneFactory.swift in Sources */,
@@ -2556,13 +2609,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				096EB4E627D76920005CE76F /* RevocationSettingsViewControllerSnapShotTests.swift in Sources */,
 				E7AD8C7E27D1355B00220E9F /* RevocationPDFGeneratorTests.swift in Sources */,
+				096EB4E227D76904005CE76F /* RevocationSettingsViewModelTests.swift in Sources */,
 				0957848627A2D28400E8206C /* ViewModelDelegateMock.swift in Sources */,
 				95A031EB27359AC60073FDD1 /* ValidationResultViewControllerSnapShotTests.swift in Sources */,
 				0957848227A2D1CF00E8206C /* ValidatorMockRouter.swift in Sources */,
 				95961E892703550B00E577A4 /* ValidationResultFactoryTests.swift in Sources */,
 				E7CB54B927B5563E002FA55E /* AppInformationViewModelTests.swift in Sources */,
 				092090E027060FC30000713F /* ValidatorOverviewViewModelTests.swift in Sources */,
+				096EB4E427D7690F005CE76F /* RevocationSettingsMocks.swift in Sources */,
 				09E854372799932A0051AEEE /* AppInformationViewControllerSnapShotTests.swift in Sources */,
 				0928183127A2C3B900A0199F /* CheckSituationViewControllerSnapShotTests.swift in Sources */,
 				097A54452790C39200FD6F28 /* GProofViewModelTests.swift in Sources */,

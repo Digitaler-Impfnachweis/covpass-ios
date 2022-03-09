@@ -463,6 +463,12 @@
 
 "accessibility_information_beep_when_checking_off" = "Signalton ausschalten";
 
+"app_information_authorities_function_title" = "Behördenfunktion";
+
+"app_information_authorities_function_state_on" = "An";
+
+"app_information_authorities_function_state_off" = "Aus";
+
 "app_information_version_label" = "Version %@";
 
 
@@ -491,3 +497,14 @@
 "error_scan_qrcode_cannot_be_parsed_message" = "Der QR-Code gehört nicht zu einem digitalen COVID-Zertifikat der EU. Sie erkennen das richtige Zertifikat in Deutschland daran, dass der Aussteller das Robert Koch-Institut ist.\n\nQR-Codes von zum Beispiel Impfbescheinigungen oder QR-Codes auf einigen Chargen-Aufklebern aus dem gelben Impfbuch können nicht hinzugefügt werden.";
 
 "error_scan_qrcode_cannot_be_parsed_button_title" = "OK";
+
+
+/********** revocation **********/
+
+"revocation_headline" = "Behördenfunktion";
+
+"revocation_copy" = "Bei Aktivierung dieser Funktion können Informationen zur Sperrung eines Zertifikats angezeigt werden. Dies ist nur für Behörden relevant. Lassen Sie diese Funktion im normalen Gebrauch deaktiviert.";
+
+"revocation_toggle_text" = "Informationen zur Sperrung anzeigen";
+
+"validation_check_popup_revoked_certificate_link_text" = "Informationen zur Sperrung anzeigen";

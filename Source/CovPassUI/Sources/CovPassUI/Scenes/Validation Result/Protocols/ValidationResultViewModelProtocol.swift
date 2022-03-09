@@ -23,6 +23,8 @@ public protocol ValidationViewModel {
     var info: String? { get }
     var buttonHidden: Bool { get set }
     var _2GContext: Bool { get set }
+    var linkIsHidden: Bool { get }
     var userDefaults: Persistence { get }
     func scanNextCertifcate()
+    func revocationButtonTapped()
 }
