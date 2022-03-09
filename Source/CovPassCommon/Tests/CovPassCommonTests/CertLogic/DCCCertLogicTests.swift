@@ -119,7 +119,7 @@ class DCCCertLogicTests: XCTestCase {
 
     func testSavedAndLocalRules() throws {
         // Check local rules (no saved rules)
-        XCTAssertEqual(sut.dccRules.count, 323)
+        XCTAssertEqual(sut.dccRules.count, 275)
 
         // Save one rule
         let rule = Rule(identifier: "", type: "", version: "", schemaVersion: "", engine: "", engineVersion: "", certificateType: "", description: [], validFrom: "", validTo: "", affectedString: [], logic: JSON(""), countryCode: "")
@@ -430,17 +430,17 @@ class DCCCertLogicTests: XCTestCase {
         XCTAssertEqual(results.result(ofRule: "RR-DE-0001"), .passed)
     }
     
-    func testEURules91DaysAfterRecovery() {
+    func testEURules89DaysAfterRecovery() {
         // GIVEN
         let now = Date()
-        let dateAfter91Days = now.addingTimeInterval(60*60*24*91)
+        let dateAfter89Days = now.addingTimeInterval(60*60*24*89)
         let token = CBORWebToken.mockRecoveryCertificate.extended()
         token.firstRecovery?.fr = now
         
         // WHEN
         let results = try! sut.validate(type: .eu,
                                         countryCode: "DE",
-                                        validationClock: dateAfter91Days,
+                                        validationClock: dateAfter89Days,
                                         certificate: token.vaccinationCertificate)
         
         // THEN
