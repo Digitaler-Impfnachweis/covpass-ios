@@ -385,23 +385,30 @@ class VaccinationRepositoryTests: XCTestCase {
     func testSetExpiryAlert() throws {
         let cborWebToken = try! JSONDecoder().decode(CBORWebToken.self, from: Data.json("CBORWebToken"))
         let cert = ExtendedCBORWebToken(vaccinationCertificate: cborWebToken, vaccinationQRCodeData: "")
-        _ = try sut.saveCertificateList(CertificateList(certificates: [cert])).wait()
+        let cert2 = CBORWebToken.mockVaccinationCertificate.extended(vaccinationQRCodeData: "1")
+        _ = try sut.saveCertificateList(CertificateList(certificates: [cert, cert2])).wait()
 
         // Get certificate list
         var list = try sut.getCertificateList().wait()
 
         // Get the first Token
-        var token = try XCTUnwrap(list.certificates.first)
-        XCTAssertNil(token.wasExpiryAlertShown)
+        var token1 = try XCTUnwrap(list.certificates.first)
+        var token2 = try XCTUnwrap(list.certificates.last)
+        let tokens = [token1, token2]
+        XCTAssertNil(token1.wasExpiryAlertShown)
+        XCTAssertNil(token2.wasExpiryAlertShown)
         // set that the expiry alert view is shown for this token
-        _ = try sut.setExpiryAlert(shown: true, token: token).wait()
+        _ = try sut.setExpiryAlert(shown: true, tokens: tokens).wait()
 
         // Get the list and check if the was expiry bool was shown is saved
         list = try sut.getCertificateList().wait()
-        token = try XCTUnwrap(list.certificates.first)
+        token1 = try XCTUnwrap(list.certificates.first)
+        token2 = try XCTUnwrap(list.certificates.last)
 
-        XCTAssertNotNil(token.wasExpiryAlertShown)
-        XCTAssertTrue(try XCTUnwrap(token.wasExpiryAlertShown))
+        XCTAssertNotNil(token1.wasExpiryAlertShown)
+        XCTAssertNotNil(token2.wasExpiryAlertShown)
+        XCTAssertTrue(try XCTUnwrap(token1.wasExpiryAlertShown))
+        XCTAssertTrue(try XCTUnwrap(token2.wasExpiryAlertShown))
     }
     
     func testSetReissueAlreadySeenInitialAndNewBadgeAlreadySeen() throws {

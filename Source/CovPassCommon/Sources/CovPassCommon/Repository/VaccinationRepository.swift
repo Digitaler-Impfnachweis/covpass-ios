@@ -345,13 +345,15 @@ public class VaccinationRepository: VaccinationRepositoryProtocol {
         }
     }
     
-    public func setExpiryAlert(shown _: Bool, token: ExtendedCBORWebToken) -> Promise<Void> {
+    public func setExpiryAlert(shown _: Bool, tokens: [ExtendedCBORWebToken]) -> Promise<Void> {
         firstly {
             getCertificateList()
         }.map(on: .global()) { list in
             var certList = list
-            if let index = list.certificates.firstIndex(of: token) {
-                certList.certificates[index].wasExpiryAlertShown = true
+            tokens.forEach {
+                if let index = list.certificates.firstIndex(of: $0) {
+                    certList.certificates[index].wasExpiryAlertShown = true
+                }
             }
             return certList
         }

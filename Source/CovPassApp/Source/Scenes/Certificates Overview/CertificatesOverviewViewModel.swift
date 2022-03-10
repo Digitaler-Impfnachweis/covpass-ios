@@ -467,9 +467,9 @@ extension CertificatesOverviewViewModel {
         let tokens = tokensToShowExpirationAlertFor()
         for var token in tokens {
             token.wasExpiryAlertShown = true
-            _ = repository.setExpiryAlert(shown: true, token: token)
         }
         if !tokens.isEmpty {
+            _ = repository.setExpiryAlert(shown: true, tokens: tokens)
             showExpiryAlert()
         }
         return .value

@@ -417,7 +417,7 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         wait(for: [vaccinationRepository.setExpiryAlertExpectation], timeout: 2)
         let value = try XCTUnwrap(vaccinationRepository.setExpiryAlertValue)
         XCTAssertTrue(value.shown)
-        XCTAssertEqual(value.token, tokens[0])
+        XCTAssertEqual(value.token.first, tokens[0])
     }
 
     func testRefresh_setExpiryAlert_called_for_all_expired_tokens() throws {
@@ -427,7 +427,6 @@ class CertificatesOverviewViewModelTests: XCTestCase {
             .invalid
         ]
         let router = CertificatesOverviewRouterMock()
-        vaccinationRepository.setExpiryAlertExpectation.expectedFulfillmentCount = 2
         configureSutAndRepository(with: router, certificates: tokens)
 
         // When

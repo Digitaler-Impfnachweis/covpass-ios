@@ -63,7 +63,7 @@ public class VaccinationRepositoryMock: VaccinationRepositoryProtocol {
         return .value(favoriteToggle)
     }
 
-    public func setExpiryAlert(shown _: Bool, token _: ExtendedCBORWebToken) -> Promise<Void> {
+    public func setExpiryAlert(shown _: Bool, tokens _: [ExtendedCBORWebToken]) -> Promise<Void> {
         Promise.value
     }
     
