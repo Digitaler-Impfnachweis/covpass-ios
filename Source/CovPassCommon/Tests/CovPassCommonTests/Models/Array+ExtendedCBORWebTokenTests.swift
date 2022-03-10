@@ -16,6 +16,12 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
         .doseNumber(1)
         .seriesOfDoses(1)
         .extended(vaccinationQRCodeData: "1")
+    var doubleDoseImmunizationJohnsonCert = CBORWebToken.mockVaccinationCertificate
+        .mockVaccinationUVCI("1")
+        .medicalProduct(.johnsonjohnson)
+        .doseNumber(2)
+        .seriesOfDoses(2)
+        .extended(vaccinationQRCodeData: "1")
     var vaccinationWithTwoShotsOfVaccine = CBORWebToken.mockVaccinationCertificate
         .mockVaccinationUVCI("2")
         .medicalProduct(.biontech)
@@ -101,6 +107,27 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
         XCTAssertTrue(candidateForReissue.count == 2)
         XCTAssertTrue(candidateForReissue.contains(singleDoseImmunizationJohnsonCert))
         XCTAssertTrue(candidateForReissue.contains(vaccinationWithTwoShotsOfVaccine))
+        XCTAssertFalse(candidateForReissue.contains(someOtherCert1))
+        XCTAssertFalse(candidateForReissue.contains(someOtherCert2))
+    }
+    
+    func testBoosteredWithJohnsonAlready() {
+        // GIVEN
+        let certs = [recoveryCert,
+                     singleDoseImmunizationJohnsonCert,
+                     doubleDoseImmunizationJohnsonCert,
+                     someOtherCert1]
+        
+        // WHEN
+        let candidateForReissue = certs.filterBoosterAfterVaccinationAfterRecovery
+        
+        // THEN
+        XCTAssertTrue(certs.qualifiedForReissue)
+        XCTAssertFalse(candidateForReissue.isEmpty)
+        XCTAssertEqual(candidateForReissue.count, 3)
+        XCTAssertTrue(candidateForReissue.contains(singleDoseImmunizationJohnsonCert))
+        XCTAssertTrue(candidateForReissue.contains(doubleDoseImmunizationJohnsonCert))
+        XCTAssertTrue(candidateForReissue.contains(recoveryCert))
         XCTAssertFalse(candidateForReissue.contains(someOtherCert1))
         XCTAssertFalse(candidateForReissue.contains(someOtherCert2))
     }
@@ -468,7 +495,7 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
         XCTAssertFalse(filteredCertsForElla.contains(recoveryCert2))
         XCTAssertTrue(filteredCertsForElla.contains(certOfEllaKatami))
     }
-
+    
     func testSortedByDnVacinationRecoveryAndTestCertficateMixed() {
         // GIVEN
         var certs = [singleDoseImmunizationJohnsonCert,
@@ -484,6 +511,23 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
         XCTAssertEqual(certs[1], singleDoseImmunizationJohnsonCert)
         XCTAssertEqual(certs[2], recoveryCert)
         XCTAssertEqual(certs[3], recoveryCert2)
+    }
+    
+    func testFilter2of1s() {
+        // GIVEN
+        var certs = [singleDoseImmunizationJohnsonCert,
+                     recoveryCert,
+                     recoveryCert2,
+                     boosterCertificateAfterReIssue,
+                     vaccinationWithTwoShotsOfVaccine,
+                     doubleDoseImmunizationJohnsonCert]
+        
+        // WHEN
+        certs = certs.filter2Of1
+        
+        // THEN
+        XCTAssertEqual(certs.count, 1)
+        XCTAssertEqual(certs[0], boosterCertificateAfterReIssue)
     }
 }
 

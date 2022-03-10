@@ -32,7 +32,7 @@ public extension Array where Element == ExtendedCBORWebToken {
     }
     
     var qualifiedForReissue: Bool {
-        guard filterBoosted.isEmpty else {
+        guard filter2Of1.isEmpty else {
             return false
         }
         return !filterBoosterAfterVaccinationAfterRecovery.isEmpty
@@ -135,6 +135,15 @@ public extension Array where Element == ExtendedCBORWebToken {
     var filterBoosted: [ExtendedCBORWebToken] {
         filter {
             if let v = $0.firstVaccination, v.isBoosted {
+                return true
+            }
+            return false
+        }
+    }
+    
+    var filter2Of1: [ExtendedCBORWebToken] {
+        filter {
+            if let v = $0.firstVaccination, v.is2Of1 {
                 return true
             }
             return false
@@ -304,7 +313,7 @@ public extension Array where Element == ExtendedCBORWebToken {
         res.append(contentsOf: quickTests)
         // #3 Booster Certificate
         //  Latest booster vaccination of a vaccination series (3/3, 4/4, ...)
-        res.append(contentsOf: filterBoosted.sortedByDn)
+        res.append(contentsOf: filterBoosted.sortByIssuedAtTime)
         // #4 Vaccination certificate
         //  Latest vaccination of a vaccination series (1/1, 2/2), older then (>) 14 days, and where the iat is the latest
         let vaccinationCertificates = filterVaccinations.sortByIssuedAtTime.sortByVaccinationDate

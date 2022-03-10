@@ -184,6 +184,10 @@ public extension Vaccination {
         sd == 2 && dn == 2
     }
     
+    var is2Of1: Bool {
+        sd == 1 && dn == 2
+    }
+    
     var isJohnsonJohnson: Bool {
         mp == MedicalProduct.johnsonjohnson.rawValue
     }

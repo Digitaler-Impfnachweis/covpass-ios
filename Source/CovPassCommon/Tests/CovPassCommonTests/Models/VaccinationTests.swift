@@ -23,6 +23,22 @@ class VaccinationTests: XCTestCase {
         sut = nil
     }
     
+    func testIs2Of1() {
+        // WHEN
+        sut.sd = 1
+        sut.dn = 2
+        // THEN
+        XCTAssertTrue(sut.is2Of1)
+    }
+    
+    func testIsNot2Of1() {
+        // WHEN
+        sut.sd = 2
+        sut.dn = 1
+        // THEN
+        XCTAssertFalse(sut.is2Of1)
+    }
+    
     func testIsJohnsonJohnson() {
         // WHEN
         sut.mp = "EU/1/20/1525"
