@@ -15,10 +15,10 @@ class RecoveryResultViewModel: ValidationResultViewModel {
     // MARK: - Properties
 
     weak var delegate: ResultViewModelDelegate?
-    var resolvable: Resolver<CBORWebToken>
+    var resolvable: Resolver<ExtendedCBORWebToken>
     var router: ValidationResultRouterProtocol
     var repository: VaccinationRepositoryProtocol
-    var certificate: CBORWebToken?
+    var certificate: ExtendedCBORWebToken?
 
     var icon: UIImage? {
         .resultSuccess
@@ -33,7 +33,7 @@ class RecoveryResultViewModel: ValidationResultViewModel {
     }
 
     var paragraphs: [Paragraph] {
-        guard let dgc = certificate?.hcert.dgc else {
+        guard let dgc = certificate?.vaccinationCertificate.hcert.dgc else {
             return []
         }
         return [
@@ -55,10 +55,10 @@ class RecoveryResultViewModel: ValidationResultViewModel {
     
     // MARK: - Lifecycle
 
-    init(resolvable: Resolver<CBORWebToken>,
+    init(resolvable: Resolver<ExtendedCBORWebToken>,
         router: ValidationResultRouterProtocol,
         repository: VaccinationRepositoryProtocol,
-        certificate: CBORWebToken?,
+        certificate: ExtendedCBORWebToken?,
         _2GContext: Bool,
         userDefaults: Persistence
     ) {

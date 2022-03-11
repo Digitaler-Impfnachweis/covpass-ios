@@ -90,4 +90,15 @@ public class VaccinationRepositoryMock: VaccinationRepositoryProtocol {
             checkedCert != nil ? seal.fulfill(checkedCert!) : seal.reject(checkedCertError)
         }
     }
+
+    public func validCertificate(_ data: String) -> Promise<ExtendedCBORWebToken> {
+        checkedCert != nil ?
+            .value(
+                ExtendedCBORWebToken(
+                    vaccinationCertificate: checkedCert!,
+                    vaccinationQRCodeData: ""
+                )
+            ) :
+            .init(error: checkedCertError)
+    }
 }

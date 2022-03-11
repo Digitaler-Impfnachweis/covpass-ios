@@ -15,7 +15,7 @@ struct ValidationResultSceneFactory: ResolvableSceneFactory {
     // MARK: - Properties
     
     let router: ValidationResultRouterProtocol
-    let certificate: CBORWebToken?
+    let certificate: ExtendedCBORWebToken?
     let error: Error?
     let buttonHidden: Bool
     let _2GContext: Bool
@@ -24,7 +24,7 @@ struct ValidationResultSceneFactory: ResolvableSceneFactory {
     // MARK: - Lifecycle
     
     init(router: ValidationResultRouterProtocol,
-         certificate: CBORWebToken?,
+         certificate: ExtendedCBORWebToken?,
          error: Error?,
          buttonHidden: Bool = false,
          _2GContext: Bool,
@@ -37,7 +37,7 @@ struct ValidationResultSceneFactory: ResolvableSceneFactory {
         self.userDefaults = userDefaults
     }
     
-    func make(resolvable: Resolver<CBORWebToken>) -> UIViewController {
+    func make(resolvable: Resolver<ExtendedCBORWebToken>) -> UIViewController {
         var viewModel = ValidationResultFactory.createViewModel(
             resolvable: resolvable,
             router: router,

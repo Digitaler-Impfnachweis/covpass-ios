@@ -10,10 +10,10 @@ import UIKit
 import PromiseKit
 
 public protocol ValidationViewModel {
-    var resolvable: Resolver<CBORWebToken> { get set }
+    var resolvable: Resolver<ExtendedCBORWebToken> { get set }
     var router: ValidationResultRouterProtocol { get set }
     var repository: VaccinationRepositoryProtocol { get set }
-    var certificate: CBORWebToken? { get set }
+    var certificate: ExtendedCBORWebToken? { get set }
     var delegate: ResultViewModelDelegate? { get set }
     var toolbarState: CustomToolbarState { get }
     var icon: UIImage? { get }

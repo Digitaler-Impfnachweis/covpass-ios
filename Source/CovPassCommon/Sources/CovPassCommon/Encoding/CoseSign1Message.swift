@@ -1,5 +1,5 @@
 //
-//  CoseSign1Parser.swift
+//  CoseSign1Message.swift
 //
 //
 //  © Copyright IBM Deutschland GmbH 2021
@@ -36,7 +36,7 @@ enum CoseSignatureAlgorithm: Int {
     case ps256 = -37
 }
 
-struct CoseSign1Message {
+public struct CoseSign1Message {
     var protected: [UInt8]
     var unprotected: Any?
     var payload: [UInt8]
@@ -52,6 +52,24 @@ struct CoseSign1Message {
         return .es256
     }
 
+    public var keyIdentifier: [UInt8] {
+        if let protectedCbor = try? CBOR.decode(protected),
+           case let .byteString(bytes) = protectedCbor[CBOR(integerLiteral: CoseProtectedHeader.kid.rawValue)] {
+            return bytes
+        } else if let unprotected = unprotected as? [CBOR: CBOR],
+                  case let .byteString(bytes) = unprotected[CBOR(integerLiteral: CoseProtectedHeader.kid.rawValue)] {
+            return bytes
+        }
+        return [UInt8]()
+    }
+
+    public var rValueSignature: [UInt8] {
+        guard signature.count >= 32 else {
+            return []
+        }
+        return [UInt8](signature.prefix(32))
+    }
+
     init(protected: [UInt8], unprotected: Any?, payload: [UInt8], signature: [UInt8]) {
         self.protected = protected
         self.unprotected = unprotected
@@ -65,7 +83,7 @@ struct CoseSign1Message {
     /// - parameter decompressedPayload: the data containing a COSE object
     /// - parameter completion: a fallback in case an error occurs
     /// - returns a constructed object of type `CoseSign1Message`
-    init(decompressedPayload: Data) throws {
+    public init(decompressedPayload: Data) throws {
         let cbor = try CBOR.decode(([UInt8])(decompressedPayload))
         var array = [CBOR]()
         if case let .tagged(_, tcbor) = cbor, case let .array(cborArray) = tcbor {

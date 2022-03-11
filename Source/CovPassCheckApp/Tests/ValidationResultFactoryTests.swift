@@ -14,14 +14,14 @@ import CertLogic
 
 class ValidationResultFactoryTests: XCTestCase {
     
-    var resolver: Resolver<CBORWebToken>!
+    var resolver: Resolver<ExtendedCBORWebToken>!
     var persistence: UserDefaultsPersistence!
     var validationResultRouter: ValidationResultRouterMock!
     var vacRepo: VaccinationRepositoryMock!
     var certLogic: DCCCertLogicMock!
     
     override func setUpWithError() throws {
-        resolver = Promise<CBORWebToken>.pending().resolver
+        resolver = Promise<ExtendedCBORWebToken>.pending().resolver
         persistence = UserDefaultsPersistence()
         validationResultRouter = ValidationResultRouterMock()
         vacRepo = VaccinationRepositoryMock()
@@ -36,7 +36,7 @@ class ValidationResultFactoryTests: XCTestCase {
         certLogic = nil
     }
     
-    func viewModel(certificate: CBORWebToken? = nil,
+    func viewModel(certificate: ExtendedCBORWebToken? = nil,
              error: CertificateError? = nil,
              logicType: DCCCertLogic.LogicType = .eu) -> ValidationResultViewModel {
         return ValidationResultFactory.createViewModel(resolvable: resolver,
@@ -71,7 +71,13 @@ class ValidationResultFactoryTests: XCTestCase {
     }
     
     func testValidationError_certificate_and_error() throws {
-        let sut = viewModel(certificate: .mockTestCertificate, error: .expiredCertifcate)
+        let sut = viewModel(
+            certificate: ExtendedCBORWebToken(
+                vaccinationCertificate: .mockTestCertificate,
+                vaccinationQRCodeData: ""
+            ),
+            error: .expiredCertifcate
+        )
         let expectedError = CertificateError.expiredCertifcate
         XCTAssertTrue(sut is ErrorResultViewModel, "Wrong Type: should be ErrorResultViewModel")
         let errorModel = try XCTUnwrap(sut as? ErrorResultViewModel)
@@ -101,17 +107,23 @@ class ValidationResultFactoryTests: XCTestCase {
     }
     
     func testValidationError_certificate_and_recoverResultViewModel() throws {
-        let expectedCertificate = CBORWebToken.mockRecoveryCertificate
+        let expectedCertificate = ExtendedCBORWebToken(
+            vaccinationCertificate: .mockRecoveryCertificate,
+            vaccinationQRCodeData: ""
+        )
         certLogic.validateResult = [ValidationResult(rule: .mock, result: .passed, validationErrors: nil)]
         let sut = viewModel(certificate: expectedCertificate)
         XCTAssertTrue(sut is RecoveryResultViewModel, "Wrong Type: should be RecoveryResultViewModel")
         let resultModel = try XCTUnwrap(sut as? RecoveryResultViewModel)
         XCTAssertTrue(resultModel.certificate == expectedCertificate)
-        XCTAssertTrue(resultModel.certificate != .mockVaccinationCertificate)
+        XCTAssertTrue(resultModel.certificate?.vaccinationCertificate != .mockVaccinationCertificate)
     }
     
     func testValidationError_certificate_and_TestResultViewModel() throws {
-        let expectedCertificate = CBORWebToken.mockTestCertificate
+        let expectedCertificate = ExtendedCBORWebToken(
+            vaccinationCertificate: .mockTestCertificate,
+            vaccinationQRCodeData: ""
+        )
         certLogic.validateResult = [ValidationResult(rule: .mock, result: .passed, validationErrors: nil)]
         let sut = viewModel(certificate: expectedCertificate)
         XCTAssertTrue(sut is TestResultViewModel, "Wrong Type: should be TestResultViewModel")
@@ -121,14 +133,14 @@ class ValidationResultFactoryTests: XCTestCase {
 }
 
 class ValidationResultFactoryExpertModeTests: XCTestCase {
-    var resolver: Resolver<CBORWebToken>!
+    var resolver: Resolver<ExtendedCBORWebToken>!
     var persistence: UserDefaultsPersistence!
     var validationResultRouter: ValidationResultRouterMock!
     var vacRepo: VaccinationRepositoryMock!
     var certLogic: DCCCertLogicMock!
     
     override func setUpWithError() throws {
-        resolver = Promise<CBORWebToken>.pending().resolver
+        resolver = Promise<ExtendedCBORWebToken>.pending().resolver
         persistence = UserDefaultsPersistence()
         validationResultRouter = ValidationResultRouterMock()
         vacRepo = VaccinationRepositoryMock()
@@ -143,7 +155,7 @@ class ValidationResultFactoryExpertModeTests: XCTestCase {
         certLogic = nil
     }
     
-    func viewModel(certificate: CBORWebToken? = nil,
+    func viewModel(certificate: ExtendedCBORWebToken? = nil,
              error: CertificateError? = nil,
              logicType: DCCCertLogic.LogicType = .eu) -> ValidationResultViewModel {
         return ValidationResultFactory.createViewModel(resolvable: resolver,
@@ -159,7 +171,10 @@ class ValidationResultFactoryExpertModeTests: XCTestCase {
     
     func testValidationError_someCert_expertModeOff_someErrorWhileCertLogicThrown_linkIsHidden() throws {
         persistence.revocationExpertMode = false
-        let expectedCertificate = CBORWebToken.mockTestCertificate
+        let expectedCertificate = ExtendedCBORWebToken(
+            vaccinationCertificate: .mockTestCertificate,
+            vaccinationQRCodeData: ""
+        )
         certLogic.validationError = APIError.invalidResponse
         let sut = viewModel(certificate: expectedCertificate)
         XCTAssertTrue(sut.linkIsHidden)
@@ -167,7 +182,10 @@ class ValidationResultFactoryExpertModeTests: XCTestCase {
     
     func testValidationError_someCert_expertModeOff_validationEmpty_linkIsHidden() throws {
         persistence.revocationExpertMode = false
-        let expectedCertificate = CBORWebToken.mockTestCertificate
+        let expectedCertificate = ExtendedCBORWebToken(
+            vaccinationCertificate: .mockTestCertificate,
+            vaccinationQRCodeData: ""
+        )
         certLogic.validateResult = []
         let sut = viewModel(certificate: expectedCertificate)
         XCTAssertTrue(sut.linkIsHidden)
@@ -176,7 +194,10 @@ class ValidationResultFactoryExpertModeTests: XCTestCase {
     
     func testValidationError_someCert_expertModeOff_validationFailing_linkIsHidden() throws {
         persistence.revocationExpertMode = false
-        let expectedCertificate = CBORWebToken.mockTestCertificate
+        let expectedCertificate = ExtendedCBORWebToken(
+            vaccinationCertificate: .mockTestCertificate,
+            vaccinationQRCodeData: ""
+        )
         certLogic.validateResult = [ValidationResult(rule: .mock, result: .fail, validationErrors: nil)]
         let sut = viewModel(certificate: expectedCertificate)
         XCTAssertTrue(sut.linkIsHidden)
@@ -190,7 +211,10 @@ class ValidationResultFactoryExpertModeTests: XCTestCase {
     
     func testValidationError_testCert_expertModeOff_linkIsHidden() throws {
         persistence.revocationExpertMode = false
-        let expectedCertificate = CBORWebToken.mockTestCertificate
+        let expectedCertificate = ExtendedCBORWebToken(
+            vaccinationCertificate: .mockTestCertificate,
+            vaccinationQRCodeData: ""
+        )
         certLogic.validateResult = [ValidationResult(rule: .mock, result: .passed, validationErrors: nil)]
         let sut = viewModel(certificate: expectedCertificate)
         XCTAssertTrue(sut.linkIsHidden)
@@ -198,7 +222,10 @@ class ValidationResultFactoryExpertModeTests: XCTestCase {
     
     func testValidationError_vacCert_expertModeOff_linkIsHidden() throws {
         persistence.revocationExpertMode = false
-        let expectedCertificate = CBORWebToken.mockVaccinationCertificate
+        let expectedCertificate = ExtendedCBORWebToken(
+            vaccinationCertificate: .mockVaccinationCertificate,
+            vaccinationQRCodeData: ""
+        )
         certLogic.validateResult = [ValidationResult(rule: .mock, result: .passed, validationErrors: nil)]
         let sut = viewModel(certificate: expectedCertificate)
         XCTAssertTrue(sut.linkIsHidden)
@@ -206,7 +233,10 @@ class ValidationResultFactoryExpertModeTests: XCTestCase {
     
     func testValidationError_recCert_expertModeOff_linkIsHidden() throws {
         persistence.revocationExpertMode = false
-        let expectedCertificate = CBORWebToken.mockRecoveryCertificate
+        let expectedCertificate = ExtendedCBORWebToken(
+            vaccinationCertificate: .mockRecoveryCertificate,
+            vaccinationQRCodeData: ""
+        )
         certLogic.validateResult = [ValidationResult(rule: .mock, result: .passed, validationErrors: nil)]
         let sut = viewModel(certificate: expectedCertificate)
         XCTAssertTrue(sut.linkIsHidden)
@@ -214,7 +244,10 @@ class ValidationResultFactoryExpertModeTests: XCTestCase {
     
     func testValidationError_testCert_expertModeOn_linkIsNotHidden() throws {
         persistence.revocationExpertMode = true
-        let expectedCertificate = CBORWebToken.mockTestCertificate
+        let expectedCertificate = ExtendedCBORWebToken(
+            vaccinationCertificate: .mockTestCertificate,
+            vaccinationQRCodeData: ""
+        )
         certLogic.validateResult = [ValidationResult(rule: .mock, result: .passed, validationErrors: nil)]
         let sut = viewModel(certificate: expectedCertificate)
         XCTAssertFalse(sut.linkIsHidden)
@@ -222,7 +255,10 @@ class ValidationResultFactoryExpertModeTests: XCTestCase {
     
     func testValidationError_vacCert_expertModeOn_linkIsNotHidden() throws {
         persistence.revocationExpertMode = true
-        let expectedCertificate = CBORWebToken.mockVaccinationCertificate
+        let expectedCertificate = ExtendedCBORWebToken(
+            vaccinationCertificate: .mockVaccinationCertificate,
+            vaccinationQRCodeData: ""
+        )
         certLogic.validateResult = [ValidationResult(rule: .mock, result: .passed, validationErrors: nil)]
         let sut = viewModel(certificate: expectedCertificate)
         XCTAssertFalse(sut.linkIsHidden)
@@ -230,7 +266,10 @@ class ValidationResultFactoryExpertModeTests: XCTestCase {
     
     func testValidationError_recCert_expertModeOn_linkIsNotHidden() throws {
         persistence.revocationExpertMode = true
-        let expectedCertificate = CBORWebToken.mockRecoveryCertificate
+        let expectedCertificate = ExtendedCBORWebToken(
+            vaccinationCertificate: .mockVaccinationCertificate,
+            vaccinationQRCodeData: ""
+        )
         certLogic.validateResult = [ValidationResult(rule: .mock, result: .passed, validationErrors: nil)]
         let sut = viewModel(certificate: expectedCertificate)
         XCTAssertFalse(sut.linkIsHidden)

@@ -13,7 +13,7 @@ import CovPassCommon
 
 class ValidationResultViewControllerSnapShotTests: BaseSnapShotTests {
     
-    let (_, resolver) = Promise<CBORWebToken>.pending()
+    let (_, resolver) = Promise<ExtendedCBORWebToken>.pending()
     var persistence: UserDefaultsPersistence!
     
     override func setUpWithError() throws {
@@ -25,11 +25,11 @@ class ValidationResultViewControllerSnapShotTests: BaseSnapShotTests {
     }
 
     func configureView(error: ValidationResultError?,
-                       token: CBORWebToken?,
+                       token: ExtendedCBORWebToken?,
                        _2GContext: Bool,
                        buttonHidden: Bool,
                        expertMode: Bool? = nil) -> UIView {
-        
+        let cborWebToken = token?.vaccinationCertificate
         var vm: ValidationResultViewModel!
         if let expertMode = expertMode, expertMode {
             persistence.revocationExpertMode = true
@@ -45,24 +45,24 @@ class ValidationResultViewControllerSnapShotTests: BaseSnapShotTests {
                                           _2GContext: _2GContext,
                                           userDefaults: persistence)
         } else {
-            guard let token = token else {
+            guard let cborWebToken = cborWebToken else {
                 return UIView()
             }
-            if token.isVaccination {
+            if cborWebToken.isVaccination {
                 vm = VaccinationResultViewModel(resolvable: resolver,
                                                 router: ValidationResultRouterMock(),
                                                 repository: VaccinationRepositoryMock(),
                                                 certificate: token,
                                                 _2GContext: _2GContext,
                                                 userDefaults: persistence)
-            } else if token.isRecovery {
+            } else if cborWebToken.isRecovery {
                 vm = RecoveryResultViewModel(resolvable: resolver,
                                                 router: ValidationResultRouterMock(),
                                                 repository: VaccinationRepositoryMock(),
                                                 certificate: token,
                                                 _2GContext: _2GContext,
                                                 userDefaults: persistence)
-            } else if token.isTest {
+            } else if cborWebToken.isTest {
                 vm = TestResultViewModel(resolvable: resolver,
                                                 router: ValidationResultRouterMock(),
                                                 repository: VaccinationRepositoryMock(),
@@ -102,25 +102,37 @@ class ValidationResultViewControllerSnapShotTests: BaseSnapShotTests {
     }
     
     func testSuccessVaccination() {
-        let token = CBORWebToken.mockVaccinationCertificate
+        let token = ExtendedCBORWebToken(
+            vaccinationCertificate: CBORWebToken.mockVaccinationCertificate,
+            vaccinationQRCodeData: ""
+        )
         let view = configureView(error: nil, token: token, _2GContext: true, buttonHidden: true)
         verifyView(view: view, height: 900)
     }
     
     func testSuccessRecovery() {
-        let token = CBORWebToken.mockRecoveryCertificate
+        let token = ExtendedCBORWebToken(
+            vaccinationCertificate: CBORWebToken.mockVaccinationCertificate,
+            vaccinationQRCodeData: ""
+        )
         let view = configureView(error: nil, token: token, _2GContext: true, buttonHidden: true)
         verifyView(view: view, height: 900)
     }
     
     func testSuccessRecoveryExpertMode() {
-        let token = CBORWebToken.mockRecoveryCertificate
+        let token = ExtendedCBORWebToken(
+            vaccinationCertificate: CBORWebToken.mockVaccinationCertificate,
+            vaccinationQRCodeData: ""
+        )
         let view = configureView(error: nil, token: token, _2GContext: false, buttonHidden: false, expertMode: true)
         verifyView(view: view, height: 900)
     }
     
     func testSuccessVaccinationExpertMode() {
-        let token = CBORWebToken.mockVaccinationCertificate
+        let token = ExtendedCBORWebToken(
+            vaccinationCertificate: CBORWebToken.mockVaccinationCertificate,
+            vaccinationQRCodeData: ""
+        )
         let view = configureView(error: nil, token: token, _2GContext: false, buttonHidden: false, expertMode: true)
         verifyView(view: view, height: 900)
     }

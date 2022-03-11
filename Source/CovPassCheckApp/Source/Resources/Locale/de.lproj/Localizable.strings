@@ -508,3 +508,204 @@
 "revocation_toggle_text" = "Informationen zur Sperrung anzeigen";
 
 "validation_check_popup_revoked_certificate_link_text" = "Informationen zur Sperrung anzeigen";
+
+"revocation_detail_page_title" = "Technische Details zum Zertifikat";
+
+"revocation_detail_page_button_text" = "PDF erstellen";
+
+"revocation_detail_page_transaction_number" = "Transaktionsnummer";
+
+"revocation_detail_page_key_reference" = "Schlüsselreferenz (KID)";
+
+"revocation_detail_page_r_value_signature" = "R-Wert-Signatur";
+
+"revocation_detail_page_country" = "Land";
+
+"revocation_detail_page_technical_expiry_date" = "Technisches Ablaufdatum";
+
+"revocation_detail_page_date_of_issuance" = "Ausstellungsdatum";
+
+
+/********** country list names **********/
+
+"IT" = "Italien";
+
+"LT" = "Litauen";
+
+"DK" = "Dänemark";
+
+"GR" = "Griechenland";
+
+"CZ" = "Tschechien";
+
+"HR" = "Kroatien";
+
+"IS" = "Island";
+
+"PT" = "Portugal";
+
+"PL" = "Polen";
+
+"BE" = "Belgien";
+
+"BG" = "Bulgarien";
+
+"DE" = "Deutschland";
+
+"LU" = "Luxemburg";
+
+"EE" = "Estland";
+
+"CY" = "Zypern";
+
+"ES" = "Spanien";
+
+"NL" = "Niederlande";
+
+"AT" = "Österreich";
+
+"LV" = "Lettland";
+
+"LI" = "Liechtenstein";
+
+"FI" = "Finnland";
+
+"SE" = "Schweden";
+
+"SI" = "Slowenien";
+
+"RO" = "Rumänien";
+
+"NO" = "Norwegen";
+
+"SK" = "Slowakei";
+
+"FR" = "Frankreich";
+
+"MT" = "Malta";
+
+"HU" = "Ungarn";
+
+"IE" = "Irland";
+
+"CH" = "Schweiz";
+
+"UA" = "Ukraine";
+
+"VA" = "Vatikanstadt";
+
+"SM" = "San Marino";
+
+"TR" = "Türkei";
+
+"MK" = "Nordmazedonien";
+
+"AD" = "Andorra";
+
+"MC" = "Monaco";
+
+"FO" = "Färöer-Inseln";
+
+"MA" = "Marokko";
+
+"AL" = "Albanien";
+
+"IL" = "Israel";
+
+"PA" = "Panama";
+
+"TG" = "Togo";
+
+"SG" = "Singapur";
+
+"GB" = "Großbritannien";
+
+"AM" = "Armenien";
+
+"GE" = "Georgien";
+
+"NZ" = "Neuseeland";
+
+"DZ" = "Algerien";
+
+"AZ" = "Aserbaidschan";
+
+"BH" = "Bahrain";
+
+"BJ" = "Benin";
+
+"BA" = "Bosnien und Herzegowina";
+
+"BR" = "Brasilien";
+
+"BI" = "Burundi";
+
+"CV" = "Kap Verde";
+
+"CA" = "Kanada";
+
+"CL" = "Chile";
+
+"CO" = "Kolumbien";
+
+"DO" = "Dominikanische Republik";
+
+"SV" = "El Salvador";
+
+"EG" = "Ägypten";
+
+"HK" = "Hongkong";
+
+"JP" = "Japan";
+
+"JO" = "Jordanien";
+
+"KZ" = "Kasachstan";
+
+"KE" = "Kenia";
+
+"KR" = "Republik Korea";
+
+"XK" = "Kosovo";
+
+"KW" = "Kuwait";
+
+"LB" = "Libanon";
+
+"MY" = "Malaysia";
+
+"MN" = "Mongolei";
+
+"ME" = "Montenegro";
+
+"MD" = "Moldawien";
+
+"RU" = "Russland";
+
+"RW" = "Ruanda";
+
+"RS" = "Serbien";
+
+"SD" = "Sudan";
+
+"TW" = "Taiwan";
+
+"TZ" = "Tansania";
+
+"TH" = "Thailand";
+
+"TN" = "Tunesien";
+
+"AE" = "Vereinte Arabische Emirate";
+
+"UG" = "Uganda";
+
+"US" = "Vereinigte Staaten von Amerika";
+
+"UY" = "Uruguay";
+
+"VN" = "Vietnam";
+
+"AR" = "Argentinien";
+
+"MX" = "Mexiko";

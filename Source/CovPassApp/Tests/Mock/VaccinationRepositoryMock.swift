@@ -111,15 +111,15 @@ public class VaccinationRepositoryMock: VaccinationRepositoryProtocol {
     }
 
     public func scanCertificate(_: String, isCountRuleEnabled: Bool) -> Promise<QRCodeScanable> {
-        return Promise { seal in
-            seal.reject(ApplicationError.unknownError)
-        }
+        .init(error: ApplicationError.unknownError)
     }
 
     public func checkCertificate(_: String) -> Promise<CBORWebToken> {
-        return Promise { seal in
-            seal.reject(ApplicationError.unknownError)
-        }
+        .init(error: ApplicationError.unknownError)
+    }
+
+    public func validCertificate(_ data: String) -> Promise<ExtendedCBORWebToken> {
+        .init(error: ApplicationError.unknownError)
     }
 }
 

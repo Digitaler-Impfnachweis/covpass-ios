@@ -56,10 +56,16 @@ class GProofViewModel: GProofViewModelProtocol {
     var seconResultLinkImage: UIImage? { secondResult.linkImage }
     var seconResultFooterText: String? { nil }
     var resultPersonIcon: UIImage { Constants.Images.iconCardInverse }
-    var resultPersonTitle: String? { firstResult?.certificate?.hcert.dgc.nam.fullName ?? secondResult?.certificate?.hcert.dgc.nam.fullName }
-    var resultPersonSubtitle: String? { firstResult?.certificate?.hcert.dgc.nam.fullNameTransliterated ?? secondResult?.certificate?.hcert.dgc.nam.fullNameTransliterated }
+    var resultPersonTitle: String? {
+        firstResult?.certificate?.vaccinationCertificate.hcert.dgc.nam.fullName ??
+        secondResult?.certificate?.vaccinationCertificate.hcert.dgc.nam.fullName
+    }
+    var resultPersonSubtitle: String? {
+        firstResult?.certificate?.vaccinationCertificate.hcert.dgc.nam.fullNameTransliterated ??
+        secondResult?.certificate?.vaccinationCertificate.hcert.dgc.nam.fullNameTransliterated
+    }
     var resultPersonFooter: String? {
-        let digitalGreenCert = firstResult?.certificate?.hcert.dgc ?? secondResult?.certificate?.hcert.dgc
+        let digitalGreenCert = firstResult?.certificate?.vaccinationCertificate.hcert.dgc ?? secondResult?.certificate?.vaccinationCertificate.hcert.dgc
         guard let dgc = digitalGreenCert else {
             return nil
         }
@@ -96,10 +102,10 @@ class GProofViewModel: GProofViewModelProtocol {
     private var lastTriedCertType: CertType? = nil
     private var userDefaults: Persistence
     private var boosterAsTest: Bool
-    private var resolvable: Resolver<CBORWebToken>
+    private var resolvable: Resolver<ExtendedCBORWebToken>
     private var isFirstScan: Bool { firstResult == nil }
-    init(resolvable: Resolver<CBORWebToken>,
-         initialToken: CBORWebToken,
+    init(resolvable: Resolver<ExtendedCBORWebToken>,
+         initialToken: ExtendedCBORWebToken,
          router: GProofRouterProtocol,
          repository: VaccinationRepositoryProtocol,
          certLogic: DCCCertLogicProtocol,
@@ -122,7 +128,7 @@ class GProofViewModel: GProofViewModelProtocol {
             try self.payloadFromScannerResult($0)
         }
         .then {
-            self.repository.checkCertificate($0)
+            self.repository.validCertificate($0)
         }
         .done {
             self.validationToken(token: $0)
@@ -138,7 +144,7 @@ class GProofViewModel: GProofViewModelProtocol {
 
     }
     
-    private func validationToken(token: CBORWebToken) {
+    private func validationToken(token: ExtendedCBORWebToken) {
         firstly {
             try self.preventSettingSameQRCode(token)
         }
@@ -199,16 +205,16 @@ class GProofViewModel: GProofViewModelProtocol {
         }
     }
     
-    private func preventSettingSameQRCode(_ newToken: CBORWebToken) throws -> Promise<CBORWebToken> {
-        let certTypeIsNotAlreadyScanned = firstResult?.certificate?.certType != newToken.certType
-        let exceptionBoosterWillReplaceCurrent = (newToken.hcert.dgc.isVaccinationBoosted && boosterAsTest)
+    private func preventSettingSameQRCode(_ newToken: ExtendedCBORWebToken) throws -> Promise<ExtendedCBORWebToken> {
+        let certTypeIsNotAlreadyScanned = firstResult?.certificate?.vaccinationCertificate.certType != newToken.vaccinationCertificate.certType
+        let exceptionBoosterWillReplaceCurrent = (newToken.vaccinationCertificate.hcert.dgc.isVaccinationBoosted && boosterAsTest)
         guard certTypeIsNotAlreadyScanned || exceptionBoosterWillReplaceCurrent else {
             throw QRCodeError.qrCodeExists
         }
         return .value(newToken)
     }
     
-    private func setResultViewModel(newToken: CBORWebToken?) -> Promise<Void> {
+    private func setResultViewModel(newToken: ExtendedCBORWebToken?) -> Promise<Void> {
         let validationResultViewModel = ValidationResultFactory.createViewModel(resolvable: resolvable,
                                                                                 router: router,
                                                                                 repository: repository,
@@ -218,7 +224,7 @@ class GProofViewModel: GProofViewModelProtocol {
                                                                                 certLogic: certLogic,
                                                                                 _2GContext: true,
                                                                                 userDefaults: userDefaults)
-        initialTokenIsBoosted = newToken?.hcert.dgc.isVaccinationBoosted ?? false && boosterAsTest
+        initialTokenIsBoosted = newToken?.vaccinationCertificate.hcert.dgc.isVaccinationBoosted ?? false && boosterAsTest
         
         if lastTriedCertType == nil || initialTokenIsBoosted {
             firstResult = validationResultViewModel
@@ -247,8 +253,8 @@ class GProofViewModel: GProofViewModelProtocol {
         }
         
         _ = firstly {
-            router.showDifferentPerson(firstResultCert: firstResultCert,
-                                       scondResultCert: secondResultCert)
+            router.showDifferentPerson(firstResultCert: firstResultCert.vaccinationCertificate,
+                                       scondResultCert: secondResultCert.vaccinationCertificate)
         }
         .done {
             switch $0 {
@@ -263,7 +269,8 @@ class GProofViewModel: GProofViewModelProtocol {
     }
     
     private var certificateAndTestNameOrDateOfBirthAreNotMatching: Bool {
-        firstResult?.certificate?.hcert.dgc != secondResult?.certificate?.hcert.dgc
+        firstResult?.certificate?.vaccinationCertificate.hcert.dgc !=
+        secondResult?.certificate?.vaccinationCertificate.hcert.dgc
     }
     
     func scanNext() {

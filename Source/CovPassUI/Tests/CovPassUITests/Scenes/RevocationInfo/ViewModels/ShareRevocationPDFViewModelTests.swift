@@ -1,0 +1,49 @@
+//
+//  ShareRevocationPDFViewModelTests.swift
+//  
+//
+//  Created by Thomas Kuleßa on 10.03.22.
+//
+
+@testable import CovPassUI
+import PDFKit
+import XCTest
+
+class ShareRevocationPDFViewModelTests: XCTestCase {
+    private var sut: ShareRevocationPDFViewModel!
+    private var url: URL!
+    override func setUpWithError() throws {
+        let fileManager = FileManager.default
+        url = fileManager.temporaryDirectory
+            .appendingPathComponent("1234_Germany_01.01.2001.pdf")
+        try? fileManager.removeItem(at: url)
+        sut = .init(
+            exportData: RevocationPDFExportData(
+                pdfDocument: PDFDocument(),
+                issuingCountry: "Germany",
+                transactionNumber: "1234",
+                date: Date(timeIntervalSinceReferenceDate: 0),
+                fileManager: fileManager
+            )
+        )
+    }
+
+    override func tearDownWithError() throws {
+        try? FileManager.default.removeItem(at: url)
+        sut = nil
+        url = nil
+    }
+
+    func testInit() {
+        // Then
+        XCTAssertTrue(FileManager.default.fileExists(atPath: url.path))
+    }
+
+    func testHandleActivityResult() {
+        // When
+        sut.handleActivityResult(completed: false, activityError: nil)
+
+        // Then
+        XCTAssertFalse(FileManager.default.fileExists(atPath: url.path))
+    }
+}

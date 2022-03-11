@@ -6,6 +6,7 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
+import CovPassCommon
 import Foundation
 import PromiseKit
 import Scanner
@@ -38,7 +39,12 @@ public struct ValidationResultRouter: ValidationResultRouterProtocol {
         )
     }
     
-    public func showRevocation() {
-        // TODO: open new reissue page
+    public func showRevocation(token: ExtendedCBORWebToken) -> Promise<Void> {
+        sceneCoordinator.present(
+            RevocationInfoSceneFactory(
+                router: RevocationInfoRouter(sceneCoordinator: sceneCoordinator),
+                token: token
+            )
+        )
     }
 }

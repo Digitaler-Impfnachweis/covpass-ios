@@ -43,10 +43,10 @@ class GProofRouter: GProofRouterProtocol {
         )
     }
     
-    func showCertificate(_ certificate: CBORWebToken?,
+    func showCertificate(_ certificate: ExtendedCBORWebToken?,
                          _2GContext: Bool,
                          userDefaults: Persistence,
-                         buttonHidden: Bool) -> Promise<CBORWebToken> {
+                         buttonHidden: Bool) -> Promise<ExtendedCBORWebToken> {
         sceneCoordinator.present(
             ValidationResultSceneFactory(
                 router: ValidationResultRouter(sceneCoordinator: sceneCoordinator),
@@ -84,7 +84,8 @@ class GProofRouter: GProofRouterProtocol {
         
     }
     
-    public func showRevocation() {
+    func showRevocation(token: ExtendedCBORWebToken) -> Promise<Void> {
         // not covered by GProof
+        .init(error: ApplicationError.general("\(#file):\(#function) should not be called."))
     }
 }

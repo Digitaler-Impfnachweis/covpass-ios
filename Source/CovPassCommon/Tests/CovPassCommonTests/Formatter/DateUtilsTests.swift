@@ -56,6 +56,10 @@ class DateUtilsTests: XCTestCase {
         XCTAssertEqual(DateUtils.displayDateTimeFormatter.string(from: date), "Jan 1, 1970 at 1:16 AM")
     }
 
+    func testDayMonthYearDateFormatter() {
+        XCTAssertEqual(DateUtils.dayMonthYearDateFormatter.string(from: date), "01.01.1970")
+    }
+
     func testParseDate() {
         XCTAssertNotNil(DateUtils.parseDate("2021"))
         XCTAssertNotNil(DateUtils.parseDate("2021-04"))

@@ -19,7 +19,7 @@ public enum Base45CodingError: Error, ErrorCode {
     }
 }
 
-enum Base45Coder {
+public enum Base45Coder {
     private static let base45Table: [Int: String] = [
         0: "0", 1: "1", 2: "2", 3: "3", 4: "4", 5: "5", 6: "6", 7: "7", 8: "8", 9: "9", 10: "A", 11: "B",
         12: "C", 13: "D", 14: "E", 15: "F", 16: "G", 17: "H", 18: "I", 19: "J", 20: "K", 21: "L", 22: "M",
@@ -30,7 +30,7 @@ enum Base45Coder {
     /// This method encodes an array of unsigned 8 bit integers representing ascii values to a String in base45
     /// - parameter int8Array: the array to be encoded
     /// - returns: a String in base45
-    static func encode(_ int8Array: [UInt8]) -> String {
+    public static func encode(_ int8Array: [UInt8]) -> String {
         return sequence(state: int8Array.makeIterator(), next: { it in
             it.next().map { ($0, it.next()) }
         }).map { Base45Coder.mapToBase45Character(firstInt: $0, secondInt: $1) }.joined()
@@ -39,7 +39,7 @@ enum Base45Coder {
     /// This method decodes a base45 String back into an array of UInt8 ascii values
     /// - parameter payload: a String represented in base45
     /// - returns: an array of unsigned 8 bit integers representing ascii values
-    static func decode(_ payload: String) throws -> [UInt8] {
+    public static func decode(_ payload: String) throws -> [UInt8] {
         var base45Values = [UInt8]()
 
         for character in payload {

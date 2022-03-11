@@ -34,6 +34,18 @@ public struct ExtendedCBORWebToken: Codable, QRCodeScanable {
         self.vaccinationCertificate = vaccinationCertificate
         self.vaccinationQRCodeData = vaccinationQRCodeData
     }
+
+    public func coseSign1Message() throws -> CoseSign1Message {
+        let compressedAndEncodedMessage = vaccinationQRCodeData.stripPrefix()
+        let compressedMessage = try Base45Coder.decode(compressedAndEncodedMessage)
+        guard let message = Compression.decompress(Data(compressedMessage)) else {
+            throw ApplicationError.general("Could not decompress QR Code data")
+        }
+        let coseSign1Message = try CoseSign1Message(
+            decompressedPayload: message
+        )
+        return coseSign1Message
+    }
 }
 
 extension ExtendedCBORWebToken: Equatable {

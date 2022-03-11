@@ -22,7 +22,7 @@ class ValidatorMockRouter: ValidatorOverviewRouterProtocol {
         .value
     }
     
-    func showGproof(initialToken: CBORWebToken,
+    func showGproof(initialToken: ExtendedCBORWebToken,
                     repository: VaccinationRepositoryProtocol,
                     certLogic: DCCCertLogicProtocol,
                     userDefaults: Persistence,
@@ -33,11 +33,14 @@ class ValidatorMockRouter: ValidatorOverviewRouterProtocol {
         .value(.success(""))
     }
     
-    func showCertificate(_ certificate: CBORWebToken?, _2GContext: Bool, userDefaults: Persistence) {
+    func showCertificate(_ certificate: ExtendedCBORWebToken?, _2GContext: Bool, userDefaults: Persistence) {
 
     }
     
-    func showError(error: Error, _2GContext: Bool, userDefaults: Persistence) -> Promise<CBORWebToken> {
-        .value(CBORWebToken.mockTestCertificate)
+    func showError(error: Error, _2GContext: Bool, userDefaults: Persistence) -> Promise<ExtendedCBORWebToken> {
+        .value(ExtendedCBORWebToken(
+            vaccinationCertificate: .mockTestCertificate,
+            vaccinationQRCodeData: "")
+        )
     }
 }
