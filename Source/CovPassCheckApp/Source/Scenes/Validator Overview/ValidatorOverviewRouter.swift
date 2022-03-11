@@ -36,7 +36,7 @@ class ValidatorOverviewRouter: ValidatorOverviewRouterProtocol {
         )
     }
     
-    func showCertificate(_ certificate: CBORWebToken?,
+    func showCertificate(_ certificate: ExtendedCBORWebToken?,
                          _2GContext: Bool,
                          userDefaults: Persistence) {
         sceneCoordinator
@@ -63,7 +63,7 @@ class ValidatorOverviewRouter: ValidatorOverviewRouterProtocol {
     
     func showError(error: Error,
                    _2GContext: Bool,
-                   userDefaults: Persistence) -> Promise<CBORWebToken>  {
+                   userDefaults: Persistence) -> Promise<ExtendedCBORWebToken>  {
         sceneCoordinator.present(
             ValidationResultSceneFactory(
                 router: ValidationResultRouter(sceneCoordinator: sceneCoordinator),
@@ -75,7 +75,7 @@ class ValidatorOverviewRouter: ValidatorOverviewRouterProtocol {
         )
     }
     
-    func showGproof(initialToken: CBORWebToken,
+    func showGproof(initialToken: ExtendedCBORWebToken,
                     repository: VaccinationRepositoryProtocol,
                     certLogic: DCCCertLogicProtocol,
                     userDefaults: Persistence,

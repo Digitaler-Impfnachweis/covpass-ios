@@ -46,14 +46,14 @@ public extension Optional where Wrapped == ValidationResultViewModel {
         case is VaccinationResultViewModel:
             return vaccinationTitle(initialTokenIsBoosted: initialTokenIsBoosted)
         case  is TestResultViewModel:
-            return self?.certificate?.hcert.dgc.isPCR ?? false ? Constants.Keys.result_2G_2nd_gproof_valid_pcrtest : Constants.Keys.result_2G_2nd_gproof_valid_rapidtest
+            return self?.certificate?.vaccinationCertificate.hcert.dgc.isPCR ?? false ? Constants.Keys.result_2G_2nd_gproof_valid_pcrtest : Constants.Keys.result_2G_2nd_gproof_valid_rapidtest
         default:
             return theOtherResultVM.errorTitle
         }
     }
     
     func vaccinationTitle(initialTokenIsBoosted: Bool) -> String {
-        guard let cert = self?.certificate else {
+        guard let cert = self?.certificate?.vaccinationCertificate else {
             return Constants.Keys.result_2G_empty_subtitle
         }
         if initialTokenIsBoosted {
@@ -68,11 +68,14 @@ public extension Optional where Wrapped == ValidationResultViewModel {
     }
     
     var errorTitle: String {
-        if self?.certificate?.isTest ?? false {
+        guard let certificate = self?.certificate?.vaccinationCertificate else {
+            return Constants.Keys.result_2G_certificate_invalid
+        }
+        if certificate.isTest {
             return Constants.Keys.result_2G_3rd_vacc_recov_empty
-        } else if self?.certificate?.isVaccination ?? false {
+        } else if certificate.isVaccination {
             return Constants.Keys.result_2G_3rd_test_recov_empty
-        } else if self?.certificate?.isRecovery ?? false {
+        } else if certificate.isRecovery {
             return Constants.Keys.result_2G_3rd_test_vacc_empty
         } else {
             return Constants.Keys.result_2G_certificate_invalid
@@ -93,11 +96,11 @@ public extension Optional where Wrapped == ValidationResultViewModel {
         case is ErrorResultViewModel:
             return Constants.Keys.result_2G_invalid_subtitle
         case is RecoveryResultViewModel:
-            return self?.certificate?.recoverySubtitle
+            return self?.certificate?.vaccinationCertificate.recoverySubtitle
         case is VaccinationResultViewModel:
-            return self?.certificate?.vaccinationSubtitle
+            return self?.certificate?.vaccinationCertificate.vaccinationSubtitle
         case is TestResultViewModel:
-            return self?.certificate?.testSubtitle
+            return self?.certificate?.vaccinationCertificate.testSubtitle
         default: return Constants.Keys.result_2G_2nd_empty
         }
     }
@@ -108,7 +111,7 @@ public extension Optional where Wrapped == ValidationResultViewModel {
         case is VaccinationResultViewModel, is RecoveryResultViewModel: return Constants.Images.detailStatusFull
         case is TestResultViewModel, is RecoveryResultViewModel: return Constants.Images.detailStatusTest
         default:
-            return self?.certificate?.isTest ?? false ? Constants.Images.detailStatusTestEmpty : Constants.Images.detailStatusFullEmpty
+            return self?.certificate?.vaccinationCertificate.isTest ?? false ? Constants.Images.detailStatusTestEmpty : Constants.Images.detailStatusFullEmpty
         }
     }
 }

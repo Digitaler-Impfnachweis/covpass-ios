@@ -202,7 +202,7 @@ class ValidatorOverviewViewModel {
             try self.payloadFromScannerResult($0)
         }
         .then {
-            self.repository.checkCertificate($0)
+            self.repository.validCertificate($0)
         }
         .done {
             if scanType == ._3G {

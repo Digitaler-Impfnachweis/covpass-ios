@@ -35,11 +35,11 @@ struct ValidationResultSceneFactory: ResolvableSceneFactory {
         self.userDefaults = userDefaults
     }
     
-    func make(resolvable: Resolver<CBORWebToken>) -> UIViewController {
+    func make(resolvable: Resolver<ExtendedCBORWebToken>) -> UIViewController {
         let viewModel = ValidationResultFactory.createViewModel(resolvable: resolvable,
                                                                 router: router,
                                                                 repository: VaccinationRepository.create(),
-                                                                certificate: certificate.vaccinationCertificate,
+                                                                certificate: certificate,
                                                                 error: error,
                                                                 token: token,
                                                                 userDefaults: userDefaults)

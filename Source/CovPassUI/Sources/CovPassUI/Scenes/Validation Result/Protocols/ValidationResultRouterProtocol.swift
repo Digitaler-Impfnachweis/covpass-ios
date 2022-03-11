@@ -8,9 +8,10 @@
 
 import PromiseKit
 import UIKit
+import CovPassCommon
 
 public protocol ValidationResultRouterProtocol: RouterProtocol {
     func showStart()
-    func showRevocation()
+    func showRevocation(token: ExtendedCBORWebToken) -> Promise<Void>
     func scanQRCode() -> Promise<ScanResult>
 }

@@ -17,10 +17,10 @@ class VaccinationResultViewModel: ValidationResultViewModel {
     // MARK: - Properties
 
     weak var delegate: ResultViewModelDelegate?
-    var resolvable: Resolver<CBORWebToken>
+    var resolvable: Resolver<ExtendedCBORWebToken>
     var router: ValidationResultRouterProtocol
     var repository: VaccinationRepositoryProtocol
-    var certificate: CBORWebToken?
+    var certificate: ExtendedCBORWebToken?
     var token: VAASValidaitonResultToken?
 
     var icon: UIImage? {
@@ -55,10 +55,10 @@ class VaccinationResultViewModel: ValidationResultViewModel {
     
     // MARK: - Lifecycle
     
-    init(resolvable: Resolver<CBORWebToken>,
+    init(resolvable: Resolver<ExtendedCBORWebToken>,
          router: ValidationResultRouterProtocol,
          repository: VaccinationRepositoryProtocol,
-         certificate: CBORWebToken?,
+         certificate: ExtendedCBORWebToken?,
          token: VAASValidaitonResultToken?,
          userDefaults: Persistence) {
         self.router = router

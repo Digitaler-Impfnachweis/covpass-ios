@@ -28,7 +28,10 @@ extension ValidationViewModel {
     }
     
     func revocationButtonTapped() {
-        router.showRevocation()
+        guard let certificate = self.certificate else { return }
+        router
+            .showRevocation(token: certificate)
+            .cauterize()
     }
     
     func cancel() {
@@ -44,10 +47,9 @@ extension ValidationViewModel {
             try self.payloadFromScannerResult($0)
         }
         .then {
-            self.repository.checkCertificate($0)
+            self.repository.validCertificate($0)
         }
         .done { certificate in
-            
             if self._2GContext {
                 resolvable.fulfill(certificate)
                 return

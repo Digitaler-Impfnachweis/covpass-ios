@@ -328,6 +328,15 @@ public class VaccinationRepository: VaccinationRepositoryProtocol {
         }
     }
 
+    public func validCertificate(_ data: String) -> Promise<ExtendedCBORWebToken> {
+        checkCertificate(data).map { cborWebToken in
+                .init(
+                    vaccinationCertificate: cborWebToken,
+                    vaccinationQRCodeData: data
+                )
+        }
+    }
+
     public func toggleFavoriteStateForCertificateWithIdentifier(_ id: String) -> Promise<Bool> {
         firstly {
             getCertificateList()

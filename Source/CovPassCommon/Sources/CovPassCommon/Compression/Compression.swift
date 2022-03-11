@@ -9,7 +9,7 @@
 import Compression
 import Foundation
 
-struct Compression {
+public struct Compression {
     typealias Config = (operation: compression_stream_operation, algorithm: compression_algorithm)
 
     static func perform(_ config: Config, source: UnsafePointer<UInt8>, sourceSize: Int, preload: Data = Data()) -> Data? {
@@ -67,7 +67,7 @@ struct Compression {
         }
     }
 
-    static func decompress(_ data: Data) -> Data? {
+    public static func decompress(_ data: Data) -> Data? {
         let size = 8_000_000
         let buffer = UnsafeMutablePointer<UInt8>.allocate(capacity: size)
         guard data.count > 2 else { return nil }

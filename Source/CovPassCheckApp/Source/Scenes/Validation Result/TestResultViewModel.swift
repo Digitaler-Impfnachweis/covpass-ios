@@ -16,17 +16,17 @@ class TestResultViewModel: ValidationResultViewModel {
     // MARK: - Properties
 
     weak var delegate: ResultViewModelDelegate?
-    var resolvable: Resolver<CBORWebToken>
+    var resolvable: Resolver<ExtendedCBORWebToken>
     var router: ValidationResultRouterProtocol
     var repository: VaccinationRepositoryProtocol
-    var certificate: CBORWebToken?
+    var certificate: ExtendedCBORWebToken?
 
     var icon: UIImage? {
         .group
     }
 
     var resultTitle: String {
-        guard let testCert = certificate?.hcert.dgc.t?.first else {
+        guard let testCert = certificate?.vaccinationCertificate.hcert.dgc.t?.first else {
             return ""
         }
         // negative pcr
@@ -44,7 +44,7 @@ class TestResultViewModel: ValidationResultViewModel {
     }
 
     var paragraphs: [Paragraph] {
-        guard let dgc = certificate?.hcert.dgc, let testCert = dgc.t?.first else {
+        guard let dgc = certificate?.vaccinationCertificate.hcert.dgc, let testCert = dgc.t?.first else {
             return []
         }
         return [
@@ -71,10 +71,10 @@ class TestResultViewModel: ValidationResultViewModel {
     
     // MARK: - Lifecycle
     
-    init(resolvable: Resolver<CBORWebToken>,
+    init(resolvable: Resolver<ExtendedCBORWebToken>,
          router: ValidationResultRouterProtocol,
          repository: VaccinationRepositoryProtocol,
-         certificate: CBORWebToken?,
+         certificate: ExtendedCBORWebToken?,
          _2GContext: Bool,
          userDefaults: Persistence
     ) {

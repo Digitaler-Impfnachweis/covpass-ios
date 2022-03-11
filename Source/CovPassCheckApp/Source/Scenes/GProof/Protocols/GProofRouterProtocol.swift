@@ -17,10 +17,10 @@ enum GProofResult {
 
 protocol GProofRouterProtocol: DialogRouterProtocol, ValidationResultRouterProtocol {
     func scanQRCode() -> Promise<ScanResult>
-    func showCertificate(_ certificate: CBORWebToken?,
+    func showCertificate(_ certificate: ExtendedCBORWebToken?,
                          _2GContext: Bool,
                          userDefaults: Persistence,
-                         buttonHidden: Bool) -> Promise<CBORWebToken>
+                         buttonHidden: Bool) -> Promise<ExtendedCBORWebToken>
     func showError(error: Error)
     func showDifferentPerson(firstResultCert: CBORWebToken,
                              scondResultCert: CBORWebToken) -> Promise<GProofResult>

@@ -12,10 +12,10 @@ import Foundation
 import PromiseKit
 
 struct ValidationResultFactory {
-    static func createViewModel(resolvable: Resolver<CBORWebToken>,
+    static func createViewModel(resolvable: Resolver<ExtendedCBORWebToken>,
                                 router: ValidationResultRouterProtocol,
                                 repository: VaccinationRepositoryProtocol,
-                                certificate: CBORWebToken?,
+                                certificate: ExtendedCBORWebToken?,
                                 error: Error?,
                                 type: DCCCertLogic.LogicType,
                                 certLogic: DCCCertLogicProtocol,
@@ -32,7 +32,7 @@ struct ValidationResultFactory {
         
         do {
             // Validate given certificate based on GERMAN rules and users local time (CovPassCheck only)
-            let validationResult = try certLogic.validate(type: type, countryCode: "DE", validationClock: Date(), certificate: cert)
+            let validationResult = try certLogic.validate(type: type, countryCode: "DE", validationClock: Date(), certificate: cert.vaccinationCertificate)
             let valid = validationResult.contains(where: { $0.result != .passed }) == false
             
             // Show error dialog when at least one rule failed or there are no rules at all
@@ -40,7 +40,7 @@ struct ValidationResultFactory {
                 return ErrorResultViewModel(resolvable: resolvable,
                                             router: router,
                                             repository: repository,
-                                            certificate: certificate,
+                                            certificate: cert,
                                             error: ValidationResultError.functional,
                                             _2GContext: _2GContext,
                                             userDefaults: userDefaults)
@@ -49,38 +49,38 @@ struct ValidationResultFactory {
                 return ErrorResultViewModel(resolvable: resolvable,
                                             router: router,
                                             repository: repository,
-                                            certificate: certificate,
+                                            certificate: cert,
                                             error: ValidationResultError.technical,
                                             _2GContext: _2GContext,
                                             userDefaults: userDefaults)
             }
-            if certificate?.hcert.dgc.r?.isEmpty == false {
+            if cert.vaccinationCertificate.hcert.dgc.r?.isEmpty == false {
                 return RecoveryResultViewModel(resolvable: resolvable,
                                                router: router,
                                                repository: repository,
-                                               certificate: certificate,
+                                               certificate: cert,
                                                _2GContext: _2GContext,
                                                userDefaults: userDefaults)
             }
-            if certificate?.hcert.dgc.t?.isEmpty == false {
+            if cert.vaccinationCertificate.hcert.dgc.t?.isEmpty == false {
                 return TestResultViewModel(resolvable: resolvable,
                                            router: router,
                                            repository: repository,
-                                           certificate: certificate,
+                                           certificate: cert,
                                            _2GContext: _2GContext,
                                            userDefaults: userDefaults)
             }
             return VaccinationResultViewModel(resolvable: resolvable,
                                               router: router,
                                               repository: repository,
-                                              certificate: certificate,
+                                              certificate: cert,
                                               _2GContext: _2GContext,
                                               userDefaults: userDefaults)
         } catch {
             return ErrorResultViewModel(resolvable: resolvable,
                                         router: router,
                                         repository: repository,
-                                        certificate: certificate,
+                                        certificate: cert,
                                         error: ValidationResultError.technical,
                                         _2GContext: _2GContext,
                                         userDefaults: userDefaults)

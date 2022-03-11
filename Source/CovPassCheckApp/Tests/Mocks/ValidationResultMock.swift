@@ -5,12 +5,13 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
+import CovPassCommon
 import CovPassUI
 import PromiseKit
 import XCTest
 
 struct ValidationResultRouterMock: ValidationResultRouterProtocol {
-    
+
     var showRevocationExpectation = XCTestExpectation()
     var sceneCoordinator: SceneCoordinator = SceneCoordinatorMock()
 
@@ -20,8 +21,8 @@ struct ValidationResultRouterMock: ValidationResultRouterProtocol {
         .value(.success(""))
     }
     
-    func showRevocation() {
+    func showRevocation(token: ExtendedCBORWebToken) -> Promise<Void> {
         showRevocationExpectation.fulfill()
+        return .init(error: NSError(domain: "TEST", code: 0, userInfo: nil))
     }
-
 }

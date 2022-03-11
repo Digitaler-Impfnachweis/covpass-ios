@@ -5,7 +5,7 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-@testable import CovPassCheckApp
+@testable import CovPassUI
 import Foundation
 import XCTest
 import CovPassCommon
@@ -16,10 +16,10 @@ class RevocationPDFGeneratorTests: XCTestCase {
     private var sut: RevocationPDFGenerator!
     override func setUpWithError() throws {
         converter = SVGToPDFConverterMock()
-        let url = try XCTUnwrap(Bundle.main.url(forResource: "RevocationInfoTemplate", withExtension: "svg"))
+        let url = try XCTUnwrap(Bundle.module.url(forResource: "RevocationInfoTemplate", withExtension: "svg"))
         let data = try XCTUnwrap(Data(contentsOf: url))
         let template = try XCTUnwrap(String(data: data, encoding: .utf8))
-        sut = .init(converter: converter, svgTemplate: template)
+        sut = .init(converter: converter, jsonEncoder: JSONEncoder(), svgTemplate: template)
     }
 
     override func tearDownWithError() throws {
@@ -32,7 +32,7 @@ class RevocationPDFGeneratorTests: XCTestCase {
         let expectation = XCTestExpectation()
 
         // When
-        sut.generate(with: .init(expirationDate: "", issuingCountry: "", qrCode: "", revocationCode: ""))
+        sut.generate(with: .mock())
             .done { pdfDocument in
                 expectation.fulfill()
             }
@@ -47,10 +47,10 @@ class RevocationPDFGeneratorTests: XCTestCase {
     func testGenerate_invalid_template() {
         // Given
         let expectation = XCTestExpectation()
-        sut = .init(converter: converter, svgTemplate: "")
+        sut = .init(converter: converter, jsonEncoder: JSONEncoder(), svgTemplate: "")
 
         // When
-        sut.generate(with: .init(expirationDate: "", issuingCountry: "", qrCode: "", revocationCode: ""))
+        sut.generate(with: .mock())
             .done { pdfDocument in
                 XCTFail("Must not succeed.")
             }
@@ -62,4 +62,16 @@ class RevocationPDFGeneratorTests: XCTestCase {
         wait(for: [expectation], timeout: 2)
     }
 
+}
+
+private extension RevocationInfo {
+    static func mock() -> Self {
+        .init(
+            transactionNumber: "",
+            kid: "", rValueSignature: "",
+            issuingCountry: "",
+            technicalExpiryDate: "",
+            dateOfIssue: ""
+        )
+    }
 }

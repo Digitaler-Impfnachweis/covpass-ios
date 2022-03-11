@@ -41,6 +41,9 @@ public protocol VaccinationRepositoryProtocol {
     /// - USED BY CovPassCheck App
     func checkCertificate(_ data: String) -> Promise<CBORWebToken>
 
+    /// Variant of `checkCertificate` which returns an `ExtendedCBORWebToken`.
+    func validCertificate(_ data: String) -> Promise<ExtendedCBORWebToken>
+
     /// Toogles the favorite state and returns the updated flag
     func toggleFavoriteStateForCertificateWithIdentifier(_ id: String) -> Promise<Bool>
 
