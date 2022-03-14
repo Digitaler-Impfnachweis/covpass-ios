@@ -15,7 +15,7 @@ protocol CertificatesOverviewViewModelProtocol {
     var delegate: CertificatesOverviewViewModelDelegate? { get set }
     var certificateViewModels: [CardViewModel] { get }
     var hasCertificates: Bool { get }
-    func refresh()
+    func refresh() -> Promise<Void>
     func updateTrustList()
     func updateBoosterRules()
     func updateValueSets()
