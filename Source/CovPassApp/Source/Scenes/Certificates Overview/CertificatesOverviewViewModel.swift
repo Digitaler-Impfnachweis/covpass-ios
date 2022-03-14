@@ -81,14 +81,8 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
     
     // MARK: - Methods
     
-    func refresh() {
-        firstly {
-            self.refreshCertificates()
-        }
-        .catch { _ in
-            // FIXME: We should handle this error
-            self.delegate?.viewModelDidUpdate()
-        }
+    func refresh() -> Promise<Void> {
+        refreshCertificates()
     }
     
     func updateTrustList() {
@@ -244,7 +238,10 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
     /// Show notifications like announcements and booster notifications one after another
     func showNotificationsIfNeeded() {
         firstly {
-            showDataPrivacyIfNeeded()
+            self.refresh()
+        }
+        .then {
+            self.showDataPrivacyIfNeeded()
         }
         .then {
             self.showAnnouncementIfNeeded()
@@ -260,6 +257,9 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
         }
         .then {
             self.showCertificatesReissueIfNeeded()
+        }
+        .then {
+            self.refresh()
         }
         .catch { error in
             print("\(#file):\(#function) Error: \(error.localizedDescription)")
@@ -285,9 +285,7 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
             concurrently: 1
         ).recover { errors in
             .value([])
-        }.done { _ in
-            self.refresh()
-        }
+        }.asVoid()
         
         return guarantee
     }

@@ -36,8 +36,9 @@ class MockCertificateViewModel: CertificatesOverviewViewModelProtocol {
         
     }
     
-    func refresh() {
+    func refresh() -> Promise<Void> {
         refreshedCalled = true
+        return .value
     }
 
     func process(payload _: String, completion _: ((Error) -> Void)?) {

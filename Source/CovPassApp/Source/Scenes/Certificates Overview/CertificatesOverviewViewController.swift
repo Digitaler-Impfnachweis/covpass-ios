@@ -53,7 +53,6 @@ class CertificatesOverviewViewController: UIViewController {
         setupActionButton()
         setupCollectionView()
         setupDotIndicator()
-        viewModel.refresh()
         viewModel.showNotificationsIfNeeded()
     }
 

@@ -276,26 +276,53 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         XCTAssertEqual(userDefaults.onboardingSelectedLogicTypeAlreadySeen, true)
     }
 
-    // TODO: Uncomment when "qualified for reissue" is implemented.
-//    func testShowNotificationsIfNeeded_showCertificatesReissueIfNeeded_shown() throws {
-//        // Given
-//        let router = CertificatesOverviewRouterMock()
-//        router.showCertificatesReissueExpectation.expectedFulfillmentCount = 2
-//        try configureSutAndRepository(
-//            with: router,
-//            certificates: [
-//                .mock(),
-//                CBORWebToken.mockVaccinationCertificateWithOtherName.extended()
-//            ]
-//        )
-//        sut.refresh()
-//
-//        // When
-//        sut.showNotificationsIfNeeded()
-//
-//        // Then
-//        wait(for: [router.showCertificatesReissueExpectation], timeout: 2)
-//    }
+    func testShowNotificationsIfNeeded_showCertificatesReissueIfNeeded_shown() throws {
+        let singleDoseImmunizationJohnsonCert = CBORWebToken.mockVaccinationCertificate
+            .mockVaccinationUVCI("1")
+            .medicalProduct(.biontech)
+            .doseNumber(1)
+            .seriesOfDoses(1)
+            .mockName(Name(gn: "Foo", fn: "Bar", gnt: "Foo", fnt: "Bar"))
+            .extended(vaccinationQRCodeData: "1")
+        let doubleDoseImmunizationJohnsonCert = CBORWebToken.mockVaccinationCertificate
+            .mockVaccinationUVCI("1")
+            .medicalProduct(.biontech)
+            .doseNumber(2)
+            .seriesOfDoses(2)
+            .mockName(Name(gn: "Foo", fn: "Bar", gnt: "Foo", fnt: "Bar"))
+            .extended(vaccinationQRCodeData: "1")
+        let singleDoseImmunizationJohnsonCertAlternativePerson = CBORWebToken.mockVaccinationCertificate
+            .mockVaccinationUVCI("2")
+            .medicalProduct(.biontech)
+            .doseNumber(1)
+            .seriesOfDoses(1)
+            .extended(vaccinationQRCodeData: "2")
+        let doubleDoseImmunizationJohnsonCertAlternativePerson = CBORWebToken.mockVaccinationCertificate
+            .mockVaccinationUVCI("2")
+            .medicalProduct(.biontech)
+            .doseNumber(2)
+            .seriesOfDoses(2)
+            .extended(vaccinationQRCodeData: "2")
+        
+        // Given
+        let router = CertificatesOverviewRouterMock()
+        router.showCertificatesReissueExpectation.expectedFulfillmentCount = 2
+        configureSutAndRepository(
+            with: router,
+            certificates: [
+                singleDoseImmunizationJohnsonCert,
+                doubleDoseImmunizationJohnsonCert,
+                singleDoseImmunizationJohnsonCertAlternativePerson,
+                doubleDoseImmunizationJohnsonCertAlternativePerson
+            ]
+        )
+
+        // When
+        sut.showNotificationsIfNeeded()
+
+        // Then
+        wait(for: [router.showCertificatesReissueExpectation], timeout: 4)
+    }
 
     func testRefresh_expiry_notification_token_is_valid() throws {
         // Given
