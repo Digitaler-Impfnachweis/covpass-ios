@@ -64,7 +64,7 @@ public extension DigitalGreenCertificate {
             return nil
         }
         guard
-            let templateURL = Bundle.module.url(forResource: name, withExtension: "svg"),
+            let templateURL = Bundle.commonBundle.url(forResource: name, withExtension: "svg"),
             let svgData = try? Data(contentsOf: templateURL)
         else {
             fatalError("no template found")

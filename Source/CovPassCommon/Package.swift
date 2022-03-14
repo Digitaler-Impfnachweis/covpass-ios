@@ -29,7 +29,8 @@ let package = Package(
         .target(
             name: "CovPassCommon",
             dependencies: ["SwiftCBOR", "Scanner", "PromiseKit", "ASN1Decoder", "CertLogic", "JWTDecode", "CryptoSwift"],
-            resources: [.process("Resources")]
+            resources: [.process("Resources")],
+            swiftSettings: [.define("SPM")]
         ),
         .testTarget(
             name: "CovPassCommonTests",
