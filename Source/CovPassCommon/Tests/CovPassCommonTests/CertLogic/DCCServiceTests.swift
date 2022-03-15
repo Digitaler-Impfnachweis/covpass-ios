@@ -57,6 +57,7 @@ class DCCServiceTests: XCTestCase {
         sessionMock.requestResponse = Promise.value(try XCTUnwrap(String(data: try JSONEncoder().encode(Rule.mock), encoding: .utf8)))
         let res = try sut.loadDCCRule(country: "foo", hash: "bar").wait()
         XCTAssertEqual(res.identifier, "rule-identifier")
+        XCTAssertEqual(res.hash, "bar")
     }
 
     func testLoadDCCRuleFails() throws {

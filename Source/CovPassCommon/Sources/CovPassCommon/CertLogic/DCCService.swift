@@ -83,6 +83,7 @@ public struct DCCService: DCCServiceProtocol {
                 guard let data = response.data(using: .utf8), let res = try? JSONDecoder().decode(Rule.self, from: data) else {
                     throw DCCServiceError.invalidResponse
                 }
+                res.hash = hash
                 return res
             }
     }
