@@ -18,7 +18,7 @@ public extension Bundle {
 extension Foundation.Bundle {
     /// Returns the resource bundle associated with the current Swift module.
     static let module: Bundle = {
-        let bundleName = "/Frameworks/CovPassCommon.framework/CovPassCommon_CovPassCommon"
+        let bundleName = "Frameworks/CovPassCommon.framework"
 
         let candidates = [
             // Bundle should be present here when the package is linked into an App.
@@ -29,7 +29,7 @@ extension Foundation.Bundle {
         ]
 
         for candidate in candidates {
-            let bundlePath = candidate?.appendingPathComponent(bundleName + ".bundle")
+            let bundlePath = candidate?.appendingPathComponent(bundleName)
             if let bundle = bundlePath.flatMap(Bundle.init(url:)) {
                 return bundle
             }
