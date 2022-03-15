@@ -17,6 +17,8 @@ private enum Constants {
     enum Config {
         static let privacySrcDe = "privacy-covpass-de"
         static let privacySrcExt = "html"
+        static let covpassFaqUrlEnglish = URL(string: "https://www.digitaler-impfnachweis-app.de/en/faq")
+        static let covpassFaqUrlGerman = URL(string: "https://www.digitaler-impfnachweis-app.de/faq")
     }
 }
 
@@ -32,6 +34,8 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
     private var certificateList = CertificateList(certificates: [])
     private var lastKnownFavoriteCertificateId: String?
     private var userDefaults: UserDefaultsPersistence
+    private let locale: Locale
+    private lazy var faqURL: URL? = locale.isGerman() ? Constants.Config.covpassFaqUrlGerman : Constants.Config.covpassFaqUrlEnglish
 
     var certificatePairsSorted: [CertificatePair] {
         repository.matchedCertificates(for: certificateList).sorted(by: { c, _ -> Bool in c.isFavorite })
@@ -70,13 +74,15 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
         repository: VaccinationRepositoryProtocol,
         certLogic: DCCCertLogicProtocol,
         boosterLogic: BoosterLogicProtocol,
-        userDefaults: UserDefaultsPersistence
+        userDefaults: UserDefaultsPersistence,
+        locale: Locale
     ) {
         self.router = router
         self.repository = repository
         self.certLogic = certLogic
         self.boosterLogic = boosterLogic
         self.userDefaults = userDefaults
+        self.locale = locale
     }
     
     // MARK: - Methods
@@ -170,7 +176,8 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
                 case .download:
                     self.router.toAppstoreCheckApp()
                 case .faq:
-                    self.router.toFaqWebsite()
+                    guard let url = self.faqURL else { break }
+                    self.router.toFaqWebsite(url)
                 case .ok: break
                 }
             }
