@@ -53,7 +53,12 @@ public final class RevocationPDFGenerator: RevocationPDFGeneratorProtocol {
               let qrCode = base64EncodedQRCodeImage(encryptedAndBase64EncodedCode) else {
             return .init(error: RevocationPDFGeneratorError())
         }
-        let revocationCode = (encryptedAndBase64EncodedCode, qrCode)
+        let multilineRevocationCode = encryptedAndBase64EncodedCode.svgTspans(
+            nrOfCharacters: 55,
+            yStart: 37,
+            lineSpacing: 21
+        )
+        let revocationCode = (multilineRevocationCode, qrCode)
         return .value(revocationCode)
     }
 
