@@ -52,4 +52,23 @@ class CertificateListTests: XCTestCase {
         // Then
         XCTAssertEqual(pairs.count, 2)
     }
+
+    func testNumberOfPersons() {
+        // Given
+        let certificates: [ExtendedCBORWebToken] = [
+            CBORWebToken.mockVaccinationCertificate.extended(),
+            CBORWebToken.mockVaccinationCertificate.extended(),
+            CBORWebToken.mockTestCertificate.extended(),
+            CBORWebToken.mockRecoveryCertificate.extended(),
+            CBORWebToken.mockVaccinationCertificateWithOtherName.extended(),
+            CBORWebToken.mockVaccinationCertificateWithOtherName.extended()
+        ]
+        let sut = CertificateList(certificates: certificates)
+
+        // When
+        let numberOfPersons = sut.numberOfPersons
+
+        // Then
+        XCTAssertEqual(numberOfPersons, 2)
+    }
 }

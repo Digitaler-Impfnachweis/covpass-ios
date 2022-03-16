@@ -17,16 +17,24 @@ class CertificateOverviewSnapShotTests: BaseSnapShotTests {
         let window = UIWindow(frame: UIScreen.main.bounds)
         let sceneCoordinator = DefaultSceneCoordinator(window: window)
         let router = CertificatesOverviewRouter(sceneCoordinator: sceneCoordinator)
-        let viewModel = CertificatesOverviewViewModel(
-            router: router,
-            repository: VaccinationRepositoryMock(),
-            certLogic: DCCCertLogicMock(),
-            boosterLogic: BoosterLogicMock(),
-            userDefaults: UserDefaultsPersistence()
-        )
+        let viewModel = self.viewModel(router: router, repository: VaccinationRepositoryMock())
         let viewController = CertificatesOverviewViewController(viewModel: viewModel)
         let navigationController = UINavigationController(rootViewController: viewController)
         verifyAsync(vc: navigationController)
+    }
+
+    private func viewModel(
+        router: CertificatesOverviewRouterProtocol,
+        repository: VaccinationRepositoryProtocol
+    ) -> CertificatesOverviewViewModelProtocol {
+        CertificatesOverviewViewModel(
+            router: router,
+            repository: repository,
+            certLogic: DCCCertLogicMock(),
+            boosterLogic: BoosterLogicMock(),
+            userDefaults: UserDefaultsPersistence(),
+            locale: .current
+        )
     }
     
     func testCertificateOverviewCertificates() {
@@ -47,13 +55,7 @@ class CertificateOverviewSnapShotTests: BaseSnapShotTests {
                      cert2,
                      cert3]
         vacinationRepoMock.certificates = certs
-        let viewModel = CertificatesOverviewViewModel(
-            router: router,
-            repository: vacinationRepoMock,
-            certLogic: DCCCertLogicMock(),
-            boosterLogic: BoosterLogicMock(),
-            userDefaults: UserDefaultsPersistence()
-        )
+        let viewModel = self.viewModel(router: router, repository: vacinationRepoMock)
         let viewController = CertificatesOverviewViewController(viewModel: viewModel)
         viewController.view.bounds = UIScreen.main.bounds
         RunLoop.current.run(for: 0.1)
@@ -66,11 +68,7 @@ class CertificateOverviewSnapShotTests: BaseSnapShotTests {
         cert.vaccinationCertificate.hcert.dgc.nam.fn = "John 1"
         let certs = [cert]
         vacinationRepoMock.certificates = certs
-        let viewModel = CertificatesOverviewViewModel(router: CertificatesOverviewRouterMock(),
-                                                      repository: vacinationRepoMock,
-                                                      certLogic: DCCCertLogicMock(),
-                                                      boosterLogic: BoosterLogicMock(),
-                                                      userDefaults: UserDefaultsPersistence())
+        let viewModel = self.viewModel(router: CertificatesOverviewRouterMock(), repository: vacinationRepoMock)
         let viewController = CertificatesOverviewViewController(viewModel: viewModel)
         let window = UIWindow(frame: UIScreen.main.bounds)
         window.rootViewController = viewController
@@ -86,11 +84,7 @@ class CertificateOverviewSnapShotTests: BaseSnapShotTests {
         cert.vaccinationCertificate.hcert.dgc.v!.first!.dn = 1
         let certs = [cert]
         vacinationRepoMock.certificates = certs
-        let viewModel = CertificatesOverviewViewModel(router: CertificatesOverviewRouterMock(),
-                                                      repository: vacinationRepoMock,
-                                                      certLogic: DCCCertLogicMock(),
-                                                      boosterLogic: BoosterLogicMock(),
-                                                      userDefaults: UserDefaultsPersistence())
+        let viewModel = self.viewModel(router: CertificatesOverviewRouterMock(), repository: vacinationRepoMock)
         let viewController = CertificatesOverviewViewController(viewModel: viewModel)
         let window = UIWindow(frame: UIScreen.main.bounds)
         window.rootViewController = viewController
@@ -105,11 +99,7 @@ class CertificateOverviewSnapShotTests: BaseSnapShotTests {
         cert.vaccinationCertificate.hcert.dgc.nam.fn = "John 1"
         let certs = [cert]
         vacinationRepoMock.certificates = certs
-        let viewModel = CertificatesOverviewViewModel(router: CertificatesOverviewRouterMock(),
-                                                      repository: vacinationRepoMock,
-                                                      certLogic: DCCCertLogicMock(),
-                                                      boosterLogic: BoosterLogicMock(),
-                                                      userDefaults: UserDefaultsPersistence())
+        let viewModel = self.viewModel(router: CertificatesOverviewRouterMock(), repository: vacinationRepoMock)
         let viewController = CertificatesOverviewViewController(viewModel: viewModel)
         let window = UIWindow(frame: UIScreen.main.bounds)
         window.rootViewController = viewController
@@ -125,11 +115,7 @@ class CertificateOverviewSnapShotTests: BaseSnapShotTests {
         cert.vaccinationCertificate.hcert.dgc.nam.fn = "John 1"
         let certs = [cert]
         vacinationRepoMock.certificates = certs
-        let viewModel = CertificatesOverviewViewModel(router: CertificatesOverviewRouterMock(),
-                                                      repository: vacinationRepoMock,
-                                                      certLogic: DCCCertLogicMock(),
-                                                      boosterLogic: BoosterLogicMock(),
-                                                      userDefaults: UserDefaultsPersistence())
+        let viewModel = self.viewModel(router: CertificatesOverviewRouterMock(), repository: vacinationRepoMock)
         let viewController = CertificatesOverviewViewController(viewModel: viewModel)
         let window = UIWindow(frame: UIScreen.main.bounds)
         window.rootViewController = viewController
@@ -145,11 +131,7 @@ class CertificateOverviewSnapShotTests: BaseSnapShotTests {
         cert.vaccinationCertificate.exp = Calendar.current.date(byAdding: .year, value: -2, to: Date())
         let certs = [cert]
         vacinationRepoMock.certificates = certs
-        let viewModel = CertificatesOverviewViewModel(router: CertificatesOverviewRouterMock(),
-                                                      repository: vacinationRepoMock,
-                                                      certLogic: DCCCertLogicMock(),
-                                                      boosterLogic: BoosterLogicMock(),
-                                                      userDefaults: UserDefaultsPersistence())
+        let viewModel = self.viewModel(router: CertificatesOverviewRouterMock(), repository: vacinationRepoMock)
         let viewController = CertificatesOverviewViewController(viewModel: viewModel)
         let window = UIWindow(frame: UIScreen.main.bounds)
         window.rootViewController = viewController
@@ -165,11 +147,7 @@ class CertificateOverviewSnapShotTests: BaseSnapShotTests {
         cert.vaccinationCertificate.invalid = true
         let certs = [cert]
         vacinationRepoMock.certificates = certs
-        let viewModel = CertificatesOverviewViewModel(router: CertificatesOverviewRouterMock(),
-                                                      repository: vacinationRepoMock,
-                                                      certLogic: DCCCertLogicMock(),
-                                                      boosterLogic: BoosterLogicMock(),
-                                                      userDefaults: UserDefaultsPersistence())
+        let viewModel = self.viewModel(router: CertificatesOverviewRouterMock(), repository: vacinationRepoMock)
         let viewController = CertificatesOverviewViewController(viewModel: viewModel)
         let window = UIWindow(frame: UIScreen.main.bounds)
         window.rootViewController = viewController

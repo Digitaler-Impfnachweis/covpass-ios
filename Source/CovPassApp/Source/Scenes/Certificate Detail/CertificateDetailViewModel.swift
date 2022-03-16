@@ -360,8 +360,8 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
         .then { _ in
             self.repository.getCertificateList()
         }
-        .get { certificateList in
-            self.showFavorite = certificateList.certificates.count > 1
+        .get { allPersonsCertificates in
+            self.showFavorite = allPersonsCertificates.numberOfPersons > 1
         }
         .done { _ in
             self.delegate?.viewModelDidUpdate()

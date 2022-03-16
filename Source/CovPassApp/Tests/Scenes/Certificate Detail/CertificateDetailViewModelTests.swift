@@ -11,6 +11,7 @@ import XCTest
 
 class CertificateDetailViewModelTests: XCTestCase {
     private var boosterLogic: BoosterLogicMock!
+    private var delegate: MockViewModelDelegate!
     private var sut: CertificateDetailViewModel!
     private var vaccinationRepo: VaccinationRepositoryMock!
 
@@ -26,6 +27,7 @@ class CertificateDetailViewModelTests: XCTestCase {
     private func configureCustomSut(certificates: [ExtendedCBORWebToken]) {
         boosterLogic = BoosterLogicMock()
         vaccinationRepo = VaccinationRepositoryMock()
+        delegate = .init()
         sut = CertificateDetailViewModel(
             router: CertificateDetailRouterMock(),
             repository: vaccinationRepo,
@@ -33,6 +35,7 @@ class CertificateDetailViewModelTests: XCTestCase {
             certificates: certificates,
             resolvable: nil
         )
+        sut.delegate = delegate
     }
     
     private func configureSut(booosterState: BoosterCandidate.BoosterState) throws {
@@ -57,6 +60,7 @@ class CertificateDetailViewModelTests: XCTestCase {
     override func tearDownWithError() throws {
         vaccinationRepo = nil
         boosterLogic = nil
+        delegate = nil
         sut = nil
     }
 
@@ -274,6 +278,74 @@ class CertificateDetailViewModelTests: XCTestCase {
         // Then
         XCTAssertEqual(name, "MUSTERMANN, ERIKA")
     }
+
+    func testFavoriteIcon_default() {
+        // When
+        let favoriteIcon = sut.favoriteIcon
+
+        // Then
+        XCTAssertNil(favoriteIcon)
+    }
+
+    func testFavoriteIcon_certificates_of_one_person_which_is_favorite() {
+        // Given
+        vaccinationRepo.favoriteToggle = true
+        sut.refresh()
+        wait(for: [delegate.viewModelDidUpdateExpectation], timeout: 2)
+
+        // When
+        let favoriteIcon = sut.favoriteIcon
+
+        // Then
+        XCTAssertNil(favoriteIcon)
+    }
+
+    func testFavoriteIcon_certificates_of_one_person_which_is_not_favorite() {
+        // Given
+        vaccinationRepo.favoriteToggle = false
+        sut.refresh()
+        wait(for: [delegate.viewModelDidUpdateExpectation], timeout: 2)
+
+        // When
+        let favoriteIcon = sut.favoriteIcon
+
+        // Then
+        XCTAssertNil(favoriteIcon)
+    }
+
+    func testFavoriteIcon_certificates_of_two_persons_this_persons_is_favorite() throws {
+        // Given
+        vaccinationRepo.favoriteToggle = true
+        vaccinationRepo.certificates = try [
+            ExtendedCBORWebToken.token1Of1(),
+            ExtendedCBORWebToken.token2Of2Pérez()
+        ]
+        sut.refresh()
+        wait(for: [delegate.viewModelDidUpdateExpectation], timeout: 2)
+
+        // When
+        let favoriteIcon = sut.favoriteIcon
+
+        // Then
+        XCTAssertEqual(favoriteIcon, UIImage.starFull)
+    }
+
+    func testFavoriteIcon_certificates_of_two_persons_this_person_is_not_favorite() throws {
+        // Given
+        vaccinationRepo.favoriteToggle = false
+        vaccinationRepo.certificates = try [
+            ExtendedCBORWebToken.token1Of1(),
+            ExtendedCBORWebToken.token2Of2Pérez()
+        ]
+        sut.refresh()
+        wait(for: [delegate.viewModelDidUpdateExpectation], timeout: 2)
+
+        // When
+        let favoriteIcon = sut.favoriteIcon
+
+        // Then
+        XCTAssertEqual(favoriteIcon, UIImage.starPartial)
+    }
 }
 
 private extension ExtendedCBORWebToken {
@@ -286,6 +358,13 @@ private extension ExtendedCBORWebToken {
     static func token2Of2Mustermann() throws -> Self {
         try token(from: """
         {"1":"DE","4":1682239131,"6":1619167131,"-260":{"1":{"nam":{"gn":"Erika","fn":"Mustermann","gnt":"ERIKA","fnt":"MUSTERMANN"},"dob":"1964-08-12","v":[{"ci":"01DE/84503/1119349007/DXSGWLWL40SU8ZFKIYIBK39A3#S","co":"DE","dn":2,"dt":"2021-02-02","is":"Bundesministerium für Gesundheit","ma":"ORG-100030215","mp":"EU/1/20/1528","sd":2,"tg":"840539006","vp":"1119349007"}],"ver":"1.0.0"}}}
+        """
+        )
+    }
+
+    static func token2Of2Pérez() throws -> Self {
+        try token(from: """
+        {"1":"DE","4":1682239131,"6":1619167131,"-260":{"1":{"nam":{"gn":"Juan","fn":"Pérez","gnt":"JUAN","fnt":"PEREZ"},"dob":"1964-08-12","v":[{"ci":"01DE/84503/1119349007/DXSGWLWL40SU8ZFKIYIBK39A3#S","co":"DE","dn":2,"dt":"2021-02-02","is":"Bundesministerium für Gesundheit","ma":"ORG-100030215","mp":"EU/1/20/1528","sd":2,"tg":"840539006","vp":"1119349007"}],"ver":"1.0.0"}}}
         """
         )
     }
