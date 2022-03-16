@@ -20,6 +20,9 @@ public struct CertificateList: Codable {
                 return .init(certificates: extendedCBORWebTokens, isFavorite: isFavorite)
             }
     }
+    public var numberOfPersons: Int {
+        certificatePairs.count
+    }
 
     enum CodingKeys: String, CodingKey {
         case certificates
