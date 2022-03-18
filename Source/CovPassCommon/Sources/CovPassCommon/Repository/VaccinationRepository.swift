@@ -173,10 +173,7 @@ public class VaccinationRepository: VaccinationRepositoryProtocol {
 
             // EC public key (prime256v1) sequence headers (26 blocks) needs to be stripped off
             //   so it can be used with SecKeyCreateWithData
-            let pubkeyB64 = try String(contentsOf: self.publicKeyURL)
-                .replacingOccurrences(of: "-----BEGIN PUBLIC KEY-----", with: "")
-                .replacingOccurrences(of: "-----END PUBLIC KEY-----", with: "")
-                .replacingOccurrences(of: "\n", with: "")
+            let pubkeyB64 = try String(contentsOf: self.publicKeyURL).stripPEMPublicKey()
             let pubkeyDER = Data(base64Encoded: pubkeyB64)!
             let barekeyDER = pubkeyDER.suffix(from: 26)
 

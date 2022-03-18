@@ -19,6 +19,7 @@ class RecoveryResultViewModel: ValidationResultViewModel {
     var router: ValidationResultRouterProtocol
     var repository: VaccinationRepositoryProtocol
     var certificate: ExtendedCBORWebToken?
+    var revocationKeyFilename: String
 
     var icon: UIImage? {
         .resultSuccess
@@ -56,11 +57,12 @@ class RecoveryResultViewModel: ValidationResultViewModel {
     // MARK: - Lifecycle
 
     init(resolvable: Resolver<ExtendedCBORWebToken>,
-        router: ValidationResultRouterProtocol,
-        repository: VaccinationRepositoryProtocol,
-        certificate: ExtendedCBORWebToken?,
-        _2GContext: Bool,
-        userDefaults: Persistence
+         router: ValidationResultRouterProtocol,
+         repository: VaccinationRepositoryProtocol,
+         certificate: ExtendedCBORWebToken?,
+         _2GContext: Bool,
+         userDefaults: Persistence,
+         revocationKeyFilename: String
     ) {
         self.resolvable = resolvable
         self.router = router
@@ -68,5 +70,6 @@ class RecoveryResultViewModel: ValidationResultViewModel {
         self.certificate = certificate
         self._2GContext = _2GContext
         self.userDefaults = userDefaults
+        self.revocationKeyFilename = revocationKeyFilename
     }
 }

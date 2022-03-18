@@ -61,6 +61,7 @@ class ErrorResultViewModel: ValidationResultViewModel {
     var repository: VaccinationRepositoryProtocol
     var certificate: ExtendedCBORWebToken?
     var error: Error
+    let revocationKeyFilename: String
 
     private var validationResultError: ValidationResultError {
         error as? ValidationResultError ?? .technical        
@@ -104,7 +105,8 @@ class ErrorResultViewModel: ValidationResultViewModel {
          certificate: ExtendedCBORWebToken? = nil,
          error: Error,
          _2GContext: Bool,
-         userDefaults: Persistence) {
+         userDefaults: Persistence,
+         revocationKeyFilename: String) {
         self.resolvable = resolvable
         self.router = router
         self.repository = repository
@@ -112,5 +114,6 @@ class ErrorResultViewModel: ValidationResultViewModel {
         self.error = error
         self._2GContext = _2GContext
         self.userDefaults = userDefaults
+        self.revocationKeyFilename = revocationKeyFilename
     }
 }

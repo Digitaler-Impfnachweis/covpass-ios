@@ -10,16 +10,18 @@ import PromiseKit
 import UIKit
 
 struct RevocationInfoSceneFactory: ResolvableSceneFactory {
+    private let keyFilename: String
     private let router: RevocationInfoRouterProtocol
     private let token: ExtendedCBORWebToken
 
-    init(router: RevocationInfoRouterProtocol, token: ExtendedCBORWebToken) {
+    init(keyFilename: String, router: RevocationInfoRouterProtocol, token: ExtendedCBORWebToken) {
+        self.keyFilename = keyFilename
         self.router = router
         self.token = token
     }
 
     func make(resolvable: Resolver<Void>) -> UIViewController {
-        guard let pdfGenerator = RevocationPDFGenerator() else {
+        guard let pdfGenerator = RevocationPDFGenerator(keyFilename: keyFilename) else {
             fatalError("Failed to instantiate RevocationPDFGenerator.")
         }
         guard let coseSign1Message = try? token.coseSign1Message() else {

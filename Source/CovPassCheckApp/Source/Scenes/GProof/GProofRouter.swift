@@ -84,7 +84,7 @@ class GProofRouter: GProofRouterProtocol {
         
     }
     
-    func showRevocation(token: ExtendedCBORWebToken) -> Promise<Void> {
+    func showRevocation(token _: ExtendedCBORWebToken, keyFilename _: String) -> Promise<Void> {
         // not covered by GProof
         .init(error: ApplicationError.general("\(#file):\(#function) should not be called."))
     }

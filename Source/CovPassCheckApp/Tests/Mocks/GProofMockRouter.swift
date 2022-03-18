@@ -49,7 +49,7 @@ class GProofMockRouter: GProofRouterProtocol {
         
     }
     
-    func showRevocation(token: ExtendedCBORWebToken) -> Promise<Void> {
+    func showRevocation(token: ExtendedCBORWebToken, keyFilename: String) -> Promise<Void> {
         .init(error: NSError(domain: "TEST", code: 0, userInfo: nil))
     }
 }

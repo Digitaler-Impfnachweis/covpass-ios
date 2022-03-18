@@ -9,19 +9,22 @@ import Foundation
 import CovPassCommon
 
 extension RevocationPDFGenerator {
-    convenience init?() {
-        guard let url = Bundle.module.url(forResource: "RevocationInfoTemplate", withExtension: "svg"),
-              let data = try? Data(contentsOf: url),
-              let svgTemplate = String(data: data, encoding: .utf8) else {
-                  return nil
-              }
+    convenience init?(keyFilename: String) {
+        let bundle = Bundle.module
+        guard let svgTemplate = try? bundle.loadString(resource: "RevocationInfoTemplate.svg", encoding: .utf8),
+              let keyString = try? bundle.loadString(resource: keyFilename, encoding: .ascii),
+              let secKey = try? keyString.secKey()
+        else {
+            return nil
+        }
         let converter = SVGToPDFConverter()
         let jsonEncoder = JSONEncoder()
 
         self.init(
             converter: converter,
             jsonEncoder: jsonEncoder,
-            svgTemplate: svgTemplate
+            svgTemplate: svgTemplate,
+            secKey: secKey
         )
     }
 }

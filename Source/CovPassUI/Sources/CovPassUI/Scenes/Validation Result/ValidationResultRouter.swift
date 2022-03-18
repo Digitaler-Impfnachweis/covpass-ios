@@ -39,9 +39,10 @@ public struct ValidationResultRouter: ValidationResultRouterProtocol {
         )
     }
     
-    public func showRevocation(token: ExtendedCBORWebToken) -> Promise<Void> {
+    public func showRevocation(token: ExtendedCBORWebToken, keyFilename: String) -> Promise<Void> {
         sceneCoordinator.present(
             RevocationInfoSceneFactory(
+                keyFilename: keyFilename,
                 router: RevocationInfoRouter(sceneCoordinator: sceneCoordinator),
                 token: token
             )

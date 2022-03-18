@@ -27,6 +27,7 @@ class ErrorResultViewModel: ValidationResultViewModel {
     var certificate: ExtendedCBORWebToken?
     var token: VAASValidaitonResultToken?
     var error: Error
+    let revocationKeyFilename = ""
     
     private var validationResultError: ValidationResultError {
         error as? ValidationResultError ?? .technical

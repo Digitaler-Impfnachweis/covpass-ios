@@ -5,10 +5,11 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
+import CovPassCommon
 import Foundation
 import PromiseKit
-import CovPassCommon
 import PDFKit
+import Security
 
 public final class RevocationPDFGenerator: RevocationPDFGeneratorProtocol {
     private enum TemplateParameter {
@@ -21,16 +22,18 @@ public final class RevocationPDFGenerator: RevocationPDFGeneratorProtocol {
     private let converter: SVGToPDFConverterProtocol
     private let svgTemplate: String
     private let jsonEncoder: JSONEncoder
+    private let secKey: SecKey
     private lazy var isSVGTemplateValid =
         svgTemplate.contains(TemplateParameter.revocationCode) &&
         svgTemplate.contains(TemplateParameter.issuingCountry) &&
         svgTemplate.contains(TemplateParameter.expirationDate) &&
         svgTemplate.contains(TemplateParameter.qrCode)
 
-    public init(converter: SVGToPDFConverterProtocol, jsonEncoder: JSONEncoder, svgTemplate: String) {
+    public init(converter: SVGToPDFConverterProtocol, jsonEncoder: JSONEncoder, svgTemplate: String, secKey: SecKey) {
         self.converter = converter
         self.svgTemplate = svgTemplate
         self.jsonEncoder = jsonEncoder
+        self.secKey = secKey
     }
 
     public func generate(with info: RevocationInfo) -> Promise<PDFDocument> {
@@ -63,8 +66,10 @@ public final class RevocationPDFGenerator: RevocationPDFGeneratorProtocol {
     }
 
     private func encryptAndBase64Encode(_ data: Data) -> String? {
-        // TODO: Add encoding and encryption.
-        return data.base64EncodedString()
+        guard let encryptedData = try? data.encrypt(with: secKey, algoritm: .eciesEncryptionStandardX963SHA256AESGCM) else {
+            return nil
+        }
+        return encryptedData.base64EncodedString()
     }
 
     private func base64EncodedQRCodeImage(_ qrCode: String) -> String? {
