@@ -29,7 +29,8 @@ class ReissueConsentViewModelTests: XCTestCase {
                                       tokens: [token],
                                       reissueRepository: reissueRepository,
                                       vaccinationRepository: VaccinationRepositoryMock(),
-                                      decoder: JSONDecoder())
+                                      decoder: JSONDecoder(),
+                                      locale: .current)
     }
     
     override func tearDownWithError() throws {
@@ -47,9 +48,15 @@ class ReissueConsentViewModelTests: XCTestCase {
         XCTAssertFalse(sut.isLoading)
     }
 
-    func testProcessAgree_error() {
+    func testProcessAgree_error_unexpected_error_type() throws {
         // Given
-        let error = CertificateReissueError.other(NSError(domain: "TEST", code: 0, userInfo: nil))
+        let expectedFaqURL = try XCTUnwrap(
+            URL(string: "https://www.digitaler-impfnachweis-app.de/en/faq#fragen-zur-covpass-app")
+        )
+        let expectedTitle = "Reissue failed"
+        let expectedMessage = "Unfortunately, there was a problem reissuing your certificate. Please check your Internet connection and note that the same certificate can be reissued a maximum of three times a year. If the error persists, please refer to the Frequently Asked Questions for more information using the error code below.\n\nError code: R000"
+
+        let error = NSError(domain: "", code: 0)
         reissueRepository.error = error
 
         // When
@@ -57,8 +64,50 @@ class ReissueConsentViewModelTests: XCTestCase {
 
         // Then
         wait(for: [mockRouter.showErrorExpectation], timeout: 1)
-        XCTAssertTrue(mockRouter.receivedError is CertificateReissueError)
+        XCTAssertEqual(mockRouter.receivedErrorFaqURL, expectedFaqURL)
+        XCTAssertEqual(mockRouter.receivedErrorTitle, expectedTitle)
+        XCTAssertEqual(mockRouter.receivedErrorMessage, expectedMessage)
         XCTAssertFalse(sut.isLoading)
+    }
+
+    func testProcessAgree_CertificateReissueRepositoryError() throws {
+        // Given
+        let error = CertificateReissueRepositoryError("ERRORCODE XYZ", message: nil)
+        reissueRepository.error = error
+
+        // When
+        sut.processAgree()
+
+        // Then
+        wait(for: [mockRouter.showErrorExpectation], timeout: 1)
+        let message = try XCTUnwrap(mockRouter.receivedErrorMessage)
+        XCTAssertTrue(message.contains("ERRORCODE XYZ"))
+    }
+
+    func testProcessAgree_error_german_locale() throws {
+        // Given
+        let expectedFaqURL = try XCTUnwrap(
+            URL(string: "https://www.digitaler-impfnachweis-app.de/faq/#fragen-zur-covpass-app")
+        )
+        let error = CertificateReissueRepositoryFallbackError()
+        let (_, resolver) = Promise<Void>.pending()
+        reissueRepository.error = error
+        sut = .init(
+            router: mockRouter,
+            resolver: resolver,
+            tokens: [],
+            reissueRepository: reissueRepository,
+            vaccinationRepository: VaccinationRepositoryMock(),
+            decoder: JSONDecoder(),
+            locale: Locale(identifier: "DE")
+        )
+
+        // When
+        sut.processAgree()
+
+        // Then
+        wait(for: [mockRouter.showErrorExpectation], timeout: 1)
+        XCTAssertEqual(mockRouter.receivedErrorFaqURL, expectedFaqURL)
     }
     
     func testProcessDisagree() {

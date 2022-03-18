@@ -35,10 +35,6 @@ class CertificateReissueURLSessionTests: XCTestCase {
                 expectation.fulfill()
             }
             .catch { error in
-                guard let error = error as? CertificateReissueError, case .other = error else {
-                    XCTFail("Error must be other error.")
-                    return
-                }
                 expectation.fulfill()
             }
         
@@ -58,12 +54,6 @@ class CertificateReissueURLSessionTests: XCTestCase {
                 expectation.fulfill()
             }
             .catch { error in
-                guard let error = error as? CertificateReissueError,
-                        case let .other(otherError) = error,
-                        (otherError as? URLError) != nil else {
-                    XCTFail("Error must be URLError.")
-                    return
-                }
                 expectation.fulfill()
             }
 

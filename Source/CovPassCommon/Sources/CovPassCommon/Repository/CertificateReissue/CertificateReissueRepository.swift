@@ -29,12 +29,20 @@ public class CertificateReissueRepository: CertificateReissueRepositoryProtocol 
     }
 
     public func reissue(_ webTokens: [ExtendedCBORWebToken]) -> Promise<CertificateReissueRepositoryResponse> {
-        jsonEncoder
-            .encodePromise(webTokens.map(\.vaccinationQRCodeData).certificateReissueRequestBody)
-            .map(reissueRequest)
-            .then(urlSession.httpRequest)
-            .then(jsonDecoder.decodePromise)
-            .then(certificateReissueRepositoryResponse)
+        Promise { seal in
+            jsonEncoder
+                .encodePromise(webTokens.map(\.vaccinationQRCodeData).certificateReissueRequestBody)
+                .map(reissueRequest)
+                .then(urlSession.httpRequest)
+                .then(jsonDecoder.decodePromise)
+                .then(certificateReissueRepositoryResponse)
+                .done { seal.fulfill($0) }
+                .catch { error in
+                    seal.reject(
+                        self.certificateReissueRepositoryError(from: error)
+                    )
+                }
+        }
     }
 
     private func reissueRequest(_ body: Data) -> URLRequest {
@@ -89,10 +97,42 @@ public class CertificateReissueRepository: CertificateReissueRepositoryProtocol 
         )
         .map { cborWebToken }
     }
+
+    private func certificateReissueRepositoryError(from error: Error) -> CertificateReissueRepositoryError {
+        if let certificateReissueError = error as? CertificateReissueURLSesssionError {
+            switch certificateReissueError {
+            case let .http(statusCode, data):
+                guard let data = data,
+                      let error = try? jsonDecoder.decode(CertificateReissueResponseError.self, from: data) else {
+                    return statusCode.errorIfDataCouldNotBeDecoded()
+                }
+                return CertificateReissueRepositoryError(
+                    error.error,
+                    message: error.message
+                )
+            default:
+                break
+            }
+        }
+        return CertificateReissueRepositoryFallbackError()
+    }
 }
 
 private extension Array where Element == String {
     var certificateReissueRequestBody: CertificateReissueRequestBody {
         .init(action: .renew, certificates: self)
+    }
+}
+
+private extension Int {
+    func errorIfDataCouldNotBeDecoded() -> CertificateReissueRepositoryError {
+        switch self {
+        case 429:
+            return CertificateReissueRepositoryError("R429", message: nil)
+        case 500:
+            return CertificateReissueRepositoryError("R500", message: nil)
+        default:
+            return CertificateReissueRepositoryFallbackError()
+        }
     }
 }

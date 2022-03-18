@@ -10,7 +10,7 @@ import Foundation
 
 public class CertificateReissueRepositoryMock: CertificateReissueRepositoryProtocol {
     public var reissueResponse: CertificateReissueRepositoryResponse = []
-    public var error: CertificateReissueError?
+    public var error: Error?
     public var responseDelay: TimeInterval = 0.0
     public init() {}
     public func reissue(_ cborWebTokens: [ExtendedCBORWebToken]) -> Promise<CertificateReissueRepositoryResponse> {

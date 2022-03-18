@@ -25,7 +25,7 @@ public class CertificateReissueURLSession: CertificateReissueURLSessionProtocol 
                             seal.fulfill(data)
                         }
                         .catch { error in
-                            seal.reject(error.certificateReissueError())
+                            seal.reject(error)
                         }
                 }
                 .resume()
@@ -35,12 +35,12 @@ public class CertificateReissueURLSession: CertificateReissueURLSessionProtocol 
     private func handleResponse(_ data: Data?, _ urlResponse: URLResponse?, _ error: Error?) -> Promise<Data> {
         self.checkForNoError(error)
             .then { _ in self.httpURLResponse(from: urlResponse) }
-            .then(\.isOk)
+            .then { self.checkHTTPStatusCode(data, response: $0) }
             .then { _ -> Promise<Data> in
                 if let data = data {
                     return .value(data)
                 }
-                return .init(error: APIError.invalidResponse)
+                return .init(error: CertificateReissueURLSesssionError.invalidResponse(urlResponse))
             }
     }
 
@@ -53,30 +53,20 @@ public class CertificateReissueURLSession: CertificateReissueURLSessionProtocol 
 
     private func httpURLResponse(from urlResponse: URLResponse?) -> Promise<HTTPURLResponse> {
         guard let httpURLResponse = urlResponse as? HTTPURLResponse else {
-            return .init(error: APIError.invalidResponse)
+            return .init(error: CertificateReissueURLSesssionError.invalidResponse(urlResponse))
         }
         return .value(httpURLResponse)
     }
-}
 
-private extension Error {
-    func certificateReissueError() -> CertificateReissueError {
-        switch self {
-        case let error as APIError:
-            return .api(error)
-        case let error as CertificateReissueError:
-            return error
-        default:
-            return .other(self)
-        }
+    private func checkHTTPStatusCode(_ data: Data?, response: HTTPURLResponse) -> Promise<Data?> {
+        response.isOk ?
+            .value(data) :
+            .init(error: CertificateReissueURLSesssionError.http(response.statusCode, data: data))
     }
 }
 
 private extension HTTPURLResponse {
-    var isOk: Promise<Void> {
-        guard 200 ..< 300 ~= statusCode else {
-            return .init(error: CertificateReissueError.http(statusCode))
-        }
-        return .value
+    var isOk: Bool {
+        200 ..< 300 ~= statusCode
     }
 }
