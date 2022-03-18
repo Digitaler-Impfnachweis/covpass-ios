@@ -500,14 +500,14 @@ class VaccinationRepositoryTests: XCTestCase {
     }
 
     func testScanCertificate() throws {
-        let token = try sut.scanCertificate(CertificateMock.validCertificate, isCountRuleEnabled: true).wait()
+        let token = try sut.scanCertificate(CertificateMock.validCertificate, isCountRuleEnabled: true, expirationRuleIsActive: true).wait()
         XCTAssertEqual((token as! ExtendedCBORWebToken).vaccinationCertificate.hcert.dgc.uvci, "01DE/00100/1119349007/F4G7014KQQ2XD0NY8FJHSTDXZ#S")
     }
 
     func testScanCertificateFailsPositive() {
         do {
             let positivePCRTest = "HC1:6BFOXN*TS0BI$ZD8UHYK1EBQZWG8W4:D4WGF-36OLNAOMIZ4WYHZKCML94HK4XPQHIZC4.OI:OI4V2*LP8W2GHKW/F3IKJ5QH*AF/GJ5MQ0KS1OK.GZ/8V5P%C4CAW+DG$$02-7%KSSDCWEGNY0/-9RQPYE9/MVSYSOH6PO9:TUQJAJG9-*NIRICVELZUZM9EN9-O9FNHZO9HQ1*P1MX1+ZE$S9$R1YXL5Q1M35AHLRIN$S4IFN5F599M+BLA4BB%V%3NKQ777IT$M0QIRR97I2HOAXL92L0A KDNKBK4CJ0JQE6H0:WO$NI Q1610AJ27K2FVIP$I/XK$M8X64XDOXCR$35L/5R3FMIA4/B 3ELEE$JD/.D%-B9JAW/BT3E3Z84JBSD9Z3E8AE-QD89MT6KBLEH-BNQMWOCNKE$JDVPLZ2KD0KCZG/WR-RIR.8DZF+:247F./N WBJ JMABA4N$Y55JS+%QOC9H.19CTT595URS9W7 6 VI/U2 PTNZ56 PTS5N*JP.61KJ618S:1*KICQIDGGV+F"
-            _ = try sut.scanCertificate(positivePCRTest, isCountRuleEnabled: true).wait()
+            _ = try sut.scanCertificate(positivePCRTest, isCountRuleEnabled: true, expirationRuleIsActive: true).wait()
             XCTFail("Should fail")
         } catch {
             XCTAssertEqual(error.localizedDescription, CertificateError.positiveResult.localizedDescription)
@@ -516,8 +516,8 @@ class VaccinationRepositoryTests: XCTestCase {
 
     func testScanCertificateFailsExistingQRCode() {
         do {
-            _ = try sut.scanCertificate(CertificateMock.validCertificate, isCountRuleEnabled: true).wait()
-            _ = try sut.scanCertificate(CertificateMock.validCertificate, isCountRuleEnabled: true).wait()
+            _ = try sut.scanCertificate(CertificateMock.validCertificate, isCountRuleEnabled: true, expirationRuleIsActive: true).wait()
+            _ = try sut.scanCertificate(CertificateMock.validCertificate, isCountRuleEnabled: true, expirationRuleIsActive: true).wait()
             XCTFail("Should fail")
         } catch {
             XCTAssertEqual(error.localizedDescription, QRCodeError.qrCodeExists.localizedDescription)
@@ -545,8 +545,8 @@ class VaccinationRepositoryTests: XCTestCase {
         let validCert2 = CertificateMock.validRecoveryCertificate
 
         do {
-            _ = try sut.scanCertificate(validCert1, isCountRuleEnabled: true).wait()
-            _ = try sut.scanCertificate(validCert2, isCountRuleEnabled: true).wait()
+            _ = try sut.scanCertificate(validCert1, isCountRuleEnabled: true, expirationRuleIsActive: true).wait()
+            _ = try sut.scanCertificate(validCert2, isCountRuleEnabled: true, expirationRuleIsActive: true).wait()
             XCTFail("Should fail")
         } catch {
             XCTAssertEqual(error.localizedDescription, QRCodeError.warningCountOfCertificates.localizedDescription)
@@ -556,8 +556,8 @@ class VaccinationRepositoryTests: XCTestCase {
     func testCountRule_Disabled_WithDifferentPersons2() throws {
         let validCert1 = CertificateMock.validCertificate
         let validCert2 = CertificateMock.validRecoveryCertificate
-        _ = try sut.scanCertificate(validCert1, isCountRuleEnabled: true).wait()
-        _ = try sut.scanCertificate(validCert2, isCountRuleEnabled: false).wait()
+        _ = try sut.scanCertificate(validCert1, isCountRuleEnabled: true, expirationRuleIsActive: true).wait()
+        _ = try sut.scanCertificate(validCert2, isCountRuleEnabled: false, expirationRuleIsActive: true).wait()
     }
     
     func testCountRule_Enabled_10TimesSamePerson() {
@@ -573,16 +573,16 @@ class VaccinationRepositoryTests: XCTestCase {
         let validCert10 = CertificateMock.validCertificate.appending("J")
 
         do {
-            _ = try sut.scanCertificate(validCert1, isCountRuleEnabled: true).wait()
-            _ = try sut.scanCertificate(validCert2, isCountRuleEnabled: true).wait()
-            _ = try sut.scanCertificate(validCert3, isCountRuleEnabled: true).wait()
-            _ = try sut.scanCertificate(validCert4, isCountRuleEnabled: true).wait()
-            _ = try sut.scanCertificate(validCert5, isCountRuleEnabled: true).wait()
-            _ = try sut.scanCertificate(validCert6, isCountRuleEnabled: true).wait()
-            _ = try sut.scanCertificate(validCert7, isCountRuleEnabled: true).wait()
-            _ = try sut.scanCertificate(validCert8, isCountRuleEnabled: true).wait()
-            _ = try sut.scanCertificate(validCert9, isCountRuleEnabled: true).wait()
-            _ = try sut.scanCertificate(validCert10, isCountRuleEnabled: true).wait()
+            _ = try sut.scanCertificate(validCert1, isCountRuleEnabled: true, expirationRuleIsActive: true).wait()
+            _ = try sut.scanCertificate(validCert2, isCountRuleEnabled: true, expirationRuleIsActive: true).wait()
+            _ = try sut.scanCertificate(validCert3, isCountRuleEnabled: true, expirationRuleIsActive: true).wait()
+            _ = try sut.scanCertificate(validCert4, isCountRuleEnabled: true, expirationRuleIsActive: true).wait()
+            _ = try sut.scanCertificate(validCert5, isCountRuleEnabled: true, expirationRuleIsActive: true).wait()
+            _ = try sut.scanCertificate(validCert6, isCountRuleEnabled: true, expirationRuleIsActive: true).wait()
+            _ = try sut.scanCertificate(validCert7, isCountRuleEnabled: true, expirationRuleIsActive: true).wait()
+            _ = try sut.scanCertificate(validCert8, isCountRuleEnabled: true, expirationRuleIsActive: true).wait()
+            _ = try sut.scanCertificate(validCert9, isCountRuleEnabled: true, expirationRuleIsActive: true).wait()
+            _ = try sut.scanCertificate(validCert10, isCountRuleEnabled: true, expirationRuleIsActive: true).wait()
             XCTAssert(true)
         } catch {
             XCTFail("Should fail")
@@ -602,16 +602,16 @@ class VaccinationRepositoryTests: XCTestCase {
         let validCert10 = CertificateMock.validCertificate.appending("J")
 
         do {
-            _ = try sut.scanCertificate(validCert1, isCountRuleEnabled: false).wait()
-            _ = try sut.scanCertificate(validCert2, isCountRuleEnabled: false).wait()
-            _ = try sut.scanCertificate(validCert3, isCountRuleEnabled: false).wait()
-            _ = try sut.scanCertificate(validCert4, isCountRuleEnabled: false).wait()
-            _ = try sut.scanCertificate(validCert5, isCountRuleEnabled: false).wait()
-            _ = try sut.scanCertificate(validCert6, isCountRuleEnabled: false).wait()
-            _ = try sut.scanCertificate(validCert7, isCountRuleEnabled: false).wait()
-            _ = try sut.scanCertificate(validCert8, isCountRuleEnabled: false).wait()
-            _ = try sut.scanCertificate(validCert9, isCountRuleEnabled: false).wait()
-            _ = try sut.scanCertificate(validCert10, isCountRuleEnabled: false).wait()
+            _ = try sut.scanCertificate(validCert1, isCountRuleEnabled: false, expirationRuleIsActive: true).wait()
+            _ = try sut.scanCertificate(validCert2, isCountRuleEnabled: false, expirationRuleIsActive: true).wait()
+            _ = try sut.scanCertificate(validCert3, isCountRuleEnabled: false, expirationRuleIsActive: true).wait()
+            _ = try sut.scanCertificate(validCert4, isCountRuleEnabled: false, expirationRuleIsActive: true).wait()
+            _ = try sut.scanCertificate(validCert5, isCountRuleEnabled: false, expirationRuleIsActive: true).wait()
+            _ = try sut.scanCertificate(validCert6, isCountRuleEnabled: false, expirationRuleIsActive: true).wait()
+            _ = try sut.scanCertificate(validCert7, isCountRuleEnabled: false, expirationRuleIsActive: true).wait()
+            _ = try sut.scanCertificate(validCert8, isCountRuleEnabled: false, expirationRuleIsActive: true).wait()
+            _ = try sut.scanCertificate(validCert9, isCountRuleEnabled: false, expirationRuleIsActive: true).wait()
+            _ = try sut.scanCertificate(validCert10, isCountRuleEnabled: false, expirationRuleIsActive: true).wait()
             XCTAssert(true)
         } catch {
             XCTFail("Should fail")
@@ -625,9 +625,9 @@ class VaccinationRepositoryTests: XCTestCase {
         let person2Cert2 = CertificateMock.validCertificate6
 
         do {
-            _ = try sut.scanCertificate(person1Cert1, isCountRuleEnabled: false).wait()
-            _ = try sut.scanCertificate(person2Cert1, isCountRuleEnabled: false).wait()
-            _ = try sut.scanCertificate(person2Cert2, isCountRuleEnabled: true).wait()
+            _ = try sut.scanCertificate(person1Cert1, isCountRuleEnabled: false, expirationRuleIsActive: true).wait()
+            _ = try sut.scanCertificate(person2Cert1, isCountRuleEnabled: false, expirationRuleIsActive: true).wait()
+            _ = try sut.scanCertificate(person2Cert2, isCountRuleEnabled: true, expirationRuleIsActive: true).wait()
             XCTAssert(true)
         } catch {
             print(error)
@@ -643,15 +643,78 @@ class VaccinationRepositoryTests: XCTestCase {
         let person3Cert1 = CertificateMock.validCertificate5
 
         do {
-            _ = try sut.scanCertificate(person1Cert1, isCountRuleEnabled: false).wait()
-            _ = try sut.scanCertificate(person2Cert1, isCountRuleEnabled: false).wait()
-            _ = try sut.scanCertificate(person2Cert2, isCountRuleEnabled: false).wait()
-            _ = try sut.scanCertificate(person3Cert1, isCountRuleEnabled: true).wait()
+            _ = try sut.scanCertificate(person1Cert1, isCountRuleEnabled: false, expirationRuleIsActive: true).wait()
+            _ = try sut.scanCertificate(person2Cert1, isCountRuleEnabled: false, expirationRuleIsActive: true).wait()
+            _ = try sut.scanCertificate(person2Cert2, isCountRuleEnabled: false, expirationRuleIsActive: true).wait()
+            _ = try sut.scanCertificate(person3Cert1, isCountRuleEnabled: true, expirationRuleIsActive: true).wait()
             XCTAssert(true)
         } catch {
             print(error)
             XCTFail("Should fail")
         }
+    }
+    
+    func testScanExpiredCertificate_expirationRuleIsActive() {
+        // GIVEN
+        let expiredCert = CertificateMock.expiredCertificate
+        let expecation = XCTestExpectation()
+        // WHEN
+        sut.scanCertificate(expiredCert, isCountRuleEnabled: false, expirationRuleIsActive: true)
+            .catch{ error in
+                // THEN
+                if (error as? CertificateError) == .expiredCertifcate {
+                    expecation.fulfill()
+                }
+            }
+        wait(for: [expecation], timeout: 1.0)
+    }
+    
+    func testScanExpiredCertificate_expirationRuleIsDeActive() {
+        // GIVEN
+        let expiredCert = CertificateMock.expiredCertificate
+        let expecation = XCTestExpectation()
+        // WHEN
+        sut.scanCertificate(expiredCert, isCountRuleEnabled: false, expirationRuleIsActive: false)
+            .done { scanResponse in
+                // THEN
+                if let token = scanResponse as? ExtendedCBORWebToken {
+                    XCTAssertTrue(token.vaccinationCertificate.isExpired)
+                    expecation.fulfill()
+                }
+            }.cauterize()
+        wait(for: [expecation], timeout: 1.0)
+    }
+    
+    func testScanNotExpiredCertificate_expirationRuleIsActive() {
+        // GIVEN
+        let expiredCert = CertificateMock.validCertificate
+        let expecation = XCTestExpectation()
+        // WHEN
+        sut.scanCertificate(expiredCert, isCountRuleEnabled: false, expirationRuleIsActive: true)
+            .done { scanResponse in
+                // THEN
+                if let token = scanResponse as? ExtendedCBORWebToken {
+                    XCTAssertFalse(token.vaccinationCertificate.isExpired)
+                    expecation.fulfill()
+                }
+            }.cauterize()
+        wait(for: [expecation], timeout: 1.0)
+    }
+    
+    func testScanNotExpiredCertificate_expirationRuleIsDeActive() {
+        // GIVEN
+        let expiredCert = CertificateMock.validCertificate
+        let expecation = XCTestExpectation()
+        // WHEN
+        sut.scanCertificate(expiredCert, isCountRuleEnabled: false, expirationRuleIsActive: false)
+            .done { scanResponse in
+                // THEN
+                if let token = scanResponse as? ExtendedCBORWebToken {
+                    XCTAssertFalse(token.vaccinationCertificate.isExpired)
+                    expecation.fulfill()
+                }
+            }.cauterize()
+        wait(for: [expecation], timeout: 1.0)
     }
 }
 

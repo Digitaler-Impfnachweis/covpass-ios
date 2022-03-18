@@ -257,12 +257,12 @@ public class VaccinationRepository: VaccinationRepositoryProtocol {
         .asVoid()
     }
 
-    public func scanCertificate(_ data: String, isCountRuleEnabled: Bool) -> Promise<QRCodeScanable> {
+    public func scanCertificate(_ data: String, isCountRuleEnabled: Bool, expirationRuleIsActive: Bool) -> Promise<QRCodeScanable> {
         firstly {
             QRCoder.parse(data)
         }
         .map(on: .global()) {
-            try self.parseCertificate($0)
+            try self.parseCertificate($0, expirationRuleIsActive: expirationRuleIsActive)
         }
         .map(on: .global()) { certificate in
             if let t = certificate.hcert.dgc.t?.first, t.isPositive {
@@ -324,7 +324,7 @@ public class VaccinationRepository: VaccinationRepositoryProtocol {
             QRCoder.parse(data)
         }
         .map(on: .global()) {
-            try self.parseCertificate($0)
+            try self.parseCertificate($0, expirationRuleIsActive: true)
         }
     }
 
@@ -409,7 +409,7 @@ public class VaccinationRepository: VaccinationRepositoryProtocol {
     // MARK: - Private Helpers
 
     /// Parse certificate payload, verify signature, check expiration, check extended key usage, and validate blacklisted entities
-    func parseCertificate(_ cosePayload: CoseSign1Message) throws -> CBORWebToken {
+    func parseCertificate(_ cosePayload: CoseSign1Message, expirationRuleIsActive: Bool) throws -> CBORWebToken {
         guard let trustList = self.trustList else {
             throw ApplicationError.general("Missing TrustList")
         }
@@ -419,7 +419,7 @@ public class VaccinationRepository: VaccinationRepositoryProtocol {
         let cosePayloadJsonData = try cosePayload.toJSON()
         let certificate = try JSONDecoder().decode(CBORWebToken.self, from: cosePayloadJsonData)
 
-        if let exp = certificate.exp, Date() > exp {
+        if let exp = certificate.exp, Date() > exp && expirationRuleIsActive {
             throw CertificateError.expiredCertifcate
         }
 

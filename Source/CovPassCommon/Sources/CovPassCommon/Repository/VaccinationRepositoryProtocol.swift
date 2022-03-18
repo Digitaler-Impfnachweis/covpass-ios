@@ -34,7 +34,7 @@ public protocol VaccinationRepositoryProtocol {
     /// If an error occurs, the method will not return a certificate but an error
     ///
     /// - USED BY CovPass App
-    func scanCertificate(_ data: String, isCountRuleEnabled: Bool) -> Promise<QRCodeScanable>
+    func scanCertificate(_ data: String, isCountRuleEnabled: Bool, expirationRuleIsActive: Bool) -> Promise<QRCodeScanable>
     
     /// checkCertificate validates the given QR code and returns the  certificate when it's valid, otherwise an error
     ///
