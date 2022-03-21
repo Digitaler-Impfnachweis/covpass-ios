@@ -161,7 +161,7 @@ class RuleCheckDetailViewModel {
                 ("test_certificate_detail_view_data_test_manufactur".localized, t.maDisplayName ?? "", results(for: .fail, and: "t.0.ma"), results(for: .open, and: "t.0.ma")),
                 ("test_certificate_detail_view_data_test_date_and_time".localized, DateUtils.displayIsoDateTimeFormatter.string(from: t.sc), results(for: .fail, and: "t.0.sc"), results(for: .open, and: "t.0.sc")),
                 ("test_certificate_detail_view_data_test_results".localized, t.trDisplayName, results(for: .fail, and: "t.0.tr"), results(for: .open, and: "t.0.tr")),
-                ("test_certificate_detail_view_data_test_centre".localized, t.tc, results(for: .fail, and: "t.0.tc"), results(for: .open, and: "t.0.tc")),
+                ("test_certificate_detail_view_data_test_centre".localized, t.tc ?? "", results(for: .fail, and: "t.0.tc"), results(for: .open, and: "t.0.tc")),
                 ("test_certificate_detail_view_data_test_country".localized, t.co, results(for: .fail, and: "t.0.co"), results(for: .open, and: "t.0.co")),
                 ("test_certificate_detail_view_data_test_issuer".localized, t.is, results(for: .fail, and: "t.0.is"), results(for: .open, and: "t.0.is")),
                 ("test_certificate_detail_view_data_test_identifier".localized, t.ciDisplayName, results(for: .fail, and: "t.0.ci"), results(for: .open, and: "t.0.ci"))

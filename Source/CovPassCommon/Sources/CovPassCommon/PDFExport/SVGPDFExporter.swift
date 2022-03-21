@@ -88,7 +88,7 @@ public final class SVGPDFExporter: NSObject, WKNavigationDelegate, SVGPDFExportP
             // test result
             svg = svg.replacingOccurrences(of: "$tr", with: test.trDisplayName.sanitizedXMLString)
             // testing center
-            svg = svg.replacingOccurrences(of: "$tc", with: test.tc.sanitizedXMLString)
+            svg = svg.replacingOccurrences(of: "$tc", with: test.tc?.sanitizedXMLString ?? .placeholder)
             // country
             svg = svg.replacingOccurrences(of: "$co", with: test.co.sanitizedXMLString)
             // certificate issue
