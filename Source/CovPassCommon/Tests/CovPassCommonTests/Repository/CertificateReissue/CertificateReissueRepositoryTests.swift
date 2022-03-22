@@ -43,11 +43,8 @@ class CertificateReissueRepositoryTests: XCTestCase {
 
         // When
         sut.reissue([cborWebToken])
-            .done { _ in
-                XCTFail("Must not succeed.")
-            }
             .catch { error in
-                guard error as? DecodingError != nil else {
+                guard error as? CertificateReissueRepositoryFallbackError != nil else {
                     XCTFail("Wrong error: \(error)")
                     return
                 }
@@ -58,29 +55,95 @@ class CertificateReissueRepositoryTests: XCTestCase {
         wait(for: [expectation], timeout: 2)
     }
 
-    func testReissue_http_error() {
+    func testReissue_http_error() throws {
         // Given
         let cborWebToken = CBORWebToken.mockVaccinationCertificate.extended()
         let expectation = XCTestExpectation()
-        let expectedStatusCode = 542
-        urlSession.error = CertificateReissueError.http(expectedStatusCode)
+        let errorResponse = CertificateReissueResponseError(
+            error: "RXXX",
+            message: "MESSAGE"
+        )
+        let data = try JSONEncoder().encode(errorResponse)
+        urlSession.error = CertificateReissueURLSesssionError.http(
+            542,
+            data: data
+        )
 
         // When
         sut.reissue([cborWebToken])
-            .done { _ in
-                XCTFail("Must not succeed.")
-            }
             .catch { error in
-                guard let certificateReissueError = error as? CertificateReissueError else {
+                guard let certificateReissueError = error as? CertificateReissueRepositoryError else {
                     XCTFail("Wrong error: \(error)")
                     return
                 }
-                switch certificateReissueError {
-                case let .http(statusCode):
-                    XCTAssertEqual(statusCode, expectedStatusCode)
-                default:
-                    XCTFail("Wrong error: \(certificateReissueError)")
+                XCTAssertEqual(certificateReissueError.errorID, errorResponse.error)
+                XCTAssertEqual(certificateReissueError.message, errorResponse.message)
+                expectation.fulfill()
+            }
+
+        // Then
+        wait(for: [expectation], timeout: 2)
+    }
+
+    func testReissue_http_error_no_response_body() throws {
+        // Given
+        let cborWebToken = CBORWebToken.mockVaccinationCertificate.extended()
+        let expectation = XCTestExpectation()
+        let expectedError = CertificateReissueRepositoryFallbackError()
+        urlSession.error = CertificateReissueURLSesssionError.http(476, data: Data())
+
+        // When
+        sut.reissue([cborWebToken])
+            .catch { error in
+                guard let certificateReissueError = error as? CertificateReissueRepositoryError else {
+                    XCTFail("Wrong error: \(error)")
+                    return
                 }
+                XCTAssertEqual(certificateReissueError, expectedError)
+                expectation.fulfill()
+            }
+
+        // Then
+        wait(for: [expectation], timeout: 2)
+    }
+
+    func testReissue_http_error_500_no_response_body() throws {
+        // Given
+        let cborWebToken = CBORWebToken.mockVaccinationCertificate.extended()
+        let expectation = XCTestExpectation()
+        let expectedError = CertificateReissueRepositoryError("R500", message: nil)
+        urlSession.error = CertificateReissueURLSesssionError.http(500, data: Data())
+
+        // When
+        sut.reissue([cborWebToken])
+            .catch { error in
+                guard let certificateReissueError = error as? CertificateReissueRepositoryError else {
+                    XCTFail("Wrong error: \(error)")
+                    return
+                }
+                XCTAssertEqual(certificateReissueError, expectedError)
+                expectation.fulfill()
+            }
+
+        // Then
+        wait(for: [expectation], timeout: 2)
+    }
+
+    func testReissue_http_error_429_no_response_body() throws {
+        // Given
+        let cborWebToken = CBORWebToken.mockVaccinationCertificate.extended()
+        let expectation = XCTestExpectation()
+        let expectedError = CertificateReissueRepositoryError("R429", message: nil)
+        urlSession.error = CertificateReissueURLSesssionError.http(429, data: Data())
+
+        // When
+        sut.reissue([cborWebToken])
+            .catch { error in
+                guard let certificateReissueError = error as? CertificateReissueRepositoryError else {
+                    XCTFail("Wrong error: \(error)")
+                    return
+                }
+                XCTAssertEqual(certificateReissueError, expectedError)
                 expectation.fulfill()
             }
 
@@ -108,7 +171,7 @@ class CertificateReissueRepositoryTests: XCTestCase {
         sut.reissue([ExtendedCBORWebToken(vaccinationCertificate: .mockVaccinationCertificate, vaccinationQRCodeData: qrCodeData)])
             .done { webTokens in
                 guard let data = self.urlSession.receivedHTTPRequest?.httpBody,
-                let requestBody = try? JSONDecoder().decode(CertificateReissueRequestBody.self, from: data) else { return }
+                      let requestBody = try? JSONDecoder().decode(CertificateReissueRequestBody.self, from: data) else { return }
                 XCTAssertTrue(requestBody.certificates[0].starts(with: "HC1:"))
                 XCTAssertEqual(webTokens.count, 1)
                 guard let certificateString = webTokens.first?.vaccinationQRCodeData else { return }

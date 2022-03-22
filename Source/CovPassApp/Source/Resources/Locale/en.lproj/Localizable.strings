@@ -1490,3 +1490,11 @@
 "certificate_renewal_confirmation_page_certificate_secondary_button" = "Delete later";
 
 "certificate_renewal_detail_view_notification_box_secondary_button" = "Update";
+
+"certificate_renewal_error_title" = "Reissue failed";
+
+"certificate_renewal_error_copy" = "Unfortunately, there was a problem reissuing your certificate. Please check your Internet connection and note that the same certificate can be reissued a maximum of three times a year. If the error persists, please refer to the Frequently Asked Questions for more information using the error code below.\n\nError code: %@";
+
+"certificate_renewal_error_button_primary" = "OK";
+
+"certificate_renewal_error_button_secondary" = "More information";

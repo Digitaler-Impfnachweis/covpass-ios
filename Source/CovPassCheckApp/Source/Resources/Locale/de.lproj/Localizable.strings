@@ -525,6 +525,10 @@
 
 "revocation_detail_page_date_of_issuance" = "Ausstellungsdatum";
 
+"accessibility_revocation_detail_page_announce" = "Technische Details zum Zertifikat wurden geöffnet";
+
+"certificate_share_pdf_shareitem_android_covpasscheck" = "PDF speichern";
+
 
 /********** country list names **********/
 

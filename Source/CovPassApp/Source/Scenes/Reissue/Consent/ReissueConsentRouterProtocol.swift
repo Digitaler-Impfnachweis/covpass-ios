@@ -9,5 +9,6 @@ protocol ReissueConsentRouterProtocol: RouterProtocol {
                   resolver: Resolver<Void>)
     func cancel(resolver: Resolver<Void>)
     func routeToPrivacyStatement()
-    func showError(_ error: Error, resolver: Resolver<Void>)
+    func showError(title: String, message: String, faqURL: URL)
+    func showURL(_ url: URL)
 }

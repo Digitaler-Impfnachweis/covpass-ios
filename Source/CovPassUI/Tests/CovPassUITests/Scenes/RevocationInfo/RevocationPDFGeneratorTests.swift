@@ -19,7 +19,12 @@ class RevocationPDFGeneratorTests: XCTestCase {
         let url = try XCTUnwrap(Bundle.module.url(forResource: "RevocationInfoTemplate", withExtension: "svg"))
         let data = try XCTUnwrap(Data(contentsOf: url))
         let template = try XCTUnwrap(String(data: data, encoding: .utf8))
-        sut = .init(converter: converter, jsonEncoder: JSONEncoder(), svgTemplate: template)
+        sut = .init(
+            converter: converter,
+            jsonEncoder: JSONEncoder(),
+            svgTemplate: template,
+            secKey: try SecKey.mock()
+        )
     }
 
     override func tearDownWithError() throws {
@@ -44,10 +49,15 @@ class RevocationPDFGeneratorTests: XCTestCase {
         wait(for: [expectation], timeout: 2)
     }
 
-    func testGenerate_invalid_template() {
+    func testGenerate_invalid_template() throws {
         // Given
         let expectation = XCTestExpectation()
-        sut = .init(converter: converter, jsonEncoder: JSONEncoder(), svgTemplate: "")
+        sut = .init(
+            converter: converter,
+            jsonEncoder: JSONEncoder(),
+            svgTemplate: "",
+            secKey: try SecKey.mock()
+        )
 
         // When
         sut.generate(with: .mock())
@@ -73,5 +83,18 @@ private extension RevocationInfo {
             technicalExpiryDate: "",
             dateOfIssue: ""
         )
+    }
+}
+
+private extension SecKey {
+    static func mock() throws -> SecKey {
+        let keyPEM = """
+-----BEGIN PUBLIC KEY-----
+MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEIxHvrv8jQx9OEzTZbsx1prQVQn/3
+ex0gMYf6GyaNBW0QKLMjrSDeN6HwSPM0QzhvhmyQUixl6l88A7Zpu5OWSw==
+-----END PUBLIC KEY-----
+"""
+        let key = try keyPEM.secKey()
+        return key
     }
 }

@@ -18,9 +18,16 @@ private enum Constants {
         static var privacyText = "certificate_renewal_consent_page_transfer_certificates_button_link".localized
         static var agree = "certificate_renewal_consent_page_transfer_certificates_confirmation_button".localized
         static var disagree = "certificate_renewal_consent_page_transfer_certificates_cancel_button".localized
+        static let errorTitle = "certificate_renewal_error_title".localized
+        static let errorMessage = "certificate_renewal_error_copy".localized
     }
     enum Images {
         static var privacyChevron = UIImage.chevronRight
+    }
+    enum Config {
+        static let errorFaqURLEnglish = URL(string: "https://www.digitaler-impfnachweis-app.de/en/faq#fragen-zur-covpass-app")
+        static let errorFaqURLGerman = URL(string: "https://www.digitaler-impfnachweis-app.de/faq/#fragen-zur-covpass-app")
+        static let defaultErrorID = "R000"
     }
 }
 
@@ -47,6 +54,7 @@ class ReissueConsentViewModel: ReissueConsentViewModelProtocol {
     private let tokens: [ExtendedCBORWebToken]
     private let decoder: JSONDecoder
     private lazy var qrCodeData: [String] = tokens.map(\.vaccinationQRCodeData)
+    private let faqURL: URL
 
     // MARK: - Lifecyle
     
@@ -55,7 +63,9 @@ class ReissueConsentViewModel: ReissueConsentViewModelProtocol {
          tokens: [ExtendedCBORWebToken],
          reissueRepository: CertificateReissueRepositoryProtocol,
          vaccinationRepository: VaccinationRepositoryProtocol,
-         decoder: JSONDecoder) {
+         decoder: JSONDecoder,
+         locale: Locale) {
+        self.faqURL = (locale.isGerman() ? Constants.Config.errorFaqURLGerman : Constants.Config.errorFaqURLEnglish)!
         self.tokens = tokens
         self.reissueRepository = reissueRepository
         self.vaccinationRepository = vaccinationRepository
@@ -106,8 +116,19 @@ class ReissueConsentViewModel: ReissueConsentViewModelProtocol {
     }
 
     private func handle(reissueError: Error) {
+        let errorID: String
+        if let error = reissueError as? CertificateReissueRepositoryError {
+            errorID = error.errorID
+        } else {
+            errorID = Constants.Config.defaultErrorID
+        }
+        
         delegate?.viewModelUpdateDidFailWithError(reissueError)
-        router.showError(reissueError, resolver: resolver)
+        router.showError(
+            title: Constants.Keys.errorTitle,
+            message: String(format: Constants.Keys.errorMessage, errorID),
+            faqURL: faqURL
+        )
     }
     
     func processDisagree() {

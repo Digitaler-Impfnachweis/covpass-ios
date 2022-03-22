@@ -31,7 +31,9 @@ struct ReissueConsentSceneFactory: SceneFactory {
                                                 tokens: tokens,
                                                 reissueRepository: reissueRepository,
                                                 vaccinationRepository: vaccinationRepository,
-                                                decoder: JSONDecoder())
+                                                decoder: JSONDecoder(),
+                                                locale: .current
+        )
         let viewController = ReissueConsentViewController(viewModel: viewModel)
         return viewController
     }

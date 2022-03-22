@@ -25,6 +25,7 @@ public protocol ValidationViewModel {
     var _2GContext: Bool { get set }
     var linkIsHidden: Bool { get }
     var userDefaults: Persistence { get }
+    var revocationKeyFilename: String { get }
     func scanNextCertifcate()
     func revocationButtonTapped()
 }

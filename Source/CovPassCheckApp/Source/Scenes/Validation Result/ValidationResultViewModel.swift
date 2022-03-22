@@ -30,7 +30,7 @@ extension ValidationViewModel {
     func revocationButtonTapped() {
         guard let certificate = self.certificate else { return }
         router
-            .showRevocation(token: certificate)
+            .showRevocation(token: certificate, keyFilename: revocationKeyFilename)
             .cauterize()
     }
     

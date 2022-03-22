@@ -57,15 +57,30 @@ class ReissueConsentRouter: ReissueConsentRouterProtocol, DialogRouterProtocol {
             .cauterize()
     }
 
-    func showError(_ error: Error, resolver _: Resolver<Void>) {
-        print("\(#file):\(#function) Error: \(error)")
+    func showError(title: String, message: String, faqURL: URL) {
+        let okAction = DialogAction(
+            title: "certificate_renewal_error_button_primary".localized,
+            style: .default
+        )
+        let faqAction = DialogAction(
+            title: "certificate_renewal_error_button_secondary".localized,
+            style: .none,
+            isEnabled: true) { [weak self] _ in
+                self?.showURL(faqURL)
+            }
+
         showDialog(
-            title: "error_standard_unexpected_title".localized,
-            message: "error_standard_unexpected_message".localized,
-            actions: [
-                .init(title: "error_standard_unexpected_button_title".localized)
-            ],
+            title: title,
+            message: message,
+            actions: [okAction, faqAction],
             style: .alert
         )
+    }
+
+    func showURL(_ url: URL) {
+        let application = UIApplication.shared
+        if application.canOpenURL(url) {
+            application.open(url)
+        }
     }
 }

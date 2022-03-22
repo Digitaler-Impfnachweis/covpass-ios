@@ -20,6 +20,7 @@ class TestResultViewModel: ValidationResultViewModel {
     var router: ValidationResultRouterProtocol
     var repository: VaccinationRepositoryProtocol
     var certificate: ExtendedCBORWebToken?
+    var revocationKeyFilename: String
 
     var icon: UIImage? {
         .group
@@ -76,7 +77,8 @@ class TestResultViewModel: ValidationResultViewModel {
          repository: VaccinationRepositoryProtocol,
          certificate: ExtendedCBORWebToken?,
          _2GContext: Bool,
-         userDefaults: Persistence
+         userDefaults: Persistence,
+         revocationKeyFilename: String
     ) {
         self.resolvable = resolvable
         self.router = router
@@ -84,5 +86,6 @@ class TestResultViewModel: ValidationResultViewModel {
         self.certificate = certificate
         self._2GContext = _2GContext
         self.userDefaults = userDefaults
+        self.revocationKeyFilename = revocationKeyFilename
     }
 }

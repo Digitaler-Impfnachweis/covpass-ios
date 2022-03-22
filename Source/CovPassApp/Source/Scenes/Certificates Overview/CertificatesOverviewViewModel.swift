@@ -141,8 +141,7 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
     }
     
     private func continueScanning() -> PMKFinalizer {
-        return self.repository.scanCertificate(self.lastPlayload,
-                                               isCountRuleEnabled: false)
+        return repository.scanCertificate(lastPlayload, isCountRuleEnabled: false, expirationRuleIsActive: false)
             .done { certificate in
                 guard let token = certificate as? ExtendedCBORWebToken else {
                     return
@@ -212,7 +211,7 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
                 return .value(ticket)
             }
             self.lastPlayload = payload
-            return self.repository.scanCertificate(payload, isCountRuleEnabled: true)
+            return self.repository.scanCertificate(payload, isCountRuleEnabled: true, expirationRuleIsActive: false)
         }
         .done { certificate in
             switch certificate {

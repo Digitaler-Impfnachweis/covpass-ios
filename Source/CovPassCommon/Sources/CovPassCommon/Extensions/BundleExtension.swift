@@ -12,6 +12,19 @@ public extension Bundle {
     static var commonBundle: Bundle {
         Bundle.module
     }
+
+    func loadString(resource: String, encoding: String.Encoding) throws -> String {
+        guard let path = path(forResource: resource, ofType: nil) else {
+            throw BundleError.url(resource)
+        }
+        let string = try String(contentsOfFile: path)
+
+        return string
+    }
+}
+
+public enum BundleError: Error {
+    case url(_ resource: String)
 }
 
 #if !SPM

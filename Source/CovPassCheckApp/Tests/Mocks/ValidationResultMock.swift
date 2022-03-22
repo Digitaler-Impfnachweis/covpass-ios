@@ -21,7 +21,7 @@ struct ValidationResultRouterMock: ValidationResultRouterProtocol {
         .value(.success(""))
     }
     
-    func showRevocation(token: ExtendedCBORWebToken) -> Promise<Void> {
+    func showRevocation(token: ExtendedCBORWebToken, keyFilename: String) -> Promise<Void> {
         showRevocationExpectation.fulfill()
         return .init(error: NSError(domain: "TEST", code: 0, userInfo: nil))
     }

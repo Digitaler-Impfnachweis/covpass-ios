@@ -114,6 +114,12 @@ public extension Array where Element == ExtendedCBORWebToken {
         })
     }
     
+    var sortByFirstPositiveResultDate: [ExtendedCBORWebToken] {
+        sorted(by: { c1, c2 -> Bool in
+            return c1.firstRecovery?.fr ?? Date() > c2.firstRecovery?.fr ?? Date()
+        })
+    }
+    
     var filterNegativePCRTestsNotOlderThan72Hours: [ExtendedCBORWebToken] {
         filter {
             if let t = $0.firstTest, t.isPCR, !t.isPositive, Date() <= Calendar.current.date(byAdding: .hour, value: 72, to: t.sc) ?? Date() {
@@ -313,16 +319,16 @@ public extension Array where Element == ExtendedCBORWebToken {
         res.append(contentsOf: quickTests)
         // #3 Booster Certificate
         //  Latest booster vaccination of a vaccination series (3/3, 4/4, ...)
-        res.append(contentsOf: filterBoosted.sortByIssuedAtTime)
+        res.append(contentsOf: filterBoosted.sortByVaccinationDate)
         // #4 Vaccination certificate
         //  Latest vaccination of a vaccination series (1/1, 2/2), older then (>) 14 days, and where the iat is the latest
-        let vaccinationCertificates = filterVaccinations.sortByIssuedAtTime.sortByVaccinationDate
+        let vaccinationCertificates = filterVaccinations.sortByVaccinationDate
         if let latestVaccination = vaccinationCertificates.firstNotBosstedValidFullImmunization {
             res.append(latestVaccination)
         }
         // #5 Recovery certificate
         //  Recovery after SARS-Cov-2-Infection, not older then (=<) 180 Days
-        res.append(contentsOf: filterRecoveryWhoseDateIsStillValid)
+        res.append(contentsOf: filterRecoveryWhoseDateIsStillValid.sortByFirstPositiveResultDate)
         // #6 Vaccination Certificate
         //  Latest vaccination of a vaccination series, not older then (=<) 14 days
         if let latestVaccination = vaccinationCertificates.firstNotValidButFullImmunization {
@@ -333,7 +339,7 @@ public extension Array where Element == ExtendedCBORWebToken {
         res.append(contentsOf: filterNotFullImmunization)
         // #8 Recovery Certificate
         //  Recovery after SARS-Cov-2-Infection, older then (>) 180 Days
-        res.append(contentsOf: filterRecoveryWhoseDateNotAnyMoreValid)
+        res.append(contentsOf: filterRecoveryWhoseDateNotAnyMoreValid.sortByFirstPositiveResultDate)
         // #9 Test certificate
         //  Negative PCR-Test, older then (>) 72 Hrs, or negative quick test older then (>) 48 Hrs
         res.append(contentsOf: filterAllTestsNegativeAndNotValid)

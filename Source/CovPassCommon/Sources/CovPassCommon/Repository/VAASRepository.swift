@@ -386,18 +386,7 @@ public class VAASRepository: VAASRepositoryProtocol {
         let err = error?.takeRetainedValue().localizedDescription
         return (cipherData, err)
     }
-    
-    private func keyFromData(_ data: Data) throws -> SecKey {
-        let options: [String: Any] = [kSecAttrKeyType as String: kSecAttrKeyTypeRSA,
-                                      kSecAttrKeyClass as String: kSecAttrKeyClassPublic, kSecAttrKeySizeInBits as String : 4096]
-        
-        var error: Unmanaged<CFError>?
-        
-        guard let key = SecKeyCreateWithData(data as CFData, options as CFDictionary, &error)
-        else { throw error!.takeRetainedValue() as Error }
-        return key
-    }
-    
+
     private func pubKey(from b64EncodedCert: String) -> SecKey? {
         guard let encodedCertData = Data(base64Encoded: b64EncodedCert),
               let cert = SecCertificateCreateWithData(nil, encodedCertData as CFData),

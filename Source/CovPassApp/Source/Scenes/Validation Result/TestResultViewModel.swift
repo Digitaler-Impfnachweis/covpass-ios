@@ -21,6 +21,7 @@ class TestResultViewModel: ValidationResultViewModel {
     var repository: VaccinationRepositoryProtocol
     var certificate: ExtendedCBORWebToken?
     var token: VAASValidaitonResultToken?
+    let revocationKeyFilename = ""
 
     var icon: UIImage? {
         .resultSuccess

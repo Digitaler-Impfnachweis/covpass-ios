@@ -38,12 +38,13 @@ class ValidationResultViewControllerSnapShotTests: BaseSnapShotTests {
         }
         if let error = error {
             vm = ErrorResultViewModel(resolvable: resolver,
-                                          router: ValidationResultRouterMock(),
-                                          repository: VaccinationRepositoryMock(),
-                                          certificate: nil,
-                                          error: error,
-                                          _2GContext: _2GContext,
-                                          userDefaults: persistence)
+                                      router: ValidationResultRouterMock(),
+                                      repository: VaccinationRepositoryMock(),
+                                      certificate: nil,
+                                      error: error,
+                                      _2GContext: _2GContext,
+                                      userDefaults: persistence,
+                                      revocationKeyFilename: "")
         } else {
             guard let cborWebToken = cborWebToken else {
                 return UIView()
@@ -54,21 +55,24 @@ class ValidationResultViewControllerSnapShotTests: BaseSnapShotTests {
                                                 repository: VaccinationRepositoryMock(),
                                                 certificate: token,
                                                 _2GContext: _2GContext,
-                                                userDefaults: persistence)
+                                                userDefaults: persistence,
+                                                revocationKeyFilename: "")
             } else if cborWebToken.isRecovery {
                 vm = RecoveryResultViewModel(resolvable: resolver,
-                                                router: ValidationResultRouterMock(),
-                                                repository: VaccinationRepositoryMock(),
-                                                certificate: token,
-                                                _2GContext: _2GContext,
-                                                userDefaults: persistence)
+                                             router: ValidationResultRouterMock(),
+                                             repository: VaccinationRepositoryMock(),
+                                             certificate: token,
+                                             _2GContext: _2GContext,
+                                             userDefaults: persistence,
+                                             revocationKeyFilename: "")
             } else if cborWebToken.isTest {
                 vm = TestResultViewModel(resolvable: resolver,
-                                                router: ValidationResultRouterMock(),
-                                                repository: VaccinationRepositoryMock(),
-                                                certificate: token,
-                                                _2GContext: _2GContext,
-                                                userDefaults: persistence)
+                                         router: ValidationResultRouterMock(),
+                                         repository: VaccinationRepositoryMock(),
+                                         certificate: token,
+                                         _2GContext: _2GContext,
+                                         userDefaults: persistence,
+                                         revocationKeyFilename: "")
             }
         }
         vm.buttonHidden = buttonHidden
