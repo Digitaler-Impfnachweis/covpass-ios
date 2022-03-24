@@ -40,6 +40,5 @@ BOOSTER_RULES_URL = https:/$()/distribution-cff4f7147260.dcc-rules.de/bnrules
 DOMESTIC_RULES_URL = https:/$()/distribution.dcc-rules.de/domesticrules
 
 // CERTIFICATE REISSUE
-// TODO: Adjust before release
 CERTIFICATE_REISSUE_URL = https:/$()/api.reissue.demo.ubirch.com
 CERTIFICATE_REISSUE_PINNING_HASHES = 151bb50bb467f6b7f346c602b22a00b651fbbdf8695c238beba832ae9c0e056d
