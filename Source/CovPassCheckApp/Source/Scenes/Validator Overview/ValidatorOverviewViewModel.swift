@@ -42,7 +42,7 @@ private enum Constants {
 class ValidatorOverviewViewModel {
     // MARK: - Properties
     
-    private let repository: VaccinationRepositoryProtocol
+    private let vaccinationRepository: VaccinationRepositoryProtocol
     private let router: ValidatorOverviewRouterProtocol
     private let certLogic: DCCCertLogicProtocol
     private var userDefaults: Persistence
@@ -52,7 +52,7 @@ class ValidatorOverviewViewModel {
     var title: String { "validation_start_screen_title".localized }
     
     var offlineAvailable: Bool {
-        !repository.trustListShouldBeUpdated() || !certLogic.rulesShouldBeUpdated()
+        !vaccinationRepository.trustListShouldBeUpdated() || !certLogic.rulesShouldBeUpdated()
     }
     
     var offlineIcon: UIImage {
@@ -151,7 +151,7 @@ class ValidatorOverviewViewModel {
          userDefaults: Persistence,
          schedulerIntervall: TimeInterval = Constants.Config.schedulerIntervall) {
         self.router = router
-        self.repository = repository
+        self.vaccinationRepository = repository
         self.certLogic = certLogic
         self.userDefaults = userDefaults
         self.schedulerIntervall = schedulerIntervall
@@ -169,7 +169,7 @@ class ValidatorOverviewViewModel {
     // MARK: - Methods
     
     func updateTrustList() {
-        repository
+        vaccinationRepository
             .updateTrustListIfNeeded()
             .done { [weak self] in
                 self?.delegate?.viewModelDidUpdate()
@@ -202,7 +202,7 @@ class ValidatorOverviewViewModel {
             try self.payloadFromScannerResult($0)
         }
         .then {
-            self.repository.validCertificate($0)
+            self.vaccinationRepository.validCertificate($0)
         }
         .done {
             if scanType == ._3G {
@@ -211,7 +211,7 @@ class ValidatorOverviewViewModel {
                                             userDefaults: self.userDefaults)
             } else {
                 self.router.showGproof(initialToken: $0,
-                                       repository: self.repository,
+                                       repository: self.vaccinationRepository,
                                        certLogic: self.certLogic,
                                        userDefaults: self.userDefaults,
                                        boosterAsTest: self.boosterAsTest)
@@ -228,7 +228,7 @@ class ValidatorOverviewViewModel {
                               userDefaults: self.userDefaults)
             .done { token in
                 self.router.showGproof(initialToken: token,
-                                       repository: self.repository,
+                                       repository: self.vaccinationRepository,
                                        certLogic: self.certLogic,
                                        userDefaults: self.userDefaults,
                                        boosterAsTest: self.boosterAsTest)
