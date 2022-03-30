@@ -66,7 +66,7 @@ public final class RevocationPDFGenerator: RevocationPDFGeneratorProtocol {
     }
 
     private func encryptAndBase64Encode(_ data: Data) -> String? {
-        guard let encryptedData = try? data.encrypt(with: secKey, algoritm: .eciesEncryptionStandardX963SHA256AESGCM) else {
+        guard let encryptedData = try? data.encrypt(with: secKey, algoritm: .eciesEncryptionCofactorVariableIVX963SHA256AESGCM) else {
             return nil
         }
         return encryptedData.base64EncodedString()

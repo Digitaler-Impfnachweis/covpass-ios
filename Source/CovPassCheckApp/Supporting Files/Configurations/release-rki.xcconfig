@@ -38,5 +38,4 @@ BOOSTER_RULES_URL = https:/$()/distribution.dcc-rules.de/bnrules
 DOMESTIC_RULES_URL = https:/$()/distribution.dcc-rules.de/domesticrules
 
 // REVOCATION INFO EXPORT
-// TODO: Adjust before release
-CERTIFICATE_REVOCATION_INFO_ENCRYPTION_KEY = invalid
+CERTIFICATE_REVOCATION_INFO_ENCRYPTION_KEY = dgcg-revocation-mgmt-prod-pubkey
