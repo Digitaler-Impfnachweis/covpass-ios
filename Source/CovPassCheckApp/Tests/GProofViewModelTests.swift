@@ -18,11 +18,14 @@ class GProofViewModelTests: XCTestCase {
     var vaccinationRepoMock: VaccinationRepositoryMock!
     var certLogicMock: DCCCertLogicMock!
     var routerMock: GProofMockRouter!
-    let (_, resolver) = Promise<CBORWebToken>.pending()
+    let (_, resolver) = Promise<ExtendedCBORWebToken>.pending()
 
     override func setUp() {
         super.setUp()
-        let initialToken = CBORWebToken.mockTestCertificate
+        let initialToken = ExtendedCBORWebToken(
+            vaccinationCertificate: CBORWebToken.mockTestCertificate,
+            vaccinationQRCodeData: ""
+        )
         vaccinationRepoMock = VaccinationRepositoryMock()
         certLogicMock = DCCCertLogicMock()
         routerMock = GProofMockRouter()
@@ -55,7 +58,10 @@ class GProofViewModelTests: XCTestCase {
         vaccinationRepoMock.checkedCert = token
         certLogicMock.validateResult = [.init(rule: nil, result: .passed, validationErrors: nil)]
         let sut = GProofViewModel(resolvable: resolver,
-                                  initialToken: initialToken,
+                                  initialToken: ExtendedCBORWebToken(
+                                    vaccinationCertificate: initialToken,
+                                    vaccinationQRCodeData: ""
+                                  ),
                                   router: routerMock,
                                   repository: vaccinationRepoMock,
                                   certLogic: certLogicMock,
@@ -195,7 +201,7 @@ class GProofViewModelTests: XCTestCase {
         XCTAssertEqual(sut.seconResultLinkImage, nil)
         XCTAssertEqual(sut.secondResultTitle, "Basic immunisation")
         XCTAssertEqual(sut.seconResultFooterText, nil)
-        XCTAssertEqual(sut.seconResultSubtitle, "12 months ago")
+        XCTAssertEqual(sut.seconResultSubtitle, "13 months ago")
         
         XCTAssertEqual(try XCTUnwrap(sut.resultPersonTitle), "Doe John")
         XCTAssertEqual(try XCTUnwrap(sut.resultPersonSubtitle), "DOE JOHN")
@@ -388,7 +394,7 @@ class GProofViewModelTests: XCTestCase {
         XCTAssertEqual(sut.firstResultLinkImage, nil)
         XCTAssertEqual(sut.firstResultTitle, "Basic immunisation")
         XCTAssertEqual(sut.firstResultFooterText, nil)
-        XCTAssertEqual(try XCTUnwrap(sut.firstResultSubtitle), "12 months ago")
+        XCTAssertEqual(try XCTUnwrap(sut.firstResultSubtitle), "13 months ago")
         
         XCTAssertEqual(sut.secondResultImage, UIImage.detailStatusFullEmpty)
         XCTAssertEqual(sut.seconResultLinkImage, nil)
@@ -431,7 +437,7 @@ class GProofViewModelTests: XCTestCase {
         XCTAssertEqual(sut.firstResultImage, UIImage.detailStatusFull)
         XCTAssertEqual(sut.firstResultLinkImage, nil)
         XCTAssertEqual(sut.firstResultTitle, "Basic immunisation")
-        XCTAssertEqual(try XCTUnwrap(sut.firstResultSubtitle), "12 months ago")
+        XCTAssertEqual(try XCTUnwrap(sut.firstResultSubtitle), "13 months ago")
         
         XCTAssertEqual(sut.secondResultImage, UIImage.detailStatusTest)
         XCTAssertEqual(sut.seconResultLinkImage, nil)
@@ -476,7 +482,7 @@ class GProofViewModelTests: XCTestCase {
         XCTAssertEqual(sut.firstResultLinkImage, nil)
         XCTAssertEqual(sut.firstResultTitle, "Recovery")
         XCTAssertEqual(sut.firstResultFooterText, nil)
-        XCTAssertEqual(sut.firstResultSubtitle!, "0 months ago")
+        XCTAssertEqual(sut.firstResultSubtitle!, "1 months ago")
         
         XCTAssertEqual(sut.secondResultImage, UIImage.detailStatusTest)
         XCTAssertEqual(sut.seconResultLinkImage, nil)
@@ -615,8 +621,11 @@ class GProofViewModelTests: XCTestCase {
             is: "Robert Koch-Institut iOS",
             ci: "URN:UVCI:01DE/IBMT102/18Q12HTUJ45NO7ZTR2RGAS#C"
         )
-        var token = CBORWebToken.mockTestCertificate
-        token.hcert.dgc.t = [test]
+        var token = ExtendedCBORWebToken.init(
+            vaccinationCertificate: .mockTestCertificate,
+            vaccinationQRCodeData: ""
+        )
+        token.vaccinationCertificate.hcert.dgc.t = [test]
         vaccinationRepoMock.checkedCert = CBORWebToken.mockTestCertificate
         certLogicMock.validateResult = [
             .init(rule: nil, result: .passed, validationErrors: nil)
@@ -641,6 +650,10 @@ class GProofViewModelTests: XCTestCase {
     fileprivate func test_scan_basic_then_booster(boosterAsTest: Bool) {
         // Given
         let basicVaccination = CBORWebToken.mockVaccinationCertificate
+        let token = ExtendedCBORWebToken(
+            vaccinationCertificate: basicVaccination,
+            vaccinationQRCodeData: ""
+        )
         basicVaccination.hcert.dgc.v!.first!.sd = 2
         basicVaccination.hcert.dgc.v!.first!.dn = 2
         let boosterVaccination = CBORWebToken.mockVaccinationCertificate
@@ -649,7 +662,7 @@ class GProofViewModelTests: XCTestCase {
         vaccinationRepoMock.checkedCert = basicVaccination
         certLogicMock.validateResult = [.init(rule: nil, result: .passed, validationErrors: nil)]
         sut = .init(resolvable: resolver,
-                    initialToken: basicVaccination,
+                    initialToken: token,
                     router: routerMock,
                     repository: vaccinationRepoMock,
                     certLogic: certLogicMock,

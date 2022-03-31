@@ -14,7 +14,13 @@ import XCTest
 class CertificatesOverviewRouterMock: CertificatesOverviewRouterProtocol {
     let showCheckSituationExpectation = XCTestExpectation(description: "showCheckSituationExpectation")
     let showDialogExpectation = XCTestExpectation(description: "showDialogExpectation")
+    let showCertificatesReissueExpectation = XCTestExpectation(description: "showCertificatesReissueExpectation")
+    let toWebsiteFAQExpectation = XCTestExpectation(description: "toWebsiteFAQExpectation")
     var sceneCoordinator: SceneCoordinator = SceneCoordinatorMock()
+    var error: Error?
+    var scanCountErrorResponse: ScanCountErrorResponse = .download
+    var receivedFaqURL: URL?
+
     func showCheckSituation(userDefaults: Persistence) -> Promise<Void> {
         showCheckSituationExpectation.fulfill()
         return .value
@@ -41,7 +47,7 @@ class CertificatesOverviewRouterMock: CertificatesOverviewRouterProtocol {
     }
 
     func showScanCountError() -> Promise<ScanCountErrorResponse> {
-        .value(.download)
+        .value(scanCountErrorResponse)
     }
 
     func showRuleCheck() -> Promise<Void> {
@@ -49,7 +55,10 @@ class CertificatesOverviewRouterMock: CertificatesOverviewRouterProtocol {
     }
 
     func scanQRCode() -> Promise<ScanResult> {
-        .value(.success(""))
+        if let error = error {
+            return .init(error: error)
+        }
+        return .value(.success(""))
     }
 
     func showAppInformation() {
@@ -69,6 +78,13 @@ class CertificatesOverviewRouterMock: CertificatesOverviewRouterProtocol {
     }
 
     func toAppstoreCheckApp() {}
-    func toFaqWebsite() {}
+    func toFaqWebsite(_ url: URL) {
+        receivedFaqURL = url
+        toWebsiteFAQExpectation.fulfill()
+    }
     func startValidationAsAService(with data: ValidationServiceInitialisation) {}
+    func showCertificatesReissue(for cborWebTokens: [ExtendedCBORWebToken]) -> Promise<Void> {
+        showCertificatesReissueExpectation.fulfill()
+        return .value
+    }
 }

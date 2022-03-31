@@ -57,13 +57,14 @@ public struct ValueSet: Codable {
     var data: Data
 }
 
-public struct DCCCertLogic: DCCCertLogicProtocol {
+public class DCCCertLogic: DCCCertLogicProtocol {
     private let initialDCCRulesURL: URL
     private let initialDomesticDCCRulesURL: URL
     private let service: DCCServiceProtocol
     private let keychain: Persistence
-    private let userDefaults: Persistence
+    private var userDefaults: Persistence
     private let jsonDecoder = JSONDecoder()
+    private let jsonEncoder = JSONEncoder()
 
     public enum LogicType: String {
         // validate against EU rules
@@ -127,15 +128,13 @@ public struct DCCCertLogic: DCCCertLogicProtocol {
     }()
 
     var valueSets: [String: [String]] {
-        // Try to load valueSets from userDefaults
-        if let valueSetData = try? userDefaults.fetch(UserDefaults.keyValueSets) as? Data,
+        if let valueSetData = userDefaults.valueSets,
            let sets = try? jsonDecoder.decode([ValueSet].self, from: valueSetData)
         {
             var udValueSets = [String: [String]]()
             sets.forEach { udValueSets[$0.id] = DCCCertLogic.valueSet($0.id, $0.data) }
             return udValueSets
         }
-        // Try to load local valueSets
         return [
             "country-2-codes": DCCCertLogic.valueSetFromFile("country-2-codes"),
             "covid-19-lab-result": DCCCertLogic.valueSetFromFile("covid-19-lab-result"),
@@ -172,10 +171,6 @@ public struct DCCCertLogic: DCCCertLogicProtocol {
 
     public var countries: [Country] {
         Countries.loadDefaultCountries()
-    }
-
-    public func lastUpdatedDCCRules() -> Date? {
-        try? userDefaults.fetch(UserDefaults.keyLastUpdatedDCCRules) as? Date
     }
 
     public init(initialDCCRulesURL: URL,
@@ -231,7 +226,7 @@ public struct DCCCertLogic: DCCCertLogicProtocol {
         )
 
         let engine = CertLogicEngine(schema: schema, rules: rules)
-        let data = try JSONEncoder().encode(certificate.hcert.dgc)
+        let data = try jsonEncoder.encode(certificate.hcert.dgc)
         guard let payload = String(data: data, encoding: .utf8) else {
             throw DCCCertLogicError.encodingError
         }
@@ -239,9 +234,9 @@ public struct DCCCertLogic: DCCCertLogicProtocol {
     }
 
     // MARK: - Updating local rules and data
-    
+
     public func rulesShouldBeUpdated() -> Bool {
-        if let lastUpdated = lastUpdatedDCCRules(),
+        if let lastUpdated = userDefaults.lastUpdatedDCCRules,
            let date = Calendar.current.date(byAdding: .day, value: 1, to: lastUpdated),
            Date() < date
         {
@@ -260,30 +255,19 @@ public struct DCCCertLogic: DCCCertLogicProtocol {
         return firstly {
             return rulesShouldBeUpdated()
         }
-        .then(on: .global()) { rulesShouldBeUpdated in
-            rulesShouldBeUpdated ? updateRules() : .value
+        .then(on: .global()) {
+            $0 ? self.updateRules() : .value
         }
     }
 
-    /// Triggers a chain of downloads/updates for DCC rules, booster rules and value sets
     public func updateRules() -> Promise<Void> {
         return firstly {
             service.loadCountryList()
         }.then(on: .global()) { _ in
-            service.loadDCCRules()
-        }
-        .then(on: .global()) { (remoteRules: [RuleSimple]) throws -> Promise<[Rule]> in
-            updateCountryRules(localRules: dccRules, remoteRules: remoteRules)
-        }
-        .map(on: .global()) { rules in
-            let data = try JSONEncoder().encode(rules)
-            try keychain.store(KeychainPersistence.Keys.dccRules.rawValue, value: data)
+            self.updateDCCRules()
         }
         .then(on: .global()) {
-            updateBoosterRules()
-        }
-        .then(on: .global()) {
-            updateDomesticRules()
+            self.updateDomesticRules()
         }
     }
 
@@ -302,19 +286,101 @@ public struct DCCCertLogic: DCCCertLogicProtocol {
         }
     }
     
+    public func boosterRulesShouldBeUpdated() -> Bool {
+        if let lastUpdated = userDefaults.lastUpdatedBoosterRules,
+           let date = Calendar.current.date(byAdding: .day, value: 1, to: lastUpdated),
+           Date() < date
+        {
+            return false
+        }
+        return true
+    }
+    
+    public func boosterRulesShouldBeUpdated() -> Promise<Bool> {
+        Promise { seal in
+            seal.fulfill(boosterRulesShouldBeUpdated())
+        }
+    }
+    
+    public func updateBoosterRulesIfNeeded() -> Promise<Void> {
+        return firstly {
+            return boosterRulesShouldBeUpdated()
+        }
+        .then(on: .global()) {
+            $0 ? self.updateBoosterRules() : .value
+        }
+    }
+    
     public func updateBoosterRules() -> Promise<Void> {
         return firstly {
             service.loadBoosterRules()
         }
         .then(on: .global()) { (remoteRules: [RuleSimple]) throws -> Promise<[Rule]> in
-            updateCountryBoosterRules(localRules: boosterRules, remoteRules: remoteRules)
+            self.updateCountryBoosterRules(localRules: self.boosterRules, remoteRules: remoteRules)
         }
         .map(on: .global()) { rules in
-            let data = try JSONEncoder().encode(rules)
-            try keychain.store(KeychainPersistence.Keys.boosterRules.rawValue, value: data)
+            let data = try self.jsonEncoder.encode(rules)
+            try self.keychain.store(KeychainPersistence.Keys.boosterRules.rawValue, value: data)
+        }
+        .then(on: .global()) { () -> Promise<Void> in
+            self.userDefaults.lastUpdatedBoosterRules = Date()
+            return .value
+        }
+    }
+    
+    public func valueSetsShouldBeUpdated() -> Bool {
+        if let lastUpdated = userDefaults.lastUpdatedValueSets,
+           let date = Calendar.current.date(byAdding: .day, value: 1, to: lastUpdated),
+           Date() < date
+        {
+            return false
+        }
+        return true
+    }
+    
+    public func valueSetsShouldBeUpdated() -> Promise<Bool> {
+        Promise { seal in
+            seal.fulfill(valueSetsShouldBeUpdated())
+        }
+    }
+    
+    public func updateValueSetsIfNeeded() -> Promise<Void> {
+        return firstly {
+            return valueSetsShouldBeUpdated()
         }
         .then(on: .global()) {
-            updateValueSets()
+            $0 ? self.updateValueSets() : .value
+        }
+    }
+    
+    public func updateValueSets() -> Promise<Void> {
+        firstly {
+            service.loadValueSets()
+        }
+        .then(on: .global()) { remoteValueSets in
+            Promise { seal in
+                var valueSets = [ValueSet]()
+                var updatedValueSets = [ValueSet]()
+                if let storedData = self.userDefaults.valueSets {
+                    valueSets = try self.jsonDecoder.decode([ValueSet].self, from: storedData)
+                }
+                for remoteValueSet in remoteValueSets {
+                    guard let remoteId = remoteValueSet["id"], let remoteHash = remoteValueSet["hash"] else { continue }
+                    if let localValueSet = valueSets.first(where: { $0.id == remoteId && $0.hash == remoteHash }) {
+                        updatedValueSets.append(localValueSet)
+                    } else {
+                        let valueSet = try self.service.loadValueSet(id: remoteId, hash: remoteHash).wait()
+                        updatedValueSets.append(valueSet)
+                    }
+                }
+                let data = try self.jsonEncoder.encode(updatedValueSets)
+                self.userDefaults.valueSets = data
+                seal.fulfill_()
+            }
+        }
+        .then(on: .global()) { () -> Promise<Void> in
+            self.userDefaults.lastUpdatedValueSets = Date()
+            return .value
         }
     }
     
@@ -323,11 +389,28 @@ public struct DCCCertLogic: DCCCertLogicProtocol {
             service.loadDomesticRules()
         }
         .then(on: .global()) { (remoteRules: [RuleSimple]) throws -> Promise<[Rule]> in
-            updateCountryDomesticRules(localRules: dccDomesticRules, remoteRules: remoteRules)
+            self.updateCountryDomesticRules(localRules: self.dccDomesticRules, remoteRules: remoteRules)
         }
         .map(on: .global()) { rules in
-            let data = try JSONEncoder().encode(rules)
-            try keychain.store(KeychainPersistence.Keys.dccDomesticRules.rawValue, value: data)
+            let data = try self.jsonEncoder.encode(rules)
+            try self.keychain.store(KeychainPersistence.Keys.dccDomesticRules.rawValue, value: data)
+        }
+    }
+    
+    public func updateDCCRules() -> Promise<Void> {
+        return firstly {
+            service.loadDCCRules()
+        }
+        .then(on: .global()) { (remoteRules: [RuleSimple]) throws -> Promise<[Rule]> in
+            self.updateCountryRules(localRules: self.dccRules, remoteRules: remoteRules)
+        }
+        .map(on: .global()) { rules in
+            let data = try self.jsonEncoder.encode(rules)
+            try self.keychain.store(KeychainPersistence.Keys.dccRules.rawValue, value: data)
+        }
+        .then(on: .global()) { () -> Promise<Void> in
+            self.userDefaults.lastUpdatedDCCRules = Date()
+            return .value
         }
     }
     
@@ -358,34 +441,6 @@ public struct DCCCertLogic: DCCCertLogicProtocol {
                 }
             }
             seal.fulfill(updatedRules)
-        }
-    }
-
-    private func updateValueSets() -> Promise<Void> {
-        firstly {
-            service.loadValueSets()
-        }
-        .then(on: .global()) { remoteValueSets in
-            Promise { seal in
-                var valueSets = [ValueSet]()
-                var updatedValueSets = [ValueSet]()
-                if let storedData = try userDefaults.fetch(UserDefaults.keyValueSets) as? Data {
-                    valueSets = try jsonDecoder.decode([ValueSet].self, from: storedData)
-                }
-                for remoteValueSet in remoteValueSets {
-                    guard let remoteId = remoteValueSet["id"], let remoteHash = remoteValueSet["hash"] else { continue }
-                    if let localValueSet = valueSets.first(where: { $0.id == remoteId && $0.hash == remoteHash }) {
-                        updatedValueSets.append(localValueSet)
-                    } else {
-                        let valueSet = try service.loadValueSet(id: remoteId, hash: remoteHash).wait()
-                        updatedValueSets.append(valueSet)
-                    }
-                }
-                let data = try JSONEncoder().encode(updatedValueSets)
-                try userDefaults.store(UserDefaults.keyValueSets, value: data)
-                try userDefaults.store(UserDefaults.keyLastUpdatedDCCRules, value: Date())
-                seal.fulfill_()
-            }
         }
     }
 }

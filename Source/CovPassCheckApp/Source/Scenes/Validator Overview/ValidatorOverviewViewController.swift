@@ -51,6 +51,7 @@ class ValidatorOverviewViewController: UIViewController {
         navigationController?.setNavigationBarHidden(true, animated: animated)
         viewModel.updateTrustList()
         viewModel.updateDCCRules()
+        viewModel.updateValueSets()
         setupCheckSituationView()
     }
 

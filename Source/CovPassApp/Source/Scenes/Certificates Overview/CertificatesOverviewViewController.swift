@@ -53,7 +53,6 @@ class CertificatesOverviewViewController: UIViewController {
         setupActionButton()
         setupCollectionView()
         setupDotIndicator()
-        viewModel.refresh()
         viewModel.showNotificationsIfNeeded()
     }
 
@@ -61,7 +60,8 @@ class CertificatesOverviewViewController: UIViewController {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
         viewModel.updateTrustList()
-        viewModel.updateDCCRules()
+        viewModel.updateBoosterRules()
+        viewModel.updateValueSets()
     }
 
     override func viewWillDisappear(_ animated: Bool) {

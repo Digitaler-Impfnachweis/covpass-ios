@@ -463,6 +463,12 @@
 
 "accessibility_information_beep_when_checking_off" = "Signalton ausschalten";
 
+"app_information_authorities_function_title" = "Behördenfunktion";
+
+"app_information_authorities_function_state_on" = "An";
+
+"app_information_authorities_function_state_off" = "Aus";
+
 "app_information_version_label" = "Version %@";
 
 
@@ -491,3 +497,219 @@
 "error_scan_qrcode_cannot_be_parsed_message" = "Der QR-Code gehört nicht zu einem digitalen COVID-Zertifikat der EU. Sie erkennen das richtige Zertifikat in Deutschland daran, dass der Aussteller das Robert Koch-Institut ist.\n\nQR-Codes von zum Beispiel Impfbescheinigungen oder QR-Codes auf einigen Chargen-Aufklebern aus dem gelben Impfbuch können nicht hinzugefügt werden.";
 
 "error_scan_qrcode_cannot_be_parsed_button_title" = "OK";
+
+
+/********** revocation **********/
+
+"revocation_headline" = "Behördenfunktion";
+
+"revocation_copy" = "Bei Aktivierung dieser Funktion können Informationen zur Sperrung eines Zertifikats angezeigt werden. Dies ist nur für Behörden relevant. Lassen Sie diese Funktion im normalen Gebrauch deaktiviert.";
+
+"revocation_toggle_text" = "Informationen zur Sperrung anzeigen";
+
+"validation_check_popup_revoked_certificate_link_text" = "Informationen zur Sperrung anzeigen";
+
+"revocation_detail_page_title" = "Technische Details zum Zertifikat";
+
+"revocation_detail_page_button_text" = "PDF erstellen";
+
+"revocation_detail_page_transaction_number" = "Transaktionsnummer";
+
+"revocation_detail_page_key_reference" = "Schlüsselreferenz (KID)";
+
+"revocation_detail_page_r_value_signature" = "R-Wert-Signatur";
+
+"revocation_detail_page_country" = "Land";
+
+"revocation_detail_page_technical_expiry_date" = "Technisches Ablaufdatum";
+
+"revocation_detail_page_date_of_issuance" = "Ausstellungsdatum";
+
+"accessibility_revocation_detail_page_announce" = "Technische Details zum Zertifikat wurden geöffnet";
+
+"certificate_share_pdf_shareitem_android_covpasscheck" = "PDF speichern";
+
+
+/********** country list names **********/
+
+"IT" = "Italien";
+
+"LT" = "Litauen";
+
+"DK" = "Dänemark";
+
+"GR" = "Griechenland";
+
+"CZ" = "Tschechien";
+
+"HR" = "Kroatien";
+
+"IS" = "Island";
+
+"PT" = "Portugal";
+
+"PL" = "Polen";
+
+"BE" = "Belgien";
+
+"BG" = "Bulgarien";
+
+"DE" = "Deutschland";
+
+"LU" = "Luxemburg";
+
+"EE" = "Estland";
+
+"CY" = "Zypern";
+
+"ES" = "Spanien";
+
+"NL" = "Niederlande";
+
+"AT" = "Österreich";
+
+"LV" = "Lettland";
+
+"LI" = "Liechtenstein";
+
+"FI" = "Finnland";
+
+"SE" = "Schweden";
+
+"SI" = "Slowenien";
+
+"RO" = "Rumänien";
+
+"NO" = "Norwegen";
+
+"SK" = "Slowakei";
+
+"FR" = "Frankreich";
+
+"MT" = "Malta";
+
+"HU" = "Ungarn";
+
+"IE" = "Irland";
+
+"CH" = "Schweiz";
+
+"UA" = "Ukraine";
+
+"VA" = "Vatikanstadt";
+
+"SM" = "San Marino";
+
+"TR" = "Türkei";
+
+"MK" = "Nordmazedonien";
+
+"AD" = "Andorra";
+
+"MC" = "Monaco";
+
+"FO" = "Färöer-Inseln";
+
+"MA" = "Marokko";
+
+"AL" = "Albanien";
+
+"IL" = "Israel";
+
+"PA" = "Panama";
+
+"TG" = "Togo";
+
+"SG" = "Singapur";
+
+"GB" = "Großbritannien";
+
+"AM" = "Armenien";
+
+"GE" = "Georgien";
+
+"NZ" = "Neuseeland";
+
+"DZ" = "Algerien";
+
+"AZ" = "Aserbaidschan";
+
+"BH" = "Bahrain";
+
+"BJ" = "Benin";
+
+"BA" = "Bosnien und Herzegowina";
+
+"BR" = "Brasilien";
+
+"BI" = "Burundi";
+
+"CV" = "Kap Verde";
+
+"CA" = "Kanada";
+
+"CL" = "Chile";
+
+"CO" = "Kolumbien";
+
+"DO" = "Dominikanische Republik";
+
+"SV" = "El Salvador";
+
+"EG" = "Ägypten";
+
+"HK" = "Hongkong";
+
+"JP" = "Japan";
+
+"JO" = "Jordanien";
+
+"KZ" = "Kasachstan";
+
+"KE" = "Kenia";
+
+"KR" = "Republik Korea";
+
+"XK" = "Kosovo";
+
+"KW" = "Kuwait";
+
+"LB" = "Libanon";
+
+"MY" = "Malaysia";
+
+"MN" = "Mongolei";
+
+"ME" = "Montenegro";
+
+"MD" = "Moldawien";
+
+"RU" = "Russland";
+
+"RW" = "Ruanda";
+
+"RS" = "Serbien";
+
+"SD" = "Sudan";
+
+"TW" = "Taiwan";
+
+"TZ" = "Tansania";
+
+"TH" = "Thailand";
+
+"TN" = "Tunesien";
+
+"AE" = "Vereinte Arabische Emirate";
+
+"UG" = "Uganda";
+
+"US" = "Vereinigte Staaten von Amerika";
+
+"UY" = "Uruguay";
+
+"VN" = "Vietnam";
+
+"AR" = "Argentinien";
+
+"MX" = "Mexiko";

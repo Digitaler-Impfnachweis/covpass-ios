@@ -10,10 +10,10 @@ import UIKit
 import PromiseKit
 
 public protocol ValidationViewModel {
-    var resolvable: Resolver<CBORWebToken> { get set }
+    var resolvable: Resolver<ExtendedCBORWebToken> { get set }
     var router: ValidationResultRouterProtocol { get set }
     var repository: VaccinationRepositoryProtocol { get set }
-    var certificate: CBORWebToken? { get set }
+    var certificate: ExtendedCBORWebToken? { get set }
     var delegate: ResultViewModelDelegate? { get set }
     var toolbarState: CustomToolbarState { get }
     var icon: UIImage? { get }
@@ -23,6 +23,9 @@ public protocol ValidationViewModel {
     var info: String? { get }
     var buttonHidden: Bool { get set }
     var _2GContext: Bool { get set }
+    var linkIsHidden: Bool { get }
     var userDefaults: Persistence { get }
+    var revocationKeyFilename: String { get }
     func scanNextCertifcate()
+    func revocationButtonTapped()
 }

@@ -12,15 +12,15 @@ import Foundation
 import PromiseKit
 
 struct ValidationResultFactory {
-    static func createViewModel(resolvable: Resolver<CBORWebToken>,
+    static func createViewModel(resolvable: Resolver<ExtendedCBORWebToken>,
                                 router: ValidationResultRouterProtocol,
                                 repository: VaccinationRepositoryProtocol,
-                                certificate: CBORWebToken?,
+                                certificate: ExtendedCBORWebToken?,
                                 error: Error?,
                                 type: DCCCertLogic.LogicType = .eu,
                                 token: VAASValidaitonResultToken,
                                 userDefaults: Persistence) -> ValidationResultViewModel {
-        guard let cert = certificate, error == nil else {
+        guard let cert = certificate?.vaccinationCertificate, error == nil else {
             return ErrorResultViewModel(resolvable: resolvable,
                                         router: router,
                                         repository: repository,

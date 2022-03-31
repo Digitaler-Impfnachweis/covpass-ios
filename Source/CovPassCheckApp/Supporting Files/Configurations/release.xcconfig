@@ -36,3 +36,6 @@ DCC_DOMESTIC_RULES_FILE = dcc-domestic-rules.json
 
 BOOSTER_RULES_URL = https:/$()/distribution-cff4f7147260.dcc-rules.de/bnrules
 DOMESTIC_RULES_URL = https:/$()/distribution.dcc-rules.de/domesticrules
+
+// REVOCATION INFO EXPORT
+CERTIFICATE_REVOCATION_INFO_ENCRYPTION_KEY = revocation-mgmt-demo-pubkey.pem

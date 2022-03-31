@@ -17,10 +17,21 @@ private enum Constants {
 }
 
 extension ValidationViewModel {
+    
+    var linkIsHidden: Bool {
+        !userDefaults.revocationExpertMode || _2GContext
+    }
         
     var toolbarState: CustomToolbarState {
         let buttonText = _2GContext ? Constants.confirmButtonLabel2G : Constants.confirmButtonLabel
         return .confirm(buttonText)
+    }
+    
+    func revocationButtonTapped() {
+        guard let certificate = self.certificate else { return }
+        router
+            .showRevocation(token: certificate, keyFilename: revocationKeyFilename)
+            .cauterize()
     }
     
     func cancel() {
@@ -36,10 +47,9 @@ extension ValidationViewModel {
             try self.payloadFromScannerResult($0)
         }
         .then {
-            self.repository.checkCertificate($0)
+            self.repository.validCertificate($0)
         }
         .done { certificate in
-            
             if self._2GContext {
                 resolvable.fulfill(certificate)
                 return

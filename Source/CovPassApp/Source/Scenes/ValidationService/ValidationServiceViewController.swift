@@ -142,7 +142,9 @@ class ValidationServiceViewController: UIViewController {
     }
 
     @objc func cancel() {
-        viewModel.router.routeToWarning()
+        viewModel.router
+            .routeToWarning()
+            .cauterize()
     }
     
     @objc func accept() {

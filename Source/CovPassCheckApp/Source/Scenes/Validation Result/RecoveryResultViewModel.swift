@@ -15,10 +15,11 @@ class RecoveryResultViewModel: ValidationResultViewModel {
     // MARK: - Properties
 
     weak var delegate: ResultViewModelDelegate?
-    var resolvable: Resolver<CBORWebToken>
+    var resolvable: Resolver<ExtendedCBORWebToken>
     var router: ValidationResultRouterProtocol
     var repository: VaccinationRepositoryProtocol
-    var certificate: CBORWebToken?
+    var certificate: ExtendedCBORWebToken?
+    var revocationKeyFilename: String
 
     var icon: UIImage? {
         .resultSuccess
@@ -33,7 +34,7 @@ class RecoveryResultViewModel: ValidationResultViewModel {
     }
 
     var paragraphs: [Paragraph] {
-        guard let dgc = certificate?.hcert.dgc else {
+        guard let dgc = certificate?.vaccinationCertificate.hcert.dgc else {
             return []
         }
         return [
@@ -55,12 +56,13 @@ class RecoveryResultViewModel: ValidationResultViewModel {
     
     // MARK: - Lifecycle
 
-    init(resolvable: Resolver<CBORWebToken>,
-        router: ValidationResultRouterProtocol,
-        repository: VaccinationRepositoryProtocol,
-        certificate: CBORWebToken?,
-        _2GContext: Bool,
-        userDefaults: Persistence
+    init(resolvable: Resolver<ExtendedCBORWebToken>,
+         router: ValidationResultRouterProtocol,
+         repository: VaccinationRepositoryProtocol,
+         certificate: ExtendedCBORWebToken?,
+         _2GContext: Bool,
+         userDefaults: Persistence,
+         revocationKeyFilename: String
     ) {
         self.resolvable = resolvable
         self.router = router
@@ -68,5 +70,6 @@ class RecoveryResultViewModel: ValidationResultViewModel {
         self.certificate = certificate
         self._2GContext = _2GContext
         self.userDefaults = userDefaults
+        self.revocationKeyFilename = revocationKeyFilename
     }
 }

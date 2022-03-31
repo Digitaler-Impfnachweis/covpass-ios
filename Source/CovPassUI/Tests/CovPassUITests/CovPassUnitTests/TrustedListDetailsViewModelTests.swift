@@ -35,6 +35,9 @@ class TrustedListDetailsViewModelTests: XCTestCase {
     }
     
     func testPropertiesInitial() throws {
+        let userDefaults = UserDefaultsPersistence()
+        try userDefaults.delete(UserDefaults.keyLastUpdatedDCCRules)
+        try userDefaults.delete(UserDefaults.keyLastUpdatedTrustList)
         XCTAssertFalse(sut.isLoading)
         XCTAssertNotNil(sut.title)
         XCTAssertNil(sut.offlineMessageRules)
@@ -47,8 +50,9 @@ class TrustedListDetailsViewModelTests: XCTestCase {
     
     func testPropertiesWithLastUpdate() throws {
         // Given
-        certLogic.lastUpdateDccrRules = DateUtils.parseDate("2021-04-26T15:05:00")
-        vaccinationRepository.lastUpdateTrustList = DateUtils.parseDate("2021-04-26T15:05:00")
+        var userDefaults = UserDefaultsPersistence()
+        userDefaults.lastUpdatedDCCRules = DateUtils.parseDate("2021-04-26T15:05:00")
+        userDefaults.lastUpdatedTrustList = DateUtils.parseDate("2021-04-26T15:05:00")
 
         // Then
         XCTAssertFalse(sut.isLoading)

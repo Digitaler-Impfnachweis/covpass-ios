@@ -12,7 +12,7 @@ import Foundation
 
 class CheckAppInformationBaseViewModel: AppInformationBaseViewModel {
     override var entries: [AppInformationEntry] {
-        super.entries + [checkSituationEntry]
+        super.entries + [checkSituationEntry, revocationSettingsEntry]
     }
 
     private let userDefaults: Persistence
@@ -20,6 +20,12 @@ class CheckAppInformationBaseViewModel: AppInformationBaseViewModel {
         let checkSituationInfo = userDefaults.selectedLogicType.checkSituationInfo
         let scene = CheckSituationSceneFactory(contextType: .settings, userDefaults: userDefaults)
         return AppInformationEntry(title: LocalText.rulesTitle, scene: scene, rightTitle: checkSituationInfo)
+    }
+    private var revocationSettingsEntry: AppInformationEntry {
+        let rightTitle = userDefaults.revocationExpertMode ? LocalText.revocationHintOn : LocalText.revocationHintOff
+        let revocationSettingsRouter: RevocationSettingsRouter = RevocationSettingsRouter(sceneCoordinator: router.sceneCoordinator)
+        let scene = RevocationSettingsSceneFactory(router: revocationSettingsRouter, userDefaults: userDefaults)
+        return AppInformationEntry(title: LocalText.revocationTitle, scene: scene, rightTitle: rightTitle)
     }
 
     init(router:AppInformationRouterProtocol, entries: [AppInformationEntry], userDefaults: Persistence) {
@@ -71,6 +77,9 @@ class EnglishAppInformationViewModel: CheckAppInformationBaseViewModel {
 
 private enum LocalText {
     static let rulesTitle = "app_information_title_local_rules".localized
+    static let revocationTitle = "app_information_authorities_function_title".localized
+    static let revocationHintOn = "app_information_authorities_function_state_on".localized
+    static let revocationHintOff = "app_information_authorities_function_state_off".localized
 }
 
 private extension AppInformationEntry {

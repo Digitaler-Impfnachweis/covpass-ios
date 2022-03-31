@@ -74,64 +74,64 @@ class CertificateItemDetailViewModel: CertificateItemDetailViewModelProtocol {
         return DateUtils.displayIsoDateOfBirth(dgc)
     }
     
-    var items: [ContentItem] {
+    var items: [ListContentItem] {
         if let r = dgc.r?.first {
             return [
-                ContentItem("recovery_certificate_detail_view_data_name".localized, dgc.nam.fullNameReverse),
-                ContentItem("recovery_certificate_detail_view_data_name_standard".localized, dgc.nam.fullNameTransliteratedReverse),
-                ContentItem("recovery_certificate_detail_view_data_date_of_birth".localized, dob,
+                ListContentItem("recovery_certificate_detail_view_data_name".localized, dgc.nam.fullNameReverse),
+                ListContentItem("recovery_certificate_detail_view_data_name_standard".localized, dgc.nam.fullNameTransliteratedReverse),
+                ListContentItem("recovery_certificate_detail_view_data_date_of_birth".localized, dob,
                             accessibilityLabel(for: dob, label: "recovery_certificate_detail_view_data_date_of_birth".localized)),
-                ContentItem("recovery_certificate_detail_view_data_disease".localized, r.tgDisplayName),
-                ContentItem("recovery_certificate_detail_view_data_date_first_positive_result".localized, DateUtils.isoDateFormatter.string(from: r.fr),
+                ListContentItem("recovery_certificate_detail_view_data_disease".localized, r.tgDisplayName),
+                ListContentItem("recovery_certificate_detail_view_data_date_first_positive_result".localized, DateUtils.isoDateFormatter.string(from: r.fr),
                             accessibilityLabel(for: r.fr, label: "recovery_certificate_detail_view_data_date_first_positive_result".localized)),
-                ContentItem("recovery_certificate_detail_view_data_country".localized, countryLocalized(r)),
-                ContentItem("recovery_certificate_detail_view_data_issuer".localized, r.is),
-                ContentItem("recovery_certificate_detail_view_data_valid_from".localized, DateUtils.isoDateFormatter.string(from: r.df),
+                ListContentItem("recovery_certificate_detail_view_data_country".localized, countryLocalized(r)),
+                ListContentItem("recovery_certificate_detail_view_data_issuer".localized, r.is),
+                ListContentItem("recovery_certificate_detail_view_data_valid_from".localized, DateUtils.isoDateFormatter.string(from: r.df),
                             accessibilityLabel(for: r.df, label: "recovery_certificate_detail_view_data_valid_from".localized)),
-                ContentItem("recovery_certificate_detail_view_data_valid_until".localized, DateUtils.isoDateFormatter.string(from: r.du),
+                ListContentItem("recovery_certificate_detail_view_data_valid_until".localized, DateUtils.isoDateFormatter.string(from: r.du),
                             accessibilityLabel(for: r.du, label: "recovery_certificate_detail_view_data_valid_until".localized)),
-                ContentItem("recovery_certificate_detail_view_data_identifier".localized, r.ciDisplayName),
-                ContentItem("recovery_certificate_detail_view_data_expiry_date".localized, String(format: "\("recovery_certificate_detail_view_data_expiry_date_message".localized)\n\("recovery_certificate_detail_view_data_expiry_date_note".localized)", certificate.vaccinationCertificate.exp != nil ? DateUtils.displayDateTimeFormatter.string(from: certificate.vaccinationCertificate.exp!) : "") /* TODO: accessibility label */ )
+                ListContentItem("recovery_certificate_detail_view_data_identifier".localized, r.ciDisplayName),
+                ListContentItem("recovery_certificate_detail_view_data_expiry_date".localized, String(format: "\("recovery_certificate_detail_view_data_expiry_date_message".localized)\n\("recovery_certificate_detail_view_data_expiry_date_note".localized)", certificate.vaccinationCertificate.exp != nil ? DateUtils.displayDateTimeFormatter.string(from: certificate.vaccinationCertificate.exp!) : "") /* TODO: accessibility label */ )
             ]
         }
         if let t = dgc.t?.first {
             return [
-                ContentItem("test_certificate_detail_view_data_name".localized, dgc.nam.fullNameReverse),
-                ContentItem("test_certificate_detail_view_data_name_standard".localized, dgc.nam.fullNameTransliteratedReverse),
-                ContentItem("test_certificate_detail_view_data_date_of_birth".localized, dob,
+                ListContentItem("test_certificate_detail_view_data_name".localized, dgc.nam.fullNameReverse),
+                ListContentItem("test_certificate_detail_view_data_name_standard".localized, dgc.nam.fullNameTransliteratedReverse),
+                ListContentItem("test_certificate_detail_view_data_date_of_birth".localized, dob,
                             accessibilityLabel(for: dob, label: "test_certificate_detail_view_data_date_of_birth".localized)),
-                ContentItem("test_certificate_detail_view_data_disease".localized, t.tgDisplayName),
-                ContentItem("test_certificate_detail_view_data_test_type".localized, t.ttDisplayName),
-                ContentItem("test_certificate_detail_view_data_test_name".localized, t.nm ?? ""),
-                ContentItem("test_certificate_detail_view_data_test_manufactur".localized, t.maDisplayName ?? ""),
-                ContentItem("test_certificate_detail_view_data_test_date_and_time".localized, DateUtils.displayIsoDateTimeFormatter.string(from: t.sc),
+                ListContentItem("test_certificate_detail_view_data_disease".localized, t.tgDisplayName),
+                ListContentItem("test_certificate_detail_view_data_test_type".localized, t.ttDisplayName),
+                ListContentItem("test_certificate_detail_view_data_test_name".localized, t.nm ?? ""),
+                ListContentItem("test_certificate_detail_view_data_test_manufactur".localized, t.maDisplayName ?? ""),
+                ListContentItem("test_certificate_detail_view_data_test_date_and_time".localized, DateUtils.displayIsoDateTimeFormatter.string(from: t.sc),
                             accessibilityLabel(for: t.sc, label: "test_certificate_detail_view_data_test_date_and_time".localized, includesTime: true)),
-                ContentItem("test_certificate_detail_view_data_test_results".localized, t.trDisplayName),
-                ContentItem("test_certificate_detail_view_data_test_centre".localized, t.tc ?? ""),
-                ContentItem("test_certificate_detail_view_data_test_country".localized, countryLocalized(t)),
-                ContentItem("test_certificate_detail_view_data_test_issuer".localized, t.is),
-                ContentItem("test_certificate_detail_view_data_test_identifier".localized, t.ciDisplayName),
-                ContentItem("test_certificate_detail_view_data_expiry_date".localized,
+                ListContentItem("test_certificate_detail_view_data_test_results".localized, t.trDisplayName),
+                ListContentItem("test_certificate_detail_view_data_test_centre".localized, t.tc ?? ""),
+                ListContentItem("test_certificate_detail_view_data_test_country".localized, countryLocalized(t)),
+                ListContentItem("test_certificate_detail_view_data_test_issuer".localized, t.is),
+                ListContentItem("test_certificate_detail_view_data_test_identifier".localized, t.ciDisplayName),
+                ListContentItem("test_certificate_detail_view_data_expiry_date".localized,
                             String(format: "\("test_certificate_detail_view_data_expiry_date_message".localized)\n\("test_certificate_detail_view_data_expiry_date_note".localized)", certificate.vaccinationCertificate.exp != nil ? DateUtils.displayDateTimeFormatter.string(from: certificate.vaccinationCertificate.exp!) : "") /* TODO: accessibility label */ )
             ]
         }
         if let v = dgc.v?.first {
             return [
-                ContentItem("vaccination_certificate_detail_view_data_name".localized, dgc.nam.fullNameReverse),
-                ContentItem("vaccination_certificate_detail_view_data_name_standard".localized, dgc.nam.fullNameTransliteratedReverse),
-                ContentItem("vaccination_certificate_detail_view_data_date_of_birth".localized, dob,
+                ListContentItem("vaccination_certificate_detail_view_data_name".localized, dgc.nam.fullNameReverse),
+                ListContentItem("vaccination_certificate_detail_view_data_name_standard".localized, dgc.nam.fullNameTransliteratedReverse),
+                ListContentItem("vaccination_certificate_detail_view_data_date_of_birth".localized, dob,
                             accessibilityLabel(for: dob, label: "vaccination_certificate_detail_view_data_date_of_birth".localized)),
-                ContentItem("vaccination_certificate_detail_view_data_disease".localized, v.tgDisplayName),
-                ContentItem("vaccination_certificate_detail_view_data_vaccine".localized, v.map(key: v.mp, from: Bundle.commonBundle.url(forResource: "vaccine-medicinal-product", withExtension: "json")) ?? v.mp),
-                ContentItem("vaccination_certificate_detail_view_data_vaccine_type".localized, v.vpDisplayName),
-                ContentItem("vaccination_certificate_detail_view_data_vaccine_manufactur".localized, v.maDisplayName),
-                ContentItem("vaccination_certificate_detail_view_data_vaccine_number".localized, "\(v.dn) / \(v.sd)"),
-                ContentItem("vaccination_certificate_detail_view_data_vaccine_date_".localized, DateUtils.isoDateFormatter.string(from: v.dt),
+                ListContentItem("vaccination_certificate_detail_view_data_disease".localized, v.tgDisplayName),
+                ListContentItem("vaccination_certificate_detail_view_data_vaccine".localized, v.map(key: v.mp, from: Bundle.commonBundle.url(forResource: "vaccines-covid-19-names", withExtension: "json")) ?? v.mp),
+                ListContentItem("vaccination_certificate_detail_view_data_vaccine_type".localized, v.vpDisplayName),
+                ListContentItem("vaccination_certificate_detail_view_data_vaccine_manufactur".localized, v.maDisplayName),
+                ListContentItem("vaccination_certificate_detail_view_data_vaccine_number".localized, "\(v.dn) / \(v.sd)"),
+                ListContentItem("vaccination_certificate_detail_view_data_vaccine_date_".localized, DateUtils.isoDateFormatter.string(from: v.dt),
                             accessibilityLabel(for: v.dt, label: "vaccination_certificate_detail_view_data_vaccine_date_".localized)),
-                ContentItem("vaccination_certificate_detail_view_data_vaccine_country".localized, countryLocalized(v)),
-                ContentItem("vaccination_certificate_detail_view_data_vaccine_issuer".localized, v.is),
-                ContentItem("vaccination_certificate_detail_view_data_vaccine_identifier".localized, v.ciDisplayName),
-                ContentItem("vaccination_certificate_detail_view_data_expiry_date".localized,
+                ListContentItem("vaccination_certificate_detail_view_data_vaccine_country".localized, countryLocalized(v)),
+                ListContentItem("vaccination_certificate_detail_view_data_vaccine_issuer".localized, v.is),
+                ListContentItem("vaccination_certificate_detail_view_data_vaccine_identifier".localized, v.ciDisplayName),
+                ListContentItem("vaccination_certificate_detail_view_data_expiry_date".localized,
                             String(format: "\("vaccination_certificate_detail_view_data_expiry_date_message".localized)\n\("vaccination_certificate_detail_view_data_expiry_date_note".localized)", certificate.vaccinationCertificate.exp != nil ? DateUtils.displayDateTimeFormatter.string(from: certificate.vaccinationCertificate.exp!) : "" /* TODO: accessibility label */ ))
             ]
         }

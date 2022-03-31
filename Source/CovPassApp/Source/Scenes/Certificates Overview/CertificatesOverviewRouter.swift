@@ -12,12 +12,9 @@ import PromiseKit
 import Scanner
 import UIKit
 
-
-
 private enum Constants {
     enum Config {
         static let covpassCheckAppStoreURL = URL(string: "https://apps.apple.com/de/app/covpass-check/id1566140314")
-        static let covpassFaqUrl = URL(string: "https://www.digitaler-impfnachweis-app.de/en/faq")
     }
 }
 
@@ -122,8 +119,8 @@ class CertificatesOverviewRouter: CertificatesOverviewRouterProtocol, DialogRout
         }
     }
 
-    func toFaqWebsite() {
-        if let url = Constants.Config.covpassFaqUrl, UIApplication.shared.canOpenURL(url) {
+    func toFaqWebsite(_ url: URL) {
+        if UIApplication.shared.canOpenURL(url) {
             UIApplication.shared.open(url)
         }
     }
@@ -168,6 +165,15 @@ class CertificatesOverviewRouter: CertificatesOverviewRouterProtocol, DialogRout
         sceneCoordinator.present(
             CheckSituationResolvableSceneFactory(contextType: .information,
                                                  userDefaults: userDefaults)
+        )
+    }
+
+    func showCertificatesReissue(for cborWebTokens: [ExtendedCBORWebToken]) -> Promise<Void> {
+        sceneCoordinator.present(
+            ReissueStartSceneFactory(
+                router: ReissueStartRouter(sceneCoordinator: sceneCoordinator),
+                tokens: cborWebTokens
+            )
         )
     }
 }

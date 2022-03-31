@@ -56,11 +56,12 @@ class ErrorResultViewModel: ValidationResultViewModel {
     // MARK: - Properties
 
     weak var delegate: ResultViewModelDelegate?
-    var resolvable: Resolver<CBORWebToken>
+    var resolvable: Resolver<ExtendedCBORWebToken>
     var router: ValidationResultRouterProtocol
     var repository: VaccinationRepositoryProtocol
-    var certificate: CBORWebToken?
+    var certificate: ExtendedCBORWebToken?
     var error: Error
+    let revocationKeyFilename: String
 
     private var validationResultError: ValidationResultError {
         error as? ValidationResultError ?? .technical        
@@ -86,19 +87,26 @@ class ErrorResultViewModel: ValidationResultViewModel {
         nil
     }
     
+    var linkIsHidden: Bool {
+        let revocationExportModeIsDisabled = !userDefaults.revocationExpertMode
+        let isNotAnFunctionalError = !((error as? ValidationResultError) == .functional)
+        return revocationExportModeIsDisabled || isNotAnFunctionalError || _2GContext
+    }
+    
     var buttonHidden: Bool = false
     var _2GContext: Bool
     var userDefaults: Persistence
     
     // MARK: - Lifecycle
     
-    init(resolvable: Resolver<CBORWebToken>,
+    init(resolvable: Resolver<ExtendedCBORWebToken>,
          router: ValidationResultRouterProtocol,
          repository: VaccinationRepositoryProtocol,
-         certificate: CBORWebToken? = nil,
+         certificate: ExtendedCBORWebToken? = nil,
          error: Error,
          _2GContext: Bool,
-         userDefaults: Persistence) {
+         userDefaults: Persistence,
+         revocationKeyFilename: String) {
         self.resolvable = resolvable
         self.router = router
         self.repository = repository
@@ -106,5 +114,6 @@ class ErrorResultViewModel: ValidationResultViewModel {
         self.error = error
         self._2GContext = _2GContext
         self.userDefaults = userDefaults
+        self.revocationKeyFilename = revocationKeyFilename
     }
 }

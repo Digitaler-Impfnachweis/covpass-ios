@@ -19,8 +19,7 @@ final class PDFExportViewModel: PDFExportViewModelProtocol, CancellableViewModel
     let token: ExtendedCBORWebToken
     let resolver: Resolver<Void>
 
-    // lazy reference to exporter (and it's web view)
-    private lazy var exporter = SVGPDFExporter()
+    private let exporter: SVGPDFExportProtocol
 
     var title: String {
         "certificate_create_pdf_headline".localized
@@ -42,10 +41,12 @@ final class PDFExportViewModel: PDFExportViewModelProtocol, CancellableViewModel
 
     init(
         token: ExtendedCBORWebToken,
-        resolvable: Resolver<Void>
+        resolvable: Resolver<Void>,
+        exporter: SVGPDFExportProtocol
     ) {
         self.token = token
         resolver = resolvable
+        self.exporter = exporter
     }
 
     func generatePDF(completion: @escaping SVGPDFExporter.ExportHandler) {

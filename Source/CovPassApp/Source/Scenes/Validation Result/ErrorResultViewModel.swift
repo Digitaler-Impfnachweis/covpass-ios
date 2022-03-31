@@ -21,12 +21,13 @@ class ErrorResultViewModel: ValidationResultViewModel {
     // MARK: - Properties
     
     weak var delegate: ResultViewModelDelegate?
-    var resolvable: Resolver<CBORWebToken>
+    var resolvable: Resolver<ExtendedCBORWebToken>
     var router: ValidationResultRouterProtocol
     var repository: VaccinationRepositoryProtocol
-    var certificate: CBORWebToken?
+    var certificate: ExtendedCBORWebToken?
     var token: VAASValidaitonResultToken?
     var error: Error
+    let revocationKeyFilename = ""
     
     private var validationResultError: ValidationResultError {
         error as? ValidationResultError ?? .technical
@@ -85,10 +86,10 @@ class ErrorResultViewModel: ValidationResultViewModel {
     
     // MARK: - Lifecycle
     
-    init(resolvable: Resolver<CBORWebToken>,
+    init(resolvable: Resolver<ExtendedCBORWebToken>,
          router: ValidationResultRouterProtocol,
          repository: VaccinationRepositoryProtocol,
-         certificate: CBORWebToken? = nil,
+         certificate: ExtendedCBORWebToken? = nil,
          error: Error,
          token: VAASValidaitonResultToken?,
          userDefaults: Persistence) {

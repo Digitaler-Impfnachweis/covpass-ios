@@ -11,14 +11,20 @@ import CertLogic
 
 public protocol DCCCertLogicProtocol {
     var countries: [Country] { get }
-    func lastUpdatedDCCRules() -> Date?
     func validate(type: DCCCertLogic.LogicType,
                   countryCode: String,
                   validationClock: Date,
                   certificate: CBORWebToken) throws -> [ValidationResult]
     func updateRulesIfNeeded() -> Promise<Void>
     func updateRules() -> Promise<Void>
-    func updateBoosterRules() -> Promise<Void>
+    mutating func updateBoosterRules() -> Promise<Void>
+    mutating func updateBoosterRulesIfNeeded() -> Promise<Void>
+    func updateValueSets() -> Promise<Void>
+    func updateValueSetsIfNeeded() -> Promise<Void>
     func rulesShouldBeUpdated() -> Promise<Bool>
     func rulesShouldBeUpdated() -> Bool
+    func boosterRulesShouldBeUpdated() -> Promise<Bool>
+    func boosterRulesShouldBeUpdated() -> Bool
+    func valueSetsShouldBeUpdated() -> Promise<Bool>
+    func valueSetsShouldBeUpdated() -> Bool
 }

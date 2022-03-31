@@ -38,3 +38,7 @@ DCC_DOMESTIC_RULES_FILE = dcc-domestic-rules.json
 
 BOOSTER_RULES_URL = https:/$()/distribution.dcc-rules.de/bnrules
 DOMESTIC_RULES_URL = https:/$()/distribution.dcc-rules.de/domesticrules
+
+// CERTIFICATE REISSUE
+CERTIFICATE_REISSUE_URL = https:/$()/api.reissue.ubirch.com
+CERTIFICATE_REISSUE_PINNING_HASHES = ab0b70216c80024e7ed798c305256293e7be0b283b96451fca104c27caab1777

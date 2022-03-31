@@ -19,6 +19,18 @@ class StringExtensionTests: XCTestCase {
         XCTAssertEqual(" HC1:ABC123".stripPrefix(), " HC1:ABC123")
     }
 
+    func testAddPrefix() {
+        // Given
+        let sut = " ABCHC1:1345\n"
+        let expectedString = "HC1:" + sut
+
+        // When
+        let prefixedString = sut.addPrefix()
+
+        // Then
+        XCTAssertEqual(prefixedString, expectedString)
+    }
+
     func testUVCIRemoval() {
         XCTAssertEqual("URN:UVCI:01:NL:187/37512422923".stripUVCIPrefix(), "01:NL:187/37512422923")
         XCTAssertEqual("URN:UVCI:01:AT:10807843F94AEE0EE5093FBC254BD813#B".stripUVCIPrefix(),

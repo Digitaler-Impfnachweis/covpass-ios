@@ -416,9 +416,52 @@ class CertificateDetailViewControllerSnapshotTests: BaseSnapShotTests {
         let vc = CertificateDetailViewController(viewModel: vm)
         verifyView(view: vc.view, height: 1100)
     }
+    
+    var singleDoseImmunizationJohnsonCert = CBORWebToken.mockVaccinationCertificate
+        .mockVaccinationUVCI("1")
+        .medicalProduct(.johnsonjohnson)
+        .doseNumber(1)
+        .seriesOfDoses(1)
+        .extended(vaccinationQRCodeData: "1")
+    var vaccinationWithTwoShotsOfVaccine = CBORWebToken.mockVaccinationCertificate
+        .mockVaccinationUVCI("2")
+        .medicalProduct(.biontech)
+        .doseNumber(2)
+        .seriesOfDoses(2)
+        .extended(vaccinationQRCodeData: "2")
+    
+    func testCertificateDetail_ShowReissueNotification() {
+        let certs = [singleDoseImmunizationJohnsonCert, vaccinationWithTwoShotsOfVaccine]
+        let bl = BoosterLogic.init(certLogic: DCCCertLogicMock(),
+                                   userDefaults: MockPersistence())
+        let vm = CertificateDetailViewModel(router: CertificateDetailRouterMock(),
+                                            repository: VaccinationRepositoryMock(),
+                                            boosterLogic: bl,
+                                            certificates: certs,
+                                            resolvable: nil)
+        let vc = CertificateDetailViewController(viewModel: vm)
+        verifyView(view: vc.view, height: 1100)
+    }
+    
+    func testCertificateDetail_ShowReissueNotification_NewBadgeAlreadySeen() {
+        singleDoseImmunizationJohnsonCert.reissueProcessNewBadgeAlreadySeen = true
+        let certs = [singleDoseImmunizationJohnsonCert, vaccinationWithTwoShotsOfVaccine]
+        let bl = BoosterLogic.init(certLogic: DCCCertLogicMock(),
+                                   userDefaults: MockPersistence())
+        let vm = CertificateDetailViewModel(router: CertificateDetailRouterMock(),
+                                            repository: VaccinationRepositoryMock(),
+                                            boosterLogic: bl,
+                                            certificates: certs,
+                                            resolvable: nil)
+        let vc = CertificateDetailViewController(viewModel: vm)
+        verifyView(view: vc.view, height: 1100)
+    }
 }
 
 struct CertificateDetailRouterMock: CertificateDetailRouterProtocol {
+    
+    let expectationShowReissue = XCTestExpectation(description: "expectationShowReissue")
+    
     func showCertificate(for token: ExtendedCBORWebToken) -> Promise<Void> {
         .value
     }
@@ -429,6 +472,11 @@ struct CertificateDetailRouterMock: CertificateDetailRouterProtocol {
 
     func showWebview(_ url: URL) {
         
+    }
+
+    func showReissue(for tokens: [ExtendedCBORWebToken]) -> Promise<Void> {
+        expectationShowReissue.fulfill()
+        return .value
     }
 
     var sceneCoordinator: SceneCoordinator = SceneCoordinatorMock()

@@ -14,15 +14,20 @@ import PromiseKit
 class ValidatorOverviewSnapShotTests: BaseSnapShotTests {
     
     func viewController(lastUpdateTrustList: Date? = nil,
-                        currentDate: Date = Date(),
+                        shouldTrustListUpdate: Bool = true,
                         ntpDate: Date = Date(),
                         ntpOffset: TimeInterval = 0.0,
                         logicType: DCCCertLogic.LogicType = .de) -> ValidatorOverviewViewController {
         let certLogicMock = DCCCertLogicMock()
         let vaccinationRepoMock = VaccinationRepositoryMock()
         var userDefaults = UserDefaultsPersistence()
-        vaccinationRepoMock.lastUpdateTrustList = lastUpdateTrustList
-        vaccinationRepoMock.currentDate = currentDate
+        if let lastUpdateTrustList = lastUpdateTrustList {
+            userDefaults.lastUpdatedTrustList = lastUpdateTrustList
+        } else {
+            try? userDefaults.delete(UserDefaults.keyLastUpdatedTrustList)
+        }
+        try? userDefaults.delete(UserDefaults.keyLastUpdatedDCCRules)
+        vaccinationRepoMock.shouldTrustListUpdate = shouldTrustListUpdate
         userDefaults.selectedLogicType = logicType
         let vm = ValidatorOverviewViewModel(router: ValidatorMockRouter(),
                                             repository: vaccinationRepoMock,
@@ -54,7 +59,7 @@ class ValidatorOverviewSnapShotTests: BaseSnapShotTests {
     
     func testOfflineModeAvailable() {
         let vc = self.viewController(lastUpdateTrustList: DateUtils.parseDate("2021-04-26T15:05:00"),
-                                     currentDate: DateUtils.parseDate("2021-04-26T13:05:00")!)
+                                     shouldTrustListUpdate: false)
         verifyView(vc: vc)
     }
     

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -15,6 +15,7 @@
                 <outlet property="imageContainerView" destination="gbm-mz-STE" id="gDi-l3-DRz"/>
                 <outlet property="imageView" destination="YG1-hQ-PYs" id="d0f-aY-Yq1"/>
                 <outlet property="infoView" destination="l0H-jd-CpU" id="m9b-cl-1eB"/>
+                <outlet property="linkExpertMode" destination="uG2-4C-nfC" id="8Ij-HT-KS3"/>
                 <outlet property="paragraphStackView" destination="Ba0-Bt-Y6p" id="0WS-As-LOh"/>
                 <outlet property="resultView" destination="Bik-p2-0B1" id="3rP-d2-Rbr"/>
                 <outlet property="stackView" destination="Yk1-DY-91Y" id="6vM-qh-eDf"/>
@@ -31,11 +32,11 @@
                     <rect key="frame" x="0.0" y="64" width="414" height="60"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                 </view>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JkM-ga-acx">
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JkM-ga-acx">
                     <rect key="frame" x="0.0" y="124" width="414" height="642"/>
                     <subviews>
-                        <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Yk1-DY-91Y">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="656"/>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Yk1-DY-91Y">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="776"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="gbm-mz-STE">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="150"/>
@@ -53,15 +54,32 @@
                                     <rect key="frame" x="0.0" y="150" width="414" height="128"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 </view>
-                                <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Ba0-Bt-Y6p">
+                                <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="200" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Ba0-Bt-Y6p">
                                     <rect key="frame" x="0.0" y="278" width="414" height="200"/>
                                 </stackView>
-                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="l0H-jd-CpU" userLabel="Info View" customClass="PlainLabel" customModule="CovPassUI">
+                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="l0H-jd-CpU" userLabel="Info View" customClass="PlainLabel" customModule="CovPassUI">
                                     <rect key="frame" x="0.0" y="478" width="414" height="128"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 </view>
-                                <view contentMode="scaleToFill" verticalHuggingPriority="1" ambiguous="YES" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="Ghi-eu-wWd" userLabel="Flexible View">
-                                    <rect key="frame" x="0.0" y="606" width="414" height="50"/>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LGD-vw-f49">
+                                    <rect key="frame" x="0.0" y="606" width="414" height="120"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uG2-4C-nfC">
+                                            <rect key="frame" x="24" y="8" width="70" height="104"/>
+                                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="8" maxY="0.0"/>
+                                            <state key="normal" title="Button" image="chevron_right"/>
+                                        </button>
+                                    </subviews>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <constraints>
+                                        <constraint firstItem="uG2-4C-nfC" firstAttribute="leading" secondItem="LGD-vw-f49" secondAttribute="leading" constant="24" id="SiH-kC-kF8"/>
+                                        <constraint firstAttribute="bottom" secondItem="uG2-4C-nfC" secondAttribute="bottom" constant="8" id="WbR-ld-35k"/>
+                                        <constraint firstItem="uG2-4C-nfC" firstAttribute="top" secondItem="LGD-vw-f49" secondAttribute="top" constant="8" id="YCn-J5-5qj"/>
+                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="uG2-4C-nfC" secondAttribute="trailing" constant="24" id="ehi-v8-rvS"/>
+                                    </constraints>
+                                </view>
+                                <view contentMode="scaleToFill" verticalHuggingPriority="1" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="Ghi-eu-wWd" userLabel="Flexible View">
+                                    <rect key="frame" x="0.0" y="726" width="414" height="50"/>
                                 </view>
                             </subviews>
                         </stackView>
@@ -110,8 +128,12 @@
         <designable name="a6B-vC-85H">
             <size key="intrinsicContentSize" width="240" height="56"/>
         </designable>
+        <designable name="l0H-jd-CpU">
+            <size key="intrinsicContentSize" width="414" height="128"/>
+        </designable>
     </designables>
     <resources>
+        <image name="chevron_right" width="24" height="24"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

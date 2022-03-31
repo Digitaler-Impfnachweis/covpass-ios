@@ -6,11 +6,13 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
+import CovPassCommon
 import Foundation
 import PromiseKit
 import Scanner
 
 public struct ValidationResultRouter: ValidationResultRouterProtocol {
+    
     // MARK: - Properties
     
     public let sceneCoordinator: SceneCoordinator
@@ -33,6 +35,16 @@ public struct ValidationResultRouter: ValidationResultRouterProtocol {
                 cameraAccessProvider: CameraAccessProvider(
                     router: DialogRouter(sceneCoordinator: sceneCoordinator)
                 )
+            )
+        )
+    }
+    
+    public func showRevocation(token: ExtendedCBORWebToken, keyFilename: String) -> Promise<Void> {
+        sceneCoordinator.present(
+            RevocationInfoSceneFactory(
+                keyFilename: keyFilename,
+                router: RevocationInfoRouter(sceneCoordinator: sceneCoordinator),
+                token: token
             )
         )
     }

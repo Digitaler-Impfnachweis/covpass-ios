@@ -12,12 +12,40 @@ import CertLogic
 
 class DCCCertLogicMock: DCCCertLogicProtocol {
     
-    var lastUpdateDccrRules: Date?
-    
+    var rulesShouldUpdate: Bool = true
+
     var countries: [Country] = [
         Country("DE")
     ]
-
+    
+    func updateBoosterRulesIfNeeded() -> Promise<Void> {
+        .value
+    }
+    
+    func updateValueSets() -> Promise<Void> {
+        .value
+    }
+    
+    func updateValueSetsIfNeeded() -> Promise<Void> {
+        .value
+    }
+    
+    func boosterRulesShouldBeUpdated() -> Promise<Bool> {
+        .value(boosterRulesShouldBeUpdated())
+    }
+    
+    func boosterRulesShouldBeUpdated() -> Bool {
+        true
+    }
+    
+    func valueSetsShouldBeUpdated() -> Promise<Bool> {
+        .value(valueSetsShouldBeUpdated())
+    }
+    
+    func valueSetsShouldBeUpdated() -> Bool {
+        true
+    }
+    
     func updateBoosterRules() -> Promise<Void> {
         .value
     }
@@ -27,17 +55,7 @@ class DCCCertLogicMock: DCCCertLogicProtocol {
     }
     
     public func rulesShouldBeUpdated() -> Bool {
-        if let lastUpdated = self.lastUpdatedDCCRules(),
-           let date = Calendar.current.date(byAdding: .day, value: 1, to: lastUpdated),
-           Date() < date
-        {
-            return false
-        }
-        return true
-    }
-    
-    func lastUpdatedDCCRules() -> Date? {
-        lastUpdateDccrRules
+        rulesShouldUpdate
     }
 
     var validationError: Error?

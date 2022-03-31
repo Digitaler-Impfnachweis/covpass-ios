@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>CERTIFICATE_REVOCATION_INFO_ENCRYPTION_KEY</key>
+	<string>$(CERTIFICATE_REVOCATION_INFO_ENCRYPTION_KEY)</string>
 	<key>API_URL</key>
 	<string>$(API_URL)</string>
 	<key>BOOSTER_RULES_URL</key>

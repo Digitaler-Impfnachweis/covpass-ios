@@ -17,6 +17,19 @@ class AppInformationViewControllerSnapShotTests: BaseSnapShotTests {
             userDefaults: UserDefaultsPersistence()
         )
         UserDefaults.standard.set(nil, forKey: UserDefaults.keySelectedLogicType)
+        UserDefaults.standard.set(nil, forKey: UserDefaults.keyRevocationExpertMode)
+        let vc = AppInformationViewController(viewModel: vm)
+        verifyView(vc: vc)
+    }
+    
+    func testDefaultAlternative() {
+        var persistence = UserDefaultsPersistence()
+        let vm = EnglishAppInformationViewModel(
+            router: AppInformationRouterMock(),
+            userDefaults: persistence
+        )
+        persistence.selectedLogicType = .eu
+        persistence.revocationExpertMode = true
         let vc = AppInformationViewController(viewModel: vm)
         verifyView(vc: vc)
     }

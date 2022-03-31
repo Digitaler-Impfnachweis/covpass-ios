@@ -30,7 +30,8 @@ class CertificateDetailViewController: UIViewController {
     @IBOutlet var immunizationView: ParagraphView!
     @IBOutlet var immunizationButtonContainerView: UIStackView!
     @IBOutlet var immunizationButton: MainButton!
-    @IBOutlet var hintView: HintView!
+    @IBOutlet var reissueHintView: HintButton!
+    @IBOutlet var boosterHintView: HintView!
     @IBOutlet var personalDataHeadline: PlainLabel!
     @IBOutlet var allCertificatesHeadline: PlainLabel!
     @IBOutlet var nameView: ParagraphView!
@@ -58,6 +59,7 @@ class CertificateDetailViewController: UIViewController {
         setupView()
         viewModel.refresh()
         viewModel.updateBoosterCandiate()
+        viewModel.updateReissueCandidate(to: true)
     }
 
     // MARK: - Methods
@@ -69,6 +71,7 @@ class CertificateDetailViewController: UIViewController {
         setupHeadline()
         setupImmunizationView()
         setupBoosterHintView()
+        setupReissueHintView()
         setupPersonalData()
         setupScanHintView()
         setupCertificates()
@@ -124,19 +127,32 @@ class CertificateDetailViewController: UIViewController {
         }
         stackView.setCustomSpacing(.space_24, after: immunizationButtonContainerView)
     }
-
+    
+    private func setupReissueHintView() {
+        reissueHintView.isHidden = !viewModel.showReissueNotification
+        reissueHintView.topRightLabel.text = viewModel.reissueNotificationHighlightText
+        reissueHintView.topRightLabel.isHidden = !viewModel.reissueNew
+        reissueHintView.containerView.backgroundColor = .neutralWhite
+        reissueHintView.containerView?.layer.borderColor = UIColor.neutralWhite.cgColor
+        reissueHintView.titleLabel.attributedText = viewModel.reissueNotificationTitle.styledAs(.header_3)
+        reissueHintView.bodyTextView.attributedText = viewModel.reissueNotificationBody.styledAs(.body)
+        reissueHintView.button.title = viewModel.reissueButtonTitle
+        reissueHintView.button.style = .alternative
+        reissueHintView.button.action = viewModel.triggerReissue
+    }
+    
     private func setupBoosterHintView() {
-        hintView.isHidden = !viewModel.showBoosterNotification
+        boosterHintView.isHidden = !viewModel.showBoosterNotification
 
-        hintView.iconView.image = nil
-        hintView.iconLabel.text = viewModel.boosterNotificationHighlightText
-        hintView.iconLabel.isHidden = !viewModel.showNewBoosterNotification
-        hintView.containerView.backgroundColor = .neutralWhite
-        hintView.containerView?.layer.borderColor = UIColor.neutralWhite.cgColor
+        boosterHintView.iconView.image = nil
+        boosterHintView.iconLabel.text = viewModel.boosterNotificationHighlightText
+        boosterHintView.iconLabel.isHidden = !viewModel.showNewBoosterNotification
+        boosterHintView.containerView.backgroundColor = .neutralWhite
+        boosterHintView.containerView?.layer.borderColor = UIColor.neutralWhite.cgColor
 
-        hintView.titleLabel.attributedText = viewModel.boosterNotificationTitle.styledAs(.header_3)
-        hintView.bodyLabel.attributedText = viewModel.boosterNotificationBody.styledAs(.body)
-        hintView.bodyLabel.linkCallback = { [weak self] url in
+        boosterHintView.titleLabel.attributedText = viewModel.boosterNotificationTitle.styledAs(.header_3)
+        boosterHintView.bodyLabel.attributedText = viewModel.boosterNotificationBody.styledAs(.body)
+        boosterHintView.bodyLabel.linkCallback = { [weak self] url in
             self?.viewModel.router.showWebview(url)
         }
     }

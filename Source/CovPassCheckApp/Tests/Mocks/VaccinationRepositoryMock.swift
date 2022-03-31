@@ -12,6 +12,11 @@ import Foundation
 public class VaccinationRepositoryMock: VaccinationRepositoryProtocol {
     
     var lastUpdateTrustList: Date?
+    var shouldTrustListUpdate: Bool = false
+
+    public func trustListShouldBeUpdated() -> Bool {
+        shouldTrustListUpdate
+    }
 
     public func updateTrustListIfNeeded() -> Promise<Void> {
         Promise.value
@@ -23,18 +28,6 @@ public class VaccinationRepositoryMock: VaccinationRepositoryProtocol {
     
     public func trustListShouldBeUpdated() -> Promise<Bool> {
         .value(trustListShouldBeUpdated())
-    }
-    
-    var currentDate = Date()
-    
-    public func trustListShouldBeUpdated() -> Bool {
-        if let lastUpdated = self.getLastUpdatedTrustList(),
-           let date = Calendar.current.date(byAdding: .day, value: 1, to: lastUpdated),
-           currentDate < date
-        {
-            return false
-        }
-        return true
     }
     
     public func getLastUpdatedTrustList() -> Date? {
@@ -56,6 +49,10 @@ public class VaccinationRepositoryMock: VaccinationRepositoryProtocol {
         Promise.value(CertificateList(certificates: []))
     }
 
+    public func add(tokens: [ExtendedCBORWebToken]) -> Promise<Void> {
+        .value
+    }
+
     public func delete(_: ExtendedCBORWebToken) -> Promise<Void> {
         .value
     }
@@ -66,15 +63,21 @@ public class VaccinationRepositoryMock: VaccinationRepositoryProtocol {
         return .value(favoriteToggle)
     }
 
-    public func setExpiryAlert(shown _: Bool, token _: ExtendedCBORWebToken) -> Promise<Void> {
+    public func setExpiryAlert(shown _: Bool, tokens _: [ExtendedCBORWebToken]) -> Promise<Void> {
         Promise.value
     }
-
+    
+    public func setReissueProcess(initialAlreadySeen: Bool,
+                                  newBadgeAlreadySeen: Bool,
+                                  tokens: [ExtendedCBORWebToken]) -> Promise<Void> {
+        return .value
+    }
+    
     public func favoriteStateForCertificates(_: [ExtendedCBORWebToken]) -> Promise<Bool> {
         .value(favoriteToggle)
     }
 
-    public func scanCertificate(_ data: String, isCountRuleEnabled: Bool) -> Promise<QRCodeScanable> {
+    public func scanCertificate(_ data: String, isCountRuleEnabled: Bool, expirationRuleIsActive: Bool) -> Promise<QRCodeScanable> {
         return Promise { seal in
             seal.reject(ApplicationError.unknownError)
         }
@@ -87,5 +90,16 @@ public class VaccinationRepositoryMock: VaccinationRepositoryProtocol {
         return Promise { seal in
             checkedCert != nil ? seal.fulfill(checkedCert!) : seal.reject(checkedCertError)
         }
+    }
+
+    public func validCertificate(_ data: String) -> Promise<ExtendedCBORWebToken> {
+        checkedCert != nil ?
+            .value(
+                ExtendedCBORWebToken(
+                    vaccinationCertificate: checkedCert!,
+                    vaccinationQRCodeData: ""
+                )
+            ) :
+            .init(error: checkedCertError)
     }
 }

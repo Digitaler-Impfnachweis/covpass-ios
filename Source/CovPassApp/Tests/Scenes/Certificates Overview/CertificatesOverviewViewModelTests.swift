@@ -25,7 +25,8 @@ class CertificatesOverviewViewModelTests: XCTestCase {
                                             repository: vaccinationRepository,
                                             certLogic: DCCCertLogicMock(),
                                             boosterLogic: BoosterLogicMock(),
-                                            userDefaults: userDefaults)
+                                            userDefaults: userDefaults,
+                                            locale: .current)
     }
     
     override func tearDownWithError() throws {
@@ -44,7 +45,7 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         vaccinationRepository.certificates = certs
         
         // WHEN
-        sut.refresh()
+        _ = sut.refresh()
         RunLoop.current.run(for: 0.1)
         
         guard let model = (sut.certificateViewModels.first as? CertificateCardViewModelProtocol) else {
@@ -76,7 +77,7 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         vaccinationRepository.certificates = certs
         
         // WHEN
-        sut.refresh()
+        _ = sut.refresh()
         RunLoop.current.run(for: 0.1)
         
         guard let model = (sut.certificateViewModels.first as? CertificateCardViewModelProtocol) else {
@@ -107,7 +108,7 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         vaccinationRepository.certificates = certs
         
         // WHEN
-        sut.refresh()
+        _ = sut.refresh()
         RunLoop.current.run(for: 0.1)
         
         guard let model = (sut.certificateViewModels.first as? CertificateCardViewModelProtocol) else {
@@ -139,7 +140,7 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         vaccinationRepository.certificates = certs
         
         // WHEN
-        sut.refresh()
+        _ = sut.refresh()
         RunLoop.current.run(for: 0.1)
         
         guard let model = (sut.certificateViewModels.first as? CertificateCardViewModelProtocol) else {
@@ -170,7 +171,7 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         vaccinationRepository.certificates = certs
         
         // WHEN
-        sut.refresh()
+        _ = sut.refresh()
         RunLoop.current.run(for: 0.1)
         
         guard let model = (sut.certificateViewModels.first as? CertificateCardViewModelProtocol) else {
@@ -202,7 +203,7 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         vaccinationRepository.certificates = certs
         
         // WHEN
-        sut.refresh()
+        _ = sut.refresh()
         RunLoop.current.run(for: 0.1)
         
         guard let model = (sut.certificateViewModels.first as? CertificateCardViewModelProtocol) else {
@@ -234,7 +235,7 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         vaccinationRepository.certificates = certs
         
         // WHEN
-        sut.refresh()
+        _ = sut.refresh()
         RunLoop.current.run(for: 0.1)
         
         guard let model = (sut.certificateViewModels.first as? CertificateCardViewModelProtocol) else {
@@ -265,7 +266,8 @@ class CertificatesOverviewViewModelTests: XCTestCase {
             repository: vaccinationRepository,
             certLogic: DCCCertLogicMock(),
             boosterLogic: BoosterLogicMock(),
-            userDefaults: userDefaults
+            userDefaults: userDefaults,
+            locale: .current
         )
         
         // When
@@ -276,6 +278,54 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         XCTAssertEqual(userDefaults.onboardingSelectedLogicTypeAlreadySeen, true)
     }
 
+    func testShowNotificationsIfNeeded_showCertificatesReissueIfNeeded_shown() throws {
+        let singleDoseImmunizationJohnsonCert = CBORWebToken.mockVaccinationCertificate
+            .mockVaccinationUVCI("1")
+            .medicalProduct(.biontech)
+            .doseNumber(1)
+            .seriesOfDoses(1)
+            .mockName(Name(gn: "Foo", fn: "Bar", gnt: "Foo", fnt: "Bar"))
+            .extended(vaccinationQRCodeData: "1")
+        let doubleDoseImmunizationJohnsonCert = CBORWebToken.mockVaccinationCertificate
+            .mockVaccinationUVCI("1")
+            .medicalProduct(.biontech)
+            .doseNumber(2)
+            .seriesOfDoses(2)
+            .mockName(Name(gn: "Foo", fn: "Bar", gnt: "Foo", fnt: "Bar"))
+            .extended(vaccinationQRCodeData: "1")
+        let singleDoseImmunizationJohnsonCertAlternativePerson = CBORWebToken.mockVaccinationCertificate
+            .mockVaccinationUVCI("2")
+            .medicalProduct(.biontech)
+            .doseNumber(1)
+            .seriesOfDoses(1)
+            .extended(vaccinationQRCodeData: "2")
+        let doubleDoseImmunizationJohnsonCertAlternativePerson = CBORWebToken.mockVaccinationCertificate
+            .mockVaccinationUVCI("2")
+            .medicalProduct(.biontech)
+            .doseNumber(2)
+            .seriesOfDoses(2)
+            .extended(vaccinationQRCodeData: "2")
+        
+        // Given
+        let router = CertificatesOverviewRouterMock()
+        router.showCertificatesReissueExpectation.expectedFulfillmentCount = 2
+        configureSutAndRepository(
+            with: router,
+            certificates: [
+                singleDoseImmunizationJohnsonCert,
+                doubleDoseImmunizationJohnsonCert,
+                singleDoseImmunizationJohnsonCertAlternativePerson,
+                doubleDoseImmunizationJohnsonCertAlternativePerson
+            ]
+        )
+
+        // When
+        sut.showNotificationsIfNeeded()
+
+        // Then
+        wait(for: [router.showCertificatesReissueExpectation], timeout: 4)
+    }
+
     func testRefresh_expiry_notification_token_is_valid() throws {
         // Given
         let router = CertificatesOverviewRouterMock()
@@ -283,7 +333,7 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         router.showDialogExpectation.isInverted = true
 
         // When
-        sut.refresh()
+        _ = sut.refresh()
 
         // Then
         wait(for: [router.showDialogExpectation], timeout: 2)
@@ -296,7 +346,9 @@ class CertificatesOverviewViewModelTests: XCTestCase {
             repository: vaccinationRepository,
             certLogic: DCCCertLogicMock(),
             boosterLogic: BoosterLogicMock(),
-            userDefaults: userDefaults)
+            userDefaults: userDefaults,
+            locale: .current
+        )
     }
 
     func testRefresh_expiry_notification_token_is_test() throws {
@@ -306,7 +358,7 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         router.showDialogExpectation.isInverted = true
 
         // When
-        sut.refresh()
+        _ = sut.refresh()
 
         // Then
         wait(for: [router.showDialogExpectation], timeout: 2)
@@ -318,7 +370,7 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         configureSutAndRepository(with: router, certificates: [.invalid])
 
         // When
-        sut.refresh()
+        _ = sut.refresh()
 
         // Then
         wait(for: [router.showDialogExpectation], timeout: 2)
@@ -330,7 +382,7 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         configureSutAndRepository(with: router, certificates: [.expired])
 
         // When
-        sut.refresh()
+        _ = sut.refresh()
 
         // Then
         wait(for: [router.showDialogExpectation], timeout: 2)
@@ -342,7 +394,7 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         configureSutAndRepository(with: router, certificates: [.expiresSoon])
 
         // When
-        sut.refresh()
+        _ = sut.refresh()
 
         // Then
         wait(for: [router.showDialogExpectation], timeout: 2)
@@ -357,7 +409,7 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         router.showDialogExpectation.isInverted = true
 
         // When
-        sut.refresh()
+        _ = sut.refresh()
 
         // Then
         wait(for: [router.showDialogExpectation], timeout: 2)
@@ -375,7 +427,7 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         configureSutAndRepository(with: router, certificates: tokens)
 
         // When
-        sut.refresh()
+        _ = sut.refresh()
 
         // Then
         wait(for: [router.showDialogExpectation], timeout: 2)
@@ -390,13 +442,13 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         configureSutAndRepository(with: router, certificates: tokens)
 
         // When
-        sut.refresh()
+        _ = sut.refresh()
 
         // Then
         wait(for: [vaccinationRepository.setExpiryAlertExpectation], timeout: 2)
         let value = try XCTUnwrap(vaccinationRepository.setExpiryAlertValue)
         XCTAssertTrue(value.shown)
-        XCTAssertEqual(value.token, tokens[0])
+        XCTAssertEqual(value.token.first, tokens[0])
     }
 
     func testRefresh_setExpiryAlert_called_for_all_expired_tokens() throws {
@@ -406,14 +458,61 @@ class CertificatesOverviewViewModelTests: XCTestCase {
             .invalid
         ]
         let router = CertificatesOverviewRouterMock()
-        vaccinationRepository.setExpiryAlertExpectation.expectedFulfillmentCount = 2
         configureSutAndRepository(with: router, certificates: tokens)
 
         // When
-        sut.refresh()
+        _ = sut.refresh()
 
         // Then
         wait(for: [vaccinationRepository.setExpiryAlertExpectation], timeout: 2)
+    }
+
+    func testScanCertificate_open_german_faq() throws {
+        // Given
+        let expectedURL = URL(string: "https://www.digitaler-impfnachweis-app.de/faq")
+        let router = CertificatesOverviewRouterMock()
+        router.error = QRCodeError.errorCountOfCertificatesReached
+        router.scanCountErrorResponse = .faq
+        sut = CertificatesOverviewViewModel(
+            router:router,
+            repository: vaccinationRepository,
+            certLogic: DCCCertLogicMock(),
+            boosterLogic: BoosterLogicMock(),
+            userDefaults: userDefaults,
+            locale: Locale(identifier: "DE")
+        )
+        
+        // When
+        sut.scanCertificate(withIntroduction: false)
+
+        // Then
+        wait(for: [router.toWebsiteFAQExpectation], timeout: 2)
+        let url = router.receivedFaqURL
+        XCTAssertEqual(url, expectedURL)
+    }
+
+    func testScanCertificate_open_english_faq() throws {
+        // Given
+        let expectedURL = URL(string: "https://www.digitaler-impfnachweis-app.de/en/faq")
+        let router = CertificatesOverviewRouterMock()
+        router.error = QRCodeError.errorCountOfCertificatesReached
+        router.scanCountErrorResponse = .faq
+        sut = CertificatesOverviewViewModel(
+            router:router,
+            repository: vaccinationRepository,
+            certLogic: DCCCertLogicMock(),
+            boosterLogic: BoosterLogicMock(),
+            userDefaults: userDefaults,
+            locale: Locale(identifier: "EN")
+        )
+
+        // When
+        sut.scanCertificate(withIntroduction: false)
+
+        // Then
+        wait(for: [router.toWebsiteFAQExpectation], timeout: 2)
+        let url = router.receivedFaqURL
+        XCTAssertEqual(url, expectedURL)
     }
 }
 

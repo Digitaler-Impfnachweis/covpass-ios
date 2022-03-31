@@ -22,15 +22,21 @@ protocol CertificateDetailViewModelProtocol {
     var immunizationTitle: String { get }
     var immunizationBody: String { get }
     var items: [CertificateItem] { get }
-
     var showBoosterNotification: Bool { get }
     var showNewBoosterNotification: Bool { get }
     var boosterNotificationTitle: String { get }
     var boosterNotificationBody: String { get }
     var boosterNotificationHighlightText: String { get }
-
+    var showReissueNotification: Bool { get }
+    var reissueNotificationTitle: String { get }
+    var reissueNotificationBody: String { get }
+    var reissueNotificationHighlightText: String { get }
+    var reissueButtonTitle: String { get }
+    var reissueNew: Bool { get }
     func refresh()
     func immunizationButtonTapped()
     func toggleFavorite()
     func updateBoosterCandiate()
+    func updateReissueCandidate(to value: Bool)
+    func triggerReissue()
 }

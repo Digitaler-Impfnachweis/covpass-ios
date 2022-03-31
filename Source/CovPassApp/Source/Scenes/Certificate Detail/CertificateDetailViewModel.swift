@@ -11,7 +11,19 @@ import CovPassUI
 import PromiseKit
 import UIKit
 
+private enum Constants {
+    enum Keys {
+        enum Reissue {
+            static let headline = "certificate_renewal_startpage_headline".localized
+            static let description = "certificate_renewal_startpage_copy".localized
+            static let newText = "vaccination_certificate_overview_booster_vaccination_notification_icon_new".localized
+            static let reissueButtonTitle = "certificate_renewal_detail_view_notification_box_secondary_button".localized
+        }
+    }
+}
+
 class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
+
     // MARK: - Properties
 
     weak var delegate: ViewModelDelegate?
@@ -45,19 +57,19 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
     }
 
     var name: String {
-        certificates.first?.vaccinationCertificate.hcert.dgc.nam.fullName ?? ""
+        selectedCertificate?.vaccinationCertificate.hcert.dgc.nam.fullName ?? ""
     }
 
     var nameReversed: String {
-        certificates.first?.vaccinationCertificate.hcert.dgc.nam.fullNameReverse ?? ""
+        selectedCertificate?.vaccinationCertificate.hcert.dgc.nam.fullNameReverse ?? ""
     }
 
     var nameTransliterated: String {
-        certificates.first?.vaccinationCertificate.hcert.dgc.nam.fullNameTransliteratedReverse ?? ""
+        selectedCertificate?.vaccinationCertificate.hcert.dgc.nam.fullNameTransliteratedReverse ?? ""
     }
 
     var birthDate: String {
-        guard let dgc = certificates.first?.vaccinationCertificate.hcert.dgc else { return "" }
+        guard let dgc = selectedCertificate?.vaccinationCertificate.hcert.dgc else { return "" }
         return DateUtils.displayIsoDateOfBirth(dgc)
     }
 
@@ -147,7 +159,7 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
         }
         return "recovery_certificate_overview_message".localized
     }
-
+    
     var items: [CertificateItem] {
         certificates
             .reversed()
@@ -166,21 +178,7 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
                 if vm == nil {
                     return nil
                 }
-                return CertificateItem(viewModel: vm!, action: {
-                    self.router.showDetail(for: cert).done {
-                        switch $0 {
-                        case .didDeleteCertificate:
-                            self.certificates = self.certificates.filter { $0 != cert }
-                            if self.certificates.count > 0 {
-                                self.delegate?.viewModelDidUpdate()
-                                self.router.showCertificateDidDeleteDialog()
-                            } else {
-                                self.resolver?.fulfill($0)
-                            }
-                        default: break
-                        }
-                    }.cauterize()
-                })
+                return certItem(vm, cert)
             }
     }
 
@@ -210,6 +208,20 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
     var boosterNotificationHighlightText: String {
         "vaccination_certificate_overview_booster_vaccination_notification_icon_new".localized
     }
+    
+    // MARK: Reissue Notification
+    
+    var showReissueNotification: Bool { certificates.qualifiedForReissue }
+
+    var reissueNotificationTitle = Constants.Keys.Reissue.headline
+
+    var reissueNotificationBody = Constants.Keys.Reissue.description
+
+    var reissueNotificationHighlightText = Constants.Keys.Reissue.newText
+   
+    var reissueButtonTitle = Constants.Keys.Reissue.reissueButtonTitle
+
+    var reissueNew: Bool { !certificates.reissueNewBadgeAlreadySeen }
 
     // MARK: - Lifecyle
 
@@ -263,7 +275,81 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
             self?.router.showUnexpectedErrorDialog(error)
         }
     }
-
+    
+    func updateReissueCandidate(to value: Bool) {
+        if certificates.qualifiedForReissue {
+            self.repository.setReissueProcess(initialAlreadySeen: value,
+                                              newBadgeAlreadySeen: value,
+                                              tokens: self.certificates.filterBoosterAfterVaccinationAfterRecovery).cauterize()
+        }
+    }
+    
+    func updateBoosterCandiate() {        
+        guard var candidate = boosterCandidate, candidate.state == .new else { return }
+        candidate.state = .qualified
+        boosterLogic.updateBoosterCandidate(candidate)
+    }
+    
+    func refreshCertsAndUpdateView() -> Promise<Void> {
+        firstly {
+            self.repository.getCertificateList()
+        }
+        .map {
+            if let selectedCertificate = self.selectedCertificate {
+                self.certificates = $0.certificates.filterMatching(selectedCertificate)
+            }
+        }
+        .done {
+            self.delegate?.viewModelDidUpdate()
+        }
+    }
+    
+    func triggerReissue() {
+        router.showReissue(for: certificates.filterBoosterAfterVaccinationAfterRecovery)
+            .ensure {
+                self.refreshCertsAndUpdateView().cauterize()
+            }
+            .cauterize()
+    }
+    
+    // MARK: Private methods
+    
+    private func removeReissueDataIfBoosterWasDeleted() {
+        if certificates.filterBoosted.isEmpty {
+            self.repository.setReissueProcess(initialAlreadySeen: false,
+                                              newBadgeAlreadySeen: false,
+                                              tokens: self.certificates.filterBoosterAfterVaccinationAfterRecovery).cauterize()
+        }
+    }
+    
+    private func certDetailDoneDidDeleteCertificate(_ cert: ExtendedCBORWebToken, _ result: CertificateDetailSceneResult) {
+        certificates = certificates.filter { $0 != cert }
+        if certificates.count > 0 {
+            delegate?.viewModelDidUpdate()
+            router.showCertificateDidDeleteDialog()
+            removeReissueDataIfBoosterWasDeleted()
+        } else {
+            resolver?.fulfill(result)
+        }
+    }
+    
+    private func certetailDone(_ result: CertificateDetailSceneResult, cert: ExtendedCBORWebToken) {
+        switch result{
+        case .didDeleteCertificate:
+            certDetailDoneDidDeleteCertificate(cert, result)
+        default: break
+        }
+    }
+    
+    private func certItem(_ vm: CertificateItemViewModel?,
+                          _ cert: ReversedCollection<[ExtendedCBORWebToken]>.Element) -> CertificateItem? {
+        return CertificateItem(viewModel: vm!) {
+            self.router.showDetail(for: cert).done { [weak self] in
+                self?.certetailDone($0, cert: cert)
+            }.cauterize()
+        }
+    }
+    
     private func refreshFavoriteState() {
         firstly {
             repository.favoriteStateForCertificates(certificates)
@@ -274,8 +360,8 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
         .then { _ in
             self.repository.getCertificateList()
         }
-        .get { certificateList in
-            self.showFavorite = certificateList.certificates.count > 1
+        .get { allPersonsCertificates in
+            self.showFavorite = allPersonsCertificates.numberOfPersons > 1
         }
         .done { _ in
             self.delegate?.viewModelDidUpdate()
@@ -283,11 +369,5 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
         .catch { [weak self] error in
             self?.router.showUnexpectedErrorDialog(error)
         }
-    }
-
-    func updateBoosterCandiate() {
-        guard var candidate = boosterCandidate, candidate.state == .new else { return }
-        candidate.state = .qualified
-        boosterLogic.updateBoosterCandidate(candidate)
     }
 }

@@ -99,7 +99,7 @@ public struct CustomURLSession: CustomURLSessionProtocol {
             }.resume()
         }
     }
-    
+
     public static let defaultHTTPHeaders: HTTPHeaders = {
         let acceptEncoding: String = "gzip;q=1.0, compress;q=0.5"
         let acceptLanguage = Locale.preferredLanguages.prefix(6).enumerated().map { index, languageCode in

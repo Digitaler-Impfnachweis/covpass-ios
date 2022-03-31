@@ -33,6 +33,7 @@ public class TrustedListDetailsViewModel {
     private let repository: VaccinationRepositoryProtocol
     private let certLogic: DCCCertLogicProtocol
     private var router: TrustedListDetailsRouterProtocol?
+    private var userDefaults = UserDefaultsPersistence()
 
     var delegate: ViewModelDelegate?
     
@@ -45,13 +46,13 @@ public class TrustedListDetailsViewModel {
     var offlineModusButton: String { Constants.Keys.offlineModusButton }
 
     var offlineMessageCertificates: String? {
-        guard let date = repository.getLastUpdatedTrustList() else { return nil }
+        guard let date = userDefaults.lastUpdatedTrustList else { return nil }
         return String(format: Constants.Keys.offlineModusCerts,
                       DateUtils.displayDateTimeFormatter.string(from: date))
     }
 
     var offlineMessageRules: String? {
-        guard let date = certLogic.lastUpdatedDCCRules() else { return nil }
+        guard let date = userDefaults.lastUpdatedDCCRules else { return nil }
         return String(format: Constants.Keys.offlineModusRules,
                       DateUtils.displayDateTimeFormatter.string(from: date))
     }

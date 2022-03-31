@@ -38,9 +38,19 @@ extension CBORWebToken {
         hcert.dgc.v?.first?.dt = date
         return self
     }
-
+    
     func doseNumber(_ dn: Int) -> Self {
         hcert.dgc.v?.first?.dn = dn
+        return self
+    }
+    
+    func seriesOfDoses(_ sd: Int) -> Self {
+        hcert.dgc.v?.first?.sd = sd
+        return self
+    }
+    
+    func medicalProduct(_ mp: MedicalProduct) -> Self {
+        hcert.dgc.v?.first?.mp = mp.rawValue
         return self
     }
 
@@ -72,29 +82,28 @@ class CertificateSorterTests: XCTestCase {
         XCTAssertEqual(sortedCertifiates[1].vaccinationCertificate.hcert.dgc.uvci, "1")
     }
     
-    func testLatestIatCertOnSameVaccinationDate() throws {
+    func testSortLatest_vaccinations() throws {
         // GIVEN
-        let vacinationDate = DateUtils.parseDate("2021-04-26T15:05:00")!
-        var firstCert: ExtendedCBORWebToken = CBORWebToken
+        let vacinationDateFirstCert = DateUtils.parseDate("2021-04-26T15:05:00")!
+        let firstCert: ExtendedCBORWebToken = CBORWebToken
             .mockVaccinationCertificate
             .mockVaccinationUVCI("1")
-            .mockVaccinationSetDate(vacinationDate)
+            .mockVaccinationSetDate(vacinationDateFirstCert)
             .extended(vaccinationQRCodeData:"1")
-        firstCert.vaccinationCertificate.iat = DateUtils.parseDate("2021-04-26T15:05:00")
 
-        var secondCert: ExtendedCBORWebToken = CBORWebToken
+        let vacinationDateSecondCert = DateUtils.parseDate("2021-05-26T15:05:00")!
+        let secondCert: ExtendedCBORWebToken = CBORWebToken
             .mockVaccinationCertificate
             .mockVaccinationUVCI("2")
-            .mockVaccinationSetDate(vacinationDate)
+            .mockVaccinationSetDate(vacinationDateSecondCert)
             .extended(vaccinationQRCodeData:"2")
-        secondCert.vaccinationCertificate.iat = DateUtils.parseDate("2021-04-27T15:05:00")
 
-        var thirdCert: ExtendedCBORWebToken = CBORWebToken
+        let vacinationDateThirdCert = DateUtils.parseDate("2021-05-26T15:05:01")!
+        let thirdCert: ExtendedCBORWebToken = CBORWebToken
             .mockVaccinationCertificate
             .mockVaccinationUVCI("3")
-            .mockVaccinationSetDate(vacinationDate)
+            .mockVaccinationSetDate(vacinationDateThirdCert)
             .extended(vaccinationQRCodeData:"3")
-        thirdCert.vaccinationCertificate.iat = DateUtils.parseDate("2021-04-28T15:05:00")
 
         let certificates = [
             secondCert,
@@ -108,52 +117,8 @@ class CertificateSorterTests: XCTestCase {
         // THEN
         XCTAssertEqual(sortedCertifiates.count, 3)
         XCTAssertEqual(sortedCertifiates[0].vaccinationCertificate.hcert.dgc.uvci, "3")
-    }
-    
-    func testLatestIatCertOnSameVaccinationDateButOneOfThemHasNoIat() throws {
-        // GIVEN
-        let vacinationDate = DateUtils.parseDate("2021-04-26T15:05:00")!
-        var firstCert: ExtendedCBORWebToken = CBORWebToken
-            .mockVaccinationCertificate
-            .mockVaccinationUVCI("1")
-            .mockVaccinationSetDate(vacinationDate)
-            .extended(vaccinationQRCodeData:"1")
-        firstCert.vaccinationCertificate.iat = DateUtils.parseDate("2021-04-26T15:05:00")
-
-        var secondCert: ExtendedCBORWebToken = CBORWebToken
-            .mockVaccinationCertificate
-            .mockVaccinationUVCI("2")
-            .mockVaccinationSetDate(vacinationDate)
-            .extended(vaccinationQRCodeData:"2")
-        secondCert.vaccinationCertificate.iat = DateUtils.parseDate("2021-04-27T15:05:00")
-
-        var thirdCert: ExtendedCBORWebToken = CBORWebToken
-            .mockVaccinationCertificate
-            .mockVaccinationUVCI("3")
-            .mockVaccinationSetDate(vacinationDate)
-            .extended(vaccinationQRCodeData:"3")
-        thirdCert.vaccinationCertificate.iat = DateUtils.parseDate("2021-04-28T15:05:00")
-
-        var fourthCert: ExtendedCBORWebToken = CBORWebToken
-            .mockVaccinationCertificate
-            .mockVaccinationUVCI("4")
-            .mockVaccinationSetDate(vacinationDate)
-            .extended(vaccinationQRCodeData:"4")
-        fourthCert.vaccinationCertificate.iat = nil
-
-        let certificates = [
-            secondCert,
-            firstCert,
-            thirdCert,
-            fourthCert
-        ]
-        
-        // WHEN
-        let sortedCertifiates = certificates.sortLatest()
-
-        // THEN
-        XCTAssertEqual(sortedCertifiates.count, 4)
-        XCTAssertEqual(sortedCertifiates[0].vaccinationCertificate.hcert.dgc.uvci, "3")
+        XCTAssertEqual(sortedCertifiates[1].vaccinationCertificate.hcert.dgc.uvci, "2")
+        XCTAssertEqual(sortedCertifiates[2].vaccinationCertificate.hcert.dgc.uvci, "1")
     }
     
     func testLatestIatCertOnSameVaccinationDateButTwoOfThemHasNoIatButOneOfTheseTwoIsLatestVac() throws {
@@ -464,29 +429,6 @@ class CertificateSorterTests: XCTestCase {
         // THEN
         XCTAssertEqual(sortedCertifiates.count, 7)
         XCTAssertEqual(sortedCertifiates[0].vaccinationCertificate.hcert.dgc.uvci, "7")
-    }
-
-    func testSortLatest_booster_order() {
-        // Given
-        let sut = [
-            CBORWebToken.mockVaccinationCertificate.doseNumber(3).extended(),
-            CBORWebToken.mockVaccinationCertificate.doseNumber(1).extended(),
-            CBORWebToken.mockVaccinationCertificate.doseNumber(4).extended(),
-            CBORWebToken.mockVaccinationCertificate.doseNumber(2).extended()
-        ]
-
-        // When
-        let tokens = sut.sortLatest()
-
-        // Then
-        guard tokens.count > 3 else {
-            XCTFail("Number of tokens must be bigger 3.")
-            return
-        }
-        XCTAssertEqual(tokens[0].vaccinationCertificate.hcert.dgc.v!.first!.dn, 4)
-        XCTAssertEqual(tokens[1].vaccinationCertificate.hcert.dgc.v?.first?.dn, 3)
-        XCTAssertEqual(tokens[2].vaccinationCertificate.hcert.dgc.v?.first?.dn, 2)
-        XCTAssertEqual(tokens[3].vaccinationCertificate.hcert.dgc.v?.first?.dn, 1)
     }
     
     func testFilter() throws {

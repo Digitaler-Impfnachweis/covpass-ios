@@ -12,6 +12,9 @@ import XCTest
 class TrustedListDetailsViewSnapShotTests: BaseSnapShotTests {
     
     func testWithoutLastUpdate() {
+        let userDefaults = UserDefaultsPersistence()
+        try? userDefaults.delete(UserDefaults.keyLastUpdatedDCCRules)
+        try? userDefaults.delete(UserDefaults.keyLastUpdatedTrustList)
         let certLogicMock = DCCCertLogicMock()
         let vaccinationRepoMock = VaccinationRepositoryMock()
         let sut = TrustedListDetailsViewModel(repository: vaccinationRepoMock,
@@ -22,10 +25,11 @@ class TrustedListDetailsViewSnapShotTests: BaseSnapShotTests {
     
     
     func testWithLastUpdate() {
+        var userDefaults = UserDefaultsPersistence()
+        userDefaults.lastUpdatedDCCRules = DateUtils.parseDate("2021-04-26T15:05:00")
+        userDefaults.lastUpdatedTrustList = DateUtils.parseDate("2021-04-26T15:05:00")
         let certLogicMock = DCCCertLogicMock()
-        certLogicMock.lastUpdateDccrRules = DateUtils.parseDate("2021-04-26T15:05:00")
         let vaccinationRepoMock = VaccinationRepositoryMock()
-        vaccinationRepoMock.lastUpdateTrustList = DateUtils.parseDate("2021-04-26T15:05:00")
         let sut = TrustedListDetailsViewModel(repository: vaccinationRepoMock,
                                               certLogic: certLogicMock)
         let vc: TrustedListDetailsViewController = TrustedListDetailsViewController(viewModel: sut)

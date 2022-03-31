@@ -15,4 +15,5 @@ protocol RuleCheckRouterProtocol: DialogRouterProtocol {
     func showCountrySelection(countries: [Country], country: String) -> Promise<String>
     func showDateSelection(date: Date) -> Promise<Date>
     func showResultDetail(result: CertificateResult, country: String, date: Date) -> Promise<Void>
+    func showInternetConnectionDialog() -> Promise<Void>
 }

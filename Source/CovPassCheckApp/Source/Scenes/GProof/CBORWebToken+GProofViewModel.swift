@@ -32,13 +32,13 @@ extension CBORWebToken {
     var recoverySubtitle: String? {
         let componentToUse: Set<Calendar.Component> = [.month]
         let stringWithPlaceholder = Constants.Keys.result_2G_2nd_timestamp_months
-        guard let fromDate = hcert.dgc.r?.first?.df else {
+        guard let fromDate = hcert.dgc.r?.first?.fr else {
             return nil
         }
         let diffComponents = Calendar.current.dateComponents(componentToUse,
                                                              from: fromDate,
                                                              to: Date())
-        return String(format: stringWithPlaceholder, diffComponents.hour ?? 0)
+        return String(format: stringWithPlaceholder, diffComponents.month ?? 0)
     }
     
     var vaccinationSubtitle: String? {
@@ -50,7 +50,7 @@ extension CBORWebToken {
         } else if isVaccination && hcert.dgc.isFullyImmunized {
             stringWithPlaceholder = Constants.Keys.result_2G_2nd_timestamp_months
         }
-        guard let fromDate = hcert.dgc.v?.first?.fullImmunizationValidFrom else {
+        guard let fromDate = hcert.dgc.v?.first?.dt else {
             return nil
         }
         let diffComponents = Calendar.current.dateComponents(componentToUse,

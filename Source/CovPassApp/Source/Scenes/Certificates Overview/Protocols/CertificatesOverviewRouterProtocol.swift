@@ -30,7 +30,8 @@ protocol CertificatesOverviewRouterProtocol: DialogRouterProtocol {
     func showScanPleaseHint() -> Promise<Void>
     func showDataPrivacy() -> Promise<Void>
     func toAppstoreCheckApp()
-    func toFaqWebsite()
+    func toFaqWebsite(_ url: URL)
     func startValidationAsAService(with data: ValidationServiceInitialisation)
-    func showCheckSituation(userDefaults: Persistence) -> Promise<Void> 
+    func showCheckSituation(userDefaults: Persistence) -> Promise<Void>
+    func showCertificatesReissue(for cborWebTokens: [ExtendedCBORWebToken]) -> Promise<Void>
 }

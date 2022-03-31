@@ -28,7 +28,8 @@ struct CertificatesOverviewSceneFactory: SceneFactory {
             repository: VaccinationRepository.create(),
             certLogic: DCCCertLogic.create(),
             boosterLogic: BoosterLogic.create(),
-            userDefaults: UserDefaultsPersistence()
+            userDefaults: UserDefaultsPersistence(),
+            locale: .current
         )
         let viewController = CertificatesOverviewViewController(viewModel: viewModel)
         let navigationController = UINavigationController(rootViewController: viewController)

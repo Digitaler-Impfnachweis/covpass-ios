@@ -32,6 +32,8 @@ public enum DateUtils {
 
     public static let displayTimeZoneFormatter = dateFormatter(format: "ZZZZ")
 
+    public static let dayMonthYearDateFormatter = dateFormatter(format: "dd.MM.yyyy")
+
     public static var displayDateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateStyle = .medium
