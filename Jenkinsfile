@@ -5,7 +5,7 @@ SECRETS = [
 
 pipeline {
   agent {
-    label "egaonfire"
+    label "ios-parallel"
   }
   options {
     skipDefaultCheckout()
