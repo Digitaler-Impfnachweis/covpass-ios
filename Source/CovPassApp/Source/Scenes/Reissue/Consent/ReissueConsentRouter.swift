@@ -53,7 +53,7 @@ class ReissueConsentRouter: ReissueConsentRouterProtocol, DialogRouterProtocol {
     
     func routeToPrivacyStatement() {
         sceneCoordinator
-            .push(DataPrivacySceneFactory(router: DataPrivacyRouter(sceneCoordinator: sceneCoordinator)))
+            .present(DataPrivacySceneFactory(router: DataPrivacyRouter(sceneCoordinator: sceneCoordinator)))
             .cauterize()
     }
 
