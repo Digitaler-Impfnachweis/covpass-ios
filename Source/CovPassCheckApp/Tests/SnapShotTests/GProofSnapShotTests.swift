@@ -161,7 +161,10 @@ class GProofSnapShotTests: BaseSnapShotTests {
         let vm = viewModel(initialToken: initialToken, result: .passed)
         let vc = GProofViewController(viewModel: vm)
         certLogicMock.validateResult = [.init(rule: nil, result: .passed, validationErrors: nil)]
-        vaccinationRepoMock.checkedCert = CBORWebToken.mockVaccinationCertificate
+        let vaccinationToken: CBORWebToken = CBORWebToken.mockVaccinationCertificate
+        let dateForTwelveMonthAgo = Calendar.current.date(byAdding: .month, value: -14, to: Date())
+        vaccinationToken.hcert.dgc.v!.first!.dt = try! XCTUnwrap(dateForTwelveMonthAgo)
+        vaccinationRepoMock.checkedCert = vaccinationToken
         vm.scanNext()
         verifyAsync(vc: vc, wait: 0.1)
     }
