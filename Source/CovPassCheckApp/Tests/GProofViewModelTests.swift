@@ -454,8 +454,10 @@ class GProofViewModelTests: XCTestCase {
     func testScaningTwoSuccessfulOneTestOneRecovery() {
         // GIVEN
         certLogicMock.validateResult = [.init(rule: nil, result: .passed, validationErrors: nil)]
-
-        vaccinationRepoMock.checkedCert = CBORWebToken.mockRecoveryCertificate
+        let vaccinationToken = CBORWebToken.mockRecoveryCertificate
+        let dateForOneMonthAgo = Calendar.current.date(byAdding: .month, value: -1, to: Date())
+        vaccinationToken.hcert.dgc.r!.first!.fr =  try! XCTUnwrap(dateForOneMonthAgo)
+        vaccinationRepoMock.checkedCert = vaccinationToken
         
         // WHEN
         sut.startover()
