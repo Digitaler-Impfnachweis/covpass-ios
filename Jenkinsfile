@@ -8,8 +8,10 @@ pipeline {
     label "ios-parallel"
   }
   options {
-    skipDefaultCheckout()
-    ansiColor("xterm")
+      disableConcurrentBuilds()
+      skipDefaultCheckout()
+      timeout(time: 90, unit: 'MINUTES') // safeguard to auto-kill stuck builds
+      ansiColor("xterm") // needs AnsiColor plugin (https://wiki.jenkins.io/display/JENKINS/AnsiColor+Plugin)
   }
   environment {
     SWIFTSERVERPORT = "${Math.abs(new Random().nextInt(20000) + 20000)}"
