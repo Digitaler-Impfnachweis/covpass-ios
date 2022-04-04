@@ -26,7 +26,7 @@ pipeline {
 
     stage("Create Simulator 🦠") {
       steps {
-        createSimulatoriOS([type: "iPhone 11", os: "iOS14.1"])
+        createSimulatoriOS([type: "iPhone 11", os: "iOS14.5"])
       }
     }
 
