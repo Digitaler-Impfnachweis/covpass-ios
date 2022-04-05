@@ -15,7 +15,7 @@ class ShareRevocationPDFViewModelTests: XCTestCase {
     override func setUpWithError() throws {
         let fileManager = FileManager.default
         url = fileManager.temporaryDirectory
-            .appendingPathComponent("1234_Germany_01.01.2001.pdf")
+            .appendingPathComponent("1234_Germany_2001-01-01.pdf")
         try? fileManager.removeItem(at: url)
         sut = .init(
             exportData: RevocationPDFExportData(

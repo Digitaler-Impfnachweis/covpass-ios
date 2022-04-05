@@ -63,6 +63,7 @@ public class RevocationInfoViewController: UIViewController {
             self?.viewModel.createPDF()
         }
         exportButton.layoutMargins = .init(top: 0, left: .space_24, bottom: 0, right: .space_24)
+        exportButton.isEnabled = viewModel.enableCreatePDF
     }
 
     private func refresh() {

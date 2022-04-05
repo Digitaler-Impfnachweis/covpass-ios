@@ -21,7 +21,7 @@ struct RevocationPDFExportData: RevocationPDFExportDataProtocol {
          fileManager: FileManager) {
         self.pdfDocument = pdfDocument
         self.fileManager = fileManager
-        let date = DateUtils.dayMonthYearDateFormatter.string(from: date)
+        let date = DateUtils.isoDateFormatter.string(from: date)
         let filename = "\(transactionNumber)_\(issuingCountry)_\(date).pdf"
         fileURL = fileManager.temporaryDirectory.appendingPathComponent(filename)
     }

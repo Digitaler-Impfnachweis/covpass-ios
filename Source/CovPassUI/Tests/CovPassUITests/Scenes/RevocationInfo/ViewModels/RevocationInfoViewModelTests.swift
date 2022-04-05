@@ -55,16 +55,15 @@ class RevocationInfoViewModelTests: XCTestCase {
         let items = sut.infoItems
 
         // Then
-        guard items.count >= 6 else {
+        guard items.count >= 5 else {
             XCTFail("Number of items must be a least 6.")
             return
         }
         XCTAssertEqual(items[0].value, "3d90f482a45f0c9f29345fd9e411cabf9763e6c01591aa68eb64311a35861f90")
         XCTAssertEqual(items[1].value, "lc9a97MWFhs=")
-        XCTAssertEqual(items[2].value, "1054eea87a853ae798c8b9277d6a6c11784fb5373bbfd08dfa937a0e45fc91a7")
-        XCTAssertEqual(items[3].value, "DE")
-        XCTAssertEqual(items[4].value, "01.01.2002")
-        XCTAssertEqual(items[5].value, "01.01.2001")
+        XCTAssertEqual(items[2].value, "DE")
+        XCTAssertEqual(items[3].value, "2002-01-01")
+        XCTAssertEqual(items[4].value, "2001-01-01")
 
     }
 
@@ -114,6 +113,40 @@ class RevocationInfoViewModelTests: XCTestCase {
         // Then
         wait(for: [updateExpectation, errorExpectation, pdfGenerator.generateExpectation], timeout: 2)
         XCTAssertFalse(sut.isGeneratingPDF)
+    }
+
+    func testEnableCreatePDF_germany() {
+        // When
+        let isEnabled = sut.enableCreatePDF
+
+        // Then
+        XCTAssertTrue(isEnabled)
+    }
+
+    func testEnableCreatePDF_not_germany() throws {
+        // Given
+        let token = CBORWebToken.mockCertificate
+        let vaccination = try XCTUnwrap(token.hcert.dgc.v?.first)
+        vaccination.co = "XY"
+        let extendedToken = ExtendedCBORWebToken(
+            vaccinationCertificate: token,
+            vaccinationQRCodeData: ""
+        )
+        sut = .init(
+            router: router,
+            resolver: resolver,
+            pdfGenerator: pdfGenerator,
+            fileManager: .default,
+            token: extendedToken,
+            coseSign1Message: .mock(),
+            timestamp: .init(timeIntervalSinceReferenceDate: 0)
+        )
+
+        // When
+        let isEnabled = sut.enableCreatePDF
+
+        // Then
+        XCTAssertFalse(isEnabled)
     }
 }
 

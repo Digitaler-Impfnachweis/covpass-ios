@@ -15,10 +15,10 @@ public class RevocationInfoViewModel: RevocationInfoViewModelProtocol {
     public let buttonTitle = "revocation_detail_page_button_text".localized(bundle: .main)
     private(set) public var isGeneratingPDF = false
     public let title = "revocation_detail_page_title".localized(bundle: .main)
+    public let enableCreatePDF: Bool
     lazy public var infoItems: [ListContentItem] = [
         .init(transactionNumberTitle, transactionNumber),
         .init(keyIDTitle, keyID),
-        .init(rValueSignatureTitle, rValueSignature),
         .init(countryTitle, country),
         .init(expiryDateTitle, expiryDate),
         .init(issuingDateTitle, issuingDate)
@@ -61,7 +61,8 @@ public class RevocationInfoViewModel: RevocationInfoViewModelProtocol {
         let dgc = cborWebToken.hcert.dgc
         let timestampSeconds = String(timestamp.timeIntervalSince1970)
         self.timestampDate = timestamp
-        self.country = dgc.localizedCountry
+        self.country = dgc.country
+        self.enableCreatePDF = country.uppercased() == "DE"
         self.expiryDate = DateUtils.dateString(from: cborWebToken.exp)
         self.issuingDate = DateUtils.dateString(from: cborWebToken.iat)
         self.keyID = coseSign1Message.keyIdentifier.toBase64()
@@ -112,12 +113,12 @@ private extension DateUtils {
         guard let date = date else {
             return ""
         }
-        return Self.dayMonthYearDateFormatter.string(from: date)
+        return Self.isoDateFormatter.string(from: date)
     }
 }
 
 private extension DigitalGreenCertificate {
-    var localizedCountry: String {
+    var country: String {
         let country: String
         if let v = v?.first {
             country = v.co
@@ -128,6 +129,6 @@ private extension DigitalGreenCertificate {
         } else {
             country = ""
         }
-        return country.localized(bundle: .main)
+        return country
     }
 }
