@@ -17,12 +17,13 @@ protocol ValidatorOverviewRouterProtocol: DialogRouterProtocol {
     func showCertificate(_ certificate: ExtendedCBORWebToken?,
                          _2GContext: Bool,
                          userDefaults: Persistence)
-    func showError(error: Error,
+    func showError(_ certificate: ExtendedCBORWebToken?,
+                   error: Error,
                    _2GContext: Bool,
                    userDefaults: Persistence) -> Promise<ExtendedCBORWebToken>
     func showAppInformation(userDefaults: Persistence)
-    func showGproof(initialToken: ExtendedCBORWebToken,
-                    repository: VaccinationRepositoryProtocol,
+    func showGproof(repository: VaccinationRepositoryProtocol,
+                    revocationRepository: CertificateRevocationRepositoryProtocol,
                     certLogic: DCCCertLogicProtocol,
                     userDefaults: Persistence,
                     boosterAsTest: Bool)

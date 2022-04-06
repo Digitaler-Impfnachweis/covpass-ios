@@ -28,6 +28,7 @@ class ValidatorOverviewViewModelTests: XCTestCase {
         let repository = VaccinationRepository.create()
         sut = ValidatorOverviewViewModel(router: ValidatorOverviewRouter(sceneCoordinator: sceneCoordinator),
                                          repository: repository,
+                                         revocationRepository: CertificateRevocationRepositoryMock(),
                                          certLogic:  DCCCertLogic.create(),
                                          userDefaults: UserDefaultsPersistence(),
                                          schedulerIntervall: 0.5)
@@ -187,6 +188,7 @@ class ValidatorOverviewViewModelTests: XCTestCase {
         sut = .init(
             router: ValidatorMockRouter(),
             repository: repository,
+            revocationRepository: CertificateRevocationRepositoryMock(),
             certLogic: certLogic,
             userDefaults: userDefaults
         )

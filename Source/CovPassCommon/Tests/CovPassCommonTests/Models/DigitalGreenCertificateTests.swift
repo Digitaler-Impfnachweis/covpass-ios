@@ -123,16 +123,106 @@ class DigitalGreenCertificateTests: XCTestCase {
         // Then
         XCTAssertEqual(hash, expectedHash)
     }
+
+    func testCountryCode_vaccination() {
+        // Given
+        let sut = DigitalGreenCertificate.with(vaccination: .with(ci: "", co: "XYZ"))
+
+        // When
+        let countryCode = sut.countryCode
+
+        // Then
+        XCTAssertEqual(countryCode, "XYZ")
+    }
+
+    func testCountryCode_test() {
+        // Given
+        let sut = DigitalGreenCertificate.with(test: .with(co: "ABC"))
+
+        // When
+        let countryCode = sut.countryCode
+
+        // Then
+        XCTAssertEqual(countryCode, "ABC")
+    }
+
+    func testCountryCode_recovery() {
+        // Given
+        let sut = DigitalGreenCertificate.with(recovery: .with(co: "DEF"))
+
+        // When
+        let countryCode = sut.countryCode
+
+        // Then
+        XCTAssertEqual(countryCode, "DEF")
+    }
+
+    func testRevocationUCIHash() {
+        // Given
+        let expectedHash: [UInt8] = [
+            112, 18, 155, 21, 251, 126, 189, 95,
+            69, 137, 206, 74, 155, 40, 100, 127,
+            201, 52, 31, 179, 224, 132, 118, 161,
+            71, 155, 61, 217, 200, 64, 29, 144
+        ]
+        let ci = "01DE/84503/1119349007/DXSGWLWL40SU8ZFKIYIBK39A3#S"
+        let sut = DigitalGreenCertificate.with(vaccination: .with(ci: ci))
+
+        // When
+        let hash = sut.revocationUCIHash
+
+        // Then
+        XCTAssertEqual(hash, expectedHash)
+    }
+
+    func testRevocationUCICountryHash() {
+        // Given
+        let expectedHash: [UInt8] = [
+            4, 153, 42, 67, 146, 255, 202, 22,
+            248, 34, 101, 61, 62, 65, 8, 8,
+            71, 63, 127, 124, 145, 206, 81, 56,
+            120, 1, 0, 215, 63, 5, 209, 115
+        ]
+        let ci = "01DE/84503/1119349007/DXSGWLWL40SU8ZFKIYIBK39A3#S"
+        let sut = DigitalGreenCertificate.with(vaccination: .with(ci: ci, co: "DE"))
+
+        // When
+        let hash = sut.revocationUCICountryHash
+
+        // Then
+        XCTAssertEqual(hash, expectedHash)
+    }
 }
 
 private extension Vaccination {
-    static func with(ci: String) -> Vaccination {
-        Vaccination(tg: "", vp: "", mp: "", ma: "", dn: 0, sd: 0, dt: Date(), co: "", is: "", ci: ci)
+    static func with(ci: String, co: String = "") -> Vaccination {
+        Vaccination(tg: "", vp: "", mp: "", ma: "", dn: 0, sd: 0, dt: Date(), co: co, is: "", ci: ci)
+    }
+}
+
+private extension Test {
+    static func with(co: String) -> Test {
+        Test(tg: "", tt: "", sc: Date(timeIntervalSinceReferenceDate: 0), tr: "", tc: "", co: co, is: "", ci: "")
+    }
+}
+
+private extension Recovery {
+    static func with(co: String) -> Recovery {
+        let date = Date(timeIntervalSinceReferenceDate: 0)
+        return .init(tg: "", fr: date, df: date, du: date, co: co, is: "", ci: "")
     }
 }
 
 private extension DigitalGreenCertificate {
     static func with(vaccination: Vaccination) -> DigitalGreenCertificate {
         DigitalGreenCertificate(nam: .init(fnt: ""), v: [vaccination], ver: "0.0")
+    }
+
+    static func with(test: Test) -> DigitalGreenCertificate {
+        DigitalGreenCertificate(nam: .init(fnt: ""), t: [test], ver: "0.0")
+    }
+
+    static func with(recovery: Recovery) -> DigitalGreenCertificate {
+        DigitalGreenCertificate(nam: .init(fnt: ""), r: [recovery], ver: "0.0")
     }
 }

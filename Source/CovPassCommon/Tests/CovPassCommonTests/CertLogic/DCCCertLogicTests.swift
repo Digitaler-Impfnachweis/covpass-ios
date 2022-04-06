@@ -34,6 +34,7 @@ class DCCCertLogicTests: XCTestCase {
 
         let trustListURL = Bundle.commonBundle.url(forResource: "dsc.json", withExtension: nil)!
         repository = VaccinationRepository(
+            revocationRepo: CertificateRevocationRepositoryMock(),
             service: APIServiceMock(),
             keychain: MockPersistence(),
             userDefaults: MockPersistence(),

@@ -9,11 +9,11 @@
 import XCTest
 
 class CertificateReissueRepositoryTests: XCTestCase {
-    var sut: CertificateReissueRepository!
-    var urlSession: CertificateReissueURLSessionMock!
+    private var sut: CertificateReissueRepository!
+    private var httpClient: HTTPClientMock!
 
     override func setUpWithError() throws {
-        urlSession = CertificateReissueURLSessionMock()
+        httpClient = HTTPClientMock()
         let url = try XCTUnwrap(URL(string: "http://localhost"))
         let trustListURL = Bundle.commonBundle.url(
             forResource: "dsc",
@@ -27,13 +27,13 @@ class CertificateReissueRepositoryTests: XCTestCase {
             jsonDecoder: jsonDecoder,
             jsonEncoder: JSONEncoder(),
             trustList: trustList,
-            urlSession: urlSession
+            httpClient: httpClient
         )
     }
 
     override func tearDownWithError() throws {
         sut = nil
-        urlSession = nil
+        httpClient = nil
     }
 
     func testReissue_returned_data_has_wrong_format() {
@@ -64,7 +64,7 @@ class CertificateReissueRepositoryTests: XCTestCase {
             message: "MESSAGE"
         )
         let data = try JSONEncoder().encode(errorResponse)
-        urlSession.error = CertificateReissueURLSesssionError.http(
+        httpClient.error = HTTPClientError.http(
             542,
             data: data
         )
@@ -90,7 +90,7 @@ class CertificateReissueRepositoryTests: XCTestCase {
         let cborWebToken = CBORWebToken.mockVaccinationCertificate.extended()
         let expectation = XCTestExpectation()
         let expectedError = CertificateReissueRepositoryFallbackError()
-        urlSession.error = CertificateReissueURLSesssionError.http(476, data: Data())
+        httpClient.error = HTTPClientError.http(476, data: Data())
 
         // When
         sut.reissue([cborWebToken])
@@ -112,7 +112,7 @@ class CertificateReissueRepositoryTests: XCTestCase {
         let cborWebToken = CBORWebToken.mockVaccinationCertificate.extended()
         let expectation = XCTestExpectation()
         let expectedError = CertificateReissueRepositoryError("R500", message: nil)
-        urlSession.error = CertificateReissueURLSesssionError.http(500, data: Data())
+        httpClient.error = HTTPClientError.http(500, data: Data())
 
         // When
         sut.reissue([cborWebToken])
@@ -134,7 +134,7 @@ class CertificateReissueRepositoryTests: XCTestCase {
         let cborWebToken = CBORWebToken.mockVaccinationCertificate.extended()
         let expectation = XCTestExpectation()
         let expectedError = CertificateReissueRepositoryError("R429", message: nil)
-        urlSession.error = CertificateReissueURLSesssionError.http(429, data: Data())
+        httpClient.error = HTTPClientError.http(429, data: Data())
 
         // When
         sut.reissue([cborWebToken])
@@ -159,7 +159,7 @@ class CertificateReissueRepositoryTests: XCTestCase {
             )
         ]
         let responseData = try JSONEncoder().encode(response)
-        urlSession.data = responseData
+        httpClient.data = responseData
     }
 
     func testReissue_success() throws {
@@ -170,7 +170,7 @@ class CertificateReissueRepositoryTests: XCTestCase {
         // When
         sut.reissue([ExtendedCBORWebToken(vaccinationCertificate: .mockVaccinationCertificate, vaccinationQRCodeData: qrCodeData)])
             .done { webTokens in
-                guard let data = self.urlSession.receivedHTTPRequest?.httpBody,
+                guard let data = self.httpClient.receivedHTTPRequest?.httpBody,
                       let requestBody = try? JSONDecoder().decode(CertificateReissueRequestBody.self, from: data) else { return }
                 XCTAssertTrue(requestBody.certificates[0].starts(with: "HC1:"))
                 XCTAssertEqual(webTokens.count, 1)

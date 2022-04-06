@@ -23,7 +23,7 @@ public struct Paragraph {
     }
 }
 
-public typealias ValidationResultViewModel = ValidationViewModel & CancellableViewModelProtocol
+public typealias ValidationResultViewModel = ValidationViewModelProtocol & CancellableViewModelProtocol
 
 public protocol ResultViewModelDelegate: AnyObject {
     func viewModelDidUpdate()
@@ -121,7 +121,16 @@ public class ValidationResultViewController: UIViewController {
         headline.actionButton.enableAccessibility(label: Constants.Accessibility.close.label)
     }
     
+    private func setScanButtonLoadingState() {
+        if viewModel.isLoadingScan {
+            toolbarView.primaryButton.startAnimating()
+        } else {
+            toolbarView.primaryButton.stopAnimating()
+        }
+    }
+    
     private func updateViews() {
+        setScanButtonLoadingState()
         toolbarView.primaryButton.isHidden = viewModel.buttonHidden
         stackView.setCustomSpacing(.space_24, after: imageContainerView)
         stackView.setCustomSpacing(.space_24, after: resultView)
@@ -170,7 +179,7 @@ extension ValidationResultViewController: CustomToolbarViewDelegate {
     public func customToolbarView(_: CustomToolbarView, didTap buttonType: ButtonItemType) {
         switch buttonType {
         case .textButton:
-            viewModel.scanNextCertifcate()
+            viewModel.scanCertificate()
         default:
             return
         }

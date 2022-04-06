@@ -20,6 +20,7 @@ public class MainButton: XibView {
         didSet {
             updateTextStyle()
             updateAppearence()
+            setupActivityIndicatorView()
         }
     }
 
@@ -93,7 +94,7 @@ public class MainButton: XibView {
 
     private func setupActivityIndicatorView() {
         dotPulseActivityView.numberOfDots = 3
-        dotPulseActivityView.color = .backgroundSecondary
+        dotPulseActivityView.color = style == .primary ? .backgroundSecondary : .brandAccent
         dotPulseActivityView.padding = 5
     }
 

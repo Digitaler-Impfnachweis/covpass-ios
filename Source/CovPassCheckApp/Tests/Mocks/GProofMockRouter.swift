@@ -12,7 +12,6 @@ import PromiseKit
 import Foundation
 
 class GProofMockRouter: GProofRouterProtocol {
-
     var qrCodeScanShouldCanceled = false
     var errorShown = false
     var certificateShown = false
@@ -25,6 +24,7 @@ class GProofMockRouter: GProofRouterProtocol {
     
     func showCertificate(_ certificate: ExtendedCBORWebToken?,
                          _2GContext: Bool,
+                         error: Error?,
                          userDefaults: Persistence,
                          buttonHidden: Bool) -> Promise<ExtendedCBORWebToken> {
         certificateShown = true

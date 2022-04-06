@@ -12,7 +12,8 @@ import PromiseKit
 import UIKit
 
 
-extension ValidationViewModel {
+extension ValidationViewModelProtocol {
+   
     var revocationInfoHidden: Bool { true }
     var revocationInfoText: String { "" }
     var revocationHeadline: String { "" }
@@ -29,7 +30,7 @@ extension ValidationViewModel {
         router.showStart()
     }
 
-    func scanNextCertifcate() {
+    func scanCertificate() {
         router.showStart()
     }
 }

@@ -42,3 +42,9 @@ DOMESTIC_RULES_URL = https:/$()/distribution.dcc-rules.de/domesticrules
 // CERTIFICATE REISSUE
 CERTIFICATE_REISSUE_URL = https:/$()/api.reissue.demo.ubirch.com
 CERTIFICATE_REISSUE_PINNING_HASHES = 151bb50bb467f6b7f346c602b22a00b651fbbdf8695c238beba832ae9c0e056d
+
+// REVOCATION
+ 
+CERTIFICATE_REVOCATION_PINNING_HASHES = 99cbc210bec8bad16f0827e733b1972e2a7b110cfbbc01e749c2b8572ddbf306
+CERTIFICATE_REVOCATION_URL = https:/$()/de.crl.test.dscg.ubirch.com
+CERTIFICATE_REVOCATION_TRUST_KEY = revocation-trust-key-debug.pem

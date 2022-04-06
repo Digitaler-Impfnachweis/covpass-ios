@@ -37,15 +37,13 @@ class ValidationResultFactoryTests: XCTestCase {
     }
     
     func viewModel(certificate: ExtendedCBORWebToken? = nil,
-             error: CertificateError? = nil,
-             logicType: DCCCertLogic.LogicType = .eu) -> ValidationResultViewModel {
+                   error: CertificateError? = nil,
+                   logicType: DCCCertLogic.LogicType = .eu) -> ValidationResultViewModel {
         return ValidationResultFactory.createViewModel(resolvable: resolver,
                                                        router: validationResultRouter,
                                                        repository: vacRepo,
                                                        certificate: certificate,
                                                        error: error,
-                                                       type: logicType,
-                                                       certLogic: certLogic,
                                                        _2GContext: false,
                                                        userDefaults: persistence)
     }
@@ -163,8 +161,6 @@ class ValidationResultFactoryExpertModeTests: XCTestCase {
                                                        repository: vacRepo,
                                                        certificate: certificate,
                                                        error: error,
-                                                       type: logicType,
-                                                       certLogic: certLogic,
                                                        _2GContext: false,
                                                        userDefaults: persistence)
     }

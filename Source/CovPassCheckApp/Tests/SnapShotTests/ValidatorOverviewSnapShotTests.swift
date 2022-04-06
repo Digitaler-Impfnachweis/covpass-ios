@@ -31,6 +31,7 @@ class ValidatorOverviewSnapShotTests: BaseSnapShotTests {
         userDefaults.selectedLogicType = logicType
         let vm = ValidatorOverviewViewModel(router: ValidatorMockRouter(),
                                             repository: vaccinationRepoMock,
+                                            revocationRepository: CertificateRevocationRepositoryMock(),
                                             certLogic: certLogicMock,
                                             userDefaults: userDefaults,
                                             schedulerIntervall: TimeInterval(10.0))

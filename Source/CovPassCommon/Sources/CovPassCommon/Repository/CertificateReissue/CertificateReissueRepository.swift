@@ -18,13 +18,13 @@ public class CertificateReissueRepository: CertificateReissueRepositoryProtocol 
     private let jsonEncoder: JSONEncoder
     private let reissueURL: URL
     private let trustList: TrustList
-    private let urlSession: CertificateReissueURLSessionProtocol
+    private let httpClient: HTTPClientProtocol
 
-    public init(baseURL: URL, jsonDecoder: JSONDecoder, jsonEncoder: JSONEncoder, trustList: TrustList, urlSession: CertificateReissueURLSessionProtocol) {
+    public init(baseURL: URL, jsonDecoder: JSONDecoder, jsonEncoder: JSONEncoder, trustList: TrustList, httpClient: HTTPClientProtocol) {
         reissueURL = baseURL.appendingPathComponent(Constants.reissuePath)
         self.jsonDecoder = jsonDecoder
         self.jsonEncoder = jsonEncoder
-        self.urlSession = urlSession
+        self.httpClient = httpClient
         self.trustList = trustList
     }
 
@@ -33,7 +33,7 @@ public class CertificateReissueRepository: CertificateReissueRepositoryProtocol 
             jsonEncoder
                 .encodePromise(webTokens.map(\.vaccinationQRCodeData).certificateReissueRequestBody)
                 .map(reissueRequest)
-                .then(urlSession.httpRequest)
+                .then(httpClient.httpRequest)
                 .then(jsonDecoder.decodePromise)
                 .then(certificateReissueRepositoryResponse)
                 .done { seal.fulfill($0) }
@@ -99,8 +99,8 @@ public class CertificateReissueRepository: CertificateReissueRepositoryProtocol 
     }
 
     private func certificateReissueRepositoryError(from error: Error) -> CertificateReissueRepositoryError {
-        if let certificateReissueError = error as? CertificateReissueURLSesssionError {
-            switch certificateReissueError {
+        if let httpClientError = error as? HTTPClientError {
+            switch httpClientError {
             case let .http(statusCode, data):
                 guard let data = data,
                       let error = try? jsonDecoder.decode(CertificateReissueResponseError.self, from: data) else {

@@ -23,9 +23,13 @@ struct ValidatorOverviewSceneFactory: SceneFactory {
     }
 
     func make() -> UIViewController {
+        guard let revocationRepository = CertificateRevocationRepository() else {
+            fatalError("Revocation Repository can´t initialized")
+        }
         let repository = VaccinationRepository.create()
         let viewModel = ValidatorOverviewViewModel(router: router,
                                                    repository: repository,
+                                                   revocationRepository: revocationRepository,
                                                    certLogic: DCCCertLogic.create(),
                                                    userDefaults: UserDefaultsPersistence())
         let viewController = ValidatorOverviewViewController(viewModel: viewModel)

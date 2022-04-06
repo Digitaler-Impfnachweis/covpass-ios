@@ -2,6 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>CERTIFICATE_REVOCATION_TRUST_KEY</key>
+	<string>$(CERTIFICATE_REVOCATION_TRUST_KEY)</string>
+	<key>CERTIFICATE_REVOCATION_PINNING_HASHES</key>
+	<string>$(CERTIFICATE_REVOCATION_PINNING_HASHES)</string>
+	<key>CERTIFICATE_REVOCATION_URL</key>
+	<string>$(CERTIFICATE_REVOCATION_URL)</string>
 	<key>CERTIFICATE_REISSUE_PINNING_HASHES</key>
 	<string>$(CERTIFICATE_REISSUE_PINNING_HASHES)</string>
 	<key>CERTIFICATE_REISSUE_URL</key>

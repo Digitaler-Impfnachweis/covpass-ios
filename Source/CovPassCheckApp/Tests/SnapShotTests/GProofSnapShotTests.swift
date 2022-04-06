@@ -46,14 +46,15 @@ class GProofSnapShotTests: BaseSnapShotTests {
                 vaccination.dt = try! XCTUnwrap(dateForTwelveMonthAgo)
             }
         }
+        vaccinationRepoMock.checkedCert = token
         let routerMock = GProofMockRouter()
         return GProofViewModel(resolvable: resolver,
-                             initialToken: initialToken,
-                             router: routerMock,
-                             repository: vaccinationRepoMock,
-                             certLogic: certLogicMock,
-                             userDefaults: UserDefaultsPersistence(),
-                             boosterAsTest: bosterAsTest)
+                               router: routerMock,
+                               repository: vaccinationRepoMock,
+                               revocationRepository: CertificateRevocationRepositoryMock(),
+                               certLogic: certLogicMock,
+                               userDefaults: UserDefaultsPersistence(),
+                               boosterAsTest: bosterAsTest)
 
     }
 
@@ -61,159 +62,166 @@ class GProofSnapShotTests: BaseSnapShotTests {
     // MARK: Init flow with Token failing functional or Technical and passing
     
     func testInitWithSuccessfulVaccinationStartOverWithTechnicalFailingCertificate() throws {
-        let initialToken = ExtendedCBORWebToken(
-            vaccinationCertificate: .mockVaccinationCertificate,
-            vaccinationQRCodeData: ""
-        )
+        let initialToken = ExtendedCBORWebToken(vaccinationCertificate: .mockVaccinationCertificate,
+                                                vaccinationQRCodeData: "")
         let vm = viewModel(initialToken: initialToken, result: .passed)
         let vc = GProofViewController(viewModel: vm)
+        vm.scanQRCode()
+        RunLoop.main.run(for: 0.1)
         certLogicMock.validateResult = []
         vaccinationRepoMock.checkedCert = nil
         vm.startover()
-        verifyAsync(vc: vc, wait: 0.1)
+        RunLoop.main.run(for: 0.1)
+        verifyView(view: vc.view)
     }
     
     func testInitWithFunctionalFailingTest() {
-        let initialToken = ExtendedCBORWebToken(
-            vaccinationCertificate: .mockTestCertificate,
-            vaccinationQRCodeData: ""
-        )
+        let initialToken = ExtendedCBORWebToken(vaccinationCertificate: .mockTestCertificate,
+                                                vaccinationQRCodeData: "")
         let vm = viewModel(initialToken: initialToken, result: .fail)
         let vc = GProofViewController(viewModel: vm)
-        verifyView(vc: vc)
+        vm.startover()
+        RunLoop.main.run(for: 0.1)
+        verifyView(view: vc.view)
     }
     
     func testInitWithFunctionalFailingVaccination() {
-        let initialToken = ExtendedCBORWebToken(
-            vaccinationCertificate: .mockVaccinationCertificate,
-            vaccinationQRCodeData: ""
-        )
+        let initialToken = ExtendedCBORWebToken(vaccinationCertificate: .mockVaccinationCertificate,
+                                                vaccinationQRCodeData: "")
         let vm = viewModel(initialToken: initialToken, result: .fail)
         let vc = GProofViewController(viewModel: vm)
-        verifyView(vc: vc)
+        vm.startover()
+        RunLoop.main.run(for: 0.1)
+        verifyView(view: vc.view)
     }
     
     func testInitWithSuccessfulTest() {
-        let initialToken = ExtendedCBORWebToken(
-            vaccinationCertificate: rapidTestToken(),
-            vaccinationQRCodeData: ""
-        )
+        let initialToken = ExtendedCBORWebToken(vaccinationCertificate: rapidTestToken(),
+                                                vaccinationQRCodeData: "")
         let vm = viewModel(initialToken: initialToken, result: .passed)
         let vc = GProofViewController(viewModel: vm)
-        verifyView(vc: vc)
+        vm.startover()
+        RunLoop.main.run(for: 0.1)
+        verifyView(view: vc.view)
     }
     
     func testInitWithSuccessfulVaccination() throws {
-        let initialToken = ExtendedCBORWebToken(
-            vaccinationCertificate: .mockVaccinationCertificate,
-            vaccinationQRCodeData: ""
-        )
+        let initialToken = ExtendedCBORWebToken(vaccinationCertificate: .mockVaccinationCertificate,
+                                                vaccinationQRCodeData: "")
         let vm = viewModel(initialToken: initialToken, result: .passed)
         let vc = GProofViewController(viewModel: vm)
-        verifyView(vc: vc)
+        vm.startover()
+        RunLoop.main.run(for: 0.1)
+        verifyView(view: vc.view)
     }
     
     // MARK: Init with some token and scan seccond failing functional or Technical and passing
     
     func testInitWithSuccessfulVaccinationAndScannedSuccessfulTest() throws {
-        let initialToken = ExtendedCBORWebToken(
-            vaccinationCertificate: .mockVaccinationCertificate,
-            vaccinationQRCodeData: ""
-        )
+        let initialToken = ExtendedCBORWebToken(vaccinationCertificate: .mockVaccinationCertificate,
+                                                vaccinationQRCodeData: "")
         let vm = viewModel(initialToken: initialToken, result: .passed)
         let vc = GProofViewController(viewModel: vm)
+        vm.startover()
+        RunLoop.main.run(for: 0.1)
         vaccinationRepoMock.checkedCert = rapidTestToken()
         vm.scanNext()
-        verifyAsync(vc: vc, wait: 0.1)
+        RunLoop.main.run(for: 0.1)
+        verifyView(view: vc.view)
     }
     
     func testInitWithSuccessfulVaccinationAndScannedFunctionalFailingTest() throws {
-        let initialToken = ExtendedCBORWebToken(
-            vaccinationCertificate: .mockVaccinationCertificate,
-            vaccinationQRCodeData: ""
-        )
+        let initialToken = ExtendedCBORWebToken(vaccinationCertificate: .mockVaccinationCertificate,
+                                                vaccinationQRCodeData: "")
         let vm = viewModel(initialToken: initialToken, result: .passed)
         let vc = GProofViewController(viewModel: vm)
+        vm.startover()
+        RunLoop.main.run(for: 0.1)
         certLogicMock.validateResult = [.init(rule: nil, result: .fail, validationErrors: nil)]
         vaccinationRepoMock.checkedCert = CBORWebToken.mockTestCertificate
         vm.scanNext()
-        verifyAsync(vc: vc, wait: 0.1)
+        RunLoop.main.run(for: 0.1)
+        verifyView(view: vc.view)
     }
     
     func testInitWithSuccessfulVaccinationAndScannedTechnicalFailingTest() throws {
-        let initialToken = ExtendedCBORWebToken(
-            vaccinationCertificate: .mockVaccinationCertificate,
-            vaccinationQRCodeData: ""
-        )
+        let initialToken = ExtendedCBORWebToken(vaccinationCertificate: .mockVaccinationCertificate,
+                                                vaccinationQRCodeData: "")
         let vm = viewModel(initialToken: initialToken, result: .passed)
         let vc = GProofViewController(viewModel: vm)
+        vm.startover()
+        RunLoop.main.run(for: 0.1)
         certLogicMock.validateResult = []
         vaccinationRepoMock.checkedCert = nil
         vm.scanNext()
-        verifyAsync(vc: vc, wait: 0.1)
+        RunLoop.main.run(for: 0.1)
+        verifyView(view: vc.view)
     }
     
     func testInitWithSuccessfulTestAndScannedSuccessfulVaccination() {
-        let initialToken = ExtendedCBORWebToken(
-            vaccinationCertificate: rapidTestToken(),
-            vaccinationQRCodeData: ""
-        )
+        let initialToken = ExtendedCBORWebToken(vaccinationCertificate: rapidTestToken(),
+                                                vaccinationQRCodeData: "")
         let vm = viewModel(initialToken: initialToken, result: .passed)
         let vc = GProofViewController(viewModel: vm)
+        vm.startover()
+        RunLoop.main.run(for: 0.1)
         certLogicMock.validateResult = [.init(rule: nil, result: .passed, validationErrors: nil)]
         let vaccinationToken: CBORWebToken = CBORWebToken.mockVaccinationCertificate
         let dateForTwelveMonthAgo = Calendar.current.date(byAdding: .month, value: -14, to: Date())
         vaccinationToken.hcert.dgc.v!.first!.dt = try! XCTUnwrap(dateForTwelveMonthAgo)
         vaccinationRepoMock.checkedCert = vaccinationToken
         vm.scanNext()
-        verifyAsync(vc: vc, wait: 0.1)
+        RunLoop.main.run(for: 0.1)
+        verifyView(view: vc.view)
     }
     
     func testInitWithSuccessfulTestAndScannedFunctionalFailingVaccination() {
-        let initialToken = ExtendedCBORWebToken(
-            vaccinationCertificate: rapidTestToken(),
-            vaccinationQRCodeData: ""
-        )
+        let initialToken = ExtendedCBORWebToken(vaccinationCertificate: rapidTestToken(),
+                                                vaccinationQRCodeData: "")
         let vm = viewModel(initialToken: initialToken, result: .passed)
         let vc = GProofViewController(viewModel: vm)
+        vm.startover()
+        RunLoop.main.run(for: 0.1)
         certLogicMock.validateResult = [.init(rule: nil, result: .fail, validationErrors: nil)]
         vaccinationRepoMock.checkedCert = CBORWebToken.mockVaccinationCertificate
         vm.scanNext()
-        verifyAsync(vc: vc, wait: 0.1)
+        RunLoop.main.run(for: 0.1)
+        verifyView(view: vc.view)
     }
     
     func testInitWithSuccessfulTestAndScannedTechnicalFailingVaccination() {
-        let initialToken = ExtendedCBORWebToken(
-            vaccinationCertificate: rapidTestToken(),
-            vaccinationQRCodeData: ""
-        )
+        let initialToken = ExtendedCBORWebToken(vaccinationCertificate: rapidTestToken(),
+                                                vaccinationQRCodeData: "")
         let vm = viewModel(initialToken: initialToken, result: .passed)
         let vc = GProofViewController(viewModel: vm)
+        vm.startover()
+        RunLoop.main.run(for: 0.1)
         certLogicMock.validateResult = []
         vaccinationRepoMock.checkedCert = nil
         vm.scanNext()
-        verifyAsync(vc: vc, wait: 0.1)
+        RunLoop.main.run(for: 0.1)
+        verifyView(view: vc.view)
     }
 
     
     func testBoostedVaccinationWhereBosterCannotReplaceTest() throws {
-        let initialToken = ExtendedCBORWebToken(
-            vaccinationCertificate: .mockVaccinationCertificate,
-            vaccinationQRCodeData: ""
-        )
+        let initialToken = ExtendedCBORWebToken(vaccinationCertificate: .mockVaccinationCertificate,
+                                                vaccinationQRCodeData: "")
         let vm = viewModel(initialToken: initialToken, result: .passed, convertBooster: true, bosterAsTest: false)
         let vc = GProofViewController(viewModel: vm)
-        verifyView(vc: vc)
+        vm.startover()
+        RunLoop.main.run(for: 0.1)
+        verifyView(view: vc.view)
     }
     
     func testBoostedVaccinationWhereBosterCanReplaceTest() throws {
-        let initialToken = ExtendedCBORWebToken(
-            vaccinationCertificate: .mockVaccinationCertificate,
-            vaccinationQRCodeData: ""
-        )
+        let initialToken = ExtendedCBORWebToken(vaccinationCertificate: .mockVaccinationCertificate,
+                                                vaccinationQRCodeData: "")
         let vm = viewModel(initialToken: initialToken, result: .passed, convertBooster: true, bosterAsTest: true)
         let vc = GProofViewController(viewModel: vm)
-        verifyView(vc: vc)
+        vm.startover()
+        RunLoop.main.run(for: 0.1)
+        verifyView(view: vc.view)
     }
 
     private func rapidTestToken() -> CBORWebToken {

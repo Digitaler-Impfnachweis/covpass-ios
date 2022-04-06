@@ -18,7 +18,7 @@ private enum Constants {
     static let revocationTitle = "revocation_headline".localized
 }
 
-extension ValidationViewModel {
+extension ValidationViewModelProtocol {
     
     var revocationInfoHidden: Bool {
         !userDefaults.revocationExpertMode || _2GContext
@@ -48,16 +48,23 @@ extension ValidationViewModel {
         router.showStart()
         resolvable.cancel()
     }
-
-    func scanNextCertifcate() {
+    
+    func scanCertificate() {
+        var tmpToken: ExtendedCBORWebToken?
+        scanCertificateStarted()
         firstly {
             router.scanQRCode()
         }
-        .map {
-            try self.payloadFromScannerResult($0)
-        }
         .then {
-            self.repository.validCertificate($0)
+            ParseCertificateUseCase(scanResult: $0,
+                                    vaccinationRepository: repository).execute()
+        }
+        .then { token -> Promise<ExtendedCBORWebToken> in
+            tmpToken = token
+            return ValidateCertificateUseCase(token: token,
+                                              revocationRepository: CertificateRevocationRepository()!,
+                                              certLogic: DCCCertLogic.create(),
+                                              persistence: self.userDefaults).execute()
         }
         .done { certificate in
             if self._2GContext {
@@ -71,29 +78,28 @@ extension ValidationViewModel {
                 repository: self.repository,
                 certificate: certificate,
                 error: nil,
-                type: UserDefaultsPersistence().selectedLogicType,
-                certLogic: DCCCertLogic.create(),
                 _2GContext: _2GContext,
                 userDefaults: userDefaults
             )
             self.delegate?.viewModelDidChange(vm)
+        }
+        .ensure {
+            scanCertificateEnded()
         }
         .catch { error in
             let vm = ValidationResultFactory.createViewModel(
                 resolvable: resolvable,
                 router: self.router,
                 repository: self.repository,
-                certificate: nil,
+                certificate: tmpToken,
                 error: error,
-                type: UserDefaultsPersistence().selectedLogicType,
-                certLogic: DCCCertLogic.create(),
                 _2GContext: _2GContext,
                 userDefaults: userDefaults
             )
             self.delegate?.viewModelDidChange(vm)
         }
     }
-
+    
     private func payloadFromScannerResult(_ result: ScanResult) throws -> String {
         switch result {
         case let .success(payload):

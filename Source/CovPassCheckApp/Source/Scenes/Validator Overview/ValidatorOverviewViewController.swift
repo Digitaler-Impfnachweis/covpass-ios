@@ -71,7 +71,16 @@ class ValidatorOverviewViewController: UIViewController {
         }
     }
 
+    private func setScanButtonLoadingState() {
+        if viewModel.isLoadingScan {
+            scanCard.actionButton.startAnimating()
+        } else {
+            scanCard.actionButton.stopAnimating()
+        }
+    }
+    
     private func setupCardView() {
+        setScanButtonLoadingState()
         offlineCard.titleLabel.attributedText = "validation_start_screen_offline_modus_title".localized.styledAs(.header_2)
         offlineCard.textLable.attributedText = "validation_start_screen_offline_modus_message".localized.styledAs(.body)
         offlineCard.infoLabel.attributedText = viewModel.offlineTitle.styledAs(.body)
@@ -116,7 +125,6 @@ class ValidatorOverviewViewController: UIViewController {
             }
             self.viewModel.startQRCodeValidation(for: scanType)
         }
-        
         scanTypeSegment.setTitle(viewModel.segment3GTitle, forSegmentAt: ScanType._3G.rawValue)
         scanTypeSegment.setTitle(viewModel.segment2GTitle, forSegmentAt: ScanType._2G.rawValue)
     }

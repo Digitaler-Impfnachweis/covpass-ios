@@ -26,7 +26,9 @@ class VaccinationRepositoryTests: XCTestCase {
         userDefaults = MockPersistence()
         boosterLogic = BoosterLogicMock()
         let trustListURL = Bundle.commonBundle.url(forResource: "dsc.json", withExtension: nil)!
+        let revocationRepo = CertificateRevocationRepositoryMock()
         sut = VaccinationRepository(
+            revocationRepo: revocationRepo,
             service: service,
             keychain: keychain,
             userDefaults: userDefaults,
@@ -34,6 +36,26 @@ class VaccinationRepositoryTests: XCTestCase {
             publicKeyURL: Bundle.module.url(forResource: "pubkey.pem", withExtension: nil)!,
             initialDataURL: trustListURL
         )
+    }
+    
+    func configureSut(revoked: Bool) -> VaccinationRepository {
+        service = APIServiceMock()
+        keychain = MockPersistence()
+        userDefaults = MockPersistence()
+        boosterLogic = BoosterLogicMock()
+        let trustListURL = Bundle.commonBundle.url(forResource: "dsc.json", withExtension: nil)!
+        let revocationRepo = CertificateRevocationRepositoryMock()
+        revocationRepo.isRevoked = revoked
+        let sut = VaccinationRepository(
+            revocationRepo: revocationRepo,
+            service: service,
+            keychain: keychain,
+            userDefaults: userDefaults,
+            boosterLogic: boosterLogic,
+            publicKeyURL: Bundle.module.url(forResource: "pubkey.pem", withExtension: nil)!,
+            initialDataURL: trustListURL
+        )
+        return sut
     }
 
     override func tearDown() {
@@ -716,6 +738,7 @@ class VaccinationRepositoryTests: XCTestCase {
             }.cauterize()
         wait(for: [expecation], timeout: 1.0)
     }
+
 }
 
 private extension MockPersistence {

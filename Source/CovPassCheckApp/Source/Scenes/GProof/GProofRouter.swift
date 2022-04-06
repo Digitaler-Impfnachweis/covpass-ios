@@ -45,13 +45,14 @@ class GProofRouter: GProofRouterProtocol {
     
     func showCertificate(_ certificate: ExtendedCBORWebToken?,
                          _2GContext: Bool,
+                         error: Error?,
                          userDefaults: Persistence,
                          buttonHidden: Bool) -> Promise<ExtendedCBORWebToken> {
         sceneCoordinator.present(
             ValidationResultSceneFactory(
                 router: ValidationResultRouter(sceneCoordinator: sceneCoordinator),
                 certificate: certificate,
-                error: nil,
+                error: error,
                 buttonHidden: buttonHidden,
                 _2GContext: _2GContext,
                 userDefaults: userDefaults

@@ -13,6 +13,7 @@ public enum CoseParsingError: Error, ErrorCode {
     case wrongType
     case wrongArrayLength
     case missingValue
+    case payload(CoseSign1Message)
 
     public var errorCode: Int {
         switch self {
@@ -22,6 +23,8 @@ public enum CoseParsingError: Error, ErrorCode {
             return 402
         case .missingValue:
             return 403
+        case .payload:
+            return 404
         }
     }
 }
@@ -32,7 +35,7 @@ enum CoseProtectedHeader: Int {
 }
 
 enum CoseSignatureAlgorithm: Int {
-    case es256 = -7
+    case es256 = -7 // ECDSA w/ SHA-256, Curve P-256 according to RFC 8152.
     case ps256 = -37
 }
 
@@ -68,6 +71,18 @@ public struct CoseSign1Message {
             return []
         }
         return [UInt8](signature.prefix(32))
+    }
+
+    public var revocationSignatureHash: [UInt8] {
+        let signature: [UInt8]
+        switch signatureAlgorithm {
+        case .es256:
+            signature = rValueSignature
+        case .ps256:
+            signature = self.signature
+        }
+        let hashedSignature = signature.sha256()
+        return hashedSignature
     }
 
     init(protected: [UInt8], unprotected: Any?, payload: [UInt8], signature: [UInt8]) {
@@ -125,8 +140,10 @@ public struct CoseSign1Message {
     /// Returns cose payload as json data
     func toJSON() throws -> Data {
         let cborDecodedPayload = try CBOR.decode(payload)
-        let certificateJson = decode(cborObject: cborDecodedPayload)
-        return try JSONSerialization.data(withJSONObject: certificateJson as Any)
+        let json = decode(cborObject: cborDecodedPayload)
+        guard let jsonPayload = json else { throw CoseParsingError.payload(self) }
+        let result = try JSONSerialization.data(withJSONObject: jsonPayload)
+        return result
     }
 
     /// Returns CBOR object
@@ -206,12 +223,32 @@ public struct CoseSign1Message {
         return CBOR.map(result)
     }
 
+    private func decode(cborObject: CBOR?) -> Any? {
+        guard let cborObject = cborObject else {
+            return nil
+        }
+        let result: Any?
+        switch cborObject {
+        case let .array(cborArray):
+            result = decode(cborArray)
+        case let .byteString(bytes):
+            result = bytes
+        case let .map(dictionary):
+            result = decode(dictionary)
+        default:
+            result = nil
+        }
+        return result
+    }
+
+    private func decode(_ cborArray: [CBOR]) -> [Any] {
+        cborArray.map(decode(cborObject:))
+    }
+
     /// Decode CBOR object
     /// - parameter cborObject: the CBOR object to be parsed
     /// - returns a dictionary
-    private func decode(cborObject: CBOR?) -> [String: Any]? {
-        guard let cborData = cborObject, case let .map(cborMap) = cborData else { return nil }
-
+    private func decode(_ cborMap: [CBOR: CBOR]) -> [String: Any] {
         var result = [String: Any]()
         for (key, value) in cborMap {
             if let (k, v) = decode(key: key, value: value) {
@@ -233,6 +270,8 @@ public struct CoseSign1Message {
         case let .negativeInt(keyInt):
             // NOTE: Negative integers are decoded as NegativeInt(UInt), where the actual number is -1 - i (CBOR's negative integers can be larger than 64-bit signed integers).
             k = "-\(keyInt + 1)"
+        case let .byteString(bytes):
+            k = Data(bytes).toHexString().lowercased()
         default:
             assertionFailure("CBOR key type not implemented, yet")
             return nil

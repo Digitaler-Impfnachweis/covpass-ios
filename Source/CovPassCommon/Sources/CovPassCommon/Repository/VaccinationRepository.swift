@@ -37,6 +37,7 @@ private enum Constants {
 }
 
 public class VaccinationRepository: VaccinationRepositoryProtocol {
+    private let revocationRepo: CertificateRevocationRepositoryProtocol
     private let service: APIServiceProtocol
     private let keychain: Persistence
     private var userDefaults: Persistence
@@ -65,7 +66,14 @@ public class VaccinationRepository: VaccinationRepositoryProtocol {
         return nil
     }
 
-    public init(service: APIServiceProtocol, keychain: Persistence, userDefaults: Persistence, boosterLogic: BoosterLogicProtocol, publicKeyURL: URL, initialDataURL: URL) {
+    public init(revocationRepo: CertificateRevocationRepositoryProtocol,
+                service: APIServiceProtocol,
+                keychain: Persistence,
+                userDefaults: Persistence,
+                boosterLogic: BoosterLogicProtocol,
+                publicKeyURL: URL,
+                initialDataURL: URL) {
+        self.revocationRepo = revocationRepo
         self.service = service
         self.keychain = keychain
         self.userDefaults = userDefaults
@@ -326,11 +334,12 @@ public class VaccinationRepository: VaccinationRepositoryProtocol {
     }
 
     public func validCertificate(_ data: String) -> Promise<ExtendedCBORWebToken> {
-        checkCertificate(data).map { cborWebToken in
-                .init(
-                    vaccinationCertificate: cborWebToken,
-                    vaccinationQRCodeData: data
-                )
+        firstly {
+            return checkCertificate(data)
+        }
+        .then {
+            Promise.value(ExtendedCBORWebToken(vaccinationCertificate: $0,
+                                               vaccinationQRCodeData: data))
         }
     }
 
