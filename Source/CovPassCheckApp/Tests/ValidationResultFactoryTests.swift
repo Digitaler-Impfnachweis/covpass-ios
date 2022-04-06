@@ -169,7 +169,7 @@ class ValidationResultFactoryExpertModeTests: XCTestCase {
                                                        userDefaults: persistence)
     }
     
-    func testValidationError_someCert_expertModeOff_someErrorWhileCertLogicThrown_linkIsHidden() throws {
+    func testValidationError_someCert_expertModeOff_someErrorWhileCertLogicThrown_revocationInfoHidden() throws {
         persistence.revocationExpertMode = false
         let expectedCertificate = ExtendedCBORWebToken(
             vaccinationCertificate: .mockTestCertificate,
@@ -177,10 +177,10 @@ class ValidationResultFactoryExpertModeTests: XCTestCase {
         )
         certLogic.validationError = APIError.invalidResponse
         let sut = viewModel(certificate: expectedCertificate)
-        XCTAssertTrue(sut.linkIsHidden)
+        XCTAssertTrue(sut.revocationInfoHidden)
     }
     
-    func testValidationError_someCert_expertModeOff_validationEmpty_linkIsHidden() throws {
+    func testValidationError_someCert_expertModeOff_validationEmpty_revocationInfoHidden() throws {
         persistence.revocationExpertMode = false
         let expectedCertificate = ExtendedCBORWebToken(
             vaccinationCertificate: .mockTestCertificate,
@@ -188,11 +188,11 @@ class ValidationResultFactoryExpertModeTests: XCTestCase {
         )
         certLogic.validateResult = []
         let sut = viewModel(certificate: expectedCertificate)
-        XCTAssertTrue(sut.linkIsHidden)
+        XCTAssertTrue(sut.revocationInfoHidden)
     }
     
     
-    func testValidationError_someCert_expertModeOff_validationFailing_linkIsHidden() throws {
+    func testValidationError_someCert_expertModeOff_validationFailing_revocationInfoHidden() throws {
         persistence.revocationExpertMode = false
         let expectedCertificate = ExtendedCBORWebToken(
             vaccinationCertificate: .mockTestCertificate,
@@ -200,16 +200,16 @@ class ValidationResultFactoryExpertModeTests: XCTestCase {
         )
         certLogic.validateResult = [ValidationResult(rule: .mock, result: .fail, validationErrors: nil)]
         let sut = viewModel(certificate: expectedCertificate)
-        XCTAssertTrue(sut.linkIsHidden)
+        XCTAssertTrue(sut.revocationInfoHidden)
     }
     
-    func testValidationError_missingCert_expertModeOff_linkIsHidden() throws {
+    func testValidationError_missingCert_expertModeOff_revocationInfoHidden() throws {
         persistence.revocationExpertMode = false
         let sut = viewModel()
-        XCTAssertTrue(sut.linkIsHidden)
+        XCTAssertTrue(sut.revocationInfoHidden)
     }
     
-    func testValidationError_testCert_expertModeOff_linkIsHidden() throws {
+    func testValidationError_testCert_expertModeOff_revocationInfoHidden() throws {
         persistence.revocationExpertMode = false
         let expectedCertificate = ExtendedCBORWebToken(
             vaccinationCertificate: .mockTestCertificate,
@@ -217,10 +217,10 @@ class ValidationResultFactoryExpertModeTests: XCTestCase {
         )
         certLogic.validateResult = [ValidationResult(rule: .mock, result: .passed, validationErrors: nil)]
         let sut = viewModel(certificate: expectedCertificate)
-        XCTAssertTrue(sut.linkIsHidden)
+        XCTAssertTrue(sut.revocationInfoHidden)
     }
     
-    func testValidationError_vacCert_expertModeOff_linkIsHidden() throws {
+    func testValidationError_vacCert_expertModeOff_revocationInfoHidden() throws {
         persistence.revocationExpertMode = false
         let expectedCertificate = ExtendedCBORWebToken(
             vaccinationCertificate: .mockVaccinationCertificate,
@@ -228,10 +228,10 @@ class ValidationResultFactoryExpertModeTests: XCTestCase {
         )
         certLogic.validateResult = [ValidationResult(rule: .mock, result: .passed, validationErrors: nil)]
         let sut = viewModel(certificate: expectedCertificate)
-        XCTAssertTrue(sut.linkIsHidden)
+        XCTAssertTrue(sut.revocationInfoHidden)
     }
     
-    func testValidationError_recCert_expertModeOff_linkIsHidden() throws {
+    func testValidationError_recCert_expertModeOff_revocationInfoHidden() throws {
         persistence.revocationExpertMode = false
         let expectedCertificate = ExtendedCBORWebToken(
             vaccinationCertificate: .mockRecoveryCertificate,
@@ -239,10 +239,10 @@ class ValidationResultFactoryExpertModeTests: XCTestCase {
         )
         certLogic.validateResult = [ValidationResult(rule: .mock, result: .passed, validationErrors: nil)]
         let sut = viewModel(certificate: expectedCertificate)
-        XCTAssertTrue(sut.linkIsHidden)
+        XCTAssertTrue(sut.revocationInfoHidden)
     }
     
-    func testValidationError_testCert_expertModeOn_linkIsNotHidden() throws {
+    func testValidationError_testCert_expertModeOn_revocationInfoHidden() throws {
         persistence.revocationExpertMode = true
         let expectedCertificate = ExtendedCBORWebToken(
             vaccinationCertificate: .mockTestCertificate,
@@ -250,10 +250,10 @@ class ValidationResultFactoryExpertModeTests: XCTestCase {
         )
         certLogic.validateResult = [ValidationResult(rule: .mock, result: .passed, validationErrors: nil)]
         let sut = viewModel(certificate: expectedCertificate)
-        XCTAssertFalse(sut.linkIsHidden)
+        XCTAssertFalse(sut.revocationInfoHidden)
     }
     
-    func testValidationError_vacCert_expertModeOn_linkIsNotHidden() throws {
+    func testValidationError_vacCert_expertModeOn_revocationInfoHidden() throws {
         persistence.revocationExpertMode = true
         let expectedCertificate = ExtendedCBORWebToken(
             vaccinationCertificate: .mockVaccinationCertificate,
@@ -261,10 +261,10 @@ class ValidationResultFactoryExpertModeTests: XCTestCase {
         )
         certLogic.validateResult = [ValidationResult(rule: .mock, result: .passed, validationErrors: nil)]
         let sut = viewModel(certificate: expectedCertificate)
-        XCTAssertFalse(sut.linkIsHidden)
+        XCTAssertFalse(sut.revocationInfoHidden)
     }
     
-    func testValidationError_recCert_expertModeOn_linkIsNotHidden() throws {
+    func testValidationError_recCert_expertModeOn_revocationInfoHidden() throws {
         persistence.revocationExpertMode = true
         let expectedCertificate = ExtendedCBORWebToken(
             vaccinationCertificate: .mockVaccinationCertificate,
@@ -272,7 +272,7 @@ class ValidationResultFactoryExpertModeTests: XCTestCase {
         )
         certLogic.validateResult = [ValidationResult(rule: .mock, result: .passed, validationErrors: nil)]
         let sut = viewModel(certificate: expectedCertificate)
-        XCTAssertFalse(sut.linkIsHidden)
+        XCTAssertFalse(sut.revocationInfoHidden)
     }
 }
 

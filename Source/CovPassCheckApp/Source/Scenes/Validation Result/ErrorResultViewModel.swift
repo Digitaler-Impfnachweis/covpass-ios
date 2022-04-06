@@ -87,7 +87,7 @@ class ErrorResultViewModel: ValidationResultViewModel {
         nil
     }
     
-    var linkIsHidden: Bool {
+    var revocationInfoHidden: Bool {
         let revocationExportModeIsDisabled = !userDefaults.revocationExpertMode
         let isNotAnFunctionalError = !((error as? ValidationResultError) == .functional)
         return revocationExportModeIsDisabled || isNotAnFunctionalError || _2GContext

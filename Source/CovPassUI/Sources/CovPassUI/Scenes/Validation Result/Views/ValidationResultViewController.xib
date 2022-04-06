@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -15,9 +15,10 @@
                 <outlet property="imageContainerView" destination="gbm-mz-STE" id="gDi-l3-DRz"/>
                 <outlet property="imageView" destination="YG1-hQ-PYs" id="d0f-aY-Yq1"/>
                 <outlet property="infoView" destination="l0H-jd-CpU" id="m9b-cl-1eB"/>
-                <outlet property="linkExpertMode" destination="uG2-4C-nfC" id="8Ij-HT-KS3"/>
                 <outlet property="paragraphStackView" destination="Ba0-Bt-Y6p" id="0WS-As-LOh"/>
                 <outlet property="resultView" destination="Bik-p2-0B1" id="3rP-d2-Rbr"/>
+                <outlet property="revocationInfoContainerView" destination="LGD-vw-f49" id="TjX-yj-NSl"/>
+                <outlet property="revocationInfoView" destination="sqh-km-v7C" id="2pv-Tf-IUg"/>
                 <outlet property="stackView" destination="Yk1-DY-91Y" id="6vM-qh-eDf"/>
                 <outlet property="toolbarView" destination="a6B-vC-85H" id="GVl-aS-y18"/>
                 <outlet property="view" destination="t4C-5y-EmT" id="gWo-7g-qiL"/>
@@ -61,21 +62,23 @@
                                     <rect key="frame" x="0.0" y="478" width="414" height="128"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 </view>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LGD-vw-f49">
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LGD-vw-f49" userLabel="Navigation Info Container View">
                                     <rect key="frame" x="0.0" y="606" width="414" height="120"/>
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uG2-4C-nfC">
-                                            <rect key="frame" x="24" y="8" width="70" height="104"/>
-                                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="8" maxY="0.0"/>
-                                            <state key="normal" title="Button" image="chevron_right"/>
-                                        </button>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sqh-km-v7C" customClass="HintView" customModule="CovPassUI">
+                                            <rect key="frame" x="0.0" y="8" width="414" height="104"/>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="104" placeholder="YES" id="bjJ-py-OoH"/>
+                                            </constraints>
+                                        </view>
                                     </subviews>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     <constraints>
-                                        <constraint firstItem="uG2-4C-nfC" firstAttribute="leading" secondItem="LGD-vw-f49" secondAttribute="leading" constant="24" id="SiH-kC-kF8"/>
-                                        <constraint firstAttribute="bottom" secondItem="uG2-4C-nfC" secondAttribute="bottom" constant="8" id="WbR-ld-35k"/>
-                                        <constraint firstItem="uG2-4C-nfC" firstAttribute="top" secondItem="LGD-vw-f49" secondAttribute="top" constant="8" id="YCn-J5-5qj"/>
-                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="uG2-4C-nfC" secondAttribute="trailing" constant="24" id="ehi-v8-rvS"/>
+                                        <constraint firstAttribute="bottom" secondItem="sqh-km-v7C" secondAttribute="bottom" constant="8" id="OLR-RR-mre"/>
+                                        <constraint firstItem="sqh-km-v7C" firstAttribute="leading" secondItem="LGD-vw-f49" secondAttribute="leading" id="ayQ-i2-FAr"/>
+                                        <constraint firstItem="sqh-km-v7C" firstAttribute="top" secondItem="LGD-vw-f49" secondAttribute="top" constant="8" id="iMe-AZ-kLC"/>
+                                        <constraint firstAttribute="trailing" secondItem="sqh-km-v7C" secondAttribute="trailing" id="mMH-8M-0yu"/>
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" verticalHuggingPriority="1" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="Ghi-eu-wWd" userLabel="Flexible View">
@@ -133,7 +136,6 @@
         </designable>
     </designables>
     <resources>
-        <image name="chevron_right" width="24" height="24"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

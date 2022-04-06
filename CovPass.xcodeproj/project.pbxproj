@@ -115,12 +115,12 @@
 		09AC1DF42757B423008356CD /* VaccinationResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09AC1DF02757B423008356CD /* VaccinationResultViewModel.swift */; };
 		09AC1DF52757B423008356CD /* TestResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09AC1DF12757B423008356CD /* TestResultViewModel.swift */; };
 		09AC1DF72757B439008356CD /* ValidationResultFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09AC1DF62757B439008356CD /* ValidationResultFactory.swift */; };
-		09AC1DF92757B44C008356CD /* ValidationResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09AC1DF82757B44C008356CD /* ValidationResultViewModel.swift */; };
+		09AC1DF92757B44C008356CD /* ValidationViewModel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09AC1DF82757B44C008356CD /* ValidationViewModel+Extension.swift */; };
 		09AC1E022757B6C9008356CD /* ValidationResultSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09AC1DFB2757B6C9008356CD /* ValidationResultSceneFactory.swift */; };
 		09AC1E032757B6C9008356CD /* RecoveryResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09AC1DFC2757B6C9008356CD /* RecoveryResultViewModel.swift */; };
 		09AC1E042757B6C9008356CD /* ErrorResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09AC1DFD2757B6C9008356CD /* ErrorResultViewModel.swift */; };
 		09AC1E052757B6C9008356CD /* ValidationResultFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09AC1DFE2757B6C9008356CD /* ValidationResultFactory.swift */; };
-		09AC1E062757B6C9008356CD /* ValidationResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09AC1DFF2757B6C9008356CD /* ValidationResultViewModel.swift */; };
+		09AC1E062757B6C9008356CD /* ValidationViewModel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09AC1DFF2757B6C9008356CD /* ValidationViewModel+Extension.swift */; };
 		09AC1E072757B6C9008356CD /* VaccinationResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09AC1E002757B6C9008356CD /* VaccinationResultViewModel.swift */; };
 		09AC1E082757B6C9008356CD /* TestResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09AC1E012757B6C9008356CD /* TestResultViewModel.swift */; };
 		09B5D240276A194C005F8FCE /* ScanCountRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B5D23F276A194C005F8FCE /* ScanCountRouter.swift */; };
@@ -486,12 +486,12 @@
 		09AC1DF02757B423008356CD /* VaccinationResultViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaccinationResultViewModel.swift; sourceTree = "<group>"; };
 		09AC1DF12757B423008356CD /* TestResultViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestResultViewModel.swift; sourceTree = "<group>"; };
 		09AC1DF62757B439008356CD /* ValidationResultFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationResultFactory.swift; sourceTree = "<group>"; };
-		09AC1DF82757B44C008356CD /* ValidationResultViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationResultViewModel.swift; sourceTree = "<group>"; };
+		09AC1DF82757B44C008356CD /* ValidationViewModel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ValidationViewModel+Extension.swift"; sourceTree = "<group>"; };
 		09AC1DFB2757B6C9008356CD /* ValidationResultSceneFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidationResultSceneFactory.swift; sourceTree = "<group>"; };
 		09AC1DFC2757B6C9008356CD /* RecoveryResultViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecoveryResultViewModel.swift; sourceTree = "<group>"; };
 		09AC1DFD2757B6C9008356CD /* ErrorResultViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorResultViewModel.swift; sourceTree = "<group>"; };
 		09AC1DFE2757B6C9008356CD /* ValidationResultFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidationResultFactory.swift; sourceTree = "<group>"; };
-		09AC1DFF2757B6C9008356CD /* ValidationResultViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidationResultViewModel.swift; sourceTree = "<group>"; };
+		09AC1DFF2757B6C9008356CD /* ValidationViewModel+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ValidationViewModel+Extension.swift"; sourceTree = "<group>"; };
 		09AC1E002757B6C9008356CD /* VaccinationResultViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VaccinationResultViewModel.swift; sourceTree = "<group>"; };
 		09AC1E012757B6C9008356CD /* TestResultViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestResultViewModel.swift; sourceTree = "<group>"; };
 		09B5D23F276A194C005F8FCE /* ScanCountRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanCountRouter.swift; sourceTree = "<group>"; };
@@ -989,7 +989,7 @@
 				09AC1DF12757B423008356CD /* TestResultViewModel.swift */,
 				09AC1DF02757B423008356CD /* VaccinationResultViewModel.swift */,
 				09AC1DF62757B439008356CD /* ValidationResultFactory.swift */,
-				09AC1DF82757B44C008356CD /* ValidationResultViewModel.swift */,
+				09AC1DF82757B44C008356CD /* ValidationViewModel+Extension.swift */,
 			);
 			path = "Validation Result";
 			sourceTree = "<group>";
@@ -1003,7 +1003,7 @@
 				09AC1E002757B6C9008356CD /* VaccinationResultViewModel.swift */,
 				09AC1DFE2757B6C9008356CD /* ValidationResultFactory.swift */,
 				09AC1DFB2757B6C9008356CD /* ValidationResultSceneFactory.swift */,
-				09AC1DFF2757B6C9008356CD /* ValidationResultViewModel.swift */,
+				09AC1DFF2757B6C9008356CD /* ValidationViewModel+Extension.swift */,
 			);
 			path = "Validation Result";
 			sourceTree = "<group>";
@@ -2373,7 +2373,7 @@
 				385FC1AF269F21A200D19AF8 /* RuleCheckDetailRouter.swift in Sources */,
 				216D1FBA264EF74F00370F16 /* CertificatesOverviewViewController.swift in Sources */,
 				216D1FB7264EF74F00370F16 /* CertificatesOverviewSceneFactory.swift in Sources */,
-				09AC1E062757B6C9008356CD /* ValidationResultViewModel.swift in Sources */,
+				09AC1E062757B6C9008356CD /* ValidationViewModel+Extension.swift in Sources */,
 				216D1FB0264EF74600370F16 /* PassConsentPageViewModel.swift in Sources */,
 				09AC1E052757B6C9008356CD /* ValidationResultFactory.swift in Sources */,
 				95BB0D4A27020EBE00885BA3 /* ScanPleaseViewController.swift in Sources */,
@@ -2560,7 +2560,7 @@
 				09AC1DF22757B423008356CD /* ErrorResultViewModel.swift in Sources */,
 				2181C1A4264F03BC00DE7412 /* ValidationOnboardingContainerViewModel.swift in Sources */,
 				09AC1DF52757B423008356CD /* TestResultViewModel.swift in Sources */,
-				09AC1DF92757B44C008356CD /* ValidationResultViewModel.swift in Sources */,
+				09AC1DF92757B44C008356CD /* ValidationViewModel+Extension.swift in Sources */,
 				2181C174264F037000DE7412 /* WelcomeSceneFactory.swift in Sources */,
 				0991D92D27BBCDDB009C1CB2 /* CBORWebToken+GProofViewModel.swift in Sources */,
 				092699F5278C55CC00331D77 /* GProofDifferentPersonSceneFactory.swift in Sources */,

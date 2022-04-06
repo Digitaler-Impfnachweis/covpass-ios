@@ -50,7 +50,8 @@ public class ValidationResultViewController: UIViewController {
     @IBOutlet var resultView: ParagraphView!
     @IBOutlet var paragraphStackView: UIStackView!
     @IBOutlet var infoView: PlainLabel!
-    @IBOutlet var linkExpertMode: UIButton!
+    @IBOutlet weak var revocationInfoView: HintView!
+    @IBOutlet weak var revocationInfoContainerView: UIView!
     
     // MARK: - Properties
     
@@ -76,19 +77,28 @@ public class ValidationResultViewController: UIViewController {
     // MARK: - Private
     
     @objc
-    private func reissueButtonTapped() {
+    private func reissueButtonTapped(_: Any) {
         viewModel.revocationButtonTapped()
     }
     
-    private func configureLinkExpertModeButton() {
-        linkExpertMode.semanticContentAttribute = .forceRightToLeft
-        linkExpertMode.contentVerticalAlignment = .top
-        linkExpertMode.addTarget(self, action: #selector(reissueButtonTapped), for: .touchUpInside)
-        linkExpertMode.setAttributedTitle(Constants.revocationLinkTitle.styledAs(.header_3).colored(.brandAccent), for: .normal)
+    private func configureRevocationInfoView() {
+        revocationInfoView.style = .info
+        revocationInfoContainerView.isHidden = viewModel.revocationInfoHidden
+        let bodyLabel = NSMutableAttributedString(
+            attributedString: viewModel.revocationInfoText
+                .appending("\n\n")
+                .styledAs(.body)
+                .colored(.onBackground70)
+        )
+        bodyLabel.append(.revocationLink())
+        revocationInfoView.bodyLabel.attributedText = bodyLabel
+        revocationInfoView.bodyLabel.linkCallback = reissueButtonTapped(_:)
+        revocationInfoView.titleLabel.attributedText = viewModel.revocationHeadline
+            .styledAs(.mainButton)
     }
     
     private func configureView() {
-        configureLinkExpertModeButton()
+        configureRevocationInfoView()
         configureHeadline()
         configureToolbarView()
         configureAccessibility()
@@ -112,7 +122,6 @@ public class ValidationResultViewController: UIViewController {
     }
     
     private func updateViews() {
-        linkExpertMode.isHidden = viewModel.linkIsHidden
         toolbarView.primaryButton.isHidden = viewModel.buttonHidden
         stackView.setCustomSpacing(.space_24, after: imageContainerView)
         stackView.setCustomSpacing(.space_24, after: resultView)
@@ -177,5 +186,22 @@ extension ValidationResultViewController: ModalInteractiveDismissibleProtocol {
     
     public func modalViewControllerDidDismiss() {
         viewModel.cancel()
+    }
+}
+
+// MARK: - NSAttributedString
+
+private extension NSAttributedString {
+    static func revocationLink() -> NSAttributedString {
+        let linkText = (Constants.revocationLinkTitle + " ⟩")
+            .styledAs(.header_3)
+            .colored(.brandAccent)
+        let string = NSMutableAttributedString(attributedString: linkText)
+        string.addAttribute(
+            .link,
+            value: "",
+            range: NSMakeRange(0, string.length)
+        )
+        return string
     }
 }

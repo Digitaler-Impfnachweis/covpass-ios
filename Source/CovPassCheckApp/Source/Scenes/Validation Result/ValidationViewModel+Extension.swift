@@ -1,5 +1,5 @@
 //
-//  ValidationResultViewModel.swift
+//  ValidationViewModel+Extension.swift
 //
 //
 //  © Copyright IBM Deutschland GmbH 2021
@@ -14,12 +14,22 @@ import UIKit
 private enum Constants {
     static let confirmButtonLabel = "validation_check_popup_valid_vaccination_button_title".localized
     static let confirmButtonLabel2G = "result_2G_button_startover".localized
+    static let revocationBody = "validation_check_popup_revoked_certificate_box_text".localized
+    static let revocationTitle = "revocation_headline".localized
 }
 
 extension ValidationViewModel {
     
-    var linkIsHidden: Bool {
+    var revocationInfoHidden: Bool {
         !userDefaults.revocationExpertMode || _2GContext
+    }
+
+    var revocationInfoText: String {
+        Constants.revocationBody
+    }
+
+    var revocationHeadline: String {
+        Constants.revocationTitle
     }
         
     var toolbarState: CustomToolbarState {

@@ -26,8 +26,37 @@ public class HintView: XibView {
     @IBOutlet public var iconStackviewCenterYConstraint: NSLayoutConstraint!
     @IBOutlet public var iconStackViewAlignToTopTile: NSLayoutConstraint!
     @IBOutlet public var titleSuperViewBottomConstraint: NSLayoutConstraint!
+
+    // MARK: -
     
-    
+    enum Style {
+        case warning
+        case info
+    }
+
+    var style: Style = .warning {
+        didSet {
+            switch style {
+            case .warning:
+                apply(warningStyle)
+            case .info:
+                apply(infoStyle)
+            }
+        }
+    }
+
+    private lazy var warningStyle = CovPassUI.Style(
+        backgroundColor: .infoBackground,
+        borderColor: .infoAccent,
+        icon: .warning
+    )
+
+    private lazy var infoStyle = CovPassUI.Style(
+        backgroundColor: .brandAccent10,
+        borderColor: .onBackground50,
+        icon: .infoSignal
+    )
+
     // MARK: - Lifecycle
 
     override public func initView() {
@@ -37,12 +66,8 @@ public class HintView: XibView {
         iconStackViewAlignToTopTile.isActive = false
         titleSuperViewBottomConstraint.isActive = false
 
-        containerView.backgroundColor = .infoBackground
         containerView?.layer.borderWidth = 1.0
-        containerView?.layer.borderColor = UIColor.infoAccent.cgColor
         containerView?.layer.cornerRadius = 12.0
-
-        iconView.image = UIImage.warning
 
         // remove placeholders
         titleLabel.text = nil
@@ -51,6 +76,13 @@ public class HintView: XibView {
 
         iconLabel.text = nil
         iconLabel.isHidden = true
+        style = .warning
+    }
+
+    private func apply(_ style: CovPassUI.Style) {
+        containerView.backgroundColor = style.backgroundColor
+        containerView.layer.borderColor = style.borderColor.cgColor
+        iconView.image = style.icon
     }
 
     override public func updateConstraints() {
@@ -65,4 +97,10 @@ public class HintView: XibView {
         containerTrailingConstraint.constant = 0
         containerBottomConstraint.constant = 0
     }
+}
+
+private struct Style {
+    let backgroundColor: UIColor
+    let borderColor: UIColor
+    let icon: UIImage
 }
