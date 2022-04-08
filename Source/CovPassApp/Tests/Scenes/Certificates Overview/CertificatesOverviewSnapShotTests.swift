@@ -57,7 +57,7 @@ class CertificateOverviewSnapShotTests: BaseSnapShotTests {
         let viewModel = self.viewModel(router: router, repository: vacinationRepoMock)
         let viewController = CertificatesOverviewViewController(viewModel: viewModel)
         viewController.view.bounds = UIScreen.main.bounds
-        RunLoop.current.run(for: 0.3)
+        RunLoop.current.run(for: 0.5)
         verifyView(vc: viewController)
     }
     
@@ -151,7 +151,7 @@ class CertificateOverviewSnapShotTests: BaseSnapShotTests {
         let window = UIWindow(frame: UIScreen.main.bounds)
         window.rootViewController = viewController
         window.makeKeyAndVisible()
-        RunLoop.current.run(for: 0.3)
+        RunLoop.current.run(for: 0.5)
         verifyView(view: viewController.collectionView.cellForItem(at: IndexPath(row: 0, section: 0))!)
     }
 }
