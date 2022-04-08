@@ -175,6 +175,7 @@ class GProofViewModel: GProofViewModelProtocol {
     }
     
     private func errorHandling(_ error: Error, token: ExtendedCBORWebToken?) {
+        self.error = error
         if (error as? QRCodeError) == .qrCodeExists {
             router.showError(error: error)
         } else if isFirstScan && ((error as? ScanError) == .badOutput || (error as? Base45CodingError) == .base45Decoding) {
