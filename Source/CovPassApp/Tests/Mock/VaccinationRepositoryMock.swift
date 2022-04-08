@@ -111,7 +111,7 @@ public class VaccinationRepositoryMock: VaccinationRepositoryProtocol {
     }
 
     public func scanCertificate(_: String, isCountRuleEnabled: Bool, expirationRuleIsActive: Bool) -> Promise<QRCodeScanable> {
-        .init(error: ApplicationError.unknownError)
+        .value(try! ExtendedCBORWebToken.mock())
     }
 
     public func checkCertificate(_: String) -> Promise<CBORWebToken> {

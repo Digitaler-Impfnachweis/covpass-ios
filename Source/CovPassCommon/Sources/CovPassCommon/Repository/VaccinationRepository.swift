@@ -115,7 +115,7 @@ public class VaccinationRepository: VaccinationRepositoryProtocol {
             var checkedCertificates = [ExtendedCBORWebToken]()
             for var certificate in list.certificates {
                 if (try? checkCertificate(certificate.vaccinationQRCodeData).wait()) == nil {
-                    certificate.vaccinationCertificate.invalid = true
+                    certificate.invalid = true
                 }
                 checkedCertificates.append(certificate)
             }
@@ -277,7 +277,11 @@ public class VaccinationRepository: VaccinationRepositoryProtocol {
         }
         .map(on: .global()) { certificate in
             ExtendedCBORWebToken(vaccinationCertificate: certificate, vaccinationQRCodeData: data)
-        }.then(on: .global()) { extendedCBORWebToken in
+        }
+        .then(on: .global()) {
+            RevokeUseCase(token: $0, revocationRepository: self.revocationRepo).execute()
+        }
+        .then(on: .global()) { extendedCBORWebToken in
             self.getCertificateList()
                 .then(on: .global()) { list -> Promise<Void> in
                     var certList = list

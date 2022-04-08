@@ -36,8 +36,7 @@ class ExtendedCBORWebTokenTests: XCTestCase {
         // Given
         let sut = ExtendedCBORWebToken(
             vaccinationCertificate: .mockVaccinationCertificate,
-            vaccinationQRCodeData: ""
-        )
+            vaccinationQRCodeData: "")
 
         // When & Then
         XCTAssertThrowsError(try sut.coseSign1Message())
@@ -47,8 +46,7 @@ class ExtendedCBORWebTokenTests: XCTestCase {
         // Given
         let sut = ExtendedCBORWebToken(
             vaccinationCertificate: .mockVaccinationCertificate,
-            vaccinationQRCodeData: "NOT BASE45 ENCODED"
-        )
+            vaccinationQRCodeData: "NOT BASE45 ENCODED")
 
         // When & Then
         XCTAssertThrowsError(try sut.coseSign1Message())
@@ -59,8 +57,7 @@ class ExtendedCBORWebTokenTests: XCTestCase {
         let data = [UInt8](try XCTUnwrap("QRCODE".data(using: .utf8)))
         let sut = ExtendedCBORWebToken(
             vaccinationCertificate: .mockVaccinationCertificate,
-            vaccinationQRCodeData: Base45Coder.encode(data)
-        )
+            vaccinationQRCodeData: Base45Coder.encode(data))
 
         // When & Then
         XCTAssertThrowsError(try sut.coseSign1Message())
@@ -73,8 +70,7 @@ class ExtendedCBORWebTokenTests: XCTestCase {
         let encodedData = Base45Coder.encode([UInt8](compressedData))
         let sut = ExtendedCBORWebToken(
             vaccinationCertificate: .mockVaccinationCertificate,
-            vaccinationQRCodeData: encodedData
-        )
+            vaccinationQRCodeData: encodedData)
 
         // When & Then
         XCTAssertThrowsError(try sut.coseSign1Message())
@@ -84,8 +80,7 @@ class ExtendedCBORWebTokenTests: XCTestCase {
         // Given
         let sut = ExtendedCBORWebToken(
             vaccinationCertificate: .mockVaccinationCertificate,
-            vaccinationQRCodeData: CertificateMock.validCertificate
-        )
+            vaccinationQRCodeData: CertificateMock.validCertificate)
 
         // When
         let message = try sut.coseSign1Message()

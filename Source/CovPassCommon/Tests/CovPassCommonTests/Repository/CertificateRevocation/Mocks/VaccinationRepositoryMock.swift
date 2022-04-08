@@ -8,8 +8,10 @@
 import CovPassCommon
 import PromiseKit
 import Foundation
+import XCTest
 
 public class VaccinationRepositoryMock: VaccinationRepositoryProtocol {
+    let saveCertExpectation = XCTestExpectation(description: "get certificate list has to be called")
     var lastUpdateTrustList: Date?
     var shouldTrustListUpdate: Bool = false
 
@@ -44,8 +46,9 @@ public class VaccinationRepositoryMock: VaccinationRepositoryProtocol {
         Promise.value(CertificateList(certificates: []))
     }
 
-    public func saveCertificateList(_: CertificateList) -> Promise<CertificateList> {
-        Promise.value(CertificateList(certificates: []))
+    public func saveCertificateList(_ certList: CertificateList) -> Promise<CertificateList> {
+        saveCertExpectation.fulfill()
+        return .value(certList)
     }
 
     public func add(tokens: [ExtendedCBORWebToken]) -> Promise<Void> {
@@ -94,8 +97,9 @@ public class VaccinationRepositoryMock: VaccinationRepositoryProtocol {
     public func validCertificate(_ data: String) -> Promise<ExtendedCBORWebToken> {
         checkedCert != nil ?
             .value(
-                ExtendedCBORWebToken(vaccinationCertificate: checkedCert!,
-                                     vaccinationQRCodeData: "")
+                ExtendedCBORWebToken(
+                    vaccinationCertificate: checkedCert!,
+                    vaccinationQRCodeData: "")
             ) :
             .init(error: checkedCertError)
     }

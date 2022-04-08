@@ -110,6 +110,11 @@ class CertificatesOverviewViewController: UIViewController {
         addButton.action = { [weak self] in
             self?.viewModel.scanCertificate()
         }
+        if viewModel.isLoading {
+            addButton.startAnimating()
+        } else {
+            addButton.stopAnimating()
+        }
     }
 
     private func reloadCollectionView() {
@@ -177,6 +182,7 @@ extension CertificatesOverviewViewController: CertificatesOverviewViewModelDeleg
     func viewModelDidUpdate() {
         setupHeaderView()
         reloadCollectionView()
+        setupActionButton()
     }
 
     func viewModelNeedsFirstCertificateVisible() {

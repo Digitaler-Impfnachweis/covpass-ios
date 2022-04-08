@@ -20,7 +20,7 @@ struct RecoveryCertificateItemViewModel: CertificateItemViewModel {
     private let active: Bool
 
     var icon: UIImage {
-        if certificate.vaccinationCertificate.isExpired || certificate.vaccinationCertificate.isInvalid {
+        if certificate.vaccinationCertificate.isExpired || certificate.isInvalid {
             return .expired
         }
         if certificate.vaccinationCertificate.expiresSoon {
@@ -30,7 +30,7 @@ struct RecoveryCertificateItemViewModel: CertificateItemViewModel {
     }
 
     var iconColor: UIColor {
-        if !active || certificate.vaccinationCertificate.isExpired || certificate.vaccinationCertificate.isInvalid {
+        if !active || certificate.vaccinationCertificate.isExpired || certificate.isInvalid {
             return .onBackground40
         }
         if dgc.v?.first?.fullImmunization ?? true == false {
@@ -40,7 +40,7 @@ struct RecoveryCertificateItemViewModel: CertificateItemViewModel {
     }
 
     var iconBackgroundColor: UIColor {
-        if !active || certificate.vaccinationCertificate.isExpired || certificate.vaccinationCertificate.isInvalid {
+        if !active || certificate.vaccinationCertificate.isExpired || certificate.isInvalid {
             return .onBackground20
         }
         if dgc.v?.first?.fullImmunization ?? true == false {
@@ -76,7 +76,7 @@ struct RecoveryCertificateItemViewModel: CertificateItemViewModel {
         if certificate.vaccinationCertificate.expiresSoon {
             return "certificates_overview_expires_soon_certificate_note".localized
         }
-        if certificate.vaccinationCertificate.isInvalid {
+        if certificate.isInvalid {
             return "certificates_overview_invalid_certificate_note".localized
         }
         return nil

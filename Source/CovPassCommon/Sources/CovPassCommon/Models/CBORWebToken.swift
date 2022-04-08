@@ -17,18 +17,11 @@ public struct CBORWebToken: Codable {
     public var exp: Date?
     /// the health certificate claim
     public var hcert: HealthCertificateClaim
-    /// true if certificate is invalid, e.g. DSC has been revoked
-    public var invalid: Bool?
 
     /// True if certificate is expired
     public var isExpired: Bool {
         guard let exp = self.exp else { return false }
         return Date() >= exp
-    }
-
-    /// True if certificate is invalid
-    public var isInvalid: Bool {
-        invalid ?? false
     }
 
     /// True if certificate expires soon
@@ -45,12 +38,11 @@ public struct CBORWebToken: Codable {
         case hcert = "-260"
     }
 
-    public init(iss: String, iat: Date? = nil, exp: Date? = nil, hcert: HealthCertificateClaim, invalid: Bool? = nil) {
+    public init(iss: String, iat: Date? = nil, exp: Date? = nil, hcert: HealthCertificateClaim) {
         self.iss = iss
         self.iat = iat
         self.exp = exp
         self.hcert = hcert
-        self.invalid = invalid
     }
 
     public init(from decoder: Decoder) throws {

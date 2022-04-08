@@ -29,6 +29,7 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
     weak var delegate: CertificatesOverviewViewModelDelegate?
     private var router: CertificatesOverviewRouterProtocol
     private let repository: VaccinationRepositoryProtocol
+    private let revocationRepository: CertificateRevocationRepositoryProtocol
     private var certLogic: DCCCertLogicProtocol
     private let boosterLogic: BoosterLogicProtocol
     private var certificateList = CertificateList(certificates: [])
@@ -67,11 +68,18 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
         return dataPrivacyHash
     }
     
+    var isLoading: Bool = false {
+        didSet {
+            delegate?.viewModelDidUpdate()
+        }
+    }
+    
     // MARK: - Lifecycle
     
     init(
         router: CertificatesOverviewRouterProtocol,
         repository: VaccinationRepositoryProtocol,
+        revocationRepository: CertificateRevocationRepositoryProtocol,
         certLogic: DCCCertLogicProtocol,
         boosterLogic: BoosterLogicProtocol,
         userDefaults: UserDefaultsPersistence,
@@ -79,6 +87,7 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
     ) {
         self.router = router
         self.repository = repository
+        self.revocationRepository = revocationRepository
         self.certLogic = certLogic
         self.boosterLogic = boosterLogic
         self.userDefaults = userDefaults
@@ -114,6 +123,14 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
     private func refreshCertificates() -> Promise<Void> {
         firstly {
             repository.getCertificateList()
+        }
+        .then {
+            InvalidationUseCase(certificateList: $0,
+                                revocationRepository: self.revocationRepository,
+                                vaccinationRepository: self.repository,
+                                date: Date(),
+                                userDefaults: self.userDefaults)
+            .execute()
         }
         .get {
             self.certificateList = $0
@@ -196,6 +213,7 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
     }
     
     func scanCertificate(withIntroduction: Bool) {
+        isLoading = true
         firstly {
             withIntroduction ? router.showHowToScan() : Promise.value
         }
@@ -223,6 +241,9 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
                 throw CertificateError.invalidEntity
             }
             
+        }
+        .ensure {
+            self.isLoading = false
         }
         .catch { error in
             self.errorHandling(error)
@@ -487,7 +508,7 @@ extension CertificatesOverviewViewModel {
             .filter { extendedToken in
                 let alreadyShown = extendedToken.wasExpiryAlertShown ?? false
                 let token = extendedToken.vaccinationCertificate
-                let showAlert = !alreadyShown && (token.expiresSoon || token.isInvalid || token.isExpired)
+                let showAlert = !alreadyShown && (token.expiresSoon || extendedToken.isInvalid || token.isExpired)
                 return showAlert
             }
     }

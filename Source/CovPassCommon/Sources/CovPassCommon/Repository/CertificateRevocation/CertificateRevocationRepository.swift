@@ -8,7 +8,7 @@
 import Foundation
 import PromiseKit
 
-public class CertificateRevocationRepository: CertificateRevocationRepositoryProtocol {
+public struct CertificateRevocationRepository: CertificateRevocationRepositoryProtocol {
     private typealias KIDList = Void
     private let client: CertificateRevocationHTTPClientProtocol
 

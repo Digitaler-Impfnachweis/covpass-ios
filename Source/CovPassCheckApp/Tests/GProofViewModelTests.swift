@@ -24,8 +24,7 @@ class GProofViewModelTests: XCTestCase {
         super.setUp()
         let initialToken = ExtendedCBORWebToken(
             vaccinationCertificate: CBORWebToken.mockTestCertificate,
-            vaccinationQRCodeData: ""
-        )
+            vaccinationQRCodeData: "")
         vaccinationRepoMock = VaccinationRepositoryMock()
         certLogicMock = DCCCertLogicMock()
         routerMock = GProofMockRouter()
@@ -629,8 +628,7 @@ class GProofViewModelTests: XCTestCase {
         )
         var token = ExtendedCBORWebToken.init(
             vaccinationCertificate: .mockTestCertificate,
-            vaccinationQRCodeData: ""
-        )
+            vaccinationQRCodeData: "")
         token.vaccinationCertificate.hcert.dgc.t = [test]
         vaccinationRepoMock.checkedCert = CBORWebToken.mockTestCertificate
         certLogicMock.validateResult = [
@@ -659,8 +657,7 @@ class GProofViewModelTests: XCTestCase {
         let basicVaccination = CBORWebToken.mockVaccinationCertificate
         _ = ExtendedCBORWebToken(
             vaccinationCertificate: basicVaccination,
-            vaccinationQRCodeData: ""
-        )
+            vaccinationQRCodeData: "")
         basicVaccination.hcert.dgc.v!.first!.sd = 2
         basicVaccination.hcert.dgc.v!.first!.dn = 2
         let boosterVaccination = CBORWebToken.mockVaccinationCertificate

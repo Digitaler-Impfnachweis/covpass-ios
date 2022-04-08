@@ -30,6 +30,7 @@ class CertificateOverviewSnapShotTests: BaseSnapShotTests {
         CertificatesOverviewViewModel(
             router: router,
             repository: repository,
+            revocationRepository: CertificateRevocationRepositoryMock(),
             certLogic: DCCCertLogicMock(),
             boosterLogic: BoosterLogicMock(),
             userDefaults: UserDefaultsPersistence(),
@@ -38,9 +39,7 @@ class CertificateOverviewSnapShotTests: BaseSnapShotTests {
     }
     
     func testCertificateOverviewCertificates() {
-        let window = UIWindow(frame: UIScreen.main.bounds)
-        let sceneCoordinator = DefaultSceneCoordinator(window: window)
-        let router = CertificatesOverviewRouter(sceneCoordinator: sceneCoordinator)
+        let router = CertificatesOverviewRouterMock()
         let vacinationRepoMock: VaccinationRepositoryMock = VaccinationRepositoryMock()
         let cert1: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended()
         cert1.vaccinationCertificate.hcert.dgc.nam.fn = "John 1"
@@ -58,7 +57,7 @@ class CertificateOverviewSnapShotTests: BaseSnapShotTests {
         let viewModel = self.viewModel(router: router, repository: vacinationRepoMock)
         let viewController = CertificatesOverviewViewController(viewModel: viewModel)
         viewController.view.bounds = UIScreen.main.bounds
-        RunLoop.current.run(for: 0.1)
+        RunLoop.current.run(for: 0.3)
         verifyView(vc: viewController)
     }
     
@@ -73,7 +72,7 @@ class CertificateOverviewSnapShotTests: BaseSnapShotTests {
         let window = UIWindow(frame: UIScreen.main.bounds)
         window.rootViewController = viewController
         window.makeKeyAndVisible()
-        RunLoop.current.run(for: 0.2)
+        RunLoop.current.run(for: 0.3)
         verifyView(view: viewController.collectionView.cellForItem(at: IndexPath(row: 0, section: 0))!)
     }
     
@@ -89,7 +88,7 @@ class CertificateOverviewSnapShotTests: BaseSnapShotTests {
         let window = UIWindow(frame: UIScreen.main.bounds)
         window.rootViewController = viewController
         window.makeKeyAndVisible()
-        RunLoop.current.run(for: 0.2)
+        RunLoop.current.run(for: 0.3)
         verifyView(view: viewController.collectionView.cellForItem(at: IndexPath(row: 0, section: 0))!)
     }
     
@@ -104,7 +103,7 @@ class CertificateOverviewSnapShotTests: BaseSnapShotTests {
         let window = UIWindow(frame: UIScreen.main.bounds)
         window.rootViewController = viewController
         window.makeKeyAndVisible()
-        RunLoop.current.run(for: 0.2)
+        RunLoop.current.run(for: 0.3)
         verifyView(view: viewController.collectionView.cellForItem(at: IndexPath(row: 0, section: 0))!)
     }
     
@@ -120,7 +119,7 @@ class CertificateOverviewSnapShotTests: BaseSnapShotTests {
         let window = UIWindow(frame: UIScreen.main.bounds)
         window.rootViewController = viewController
         window.makeKeyAndVisible()
-        RunLoop.current.run(for: 0.2)
+        RunLoop.current.run(for: 0.3)
         verifyView(view: viewController.collectionView.cellForItem(at: IndexPath(row: 0, section: 0))!)
     }
     
@@ -136,7 +135,7 @@ class CertificateOverviewSnapShotTests: BaseSnapShotTests {
         let window = UIWindow(frame: UIScreen.main.bounds)
         window.rootViewController = viewController
         window.makeKeyAndVisible()
-        RunLoop.current.run(for: 0.2)
+        RunLoop.current.run(for: 0.3)
         verifyView(view: viewController.collectionView.cellForItem(at: IndexPath(row: 0, section: 0))!)
     }
     
@@ -144,7 +143,7 @@ class CertificateOverviewSnapShotTests: BaseSnapShotTests {
         let vacinationRepoMock: VaccinationRepositoryMock = VaccinationRepositoryMock()
         var cert: ExtendedCBORWebToken = CBORWebToken.mockTestCertificate.extended()
         cert.vaccinationCertificate.hcert.dgc.nam.fn = "John 1"
-        cert.vaccinationCertificate.invalid = true
+        cert.invalid = true
         let certs = [cert]
         vacinationRepoMock.certificates = certs
         let viewModel = self.viewModel(router: CertificatesOverviewRouterMock(), repository: vacinationRepoMock)
@@ -152,7 +151,7 @@ class CertificateOverviewSnapShotTests: BaseSnapShotTests {
         let window = UIWindow(frame: UIScreen.main.bounds)
         window.rootViewController = viewController
         window.makeKeyAndVisible()
-        RunLoop.current.run(for: 0.2)
+        RunLoop.current.run(for: 0.3)
         verifyView(view: viewController.collectionView.cellForItem(at: IndexPath(row: 0, section: 0))!)
     }
 }

@@ -9,7 +9,7 @@ import CovPassCommon
 import Foundation
 
 extension CertificateRevocationRepository {
-    convenience init?() {
+    init?() {
         let trustKeyResourceName = XCConfiguration.certificateRevocationTrustKey
         guard let trustKeyString = try? Bundle.main.loadString(resource: trustKeyResourceName, encoding: .ascii),
               let secKey = try? trustKeyString.secKey() else {

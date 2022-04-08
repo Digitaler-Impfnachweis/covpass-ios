@@ -168,7 +168,8 @@ class CertificateReissueRepositoryTests: XCTestCase {
         try prepareURLSession(with: qrCodeData)
 
         // When
-        sut.reissue([ExtendedCBORWebToken(vaccinationCertificate: .mockVaccinationCertificate, vaccinationQRCodeData: qrCodeData)])
+        sut.reissue([ExtendedCBORWebToken(vaccinationCertificate: .mockVaccinationCertificate,
+                                          vaccinationQRCodeData: qrCodeData)])
             .done { webTokens in
                 guard let data = self.httpClient.receivedHTTPRequest?.httpBody,
                       let requestBody = try? JSONDecoder().decode(CertificateReissueRequestBody.self, from: data) else { return }

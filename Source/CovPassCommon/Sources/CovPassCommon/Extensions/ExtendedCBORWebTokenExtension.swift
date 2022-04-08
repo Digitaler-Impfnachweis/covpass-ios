@@ -30,4 +30,6 @@ public extension ExtendedCBORWebToken {
     var firstVaccination: Vaccination? { vaccinations?.first }
 
     var canExportToPDF: Bool { vaccinationCertificate.hcert.dgc.template != nil }
+    
+    var isInvalid: Bool { invalid ?? false }    
 }

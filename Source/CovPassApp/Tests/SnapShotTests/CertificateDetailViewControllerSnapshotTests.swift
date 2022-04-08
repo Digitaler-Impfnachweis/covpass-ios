@@ -153,7 +153,7 @@ class CertificateDetailViewControllerSnapshotTests: BaseSnapShotTests {
         var cert: ExtendedCBORWebToken = CBORWebToken.mockTestCertificate.extended()
         cert.vaccinationCertificate.hcert.dgc.t!.first!.sc = DateUtils.parseDate("2021-04-26T15:05:00")!
         cert.vaccinationCertificate.hcert.dgc.nam.fn = "John 1"
-        cert.vaccinationCertificate.invalid = true
+        cert.invalid = true
         let certs = [cert]
         vacinationRepoMock.certificates = certs
         let bl = BoosterLogic.init(certLogic: DCCCertLogicMock(),
@@ -174,7 +174,7 @@ class CertificateDetailViewControllerSnapshotTests: BaseSnapShotTests {
         var cert: ExtendedCBORWebToken = CBORWebToken.mockTestCertificate.extended()
         cert.vaccinationCertificate.hcert.dgc.t!.first!.sc = DateUtils.parseDate("2021-04-26T15:05:00")!
         cert.vaccinationCertificate.hcert.dgc.nam.fn = "John 1"
-        cert.vaccinationCertificate.invalid = true
+        cert.invalid = true
         cert.vaccinationQRCodeData = " "
 
         // Test
@@ -226,7 +226,7 @@ class CertificateDetailViewControllerSnapshotTests: BaseSnapShotTests {
         var cert: ExtendedCBORWebToken = CBORWebToken.mockTestCertificate.extended()
         cert.vaccinationCertificate.hcert.dgc.t!.first!.sc = DateUtils.parseDate("2021-04-26T15:05:00")!
         cert.vaccinationCertificate.hcert.dgc.nam.fn = "John 1"
-        cert.vaccinationCertificate.invalid = true
+        cert.invalid = true
         cert.vaccinationQRCodeData = " "
 
         // Test
@@ -278,7 +278,7 @@ class CertificateDetailViewControllerSnapshotTests: BaseSnapShotTests {
         var cert: ExtendedCBORWebToken = CBORWebToken.mockTestCertificate.extended()
         cert.vaccinationCertificate.hcert.dgc.t!.first!.sc = DateUtils.parseDate("2021-04-26T15:05:00")!
         cert.vaccinationCertificate.hcert.dgc.nam.fn = "John 1"
-        cert.vaccinationCertificate.invalid = true
+        cert.invalid = true
         cert.vaccinationQRCodeData = " "
 
         // Test
@@ -325,7 +325,7 @@ class CertificateDetailViewControllerSnapshotTests: BaseSnapShotTests {
         var cert: ExtendedCBORWebToken = CBORWebToken.mockTestCertificate.extended()
         cert.vaccinationCertificate.hcert.dgc.t!.first!.sc = DateUtils.parseDate("2021-04-26T15:05:00")!
         cert.vaccinationCertificate.hcert.dgc.nam.fn = "John 1"
-        cert.vaccinationCertificate.invalid = true
+        cert.invalid = true
         cert.vaccinationQRCodeData = " "
 
         // Test
@@ -367,7 +367,7 @@ class CertificateDetailViewControllerSnapshotTests: BaseSnapShotTests {
         var cert: ExtendedCBORWebToken = CBORWebToken.mockTestCertificate.extended()
         cert.vaccinationCertificate.hcert.dgc.t!.first!.sc = DateUtils.parseDate("2021-04-26T15:05:00")!
         cert.vaccinationCertificate.hcert.dgc.nam.fn = "John 1"
-        cert.vaccinationCertificate.invalid = true
+        cert.invalid = true
         cert.vaccinationQRCodeData = " "
 
         // Test

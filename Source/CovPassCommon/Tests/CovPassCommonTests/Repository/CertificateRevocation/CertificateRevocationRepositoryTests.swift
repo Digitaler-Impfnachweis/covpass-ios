@@ -12,14 +12,17 @@ import XCTest
 class CertificateRevocationRepositoryTests: XCTestCase {
     private var client: CertificateRevocationHTTPClientMock!
     private var sut: CertificateRevocationRepository!
+    private var userDefaults: UserDefaultsPersistence!
 
     override func setUpWithError() throws {
         client = .init()
+        userDefaults = UserDefaultsPersistence()
         client.kidListResponse = .validKidListResponse()
         sut = .init(client: client)
     }
 
     override func tearDownWithError() throws {
+        userDefaults = nil
         client = nil
         sut = nil
     }
@@ -310,8 +313,7 @@ private extension ExtendedCBORWebToken {
         let cborWebToken = try JSONDecoder().decode(CBORWebToken.self, from: messagePayload)
         let extendedCborWebToken = ExtendedCBORWebToken(
             vaccinationCertificate: cborWebToken,
-            vaccinationQRCodeData: revokedVaccinationCertificateQRCode
-        )
+            vaccinationQRCodeData: revokedVaccinationCertificateQRCode)
         return extendedCborWebToken
     }
 }

@@ -67,7 +67,7 @@ class CertificateItemDetailViewModel: CertificateItemDetailViewModelProtocol {
     }
 
     var isInvalid: Bool {
-        certificate.vaccinationCertificate.isInvalid
+        certificate.isInvalid
     }
 
     private var dob: String {

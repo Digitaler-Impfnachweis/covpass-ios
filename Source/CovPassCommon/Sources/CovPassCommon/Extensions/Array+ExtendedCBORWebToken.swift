@@ -231,7 +231,7 @@ public extension Array where Element == ExtendedCBORWebToken {
     }
     
     var filterValidAndNotExpiredCertsWhichArenNotFraud: [ExtendedCBORWebToken] {
-        self.filter({ ($0.vaccinationCertificate.isExpired && !$0.vaccinationCertificate.isFraud) || !$0.vaccinationCertificate.isInvalid  })
+        self.filter({ ($0.vaccinationCertificate.isExpired && !$0.vaccinationCertificate.isFraud) || !$0.isInvalid  })
     }
     
     func firstIndex(of certificate: Element?) -> Int? {

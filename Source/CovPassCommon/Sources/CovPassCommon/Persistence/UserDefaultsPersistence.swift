@@ -118,6 +118,16 @@ public extension Persistence {
         }
     }
     
+    var lastQueriedRevocation: Date? {
+        get {
+            let value = try? fetch(UserDefaults.keyLastQueriedRevocation) as? Date
+            return value
+        }
+        set {
+            try? store(UserDefaults.keyLastQueriedRevocation, value: newValue as Any)
+        }
+    }
+    
     var valueSets: Data? {
         get {
             let value = try? fetch(UserDefaults.keyValueSets) as? Data

@@ -22,4 +22,5 @@ public extension UserDefaults {
     static let keyBoosterCandidates = "keyBoosterCandidates"
     static let keySelectedLogicType = "keySelectedLogicType"
     static let keyOnboardingSelectedLogicTypeAlreadySeen = "keyOnboardingSelectedLogicTypeAlreadySeen"
+    static let keyLastQueriedRevocation = "lastQueriedRevocation"
 }

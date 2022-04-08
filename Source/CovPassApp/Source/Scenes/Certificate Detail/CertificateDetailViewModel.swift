@@ -45,7 +45,7 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
     }
 
     var immunizationButton: String {
-        if selectedCertificate?.vaccinationCertificate.isInvalid ?? false {
+        if selectedCertificate?.isInvalid ?? false {
             return "certificates_overview_expired_action_button_title".localized
         }
         return "recovery_certificate_overview_action_button_title".localized
@@ -74,7 +74,7 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
     }
 
     var immunizationIcon: UIImage? {
-        if selectedCertificate?.vaccinationCertificate.isExpired ?? false || selectedCertificate?.vaccinationCertificate.isInvalid ?? false {
+        if selectedCertificate?.vaccinationCertificate.isExpired ?? false || selectedCertificate?.isInvalid ?? false {
             return UIImage.statusExpiredCircle
         }
         if selectedCertificate?.vaccinationCertificate.expiresSoon ?? false {
@@ -101,7 +101,7 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
                           DateUtils.displayDateFormatter.string(from: expireDate),
                           DateUtils.displayTimeFormatter.string(from: expireDate))
         }
-        if selectedCertificate?.vaccinationCertificate.isInvalid ?? false {
+        if selectedCertificate?.isInvalid ?? false {
             return "certificate_invalid_detail_view_note_title".localized
         }
         if let r = selectedCertificate?.vaccinationCertificate.hcert.dgc.r?.first {
@@ -142,7 +142,7 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
         if selectedCertificate?.vaccinationCertificate.expiresSoon ?? false {
             return "certificates_overview_soon_expiring_subtitle".localized
         }
-        if selectedCertificate?.vaccinationCertificate.isInvalid ?? false {
+        if selectedCertificate?.isInvalid ?? false {
             return "certificates_overview_invalid_message".localized
         }
         if let cert = selectedCertificate?.vaccinationCertificate.hcert.dgc.v?.first(where: { $0.fullImmunization }), !cert.fullImmunizationValid {
@@ -247,7 +247,7 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
     }
 
     func immunizationButtonTapped() {
-        if selectedCertificate?.vaccinationCertificate.isInvalid ?? false {
+        if selectedCertificate?.isInvalid ?? false {
             resolver?.fulfill(.addNewCertificate)
         } else {
             guard let cert = certificates.sortLatest().first else {

@@ -21,7 +21,8 @@ class MockCertificateViewModel: CertificatesOverviewViewModelProtocol {
     var processCalled = false
     var configureCalled = false
     var selectedCertificateIndex: Int?
-
+    var isLoading: Bool = false
+    
     // MARK: - CertificateViewModel
 
     weak var delegate: CertificatesOverviewViewModelDelegate?

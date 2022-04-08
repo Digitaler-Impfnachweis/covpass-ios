@@ -15,6 +15,7 @@ class CertificatesOverviewRouterMock: CertificatesOverviewRouterProtocol {
     let showCheckSituationExpectation = XCTestExpectation(description: "showCheckSituationExpectation")
     let showDialogExpectation = XCTestExpectation(description: "showDialogExpectation")
     let showCertificatesReissueExpectation = XCTestExpectation(description: "showCertificatesReissueExpectation")
+    let showCertificateExpectation = XCTestExpectation(description: "showCertificateExpectation")
     let toWebsiteFAQExpectation = XCTestExpectation(description: "toWebsiteFAQExpectation")
     var sceneCoordinator: SceneCoordinator = SceneCoordinatorMock()
     var error: Error?
@@ -35,7 +36,8 @@ class CertificatesOverviewRouterMock: CertificatesOverviewRouterProtocol {
     }
 
     func showCertificates(_ certificates: [ExtendedCBORWebToken]) -> Promise<CertificateDetailSceneResult> {
-        .value(.addNewCertificate)
+        showCertificateExpectation.fulfill()
+        return .value(.showCertificatesOnOverview(certificates))
     }
 
     func showHowToScan() -> Promise<Void> {

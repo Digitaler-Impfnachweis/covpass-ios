@@ -23,9 +23,13 @@ struct CertificatesOverviewSceneFactory: SceneFactory {
     }
 
     func make() -> UIViewController {
+        guard let revocationRepository = CertificateRevocationRepository() else {
+            fatalError("Revocation Repository can´t initialized")
+        }
         let viewModel = CertificatesOverviewViewModel(
             router: router,
             repository: VaccinationRepository.create(),
+            revocationRepository: revocationRepository,
             certLogic: DCCCertLogic.create(),
             boosterLogic: BoosterLogic.create(),
             userDefaults: UserDefaultsPersistence(),

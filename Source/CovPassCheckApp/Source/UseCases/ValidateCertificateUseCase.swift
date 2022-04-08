@@ -22,19 +22,7 @@ struct ValidateCertificateUseCase {
             checkBusinessRules(token)
         }
         .then {
-            isRevoked($0)
-        }
-    }
-    
-    private func isRevoked(_ token: ExtendedCBORWebToken) -> Promise<ExtendedCBORWebToken> {
-        firstly {
-            revocationRepository.isRevoked(token)
-        }
-        .then { isRevoked -> Promise<ExtendedCBORWebToken> in
-            if isRevoked {
-                return .init(error: CertificateError.invalidEntity)
-            }
-            return .value(token)
+            RevokeUseCase(token: $0, revocationRepository: revocationRepository).execute()
         }
     }
     

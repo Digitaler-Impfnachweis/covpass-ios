@@ -71,6 +71,7 @@ class CertificateItemDetailViewController: UIViewController {
             toolbar.primaryButton.isHidden = false
             stackView.addArrangedSubview(toolbar)
         }
+        stackView.setCustomSpacing(40, after: itemStackView)
     }
 
     private func setupNavigationBar() {
@@ -187,14 +188,17 @@ class CertificateItemDetailViewController: UIViewController {
         qrCodeButton.icon = .scan
         qrCodeButton.tintColor = .white
         qrCodeButton.action = viewModel.showQRCode
-
+        qrCodeButton.isHidden = viewModel.isInvalid
+        
         pdfExportButton.title = "vaccination_certificate_detail_view_pdf_action_button_title".localized
         pdfExportButton.style = .secondary
         pdfExportButton.icon = .share
         pdfExportButton.action = viewModel.startPDFExport
 
         pdfExportButton.disable()
-        if viewModel.canExportToPDF {
+        if viewModel.isInvalid {
+           pdfExportButton.isHidden = true
+       } else if viewModel.canExportToPDF {
             // Some certificates such as tests or non-German ones cannot be exported
             pdfExportButton.enable()
         } else {
@@ -202,6 +206,12 @@ class CertificateItemDetailViewController: UIViewController {
             disclaimer.imageView.image = .info
             disclaimer.bodyAttributedString = "vaccination_certificate_detail_view_pdf_action_button_note".localized.styledAs(.body)
             buttonStackView.addArrangedSubview(disclaimer)
+        }
+        
+        if pdfExportButton.isHidden && qrCodeButton.isHidden {
+            stackView.setCustomSpacing(0, after: buttonStackView)
+        } else {
+            stackView.setCustomSpacing(40, after: buttonStackView)
         }
     }
 

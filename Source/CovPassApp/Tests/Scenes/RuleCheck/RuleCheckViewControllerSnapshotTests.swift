@@ -142,7 +142,7 @@ class RuleCheckViewControllerSnapshotTests: BaseSnapShotTests {
                                                               gnt: "STEFAN",
                                                               fnt: "BAUER")
         firstCert.vaccinationCertificate.exp = Date().addingTimeInterval(-1000)
-        firstCert.vaccinationCertificate.invalid = true
+        firstCert.invalid = true
 
         var secondCert: ExtendedCBORWebToken = CBORWebToken
             .mockVaccinationCertificate
@@ -206,7 +206,7 @@ class RuleCheckViewControllerSnapshotTests: BaseSnapShotTests {
                                                               fn: "Bauer (INVALID)",
                                                               gnt: "STEFAN",
                                                               fnt: "BAUER")
-        firstCert.vaccinationCertificate.invalid = true
+        firstCert.invalid = true
         
         var secondCert: ExtendedCBORWebToken = CBORWebToken
             .mockVaccinationCertificate
@@ -271,7 +271,7 @@ class RuleCheckViewControllerSnapshotTests: BaseSnapShotTests {
                                                               gnt: "STEFAN",
                                                               fnt: "BAUER")
         firstCert.vaccinationCertificate.exp = Date().addingTimeInterval(-1000)
-        firstCert.vaccinationCertificate.invalid = true
+        firstCert.invalid = true
 
         var secondCert: ExtendedCBORWebToken = CBORWebToken
             .mockVaccinationCertificate
@@ -282,7 +282,7 @@ class RuleCheckViewControllerSnapshotTests: BaseSnapShotTests {
                                                                fn: "Hamilton",
                                                                gnt: "Samuel T.",
                                                                fnt: "Hamilton")
-        secondCert.vaccinationCertificate.invalid = true
+        secondCert.invalid = true
 
         var thirdCert: ExtendedCBORWebToken = CBORWebToken
             .mockTestCertificate
@@ -336,7 +336,7 @@ class RuleCheckViewControllerSnapshotTests: BaseSnapShotTests {
                                                               fn: "Bauer (EXPIRED)",
                                                               gnt: "STEFAN",
                                                               fnt: "BAUER")
-        firstCert.vaccinationCertificate.invalid = true
+        firstCert.invalid = true
 
 
         let certificates = [
@@ -369,7 +369,7 @@ class RuleCheckViewControllerSnapshotTests: BaseSnapShotTests {
                                                               gnt: "STEFAN",
                                                               fnt: "BAUER")
         firstCert.vaccinationCertificate.exp = Date().addingTimeInterval(-1000)
-        firstCert.vaccinationCertificate.invalid = true
+        firstCert.invalid = true
 
         var secondCert: ExtendedCBORWebToken = CBORWebToken
             .mockVaccinationCertificate
@@ -381,7 +381,7 @@ class RuleCheckViewControllerSnapshotTests: BaseSnapShotTests {
                                                                gnt: "Samuel T.",
                                                                fnt: "Hamilton")
         secondCert.vaccinationCertificate.exp = Date().addingTimeInterval(-1000)
-        secondCert.vaccinationCertificate.invalid = true
+        secondCert.invalid = true
 
         var thirdCert: ExtendedCBORWebToken = CBORWebToken
             .mockTestCertificate
@@ -393,7 +393,7 @@ class RuleCheckViewControllerSnapshotTests: BaseSnapShotTests {
                                                               gnt: "Tim",
                                                               fnt: "Berg")
         thirdCert.vaccinationCertificate.exp = Date().addingTimeInterval(-1000)
-        thirdCert.vaccinationCertificate.invalid = true
+        thirdCert.invalid = true
 
         var fourthCert: ExtendedCBORWebToken = CBORWebToken
             .mockRecoveryCertificate
@@ -405,7 +405,7 @@ class RuleCheckViewControllerSnapshotTests: BaseSnapShotTests {
                                                                gnt: "Sabrina",
                                                                fnt: "Vogler")
         fourthCert.vaccinationCertificate.exp = Date().addingTimeInterval(-1000)
-        fourthCert.vaccinationCertificate.invalid = true
+        fourthCert.invalid = true
 
         let certificates = [
             fourthCert,
@@ -439,7 +439,7 @@ class RuleCheckViewControllerSnapshotTests: BaseSnapShotTests {
                                                               fn: "Bauer (EXPIRED)",
                                                               gnt: "STEFAN",
                                                               fnt: "BAUER")
-        firstCert.vaccinationCertificate.invalid = true
+        firstCert.invalid = true
 
         var secondCert: ExtendedCBORWebToken = CBORWebToken
             .mockVaccinationCertificate
@@ -450,7 +450,7 @@ class RuleCheckViewControllerSnapshotTests: BaseSnapShotTests {
                                                                fn: "Hamilton (EXPIRED)",
                                                                gnt: "Samuel T.",
                                                                fnt: "Hamilton")
-        secondCert.vaccinationCertificate.invalid = true
+        secondCert.invalid = true
 
         var thirdCert: ExtendedCBORWebToken = CBORWebToken
             .mockTestCertificate
@@ -461,7 +461,7 @@ class RuleCheckViewControllerSnapshotTests: BaseSnapShotTests {
                                                               fn: "Berg (EXPIRED)",
                                                               gnt: "Tim",
                                                               fnt: "Berg")
-        thirdCert.vaccinationCertificate.invalid = true
+        thirdCert.invalid = true
 
         var fourthCert: ExtendedCBORWebToken = CBORWebToken
             .mockRecoveryCertificate
@@ -472,7 +472,7 @@ class RuleCheckViewControllerSnapshotTests: BaseSnapShotTests {
                                                                fn: "Vogler (EXPIRED)",
                                                                gnt: "Sabrina",
                                                                fnt: "Vogler")
-        fourthCert.vaccinationCertificate.invalid = true
+        fourthCert.invalid = true
 
         let certificates = [
             fourthCert,
@@ -507,7 +507,7 @@ class RuleCheckViewControllerSnapshotTests: BaseSnapShotTests {
                                                                fn: "Vogler",
                                                                gnt: "Sabrina",
                                                                fnt: "Vogler")
-        fourthCert.vaccinationCertificate.invalid = true
+        fourthCert.invalid = true
         
         var fifthCert: ExtendedCBORWebToken = CBORWebToken
             .mockVaccinationCertificate
@@ -518,7 +518,7 @@ class RuleCheckViewControllerSnapshotTests: BaseSnapShotTests {
                                                                fn: "Vogler",
                                                                gnt: "Sabrina",
                                                                fnt: "Vogler")
-        fifthCert.vaccinationCertificate.invalid = false
+        fifthCert.invalid = false
 
         let certificates = [
             fourthCert,

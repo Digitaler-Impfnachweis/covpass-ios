@@ -19,10 +19,8 @@ class RevocationInfoViewModelTests: XCTestCase {
     private var sut: RevocationInfoViewModel!
 
     override func setUpWithError() throws {
-        let token = ExtendedCBORWebToken(
-            vaccinationCertificate: .mockCertificate,
-            vaccinationQRCodeData: ""
-        )
+        let token = ExtendedCBORWebToken(vaccinationCertificate: .mockCertificate,
+                                         vaccinationQRCodeData: "")
         let (promise, resolver) = Promise<Void>.pending()
         pdfGenerator = .init()
         router = .init()
@@ -128,10 +126,8 @@ class RevocationInfoViewModelTests: XCTestCase {
         let token = CBORWebToken.mockCertificate
         let vaccination = try XCTUnwrap(token.hcert.dgc.v?.first)
         vaccination.co = "XY"
-        let extendedToken = ExtendedCBORWebToken(
-            vaccinationCertificate: token,
-            vaccinationQRCodeData: ""
-        )
+        let extendedToken = ExtendedCBORWebToken(vaccinationCertificate: token,
+                                                 vaccinationQRCodeData: "")
         sut = .init(
             router: router,
             resolver: resolver,

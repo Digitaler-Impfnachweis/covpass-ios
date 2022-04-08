@@ -77,7 +77,7 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
         if token.vaccinationCertificate.isExpired {
             return "certificates_start_screen_qrcode_certificate_expired_subtitle".localized
         }
-        if token.vaccinationCertificate.isInvalid {
+        if token.isInvalid {
             return "certificates_start_screen_qrcode_certificate_invalid_subtitle".localized
         }
         if showNotification {
@@ -98,7 +98,7 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
     }
 
     var isExpired: Bool {
-        token.vaccinationCertificate.isExpired || token.vaccinationCertificate.isInvalid
+        token.vaccinationCertificate.isExpired || token.isInvalid
     }
 
     var showFavorite: Bool = true

@@ -101,6 +101,11 @@ pipeline {
           }
         }
       }
+      post {
+          always {
+              archiveArtifacts artifacts: "CovPassTests/FailureDiffs/**/*.png" , allowEmptyArchive: true , caseSensitive: false, onlyIfSuccessful: false
+          }
+      }
     }
 
     stage("CovPassApp 🎫") {
@@ -120,6 +125,11 @@ pipeline {
             """
           }
         }
+      }
+      post {
+          always {
+              archiveArtifacts artifacts: "CovPassTests/FailureDiffs/**/*.png" , allowEmptyArchive: true , caseSensitive: false, onlyIfSuccessful: false
+          }
       }
     }
   }
