@@ -67,9 +67,3 @@ struct ValidationResultFactory {
                                           revocationKeyFilename: revocationKeyFilename)
     }
 }
-
-extension XCConfiguration {
-    static var certificationRevocationEncryptionKey: String {
-        Self.value(String.self, forKey: "CERTIFICATE_REVOCATION_INFO_ENCRYPTION_KEY")
-    }
-}

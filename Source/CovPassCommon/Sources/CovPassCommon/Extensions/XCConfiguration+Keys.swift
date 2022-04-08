@@ -19,4 +19,8 @@ public extension XCConfiguration {
     static var certificateRevocationPinningHashes: [String] {
         value([String].self, forKey: "CERTIFICATE_REVOCATION_PINNING_HASHES")
     }
+
+    static var certificationRevocationEncryptionKey: String {
+        Self.value(String.self, forKey: "CERTIFICATE_REVOCATION_INFO_ENCRYPTION_KEY")
+    }
 }

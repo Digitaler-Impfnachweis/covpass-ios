@@ -334,6 +334,8 @@
 		E70C3E9D27A955CC001F07FF /* RuleCheckRouterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70C3E9C27A955CC001F07FF /* RuleCheckRouterMock.swift */; };
 		E70C3EA427A98A5C001F07FF /* CertificatesOverviewRouterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70C3EA327A98A5C001F07FF /* CertificatesOverviewRouterMock.swift */; };
 		E712855C27EC7FEF00006F9B /* revocation-trust-key-debug.pem in Resources */ = {isa = PBXBuildFile; fileRef = E712855B27EC7FEF00006F9B /* revocation-trust-key-debug.pem */; };
+		E7170772280088AE000B2E32 /* revocation-trust-key-release.pem in Resources */ = {isa = PBXBuildFile; fileRef = E7170771280088AE000B2E32 /* revocation-trust-key-release.pem */; };
+		E7170774280091A9000B2E32 /* revocation-trust-key-release.pem in Resources */ = {isa = PBXBuildFile; fileRef = E7170773280091A9000B2E32 /* revocation-trust-key-release.pem */; };
 		E745AF1C27DA3C7000B3671E /* RevocationInfoViewControllerSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E745AF1A27DA3B9500B3671E /* RevocationInfoViewControllerSnapshotTests.swift */; };
 		E745AF2227DA3F2500B3671E /* CoseSign1Message+Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E745AF2127DA3F2400B3671E /* CoseSign1Message+Mock.swift */; };
 		E75234DC27CE6EF200B744AB /* ReissueResultViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E75234DB27CE6EF200B744AB /* ReissueResultViewModelTests.swift */; };
@@ -745,6 +747,8 @@
 		E70C3E9C27A955CC001F07FF /* RuleCheckRouterMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleCheckRouterMock.swift; sourceTree = "<group>"; };
 		E70C3EA327A98A5C001F07FF /* CertificatesOverviewRouterMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificatesOverviewRouterMock.swift; sourceTree = "<group>"; };
 		E712855B27EC7FEF00006F9B /* revocation-trust-key-debug.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "revocation-trust-key-debug.pem"; sourceTree = "<group>"; };
+		E7170771280088AE000B2E32 /* revocation-trust-key-release.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "revocation-trust-key-release.pem"; sourceTree = "<group>"; };
+		E7170773280091A9000B2E32 /* revocation-trust-key-release.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "revocation-trust-key-release.pem"; sourceTree = "<group>"; };
 		E745AF1A27DA3B9500B3671E /* RevocationInfoViewControllerSnapshotTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RevocationInfoViewControllerSnapshotTests.swift; sourceTree = "<group>"; };
 		E745AF2127DA3F2400B3671E /* CoseSign1Message+Mock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CoseSign1Message+Mock.swift"; sourceTree = "<group>"; };
 		E75234DB27CE6EF200B744AB /* ReissueResultViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReissueResultViewModelTests.swift; sourceTree = "<group>"; };
@@ -1063,6 +1067,7 @@
 		09C422A527F5C92400232036 /* Revocation */ = {
 			isa = PBXGroup;
 			children = (
+				E7170773280091A9000B2E32 /* revocation-trust-key-release.pem */,
 				09C422A627F5C93C00232036 /* revocation-trust-key-debug.pem */,
 			);
 			path = Revocation;
@@ -2080,6 +2085,7 @@
 		E712855A27EC7F7000006F9B /* Revocation */ = {
 			isa = PBXGroup;
 			children = (
+				E7170771280088AE000B2E32 /* revocation-trust-key-release.pem */,
 				E712855B27EC7FEF00006F9B /* revocation-trust-key-debug.pem */,
 			);
 			path = Revocation;
@@ -2353,6 +2359,7 @@
 				65E0DB0C2657F31C004C660F /* CertificateViewController.xib in Resources */,
 				096897AA27C3E3C1009E2886 /* ReissueResultViewController.xib in Resources */,
 				216D1F87264EF6A800370F16 /* LaunchScreen.storyboard in Resources */,
+				E7170774280091A9000B2E32 /* revocation-trust-key-release.pem in Resources */,
 				385FC19F269ED63500D19AF8 /* DateSelectionViewController.xib in Resources */,
 				0933177E273ABB2A0036DB2A /* ChooseCertificateViewController.xib in Resources */,
 				3523616C26D66BC50085B243 /* BoosterNotificationViewController.xib in Resources */,
@@ -2384,6 +2391,7 @@
 				092699ED278C55A200331D77 /* GProofDifferentPersonViewController.xib in Resources */,
 				2181C179264F037400DE7412 /* WelcomeViewController.xib in Resources */,
 				3876382F26ADBFEC00FBCA47 /* privacy-covpasscheck-en.html in Resources */,
+				E7170772280088AE000B2E32 /* revocation-trust-key-release.pem in Resources */,
 				3823416A268A2A3900722A46 /* contact-covpasscheck-de.html in Resources */,
 				0969AB9A2787AB6B00ECCA74 /* GProofViewController.xib in Resources */,
 				3876382E26ADBFE500FBCA47 /* contact-covpasscheck-en.html in Resources */,
