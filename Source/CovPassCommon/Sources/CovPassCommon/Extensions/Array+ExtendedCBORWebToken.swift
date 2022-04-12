@@ -35,7 +35,20 @@ public extension Array where Element == ExtendedCBORWebToken {
         guard filter2Of1.isEmpty else {
             return false
         }
-        return !filterBoosterAfterVaccinationAfterRecovery.isEmpty
+        guard recoveryIfAvailableIsOlderThanVaccinationDates else {
+            return false
+        }
+        return !filterBoosterAfterVaccinationAfterRecoveryFromGermany.isEmpty
+    }
+    
+    var recoveryIfAvailableIsOlderThanVaccinationDates: Bool {
+        guard !recoveryDates.isEmpty else {
+            return true
+        }
+        if let latestVaccinationDate = vaccinationsForReissueDates.latestDate, let latestRecoveryDate = recoveryDates.latestDate {
+            return latestRecoveryDate < latestVaccinationDate
+        }
+        return false
     }
     
     var reissueProcessInitialNotAlreadySeen: Bool { !reissueProcessInitialAlreadySeen }
@@ -44,34 +57,42 @@ public extension Array where Element == ExtendedCBORWebToken {
     
     var reissueNewBadgeAlreadySeen: Bool { first(where: { $0.reissueProcessNewBadgeAlreadySeen ?? false }) != nil }
 
-    var tokensOfVaccinationWithSingleDose: [ExtendedCBORWebToken] {
+    var tokensOfVaccinationWithSingleDoseFromGermany: [ExtendedCBORWebToken] {
         filter {
             guard let vaccinations = $0.vaccinations else {
                 return false
             }
             return !vaccinations.filter{ $0.isSingleDoseComplete }.isEmpty
-        }
+        }.filterIssuedByGerman
     }
     
-    var tokensOfVaccinationWithDoubleDoseComplete: [ExtendedCBORWebToken] {
+    var tokensOfVaccinationWithDoubleDoseCompleteFromGermany: [ExtendedCBORWebToken] {
         filter {
             guard let vaccinations = $0.vaccinations else {
                 return false
             }
             return !vaccinations.filter{ $0.isDoubleDoseComplete }.isEmpty
-        }
+        }.filterIssuedByGerman
     }
     
-    var tokensOfRecovery: [ExtendedCBORWebToken] { filter(by: .recovery) }
+    var tokensOfRecoveryFromGermany: [ExtendedCBORWebToken] { filter(by: .recovery).filterIssuedByGerman }
     
-    var filterBoosterAfterVaccinationAfterRecovery: [ExtendedCBORWebToken] {
-        guard !tokensOfVaccinationWithSingleDose.isEmpty else {
+    var recoveryDates: [Date] {
+        tokensOfRecoveryFromGermany.map{ $0.firstRecovery!.fr }
+    }
+    
+    var vaccinationsForReissueDates : [Date] {
+        (tokensOfVaccinationWithSingleDoseFromGermany + tokensOfVaccinationWithDoubleDoseCompleteFromGermany).map{ $0.firstVaccination!.dt }
+    }
+    
+    var filterBoosterAfterVaccinationAfterRecoveryFromGermany: [ExtendedCBORWebToken] {
+        guard !tokensOfVaccinationWithSingleDoseFromGermany.isEmpty else {
             return []
         }
-        guard !tokensOfVaccinationWithDoubleDoseComplete.isEmpty else {
+        guard !tokensOfVaccinationWithDoubleDoseCompleteFromGermany.isEmpty else {
             return []
         }
-        return tokensOfRecovery + tokensOfVaccinationWithSingleDose + tokensOfVaccinationWithDoubleDoseComplete
+        return tokensOfRecoveryFromGermany + tokensOfVaccinationWithSingleDoseFromGermany + tokensOfVaccinationWithDoubleDoseCompleteFromGermany
     }
     
     var sortByIssuedAtTime: [ExtendedCBORWebToken] {
@@ -126,6 +147,12 @@ public extension Array where Element == ExtendedCBORWebToken {
                 return true
             }
             return false
+        }
+    }
+    
+    var filterIssuedByGerman: [ExtendedCBORWebToken] {
+        filter {
+            $0.vaccinationCertificate.isGermanIssuer
         }
     }
     

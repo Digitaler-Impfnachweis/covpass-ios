@@ -126,6 +126,19 @@ class CertificateDetailViewModelTests: XCTestCase {
         XCTAssertTrue(sut.showReissueNotification)
     }
     
+    func testShowReissueNotification_ReissueNotQualifiedCase_RecoveryIsYoungerThanVaccinations() throws {
+        // GIVEN: 1/1 and 2/2 and recovery cert qualifies for reissue
+        let certificates: [ExtendedCBORWebToken] = try [
+            CBORWebToken.mockRecoveryCertificate.extended(),
+            .token1Of1(),
+            .token2Of2(),
+        ]
+        configureCustomSut(certificates: certificates)
+        
+        // THEN
+        XCTAssertFalse(sut.showReissueNotification)
+    }
+    
     func testShowReissueNotification_ReissueQualifiedCase2() throws {
         // GIVEN: 1/1 and 2/2 and recovery cert qualifies for reissue
         let certificates: [ExtendedCBORWebToken] = try [
@@ -133,6 +146,9 @@ class CertificateDetailViewModelTests: XCTestCase {
             .token1Of1(),
             .token2Of2(),
         ]
+        certificates[0].firstRecovery!.fr = Date().addingTimeInterval(-2000)
+        certificates[1].firstVaccination!.dt = Date().addingTimeInterval(-1500)
+        certificates[2].firstVaccination!.dt = Date().addingTimeInterval(-1000)
         configureCustomSut(certificates: certificates)
         
         // THEN

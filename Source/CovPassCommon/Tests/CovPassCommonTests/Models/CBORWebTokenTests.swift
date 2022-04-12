@@ -50,4 +50,28 @@ class CBORWebTokenTests: XCTestCase {
         let certificate = CBORWebToken.mockVaccinationCertificate.extended(vaccinationQRCodeData: "")
         XCTAssertFalse(certificate.vaccinationCertificate.isFraud)
     }
+    
+    func testIssIsDE() {
+        // GIVEN
+        var certificate = CBORWebToken.mockVaccinationCertificate
+        certificate.iss = "DE"
+        
+        // WHEN
+        let isGermanCert = certificate.isGermanIssuer
+        
+        // THEN
+        XCTAssertEqual(isGermanCert, true)
+    }
+    
+    func testIssIsNotDE() {
+        // GIVEN
+        var certificate = CBORWebToken.mockVaccinationCertificate
+        certificate.iss = "FOO"
+        
+        // WHEN
+        let isGermanCert = certificate.isGermanIssuer
+        
+        // THEN
+        XCTAssertEqual(isGermanCert, false)
+    }
 }

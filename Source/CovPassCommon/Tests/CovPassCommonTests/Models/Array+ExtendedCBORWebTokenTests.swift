@@ -100,7 +100,7 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
                      vaccinationWithTwoShotsOfVaccine]
         
         // WHEN
-        let candidateForReissue = certs.filterBoosterAfterVaccinationAfterRecovery
+        let candidateForReissue = certs.filterBoosterAfterVaccinationAfterRecoveryFromGermany
         
         // THEN
         XCTAssertFalse(candidateForReissue.isEmpty)
@@ -111,7 +111,7 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
         XCTAssertFalse(candidateForReissue.contains(someOtherCert2))
     }
     
-    func testBoosteredWithJohnsonAlready() {
+    func testBoosteredWithJohnsonAlreadyButRecoveryIsFresherDateThanVaccinations() {
         // GIVEN
         let certs = [recoveryCert,
                      singleDoseImmunizationJohnsonCert,
@@ -119,7 +119,31 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
                      someOtherCert1]
         
         // WHEN
-        let candidateForReissue = certs.filterBoosterAfterVaccinationAfterRecovery
+        let candidateForReissue = certs.filterBoosterAfterVaccinationAfterRecoveryFromGermany
+        
+        // THEN
+        XCTAssertFalse(certs.qualifiedForReissue)
+        XCTAssertFalse(candidateForReissue.isEmpty)
+        XCTAssertEqual(candidateForReissue.count, 3)
+        XCTAssertTrue(candidateForReissue.contains(singleDoseImmunizationJohnsonCert))
+        XCTAssertTrue(candidateForReissue.contains(doubleDoseImmunizationJohnsonCert))
+        XCTAssertTrue(candidateForReissue.contains(recoveryCert))
+        XCTAssertFalse(candidateForReissue.contains(someOtherCert1))
+        XCTAssertFalse(candidateForReissue.contains(someOtherCert2))
+    }
+    
+    func testBoosteredWithJohnsonAlreadyAndRecoveryIsOlderDateThanVaccinations() {
+        // GIVEN
+        let recoveryCertOlderDateThanVaccinations = recoveryCert
+        let dateOfOneOfVaccinations = singleDoseImmunizationJohnsonCert.firstVaccination?.dt
+        recoveryCertOlderDateThanVaccinations.vaccinationCertificate.hcert.dgc.r!.first!.fr = dateOfOneOfVaccinations!.addingTimeInterval(-2000)
+        let certs = [recoveryCertOlderDateThanVaccinations,
+                     singleDoseImmunizationJohnsonCert,
+                     doubleDoseImmunizationJohnsonCert,
+                     someOtherCert1]
+        
+        // WHEN
+        let candidateForReissue = certs.filterBoosterAfterVaccinationAfterRecoveryFromGermany
         
         // THEN
         XCTAssertTrue(certs.qualifiedForReissue)
@@ -140,7 +164,7 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
                      vaccinationWithTwoShotsOfVaccine]
         
         // WHEN
-        let candidateForReissue = certs.filterBoosterAfterVaccinationAfterRecovery
+        let candidateForReissue = certs.filterBoosterAfterVaccinationAfterRecoveryFromGermany
         
         // THEN
         XCTAssertTrue(certs.qualifiedForReissue)
@@ -152,7 +176,59 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
         XCTAssertFalse(candidateForReissue.contains(someOtherCert2))
     }
     
-    func testBoosterAfterVaccinationAfterRecoveryWithRecovery() {
+    func testBoosterAfterVaccinationAfterRecoveryWithRecoveryDateOlderThanVaccinationDates() {
+        let recoveryCertOlderDateThanVaccinations = recoveryCert
+        let dateOfOneOfVaccinations = singleDoseImmunizationJohnsonCert.firstVaccination?.dt
+        recoveryCertOlderDateThanVaccinations.vaccinationCertificate.hcert.dgc.r!.first!.fr = dateOfOneOfVaccinations!.addingTimeInterval(-2000)
+        // GIVEN
+        let certs = [someOtherCert2,
+                     recoveryCertOlderDateThanVaccinations,
+                     singleDoseImmunizationJohnsonCert,
+                     someOtherCert1,
+                     vaccinationWithTwoShotsOfVaccine]
+        
+        // WHEN
+        let candidateForReissue = certs.filterBoosterAfterVaccinationAfterRecoveryFromGermany
+        
+        // THEN
+        XCTAssertTrue(certs.qualifiedForReissue)
+        XCTAssertFalse(candidateForReissue.isEmpty)
+        XCTAssertEqual(candidateForReissue.count, 3)
+        XCTAssertTrue(candidateForReissue.contains(singleDoseImmunizationJohnsonCert))
+        XCTAssertTrue(candidateForReissue.contains(vaccinationWithTwoShotsOfVaccine))
+        XCTAssertTrue(candidateForReissue.contains(recoveryCert))
+        XCTAssertFalse(candidateForReissue.contains(someOtherCert1))
+        XCTAssertFalse(candidateForReissue.contains(someOtherCert2))
+    }
+    
+    func testBoosterAfterVaccinationAfterRecoveryWithRecoveryDateOlderThanVaccinationDatesWithOneCertIsNotDEIssuer() {
+        let recoveryCertOlderDateThanVaccinations = recoveryCert
+        let dateOfOneOfVaccinations = singleDoseImmunizationJohnsonCert.firstVaccination?.dt
+        recoveryCertOlderDateThanVaccinations.vaccinationCertificate.hcert.dgc.r!.first!.fr = dateOfOneOfVaccinations!.addingTimeInterval(-2000)
+        var singleDoseImmunizationJohnsonCert = singleDoseImmunizationJohnsonCert
+        singleDoseImmunizationJohnsonCert.vaccinationCertificate.iss = "EN"
+        // GIVEN
+        let certs = [someOtherCert2,
+                     recoveryCertOlderDateThanVaccinations,
+                     singleDoseImmunizationJohnsonCert,
+                     someOtherCert1,
+                     vaccinationWithTwoShotsOfVaccine]
+        
+        // WHEN
+        let candidateForReissue = certs.filterBoosterAfterVaccinationAfterRecoveryFromGermany
+        
+        // THEN
+        XCTAssertFalse(certs.qualifiedForReissue)
+        XCTAssertTrue(candidateForReissue.isEmpty)
+        XCTAssertEqual(candidateForReissue.count, 0)
+        XCTAssertFalse(candidateForReissue.contains(singleDoseImmunizationJohnsonCert))
+        XCTAssertFalse(candidateForReissue.contains(vaccinationWithTwoShotsOfVaccine))
+        XCTAssertFalse(candidateForReissue.contains(recoveryCert))
+        XCTAssertFalse(candidateForReissue.contains(someOtherCert1))
+        XCTAssertFalse(candidateForReissue.contains(someOtherCert2))
+    }
+    
+    func testBoosterAfterVaccinationAfterRecoveryWithRecoveryDateFresherThanVaccinationDates() {
         // GIVEN
         let certs = [someOtherCert2,
                      recoveryCert2,
@@ -162,10 +238,10 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
                      recoveryCert]
         
         // WHEN
-        let candidateForReissue = certs.filterBoosterAfterVaccinationAfterRecovery
+        let candidateForReissue = certs.filterBoosterAfterVaccinationAfterRecoveryFromGermany
         
         // THEN
-        XCTAssertTrue(certs.qualifiedForReissue)
+        XCTAssertFalse(certs.qualifiedForReissue)
         XCTAssertFalse(candidateForReissue.isEmpty)
         XCTAssertEqual(candidateForReissue.count, 4)
         XCTAssertTrue(candidateForReissue.contains(singleDoseImmunizationJohnsonCert))
