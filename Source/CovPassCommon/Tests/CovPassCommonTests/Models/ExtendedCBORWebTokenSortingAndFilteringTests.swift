@@ -33,12 +33,12 @@ extension CBORWebToken {
         hcert.dgc.r?.first?.ci = uvci
         return self
     }
-
+    
     func mockVaccinationSetDate(_ date: Date) -> Self {
         hcert.dgc.v?.first?.dt = date
         return self
     }
-    
+
     func doseNumber(_ dn: Int) -> Self {
         hcert.dgc.v?.first?.dn = dn
         return self
@@ -80,6 +80,76 @@ class CertificateSorterTests: XCTestCase {
         XCTAssertEqual(sortedCertifiates.count, 2)
         XCTAssertEqual(sortedCertifiates[0].vaccinationCertificate.hcert.dgc.uvci, "2")
         XCTAssertEqual(sortedCertifiates[1].vaccinationCertificate.hcert.dgc.uvci, "1")
+    }
+    
+    func testTwoVaccinationsSameVacDateButDifferentIssueDate() throws {
+        // GIVEN
+        let dateOld = Date().addingTimeInterval(-100)
+        let dateNew = Date().addingTimeInterval(100)
+        let vaccinationDate = Date()
+        var cert1 = CBORWebToken
+            .mockVaccinationCertificate
+            .mockVaccinationUVCI("1")
+            .mockVaccinationSetDate(vaccinationDate)
+            .extended(vaccinationQRCodeData: "1")
+        cert1.vaccinationCertificate.iat = dateOld
+        var cert2 = CBORWebToken
+            .mockVaccinationCertificate
+            .mockVaccinationUVCI("2")
+            .mockVaccinationSetDate(vaccinationDate)
+            .extended(vaccinationQRCodeData: "2")
+        cert2.vaccinationCertificate.iat = dateNew
+        let certificates = [
+            cert1,
+            cert2
+        ]
+        
+        // WHEN
+        let sortedCertifiates = certificates.sortLatest()
+
+        // THEN
+        XCTAssertEqual(sortedCertifiates.count, 2)
+        XCTAssertEqual(sortedCertifiates.first?.vaccinationCertificate.hcert.dgc.uvci, "2")
+        XCTAssertEqual(sortedCertifiates.last?.vaccinationCertificate.hcert.dgc.uvci, "1")
+        XCTAssertEqual(sortedCertifiates.first?.vaccinationCertificate.hcert.dgc.isVaccinationBoosted, false)
+        XCTAssertEqual(sortedCertifiates.last?.vaccinationCertificate.hcert.dgc.isVaccinationBoosted, false)
+    }
+    
+    func testTwoBoostersSameVacDateButDifferentIssueDate() throws {
+        // Given
+        let dateOld = Date().addingTimeInterval(-100)
+        let dateNew = Date().addingTimeInterval(100)
+        let vaccinationDate = Date()
+        var cert1 = CBORWebToken
+            .mockVaccinationCertificate
+            .mockVaccinationUVCI("1")
+            .mockVaccinationSetDate(vaccinationDate)
+            .doseNumber(4)
+            .seriesOfDoses(2)
+            .extended(vaccinationQRCodeData: "1")
+        cert1.vaccinationCertificate.iat = dateOld
+        var cert2 = CBORWebToken
+            .mockVaccinationCertificate
+            .mockVaccinationUVCI("2")
+            .mockVaccinationSetDate(vaccinationDate)
+            .doseNumber(4)
+            .seriesOfDoses(2)
+            .extended(vaccinationQRCodeData: "2")
+        cert2.vaccinationCertificate.iat = dateNew
+        let certificates = [
+            cert1,
+            cert2
+        ]
+        
+        // WHEN
+        let sortedCertifiates = certificates.sortLatest()
+
+        // THEN
+        XCTAssertEqual(sortedCertifiates.count, 2)
+        XCTAssertEqual(sortedCertifiates.first?.vaccinationCertificate.hcert.dgc.uvci, "2")
+        XCTAssertEqual(sortedCertifiates.last?.vaccinationCertificate.hcert.dgc.uvci, "1")
+        XCTAssertEqual(sortedCertifiates.first?.vaccinationCertificate.hcert.dgc.isVaccinationBoosted, true)
+        XCTAssertEqual(sortedCertifiates.last?.vaccinationCertificate.hcert.dgc.isVaccinationBoosted, true)
     }
     
     func testSortLatest_vaccinations() throws {
