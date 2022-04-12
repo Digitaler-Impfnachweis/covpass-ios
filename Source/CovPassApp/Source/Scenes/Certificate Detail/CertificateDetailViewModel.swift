@@ -280,7 +280,7 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
         if certificates.qualifiedForReissue {
             self.repository.setReissueProcess(initialAlreadySeen: value,
                                               newBadgeAlreadySeen: value,
-                                              tokens: self.certificates.filterBoosterAfterVaccinationAfterRecovery).cauterize()
+                                              tokens: certificates.filterBoosterAfterVaccinationAfterRecoveryFromGermany).cauterize()
         }
     }
     
@@ -305,7 +305,7 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
     }
     
     func triggerReissue() {
-        router.showReissue(for: certificates.filterBoosterAfterVaccinationAfterRecovery)
+        router.showReissue(for: certificates.filterBoosterAfterVaccinationAfterRecoveryFromGermany)
             .ensure {
                 self.refreshCertsAndUpdateView().cauterize()
             }
@@ -318,7 +318,7 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
         if certificates.filterBoosted.isEmpty {
             self.repository.setReissueProcess(initialAlreadySeen: false,
                                               newBadgeAlreadySeen: false,
-                                              tokens: self.certificates.filterBoosterAfterVaccinationAfterRecovery).cauterize()
+                                              tokens: certificates.filterBoosterAfterVaccinationAfterRecoveryFromGermany).cauterize()
         }
     }
     
