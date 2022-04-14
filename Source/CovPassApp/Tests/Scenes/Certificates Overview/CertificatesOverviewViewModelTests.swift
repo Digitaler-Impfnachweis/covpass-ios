@@ -68,7 +68,7 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         XCTAssertEqual(.onBrandAccent70, model.backgroundColor)
         XCTAssertEqual(.neutralWhite, model.tintColor)
         XCTAssertEqual(.statusFullDetail, model.titleIcon)
-        XCTAssertEqual(false, model.isExpired)
+        XCTAssertEqual(false, model.isInvalid)
         XCTAssertEqual(false, model.isFavorite)
     }
     
@@ -100,7 +100,7 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         XCTAssertEqual(.onBrandAccent70, model.backgroundColor)
         XCTAssertEqual(.neutralWhite, model.tintColor)
         XCTAssertEqual(.statusFullDetail, model.titleIcon)
-        XCTAssertEqual(false, model.isExpired)
+        XCTAssertEqual(false, model.isInvalid)
         XCTAssertEqual(false, model.isFavorite)
     }
     
@@ -131,7 +131,7 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         XCTAssertEqual(.onBrandAccent70, model.backgroundColor)
         XCTAssertEqual(.neutralWhite, model.tintColor)
         XCTAssertEqual(.statusFullDetail, model.titleIcon)
-        XCTAssertEqual(false, model.isExpired)
+        XCTAssertEqual(false, model.isInvalid)
         XCTAssertEqual(false, model.isFavorite)
     }
     
@@ -163,7 +163,7 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         XCTAssertEqual(.onBrandAccent70, model.backgroundColor)
         XCTAssertEqual(.neutralWhite, model.tintColor)
         XCTAssertEqual(.statusFullDetail, model.titleIcon)
-        XCTAssertEqual(false, model.isExpired)
+        XCTAssertEqual(false, model.isInvalid)
         XCTAssertEqual(false, model.isFavorite)
     }
     
@@ -194,7 +194,7 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         XCTAssertEqual(.onBrandAccent70, model.backgroundColor)
         XCTAssertEqual(.neutralWhite, model.tintColor)
         XCTAssertEqual(.statusFullDetail, model.titleIcon)
-        XCTAssertEqual(false, model.isExpired)
+        XCTAssertEqual(false, model.isInvalid)
         XCTAssertEqual(false, model.isFavorite)
     }
     
@@ -226,7 +226,7 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         XCTAssertEqual(.onBackground40, model.backgroundColor)
         XCTAssertEqual(.neutralWhite, model.tintColor)
         XCTAssertEqual(.expired, model.titleIcon)
-        XCTAssertEqual(true, model.isExpired)
+        XCTAssertEqual(true, model.isInvalid)
         XCTAssertEqual(false, model.isFavorite)
     }
     
@@ -258,7 +258,7 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         XCTAssertEqual(.onBackground40, model.backgroundColor)
         XCTAssertEqual(.neutralWhite, model.tintColor)
         XCTAssertEqual(.expired, model.titleIcon)
-        XCTAssertEqual(true, model.isExpired)
+        XCTAssertEqual(true, model.isInvalid)
         XCTAssertEqual(false, model.isFavorite)
     }
 
@@ -421,7 +421,7 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         _ = sut.refresh()
 
         // Then
-        wait(for: [router.showDialogExpectation], timeout: 2)
+        wait(for: [router.showDialogExpectation], timeout: 1)
     }
 
     func testRefresh_expiry_notification_multiple_tokens_one_is_valid() throws {

@@ -14,6 +14,9 @@ protocol CertificateItemDetailViewModelProtocol {
     var title: String { get }
     var showSubtitle: Bool { get }
     var headline: String { get }
+    var revocationText: String { get }
+    var isRevoked: Bool { get }
+    var hideQRCodeButtons: Bool { get }
     var isExpired: Bool { get }
     var expiresSoonDate: Date? { get }
     var isInvalid: Bool { get }

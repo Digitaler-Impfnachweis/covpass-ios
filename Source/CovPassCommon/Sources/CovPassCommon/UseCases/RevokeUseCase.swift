@@ -28,7 +28,7 @@ public struct RevokeUseCase {
         }
         .then(on: .global()) { isRevoked -> Promise<ExtendedCBORWebToken> in
             if isRevoked {
-                return .init(error: CertificateError.invalidEntity)
+                return .init(error: CertificateError.revoked(token))
             }
             return .value(token)
         }

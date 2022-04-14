@@ -1,5 +1,5 @@
 //
-//  RevokeUseCaseTest.swift
+//  RevokeUseCaseTests.swift
 //
 //  © Copyright IBM Deutschland GmbH 2021
 //  SPDX-License-Identifier: Apache-2.0
@@ -8,13 +8,13 @@
 import XCTest
 @testable import CovPassCommon
 
-class RevokeUseCaseTest: XCTestCase {
-    
+class RevokeUseCaseTests: XCTestCase {
+    var token: ExtendedCBORWebToken!
     var sut: RevokeUseCase!
     var revocationRepository: CertificateRevocationRepositoryMock!
 
     override func setUpWithError() throws {
-        let token = CBORWebToken.mockVaccinationCertificate.mockVaccinationUVCI("FOO").extended()
+        token = CBORWebToken.mockVaccinationCertificate.mockVaccinationUVCI("FOO").extended()
         revocationRepository = CertificateRevocationRepositoryMock()
         sut = RevokeUseCase(token: token,
                             revocationRepository: revocationRepository)
@@ -23,6 +23,7 @@ class RevokeUseCaseTest: XCTestCase {
     override func tearDownWithError() throws {
         revocationRepository = nil
         sut = nil
+        token = nil
     }
     
     func test_isNotRevoked() {
@@ -57,7 +58,10 @@ class RevokeUseCaseTest: XCTestCase {
             XCTFail("Should fail")
         }
         .catch { error in
-            testExpectation.fulfill()
+            if case let CertificateError.revoked(revokedToken) = error {
+                XCTAssertEqual(revokedToken, self.token)
+                testExpectation.fulfill()
+            }
         }
         wait(for: [revocationRepository.isRevokedExpectation,
                    testExpectation],

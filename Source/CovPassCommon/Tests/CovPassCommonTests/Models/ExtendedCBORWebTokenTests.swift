@@ -12,18 +12,20 @@ import XCTest
 @testable import CovPassCommon
 
 class ExtendedCBORWebTokenTests: XCTestCase {
-    let sut1 = [
-        CBORWebToken.mockVaccinationCertificate.mockName(Name(fnt: "foo")).extended(),
-        CBORWebToken.mockVaccinationCertificate.mockName(Name(fnt: "foo")).extended(),
-        CBORWebToken.mockVaccinationCertificate.mockName(Name(fnt: "bar")).extended(),
-    ]
-
-    let sut2 = [
-        CBORWebToken.mockVaccinationCertificate.mockName(Name(fnt: "foo")).extended(),
-        CBORWebToken.mockVaccinationCertificate.mockName(Name(fnt: "foo")).extended(),
-    ]
-
     func testCertificatePair() {
+        // Given
+        let sut1 = [
+            CBORWebToken.mockVaccinationCertificate.mockName(Name(fnt: "foo")).extended(),
+            CBORWebToken.mockVaccinationCertificate.mockName(Name(fnt: "foo")).extended(),
+            CBORWebToken.mockVaccinationCertificate.mockName(Name(fnt: "bar")).extended(),
+        ]
+
+        let sut2 = [
+            CBORWebToken.mockVaccinationCertificate.mockName(Name(fnt: "foo")).extended(),
+            CBORWebToken.mockVaccinationCertificate.mockName(Name(fnt: "foo")).extended(),
+        ]
+
+        // When & Then
         XCTAssertEqual(sut1.certificatePair(for: CBORWebToken.mockVaccinationCertificate.mockName(Name(fnt: "foo")).extended()).count, 2)
         XCTAssertEqual(sut1.certificatePair(for: CBORWebToken.mockVaccinationCertificate.mockName(Name(fnt: "bar")).extended()).count, 1)
         XCTAssertEqual(sut2.certificatePair(for: CBORWebToken.mockVaccinationCertificate.mockName(Name(fnt: "bar")).extended()).count, 0)
@@ -87,5 +89,46 @@ class ExtendedCBORWebTokenTests: XCTestCase {
 
         // Then
         XCTAssertFalse(message.payload.isEmpty)
+    }
+
+    func testIsRevoked_default() {
+        let sut = ExtendedCBORWebToken(
+            vaccinationCertificate: .mockVaccinationCertificate,
+            vaccinationQRCodeData: ""
+        )
+
+        // When
+        let isRevoked = sut.isRevoked
+
+        // Then
+        XCTAssertFalse(isRevoked)
+    }
+
+    func testIsRevoked_true() {
+        var sut = ExtendedCBORWebToken(
+            vaccinationCertificate: .mockVaccinationCertificate,
+            vaccinationQRCodeData: ""
+        )
+        sut.revoked = true
+
+        // When
+        let isRevoked = sut.isRevoked
+
+        // Then
+        XCTAssertTrue(isRevoked)
+    }
+
+    func testIsRevoked_false() {
+        var sut = ExtendedCBORWebToken(
+            vaccinationCertificate: .mockVaccinationCertificate,
+            vaccinationQRCodeData: ""
+        )
+        sut.revoked = false
+
+        // When
+        let isRevoked = sut.isRevoked
+
+        // Then
+        XCTAssertFalse(isRevoked)
     }
 }

@@ -30,8 +30,10 @@ public struct ExtendedCBORWebToken: Codable, QRCodeScanable {
     
     public var reissueProcessNewBadgeAlreadySeen: Bool?
     
-    /// true if certificate is invalid, e.g. DSC has been revoked
+    /// true if certificate is invalid
     public var invalid: Bool?
+
+    public var revoked: Bool?
 
     public init(vaccinationCertificate: CBORWebToken, vaccinationQRCodeData: String) {
         self.vaccinationCertificate = vaccinationCertificate

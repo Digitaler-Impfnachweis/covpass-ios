@@ -9,23 +9,6 @@
 import Foundation
 import PromiseKit
 
-public enum CertificateError: Error, ErrorCode {
-    case positiveResult
-    case expiredCertifcate
-    case invalidEntity
-
-    public var errorCode: Int {
-        switch self {
-        case .positiveResult:
-            return 421
-        case .expiredCertifcate:
-            return 422
-        case .invalidEntity:
-            return 423
-        }
-    }
-}
-
 public enum ScanType: Int {
     case _3G = 0
     case _2G = 1

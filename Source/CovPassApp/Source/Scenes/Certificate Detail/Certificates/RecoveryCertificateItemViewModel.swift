@@ -20,7 +20,7 @@ struct RecoveryCertificateItemViewModel: CertificateItemViewModel {
     private let active: Bool
 
     var icon: UIImage {
-        if certificate.vaccinationCertificate.isExpired || certificate.isInvalid {
+        if isInvalid {
             return .expired
         }
         if certificate.vaccinationCertificate.expiresSoon {
@@ -30,7 +30,7 @@ struct RecoveryCertificateItemViewModel: CertificateItemViewModel {
     }
 
     var iconColor: UIColor {
-        if !active || certificate.vaccinationCertificate.isExpired || certificate.isInvalid {
+        if !active || isInvalid {
             return .onBackground40
         }
         if dgc.v?.first?.fullImmunization ?? true == false {
@@ -39,8 +39,12 @@ struct RecoveryCertificateItemViewModel: CertificateItemViewModel {
         return .neutralWhite
     }
 
+    private var isInvalid: Bool {
+        certificate.vaccinationCertificate.isExpired || certificate.isInvalid || certificate.isRevoked
+    }
+
     var iconBackgroundColor: UIColor {
-        if !active || certificate.vaccinationCertificate.isExpired || certificate.isInvalid {
+        if !active || isInvalid {
             return .onBackground20
         }
         if dgc.v?.first?.fullImmunization ?? true == false {
@@ -76,7 +80,7 @@ struct RecoveryCertificateItemViewModel: CertificateItemViewModel {
         if certificate.vaccinationCertificate.expiresSoon {
             return "certificates_overview_expires_soon_certificate_note".localized
         }
-        if certificate.isInvalid {
+        if certificate.isInvalid  || certificate.isRevoked {
             return "certificates_overview_invalid_certificate_note".localized
         }
         return nil

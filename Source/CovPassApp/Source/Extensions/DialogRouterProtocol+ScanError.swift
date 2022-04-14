@@ -64,6 +64,19 @@ extension DialogRouterProtocol {
                 ],
                 style: .alert
             )
+        case let CertificateError.revoked(token):
+            let title = "revocation_error_scan_title".localized
+            let message = (
+                token.vaccinationCertificate.isGermanIssuer ?
+                "revocation_error_scan_single_DE" : "revocation_error_scan_single_notDE"
+            ).localized
+            let action = DialogAction(
+                title: "error_test_certificate_not_valid_button_title".localized,
+                style: .cancel,
+                completion: { _ in completion?() }
+            )
+
+            showDialog(title: title, message: message, actions: [action], style: .alert)
         default:
             showDialog(
                 title: "error_scan_qrcode_cannot_be_parsed_title".localized,

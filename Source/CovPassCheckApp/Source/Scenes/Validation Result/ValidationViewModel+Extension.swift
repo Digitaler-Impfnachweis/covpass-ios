@@ -9,7 +9,7 @@
 import CovPassCommon
 import CovPassUI
 import PromiseKit
-import UIKit
+import UIKit 
 
 private enum Constants {
     static let confirmButtonLabel = "validation_check_popup_valid_vaccination_button_title".localized

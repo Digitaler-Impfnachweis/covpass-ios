@@ -95,11 +95,7 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
     }
     
     // MARK: - Methods
-    
-    func refresh() -> Promise<Void> {
-        refreshCertificates()
-    }
-    
+
     func updateTrustList() {
         repository.updateTrustListIfNeeded()
             .done {
@@ -120,7 +116,7 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
         certLogic.updateValueSetsIfNeeded().cauterize()
     }
     
-    private func refreshCertificates() -> Promise<Void> {
+    func refresh() -> Promise<Void> {
         firstly {
             repository.getCertificateList()
         }
@@ -286,6 +282,9 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
             self.showCertificatesReissueIfNeeded()
         }
         .then {
+            self.showRevocationWarningIfNeeded()
+        }
+        .then {
             self.refresh()
         }
         .catch { error in
@@ -355,7 +354,7 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
             repository.toggleFavoriteStateForCertificateWithIdentifier(id)
         }
         .then { isFavorite in
-            self.refreshCertificates().map { isFavorite }
+            self.refresh().map { isFavorite }
         }
         .done { isFavorite in
             self.lastKnownFavoriteCertificateId = isFavorite ? id : nil
@@ -380,11 +379,11 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
         .cancelled {
             // User cancelled by back button or swipe gesture.
             // So refresh everything because we don't know what exactly changed here.
-            self.refresh()
+            _ = self.refresh()
         }
         .then { result in
             // Make sure overview is up2date
-            self.refreshCertificates().map { result }
+            self.refresh().map { result }
         }
         .done {
             self.handleCertificateDetailSceneResult($0)
@@ -478,7 +477,7 @@ extension CertificatesOverviewViewModel {
         }
         .then { (showBoosterNotification: Bool) -> Promise<Void> in
             if !showBoosterNotification { return Promise.value }
-            return self.refreshCertificates()
+            return self.refresh()
                 .then {
                     self.router.showBoosterNotification() 
                 }
@@ -520,6 +519,29 @@ extension CertificatesOverviewViewModel {
         router.showDialog(
             title: "certificate_check_invalidity_error_title".localized,
             message: "error_validity_check_certificates_message".localized,
+            actions: [action],
+            style: .alert)
+    }
+
+    private func showRevocationWarningIfNeeded() -> Guarantee<Void> {
+        let someTokenIsRevoked = tokensToShowRevocationWarningFor().count > 0
+        if someTokenIsRevoked {
+            showRevocationWarning()
+        }
+        return .value
+    }
+
+    private func tokensToShowRevocationWarningFor() -> [ExtendedCBORWebToken] {
+        certificateList.certificates.filter(\.isRevoked)
+    }
+
+    private func showRevocationWarning() {
+        let action = DialogAction(
+            title: "error_validity_check_certificates_button_title".localized
+        )
+        router.showDialog(
+            title: "certificate_check_invalidity_error_title".localized,
+            message: "revocation_dialog_single".localized,
             actions: [action],
             style: .alert)
     }

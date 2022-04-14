@@ -98,7 +98,7 @@ class CertificateDetailViewController: UIViewController {
     }
 
     private func setupScanHintView() {
-        scanHintView.isHidden = false
+        scanHintView.isHidden = !viewModel.showScanHint
         scanHintView.iconView.image = .warning
         scanHintView.containerView.backgroundColor = .infoBackground
         scanHintView.containerView?.layer.borderColor = UIColor.infoAccent.cgColor

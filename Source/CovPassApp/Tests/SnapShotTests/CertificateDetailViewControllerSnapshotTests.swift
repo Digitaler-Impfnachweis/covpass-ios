@@ -456,6 +456,23 @@ class CertificateDetailViewControllerSnapshotTests: BaseSnapShotTests {
         let vc = CertificateDetailViewController(viewModel: vm)
         verifyView(view: vc.view, height: 1100)
     }
+
+    func testCertificateIsRevoked() throws {
+        var token = try ExtendedCBORWebToken.token1Of1()
+        token.revoked = true
+        let viewModel = CertificateDetailViewModel(
+            router: CertificateDetailRouterMock(),
+            repository: VaccinationRepositoryMock(),
+            boosterLogic: BoosterLogicMock(),
+            certificates: [token],
+            resolvable: nil
+        )
+        let viewController = CertificateDetailViewController(
+            viewModel: viewModel
+        )
+
+        verifyView(view: viewController.view, height: 1100)
+    }
 }
 
 struct CertificateDetailRouterMock: CertificateDetailRouterProtocol {

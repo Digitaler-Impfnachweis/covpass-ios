@@ -125,6 +125,10 @@ class CertificateItemDetailViewController: UIViewController {
             hintView.isHidden = false
             hintView.titleLabel.attributedText = "certificate_invalid_detail_view_note_title".localized.styledAs(.header_3)
             hintView.bodyLabel.attributedText = "certificate_invalid_detail_view_note_message".localized.styledAs(.body)
+        } else if viewModel.isRevoked {
+            hintView.isHidden = false
+            hintView.titleLabel.attributedText = "certificate_invalid_detail_view_note_title".localized.styledAs(.header_3)
+            hintView.bodyLabel.attributedText = viewModel.revocationText.styledAs(.body)
         }
     }
 
@@ -188,7 +192,7 @@ class CertificateItemDetailViewController: UIViewController {
         qrCodeButton.icon = .scan
         qrCodeButton.tintColor = .white
         qrCodeButton.action = viewModel.showQRCode
-        qrCodeButton.isHidden = viewModel.isInvalid
+        qrCodeButton.isHidden = viewModel.hideQRCodeButtons
         
         pdfExportButton.title = "vaccination_certificate_detail_view_pdf_action_button_title".localized
         pdfExportButton.style = .secondary
@@ -196,7 +200,7 @@ class CertificateItemDetailViewController: UIViewController {
         pdfExportButton.action = viewModel.startPDFExport
 
         pdfExportButton.disable()
-        if viewModel.isInvalid {
+        if viewModel.hideQRCodeButtons  {
            pdfExportButton.isHidden = true
        } else if viewModel.canExportToPDF {
             // Some certificates such as tests or non-German ones cannot be exported

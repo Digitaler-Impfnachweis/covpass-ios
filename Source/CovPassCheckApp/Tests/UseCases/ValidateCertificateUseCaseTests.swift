@@ -67,8 +67,10 @@ class ValidateCertificateUseCaseTests: XCTestCase {
             XCTFail("Should fail")
         }
         .catch { error in
-            let certificateError = error as? CertificateError
-            XCTAssertEqual(certificateError, .invalidEntity)
+            guard case CertificateError.revoked(_) = error else {
+                XCTFail("Wrong error.")
+                return
+            }
             testExpectation.fulfill()
 
         }

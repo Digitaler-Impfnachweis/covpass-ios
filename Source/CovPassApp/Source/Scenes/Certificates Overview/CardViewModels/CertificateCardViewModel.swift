@@ -18,7 +18,7 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
     private var onAction: (ExtendedCBORWebToken) -> Void
     private var onFavorite: (String) -> Void
     private var repository: VaccinationRepositoryProtocol
-    private var boosterLogic: BoosterLogic
+    private var boosterLogic: BoosterLogicProtocol
     private var certificate: DigitalGreenCertificate {
         token.vaccinationCertificate.hcert.dgc
     }
@@ -38,7 +38,7 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
         onAction: @escaping (ExtendedCBORWebToken) -> Void,
         onFavorite: @escaping (String) -> Void,
         repository: VaccinationRepositoryProtocol,
-        boosterLogic: BoosterLogic
+        boosterLogic: BoosterLogicProtocol
     ) {
         self.token = token
         certificateIsFavorite = isFavorite
@@ -58,7 +58,7 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
     }
 
     var backgroundColor: UIColor {
-        isExpired ? .onBackground40 : .onBrandAccent70
+        isInvalid ? .onBackground40 : .onBrandAccent70
     }
 
     var iconTintColor: UIColor {
@@ -87,7 +87,7 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
     }
 
     var titleIcon: UIImage {
-        if isExpired {
+        if isInvalid {
             return UIImage.expired
         }
         return showNotification ? UIImage.statusFullNotfication : UIImage.statusFullDetail
@@ -97,14 +97,15 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
         certificateIsFavorite
     }
 
-    var isExpired: Bool {
-        token.vaccinationCertificate.isExpired || token.isInvalid
+    var isInvalid: Bool {
+        token.vaccinationCertificate.isExpired || token.isInvalid || token.isRevoked
     }
 
     var showFavorite: Bool = true
 
     var qrCode: UIImage? {
-        token.vaccinationQRCodeData.generateQRCode()
+        let code = token.isRevoked ? "" : token.vaccinationQRCodeData
+        return code.generateQRCode()
     }
 
     var name: String {

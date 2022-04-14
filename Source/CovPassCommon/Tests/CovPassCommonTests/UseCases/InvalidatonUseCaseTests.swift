@@ -73,7 +73,7 @@ class InvalidatonUseCaseTests: XCTestCase {
             XCTAssertNotNil(token)
             XCTAssertTrue(token.certificates.first!.vaccinationCertificate.isVaccination)
             XCTAssertEqual(token.certificates.first!.vaccinationCertificate.hcert.dgc.uvci, "FOO")
-            XCTAssertEqual(token.certificates.first!.isInvalid, true)
+            XCTAssertEqual(token.certificates.first!.isRevoked, true)
             testExpectation.fulfill()
         }
         .catch { error in

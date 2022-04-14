@@ -1498,3 +1498,24 @@
 "certificate_renewal_error_button_primary" = "OK";
 
 "certificate_renewal_error_button_secondary" = "Mehr Informationen";
+
+
+/********** DCC revocation **********/
+
+"revocation_error_scan_title" = "Das Zertifikat kann nicht hinzugefügt werden";
+
+"revocation_error_scan_single_DE" = "Das von Ihnen gescannte Zertifikat wurde vom RKI aufgrund einer behördlichen Verfügung gesperrt.";
+
+"revocation_error_scan_single_notDE" = "Das Zertifikat wurde vom Zertifikataussteller aufgrund einer behördlichen Entscheidung gesperrt.";
+
+"revocation_error_scan_locationID" = "Das von Ihnen gescannte Zertifikat wurde vom RKI aufgrund einer behördlichen Verfügung gesperrt. Bitte bemühen Sie sich darum, einen neuen digitalen Nachweis ausstellen zu lassen.";
+
+"revocation_dialog_single" = "Die Gültigkeit eines Zertifikats hat sich geändert. Dieses Zertifikat kann nicht mehr zum Nachweis verwendet werden.";
+
+"revocation_dialog_locationID" = "Die Gültigkeit eines Zertifikats hat sich geändert. Dieses Zertifikat kann nicht mehr zum Nachweis verwendet werden. Bitte bemühen Sie sich darum, einen neuen digitalen Nachweis ausstellen zu lassen.";
+
+"revocation_detail_single_DE" = "Das RKI hat das Zertifikat aufgrund einer behördlichen Verfügung gesperrt.";
+
+"revocation_detail_single_notDE" = "Das Zertifikat wurde vom Zertifikataussteller aufgrund einer behördlichen Entscheidung gesperrt.";
+
+"revocation_detail_locationID" = "Das RKI hat das Zertifikat aufgrund einer behördlichen Verfügung gesperrt. Bitte bemühen Sie sich darum, einen neuen digitalen Nachweis ausstellen zu lassen.";

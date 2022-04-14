@@ -1,5 +1,5 @@
 //
-//  FetchCertificatesUseCase.swift
+//  InvalidationUseCase.swift
 //
 //  © Copyright IBM Deutschland GmbH 2021
 //  SPDX-License-Identifier: Apache-2.0
@@ -70,7 +70,7 @@ public class InvalidationUseCase {
         .then { isRevoked -> Promise<ExtendedCBORWebToken> in
             if isRevoked {
                 var tmpToken = token
-                tmpToken.invalid = true
+                tmpToken.revoked = true
                 return .value(tmpToken)
             }
             return .value(token)

@@ -124,7 +124,7 @@ class GProofViewModel: GProofViewModelProtocol {
     
     func scanQRCode() {
         var tmpToken: ExtendedCBORWebToken?
-        let promise = firstly {
+        firstly {
             router.scanQRCode()
         }
         .then {
