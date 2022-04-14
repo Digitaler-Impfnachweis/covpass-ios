@@ -90,8 +90,8 @@ class GProofViewModel: GProofViewModelProtocol {
     var areBothScanned: Bool { firstResult != nil && secondResult != nil}
     var firstResult: ValidationResultViewModel? = nil
     var secondResult: ValidationResultViewModel? = nil
-    var firstIsFailedTechnicalReason: Bool { (firstResult is ErrorResultViewModel && firstResult?.certificate == nil) }
-    var secondIsFailedTechnicalReason: Bool { (secondResult is ErrorResultViewModel && secondResult?.certificate == nil) }
+    var firstIsFailedTechnicalReason: Bool { (firstResult is ErrorResultViewModel) }
+    var secondIsFailedTechnicalReason: Bool { (secondResult is ErrorResultViewModel) }
     let router: GProofRouterProtocol
     internal var delegate: ViewModelDelegate?
     private var initialTokenIsBoosted: Bool = false
