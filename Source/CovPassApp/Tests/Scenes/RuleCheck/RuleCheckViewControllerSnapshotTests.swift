@@ -535,5 +535,49 @@ class RuleCheckViewControllerSnapshotTests: BaseSnapShotTests {
         let vc = RuleCheckViewController(viewModel: sut)
         verifyView(view: vc.view, height: 1300, waitAfter: 0.2)
     }
+    
+    func testWithCertifcatesOnePersonTwoCertificatesOneValidOneRevoked() {
+        let certLogicMock = DCCCertLogicMock()
+        let vaccinationRepoMock = VaccinationRepositoryMock()
+
+        let vacinationDate = DateUtils.parseDate("2021-04-26T15:05:00")!
+
+        var revokedCert: ExtendedCBORWebToken = CBORWebToken
+            .mockVaccinationCertificate
+            .mockVaccinationUVCI("3")
+            .mockVaccinationSetDate(vacinationDate)
+            .extended(vaccinationQRCodeData:"3")
+        revokedCert.vaccinationCertificate.hcert.dgc.nam = Name(gn: "Sabrina",
+                                                               fn: "Vogler",
+                                                               gnt: "Sabrina",
+                                                               fnt: "Vogler")
+        revokedCert.revoked = true
+        
+        var validCert: ExtendedCBORWebToken = CBORWebToken
+            .mockVaccinationCertificate
+            .mockVaccinationUVCI("4")
+            .mockVaccinationSetDate(vacinationDate)
+            .extended(vaccinationQRCodeData:"4")
+        validCert.vaccinationCertificate.hcert.dgc.nam = Name(gn: "Sabrina",
+                                                               fn: "Vogler",
+                                                               gnt: "Sabrina",
+                                                               fnt: "Vogler")
+        validCert.invalid = false
+
+        let certificates = [
+            revokedCert,
+            validCert
+        ]
+        
+        vaccinationRepoMock.certificates = certificates
+        certLogicMock.validateResult = [ValidationResult(rule: nil, result: .passed, validationErrors: nil)]
+        let sut = RuleCheckViewModel(router: nil,
+                                     resolvable: nil,
+                                     repository: vaccinationRepoMock,
+                                     certLogic: certLogicMock)
+        sut.date = DateUtils.parseDate("2021-04-26T15:05:00")!
+        let vc = RuleCheckViewController(viewModel: sut)
+        verifyView(view: vc.view, height: 1300, waitAfter: 0.2)
+    }
 }
 

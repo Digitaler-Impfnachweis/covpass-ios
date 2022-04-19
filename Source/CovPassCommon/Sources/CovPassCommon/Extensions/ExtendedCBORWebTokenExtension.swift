@@ -34,4 +34,6 @@ public extension ExtendedCBORWebToken {
     var isInvalid: Bool { invalid ?? false }
 
     var isRevoked: Bool { revoked ?? false  }
+    
+    var isNotRevoked: Bool { !isRevoked }
 }
