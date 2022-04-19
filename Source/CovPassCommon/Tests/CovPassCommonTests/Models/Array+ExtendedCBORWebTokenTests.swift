@@ -122,12 +122,12 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
         let candidateForReissue = certs.filterBoosterAfterVaccinationAfterRecoveryFromGermany
         
         // THEN
-        XCTAssertFalse(certs.qualifiedForReissue)
+        XCTAssertTrue(certs.qualifiedForReissue)
         XCTAssertFalse(candidateForReissue.isEmpty)
-        XCTAssertEqual(candidateForReissue.count, 3)
+        XCTAssertEqual(candidateForReissue.count, 2)
         XCTAssertTrue(candidateForReissue.contains(singleDoseImmunizationJohnsonCert))
         XCTAssertTrue(candidateForReissue.contains(doubleDoseImmunizationJohnsonCert))
-        XCTAssertTrue(candidateForReissue.contains(recoveryCert))
+        XCTAssertFalse(candidateForReissue.contains(recoveryCert))
         XCTAssertFalse(candidateForReissue.contains(someOtherCert1))
         XCTAssertFalse(candidateForReissue.contains(someOtherCert2))
     }
@@ -241,12 +241,12 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
         let candidateForReissue = certs.filterBoosterAfterVaccinationAfterRecoveryFromGermany
         
         // THEN
-        XCTAssertFalse(certs.qualifiedForReissue)
+        XCTAssertTrue(certs.qualifiedForReissue)
         XCTAssertFalse(candidateForReissue.isEmpty)
-        XCTAssertEqual(candidateForReissue.count, 4)
+        XCTAssertEqual(candidateForReissue.count, 2)
         XCTAssertTrue(candidateForReissue.contains(singleDoseImmunizationJohnsonCert))
         XCTAssertTrue(candidateForReissue.contains(vaccinationWithTwoShotsOfVaccine))
-        XCTAssertTrue(candidateForReissue.contains(recoveryCert))
+        XCTAssertFalse(candidateForReissue.contains(recoveryCert))
         XCTAssertFalse(candidateForReissue.contains(someOtherCert1))
         XCTAssertFalse(candidateForReissue.contains(someOtherCert2))
     }

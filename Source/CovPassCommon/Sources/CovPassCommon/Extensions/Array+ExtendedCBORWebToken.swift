@@ -35,20 +35,7 @@ public extension Array where Element == ExtendedCBORWebToken {
         guard filter2Of1.isEmpty else {
             return false
         }
-        guard recoveryIfAvailableIsOlderThanVaccinationDates else {
-            return false
-        }
         return !filterBoosterAfterVaccinationAfterRecoveryFromGermany.isEmpty
-    }
-    
-    var recoveryIfAvailableIsOlderThanVaccinationDates: Bool {
-        guard !recoveryDates.isEmpty else {
-            return true
-        }
-        if let latestVaccinationDate = vaccinationsForReissueDates.latestDate, let latestRecoveryDate = recoveryDates.latestDate {
-            return latestRecoveryDate < latestVaccinationDate
-        }
-        return false
     }
     
     var reissueProcessInitialNotAlreadySeen: Bool { !reissueProcessInitialAlreadySeen }
@@ -75,14 +62,25 @@ public extension Array where Element == ExtendedCBORWebToken {
         }.filterIssuedByGerman
     }
     
-    var tokensOfRecoveryFromGermany: [ExtendedCBORWebToken] { filter(by: .recovery).filterIssuedByGerman }
+    var tokensOfRecoveryFromGermany: [ExtendedCBORWebToken] {
+        let recoveriesIssuedByGerman = filter(by: .recovery).filterIssuedByGerman
+        return recoveriesIssuedByGerman.filterOlderThanDoubleDoseVaccination(datesOfGermanDoubleDoseVaccinations: datesOfGermanDoubleDoseVaccinations)
+    }
+    
+    func filterOlderThanDoubleDoseVaccination(datesOfGermanDoubleDoseVaccinations: [Date]) -> [ExtendedCBORWebToken] {
+        filter { token in
+            datesOfGermanDoubleDoseVaccinations.contains { doubleDoseVaccinationDate in
+                return token.firstRecovery!.fr < doubleDoseVaccinationDate
+            }
+        }
+    }
     
     var recoveryDates: [Date] {
         tokensOfRecoveryFromGermany.map{ $0.firstRecovery!.fr }
     }
     
-    var vaccinationsForReissueDates : [Date] {
-        (tokensOfVaccinationWithSingleDoseFromGermany + tokensOfVaccinationWithDoubleDoseCompleteFromGermany).map{ $0.firstVaccination!.dt }
+    var datesOfGermanDoubleDoseVaccinations : [Date] {
+        tokensOfVaccinationWithDoubleDoseCompleteFromGermany.map{ $0.firstVaccination!.dt }
     }
     
     var filterBoosterAfterVaccinationAfterRecoveryFromGermany: [ExtendedCBORWebToken] {
@@ -92,6 +90,7 @@ public extension Array where Element == ExtendedCBORWebToken {
         guard !tokensOfVaccinationWithDoubleDoseCompleteFromGermany.isEmpty else {
             return []
         }
+
         return tokensOfRecoveryFromGermany + tokensOfVaccinationWithSingleDoseFromGermany + tokensOfVaccinationWithDoubleDoseCompleteFromGermany
     }
     

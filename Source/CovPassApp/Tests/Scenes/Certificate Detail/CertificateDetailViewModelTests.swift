@@ -137,7 +137,7 @@ class CertificateDetailViewModelTests: XCTestCase {
         configureCustomSut(certificates: certificates)
         
         // THEN
-        XCTAssertFalse(sut.showReissueNotification)
+        XCTAssert(sut.showReissueNotification)
     }
     
     func testShowReissueNotification_ReissueQualifiedCase2() throws {
