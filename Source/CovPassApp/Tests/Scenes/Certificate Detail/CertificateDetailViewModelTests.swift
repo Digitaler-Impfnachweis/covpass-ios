@@ -458,7 +458,7 @@ class CertificateDetailViewModelTests: XCTestCase {
         XCTAssertEqual(immunizationTitle, "Certificate invalid")
     }
 
-    func testImmunizationBody_revoked_german_issuer() throws {
+    func testImmunizationBody_revoked_vaccination_certificate_german_issuer() throws {
         // Given
         try configureSut(revoked: true)
 
@@ -469,14 +469,66 @@ class CertificateDetailViewModelTests: XCTestCase {
         XCTAssertEqual(immunizationBody, "The RKI has revoked the certificate due to an official decree.")
     }
 
-    func testImmunizationBody_revoked_non_german_issuer() throws {
+    func testImmunizationBody_revoked_vaccination_certificate_non_german_issuer() throws {
         // Given
         var token = try ExtendedCBORWebToken.token1Of1()
         token.vaccinationCertificate.iss = "XL"
         token.revoked = true
-        vaccinationRepo.certificates = [token]
-        sut.refreshCertsAndUpdateView()
-        wait(for: [delegate.viewModelDidUpdateExpectation], timeout: 1)
+        configureCustomSut(certificates: [token])
+
+        // When
+        let immunizationBody = sut.immunizationBody
+
+        // Then
+        XCTAssertEqual(immunizationBody, "The certificate was revoked by the certificate issuer due to an official decision.")
+    }
+
+    func testImmunizationBody_revoked_test_certificate_german_issuer() {
+        // Given
+        var token = CBORWebToken.mockTestCertificate.extended()
+        token.revoked = true
+        configureCustomSut(certificates: [token])
+
+        // When
+        let immunizationBody = sut.immunizationBody
+
+        // Then
+        XCTAssertEqual(immunizationBody, "The RKI has revoked the certificate due to an official decree.")
+    }
+
+    func testImmunizationBody_revoked_test_certificate_non_german_issuer() throws {
+        // Given
+        var token = CBORWebToken.mockTestCertificate.extended()
+        token.vaccinationCertificate.iss = "XL"
+        token.revoked = true
+        configureCustomSut(certificates: [token])
+
+        // When
+        let immunizationBody = sut.immunizationBody
+
+        // Then
+        XCTAssertEqual(immunizationBody, "The certificate was revoked by the certificate issuer due to an official decision.")
+    }
+
+    func testImmunizationBody_revoked_recovery_certificate_german_issuer() {
+        // Given
+        var token = CBORWebToken.mockRecoveryCertificate.extended()
+        token.revoked = true
+        configureCustomSut(certificates: [token])
+
+        // When
+        let immunizationBody = sut.immunizationBody
+
+        // Then
+        XCTAssertEqual(immunizationBody, "The RKI has revoked the certificate due to an official decree.")
+    }
+
+    func testImmunizationBody_revoked_recovery_certificate_non_german_issuer() throws {
+        // Given
+        var token = CBORWebToken.mockRecoveryCertificate.extended()
+        token.vaccinationCertificate.iss = "XL"
+        token.revoked = true
+        configureCustomSut(certificates: [token])
 
         // When
         let immunizationBody = sut.immunizationBody

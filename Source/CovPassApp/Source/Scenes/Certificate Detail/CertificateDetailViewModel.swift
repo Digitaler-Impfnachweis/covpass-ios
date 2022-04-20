@@ -154,6 +154,12 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
         if selectedCertificate?.isInvalid ?? false {
             return "certificates_overview_invalid_message".localized
         }
+        if selectedCertificateIsGermanAndWasRevoked {
+            return "revocation_detail_single_DE".localized
+        }
+        if selectedCertificateIsNotGermanAndWasRevoked {
+            return "revocation_detail_single_notDE".localized
+        }
         if let cert = selectedCertificate?.vaccinationCertificate.hcert.dgc.v?.first(where: { $0.fullImmunization }), !cert.fullImmunizationValid {
             return "vaccination_certificate_overview_complete_from_message".localized
         }
@@ -165,12 +171,6 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
         }
         if !fullImmunization {
             return "vaccination_certificate_overview_incomplete_message".localized
-        }
-        if selectedCertificateIsGermanAndWasRevoked {
-            return "revocation_detail_single_DE".localized
-        }
-        if selectedCertificateIsNotGermanAndWasRevoked {
-            return "revocation_detail_single_notDE".localized
         }
         return "recovery_certificate_overview_message".localized
     }
