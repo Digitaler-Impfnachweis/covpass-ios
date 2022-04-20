@@ -154,4 +154,20 @@ class CertificateOverviewSnapShotTests: BaseSnapShotTests {
         RunLoop.current.run(for: 0.5)
         verifyView(view: viewController.collectionView.cellForItem(at: IndexPath(row: 0, section: 0))!)
     }
+    
+    func testCertificateOverviewCertificates_IsRevoked() {
+        let vacinationRepoMock: VaccinationRepositoryMock = VaccinationRepositoryMock()
+        var cert: ExtendedCBORWebToken = CBORWebToken.mockTestCertificate.extended()
+        cert.vaccinationCertificate.hcert.dgc.nam.fn = "John 1"
+        cert.revoked = true
+        let certs = [cert]
+        vacinationRepoMock.certificates = certs
+        let viewModel = self.viewModel(router: CertificatesOverviewRouterMock(), repository: vacinationRepoMock)
+        let viewController = CertificatesOverviewViewController(viewModel: viewModel)
+        let window = UIWindow(frame: UIScreen.main.bounds)
+        window.rootViewController = viewController
+        window.makeKeyAndVisible()
+        RunLoop.current.run(for: 0.5)
+        verifyView(view: viewController.collectionView.cellForItem(at: IndexPath(row: 0, section: 0))!)
+    }
 }

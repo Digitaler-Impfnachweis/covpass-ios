@@ -71,7 +71,7 @@ class CertificateItemDetailViewModel: CertificateItemDetailViewModelProtocol {
     }
 
     lazy var isRevoked = certificate.isRevoked
-    lazy var hideQRCodeButtons = isInvalid || isRevoked
+    lazy var hideQRCodeButtons = (isInvalid && !certificate.vaccinationCertificate.isExpired ) || isRevoked
     lazy var revocationText = (
         certificate.vaccinationCertificate.isGermanIssuer ?
             "revocation_detail_single_DE" :

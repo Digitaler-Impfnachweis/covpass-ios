@@ -77,7 +77,7 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
         if token.vaccinationCertificate.isExpired {
             return "certificates_start_screen_qrcode_certificate_expired_subtitle".localized
         }
-        if token.isInvalid {
+        if token.isInvalid || token.isRevoked {
             return "certificates_start_screen_qrcode_certificate_invalid_subtitle".localized
         }
         if showNotification {
