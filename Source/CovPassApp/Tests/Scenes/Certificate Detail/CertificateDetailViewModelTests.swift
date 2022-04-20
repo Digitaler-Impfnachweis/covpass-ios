@@ -8,11 +8,15 @@
 @testable import CovPassApp
 import CovPassCommon
 import CovPassUI
+import PromiseKit
 import XCTest
 
 class CertificateDetailViewModelTests: XCTestCase {
     private var boosterLogic: BoosterLogicMock!
     private var delegate: MockViewModelDelegate!
+    private var promise: Promise<CertificateDetailSceneResult>!
+    private var resolver: Resolver<CertificateDetailSceneResult>!
+    private var router: CertificateDetailRouterMock!
     private var sut: CertificateDetailViewModel!
     private var vaccinationRepo: VaccinationRepositoryMock!
 
@@ -22,6 +26,10 @@ class CertificateDetailViewModelTests: XCTestCase {
             .token2Of2(),
             .token3Of3()
         ]
+        let (promise, resolver) = Promise<CertificateDetailSceneResult>.pending()
+        self.promise = promise
+        self.resolver = resolver
+        router = .init()
         configureCustomSut(certificates: certificates)
     }
     
@@ -30,11 +38,11 @@ class CertificateDetailViewModelTests: XCTestCase {
         vaccinationRepo = VaccinationRepositoryMock()
         delegate = .init()
         sut = CertificateDetailViewModel(
-            router: CertificateDetailRouterMock(),
+            router: router,
             repository: vaccinationRepo,
             boosterLogic: boosterLogic,
             certificates: certificates,
-            resolvable: nil
+            resolvable: resolver
         )
         sut.delegate = delegate
     }
@@ -50,11 +58,11 @@ class CertificateDetailViewModelTests: XCTestCase {
         ]
         boosterLogic.boosterCandidates = [boosterCandidate]
         sut = CertificateDetailViewModel(
-            router: CertificateDetailRouterMock(),
+            router: router,
             repository: VaccinationRepositoryMock(),
             boosterLogic: boosterLogic,
             certificates: certificates,
-            resolvable: nil
+            resolvable: resolver
         )
     }
 
@@ -62,6 +70,8 @@ class CertificateDetailViewModelTests: XCTestCase {
         vaccinationRepo = nil
         boosterLogic = nil
         delegate = nil
+        promise = nil
+        router = nil
         sut = nil
     }
 
@@ -495,6 +505,74 @@ class CertificateDetailViewModelTests: XCTestCase {
 
         // Then
         XCTAssertTrue(showScanHint)
+    }
+
+    func testImmunizationButtonTapped_no_certificates() {
+        // Given
+        router.showCertificateExpectation.isInverted = true
+        configureCustomSut(certificates: [])
+
+        // When
+        sut.immunizationButtonTapped()
+
+        // Then
+        wait(for: [router.showCertificateExpectation], timeout: 1)
+        XCTAssertFalse(promise.isFulfilled)
+    }
+
+    func testImmunizationButtonTapped_certificate_invalid() throws {
+        // Given
+        try configureSut(invalid: true)
+        let expectation = XCTestExpectation()
+        promise
+            .done { result in
+                switch result {
+                case .addNewCertificate:
+                    expectation.fulfill()
+                default:
+                    break
+                }
+            }
+            .cauterize()
+
+        // When
+        sut.immunizationButtonTapped()
+
+        // Then
+        wait(for: [expectation], timeout: 1)
+    }
+
+    func testImmunizationButtonTapped_certificate_revoked() throws {
+        // Given
+        try configureSut(revoked: true)
+        let expectation = XCTestExpectation()
+        promise
+            .done { result in
+                switch result {
+                case .addNewCertificate:
+                    expectation.fulfill()
+                default:
+                    break
+                }
+            }
+            .cauterize()
+
+        // When
+        sut.immunizationButtonTapped()
+
+        // Then
+        wait(for: [expectation], timeout: 1)
+    }
+
+    func testImmunizationButtonTapped_valid_certificate() throws {
+        // Given
+        try configureSut()
+
+        // When
+        sut.immunizationButtonTapped()
+
+        // Then
+        wait(for: [router.showCertificateExpectation], timeout: 1)
     }
 }
 

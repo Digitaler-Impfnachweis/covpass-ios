@@ -337,6 +337,7 @@
 		E7170774280091A9000B2E32 /* revocation-trust-key-release.pem in Resources */ = {isa = PBXBuildFile; fileRef = E7170773280091A9000B2E32 /* revocation-trust-key-release.pem */; };
 		E745AF1C27DA3C7000B3671E /* RevocationInfoViewControllerSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E745AF1A27DA3B9500B3671E /* RevocationInfoViewControllerSnapshotTests.swift */; };
 		E745AF2227DA3F2500B3671E /* CoseSign1Message+Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E745AF2127DA3F2400B3671E /* CoseSign1Message+Mock.swift */; };
+		E74D4C7A2810384200EF5D6F /* CertificateDetailRouterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74D4C792810384200EF5D6F /* CertificateDetailRouterMock.swift */; };
 		E75234DC27CE6EF200B744AB /* ReissueResultViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E75234DB27CE6EF200B744AB /* ReissueResultViewModelTests.swift */; };
 		E75234E127CE6FE700B744AB /* ReissueResultRouterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E75234E027CE6FE700B744AB /* ReissueResultRouterMock.swift */; };
 		E76B96EA27C50F130030FC0C /* URLSession+CertificateReissue.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76B96E927C50F130030FC0C /* URLSession+CertificateReissue.swift */; };
@@ -756,6 +757,7 @@
 		E7170773280091A9000B2E32 /* revocation-trust-key-release.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "revocation-trust-key-release.pem"; sourceTree = "<group>"; };
 		E745AF1A27DA3B9500B3671E /* RevocationInfoViewControllerSnapshotTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RevocationInfoViewControllerSnapshotTests.swift; sourceTree = "<group>"; };
 		E745AF2127DA3F2400B3671E /* CoseSign1Message+Mock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CoseSign1Message+Mock.swift"; sourceTree = "<group>"; };
+		E74D4C792810384200EF5D6F /* CertificateDetailRouterMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateDetailRouterMock.swift; sourceTree = "<group>"; };
 		E75234DB27CE6EF200B744AB /* ReissueResultViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReissueResultViewModelTests.swift; sourceTree = "<group>"; };
 		E75234E027CE6FE700B744AB /* ReissueResultRouterMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReissueResultRouterMock.swift; sourceTree = "<group>"; };
 		E76B96E927C50F130030FC0C /* URLSession+CertificateReissue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+CertificateReissue.swift"; sourceTree = "<group>"; };
@@ -2119,6 +2121,14 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		E74D4C782810382200EF5D6F /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				E74D4C792810384200EF5D6F /* CertificateDetailRouterMock.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
 		E75234DA27CE6ECA00B744AB /* Result */ = {
 			isa = PBXGroup;
 			children = (
@@ -2155,6 +2165,7 @@
 		E76B998727AAE7F60029FCB1 /* Certificate Detail */ = {
 			isa = PBXGroup;
 			children = (
+				E74D4C782810382200EF5D6F /* Mocks */,
 				E7CDDC8D28072F20006B5190 /* Certificates */,
 				E76B998827AAE8220029FCB1 /* CertificateDetailViewModelTests.swift */,
 			);
@@ -2662,6 +2673,7 @@
 				09D580F927C0BDDC00CB50CB /* ReissueStartViewControllerSnapShotTests.swift in Sources */,
 				09590D392715E67F004410D7 /* MockCertificateViewModelDelegate.swift in Sources */,
 				9514A5F22732A40E00987109 /* CertificateDetailViewControllerSnapshotTests.swift in Sources */,
+				E74D4C7A2810384200EF5D6F /* CertificateDetailRouterMock.swift in Sources */,
 				09CE6C9427AB31D50048BDA4 /* CountrySelectionRouterMock.swift in Sources */,
 				09CE6C9227AB31920048BDA4 /* CountrySelectionViewControllerSnapShotTests.swift in Sources */,
 				09590D322715E67F004410D7 /* VaccinationRepositoryMock.swift in Sources */,

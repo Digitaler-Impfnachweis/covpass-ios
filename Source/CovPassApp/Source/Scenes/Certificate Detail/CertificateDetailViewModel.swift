@@ -283,14 +283,18 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
     }
 
     func immunizationButtonTapped() {
-        if selectedCertificate?.isInvalid ?? false {
+        if selectedCertificateIsInvalidOrRevoked {
             resolver?.fulfill(.addNewCertificate)
         } else {
-            guard let cert = certificates.sortLatest().first else {
-                return
-            }
-            router.showCertificate(for: cert)
+            showLatestCertificate()
         }
+    }
+
+    private func showLatestCertificate() {
+        guard let certificate = certificates.sortLatest().first else {
+            return
+        }
+        router.showCertificate(for: certificate)
     }
 
     func toggleFavorite() {

@@ -474,27 +474,3 @@ class CertificateDetailViewControllerSnapshotTests: BaseSnapShotTests {
         verifyView(view: viewController.view, height: 1100)
     }
 }
-
-struct CertificateDetailRouterMock: CertificateDetailRouterProtocol {
-    
-    let expectationShowReissue = XCTestExpectation(description: "expectationShowReissue")
-    
-    func showCertificate(for token: ExtendedCBORWebToken) -> Promise<Void> {
-        .value
-    }
-    
-    func showDetail(for certificate: ExtendedCBORWebToken) -> Promise<CertificateDetailSceneResult> {
-        .value(.addNewCertificate)
-    }
-
-    func showWebview(_ url: URL) {
-        
-    }
-
-    func showReissue(for tokens: [ExtendedCBORWebToken]) -> Promise<Void> {
-        expectationShowReissue.fulfill()
-        return .value
-    }
-
-    var sceneCoordinator: SceneCoordinator = SceneCoordinatorMock()
-}
