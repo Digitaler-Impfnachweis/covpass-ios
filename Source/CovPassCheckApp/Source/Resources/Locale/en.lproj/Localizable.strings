@@ -247,7 +247,7 @@
 
 "accessibility_validation_check_popup_unsuccessful_certificate_label_close" = "Close";
 
-"validation_check_popup_test_title" = "Negative rapid test from %d hours ago";
+"validation_check_popup_test_title" = "Negative rapid test from %d hour(s) ago";
 
 "validation_check_popup_test_message" = "Check the following data against an ID document from the person you are checking.";
 
@@ -259,7 +259,7 @@
 
 "accessibility_validation_check_popup_test_label_close" = "Close";
 
-"validation_check_popup_valid_pcr_test_title" = "Negative PCR test from %d hours ago";
+"validation_check_popup_valid_pcr_test_title" = "Negative PCR test from %d hour(s) ago";
 
 "validation_check_popup_valid_pcr_test_message" = "Check the following data against an ID document from the person you are checking:";
 
@@ -322,11 +322,11 @@
 
 "result_2G_2nd_empty" = "May be required for 2G+";
 
-"result_2G_2nd_timestamp_hours" = "%d hours ago";
+"result_2G_2nd_timestamp_hours" = "%d hour(s) ago";
 
-"result_2G_2nd_timestamp_days" = "%d days ago";
+"result_2G_2nd_timestamp_days" = "%d day(s) ago";
 
-"result_2G_2nd_timestamp_months" = "%d months ago";
+"result_2G_2nd_timestamp_months" = "%d month(s) ago";
 
 "result_2G_3rd_test_vacc_empty" = "Test or vaccination*";
 

@@ -247,7 +247,7 @@
 
 "accessibility_validation_check_popup_unsuccessful_certificate_label_close" = "Schließen";
 
-"validation_check_popup_test_title" = "Negativer Schnelltest von vor %d Stunden";
+"validation_check_popup_test_title" = "Negativer Schnelltest von vor %d Stunde(n)";
 
 "validation_check_popup_test_message" = "Gleichen Sie jetzt folgende Daten mit einem Ausweisdokument der geprüften Person ab.";
 
@@ -259,7 +259,7 @@
 
 "accessibility_validation_check_popup_test_label_close" = "Schließen";
 
-"validation_check_popup_valid_pcr_test_title" = "Negativer PCR-Test von vor %d Stunden";
+"validation_check_popup_valid_pcr_test_title" = "Negativer PCR-Test von vor %d Stunde(n)";
 
 "validation_check_popup_valid_pcr_test_message" = "Gleichen Sie folgende Daten mit einem Ausweisdokument der geprüften Person ab:";
 
@@ -322,11 +322,11 @@
 
 "result_2G_2nd_empty" = "Kann für 2G+ notwendig sein";
 
-"result_2G_2nd_timestamp_hours" = "Vor %d Stunden";
+"result_2G_2nd_timestamp_hours" = "Vor %d Stunde(n)";
 
-"result_2G_2nd_timestamp_days" = "Vor %d Tagen";
+"result_2G_2nd_timestamp_days" = "Vor %d Tage(n)";
 
-"result_2G_2nd_timestamp_months" = "Vor %d Monaten";
+"result_2G_2nd_timestamp_months" = "Vor %d Monat(en)";
 
 "result_2G_3rd_test_vacc_empty" = "Test oder Impfung*";
 

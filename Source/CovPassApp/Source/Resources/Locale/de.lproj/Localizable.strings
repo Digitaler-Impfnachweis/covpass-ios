@@ -664,7 +664,7 @@
 
 "booster_vaccination_certificate_overview_action_button_title" = "Aktuellen QR-Code anzeigen";
 
-"vaccination_certificate_overview_incomplete_title" = "Unvollständiger Impfschutz: %d von %d";
+"vaccination_certificate_overview_incomplete_title" = "Unvollständiger Impfschutz";
 
 "vaccination_certificate_overview_incomplete_message" = "Ihr Impfschutz ist nicht vollständig. Um den QR-Code als Nachweis für einen kompletten Impfschutz vorzeigen zu können, fügen Sie bitte eine weitere Impfung hinzu.";
 

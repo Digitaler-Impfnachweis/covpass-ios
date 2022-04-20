@@ -79,7 +79,7 @@ class GProofViewModelTests: XCTestCase {
         XCTAssertEqual(sut.firstResultLinkImage, nil)
         XCTAssertEqual(sut.firstResultTitle, "Negative PCR test")
         XCTAssertEqual(sut.firstResultFooterText, nil)
-        XCTAssertEqual(sut.firstResultSubtitle, "0 hours ago")
+        XCTAssertEqual(sut.firstResultSubtitle, "0 hour(s) ago")
         
         XCTAssertEqual(sut.secondResultImage, UIImage.detailStatusFullEmpty)
         XCTAssertEqual(sut.seconResultLinkImage, nil)
@@ -104,7 +104,7 @@ class GProofViewModelTests: XCTestCase {
         XCTAssertEqual(sut.firstResultLinkImage, nil)
         XCTAssertEqual(sut.firstResultTitle, "Negative PCR test")
         XCTAssertEqual(sut.firstResultFooterText, nil)
-        XCTAssertEqual(sut.firstResultSubtitle, "0 hours ago")
+        XCTAssertEqual(sut.firstResultSubtitle, "0 hour(s) ago")
         
         XCTAssertEqual(sut.secondResultImage, UIImage.detailStatusFullEmpty)
         XCTAssertEqual(sut.seconResultLinkImage, nil)
@@ -134,7 +134,7 @@ class GProofViewModelTests: XCTestCase {
         XCTAssertEqual(sut.firstResultLinkImage, nil)
         XCTAssertEqual(sut.firstResultTitle, "Negative PCR test")
         XCTAssertEqual(sut.firstResultFooterText, nil)
-        XCTAssertEqual(sut.firstResultSubtitle, "0 hours ago")
+        XCTAssertEqual(sut.firstResultSubtitle, "0 hour(s) ago")
         
         XCTAssertEqual(sut.secondResultImage, UIImage.detailStatusFullEmpty)
         XCTAssertEqual(sut.seconResultLinkImage, nil)
@@ -165,7 +165,7 @@ class GProofViewModelTests: XCTestCase {
         XCTAssertEqual(sut.firstResultLinkImage, nil)
         XCTAssertEqual(sut.firstResultTitle, "Negative PCR test")
         XCTAssertEqual(sut.firstResultFooterText, nil)
-        XCTAssertEqual(sut.firstResultSubtitle!, "0 hours ago")
+        XCTAssertEqual(sut.firstResultSubtitle!, "0 hour(s) ago")
         
         XCTAssertEqual(sut.secondResultImage, UIImage.detailStatusFailed)
         XCTAssertEqual(sut.seconResultLinkImage, .FieldRight)
@@ -199,13 +199,13 @@ class GProofViewModelTests: XCTestCase {
         XCTAssertEqual(sut.firstResultLinkImage, nil)
         XCTAssertEqual(sut.firstResultTitle, "Negative PCR test")
         XCTAssertEqual(sut.firstResultFooterText, nil)
-        XCTAssertEqual(sut.firstResultSubtitle, "0 hours ago")
+        XCTAssertEqual(sut.firstResultSubtitle, "0 hour(s) ago")
         
         XCTAssertEqual(sut.secondResultImage, UIImage.detailStatusFull)
         XCTAssertEqual(sut.seconResultLinkImage, nil)
         XCTAssertEqual(sut.secondResultTitle, "Basic immunisation")
         XCTAssertEqual(sut.seconResultFooterText, nil)
-        XCTAssertEqual(sut.seconResultSubtitle, "13 months ago")
+        XCTAssertEqual(sut.seconResultSubtitle, "13 month(s) ago")
         
         XCTAssertEqual(try XCTUnwrap(sut.resultPersonTitle), "Doe John")
         XCTAssertEqual(try XCTUnwrap(sut.resultPersonSubtitle), "DOE JOHN")
@@ -356,7 +356,7 @@ class GProofViewModelTests: XCTestCase {
         XCTAssertEqual(sut.firstResultLinkImage, nil)
         XCTAssertEqual(sut.firstResultTitle, "Negative PCR test")
         XCTAssertEqual(sut.firstResultFooterText, nil)
-        XCTAssertEqual(sut.firstResultSubtitle!, "0 hours ago")
+        XCTAssertEqual(sut.firstResultSubtitle!, "0 hour(s) ago")
         
         XCTAssertEqual(sut.secondResultImage, UIImage.detailStatusFullEmpty)
         XCTAssertEqual(sut.seconResultLinkImage, nil)
@@ -397,7 +397,7 @@ class GProofViewModelTests: XCTestCase {
         XCTAssertEqual(sut.firstResultLinkImage, nil)
         XCTAssertEqual(sut.firstResultTitle, "Basic immunisation")
         XCTAssertEqual(sut.firstResultFooterText, nil)
-        XCTAssertEqual(try XCTUnwrap(sut.firstResultSubtitle), "13 months ago")
+        XCTAssertEqual(try XCTUnwrap(sut.firstResultSubtitle), "13 month(s) ago")
         
         XCTAssertEqual(sut.secondResultImage, UIImage.detailStatusFullEmpty)
         XCTAssertEqual(sut.seconResultLinkImage, nil)
@@ -440,13 +440,13 @@ class GProofViewModelTests: XCTestCase {
         XCTAssertEqual(sut.firstResultImage, UIImage.detailStatusFull)
         XCTAssertEqual(sut.firstResultLinkImage, nil)
         XCTAssertEqual(sut.firstResultTitle, "Basic immunisation")
-        XCTAssertEqual(try XCTUnwrap(sut.firstResultSubtitle), "13 months ago")
+        XCTAssertEqual(try XCTUnwrap(sut.firstResultSubtitle), "13 month(s) ago")
         
         XCTAssertEqual(sut.secondResultImage, UIImage.detailStatusTest)
         XCTAssertEqual(sut.seconResultLinkImage, nil)
         XCTAssertEqual(sut.secondResultTitle, "Negative PCR test")
         XCTAssertEqual(sut.seconResultFooterText, nil)
-        XCTAssertEqual(sut.seconResultSubtitle, "0 hours ago")
+        XCTAssertEqual(sut.seconResultSubtitle, "0 hour(s) ago")
         
         XCTAssertEqual(try XCTUnwrap(sut.resultPersonTitle), "Doe John")
         XCTAssertEqual(try XCTUnwrap(sut.resultPersonSubtitle), "DOE JOHN")
@@ -487,13 +487,13 @@ class GProofViewModelTests: XCTestCase {
         XCTAssertEqual(sut.firstResultLinkImage, nil)
         XCTAssertEqual(sut.firstResultTitle, "Recovery")
         XCTAssertEqual(sut.firstResultFooterText, nil)
-        XCTAssertEqual(sut.firstResultSubtitle!, "1 months ago")
+        XCTAssertEqual(sut.firstResultSubtitle!, "1 month(s) ago")
         
         XCTAssertEqual(sut.secondResultImage, UIImage.detailStatusTest)
         XCTAssertEqual(sut.seconResultLinkImage, nil)
         XCTAssertEqual(sut.secondResultTitle, "Negative PCR test")
         XCTAssertEqual(sut.seconResultFooterText, nil)
-        XCTAssertEqual(sut.seconResultSubtitle!, "0 hours ago")
+        XCTAssertEqual(sut.seconResultSubtitle!, "0 hour(s) ago")
         
         XCTAssertEqual(sut.resultPersonTitle!, "Doe John")
         XCTAssertEqual(sut.resultPersonSubtitle!, "DOE JOHN")

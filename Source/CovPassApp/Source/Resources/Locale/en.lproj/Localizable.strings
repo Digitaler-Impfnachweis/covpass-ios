@@ -664,7 +664,7 @@
 
 "booster_vaccination_certificate_overview_action_button_title" = "Display current QR Code";
 
-"vaccination_certificate_overview_incomplete_title" = "Not fully vaccinated: %d of %d";
+"vaccination_certificate_overview_incomplete_title" = "Not fully vaccinated";
 
 "vaccination_certificate_overview_incomplete_message" = "You are not fully vaccinated. To use this QR code as proof of completed vaccination, you will need to add another vaccine dose.";
 
