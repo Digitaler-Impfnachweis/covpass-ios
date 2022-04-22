@@ -104,7 +104,7 @@ class GProofViewModel: GProofViewModelProtocol {
     private var userDefaults: Persistence
     private var boosterAsTest: Bool
     private var resolvable: Resolver<ExtendedCBORWebToken>
-    private var isFirstScan: Bool { firstResult == nil }
+    private var isFirstScan = true
     init(resolvable: Resolver<ExtendedCBORWebToken>,
          router: GProofRouterProtocol,
          repository: VaccinationRepositoryProtocol,
@@ -164,11 +164,6 @@ class GProofViewModel: GProofViewModelProtocol {
         .done {
             self.delegate?.viewModelDidUpdate()
         }
-        .cancelled {
-            if self.isFirstScan {
-                self.router.sceneCoordinator.dimiss(animated: true)
-            }
-        }
         .catch {
             self.errorHandling($0, token: token)
         }
@@ -178,18 +173,17 @@ class GProofViewModel: GProofViewModelProtocol {
         self.error = error
         if (error as? QRCodeError) == .qrCodeExists {
             router.showError(error: error)
-        } else if isFirstScan && ((error as? ScanError) == .badOutput || (error as? Base45CodingError) == .base45Decoding) {
-            showErorResultPage(error: error)
+        } else if isFirstScan && (error is ScanError || error is Base45CodingError || error is CertificateError) {
+            showErorResultPage(error: error, token: token)
             setResultViewModel(error: error, newToken: token).cauterize()
         } else {
             setResultViewModel(error: error, newToken: token).cauterize()
         }
     }
     
-    private func showErorResultPage(error: Error) {
-        let showCert = lastTriedCertType == .test ? secondResult?.certificate : firstResult?.certificate
+    private func showErorResultPage(error: Error, token: ExtendedCBORWebToken?) {
         let shouldShowStartOverButton = !isFirstScan
-        router.showCertificate(showCert,
+        router.showCertificate(token,
                                _2GContext: true,
                                error: error,
                                userDefaults: userDefaults,
@@ -284,11 +278,13 @@ class GProofViewModel: GProofViewModelProtocol {
     }
     
     func scanNext() {
+        isFirstScan = false
         lastTriedCertType = .test
         scanQRCode()
     }
     
     func retry() {
+        isFirstScan = false
         if lastTriedCertType == .test {
             secondResult = nil
         } else {
@@ -299,6 +295,7 @@ class GProofViewModel: GProofViewModelProtocol {
     }
     
     func startover() {
+        isFirstScan = true
         secondResult = nil
         firstResult = nil
         lastTriedCertType = nil
@@ -329,22 +326,6 @@ class GProofViewModel: GProofViewModelProtocol {
                              buttonHidden: true)
             .cauterize()
     }
-    
-
-    
-
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
-
-    
 }
 
 

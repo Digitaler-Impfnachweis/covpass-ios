@@ -54,7 +54,7 @@ class GProofViewModelTests: XCTestCase {
         let vaccinationRepoMock = VaccinationRepositoryMock()
         let dateForTwelveMonthAgo = Calendar.current.date(byAdding: .month, value: -13, to: Date())
         vaccinationRepoMock.checkedCert = initialToken
-        sut.scanQRCode()
+        sut.startover()
         RunLoop.current.run(for: 0.1)
         let certLogicMock = DCCCertLogicMock()
         let routerMock = GProofMockRouter()
@@ -69,8 +69,8 @@ class GProofViewModelTests: XCTestCase {
                                   certLogic: certLogicMock,
                                   userDefaults: UserDefaultsPersistence(),
                                   boosterAsTest: false)
-        sut.scanQRCode()
-        RunLoop.current.run(for: 0.1)
+        sut.startover()
+        RunLoop.current.run(for: 10.1)
         
         // WHEN
         
@@ -95,8 +95,8 @@ class GProofViewModelTests: XCTestCase {
         XCTAssertFalse((sut.router as! GProofMockRouter).errorShown)
 
         // WHEN
-        vaccinationRepoMock.checkedCert = CBORWebToken.mockTestCertificate
-        sut.scanNext()
+        vaccinationRepoMock.checkedCert = CBORWebToken.mockTestCertificate.mockTestUVCI("1")
+        sut.scanQRCode()
         RunLoop.current.run(for: 0.1)
         
         // THEN
@@ -214,7 +214,7 @@ class GProofViewModelTests: XCTestCase {
         XCTAssertFalse((sut.router as! GProofMockRouter).errorShown)
     }
     
-    func testDefault() {
+    func testDefault() throws {
         // GIVEN
         // A Test Cert in setUp which fails
 
@@ -254,9 +254,9 @@ class GProofViewModelTests: XCTestCase {
         XCTAssertEqual(sut.seconResultFooterText, nil)
         XCTAssertEqual(sut.seconResultSubtitle, "May be required for 2G+")
 
-        XCTAssertEqual(sut.resultPersonTitle!, "Doe John")
-        XCTAssertEqual(sut.resultPersonSubtitle!, "DOE JOHN")
-        XCTAssertEqual(sut.resultPersonFooter!, "Born on Jan 1, 1990")
+        XCTAssertEqual(try XCTUnwrap(sut.resultPersonTitle), "Doe John")
+        XCTAssertEqual(try XCTUnwrap(sut.resultPersonSubtitle), "DOE JOHN")
+        XCTAssertEqual(try XCTUnwrap(sut.resultPersonFooter), "Born on Jan 1, 1990")
         XCTAssertEqual(sut.resultPersonIcon, UIImage.iconCardInverse)
     }
     
@@ -326,9 +326,9 @@ class GProofViewModelTests: XCTestCase {
         XCTAssertEqual(sut.seconResultFooterText, nil)
         XCTAssertEqual(sut.seconResultSubtitle, "May be required for 2G+")
         
-        XCTAssertEqual(sut.resultPersonTitle!, "Doe John")
-        XCTAssertEqual(sut.resultPersonSubtitle!, "DOE JOHN")
-        XCTAssertEqual(sut.resultPersonFooter!, "Born on Jan 1, 1990")
+        XCTAssertEqual(try XCTUnwrap(sut.resultPersonTitle), "Doe John")
+        XCTAssertEqual(try XCTUnwrap(sut.resultPersonSubtitle), "DOE JOHN")
+        XCTAssertEqual(try XCTUnwrap(sut.resultPersonFooter), "Born on Jan 1, 1990")
         XCTAssertEqual(sut.resultPersonIcon, UIImage.iconCardInverse)
     }
     
@@ -544,10 +544,9 @@ class GProofViewModelTests: XCTestCase {
         
         // WHEN
         sut.scanNext()
-        RunLoop.current.run(for: 0.1)
         
         // THEN
-        XCTAssertTrue((sut.router as! GProofMockRouter).showDifferentPersonShown)
+        wait(for: [(sut.router as! GProofMockRouter).showDifferentPersonShown], timeout: 0.1)
     }
     
     func testNotDCCScannedAtFirstScan() {
@@ -555,44 +554,51 @@ class GProofViewModelTests: XCTestCase {
         vaccinationRepoMock.checkedCert = nil
         vaccinationRepoMock.checkedCertError = ScanError.badOutput
         certLogicMock.validateResult = [.init(rule: nil, result: .passed, validationErrors: nil)]
-        sut.startover()
 
         // WHEN
-        sut.scanNext()
-        RunLoop.current.run(for: 0.1)
+        sut.startover()
 
         // THEN
-        XCTAssertTrue((sut.router as! GProofMockRouter).certificateShown)
+        wait(for: [(sut.router as! GProofMockRouter).certificateShown], timeout: 0.1)
+    }
+    
+    
+    func testFirstScanTechnicalErrorOpensCertificateDetailPage() {
+        // GIVEN
+        vaccinationRepoMock.checkedCertError = CertificateError.expiredCertifcate
+        vaccinationRepoMock.checkedCert = nil
+        
+        // WHEN
+        sut.startover()
+        // THEN
+        wait(for: [(sut.router as! GProofMockRouter).certificateShown], timeout: 0.1)
     }
     
     func testNotDCCScannedAtSecondScan() {
         // GIVEN
+        (sut.router as! GProofMockRouter).certificateShown.isInverted = true
         vaccinationRepoMock.checkedCert = CBORWebToken.mockTestCertificate
         certLogicMock.validateResult = [.init(rule: nil, result: .passed, validationErrors: nil)]
         sut.startover()
-        RunLoop.current.run(for: 0.1)
         vaccinationRepoMock.checkedCert = nil
         vaccinationRepoMock.checkedCertError = ScanError.badOutput
         certLogicMock.validateResult = [.init(rule: nil, result: .passed, validationErrors: nil)]
 
         // WHEN
         sut.scanNext()
-        RunLoop.current.run(for: 0.1)
 
         // THEN
-        XCTAssertFalse((sut.router as! GProofMockRouter).certificateShown)
+        wait(for: [(sut.router as! GProofMockRouter).certificateShown], timeout: 0.1)
     }
     
     func testShowResultGProof() {
-        XCTAssertFalse((sut.router as! GProofMockRouter).certificateShown)
         sut.showFirstCardResult()
-        XCTAssertTrue((sut.router as! GProofMockRouter).certificateShown)
+        wait(for: [(sut.router as! GProofMockRouter).certificateShown], timeout: 0.1)
     }
     
     func testShowResultTestProof() {
-        XCTAssertFalse((sut.router as! GProofMockRouter).certificateShown)
         sut.showSecondCardResult()
-        XCTAssertTrue((sut.router as! GProofMockRouter).certificateShown)
+        wait(for: [(sut.router as! GProofMockRouter).certificateShown], timeout: 0.1)
     }
     
     func testDismissSceneAfterStartOverOnClosingCamera() {

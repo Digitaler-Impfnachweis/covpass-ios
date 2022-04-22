@@ -10,12 +10,13 @@ import CovPassCommon
 import CovPassUI
 import PromiseKit
 import Foundation
+import XCTest
 
 class GProofMockRouter: GProofRouterProtocol {
     var qrCodeScanShouldCanceled = false
     var errorShown = false
-    var certificateShown = false
-    var showDifferentPersonShown = false
+    var certificateShown = XCTestExpectation()
+    var showDifferentPersonShown = XCTestExpectation()
     var sceneCoordinator: SceneCoordinator = SceneCoordinatorMock()
 
     func scanQRCode() -> Promise<ScanResult> {
@@ -27,7 +28,7 @@ class GProofMockRouter: GProofRouterProtocol {
                          error: Error?,
                          userDefaults: Persistence,
                          buttonHidden: Bool) -> Promise<ExtendedCBORWebToken> {
-        certificateShown = true
+        certificateShown.fulfill()
         return .value(
             ExtendedCBORWebToken(
                 vaccinationCertificate: .mockVaccinationCertificate,
@@ -41,7 +42,7 @@ class GProofMockRouter: GProofRouterProtocol {
     }
     
     func showDifferentPerson(firstResultCert: CBORWebToken, scondResultCert: CBORWebToken) -> Promise<GProofResult> {
-        showDifferentPersonShown = true
+        showDifferentPersonShown.fulfill()
         return .value(.cancel)
     }
     
