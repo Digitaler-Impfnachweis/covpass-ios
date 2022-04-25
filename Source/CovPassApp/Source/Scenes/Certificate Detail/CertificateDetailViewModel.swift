@@ -356,7 +356,7 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
     // MARK: Private methods
     
     private func removeReissueDataIfBoosterWasDeleted() {
-        if certificates.filterBoosted.isEmpty {
+        if certificates.filterBoosters.isEmpty {
             self.repository.setReissueProcess(initialAlreadySeen: false,
                                               newBadgeAlreadySeen: false,
                                               tokens: certificates.filterBoosterAfterVaccinationAfterRecoveryFromGermany).cauterize()

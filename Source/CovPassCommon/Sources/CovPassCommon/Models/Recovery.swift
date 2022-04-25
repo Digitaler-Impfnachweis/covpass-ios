@@ -111,4 +111,8 @@ public extension Recovery {
     var ciDisplayName: String {
         return ci.stripUVCIPrefix()
     }
+    
+    func isOlderThan(vaccination: Vaccination) -> Bool {
+        return fr < vaccination.dt
+    }
 }

@@ -13,7 +13,42 @@ import PromiseKit
 
 
 class CertificateDetailViewControllerSnapshotTests: BaseSnapShotTests {
+    
+    var cert1OutOf1JohnsonJohnson: ExtendedCBORWebToken!
+    var cert2OutOf1Vaccinatio: ExtendedCBORWebToken!
+    var certRecoveryOldestInChain: ExtendedCBORWebToken!
 
+    
+    override func setUpWithError() throws {
+        cert1OutOf1JohnsonJohnson = CBORWebToken
+            .mockVaccinationCertificate
+            .mockVaccinationUVCI("1")
+            .seriesOfDoses(1)
+            .doseNumber(1)
+            .mockVaccinationSetDate(DateUtils.parseDate("2021-01-26T15:05:00")!)
+            .medicalProduct(.johnsonjohnson)
+            .extended(vaccinationQRCodeData: "1")
+        cert2OutOf1Vaccinatio = CBORWebToken
+            .mockVaccinationCertificate
+            .mockVaccinationUVCI("2")
+            .seriesOfDoses(1)
+            .doseNumber(2)
+            .mockVaccinationSetDate(DateUtils.parseDate("2021-04-26T15:05:00")!)
+            .medicalProduct(.astrazeneca)
+            .extended(vaccinationQRCodeData: "2")
+        certRecoveryOldestInChain = CBORWebToken
+            .mockRecoveryCertificate
+            .mockRecoveryUVCI("3")
+            .recoveryTestDate(DateUtils.parseDate("2020-12-26T15:05:00")!)
+            .extended(vaccinationQRCodeData: "3")
+    }
+    
+    override func tearDownWithError() throws {
+        cert1OutOf1JohnsonJohnson = nil
+        cert2OutOf1Vaccinatio = nil
+        certRecoveryOldestInChain = nil
+    }
+    
     func testCertificateDetailViewController() {
         let (_, resolver) = Promise<CertificateDetailSceneResult>.pending()
         let bl = BoosterLogic.init(certLogic: DCCCertLogicMock(), userDefaults: MockPersistence())
@@ -456,7 +491,7 @@ class CertificateDetailViewControllerSnapshotTests: BaseSnapShotTests {
         let vc = CertificateDetailViewController(viewModel: vm)
         verifyView(view: vc.view, height: 1100)
     }
-
+    
     func testCertificateIsRevoked() throws {
         var token = try ExtendedCBORWebToken.token1Of1()
         token.revoked = true
@@ -465,6 +500,102 @@ class CertificateDetailViewControllerSnapshotTests: BaseSnapShotTests {
             repository: VaccinationRepositoryMock(),
             boosterLogic: BoosterLogicMock(),
             certificates: [token],
+            resolvable: nil
+        )
+        let viewController = CertificateDetailViewController(
+            viewModel: viewModel
+        )
+
+        verifyView(view: viewController.view, height: 1100)
+    }
+    
+    func test1OutOf1JohnsonJohnson() throws {
+        let token = try ExtendedCBORWebToken.token1Of1()
+        token.vaccinationCertificate.hcert.dgc.v!.first!.mp = "EU/1/20/1525"
+        let viewModel = CertificateDetailViewModel(
+            router: CertificateDetailRouterMock(),
+            repository: VaccinationRepositoryMock(),
+            boosterLogic: BoosterLogicMock(),
+            certificates: [token],
+            resolvable: nil
+        )
+        let viewController = CertificateDetailViewController(
+            viewModel: viewModel
+        )
+
+        verifyView(view: viewController.view, height: 1100)
+    }
+    
+    func test1OutOf1JohnsonJohnsonAnd2OutOf1Vaccination() {
+        let viewModel = CertificateDetailViewModel(
+            router: CertificateDetailRouterMock(),
+            repository: VaccinationRepositoryMock(),
+            boosterLogic: BoosterLogicMock(),
+            certificates: [cert1OutOf1JohnsonJohnson,
+                           cert2OutOf1Vaccinatio],
+            resolvable: nil
+        )
+        let viewController = CertificateDetailViewController(
+            viewModel: viewModel
+        )
+
+        verifyView(view: viewController.view, height: 1300)
+    }
+    
+    func test1OutOf1JohnsonJohnsonAnd2OutOf1VaccinationAndRecoveryAsOldestCert() {
+        let viewModel = CertificateDetailViewModel(
+            router: CertificateDetailRouterMock(),
+            repository: VaccinationRepositoryMock(),
+            boosterLogic: BoosterLogicMock(),
+            certificates: [cert1OutOf1JohnsonJohnson,
+                           cert2OutOf1Vaccinatio,
+                           certRecoveryOldestInChain],
+            resolvable: nil
+        )
+        let viewController = CertificateDetailViewController(
+            viewModel: viewModel
+        )
+
+        verifyView(view: viewController.view, height: 1300)
+    }
+    
+    func test1OutOf1JohnsonJohnsonAnd2OutOf2VaccinationAndRecoveryAsOldestCert() {
+        // GIVEN
+
+        
+        let viewModel = CertificateDetailViewModel(
+            router: CertificateDetailRouterMock(),
+            repository: VaccinationRepositoryMock(),
+            boosterLogic: BoosterLogicMock(),
+            certificates: [cert1OutOf1JohnsonJohnson,
+                           cert2OutOf1Vaccinatio,
+                           certRecoveryOldestInChain],
+            resolvable: nil
+        )
+        let viewController = CertificateDetailViewController(
+            viewModel: viewModel
+        )
+
+        verifyView(view: viewController.view, height: 1800)
+    }
+    
+    func test3OutOf1Vaccination() {
+        // GIVEN
+        let date = DateUtils.parseDate("2021-01-26T15:05:00")!
+        let cert3OutOf1: ExtendedCBORWebToken = CBORWebToken
+            .mockVaccinationCertificate
+            .mockVaccinationUVCI("1")
+            .seriesOfDoses(1)
+            .doseNumber(3)
+            .mockVaccinationSetDate(date)
+            .medicalProduct(.johnsonjohnson)
+            .extended(vaccinationQRCodeData: "1")
+        
+        let viewModel = CertificateDetailViewModel(
+            router: CertificateDetailRouterMock(),
+            repository: VaccinationRepositoryMock(),
+            boosterLogic: BoosterLogicMock(),
+            certificates: [cert3OutOf1],
             resolvable: nil
         )
         let viewController = CertificateDetailViewController(

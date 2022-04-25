@@ -29,37 +29,6 @@ public class Vaccination: Codable {
     /// Unique Certificate Identifier: UVCI
     public var ci: String
 
-    /// True if full immunization (or booster) is given
-    public var fullImmunization: Bool { dn >= sd || isBoosted || isFullImmunizationAfterRecovery }
-
-    /// `True` if vaccination is a booster vaccination (J&J 2/2, all other vaccination 3/3)
-    public var isBoosted: Bool {
-        (isJohnsonJohnson && dn >= 2) || dn >= 3 || dn > sd
-    }
-
-    public var isFullImmunizationAfterRecovery: Bool {
-        let allExceptJJ = [MedicalProduct.biontech.rawValue, MedicalProduct.moderna.rawValue, MedicalProduct.astrazeneca.rawValue]
-        return (isSingleDoseComplete && allExceptJJ.contains(mp))
-    }
-
-    /// Date when the full immunization is valid
-    public var fullImmunizationValidFrom: Date? {
-        if !fullImmunization { return nil }
-        if isBoosted || isFullImmunizationAfterRecovery { return dt }
-        guard let validDate = Calendar.current.date(byAdding: .day, value: 15, to: dt) else {
-            return nil
-        }
-
-        return validDate
-    }
-
-    /// True if full immunization is valid
-    public var fullImmunizationValid: Bool {
-        guard let dateValidFrom = fullImmunizationValidFrom else { return false }
-        if isBoosted || isFullImmunizationAfterRecovery { return true }
-        return Date() > dateValidFrom
-    }
-
     enum CodingKeys: String, CodingKey {
         case tg
         case vp
@@ -188,6 +157,11 @@ public extension Vaccination {
         sd == 1 && dn == 2
     }
     
+    
+    var isJohnsonJohnsonWithSingleDoseComplete: Bool {
+        isJohnsonJohnson && isSingleDoseComplete
+    }
+    
     var isJohnsonJohnson: Bool {
         mp == MedicalProduct.johnsonjohnson.rawValue
     }
@@ -202,5 +176,65 @@ public extension Vaccination {
     
     var isAstrazeneca: Bool {
         mp == MedicalProduct.astrazeneca.rawValue
+    }
+    
+    /// True if full immunization (or booster) is given
+    var fullImmunization: Bool {
+        (dn >= sd && !isJohnsonJohnson) || isBoosted() || isFullImmunizationAfterRecovery
+    }
+
+    /// `True` if vaccination is a booster vaccination (J&J 2/2, all other vaccination 3/3)
+    func isBoosted(vaccinations: [Vaccination]? = nil, recoveries: [Recovery]? = nil) -> Bool {
+        if let vaccinations = vaccinations, downgrade2OutOf1ToBasisImmunization(otherCertificatesInTheUsersChain: vaccinations, recoveries: recoveries) {
+            return false
+        }
+        return (isJohnsonJohnson && dn >= 2) || dn >= 3 || dn > sd
+    }
+    
+    var isFullImmunizationAfterRecovery: Bool {
+        let allExceptJJ = [MedicalProduct.biontech.rawValue, MedicalProduct.moderna.rawValue, MedicalProduct.astrazeneca.rawValue]
+        return (isSingleDoseComplete && allExceptJJ.contains(mp))
+    }
+
+    /// Date when the full immunization is valid
+    var fullImmunizationValidFrom: Date? {
+        if !fullImmunization { return nil }
+        if isBoosted() || isFullImmunizationAfterRecovery{ return dt }
+        guard let validDate = Calendar.current.date(byAdding: .day, value: 15, to: dt) else {
+            return nil
+        }
+
+        return validDate
+    }
+
+    /// True if full immunization is valid
+    var fullImmunizationValid: Bool {
+        guard let dateValidFrom = fullImmunizationValidFrom else { return false }
+        if isBoosted() || isFullImmunizationAfterRecovery { return true }
+        return Date() > dateValidFrom
+    }
+    
+    func downgrade2OutOf1ToBasisImmunization(otherCertificatesInTheUsersChain certificates: [Vaccination], recoveries: [Recovery]? = nil) -> Bool {
+
+        var certsWithSelf = certificates
+        if !certsWithSelf.contains(self) {
+            certsWithSelf.append(self)
+        }
+
+        guard certsWithSelf.contains(where: \.isJohnsonJohnsonWithSingleDoseComplete) else {
+            return false
+        }
+        
+        guard certsWithSelf.contains(where: \.is2Of1) else {
+            return false
+        }
+        
+        if let latestRecovery = recoveries?.latestRecovery,
+                let oldestVaccination = certificates.oldestVaccination,
+                latestRecovery.isOlderThan(vaccination: oldestVaccination) {
+            return false
+        }
+
+        return true
     }
 }

@@ -164,9 +164,9 @@ public extension Array where Element == ExtendedCBORWebToken {
         }
     }
     
-    var filterBoosted: [ExtendedCBORWebToken] {
+    var filterBoosters: [ExtendedCBORWebToken] {
         filter {
-            if let v = $0.firstVaccination, v.isBoosted {
+            if let v = $0.firstVaccination, v.isBoosted(vaccinations: vaccinations, recoveries: recoveries) {
                 return true
             }
             return false
@@ -207,13 +207,21 @@ public extension Array where Element == ExtendedCBORWebToken {
         filter { $0.vaccinations != nil }
     }
     
+    var filterRecoveries: [ExtendedCBORWebToken] {
+        filter { $0.recoveries != nil }
+    }
+    
     var vaccinations: [Vaccination] {
         filterVaccinations.map{ $0.vaccinations }.compactMap{$0}.flatMap{$0}
     }
     
+    var recoveries: [Recovery] {
+        filterRecoveries.map{ $0.recoveries }.compactMap{$0}.flatMap{$0}
+    }
+    
     var firstNotBosstedValidFullImmunization: ExtendedCBORWebToken? {
         first(where: {
-            if let v = $0.firstVaccination, v.fullImmunization, v.fullImmunizationValid, !v.isBoosted /* Boosters are currently lower prioritized (see 5.1) */ {
+            if let v = $0.firstVaccination, v.fullImmunization, v.fullImmunizationValid, !v.isBoosted(vaccinations: vaccinations, recoveries: recoveries) /* Boosters are currently lower prioritized (see 5.1) */ {
                 return true
             }
             return false
@@ -331,47 +339,97 @@ public extension Array where Element == ExtendedCBORWebToken {
         }
     }
     
+    var sortLatestPcrTest: [ExtendedCBORWebToken] {
+        filterNegativePCRTestsNotOlderThan72Hours
+            .sortByIssuedAtTime
+            .sortTestsByDateTimeOfSampleCollection
+    }
+    
+    var sortLatestQuickTests: [ExtendedCBORWebToken] {
+        filterNegativeQuickTestsNotOlderThan48Hours
+            .sortByIssuedAtTime
+            .sortTestsByDateTimeOfSampleCollection
+    }
+    
+    var sortLatestBooster: [ExtendedCBORWebToken] {
+        filterBoosters
+            .sortByIssuedAtTime
+            .sortByVaccinationDate
+    }
+    
+    var sortLatestVaccinations: [ExtendedCBORWebToken] {
+        filterVaccinations
+            .sortByIssuedAtTime
+            .sortByVaccinationDate
+    }
+    
+    var sortLatestVaccinationsFirstNotBosstedValidFullImmunization: ExtendedCBORWebToken? {
+        sortLatestVaccinations
+            .firstNotBosstedValidFullImmunization
+    }
+    
+    var sortLatestVaccinationsFirstNotValidButFullImmunization: ExtendedCBORWebToken? {
+        sortLatestVaccinations
+            .firstNotValidButFullImmunization
+    }
+    
+    var sortLatestRecoveryWhoseDateIsStillValidSortByFirstPositiveResultDate: [ExtendedCBORWebToken] {
+        filterRecoveryWhoseDateIsStillValid
+            .sortByFirstPositiveResultDate
+    }
+    
+    var sortLatestNotFullImmunization: [ExtendedCBORWebToken] {
+        filterNotFullImmunization
+    }
+    
+    var sortLatestRecoveryWhoseDateNotAnyMoreValidSortByFirstPositiveResultDate: [ExtendedCBORWebToken] {
+        filterRecoveryWhoseDateNotAnyMoreValid
+            .sortByFirstPositiveResultDate
+    }
+    
+    var sortLatestTestsNegativeAndNotValid: [ExtendedCBORWebToken] {
+        filterAllTestsNegativeAndNotValid
+    }
+    
+    func sortLatestRest(_ res: [ExtendedCBORWebToken]) -> [ExtendedCBORWebToken] {
+        return filter { !res.contains($0) }
+    }
+    
     func sortLatest() -> [ExtendedCBORWebToken] {
         var res = [ExtendedCBORWebToken]()
         // #1 Test certificate
         //  Negative PCR Test not older than (=<)72h, ordered by date (newest first)
-        let pcrTests = filterNegativePCRTestsNotOlderThan72Hours
-        res.append(contentsOf: pcrTests.sortByIssuedAtTime.sortTestsByDateTimeOfSampleCollection)
+        res.append(contentsOf: sortLatestPcrTest)
         // #2 Test certificate
         //  Negative quick test, not older than 48 hrs, ordered by date (newest first)
-        var quickTests = filterNegativeQuickTestsNotOlderThan48Hours
-        quickTests  = quickTests.sortByIssuedAtTime
-        quickTests  = quickTests.sortTestsByDateTimeOfSampleCollection
-        res.append(contentsOf: quickTests)
+        res.append(contentsOf: sortLatestQuickTests)
         // #3 Booster Certificate
         //  Latest booster vaccination of a vaccination series (3/3, 4/4, ...)
-        res.append(contentsOf: filterBoosted.sortByIssuedAtTime.sortByVaccinationDate)
+        res.append(contentsOf: sortLatestBooster)
         // #4 Vaccination certificate
         //  Latest vaccination of a vaccination series (1/1, 2/2), older then (>) 14 days, and where the iat is the latest
-        let vaccinationCertificates = filterVaccinations.sortByIssuedAtTime.sortByVaccinationDate
-        if let latestVaccination = vaccinationCertificates.firstNotBosstedValidFullImmunization {
+        if let latestVaccination = sortLatestVaccinationsFirstNotBosstedValidFullImmunization {
             res.append(latestVaccination)
         }
         // #5 Recovery certificate
         //  Recovery after SARS-Cov-2-Infection, not older then (=<) 180 Days
-        res.append(contentsOf: filterRecoveryWhoseDateIsStillValid.sortByFirstPositiveResultDate)
+        res.append(contentsOf: sortLatestRecoveryWhoseDateIsStillValidSortByFirstPositiveResultDate)
         // #6 Vaccination Certificate
         //  Latest vaccination of a vaccination series, not older then (=<) 14 days
-        if let latestVaccination = vaccinationCertificates.firstNotValidButFullImmunization {
+        if let latestVaccination = sortLatestVaccinationsFirstNotValidButFullImmunization {
             res.append(latestVaccination)
         }
         // #7 Vaccination Certificate
         //  Not-latest (partial immunization) of a vaccination series (1/2)
-        res.append(contentsOf: filterNotFullImmunization)
+        res.append(contentsOf: sortLatestNotFullImmunization)
         // #8 Recovery Certificate
         //  Recovery after SARS-Cov-2-Infection, older then (>) 180 Days
-        res.append(contentsOf: filterRecoveryWhoseDateNotAnyMoreValid.sortByFirstPositiveResultDate)
+        res.append(contentsOf: sortLatestRecoveryWhoseDateNotAnyMoreValidSortByFirstPositiveResultDate)
         // #9 Test certificate
         //  Negative PCR-Test, older then (>) 72 Hrs, or negative quick test older then (>) 48 Hrs
-        res.append(contentsOf: filterAllTestsNegativeAndNotValid)
+        res.append(contentsOf: sortLatestTestsNegativeAndNotValid)
         // #10 Now add everything that did not match any of the rules above
-        res.append(contentsOf: filter { !res.contains($0) })
-
+        res.append(contentsOf: sortLatestRest(res))
         return res
     }
 }

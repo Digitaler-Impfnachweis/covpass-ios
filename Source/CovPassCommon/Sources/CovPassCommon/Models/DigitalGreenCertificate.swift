@@ -68,7 +68,7 @@ public struct DigitalGreenCertificate: Codable {
 
     /// Returns `true` if certificate is a booster vaccination
     public var isVaccinationBoosted: Bool {
-        guard let result = v?.filter({ $0.isBoosted }) else { return false }
+        guard let result = v?.filter({ $0.isBoosted() }) else { return false }
         return !result.isEmpty
     }
 

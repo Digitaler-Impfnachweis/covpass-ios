@@ -605,6 +605,26 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
         XCTAssertEqual(certs.count, 1)
         XCTAssertEqual(certs[0], boosterCertificateAfterReIssue)
     }
+    
+    func testFilterRecoveries() {
+        // GIVEN
+        let certs = [singleDoseImmunizationJohnsonCert,
+                     recoveryCert,
+                     recoveryCert2,
+                     boosterCertificateAfterReIssue,
+                     vaccinationWithTwoShotsOfVaccine,
+                     doubleDoseImmunizationJohnsonCert]
+        
+        // WHEN
+        let certsOfRecoveries = certs.filterRecoveries
+        let recoveries = certs.recoveries
+
+        // THEN
+        XCTAssertEqual(certsOfRecoveries.count, 2)
+        XCTAssertEqual(certsOfRecoveries[0], recoveryCert)
+        XCTAssertEqual(certsOfRecoveries[1], recoveryCert2)
+        XCTAssertEqual(recoveries.count, 2)
+    }
 }
 
 private extension DigitalGreenCertificate {
