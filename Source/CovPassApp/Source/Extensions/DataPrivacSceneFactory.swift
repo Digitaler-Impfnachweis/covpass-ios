@@ -1,18 +1,19 @@
 //
-//  AnnouncementSceneFactory.swift
+//  DataPrivacySceneFactory.swift
 //
 //
 //  © Copyright IBM Deutschland GmbH 2021
 //  SPDX-License-Identifier: Apache-2.0
 //
 
+import CovPassUI
 import PromiseKit
 import UIKit
 
 public struct DataPrivacySceneFactory: ResolvableSceneFactory {
     // MARK: - Properties
 
-    let router: DataPrivacyRouter
+    private let router: DataPrivacyRouter
 
     // MARK: - Lifecycle
 
@@ -21,9 +22,17 @@ public struct DataPrivacySceneFactory: ResolvableSceneFactory {
     }
 
     public func make(resolvable: Resolver<Void>) -> UIViewController {
+        let filename = Locale.current.isGerman() ? "privacy-covpass-de" : "privacy-covpass-en"
+        guard let url = Bundle.main.url(
+            forResource: filename,
+            withExtension: "html"
+        ) else {
+            fatalError("Must not fail.")
+        }
         let viewModel = DataPrivacyViewModel(
             router: router,
-            resolvable: resolvable
+            resolvable: resolvable,
+            privacyURL: url
         )
         return DataPrivacyViewController(viewModel: viewModel)
     }

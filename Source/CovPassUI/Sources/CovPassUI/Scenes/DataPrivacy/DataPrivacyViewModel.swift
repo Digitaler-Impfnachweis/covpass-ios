@@ -9,31 +9,30 @@
 import PromiseKit
 import UIKit
 
-class DataPrivacyViewModel: BaseViewModel, CancellableViewModelProtocol {
+public class DataPrivacyViewModel: BaseViewModel, CancellableViewModelProtocol {
     // MARK: - Properties
     
-    weak var delegate: ViewModelDelegate?
-    let router: DataPrivacyRouter
-    let resolver: Resolver<Void>
-    
-    var webViewRequest: URLRequest? {
-        guard let url =  Bundle.main.url(forResource: Locale.current.isGerman() ? "privacy-covpass-de" : "privacy-covpass-en", withExtension: "html") else { return nil }
-        return URLRequest(url: url)
-    }
+    weak public var delegate: ViewModelDelegate?
+    private let router: DataPrivacyRouter
+    private let resolver: Resolver<Void>
+    let webViewRequest: URLRequest
     
     // MARK: - Lifecycle
     
-    init(router: DataPrivacyRouter,
-         resolvable: Resolver<Void>) {
+    public init(router: DataPrivacyRouter,
+         resolvable: Resolver<Void>,
+         privacyURL: URL
+    ) {
         self.router = router
         resolver = resolvable
+        webViewRequest = URLRequest(url: privacyURL)
     }
     
     func done() {
         resolver.fulfill_()
     }
     
-    func cancel() {
+    public func cancel() {
         resolver.cancel()
     }
 }

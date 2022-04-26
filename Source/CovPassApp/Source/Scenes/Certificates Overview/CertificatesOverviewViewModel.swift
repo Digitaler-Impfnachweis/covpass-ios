@@ -414,7 +414,7 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
 extension CertificatesOverviewViewModel {
     /// Shows the announcement view if user downloaded a new version from the app store
     private func showAnnouncementIfNeeded() -> Promise<Void> {
-        let bundleVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
+        let bundleVersion = Bundle.main.shortVersionString ?? ""
         guard let announcementVersion = userDefaults.announcementVersion else {
             userDefaults.announcementVersion = bundleVersion
             return Promise.value

@@ -99,4 +99,14 @@ class ValidatorOverviewRouter: ValidatorOverviewRouterProtocol {
                                                  userDefaults: userDefaults)
         )
     }
+
+    func showDataPrivacy() -> Promise<Void> {
+        sceneCoordinator.present(
+            DataPrivacySceneFactory(
+                router: DataPrivacyRouter(
+                    sceneCoordinator: sceneCoordinator
+                )
+            )
+        )
+    }
 }
