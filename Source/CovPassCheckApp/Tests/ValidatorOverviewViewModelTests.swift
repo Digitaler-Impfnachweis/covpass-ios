@@ -14,28 +14,26 @@ private enum Constants {
     enum Keys {
         static var syncTitle = "validation_start_screen_scan_sync_message_title"
         static var syncMessage = "validation_start_screen_scan_sync_message_text"
+        static let privacyFile = "PRIVACY INFO"
     }
 }
 
 class ValidatorOverviewViewModelTests: XCTestCase {
-    
-    var sut: ValidatorOverviewViewModel!
+    private var userDefaults: MockPersistence!
+    private var router: ValidatorMockRouter!
+    private var sut: ValidatorOverviewViewModel!
     
     override func setUp() {
         super.setUp()
-        let window = UIWindow(frame: UIScreen.main.bounds)
-        let sceneCoordinator = DefaultSceneCoordinator(window: window)
-        let repository = VaccinationRepository.create()
-        sut = ValidatorOverviewViewModel(router: ValidatorOverviewRouter(sceneCoordinator: sceneCoordinator),
-                                         repository: repository,
-                                         revocationRepository: CertificateRevocationRepositoryMock(),
-                                         certLogic:  DCCCertLogic.create(),
-                                         userDefaults: UserDefaultsPersistence(),
-                                         schedulerIntervall: 0.5)
+        router = .init()
+        userDefaults = .init()
+        prepareSut()
     }
     
     override func tearDown() {
-       sut = nil
+        router = nil
+        userDefaults = nil
+        sut = nil
        super.tearDown()
     }
     
@@ -175,10 +173,9 @@ class ValidatorOverviewViewModelTests: XCTestCase {
         XCTAssertTrue(title.isEmpty)
     }
 
-    private func prepareSut(lastUpdateTrustList: Date? = nil, lastUpdateDccrRules: Date? = nil) {
+    private func prepareSut(lastUpdateTrustList: Date? = nil, lastUpdateDccrRules: Date? = nil, appVersion: String? = nil) {
         let repository = VaccinationRepositoryMock()
         let certLogic = DCCCertLogicMock()
-        var userDefaults = UserDefaultsPersistence()
         if let lastUpdateTrustList = lastUpdateTrustList {
             userDefaults.lastUpdatedTrustList = lastUpdateTrustList
         }
@@ -186,11 +183,13 @@ class ValidatorOverviewViewModelTests: XCTestCase {
             userDefaults.lastUpdatedDCCRules = lastUpdateDccrRules
         }
         sut = .init(
-            router: ValidatorMockRouter(),
+            router: router,
             repository: repository,
             revocationRepository: CertificateRevocationRepositoryMock(),
             certLogic: certLogic,
-            userDefaults: userDefaults
+            userDefaults: userDefaults,
+            privacyFile: Constants.Keys.privacyFile,
+            appVersion: appVersion
         )
     }
 
@@ -222,5 +221,62 @@ class ValidatorOverviewViewModelTests: XCTestCase {
 
         // Then
         XCTAssertEqual(title, expectedTitle)
+    }
+
+    func testShowNotificationsIfNeeded_showDataPrivacy_never_shown_before() {
+        // Given
+        let privacyHash = Constants.Keys.privacyFile.sha256()
+        prepareSut()
+        
+        // When
+        sut.showNotificationsIfNeeded()
+
+        // Then
+        wait(for: [router.showDataPrivacyExpectation], timeout: 1)
+        XCTAssertEqual(userDefaults.privacyHash, privacyHash)
+    }
+
+    func testShowNotificationsIfNeeded_showDataPrivacy_was_shown_for_this_version() {
+        // Given
+        let privacyHash = Constants.Keys.privacyFile.sha256()
+        router.showDataPrivacyExpectation.isInverted = true
+        userDefaults.privacyShownForAppVersion = "0.1"
+        userDefaults.privacyHash = privacyHash
+        prepareSut(appVersion: "0.1")
+
+        // When
+        sut.showNotificationsIfNeeded()
+
+        // Then
+        wait(for: [router.showDataPrivacyExpectation], timeout: 1)
+    }
+
+    func testShowNotificationsIfNeeded_showDataPrivacy_was_not_shown_for_this_version() {
+        // Given
+        let privacyHash = Constants.Keys.privacyFile.sha256()
+        userDefaults.privacyShownForAppVersion = "0.1"
+        userDefaults.privacyHash = privacyHash
+        prepareSut(appVersion: "0.2")
+
+        // When
+        sut.showNotificationsIfNeeded()
+
+        // Then
+        wait(for: [router.showDataPrivacyExpectation], timeout: 1)
+        XCTAssertEqual(userDefaults.privacyShownForAppVersion, "0.2")
+    }
+
+    func testShowNotificationsIfNeeded_showDataPrivacy_was_shown_for_other_version() {
+        // Given
+        let privacyHash = Constants.Keys.privacyFile.sha256()
+        userDefaults.privacyHash = "".sha256()
+        prepareSut()
+
+        // When
+        sut.showNotificationsIfNeeded()
+
+        // Then
+        wait(for: [router.showDataPrivacyExpectation], timeout: 1)
+        XCTAssertEqual(userDefaults.privacyHash, privacyHash)
     }
 }

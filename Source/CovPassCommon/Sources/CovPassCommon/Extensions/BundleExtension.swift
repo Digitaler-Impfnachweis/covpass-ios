@@ -21,6 +21,10 @@ public extension Bundle {
 
         return string
     }
+
+    var shortVersionString: String? {
+        infoDictionary?["CFBundleShortVersionString"] as? String
+    }
 }
 
 public enum BundleError: Error {

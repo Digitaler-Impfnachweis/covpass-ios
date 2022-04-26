@@ -9,10 +9,12 @@
 import CovPassCommon
 import CovPassUI
 import PromiseKit
+import XCTest
 
 class ValidatorMockRouter: ValidatorOverviewRouterProtocol {
 
     var sceneCoordinator: SceneCoordinator = SceneCoordinatorMock()
+    var showDataPrivacyExpectation = XCTestExpectation(description: "showDataPrivacyExpectation")
 
     func showAppInformation(userDefaults: Persistence) {
         
@@ -45,5 +47,10 @@ class ValidatorMockRouter: ValidatorOverviewRouterProtocol {
             vaccinationCertificate: .mockTestCertificate,
             vaccinationQRCodeData: "")
         )
+    }
+
+    func showDataPrivacy() -> Promise<Void> {
+        showDataPrivacyExpectation.fulfill()
+        return .value
     }
 }

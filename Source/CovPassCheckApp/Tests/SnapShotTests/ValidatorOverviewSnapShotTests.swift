@@ -34,6 +34,7 @@ class ValidatorOverviewSnapShotTests: BaseSnapShotTests {
                                             revocationRepository: CertificateRevocationRepositoryMock(),
                                             certLogic: certLogicMock,
                                             userDefaults: userDefaults,
+                                            privacyFile: "",
                                             schedulerIntervall: TimeInterval(10.0))
         vm.ntpDate = ntpDate
         vm.ntpOffset = ntpOffset

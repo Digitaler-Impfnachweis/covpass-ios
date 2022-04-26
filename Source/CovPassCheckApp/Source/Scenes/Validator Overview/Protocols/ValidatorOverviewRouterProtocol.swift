@@ -28,4 +28,5 @@ protocol ValidatorOverviewRouterProtocol: DialogRouterProtocol {
                     userDefaults: Persistence,
                     boosterAsTest: Bool)
     func showCheckSituation(userDefaults: Persistence) -> Promise<Void>
+    func showDataPrivacy() -> Promise<Void>
 }

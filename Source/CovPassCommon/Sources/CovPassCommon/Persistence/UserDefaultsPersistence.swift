@@ -46,6 +46,16 @@ public extension Persistence {
             try? store(UserDefaults.keyPrivacy, value: newValue as Any)
         }
     }
+
+    var privacyShownForAppVersion: String? {
+        get {
+            let value = try? fetch(UserDefaults.keyPrivacyShownForAppVersion) as? String
+            return value
+        }
+        set {
+            try? store(UserDefaults.keyPrivacyShownForAppVersion, value: newValue as Any)
+        }
+    }
     
     var selectedLogicType: DCCCertLogic.LogicType {
         get {

@@ -47,6 +47,8 @@ class ValidatorOverviewViewModel {
     private let router: ValidatorOverviewRouterProtocol
     private let certLogic: DCCCertLogicProtocol
     private var userDefaults: Persistence
+    private var currentDataPrivacyHash: String
+    private let appVersion: String?
     
     var delegate: ViewModelDelegate?
     
@@ -157,13 +159,18 @@ class ValidatorOverviewViewModel {
          revocationRepository: CertificateRevocationRepositoryProtocol,
          certLogic: DCCCertLogicProtocol,
          userDefaults: Persistence,
-         schedulerIntervall: TimeInterval = Constants.Config.schedulerIntervall) {
+         privacyFile: String,
+         schedulerIntervall: TimeInterval = Constants.Config.schedulerIntervall,
+         appVersion: String? = Bundle.main.shortVersionString
+    ) {
         self.router = router
         self.vaccinationRepository = repository
         self.revocationRepository = revocationRepository
         self.certLogic = certLogic
         self.userDefaults = userDefaults
         self.schedulerIntervall = schedulerIntervall
+        self.currentDataPrivacyHash = privacyFile.sha256()
+        self.appVersion = appVersion
         self.setupTimer()
     }
     
@@ -258,6 +265,7 @@ class ValidatorOverviewViewModel {
         firstly {
             showCheckSituationIfNeeded()
         }
+        .then(showDataPrivacyIfNeeded)
         .done {
             self.delegate?.viewModelDidUpdate()
         }
@@ -272,6 +280,23 @@ class ValidatorOverviewViewModel {
         }
         userDefaults.onboardingSelectedLogicTypeAlreadySeen = true
         return router.showCheckSituation(userDefaults: userDefaults)
+    }
+
+    private func showDataPrivacyIfNeeded() -> Guarantee<Void> {
+        let guarantee: Guarantee<Void>
+        if let privacyHash = userDefaults.privacyHash,
+           privacyHash == currentDataPrivacyHash,
+           let privacyShownForAppVersion = userDefaults.privacyShownForAppVersion,
+           privacyShownForAppVersion == appVersion
+        {
+            guarantee = .value
+        } else {
+            userDefaults.privacyHash = currentDataPrivacyHash
+            userDefaults.privacyShownForAppVersion = appVersion
+            guarantee = router.showDataPrivacy().recover { _ in }
+        }
+
+        return guarantee
     }
     
     // MARK: Kronos Usage
