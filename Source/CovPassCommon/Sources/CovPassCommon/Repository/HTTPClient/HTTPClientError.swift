@@ -13,4 +13,6 @@ public enum HTTPClientError: Error {
     case invalidResponse(URLResponse?)
     /// HTTP error with status code.
     case http(_ statusCode: Int, data: Data?)
+    /// URLSession cancel-error
+    case dataTaskCancelled
 }

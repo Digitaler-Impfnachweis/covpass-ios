@@ -48,7 +48,15 @@ public class HTTPClient: HTTPClientProtocol {
         guard let error = error else {
             return .value
         }
-        return .init(error: error)
+        return .init(error: mapIfIsCancelled(error))
+    }
+
+    private func mapIfIsCancelled(_ error: Error) -> Error {
+        let error = error as NSError
+        if error.domain == NSURLErrorDomain, error.isCancelled {
+            return HTTPClientError.dataTaskCancelled
+        }
+        return error
     }
 
     private func httpURLResponse(from urlResponse: URLResponse?) -> Promise<HTTPURLResponse> {
