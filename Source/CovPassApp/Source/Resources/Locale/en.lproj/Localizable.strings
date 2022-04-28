@@ -1493,7 +1493,7 @@
 
 "certificate_renewal_error_title" = "Reissue failed";
 
-"certificate_renewal_error_copy" = "Unfortunately, there was a problem reissuing your certificate. Please check your Internet connection and note that the same certificate can be reissued a maximum of three times a year. If the error persists, please refer to the Frequently Asked Questions for more information using the error code below.\n\nError code: %@";
+"certificate_renewal_error_copy" = "Unfortunately, there was a problem reissuing your certificate. Please check your internet connection. Note that the certificate can be reissued a maximum of three times a year. For more information on the error code below please contact our hotline at 0800-4747-001 or support@covpass-app.de.\n\nError code: %@";
 
 "certificate_renewal_error_button_primary" = "OK";
 
