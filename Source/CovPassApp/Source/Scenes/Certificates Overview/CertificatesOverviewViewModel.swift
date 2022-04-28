@@ -504,10 +504,10 @@ extension CertificatesOverviewViewModel {
             .map(\.certificates)
             .compactMap { $0.sortLatest().first }
             .filter(\.vaccinationCertificate.isNotTest)
+            .filter(\.expiryAlertWasNotShown)
             .filter { extendedToken in
-                let alreadyShown = extendedToken.wasExpiryAlertShown ?? false
                 let token = extendedToken.vaccinationCertificate
-                let showAlert = !alreadyShown && (token.expiresSoon || extendedToken.isInvalid || token.isExpired)
+                let showAlert = token.expiresSoon || extendedToken.isInvalid || token.isExpired
                 return showAlert
             }
     }
@@ -524,15 +524,18 @@ extension CertificatesOverviewViewModel {
     }
 
     private func showRevocationWarningIfNeeded() -> Guarantee<Void> {
-        let someTokenIsRevoked = tokensToShowRevocationWarningFor().count > 0
-        if someTokenIsRevoked {
+        let tokens = tokensToShowRevocationWarningFor()
+        if !tokens.isEmpty {
+            _ = repository.setExpiryAlert(shown: true, tokens: tokens)
             showRevocationWarning()
         }
         return .value
     }
 
     private func tokensToShowRevocationWarningFor() -> [ExtendedCBORWebToken] {
-        certificateList.certificates.filter(\.isRevoked)
+        certificateList.certificates
+            .filter(\.isRevoked)
+            .filter(\.expiryAlertWasNotShown)
     }
 
     private func showRevocationWarning() {
@@ -544,5 +547,12 @@ extension CertificatesOverviewViewModel {
             message: "revocation_dialog_single".localized,
             actions: [action],
             style: .alert)
+    }
+}
+
+private extension ExtendedCBORWebToken {
+    var expiryAlertWasNotShown: Bool {
+        let wasAlreadyShown = wasExpiryAlertShown ?? false
+        return !wasAlreadyShown
     }
 }
