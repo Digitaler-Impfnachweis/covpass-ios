@@ -332,6 +332,58 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         wait(for: [router.showCertificatesReissueExpectation], timeout: 4)
     }
 
+    func testShowNotificationsIfNeeded_showRevocationWarning_token_not_revoked() throws {
+        // Given
+        let token = try ExtendedCBORWebToken.mock()
+        router.showDialogExpectation.isInverted = true
+        vaccinationRepository.setExpiryAlertExpectation.isInverted = true
+        configureSutAndRepository(with: router, certificates: [token])
+
+        // When
+        sut.showNotificationsIfNeeded()
+
+        // Then
+        wait(for: [
+            router.showDialogExpectation,
+            vaccinationRepository.setExpiryAlertExpectation
+        ], timeout: 1)
+    }
+
+    func testShowNotificationsIfNeeded_showRevocationWarning_token_revoked() throws {
+        // Given
+        var token = try ExtendedCBORWebToken.mock()
+        token.revoked = true
+        configureSutAndRepository(with: router, certificates: [token])
+
+        // When
+        sut.showNotificationsIfNeeded()
+
+        // Then
+        wait(for: [
+            router.showDialogExpectation,
+            vaccinationRepository.setExpiryAlertExpectation
+        ], timeout: 1)
+    }
+
+    func testShowNotificationsIfNeeded_showRevocationWarning_only_once() throws {
+        // Given
+        var token = try ExtendedCBORWebToken.mock()
+        token.revoked = true
+        token.wasExpiryAlertShown = true
+        router.showDialogExpectation.isInverted = true
+        vaccinationRepository.setExpiryAlertExpectation.isInverted = true
+        configureSutAndRepository(with: router, certificates: [token])
+
+        // When
+        sut.showNotificationsIfNeeded()
+
+        // Then
+        wait(for: [
+            router.showDialogExpectation,
+            vaccinationRepository.setExpiryAlertExpectation
+        ], timeout: 1)
+    }
+
     func testRefresh_expiry_notification_token_is_valid() throws {
         // Given
         let router = CertificatesOverviewRouterMock()

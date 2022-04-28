@@ -132,7 +132,7 @@ class CertificateDetailViewControllerSnapshotTests: BaseSnapShotTests {
         let vacinationRepoMock: VaccinationRepositoryMock = VaccinationRepositoryMock()
         let cert: ExtendedCBORWebToken = CBORWebToken.mockRecoveryCertificate.extended()
         cert.vaccinationCertificate.hcert.dgc.nam.fn = "John 1"
-        cert.vaccinationCertificate.hcert.dgc.r!.first!.df =  DateUtils.parseDate("2022-04-26T15:05:00")!
+        cert.vaccinationCertificate.hcert.dgc.r!.first!.df =  Date(timeIntervalSinceReferenceDate: 0)
         let certs = [cert]
         vacinationRepoMock.certificates = certs
         let bl = BoosterLogic.init(certLogic: DCCCertLogicMock(),
