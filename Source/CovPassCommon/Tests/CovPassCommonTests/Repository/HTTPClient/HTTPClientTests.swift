@@ -104,4 +104,19 @@ class HTTPClientTests: XCTestCase {
         // Then
         wait(for: [expectation], timeout: 2)
     }
+
+    func testHttpRequest_NSURLErrorCancelled() throws {
+        // Given
+        dataTaskProducer.error = NSError(domain: NSURLErrorDomain, code: NSURLErrorCancelled)
+        let expectation = XCTestExpectation()
+
+        // When
+        sut.httpRequest(request)
+            .catch { error in
+                expectation.fulfill()
+            }
+
+        // Then
+        wait(for: [expectation], timeout: 2)
+    }
 }
