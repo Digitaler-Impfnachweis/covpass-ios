@@ -79,6 +79,8 @@
 
 "dialog_start_screen_button_update" = "Aktualisieren";
 
+"dialog_update_info_notification_action_button" = "OK";
+
 "accessibility_update_info_announce" = "Die Ansicht \"Neue Funktionen\" wurde geöffnet";
 
 "accessibility_check_context_onboarding_announce_open" = "Die Ansicht “Wann nutzen Sie die CovPassCheck-App?” wurde geöffnet.";

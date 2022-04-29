@@ -79,6 +79,8 @@
 
 "dialog_start_screen_button_update" = "Update";
 
+"dialog_update_info_notification_action_button" = "OK";
+
 "accessibility_update_info_announce" = "The view \"New features\" has been opened";
 
 "accessibility_check_context_onboarding_announce_open" = "The view \"When do you use the CovPassCheck app?\" has been opened.";
