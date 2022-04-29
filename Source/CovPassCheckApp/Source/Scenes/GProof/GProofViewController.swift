@@ -82,7 +82,7 @@ class GProofViewController: UIViewController {
     }
     
     private func configureContent() {
-        personStack.isHidden = viewModel.firstIsFailedTechnicalReason
+        personStack.isHidden = viewModel.personStackIsHidden
         pageFooter.attributedText = viewModel.footnote.styledAs(.subheader_2)
         pageFooter.isHidden = viewModel.pageFooterIsHidden
         personStackHeadline.attributedText = viewModel.checkIdMessage.styledAs(.subheader_2)

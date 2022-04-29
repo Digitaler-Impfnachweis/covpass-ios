@@ -129,7 +129,7 @@ class DCCCertLogicTests: XCTestCase {
         let res = try sut.validate(countryCode: "DE", validationClock: Date(), certificate: cert)
 
         XCTAssertEqual(res.count, 4)
-        XCTAssertEqual(failedResults(results: res).count, 0)
+        XCTAssertEqual(res.failedResults.count, 0)
     }
 
     func testInvalidVaccination() throws {
@@ -139,8 +139,8 @@ class DCCCertLogicTests: XCTestCase {
         let res = try sut.validate(countryCode: "DE", validationClock: Date(), certificate: cert)
 
         XCTAssertEqual(res.count, 4)
-        XCTAssertEqual(failedResults(results: res).count, 1)
-        XCTAssertEqual(failedResults(results: res).first?.rule?.identifier, "VR-DE-0004")
+        XCTAssertEqual(res.failedResults.count, 1)
+        XCTAssertEqual(res.failedResults.first?.rule?.identifier, "VR-DE-0004")
     }
 
     func testValidVaccinationWithoutRules() {
@@ -165,7 +165,7 @@ class DCCCertLogicTests: XCTestCase {
         let res = try sut.validate(countryCode: "DE", validationClock: Date(), certificate: cert)
 
         XCTAssertEqual(res.count, 2)
-        XCTAssertEqual(failedResults(results: res).count, 0)
+        XCTAssertEqual(res.failedResults.count, 0)
     }
 
     func testInvalidRecovery() throws {
@@ -175,8 +175,8 @@ class DCCCertLogicTests: XCTestCase {
         let res = try sut.validate(countryCode: "DE", validationClock: Date(), certificate: cert)
 
         XCTAssertEqual(res.count, 2)
-        XCTAssertEqual(failedResults(results: res).count, 1)
-        XCTAssertEqual(failedResults(results: res).first?.rule?.identifier, "RR-DE-0002")
+        XCTAssertEqual(res.failedResults.count, 1)
+        XCTAssertEqual(res.failedResults.first?.rule?.identifier, "RR-DE-0002")
     }
 
     func testRuleUpdate() throws {
@@ -614,11 +614,5 @@ class DCCCertLogicTests: XCTestCase {
                 exp.fulfill()
             }.cauterize()
         wait(for: [exp], timeout: 0.1, enforceOrder: true)
-    }
-
-    // MARK: - Helpers
-
-    private func failedResults(results: [ValidationResult]) -> [ValidationResult] {
-        results.filter { $0.result == .fail }
     }
 }

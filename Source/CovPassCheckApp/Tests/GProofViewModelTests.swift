@@ -11,6 +11,8 @@
 import XCTest
 import PromiseKit
 import Scanner
+import SwiftyJSON
+import CertLogic
 
 class GProofViewModelTests: XCTestCase {
     
@@ -37,7 +39,7 @@ class GProofViewModelTests: XCTestCase {
                               userDefaults: UserDefaultsPersistence(),
                               boosterAsTest: false)
         sut.scanQRCode()
-        RunLoop.current.run(for: 0.1)
+        RunLoop.current.run(for: 0.2)
     }
     
     override func tearDown() {
@@ -70,7 +72,7 @@ class GProofViewModelTests: XCTestCase {
                                   userDefaults: UserDefaultsPersistence(),
                                   boosterAsTest: false)
         sut.startover()
-        RunLoop.current.run(for: 10.1)
+        RunLoop.current.run(for: 0.1)
         
         // WHEN
         
@@ -696,5 +698,309 @@ class GProofViewModelTests: XCTestCase {
     
     func test_scan_basic_then_booster_boosterAsTestOn() {
         test_scan_basic_then_booster(boosterAsTest: true)
+    }
+    
+    func testScanOpenCertificateFailingDueToRRDE0002ThanPassedCertificate() throws {
+        // GIVEN
+        let rule = Rule(identifier: "RR-DE-0002", type: "", version: "", schemaVersion: "", engine: "", engineVersion: "", certificateType: "", description: [], validFrom: "", validTo: "", affectedString: [], logic: JSON(""), countryCode: "DE" )
+        let recoveryToken = CBORWebToken.mockRecoveryCertificate
+        let dateForOneMonthAgo = Calendar.current.date(byAdding: .day, value: -95, to: Date())
+        recoveryToken.hcert.dgc.r!.first!.fr =  try XCTUnwrap(dateForOneMonthAgo)
+        vaccinationRepoMock.checkedCert = recoveryToken
+        certLogicMock.validateResult = [.init(rule: rule, result: .fail, validationErrors: nil)]
+        
+        // WHEN
+        sut.startover()
+        RunLoop.current.run(for: 0.1)
+        
+        // THEN
+        XCTAssertFalse(sut.scanNextButtonIsHidden)
+        XCTAssertTrue(sut.buttonRetryIsHidden)
+        XCTAssertFalse(sut.buttonStartOverIsHidden)
+        XCTAssertFalse(sut.onlyOneIsScannedAndThisFailed)
+        XCTAssertFalse(sut.someIsFailed)
+        XCTAssertFalse(sut.areBothScanned)
+        XCTAssertNotNil(sut.firstResult)
+        XCTAssertNil(sut.secondResult)
+        
+        XCTAssertEqual(sut.firstResultImage, UIImage.detailStatusPartial)
+        XCTAssertEqual(sut.firstResultLinkImage, nil)
+        XCTAssertEqual(sut.firstResultTitle, "Recovery")
+        XCTAssertEqual(sut.firstResultFooterText, nil)
+        XCTAssertEqual(sut.firstResultSubtitle!, "3 month(s) ago")
+        
+        XCTAssertEqual(sut.secondResultImage, UIImage.detailStatusFullEmpty)
+        XCTAssertEqual(sut.seconResultLinkImage, nil)
+        XCTAssertEqual(sut.secondResultTitle, "Basic immunisation")
+        XCTAssertEqual(sut.seconResultFooterText, nil)
+        XCTAssertEqual(sut.seconResultSubtitle!, "May be required for 2G+")
+        
+        XCTAssertEqual(sut.resultPersonTitle!, "Doe John")
+        XCTAssertEqual(sut.resultPersonSubtitle!, "DOE JOHN")
+        XCTAssertEqual(sut.resultPersonFooter!, "Born on Jan 1, 1990")
+        XCTAssertEqual(sut.resultPersonIcon, UIImage.iconCardInverse)
+        
+        // GIVEN
+        vaccinationRepoMock.checkedCert = CBORWebToken.mockVaccinationCertificate
+        certLogicMock.validateResult = [.init(rule: nil, result: .passed, validationErrors: nil)]
+        
+        // WHEN
+        sut.scanNext()
+        RunLoop.current.run(for: 0.1)
+
+        // THEN
+        XCTAssert(sut.scanNextButtonIsHidden)
+        XCTAssert(sut.buttonRetryIsHidden)
+        XCTAssert(sut.buttonStartOverIsHidden == false)
+        XCTAssert(sut.onlyOneIsScannedAndThisFailed == false)
+        XCTAssert(sut.someIsFailed == false)
+        XCTAssert(sut.areBothScanned)
+        XCTAssert(sut.firstResult != nil)
+        XCTAssert(sut.secondResult != nil)
+        
+        XCTAssertEqual(sut.firstResultImage, UIImage.detailStatusFull)
+        XCTAssertEqual(sut.firstResultLinkImage, nil)
+        XCTAssertEqual(sut.firstResultTitle, "Recovery")
+        XCTAssertEqual(sut.firstResultFooterText, nil)
+        XCTAssertEqual(sut.firstResultSubtitle!, "3 month(s) ago")
+        
+        XCTAssertEqual(sut.secondResultImage, UIImage.detailStatusFull)
+        XCTAssertEqual(sut.seconResultLinkImage, nil)
+        XCTAssertEqual(sut.secondResultTitle, "Basic immunisation")
+        XCTAssertEqual(sut.seconResultFooterText, nil)
+        XCTAssertEqual(sut.seconResultSubtitle!, "15 month(s) ago")
+        
+        XCTAssertEqual(sut.resultPersonTitle!, "Doe John")
+        XCTAssertEqual(sut.resultPersonSubtitle!, "DOE JOHN")
+        XCTAssertEqual(sut.resultPersonFooter!, "Born on Jan 1, 1990")
+        XCTAssertEqual(sut.resultPersonIcon, UIImage.iconCardInverse)
+    }
+    
+    func testScanOpenCertificateFailingDueToRRDE0002ThanPassedCertificateWhichIsNotVaccination() throws {
+        // GIVEN
+        let rule = Rule(identifier: "RR-DE-0002", type: "", version: "", schemaVersion: "", engine: "", engineVersion: "", certificateType: "", description: [], validFrom: "", validTo: "", affectedString: [], logic: JSON(""), countryCode: "DE" )
+        let recoveryToken = CBORWebToken.mockRecoveryCertificate
+        let dateForOneMonthAgo = Calendar.current.date(byAdding: .day, value: -95, to: Date())
+        recoveryToken.hcert.dgc.r!.first!.fr =  try XCTUnwrap(dateForOneMonthAgo)
+        vaccinationRepoMock.checkedCert = recoveryToken
+        certLogicMock.validateResult = [.init(rule: rule, result: .fail, validationErrors: nil)]
+        
+        // WHEN
+        sut.startover()
+        RunLoop.current.run(for: 0.1)
+        
+        // THEN
+        XCTAssertFalse(sut.scanNextButtonIsHidden)
+        XCTAssertTrue(sut.buttonRetryIsHidden)
+        XCTAssertFalse(sut.buttonStartOverIsHidden)
+        XCTAssertFalse(sut.onlyOneIsScannedAndThisFailed)
+        XCTAssertFalse(sut.someIsFailed)
+        XCTAssertFalse(sut.areBothScanned)
+        XCTAssertNotNil(sut.firstResult)
+        XCTAssertNil(sut.secondResult)
+        
+        XCTAssertEqual(sut.firstResultImage, UIImage.detailStatusPartial)
+        XCTAssertEqual(sut.firstResultLinkImage, nil)
+        XCTAssertEqual(sut.firstResultTitle, "Recovery")
+        XCTAssertEqual(sut.firstResultFooterText, nil)
+        XCTAssertEqual(sut.firstResultSubtitle!, "3 month(s) ago")
+        
+        XCTAssertEqual(sut.secondResultImage, UIImage.detailStatusFullEmpty)
+        XCTAssertEqual(sut.seconResultLinkImage, nil)
+        XCTAssertEqual(sut.secondResultTitle, "Basic immunisation")
+        XCTAssertEqual(sut.seconResultFooterText, nil)
+        XCTAssertEqual(sut.seconResultSubtitle!, "May be required for 2G+")
+        
+        XCTAssertEqual(sut.resultPersonTitle!, "Doe John")
+        XCTAssertEqual(sut.resultPersonSubtitle!, "DOE JOHN")
+        XCTAssertEqual(sut.resultPersonFooter!, "Born on Jan 1, 1990")
+        XCTAssertEqual(sut.resultPersonIcon, UIImage.iconCardInverse)
+        
+        // GIVEN
+        vaccinationRepoMock.checkedCert = CBORWebToken.mockTestCertificate
+        certLogicMock.validateResult = [.init(rule: nil, result: .passed, validationErrors: nil)]
+        
+        // WHEN
+        sut.scanNext()
+        RunLoop.current.run(for: 0.1)
+
+        // THEN
+        XCTAssertFalse(sut.scanNextButtonIsHidden)
+        XCTAssertTrue(sut.buttonRetryIsHidden)
+        XCTAssertFalse(sut.buttonStartOverIsHidden)
+        XCTAssertFalse(sut.onlyOneIsScannedAndThisFailed)
+        XCTAssertFalse(sut.someIsFailed)
+        XCTAssertFalse(sut.areBothScanned)
+        XCTAssertNotNil(sut.firstResult)
+        XCTAssertNil(sut.secondResult)
+        
+        XCTAssertEqual(sut.firstResultImage, UIImage.detailStatusPartial)
+        XCTAssertEqual(sut.firstResultLinkImage, nil)
+        XCTAssertEqual(sut.firstResultTitle, "Recovery")
+        XCTAssertEqual(sut.firstResultFooterText, nil)
+        XCTAssertEqual(sut.firstResultSubtitle!, "3 month(s) ago")
+        
+        XCTAssertEqual(sut.secondResultImage, UIImage.detailStatusFullEmpty)
+        XCTAssertEqual(sut.seconResultLinkImage, nil)
+        XCTAssertEqual(sut.secondResultTitle, "Basic immunisation")
+        XCTAssertEqual(sut.seconResultFooterText, nil)
+        XCTAssertEqual(sut.seconResultSubtitle!, "May be required for 2G+")
+        
+        XCTAssertEqual(sut.resultPersonTitle!, "Doe John")
+        XCTAssertEqual(sut.resultPersonSubtitle!, "DOE JOHN")
+        XCTAssertEqual(sut.resultPersonFooter!, "Born on Jan 1, 1990")
+        XCTAssertEqual(sut.resultPersonIcon, UIImage.iconCardInverse)
+    }
+    
+    func testScanBasisImmunizationCertificateThanOpenCertificateFailingDueToRRDE0002() throws {
+        // GIVEN
+        vaccinationRepoMock.checkedCert = CBORWebToken.mockVaccinationCertificate
+        certLogicMock.validateResult = [.init(rule: nil, result: .passed, validationErrors: nil)]
+        
+        // WHEN
+        sut.startover()
+        RunLoop.current.run(for: 0.1)
+
+        // THEN
+        XCTAssertFalse(sut.scanNextButtonIsHidden)
+        XCTAssertTrue(sut.buttonRetryIsHidden)
+        XCTAssertFalse(sut.buttonStartOverIsHidden)
+        XCTAssertFalse(sut.onlyOneIsScannedAndThisFailed)
+        XCTAssertFalse(sut.someIsFailed)
+        XCTAssertFalse(sut.areBothScanned)
+        XCTAssertNotNil(sut.firstResult)
+        XCTAssertNil(sut.secondResult)
+        
+        XCTAssertEqual(sut.firstResultImage, UIImage.detailStatusFull)
+        XCTAssertEqual(sut.firstResultLinkImage, nil)
+        XCTAssertEqual(sut.firstResultTitle, "Basic immunisation")
+        XCTAssertEqual(sut.firstResultFooterText, nil)
+        XCTAssertEqual(sut.firstResultSubtitle!, "15 month(s) ago")
+        
+        XCTAssertEqual(sut.secondResultImage, UIImage.detailStatusFullEmpty)
+        XCTAssertEqual(sut.seconResultLinkImage, nil)
+        XCTAssertEqual(sut.secondResultTitle, "Test or recovery")
+        XCTAssertEqual(sut.seconResultFooterText, nil)
+        XCTAssertEqual(sut.seconResultSubtitle!, "May be required for 2G+")
+        
+        XCTAssertEqual(sut.resultPersonTitle!, "Doe John")
+        XCTAssertEqual(sut.resultPersonSubtitle!, "DOE JOHN")
+        XCTAssertEqual(sut.resultPersonFooter!, "Born on Jan 1, 1990")
+        XCTAssertEqual(sut.resultPersonIcon, UIImage.iconCardInverse)
+        
+        // GIVEN
+        let rule = Rule(identifier: "RR-DE-0002", type: "", version: "", schemaVersion: "", engine: "", engineVersion: "", certificateType: "", description: [], validFrom: "", validTo: "", affectedString: [], logic: JSON(""), countryCode: "DE" )
+        let recoveryToken = CBORWebToken.mockRecoveryCertificate
+        let dateForOneMonthAgo = Calendar.current.date(byAdding: .day, value: -95, to: Date())
+        recoveryToken.hcert.dgc.r!.first!.fr =  try XCTUnwrap(dateForOneMonthAgo)
+        vaccinationRepoMock.checkedCert = recoveryToken
+        certLogicMock.validateResult = [.init(rule: rule, result: .fail, validationErrors: nil)]
+        
+        // WHEN
+        sut.scanNext()
+        RunLoop.current.run(for: 0.1)
+        
+        // THEN
+        XCTAssertTrue(sut.scanNextButtonIsHidden)
+        XCTAssertTrue(sut.buttonRetryIsHidden)
+        XCTAssertFalse(sut.buttonStartOverIsHidden)
+        XCTAssertFalse(sut.onlyOneIsScannedAndThisFailed)
+        XCTAssertFalse(sut.someIsFailed)
+        XCTAssertTrue(sut.areBothScanned)
+        XCTAssertNotNil(sut.firstResult)
+        XCTAssertNotNil(sut.secondResult)
+        
+        XCTAssertEqual(sut.firstResultImage, UIImage.detailStatusFull)
+        XCTAssertEqual(sut.firstResultLinkImage, nil)
+        XCTAssertEqual(sut.firstResultTitle, "Basic immunisation")
+        XCTAssertEqual(sut.firstResultFooterText, nil)
+        XCTAssertEqual(sut.firstResultSubtitle!, "15 month(s) ago")
+        
+        XCTAssertEqual(sut.secondResultImage, UIImage.detailStatusFull)
+        XCTAssertEqual(sut.seconResultLinkImage, nil)
+        XCTAssertEqual(sut.secondResultTitle, "Recovery")
+        XCTAssertEqual(sut.seconResultFooterText, nil)
+        XCTAssertEqual(sut.seconResultSubtitle!, "3 month(s) ago")
+        
+        XCTAssertEqual(sut.resultPersonTitle!, "Doe John")
+        XCTAssertEqual(sut.resultPersonSubtitle!, "DOE JOHN")
+        XCTAssertEqual(sut.resultPersonFooter!, "Born on Jan 1, 1990")
+        XCTAssertEqual(sut.resultPersonIcon, UIImage.iconCardInverse)
+    }
+    
+    func testScanTestCertificateThanOpenCertificateFailingDueToRRDE0002() throws {
+        // GIVEN
+        vaccinationRepoMock.checkedCert = CBORWebToken.mockTestCertificate
+        certLogicMock.validateResult = [.init(rule: nil, result: .passed, validationErrors: nil)]
+        
+        // WHEN
+        sut.startover()
+        RunLoop.current.run(for: 0.1)
+
+        // THEN
+        XCTAssertFalse(sut.scanNextButtonIsHidden)
+        XCTAssertTrue(sut.buttonRetryIsHidden)
+        XCTAssertFalse(sut.buttonStartOverIsHidden)
+        XCTAssertFalse(sut.onlyOneIsScannedAndThisFailed)
+        XCTAssertFalse(sut.someIsFailed)
+        XCTAssertFalse(sut.areBothScanned)
+        XCTAssertNotNil(sut.firstResult)
+        XCTAssertNil(sut.secondResult)
+        
+        XCTAssertEqual(sut.firstResultImage, UIImage.detailStatusTest)
+        XCTAssertEqual(sut.firstResultLinkImage, nil)
+        XCTAssertEqual(sut.firstResultTitle, "Negative PCR test")
+        XCTAssertEqual(sut.firstResultFooterText, nil)
+        XCTAssertEqual(sut.firstResultSubtitle!, "0 hour(s) ago")
+        
+        XCTAssertEqual(sut.secondResultImage, UIImage.detailStatusFullEmpty)
+        XCTAssertEqual(sut.seconResultLinkImage, nil)
+        XCTAssertEqual(sut.secondResultTitle, "Vaccination* or recovery")
+        XCTAssertEqual(sut.seconResultFooterText, nil)
+        XCTAssertEqual(sut.seconResultSubtitle!, "May be required for 2G+")
+        
+        XCTAssertEqual(sut.resultPersonTitle!, "Doe John")
+        XCTAssertEqual(sut.resultPersonSubtitle!, "DOE JOHN")
+        XCTAssertEqual(sut.resultPersonFooter!, "Born on Jan 1, 1990")
+        XCTAssertEqual(sut.resultPersonIcon, UIImage.iconCardInverse)
+        
+        // GIVEN
+        let rule = Rule(identifier: "RR-DE-0002", type: "", version: "", schemaVersion: "", engine: "", engineVersion: "", certificateType: "", description: [], validFrom: "", validTo: "", affectedString: [], logic: JSON(""), countryCode: "DE" )
+        let recoveryToken = CBORWebToken.mockRecoveryCertificate
+        let dateForOneMonthAgo = Calendar.current.date(byAdding: .day, value: -95, to: Date())
+        recoveryToken.hcert.dgc.r!.first!.fr =  try XCTUnwrap(dateForOneMonthAgo)
+        vaccinationRepoMock.checkedCert = recoveryToken
+        certLogicMock.validateResult = [.init(rule: rule, result: .fail, validationErrors: nil)]
+        
+        // WHEN
+        sut.scanNext()
+        RunLoop.current.run(for: 0.1)
+        
+        // THEN
+        XCTAssertTrue(sut.scanNextButtonIsHidden)
+        XCTAssertFalse(sut.buttonRetryIsHidden)
+        XCTAssertFalse(sut.buttonStartOverIsHidden)
+        XCTAssertFalse(sut.onlyOneIsScannedAndThisFailed)
+        XCTAssertTrue(sut.someIsFailed)
+        XCTAssertTrue(sut.areBothScanned)
+        XCTAssertNotNil(sut.firstResult)
+        XCTAssertNotNil(sut.secondResult)
+        
+        XCTAssertEqual(sut.firstResultImage, UIImage.detailStatusTest)
+        XCTAssertEqual(sut.firstResultLinkImage, nil)
+        XCTAssertEqual(sut.firstResultTitle, "Negative PCR test")
+        XCTAssertEqual(sut.firstResultFooterText, nil)
+        XCTAssertEqual(sut.firstResultSubtitle!, "0 hour(s) ago")
+        
+        XCTAssertEqual(sut.secondResultImage, UIImage.detailStatusFailed)
+        XCTAssertEqual(sut.seconResultLinkImage, .FieldRight)
+        XCTAssertEqual(sut.secondResultTitle, "Invalid certificate")
+        XCTAssertEqual(sut.seconResultFooterText, nil)
+        XCTAssertEqual(sut.seconResultSubtitle!, "Show details")
+        
+        XCTAssertEqual(sut.resultPersonTitle!, "Doe John")
+        XCTAssertEqual(sut.resultPersonSubtitle!, "DOE JOHN")
+        XCTAssertEqual(sut.resultPersonFooter!, "Born on Jan 1, 1990")
+        XCTAssertEqual(sut.resultPersonIcon, UIImage.iconCardInverse)
     }
 }

@@ -12,6 +12,7 @@ import Foundation
 import PromiseKit
 import UIKit
 import Kronos
+import CertLogic
 
 private enum Constants {
     enum Keys {
@@ -227,7 +228,7 @@ class ValidatorOverviewViewModel {
                 ParseCertificateUseCase(scanResult: $0,
                                         vaccinationRepository: self.vaccinationRepository).execute()
             }
-            .then { token -> Promise<ExtendedCBORWebToken> in
+            .then { token -> Promise<ValidateCertificateUseCase.Result> in
                 tmpToken = token
                 return ValidateCertificateUseCase(token: token,
                                                   revocationRepository: self.revocationRepository,
@@ -235,7 +236,7 @@ class ValidatorOverviewViewModel {
                                                   persistence: self.userDefaults).execute()
             }
             .done {
-                self.router.showCertificate($0,
+                self.router.showCertificate($0.token,
                                             _2GContext: false,
                                             userDefaults: self.userDefaults)
                 

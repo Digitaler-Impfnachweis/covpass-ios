@@ -8,6 +8,8 @@
 import XCTest
 @testable import CovPassCheckApp
 @testable import CovPassCommon
+import SwiftyJSON
+import CertLogic
 
 class ValidateCertificateUseCaseTests: XCTestCase {
     
@@ -16,7 +18,7 @@ class ValidateCertificateUseCaseTests: XCTestCase {
     var revocationRepository: CertificateRevocationRepositoryMock!
 
     override func setUpWithError() throws {
-        let token = CBORWebToken.mockVaccinationCertificate.mockVaccinationUVCI("FOO").extended()
+        let token = CBORWebToken.mockRecoveryCertificate.mockRecoveryUVCI("FOO").extended()
         let persistence = UserDefaultsPersistence()
         revocationRepository = CertificateRevocationRepositoryMock()
         certLogic = DCCCertLogicMock()
@@ -39,11 +41,11 @@ class ValidateCertificateUseCaseTests: XCTestCase {
         certLogic.validateResult = [.init(rule: nil, result: .passed, validationErrors: nil)]
         revocationRepository.isRevoked = false
         // WHEN
-        sut.execute().done { token in
+        sut.execute().done { result in
             // THEN
-            XCTAssertNotNil(token)
-            XCTAssertTrue(token.vaccinationCertificate.isVaccination)
-            XCTAssertEqual(token.vaccinationCertificate.hcert.dgc.uvci, "FOO")
+            XCTAssertNotNil(result.token)
+            XCTAssertTrue(result.token.vaccinationCertificate.isRecovery)
+            XCTAssertEqual(result.token.vaccinationCertificate.hcert.dgc.uvci, "FOO")
             testExpectation.fulfill()
         }
         .catch { error in
@@ -137,6 +139,31 @@ class ValidateCertificateUseCaseTests: XCTestCase {
             let certificateError = error as? ValidationResultError
             XCTAssertEqual(certificateError, .technical)
             testExpectation.fulfill()
+        }
+        wait(for: [testExpectation],
+             timeout: 0.1,
+             enforceOrder: true)
+    }
+    
+    func test_RR_DE_0002_response() {
+        // GIVEN
+        let testExpectation = XCTestExpectation()
+        let rule = Rule(identifier: "RR-DE-0002", type: "", version: "", schemaVersion: "", engine: "", engineVersion: "", certificateType: "", description: [], validFrom: "", validTo: "", affectedString: [], logic: JSON(""), countryCode: "DE" )
+        let validationResult = [ValidationResult(rule: rule, result: .fail, validationErrors: nil)]
+        certLogic.validationError = nil
+        certLogic.validateResult = validationResult
+        revocationRepository.isRevoked = false
+        // WHEN
+        sut.execute().done { result in
+            // THEN
+            XCTAssertEqual(result.token.vaccinationCertificate.hcert.dgc.uvci, "FOO")
+            XCTAssertEqual(result.validationResults?.count, validationResult.count)
+            XCTAssertEqual(result.validationResults?.first?.rule?.identifier, validationResult.first?.rule?.identifier)
+            XCTAssertEqual(result.validationResults?.first?.result, .open)
+            testExpectation.fulfill()
+        }
+        .catch { error in
+            XCTFail("Should not fail")
         }
         wait(for: [testExpectation],
              timeout: 0.1,

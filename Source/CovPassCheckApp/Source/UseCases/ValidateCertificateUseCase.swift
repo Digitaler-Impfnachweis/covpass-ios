@@ -8,8 +8,7 @@
 import CovPassCommon
 import PromiseKit
 import Foundation
-import CovPassUI
-import Scanner
+import CertLogic
 
 struct ValidateCertificateUseCase {
     let token: ExtendedCBORWebToken
@@ -17,16 +16,33 @@ struct ValidateCertificateUseCase {
     let certLogic: DCCCertLogicProtocol
     let persistence: Persistence
     
-    func execute() -> Promise<ExtendedCBORWebToken> {
+    struct Result {
+        let token: ExtendedCBORWebToken
+        let validationResults: [ValidationResult]?
+    }
+    
+    func execute() -> Promise<Result> {
         firstly {
             checkBusinessRules(token)
         }
         .then {
-            RevokeUseCase(token: $0, revocationRepository: revocationRepository).execute()
+            isRevoked($0)
         }
     }
     
-    private func checkBusinessRules(_ token: ExtendedCBORWebToken) ->  Promise<ExtendedCBORWebToken> {
+    private func isRevoked(_ result: Result) -> Promise<Result> {
+        firstly {
+            revocationRepository.isRevoked(result.token)
+        }
+        .then(on: .global()) { isRevoked -> Promise<Result> in
+            if isRevoked {
+                return .init(error: CertificateError.revoked(result.token))
+            }
+            return .value(result)
+        }
+    }
+    
+    private func checkBusinessRules(_ token: ExtendedCBORWebToken) ->  Promise<Result> {
         // Validate given certificate based on GERMAN rules and users local time (CovPassCheck only)
         let validationResult = try? certLogic.validate(type: persistence.selectedLogicType,
                                                        countryCode: "DE",
@@ -34,6 +50,11 @@ struct ValidateCertificateUseCase {
                                                        certificate: token.vaccinationCertificate)
         let valid = validationResult?.contains(where: { $0.result != .passed }) == false
         
+        // exception https://dth01.ibmgcloud.net/jira/browse/BVC-3905
+        if token.vaccinationCertificate.isRecovery, validationResult?.failedResults.count == 1, let ruleResult0002 = validationResult?.validationResult(ofRule: "RR-DE-0002"), ruleResult0002.result == .fail {
+            ruleResult0002.result = .open
+            return .value(.init(token: token, validationResults: validationResult))
+        }
         // Show error dialog when at least one rule failed or there are no rules at all
         if !valid {
             return .init(error: ValidationResultError.functional)
@@ -41,6 +62,6 @@ struct ValidateCertificateUseCase {
         if validationResult?.isEmpty ?? false {
             return .init(error: ValidationResultError.technical)
         }
-        return .value(token)
+        return .value(.init(token: token, validationResults: validationResult))
     }
 }

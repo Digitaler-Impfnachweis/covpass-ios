@@ -9,7 +9,8 @@
 import CovPassCommon
 import CovPassUI
 import PromiseKit
-import UIKit 
+import UIKit
+import CertLogic
 
 private enum Constants {
     static let confirmButtonLabel = "validation_check_popup_valid_vaccination_button_title".localized
@@ -59,16 +60,16 @@ extension ValidationViewModelProtocol {
             ParseCertificateUseCase(scanResult: $0,
                                     vaccinationRepository: repository).execute()
         }
-        .then { token -> Promise<ExtendedCBORWebToken> in
+        .then { token -> Promise<ValidateCertificateUseCase.Result> in
             tmpToken = token
             return ValidateCertificateUseCase(token: token,
                                               revocationRepository: CertificateRevocationRepository()!,
                                               certLogic: DCCCertLogic.create(),
                                               persistence: self.userDefaults).execute()
         }
-        .done { certificate in
+        .done { result in
             if self._2GContext {
-                resolvable.fulfill(certificate)
+                resolvable.fulfill(result.token)
                 return
             }
             
@@ -76,7 +77,7 @@ extension ValidationViewModelProtocol {
                 resolvable: resolvable,
                 router: self.router,
                 repository: self.repository,
-                certificate: certificate,
+                certificate: result.token,
                 error: nil,
                 _2GContext: _2GContext,
                 userDefaults: userDefaults

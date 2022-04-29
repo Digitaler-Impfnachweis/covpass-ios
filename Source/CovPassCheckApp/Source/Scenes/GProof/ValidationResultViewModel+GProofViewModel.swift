@@ -26,6 +26,7 @@ private enum Constants {
     }
     enum Images {
         static let detailStatusFull = UIImage.detailStatusFull
+        static let detailStatusPartial = UIImage.detailStatusPartial
         static let detailStatusFailed = UIImage.detailStatusFailed
         static let detailStatusFullEmpty = UIImage.detailStatusFullEmpty
         static let detailStatusTestEmpty = UIImage.detailStatusTestEmpty
@@ -34,26 +35,28 @@ private enum Constants {
     }
 }
 
-public extension Optional where Wrapped == ValidationResultViewModel {
+public extension Optional where Wrapped == GProofValidationResult {
     
-    func title(theOtherResultVM: ValidationResultViewModel?,
+    func title(theOtherResultVM: GProofValidationResult?,
                initialTokenIsBoosted: Bool) -> String {
-        switch self {
-        case is ErrorResultViewModel:
+        if self?.error != nil {
             return Constants.Keys.result_2G_certificate_invalid
-        case is RecoveryResultViewModel:
-            return Constants.Keys.result_2G_2nd_gproof_valid_recovery
-        case is VaccinationResultViewModel:
+        }
+        
+        switch self?.token?.vaccinationCertificate.certType {
+        case .vaccination:
             return vaccinationTitle(initialTokenIsBoosted: initialTokenIsBoosted)
-        case  is TestResultViewModel:
-            return self?.certificate?.vaccinationCertificate.hcert.dgc.isPCR ?? false ? Constants.Keys.result_2G_2nd_gproof_valid_pcrtest : Constants.Keys.result_2G_2nd_gproof_valid_rapidtest
-        default:
+        case .recovery:
+            return Constants.Keys.result_2G_2nd_gproof_valid_recovery
+        case .test:
+            return self?.token?.vaccinationCertificate.hcert.dgc.isPCR ?? false ? Constants.Keys.result_2G_2nd_gproof_valid_pcrtest : Constants.Keys.result_2G_2nd_gproof_valid_rapidtest
+        case .none:
             return theOtherResultVM.errorTitle
         }
     }
     
     func vaccinationTitle(initialTokenIsBoosted: Bool) -> String {
-        guard let cert = self?.certificate?.vaccinationCertificate else {
+        guard let cert = self?.token?.vaccinationCertificate else {
             return Constants.Keys.result_2G_empty_subtitle
         }
         if initialTokenIsBoosted {
@@ -68,7 +71,7 @@ public extension Optional where Wrapped == ValidationResultViewModel {
     }
     
     var errorTitle: String {
-        guard let certificate = self?.certificate?.vaccinationCertificate else {
+        guard let certificate = self?.token?.vaccinationCertificate else {
             return Constants.Keys.result_2G_certificate_invalid
         }
         if certificate.isTest {
@@ -76,6 +79,9 @@ public extension Optional where Wrapped == ValidationResultViewModel {
         } else if certificate.isVaccination {
             return Constants.Keys.result_2G_3rd_test_recov_empty
         } else if certificate.isRecovery {
+            if let openResults = self?.result?.openResults, openResults.count > 0 {
+                return Constants.Keys.result_2G_2nd_gproof_valid_basic
+            }
             return Constants.Keys.result_2G_3rd_test_vacc_empty
         } else {
             return Constants.Keys.result_2G_certificate_invalid
@@ -83,36 +89,42 @@ public extension Optional where Wrapped == ValidationResultViewModel {
     }
     
     var linkImage: UIImage? {
-        switch self {
-        case is ErrorResultViewModel: return Constants.Images.chevronRight
-        case is VaccinationResultViewModel, is RecoveryResultViewModel: return nil
-        case is TestResultViewModel: return nil
-        default: return nil
+        if self?.error != nil {
+            return Constants.Images.chevronRight
         }
+        return nil
     }
     
     var subtitle: String? {
-        switch self {
-        case is ErrorResultViewModel:
+        if self?.error != nil {
             return Constants.Keys.result_2G_invalid_subtitle
-        case is RecoveryResultViewModel:
-            return self?.certificate?.vaccinationCertificate.recoverySubtitle
-        case is VaccinationResultViewModel:
-            return self?.certificate?.vaccinationCertificate.vaccinationSubtitle
-        case is TestResultViewModel:
-            return self?.certificate?.vaccinationCertificate.testSubtitle
-        default:
+        }
+        switch self?.token?.vaccinationCertificate.certType {
+        case .vaccination:
+            return self?.token?.vaccinationCertificate.vaccinationSubtitle
+        case .recovery:
+            return self?.token?.vaccinationCertificate.recoverySubtitle
+        case .test:
+            return self?.token?.vaccinationCertificate.testSubtitle
+        case .none:
             return Constants.Keys.result_2G_2nd_empty
         }
     }
     
-    var image: UIImage {
-        switch self {
-        case is ErrorResultViewModel: return Constants.Images.detailStatusFailed
-        case is VaccinationResultViewModel, is RecoveryResultViewModel: return Constants.Images.detailStatusFull
-        case is TestResultViewModel, is RecoveryResultViewModel: return Constants.Images.detailStatusTest
-        default:
-            return self?.certificate?.vaccinationCertificate.isTest ?? false ? Constants.Images.detailStatusTestEmpty : Constants.Images.detailStatusFullEmpty
+    var image: UIImage {        
+        if self?.error != nil {
+            return Constants.Images.detailStatusFailed
+        }
+        if let openResults = self?.result?.openResults, openResults.count > 0 {
+            return Constants.Images.detailStatusPartial
+        }
+        switch self?.token?.vaccinationCertificate.certType {
+        case .vaccination, .recovery:
+            return Constants.Images.detailStatusFull
+        case .test:
+            return Constants.Images.detailStatusTest
+        case .none:
+            return self?.token?.vaccinationCertificate.isTest ?? false ? Constants.Images.detailStatusTestEmpty : Constants.Images.detailStatusFullEmpty
         }
     }
 }

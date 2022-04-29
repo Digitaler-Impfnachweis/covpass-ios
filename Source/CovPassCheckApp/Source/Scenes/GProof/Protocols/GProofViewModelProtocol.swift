@@ -17,6 +17,7 @@ protocol GProofViewModelProtocol {
     var scanNextButtonIsHidden: Bool { get }
     var onlyOneIsScannedAndThisFailed: Bool { get }
     var buttonRetry: String { get }
+    var personStackIsHidden: Bool { get }
     var buttonRetryIsHidden: Bool { get }
     var buttonStartOver: String { get }
     var buttonStartOverIsHidden: Bool { get }
@@ -43,8 +44,8 @@ protocol GProofViewModelProtocol {
     var secondIsFailedTechnicalReason: Bool { get }
     var areBothScanned: Bool { get }
     var delegate: ViewModelDelegate? { get set }
-    var firstResult: ValidationResultViewModel?  { get set }
-    var secondResult: ValidationResultViewModel?  { get set }
+    var firstResult: GProofValidationResult?  { get set }
+    var secondResult: GProofValidationResult?  { get set }
     func scanNext()
     func retry()
     func startover()
