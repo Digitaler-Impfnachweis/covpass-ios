@@ -178,10 +178,10 @@ class DigitalGreenCertificateTests: XCTestCase {
     func testRevocationUCICountryHash() {
         // Given
         let expectedHash: [UInt8] = [
-            4, 153, 42, 67, 146, 255, 202, 22,
-            248, 34, 101, 61, 62, 65, 8, 8,
-            71, 63, 127, 124, 145, 206, 81, 56,
-            120, 1, 0, 215, 63, 5, 209, 115
+            242, 5, 246, 242, 252, 210, 81, 48,
+            233, 179, 167, 15, 142, 20, 249, 19,
+            79, 180, 86, 59, 76, 233, 249, 152,
+            146, 161, 29, 46, 251, 69, 33, 169
         ]
         let ci = "01DE/84503/1119349007/DXSGWLWL40SU8ZFKIYIBK39A3#S"
         let sut = DigitalGreenCertificate.with(vaccination: .with(ci: ci, co: "DE"))
