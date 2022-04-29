@@ -59,7 +59,7 @@ public struct DigitalGreenCertificate: Codable {
     }
 
     public var revocationUCICountryHash: [UInt8] {
-        (uvci + countryCode).bytes.sha256()
+        (countryCode + uvci).bytes.sha256()
     }
 
     public var countryCode: String {
