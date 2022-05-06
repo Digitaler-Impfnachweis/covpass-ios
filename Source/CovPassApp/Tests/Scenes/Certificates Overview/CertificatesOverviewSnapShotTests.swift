@@ -10,6 +10,7 @@
 @testable import CovPassCommon
 import UIKit
 import PromiseKit
+import XCTest
 
 class CertificateOverviewSnapShotTests: BaseSnapShotTests {
     
@@ -107,10 +108,10 @@ class CertificateOverviewSnapShotTests: BaseSnapShotTests {
         verifyView(view: viewController.collectionView.cellForItem(at: IndexPath(row: 0, section: 0))!)
     }
     
-    func testCertificateOverviewCertificates_Test() {
+    func testCertificateOverviewCertificates_Test() throws {
         let vacinationRepoMock: VaccinationRepositoryMock = VaccinationRepositoryMock()
         let cert: ExtendedCBORWebToken = CBORWebToken.mockTestCertificate.extended()
-        cert.vaccinationCertificate.hcert.dgc.t!.first!.sc = DateUtils.parseDate("2021-04-26T15:05:00")!
+        cert.vaccinationCertificate.hcert.dgc.t!.first!.sc = try XCTUnwrap(Calendar.current.date(byAdding: .hour, value: -8979, to: Date()))
         cert.vaccinationCertificate.hcert.dgc.nam.fn = "John 1"
         let certs = [cert]
         vacinationRepoMock.certificates = certs
@@ -161,6 +162,129 @@ class CertificateOverviewSnapShotTests: BaseSnapShotTests {
         cert.vaccinationCertificate.hcert.dgc.nam.fn = "John 1"
         cert.revoked = true
         let certs = [cert]
+        vacinationRepoMock.certificates = certs
+        let viewModel = self.viewModel(router: CertificatesOverviewRouterMock(), repository: vacinationRepoMock)
+        let viewController = CertificatesOverviewViewController(viewModel: viewModel)
+        let window = UIWindow(frame: UIScreen.main.bounds)
+        window.rootViewController = viewController
+        window.makeKeyAndVisible()
+        RunLoop.current.run(for: 0.5)
+        verifyView(view: viewController.collectionView.cellForItem(at: IndexPath(row: 0, section: 0))!)
+    }
+    
+    
+    func testJohnsonJohnson1OutOf1() {
+        let vacinationRepoMock: VaccinationRepositoryMock = VaccinationRepositoryMock()
+        let cert: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended()
+        cert.vaccinationCertificate.hcert.dgc.nam.fn = "John 1"
+        cert.vaccinationCertificate.hcert.dgc.v!.first!.mp = MedicalProduct.johnsonjohnson.rawValue
+        cert.vaccinationCertificate.hcert.dgc.v!.first!.dn = 1
+        cert.vaccinationCertificate.hcert.dgc.v!.first!.sd = 1
+        let certs = [cert]
+        vacinationRepoMock.certificates = certs
+        let viewModel = self.viewModel(router: CertificatesOverviewRouterMock(), repository: vacinationRepoMock)
+        let viewController = CertificatesOverviewViewController(viewModel: viewModel)
+        let window = UIWindow(frame: UIScreen.main.bounds)
+        window.rootViewController = viewController
+        window.makeKeyAndVisible()
+        RunLoop.current.run(for: 0.5)
+        verifyView(view: viewController.collectionView.cellForItem(at: IndexPath(row: 0, section: 0))!)
+    }
+    
+    func testJohnsonJohnson3OutOf1() throws {
+        let vacinationRepoMock: VaccinationRepositoryMock = VaccinationRepositoryMock()
+        let cert: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended()
+        cert.vaccinationCertificate.hcert.dgc.nam.fn = "John 1"
+        cert.vaccinationCertificate.hcert.dgc.v!.first!.mp = MedicalProduct.johnsonjohnson.rawValue
+        cert.vaccinationCertificate.hcert.dgc.v!.first!.dn = 3
+        cert.vaccinationCertificate.hcert.dgc.v!.first!.sd = 1
+        cert.vaccinationCertificate.hcert.dgc.v!.first!.dt = try XCTUnwrap(Calendar.current.date(byAdding: .day, value: -489, to: Date()))
+        let certs = [cert]
+        vacinationRepoMock.certificates = certs
+        let viewModel = self.viewModel(router: CertificatesOverviewRouterMock(), repository: vacinationRepoMock)
+        let viewController = CertificatesOverviewViewController(viewModel: viewModel)
+        let window = UIWindow(frame: UIScreen.main.bounds)
+        window.rootViewController = viewController
+        window.makeKeyAndVisible()
+        RunLoop.current.run(for: 0.5)
+        verifyView(view: viewController.collectionView.cellForItem(at: IndexPath(row: 0, section: 0))!)
+    }
+
+    func testDowngrade2OutOf1ToBasisImmunization() {
+        let vacinationRepoMock: VaccinationRepositoryMock = VaccinationRepositoryMock()
+        let cert: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended()
+        cert.vaccinationCertificate.hcert.dgc.nam.fn = "John 1"
+        cert.vaccinationCertificate.hcert.dgc.v!.first!.mp = MedicalProduct.biontech.rawValue
+        cert.vaccinationCertificate.hcert.dgc.v!.first!.dn = 2
+        cert.vaccinationCertificate.hcert.dgc.v!.first!.sd = 1
+        cert.vaccinationCertificate.hcert.dgc.v!.first!.dt = Date()
+        let secondCert: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended()
+        secondCert.vaccinationCertificate.hcert.dgc.nam.fn = "John 1"
+        secondCert.vaccinationCertificate.hcert.dgc.v!.first!.mp = MedicalProduct.johnsonjohnson.rawValue
+        secondCert.vaccinationCertificate.hcert.dgc.v!.first!.dn = 1
+        secondCert.vaccinationCertificate.hcert.dgc.v!.first!.sd = 1
+        secondCert.vaccinationCertificate.hcert.dgc.v!.first!.dt = Date()
+        let certs = [cert, secondCert]
+        vacinationRepoMock.certificates = certs
+        let viewModel = self.viewModel(router: CertificatesOverviewRouterMock(), repository: vacinationRepoMock)
+        let viewController = CertificatesOverviewViewController(viewModel: viewModel)
+        let window = UIWindow(frame: UIScreen.main.bounds)
+        window.rootViewController = viewController
+        window.makeKeyAndVisible()
+        RunLoop.current.run(for: 0.5)
+        verifyView(view: viewController.collectionView.cellForItem(at: IndexPath(row: 0, section: 0))!)
+    }
+
+    func testDowngrade2OutOf1ToBasisImmunizationAndRecoveryAsOldest() {
+        let vacinationRepoMock: VaccinationRepositoryMock = VaccinationRepositoryMock()
+        let cert: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended()
+        cert.vaccinationCertificate.hcert.dgc.nam.fn = "John 1"
+        cert.vaccinationCertificate.hcert.dgc.v!.first!.mp = MedicalProduct.biontech.rawValue
+        cert.vaccinationCertificate.hcert.dgc.v!.first!.dn = 2
+        cert.vaccinationCertificate.hcert.dgc.v!.first!.sd = 1
+        cert.vaccinationCertificate.hcert.dgc.v!.first!.dt = Date()
+        let recovery: ExtendedCBORWebToken = CBORWebToken.mockRecoveryCertificate.extended()
+        recovery.vaccinationCertificate.hcert.dgc.nam.fn = "John 1"
+        recovery.vaccinationCertificate.hcert.dgc.r!.first!.fr = Date() - 100
+        recovery.vaccinationCertificate.hcert.dgc.r!.first!.df = Date()
+        recovery.vaccinationCertificate.hcert.dgc.r!.first!.du = Date()
+        let secondCert: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended()
+        secondCert.vaccinationCertificate.hcert.dgc.nam.fn = "John 1"
+        secondCert.vaccinationCertificate.hcert.dgc.v!.first!.mp = MedicalProduct.johnsonjohnson.rawValue
+        secondCert.vaccinationCertificate.hcert.dgc.v!.first!.dn = 1
+        secondCert.vaccinationCertificate.hcert.dgc.v!.first!.sd = 1
+        secondCert.vaccinationCertificate.hcert.dgc.v!.first!.dt = Date()
+        let certs = [cert,recovery,secondCert]
+        vacinationRepoMock.certificates = certs
+        let viewModel = self.viewModel(router: CertificatesOverviewRouterMock(), repository: vacinationRepoMock)
+        let viewController = CertificatesOverviewViewController(viewModel: viewModel)
+        let window = UIWindow(frame: UIScreen.main.bounds)
+        window.rootViewController = viewController
+        window.makeKeyAndVisible()
+        RunLoop.current.run(for: 0.5)
+        verifyView(view: viewController.collectionView.cellForItem(at: IndexPath(row: 0, section: 0))!)
+    }
+
+    func testDowngrade2OutOf1ToBasisImmunizationAndRecoveryAsNotOldest() {
+        let vacinationRepoMock: VaccinationRepositoryMock = VaccinationRepositoryMock()
+        let cert: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended()
+        cert.vaccinationCertificate.hcert.dgc.nam.fn = "John 1"
+        cert.vaccinationCertificate.hcert.dgc.v!.first!.mp = MedicalProduct.biontech.rawValue
+        cert.vaccinationCertificate.hcert.dgc.v!.first!.dn = 2
+        cert.vaccinationCertificate.hcert.dgc.v!.first!.sd = 1
+        cert.vaccinationCertificate.hcert.dgc.v!.first!.dt = Date()
+        let recovery: ExtendedCBORWebToken = CBORWebToken.mockRecoveryCertificate.extended()
+        recovery.vaccinationCertificate.hcert.dgc.nam.fn = "John 1"
+        recovery.vaccinationCertificate.hcert.dgc.r!.first!.fr = Date() + 100
+        recovery.vaccinationCertificate.hcert.dgc.r!.first!.df = Date()
+        recovery.vaccinationCertificate.hcert.dgc.r!.first!.du = Date()
+        let secondCert: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended()
+        secondCert.vaccinationCertificate.hcert.dgc.nam.fn = "John 1"
+        secondCert.vaccinationCertificate.hcert.dgc.v!.first!.mp = MedicalProduct.johnsonjohnson.rawValue
+        secondCert.vaccinationCertificate.hcert.dgc.v!.first!.dn = 1
+        secondCert.vaccinationCertificate.hcert.dgc.v!.first!.sd = 1
+        secondCert.vaccinationCertificate.hcert.dgc.v!.first!.dt = Date()
+        let certs = [cert,recovery,secondCert]
         vacinationRepoMock.certificates = certs
         let viewModel = self.viewModel(router: CertificatesOverviewRouterMock(), repository: vacinationRepoMock)
         let viewController = CertificatesOverviewViewController(viewModel: viewModel)

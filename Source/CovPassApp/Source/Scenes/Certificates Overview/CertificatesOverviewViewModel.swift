@@ -339,6 +339,8 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
             guard let cert = sortedCertificates.first else { return nil }
             return CertificateCardViewModel(
                 token: cert,
+                vaccinations: sortedCertificates.vaccinations,
+                recoveries: sortedCertificates.recoveries,
                 isFavorite: certificatePair.isFavorite,
                 showFavorite: certificates.count > 1,
                 onAction: showCertificate,

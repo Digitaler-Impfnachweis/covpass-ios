@@ -30,14 +30,9 @@ class TestResultViewModel: ValidationResultViewModel {
         guard let testCert = certificate?.vaccinationCertificate.hcert.dgc.t?.first else {
             return ""
         }
-        // negative pcr
-        if testCert.isPCR {
-            let diffComponents = Calendar.current.dateComponents([.hour], from: testCert.sc, to: Date())
-            return String(format: "validation_check_popup_valid_pcr_test_title".localized, diffComponents.hour ?? 0)
-        }
-        // negative rapid
-        let diffComponents = Calendar.current.dateComponents([.hour], from: testCert.sc, to: Date())
-        return String(format: "validation_check_popup_test_title".localized, diffComponents.hour ?? 0)
+        let hours = Date().hoursSince(testCert.sc)
+        let formatString = testCert.isPCR ? "validation_check_popup_valid_pcr_test_title" : "validation_check_popup_test_title"
+        return String(format: formatString.localized, hours)
     }
 
     var resultBody: String {

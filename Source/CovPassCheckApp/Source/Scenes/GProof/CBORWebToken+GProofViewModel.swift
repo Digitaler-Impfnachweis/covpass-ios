@@ -21,42 +21,34 @@ private enum Constants {
 extension CBORWebToken {
     
     var testSubtitle: String? {
-        guard let test = hcert.dgc.t?.first else {
+        guard let date = hcert.dgc.t?.first?.sc else {
             return ""
         }
-        let diffComponents = Calendar.current.dateComponents([.hour], from: test.sc, to: Date())
         let formatString = Constants.Keys.result_2G_2nd_timestamp_hours
-        return String(format: formatString, diffComponents.hour ?? 0)
+        return String(format: formatString, Date().hoursSince(date))
     }
     
     var recoverySubtitle: String? {
-        let componentToUse: Set<Calendar.Component> = [.month]
-        let stringWithPlaceholder = Constants.Keys.result_2G_2nd_timestamp_months
-        guard let fromDate = hcert.dgc.r?.first?.fr else {
+        guard let date = hcert.dgc.r?.first?.fr else {
             return nil
         }
-        let diffComponents = Calendar.current.dateComponents(componentToUse,
-                                                             from: fromDate,
-                                                             to: Date())
-        return String(format: stringWithPlaceholder, diffComponents.month ?? 0)
+        let stringWithPlaceholder = Constants.Keys.result_2G_2nd_timestamp_months
+        return String(format: stringWithPlaceholder, Date().monthsSince(date))
     }
     
     var vaccinationSubtitle: String? {
+        guard let date = hcert.dgc.v?.first?.dt else { return nil }
+        var dateDifference = 0
         var stringWithPlaceholder = Constants.Keys.result_2G_2nd_empty
-        var componentToUse: Set<Calendar.Component> = [.month]
+
         if hcert.dgc.isVaccinationBoosted {
             stringWithPlaceholder = Constants.Keys.result_2G_2nd_timestamp_days
-            componentToUse = [.day]
+            dateDifference = Date().daysSince(date)
         } else if hcert.dgc.v?.first?.fullImmunizationCheck ?? false {
             stringWithPlaceholder = Constants.Keys.result_2G_2nd_timestamp_months
+            dateDifference = Date().monthsSince(date)
         }
-        guard let fromDate = hcert.dgc.v?.first?.dt else {
-            return nil
-        }
-        let diffComponents = Calendar.current.dateComponents(componentToUse,
-                                                             from: fromDate,
-                                                             to: Date())
-        let component = componentToUse.first == .month ? diffComponents.month : diffComponents.day
-        return String(format: stringWithPlaceholder, component ?? 0)
+
+        return String(format: stringWithPlaceholder, dateDifference)
     }
 }

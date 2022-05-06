@@ -146,6 +146,22 @@
 
 "certificates_start_screen_pop_up_app_reference_button" = "OK";
 
+"certificate_type_recovery" = "Genesung";
+
+"certificate_type_basic_immunisation" = "Grundimmunisierung";
+
+"certificate_type_booster" = "Auffrischungsimpfung";
+
+"certificate_type_rapidtest" = "Antigen-Schnelltest";
+
+"certificate_type_pcrtest" = "PCR-Test";
+
+"certificate_timestamp_hours" = "Vor %d Stunde(n)";
+
+"certificate_timestamp_days" = "Vor %d Tage(n)";
+
+"certificate_timestamp_months" = "Vor %d Monat(en)";
+
 "accessibility_certificates_start_screen_pop_up_app_reference_label" = "Pop-up schließen";
 
 "accessibility_certificate_popup_checkapp_announce" = "Die Ansicht \"Scannen bitte!\" wurde geöffnet";

@@ -41,11 +41,11 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         super.tearDown()
     }
     
-    func testTestCertificate() {
+    func testTestCertificate() throws {
         // Given
         let cert: ExtendedCBORWebToken = CBORWebToken.mockTestCertificate.extended()
         cert.vaccinationCertificate.hcert.dgc.nam.fn = "John 1"
-        cert.vaccinationCertificate.hcert.dgc.t!.first!.sc = DateUtils.parseDate("2021-04-26T15:05:00")!
+        cert.vaccinationCertificate.hcert.dgc.t!.first!.sc = try XCTUnwrap(Calendar.current.date(byAdding: .hour, value: -8995, to: Date()))
         let certs = [cert]
         vaccinationRepository.certificates = certs
         
@@ -59,24 +59,23 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         }
         
         // THEN
-        XCTAssertEqual("EU Digital COVID Certificate", model.title)
-        XCTAssertEqual("", model.subtitle)
         XCTAssertEqual("Display certificates", model.actionTitle)
         XCTAssertEqual("Doe John 1", model.name)
-        XCTAssertEqual(.neutralWhite, model.iconTintColor)
         XCTAssertEqual(.neutralWhite, model.textColor)
         XCTAssertEqual(.onBrandAccent70, model.backgroundColor)
         XCTAssertEqual(.neutralWhite, model.tintColor)
-        XCTAssertEqual(.statusFullDetail, model.titleIcon)
+        XCTAssertEqual(.detailStatusTestInverse, model.titleIcon)
+        XCTAssertEqual("PCR test", model.title)
+        XCTAssertEqual("8995 hour(s) ago", model.subtitle)
         XCTAssertEqual(false, model.isInvalid)
         XCTAssertEqual(false, model.isFavorite)
     }
     
-    func testTestCertificateNotPCR() {
+    func testTestCertificateNotPCR() throws {
         // Given
         let cert: ExtendedCBORWebToken = CBORWebToken.mockTestCertificate.extended()
         cert.vaccinationCertificate.hcert.dgc.nam.fn = "John 1"
-        cert.vaccinationCertificate.hcert.dgc.t!.first!.sc = DateUtils.parseDate("2021-04-26T15:05:00")!
+        cert.vaccinationCertificate.hcert.dgc.t!.first!.sc = try XCTUnwrap(Calendar.current.date(byAdding: .hour, value: -8995, to: Date()))
         cert.vaccinationCertificate.hcert.dgc.t!.first!.tt = "LP217198-3"
         let certs = [cert]
         vaccinationRepository.certificates = certs
@@ -91,15 +90,14 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         }
         
         // THEN
-        XCTAssertEqual("EU Digital COVID Certificate", model.title)
-        XCTAssertEqual("", model.subtitle)
         XCTAssertEqual("Display certificates", model.actionTitle)
         XCTAssertEqual("Doe John 1", model.name)
-        XCTAssertEqual(.neutralWhite, model.iconTintColor)
         XCTAssertEqual(.neutralWhite, model.textColor)
         XCTAssertEqual(.onBrandAccent70, model.backgroundColor)
         XCTAssertEqual(.neutralWhite, model.tintColor)
-        XCTAssertEqual(.statusFullDetail, model.titleIcon)
+        XCTAssertEqual(.detailStatusTestInverse, model.titleIcon)
+        XCTAssertEqual("Rapid antigen test", model.title)
+        XCTAssertEqual("8995 hour(s) ago", model.subtitle)
         XCTAssertEqual(false, model.isInvalid)
         XCTAssertEqual(false, model.isFavorite)
     }
@@ -122,15 +120,14 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         }
         
         // THEN
-        XCTAssertEqual("EU Digital COVID Certificate", model.title)
-        XCTAssertEqual("", model.subtitle)
         XCTAssertEqual("Display certificates", model.actionTitle)
         XCTAssertEqual("Doe John 1", model.name)
-        XCTAssertEqual(.neutralWhite, model.iconTintColor)
         XCTAssertEqual(.neutralWhite, model.textColor)
         XCTAssertEqual(.onBrandAccent70, model.backgroundColor)
         XCTAssertEqual(.neutralWhite, model.tintColor)
         XCTAssertEqual(.statusFullDetail, model.titleIcon)
+        XCTAssertEqual("Basic immunisation", model.title)
+        XCTAssertEqual("12 month(s) ago", model.subtitle)
         XCTAssertEqual(false, model.isInvalid)
         XCTAssertEqual(false, model.isFavorite)
     }
@@ -154,15 +151,14 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         }
         
         // THEN
-        XCTAssertEqual("EU Digital COVID Certificate", model.title)
-        XCTAssertEqual("", model.subtitle)
         XCTAssertEqual("Display certificates", model.actionTitle)
         XCTAssertEqual("Doe John 1", model.name)
-        XCTAssertEqual(.neutralWhite, model.iconTintColor)
         XCTAssertEqual(.neutralWhite, model.textColor)
         XCTAssertEqual(.onBrandAccent70, model.backgroundColor)
         XCTAssertEqual(.neutralWhite, model.tintColor)
-        XCTAssertEqual(.statusFullDetail, model.titleIcon)
+        XCTAssertEqual(.startStatusPartial, model.titleIcon)
+        XCTAssertEqual("Vaccine dose 1 of 2", model.title)
+        XCTAssertEqual("12 month(s) ago", model.subtitle)
         XCTAssertEqual(false, model.isInvalid)
         XCTAssertEqual(false, model.isFavorite)
     }
@@ -185,15 +181,14 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         }
         
         // THEN
-        XCTAssertEqual("EU Digital COVID Certificate", model.title)
-        XCTAssertEqual("", model.subtitle)
         XCTAssertEqual("Display certificates", model.actionTitle)
         XCTAssertEqual("Doe John 1", model.name)
-        XCTAssertEqual(.neutralWhite, model.iconTintColor)
         XCTAssertEqual(.neutralWhite, model.textColor)
         XCTAssertEqual(.onBrandAccent70, model.backgroundColor)
         XCTAssertEqual(.neutralWhite, model.tintColor)
         XCTAssertEqual(.statusFullDetail, model.titleIcon)
+        XCTAssertEqual("Recovery", model.title)
+        XCTAssertEqual("3 month(s) ago", model.subtitle)
         XCTAssertEqual(false, model.isInvalid)
         XCTAssertEqual(false, model.isFavorite)
     }
@@ -221,11 +216,12 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         XCTAssertEqual("Invalid", model.subtitle)
         XCTAssertEqual("Display certificates", model.actionTitle)
         XCTAssertEqual("Doe John 1", model.name)
-        XCTAssertEqual(.neutralWhite, model.iconTintColor)
         XCTAssertEqual(.neutralWhite, model.textColor)
         XCTAssertEqual(.onBackground40, model.backgroundColor)
         XCTAssertEqual(.neutralWhite, model.tintColor)
         XCTAssertEqual(.expired, model.titleIcon)
+        XCTAssertEqual("EU Digital COVID Certificate", model.title)
+        XCTAssertEqual("Invalid", model.subtitle)
         XCTAssertEqual(true, model.isInvalid)
         XCTAssertEqual(false, model.isFavorite)
     }
@@ -253,11 +249,12 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         XCTAssertEqual("Expired", model.subtitle)
         XCTAssertEqual("Display certificates", model.actionTitle)
         XCTAssertEqual("Doe John 1", model.name)
-        XCTAssertEqual(.neutralWhite, model.iconTintColor)
         XCTAssertEqual(.neutralWhite, model.textColor)
         XCTAssertEqual(.onBackground40, model.backgroundColor)
         XCTAssertEqual(.neutralWhite, model.tintColor)
         XCTAssertEqual(.expired, model.titleIcon)
+        XCTAssertEqual("EU Digital COVID Certificate", model.title)
+        XCTAssertEqual("Expired", model.subtitle)
         XCTAssertEqual(true, model.isInvalid)
         XCTAssertEqual(false, model.isFavorite)
     }

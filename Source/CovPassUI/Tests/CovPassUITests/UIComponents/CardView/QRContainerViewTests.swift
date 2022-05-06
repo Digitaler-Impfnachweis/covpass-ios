@@ -28,7 +28,7 @@ class QRContainerViewTests: XCTestCase {
 
     func testInit() {
         XCTAssertEqual(sut.qrContainerView?.layoutMargins, .init(top: .space_8, left: .space_8, bottom: .space_8, right: .space_8))
-        XCTAssertEqual(sut.qrContainerView?.layer.cornerRadius, 10)
+        XCTAssertEqual(sut.qrContainerView?.layer.cornerRadius, 0)
         XCTAssertEqual(sut.qrContainerView?.layer.masksToBounds, true)
     }
 
@@ -39,7 +39,7 @@ class QRContainerViewTests: XCTestCase {
         sut.image = .arrowBack // Trigger updateviews
 
         XCTAssertEqual(sut.imageView.image, .arrowBack)
-        XCTAssertEqual(sut.qrContainerView?.backgroundColor, .neutralWhite)
+        XCTAssertNil(sut.qrContainerView?.backgroundColor)
 
         XCTAssertFalse(sut.titleLabel.isHidden)
         XCTAssertFalse(sut.subtitleLabel.isHidden)

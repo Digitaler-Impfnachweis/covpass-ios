@@ -14,15 +14,29 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
     // MARK: - Private Properties
 
     private var token: ExtendedCBORWebToken
+    private var vaccinations: [Vaccination]
+    private var recoveries: [Recovery]
     private var certificateIsFavorite: Bool
     private var onAction: (ExtendedCBORWebToken) -> Void
     private var onFavorite: (String) -> Void
     private var repository: VaccinationRepositoryProtocol
     private var boosterLogic: BoosterLogicProtocol
-    private var certificate: DigitalGreenCertificate {
-        token.vaccinationCertificate.hcert.dgc
-    }
-
+    private let currentDate: Date
+    private lazy var dgc: DigitalGreenCertificate = certificate.hcert.dgc
+    private lazy var certificate = token.vaccinationCertificate
+    private lazy var isExpired = certificate.isExpired
+    private lazy var isRecovery = certificate.isRecovery && !isInvalid
+    private lazy var isBasicVaccination = dgc.isFullyImmunized && !isBoosterVaccination && !isInvalid
+    private lazy var isPartialVaccination = certificate.isVaccination && !dgc.isFullyImmunized && !isInvalid
+    private lazy var isBoosterVaccination = dgc .v?.first?.isBoosted(vaccinations: vaccinations, recoveries: recoveries) ?? false && !isInvalid
+    private lazy var isPCRTest = dgc.isPCR && !isInvalid
+    private lazy var isRapidAntigenTest = certificate.isTest && !isPCRTest && !isInvalid
+    private lazy var isRevoked = token.isRevoked
+    private lazy var tokenIsInvalid = token.isInvalid
+    private lazy var partialVaccination: Vaccination? = {
+        guard isPartialVaccination else { return nil }
+        return dgc.v?.first
+    }()
     // Show notification to the user if he is qualified for a booster vaccination
     private var showNotification: Bool {
         guard let boosterCandidate = boosterLogic.checkCertificates([token]) else { return false }
@@ -33,20 +47,26 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
 
     init(
         token: ExtendedCBORWebToken,
+        vaccinations: [Vaccination],
+        recoveries: [Recovery],
         isFavorite: Bool,
         showFavorite: Bool,
         onAction: @escaping (ExtendedCBORWebToken) -> Void,
         onFavorite: @escaping (String) -> Void,
         repository: VaccinationRepositoryProtocol,
-        boosterLogic: BoosterLogicProtocol
+        boosterLogic: BoosterLogicProtocol,
+        currentDate: Date = Date()
     ) {
         self.token = token
+        self.vaccinations = vaccinations
+        self.recoveries = recoveries
         certificateIsFavorite = isFavorite
         self.showFavorite = showFavorite
         self.onAction = onAction
         self.onFavorite = onFavorite
         self.repository = repository
         self.boosterLogic = boosterLogic
+        self.currentDate = currentDate
     }
 
     // MARK: - Internal Properties
@@ -62,54 +82,87 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
     }
 
     var iconTintColor: UIColor {
-        .neutralWhite
+        isInvalid ? UIColor(hexString: "878787") : .onBrandAccent70
     }
 
     var textColor: UIColor {
         .neutralWhite
     }
 
-    var title: String {
-        "startscreen_card_title".localized
-    }
+    lazy var title: String = {
+        let title: String
+        if isInvalid {
+            title = "startscreen_card_title"
+        } else if isRecovery {
+            title = "certificate_type_recovery"
+        } else if isBasicVaccination {
+            title = "certificate_type_basic_immunisation"
+        } else if isBoosterVaccination {
+            title = "certificate_type_booster"
+        } else if isPCRTest {
+            title = "certificates_overview_pcr_test_certificate_message"
+        } else if isRapidAntigenTest {
+            title = "certificates_overview_test_certificate_message"
+        } else if let vaccination = partialVaccination {
+            title = String(
+                format: "certificates_overview_vaccination_certificate_message".localized,
+                vaccination.dn,
+                vaccination.sd
+            )
+        } else {
+            title = ""
+        }
+        return title.localized
+    }()
 
-    var subtitle: String {
-        if token.vaccinationCertificate.isExpired {
-            return "certificates_start_screen_qrcode_certificate_expired_subtitle".localized
+    lazy var subtitle: String = {
+        let subtitle: String
+        if isExpired {
+            subtitle = "certificates_start_screen_qrcode_certificate_expired_subtitle".localized
+        } else if isRecovery, let date = dgc.r?.first?.fr {
+            subtitle = currentDate.monthSinceString(date)
+        } else if isBasicVaccination || isPartialVaccination, let date = dgc.v?.first?.dt {
+            subtitle = currentDate.monthSinceString(date)
+        } else if isBoosterVaccination, let date = dgc.v?.first?.dt {
+            subtitle = currentDate.daysSinceString(date)
+        } else if isPCRTest || isRapidAntigenTest, let date = dgc.t?.first?.sc {
+            subtitle = currentDate.hoursSinceString(date)
+        } else if isRevoked || tokenIsInvalid {
+            subtitle = "certificates_start_screen_qrcode_certificate_invalid_subtitle".localized
+        } else if showNotification {
+            subtitle = "vaccination_start_screen_qrcode_booster_vaccination_note_subtitle".localized
+        } else {
+            subtitle = ""
         }
-        if token.isInvalid || token.isRevoked {
-            return "certificates_start_screen_qrcode_certificate_invalid_subtitle".localized
-        }
-        if showNotification {
-            return "vaccination_start_screen_qrcode_booster_vaccination_note_subtitle".localized
-        }
-        return ""
-    }
+        return subtitle
+    }()
 
     var titleIcon: UIImage {
         if isInvalid {
-            return UIImage.expired
+            return .expired
+        } else if isPCRTest || isRapidAntigenTest {
+            return .detailStatusTestInverse
+        } else if isPartialVaccination {
+            return .startStatusPartial
         }
-        return showNotification ? UIImage.statusFullNotfication : UIImage.statusFullDetail
+        return showNotification ? .statusFullNotfication : .statusFullDetail
     }
 
     var isFavorite: Bool {
         certificateIsFavorite
     }
 
-    var isInvalid: Bool {
-        token.vaccinationCertificate.isExpired || token.isInvalid || token.isRevoked
-    }
+    lazy var isInvalid: Bool = isExpired || tokenIsInvalid || isRevoked
 
     var showFavorite: Bool = true
 
-    var qrCode: UIImage? {
-        let code = token.isRevoked ? "" : token.vaccinationQRCodeData
+    lazy var qrCode: UIImage? = {
+        let code = isRevoked ? "" : token.vaccinationQRCodeData
         return code.generateQRCode()
-    }
+    }()
 
     var name: String {
-        certificate.nam.fullName
+        dgc.nam.fullName
     }
 
     var actionTitle: String {
@@ -127,6 +180,29 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
     }
 
     func onClickFavorite() {
-        onFavorite(certificate.uvci)
+        onFavorite(dgc.uvci)
+    }
+}
+
+private extension Date {
+    func monthSinceString(_ date: Date) -> String {
+        String(
+            format: "certificate_timestamp_months".localized,
+            monthsSince(date)
+        )
+    }
+
+    func daysSinceString(_ date: Date) -> String {
+        String(
+            format: "certificate_timestamp_days".localized,
+            daysSince(date)
+        )
+    }
+
+    func hoursSinceString(_ date: Date) -> String {
+        String(
+            format: "certificate_timestamp_hours".localized,
+            hoursSince(date)
+        )
     }
 }

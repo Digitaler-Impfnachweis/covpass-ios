@@ -146,6 +146,22 @@
 
 "certificates_start_screen_pop_up_app_reference_button" = "OK";
 
+"certificate_type_recovery" = "Recovery";
+
+"certificate_type_basic_immunisation" = "Basic immunisation";
+
+"certificate_type_booster" = "Booster vaccination";
+
+"certificate_type_rapidtest" = "antigen rapid test";
+
+"certificate_type_pcrtest" = "PCR test";
+
+"certificate_timestamp_hours" = "%d hour(s) ago";
+
+"certificate_timestamp_days" = "%d day(s) ago";
+
+"certificate_timestamp_months" = "%d month(s) ago";
+
 "accessibility_certificates_start_screen_pop_up_app_reference_label" = "Close Pop-up";
 
 "accessibility_certificate_popup_checkapp_announce" = "The view \"Please scan!\" has been opened";

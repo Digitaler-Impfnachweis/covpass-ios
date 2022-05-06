@@ -53,7 +53,7 @@ public class CertificateCollectionViewCell: CardCollectionViewCell {
     @IBOutlet public var contentStackView: UIStackView!
     @IBOutlet public var titleStackView: UIStackView!
     @IBOutlet public var actionView: CardViewAction!
-    @IBOutlet public var titleView: PlainLabel!
+    @IBOutlet public var titleView: UILabel!
     @IBOutlet public var qrContainerView: QRContainerView!
     @IBOutlet public var favoriteButton: UIButton!
 
@@ -81,7 +81,7 @@ public class CertificateCollectionViewCell: CardCollectionViewCell {
         containerView.layer.cornerRadius = Constants.Layout.cornerRadius
         containerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onPressAction)))
 
-        contentStackView.setCustomSpacing(.space_8, after: titleStackView)
+        contentStackView.setCustomSpacing(.space_16, after: titleStackView)
     }
 
     override public func layoutSubviews() {
@@ -99,21 +99,21 @@ public class CertificateCollectionViewCell: CardCollectionViewCell {
         qrContainerView.image = vm.qrCode
         qrContainerView.layoutMargins.bottom = .space_18
         qrContainerView.isHidden = vm.qrCode == nil
-        qrContainerView.titleLabel.attributedText = vm.title.styledAs(.header_3).colored(vm.textColor)
-        qrContainerView.subtitleLabel.attributedText = vm.subtitle.styledAs(.body).colored(vm.textColor)
+        qrContainerView.title = vm.title
+        qrContainerView.subtitle = vm.subtitle
 
         qrContainerView.qrInfoText = Constants.qrInfoText
 
-        qrContainerView.showOverlay = vm.isInvalid
+        qrContainerView.isInvalid = vm.isInvalid
 
-        titleView.textableView.attributedText = vm.name.styledAs(.header_1).lineHeight(Constants.Layout.titleLineHeight).colored(vm.tintColor)
+        titleView.attributedText = vm.name.styledAs(.header_3).colored(vm.tintColor)
+        titleView.lineBreakMode = .byTruncatingTail
         titleView.backgroundColor = .clear
         favoriteButton.tintColor = vm.tintColor
         favoriteButton.setImage((vm.isFavorite ? UIImage.starFull : UIImage.starPartial).withRenderingMode(.alwaysTemplate), for: .normal)
         favoriteButton.isHidden = !vm.showFavorite
         let favoriteButtonAccessibilityText = vm.isFavorite ? Constants.Accessibility.favoriteActive : Constants.Accessibility.favoriteDeactive
         favoriteButton.enableAccessibility(label: favoriteButtonAccessibilityText, traits: .button)
-        contentStackView.setCustomSpacing(.space_2, after: titleView)
 
         actionView.titleLabel.attributedText = vm.actionTitle.styledAs(.body).lineHeight(Constants.Layout.actionLineHeight).colored(vm.tintColor)
         actionView.enableAccessibility(label: vm.actionTitle, hint: Constants.Accessibility.actionHint, traits: .button)

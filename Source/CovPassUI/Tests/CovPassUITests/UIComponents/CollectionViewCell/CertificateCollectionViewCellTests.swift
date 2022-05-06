@@ -60,8 +60,6 @@ class CertificateCollectionViewCellTests: XCTestCase {
         XCTAssertEqual(sut.qrContainerView.layoutMargins, .init(top: .zero, left: .zero, bottom: .space_18, right: .zero))
         XCTAssertFalse(sut.qrContainerView.isHidden)
         XCTAssertFalse(sut.qrContainerView.titleLabel.isHidden)
-
-        XCTAssertEqual(sut.titleView.textableView.attributedText, viewModel.name.styledAs(.header_1).lineHeight(33).colored(viewModel.tintColor))
         XCTAssertEqual(sut.titleView.backgroundColor, .clear)
 
         XCTAssertEqual(sut.actionView.tintColor, .neutralWhite)

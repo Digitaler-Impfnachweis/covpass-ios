@@ -27,12 +27,15 @@ class CertificateCardViewModelTests: XCTestCase {
     private func sut(token: ExtendedCBORWebToken) -> CertificateCardViewModel {
         .init(
             token: token,
+            vaccinations: [],
+            recoveries: [],
             isFavorite: false,
             showFavorite: false,
             onAction: { _ in },
             onFavorite: { _ in },
             repository: VaccinationRepositoryMock(),
-            boosterLogic: BoosterLogicMock()
+            boosterLogic: BoosterLogicMock(),
+            currentDate: .distantFuture
         )
     }
 
@@ -108,5 +111,291 @@ class CertificateCardViewModelTests: XCTestCase {
 
         // Then
         XCTAssertNotNil(qrCode)
+    }
+
+    func testTitle_vaccination_1_of_2() throws {
+        // Given
+        let token = try ExtendedCBORWebToken.token1Of2()
+        let sut = sut(token: token)
+
+        // When
+        let title = sut.title
+
+        // Then
+        XCTAssertEqual(title, "Vaccine dose 1 of 2")
+    }
+
+    func testTitle_vaccination_2_of_2() throws {
+        // Given
+        let token = try ExtendedCBORWebToken.token2Of2()
+        let sut = sut(token: token)
+
+        // When
+        let title = sut.title
+
+        // Then
+        XCTAssertEqual(title, "Basic immunisation")
+    }
+
+    func testTitle_vaccination_3_of_2() {
+        // Given
+        let token = CBORWebToken.mockVaccinationCertificate.doseNumber(3)
+        let sut = sut(token: .init(vaccinationCertificate: token, vaccinationQRCodeData: ""))
+
+        // When
+        let title = sut.title
+
+        // Then
+        XCTAssertEqual(title, "Booster vaccination")
+    }
+
+    func testTitle_expired() {
+        // Given
+        let token = ExtendedCBORWebToken.expiredVaccination()
+        let sut = sut(token: token)
+
+        // When
+        let title = sut.title
+
+        // Then
+        XCTAssertEqual(title, "EU Digital COVID Certificate")
+    }
+
+    func testTitle_revoked() throws {
+        // Given
+        var token = try ExtendedCBORWebToken.mock()
+        token.revoked = true
+        let sut = sut(token: token)
+
+        // When
+        let title = sut.title
+
+        // Then
+        XCTAssertEqual(title, "EU Digital COVID Certificate")
+    }
+
+    func testTitle_invalid() throws {
+        // Given
+        var token = try ExtendedCBORWebToken.mock()
+        token.invalid = true
+        let sut = sut(token: token)
+
+        // When
+        let title = sut.title
+
+        // Then
+        XCTAssertEqual(title, "EU Digital COVID Certificate")
+    }
+
+    func testTitle_pcr_test() {
+        // Given
+        let token = ExtendedCBORWebToken.pcrTest()
+        let sut = sut(token: token)
+
+        // When
+        let title = sut.title
+
+        // Then
+        XCTAssertEqual(title, "PCR test")
+    }
+
+    func testTitle_antigen_test() {
+        // Given
+        let token = ExtendedCBORWebToken.antigenTest()
+        let sut = sut(token: token)
+
+        // When
+        let title = sut.title
+
+        // Then
+        XCTAssertEqual(title, "Rapid antigen test")
+    }
+
+    func testSubtitle_vaccination_1_of_2() throws {
+        // Given
+        let token = try ExtendedCBORWebToken.token1Of2()
+        let sut = sut(token: token)
+
+        // When
+        let subtitle = sut.subtitle
+
+        // Then
+        XCTAssertEqual(subtitle, "23758 month(s) ago")
+    }
+
+    func testSubtitle_vaccination_2_of_2() throws {
+        // Given
+        let token = try ExtendedCBORWebToken.token2Of2()
+        let sut = sut(token: token)
+
+        // When
+        let subtitle = sut.subtitle
+
+        // Then
+        XCTAssertEqual(subtitle, "23758 month(s) ago")
+    }
+
+    func testSubtitle_vaccination_3_of_2() {
+        // Given
+        let token = CBORWebToken.mockVaccinationCertificate.doseNumber(3)
+        let sut = sut(token: .init(vaccinationCertificate: token, vaccinationQRCodeData: ""))
+
+        // When
+        let subtitle = sut.subtitle
+
+        // Then
+        XCTAssertEqual(subtitle, "723180 day(s) ago")
+    }
+
+    func testSubtitle_expired() {
+        // Given
+        let token = ExtendedCBORWebToken.expiredVaccination()
+        let sut = sut(token: token)
+
+        // When
+        let subtitle = sut.subtitle
+
+        // Then
+        XCTAssertEqual(subtitle, "Expired")
+    }
+
+    func testSubtitle_revoked() throws {
+        // Given
+        var token = try ExtendedCBORWebToken.mock()
+        token.revoked = true
+        let sut = sut(token: token)
+
+        // When
+        let subtitle = sut.subtitle
+
+        // Then
+        XCTAssertEqual(subtitle, "Invalid")
+    }
+
+    func testSubtitle_invalid() throws {
+        // Given
+        var token = try ExtendedCBORWebToken.mock()
+        token.invalid = true
+        let sut = sut(token: token)
+
+        // When
+        let subtitle = sut.subtitle
+
+        // Then
+        XCTAssertEqual(subtitle, "Invalid")
+    }
+
+    func testSubtitle_pcr_test() {
+        // Given
+        let token = ExtendedCBORWebToken.pcrTest()
+        let sut = sut(token: token)
+
+        // When
+        let subtitle = sut.subtitle
+
+        // Then
+        XCTAssertEqual(subtitle, "17531640 hour(s) ago")
+    }
+
+    func testSubtitle_antigen_test() {
+        // Given
+        let token = ExtendedCBORWebToken.antigenTest()
+        let sut = sut(token: token)
+
+        // When
+        let subtitle = sut.subtitle
+
+        // Then
+        XCTAssertEqual(subtitle, "17531640 hour(s) ago")
+    }
+
+    func testIconTintColor_invalid() throws {
+        // Given
+        var token = try ExtendedCBORWebToken.mock()
+        token.invalid = true
+        let sut = sut(token: token)
+
+        // When
+        let iconTintColor = sut.iconTintColor
+
+        // Then
+        XCTAssertEqual(iconTintColor, UIColor(hexString: "878787"))
+    }
+
+    func testIconTintColor_not_invalid() throws {
+        // Given
+        let token = try ExtendedCBORWebToken.mock()
+        let sut = sut(token: token)
+
+        // When
+        let iconTintColor = sut.iconTintColor
+
+        // Then
+        XCTAssertEqual(iconTintColor, .onBrandAccent70)
+    }
+}
+
+private extension ExtendedCBORWebToken {
+    static func pcrTest() -> Self {
+        .init(
+            vaccinationCertificate: CBORWebToken(
+                iss: "DE",
+                iat: Date(timeIntervalSinceReferenceDate: 0),
+                exp: .distantFuture+1000,
+                hcert: HealthCertificateClaim(
+                    dgc: DigitalGreenCertificate(
+                        nam: Name(
+                            gn: "Doe",
+                            fn: "John",
+                            gnt: "DOE",
+                            fnt: "JOHN"
+                        ),
+                        dob: DateUtils.isoDateFormatter.date(from: "1990-01-01"),
+                        dobString: "1990-01-01",
+                        t: [
+                            .init(
+                                tg: "840539006",
+                                tt: "LP6464-4",
+                                nm: "SARS-CoV-2 PCR Test",
+                                ma: "1360",
+                                sc: Date(timeIntervalSinceReferenceDate: 0),
+                                tr: "260373001",
+                                tc: "Test Center",
+                                co: "DE",
+                                is: "Robert Koch-Institut iOS",
+                                ci: "URN:UVCI:01DE/IBMT102/18Q12HTUJ45NO7ZTR2RGAS#C"
+                            )
+                        ],
+                        ver: "1.0.0"
+                    )
+                )
+            ),
+            vaccinationQRCodeData: ""
+        )
+    }
+
+    static func antigenTest() -> Self {
+        var token = pcrTest()
+        token.vaccinationCertificate.hcert.dgc.t = [
+            .init(
+                tg: "840539006",
+                tt: "LP217198-3",
+                nm: "SARS-CoV-2 PCR Test",
+                ma: "1360",
+                sc: Date(timeIntervalSinceReferenceDate: 0),
+                tr: "260373001",
+                tc: "Test Center",
+                co: "DE",
+                is: "Robert Koch-Institut iOS",
+                ci: "URN:UVCI:01DE/IBMT102/18Q12HTUJ45NO7ZTR2RGAS#C"
+            )
+        ]
+        return token
+    }
+
+    static func expiredVaccination() -> Self {
+        var token = CBORWebToken.mockVaccinationCertificate
+        token.exp = token.iat ?? Date(timeIntervalSinceReferenceDate: -1000)
+        return .init(vaccinationCertificate: token, vaccinationQRCodeData: "")
     }
 }

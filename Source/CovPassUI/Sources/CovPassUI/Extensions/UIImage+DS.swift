@@ -84,6 +84,9 @@ public extension UIImage {
     @ImageLoader(name: "star_partial")
     private(set) static var starPartial
 
+    @ImageLoader(name: "start-status-partial")
+    private(set) static var startStatusPartial
+
     @ImageLoader(name: "help")
     private(set) static var help
 
@@ -224,6 +227,9 @@ public extension UIImage {
     
     @ImageLoader(name: "detail-status-test")
     private(set) static var detailStatusTest
+    
+    @ImageLoader(name: "detail-status-test-inverse")
+    private(set) static var detailStatusTestInverse
     
     @ImageLoader(name: "icon-card-inverse")
     private(set) static var iconCardInverse

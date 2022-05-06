@@ -81,7 +81,7 @@ class CertificatesOverviewViewController: UIViewController {
         headerView.attributedTitleText = "certificate_action_button_check_validity".localized.styledAs(.header_3).colored(.brandBase).lineHeight(Constants.Layout.actionLineHeight)
         headerView.titleButton.isHidden = !viewModel.hasCertificates
         headerView.titleIcon.isHidden = !viewModel.hasCertificates
-        headerView.image = .help
+        headerView.image = .settings
         headerView.actionButton.enableAccessibility(label:  Constants.Accessibility.moreInformation.label)
 
         headerView.titleAction = { [weak self] in
