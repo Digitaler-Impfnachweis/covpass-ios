@@ -22,6 +22,7 @@ public class VaccinationRepositoryMock: VaccinationRepositoryProtocol {
     var saveError: Error?
     var receivedTokens = [ExtendedCBORWebToken]()
     var deleteError: Error?
+    var qrCodeData: String?
     
     public func matchedCertificates(for certificateList: CertificateList) -> [CertificatePair] {
         var pairs = [CertificatePair]()
@@ -110,8 +111,9 @@ public class VaccinationRepositoryMock: VaccinationRepositoryProtocol {
         .value(favoriteToggle)
     }
 
-    public func scanCertificate(_: String, isCountRuleEnabled: Bool, expirationRuleIsActive: Bool) -> Promise<QRCodeScanable> {
-        .value(try! ExtendedCBORWebToken.mock())
+    public func scanCertificate(_ qrCodeData: String, isCountRuleEnabled: Bool, expirationRuleIsActive: Bool) -> Promise<QRCodeScanable> {
+        self.qrCodeData = qrCodeData
+        return .value(try! ExtendedCBORWebToken.mock())
     }
 
     public func checkCertificate(_: String) -> Promise<CBORWebToken> {

@@ -60,7 +60,7 @@ public extension Optional where Wrapped == ValidationResultViewModel {
             return Constants.Keys.result_2G_2nd_gproof_valid_boosted
         } else if cert.hcert.dgc.isVaccinationBoosted {
             return Constants.Keys.result_2G_2nd_gproof_valid_boosted
-        } else if cert.hcert.dgc.isFullyImmunized {
+        } else if cert.hcert.dgc.v?.first?.fullImmunizationCheck ?? false {
             return Constants.Keys.result_2G_2nd_gproof_valid_basic
         } else {
             return Constants.Keys.result_2G_empty_subtitle

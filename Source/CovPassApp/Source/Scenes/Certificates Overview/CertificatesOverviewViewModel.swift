@@ -224,8 +224,8 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
                 let ticket = try? JSONDecoder().decode(ValidationServiceInitialisation.self, from: data) {
                 return .value(ticket)
             }
-            self.lastPlayload = payload
-            return self.repository.scanCertificate(payload, isCountRuleEnabled: true, expirationRuleIsActive: false)
+            self.lastPlayload = payload.trimmingCharacters(in: .whitespaces)
+            return self.repository.scanCertificate(self.lastPlayload, isCountRuleEnabled: true, expirationRuleIsActive: false)
         }
         .done { certificate in
             switch certificate {

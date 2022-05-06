@@ -182,6 +182,10 @@ public extension Vaccination {
     var fullImmunization: Bool {
         (dn >= sd && !isJohnsonJohnson) || isBoosted() || isFullImmunizationAfterRecovery
     }
+    
+    var fullImmunizationCheck: Bool {
+        dn >= sd || isBoosted() || isFullImmunizationAfterRecovery
+    }
 
     /// `True` if vaccination is a booster vaccination (J&J 2/2, all other vaccination 3/3)
     func isBoosted(vaccinations: [Vaccination]? = nil, recoveries: [Recovery]? = nil) -> Bool {

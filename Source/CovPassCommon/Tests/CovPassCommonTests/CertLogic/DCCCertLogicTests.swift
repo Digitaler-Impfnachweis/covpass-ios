@@ -162,6 +162,7 @@ class DCCCertLogicTests: XCTestCase {
 
     func testValidRecovery() throws {
         let cert = CBORWebToken.mockRecoveryCertificate
+        cert.hcert.dgc.r!.first!.fr = try XCTUnwrap(Calendar.current.date(byAdding: .day, value: -29, to: Date()))
         let res = try sut.validate(countryCode: "DE", validationClock: Date(), certificate: cert)
 
         XCTAssertEqual(res.count, 2)

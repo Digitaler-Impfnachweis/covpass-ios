@@ -21,6 +21,7 @@ class CertificatesOverviewRouterMock: CertificatesOverviewRouterProtocol {
     var error: Error?
     var scanCountErrorResponse: ScanCountErrorResponse = .download
     var receivedFaqURL: URL?
+    var scanQRCodePayload: String = ""
 
     func showCheckSituation(userDefaults: Persistence) -> Promise<Void> {
         showCheckSituationExpectation.fulfill()
@@ -60,7 +61,7 @@ class CertificatesOverviewRouterMock: CertificatesOverviewRouterProtocol {
         if let error = error {
             return .init(error: error)
         }
-        return .value(.success(""))
+        return .value(.success(scanQRCodePayload))
     }
 
     func showAppInformation() {

@@ -578,6 +578,31 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         XCTAssertEqual(url, expectedURL)
     }
     
+    func testScanCertificate_withTrailingWhitespace() throws {
+        // Given
+        let router = CertificatesOverviewRouterMock()
+        router.error = nil
+        let qrCodeData = "HC1:6BFOXN%TSMAHN-HWWK2RL99TEZP3Z9M52N651WGRJPTWG%E5EM5K:3.UAXCVEM7F/8X*G-O9 WUQRELS4 CT*OVN%2LXK7Y4J1T4VN4%KD-4Q/S8ALD-INOV6$0+BN9Y431T6$K6NFNSVYWV9Y4.$S6ZC0JB9MBKD38D0MJC7ZS2%KYZPJWLK34JWLG56H0API0Z.2G F.J2CJ0R$F:L6TM8*OCUNAGK127JSBCVAE%7E0L24GSTQHG0799QD0AU3ETI08N2/HS$*S-EKIMIBRU4SI.J9WVHPYH9UE2YHB+HVLIJRH.OG4SIIRH5YEUZUWM6J$7XLH5G6TH95NITK292W7*RBT1KCGTHQSEQEC5L64HX6IAS3DS2980IQ.DPUHLW$GAHLW 70SO:GOLIROGO3T59YLLYP-HQLTQ:GOOGO.T6FT5D75W9AAABG643KKEWP6VI*.2R+K2O94L8-YBF3A*KV9TS$-I.W67+C%LLMDGYCUE-B/192FDS0EK6F AB-9BU7W5VP+4UC+TTM6OTKJEDA.TFBO$PSQ405FDK1 "
+        router.scanQRCodePayload = qrCodeData
+        sut = CertificatesOverviewViewModel(
+            router: router,
+            repository: vaccinationRepository,
+            revocationRepository: CertificateRevocationRepositoryMock(),
+            certLogic: DCCCertLogicMock(),
+            boosterLogic: BoosterLogicMock(),
+            userDefaults: userDefaults,
+            locale: Locale(identifier: "EN")
+        )
+
+        // When
+        sut.scanCertificate(withIntroduction: false)
+        RunLoop.main.run(for: 0.1)
+
+        // Then
+        XCTAssertEqual(qrCodeData.trimmingCharacters(in: .whitespaces), vaccinationRepository.qrCodeData)
+        wait(for: [router.showCertificateExpectation], timeout: 2)
+    }
+    
     func testScanCertificate_revokedCertificate() throws {
         // Given
         XCTAssertFalse(sut.isLoading)
