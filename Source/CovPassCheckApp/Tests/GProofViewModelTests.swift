@@ -741,7 +741,10 @@ class GProofViewModelTests: XCTestCase {
         XCTAssertEqual(sut.resultPersonIcon, UIImage.iconCardInverse)
         
         // GIVEN
-        vaccinationRepoMock.checkedCert = CBORWebToken.mockVaccinationCertificate
+        let token = CBORWebToken.mockVaccinationCertificate
+        let dateForFifteenMonthAgo = try XCTUnwrap(Calendar.current.date(byAdding: .month, value: -15, to: Date()))
+        token.hcert.dgc.v!.first!.dt = dateForFifteenMonthAgo
+        vaccinationRepoMock.checkedCert = token
         certLogicMock.validateResult = [.init(rule: nil, result: .passed, validationErrors: nil)]
         
         // WHEN
@@ -854,7 +857,10 @@ class GProofViewModelTests: XCTestCase {
     
     func testScanBasisImmunizationCertificateThanOpenCertificateFailingDueToRRDE0002() throws {
         // GIVEN
-        vaccinationRepoMock.checkedCert = CBORWebToken.mockVaccinationCertificate
+        let token = CBORWebToken.mockVaccinationCertificate
+        let dateForFifteenMonthAgo = try XCTUnwrap(Calendar.current.date(byAdding: .month, value: -15, to: Date()))
+        token.hcert.dgc.v!.first!.dt = dateForFifteenMonthAgo
+        vaccinationRepoMock.checkedCert = token
         certLogicMock.validateResult = [.init(rule: nil, result: .passed, validationErrors: nil)]
         
         // WHEN

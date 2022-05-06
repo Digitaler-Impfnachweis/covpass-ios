@@ -332,6 +332,7 @@ class CertificateDetailViewControllerSnapshotTests: BaseSnapShotTests {
         // Recovery
         var cert4: ExtendedCBORWebToken = CBORWebToken.mockRecoveryCertificate.extended()
         cert4.vaccinationCertificate.hcert.dgc.nam.fn = "John 1"
+        cert4.vaccinationCertificate.hcert.dgc.r!.first!.du = DateUtils.parseDate("2027-04-26T15:05:00")!
         cert4.vaccinationQRCodeData = "4"
 
         // Vaccination Partly
