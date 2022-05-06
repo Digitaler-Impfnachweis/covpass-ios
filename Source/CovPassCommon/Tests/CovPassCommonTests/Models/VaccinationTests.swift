@@ -301,6 +301,7 @@ class VaccinationTests: XCTestCase {
         
         // THEN
         XCTAssertFalse(sut.fullImmunization)
+        XCTAssertTrue(sut.fullImmunizationCheck)
         XCTAssertFalse(sut.fullImmunizationValid)
         XCTAssertFalse(sut.isFullImmunizationAfterRecovery)
         XCTAssertFalse(sut.isBoosted())
@@ -315,6 +316,7 @@ class VaccinationTests: XCTestCase {
         
         // THEN
         XCTAssertTrue(sut.fullImmunization)
+        XCTAssertTrue(sut.fullImmunizationCheck)
         XCTAssertTrue(sut.fullImmunizationValid)
         XCTAssertFalse(sut.isFullImmunizationAfterRecovery)
         XCTAssertTrue(sut.isBoosted())

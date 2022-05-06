@@ -47,7 +47,7 @@ extension CBORWebToken {
         if hcert.dgc.isVaccinationBoosted {
             stringWithPlaceholder = Constants.Keys.result_2G_2nd_timestamp_days
             componentToUse = [.day]
-        } else if isVaccination && hcert.dgc.isFullyImmunized {
+        } else if hcert.dgc.v?.first?.fullImmunizationCheck ?? false {
             stringWithPlaceholder = Constants.Keys.result_2G_2nd_timestamp_months
         }
         guard let fromDate = hcert.dgc.v?.first?.dt else {
