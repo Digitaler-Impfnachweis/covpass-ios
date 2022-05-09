@@ -172,4 +172,39 @@ class CertificateItemDetailViewModelTests: XCTestCase {
             "The certificate was revoked by the certificate issuer due to an official decision."
         )
     }
+
+    func testItems_tc_not_nil() {
+        // Given
+        let cborWebToken = CBORWebToken.mockTestCertificate
+        let token = cborWebToken.extended()
+        configureSut(token: token)
+
+        // When
+        let items = sut.items
+
+        // Then
+        let listContentItem = items.first { item in
+            item.label == "Testzentrum oder -einrichtung / Testing centre or facility"
+        }
+        XCTAssertEqual(listContentItem?.value, "Test Center")
+    }
+
+    func testItems_tc_is_nil() throws {
+        // Given
+        var cborWebToken = CBORWebToken.mockTestCertificate
+        let test = try XCTUnwrap(cborWebToken.hcert.dgc.t?.first)
+        test.tc = nil
+        cborWebToken.hcert.dgc.t = [test]
+        let token = cborWebToken.extended()
+        configureSut(token: token)
+
+        // When
+        let items = sut.items
+
+        // Then
+        let listContentItem = items.first { item in
+            item.label == "Testzentrum oder -einrichtung / Testing centre or facility"
+        }
+        XCTAssertEqual(listContentItem?.value, "")
+    }
 }

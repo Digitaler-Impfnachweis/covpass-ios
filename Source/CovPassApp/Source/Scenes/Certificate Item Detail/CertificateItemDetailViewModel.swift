@@ -115,7 +115,7 @@ class CertificateItemDetailViewModel: CertificateItemDetailViewModelProtocol {
                 ListContentItem("test_certificate_detail_view_data_test_date_and_time".localized, DateUtils.displayIsoDateTimeFormatter.string(from: t.sc),
                             accessibilityLabel(for: t.sc, label: "test_certificate_detail_view_data_test_date_and_time".localized, includesTime: true)),
                 ListContentItem("test_certificate_detail_view_data_test_results".localized, t.trDisplayName),
-                ListContentItem("test_certificate_detail_view_data_test_centre".localized, t.tc),
+                ListContentItem("test_certificate_detail_view_data_test_centre".localized, t.tc ?? ""),
                 ListContentItem("test_certificate_detail_view_data_test_country".localized, countryLocalized(t)),
                 ListContentItem("test_certificate_detail_view_data_test_issuer".localized, t.is),
                 ListContentItem("test_certificate_detail_view_data_test_identifier".localized, t.ciDisplayName),

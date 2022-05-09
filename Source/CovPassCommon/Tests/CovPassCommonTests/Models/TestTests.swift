@@ -85,5 +85,76 @@ class TestTests: XCTestCase {
         XCTAssertEqual(sut.trDisplayName, "Not detected")
         XCTAssertEqual(sut.ci, "URN:UVCI:01DE/IZ12345A/5CWLU12RNOB9RXSEOP6FG8#W")
         XCTAssertEqual(sut.ciDisplayName, "01DE/IZ12345A/5CWLU12RNOB9RXSEOP6FG8#W")
+        XCTAssertEqual(sut.tc, "Testzentrum K00f6ln Hbf")
+    }
+
+    func testTc_not_nil() {
+        // When
+        let tc = sut.tc
+
+        // Then
+        XCTAssertEqual(tc, "tc")
+    }
+
+    func testTc_nil() {
+        // Given
+        sut = .init(
+            tg: "tg", tt: "tt", nm: "nm", ma: "ma", sc: Date(),
+            tr: "tr", tc: nil, co: "co", is: "is", ci: "ci")
+        // When
+        let tc = sut.tc
+
+        // Then
+        XCTAssertNil(tc)
+    }
+
+    func testInitWithCoder_tc_nil() throws {
+        // Given
+        let json = """
+            {
+                "ci": "URN:UVCI:01DE/IZ12345A/5CWLU12RNOB9RXSEOP6FG8#W",
+                "co": "DE",
+                "dr": "2021-05-30T10:30:15Z",
+                "is": "Robert Koch-Institut",
+                "sc": "2021-05-30T10:12:22Z",
+                "tc": null,
+                "tg": "840539006",
+                "tr": "260415000",
+                "tt": "LP217198-3",
+                "ma": "1762"
+            }
+        """
+        let data = try XCTUnwrap(json.data(using: .utf8))
+
+        // When
+        sut = try JSONDecoder().decode(Test.self, from: data)
+
+        // Then
+        XCTAssertNil(sut.tc)
+    }
+
+    func testInitFromDecoder_tc_not_nil() throws {
+        // Given
+        let json = """
+            {
+                "ci": "URN:UVCI:01DE/IZ12345A/5CWLU12RNOB9RXSEOP6FG8#W",
+                "co": "DE",
+                "dr": "2021-05-30T10:30:15Z",
+                "is": "Robert Koch-Institut",
+                "sc": "2021-05-30T10:12:22Z",
+                "tg": "840539006",
+                "tr": "260415000",
+                "tt": "LP217198-3",
+                "ma": "1762",
+                "tc": "Testcenter Köln-Buchforst"
+            }
+        """
+        let data = try XCTUnwrap(json.data(using: .utf8))
+
+        // When
+        sut = try JSONDecoder().decode(Test.self, from: data)
+
+        // Then
+        XCTAssertEqual(sut.tc, "Testcenter Köln-Buchforst")
     }
 }
