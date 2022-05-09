@@ -337,6 +337,7 @@
 		E7170774280091A9000B2E32 /* revocation-trust-key-release.pem in Resources */ = {isa = PBXBuildFile; fileRef = E7170773280091A9000B2E32 /* revocation-trust-key-release.pem */; };
 		E745AF1C27DA3C7000B3671E /* RevocationInfoViewControllerSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E745AF1A27DA3B9500B3671E /* RevocationInfoViewControllerSnapshotTests.swift */; };
 		E745AF2227DA3F2500B3671E /* CoseSign1Message+Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E745AF2127DA3F2400B3671E /* CoseSign1Message+Mock.swift */; };
+		E746D97D28290CA5005C31BA /* RuleCheckDetailViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E746D97C28290CA5005C31BA /* RuleCheckDetailViewModelTests.swift */; };
 		E74D4C7A2810384200EF5D6F /* CertificateDetailRouterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74D4C792810384200EF5D6F /* CertificateDetailRouterMock.swift */; };
 		E75234DC27CE6EF200B744AB /* ReissueResultViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E75234DB27CE6EF200B744AB /* ReissueResultViewModelTests.swift */; };
 		E75234E127CE6FE700B744AB /* ReissueResultRouterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E75234E027CE6FE700B744AB /* ReissueResultRouterMock.swift */; };
@@ -346,7 +347,6 @@
 		E76B96EA27C50F130030FC0C /* URLSession+CertificateReissue.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76B96E927C50F130030FC0C /* URLSession+CertificateReissue.swift */; };
 		E76B96EC27C5120A0030FC0C /* URLSession+CertificateReissueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76B96EB27C5120A0030FC0C /* URLSession+CertificateReissueTests.swift */; };
 		E76B998927AAE8220029FCB1 /* CertificateDetailViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76B998827AAE8220029FCB1 /* CertificateDetailViewModelTests.swift */; };
-		E77F382228257AAA00FB7292 /* RuleCheckDetailViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77F382128257AAA00FB7292 /* RuleCheckDetailViewModelTests.swift */; };
 		E782BBA027D280CF00CC033A /* ExtendedCBORWekToken+Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E782BB9F27D280CF00CC033A /* ExtendedCBORWekToken+Mock.swift */; };
 		E79CF9EC27E8923C00C4619E /* URLSession+CertificateRevocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79CF9EB27E8923C00C4619E /* URLSession+CertificateRevocation.swift */; };
 		E79CF9F027E8981100C4619E /* URLSession+CertificateRevocationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79CF9EE27E8974800C4619E /* URLSession+CertificateRevocationTests.swift */; };
@@ -761,6 +761,7 @@
 		E7170773280091A9000B2E32 /* revocation-trust-key-release.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "revocation-trust-key-release.pem"; sourceTree = "<group>"; };
 		E745AF1A27DA3B9500B3671E /* RevocationInfoViewControllerSnapshotTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RevocationInfoViewControllerSnapshotTests.swift; sourceTree = "<group>"; };
 		E745AF2127DA3F2400B3671E /* CoseSign1Message+Mock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CoseSign1Message+Mock.swift"; sourceTree = "<group>"; };
+		E746D97C28290CA5005C31BA /* RuleCheckDetailViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleCheckDetailViewModelTests.swift; sourceTree = "<group>"; };
 		E74D4C792810384200EF5D6F /* CertificateDetailRouterMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateDetailRouterMock.swift; sourceTree = "<group>"; };
 		E75234DB27CE6EF200B744AB /* ReissueResultViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReissueResultViewModelTests.swift; sourceTree = "<group>"; };
 		E75234E027CE6FE700B744AB /* ReissueResultRouterMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReissueResultRouterMock.swift; sourceTree = "<group>"; };
@@ -770,7 +771,6 @@
 		E76B96E927C50F130030FC0C /* URLSession+CertificateReissue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+CertificateReissue.swift"; sourceTree = "<group>"; };
 		E76B96EB27C5120A0030FC0C /* URLSession+CertificateReissueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+CertificateReissueTests.swift"; sourceTree = "<group>"; };
 		E76B998827AAE8220029FCB1 /* CertificateDetailViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateDetailViewModelTests.swift; sourceTree = "<group>"; };
-		E77F382128257AAA00FB7292 /* RuleCheckDetailViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleCheckDetailViewModelTests.swift; sourceTree = "<group>"; };
 		E782BB9F27D280CF00CC033A /* ExtendedCBORWekToken+Mock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ExtendedCBORWekToken+Mock.swift"; sourceTree = "<group>"; };
 		E79CF9EB27E8923C00C4619E /* URLSession+CertificateRevocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+CertificateRevocation.swift"; sourceTree = "<group>"; };
 		E79CF9EE27E8974800C4619E /* URLSession+CertificateRevocationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+CertificateRevocationTests.swift"; sourceTree = "<group>"; };
@@ -1562,7 +1562,6 @@
 				21FBCA55264F011800CAEF44 /* Main */,
 				21FBCA57264F011800CAEF44 /* Onboarding */,
 				096EB4D127D768D3005CE76F /* RevocationSettings */,
-				E77F381F28257A6E00FB7292 /* RuleCheck */,
 				09FA0830271F02F600805629 /* TrustedListUpdate */,
 				09AC1DE52757ACCE008356CD /* Validation Result */,
 				21FBCA37264F011800CAEF44 /* Validator Overview */,
@@ -2083,8 +2082,9 @@
 			isa = PBXGroup;
 			children = (
 				E70C3E9B27A955A1001F07FF /* Mocks */,
-				E70C3E9927A95523001F07FF /* RuleCheckViewModelTests.swift */,
+				E746D97B28290C72005C31BA /* RuleCheckDetail */,
 				09590D1A2715E2E8004410D7 /* RuleCheckViewControllerSnapshotTests.swift */,
+				E70C3E9927A95523001F07FF /* RuleCheckViewModelTests.swift */,
 			);
 			path = RuleCheck;
 			sourceTree = "<group>";
@@ -2131,6 +2131,14 @@
 				E745AF1A27DA3B9500B3671E /* RevocationInfoViewControllerSnapshotTests.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		E746D97B28290C72005C31BA /* RuleCheckDetail */ = {
+			isa = PBXGroup;
+			children = (
+				E746D97C28290CA5005C31BA /* RuleCheckDetailViewModelTests.swift */,
+			);
+			path = RuleCheckDetail;
 			sourceTree = "<group>";
 		};
 		E74D4C782810382200EF5D6F /* Mocks */ = {
@@ -2182,22 +2190,6 @@
 				E76B998827AAE8220029FCB1 /* CertificateDetailViewModelTests.swift */,
 			);
 			path = "Certificate Detail";
-			sourceTree = "<group>";
-		};
-		E77F381F28257A6E00FB7292 /* RuleCheck */ = {
-			isa = PBXGroup;
-			children = (
-				E77F382028257A7B00FB7292 /* RuleCheckDetail */,
-			);
-			path = RuleCheck;
-			sourceTree = "<group>";
-		};
-		E77F382028257A7B00FB7292 /* RuleCheckDetail */ = {
-			isa = PBXGroup;
-			children = (
-				E77F382128257AAA00FB7292 /* RuleCheckDetailViewModelTests.swift */,
-			);
-			path = RuleCheckDetail;
 			sourceTree = "<group>";
 		};
 		E79CF9ED27E896FC00C4619E /* Extensions */ = {
@@ -2651,7 +2643,7 @@
 				216D202B264EFA6600370F16 /* CertificateViewControllerTests.swift in Sources */,
 				E70C3E9A27A95523001F07FF /* RuleCheckViewModelTests.swift in Sources */,
 				E7CDDC8F28072F59006B5190 /* VaccinationCertificateItemViewModelTests.swift in Sources */,
-				E77F382228257AAA00FB7292 /* RuleCheckDetailViewModelTests.swift in Sources */,
+				E746D97D28290CA5005C31BA /* RuleCheckDetailViewModelTests.swift in Sources */,
 				0993B1692762090A00217884 /* ValidationFailedSnapShotTests.swift in Sources */,
 				09D5812127C27CB700CB50CB /* ReissueStartViewModelTests.swift in Sources */,
 				E76B96EC27C5120A0030FC0C /* URLSession+CertificateReissueTests.swift in Sources */,

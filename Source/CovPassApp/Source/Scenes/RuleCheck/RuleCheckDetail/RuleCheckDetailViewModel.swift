@@ -122,7 +122,7 @@ class RuleCheckDetailViewModel {
     }
 
     private var dob: String {
-        return DateUtils.displayDateOfBirth(dgc)
+        DateUtils.displayIsoDateOfBirth(dgc)
     }
 
     private func results(for result: CertLogic.Result, and pattern: String) -> [String] {
