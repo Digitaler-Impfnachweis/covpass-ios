@@ -86,8 +86,8 @@ class VaccinationRepositoryTests: XCTestCase {
     }
 
     func testCheckCertificateValidEC() throws {
-        let res = try sut.checkCertificate(CertificateMock.validCertificate).wait()
-        XCTAssertEqual(res.iss, "DE")
+        let res = try sut.checkCertificate(CertificateMock.validCertificate2).wait()
+        XCTAssertEqual(res.iss, "IT")
     }
 
 //    func testCheckCertificateValidRSA() throws {
@@ -134,7 +134,7 @@ class VaccinationRepositoryTests: XCTestCase {
     
     func testCheckCertificateInvalidEntity() {
         do {
-            let res = try sut.checkCertificate(CertificateMock.validCertificate).wait()
+            let res = try sut.checkCertificate(CertificateMock.validCertificate2).wait()
             res.hcert.dgc.v?.first?.ci = "URN:UVCI:01DE/foobar/F4G7014KQQ2XD0NY8FJHSTDXZ#S"
 
             try sut.validateEntity(res)
@@ -204,7 +204,7 @@ class VaccinationRepositoryTests: XCTestCase {
                 certificates: [
                     ExtendedCBORWebToken(
                         vaccinationCertificate: try JSONDecoder().decode(CBORWebToken.self, from: Data.json("CBORWebToken")),
-                        vaccinationQRCodeData: CertificateMock.validCertificate)
+                        vaccinationQRCodeData: CertificateMock.validCertificate2)
                 ],
                 favoriteCertificateId: "1"
             )
@@ -382,8 +382,8 @@ class VaccinationRepositoryTests: XCTestCase {
     }
 
     func testCheckCertificate() throws {
-        let token = try sut.checkCertificate(CertificateMock.validCertificate).wait()
-        XCTAssertEqual(token.hcert.dgc.uvci, "01DE/00100/1119349007/F4G7014KQQ2XD0NY8FJHSTDXZ#S")
+        let token = try sut.checkCertificate(CertificateMock.validCertificate2).wait()
+        XCTAssertEqual(token.hcert.dgc.uvci, "URN:UVCI:01DE/84503/1651139518/DXSGWLWL40SU8ZFKIYIBK30A4#S")
     }
 
     func testCheckCertificateFails() {
@@ -522,8 +522,8 @@ class VaccinationRepositoryTests: XCTestCase {
     }
 
     func testScanCertificate() throws {
-        let token = try sut.scanCertificate(CertificateMock.validCertificate, isCountRuleEnabled: true, expirationRuleIsActive: true).wait()
-        XCTAssertEqual((token as! ExtendedCBORWebToken).vaccinationCertificate.hcert.dgc.uvci, "01DE/00100/1119349007/F4G7014KQQ2XD0NY8FJHSTDXZ#S")
+        let token = try sut.scanCertificate(CertificateMock.validCertificate2, isCountRuleEnabled: true, expirationRuleIsActive: true).wait()
+        XCTAssertEqual((token as! ExtendedCBORWebToken).vaccinationCertificate.hcert.dgc.uvci, "URN:UVCI:01DE/84503/1651139518/DXSGWLWL40SU8ZFKIYIBK30A4#S")
     }
 
     func testScanCertificateFailsPositive() {
@@ -538,8 +538,8 @@ class VaccinationRepositoryTests: XCTestCase {
 
     func testScanCertificateFailsExistingQRCode() {
         do {
-            _ = try sut.scanCertificate(CertificateMock.validCertificate, isCountRuleEnabled: true, expirationRuleIsActive: true).wait()
-            _ = try sut.scanCertificate(CertificateMock.validCertificate, isCountRuleEnabled: true, expirationRuleIsActive: true).wait()
+            _ = try sut.scanCertificate(CertificateMock.validCertificate2, isCountRuleEnabled: true, expirationRuleIsActive: true).wait()
+            _ = try sut.scanCertificate(CertificateMock.validCertificate2, isCountRuleEnabled: true, expirationRuleIsActive: true).wait()
             XCTFail("Should fail")
         } catch {
             XCTAssertEqual(error.localizedDescription, QRCodeError.qrCodeExists.localizedDescription)
@@ -563,7 +563,7 @@ class VaccinationRepositoryTests: XCTestCase {
     
     func testCountRule_Enabled_WithDifferentPersons2() {
         
-        let validCert1 = CertificateMock.validCertificate
+        let validCert1 = CertificateMock.validCertificate2
         let validCert2 = CertificateMock.validRecoveryCertificate
 
         do {
@@ -576,23 +576,23 @@ class VaccinationRepositoryTests: XCTestCase {
     }
     
     func testCountRule_Disabled_WithDifferentPersons2() throws {
-        let validCert1 = CertificateMock.validCertificate
+        let validCert1 = CertificateMock.validCertificate2
         let validCert2 = CertificateMock.validRecoveryCertificate
         _ = try sut.scanCertificate(validCert1, isCountRuleEnabled: true, expirationRuleIsActive: true).wait()
         _ = try sut.scanCertificate(validCert2, isCountRuleEnabled: false, expirationRuleIsActive: true).wait()
     }
     
     func testCountRule_Enabled_10TimesSamePerson() {
-        let validCert1 = CertificateMock.validCertificate
-        let validCert2 = CertificateMock.validCertificate.appending("B")
-        let validCert3 = CertificateMock.validCertificate.appending("C")
-        let validCert4 = CertificateMock.validCertificate.appending("D")
-        let validCert5 = CertificateMock.validCertificate.appending("E")
-        let validCert6 = CertificateMock.validCertificate.appending("F")
-        let validCert7 = CertificateMock.validCertificate.appending("G")
-        let validCert8 = CertificateMock.validCertificate.appending("H")
-        let validCert9 = CertificateMock.validCertificate.appending("I")
-        let validCert10 = CertificateMock.validCertificate.appending("J")
+        let validCert1 = CertificateMock.validCertificate2
+        let validCert2 = CertificateMock.validCertificate2.appending("B")
+        let validCert3 = CertificateMock.validCertificate2.appending("C")
+        let validCert4 = CertificateMock.validCertificate2.appending("D")
+        let validCert5 = CertificateMock.validCertificate2.appending("E")
+        let validCert6 = CertificateMock.validCertificate2.appending("F")
+        let validCert7 = CertificateMock.validCertificate2.appending("G")
+        let validCert8 = CertificateMock.validCertificate2.appending("H")
+        let validCert9 = CertificateMock.validCertificate2.appending("I")
+        let validCert10 = CertificateMock.validCertificate2.appending("J")
 
         do {
             _ = try sut.scanCertificate(validCert1, isCountRuleEnabled: true, expirationRuleIsActive: true).wait()
@@ -612,16 +612,16 @@ class VaccinationRepositoryTests: XCTestCase {
     }
     
     func testCountRule_Disabled_10TimesSamePerson() {
-        let validCert1 = CertificateMock.validCertificate
-        let validCert2 = CertificateMock.validCertificate.appending("B")
-        let validCert3 = CertificateMock.validCertificate.appending("C")
-        let validCert4 = CertificateMock.validCertificate.appending("D")
-        let validCert5 = CertificateMock.validCertificate.appending("E")
-        let validCert6 = CertificateMock.validCertificate.appending("F")
-        let validCert7 = CertificateMock.validCertificate.appending("G")
-        let validCert8 = CertificateMock.validCertificate.appending("H")
-        let validCert9 = CertificateMock.validCertificate.appending("I")
-        let validCert10 = CertificateMock.validCertificate.appending("J")
+        let validCert1 = CertificateMock.validCertificate2
+        let validCert2 = CertificateMock.validCertificate2.appending("B")
+        let validCert3 = CertificateMock.validCertificate2.appending("C")
+        let validCert4 = CertificateMock.validCertificate2.appending("D")
+        let validCert5 = CertificateMock.validCertificate2.appending("E")
+        let validCert6 = CertificateMock.validCertificate2.appending("F")
+        let validCert7 = CertificateMock.validCertificate2.appending("G")
+        let validCert8 = CertificateMock.validCertificate2.appending("H")
+        let validCert9 = CertificateMock.validCertificate2.appending("I")
+        let validCert10 = CertificateMock.validCertificate2.appending("J")
 
         do {
             _ = try sut.scanCertificate(validCert1, isCountRuleEnabled: false, expirationRuleIsActive: true).wait()
@@ -709,7 +709,7 @@ class VaccinationRepositoryTests: XCTestCase {
     
     func testScanNotExpiredCertificate_expirationRuleIsActive() {
         // GIVEN
-        let expiredCert = CertificateMock.validCertificate
+        let expiredCert = CertificateMock.validCertificate2
         let expecation = XCTestExpectation()
         // WHEN
         sut.scanCertificate(expiredCert, isCountRuleEnabled: false, expirationRuleIsActive: true)
@@ -725,7 +725,7 @@ class VaccinationRepositoryTests: XCTestCase {
     
     func testScanNotExpiredCertificate_expirationRuleIsDeActive() {
         // GIVEN
-        let expiredCert = CertificateMock.validCertificate
+        let expiredCert = CertificateMock.validCertificate2
         let expecation = XCTestExpectation()
         // WHEN
         sut.scanCertificate(expiredCert, isCountRuleEnabled: false, expirationRuleIsActive: false)

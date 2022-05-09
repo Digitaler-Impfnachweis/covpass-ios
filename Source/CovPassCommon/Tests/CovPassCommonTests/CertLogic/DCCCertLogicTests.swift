@@ -133,7 +133,7 @@ class DCCCertLogicTests: XCTestCase {
     }
 
     func testInvalidVaccination() throws {
-        let cert = try repository.checkCertificate(CertificateMock.validCertificate).wait()
+        let cert = try repository.checkCertificate(CertificateMock.validCertificate2).wait()
         cert.hcert.dgc.v![0].dt = Date(timeIntervalSince1970: 0)
 
         let res = try sut.validate(countryCode: "DE", validationClock: Date(), certificate: cert)
@@ -150,7 +150,7 @@ class DCCCertLogicTests: XCTestCase {
                                    service: DCCServiceMock(),
                                    keychain: MockPersistence(),
                                    userDefaults: MockPersistence())
-            let cert = try repository.checkCertificate(CertificateMock.validCertificate).wait()
+            let cert = try repository.checkCertificate(CertificateMock.validCertificate2).wait()
 
             _ = try sut.validate(countryCode: "DE", validationClock: Date(), certificate: cert)
 

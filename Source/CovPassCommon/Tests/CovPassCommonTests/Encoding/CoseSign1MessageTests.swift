@@ -48,9 +48,9 @@ class CoseSign1MessageTests: XCTestCase {
         let jsonData = try coseSign1Message.toJSON()
         let mappedDictionary = try JSONSerialization.jsonObject(with: jsonData, options: .allowFragments) as? [String: Any]
 
-        XCTAssertEqual(mappedDictionary?["4"] as? UInt64, 1_651_936_419)
-        XCTAssertEqual(mappedDictionary?["1"] as? String, "DE")
-        XCTAssertEqual(mappedDictionary?["6"] as? UInt64, 1_620_400_419)
+        XCTAssertEqual(mappedDictionary?["4"] as? UInt64, 1_682_675_518)
+        XCTAssertEqual(mappedDictionary?["1"] as? String, "IT")
+        XCTAssertEqual(mappedDictionary?["6"] as? UInt64, 1_651_139_518)
     }
 
     func testInitJsonToJSON() throws {
