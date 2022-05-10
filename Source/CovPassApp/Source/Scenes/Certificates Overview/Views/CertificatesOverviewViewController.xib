@@ -29,11 +29,12 @@
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
-                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="UkJ-ri-sjN">
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="555" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="UkJ-ri-sjN">
                     <rect key="frame" x="0.0" y="157" width="414" height="555"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="555" id="Dvn-A5-0jL"/>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="1" id="BAA-K7-ha9"/>
+                        <constraint firstAttribute="height" relation="lessThanOrEqual" constant="565" id="Dvn-A5-0jL"/>
                     </constraints>
                     <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="mNC-aH-BF7">
                         <size key="itemSize" width="128" height="128"/>
