@@ -65,7 +65,8 @@ extension ValidationViewModelProtocol {
             return ValidateCertificateUseCase(token: token,
                                               revocationRepository: CertificateRevocationRepository()!,
                                               certLogic: DCCCertLogic.create(),
-                                              persistence: self.userDefaults).execute()
+                                              persistence: self.userDefaults,
+                                              allowExceptions: _2GContext).execute()
         }
         .done { result in
             if self._2GContext {

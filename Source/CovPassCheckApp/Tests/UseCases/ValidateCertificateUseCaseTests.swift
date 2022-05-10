@@ -25,7 +25,8 @@ class ValidateCertificateUseCaseTests: XCTestCase {
         sut = ValidateCertificateUseCase(token: token,
                                          revocationRepository: revocationRepository,
                                          certLogic: certLogic,
-                                         persistence: persistence)
+                                         persistence: persistence,
+                                         allowExceptions: true)
     }
     
     override func tearDownWithError() throws {
@@ -164,6 +165,40 @@ class ValidateCertificateUseCaseTests: XCTestCase {
         }
         .catch { error in
             XCTFail("Should not fail")
+        }
+        wait(for: [testExpectation],
+             timeout: 0.1,
+             enforceOrder: true)
+    }
+    
+    func test_RR_DE_0002_response_dont_allow_exception() {
+        // GIVEN
+        let testExpectation = XCTestExpectation()
+        let token = CBORWebToken.mockRecoveryCertificate.mockRecoveryUVCI("FOO").extended()
+        let persistence = UserDefaultsPersistence()
+        revocationRepository = CertificateRevocationRepositoryMock()
+        certLogic = DCCCertLogicMock()
+        sut = ValidateCertificateUseCase(token: token,
+                                         revocationRepository: revocationRepository,
+                                         certLogic: certLogic,
+                                         persistence: persistence,
+                                         allowExceptions: false)
+        let rule = Rule(identifier: "RR-DE-0002", type: "", version: "", schemaVersion: "", engine: "", engineVersion: "", certificateType: "", description: [], validFrom: "", validTo: "", affectedString: [], logic: JSON(""), countryCode: "DE" )
+        let validationResult = [ValidationResult(rule: rule, result: .fail, validationErrors: nil)]
+        certLogic.validationError = nil
+        certLogic.validateResult = validationResult
+        revocationRepository.isRevoked = false
+        // WHEN
+        sut.execute().done { result in
+            // THEN
+            XCTFail("Should fail")
+        }
+        .catch { error in
+            if error as? ValidationResultError == .functional {
+                testExpectation.fulfill()
+            } else {
+                XCTFail("Error should be an functional error: \(error.localizedDescription)")
+            }
         }
         wait(for: [testExpectation],
              timeout: 0.1,

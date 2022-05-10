@@ -146,7 +146,8 @@ class GProofViewModel: GProofViewModelProtocol {
             return ValidateCertificateUseCase(token: token,
                                               revocationRepository: CertificateRevocationRepository()!,
                                               certLogic: self.certLogic,
-                                              persistence: self.userDefaults).execute()
+                                              persistence: self.userDefaults,
+                                              allowExceptions: true).execute()
         }
         .cancelled {
             if self.isFirstScan {
@@ -256,7 +257,9 @@ class GProofViewModel: GProofViewModelProtocol {
 
         if doesFirstScanContaintOpenResults, secondToken?.firstVaccination?.fullImmunizationCheck ?? false {
             convertOpenResultOfFirstCertificateToPassed()
-        } else if doesFirstScanContaintOpenResults, secondToken?.vaccinationCertificate.isVaccination == false {
+        } else if doesFirstScanContaintOpenResults,
+                    secondToken?.vaccinationCertificate.isVaccination == false,
+                    error as? ValidationResultError != .functional {
             secondResult = nil
             router.showError(error: QRCodeError.qrCodeExists)
         } else if doesSecondScanContaintOpenResults, firstToken?.firstVaccination?.fullImmunizationCheck ?? false {
@@ -315,6 +318,7 @@ class GProofViewModel: GProofViewModelProtocol {
     
     func retry() {
         isFirstScan = false
+        secondResult = nil
         delegate?.viewModelDidUpdate()
         scanQRCode()
     }

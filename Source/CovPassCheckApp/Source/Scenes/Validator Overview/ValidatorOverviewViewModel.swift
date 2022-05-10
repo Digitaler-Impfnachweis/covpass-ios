@@ -233,7 +233,8 @@ class ValidatorOverviewViewModel {
                 return ValidateCertificateUseCase(token: token,
                                                   revocationRepository: self.revocationRepository,
                                                   certLogic: DCCCertLogic.create(),
-                                                  persistence: self.userDefaults).execute()
+                                                  persistence: self.userDefaults,
+                                                  allowExceptions: false).execute()
             }
             .done {
                 self.router.showCertificate($0.token,

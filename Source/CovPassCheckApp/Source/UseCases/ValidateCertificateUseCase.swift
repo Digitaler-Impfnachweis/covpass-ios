@@ -15,6 +15,7 @@ struct ValidateCertificateUseCase {
     let revocationRepository: CertificateRevocationRepositoryProtocol
     let certLogic: DCCCertLogicProtocol
     let persistence: Persistence
+    let allowExceptions: Bool
     
     struct Result {
         let token: ExtendedCBORWebToken
@@ -51,7 +52,11 @@ struct ValidateCertificateUseCase {
         let valid = validationResult?.contains(where: { $0.result != .passed }) == false
         
         // exception https://dth01.ibmgcloud.net/jira/browse/BVC-3905
-        if token.vaccinationCertificate.isRecovery, validationResult?.failedResults.count == 1, let ruleResult0002 = validationResult?.validationResult(ofRule: "RR-DE-0002"), ruleResult0002.result == .fail {
+        if allowExceptions,
+            token.vaccinationCertificate.isRecovery,
+            validationResult?.failedResults.count == 1,
+            let ruleResult0002 = validationResult?.validationResult(ofRule: "RR-DE-0002"),
+            ruleResult0002.result == .fail {
             ruleResult0002.result = .open
             return .value(.init(token: token, validationResults: validationResult))
         }
