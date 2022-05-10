@@ -254,12 +254,12 @@ class GProofViewModel: GProofViewModelProtocol {
         let doesFirstScanContaintOpenResults: Bool = !(firstResult?.result?.openResults.isEmpty ?? true)
         let doesSecondScanContaintOpenResults: Bool = !(secondResult?.result?.openResults.isEmpty ?? true)
 
-        if doesFirstScanContaintOpenResults, secondToken?.firstVaccination?.fullImmunizationValid ?? false {
+        if doesFirstScanContaintOpenResults, secondToken?.firstVaccination?.fullImmunizationCheck ?? false {
             convertOpenResultOfFirstCertificateToPassed()
         } else if doesFirstScanContaintOpenResults, secondToken?.vaccinationCertificate.isVaccination == false {
             secondResult = nil
             router.showError(error: QRCodeError.qrCodeExists)
-        } else if doesSecondScanContaintOpenResults, firstToken?.firstVaccination?.fullImmunizationValid ?? false {
+        } else if doesSecondScanContaintOpenResults, firstToken?.firstVaccination?.fullImmunizationCheck ?? false {
             convertOpenResultOfSecondCertificate(to: .passed)
         } else if doesSecondScanContaintOpenResults, firstToken?.vaccinationCertificate.isVaccination == false {
             convertOpenResultOfSecondCertificate(to: .fail)

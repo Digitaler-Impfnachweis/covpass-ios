@@ -1009,4 +1009,86 @@ class GProofViewModelTests: XCTestCase {
         XCTAssertEqual(sut.resultPersonFooter!, "Born on Jan 1, 1990")
         XCTAssertEqual(sut.resultPersonIcon, UIImage.iconCardInverse)
     }
+    
+    func testScanBasisImmunizationOfJJCertificateThanOpenCertificateFailingDueToRRDE0002() throws {
+        // GIVEN
+        let dateForFifteenMonthAgo = try XCTUnwrap(Calendar.current.date(byAdding: .month, value: -15, to: Date()))
+        let token = CBORWebToken.mockVaccinationCertificate
+        token.hcert.dgc.v!.first!.sd = 1
+        token.hcert.dgc.v!.first!.dn = 1
+        token.hcert.dgc.v!.first!.mp = MedicalProduct.johnsonjohnson.rawValue
+        token.hcert.dgc.v!.first!.dt = dateForFifteenMonthAgo
+        vaccinationRepoMock.checkedCert = token
+        certLogicMock.validateResult = [.init(rule: nil, result: .passed, validationErrors: nil)]
+        
+        // WHEN
+        sut.startover()
+        RunLoop.current.run(for: 0.1)
+
+        // THEN
+        XCTAssertFalse(sut.scanNextButtonIsHidden)
+        XCTAssertTrue(sut.buttonRetryIsHidden)
+        XCTAssertFalse(sut.buttonStartOverIsHidden)
+        XCTAssertFalse(sut.onlyOneIsScannedAndThisFailed)
+        XCTAssertFalse(sut.someIsFailed)
+        XCTAssertFalse(sut.areBothScanned)
+        XCTAssertNotNil(sut.firstResult)
+        XCTAssertNil(sut.secondResult)
+        
+        XCTAssertEqual(sut.firstResultImage, UIImage.detailStatusFull)
+        XCTAssertEqual(sut.firstResultLinkImage, nil)
+        XCTAssertEqual(sut.firstResultTitle, "Basic immunisation")
+        XCTAssertEqual(sut.firstResultFooterText, nil)
+        XCTAssertEqual(sut.firstResultSubtitle!, "15 month(s) ago")
+        
+        XCTAssertEqual(sut.secondResultImage, UIImage.detailStatusFullEmpty)
+        XCTAssertEqual(sut.seconResultLinkImage, nil)
+        XCTAssertEqual(sut.secondResultTitle, "Test or recovery")
+        XCTAssertEqual(sut.seconResultFooterText, nil)
+        XCTAssertEqual(sut.seconResultSubtitle!, "May be required for 2G+")
+        
+        XCTAssertEqual(sut.resultPersonTitle!, "Doe John")
+        XCTAssertEqual(sut.resultPersonSubtitle!, "DOE JOHN")
+        XCTAssertEqual(sut.resultPersonFooter!, "Born on Jan 1, 1990")
+        XCTAssertEqual(sut.resultPersonIcon, UIImage.iconCardInverse)
+        
+        // GIVEN
+        let rule = Rule(identifier: "RR-DE-0002", type: "", version: "", schemaVersion: "", engine: "", engineVersion: "", certificateType: "", description: [], validFrom: "", validTo: "", affectedString: [], logic: JSON(""), countryCode: "DE" )
+        let recoveryToken = CBORWebToken.mockRecoveryCertificate
+        let dateForOneMonthAgo = Calendar.current.date(byAdding: .month, value: -3, to: Date())
+        recoveryToken.hcert.dgc.r!.first!.fr =  try XCTUnwrap(dateForOneMonthAgo)
+        vaccinationRepoMock.checkedCert = recoveryToken
+        certLogicMock.validateResult = [.init(rule: rule, result: .fail, validationErrors: nil)]
+        
+        // WHEN
+        sut.scanNext()
+        RunLoop.current.run(for: 0.1)
+        
+        // THEN
+        XCTAssertTrue(sut.scanNextButtonIsHidden)
+        XCTAssertTrue(sut.buttonRetryIsHidden)
+        XCTAssertFalse(sut.buttonStartOverIsHidden)
+        XCTAssertFalse(sut.onlyOneIsScannedAndThisFailed)
+        XCTAssertFalse(sut.someIsFailed)
+        XCTAssertTrue(sut.areBothScanned)
+        XCTAssertNotNil(sut.firstResult)
+        XCTAssertNotNil(sut.secondResult)
+        
+        XCTAssertEqual(sut.firstResultImage, UIImage.detailStatusFull)
+        XCTAssertEqual(sut.firstResultLinkImage, nil)
+        XCTAssertEqual(sut.firstResultTitle, "Basic immunisation")
+        XCTAssertEqual(sut.firstResultFooterText, nil)
+        XCTAssertEqual(sut.firstResultSubtitle!, "15 month(s) ago")
+        
+        XCTAssertEqual(sut.secondResultImage, UIImage.detailStatusFull)
+        XCTAssertEqual(sut.seconResultLinkImage, nil)
+        XCTAssertEqual(sut.secondResultTitle, "Recovery")
+        XCTAssertEqual(sut.seconResultFooterText, nil)
+        XCTAssertEqual(sut.seconResultSubtitle!, "3 month(s) ago")
+        
+        XCTAssertEqual(sut.resultPersonTitle!, "Doe John")
+        XCTAssertEqual(sut.resultPersonSubtitle!, "DOE JOHN")
+        XCTAssertEqual(sut.resultPersonFooter!, "Born on Jan 1, 1990")
+        XCTAssertEqual(sut.resultPersonIcon, UIImage.iconCardInverse)
+    }
 }
