@@ -132,6 +132,13 @@
 "certificates_start_screen_qr_code_app_reference_text" = "Dieser QR-Code lässt sich verlässlich mit der CovPassCheck-App prüfen.";
 
 
+/********** modal_view **********/
+
+"modal_subline" = "%d aktuell verwendete(s) Zertifikat(e)";
+
+"modal_button" = "Zertifikate verwalten";
+
+
 /********** popup: Remark within the app towards the CovPassCheck app **********/
 
 "certificates_start_screen_pop_up_app_reference_title" = "Scannen bitte!";
@@ -1509,11 +1516,32 @@
 
 "certificate_renewal_error_title" = "Neuausstellung fehlgeschlagen";
 
-"certificate_renewal_error_copy" = "Leider gab es ein Problem bei der Neuausstellung Ihres Zertifikats. Bitte überprüfen Sie Ihre Internetverbindung. Beachten Sie, dass Sie das Zertifikat maximal drei Mal im Jahr neu ausstellen lassen können. Für Informationen zum unten aufgeführten Fehlercode kontaktieren Sie bitte unsere Hotline unter 0800-4747-001 oder support@covpass-app.de.\n\nFehlercode: %@";
+"certificate_renewal_error_copy" = "Leider gab es ein Problem bei der Neuausstellung Ihres Zertifikats. Bitte überprüfen Sie Ihre Internetverbindung. Beachten Sie, dass Sie das Zertifikat maximal drei Mal im Jahr neu ausstellen lassen können. Für Informationen zum unten aufgeführten Fehlercode kontaktieren Sie bitte unsere Hotline unter 0800–4747–001 oder support@covpass-app.de.\n\nFehlercode: %@";
 
 "certificate_renewal_error_button_primary" = "OK";
 
 "certificate_renewal_error_button_secondary" = "Mehr Informationen";
+
+
+/********** DCC renewal when expiring **********/
+
+"renewal_expiry_notification_title" = "Erneuerung notwendig";
+
+"renewal_expiry_notification_copy_vaccination" = "Die technische Laufzeit Ihres Impfzertifikats läuft bald aus. Erneuern Sie das Zertifikat, um es weiterhin nutzen zu können.";
+
+"renewal_expiry_notification_button_vaccination" = "Impfzertifikat erneuern";
+
+"renewal_expiry_notification_copy_recovery" = "Die technische Laufzeit Ihres Genesenenzertifikats läuft bald aus. Erneuern Sie das Zertifikat, um es weiterhin nutzen zu können.";
+
+"renewal_expiry_notification_button_recovery" = "Genesenenzertifikat erneuern";
+
+"renewal_expiry_consent_list_item_1" = "Die Erneuerung der Zertifikate ist freiwillig und kostenlos.";
+
+"renewal_expiry_consent_list_item_2" = "Um sicherzustellen, dass Zertifikate nur einmalig erneuert werden können, werden jeweils die Kennung des alten und des erneuerten Zertifikats durch das RKI dokumentiert. Die weiteren Daten zu Ihren Zertifikaten werden nach der Erneuerung beim RKI sofort gelöscht.";
+
+"renewal_expiry_consent_list_item_3" = "Stellen Sie bitte bei der Erneuerung von Familienzertifikaten sicher, dass das betreffende Familienmitglied einverstanden ist.";
+
+"renewal_expiry_consent_list_item_4" = "In bestimmten Fällen werden zusätzlich zu dem zu erneuernden Zertifikat weitere Zertifikate übermittelt. Dies ist erforderlich, um die bisherige Abfolge der Impfungen und Genesungen im neuen Zertifikat aufnehmen zu können.";
 
 
 /********** DCC revocation **********/
