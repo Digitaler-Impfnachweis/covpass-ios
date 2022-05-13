@@ -26,8 +26,8 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
     private lazy var certificate = token.vaccinationCertificate
     private lazy var isExpired = certificate.isExpired
     private lazy var isRecovery = certificate.isRecovery && !isInvalid
-    private lazy var isBasicVaccination = dgc.isFullyImmunized && !isBoosterVaccination && !isInvalid
-    private lazy var isPartialVaccination = certificate.isVaccination && !dgc.isFullyImmunized && !isInvalid
+    private lazy var isBasicVaccination = dgc.fullImmunizationValid && !isBoosterVaccination && !isInvalid
+    private lazy var isPartialVaccination = certificate.isVaccination && !dgc.fullImmunizationValid && !isInvalid
     private lazy var isBoosterVaccination = dgc .v?.first?.isBoosted(vaccinations: vaccinations, recoveries: recoveries) ?? false && !isInvalid
     private lazy var isPCRTest = dgc.isPCR && !isInvalid
     private lazy var isRapidAntigenTest = certificate.isTest && !isPCRTest && !isInvalid
@@ -145,7 +145,7 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
         } else if isPartialVaccination {
             return .startStatusPartial
         }
-        return showNotification ? .statusFullNotfication : .statusFullDetail
+        return showNotification ? .statusFullBlueNotification : .statusFullDetail
     }
 
     var isFavorite: Bool {

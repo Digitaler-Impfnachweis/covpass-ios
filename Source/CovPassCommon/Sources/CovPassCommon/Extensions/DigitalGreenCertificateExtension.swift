@@ -14,8 +14,8 @@ extension DigitalGreenCertificate: Equatable {
 }
 
 public extension DigitalGreenCertificate {
-    var isFullyImmunized: Bool {
-        guard let result = v?.filter({ $0.fullImmunization }) else { return false }
+    var fullImmunizationValid: Bool {
+        guard let result = v?.filter({ $0.fullImmunizationValid }) else { return false }
         return !result.isEmpty
     }
     

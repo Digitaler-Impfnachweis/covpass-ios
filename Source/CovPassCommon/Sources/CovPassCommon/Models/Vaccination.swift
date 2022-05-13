@@ -183,10 +183,6 @@ public extension Vaccination {
         (dn >= sd && !isJohnsonJohnson) || isBoosted() || isFullImmunizationAfterRecovery
     }
     
-    var fullImmunizationCheck: Bool {
-        dn >= sd || isBoosted() || isFullImmunizationAfterRecovery
-    }
-
     /// `True` if vaccination is a booster vaccination (J&J 2/2, all other vaccination 3/3)
     func isBoosted(vaccinations: [Vaccination]? = nil, recoveries: [Recovery]? = nil) -> Bool {
         if let vaccinations = vaccinations, downgrade2OutOf1ToBasisImmunization(otherCertificatesInTheUsersChain: vaccinations, recoveries: recoveries) {
@@ -211,13 +207,14 @@ public extension Vaccination {
         return validDate
     }
 
+
     /// True if full immunization is valid
     var fullImmunizationValid: Bool {
         guard let dateValidFrom = fullImmunizationValidFrom else { return false }
         if isBoosted() || isFullImmunizationAfterRecovery { return true }
         return Date() > dateValidFrom
     }
-    
+
     func downgrade2OutOf1ToBasisImmunization(otherCertificatesInTheUsersChain certificates: [Vaccination], recoveries: [Recovery]? = nil) -> Bool {
 
         var certsWithSelf = certificates

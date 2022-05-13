@@ -293,36 +293,6 @@ class VaccinationTests: XCTestCase {
         XCTAssert(sut.fullImmunizationValid)
     }
     
-    func testJohnsonJohnson1OutOf1() {
-        // WHEN
-        sut.mp = MedicalProduct.johnsonjohnson.rawValue
-        sut.dn = 1
-        sut.sd = 1
-        
-        // THEN
-        XCTAssertFalse(sut.fullImmunization)
-        XCTAssertTrue(sut.fullImmunizationCheck)
-        XCTAssertFalse(sut.fullImmunizationValid)
-        XCTAssertFalse(sut.isFullImmunizationAfterRecovery)
-        XCTAssertFalse(sut.isBoosted())
-        XCTAssertEqual(sut.fullImmunizationValidFrom, nil)
-    }
-    
-    func testJohnsonJohnson3OutOf1() {
-        // WHEN
-        sut.mp = MedicalProduct.johnsonjohnson.rawValue
-        sut.dn = 3
-        sut.sd = 1
-        
-        // THEN
-        XCTAssertTrue(sut.fullImmunization)
-        XCTAssertTrue(sut.fullImmunizationCheck)
-        XCTAssertTrue(sut.fullImmunizationValid)
-        XCTAssertFalse(sut.isFullImmunizationAfterRecovery)
-        XCTAssertTrue(sut.isBoosted())
-        XCTAssertEqual(sut.fullImmunizationValidFrom, dtDate)
-    }
-    
     func testDowngrade2OutOf1ToBasisImmunization() {
         let shouldDowngraded = vac2Of1SomeProduct.downgrade2OutOf1ToBasisImmunization(otherCertificatesInTheUsersChain: [vac1Of1JJ],
                                                                                       recoveries: nil)
@@ -358,5 +328,42 @@ class VaccinationTests: XCTestCase {
                                                                                       recoveries: [recovery])
         XCTAssertTrue(vac2Of1SomeProduct.isBoosted())
         XCTAssertTrue(shouldDowngraded)
+    }
+ 
+    
+    func testWalletApp_NotValidBecauseOfFresherThan14Days() throws {
+        // GIVEN
+        sut.dt = try XCTUnwrap(Calendar.current.date(byAdding: .day, value: -10, to: Date()))
+        sut.dn = 2
+        sut.sd = 2
+        sut.mp = MedicalProduct.biontech.rawValue
+        // WHEN
+        let result = sut.fullImmunizationValid
+        // THEN
+        XCTAssertFalse(result)
+    }
+    
+    func testWalletApp_ValidBecauseOfFresherOlder14Days() throws {
+        // GIVEN
+        sut.dt = try XCTUnwrap(Calendar.current.date(byAdding: .day, value: -15, to: Date()))
+        sut.dn = 2
+        sut.sd = 2
+        sut.mp = MedicalProduct.biontech.rawValue
+        // WHEN
+        let result = sut.fullImmunizationValid
+        // THEN
+        XCTAssertTrue(result)
+    }
+    
+    func testWalletApp_JJValidBecauseOfFresherOlder14Days() throws {
+        // GIVEN
+        sut.dt = try XCTUnwrap(Calendar.current.date(byAdding: .day, value: -15, to: Date()))
+        sut.dn = 2
+        sut.sd = 2
+        sut.mp = MedicalProduct.johnsonjohnson.rawValue
+        // WHEN
+        let result = sut.fullImmunizationValid
+        
+        XCTAssertTrue(result)
     }
 }

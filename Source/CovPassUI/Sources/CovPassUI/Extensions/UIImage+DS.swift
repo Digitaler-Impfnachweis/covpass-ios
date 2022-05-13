@@ -197,10 +197,13 @@ public extension UIImage {
     
     @ImageLoader(name: "flag_de")
     private(set) static var flagDE
-
+    
     @ImageLoader(name: "status_full_notification")
     private(set) static var statusFullNotfication
-
+    
+    @ImageLoader(name: "status_full_blue_notification")
+    private(set) static var statusFullBlueNotification
+    
     @ImageLoader(name: "flash-on")
     private(set) static var flashOn
 

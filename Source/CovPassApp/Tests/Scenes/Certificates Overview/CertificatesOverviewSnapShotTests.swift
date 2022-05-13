@@ -264,7 +264,7 @@ class CertificateOverviewSnapShotTests: BaseSnapShotTests {
         RunLoop.current.run(for: 0.5)
         verifyView(view: viewController.collectionView.cellForItem(at: IndexPath(row: 0, section: 0))!)
     }
-
+    
     func testDowngrade2OutOf1ToBasisImmunizationAndRecoveryAsNotOldest() {
         let vacinationRepoMock: VaccinationRepositoryMock = VaccinationRepositoryMock()
         let cert: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended()
@@ -285,6 +285,25 @@ class CertificateOverviewSnapShotTests: BaseSnapShotTests {
         secondCert.vaccinationCertificate.hcert.dgc.v!.first!.sd = 1
         secondCert.vaccinationCertificate.hcert.dgc.v!.first!.dt = Date()
         let certs = [cert,recovery,secondCert]
+        vacinationRepoMock.certificates = certs
+        let viewModel = self.viewModel(router: CertificatesOverviewRouterMock(), repository: vacinationRepoMock)
+        let viewController = CertificatesOverviewViewController(viewModel: viewModel)
+        let window = UIWindow(frame: UIScreen.main.bounds)
+        window.rootViewController = viewController
+        window.makeKeyAndVisible()
+        RunLoop.current.run(for: 0.5)
+        verifyView(view: viewController.collectionView.cellForItem(at: IndexPath(row: 0, section: 0))!)
+    }
+    
+    func test2Of2NotJJSoLessThan14Days_so_not_valid() throws {
+        let vacinationRepoMock: VaccinationRepositoryMock = VaccinationRepositoryMock()
+        let cert: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended()
+        cert.vaccinationCertificate.hcert.dgc.nam.fn = "John 1"
+        cert.vaccinationCertificate.hcert.dgc.v!.first!.mp = MedicalProduct.biontech.rawValue
+        cert.vaccinationCertificate.hcert.dgc.v!.first!.dn = 2
+        cert.vaccinationCertificate.hcert.dgc.v!.first!.sd = 2
+        cert.vaccinationCertificate.hcert.dgc.v!.first!.dt = try XCTUnwrap(Calendar.current.date(byAdding: .day, value: -10, to: Date()))
+        let certs = [cert]
         vacinationRepoMock.certificates = certs
         let viewModel = self.viewModel(router: CertificatesOverviewRouterMock(), repository: vacinationRepoMock)
         let viewController = CertificatesOverviewViewController(viewModel: viewModel)
