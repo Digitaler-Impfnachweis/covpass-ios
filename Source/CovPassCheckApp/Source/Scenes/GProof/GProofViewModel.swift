@@ -49,6 +49,11 @@ class GProofViewModel: GProofViewModelProtocol {
     var footnote: String { Constants.Keys.result_2G__3rd_footnote}
     var buttonScanNextTitle: String { Constants.Keys.result_2G__3rd_button}
     var buttonRetry: String { Constants.Keys.result_2G_button_retry}
+    var isLoading: Bool = false {
+        didSet {
+            delegate?.viewModelDidUpdate()
+        }
+    }
     var personStackIsHidden: Bool { firstIsFailedTechnicalReason || firstResult == nil }
     var buttonStartOver: String { Constants.Keys.result_2G_button_startover}
     var accessibilityResultAnnounce: String { Constants.Keys.accessibility_scan_result_announce_2G}
@@ -133,6 +138,7 @@ class GProofViewModel: GProofViewModelProtocol {
     
     
     func scanQRCode() {
+        isLoading = true
         var tmpToken: ExtendedCBORWebToken?
         firstly {
             router.scanQRCode()
@@ -156,6 +162,9 @@ class GProofViewModel: GProofViewModelProtocol {
         }
         .done {
             self.validationToken(token: $0.token, error: nil, result: $0.validationResults)
+        }
+        .ensure {
+            self.isLoading = false
         }
         .catch {
             self.validationToken(token: tmpToken, error: $0, result: nil)

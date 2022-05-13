@@ -1197,6 +1197,49 @@ class GProofViewModelTests: XCTestCase {
         XCTAssertEqual(sut.resultPersonIcon, UIImage.iconCardInverse)
     }
     
+    func testLoading_startover() {
+        // GIVEN
+        XCTAssertEqual(sut.isLoading, false)
+        vaccinationRepoMock.checkedCertError = QRCodeError.versionNotSupported
+
+        // WHEN
+        sut.startover()
+
+        // THEN
+        XCTAssertEqual(sut.isLoading, true)
+        RunLoop.current.run(for: 0.1)
+        XCTAssertEqual(sut.isLoading, false)
+    }
+    
+    func testLoading_retry() {
+        // GIVEN
+        XCTAssertEqual(sut.isLoading, false)
+        vaccinationRepoMock.checkedCertError = QRCodeError.versionNotSupported
+        
+        // WHEN
+        sut.retry()
+        
+        // THEN
+        XCTAssertEqual(sut.isLoading, true)
+        RunLoop.current.run(for: 0.1)
+        XCTAssertEqual(sut.isLoading, false)
+    }
+    
+    func testLoading_scanNext() {
+        // GIVEN
+        XCTAssertEqual(sut.isLoading, false)
+        vaccinationRepoMock.checkedCertError = QRCodeError.versionNotSupported
+
+        // WHEN
+        sut.scanNext()
+
+        // THEN
+        XCTAssertEqual(sut.isLoading, true)
+        RunLoop.current.run(for: 0.1)
+        XCTAssertEqual(sut.isLoading, false)
+
+    }
+    
     func testOpenCertificateFailingDueToRRDE0002ThanScanVaccinationWhichIsFresherThan14Days() throws {
         // GIVEN
         let rule = Rule(identifier: "RR-DE-0002", type: "", version: "", schemaVersion: "", engine: "", engineVersion: "", certificateType: "", description: [], validFrom: "", validTo: "", affectedString: [], logic: JSON(""), countryCode: "DE" )

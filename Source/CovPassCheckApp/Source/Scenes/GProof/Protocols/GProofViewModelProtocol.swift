@@ -17,6 +17,7 @@ protocol GProofViewModelProtocol {
     var scanNextButtonIsHidden: Bool { get }
     var onlyOneIsScannedAndThisFailed: Bool { get }
     var buttonRetry: String { get }
+    var isLoading: Bool { get set }
     var personStackIsHidden: Bool { get }
     var buttonRetryIsHidden: Bool { get }
     var buttonStartOver: String { get }

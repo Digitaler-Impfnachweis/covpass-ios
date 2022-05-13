@@ -79,6 +79,9 @@ class GProofViewController: UIViewController {
         buttonStartOver.action = viewModel.startover
         firstResultCard.action = viewModel.showFirstCardResult
         seconResultCard.action = viewModel.showSecondCardResult
+        viewModel.isLoading ? buttonScanNext.startAnimating() : buttonScanNext.stopAnimating()
+        viewModel.isLoading ? buttonStartOver.startAnimating() : buttonStartOver.stopAnimating()
+        viewModel.isLoading ? buttonRetry.startAnimating() : buttonRetry.stopAnimating()
     }
     
     private func configureContent() {
