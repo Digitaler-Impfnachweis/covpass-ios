@@ -158,11 +158,11 @@ class GProofViewModel: GProofViewModelProtocol {
             self.validationToken(token: $0.token, error: nil, result: $0.validationResults)
         }
         .catch {
-            self.errorHandling($0, token: tmpToken, result: nil)
+            self.validationToken(token: tmpToken, error: $0, result: nil)
         }
     }
 
-    private func validationToken(token: ExtendedCBORWebToken, error: Error?, result: [ValidationResult]?) {
+    private func validationToken(token: ExtendedCBORWebToken?, error: Error?, result: [ValidationResult]?) {
         firstly {
             try self.preventSettingSameQRCode(token)
         }
@@ -222,7 +222,11 @@ class GProofViewModel: GProofViewModelProtocol {
         }
     }
     
-    private func preventSettingSameQRCode(_ newToken: ExtendedCBORWebToken) throws -> Promise<ExtendedCBORWebToken> {
+    private func preventSettingSameQRCode(_ newToken: ExtendedCBORWebToken?) throws -> Promise<ExtendedCBORWebToken> {
+        guard let newToken = newToken else {
+            return .init(error: CertificateError.invalidEntity)
+        }
+
         let certTypeIsNotAlreadyScanned = firstToken?.vaccinationCertificate.certType != newToken.vaccinationCertificate.certType
         let exceptionBoosterWillReplaceCurrent = (newToken.vaccinationCertificate.hcert.dgc.isVaccinationBoosted && boosterAsTest)
         guard certTypeIsNotAlreadyScanned || exceptionBoosterWillReplaceCurrent else {

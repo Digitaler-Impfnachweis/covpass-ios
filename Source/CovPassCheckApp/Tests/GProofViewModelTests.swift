@@ -530,6 +530,31 @@ class GProofViewModelTests: XCTestCase {
         XCTAssertTrue((sut.router as! GProofMockRouter).errorShown)
     }
     
+    func testScaningSameTypeOfCert() {
+        // GIVEN
+        vaccinationRepoMock.checkedCert = CBORWebToken.mockVaccinationCertificate
+        vaccinationRepoMock.checkedCert?.hcert.dgc.v?.first?.dn = 2
+        vaccinationRepoMock.checkedCert?.hcert.dgc.v?.first?.sd = 2
+        certLogicMock.validateResult = [.init(rule: nil, result: .passed, validationErrors: nil)]
+
+        // WHEN
+        sut.startover()
+        RunLoop.current.run(for: 0.1)
+        
+        // GIVEN
+        vaccinationRepoMock.checkedCert = CBORWebToken.mockVaccinationCertificate
+        vaccinationRepoMock.checkedCert?.hcert.dgc.v?.first?.dn = 1
+        vaccinationRepoMock.checkedCert?.hcert.dgc.v?.first?.sd = 2
+        certLogicMock.validateResult = [.init(rule: nil, result: .fail, validationErrors: nil)]
+        
+        // WHEN
+        sut.scanNext()
+        RunLoop.current.run(for: 0.1)
+
+        // THEN
+        XCTAssertTrue((sut.router as! GProofMockRouter).errorShown)
+    }
+    
     func testDifferentPersonCerts() {
         // GIVEN
         vaccinationRepoMock.checkedCert = CBORWebToken.mockTestCertificate
