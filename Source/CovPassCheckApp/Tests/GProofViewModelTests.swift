@@ -878,6 +878,8 @@ class GProofViewModelTests: XCTestCase {
         XCTAssertEqual(sut.resultPersonSubtitle!, "DOE JOHN")
         XCTAssertEqual(sut.resultPersonFooter!, "Born on Jan 1, 1990")
         XCTAssertEqual(sut.resultPersonIcon, UIImage.iconCardInverse)
+        
+        wait(for: [routerMock.recovery90DaysErrorShown], timeout: 1.0)
     }
     
     func testScanBasisImmunizationCertificateThanOpenCertificateFailingDueToRRDE0002() throws {

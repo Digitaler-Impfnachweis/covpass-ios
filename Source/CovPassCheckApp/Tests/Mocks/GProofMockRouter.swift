@@ -17,6 +17,7 @@ class GProofMockRouter: GProofRouterProtocol {
     var errorShown = false
     var certificateShown = XCTestExpectation()
     var showDifferentPersonShown = XCTestExpectation()
+    var recovery90DaysErrorShown = XCTestExpectation()
     var sceneCoordinator: SceneCoordinator = SceneCoordinatorMock()
 
     func scanQRCode() -> Promise<ScanResult> {
@@ -39,6 +40,9 @@ class GProofMockRouter: GProofRouterProtocol {
     
     func showError(error: Error) {
         errorShown = true
+    }
+    func showRecovery90DaysError(error: Error) {
+        recovery90DaysErrorShown.fulfill()
     }
     
     func showDifferentPerson(firstResultCert: CBORWebToken, scondResultCert: CBORWebToken) -> Promise<GProofResult> {

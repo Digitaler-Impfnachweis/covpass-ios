@@ -274,7 +274,7 @@ class GProofViewModel: GProofViewModelProtocol {
                     secondToken?.vaccinationCertificate.isVaccination == false,
                     error as? ValidationResultError != .functional {
             secondResult = nil
-            router.showError(error: QRCodeError.qrCodeExists)
+            router.showRecovery90DaysError(error: QRCodeError.qrCodeExists)
         } else if doesSecondScanContaintOpenResults, firstToken?.firstVaccination?.fullImmunizationValidCheckApp ?? false {
             convertOpenResultOfSecondCertificate(to: .passed)
         } else if doesSecondScanContaintOpenResults, firstToken?.vaccinationCertificate.isVaccination == false {
