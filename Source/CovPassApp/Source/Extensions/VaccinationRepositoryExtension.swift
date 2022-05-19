@@ -11,7 +11,11 @@ import Foundation
 
 extension VaccinationRepository {
     static func create() -> VaccinationRepository {
-        VaccinationRepository(
+        guard let revocationRepo = CertificateRevocationRepository() else {
+            fatalError("Revocation Repository can´t initialized")
+        }
+        return VaccinationRepository(
+            revocationRepo: revocationRepo,
             service: APIService.create(),
             keychain: KeychainPersistence(),
             userDefaults: UserDefaultsPersistence(),

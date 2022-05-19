@@ -23,6 +23,7 @@ protocol CertificateDetailViewModelProtocol {
     var immunizationBody: String { get }
     var items: [CertificateItem] { get }
     var showBoosterNotification: Bool { get }
+    var showScanHint: Bool { get }
     var showNewBoosterNotification: Bool { get }
     var boosterNotificationTitle: String { get }
     var boosterNotificationBody: String { get }

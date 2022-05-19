@@ -9,23 +9,6 @@
 import Foundation
 import PromiseKit
 
-public enum CertificateError: Error, ErrorCode {
-    case positiveResult
-    case expiredCertifcate
-    case invalidEntity
-
-    public var errorCode: Int {
-        switch self {
-        case .positiveResult:
-            return 421
-        case .expiredCertifcate:
-            return 422
-        case .invalidEntity:
-            return 423
-        }
-    }
-}
-
 public enum ScanType: Int {
     case _3G = 0
     case _2G = 1
@@ -37,6 +20,7 @@ private enum Constants {
 }
 
 public class VaccinationRepository: VaccinationRepositoryProtocol {
+    private let revocationRepo: CertificateRevocationRepositoryProtocol
     private let service: APIServiceProtocol
     private let keychain: Persistence
     private var userDefaults: Persistence
@@ -65,7 +49,14 @@ public class VaccinationRepository: VaccinationRepositoryProtocol {
         return nil
     }
 
-    public init(service: APIServiceProtocol, keychain: Persistence, userDefaults: Persistence, boosterLogic: BoosterLogicProtocol, publicKeyURL: URL, initialDataURL: URL) {
+    public init(revocationRepo: CertificateRevocationRepositoryProtocol,
+                service: APIServiceProtocol,
+                keychain: Persistence,
+                userDefaults: Persistence,
+                boosterLogic: BoosterLogicProtocol,
+                publicKeyURL: URL,
+                initialDataURL: URL) {
+        self.revocationRepo = revocationRepo
         self.service = service
         self.keychain = keychain
         self.userDefaults = userDefaults
@@ -107,7 +98,7 @@ public class VaccinationRepository: VaccinationRepositoryProtocol {
             var checkedCertificates = [ExtendedCBORWebToken]()
             for var certificate in list.certificates {
                 if (try? checkCertificate(certificate.vaccinationQRCodeData).wait()) == nil {
-                    certificate.vaccinationCertificate.invalid = true
+                    certificate.invalid = true
                 }
                 checkedCertificates.append(certificate)
             }
@@ -269,7 +260,11 @@ public class VaccinationRepository: VaccinationRepositoryProtocol {
         }
         .map(on: .global()) { certificate in
             ExtendedCBORWebToken(vaccinationCertificate: certificate, vaccinationQRCodeData: data)
-        }.then(on: .global()) { extendedCBORWebToken in
+        }
+        .then(on: .global()) {
+            RevokeUseCase(token: $0, revocationRepository: self.revocationRepo).execute()
+        }
+        .then(on: .global()) { extendedCBORWebToken in
             self.getCertificateList()
                 .then(on: .global()) { list -> Promise<Void> in
                     var certList = list
@@ -326,11 +321,12 @@ public class VaccinationRepository: VaccinationRepositoryProtocol {
     }
 
     public func validCertificate(_ data: String) -> Promise<ExtendedCBORWebToken> {
-        checkCertificate(data).map { cborWebToken in
-                .init(
-                    vaccinationCertificate: cborWebToken,
-                    vaccinationQRCodeData: data
-                )
+        firstly {
+            return checkCertificate(data)
+        }
+        .then {
+            Promise.value(ExtendedCBORWebToken(vaccinationCertificate: $0,
+                                               vaccinationQRCodeData: data))
         }
     }
 

@@ -45,4 +45,7 @@ public extension CBORWebToken {
         isTest ? .test : isRecovery ? .recovery : .vaccination
     }
     
+    var isGermanIssuer: Bool {
+        iss == "DE"
+    }
 }

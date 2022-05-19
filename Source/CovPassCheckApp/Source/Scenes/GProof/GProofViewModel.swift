@@ -90,58 +90,65 @@ class GProofViewModel: GProofViewModelProtocol {
     var areBothScanned: Bool { firstResult != nil && secondResult != nil}
     var firstResult: ValidationResultViewModel? = nil
     var secondResult: ValidationResultViewModel? = nil
-    var firstIsFailedTechnicalReason: Bool { (firstResult is ErrorResultViewModel && firstResult?.certificate == nil) }
-    var secondIsFailedTechnicalReason: Bool { (secondResult is ErrorResultViewModel && secondResult?.certificate == nil) }
+    var firstIsFailedTechnicalReason: Bool { (firstResult is ErrorResultViewModel) }
+    var secondIsFailedTechnicalReason: Bool { (secondResult is ErrorResultViewModel) }
     let router: GProofRouterProtocol
     internal var delegate: ViewModelDelegate?
     private var initialTokenIsBoosted: Bool = false
+    private var error: Error?
     private let repository: VaccinationRepositoryProtocol
+    private let revocationRepository: CertificateRevocationRepositoryProtocol
     private let certLogic: DCCCertLogicProtocol
-    private let error: Error? = nil
     private let jsonEncoder: JSONEncoder = JSONEncoder()
     private var lastTriedCertType: CertType? = nil
     private var userDefaults: Persistence
     private var boosterAsTest: Bool
     private var resolvable: Resolver<ExtendedCBORWebToken>
-    private var isFirstScan: Bool { firstResult == nil }
+    private var isFirstScan = true
     init(resolvable: Resolver<ExtendedCBORWebToken>,
-         initialToken: ExtendedCBORWebToken,
          router: GProofRouterProtocol,
          repository: VaccinationRepositoryProtocol,
+         revocationRepository: CertificateRevocationRepositoryProtocol,
          certLogic: DCCCertLogicProtocol,
          userDefaults: Persistence,
          boosterAsTest: Bool) {
         self.resolvable = resolvable
         self.repository = repository
+        self.revocationRepository = revocationRepository
         self.certLogic = certLogic
         self.userDefaults = userDefaults
         self.router = router
         self.boosterAsTest = boosterAsTest
-        _ = self.setResultViewModel(newToken: initialToken)
     }
     
-    private func startQRCodeValidation(for scanType: ScanType) {
+    
+    func scanQRCode() {
+        var tmpToken: ExtendedCBORWebToken?
         firstly {
             router.scanQRCode()
         }
-        .map {
-            try self.payloadFromScannerResult($0)
-        }
         .then {
-            self.repository.validCertificate($0)
+            ParseCertificateUseCase(scanResult: $0,
+                                    vaccinationRepository: self.repository).execute()
         }
-        .done {
-            self.validationToken(token: $0)
+        .then { token -> Promise<ExtendedCBORWebToken> in
+            tmpToken = token
+            return ValidateCertificateUseCase(token: token,
+                                              revocationRepository: CertificateRevocationRepository()!,
+                                              certLogic: self.certLogic,
+                                              persistence: self.userDefaults).execute()
         }
         .cancelled {
             if self.isFirstScan {
                 self.router.sceneCoordinator.dimiss(animated: true)
             }
         }
-        .catch {
-            self.errorHandling($0)
+        .done {
+            self.validationToken(token: $0)
         }
-
+        .catch { error in
+            self.errorHandling(error, token: tmpToken)
+        }
     }
     
     private func validationToken(token: ExtendedCBORWebToken) {
@@ -149,7 +156,7 @@ class GProofViewModel: GProofViewModelProtocol {
             try self.preventSettingSameQRCode(token)
         }
         .then {
-            self.setResultViewModel(newToken: $0)
+            self.setResultViewModel(error: nil, newToken: $0)
         }
         .then {
             self.checkIfSamePerson()
@@ -157,32 +164,31 @@ class GProofViewModel: GProofViewModelProtocol {
         .done {
             self.delegate?.viewModelDidUpdate()
         }
-        .cancelled {
-            if self.isFirstScan {
-                self.router.sceneCoordinator.dimiss(animated: true)
-            }
-        }
         .catch {
-            self.errorHandling($0)
+            self.errorHandling($0, token: token)
         }
     }
     
-    private func errorHandling(_ error: Error) {
+    private func errorHandling(_ error: Error, token: ExtendedCBORWebToken?) {
+        self.error = error
         if (error as? QRCodeError) == .qrCodeExists {
             router.showError(error: error)
-        } else if isFirstScan && ((error as? ScanError) == .badOutput || (error as? Base45CodingError) == .base45Decoding) {
-            showErorResultPage()
-            setResultViewModel(newToken: nil).cauterize()
+        } else if isFirstScan && (error is ScanError || error is Base45CodingError || error is CertificateError) {
+            showErorResultPage(error: error, token: token)
+            setResultViewModel(error: error, newToken: token).cauterize()
         } else {
-            setResultViewModel(newToken: nil).cauterize()
+            setResultViewModel(error: error, newToken: token).cauterize()
         }
     }
     
-    private func showErorResultPage() {
-        let showCert = lastTriedCertType == .test ? secondResult?.certificate : firstResult?.certificate
+    private func showErorResultPage(error: Error, token: ExtendedCBORWebToken?) {
         let shouldShowStartOverButton = !isFirstScan
-        router.showCertificate(showCert, _2GContext: true, userDefaults: userDefaults, buttonHidden: shouldShowStartOverButton)
-            .done{ token in
+        router.showCertificate(token,
+                               _2GContext: true,
+                               error: error,
+                               userDefaults: userDefaults,
+                               buttonHidden: shouldShowStartOverButton)
+            .done { token in
                 self.validationToken(token: token)
             }
             .cancelled {
@@ -214,14 +220,12 @@ class GProofViewModel: GProofViewModelProtocol {
         return .value(newToken)
     }
     
-    private func setResultViewModel(newToken: ExtendedCBORWebToken?) -> Promise<Void> {
+    private func setResultViewModel(error: Error?, newToken: ExtendedCBORWebToken?) -> Promise<Void> {
         let validationResultViewModel = ValidationResultFactory.createViewModel(resolvable: resolvable,
                                                                                 router: router,
                                                                                 repository: repository,
                                                                                 certificate: newToken,
                                                                                 error: error,
-                                                                                type: userDefaults.selectedLogicType,
-                                                                                certLogic: certLogic,
                                                                                 _2GContext: true,
                                                                                 userDefaults: userDefaults)
         initialTokenIsBoosted = newToken?.vaccinationCertificate.hcert.dgc.isVaccinationBoosted ?? false && boosterAsTest
@@ -274,26 +278,29 @@ class GProofViewModel: GProofViewModelProtocol {
     }
     
     func scanNext() {
+        isFirstScan = false
         lastTriedCertType = .test
-        startQRCodeValidation(for: ._2G)
+        scanQRCode()
     }
     
     func retry() {
+        isFirstScan = false
         if lastTriedCertType == .test {
             secondResult = nil
         } else {
             firstResult = nil
         }
         delegate?.viewModelDidUpdate()
-        startQRCodeValidation(for: ._2G)
+        scanQRCode()
     }
     
     func startover() {
+        isFirstScan = true
         secondResult = nil
         firstResult = nil
         lastTriedCertType = nil
         delegate?.viewModelDidUpdate()
-        startQRCodeValidation(for: ._2G)
+        scanQRCode()
     }
     
     func cancel() {
@@ -303,36 +310,22 @@ class GProofViewModel: GProofViewModelProtocol {
     func showFirstCardResult() {
         router
             .showCertificate(firstResult?.certificate,
-                               _2GContext: true,
-                               userDefaults: userDefaults,
-                               buttonHidden: true)
+                             _2GContext: true,
+                             error: error,
+                             userDefaults: userDefaults,
+                             buttonHidden: true)
             .cauterize()
     }
     
     func showSecondCardResult() {
         router
             .showCertificate(secondResult?.certificate,
-                               _2GContext: true,
-                               userDefaults: userDefaults,
-                               buttonHidden: true)
+                             _2GContext: true,
+                             error: error,
+                             userDefaults: userDefaults,
+                             buttonHidden: true)
             .cauterize()
     }
-    
-
-    
-
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
-
-    
 }
 
 

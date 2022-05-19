@@ -14,12 +14,14 @@ public extension CertificateReissueRepository {
         let jsonDecoder = JSONDecoder()
         let jsonEncoder = JSONEncoder()
         let baseURL = XCConfiguration.certificateReissueURL
-        let trustListURL = Bundle.commonBundle.url(
-            forResource: XCConfiguration.staticTrustListResource,
-            withExtension: nil
-        )!
-        let urlSession = CertificateReissueURLSession(
-            urlSession: URLSession.certificateReissue()
+        guard let trustListURL = Bundle.commonBundle.url(forResource: XCConfiguration.staticTrustListResource, withExtension: nil) else {
+            return nil
+        }
+        let dataTaskProducer = DataTaskProducer(
+            urlSession:URLSession.certificateReissue()
+        )
+        let httpClient = HTTPClient(
+            dataTaskProducer: dataTaskProducer
         )
         guard let trustListData = keychain.trustList ?? (try? Data(contentsOf: trustListURL)),
               let trustList = try? jsonDecoder.decode(TrustList.self, from: trustListData) else {
@@ -31,7 +33,7 @@ public extension CertificateReissueRepository {
             jsonDecoder: jsonDecoder,
             jsonEncoder: jsonEncoder,
             trustList: trustList,
-            urlSession: urlSession
+            httpClient: httpClient
         )
     }
 }

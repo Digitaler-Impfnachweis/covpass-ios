@@ -18,6 +18,7 @@ class QualityAssuranceTests: XCTestCase {
     override func setUp() {
         super.setUp()
         repository = VaccinationRepository(
+            revocationRepo: CertificateRevocationRepositoryMock(),
             service: APIServiceMock(),
             keychain: MockPersistence(),
             userDefaults: MockPersistence(),

@@ -19,7 +19,8 @@ extension ExtendedCBORWebToken {
     static func token(from cbOrWebToken: String) throws -> Self {
         let data = try XCTUnwrap(cbOrWebToken.data(using: .utf8))
         let token = try JSONDecoder().decode(CBORWebToken.self, from: data)
-        let extendedToken = Self(vaccinationCertificate: token, vaccinationQRCodeData: "")
+        let extendedToken = Self(vaccinationCertificate: token,
+                                 vaccinationQRCodeData: "")
         return extendedToken
     }
 

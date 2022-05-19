@@ -108,8 +108,7 @@ class ValidationResultViewControllerSnapShotTests: BaseSnapShotTests {
     func testSuccessVaccination() {
         let token = ExtendedCBORWebToken(
             vaccinationCertificate: CBORWebToken.mockVaccinationCertificate,
-            vaccinationQRCodeData: ""
-        )
+            vaccinationQRCodeData: "")
         let view = configureView(error: nil, token: token, _2GContext: true, buttonHidden: true)
         verifyView(view: view, height: 900)
     }
@@ -117,8 +116,7 @@ class ValidationResultViewControllerSnapShotTests: BaseSnapShotTests {
     func testSuccessRecovery() {
         let token = ExtendedCBORWebToken(
             vaccinationCertificate: CBORWebToken.mockVaccinationCertificate,
-            vaccinationQRCodeData: ""
-        )
+            vaccinationQRCodeData: "")
         let view = configureView(error: nil, token: token, _2GContext: true, buttonHidden: true)
         verifyView(view: view, height: 900)
     }
@@ -126,8 +124,7 @@ class ValidationResultViewControllerSnapShotTests: BaseSnapShotTests {
     func testSuccessRecoveryExpertMode() {
         let token = ExtendedCBORWebToken(
             vaccinationCertificate: CBORWebToken.mockVaccinationCertificate,
-            vaccinationQRCodeData: ""
-        )
+            vaccinationQRCodeData: "")
         let view = configureView(error: nil, token: token, _2GContext: false, buttonHidden: false, expertMode: true)
         verifyView(view: view, height: 900)
     }
@@ -135,8 +132,7 @@ class ValidationResultViewControllerSnapShotTests: BaseSnapShotTests {
     func testSuccessVaccinationExpertMode() {
         let token = ExtendedCBORWebToken(
             vaccinationCertificate: CBORWebToken.mockVaccinationCertificate,
-            vaccinationQRCodeData: ""
-        )
+            vaccinationQRCodeData: "")
         let view = configureView(error: nil, token: token, _2GContext: false, buttonHidden: false, expertMode: true)
         verifyView(view: view, height: 900)
     }

@@ -16,13 +16,16 @@ class CertificatesOverviewViewModelTests: XCTestCase {
     var sut: CertificatesOverviewViewModel!
     var userDefaults: UserDefaultsPersistence!
     var vaccinationRepository: VaccinationRepositoryMock!
-    
+    var revocationRepository: CertificateRevocationRepositoryMock!
+    var router: CertificatesOverviewRouterMock!
     override func setUpWithError() throws {
-        let window = UIWindow(frame: UIScreen.main.bounds)
+        router = CertificatesOverviewRouterMock()
         userDefaults = UserDefaultsPersistence()
         vaccinationRepository = VaccinationRepositoryMock()
-        sut = CertificatesOverviewViewModel(router: CertificatesOverviewRouter(sceneCoordinator: DefaultSceneCoordinator(window: window)),
+        revocationRepository = CertificateRevocationRepositoryMock()
+        sut = CertificatesOverviewViewModel(router: router,
                                             repository: vaccinationRepository,
+                                            revocationRepository: revocationRepository,
                                             certLogic: DCCCertLogicMock(),
                                             boosterLogic: BoosterLogicMock(),
                                             userDefaults: userDefaults,
@@ -31,6 +34,8 @@ class CertificatesOverviewViewModelTests: XCTestCase {
     
     override func tearDownWithError() throws {
         sut = nil
+        router = nil
+        revocationRepository = nil
         userDefaults = nil
         vaccinationRepository = nil
         super.tearDown()
@@ -63,7 +68,7 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         XCTAssertEqual(.onBrandAccent70, model.backgroundColor)
         XCTAssertEqual(.neutralWhite, model.tintColor)
         XCTAssertEqual(.statusFullDetail, model.titleIcon)
-        XCTAssertEqual(false, model.isExpired)
+        XCTAssertEqual(false, model.isInvalid)
         XCTAssertEqual(false, model.isFavorite)
     }
     
@@ -95,7 +100,7 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         XCTAssertEqual(.onBrandAccent70, model.backgroundColor)
         XCTAssertEqual(.neutralWhite, model.tintColor)
         XCTAssertEqual(.statusFullDetail, model.titleIcon)
-        XCTAssertEqual(false, model.isExpired)
+        XCTAssertEqual(false, model.isInvalid)
         XCTAssertEqual(false, model.isFavorite)
     }
     
@@ -126,7 +131,7 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         XCTAssertEqual(.onBrandAccent70, model.backgroundColor)
         XCTAssertEqual(.neutralWhite, model.tintColor)
         XCTAssertEqual(.statusFullDetail, model.titleIcon)
-        XCTAssertEqual(false, model.isExpired)
+        XCTAssertEqual(false, model.isInvalid)
         XCTAssertEqual(false, model.isFavorite)
     }
     
@@ -158,7 +163,7 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         XCTAssertEqual(.onBrandAccent70, model.backgroundColor)
         XCTAssertEqual(.neutralWhite, model.tintColor)
         XCTAssertEqual(.statusFullDetail, model.titleIcon)
-        XCTAssertEqual(false, model.isExpired)
+        XCTAssertEqual(false, model.isInvalid)
         XCTAssertEqual(false, model.isFavorite)
     }
     
@@ -189,7 +194,7 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         XCTAssertEqual(.onBrandAccent70, model.backgroundColor)
         XCTAssertEqual(.neutralWhite, model.tintColor)
         XCTAssertEqual(.statusFullDetail, model.titleIcon)
-        XCTAssertEqual(false, model.isExpired)
+        XCTAssertEqual(false, model.isInvalid)
         XCTAssertEqual(false, model.isFavorite)
     }
     
@@ -198,7 +203,7 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         var cert: ExtendedCBORWebToken = CBORWebToken.mockRecoveryCertificate.extended()
         cert.vaccinationCertificate.hcert.dgc.nam.fn = "John 1"
         cert.vaccinationCertificate.hcert.dgc.r!.first!.du = DateUtils.parseDate("2021-04-26T15:05:00")!
-        cert.vaccinationCertificate.invalid = true
+        cert.invalid = true
         let certs = [cert]
         vaccinationRepository.certificates = certs
         
@@ -221,7 +226,7 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         XCTAssertEqual(.onBackground40, model.backgroundColor)
         XCTAssertEqual(.neutralWhite, model.tintColor)
         XCTAssertEqual(.expired, model.titleIcon)
-        XCTAssertEqual(true, model.isExpired)
+        XCTAssertEqual(true, model.isInvalid)
         XCTAssertEqual(false, model.isFavorite)
     }
     
@@ -253,7 +258,7 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         XCTAssertEqual(.onBackground40, model.backgroundColor)
         XCTAssertEqual(.neutralWhite, model.tintColor)
         XCTAssertEqual(.expired, model.titleIcon)
-        XCTAssertEqual(true, model.isExpired)
+        XCTAssertEqual(true, model.isInvalid)
         XCTAssertEqual(false, model.isFavorite)
     }
 
@@ -264,6 +269,7 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         sut = .init(
             router: router,
             repository: vaccinationRepository,
+            revocationRepository: CertificateRevocationRepositoryMock(),
             certLogic: DCCCertLogicMock(),
             boosterLogic: BoosterLogicMock(),
             userDefaults: userDefaults,
@@ -344,6 +350,7 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         sut = CertificatesOverviewViewModel(
             router: router,
             repository: vaccinationRepository,
+            revocationRepository: CertificateRevocationRepositoryMock(),
             certLogic: DCCCertLogicMock(),
             boosterLogic: BoosterLogicMock(),
             userDefaults: userDefaults,
@@ -367,7 +374,9 @@ class CertificatesOverviewViewModelTests: XCTestCase {
     func testRefresh_expiry_notification_token_is_invalid() throws {
         // Given
         let router = CertificatesOverviewRouterMock()
-        configureSutAndRepository(with: router, certificates: [.invalid])
+        var token = ExtendedCBORWebToken.invalidToken
+        token.invalid = true
+        configureSutAndRepository(with: router, certificates: [token])
 
         // When
         _ = sut.refresh()
@@ -412,14 +421,14 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         _ = sut.refresh()
 
         // Then
-        wait(for: [router.showDialogExpectation], timeout: 2)
+        wait(for: [router.showDialogExpectation], timeout: 1)
     }
 
     func testRefresh_expiry_notification_multiple_tokens_one_is_valid() throws {
         // Given
         let tokens: [ExtendedCBORWebToken] = try [
             .expired,
-            .invalid,
+            .invalidToken,
             .test,
             .mock()
         ]
@@ -455,7 +464,7 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         // Given
         let tokens: [ExtendedCBORWebToken] = [
             .expired,
-            .invalid
+            .invalidToken
         ]
         let router = CertificatesOverviewRouterMock()
         configureSutAndRepository(with: router, certificates: tokens)
@@ -476,6 +485,7 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         sut = CertificatesOverviewViewModel(
             router:router,
             repository: vaccinationRepository,
+            revocationRepository: CertificateRevocationRepositoryMock(),
             certLogic: DCCCertLogicMock(),
             boosterLogic: BoosterLogicMock(),
             userDefaults: userDefaults,
@@ -490,7 +500,7 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         let url = router.receivedFaqURL
         XCTAssertEqual(url, expectedURL)
     }
-
+    
     func testScanCertificate_open_english_faq() throws {
         // Given
         let expectedURL = URL(string: "https://www.digitaler-impfnachweis-app.de/en/faq")
@@ -500,6 +510,7 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         sut = CertificatesOverviewViewModel(
             router:router,
             repository: vaccinationRepository,
+            revocationRepository: CertificateRevocationRepositoryMock(),
             certLogic: DCCCertLogicMock(),
             boosterLogic: BoosterLogicMock(),
             userDefaults: userDefaults,
@@ -514,6 +525,19 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         let url = router.receivedFaqURL
         XCTAssertEqual(url, expectedURL)
     }
+    
+    func testScanCertificate_revokedCertificate() throws {
+        // Given
+        XCTAssertFalse(sut.isLoading)
+
+        // When
+        sut.scanCertificate(withIntroduction: false)
+        XCTAssertTrue(sut.isLoading)
+        RunLoop.main.run(for: 0.01)
+        // Then
+        XCTAssertFalse(sut.isLoading)
+        wait(for: [router.showCertificateExpectation], timeout: 0.1)
+    }
 }
 
 private extension ExtendedCBORWebToken {
@@ -523,8 +547,7 @@ private extension ExtendedCBORWebToken {
                 iss: "",
                 iat: nil,
                 exp: .distantPast,
-                hcert: .init(dgc: .init(nam: .init(fnt: ""), ver: "1")),
-                invalid: false
+                hcert: .init(dgc: .init(nam: .init(fnt: ""), ver: "1"))
             ),
             vaccinationQRCodeData: ""
         )
@@ -536,21 +559,19 @@ private extension ExtendedCBORWebToken {
                 iss: "",
                 iat: nil,
                 exp: Date() + 60,
-                hcert: .init(dgc: .init(nam: .init(fnt: ""), ver: "1")),
-                invalid: false
+                hcert: .init(dgc: .init(nam: .init(fnt: ""), ver: "1"))
             ),
             vaccinationQRCodeData: ""
         )
     }
 
-    static var invalid: ExtendedCBORWebToken {
+    static var invalidToken: ExtendedCBORWebToken {
         .init(
             vaccinationCertificate: .init(
                 iss: "",
                 iat: nil,
                 exp: nil,
-                hcert: .init(dgc: .init(nam: .init(fnt: ""), ver: "1")),
-                invalid: true
+                hcert: .init(dgc: .init(nam: .init(fnt: ""), ver: "1"))
             ),
             vaccinationQRCodeData: ""
         )

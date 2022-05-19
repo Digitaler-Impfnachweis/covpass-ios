@@ -45,10 +45,17 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
     }
 
     var immunizationButton: String {
-        if selectedCertificate?.vaccinationCertificate.isInvalid ?? false {
+        if selectedCertificateIsInvalidOrRevoked {
             return "certificates_overview_expired_action_button_title".localized
         }
         return "recovery_certificate_overview_action_button_title".localized
+    }
+
+    private var selectedCertificateIsInvalidOrRevoked: Bool {
+        guard let selectedCertificate = selectedCertificate else {
+            return false
+        }
+        return selectedCertificate.isInvalid || selectedCertificate.isRevoked
     }
 
     var favoriteIcon: UIImage? {
@@ -74,7 +81,9 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
     }
 
     var immunizationIcon: UIImage? {
-        if selectedCertificate?.vaccinationCertificate.isExpired ?? false || selectedCertificate?.vaccinationCertificate.isInvalid ?? false {
+        if selectedCertificate?.vaccinationCertificate.isExpired ?? false ||
+            selectedCertificateIsInvalidOrRevoked
+        {
             return UIImage.statusExpiredCircle
         }
         if selectedCertificate?.vaccinationCertificate.expiresSoon ?? false {
@@ -101,7 +110,7 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
                           DateUtils.displayDateFormatter.string(from: expireDate),
                           DateUtils.displayTimeFormatter.string(from: expireDate))
         }
-        if selectedCertificate?.vaccinationCertificate.isInvalid ?? false {
+        if selectedCertificateIsInvalidOrRevoked {
             return "certificate_invalid_detail_view_note_title".localized
         }
         if let r = selectedCertificate?.vaccinationCertificate.hcert.dgc.r?.first {
@@ -142,8 +151,14 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
         if selectedCertificate?.vaccinationCertificate.expiresSoon ?? false {
             return "certificates_overview_soon_expiring_subtitle".localized
         }
-        if selectedCertificate?.vaccinationCertificate.isInvalid ?? false {
+        if selectedCertificate?.isInvalid ?? false {
             return "certificates_overview_invalid_message".localized
+        }
+        if selectedCertificateIsGermanAndWasRevoked {
+            return "revocation_detail_single_DE".localized
+        }
+        if selectedCertificateIsNotGermanAndWasRevoked {
+            return "revocation_detail_single_notDE".localized
         }
         if let cert = selectedCertificate?.vaccinationCertificate.hcert.dgc.v?.first(where: { $0.fullImmunization }), !cert.fullImmunizationValid {
             return "vaccination_certificate_overview_complete_from_message".localized
@@ -158,6 +173,27 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
             return "vaccination_certificate_overview_incomplete_message".localized
         }
         return "recovery_certificate_overview_message".localized
+    }
+
+    private var selectedCertificateIsGermanAndWasRevoked: Bool {
+        guard let selectedCertificate = selectedCertificate else {
+            return false
+        }
+        return selectedCertificate.vaccinationCertificate.isGermanIssuer && selectedCertificate.isRevoked
+    }
+
+    private var selectedCertificateIsNotGermanAndWasRevoked: Bool {
+        guard let selectedCertificate = selectedCertificate else {
+            return false
+        }
+        return !selectedCertificate.vaccinationCertificate.isGermanIssuer && selectedCertificate.isRevoked
+    }
+
+    var showScanHint: Bool {
+        guard let selectedCertificate = selectedCertificate else {
+            return true
+        }
+        return !selectedCertificate.isRevoked
     }
     
     var items: [CertificateItem] {
@@ -247,14 +283,18 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
     }
 
     func immunizationButtonTapped() {
-        if selectedCertificate?.vaccinationCertificate.isInvalid ?? false {
+        if selectedCertificateIsInvalidOrRevoked {
             resolver?.fulfill(.addNewCertificate)
         } else {
-            guard let cert = certificates.sortLatest().first else {
-                return
-            }
-            router.showCertificate(for: cert)
+            showLatestCertificate()
         }
+    }
+
+    private func showLatestCertificate() {
+        guard let certificate = certificates.sortLatest().first else {
+            return
+        }
+        router.showCertificate(for: certificate)
     }
 
     func toggleFavorite() {
@@ -280,7 +320,7 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
         if certificates.qualifiedForReissue {
             self.repository.setReissueProcess(initialAlreadySeen: value,
                                               newBadgeAlreadySeen: value,
-                                              tokens: self.certificates.filterBoosterAfterVaccinationAfterRecovery).cauterize()
+                                              tokens: certificates.filterBoosterAfterVaccinationAfterRecoveryFromGermany).cauterize()
         }
     }
     
@@ -290,7 +330,7 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
         boosterLogic.updateBoosterCandidate(candidate)
     }
     
-    func refreshCertsAndUpdateView() -> Promise<Void> {
+    func refreshCertsAndUpdateView() {
         firstly {
             self.repository.getCertificateList()
         }
@@ -302,12 +342,13 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
         .done {
             self.delegate?.viewModelDidUpdate()
         }
+        .cauterize()
     }
     
     func triggerReissue() {
-        router.showReissue(for: certificates.filterBoosterAfterVaccinationAfterRecovery)
+        router.showReissue(for: certificates.filterBoosterAfterVaccinationAfterRecoveryFromGermany)
             .ensure {
-                self.refreshCertsAndUpdateView().cauterize()
+                self.refreshCertsAndUpdateView()
             }
             .cauterize()
     }
@@ -318,7 +359,7 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
         if certificates.filterBoosted.isEmpty {
             self.repository.setReissueProcess(initialAlreadySeen: false,
                                               newBadgeAlreadySeen: false,
-                                              tokens: self.certificates.filterBoosterAfterVaccinationAfterRecovery).cauterize()
+                                              tokens: certificates.filterBoosterAfterVaccinationAfterRecoveryFromGermany).cauterize()
         }
     }
     

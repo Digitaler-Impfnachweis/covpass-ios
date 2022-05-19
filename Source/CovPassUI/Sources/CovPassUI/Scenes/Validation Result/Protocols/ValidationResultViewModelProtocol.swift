@@ -9,7 +9,7 @@ import CovPassCommon
 import UIKit
 import PromiseKit
 
-public protocol ValidationViewModel {
+public protocol ValidationViewModelProtocol {
     var resolvable: Resolver<ExtendedCBORWebToken> { get set }
     var router: ValidationResultRouterProtocol { get set }
     var repository: VaccinationRepositoryProtocol { get set }
@@ -21,11 +21,16 @@ public protocol ValidationViewModel {
     var resultBody: String { get }
     var paragraphs: [Paragraph] { get }
     var info: String? { get }
+    var revocationHeadline: String { get }
+    var revocationInfoText: String { get }
     var buttonHidden: Bool { get set }
+    var isLoadingScan: Bool { get set }
     var _2GContext: Bool { get set }
-    var linkIsHidden: Bool { get }
+    var revocationInfoHidden: Bool { get }
     var userDefaults: Persistence { get }
     var revocationKeyFilename: String { get }
-    func scanNextCertifcate()
+    func scanCertificate()
+    func scanCertificateStarted()
+    func scanCertificateEnded()
     func revocationButtonTapped()
 }

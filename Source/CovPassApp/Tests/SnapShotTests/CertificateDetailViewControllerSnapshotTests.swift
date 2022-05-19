@@ -153,7 +153,7 @@ class CertificateDetailViewControllerSnapshotTests: BaseSnapShotTests {
         var cert: ExtendedCBORWebToken = CBORWebToken.mockTestCertificate.extended()
         cert.vaccinationCertificate.hcert.dgc.t!.first!.sc = DateUtils.parseDate("2021-04-26T15:05:00")!
         cert.vaccinationCertificate.hcert.dgc.nam.fn = "John 1"
-        cert.vaccinationCertificate.invalid = true
+        cert.invalid = true
         let certs = [cert]
         vacinationRepoMock.certificates = certs
         let bl = BoosterLogic.init(certLogic: DCCCertLogicMock(),
@@ -174,7 +174,7 @@ class CertificateDetailViewControllerSnapshotTests: BaseSnapShotTests {
         var cert: ExtendedCBORWebToken = CBORWebToken.mockTestCertificate.extended()
         cert.vaccinationCertificate.hcert.dgc.t!.first!.sc = DateUtils.parseDate("2021-04-26T15:05:00")!
         cert.vaccinationCertificate.hcert.dgc.nam.fn = "John 1"
-        cert.vaccinationCertificate.invalid = true
+        cert.invalid = true
         cert.vaccinationQRCodeData = " "
 
         // Test
@@ -226,7 +226,7 @@ class CertificateDetailViewControllerSnapshotTests: BaseSnapShotTests {
         var cert: ExtendedCBORWebToken = CBORWebToken.mockTestCertificate.extended()
         cert.vaccinationCertificate.hcert.dgc.t!.first!.sc = DateUtils.parseDate("2021-04-26T15:05:00")!
         cert.vaccinationCertificate.hcert.dgc.nam.fn = "John 1"
-        cert.vaccinationCertificate.invalid = true
+        cert.invalid = true
         cert.vaccinationQRCodeData = " "
 
         // Test
@@ -278,7 +278,7 @@ class CertificateDetailViewControllerSnapshotTests: BaseSnapShotTests {
         var cert: ExtendedCBORWebToken = CBORWebToken.mockTestCertificate.extended()
         cert.vaccinationCertificate.hcert.dgc.t!.first!.sc = DateUtils.parseDate("2021-04-26T15:05:00")!
         cert.vaccinationCertificate.hcert.dgc.nam.fn = "John 1"
-        cert.vaccinationCertificate.invalid = true
+        cert.invalid = true
         cert.vaccinationQRCodeData = " "
 
         // Test
@@ -325,7 +325,7 @@ class CertificateDetailViewControllerSnapshotTests: BaseSnapShotTests {
         var cert: ExtendedCBORWebToken = CBORWebToken.mockTestCertificate.extended()
         cert.vaccinationCertificate.hcert.dgc.t!.first!.sc = DateUtils.parseDate("2021-04-26T15:05:00")!
         cert.vaccinationCertificate.hcert.dgc.nam.fn = "John 1"
-        cert.vaccinationCertificate.invalid = true
+        cert.invalid = true
         cert.vaccinationQRCodeData = " "
 
         // Test
@@ -367,7 +367,7 @@ class CertificateDetailViewControllerSnapshotTests: BaseSnapShotTests {
         var cert: ExtendedCBORWebToken = CBORWebToken.mockTestCertificate.extended()
         cert.vaccinationCertificate.hcert.dgc.t!.first!.sc = DateUtils.parseDate("2021-04-26T15:05:00")!
         cert.vaccinationCertificate.hcert.dgc.nam.fn = "John 1"
-        cert.vaccinationCertificate.invalid = true
+        cert.invalid = true
         cert.vaccinationQRCodeData = " "
 
         // Test
@@ -456,28 +456,21 @@ class CertificateDetailViewControllerSnapshotTests: BaseSnapShotTests {
         let vc = CertificateDetailViewController(viewModel: vm)
         verifyView(view: vc.view, height: 1100)
     }
-}
 
-struct CertificateDetailRouterMock: CertificateDetailRouterProtocol {
-    
-    let expectationShowReissue = XCTestExpectation(description: "expectationShowReissue")
-    
-    func showCertificate(for token: ExtendedCBORWebToken) -> Promise<Void> {
-        .value
-    }
-    
-    func showDetail(for certificate: ExtendedCBORWebToken) -> Promise<CertificateDetailSceneResult> {
-        .value(.addNewCertificate)
-    }
+    func testCertificateIsRevoked() throws {
+        var token = try ExtendedCBORWebToken.token1Of1()
+        token.revoked = true
+        let viewModel = CertificateDetailViewModel(
+            router: CertificateDetailRouterMock(),
+            repository: VaccinationRepositoryMock(),
+            boosterLogic: BoosterLogicMock(),
+            certificates: [token],
+            resolvable: nil
+        )
+        let viewController = CertificateDetailViewController(
+            viewModel: viewModel
+        )
 
-    func showWebview(_ url: URL) {
-        
+        verifyView(view: viewController.view, height: 1100)
     }
-
-    func showReissue(for tokens: [ExtendedCBORWebToken]) -> Promise<Void> {
-        expectationShowReissue.fulfill()
-        return .value
-    }
-
-    var sceneCoordinator: SceneCoordinator = SceneCoordinatorMock()
 }

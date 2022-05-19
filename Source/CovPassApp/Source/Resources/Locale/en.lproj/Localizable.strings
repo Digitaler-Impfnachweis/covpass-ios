@@ -664,7 +664,7 @@
 
 "booster_vaccination_certificate_overview_action_button_title" = "Display current QR Code";
 
-"vaccination_certificate_overview_incomplete_title" = "Not fully vaccinated: %d of %d";
+"vaccination_certificate_overview_incomplete_title" = "Not fully vaccinated";
 
 "vaccination_certificate_overview_incomplete_message" = "You are not fully vaccinated. To use this QR code as proof of completed vaccination, you will need to add another vaccine dose.";
 
@@ -1498,3 +1498,24 @@
 "certificate_renewal_error_button_primary" = "OK";
 
 "certificate_renewal_error_button_secondary" = "More information";
+
+
+/********** DCC revocation **********/
+
+"revocation_error_scan_title" = "The certificate cannot be added";
+
+"revocation_error_scan_single_DE" = "The certificate you scanned was revoked by the RKI due to an official decree.";
+
+"revocation_error_scan_single_notDE" = "The certificate was revoked by the certificate issuer due to an official decision.";
+
+"revocation_error_scan_locationID" = "The certificate you scanned was revoked by the RKI due to an official decree. Please make every effort to have a new digital certificate issued.";
+
+"revocation_dialog_single" = "The validity of a certificate has changed. This certificate can no longer be used for verification.";
+
+"revocation_dialog_locationID" = "The validity of a certificate has changed. This certificate can no longer be used for verification. Please make every effort to have a new digital certificate issued.";
+
+"revocation_detail_single_DE" = "The RKI has revoked the certificate due to an official decree.";
+
+"revocation_detail_single_notDE" = "The certificate was revoked by the certificate issuer due to an official decision.";
+
+"revocation_detail_locationID" = "The RKI has revoked the certificate due to an official decree. Please make every effort to have a new digital certificate issued.";

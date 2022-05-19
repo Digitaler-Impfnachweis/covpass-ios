@@ -1,5 +1,5 @@
 //
-//  ValidationResultViewModel.swift
+//  ValidationViewModel+Extension.swift
 //
 //
 //  © Copyright IBM Deutschland GmbH 2021
@@ -9,17 +9,27 @@
 import CovPassCommon
 import CovPassUI
 import PromiseKit
-import UIKit
+import UIKit 
 
 private enum Constants {
     static let confirmButtonLabel = "validation_check_popup_valid_vaccination_button_title".localized
     static let confirmButtonLabel2G = "result_2G_button_startover".localized
+    static let revocationBody = "validation_check_popup_revoked_certificate_box_text".localized
+    static let revocationTitle = "revocation_headline".localized
 }
 
-extension ValidationViewModel {
+extension ValidationViewModelProtocol {
     
-    var linkIsHidden: Bool {
+    var revocationInfoHidden: Bool {
         !userDefaults.revocationExpertMode || _2GContext
+    }
+
+    var revocationInfoText: String {
+        Constants.revocationBody
+    }
+
+    var revocationHeadline: String {
+        Constants.revocationTitle
     }
         
     var toolbarState: CustomToolbarState {
@@ -38,16 +48,23 @@ extension ValidationViewModel {
         router.showStart()
         resolvable.cancel()
     }
-
-    func scanNextCertifcate() {
+    
+    func scanCertificate() {
+        var tmpToken: ExtendedCBORWebToken?
+        scanCertificateStarted()
         firstly {
             router.scanQRCode()
         }
-        .map {
-            try self.payloadFromScannerResult($0)
-        }
         .then {
-            self.repository.validCertificate($0)
+            ParseCertificateUseCase(scanResult: $0,
+                                    vaccinationRepository: repository).execute()
+        }
+        .then { token -> Promise<ExtendedCBORWebToken> in
+            tmpToken = token
+            return ValidateCertificateUseCase(token: token,
+                                              revocationRepository: CertificateRevocationRepository()!,
+                                              certLogic: DCCCertLogic.create(),
+                                              persistence: self.userDefaults).execute()
         }
         .done { certificate in
             if self._2GContext {
@@ -61,29 +78,28 @@ extension ValidationViewModel {
                 repository: self.repository,
                 certificate: certificate,
                 error: nil,
-                type: UserDefaultsPersistence().selectedLogicType,
-                certLogic: DCCCertLogic.create(),
                 _2GContext: _2GContext,
                 userDefaults: userDefaults
             )
             self.delegate?.viewModelDidChange(vm)
+        }
+        .ensure {
+            scanCertificateEnded()
         }
         .catch { error in
             let vm = ValidationResultFactory.createViewModel(
                 resolvable: resolvable,
                 router: self.router,
                 repository: self.repository,
-                certificate: nil,
+                certificate: tmpToken,
                 error: error,
-                type: UserDefaultsPersistence().selectedLogicType,
-                certLogic: DCCCertLogic.create(),
                 _2GContext: _2GContext,
                 userDefaults: userDefaults
             )
             self.delegate?.viewModelDidChange(vm)
         }
     }
-
+    
     private func payloadFromScannerResult(_ result: ScanResult) throws -> String {
         switch result {
         case let .success(payload):

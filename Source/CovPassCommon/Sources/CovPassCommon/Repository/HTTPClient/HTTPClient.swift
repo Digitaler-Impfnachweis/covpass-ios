@@ -1,5 +1,5 @@
 //
-//  CertificateReissueURLSession.swift
+//  HTTPClient.swift
 //  
 //
 //  Created by Thomas Kuleßa on 18.02.22.
@@ -9,16 +9,16 @@ import Foundation
 import PromiseKit
 import SwiftUI
 
-public class CertificateReissueURLSession: CertificateReissueURLSessionProtocol {
-    private var urlSession: URLSession
+public class HTTPClient: HTTPClientProtocol {
+    private var dataTaskProducer: DataTaskProducerProtocol
 
-    public init(urlSession: URLSession) {
-        self.urlSession = urlSession
+    public init(dataTaskProducer: DataTaskProducerProtocol) {
+        self.dataTaskProducer = dataTaskProducer
     }
 
     public func httpRequest(_ urlRequest: URLRequest) -> Promise<Data> {
         Promise { seal in
-            urlSession
+            dataTaskProducer
                 .dataTask(with: urlRequest) { data, urlResponse, error in
                     self.handleResponse(data, urlResponse, error)
                         .done { data in
@@ -40,7 +40,7 @@ public class CertificateReissueURLSession: CertificateReissueURLSessionProtocol 
                 if let data = data {
                     return .value(data)
                 }
-                return .init(error: CertificateReissueURLSesssionError.invalidResponse(urlResponse))
+                return .init(error: HTTPClientError.invalidResponse(urlResponse))
             }
     }
 
@@ -48,12 +48,20 @@ public class CertificateReissueURLSession: CertificateReissueURLSessionProtocol 
         guard let error = error else {
             return .value
         }
-        return .init(error: error)
+        return .init(error: mapIfIsCancelled(error))
+    }
+
+    private func mapIfIsCancelled(_ error: Error) -> Error {
+        let error = error as NSError
+        if error.domain == NSURLErrorDomain, error.isCancelled {
+            return HTTPClientError.dataTaskCancelled
+        }
+        return error
     }
 
     private func httpURLResponse(from urlResponse: URLResponse?) -> Promise<HTTPURLResponse> {
         guard let httpURLResponse = urlResponse as? HTTPURLResponse else {
-            return .init(error: CertificateReissueURLSesssionError.invalidResponse(urlResponse))
+            return .init(error: HTTPClientError.invalidResponse(urlResponse))
         }
         return .value(httpURLResponse)
     }
@@ -61,7 +69,7 @@ public class CertificateReissueURLSession: CertificateReissueURLSessionProtocol 
     private func checkHTTPStatusCode(_ data: Data?, response: HTTPURLResponse) -> Promise<Data?> {
         response.isOk ?
             .value(data) :
-            .init(error: CertificateReissueURLSesssionError.http(response.statusCode, data: data))
+            .init(error: HTTPClientError.http(response.statusCode, data: data))
     }
 }
 

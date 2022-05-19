@@ -26,7 +26,9 @@ class VaccinationRepositoryTests: XCTestCase {
         userDefaults = MockPersistence()
         boosterLogic = BoosterLogicMock()
         let trustListURL = Bundle.commonBundle.url(forResource: "dsc.json", withExtension: nil)!
+        let revocationRepo = CertificateRevocationRepositoryMock()
         sut = VaccinationRepository(
+            revocationRepo: revocationRepo,
             service: service,
             keychain: keychain,
             userDefaults: userDefaults,
@@ -34,6 +36,26 @@ class VaccinationRepositoryTests: XCTestCase {
             publicKeyURL: Bundle.module.url(forResource: "pubkey.pem", withExtension: nil)!,
             initialDataURL: trustListURL
         )
+    }
+    
+    func configureSut(revoked: Bool) -> VaccinationRepository {
+        service = APIServiceMock()
+        keychain = MockPersistence()
+        userDefaults = MockPersistence()
+        boosterLogic = BoosterLogicMock()
+        let trustListURL = Bundle.commonBundle.url(forResource: "dsc.json", withExtension: nil)!
+        let revocationRepo = CertificateRevocationRepositoryMock()
+        revocationRepo.isRevoked = revoked
+        let sut = VaccinationRepository(
+            revocationRepo: revocationRepo,
+            service: service,
+            keychain: keychain,
+            userDefaults: userDefaults,
+            boosterLogic: boosterLogic,
+            publicKeyURL: Bundle.module.url(forResource: "pubkey.pem", withExtension: nil)!,
+            initialDataURL: trustListURL
+        )
+        return sut
     }
 
     override func tearDown() {
@@ -182,8 +204,7 @@ class VaccinationRepositoryTests: XCTestCase {
                 certificates: [
                     ExtendedCBORWebToken(
                         vaccinationCertificate: try JSONDecoder().decode(CBORWebToken.self, from: Data.json("CBORWebToken")),
-                        vaccinationQRCodeData: CertificateMock.validCertificate
-                    )
+                        vaccinationQRCodeData: CertificateMock.validCertificate)
                 ],
                 favoriteCertificateId: "1"
             )
@@ -193,7 +214,7 @@ class VaccinationRepositoryTests: XCTestCase {
         let list = try sut.getCertificateList().wait()
 
         XCTAssertEqual(list.favoriteCertificateId, "1")
-        XCTAssertEqual(list.certificates.first?.vaccinationCertificate.isInvalid, false)
+        XCTAssertEqual(list.certificates.first?.isInvalid, false)
     }
 
     func testGetCertificateListWithInvalidation() throws {
@@ -203,8 +224,7 @@ class VaccinationRepositoryTests: XCTestCase {
                 certificates: [
                     ExtendedCBORWebToken(
                         vaccinationCertificate: try JSONDecoder().decode(CBORWebToken.self, from: Data.json("CBORWebToken")),
-                        vaccinationQRCodeData: CertificateMock.invalidCertificateInvalidSignature
-                    )
+                        vaccinationQRCodeData: CertificateMock.invalidCertificateInvalidSignature)
                 ],
                 favoriteCertificateId: "1"
             )
@@ -214,7 +234,7 @@ class VaccinationRepositoryTests: XCTestCase {
         let list = try sut.getCertificateList().wait()
 
         XCTAssertEqual(list.favoriteCertificateId, "1")
-        XCTAssertEqual(list.certificates.first?.vaccinationCertificate.isInvalid, true)
+        XCTAssertEqual(list.certificates.first?.isInvalid, true)
     }
 
     func testGetCertificateListFailsWithWrongData() throws {
@@ -302,8 +322,9 @@ class VaccinationRepositoryTests: XCTestCase {
 
     func testDeleteCertificate() throws {
         let cborWebToken = CBORWebToken.mockVaccinationCertificate
-        let cert = ExtendedCBORWebToken(vaccinationCertificate: cborWebToken, vaccinationQRCodeData: "")
-
+        let cert = ExtendedCBORWebToken(vaccinationCertificate: cborWebToken,
+                                        vaccinationQRCodeData: "")
+        
         _ = try sut.saveCertificateList(CertificateList(certificates: [cert], favoriteCertificateId: cborWebToken.hcert.dgc.uvci)).wait()
 
         var list = try sut.getCertificateList().wait()
@@ -319,7 +340,8 @@ class VaccinationRepositoryTests: XCTestCase {
 
     func testDeleteCertificateWithBooster() throws {
         let cborWebToken = CBORWebToken.mockVaccinationCertificate
-        let cert = ExtendedCBORWebToken(vaccinationCertificate: cborWebToken, vaccinationQRCodeData: "")
+        let cert = ExtendedCBORWebToken(vaccinationCertificate: cborWebToken,
+                                        vaccinationQRCodeData: "")
 
         // existing booster notification should be deleted when certificate gets deleted
         boosterLogic.updateBoosterCandidate(BoosterCandidate(certificate: cert))
@@ -339,10 +361,12 @@ class VaccinationRepositoryTests: XCTestCase {
 
     func testDeleteCertificateWithDifferentBooster() throws {
         let cborWebToken = CBORWebToken.mockVaccinationCertificate
-        let cert = ExtendedCBORWebToken(vaccinationCertificate: cborWebToken, vaccinationQRCodeData: "")
+        let cert = ExtendedCBORWebToken(vaccinationCertificate: cborWebToken,
+                                        vaccinationQRCodeData: "")
 
         // other booster notifications should stay when certificate gets deleted
-        boosterLogic.updateBoosterCandidate(BoosterCandidate(certificate: ExtendedCBORWebToken(vaccinationCertificate: CBORWebToken.mockVaccinationCertificate.mockVaccinationUVCI("foo"), vaccinationQRCodeData: "")))
+        boosterLogic.updateBoosterCandidate(BoosterCandidate(certificate: ExtendedCBORWebToken(vaccinationCertificate: CBORWebToken.mockVaccinationCertificate.mockVaccinationUVCI("foo"),
+                                                                                               vaccinationQRCodeData: "")))
 
         _ = try sut.saveCertificateList(CertificateList(certificates: [cert], favoriteCertificateId: cborWebToken.hcert.dgc.uvci)).wait()
 
@@ -384,7 +408,8 @@ class VaccinationRepositoryTests: XCTestCase {
     
     func testSetExpiryAlert() throws {
         let cborWebToken = try! JSONDecoder().decode(CBORWebToken.self, from: Data.json("CBORWebToken"))
-        let cert = ExtendedCBORWebToken(vaccinationCertificate: cborWebToken, vaccinationQRCodeData: "")
+        let cert = ExtendedCBORWebToken(vaccinationCertificate: cborWebToken,
+                                        vaccinationQRCodeData: "")
         let cert2 = CBORWebToken.mockVaccinationCertificate.extended(vaccinationQRCodeData: "1")
         _ = try sut.saveCertificateList(CertificateList(certificates: [cert, cert2])).wait()
 
@@ -452,7 +477,8 @@ class VaccinationRepositoryTests: XCTestCase {
 
     func testFavoriteStateForCertificates() throws {
         let cborWebToken = try! JSONDecoder().decode(CBORWebToken.self, from: Data.json("CBORWebToken"))
-        let cert = ExtendedCBORWebToken(vaccinationCertificate: cborWebToken, vaccinationQRCodeData: "")
+        let cert = ExtendedCBORWebToken(vaccinationCertificate: cborWebToken,
+                                        vaccinationQRCodeData: "")
         _ = try sut.saveCertificateList(CertificateList(certificates: [cert])).wait()
 
         var res = try sut.favoriteStateForCertificates([cert]).wait()
@@ -468,12 +494,10 @@ class VaccinationRepositoryTests: XCTestCase {
     func testMatchedCertificates() throws {
         let cert1 = ExtendedCBORWebToken(
             vaccinationCertificate: try! JSONDecoder().decode(CBORWebToken.self, from: Data.json("CBORWebToken")),
-            vaccinationQRCodeData: ""
-        )
+            vaccinationQRCodeData: "")
         let cert2 = ExtendedCBORWebToken(
             vaccinationCertificate: try! JSONDecoder().decode(CBORWebToken.self, from: Data.json("CBORWebToken")),
-            vaccinationQRCodeData: ""
-        )
+            vaccinationQRCodeData: "")
         let list = CertificateList(certificates: [cert1, cert2])
 
         let res = sut.matchedCertificates(for: list)
@@ -484,14 +508,12 @@ class VaccinationRepositoryTests: XCTestCase {
     func testMatchedCertificatesDifferentPeople() throws {
         let cert1 = ExtendedCBORWebToken(
             vaccinationCertificate: try! JSONDecoder().decode(CBORWebToken.self, from: Data.json("CBORWebToken")),
-            vaccinationQRCodeData: ""
-        )
+            vaccinationQRCodeData: "")
         var token = try! JSONDecoder().decode(CBORWebToken.self, from: Data.json("CBORWebToken"))
         token.hcert.dgc.dob = Date()
         let cert2 = ExtendedCBORWebToken(
             vaccinationCertificate: token,
-            vaccinationQRCodeData: ""
-        )
+            vaccinationQRCodeData: "")
         let list = CertificateList(certificates: [cert1, cert2])
 
         let res = sut.matchedCertificates(for: list)
@@ -716,6 +738,7 @@ class VaccinationRepositoryTests: XCTestCase {
             }.cauterize()
         wait(for: [expecation], timeout: 1.0)
     }
+
 }
 
 private extension MockPersistence {

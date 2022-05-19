@@ -43,6 +43,7 @@ class ValidatorOverviewViewModel {
     // MARK: - Properties
     
     private let vaccinationRepository: VaccinationRepositoryProtocol
+    private let revocationRepository: CertificateRevocationRepositoryProtocol
     private let router: ValidatorOverviewRouterProtocol
     private let certLogic: DCCCertLogicProtocol
     private var userDefaults: Persistence
@@ -142,16 +143,24 @@ class ValidatorOverviewViewModel {
     }
     
     var boosterAsTest = false
-    
+
+    private(set) var isLoadingScan = false {
+        didSet {
+            delegate?.viewModelDidUpdate()
+        }
+    }
+
     // MARK: - Lifecycle
     
     init(router: ValidatorOverviewRouterProtocol,
          repository: VaccinationRepositoryProtocol,
+         revocationRepository: CertificateRevocationRepositoryProtocol,
          certLogic: DCCCertLogicProtocol,
          userDefaults: Persistence,
          schedulerIntervall: TimeInterval = Constants.Config.schedulerIntervall) {
         self.router = router
         self.vaccinationRepository = repository
+        self.revocationRepository = revocationRepository
         self.certLogic = certLogic
         self.userDefaults = userDefaults
         self.schedulerIntervall = schedulerIntervall
@@ -195,59 +204,55 @@ class ValidatorOverviewViewModel {
     }
     
     func startQRCodeValidation(for scanType: ScanType) {
-        firstly {
-            router.scanQRCode()
-        }
-        .map {
-            try self.payloadFromScannerResult($0)
-        }
-        .then {
-            self.vaccinationRepository.validCertificate($0)
-        }
-        .done {
-            if scanType == ._3G {
+        if scanType == ._2G {
+            self.router.showGproof(repository: self.vaccinationRepository,
+                                   revocationRepository: self.revocationRepository,
+                                   certLogic: self.certLogic,
+                                   userDefaults: self.userDefaults,
+                                   boosterAsTest: self.boosterAsTest)
+        } else {
+            var tmpToken: ExtendedCBORWebToken?
+            isLoadingScan = true
+            firstly {
+                router.scanQRCode()
+            }
+            .then {
+                ParseCertificateUseCase(scanResult: $0,
+                                        vaccinationRepository: self.vaccinationRepository).execute()
+            }
+            .then { token -> Promise<ExtendedCBORWebToken> in
+                tmpToken = token
+                return ValidateCertificateUseCase(token: token,
+                                                  revocationRepository: self.revocationRepository,
+                                                  certLogic: DCCCertLogic.create(),
+                                                  persistence: self.userDefaults).execute()
+            }
+            .done {
                 self.router.showCertificate($0,
                                             _2GContext: false,
                                             userDefaults: self.userDefaults)
-            } else {
-                self.router.showGproof(initialToken: $0,
-                                       repository: self.vaccinationRepository,
-                                       certLogic: self.certLogic,
-                                       userDefaults: self.userDefaults,
-                                       boosterAsTest: self.boosterAsTest)
+                
             }
-        }
-        .catch { error in
-            self.errorHandling(error: error, scanType: scanType)
+            .ensure {
+                self.isLoadingScan = false
+            }
+            .catch { error in
+                self.errorHandling(error: error, token: tmpToken, scanType: scanType)
+            }
         }
     }
     
-    func errorHandling(error: Error, scanType: ScanType) {
-        self.router.showError(error: error,
+    func errorHandling(error: Error, token: ExtendedCBORWebToken?, scanType: ScanType) {
+        self.router.showError(token,
+                              error: error,
                               _2GContext: scanType == ._2G,
-                              userDefaults: self.userDefaults)
-            .done { token in
-                self.router.showGproof(initialToken: token,
-                                       repository: self.vaccinationRepository,
-                                       certLogic: self.certLogic,
-                                       userDefaults: self.userDefaults,
-                                       boosterAsTest: self.boosterAsTest)
-            }
-            .cauterize()
+                              userDefaults: self.userDefaults).cauterize()
     }
     
     func showAppInformation() {
         router.showAppInformation(userDefaults: userDefaults)
     }
     
-    private func payloadFromScannerResult(_ result: ScanResult) throws -> String {
-        switch result {
-        case let .success(payload):
-            return payload
-        case let .failure(error):
-            throw error
-        }
-    }
     
     func showNotificationsIfNeeded() {
         firstly {

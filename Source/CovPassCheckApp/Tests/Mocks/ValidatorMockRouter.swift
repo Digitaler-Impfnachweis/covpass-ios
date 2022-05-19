@@ -11,7 +11,7 @@ import CovPassUI
 import PromiseKit
 
 class ValidatorMockRouter: ValidatorOverviewRouterProtocol {
-    
+
     var sceneCoordinator: SceneCoordinator = SceneCoordinatorMock()
 
     func showAppInformation(userDefaults: Persistence) {
@@ -22,8 +22,8 @@ class ValidatorMockRouter: ValidatorOverviewRouterProtocol {
         .value
     }
     
-    func showGproof(initialToken: ExtendedCBORWebToken,
-                    repository: VaccinationRepositoryProtocol,
+    func showGproof(repository: VaccinationRepositoryProtocol,
+                    revocationRepository: CertificateRevocationRepositoryProtocol,
                     certLogic: DCCCertLogicProtocol,
                     userDefaults: Persistence,
                     boosterAsTest: Bool) {
@@ -37,7 +37,10 @@ class ValidatorMockRouter: ValidatorOverviewRouterProtocol {
 
     }
     
-    func showError(error: Error, _2GContext: Bool, userDefaults: Persistence) -> Promise<ExtendedCBORWebToken> {
+    func showError(_ certificate: ExtendedCBORWebToken?,
+                   error: Error,
+                   _2GContext: Bool,
+                   userDefaults: Persistence) -> Promise<ExtendedCBORWebToken> {
         .value(ExtendedCBORWebToken(
             vaccinationCertificate: .mockTestCertificate,
             vaccinationQRCodeData: "")

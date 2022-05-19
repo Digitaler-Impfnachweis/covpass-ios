@@ -13,6 +13,7 @@ public protocol RevocationInfoViewModelProtocol {
     var infoItems: [ListContentItem] { get }
     var isGeneratingPDF: Bool { get }
     var title: String { get }
+    var enableCreatePDF: Bool { get }
 
     func cancel()
     func createPDF()

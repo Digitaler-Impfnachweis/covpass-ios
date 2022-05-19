@@ -44,8 +44,6 @@ struct ValidationResultSceneFactory: ResolvableSceneFactory {
             repository: VaccinationRepository.create(),
             certificate: certificate,
             error: error,
-            type: userDefaults.selectedLogicType,
-            certLogic: DCCCertLogic.create(),
             _2GContext: _2GContext,
             userDefaults: userDefaults
         )

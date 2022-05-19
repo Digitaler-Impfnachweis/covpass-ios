@@ -67,8 +67,16 @@ class CertificateItemDetailViewModel: CertificateItemDetailViewModelProtocol {
     }
 
     var isInvalid: Bool {
-        certificate.vaccinationCertificate.isInvalid
+        certificate.isInvalid
     }
+
+    lazy var isRevoked = certificate.isRevoked
+    lazy var hideQRCodeButtons = (isInvalid && !certificate.vaccinationCertificate.isExpired ) || isRevoked
+    lazy var revocationText = (
+        certificate.vaccinationCertificate.isGermanIssuer ?
+            "revocation_detail_single_DE" :
+            "revocation_detail_single_notDE"
+    ).localized
 
     private var dob: String {
         return DateUtils.displayIsoDateOfBirth(dgc)

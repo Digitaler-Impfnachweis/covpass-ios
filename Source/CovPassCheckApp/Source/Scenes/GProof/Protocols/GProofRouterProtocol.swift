@@ -19,6 +19,7 @@ protocol GProofRouterProtocol: DialogRouterProtocol, ValidationResultRouterProto
     func scanQRCode() -> Promise<ScanResult>
     func showCertificate(_ certificate: ExtendedCBORWebToken?,
                          _2GContext: Bool,
+                         error: Error?,
                          userDefaults: Persistence,
                          buttonHidden: Bool) -> Promise<ExtendedCBORWebToken>
     func showError(error: Error)

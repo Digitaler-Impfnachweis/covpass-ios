@@ -1,5 +1,5 @@
 //
-//  ValidationResultViewModel.swift
+//  ValidationViewModel+Extension.swift
 //
 //
 //  © Copyright IBM Deutschland GmbH 2021
@@ -12,11 +12,11 @@ import PromiseKit
 import UIKit
 
 
-extension ValidationViewModel {
+extension ValidationViewModelProtocol {
    
-    var linkIsHidden: Bool {
-        return true
-    }
+    var revocationInfoHidden: Bool { true }
+    var revocationInfoText: String { "" }
+    var revocationHeadline: String { "" }
 
     func revocationButtonTapped() {
         // not covered by CovPass
@@ -30,7 +30,7 @@ extension ValidationViewModel {
         router.showStart()
     }
 
-    func scanNextCertifcate() {
+    func scanCertificate() {
         router.showStart()
     }
 }

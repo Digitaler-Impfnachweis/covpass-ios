@@ -1,5 +1,5 @@
 //
-//  CertificateReissueURLSessionMock.swift
+//  HTTPClientMock.swift
 //  
 //
 //  Created by Thomas Kuleßa on 21.02.22.
@@ -9,7 +9,7 @@
 import Foundation
 import PromiseKit
 
-class CertificateReissueURLSessionMock: CertificateReissueURLSessionProtocol {
+class HTTPClientMock: HTTPClientProtocol {
     var error: Error?
     var data = Data()
     var receivedHTTPRequest: URLRequest?

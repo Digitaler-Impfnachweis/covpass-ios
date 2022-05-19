@@ -29,6 +29,7 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
     weak var delegate: CertificatesOverviewViewModelDelegate?
     private var router: CertificatesOverviewRouterProtocol
     private let repository: VaccinationRepositoryProtocol
+    private let revocationRepository: CertificateRevocationRepositoryProtocol
     private var certLogic: DCCCertLogicProtocol
     private let boosterLogic: BoosterLogicProtocol
     private var certificateList = CertificateList(certificates: [])
@@ -67,11 +68,18 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
         return dataPrivacyHash
     }
     
+    var isLoading: Bool = false {
+        didSet {
+            delegate?.viewModelDidUpdate()
+        }
+    }
+    
     // MARK: - Lifecycle
     
     init(
         router: CertificatesOverviewRouterProtocol,
         repository: VaccinationRepositoryProtocol,
+        revocationRepository: CertificateRevocationRepositoryProtocol,
         certLogic: DCCCertLogicProtocol,
         boosterLogic: BoosterLogicProtocol,
         userDefaults: UserDefaultsPersistence,
@@ -79,6 +87,7 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
     ) {
         self.router = router
         self.repository = repository
+        self.revocationRepository = revocationRepository
         self.certLogic = certLogic
         self.boosterLogic = boosterLogic
         self.userDefaults = userDefaults
@@ -86,11 +95,7 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
     }
     
     // MARK: - Methods
-    
-    func refresh() -> Promise<Void> {
-        refreshCertificates()
-    }
-    
+
     func updateTrustList() {
         repository.updateTrustListIfNeeded()
             .done {
@@ -111,9 +116,17 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
         certLogic.updateValueSetsIfNeeded().cauterize()
     }
     
-    private func refreshCertificates() -> Promise<Void> {
+    func refresh() -> Promise<Void> {
         firstly {
             repository.getCertificateList()
+        }
+        .then {
+            InvalidationUseCase(certificateList: $0,
+                                revocationRepository: self.revocationRepository,
+                                vaccinationRepository: self.repository,
+                                date: Date(),
+                                userDefaults: self.userDefaults)
+            .execute()
         }
         .get {
             self.certificateList = $0
@@ -196,6 +209,7 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
     }
     
     func scanCertificate(withIntroduction: Bool) {
+        isLoading = true
         firstly {
             withIntroduction ? router.showHowToScan() : Promise.value
         }
@@ -223,6 +237,9 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
                 throw CertificateError.invalidEntity
             }
             
+        }
+        .ensure {
+            self.isLoading = false
         }
         .catch { error in
             self.errorHandling(error)
@@ -263,6 +280,9 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
         }
         .then {
             self.showCertificatesReissueIfNeeded()
+        }
+        .then {
+            self.showRevocationWarningIfNeeded()
         }
         .then {
             self.refresh()
@@ -334,7 +354,7 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
             repository.toggleFavoriteStateForCertificateWithIdentifier(id)
         }
         .then { isFavorite in
-            self.refreshCertificates().map { isFavorite }
+            self.refresh().map { isFavorite }
         }
         .done { isFavorite in
             self.lastKnownFavoriteCertificateId = isFavorite ? id : nil
@@ -359,11 +379,11 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
         .cancelled {
             // User cancelled by back button or swipe gesture.
             // So refresh everything because we don't know what exactly changed here.
-            self.refresh()
+            _ = self.refresh()
         }
         .then { result in
             // Make sure overview is up2date
-            self.refreshCertificates().map { result }
+            self.refresh().map { result }
         }
         .done {
             self.handleCertificateDetailSceneResult($0)
@@ -457,7 +477,7 @@ extension CertificatesOverviewViewModel {
         }
         .then { (showBoosterNotification: Bool) -> Promise<Void> in
             if !showBoosterNotification { return Promise.value }
-            return self.refreshCertificates()
+            return self.refresh()
                 .then {
                     self.router.showBoosterNotification() 
                 }
@@ -487,7 +507,7 @@ extension CertificatesOverviewViewModel {
             .filter { extendedToken in
                 let alreadyShown = extendedToken.wasExpiryAlertShown ?? false
                 let token = extendedToken.vaccinationCertificate
-                let showAlert = !alreadyShown && (token.expiresSoon || token.isInvalid || token.isExpired)
+                let showAlert = !alreadyShown && (token.expiresSoon || extendedToken.isInvalid || token.isExpired)
                 return showAlert
             }
     }
@@ -499,6 +519,29 @@ extension CertificatesOverviewViewModel {
         router.showDialog(
             title: "certificate_check_invalidity_error_title".localized,
             message: "error_validity_check_certificates_message".localized,
+            actions: [action],
+            style: .alert)
+    }
+
+    private func showRevocationWarningIfNeeded() -> Guarantee<Void> {
+        let someTokenIsRevoked = tokensToShowRevocationWarningFor().count > 0
+        if someTokenIsRevoked {
+            showRevocationWarning()
+        }
+        return .value
+    }
+
+    private func tokensToShowRevocationWarningFor() -> [ExtendedCBORWebToken] {
+        certificateList.certificates.filter(\.isRevoked)
+    }
+
+    private func showRevocationWarning() {
+        let action = DialogAction(
+            title: "error_validity_check_certificates_button_title".localized
+        )
+        router.showDialog(
+            title: "certificate_check_invalidity_error_title".localized,
+            message: "revocation_dialog_single".localized,
             actions: [action],
             style: .alert)
     }

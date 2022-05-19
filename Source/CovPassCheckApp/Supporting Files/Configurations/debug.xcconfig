@@ -37,6 +37,9 @@ DCC_DOMESTIC_RULES_FILE = dcc-domestic-rules.json
 BOOSTER_RULES_URL = https:/$()/distribution-cff4f7147260.dcc-rules.de/bnrules
 DOMESTIC_RULES_URL = https:/$()/distribution-cff4f7147260.dcc-rules.de/domesticrules
 
-// REVOCATION INFO EXPORT
+// REVOCATION
 
 CERTIFICATE_REVOCATION_INFO_ENCRYPTION_KEY = revocation-mgmt-demo-pubkey.pem
+CERTIFICATE_REVOCATION_PINNING_HASHES = 99cbc210bec8bad16f0827e733b1972e2a7b110cfbbc01e749c2b8572ddbf306
+CERTIFICATE_REVOCATION_URL = https:/$()/de.crl.test.dscg.ubirch.com
+CERTIFICATE_REVOCATION_TRUST_KEY = revocation-trust-key-debug.pem

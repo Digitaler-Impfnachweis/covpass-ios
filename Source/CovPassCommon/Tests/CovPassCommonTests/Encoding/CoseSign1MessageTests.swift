@@ -208,4 +208,86 @@ class CoseSign1MessageTests: XCTestCase {
         // Then
         XCTAssertEqual(signatue, rValueSignature)
     }
+
+    func testToJSON_payload_with_binary_keys() throws {
+        // Given
+        let keys = [
+            "f5c5970c3039d854",
+            "f50159a32d84e89d",
+            "69b71d69b71d69b71d",
+            "6162636465666768",
+            "07805b250c759584",
+            "8c4ae0ed458b67f1"
+        ]
+        let base64EncodedCoseMessage = "0oRDoQEmoFhcpklptx1ptx1ptx2hQQoBSGFiY2RlZmdooUEKA0j1xZcMMDnYVKNBCgRBCwFBDAFIjErg7UWLZ/GhQQoCSAeAWyUMdZWEo0EKAkELAkEMAkj1AVmjLYTonaFBCwVYQPvCkhxAu2OpXTWXK5Fwcp5ghZWoquDDxu8ROlouygn6psPRt/AXVD0EBXBCNwqI6mp4ZKzUc2qdygskw9fuwwk="
+        let data = try XCTUnwrap(Data(base64Encoded: base64EncodedCoseMessage))
+        let sut = try CoseSign1Message(decompressedPayload: data)
+
+        // When
+        let jsonData = try sut.toJSON()
+
+        // Then
+        let json = try JSONSerialization.jsonObject(with: jsonData)
+        guard let dictionary = json as? NSDictionary else {
+            XCTFail("Must be a dictionary.")
+            return
+        }
+        XCTAssertEqual(dictionary.count, 6)
+
+        for key in keys {
+            XCTAssertTrue(dictionary[key] is NSDictionary, "Key missing: \(key)")
+        }
+
+        guard let value = dictionary["f5c5970c3039d854"] as? NSDictionary else {
+            XCTFail("Must be not nil and a dictionary.")
+            return
+        }
+        XCTAssertNotNil(value["0a"])
+        XCTAssertNotNil(value["0b"])
+        XCTAssertNotNil(value["0c"])
+    }
+
+    func testToJSON_payload_with_array() throws {
+        // Given
+        let expectedArray: [[UInt8]] = [
+            [0xb4,0x65,0xf7,0xf4,0x84,0xe7,0x56,0xe0,0xf6,0x56,0xf1,0x47,0xa0,0x74,0x30,0x0a],
+            [0xef,0x47,0x6f,0x52,0x7e,0x98,0x5c,0x20,0x4e,0x7e,0x17,0x0e,0xb8,0x92,0xf3,0x75],
+            [0xa6,0xb8,0xa0,0x1b,0x67,0x03,0x0f,0x32,0xe0,0xe3,0xd7,0x05,0x2a,0x71,0xa6,0x88],
+            [0xec,0xe1,0x30,0xa1,0xfd,0x00,0x1c,0x7f,0xc6,0x19,0xf1,0xa0,0x19,0x5b,0x31,0xac]
+        ]
+        let base64EncodedMessage = "0oRDoQEmoFhFhFC0Zff0hOdW4PZW8UegdDAKUO9Hb1J+mFwgTn4XDriS83VQprigG2cDDzLg49cFKnGmiFDs4TCh/QAcf8YZ8aAZWzGsWEBzfym6BRubH/lzn4MpVo1M7K/d5+fY+Vt+670fTfHxdbXnRMojTWe45T2TKElsrWyciUVFPlHbTkTtdmS072Vu"
+        let data = try XCTUnwrap(Data(base64Encoded: base64EncodedMessage))
+        let sut = try CoseSign1Message(decompressedPayload: data)
+
+        // When
+        let jsonData = try sut.toJSON()
+
+        // Then
+        let json = try JSONSerialization.jsonObject(with: jsonData)
+        guard let array = json as? [[UInt8]] else {
+            XCTFail("Must be an array.")
+            return
+        }
+        XCTAssertEqual(array, expectedArray)
+    }
+
+    func testRevocationSignatureHash() throws {
+        // Given
+        let expectedHash: [UInt8] = [
+            166, 184, 160, 27, 103, 3, 15, 50,
+            224, 227, 215, 5, 42, 113, 166, 136,
+            150, 71, 162, 241, 54, 152, 75, 135,
+            103, 137, 149, 147, 50, 197, 184, 99
+        ]
+        let base64EncodedMessage =
+        "0oRNogEmBEj1xZcMMDnYVKBY8qQEGmPZq4AGGmId600BYkRFOQEDoQGkY3ZlcmUxLjMuMGNuYW2kYmZuak11c3Rlcm1hbm5jZm50ak1VU1RFUk1BTk5iZ25jTWF4Y2dudGNNQVhjZG9iajE5OTAtMDEtMDFhdoGqYnRnaTg0MDUzOTAwNmJ2cGoxMTE5MzQ5MDA3Ym1wbEVVLzEvMjAvMTUyOGJtYW1PUkctMTAwMDMwMjE1YmRuA2JzZANiZHRqMjAyMi0wMi0wMWJjb2JERWJpc2NSS0liY2l4KVVSTjpVVkNJOlYxOkRFOk1OSTVTSEJBVkRDNUpXRjBXSTYzSTVJUTY4WECqn/vjRh04QnGYrq78H4ffBMEFXygWO9c03pg4VccMKbBLVUQR/AKn1cvByvGVrM8lpVCH7THIihPQF3+GgZO3"
+        let data = try XCTUnwrap(Data(base64Encoded: base64EncodedMessage))
+        let sut = try CoseSign1Message(decompressedPayload: data)
+
+        // When
+        let hash = sut.revocationSignatureHash
+
+        // Then
+        XCTAssertEqual(hash, expectedHash)
+    }
 }

@@ -94,10 +94,8 @@ public class VaccinationRepositoryMock: VaccinationRepositoryProtocol {
     public func validCertificate(_ data: String) -> Promise<ExtendedCBORWebToken> {
         checkedCert != nil ?
             .value(
-                ExtendedCBORWebToken(
-                    vaccinationCertificate: checkedCert!,
-                    vaccinationQRCodeData: ""
-                )
+                ExtendedCBORWebToken(vaccinationCertificate: checkedCert!,
+                                     vaccinationQRCodeData: "")
             ) :
             .init(error: checkedCertError)
     }

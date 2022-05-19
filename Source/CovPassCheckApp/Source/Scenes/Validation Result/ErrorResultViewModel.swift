@@ -87,7 +87,7 @@ class ErrorResultViewModel: ValidationResultViewModel {
         nil
     }
     
-    var linkIsHidden: Bool {
+    var revocationInfoHidden: Bool {
         let revocationExportModeIsDisabled = !userDefaults.revocationExpertMode
         let isNotAnFunctionalError = !((error as? ValidationResultError) == .functional)
         return revocationExportModeIsDisabled || isNotAnFunctionalError || _2GContext
@@ -96,6 +96,11 @@ class ErrorResultViewModel: ValidationResultViewModel {
     var buttonHidden: Bool = false
     var _2GContext: Bool
     var userDefaults: Persistence
+    var isLoadingScan: Bool = false {
+        didSet {
+            delegate?.viewModelDidUpdate()
+        }
+    }
     
     // MARK: - Lifecycle
     
@@ -115,5 +120,13 @@ class ErrorResultViewModel: ValidationResultViewModel {
         self._2GContext = _2GContext
         self.userDefaults = userDefaults
         self.revocationKeyFilename = revocationKeyFilename
+    }
+    
+    func scanCertificateStarted() {
+        isLoadingScan = true
+    }
+    
+    func scanCertificateEnded() {
+        isLoadingScan = false
     }
 }

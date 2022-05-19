@@ -101,7 +101,8 @@ public extension Optional where Wrapped == ValidationResultViewModel {
             return self?.certificate?.vaccinationCertificate.vaccinationSubtitle
         case is TestResultViewModel:
             return self?.certificate?.vaccinationCertificate.testSubtitle
-        default: return Constants.Keys.result_2G_2nd_empty
+        default:
+            return Constants.Keys.result_2G_2nd_empty
         }
     }
     

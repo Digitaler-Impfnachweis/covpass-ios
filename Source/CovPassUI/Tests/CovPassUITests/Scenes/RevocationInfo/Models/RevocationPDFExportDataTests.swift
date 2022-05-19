@@ -11,41 +11,39 @@ import XCTest
 
 class RevocationPDFExportDataTests: XCTestCase {
     private var fileManager: FileManagerMock!
+    private var fileURL: URL!
     private var sut: RevocationPDFExportData!
 
     override func setUpWithError() throws {
         fileManager = .init()
         sut = .init(
             pdfDocument: PDFDocument(),
-            issuingCountry: "Germany",
+            issuingCountry: "DE",
             transactionNumber: "1234",
             date: .init(timeIntervalSinceReferenceDate: 0),
             fileManager: fileManager
         )
+        fileURL = fileManager.temporaryDirectory
+            .appendingPathComponent("1234_DE_2001-01-01.pdf")
     }
 
     override func tearDownWithError() throws {
         fileManager = nil
+        fileURL = nil
         sut = nil
     }
 
     func testFileURL() {
-        // Given
-        let expectedURL = fileManager.temporaryDirectory
-            .appendingPathComponent("1234_Germany_01.01.2001.pdf")
-
         // When
         let url = sut.fileURL
 
         // Then
-        XCTAssertEqual(url, expectedURL)
+        XCTAssertEqual(url, fileURL)
     }
 
     func testWrite() {
         // Given
-        let path = FileManager.default.temporaryDirectory
-            .appendingPathComponent("1234_Germany_01.01.2001.pdf")
-            .path
+        let path = fileURL.path
 
         // When
         sut.write()
@@ -57,8 +55,6 @@ class RevocationPDFExportDataTests: XCTestCase {
 
     func testDelete_success() throws {
         // Given
-        let url = fileManager.temporaryDirectory
-            .appendingPathComponent("1234_Germany_01.01.2001.pdf")
         sut.write()
 
         // When
@@ -66,7 +62,7 @@ class RevocationPDFExportDataTests: XCTestCase {
 
         // Then
         wait(for: [fileManager.removeItemExpectation], timeout: 1)
-        XCTAssertEqual(fileManager.removeItemURL, url)
+        XCTAssertEqual(fileManager.removeItemURL, fileURL)
     }
 
     func testDelete_failure() {

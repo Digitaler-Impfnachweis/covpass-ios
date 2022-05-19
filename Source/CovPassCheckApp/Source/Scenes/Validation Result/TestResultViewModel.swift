@@ -69,6 +69,11 @@ class TestResultViewModel: ValidationResultViewModel {
     var buttonHidden: Bool = false
     var _2GContext: Bool
     var userDefaults: Persistence
+    var isLoadingScan: Bool = false {
+        didSet {
+            delegate?.viewModelDidUpdate()
+        }
+    }
     
     // MARK: - Lifecycle
     
@@ -87,5 +92,13 @@ class TestResultViewModel: ValidationResultViewModel {
         self._2GContext = _2GContext
         self.userDefaults = userDefaults
         self.revocationKeyFilename = revocationKeyFilename
+    }
+    
+    func scanCertificateStarted() {
+        isLoadingScan = true
+    }
+    
+    func scanCertificateEnded() {
+        isLoadingScan = false
     }
 }

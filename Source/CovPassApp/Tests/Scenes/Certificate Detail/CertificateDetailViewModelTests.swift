@@ -7,11 +7,16 @@
 
 @testable import CovPassApp
 import CovPassCommon
+import CovPassUI
+import PromiseKit
 import XCTest
 
 class CertificateDetailViewModelTests: XCTestCase {
     private var boosterLogic: BoosterLogicMock!
     private var delegate: MockViewModelDelegate!
+    private var promise: Promise<CertificateDetailSceneResult>!
+    private var resolver: Resolver<CertificateDetailSceneResult>!
+    private var router: CertificateDetailRouterMock!
     private var sut: CertificateDetailViewModel!
     private var vaccinationRepo: VaccinationRepositoryMock!
 
@@ -21,6 +26,10 @@ class CertificateDetailViewModelTests: XCTestCase {
             .token2Of2(),
             .token3Of3()
         ]
+        let (promise, resolver) = Promise<CertificateDetailSceneResult>.pending()
+        self.promise = promise
+        self.resolver = resolver
+        router = .init()
         configureCustomSut(certificates: certificates)
     }
     
@@ -29,11 +38,11 @@ class CertificateDetailViewModelTests: XCTestCase {
         vaccinationRepo = VaccinationRepositoryMock()
         delegate = .init()
         sut = CertificateDetailViewModel(
-            router: CertificateDetailRouterMock(),
+            router: router,
             repository: vaccinationRepo,
             boosterLogic: boosterLogic,
             certificates: certificates,
-            resolvable: nil
+            resolvable: resolver
         )
         sut.delegate = delegate
     }
@@ -49,11 +58,11 @@ class CertificateDetailViewModelTests: XCTestCase {
         ]
         boosterLogic.boosterCandidates = [boosterCandidate]
         sut = CertificateDetailViewModel(
-            router: CertificateDetailRouterMock(),
+            router: router,
             repository: VaccinationRepositoryMock(),
             boosterLogic: boosterLogic,
             certificates: certificates,
-            resolvable: nil
+            resolvable: resolver
         )
     }
 
@@ -61,6 +70,8 @@ class CertificateDetailViewModelTests: XCTestCase {
         vaccinationRepo = nil
         boosterLogic = nil
         delegate = nil
+        promise = nil
+        router = nil
         sut = nil
     }
 
@@ -126,6 +137,19 @@ class CertificateDetailViewModelTests: XCTestCase {
         XCTAssertTrue(sut.showReissueNotification)
     }
     
+    func testShowReissueNotification_ReissueNotQualifiedCase_RecoveryIsYoungerThanVaccinations() throws {
+        // GIVEN: 1/1 and 2/2 and recovery cert qualifies for reissue
+        let certificates: [ExtendedCBORWebToken] = try [
+            CBORWebToken.mockRecoveryCertificate.extended(),
+            .token1Of1(),
+            .token2Of2(),
+        ]
+        configureCustomSut(certificates: certificates)
+        
+        // THEN
+        XCTAssert(sut.showReissueNotification)
+    }
+    
     func testShowReissueNotification_ReissueQualifiedCase2() throws {
         // GIVEN: 1/1 and 2/2 and recovery cert qualifies for reissue
         let certificates: [ExtendedCBORWebToken] = try [
@@ -133,6 +157,9 @@ class CertificateDetailViewModelTests: XCTestCase {
             .token1Of1(),
             .token2Of2(),
         ]
+        certificates[0].firstRecovery!.fr = Date().addingTimeInterval(-2000)
+        certificates[1].firstVaccination!.dt = Date().addingTimeInterval(-1500)
+        certificates[2].firstVaccination!.dt = Date().addingTimeInterval(-1000)
         configureCustomSut(certificates: certificates)
         
         // THEN
@@ -345,6 +372,259 @@ class CertificateDetailViewModelTests: XCTestCase {
 
         // Then
         XCTAssertEqual(favoriteIcon, UIImage.starPartial)
+    }
+
+    func testImmunizationButton_neither_revoked_nor_invalid() {
+        // Given
+        sut.refresh()
+
+        // When
+        let immunizationButton = sut.immunizationButton
+
+        // Then
+        XCTAssertEqual(immunizationButton, "Display current QR Code")
+    }
+
+    func testImmunizationButton_revoked() throws {
+        // Given
+        try configureSut(revoked: true)
+
+        // When
+        let immunizationButton = sut.immunizationButton
+
+        // Then
+        XCTAssertEqual(immunizationButton, "Add new certificate")
+    }
+
+    private func configureSut(invalid: Bool? = nil, revoked: Bool? = nil) throws {
+        var token = try ExtendedCBORWebToken.token1Of1()
+        token.revoked = revoked
+        token.invalid = invalid
+        configureCustomSut(certificates: [token])
+    }
+
+    func testImmunizationButton_invalid() throws {
+        // Given
+        try configureSut(invalid: true)
+
+        // When
+        let immunizationButton = sut.immunizationButton
+
+        // Then
+        XCTAssertEqual(immunizationButton, "Add new certificate")
+    }
+
+    func testImmunizationIcon_revoked() throws {
+        // Given
+        try configureSut(revoked: true)
+
+        // When
+        let immunizationIcon = sut.immunizationIcon
+
+        // Then
+        XCTAssertEqual(immunizationIcon, .statusExpiredCircle)
+    }
+
+    func testImmunizationIcon_invalid() throws {
+        // Given
+        try configureSut(invalid: true)
+
+        // When
+        let immunizationIcon = sut.immunizationIcon
+
+        // Then
+        XCTAssertEqual(immunizationIcon, .statusExpiredCircle)
+    }
+
+    func testImmunizationTitle_revoked() throws {
+        // Given
+        try configureSut(revoked: true)
+
+        // When
+        let immunizationTitle = sut.immunizationTitle
+
+        // Then
+        XCTAssertEqual(immunizationTitle, "Certificate invalid")
+    }
+
+    func testImmunizationTitle_invalid() throws {
+        // Given
+        try configureSut(invalid: true)
+
+        // When
+        let immunizationTitle = sut.immunizationTitle
+
+        // Then
+        XCTAssertEqual(immunizationTitle, "Certificate invalid")
+    }
+
+    func testImmunizationBody_revoked_vaccination_certificate_german_issuer() throws {
+        // Given
+        try configureSut(revoked: true)
+
+        // When
+        let immunizationBody = sut.immunizationBody
+
+        // Then
+        XCTAssertEqual(immunizationBody, "The RKI has revoked the certificate due to an official decree.")
+    }
+
+    func testImmunizationBody_revoked_vaccination_certificate_non_german_issuer() throws {
+        // Given
+        var token = try ExtendedCBORWebToken.token1Of1()
+        token.vaccinationCertificate.iss = "XL"
+        token.revoked = true
+        configureCustomSut(certificates: [token])
+
+        // When
+        let immunizationBody = sut.immunizationBody
+
+        // Then
+        XCTAssertEqual(immunizationBody, "The certificate was revoked by the certificate issuer due to an official decision.")
+    }
+
+    func testImmunizationBody_revoked_test_certificate_german_issuer() {
+        // Given
+        var token = CBORWebToken.mockTestCertificate.extended()
+        token.revoked = true
+        configureCustomSut(certificates: [token])
+
+        // When
+        let immunizationBody = sut.immunizationBody
+
+        // Then
+        XCTAssertEqual(immunizationBody, "The RKI has revoked the certificate due to an official decree.")
+    }
+
+    func testImmunizationBody_revoked_test_certificate_non_german_issuer() throws {
+        // Given
+        var token = CBORWebToken.mockTestCertificate.extended()
+        token.vaccinationCertificate.iss = "XL"
+        token.revoked = true
+        configureCustomSut(certificates: [token])
+
+        // When
+        let immunizationBody = sut.immunizationBody
+
+        // Then
+        XCTAssertEqual(immunizationBody, "The certificate was revoked by the certificate issuer due to an official decision.")
+    }
+
+    func testImmunizationBody_revoked_recovery_certificate_german_issuer() {
+        // Given
+        var token = CBORWebToken.mockRecoveryCertificate.extended()
+        token.revoked = true
+        configureCustomSut(certificates: [token])
+
+        // When
+        let immunizationBody = sut.immunizationBody
+
+        // Then
+        XCTAssertEqual(immunizationBody, "The RKI has revoked the certificate due to an official decree.")
+    }
+
+    func testImmunizationBody_revoked_recovery_certificate_non_german_issuer() throws {
+        // Given
+        var token = CBORWebToken.mockRecoveryCertificate.extended()
+        token.vaccinationCertificate.iss = "XL"
+        token.revoked = true
+        configureCustomSut(certificates: [token])
+
+        // When
+        let immunizationBody = sut.immunizationBody
+
+        // Then
+        XCTAssertEqual(immunizationBody, "The certificate was revoked by the certificate issuer due to an official decision.")
+    }
+
+    func testShowScanHint_revoked() throws {
+        // Given
+        try configureSut(revoked: true)
+
+        // When
+        let showScanHint = sut.showScanHint
+
+        // Then
+        XCTAssertFalse(showScanHint)
+    }
+
+    func testShowScanHint_not_revoked() throws {
+        // Given
+        try configureSut()
+
+        // When
+        let showScanHint = sut.showScanHint
+
+        // Then
+        XCTAssertTrue(showScanHint)
+    }
+
+    func testImmunizationButtonTapped_no_certificates() {
+        // Given
+        router.showCertificateExpectation.isInverted = true
+        configureCustomSut(certificates: [])
+
+        // When
+        sut.immunizationButtonTapped()
+
+        // Then
+        wait(for: [router.showCertificateExpectation], timeout: 1)
+        XCTAssertFalse(promise.isFulfilled)
+    }
+
+    func testImmunizationButtonTapped_certificate_invalid() throws {
+        // Given
+        try configureSut(invalid: true)
+        let expectation = XCTestExpectation()
+        promise
+            .done { result in
+                switch result {
+                case .addNewCertificate:
+                    expectation.fulfill()
+                default:
+                    break
+                }
+            }
+            .cauterize()
+
+        // When
+        sut.immunizationButtonTapped()
+
+        // Then
+        wait(for: [expectation], timeout: 1)
+    }
+
+    func testImmunizationButtonTapped_certificate_revoked() throws {
+        // Given
+        try configureSut(revoked: true)
+        let expectation = XCTestExpectation()
+        promise
+            .done { result in
+                switch result {
+                case .addNewCertificate:
+                    expectation.fulfill()
+                default:
+                    break
+                }
+            }
+            .cauterize()
+
+        // When
+        sut.immunizationButtonTapped()
+
+        // Then
+        wait(for: [expectation], timeout: 1)
+    }
+
+    func testImmunizationButtonTapped_valid_certificate() throws {
+        // Given
+        try configureSut()
+
+        // When
+        sut.immunizationButtonTapped()
+
+        // Then
+        wait(for: [router.showCertificateExpectation], timeout: 1)
     }
 }
 

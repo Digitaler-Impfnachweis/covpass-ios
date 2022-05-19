@@ -45,6 +45,11 @@ class GProofViewController: UIViewController {
         configureView()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.startover()
+    }
+    
     private func configureView() {
         configureHeadline()
         configureButtons()

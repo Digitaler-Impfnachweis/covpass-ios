@@ -247,7 +247,7 @@
 
 "accessibility_validation_check_popup_unsuccessful_certificate_label_close" = "Close";
 
-"validation_check_popup_test_title" = "Negative rapid test from %d hours ago";
+"validation_check_popup_test_title" = "Negative rapid test from %d hour(s) ago";
 
 "validation_check_popup_test_message" = "Check the following data against an ID document from the person you are checking.";
 
@@ -259,7 +259,7 @@
 
 "accessibility_validation_check_popup_test_label_close" = "Close";
 
-"validation_check_popup_valid_pcr_test_title" = "Negative PCR test from %d hours ago";
+"validation_check_popup_valid_pcr_test_title" = "Negative PCR test from %d hour(s) ago";
 
 "validation_check_popup_valid_pcr_test_message" = "Check the following data against an ID document from the person you are checking:";
 
@@ -322,11 +322,11 @@
 
 "result_2G_2nd_empty" = "May be required for 2G+";
 
-"result_2G_2nd_timestamp_hours" = "%d hours ago";
+"result_2G_2nd_timestamp_hours" = "%d hour(s) ago";
 
-"result_2G_2nd_timestamp_days" = "%d days ago";
+"result_2G_2nd_timestamp_days" = "%d day(s) ago";
 
-"result_2G_2nd_timestamp_months" = "%d months ago";
+"result_2G_2nd_timestamp_months" = "%d month(s) ago";
 
 "result_2G_3rd_test_vacc_empty" = "Test or vaccination*";
 
@@ -503,11 +503,13 @@
 
 "revocation_headline" = "Function for authorities";
 
-"revocation_copy" = "When this function is activated, information about the revocation of a certificate can be displayed. This is only relevant for authorities. Leave this function deactivated in normal use.";
+"revocation_copy" = "This function is intended exclusively for police authorities and enables them to retrieve the revocation identifier of a certificate in the course of investigations. In normal use, this function should remain deactivated. Attempting to revoke a certificate without authorization using this function is punishable by law and can have serious consequences.\n\nIf you suspect that you have a forged certificate or a certificate with incorrect content, please inform the local police authority.";
 
-"revocation_toggle_text" = "Show revocation information";
+"revocation_toggle_text" = "Activate function for authorities";
 
 "validation_check_popup_revoked_certificate_link_text" = "Show revocation information";
+
+"validation_check_popup_revoked_certificate_box_text" = "This function is intended exclusively for police authorities. Attempting to revoke a certificate without authorization is punishable by law and can have serious consequences.";
 
 "revocation_detail_page_title" = "Technical details of the certificate";
 

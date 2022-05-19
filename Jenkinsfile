@@ -8,8 +8,10 @@ pipeline {
     label "ios-parallel"
   }
   options {
-    skipDefaultCheckout()
-    ansiColor("xterm")
+      disableConcurrentBuilds()
+      skipDefaultCheckout()
+      timeout(time: 90, unit: 'MINUTES') // safeguard to auto-kill stuck builds
+      ansiColor("xterm") // needs AnsiColor plugin (https://wiki.jenkins.io/display/JENKINS/AnsiColor+Plugin)
   }
   environment {
     SWIFTSERVERPORT = "${Math.abs(new Random().nextInt(20000) + 20000)}"
@@ -26,7 +28,7 @@ pipeline {
 
     stage("Create Simulator 🦠") {
       steps {
-        createSimulatoriOS([type: "iPhone 11", os: "iOS14.1"])
+        createSimulatoriOS([type: "iPhone 11", os: "iOS14.5"])
       }
     }
 
@@ -99,6 +101,11 @@ pipeline {
           }
         }
       }
+      post {
+          always {
+              archiveArtifacts artifacts: "CovPassTests/FailureDiffs/**/*.png" , allowEmptyArchive: true , caseSensitive: false, onlyIfSuccessful: false
+          }
+      }
     }
 
     stage("CovPassApp 🎫") {
@@ -118,6 +125,11 @@ pipeline {
             """
           }
         }
+      }
+      post {
+          always {
+              archiveArtifacts artifacts: "CovPassTests/FailureDiffs/**/*.png" , allowEmptyArchive: true , caseSensitive: false, onlyIfSuccessful: false
+          }
       }
     }
   }

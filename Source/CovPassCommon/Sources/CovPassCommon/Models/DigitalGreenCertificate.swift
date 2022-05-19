@@ -54,6 +54,18 @@ public struct DigitalGreenCertificate: Codable {
         uvciLocation?.data(using: .utf8)?.sha512().hexEncodedString()
     }
 
+    public var revocationUCIHash: [UInt8] {
+        uvci.bytes.sha256()
+    }
+
+    public var revocationUCICountryHash: [UInt8] {
+        (uvci + countryCode).bytes.sha256()
+    }
+
+    public var countryCode: String {
+        v?.first?.co ?? t?.first?.co ?? r?.first?.co ?? ""
+    }
+
     /// Returns `true` if certificate is a booster vaccination
     public var isVaccinationBoosted: Bool {
         guard let result = v?.filter({ $0.isBoosted }) else { return false }

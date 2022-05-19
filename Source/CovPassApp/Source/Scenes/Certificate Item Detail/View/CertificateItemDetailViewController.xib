@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -30,11 +30,11 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YDs-Va-mXX">
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YDs-Va-mXX">
                     <rect key="frame" x="0.0" y="24" width="414" height="858"/>
                     <subviews>
-                        <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="4ka-qw-LRS">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="942"/>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="4ka-qw-LRS">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="706"/>
                             <subviews>
                                 <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="eZz-97-0Z9" userLabel="Headline" customClass="PlainLabel" customModule="CovPassUI">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
@@ -48,26 +48,26 @@
                                 <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="200" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="rhc-O6-hd2" userLabel="Item StackView">
                                     <rect key="frame" x="0.0" y="150" width="414" height="200"/>
                                 </stackView>
-                                <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ir9-gh-Ice">
-                                    <rect key="frame" x="0.0" y="350" width="414" height="336"/>
+                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ir9-gh-Ice">
+                                    <rect key="frame" x="0.0" y="350" width="414" height="100"/>
                                     <subviews>
-                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="F9o-pz-Rvg" userLabel="QRCode Button" customClass="MainButton" customModule="CovPassUI">
-                                            <rect key="frame" x="24" y="40" width="366" height="128"/>
+                                        <view contentMode="scaleToFill" placeholderIntrinsicWidth="366" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="F9o-pz-Rvg" userLabel="QRCode Button" customClass="MainButton" customModule="CovPassUI">
+                                            <rect key="frame" x="24" y="0.0" width="366" height="50"/>
                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         </view>
-                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0GC-AU-5hJ" userLabel="PDF Export Button" customClass="MainButton" customModule="CovPassUI">
-                                            <rect key="frame" x="24" y="168" width="366" height="128"/>
+                                        <view contentMode="scaleToFill" placeholderIntrinsicWidth="366" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="0GC-AU-5hJ" userLabel="PDF Export Button" customClass="MainButton" customModule="CovPassUI">
+                                            <rect key="frame" x="24" y="50" width="366" height="50"/>
                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         </view>
                                     </subviews>
-                                    <edgeInsets key="layoutMargins" top="40" left="24" bottom="40" right="24"/>
+                                    <edgeInsets key="layoutMargins" top="0.0" left="24" bottom="0.0" right="24"/>
                                 </stackView>
-                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8lP-8f-hEk" userLabel="Info 1" customClass="LinkLabel" customModule="CovPassUI">
-                                    <rect key="frame" x="0.0" y="686" width="414" height="128"/>
+                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="8lP-8f-hEk" userLabel="Info 1" customClass="LinkLabel" customModule="CovPassUI">
+                                    <rect key="frame" x="0.0" y="450" width="414" height="128"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 </view>
-                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fHs-Y7-col" userLabel="Info 2" customClass="LinkLabel" customModule="CovPassUI">
-                                    <rect key="frame" x="0.0" y="814" width="414" height="128"/>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fHs-Y7-col" userLabel="Info 2" customClass="LinkLabel" customModule="CovPassUI">
+                                    <rect key="frame" x="0.0" y="578" width="414" height="128"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 </view>
                             </subviews>
@@ -96,14 +96,26 @@
         </view>
     </objects>
     <designables>
+        <designable name="0GC-AU-5hJ">
+            <size key="intrinsicContentSize" width="366" height="50"/>
+        </designable>
         <designable name="3cl-7D-PNO">
             <size key="intrinsicContentSize" width="414" height="50"/>
+        </designable>
+        <designable name="8lP-8f-hEk">
+            <size key="intrinsicContentSize" width="414" height="128"/>
+        </designable>
+        <designable name="F9o-pz-Rvg">
+            <size key="intrinsicContentSize" width="366" height="50"/>
         </designable>
         <designable name="cYD-X5-OTC">
             <size key="intrinsicContentSize" width="414" height="50"/>
         </designable>
         <designable name="eZz-97-0Z9">
             <size key="intrinsicContentSize" width="414" height="50"/>
+        </designable>
+        <designable name="fHs-Y7-col">
+            <size key="intrinsicContentSize" width="414" height="128"/>
         </designable>
     </designables>
     <resources>

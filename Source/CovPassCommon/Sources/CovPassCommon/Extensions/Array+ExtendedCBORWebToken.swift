@@ -35,7 +35,7 @@ public extension Array where Element == ExtendedCBORWebToken {
         guard filter2Of1.isEmpty else {
             return false
         }
-        return !filterBoosterAfterVaccinationAfterRecovery.isEmpty
+        return !filterBoosterAfterVaccinationAfterRecoveryFromGermany.isEmpty
     }
     
     var reissueProcessInitialNotAlreadySeen: Bool { !reissueProcessInitialAlreadySeen }
@@ -44,34 +44,54 @@ public extension Array where Element == ExtendedCBORWebToken {
     
     var reissueNewBadgeAlreadySeen: Bool { first(where: { $0.reissueProcessNewBadgeAlreadySeen ?? false }) != nil }
 
-    var tokensOfVaccinationWithSingleDose: [ExtendedCBORWebToken] {
+    var tokensOfVaccinationWithSingleDoseFromGermany: [ExtendedCBORWebToken] {
         filter {
             guard let vaccinations = $0.vaccinations else {
                 return false
             }
             return !vaccinations.filter{ $0.isSingleDoseComplete }.isEmpty
-        }
+        }.filterIssuedByGerman
     }
     
-    var tokensOfVaccinationWithDoubleDoseComplete: [ExtendedCBORWebToken] {
+    var tokensOfVaccinationWithDoubleDoseCompleteFromGermany: [ExtendedCBORWebToken] {
         filter {
             guard let vaccinations = $0.vaccinations else {
                 return false
             }
             return !vaccinations.filter{ $0.isDoubleDoseComplete }.isEmpty
+        }.filterIssuedByGerman
+    }
+    
+    var tokensOfRecoveryFromGermany: [ExtendedCBORWebToken] {
+        let recoveriesIssuedByGerman = filter(by: .recovery).filterIssuedByGerman
+        return recoveriesIssuedByGerman.filterOlderThanDoubleDoseVaccination(datesOfGermanDoubleDoseVaccinations: datesOfGermanDoubleDoseVaccinations)
+    }
+    
+    func filterOlderThanDoubleDoseVaccination(datesOfGermanDoubleDoseVaccinations: [Date]) -> [ExtendedCBORWebToken] {
+        filter { token in
+            datesOfGermanDoubleDoseVaccinations.contains { doubleDoseVaccinationDate in
+                return token.firstRecovery!.fr < doubleDoseVaccinationDate
+            }
         }
     }
     
-    var tokensOfRecovery: [ExtendedCBORWebToken] { filter(by: .recovery) }
+    var recoveryDates: [Date] {
+        tokensOfRecoveryFromGermany.map{ $0.firstRecovery!.fr }
+    }
     
-    var filterBoosterAfterVaccinationAfterRecovery: [ExtendedCBORWebToken] {
-        guard !tokensOfVaccinationWithSingleDose.isEmpty else {
+    var datesOfGermanDoubleDoseVaccinations : [Date] {
+        tokensOfVaccinationWithDoubleDoseCompleteFromGermany.map{ $0.firstVaccination!.dt }
+    }
+    
+    var filterBoosterAfterVaccinationAfterRecoveryFromGermany: [ExtendedCBORWebToken] {
+        guard !tokensOfVaccinationWithSingleDoseFromGermany.isEmpty else {
             return []
         }
-        guard !tokensOfVaccinationWithDoubleDoseComplete.isEmpty else {
+        guard !tokensOfVaccinationWithDoubleDoseCompleteFromGermany.isEmpty else {
             return []
         }
-        return tokensOfRecovery + tokensOfVaccinationWithSingleDose + tokensOfVaccinationWithDoubleDoseComplete
+
+        return tokensOfRecoveryFromGermany + tokensOfVaccinationWithSingleDoseFromGermany + tokensOfVaccinationWithDoubleDoseCompleteFromGermany
     }
     
     var sortByIssuedAtTime: [ExtendedCBORWebToken] {
@@ -126,6 +146,12 @@ public extension Array where Element == ExtendedCBORWebToken {
                 return true
             }
             return false
+        }
+    }
+    
+    var filterIssuedByGerman: [ExtendedCBORWebToken] {
+        filter {
+            $0.vaccinationCertificate.isGermanIssuer
         }
     }
     
@@ -231,7 +257,7 @@ public extension Array where Element == ExtendedCBORWebToken {
     }
     
     var filterValidAndNotExpiredCertsWhichArenNotFraud: [ExtendedCBORWebToken] {
-        self.filter({ ($0.vaccinationCertificate.isExpired && !$0.vaccinationCertificate.isFraud) || !$0.vaccinationCertificate.isInvalid  })
+        self.filter({ ($0.vaccinationCertificate.isExpired && !$0.vaccinationCertificate.isFraud) || !$0.isInvalid  })
     }
     
     func firstIndex(of certificate: Element?) -> Int? {
@@ -319,10 +345,10 @@ public extension Array where Element == ExtendedCBORWebToken {
         res.append(contentsOf: quickTests)
         // #3 Booster Certificate
         //  Latest booster vaccination of a vaccination series (3/3, 4/4, ...)
-        res.append(contentsOf: filterBoosted.sortByVaccinationDate)
+        res.append(contentsOf: filterBoosted.sortByIssuedAtTime.sortByVaccinationDate)
         // #4 Vaccination certificate
         //  Latest vaccination of a vaccination series (1/1, 2/2), older then (>) 14 days, and where the iat is the latest
-        let vaccinationCertificates = filterVaccinations.sortByVaccinationDate
+        let vaccinationCertificates = filterVaccinations.sortByIssuedAtTime.sortByVaccinationDate
         if let latestVaccination = vaccinationCertificates.firstNotBosstedValidFullImmunization {
             res.append(latestVaccination)
         }
