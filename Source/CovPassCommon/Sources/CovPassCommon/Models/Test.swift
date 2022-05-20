@@ -22,7 +22,7 @@ public class Test: Codable {
     /// Test Result
     public var tr: String
     /// Testing Centre
-    public var tc: String
+    public var tc: String?
     /// Country of Vaccination
     public var co: String
     /// Certificate Issuer
@@ -70,7 +70,7 @@ public class Test: Codable {
         case ci
     }
 
-    public init(tg: String, tt: String, nm: String? = nil, ma: String? = nil, sc: Date, tr: String, tc: String, co: String, is: String, ci: String) {
+    public init(tg: String, tt: String, nm: String? = nil, ma: String? = nil, sc: Date, tr: String, tc: String? = nil, co: String, is: String, ci: String) {
         self.tg = tg
         self.tt = tt
         self.nm = nm
@@ -96,7 +96,7 @@ public class Test: Codable {
         }
         sc = scDate
         tr = try values.decodeTrimmedString(forKey: .tr)
-        tc = try values.decodeTrimmedString(forKey: .tc)
+        tc = try? values.decodeTrimmedString(forKey: .tc)
         co = try values.decodeTrimmedString(forKey: .co)
         `is` = try values.decodeTrimmedString(forKey: .is)
         ci = try values.decodeTrimmedString(forKey: .ci)
