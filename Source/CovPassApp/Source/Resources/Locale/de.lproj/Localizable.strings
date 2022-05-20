@@ -735,13 +735,13 @@
 
 "certificates_overview_expired_title" = "Zertifikat abgelaufen";
 
-"certificates_overview_expired_message" = "Das Ablaufdatum Ihrer Zertifikate wurde überschritten. Bitte bemühen Sie sich darum, einen neuen digitalen Nachweis ausstellen zu lassen.";
+"certificates_overview_expired_message" = "Sie können Ihre wichtigsten Zertifikate bequem in der CovPass-App austauschen. Nutzen Sie dafür die Erneuerungsfunktion in der Übersicht Ihrer Zertifikate oder scannen Sie ein neu ausgestelltes Zertifikat ein. Sofern ein aktuelleres Impfzertifikat vorliegt, brauchen Sie die vorherigen Impfzertifikate nicht erneuern.";
 
 "certificates_overview_expired_action_button_title" = "Neues Zertifikat hinzufügen";
 
 "certificates_overview_soon_expiring_title" = "Aktuelles Zertifikat läuft am %@ um %@ ab";
 
-"certificates_overview_soon_expiring_subtitle" = "Bitte bemühen Sie sich rechtzeitig darum, einen neuen digitalen Nachweis ausstellen zu lassen.";
+"certificates_overview_soon_expiring_subtitle" = "Sie können das Zertifikat bequem in der CovPass-App austauschen. Nutzen Sie dafür die Erneuerungsfunktion in der Übersicht Ihrer Zertifikate oder scannen Sie ein neu ausgestelltes Zertifikat ein.";
 
 "certificates_overview_invalid_title" = "Zertifikat ungültig";
 
@@ -889,7 +889,7 @@
 
 "vaccination_certificate_detail_view_data_expiry_date_message" = "Gültig bis %@";
 
-"vaccination_certificate_detail_view_data_expiry_date_note" = "Bitte bemühen Sie sich rechtzeitig darum, einen neuen digitalen Nachweis ausstellen zu lassen.";
+"vaccination_certificate_detail_view_data_expiry_date_note" = "Sie werden in der App benachrichtigt, falls Sie das Zertifikat erneuern können.";
 
 "vaccination_certificate_detail_view_data_vaccine_note_de" = "Diese Bescheinigung ist kein Reisedokument. Die wissenschaftlichen Erkenntnisse zu COVID-19 in den Bereichen Impfung, Testung und Genesung entwickeln sich fortlaufend weiter, auch im Hinblick auf neue besorgniserregende Virusvarianten. Bitte informieren Sie sich vor Reiseantritt über die am Zielort geltenden Gesundheitsmaßnahmen und entsprechenden Beschränkungen.\n\nInformationen über die in den jeweiligen EU-Ländern geltenden Einreisebestimmungen finden Sie unter #https://reopen.europa.eu::https://reopen.europa.eu#.";
 
@@ -973,7 +973,7 @@
 
 "test_certificate_detail_view_data_expiry_date_message" = "Gültig bis %@";
 
-"test_certificate_detail_view_data_expiry_date_note" = "Bitte bemühen Sie sich rechtzeitig darum, einen neuen digitalen Nachweis ausstellen zu lassen.";
+"test_certificate_detail_view_data_expiry_date_note" = "Sie werden in der App benachrichtigt, falls Sie das Zertifikat erneuern können.";
 
 "test_certificate_detail_view_data_test_note_de" = "Diese Bescheinigung ist kein Reisedokument. Die wissenschaftlichen Erkenntnisse zu COVID-19 in den Bereichen Impfung, Testung und Genesung entwickeln sich fortlaufend weiter, auch im Hinblick auf neue besorgniserregende Virusvarianten. Bitte informieren Sie sich vor Reiseantritt über die am Zielort geltenden Gesundheitsmaßnahmen und entsprechenden Beschränkungen.\n\nInformationen über die in den jeweiligen EU-Ländern geltenden Einreisebestimmungen finden Sie unter #https://reopen.europa.eu::https://reopen.europa.eu#.";
 
@@ -1041,7 +1041,7 @@
 
 "recovery_certificate_detail_view_data_expiry_date_message" = "Gültig bis %@";
 
-"recovery_certificate_detail_view_data_expiry_date_note" = "Bitte bemühen Sie sich rechtzeitig darum, einen neuen digitalen Nachweis ausstellen zu lassen.";
+"recovery_certificate_detail_view_data_expiry_date_note" = "Sie werden in der App benachrichtigt, falls Sie das Zertifikat erneuern können.";
 
 "recovery_certificate_detail_view_data_test_note_de" = "Diese Bescheinigung ist kein Reisedokument. Die wissenschaftlichen Erkenntnisse zu COVID-19 in den Bereichen Impfung, Testung und Genesung entwickeln sich fortlaufend weiter, auch im Hinblick auf neue besorgniserregende Virusvarianten. Bitte informieren Sie sich vor Reiseantritt über die am Zielort geltenden Gesundheitsmaßnahmen und entsprechenden Beschränkungen.\n\nInformationen über die in den jeweiligen EU-Ländern geltenden Einreisebestimmungen finden Sie unter #https://reopen.europa.eu::https://reopen.europa.eu#.";
 
@@ -1063,7 +1063,7 @@
 
 "certificate_expires_detail_view_note_title" = "Zertifikat läuft am %@ um %@ ab";
 
-"certificate_expires_detail_view_note_message" = "Bitte bemühen Sie sich rechtzeitig darum, einen neuen digitalen Nachweis ausstellen zu lassen.";
+"certificate_expires_detail_view_note_message" = "Sie können das Zertifikat bequem in der CovPass-App austauschen. Nutzen Sie dafür die Erneuerungsfunktion in der Übersicht Ihrer Zertifikate oder scannen Sie ein neu ausgestelltes Zertifikat ein.";
 
 "certificate_invalid_detail_view_note_title" = "Zertifikat ungültig";
 
@@ -1071,7 +1071,7 @@
 
 "certificate_expired_detail_view_note_title" = "Zertifikat abgelaufen";
 
-"certificate_expired_detail_view_note_message" = "Das Ablaufdatum wurde überschritten. Bitte bemühen Sie sich darum, einen neuen digitalen Nachweis ausstellen zu lassen.";
+"certificate_expired_detail_view_note_message" = "Sie können Ihre wichtigsten Zertifikate bequem in der CovPass-App austauschen. Nutzen Sie dafür die Erneuerungsfunktion in der Übersicht Ihrer Zertifikate oder scannen Sie ein neu ausgestelltes Zertifikat ein. Sofern ein aktuelleres Impfzertifikat vorliegt, brauchen Sie die vorherigen Impfzertifikate nicht erneuern.";
 
 
 /********** print certificate **********/
@@ -1146,7 +1146,7 @@
 
 "error_validity_check_certificates_title" = "Überprüfen Sie die Gültigkeit Ihrer Zertifikate";
 
-"error_validity_check_certificates_message" = "Die Gültigkeit Ihrer Zertifikate läuft bald ab oder ist bereits abgelaufen. Bitte bemühen Sie sich darum, einen neuen digitalen Nachweis ausstellen zu lassen.";
+"error_validity_check_certificates_message" = "Wenn Sie dieses Zertifikat in der App erneuern können, erhalten Sie eine Benachrichtigung.Mehr Informationen zum Austausch von abgelaufenen Zertifikaten finden Sie in unseren FAQs.";
 
 "error_validity_check_certificates_button_title" = "OK";
 
@@ -1535,11 +1535,15 @@
 
 "renewal_expiry_notification_button_recovery" = "Genesenenzertifikat erneuern";
 
+"renewal_expiry_consent_box_item_1" = "Die App übermittelt die genannten Zertifikate zur Überprüfung an das RKI.";
+
+"renewal_expiry_consent_box_item_1" = "Das RKI überprüft die Zertifikate, stellt ein erneuertes Zertifikat aus und übermittelt dieses an Ihre App.";
+
 "renewal_expiry_consent_list_item_1" = "Die Erneuerung der Zertifikate ist freiwillig und kostenlos.";
 
 "renewal_expiry_consent_list_item_2" = "Um sicherzustellen, dass Zertifikate nur einmalig erneuert werden können, werden jeweils die Kennung des alten und des erneuerten Zertifikats durch das RKI dokumentiert. Die weiteren Daten zu Ihren Zertifikaten werden nach der Erneuerung beim RKI sofort gelöscht.";
 
-"renewal_expiry_consent_list_item_3" = "Stellen Sie bitte bei der Erneuerung von Familienzertifikaten sicher, dass das betreffende Familienmitglied einverstanden ist.";
+"renewal_expiry_consent_list_item_3" = "Stellen Sie bitte bei der Erneuerung von Zertifikaten von Familienmitgliedern sicher, dass die betreffende Person einverstanden ist.";
 
 "renewal_expiry_consent_list_item_4" = "In bestimmten Fällen werden zusätzlich zu dem zu erneuernden Zertifikat weitere Zertifikate übermittelt. Dies ist erforderlich, um die bisherige Abfolge der Impfungen und Genesungen im neuen Zertifikat aufnehmen zu können.";
 

@@ -26,8 +26,8 @@ public extension Date {
             from: date,
             to: self
         )
-        let months = diffComponents.day ?? 0
-        return months
+        let days = diffComponents.day ?? 0
+        return days
     }
 
     func hoursSince(_ date: Date) -> Int {
@@ -37,7 +37,28 @@ public extension Date {
             from: date,
             to: self
         )
-        let months = diffComponents.hour ?? 0
-        return months
+        let hours = diffComponents.hour ?? 0
+        return hours
+    }
+
+    func yearsSince(_ date: Date) -> Int {
+        let components: Set<Calendar.Component> = [.year]
+        let diffComponents = Calendar.current.dateComponents(
+            components,
+            from: date,
+            to: self
+        )
+        let years = diffComponents.year ?? 0
+        return years
+    }
+
+    var endOfYear: Self? {
+        let dateInterval = Calendar.current.dateInterval(of: .year, for: self)
+        return dateInterval?.end
+    }
+
+    var endOfMonth: Self? {
+        let dateInterval = Calendar.current.dateInterval(of: .month, for: self)
+        return dateInterval?.end
     }
 }

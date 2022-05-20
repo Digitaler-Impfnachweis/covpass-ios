@@ -118,11 +118,10 @@ class CertificateDetailViewModelTests: XCTestCase {
     
     func testStartReissue() throws {
         // When
-        sut.triggerReissue()
+        sut.triggerBoosterReissue()
 
         // Then
-        let expectation1 = try XCTUnwrap((sut.router as? CertificateDetailRouterMock)?.expectationShowReissue)
-        wait(for: [expectation1], timeout: 0.1)
+        wait(for: [router.expectationShowReissue], timeout: 0.1)
     }
     
     func testShowReissueNotification_ReissueQualifiedCase1() throws {
@@ -134,7 +133,7 @@ class CertificateDetailViewModelTests: XCTestCase {
         configureCustomSut(certificates: certificates)
         
         // THEN
-        XCTAssertTrue(sut.showReissueNotification)
+        XCTAssertTrue(sut.showBoosterReissueNotification)
     }
     
     func testShowReissueNotification_ReissueNotQualifiedCase_RecoveryIsYoungerThanVaccinations() throws {
@@ -147,7 +146,7 @@ class CertificateDetailViewModelTests: XCTestCase {
         configureCustomSut(certificates: certificates)
         
         // THEN
-        XCTAssert(sut.showReissueNotification)
+        XCTAssert(sut.showBoosterReissueNotification)
     }
     
     func testShowReissueNotification_ReissueQualifiedCase2() throws {
@@ -163,7 +162,7 @@ class CertificateDetailViewModelTests: XCTestCase {
         configureCustomSut(certificates: certificates)
         
         // THEN
-        XCTAssertTrue(sut.showReissueNotification)
+        XCTAssertTrue(sut.showBoosterReissueNotification)
     }
     
     func testNotShowReissueNotification_NotQualified() throws {
@@ -174,7 +173,7 @@ class CertificateDetailViewModelTests: XCTestCase {
         configureCustomSut(certificates: certificates)
         
         // THEN
-        XCTAssertFalse(sut.showReissueNotification)
+        XCTAssertFalse(sut.showBoosterReissueNotification)
     }
     
     func testShowReissueNotification_WithNewBadge() throws {
@@ -188,7 +187,7 @@ class CertificateDetailViewModelTests: XCTestCase {
         configureCustomSut(certificates: certificates)
         
         // THEN
-        XCTAssertTrue(sut.reissueNew)
+        XCTAssertTrue(sut.showBoosterReissueIsNewBadge)
     }
     
     func testShowReissueNotification_WithoutNewBadge() throws {
@@ -202,7 +201,7 @@ class CertificateDetailViewModelTests: XCTestCase {
         configureCustomSut(certificates: certificates)
         
         // THEN
-        XCTAssertFalse(sut.reissueNew)
+        XCTAssertFalse(sut.showBoosterReissueIsNewBadge)
     }
     
     func testShowReissueNotification_WithoutNewBadge_alternative() throws {
@@ -216,7 +215,7 @@ class CertificateDetailViewModelTests: XCTestCase {
         configureCustomSut(certificates: certificates)
         
         // THEN
-        XCTAssertFalse(sut.reissueNew)
+        XCTAssertFalse(sut.showBoosterReissueIsNewBadge)
     }
     
     func testUpdateReissueCandidate() throws {
@@ -626,9 +625,194 @@ class CertificateDetailViewModelTests: XCTestCase {
         // Then
         wait(for: [router.showCertificateExpectation], timeout: 1)
     }
+
+    func testShowVaccinationExpiryReissueNotification_no_reissueble_vaccination() throws {
+        // Given
+        configureCustomSut(certificates: [.nonReissuableVaccination])
+
+        // When
+        let showVaccinationExpiryReissueNotification = sut.showVaccinationExpiryReissueNotification
+
+        // Then
+        XCTAssertFalse(showVaccinationExpiryReissueNotification)
+    }
+
+    func testShowVaccinationExpiryReissueNotification_reissueble_vaccination() throws {
+        // Given
+        configureCustomSut(certificates: [.reissuableVaccination])
+
+        // When
+        let showVaccinationExpiryReissueNotification = sut.showVaccinationExpiryReissueNotification
+
+        // Then
+        XCTAssertTrue(showVaccinationExpiryReissueNotification)
+    }
+
+    func testShowVaccinationExpiryReissueIsNewBadge_is_new() {
+        // Given
+        let token = ExtendedCBORWebToken.reissuableVaccination
+        configureCustomSut(certificates: [token])
+
+        // When
+        let showVaccinationExpiryReissueIsNewBadge = sut.showVaccinationExpiryReissueIsNewBadge
+
+        // Then
+        XCTAssertTrue(showVaccinationExpiryReissueIsNewBadge)
+    }
+
+    func testShowVaccinationExpiryReissueIsNewBadge_is_not_new() {
+        // Given
+        var token = ExtendedCBORWebToken.reissuableVaccination
+        token.reissueProcessNewBadgeAlreadySeen = true
+        configureCustomSut(certificates: [token])
+
+        // When
+        let showVaccinationExpiryReissueIsNewBadge = sut.showVaccinationExpiryReissueIsNewBadge
+
+        // Then
+        XCTAssertFalse(showVaccinationExpiryReissueIsNewBadge)
+    }
+
+    func testShowRecoveryExpiryReissueIsNewBadge_is_new() {
+        // Given
+        var token = ExtendedCBORWebToken.reissuableRecovery
+        token.reissueProcessNewBadgeAlreadySeen = false
+        configureCustomSut(certificates: [token])
+
+        // When
+        let showRecoveryExpiryReissueIsNewBadge = sut.showRecoveryExpiryReissueIsNewBadge(index: 0)
+
+        // Then
+        XCTAssertTrue(showRecoveryExpiryReissueIsNewBadge)
+    }
+
+    func testShowRecoveryExpiryReissueIsNewBadge_is_not_new() {
+        // Given
+        var token = ExtendedCBORWebToken.reissuableRecovery
+        token.reissueProcessNewBadgeAlreadySeen = true
+        configureCustomSut(certificates: [token])
+
+        // When
+        let showRecoveryExpiryReissueIsNewBadge = sut.showRecoveryExpiryReissueIsNewBadge(index: 0)
+
+        // Then
+        XCTAssertFalse(showRecoveryExpiryReissueIsNewBadge)
+    }
+
+    func testShowRecoveryExpiryReissueIsNewBadge_no_tokens() {
+        // Given
+        configureCustomSut(certificates: [])
+
+        // When
+        let showRecoveryExpiryReissueIsNewBadge = sut.showRecoveryExpiryReissueIsNewBadge(index: 0)
+
+        // Then
+        XCTAssertFalse(showRecoveryExpiryReissueIsNewBadge)
+    }
+
+    func testTriggerVaccinationExpiryReissue() throws {
+        // Given
+        let token1 = ExtendedCBORWebToken.reissuableVaccination
+        let token2 = ExtendedCBORWebToken.reissuableVaccination
+        try configureCustomSut(
+            certificates: [
+                token1,
+                token2,
+                .reissuableRecovery,
+                .reissuableRecovery,
+                .token2Of2()
+            ]
+        )
+
+        // When
+        sut.triggerVaccinationExpiryReissue()
+
+        // Then
+        wait(for: [
+            router.expectationShowReissue,
+            vaccinationRepo.getCertificateListExpectation,
+            delegate.viewModelDidUpdateExpectation
+        ], timeout: 1)
+        let tokens = router.receivedReissueTokens
+        XCTAssertEqual(tokens.count, 2)
+    }
+
+    func testTriggerRecoveryExpiryReissue() throws {
+        // Given
+        let token1 = ExtendedCBORWebToken.reissuableRecovery
+        let token2 = ExtendedCBORWebToken.reissuableRecovery
+        try configureCustomSut(
+            certificates: [
+                token1,
+                token2,
+                .reissuableVaccination,
+                .reissuableVaccination,
+                .token2Of2()
+            ]
+        )
+
+        // When
+        sut.triggerRecoveryExpiryReissue(index: 0)
+
+        // Then
+        wait(for: [
+            router.expectationShowReissue,
+            vaccinationRepo.getCertificateListExpectation,
+            delegate.viewModelDidUpdateExpectation
+        ], timeout: 1)
+        let tokens = router.receivedReissueTokens
+        XCTAssertEqual(tokens.count, 5)
+    }
+
+    func testMarkExpiryReissueCandidatesAsSeen() {
+        // Given
+        vaccinationRepo.replaceExpectation.expectedFulfillmentCount = 3
+        configureCustomSut(
+            certificates: [
+                .reissuableRecovery,
+                .reissuableRecovery,
+                .reissuableVaccination,
+                .reissuableVaccination,
+                .nonReissuableVaccination,
+                .nonReissuableRecovery
+            ]
+        )
+
+        // When
+        sut.markExpiryReissueCandidatesAsSeen()
+
+        // Then
+        wait(for: [
+            vaccinationRepo.replaceExpectation
+        ], timeout: 1)
+    }
 }
 
 private extension ExtendedCBORWebToken {
+    static var reissuableVaccination: Self {
+        var token = CBORWebToken.mockVaccinationCertificate
+        token.exp = Date()
+        return token.extended(vaccinationQRCodeData: UUID().uuidString)
+    }
+
+    static var nonReissuableVaccination: Self {
+        CBORWebToken.mockVaccinationCertificate.extended(
+            vaccinationQRCodeData: UUID().uuidString
+        )
+    }
+
+    static var reissuableRecovery: Self {
+        var token = CBORWebToken.mockRecoveryCertificate
+        token.exp = Date()
+        return token.extended(vaccinationQRCodeData: UUID().uuidString)
+    }
+
+    static var nonReissuableRecovery: Self {
+        CBORWebToken.mockRecoveryCertificate.extended(
+            vaccinationQRCodeData: UUID().uuidString
+        )
+    }
+
     static func token1Of2SchmidtMustermann() throws -> Self {
         try token(from: """
         {"1":"DE","4":1682239131,"6":1619167131,"-260":{"1":{"nam":{"gn":"Erika","fn":"Schmidt-Mustermann","gnt":"ERIKA","fnt":"SCHMIDT<MUSTERMANN"},"dob":"1964-08-12","v":[{"ci":"01DE/84503/1119349007/DXSGWLWL40SU8ZFKIYIBK39A3#S","co":"DE","dn":1,"dt":"2021-02-02","is":"Bundesministerium für Gesundheit","ma":"ORG-100030215","mp":"EU/1/20/1528","sd":2,"tg":"840539006","vp":"1119349007"}],"ver":"1.0.0"}}}

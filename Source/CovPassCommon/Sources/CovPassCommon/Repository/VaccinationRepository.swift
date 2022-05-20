@@ -428,4 +428,20 @@ public class VaccinationRepository: VaccinationRepositoryProtocol {
             throw CertificateError.invalidEntity
         }
     }
+
+    public func replace(_ token: ExtendedCBORWebToken) -> Promise<Void> {
+        getCertificateList()
+            .then { certificateList -> Promise<CertificateList> in
+                var mutableCertificateList = certificateList
+                var certificates = certificateList.certificates
+                guard let index = certificates.firstIndex(of: token) else {
+                    return .init(error: ApplicationError.general(""))
+                }
+                certificates[index] = token
+                mutableCertificateList.certificates = certificates
+                return .value(mutableCertificateList)
+            }
+            .then(saveCertificateList)
+            .asVoid()
+    }
 }

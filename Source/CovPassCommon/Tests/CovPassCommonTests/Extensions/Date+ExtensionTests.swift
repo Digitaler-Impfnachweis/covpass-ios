@@ -84,6 +84,102 @@ class Date_ExtensionTests: XCTestCase {
         // Then
         XCTAssertEqual(hours, 0)
     }
+
+    func testYearsSince_1_second_ago() {
+        // Given
+        let pastDate = sut - 1
+
+        // When
+        let years = sut.yearsSince(pastDate)
+
+        // Then
+        XCTAssertEqual(years, 0)
+    }
+
+    func testYearsSince_366_days_ago() {
+        // Given
+        let pastDate = sut - secondsPerDay * 366
+
+        // When
+        let years = sut.yearsSince(pastDate)
+
+        // Then
+        XCTAssertEqual(years, 1)
+    }
+
+    func testYearsSince_in_365_day() {
+        // Given
+        let pastDate = sut + secondsPerDay * 365
+
+        // When
+        let years = sut.yearsSince(pastDate)
+
+        // Then
+        XCTAssertEqual(years, -1)
+    }
+
+    func testEndOfYear_reference_date() throws {
+        // Given
+        let sut = Date(timeIntervalSinceReferenceDate: 0)
+
+        // When
+        let endOfYear = try XCTUnwrap(sut.endOfYear)
+
+        // Then
+        XCTAssertEqual(endOfYear, sut + 31532400)
+    }
+
+    func testEndOfYear_other() throws {
+        // Given
+        let components: Set<Calendar.Component> = [.year, .month, .day, .hour, .minute, .second]
+        let sut = Date(timeIntervalSinceReferenceDate: 6535634442)
+
+        // When
+        let endOfYear = try XCTUnwrap(sut.endOfYear)
+
+        // Then
+        let dateComponents = Calendar.current.dateComponents(components, from: endOfYear)
+        XCTAssertEqual(dateComponents.year, 2209)
+        XCTAssertEqual(dateComponents.month, 1)
+        XCTAssertEqual(dateComponents.day, 1)
+        XCTAssertEqual(dateComponents.hour, 0)
+        XCTAssertEqual(dateComponents.minute, 0)
+        XCTAssertEqual(dateComponents.second, 0)
+    }
+
+    func testEndOfMonth_reference_date() throws {
+        let components: Set<Calendar.Component> = [.year, .month, .day, .hour, .minute, .second]
+        let sut = Date(timeIntervalSinceReferenceDate: 0)
+
+        // When
+        let endOfMonth = try XCTUnwrap(sut.endOfMonth)
+
+        // Then
+        let dateComponents = Calendar.current.dateComponents(components, from: endOfMonth)
+        XCTAssertEqual(dateComponents.year, 2001)
+        XCTAssertEqual(dateComponents.month, 2)
+        XCTAssertEqual(dateComponents.day, 1)
+        XCTAssertEqual(dateComponents.hour, 0)
+        XCTAssertEqual(dateComponents.minute, 0)
+        XCTAssertEqual(dateComponents.second, 0)
+    }
+
+    func testEndOfMonth_other() throws {
+        let components: Set<Calendar.Component> = [.year, .month, .day, .hour, .minute, .second]
+        let sut = Date(timeIntervalSinceReferenceDate: 99999359)
+
+        // When
+        let endOfMonth = try XCTUnwrap(sut.endOfMonth)
+
+        // Then
+        let dateComponents = Calendar.current.dateComponents(components, from: endOfMonth)
+        XCTAssertEqual(dateComponents.year, 2004)
+        XCTAssertEqual(dateComponents.month, 4)
+        XCTAssertEqual(dateComponents.day, 1)
+        XCTAssertEqual(dateComponents.hour, 0)
+        XCTAssertEqual(dateComponents.minute, 0)
+        XCTAssertEqual(dateComponents.second, 0)
+    }
 }
 
 private let secondsPerHour: TimeInterval = 60*60

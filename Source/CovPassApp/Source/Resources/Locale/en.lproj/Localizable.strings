@@ -735,13 +735,13 @@
 
 "certificates_overview_expired_title" = "Certificate expired";
 
-"certificates_overview_expired_message" = "The expiry date of your certificates has passed. Please make every effort to have a new digital certificate issued.";
+"certificates_overview_expired_message" = "You can easily renew your most important certificates in the CovPass app. To do so, use the renewal function in the overview of your certificates or scan a newly issued certificate. If you have a more recent vaccination certificate, you do not need to renew the previous vaccination certificates.";
 
 "certificates_overview_expired_action_button_title" = "Add new certificate";
 
 "certificates_overview_soon_expiring_title" = "Current certificate expires on %@ at %@";
 
-"certificates_overview_soon_expiring_subtitle" = "Please make every effort to have a new digital certificate issued.";
+"certificates_overview_soon_expiring_subtitle" = "You can easily replace the certificate in the CovPass app by using the renewal function in the overview of your certificates or by scanning a newly issued certificate.";
 
 "certificates_overview_invalid_title" = "Certificate invalid";
 
@@ -889,7 +889,7 @@
 
 "vaccination_certificate_detail_view_data_expiry_date_message" = "Valid until %@";
 
-"vaccination_certificate_detail_view_data_expiry_date_note" = "Please make every effort to have a new digital certificate issued in good time.";
+"vaccination_certificate_detail_view_data_expiry_date_note" = "You will be notified in the app if you can renew the certificate.";
 
 "vaccination_certificate_detail_view_data_vaccine_note_de" = "Diese Bescheinigung ist kein Reisedokument. Die wissenschaftlichen Erkenntnisse zu COVID-19 in den Bereichen Impfung, Testung und Genesung entwickeln sich fortlaufend weiter, auch im Hinblick auf neue besorgniserregende Virusvarianten. Bitte informieren Sie sich vor Reiseantritt über die am Zielort geltenden Gesundheitsmaßnahmen und entsprechenden Beschränkungen.\n\nInformationen über die in den jeweiligen EU-Ländern geltenden Einreisebestimmungen finden Sie unter #https://reopen.europa.eu::https://reopen.europa.eu#.";
 
@@ -973,7 +973,7 @@
 
 "test_certificate_detail_view_data_expiry_date_message" = "Valid until %@";
 
-"test_certificate_detail_view_data_expiry_date_note" = "Please make every effort to have a new digital certificate issued in good time.";
+"test_certificate_detail_view_data_expiry_date_note" = "You will be notified in the app if you can renew the certificate.";
 
 "test_certificate_detail_view_data_test_note_de" = "Diese Bescheinigung ist kein Reisedokument. Die wissenschaftlichen Erkenntnisse zu COVID-19 in den Bereichen Impfung, Testung und Genesung entwickeln sich fortlaufend weiter, auch im Hinblick auf neue besorgniserregende Virusvarianten. Bitte informieren Sie sich vor Reiseantritt über die am Zielort geltenden Gesundheitsmaßnahmen und entsprechenden Beschränkungen.\n\nInformationen über die in den jeweiligen EU-Ländern geltenden Einreisebestimmungen finden Sie unter #https://reopen.europa.eu::https://reopen.europa.eu#.";
 
@@ -1041,7 +1041,7 @@
 
 "recovery_certificate_detail_view_data_expiry_date_message" = "Valid until %@";
 
-"recovery_certificate_detail_view_data_expiry_date_note" = "Please make every effort to have a new digital certificate issued in good time.";
+"recovery_certificate_detail_view_data_expiry_date_note" = "You will be notified in the app if you can renew the certificate.";
 
 "recovery_certificate_detail_view_data_test_note_de" = "Diese Bescheinigung ist kein Reisedokument. Die wissenschaftlichen Erkenntnisse zu COVID-19 in den Bereichen Impfung, Testung und Genesung entwickeln sich fortlaufend weiter, auch im Hinblick auf neue besorgniserregende Virusvarianten. Bitte informieren Sie sich vor Reiseantritt über die am Zielort geltenden Gesundheitsmaßnahmen und entsprechenden Beschränkungen.\n\nInformationen über die in den jeweiligen EU-Ländern geltenden Einreisebestimmungen finden Sie unter #https://reopen.europa.eu::https://reopen.europa.eu#.";
 
@@ -1063,7 +1063,7 @@
 
 "certificate_expires_detail_view_note_title" = "Certificate expires on %@ at %@";
 
-"certificate_expires_detail_view_note_message" = "Please make every effort to have a new digital certificate issued in good time.";
+"certificate_expires_detail_view_note_message" = "You can easily renew the certificate in the CovPass app. To do so, use the renewal function in the overview of your certificates or scan a newly issued certificate.";
 
 "certificate_invalid_detail_view_note_title" = "Certificate invalid";
 
@@ -1071,7 +1071,7 @@
 
 "certificate_expired_detail_view_note_title" = "Certificate expired";
 
-"certificate_expired_detail_view_note_message" = "The expiry date has been exceeded. Please make every effort to have a new digital certificate issued.";
+"certificate_expired_detail_view_note_message" = "You can easily renew your most important certificates in the CovPass app. To do so, use the renewal function in the overview of your certificates or scan a newly issued certificate. If you have a more recent vaccination certificate, you do not need to renew the previous vaccination certificates.";
 
 
 /********** print certificate **********/
@@ -1146,7 +1146,7 @@
 
 "error_validity_check_certificates_title" = "Check the validity of your certificates";
 
-"error_validity_check_certificates_message" = "The validity of your certificates is about to expire or has already expired. Please make every effort to have a new digital certificate issued.";
+"error_validity_check_certificates_message" = "If you can renew this certificate in the app, you will receive a notification. You can find more information about replacing expired certificates in our FAQs.";
 
 "error_validity_check_certificates_button_title" = "OK";
 
@@ -1535,11 +1535,15 @@
 
 "renewal_expiry_notification_button_recovery" = "Renew recovery certificate";
 
+"renewal_expiry_consent_box_item_1" = "The app transmits the aforementioned certificates to the RKI for verification.";
+
+"renewal_expiry_consent_box_item_1" = "The RKI checks the certificates, issues a renewed certificate and transmits it to your app.";
+
 "renewal_expiry_consent_list_item_1" = "The renewal of certificates is voluntary and free of charge.";
 
 "renewal_expiry_consent_list_item_2" = "To ensure that certificates can only be renewed once, the RKI documents the identifier of the old and the renewed certificate. The other data on your certificates will be deleted by the RKI immediately after renewal.";
 
-"renewal_expiry_consent_list_item_3" = "When renewing family certificates, please ensure that the respective family member agrees.";
+"renewal_expiry_consent_list_item_3" = "When renewing certificates of family members, please ensure that the person concerned agrees.";
 
 "renewal_expiry_consent_list_item_4" = "In certain cases, additional certificates are sent in addition to the certificate to be renewed. This is necessary in order to be able to include the previous sequence of vaccinations and recoveries in the new certificate.";
 

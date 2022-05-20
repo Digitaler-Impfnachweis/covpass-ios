@@ -14,10 +14,15 @@ import UIKit
 private enum Constants {
     enum Keys {
         enum Reissue {
-            static let headline = "certificate_renewal_startpage_headline".localized
-            static let description = "certificate_renewal_startpage_copy".localized
+            static let boosterHeadline = "certificate_renewal_startpage_headline".localized
+            static let boosterDescription = "certificate_renewal_startpage_copy".localized
             static let newText = "vaccination_certificate_overview_booster_vaccination_notification_icon_new".localized
-            static let reissueButtonTitle = "certificate_renewal_detail_view_notification_box_secondary_button".localized
+            static let boosterButtonTitle = "certificate_renewal_detail_view_notification_box_secondary_button".localized
+            static let expiryHeadline = "renewal_expiry_notification_title".localized
+            static let vaccinationExpiryDescription = "renewal_expiry_notification_copy_vaccination".localized
+            static let recoveryExpiryDescription = "renewal_expiry_notification_copy_recovery".localized
+            static let vaccinationExpiryButtonTitle = "renewal_expiry_notification_button_vaccination".localized
+            static let recoveryExpiryButtonTitle = "renewal_expiry_notification_button_recovery".localized
         }
     }
 }
@@ -163,7 +168,7 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
         if let cert = selectedCertificate?.vaccinationCertificate.hcert.dgc.v?.first(where: { $0.fullImmunization }), !cert.fullImmunizationValid {
             return "vaccination_certificate_overview_complete_from_message".localized
         }
-        if (selectedCertificate?.vaccinationCertificate.hcert.dgc.r?.first) != nil {
+        if selectedCertificate?.vaccinationCertificate.isRecovery ?? false {
             return "recovery_certificate_overview_message".localized
         }
         if let t = selectedCertificate?.firstTest {
@@ -241,23 +246,66 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
         return "\(String(format: "vaccination_certificate_overview_booster_vaccination_notification_message".localized, description, rule.identifier))\n\n\("vaccination_certificate_overview_faqlink".localized)"
     }
 
-    var boosterNotificationHighlightText: String {
-        "vaccination_certificate_overview_booster_vaccination_notification_icon_new".localized
+    var boosterNotificationHighlightText = Constants.Keys.Reissue.newText
+    
+    // MARK: Reissue
+    
+    var showBoosterReissueNotification: Bool {
+        certificates.qualifiedForReissue
     }
-    
-    // MARK: Reissue Notification
-    
-    var showReissueNotification: Bool { certificates.qualifiedForReissue }
 
-    var reissueNotificationTitle = Constants.Keys.Reissue.headline
+    var showVaccinationExpiryReissueNotification: Bool {
+        certificates.areVaccinationsQualifiedForExpiryReissue
+    }
 
-    var reissueNotificationBody = Constants.Keys.Reissue.description
+    var showVaccinationExpiryReissueIsNewBadge: Bool {
+        !certificates.vaccinationExpiryReissueNewBadgeAlreadySeen
+    }
+
+    private var vaccinationExpiryReissueTokens: [ExtendedCBORWebToken] {
+        certificates.qualifiedCertificatesForVaccinationExpiryReissue
+    }
+
+    var showBoosterReissueIsNewBadge: Bool {
+        guard let alreadyShown = boosterReissueTokens.first?.reissueProcessNewBadgeAlreadySeen else {
+            return false
+        }
+        return !alreadyShown
+    }
+
+    private var boosterReissueTokens: [ExtendedCBORWebToken] {
+        certificates.filterBoosterAfterVaccinationAfterRecoveryFromGermany
+    }
+
+    func showRecoveryExpiryReissueIsNewBadge(index: Int) -> Bool {
+        guard 0 ..< recoveryExpiryReissueCandidatesCount ~= index,
+              let alreadySeen = recoveryExpiryReissueTokens[index].first?.reissueProcessNewBadgeAlreadySeen  else {
+            return false
+        }
+        return !alreadySeen
+    }
+
+    lazy var recoveryExpiryReissueCandidatesCount = recoveryExpiryReissueTokens.count
+
+    private lazy var recoveryExpiryReissueTokens = certificates.qualifiedCertificatesForRecoveryExpiryReissue
+
+    var boosterReissueNotificationTitle = Constants.Keys.Reissue.boosterHeadline
+
+    var boosterReissueNotificationBody = Constants.Keys.Reissue.boosterDescription
 
     var reissueNotificationHighlightText = Constants.Keys.Reissue.newText
    
-    var reissueButtonTitle = Constants.Keys.Reissue.reissueButtonTitle
+    var boosterReissueButtonTitle = Constants.Keys.Reissue.boosterButtonTitle
 
-    var reissueNew: Bool { !certificates.reissueNewBadgeAlreadySeen }
+    let expiryReissueNotificationTitle = Constants.Keys.Reissue.expiryHeadline
+
+    let vaccinationExpiryReissueNotificationBody = Constants.Keys.Reissue.vaccinationExpiryDescription
+
+    let vaccinationExpiryReissueButtonTitle = Constants.Keys.Reissue.vaccinationExpiryButtonTitle
+
+    let recoveryExpiryReissueNotificationBody = Constants.Keys.Reissue.recoveryExpiryDescription
+
+    let recoveryExpiryReissueButtonTitle = Constants.Keys.Reissue.recoveryExpiryButtonTitle
 
     // MARK: - Lifecyle
 
@@ -345,15 +393,66 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
         .cauterize()
     }
     
-    func triggerReissue() {
-        router.showReissue(for: certificates.filterBoosterAfterVaccinationAfterRecoveryFromGermany,
-                           context: .boosterRenewal)
+    func triggerBoosterReissue() {
+        showReissue(
+            for: certificates.filterBoosterAfterVaccinationAfterRecoveryFromGermany,
+            context: .boosterRenewal
+        )
+    }
+
+    private func showReissue(
+        for certificates: [ExtendedCBORWebToken],
+        context: ReissueContext
+    ) {
+        router.showReissue(for: certificates, context: context)
             .ensure {
                 self.refreshCertsAndUpdateView()
             }
             .cauterize()
     }
-    
+
+
+    func triggerVaccinationExpiryReissue() {
+        showReissue(
+            for: vaccinationExpiryReissueTokens,
+            context: .certificateExtension
+        )
+    }
+
+    func triggerRecoveryExpiryReissue(index: Int) {
+        guard 0 ..< recoveryExpiryReissueCandidatesCount ~= index else {
+            return
+        }
+        showReissue(
+            for: recoveryExpiryReissueTokens[index],
+            context: .certificateExtension
+        )
+    }
+
+    func markExpiryReissueCandidatesAsSeen() {
+        markVaccinationExpiryReissueAsSeen()
+        markRecoveryExpiryReissueAsSeen()
+    }
+
+    private func markVaccinationExpiryReissueAsSeen() {
+        guard var vaccination = vaccinationExpiryReissueTokens.first else {
+            return
+        }
+        vaccination.reissueProcessNewBadgeAlreadySeen = true
+        repository.replace(vaccination).cauterize()
+    }
+
+    private func markRecoveryExpiryReissueAsSeen() {
+        let recoveries = recoveryExpiryReissueTokens
+        for tokens in recoveries {
+            guard var recovery = tokens.first else {
+                continue
+            }
+            recovery.reissueProcessNewBadgeAlreadySeen = true
+            repository.replace(recovery).cauterize()
+        }
+    }
+
     // MARK: Private methods
     
     private func removeReissueDataIfBoosterWasDeleted() {

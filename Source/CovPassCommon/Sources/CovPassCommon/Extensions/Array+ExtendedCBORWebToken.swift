@@ -37,12 +37,80 @@ public extension Array where Element == ExtendedCBORWebToken {
         }
         return !filterBoosterAfterVaccinationAfterRecoveryFromGermany.isEmpty
     }
-    
+
+    var areVaccinationsQualifiedForExpiryReissue: Bool {
+        vaccinationExpiryReissueCandidate != nil
+    }
+
+    var qualifiedCertificatesForVaccinationExpiryReissue: Self {
+        let allCertificatesOrderedByDate = sortedByDtFrAndSc
+        guard let reissueCandidate = allCertificatesOrderedByDate.vaccinationExpiryReissueCandidate else {
+            return []
+        }
+        let results = allCertificatesOrderedByDate
+            .sixCertificatesExcludingTests(from: reissueCandidate)
+        return results
+    }
+
+    private var sortedByDtFrAndSc: Self {
+        sorted { element1, element2 in
+            element1.vaccinationCertificate.dtFrOrSc() > element2.vaccinationCertificate.dtFrOrSc()
+        }
+    }
+
+    private var vaccinationExpiryReissueCandidate: ExtendedCBORWebToken? {
+        filterExpiryReissueCandidates
+            .filter1of2IfPersonIsUnder18
+            .first(where: \.vaccinationCertificate.isVaccination)
+    }
+
+    private var filterExpiryReissueCandidates: Self {
+        filter {
+            let cborToken = $0.vaccinationCertificate
+            return cborToken.willExpireInLessOrEqual28Days || cborToken.expiredForLessOrEqual90Days
+        }
+        .filterIssuedByGerman
+        .filter { !$0.isRevoked }
+        .filter { !$0.vaccinationCertificate.isTest }
+    }
+
+    private var filter1of2IfPersonIsUnder18: Self {
+        filter { token in
+            let dgc = token.vaccinationCertificate.hcert.dgc
+            return (dgc.is1of2Vaccination && dgc.personIsYoungerThan18) || !dgc.is1of2Vaccination
+        }
+    }
+
+    private func sixCertificatesExcludingTests(from token : ExtendedCBORWebToken) -> Self {
+        Array(drop { $0 != token })
+            .filter { !$0.vaccinationCertificate.isTest }
+            .takeFirst(6)
+    }
+
+    var qualifiedCertificatesForRecoveryExpiryReissue: [Self] {
+        let allCertificatesOrderedByDate = sortedByDtFrAndSc
+        let reissueCandidates = allCertificatesOrderedByDate.recoveryExpiryReissueCandidates
+        let results: Array<Self> = reissueCandidates.map { token in
+            allCertificatesOrderedByDate
+                .sixCertificatesExcludingTests(from: token)
+        }
+        return results
+    }
+
+    private var recoveryExpiryReissueCandidates: [ExtendedCBORWebToken] {
+        filterExpiryReissueCandidates
+            .filter(\.vaccinationCertificate.isRecovery)
+    }
+
     var reissueProcessInitialNotAlreadySeen: Bool { !reissueProcessInitialAlreadySeen }
     
     var reissueProcessInitialAlreadySeen: Bool { first(where: { $0.reissueProcessInitialAlreadySeen ?? false }) != nil }
     
     var reissueNewBadgeAlreadySeen: Bool { first(where: { $0.reissueProcessNewBadgeAlreadySeen ?? false }) != nil }
+
+    var vaccinationExpiryReissueNewBadgeAlreadySeen: Bool {
+        vaccinationExpiryReissueCandidate?.reissueProcessNewBadgeAlreadySeen ?? false
+    }
 
     var tokensOfVaccinationWithSingleDoseFromGermany: [ExtendedCBORWebToken] {
         filter {
@@ -438,5 +506,21 @@ public extension Array where Element == ExtendedCBORWebToken {
 private extension ExtendedCBORWebToken {
     func matches(_ extendedCBORWebToken: ExtendedCBORWebToken) -> Bool {
         vaccinationCertificate.hcert.dgc == extendedCBORWebToken.vaccinationCertificate.hcert.dgc
+    }
+}
+
+private extension CBORWebToken {
+    func dtFrOrSc() -> Date {
+        let date: Date
+        if let vaccination = hcert.dgc.v?.first {
+            date = vaccination.dt
+        } else if let recovery = hcert.dgc.r?.first {
+            date = recovery.fr
+        } else if let test = hcert.dgc.t?.first {
+            date = test.sc
+        } else {
+            date = .init(timeIntervalSinceReferenceDate: 0)
+        }
+        return date
     }
 }

@@ -625,6 +625,547 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
         XCTAssertEqual(certsOfRecoveries[1], recoveryCert2)
         XCTAssertEqual(recoveries.count, 2)
     }
+
+    func testQualifiedCertificatesForVaccinationExpiryReissue_no_vaccination() {
+        // Given
+        var recoveryToken = CBORWebToken.mockRecoveryCertificate
+        var testToken = CBORWebToken.mockTestCertificate
+        recoveryToken.exp = .init(timeIntervalSinceNow: -60)
+        testToken.exp = .init(timeIntervalSinceNow: -60)
+        let sut: [ExtendedCBORWebToken] = [
+            recoveryToken.extended(),
+            testToken.extended()
+        ]
+
+        // When
+        let tokens = sut.qualifiedCertificatesForVaccinationExpiryReissue
+
+        // Then
+        XCTAssertTrue(tokens.isEmpty)
+    }
+
+    func testQualifiedCertificatesForVaccinationExpiryReissue_token_is_reissueable() {
+        // Given
+        var cborWebToken = CBORWebToken.mockVaccinationCertificate
+        cborWebToken.exp = .init(timeIntervalSinceNow: -60)
+        let token = cborWebToken.extended(vaccinationQRCodeData: "1")
+        let sut: [ExtendedCBORWebToken] = [
+            token,
+            token,
+            token,
+            token,
+            CBORWebToken.mockVaccinationCertificate.extended(),
+            token,
+            token,
+            token
+        ]
+
+        // When
+        let tokens = sut.qualifiedCertificatesForVaccinationExpiryReissue
+
+        // Then
+        XCTAssertEqual(tokens.count, 6)
+        XCTAssertEqual(tokens.first, token)
+    }
+
+    func testQualifiedCertificatesForVaccinationExpiryReissue_older_recovery_included() {
+        // Given
+        let now = Date()
+
+        var vaccinationCborWebToken = CBORWebToken.mockVaccinationCertificate.mockVaccinationSetDate(now-3)
+        vaccinationCborWebToken.exp = now - 1
+        let vaccinationToken = vaccinationCborWebToken.extended(vaccinationQRCodeData: "vaccinationToken")
+
+        var recoveryCborWebToken = CBORWebToken.mockRecoveryCertificate.mockRecovery(fr: now-4)
+        recoveryCborWebToken.exp = now - 2
+        let recoveryToken = recoveryCborWebToken.extended(vaccinationQRCodeData: "recoveryToken")
+
+        let sut: [ExtendedCBORWebToken] = [
+            vaccinationToken,
+            recoveryToken
+        ]
+
+        // When
+        let tokens = sut.qualifiedCertificatesForVaccinationExpiryReissue
+
+        // Then
+        if tokens.count == 2 {
+            XCTAssertEqual(tokens[0], vaccinationToken)
+            XCTAssertEqual(tokens[1], recoveryToken)
+        } else {
+            XCTFail("Count is wrong: \(tokens.count)")
+        }
+    }
+
+    func testQualifiedCertificatesForVaccinationExpiryReissue_newer_recovery_not_included() {
+        // Given
+        let now = Date()
+
+        var vaccinationCborWebToken = CBORWebToken.mockVaccinationCertificate
+            .mockVaccinationSetDate(now-2)
+        vaccinationCborWebToken.exp = now
+        let vaccinationToken = vaccinationCborWebToken.extended(vaccinationQRCodeData: "vaccinationToken")
+
+        var recoveryCborWebToken = CBORWebToken.mockRecoveryCertificate
+            .mockRecovery(fr: now-1)
+        recoveryCborWebToken.exp = now
+        let recoveryToken = recoveryCborWebToken.extended(vaccinationQRCodeData: "recoveryToken")
+
+        let sut: [ExtendedCBORWebToken] = [
+            vaccinationToken,
+            recoveryToken
+        ]
+
+        // When
+        let tokens = sut.qualifiedCertificatesForVaccinationExpiryReissue
+
+        // Then
+        if tokens.count == 1 {
+            XCTAssertTrue(tokens.contains(vaccinationToken))
+        } else {
+            XCTFail("Count is wrong.")
+        }
+    }
+
+    func testQualifiedCertificatesForVaccinationExpiryReissue_older_non_tests_included() {
+        // Given
+        let now = Date()
+
+        var vaccinationCborWebToken = CBORWebToken.mockVaccinationCertificate
+            .mockVaccinationSetDate(now)
+        vaccinationCborWebToken.exp = now
+        let vaccinationToken = vaccinationCborWebToken.extended(vaccinationQRCodeData: "vaccinationToken")
+
+        let cborToken1 = CBORWebToken.mockRecoveryCertificate.mockRecovery(fr: now-2)
+        var token1 = cborToken1.extended(vaccinationQRCodeData: "token1")
+        token1.revoked = true
+
+        let cborToken2 = CBORWebToken.mockRecoveryCertificate.mockRecovery(fr: now-3)
+        var token2 = cborToken2.extended(vaccinationQRCodeData: "token2")
+        token2.invalid = true
+
+        let cborToken3 = CBORWebToken.mockTestCertificate.mockVaccinationSetDate(now-4)
+        let token3 = cborToken3.extended(vaccinationQRCodeData: "token3")
+
+        let cborToken4 = CBORWebToken.mockVaccinationCertificate.mockVaccinationSetDate(now-5)
+        let token4 = cborToken4.extended(vaccinationQRCodeData: "token4")
+
+        let sut: [ExtendedCBORWebToken] = [
+            vaccinationToken,
+            token4,
+            token3,
+            token2,
+            token1
+        ]
+
+        // When
+        let tokens = sut.qualifiedCertificatesForVaccinationExpiryReissue
+
+        // Then
+        if tokens.count == 4 {
+            XCTAssertEqual(tokens[0], vaccinationToken)
+            XCTAssertEqual(tokens[1], token1)
+            XCTAssertEqual(tokens[2], token2)
+            XCTAssertEqual(tokens[3], token4)
+        } else {
+            XCTFail("Count is wrong.")
+        }
+    }
+
+    func testQualifiedCertificatesForVaccinationExpiryReissue_token_is_not_german() {
+        // Given
+        var cborWebToken = CBORWebToken.mockVaccinationCertificate
+        cborWebToken.exp = .init(timeIntervalSinceNow: -60)
+        cborWebToken.iss = "PL"
+        let token = cborWebToken.extended()
+        let sut: [ExtendedCBORWebToken] = [
+            token
+        ]
+
+        // When
+        let tokens = sut.qualifiedCertificatesForVaccinationExpiryReissue
+
+        // Then
+        XCTAssertTrue(tokens.isEmpty)
+    }
+
+    func testQualifiedCertificatesForVaccinationExpiryReissue_token_to_old() {
+        // Given
+        var cborWebToken = CBORWebToken.mockVaccinationCertificate
+        cborWebToken.exp = .init(timeIntervalSinceReferenceDate: 0)
+        let token = cborWebToken.extended()
+        let sut: [ExtendedCBORWebToken] = [
+            token
+        ]
+
+        // When
+        let tokens = sut.qualifiedCertificatesForVaccinationExpiryReissue
+
+        // Then
+        XCTAssertTrue(tokens.isEmpty)
+    }
+
+    func testQualifiedCertificatesForVaccinationExpiryReissue_1_out_of_2_person_is_older_than_18() {
+        // Given
+        var cborWebToken = CBORWebToken.mockVaccinationCertificate.doseNumber(1)
+        cborWebToken.exp = .init(timeIntervalSinceNow: -60)
+        cborWebToken.hcert.dgc.dob = .init(timeIntervalSinceReferenceDate: 0)
+        let token = cborWebToken.extended()
+        let sut: [ExtendedCBORWebToken] = [
+            token
+        ]
+
+        // When
+        let tokens = sut.qualifiedCertificatesForVaccinationExpiryReissue
+
+        // Then
+        XCTAssertTrue(tokens.isEmpty)
+    }
+
+    func testQualifiedCertificatesForVaccinationExpiryReissue_1_out_of_2_person_is_younger_than_18() {
+        // Given
+        var cborWebToken = CBORWebToken.mockVaccinationCertificate.doseNumber(1)
+        cborWebToken.exp = .init(timeIntervalSinceNow: -60)
+        cborWebToken.hcert.dgc.dob = .init(timeIntervalSinceNow: -1000)
+        let token = cborWebToken.extended(vaccinationQRCodeData: "1")
+        let sut: [ExtendedCBORWebToken] = [
+            token
+        ]
+
+        // When
+        let tokens = sut.qualifiedCertificatesForVaccinationExpiryReissue
+
+        // Then
+        XCTAssertEqual(tokens.count, 1)
+        XCTAssertEqual(tokens.first, token)
+    }
+
+    func testQualifiedCertificatesForVaccinationExpiryReissue_vaccination_is_revoked() {
+        // Given
+        var cborWebToken = CBORWebToken.mockVaccinationCertificate
+        cborWebToken.exp = .init(timeIntervalSinceNow: -60)
+        var token = cborWebToken.extended(vaccinationQRCodeData: "1")
+        token.revoked = true
+        let sut: [ExtendedCBORWebToken] = [
+            token
+        ]
+
+        // When
+        let tokens = sut.qualifiedCertificatesForVaccinationExpiryReissue
+
+        // Then
+        XCTAssertTrue(tokens.isEmpty)
+    }
+
+    func testAreVaccinationsQualifiedForExpiryReissue_no_vaccination() {
+        // Given
+        var cborWebToken = CBORWebToken.mockRecoveryCertificate
+        cborWebToken.exp = .init(timeIntervalSinceNow: -60)
+        let token = cborWebToken.extended(vaccinationQRCodeData: "1")
+        let sut: [ExtendedCBORWebToken] = [
+            token,
+            CBORWebToken.mockTestCertificate.extended()
+        ]
+
+        // When
+        let areVaccinationsQualifiedForExpiryReissue = sut.areVaccinationsQualifiedForExpiryReissue
+
+        // Then
+        XCTAssertFalse(areVaccinationsQualifiedForExpiryReissue)
+    }
+
+    func testAreVaccinationsQualifiedForExpiryReissue_token_is_reissueable() {
+        // Given
+        var cborWebToken = CBORWebToken.mockVaccinationCertificate
+        cborWebToken.exp = .init(timeIntervalSinceNow: -60)
+        let token = cborWebToken.extended()
+        let sut: [ExtendedCBORWebToken] = [
+            token
+        ]
+
+        // When
+        let areVaccinationsQualifiedForExpiryReissue = sut.areVaccinationsQualifiedForExpiryReissue
+
+        // Then
+        XCTAssertTrue(areVaccinationsQualifiedForExpiryReissue)
+    }
+
+    // MARK: -
+
+    func testQualifiedCertificatesForRecoveryExpiryReissue_no_vaccination() {
+        // Given
+        var vaccinationToken = CBORWebToken.mockVaccinationCertificate
+        var testToken = CBORWebToken.mockTestCertificate
+        vaccinationToken.exp = .init(timeIntervalSinceNow: -60)
+        testToken.exp = .init(timeIntervalSinceNow: -60)
+        let sut: [ExtendedCBORWebToken] = [
+            vaccinationToken.extended(),
+            testToken.extended()
+        ]
+
+        // When
+        let tokens = sut.qualifiedCertificatesForRecoveryExpiryReissue
+
+        // Then
+        XCTAssertTrue(tokens.isEmpty)
+    }
+
+    func testQualifiedCertificatesForRecoveryExpiryReissue_token_is_reissueable() throws {
+        // Given
+        var cborWebToken = CBORWebToken.mockRecoveryCertificate
+        cborWebToken.exp = .init(timeIntervalSinceNow: -60)
+        let token = cborWebToken.extended(vaccinationQRCodeData: "1")
+        let sut: [ExtendedCBORWebToken] = [
+            token,
+            token,
+            token,
+            token,
+            CBORWebToken.mockVaccinationCertificate.extended(),
+            token,
+            token,
+            token
+        ]
+
+        // When
+        let tokens = try XCTUnwrap(
+            sut.qualifiedCertificatesForRecoveryExpiryReissue.first
+        )
+
+        // Then
+        XCTAssertEqual(tokens.count, 6)
+        XCTAssertEqual(tokens.first, token)
+    }
+
+    func testQualifiedCertificatesForRecoveryExpiryReissue_older_vaccination_included() throws {
+        // Given
+        let now = Date()
+
+        var recoveryCborWebToken = CBORWebToken.mockRecoveryCertificate.mockRecovery(fr: now)
+        recoveryCborWebToken.exp = now - 2
+        let recoveryToken = recoveryCborWebToken.extended(vaccinationQRCodeData: "recoveryToken")
+
+        var vaccinationCborWebToken = CBORWebToken.mockVaccinationCertificate.mockVaccinationSetDate(now-1)
+        vaccinationCborWebToken.exp = now - 1
+        let vaccinationToken = vaccinationCborWebToken.extended(vaccinationQRCodeData: "vaccinationToken")
+
+        let sut: [ExtendedCBORWebToken] = [
+            vaccinationToken,
+            recoveryToken
+        ]
+
+        // When
+        let tokens = try XCTUnwrap(
+            sut.qualifiedCertificatesForRecoveryExpiryReissue.first
+        )
+
+        // Then
+        if tokens.count == 2 {
+            XCTAssertEqual(tokens[0], recoveryToken)
+            XCTAssertEqual(tokens[1], vaccinationToken)
+        } else {
+            XCTFail("Count is wrong: \(tokens.count)")
+        }
+    }
+
+    func testQualifiedCertificatesForRecoveryExpiryReissue_newer_vaccination_not_included() throws {
+        // Given
+        let now = Date()
+
+        var recoveryCborWebToken = CBORWebToken.mockRecoveryCertificate
+            .mockRecovery(fr: now-2)
+        recoveryCborWebToken.exp = now
+        let recoveryToken = recoveryCborWebToken.extended(vaccinationQRCodeData: "recoveryToken")
+
+        var vaccinationCborWebToken = CBORWebToken.mockVaccinationCertificate
+            .mockVaccinationSetDate(now-1)
+        vaccinationCborWebToken.exp = now
+        let vaccinationToken = vaccinationCborWebToken.extended(vaccinationQRCodeData: "vaccinationToken")
+
+        let sut: [ExtendedCBORWebToken] = [
+            vaccinationToken,
+            recoveryToken
+        ]
+
+        // When
+        let tokens = try XCTUnwrap(
+            sut.qualifiedCertificatesForRecoveryExpiryReissue.first
+        )
+
+        // Then
+        if tokens.count == 1 {
+            XCTAssertTrue(tokens.contains(recoveryToken))
+        } else {
+            XCTFail("Count is wrong.")
+        }
+    }
+
+    func testQualifiedCertificatesForRecoveryExpiryReissue_older_non_tests_included() throws {
+        // Given
+        let now = Date()
+
+        var recoveryCborWebToken = CBORWebToken.mockRecoveryCertificate
+            .mockRecovery(fr: now)
+        recoveryCborWebToken.exp = now
+        let recoveryToken = recoveryCborWebToken.extended(vaccinationQRCodeData: "recoveryToken")
+
+        let cborToken1 = CBORWebToken.mockVaccinationCertificate.mockVaccinationSetDate(now-2)
+        var token1 = cborToken1.extended(vaccinationQRCodeData: "token1")
+        token1.revoked = true
+
+        let cborToken2 = CBORWebToken.mockRecoveryCertificate.mockRecovery(fr: now-3)
+        var token2 = cborToken2.extended(vaccinationQRCodeData: "token2")
+        token2.invalid = true
+
+        let cborToken3 = CBORWebToken.mockTestCertificate.mockVaccinationSetDate(now-4)
+        let token3 = cborToken3.extended(vaccinationQRCodeData: "token3")
+
+        let cborToken4 = CBORWebToken.mockVaccinationCertificate.mockVaccinationSetDate(now-5)
+        let token4 = cborToken4.extended(vaccinationQRCodeData: "token4")
+
+        let sut: [ExtendedCBORWebToken] = [
+            recoveryToken,
+            token4,
+            token3,
+            token2,
+            token1
+        ]
+
+        // When
+        let tokens = try XCTUnwrap(
+            sut.qualifiedCertificatesForRecoveryExpiryReissue.first
+        )
+
+        // Then
+        if tokens.count == 4 {
+            XCTAssertEqual(tokens[0], recoveryToken)
+            XCTAssertEqual(tokens[1], token1)
+            XCTAssertEqual(tokens[2], token2)
+            XCTAssertEqual(tokens[3], token4)
+        } else {
+            XCTFail("Count is wrong.")
+        }
+    }
+
+    func testQualifiedCertificatesForRecoveryExpiryReissue_token_is_not_german() {
+        // Given
+        var cborWebToken = CBORWebToken.mockRecoveryCertificate
+        cborWebToken.exp = .init(timeIntervalSinceNow: -60)
+        cborWebToken.iss = "PL"
+        let token = cborWebToken.extended()
+        let sut: [ExtendedCBORWebToken] = [
+            token
+        ]
+
+        // When
+        let tokens = sut.qualifiedCertificatesForRecoveryExpiryReissue
+
+        // Then
+        XCTAssertTrue(tokens.isEmpty)
+    }
+
+    func testQualifiedCertificatesForRecoveryExpiryReissue_token_to_old() {
+        // Given
+        var cborWebToken = CBORWebToken.mockRecoveryCertificate
+        cborWebToken.exp = .init(timeIntervalSinceReferenceDate: 0)
+        let token = cborWebToken.extended()
+        let sut: [ExtendedCBORWebToken] = [
+            token
+        ]
+
+        // When
+        let tokens = sut.qualifiedCertificatesForRecoveryExpiryReissue
+
+        // Then
+        XCTAssertTrue(tokens.isEmpty)
+    }
+
+    func testQualifiedCertificatesForRecoveryExpiryReissue_is_revoked() {
+        // Given
+        var cborWebToken = CBORWebToken.mockRecoveryCertificate
+        cborWebToken.exp = .init(timeIntervalSinceNow: -60)
+        var token = cborWebToken.extended(vaccinationQRCodeData: "1")
+        token.revoked = true
+        let sut: [ExtendedCBORWebToken] = [
+            token
+        ]
+
+        // When
+        let tokens = sut.qualifiedCertificatesForRecoveryExpiryReissue
+
+        // Then
+        XCTAssertTrue(tokens.isEmpty)
+    }
+
+    func testQualifiedCertificatesForRecoveryExpiryReissue_multiple_candidates() {
+        let now = Date()
+        var cborWebToken1 = CBORWebToken.mockRecoveryCertificate
+            .mockRecovery(fr: now)
+        cborWebToken1.exp = .init(timeIntervalSinceNow: -60)
+        let token1 = cborWebToken1.extended(vaccinationQRCodeData: "1")
+        var cborWebToken2 = CBORWebToken.mockRecoveryCertificate
+            .mockRecovery(fr: now-1)
+        cborWebToken2.exp = .init(timeIntervalSinceNow: -60)
+        let token2 = cborWebToken2.extended(vaccinationQRCodeData: "2")
+        let token3 = CBORWebToken.mockVaccinationCertificate
+            .mockVaccinationSetDate(now-2)
+            .extended(vaccinationQRCodeData: "3")
+        let sut: [ExtendedCBORWebToken] = [
+            token2,
+            token3,
+            token1
+        ]
+
+        // When
+        let tokens = sut.qualifiedCertificatesForRecoveryExpiryReissue
+
+        // Then
+        if tokens.count == 2 {
+            let candidates1 = tokens[0]
+            let candidates2 = tokens[1]
+            if candidates1.count == 3 {
+                XCTAssertEqual(candidates1[0], token1)
+                XCTAssertEqual(candidates1[1], token2)
+                XCTAssertEqual(candidates1[2], token3)
+            } else {
+                XCTFail("Count must be 3.")
+            }
+            if candidates2.count == 2 {
+                XCTAssertEqual(candidates2[0], token2)
+                XCTAssertEqual(candidates2[1], token3)
+            } else {
+                XCTFail("Count must be 2.")
+            }
+        } else {
+            XCTFail("Count must be 2.")
+        }
+    }
+
+    func testVaccinationExpiryReissueNewBadgeAlreadySeen_already_seen() {
+        var cborWebToken = CBORWebToken.mockVaccinationCertificate
+        cborWebToken.exp = .init(timeIntervalSinceNow: -60)
+        var token = cborWebToken.extended(vaccinationQRCodeData: "1")
+        token.reissueProcessNewBadgeAlreadySeen = true
+        let sut: [ExtendedCBORWebToken] = [token]
+
+        // When
+        let alreadySeen = sut.vaccinationExpiryReissueNewBadgeAlreadySeen
+
+        // Then
+        XCTAssertTrue(alreadySeen)
+    }
+
+    func testVaccinationExpiryReissueNewBadgeAlreadySeen_not_already_seen() {
+        var cborWebToken = CBORWebToken.mockVaccinationCertificate
+        cborWebToken.exp = .init(timeIntervalSinceNow: -60)
+        let token = cborWebToken.extended(vaccinationQRCodeData: "1")
+        let sut: [ExtendedCBORWebToken] = [token]
+
+        // When
+        let alreadySeen = sut.vaccinationExpiryReissueNewBadgeAlreadySeen
+
+        // Then
+        XCTAssertFalse(alreadySeen)
+    }
 }
 
 private extension DigitalGreenCertificate {

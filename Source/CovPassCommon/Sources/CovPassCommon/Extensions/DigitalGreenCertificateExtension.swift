@@ -53,4 +53,20 @@ public extension DigitalGreenCertificate {
         guard let result = v?.filter({ $0.isAstrazeneca }) else { return false }
         return !result.isEmpty
     }
+
+    var personIsYoungerThan18: Bool { personIsYounger(than: 18) }
+
+    private func personIsYounger(than years: Int) -> Bool {
+        guard let dob = dob else { return false }
+        let isYounger = Date().yearsSince(dob) < years
+        return isYounger
+    }
+
+    var is1of2Vaccination: Bool {
+        guard let vaccinations = v else { return false }
+        let result = vaccinations.contains { vaccination in
+            vaccination.dn == 1 && vaccination.sd == 2
+        }
+        return result
+    }
  }

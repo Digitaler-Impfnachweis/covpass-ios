@@ -96,7 +96,7 @@ public struct DigitalGreenCertificate: Codable {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         nam = try values.decode(Name.self, forKey: .nam)
         if let dobDateString = try? values.decodeTrimmedString(forKey: .dob) {
-            dob = DateUtils.parseDate(dobDateString)
+            dob = DateUtils.parse(dateOfBirth: dobDateString)
         }
         dobString = try? values.decodeTrimmedString(forKey: .dobString)
         if dobString == nil {

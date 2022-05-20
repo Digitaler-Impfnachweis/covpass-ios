@@ -15,6 +15,7 @@ public class VaccinationRepositoryMock: VaccinationRepositoryProtocol {
     let getCertificateListExpectation = XCTestExpectation(description: "getCertificateListExpectation")
     let setExpiryAlertExpectation = XCTestExpectation(description: "setExpiryAlertExpectation")
     let setReissueAlreadySeen = XCTestExpectation(description: "setReissueAlreadySeen")
+    let replaceExpectation = XCTestExpectation(description: "replaceExpectation")
     var lastUpdatedTrustList: Date?
     var certificates: [ExtendedCBORWebToken] = []
     var certPair: [CertificatePair] = []
@@ -122,6 +123,11 @@ public class VaccinationRepositoryMock: VaccinationRepositoryProtocol {
 
     public func validCertificate(_ data: String) -> Promise<ExtendedCBORWebToken> {
         .init(error: ApplicationError.unknownError)
+    }
+
+    public func replace(_ token: ExtendedCBORWebToken) -> Promise<Void> {
+        replaceExpectation.fulfill()
+        return .init()
     }
 }
 

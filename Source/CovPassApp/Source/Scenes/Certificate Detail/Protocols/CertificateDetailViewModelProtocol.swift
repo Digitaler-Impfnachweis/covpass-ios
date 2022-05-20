@@ -28,16 +28,28 @@ protocol CertificateDetailViewModelProtocol {
     var boosterNotificationTitle: String { get }
     var boosterNotificationBody: String { get }
     var boosterNotificationHighlightText: String { get }
-    var showReissueNotification: Bool { get }
-    var reissueNotificationTitle: String { get }
-    var reissueNotificationBody: String { get }
+    var boosterReissueNotificationTitle: String { get }
+    var boosterReissueNotificationBody: String { get }
     var reissueNotificationHighlightText: String { get }
-    var reissueButtonTitle: String { get }
-    var reissueNew: Bool { get }
+    var boosterReissueButtonTitle: String { get }
+    var expiryReissueNotificationTitle: String { get }
+    var vaccinationExpiryReissueNotificationBody: String { get }
+    var vaccinationExpiryReissueButtonTitle: String { get }
+    var recoveryExpiryReissueNotificationBody: String { get }
+    var recoveryExpiryReissueButtonTitle: String { get }
+    var showBoosterReissueNotification: Bool { get }
+    var showVaccinationExpiryReissueNotification: Bool { get }
+    var recoveryExpiryReissueCandidatesCount: Int { get }
+    var showBoosterReissueIsNewBadge: Bool { get }
+    var showVaccinationExpiryReissueIsNewBadge: Bool { get }
+    func showRecoveryExpiryReissueIsNewBadge(index: Int) -> Bool
+    func triggerBoosterReissue()
+    func triggerVaccinationExpiryReissue()
+    func triggerRecoveryExpiryReissue(index: Int)
     func refresh()
     func immunizationButtonTapped()
     func toggleFavorite()
     func updateBoosterCandiate()
     func updateReissueCandidate(to value: Bool)
-    func triggerReissue()
+    func markExpiryReissueCandidatesAsSeen() 
 }

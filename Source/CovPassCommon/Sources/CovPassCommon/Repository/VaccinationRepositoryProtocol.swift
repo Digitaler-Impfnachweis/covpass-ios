@@ -64,4 +64,7 @@ public protocol VaccinationRepositoryProtocol {
     func trustListShouldBeUpdated() -> Promise<Bool>
     
     func trustListShouldBeUpdated() -> Bool
+
+    /// Replaces the given token. If it does not exist an error is generated.
+    func replace(_ token: ExtendedCBORWebToken) -> Promise<Void>
 }

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -22,7 +22,7 @@
                 <outlet property="nameTransliteratedView" destination="KGk-1M-GC6" id="cZf-3K-KCC"/>
                 <outlet property="nameView" destination="axl-hz-02P" id="BK7-BD-z3I"/>
                 <outlet property="personalDataHeadline" destination="jt2-bl-Uis" id="VeQ-M5-IxV"/>
-                <outlet property="reissueHintView" destination="9uC-ke-NLa" id="Cp5-DH-0ti"/>
+                <outlet property="reissueStackView" destination="mH1-6C-Yzb" id="nbd-UV-Rvf"/>
                 <outlet property="scanHintView" destination="lZf-yH-BZP" id="Z8q-xp-yae"/>
                 <outlet property="scrollView" destination="YDs-Va-mXX" id="rkd-dK-EbI"/>
                 <outlet property="stackView" destination="4ka-qw-LRS" id="bvG-dB-nlQ"/>
@@ -72,9 +72,12 @@
                                         <constraint firstItem="1rx-P9-x8s" firstAttribute="top" secondItem="j4t-Jg-zf5" secondAttribute="topMargin" id="wjP-O2-ek5"/>
                                     </constraints>
                                 </view>
-                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="9uC-ke-NLa" userLabel="Reissue Hint View" customClass="HintButton" customModule="CovPassUI">
+                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="mH1-6C-Yzb">
                                     <rect key="frame" x="0.0" y="322" width="414" height="50"/>
-                                </view>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="50" placeholder="YES" id="2aQ-ki-wJf"/>
+                                    </constraints>
+                                </stackView>
                                 <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="fc2-AT-hbj" userLabel="Booster Hint View" customClass="HintView" customModule="CovPassUI">
                                     <rect key="frame" x="0.0" y="372" width="414" height="50"/>
                                 </view>
@@ -125,9 +128,6 @@
         </view>
     </objects>
     <designables>
-        <designable name="9uC-ke-NLa">
-            <size key="intrinsicContentSize" width="414" height="50"/>
-        </designable>
         <designable name="Fc7-Ur-FVx">
             <size key="intrinsicContentSize" width="414" height="128"/>
         </designable>

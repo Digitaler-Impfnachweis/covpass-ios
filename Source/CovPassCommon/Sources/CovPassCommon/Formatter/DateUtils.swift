@@ -132,6 +132,16 @@ public enum DateUtils {
         return dobString
     }
 
+    public static func parse(dateOfBirth: String) -> Date? {
+        if let date = dateFormatter(format: "yyyy").date(from: dateOfBirth) {
+            return date.endOfYear
+        }
+        if let date = dateFormatter(format: "yyyy-MM").date(from: dateOfBirth) {
+            return date.endOfMonth
+        }
+        return parseDate(dateOfBirth)
+    }
+
     // MARK: - VoiceOver helpers
 
     public static func audioDate(_ string: String) -> String? {

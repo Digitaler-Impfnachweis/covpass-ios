@@ -467,6 +467,8 @@ class CertificateDetailViewControllerSnapshotTests: BaseSnapShotTests {
         .extended(vaccinationQRCodeData: "2")
     
     func testCertificateDetail_ShowReissueNotification() {
+        var singleDoseImmunizationJohnsonCert = singleDoseImmunizationJohnsonCert
+        singleDoseImmunizationJohnsonCert.reissueProcessNewBadgeAlreadySeen = false
         let certs = [singleDoseImmunizationJohnsonCert, vaccinationWithTwoShotsOfVaccine]
         let bl = BoosterLogic.init(certLogic: DCCCertLogicMock(),
                                    userDefaults: MockPersistence())
@@ -599,6 +601,30 @@ class CertificateDetailViewControllerSnapshotTests: BaseSnapShotTests {
             certificates: [cert3OutOf1],
             resolvable: nil
         )
+        let viewController = CertificateDetailViewController(
+            viewModel: viewModel
+        )
+
+        verifyView(view: viewController.view, height: 1100)
+    }
+
+    func testReissueNotifications_new_badge_shown() {
+        let viewModel = CertificateDetailViewModelMock()
+        viewModel.showBoosterReissueIsNewBadge = true
+        viewModel.showVaccinationExpiryReissueIsNewBadge = true
+        viewModel.showBoosterReissueNotification = true
+        viewModel.showRecoveryExpiryReissueIsNewBadgeValues = [true, true]
+        let viewController = CertificateDetailViewController(
+            viewModel: viewModel
+        )
+
+        verifyView(view: viewController.view, height: 1100)
+    }
+
+    func testReissueNotifications_new_badge_for_only_one_recovery() {
+        let viewModel = CertificateDetailViewModelMock()
+        viewModel.showVaccinationExpiryReissueNotification = true
+        viewModel.showRecoveryExpiryReissueIsNewBadgeValues = [false, true]
         let viewController = CertificateDetailViewController(
             viewModel: viewModel
         )

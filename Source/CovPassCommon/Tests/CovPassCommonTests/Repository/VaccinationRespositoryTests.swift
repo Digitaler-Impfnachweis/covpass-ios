@@ -739,6 +739,60 @@ class VaccinationRepositoryTests: XCTestCase {
         wait(for: [expecation], timeout: 1.0)
     }
 
+    func testReplace_token_does_not_exist() {
+        // Given
+        let token = CBORWebToken.mockVaccinationCertificate.extended(
+            vaccinationQRCodeData: "token"
+        )
+        let expectation = XCTestExpectation()
+
+        // When
+        sut.replace(token)
+            .done { _ in
+                XCTFail("Must not succeed.")
+            }
+            .catch { _ in
+                expectation.fulfill()
+            }
+
+        // Then
+        wait(for: [expectation], timeout: 1)
+    }
+
+    func testReplace_token_does_exist() throws {
+        // Given
+        let expectation = XCTestExpectation()
+        let uuid = UUID().uuidString
+        var token = try JSONDecoder().decode(CBORWebToken.self, from: Data.json("CBORWebToken"))
+        let certificateList = CertificateList(
+            certificates: [.init(vaccinationCertificate: token, vaccinationQRCodeData: "ABCD")],
+            favoriteCertificateId: "1"
+        )
+        try keychain.store(certificateList)
+        token.iss = uuid
+        var changedExtendedToken = ExtendedCBORWebToken(
+            vaccinationCertificate: token,
+            vaccinationQRCodeData: "ABCD"
+        )
+        changedExtendedToken.reissueProcessNewBadgeAlreadySeen = true
+
+        // When
+        sut.replace(changedExtendedToken)
+            .done { _ in
+                let certificates = try self.keychain.fetchCertificateList().certificates
+                if let token = certificates.first(where: { $0 == changedExtendedToken }) {
+                    XCTAssertEqual(token.vaccinationCertificate.iss, uuid)
+                    XCTAssertEqual(token.reissueProcessNewBadgeAlreadySeen, true)
+                    expectation.fulfill()
+                }
+            }
+            .catch { _ in
+                XCTFail()
+            }
+
+        // Then
+        wait(for: [expectation], timeout: 1)
+    }
 }
 
 private extension MockPersistence {

@@ -12,6 +12,16 @@ import Foundation
 import XCTest
 
 class CBORWebTokenTests: XCTestCase {
+    var sut: CBORWebToken!
+
+    override func setUpWithError() throws {
+        sut = .mockVaccinationCertificate
+    }
+
+    override func tearDownWithError() throws {
+        sut = nil
+    }
+
     func testDecoding() {
         let jsonData = Data.json("CBORWebToken")
         let sut = try! JSONDecoder().decode(CBORWebToken.self, from: jsonData)
@@ -74,4 +84,95 @@ class CBORWebTokenTests: XCTestCase {
         // THEN
         XCTAssertEqual(isGermanCert, false)
     }
+
+    func testExpiredForLessOrEqual90Days_expired_less_than_90_days_ago() {
+        // Given
+        sut.exp = Date(timeIntervalSinceNow: -1)
+
+        // When
+        let isExpired = sut.expiredForLessOrEqual90Days
+
+        // Then
+        XCTAssertTrue(isExpired)
+    }
+
+    func testExpiredForLessOrEqual90Days_not_expired() {
+        // Given
+        sut.exp = .distantFuture
+
+        // When
+        let isExpired = sut.expiredForLessOrEqual90Days
+
+        // Then
+        XCTAssertFalse(isExpired)
+    }
+
+    func testExpiredForLessOrEqual90Days_expired_more_than_90_days_ago() {
+        // Given
+        sut.exp = .distantPast
+
+        // When
+        let isExpired = sut.expiredForLessOrEqual90Days
+
+        // Then
+        XCTAssertFalse(isExpired)
+    }
+
+    func testExpiredForLessOrEqual90Days_exp_is_nil() {
+        // Given
+        sut.exp = nil
+
+        // When
+        let isExpired = sut.expiredForLessOrEqual90Days
+
+        // Then
+        XCTAssertFalse(isExpired)
+    }
+
+    func testWillExpireInLessOrEqual28Days_already_expired() {
+        // Given
+        sut.exp = Date(timeIntervalSinceNow: -1)
+
+        // When
+        let willExpire = sut.willExpireInLessOrEqual28Days
+
+        // Then
+        XCTAssertFalse(willExpire)
+    }
+
+    func testWillExpireInLessOrEqual28Days_will_expire() {
+        // Given
+        sut.exp = Date(timeIntervalSinceNow: 28*secondsPerDay)
+
+        // When
+        let willExpire = sut.willExpireInLessOrEqual28Days
+
+        // Then
+        XCTAssertTrue(willExpire)
+    }
+
+    func testWillExpireInLessOrEqual28Days_will_expire_after_28_days() {
+        // Given
+        sut.exp = Date(timeIntervalSinceNow: 30*secondsPerDay)
+
+        // When
+        let willExpire = sut.willExpireInLessOrEqual28Days
+
+        // Then
+        XCTAssertFalse(willExpire)
+    }
+
+    func testWillExpireInLessOrEqual28Days_exp_is_nil() {
+        // Given
+        sut.exp = nil
+
+        // When
+        let willExpire = sut.willExpireInLessOrEqual28Days
+
+        // Then
+        XCTAssertFalse(willExpire)
+    }
 }
+
+private let secondsPerHour: TimeInterval = 60*60
+private let secondsPerDay: TimeInterval = 24*secondsPerHour

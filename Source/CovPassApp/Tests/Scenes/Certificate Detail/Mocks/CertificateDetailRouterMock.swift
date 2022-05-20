@@ -12,11 +12,12 @@ import CovPassUI
 import PromiseKit
 import XCTest
 
-struct CertificateDetailRouterMock: CertificateDetailRouterProtocol {
+final class CertificateDetailRouterMock: CertificateDetailRouterProtocol {
     var sceneCoordinator: SceneCoordinator = SceneCoordinatorMock()
     let expectationShowReissue = XCTestExpectation(description: "expectationShowReissue")
     let showCertificateExpectation = XCTestExpectation(description: "showCertificateExpectation")
     let showQRCodeScannerExpectation = XCTestExpectation(description: "showQRCodeScannerExpectation")
+    var receivedReissueTokens: [ExtendedCBORWebToken] = []
 
     func showCertificate(for token: ExtendedCBORWebToken) -> Promise<Void> {
         showCertificateExpectation.fulfill()
@@ -30,6 +31,7 @@ struct CertificateDetailRouterMock: CertificateDetailRouterProtocol {
     func showWebview(_ url: URL) {}
 
     func showReissue(for tokens: [ExtendedCBORWebToken], context: ReissueContext) -> Promise<Void> {
+        receivedReissueTokens = tokens
         expectationShowReissue.fulfill()
         return .value
     }

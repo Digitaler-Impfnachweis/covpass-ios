@@ -87,4 +87,52 @@ class DateUtilsTests: XCTestCase {
         dgc.dobString = "2021-04-26T15:05:00"
         XCTAssertEqual(DateUtils.displayDateOfBirth(dgc), "2021-04-26")
     }
+
+    func testParseDateOfBirth_year_only() throws {
+        // Given
+        let components: Set<Calendar.Component> = [.year, .month, .day, .hour, .minute, .second]
+        let dateString = "2137"
+
+        // When
+        let date = try XCTUnwrap(DateUtils.parse(dateOfBirth: dateString))
+
+        // Then
+        let dateComponents = Calendar.current.dateComponents(components, from: date)
+        XCTAssertEqual(dateComponents.year, 2138)
+        XCTAssertEqual(dateComponents.month, 1)
+        XCTAssertEqual(dateComponents.day, 1)
+        XCTAssertEqual(dateComponents.hour, 0)
+        XCTAssertEqual(dateComponents.minute, 0)
+        XCTAssertEqual(dateComponents.second, 0)
+    }
+
+    func testParseDateOfBirth_year_and_month() throws {
+        // Given
+        let components: Set<Calendar.Component> = [.year, .month, .day, .hour, .minute, .second]
+        let dateString = "2137-10"
+
+        // When
+        let date = try XCTUnwrap(DateUtils.parse(dateOfBirth: dateString))
+
+        // Then
+        let dateComponents = Calendar.current.dateComponents(components, from: date)
+        XCTAssertEqual(dateComponents.year, 2137)
+        XCTAssertEqual(dateComponents.month, 11)
+        XCTAssertEqual(dateComponents.day, 1)
+        XCTAssertEqual(dateComponents.hour, 0)
+        XCTAssertEqual(dateComponents.minute, 0)
+        XCTAssertEqual(dateComponents.second, 0)
+    }
+
+    func testParseDateOfBirth_other() {
+        XCTAssertNotNil(DateUtils.parse(dateOfBirth: "2021-04-26"))
+        XCTAssertNotNil(DateUtils.parse(dateOfBirth: "2021-04-26T15:05:00"))
+        XCTAssertNotNil(DateUtils.parse(dateOfBirth: "2021-04-26T15:05:00Z"))
+        XCTAssertNotNil(DateUtils.parse(dateOfBirth: "2021-04-26T15:05:00+02:00"))
+        XCTAssertNotNil(DateUtils.parse(dateOfBirth: "2021-04-26T15:05:00.123"))
+        XCTAssertNotNil(DateUtils.parse(dateOfBirth: "2021-04-26T15:05:00.123+02:00"))
+        XCTAssertNotNil(DateUtils.parse(dateOfBirth: "2021-06-07T17:24:36.798354+00:00"))
+        XCTAssertNil(DateUtils.parse(dateOfBirth: "15:05:00+02:00"))
+        XCTAssertNil(DateUtils.parse(dateOfBirth: "15:05:00"))
+    }
 }

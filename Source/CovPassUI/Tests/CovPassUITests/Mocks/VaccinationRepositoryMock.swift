@@ -99,4 +99,8 @@ public class VaccinationRepositoryMock: VaccinationRepositoryProtocol {
             ) :
             .init(error: checkedCertError)
     }
+
+    public func replace(_ token: ExtendedCBORWebToken) -> Promise<Void> {
+        .init()
+    }
 }

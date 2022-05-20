@@ -30,7 +30,7 @@ class CertificateDetailViewController: UIViewController {
     @IBOutlet var immunizationView: ParagraphView!
     @IBOutlet var immunizationButtonContainerView: UIStackView!
     @IBOutlet var immunizationButton: MainButton!
-    @IBOutlet var reissueHintView: HintButton!
+    @IBOutlet var reissueStackView: UIStackView!
     @IBOutlet var boosterHintView: HintView!
     @IBOutlet var personalDataHeadline: PlainLabel!
     @IBOutlet var allCertificatesHeadline: PlainLabel!
@@ -60,6 +60,7 @@ class CertificateDetailViewController: UIViewController {
         viewModel.refresh()
         viewModel.updateBoosterCandiate()
         viewModel.updateReissueCandidate(to: true)
+        viewModel.markExpiryReissueCandidatesAsSeen()
     }
 
     // MARK: - Methods
@@ -71,7 +72,7 @@ class CertificateDetailViewController: UIViewController {
         setupHeadline()
         setupImmunizationView()
         setupBoosterHintView()
-        setupReissueHintView()
+        setupReissueStackView()
         setupPersonalData()
         setupScanHintView()
         setupCertificates()
@@ -128,19 +129,48 @@ class CertificateDetailViewController: UIViewController {
         stackView.setCustomSpacing(.space_24, after: immunizationButtonContainerView)
     }
     
-    private func setupReissueHintView() {
-        reissueHintView.isHidden = !viewModel.showReissueNotification
+    private func setupReissueStackView() {
+        reissueStackView.removeAllArrangedSubviews()
+        if viewModel.showBoosterReissueNotification {
+            let hintButton = createReissueHintButton()
+            hintButton.topRightLabel.isHidden = !viewModel.showBoosterReissueIsNewBadge
+            hintButton.button.action = viewModel.triggerBoosterReissue
+            hintButton.titleLabel.attributedText = viewModel.boosterReissueNotificationTitle.styledAs(.header_3)
+            hintButton.bodyTextView.attributedText = viewModel.boosterReissueNotificationBody.styledAs(.body)
+            hintButton.button.title = viewModel.boosterReissueButtonTitle
+            reissueStackView.addArrangedSubview(hintButton)
+        } else if viewModel.showVaccinationExpiryReissueNotification {
+            let hintButton = createReissueHintButton()
+            hintButton.topRightLabel.isHidden = !viewModel.showVaccinationExpiryReissueIsNewBadge
+            hintButton.button.action = viewModel.triggerVaccinationExpiryReissue
+            hintButton.titleLabel.attributedText = viewModel.expiryReissueNotificationTitle.styledAs(.header_3)
+            hintButton.bodyTextView.attributedText = viewModel.vaccinationExpiryReissueNotificationBody.styledAs(.body)
+            hintButton.button.title = viewModel.vaccinationExpiryReissueButtonTitle
+            reissueStackView.addArrangedSubview(hintButton)
+        }
+        for index in 0 ..< viewModel.recoveryExpiryReissueCandidatesCount {
+            let hintButton = createReissueHintButton()
+            hintButton.topRightLabel.isHidden = !viewModel.showRecoveryExpiryReissueIsNewBadge(index: index)
+            hintButton.button.action = { [weak self] in
+                self?.viewModel.triggerRecoveryExpiryReissue(index: index)
+            }
+            hintButton.titleLabel.attributedText = viewModel.expiryReissueNotificationTitle.styledAs(.header_3)
+            hintButton.bodyTextView.attributedText = viewModel.recoveryExpiryReissueNotificationBody.styledAs(.body)
+            hintButton.button.title = viewModel.recoveryExpiryReissueButtonTitle
+            reissueStackView.addArrangedSubview(hintButton)
+        }
+    }
+
+    private func createReissueHintButton() -> HintButton {
+        let reissueHintView = HintButton()
         reissueHintView.topRightLabel.text = viewModel.reissueNotificationHighlightText
-        reissueHintView.topRightLabel.isHidden = !viewModel.reissueNew
         reissueHintView.containerView.backgroundColor = .neutralWhite
         reissueHintView.containerView?.layer.borderColor = UIColor.neutralWhite.cgColor
-        reissueHintView.titleLabel.attributedText = viewModel.reissueNotificationTitle.styledAs(.header_3)
-        reissueHintView.bodyTextView.attributedText = viewModel.reissueNotificationBody.styledAs(.body)
-        reissueHintView.button.title = viewModel.reissueButtonTitle
         reissueHintView.button.style = .alternative
-        reissueHintView.button.action = viewModel.triggerReissue
+        reissueHintView.backgroundColor = .backgroundPrimary
+        return reissueHintView
     }
-    
+
     private func setupBoosterHintView() {
         boosterHintView.isHidden = !viewModel.showBoosterNotification
 
