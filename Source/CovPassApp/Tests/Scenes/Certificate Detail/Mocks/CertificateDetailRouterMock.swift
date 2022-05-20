@@ -29,7 +29,7 @@ struct CertificateDetailRouterMock: CertificateDetailRouterProtocol {
 
     func showWebview(_ url: URL) {}
 
-    func showReissue(for tokens: [ExtendedCBORWebToken]) -> Promise<Void> {
+    func showReissue(for tokens: [ExtendedCBORWebToken], context: ReissueContext) -> Promise<Void> {
         expectationShowReissue.fulfill()
         return .value
     }

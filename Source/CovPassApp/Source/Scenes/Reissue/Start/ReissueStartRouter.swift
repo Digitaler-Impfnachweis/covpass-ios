@@ -18,11 +18,13 @@ class ReissueStartRouter: ReissueStartRouterProtocol {
     // MARK: - Methods
 
     func showNext(tokens: [ExtendedCBORWebToken],
-                  resolver: Resolver<Void>) {
+                  resolver: Resolver<Void>,
+                  context: ReissueContext) {
         sceneCoordinator
             .push(ReissueConsentSceneFactory(router: ReissueConsentRouter(sceneCoordinator: sceneCoordinator),
                                              tokens: tokens,
-                                             resolver: resolver),
+                                             resolver: resolver,
+                                             context: context),
                   animated: true)
     }
 }

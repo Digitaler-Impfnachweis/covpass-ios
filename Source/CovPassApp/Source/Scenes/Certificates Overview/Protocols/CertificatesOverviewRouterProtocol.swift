@@ -33,5 +33,6 @@ protocol CertificatesOverviewRouterProtocol: DialogRouterProtocol {
     func toFaqWebsite(_ url: URL)
     func startValidationAsAService(with data: ValidationServiceInitialisation)
     func showCheckSituation(userDefaults: Persistence) -> Promise<Void>
-    func showCertificatesReissue(for cborWebTokens: [ExtendedCBORWebToken]) -> Promise<Void>
+    func showCertificatesReissue(for cborWebTokens: [ExtendedCBORWebToken],
+                                 context: ReissueContext) -> Promise<Void>
 }

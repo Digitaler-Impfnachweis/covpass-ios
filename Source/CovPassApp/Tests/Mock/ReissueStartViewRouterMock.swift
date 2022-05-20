@@ -18,7 +18,7 @@ class ReissueStartRouterMock: ReissueStartRouterProtocol {
     let showNextExpectation = XCTestExpectation(description: "showNextExpectation")
     let cancelExpectation = XCTestExpectation(description: "cancelExpectation")
 
-    func showNext(tokens: [ExtendedCBORWebToken], resolver: Resolver<Void>) {
+    func showNext(tokens: [ExtendedCBORWebToken], resolver: Resolver<Void>, context: ReissueContext) {
         showNextExpectation.fulfill()
     }
     

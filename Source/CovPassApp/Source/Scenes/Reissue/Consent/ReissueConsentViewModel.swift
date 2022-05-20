@@ -14,6 +14,10 @@ private enum Constants {
         static var hintBulletPoint2 = "certificate_renewal_consent_page_transfer_certificates_consent_box_copy_list_item_2".localized
         static var hintBulletPoint3 = "certificate_renewal_consent_page_transfer_certificates_consent_box_copy_list_item_3".localized
         static var description = "certificate_renewal_consent_page_transfer_certificates_copy".localized
+        static var descriptionBullet1 = "renewal_expiry_consent_list_item_1".localized
+        static var descriptionBullet2 = "renewal_expiry_consent_list_item_2".localized
+        static var descriptionBullet3 = "renewal_expiry_consent_list_item_3".localized
+        static var descriptionBullet4 = "renewal_expiry_consent_list_item_4".localized
         static var privacyHeadline = "certificate_renewal_consent_page_transfer_certificates_headline_privacy_policy".localized
         static var privacyText = "certificate_renewal_consent_page_transfer_certificates_button_link".localized
         static var agree = "certificate_renewal_consent_page_transfer_certificates_confirmation_button".localized
@@ -38,10 +42,10 @@ class ReissueConsentViewModel: ReissueConsentViewModelProtocol {
     let certItems: [CertificateItem]
     let titleText = Constants.Keys.title
     let subTitleText = Constants.Keys.subTitle
-    let descriptionText = Constants.Keys.description
+    var descriptionText: NSAttributedString
     let privacyHeadlineText = Constants.Keys.privacyHeadline
     let hintTitle = Constants.Keys.hintTitle
-    let hintText: NSAttributedString
+    var hintText: NSAttributedString
     let dataPrivacyText = Constants.Keys.privacyText
     let dataPrivacyChecvron = Constants.Images.privacyChevron
     let buttonAgreeTitle = Constants.Keys.agree
@@ -55,7 +59,8 @@ class ReissueConsentViewModel: ReissueConsentViewModelProtocol {
     private let decoder: JSONDecoder
     private lazy var qrCodeData: [String] = tokens.map(\.vaccinationQRCodeData)
     private let faqURL: URL
-
+    private let context: ReissueContext
+    
     // MARK: - Lifecyle
     
     init(router: ReissueConsentRouterProtocol,
@@ -64,7 +69,8 @@ class ReissueConsentViewModel: ReissueConsentViewModelProtocol {
          reissueRepository: CertificateReissueRepositoryProtocol,
          vaccinationRepository: VaccinationRepositoryProtocol,
          decoder: JSONDecoder,
-         locale: Locale) {
+         locale: Locale,
+         context: ReissueContext) {
         self.faqURL = (locale.isGerman() ? Constants.Config.errorFaqURLGerman : Constants.Config.errorFaqURLEnglish)!
         self.tokens = tokens
         self.reissueRepository = reissueRepository
@@ -73,19 +79,32 @@ class ReissueConsentViewModel: ReissueConsentViewModelProtocol {
         self.router = router
         self.resolver = resolver
         self.certItems = tokens.sortedByDn.compactMap{ $0.certItem(active: true) }
+        self.descriptionText = Constants.Keys.description.styledAs(.body)
         self.hintText = Constants.Keys.hintText.styledAs(.body)
             .appendBullets([
                 Constants.Keys.hintBulletPoint1.styledAs(.body),
                 Constants.Keys.hintBulletPoint2.styledAs(.body),
-                Constants.Keys.hintBulletPoint3.styledAs(.body),
             ], spacing: 12)
+        
+        if context == .boosterRenewal {
+            self.hintText = hintText.appendBullets([Constants.Keys.hintBulletPoint3.styledAs(.body)])
+        } else {
+            self.descriptionText = NSAttributedString.toBullets([
+                Constants.Keys.descriptionBullet1.styledAs(.body),
+                Constants.Keys.descriptionBullet2.styledAs(.body),
+                Constants.Keys.descriptionBullet3.styledAs(.body),
+                Constants.Keys.descriptionBullet4.styledAs(.body),
+            ])
+        }
+        self.context = context
     }
     
     // MARK: - Methods
+
     
     func processAgree() {
         showLoadingIndicator()
-            .then(reissueRepository.reissue)
+            .then(reissue())
             .then(save)
             .ensure { [weak self] in
                 self?.isLoading = false
@@ -103,16 +122,45 @@ class ReissueConsentViewModel: ReissueConsentViewModelProtocol {
         delegate?.viewModelDidUpdate()
         return .value(tokens)
     }
-
+    
+    private func reissue() -> ([ExtendedCBORWebToken]) -> Promise<CertificateReissueRepositoryResponse> {
+        if context == .boosterRenewal {
+            return reissueRepository.renew
+        } else {
+            return reissueRepository.extend
+        }
+    }
+    
     private func save(tokens: [ExtendedCBORWebToken]) -> Promise<[ExtendedCBORWebToken]> {
         vaccinationRepository
             .add(tokens: tokens)
             .map { tokens }
     }
-
-    private func handle(tokens: [ExtendedCBORWebToken]) {
+    
+    private func handleDoneExtendRenewal() {
+        vaccinationRepository.delete(self.tokens.sortedByDn[0])
+            .done {
+                self.router.showGenericResultPage()
+            }.catch { [weak self] error in
+                self?.handle(reissueError: error)
+            }
+    }
+    
+    fileprivate func handleDoneBoosterRenewal(_ tokens: [ExtendedCBORWebToken]) {
+        router.showReissueResultPage(newTokens: tokens, oldTokens: self.tokens, resolver: resolver)
+    }
+    
+    fileprivate func extractedFunc() {
         delegate?.viewModelDidUpdate()
-        router.showNext(newTokens: tokens, oldTokens: self.tokens, resolver: resolver)
+    }
+    
+    private func handle(tokens: [ExtendedCBORWebToken]) {
+        extractedFunc()
+        if context == .boosterRenewal {
+            handleDoneBoosterRenewal(tokens)
+        } else {
+            handleDoneExtendRenewal()
+        }
     }
 
     private func handle(reissueError: Error) {

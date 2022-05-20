@@ -346,7 +346,8 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
     }
     
     func triggerReissue() {
-        router.showReissue(for: certificates.filterBoosterAfterVaccinationAfterRecoveryFromGermany)
+        router.showReissue(for: certificates.filterBoosterAfterVaccinationAfterRecoveryFromGermany,
+                           context: .boosterRenewal)
             .ensure {
                 self.refreshCertsAndUpdateView()
             }

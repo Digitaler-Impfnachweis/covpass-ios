@@ -26,7 +26,8 @@ class ReissueStartViewModelTests: XCTestCase {
         token = CBORWebToken.mockVaccinationCertificate.extended()
         sut = ReissueStartViewModel(router: mockRouter,
                                     resolver: resolver,
-                                    tokens: [token])
+                                    tokens: [token],
+                                    context: .boosterRenewal)
     }
     
     override func tearDownWithError() throws {

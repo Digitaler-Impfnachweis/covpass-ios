@@ -21,7 +21,23 @@ class ReissueConsentViewControllerSnapShotTests: BaseSnapShotTests {
                                          reissueRepository: CertificateReissueRepositoryMock(),
                                          vaccinationRepository: VaccinationRepositoryMock(),
                                          decoder: JSONDecoder(),
-                                         locale: .current)
+                                         locale: .current,
+                                         context: .boosterRenewal)
+        let vc = ReissueConsentViewController(viewModel: vm)
+        verifyView(view: vc.view, height: 1000)
+    }
+    
+    func testDefaultExpiryContext() {
+        let token = CBORWebToken.mockVaccinationCertificate.extended()
+        let (_, resolver) = Promise<Void>.pending()
+        let vm = ReissueConsentViewModel(router: ReissueConsentRouter(sceneCoordinator: SceneCoordinatorMock()),
+                                         resolver: resolver,
+                                         tokens: [token],
+                                         reissueRepository: CertificateReissueRepositoryMock(),
+                                         vaccinationRepository: VaccinationRepositoryMock(),
+                                         decoder: JSONDecoder(),
+                                         locale: .current,
+                                         context: .certificateExtension)
         let vc = ReissueConsentViewController(viewModel: vm)
         verifyView(view: vc.view, height: 1000)
     }

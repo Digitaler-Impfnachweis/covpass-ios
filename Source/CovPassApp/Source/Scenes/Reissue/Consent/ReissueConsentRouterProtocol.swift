@@ -4,9 +4,10 @@ import CovPassCommon
 import PromiseKit
 
 protocol ReissueConsentRouterProtocol: RouterProtocol {
-    func showNext(newTokens: [ExtendedCBORWebToken],
-                  oldTokens: [ExtendedCBORWebToken],
-                  resolver: Resolver<Void>)
+    func showReissueResultPage(newTokens: [ExtendedCBORWebToken],
+                               oldTokens: [ExtendedCBORWebToken],
+                               resolver: Resolver<Void>)
+    func showGenericResultPage()
     func cancel(resolver: Resolver<Void>)
     func routeToPrivacyStatement()
     func showError(title: String, message: String, faqURL: URL)

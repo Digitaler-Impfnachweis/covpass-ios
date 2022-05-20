@@ -33,6 +33,8 @@
 		0933177F273ABB2A0036DB2A /* ChooseCertificateRouterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09331772273ABB2A0036DB2A /* ChooseCertificateRouterProtocol.swift */; };
 		09331781273ABB2A0036DB2A /* ChooseCertificateViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09331774273ABB2A0036DB2A /* ChooseCertificateViewModelProtocol.swift */; };
 		0939EAB827043BD80086729C /* Kronos in Frameworks */ = {isa = PBXBuildFile; productRef = 0939EAB727043BD80086729C /* Kronos */; };
+		094924072833B33E00824260 /* ResultViewSnapShotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094924062833B33E00824260 /* ResultViewSnapShotTests.swift */; };
+		094924092833B3C600824260 /* ResultViewRouterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094924082833B3C600824260 /* ResultViewRouterMock.swift */; };
 		09541B5727FD7E7F00A32547 /* ValidateCertificateUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09541B5527FD7E7C00A32547 /* ValidateCertificateUseCaseTests.swift */; };
 		09541B5927FD7FD800A32547 /* CBORWebTokenExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09541B5827FD7FD800A32547 /* CBORWebTokenExtensions.swift */; };
 		09541B5B27FD887500A32547 /* ParseCertificateUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09541B5A27FD887500A32547 /* ParseCertificateUseCaseTests.swift */; };
@@ -443,6 +445,8 @@
 		09331770273ABB2A0036DB2A /* ChooseCertificateViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChooseCertificateViewController.xib; sourceTree = "<group>"; };
 		09331772273ABB2A0036DB2A /* ChooseCertificateRouterProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseCertificateRouterProtocol.swift; sourceTree = "<group>"; };
 		09331774273ABB2A0036DB2A /* ChooseCertificateViewModelProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseCertificateViewModelProtocol.swift; sourceTree = "<group>"; };
+		094924062833B33E00824260 /* ResultViewSnapShotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewSnapShotTests.swift; sourceTree = "<group>"; };
+		094924082833B3C600824260 /* ResultViewRouterMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewRouterMock.swift; sourceTree = "<group>"; };
 		09541B5527FD7E7C00A32547 /* ValidateCertificateUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidateCertificateUseCaseTests.swift; sourceTree = "<group>"; };
 		09541B5827FD7FD800A32547 /* CBORWebTokenExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CBORWebTokenExtensions.swift; sourceTree = "<group>"; };
 		09541B5A27FD887500A32547 /* ParseCertificateUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseCertificateUseCaseTests.swift; sourceTree = "<group>"; };
@@ -916,6 +920,14 @@
 				09331774273ABB2A0036DB2A /* ChooseCertificateViewModelProtocol.swift */,
 			);
 			path = Protocols;
+			sourceTree = "<group>";
+		};
+		094924052833B32600824260 /* ResultView */ = {
+			isa = PBXGroup;
+			children = (
+				094924062833B33E00824260 /* ResultViewSnapShotTests.swift */,
+			);
+			path = ResultView;
 			sourceTree = "<group>";
 		};
 		09541B5427FD7E6B00A32547 /* UseCases */ = {
@@ -1469,6 +1481,7 @@
 				09D580E427BFCE7600CB50CB /* ValidationServiceRouterMock.swift */,
 				09D5812227C27DAD00CB50CB /* ReissueStartViewRouterMock.swift */,
 				096897A027C3A8FE009E2886 /* ReissueConsentRouterMock.swift */,
+				094924082833B3C600824260 /* ResultViewRouterMock.swift */,
 			);
 			path = Mock;
 			sourceTree = "<group>";
@@ -1494,6 +1507,7 @@
 		216D2025264EF95400370F16 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				094924052833B32600824260 /* ResultView */,
 				09D5811E27C27CA600CB50CB /* Reissue */,
 				09D580DE27BFCCD200CB50CB /* CertificateItemDetail */,
 				E7CB54B127B5324E002FA55E /* App Information */,
@@ -2675,6 +2689,7 @@
 				096897B227C3E3D5009E2886 /* ReissueResultViewControllerSnapShotTests.swift in Sources */,
 				E75234DC27CE6EF200B744AB /* ReissueResultViewModelTests.swift in Sources */,
 				E7CB54B327B53296002FA55E /* AppInformationViewModelTests.swift in Sources */,
+				094924072833B33E00824260 /* ResultViewSnapShotTests.swift in Sources */,
 				09590D302715E67F004410D7 /* MockCardViewModel.swift in Sources */,
 				0994A4D6273431A500B21FCF /* WebTokenMockUtil.swift in Sources */,
 				0994A4D12734319800B21FCF /* TrustedListDetailsViewSnapShotTests.swift in Sources */,
@@ -2704,6 +2719,7 @@
 				096897A127C3A8FE009E2886 /* ReissueConsentRouterMock.swift in Sources */,
 				09C1DD922759727500BC0B36 /* CertificatesOverviewViewModelTests.swift in Sources */,
 				09590D352715E67F004410D7 /* MockCertificateViewModel.swift in Sources */,
+				094924092833B3C600824260 /* ResultViewRouterMock.swift in Sources */,
 				95FE37B6273EF4FC000899A3 /* VAASRepositoryMock.swift in Sources */,
 				386FDCFC26ED205900AC7639 /* BoosterNotificationViewModelTests.swift in Sources */,
 				E7FFBDA927F5D5B700796FEA /* URLSession+CertificateRevocationTests.swift in Sources */,

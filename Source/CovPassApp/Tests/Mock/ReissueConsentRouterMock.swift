@@ -16,6 +16,7 @@ class ReissueConsentRouterMock: ReissueConsentRouterProtocol {
 
     var sceneCoordinator: SceneCoordinator = SceneCoordinatorMock()
     let showNextExpectation = XCTestExpectation(description: "showNextExpectation")
+    let showNextGenericPageExpectation = XCTestExpectation(description: "showNextExpectation")
     let cancelExpectation = XCTestExpectation(description: "cancelExpectation")
     let routeToPrivacyExpectation = XCTestExpectation(description: "routeToPrivacyExpectation")
     let showErrorExpectation = XCTestExpectation(description: "showErrorExpectation")
@@ -23,8 +24,12 @@ class ReissueConsentRouterMock: ReissueConsentRouterProtocol {
     var receivedErrorTitle: String?
     var receivedErrorMessage: String?
 
-    func showNext(newTokens: [ExtendedCBORWebToken], oldTokens: [ExtendedCBORWebToken], resolver: Resolver<Void>) {
+    func showReissueResultPage(newTokens: [ExtendedCBORWebToken], oldTokens: [ExtendedCBORWebToken], resolver: Resolver<Void>) {
         showNextExpectation.fulfill()
+    }
+    
+    func showGenericResultPage() {
+        showNextGenericPageExpectation.fulfill()
     }
     
     func cancel(resolver:Resolver<Void>)  {

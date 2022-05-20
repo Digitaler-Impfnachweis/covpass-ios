@@ -86,7 +86,7 @@ class CertificatesOverviewRouterMock: CertificatesOverviewRouterProtocol {
         toWebsiteFAQExpectation.fulfill()
     }
     func startValidationAsAService(with data: ValidationServiceInitialisation) {}
-    func showCertificatesReissue(for cborWebTokens: [ExtendedCBORWebToken]) -> Promise<Void> {
+    func showCertificatesReissue(for cborWebTokens: [ExtendedCBORWebToken], context: ReissueContext) -> Promise<Void> {
         showCertificatesReissueExpectation.fulfill()
         return .value
     }

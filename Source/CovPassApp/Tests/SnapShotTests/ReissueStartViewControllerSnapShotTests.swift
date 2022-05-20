@@ -17,7 +17,19 @@ class ReissueStartViewControllerSnapShotTests: BaseSnapShotTests {
         let (_, resolver) = Promise<Void>.pending()
         let vm = ReissueStartViewModel(router: ReissueStartRouter(sceneCoordinator: SceneCoordinatorMock()),
                                        resolver: resolver,
-                                       tokens: [token])
+                                       tokens: [token],
+                                       context: .boosterRenewal)
+        let vc = ReissueStartViewController(viewModel: vm)
+        verifyView(view: vc.view, height: 1000)
+    }
+    
+    func testDefaultExpiryContext() {
+        let token = CBORWebToken.mockVaccinationCertificate.extended()
+        let (_, resolver) = Promise<Void>.pending()
+        let vm = ReissueStartViewModel(router: ReissueStartRouter(sceneCoordinator: SceneCoordinatorMock()),
+                                       resolver: resolver,
+                                       tokens: [token],
+                                       context: .certificateExtension)
         let vc = ReissueStartViewController(viewModel: vm)
         verifyView(view: vc.view, height: 1000)
     }

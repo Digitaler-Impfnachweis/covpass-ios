@@ -168,11 +168,13 @@ class CertificatesOverviewRouter: CertificatesOverviewRouterProtocol, DialogRout
         )
     }
 
-    func showCertificatesReissue(for cborWebTokens: [ExtendedCBORWebToken]) -> Promise<Void> {
+    func showCertificatesReissue(for cborWebTokens: [ExtendedCBORWebToken],
+                                 context: ReissueContext) -> Promise<Void> {
         sceneCoordinator.present(
             ReissueStartSceneFactory(
                 router: ReissueStartRouter(sceneCoordinator: sceneCoordinator),
-                tokens: cborWebTokens
+                tokens: cborWebTokens,
+                context: context
             )
         )
     }

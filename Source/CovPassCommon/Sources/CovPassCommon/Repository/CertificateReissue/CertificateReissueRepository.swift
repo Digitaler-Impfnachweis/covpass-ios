@@ -28,10 +28,18 @@ public class CertificateReissueRepository: CertificateReissueRepositoryProtocol 
         self.trustList = trustList
     }
 
-    public func reissue(_ webTokens: [ExtendedCBORWebToken]) -> Promise<CertificateReissueRepositoryResponse> {
+    public func renew(_ webTokens: [ExtendedCBORWebToken]) -> Promise<CertificateReissueRepositoryResponse> {
+        reissue(webTokens.map(\.vaccinationQRCodeData).certificateRenewRequestBody)
+    }
+    
+    public func extend(_ webTokens: [ExtendedCBORWebToken]) -> Promise<CertificateReissueRepositoryResponse> {
+        reissue(webTokens.map(\.vaccinationQRCodeData).certificateExtendRequestBody)
+    }
+    
+    private func reissue(_ certificateExtendRequestBody: CertificateReissueRequestBody) -> Promise<CertificateReissueRepositoryResponse> {
         Promise { seal in
             jsonEncoder
-                .encodePromise(webTokens.map(\.vaccinationQRCodeData).certificateReissueRequestBody)
+                .encodePromise(certificateExtendRequestBody)
                 .map(reissueRequest)
                 .then(httpClient.httpRequest)
                 .then(jsonDecoder.decodePromise)
@@ -119,7 +127,11 @@ public class CertificateReissueRepository: CertificateReissueRepositoryProtocol 
 }
 
 private extension Array where Element == String {
-    var certificateReissueRequestBody: CertificateReissueRequestBody {
+    var certificateRenewRequestBody: CertificateReissueRequestBody {
+        .init(action: .renew, certificates: self)
+    }
+    
+    var certificateExtendRequestBody: CertificateReissueRequestBody {
         .init(action: .renew, certificates: self)
     }
 }

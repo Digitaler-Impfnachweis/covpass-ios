@@ -67,7 +67,7 @@ class ReissueConsentViewController: UIViewController {
         certStack.subviews.forEach { $0.removeFromSuperview() }
         viewModel.certItems.forEach { certStack.addArrangedSubview($0) }
         configureHintView()
-        descriptionLabel.attributedText = viewModel.descriptionText.styledAs(.body)
+        descriptionLabel.attributedText = viewModel.descriptionText
         bodyStackView.setCustomSpacing(Constants.customSpacingAfterDescription, after: descriptionLabel)
         privacyHeadlineLabel.attributedText = viewModel.privacyHeadlineText.styledAs(.body).colored(.onBackground70)
         dataPrivacyLabel.textLabel.attributedText = viewModel.dataPrivacyText.styledAs(.header_3)

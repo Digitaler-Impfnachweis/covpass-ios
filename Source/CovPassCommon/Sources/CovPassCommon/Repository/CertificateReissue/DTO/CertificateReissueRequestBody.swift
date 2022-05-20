@@ -17,6 +17,7 @@ struct CertificateReissueRequestBody: Codable {
 
     enum Action: String, Codable {
         case renew
+        case extend
         case combine
     }
 }

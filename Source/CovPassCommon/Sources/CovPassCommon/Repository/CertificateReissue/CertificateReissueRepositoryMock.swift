@@ -13,7 +13,18 @@ public class CertificateReissueRepositoryMock: CertificateReissueRepositoryProto
     public var error: Error?
     public var responseDelay: TimeInterval = 0.0
     public init() {}
-    public func reissue(_ cborWebTokens: [ExtendedCBORWebToken]) -> Promise<CertificateReissueRepositoryResponse> {
+    public func renew(_ cborWebTokens: [ExtendedCBORWebToken]) -> Promise<CertificateReissueRepositoryResponse> {
+        if let error = error {
+            return after(seconds: responseDelay).then {
+                Promise.init(error: error)
+            }
+        }
+        return after(seconds: responseDelay).then {
+            Promise.value(self.reissueResponse)
+        }
+    }
+    
+    public func extend(_ webTokens: [ExtendedCBORWebToken]) -> Promise<CertificateReissueRepositoryResponse> {
         if let error = error {
             return after(seconds: responseDelay).then {
                 Promise.init(error: error)

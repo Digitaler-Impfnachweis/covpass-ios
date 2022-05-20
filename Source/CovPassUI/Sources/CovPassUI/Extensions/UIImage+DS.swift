@@ -204,6 +204,9 @@ public extension UIImage {
     @ImageLoader(name: "status_full_blue_notification")
     private(set) static var statusFullBlueNotification
     
+    @ImageLoader(name: "success_large")
+    private(set) static var successLarge
+    
     @ImageLoader(name: "flash-on")
     private(set) static var flashOn
 

@@ -318,7 +318,7 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
     
     private func showCertificatesReissue(tokens: [ExtendedCBORWebToken]) -> Promise<Void> {
         repository.setReissueProcess(initialAlreadySeen: true, newBadgeAlreadySeen: false, tokens: tokens).cauterize()
-        return router.showCertificatesReissue(for:tokens)
+        return router.showCertificatesReissue(for:tokens, context: .boosterRenewal)
     }
 
     private func payloadFromScannerResult(_ result: ScanResult) throws -> String {

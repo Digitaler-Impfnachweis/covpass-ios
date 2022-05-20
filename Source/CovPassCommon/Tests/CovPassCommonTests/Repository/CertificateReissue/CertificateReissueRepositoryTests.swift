@@ -42,7 +42,7 @@ class CertificateReissueRepositoryTests: XCTestCase {
         let expectation = XCTestExpectation()
 
         // When
-        sut.reissue([cborWebToken])
+        sut.renew([cborWebToken])
             .catch { error in
                 guard error as? CertificateReissueRepositoryFallbackError != nil else {
                     XCTFail("Wrong error: \(error)")
@@ -70,7 +70,7 @@ class CertificateReissueRepositoryTests: XCTestCase {
         )
 
         // When
-        sut.reissue([cborWebToken])
+        sut.renew([cborWebToken])
             .catch { error in
                 guard let certificateReissueError = error as? CertificateReissueRepositoryError else {
                     XCTFail("Wrong error: \(error)")
@@ -93,7 +93,7 @@ class CertificateReissueRepositoryTests: XCTestCase {
         httpClient.error = HTTPClientError.http(476, data: Data())
 
         // When
-        sut.reissue([cborWebToken])
+        sut.renew([cborWebToken])
             .catch { error in
                 guard let certificateReissueError = error as? CertificateReissueRepositoryError else {
                     XCTFail("Wrong error: \(error)")
@@ -115,7 +115,7 @@ class CertificateReissueRepositoryTests: XCTestCase {
         httpClient.error = HTTPClientError.http(500, data: Data())
 
         // When
-        sut.reissue([cborWebToken])
+        sut.renew([cborWebToken])
             .catch { error in
                 guard let certificateReissueError = error as? CertificateReissueRepositoryError else {
                     XCTFail("Wrong error: \(error)")
@@ -137,7 +137,7 @@ class CertificateReissueRepositoryTests: XCTestCase {
         httpClient.error = HTTPClientError.http(429, data: Data())
 
         // When
-        sut.reissue([cborWebToken])
+        sut.renew([cborWebToken])
             .catch { error in
                 guard let certificateReissueError = error as? CertificateReissueRepositoryError else {
                     XCTFail("Wrong error: \(error)")
@@ -168,7 +168,7 @@ class CertificateReissueRepositoryTests: XCTestCase {
         try prepareURLSession(with: qrCodeData)
 
         // When
-        sut.reissue([ExtendedCBORWebToken(vaccinationCertificate: .mockVaccinationCertificate,
+        sut.renew([ExtendedCBORWebToken(vaccinationCertificate: .mockVaccinationCertificate,
                                           vaccinationQRCodeData: qrCodeData)])
             .done { webTokens in
                 guard let data = self.httpClient.receivedHTTPRequest?.httpBody,

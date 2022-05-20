@@ -8,7 +8,7 @@ protocol ReissueConsentViewModelProtocol {
     var certItems: [CertificateItem] { get }
     var titleText: String { get }
     var subTitleText: String { get }
-    var descriptionText: String { get }
+    var descriptionText: NSAttributedString { get }
     var privacyHeadlineText: String { get }
     var hintTitle: String { get }
     var hintText: NSAttributedString { get }

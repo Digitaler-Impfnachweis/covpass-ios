@@ -30,7 +30,8 @@ class ReissueConsentViewModelTests: XCTestCase {
                                       reissueRepository: reissueRepository,
                                       vaccinationRepository: VaccinationRepositoryMock(),
                                       decoder: JSONDecoder(),
-                                      locale: .current)
+                                      locale: .current,
+                                      context: .boosterRenewal)
     }
     
     override func tearDownWithError() throws {
@@ -83,7 +84,7 @@ class ReissueConsentViewModelTests: XCTestCase {
         let message = try XCTUnwrap(mockRouter.receivedErrorMessage)
         XCTAssertTrue(message.contains("ERRORCODE XYZ"))
     }
-
+    
     func testProcessAgree_error_german_locale() throws {
         // Given
         let expectedFaqURL = try XCTUnwrap(
@@ -99,7 +100,8 @@ class ReissueConsentViewModelTests: XCTestCase {
             reissueRepository: reissueRepository,
             vaccinationRepository: VaccinationRepositoryMock(),
             decoder: JSONDecoder(),
-            locale: Locale(identifier: "DE")
+            locale: Locale(identifier: "DE"),
+            context: .boosterRenewal
         )
 
         // When

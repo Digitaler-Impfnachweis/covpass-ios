@@ -16,5 +16,6 @@ protocol CertificateDetailRouterProtocol: DialogRouterProtocol {
     func showWebview(_ url: URL)
     @discardableResult
     func showCertificate(for token: ExtendedCBORWebToken) -> Promise<Void>
-    func showReissue(for tokens: [ExtendedCBORWebToken]) -> Promise<Void>
+    func showReissue(for tokens: [ExtendedCBORWebToken],
+                     context: ReissueContext) -> Promise<Void>
 }

@@ -29,14 +29,19 @@ class ReissueConsentRouter: ReissueConsentRouterProtocol, DialogRouterProtocol {
 
     // MARK: - Methods
     
-    func showNext(newTokens: [ExtendedCBORWebToken],
-                  oldTokens: [ExtendedCBORWebToken],
-                  resolver: Resolver<Void>){
+    func showReissueResultPage(newTokens: [ExtendedCBORWebToken],
+                               oldTokens: [ExtendedCBORWebToken],
+                               resolver: Resolver<Void>){
         sceneCoordinator
             .push(ReissueResultSceneFactory(router: ReissueResultRouter(sceneCoordinator: sceneCoordinator),
                                             newTokens: newTokens,
                                             oldTokens: oldTokens,
                                             resolver: resolver))
+    }
+    
+    func showGenericResultPage() {
+        sceneCoordinator
+            .push(ResultViewSceneFactory(router: ResultViewRouter(sceneCoordinator: sceneCoordinator)))
     }
     
     func cancel(resolver: Resolver<Void>) {

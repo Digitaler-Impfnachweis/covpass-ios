@@ -1543,6 +1543,10 @@
 
 "renewal_expiry_consent_list_item_4" = "In bestimmten Fällen werden zusätzlich zu dem zu erneuernden Zertifikat weitere Zertifikate übermittelt. Dies ist erforderlich, um die bisherige Abfolge der Impfungen und Genesungen im neuen Zertifikat aufnehmen zu können.";
 
+"renewal_expiry_success_copy" = "Sie können Ihr Zertifikat nun weiterhin wie gewohnt nutzen.";
+
+"renewal_expiry_success_button" = "OK";
+
 
 /********** DCC revocation **********/
 
