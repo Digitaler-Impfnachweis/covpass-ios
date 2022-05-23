@@ -36,7 +36,7 @@ class CertificateReissueRepositoryTests: XCTestCase {
         httpClient = nil
     }
 
-    func testReissue_returned_data_has_wrong_format() {
+    func testRenew_returned_data_has_wrong_format() {
         // Given
         let cborWebToken = CBORWebToken.mockVaccinationCertificate.extended()
         let expectation = XCTestExpectation()
@@ -55,7 +55,7 @@ class CertificateReissueRepositoryTests: XCTestCase {
         wait(for: [expectation], timeout: 2)
     }
 
-    func testReissue_http_error() throws {
+    func testRenew_http_error() throws {
         // Given
         let cborWebToken = CBORWebToken.mockVaccinationCertificate.extended()
         let expectation = XCTestExpectation()
@@ -85,7 +85,7 @@ class CertificateReissueRepositoryTests: XCTestCase {
         wait(for: [expectation], timeout: 2)
     }
 
-    func testReissue_http_error_no_response_body() throws {
+    func testRenew_http_error_no_response_body() throws {
         // Given
         let cborWebToken = CBORWebToken.mockVaccinationCertificate.extended()
         let expectation = XCTestExpectation()
@@ -107,7 +107,7 @@ class CertificateReissueRepositoryTests: XCTestCase {
         wait(for: [expectation], timeout: 2)
     }
 
-    func testReissue_http_error_500_no_response_body() throws {
+    func testRenew_http_error_500_no_response_body() throws {
         // Given
         let cborWebToken = CBORWebToken.mockVaccinationCertificate.extended()
         let expectation = XCTestExpectation()
@@ -129,7 +129,7 @@ class CertificateReissueRepositoryTests: XCTestCase {
         wait(for: [expectation], timeout: 2)
     }
 
-    func testReissue_http_error_429_no_response_body() throws {
+    func testRenew_http_error_429_no_response_body() throws {
         // Given
         let cborWebToken = CBORWebToken.mockVaccinationCertificate.extended()
         let expectation = XCTestExpectation()
@@ -162,7 +162,7 @@ class CertificateReissueRepositoryTests: XCTestCase {
         httpClient.data = responseData
     }
 
-    func testReissue_success() throws {
+    func testRenew_success() throws {
         // Given
         let expectation = XCTestExpectation()
         try prepareURLSession(with: qrCodeData)
@@ -174,6 +174,148 @@ class CertificateReissueRepositoryTests: XCTestCase {
                 guard let data = self.httpClient.receivedHTTPRequest?.httpBody,
                       let requestBody = try? JSONDecoder().decode(CertificateReissueRequestBody.self, from: data) else { return }
                 XCTAssertTrue(requestBody.certificates[0].starts(with: "HC1:"))
+                XCTAssertEqual(requestBody.action, .renew)
+                XCTAssertEqual(webTokens.count, 1)
+                guard let certificateString = webTokens.first?.vaccinationQRCodeData else { return }
+                XCTAssertEqual(certificateString, qrCodeData)
+                expectation.fulfill()
+            }
+            .catch { error in
+                XCTFail("Must not fail with: \(error)")
+            }
+
+        // Then
+        wait(for: [expectation], timeout: 2)
+    }
+
+    func testExtend_returned_data_has_wrong_format() {
+        // Given
+        let cborWebToken = CBORWebToken.mockVaccinationCertificate.extended()
+        let expectation = XCTestExpectation()
+
+        // When
+        sut.extend([cborWebToken])
+            .catch { error in
+                guard error as? CertificateReissueRepositoryFallbackError != nil else {
+                    XCTFail("Wrong error: \(error)")
+                    return
+                }
+                expectation.fulfill()
+            }
+
+        // Then
+        wait(for: [expectation], timeout: 2)
+    }
+
+    func testExtend_http_error() throws {
+        // Given
+        let cborWebToken = CBORWebToken.mockVaccinationCertificate.extended()
+        let expectation = XCTestExpectation()
+        let errorResponse = CertificateReissueResponseError(
+            error: "RXXX",
+            message: "MESSAGE"
+        )
+        let data = try JSONEncoder().encode(errorResponse)
+        httpClient.error = HTTPClientError.http(
+            542,
+            data: data
+        )
+
+        // When
+        sut.extend([cborWebToken])
+            .catch { error in
+                guard let certificateReissueError = error as? CertificateReissueRepositoryError else {
+                    XCTFail("Wrong error: \(error)")
+                    return
+                }
+                XCTAssertEqual(certificateReissueError.errorID, errorResponse.error)
+                XCTAssertEqual(certificateReissueError.message, errorResponse.message)
+                expectation.fulfill()
+            }
+
+        // Then
+        wait(for: [expectation], timeout: 2)
+    }
+
+    func testExtend_http_error_no_response_body() throws {
+        // Given
+        let cborWebToken = CBORWebToken.mockVaccinationCertificate.extended()
+        let expectation = XCTestExpectation()
+        let expectedError = CertificateReissueRepositoryFallbackError()
+        httpClient.error = HTTPClientError.http(476, data: Data())
+
+        // When
+        sut.extend([cborWebToken])
+            .catch { error in
+                guard let certificateReissueError = error as? CertificateReissueRepositoryError else {
+                    XCTFail("Wrong error: \(error)")
+                    return
+                }
+                XCTAssertEqual(certificateReissueError, expectedError)
+                expectation.fulfill()
+            }
+
+        // Then
+        wait(for: [expectation], timeout: 2)
+    }
+
+    func testExtend_http_error_500_no_response_body() throws {
+        // Given
+        let cborWebToken = CBORWebToken.mockVaccinationCertificate.extended()
+        let expectation = XCTestExpectation()
+        let expectedError = CertificateReissueRepositoryError("R500", message: nil)
+        httpClient.error = HTTPClientError.http(500, data: Data())
+
+        // When
+        sut.extend([cborWebToken])
+            .catch { error in
+                guard let certificateReissueError = error as? CertificateReissueRepositoryError else {
+                    XCTFail("Wrong error: \(error)")
+                    return
+                }
+                XCTAssertEqual(certificateReissueError, expectedError)
+                expectation.fulfill()
+            }
+
+        // Then
+        wait(for: [expectation], timeout: 2)
+    }
+
+    func testExtend_http_error_429_no_response_body() throws {
+        // Given
+        let cborWebToken = CBORWebToken.mockVaccinationCertificate.extended()
+        let expectation = XCTestExpectation()
+        let expectedError = CertificateReissueRepositoryError("R429", message: nil)
+        httpClient.error = HTTPClientError.http(429, data: Data())
+
+        // When
+        sut.extend([cborWebToken])
+            .catch { error in
+                guard let certificateReissueError = error as? CertificateReissueRepositoryError else {
+                    XCTFail("Wrong error: \(error)")
+                    return
+                }
+                XCTAssertEqual(certificateReissueError, expectedError)
+                expectation.fulfill()
+            }
+
+        // Then
+        wait(for: [expectation], timeout: 2)
+    }
+
+    func testExtend_success() throws {
+        // Given
+        let expectation = XCTestExpectation()
+        try prepareURLSession(with: qrCodeData)
+
+        // When
+        sut.extend([ExtendedCBORWebToken(vaccinationCertificate: .mockVaccinationCertificate,
+                                          vaccinationQRCodeData: qrCodeData)])
+            .done { webTokens in
+                guard let data = self.httpClient.receivedHTTPRequest?.httpBody,
+                      let requestBody = try? JSONDecoder().decode(CertificateReissueRequestBody.self, from: data) else { return }
+                XCTAssertTrue(requestBody.certificates[0].starts(with: "HC1:"))
+                XCTAssertEqual(requestBody.action, .extend)
                 XCTAssertEqual(webTokens.count, 1)
                 guard let certificateString = webTokens.first?.vaccinationQRCodeData else { return }
                 XCTAssertEqual(certificateString, qrCodeData)

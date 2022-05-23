@@ -132,7 +132,7 @@ private extension Array where Element == String {
     }
     
     var certificateExtendRequestBody: CertificateReissueRequestBody {
-        .init(action: .renew, certificates: self)
+        .init(action: .extend, certificates: self)
     }
 }
 
