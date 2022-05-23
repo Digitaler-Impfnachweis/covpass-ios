@@ -10,9 +10,9 @@ import Foundation
 
 public extension String {
     var sanitizedFileName: String {
+        let pattern = #"[^\p{L}|\d|\.|_|-]"#
         // Allow all letters, any digits, ., _, - and remove everything else
-        guard let pattern = String(cString: #"[^\p{L}|\d|\.|_|-]"#, encoding: .utf8),
-              let regex = try? NSRegularExpression(pattern: pattern, options: .caseInsensitive) else { return self }
+        guard let regex = try? NSRegularExpression(pattern: pattern, options: .caseInsensitive) else { return self }
         let range = NSMakeRange(0, self.count)
         return regex.stringByReplacingMatches(in: self, options: [], range: range, withTemplate: "")
     }
@@ -26,7 +26,7 @@ public extension String {
 
         // only matches '&' not used in other escaped characters
         // see: https://regex101.com/r/3FKwYF/1/
-        let pattern = String(cString: #"&(?![amp|lt|gt|quot|apos]+\;)"#, encoding: .utf8)!
+        let pattern = #"&(?![amp|lt|gt|quot|apos]+\;)"#
         let regex = try! NSRegularExpression(pattern: pattern)
         let range = NSRange(location: 0, length: escaped.utf16.count)
         escaped = regex.stringByReplacingMatches(in: escaped, options: [], range: range, withTemplate: "&amp;")

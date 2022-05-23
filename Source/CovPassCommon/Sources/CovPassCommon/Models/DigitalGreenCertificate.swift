@@ -39,7 +39,7 @@ public struct DigitalGreenCertificate: Codable {
     }
 
     public var uvciLocation: String? {
-        let pattern = String(cString: #"[a-zA-Z]{2}\/.+?(?=\/)"#, encoding: .utf8)!
+        let pattern = #"[a-zA-Z]{2}\/.+?(?=\/)"#
         let regex = try! NSRegularExpression(pattern: pattern, options: NSRegularExpression.Options.caseInsensitive)
         let range = NSMakeRange(0, uvci.count)
         guard let match = regex.firstMatch(in: uvci, options: .withTransparentBounds, range: range),
