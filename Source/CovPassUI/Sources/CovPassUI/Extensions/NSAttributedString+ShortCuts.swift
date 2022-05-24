@@ -29,7 +29,7 @@ public extension NSAttributedString {
             try? UIFont.loadCustomFonts()
         }
 
-        guard let font = UIFont(name: fontName, size: size) else { fatalError("Error loading font with name \(fontName)") }
+        let font = UIFont(name: fontName, size: size) ?? UIFont.systemFont(ofSize: size)
 
         let fontMetrics = UIFontMetrics(forTextStyle: textStyle)
         let scaledFont = fontMetrics.scaledFont(for: font, compatibleWith: traitCollection)
