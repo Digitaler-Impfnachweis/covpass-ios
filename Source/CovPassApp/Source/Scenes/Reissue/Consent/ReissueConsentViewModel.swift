@@ -140,7 +140,7 @@ class ReissueConsentViewModel: ReissueConsentViewModelProtocol {
     private func handleDoneExtendRenewal() {
         vaccinationRepository.delete(self.tokens.sortedByDn[0])
             .done {
-                self.router.showGenericResultPage()
+                self.router.showGenericResultPage(resolver: self.resolver)
             }.catch { [weak self] error in
                 self?.handle(reissueError: error)
             }

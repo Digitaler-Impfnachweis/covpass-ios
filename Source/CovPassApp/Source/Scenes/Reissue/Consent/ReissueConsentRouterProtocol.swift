@@ -7,7 +7,7 @@ protocol ReissueConsentRouterProtocol: RouterProtocol {
     func showReissueResultPage(newTokens: [ExtendedCBORWebToken],
                                oldTokens: [ExtendedCBORWebToken],
                                resolver: Resolver<Void>)
-    func showGenericResultPage()
+    func showGenericResultPage(resolver: Resolver<Void>)
     func cancel(resolver: Resolver<Void>)
     func routeToPrivacyStatement()
     func showError(title: String, message: String, faqURL: URL)

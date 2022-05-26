@@ -18,12 +18,15 @@ public class ResultViewViewModel: ResultViewViewModelProtocol {
     public var description = Constants.Keys.subTitle
     public var buttonTitle = Constants.Keys.submitButton
     private var router: ResultViewRouterProtocol
-    
-    public init (router: ResultViewRouterProtocol) {
+    private var resolver: Resolver<Void>
+
+    public init (router: ResultViewRouterProtocol,
+                 resolver: Resolver<Void>) {
         self.router = router
+        self.resolver = resolver
     }
     
     public func submitTapped() {
-        router.sceneCoordinator.dimiss(animated: true)
+        resolver.fulfill_()
     }
 }

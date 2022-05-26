@@ -28,7 +28,7 @@ class ReissueConsentRouterMock: ReissueConsentRouterProtocol {
         showNextExpectation.fulfill()
     }
     
-    func showGenericResultPage() {
+    func showGenericResultPage(resolver: Resolver<Void>) {
         showNextGenericPageExpectation.fulfill()
     }
     

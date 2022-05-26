@@ -39,9 +39,9 @@ class ReissueConsentRouter: ReissueConsentRouterProtocol, DialogRouterProtocol {
                                             resolver: resolver))
     }
     
-    func showGenericResultPage() {
+    func showGenericResultPage(resolver: Resolver<Void>) {
         sceneCoordinator
-            .push(ResultViewSceneFactory(router: ResultViewRouter(sceneCoordinator: sceneCoordinator)))
+            .push(ResultViewSceneFactory(router: ResultViewRouter(sceneCoordinator: sceneCoordinator), resolver: resolver))
     }
     
     func cancel(resolver: Resolver<Void>) {
