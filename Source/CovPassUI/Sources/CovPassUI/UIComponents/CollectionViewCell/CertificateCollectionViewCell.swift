@@ -36,6 +36,8 @@ public protocol CertificateCardViewModelBase {
     var isInvalid: Bool { get }
     var isFavorite: Bool { get }
     var showFavorite: Bool { get set }
+    var showTitle: Bool { get set }
+    var showAction: Bool { get set }
     var qrCode: UIImage? { get }
     var name: String { get }
     var actionTitle: String { get }
@@ -64,23 +66,24 @@ public class CertificateCollectionViewCell: CardCollectionViewCell {
             updateView()
         }
     }
-
+    
     // MARK: - Lifecycle
-
+    
+    public func shadow(show: Bool) {
+        clipsToBounds = !show
+        contentView.clipsToBounds = !show
+        contentView.layer.shadowColor = show ? UIColor.neutralBlack.cgColor : nil
+        contentView.layer.shadowRadius = show ? Constants.Layout.shadowRadius : 3.0
+        contentView.layer.shadowOpacity = show ? Float(Constants.Layout.shadowOpacity) : 0.0
+        contentView.layer.shadowOffset = show ? Constants.Layout.shadowOffset : .init(width: 0, height: 0)
+    }
+    
     override public func awakeFromNib() {
         super.awakeFromNib()
-        clipsToBounds = false
-
-        contentView.clipsToBounds = false
-        contentView.layer.shadowColor = UIColor.neutralBlack.cgColor
-        contentView.layer.shadowRadius = Constants.Layout.shadowRadius
-        contentView.layer.shadowOpacity = Float(Constants.Layout.shadowOpacity)
-        contentView.layer.shadowOffset = Constants.Layout.shadowOffset
-
+        shadow(show: true)
         containerView.tintColor = .brandAccent
         containerView.layer.cornerRadius = Constants.Layout.cornerRadius
         containerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onPressAction)))
-
         contentStackView.setCustomSpacing(.space_16, after: titleStackView)
     }
 
@@ -101,24 +104,23 @@ public class CertificateCollectionViewCell: CardCollectionViewCell {
         qrContainerView.isHidden = vm.qrCode == nil
         qrContainerView.title = vm.title
         qrContainerView.subtitle = vm.subtitle
-
         qrContainerView.qrInfoText = Constants.qrInfoText
-
         qrContainerView.isInvalid = vm.isInvalid
-
         titleView.attributedText = vm.name.styledAs(.header_3).colored(vm.tintColor)
         titleView.lineBreakMode = .byTruncatingTail
         titleView.backgroundColor = .clear
+        titleView.isHidden = !vm.showTitle
         favoriteButton.tintColor = vm.tintColor
-        favoriteButton.setImage((vm.isFavorite ? UIImage.starFull : UIImage.starPartial).withRenderingMode(.alwaysTemplate), for: .normal)
+        favoriteButton.setImage((vm.isFavorite ? UIImage.starFull : UIImage.starPartial).withRenderingMode(.alwaysTemplate),
+                                for: .normal)
         favoriteButton.isHidden = !vm.showFavorite
         let favoriteButtonAccessibilityText = vm.isFavorite ? Constants.Accessibility.favoriteActive : Constants.Accessibility.favoriteDeactive
         favoriteButton.enableAccessibility(label: favoriteButtonAccessibilityText, traits: .button)
-
         actionView.titleLabel.attributedText = vm.actionTitle.styledAs(.body).lineHeight(Constants.Layout.actionLineHeight).colored(vm.tintColor)
         actionView.enableAccessibility(label: vm.actionTitle, hint: Constants.Accessibility.actionHint, traits: .button)
         actionView.actionImage.tintColor = vm.tintColor
         actionView.tintColor = .neutralWhite
+        actionView.isHidden = !vm.showAction
     }
 
     override public func viewModelDidUpdate() {

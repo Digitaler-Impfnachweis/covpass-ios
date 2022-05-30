@@ -11,6 +11,6 @@ import Foundation
 
 enum CertificateDetailSceneResult {
     case didDeleteCertificate
-    case showCertificatesOnOverview([ExtendedCBORWebToken])
+    case showCertificatesOnOverview(ExtendedCBORWebToken)
     case addNewCertificate
 }

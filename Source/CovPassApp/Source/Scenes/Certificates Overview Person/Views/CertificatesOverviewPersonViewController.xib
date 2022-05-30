@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CertificatesOverviewPersonViewController" customModule="CovPassApp" customModuleProvider="target">
+            <connections>
+                <outlet property="collectionView" destination="UkJ-ri-sjN" id="cZd-Ci-95N"/>
+                <outlet property="dotPageIndicator" destination="fNK-Jd-P7z" id="8nL-D9-aZS"/>
+                <outlet property="gotoDetailsButton" destination="wcE-wM-PY1" id="g67-cS-soM"/>
+                <outlet property="headerView" destination="qpg-K1-lgH" id="vcD-aH-FtS"/>
+                <outlet property="subtTitleLabel" destination="jFu-Hw-ag3" id="Sxv-CK-LCS"/>
+                <outlet property="view" destination="48O-Oh-khi" id="YBd-Mf-xHx"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" id="48O-Oh-khi">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" placeholderIntrinsicWidth="374" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="qpg-K1-lgH" customClass="OverviewHeaderView" customModule="CovPassUI">
+                    <rect key="frame" x="0.0" y="48" width="414" height="50"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jFu-Hw-ag3">
+                    <rect key="frame" x="24" y="98" width="366" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="400" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="UkJ-ri-sjN">
+                    <rect key="frame" x="0.0" y="248" width="414" height="400"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="1" id="3Bd-ig-xsA"/>
+                        <constraint firstAttribute="height" relation="lessThanOrEqual" constant="450" id="hbM-6N-3zZ"/>
+                    </constraints>
+                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="mNC-aH-BF7">
+                        <size key="itemSize" width="128" height="128"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                    <cells>
+                        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="MqQ-tU-mXL">
+                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="ADS-bK-q1R">
+                                <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                            </collectionViewCellContentView>
+                        </collectionViewCell>
+                    </cells>
+                </collectionView>
+                <view contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="240" placeholderIntrinsicHeight="12" translatesAutoresizingMaskIntoConstraints="NO" id="fNK-Jd-P7z" customClass="DotPageIndicator" customModule="CovPassUI">
+                    <rect key="frame" x="87" y="648" width="240" height="12"/>
+                    <color key="backgroundColor" red="0.023529411760000001" green="0.37254901959999998" blue="0.76862745099999996" alpha="1" colorSpace="calibratedRGB"/>
+                </view>
+                <view contentMode="scaleToFill" placeholderIntrinsicWidth="56" placeholderIntrinsicHeight="56" translatesAutoresizingMaskIntoConstraints="NO" id="wcE-wM-PY1" customClass="MainButton" customModule="CovPassUI">
+                    <rect key="frame" x="179" y="802" width="56" height="56"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <color key="tintColor" systemColor="systemBackgroundColor"/>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yaz-CT-uYy">
+                    <rect key="frame" x="0.0" y="119" width="414" height="129"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="8FF-gi-glk"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="jFu-Hw-ag3" firstAttribute="leading" secondItem="8FF-gi-glk" secondAttribute="leading" constant="24" id="0TR-Y1-s0M"/>
+                <constraint firstItem="UkJ-ri-sjN" firstAttribute="centerY" secondItem="48O-Oh-khi" secondAttribute="centerY" id="0av-6b-sVv"/>
+                <constraint firstItem="qpg-K1-lgH" firstAttribute="top" secondItem="8FF-gi-glk" secondAttribute="top" constant="4" id="0dY-ys-PEi"/>
+                <constraint firstItem="8FF-gi-glk" firstAttribute="bottom" secondItem="wcE-wM-PY1" secondAttribute="bottom" constant="4" id="94o-BX-LBh"/>
+                <constraint firstItem="wcE-wM-PY1" firstAttribute="centerX" secondItem="48O-Oh-khi" secondAttribute="centerX" id="9k9-M2-psw"/>
+                <constraint firstItem="UkJ-ri-sjN" firstAttribute="top" secondItem="Yaz-CT-uYy" secondAttribute="bottom" id="BnA-ox-WsM"/>
+                <constraint firstItem="UkJ-ri-sjN" firstAttribute="leading" secondItem="48O-Oh-khi" secondAttribute="leading" id="Jjb-WV-mo6"/>
+                <constraint firstItem="fNK-Jd-P7z" firstAttribute="top" secondItem="UkJ-ri-sjN" secondAttribute="bottom" id="Mh8-Vc-2Oz"/>
+                <constraint firstItem="fNK-Jd-P7z" firstAttribute="centerX" secondItem="48O-Oh-khi" secondAttribute="centerX" id="PaD-fF-Akk"/>
+                <constraint firstItem="wcE-wM-PY1" firstAttribute="top" relation="greaterThanOrEqual" secondItem="fNK-Jd-P7z" secondAttribute="bottom" constant="4" id="Shd-r6-K7K"/>
+                <constraint firstAttribute="trailing" secondItem="UkJ-ri-sjN" secondAttribute="trailing" id="TPl-Ni-Pka"/>
+                <constraint firstItem="8FF-gi-glk" firstAttribute="trailing" secondItem="Yaz-CT-uYy" secondAttribute="trailing" id="VNN-qO-mNs"/>
+                <constraint firstAttribute="trailing" secondItem="qpg-K1-lgH" secondAttribute="trailing" id="YJ6-O5-U3a"/>
+                <constraint firstItem="Yaz-CT-uYy" firstAttribute="top" secondItem="jFu-Hw-ag3" secondAttribute="bottom" id="c0D-NM-MZh"/>
+                <constraint firstItem="qpg-K1-lgH" firstAttribute="leading" secondItem="48O-Oh-khi" secondAttribute="leading" id="cO3-zk-rc8"/>
+                <constraint firstItem="8FF-gi-glk" firstAttribute="trailing" secondItem="jFu-Hw-ag3" secondAttribute="trailing" constant="24" id="cvc-TI-qXg"/>
+                <constraint firstItem="Yaz-CT-uYy" firstAttribute="leading" secondItem="8FF-gi-glk" secondAttribute="leading" id="i9L-IA-bk7"/>
+                <constraint firstItem="jFu-Hw-ag3" firstAttribute="top" secondItem="qpg-K1-lgH" secondAttribute="bottom" id="wLR-R7-dx4"/>
+            </constraints>
+            <point key="canvasLocation" x="137.68115942028987" y="-491.51785714285711"/>
+        </view>
+    </objects>
+    <designables>
+        <designable name="qpg-K1-lgH">
+            <size key="intrinsicContentSize" width="374" height="50"/>
+        </designable>
+        <designable name="wcE-wM-PY1">
+            <size key="intrinsicContentSize" width="56" height="56"/>
+        </designable>
+    </designables>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

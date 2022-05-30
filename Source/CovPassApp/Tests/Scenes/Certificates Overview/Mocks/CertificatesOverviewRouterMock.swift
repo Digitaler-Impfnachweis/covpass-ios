@@ -16,6 +16,7 @@ class CertificatesOverviewRouterMock: CertificatesOverviewRouterProtocol {
     let showDialogExpectation = XCTestExpectation(description: "showDialogExpectation")
     let showCertificatesReissueExpectation = XCTestExpectation(description: "showCertificatesReissueExpectation")
     let showCertificateExpectation = XCTestExpectation(description: "showCertificateExpectation")
+    let showCertificateModalExpectation = XCTestExpectation(description: "showCertificateExpectation")
     let toWebsiteFAQExpectation = XCTestExpectation(description: "toWebsiteFAQExpectation")
     var sceneCoordinator: SceneCoordinator = SceneCoordinatorMock()
     var error: Error?
@@ -36,9 +37,16 @@ class CertificatesOverviewRouterMock: CertificatesOverviewRouterProtocol {
         .value
     }
 
-    func showCertificates(_ certificates: [ExtendedCBORWebToken]) -> Promise<CertificateDetailSceneResult> {
+    func showCertificates(certificates: [ExtendedCBORWebToken],
+                          vaccinationRepository: VaccinationRepositoryProtocol,
+                          boosterLogic: BoosterLogicProtocol) -> Promise<CertificateDetailSceneResult> {
+        showCertificateModalExpectation.fulfill()
+        return .value(.showCertificatesOnOverview(certificates.first!))
+    }
+    
+    func showCertificatesDetail(certificates: [ExtendedCBORWebToken]) -> Promise<CertificateDetailSceneResult> {
         showCertificateExpectation.fulfill()
-        return .value(.showCertificatesOnOverview(certificates))
+        return .value(.showCertificatesOnOverview(certificates.first!))
     }
 
     func showHowToScan() -> Promise<Void> {

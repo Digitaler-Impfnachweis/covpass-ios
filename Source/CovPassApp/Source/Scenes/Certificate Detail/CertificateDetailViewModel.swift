@@ -37,7 +37,7 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
     private var certificates: [ExtendedCBORWebToken]
     private let boosterLogic: BoosterLogicProtocol
     private let boosterCandidate: BoosterCandidate?
-    private let resolver: Resolver<CertificateDetailSceneResult>?
+    private let resolver: Resolver<CertificateDetailSceneResult>
     private var isFavorite = false
     private var showFavorite = false
 
@@ -104,6 +104,9 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
     }
 
     var immunizationTitle: String {
+        if selectedCertificateIsInvalidOrRevoked {
+            return "certificate_invalid_detail_view_note_title".localized
+        }
         if selectedCertificate?.vaccinationCertificate.isExpired ?? false {
             return "certificate_expired_detail_view_note_title".localized
         }
@@ -114,9 +117,6 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
             return String(format: "certificates_overview_soon_expiring_title".localized,
                           DateUtils.displayDateFormatter.string(from: expireDate),
                           DateUtils.displayTimeFormatter.string(from: expireDate))
-        }
-        if selectedCertificateIsInvalidOrRevoked {
-            return "certificate_invalid_detail_view_note_title".localized
         }
         if let r = selectedCertificate?.vaccinationCertificate.hcert.dgc.r?.first {
             if Date() < r.df {
@@ -150,6 +150,12 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
     }
 
     var immunizationBody: String {
+        if selectedCertificateIsGermanAndWasRevoked {
+            return "revocation_detail_single_DE".localized
+        }
+        if selectedCertificateIsNotGermanAndWasRevoked {
+            return "revocation_detail_single_notDE".localized
+        }
         if selectedCertificate?.vaccinationCertificate.isExpired ?? false {
             return "certificates_overview_expired_message".localized
         }
@@ -158,12 +164,6 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
         }
         if selectedCertificate?.isInvalid ?? false {
             return "certificates_overview_invalid_message".localized
-        }
-        if selectedCertificateIsGermanAndWasRevoked {
-            return "revocation_detail_single_DE".localized
-        }
-        if selectedCertificateIsNotGermanAndWasRevoked {
-            return "revocation_detail_single_notDE".localized
         }
         if let cert = selectedCertificate?.vaccinationCertificate.hcert.dgc.v?.first(where: { $0.fullImmunization }), !cert.fullImmunizationValid {
             return "vaccination_certificate_overview_complete_from_message".localized
@@ -314,7 +314,7 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
         repository: VaccinationRepositoryProtocol,
         boosterLogic: BoosterLogicProtocol,
         certificates: [ExtendedCBORWebToken],
-        resolvable: Resolver<CertificateDetailSceneResult>?
+        resolvable: Resolver<CertificateDetailSceneResult>
     ) {
         self.router = router
         self.repository = repository
@@ -332,7 +332,7 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
 
     func immunizationButtonTapped() {
         if selectedCertificateIsInvalidOrRevoked {
-            resolver?.fulfill(.addNewCertificate)
+            resolver.fulfill(.addNewCertificate)
         } else {
             showLatestCertificate()
         }
@@ -342,7 +342,7 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
         guard let certificate = certificates.sortLatest().first else {
             return
         }
-        router.showCertificate(for: certificate)
+        resolver.fulfill(.showCertificatesOnOverview(certificate))
     }
 
     func toggleFavorite() {
@@ -470,7 +470,7 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
             router.showCertificateDidDeleteDialog()
             removeReissueDataIfBoosterWasDeleted()
         } else {
-            resolver?.fulfill(result)
+            resolver.fulfill(result)
         }
     }
     

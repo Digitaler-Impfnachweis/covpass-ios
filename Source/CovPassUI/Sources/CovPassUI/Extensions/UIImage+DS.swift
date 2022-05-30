@@ -99,6 +99,12 @@ public extension UIImage {
     @ImageLoader(name: "prevention_label")
     private(set) static var completness
     
+    @ImageLoader(name: "manage")
+    private(set) static var manage
+    
+    @ImageLoader(name: "manage_notification")
+    private(set) static var manageNotification
+    
     @ImageLoader(name: "prevention")
     private(set) static var prevention
 

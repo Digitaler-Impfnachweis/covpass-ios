@@ -14,7 +14,8 @@ public enum MainButtonStyle {
     case tertiary
     case plain
     case alternative
-    
+    case alternativeWhiteTitle
+
     public var textColor: UIColor {
         switch self {
         case .primary:
@@ -27,6 +28,8 @@ public enum MainButtonStyle {
             return .brandBase
         case .alternative:
             return .brandBase
+        case .alternativeWhiteTitle:
+            return .white
         }
     }
     
@@ -40,7 +43,7 @@ public enum MainButtonStyle {
             return .neutralBlack
         case .plain:
             return .brandBase
-        case .alternative:
+        case .alternative, .alternativeWhiteTitle:
             return .brandBase
         }
     }
@@ -55,7 +58,7 @@ public enum MainButtonStyle {
             return .neutralBlack
         case .plain:
             return .brandBase
-        case .alternative:
+        case .alternative, .alternativeWhiteTitle:
             return .brandBase
         }
     }
@@ -70,7 +73,7 @@ public enum MainButtonStyle {
             return .neutralBlack
         case .plain:
             return .onBackground70
-        case .alternative:
+        case .alternative, .alternativeWhiteTitle:
             return .brandBase
         }
     }
@@ -85,7 +88,7 @@ public enum MainButtonStyle {
             return .onBackground20
         case .plain:
             return .clear
-        case .alternative:
+        case .alternative, .alternativeWhiteTitle:
             return .clear
         }
     }
@@ -100,7 +103,7 @@ public enum MainButtonStyle {
             return .onBackground20
         case .plain:
             return .clear
-        case .alternative:
+        case .alternative, .alternativeWhiteTitle:
             return .clear
         }
     }
@@ -115,7 +118,7 @@ public enum MainButtonStyle {
             return .onBackground20
         case .plain:
             return .clear
-        case .alternative:
+        case .alternative, .alternativeWhiteTitle:
             return .clear
         }
     }
@@ -130,7 +133,7 @@ public enum MainButtonStyle {
             return .backgroundSecondary20
         case .plain:
             return .backgroundSecondary20
-        case .alternative:
+        case .alternative, .alternativeWhiteTitle:
             return .clear
         }
     }
@@ -145,7 +148,7 @@ public enum MainButtonStyle {
             return .clear
         case .plain:
             return .clear
-        case .alternative:
+        case .alternative, .alternativeWhiteTitle:
             return .brandBase
         }
     }
@@ -160,7 +163,7 @@ public enum MainButtonStyle {
             return .clear
         case .plain:
             return .clear
-        case .alternative:
+        case .alternative, .alternativeWhiteTitle:
             return .brandBase
         }
     }
@@ -175,7 +178,7 @@ public enum MainButtonStyle {
             return .clear
         case .plain:
             return .clear
-        case .alternative:
+        case .alternative, .alternativeWhiteTitle:
             return .brandBase
         }
     }
@@ -190,7 +193,7 @@ public enum MainButtonStyle {
             return .clear
         case .plain:
             return .clear
-        case .alternative:
+        case .alternative, .alternativeWhiteTitle:
             return .brandBase
         }
     }
@@ -205,7 +208,7 @@ public enum MainButtonStyle {
             return .clear
         case .plain:
             return .clear
-        case .alternative:
+        case .alternative, .alternativeWhiteTitle:
             return .clear
         }
     }

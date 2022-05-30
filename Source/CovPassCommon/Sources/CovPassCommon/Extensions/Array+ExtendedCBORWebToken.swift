@@ -279,6 +279,33 @@ public extension Array where Element == ExtendedCBORWebToken {
         filter { $0.recoveries != nil }
     }
     
+    var firstVaccination: ExtendedCBORWebToken? { first(where:\.vaccinationCertificate.isVaccination) }
+    
+    var firstRecovery: ExtendedCBORWebToken? { first(where:\.vaccinationCertificate.isRecovery) }
+    
+    var firstTest: ExtendedCBORWebToken? { first(where:\.vaccinationCertificate.isTest) }
+    
+    var filterNotInvalid: Self { filter(\.isNotInvalid) }
+    
+    var filterNotRevoked: Self { filter(\.isNotRevoked) }
+    
+    var filterNotExpired: Self { filter(\.isNotExpired) }
+
+    var filterFirstOfAllTypes: [ExtendedCBORWebToken] {
+        var firstOfAll: [ExtendedCBORWebToken] = []
+        let sortedList = sortLatest().filterNotInvalid.filterNotRevoked.filterNotExpired
+        if let firstTest = sortedList.firstTest {
+            firstOfAll.append(firstTest)
+        }
+        if let firstVaccination = sortedList.firstVaccination {
+            firstOfAll.append(firstVaccination)
+        }
+        if let firstRecovery = sortedList.firstRecovery {
+            firstOfAll.append(firstRecovery)
+        }
+        return firstOfAll
+    }
+    
     var vaccinations: [Vaccination] {
         filterVaccinations.map{ $0.vaccinations }.compactMap{$0}.flatMap{$0}
     }

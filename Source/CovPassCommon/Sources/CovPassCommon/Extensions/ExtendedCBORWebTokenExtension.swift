@@ -32,8 +32,12 @@ public extension ExtendedCBORWebToken {
     var canExportToPDF: Bool { vaccinationCertificate.hcert.dgc.template != nil }
     
     var isInvalid: Bool { invalid ?? false }
+    
+    var isNotInvalid: Bool { !isInvalid }
 
     var isRevoked: Bool { revoked ?? false  }
     
     var isNotRevoked: Bool { !isRevoked }
+
+    var isNotExpired: Bool { !vaccinationCertificate.isExpired }
 }

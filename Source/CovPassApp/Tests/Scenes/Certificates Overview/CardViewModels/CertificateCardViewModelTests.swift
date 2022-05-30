@@ -24,21 +24,55 @@ class CertificateCardViewModelTests: XCTestCase {
         XCTAssertTrue(isInvalid)
     }
 
-    private func sut(token: ExtendedCBORWebToken) -> CertificateCardViewModel {
+    private func sut(token: ExtendedCBORWebToken,
+                     boosterLogic: BoosterLogicMock = BoosterLogicMock()) -> CertificateCardViewModel {
         .init(
             token: token,
             vaccinations: [],
             recoveries: [],
             isFavorite: false,
             showFavorite: false,
+            showTitle: true,
+            showAction: true,
+            showNotificationIcon: true,
             onAction: { _ in },
             onFavorite: { _ in },
             repository: VaccinationRepositoryMock(),
-            boosterLogic: BoosterLogicMock(),
+            boosterLogic: boosterLogic,
             currentDate: .distantFuture
         )
     }
+    
+    func testIsShowNotification_false() {
+        // Given
+        let cborWebToken = CBORWebToken.mockVaccinationCertificate
+        let token = cborWebToken.extended()
+        let sut = sut(token: token)
 
+        // When
+        let showNotification = sut.showBoosterAvailabilityNotification
+
+        // Then
+        XCTAssertFalse(showNotification)
+    }
+    
+    func testIsShowNotification_true() {
+        // Given
+        let cborWebToken = CBORWebToken.mockVaccinationCertificate
+        let token = cborWebToken.extended()
+        let boosterLogic = BoosterLogicMock()
+        var boosterCandidate = BoosterCandidate(certificate: token)
+        boosterCandidate.state = .new
+        boosterLogic.boosterCandidates = [boosterCandidate]
+        let sut = sut(token: token, boosterLogic: boosterLogic)
+
+        // When
+        let showNotification = sut.showBoosterAvailabilityNotification
+
+        // Then
+        XCTAssertTrue(showNotification)
+    }
+    
     func testIsInvalid_false() {
         // Given
         let cborWebToken = CBORWebToken.mockVaccinationCertificate

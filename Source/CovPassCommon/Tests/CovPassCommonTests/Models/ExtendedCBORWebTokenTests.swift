@@ -145,7 +145,7 @@ class ExtendedCBORWebTokenTests: XCTestCase {
         // Then
         XCTAssertFalse(isRevoked)
     }
-
+    
     func testIsNotRevoked_false() {
         var sut = ExtendedCBORWebToken(
             vaccinationCertificate: .mockVaccinationCertificate,
@@ -158,5 +158,47 @@ class ExtendedCBORWebTokenTests: XCTestCase {
 
         // Then
         XCTAssertTrue(isRevoked)
+    }
+    
+    func testIsInvalid() {
+        var sut = ExtendedCBORWebToken(
+            vaccinationCertificate: .mockVaccinationCertificate,
+            vaccinationQRCodeData: ""
+        )
+        sut.invalid = true
+
+        // When
+        let isInvalid = sut.isInvalid
+
+        // Then
+        XCTAssertTrue(isInvalid)
+    }
+    
+    func testIsNotInvalid() {
+        var sut = ExtendedCBORWebToken(
+            vaccinationCertificate: .mockVaccinationCertificate,
+            vaccinationQRCodeData: ""
+        )
+        sut.invalid = true
+
+        // When
+        let isNotInvalid = sut.isNotInvalid
+
+        // Then
+        XCTAssertFalse(isNotInvalid)
+    }
+    
+    func testIsNotExpired() {
+        var sut = ExtendedCBORWebToken(
+            vaccinationCertificate: .mockVaccinationCertificate,
+            vaccinationQRCodeData: ""
+        )
+        sut.vaccinationCertificate.exp = Date() + 1000
+
+        // When
+        let isNotExpired = sut.isNotExpired
+
+        // Then
+        XCTAssertTrue(isNotExpired)
     }
 }

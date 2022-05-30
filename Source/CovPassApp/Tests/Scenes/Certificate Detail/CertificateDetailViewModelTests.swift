@@ -618,12 +618,23 @@ class CertificateDetailViewModelTests: XCTestCase {
     func testImmunizationButtonTapped_valid_certificate() throws {
         // Given
         try configureSut()
+        let expectation = XCTestExpectation()
+        promise
+            .done { result in
+                switch result {
+                case .showCertificatesOnOverview:
+                    expectation.fulfill()
+                default:
+                    break
+                }
+            }
+            .cauterize()
 
         // When
         sut.immunizationButtonTapped()
 
         // Then
-        wait(for: [router.showCertificateExpectation], timeout: 1)
+        wait(for: [expectation], timeout: 1)
     }
 
     func testShowVaccinationExpiryReissueNotification_no_reissueble_vaccination() throws {

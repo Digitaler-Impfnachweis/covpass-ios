@@ -11,6 +11,7 @@ import CovPassUI
 import UIKit
 
 class CertificateCardViewModel: CertificateCardViewModelProtocol {
+   
     // MARK: - Private Properties
 
     private var token: ExtendedCBORWebToken
@@ -38,10 +39,11 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
         return dgc.v?.first
     }()
     // Show notification to the user if he is qualified for a booster vaccination
-    private var showNotification: Bool {
+    var showBoosterAvailabilityNotification: Bool {
         guard let boosterCandidate = boosterLogic.checkCertificates([token]) else { return false }
         return boosterCandidate.state == .new
     }
+    private let showNotificationIcon: Bool
 
     // MARK: - Lifecycle
 
@@ -51,6 +53,9 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
         recoveries: [Recovery],
         isFavorite: Bool,
         showFavorite: Bool,
+        showTitle: Bool,
+        showAction: Bool,
+        showNotificationIcon: Bool,
         onAction: @escaping (ExtendedCBORWebToken) -> Void,
         onFavorite: @escaping (String) -> Void,
         repository: VaccinationRepositoryProtocol,
@@ -62,11 +67,14 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
         self.recoveries = recoveries
         certificateIsFavorite = isFavorite
         self.showFavorite = showFavorite
+        self.showTitle = showTitle
+        self.showAction = showAction
         self.onAction = onAction
         self.onFavorite = onFavorite
         self.repository = repository
         self.boosterLogic = boosterLogic
         self.currentDate = currentDate
+        self.showNotificationIcon = showNotificationIcon
     }
 
     // MARK: - Internal Properties
@@ -129,7 +137,7 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
             subtitle = currentDate.hoursSinceString(date)
         } else if isRevoked || tokenIsInvalid {
             subtitle = "certificates_start_screen_qrcode_certificate_invalid_subtitle".localized
-        } else if showNotification {
+        } else if showBoosterAvailabilityNotification {
             subtitle = "vaccination_start_screen_qrcode_booster_vaccination_note_subtitle".localized
         } else {
             subtitle = ""
@@ -145,7 +153,7 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
         } else if isPartialVaccination {
             return .startStatusPartial
         }
-        return showNotification ? .statusFullBlueNotification : .statusFullDetail
+        return showBoosterAvailabilityNotification && showNotificationIcon ? .statusFullBlueNotification : .statusFullDetail
     }
 
     var isFavorite: Bool {
@@ -155,6 +163,8 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
     lazy var isInvalid: Bool = isExpired || tokenIsInvalid || isRevoked
 
     var showFavorite: Bool = true
+    var showTitle: Bool = false
+    var showAction: Bool = false
 
     lazy var qrCode: UIImage? = {
         let code = isRevoked ? "" : token.vaccinationQRCodeData

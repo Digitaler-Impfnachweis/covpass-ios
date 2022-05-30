@@ -19,17 +19,17 @@ private enum Constants {
 }
 
 class CertificatesOverviewRouter: CertificatesOverviewRouterProtocol, DialogRouterProtocol {
-
+    
     // MARK: - Properties
-
+    
     let sceneCoordinator: SceneCoordinator
-
+    
     // MARK: - Lifecycle
-
+    
     init(sceneCoordinator: SceneCoordinator) {
         self.sceneCoordinator = sceneCoordinator
     }
-
+    
     // MARK: - Methods
     
     func showAnnouncement() -> Promise<Void> {
@@ -61,8 +61,19 @@ class CertificatesOverviewRouter: CertificatesOverviewRouterProtocol, DialogRout
             )
         )
     }
-
-    func showCertificates(_ certificates: [ExtendedCBORWebToken]) -> Promise<CertificateDetailSceneResult> {
+    
+    func showCertificates(certificates: [ExtendedCBORWebToken],
+                          vaccinationRepository: VaccinationRepositoryProtocol,
+                          boosterLogic: BoosterLogicProtocol) -> Promise<CertificateDetailSceneResult> {
+        let router = CertificatesOverviewPersonRouter(sceneCoordinator: sceneCoordinator)
+        let sceneFactory = CertificatesOverviewPersonSceneFactory(router: router,
+                                                                  certificates: certificates,
+                                                                  vaccinationRepository: vaccinationRepository,
+                                                                  boosterLogic: boosterLogic)
+        return sceneCoordinator.present(sceneFactory, animated: true)
+    }
+    
+    func showCertificatesDetail(certificates: [ExtendedCBORWebToken]) -> Promise<CertificateDetailSceneResult> {
         sceneCoordinator.push(
             CertificateDetailSceneFactory(
                 router: CertificateDetailRouter(sceneCoordinator: sceneCoordinator),
@@ -70,7 +81,7 @@ class CertificatesOverviewRouter: CertificatesOverviewRouterProtocol, DialogRout
             )
         )
     }
-
+    
     func showHowToScan() -> Promise<Void> {
         sceneCoordinator.present(
             HowToScanSceneFactory(
@@ -112,13 +123,13 @@ class CertificatesOverviewRouter: CertificatesOverviewRouterProtocol, DialogRout
                        style: .alert)
         }
     }
-
+    
     func toAppstoreCheckApp() {
         if let url = Constants.Config.covpassCheckAppStoreURL, UIApplication.shared.canOpenURL(url) {
             UIApplication.shared.open(url)
         }
     }
-
+    
     func toFaqWebsite(_ url: URL) {
         if UIApplication.shared.canOpenURL(url) {
             UIApplication.shared.open(url)
@@ -132,7 +143,7 @@ class CertificatesOverviewRouter: CertificatesOverviewRouterProtocol, DialogRout
             )
         )
     }
-
+    
     func scanQRCode() -> Promise<ScanResult> {
         sceneCoordinator.present(
             ScanSceneFactory(
@@ -142,7 +153,7 @@ class CertificatesOverviewRouter: CertificatesOverviewRouterProtocol, DialogRout
             )
         )
     }
-
+    
     func showAppInformation() {
         sceneCoordinator.push(
             AppInformationSceneFactory(
@@ -150,14 +161,14 @@ class CertificatesOverviewRouter: CertificatesOverviewRouterProtocol, DialogRout
             )
         )
     }
-
+    
     func showBoosterNotification() -> Promise<Void> {
         sceneCoordinator.present(BoosterNotificationSceneFactory())
     }
-
+    
     func startValidationAsAService(with data: ValidationServiceInitialisation) {
         sceneCoordinator.present(
-            ValidationServiceFactory(router: ValidationServiceRouter(sceneCoordinator: sceneCoordinator),                                     
+            ValidationServiceFactory(router: ValidationServiceRouter(sceneCoordinator: sceneCoordinator),
                                      initialisationData: data))
     }
     
@@ -167,7 +178,7 @@ class CertificatesOverviewRouter: CertificatesOverviewRouterProtocol, DialogRout
                                                  userDefaults: userDefaults)
         )
     }
-
+    
     func showCertificatesReissue(for cborWebTokens: [ExtendedCBORWebToken],
                                  context: ReissueContext) -> Promise<Void> {
         sceneCoordinator.present(

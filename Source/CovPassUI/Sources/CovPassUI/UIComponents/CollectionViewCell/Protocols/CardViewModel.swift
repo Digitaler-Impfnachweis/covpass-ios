@@ -13,5 +13,6 @@ public protocol CardViewModel {
     var backgroundColor: UIColor { get }
     var iconTintColor: UIColor { get }
     var textColor: UIColor { get }
+    var showBoosterAvailabilityNotification: Bool { get }
     var delegate: ViewModelDelegate? { get set }
 }

@@ -147,10 +147,10 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
     private var lastPlayload: String = ""
     
     private func afterScannedCertFinalFlow(_ certificate: ExtendedCBORWebToken) {
-        self.certificateList.certificates.append(certificate)
-        self.delegate?.viewModelDidUpdate()
-        self.handleCertificateDetailSceneResult(.showCertificatesOnOverview([certificate]))
-        self.showCertificate(certificate)
+        certificateList.certificates.append(certificate)
+        delegate?.viewModelDidUpdate()
+        handleCertificateDetailSceneResult(.showCertificatesOnOverview(certificate))
+        showCertificates(certificateList.certificates.certificatePair(for: certificate), forceToDetailsPage: true)
     }
     
     private func continueScanning() -> PMKFinalizer {
@@ -343,7 +343,10 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
                 recoveries: sortedCertificates.recoveries,
                 isFavorite: certificatePair.isFavorite,
                 showFavorite: certificates.count > 1,
-                onAction: showCertificate,
+                showTitle: true,
+                showAction: true,
+                showNotificationIcon: true,
+                onAction: onActionCardView,
                 onFavorite: toggleFavoriteStateForCertificateWithId,
                 repository: repository,
                 boosterLogic: BoosterLogic.create()
@@ -367,16 +370,25 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
         }
     }
     
-    func showCertificate(_ certificate: ExtendedCBORWebToken) {
-        showCertificates(certificateList.certificates.certificatePair(for: certificate))
+    func onActionCardView(_ certificate: ExtendedCBORWebToken) {
+        showCertificates(certificateList.certificates.certificatePair(for: certificate), forceToDetailsPage: false)
     }
     
-    private func showCertificates(_ certificates: [ExtendedCBORWebToken]) {
-        guard certificates.isEmpty == false else {
+    private func showCertificate(certificates: [ExtendedCBORWebToken], forceToDetailsPage: Bool) -> Promise<CertificateDetailSceneResult> {
+        if certificates.filterFirstOfAllTypes.count > 0 && !forceToDetailsPage {
+            return router.showCertificates(certificates: certificates,
+                                           vaccinationRepository: repository,
+                                           boosterLogic: boosterLogic)
+        }
+        return router.showCertificatesDetail(certificates: certificates)
+    }
+    
+    private func showCertificates(_ certificates: [ExtendedCBORWebToken], forceToDetailsPage: Bool) {
+        guard !certificates.isEmpty else {
             return
         }
         firstly {
-            router.showCertificates(certificates)
+            showCertificate(certificates: certificates, forceToDetailsPage: forceToDetailsPage)
         }
         .cancelled {
             // User cancelled by back button or swipe gesture.
@@ -401,8 +413,8 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
             router.showCertificateDidDeleteDialog()
             delegate?.viewModelNeedsFirstCertificateVisible()
             
-        case let .showCertificatesOnOverview(certificates):
-            guard let index = certificatePairsSorted.firstIndex(where: { $0.certificates.elementsEqual(certificates) }) else { return }
+        case let .showCertificatesOnOverview(certificate):
+            guard let index = certificatePairsSorted.firstIndex(where: { $0.certificates.elementsEqual([certificate]) }) else { return }
             delegate?.viewModelNeedsCertificateVisible(at: index)
             
         case .addNewCertificate:

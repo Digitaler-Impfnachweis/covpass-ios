@@ -202,12 +202,12 @@ class GProofViewModel: GProofViewModelProtocol {
     }
     
     private func showErorResultPage(error: Error, token: ExtendedCBORWebToken?) {
-        let shouldShowStartOverButton = !isFirstScan
+        let showStartOverButton = !isFirstScan
         router.showCertificate(token,
                                _2GContext: true,
                                error: error,
                                userDefaults: userDefaults,
-                               buttonHidden: shouldShowStartOverButton)
+                               buttonHidden: showStartOverButton)
             .done { token in
                 self.validationToken(token: token, error: error, result: nil)
             }

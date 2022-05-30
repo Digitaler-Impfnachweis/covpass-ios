@@ -32,6 +32,7 @@ class CertificatesOverviewViewController: UIViewController {
     @IBOutlet var dotPageIndicator: DotPageIndicator!
 
     private(set) var viewModel: CertificatesOverviewViewModelProtocol
+    private(set) var cellWidthMargin: CGFloat = 40
 
     // MARK: - Lifecycle
 
@@ -96,7 +97,7 @@ class CertificatesOverviewViewController: UIViewController {
         collectionView.clipsToBounds = false
         collectionView.delegate = self
         collectionView.dataSource = self
-        let layout = CardFlowLayout()
+        let layout = CardFlowLayout(spacing: 10, leftSectionInset: cellWidthMargin / 2)
         layout.scrollDirection = .horizontal
         collectionView.collectionViewLayout = layout
         collectionView.register(UINib(nibName: "\(NoCertificateCollectionViewCell.self)", bundle: Bundle.uiBundle), forCellWithReuseIdentifier: "\(NoCertificateCollectionViewCell.self)")
@@ -141,10 +142,10 @@ extension CertificatesOverviewViewController: UICollectionViewDataSource {
         guard viewModel.certificateViewModels.count > indexPath.row else { return UICollectionViewCell() }
         let vm = viewModel.certificateViewModels[indexPath.row]
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: vm.reuseIdentifier, for: indexPath) as? CardCollectionViewCell else { return UICollectionViewCell() }
-
         cell.viewModel = vm
         cell.viewModel?.delegate = cell
-
+        (cell as? CertificateCollectionViewCell)?.contentStackView.layoutMargins.top = 20
+        (cell as? CertificateCollectionViewCell)?.contentStackView.layoutMargins.bottom = 0
         return cell
     }
 }
@@ -164,7 +165,7 @@ extension CertificatesOverviewViewController: UICollectionViewDelegate {
 
 extension CertificatesOverviewViewController: UICollectionViewDelegateFlowLayout {
     public func collectionView(_ collectionView: UICollectionView, layout _: UICollectionViewLayout, sizeForItemAt _: IndexPath) -> CGSize {
-        CGSize(width: collectionView.bounds.width - 40, height: collectionView.bounds.height)
+        CGSize(width: collectionView.bounds.width - cellWidthMargin, height: collectionView.bounds.height)
     }
 }
 

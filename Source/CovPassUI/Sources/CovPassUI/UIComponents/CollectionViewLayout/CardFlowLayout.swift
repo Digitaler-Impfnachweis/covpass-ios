@@ -26,10 +26,21 @@ open class CardFlowLayout: UICollectionViewFlowLayout {
     @IBInspectable open var sideItemScale: CGFloat = 1
     @IBInspectable open var sideItemAlpha: CGFloat = 0.8
     @IBInspectable open var sideItemShift: CGFloat = 0.7
-    open var spacingMode = CardFlowLayoutSpacingMode.fixed(spacing: 10)
+    public var leftSectionInset: CGFloat
+    public var spacingMode: CardFlowLayoutSpacingMode
 
     fileprivate var state = LayoutState(size: CGSize.zero, direction: .horizontal)
-
+    
+    public init(spacing: CGFloat, leftSectionInset: CGFloat) {
+        self.spacingMode = .fixed(spacing: spacing)
+        self.leftSectionInset = leftSectionInset
+        super.init()
+    }
+    
+    required public init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override open func prepare() {
         super.prepare()
         let currentState = LayoutState(size: collectionView!.bounds.size, direction: scrollDirection)
@@ -56,7 +67,7 @@ open class CardFlowLayout: UICollectionViewFlowLayout {
 
         let yInset = (collectionSize.height - itemSize.height) / 2
         let xInset = (collectionSize.width - itemSize.width) / 2
-        sectionInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: xInset)
+        sectionInset = UIEdgeInsets(top: 0, left: leftSectionInset, bottom: 0, right: xInset)
 
         let side = isHorizontal ? itemSize.width : itemSize.height
         let scaledItemOffset = (side - side * sideItemScale) / 2
