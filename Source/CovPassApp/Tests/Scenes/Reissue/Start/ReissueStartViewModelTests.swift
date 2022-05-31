@@ -15,23 +15,29 @@ class ReissueStartViewModelTests: XCTestCase {
     
     private var sut: ReissueStartViewModel!
     private var mockRouter: ReissueStartRouterMock!
-    private var token: ExtendedCBORWebToken!
     private var promise: Promise<Void>!
     
     override func setUpWithError() throws {
         try super.setUpWithError()
+        configureSut()
+    }
+
+    private func configureSut(
+        tokens: [ExtendedCBORWebToken] = [CBORWebToken.mockVaccinationCertificate.extended()],
+        context: ReissueContext = .boosterRenewal
+    ) {
         let (promise, resolver) = Promise<Void>.pending()
         self.promise = promise
         mockRouter = ReissueStartRouterMock()
-        token = CBORWebToken.mockVaccinationCertificate.extended()
-        sut = ReissueStartViewModel(router: mockRouter,
-                                    resolver: resolver,
-                                    tokens: [token],
-                                    context: .boosterRenewal)
+        sut = ReissueStartViewModel(
+            router: mockRouter,
+            resolver: resolver,
+            tokens: tokens,
+            context: context
+        )
     }
     
     override func tearDownWithError() throws {
-        token = nil
         mockRouter = nil
         sut = nil
         promise = nil
@@ -55,5 +61,31 @@ class ReissueStartViewModelTests: XCTestCase {
         }
         .cauterize()
         wait(for: [expectation], timeout: 1)
+    }
+
+    func testCertItem_booster() {
+        // Given
+        let token1 = CBORWebToken.mockRecoveryCertificate.recoveryTestDate(.distantFuture).extended(vaccinationQRCodeData: "1")
+        let token2 = CBORWebToken.mockVaccinationCertificate.doseNumber(1).extended(vaccinationQRCodeData: "1")
+        configureSut(tokens: [token1, token2])
+
+        // When
+        let certItem = sut.certItem
+
+        // Then
+        XCTAssertEqual(certItem.activeLabel.text, "Vaccinated on Jan 1, 2021")
+    }
+
+    func testCertItem_expiry_extension() {
+        // Given
+        let token1 = CBORWebToken.mockRecoveryCertificate.recoveryTestDate(.distantFuture).extended(vaccinationQRCodeData: "1")
+        let token2 = CBORWebToken.mockVaccinationCertificate.doseNumber(1).extended(vaccinationQRCodeData: "1")
+        configureSut(tokens: [token1, token2], context: .certificateExtension)
+
+        // When
+        let certItem = sut.certItem
+
+        // Then
+        XCTAssertEqual(certItem.activeLabel.text, "Maximum valid until May 1, 2022")
     }
 }

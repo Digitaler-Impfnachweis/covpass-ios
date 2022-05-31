@@ -48,7 +48,14 @@ class ReissueStartViewModel: ReissueStartViewModelProtocol {
         self.router = router
         self.resolver = resolver
         self.tokens = tokens
-        self.certItem = tokens.sortedByDn[0].certItem(active: true)
+        let reissuableTokens: [ExtendedCBORWebToken]
+        switch context {
+        case .boosterRenewal:
+            reissuableTokens = tokens.sortedByDn
+        case .certificateExtension:
+            reissuableTokens = tokens
+        }
+        certItem = reissuableTokens[0].certItem(active: true)
     }
     
     // MARK: - Methods
