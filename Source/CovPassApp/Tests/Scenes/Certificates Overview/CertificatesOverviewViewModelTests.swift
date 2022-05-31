@@ -11,8 +11,10 @@
 import XCTest
 import PromiseKit
 
+private let secondsPerYear: TimeInterval = 365*24*60*60
+
 class CertificatesOverviewViewModelTests: XCTestCase {
-    
+    var delegate: MockCertificateViewModelDelegate!
     var sut: CertificatesOverviewViewModel!
     var userDefaults: UserDefaultsPersistence!
     var vaccinationRepository: VaccinationRepositoryMock!
@@ -30,9 +32,12 @@ class CertificatesOverviewViewModelTests: XCTestCase {
                                             boosterLogic: BoosterLogicMock(),
                                             userDefaults: userDefaults,
                                             locale: .current)
+        delegate = .init()
+        sut.delegate = delegate
     }
     
     override func tearDownWithError() throws {
+        delegate = nil
         sut = nil
         router = nil
         revocationRepository = nil
@@ -106,20 +111,19 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         // Given
         let cert: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended()
         cert.vaccinationCertificate.hcert.dgc.nam.fn = "John 1"
-        cert.vaccinationCertificate.hcert.dgc.v!.first!.dt =  try XCTUnwrap(Calendar.current.date(byAdding: .month, value: -12, to: Date()))
+        cert.vaccinationCertificate.hcert.dgc.v!.first!.dt = Date(timeIntervalSinceNow: -secondsPerYear)
         let certs = [cert]
         vaccinationRepository.certificates = certs
         
         // WHEN
         _ = sut.refresh()
-        RunLoop.current.run(for: 0.1)
-        
+
+        // THEN
+        wait(for: [delegate.viewModelDidUpdateExpectation], timeout: 1)
         guard let model = (sut.certificateViewModels.first as? CertificateCardViewModelProtocol) else {
             XCTFail("Model can not be extracted")
             return
         }
-        
-        // THEN
         XCTAssertEqual("Display certificates", model.actionTitle)
         XCTAssertEqual("Doe John 1", model.name)
         XCTAssertEqual(.neutralWhite, model.textColor)
@@ -136,21 +140,20 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         // Given
         let cert: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended()
         cert.vaccinationCertificate.hcert.dgc.nam.fn = "John 1"
-        cert.vaccinationCertificate.hcert.dgc.v!.first!.dt = try XCTUnwrap(Calendar.current.date(byAdding: .month, value: -12, to: Date()))
+        cert.vaccinationCertificate.hcert.dgc.v!.first!.dt = Date(timeIntervalSinceNow: -secondsPerYear)
         cert.vaccinationCertificate.hcert.dgc.v!.first!.dn = 1
         let certs = [cert]
         vaccinationRepository.certificates = certs
         
         // WHEN
         _ = sut.refresh()
-        RunLoop.current.run(for: 0.1)
-        
+
+        // THEN
+        wait(for: [delegate.viewModelDidUpdateExpectation], timeout: 1)
         guard let model = (sut.certificateViewModels.first as? CertificateCardViewModelProtocol) else {
             XCTFail("Model can not be extracted")
             return
         }
-        
-        // THEN
         XCTAssertEqual("Display certificates", model.actionTitle)
         XCTAssertEqual("Doe John 1", model.name)
         XCTAssertEqual(.neutralWhite, model.textColor)

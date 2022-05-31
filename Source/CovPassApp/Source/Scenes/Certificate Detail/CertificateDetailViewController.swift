@@ -159,6 +159,7 @@ class CertificateDetailViewController: UIViewController {
             hintButton.button.title = viewModel.recoveryExpiryReissueButtonTitle
             reissueStackView.addArrangedSubview(hintButton)
         }
+        reissueStackView.isHidden = reissueStackView.arrangedSubviews.isEmpty
     }
 
     private func createReissueHintButton() -> HintButton {
