@@ -221,12 +221,17 @@ public extension Vaccination {
         if !certsWithSelf.contains(self) {
             certsWithSelf.append(self)
         }
-
+        
+        let sortedCerts = certsWithSelf.sorted(by: { $0.dn > $1.dn })
+        guard sortedCerts.firstIndex(where: \.is2Of1) == 0 || sortedCerts.firstIndex(where: \.isDoubleDoseComplete) == 0 else {
+            return false
+        }
+        
         guard certsWithSelf.contains(where: \.isJohnsonJohnsonWithSingleDoseComplete) else {
             return false
         }
         
-        guard certsWithSelf.contains(where: \.is2Of1) else {
+        guard certsWithSelf.contains(where: \.is2Of1) || certsWithSelf.contains(where: \.isDoubleDoseComplete) else {
             return false
         }
         

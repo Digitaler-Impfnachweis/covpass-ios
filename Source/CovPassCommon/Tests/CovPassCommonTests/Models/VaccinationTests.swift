@@ -16,8 +16,9 @@ class VaccinationTests: XCTestCase {
     var sut: Vaccination!
     var dtDate: Date!
     var vac1Of1JJ: Vaccination!
-    var vac2Of1SomeProduct: Vaccination!
-    
+    var vac2Of1Biontech: Vaccination!
+    var vac2Of2Moderna: Vaccination!
+
     override func setUpWithError() throws {
         dtDate = Date()
         sut = Vaccination(tg: "", vp: "", mp: "", ma: "", dn: 1, sd: 1, dt: dtDate, co: "", is: "", ci: "")
@@ -30,12 +31,22 @@ class VaccinationTests: XCTestCase {
                                 co: "",
                                 is: "",
                                 ci: "1")
-        vac2Of1SomeProduct = Vaccination(tg: "",
+        vac2Of1Biontech = Vaccination(tg: "",
                                          vp: "",
                                          mp: MedicalProduct.biontech.rawValue,
                                          ma: "",
                                          dn: 2,
                                          sd: 1,
+                                         dt: Date(),
+                                         co: "",
+                                         is: "",
+                                         ci: "2")
+        vac2Of2Moderna = Vaccination(tg: "",
+                                         vp: "",
+                                         mp: MedicalProduct.moderna.rawValue,
+                                         ma: "",
+                                         dn: 2,
+                                         sd: 2,
                                          dt: Date(),
                                          co: "",
                                          is: "",
@@ -46,7 +57,7 @@ class VaccinationTests: XCTestCase {
         dtDate = nil
         sut = nil
         vac1Of1JJ = nil
-        vac2Of1SomeProduct = nil
+        vac2Of1Biontech = nil
     }
     
     func testIs2Of1() {
@@ -294,9 +305,9 @@ class VaccinationTests: XCTestCase {
     }
     
     func testDowngrade2OutOf1ToBasisImmunization() {
-        let shouldDowngraded = vac2Of1SomeProduct.downgrade2OutOf1ToBasisImmunization(otherCertificatesInTheUsersChain: [vac1Of1JJ],
+        let shouldDowngraded = vac2Of1Biontech.downgrade2OutOf1ToBasisImmunization(otherCertificatesInTheUsersChain: [vac1Of1JJ],
                                                                                       recoveries: nil)
-        XCTAssertTrue(vac2Of1SomeProduct.isBoosted())
+        XCTAssertTrue(vac2Of1Biontech.isBoosted())
         XCTAssertTrue(shouldDowngraded)
     }
     
@@ -309,9 +320,9 @@ class VaccinationTests: XCTestCase {
                                 is: "",
                                 ci: "3")
         
-        let shouldDowngraded = vac2Of1SomeProduct.downgrade2OutOf1ToBasisImmunization(otherCertificatesInTheUsersChain: [vac1Of1JJ],
+        let shouldDowngraded = vac2Of1Biontech.downgrade2OutOf1ToBasisImmunization(otherCertificatesInTheUsersChain: [vac1Of1JJ],
                                                                                       recoveries: [recovery])
-        XCTAssertTrue(vac2Of1SomeProduct.isBoosted())
+        XCTAssertTrue(vac2Of1Biontech.isBoosted())
         XCTAssertFalse(shouldDowngraded)
     }
     
@@ -324,10 +335,81 @@ class VaccinationTests: XCTestCase {
                                 is: "",
                                 ci: "3")
         
-        let shouldDowngraded = vac2Of1SomeProduct.downgrade2OutOf1ToBasisImmunization(otherCertificatesInTheUsersChain: [vac1Of1JJ],
+        let shouldDowngraded = vac2Of1Biontech.downgrade2OutOf1ToBasisImmunization(otherCertificatesInTheUsersChain: [vac1Of1JJ],
                                                                                       recoveries: [recovery])
-        XCTAssertTrue(vac2Of1SomeProduct.isBoosted())
+        XCTAssertTrue(vac2Of1Biontech.isBoosted())
         XCTAssertTrue(shouldDowngraded)
+    }
+    
+    func testDowngrade2OutOf1ToBasisImmunizationWithBoosterCert() {
+        let someBooster = Vaccination(tg: "", vp: "",
+                                mp: MedicalProduct.johnsonjohnson.rawValue,
+                                ma: "",
+                                dn: 3,
+                                sd: 3,
+                                dt: Date(),
+                                co: "",
+                                is: "",
+                                ci: "1")
+        
+        let shouldDowngraded = vac2Of1Biontech.downgrade2OutOf1ToBasisImmunization(otherCertificatesInTheUsersChain: [someBooster, vac1Of1JJ, vac2Of1Biontech],
+                                                                                      recoveries: [])
+        XCTAssertTrue(vac2Of1Biontech.isBoosted())
+        XCTAssertFalse(shouldDowngraded)
+    }
+ 
+    func testDowngrade2OutOf2ToBasisImmunization() {
+        let shouldDowngraded = vac2Of2Moderna.downgrade2OutOf1ToBasisImmunization(otherCertificatesInTheUsersChain: [vac1Of1JJ],
+                                                                                      recoveries: nil)
+        XCTAssertTrue(vac2Of1Biontech.isBoosted())
+        XCTAssertTrue(shouldDowngraded)
+    }
+    
+    func testDowngrade2OutOf2ToBasisImmunizationAndRecoveryAsOldest() {
+        let recovery = Recovery(tg: "",
+                                fr: Date() - 100,
+                                df: Date(),
+                                du: Date(),
+                                co: "",
+                                is: "",
+                                ci: "3")
+        
+        let shouldDowngraded = vac2Of2Moderna.downgrade2OutOf1ToBasisImmunization(otherCertificatesInTheUsersChain: [vac1Of1JJ],
+                                                                                      recoveries: [recovery])
+        XCTAssertTrue(vac2Of1Biontech.isBoosted())
+        XCTAssertFalse(shouldDowngraded)
+    }
+    
+    func testDowngrade2OutOf2ToBasisImmunizationAndRecoveryAsNotOldest() {
+        let recovery = Recovery(tg: "",
+                                fr: Date() + 100,
+                                df: Date(),
+                                du: Date(),
+                                co: "",
+                                is: "",
+                                ci: "3")
+        
+        let shouldDowngraded = vac2Of2Moderna.downgrade2OutOf1ToBasisImmunization(otherCertificatesInTheUsersChain: [vac1Of1JJ],
+                                                                                      recoveries: [recovery])
+        XCTAssertTrue(vac2Of1Biontech.isBoosted())
+        XCTAssertTrue(shouldDowngraded)
+    }
+    
+    func testDowngrade2OutOf2ToBasisImmunizationWithBoosterCert() {
+        let someBooster = Vaccination(tg: "", vp: "",
+                                mp: MedicalProduct.johnsonjohnson.rawValue,
+                                ma: "",
+                                dn: 3,
+                                sd: 3,
+                                dt: Date(),
+                                co: "",
+                                is: "",
+                                ci: "1")
+        
+        let shouldDowngraded = vac2Of2Moderna.downgrade2OutOf1ToBasisImmunization(otherCertificatesInTheUsersChain: [someBooster, vac1Of1JJ, vac2Of1Biontech],
+                                                                                      recoveries: [])
+        XCTAssertTrue(vac2Of1Biontech.isBoosted())
+        XCTAssertFalse(shouldDowngraded)
     }
  
     
