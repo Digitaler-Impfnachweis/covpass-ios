@@ -7,6 +7,7 @@ import UIKit
 private enum Constants {
     enum Keys {
         static var title = "certificate_renewal_consent_page_transfer_certificates_headline".localized
+        static var titleExpiry = "share_certificate_consent_title".localized
         static var subTitle = "certificate_renewal_consent_page_transfer_certificates_subline".localized
         static var hintTitle = "certificate_renewal_consent_page_transfer_certificates_consent_box_subline".localized
         static var hintText = "certificate_renewal_consent_page_transfer_certificates_consent_box_copy".localized
@@ -40,7 +41,7 @@ class ReissueConsentViewModel: ReissueConsentViewModelProtocol {
     // MARK: - Properties
     weak var delegate: ViewModelDelegate?
     let certItems: [CertificateItem]
-    let titleText = Constants.Keys.title
+    let titleText: String
     let subTitleText = Constants.Keys.subTitle
     var descriptionText: NSAttributedString
     let privacyHeadlineText = Constants.Keys.privacyHeadline
@@ -79,6 +80,7 @@ class ReissueConsentViewModel: ReissueConsentViewModelProtocol {
         self.router = router
         self.resolver = resolver
         self.certItems = tokens.sortedByDn.compactMap{ $0.certItem(active: true) }
+        self.titleText = context == .boosterRenewal ? Constants.Keys.title : Constants.Keys.titleExpiry
         self.descriptionText = Constants.Keys.description.styledAs(.body)
         self.hintText = Constants.Keys.hintText.styledAs(.body)
             .appendBullets([
