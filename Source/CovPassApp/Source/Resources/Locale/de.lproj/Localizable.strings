@@ -731,7 +731,7 @@
 
 "recovery_certificate_overview_message" = "Zeigen Sie bei Bedarf den QR-Code vor. Halten Sie zudem ein Ausweisdokument bei der Überprüfung bereit.";
 
-"recovery_certificate_overview_action_button_title" = "Aktuellen QR-Code anzeigen";
+"recovery_certificate_overview_action_button_title" = "Nachweise anzeigen";
 
 "certificates_overview_expired_title" = "Zertifikat abgelaufen";
 

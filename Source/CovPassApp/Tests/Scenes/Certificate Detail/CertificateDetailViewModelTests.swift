@@ -381,7 +381,7 @@ class CertificateDetailViewModelTests: XCTestCase {
         let immunizationButton = sut.immunizationButton
 
         // Then
-        XCTAssertEqual(immunizationButton, "Display current QR Code")
+        XCTAssertEqual(immunizationButton, "Show certificates")
     }
 
     func testImmunizationButton_revoked() throws {

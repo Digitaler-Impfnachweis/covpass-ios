@@ -731,7 +731,7 @@
 
 "recovery_certificate_overview_message" = "Show this QR code when needed. Be ready to show ID when your QR code is checked.";
 
-"recovery_certificate_overview_action_button_title" = "Display current QR Code";
+"recovery_certificate_overview_action_button_title" = "Show certificates";
 
 "certificates_overview_expired_title" = "Certificate expired";
 
