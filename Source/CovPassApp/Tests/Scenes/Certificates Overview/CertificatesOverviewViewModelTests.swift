@@ -494,6 +494,24 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         wait(for: [router.showDialogExpectation], timeout: 2)
     }
 
+    func testRefresh_expiry_notification_only_shown_once() throws {
+        // Given
+        let tokens: [ExtendedCBORWebToken] = [.expired]
+        let router = CertificatesOverviewRouterMock()
+        configureSutAndRepository(with: router, certificates: tokens)
+        vaccinationRepository.getCertificateListExpectation.expectedFulfillmentCount = 2
+
+        // When
+        _ = sut.refresh()
+
+        // Then
+        wait(for: [
+            vaccinationRepository.setExpiryAlertExpectation,
+            vaccinationRepository.getCertificateListExpectation,
+            router.showDialogExpectation
+        ], timeout: 1)
+    }
+
     func testRefresh_setExpiryAlert_called() throws {
         // Given
         let tokens: [ExtendedCBORWebToken] = [

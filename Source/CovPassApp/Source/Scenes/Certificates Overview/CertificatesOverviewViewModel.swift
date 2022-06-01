@@ -507,8 +507,18 @@ extension CertificatesOverviewViewModel {
             token.wasExpiryAlertShown = true
         }
         if !tokens.isEmpty {
-            _ = repository.setExpiryAlert(shown: true, tokens: tokens)
-            showExpiryAlert()
+            repository.setExpiryAlert(shown: true, tokens: tokens)
+                .then { _ in
+                    self.repository.getCertificateList()
+                }
+                .ensure {
+                    self.showExpiryAlert()
+                }
+                .done { certificateList in
+                    self.certificateList = certificateList
+                }
+                .cauterize()
+
         }
         return .value
     }
