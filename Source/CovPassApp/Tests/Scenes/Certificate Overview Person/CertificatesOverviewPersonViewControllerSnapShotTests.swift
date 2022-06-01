@@ -26,11 +26,12 @@ class CertificatesOverviewPersonViewControllerSnapShotTests: BaseSnapShotTests {
                                             resolver: resolver)
     }
     
-    func test_vaccination() {
+    func test_vaccination() throws {
         let router = CertificatesOverviewPersonRouterMock()
         let vacinationRepoMock: VaccinationRepositoryMock = VaccinationRepositoryMock()
         let cert1: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended()
         cert1.vaccinationCertificate.hcert.dgc.nam.fn = "John 1"
+        cert1.vaccinationCertificate.hcert.dgc.v!.first!.dt = try XCTUnwrap(Calendar.current.date(byAdding: .month, value: -16, to: Date()))
         let certs = [cert1]
         vacinationRepoMock.certificates = certs
         let viewModel = self.viewModel(certificates: certs, router: router, repository: vacinationRepoMock)
@@ -39,11 +40,12 @@ class CertificatesOverviewPersonViewControllerSnapShotTests: BaseSnapShotTests {
         verifyView(view: viewController.view)
     }
     
-    func test_recovery() {
+    func test_recovery() throws {
         let router = CertificatesOverviewPersonRouterMock()
         let vacinationRepoMock: VaccinationRepositoryMock = VaccinationRepositoryMock()
         let cert1: ExtendedCBORWebToken = CBORWebToken.mockRecoveryCertificate.extended()
         cert1.vaccinationCertificate.hcert.dgc.nam.fn = "John 1"
+        cert1.vaccinationCertificate.hcert.dgc.r!.first!.fr = try XCTUnwrap(Calendar.current.date(byAdding: .month, value: -3, to: Date()))
         let certs = [cert1]
         vacinationRepoMock.certificates = certs
         let viewModel = self.viewModel(certificates: certs, router: router, repository: vacinationRepoMock)
@@ -65,12 +67,13 @@ class CertificatesOverviewPersonViewControllerSnapShotTests: BaseSnapShotTests {
         verifyView(view: viewController.view)
     }
     
-    func test_vaccination_partly() {
+    func test_vaccination_partly() throws {
         let router = CertificatesOverviewPersonRouterMock()
         let vacinationRepoMock: VaccinationRepositoryMock = VaccinationRepositoryMock()
         let cert: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended()
         cert.vaccinationCertificate.hcert.dgc.nam.fn = "John 1"
         cert.vaccinationCertificate.hcert.dgc.v!.first!.dn = 1
+        cert.vaccinationCertificate.hcert.dgc.v!.first!.dt = try XCTUnwrap(Calendar.current.date(byAdding: .month, value: -16, to: Date()))
         let certs = [cert]
         vacinationRepoMock.certificates = certs
         let viewModel = self.viewModel(certificates: certs, router: router, repository: vacinationRepoMock)
@@ -79,7 +82,7 @@ class CertificatesOverviewPersonViewControllerSnapShotTests: BaseSnapShotTests {
         verifyView(view: viewController.view)
     }
     
-    func test_vaccination_JohnsonJohnson1OutOf1() {
+    func test_vaccination_JohnsonJohnson1OutOf1() throws {
         let router = CertificatesOverviewPersonRouterMock()
         let vacinationRepoMock: VaccinationRepositoryMock = VaccinationRepositoryMock()
         let cert: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended()
@@ -87,6 +90,7 @@ class CertificatesOverviewPersonViewControllerSnapShotTests: BaseSnapShotTests {
         cert.vaccinationCertificate.hcert.dgc.v!.first!.mp = MedicalProduct.johnsonjohnson.rawValue
         cert.vaccinationCertificate.hcert.dgc.v!.first!.dn = 1
         cert.vaccinationCertificate.hcert.dgc.v!.first!.sd = 1
+        cert.vaccinationCertificate.hcert.dgc.v!.first!.dt = try XCTUnwrap(Calendar.current.date(byAdding: .month, value: -16, to: Date()))
         let certs = [cert]
         vacinationRepoMock.certificates = certs
         let viewModel = self.viewModel(certificates: certs, router: router, repository: vacinationRepoMock)

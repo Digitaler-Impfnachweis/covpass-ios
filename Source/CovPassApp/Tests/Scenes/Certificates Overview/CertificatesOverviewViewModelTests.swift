@@ -166,11 +166,11 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         XCTAssertEqual(false, model.isFavorite)
     }
     
-    func testRecoveryCertificate() {
+    func testRecoveryCertificate() throws {
         // Given
         let cert: ExtendedCBORWebToken = CBORWebToken.mockRecoveryCertificate.extended()
         cert.vaccinationCertificate.hcert.dgc.nam.fn = "John 1"
-        cert.vaccinationCertificate.hcert.dgc.r!.first!.du = DateUtils.parseDate("2021-04-26T15:05:00")!
+        cert.vaccinationCertificate.hcert.dgc.r!.first!.fr = try XCTUnwrap(Calendar.current.date(byAdding: .month, value: -3, to: Date()))!
         let certs = [cert]
         vaccinationRepository.certificates = certs
         
