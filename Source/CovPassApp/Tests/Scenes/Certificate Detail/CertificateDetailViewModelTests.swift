@@ -721,23 +721,22 @@ class CertificateDetailViewModelTests: XCTestCase {
         XCTAssertFalse(showRecoveryExpiryReissueIsNewBadge)
     }
 
-    func testTriggerVaccinationExpiryReissue() throws {
+    func testTriggerVaccinationExpiryReissue() {
         // Given
         let token1 = ExtendedCBORWebToken.reissuableVaccination
         let token2 = ExtendedCBORWebToken.reissuableVaccination
-        try configureCustomSut(
+        configureCustomSut(
             certificates: [
                 token1,
                 token2,
                 .reissuableRecovery,
                 .reissuableRecovery,
-                .token2Of2()
             ]
         )
-
+        
         // When
         sut.triggerVaccinationExpiryReissue()
-
+        
         // Then
         wait(for: [
             router.expectationShowReissue,

@@ -59,7 +59,12 @@ public extension Array where Element == ExtendedCBORWebToken {
     }
 
     private var vaccinationExpiryReissueCandidate: ExtendedCBORWebToken? {
-        filterExpiryReissueCandidates
+        guard let latestVaccination = sortLatest().firstVaccination?.vaccinationCertificate,
+              latestVaccination.willExpireInLessOrEqual28Days ||
+                latestVaccination.expiredForLessOrEqual90Days else {
+            return nil
+        }
+        return filterExpiryReissueCandidates
             .filter1of2IfPersonIsUnder18
             .first(where: \.vaccinationCertificate.isVaccination)
     }
