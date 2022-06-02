@@ -796,6 +796,45 @@ class CertificateDetailViewModelTests: XCTestCase {
             vaccinationRepo.replaceExpectation
         ], timeout: 1)
     }
+
+    func testRecoveryExpiryReissueCandidatesCount() {
+        // Given
+        configureCustomSut(
+            certificates: [
+                .reissuableRecovery,
+                .reissuableRecovery,
+                .reissuableVaccination,
+                .nonReissuableRecovery
+            ]
+        )
+
+        // When
+        let count = sut.recoveryExpiryReissueCandidatesCount
+
+        // Then
+        XCTAssertEqual(count, 2)
+    }
+
+    func testRecoveryExpiryReissueCandidatesCount_count_changed_after_refresh() {
+        // Given
+        configureCustomSut(
+            certificates: [
+                .reissuableRecovery,
+                .reissuableRecovery,
+                .reissuableVaccination,
+                .nonReissuableRecovery
+            ]
+        )
+        vaccinationRepo.certificates = []
+        sut.refreshCertsAndUpdateView()
+        wait(for: [delegate.viewModelDidUpdateExpectation], timeout: 1)
+
+        // When
+        let count = sut.recoveryExpiryReissueCandidatesCount
+
+        // Then
+        XCTAssertEqual(count, 0)
+    }
 }
 
 private extension ExtendedCBORWebToken {

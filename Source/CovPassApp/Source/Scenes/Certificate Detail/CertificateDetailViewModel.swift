@@ -285,9 +285,13 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
         return !alreadySeen
     }
 
-    lazy var recoveryExpiryReissueCandidatesCount = recoveryExpiryReissueTokens.count
+    var recoveryExpiryReissueCandidatesCount: Int {
+        recoveryExpiryReissueTokens.count
+    }
 
-    private lazy var recoveryExpiryReissueTokens = certificates.qualifiedCertificatesForRecoveryExpiryReissue
+    private var recoveryExpiryReissueTokens: [[ExtendedCBORWebToken]] {
+        certificates.qualifiedCertificatesForRecoveryExpiryReissue
+    }
 
     var boosterReissueNotificationTitle = Constants.Keys.Reissue.boosterHeadline
 

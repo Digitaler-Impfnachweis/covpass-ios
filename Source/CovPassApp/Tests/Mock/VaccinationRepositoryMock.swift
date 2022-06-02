@@ -16,12 +16,15 @@ public class VaccinationRepositoryMock: VaccinationRepositoryProtocol {
     let setExpiryAlertExpectation = XCTestExpectation(description: "setExpiryAlertExpectation")
     let setReissueAlreadySeen = XCTestExpectation(description: "setReissueAlreadySeen")
     let replaceExpectation = XCTestExpectation(description: "replaceExpectation")
+    let addExpectation = XCTestExpectation(description: "addExpectation")
+    let deleteExpectation = XCTestExpectation(description: "deleteExpectation")
     var lastUpdatedTrustList: Date?
     var certificates: [ExtendedCBORWebToken] = []
     var certPair: [CertificatePair] = []
     var shouldTrustListUpdate: Bool = true
     var saveError: Error?
     var receivedTokens = [ExtendedCBORWebToken]()
+    private(set) var receivedDeleteToken: ExtendedCBORWebToken?
     var deleteError: Error?
     var qrCodeData: String?
     
@@ -75,13 +78,16 @@ public class VaccinationRepositoryMock: VaccinationRepositoryProtocol {
 
     public func add(tokens: [ExtendedCBORWebToken]) -> Promise<Void> {
         receivedTokens = tokens
+        addExpectation.fulfill()
         if let error = saveError {
             return .init(error: error)
         }
         return .value
     }
 
-    public func delete(_: ExtendedCBORWebToken) -> Promise<Void> {
+    public func delete(_ token: ExtendedCBORWebToken) -> Promise<Void> {
+        receivedDeleteToken = token
+        deleteExpectation.fulfill()
         if let error = deleteError {
             return .init(error: error)
         }

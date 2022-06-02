@@ -51,7 +51,6 @@ struct ValidateCertificateUseCase {
                                                        certificate: token.vaccinationCertificate)
         let valid = validationResult?.contains(where: { $0.result != .passed }) == false
         
-        // exception https://dth01.ibmgcloud.net/jira/browse/BVC-3905
         if allowExceptions,
             token.vaccinationCertificate.isRecovery,
             validationResult?.failedResults.count == 1,

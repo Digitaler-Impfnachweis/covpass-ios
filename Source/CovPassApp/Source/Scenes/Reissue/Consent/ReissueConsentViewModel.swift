@@ -103,20 +103,37 @@ class ReissueConsentViewModel: ReissueConsentViewModelProtocol {
     
     // MARK: - Methods
 
-    
     func processAgree() {
+        switch context {
+        case .boosterRenewal:
+            renew()
+        case .certificateExtension:
+            extend()
+        }
+    }
+
+    private func renew() {
         showLoadingIndicator()
-            .then(reissue())
-            .then(save)
+            .then(reissueRepository.renew)
+            .then(save(renewedTokens:))
             .ensure { [weak self] in
                 self?.isLoading = false
             }
-            .done { [weak self] tokens in
-                self?.handle(tokens: tokens)
+            .done(handleDoneBoosterRenewal)
+            .catch(handle(reissueError:))
+    }
+
+    private func extend() {
+        showLoadingIndicator()
+            .then(reissueRepository.extend)
+            .then(save(extendedTokens:))
+            .ensure { [weak self] in
+                self?.isLoading = false
             }
-            .catch { [weak self] in
-                self?.handle(reissueError: $0)
+            .done { [weak self] _ in
+                self?.handleDoneExtendRenewal()
             }
+            .catch(handle(reissueError:))
     }
 
     private func showLoadingIndicator() -> Guarantee<[ExtendedCBORWebToken]> {
@@ -124,45 +141,30 @@ class ReissueConsentViewModel: ReissueConsentViewModelProtocol {
         delegate?.viewModelDidUpdate()
         return .value(tokens)
     }
-    
-    private func reissue() -> ([ExtendedCBORWebToken]) -> Promise<CertificateReissueRepositoryResponse> {
-        if context == .boosterRenewal {
-            return reissueRepository.renew
-        } else {
-            return reissueRepository.extend
-        }
-    }
-    
-    private func save(tokens: [ExtendedCBORWebToken]) -> Promise<[ExtendedCBORWebToken]> {
+
+    private func save(renewedTokens: [ExtendedCBORWebToken]) -> Promise<[ExtendedCBORWebToken]> {
         vaccinationRepository
-            .add(tokens: tokens)
-            .map { tokens }
+            .add(tokens: renewedTokens)
+            .map { renewedTokens }
     }
-    
-    private func handleDoneExtendRenewal() {
-        vaccinationRepository.delete(self.tokens.sortedByDn[0])
-            .done {
-                self.router.showGenericResultPage(resolver: self.resolver)
-            }.catch { [weak self] error in
-                self?.handle(reissueError: error)
-            }
-    }
-    
-    fileprivate func handleDoneBoosterRenewal(_ tokens: [ExtendedCBORWebToken]) {
-        router.showReissueResultPage(newTokens: tokens, oldTokens: self.tokens, resolver: resolver)
-    }
-    
-    fileprivate func extractedFunc() {
-        delegate?.viewModelDidUpdate()
-    }
-    
-    private func handle(tokens: [ExtendedCBORWebToken]) {
-        extractedFunc()
-        if context == .boosterRenewal {
-            handleDoneBoosterRenewal(tokens)
-        } else {
-            handleDoneExtendRenewal()
+
+    private func save(extendedTokens: [ExtendedCBORWebToken]) -> Promise<Void> {
+        guard let unextendedToken = tokens.first else {
+            return .init(error: ApplicationError.unknownError)
         }
+        return vaccinationRepository
+            .delete(unextendedToken)
+            .then { self.vaccinationRepository.add(tokens: extendedTokens) }
+    }
+
+    private func handleDoneExtendRenewal() {
+        delegate?.viewModelDidUpdate()
+        self.router.showGenericResultPage(resolver: self.resolver)
+    }
+    
+    private func handleDoneBoosterRenewal(_ tokens: [ExtendedCBORWebToken]) {
+        delegate?.viewModelDidUpdate()
+        router.showReissueResultPage(newTokens: tokens, oldTokens: self.tokens, resolver: resolver)
     }
 
     private func handle(reissueError: Error) {
