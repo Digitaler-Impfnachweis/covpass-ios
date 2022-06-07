@@ -153,6 +153,8 @@
 
 "certificates_start_screen_pop_up_app_reference_button" = "OK";
 
+"certificate_type_partial" = "Not fully vaccinated";
+
 "certificate_type_recovery" = "Recovery";
 
 "certificate_type_basic_immunisation" = "Basic immunisation";
@@ -683,27 +685,27 @@
 
 "accessibility_overview_certificates_label_favourites_button_not_active" = "Always display this person's certificates in first place: not active";
 
-"accessibility_overview_certificates_label_display_certificate" = "Display certificate";
+"accessibility_overview_certificates_label_display_certificate" = "Show certificate";
 
-"booster_vaccination_certificate_overview_action_button_title" = "Display current QR Code";
+"booster_vaccination_certificate_overview_action_button_title" = "Show certificates";
 
 "vaccination_certificate_overview_incomplete_title" = "Not fully vaccinated";
 
 "vaccination_certificate_overview_incomplete_message" = "You are not fully vaccinated. To use this QR code as proof of completed vaccination, you will need to add another vaccine dose.";
 
-"vaccination_certificate_detail_view_incomplete_action_button_title" = "Display current QR Code";
+"vaccination_certificate_detail_view_incomplete_action_button_title" = "Show certificates";
 
-"vaccination_certificate_overview_complete_from_title" = "Fully vaccinated as of %@";
+"vaccination_certificate_overview_complete_from_title" = "Basic immunisation";
 
 "vaccination_certificate_overview_complete_from_message" = "You are not yet considered fully vaccinated. Full vaccination takes effect 14 days after the final dose.";
 
-"vaccination_certificate_overview_complete_title" = "Fully vaccinated";
+"vaccination_certificate_overview_complete_title" = "Basic immunisation";
 
 "certificates_overview_qr_scan_hint" = "This QR code can be reliably verified with the CovPassCheck app.";
 
 "vaccination_certificate_overview_complete_message" = "Show this QR code when needed. Be ready to show ID when your QR code is checked.";
 
-"vaccination_certificate_overview_complete_action_button_title" = "Display current QR Code";
+"vaccination_certificate_overview_complete_action_button_title" = "Show certificates";
 
 "vaccination_certificate_overview_booster_vaccination_notification_icon_new" = "New";
 
@@ -713,21 +715,21 @@
 
 "vaccination_certificate_overview_faqlink" = "Please find more information in our #Frequently Asked Questions::https://www.digitaler-impfnachweis-app.de/en/faq#.";
 
-"test_certificate_overview_title" = "Negative rapid antigen test from %@";
+"test_certificate_overview_title" = "Negative rapid antigen test";
 
 "test_certificate_overview_message" = "Show this QR code when needed. Be ready to show ID when your QR code is checked.";
 
-"test_certificate_overview_action_button_title" = "Display current QR Code";
+"test_certificate_overview_action_button_title" = "Show certificates";
 
-"pcr_test_certificate_overview_title" = "Negative PCR test from %@";
+"pcr_test_certificate_overview_title" = "Negative PCR test";
 
 "pcr_test_certificate_overview_message" = "Show this QR code when needed. Be ready to show ID when your QR code is checked.";
 
-"pcr_test_certificate_overview_action_button_title" = "Display current QR Code";
+"pcr_test_certificate_overview_action_button_title" = "Show certificates";
 
-"recovery_certificate_overview_valid_until_title" = "Recovery at most valid until %@";
+"recovery_certificate_overview_valid_until_title" = "Recovery";
 
-"recovery_certificate_overview_valid_from_title" = "Recovery valid from %@";
+"recovery_certificate_overview_valid_from_title" = "From %@";
 
 "recovery_certificate_overview_message" = "Show this QR code when needed. Be ready to show ID when your QR code is checked.";
 
@@ -1537,7 +1539,7 @@
 
 "renewal_expiry_consent_box_item_1" = "The app transmits the aforementioned certificates to the RKI for verification.";
 
-"renewal_expiry_consent_box_item_1" = "The RKI checks the certificates, issues a renewed certificate and transmits it to your app.";
+"renewal_expiry_consent_box_item_2" = "The RKI checks the certificates, issues a renewed certificate and transmits it to your app.";
 
 "renewal_expiry_consent_list_item_1" = "The renewal of certificates is voluntary and free of charge.";
 

@@ -153,11 +153,13 @@
 
 "certificates_start_screen_pop_up_app_reference_button" = "OK";
 
+"certificate_type_partial" = "Unvollständiger Impfschutz";
+
 "certificate_type_recovery" = "Genesung";
 
 "certificate_type_basic_immunisation" = "Grundimmunisierung";
 
-"certificate_type_booster" = "Auffrischungsimpfung";
+"certificate_type_booster" = "Auffrischimpfung";
 
 "certificate_type_rapidtest" = "Antigen-Schnelltest";
 
@@ -685,25 +687,25 @@
 
 "accessibility_overview_certificates_label_display_certificate" = "Zertifikat anzeigen";
 
-"booster_vaccination_certificate_overview_action_button_title" = "Aktuellen QR-Code anzeigen";
+"booster_vaccination_certificate_overview_action_button_title" = "Nachweise anzeigen";
 
 "vaccination_certificate_overview_incomplete_title" = "Unvollständiger Impfschutz";
 
 "vaccination_certificate_overview_incomplete_message" = "Ihr Impfschutz ist nicht vollständig. Um den QR-Code als Nachweis für einen kompletten Impfschutz vorzeigen zu können, fügen Sie bitte eine weitere Impfung hinzu.";
 
-"vaccination_certificate_detail_view_incomplete_action_button_title" = "Aktuellen QR-Code anzeigen";
+"vaccination_certificate_detail_view_incomplete_action_button_title" = "Nachweise anzeigen";
 
-"vaccination_certificate_overview_complete_from_title" = "Vollständiger Impfschutz ab %@";
+"vaccination_certificate_overview_complete_from_title" = "Grundimmunisierung";
 
 "vaccination_certificate_overview_complete_from_message" = "Ihr Impfschutz ist noch nicht vollständig. Der Impfschutz ist erst 14 Tage nach der letzten Impfung vollständig.";
 
-"vaccination_certificate_overview_complete_title" = "Vollständiger Impfschutz";
+"vaccination_certificate_overview_complete_title" = "Grundimmunisierung";
 
 "certificates_overview_qr_scan_hint" = "Dieser QR-Code lässt sich verlässlich mit der CovPassCheck-App überprüfen.";
 
 "vaccination_certificate_overview_complete_message" = "Zeigen Sie bei Bedarf den QR-Code vor. Halten Sie zudem ein Ausweisdokument bei der Überprüfung bereit.";
 
-"vaccination_certificate_overview_complete_action_button_title" = "Aktuellen QR-Code anzeigen";
+"vaccination_certificate_overview_complete_action_button_title" = "Nachweise anzeigen";
 
 "vaccination_certificate_overview_booster_vaccination_notification_icon_new" = "Neu";
 
@@ -713,21 +715,21 @@
 
 "vaccination_certificate_overview_faqlink" = "Mehr Informationen finden Sie in unseren #Häufigen Fragen und Antworten::https://www.digitaler-impfnachweis-app.de/faq#.";
 
-"test_certificate_overview_title" = "Negativer Antigen-Schnelltest vom %@";
+"test_certificate_overview_title" = "Negativer Antigen-Schnelltest";
 
 "test_certificate_overview_message" = "Zeigen Sie bei Bedarf den QR-Code vor. Halten Sie zudem ein Ausweisdokument bei der Überprüfung bereit.";
 
-"test_certificate_overview_action_button_title" = "Aktuellen QR-Code anzeigen";
+"test_certificate_overview_action_button_title" = "Nachweise anzeigen";
 
-"pcr_test_certificate_overview_title" = "Negativer PCR-Test vom %@";
+"pcr_test_certificate_overview_title" = "Negativer PCR-Test";
 
 "pcr_test_certificate_overview_message" = "Zeigen Sie bei Bedarf den QR-Code vor. Halten Sie zudem ein Ausweisdokument bei der Überprüfung bereit.";
 
-"pcr_test_certificate_overview_action_button_title" = "Aktuellen QR-Code anzeigen";
+"pcr_test_certificate_overview_action_button_title" = "Nachweise anzeigen";
 
-"recovery_certificate_overview_valid_until_title" = "Genesung höchstens gültig bis %@";
+"recovery_certificate_overview_valid_until_title" = "Genesung";
 
-"recovery_certificate_overview_valid_from_title" = "Genesung gültig ab %@";
+"recovery_certificate_overview_valid_from_title" = "Ab %@";
 
 "recovery_certificate_overview_message" = "Zeigen Sie bei Bedarf den QR-Code vor. Halten Sie zudem ein Ausweisdokument bei der Überprüfung bereit.";
 
@@ -1537,7 +1539,7 @@
 
 "renewal_expiry_consent_box_item_1" = "Die App übermittelt die genannten Zertifikate zur Überprüfung an das RKI.";
 
-"renewal_expiry_consent_box_item_1" = "Das RKI überprüft die Zertifikate, stellt ein erneuertes Zertifikat aus und übermittelt dieses an Ihre App.";
+"renewal_expiry_consent_box_item_2" = "Das RKI überprüft die Zertifikate, stellt ein erneuertes Zertifikat aus und übermittelt dieses an Ihre App.";
 
 "renewal_expiry_consent_list_item_1" = "Die Erneuerung der Zertifikate ist freiwillig und kostenlos.";
 
