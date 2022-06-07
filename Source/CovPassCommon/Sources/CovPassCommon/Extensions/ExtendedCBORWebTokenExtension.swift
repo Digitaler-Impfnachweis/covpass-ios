@@ -40,4 +40,42 @@ public extension ExtendedCBORWebToken {
     var isNotRevoked: Bool { !isRevoked }
 
     var isNotExpired: Bool { !vaccinationCertificate.isExpired }
+    
+    func sameDateVaccination(for token: ExtendedCBORWebToken) -> Bool {
+        guard let dt1 = firstVaccination?.dt else {
+            return false
+        }
+        guard let dt2 = token.firstVaccination?.dt else {
+            return false
+        }
+        return dt1.daysSince(dt2) == 0
+    }
+    
+    func sameRecoveryTestDate(for token: ExtendedCBORWebToken) -> Bool {
+        guard let fr1 = firstRecovery?.fr else {
+            return false
+        }
+        guard let fr2 = token.firstRecovery?.fr else {
+            return false
+        }
+        return fr1.daysSince(fr2) == 0
+    }
+    
+    func issuedBefore(for token: ExtendedCBORWebToken) -> Bool {
+        guard let iat1 = vaccinationCertificate.iat else {
+            return false
+        }
+        guard let iat2 = token.vaccinationCertificate.iat else {
+            return false
+        }
+        return iat1 < iat2
+    }
+    
+    func isVaccinatedOnSameDateAndIsIssuedBefore(_ token: ExtendedCBORWebToken) -> Bool {
+        sameDateVaccination(for: token) && issuedBefore(for: token)
+    }
+    
+    func isTestedForRecoveryOnSameDateAndIsIssuedBefore(_ token: ExtendedCBORWebToken) -> Bool {
+        sameRecoveryTestDate(for: token) && issuedBefore(for: token)
+    }
 }

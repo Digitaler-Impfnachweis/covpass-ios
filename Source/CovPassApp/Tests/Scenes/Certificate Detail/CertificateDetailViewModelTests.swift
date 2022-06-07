@@ -744,7 +744,7 @@ class CertificateDetailViewModelTests: XCTestCase {
             delegate.viewModelDidUpdateExpectation
         ], timeout: 1)
         let tokens = router.receivedReissueTokens
-        XCTAssertEqual(tokens.count, 2)
+        XCTAssertEqual(tokens.count, 1)
     }
 
     func testTriggerRecoveryExpiryReissue() throws {
@@ -771,7 +771,7 @@ class CertificateDetailViewModelTests: XCTestCase {
             delegate.viewModelDidUpdateExpectation
         ], timeout: 1)
         let tokens = router.receivedReissueTokens
-        XCTAssertEqual(tokens.count, 5)
+        XCTAssertEqual(tokens.count, 3)
     }
 
     func testMarkExpiryReissueCandidatesAsSeen() {
@@ -783,8 +783,7 @@ class CertificateDetailViewModelTests: XCTestCase {
                 .reissuableRecovery,
                 .reissuableVaccination,
                 .reissuableVaccination,
-                .nonReissuableVaccination,
-                .nonReissuableRecovery
+                .nonReissuableVaccination
             ]
         )
 
@@ -796,8 +795,25 @@ class CertificateDetailViewModelTests: XCTestCase {
             vaccinationRepo.replaceExpectation
         ], timeout: 1)
     }
-
+    
     func testRecoveryExpiryReissueCandidatesCount() {
+        // Given
+        configureCustomSut(
+            certificates: [
+                .reissuableRecovery,
+                .reissuableRecovery,
+                .reissuableVaccination,
+            ]
+        )
+
+        // When
+        let count = sut.recoveryExpiryReissueCandidatesCount
+
+        // Then
+        XCTAssertEqual(count, 1)
+    }
+    
+    func testRecoveryExpiryReissueCandidatesCount_withNonReissuable() {
         // Given
         configureCustomSut(
             certificates: [
@@ -812,7 +828,7 @@ class CertificateDetailViewModelTests: XCTestCase {
         let count = sut.recoveryExpiryReissueCandidatesCount
 
         // Then
-        XCTAssertEqual(count, 2)
+        XCTAssertEqual(count, 0)
     }
 
     func testRecoveryExpiryReissueCandidatesCount_count_changed_after_refresh() {

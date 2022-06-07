@@ -79,7 +79,6 @@ class ReissueConsentViewModel: ReissueConsentViewModelProtocol {
         self.decoder = decoder
         self.router = router
         self.resolver = resolver
-        self.certItems = tokens.sortedByDn.compactMap{ $0.certItem(active: true) }
         self.titleText = context == .boosterRenewal ? Constants.Keys.title : Constants.Keys.titleExpiry
         self.descriptionText = Constants.Keys.description.styledAs(.body)
         self.hintText = Constants.Keys.hintText.styledAs(.body)
@@ -89,8 +88,10 @@ class ReissueConsentViewModel: ReissueConsentViewModelProtocol {
             ], spacing: 12)
         
         if context == .boosterRenewal {
+            self.certItems = tokens.sortedByDn.compactMap{ $0.certItem(active: true) }
             self.hintText = hintText.appendBullets([Constants.Keys.hintBulletPoint3.styledAs(.body)])
         } else {
+            self.certItems = tokens.compactMap{ $0.certItem(active: true) }
             self.descriptionText = NSAttributedString.toBullets([
                 Constants.Keys.descriptionBullet1.styledAs(.body),
                 Constants.Keys.descriptionBullet2.styledAs(.body),

@@ -290,7 +290,7 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
     }
 
     private var recoveryExpiryReissueTokens: [[ExtendedCBORWebToken]] {
-        certificates.qualifiedCertificatesForRecoveryExpiryReissue
+        certificates.cleanDuplicates.qualifiedCertificatesForRecoveryExpiryReissue
     }
 
     var boosterReissueNotificationTitle = Constants.Keys.Reissue.boosterHeadline
@@ -408,7 +408,7 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
         for certificates: [ExtendedCBORWebToken],
         context: ReissueContext
     ) {
-        router.showReissue(for: certificates, context: context)
+        router.showReissue(for: certificates.cleanDuplicates, context: context)
             .ensure {
                 self.refreshCertsAndUpdateView()
             }

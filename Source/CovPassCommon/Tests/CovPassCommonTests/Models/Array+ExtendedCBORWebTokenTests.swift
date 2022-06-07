@@ -1179,7 +1179,7 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
         // Then
         XCTAssertTrue(alreadySeen)
     }
-
+    
     func testVaccinationExpiryReissueNewBadgeAlreadySeen_not_already_seen() {
         var cborWebToken = CBORWebToken.mockVaccinationCertificate
         cborWebToken.exp = .init(timeIntervalSinceNow: -60)
@@ -1191,6 +1191,116 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
 
         // Then
         XCTAssertFalse(alreadySeen)
+    }
+    
+    func testRemoveDuplicates() throws {
+        
+        // GIVEN about Vaccination -> later should only stay vaccinationToken3 with latest issued at date and vaccinationToken4
+        let vaccinationTokenDt = try XCTUnwrap(DateUtils.parseDate("2021-04-26T15:05:00"))
+        let vaccinationTokenDt2 = try XCTUnwrap(DateUtils.parseDate("2021-05-26T15:05:00"))
+        let vaccinationToken1Iat = try XCTUnwrap(DateUtils.parseDate("2021-04-28T15:05:00"))
+        let vaccinationToken2Iat = try XCTUnwrap(DateUtils.parseDate("2021-04-30T15:05:00"))
+        let vaccinationToken3Iat = try XCTUnwrap(DateUtils.parseDate("2022-04-30T15:05:00"))
+
+        var vaccinationToken1 = CBORWebToken.mockVaccinationCertificate.extended(vaccinationQRCodeData: "1")
+        vaccinationToken1.vaccinationCertificate.iat = vaccinationToken1Iat
+        vaccinationToken1.vaccinationCertificate.hcert.dgc.v!.first!.dt = vaccinationTokenDt
+
+        var vaccinationToken2 = CBORWebToken.mockVaccinationCertificate.extended(vaccinationQRCodeData: "2")
+        vaccinationToken2.vaccinationCertificate.iat = vaccinationToken2Iat
+        vaccinationToken2.vaccinationCertificate.hcert.dgc.v!.first!.dt = vaccinationTokenDt
+        
+        var vaccinationToken3 = CBORWebToken.mockVaccinationCertificate.extended(vaccinationQRCodeData: "3")
+        vaccinationToken3.vaccinationCertificate.iat = vaccinationToken3Iat
+        vaccinationToken3.vaccinationCertificate.hcert.dgc.v!.first!.dt = vaccinationTokenDt
+        
+        var vaccinationToken4 = CBORWebToken.mockVaccinationCertificate.extended(vaccinationQRCodeData: "4")
+        vaccinationToken4.vaccinationCertificate.iat = vaccinationToken3Iat
+        vaccinationToken4.vaccinationCertificate.hcert.dgc.v!.first!.dt = vaccinationTokenDt2
+        
+        
+        // GIVEN about Recovery -> later should only stay recoveryToken3 with latest issued at date and recoveryToken4
+        let recoveryTokenFr = try XCTUnwrap(DateUtils.parseDate("2022-05-01T15:05:00"))
+        let recoveryTokenFr2 = try XCTUnwrap(DateUtils.parseDate("2022-05-02T15:05:00"))
+        let recoveryToken1Iat = try XCTUnwrap(DateUtils.parseDate("2022-05-02T15:05:00"))
+        let recoveryToken2Iat = try XCTUnwrap(DateUtils.parseDate("2022-05-03T15:05:00"))
+        let recoveryToken3Iat = try XCTUnwrap(DateUtils.parseDate("2022-05-04T15:05:00"))
+        
+        var recoveryToken1 = CBORWebToken.mockRecoveryCertificate.extended(vaccinationQRCodeData: "5")
+        recoveryToken1.vaccinationCertificate.iat = recoveryToken1Iat
+        recoveryToken1.vaccinationCertificate.hcert.dgc.r!.first!.fr = recoveryTokenFr
+        
+        var recoveryToken2 = CBORWebToken.mockRecoveryCertificate.extended(vaccinationQRCodeData: "6")
+        recoveryToken2.vaccinationCertificate.iat = recoveryToken2Iat
+        recoveryToken2.vaccinationCertificate.hcert.dgc.r!.first!.fr = recoveryTokenFr
+        
+        var recoveryToken3 = CBORWebToken.mockRecoveryCertificate.extended(vaccinationQRCodeData: "7")
+        recoveryToken3.vaccinationCertificate.iat = recoveryToken3Iat
+        recoveryToken3.vaccinationCertificate.hcert.dgc.r!.first!.fr = recoveryTokenFr
+        
+        var recoveryToken4 = CBORWebToken.mockRecoveryCertificate.extended(vaccinationQRCodeData: "8")
+        recoveryToken4.vaccinationCertificate.iat = recoveryToken3Iat
+        recoveryToken4.vaccinationCertificate.hcert.dgc.r!.first!.fr = recoveryTokenFr2
+        
+        var recoveryToken5 = CBORWebToken.mockRecoveryCertificate.extended(vaccinationQRCodeData: "9")
+        recoveryToken5.vaccinationCertificate.iat = vaccinationToken3Iat
+        recoveryToken5.vaccinationCertificate.hcert.dgc.r!.first!.fr = vaccinationTokenDt2
+       
+         
+         // GIVEN about Test -> later all test should stay in array no rules
+         let testTokenSc = try XCTUnwrap(DateUtils.parseDate("2022-05-01T15:05:00"))
+         let testToken1Iat = try XCTUnwrap(DateUtils.parseDate("2022-07-02T15:05:00"))
+         
+         var testToken1 = CBORWebToken.mockTestCertificate.extended(vaccinationQRCodeData: "10")
+         testToken1.vaccinationCertificate.iat = testToken1Iat
+         testToken1.vaccinationCertificate.hcert.dgc.t!.first!.sc = testTokenSc
+
+         var testToken2 = CBORWebToken.mockTestCertificate.extended(vaccinationQRCodeData: "11")
+         testToken2.vaccinationCertificate.iat = testToken1Iat
+         testToken2.vaccinationCertificate.hcert.dgc.t!.first!.sc = testTokenSc
+
+         var testToken3 = CBORWebToken.mockTestCertificate.extended(vaccinationQRCodeData: "12")
+         testToken3.vaccinationCertificate.iat = testToken1Iat
+         testToken3.vaccinationCertificate.hcert.dgc.t!.first!.sc = testTokenSc
+
+        let sut: [ExtendedCBORWebToken] = [vaccinationToken1,
+                                           recoveryToken2,
+                                           recoveryToken3,
+                                           vaccinationToken2,
+                                           testToken1,
+                                           testToken2,
+                                           recoveryToken5,
+                                           testToken3,
+                                           vaccinationToken3,
+                                           recoveryToken4,
+                                           recoveryToken1,
+                                           vaccinationToken4]
+
+        // WHEN
+        let cleanSut = sut.cleanDuplicates
+
+        // THEN
+        let vaccinationCert1 = try XCTUnwrap(cleanSut[4].vaccinationCertificate)
+        let vaccination1 = try XCTUnwrap(vaccinationCert1.hcert.dgc.v?.first)
+        let vaccinationCert2 = try XCTUnwrap(cleanSut[6].vaccinationCertificate)
+        let vaccination2 = try XCTUnwrap(vaccinationCert2.hcert.dgc.v?.first)
+        let recoveryCert1 = try XCTUnwrap(cleanSut[0].vaccinationCertificate)
+        let recovery1 = try XCTUnwrap(recoveryCert1.hcert.dgc.r?.first)
+        let recoveryCert2 = try XCTUnwrap(cleanSut[5].vaccinationCertificate)
+        let recovery2 = try XCTUnwrap(recoveryCert2.hcert.dgc.r?.first)
+        XCTAssertEqual(cleanSut.count, 7)
+        XCTAssertEqual(vaccinationCert1.certType, .vaccination)
+        XCTAssertEqual(vaccinationCert1.iat, vaccinationToken3Iat)
+        XCTAssertEqual(vaccination1.dt, vaccinationTokenDt)
+        XCTAssertEqual(vaccinationCert2.certType, .vaccination)
+        XCTAssertEqual(vaccinationCert2.iat, vaccinationToken3Iat)
+        XCTAssertEqual(vaccination2.dt, vaccinationTokenDt2)
+        XCTAssertEqual(recoveryCert1.certType, .recovery)
+        XCTAssertEqual(recoveryCert1.iat, recoveryToken3Iat)
+        XCTAssertEqual(recovery1.fr, recoveryTokenFr)
+        XCTAssertEqual(recoveryCert2.certType, .recovery)
+        XCTAssertEqual(recoveryCert2.iat, recoveryToken3Iat)
+        XCTAssertEqual(recovery2.fr, recoveryTokenFr2)
     }
 }
 

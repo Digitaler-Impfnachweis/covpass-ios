@@ -126,6 +126,73 @@ public extension Array where Element == ExtendedCBORWebToken {
         }.filterIssuedByGerman
     }
     
+    private var cleanVaccinationDuplicates: Self {
+        var cleanTokens = [ExtendedCBORWebToken]()
+        for token in self.filterVaccinations {
+            if cleanTokens.containsSameVaccinationDateAndIsIssuedBefore(token),
+                let tokenIndex = cleanTokens.firstIndex(where: {$0.isVaccinatedOnSameDateAndIsIssuedBefore(token)}) {
+                cleanTokens[tokenIndex] = token
+            } else if cleanTokens.notContainSameVaccinationDate(like: token) {
+                cleanTokens.append(token)
+            }
+        }
+        return cleanTokens
+    }
+    
+    private var cleanRecoveryDuplicates: Self {
+        var cleanTokens = [ExtendedCBORWebToken]()
+        for token in self.filterRecoveries {
+            if cleanTokens.containsSameRecoveryTestDateAndIsIssuedBefore(token),
+               let tokenIndex = cleanTokens.firstIndex(where: {$0.isTestedForRecoveryOnSameDateAndIsIssuedBefore(token)}) {
+                cleanTokens[tokenIndex] = token
+            } else if cleanTokens.notContainSameRecoveryTestDate(like: token) {
+                cleanTokens.append(token)
+            }
+        }
+        return cleanTokens
+    }
+    
+    private var cleanDateDuplicates: Self {
+        var cleanTokens = [ExtendedCBORWebToken]()
+        for token in self {
+            if cleanTokens.containsSameDate(like: token) {
+                if token.vaccinationCertificate.certType == .vaccination,
+                    let tokenIndex = cleanTokens.firstIndex(where: {$0.vaccinationCertificate.dtFrOrSc().daysSince(token.vaccinationCertificate.dtFrOrSc()) == 0}) {
+                    cleanTokens[tokenIndex] = token
+                }
+            } else {
+                cleanTokens.append(token)
+            }
+        }
+        return cleanTokens
+    }
+    
+    var cleanDuplicates: Self {
+        let certs = cleanVaccinationDuplicates + cleanRecoveryDuplicates
+        let cleanedList = certs.cleanDateDuplicates + self.filterTests
+        return filter { token in cleanedList.contains { token == $0 } }
+    }
+    
+    func notContainSameVaccinationDate(like token: ExtendedCBORWebToken) -> Bool {
+        !contains(where:{$0.sameDateVaccination(for: token)})
+    }
+    
+    func containsSameVaccinationDateAndIsIssuedBefore(_ token: ExtendedCBORWebToken) -> Bool {
+        contains(where: {$0.isVaccinatedOnSameDateAndIsIssuedBefore(token)})
+    }
+    
+    func notContainSameRecoveryTestDate(like token: ExtendedCBORWebToken) -> Bool {
+        !contains(where:{$0.sameRecoveryTestDate(for: token)})
+    }
+    
+    func containsSameRecoveryTestDateAndIsIssuedBefore(_ token: ExtendedCBORWebToken) -> Bool {
+        contains(where: {$0.isTestedForRecoveryOnSameDateAndIsIssuedBefore(token)})
+    }
+    
+    func containsSameDate(like token: ExtendedCBORWebToken) -> Bool {
+        contains(where: {$0.vaccinationCertificate.dtFrOrSc().daysSince(token.vaccinationCertificate.dtFrOrSc()) == 0 })
+    }
+
     var tokensOfVaccinationWithDoubleDoseCompleteFromGermany: [ExtendedCBORWebToken] {
         filter {
             guard let vaccinations = $0.vaccinations else {
@@ -282,6 +349,10 @@ public extension Array where Element == ExtendedCBORWebToken {
     
     var filterRecoveries: [ExtendedCBORWebToken] {
         filter { $0.recoveries != nil }
+    }
+    
+    var filterTests: [ExtendedCBORWebToken] {
+        filter { $0.tests != nil }
     }
     
     var firstVaccination: ExtendedCBORWebToken? { first(where:\.vaccinationCertificate.isVaccination) }
@@ -480,6 +551,8 @@ public extension Array where Element == ExtendedCBORWebToken {
     
     var sortLatestNotFullImmunization: [ExtendedCBORWebToken] {
         filterNotFullImmunization
+            .sortByIssuedAtTime
+            .sortByVaccinationDate
     }
     
     var sortLatestRecoveryWhoseDateNotAnyMoreValidSortByFirstPositiveResultDate: [ExtendedCBORWebToken] {
