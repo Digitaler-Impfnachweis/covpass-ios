@@ -735,13 +735,13 @@
 
 "certificates_overview_expired_title" = "Zertifikat abgelaufen";
 
-"certificates_overview_expired_message" = "Sie können Ihre wichtigsten Zertifikate bequem in der CovPass-App austauschen. Nutzen Sie dafür die Erneuerungsfunktion in der Übersicht Ihrer Zertifikate oder scannen Sie ein neu ausgestelltes Zertifikat ein. Sofern ein aktuelleres Impfzertifikat vorliegt, brauchen Sie die vorherigen Impfzertifikate nicht erneuern.";
+"certificates_overview_expired_message" = "Das Ablaufdatum Ihres neuesten Zertifikats wurde überschritten. Sie können dieses Zertifikat bequem in der CovPass-App austauschen. Vorherige Zertifikate werden nicht erneuert. Nutzen Sie dafür die Erneuerungsfunktion in der Übersicht Ihrer Zertifikate oder scannen Sie ein neu ausgestelltes Zertifikat ein.";
 
 "certificates_overview_expired_action_button_title" = "Neues Zertifikat hinzufügen";
 
 "certificates_overview_soon_expiring_title" = "Aktuelles Zertifikat läuft am %@ um %@ ab";
 
-"certificates_overview_soon_expiring_subtitle" = "Sie können das Zertifikat bequem in der CovPass-App austauschen. Nutzen Sie dafür die Erneuerungsfunktion in der Übersicht Ihrer Zertifikate oder scannen Sie ein neu ausgestelltes Zertifikat ein.";
+"certificates_overview_soon_expiring_subtitle" = "Sie können Ihr neuestes Zertifikat bequem in der CovPass-App austauschen. Vorherige Zertifikate werden nicht erneuert. Nutzen Sie dafür die Erneuerungsfunktion in der Übersicht Ihrer Zertifikate oder scannen Sie ein neu ausgestelltes Zertifikat ein.";
 
 "certificates_overview_invalid_title" = "Zertifikat ungültig";
 
@@ -1063,7 +1063,7 @@
 
 "certificate_expires_detail_view_note_title" = "Zertifikat läuft am %@ um %@ ab";
 
-"certificate_expires_detail_view_note_message" = "Sie können das Zertifikat bequem in der CovPass-App austauschen. Nutzen Sie dafür die Erneuerungsfunktion in der Übersicht Ihrer Zertifikate oder scannen Sie ein neu ausgestelltes Zertifikat ein.";
+"certificate_expires_detail_view_note_message" = "Wenn es sich hierbei um Ihr neuestes Zertifikat handelt, können Sie es auf der Übersicht Ihrer Zertifikate erneuern. Andernfalls müssen Sie nichts tun, da in Ihrem neuesten Zertifikat alle notwendigen Informationen für eine Prüfung enthalten sind.";
 
 "certificate_invalid_detail_view_note_title" = "Zertifikat ungültig";
 
@@ -1071,7 +1071,7 @@
 
 "certificate_expired_detail_view_note_title" = "Zertifikat abgelaufen";
 
-"certificate_expired_detail_view_note_message" = "Sie können Ihre wichtigsten Zertifikate bequem in der CovPass-App austauschen. Nutzen Sie dafür die Erneuerungsfunktion in der Übersicht Ihrer Zertifikate oder scannen Sie ein neu ausgestelltes Zertifikat ein. Sofern ein aktuelleres Impfzertifikat vorliegt, brauchen Sie die vorherigen Impfzertifikate nicht erneuern.";
+"certificate_expired_detail_view_note_message" = "Wenn es sich hierbei um Ihr neuestes Zertifikat handelt, können Sie es auf der Übersicht Ihrer Zertifikate erneuern. Andernfalls müssen Sie nichts tun, da in Ihrem neuesten Zertifikat alle notwendigen Informationen für eine Prüfung enthalten sind.";
 
 
 /********** print certificate **********/
@@ -1527,11 +1527,11 @@
 
 "renewal_expiry_notification_title" = "Erneuerung notwendig";
 
-"renewal_expiry_notification_copy_vaccination" = "Die technische Laufzeit Ihres Impfzertifikats läuft bald aus. Erneuern Sie das Zertifikat, um es weiterhin nutzen zu können.";
+"renewal_expiry_notification_copy_vaccination" = "Die technische Laufzeit Ihres Impfzertifikats läuft bald ab oder ist bereits abgelaufen. Erneuern Sie das Zertifikat, um es weiterhin nutzen zu können.";
 
 "renewal_expiry_notification_button_vaccination" = "Impfzertifikat erneuern";
 
-"renewal_expiry_notification_copy_recovery" = "Die technische Laufzeit Ihres Genesenenzertifikats läuft bald aus. Erneuern Sie das Zertifikat, um es weiterhin nutzen zu können.";
+"renewal_expiry_notification_copy_recovery" = "Die technische Laufzeit Ihres Genesenenzertifikats läuft bald ab oder ist bereits abgelaufen. Erneuern Sie das Zertifikat, um es weiterhin nutzen zu können.";
 
 "renewal_expiry_notification_button_recovery" = "Genesenenzertifikat erneuern";
 

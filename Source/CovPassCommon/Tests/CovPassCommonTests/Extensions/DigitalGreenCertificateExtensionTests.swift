@@ -27,40 +27,6 @@ class DigitalGreenCertificateExtensionTests: XCTestCase {
         sut = nil
     }
 
-    func testPersonIsYoungerThan18_is_younger() {
-        // Given
-        let components = DateComponents(year: -18, second: 1)
-        let dob = Calendar.current.date(byAdding: components, to: Date())
-        sut.dob = dob
-
-        // When
-        let isYounger = sut.personIsYoungerThan18
-
-        // Then
-        XCTAssertTrue(isYounger)
-    }
-
-    func testPersonIsYoungerThan18_dob_is_nil() {
-        // When
-        let isYounger = sut.personIsYoungerThan18
-
-        // Then
-        XCTAssertFalse(isYounger)
-    }
-
-    func testPersonIsYoungerThan18_is_18() throws {
-        // Given
-        let components = DateComponents(year: -18)
-        let dob = Calendar.current.date(byAdding: components, to: Date())
-        sut.dob = dob
-
-        // When
-        let isYounger = sut.personIsYoungerThan18
-
-        // Then
-        XCTAssertFalse(isYounger)
-    }
-
     func testIs1of2Vaccination_no_vaccination() {
         // When
         let is1Of2 = sut.is1of2Vaccination

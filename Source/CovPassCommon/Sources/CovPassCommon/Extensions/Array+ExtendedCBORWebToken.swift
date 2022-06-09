@@ -65,7 +65,6 @@ public extension Array where Element == ExtendedCBORWebToken {
             return nil
         }
         return filterExpiryReissueCandidates
-            .filter1of2IfPersonIsUnder18
             .first(where: \.vaccinationCertificate.isVaccination)
     }
 
@@ -77,13 +76,6 @@ public extension Array where Element == ExtendedCBORWebToken {
         .filterIssuedByGerman
         .filter { !$0.isRevoked }
         .filter { !$0.vaccinationCertificate.isTest }
-    }
-
-    private var filter1of2IfPersonIsUnder18: Self {
-        filter { token in
-            let dgc = token.vaccinationCertificate.hcert.dgc
-            return (dgc.is1of2Vaccination && dgc.personIsYoungerThan18) || !dgc.is1of2Vaccination
-        }
     }
 
     private func sixCertificatesExcludingTests(from token : ExtendedCBORWebToken) -> Self {
