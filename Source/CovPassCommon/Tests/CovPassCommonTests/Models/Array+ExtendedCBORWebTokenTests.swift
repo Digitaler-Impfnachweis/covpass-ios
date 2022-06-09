@@ -831,41 +831,6 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
         XCTAssertTrue(tokens.isEmpty)
     }
 
-    func testQualifiedCertificatesForVaccinationExpiryReissue_1_out_of_2_person_is_older_than_18() {
-        // Given
-        var cborWebToken = CBORWebToken.mockVaccinationCertificate.doseNumber(1)
-        cborWebToken.exp = .init(timeIntervalSinceNow: -60)
-        cborWebToken.hcert.dgc.dob = .init(timeIntervalSinceReferenceDate: 0)
-        let token = cborWebToken.extended()
-        let sut: [ExtendedCBORWebToken] = [
-            token
-        ]
-
-        // When
-        let tokens = sut.qualifiedCertificatesForVaccinationExpiryReissue
-
-        // Then
-        XCTAssertTrue(tokens.isEmpty)
-    }
-
-    func testQualifiedCertificatesForVaccinationExpiryReissue_1_out_of_2_person_is_younger_than_18() {
-        // Given
-        var cborWebToken = CBORWebToken.mockVaccinationCertificate.doseNumber(1)
-        cborWebToken.exp = .init(timeIntervalSinceNow: -60)
-        cborWebToken.hcert.dgc.dob = .init(timeIntervalSinceNow: -1000)
-        let token = cborWebToken.extended(vaccinationQRCodeData: "1")
-        let sut: [ExtendedCBORWebToken] = [
-            token
-        ]
-
-        // When
-        let tokens = sut.qualifiedCertificatesForVaccinationExpiryReissue
-
-        // Then
-        XCTAssertEqual(tokens.count, 1)
-        XCTAssertEqual(tokens.first, token)
-    }
-
     func testQualifiedCertificatesForVaccinationExpiryReissue_vaccination_is_revoked() {
         // Given
         var cborWebToken = CBORWebToken.mockVaccinationCertificate

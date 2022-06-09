@@ -662,7 +662,7 @@ class VaccinationRepositoryTests: XCTestCase {
         let person1Cert1 = CertificateMock.validCertificate3
         let person2Cert1 = CertificateMock.validCertificate4
         let person2Cert2 = CertificateMock.validCertificate6
-        let person3Cert1 = CertificateMock.validCertificate5
+        let person3Cert1 = CertificateMock.validCertificate2
 
         do {
             _ = try sut.scanCertificate(person1Cert1, isCountRuleEnabled: false, expirationRuleIsActive: true).wait()
