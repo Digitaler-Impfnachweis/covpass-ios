@@ -23,4 +23,12 @@ public extension XCConfiguration {
     static var certificationRevocationEncryptionKey: String {
         Self.value(String.self, forKey: "CERTIFICATE_REVOCATION_INFO_ENCRYPTION_KEY")
     }
+
+    static var certificateReissueURL: URL {
+        Self.value(URL.self, forKey: "CERTIFICATE_REISSUE_URL")
+    }
+
+    static var staticTrustListResource: String {
+        Self.value(String.self, forKey: "TRUST_LIST_STATIC_DATA")
+    }
 }

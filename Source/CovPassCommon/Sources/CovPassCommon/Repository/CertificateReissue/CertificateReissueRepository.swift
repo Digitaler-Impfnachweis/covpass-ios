@@ -17,15 +17,15 @@ public class CertificateReissueRepository: CertificateReissueRepositoryProtocol 
     private let jsonDecoder: JSONDecoder
     private let jsonEncoder: JSONEncoder
     private let reissueURL: URL
-    private let trustList: TrustList
     private let httpClient: HTTPClientProtocol
+    private let coseSign1MessageConverter: CoseSign1MessageConverterProtocol
 
-    public init(baseURL: URL, jsonDecoder: JSONDecoder, jsonEncoder: JSONEncoder, trustList: TrustList, httpClient: HTTPClientProtocol) {
+    public init(baseURL: URL, jsonDecoder: JSONDecoder, jsonEncoder: JSONEncoder, httpClient: HTTPClientProtocol, coseSign1MessageConverter: CoseSign1MessageConverterProtocol) {
         reissueURL = baseURL.appendingPathComponent(Constants.reissuePath)
         self.jsonDecoder = jsonDecoder
         self.jsonEncoder = jsonEncoder
         self.httpClient = httpClient
-        self.trustList = trustList
+        self.coseSign1MessageConverter = coseSign1MessageConverter
     }
 
     public func renew(_ webTokens: [ExtendedCBORWebToken]) -> Promise<CertificateReissueRepositoryResponse> {
@@ -66,44 +66,7 @@ public class CertificateReissueRepository: CertificateReissueRepositoryProtocol 
     }
 
     private func cborWebToken(from response: CertificateReissueResponse) -> Promise<ExtendedCBORWebToken> {
-        response.certificate
-            .stripPrefix()
-            .decodedBase45
-            .then(\.decompressed)
-            .then(CoseSign1Message.promise)
-            .then(verifiedCBORWebToken)
-            .map { cborWebToken in
-                ExtendedCBORWebToken(
-                    vaccinationCertificate: cborWebToken,
-                    vaccinationQRCodeData: response.certificate
-                )
-            }
-    }
-
-    private func verifiedCBORWebToken(_ coseSign1Message: CoseSign1Message) -> Promise<CBORWebToken> {
-        when(fulfilled: cborWebToken(from: coseSign1Message),
-             HCert.verifyPromise(message: coseSign1Message, trustList: trustList)
-        )
-        .then(checkExtendedKeyUsage)
-        .then(\.noFraud)
-        .then(\.notExpired)
-    }
-
-    private func cborWebToken(from coseSign1Message: CoseSign1Message) -> Promise<CBORWebToken> {
-        do {
-            let json = try coseSign1Message.toJSON()
-            return jsonDecoder.decodePromise(json)
-        } catch {
-            return .init(error: error)
-        }
-    }
-
-    private func checkExtendedKeyUsage(cborWebToken: CBORWebToken, trustCertificate: TrustCertificate) -> Promise<CBORWebToken> {
-        HCert.checkExtendedKeyUsagePromise(
-            certificate: cborWebToken,
-            trustCertificate: trustCertificate
-        )
-        .map { cborWebToken }
+        coseSign1MessageConverter.convert(message: response.certificate)
     }
 
     private func certificateReissueRepositoryError(from error: Error) -> CertificateReissueRepositoryError {
