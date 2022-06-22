@@ -106,30 +106,54 @@ class VaccinationRepositoryTests: XCTestCase {
 //    }
 
     func testValidateEntityValidRecoveryCertificate() {
-        do {
-            let res = try sut.checkCertificate(CertificateMock.validRecoveryCertificate).wait()
-            XCTAssertNoThrow(try sut.validateEntity(res))
-        } catch {
-            XCTFail("Should fail")
-        }
+        // Given
+        let token = CertificateMock.validRecoveryCertificate
+        let expectation = XCTestExpectation()
+
+        // When
+        sut.checkCertificate(token)
+            .done { tokens in
+                XCTAssertNoThrow(try self.sut.validateEntity(tokens))
+                expectation.fulfill()
+            }
+            .cauterize()
+
+        //Then
+        wait(for: [expectation], timeout: 1)
     }
     
     func testValidateEntityValidCertificateNoPrefix() {
-        do {
-            let res = try sut.checkCertificate(CertificateMock.validCertificateNoPrefix).wait()
-            XCTAssertNoThrow(try sut.validateEntity(res))
-        } catch {
-            XCTFail("Should fail")
-        }
+        // Given
+        let token = CertificateMock.validCertificateNoPrefix
+        let expectation = XCTestExpectation()
+
+        // When
+        sut.checkCertificate(token)
+            .done { tokens in
+                XCTAssertNoThrow(try self.sut.validateEntity(tokens))
+                expectation.fulfill()
+            }
+            .cauterize()
+
+        //Then
+        wait(for: [expectation], timeout: 1)
     }
     
     func testValidateEntityValidExtendedKeyUsageGreece() {
-        do {
-            let res = try sut.checkCertificate(CertificateMock.validExtendedKeyUsageGreece).wait()
-            XCTAssertNoThrow(try sut.validateEntity(res))
-        } catch {
-            XCTFail("Should fail")
-        }
+        // Given
+        let token = CertificateMock.validExtendedKeyUsageGreece
+        let expectation = XCTestExpectation()
+
+        // When
+        sut.checkCertificate(token)
+            .done { tokens in
+                XCTAssertNoThrow(try self.sut.validateEntity(tokens))
+                expectation.fulfill()
+            }
+            .cauterize()
+
+        //Then
+        wait(for: [expectation], timeout: 1)
     }
     
     func testCheckCertificateInvalidEntity() {
@@ -170,7 +194,6 @@ class VaccinationRepositoryTests: XCTestCase {
             try sut.validateEntity(res)
             XCTFail("Should fail")
         } catch {
-            print(error)
             XCTAssertEqual(error.localizedDescription, "The data couldn’t be read because it is missing.")
         }
     }
@@ -181,7 +204,6 @@ class VaccinationRepositoryTests: XCTestCase {
             try sut.validateEntity(res)
             XCTFail("Should fail")
         } catch {
-            print(error)
             XCTAssertEqual(error.localizedDescription, HCertError.illegalKeyUsage.localizedDescription)
         }
     }
@@ -192,7 +214,6 @@ class VaccinationRepositoryTests: XCTestCase {
             try sut.validateEntity(res)
             XCTFail("Should fail")
         } catch {
-            print(error)
             XCTAssertEqual(error.localizedDescription, CertificateError.expiredCertifcate.localizedDescription)
         }
     }

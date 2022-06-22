@@ -29,7 +29,11 @@ public extension UIColor {
 
     static let onBackground70 = UIColor("OnBackground70")
 
+    static let onBackground80 = UIColor("OnBackground80")
+
     static let onBackground100 = UIColor("OnBackground100")
+
+    static let onBackground110 = UIColor("OnBackground110")
 
     static let backgroundPrimary = UIColor("BackgroundPrimary")
 
@@ -39,6 +43,8 @@ public extension UIColor {
     
     static let backgroundSecondary30 = UIColor("BackgroundSecondary30")
 
+    static let backgroundSecondary40 = UIColor("BackgroundSecondary40")
+
     static let backgroundPrimary100 = UIColor("backgroundSecondary100")
     
     static let brandAccent = UIColor("BrandAccent")
@@ -46,6 +52,8 @@ public extension UIColor {
     static let brandAccent10 = UIColor("BrandAccent10")
 
     static let brandAccent20 = UIColor("BrandAccent20")
+
+    static let brandAccent30 = UIColor("BrandAccent30")
 
     static let brandAccent70 = UIColor("BrandAccent70")
 

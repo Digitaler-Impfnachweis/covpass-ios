@@ -9,34 +9,16 @@
 import UIKit
 
 public enum TextStyle {
-    /// size: 34 lineHeight: 51 letterSpacing: 0.13 type: semi-bold color: onBackground100
     case display
-
-    /// size: 28 lineHeight: 42 letterSpacing: 0.13 type: semi-bold color: onBackground100
     case header_1
-
-    /// size: 18 lineHeight: 27 letterSpacing: 0.13 type: semi-bold color: onBackground100
     case header_2
-
-    /// size: 14 lineHeight: 17 letterSpacing: 0.13 type: semi-bold color: onBackground100
     case header_3
-
-    /// size: 16 lineHeight: 24 letterSpacing: 0.13 type: semi-bold color: onBackground100
     case header_16
-
-    /// size: 18 lineHeight: 27 letterSpacing: 0.13 type: semi-bold color: onBackground100
+    case header_20
     case subheader_1
-
-    /// size: 14 lineHeight: 21 letterSpacing: 0.13 type: semi-bold color: onBackground70
     case subheader_2
-
-    /// size: 14 lineHeight: 21 letterSpacing: 0.13 type: regular color: onBackground100
     case body
-
-    /// size: 12 lineHeight: 18 letterSpacing: 0.13 type: regular color: onBackground100
     case label
-
-    /// size: 14 lineHeight: 18 letterSpacing: 0.13 type: semi-bold color: onBackground100
     case mainButton
 
     public func apply(_ string: NSAttributedString) -> NSAttributedString {
@@ -60,6 +42,11 @@ public enum TextStyle {
             return string
                 .font(named: UIFont.sansSemiBold, size: 14.0, lineHeight: 21.0, textStyle: .subheadline)
                 .colored(.onBackground100)
+
+        case .header_20:
+            return string
+                .font(named: UIFont.sansSemiBold, size: 20.0, lineHeight: 30, textStyle: .title3)
+                .colored(.onBackground110)
 
         case .header_16:
             return string

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CertificateImportSelectionItemView" customModule="CovPassApp" customModuleProvider="target">
+            <connections>
+                <outlet property="checkmarkButton" destination="Mz6-57-ETb" id="N0Q-MO-QbJ"/>
+                <outlet property="stackView" destination="2mw-Vv-WXV" id="RA6-TC-cQL"/>
+                <outlet property="subtitleLabel" destination="RZ1-jB-yq7" id="DSF-YN-4UY"/>
+                <outlet property="titleLabel" destination="oRj-6c-AJ1" id="Pye-IT-Lkd"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mz6-57-ETb">
+                    <rect key="frame" x="14" y="28" width="44" height="44"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="44" id="nvp-KI-usJ"/>
+                        <constraint firstAttribute="height" constant="44" id="tXl-dw-js2"/>
+                    </constraints>
+                    <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
+                    <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="plain" image="checkbox_unchecked"/>
+                </button>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="2mw-Vv-WXV">
+                    <rect key="frame" x="67" y="12" width="41.5" height="75"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oRj-6c-AJ1">
+                            <rect key="frame" x="0.0" y="0.0" width="41.5" height="37.5"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RZ1-jB-yq7">
+                            <rect key="frame" x="0.0" y="37.5" width="41.5" height="37.5"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                </stackView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WNF-Rh-ci4" userLabel="Line View">
+                    <rect key="frame" x="0.0" y="99" width="414" height="1"/>
+                    <color key="backgroundColor" name="Divider"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="aKS-62-AtO"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="Mz6-57-ETb" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="14" id="68E-tm-Shg"/>
+                <constraint firstItem="2mw-Vv-WXV" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="12" id="9Od-dd-sKE"/>
+                <constraint firstItem="WNF-Rh-ci4" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="D5V-RE-VLs"/>
+                <constraint firstItem="WNF-Rh-ci4" firstAttribute="top" secondItem="2mw-Vv-WXV" secondAttribute="bottom" constant="12" id="ESv-rR-Zv8"/>
+                <constraint firstAttribute="bottom" secondItem="WNF-Rh-ci4" secondAttribute="bottom" id="O9p-G8-8Z8"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="2mw-Vv-WXV" secondAttribute="trailing" constant="24" id="SuQ-5q-8Ot"/>
+                <constraint firstItem="WNF-Rh-ci4" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="Y97-Sq-9QE"/>
+                <constraint firstItem="Mz6-57-ETb" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="jAC-Fh-gV7"/>
+                <constraint firstItem="2mw-Vv-WXV" firstAttribute="leading" secondItem="Mz6-57-ETb" secondAttribute="trailing" constant="9" id="tJ9-8c-jFx"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="153.62318840579712" y="-75"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="checkbox_unchecked" width="24" height="24"/>
+        <namedColor name="Divider">
+            <color red="0.89411764705882357" green="0.90980392156862744" blue="0.92549019607843142" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

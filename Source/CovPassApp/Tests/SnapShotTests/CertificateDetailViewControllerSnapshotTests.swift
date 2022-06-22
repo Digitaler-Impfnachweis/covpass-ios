@@ -250,7 +250,7 @@ class CertificateDetailViewControllerSnapshotTests: BaseSnapShotTests {
 
         let certs = [cert, cert2, cert3, cert4, cert5, cert6]
         vacinationRepoMock.certificates = certs
-        let bl = BoosterLogic.init(certLogic: DCCCertLogicMock(),
+        _ = BoosterLogic.init(certLogic: DCCCertLogicMock(),
                                    userDefaults: MockPersistence())
         let vm = configureSut(certs: certs)
         let vc = CertificateDetailViewController(viewModel: vm)
@@ -294,7 +294,7 @@ class CertificateDetailViewControllerSnapshotTests: BaseSnapShotTests {
 
         let certs = [cert, cert2, cert3, cert4, cert5]
         vacinationRepoMock.certificates = certs
-        let bl = BoosterLogic.init(certLogic: DCCCertLogicMock(),
+        _ = BoosterLogic.init(certLogic: DCCCertLogicMock(),
                                    userDefaults: MockPersistence())
         let vm = configureSut(certs: certs)
         let vc = CertificateDetailViewController(viewModel: vm)

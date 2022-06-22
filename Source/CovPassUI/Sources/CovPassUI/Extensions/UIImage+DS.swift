@@ -138,6 +138,9 @@ public extension UIImage {
     @ImageLoader(name: "checkbox_checked")
     private(set) static var checkboxChecked
 
+    @ImageLoader(name: "checkbox_partial")
+    private(set) static var checkboxPartial
+
     @ImageLoader(name: "checkbox_unchecked")
     private(set) static var checkboxUnchecked
 
