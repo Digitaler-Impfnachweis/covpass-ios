@@ -24,6 +24,7 @@ protocol CertificatesOverviewViewModelProtocol {
     func showAppInformation()
     func showRuleCheck()
     func showNotificationsIfNeeded()
+    func handleOpen(url: URL) -> Bool
 }
 
 extension CertificatesOverviewViewModelProtocol {

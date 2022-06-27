@@ -2,28 +2,39 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>CERTIFICATE_REVOCATION_TRUST_KEY</key>
-	<string>$(CERTIFICATE_REVOCATION_TRUST_KEY)</string>
-	<key>CERTIFICATE_REVOCATION_PINNING_HASHES</key>
-	<string>$(CERTIFICATE_REVOCATION_PINNING_HASHES)</string>
-	<key>CERTIFICATE_REVOCATION_URL</key>
-	<string>$(CERTIFICATE_REVOCATION_URL)</string>
-	<key>CERTIFICATE_REISSUE_PINNING_HASHES</key>
-	<string>$(CERTIFICATE_REISSUE_PINNING_HASHES)</string>
-	<key>CERTIFICATE_REISSUE_URL</key>
-	<string>$(CERTIFICATE_REISSUE_URL)</string>
 	<key>API_URL</key>
 	<string>$(API_URL)</string>
 	<key>BOOSTER_RULES_URL</key>
 	<string>$(BOOSTER_RULES_URL)</string>
-	<key>DOMESTIC_RULES_URL</key>
-	<string>$(DOMESTIC_RULES_URL)</string>
 	<key>BUNDLE_NAME</key>
 	<string>$(BUNDLE_NAME)</string>
+	<key>CERTIFICATE_REISSUE_PINNING_HASHES</key>
+	<string>$(CERTIFICATE_REISSUE_PINNING_HASHES)</string>
+	<key>CERTIFICATE_REISSUE_URL</key>
+	<string>$(CERTIFICATE_REISSUE_URL)</string>
+	<key>CERTIFICATE_REVOCATION_PINNING_HASHES</key>
+	<string>$(CERTIFICATE_REVOCATION_PINNING_HASHES)</string>
+	<key>CERTIFICATE_REVOCATION_TRUST_KEY</key>
+	<string>$(CERTIFICATE_REVOCATION_TRUST_KEY)</string>
+	<key>CERTIFICATE_REVOCATION_URL</key>
+	<string>$(CERTIFICATE_REVOCATION_URL)</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
 	<string>$(APP_NAME)</string>
+	<key>CFBundleDocumentTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeName</key>
+			<string>PDF</string>
+			<key>LSHandlerRank</key>
+			<string>Owner</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>com.adobe.pdf</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIconName</key>
@@ -45,14 +56,16 @@
 	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
-	<key>DCC_RULES_FILE</key>
-	<string>$(DCC_RULES_FILE)</string>
 	<key>DCC_DOMESTIC_RULES_FILE</key>
 	<string>$(DCC_DOMESTIC_RULES_FILE)</string>
+	<key>DCC_RULES_FILE</key>
+	<string>$(DCC_RULES_FILE)</string>
 	<key>DCC_RULES_TLS_CERTIFICATE_NAME</key>
 	<string>$(DCC_RULES_TLS_CERTIFICATE_NAME)</string>
 	<key>DCC_RULES_URL</key>
 	<string>$(DCC_RULES_URL)</string>
+	<key>DOMESTIC_RULES_URL</key>
+	<string>$(DOMESTIC_RULES_URL)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
@@ -88,5 +101,9 @@
 	</array>
 	<key>UIUserInterfaceStyle</key>
 	<string>Light</string>
+	<key>UISupportsDocumentBrowser</key>
+	<false/>
+	<key>LSSupportsOpeningDocumentsInPlace</key>
+	<false/>
 </dict>
 </plist>

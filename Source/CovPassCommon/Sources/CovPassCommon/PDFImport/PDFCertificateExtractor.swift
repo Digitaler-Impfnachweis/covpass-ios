@@ -8,35 +8,31 @@
 import Foundation
 import PromiseKit
 
-public struct PDFCBORExtractor: PDFCertificateExtractorProtocol {
+public final class PDFCBORExtractor: CertificateExtractorProtocol {
     private let maximalNumberOfTokens: Int
     private let revocationRepository: CertificateRevocationRepositoryProtocol
-    private let document: QRCodePDFDocumentProtocol
     private let coseSign1MessageConverter: CoseSign1MessageConverterProtocol
-    private let existingTokens: [ExtendedCBORWebToken]
+    private var existingTokens: [ExtendedCBORWebToken] = []
     private let queue: DispatchQueue
 
     public init(
-        document: QRCodePDFDocumentProtocol,
         maximalNumberOfTokens: Int,
-        existingTokens: [ExtendedCBORWebToken],
         coseSign1MessageConverter: CoseSign1MessageConverterProtocol,
         revocationRepository: CertificateRevocationRepositoryProtocol,
         queue: DispatchQueue
     ) {
-        self.document = document
         self.maximalNumberOfTokens = maximalNumberOfTokens
-        self.existingTokens = existingTokens
         self.coseSign1MessageConverter = coseSign1MessageConverter
         self.revocationRepository = revocationRepository
         self.queue = queue
     }
 
-    func extract() -> Promise<PDFCertificateExtractorResults> {
+    public func extract(document: QRCodeDocumentProtocol, ignoreTokens: [ExtendedCBORWebToken]) -> Promise<CertificateExtractorResults> {
         Promise { seal in
-            queue.async {
-                var results = PDFCertificateExtractorResults()
+            queue.async { [self] in
+                var results = CertificateExtractorResults()
                 var pageNumber = 1
+                existingTokens = ignoreTokens
 
                 while pageNumber <= document.numberOfPages && results.count < maximalNumberOfTokens {
                     do {
@@ -59,7 +55,7 @@ public struct PDFCBORExtractor: PDFCertificateExtractorProtocol {
         }
     }
 
-    private func extendedCBORWebTokens(_ qrCodes: [String]) -> Guarantee<PDFCertificateExtractorResults> {
+    private func extendedCBORWebTokens(_ qrCodes: [String]) -> Guarantee<CertificateExtractorResults> {
         Guarantee { seal in
             let iterator = qrCodes.map(validExtendedCBORWebToken).makeIterator()
             when(fulfilled: iterator, concurrently: 2)

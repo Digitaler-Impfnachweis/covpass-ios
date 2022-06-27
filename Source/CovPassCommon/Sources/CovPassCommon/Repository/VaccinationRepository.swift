@@ -444,4 +444,19 @@ public class VaccinationRepository: VaccinationRepositoryProtocol {
             .then(saveCertificateList)
             .asVoid()
     }
+
+    public func update(_ tokens: [ExtendedCBORWebToken]) -> Promise<Void> {
+        getCertificateList()
+            .map(\.certificates)
+            .then { existingTokens -> Promise<Void> in
+                let promises = tokens.map { token in
+                    self.update(token, existingTokens: existingTokens)
+                }
+                return when(fulfilled: promises)
+            }
+    }
+
+    private func update(_ token: ExtendedCBORWebToken, existingTokens: [ExtendedCBORWebToken]) -> Promise<Void> {
+        existingTokens.contains(token) ? replace(token) : add(tokens: [token])
+    }
 }

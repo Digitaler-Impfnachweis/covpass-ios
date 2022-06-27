@@ -33,9 +33,7 @@ class PDFCertificateExtractorTests: XCTestCase {
         existingTokens: [ExtendedCBORWebToken] = []
     ) {
         sut = .init(
-            document: document,
             maximalNumberOfTokens: maximalNumberOfTokens,
-            existingTokens: existingTokens,
             coseSign1MessageConverter: coseSign1MessageConverter,
             revocationRepository: revocationRepository,
             queue: .init(label: "Test Queue")
@@ -51,7 +49,7 @@ class PDFCertificateExtractorTests: XCTestCase {
         configureSut()
 
         // When
-        sut.extract()
+        sut.extract(document: document, ignoreTokens: [])
             .done { tokens in
                 // Then
                 XCTAssertEqual(tokens.count, 1)
@@ -78,7 +76,7 @@ class PDFCertificateExtractorTests: XCTestCase {
         configureSut()
 
         // When
-        sut.extract()
+        sut.extract(document: document, ignoreTokens: [])
             .done { tokens in
                 XCTAssertEqual(tokens.count, 0)
                 expectation.fulfill()
@@ -100,7 +98,7 @@ class PDFCertificateExtractorTests: XCTestCase {
         configureSut()
 
         // When
-        sut.extract()
+        sut.extract(document: document, ignoreTokens: [])
             .done { _ in
                 XCTFail("Must not succeed.")
             }
@@ -121,7 +119,7 @@ class PDFCertificateExtractorTests: XCTestCase {
         configureSut()
 
         // When
-        sut.extract()
+        sut.extract(document: document, ignoreTokens: [])
             .done { tokens in
                 XCTAssertEqual(tokens.count, 0)
                 expectation.fulfill()
@@ -143,7 +141,7 @@ class PDFCertificateExtractorTests: XCTestCase {
         configureSut(existingTokens: [token])
 
         // When
-        sut.extract()
+        sut.extract(document: document, ignoreTokens: [token])
             .done { tokens in
                 // Then
                 XCTAssertEqual(tokens.count, 0)
@@ -167,7 +165,7 @@ class PDFCertificateExtractorTests: XCTestCase {
         configureSut(maximalNumberOfTokens: 4)
 
         // When
-        sut.extract()
+        sut.extract(document: document, ignoreTokens: [])
             .done { tokens in
                 // Then
                 XCTAssertEqual(tokens.count, 4)
@@ -198,7 +196,7 @@ class PDFCertificateExtractorTests: XCTestCase {
         configureSut()
 
         // When
-        sut.extract()
+        sut.extract(document: document, ignoreTokens: [])
             .done { tokens in
                 // Then
                 XCTAssertEqual(tokens.count, 3)

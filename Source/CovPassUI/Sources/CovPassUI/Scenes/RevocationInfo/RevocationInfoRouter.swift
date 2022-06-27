@@ -7,10 +7,14 @@
 
 import PDFKit
 
-struct RevocationInfoRouter: RevocationInfoRouterProtocol, RouterProtocol {
-    let sceneCoordinator: SceneCoordinator
+public struct RevocationInfoRouter: RevocationInfoRouterProtocol, RouterProtocol {
+    public let sceneCoordinator: SceneCoordinator
 
-    func showPDFExport(with exportData: RevocationPDFExportDataProtocol) {
+    public init(sceneCoordinator: SceneCoordinator) {
+        self.sceneCoordinator = sceneCoordinator
+    }
+
+    public func showPDFExport(with exportData: RevocationPDFExportDataProtocol) {
         sceneCoordinator.present(
             RevocationInfoPDFExportSceneFactory(exportData: exportData)
         )

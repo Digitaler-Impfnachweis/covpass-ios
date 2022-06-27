@@ -23,12 +23,13 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mz6-57-ETb">
+                <button opaque="NO" contentMode="center" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mz6-57-ETb">
                     <rect key="frame" x="14" y="28" width="44" height="44"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="44" id="nvp-KI-usJ"/>
                         <constraint firstAttribute="height" constant="44" id="tXl-dw-js2"/>
                     </constraints>
+                    <color key="tintColor" name="BackgroundPrimary"/>
                     <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
                     <state key="normal" title="Button"/>
                     <buttonConfiguration key="configuration" style="plain" image="checkbox_unchecked"/>
@@ -77,6 +78,9 @@
     </objects>
     <resources>
         <image name="checkbox_unchecked" width="24" height="24"/>
+        <namedColor name="BackgroundPrimary">
+            <color red="0.97254901960784312" green="0.97254901960784312" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
         <namedColor name="Divider">
             <color red="0.89411764705882357" green="0.90980392156862744" blue="0.92549019607843142" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

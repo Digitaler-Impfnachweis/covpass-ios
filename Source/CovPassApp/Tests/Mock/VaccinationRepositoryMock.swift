@@ -18,6 +18,7 @@ public class VaccinationRepositoryMock: VaccinationRepositoryProtocol {
     let replaceExpectation = XCTestExpectation(description: "replaceExpectation")
     let addExpectation = XCTestExpectation(description: "addExpectation")
     let deleteExpectation = XCTestExpectation(description: "deleteExpectation")
+    let updateExpectation = XCTestExpectation(description: "updateExpectation")
     var lastUpdatedTrustList: Date?
     var certificates: [ExtendedCBORWebToken] = []
     var certPair: [CertificatePair] = []
@@ -27,6 +28,7 @@ public class VaccinationRepositoryMock: VaccinationRepositoryProtocol {
     private(set) var receivedDeleteToken: ExtendedCBORWebToken?
     var deleteError: Error?
     var qrCodeData: String?
+    var updateError: Error?
     
     public func matchedCertificates(for certificateList: CertificateList) -> [CertificatePair] {
         var pairs = [CertificatePair]()
@@ -133,6 +135,14 @@ public class VaccinationRepositoryMock: VaccinationRepositoryProtocol {
 
     public func replace(_ token: ExtendedCBORWebToken) -> Promise<Void> {
         replaceExpectation.fulfill()
+        return .init()
+    }
+
+    public func update(_ tokens: [ExtendedCBORWebToken]) -> Promise<Void> {
+        updateExpectation.fulfill()
+        if let updateError = updateError {
+            return .init(error: updateError)
+        }
         return .init()
     }
 }

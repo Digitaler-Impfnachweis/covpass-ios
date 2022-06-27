@@ -65,6 +65,9 @@ public extension UIImage {
     
     @ImageLoader(name: "button_close")
     private(set) static var close
+    
+    @ImageLoader(name: "button_close_alternative")
+    private(set) static var closeAlternative
 
     @ImageLoader(name: "scan_proof_image")
     private(set) static var proofScreen
@@ -113,6 +116,9 @@ public extension UIImage {
 
     @ImageLoader(name: "icon_qr")
     private(set) static var scan
+    
+    @ImageLoader(name: "photo")
+    private(set) static var photo
 
     @ImageLoader(name: "icon_share")
     private(set) static var share

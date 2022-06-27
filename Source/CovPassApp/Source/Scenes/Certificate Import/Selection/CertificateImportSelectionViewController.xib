@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CertificateImportSelectionViewController" customModule="CovPassApp" customModuleProvider="target">
+            <connections>
+                <outlet property="hintView" destination="RXl-Ky-ahu" id="ZDI-cd-aZC"/>
+                <outlet property="importButton" destination="5VU-4E-BKi" id="Qtl-St-94M"/>
+                <outlet property="infoHeaderView" destination="r0n-3W-BWs" id="YZk-ix-faN"/>
+                <outlet property="itemSelectionStackView" destination="TS4-Xk-xI8" id="xre-fb-89K"/>
+                <outlet property="selectionTitleCheckboxButton" destination="cVr-Yx-yNW" id="Ac7-Lp-cyx"/>
+                <outlet property="selectionTitleLabel" destination="6th-UN-3b8" id="3k7-5d-aKn"/>
+                <outlet property="selectionTitleView" destination="9h0-8q-0MD" id="Pgq-RW-0Gm"/>
+                <outlet property="view" destination="iN0-l3-epB" id="g44-1l-Y90"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r0n-3W-BWs" customClass="InfoHeaderView" customModule="CovPassUI">
+                    <rect key="frame" x="0.0" y="44" width="414" height="80"/>
+                    <color key="backgroundColor" name="BrandBase80"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="80" id="78z-dS-dP8"/>
+                    </constraints>
+                </view>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kdV-CK-EDP">
+                    <rect key="frame" x="0.0" y="124" width="414" height="772"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pKH-mL-QJc" userLabel="Content View">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="756.5"/>
+                            <subviews>
+                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="XKe-tZ-wUJ">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="570"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9h0-8q-0MD" userLabel="Selection Title">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cVr-Yx-yNW">
+                                                    <rect key="frame" x="14" y="3" width="44" height="44"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="44" id="Z2K-mV-ZMB"/>
+                                                        <constraint firstAttribute="width" constant="44" id="yUn-2G-AUt"/>
+                                                    </constraints>
+                                                    <state key="normal" title="Button"/>
+                                                    <buttonConfiguration key="configuration" style="plain" image="checkbox_unchecked"/>
+                                                    <connections>
+                                                        <action selector="toggleSelection" destination="-1" eventType="primaryActionTriggered" id="cZS-MF-aEE"/>
+                                                    </connections>
+                                                </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 von 2 Zertifikat(en) ausgewählt" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6th-UN-3b8">
+                                                    <rect key="frame" x="67" y="12" width="251" height="26"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" name="BackgroundSecondary40"/>
+                                            <constraints>
+                                                <constraint firstItem="6th-UN-3b8" firstAttribute="top" secondItem="9h0-8q-0MD" secondAttribute="top" constant="12" id="QzT-07-A3T"/>
+                                                <constraint firstItem="cVr-Yx-yNW" firstAttribute="leading" secondItem="9h0-8q-0MD" secondAttribute="leading" constant="14" id="Vfj-Lu-lhU"/>
+                                                <constraint firstAttribute="bottom" secondItem="6th-UN-3b8" secondAttribute="bottom" constant="12" id="bOq-3d-Q3L"/>
+                                                <constraint firstItem="6th-UN-3b8" firstAttribute="leading" secondItem="cVr-Yx-yNW" secondAttribute="trailing" constant="9" id="fiR-CK-YlD"/>
+                                                <constraint firstItem="6th-UN-3b8" firstAttribute="centerY" secondItem="cVr-Yx-yNW" secondAttribute="centerY" id="vzi-GI-d7c"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="6th-UN-3b8" secondAttribute="trailing" constant="24" id="whY-Bx-F2t"/>
+                                            </constraints>
+                                        </view>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="TS4-Xk-xI8">
+                                            <rect key="frame" x="0.0" y="50" width="414" height="200"/>
+                                            <color key="backgroundColor" systemColor="systemPinkColor"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="200" placeholder="YES" id="IuS-1Y-RCa"/>
+                                            </constraints>
+                                        </stackView>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RXl-Ky-ahu" customClass="HintView" customModule="CovPassUI">
+                                            <rect key="frame" x="0.0" y="250" width="414" height="320"/>
+                                            <color key="backgroundColor" systemColor="systemTealColor"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="320" placeholder="YES" id="VRj-ny-8Zr"/>
+                                            </constraints>
+                                        </view>
+                                    </subviews>
+                                </stackView>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5VU-4E-BKi" customClass="MainButton" customModule="CovPassUI">
+                                    <rect key="frame" x="24" y="620" width="366" height="116.5"/>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="366" placeholder="YES" id="HAk-Sd-Etq"/>
+                                        <constraint firstAttribute="height" constant="116.5" placeholder="YES" id="jbx-h4-ZCz"/>
+                                    </constraints>
+                                </view>
+                            </subviews>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <constraints>
+                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="5VU-4E-BKi" secondAttribute="trailing" constant="24" id="4Ik-n9-Bxk"/>
+                                <constraint firstItem="5VU-4E-BKi" firstAttribute="centerX" secondItem="pKH-mL-QJc" secondAttribute="centerX" id="50y-3y-Jod"/>
+                                <constraint firstItem="5VU-4E-BKi" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="pKH-mL-QJc" secondAttribute="leading" constant="24" id="6zj-Cp-Noe"/>
+                                <constraint firstItem="XKe-tZ-wUJ" firstAttribute="leading" secondItem="pKH-mL-QJc" secondAttribute="leading" id="I1v-kc-7xG"/>
+                                <constraint firstItem="XKe-tZ-wUJ" firstAttribute="top" secondItem="pKH-mL-QJc" secondAttribute="top" id="QZ5-fv-WrZ"/>
+                                <constraint firstItem="5VU-4E-BKi" firstAttribute="top" secondItem="XKe-tZ-wUJ" secondAttribute="bottom" constant="50" id="pjG-TZ-UiY"/>
+                                <constraint firstAttribute="bottom" secondItem="5VU-4E-BKi" secondAttribute="bottom" constant="20" id="xVF-Bv-g9w"/>
+                                <constraint firstAttribute="trailing" secondItem="XKe-tZ-wUJ" secondAttribute="trailing" id="zEz-dM-yiM"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="pKH-mL-QJc" firstAttribute="width" secondItem="POY-P5-LHu" secondAttribute="width" priority="250" id="33U-Xv-f1R"/>
+                        <constraint firstItem="pKH-mL-QJc" firstAttribute="top" secondItem="kdV-CK-EDP" secondAttribute="top" id="3HW-9D-0H7"/>
+                        <constraint firstAttribute="trailing" secondItem="pKH-mL-QJc" secondAttribute="trailing" id="4lb-7H-X01"/>
+                        <constraint firstItem="pKH-mL-QJc" firstAttribute="leading" secondItem="kdV-CK-EDP" secondAttribute="leading" id="931-Jg-Klg"/>
+                        <constraint firstItem="pKH-mL-QJc" firstAttribute="trailing" secondItem="POY-P5-LHu" secondAttribute="trailing" id="Gbl-ck-cf4"/>
+                        <constraint firstItem="pKH-mL-QJc" firstAttribute="height" secondItem="POY-P5-LHu" secondAttribute="height" priority="250" id="TCf-VJ-AJQ"/>
+                        <constraint firstItem="pKH-mL-QJc" firstAttribute="leading" secondItem="POY-P5-LHu" secondAttribute="leading" id="bOS-fC-LCh"/>
+                        <constraint firstAttribute="bottom" secondItem="pKH-mL-QJc" secondAttribute="bottom" priority="250" id="hdY-yT-6qw"/>
+                    </constraints>
+                    <viewLayoutGuide key="contentLayoutGuide" id="XGB-Ek-Qfa"/>
+                    <viewLayoutGuide key="frameLayoutGuide" id="POY-P5-LHu"/>
+                </scrollView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="r0n-3W-BWs" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="1Sj-iR-NWg"/>
+                <constraint firstAttribute="bottom" secondItem="kdV-CK-EDP" secondAttribute="bottom" id="BSn-ew-yZo"/>
+                <constraint firstItem="r0n-3W-BWs" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="DMX-kW-qnK"/>
+                <constraint firstItem="r0n-3W-BWs" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="jWs-fa-4H6"/>
+                <constraint firstAttribute="trailing" secondItem="kdV-CK-EDP" secondAttribute="trailing" id="l3a-Vj-Eoc"/>
+                <constraint firstItem="kdV-CK-EDP" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="qMe-Bc-2AY"/>
+                <constraint firstItem="kdV-CK-EDP" firstAttribute="top" secondItem="r0n-3W-BWs" secondAttribute="bottom" id="umL-sH-cMj"/>
+            </constraints>
+            <point key="canvasLocation" x="140.57971014492756" y="153.34821428571428"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="checkbox_unchecked" width="24" height="24"/>
+        <namedColor name="BackgroundSecondary40">
+            <color red="0.96470588235294119" green="0.96470588235294119" blue="0.96470588235294119" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="BrandBase80">
+            <color red="0.019607843137254902" green="0.29019607843137257" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemPinkColor">
+            <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemTealColor">
+            <color red="0.18823529411764706" green="0.69019607843137254" blue="0.7803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

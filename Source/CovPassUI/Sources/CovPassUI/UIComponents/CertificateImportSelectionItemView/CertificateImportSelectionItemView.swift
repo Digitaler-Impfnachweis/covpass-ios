@@ -18,6 +18,6 @@ public final class CertificateImportSelectionItemView: XibView {
 
         checkmarkButton.setImage(.checkboxChecked, for: .selected)
         checkmarkButton.setImage(.checkboxUnchecked, for: .normal)
-        checkmarkButton.setTitle(nil, for: .normal)
+        checkmarkButton.setTitle("", for: .normal)
     }
 }

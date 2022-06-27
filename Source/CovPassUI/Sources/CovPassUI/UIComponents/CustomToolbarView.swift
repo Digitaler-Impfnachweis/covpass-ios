@@ -35,6 +35,7 @@ public enum ButtonItemType {
     case scrollButton
     case disabledWithText
     case flashLight
+    case documentPicker
 }
 
 public enum CustomToolbarState: Equatable {
@@ -45,6 +46,7 @@ public enum CustomToolbarState: Equatable {
     case scrollAware
     case confirm(String)
     case disabled
+    case plain
     case disabledWithText(String)
     case flashLight
 }
@@ -53,7 +55,9 @@ public enum CustomToolbarState: Equatable {
 public class CustomToolbarView: XibView {
     public weak var delegate: CustomToolbarViewDelegate?
     @IBOutlet var leftButton: UIButton!
+    @IBOutlet var leftButton2: UIButton!
     @IBOutlet var rightButton: UIButton!
+    let plainView =  UIView()
     public var primaryButton: MainButton!
     private var gradientLayer = CAGradientLayer()
 
@@ -81,6 +85,9 @@ public class CustomToolbarView: XibView {
                 setupDisabledButton(with: title)
             case .flashLight:
                 setUpRightButton(rightButtonItem: .flashLight)
+            case .plain:
+                setupPlainState()
+
             }
         }
     }
@@ -89,6 +96,16 @@ public class CustomToolbarView: XibView {
         didSet {
             leftButtonVoiceOverSettings.map {
                 leftButton.enableAccessibility(label: $0.label,
+                                               hint: $0.hint,
+                                               traits: $0.traits)
+            }
+        }
+    }
+    
+    public var leftButton2VoiceOverSettings: VoiceOverOptions.Settings? {
+        didSet {
+            leftButton2VoiceOverSettings.map {
+                leftButton2.enableAccessibility(label: $0.label,
                                                hint: $0.hint,
                                                traits: $0.traits)
             }
@@ -116,6 +133,7 @@ public class CustomToolbarView: XibView {
     }
 
     var leftButtonAction: (() -> Void)?
+    var leftButton2Action: (() -> Void)?
     var rightButtonAction: (() -> Void)?
 
     public func setUpLeftButton(leftButtonItem: ButtonItemType?) {
@@ -135,8 +153,42 @@ public class CustomToolbarView: XibView {
                 strongSelf.delegate?.customToolbarView(strongSelf, didTap: .navigationArrow)
             }
             leftButton.enableAccessibility(label: Constants.Accessibility.back.label)
+        case .documentPicker:
+            leftButton.setImage(.photo, for: .normal)
+            leftButtonAction = { [weak self] in
+                guard let strongSelf = self else { return }
+                strongSelf.delegate?.customToolbarView(strongSelf, didTap: .documentPicker)
+            }
+            // TODO: add accessibility
+            leftButton.enableAccessibility(label: Constants.Accessibility.back.label)
         default:
             resetSecondary(button: leftButton)
+        }
+    }
+    
+    public func setUpLeftButton2(leftButtonItem: ButtonItemType?) {
+        guard let leftButtonItem = leftButtonItem else {
+            resetSecondary(button: leftButton2)
+            return
+        }
+
+        leftButton2.isHidden = false
+        leftButton2.isEnabled = true
+        leftButton2.tintColor = .onBackground70
+        switch leftButtonItem {
+        case .flashLight:
+            leftButton2.isHidden = false
+            enableLeft2Button(rightButtonItem: leftButtonItem)
+            leftButton2.setImage(.flashOff, for: .normal)
+            leftButton2.setImage(.flashOn, for: .selected)
+
+            leftButton2Action = { [weak self] in
+                guard let self = self else { return }
+                self.leftButton2.isSelected.toggle()
+                self.delegate?.customToolbarView(self, didTap: .flashLight)
+            }
+        default:
+            resetSecondary(button: leftButton2)
         }
     }
 
@@ -152,6 +204,17 @@ public class CustomToolbarView: XibView {
                 self.rightButton.isSelected.toggle()
                 self.delegate?.customToolbarView(self, didTap: .flashLight)
             }
+        } else if case .cancelButton = rightButtonItem {
+                rightButton.isHidden = false
+                enableRightButton(rightButtonItem: rightButtonItem)
+                rightButton.setImage(.closeAlternative, for: .normal)
+                rightButton.setImage(.closeAlternative, for: .selected)
+
+                rightButtonAction = { [weak self] in
+                    guard let self = self else { return }
+                    self.rightButton.isSelected.toggle()
+                    self.delegate?.customToolbarView(self, didTap: .cancelButton)
+                }
         }
     }
 
@@ -160,10 +223,16 @@ public class CustomToolbarView: XibView {
             rightButton.isEnabled = false
         }
     }
-
+    
     public func enableRightButton(rightButtonItem: ButtonItemType?) {
         if case .flashLight = rightButtonItem {
             rightButton.isEnabled = true
+        }
+    }
+    
+    public func enableLeft2Button(rightButtonItem: ButtonItemType?) {
+        if case .flashLight = rightButtonItem {
+            leftButton2.isEnabled = true
         }
     }
 
@@ -175,6 +244,13 @@ public class CustomToolbarView: XibView {
     private func setupDisabledButton(with text: String? = nil) {
         resetPrimaryButton()
         configureDisabledButton(button: disabledButtonWithText, title: text)
+    }
+    
+    public func setupPlainState() {
+        resetPrimaryButton()
+        addSubview(plainView)
+        plainView.setConstant(height: Constants.Layout.cancelButtonHeight)
+        configureCenterConstraints(for: plainView)
     }
 
     public func setUpMiddleButton(middleButtonItem: ButtonItemType?) {
@@ -324,7 +400,7 @@ public class CustomToolbarView: XibView {
         configureCenterConstraints(for: button)
     }
 
-    private func configureCenterConstraints(for button: MainButton) {
+    private func configureCenterConstraints(for button: UIView) {
         button.centerX(of: layoutMarginsGuide)
         button.pinEdges([.top, .bottom], to: layoutMarginsGuide)
         button.setContentHuggingPriority(.required, for: .horizontal)
@@ -347,9 +423,13 @@ public class CustomToolbarView: XibView {
         super.layoutSubviews()
         gradientLayer.frame = self.bounds
     }
-
+    
     @IBAction func leftButtonPressed() {
         leftButtonAction?()
+    }
+    
+    @IBAction func leftButton2Pressed() {
+        leftButton2Action?()
     }
 
     @IBAction func didTouchRightButton() {

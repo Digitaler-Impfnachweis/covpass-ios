@@ -9,8 +9,11 @@
 import AVFoundation
 import Scanner
 import UIKit
+import MobileCoreServices
+import UniformTypeIdentifiers
+import PhotosUI
 
-class ScanViewController: UIViewController {
+public final class ScanViewController: UIViewController, UINavigationControllerDelegate {
     // MARK: - IBOutlet
 
     @IBOutlet var toolbarView: CustomToolbarView!
@@ -25,19 +28,18 @@ class ScanViewController: UIViewController {
 
     @available(*, unavailable)
     required init?(coder _: NSCoder) { fatalError("init?(coder: NSCoder) not implemented yet") }
-
-    init(viewModel: ScanViewModel) {
+    
+    public init(viewModel: ScanViewModel) {
         self.viewModel = viewModel
         super.init(nibName: String(describing: Self.self), bundle: .module)
     }
-
-    override func viewDidLoad() {
+    
+    public override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel.delegate = self
         view.backgroundColor = .backgroundPrimary
         container.backgroundColor = .neutralBlack
-
         configureToolbarView()
-
         viewModel.onCameraAccess = { [weak self] in
             self?.configureScanView()
         }
@@ -56,33 +58,85 @@ class ScanViewController: UIViewController {
     }
 
     private func configureToolbarView() {
-        toolbarView.state = .cancel
-        toolbarView.leftButton.isHidden = true
-        #if targetEnvironment(simulator)
-            toolbarView.setUpRightButton(rightButtonItem: .flashLight)
+        if viewModel.isDocumentPickerEnabled {
+            toolbarView.state = .plain
+            toolbarView.setUpRightButton(rightButtonItem: .cancelButton)
+            toolbarView.setUpLeftButton(leftButtonItem: .documentPicker)
+#if targetEnvironment(simulator)
+            toolbarView.setUpLeftButton2(leftButtonItem: .flashLight)
+            
+#else
+            if viewModel.hasDeviceTorch {
+                toolbarView.setUpLeftButton2(leftButtonItem: .flashLight)
+            }
+#endif
+            toolbarView.layoutMargins.top = .space_24
+            toolbarView.delegate = self
+            toolbarView.rightButtonVoiceOverSettings = viewModel.closeVoiceOverOptions
+            toolbarView.leftButton2VoiceOverSettings = viewModel.currentTorchVoiceOverOptions
+            toolbarView.leftButtonVoiceOverSettings = viewModel.documentPickerVoiceOverOptions
 
-        #else
+        } else {
+            toolbarView.state = .cancel
+            toolbarView.leftButton.isHidden = true
+#if targetEnvironment(simulator)
+            toolbarView.setUpRightButton(rightButtonItem: .flashLight)
+            
+#else
             if viewModel.hasDeviceTorch {
                 toolbarView.setUpRightButton(rightButtonItem: .flashLight)
             }
-        #endif
-        toolbarView.layoutMargins.top = .space_24
-        toolbarView.delegate = self
-        toolbarView.primaryButtonVoiceOverSettings = viewModel.closeVoiceOverOptions
-        toolbarView.rightButtonVoiceOverSettings = viewModel.currentTorchVoiceOverOptions
+#endif
+            toolbarView.layoutMargins.top = .space_24
+            toolbarView.delegate = self
+            toolbarView.primaryButtonVoiceOverSettings = viewModel.closeVoiceOverOptions
+            toolbarView.rightButtonVoiceOverSettings = viewModel.currentTorchVoiceOverOptions
+        }
+    }
+    
+    
+}
+
+extension ScanViewController: ScanViewModelDelegate {
+    
+    func selectFiles() {
+        let documentPicker = UIDocumentPickerViewController(documentTypes: [String(kUTTypePDF)], in: UIDocumentPickerMode.import)
+        documentPicker.delegate = self
+        documentPicker.allowsMultipleSelection = true
+        present(documentPicker, animated: true)
+    }
+    
+    func selectImages() {
+        if #available(iOS 14.0, *) {
+            var configuration = PHPickerConfiguration()
+            configuration.filter = .images
+            configuration.selectionLimit = 0
+            let picker = PHPickerViewController(configuration: configuration)
+            picker.delegate = self
+            present(picker, animated: true)
+        } else {
+            let pickerController = UIImagePickerController()
+            pickerController.delegate = self
+            pickerController.mediaTypes = ["public.image"]
+            guard UIImagePickerController.isSourceTypeAvailable(.photoLibrary) else { return }
+            pickerController.sourceType = .photoLibrary
+            present(pickerController, animated: true)
+        }
     }
 }
 
 // MARK: - CustomToolbarViewDelegate
 
 extension ScanViewController: CustomToolbarViewDelegate {
-    func customToolbarView(_: CustomToolbarView, didTap buttonType: ButtonItemType) {
+    public func customToolbarView(_: CustomToolbarView, didTap buttonType: ButtonItemType) {
         switch buttonType {
         case .cancelButton:
             viewModel.cancel()
         case .flashLight:
             viewModel.toggleFlashlight()
-            toolbarView.rightButtonVoiceOverSettings = viewModel.currentTorchVoiceOverOptions
+            toolbarView.leftButton2VoiceOverSettings = viewModel.currentTorchVoiceOverOptions
+        case .documentPicker:
+            viewModel.documentPicker()
         default:
             return
         }
@@ -92,17 +146,70 @@ extension ScanViewController: CustomToolbarViewDelegate {
 // MARK: - ScannerDelegate
 
 extension ScanViewController: ScannerDelegate {
-    func result(with value: Swift.Result<String, ScanError>) {
+    public func result(with value: Swift.Result<String, ScanError>) {
         viewModel.onResult(value)
     }
 }
 
+// MARK: - ModalInteractiveDismissibleProtocol
+
 extension ScanViewController: ModalInteractiveDismissibleProtocol {
-    func canDismissModalViewController() -> Bool {
+    public func canDismissModalViewController() -> Bool {
         viewModel.isCancellable()
     }
-
-    func modalViewControllerDidDismiss() {
+    
+    public func modalViewControllerDidDismiss() {
         viewModel.cancel()
+    }
+}
+
+// MARK: - UIDocumentPickerDelegate
+
+extension ScanViewController: UIDocumentPickerDelegate {
+    
+    public func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
+        viewModel.documentPicked(at: urls)
+    }
+    
+    public func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentAt url: URL) {
+        viewModel.documentPicked(at: [url])
+    }
+}
+
+// MARK: - PHPickerViewControllerDelegate
+
+@available(iOS 14, *)
+extension ScanViewController: PHPickerViewControllerDelegate {
+    public func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        // Get the reference of itemProvider from results
+        var images = Array<UIImage>()
+        results.forEach { result in
+            let itemProvider = result.itemProvider
+            if itemProvider.canLoadObject(ofClass: UIImage.self) {
+                itemProvider.loadObject(ofClass: UIImage.self) { image, error in
+                    DispatchQueue.main.async {
+                        guard let image = image as? UIImage else { return }
+                        images.append(image)
+                        print("images.count \(images.count) results.count \(results.count)")
+                        if images.count == results.count {
+                            self.viewModel.imagePicked(images: images)
+                            picker.dismiss(animated: true)
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+// MARK: - UIImagePickerControllerDelegate
+
+extension ScanViewController: UIImagePickerControllerDelegate {
+    
+    public func imagePickerController(_ picker: UIImagePickerController,
+                                      didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+        picker.dismiss(animated: true)
+        guard let image = info[.originalImage] as? UIImage else { return }
+        viewModel.imagePicked(images: [image])
     }
 }

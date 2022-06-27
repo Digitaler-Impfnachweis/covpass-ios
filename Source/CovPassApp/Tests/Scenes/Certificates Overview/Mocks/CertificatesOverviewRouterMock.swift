@@ -18,11 +18,14 @@ class CertificatesOverviewRouterMock: CertificatesOverviewRouterProtocol {
     let showCertificateExpectation = XCTestExpectation(description: "showCertificateExpectation")
     let showCertificateModalExpectation = XCTestExpectation(description: "showCertificateExpectation")
     let toWebsiteFAQExpectation = XCTestExpectation(description: "toWebsiteFAQExpectation")
+    let showCertificateImportErrorExpectation = XCTestExpectation(description: "showCertificateImportErrorExpectation")
+    let showCertificatePickerExpectation = XCTestExpectation(description: "showCertificatePickerExpectation")
     var sceneCoordinator: SceneCoordinator = SceneCoordinatorMock()
     var error: Error?
     var scanCountErrorResponse: ScanCountErrorResponse = .download
     var receivedFaqURL: URL?
     var scanQRCodePayload: String = ""
+    var receivedCertificatePickerTokens: [ExtendedCBORWebToken]?
 
     func showCheckSituation(userDefaults: Persistence) -> Promise<Void> {
         showCheckSituationExpectation.fulfill()
@@ -97,5 +100,18 @@ class CertificatesOverviewRouterMock: CertificatesOverviewRouterProtocol {
     func showCertificatesReissue(for cborWebTokens: [ExtendedCBORWebToken], context: ReissueContext) -> Promise<Void> {
         showCertificatesReissueExpectation.fulfill()
         return .value
+    }
+
+    func showCertificatePicker(tokens: [ExtendedCBORWebToken]) -> Promise<Void> {
+        receivedCertificatePickerTokens = tokens
+        showCertificatePickerExpectation.fulfill()
+        if let error = error {
+            return .init(error: error)
+        }
+        return .value
+    }
+
+    func showCertificateImportError() {
+        showCertificateImportErrorExpectation.fulfill()
     }
 }

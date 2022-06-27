@@ -29,7 +29,8 @@ let package = Package(
         ),
         .testTarget(
             name: "CovPassUITests",
-            dependencies: ["CovPassUI"]
+            dependencies: ["CovPassUI"],
+            resources: [.process("Resources")]
         )
     ]
 )

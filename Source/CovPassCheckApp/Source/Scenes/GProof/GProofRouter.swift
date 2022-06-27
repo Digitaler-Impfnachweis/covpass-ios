@@ -41,7 +41,9 @@ class GProofRouter: GProofRouterProtocol {
             ScanSceneFactory(
                 cameraAccessProvider: CameraAccessProvider(
                     router: DialogRouter(sceneCoordinator: sceneCoordinator)
-                )
+                ),
+                router: ScanRouter(sceneCoordinator: sceneCoordinator),
+                isDocumentPickerEnabled: false
             )
         )
     }

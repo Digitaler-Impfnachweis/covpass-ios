@@ -31,7 +31,9 @@ class ValidatorOverviewRouter: ValidatorOverviewRouterProtocol {
             ScanSceneFactory(
                 cameraAccessProvider: CameraAccessProvider(
                     router: DialogRouter(sceneCoordinator: sceneCoordinator)
-                )
+                ),
+                router: ScanRouter(sceneCoordinator: sceneCoordinator),
+                isDocumentPickerEnabled: false
             )
         )
     }

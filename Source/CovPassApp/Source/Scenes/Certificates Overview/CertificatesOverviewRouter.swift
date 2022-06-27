@@ -16,10 +16,16 @@ private enum Constants {
     enum Config {
         static let covpassCheckAppStoreURL = URL(string: "https://apps.apple.com/de/app/covpass-check/id1566140314")
     }
+
+    enum Texts {
+        static let errorTitle = "file_import_error_access_title".localized
+        static let errorMessage = "file_import_error_access_copy".localized
+        static let errorButtonText = "file_import_error_access_button".localized
+    }
 }
 
 class CertificatesOverviewRouter: CertificatesOverviewRouterProtocol, DialogRouterProtocol {
-    
+
     // MARK: - Properties
     
     let sceneCoordinator: SceneCoordinator
@@ -147,9 +153,9 @@ class CertificatesOverviewRouter: CertificatesOverviewRouterProtocol, DialogRout
     func scanQRCode() -> Promise<ScanResult> {
         sceneCoordinator.present(
             ScanSceneFactory(
-                cameraAccessProvider: CameraAccessProvider(
-                    router: DialogRouter(sceneCoordinator: sceneCoordinator)
-                )
+                cameraAccessProvider: CameraAccessProvider(router: DialogRouter(sceneCoordinator: sceneCoordinator)),
+                router: ScanRouter(sceneCoordinator: sceneCoordinator),
+                isDocumentPickerEnabled: true
             )
         )
     }
@@ -187,6 +193,26 @@ class CertificatesOverviewRouter: CertificatesOverviewRouterProtocol, DialogRout
                 tokens: cborWebTokens,
                 context: context
             )
+        )
+    }
+
+    func showCertificatePicker(tokens: [ExtendedCBORWebToken]) -> Promise<Void> {
+        sceneCoordinator.present(
+            CertificateImportSelectionFactory(
+                importTokens: tokens,
+                router: CertificateImportSelectionRouter(
+                    sceneCoordinator: sceneCoordinator
+                )
+            )
+        )
+    }
+
+    func showCertificateImportError() {
+        showDialog(
+            title: Constants.Texts.errorTitle,
+            message: Constants.Texts.errorMessage,
+            actions: [.init(title: Constants.Texts.errorButtonText)],
+            style: .alert
         )
     }
 }

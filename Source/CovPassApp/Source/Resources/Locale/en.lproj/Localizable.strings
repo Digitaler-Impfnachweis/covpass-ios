@@ -301,11 +301,17 @@
 
 "file_import_result_button" = "Import %d certificate(s)";
 
+"file_import_success_title" = "Import successful";
+
+"file_import_success_copy" = "You can now continue to use your certificate(s) as usual.";
+
+"file_import_success_button" = "OK";
+
 "file_import_error_maximum_title" = "Maximum number of certificates exceeded";
 
 "file_import_error_maximum_copy" = "The selected file either has too many pages or contains certificates for more than 20 different people. Try to reduce the number of pages.";
 
-"file_import_error_maximum_copy" = "OK";
+"file_import_error_maximum_button" = "OK";
 
 "file_import_error_access_title" = "The file could not be read";
 
@@ -771,7 +777,7 @@
 
 "certificates_overview_soon_expiring_title" = "Current certificate expires on %@ at %@";
 
-"certificates_overview_soon_expiring_subtitle" = "You can easily renew your latest certificate in the CovPass app. Previous certificates will not be renewed. To do so, use the renewal function in the overview of your certificates or scan a newly issued certificate.";
+"certificates_overview_soon_expiring_subtitle" = "You can easily replace the certificate in the CovPass app by using the renewal function in the overview of your certificates or by scanning a newly issued certificate.";
 
 "certificates_overview_invalid_title" = "Certificate invalid";
 
@@ -1093,7 +1099,7 @@
 
 "certificate_expires_detail_view_note_title" = "Certificate expires on %@ at %@";
 
-"certificate_expires_detail_view_note_message" = "If this is your latest certificate, you can renew it on the overview of your certificates. Otherwise, you don't have to do anything because your latest certificate contains all the necessary information for a check.";
+"certificate_expires_detail_view_note_message" = "You can easily renew the certificate in the CovPass app. To do so, use the renewal function in the overview of your certificates or scan a newly issued certificate.";
 
 "certificate_invalid_detail_view_note_title" = "Certificate invalid";
 
@@ -1101,7 +1107,7 @@
 
 "certificate_expired_detail_view_note_title" = "Certificate expired";
 
-"certificate_expired_detail_view_note_message" = "If this is your latest certificate, you can renew it on the overview of your certificates. Otherwise, you don't have to do anything because your latest certificate contains all the necessary information for a check.";
+"certificate_expired_detail_view_note_message" = "You can easily renew your most important certificates in the CovPass app. To do so, use the renewal function in the overview of your certificates or scan a newly issued certificate. If you have a more recent vaccination certificate, you do not need to renew the previous vaccination certificates.";
 
 
 /********** print certificate **********/
@@ -1561,7 +1567,7 @@
 
 "renewal_expiry_notification_button_vaccination" = "Renew vaccination certificate";
 
-"renewal_expiry_notification_copy_recovery" = "The technical validity of your recovery certificate is about to expire or has already expired. Renew the certificate to continue using it.";
+"renewal_expiry_notification_copy_recovery" = "The technical expiry date of your recovery certificate is coming up. Renew the certificate to continue using it.";
 
 "renewal_expiry_notification_button_recovery" = "Renew recovery certificate";
 

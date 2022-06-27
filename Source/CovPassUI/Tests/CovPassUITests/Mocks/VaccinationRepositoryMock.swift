@@ -103,4 +103,8 @@ public class VaccinationRepositoryMock: VaccinationRepositoryProtocol {
     public func replace(_ token: ExtendedCBORWebToken) -> Promise<Void> {
         .init()
     }
+
+    public func update(_ tokens: [ExtendedCBORWebToken]) -> Promise<Void> {
+        .init()
+    }
 }

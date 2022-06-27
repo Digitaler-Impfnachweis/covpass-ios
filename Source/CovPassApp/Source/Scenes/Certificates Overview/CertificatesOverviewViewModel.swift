@@ -37,7 +37,8 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
     private var userDefaults: UserDefaultsPersistence
     private let locale: Locale
     private lazy var faqURL: URL? = locale.isGerman() ? Constants.Config.covpassFaqUrlGerman : Constants.Config.covpassFaqUrlEnglish
-
+    private let jsonDecoder = JSONDecoder()
+    private let pdfExtractor: CertificateExtractorProtocol
     var certificatePairsSorted: [CertificatePair] {
         repository.matchedCertificates(for: certificateList).sorted(by: { c, _ -> Bool in c.isFavorite })
     }
@@ -83,8 +84,10 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
         certLogic: DCCCertLogicProtocol,
         boosterLogic: BoosterLogicProtocol,
         userDefaults: UserDefaultsPersistence,
-        locale: Locale
+        locale: Locale,
+        pdfExtractor: CertificateExtractorProtocol
     ) {
+        self.pdfExtractor = pdfExtractor
         self.router = router
         self.repository = repository
         self.revocationRepository = revocationRepository
@@ -95,6 +98,39 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
     }
     
     // MARK: - Methods
+    
+    func handleOpen(url: URL) -> Bool {
+        when(fulfilled: pdfDocument(from: url), repository.getCertificateList())
+            .then { document, certificateList in
+                self.pdfExtractor.extract(
+                    document: document,
+                    ignoreTokens: certificateList.certificates
+                )
+            }
+            .then { extractedTokens in
+                self.router.showCertificatePicker(tokens: extractedTokens)
+            }
+            .then { _ in
+                self.repository.getCertificateList()
+            }
+            .done { [weak self] certificateList in
+                self?.certificateList = certificateList
+                self?.delegate?.viewModelDidUpdate()
+            }
+            .catch { [weak self] _ in
+                self?.router.showCertificateImportError()
+            }
+        return true
+    }
+
+    private func pdfDocument(from url: URL) -> Promise<QRCodeDocumentProtocol> {
+        do {
+            let document = try QRCodePDFDocument(with: url)
+            return .value(document)
+        } catch {
+            return .init(error: error)
+        }
+    }
 
     func updateTrustList() {
         repository.updateTrustListIfNeeded()
@@ -221,7 +257,7 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
         }
         .then { payload -> Promise<QRCodeScanable> in
             if  let data = payload.data(using: .utf8),
-                let ticket = try? JSONDecoder().decode(ValidationServiceInitialisation.self, from: data) {
+                let ticket = try? self.jsonDecoder.decode(ValidationServiceInitialisation.self, from: data) {
                 return .value(ticket)
             }
             self.lastPlayload = payload.trimmingCharacters(in: .whitespaces)

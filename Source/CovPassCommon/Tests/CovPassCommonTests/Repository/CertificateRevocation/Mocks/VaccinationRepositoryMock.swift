@@ -12,6 +12,7 @@ import XCTest
 
 public class VaccinationRepositoryMock: VaccinationRepositoryProtocol {
     let saveCertExpectation = XCTestExpectation(description: "get certificate list has to be called")
+    let updateExpectation = XCTestExpectation(description: "updateExpectation")
     var lastUpdateTrustList: Date?
     var shouldTrustListUpdate: Bool = false
 
@@ -106,5 +107,10 @@ public class VaccinationRepositoryMock: VaccinationRepositoryProtocol {
 
     public func replace(_ token: ExtendedCBORWebToken) -> Promise<Void> {
         .init()
+    }
+
+    public func update(_ tokens: [ExtendedCBORWebToken]) -> Promise<Void> {
+        updateExpectation.fulfill()
+        return .init()
     }
 }

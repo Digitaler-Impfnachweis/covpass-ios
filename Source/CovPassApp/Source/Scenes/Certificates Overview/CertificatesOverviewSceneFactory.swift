@@ -23,8 +23,10 @@ struct CertificatesOverviewSceneFactory: SceneFactory {
     }
 
     func make() -> UIViewController {
-        guard let revocationRepository = CertificateRevocationRepository() else {
-            fatalError("Revocation Repository can´t initialized")
+        guard let revocationRepository = CertificateRevocationRepository(),
+              let pdfExtractor = PDFCBORExtractor()
+        else {
+            fatalError("Dependencies can´t be initialized.")
         }
         let viewModel = CertificatesOverviewViewModel(
             router: router,
@@ -33,7 +35,8 @@ struct CertificatesOverviewSceneFactory: SceneFactory {
             certLogic: DCCCertLogic.create(),
             boosterLogic: BoosterLogic.create(),
             userDefaults: UserDefaultsPersistence(),
-            locale: .current
+            locale: .current,
+            pdfExtractor: pdfExtractor
         )
         let viewController = CertificatesOverviewViewController(viewModel: viewModel)
         let navigationController = UINavigationController(rootViewController: viewController)

@@ -33,6 +33,10 @@ class MockCertificateViewModel: CertificatesOverviewViewModelProtocol {
 
     var certificateViewModels: [CardViewModel] = []
 
+    func handleOpen(url: URL) -> Bool {
+        return true
+    }
+
     func updateBoosterRules() {
         
     }

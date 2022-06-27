@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import Vision
 
-public class QRCodePDFDocument: QRCodePDFDocumentProtocol {
+public final class QRCodePDFDocument: QRCodeDocumentProtocol {
     public let numberOfPages: Int
 
     private let document: CGPDFDocument

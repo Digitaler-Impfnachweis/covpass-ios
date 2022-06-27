@@ -1,28 +1,24 @@
-import Foundation
 import UIKit
 import CovPassCommon
 import PromiseKit
 
-private enum Constants {
-    enum Keys {
-        static var title = "certificate_renewal_confirmation_page_headline".localized(bundle: .main)
-        static var subTitle = "renewal_expiry_success_copy".localized(bundle: .main)
-        static var submitButton = "renewal_expiry_success_button".localized(bundle: .main)
-    }
-}
+open class ResultViewViewModel: ResultViewViewModelProtocol {
+    public let image: UIImage
+    public let title: String
+    public let description: String
+    public let buttonTitle: String
+    private let resolver: Resolver<Void>
 
-public class ResultViewViewModel: ResultViewViewModelProtocol {
-    
-    public var image = UIImage.successLarge
-    public var title = Constants.Keys.title
-    public var description = Constants.Keys.subTitle
-    public var buttonTitle = Constants.Keys.submitButton
-    private var router: ResultViewRouterProtocol
-    private var resolver: Resolver<Void>
-
-    public init (router: ResultViewRouterProtocol,
-                 resolver: Resolver<Void>) {
-        self.router = router
+    public init (image: UIImage,
+                 title: String,
+                 description: String,
+                 buttonTitle: String,
+                 resolver: Resolver<Void>
+    ) {
+        self.image = image
+        self.title = title
+        self.description = description
+        self.buttonTitle = buttonTitle
         self.resolver = resolver
     }
     

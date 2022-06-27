@@ -40,6 +40,17 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         #endif
         return true
     }
+    
+    func application(_ application: UIApplication, handleOpen url: URL) -> Bool {
+        guard let window = self.window,
+              let rootViewController = window.rootViewController,
+              let navigationController = rootViewController as? UINavigationController,
+              let certificateOverviewViewController = navigationController.viewControllers.first as? CertificatesOverviewViewController else {
+            return false
+        }
+
+        return certificateOverviewViewController.viewModel.handleOpen(url: url)
+    }
 
     private func setupKeychain() throws {
         if !UserDefaults.StartupInfo.bool(.appInstalled) {

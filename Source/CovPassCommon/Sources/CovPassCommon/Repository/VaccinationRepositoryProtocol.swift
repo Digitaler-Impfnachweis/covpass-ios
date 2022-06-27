@@ -67,4 +67,9 @@ public protocol VaccinationRepositoryProtocol {
 
     /// Replaces the given token. If it does not exist an error is generated.
     func replace(_ token: ExtendedCBORWebToken) -> Promise<Void>
+
+    /// If equal tokens already exist, they are replaced with the given tokens. If not, the tokens is added.
+    /// - Parameter tokens: The new tokens to update or add. May be empty.
+    /// - Returns: Error if insertion failed.
+    func update(_ tokens: [ExtendedCBORWebToken]) -> Promise<Void>
 }

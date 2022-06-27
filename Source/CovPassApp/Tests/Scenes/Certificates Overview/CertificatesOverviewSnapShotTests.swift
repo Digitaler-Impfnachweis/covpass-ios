@@ -35,7 +35,8 @@ class CertificateOverviewSnapShotTests: BaseSnapShotTests {
             certLogic: DCCCertLogicMock(),
             boosterLogic: BoosterLogicMock(),
             userDefaults: UserDefaultsPersistence(),
-            locale: .current
+            locale: .current,
+            pdfExtractor: CertificateExtractorMock()
         )
     }
     

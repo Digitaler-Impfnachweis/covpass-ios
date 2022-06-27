@@ -8,7 +8,7 @@
 import CovPassCommon
 import Foundation
 
-struct QRCodePDFDocumentMock: QRCodePDFDocumentProtocol {
+struct QRCodePDFDocumentMock: QRCodeDocumentProtocol {
     var numberOfPages: Int {
         qrCodes.count
     }

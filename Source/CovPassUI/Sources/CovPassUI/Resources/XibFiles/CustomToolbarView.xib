@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CustomToolbarView" customModule="CovPassUI">
             <connections>
                 <outlet property="leftButton" destination="v34-Dd-H4r" id="tWi-1N-OUa"/>
+                <outlet property="leftButton2" destination="qih-Ne-ToI" id="jMu-Af-Phy"/>
                 <outlet property="rightButton" destination="cGz-S1-zB5" id="mHO-9h-Ttn"/>
             </connections>
         </placeholder>
@@ -17,36 +18,53 @@
         <view opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iN0-l3-epB">
             <rect key="frame" x="0.0" y="0.0" width="498" height="82"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v34-Dd-H4r" userLabel="Left Button">
-                    <rect key="frame" x="16" y="13" width="56" height="56"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="56" id="iPo-do-mPZ"/>
-                        <constraint firstAttribute="width" constant="56" id="uq8-Oq-mgL"/>
-                    </constraints>
-                    <connections>
-                        <action selector="leftButtonPressed" destination="-1" eventType="touchUpInside" id="rNC-7M-T9b"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cGz-S1-zB5" userLabel="Right Button">
+                <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Woz-2G-4iG">
+                    <rect key="frame" x="16" y="13" width="128" height="56"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v34-Dd-H4r" userLabel="Left Button">
+                            <rect key="frame" x="0.0" y="0.0" width="56" height="56"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="56" id="iPo-do-mPZ"/>
+                                <constraint firstAttribute="width" constant="56" id="uq8-Oq-mgL"/>
+                            </constraints>
+                            <connections>
+                                <action selector="leftButtonPressed" destination="-1" eventType="touchUpInside" id="rNC-7M-T9b"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qih-Ne-ToI" userLabel="Left Button">
+                            <rect key="frame" x="72" y="0.0" width="56" height="56"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="56" id="BZv-Rh-2HW"/>
+                                <constraint firstAttribute="height" constant="56" id="pqO-vm-gCm"/>
+                            </constraints>
+                            <connections>
+                                <action selector="leftButton2Pressed" destination="-1" eventType="touchUpInside" id="JTx-Xw-dgF"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                </stackView>
+                <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="MFn-7a-jCX">
                     <rect key="frame" x="410" y="13" width="56" height="56"/>
-                    <accessibility key="accessibilityConfiguration">
-                        <bool key="isElement" value="NO"/>
-                    </accessibility>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="56" id="N8P-Sr-EvW"/>
-                        <constraint firstAttribute="width" constant="56" id="uu7-Di-pBb"/>
-                    </constraints>
-                    <connections>
-                        <action selector="didTouchRightButton" destination="-1" eventType="touchUpInside" id="CZT-f7-zaa"/>
-                    </connections>
-                </button>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cGz-S1-zB5" userLabel="Right Button">
+                            <rect key="frame" x="0.0" y="0.0" width="56" height="56"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="56" id="N8P-Sr-EvW"/>
+                                <constraint firstAttribute="width" constant="56" id="uu7-Di-pBb"/>
+                            </constraints>
+                            <connections>
+                                <action selector="didTouchRightButton" destination="-1" eventType="touchUpInside" id="CZT-f7-zaa"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                </stackView>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="v34-Dd-H4r" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="7fW-ll-sW9"/>
-                <constraint firstAttribute="trailing" secondItem="cGz-S1-zB5" secondAttribute="trailing" constant="32" id="Gpj-P3-MWM"/>
-                <constraint firstItem="v34-Dd-H4r" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="eTr-Yz-5Hn"/>
-                <constraint firstItem="cGz-S1-zB5" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="zyT-SH-qah"/>
+                <constraint firstItem="Woz-2G-4iG" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="4I0-mb-Rwq"/>
+                <constraint firstItem="MFn-7a-jCX" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="Ky1-ug-t2R"/>
+                <constraint firstAttribute="trailing" secondItem="MFn-7a-jCX" secondAttribute="trailing" constant="32" id="Nje-OR-pvH"/>
+                <constraint firstItem="Woz-2G-4iG" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="Zhn-2X-J8d"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <edgeInsets key="layoutMargins" top="0.0" left="0.0" bottom="0.0" right="0.0"/>
