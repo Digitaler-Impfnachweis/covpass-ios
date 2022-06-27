@@ -1,8 +1,8 @@
 //
 //  Array+ExtendedCBORWebTokenTests.swift
 //  
-//
-//  Created by Thomas Kuleßa on 23.02.22.
+//  © Copyright IBM Deutschland GmbH 2021
+//  SPDX-License-Identifier: Apache-2.0
 //
 
 @testable import CovPassCommon

@@ -1,8 +1,8 @@
 //
 //  ScanRouter.swift
 //  
-//
-//  Created by Fatih Karakurt on 08.06.22.
+//  © Copyright IBM Deutschland GmbH 2021
+//  SPDX-License-Identifier: Apache-2.0
 //
 
 import CovPassCommon

@@ -1,8 +1,8 @@
 //
 //  File.swift
 //  
-//
-//  Created by Andreas Kostuch on 24.11.21.
+//  © Copyright IBM Deutschland GmbH 2021
+//  SPDX-License-Identifier: Apache-2.0
 //
 
 import Foundation

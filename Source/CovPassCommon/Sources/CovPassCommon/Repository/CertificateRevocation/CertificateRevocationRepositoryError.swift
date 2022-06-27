@@ -1,8 +1,8 @@
 //
 //  CertificateRevocationRepositoryError.swift
 //  
-//
-//  Created by Thomas Kuleßa on 28.03.22.
+//  © Copyright IBM Deutschland GmbH 2021
+//  SPDX-License-Identifier: Apache-2.0
 //
 
 import Foundation

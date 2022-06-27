@@ -1,8 +1,8 @@
 //
 //  String+Base45Tests.swift
 //  
-//
-//  Created by Thomas Kuleßa on 21.02.22.
+//  © Copyright IBM Deutschland GmbH 2021
+//  SPDX-License-Identifier: Apache-2.0
 //
 
 @testable import CovPassCommon

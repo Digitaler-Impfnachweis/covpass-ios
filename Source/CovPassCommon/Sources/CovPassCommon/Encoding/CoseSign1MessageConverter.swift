@@ -1,8 +1,8 @@
 //
 //  CoseSign1MessageConverter.swift
 //  
-//
-//  Created by Thomas Kuleßa on 09.06.22.
+//  © Copyright IBM Deutschland GmbH 2021
+//  SPDX-License-Identifier: Apache-2.0
 //
 
 import Foundation

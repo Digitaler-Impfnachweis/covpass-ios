@@ -20,8 +20,8 @@
 //
 //  X509.swift
 //
-//
-//  Created by Yannick Spreen on 4/17/21.
+//  © Copyright IBM Deutschland GmbH 2021
+//  SPDX-License-Identifier: Apache-2.0
 //
 
 import Foundation

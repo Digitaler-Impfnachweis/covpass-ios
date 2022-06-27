@@ -1,8 +1,8 @@
 //
 //  Array+RecoveryTests.swift
 //
-//
-//  Created by Fatih Karakurt on 25.04.22.
+//  © Copyright IBM Deutschland GmbH 2021
+//  SPDX-License-Identifier: Apache-2.0
 //
 
 @testable import CovPassCommon
