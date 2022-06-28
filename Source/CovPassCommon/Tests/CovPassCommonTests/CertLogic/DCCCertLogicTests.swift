@@ -40,7 +40,8 @@ class DCCCertLogicTests: XCTestCase {
             userDefaults: MockPersistence(),
             boosterLogic: BoosterLogicMock(),
             publicKeyURL: URL(fileURLWithPath: "pubkey.pem"),
-            initialDataURL: trustListURL
+            initialDataURL: trustListURL,
+            queue: .global()
         )
     }
 

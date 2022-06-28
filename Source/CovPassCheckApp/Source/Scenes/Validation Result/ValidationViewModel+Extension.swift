@@ -56,6 +56,7 @@ extension ValidationViewModelProtocol {
         firstly {
             router.scanQRCode()
         }
+        .then { $0.mapOnScanResult() }
         .then {
             ParseCertificateUseCase(scanResult: $0,
                                     vaccinationRepository: repository).execute()

@@ -20,8 +20,8 @@ class GProofMockRouter: GProofRouterProtocol {
     var recovery90DaysErrorShown = XCTestExpectation()
     var sceneCoordinator: SceneCoordinator = SceneCoordinatorMock()
 
-    func scanQRCode() -> Promise<ScanResult> {
-        qrCodeScanShouldCanceled ? .init { resolver in resolver.cancel() } : .value(.success(""))
+    func scanQRCode() -> Promise<QRCodeImportResult> {
+        qrCodeScanShouldCanceled ? .init { resolver in resolver.cancel() } : .value(.scanResult(.success("")))
     }
     
     func showCertificate(_ certificate: ExtendedCBORWebToken?,

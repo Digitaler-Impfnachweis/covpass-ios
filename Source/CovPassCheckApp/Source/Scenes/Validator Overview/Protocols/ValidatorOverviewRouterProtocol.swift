@@ -13,7 +13,7 @@ import Scanner
 import UIKit
 
 protocol ValidatorOverviewRouterProtocol: DialogRouterProtocol {
-    func scanQRCode() -> Promise<ScanResult>
+    func scanQRCode() -> Promise<QRCodeImportResult>
     func showCertificate(_ certificate: ExtendedCBORWebToken?,
                          _2GContext: Bool,
                          userDefaults: Persistence)

@@ -250,10 +250,38 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
             withIntroduction ? router.showHowToScan() : Promise.value
         }
         .then {
-            self.router.scanQRCode()
+            self.router.showQRCodeScanAndSelectionView()
         }
-        .map { result in
-            try self.payloadFromScannerResult(result)
+        .done { [weak self] qrCodeImportResult in
+            switch qrCodeImportResult {
+            case .pickerImport:
+                self?.processPickerImport()
+            case let .scanResult(result):
+                self?.processScanResult(result)
+            }
+        }
+        .catch { [weak self] error in
+            self?.errorHandling(error)
+        }
+    }
+
+    private func processPickerImport() {
+        firstly {
+            repository.getCertificateList()
+        }
+        .ensure {
+            self.isLoading = false
+        }
+        .done { [weak self] certificateList in
+            self?.certificateList = certificateList
+            self?.delegate?.viewModelDidUpdate()
+        }
+        .cauterize()
+    }
+
+    private func processScanResult(_ result: ScanResult) {
+        firstly {
+            self.payloadFromScannerResult(result)
         }
         .then { payload -> Promise<QRCodeScanable> in
             if  let data = payload.data(using: .utf8),
@@ -357,12 +385,12 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
         return router.showCertificatesReissue(for:tokens, context: .boosterRenewal)
     }
 
-    private func payloadFromScannerResult(_ result: ScanResult) throws -> String {
+    private func payloadFromScannerResult(_ result: ScanResult) -> Promise<String> {
         switch result {
         case let .success(payload):
-            return payload
+            return .value(payload)
         case let .failure(error):
-            throw error
+            return .init(error: error)
         }
     }
     

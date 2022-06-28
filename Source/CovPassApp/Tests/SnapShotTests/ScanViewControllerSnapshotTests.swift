@@ -13,31 +13,27 @@ import UIKit
 
 class ScanViewSnapShotTests: BaseSnapShotTests {
     func testDefault() {
-        let (_, resolver) = Promise<ScanResult>.pending()
-        let router = ScanRouterMock()
-        let viewModel = ScanViewModel(
-            cameraAccessProvider: CameraAccessProviderMock(),
-            resolvable: resolver,
-            router: router,
-            isDocumentPickerEnabled: false,
-            certificateExtractor: CertificateExtractorMock(),
-            certificateRepository: VaccinationRepositoryMock()
-        )
+        let viewModel = viewModel()
         let viewController = ScanViewController(viewModel: viewModel)
         verifyView(view: viewController.view, height: 500)
     }
-    
-    func testIsDocumentPickerEnabled() {
-        let (_, resolver) = Promise<ScanResult>.pending()
+
+    private func viewModel(isDocumentPickerEnabled: Bool = false) -> ScanViewModel {
+        let (_, resolver) = Promise<QRCodeImportResult>.pending()
         let router = ScanRouterMock()
         let viewModel = ScanViewModel(
             cameraAccessProvider: CameraAccessProviderMock(),
             resolvable: resolver,
             router: router,
-            isDocumentPickerEnabled: true,
+            isDocumentPickerEnabled: isDocumentPickerEnabled,
             certificateExtractor: CertificateExtractorMock(),
             certificateRepository: VaccinationRepositoryMock()
         )
+        return viewModel
+    }
+    
+    func testIsDocumentPickerEnabled() {
+        let viewModel = viewModel(isDocumentPickerEnabled: true)
         let viewController = ScanViewController(viewModel: viewModel)
         verifyView(view: viewController.view, height: 500)
     }

@@ -34,7 +34,8 @@ class VaccinationRepositoryTests: XCTestCase {
             userDefaults: userDefaults,
             boosterLogic: boosterLogic,
             publicKeyURL: Bundle.module.url(forResource: "pubkey.pem", withExtension: nil)!,
-            initialDataURL: trustListURL
+            initialDataURL: trustListURL,
+            queue: .global()
         )
     }
     
@@ -53,7 +54,8 @@ class VaccinationRepositoryTests: XCTestCase {
             userDefaults: userDefaults,
             boosterLogic: boosterLogic,
             publicKeyURL: Bundle.module.url(forResource: "pubkey.pem", withExtension: nil)!,
-            initialDataURL: trustListURL
+            initialDataURL: trustListURL,
+            queue: .global()
         )
         return sut
     }

@@ -19,6 +19,7 @@ public class VaccinationRepositoryMock: VaccinationRepositoryProtocol {
     let addExpectation = XCTestExpectation(description: "addExpectation")
     let deleteExpectation = XCTestExpectation(description: "deleteExpectation")
     let updateExpectation = XCTestExpectation(description: "updateExpectation")
+    let scanCertificateExpectation = XCTestExpectation(description: "scanCertificateExpectation")
     var lastUpdatedTrustList: Date?
     var certificates: [ExtendedCBORWebToken] = []
     var certPair: [CertificatePair] = []
@@ -122,6 +123,7 @@ public class VaccinationRepositoryMock: VaccinationRepositoryProtocol {
 
     public func scanCertificate(_ qrCodeData: String, isCountRuleEnabled: Bool, expirationRuleIsActive: Bool) -> Promise<QRCodeScanable> {
         self.qrCodeData = qrCodeData
+        scanCertificateExpectation.fulfill()
         return .value(try! ExtendedCBORWebToken.mock())
     }
 

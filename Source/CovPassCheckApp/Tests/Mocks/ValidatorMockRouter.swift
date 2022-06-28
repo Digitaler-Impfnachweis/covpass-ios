@@ -31,8 +31,8 @@ class ValidatorMockRouter: ValidatorOverviewRouterProtocol {
                     boosterAsTest: Bool) {
     }
     
-    func scanQRCode() -> Promise<ScanResult> {
-        .value(.success(""))
+    func scanQRCode() -> Promise<QRCodeImportResult> {
+        .value(.scanResult(.success("")))
     }
     
     func showCertificate(_ certificate: ExtendedCBORWebToken?, _2GContext: Bool, userDefaults: Persistence) {

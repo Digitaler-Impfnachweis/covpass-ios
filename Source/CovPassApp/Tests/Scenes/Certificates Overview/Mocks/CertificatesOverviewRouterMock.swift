@@ -20,12 +20,15 @@ class CertificatesOverviewRouterMock: CertificatesOverviewRouterProtocol {
     let toWebsiteFAQExpectation = XCTestExpectation(description: "toWebsiteFAQExpectation")
     let showCertificateImportErrorExpectation = XCTestExpectation(description: "showCertificateImportErrorExpectation")
     let showCertificatePickerExpectation = XCTestExpectation(description: "showCertificatePickerExpectation")
+    let showQRCodeScanAndSelectionViewExpectation = XCTestExpectation(description: "showQRCodeScanAndSelectionViewExpectation")
+    let showHowToScanExpectation = XCTestExpectation(description: "showHowToScanExpectation")
     var sceneCoordinator: SceneCoordinator = SceneCoordinatorMock()
     var error: Error?
     var scanCountErrorResponse: ScanCountErrorResponse = .download
     var receivedFaqURL: URL?
     var scanQRCodePayload: String = ""
     var receivedCertificatePickerTokens: [ExtendedCBORWebToken]?
+    var showQRCodeScanAndSelectionViewValue = QRCodeImportResult.scanResult(.success(""))
 
     func showCheckSituation(userDefaults: Persistence) -> Promise<Void> {
         showCheckSituationExpectation.fulfill()
@@ -53,7 +56,8 @@ class CertificatesOverviewRouterMock: CertificatesOverviewRouterProtocol {
     }
 
     func showHowToScan() -> Promise<Void> {
-        .value
+        showHowToScanExpectation.fulfill()
+        return .value
     }
 
     func showScanCountWarning() -> Promise<Bool> {
@@ -68,11 +72,12 @@ class CertificatesOverviewRouterMock: CertificatesOverviewRouterProtocol {
         .value
     }
 
-    func scanQRCode() -> Promise<ScanResult> {
+    func showQRCodeScanAndSelectionView() -> Promise<QRCodeImportResult> {
+        showQRCodeScanAndSelectionViewExpectation.fulfill()
         if let error = error {
             return .init(error: error)
         }
-        return .value(.success(scanQRCodePayload))
+        return .value(showQRCodeScanAndSelectionViewValue)
     }
 
     func showAppInformation() {

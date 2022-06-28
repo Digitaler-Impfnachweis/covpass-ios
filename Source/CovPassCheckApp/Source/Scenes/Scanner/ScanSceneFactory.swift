@@ -28,7 +28,7 @@ public struct ScanSceneFactory: ResolvableSceneFactory {
     
     // MARK: - Methods
     
-    public func make(resolvable: Resolver<ScanResult>) -> UIViewController {
+    public func make(resolvable: Resolver<QRCodeImportResult>) -> UIViewController {
         let viewModel = ScanViewModel(
             cameraAccessProvider: cameraAccessProvider,
             resolvable: resolvable,

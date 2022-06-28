@@ -21,7 +21,8 @@ extension VaccinationRepository {
             userDefaults: UserDefaultsPersistence(),
             boosterLogic: BoosterLogic.create(),
             publicKeyURL: Bundle.commonBundle.url(forResource: XCConfiguration.value(String.self, forKey: "TRUST_LIST_PUBLIC_KEY"), withExtension: nil)!,
-            initialDataURL: Bundle.commonBundle.url(forResource: XCConfiguration.value(String.self, forKey: "TRUST_LIST_STATIC_DATA"), withExtension: nil)!
+            initialDataURL: Bundle.commonBundle.url(forResource: XCConfiguration.value(String.self, forKey: "TRUST_LIST_STATIC_DATA"), withExtension: nil)!,
+            queue: .global()
         )
     }
 }

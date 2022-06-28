@@ -150,7 +150,7 @@ class CertificatesOverviewRouter: CertificatesOverviewRouterProtocol, DialogRout
         )
     }
     
-    func scanQRCode() -> Promise<ScanResult> {
+    func showQRCodeScanAndSelectionView() -> Promise<QRCodeImportResult> {
         sceneCoordinator.present(
             ScanSceneFactory(
                 cameraAccessProvider: CameraAccessProvider(router: DialogRouter(sceneCoordinator: sceneCoordinator)),

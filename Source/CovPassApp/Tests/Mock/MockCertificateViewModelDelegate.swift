@@ -16,6 +16,7 @@ class MockCertificateViewModelDelegate: CertificatesOverviewViewModelDelegate {
     var needsFirstCertificateVisibleCalled = false
     var needsCertificateVisibleAtIndex: Int?
     let viewModelDidUpdateExpectation = XCTestExpectation(description: "viewModelDidUpdateExpectation")
+    let viewModelNeedsCertificateVisibleExpectation = XCTestExpectation(description: "viewModelNeedsCertificateVisibleExpectation")
 
     func viewModelDidUpdate() {
         updateCalled = true
@@ -28,5 +29,6 @@ class MockCertificateViewModelDelegate: CertificatesOverviewViewModelDelegate {
 
     func viewModelNeedsCertificateVisible(at index: Int) {
         needsCertificateVisibleAtIndex = index
+        viewModelNeedsCertificateVisibleExpectation.fulfill()
     }
 }

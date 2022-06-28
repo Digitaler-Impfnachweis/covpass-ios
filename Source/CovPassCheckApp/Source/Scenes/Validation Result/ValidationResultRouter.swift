@@ -30,7 +30,7 @@ public struct ValidationResultRouter: ValidationResultRouterProtocol {
         sceneCoordinator.dimiss()
     }
     
-    public func scanQRCode() -> Promise<ScanResult> {
+    public func scanQRCode() -> Promise<QRCodeImportResult> {
         sceneCoordinator.present(
             ScanSceneFactory(
                 cameraAccessProvider: CameraAccessProvider(router: DialogRouter(sceneCoordinator: sceneCoordinator)),

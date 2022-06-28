@@ -27,6 +27,7 @@ public class VaccinationRepository: VaccinationRepositoryProtocol {
     private let boosterLogic: BoosterLogicProtocol
     private let publicKeyURL: URL
     private let initialDataURL: URL
+    private let queue: DispatchQueue
     static let entityBlacklist = [
         "81d51278c45f29dbba6b243c9c25cb0266b3d32e425b7a9db1fa6fcd58ad308c5b3857be6470a84403680d833a3f28fb02fb8c809324811b573c131d1ae52599",
         "75f6df21f51b4998740bf3e1cdaff1c76230360e1baf5ac0a2b9a383a1f9fa34dd77b6aa55a28cc5843d75b7c4a89bdbfc9a9177da244861c4068e76847dd150",
@@ -55,7 +56,10 @@ public class VaccinationRepository: VaccinationRepositoryProtocol {
                 userDefaults: Persistence,
                 boosterLogic: BoosterLogicProtocol,
                 publicKeyURL: URL,
-                initialDataURL: URL) {
+                initialDataURL: URL,
+                queue: DispatchQueue
+    ) {
+        self.queue = queue
         self.revocationRepo = revocationRepo
         self.service = service
         self.keychain = keychain
@@ -449,11 +453,19 @@ public class VaccinationRepository: VaccinationRepositoryProtocol {
         getCertificateList()
             .map(\.certificates)
             .then { existingTokens -> Promise<Void> in
-                let promises = tokens.map { token in
-                    self.update(token, existingTokens: existingTokens)
-                }
-                return when(fulfilled: promises)
+                self.update(tokens, existingTokens: existingTokens)
             }
+    }
+
+    private func update(_ tokens: [ExtendedCBORWebToken], existingTokens: [ExtendedCBORWebToken]) -> Promise<Void> {
+        Promise { seal in
+            queue.async {
+                for token in tokens {
+                    try? self.update(token, existingTokens: existingTokens).wait()
+                }
+                seal.fulfill_()
+            }
+        }
     }
 
     private func update(_ token: ExtendedCBORWebToken, existingTokens: [ExtendedCBORWebToken]) -> Promise<Void> {

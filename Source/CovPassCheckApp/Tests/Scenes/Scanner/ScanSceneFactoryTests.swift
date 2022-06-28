@@ -27,7 +27,7 @@ class ScanSceneFactoryTests: XCTestCase {
 
     func testMake() {
         // Given
-        let (_, resolver) = Promise<ScanResult>.pending()
+        let (_, resolver) = Promise<QRCodeImportResult>.pending()
 
         // When
         _ = sut.make(resolvable: resolver)

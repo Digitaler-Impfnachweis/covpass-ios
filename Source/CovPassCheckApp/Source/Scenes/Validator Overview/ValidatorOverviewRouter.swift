@@ -26,7 +26,7 @@ class ValidatorOverviewRouter: ValidatorOverviewRouterProtocol {
     
     // MARK: - Methods
     
-    func scanQRCode() -> Promise<ScanResult> {
+    func scanQRCode() -> Promise<QRCodeImportResult> {
         sceneCoordinator.present(
             ScanSceneFactory(
                 cameraAccessProvider: CameraAccessProvider(

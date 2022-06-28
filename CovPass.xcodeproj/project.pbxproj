@@ -399,6 +399,7 @@
 		E79CF9F227E8C2FA00C4619E /* CertificateRevocationRepository+Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79CF9F127E8C2FA00C4619E /* CertificateRevocationRepository+Factory.swift */; };
 		E79CF9F627E8C6DB00C4619E /* CertificateRevocationRepository+FactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79CF9F327E8C5DB00C4619E /* CertificateRevocationRepository+FactoryTests.swift */; };
 		E7AD8C7527D11A2E00220E9F /* SVGPDFExporter+Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7AD8C7327D1197600220E9F /* SVGPDFExporter+Factory.swift */; };
+		E7B76647286B7282003CAEB4 /* QRCodeImportResult+CovPassCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B76646286B7282003CAEB4 /* QRCodeImportResult+CovPassCheck.swift */; };
 		E7B98B302858BBB5005861C8 /* CertificateImportSelectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7B98B2F2858BBB5005861C8 /* CertificateImportSelectionViewController.xib */; };
 		E7BAB77E2805BB4700C6AA28 /* CertificateCardViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7BAB77D2805BB4700C6AA28 /* CertificateCardViewModelTests.swift */; };
 		E7C8A4712853333900025770 /* CoseSign1MessageConverter+Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C8A4702853333900025770 /* CoseSign1MessageConverter+Factory.swift */; };
@@ -883,6 +884,7 @@
 		E79CF9F127E8C2FA00C4619E /* CertificateRevocationRepository+Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CertificateRevocationRepository+Factory.swift"; sourceTree = "<group>"; };
 		E79CF9F327E8C5DB00C4619E /* CertificateRevocationRepository+FactoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CertificateRevocationRepository+FactoryTests.swift"; sourceTree = "<group>"; };
 		E7AD8C7327D1197600220E9F /* SVGPDFExporter+Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SVGPDFExporter+Factory.swift"; sourceTree = "<group>"; };
+		E7B76646286B7282003CAEB4 /* QRCodeImportResult+CovPassCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "QRCodeImportResult+CovPassCheck.swift"; sourceTree = "<group>"; };
 		E7B98B2F2858BBB5005861C8 /* CertificateImportSelectionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CertificateImportSelectionViewController.xib; sourceTree = "<group>"; };
 		E7BAB77D2805BB4700C6AA28 /* CertificateCardViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateCardViewModelTests.swift; sourceTree = "<group>"; };
 		E7C8A4702853333900025770 /* CoseSign1MessageConverter+Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoseSign1MessageConverter+Factory.swift"; sourceTree = "<group>"; };
@@ -1844,14 +1846,15 @@
 		21FBCA5E264F011900CAEF44 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				098E44D1282D869200411776 /* VaccinationExtension.swift */,
 				21FBCA5F264F011900CAEF44 /* ApiServiceFactory.swift */,
 				38FCEEC826EB9DD200D10A22 /* BoosterLogicFactory.swift */,
 				E79CF9F127E8C2FA00C4619E /* CertificateRevocationRepository+Factory.swift */,
 				E76229F32816D9B400BF937C /* DataPrivacySceneFactory.swift */,
 				3829A30A269CFF7C00B8346C /* DCCCertLogicExtension.swift */,
+				E7B76646286B7282003CAEB4 /* QRCodeImportResult+CovPassCheck.swift */,
 				21FBCA60264F011900CAEF44 /* StringLocalization.swift */,
 				E79CF9EB27E8923C00C4619E /* URLSession+CertificateRevocation.swift */,
+				098E44D1282D869200411776 /* VaccinationExtension.swift */,
 				38E94DEA266122E30015553C /* VaccinationRepositoryExtension.swift */,
 			);
 			path = Extensions;
@@ -3163,6 +3166,7 @@
 				092699F1278C55BE00331D77 /* GProofDifferentPersonRouter.swift in Sources */,
 				098748B027FB24ED00A28414 /* ValidateCertificateUseCase.swift in Sources */,
 				38E94DEC266123520015553C /* VaccinationRepositoryExtension.swift in Sources */,
+				E7B76647286B7282003CAEB4 /* QRCodeImportResult+CovPassCheck.swift in Sources */,
 				2181C1B3264F040500DE7412 /* StringLocalization.swift in Sources */,
 				88AB2AC025FA433F00D4EA52 /* AppDelegate.swift in Sources */,
 				2181C162264F035500DE7412 /* ValidatorOverviewRouter.swift in Sources */,

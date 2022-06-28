@@ -31,7 +31,7 @@ public class ScanViewModel: CancellableViewModelProtocol {
     // MARK: - Properties
 
     private let cameraAccessProvider: CameraAccessProviderProtocol
-    let resolver: Resolver<ScanResult>
+    let resolver: Resolver<QRCodeImportResult>
     var delegate: ScanViewModelDelegate?
     var onCameraAccess: (() -> Void)?
     var isDocumentPickerEnabled: Bool
@@ -62,7 +62,7 @@ public class ScanViewModel: CancellableViewModelProtocol {
 
     public init(
         cameraAccessProvider: CameraAccessProviderProtocol,
-        resolvable: Resolver<ScanResult>,
+        resolvable: Resolver<QRCodeImportResult>,
         router: ScanRouterProtocol,
         isDocumentPickerEnabled: Bool,
         certificateExtractor: CertificateExtractorProtocol?,
@@ -99,7 +99,7 @@ public class ScanViewModel: CancellableViewModelProtocol {
     }
 
     func onResult(_ result: ScanResult) {
-        resolver.fulfill(result)
+        resolver.fulfill(.scanResult(result))
     }
 
     public func cancel() {
@@ -152,6 +152,9 @@ public class ScanViewModel: CancellableViewModelProtocol {
         }
         .then{ tokens in
             self.router.showCertificatePicker(tokens: tokens)
+        }
+        .done{ _ in
+            self.resolver.fulfill(.pickerImport)
         }
         .cauterize()
     }

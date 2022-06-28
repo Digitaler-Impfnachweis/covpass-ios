@@ -18,7 +18,7 @@ class ScanViewModelTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
-        let (_, resolver) = Promise<ScanResult>.pending()
+        let (_, resolver) = Promise<QRCodeImportResult>.pending()
         router = ScanRouterMock()
         certificateRepository = .init()
         pdfCBORExtractor = .init()
@@ -84,7 +84,7 @@ class ScanViewModelTests: XCTestCase {
     func testDocumentPicked_dependencies_missing() throws {
         // Given
         let url = FileManager.default.temporaryDirectory
-        let (_, resolver) = Promise<ScanResult>.pending()
+        let (_, resolver) = Promise<QRCodeImportResult>.pending()
         sut = .init(
             cameraAccessProvider: CameraAccessProviderMock(),
             resolvable: resolver,
@@ -122,7 +122,7 @@ class ScanViewModelTests: XCTestCase {
     func testImagePicked_dependencies_missing() throws {
         // Given
         let image = UIImage()
-        let (_, resolver) = Promise<ScanResult>.pending()
+        let (_, resolver) = Promise<QRCodeImportResult>.pending()
         sut = .init(
             cameraAccessProvider: CameraAccessProviderMock(),
             resolvable: resolver,

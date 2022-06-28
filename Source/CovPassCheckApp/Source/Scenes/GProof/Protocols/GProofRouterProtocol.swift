@@ -16,7 +16,6 @@ enum GProofResult {
 }
 
 protocol GProofRouterProtocol: DialogRouterProtocol, ValidationResultRouterProtocol {
-    func scanQRCode() -> Promise<ScanResult>
     func showCertificate(_ certificate: ExtendedCBORWebToken?,
                          _2GContext: Bool,
                          error: Error?,
