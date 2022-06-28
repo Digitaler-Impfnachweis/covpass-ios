@@ -12,7 +12,6 @@ import CovPassCommon
 
 protocol CertificateItemDetailViewModelProtocol {
     var title: String { get }
-    var showSubtitle: Bool { get }
     var headline: String { get }
     var revocationText: String { get }
     var isRevoked: Bool { get }

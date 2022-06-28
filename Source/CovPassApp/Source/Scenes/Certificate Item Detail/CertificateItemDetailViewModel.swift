@@ -41,10 +41,6 @@ class CertificateItemDetailViewModel: CertificateItemDetailViewModelProtocol {
         return String(format: "vaccination_certificate_detail_view_vaccination_title".localized, dgc.v?.first?.dn ?? 0, dgc.v?.first?.sd ?? 0)
     }
 
-    var showSubtitle: Bool {
-        dgc.v?.first?.dn == 1 && dgc.v?.first?.sd == 1
-    }
-
     var headline: String {
         if dgc.r != nil {
             return "recovery_certificate_detail_view_headline".localized
