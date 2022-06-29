@@ -1577,7 +1577,7 @@
 
 "renewal_expiry_consent_list_item_1" = "The renewal of certificates is voluntary and free of charge.";
 
-"renewal_expiry_consent_list_item_2" = "To ensure that certificates can only be renewed once, the RKI documents the identifier of the old and the renewed certificate. The other data on your certificates will be deleted by the RKI immediately after renewal.";
+"renewal_expiry_consent_list_item_2" = "To ensure that certificates can only be updated to a limited extent, the identifier of the old certificate is documented by the RKI. The other data on your certificates will be deleted by the RKI immediately after renewal.";
 
 "renewal_expiry_consent_list_item_3" = "When renewing certificates of family members, please ensure that the person concerned agrees.";
 
