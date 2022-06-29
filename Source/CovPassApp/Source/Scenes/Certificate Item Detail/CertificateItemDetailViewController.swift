@@ -102,9 +102,12 @@ class CertificateItemDetailViewController: UIViewController {
         hintView.containerView?.layer.borderColor = UIColor.infoAccent.cgColor
         stackView.setCustomSpacing(.space_24, after: hintView)
         if viewModel.isExpired {
+            let bodyText = viewModel.isGerman ?
+                "certificate_expired_detail_view_note_message" :
+                "certificate_expires_detail_view_note_nonDE"
             hintView.isHidden = false
             hintView.titleLabel.attributedText = "certificate_expired_detail_view_note_title".localized.styledAs(.header_3)
-            hintView.bodyLabel.attributedText = "certificate_expired_detail_view_note_message".localized.styledAs(.body)
+            hintView.bodyLabel.attributedText = bodyText.localized.styledAs(.body)
         } else if let date = viewModel.expiresSoonDate {
             hintView.isHidden = false
             hintView.iconView.image = .activity

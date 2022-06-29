@@ -207,4 +207,29 @@ class CertificateItemDetailViewModelTests: XCTestCase {
         }
         XCTAssertEqual(listContentItem?.value, "")
     }
+
+    func testIsGerman_true() {
+        // Given
+        let token = CBORWebToken.mockVaccinationCertificate
+        configureSut(token: token.extended())
+
+        // When
+        let isGerman = sut.isGerman
+
+        // Then
+        XCTAssertTrue(isGerman)
+    }
+
+    func testIsGerman_false() {
+        // Given
+        var token = CBORWebToken.mockVaccinationCertificate
+        token.iss = "CZ"
+        configureSut(token: token.extended())
+
+        // When
+        let isGerman = sut.isGerman
+
+        // Then
+        XCTAssertFalse(isGerman)
+    }
 }

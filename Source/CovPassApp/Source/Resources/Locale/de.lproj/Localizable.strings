@@ -771,7 +771,9 @@
 
 "certificates_overview_expired_title" = "Zertifikat abgelaufen";
 
-"certificates_overview_expired_message" = "Sie können Ihre wichtigsten Zertifikate bequem in der CovPass-App austauschen. Nutzen Sie dafür die Erneuerungsfunktion in der Übersicht Ihrer Zertifikate oder scannen Sie ein neu ausgestelltes Zertifikat ein. Sofern ein aktuelleres Impfzertifikat vorliegt, brauchen Sie die vorherigen Impfzertifikate nicht erneuern.";
+"certificates_overview_expired_message" = "Das Ablaufdatum Ihres neuesten Zertifikats wurde überschritten. Sie können dieses Zertifikat bequem in der CovPass-App austauschen. Vorherige Zertifikate werden nicht erneuert. Nutzen Sie dafür die Erneuerungsfunktion in der Übersicht Ihrer Zertifikate oder scannen Sie ein neu ausgestelltes Zertifikat ein.";
+
+"certificates_overview_expired_or_soon_expiring_nonDE" = "Ihr neuestes Zertifikat wurde nicht in Deutschland ausgestellt und kann daher nicht in der App erneuert werden. Bitte wenden Sie sich an den Aussteller des Zertifikats.";
 
 "certificates_overview_expired_action_button_title" = "Neues Zertifikat hinzufügen";
 
@@ -1100,6 +1102,8 @@
 "certificate_expires_detail_view_note_title" = "Zertifikat läuft am %@ um %@ ab";
 
 "certificate_expires_detail_view_note_message" = "Wenn es sich hierbei um Ihr neuestes Zertifikat handelt, können Sie es auf der Übersicht Ihrer Zertifikate erneuern. Sie können frühere Zertifikate nicht erneuern. In Ihrem neuesten Zertifikat sind alle notwendigen Informationen für eine Prüfung enthalten.";
+
+"certificate_expires_detail_view_note_nonDE" = "Dieses Zertifikat wurde nicht in Deutschland ausgestellt und kann daher nicht in der App erneuert werden. Bitte wenden Sie sich an den Aussteller des Zertifikats.";
 
 "certificate_invalid_detail_view_note_title" = "Zertifikat ungültig";
 

@@ -23,6 +23,7 @@ protocol CertificateItemDetailViewModelProtocol {
     var canExportToPDF: Bool { get }
     var vaasResultToken: VAASValidaitonResultToken? { get }
     var hasValidationResult: Bool { get }
+    var isGerman: Bool { get }
     func showQRCode()
     func startPDFExport()
     func deleteCertificate()

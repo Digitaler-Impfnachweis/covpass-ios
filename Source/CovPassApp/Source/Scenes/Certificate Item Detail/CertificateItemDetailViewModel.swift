@@ -23,8 +23,9 @@ class CertificateItemDetailViewModel: CertificateItemDetailViewModelProtocol {
     // MARK: - Properties
 
     let router: CertificateItemDetailRouterProtocol
+    let isGerman: Bool
     private let repository: VaccinationRepositoryProtocol
-    private var certificate: ExtendedCBORWebToken
+    private let certificate: ExtendedCBORWebToken
     private var dgc: DigitalGreenCertificate {
         certificate.vaccinationCertificate.hcert.dgc
     }
@@ -165,6 +166,7 @@ class CertificateItemDetailViewModel: CertificateItemDetailViewModelProtocol {
         self.certificate = certificate
         resolver = resolvable
         self.vaasResultToken = vaasResultToken
+        isGerman = certificate.vaccinationCertificate.isGermanIssuer
     }
 
     // MARK: - Methods

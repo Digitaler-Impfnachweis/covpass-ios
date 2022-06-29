@@ -66,6 +66,45 @@ class CertificateItemDetailViewControllerSnapshotTests: BaseSnapShotTests {
         // When & Then
         verifyView(view: sut.view)
     }
+
+    func testExpiredCertificate() throws {
+        // Given
+        var token = try ExtendedCBORWebToken.token1Of1()
+        token.vaccinationCertificate.exp = .init(timeIntervalSinceReferenceDate: 0)
+        let viewModel = CertificateItemDetailViewModelMock(
+            router: CertificateItemDetailRouterMock(),
+            repository: VaccinationRepositoryMock(),
+            certificate: token,
+            resolvable: nil,
+            vaasResultToken: nil
+        )
+        let sut = CertificateItemDetailViewController(
+            viewModel: viewModel
+        )
+
+        // When & Then
+        verifyView(view: sut.view, height: 1800)
+    }
+
+    func testExpiredCertificate_non_german_issuer() throws {
+        // Given
+        var token = try ExtendedCBORWebToken.token1Of1()
+        token.vaccinationCertificate.exp = .init(timeIntervalSinceReferenceDate: 0)
+        token.vaccinationCertificate.iss = "FR"
+        let viewModel = CertificateItemDetailViewModelMock(
+            router: CertificateItemDetailRouterMock(),
+            repository: VaccinationRepositoryMock(),
+            certificate: token,
+            resolvable: nil,
+            vaasResultToken: nil
+        )
+        let sut = CertificateItemDetailViewController(
+            viewModel: viewModel
+        )
+
+        // When & Then
+        verifyView(view: sut.view, height: 1800)
+    }
 }
 
 private class CertificateItemDetailViewModelMock: CertificateItemDetailViewModel {

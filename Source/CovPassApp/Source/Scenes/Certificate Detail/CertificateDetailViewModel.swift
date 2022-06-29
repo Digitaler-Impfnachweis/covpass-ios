@@ -156,10 +156,13 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
         if selectedCertificateIsNotGermanAndWasRevoked {
             return "revocation_detail_single_notDE".localized
         }
-        if selectedCertificate?.vaccinationCertificate.isExpired ?? false {
+        if selectedCertificateIsGermanExpired {
             return "certificates_overview_expired_message".localized
         }
-        if selectedCertificate?.vaccinationCertificate.expiresSoon ?? false {
+        if selectedCertificateIsNonGermanExpired || selectedCertificateIsNonGermanExpiringSoon {
+            return "certificates_overview_expired_or_soon_expiring_nonDE".localized
+        }
+        if selectedCertificateIsGermanExpiringSoon {
             return "certificates_overview_soon_expiring_subtitle".localized
         }
         if selectedCertificate?.isInvalid ?? false {
@@ -192,6 +195,34 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
             return false
         }
         return !selectedCertificate.vaccinationCertificate.isGermanIssuer && selectedCertificate.isRevoked
+    }
+
+    private var selectedCertificateIsGermanExpired: Bool {
+        guard let token = selectedCertificate?.vaccinationCertificate else {
+            return false
+        }
+        return token.isExpired && token.isGermanIssuer
+    }
+
+    private var selectedCertificateIsNonGermanExpired: Bool {
+        guard let token = selectedCertificate?.vaccinationCertificate else {
+            return false
+        }
+        return token.isExpired && !token.isGermanIssuer
+    }
+
+    private var selectedCertificateIsGermanExpiringSoon: Bool {
+        guard let token = selectedCertificate?.vaccinationCertificate else {
+            return false
+        }
+        return token.expiresSoon && token.isGermanIssuer
+    }
+
+    private var selectedCertificateIsNonGermanExpiringSoon: Bool {
+        guard let token = selectedCertificate?.vaccinationCertificate else {
+            return false
+        }
+        return token.expiresSoon && !token.isGermanIssuer
     }
 
     var showScanHint: Bool {

@@ -773,6 +773,8 @@
 
 "certificates_overview_expired_message" = "The expiry date of your latest certificate has passed. You can conveniently renew this certificate in the CovPass app. Previous certificates will not be renewed. To do so, use the renewal function in the overview of your certificates or scan a newly issued certificate.";
 
+"certificates_overview_expired_or_soon_expiring_nonDE" = "Your latest certificate was not issued in Germany and therefore cannot be renewed in the app. Please contact the issuer of the certificate.";
+
 "certificates_overview_expired_action_button_title" = "Add new certificate";
 
 "certificates_overview_soon_expiring_title" = "Current certificate expires on %@ at %@";
@@ -1100,6 +1102,8 @@
 "certificate_expires_detail_view_note_title" = "Certificate expires on %@ at %@";
 
 "certificate_expires_detail_view_note_message" = "If this is your latest certificate, you can renew it on the overview of your certificates. You cannot renew previous certificates. Your latest certificate contains all the necessary information for a check.";
+
+"certificate_expires_detail_view_note_nonDE" = "This certificate was not issued in Germany and therefore cannot be renewed in the app. Please contact the issuer of the certificate.";
 
 "certificate_invalid_detail_view_note_title" = "Certificate invalid";
 

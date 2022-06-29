@@ -536,6 +536,56 @@ class CertificateDetailViewModelTests: XCTestCase {
         XCTAssertEqual(immunizationBody, "The certificate was revoked by the certificate issuer due to an official decision.")
     }
 
+    func testImmunizationBody_expired_certificate_non_german_issuer() throws {
+        // Given
+        var token = CBORWebToken.mockRecoveryCertificate.extended()
+        token.vaccinationCertificate.iss = "XL"
+        token.vaccinationCertificate.exp = .init(timeIntervalSinceReferenceDate: 0)
+        configureCustomSut(certificates: [token])
+
+        // When
+        let immunizationBody = sut.immunizationBody
+
+        // Then
+        XCTAssertEqual(
+            immunizationBody,
+            "Your latest certificate was not issued in Germany and therefore cannot be renewed in the app. Please contact the issuer of the certificate."
+        )
+    }
+
+    func testImmunizationBody_expiring_soon_certificate_non_german_issuer() throws {
+        // Given
+        var token = CBORWebToken.mockRecoveryCertificate.extended()
+        token.vaccinationCertificate.iss = "XL"
+        token.vaccinationCertificate.exp = .init(timeIntervalSinceNow: 1000)
+        configureCustomSut(certificates: [token])
+
+        // When
+        let immunizationBody = sut.immunizationBody
+
+        // Then
+        XCTAssertEqual(
+            immunizationBody,
+            "Your latest certificate was not issued in Germany and therefore cannot be renewed in the app. Please contact the issuer of the certificate."
+        )
+    }
+
+    func testImmunizationBody_expired_certificate_german_issuer() throws {
+        // Given
+        var token = CBORWebToken.mockRecoveryCertificate.extended()
+        token.vaccinationCertificate.exp = .init(timeIntervalSinceReferenceDate: 0)
+        configureCustomSut(certificates: [token])
+
+        // When
+        let immunizationBody = sut.immunizationBody
+
+        // Then
+        XCTAssertEqual(
+            immunizationBody,
+            "The expiry date of your latest certificate has passed. You can conveniently renew this certificate in the CovPass app. Previous certificates will not be renewed. To do so, use the renewal function in the overview of your certificates or scan a newly issued certificate."
+        )
+    }
+
     func testShowScanHint_revoked() throws {
         // Given
         try configureSut(revoked: true)
