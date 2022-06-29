@@ -399,6 +399,8 @@
 		E79CF9F227E8C2FA00C4619E /* CertificateRevocationRepository+Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79CF9F127E8C2FA00C4619E /* CertificateRevocationRepository+Factory.swift */; };
 		E79CF9F627E8C6DB00C4619E /* CertificateRevocationRepository+FactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79CF9F327E8C5DB00C4619E /* CertificateRevocationRepository+FactoryTests.swift */; };
 		E7AD8C7527D11A2E00220E9F /* SVGPDFExporter+Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7AD8C7327D1197600220E9F /* SVGPDFExporter+Factory.swift */; };
+		E7B76642286B47C3003CAEB4 /* RuleCheckDetailViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B76641286B47C3003CAEB4 /* RuleCheckDetailViewControllerTests.swift */; };
+		E7B76645286B485D003CAEB4 /* RuleCheckDetailRouterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B76644286B485D003CAEB4 /* RuleCheckDetailRouterMock.swift */; };
 		E7B76647286B7282003CAEB4 /* QRCodeImportResult+CovPassCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B76646286B7282003CAEB4 /* QRCodeImportResult+CovPassCheck.swift */; };
 		E7B98B302858BBB5005861C8 /* CertificateImportSelectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7B98B2F2858BBB5005861C8 /* CertificateImportSelectionViewController.xib */; };
 		E7BAB77E2805BB4700C6AA28 /* CertificateCardViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7BAB77D2805BB4700C6AA28 /* CertificateCardViewModelTests.swift */; };
@@ -884,6 +886,8 @@
 		E79CF9F127E8C2FA00C4619E /* CertificateRevocationRepository+Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CertificateRevocationRepository+Factory.swift"; sourceTree = "<group>"; };
 		E79CF9F327E8C5DB00C4619E /* CertificateRevocationRepository+FactoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CertificateRevocationRepository+FactoryTests.swift"; sourceTree = "<group>"; };
 		E7AD8C7327D1197600220E9F /* SVGPDFExporter+Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SVGPDFExporter+Factory.swift"; sourceTree = "<group>"; };
+		E7B76641286B47C3003CAEB4 /* RuleCheckDetailViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleCheckDetailViewControllerTests.swift; sourceTree = "<group>"; };
+		E7B76644286B485D003CAEB4 /* RuleCheckDetailRouterMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleCheckDetailRouterMock.swift; sourceTree = "<group>"; };
 		E7B76646286B7282003CAEB4 /* QRCodeImportResult+CovPassCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "QRCodeImportResult+CovPassCheck.swift"; sourceTree = "<group>"; };
 		E7B98B2F2858BBB5005861C8 /* CertificateImportSelectionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CertificateImportSelectionViewController.xib; sourceTree = "<group>"; };
 		E7BAB77D2805BB4700C6AA28 /* CertificateCardViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateCardViewModelTests.swift; sourceTree = "<group>"; };
@@ -2463,7 +2467,9 @@
 		E746D97B28290C72005C31BA /* RuleCheckDetail */ = {
 			isa = PBXGroup;
 			children = (
+				E7B76643286B4841003CAEB4 /* Mocks */,
 				E746D97C28290CA5005C31BA /* RuleCheckDetailViewModelTests.swift */,
+				E7B76641286B47C3003CAEB4 /* RuleCheckDetailViewControllerTests.swift */,
 			);
 			path = RuleCheckDetail;
 			sourceTree = "<group>";
@@ -2528,6 +2534,14 @@
 				098E44D3282D88DA00411776 /* VaccinationExtensionTests.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		E7B76643286B4841003CAEB4 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				E7B76644286B485D003CAEB4 /* RuleCheckDetailRouterMock.swift */,
+			);
+			path = Mocks;
 			sourceTree = "<group>";
 		};
 		E7BAB77C2805BB0700C6AA28 /* CardViewModels */ = {
@@ -3099,8 +3113,10 @@
 				096897A127C3A8FE009E2886 /* ReissueConsentRouterMock.swift in Sources */,
 				09C1DD922759727500BC0B36 /* CertificatesOverviewViewModelTests.swift in Sources */,
 				09590D352715E67F004410D7 /* MockCertificateViewModel.swift in Sources */,
+				E7B76642286B47C3003CAEB4 /* RuleCheckDetailViewControllerTests.swift in Sources */,
 				95FE37B6273EF4FC000899A3 /* VAASRepositoryMock.swift in Sources */,
 				386FDCFC26ED205900AC7639 /* BoosterNotificationViewModelTests.swift in Sources */,
+				E7B76645286B485D003CAEB4 /* RuleCheckDetailRouterMock.swift in Sources */,
 				E7FFBDA927F5D5B700796FEA /* URLSession+CertificateRevocationTests.swift in Sources */,
 				09590D312715E67F004410D7 /* SceneCoordinatorMock.swift in Sources */,
 				95BB0D4F2702155600885BA3 /* ScanPleaseViewModelTests.swift in Sources */,

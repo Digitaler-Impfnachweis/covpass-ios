@@ -144,7 +144,7 @@ class RuleCheckDetailViewModel {
                 ("recovery_certificate_detail_view_data_date_of_birth".localized, dob, results(for: .fail, and: "dob"), results(for: .open, and: "dob")),
                 ("recovery_certificate_detail_view_data_disease".localized, r.tgDisplayName, results(for: .fail, and: "r.0.tg"), results(for: .open, and: "r.0.tg")),
                 ("recovery_certificate_detail_view_data_date_first_positive_result".localized, DateUtils.isoDateFormatter.string(from: r.fr), results(for: .fail, and: "r.0.fr"), results(for: .open, and: "r.0.fr")),
-                ("recovery_certificate_detail_view_data_country".localized, r.co, results(for: .fail, and: "r.0.co"), results(for: .open, and: "r.0.co")),
+                ("recovery_certificate_detail_view_data_country".localized, mapCountryNameIfGermany(r.co), results(for: .fail, and: "r.0.co"), results(for: .open, and: "r.0.co")),
                 ("recovery_certificate_detail_view_data_issuer".localized, r.is, results(for: .fail, and: "r.0.is"), results(for: .open, and: "r.0.is")),
                 ("recovery_certificate_detail_view_data_valid_from".localized, DateUtils.isoDateFormatter.string(from: r.df), results(for: .fail, and: "r.0.df"), results(for: .open, and: "r.0.df")),
                 ("recovery_certificate_detail_view_data_valid_until".localized, DateUtils.isoDateFormatter.string(from: r.du), results(for: .fail, and: "r.0.du"), results(for: .open, and: "r.0.du")),
@@ -162,7 +162,7 @@ class RuleCheckDetailViewModel {
                 ("test_certificate_detail_view_data_test_date_and_time".localized, DateUtils.displayIsoDateTimeFormatter.string(from: t.sc), results(for: .fail, and: "t.0.sc"), results(for: .open, and: "t.0.sc")),
                 ("test_certificate_detail_view_data_test_results".localized, t.trDisplayName, results(for: .fail, and: "t.0.tr"), results(for: .open, and: "t.0.tr")),
                 ("test_certificate_detail_view_data_test_centre".localized, t.tc ?? "", results(for: .fail, and: "t.0.tc"), results(for: .open, and: "t.0.tc")),
-                ("test_certificate_detail_view_data_test_country".localized, t.co, results(for: .fail, and: "t.0.co"), results(for: .open, and: "t.0.co")),
+                ("test_certificate_detail_view_data_test_country".localized, mapCountryNameIfGermany(t.co), results(for: .fail, and: "t.0.co"), results(for: .open, and: "t.0.co")),
                 ("test_certificate_detail_view_data_test_issuer".localized, t.is, results(for: .fail, and: "t.0.is"), results(for: .open, and: "t.0.is")),
                 ("test_certificate_detail_view_data_test_identifier".localized, t.ciDisplayName, results(for: .fail, and: "t.0.ci"), results(for: .open, and: "t.0.ci"))
             ]
@@ -177,12 +177,17 @@ class RuleCheckDetailViewModel {
                 ("vaccination_certificate_detail_view_data_vaccine_manufactur".localized, v.maDisplayName, results(for: .fail, and: "v.0.ma"), results(for: .open, and: "v.0.ma")),
                 ("vaccination_certificate_detail_view_data_vaccine_number".localized, "\(v.dn) / \(v.sd)", results(for: .fail, and: "v.0.sd"), results(for: .open, and: "v.0.sd")),
                 ("vaccination_certificate_detail_view_data_vaccine_date_".localized, DateUtils.isoDateFormatter.string(from: v.dt), results(for: .fail, and: "v.0.dt"), results(for: .open, and: "v.0.dt")),
-                ("vaccination_certificate_detail_view_data_vaccine_country".localized, v.co.localized, results(for: .fail, and: "v.0.co"), results(for: .open, and: "v.0.co")),
+                ("vaccination_certificate_detail_view_data_vaccine_country".localized, mapCountryNameIfGermany(v.co), results(for: .fail, and: "v.0.co"), results(for: .open, and: "v.0.co")),
                 ("vaccination_certificate_detail_view_data_vaccine_issuer".localized, v.is, results(for: .fail, and: "v.0.is"), results(for: .open, and: "v.0.is")),
                 ("vaccination_certificate_detail_view_data_vaccine_identifier".localized, v.ciDisplayName, results(for: .fail, and: "v.0.ci"), results(for: .open, and: "v.0.ci"))
             ]
         }
         return []
+    }
+
+    private func mapCountryNameIfGermany(_ co: String) -> String {
+        let countryName = co == "DE" ? "vaccination_certificate_detail_view_data_vaccine_country_germany" : co
+        return countryName.localized
     }
 
     // MARK: - Lifecyle

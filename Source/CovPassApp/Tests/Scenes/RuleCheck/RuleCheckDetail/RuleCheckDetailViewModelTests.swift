@@ -13,6 +13,8 @@ import XCTest
 private enum Constants {
     static let dobTitle = "Geburtsdatum / Date of birth (YYYY-MM-DD)"
     static let testFacilityTitle = "Testzentrum oder -einrichtung / Testing centre or facility"
+    static let countryVacctionationTitle = "Land der Impfung / Country vaccinating"
+    static let countryRecoveryAndTestTitle = "Land der Testung / Country performing test"
 }
 
 class RuleCheckDetailViewModelTests: XCTestCase {
@@ -46,6 +48,10 @@ class RuleCheckDetailViewModelTests: XCTestCase {
         let dobItem = items.first { title, _, _, _ in
             title == Constants.dobTitle
         }
+        let countryItem =  items.first { title, _, _, _ in
+            title == Constants.countryVacctionationTitle
+        }
+        XCTAssertEqual(countryItem?.1, "Germany")
         XCTAssertEqual(dobItem?.1, "1964-08-12")
     }
 
@@ -61,6 +67,10 @@ class RuleCheckDetailViewModelTests: XCTestCase {
         let dobItem = items.first { title, _, _, _ in
             title == Constants.dobTitle
         }
+        let countryItem =  items.first { title, _, _, _ in
+            title == Constants.countryRecoveryAndTestTitle
+        }
+        XCTAssertEqual(countryItem?.1, "Germany")
         XCTAssertEqual(dobItem?.1, "1990-01-01")
     }
 
@@ -82,8 +92,60 @@ class RuleCheckDetailViewModelTests: XCTestCase {
         let testFacilityItem = items.first { title, _, _, _ in
             title == Constants.testFacilityTitle
         }
+        let countryItem =  items.first { title, _, _, _ in
+            title == Constants.countryRecoveryAndTestTitle
+        }
+        XCTAssertEqual(countryItem?.1, "Germany")
         XCTAssertEqual(dobItem?.1, "1990-01-01")
         XCTAssertEqual(testFacilityItem?.1, "")
+    }
+
+    func testItems_vaccination_co_not_germany() {
+        // Given
+        let cborWebToken = CBORWebToken.mockVaccinationCertificate
+        cborWebToken.hcert.dgc.v?.first?.co = "IL"
+        configureSut(token: cborWebToken.extended())
+
+        // When
+        let items = sut.items
+
+        // Then
+        let countryItem =  items.first { title, _, _, _ in
+            title == Constants.countryVacctionationTitle
+        }
+        XCTAssertEqual(countryItem?.1, "Israel")
+    }
+
+    func testItems_test_co_not_germany() {
+        // Given
+        let cborWebToken = CBORWebToken.mockTestCertificate
+        cborWebToken.hcert.dgc.t?.first?.co = "IS"
+        configureSut(token: cborWebToken.extended())
+
+        // When
+        let items = sut.items
+
+        // Then
+        let countryItem =  items.first { title, _, _, _ in
+            title == Constants.countryRecoveryAndTestTitle
+        }
+        XCTAssertEqual(countryItem?.1, "Iceland")
+    }
+
+    func testItems_recovery_co_not_germany() {
+        // Given
+        let cborWebToken = CBORWebToken.mockRecoveryCertificate
+        cborWebToken.hcert.dgc.r?.first?.co = "BR"
+        configureSut(token: cborWebToken.extended())
+
+        // When
+        let items = sut.items
+
+        // Then
+        let countryItem =  items.first { title, _, _, _ in
+            title == Constants.countryRecoveryAndTestTitle
+        }
+        XCTAssertEqual(countryItem?.1, "Brazil")
     }
 }
 
