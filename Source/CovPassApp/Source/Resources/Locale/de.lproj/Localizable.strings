@@ -1506,7 +1506,7 @@
 
 "certificate_renewal_startpage_copy" = "Die Spezifikationen der EU für bestimmte Impfzertifikate wurden geändert. Dieses Zertifikat entspricht nicht der aktuellen Nummerierung. Es ist weiterhin gültig. Falls es sich jedoch um ein Zertifikat für eine Auffrischungsimpfung handelt, wird diese bei einer Prüfung nicht erkannt.\n\nWir empfehlen Ihnen daher, ein neues Impfzertifikat mit der Nummer 2/1 direkt kostenlos über die App anzufordern. Hierfür ist Ihr Einverständnis erforderlich.";
 
-"certificate_renewal_startpage_copy_box" = "Der Vorgang ist ganz unkompliziert und dauert nur wenige Minuten. Sie können die Erneuerung auch später in der Detailansicht Ihrer Zertifikate anstoßen.";
+"certificate_renewal_startpage_copy_box" = "Der Vorgang ist ganz unkompliziert und dauert nur wenige Minuten. Sie können die Erneuerung auch später in der Übersicht Ihrer Zertifikate anstoßen.";
 
 "certificate_renewal_startpage_main_button" = "Jetzt erneuern";
 
