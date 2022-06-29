@@ -1099,7 +1099,7 @@
 
 "certificate_expires_detail_view_note_title" = "Certificate expires on %@ at %@";
 
-"certificate_expires_detail_view_note_message" = "You can easily renew the certificate in the CovPass app. To do so, use the renewal function in the overview of your certificates or scan a newly issued certificate.";
+"certificate_expires_detail_view_note_message" = "If this is your latest certificate, you can renew it on the overview of your certificates. You cannot renew previous certificates. Your latest certificate contains all the necessary information for a check.";
 
 "certificate_invalid_detail_view_note_title" = "Certificate invalid";
 

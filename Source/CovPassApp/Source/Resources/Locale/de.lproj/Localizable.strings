@@ -1099,7 +1099,7 @@
 
 "certificate_expires_detail_view_note_title" = "Zertifikat läuft am %@ um %@ ab";
 
-"certificate_expires_detail_view_note_message" = "Sie können das Zertifikat bequem in der CovPass-App austauschen. Nutzen Sie dafür die Erneuerungsfunktion in der Übersicht Ihrer Zertifikate oder scannen Sie ein neu ausgestelltes Zertifikat ein.";
+"certificate_expires_detail_view_note_message" = "Wenn es sich hierbei um Ihr neuestes Zertifikat handelt, können Sie es auf der Übersicht Ihrer Zertifikate erneuern. Sie können frühere Zertifikate nicht erneuern. In Ihrem neuesten Zertifikat sind alle notwendigen Informationen für eine Prüfung enthalten.";
 
 "certificate_invalid_detail_view_note_title" = "Zertifikat ungültig";
 
