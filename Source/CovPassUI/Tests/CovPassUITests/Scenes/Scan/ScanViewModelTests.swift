@@ -12,13 +12,17 @@ import PromiseKit
 
 class ScanViewModelTests: XCTestCase {
     var certificateRepository: VaccinationRepositoryMock!
+    var delegate: ScanViewModelDelegateMock!
+    var promise: Promise<QRCodeImportResult>!
     var pdfCBORExtractor: CertificateExtractorMock!
     var sut: ScanViewModel!
     var router: ScanRouterMock!
 
     override func setUp() {
         super.setUp()
-        let (_, resolver) = Promise<QRCodeImportResult>.pending()
+        let (promise, resolver) = Promise<QRCodeImportResult>.pending()
+        self.promise = promise
+        delegate = ScanViewModelDelegateMock()
         router = ScanRouterMock()
         certificateRepository = .init()
         pdfCBORExtractor = .init()
@@ -30,9 +34,12 @@ class ScanViewModelTests: XCTestCase {
             certificateExtractor: pdfCBORExtractor,
             certificateRepository: certificateRepository
         )
+        sut.delegate = delegate
     }
     
     override func tearDown() {
+        delegate = nil
+        promise = nil
         sut = nil
         router = nil
         certificateRepository = nil
@@ -62,6 +69,30 @@ class ScanViewModelTests: XCTestCase {
         wait(for: [router.showDocumentPickerExpectation], timeout: 1.0)
     }
 
+    func testDocumentPicker_cancel() {
+        // Given
+        router.choosenDocumentType = .cancel
+        delegate.viewModelDidChangeExpectation.expectedFulfillmentCount = 2
+
+        // When
+        sut.documentPicker()
+
+        // Then
+        wait(for: [
+            router.showDocumentPickerExpectation,
+            delegate.viewModelDidChangeExpectation
+        ], timeout: 1.0)
+        XCTAssertEqual(sut.mode, .scan)
+    }
+
+    func testDocumentPicker() {
+        // When
+        sut.documentPicker()
+
+        // Then
+        XCTAssertEqual(sut.mode, .selection)
+    }
+
     func testDocumentPicked() throws {
         // Given
         let url = try XCTUnwrap(
@@ -77,7 +108,11 @@ class ScanViewModelTests: XCTestCase {
         sut.documentPicked(at: [url])
 
         // Then
-        wait(for: [router.showCertificatePickerExpectation], timeout: 1)
+        wait(for: [
+            router.showCertificatePickerExpectation,
+            delegate.viewModelDidChangeExpectation
+        ], timeout: 1)
+        XCTAssertEqual(sut.mode, .scan)
         XCTAssertEqual(router.receivedTokens, [token])
     }
 
@@ -115,7 +150,11 @@ class ScanViewModelTests: XCTestCase {
         sut.imagePicked(images: [image])
 
         // Then
-        wait(for: [router.showCertificatePickerExpectation], timeout: 1)
+        wait(for: [
+            router.showCertificatePickerExpectation,
+            delegate.viewModelDidChangeExpectation
+        ], timeout: 1)
+        XCTAssertEqual(sut.mode, .scan)
         XCTAssertEqual(router.receivedTokens, [token])
     }
 
@@ -138,5 +177,21 @@ class ScanViewModelTests: XCTestCase {
 
         // Then
         wait(for: [router.showCertificatePickerExpectation], timeout: 1)
+    }
+
+    func testMode() {
+        // When
+        let mode = sut.mode
+
+        // Then
+        XCTAssertEqual(mode, .scan)
+    }
+
+    func testMode_set() {
+        // When
+        sut.mode = .selection
+
+        // Then
+        wait(for: [delegate.viewModelDidChangeExpectation], timeout: 1)
     }
 }

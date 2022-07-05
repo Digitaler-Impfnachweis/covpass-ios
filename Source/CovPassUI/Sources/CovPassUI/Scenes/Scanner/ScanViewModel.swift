@@ -25,6 +25,7 @@ private enum Constants {
 protocol ScanViewModelDelegate: AnyObject {
     func selectFiles()
     func selectImages()
+    func viewModelDidChange()
 }
 
 public class ScanViewModel: CancellableViewModelProtocol {
@@ -58,6 +59,12 @@ public class ScanViewModel: CancellableViewModelProtocol {
         Constants.Accessibility.scanner
     }
 
+    var mode: Mode = .scan {
+        didSet {
+            delegate?.viewModelDidChange()
+        }
+    }
+
     // MARK: - Lifecycle
 
     public init(
@@ -87,7 +94,7 @@ public class ScanViewModel: CancellableViewModelProtocol {
             cameraAccessProvider.requestAccess(for: .video)
         }
         .done {
-            self.onCameraAccess?()
+            self.mode = .scan
         }
         .cancelled {
             self.cancel()
@@ -107,6 +114,7 @@ public class ScanViewModel: CancellableViewModelProtocol {
     }
     
     func documentPicker() {
+        mode = .selection
         router.showDocumentPickerSheet()
             .done { sheetResult in
                 switch sheetResult {
@@ -114,7 +122,8 @@ public class ScanViewModel: CancellableViewModelProtocol {
                     self.delegate?.selectFiles()
                 case .photo:
                     self.delegate?.selectImages()
-                    break
+                case .cancel:
+                    self.mode = .scan
                 }
             }.cauterize()
     }
@@ -150,11 +159,14 @@ public class ScanViewModel: CancellableViewModelProtocol {
                 ignoreTokens: certificateList.certificates
             )
         }
-        .then{ tokens in
+        .then { tokens in
             self.router.showCertificatePicker(tokens: tokens)
         }
-        .done{ _ in
+        .done { _ in
             self.resolver.fulfill(.pickerImport)
+        }
+        .ensure {
+            self.mode = .scan
         }
         .cauterize()
     }

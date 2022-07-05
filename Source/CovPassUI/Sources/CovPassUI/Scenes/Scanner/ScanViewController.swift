@@ -49,6 +49,7 @@ public final class ScanViewController: UIViewController, UINavigationControllerD
     // MARK: - Private
 
     private func configureScanView() {
+        removeScanView()
         let viewController = Scanner.viewController(codeTypes: [.qr], scanMode: .once, delegate: self)
         viewController.view.frame = container.bounds
         container.addSubview(viewController.view)
@@ -94,7 +95,15 @@ public final class ScanViewController: UIViewController, UINavigationControllerD
         }
     }
     
-    
+    private func removeScanView() {
+        scanViewController?.view.removeFromSuperview()
+        scanViewController = nil
+    }
+
+    func pickingWasCancelled() {
+        dismiss(animated: true)
+        viewModel.mode = .scan
+    }
 }
 
 extension ScanViewController: ScanViewModelDelegate {
@@ -121,6 +130,15 @@ extension ScanViewController: ScanViewModelDelegate {
             guard UIImagePickerController.isSourceTypeAvailable(.photoLibrary) else { return }
             pickerController.sourceType = .photoLibrary
             present(pickerController, animated: true)
+        }
+    }
+
+    func viewModelDidChange() {
+        switch viewModel.mode {
+        case .scan:
+            configureScanView()
+        case .selection:
+            removeScanView()
         }
     }
 }
@@ -161,6 +179,10 @@ extension ScanViewController: ModalInteractiveDismissibleProtocol {
     public func modalViewControllerDidDismiss() {
         viewModel.cancel()
     }
+
+    public func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
+        pickingWasCancelled()
+    }
 }
 
 // MARK: - UIDocumentPickerDelegate
@@ -181,6 +203,9 @@ extension ScanViewController: UIDocumentPickerDelegate {
 @available(iOS 14, *)
 extension ScanViewController: PHPickerViewControllerDelegate {
     public func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        if results.isEmpty {
+            pickingWasCancelled()
+        }
         // Get the reference of itemProvider from results
         var images = Array<UIImage>()
         results.forEach { result in
@@ -211,5 +236,9 @@ extension ScanViewController: UIImagePickerControllerDelegate {
         picker.dismiss(animated: true)
         guard let image = info[.originalImage] as? UIImage else { return }
         viewModel.imagePicked(images: [image])
+    }
+
+    public func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        pickingWasCancelled()
     }
 }

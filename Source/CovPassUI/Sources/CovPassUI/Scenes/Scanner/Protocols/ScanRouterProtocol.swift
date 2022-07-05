@@ -9,6 +9,7 @@ import PromiseKit
 import CovPassCommon
 
 public enum DocumentSheetResult {
+    case cancel
     case photo
     case document
 }
