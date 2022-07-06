@@ -9,7 +9,15 @@ import Foundation
 import CovPassCommon
 
 extension CoseSign1MessageConverter {
-    init?() {
+    static func certificateReissueRepository() -> Self? {
+        .init(verifyExpiration: true)
+    }
+
+    static func pdfCBORExtractor() -> Self? {
+        .init(verifyExpiration: false)
+    }
+    
+    private init?(verifyExpiration: Bool) {
         let keychain = KeychainPersistence()
         let jsonDecoder = JSONDecoder()
         guard let trustListURL = Bundle.commonBundle.url(forResource: XCConfiguration.staticTrustListResource, withExtension: nil),
@@ -18,6 +26,6 @@ extension CoseSign1MessageConverter {
             return nil
         }
 
-        self.init(jsonDecoder: jsonDecoder, trustList: trustList)
+        self.init(jsonDecoder: jsonDecoder, trustList: trustList, verifyExpiration: verifyExpiration)
     }
 }

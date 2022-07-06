@@ -24,7 +24,8 @@ class CertificateReissueRepositoryTests: XCTestCase {
         let trustList = try jsonDecoder.decode(TrustList.self, from: trustListData)
         let coseSign1MessageConverter = CoseSign1MessageConverter(
             jsonDecoder: jsonDecoder,
-            trustList: trustList
+            trustList: trustList,
+            verifyExpiration: true
         )
         sut = .init(
             baseURL: url,

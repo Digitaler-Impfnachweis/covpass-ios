@@ -12,6 +12,10 @@ class CoseSign1MessageConverterTests: XCTestCase {
     private var sut: CoseSign1MessageConverter!
 
     override func setUpWithError() throws {
+        try configureSut()
+    }
+
+    private func configureSut(verifyExpiration: Bool = true) throws {
         let trustListURL = Bundle.commonBundle.url(
             forResource: "dsc",
             withExtension: "json"
@@ -21,7 +25,8 @@ class CoseSign1MessageConverterTests: XCTestCase {
         let trustList = try jsonDecoder.decode(TrustList.self, from: trustListData)
         sut = .init(
             jsonDecoder: jsonDecoder,
-            trustList: trustList
+            trustList: trustList,
+            verifyExpiration: verifyExpiration
         )
     }
 
@@ -64,6 +69,25 @@ class CoseSign1MessageConverterTests: XCTestCase {
                 } else {
                     XCTFail("Wrong error.")
                 }
+            }
+
+        // Then
+        wait(for: [expectation], timeout: 1)
+    }
+
+    func testConvert_expired_message_but_dont_verify_it() throws {
+        // Given
+        let message = expiredToken
+        let expectation = XCTestExpectation()
+        try configureSut(verifyExpiration: false)
+
+        // When
+        sut.convert(message: message)
+            .done { _ in
+                expectation.fulfill()
+            }
+            .catch { _ in
+                XCTFail("Must not fail.")
             }
 
         // Then
