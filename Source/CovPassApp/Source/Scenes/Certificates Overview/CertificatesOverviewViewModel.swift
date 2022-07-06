@@ -252,6 +252,9 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
         .then {
             self.router.showQRCodeScanAndSelectionView()
         }
+        .cancelled {
+            self.isLoading = false
+        }
         .done { [weak self] qrCodeImportResult in
             switch qrCodeImportResult {
             case .pickerImport:
@@ -261,6 +264,7 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
             }
         }
         .catch { [weak self] error in
+            self?.isLoading = false
             self?.errorHandling(error)
         }
     }
@@ -300,7 +304,7 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
             default:
                 throw CertificateError.invalidEntity
             }
-            
+
         }
         .ensure {
             self.isLoading = false

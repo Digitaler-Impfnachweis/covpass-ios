@@ -653,6 +653,7 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         // Then
         XCTAssertFalse(sut.isLoading)
         wait(for: [router.showCertificateExpectation], timeout: 0.1)
+        XCTAssertFalse(sut.isLoading)
     }
 
     func testHandleOpen_success() throws {
