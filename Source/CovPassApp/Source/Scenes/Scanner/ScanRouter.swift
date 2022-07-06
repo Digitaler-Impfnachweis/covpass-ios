@@ -26,12 +26,13 @@ struct ScanRouter: ScanRouterProtocol, RouterProtocol {
     }
 
     public func showDocumentPickerSheet() -> Promise<DocumentSheetResult> {
-        return .init { resolver in
+        .init { resolver in
             let photoCompletion: ((DialogAction) -> Void)? = { action in resolver.fulfill(.photo) }
             let documentCompletion: ((DialogAction) -> Void)? = { action in resolver.fulfill(.document) }
+            let cancelCompletion: ((DialogAction) -> Void)? = { action in resolver.fulfill(.cancel) }
             let photoAction: DialogAction = DialogAction(title: Constants.Keys.actionTitlePhoto, completion: photoCompletion)
             let documentAction: DialogAction = DialogAction(title: Constants.Keys.actionTitleDocument, completion: documentCompletion)
-            let cancelAction: DialogAction = DialogAction(title: Constants.Keys.actionTitleCancel, style: .cancel)
+            let cancelAction: DialogAction = DialogAction(title: Constants.Keys.actionTitleCancel, style: .cancel, completion: cancelCompletion)
             let scene = AlertSceneFactory(
                 title: Constants.Keys.actionSheetTitle,
                 message: nil,
@@ -40,7 +41,6 @@ struct ScanRouter: ScanRouterProtocol, RouterProtocol {
             )
             sceneCoordinator.present(scene).cauterize()
         }
-        
     }
 
     public func showCertificatePicker(tokens: [ExtendedCBORWebToken]) -> Promise<Void> {

@@ -10,7 +10,7 @@ import Foundation
 
 public extension CertificateReissueRepository {
     convenience init?() {
-        guard let coseSign1MessageConverter = CoseSign1MessageConverter() else {
+        guard let coseSign1MessageConverter = CoseSign1MessageConverter.certificateReissueRepository() else {
             return nil
         }
         let jsonDecoder = JSONDecoder()

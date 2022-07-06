@@ -218,19 +218,19 @@
 
 "accessibility_certificate_add_popup_image" = "Image: Person holds smartphone over three different certificates with QR code";
 
-"certificate_add_popup_title" = "Scan QR code";
+"certificate_add_popup_title" = "Add a certificate";
 
 "certificate_add_popup_note_title" = "Your smartphone is not protected by a code";
 
 "certificate_add_popup_note_message" = "The CovPass app saves sensitive data to your smartphone. To protect your data against access by strangers, we recommend that you set up an unlock code for your smartphone.";
 
-"certificate_add_popup_message" = "Scan the QR code on an EU Digital COVID Certificate. The certificate is transferred directly to the CovPass app.\n\nFor booking purposes (e.g. flight and hotel), you can submit your added COVID certificate to the provider online. To do so, scan the QR code displayed during the booking process.";
+"certificate_add_popup_message" = "In the following step, scan the QR code from an EU COVID digital certificate or upload it as a photo or PDF file. The certificate will then be loaded directly into the CovPass app.";
 
 "certificate_add_popup_action_title" = "Which QR code can I scan and save to my smartphone?";
 
-"certificate_add_popup_action_title_linked" = "#Which QR code can I scan and save to my smartphone?::$0#";
+"certificate_add_popup_action_title_linked" = "#Which QR code can I scan?::$0#";
 
-"certificate_add_popup_scan_button_title" = "Scan QR code";
+"certificate_add_popup_scan_button_title" = "Add certificate";
 
 "certificate_add_dialog_camera_access_title" = "Camera access needed";
 

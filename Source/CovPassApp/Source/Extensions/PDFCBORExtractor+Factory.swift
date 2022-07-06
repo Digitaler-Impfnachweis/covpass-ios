@@ -10,7 +10,7 @@ import CovPassCommon
 
 extension PDFCBORExtractor {
     convenience init?() {
-        guard let messageConverter = CoseSign1MessageConverter(),
+        guard let messageConverter = CoseSign1MessageConverter.pdfCBORExtractor(),
               let revocationRepository = CertificateRevocationRepository()
         else {
             return nil

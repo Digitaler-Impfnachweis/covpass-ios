@@ -366,6 +366,7 @@
 		E715CB7228637DE600D07443 /* TestImportSelectionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E715CB7128637DE600D07443 /* TestImportSelectionItem.swift */; };
 		E7170772280088AE000B2E32 /* revocation-trust-key-release.pem in Resources */ = {isa = PBXBuildFile; fileRef = E7170771280088AE000B2E32 /* revocation-trust-key-release.pem */; };
 		E7170774280091A9000B2E32 /* revocation-trust-key-release.pem in Resources */ = {isa = PBXBuildFile; fileRef = E7170773280091A9000B2E32 /* revocation-trust-key-release.pem */; };
+		E72A4C6028747F6B009F593A /* CoseSign1MessageConverter+FactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72A4C5F28747F6B009F593A /* CoseSign1MessageConverter+FactoryTests.swift */; };
 		E735E0AE2865D7340032025C /* Test QR Codes.pdf in Resources */ = {isa = PBXBuildFile; fileRef = E735E0AD2865D7340032025C /* Test QR Codes.pdf */; };
 		E735E0B0286601730032025C /* ScanRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E735E0AF286601730032025C /* ScanRouter.swift */; };
 		E735E0B3286608F90032025C /* ScanRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E735E0B1286608C80032025C /* ScanRouter.swift */; };
@@ -853,6 +854,7 @@
 		E715CB7128637DE600D07443 /* TestImportSelectionItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestImportSelectionItem.swift; sourceTree = "<group>"; };
 		E7170771280088AE000B2E32 /* revocation-trust-key-release.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "revocation-trust-key-release.pem"; sourceTree = "<group>"; };
 		E7170773280091A9000B2E32 /* revocation-trust-key-release.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "revocation-trust-key-release.pem"; sourceTree = "<group>"; };
+		E72A4C5F28747F6B009F593A /* CoseSign1MessageConverter+FactoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoseSign1MessageConverter+FactoryTests.swift"; sourceTree = "<group>"; };
 		E735E0AD2865D7340032025C /* Test QR Codes.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "Test QR Codes.pdf"; sourceTree = "<group>"; };
 		E735E0AF286601730032025C /* ScanRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanRouter.swift; sourceTree = "<group>"; };
 		E735E0B1286608C80032025C /* ScanRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanRouter.swift; sourceTree = "<group>"; };
@@ -2628,6 +2630,7 @@
 			children = (
 				E7F7817C27C400BA009AC907 /* CertificateReissueRepository+FactoryTests.swift */,
 				E7FFBDAA27F5D83900796FEA /* CertificateRevocationRepository+FactoryTests.swift */,
+				E72A4C5F28747F6B009F593A /* CoseSign1MessageConverter+FactoryTests.swift */,
 				E7D1F0922861CABD00FA7465 /* PDFCBORExtractor+FactoryTests.swift */,
 				E76B96EB27C5120A0030FC0C /* URLSession+CertificateReissueTests.swift */,
 				E7FFBDA827F5D5B700796FEA /* URLSession+CertificateRevocationTests.swift */,
@@ -3075,6 +3078,7 @@
 				096897B227C3E3D5009E2886 /* ReissueResultViewControllerSnapShotTests.swift in Sources */,
 				E75234DC27CE6EF200B744AB /* ReissueResultViewModelTests.swift in Sources */,
 				E7CB54B327B53296002FA55E /* AppInformationViewModelTests.swift in Sources */,
+				E72A4C6028747F6B009F593A /* CoseSign1MessageConverter+FactoryTests.swift in Sources */,
 				091DE729284F97BF00EB99FC /* ScanViewControllerSnapshotTests.swift in Sources */,
 				094924072833B33E00824260 /* ResultViewSnapShotTests.swift in Sources */,
 				09590D302715E67F004410D7 /* MockCardViewModel.swift in Sources */,

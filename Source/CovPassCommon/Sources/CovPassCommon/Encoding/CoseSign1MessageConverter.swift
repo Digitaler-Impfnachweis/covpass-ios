@@ -11,8 +11,10 @@ import PromiseKit
 public struct CoseSign1MessageConverter: CoseSign1MessageConverterProtocol {
     private let jsonDecoder: JSONDecoder
     private let trustList: TrustList
+    private let verifyExpiration: Bool
 
-    public init(jsonDecoder: JSONDecoder, trustList: TrustList) {
+    public init(jsonDecoder: JSONDecoder, trustList: TrustList, verifyExpiration: Bool) {
+        self.verifyExpiration = verifyExpiration
         self.jsonDecoder = jsonDecoder
         self.trustList = trustList
     }
@@ -38,7 +40,7 @@ public struct CoseSign1MessageConverter: CoseSign1MessageConverterProtocol {
         )
         .then(checkExtendedKeyUsage)
         .then(\.noFraud)
-        .then(\.notExpired)
+        .then(skipExpiryVerificationOrNotExpired)
     }
 
     private func cborWebToken(from coseSign1Message: CoseSign1Message) -> Promise<CBORWebToken> {
@@ -56,5 +58,9 @@ public struct CoseSign1MessageConverter: CoseSign1MessageConverterProtocol {
             trustCertificate: trustCertificate
         )
         .map { cborWebToken }
+    }
+
+    private func skipExpiryVerificationOrNotExpired(_ token: CBORWebToken) -> Promise<CBORWebToken> {
+        verifyExpiration ? token.notExpired : .value(token)
     }
 }
