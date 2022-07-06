@@ -205,25 +205,17 @@ extension ScanViewController: PHPickerViewControllerDelegate {
     public func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
         if results.isEmpty {
             pickingWasCancelled()
+            return
         }
-        // Get the reference of itemProvider from results
-        var images = Array<UIImage>()
-        results.forEach { result in
-            let itemProvider = result.itemProvider
-            if itemProvider.canLoadObject(ofClass: UIImage.self) {
-                itemProvider.loadObject(ofClass: UIImage.self) { image, error in
-                    DispatchQueue.main.async {
-                        guard let image = image as? UIImage else { return }
-                        images.append(image)
-                        print("images.count \(images.count) results.count \(results.count)")
-                        if images.count == results.count {
-                            self.viewModel.imagePicked(images: images)
-                            picker.dismiss(animated: true)
-                        }
-                    }
-                }
+        let itemProviders = results.map(\.itemProvider)
+
+        dismiss(animated: true)
+        itemProviders
+            .loadImages()
+            .done(on: DispatchQueue.main, flags: nil) { [weak self] images in
+                self?.viewModel.imagePicked(images: images)
             }
-        }
+            .cauterize()
     }
 }
 
