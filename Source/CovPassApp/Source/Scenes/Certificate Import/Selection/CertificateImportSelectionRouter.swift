@@ -11,7 +11,7 @@ import PromiseKit
 private enum Constants {
     static let errorTitle = "file_import_error_maximum_title".localized
     static let errorMessage = "file_import_error_maximum_copy".localized
-    static let buttonText = "file_import_error_maximum_copy".localized
+    static let buttonText = "file_import_error_maximum_button".localized
 }
 
 struct CertificateImportSelectionRouter: CertificateImportSelectionRouterProtocol, DialogRouterProtocol {
