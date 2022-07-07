@@ -101,7 +101,7 @@ public final class ScanViewController: UIViewController, UINavigationControllerD
     }
 
     func pickingWasCancelled() {
-        dismiss(animated: true)
+        dismissPresented(animated: true)
         viewModel.mode = .scan
     }
 }
@@ -232,5 +232,13 @@ extension ScanViewController: UIImagePickerControllerDelegate {
 
     public func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         pickingWasCancelled()
+    }
+}
+
+private extension UIViewController {
+    func dismissPresented(animated flag: Bool, completion: (() -> Void)? = nil) {
+        if presentedViewController != nil {
+            dismiss(animated: true, completion: completion)
+        }
     }
 }
