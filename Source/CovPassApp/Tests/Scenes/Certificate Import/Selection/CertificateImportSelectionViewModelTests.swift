@@ -247,7 +247,25 @@ class CertificateImportSelectionViewModelTests: XCTestCase {
             ).extended()
         }
         configureSut(tokens: tokens)
-        
+
+        // When
+        sut.confirm()
+
+        // Then
+        wait(for: [
+            router.showTooManyHoldersErrorExpectation
+        ], timeout: 1)
+    }
+
+    func testConfirm_too_many_certifcate_holders_including_existing_tokens() {
+        // Given
+        let tokens = (0...20).map { index in
+            CBORWebToken.mockVaccinationCertificate.mockName(
+                .init(gn: nil, fn: nil, gnt: nil, fnt: "\(index)")
+            ).extended()
+        }
+        vaccinationRepository.certificates = tokens
+
         // When
         sut.confirm()
 
@@ -292,5 +310,37 @@ class CertificateImportSelectionViewModelTests: XCTestCase {
         XCTAssertFalse(
             sut.items.contains{ $0.selected == false }
         )
+    }
+
+    func testItemSelectionState_all() {
+        // When
+        let state = sut.itemSelectionState
+
+        // Then
+        XCTAssertEqual(state, .all)
+    }
+
+    func testItemSelectionState_some() {
+        // Given
+        sut.items.first?.selected = false
+
+        // When
+        let state = sut.itemSelectionState
+
+        // Then
+        XCTAssertEqual(state, .some)
+    }
+
+    func testItemSelectionState_none() {
+        // Given
+        for item in sut.items {
+            item.selected = false
+        }
+
+        // When
+        let state = sut.itemSelectionState
+
+        // Then
+        XCTAssertEqual(state, .none)
     }
 }

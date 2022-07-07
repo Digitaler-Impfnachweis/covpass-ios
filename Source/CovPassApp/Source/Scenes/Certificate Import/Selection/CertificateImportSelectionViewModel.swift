@@ -50,6 +50,10 @@ final class CertificateImportSelectionViewModel: CertificateImportSelectionViewM
         items.filter(\.selected)
     }
 
+    private var selectedTokens: [ExtendedCBORWebToken] {
+        selectedItems.map(\.token)
+    }
+
     var itemSelectionState: CertificateImportSelectionState {
         switch selectedItems.count {
         case 0:
@@ -86,14 +90,34 @@ final class CertificateImportSelectionViewModel: CertificateImportSelectionViewM
             cancel()
             return
         }
-        let tokens = selectedItems.map(\.token)
-        if tokens.hasMoreThan20Holders {
-            router.showTooManyHoldersError()
-            return
-        }
+        existingAndSelectedTokensHaveMoreThan20Holders()
+            .done { moreThan20Holders in
+                if moreThan20Holders {
+                    self.router.showTooManyHoldersError()
+                } else {
+                    self.updateSelectedTokens()
+                }
+            }
+    }
 
+    private func existingAndSelectedTokensHaveMoreThan20Holders() -> Guarantee<Bool> {
+        Guarantee { seal in
+            vaccinationRepository
+                .getCertificateList()
+                .map(\.certificates)
+                .done { existingTokens in
+                    let hasMoreThan20Holders = (existingTokens + self.selectedTokens).hasMoreThan20Holders
+                    seal(hasMoreThan20Holders)
+                }
+                .catch { _ in
+                    seal(false)
+                }
+        }
+    }
+
+    private func updateSelectedTokens() {
         vaccinationRepository
-            .update(tokens)
+            .update(selectedTokens)
             .done { [weak self] _ in
                 self?.handleSuccess()
             }
