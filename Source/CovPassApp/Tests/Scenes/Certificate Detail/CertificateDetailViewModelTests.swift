@@ -457,6 +457,17 @@ class CertificateDetailViewModelTests: XCTestCase {
         XCTAssertEqual(immunizationTitle, "Certificate invalid")
     }
 
+    func testImmunizationTitle_booster() throws {
+        // Given
+        try configureCustomSut(certificates: [.token3Of3()])
+
+        // When
+        let immunizationTitle = sut.immunizationTitle
+
+        // Then
+        XCTAssertEqual(immunizationTitle, "Booster vaccination")
+    }
+
     func testImmunizationBody_revoked_vaccination_certificate_german_issuer() throws {
         // Given
         try configureSut(revoked: true)

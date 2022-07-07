@@ -45,22 +45,39 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
         certificates.sortLatest().first
     }
 
+    private var selectedToken: CBORWebToken? {
+        selectedCertificate?.vaccinationCertificate
+    }
+
+    private var selectedDgc: DigitalGreenCertificate?  {
+        selectedToken?.hcert.dgc
+    }
+
+    private var selectedCertificateIsRevoked: Bool {
+        selectedCertificate?.isRevoked ?? false
+    }
+
+    private var selectedCertificatetIsInvalid: Bool {
+        selectedCertificate?.isInvalid ?? false
+    }
+
+    private var selectedTokenIsGermanIssuer: Bool {
+        selectedToken?.isGermanIssuer ?? false
+    }
+
+    private var selectedTokenIsExpired: Bool {
+        selectedToken?.isExpired ?? false
+    }
+
     var fullImmunization: Bool {
         certificates.map { $0.vaccinationCertificate.hcert.dgc.v?.first?.fullImmunization ?? false }.first(where: { $0 }) ?? false
     }
 
     var immunizationButton: String {
-        if selectedCertificateIsInvalidOrRevoked {
+        if selectedCertificatetIsInvalid || selectedCertificateIsRevoked {
             return "certificates_overview_expired_action_button_title".localized
         }
         return "recovery_certificate_overview_action_button_title".localized
-    }
-
-    private var selectedCertificateIsInvalidOrRevoked: Bool {
-        guard let selectedCertificate = selectedCertificate else {
-            return false
-        }
-        return selectedCertificate.isInvalid || selectedCertificate.isRevoked
     }
 
     var favoriteIcon: UIImage? {
@@ -69,56 +86,55 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
     }
 
     var name: String {
-        selectedCertificate?.vaccinationCertificate.hcert.dgc.nam.fullName ?? ""
+        selectedDgc?.nam.fullName ?? ""
     }
 
     var nameReversed: String {
-        selectedCertificate?.vaccinationCertificate.hcert.dgc.nam.fullNameReverse ?? ""
+        selectedDgc?.nam.fullNameReverse ?? ""
     }
 
     var nameTransliterated: String {
-        selectedCertificate?.vaccinationCertificate.hcert.dgc.nam.fullNameTransliteratedReverse ?? ""
+        selectedDgc?.nam.fullNameTransliteratedReverse ?? ""
     }
 
     var birthDate: String {
-        guard let dgc = selectedCertificate?.vaccinationCertificate.hcert.dgc else { return "" }
+        guard let dgc = selectedDgc else { return "" }
         return DateUtils.displayIsoDateOfBirth(dgc)
     }
 
     var immunizationIcon: UIImage? {
-        if selectedCertificate?.vaccinationCertificate.isExpired ?? false ||
-            selectedCertificateIsInvalidOrRevoked
+        if selectedTokenIsExpired || selectedCertificatetIsInvalid || selectedCertificateIsRevoked
         {
             return UIImage.statusExpiredCircle
         }
-        if selectedCertificate?.vaccinationCertificate.expiresSoon ?? false {
+        if selectedToken?.expiresSoon ?? false {
             return UIImage.activity
         }
-        if selectedCertificate?.vaccinationCertificate.hcert.dgc.r != nil {
+        if selectedDgc?.r != nil {
             return UIImage.detailStatusFull
         }
-        if selectedCertificate?.vaccinationCertificate.hcert.dgc.t != nil {
+        if selectedDgc?.t != nil {
             return UIImage.detailStatusFull
         }
         return fullImmunization ? UIImage.detailStatusFull : UIImage.detailStatusPartial
     }
 
     var immunizationTitle: String {
-        if selectedCertificateIsInvalidOrRevoked {
+        if selectedCertificatetIsInvalid || selectedCertificateIsRevoked {
             return "certificate_invalid_detail_view_note_title".localized
         }
-        if selectedCertificate?.vaccinationCertificate.isExpired ?? false {
+        if selectedTokenIsExpired {
             return "certificate_expired_detail_view_note_title".localized
         }
-        if selectedCertificate?.vaccinationCertificate.expiresSoon ?? false {
-            guard let expireDate = selectedCertificate?.vaccinationCertificate.exp else {
+        if selectedToken?.expiresSoon ?? false {
+            guard let expireDate = selectedToken?.exp else {
                 return "certificates_overview_expires_soon_certificate_note".localized
             }
             return String(format: "certificates_overview_soon_expiring_title".localized,
                           DateUtils.displayDateFormatter.string(from: expireDate),
                           DateUtils.displayTimeFormatter.string(from: expireDate))
         }
-        if let r = selectedCertificate?.vaccinationCertificate.hcert.dgc.r?.first {
+        if let r = selectedDgc?.r?.first {
             if Date() < r.df {
                 return String(format: "recovery_certificate_overview_valid_from_title".localized, DateUtils.displayDateFormatter.string(from: r.df))
             }
@@ -140,7 +156,9 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
         guard let cert = sortedByFullImmunization.first?.vaccinationCertificate.hcert.dgc.v?.first else {
             return "vaccination_certificate_overview_incomplete_title".localized
         }
-        if cert.fullImmunizationValid {
+        if isBoosterVaccination {
+            return "certificate_type_booster".localized
+        } else if cert.fullImmunizationValid {
             return "vaccination_certificate_overview_complete_title".localized
         } else if fullImmunization {
             return "vaccination_certificate_overview_complete_from_title".localized
@@ -150,16 +168,16 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
     }
 
     var immunizationBody: String {
-        if selectedCertificateIsGermanAndWasRevoked {
+        if selectedTokenIsGermanIssuer && selectedCertificateIsRevoked  {
             return "revocation_detail_single_DE".localized
         }
-        if selectedCertificateIsNotGermanAndWasRevoked {
+        if !selectedTokenIsGermanIssuer && selectedCertificateIsRevoked {
             return "revocation_detail_single_notDE".localized
         }
-        if selectedCertificateIsGermanExpired {
+        if selectedTokenIsGermanIssuer && selectedTokenIsExpired {
             return "certificates_overview_expired_message".localized
         }
-        if selectedCertificateIsNonGermanExpired || selectedCertificateIsNonGermanExpiringSoon {
+        if (selectedTokenIsExpired && !selectedTokenIsGermanIssuer) || selectedCertificateIsNonGermanExpiringSoon {
             return "certificates_overview_expired_or_soon_expiring_nonDE".localized
         }
         if selectedCertificateIsGermanExpiringSoon {
@@ -168,10 +186,10 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
         if selectedCertificate?.isInvalid ?? false {
             return "certificates_overview_invalid_message".localized
         }
-        if let cert = selectedCertificate?.vaccinationCertificate.hcert.dgc.v?.first(where: { $0.fullImmunization }), !cert.fullImmunizationValid {
+        if let cert = selectedDgc?.v?.first(where: { $0.fullImmunization }), !cert.fullImmunizationValid {
             return "vaccination_certificate_overview_complete_from_message".localized
         }
-        if selectedCertificate?.vaccinationCertificate.isRecovery ?? false {
+        if selectedToken?.isRecovery ?? false {
             return "recovery_certificate_overview_message".localized
         }
         if let t = selectedCertificate?.firstTest {
@@ -183,43 +201,15 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
         return "recovery_certificate_overview_message".localized
     }
 
-    private var selectedCertificateIsGermanAndWasRevoked: Bool {
-        guard let selectedCertificate = selectedCertificate else {
-            return false
-        }
-        return selectedCertificate.vaccinationCertificate.isGermanIssuer && selectedCertificate.isRevoked
-    }
-
-    private var selectedCertificateIsNotGermanAndWasRevoked: Bool {
-        guard let selectedCertificate = selectedCertificate else {
-            return false
-        }
-        return !selectedCertificate.vaccinationCertificate.isGermanIssuer && selectedCertificate.isRevoked
-    }
-
-    private var selectedCertificateIsGermanExpired: Bool {
-        guard let token = selectedCertificate?.vaccinationCertificate else {
-            return false
-        }
-        return token.isExpired && token.isGermanIssuer
-    }
-
-    private var selectedCertificateIsNonGermanExpired: Bool {
-        guard let token = selectedCertificate?.vaccinationCertificate else {
-            return false
-        }
-        return token.isExpired && !token.isGermanIssuer
-    }
-
     private var selectedCertificateIsGermanExpiringSoon: Bool {
-        guard let token = selectedCertificate?.vaccinationCertificate else {
+        guard let token = selectedToken else {
             return false
         }
         return token.expiresSoon && token.isGermanIssuer
     }
 
     private var selectedCertificateIsNonGermanExpiringSoon: Bool {
-        guard let token = selectedCertificate?.vaccinationCertificate else {
+        guard let token = selectedToken else {
             return false
         }
         return token.expiresSoon && !token.isGermanIssuer
@@ -366,7 +356,7 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
     }
 
     func immunizationButtonTapped() {
-        if selectedCertificateIsInvalidOrRevoked {
+        if selectedCertificatetIsInvalid || selectedCertificateIsRevoked {
             resolver.fulfill(.addNewCertificate)
         } else {
             showLatestCertificate()
@@ -545,5 +535,23 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
         .catch { [weak self] error in
             self?.router.showUnexpectedErrorDialog(error)
         }
+    }
+}
+
+extension CertificateDetailViewModel {
+    var isBoosterVaccination: Bool {
+        selectedDgc?.v?.first?.isBoosted(vaccinations: vaccinations, recoveries: recoveries) ?? false && !isInvalid
+    }
+
+    private var isInvalid: Bool {
+        selectedTokenIsExpired || selectedCertificatetIsInvalid || selectedCertificateIsRevoked
+    }
+
+    private var vaccinations: [Vaccination] {
+        certificates.sortLatest().vaccinations
+    }
+
+    private var recoveries: [Recovery] {
+        certificates.sortLatest().recoveries
     }
 }
