@@ -207,15 +207,16 @@ extension ScanViewController: PHPickerViewControllerDelegate {
             pickingWasCancelled()
             return
         }
-        let itemProviders = results.map(\.itemProvider)
 
-        dismiss(animated: true)
-        itemProviders
-            .loadImages()
-            .done(on: DispatchQueue.main, flags: nil) { [weak self] images in
-                self?.viewModel.imagePicked(images: images)
-            }
-            .cauterize()
+        dismiss(animated: true) {
+            results
+                 .map(\.itemProvider)
+                 .loadImages()
+                 .done(on: DispatchQueue.main) { [weak self] images in
+                     self?.viewModel.imagePicked(images: images)
+                 }
+                 .cauterize()
+        }
     }
 }
 
