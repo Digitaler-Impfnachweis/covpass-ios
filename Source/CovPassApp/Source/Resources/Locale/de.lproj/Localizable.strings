@@ -1186,7 +1186,7 @@
 
 "error_validity_check_certificates_title" = "Überprüfen Sie die Gültigkeit Ihrer Zertifikate";
 
-"error_validity_check_certificates_message" = "Wenn Sie dieses Zertifikat in der App erneuern können, erhalten Sie eine Benachrichtigung.Mehr Informationen zum Austausch von abgelaufenen Zertifikaten finden Sie in unseren FAQs.";
+"error_validity_check_certificates_message" = "Wenn Sie dieses Zertifikat in der App erneuern können, erhalten Sie eine Benachrichtigung. Mehr Informationen zum Austausch von abgelaufenen Zertifikaten finden Sie in unseren FAQs.";
 
 "error_validity_check_certificates_button_title" = "OK";
 
