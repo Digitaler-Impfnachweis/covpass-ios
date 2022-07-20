@@ -1,10 +1,11 @@
 //
-//  GProofViewModel+ValidationResultModel.swift
+//  GProofValidationResult+GProofViewModel.swift
 //
 //  © Copyright IBM Deutschland GmbH 2021
 //  SPDX-License-Identifier: Apache-2.0
 //
 
+import CovPassCommon
 import CovPassUI
 import UIKit
 
@@ -61,7 +62,7 @@ public extension Optional where Wrapped == GProofValidationResult {
         }
         if initialTokenIsBoosted {
             return Constants.Keys.result_2G_2nd_gproof_valid_boosted
-        } else if cert.hcert.dgc.isVaccinationBoosted {
+        } else if cert.hcert.dgc.isVaccinationBoosted && !cert.hcert.dgc.isJohnsonAndJohnson2of2Vaccination {
             return Constants.Keys.result_2G_2nd_gproof_valid_boosted
         } else if cert.hcert.dgc.v?.first?.fullImmunizationCheck ?? false {
             return Constants.Keys.result_2G_2nd_gproof_valid_basic

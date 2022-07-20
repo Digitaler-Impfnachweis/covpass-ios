@@ -41,7 +41,7 @@ extension CBORWebToken {
         var dateDifference = 0
         var stringWithPlaceholder = Constants.Keys.result_2G_2nd_empty
 
-        if hcert.dgc.isVaccinationBoosted {
+        if hcert.dgc.isVaccinationBoosted && !hcert.dgc.isJohnsonAndJohnson2of2Vaccination {
             stringWithPlaceholder = Constants.Keys.result_2G_2nd_timestamp_days
             dateDifference = Date().daysSince(date)
         } else if hcert.dgc.v?.first?.fullImmunizationCheck ?? false {

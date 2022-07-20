@@ -127,7 +127,7 @@
 		098E44D2282D869200411776 /* VaccinationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098E44D1282D869200411776 /* VaccinationExtension.swift */; };
 		098E44D4282D88DA00411776 /* VaccinationExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098E44D3282D88DA00411776 /* VaccinationExtensionTests.swift */; };
 		0991D92D27BBCDDB009C1CB2 /* CBORWebToken+GProofViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0991D92C27BBCDDB009C1CB2 /* CBORWebToken+GProofViewModel.swift */; };
-		0991D92F27BBCE14009C1CB2 /* ValidationResultViewModel+GProofViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0991D92E27BBCE14009C1CB2 /* ValidationResultViewModel+GProofViewModel.swift */; };
+		0991D92F27BBCE14009C1CB2 /* GProofValidationResult+GProofViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0991D92E27BBCE14009C1CB2 /* GProofValidationResult+GProofViewModel.swift */; };
 		0993B15B27610C5900217884 /* ValidationFailedFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0993B15A27610C5900217884 /* ValidationFailedFactory.swift */; };
 		0993B15F27610FC300217884 /* ValidationFailedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0993B15E27610FC300217884 /* ValidationFailedViewModel.swift */; };
 		0993B16127610FCB00217884 /* ValidationFailedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0993B16027610FCB00217884 /* ValidationFailedViewController.swift */; };
@@ -425,6 +425,8 @@
 		E7D1F0A62861E12700FA7465 /* ScanRouterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D1F0A42861E12700FA7465 /* ScanRouterMock.swift */; };
 		E7F7817A27C4007D009AC907 /* CertificateReissueRepository+Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F7817927C4007D009AC907 /* CertificateReissueRepository+Factory.swift */; };
 		E7F7817D27C400BA009AC907 /* CertificateReissueRepository+FactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F7817C27C400BA009AC907 /* CertificateReissueRepository+FactoryTests.swift */; };
+		E7F8D88928880B61007C4AE7 /* CBORWebToken+GProofViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F8D88728880B1C007C4AE7 /* CBORWebToken+GProofViewModelTests.swift */; };
+		E7F8D88B28880CEB007C4AE7 /* GProofValidationResult+GProofViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F8D88A28880CEB007C4AE7 /* GProofValidationResult+GProofViewModelTests.swift */; };
 		E7FFBDA927F5D5B700796FEA /* URLSession+CertificateRevocationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FFBDA827F5D5B700796FEA /* URLSession+CertificateRevocationTests.swift */; };
 		E7FFBDAB27F5D83900796FEA /* CertificateRevocationRepository+FactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FFBDAA27F5D83900796FEA /* CertificateRevocationRepository+FactoryTests.swift */; };
 /* End PBXBuildFile section */
@@ -572,7 +574,7 @@
 		098E44D1282D869200411776 /* VaccinationExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VaccinationExtension.swift; sourceTree = "<group>"; };
 		098E44D3282D88DA00411776 /* VaccinationExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaccinationExtensionTests.swift; sourceTree = "<group>"; };
 		0991D92C27BBCDDB009C1CB2 /* CBORWebToken+GProofViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CBORWebToken+GProofViewModel.swift"; sourceTree = "<group>"; };
-		0991D92E27BBCE14009C1CB2 /* ValidationResultViewModel+GProofViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ValidationResultViewModel+GProofViewModel.swift"; sourceTree = "<group>"; };
+		0991D92E27BBCE14009C1CB2 /* GProofValidationResult+GProofViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GProofValidationResult+GProofViewModel.swift"; sourceTree = "<group>"; };
 		0993330327299700000D6BF6 /* TrustedListDetailsSceneFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrustedListDetailsSceneFactory.swift; sourceTree = "<group>"; };
 		0993330427299700000D6BF6 /* TrustedListDetailsRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrustedListDetailsRouter.swift; sourceTree = "<group>"; };
 		0993B15A27610C5900217884 /* ValidationFailedFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationFailedFactory.swift; sourceTree = "<group>"; };
@@ -912,6 +914,8 @@
 		E7D1F0A42861E12700FA7465 /* ScanRouterMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanRouterMock.swift; sourceTree = "<group>"; };
 		E7F7817927C4007D009AC907 /* CertificateReissueRepository+Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CertificateReissueRepository+Factory.swift"; sourceTree = "<group>"; };
 		E7F7817C27C400BA009AC907 /* CertificateReissueRepository+FactoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CertificateReissueRepository+FactoryTests.swift"; sourceTree = "<group>"; };
+		E7F8D88728880B1C007C4AE7 /* CBORWebToken+GProofViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CBORWebToken+GProofViewModelTests.swift"; sourceTree = "<group>"; };
+		E7F8D88A28880CEB007C4AE7 /* GProofValidationResult+GProofViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GProofValidationResult+GProofViewModelTests.swift"; sourceTree = "<group>"; };
 		E7FFBDA827F5D5B700796FEA /* URLSession+CertificateRevocationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URLSession+CertificateRevocationTests.swift"; sourceTree = "<group>"; };
 		E7FFBDAA27F5D83900796FEA /* CertificateRevocationRepository+FactoryTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CertificateRevocationRepository+FactoryTests.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1118,14 +1122,14 @@
 		0969AB8C2787AA8000ECCA74 /* GProof */ = {
 			isa = PBXGroup;
 			children = (
-				0969AB962787AB2800ECCA74 /* Views */,
 				0969AB8D2787AA9B00ECCA74 /* Protocols */,
-				0969AB942787AB2200ECCA74 /* GProofViewController.swift */,
-				0969AB9B2787ABAC00ECCA74 /* GProofSceneFactory.swift */,
-				092699E3278BA14E00331D77 /* GProofRouter.swift */,
-				0969AB922787AB1B00ECCA74 /* GProofViewModel.swift */,
+				0969AB962787AB2800ECCA74 /* Views */,
 				0991D92C27BBCDDB009C1CB2 /* CBORWebToken+GProofViewModel.swift */,
-				0991D92E27BBCE14009C1CB2 /* ValidationResultViewModel+GProofViewModel.swift */,
+				092699E3278BA14E00331D77 /* GProofRouter.swift */,
+				0969AB9B2787ABAC00ECCA74 /* GProofSceneFactory.swift */,
+				0991D92E27BBCE14009C1CB2 /* GProofValidationResult+GProofViewModel.swift */,
+				0969AB942787AB2200ECCA74 /* GProofViewController.swift */,
+				0969AB922787AB1B00ECCA74 /* GProofViewModel.swift */,
 			);
 			path = GProof;
 			sourceTree = "<group>";
@@ -2181,6 +2185,7 @@
 		88AB2A5F25FA40CE00D4EA52 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				E7F8D88628880AF0007C4AE7 /* GProof */,
 				09541B5427FD7E6B00A32547 /* UseCases */,
 				E79CF9ED27E896FC00C4619E /* Extensions */,
 				E7CB54B427B55407002FA55E /* Scenes */,
@@ -2636,6 +2641,15 @@
 				E7FFBDA827F5D5B700796FEA /* URLSession+CertificateRevocationTests.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		E7F8D88628880AF0007C4AE7 /* GProof */ = {
+			isa = PBXGroup;
+			children = (
+				E7F8D88728880B1C007C4AE7 /* CBORWebToken+GProofViewModelTests.swift */,
+				E7F8D88A28880CEB007C4AE7 /* GProofValidationResult+GProofViewModelTests.swift */,
+			);
+			path = GProof;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -3193,7 +3207,7 @@
 				E7D1F09C2861DB4200FA7465 /* ScanSceneFactory.swift in Sources */,
 				092699F3278C55C500331D77 /* GProofDifferentPersonViewModel.swift in Sources */,
 				2181C16D264F035D00DE7412 /* ValidatorOverviewRouterProtocol.swift in Sources */,
-				0991D92F27BBCE14009C1CB2 /* ValidationResultViewModel+GProofViewModel.swift in Sources */,
+				0991D92F27BBCE14009C1CB2 /* GProofValidationResult+GProofViewModel.swift in Sources */,
 				0969AB8F2787AAE500ECCA74 /* GProofRouterProtocol.swift in Sources */,
 				3829A30C269CFF7F00B8346C /* DCCCertLogicExtension.swift in Sources */,
 				098E44D2282D869200411776 /* VaccinationExtension.swift in Sources */,
@@ -3214,9 +3228,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				09541B5727FD7E7F00A32547 /* ValidateCertificateUseCaseTests.swift in Sources */,
+				E7F8D88B28880CEB007C4AE7 /* GProofValidationResult+GProofViewModelTests.swift in Sources */,
 				096EB4E627D76920005CE76F /* RevocationSettingsViewControllerSnapShotTests.swift in Sources */,
 				096EB4E227D76904005CE76F /* RevocationSettingsViewModelTests.swift in Sources */,
 				0957848627A2D28400E8206C /* ViewModelDelegateMock.swift in Sources */,
+				E7F8D88928880B61007C4AE7 /* CBORWebToken+GProofViewModelTests.swift in Sources */,
 				09541B5927FD7FD800A32547 /* CBORWebTokenExtensions.swift in Sources */,
 				E7D1F0A52861E12700FA7465 /* CameraAccessProviderMock.swift in Sources */,
 				95A031EB27359AC60073FDD1 /* ValidationResultViewControllerSnapShotTests.swift in Sources */,

@@ -46,12 +46,12 @@ class DigitalGreenCertificateExtensionTests: XCTestCase {
         XCTAssertFalse(is1Of2)
     }
 
-    private func configureSut(dn: Int = 2, sd: Int = 2) {
+    private func configureSut(dn: Int = 2, sd: Int = 2, mp: String = "") {
         sut.v = [
             .init(
                 tg: "",
                 vp: "",
-                mp: "",
+                mp: mp,
                 ma: "",
                 dn: dn,
                 sd: sd,
@@ -93,6 +93,17 @@ class DigitalGreenCertificateExtensionTests: XCTestCase {
 
         // Then
         XCTAssertTrue(is1Of2)
+    }
+
+    func testIsJohnsonAndJohnson2of2Vaccination() {
+        // Given
+        configureSut(dn: 2, sd: 2, mp: "EU/1/20/1525")
+
+        // When
+        let isJohnsonAndJohnson2of2Vaccination = sut.isJohnsonAndJohnson2of2Vaccination
+
+        // Then
+        XCTAssertTrue(isJohnsonAndJohnson2of2Vaccination)
     }
 }
 

@@ -556,7 +556,6 @@ extension CertificateDetailViewModel {
     }
 
     fileprivate var isJohnsonAndJohnson2of2Vaccination: Bool {
-        guard let vaccination = selectedDgc?.v?.first else { return false }
-        return vaccination.isJohnsonJohnson && vaccination.isDoubleDoseComplete
+        selectedDgc?.isJohnsonAndJohnson2of2Vaccination ?? false
     }
 }

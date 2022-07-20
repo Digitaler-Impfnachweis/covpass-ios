@@ -61,4 +61,8 @@ public extension DigitalGreenCertificate {
         }
         return result
     }
+
+    var isJohnsonAndJohnson2of2Vaccination: Bool {
+        v?.contains { $0.isJohnsonJohnson && $0.isDoubleDoseComplete } ?? false
+    }
  }
