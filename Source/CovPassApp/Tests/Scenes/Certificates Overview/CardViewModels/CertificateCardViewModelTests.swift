@@ -245,6 +245,39 @@ class CertificateCardViewModelTests: XCTestCase {
         XCTAssertEqual(title, "Rapid antigen test")
     }
 
+    func testTitle_johnson_and_johnson_2_of_2() {
+        // Given
+        let token = CBORWebToken.mockVaccinationCertificate
+            .doseNumber(2)
+            .seriesOfDoses(2)
+            .medicalProduct(.johnsonjohnson)
+            .extended()
+        let sut = sut(token: token)
+
+        // When
+        let title = sut.title
+
+        // Then
+        XCTAssertEqual(title, "Basic immunisation")
+    }
+
+    func testSubtitle_johnson_and_johnson_2_of_2() {
+        // Given
+        let token = CBORWebToken.mockVaccinationCertificate
+            .doseNumber(2)
+            .seriesOfDoses(2)
+            .medicalProduct(.johnsonjohnson)
+            .mockVaccinationSetDate(.init(timeIntervalSinceReferenceDate: 0))
+            .extended()
+        let sut = sut(token: token)
+
+        // When
+        let subtitle = sut.subtitle
+
+        // Then
+        XCTAssertEqual(subtitle, "24000 month(s) ago")
+    }
+
     func testSubtitle_vaccination_1_of_2() throws {
         // Given
         let token = try ExtendedCBORWebToken.token1Of2()

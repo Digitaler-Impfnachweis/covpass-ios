@@ -468,6 +468,22 @@ class CertificateDetailViewModelTests: XCTestCase {
         XCTAssertEqual(immunizationTitle, "Booster vaccination")
     }
 
+    func testImmunizationTitle_johnson_and_johnson_2_of_2() {
+        // Given
+        let token = CBORWebToken.mockVaccinationCertificate
+            .doseNumber(2)
+            .seriesOfDoses(2)
+            .medicalProduct(.johnsonjohnson)
+            .extended()
+        configureCustomSut(certificates: [token])
+
+        // When
+        let immunizationTitle = sut.immunizationTitle
+
+        // Then
+        XCTAssertEqual(immunizationTitle, "Basic immunisation")
+    }
+
     func testImmunizationBody_revoked_vaccination_certificate_german_issuer() throws {
         // Given
         try configureSut(revoked: true)

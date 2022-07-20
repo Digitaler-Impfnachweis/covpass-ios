@@ -29,7 +29,7 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
     private lazy var isRecovery = certificate.isRecovery && !isInvalid
     private lazy var isBasicVaccination = dgc.fullImmunizationValid && !isBoosterVaccination && !isInvalid
     private lazy var isPartialVaccination = certificate.isVaccination && !dgc.fullImmunizationValid && !isInvalid
-    private lazy var isBoosterVaccination = dgc .v?.first?.isBoosted(vaccinations: vaccinations, recoveries: recoveries) ?? false && !isInvalid
+    private lazy var isBoosterVaccination = dgc.v?.first?.isBoosted(vaccinations: vaccinations, recoveries: recoveries) ?? false && !isInvalid
     private lazy var isPCRTest = dgc.isPCR && !isInvalid
     private lazy var isRapidAntigenTest = certificate.isTest && !isPCRTest && !isInvalid
     private lazy var isRevoked = token.isRevoked
@@ -37,6 +37,10 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
     private lazy var partialVaccination: Vaccination? = {
         guard isPartialVaccination else { return nil }
         return dgc.v?.first
+    }()
+    private lazy var isJohnsonAndJohnson2of2Vaccination: Bool = {
+        guard let vaccination = dgc.v?.first else { return false }
+        return vaccination.isJohnsonJohnson && vaccination.isDoubleDoseComplete
     }()
     // Show notification to the user if he is qualified for a booster vaccination
     var showBoosterAvailabilityNotification: Bool {
@@ -103,7 +107,7 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
             title = "startscreen_card_title"
         } else if isRecovery {
             title = "certificate_type_recovery"
-        } else if isBasicVaccination {
+        } else if isBasicVaccination || isJohnsonAndJohnson2of2Vaccination {
             title = "certificate_type_basic_immunisation"
         } else if isBoosterVaccination {
             title = "certificate_type_booster"
@@ -129,7 +133,8 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
             subtitle = "certificates_start_screen_qrcode_certificate_expired_subtitle".localized
         } else if isRecovery, let date = dgc.r?.first?.fr {
             subtitle = currentDate.monthSinceString(date)
-        } else if isBasicVaccination || isPartialVaccination, let date = dgc.v?.first?.dt {
+        } else if isBasicVaccination || isPartialVaccination || isJohnsonAndJohnson2of2Vaccination,
+                  let date = dgc.v?.first?.dt {
             subtitle = currentDate.monthSinceString(date)
         } else if isBoosterVaccination, let date = dgc.v?.first?.dt {
             subtitle = currentDate.daysSinceString(date)

@@ -156,7 +156,7 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
         guard let cert = sortedByFullImmunization.first?.vaccinationCertificate.hcert.dgc.v?.first else {
             return "vaccination_certificate_overview_incomplete_title".localized
         }
-        if isBoosterVaccination {
+        if isBoosterVaccination && !isJohnsonAndJohnson2of2Vaccination {
             return "certificate_type_booster".localized
         } else if cert.fullImmunizationValid {
             return "vaccination_certificate_overview_complete_title".localized
@@ -553,5 +553,10 @@ extension CertificateDetailViewModel {
 
     private var recoveries: [Recovery] {
         certificates.sortLatest().recoveries
+    }
+
+    fileprivate var isJohnsonAndJohnson2of2Vaccination: Bool {
+        guard let vaccination = selectedDgc?.v?.first else { return false }
+        return vaccination.isJohnsonJohnson && vaccination.isDoubleDoseComplete
     }
 }
