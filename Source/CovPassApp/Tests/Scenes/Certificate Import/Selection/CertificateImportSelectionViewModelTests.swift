@@ -11,6 +11,7 @@ import PromiseKit
 import XCTest
 
 class CertificateImportSelectionViewModelTests: XCTestCase {
+    private var delegate: MockViewModelDelegate!
     private var promise: Promise<Void>!
     private var resolver: Resolver<Void>!
     private var router: CertificateImportSelectionRouterMock!
@@ -26,6 +27,7 @@ class CertificateImportSelectionViewModelTests: XCTestCase {
         ]
         vaccinationRepository = .init()
         router = .init()
+        delegate = .init()
         let (promise, resolver) = Promise<Void>.pending()
         self.promise = promise
         self.resolver = resolver
@@ -39,9 +41,11 @@ class CertificateImportSelectionViewModelTests: XCTestCase {
             resolver: resolver,
             router: router
         )
+        sut.delegate = delegate
     }
 
     override func tearDownWithError() throws {
+        delegate = nil
         promise = nil
         resolver = nil
         router = nil
@@ -209,18 +213,25 @@ class CertificateImportSelectionViewModelTests: XCTestCase {
         sut.confirm()
 
         // Then
+        XCTAssertFalse(sut.isImportingCertificates)
         wait(for: [expectation], timeout: 1)
     }
 
     func testConfirm_import_success() {
+        // Given
+        delegate.viewModelDidUpdateExpectation.expectedFulfillmentCount = 2
+
         // When
         sut.confirm()
 
         // Then
+        XCTAssertTrue(sut.isImportingCertificates)
         wait(for: [
             vaccinationRepository.updateExpectation,
-            router.showImportSuccessExpectation
+            router.showImportSuccessExpectation,
+            delegate.viewModelDidUpdateExpectation
         ], timeout: 1)
+        XCTAssertFalse(sut.isImportingCertificates)
     }
 
     func testConfirm_import_failure() {
@@ -231,12 +242,18 @@ class CertificateImportSelectionViewModelTests: XCTestCase {
         }.cauterize()
         vaccinationRepository.updateError = NSError(domain: "TEST", code: 0)
         router.showImportSuccessExpectation.isInverted = true
+        delegate.viewModelDidUpdateExpectation.expectedFulfillmentCount = 2
 
         // When
         sut.confirm()
 
         // Then
-        wait(for: [expectation, router.showImportSuccessExpectation], timeout: 1)
+        wait(for: [
+            expectation,
+            router.showImportSuccessExpectation,
+            delegate.viewModelDidUpdateExpectation
+        ], timeout: 1)
+        XCTAssertFalse(sut.isImportingCertificates)
     }
 
     func testConfirm_too_many_certifcate_holders() {
@@ -246,6 +263,7 @@ class CertificateImportSelectionViewModelTests: XCTestCase {
                 .init(gn: nil, fn: nil, gnt: nil, fnt: "\(index)")
             ).extended()
         }
+        delegate.viewModelDidUpdateExpectation.expectedFulfillmentCount = 2
         configureSut(tokens: tokens)
 
         // When
@@ -253,8 +271,10 @@ class CertificateImportSelectionViewModelTests: XCTestCase {
 
         // Then
         wait(for: [
-            router.showTooManyHoldersErrorExpectation
+            router.showTooManyHoldersErrorExpectation,
+            delegate.viewModelDidUpdateExpectation
         ], timeout: 1)
+        XCTAssertFalse(sut.isImportingCertificates)
     }
 
     func testConfirm_too_many_certifcate_holders_including_existing_tokens() {
@@ -342,5 +362,13 @@ class CertificateImportSelectionViewModelTests: XCTestCase {
 
         // Then
         XCTAssertEqual(state, .none)
+    }
+
+    func testIsImportingCertificates_default() {
+        // When
+        let isImportingCertificates = sut.isImportingCertificates
+
+        // Then
+        XCTAssertFalse(isImportingCertificates)
     }
 }

@@ -17,11 +17,12 @@ final class CertificateImportSelectionViewController: UIViewController {
     @IBOutlet weak var hintView: HintView!
     @IBOutlet weak var importButton: MainButton!
 
-    private let viewModel: CertificateImportSelectionViewModelProtocol
+    private var viewModel: CertificateImportSelectionViewModelProtocol
     
     init(viewModel: CertificateImportSelectionViewModelProtocol) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
+        self.viewModel.delegate = self
     }
 
     required init?(coder: NSCoder) {
@@ -134,5 +135,14 @@ final class CertificateImportSelectionViewController: UIViewController {
         importButton.isEnabled = viewModel.enableButton
         importButton.title = viewModel.buttonTitle
         importButton.action = viewModel.confirm
+        viewModel.isImportingCertificates ? importButton.startAnimating() : importButton.stopAnimating()
     }
+}
+
+extension CertificateImportSelectionViewController: ViewModelDelegate {
+    func viewModelDidUpdate() {
+        configureButton()
+    }
+
+    func viewModelUpdateDidFailWithError(_ error: Error) {}
 }

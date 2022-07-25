@@ -65,6 +65,12 @@ public class ScanViewModel: CancellableViewModelProtocol {
         }
     }
 
+    private(set) var isProcessingCertificates: Bool = false {
+        didSet {
+            delegate?.viewModelDidChange()
+        }
+    }
+
     // MARK: - Lifecycle
 
     public init(
@@ -151,6 +157,7 @@ public class ScanViewModel: CancellableViewModelProtocol {
               let certificateRepository = certificateRepository else {
             return
         }
+        isProcessingCertificates = true
         firstly {
             certificateRepository.getCertificateList()
         }.then { certificateList in
@@ -167,6 +174,7 @@ public class ScanViewModel: CancellableViewModelProtocol {
         }
         .ensure {
             self.mode = .scan
+            self.isProcessingCertificates = false
         }
         .cauterize()
     }

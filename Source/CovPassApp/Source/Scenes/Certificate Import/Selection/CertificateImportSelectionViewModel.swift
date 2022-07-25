@@ -30,9 +30,17 @@ final class CertificateImportSelectionViewModel: CertificateImportSelectionViewM
     let hintTitle = Constants.hintTitle
     let hintTextBulletPoints = Constants.hintBulletPoints
     let items: [CertificateImportSelectionItem]
+    var delegate: ViewModelDelegate?
+    
     private let vaccinationRepository: VaccinationRepositoryProtocol
     private let resolver: Resolver<Void>
     private let router: CertificateImportSelectionRouterProtocol
+
+    private(set) var isImportingCertificates = false {
+        didSet {
+            delegate?.viewModelDidUpdate()
+        }
+    }
 
     var buttonTitle: String {
         items.isEmpty ? Constants.emptyButtonTitle : .init(format: Constants.buttonTitleFormat, selectedItems.count)
@@ -90,9 +98,11 @@ final class CertificateImportSelectionViewModel: CertificateImportSelectionViewM
             cancel()
             return
         }
+        isImportingCertificates = true
         existingAndSelectedTokensHaveMoreThan20Holders()
             .done { moreThan20Holders in
                 if moreThan20Holders {
+                    self.isImportingCertificates = false
                     self.router.showTooManyHoldersError()
                 } else {
                     self.updateSelectedTokens()
@@ -120,6 +130,9 @@ final class CertificateImportSelectionViewModel: CertificateImportSelectionViewM
             .update(selectedTokens)
             .done { [weak self] _ in
                 self?.handleSuccess()
+            }
+            .ensure { [weak self] in
+                self?.isImportingCertificates = false
             }
             .catch { [weak self] _ in
                 self?.cancel()

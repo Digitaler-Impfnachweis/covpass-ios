@@ -18,6 +18,7 @@ public final class ScanViewController: UIViewController, UINavigationControllerD
 
     @IBOutlet var toolbarView: CustomToolbarView!
     @IBOutlet var container: UIView!
+    @IBOutlet weak var activityIndicatorView: DotPulseActivityIndicator!
 
     // MARK: - Properties
 
@@ -40,6 +41,7 @@ public final class ScanViewController: UIViewController, UINavigationControllerD
         view.backgroundColor = .backgroundPrimary
         container.backgroundColor = .neutralBlack
         configureToolbarView()
+        updateActivity()
         viewModel.onCameraAccess = { [weak self] in
             self?.configureScanView()
         }
@@ -104,6 +106,17 @@ public final class ScanViewController: UIViewController, UINavigationControllerD
         dismissPresented(animated: true)
         viewModel.mode = .scan
     }
+
+    private func updateActivity() {
+        activityIndicatorView.isHidden = !viewModel.isProcessingCertificates
+        toolbarView.leftButton.isEnabled = !viewModel.isProcessingCertificates
+        toolbarView.leftButton2.isEnabled = !viewModel.isProcessingCertificates
+        if viewModel.isProcessingCertificates {
+            activityIndicatorView.startAnimating()
+        } else {
+            activityIndicatorView.stopAnimating()
+        }
+    }
 }
 
 extension ScanViewController: ScanViewModelDelegate {
@@ -140,6 +153,7 @@ extension ScanViewController: ScanViewModelDelegate {
         case .selection:
             removeScanView()
         }
+        updateActivity()
     }
 }
 

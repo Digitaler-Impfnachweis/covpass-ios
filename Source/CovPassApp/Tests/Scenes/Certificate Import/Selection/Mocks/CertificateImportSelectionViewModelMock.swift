@@ -7,9 +7,12 @@
 
 @testable import CovPassApp
 import CovPassCommon
+import CovPassUI
 import XCTest
 
 final class CertificateImportSelectionViewModelMock: CertificateImportSelectionViewModelProtocol {
+    var delegate: ViewModelDelegate?
+    var isImportingCertificates = false
     let importCertificatesExpectation = XCTestExpectation(description: "importCertificatesExpectation")
     var itemSelectionState: CertificateImportSelectionState = .none
     var enableButton = true

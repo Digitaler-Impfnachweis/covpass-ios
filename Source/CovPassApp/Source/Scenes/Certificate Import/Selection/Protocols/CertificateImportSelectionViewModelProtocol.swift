@@ -17,6 +17,8 @@ protocol CertificateImportSelectionViewModelProtocol {
     var itemSelectionState: CertificateImportSelectionState { get }
     var enableButton: Bool { get }
     var hideSelection: Bool { get }
+    var isImportingCertificates: Bool { get }
+    var delegate: ViewModelDelegate? { get set }
 
     func confirm()
     func cancel()

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ScanViewController" customModule="CovPassUI">
             <connections>
+                <outlet property="activityIndicatorView" destination="Qh4-No-qvr" id="bzy-cM-LDx"/>
                 <outlet property="container" destination="6p5-KI-vme" id="Ucd-Fk-zAp"/>
                 <outlet property="toolbarView" destination="5cz-uG-cjm" id="CI6-0W-wdK"/>
                 <outlet property="view" destination="EOK-T9-d5Z" id="ond-6B-tSv"/>
@@ -24,6 +25,14 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6p5-KI-vme" userLabel="Container">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="794"/>
                 </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qh4-No-qvr" customClass="DotPulseActivityIndicator" customModule="CovPassUI">
+                    <rect key="frame" x="157" y="387" width="100" height="20"/>
+                    <color key="backgroundColor" systemColor="systemPurpleColor"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="100" id="dXe-W7-rwT"/>
+                        <constraint firstAttribute="height" constant="20" id="yeh-m8-Y6I"/>
+                    </constraints>
+                </view>
                 <view contentMode="scaleToFill" placeholderIntrinsicWidth="240" placeholderIntrinsicHeight="56" translatesAutoresizingMaskIntoConstraints="NO" id="5cz-uG-cjm" customClass="CustomToolbarView" customModule="CovPassUI">
                     <rect key="frame" x="0.0" y="794" width="414" height="56"/>
                 </view>
@@ -31,11 +40,13 @@
             <viewLayoutGuide key="safeArea" id="KqW-RY-ahZ"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
+                <constraint firstItem="Qh4-No-qvr" firstAttribute="centerX" secondItem="6p5-KI-vme" secondAttribute="centerX" id="0qt-0S-1zR"/>
                 <constraint firstItem="6p5-KI-vme" firstAttribute="top" secondItem="EOK-T9-d5Z" secondAttribute="top" id="8r3-C4-sXy"/>
                 <constraint firstItem="6p5-KI-vme" firstAttribute="trailing" secondItem="KqW-RY-ahZ" secondAttribute="trailing" id="9Q1-by-GM7"/>
                 <constraint firstItem="5cz-uG-cjm" firstAttribute="leading" secondItem="KqW-RY-ahZ" secondAttribute="leading" id="F8R-lz-WmU"/>
                 <constraint firstItem="5cz-uG-cjm" firstAttribute="trailing" secondItem="KqW-RY-ahZ" secondAttribute="trailing" id="OsN-BV-7OA"/>
                 <constraint firstItem="6p5-KI-vme" firstAttribute="leading" secondItem="KqW-RY-ahZ" secondAttribute="leading" id="Qpp-O4-Jcf"/>
+                <constraint firstItem="Qh4-No-qvr" firstAttribute="centerY" secondItem="6p5-KI-vme" secondAttribute="centerY" id="rEf-mV-ypM"/>
                 <constraint firstItem="KqW-RY-ahZ" firstAttribute="bottom" secondItem="5cz-uG-cjm" secondAttribute="bottom" constant="12" id="ueb-0s-DQT"/>
                 <constraint firstItem="5cz-uG-cjm" firstAttribute="top" secondItem="6p5-KI-vme" secondAttribute="bottom" id="yT7-bh-K7K"/>
             </constraints>
@@ -50,6 +61,9 @@
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemPurpleColor">
+            <color red="0.68627450980392157" green="0.32156862745098042" blue="0.87058823529411766" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
