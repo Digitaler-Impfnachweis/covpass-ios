@@ -8,16 +8,21 @@
 import Foundation
 
 public struct CertificateRevocationIndexListByKIDResponse {
+    let lastModified: String?
+    let rawDictionary: NSDictionary
     private let byte1Hashes: Byte1ValueDictionary
-    init(with dictionary: NSDictionary) throws {
+
+    init(with dictionary: NSDictionary, lastModified: String? = nil) throws {
+        self.lastModified = lastModified
+        rawDictionary = dictionary
         byte1Hashes = try dictionary.hashDictionary()
     }
 
-    public func contains(_ byte1: UInt8) -> Bool {
+    func contains(_ byte1: UInt8) -> Bool {
         byte1Hashes[byte1] != nil
     }
 
-    public func contains(_ byte1: UInt8, _ byte2: UInt8) -> Bool {
+    func contains(_ byte1: UInt8, _ byte2: UInt8) -> Bool {
         guard let byte2hashes = byte1Hashes[byte1]?.hashes else { return false }
         return byte2hashes[byte2] != nil
     }
@@ -47,7 +52,7 @@ private extension NSDictionary {
                   value.count > 2,
                   let dictionary = value[2] as? NSDictionary
             else {
-                throw CertificateRevocationHTTPClientError.cbor
+                throw CertificateRevocationDataSourceError.cbor
             }
             let timestamp = (value[0] as? TimeInterval) ?? 0
             let hashCount = (value[1] as? Int) ?? 0
@@ -65,7 +70,7 @@ private extension NSDictionary {
                   let value = value as? Array<Any>,
                   value.count > 1
             else {
-                throw CertificateRevocationHTTPClientError.cbor
+                throw CertificateRevocationDataSourceError.cbor
             }
             let timestamp = (value[0] as? TimeInterval) ?? 0
             let hashCount = (value[1] as? Int) ?? 0

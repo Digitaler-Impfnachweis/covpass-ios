@@ -1,5 +1,5 @@
 //
-//  CertificateRevocationHTTPClientProtocol.swift
+//  CertificateRevocationDataSource.swift
 //  
 //  © Copyright IBM Deutschland GmbH 2021
 //  SPDX-License-Identifier: Apache-2.0
@@ -11,10 +11,11 @@ import PromiseKit
 public typealias KID = [UInt8]
 public typealias CertificateRevocationHash = [UInt8]
 public typealias CertificateRevocationIndexListResponse = NSDictionary
-public typealias CertificateRevocationChunkListResponse = [CertificateRevocationHash]
 
-public protocol CertificateRevocationHTTPClientProtocol {
+public protocol CertificateRevocationDataSourceProtocol {
     /// Request the top-level `kid.lst`.
+    /// - Returns: The KID list response, or a Promise error. If kid list is empty, a HTTP 404 error is
+    ///            returned.
     func getKIDList() -> Promise<CertificateRevocationKIDListResponse>
 
     /// Request the top-level `index.lst`.
@@ -23,6 +24,7 @@ public protocol CertificateRevocationHTTPClientProtocol {
     /// Request the `index.lst` for a given key identifier.
     /// - Parameters:
     ///   - kid: The key identifier.
+    ///   - hashType: type of the hash to use for request.
     /// - Returns: The `index.lst` JSON dictionary.
     func getIndexList(kid: KID, hashType: CertificateRevocationHashType) -> Promise<CertificateRevocationIndexListByKIDResponse>
 
@@ -35,6 +37,7 @@ public protocol CertificateRevocationHTTPClientProtocol {
     /// Request the`chunk.lst` for a given key identifier.
     /// - Parameters:
     ///   - kid: The key identifier.
+    ///   - hashType: The type of the hash to lookup.
     /// - Returns: The `chunk.lst` array.
     func getChunkList(kid: KID, hashType: CertificateRevocationHashType) -> Promise<CertificateRevocationChunkListResponse>
 

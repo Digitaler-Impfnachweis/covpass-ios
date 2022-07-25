@@ -16,7 +16,7 @@ public class HTTPClient: HTTPClientProtocol {
         self.dataTaskProducer = dataTaskProducer
     }
 
-    public func httpRequest(_ urlRequest: URLRequest) -> Promise<Data> {
+    public func httpRequest(_ urlRequest: URLRequest) -> Promise<HTTPClientResponse> {
         Promise { seal in
             dataTaskProducer
                 .dataTask(with: urlRequest) { data, urlResponse, error in
@@ -32,16 +32,10 @@ public class HTTPClient: HTTPClientProtocol {
         }
     }
 
-    private func handleResponse(_ data: Data?, _ urlResponse: URLResponse?, _ error: Error?) -> Promise<Data> {
+    private func handleResponse(_ data: Data?, _ urlResponse: URLResponse?, _ error: Error?) -> Promise<HTTPClientResponse> {
         self.checkForNoError(error)
             .then { _ in self.httpURLResponse(from: urlResponse) }
             .then { self.checkHTTPStatusCode(data, response: $0) }
-            .then { _ -> Promise<Data> in
-                if let data = data {
-                    return .value(data)
-                }
-                return .init(error: HTTPClientError.invalidResponse(urlResponse))
-            }
     }
 
     private func checkForNoError(_ error: Error?) -> Promise<Void> {
@@ -66,15 +60,16 @@ public class HTTPClient: HTTPClientProtocol {
         return .value(httpURLResponse)
     }
 
-    private func checkHTTPStatusCode(_ data: Data?, response: HTTPURLResponse) -> Promise<Data?> {
+    private func checkHTTPStatusCode(_ data: Data?, response: HTTPURLResponse) -> Promise<HTTPClientResponse> {
         response.isOk ?
-            .value(data) :
+            .value(.init(httpURLResponse: response, data: data)) :
             .init(error: HTTPClientError.http(response.statusCode, data: data))
     }
 }
 
 private extension HTTPURLResponse {
     var isOk: Bool {
-        200 ..< 300 ~= statusCode
+        200 ..< 300 ~= statusCode ||
+        HTTPStatusCode.notModified == statusCode
     }
 }

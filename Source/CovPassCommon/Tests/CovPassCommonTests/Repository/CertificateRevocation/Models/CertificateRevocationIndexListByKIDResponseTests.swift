@@ -56,4 +56,44 @@ class CertificateRevocationIndexListByKIDResponseTests: XCTestCase {
         XCTAssertFalse(sut.contains(0xa6, 0x54))
         XCTAssertFalse(sut.contains(0xbd, 0x54))
     }
+
+    func testRawDictionary() throws {
+        // Given
+        let expectedDictionary: NSDictionary = .validIndexListResponse()
+        let sut = try CertificateRevocationIndexListByKIDResponse(with: expectedDictionary)
+
+        // When
+        let dictionary = sut.rawDictionary
+
+        // Then
+        XCTAssertEqual(dictionary, expectedDictionary)
+    }
+
+    func testLastUpdate() throws {
+        // Given
+        let expectedLastModified = "ABC"
+        let sut = try CertificateRevocationIndexListByKIDResponse(
+            with: .validIndexListResponse(),
+            lastModified: expectedLastModified
+        )
+
+        // When
+        let lastModified = sut.lastModified
+
+        // Then
+        XCTAssertEqual(lastModified, expectedLastModified)
+    }
+
+    func testLastUpdate_nil() throws {
+        // Given
+        let sut = try CertificateRevocationIndexListByKIDResponse(
+            with: .validIndexListResponse()
+        )
+
+        // When
+        let lastModified = sut.lastModified
+
+        // Then
+        XCTAssertNil(lastModified)
+    }
 }

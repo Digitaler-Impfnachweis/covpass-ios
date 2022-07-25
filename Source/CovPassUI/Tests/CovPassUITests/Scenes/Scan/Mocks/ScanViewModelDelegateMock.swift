@@ -1,8 +1,8 @@
 //
 //  ScanViewModelDelegateMock.swift
 //  
-//
-//  Created by Thomas Kuleßa on 05.07.22.
+//  © Copyright IBM Deutschland GmbH 2021
+//  SPDX-License-Identifier: Apache-2.0
 //
 
 @testable import CovPassUI

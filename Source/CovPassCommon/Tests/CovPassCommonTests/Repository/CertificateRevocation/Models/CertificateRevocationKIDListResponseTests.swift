@@ -9,6 +9,16 @@
 import XCTest
 
 class CertificateRevocationKIDListResponseTests: XCTestCase {
+    private var sut: CertificateRevocationKIDListResponse!
+
+    override func setUpWithError() throws {
+        sut = try .init(with: .validKidListResponse(), lastModified: "ABC")
+    }
+
+    override func tearDownWithError() throws {
+        sut = nil
+    }
+
     func testInit_success_with_empty() {
         // Given
         let dictionary: NSDictionary = .init()
@@ -39,13 +49,11 @@ class CertificateRevocationKIDListResponseTests: XCTestCase {
         )
     }
 
-    func testContains() throws {
+    func testContains() {
         // Given
         let kid1: KID = [0xf5,0xc5,0x97,0x0c,0x30,0x39,0xd8,0x54]
         let kid2: KID = [0xab, 0xcd]
         let kid3: KID = [0xef, 0xef]
-        let dictionary: NSDictionary = .validKidListResponse()
-        let sut = try CertificateRevocationKIDListResponse(with: dictionary)
 
         // When & Then
         XCTAssertTrue(sut.contains(kid1))
@@ -53,13 +61,11 @@ class CertificateRevocationKIDListResponseTests: XCTestCase {
         XCTAssertFalse(sut.contains(kid3))
     }
 
-    func testCount() throws {
+    func testCount() {
         // Given
         let kid1: KID = [0xf5,0xc5,0x97,0x0c,0x30,0x39,0xd8,0x54]
         let kid2: KID = [0xab, 0xcd]
         let kid3: KID = [0xef, 0xef]
-        let dictionary: NSDictionary = .validKidListResponse()
-        let sut = try CertificateRevocationKIDListResponse(with: dictionary)
 
         // When & Then
         XCTAssertEqual(sut.count(kid1, hashType: .signature), 3)
@@ -73,11 +79,9 @@ class CertificateRevocationKIDListResponseTests: XCTestCase {
         XCTAssertEqual(sut.count(kid3, hashType: .countryCodeUCI), 0)
     }
 
-    func testHashTypeCounts() throws {
+    func testHashTypeCounts() {
         // Given
         let kid: KID = [0xab,0xcd]
-        let dictionary: NSDictionary = .validKidListResponse()
-        let sut = try CertificateRevocationKIDListResponse(with: dictionary)
 
         // When
         let hasTypeCounts = sut.hashTypeCounts(kid)
@@ -95,11 +99,9 @@ class CertificateRevocationKIDListResponseTests: XCTestCase {
         XCTAssertEqual(hasTypeCounts[2].1, 2)
     }
 
-    func testHashTypeCounts_some_values_missing_or_0() throws {
+    func testHashTypeCounts_some_values_missing_or_0() {
         // Given
         let kid: KID = [255]
-        let dictionary: NSDictionary = .validKidListResponse()
-        let sut = try CertificateRevocationKIDListResponse(with: dictionary)
 
         // When
         let hasTypeCounts = sut.hashTypeCounts(kid)
@@ -109,5 +111,58 @@ class CertificateRevocationKIDListResponseTests: XCTestCase {
         XCTAssertEqual(hasTypeCounts.count, 1)
         XCTAssertEqual(hashTypeCount?.0, .countryCodeUCI)
         XCTAssertEqual(hashTypeCount?.1, 1)
+    }
+
+    func testRawDictionary() {
+        // When
+        let dictionary = sut.rawDictionary
+
+        // Then
+        XCTAssertEqual(dictionary, .validKidListResponse())
+    }
+
+    func testLastUpdate() {
+        // Given
+        let expectedLastModified = "ABC"
+
+        // When
+        let lastModified = sut.lastModified
+
+        // Then
+        XCTAssertEqual(lastModified, expectedLastModified)
+    }
+
+    func testLastUpdate_nil() throws {
+        // Given
+        sut = try .init(with: .validKidListResponse())
+
+        // When
+        let lastModified = sut.lastModified
+
+        // Then
+        XCTAssertNil(lastModified)
+    }
+
+    func testKidsWithHashTypeSignature() { // 0a
+        // When
+        let kids = sut.kids(with: .signature)
+        // Then
+        XCTAssertEqual(kids.count, 2)
+    }
+
+    func testKidsWithHashTypeUCI() {//0b
+        // When
+        let kids = sut.kids(with: .uci)
+
+        // Then
+        XCTAssertEqual(kids.count, 2)
+    }
+
+    func testKidsWithHashTypeCountryCodeUCI() { //0c
+        // When
+        let kids = sut.kids(with: .countryCodeUCI)
+
+        // Then
+        XCTAssertEqual(kids.count, 3)
     }
 }

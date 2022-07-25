@@ -52,13 +52,11 @@ class HTTPClientTests: XCTestCase {
 
         // When
         sut.httpRequest(request)
-            .catch { error in
-                guard let httpClientError = error as? HTTPClientError, case .invalidResponse = httpClientError else {
-                    XCTFail("Wrong error")
-                    return
-                }
+            .done { response in
+                XCTAssertNil(response.data)
                 expectation.fulfill()
             }
+            .cauterize()
         
         // Then
         wait(for: [expectation], timeout: 2)
@@ -115,6 +113,29 @@ class HTTPClientTests: XCTestCase {
             .catch { error in
                 expectation.fulfill()
             }
+
+        // Then
+        wait(for: [expectation], timeout: 2)
+    }
+
+    func testHttpRequest_http_notModified() throws {
+        // Given
+        dataTaskProducer.response = try XCTUnwrap(
+            HTTPURLResponse(
+                url: try XCTUnwrap(request.url),
+                statusCode: HTTPStatusCode.notModified,
+                httpVersion: nil,
+                headerFields: nil
+            )
+        )
+        let expectation = XCTestExpectation()
+
+        // When
+        sut.httpRequest(request)
+            .done { response in
+                expectation.fulfill()
+            }
+            .cauterize()
 
         // Then
         wait(for: [expectation], timeout: 2)

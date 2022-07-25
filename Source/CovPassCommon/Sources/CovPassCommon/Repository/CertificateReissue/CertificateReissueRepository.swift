@@ -42,6 +42,7 @@ public class CertificateReissueRepository: CertificateReissueRepositoryProtocol 
                 .encodePromise(certificateExtendRequestBody)
                 .map(reissueRequest)
                 .then(httpClient.httpRequest)
+                .then(mapResponse)
                 .then(jsonDecoder.decodePromise)
                 .then(certificateReissueRepositoryResponse)
                 .done { seal.fulfill($0) }
@@ -58,6 +59,13 @@ public class CertificateReissueRepository: CertificateReissueRepositoryProtocol 
         request.httpMethod = Constants.httpPostMethod
         request.httpBody = body
         return request
+    }
+
+    private func mapResponse(_ response: HTTPClientResponse) -> Promise<Data> {
+        guard let data = response.data else {
+            return .init(error: CertificateReissueRepositoryFallbackError())
+        }
+        return .value(data)
     }
 
     private func certificateReissueRepositoryResponse(_ response: [CertificateReissueResponse]) -> Promise<CertificateReissueRepositoryResponse> {

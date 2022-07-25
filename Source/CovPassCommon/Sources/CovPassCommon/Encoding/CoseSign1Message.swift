@@ -235,6 +235,8 @@ public struct CoseSign1Message {
             result = bytes
         case let .map(dictionary):
             result = decode(dictionary)
+        case let .unsignedInt(value):
+            result = value
         default:
             result = nil
         }

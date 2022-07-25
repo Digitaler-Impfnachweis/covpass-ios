@@ -11,14 +11,14 @@ import PromiseKit
 
 class HTTPClientMock: HTTPClientProtocol {
     var error: Error?
-    var data = Data()
+    var response = HTTPClientResponse(httpURLResponse: .init(), data: nil)
     var receivedHTTPRequest: URLRequest?
 
-    func httpRequest(_ urlRequest: URLRequest) -> Promise<Data> {
+    func httpRequest(_ urlRequest: URLRequest) -> Promise<HTTPClientResponse> {
         receivedHTTPRequest = urlRequest
         if let error = error {
             return .init(error: error)
         }
-        return .value(data)
+        return .value(response)
     }
 }

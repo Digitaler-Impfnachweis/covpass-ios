@@ -164,7 +164,10 @@ class CertificateReissueRepositoryTests: XCTestCase {
             )
         ]
         let responseData = try JSONEncoder().encode(response)
-        httpClient.data = responseData
+        httpClient.response = .init(
+            httpURLResponse: HTTPURLResponse(),
+            data: responseData
+        )
     }
 
     func testRenew_success() throws {

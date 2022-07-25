@@ -10,7 +10,7 @@ import Compression
 import XCTest
 
 class CertificateRevocationRepositoryTests: XCTestCase {
-    private var client: CertificateRevocationHTTPClientMock!
+    private var client: CertificateRevocationDataSourceMock!
     private var sut: CertificateRevocationRepository!
     private var userDefaults: UserDefaultsPersistence!
 
@@ -204,7 +204,7 @@ class CertificateRevocationRepositoryTests: XCTestCase {
         // Given
         let token = try ExtendedCBORWebToken.revokedVaccinationCertificate()
         let expectation = XCTestExpectation()
-        client.chunkListResponse = .init()
+        client.chunkListResponse = .init(hashes: [])
 
         // When
         sut.isRevoked(token)

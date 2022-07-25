@@ -10,9 +10,9 @@ import PromiseKit
 
 public struct CertificateRevocationRepository: CertificateRevocationRepositoryProtocol {
     private typealias KIDList = Void
-    private let client: CertificateRevocationHTTPClientProtocol
+    private let client: CertificateRevocationDataSourceProtocol
 
-    public init(client: CertificateRevocationHTTPClientProtocol) {
+    public init(client: CertificateRevocationDataSourceProtocol) {
         self.client = client
     }
 
@@ -82,7 +82,8 @@ public struct CertificateRevocationRepository: CertificateRevocationRepositoryPr
                 assertionFailure("Must never happen.")
                 return .init(error: ApplicationError.unknownError)
             }
-            let isRevoked = chunkListResponse1.contains(hash) || chunkListResponse2.contains(hash)
+            let isRevoked = chunkListResponse1.hashes.contains(hash) ||
+                chunkListResponse2.hashes.contains(hash)
 
             return .value(isRevoked)
         }
