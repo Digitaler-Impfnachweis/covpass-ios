@@ -22,6 +22,10 @@ class CertificateRevocationOfflineServiceTests: XCTestCase {
         dateProvider = .init()
         persistence = .init()
         dateProvider.date = .init(timeIntervalSinceReferenceDate: 0)
+        configureSut()
+    }
+
+    private func configureSut() {
         sut = .init(
             localDataSource: localDataSource,
             remoteDataSource: remoteDataSource,
@@ -92,7 +96,7 @@ class CertificateRevocationOfflineServiceTests: XCTestCase {
         wait(for: [
             localDataSource.deleteAllExpectation,
             remoteDataSource.getKIDListExpectation,
-            persistence.storeExpectation
+            persistence.deleteExpectation
         ], timeout: 2)
         XCTAssertNil(sut.lastSuccessfulUpdate)
     }
@@ -154,7 +158,7 @@ class CertificateRevocationOfflineServiceTests: XCTestCase {
         } else {
             XCTFail("HTTP header must be present.")
         }
-        XCTAssertEqual(persistence.receivedStoreKey, "keyCertificateRevocationServiceLastUpdate")
+        XCTAssertEqual(persistence.receivedStoreKey, "keyCertificateRevocationOfflineServiceLastUpdate")
         if let date = persistence.receivedStoreValue as? Date {
             XCTAssertEqual(date, expectedLastSuccessfulUpdate)
         } else {
@@ -332,5 +336,44 @@ class CertificateRevocationOfflineServiceTests: XCTestCase {
         // Then
         wait(for: [persistence.storeExpectation], timeout: 2)
         XCTAssertEqual(sut.state, .error)
+    }
+
+    func testUpdateIfNeeded_never_updated() {
+        // When
+        sut.updateIfNeeded()
+
+        // Then
+        wait(for: [persistence.storeExpectation], timeout: 1)
+        XCTAssertNotNil(sut.lastSuccessfulUpdate)
+    }
+
+    func testUpdateIfNeeded_update_not_24h_ago() {
+        // Given
+        persistence.certificateRevocationOfflineServiceLastUpdate = .init(timeIntervalSinceReferenceDate: 0)
+        persistence.storeExpectation = .init()
+        persistence.storeExpectation.isInverted = true
+        dateProvider.date = .init(timeIntervalSinceReferenceDate: 3600)
+
+        // When
+        sut.updateIfNeeded()
+
+        // Then
+        wait(for: [persistence.storeExpectation], timeout: 1)
+        XCTAssertEqual(sut.lastSuccessfulUpdate, .init(timeIntervalSinceReferenceDate: 0))
+    }
+
+    func testUpdateIfNeeded_update_24h_ago() {
+        // Given
+        persistence.certificateRevocationOfflineServiceLastUpdate = .init(timeIntervalSinceReferenceDate: 0)
+        persistence.storeExpectation = .init()
+        dateProvider.date = .init(timeIntervalSinceReferenceDate: 3600*25)
+        configureSut()
+
+        // When
+        sut.updateIfNeeded()
+
+        // Then
+        wait(for: [persistence.storeExpectation], timeout: 10)
+        XCTAssertNotNil(sut.lastSuccessfulUpdate)
     }
 }

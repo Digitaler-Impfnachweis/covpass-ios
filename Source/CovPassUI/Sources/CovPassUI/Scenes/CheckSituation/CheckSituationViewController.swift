@@ -8,7 +8,7 @@
 import UIKit
 import CovPassCommon
 
-class CheckSituationViewController: UIViewController {
+public class CheckSituationViewController: UIViewController {
     
     // MARK: - IBOutlet
     @IBOutlet var stackview: UIStackView!
@@ -24,6 +24,10 @@ class CheckSituationViewController: UIViewController {
     @IBOutlet var descriptionLabel: PlainLabel!
     @IBOutlet var subTitleLabel: PlainLabel!
     @IBOutlet var saveButton: MainButton!
+    @IBOutlet var offlineRevocationView: UIView!
+    @IBOutlet weak var offlineRevocationTitleLabel: UILabel!
+    @IBOutlet weak var offlineRevocationSwitch: LabeledSwitch!
+    @IBOutlet weak var offlineRevocationDescriptionLabel: UILabel!
 
     // MARK: - Properties
     private(set) var viewModel: CheckSituationViewModelProtocol
@@ -33,23 +37,23 @@ class CheckSituationViewController: UIViewController {
     @available(*, unavailable)
     required init?(coder _: NSCoder) { fatalError("init?(coder: NSCoder) not implemented yet") }
 
-    init(viewModel: CheckSituationViewModelProtocol) {
+    public init(viewModel: CheckSituationViewModelProtocol) {
         self.viewModel = viewModel
         super.init(nibName: String(describing: Self.self), bundle: .module)
     }
 
-    override func viewDidLoad() {
+    public override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.delegate = self
         configureView()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
+    public override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         UIAccessibility.post(notification: .announcement, argument: viewModel.onboardingOpen)
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
+    public override func viewWillDisappear(_ animated: Bool) {
         super.viewWillAppear(animated)
         UIAccessibility.post(notification: .announcement, argument: viewModel.onboardingClose)
     }
@@ -118,6 +122,27 @@ class CheckSituationViewController: UIViewController {
         configureSaveButton()
         configureSpacings()
         configSelection()
+        configureOfflineRevocationView()
+    }
+
+    private func configureOfflineRevocationView() {
+        offlineRevocationView.isHidden = viewModel.offlineRevocationIsHidden
+        offlineRevocationTitleLabel.attributedText = NSAttributedString(
+            string: viewModel.offlineRevocationTitle
+        )
+        .font(named: UIFont.sansSemiBold, size: 18.0, lineHeight: 27.0, textStyle: .headline)
+        .colored(.onBackground110)
+        offlineRevocationDescriptionLabel.attributedText = viewModel.offlineRevocationDescription
+            .styledAs(.body)
+            .colored(.onBackground110)
+        offlineRevocationSwitch.label.attributedText = viewModel.offlineRevocationSwitchTitle
+            .styledAs(.header_3)
+            .colored(.onBackground110)
+        offlineRevocationSwitch.uiSwitch.onTintColor = .brandAccent
+        offlineRevocationSwitch.switchChanged = { [weak self] _ in
+            self?.viewModel.toggleOfflineRevocation()
+        }
+        offlineRevocationSwitch.uiSwitch.isOn = viewModel.offlineRevocationIsEnabled
     }
     
     func configSelection() {
@@ -141,9 +166,9 @@ class CheckSituationViewController: UIViewController {
 }
 
 extension CheckSituationViewController: ViewModelDelegate {
-    func viewModelDidUpdate() {
+    public func viewModelDidUpdate() {
         configSelection()
     }
     
-    func viewModelUpdateDidFailWithError(_ error: Error) {}
+    public func viewModelUpdateDidFailWithError(_ error: Error) {}
 }

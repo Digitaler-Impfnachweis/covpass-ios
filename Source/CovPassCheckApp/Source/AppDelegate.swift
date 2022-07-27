@@ -13,6 +13,7 @@ import UIKit
 final class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     var sceneCoordinator: DefaultSceneCoordinator?
+    private let persistence = UserDefaultsPersistence()
 
     func application(
         _: UIApplication,
@@ -33,6 +34,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         self.sceneCoordinator = sceneCoordinator
 
         appUpdateDialogIfNeeded()
+        updateCertificateRevocationOfflineServiceIfNeeded()
 
         return true
     }
@@ -47,7 +49,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     private func appUpdateDialogIfNeeded() {
         CheckAppUpdate(
             service: CheckAppUpdateService(bundleIdentifier: "de.rki.corona-impf-check"),
-            userDefaults: UserDefaultsPersistence(),
+            userDefaults: persistence,
             appStoreID: "id1566140314"
         ).showUpdateDialogIfNeeded(
             title: "dialog_start_screen_title".localized,
@@ -55,6 +57,17 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
             ok: "dialog_start_screen_button_update".localized,
             cancel: "dialog_start_screen_button_later".localized
         )
+    }
+
+    private func updateCertificateRevocationOfflineServiceIfNeeded() {
+        guard persistence.isCertificateRevocationOfflineServiceEnabled else {
+            return
+        }
+        guard let service = CertificateRevocationOfflineService.shared else {
+            fatalError("CertificateRevocationOfflineService must not be nil.")
+        }
+
+        service.updateIfNeeded()
     }
 
     func applicationWillResignActive(_: UIApplication) {

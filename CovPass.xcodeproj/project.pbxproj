@@ -431,6 +431,8 @@
 		E7D1F0A22861E04700FA7465 /* ScanSceneFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D1F0A02861E03A00FA7465 /* ScanSceneFactoryTests.swift */; };
 		E7D1F0A52861E12700FA7465 /* CameraAccessProviderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D1F0A32861E12700FA7465 /* CameraAccessProviderMock.swift */; };
 		E7D1F0A62861E12700FA7465 /* ScanRouterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D1F0A42861E12700FA7465 /* ScanRouterMock.swift */; };
+		E7D8062C2890493D00743DAE /* CheckSituationSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D8062A2890455600743DAE /* CheckSituationSceneFactory.swift */; };
+		E7D8062F28904AC700743DAE /* CheckSituationSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D8062E28904AC700743DAE /* CheckSituationSceneFactory.swift */; };
 		E7F7817A27C4007D009AC907 /* CertificateReissueRepository+Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F7817927C4007D009AC907 /* CertificateReissueRepository+Factory.swift */; };
 		E7F7817D27C400BA009AC907 /* CertificateReissueRepository+FactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F7817C27C400BA009AC907 /* CertificateReissueRepository+FactoryTests.swift */; };
 		E7F8D88928880B61007C4AE7 /* CBORWebToken+GProofViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F8D88728880B1C007C4AE7 /* CBORWebToken+GProofViewModelTests.swift */; };
@@ -928,6 +930,8 @@
 		E7D1F0A02861E03A00FA7465 /* ScanSceneFactoryTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanSceneFactoryTests.swift; sourceTree = "<group>"; };
 		E7D1F0A32861E12700FA7465 /* CameraAccessProviderMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraAccessProviderMock.swift; sourceTree = "<group>"; };
 		E7D1F0A42861E12700FA7465 /* ScanRouterMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanRouterMock.swift; sourceTree = "<group>"; };
+		E7D8062A2890455600743DAE /* CheckSituationSceneFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckSituationSceneFactory.swift; sourceTree = "<group>"; };
+		E7D8062E28904AC700743DAE /* CheckSituationSceneFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckSituationSceneFactory.swift; sourceTree = "<group>"; };
 		E7F7817927C4007D009AC907 /* CertificateReissueRepository+Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CertificateReissueRepository+Factory.swift"; sourceTree = "<group>"; };
 		E7F7817C27C400BA009AC907 /* CertificateReissueRepository+FactoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CertificateReissueRepository+FactoryTests.swift"; sourceTree = "<group>"; };
 		E7F8D88728880B1C007C4AE7 /* CBORWebToken+GProofViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CBORWebToken+GProofViewModelTests.swift"; sourceTree = "<group>"; };
@@ -1428,6 +1432,7 @@
 				3882AEAC266FE7C6000354CD /* Certificate Item Detail */,
 				216D1EFF264EF4E400370F16 /* Certificates Overview */,
 				09B62BAA283779B6004FF596 /* Certificates Overview Person */,
+				E7D8062D28904AC700743DAE /* CheckSituation */,
 				09331763273ABB2A0036DB2A /* ChooseCertificate */,
 				216D1F2B264EF4E400370F16 /* HowToScan */,
 				216D1F23264EF4E400370F16 /* Main */,
@@ -1777,6 +1782,7 @@
 		21FBCA36264F011800CAEF44 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				E7D806292890451900743DAE /* CheckSituation */,
 				21FBCA47264F011800CAEF44 /* App Information */,
 				0969AB8C2787AA8000ECCA74 /* GProof */,
 				092699E5278C4FF400331D77 /* GProofDifferentPerson */,
@@ -2653,6 +2659,22 @@
 			path = Scanner;
 			sourceTree = "<group>";
 		};
+		E7D806292890451900743DAE /* CheckSituation */ = {
+			isa = PBXGroup;
+			children = (
+				E7D8062A2890455600743DAE /* CheckSituationSceneFactory.swift */,
+			);
+			path = CheckSituation;
+			sourceTree = "<group>";
+		};
+		E7D8062D28904AC700743DAE /* CheckSituation */ = {
+			isa = PBXGroup;
+			children = (
+				E7D8062E28904AC700743DAE /* CheckSituationSceneFactory.swift */,
+			);
+			path = CheckSituation;
+			sourceTree = "<group>";
+		};
 		E7F7817B27C40090009AC907 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -3065,6 +3087,7 @@
 				09AC1E032757B6C9008356CD /* RecoveryResultViewModel.swift in Sources */,
 				216D1FAF264EF74600370F16 /* PassOnboardingContainerViewModel.swift in Sources */,
 				E7B49CF9283D1A3900401C2E /* CertificateRevocationHTTPClient+Factory.swift in Sources */,
+				E7D8062F28904AC700743DAE /* CheckSituationSceneFactory.swift in Sources */,
 				09C422A227F5BA5B00232036 /* CertificateRevocationRepository+Factory.swift in Sources */,
 				3520AA6C26B85AA900D22435 /* PDFExportViewModelProtocol.swift in Sources */,
 				95BB0D4827020EBE00885BA3 /* ScanPleaseSceneFactory.swift in Sources */,
@@ -3199,6 +3222,7 @@
 				09AC1DE92757ADAA008356CD /* ValidationResultSceneFactory.swift in Sources */,
 				2181C161264F035500DE7412 /* ValidatorOverviewViewController.swift in Sources */,
 				2181C19F264F03B800DE7412 /* MainSceneFactory.swift in Sources */,
+				E7D8062C2890493D00743DAE /* CheckSituationSceneFactory.swift in Sources */,
 				2181C1A5264F03BC00DE7412 /* OnboardingRouter.swift in Sources */,
 				0969AB952787AB2200ECCA74 /* GProofViewController.swift in Sources */,
 				096EB4DB27D768D3005CE76F /* RevocationSettingsViewModelProtocol.swift in Sources */,

@@ -5,6 +5,7 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
+import CovPassUI
 import PromiseKit
 import UIKit
 import CovPassCommon
@@ -24,9 +25,12 @@ public struct CheckSituationSceneFactory: SceneFactory {
     // MARK: - Methods
 
     public func make() -> UIViewController {
-        let viewModel = CheckSituationViewModel(context: contextType,
-                                                userDefaults: userDefaults,
-                                                resolver: nil)
+        let viewModel = CheckSituationViewModel(
+            context: contextType,
+            userDefaults: userDefaults,
+            resolver: nil,
+            offlineRevocationService: nil
+        )
         let viewController = CheckSituationViewController(viewModel: viewModel)
         return viewController
     }

@@ -23,7 +23,7 @@ public struct DateProvider: DateProviding {
 
 /// Always returns the same date. Useful for testing.
 public struct StaticDateProvider: DateProviding {
-    var date = Date()
+    public var date = Date()
 
     public init() {}
 

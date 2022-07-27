@@ -13,17 +13,24 @@ import PromiseKit
 
 class CheckSituationViewModelTests: XCTestCase {
 
+    var offlineRevocationService: CertificateRevocationOfflineServiceMock!
+    var persistence: UserDefaultsPersistence!
     var sut: CheckSituationViewModel!
 
     override func setUp() {
         super.setUp()
         let (_, resolver) = Promise<Void>.pending()
+        persistence = .init()
+        offlineRevocationService = .init()
         sut = CheckSituationViewModel(context: .settings,
-                                      userDefaults: UserDefaultsPersistence(),
-                                      resolver: resolver)
+                                      userDefaults: persistence,
+                                      resolver: resolver,
+                                      offlineRevocationService: offlineRevocationService)
     }
     
     override func tearDown() {
+        offlineRevocationService = nil
+        persistence = nil
         sut = nil
         super.tearDown()
     }
@@ -47,6 +54,7 @@ class CheckSituationViewModelTests: XCTestCase {
         XCTAssertEqual(sut.newBadgeIconIsHidden, true)
         XCTAssertEqual(sut.pageImageIsHidden, true)
         XCTAssertEqual(sut.buttonIsHidden, true)
+        XCTAssertFalse(sut.offlineRevocationIsHidden)
     }
     
     func testOnboardingContext() {
@@ -68,6 +76,18 @@ class CheckSituationViewModelTests: XCTestCase {
         XCTAssertEqual(sut.newBadgeIconIsHidden, false)
         XCTAssertEqual(sut.pageImageIsHidden, false)
         XCTAssertEqual(sut.buttonIsHidden, false)
+        XCTAssertTrue(sut.offlineRevocationIsHidden)
+    }
+
+    func testOfflineRevocationIsHidden_information_context() {
+        // Given
+        sut.context = .information
+
+        // When
+        let isHidden = sut.offlineRevocationIsHidden
+
+        // Then
+        XCTAssertTrue(isHidden)
     }
     
     func testFetchSelectedRule() {
@@ -92,5 +112,51 @@ class CheckSituationViewModelTests: XCTestCase {
 
         // THEN
         XCTAssertEqual(selectedType, .eu)
+    }
+
+    func testOfflineRevocationIsEnabled_true() {
+        // Given
+        persistence.isCertificateRevocationOfflineServiceEnabled = true
+
+        // When
+        let isEnabled = sut.offlineRevocationIsEnabled
+
+        // Then
+        XCTAssertTrue(isEnabled)
+    }
+
+    func testOfflineRevocationIsEnabled_false() {
+        // Given
+        persistence.isCertificateRevocationOfflineServiceEnabled = false
+
+        // When
+        let isEnabled = sut.offlineRevocationIsEnabled
+
+        // Then
+        XCTAssertFalse(isEnabled)
+    }
+
+    func testToggleOfflineRevocation_enable() {
+        // Given
+        persistence.isCertificateRevocationOfflineServiceEnabled = false
+
+        // When
+        sut.toggleOfflineRevocation()
+
+        // Then
+        wait(for: [offlineRevocationService.updateExpectation], timeout: 1)
+        XCTAssertTrue(persistence.isCertificateRevocationOfflineServiceEnabled)
+    }
+
+    func testToggleOfflineRevocation_disable() {
+        // Given
+        persistence.isCertificateRevocationOfflineServiceEnabled = true
+
+        // When
+        sut.toggleOfflineRevocation()
+
+        // Then
+        wait(for: [offlineRevocationService.resetExpectation], timeout: 1)
+        XCTAssertFalse(persistence.isCertificateRevocationOfflineServiceEnabled)
     }
 }

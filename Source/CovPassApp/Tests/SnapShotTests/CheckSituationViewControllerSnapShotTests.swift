@@ -13,7 +13,8 @@ class CheckSituationViewControllerSnapShotTests: BaseSnapShotTests {
     func testInformation() {
         let vm = CheckSituationViewModel(context: .information,
                                          userDefaults: UserDefaultsPersistence(),
-                                         resolver: nil)
+                                         resolver: nil,
+                                         offlineRevocationService: nil)
         let vc = CheckSituationViewController(viewModel: vm)
         verifyView(vc: vc)
     }

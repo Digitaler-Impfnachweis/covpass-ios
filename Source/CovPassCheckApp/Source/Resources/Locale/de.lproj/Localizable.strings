@@ -451,11 +451,21 @@
 
 "accessibility_app_information_update_back" = "Zurück";
 
+"accessibility_app_information_checking_rules_open" = "Die Ansicht \"Prüfregeln\" wurde geöffnet";
+
+"accessibility_app_information_checking_rules_close" = "Die Ansicht \"Prüfregeln\" wurde geschlossen";
+
+"app_information_title_checkrules" = "Prüfregeln";
+
+"app_information_offline_revocation_title" = "Gesperrte Zertifikate offline prüfen";
+
+"app_information_offline_revocation_copy" = " Aktivieren Sie diese Einstellung, wenn Sie auch im Offline-Modus von den Behörden gesperrte Zertifikate erkennen möchten. Andernfalls werden gesperrte Zertifikate nur im Online-Modus erkannt. Diese Funktion verbraucht mehr Datenvolumen.";
+
 "accessibility_app_information_title_update" = "Die Ansicht \"Prüfregeln aktualisieren\" wurde geöffnet";
 
 "accessibility_app_information_title_local_rules" = "Die Ansicht \"Prüfsituation\" wurde geöffnet";
 
-"app_information_title_local_rules" = "Prüfsituation";
+"app_information_title_local_rules" = "Regelwerk";
 
 "app_information_title_local_rules_button" = "Übernehmen";
 

@@ -451,11 +451,21 @@
 
 "accessibility_app_information_update_back" = "Back";
 
+"accessibility_app_information_checking_rules_open" = "The view \"Checking rules\" has been opened";
+
+"accessibility_app_information_checking_rules_close" = "The view \"Checking rules\" has been closed";
+
+"app_information_title_checkrules" = "Checking rules";
+
+"app_information_offline_revocation_title" = "Check revoked certificates offline";
+
+"app_information_offline_revocation_copy" = "Activate this setting if you also want to detect certificates revoked by the authorities in offline mode. Otherwise, revoked certificates are only detected in online mode. This function consumes more data volume.";
+
 "accessibility_app_information_title_update" = "The view \"Update rule set\" has been opened";
 
 "accessibility_app_information_title_local_rules" = "The view \"Check situation\" has been opened";
 
-"app_information_title_local_rules" = "Check situation";
+"app_information_title_local_rules" = "Checking rules";
 
 "app_information_title_local_rules_button" = "Apply";
 

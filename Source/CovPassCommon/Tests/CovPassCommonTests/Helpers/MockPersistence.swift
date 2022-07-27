@@ -13,7 +13,8 @@ import XCTest
 
 class MockPersistence: Persistence {
     private var store = [String: Any]()
-    let storeExpectation = XCTestExpectation(description: "storeExpectation")
+    var storeExpectation = XCTestExpectation(description: "storeExpectation")
+    var deleteExpectation = XCTestExpectation(description: "deleteExpectation")
     var storeError: Error?
     private(set) var receivedStoreKey: String?
     private(set) var receivedStoreValue: Any?
@@ -37,6 +38,7 @@ class MockPersistence: Persistence {
 
     var deleteError: Error?
     func delete(_ key: String) throws {
+        deleteExpectation.fulfill()
         if let error = deleteError {
             throw error
         }

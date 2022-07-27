@@ -11,59 +11,77 @@ import CovPassCommon
 import Foundation
 
 class CheckSituationViewControllerSnapShotTests: BaseSnapShotTests {
+    private var sut: CheckSituationViewController!
+
+    override func setUpWithError() throws {
+        configureSut()
+    }
+
+    func configureSut(
+        context: CheckSituationViewModelContextType = .onboarding,
+        selectedRule: DCCCertLogic.LogicType? = nil
+    ) {
+        var persistence = UserDefaultsPersistence()
+        persistence.isCertificateRevocationOfflineServiceEnabled = true
+        let viewModel = CheckSituationViewModel(
+            context: context,
+            userDefaults: persistence,
+            resolver: nil,
+            offlineRevocationService: nil
+        )
+        if let selectedRule = selectedRule {
+            viewModel.selectedRule = selectedRule
+        }
+        sut = CheckSituationViewController(viewModel: viewModel)
+    }
+
 
     func testDefaultOnboarding() {
-        let vm = CheckSituationViewModel(context: .onboarding,
-                                         userDefaults: UserDefaultsPersistence(),
-                                         resolver: nil)
+        // Given
         UserDefaults.standard.set(nil, forKey: UserDefaults.keySelectedLogicType)
-        let vc = CheckSituationViewController(viewModel: vm)
-        verifyView(vc: vc)
+
+        // When & Then
+        verifyView(vc: sut)
     }
     
     func testDefaultSettings() {
-        let vm = CheckSituationViewModel(context: .settings,
-                                         userDefaults: UserDefaultsPersistence(),
-                                         resolver: nil)
+        // Given
+        configureSut(context: .settings)
         UserDefaults.standard.set(nil, forKey: UserDefaults.keySelectedLogicType)
-        let vc = CheckSituationViewController(viewModel: vm)
-        verifyView(vc: vc)
+
+        // When & Then
+        verifyView(vc: sut)
     }
     
     func testOnboardingDERulesSelected() {
-        let vm = CheckSituationViewModel(context: .onboarding,
-                                         userDefaults: UserDefaultsPersistence(),
-                                         resolver: nil)
-        vm.selectedRule = .de
-        let vc = CheckSituationViewController(viewModel: vm)
-        verifyView(vc: vc)
+        // Given
+        configureSut(selectedRule: .de)
+
+        // When & Then
+        verifyView(vc: sut)
     }
     
     func testOnboardingEURulesSelected() {
-        let vm = CheckSituationViewModel(context: .onboarding,
-                                         userDefaults: UserDefaultsPersistence(),
-                                         resolver: nil)
-        vm.selectedRule = .eu
-        let vc = CheckSituationViewController(viewModel: vm)
-        verifyView(vc: vc)
+        // Given
+        configureSut(selectedRule: .eu)
+
+        // When & Then
+        verifyView(vc: sut)
     }
     
     func testSettingsDERulesSelected() {
-        let vm = CheckSituationViewModel(context: .settings,
-                                         userDefaults: UserDefaultsPersistence(),
-                                         resolver: nil)
-        vm.selectedRule = .de
-        let vc = CheckSituationViewController(viewModel: vm)
-        verifyView(vc: vc)
+        // Given
+        configureSut(context: .settings, selectedRule: .de)
+
+        // When & Then
+        verifyView(vc: sut)
     }
     
     func testSettingsEURulesSelected() {
-        let vm = CheckSituationViewModel(context: .settings,
-                                         userDefaults: UserDefaultsPersistence(),
-                                         resolver: nil)
-        vm.selectedRule = .eu
-        let vc = CheckSituationViewController(viewModel: vm)
-        verifyView(vc: vc)
-    }
+        // Given
+        configureSut(context: .settings, selectedRule: .eu)
 
+        // When & Then
+        verifyView(vc: sut)
+    }
 }

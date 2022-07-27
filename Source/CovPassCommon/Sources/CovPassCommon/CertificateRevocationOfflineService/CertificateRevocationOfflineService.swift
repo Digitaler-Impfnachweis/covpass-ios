@@ -12,10 +12,10 @@ public class CertificateRevocationOfflineService: CertificateRevocationOfflineSe
     public private(set) var state: CertificateRevocationServiceState = .idle
     public private(set) var lastSuccessfulUpdate: Date? {
         get {
-            persistence.certificateRevocationServiceLastUpdate
+            persistence.certificateRevocationOfflineServiceLastUpdate
         }
         set {
-            persistence.certificateRevocationServiceLastUpdate = newValue
+            persistence.certificateRevocationOfflineServiceLastUpdate = newValue
         }
     }
 
@@ -234,5 +234,13 @@ public class CertificateRevocationOfflineService: CertificateRevocationOfflineSe
             .catch { _ in
                 self.state = .error
             }
+    }
+
+    public func updateIfNeeded() {
+        if let lastSuccessfulUpdate = lastSuccessfulUpdate,
+           dateProvider.now().hoursSince(lastSuccessfulUpdate) < 24 {
+            return
+        }
+        update()
     }
 }

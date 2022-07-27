@@ -8,8 +8,9 @@
 import PromiseKit
 import UIKit
 import CovPassCommon
+import CovPassUI
 
-public struct CheckSituationResolvableSceneFactory: ResolvableSceneFactory {
+public struct CheckSituationSceneFactory: SceneFactory {
     
     // MARK: - Lifecycle
     private let contextType: CheckSituationViewModelContextType
@@ -23,11 +24,14 @@ public struct CheckSituationResolvableSceneFactory: ResolvableSceneFactory {
 
     // MARK: - Methods
 
-    public func make(resolvable: Resolver<Void>) -> UIViewController {
+    public func make() -> UIViewController {
+        guard let offlineRevocationService = CertificateRevocationOfflineService.shared else {
+            fatalError("CertificateRevocationOfflineService must not be nil.")
+        }
         let viewModel = CheckSituationViewModel(context: contextType,
                                                 userDefaults: userDefaults,
-                                                resolver: resolvable,
-                                                offlineRevocationService: nil)
+                                                resolver: nil,
+                                                offlineRevocationService: offlineRevocationService)
         let viewController = CheckSituationViewController(viewModel: viewModel)
         return viewController
     }

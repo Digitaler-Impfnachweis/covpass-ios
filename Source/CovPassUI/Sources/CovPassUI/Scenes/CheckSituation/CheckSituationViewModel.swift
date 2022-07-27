@@ -35,6 +35,11 @@ private enum Constants {
             static let doneButtonTitle = "dialog_local_rulecheck_button".localized(bundle: .main)
             static let subTitleText = "dialog_local_rulecheck_subtitle".localized(bundle: .main)
         }
+        enum OfflineRevocation {
+            static let title = "app_information_offline_revocation_title".localized(bundle: .main)
+            static let description = "app_information_offline_revocation_copy".localized(bundle: .main)
+            static let switchTitle = "app_information_offline_revocation_title".localized(bundle: .main)
+        }
     }
     enum Images {
         static let pageImage = UIImage.illustration4
@@ -56,28 +61,40 @@ private enum Constants {
 public class CheckSituationViewModel: CheckSituationViewModelProtocol {
 
     // MARK: - Public/Protocol properties
-    var navBarTitle: String = Constants.Keys.General.navBarTitle
-    var pageTitle: String = Constants.Keys.General.pageTitle
-    var newBadgeText: String = Constants.Keys.General.newBadgeText
-    var pageImage: UIImage = Constants.Images.pageImage
-    var travelRulesTitle: String = Constants.Keys.General.travelRulesTitle
-    var travelRulesDescription: String = Constants.Keys.General.travelRulesDescription
-    var domesticRulesTitle: String = Constants.Keys.General.domesticRulesTitle
-    var domesticRulesDescription: String = Constants.Keys.General.domesticRulesDescription
-    var footerText: String = Constants.Keys.General.footerText
-    var subTitleText: String = Constants.Keys.Information.subTitleText
-    var doneButtonTitle: String = Constants.Keys.General.doneButtonTitle
-    var onboardingOpen: String = Constants.Accessibility.General.onboardingOpen
-    var onboardingClose: String = Constants.Accessibility.General.onboardingClose
-    var onboardingImageDescription: String = Constants.Accessibility.General.onboardingImageDescription
-    var pageTitleIsHidden: Bool = false
-    var newBadgeIconIsHidden: Bool = false
-    var pageImageIsHidden: Bool = false
-    var selectionIsHidden: Bool = false
-    var subTitleIsHidden: Bool = true
-    var descriptionTextIsTop: Bool = false
-    var buttonIsHidden: Bool = false
-    var selectedRule: DCCCertLogic.LogicType {
+    public var navBarTitle: String = Constants.Keys.General.navBarTitle
+    public var pageTitle: String = Constants.Keys.General.pageTitle
+    public var newBadgeText: String = Constants.Keys.General.newBadgeText
+    public var pageImage: UIImage = Constants.Images.pageImage
+    public var travelRulesTitle: String = Constants.Keys.General.travelRulesTitle
+    public var travelRulesDescription: String = Constants.Keys.General.travelRulesDescription
+    public var domesticRulesTitle: String = Constants.Keys.General.domesticRulesTitle
+    public var domesticRulesDescription: String = Constants.Keys.General.domesticRulesDescription
+    public var footerText: String = Constants.Keys.General.footerText
+    public var subTitleText: String = Constants.Keys.Information.subTitleText
+    public var doneButtonTitle: String = Constants.Keys.General.doneButtonTitle
+    public var onboardingOpen: String = Constants.Accessibility.General.onboardingOpen
+    public var onboardingClose: String = Constants.Accessibility.General.onboardingClose
+    public var onboardingImageDescription: String = Constants.Accessibility.General.onboardingImageDescription
+    public let offlineRevocationTitle = Constants.Keys.OfflineRevocation.title
+    public let offlineRevocationDescription =  Constants.Keys.OfflineRevocation.description
+    public let offlineRevocationSwitchTitle =  Constants.Keys.OfflineRevocation.switchTitle
+    public var pageTitleIsHidden: Bool = false
+    public var newBadgeIconIsHidden: Bool = false
+    public var pageImageIsHidden: Bool = false
+    public var selectionIsHidden: Bool = false
+    public var subTitleIsHidden: Bool = true
+    public var descriptionTextIsTop: Bool = false
+    public var buttonIsHidden: Bool = false
+    public var offlineRevocationIsHidden = true
+    public private(set) var offlineRevocationIsEnabled: Bool {
+        get {
+            userDefaults.isCertificateRevocationOfflineServiceEnabled
+        }
+        set {
+            userDefaults.isCertificateRevocationOfflineServiceEnabled = newValue
+        }
+    }
+    public var selectedRule: DCCCertLogic.LogicType {
         get {
             userDefaults.selectedLogicType 
         }
@@ -88,8 +105,8 @@ public class CheckSituationViewModel: CheckSituationViewModelProtocol {
             }
         }
     }
-    var delegate: ViewModelDelegate?
-    var context: CheckSituationViewModelContextType {
+    public var delegate: ViewModelDelegate?
+    public var context: CheckSituationViewModelContextType {
         didSet {
             changeContext()
         }
@@ -98,20 +115,32 @@ public class CheckSituationViewModel: CheckSituationViewModelProtocol {
     // MARK: - Private properties
     private let resolver: Resolver<Void>?
     private var userDefaults: Persistence
+    private let offlineRevocationService: CertificateRevocationOfflineServiceProtocol?
 
-    init (context: CheckSituationViewModelContextType,
+    public init(context: CheckSituationViewModelContextType,
           userDefaults: Persistence,
-          resolver: Resolver<Void>?) {
+          resolver: Resolver<Void>?,
+          offlineRevocationService: CertificateRevocationOfflineServiceProtocol?) {
+        self.offlineRevocationService = offlineRevocationService
         self.userDefaults = userDefaults
         self.resolver = resolver
         self.context = context
         self.changeContext()
     }
-    
-    func doneIsTapped() {
+
+    public func doneIsTapped() {
         resolver?.fulfill_()
     }
-    
+
+    public func toggleOfflineRevocation() {
+        offlineRevocationIsEnabled.toggle()
+        if offlineRevocationIsEnabled {
+            offlineRevocationService?.update()
+        } else {
+            offlineRevocationService?.reset()
+        }
+    }
+
     // MARK: - Private methods
     
     private func changeContext() {
@@ -124,6 +153,7 @@ public class CheckSituationViewModel: CheckSituationViewModelProtocol {
             descriptionTextIsTop = false
             selectionIsHidden = false
             subTitleIsHidden = true
+            offlineRevocationIsHidden = true
         case .settings:
             buttonIsHidden = true
             pageTitleIsHidden = true
@@ -132,6 +162,7 @@ public class CheckSituationViewModel: CheckSituationViewModelProtocol {
             descriptionTextIsTop = true
             selectionIsHidden = false
             subTitleIsHidden = true
+            offlineRevocationIsHidden = false
         case .information:
             newBadgeIconIsHidden = true
             descriptionTextIsTop = false
@@ -140,6 +171,7 @@ public class CheckSituationViewModel: CheckSituationViewModelProtocol {
             pageImageIsHidden = false
             selectionIsHidden = true
             subTitleIsHidden = false
+            offlineRevocationIsHidden = true
             navBarTitle = Constants.Keys.Information.navBarTitle
             pageTitle = Constants.Keys.Information.pageTitle
             newBadgeText = Constants.Keys.Information.newBadgeText

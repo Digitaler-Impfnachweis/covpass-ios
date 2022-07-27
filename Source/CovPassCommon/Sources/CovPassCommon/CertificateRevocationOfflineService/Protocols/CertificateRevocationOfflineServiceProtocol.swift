@@ -27,6 +27,10 @@ public protocol CertificateRevocationOfflineServiceProtocol {
     /// Interupts a possibly ongoing update, deletes all downloaded data, set the `state` to `.idle`
     /// and resets the date of last successful update.
     func reset()
+
+    /// Performs an update as described for `update()`, but only if 24h passed since last successful
+    /// update.
+    func updateIfNeeded()
 }
 
 

@@ -12,7 +12,7 @@ public enum CheckSituationViewModelContextType {
     case onboarding, settings, information
 }
 
-protocol CheckSituationViewModelProtocol {
+public protocol CheckSituationViewModelProtocol {
     var navBarTitle: String { get }
     var pageTitle: String { get }
     var newBadgeText: String { get }
@@ -24,11 +24,16 @@ protocol CheckSituationViewModelProtocol {
     var subTitleText: String { get }
     var footerText: String { get }
     var doneButtonTitle: String { get }
+    var offlineRevocationTitle: String { get }
+    var offlineRevocationDescription: String { get }
+    var offlineRevocationSwitchTitle: String { get }
     var pageTitleIsHidden: Bool { get }
     var newBadgeIconIsHidden: Bool { get }
     var pageImageIsHidden: Bool { get }
     var selectionIsHidden: Bool { get }
     var subTitleIsHidden: Bool { get }
+    var offlineRevocationIsHidden: Bool { get }
+    var offlineRevocationIsEnabled: Bool { get }
     var descriptionTextIsTop: Bool { get }
     var buttonIsHidden: Bool { get set }
     var onboardingOpen: String { get }
@@ -38,4 +43,5 @@ protocol CheckSituationViewModelProtocol {
     var delegate: ViewModelDelegate? { get set }
     var context: CheckSituationViewModelContextType { get set }
     func doneIsTapped()
+    func toggleOfflineRevocation()
 }
