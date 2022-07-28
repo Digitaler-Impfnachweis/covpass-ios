@@ -25,6 +25,7 @@ class GProofDifferentPersonViewController: UIViewController {
     @IBOutlet weak var retryButton: MainButton!
     @IBOutlet weak var startOverButton: MainButton!
     @IBOutlet weak var footerStack: UIStackView!
+    @IBOutlet weak var counterLabel: UILabel!
     
     private(set) var viewModel: GProofDifferentPersonViewModelProtocol
     
@@ -51,6 +52,7 @@ class GProofDifferentPersonViewController: UIViewController {
         configureButtons()
         configureAccessiblity()
         configureContent()
+        configureCounter()
     }
     
     private func configureHeadline() {
@@ -106,11 +108,28 @@ class GProofDifferentPersonViewController: UIViewController {
     @IBAction func footerLinkTapped(_ sender: Any) {
         viewModel.cancel()
     }
+
+    private func configureCounter() {
+        let counterInfo: NSMutableAttributedString = .init(
+            attributedString: viewModel.countdownTimerModel.counterInfo.styledAs(.body)
+        )
+        counterLabel.attributedText = counterInfo
+        counterLabel.textAlignment = .center
+        counterLabel.isHidden = viewModel.countdownTimerModel.hideCountdown
+    }
+
+    private func dismissIfCountdownIsFinished() {
+        if viewModel.countdownTimerModel.shouldDismiss {
+            viewModel.cancel()
+        }
+    }
 }
 
 extension GProofDifferentPersonViewController: ViewModelDelegate {
     func viewModelDidUpdate() {
         self.configureContent()
+        self.configureCounter()
+        self.dismissIfCountdownIsFinished()
     }
     
     func viewModelUpdateDidFailWithError(_ error: Error) {

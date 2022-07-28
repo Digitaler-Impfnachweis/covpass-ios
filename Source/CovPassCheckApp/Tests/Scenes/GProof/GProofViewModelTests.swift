@@ -21,6 +21,8 @@ class GProofViewModelTests: XCTestCase {
     var certLogicMock: DCCCertLogicMock!
     var routerMock: GProofMockRouter!
     let (_, resolver) = Promise<ExtendedCBORWebToken>.pending()
+    var delegate: ViewModelDelegateMock!
+    var countdownTimerModel: CountdownTimerModelMock!
 
     override func setUp() {
         super.setUp()
@@ -31,15 +33,31 @@ class GProofViewModelTests: XCTestCase {
         certLogicMock = DCCCertLogicMock()
         routerMock = GProofMockRouter()
         vaccinationRepoMock.checkedCert = initialToken.vaccinationCertificate
-        sut = GProofViewModel(resolvable: resolver,
-                              router: routerMock,
-                              repository: vaccinationRepoMock,
-                              revocationRepository: CertificateRevocationRepositoryMock(),
-                              certLogic: certLogicMock,
-                              userDefaults: UserDefaultsPersistence(),
-                              boosterAsTest: false)
+        delegate = .init()
+        configureSut()
         sut.scanQRCode()
         RunLoop.current.run(for: 0.2)
+    }
+
+    private func configureSut(
+        dismissAfterSeconds: TimeInterval = .greatestFiniteMagnitude,
+        countdownDuration: TimeInterval = 0
+    ) {
+        countdownTimerModel = CountdownTimerModelMock(
+            dismissAfterSeconds: dismissAfterSeconds,
+            countdownDuration: countdownDuration
+        )
+        sut = .init(
+            resolvable: resolver,
+            router: routerMock,
+            repository: vaccinationRepoMock,
+            revocationRepository: CertificateRevocationRepositoryMock(),
+            certLogic: certLogicMock,
+            userDefaults: UserDefaultsPersistence(),
+            boosterAsTest: false,
+            countdownTimerModel: countdownTimerModel
+        )
+        sut.delegate = delegate
     }
     
     override func tearDown() {
@@ -47,6 +65,8 @@ class GProofViewModelTests: XCTestCase {
         vaccinationRepoMock = nil
         certLogicMock = nil
         routerMock = nil
+        delegate = nil
+        countdownTimerModel = nil
         super.tearDown()
     }
     
@@ -64,13 +84,16 @@ class GProofViewModelTests: XCTestCase {
         token.hcert.dgc.t!.first!.sc = try XCTUnwrap(Date())
         vaccinationRepoMock.checkedCert = token
         certLogicMock.validateResult = [.init(rule: nil, result: .passed, validationErrors: nil)]
+        let countdownTimerModel = CountdownTimerModel(dismissAfterSeconds: 0, countdownDuration: 0)
         let sut = GProofViewModel(resolvable: self.resolver,
                                   router: routerMock,
                                   repository: vaccinationRepoMock,
                                   revocationRepository: CertificateRevocationRepositoryMock(),
                                   certLogic: certLogicMock,
                                   userDefaults: UserDefaultsPersistence(),
-                                  boosterAsTest: false)
+                                  boosterAsTest: false,
+                                  countdownTimerModel: countdownTimerModel
+        )
         sut.startover()
         RunLoop.current.run(for: 0.1)
         
@@ -674,7 +697,8 @@ class GProofViewModelTests: XCTestCase {
             revocationRepository: CertificateRevocationRepositoryMock(),
             certLogic: certLogicMock,
             userDefaults: UserDefaultsPersistence(),
-            boosterAsTest: false
+            boosterAsTest: false,
+            countdownTimerModel: .init(dismissAfterSeconds: 0, countdownDuration: 0)
         )
         sut.scanQRCode()
         RunLoop.current.run(for: 0.1)
@@ -704,7 +728,8 @@ class GProofViewModelTests: XCTestCase {
                     revocationRepository: CertificateRevocationRepositoryMock(),
                     certLogic: certLogicMock,
                     userDefaults: UserDefaultsPersistence(),
-                    boosterAsTest: boosterAsTest)
+                    boosterAsTest: boosterAsTest,
+                    countdownTimerModel: .init(dismissAfterSeconds: 0, countdownDuration: 0))
         sut.scanQRCode()
         RunLoop.current.run(for: 0.1)
         // When
@@ -1241,6 +1266,30 @@ class GProofViewModelTests: XCTestCase {
         XCTAssertEqual(sut.isLoading, false)
 
     }
+
+    func testScanNext_countdownTimer_resetted() {
+        // When
+        sut.scanNext()
+
+        // Then
+        wait(for: [countdownTimerModel.resetExpectation], timeout: 1)
+    }
+
+    func testRetry_countdownTimer_resetted() {
+        // When
+        sut.retry()
+
+        // Then
+        wait(for: [countdownTimerModel.resetExpectation], timeout: 1)
+    }
+
+    func testStartover_countdownTimer_resetted() {
+        // When
+        sut.startover()
+
+        // Then
+        wait(for: [countdownTimerModel.resetExpectation], timeout: 1)
+    }
     
     func testOpenCertificateFailingDueToRRDE0002ThanScanVaccinationWhichIsFresherThan14Days() throws {
         // GIVEN
@@ -1320,5 +1369,35 @@ class GProofViewModelTests: XCTestCase {
         XCTAssertEqual(sut.resultPersonSubtitle!, "DOE JOHN")
         XCTAssertEqual(sut.resultPersonFooter!, "Born on Jan 1, 1990")
         XCTAssertEqual(sut.resultPersonIcon, UIImage.iconCardInverse)
+    }
+
+    func testScanQRCode_dismiss_after_scan() throws {
+        // Given
+        let sceneCoordinator = try XCTUnwrap(routerMock.sceneCoordinator as? SceneCoordinatorMock)
+        configureSut(dismissAfterSeconds: 0, countdownDuration: 0)
+
+        // When
+        sut.scanQRCode()
+
+        // Then
+        wait(for: [sceneCoordinator.dismissExpectation], timeout: 2)
+    }
+
+    func testCounterInfo_show_info_after_scan() {
+        // Given
+        configureSut(dismissAfterSeconds: 120, countdownDuration: 120)
+        let expectation = XCTestExpectation()
+        expectation.expectedFulfillmentCount = 5
+        delegate.didUpdate = {
+            expectation.fulfill()
+        }
+        sut.scanQRCode()
+        wait(for: [expectation], timeout: 2)
+
+        // When
+        let counterInfo = sut.countdownTimerModel.counterInfo
+
+        // Then
+        XCTAssertFalse(counterInfo.isEmpty)
     }
 }

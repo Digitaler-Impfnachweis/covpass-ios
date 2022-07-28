@@ -1,5 +1,5 @@
 //
-//  ValidationViewModel+Extension.swift
+//  ValidationViewModelProtocol+Extension.swift
 //
 //
 //  © Copyright IBM Deutschland GmbH 2021

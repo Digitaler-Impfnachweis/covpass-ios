@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ValidationResultViewController" customModule="CovPassCheckApp" customModuleProvider="target">
             <connections>
+                <outlet property="counterLabel" destination="PP6-gI-X3n" id="pIx-nK-2MB"/>
                 <outlet property="headline" destination="5Zd-xw-4Zy" id="CJ4-zv-GyU"/>
                 <outlet property="imageContainerView" destination="gbm-mz-STE" id="gDi-l3-DRz"/>
                 <outlet property="imageView" destination="YG1-hQ-PYs" id="d0f-aY-Yq1"/>
@@ -34,7 +35,7 @@
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                 </view>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JkM-ga-acx">
-                    <rect key="frame" x="0.0" y="124" width="414" height="642"/>
+                    <rect key="frame" x="0.0" y="124" width="414" height="609.5"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Yk1-DY-91Y">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="776"/>
@@ -97,26 +98,37 @@
                     <viewLayoutGuide key="contentLayoutGuide" id="yi7-T6-Cvu"/>
                     <viewLayoutGuide key="frameLayoutGuide" id="evq-Jj-6az"/>
                 </scrollView>
-                <view contentMode="scaleToFill" placeholderIntrinsicWidth="240" placeholderIntrinsicHeight="56" translatesAutoresizingMaskIntoConstraints="NO" id="a6B-vC-85H" customClass="CustomToolbarView" customModule="CovPassUI">
-                    <rect key="frame" x="0.0" y="790" width="414" height="60"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="60" id="p6h-0Q-RGl"/>
-                    </constraints>
-                </view>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="rpl-Lj-wCI">
+                    <rect key="frame" x="0.0" y="757.5" width="414" height="92.5"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" placeholderIntrinsicWidth="240" placeholderIntrinsicHeight="56" translatesAutoresizingMaskIntoConstraints="NO" id="a6B-vC-85H" customClass="CustomToolbarView" customModule="CovPassUI">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="60" id="p6h-0Q-RGl"/>
+                            </constraints>
+                        </view>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Diese Ansicht schliesst sich in 59 Sekunden." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PP6-gI-X3n">
+                            <rect key="frame" x="0.0" y="72" width="414" height="20.5"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                </stackView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="GAV-T5-KlK"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="a6B-vC-85H" firstAttribute="top" secondItem="JkM-ga-acx" secondAttribute="bottom" constant="24" id="14h-Fa-081"/>
-                <constraint firstItem="GAV-T5-KlK" firstAttribute="bottom" secondItem="a6B-vC-85H" secondAttribute="bottom" constant="12" id="1gN-Qg-ZK0"/>
                 <constraint firstItem="JkM-ga-acx" firstAttribute="trailing" secondItem="GAV-T5-KlK" secondAttribute="trailing" id="73R-Zz-cqF"/>
-                <constraint firstItem="a6B-vC-85H" firstAttribute="leading" secondItem="GAV-T5-KlK" secondAttribute="leading" id="IMD-Zp-vQy"/>
+                <constraint firstItem="rpl-Lj-wCI" firstAttribute="top" secondItem="JkM-ga-acx" secondAttribute="bottom" constant="24" id="Iw0-Zm-lyh"/>
                 <constraint firstItem="5Zd-xw-4Zy" firstAttribute="trailing" secondItem="GAV-T5-KlK" secondAttribute="trailing" id="Mnt-Fp-KHY"/>
+                <constraint firstItem="rpl-Lj-wCI" firstAttribute="leading" secondItem="GAV-T5-KlK" secondAttribute="leading" id="Nra-Mc-JJ6"/>
+                <constraint firstItem="GAV-T5-KlK" firstAttribute="bottom" secondItem="rpl-Lj-wCI" secondAttribute="bottom" constant="12" id="aVB-Ix-3zE"/>
                 <constraint firstItem="5Zd-xw-4Zy" firstAttribute="top" secondItem="GAV-T5-KlK" secondAttribute="top" constant="20" id="am7-nm-ws6"/>
                 <constraint firstItem="JkM-ga-acx" firstAttribute="leading" secondItem="GAV-T5-KlK" secondAttribute="leading" id="cqG-zQ-EMx"/>
                 <constraint firstItem="5Zd-xw-4Zy" firstAttribute="leading" secondItem="GAV-T5-KlK" secondAttribute="leading" id="qmh-PK-wpq"/>
                 <constraint firstItem="JkM-ga-acx" firstAttribute="top" secondItem="5Zd-xw-4Zy" secondAttribute="bottom" id="qva-dS-5k1"/>
-                <constraint firstItem="a6B-vC-85H" firstAttribute="trailing" secondItem="GAV-T5-KlK" secondAttribute="trailing" id="ukR-cB-V4T"/>
+                <constraint firstItem="GAV-T5-KlK" firstAttribute="trailing" secondItem="rpl-Lj-wCI" secondAttribute="trailing" id="wfv-fJ-f3l"/>
             </constraints>
             <point key="canvasLocation" x="-2500" y="-52"/>
         </view>

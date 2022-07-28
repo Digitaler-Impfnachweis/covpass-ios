@@ -25,11 +25,6 @@ public struct Paragraph {
 
 public typealias ValidationResultViewModel = ValidationViewModelProtocol & CancellableViewModelProtocol
 
-public protocol ResultViewModelDelegate: AnyObject {
-    func viewModelDidUpdate()
-    func viewModelDidChange(_ newViewModel: ValidationResultViewModel)
-}
-
 private enum Constants {
     static let confirmButtonLabel = "validation_check_popup_valid_vaccination_button_title".localized
     static let revocationLinkTitle = "validation_check_popup_revoked_certificate_link_text".localized(bundle: .main)
@@ -52,6 +47,7 @@ public class ValidationResultViewController: UIViewController {
     @IBOutlet var infoView: PlainLabel!
     @IBOutlet weak var revocationInfoView: HintView!
     @IBOutlet weak var revocationInfoContainerView: UIView!
+    @IBOutlet weak var counterLabel: UILabel!
     
     // MARK: - Properties
     
@@ -102,6 +98,7 @@ public class ValidationResultViewController: UIViewController {
         configureHeadline()
         configureToolbarView()
         configureAccessibility()
+        configureCounter()
     }
     
     private func configureHeadline() {
@@ -157,6 +154,18 @@ public class ValidationResultViewController: UIViewController {
         }
         UIAccessibility.post(notification: .layoutChanged, argument: resultView.titleLabel)
     }
+
+    private func configureCounter() {
+        counterLabel.isHidden = viewModel.countdownTimerModel?.hideCountdown ?? true
+        guard let countdownTimerModel = viewModel.countdownTimerModel else {
+            return
+        }
+        let counterInfo = NSMutableAttributedString(
+            attributedString: countdownTimerModel.counterInfo.styledAs(.body)
+        )
+        counterLabel.attributedText = counterInfo
+        counterLabel.textAlignment = .center
+    }
 }
 
 // MARK: - ViewModelDelegate
@@ -164,6 +173,7 @@ public class ValidationResultViewController: UIViewController {
 extension ValidationResultViewController: ResultViewModelDelegate {
     public func viewModelDidUpdate() {
         updateViews()
+        configureCounter()
     }
     
     public func viewModelDidChange(_ newViewModel: ValidationResultViewModel) {

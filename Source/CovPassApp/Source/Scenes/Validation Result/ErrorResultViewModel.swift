@@ -28,6 +28,7 @@ class ErrorResultViewModel: ValidationResultViewModel {
     var token: VAASValidaitonResultToken?
     var error: Error
     let revocationKeyFilename = ""
+    let countdownTimerModel: CountdownTimerModel? = nil
     
     private var validationResultError: ValidationResultError {
         error as? ValidationResultError ?? .technical

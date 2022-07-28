@@ -376,8 +376,10 @@
 
 "error_2G_unexpected_type_old_recovery_button" = "OK";
 
+"result_countdown" = "This view closes in %d seconds.";
 
-/********** app information **********/
+
+/********** Settings **********/
 
 "accessibility_app_information_label_back" = "Back to the start screen";
 

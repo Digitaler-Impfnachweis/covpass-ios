@@ -16,6 +16,7 @@ public protocol ValidationViewModelProtocol {
     var certificate: ExtendedCBORWebToken? { get set }
     var delegate: ResultViewModelDelegate? { get set }
     var toolbarState: CustomToolbarState { get }
+    var countdownTimerModel: CountdownTimerModel? { get }
     var icon: UIImage? { get }
     var resultTitle: String { get }
     var resultBody: String { get }

@@ -40,6 +40,12 @@ struct ValidationResultFactory {
                                         userDefaults: userDefaults,
                                         revocationKeyFilename: revocationKeyFilename)
         }
+
+        let countdownTimerModel = CountdownTimerModel(
+            dismissAfterSeconds: 120,
+            countdownDuration: 60
+        )
+
         if certificate.vaccinationCertificate.hcert.dgc.r?.isEmpty == false {
             return RecoveryResultViewModel(resolvable: resolvable,
                                            router: router,
@@ -47,7 +53,8 @@ struct ValidationResultFactory {
                                            certificate: certificate,
                                            _2GContext: _2GContext,
                                            userDefaults: userDefaults,
-                                           revocationKeyFilename: revocationKeyFilename)
+                                           revocationKeyFilename: revocationKeyFilename,
+                                           countdownTimerModel: countdownTimerModel)
         }
         if certificate.vaccinationCertificate.hcert.dgc.t?.isEmpty == false {
             return TestResultViewModel(resolvable: resolvable,
@@ -56,7 +63,8 @@ struct ValidationResultFactory {
                                        certificate: certificate,
                                        _2GContext: _2GContext,
                                        userDefaults: userDefaults,
-                                       revocationKeyFilename: revocationKeyFilename)
+                                       revocationKeyFilename: revocationKeyFilename,
+                                       countdownTimerModel: countdownTimerModel)
         }
         return VaccinationResultViewModel(resolvable: resolvable,
                                           router: router,
@@ -64,6 +72,7 @@ struct ValidationResultFactory {
                                           certificate: certificate,
                                           _2GContext: _2GContext,
                                           userDefaults: userDefaults,
-                                          revocationKeyFilename: revocationKeyFilename)
+                                          revocationKeyFilename: revocationKeyFilename,
+                                          countdownTimerModel: countdownTimerModel)
     }
 }

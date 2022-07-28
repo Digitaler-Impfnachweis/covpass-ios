@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -9,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GProofDifferentPersonViewController" customModule="CovPassCheckApp" customModuleProvider="target">
             <connections>
+                <outlet property="counterLabel" destination="4bP-hc-Re0" id="MaM-jR-Yq3"/>
                 <outlet property="firstResultCard" destination="54t-Rn-hAg" id="d3r-vt-mLb"/>
                 <outlet property="firstResultHeadlineLabel" destination="Bg1-cI-nHB" id="7i4-f1-JcF"/>
                 <outlet property="footerHeadline" destination="qTo-Nw-26Q" id="dhw-2u-efZ"/>
@@ -37,10 +40,10 @@
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YZD-w6-Gf1" userLabel="Body View">
-                            <rect key="frame" x="24" y="84" width="366" height="860"/>
+                            <rect key="frame" x="24" y="84" width="366" height="904.5"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="548-bM-NWY">
-                                    <rect key="frame" x="0.0" y="0.0" width="366" height="860"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="366" height="904.5"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4lc-e8-VRv" userLabel="Subtitle">
                                             <rect key="frame" x="0.0" y="0.0" width="366" height="20.5"/>
@@ -125,6 +128,12 @@
                                                 </view>
                                             </subviews>
                                         </stackView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Diese Ansicht schliesst sich in 59 Sekunden." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4bP-hc-Re0">
+                                            <rect key="frame" x="0.0" y="884" width="366" height="20.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                 </stackView>
                             </subviews>
@@ -169,6 +178,23 @@
             </connections>
         </tapGestureRecognizer>
     </objects>
+    <designables>
+        <designable name="54t-Rn-hAg">
+            <size key="intrinsicContentSize" width="414" height="110"/>
+        </designable>
+        <designable name="DGl-Sc-nGO">
+            <size key="intrinsicContentSize" width="414" height="128"/>
+        </designable>
+        <designable name="Sxb-44-nxk">
+            <size key="intrinsicContentSize" width="414" height="106"/>
+        </designable>
+        <designable name="rPT-fc-LXq">
+            <size key="intrinsicContentSize" width="414" height="60"/>
+        </designable>
+        <designable name="zKZ-k3-xca">
+            <size key="intrinsicContentSize" width="414" height="128"/>
+        </designable>
+    </designables>
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

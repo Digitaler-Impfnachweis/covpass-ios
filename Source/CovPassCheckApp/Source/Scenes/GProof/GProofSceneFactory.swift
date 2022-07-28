@@ -38,13 +38,18 @@ struct GProofSceneFactory: ResolvableSceneFactory {
     }
 
     func make(resolvable: Resolver<ExtendedCBORWebToken>) -> UIViewController {
+        let countdownTimerModel = CountdownTimerModel(
+            dismissAfterSeconds: 120,
+            countdownDuration: 60
+        )
         let viewModel = GProofViewModel(resolvable: resolvable,
                                         router: router,
                                         repository: repository,
                                         revocationRepository: revocationRepository,
                                         certLogic: certLogic,
                                         userDefaults: userDefaults,
-                                        boosterAsTest: boosterAsTest)
+                                        boosterAsTest: boosterAsTest,
+                                        countdownTimerModel: countdownTimerModel)
         let viewController = GProofViewController(viewModel: viewModel)
         return viewController
     }

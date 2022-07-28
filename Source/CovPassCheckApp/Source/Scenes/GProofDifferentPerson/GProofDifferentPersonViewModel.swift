@@ -54,7 +54,14 @@ class GProofDifferentPersonViewModel: GProofDifferentPersonViewModelProtocol {
     }
     var firstResultCert: CBORWebToken
     var secondResultCert: CBORWebToken
-    var delegate: ViewModelDelegate?
+    let countdownTimerModel: CountdownTimerModel
+    var delegate: ViewModelDelegate? = nil {
+        didSet {
+            countdownTimerModel.onUpdate = { [weak self] _ in
+                self?.delegate?.viewModelDidUpdate()
+            }
+        }
+    }
     var isDateOfBirthDifferent: Bool {
         return firstResultCert.hcert.dgc.dob != secondResultCert.hcert.dgc.dob
     }
@@ -62,10 +69,14 @@ class GProofDifferentPersonViewModel: GProofDifferentPersonViewModelProtocol {
     
     init(firstResultCert: CBORWebToken,
          secondResultCert: CBORWebToken,
-         resolver: Resolver<GProofResult>) {
+         resolver: Resolver<GProofResult>,
+         countdownTimerModel: CountdownTimerModel
+    ) {
         self.firstResultCert = firstResultCert
         self.secondResultCert = secondResultCert
         self.resolver = resolver
+        self.countdownTimerModel = countdownTimerModel
+        countdownTimerModel.start()
     }
     
     func startover() {

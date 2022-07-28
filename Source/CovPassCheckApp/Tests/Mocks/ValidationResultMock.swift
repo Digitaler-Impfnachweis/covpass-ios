@@ -11,11 +11,13 @@ import PromiseKit
 import XCTest
 
 struct ValidationResultRouterMock: ValidationResultRouterProtocol {
-
+    var showStartExpectation = XCTestExpectation(description: "showStartExpectation")
     var showRevocationExpectation = XCTestExpectation()
     var sceneCoordinator: SceneCoordinator = SceneCoordinatorMock()
 
-    func showStart() {}
+    func showStart() {
+        showStartExpectation.fulfill()
+    }
 
     func scanQRCode() -> Promise<QRCodeImportResult> {
         .value(.scanResult(.success("")))

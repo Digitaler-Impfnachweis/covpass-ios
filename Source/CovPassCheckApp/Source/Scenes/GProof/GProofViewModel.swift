@@ -106,7 +106,8 @@ class GProofViewModel: GProofViewModelProtocol {
     var firstIsFailedTechnicalReason: Bool { (firstResult?.error != nil) }
     var secondIsFailedTechnicalReason: Bool { (secondResult?.error != nil) }
     let router: GProofRouterProtocol
-    internal var delegate: ViewModelDelegate?
+    let countdownTimerModel: CountdownTimerModel
+    weak var delegate: ViewModelDelegate?
     private var initialTokenIsBoosted: Bool = false
     private var error: Error?
     private let repository: VaccinationRepositoryProtocol
@@ -126,7 +127,10 @@ class GProofViewModel: GProofViewModelProtocol {
          revocationRepository: CertificateRevocationRepositoryProtocol,
          certLogic: DCCCertLogicProtocol,
          userDefaults: Persistence,
-         boosterAsTest: Bool) {
+         boosterAsTest: Bool,
+         countdownTimerModel: CountdownTimerModel
+    ) {
+        self.countdownTimerModel = countdownTimerModel
         self.resolvable = resolvable
         self.repository = repository
         self.revocationRepository = revocationRepository
@@ -134,9 +138,17 @@ class GProofViewModel: GProofViewModelProtocol {
         self.userDefaults = userDefaults
         self.router = router
         self.boosterAsTest = boosterAsTest
+        self.countdownTimerModel.onUpdate = onCountdownTimerModelUpdate
     }
-    
-    
+
+    private func onCountdownTimerModelUpdate(countdownTimerModel: CountdownTimerModel) {
+        if countdownTimerModel.shouldDismiss {
+            cancel()
+        } else {
+            delegate?.viewModelDidUpdate()
+        }
+    }
+
     func scanQRCode() {
         isLoading = true
         var tmpToken: ExtendedCBORWebToken?
@@ -182,6 +194,9 @@ class GProofViewModel: GProofViewModelProtocol {
         .then {
             self.checkIfSamePerson()
         }
+        .ensure {
+            self.startAutomaticDismissal()
+        }
         .done {
             self.delegate?.viewModelDidUpdate()
         }
@@ -222,7 +237,11 @@ class GProofViewModel: GProofViewModelProtocol {
             router.sceneCoordinator.dimiss(animated: true)
         }
     }
-    
+
+    private func startAutomaticDismissal() {
+        countdownTimerModel.start()
+    }
+
     private func payloadFromScannerResult(_ result: ScanResult) throws -> String {
         switch result {
         case let .success(payload):
@@ -303,21 +322,23 @@ class GProofViewModel: GProofViewModelProtocol {
         guard let secondResultCert = secondToken, !(secondResult?.error != nil) else {
             return .value
         }
-        
-        _ = firstly {
-            router.showDifferentPerson(firstResultCert: firstResultCert.vaccinationCertificate,
-                                       scondResultCert: secondResultCert.vaccinationCertificate)
-        }
-        .done {
-            switch $0 {
-            case .startover: self.startover()
-            case .retry: self.retry()
-            case.cancel: break
+
+        countdownTimerModel.reset()
+        return router.showDifferentPerson(
+            firstResultCert: firstResultCert.vaccinationCertificate,
+            scondResultCert: secondResultCert.vaccinationCertificate
+        )
+        .get { result in
+            switch result {
+            case .startover:
+                self.startover()
+            case .retry:
+                self.retry()
+            case .cancel:
+                self.cancel()
             }
         }
-        .cauterize()
-        
-        return .value
+        .asVoid()
     }
     
     private var certificateAndTestNameOrDateOfBirthAreNotMatching: Bool {
@@ -327,12 +348,14 @@ class GProofViewModel: GProofViewModelProtocol {
     
     func scanNext() {
         isFirstScan = false
+        countdownTimerModel.reset()
         scanQRCode()
     }
     
     func retry() {
         isFirstScan = false
         secondResult = nil
+        countdownTimerModel.reset()
         delegate?.viewModelDidUpdate()
         scanQRCode()
     }
@@ -341,6 +364,7 @@ class GProofViewModel: GProofViewModelProtocol {
         isFirstScan = true
         secondResult = nil
         firstResult = nil
+        countdownTimerModel.reset()
         delegate?.viewModelDidUpdate()
         scanQRCode()
     }

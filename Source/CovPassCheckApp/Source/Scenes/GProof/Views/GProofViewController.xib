@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -16,12 +16,14 @@
                 <outlet property="buttonStack" destination="3Sp-3v-WQB" id="m6c-cw-yjz"/>
                 <outlet property="buttonStartOver" destination="DpY-jD-wtK" id="iWG-Tc-iuq"/>
                 <outlet property="certStack" destination="fxq-7o-PfR" id="GH0-0z-YeY"/>
+                <outlet property="counterLabel" destination="HMI-QU-Adc" id="eiS-t2-RHR"/>
                 <outlet property="firstResultCard" destination="r2L-zE-97I" id="SIA-sc-iaQ"/>
                 <outlet property="headline" destination="dnN-F6-21N" id="9bh-Ed-20T"/>
                 <outlet property="pageFooter" destination="ch5-ec-Nf8" id="G7T-cV-AG8"/>
                 <outlet property="personStack" destination="pAi-fz-BVy" id="7iD-pV-jdP"/>
                 <outlet property="personStackHeadline" destination="QQv-92-BGF" id="fY5-c8-u7p"/>
                 <outlet property="resultPerson" destination="e5g-Uh-iIv" id="waU-dB-y0R"/>
+                <outlet property="scrollView" destination="x4e-BG-quS" id="KV0-S9-0pU"/>
                 <outlet property="seconResultCard" destination="dha-9K-gai" id="RwP-Y5-WnP"/>
                 <outlet property="view" destination="ejN-O6-ZDd" id="J2h-gG-kN4"/>
             </connections>
@@ -39,10 +41,10 @@
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eBt-dr-aoz" userLabel="Body View">
-                            <rect key="frame" x="24" y="60" width="366" height="1030.5"/>
+                            <rect key="frame" x="24" y="60" width="366" height="1071.5"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="42" translatesAutoresizingMaskIntoConstraints="NO" id="kyw-Sw-FYK">
-                                    <rect key="frame" x="0.0" y="20" width="366" height="1010.5"/>
+                                    <rect key="frame" x="0.0" y="20" width="366" height="1051.5"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="110" placeholderIntrinsicHeight="200" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="fxq-7o-PfR" userLabel="Cert Stack">
                                             <rect key="frame" x="0.0" y="0.0" width="366" height="232"/>
@@ -79,7 +81,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="3Sp-3v-WQB" userLabel="Button Stack">
-                                            <rect key="frame" x="0.0" y="578.5" width="366" height="432"/>
+                                            <rect key="frame" x="0.0" y="578.5" width="366" height="473"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="tO6-PR-mb1" userLabel="Scan Next" customClass="MainButton" customModule="CovPassUI">
                                                     <rect key="frame" x="0.0" y="0.0" width="366" height="128"/>
@@ -93,12 +95,21 @@
                                                     <rect key="frame" x="0.0" y="304" width="366" height="128"/>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 </view>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Diese Ansicht schliesst sich in 59 Sekunden." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HMI-QU-Adc">
+                                                    <rect key="frame" x="0.0" y="456" width="366" height="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="HMI-QU-Adc" firstAttribute="leading" secondItem="3Sp-3v-WQB" secondAttribute="leading" id="Ban-wt-xof"/>
+                                                <constraint firstAttribute="trailing" secondItem="HMI-QU-Adc" secondAttribute="trailing" id="sdO-SW-NQH"/>
+                                            </constraints>
                                         </stackView>
                                     </subviews>
                                 </stackView>
                             </subviews>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             <constraints>
                                 <constraint firstItem="kyw-Sw-FYK" firstAttribute="leading" secondItem="eBt-dr-aoz" secondAttribute="leading" id="ZLU-WB-0o5"/>
                                 <constraint firstItem="kyw-Sw-FYK" firstAttribute="top" secondItem="eBt-dr-aoz" secondAttribute="top" constant="20" symbolic="YES" id="mlS-EN-gjg"/>

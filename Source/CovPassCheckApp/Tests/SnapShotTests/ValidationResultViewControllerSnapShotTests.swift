@@ -28,7 +28,9 @@ class ValidationResultViewControllerSnapShotTests: BaseSnapShotTests {
                        token: ExtendedCBORWebToken?,
                        _2GContext: Bool,
                        buttonHidden: Bool,
-                       expertMode: Bool? = nil) -> UIView {
+                       expertMode: Bool? = nil,
+                       hideCountdown: Bool = true
+    ) -> UIView {
         let cborWebToken = token?.vaccinationCertificate
         var vm: ValidationResultViewModel!
         if let expertMode = expertMode, expertMode {
@@ -49,6 +51,9 @@ class ValidationResultViewControllerSnapShotTests: BaseSnapShotTests {
             guard let cborWebToken = cborWebToken else {
                 return UIView()
             }
+            let countdownTimerModel = CountdownTimerModelMock()
+            countdownTimerModel.hideCountdown = hideCountdown
+
             if cborWebToken.isVaccination {
                 vm = VaccinationResultViewModel(resolvable: resolver,
                                                 router: ValidationResultRouterMock(),
@@ -56,7 +61,8 @@ class ValidationResultViewControllerSnapShotTests: BaseSnapShotTests {
                                                 certificate: token,
                                                 _2GContext: _2GContext,
                                                 userDefaults: persistence,
-                                                revocationKeyFilename: "")
+                                                revocationKeyFilename: "",
+                                                countdownTimerModel: countdownTimerModel)
             } else if cborWebToken.isRecovery {
                 vm = RecoveryResultViewModel(resolvable: resolver,
                                              router: ValidationResultRouterMock(),
@@ -64,7 +70,8 @@ class ValidationResultViewControllerSnapShotTests: BaseSnapShotTests {
                                              certificate: token,
                                              _2GContext: _2GContext,
                                              userDefaults: persistence,
-                                             revocationKeyFilename: "")
+                                             revocationKeyFilename: "",
+                                             countdownTimerModel: countdownTimerModel)
             } else if cborWebToken.isTest {
                 vm = TestResultViewModel(resolvable: resolver,
                                          router: ValidationResultRouterMock(),
@@ -72,7 +79,8 @@ class ValidationResultViewControllerSnapShotTests: BaseSnapShotTests {
                                          certificate: token,
                                          _2GContext: _2GContext,
                                          userDefaults: persistence,
-                                         revocationKeyFilename: "")
+                                         revocationKeyFilename: "",
+                                         countdownTimerModel: countdownTimerModel)
             }
         }
         vm.buttonHidden = buttonHidden
@@ -112,12 +120,28 @@ class ValidationResultViewControllerSnapShotTests: BaseSnapShotTests {
         let view = configureView(error: nil, token: token, _2GContext: true, buttonHidden: true)
         verifyView(view: view, height: 900)
     }
+
+    func testSuccessVaccination_with_countdown() {
+        let token = ExtendedCBORWebToken(
+            vaccinationCertificate: CBORWebToken.mockVaccinationCertificate,
+            vaccinationQRCodeData: "")
+        let view = configureView(error: nil, token: token, _2GContext: true, buttonHidden: true, hideCountdown: false)
+        verifyView(view: view, height: 900)
+    }
     
     func testSuccessRecovery() {
         let token = ExtendedCBORWebToken(
             vaccinationCertificate: CBORWebToken.mockVaccinationCertificate,
             vaccinationQRCodeData: "")
         let view = configureView(error: nil, token: token, _2GContext: true, buttonHidden: true)
+        verifyView(view: view, height: 900)
+    }
+
+    func testSuccessRecovery_with_countdown() {
+        let token = ExtendedCBORWebToken(
+            vaccinationCertificate: CBORWebToken.mockVaccinationCertificate,
+            vaccinationQRCodeData: "")
+        let view = configureView(error: nil, token: token, _2GContext: true, buttonHidden: true, hideCountdown: false)
         verifyView(view: view, height: 900)
     }
     

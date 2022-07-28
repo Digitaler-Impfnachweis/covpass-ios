@@ -15,6 +15,7 @@ class RecoveryResultViewModel: ValidationResultViewModel {
     // MARK: - Properties
 
     weak var delegate: ResultViewModelDelegate?
+    let countdownTimerModel: CountdownTimerModel?
     var resolvable: Resolver<ExtendedCBORWebToken>
     var router: ValidationResultRouterProtocol
     var repository: VaccinationRepositoryProtocol
@@ -67,7 +68,8 @@ class RecoveryResultViewModel: ValidationResultViewModel {
          certificate: ExtendedCBORWebToken?,
          _2GContext: Bool,
          userDefaults: Persistence,
-         revocationKeyFilename: String
+         revocationKeyFilename: String,
+         countdownTimerModel: CountdownTimerModel
     ) {
         self.resolvable = resolvable
         self.router = router
@@ -76,6 +78,17 @@ class RecoveryResultViewModel: ValidationResultViewModel {
         self._2GContext = _2GContext
         self.userDefaults = userDefaults
         self.revocationKeyFilename = revocationKeyFilename
+        self.countdownTimerModel = countdownTimerModel
+        countdownTimerModel.onUpdate = onCountdownTimerModelUpdate
+        countdownTimerModel.start()
+    }
+
+    private func onCountdownTimerModelUpdate(countdownTimerModel: CountdownTimerModel) {
+        if countdownTimerModel.shouldDismiss {
+            cancel()
+        } else {
+            delegate?.viewModelDidUpdate()
+        }
     }
     
     func scanCertificateStarted() {

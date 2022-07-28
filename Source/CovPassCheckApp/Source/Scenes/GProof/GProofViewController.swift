@@ -24,7 +24,8 @@ class GProofViewController: UIViewController {
     @IBOutlet var firstResultCard: CertResultCard!
     @IBOutlet var seconResultCard: CertResultCard!
     @IBOutlet var resultPerson: CertResultCard!
-    
+    @IBOutlet var counterLabel: UILabel!
+    @IBOutlet var scrollView: UIScrollView!
     private(set) var viewModel: GProofViewModelProtocol
 
     // MARK: - Lifecycle
@@ -55,6 +56,7 @@ class GProofViewController: UIViewController {
         configureButtons()
         configureAccessiblity()
         configureContent()
+        configureCounter()
     }
     
     private func configureHeadline() {
@@ -128,11 +130,21 @@ class GProofViewController: UIViewController {
     private func configureAccessiblity() {
         headline.actionButton.enableAccessibility(label: viewModel.accessibilityResultAnnounceClose)
     }
+
+    private func configureCounter() {
+        let counterInfo: NSMutableAttributedString = .init(
+            attributedString: viewModel.countdownTimerModel.counterInfo.styledAs(.body)
+        )
+        counterLabel.attributedText = counterInfo
+        counterLabel.textAlignment = .center
+        counterLabel.isHidden = viewModel.countdownTimerModel.hideCountdown
+    }
 }
 
 extension GProofViewController: ViewModelDelegate {
     func viewModelDidUpdate() {
         self.configureView()
+        self.configureCounter()
     }
     
     func viewModelUpdateDidFailWithError(_ error: Error) {

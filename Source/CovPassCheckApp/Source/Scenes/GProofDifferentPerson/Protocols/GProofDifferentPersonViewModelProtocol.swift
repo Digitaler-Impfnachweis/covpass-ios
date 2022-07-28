@@ -31,6 +31,7 @@ protocol GProofDifferentPersonViewModelProtocol {
     var secondResultCert: CBORWebToken { get set }
     var delegate: ViewModelDelegate? { get set }
     var isDateOfBirthDifferent: Bool { get }
+    var countdownTimerModel: CountdownTimerModel { get }
     func startover()
     func retry()
     func cancel()

@@ -47,6 +47,7 @@ protocol GProofViewModelProtocol {
     var delegate: ViewModelDelegate? { get set }
     var firstResult: GProofValidationResult?  { get set }
     var secondResult: GProofValidationResult?  { get set }
+    var countdownTimerModel: CountdownTimerModel { get }
     func scanNext()
     func retry()
     func startover()

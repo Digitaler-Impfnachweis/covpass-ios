@@ -25,9 +25,14 @@ struct GProofDifferentPersonSceneFactory: ResolvableSceneFactory {
     }
     
     func make(resolvable: Resolver<GProofResult>) -> UIViewController {
+        let countdownTimerModel = CountdownTimerModel(
+            dismissAfterSeconds: 120,
+            countdownDuration: 60
+        )
         let viewModel = GProofDifferentPersonViewModel(firstResultCert: firstResultCert,
                                                        secondResultCert: secondResultCert,
-                                                       resolver: resolvable)
+                                                       resolver: resolvable,
+                                                       countdownTimerModel: countdownTimerModel)
         let viewController = GProofDifferentPersonViewController(viewModel: viewModel)
         return viewController
     }

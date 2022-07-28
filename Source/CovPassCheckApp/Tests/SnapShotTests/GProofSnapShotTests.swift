@@ -54,10 +54,9 @@ class GProofSnapShotTests: BaseSnapShotTests {
                                revocationRepository: CertificateRevocationRepositoryMock(),
                                certLogic: certLogicMock,
                                userDefaults: UserDefaultsPersistence(),
-                               boosterAsTest: bosterAsTest)
-
+                               boosterAsTest: bosterAsTest,
+                               countdownTimerModel: .init(dismissAfterSeconds: 0, countdownDuration: 0))
     }
-
 
     // MARK: Init flow with Token failing functional or Technical and passing
     
