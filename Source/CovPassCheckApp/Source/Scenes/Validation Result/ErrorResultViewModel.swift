@@ -62,6 +62,7 @@ class ErrorResultViewModel: ValidationResultViewModel {
     var certificate: ExtendedCBORWebToken?
     var error: Error
     let revocationKeyFilename: String
+    let revocationRepository: CertificateRevocationRepositoryProtocol? = nil
     let countdownTimerModel: CountdownTimerModel? = nil
     private var validationResultError: ValidationResultError {
         error as? ValidationResultError ?? .technical        

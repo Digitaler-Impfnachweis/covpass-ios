@@ -163,7 +163,7 @@ class GProofViewModel: GProofViewModelProtocol {
         .then { token -> Promise<ValidateCertificateUseCase.Result> in
             tmpToken = token
             return ValidateCertificateUseCase(token: token,
-                                              revocationRepository: CertificateRevocationRepository()!,
+                                              revocationRepository: self.revocationRepository,
                                               certLogic: self.certLogic,
                                               persistence: self.userDefaults,
                                               allowExceptions: true).execute()

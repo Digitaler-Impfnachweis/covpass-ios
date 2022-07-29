@@ -31,7 +31,7 @@ struct ValidatorOverviewSceneFactory: SceneFactory {
         guard let privacyFile = try? bundle.loadString(resource: filename, encoding: .utf8) else {
             fatalError("Failed to load privacy file.")
         }
-        guard let revocationRepository = CertificateRevocationRepository() else {
+        guard let revocationRepository = CertificateRevocationWrapperRepository() else {
             fatalError("Revocation Repository can´t initialized")
         }
         let repository = VaccinationRepository.create()

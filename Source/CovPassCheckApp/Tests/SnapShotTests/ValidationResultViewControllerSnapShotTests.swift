@@ -62,7 +62,8 @@ class ValidationResultViewControllerSnapShotTests: BaseSnapShotTests {
                                                 _2GContext: _2GContext,
                                                 userDefaults: persistence,
                                                 revocationKeyFilename: "",
-                                                countdownTimerModel: countdownTimerModel)
+                                                countdownTimerModel: countdownTimerModel,
+                                                revocationRepository: CertificateRevocationRepositoryMock())
             } else if cborWebToken.isRecovery {
                 vm = RecoveryResultViewModel(resolvable: resolver,
                                              router: ValidationResultRouterMock(),
@@ -71,7 +72,8 @@ class ValidationResultViewControllerSnapShotTests: BaseSnapShotTests {
                                              _2GContext: _2GContext,
                                              userDefaults: persistence,
                                              revocationKeyFilename: "",
-                                             countdownTimerModel: countdownTimerModel)
+                                             countdownTimerModel: countdownTimerModel,
+                                             revocationRepository: CertificateRevocationRepositoryMock())
             } else if cborWebToken.isTest {
                 vm = TestResultViewModel(resolvable: resolver,
                                          router: ValidationResultRouterMock(),
@@ -80,7 +82,8 @@ class ValidationResultViewControllerSnapShotTests: BaseSnapShotTests {
                                          _2GContext: _2GContext,
                                          userDefaults: persistence,
                                          revocationKeyFilename: "",
-                                         countdownTimerModel: countdownTimerModel)
+                                         countdownTimerModel: countdownTimerModel,
+                                         revocationRepository: CertificateRevocationRepositoryMock())
             }
         }
         vm.buttonHidden = buttonHidden

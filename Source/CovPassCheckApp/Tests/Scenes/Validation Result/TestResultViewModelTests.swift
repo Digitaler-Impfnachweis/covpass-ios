@@ -32,7 +32,8 @@ class TestResultViewModelTests: XCTestCase {
             countdownTimerModel: .init(
                 dismissAfterSeconds: 0,
                 countdownDuration: 0
-            )
+            ),
+            revocationRepository: nil
         )
         sut.delegate = delegate
     }

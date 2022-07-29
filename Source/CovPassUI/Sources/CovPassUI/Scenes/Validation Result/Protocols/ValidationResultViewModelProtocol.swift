@@ -13,6 +13,7 @@ public protocol ValidationViewModelProtocol {
     var resolvable: Resolver<ExtendedCBORWebToken> { get set }
     var router: ValidationResultRouterProtocol { get set }
     var repository: VaccinationRepositoryProtocol { get set }
+    var revocationRepository: CertificateRevocationRepositoryProtocol? { get }
     var certificate: ExtendedCBORWebToken? { get set }
     var delegate: ResultViewModelDelegate? { get set }
     var toolbarState: CustomToolbarState { get }

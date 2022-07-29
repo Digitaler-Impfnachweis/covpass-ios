@@ -22,6 +22,7 @@ class VaccinationResultViewModel: ValidationResultViewModel {
     var repository: VaccinationRepositoryProtocol
     var certificate: ExtendedCBORWebToken?
     var revocationKeyFilename: String
+    let revocationRepository: CertificateRevocationRepositoryProtocol?
 
     var icon: UIImage? {
         .resultSuccess
@@ -70,8 +71,10 @@ class VaccinationResultViewModel: ValidationResultViewModel {
          _2GContext: Bool,
          userDefaults: Persistence,
          revocationKeyFilename: String,
-         countdownTimerModel: CountdownTimerModel
+         countdownTimerModel: CountdownTimerModel,
+         revocationRepository: CertificateRevocationRepositoryProtocol
     ) {
+        self.revocationRepository = revocationRepository
         self.resolvable = resolvable
         self.router = router
         self.repository = repository

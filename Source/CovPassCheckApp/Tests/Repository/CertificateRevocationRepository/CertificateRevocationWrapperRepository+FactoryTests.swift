@@ -1,5 +1,5 @@
 //
-//  CertificateRevocationRepository+FactoryTests.swift
+//  CertificateRevocationWrapperRepository+FactoryTests.swift
 //
 //  © Copyright IBM Deutschland GmbH 2021
 //  SPDX-License-Identifier: Apache-2.0
@@ -9,10 +9,10 @@
 import CovPassCommon
 import XCTest
 
-class CertificateRevocationRepository_FactoryTests: XCTestCase {
+class CertificateRevocationWrapperRepository_FactoryTests: XCTestCase {
     func testConvenienceInit() {
         // When
-        let sut = CertificateRevocationRepository()
+        let sut = CertificateRevocationWrapperRepository()
 
         // Then
         XCTAssertNotNil(sut)

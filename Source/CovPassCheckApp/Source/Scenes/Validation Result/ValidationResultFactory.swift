@@ -45,6 +45,9 @@ struct ValidationResultFactory {
             dismissAfterSeconds: 120,
             countdownDuration: 60
         )
+        guard let revocationRepository = CertificateRevocationWrapperRepository() else {
+            fatalError("revocationRepository mut nor be nil.")
+        }
 
         if certificate.vaccinationCertificate.hcert.dgc.r?.isEmpty == false {
             return RecoveryResultViewModel(resolvable: resolvable,
@@ -54,7 +57,8 @@ struct ValidationResultFactory {
                                            _2GContext: _2GContext,
                                            userDefaults: userDefaults,
                                            revocationKeyFilename: revocationKeyFilename,
-                                           countdownTimerModel: countdownTimerModel)
+                                           countdownTimerModel: countdownTimerModel,
+                                           revocationRepository: revocationRepository)
         }
         if certificate.vaccinationCertificate.hcert.dgc.t?.isEmpty == false {
             return TestResultViewModel(resolvable: resolvable,
@@ -64,7 +68,8 @@ struct ValidationResultFactory {
                                        _2GContext: _2GContext,
                                        userDefaults: userDefaults,
                                        revocationKeyFilename: revocationKeyFilename,
-                                       countdownTimerModel: countdownTimerModel)
+                                       countdownTimerModel: countdownTimerModel,
+                                       revocationRepository: revocationRepository)
         }
         return VaccinationResultViewModel(resolvable: resolvable,
                                           router: router,
@@ -73,6 +78,7 @@ struct ValidationResultFactory {
                                           _2GContext: _2GContext,
                                           userDefaults: userDefaults,
                                           revocationKeyFilename: revocationKeyFilename,
-                                          countdownTimerModel: countdownTimerModel)
+                                          countdownTimerModel: countdownTimerModel,
+                                          revocationRepository: revocationRepository)
     }
 }

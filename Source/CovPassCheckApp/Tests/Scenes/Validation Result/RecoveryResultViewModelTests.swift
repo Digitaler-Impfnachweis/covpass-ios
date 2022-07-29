@@ -32,7 +32,8 @@ class RecoveryResultViewModelTests: XCTestCase {
             countdownTimerModel: .init(
                 dismissAfterSeconds: 0,
                 countdownDuration: 0
-            )
+            ),
+            revocationRepository: CertificateRevocationRepositoryMock()
         )
         sut.delegate = delegate
     }

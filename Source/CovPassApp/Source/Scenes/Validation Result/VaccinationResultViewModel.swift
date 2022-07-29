@@ -23,6 +23,7 @@ class VaccinationResultViewModel: ValidationResultViewModel {
     var token: VAASValidaitonResultToken?
     let revocationKeyFilename = ""
     let countdownTimerModel: CountdownTimerModel? = nil
+    let revocationRepository: CertificateRevocationRepositoryProtocol? = nil
 
     var icon: UIImage? {
         .resultSuccess

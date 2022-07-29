@@ -64,7 +64,7 @@ extension ValidationViewModelProtocol {
         .then { token -> Promise<ValidateCertificateUseCase.Result> in
             tmpToken = token
             return ValidateCertificateUseCase(token: token,
-                                              revocationRepository: CertificateRevocationRepository()!,
+                                              revocationRepository: self.revocationRepository!,
                                               certLogic: DCCCertLogic.create(),
                                               persistence: self.userDefaults,
                                               allowExceptions: _2GContext).execute()
