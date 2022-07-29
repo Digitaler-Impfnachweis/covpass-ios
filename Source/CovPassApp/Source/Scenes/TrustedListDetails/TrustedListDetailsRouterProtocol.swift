@@ -10,7 +10,8 @@ import CovPassCommon
 import PromiseKit
 import Scanner
 import UIKit
+import CovPassUI
 
-public protocol TrustedListDetailsRouterProtocol: DialogRouterProtocol {
+protocol TrustedListDetailsRouterProtocol: DialogRouterProtocol {
     func showError(error: Error)
 }

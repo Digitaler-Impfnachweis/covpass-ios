@@ -6,6 +6,7 @@
 //
 
 @testable import CovPassCommon
+@testable import CovPassCheckApp
 import CovPassUI
 import XCTest
 

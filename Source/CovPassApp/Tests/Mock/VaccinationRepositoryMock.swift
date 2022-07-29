@@ -30,7 +30,8 @@ public class VaccinationRepositoryMock: VaccinationRepositoryProtocol {
     var deleteError: Error?
     var qrCodeData: String?
     var updateError: Error?
-    
+    var didUpdateTrustListHandler: (()->Void)?
+
     public func matchedCertificates(for certificateList: CertificateList) -> [CertificatePair] {
         var pairs = [CertificatePair]()
         for cert in certificateList.certificates {
@@ -64,9 +65,10 @@ public class VaccinationRepositoryMock: VaccinationRepositoryProtocol {
     public func updateTrustListIfNeeded() -> Promise<Void> {
         Promise.value
     }
-
+    
     public func updateTrustList() -> Promise<Void> {
-        Promise.value
+        didUpdateTrustListHandler?()
+        return Promise.value
     }
 
     public func getCertificateList() -> Promise<CertificateList> {

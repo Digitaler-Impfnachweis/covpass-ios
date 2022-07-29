@@ -6,6 +6,7 @@
 //
 
 @testable import CovPassUI
+@testable import CovPassCheckApp
 import CovPassCommon
 import XCTest
 
@@ -22,7 +23,7 @@ class TrustedListDetailsViewModelTests: XCTestCase {
         certLogic = DCCCertLogicMock()
         delegate = ViewModelDelegateMock()
         sut = TrustedListDetailsViewModel(repository: vaccinationRepository,
-                                              certLogic: certLogic)
+                                          certLogic: certLogic)
         sut.delegate = delegate
     }
     
@@ -82,5 +83,4 @@ class TrustedListDetailsViewModelTests: XCTestCase {
         wait(for: [exp1, exp2, exp3], timeout: 2, enforceOrder: true)
         XCTAssertFalse(sut.isLoading)
     }
-    
 }

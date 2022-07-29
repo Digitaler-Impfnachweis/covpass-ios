@@ -1,5 +1,5 @@
 //
-//  ValidatorOverviewRouter.swift
+//  TrustedListDetailsRouter.swift
 //
 //
 //  © Copyright IBM Deutschland GmbH 2021

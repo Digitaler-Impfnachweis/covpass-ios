@@ -12,7 +12,8 @@ import Foundation
 
 class DCCCertLogicMock: DCCCertLogicProtocol {
     
-    var lastUpdateDccrRules: Date?
+    var shouldValueSetsBeUpdated: Bool = true
+    var shouldRulesBeUpdated: Bool = true
 
     func updateBoosterRulesIfNeeded() -> Promise<Void> {
         .value
@@ -39,7 +40,7 @@ class DCCCertLogicMock: DCCCertLogicProtocol {
     }
     
     func valueSetsShouldBeUpdated() -> Bool {
-        return true
+        return shouldValueSetsBeUpdated
     }
     
     var countries: [Country] {
@@ -55,18 +56,9 @@ class DCCCertLogicMock: DCCCertLogicProtocol {
     }
 
     public func rulesShouldBeUpdated() -> Bool {
-        if let lastUpdated = self.lastUpdatedDCCRules(),
-           let date = Calendar.current.date(byAdding: .day, value: 1, to: lastUpdated),
-           Date() < date
-        {
-            return false
-        }
-        return true
+        return shouldRulesBeUpdated
     }
 
-    func lastUpdatedDCCRules() -> Date? {
-        lastUpdateDccrRules
-    }
 
     var validationError: Error?
     var validateResult: [ValidationResult]?

@@ -8,14 +8,15 @@
 import Foundation
 import Scanner
 import UIKit
+import CovPassUI
 
-open class TrustedListDetailsViewController: UIViewController {
+class TrustedListDetailsViewController: UIViewController {
     // MARK: - IBOutlet
     @IBOutlet var headerView: PlainLabel!
     @IBOutlet var offlineCard: HintView!
     @IBOutlet public var mainButton: MainButton!
-    let activityIndicator = DotPulseActivityIndicator(frame: CGRect(x: 0, y: 0, width: 100, height: 20))
-
+    private let activityIndicator = DotPulseActivityIndicator(frame: CGRect(x: 0, y: 0, width: 100, height: 20))
+    
     // MARK: - Properties
     
     private(set) var viewModel: TrustedListDetailsViewModel
@@ -23,14 +24,14 @@ open class TrustedListDetailsViewController: UIViewController {
     // MARK: - Lifecycle
     
     @available(*, unavailable)
-    required public init?(coder _: NSCoder) { fatalError("init?(coder: NSCoder) not implemented yet") }
+    required init?(coder _: NSCoder) { fatalError("init?(coder: NSCoder) not implemented yet") }
     
     public init(viewModel: TrustedListDetailsViewModel) {
         self.viewModel = viewModel
-        super.init(nibName: String(describing: Self.self), bundle: .uiBundle)
+        super.init(nibName: String(describing: Self.self), bundle: .main)
     }
     
-    open override func viewDidLoad() {
+    override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.delegate = self
         view.backgroundColor = .neutralWhite

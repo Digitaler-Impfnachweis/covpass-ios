@@ -1,5 +1,5 @@
 //
-//  ValidatorOverviewRouter.swift
+//  TrustedListDetailsRouter.swift
 //
 //
 //  © Copyright IBM Deutschland GmbH 2021
@@ -28,11 +28,7 @@ class TrustedListDetailsRouter: TrustedListDetailsRouterProtocol {
 
     func showError(error: Error) {
         sceneCoordinator.present(
-            ValidationResultSceneFactory(
-                router: ValidationResultRouter(sceneCoordinator: sceneCoordinator),
-                certificate: nil,
-                error: error
-            )
+            TrustedListDetailsSceneFactory(sceneCoordinator: sceneCoordinator)
         )
     }
 }

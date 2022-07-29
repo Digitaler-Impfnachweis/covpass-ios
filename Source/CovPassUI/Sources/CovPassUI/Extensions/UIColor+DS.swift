@@ -82,6 +82,8 @@ public extension UIColor {
     static let success = UIColor("Success")
 
     static let warning = UIColor("Warning")
+    
+    static let warningAlternative = UIColor("WarningAlternative")
 
     static let info = UIColor("Info")
 

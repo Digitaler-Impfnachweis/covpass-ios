@@ -13,6 +13,7 @@ import CertLogic
 class DCCCertLogicMock: DCCCertLogicProtocol {
     
     var rulesShouldUpdate: Bool = true
+    var valueSetsShouldUpdate: Bool = true
 
     var countries: [Country] = [
         Country("DE")
@@ -43,7 +44,7 @@ class DCCCertLogicMock: DCCCertLogicProtocol {
     }
     
     func valueSetsShouldBeUpdated() -> Bool {
-        true
+        valueSetsShouldUpdate
     }
     
     func updateBoosterRules() -> Promise<Void> {
