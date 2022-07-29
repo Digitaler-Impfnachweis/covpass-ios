@@ -525,6 +525,20 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         wait(for: [vaccinationRepository.setExpiryAlertExpectation], timeout: 2)
     }
 
+    func testRefresh_certificates_are_shown_before_revocation_check() {
+        // Given
+        revocationRepository.isRevokedExpectation.isInverted = true
+
+        // When
+        sut.refresh().cauterize()
+
+        // Then
+        wait(for: [
+            delegate.viewModelDidUpdateExpectation,
+            revocationRepository.isRevokedExpectation
+        ], timeout: 1)
+    }
+
     func testScanCertificate_open_german_faq() throws {
         // Given
         let expectedURL = URL(string: "https://www.digitaler-impfnachweis-app.de/faq")

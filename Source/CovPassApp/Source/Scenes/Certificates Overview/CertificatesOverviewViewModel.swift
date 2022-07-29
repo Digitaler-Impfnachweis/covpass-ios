@@ -156,6 +156,10 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
         firstly {
             repository.getCertificateList()
         }
+        .get {
+            self.certificateList = $0
+            self.delegate?.viewModelDidUpdate()
+        }
         .then {
             InvalidationUseCase(certificateList: $0,
                                 revocationRepository: self.revocationRepository,
