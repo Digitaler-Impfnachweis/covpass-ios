@@ -504,18 +504,21 @@ public extension Array where Element == ExtendedCBORWebToken {
     
     var sortLatestPcrTest: [ExtendedCBORWebToken] {
         filterNegativePCRTestsNotOlderThan72Hours
+            .filterNotInvalid.filterNotRevoked.filterNotExpired
             .sortByIssuedAtTime
             .sortTestsByDateTimeOfSampleCollection
     }
     
     var sortLatestQuickTests: [ExtendedCBORWebToken] {
         filterNegativeQuickTestsNotOlderThan48Hours
+            .filterNotInvalid.filterNotRevoked.filterNotExpired
             .sortByIssuedAtTime
             .sortTestsByDateTimeOfSampleCollection
     }
     
     var sortLatestBooster: [ExtendedCBORWebToken] {
         filterBoosters
+            .filterNotInvalid.filterNotRevoked.filterNotExpired
             .sortByIssuedAtTime
             .sortByVaccinationDate
     }
@@ -528,32 +531,38 @@ public extension Array where Element == ExtendedCBORWebToken {
     
     var sortLatestVaccinationsFirstNotBosstedValidFullImmunization: ExtendedCBORWebToken? {
         sortLatestVaccinations
+            .filterNotInvalid.filterNotRevoked.filterNotExpired
             .firstNotBosstedValidFullImmunization
     }
     
     var sortLatestVaccinationsFirstNotValidButFullImmunization: ExtendedCBORWebToken? {
         sortLatestVaccinations
+            .filterNotInvalid.filterNotRevoked.filterNotExpired
             .firstNotValidButFullImmunization
     }
     
     var sortLatestRecoveryWhoseDateIsStillValidSortByFirstPositiveResultDate: [ExtendedCBORWebToken] {
         filterRecoveryWhoseDateIsStillValid
+            .filterNotInvalid.filterNotRevoked.filterNotExpired
             .sortByFirstPositiveResultDate
     }
     
     var sortLatestNotFullImmunization: [ExtendedCBORWebToken] {
         filterNotFullImmunization
+            .filterNotInvalid.filterNotRevoked.filterNotExpired
             .sortByIssuedAtTime
             .sortByVaccinationDate
     }
     
     var sortLatestRecoveryWhoseDateNotAnyMoreValidSortByFirstPositiveResultDate: [ExtendedCBORWebToken] {
         filterRecoveryWhoseDateNotAnyMoreValid
+            .filterNotInvalid.filterNotRevoked.filterNotExpired
             .sortByFirstPositiveResultDate
     }
     
     var sortLatestTestsNegativeAndNotValid: [ExtendedCBORWebToken] {
         filterAllTestsNegativeAndNotValid
+            .filterNotInvalid.filterNotRevoked.filterNotExpired
     }
     
     func sortLatestRest(_ res: [ExtendedCBORWebToken]) -> [ExtendedCBORWebToken] {

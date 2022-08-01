@@ -649,7 +649,9 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
         var cborWebToken = CBORWebToken.mockVaccinationCertificate
         cborWebToken.exp = .init(timeIntervalSinceNow: -60)
         let token = cborWebToken.extended(vaccinationQRCodeData: "1")
-        let token2 = CBORWebToken.mockVaccinationCertificate.extended(vaccinationQRCodeData: "2")
+        var cborWebToken2 = CBORWebToken.mockVaccinationCertificate
+        cborWebToken2.exp = .init(timeIntervalSinceNow: -70)
+        let token2 = cborWebToken2.extended(vaccinationQRCodeData: "2")
         token2.vaccinationCertificate.hcert.dgc.v!.first!.dt = try! XCTUnwrap(DateUtils.isoDateFormatter.date(from: "2008-01-01"))
         let sut: [ExtendedCBORWebToken] = [
             token,
@@ -668,6 +670,60 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
         // Then
         XCTAssertEqual(tokens.count, 6)
         XCTAssertEqual(tokens.first, token)
+    }
+    
+    func test_expired_have_least_priority() {
+        // Given
+        var cborWebToken = CBORWebToken.mockVaccinationCertificate
+        cborWebToken.exp = .init(timeIntervalSinceNow: -60)
+        let tokenExpired = cborWebToken.extended(vaccinationQRCodeData: "1")
+        let cborWebToken2 = CBORWebToken.mockVaccinationCertificate
+        let tokenNotExpired = cborWebToken2.extended(vaccinationQRCodeData: "2")
+        let sut: [ExtendedCBORWebToken] = [tokenExpired,tokenNotExpired]
+        
+        // WHEN
+        let tokens = sut.sortLatest()
+
+        // Then
+        XCTAssertEqual(tokens.count, 2)
+        XCTAssertEqual(tokens.first, tokenNotExpired)
+        XCTAssertEqual(tokens.last, tokenExpired)
+    }
+    
+    func test_revoked_have_least_priority() {
+        // Given
+        let cborWebToken = CBORWebToken.mockVaccinationCertificate
+        var tokenRevoked = cborWebToken.extended(vaccinationQRCodeData: "1")
+        tokenRevoked.revoked = true
+        let cborWebToken2 = CBORWebToken.mockVaccinationCertificate
+        let tokenNotRevoked = cborWebToken2.extended(vaccinationQRCodeData: "2")
+        let sut: [ExtendedCBORWebToken] = [tokenRevoked, tokenNotRevoked]
+        
+        // WHEN
+        let tokens = sut.sortLatest()
+
+        // Then
+        XCTAssertEqual(tokens.count, 2)
+        XCTAssertEqual(tokens.first, tokenNotRevoked)
+        XCTAssertEqual(tokens.last, tokenRevoked)
+    }
+    
+    func test_invalid_have_least_priority() {
+        // Given
+        let cborWebToken = CBORWebToken.mockVaccinationCertificate
+        var tokenInvalid = cborWebToken.extended(vaccinationQRCodeData: "1")
+        tokenInvalid.invalid = true
+        let cborWebToken2 = CBORWebToken.mockVaccinationCertificate
+        let tokenNotInvalid = cborWebToken2.extended(vaccinationQRCodeData: "2")
+        let sut: [ExtendedCBORWebToken] = [tokenInvalid, tokenNotInvalid]
+        
+        // WHEN
+        let tokens = sut.sortLatest()
+
+        // Then
+        XCTAssertEqual(tokens.count, 2)
+        XCTAssertEqual(tokens.first, tokenNotInvalid)
+        XCTAssertEqual(tokens.last, tokenInvalid)
     }
     
     func testQualifiedCertificatesForVaccinationExpiryReissue_token_is_not_reissueable() {
@@ -762,18 +818,23 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
         vaccinationCborWebToken.exp = now
         let vaccinationToken = vaccinationCborWebToken.extended(vaccinationQRCodeData: "vaccinationToken")
 
-        let cborToken1 = CBORWebToken.mockRecoveryCertificate.mockRecovery(fr: now-2)
+        var cborToken1 = CBORWebToken.mockRecoveryCertificate.mockRecovery(fr: now-2)
+        cborToken1.exp = now-2
         var token1 = cborToken1.extended(vaccinationQRCodeData: "token1")
         token1.revoked = true
 
-        let cborToken2 = CBORWebToken.mockRecoveryCertificate.mockRecovery(fr: now-3)
+        var cborToken2 = CBORWebToken.mockRecoveryCertificate.mockRecovery(fr: now-3)
+        cborToken2.exp = now-3
         var token2 = cborToken2.extended(vaccinationQRCodeData: "token2")
         token2.invalid = true
 
-        let cborToken3 = CBORWebToken.mockTestCertificate.mockVaccinationSetDate(now-4)
+        var cborToken3 = CBORWebToken.mockTestCertificate
+            .mockVaccinationSetDate(now-4)
+        cborToken3.exp = now-4
         let token3 = cborToken3.extended(vaccinationQRCodeData: "token3")
 
-        let cborToken4 = CBORWebToken.mockVaccinationCertificate.mockVaccinationSetDate(now-5)
+        var cborToken4 = CBORWebToken.mockVaccinationCertificate.mockVaccinationSetDate(now-5)
+        cborToken4.exp = now-5
         let token4 = cborToken4.extended(vaccinationQRCodeData: "token4")
 
         let sut: [ExtendedCBORWebToken] = [
