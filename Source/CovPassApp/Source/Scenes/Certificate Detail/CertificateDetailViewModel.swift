@@ -61,6 +61,10 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
         selectedCertificate?.isInvalid ?? false
     }
 
+    private var selectedCertificatetIsRecovery: Bool {
+        selectedCertificate?.vaccinationCertificate.isRecovery ?? false
+    }
+
     private var selectedTokenIsGermanIssuer: Bool {
         selectedToken?.isGermanIssuer ?? false
     }
@@ -134,11 +138,8 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
                           DateUtils.displayDateFormatter.string(from: expireDate),
                           DateUtils.displayTimeFormatter.string(from: expireDate))
         }
-        if let r = selectedDgc?.r?.first {
-            if Date() < r.df {
-                return String(format: "recovery_certificate_overview_valid_from_title".localized, DateUtils.displayDateFormatter.string(from: r.df))
-            }
-            return String(format: "recovery_certificate_overview_valid_until_title".localized, DateUtils.displayDateFormatter.string(from: r.du))
+        if selectedCertificatetIsRecovery {
+            return "recovery_certificate_overview_valid_until_title".localized
         }
         if let t = selectedCertificate?.firstTest {
             if t.isPCR {
