@@ -14,13 +14,17 @@ class DCCCertLogicMock: DCCCertLogicProtocol {
     
     var shouldValueSetsBeUpdated: Bool = true
     var shouldRulesBeUpdated: Bool = true
+    var throwErrorOnUpdateRules: Bool = false
 
     func updateBoosterRulesIfNeeded() -> Promise<Void> {
         .value
     }
     
+    var didUpdateValueSets: (()->Void)?
+
     func updateValueSets() -> Promise<Void> {
-        .value
+        didUpdateValueSets?()
+        return Promise.value
     }
     
     func updateValueSetsIfNeeded() -> Promise<Void> {
@@ -40,7 +44,7 @@ class DCCCertLogicMock: DCCCertLogicProtocol {
     }
     
     func valueSetsShouldBeUpdated() -> Bool {
-        return shouldValueSetsBeUpdated
+        shouldValueSetsBeUpdated
     }
     
     var countries: [Country] {
@@ -76,7 +80,11 @@ class DCCCertLogicMock: DCCCertLogicProtocol {
     var didUpdateRules: (()->Void)?
 
     func updateRules() -> Promise<Void> {
-        didUpdateRules?()
-        return Promise.value
+        if throwErrorOnUpdateRules {
+            return .init(error: NSError(domain: "No Internet", code: NSURLErrorNotConnectedToInternet))
+        } else {
+            didUpdateRules?()
+            return Promise.value
+        }
     }
 }

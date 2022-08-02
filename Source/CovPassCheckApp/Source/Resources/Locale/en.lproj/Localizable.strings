@@ -158,6 +158,20 @@
 
 "validation_start_screen_offline_modus_button" = "Update";
 
+"start_offline_title" = "Check offline";
+
+"start_offline_status_available" = "Available";
+
+"start_offline_status_unavailable" = "Update required";
+
+"start_offline_copy" = "To be able to check reliably without an internet connection, the checking rules should have been updated less than 24 hours ago.";
+
+"start_offline_link_title" = "Update checking rules";
+
+"start_offline_link_subtitle_available" = "Last updated less than 24 hours ago";
+
+"start_offline_subtitle_unavailable" = "Last update older than 24 hours";
+
 
 /********** popup: Check vaccination **********/
 
@@ -431,9 +445,35 @@
 
 "accessibility_app_information_open_source_label_back" = "Back";
 
-"app_information_title_update" = "Update rule set";
+"app_information_title_update" = "Checking rules";
 
-"app_information_message_update" = "To verify scanned certificates, the app requires up-to-date lists of trusted certificate issuers as well as the current Corona rules in Germany.\n\nThese lists are updated automatically on a daily basis. You can also manually update them here at any time.";
+"settings_rules_list_title" = "Checking rules";
+
+"settings_rules_list_status_updated" = "Updated";
+
+"settings_rules_list_status_outofdate" = "Update required";
+
+"settings_rules_list_entry" = "Entry rules";
+
+"settings_rules_list_domestic" = "Domestic rules";
+
+"settings_rules_list_features" = "Rule features";
+
+"settings_rules_list_issuer" = "Certificate issuer";
+
+"settings_rules_list_countries" = "Country lists";
+
+"settings_rules_list_authorities" = "List of authorities";
+
+"settings_rules_list_loading_title" = "Lists are being updated…";
+
+"settings_rules_list_loading_size" = "%d / %d MB";
+
+"settings_rules_list_loading_cancel" = "Cancel";
+
+"app_information_message_update" = "To verify scanned certificates, the app requires up-to-date lists of trusted certificate issuers as well as the current Corona rules in Germany. These lists update automatically every day in online mode.";
+
+"app_information_rules_list_title" = "Rules";
 
 "app_information_message_update_note" = "Most recent update";
 

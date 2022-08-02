@@ -5,4 +5,4 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-protocol CheckSituationRouterProtocol { }
+public protocol CheckSituationRouterProtocol: DialogRouterProtocol { }

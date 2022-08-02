@@ -11,9 +11,7 @@ import XCTest
 import PromiseKit
 
 final class CertificateRevocationOfflineServiceMock: CertificateRevocationOfflineServiceProtocol {
-
     var lastSuccessfulUpdate: Date?
-    var shouldOfflineUpdate: Bool = false
     var state: CertificateRevocationServiceState = .idle
     let updateExpectation = XCTestExpectation(description: "updateExpectation")
     let resetExpectation = XCTestExpectation(description: "resetExpectation")
@@ -22,13 +20,13 @@ final class CertificateRevocationOfflineServiceMock: CertificateRevocationOfflin
         updateExpectation.fulfill()
         return .value
     }
-    
-    func updateNeeded() -> Bool {
-        shouldOfflineUpdate
-    }
 
     func reset() {
         resetExpectation.fulfill()
+    }
+    
+    func updateNeeded() -> Bool {
+        return false
     }
 
     func updateIfNeeded() {

@@ -19,15 +19,30 @@ class CheckSituationViewControllerSnapShotTests: BaseSnapShotTests {
 
     func configureSut(
         context: CheckSituationViewModelContextType = .onboarding,
-        selectedRule: DCCCertLogic.LogicType? = nil
+        selectedRule: DCCCertLogic.LogicType? = nil,
+        updateDate: Date? = nil,
+        shouldUpdate: Bool = true
     ) {
         var persistence = UserDefaultsPersistence()
         persistence.isCertificateRevocationOfflineServiceEnabled = true
+        if let date = updateDate {
+            persistence.lastUpdatedValueSets = date
+            persistence.lastUpdatedDCCRules = date
+            persistence.lastUpdatedTrustList = date
+        }
+        let vaccinationRepositoryMock = VaccinationRepositoryMock()
+        vaccinationRepositoryMock.shouldTrustListUpdate = shouldUpdate
+        let certLogicMock = DCCCertLogicMock()
+        certLogicMock.shouldRulesBeUpdated = shouldUpdate
+        certLogicMock.shouldValueSetsBeUpdated = shouldUpdate
         let viewModel = CheckSituationViewModel(
             context: context,
             userDefaults: persistence,
+            router: nil,
             resolver: nil,
-            offlineRevocationService: nil
+            offlineRevocationService: CertificateRevocationOfflineServiceMock(),
+            repository: vaccinationRepositoryMock,
+            certLogic: certLogicMock
         )
         if let selectedRule = selectedRule {
             viewModel.selectedRule = selectedRule
@@ -46,11 +61,11 @@ class CheckSituationViewControllerSnapShotTests: BaseSnapShotTests {
     
     func testDefaultSettings() {
         // Given
-        configureSut(context: .settings)
+        configureSut(context: .settings, updateDate: DateUtils.parseDate("2021-04-26T15:05:00"))
         UserDefaults.standard.set(nil, forKey: UserDefaults.keySelectedLogicType)
 
         // When & Then
-        verifyView(vc: sut)
+        verifyView(view: sut.view, height: 1200)
     }
     
     func testOnboardingDERulesSelected() {
@@ -71,17 +86,25 @@ class CheckSituationViewControllerSnapShotTests: BaseSnapShotTests {
     
     func testSettingsDERulesSelected() {
         // Given
-        configureSut(context: .settings, selectedRule: .de)
+        configureSut(context: .settings, selectedRule: .de, updateDate: DateUtils.parseDate("2021-04-26T15:05:00"))
 
         // When & Then
-        verifyView(vc: sut)
+        verifyView(view: sut.view, height: 1200)
     }
     
     func testSettingsEURulesSelected() {
         // Given
-        configureSut(context: .settings, selectedRule: .eu)
+        configureSut(context: .settings, selectedRule: .eu, updateDate: DateUtils.parseDate("2021-04-26T15:05:00"))
 
         // When & Then
-        verifyView(vc: sut)
+        verifyView(view: sut.view, height: 1200)
+    }
+    
+    func testSettingsUpdateNotAvailable() {
+        // Given
+        configureSut(context: .settings, selectedRule: .eu, updateDate: DateUtils.parseDate("2021-04-26T15:05:00"), shouldUpdate: false)
+
+        // When & Then
+        verifyView(view: sut.view, height: 1200)
     }
 }

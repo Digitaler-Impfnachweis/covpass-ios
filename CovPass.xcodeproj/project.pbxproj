@@ -31,6 +31,9 @@
 		0933177E273ABB2A0036DB2A /* ChooseCertificateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09331770273ABB2A0036DB2A /* ChooseCertificateViewController.xib */; };
 		0933177F273ABB2A0036DB2A /* ChooseCertificateRouterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09331772273ABB2A0036DB2A /* ChooseCertificateRouterProtocol.swift */; };
 		09331781273ABB2A0036DB2A /* ChooseCertificateViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09331774273ABB2A0036DB2A /* ChooseCertificateViewModelProtocol.swift */; };
+		0938F7DC2899147B001469C1 /* CheckSituationResolvableSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0938F7DB2899147B001469C1 /* CheckSituationResolvableSceneFactory.swift */; };
+		0938F7DE289914B5001469C1 /* CheckSituationResolvableSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0938F7DD289914B5001469C1 /* CheckSituationResolvableSceneFactory.swift */; };
+		0938F7E0289914CD001469C1 /* CertificateRevocationOfflineServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0938F7DF289914CD001469C1 /* CertificateRevocationOfflineServiceMock.swift */; };
 		0939EAB827043BD80086729C /* Kronos in Frameworks */ = {isa = PBXBuildFile; productRef = 0939EAB727043BD80086729C /* Kronos */; };
 		0944683B283D1D6500082BA2 /* CertificatesOverviewPersonViewControllerSnapShotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0944683A283D1D6500082BA2 /* CertificatesOverviewPersonViewControllerSnapShotTests.swift */; };
 		0944683D283D1D7100082BA2 /* CertificatesOverviewPersonViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0944683C283D1D7100082BA2 /* CertificatesOverviewPersonViewModelTests.swift */; };
@@ -135,13 +138,6 @@
 		09943E372892A242005B1184 /* TrustedListDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09943E242892A18D005B1184 /* TrustedListDetailsViewModel.swift */; };
 		09943E382892A242005B1184 /* TrustedListDetailsRouterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09943E252892A18D005B1184 /* TrustedListDetailsRouterProtocol.swift */; };
 		09943E392892A242005B1184 /* TrustedListDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09943E232892A18D005B1184 /* TrustedListDetailsViewController.swift */; };
-		09943E3C2892A45A005B1184 /* TrustListDownloadError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09943E3A2892A440005B1184 /* TrustListDownloadError.swift */; };
-		09943E432892A614005B1184 /* TrustedListDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09943E3E2892A614005B1184 /* TrustedListDetailsViewController.swift */; };
-		09943E442892A614005B1184 /* TrustedListDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09943E3F2892A614005B1184 /* TrustedListDetailsViewModel.swift */; };
-		09943E452892A614005B1184 /* TrustedListDetailsRouterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09943E402892A614005B1184 /* TrustedListDetailsRouterProtocol.swift */; };
-		09943E462892A614005B1184 /* TrustedListDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09943E422892A614005B1184 /* TrustedListDetailsViewController.xib */; };
-		09943E492892A676005B1184 /* TrustedListDetailsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09943E472892A676005B1184 /* TrustedListDetailsRouter.swift */; };
-		09943E4A2892A676005B1184 /* TrustedListDetailsSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09943E482892A676005B1184 /* TrustedListDetailsSceneFactory.swift */; };
 		09943E4D2892A7A0005B1184 /* TrustedListDetailsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09943E4C2892A7A0005B1184 /* TrustedListDetailsViewModelTests.swift */; };
 		09943E4F2892A7F1005B1184 /* ViewModelDelegateMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09943E4E2892A7F1005B1184 /* ViewModelDelegateMock.swift */; };
 		0994A4D02734319800B21FCF /* CertificatesOverviewSnapShotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0994A4CE2734319800B21FCF /* CertificatesOverviewSnapShotTests.swift */; };
@@ -149,7 +145,6 @@
 		0994A4D5273431A500B21FCF /* TestUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0994A4D2273431A500B21FCF /* TestUtil.swift */; };
 		0994A4D6273431A500B21FCF /* WebTokenMockUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0994A4D3273431A500B21FCF /* WebTokenMockUtil.swift */; };
 		0994A4D7273431A500B21FCF /* BoosterLogicMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0994A4D4273431A500B21FCF /* BoosterLogicMock.swift */; };
-		099E6905270DEEE7002C6926 /* TrustedListDetailsViewSnapShotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 099E6904270DEEE7002C6926 /* TrustedListDetailsViewSnapShotTests.swift */; };
 		09A27BCA270F3A2C000FE4F9 /* TestExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A27BC9270F3A2C000FE4F9 /* TestExtension.swift */; };
 		09ABDAC827FC3D7C0078EB11 /* ParseCertificateUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09ABDAC727FC3D7C0078EB11 /* ParseCertificateUseCase.swift */; };
 		09ABDACB27FC934B0078EB11 /* CertificateRevocationRepositoryMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09ABDAC927FC93440078EB11 /* CertificateRevocationRepositoryMock.swift */; };
@@ -201,7 +196,6 @@
 		09E85435279992DC0051AEEE /* AppInformationRouterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E85434279992DC0051AEEE /* AppInformationRouterMock.swift */; };
 		09E854372799932A0051AEEE /* AppInformationViewControllerSnapShotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E854362799932A0051AEEE /* AppInformationViewControllerSnapShotTests.swift */; };
 		09E8543A279993470051AEEE /* AppInformationRouterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E85439279993470051AEEE /* AppInformationRouterMock.swift */; };
-		09E909702892A9DA001C2CF0 /* TrustedListDetailsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E9096F2892A9DA001C2CF0 /* TrustedListDetailsViewModelTests.swift */; };
 		216D1F48264EF50300370F16 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 216D1F43264EF50300370F16 /* Localizable.strings */; };
 		216D1F49264EF50300370F16 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 216D1F46264EF50300370F16 /* Assets.xcassets */; };
 		216D1F87264EF6A800370F16 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 216D1F86264EF6A800370F16 /* LaunchScreen.storyboard */; };
@@ -535,6 +529,9 @@
 		09331770273ABB2A0036DB2A /* ChooseCertificateViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChooseCertificateViewController.xib; sourceTree = "<group>"; };
 		09331772273ABB2A0036DB2A /* ChooseCertificateRouterProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseCertificateRouterProtocol.swift; sourceTree = "<group>"; };
 		09331774273ABB2A0036DB2A /* ChooseCertificateViewModelProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseCertificateViewModelProtocol.swift; sourceTree = "<group>"; };
+		0938F7DB2899147B001469C1 /* CheckSituationResolvableSceneFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckSituationResolvableSceneFactory.swift; sourceTree = "<group>"; };
+		0938F7DD289914B5001469C1 /* CheckSituationResolvableSceneFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckSituationResolvableSceneFactory.swift; sourceTree = "<group>"; };
+		0938F7DF289914CD001469C1 /* CertificateRevocationOfflineServiceMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertificateRevocationOfflineServiceMock.swift; sourceTree = "<group>"; };
 		0944683A283D1D6500082BA2 /* CertificatesOverviewPersonViewControllerSnapShotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificatesOverviewPersonViewControllerSnapShotTests.swift; sourceTree = "<group>"; };
 		0944683C283D1D7100082BA2 /* CertificatesOverviewPersonViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificatesOverviewPersonViewModelTests.swift; sourceTree = "<group>"; };
 		0944683E283D1E3200082BA2 /* CertificatesOverviewPersonRouterMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificatesOverviewPersonRouterMock.swift; sourceTree = "<group>"; };
@@ -615,13 +612,6 @@
 		09943E242892A18D005B1184 /* TrustedListDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrustedListDetailsViewModel.swift; sourceTree = "<group>"; };
 		09943E252892A18D005B1184 /* TrustedListDetailsRouterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrustedListDetailsRouterProtocol.swift; sourceTree = "<group>"; };
 		09943E272892A18D005B1184 /* TrustedListDetailsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TrustedListDetailsViewController.xib; sourceTree = "<group>"; };
-		09943E3A2892A440005B1184 /* TrustListDownloadError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrustListDownloadError.swift; sourceTree = "<group>"; };
-		09943E3E2892A614005B1184 /* TrustedListDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrustedListDetailsViewController.swift; sourceTree = "<group>"; };
-		09943E3F2892A614005B1184 /* TrustedListDetailsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrustedListDetailsViewModel.swift; sourceTree = "<group>"; };
-		09943E402892A614005B1184 /* TrustedListDetailsRouterProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrustedListDetailsRouterProtocol.swift; sourceTree = "<group>"; };
-		09943E422892A614005B1184 /* TrustedListDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TrustedListDetailsViewController.xib; sourceTree = "<group>"; };
-		09943E472892A676005B1184 /* TrustedListDetailsRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrustedListDetailsRouter.swift; sourceTree = "<group>"; };
-		09943E482892A676005B1184 /* TrustedListDetailsSceneFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrustedListDetailsSceneFactory.swift; sourceTree = "<group>"; };
 		09943E4C2892A7A0005B1184 /* TrustedListDetailsViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrustedListDetailsViewModelTests.swift; sourceTree = "<group>"; };
 		09943E4E2892A7F1005B1184 /* ViewModelDelegateMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewModelDelegateMock.swift; sourceTree = "<group>"; };
 		0994A4CE2734319800B21FCF /* CertificatesOverviewSnapShotTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertificatesOverviewSnapShotTests.swift; sourceTree = "<group>"; };
@@ -629,7 +619,6 @@
 		0994A4D2273431A500B21FCF /* TestUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestUtil.swift; sourceTree = "<group>"; };
 		0994A4D3273431A500B21FCF /* WebTokenMockUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebTokenMockUtil.swift; sourceTree = "<group>"; };
 		0994A4D4273431A500B21FCF /* BoosterLogicMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoosterLogicMock.swift; sourceTree = "<group>"; };
-		099E6904270DEEE7002C6926 /* TrustedListDetailsViewSnapShotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrustedListDetailsViewSnapShotTests.swift; sourceTree = "<group>"; };
 		09A27BC9270F3A2C000FE4F9 /* TestExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestExtension.swift; sourceTree = "<group>"; };
 		09A4238F2850C73000438F82 /* ScanRouterMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanRouterMock.swift; sourceTree = "<group>"; };
 		09ABDAC727FC3D7C0078EB11 /* ParseCertificateUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseCertificateUseCase.swift; sourceTree = "<group>"; };
@@ -689,7 +678,6 @@
 		09E85434279992DC0051AEEE /* AppInformationRouterMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInformationRouterMock.swift; sourceTree = "<group>"; };
 		09E854362799932A0051AEEE /* AppInformationViewControllerSnapShotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInformationViewControllerSnapShotTests.swift; sourceTree = "<group>"; };
 		09E85439279993470051AEEE /* AppInformationRouterMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInformationRouterMock.swift; sourceTree = "<group>"; };
-		09E9096F2892A9DA001C2CF0 /* TrustedListDetailsViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrustedListDetailsViewModelTests.swift; sourceTree = "<group>"; };
 		210116F82646D18100B9E8FF /* debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = debug.xcconfig; sourceTree = "<group>"; };
 		2101178C2646E86F00B9E8FF /* debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = debug.xcconfig; sourceTree = "<group>"; };
 		212E757D264F0D09007C0F3A /* CovPassUI */ = {isa = PBXFileReference; lastKnownFileType = folder; path = CovPassUI; sourceTree = "<group>"; };
@@ -1025,7 +1013,6 @@
 			children = (
 				096EB4E527D76920005CE76F /* RevocationSettingsViewControllerSnapShotTests.swift */,
 				0904337D270EFEA50008267B /* BaseSnapShotTests.swift */,
-				099E6904270DEEE7002C6926 /* TrustedListDetailsViewSnapShotTests.swift */,
 				95A031E9273597880073FDD1 /* ValidationResultViewControllerSnapShotTests.swift */,
 				0969AB8A2785F45F00ECCA74 /* ValidatorOverviewSnapShotTests.swift */,
 				097A54462790D76C00FD6F28 /* GProofSnapShotTests.swift */,
@@ -1283,7 +1270,6 @@
 				09943E242892A18D005B1184 /* TrustedListDetailsViewModel.swift */,
 				09943E252892A18D005B1184 /* TrustedListDetailsRouterProtocol.swift */,
 				09943E262892A18D005B1184 /* Views */,
-				09943E282892A18D005B1184 /* Protocols */,
 			);
 			path = TrustedListDetails;
 			sourceTree = "<group>";
@@ -1292,35 +1278,6 @@
 			isa = PBXGroup;
 			children = (
 				09943E272892A18D005B1184 /* TrustedListDetailsViewController.xib */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		09943E282892A18D005B1184 /* Protocols */ = {
-			isa = PBXGroup;
-			children = (
-				09943E3A2892A440005B1184 /* TrustListDownloadError.swift */,
-			);
-			path = Protocols;
-			sourceTree = "<group>";
-		};
-		09943E3D2892A614005B1184 /* TrustedListDetails */ = {
-			isa = PBXGroup;
-			children = (
-				09943E472892A676005B1184 /* TrustedListDetailsRouter.swift */,
-				09943E482892A676005B1184 /* TrustedListDetailsSceneFactory.swift */,
-				09943E3E2892A614005B1184 /* TrustedListDetailsViewController.swift */,
-				09943E3F2892A614005B1184 /* TrustedListDetailsViewModel.swift */,
-				09943E402892A614005B1184 /* TrustedListDetailsRouterProtocol.swift */,
-				09943E412892A614005B1184 /* Views */,
-			);
-			path = TrustedListDetails;
-			sourceTree = "<group>";
-		};
-		09943E412892A614005B1184 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				09943E422892A614005B1184 /* TrustedListDetailsViewController.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1474,6 +1431,7 @@
 		09E854382799933F0051AEEE /* Mocks */ = {
 			isa = PBXGroup;
 			children = (
+				0938F7DF289914CD001469C1 /* CertificateRevocationOfflineServiceMock.swift */,
 				09E85439279993470051AEEE /* AppInformationRouterMock.swift */,
 				E7D1F0A32861E12700FA7465 /* CameraAccessProviderMock.swift */,
 				09ABDAC927FC93440078EB11 /* CertificateRevocationRepositoryMock.swift */,
@@ -1868,7 +1826,6 @@
 		21FBCA36264F011800CAEF44 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				09943E3D2892A614005B1184 /* TrustedListDetails */,
 				E7D806292890451900743DAE /* CheckSituation */,
 				21FBCA47264F011800CAEF44 /* App Information */,
 				0969AB8C2787AA8000ECCA74 /* GProof */,
@@ -2308,7 +2265,6 @@
 				09A27BC9270F3A2C000FE4F9 /* TestExtension.swift */,
 				95961E872703545200E577A4 /* ValidationResultFactoryTests.swift */,
 				092090DF27060FC30000713F /* ValidatorOverviewViewModelTests.swift */,
-				09E9096F2892A9DA001C2CF0 /* TrustedListDetailsViewModelTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -2812,6 +2768,7 @@
 		E7D806292890451900743DAE /* CheckSituation */ = {
 			isa = PBXGroup;
 			children = (
+				0938F7DD289914B5001469C1 /* CheckSituationResolvableSceneFactory.swift */,
 				E7D8062A2890455600743DAE /* CheckSituationSceneFactory.swift */,
 			);
 			path = CheckSituation;
@@ -2820,6 +2777,7 @@
 		E7D8062D28904AC700743DAE /* CheckSituation */ = {
 			isa = PBXGroup;
 			children = (
+				0938F7DB2899147B001469C1 /* CheckSituationResolvableSceneFactory.swift */,
 				E7D8062E28904AC700743DAE /* CheckSituationSceneFactory.swift */,
 			);
 			path = CheckSituation;
@@ -3053,7 +3011,6 @@
 				E7170772280088AE000B2E32 /* revocation-trust-key-release.pem in Resources */,
 				3823416A268A2A3900722A46 /* contact-covpasscheck-de.html in Resources */,
 				0969AB9A2787AB6B00ECCA74 /* GProofViewController.xib in Resources */,
-				09943E462892A614005B1184 /* TrustedListDetailsViewController.xib in Resources */,
 				3876382E26ADBFE500FBCA47 /* contact-covpasscheck-en.html in Resources */,
 				88BEE04226550E2500479E5E /* privacy-covpasscheck-de.html in Resources */,
 				E712855C27EC7FEF00006F9B /* revocation-trust-key-debug.pem in Resources */,
@@ -3183,7 +3140,6 @@
 				957454A6273D5889009B25B0 /* ValidationServiceFactory.swift in Sources */,
 				957454A4273D5889009B25B0 /* ValidationServiceViewController.swift in Sources */,
 				3882AEB7266FEBA3000354CD /* CertificateItemDetailViewModelProtocol.swift in Sources */,
-				09943E3C2892A45A005B1184 /* TrustListDownloadError.swift in Sources */,
 				957454A9273D58AE009B25B0 /* HintTableViewCell.swift in Sources */,
 				216D1FA7264EF74100370F16 /* WelcomeViewModel.swift in Sources */,
 				957454AB273E80BC009B25B0 /* SubTitleCell.swift in Sources */,
@@ -3245,6 +3201,7 @@
 				216D1FAF264EF74600370F16 /* PassOnboardingContainerViewModel.swift in Sources */,
 				E7B49CF9283D1A3900401C2E /* CertificateRevocationHTTPClient+Factory.swift in Sources */,
 				E7D8062F28904AC700743DAE /* CheckSituationSceneFactory.swift in Sources */,
+				0938F7DC2899147B001469C1 /* CheckSituationResolvableSceneFactory.swift in Sources */,
 				09C422A227F5BA5B00232036 /* CertificateRevocationRepository+Factory.swift in Sources */,
 				3520AA6C26B85AA900D22435 /* PDFExportViewModelProtocol.swift in Sources */,
 				95BB0D4827020EBE00885BA3 /* ScanPleaseSceneFactory.swift in Sources */,
@@ -3368,7 +3325,6 @@
 				096EB4D927D768D3005CE76F /* RevocationSettingsSceneFactory.swift in Sources */,
 				09AC1DF42757B423008356CD /* VaccinationResultViewModel.swift in Sources */,
 				E7D1F0862861B1C600FA7465 /* ValidationResultRouter.swift in Sources */,
-				09943E492892A676005B1184 /* TrustedListDetailsRouter.swift in Sources */,
 				096EB4DC27D768D3005CE76F /* RevocationSettingsViewModel.swift in Sources */,
 				E7CDDC8A2806C024006B5190 /* ValidationViewModelProtocol+Extension.swift in Sources */,
 				E76229F42816D9B400BF937C /* DataPrivacySceneFactory.swift in Sources */,
@@ -3390,7 +3346,6 @@
 				E745AF2227DA3F2500B3671E /* CoseSign1Message+Mock.swift in Sources */,
 				092699EF278C55A900331D77 /* GProofDifferentPersonViewController.swift in Sources */,
 				2181C1B2264F040500DE7412 /* ApiServiceFactory.swift in Sources */,
-				09943E442892A614005B1184 /* TrustedListDetailsViewModel.swift in Sources */,
 				0969AB9C2787ABAC00ECCA74 /* GProofSceneFactory.swift in Sources */,
 				2181C173264F037000DE7412 /* WelcomeRouter.swift in Sources */,
 				2181C163264F035500DE7412 /* ValidatorOverviewViewModel.swift in Sources */,
@@ -3400,15 +3355,12 @@
 				2181C1A4264F03BC00DE7412 /* ValidationOnboardingContainerViewModel.swift in Sources */,
 				E72A2DAA2897EA65002BFBBB /* CertificateRevocationWrapperRepository+Factory.swift in Sources */,
 				09AC1DF52757B423008356CD /* TestResultViewModel.swift in Sources */,
-				09943E4A2892A676005B1184 /* TrustedListDetailsSceneFactory.swift in Sources */,
 				E73453F2286DF4DE00ED7E00 /* CertificateRevocationFilesystemDataSource+Factory.swift in Sources */,
 				E79CF9EC27E8923C00C4619E /* URLSession+CertificateRevocation.swift in Sources */,
 				2181C174264F037000DE7412 /* WelcomeSceneFactory.swift in Sources */,
-				09943E432892A614005B1184 /* TrustedListDetailsViewController.swift in Sources */,
 				0991D92D27BBCDDB009C1CB2 /* CBORWebToken+GProofViewModel.swift in Sources */,
 				092699F5278C55CC00331D77 /* GProofDifferentPersonSceneFactory.swift in Sources */,
 				0969AB932787AB1B00ECCA74 /* GProofViewModel.swift in Sources */,
-				09943E452892A614005B1184 /* TrustedListDetailsRouterProtocol.swift in Sources */,
 				38FCEEC926EB9DD200D10A22 /* BoosterLogicFactory.swift in Sources */,
 				2181C183264F039500DE7412 /* AppInformationViewModel.swift in Sources */,
 				E735E0B3286608F90032025C /* ScanRouter.swift in Sources */,
@@ -3425,6 +3377,7 @@
 				2181C16D264F035D00DE7412 /* ValidatorOverviewRouterProtocol.swift in Sources */,
 				0991D92F27BBCE14009C1CB2 /* GProofValidationResult+GProofViewModel.swift in Sources */,
 				0969AB8F2787AAE500ECCA74 /* GProofRouterProtocol.swift in Sources */,
+				0938F7DE289914B5001469C1 /* CheckSituationResolvableSceneFactory.swift in Sources */,
 				3829A30C269CFF7F00B8346C /* DCCCertLogicExtension.swift in Sources */,
 				098E44D2282D869200411776 /* VaccinationExtension.swift in Sources */,
 				092699E4278BA14E00331D77 /* GProofRouter.swift in Sources */,
@@ -3456,7 +3409,6 @@
 				95961E892703550B00E577A4 /* ValidationResultFactoryTests.swift in Sources */,
 				E7CB54B927B5563E002FA55E /* AppInformationViewModelTests.swift in Sources */,
 				098E44D4282D88DA00411776 /* VaccinationExtensionTests.swift in Sources */,
-				09E909702892A9DA001C2CF0 /* TrustedListDetailsViewModelTests.swift in Sources */,
 				092090E027060FC30000713F /* ValidatorOverviewViewModelTests.swift in Sources */,
 				096EB4E427D7690F005CE76F /* RevocationSettingsMocks.swift in Sources */,
 				09E854372799932A0051AEEE /* AppInformationViewControllerSnapShotTests.swift in Sources */,
@@ -3484,10 +3436,10 @@
 				097A54472790D76C00FD6F28 /* GProofSnapShotTests.swift in Sources */,
 				0969AB8B2785F45F00ECCA74 /* ValidatorOverviewSnapShotTests.swift in Sources */,
 				E74044832890173400B53AE3 /* ResultViewModelDelegateMock.swift in Sources */,
-				099E6905270DEEE7002C6926 /* TrustedListDetailsViewSnapShotTests.swift in Sources */,
 				E740448C28902C9E00B53AE3 /* GProofDifferentPersonViewModelTests.swift in Sources */,
 				0957848C27A2D35B00E8206C /* ValidationResultMock.swift in Sources */,
 				E74E98CB2892F6A100F73632 /* CertificateRevocationWrapperRepositoryTests.swift in Sources */,
+				0938F7E0289914CD001469C1 /* CertificateRevocationOfflineServiceMock.swift in Sources */,
 				E76229F62816EADE00BF937C /* MockPersistence.swift in Sources */,
 				097A54492790E77E00FD6F28 /* GProofDifferentPersonViewControllerSnapshotTests.swift in Sources */,
 				E79CF9F027E8981100C4619E /* URLSession+CertificateRevocationTests.swift in Sources */,

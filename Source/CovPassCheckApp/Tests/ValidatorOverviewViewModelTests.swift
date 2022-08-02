@@ -141,38 +141,6 @@ class ValidatorOverviewViewModelTests: XCTestCase {
         self.waitForExpectations(timeout: 1.0, handler: nil)
     }
 
-    func testUpdateTitle_offlineMessageCertificates_and_offlineMessageRules_not_nil() {
-        // Given
-        let expectedTitle = Localizer.localized(
-            "validation_start_screen_offline_modus_note_update",
-            bundle: Bundle.main
-        )
-        prepareSut(
-            lastUpdateTrustList: .init(timeIntervalSinceReferenceDate: 0),
-            lastUpdateDccrRules: .init(timeIntervalSinceReferenceDate: 0)
-        )
-
-        // When
-        let title = sut.updateTitle
-
-        // Then
-        XCTAssertEqual(title, expectedTitle)
-    }
-
-    func testUpdateTitle_offlineMessageCertificates_and_offlineMessageRules_nil() throws {
-        // Given
-        let userDefaults = UserDefaultsPersistence()
-        try userDefaults.delete(UserDefaults.keyLastUpdatedDCCRules)
-        try userDefaults.delete(UserDefaults.keyLastUpdatedTrustList)
-        prepareSut()
-
-        // When
-        let title = sut.updateTitle
-
-        // Then
-        XCTAssertTrue(title.isEmpty)
-    }
-
     private func prepareSut(lastUpdateTrustList: Date? = nil, lastUpdateDccrRules: Date? = nil, appVersion: String? = nil) {
         let repository = VaccinationRepositoryMock()
         let certLogic = DCCCertLogicMock()
@@ -191,36 +159,6 @@ class ValidatorOverviewViewModelTests: XCTestCase {
             privacyFile: Constants.Keys.privacyFile,
             appVersion: appVersion
         )
-    }
-
-    func testUpdateTitle_offlineMessageCertificates_not_nil() {
-        // Given
-        let expectedTitle = Localizer.localized(
-            "validation_start_screen_offline_modus_note_update",
-            bundle: Bundle.main
-        )
-        prepareSut(lastUpdateTrustList: .init(timeIntervalSinceReferenceDate: 0))
-
-        // When
-        let title = sut.updateTitle
-
-        // Then
-        XCTAssertEqual(title, expectedTitle)
-    }
-
-    func testUpdateTitle_offlineMessageRules_not_nil() {
-        // Given
-        let expectedTitle = Localizer.localized(
-            "validation_start_screen_offline_modus_note_update",
-            bundle: Bundle.main
-        )
-        prepareSut(lastUpdateDccrRules: .init(timeIntervalSinceReferenceDate: 0))
-
-        // When
-        let title = sut.updateTitle
-
-        // Then
-        XCTAssertEqual(title, expectedTitle)
     }
 
     func testShowNotificationsIfNeeded_showDataPrivacy_never_shown_before() {

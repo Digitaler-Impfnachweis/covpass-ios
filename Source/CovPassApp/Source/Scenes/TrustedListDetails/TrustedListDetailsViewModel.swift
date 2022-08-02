@@ -15,17 +15,17 @@ private enum Constants {
     enum Keys {
         static let title = "app_information_title_update".localized
         static let offlineModusInformation = "app_information_message_update".localized
-        static let listTitle = "settings_rules_lists_title".localized
-        static let statusAvailable = "settings_rules_lists_status_available".localized
-        static let statusUnavailable = "settings_rules_lists_status_unavailable".localized
-        static let entryRulesTitle = "settings_rules_lists_entry".localized
-        static let domesticRulesTitle = "settings_rules_lists_domestic".localized
-        static let valueSetsTitle = "settings_rules_lists_features".localized
-        static let certificateProviderTitle = "settings_rules_lists_issuer".localized
-        static let countryListTitle = "settings_rules_lists_countries".localized
+        static let listTitle = "settings_rules_list_title".localized
+        static let statusAvailable = "settings_rules_list_status_updated".localized
+        static let statusUnavailable = "settings_rules_list_status_outofdate".localized
+        static let entryRulesTitle = "settings_rules_list_entry".localized
+        static let domesticRulesTitle = "settings_rules_list_domestic".localized
+        static let valueSetsTitle = "settings_rules_list_features".localized
+        static let certificateProviderTitle = "settings_rules_list_issuer".localized
+        static let countryListTitle = "settings_rules_list_countries".localized
         static let loadTitle = "app_information_message_update_button".localized
-        static let loadingTitle = "settings_rules_lists_loading_title".localized
-        static let cancelTitle = "settings_rules_lists_loading_cancel".localized
+        static let loadingTitle = "settings_rules_list_loading_title".localized
+        static let cancelTitle = "settings_rules_list_loading_cancel".localized
     }
     enum Accessibility {
         static let titleUpdate = "accessibility_app_information_title_update".localized
@@ -109,7 +109,7 @@ class TrustedListDetailsViewModel {
         }
         .catch({ error in
             switch (error as NSError).code {
-            case -1009:self.router?.showNoInternetErrorDialog(error)
+            case NSURLErrorNotConnectedToInternet:self.router?.showNoInternetErrorDialog(error)
             default: break
             }
         })

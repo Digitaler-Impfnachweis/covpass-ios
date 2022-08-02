@@ -1266,27 +1266,27 @@
 
 "app_information_message_update" = "Zur Überprüfung der Gültigkeit von Zertifikaten benötigt die App aktuelle Listen der vertrauenswürdigen Zertifikatsaussteller und der momentan geltenden Corona-Einreiseregeln in den entsprechenden Ländern.\n\nDiese Listen aktualisieren sich täglich automatisch. Sie können hier auch jederzeit eine manuelle Aktualisierung vornehmen.";
 
-"settings_rules_lists_title" = "Prüfregeln";
+"settings_rules_list_title" = "Prüfregeln";
 
-"settings_rules_lists_status_available" = "Aktuell";
+"settings_rules_list_status_updated" = "Aktualisiert";
 
-"settings_rules_lists_status_unavailable" = "Aktualisierung notwendig";
+"settings_rules_list_status_outofdate" = "Aktualisierung notwendig";
 
-"settings_rules_lists_entry" = "Einreiseregeln";
+"settings_rules_list_entry" = "Einreiseregeln";
 
-"settings_rules_lists_domestic" = "Inlandsregeln";
+"settings_rules_list_domestic" = "Inlandsregeln";
 
-"settings_rules_lists_features" = "Regelmerkmale";
+"settings_rules_list_features" = "Regelmerkmale";
 
-"settings_rules_lists_issuer" = "Zertifikatsaussteller";
+"settings_rules_list_issuer" = "Zertifikatsaussteller";
 
-"settings_rules_lists_countries" = "Länderlisten";
+"settings_rules_list_countries" = "Länderlisten";
 
-"settings_rules_lists_loading_title" = "Listen werden aktualisiert…";
+"settings_rules_list_loading_title" = "Listen werden aktualisiert…";
 
-"settings_rules_lists_loading_size" = "%d / %d MB";
+"settings_rules_list_loading_size" = "%d / %d MB";
 
-"settings_rules_lists_loading_cancel" = "Abbrechen";
+"settings_rules_list_loading_cancel" = "Abbrechen";
 
 "app_information_message_update_note" = "Letztes Update";
 

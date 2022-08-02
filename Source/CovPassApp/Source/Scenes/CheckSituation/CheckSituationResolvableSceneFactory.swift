@@ -10,32 +10,26 @@ import UIKit
 import CovPassCommon
 import CovPassUI
 
-public struct CheckSituationSceneFactory: SceneFactory {
+public struct CheckSituationResolvableSceneFactory: ResolvableSceneFactory {
     
     // MARK: - Lifecycle
     private let contextType: CheckSituationViewModelContextType
-    private let router: CheckSituationRouterProtocol
     private let userDefaults: Persistence
-
+    
     public init(contextType: CheckSituationViewModelContextType,
-                router: CheckSituationRouterProtocol,
                 userDefaults: Persistence) {
         self.userDefaults = userDefaults
-        self.router = router
         self.contextType = contextType
     }
     
     // MARK: - Methods
     
-    public func make() -> UIViewController {
-        guard let offlineRevocationService = CertificateRevocationOfflineService.shared else {
-            fatalError("CertificateRevocationOfflineService must not be nil.")
-        }
+    public func make(resolvable: Resolver<Void>) -> UIViewController {
         let viewModel = CheckSituationViewModel(context: contextType,
                                                 userDefaults: userDefaults,
-                                                router: router,
-                                                resolver: nil,
-                                                offlineRevocationService: offlineRevocationService,
+                                                router: nil,
+                                                resolver: resolvable,
+                                                offlineRevocationService: nil,
                                                 repository: VaccinationRepository.create(),
                                                 certLogic: DCCCertLogic.create())
         let viewController = CheckSituationViewController(viewModel: viewModel)

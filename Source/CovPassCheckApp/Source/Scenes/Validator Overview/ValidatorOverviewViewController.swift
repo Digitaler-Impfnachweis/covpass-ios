@@ -17,10 +17,18 @@ class ValidatorOverviewViewController: UIViewController {
 
     @IBOutlet var headerView: InfoHeaderView!
     @IBOutlet var scanCard: ScanCardView!
-    @IBOutlet var offlineCard: OfflineCardView!
     @IBOutlet var timeHintView: HintView!
     @IBOutlet var scanTypeSegment: UISegmentedControl!
     @IBOutlet var checkSituationLabel: UILabel!
+    @IBOutlet var offlineInformationView: UIView!
+    @IBOutlet var offlineInformationStateWrapperView: UIView!
+    @IBOutlet var offlineInformationTitleLabel: PlainLabel!
+    @IBOutlet var offlineInformationStateImageView: UIImageView!
+    @IBOutlet var offlineInformationStateTextLabel: PlainLabel!
+    @IBOutlet var offlineInformationDescriptionLabel: PlainLabel!
+    @IBOutlet var offlineInformationUpdateCellTitleLabel: PlainLabel!
+    @IBOutlet var offlineInformationUpdateCellSubtitleLabel: PlainLabel!
+    @IBOutlet var offlineInformationCellAccesoryImageView: UIImageView!
     
     // MARK: - Properties
 
@@ -43,6 +51,7 @@ class ValidatorOverviewViewController: UIViewController {
         setupHeaderView()
         setupCardView()
         setupSegmentControl()
+        setupOfflineInformationView()
         viewModel.showNotificationsIfNeeded()
     }
 
@@ -80,18 +89,7 @@ class ValidatorOverviewViewController: UIViewController {
     }
     
     private func setupCardView() {
-        setScanButtonLoadingState()
-        offlineCard.titleLabel.attributedText = "validation_start_screen_offline_modus_title".localized.styledAs(.header_2)
-        offlineCard.textLable.attributedText = "validation_start_screen_offline_modus_message".localized.styledAs(.body)
-        offlineCard.infoLabel.attributedText = viewModel.offlineTitle.styledAs(.body)
-        offlineCard.infoImageView.image = viewModel.offlineIcon
-
-        offlineCard.dateTitle.text = viewModel.updateTitle
-        offlineCard.certificatesDateLabel.attributedText = viewModel.offlineMessageCertificates?.styledAs(.body).colored(.onBackground70)
-        offlineCard.rulesDateLabel.attributedText = viewModel.offlineMessageRules?.styledAs(.body).colored(.onBackground70)
-
-        offlineCard.layoutMargins.bottom = .space_40
-        
+        setScanButtonLoadingState()        
         setupTimeHintView()
         setupCheckSituationView()
     }
@@ -133,6 +131,22 @@ class ValidatorOverviewViewController: UIViewController {
         checkSituationLabel.attributedText = viewModel.checkSituationText.styledAs(.body).aligned(to: .center)
     }
     
+    private func setupOfflineInformationView() {
+        offlineInformationView.layer.cornerRadius = 8
+        offlineInformationTitleLabel.attributedText = viewModel.offlineInformationTitle.styledAs(.header_3)
+        offlineInformationStateImageView.image = viewModel.offlineInformationStateIcon
+        offlineInformationStateWrapperView.backgroundColor = viewModel.offlineInformationStateBackgroundColor
+        offlineInformationStateWrapperView.layer.cornerRadius = 12
+        offlineInformationStateImageView.image = viewModel.offlineInformationStateIcon
+        offlineInformationStateTextLabel.attributedText  = viewModel.offlineInformationStateText.styledAs(.label).colored(viewModel.offlineInformationStateTextColor)
+        offlineInformationDescriptionLabel.attributedText = viewModel.offlineInformationDescription.styledAs(.body)
+        offlineInformationUpdateCellTitleLabel.attributedText = viewModel.offlineInformationUpdateCellTitle.styledAs(.header_3)
+        offlineInformationUpdateCellSubtitleLabel.attributedText = viewModel.offlineInformationUpdateCellSubtitle.styledAs(.body)
+        offlineInformationCellAccesoryImageView.image = viewModel.offlineInformationCellIcon
+    }
+    
+    // MARK: - Actions
+    
     @IBAction func segmentChanged(_ sender: UISegmentedControl) {
         switch ScanType(rawValue:sender.selectedSegmentIndex) {
         case ._3G:
@@ -147,11 +161,15 @@ class ValidatorOverviewViewController: UIViewController {
         }
     }
     
+    @IBAction func routeToUpdateTapped(_ sender: Any) {
+        viewModel.routeToRulesUpdate()
+    }
 }
 
 extension ValidatorOverviewViewController: ViewModelDelegate {
     func viewModelDidUpdate() {
         setupCardView()
+        setupOfflineInformationView()
     }
 
     func viewModelUpdateDidFailWithError(_: Error) {}

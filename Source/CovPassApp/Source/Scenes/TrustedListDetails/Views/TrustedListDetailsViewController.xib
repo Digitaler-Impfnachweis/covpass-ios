@@ -293,7 +293,7 @@
                                         </view>
                                         <view contentMode="scaleToFill" placeholderIntrinsicWidth="240" placeholderIntrinsicHeight="20" translatesAutoresizingMaskIntoConstraints="NO" id="nqU-kK-JqU" userLabel="LoadingIndicatorWrapper">
                                             <rect key="frame" x="87" y="76" width="240" height="20"/>
-                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </view>
                                         <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="20" translatesAutoresizingMaskIntoConstraints="NO" id="yep-it-64P" userLabel="Cancel Button" customClass="MainButton" customModule="CovPassUI">
                                             <rect key="frame" x="0.0" y="96" width="414" height="56"/>

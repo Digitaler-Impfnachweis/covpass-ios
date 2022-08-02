@@ -46,7 +46,6 @@ extension AppInformationBaseViewModel {
         public static let title = NSLocalizedString("app_information_title", comment: "")
         public static let description = NSLocalizedString("app_information_message", comment: "")
         public static let accessibilityStatementTitle = NSLocalizedString("app_information_title_accessibility_statement", comment: "")
-        public static let localRulesTitle = NSLocalizedString("app_information_title_local_rules", comment: "")
         public static let appVersion = String(format: "Version %@", Bundle.main.appVersion())
     }
 }

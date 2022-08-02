@@ -61,7 +61,7 @@ class CertificateRevocationOfflineServiceTests: XCTestCase {
     func testLastSuccessfulUpdate_update_success() {
         // Given
         let expectedLastSuccessfulUpdate = Date(timeIntervalSinceReferenceDate: 0)
-        sut.update()
+        sut.update().cauterize()
         wait(for: [persistence.storeExpectation], timeout: 1)
 
         // When
@@ -86,7 +86,7 @@ class CertificateRevocationOfflineServiceTests: XCTestCase {
         // Given
         remoteDataSource.getIndexListLastModifiedExpectation.isInverted = true
         localDataSource.kidListLastModifiedResponseDelay = 1.0
-        sut.update()
+        sut.update().cauterize()
         
         // When
         sut.reset()
@@ -104,10 +104,10 @@ class CertificateRevocationOfflineServiceTests: XCTestCase {
     func testUpdate_called_two_times() {
         // Given
         remoteDataSource.getKIDListExpectation.expectedFulfillmentCount = 1
-        sut.update()
+        sut.update().cauterize()
         
         // When
-        sut.update()
+        sut.update().cauterize()
 
         // Then
         XCTAssertEqual(sut.state, .updating)
@@ -123,7 +123,7 @@ class CertificateRevocationOfflineServiceTests: XCTestCase {
         let expectedLastSuccessfulUpdate = Date(timeIntervalSinceReferenceDate: 0)
 
         // When
-        sut.update()
+        sut.update().cauterize()
 
         // Then
         XCTAssertEqual(sut.state, .updating)
@@ -172,7 +172,7 @@ class CertificateRevocationOfflineServiceTests: XCTestCase {
         remoteDataSource.kidListResponse = nil
 
         // When
-        sut.update()
+        sut.update().cauterize()
 
         // Then
         wait(for: [localDataSource.putKIDListExpectation], timeout: 2)
@@ -184,7 +184,7 @@ class CertificateRevocationOfflineServiceTests: XCTestCase {
         remoteDataSource.getKIDListError = NSError(domain: "TEST", code: 0)
 
         // When
-        sut.update()
+        sut.update().cauterize()
 
         // Then
         wait(for: [localDataSource.putKIDListExpectation], timeout: 2)
@@ -197,7 +197,7 @@ class CertificateRevocationOfflineServiceTests: XCTestCase {
         localDataSource.putKIDListError = NSError(domain: "TEST", code: 0)
 
         // When
-        sut.update()
+        sut.update().cauterize()
 
         // Then
         wait(for: [localDataSource.getKIDListExpectation], timeout: 2)
@@ -213,7 +213,7 @@ class CertificateRevocationOfflineServiceTests: XCTestCase {
         localDataSource.putIndexListExpectation.expectedFulfillmentCount = expectedRequests
 
         // When
-        sut.update()
+        sut.update().cauterize()
 
         // Then
         wait(for: [
@@ -239,7 +239,7 @@ class CertificateRevocationOfflineServiceTests: XCTestCase {
         localDataSource.putIndexListExpectation.isInverted = true
 
         // When
-        sut.update()
+        sut.update().cauterize()
 
         // Then
         wait(for: [localDataSource.getChunkListLastModifiedExpectation], timeout: 2)
@@ -252,7 +252,7 @@ class CertificateRevocationOfflineServiceTests: XCTestCase {
         remoteDataSource.getIndexListError = NSError(domain: "TEST", code: 0)
 
         // When
-        sut.update()
+        sut.update().cauterize()
 
         // Then
         wait(for: [localDataSource.putIndexListExpectation], timeout: 2)
@@ -265,7 +265,7 @@ class CertificateRevocationOfflineServiceTests: XCTestCase {
         localDataSource.putIndexListError = NSError(domain: "TEST", code: 0)
 
         // When
-        sut.update()
+        sut.update().cauterize()
 
         // Then
         wait(for: [remoteDataSource.getChunkListExpectation], timeout: 2)
@@ -281,7 +281,7 @@ class CertificateRevocationOfflineServiceTests: XCTestCase {
         localDataSource.putChunkListExpectation.expectedFulfillmentCount = expectedRequests
 
         // When
-        sut.update()
+        sut.update().cauterize()
 
         // Then
         wait(for: [
@@ -306,7 +306,7 @@ class CertificateRevocationOfflineServiceTests: XCTestCase {
         localDataSource.putChunkListExpectation.isInverted = true
 
         // When
-        sut.update()
+        sut.update().cauterize()
 
         // Then
         wait(for: [localDataSource.putChunkListExpectation], timeout: 1)
@@ -318,7 +318,7 @@ class CertificateRevocationOfflineServiceTests: XCTestCase {
         remoteDataSource.getIndexListError = NSError(domain: "TEST", code: 0)
 
         // When
-        sut.update()
+        sut.update().cauterize()
 
         // Then
         wait(for: [localDataSource.putChunkListExpectation], timeout: 2)
@@ -331,7 +331,7 @@ class CertificateRevocationOfflineServiceTests: XCTestCase {
         localDataSource.putChunkListError = NSError(domain: "TEST", code: 0)
 
         // When
-        sut.update()
+        sut.update().cauterize()
 
         // Then
         wait(for: [persistence.storeExpectation], timeout: 2)
@@ -361,7 +361,7 @@ class CertificateRevocationOfflineServiceTests: XCTestCase {
         wait(for: [persistence.storeExpectation], timeout: 1)
         XCTAssertEqual(sut.lastSuccessfulUpdate, .init(timeIntervalSinceReferenceDate: 0))
     }
-
+    
     func testUpdateIfNeeded_update_24h_ago() {
         // Given
         persistence.certificateRevocationOfflineServiceLastUpdate = .init(timeIntervalSinceReferenceDate: 0)
@@ -375,5 +375,30 @@ class CertificateRevocationOfflineServiceTests: XCTestCase {
         // Then
         wait(for: [persistence.storeExpectation], timeout: 10)
         XCTAssertNotNil(sut.lastSuccessfulUpdate)
+    }
+    
+    func testUpdateNeeded_update_not_24h_ago() {
+        // Given
+        persistence.certificateRevocationOfflineServiceLastUpdate = .init(timeIntervalSinceReferenceDate: 0)
+        dateProvider.date = .init(timeIntervalSinceReferenceDate: 3600)
+
+        // When
+        let updateNeeded = sut.updateNeeded()
+
+        // Then
+        XCTAssertFalse(updateNeeded)
+    }
+    
+    func testUpdateNeeded_update_24h_ago() {
+        // Given
+        persistence.certificateRevocationOfflineServiceLastUpdate = .init(timeIntervalSinceReferenceDate: 0)
+        dateProvider.date = .init(timeIntervalSinceReferenceDate: 3600*25)
+        configureSut()
+
+        // When
+        let updateNeeded = sut.updateNeeded()
+
+        // Then
+        XCTAssertTrue(updateNeeded)
     }
 }

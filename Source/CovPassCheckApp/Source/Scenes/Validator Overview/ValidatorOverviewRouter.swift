@@ -98,6 +98,7 @@ class ValidatorOverviewRouter: ValidatorOverviewRouterProtocol {
     func showCheckSituation(userDefaults: Persistence) -> Promise<Void> {
         sceneCoordinator.present(
             CheckSituationResolvableSceneFactory(contextType: .onboarding,
+                                                 router: CheckSituationRouter(sceneCoordinator: sceneCoordinator),
                                                  userDefaults: userDefaults)
         )
     }
@@ -110,5 +111,11 @@ class ValidatorOverviewRouter: ValidatorOverviewRouterProtocol {
                 )
             )
         )
+    }
+    
+    func routeToRulesUpdate(userDefaults: Persistence) -> Promise<Void> {
+        sceneCoordinator.push(CheckSituationResolvableSceneFactory(contextType: .settings,
+                                                                   router: CheckSituationRouter(sceneCoordinator: sceneCoordinator),
+                                                                   userDefaults: userDefaults))
     }
 }

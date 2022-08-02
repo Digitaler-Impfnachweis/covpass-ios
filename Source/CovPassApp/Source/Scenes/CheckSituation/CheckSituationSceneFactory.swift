@@ -28,8 +28,11 @@ public struct CheckSituationSceneFactory: SceneFactory {
         let viewModel = CheckSituationViewModel(
             context: contextType,
             userDefaults: userDefaults,
+            router: nil,
             resolver: nil,
-            offlineRevocationService: nil
+            offlineRevocationService: nil,
+            repository: VaccinationRepository.create(),
+            certLogic: DCCCertLogic.create()
         )
         let viewController = CheckSituationViewController(viewModel: viewModel)
         return viewController

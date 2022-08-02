@@ -53,4 +53,8 @@ class ValidatorMockRouter: ValidatorOverviewRouterProtocol {
         showDataPrivacyExpectation.fulfill()
         return .value
     }
+    
+    func routeToRulesUpdate(userDefaults: Persistence) -> Promise<Void> {
+        .value
+    }
 }

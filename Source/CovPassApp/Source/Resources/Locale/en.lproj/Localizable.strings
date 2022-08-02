@@ -1266,27 +1266,27 @@
 
 "app_information_message_update" = "To check the validity of certificates, the app requires up-to-date lists of trusted certificate issuers as well as the current Covid-19 rules in the relevant travel countries.\n\nThese lists are updated automatically on a daily basis. You can also manually update them here at any time.";
 
-"settings_rules_lists_title" = "Checking rules";
+"settings_rules_list_title" = "Checking rules";
 
-"settings_rules_lists_status_available" = "Up to date";
+"settings_rules_list_status_updated" = "Updated";
 
-"settings_rules_lists_status_unavailable" = "Update required";
+"settings_rules_list_status_outofdate" = "Update required";
 
-"settings_rules_lists_entry" = "Entry rules";
+"settings_rules_list_entry" = "Entry rules";
 
-"settings_rules_lists_domestic" = "Domestic rules";
+"settings_rules_list_domestic" = "Domestic rules";
 
-"settings_rules_lists_features" = "Rule features";
+"settings_rules_list_features" = "Rule features";
 
-"settings_rules_lists_issuer" = "Certificate issuer";
+"settings_rules_list_issuer" = "Certificate issuer";
 
-"settings_rules_lists_countries" = "Country lists";
+"settings_rules_list_countries" = "Country lists";
 
-"settings_rules_lists_loading_title" = "Lists are being updated...";
+"settings_rules_list_loading_title" = "Lists are being updated…";
 
-"settings_rules_lists_loading_size" = "%d / %d MB";
+"settings_rules_list_loading_size" = "%d / %d MB";
 
-"settings_rules_lists_loading_cancel" = "Cancel";
+"settings_rules_list_loading_cancel" = "Cancel";
 
 "app_information_message_update_note" = "Most recent update";
 

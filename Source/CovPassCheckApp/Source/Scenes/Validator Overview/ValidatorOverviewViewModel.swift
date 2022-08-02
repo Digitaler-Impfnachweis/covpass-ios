@@ -16,6 +16,7 @@ import CertLogic
 
 private enum Constants {
     enum Keys {
+        static let title = "validation_start_screen_title".localized
         static let syncTitle = "validation_start_screen_scan_sync_message_title".localized
         static let syncMessage = "validation_start_screen_scan_sync_message_text".localized
         static let updateTitle = "validation_start_screen_offline_modus_note_update".localized
@@ -31,6 +32,15 @@ private enum Constants {
         }
         enum Toggle {
             static let validation_start_screen_scan_message_2G_toggle = "validation_start_screen_scan_message_2G_toggle".localized
+        }
+        enum OfflineInformation {
+            static let title = "start_offline_title".localized
+            static let status_unavailable = "start_offline_status_unavailable".localized
+            static let status_available = "start_offline_status_available".localized
+            static let copy = "start_offline_copy".localized
+            static let link_title = "start_offline_link_title".localized
+            static let subtitle_unavailable = "start_offline_subtitle_unavailable".localized
+            static let link_subtitle_available = "start_offline_link_subtitle_available".localized
         }
     }
     enum Config {
@@ -53,29 +63,7 @@ class ValidatorOverviewViewModel {
     
     var delegate: ViewModelDelegate?
     
-    var title: String { "validation_start_screen_title".localized }
-    
-    var offlineAvailable: Bool {
-        !vaccinationRepository.trustListShouldBeUpdated() || !certLogic.rulesShouldBeUpdated()
-    }
-    
-    var offlineIcon: UIImage {
-        offlineAvailable ? .validationCheckmark : .warning
-    }
-    
-    var offlineTitle: String {
-        offlineAvailable ? "validation_start_screen_offline_modus_note_latest_version".localized : "validation_start_screen_offline_modus_note_old_version".localized
-    }
-    
-    var offlineMessageCertificates: String? {
-        guard let date = userDefaults.lastUpdatedTrustList else { return nil }
-        return String(format: "validation_start_screen_offline_modus_certificates".localized, DateUtils.displayDateTimeFormatter.string(from: date))
-    }
-    
-    var offlineMessageRules: String? {
-        guard let date = userDefaults.lastUpdatedDCCRules else { return nil }
-        return String(format: "validation_start_screen_offline_modus_rules".localized, DateUtils.displayDateTimeFormatter.string(from: date))
-    }
+    var title: String { Constants.Keys.title }
     
     var timeHintTitle: String {
         Constants.Keys.syncTitle
@@ -125,6 +113,17 @@ class ValidatorOverviewViewModel {
         Constants.Keys.ScanType.validation_start_screen_scan_message_2G
     }
     
+    var offlineInformationTitle: String = Constants.Keys.OfflineInformation.title
+    var offlineInformationStateIcon: UIImage { shouldSomethingBeUpdated ? .warning : .check }
+    var offlineInformationStateTextColor: UIColor { shouldSomethingBeUpdated ? .neutralBlack : .neutralWhite }
+    var offlineInformationStateBackgroundColor: UIColor { shouldSomethingBeUpdated ? .warningAlternative : .resultGreen }
+    var offlineInformationStateText: String { shouldSomethingBeUpdated ? Constants.Keys.OfflineInformation.status_unavailable : Constants.Keys.OfflineInformation.status_available }
+    var offlineInformationDescription: String = Constants.Keys.OfflineInformation.copy
+    var offlineInformationUpdateCellTitle: String = Constants.Keys.OfflineInformation.link_title
+    var offlineInformationUpdateCellSubtitle: String { shouldSomethingBeUpdated ? Constants.Keys.OfflineInformation.subtitle_unavailable : Constants.Keys.OfflineInformation.link_subtitle_available }
+    var offlineInformationCellIcon: UIImage = .chevronRight
+    private var shouldSomethingBeUpdated: Bool { certLogic.rulesShouldBeUpdated() || certLogic.valueSetsShouldBeUpdated() || vaccinationRepository.trustListShouldBeUpdated() }
+    
     var checkSituationText: String {
         switch userDefaults.selectedLogicType {
         case .eu: return Constants.Keys.CheckSituation.euText
@@ -137,14 +136,6 @@ class ValidatorOverviewViewModel {
         Constants.Keys.Toggle.validation_start_screen_scan_message_2G_toggle
     }
 
-    var updateTitle: String {
-        showUpdateTitle ? Constants.Keys.updateTitle : ""
-    }  
-
-    private var showUpdateTitle: Bool {
-        offlineMessageCertificates != nil || offlineMessageRules != nil
-    }
-    
     var boosterAsTest = false
 
     private(set) var isLoadingScan = false {
@@ -263,7 +254,6 @@ class ValidatorOverviewViewModel {
         router.showAppInformation(userDefaults: userDefaults)
     }
     
-    
     func showNotificationsIfNeeded() {
         firstly {
             showCheckSituationIfNeeded()
@@ -300,6 +290,12 @@ class ValidatorOverviewViewModel {
         }
 
         return guarantee
+    }
+    
+    func routeToRulesUpdate() {
+        router.routeToRulesUpdate(userDefaults: userDefaults)
+            .done { self.delegate?.viewModelDidUpdate() }
+            .cauterize()
     }
     
     // MARK: Kronos Usage

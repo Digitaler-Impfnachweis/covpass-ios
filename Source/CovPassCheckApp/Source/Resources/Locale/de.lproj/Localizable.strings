@@ -158,6 +158,20 @@
 
 "validation_start_screen_offline_modus_button" = "Aktualisieren";
 
+"start_offline_title" = "Offline prüfen";
+
+"start_offline_status_available" = "Verfügbar";
+
+"start_offline_status_unavailable" = "Aktualisierung notwendig";
+
+"start_offline_copy" = " Um ohne Internetverbindung zuverlässig prüfen zu können, sollten die Prüfregeln vor weniger als 24 Stunden aktualisiert worden sein.";
+
+"start_offline_link_title" = "Prüfregeln aktualisieren";
+
+"start_offline_link_subtitle_available" = " Letzte Aktualisierung vor weniger als 24 Stunden";
+
+"start_offline_subtitle_unavailable" = " Letzte Aktualisierung älter als 24 Stunden";
+
 
 /********** popup: Check vaccination **********/
 
@@ -431,9 +445,35 @@
 
 "accessibility_app_information_open_source_label_back" = "Zurück";
 
-"app_information_title_update" = "Prüfregeln aktualisieren";
+"app_information_title_update" = "Prüfregeln";
 
-"app_information_message_update" = "Zur Überprüfung eingescannter Zertifikate benötigt die App aktuelle Listen der vertrauenswürdigen Zertifikatsaussteller und der momentan in Deutschland geltenden Corona-Regeln.\n\nDiese Listen aktualisieren sich täglich automatisch. Sie können hier auch jederzeit eine manuelle Aktualisierung vornehmen.";
+"settings_rules_list_title" = "Prüfregeln";
+
+"settings_rules_list_status_updated" = "Aktualisiert";
+
+"settings_rules_list_status_outofdate" = "Aktualisierung notwendig";
+
+"settings_rules_list_entry" = "Einreiseregeln";
+
+"settings_rules_list_domestic" = "Inlandsregeln";
+
+"settings_rules_list_features" = "Regelmerkmale";
+
+"settings_rules_list_issuer" = "Zertifikatsaussteller";
+
+"settings_rules_list_countries" = "Länderlisten";
+
+"settings_rules_list_authorities" = "Behördenlisten";
+
+"settings_rules_list_loading_title" = "Listen werden aktualisiert…";
+
+"settings_rules_list_loading_size" = "%d / %d MB";
+
+"settings_rules_list_loading_cancel" = "Abbrechen";
+
+"app_information_message_update" = "Zur Überprüfung eingescannter Zertifikate benötigt die App aktuelle Listen der vertrauenswürdigen Zertifikatsaussteller und der momentan in Deutschland geltenden Corona-Regeln. Diese Listen aktualisieren sich im Online-Modus täglich automatisch.";
+
+"app_information_rules_list_title" = "Regelwerk";
 
 "app_information_message_update_note" = "Letztes Update";
 

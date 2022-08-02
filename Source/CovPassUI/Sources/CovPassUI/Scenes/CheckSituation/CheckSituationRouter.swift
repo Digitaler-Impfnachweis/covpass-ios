@@ -5,4 +5,10 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-struct CheckSituationRouter: CheckSituationRouterProtocol { }
+public struct CheckSituationRouter: CheckSituationRouterProtocol, DialogRouterProtocol {
+    public var sceneCoordinator: SceneCoordinator
+    
+    public init(sceneCoordinator: SceneCoordinator) {
+        self.sceneCoordinator = sceneCoordinator
+    }
+}

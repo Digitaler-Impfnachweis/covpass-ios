@@ -152,7 +152,6 @@ class GermanAppInformationViewModelTests: XCTestCase {
             AppInformationBaseViewModel.Texts.openSourceLicenseTitle,
             AppInformationBaseViewModel.Texts.accessibilityStatementTitle,
             AppInformationBaseViewModel.Texts.appInformationTitle,
-            AppInformationBaseViewModel.Texts.localRulesTitle
         ]
         let sut = GermanAppInformationViewModel(
             router: AppInformationRouterMock(),
@@ -163,7 +162,7 @@ class GermanAppInformationViewModelTests: XCTestCase {
         let entries = sut.entries
 
         // Then
-        XCTAssertEqual(entries.count, 10)
+        XCTAssertEqual(entries.count, 9)
         for index in 0..<min(entries.count, expectedTitles.count) {
             XCTAssertEqual(entries[index].title, expectedTitles[index])
         }
@@ -181,7 +180,6 @@ class EnglishAppInformationViewModelTests: XCTestCase {
             AppInformationBaseViewModel.Texts.openSourceLicenseTitle,
             AppInformationBaseViewModel.Texts.accessibilityStatementTitle,
             AppInformationBaseViewModel.Texts.appInformationTitle,
-            AppInformationBaseViewModel.Texts.localRulesTitle
         ]
         let sut = EnglishAppInformationViewModel(
             router: AppInformationRouterMock(),
@@ -192,7 +190,7 @@ class EnglishAppInformationViewModelTests: XCTestCase {
         let entries = sut.entries
 
         // Then
-        XCTAssertEqual(entries.count, 9)
+        XCTAssertEqual(entries.count, 8)
         for index in 0..<min(entries.count, expectedTitles.count) {
             XCTAssertEqual(entries[index].title, expectedTitles[index])
         }

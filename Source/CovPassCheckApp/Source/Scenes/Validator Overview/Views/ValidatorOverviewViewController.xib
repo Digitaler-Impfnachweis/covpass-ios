@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -13,7 +14,15 @@
             <connections>
                 <outlet property="checkSituationLabel" destination="SaM-1L-4r5" id="E5L-q5-Rqe"/>
                 <outlet property="headerView" destination="zJo-A3-iFe" id="O25-eI-mKv"/>
-                <outlet property="offlineCard" destination="TTc-KS-yO5" id="UxL-Sz-hzu"/>
+                <outlet property="offlineInformationCellAccesoryImageView" destination="FCZ-LN-PMM" id="VWc-ok-W0R"/>
+                <outlet property="offlineInformationDescriptionLabel" destination="QBE-2c-tfc" id="p4R-AO-Y3f"/>
+                <outlet property="offlineInformationStateImageView" destination="auF-BT-vgS" id="kKu-6f-1Vq"/>
+                <outlet property="offlineInformationStateTextLabel" destination="Exb-FI-do8" id="aKN-8t-TsN"/>
+                <outlet property="offlineInformationStateWrapperView" destination="gDz-ma-muo" id="Q2J-ta-THC"/>
+                <outlet property="offlineInformationTitleLabel" destination="d41-bC-2Q2" id="gCI-LC-LKi"/>
+                <outlet property="offlineInformationUpdateCellSubtitleLabel" destination="9HZ-U9-dNS" id="ub9-gk-aap"/>
+                <outlet property="offlineInformationUpdateCellTitleLabel" destination="Mkl-Ob-tnN" id="mRu-XL-1Il"/>
+                <outlet property="offlineInformationView" destination="ZnB-jU-bzk" id="0W5-g1-brB"/>
                 <outlet property="scanCard" destination="0Le-DA-8MJ" id="hqR-DR-0ma"/>
                 <outlet property="scanTypeSegment" destination="7SU-cs-ahY" id="4Ef-mN-DXc"/>
                 <outlet property="timeHintView" destination="h6e-Af-Kqm" id="oa1-he-uRS"/>
@@ -34,10 +43,10 @@
                             <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LPz-bQ-P6F">
-                            <rect key="frame" x="0.0" y="100" width="414" height="887.5"/>
+                            <rect key="frame" x="0.0" y="100" width="414" height="1178.5"/>
                             <subviews>
-                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="UmP-gd-ynO">
-                                    <rect key="frame" x="24" y="12" width="366" height="875.5"/>
+                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="UmP-gd-ynO">
+                                    <rect key="frame" x="24" y="12" width="366" height="1166.5"/>
                                     <subviews>
                                         <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="7SU-cs-ahY">
                                             <rect key="frame" x="0.0" y="0.0" width="366" height="32"/>
@@ -49,6 +58,13 @@
                                                 <action selector="segmentChanged:" destination="-1" eventType="valueChanged" id="Wor-Je-s7E"/>
                                             </connections>
                                         </segmentedControl>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lPj-Yr-ZaZ" userLabel="spacer">
+                                            <rect key="frame" x="0.0" y="31" width="366" height="24"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="24" id="6lq-kQ-VBQ"/>
+                                            </constraints>
+                                        </view>
                                         <view contentMode="scaleToFill" placeholderIntrinsicWidth="366" placeholderIntrinsicHeight="350" translatesAutoresizingMaskIntoConstraints="NO" id="0Le-DA-8MJ" customClass="ScanCardView" customModule="CovPassUI">
                                             <rect key="frame" x="0.0" y="55" width="366" height="350"/>
                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -56,24 +72,174 @@
                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="350" id="wHQ-Hr-dqv"/>
                                             </constraints>
                                         </view>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ATD-xr-uIf" userLabel="spacer">
+                                            <rect key="frame" x="0.0" y="405" width="366" height="8"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="8" id="vhR-bo-5Se"/>
+                                            </constraints>
+                                        </view>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SaM-1L-4r5" userLabel="Check Situation Label">
-                                            <rect key="frame" x="0.0" y="429" width="366" height="20.5"/>
+                                            <rect key="frame" x="0.0" y="413" width="366" height="20.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nRU-ku-FZH" userLabel="spacer">
+                                            <rect key="frame" x="0.0" y="433.5" width="366" height="20"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="20" id="3C7-tO-Ibx"/>
+                                            </constraints>
+                                        </view>
                                         <view contentMode="scaleToFill" placeholderIntrinsicWidth="366" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="h6e-Af-Kqm" customClass="HintView" customModule="CovPassUI">
-                                            <rect key="frame" x="0.0" y="473.5" width="366" height="128"/>
+                                            <rect key="frame" x="0.0" y="453.5" width="366" height="128"/>
                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="128" id="mxR-kh-HLg"/>
                                             </constraints>
                                         </view>
-                                        <view contentMode="scaleToFill" placeholderIntrinsicWidth="366" placeholderIntrinsicHeight="250" translatesAutoresizingMaskIntoConstraints="NO" id="TTc-KS-yO5" customClass="OfflineCardView" customModule="CovPassUI">
-                                            <rect key="frame" x="0.0" y="625.5" width="366" height="250"/>
-                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oRM-tT-xQQ" userLabel="spacer">
+                                            <rect key="frame" x="0.0" y="581.5" width="366" height="20"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="250" id="IiP-04-gia"/>
+                                                <constraint firstAttribute="height" constant="20" id="QgE-R4-c51"/>
+                                            </constraints>
+                                        </view>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZnB-jU-bzk" userLabel="Offline Information View">
+                                            <rect key="frame" x="0.0" y="601.5" width="366" height="565"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="2yT-hW-9HN">
+                                                    <rect key="frame" x="0.0" y="16" width="366" height="533"/>
+                                                    <subviews>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="apX-yH-VR6">
+                                                            <rect key="frame" x="0.0" y="0.0" width="366" height="184"/>
+                                                            <subviews>
+                                                                <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bPh-CU-g0w">
+                                                                    <rect key="frame" x="24" y="0.0" width="318" height="184"/>
+                                                                    <subviews>
+                                                                        <view contentMode="scaleToFill" placeholderIntrinsicWidth="100" placeholderIntrinsicHeight="144" translatesAutoresizingMaskIntoConstraints="NO" id="d41-bC-2Q2" userLabel="title" customClass="PlainLabel" customModule="CovPassUI">
+                                                                            <rect key="frame" x="0.0" y="0.0" width="100" height="184"/>
+                                                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                        </view>
+                                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="abg-pD-TIZ" userLabel="spacer">
+                                                                            <rect key="frame" x="100" y="0.0" width="98" height="184"/>
+                                                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                            <gestureRecognizers/>
+                                                                        </view>
+                                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gDz-ma-muo">
+                                                                            <rect key="frame" x="198" y="0.0" width="120" height="184"/>
+                                                                            <subviews>
+                                                                                <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="FGP-Gn-RnR">
+                                                                                    <rect key="frame" x="4" y="4" width="104" height="176"/>
+                                                                                    <subviews>
+                                                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="auF-BT-vgS">
+                                                                                            <rect key="frame" x="0.0" y="80" width="16" height="16"/>
+                                                                                            <constraints>
+                                                                                                <constraint firstAttribute="width" constant="16" id="Pqn-iM-Bq5"/>
+                                                                                                <constraint firstAttribute="height" constant="16" id="bhe-1i-a21"/>
+                                                                                            </constraints>
+                                                                                        </imageView>
+                                                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Exb-FI-do8" userLabel="donwloadStateHintLabel" customClass="PlainLabel" customModule="CovPassUI">
+                                                                                            <rect key="frame" x="16" y="24" width="88" height="128"/>
+                                                                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                                        </view>
+                                                                                    </subviews>
+                                                                                </stackView>
+                                                                            </subviews>
+                                                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                            <constraints>
+                                                                                <constraint firstAttribute="trailing" secondItem="FGP-Gn-RnR" secondAttribute="trailing" constant="12" id="6Bv-WD-dSv"/>
+                                                                                <constraint firstItem="FGP-Gn-RnR" firstAttribute="leading" secondItem="gDz-ma-muo" secondAttribute="leading" constant="4" id="KM7-7n-cUW"/>
+                                                                                <constraint firstItem="FGP-Gn-RnR" firstAttribute="top" secondItem="gDz-ma-muo" secondAttribute="top" constant="4" id="Uxa-B7-Z4w"/>
+                                                                                <constraint firstAttribute="bottom" secondItem="FGP-Gn-RnR" secondAttribute="bottom" constant="4" id="yZR-5L-LXL"/>
+                                                                            </constraints>
+                                                                        </view>
+                                                                    </subviews>
+                                                                </stackView>
+                                                            </subviews>
+                                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="bottom" secondItem="bPh-CU-g0w" secondAttribute="bottom" id="625-8e-ujX"/>
+                                                                <constraint firstItem="bPh-CU-g0w" firstAttribute="top" secondItem="apX-yH-VR6" secondAttribute="top" id="JDG-5B-01h"/>
+                                                                <constraint firstAttribute="trailing" secondItem="bPh-CU-g0w" secondAttribute="trailing" constant="24" id="ed0-di-IJF"/>
+                                                                <constraint firstItem="bPh-CU-g0w" firstAttribute="leading" secondItem="apX-yH-VR6" secondAttribute="leading" constant="24" id="hCa-Zg-xe6"/>
+                                                            </constraints>
+                                                        </view>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qHi-XL-L29">
+                                                            <rect key="frame" x="0.0" y="198" width="366" height="66"/>
+                                                            <subviews>
+                                                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="366" placeholderIntrinsicHeight="21" translatesAutoresizingMaskIntoConstraints="NO" id="QBE-2c-tfc" userLabel="title" customClass="PlainLabel" customModule="CovPassUI">
+                                                                    <rect key="frame" x="24" y="0.0" width="318" height="66"/>
+                                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                </view>
+                                                            </subviews>
+                                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                            <constraints>
+                                                                <constraint firstItem="QBE-2c-tfc" firstAttribute="top" secondItem="qHi-XL-L29" secondAttribute="top" id="R4o-Db-Wcx"/>
+                                                                <constraint firstAttribute="bottom" secondItem="QBE-2c-tfc" secondAttribute="bottom" id="RdX-8h-JOf"/>
+                                                                <constraint firstItem="QBE-2c-tfc" firstAttribute="leading" secondItem="qHi-XL-L29" secondAttribute="leading" constant="24" id="Yqc-CX-IHq"/>
+                                                                <constraint firstAttribute="trailing" secondItem="QBE-2c-tfc" secondAttribute="trailing" constant="24" id="xSb-BG-BcC"/>
+                                                            </constraints>
+                                                        </view>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rx4-dY-y9R" userLabel="divider">
+                                                            <rect key="frame" x="0.0" y="278" width="366" height="1"/>
+                                                            <color key="backgroundColor" name="Divider"/>
+                                                            <gestureRecognizers/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="1" id="3KQ-8r-8Zy"/>
+                                                            </constraints>
+                                                        </view>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NlC-Yh-THb">
+                                                            <rect key="frame" x="0.0" y="293" width="366" height="240"/>
+                                                            <subviews>
+                                                                <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XMM-XU-HWz">
+                                                                    <rect key="frame" x="24" y="0.0" width="318" height="240"/>
+                                                                    <subviews>
+                                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="tQf-b6-yng">
+                                                                            <rect key="frame" x="0.0" y="0.0" width="294" height="240"/>
+                                                                            <subviews>
+                                                                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="366" placeholderIntrinsicHeight="179" translatesAutoresizingMaskIntoConstraints="NO" id="Mkl-Ob-tnN" userLabel="title" customClass="PlainLabel" customModule="CovPassUI">
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="294" height="219"/>
+                                                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                                </view>
+                                                                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="366" placeholderIntrinsicHeight="21" translatesAutoresizingMaskIntoConstraints="NO" id="9HZ-U9-dNS" userLabel="title" customClass="PlainLabel" customModule="CovPassUI">
+                                                                                    <rect key="frame" x="0.0" y="219" width="294" height="21"/>
+                                                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                                </view>
+                                                                            </subviews>
+                                                                        </stackView>
+                                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FCZ-LN-PMM">
+                                                                            <rect key="frame" x="294" y="0.0" width="24" height="240"/>
+                                                                            <constraints>
+                                                                                <constraint firstAttribute="width" constant="24" id="Dxe-wF-bEk"/>
+                                                                            </constraints>
+                                                                        </imageView>
+                                                                    </subviews>
+                                                                    <gestureRecognizers/>
+                                                                    <connections>
+                                                                        <outletCollection property="gestureRecognizers" destination="vuv-lZ-OTa" appends="YES" id="y35-na-zbl"/>
+                                                                    </connections>
+                                                                </stackView>
+                                                            </subviews>
+                                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="bottom" secondItem="XMM-XU-HWz" secondAttribute="bottom" id="12N-D2-0v1"/>
+                                                                <constraint firstItem="XMM-XU-HWz" firstAttribute="top" secondItem="NlC-Yh-THb" secondAttribute="top" id="XCz-B6-4zj"/>
+                                                                <constraint firstAttribute="trailing" secondItem="XMM-XU-HWz" secondAttribute="trailing" constant="24" id="XhR-2w-VKG"/>
+                                                                <constraint firstItem="XMM-XU-HWz" firstAttribute="leading" secondItem="NlC-Yh-THb" secondAttribute="leading" constant="24" id="jEW-zu-RAu"/>
+                                                            </constraints>
+                                                        </view>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                            <gestureRecognizers/>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="2yT-hW-9HN" secondAttribute="trailing" id="1Ga-Y4-Ndz"/>
+                                                <constraint firstItem="2yT-hW-9HN" firstAttribute="top" secondItem="ZnB-jU-bzk" secondAttribute="top" constant="16" id="gGx-Va-tdr"/>
+                                                <constraint firstItem="2yT-hW-9HN" firstAttribute="leading" secondItem="ZnB-jU-bzk" secondAttribute="leading" id="siZ-vU-Muh"/>
+                                                <constraint firstAttribute="bottom" secondItem="2yT-hW-9HN" secondAttribute="bottom" constant="16" id="wMi-6B-ZWa"/>
                                             </constraints>
                                         </view>
                                     </subviews>
@@ -113,13 +279,30 @@
             </constraints>
             <point key="canvasLocation" x="-52.173913043478265" y="10.714285714285714"/>
         </view>
+        <tapGestureRecognizer id="vuv-lZ-OTa">
+            <connections>
+                <action selector="routeToUpdateTapped:" destination="-1" id="xyi-FD-Irn"/>
+            </connections>
+        </tapGestureRecognizer>
     </objects>
     <designables>
         <designable name="0Le-DA-8MJ">
             <size key="intrinsicContentSize" width="366" height="350"/>
         </designable>
-        <designable name="TTc-KS-yO5">
-            <size key="intrinsicContentSize" width="366" height="250"/>
+        <designable name="9HZ-U9-dNS">
+            <size key="intrinsicContentSize" width="366" height="21"/>
+        </designable>
+        <designable name="Exb-FI-do8">
+            <size key="intrinsicContentSize" width="88" height="128"/>
+        </designable>
+        <designable name="Mkl-Ob-tnN">
+            <size key="intrinsicContentSize" width="366" height="179"/>
+        </designable>
+        <designable name="QBE-2c-tfc">
+            <size key="intrinsicContentSize" width="366" height="21"/>
+        </designable>
+        <designable name="d41-bC-2Q2">
+            <size key="intrinsicContentSize" width="100" height="144"/>
         </designable>
         <designable name="h6e-Af-Kqm">
             <size key="intrinsicContentSize" width="366" height="128"/>
@@ -129,6 +312,9 @@
         </designable>
     </designables>
     <resources>
+        <namedColor name="Divider">
+            <color red="0.89411764705882357" green="0.90980392156862744" blue="0.92549019607843142" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

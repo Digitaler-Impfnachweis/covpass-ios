@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum TrustListDownloadError: Error {
+public enum TrustListDownloadError: Error {
     /// The update process was cancelled.
     case cancelled
 }
