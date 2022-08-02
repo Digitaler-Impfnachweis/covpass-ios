@@ -54,7 +54,16 @@ class GProofViewModel: GProofViewModelProtocol {
             delegate?.viewModelDidUpdate()
         }
     }
-    var personStackIsHidden: Bool { firstIsFailedTechnicalReason || firstResult == nil }
+    var personStackIsHidden: Bool {
+        firstIsFailedTechnicalReason ||
+        firstResult == nil ||
+        secondResultIsInvalid
+    }
+
+    private var secondResultIsInvalid: Bool {
+        secondResult?.error != nil
+    }
+
     var buttonStartOver: String { Constants.Keys.result_2G_button_startover}
     var accessibilityResultAnnounce: String { Constants.Keys.accessibility_scan_result_announce_2G}
     var accessibilityResultAnnounceClose: String { Constants.Keys.accessibility_scan_result_closing_announce_2G}
@@ -294,7 +303,7 @@ class GProofViewModel: GProofViewModelProtocol {
                     secondToken?.vaccinationCertificate.isVaccination == false,
                     error as? ValidationResultError != .functional {
             secondResult = nil
-            router.showRecovery90DaysError(error: QRCodeError.qrCodeExists)
+            router.showError(error: QRCodeError.qrCodeExists)
         } else if doesSecondScanContaintOpenResults, firstToken?.firstVaccination?.fullImmunizationValidCheckApp ?? false {
             convertOpenResultOfSecondCertificate(to: .passed)
         } else if doesSecondScanContaintOpenResults, firstToken?.vaccinationCertificate.isVaccination == false {

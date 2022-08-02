@@ -904,7 +904,7 @@ class GProofViewModelTests: XCTestCase {
         XCTAssertEqual(sut.resultPersonFooter!, "Born on Jan 1, 1990")
         XCTAssertEqual(sut.resultPersonIcon, UIImage.iconCardInverse)
         
-        wait(for: [routerMock.recovery90DaysErrorShown], timeout: 1.0)
+        wait(for: [routerMock.showErrorExpectation], timeout: 1.0)
     }
     
     func testScanBasisImmunizationCertificateThanOpenCertificateFailingDueToRRDE0002() throws {
@@ -1399,5 +1399,20 @@ class GProofViewModelTests: XCTestCase {
 
         // Then
         XCTAssertFalse(counterInfo.isEmpty)
+    }
+
+    func testPersonStackIsHidden_second_certificate_has_error() {
+        // Given
+        sut.secondResult = .init(
+            token: nil,
+            error: NSError(domain: "TEST", code: 0),
+            result: nil
+        )
+
+        // When
+        let isHidden = sut.personStackIsHidden
+
+        // Then
+        XCTAssertTrue(isHidden)
     }
 }

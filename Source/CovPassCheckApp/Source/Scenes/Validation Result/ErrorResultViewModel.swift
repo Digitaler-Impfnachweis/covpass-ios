@@ -62,7 +62,7 @@ class ErrorResultViewModel: ValidationResultViewModel {
     var certificate: ExtendedCBORWebToken?
     var error: Error
     let revocationKeyFilename: String
-    let revocationRepository: CertificateRevocationRepositoryProtocol? = nil
+    let revocationRepository: CertificateRevocationRepositoryProtocol?
     let countdownTimerModel: CountdownTimerModel? = nil
     private var validationResultError: ValidationResultError {
         error as? ValidationResultError ?? .technical        
@@ -112,7 +112,10 @@ class ErrorResultViewModel: ValidationResultViewModel {
          error: Error,
          _2GContext: Bool,
          userDefaults: Persistence,
-         revocationKeyFilename: String) {
+         revocationKeyFilename: String,
+         revocationRepository: CertificateRevocationRepositoryProtocol
+    ) {
+        self.revocationRepository = revocationRepository
         self.resolvable = resolvable
         self.router = router
         self.repository = repository

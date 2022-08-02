@@ -22,7 +22,6 @@ protocol GProofRouterProtocol: DialogRouterProtocol, ValidationResultRouterProto
                          userDefaults: Persistence,
                          buttonHidden: Bool) -> Promise<ExtendedCBORWebToken>
     func showError(error: Error)
-    func showRecovery90DaysError(error: Error)
     func showDifferentPerson(firstResultCert: CBORWebToken,
                              scondResultCert: CBORWebToken) -> Promise<GProofResult>
 }

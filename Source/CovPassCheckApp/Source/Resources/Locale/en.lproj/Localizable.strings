@@ -370,12 +370,6 @@
 
 "error_2G_unexpected_type_button" = "OK";
 
-"error_2G_unexpected_type_old_recovery_title" = "Wrong certificate type";
-
-"error_2G_unexpected_type_old_recovery_copy" = "To meet the 2G+ requirements with a recovery older than 90 days, you need to scan a basic immunisation as a second proof.";
-
-"error_2G_unexpected_type_old_recovery_button" = "OK";
-
 "result_countdown" = "This view closes in %d seconds.";
 
 

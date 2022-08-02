@@ -19,18 +19,11 @@ struct ValidationResultFactory {
                                 error: Error?,
                                 _2GContext: Bool,
                                 userDefaults: Persistence) -> ValidationResultViewModel {
-        let revocationKeyFilename = XCConfiguration.certificationRevocationEncryptionKey
-        guard error == nil else {
-            return ErrorResultViewModel(resolvable: resolvable,
-                                        router: router,
-                                        repository: repository,
-                                        certificate: certificate,
-                                        error: error ?? ValidationResultError.technical,
-                                        _2GContext: _2GContext,
-                                        userDefaults: userDefaults,
-                                        revocationKeyFilename: revocationKeyFilename)
+        guard let revocationRepository = CertificateRevocationWrapperRepository() else {
+            fatalError("revocationRepository mut nor be nil.")
         }
-        guard let certificate = certificate else {
+        let revocationKeyFilename = XCConfiguration.certificationRevocationEncryptionKey
+        guard error == nil, let certificate = certificate else {
             return ErrorResultViewModel(resolvable: resolvable,
                                         router: router,
                                         repository: repository,
@@ -38,16 +31,14 @@ struct ValidationResultFactory {
                                         error: error ?? ValidationResultError.technical,
                                         _2GContext: _2GContext,
                                         userDefaults: userDefaults,
-                                        revocationKeyFilename: revocationKeyFilename)
+                                        revocationKeyFilename: revocationKeyFilename,
+                                        revocationRepository: revocationRepository)
         }
 
         let countdownTimerModel = CountdownTimerModel(
             dismissAfterSeconds: 120,
             countdownDuration: 60
         )
-        guard let revocationRepository = CertificateRevocationWrapperRepository() else {
-            fatalError("revocationRepository mut nor be nil.")
-        }
 
         if certificate.vaccinationCertificate.hcert.dgc.r?.isEmpty == false {
             return RecoveryResultViewModel(resolvable: resolvable,

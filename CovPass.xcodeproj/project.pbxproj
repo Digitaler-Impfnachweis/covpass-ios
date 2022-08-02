@@ -381,6 +381,7 @@
 		E715CB7228637DE600D07443 /* TestImportSelectionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E715CB7128637DE600D07443 /* TestImportSelectionItem.swift */; };
 		E7170772280088AE000B2E32 /* revocation-trust-key-release.pem in Resources */ = {isa = PBXBuildFile; fileRef = E7170771280088AE000B2E32 /* revocation-trust-key-release.pem */; };
 		E7170774280091A9000B2E32 /* revocation-trust-key-release.pem in Resources */ = {isa = PBXBuildFile; fileRef = E7170773280091A9000B2E32 /* revocation-trust-key-release.pem */; };
+		E72A2DAA2897EA65002BFBBB /* CertificateRevocationWrapperRepository+Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79CF9F127E8C2FA00C4619E /* CertificateRevocationWrapperRepository+Factory.swift */; };
 		E72A4C6028747F6B009F593A /* CoseSign1MessageConverter+FactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72A4C5F28747F6B009F593A /* CoseSign1MessageConverter+FactoryTests.swift */; };
 		E73453F2286DF4DE00ED7E00 /* CertificateRevocationFilesystemDataSource+Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73453F1286DF4DE00ED7E00 /* CertificateRevocationFilesystemDataSource+Factory.swift */; };
 		E735E0AE2865D7340032025C /* Test QR Codes.pdf in Resources */ = {isa = PBXBuildFile; fileRef = E735E0AD2865D7340032025C /* Test QR Codes.pdf */; };
@@ -422,7 +423,6 @@
 		E782BBA027D280CF00CC033A /* ExtendedCBORWekToken+Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E782BB9F27D280CF00CC033A /* ExtendedCBORWekToken+Mock.swift */; };
 		E79CF9EC27E8923C00C4619E /* URLSession+CertificateRevocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79CF9EB27E8923C00C4619E /* URLSession+CertificateRevocation.swift */; };
 		E79CF9F027E8981100C4619E /* URLSession+CertificateRevocationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79CF9EE27E8974800C4619E /* URLSession+CertificateRevocationTests.swift */; };
-		E79CF9F227E8C2FA00C4619E /* CertificateRevocationWrapperRepository+Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79CF9F127E8C2FA00C4619E /* CertificateRevocationWrapperRepository+Factory.swift */; };
 		E79CF9F627E8C6DB00C4619E /* CertificateRevocationWrapperRepository+FactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79CF9F327E8C5DB00C4619E /* CertificateRevocationWrapperRepository+FactoryTests.swift */; };
 		E7AD8C7527D11A2E00220E9F /* SVGPDFExporter+Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7AD8C7327D1197600220E9F /* SVGPDFExporter+Factory.swift */; };
 		E7B49CF3283CC51900401C2E /* CertificateRevocationOfflineService+Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B49CF2283CC51900401C2E /* CertificateRevocationOfflineService+Factory.swift */; };
@@ -3398,6 +3398,7 @@
 				092699EB278C505200331D77 /* GProofDifferentPersonViewModelProtocol.swift in Sources */,
 				09AC1DF22757B423008356CD /* ErrorResultViewModel.swift in Sources */,
 				2181C1A4264F03BC00DE7412 /* ValidationOnboardingContainerViewModel.swift in Sources */,
+				E72A2DAA2897EA65002BFBBB /* CertificateRevocationWrapperRepository+Factory.swift in Sources */,
 				09AC1DF52757B423008356CD /* TestResultViewModel.swift in Sources */,
 				09943E4A2892A676005B1184 /* TrustedListDetailsSceneFactory.swift in Sources */,
 				E73453F2286DF4DE00ED7E00 /* CertificateRevocationFilesystemDataSource+Factory.swift in Sources */,
@@ -3407,8 +3408,6 @@
 				0991D92D27BBCDDB009C1CB2 /* CBORWebToken+GProofViewModel.swift in Sources */,
 				092699F5278C55CC00331D77 /* GProofDifferentPersonSceneFactory.swift in Sources */,
 				0969AB932787AB1B00ECCA74 /* GProofViewModel.swift in Sources */,
-				E79CF9F227E8C2FA00C4619E /* CertificateRevocationWrapperRepository+Factory.swift in Sources */,
-				E79CF9F227E8C2FA00C4619E /* CertificateRevocationRepository+Factory.swift in Sources */,
 				09943E452892A614005B1184 /* TrustedListDetailsRouterProtocol.swift in Sources */,
 				38FCEEC926EB9DD200D10A22 /* BoosterLogicFactory.swift in Sources */,
 				2181C183264F039500DE7412 /* AppInformationViewModel.swift in Sources */,

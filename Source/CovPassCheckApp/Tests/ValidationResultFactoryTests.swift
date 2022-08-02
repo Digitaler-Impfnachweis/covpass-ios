@@ -56,6 +56,7 @@ class ValidationResultFactoryTests: XCTestCase {
         XCTAssertTrue(errorModel.error is ValidationResultError, "Wrong Type: should be ValidationResultError")
         let error = errorModel.error as! ValidationResultError
         XCTAssertTrue(error == expectedError, "Wrong Error")
+        XCTAssertNotNil(sut.revocationRepository)
     }
     
     func testValidationError_certificate_and_no_error() throws {
@@ -66,6 +67,7 @@ class ValidationResultFactoryTests: XCTestCase {
         XCTAssertTrue(errorModel.error is ValidationResultError, "Wrong Type: should be ValidationResultError")
         let error = try XCTUnwrap(errorModel.error as? ValidationResultError)
         XCTAssertTrue(error == expectedError, "Wrong Error")
+        XCTAssertNotNil(sut.revocationRepository)
     }
     
     func testValidationError_certificate_and_error() throws {
@@ -112,6 +114,7 @@ class ValidationResultFactoryTests: XCTestCase {
         let resultModel = try XCTUnwrap(sut as? RecoveryResultViewModel)
         XCTAssertTrue(resultModel.certificate == expectedCertificate)
         XCTAssertTrue(resultModel.certificate?.vaccinationCertificate != .mockVaccinationCertificate)
+        XCTAssertNotNil(sut.revocationRepository)
     }
     
     func testValidationError_certificate_and_TestResultViewModel() throws {
@@ -122,6 +125,20 @@ class ValidationResultFactoryTests: XCTestCase {
         XCTAssertTrue(sut is TestResultViewModel, "Wrong Type: should be TestResultViewModel")
         let resultModel = try XCTUnwrap(sut as? TestResultViewModel)
         XCTAssertTrue(resultModel.certificate == expectedCertificate)
+        XCTAssertNotNil(sut.revocationRepository)
+    }
+
+    func testCreateViewModel_vaccination() {
+        // When
+        let sut = viewModel(
+            certificate: CBORWebToken.mockVaccinationCertificate.extended(),
+            error: nil,
+            logicType: .de
+        )
+
+        // Then
+        XCTAssertTrue(sut is VaccinationResultViewModel)
+        XCTAssertNotNil(sut.revocationRepository)
     }
 }
 

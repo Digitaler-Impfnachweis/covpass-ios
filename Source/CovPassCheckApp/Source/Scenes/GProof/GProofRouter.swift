@@ -16,9 +16,6 @@ private enum Constants {
         static let error_2G_unexpected_type_title = "error_2G_unexpected_type_title".localized
         static let error_2G_unexpected_type_copy = "error_2G_unexpected_type_copy".localized
         static let error_2G_unexpected_type_button = "error_2G_unexpected_type_button".localized
-        static let error_2G_unexpected_type_old_recovery_title = "error_2G_unexpected_type_old_recovery_title".localized
-        static let error_2G_unexpected_type_old_recovery_button = "error_2G_unexpected_type_old_recovery_button".localized
-        static let error_2G_unexpected_type_old_recovery_copy = "error_2G_unexpected_type_old_recovery_copy".localized
     }
 }
 
@@ -77,20 +74,7 @@ class GProofRouter: GProofRouterProtocol {
                    ],
                    style: .alert)
     }
-    
-    func showRecovery90DaysError(error: Error) {
-        let copyString = Constants.Keys.error_2G_unexpected_type_old_recovery_copy
-        showDialog(title: Constants.Keys.error_2G_unexpected_type_old_recovery_title,
-                   message: error.displayCodeWithMessage(copyString),
-                   actions: [
-                    DialogAction(title: Constants.Keys.error_2G_unexpected_type_old_recovery_button,
-                                 style: UIAlertAction.Style.default,
-                                 isEnabled: true,
-                                 completion: nil)
-                   ],
-                   style: .alert)
-    }
-    
+
     func showDifferentPerson(firstResultCert: CBORWebToken,
                              scondResultCert: CBORWebToken) -> Promise<GProofResult> {
         sceneCoordinator.present(

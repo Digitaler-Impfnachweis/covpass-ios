@@ -46,7 +46,8 @@ class ValidationResultViewControllerSnapShotTests: BaseSnapShotTests {
                                       error: error,
                                       _2GContext: _2GContext,
                                       userDefaults: persistence,
-                                      revocationKeyFilename: "")
+                                      revocationKeyFilename: "",
+                                      revocationRepository: CertificateRevocationRepositoryMock())
         } else {
             guard let cborWebToken = cborWebToken else {
                 return UIView()

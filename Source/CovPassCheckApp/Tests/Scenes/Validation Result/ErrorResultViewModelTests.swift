@@ -23,7 +23,8 @@ class ErrorResultViewModelTests: XCTestCase {
             error: NSError(domain: "TEST", code: 0),
             _2GContext: false,
             userDefaults: MockPersistence(),
-            revocationKeyFilename: ""
+            revocationKeyFilename: "",
+            revocationRepository: CertificateRevocationRepositoryMock()
         )
     }
 
@@ -37,5 +38,13 @@ class ErrorResultViewModelTests: XCTestCase {
 
         // Then
         XCTAssertNil(countdownTimerModel)
+    }
+
+    func testRevocationRepository() {
+        // When
+        let respository = sut.revocationRepository
+
+        // Then
+        XCTAssertNotNil(respository)
     }
 }
