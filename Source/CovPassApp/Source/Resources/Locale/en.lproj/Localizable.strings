@@ -289,7 +289,7 @@
 
 "file_import_result_info_bullet1" = "Check whether there is a QR code in the selected file.";
 
-"file_import_result_info_bullet2" = "Note that no expired or revoked certificates can be imported.";
+"file_import_result_info_bullet2" = "Note that certificates cannot be imported if they are revoked, invalid or already stored in the app.";
 
 "file_import_result_info_bullet3" = "Take a screenshot of the QR code in question and import it again as a photo.";
 

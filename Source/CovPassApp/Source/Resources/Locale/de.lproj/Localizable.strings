@@ -289,7 +289,7 @@
 
 "file_import_result_info_bullet1" = "Prüfen Sie, ob in der ausgewählten Datei ein QR-Code vorhanden ist.";
 
-"file_import_result_info_bullet2" = "Beachten Sie, dass keine abgelaufenen oder gesperrten Zertifikate importiert werden können.";
+"file_import_result_info_bullet2" = "Beachten Sie, dass Zertifikate nicht importiert werden können, wenn sie gesperrt, ungültig oder bereits in der App hinterlegt sind.";
 
 "file_import_result_info_bullet3" = "Erstellen Sie einen Screenshot des betreffenden QR-Codes und importieren Sie ihn als Foto erneut.";
 
