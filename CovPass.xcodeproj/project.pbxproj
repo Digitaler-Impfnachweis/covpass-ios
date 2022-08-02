@@ -402,6 +402,16 @@
 		E745AF1C27DA3C7000B3671E /* RevocationInfoViewControllerSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E745AF1A27DA3B9500B3671E /* RevocationInfoViewControllerSnapshotTests.swift */; };
 		E745AF2227DA3F2500B3671E /* CoseSign1Message+Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E745AF2127DA3F2400B3671E /* CoseSign1Message+Mock.swift */; };
 		E746D97D28290CA5005C31BA /* RuleCheckDetailViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E746D97C28290CA5005C31BA /* RuleCheckDetailViewModelTests.swift */; };
+		E74C919328984377003FC588 /* CovPass.png in Resources */ = {isa = PBXBuildFile; fileRef = E74C919228984377003FC588 /* CovPass.png */; };
+		E74C919428984377003FC588 /* CovPass.png in Resources */ = {isa = PBXBuildFile; fileRef = E74C919228984377003FC588 /* CovPass.png */; };
+		E74C919528984377003FC588 /* CovPass.png in Resources */ = {isa = PBXBuildFile; fileRef = E74C919228984377003FC588 /* CovPass.png */; };
+		E74C919628984377003FC588 /* CovPass.png in Resources */ = {isa = PBXBuildFile; fileRef = E74C919228984377003FC588 /* CovPass.png */; };
+		E74C919A289843C5003FC588 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E74C9197289843C5003FC588 /* OpenSans-Bold.ttf */; };
+		E74C919C289843C5003FC588 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E74C9197289843C5003FC588 /* OpenSans-Bold.ttf */; };
+		E74C919E289843C5003FC588 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E74C9198289843C5003FC588 /* OpenSans-Regular.ttf */; };
+		E74C91A0289843C5003FC588 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E74C9198289843C5003FC588 /* OpenSans-Regular.ttf */; };
+		E74C91A2289843C5003FC588 /* OpenSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E74C9199289843C5003FC588 /* OpenSans-SemiBold.ttf */; };
+		E74C91A4289843C5003FC588 /* OpenSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E74C9199289843C5003FC588 /* OpenSans-SemiBold.ttf */; };
 		E74D4C7A2810384200EF5D6F /* CertificateDetailRouterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74D4C792810384200EF5D6F /* CertificateDetailRouterMock.swift */; };
 		E74E98C72892DEDC00F73632 /* CertificateRevocationWrapperRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74E98C62892DEDC00F73632 /* CertificateRevocationWrapperRepository.swift */; };
 		E74E98CB2892F6A100F73632 /* CertificateRevocationWrapperRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74E98CA2892F6A100F73632 /* CertificateRevocationWrapperRepositoryTests.swift */; };
@@ -511,7 +521,6 @@
 /* Begin PBXFileReference section */
 		0904337D270EFEA50008267B /* BaseSnapShotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseSnapShotTests.swift; sourceTree = "<group>"; };
 		091DE728284F97BF00EB99FC /* ScanViewControllerSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanViewControllerSnapshotTests.swift; sourceTree = "<group>"; };
-		091DE72A284F989600EB99FC /* CameraAccessProviderMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraAccessProviderMock.swift; sourceTree = "<group>"; };
 		092090DF27060FC30000713F /* ValidatorOverviewViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatorOverviewViewModelTests.swift; sourceTree = "<group>"; };
 		092699E3278BA14E00331D77 /* GProofRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GProofRouter.swift; sourceTree = "<group>"; };
 		092699E8278C503D00331D77 /* GProofDifferentPersonRouterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GProofDifferentPersonRouterProtocol.swift; sourceTree = "<group>"; };
@@ -620,7 +629,6 @@
 		0994A4D3273431A500B21FCF /* WebTokenMockUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebTokenMockUtil.swift; sourceTree = "<group>"; };
 		0994A4D4273431A500B21FCF /* BoosterLogicMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoosterLogicMock.swift; sourceTree = "<group>"; };
 		09A27BC9270F3A2C000FE4F9 /* TestExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestExtension.swift; sourceTree = "<group>"; };
-		09A4238F2850C73000438F82 /* ScanRouterMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanRouterMock.swift; sourceTree = "<group>"; };
 		09ABDAC727FC3D7C0078EB11 /* ParseCertificateUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseCertificateUseCase.swift; sourceTree = "<group>"; };
 		09ABDAC927FC93440078EB11 /* CertificateRevocationRepositoryMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertificateRevocationRepositoryMock.swift; sourceTree = "<group>"; };
 		09AC1DE82757ADAA008356CD /* ValidationResultSceneFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationResultSceneFactory.swift; sourceTree = "<group>"; };
@@ -916,6 +924,10 @@
 		E745AF1A27DA3B9500B3671E /* RevocationInfoViewControllerSnapshotTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RevocationInfoViewControllerSnapshotTests.swift; sourceTree = "<group>"; };
 		E745AF2127DA3F2400B3671E /* CoseSign1Message+Mock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CoseSign1Message+Mock.swift"; sourceTree = "<group>"; };
 		E746D97C28290CA5005C31BA /* RuleCheckDetailViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleCheckDetailViewModelTests.swift; sourceTree = "<group>"; };
+		E74C919228984377003FC588 /* CovPass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CovPass.png; sourceTree = "<group>"; };
+		E74C9197289843C5003FC588 /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Bold.ttf"; sourceTree = "<group>"; };
+		E74C9198289843C5003FC588 /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
+		E74C9199289843C5003FC588 /* OpenSans-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-SemiBold.ttf"; sourceTree = "<group>"; };
 		E74D4C792810384200EF5D6F /* CertificateDetailRouterMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateDetailRouterMock.swift; sourceTree = "<group>"; };
 		E74E98C62892DEDC00F73632 /* CertificateRevocationWrapperRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateRevocationWrapperRepository.swift; sourceTree = "<group>"; };
 		E74E98CA2892F6A100F73632 /* CertificateRevocationWrapperRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateRevocationWrapperRepositoryTests.swift; sourceTree = "<group>"; };
@@ -2150,9 +2162,9 @@
 			isa = PBXGroup;
 			children = (
 				216D2049264EFD1700370F16 /* Source */,
-				65D6D47325F7A634000CB339 /* Products */,
 				65D6D4B625F7A6E2000CB339 /* Frameworks */,
-				E738564C2864613B0070C1B0 /* Recovered References */,
+				65D6D47325F7A634000CB339 /* Products */,
+				E74C919128984377003FC588 /* Resources */,
 			);
 			sourceTree = "<group>";
 		};
@@ -2470,15 +2482,6 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		E738564C2864613B0070C1B0 /* Recovered References */ = {
-			isa = PBXGroup;
-			children = (
-				09A4238F2850C73000438F82 /* ScanRouterMock.swift */,
-				091DE72A284F989600EB99FC /* CameraAccessProviderMock.swift */,
-			);
-			name = "Recovered References";
-			sourceTree = "<group>";
-		};
 		E73856602864CD120070C1B0 /* Success */ = {
 			isa = PBXGroup;
 			children = (
@@ -2563,6 +2566,17 @@
 				E7B76641286B47C3003CAEB4 /* RuleCheckDetailViewControllerTests.swift */,
 			);
 			path = RuleCheckDetail;
+			sourceTree = "<group>";
+		};
+		E74C919128984377003FC588 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				E74C9197289843C5003FC588 /* OpenSans-Bold.ttf */,
+				E74C9198289843C5003FC588 /* OpenSans-Regular.ttf */,
+				E74C9199289843C5003FC588 /* OpenSans-SemiBold.ttf */,
+				E74C919228984377003FC588 /* CovPass.png */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		E74D4C782810382200EF5D6F /* Mocks */ = {
@@ -2959,6 +2973,7 @@
 				0983F5F728378E7C0020DBF0 /* CertificatesOverviewPersonViewController.xib in Resources */,
 				3876382826ADBED100FBCA47 /* contact-covpass-en.html in Resources */,
 				950629EA2746D35300138EBE /* ConsentExchangeViewController.xib in Resources */,
+				E74C919328984377003FC588 /* CovPass.png in Resources */,
 				3865B76D26DFE4C90053D1D3 /* AnnouncementViewController.xib in Resources */,
 				381EA91F26D8FD5C0014F2A5 /* privacy-covpass-de.html in Resources */,
 				385FC192269EB6AE00D19AF8 /* CountrySelectionViewController.xib in Resources */,
@@ -2968,7 +2983,10 @@
 				216D1FE0264EF76800370F16 /* CertificateDetailViewController.xib in Resources */,
 				216D1F49264EF50300370F16 /* Assets.xcassets in Resources */,
 				38E3625D269B712900DE6D4C /* RuleCheckViewController.xib in Resources */,
+				E74C919A289843C5003FC588 /* OpenSans-Bold.ttf in Resources */,
 				3882AEC226700BB3000354CD /* CertificateItemDetailViewController.xib in Resources */,
+				E74C91A2289843C5003FC588 /* OpenSans-SemiBold.ttf in Resources */,
+				E74C919E289843C5003FC588 /* OpenSans-Regular.ttf in Resources */,
 				216D1FF6264EF77600370F16 /* HowToScanViewController.xib in Resources */,
 				65E0DB0C2657F31C004C660F /* CertificateViewController.xib in Resources */,
 				096897AA27C3E3C1009E2886 /* ReissueResultViewController.xib in Resources */,
@@ -2997,6 +3015,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E735E0AE2865D7340032025C /* Test QR Codes.pdf in Resources */,
+				E74C919428984377003FC588 /* CovPass.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3007,6 +3026,7 @@
 				096EB4DE27D768D3005CE76F /* RevocationSettingsViewController.xib in Resources */,
 				092699ED278C55A200331D77 /* GProofDifferentPersonViewController.xib in Resources */,
 				2181C179264F037400DE7412 /* WelcomeViewController.xib in Resources */,
+				E74C919C289843C5003FC588 /* OpenSans-Bold.ttf in Resources */,
 				3876382F26ADBFEC00FBCA47 /* privacy-covpasscheck-en.html in Resources */,
 				E7170772280088AE000B2E32 /* revocation-trust-key-release.pem in Resources */,
 				3823416A268A2A3900722A46 /* contact-covpasscheck-de.html in Resources */,
@@ -3016,7 +3036,10 @@
 				E712855C27EC7FEF00006F9B /* revocation-trust-key-debug.pem in Resources */,
 				2181C1BD264F053000DE7412 /* Localizable.strings in Resources */,
 				2181C168264F035A00DE7412 /* ValidatorOverviewViewController.xib in Resources */,
+				E74C919528984377003FC588 /* CovPass.png in Resources */,
 				21FBCA79264F016E00CAEF44 /* LaunchScreen.storyboard in Resources */,
+				E74C91A4289843C5003FC588 /* OpenSans-SemiBold.ttf in Resources */,
+				E74C91A0289843C5003FC588 /* OpenSans-Regular.ttf in Resources */,
 				6507D7ED25FB5E0300D69F94 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3025,6 +3048,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E74C919628984377003FC588 /* CovPass.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3361,6 +3385,9 @@
 				0991D92D27BBCDDB009C1CB2 /* CBORWebToken+GProofViewModel.swift in Sources */,
 				092699F5278C55CC00331D77 /* GProofDifferentPersonSceneFactory.swift in Sources */,
 				0969AB932787AB1B00ECCA74 /* GProofViewModel.swift in Sources */,
+				E79CF9F227E8C2FA00C4619E /* CertificateRevocationWrapperRepository+Factory.swift in Sources */,
+				E79CF9F227E8C2FA00C4619E /* CertificateRevocationWrapperRepository+Factory.swift in Sources */,
+				09943E452892A614005B1184 /* TrustedListDetailsRouterProtocol.swift in Sources */,
 				38FCEEC926EB9DD200D10A22 /* BoosterLogicFactory.swift in Sources */,
 				2181C183264F039500DE7412 /* AppInformationViewModel.swift in Sources */,
 				E735E0B3286608F90032025C /* ScanRouter.swift in Sources */,
