@@ -147,6 +147,40 @@ class CertificateCardViewModelTests: XCTestCase {
         XCTAssertNotNil(qrCode)
     }
 
+    func testQRCode_token_is_invalid() {
+        // Given
+        let cborWebToken = CBORWebToken.mockVaccinationCertificate
+        var token = ExtendedCBORWebToken(
+            vaccinationCertificate: cborWebToken,
+            vaccinationQRCodeData: "XYZ"
+        )
+        token.invalid = true
+        let sut = sut(token: token)
+
+        // When
+        let qrCode = sut.qrCode
+
+        // Then
+        XCTAssertNotNil(qrCode)
+    }
+
+    func testQRCode_token_is_expired() {
+        // Given
+        var cborWebToken = CBORWebToken.mockVaccinationCertificate
+        cborWebToken.exp = .distantPast
+        let token = ExtendedCBORWebToken(
+            vaccinationCertificate: cborWebToken,
+            vaccinationQRCodeData: "XYZ"
+        )
+        let sut = sut(token: token)
+
+        // When
+        let qrCode = sut.qrCode
+
+        // Then
+        XCTAssertNotNil(qrCode)
+    }
+
     func testTitle_vaccination_1_of_2() throws {
         // Given
         let token = try ExtendedCBORWebToken.token1Of2()

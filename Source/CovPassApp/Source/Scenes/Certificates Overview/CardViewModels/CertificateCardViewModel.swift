@@ -172,7 +172,7 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
     var showAction: Bool = false
 
     lazy var qrCode: UIImage? = {
-        let code = isRevoked ? "" : token.vaccinationQRCodeData
+        let code = isInvalid ? "" : token.vaccinationQRCodeData
         return code.generateQRCode()
     }()
 
