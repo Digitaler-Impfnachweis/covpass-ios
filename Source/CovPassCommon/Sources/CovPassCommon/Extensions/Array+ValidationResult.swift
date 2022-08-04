@@ -16,6 +16,10 @@ public extension Array where Element == ValidationResult {
         filter { $0.result == .open }
     }
 
+    var filterAcceptanceRules: Self {
+        return filter { $0.rule?.ruleType == .acceptence }
+    }
+    
     func result(ofRule identifier: String) -> Result? {
         return validationResult(ofRule: identifier)?.result
     }

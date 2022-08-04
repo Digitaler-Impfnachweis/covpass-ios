@@ -93,4 +93,17 @@ class ArrayValidationResultTests: XCTestCase {
         // THEN
         XCTAssertEqual(rule.identifier, fetechedResult?.rule?.identifier)
     }
+    
+    func testfilteringOfAcceptanceRules() {
+        // GIVEN
+        let rule = Rule(identifier: "FOO", type: "Acceptance", version: "", schemaVersion: "", engine: "", engineVersion: "", certificateType: "", description: [], validFrom: "", validTo: "", affectedString: [], logic: JSON(""), countryCode: "DE")
+        let rule2 = Rule(identifier: "Bar", type: "Invalidation", version: "", schemaVersion: "", engine: "", engineVersion: "", certificateType: "", description: [], validFrom: "", validTo: "", affectedString: [], logic: JSON(""), countryCode: "DE")
+        let sut: [ValidationResult] = [.init(rule: rule, result: .open, validationErrors: nil),
+            .init(rule: rule2, result: .open, validationErrors: nil)]
+        // WHEN
+        let fetechedResult = sut.filterAcceptanceRules
+        // THEN
+        XCTAssertEqual(fetechedResult.count, 1)
+        XCTAssertEqual(rule.identifier, fetechedResult.first?.rule?.identifier)
+    }
 }

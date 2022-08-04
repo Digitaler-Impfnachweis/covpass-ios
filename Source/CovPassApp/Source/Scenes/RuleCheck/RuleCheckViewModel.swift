@@ -35,7 +35,7 @@ struct CertificateResult {
         if result.contains(where: { $0.result == .fail }) {
             return .fail
         }
-        if result.contains(where: { $0.result == .open }) || result.isEmpty {
+        if result.contains(where: { $0.result == .open }) || result.isEmpty || result.filterAcceptanceRules.isEmpty {
             return .open
         }
         return .passed
