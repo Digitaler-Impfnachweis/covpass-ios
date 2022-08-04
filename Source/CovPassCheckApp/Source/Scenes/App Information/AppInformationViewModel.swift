@@ -17,9 +17,12 @@ class CheckAppInformationBaseViewModel: AppInformationBaseViewModel {
 
     private let userDefaults: Persistence
     private var checkSituationEntry: AppInformationEntry {
-        let checkSituationInfo = userDefaults.selectedLogicType.checkSituationInfo
-        let scene = CheckSituationSceneFactory(contextType: .settings, router: CheckSituationRouter(sceneCoordinator: router.sceneCoordinator), userDefaults: userDefaults)
-        return AppInformationEntry(title: LocalText.rulesTitle, scene: scene, rightTitle: checkSituationInfo)
+        let scene = CheckSituationSceneFactory(
+            contextType: .settings,
+            router: CheckSituationRouter(sceneCoordinator: router.sceneCoordinator),
+            userDefaults: userDefaults
+        )
+        return AppInformationEntry(title: LocalText.rulesTitle, scene: scene)
     }
     private var revocationSettingsEntry: AppInformationEntry {
         let rightTitle = userDefaults.revocationExpertMode ? LocalText.revocationHintOn : LocalText.revocationHintOff
