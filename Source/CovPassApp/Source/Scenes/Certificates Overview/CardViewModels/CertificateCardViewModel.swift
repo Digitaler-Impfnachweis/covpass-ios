@@ -152,11 +152,11 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
 
     var titleIcon: UIImage {
         if isInvalid {
-            return .expired
+            return showBoosterAvailabilityNotification && showNotificationIcon ? .expiredNotification : .expired
         } else if isPCRTest || isRapidAntigenTest {
-            return .detailStatusTestInverse
+            return showBoosterAvailabilityNotification && showNotificationIcon ? .testNotification : .detailStatusTestInverse
         } else if isPartialVaccination {
-            return .startStatusPartial
+            return showBoosterAvailabilityNotification && showNotificationIcon ? .halfShieldNotification: .startStatusPartial
         }
         return showBoosterAvailabilityNotification && showNotificationIcon ? .statusFullBlueNotification : .statusFullDetail
     }

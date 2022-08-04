@@ -266,9 +266,20 @@ public extension UIImage {
 
     @ImageLoader(name: "start-status-full-white")
     private(set) static var startStatusFullWhite
-
+    
     @ImageLoader(name: "status-expired-circle")
     private(set) static var statusExpiredCircle
+    
+    @ImageLoader(name: "half-shield-notification")
+    private(set) static var halfShieldNotification
+    
+    @ImageLoader(name: "expired-notification")
+    private(set) static var expiredNotification
+    
+    @ImageLoader(name: "test-notification")
+    private(set) static var testNotification
+    
+    
 }
 
 @propertyWrapper
