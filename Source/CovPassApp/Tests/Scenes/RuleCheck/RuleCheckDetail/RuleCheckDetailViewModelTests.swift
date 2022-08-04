@@ -15,6 +15,8 @@ private enum Constants {
     static let testFacilityTitle = "Testzentrum oder -einrichtung / Testing centre or facility"
     static let countryVacctionationTitle = "Land der Impfung / Country vaccinating"
     static let countryRecoveryAndTestTitle = "Land der Testung / Country performing test"
+    static let fullnameTransliteratedTitle = "Standardisierter Name, Vorname / Standardized name, first name"
+    static let technicalExpiryTitle = "Technical expiry date / Technical expiry date"
 }
 
 class RuleCheckDetailViewModelTests: XCTestCase {
@@ -48,16 +50,29 @@ class RuleCheckDetailViewModelTests: XCTestCase {
         let dobItem = items.first { title, _, _, _ in
             title == Constants.dobTitle
         }
-        let countryItem =  items.first { title, _, _, _ in
+        let countryItem = items.first { title, _, _, _ in
             title == Constants.countryVacctionationTitle
         }
+        let fullnameTransliteratedItem = items.first { title, _, _, _ in
+            title == Constants.fullnameTransliteratedTitle
+        }
+        let technicalExpiryDateItem = items.first { title, _, _, _ in
+            title == Constants.technicalExpiryTitle
+        }
+        XCTAssertEqual(fullnameTransliteratedItem?.1, "SCHMITT<MUSTERMANN, ERIKA<DOERTE")
+        XCTAssertEqual(
+            technicalExpiryDateItem?.1,
+            "Valid until Apr 23, 2023 at 10:38 AM\nYou will be notified in the app if you can renew the certificate."
+        )
         XCTAssertEqual(countryItem?.1, "Germany")
         XCTAssertEqual(dobItem?.1, "1964-08-12")
     }
 
     func testItems_recovery() {
         // Given
-        let token = CBORWebToken.mockRecoveryCertificate.extended()
+        var cborToken = CBORWebToken.mockRecoveryCertificate
+        cborToken.exp = .init(timeIntervalSinceReferenceDate: 0)
+        let token = cborToken.extended()
         configureSut(token: token)
 
         // When
@@ -67,9 +82,20 @@ class RuleCheckDetailViewModelTests: XCTestCase {
         let dobItem = items.first { title, _, _, _ in
             title == Constants.dobTitle
         }
-        let countryItem =  items.first { title, _, _, _ in
+        let countryItem = items.first { title, _, _, _ in
             title == Constants.countryRecoveryAndTestTitle
         }
+        let fullnameTransliteratedItem = items.first { title, _, _, _ in
+            title == Constants.fullnameTransliteratedTitle
+        }
+        let technicalExpiryDateItem = items.first { title, _, _, _ in
+            title == Constants.technicalExpiryTitle
+        }
+        XCTAssertEqual(fullnameTransliteratedItem?.1, "JOHN, DOE")
+        XCTAssertEqual(
+            technicalExpiryDateItem?.1,
+            "Valid until Jan 1, 2001 at 1:00 AM\nYou will be notified in the app if you can renew the certificate."
+        )
         XCTAssertEqual(countryItem?.1, "Germany")
         XCTAssertEqual(dobItem?.1, "1990-01-01")
     }
@@ -77,6 +103,7 @@ class RuleCheckDetailViewModelTests: XCTestCase {
     func testItems_test() throws {
         // Given
         var cborWebToken = CBORWebToken.mockTestCertificate
+        cborWebToken.exp = .init(timeIntervalSinceReferenceDate: 0)
         let test = try XCTUnwrap(cborWebToken.hcert.dgc.t?.first)
         test.tc = nil
         cborWebToken.hcert.dgc.t = [test]
@@ -95,6 +122,17 @@ class RuleCheckDetailViewModelTests: XCTestCase {
         let countryItem =  items.first { title, _, _, _ in
             title == Constants.countryRecoveryAndTestTitle
         }
+        let fullnameTransliteratedItem = items.first { title, _, _, _ in
+            title == Constants.fullnameTransliteratedTitle
+        }
+        let technicalExpiryDateItem = items.first { title, _, _, _ in
+            title == Constants.technicalExpiryTitle
+        }
+        XCTAssertEqual(fullnameTransliteratedItem?.1, "JOHN, DOE")
+        XCTAssertEqual(
+            technicalExpiryDateItem?.1,
+            "Valid until Jan 1, 2001 at 1:00 AM\nYou will be notified in the app if you can renew the certificate."
+        )
         XCTAssertEqual(countryItem?.1, "Germany")
         XCTAssertEqual(dobItem?.1, "1990-01-01")
         XCTAssertEqual(testFacilityItem?.1, "")

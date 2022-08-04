@@ -140,9 +140,13 @@ class RuleCheckDetailViewModel {
     }
 
     var items: [(String, String, [String], [String])] {
+        let exp = result.certificate.vaccinationCertificate.exp
+        let expiryDate = exp != nil ? DateUtils.displayDateTimeFormatter.string(from: exp!) : ""
+
         if let r = dgc.r?.first {
             return [
                 ("recovery_certificate_detail_view_data_name".localized, dgc.nam.fullNameReverse, [], []),
+                ("recovery_certificate_detail_view_data_name_standard".localized, dgc.nam.fullNameTransliteratedReverse, [], []),
                 ("recovery_certificate_detail_view_data_date_of_birth".localized, dob, results(for: .fail, and: "dob"), results(for: .open, and: "dob")),
                 ("recovery_certificate_detail_view_data_disease".localized, r.tgDisplayName, results(for: .fail, and: "r.0.tg"), results(for: .open, and: "r.0.tg")),
                 ("recovery_certificate_detail_view_data_date_first_positive_result".localized, DateUtils.isoDateFormatter.string(from: r.fr), results(for: .fail, and: "r.0.fr"), results(for: .open, and: "r.0.fr")),
@@ -150,12 +154,18 @@ class RuleCheckDetailViewModel {
                 ("recovery_certificate_detail_view_data_issuer".localized, r.is, results(for: .fail, and: "r.0.is"), results(for: .open, and: "r.0.is")),
                 ("recovery_certificate_detail_view_data_valid_from".localized, DateUtils.isoDateFormatter.string(from: r.df), results(for: .fail, and: "r.0.df"), results(for: .open, and: "r.0.df")),
                 ("recovery_certificate_detail_view_data_valid_until".localized, DateUtils.isoDateFormatter.string(from: r.du), results(for: .fail, and: "r.0.du"), results(for: .open, and: "r.0.du")),
-                ("recovery_certificate_detail_view_data_identifier".localized, r.ciDisplayName, results(for: .fail, and: "r.0.ci"), results(for: .open, and: "r.0.ci"))
+                ("recovery_certificate_detail_view_data_identifier".localized, r.ciDisplayName, results(for: .fail, and: "r.0.ci"), results(for: .open, and: "r.0.ci")),
+                ("recovery_certificate_detail_view_data_expiry_date".localized,
+                 String(format: "recovery_certificate_detail_view_data_expiry_date_message".localized, expiryDate) + "\n" +
+                 "recovery_certificate_detail_view_data_expiry_date_note".localized,
+                 [], []
+                )
             ]
         }
         if let t = dgc.t?.first {
             return [
                 ("test_certificate_detail_view_data_name".localized, dgc.nam.fullNameReverse, [], []),
+                ("test_certificate_detail_view_data_name_standard".localized, dgc.nam.fullNameTransliteratedReverse, [], []),
                 ("test_certificate_detail_view_data_date_of_birth".localized, dob, results(for: .fail, and: "dob"), results(for: .open, and: "dob")),
                 ("test_certificate_detail_view_data_disease".localized, t.tgDisplayName, results(for: .fail, and: "t.0.tg"), results(for: .open, and: "t.0.tg")),
                 ("test_certificate_detail_view_data_test_type".localized, t.ttDisplayName, results(for: .fail, and: "t.0.tt"), results(for: .open, and: "t.0.tt")),
@@ -166,12 +176,18 @@ class RuleCheckDetailViewModel {
                 ("test_certificate_detail_view_data_test_centre".localized, t.tc ?? "", results(for: .fail, and: "t.0.tc"), results(for: .open, and: "t.0.tc")),
                 ("test_certificate_detail_view_data_test_country".localized, mapCountryNameIfGermany(t.co), results(for: .fail, and: "t.0.co"), results(for: .open, and: "t.0.co")),
                 ("test_certificate_detail_view_data_test_issuer".localized, t.is, results(for: .fail, and: "t.0.is"), results(for: .open, and: "t.0.is")),
-                ("test_certificate_detail_view_data_test_identifier".localized, t.ciDisplayName, results(for: .fail, and: "t.0.ci"), results(for: .open, and: "t.0.ci"))
+                ("test_certificate_detail_view_data_test_identifier".localized, t.ciDisplayName, results(for: .fail, and: "t.0.ci"), results(for: .open, and: "t.0.ci")),
+                ("test_certificate_detail_view_data_expiry_date".localized,
+                 String(format: "test_certificate_detail_view_data_expiry_date_message".localized, expiryDate) + "\n" +
+                 "test_certificate_detail_view_data_expiry_date_note".localized,
+                 [], []
+                )
             ]
         }
         if let v = dgc.v?.first {
             return [
                 ("vaccination_certificate_detail_view_data_name".localized, dgc.nam.fullNameReverse, [], []),
+                ("vaccination_certificate_detail_view_data_name_standard".localized, dgc.nam.fullNameTransliteratedReverse, [], []),
                 ("vaccination_certificate_detail_view_data_date_of_birth".localized, dob, results(for: .fail, and: "dob"), results(for: .open, and: "dob")),
                 ("vaccination_certificate_detail_view_data_disease".localized, v.tgDisplayName, results(for: .fail, and: "v.0.tg"), results(for: .open, and: "v.0.tg")),
                 ("vaccination_certificate_detail_view_data_vaccine".localized, v.mpDisplayName, results(for: .fail, and: "v.0.mp"), results(for: .open, and: "v.0.mp")),
@@ -181,7 +197,12 @@ class RuleCheckDetailViewModel {
                 ("vaccination_certificate_detail_view_data_vaccine_date_".localized, DateUtils.isoDateFormatter.string(from: v.dt), results(for: .fail, and: "v.0.dt"), results(for: .open, and: "v.0.dt")),
                 ("vaccination_certificate_detail_view_data_vaccine_country".localized, mapCountryNameIfGermany(v.co), results(for: .fail, and: "v.0.co"), results(for: .open, and: "v.0.co")),
                 ("vaccination_certificate_detail_view_data_vaccine_issuer".localized, v.is, results(for: .fail, and: "v.0.is"), results(for: .open, and: "v.0.is")),
-                ("vaccination_certificate_detail_view_data_vaccine_identifier".localized, v.ciDisplayName, results(for: .fail, and: "v.0.ci"), results(for: .open, and: "v.0.ci"))
+                ("vaccination_certificate_detail_view_data_vaccine_identifier".localized, v.ciDisplayName, results(for: .fail, and: "v.0.ci"), results(for: .open, and: "v.0.ci")),
+                ("vaccination_certificate_detail_view_data_expiry_date".localized,
+                 String(format: "vaccination_certificate_detail_view_data_expiry_date_message".localized, expiryDate) + "\n" +
+                 "vaccination_certificate_detail_view_data_expiry_date_note".localized,
+                 [], []
+                )
             ]
         }
         return []
