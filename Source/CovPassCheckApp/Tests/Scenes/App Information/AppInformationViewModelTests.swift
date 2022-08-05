@@ -22,7 +22,7 @@ class CheckAppInformationBaseViewModelTests: XCTestCase {
         XCTAssertEqual(entries.count, 2)
     }
 
-    private func prepareSut(with persistence: UserDefaultsPersistence) -> CheckAppInformationBaseViewModel {
+    private func prepareSut(with persistence: UserDefaultsPersistence = UserDefaultsPersistence()) -> CheckAppInformationBaseViewModel {
         CheckAppInformationBaseViewModel(
             router: AppInformationRouterMock(),
             entries: [],
@@ -30,67 +30,18 @@ class CheckAppInformationBaseViewModelTests: XCTestCase {
         )
     }
 
-    func testEntries_selectedLogicType_booster() throws {
+    func testEntries_checking_rules_right_title_nil() throws {
         // Given
-        let expectedTitle = ""
-        var persistence = UserDefaultsPersistence()
-        persistence.selectedLogicType = .booster
-        let sut = prepareSut(with: persistence)
+        let sut = prepareSut()
 
         // When
         let entries = sut.entries
 
         // Then
         let entry = try XCTUnwrap(entries[0])
-        XCTAssertEqual(entry.rightTitle, expectedTitle)
+        XCTAssertNil(entry.rightTitle)
     }
 
-    func testEntries_selectedLogicType_de() throws {
-        // Given
-        let expectedTitle = "app_information_title_local_rules_status_DE".localized
-        var persistence = UserDefaultsPersistence()
-        persistence.selectedLogicType = .de
-        let sut = prepareSut(with: persistence)
-
-        // When
-        let entries = sut.entries
-
-        // Then
-        let entry = try XCTUnwrap(entries[0])
-        XCTAssertEqual(entry.rightTitle, expectedTitle)
-    }
-    
-    func testEntries_selectedLogicType_eu() throws {
-        // Given
-        let expectedTitle = "app_information_title_local_rules_status_EU".localized
-        var persistence = UserDefaultsPersistence()
-        persistence.selectedLogicType = .eu
-        let sut = prepareSut(with: persistence)
-
-        // When
-        let entries = sut.entries
-
-        // Then
-        let entry = try XCTUnwrap(entries[0])
-        XCTAssertEqual(entry.rightTitle, expectedTitle)
-    }
-
-    func testEntries_selectedLogicType_modified() throws {
-        // Given
-        let expectedTitle = "app_information_title_local_rules_status_EU".localized
-        var persistence = UserDefaultsPersistence()
-        persistence.selectedLogicType = .booster
-        let sut = prepareSut(with: persistence)
-        persistence.selectedLogicType = .eu
-
-        // When
-        let entries = sut.entries
-
-        // Then
-        let entry = try XCTUnwrap(entries[0])
-        XCTAssertEqual(entry.rightTitle, expectedTitle)
-    }
-    
     func testEntries_expertMode_default() throws {
         // Given
         // TODO: replace with twine key
