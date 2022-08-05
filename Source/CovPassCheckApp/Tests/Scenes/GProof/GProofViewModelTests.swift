@@ -20,6 +20,7 @@ class GProofViewModelTests: XCTestCase {
     var vaccinationRepoMock: VaccinationRepositoryMock!
     var certLogicMock: DCCCertLogicMock!
     var routerMock: GProofMockRouter!
+    var revocationRespostiroyMock: CertificateRevocationRepositoryMock!
     let (_, resolver) = Promise<ExtendedCBORWebToken>.pending()
     var delegate: ViewModelDelegateMock!
     var countdownTimerModel: CountdownTimerModelMock!
@@ -32,6 +33,7 @@ class GProofViewModelTests: XCTestCase {
         vaccinationRepoMock = VaccinationRepositoryMock()
         certLogicMock = DCCCertLogicMock()
         routerMock = GProofMockRouter()
+        revocationRespostiroyMock = CertificateRevocationRepositoryMock()
         vaccinationRepoMock.checkedCert = initialToken.vaccinationCertificate
         delegate = .init()
         configureSut()
@@ -51,7 +53,7 @@ class GProofViewModelTests: XCTestCase {
             resolvable: resolver,
             router: routerMock,
             repository: vaccinationRepoMock,
-            revocationRepository: CertificateRevocationRepositoryMock(),
+            revocationRepository: revocationRespostiroyMock,
             certLogic: certLogicMock,
             userDefaults: UserDefaultsPersistence(),
             boosterAsTest: false,
@@ -63,6 +65,7 @@ class GProofViewModelTests: XCTestCase {
     override func tearDown() {
         sut = nil
         vaccinationRepoMock = nil
+        revocationRespostiroyMock = nil
         certLogicMock = nil
         routerMock = nil
         delegate = nil
@@ -533,10 +536,9 @@ class GProofViewModelTests: XCTestCase {
 
         // WHEN
         sut.scanNext()
-        RunLoop.current.run(for: 0.1)
         
         // THEN
-        XCTAssertTrue((sut.router as! GProofMockRouter).errorShown)
+        wait(for: [(sut.router as! GProofMockRouter).certificateShown], timeout: 0.1)
     }
     
     func testScaningAlreadyScannedCertType() {
@@ -547,10 +549,9 @@ class GProofViewModelTests: XCTestCase {
 
         // WHEN
         sut.scanNext()
-        RunLoop.current.run(for: 0.1)
         
         // THEN
-        XCTAssertTrue((sut.router as! GProofMockRouter).errorShown)
+        wait(for: [(sut.router as! GProofMockRouter).certificateShown], timeout: 0.1)
     }
     
     func testScaningSameTypeOfCert() {
@@ -613,7 +614,7 @@ class GProofViewModelTests: XCTestCase {
     }
     
     
-    func testFirstScanTechnicalErrorOpensCertificateDetailPage() {
+    func testFirstScanTechnicalErrorExpiredOpensCertificateDetailPage() {
         // GIVEN
         vaccinationRepoMock.checkedCertError = CertificateError.expiredCertifcate
         vaccinationRepoMock.checkedCert = nil
@@ -624,12 +625,36 @@ class GProofViewModelTests: XCTestCase {
         wait(for: [(sut.router as! GProofMockRouter).certificateShown], timeout: 0.1)
     }
     
+    func testFirstScanTechnicalErrorNoValidationResultsOpensCertificateDetailPage() {
+        // GIVEN
+        vaccinationRepoMock.checkedCert = CBORWebToken.mockRecoveryCertificate
+        certLogicMock.validateResult = []
+        
+        // WHEN
+        sut.startover()
+        // THEN
+        wait(for: [(sut.router as! GProofMockRouter).certificateShown], timeout: 0.1)
+    }
+    
+    func testFirstScanTechnicalErrorREVOKEDOpensCertificateDetailPage() {
+        // GIVEN
+        vaccinationRepoMock.checkedCert = CBORWebToken.mockRecoveryCertificate
+        certLogicMock.validateResult = [.init(rule: nil, result: .passed, validationErrors: nil)]
+        revocationRespostiroyMock.isRevoked = true
+        
+        // WHEN
+        sut.startover()
+        // THEN
+        wait(for: [(sut.router as! GProofMockRouter).certificateShown], timeout: 0.1)
+    }
+    
     func testNotDCCScannedAtSecondScan() {
         // GIVEN
-        (sut.router as! GProofMockRouter).certificateShown.isInverted = true
         vaccinationRepoMock.checkedCert = CBORWebToken.mockTestCertificate
         certLogicMock.validateResult = [.init(rule: nil, result: .passed, validationErrors: nil)]
         sut.startover()
+        (sut.router as! GProofMockRouter).certificateShown = XCTestExpectation()
+        (sut.router as! GProofMockRouter).certificateShown.isInverted = true
         vaccinationRepoMock.checkedCert = nil
         vaccinationRepoMock.checkedCertError = ScanError.badOutput
         certLogicMock.validateResult = [.init(rule: nil, result: .passed, validationErrors: nil)]
@@ -711,6 +736,7 @@ class GProofViewModelTests: XCTestCase {
     
     fileprivate func test_scan_basic_then_booster(boosterAsTest: Bool) {
         // Given
+        (sut.router as! GProofMockRouter).errorShown = false
         let basicVaccination = CBORWebToken.mockVaccinationCertificate
         _ = ExtendedCBORWebToken(
             vaccinationCertificate: basicVaccination,
@@ -736,10 +762,11 @@ class GProofViewModelTests: XCTestCase {
         vaccinationRepoMock.checkedCert = boosterVaccination
         sut.scanNext()
         RunLoop.current.run(for: 0.1)
-
+        
         // Then
         let errorShown = (sut.router as! GProofMockRouter).errorShown
         XCTAssertEqual(!boosterAsTest, errorShown)
+        wait(for: [routerMock.showErrorExpectation], timeout: 1.0)
     }
     
     func test_scan_basic_then_booster_boosterAsTestOff() {
