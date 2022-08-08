@@ -74,7 +74,8 @@ class ValidatorOverviewViewController: UIViewController {
     private func setupHeaderView() {
         headerView.attributedTitleText = viewModel.title.styledAs(.header_2)
         headerView.textLabel.accessibilityTraits = .header
-        headerView.image = .help
+        headerView.image = .settings
+        headerView.actionButtonWidth = 22.0
         headerView.action = { [weak self] in
             self?.viewModel.showAppInformation()
         }
