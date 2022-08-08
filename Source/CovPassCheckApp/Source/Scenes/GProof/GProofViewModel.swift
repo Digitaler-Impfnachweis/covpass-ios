@@ -157,7 +157,7 @@ class GProofViewModel: GProofViewModelProtocol {
             delegate?.viewModelDidUpdate()
         }
     }
-
+    
     func scanQRCode() {
         isLoading = true
         var tmpToken: ExtendedCBORWebToken?
@@ -189,10 +189,18 @@ class GProofViewModel: GProofViewModelProtocol {
             self.isLoading = false
         }
         .catch {
-            self.validationToken(token: tmpToken, error: $0, result: nil)
+            self.validateTokenOrHandleError($0, token: tmpToken)
         }
     }
-
+    
+    private func validateTokenOrHandleError(_ error: Error, token: ExtendedCBORWebToken?) {
+        if error.isTechnicalError {
+            errorHandling(error, token: token, result: nil)
+        } else {
+            validationToken(token: token, error: error, result: nil)
+        }
+    }
+    
     private func validationToken(token: ExtendedCBORWebToken?, error: Error?, result: [ValidationResult]?) {
         firstly {
             try self.preventSettingSameQRCode(token)
@@ -218,7 +226,7 @@ class GProofViewModel: GProofViewModelProtocol {
         self.error = error
         if (error as? QRCodeError) == .qrCodeExists {
             router.showError(error: error)
-        } else if isFirstScan && (error is ScanError || error is Base45CodingError || error is CertificateError) {
+        } else if isFirstScan && error.isTechnicalError {
             showErorResultPage(error: error, token: token)
             setResultViewModel(error: error, newToken: token, result: result).cauterize()
         } else {
@@ -415,5 +423,15 @@ private extension Array where Element == ValidationResult {
             }
             validationResult(ofRule: "RR-DE-0002")?.result = newValue
         }
+    }
+}
+
+private extension Error {
+    
+    var isTechnicalError: Bool {
+        return (self is ScanError ||
+                self is Base45CodingError ||
+                self is CertificateError ||
+                (self as? ValidationResultError) == .technical)
     }
 }

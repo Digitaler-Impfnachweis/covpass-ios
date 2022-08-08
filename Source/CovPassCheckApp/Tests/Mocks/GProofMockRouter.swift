@@ -31,12 +31,11 @@ class GProofMockRouter: GProofRouterProtocol {
                          userDefaults: Persistence,
                          buttonHidden: Bool) -> Promise<ExtendedCBORWebToken> {
         certificateShown.fulfill()
-        return .value(
-            ExtendedCBORWebToken(
-                vaccinationCertificate: .mockVaccinationCertificate,
-                vaccinationQRCodeData: ""
-            )
-        )
+        if let certificate = certificate {
+            return .value(certificate)
+        } else {
+            return .init(error: NSError(domain: "", code: 10000))
+        }
     }
     
     func showError(error: Error) {
