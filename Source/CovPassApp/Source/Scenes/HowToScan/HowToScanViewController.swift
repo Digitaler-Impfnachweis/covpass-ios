@@ -56,6 +56,17 @@ class HowToScanViewController: UIViewController {
         configureToolbarView()
         configureActionView()
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        UIAccessibility.post(notification: .layoutChanged, argument: viewModel.sceneOpeningAnnouncement)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        UIAccessibility.post(notification: .layoutChanged, argument: viewModel.sceneClosingAnnouncement)
+    }
+    
 
     // MARK: - Private
 
@@ -67,11 +78,12 @@ class HowToScanViewController: UIViewController {
 
     private func configureHeadline() {
         headline.attributedTitleText = viewModel.title.styledAs(.header_2)
+        headline.textLabel.accessibilityTraits = .header
         headline.action = { [weak self] in
             self?.viewModel.cancel()
         }
         headline.image = .close
-        headline.actionButton.enableAccessibility(label: Constants.Accessibility.close.label)
+        headline.actionButton.enableAccessibility(label: Constants.Accessibility.close.label, traits: .button)
         headline.layoutMargins.bottom = .space_24
     }
 
