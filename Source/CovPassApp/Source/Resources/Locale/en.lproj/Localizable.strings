@@ -226,9 +226,9 @@
 
 "certificate_add_popup_message" = "In the following step, scan the QR code from an EU COVID digital certificate or upload it as a photo or PDF file. The certificate will then be loaded directly into the CovPass app.";
 
-"certificate_add_popup_action_title" = "Which QR code can I scan and save to my smartphone?";
+"certificate_add_popup_action_title" = "More information in the FAQ";
 
-"certificate_add_popup_action_title_linked" = "#Which QR code can I scan?::$0#";
+"certificate_add_popup_action_title_linked" = "#More information in the FAQ::$0#";
 
 "certificate_add_popup_scan_button_title" = "Add certificate";
 
