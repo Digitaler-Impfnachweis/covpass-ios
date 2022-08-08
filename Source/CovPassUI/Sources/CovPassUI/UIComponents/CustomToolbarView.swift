@@ -218,12 +218,14 @@ public class CustomToolbarView: XibView {
         }
     }
 
-    public func disableRightButton(rightButtonItem: ButtonItemType?) {
-        if case .flashLight = rightButtonItem {
-            rightButton.isEnabled = false
-        }
+    public func disableRightButton() {
+        rightButton.isHidden = true
     }
-    
+
+    public func disableLeftButton() {
+        leftButton.isHidden = true
+    }
+
     public func enableRightButton(rightButtonItem: ButtonItemType?) {
         if case .flashLight = rightButtonItem {
             rightButton.isEnabled = true
@@ -440,7 +442,11 @@ public class CustomToolbarView: XibView {
 public extension CustomToolbarView {
     override var accessibilityElements: [Any]? {
         get {
-            [primaryButton as Any, leftButton as Any, rightButton as Any]
+            [
+                primaryButton == nil || primaryButton.isHidden ? nil : primaryButton,
+                leftButton == nil || leftButton.isHidden ? nil : leftButton,
+                rightButton == nil || rightButton.isHidden ? nil : rightButton
+            ].compactMap { $0 }
         }
         set {}
     }

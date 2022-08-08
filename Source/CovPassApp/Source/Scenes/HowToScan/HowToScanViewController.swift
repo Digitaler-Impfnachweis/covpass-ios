@@ -112,6 +112,8 @@ class HowToScanViewController: UIViewController {
         toolbarView.state = .confirm(viewModel.startButtonTitle)
         toolbarView.layoutMargins.top = .space_24
         toolbarView.delegate = self
+        toolbarView.disableLeftButton()
+        toolbarView.disableRightButton()
     }
 }
 

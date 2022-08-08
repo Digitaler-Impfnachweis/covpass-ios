@@ -42,16 +42,6 @@ class CustomToolbarViewTests: XCTestCase {
         XCTAssertTrue(sut.subviews.last is MainButton)
     }
 
-    // Doesn't work for reasons. :/
-//    func testLeftButtonAction() {
-//        var actionExecuted = false
-//        sut.leftButtonAction = {
-//            actionExecuted = true
-//        }
-//        sut.leftButton.sendActions(for: .touchUpInside)
-//        XCTAssertTrue(actionExecuted, "Action should be executed")
-//    }
-
     func test_State_None() {
         // Given
         let state = CustomToolbarState.none
@@ -166,5 +156,93 @@ class CustomToolbarViewTests: XCTestCase {
         XCTAssertEqual(sut.leftButton.accessibilityHint, "leftHint")
         XCTAssertEqual(sut.leftButton.accessibilityTraits, [UIAccessibilityTraits.button,
                                                             UIAccessibilityTraits.updatesFrequently])
+    }
+
+    func testDisableLeftButton() {
+        // When
+        sut.disableLeftButton()
+
+        // Then
+        XCTAssertTrue(sut.leftButton.isHidden)
+    }
+
+    func testDisableRightButton() {
+        // When
+        sut.disableRightButton()
+
+        // Then
+        XCTAssertTrue(sut.rightButton.isHidden)
+    }
+
+    func testAccessibilityElements() throws {
+        // When
+        sut.state = .done
+        let elements = try XCTUnwrap(sut.accessibilityElements)
+
+        // Then
+        XCTAssertEqual(elements.count, 3)
+        XCTAssertTrue(elements.contains(sut.leftButton))
+        XCTAssertTrue(elements.contains(sut.rightButton))
+        XCTAssertTrue(elements.contains(sut.primaryButton))
+    }
+
+    func testAccessibilityElements_left_button_hidden() throws {
+        // Given
+        sut.state = .done
+        sut.leftButton.isHidden = true
+
+        // When
+        let elements = try XCTUnwrap(sut.accessibilityElements)
+
+        // Then
+        XCTAssertEqual(elements.count, 2)
+        XCTAssertFalse(elements.contains(sut.leftButton))
+    }
+
+    func testAccessibilityElements_right_button_hidden() throws {
+        // Given
+        sut.state = .done
+        sut.rightButton.isHidden = true
+
+        // When
+        let elements = try XCTUnwrap(sut.accessibilityElements)
+
+        // Then
+        XCTAssertEqual(elements.count, 2)
+        XCTAssertFalse(elements.contains(sut.rightButton))
+    }
+
+    func testAccessibilityElements_primary_button_hidden() throws {
+        // When
+        let elements = try XCTUnwrap(sut.accessibilityElements)
+
+        // Then
+        XCTAssertFalse(elements.contains(sut.primaryButton))
+    }
+
+    func testAccessibilityElements_all_buttons_hidden() throws {
+        // Given
+        sut.state = .done
+        sut.primaryButton.isHidden = true
+        sut.leftButton.isHidden = true
+        sut.rightButton.isHidden = true
+
+        // When
+        let elements = try XCTUnwrap(sut.accessibilityElements)
+
+        // Then
+        XCTAssertTrue(elements.isEmpty)
+    }
+}
+
+private extension Array where Element == Any {
+    func contains<Button: Equatable>(_ button: Button) -> Bool {
+        contains { element in
+            if let elementButton = element as? Button {
+                return elementButton == button
+            } else {
+                return false
+            }
+        }
     }
 }
