@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="InfoHeaderView" customModule="CovPassUI">
             <connections>
                 <outlet property="actionButton" destination="RSG-an-e0J" id="Q1H-u7-Uqh"/>
+                <outlet property="actionButtonWidthConstraint" destination="dFn-Cr-Q42" id="1Uo-H7-Dd7"/>
                 <outlet property="bottomConstraint" destination="Rt4-Fn-YC4" id="snI-Wh-XOP"/>
                 <outlet property="stackView" destination="wwI-KP-np5" id="10F-5c-IQF"/>
                 <outlet property="textLabel" destination="jYL-ZW-bpk" id="f2g-m7-enc"/>
@@ -29,16 +31,28 @@
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RSG-an-e0J">
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UPt-Eo-qct">
                             <rect key="frame" x="380" y="0.5" width="44" height="44"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RSG-an-e0J">
+                                    <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" secondItem="RSG-an-e0J" secondAttribute="height" id="4gk-UR-xF5"/>
+                                        <constraint firstAttribute="width" constant="44" id="dFn-Cr-Q42"/>
+                                    </constraints>
+                                    <connections>
+                                        <action selector="actionButtonPressedWithButton:" destination="-1" eventType="touchUpInside" id="qlZ-Ts-9i8"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             <constraints>
-                                <constraint firstAttribute="width" secondItem="RSG-an-e0J" secondAttribute="height" id="4gk-UR-xF5"/>
-                                <constraint firstAttribute="width" constant="44" id="dFn-Cr-Q42"/>
+                                <constraint firstAttribute="height" constant="44" id="7z5-uU-ecV"/>
+                                <constraint firstItem="RSG-an-e0J" firstAttribute="leading" secondItem="UPt-Eo-qct" secondAttribute="leading" id="Tyq-Dh-85h"/>
+                                <constraint firstItem="RSG-an-e0J" firstAttribute="centerY" secondItem="UPt-Eo-qct" secondAttribute="centerY" id="WLU-Fj-Ir4"/>
+                                <constraint firstAttribute="trailing" secondItem="RSG-an-e0J" secondAttribute="trailing" id="jPR-eN-M1l"/>
                             </constraints>
-                            <connections>
-                                <action selector="actionButtonPressedWithButton:" destination="-1" eventType="touchUpInside" id="qlZ-Ts-9i8"/>
-                            </connections>
-                        </button>
+                        </view>
                     </subviews>
                 </stackView>
             </subviews>
@@ -54,4 +68,9 @@
             <point key="canvasLocation" x="-546" y="-125"/>
         </view>
     </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>

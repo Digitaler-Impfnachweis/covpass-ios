@@ -13,11 +13,11 @@ import PromiseKit
 
 class ValidatorOverviewSnapShotTests: BaseSnapShotTests {
     
-    func viewController(lastUpdateTrustList: Date? = nil,
-                        shouldTrustListUpdate: Bool = true,
-                        ntpDate: Date = Date(),
-                        ntpOffset: TimeInterval = 0.0,
-                        logicType: DCCCertLogic.LogicType = .de) -> ValidatorOverviewViewController {
+    func configureSut(lastUpdateTrustList: Date? = nil,
+                      shouldTrustListUpdate: Bool = true,
+                      ntpDate: Date = Date(),
+                      ntpOffset: TimeInterval = 0.0,
+                      logicType: DCCCertLogic.LogicType = .de) -> ValidatorOverviewViewController {
         let certLogicMock = DCCCertLogicMock()
         let vaccinationRepoMock = VaccinationRepositoryMock()
         var userDefaults = UserDefaultsPersistence()
@@ -42,38 +42,38 @@ class ValidatorOverviewSnapShotTests: BaseSnapShotTests {
     }
     
     func testDefault() {
-        let vc = self.viewController()
-        verifyView(vc: vc)
+        let sut = self.configureSut()
+        verifyView(vc: sut)
     }
     
     func testDefaultEUCheckSituation() {
-        let vc = self.viewController(logicType: .eu)
-        verifyView(vc: vc)
+        let sut = self.configureSut(logicType: .eu)
+        verifyView(vc: sut)
     }
     
     func testSegment2GSelected() {
-        let vc = self.viewController()
-        vc.view.bounds = UIScreen.main.bounds
-        vc.scanTypeSegment.selectedSegmentIndex = 1
-        vc.segmentChanged(vc.scanTypeSegment)
-        verifyView(vc: vc)
+        let sut = self.configureSut()
+        sut.view.bounds = UIScreen.main.bounds
+        sut.scanTypeSegment.selectedSegmentIndex = 1
+        sut.segmentChanged(sut.scanTypeSegment)
+        verifyView(vc: sut)
     }
     
     func testOfflineModeAvailable() {
-        let vc = self.viewController(lastUpdateTrustList: DateUtils.parseDate("2021-04-26T15:05:00"),
-                                     shouldTrustListUpdate: false)
-        verifyView(vc: vc)
+        let sut = self.configureSut(lastUpdateTrustList: DateUtils.parseDate("2021-04-26T15:05:00"),
+                                    shouldTrustListUpdate: false)
+        verifyView(vc: sut)
     }
     
     func testOfflineModeNotAvailable() {
-        let vc = self.viewController(lastUpdateTrustList: DateUtils.parseDate("2021-04-26T15:05:00"))
-        verifyView(vc: vc)
+        let sut = self.configureSut(lastUpdateTrustList: DateUtils.parseDate("2021-04-26T15:05:00"))
+        verifyView(vc: sut)
     }
     
     func testTimeHint() {
-        let vc = self.viewController(lastUpdateTrustList: DateUtils.parseDate("2021-04-26T15:05:00"),
-                                     ntpDate: DateUtils.parseDate("2021-04-26T15:05:00")!,
-        ntpOffset: 7201)
-        verifyView(vc: vc)
+        let sut = self.configureSut(lastUpdateTrustList: DateUtils.parseDate("2021-04-26T15:05:00"),
+                                    ntpDate: DateUtils.parseDate("2021-04-26T15:05:00")!,
+                                    ntpOffset: 7201)
+        verifyView(vc: sut)
     }
 }

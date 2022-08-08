@@ -13,11 +13,12 @@ import UIKit
 public class InfoHeaderView: XibView {
     // MARK: - Outlets
 
-    @IBOutlet public var textLabel: UILabel!
     @IBOutlet public var actionButton: UIButton!
-    @IBOutlet public var stackView: UIStackView!
+    @IBOutlet public var textLabel: UILabel!
     @IBOutlet public var topConstraint: NSLayoutConstraint!
     @IBOutlet public var bottomConstraint: NSLayoutConstraint!
+    @IBOutlet private var stackView: UIStackView!
+    @IBOutlet private var actionButtonWidthConstraint: NSLayoutConstraint!
 
     // MARK: - Variables
 
@@ -30,6 +31,12 @@ public class InfoHeaderView: XibView {
     public var image: UIImage? {
         didSet {
             actionButton.setImage(image, for: .normal)
+        }
+    }
+    
+    public var actionButtonWidth: CGFloat = 44.0 {
+        didSet {
+            actionButtonWidthConstraint.constant = actionButtonWidth
         }
     }
 
