@@ -135,7 +135,7 @@ class RuleCheckViewController: UIViewController {
                 guard let rvm = vm as? ResultItemViewModel else { return }
                 self.viewModel.showDetail(rvm.result)
             })
-            certificateItem.enableAccessibility(label: Constants.Accessibility.list.label, traits: .button)
+            certificateItem.enableAccessibility(label: vm.activeTitle, hint: Constants.Accessibility.list.label, traits: .button)
             stackView.addArrangedSubview(certificateItem)
         }
 
