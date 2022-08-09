@@ -69,10 +69,21 @@ class RuleCheckViewController: UIViewController {
         viewModel.updateRules()
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        UIAccessibility.post(notification: .layoutChanged, argument: viewModel.announce)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        UIAccessibility.post(notification: .layoutChanged, argument: viewModel.closingAnnounce)
+    }
+    
     // MARK: - Private
 
     private func configureText() {
         headline.attributedTitleText = "certificate_check_validity_title".localized.styledAs(.header_2)
+        headline.textLabel.accessibilityTraits = .header
         headline.action = { [weak self] in
             self?.viewModel.cancel()
         }

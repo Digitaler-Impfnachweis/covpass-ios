@@ -26,6 +26,10 @@ private enum Constants {
         static let domesticDeCountryCode = "DE2"
         static let defaultDeCountryCode = "DE"
     }
+    enum Accessibility {
+        static let announce = "accessibility_certificate_check_validity_announce".localized
+        static let closingAnnounce = "accessibility_certificate_check_validity_closing_announce".localized
+    }
 }
 
 struct CertificateResult {
@@ -61,6 +65,9 @@ class RuleCheckViewModel: BaseViewModel, CancellableViewModelProtocol {
     let domesticRulesHintIcon = UIImage.infoSignal
     let germanInfoBoxText = Constants.Keys.germanInfoBox
     var timeHintIsHidden: Bool {  !repository.trustListShouldBeUpdated() || !certLogic.rulesShouldBeUpdated() || isLoading }
+    let announce = Constants.Accessibility.announce
+    let closingAnnounce = Constants.Accessibility.closingAnnounce
+
     private var certificateList: CertificateList?
     private let router: RuleCheckRouterProtocol?
     private let resolver: Resolver<Void>?
