@@ -14,13 +14,6 @@ private enum Constants {
         static let cornerRadius: CGFloat = 12.0
         static let borderWith: CGFloat = 1.0
     }
-
-    enum Accessibility {
-        static let select = VoiceOverOptions.Settings(label: "certificate_check_validity_selection_country_action_button".localized)
-        static let close = VoiceOverOptions.Settings(label: "accessibility_popup_label_close".localized)
-        static let countrySelected = VoiceOverOptions.Settings(label: "accessibility_certificate_check_validity_selection_country_selected".localized)
-        static let countryUnselected = VoiceOverOptions.Settings(label: "accessibility_certificate_check_validity_selection_country_unselected".localized)
-    }
 }
 
 class CountrySelectionViewController: UIViewController {
@@ -53,20 +46,32 @@ class CountrySelectionViewController: UIViewController {
         configureText()
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        UIAccessibility.post(notification: .layoutChanged, argument: viewModel.announce)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        UIAccessibility.post(notification: .layoutChanged, argument: viewModel.closingAnnounce)
+    }
+    
     // MARK: - Private
 
     private func configureHeadline() {
         headline.attributedTitleText = "certificate_check_validity_selection_country_title".localized.styledAs(.header_2)
+        headline.textLabel.accessibilityTraits = .header
         headline.action = { [weak self] in
             self?.viewModel.cancel()
         }
         headline.image = .close
         headline.layoutMargins.bottom = .space_24
-        headline.actionButton.enableAccessibility(label: Constants.Accessibility.close.label)
+        headline.actionButton.enableAccessibility(label: viewModel.close)
     }
 
     private func configureText() {
         info.attributedText = "certificate_check_validity_selection_country_note".localized.styledAs(.body)
+        info.enableAccessibility(label: "certificate_check_validity_selection_country_note".localized)
         info.layoutMargins = .init(top: .space_8, left: .space_8, bottom: .space_8, right: .space_8)
         info.backgroundColor = .backgroundSecondary20
         info.layer.borderWidth = Constants.Layout.borderWith
@@ -89,10 +94,10 @@ class CountrySelectionViewController: UIViewController {
 
             if viewModel.selectedCountry == country.code {
                 countryView.rightIcon.image = .checkboxChecked
-                countryView.enableAccessibility(label: String(format: Constants.Accessibility.countrySelected.label!, country.code.localized), traits: .button)
+                countryView.enableAccessibility(label: String(format: viewModel.countrySelected, country.code.localized), traits: .button)
             } else {
                 countryView.rightIcon.image = .checkboxUnchecked
-                countryView.enableAccessibility(label: String(format: Constants.Accessibility.countryUnselected.label!, country.code.localized), traits: .button)
+                countryView.enableAccessibility(label: String(format: viewModel.countryUnselected, country.code.localized), traits: .button)
             }
 
             countryView.action = {
@@ -101,10 +106,11 @@ class CountrySelectionViewController: UIViewController {
             }
             stackView.addArrangedSubview(countryView)
         }
-
-        // We can use forced unwrapping here because it's set via Constants
-        toolbarView.state = .confirm(Constants.Accessibility.select.label!)
+        
+        toolbarView.state = .confirm(viewModel.select)
         toolbarView.delegate = self
+        toolbarView.disableLeftButton()
+        toolbarView.disableRightButton()
     }
 }
 
