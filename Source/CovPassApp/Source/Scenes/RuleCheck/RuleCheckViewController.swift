@@ -165,8 +165,7 @@ class RuleCheckViewController: UIViewController {
         domesticRulesHintView.titleLabel.attributedText = viewModel.germanInfoBoxText.styledAs(.body)
         domesticRulesHintView.containerTopConstraint.constant = 0
         domesticRulesHintView.containerBottomConstraint.constant = 24
-        domesticRulesHintView.enableAccessibility(label: "\(viewModel.timeHintTitle)\n\(viewModel.timeHintSubTitle)",
-                                          traits: .staticText)
+        domesticRulesHintView.enableAccessibility(label:  viewModel.germanInfoBoxText, traits: .staticText)
         domesticRulesHintView.subTitleLabel.isHidden = true
         domesticRulesHintView.bodyLabel.isHidden = true
         domesticRulesHintView.iconStackviewCenterYConstraint.isActive = false
