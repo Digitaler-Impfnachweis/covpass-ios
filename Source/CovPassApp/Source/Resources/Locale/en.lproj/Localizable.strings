@@ -997,7 +997,7 @@
 
 "accessibility_test_certificate_detail_view_data_test_country" = "Country performing test";
 
-"test_certificate_detail_view_data_test_issuer" = "Zertifikataussteller / Certificate issuer";
+"test_certificate_detail_view_data_test_issuer" = "Zertifikatsaussteller / Certificate issuer";
 
 "accessibility_test_certificate_detail_view_data_test_issuer" = "Certificate issuer";
 
@@ -1057,7 +1057,7 @@
 
 "accessibility_recovery_certificate_detail_view_data_country" = "Country performing test";
 
-"recovery_certificate_detail_view_data_issuer" = "Zertifikataussteller / Certificate issuer";
+"recovery_certificate_detail_view_data_issuer" = "Zertifikatsaussteller / Certificate issuer";
 
 "accessibility_recovery_certificate_detail_view_data_issuer" = "Certificate issuer";
 

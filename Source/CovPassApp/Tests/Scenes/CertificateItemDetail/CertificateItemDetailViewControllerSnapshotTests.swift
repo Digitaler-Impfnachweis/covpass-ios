@@ -10,10 +10,14 @@ import CovPassCommon
 import XCTest
 
 class CertificateItemDetailViewControllerSnapshotTests: BaseSnapShotTests {
-    func testRevokedCertificate() throws {
-        // Given
-        var token = try ExtendedCBORWebToken.token1Of1()
-        token.revoked = true
+    private var sut: CertificateItemDetailViewController!
+
+    override func setUpWithError() throws {
+        try super.setUpWithError()
+        try configureSut(token: .token1Of1())
+    }
+
+    private func configureSut(token: ExtendedCBORWebToken) {
         let viewModel = CertificateItemDetailViewModel(
             router: CertificateItemDetailRouterMock(),
             repository: VaccinationRepositoryMock(),
@@ -21,31 +25,34 @@ class CertificateItemDetailViewControllerSnapshotTests: BaseSnapShotTests {
             resolvable: nil,
             vaasResultToken: nil
         )
-        let viewController = CertificateItemDetailViewController(
-            viewModel: viewModel
-        )
+        sut = CertificateItemDetailViewController(viewModel: viewModel)
+    }
+
+    override func tearDownWithError() throws {
+        sut = nil
+        try super.tearDownWithError()
+    }
+
+    func testRevokedCertificate() throws {
+        // Given
+        var token = try ExtendedCBORWebToken.token1Of1()
+        token.revoked = true
+        configureSut(token: token)
         RunLoop.main.run(for: 0.1)
+
         // When & Then
-        verifyView(view: viewController.view, height: 1800)
+        verifyView(view: sut.view, height: 1800)
     }
     
     func testInvalidCertificate() throws {
         // Given
         var token = try ExtendedCBORWebToken.token1Of1()
         token.invalid = true
-        let viewModel = CertificateItemDetailViewModel(
-            router: CertificateItemDetailRouterMock(),
-            repository: VaccinationRepositoryMock(),
-            certificate: token,
-            resolvable: nil,
-            vaasResultToken: nil
-        )
-        let viewController = CertificateItemDetailViewController(
-            viewModel: viewModel
-        )
+        configureSut(token: token)
+
         RunLoop.main.run(for: 0.1)
         // When & Then
-        verifyView(view: viewController.view, height: 1800)
+        verifyView(view: sut.view, height: 1800)
     }
 
     func testExpiringCertificate() throws {
@@ -71,16 +78,7 @@ class CertificateItemDetailViewControllerSnapshotTests: BaseSnapShotTests {
         // Given
         var token = try ExtendedCBORWebToken.token1Of1()
         token.vaccinationCertificate.exp = .init(timeIntervalSinceReferenceDate: 0)
-        let viewModel = CertificateItemDetailViewModelMock(
-            router: CertificateItemDetailRouterMock(),
-            repository: VaccinationRepositoryMock(),
-            certificate: token,
-            resolvable: nil,
-            vaasResultToken: nil
-        )
-        let sut = CertificateItemDetailViewController(
-            viewModel: viewModel
-        )
+        configureSut(token: token)
 
         // When & Then
         verifyView(view: sut.view, height: 1800)
@@ -91,16 +89,30 @@ class CertificateItemDetailViewControllerSnapshotTests: BaseSnapShotTests {
         var token = try ExtendedCBORWebToken.token1Of1()
         token.vaccinationCertificate.exp = .init(timeIntervalSinceReferenceDate: 0)
         token.vaccinationCertificate.iss = "FR"
-        let viewModel = CertificateItemDetailViewModelMock(
-            router: CertificateItemDetailRouterMock(),
-            repository: VaccinationRepositoryMock(),
-            certificate: token,
-            resolvable: nil,
-            vaasResultToken: nil
-        )
-        let sut = CertificateItemDetailViewController(
-            viewModel: viewModel
-        )
+        configureSut(token: token)
+
+        // When & Then
+        verifyView(view: sut.view, height: 1800)
+    }
+
+    func testRecovery() throws {
+        // Given
+        var token = CBORWebToken.mockRecoveryCertificate.extended()
+        token.vaccinationCertificate.exp = .init(timeIntervalSinceReferenceDate: 0)
+        configureSut(token: token)
+
+        // When & Then
+        verifyView(view: sut.view, height: 1800)
+    }
+
+    func testTest() throws {
+        // Given
+        var token = CBORWebToken.mockTestCertificate.extended()
+        token.vaccinationCertificate.exp = .init(timeIntervalSinceReferenceDate: 0)
+        let test = try XCTUnwrap(token.vaccinationCertificate.hcert.dgc.t?.first)
+        test.sc = .init(timeIntervalSinceReferenceDate: 60)
+        token.vaccinationCertificate.hcert.dgc.t = [test]
+        configureSut(token: token)
 
         // When & Then
         verifyView(view: sut.view, height: 1800)
