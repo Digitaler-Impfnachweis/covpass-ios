@@ -78,7 +78,7 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
     }
 
     var immunizationButton: String {
-        if selectedCertificatetIsInvalid || selectedCertificateIsRevoked {
+        if selectedCertificatetIsInvalid || selectedCertificateIsRevoked || selectedTokenIsExpired {
             return "certificates_overview_expired_action_button_title".localized
         }
         return "recovery_certificate_overview_action_button_title".localized
@@ -357,7 +357,7 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
     }
 
     func immunizationButtonTapped() {
-        if selectedCertificatetIsInvalid || selectedCertificateIsRevoked {
+        if selectedCertificatetIsInvalid || selectedCertificateIsRevoked || selectedTokenIsExpired {
             resolver.fulfill(.addNewCertificate)
         } else {
             showLatestCertificate()
