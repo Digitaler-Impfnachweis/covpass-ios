@@ -69,6 +69,7 @@ class RuleCheckDetailViewController: UIViewController {
         headerView.actionButton.enableAccessibility(label: Constants.Accessibility.close.label)
         subtitleLabel.attributedText = viewModel.subtitle.styledAs(.body).colored(.onBackground70)
         subtitleLabel.layoutMargins = .init(top: .zero, left: .space_24, bottom: .zero, right: .space_24)
+        headerView.textLabel.accessibilityTraits = .header
     }
 
     private func setupList() {
