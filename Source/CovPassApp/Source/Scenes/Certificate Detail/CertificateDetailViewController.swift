@@ -95,6 +95,7 @@ class CertificateDetailViewController: UIViewController {
     private func setupHeadline() {
         nameHeadline.attributedText = viewModel.name.styledAs(.header_1).colored(.onBackground100)
         nameHeadline.layoutMargins = .init(top: .zero, left: .space_24, bottom: .zero, right: .space_24)
+        nameHeadline.textableView.accessibilityTraits = .header
         stackView.setCustomSpacing(.space_24, after: nameHeadline)
     }
 
@@ -192,6 +193,7 @@ class CertificateDetailViewController: UIViewController {
         stackView.setCustomSpacing(.space_12, after: personalDataHeadline)
         personalDataHeadline.attributedText = "certificates_overview_personal_data_title".localized.styledAs(.header_2)
         personalDataHeadline.layoutMargins = .init(top: .space_30, left: .space_24, bottom: .zero, right: .space_24)
+        personalDataHeadline.textableView.accessibilityTraits = .header
 
         nameView.attributedTitleText = "certificates_overview_personal_data_name".localized.styledAs(.header_3)
         nameView.attributedBodyText = viewModel.nameReversed.styledAs(.body)
@@ -208,6 +210,7 @@ class CertificateDetailViewController: UIViewController {
 
         allCertificatesHeadline.attributedText = "certificates_overview_all_certificates_title".localized.styledAs(.header_2)
         allCertificatesHeadline.layoutMargins = .init(top: .space_30, left: .space_24, bottom: .space_16, right: .space_24)
+        allCertificatesHeadline.textableView.accessibilityTraits = .header
     }
 
     private func setupCertificates() {
