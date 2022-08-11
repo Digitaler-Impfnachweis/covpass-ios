@@ -34,4 +34,12 @@ class InfoHeaderViewTests: XCTestCase {
         XCTAssertEqual(sut.actionButton.imageView?.image, .cancel)
         XCTAssertEqual(sut.layoutMargins, .init(top: .zero, left: .space_24, bottom: .zero, right: .space_24))
     }
+
+    func testTextLabel() throws {
+        // When
+        let textLabel = try XCTUnwrap(sut.textLabel)
+
+        // Then
+        XCTAssertTrue(textLabel.accessibilityTraits.contains(.header))
+    }
 }

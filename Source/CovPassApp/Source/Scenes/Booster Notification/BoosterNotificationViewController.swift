@@ -34,11 +34,16 @@ class BoosterNotificationViewController: UIViewController {
         detailsView.attributedBodyText = viewModel.disclaimerText.styledAs(.body)
         detailsView.bottomBorder.isHidden = true
 
-        iconLabel.text = viewModel.highlightLabelText // no styling
+        setupIconLabel()
 
         actionButton.title = viewModel.actionButtonTitle
         actionButton.action = { [weak self] in
             self?.viewModel.resolver.fulfill_()
         }
+    }
+
+    private func setupIconLabel() {
+        iconLabel.text = viewModel.highlightLabelText // no styling
+        iconLabel.isAccessibilityElement = false
     }
 }

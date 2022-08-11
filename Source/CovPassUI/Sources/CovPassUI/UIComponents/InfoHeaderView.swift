@@ -47,6 +47,7 @@ public class InfoHeaderView: XibView {
     override public func initView() {
         super.initView()
         layoutMargins = .init(top: .zero, left: .space_24, bottom: .zero, right: .space_24)
+        textLabel.accessibilityTraits = .header
     }
 
     // MARK: - IBAction
