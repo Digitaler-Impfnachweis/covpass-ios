@@ -94,6 +94,7 @@ class CertificateDetailViewController: UIViewController {
 
     private func setupHeadline() {
         nameHeadline.attributedText = viewModel.name.styledAs(.header_1).colored(.onBackground100)
+        nameHeadline.textableView.accessibilityTraits = .header
         nameHeadline.layoutMargins = .init(top: .zero, left: .space_24, bottom: .zero, right: .space_24)
         nameHeadline.textableView.accessibilityTraits = .header
         stackView.setCustomSpacing(.space_24, after: nameHeadline)
@@ -191,24 +192,29 @@ class CertificateDetailViewController: UIViewController {
 
     private func setupPersonalData() {
         stackView.setCustomSpacing(.space_12, after: personalDataHeadline)
-        personalDataHeadline.attributedText = "certificates_overview_personal_data_title".localized.styledAs(.header_2)
+        personalDataHeadline.attributedText = viewModel.title.styledAs(.header_2)
+        personalDataHeadline.textableView.accessibilityTraits = .header
         personalDataHeadline.layoutMargins = .init(top: .space_30, left: .space_24, bottom: .zero, right: .space_24)
         personalDataHeadline.textableView.accessibilityTraits = .header
 
-        nameView.attributedTitleText = "certificates_overview_personal_data_name".localized.styledAs(.header_3)
+        nameView.attributedTitleText = viewModel.nameTitle.styledAs(.header_3)
+        nameView.accessibilityLabelValue = viewModel.accessibilityName
         nameView.attributedBodyText = viewModel.nameReversed.styledAs(.body)
         nameView.contentView?.layoutMargins = .init(top: .space_12, left: .space_24, bottom: .space_12, right: .space_24)
 
-        nameTransliteratedView.attributedTitleText = "vaccination_certificate_detail_view_data_name_standard".localized.styledAs(.header_3)
+        nameTransliteratedView.attributedTitleText = viewModel.nameTitleStandard.styledAs(.header_3)
         nameTransliteratedView.attributedBodyText = viewModel.nameTransliterated.styledAs(.body)
+        nameTransliteratedView.accessibilityLabelValue = viewModel.accessibilityNameStandard
         nameTransliteratedView.contentView?.layoutMargins = .init(top: .space_12, left: .space_24, bottom: .space_12, right: .space_24)
 
-        birtdateView.attributedTitleText = "certificates_overview_personal_data_date_of_birth".localized.styledAs(.header_3)
+        birtdateView.attributedTitleText = viewModel.dateOfBirth.styledAs(.header_3)
         birtdateView.attributedBodyText = viewModel.birthDate.styledAs(.body)
+        birtdateView.accessibilityLabelValue = viewModel.accessibilityDateOfBirth
         birtdateView.contentView?.layoutMargins = .init(top: .space_12, left: .space_24, bottom: .space_12, right: .space_24)
-        birtdateView.accessibilityLabel = "\(birtdateView.attributedTitleText?.string ?? "")\n \(DateUtils.audioDate(viewModel.birthDate) ?? viewModel.birthDate)"
+        birtdateView.accessibilityLabel = "\(viewModel.accessibilityDateOfBirth)\n \(DateUtils.audioDate(viewModel.birthDate) ?? viewModel.birthDate)"
 
-        allCertificatesHeadline.attributedText = "certificates_overview_all_certificates_title".localized.styledAs(.header_2)
+        allCertificatesHeadline.attributedText = viewModel.certificatesTitle.styledAs(.header_2)
+        allCertificatesHeadline.textableView.enableAccessibility(label: viewModel.accessibilityCertificatesTitle, traits: .header)
         allCertificatesHeadline.layoutMargins = .init(top: .space_30, left: .space_24, bottom: .space_16, right: .space_24)
         allCertificatesHeadline.textableView.accessibilityTraits = .header
     }

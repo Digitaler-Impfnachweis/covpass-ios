@@ -21,6 +21,15 @@ protocol CertificateDetailViewModelProtocol {
     var immunizationIcon: UIImage? { get }
     var immunizationTitle: String { get }
     var immunizationBody: String { get }
+    var title: String { get }
+    var nameTitle: String { get }
+    var nameTitleStandard: String { get }
+    var dateOfBirth: String { get }
+    var certificatesTitle: String { get }
+    var accessibilityName: String { get }
+    var accessibilityNameStandard: String { get }
+    var accessibilityDateOfBirth: String { get }
+    var accessibilityCertificatesTitle: String { get }
     var items: [CertificateItem] { get }
     var showBoosterNotification: Bool { get }
     var showScanHint: Bool { get }

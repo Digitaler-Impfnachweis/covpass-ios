@@ -38,6 +38,15 @@ final class CertificateDetailViewModelMock: CertificateDetailViewModelProtocol {
     var vaccinationExpiryReissueButtonTitle = "Renew vaccination certificate"
     var recoveryExpiryReissueNotificationBody = "The technical expiry date of your recovery certificate is coming up. Renew the certificate to continue using it."
     var recoveryExpiryReissueButtonTitle = "Renew recovery certificate"
+    var title = "Personal details"
+    var nameTitle = "Name, Vorname / Name, first name"
+    var nameTitleStandard = "Standardisierter Name, Vorname / Standardized name, first name"
+    var dateOfBirth = "Geburtsdatum / Date of birth (YYYY-MM-DD)"
+    var certificatesTitle = "Digitales EU Zertifikat"
+    var accessibilityName = "Name, first name"
+    var accessibilityNameStandard = "Standardized name, first name"
+    var accessibilityDateOfBirth = "Date of birth (YYYY-MM-DD)"
+    var accessibilityCertificatesTitle = "Digital EU Zertifikat"
     var showBoosterReissueNotification = false
     var showVaccinationExpiryReissueNotification = false
     var showBoosterReissueIsNewBadge = false

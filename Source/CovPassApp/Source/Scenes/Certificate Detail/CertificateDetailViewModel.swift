@@ -24,13 +24,27 @@ private enum Constants {
             static let vaccinationExpiryButtonTitle = "renewal_expiry_notification_button_vaccination".localized
             static let recoveryExpiryButtonTitle = "renewal_expiry_notification_button_recovery".localized
         }
+        enum PersonalData {
+            static let title = "certificates_overview_personal_data_title".localized
+            static let name = "certificates_overview_personal_data_name".localized
+            static let nameStandard = "vaccination_certificate_detail_view_data_name_standard".localized
+            static let dateOfBirth = "certificates_overview_personal_data_date_of_birth".localized
+            static let certificatesTitle = "certificates_overview_all_certificates_title".localized
+        }
+    }
+    enum Accessibility {
+        enum PersonalData {
+            static let name = "accessibility_certificates_overview_personal_data_name".localized
+            static let nameStandard = "accessibility_vaccination_certificate_detail_view_data_name_standard".localized
+            static let dateOfBirth = "accessibility_certificates_overview_personal_data_date_of_birth".localized
+            static let certificatesTitle = "accessibility_certificates_overview_all_certificates_title".localized
+        }
     }
 }
 
 class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
 
     // MARK: - Properties
-
     weak var delegate: ViewModelDelegate?
     var router: CertificateDetailRouterProtocol
     private let repository: VaccinationRepositoryProtocol
@@ -40,72 +54,53 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
     private let resolver: Resolver<CertificateDetailSceneResult>
     private var isFavorite = false
     private var showFavorite = false
-
-    private var selectedCertificate: ExtendedCBORWebToken? {
-        certificates.sortLatest().first
+    private var selectedCertificate: ExtendedCBORWebToken? { certificates.sortLatest().first }
+    private var selectedToken: CBORWebToken? { selectedCertificate?.vaccinationCertificate }
+    private var selectedDgc: DigitalGreenCertificate? { selectedToken?.hcert.dgc}
+    private var selectedCertificateIsRevoked: Bool { selectedCertificate?.isRevoked ?? false }
+    private var selectedCertificatetIsInvalid: Bool { selectedCertificate?.isInvalid ?? false }
+    private var selectedCertificatetIsRecovery: Bool { selectedCertificate?.vaccinationCertificate.isRecovery ?? false }
+    private var selectedTokenIsGermanIssuer: Bool { selectedToken?.isGermanIssuer ?? false }
+    private var selectedTokenIsExpired: Bool { selectedToken?.isExpired ?? false }
+    private var selectedCertificateIsGermanExpiringSoon: Bool {
+        guard let token = selectedToken else {
+            return false
+        }
+        return token.expiresSoon && token.isGermanIssuer
     }
-
-    private var selectedToken: CBORWebToken? {
-        selectedCertificate?.vaccinationCertificate
+    private var selectedCertificateIsNonGermanExpiringSoon: Bool {
+        guard let token = selectedToken else {
+            return false
+        }
+        return token.expiresSoon && !token.isGermanIssuer
     }
-
-    private var selectedDgc: DigitalGreenCertificate?  {
-        selectedToken?.hcert.dgc
+    var name: String { selectedDgc?.nam.fullName ?? ""}
+    var nameReversed: String { selectedDgc?.nam.fullNameReverse ?? "" }
+    var nameTransliterated: String { selectedDgc?.nam.fullNameTransliteratedReverse ?? "" }
+    var title = Constants.Keys.PersonalData.title
+    var nameTitle = Constants.Keys.PersonalData.name
+    var nameTitleStandard = Constants.Keys.PersonalData.nameStandard
+    var dateOfBirth = Constants.Keys.PersonalData.dateOfBirth
+    var certificatesTitle = Constants.Keys.PersonalData.certificatesTitle
+    var accessibilityName = Constants.Accessibility.PersonalData.name
+    var accessibilityNameStandard = Constants.Accessibility.PersonalData.nameStandard
+    var accessibilityDateOfBirth = Constants.Accessibility.PersonalData.dateOfBirth
+    var accessibilityCertificatesTitle = Constants.Accessibility.PersonalData.certificatesTitle
+    var fullImmunization: Bool { certificates.map { $0.firstVaccination?.fullImmunization ?? false }.first(where: { $0 }) ?? false }
+    var birthDate: String {
+        guard let dgc = selectedDgc else { return "" }
+        return DateUtils.displayIsoDateOfBirth(dgc)
     }
-
-    private var selectedCertificateIsRevoked: Bool {
-        selectedCertificate?.isRevoked ?? false
-    }
-
-    private var selectedCertificatetIsInvalid: Bool {
-        selectedCertificate?.isInvalid ?? false
-    }
-
-    private var selectedCertificatetIsRecovery: Bool {
-        selectedCertificate?.vaccinationCertificate.isRecovery ?? false
-    }
-
-    private var selectedTokenIsGermanIssuer: Bool {
-        selectedToken?.isGermanIssuer ?? false
-    }
-
-    private var selectedTokenIsExpired: Bool {
-        selectedToken?.isExpired ?? false
-    }
-
-    var fullImmunization: Bool {
-        certificates.map { $0.vaccinationCertificate.hcert.dgc.v?.first?.fullImmunization ?? false }.first(where: { $0 }) ?? false
-    }
-
     var immunizationButton: String {
         if selectedCertificatetIsInvalid || selectedCertificateIsRevoked || selectedTokenIsExpired {
             return "certificates_overview_expired_action_button_title".localized
         }
         return "recovery_certificate_overview_action_button_title".localized
     }
-
     var favoriteIcon: UIImage? {
         if !showFavorite { return nil }
         return isFavorite ? .starFull : .starPartial
     }
-
-    var name: String {
-        selectedDgc?.nam.fullName ?? ""
-    }
-
-    var nameReversed: String {
-        selectedDgc?.nam.fullNameReverse ?? ""
-    }
-
-    var nameTransliterated: String {
-        selectedDgc?.nam.fullNameTransliteratedReverse ?? ""
-    }
-
-    var birthDate: String {
-        guard let dgc = selectedDgc else { return "" }
-        return DateUtils.displayIsoDateOfBirth(dgc)
-    }
-
     var immunizationIcon: UIImage? {
         if selectedTokenIsExpired || selectedCertificatetIsInvalid || selectedCertificateIsRevoked
         {
@@ -200,20 +195,6 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
             return "vaccination_certificate_overview_incomplete_message".localized
         }
         return "recovery_certificate_overview_message".localized
-    }
-
-    private var selectedCertificateIsGermanExpiringSoon: Bool {
-        guard let token = selectedToken else {
-            return false
-        }
-        return token.expiresSoon && token.isGermanIssuer
-    }
-
-    private var selectedCertificateIsNonGermanExpiringSoon: Bool {
-        guard let token = selectedToken else {
-            return false
-        }
-        return token.expiresSoon && !token.isGermanIssuer
     }
 
     var showScanHint: Bool {
