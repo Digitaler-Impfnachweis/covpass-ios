@@ -68,6 +68,7 @@ class CertificateViewController: UIViewController {
     private func configureToolbarView() {
         toolbarView.state = .confirm("vaccination_certificate_detail_view_qrcode_screen_action_button_title".localized)
         toolbarView.setUpLeftButton(leftButtonItem: .disabledTextButton)
+        toolbarView.disableRightButton()
         toolbarView.layoutMargins.top = .space_24
         toolbarView.delegate = self
     }
