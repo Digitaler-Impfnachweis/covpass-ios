@@ -112,6 +112,8 @@ public class ValidationResultViewController: UIViewController {
     private func configureToolbarView() {
         toolbarView.state = viewModel.toolbarState
         toolbarView.delegate = self
+        toolbarView.disableLeftButton()
+        toolbarView.disableRightButton()
     }
     
     private func configureAccessibility() {
