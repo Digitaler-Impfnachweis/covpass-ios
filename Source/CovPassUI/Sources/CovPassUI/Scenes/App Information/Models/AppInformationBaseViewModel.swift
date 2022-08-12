@@ -36,16 +36,25 @@ open class AppInformationBaseViewModel: AppInformationViewModelProtocol {
 
 extension AppInformationBaseViewModel {
     public enum Texts {
-        public static let leichteSprache = NSLocalizedString("app_information_title_company_easy_language", comment: "")
-        public static let contactTitle = NSLocalizedString("app_information_title_contact", comment: "")
-        public static let faqTitle = NSLocalizedString("app_information_title_faq", comment: "")
-        public static let datenschutzTitle = NSLocalizedString("app_information_title_datenschutz", comment: "")
-        public static let companyDetailsTitle = NSLocalizedString("app_information_title_company_details", comment: "")
-        public static let openSourceLicenseTitle = NSLocalizedString("app_information_title_open_source", comment: "")
-        public static let appInformationTitle = NSLocalizedString("app_information_title_update", comment: "")
-        public static let title = NSLocalizedString("app_information_title", comment: "")
-        public static let description = NSLocalizedString("app_information_message", comment: "")
-        public static let accessibilityStatementTitle = NSLocalizedString("app_information_title_accessibility_statement", comment: "")
+        public static let leichteSprache = "app_information_title_company_easy_language".localized(bundle: .main)
+        public static let contactTitle = "app_information_title_contact".localized(bundle: .main)
+        public static let faqTitle = "app_information_title_faq".localized(bundle: .main)
+        public static let datenschutzTitle = "app_information_title_datenschutz".localized(bundle: .main)
+        public static let companyDetailsTitle = "app_information_title_company_details".localized(bundle: .main)
+        public static let openSourceLicenseTitle = "app_information_title_open_source".localized(bundle: .main)
+        public static let appInformationTitle = "app_information_title_update".localized(bundle: .main)
+        public static let title = "app_information_title".localized(bundle: .main)
+        public static let description = "app_information_message".localized(bundle: .main)
+        public static let accessibilityStatementTitle = "app_information_title_accessibility_statement".localized(bundle: .main)
         public static let appVersion = String(format: "Version %@", Bundle.main.appVersion())
+    }
+    public enum AccessiblityAnnouncments {
+        public static let leichteSprache = Texts.leichteSprache
+        public static let contactTitle = "accessibility_app_information_title_contact_announce".localized(bundle: .main)
+        public static let faqTitle = Texts.faqTitle
+        public static let datenschutzTitle = "accessibility_app_information_datenschutz_announce".localized(bundle: .main)
+        public static let companyDetailsTitle = Texts.companyDetailsTitle
+        public static let openSourceLicenseTitle = "accessibility_app_information_title_open_source_announce".localized(bundle: .main)
+        public static let accessibilityStatementTitle = Texts.accessibilityStatementTitle
     }
 }

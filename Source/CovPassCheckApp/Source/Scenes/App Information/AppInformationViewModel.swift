@@ -45,13 +45,27 @@ class GermanAppInformationViewModel: CheckAppInformationBaseViewModel {
         licenseBundle: Bundle = .commonBundle
     ) {
         let entries: [AppInformationEntry] = [
-            .webEntry(title: Texts.leichteSprache, url: URL(string: "https://digitaler-impfnachweis-app.de/webviews/leichte-sprache/covpasscheckapp")!),
-            .webEntry(title: Texts.contactTitle, url: mainBundle.url(forResource: "contact-covpasscheck-de", withExtension: "html")!),
-            .webEntry(title: Texts.faqTitle, url: URL(string: "https://www.digitaler-impfnachweis-app.de/webviews/verification-app/faq/")!),
-            .webEntry(title: Texts.datenschutzTitle, url: mainBundle.url(forResource: "privacy-covpasscheck-de", withExtension: "html")!),
-            .webEntry(title: Texts.companyDetailsTitle, url: URL(string: "https://www.digitaler-impfnachweis-app.de/webviews/imprint/")!),
-            .webEntry(title: Texts.openSourceLicenseTitle, url: licenseBundle.url(forResource: "license_de" , withExtension: "html")!),
-            .webEntry(title: Texts.accessibilityStatementTitle, url: URL(string: "https://www.digitaler-impfnachweis-app.de/webviews/covpasscheck-app-ios-barrierefreiheitserklaerung/")!),
+            .webEntry(title: Texts.leichteSprache,
+                      url: URL(string: "https://digitaler-impfnachweis-app.de/webviews/leichte-sprache/covpasscheckapp")!,
+                      accessibilityAnnouncement: AccessiblityAnnouncments.leichteSprache),
+            .webEntry(title: Texts.contactTitle,
+                      url: mainBundle.url(forResource: "contact-covpasscheck-de", withExtension: "html")!,
+                      accessibilityAnnouncement: AccessiblityAnnouncments.contactTitle),
+            .webEntry(title: Texts.faqTitle,
+                      url: URL(string: "https://www.digitaler-impfnachweis-app.de/webviews/verification-app/faq/")!,
+                      accessibilityAnnouncement: AccessiblityAnnouncments.faqTitle),
+            .webEntry(title: Texts.datenschutzTitle,
+                      url: mainBundle.url(forResource: "privacy-covpasscheck-de", withExtension: "html")!,
+                      accessibilityAnnouncement: AccessiblityAnnouncments.datenschutzTitle),
+            .webEntry(title: Texts.companyDetailsTitle,
+                      url: URL(string: "https://www.digitaler-impfnachweis-app.de/webviews/imprint/")!,
+                      accessibilityAnnouncement: AccessiblityAnnouncments.companyDetailsTitle),
+            .webEntry(title: Texts.openSourceLicenseTitle,
+                      url: licenseBundle.url(forResource: "license_de" , withExtension: "html")!,
+                      accessibilityAnnouncement: AccessiblityAnnouncments.openSourceLicenseTitle),
+            .webEntry(title: Texts.accessibilityStatementTitle,
+                      url: URL(string: "https://www.digitaler-impfnachweis-app.de/webviews/covpasscheck-app-ios-barrierefreiheitserklaerung/")!,
+                      accessibilityAnnouncement: AccessiblityAnnouncments.accessibilityStatementTitle),
         ]
         super.init(router: router, entries: entries, userDefaults: userDefaults)
     }
@@ -65,12 +79,24 @@ class EnglishAppInformationViewModel: CheckAppInformationBaseViewModel {
         licenseBundle: Bundle = .commonBundle
     ) {
         let entries: [AppInformationEntry] = [
-            .webEntry(title: Texts.contactTitle, url: mainBundle.url(forResource: "contact-covpasscheck-en", withExtension: "html")!),
-            .webEntry(title: Texts.faqTitle, url: URL(string: "https://www.digitaler-impfnachweis-app.de/en/webviews/client-app/faq/")!),
-            .webEntry(title: Texts.datenschutzTitle, url: mainBundle.url(forResource: "privacy-covpasscheck-en", withExtension: "html")!),
-            .webEntry(title: Texts.companyDetailsTitle, url: URL(string: "https://www.digitaler-impfnachweis-app.de/en/webviews/imprint/")!),
-            .webEntry(title: Texts.openSourceLicenseTitle, url: licenseBundle.url(forResource: "license_en" , withExtension: "html")!),
-            .webEntry(title: Texts.accessibilityStatementTitle, url: URL(string: "https://www.digitaler-impfnachweis-app.de/en/webviews/covpasscheck-app-ios-accessibility-statement/")!),
+            .webEntry(title: Texts.contactTitle,
+                      url: mainBundle.url(forResource: "contact-covpasscheck-en", withExtension: "html")!,
+                      accessibilityAnnouncement: AccessiblityAnnouncments.contactTitle),
+            .webEntry(title: Texts.faqTitle,
+                      url: URL(string: "https://www.digitaler-impfnachweis-app.de/en/webviews/client-app/faq/")!,
+                      accessibilityAnnouncement: AccessiblityAnnouncments.faqTitle),
+            .webEntry(title: Texts.datenschutzTitle,
+                      url: mainBundle.url(forResource: "privacy-covpasscheck-en", withExtension: "html")!,
+                      accessibilityAnnouncement: AccessiblityAnnouncments.datenschutzTitle),
+            .webEntry(title: Texts.companyDetailsTitle,
+                      url: URL(string: "https://www.digitaler-impfnachweis-app.de/en/webviews/imprint/")!,
+                      accessibilityAnnouncement: AccessiblityAnnouncments.companyDetailsTitle),
+            .webEntry(title: Texts.openSourceLicenseTitle,
+                      url: licenseBundle.url(forResource: "license_en" , withExtension: "html")!,
+                      accessibilityAnnouncement: AccessiblityAnnouncments.openSourceLicenseTitle),
+            .webEntry(title: Texts.accessibilityStatementTitle,
+                      url: URL(string: "https://www.digitaler-impfnachweis-app.de/en/webviews/covpasscheck-app-ios-accessibility-statement/")!,
+                      accessibilityAnnouncement: AccessiblityAnnouncments.accessibilityStatementTitle),
         ]
         super.init(router: router, entries: entries, userDefaults: userDefaults)
     }
@@ -84,10 +110,12 @@ private enum LocalText {
 }
 
 private extension AppInformationEntry {
-    static func webEntry(title: String, url: URL) -> AppInformationEntry {
+    static func webEntry(title: String,
+                         url: URL,
+                         accessibilityAnnouncement: String) -> AppInformationEntry {
         .init(
             title: title,
-            scene: WebviewSceneFactory(title: title, url: url)
+            scene: WebviewSceneFactory(title: title, url: url, accessibilityAnnouncement: accessibilityAnnouncement)
         )
     }
 }

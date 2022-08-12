@@ -29,16 +29,17 @@ open class WebviewViewController: UIViewController {
     override public func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .neutralWhite
-
         setupTitle()
         setupNavigationBar()
-
         webView.backgroundColor = .neutralWhite
         webView.navigationDelegate = self
         webView.load(viewModel.urlRequest)
-
     }
 
+    open override func viewDidAppear(_ animated: Bool) {
+        UIAccessibility.post(notification: .layoutChanged, argument: viewModel.accessibilityAnnouncement)
+    }
+    
     private func setupTitle() {
         if navigationController?.navigationBar.backItem != nil {
             title = viewModel.title
@@ -46,6 +47,7 @@ open class WebviewViewController: UIViewController {
         }
         let label = UILabel()
         label.attributedText = viewModel.title?.styledAs(.header_3)
+        label.accessibilityTraits = .header
         navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: label)
     }
 

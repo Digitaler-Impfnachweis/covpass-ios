@@ -87,6 +87,7 @@ public class OnboardingContainerViewController: UIViewController, ViewModelDeleg
         updateToolbarForPage(at: currentIndex)
         toolbarView.setUpLeftButton(leftButtonItem: .navigationArrow)
         toolbarView.delegate = self
+        toolbarView.disableRightButton()
     }
 
     private func configureBottomView() {

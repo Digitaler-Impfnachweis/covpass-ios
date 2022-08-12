@@ -48,6 +48,7 @@ public class InfoHeaderView: XibView {
         super.initView()
         layoutMargins = .init(top: .zero, left: .space_24, bottom: .zero, right: .space_24)
         textLabel.accessibilityTraits = .header
+        accessibilityElements = [textLabel!, actionButton!]
     }
 
     // MARK: - IBAction

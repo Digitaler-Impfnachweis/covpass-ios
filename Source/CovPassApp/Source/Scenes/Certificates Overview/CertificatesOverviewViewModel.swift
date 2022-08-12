@@ -14,6 +14,11 @@ import PromiseKit
 import UIKit
 
 private enum Constants {
+    enum Accessibility {
+        static let addCertificate = "accessibility_vaccination_start_screen_label_add_certificate".localized
+        static let moreInformation = "accessibility_vaccination_start_screen_label_information".localized
+        static let announcement = "accessibility_start_screen_info_announce".localized
+    }
     enum Config {
         static let privacySrcDe = "privacy-covpass-de"
         static let privacySrcExt = "html"
@@ -39,18 +44,6 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
     private lazy var faqURL: URL? = locale.isGerman() ? Constants.Config.covpassFaqUrlGerman : Constants.Config.covpassFaqUrlEnglish
     private let jsonDecoder = JSONDecoder()
     private let pdfExtractor: CertificateExtractorProtocol
-    var certificatePairsSorted: [CertificatePair] {
-        repository.matchedCertificates(for: certificateList).sorted(by: { c, _ -> Bool in c.isFavorite })
-    }
-    
-    var certificateViewModels: [CardViewModel] {
-        cardViewModels(for: certificatePairsSorted)
-    }
-    
-    var hasCertificates: Bool {
-        certificateList.certificates.count > 0
-    }
-    
     private var privacyFileUrl: URL? {
         guard let url =  Bundle.main.url(forResource: Constants.Config.privacySrcDe,
                                          withExtension: Constants.Config.privacySrcExt) else {
@@ -58,7 +51,6 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
         }
         return url
     }
-    
     private var currentDataPrivacyHash: String? {
         guard let url = privacyFileUrl else {
             return nil
@@ -68,7 +60,14 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
         }
         return dataPrivacyHash
     }
-    
+    var certificatePairsSorted: [CertificatePair] {
+        repository.matchedCertificates(for: certificateList).sorted(by: { c, _ -> Bool in c.isFavorite })
+    }
+    var certificateViewModels: [CardViewModel] { cardViewModels(for: certificatePairsSorted) }
+    var hasCertificates: Bool { certificateList.certificates.count > 0 }
+    var accessibilityAddCertificate = Constants.Accessibility.addCertificate
+    var accessibilityMoreInformation = Constants.Accessibility.moreInformation
+    var accessibilityAnnouncement = Constants.Accessibility.announcement
     var isLoading: Bool = false {
         didSet {
             delegate?.viewModelDidUpdate()
@@ -543,9 +542,6 @@ private extension CertificatesOverviewViewModel {
             return .value
         }
         UserDefaults.StartupInfo.set(true, forKey: .scanPleaseShown)
-#if DEBUG
-        UserDefaults.StartupInfo.set(false, forKey: .scanPleaseShown)
-#endif
         return router.showScanPleaseHint()
     }
 }

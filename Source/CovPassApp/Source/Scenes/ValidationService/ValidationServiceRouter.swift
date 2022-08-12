@@ -208,7 +208,9 @@ struct ValidationServiceRouter: ValidationServiceRoutable {
     
     func routeToPrivacyStatement(url: URL) {
         let webViewScene = WebviewSceneFactory(title: "app_information_title_datenschutz".localized,
-                                               url: url, isToolbarShown: true)
+                                               url: url,
+                                               isToolbarShown: true,
+                                               accessibilityAnnouncement: "accessibility_app_information_datenschutz_announce".localized)
         sceneCoordinator.push(webViewScene)
     }
     

@@ -60,6 +60,7 @@ class HowToScanViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         UIAccessibility.post(notification: .layoutChanged, argument: viewModel.sceneOpeningAnnouncement)
+        UIAccessibility.post(notification: .layoutChanged, argument: headline.textLabel)
     }
     
     override func viewWillDisappear(_ animated: Bool) {

@@ -24,7 +24,8 @@ class ValidationServiceViewControllerSnapShotTests: BaseSnapShotTests {
         let vm = WebviewViewModel(title: "app_information_title_datenschutz".localized(bundle: Bundle.uiBundle),
                                   url: ValidationServiceInitialisation.mock.privacyUrl,
                                   closeButtonShown: false,
-                                  isToolbarShown: true)
+                                  isToolbarShown: true,
+                                  accessibilityAnnouncement: "")
         let vc = WebviewViewController(viewModel: vm)
         
         verifyView(view: vc.view)

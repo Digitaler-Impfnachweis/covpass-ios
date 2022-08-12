@@ -16,6 +16,9 @@ protocol CertificatesOverviewViewModelProtocol {
     var certificateViewModels: [CardViewModel] { get }
     var hasCertificates: Bool { get }
     var isLoading: Bool { get set }
+    var accessibilityAddCertificate: String { get }
+    var accessibilityMoreInformation: String { get }
+    var accessibilityAnnouncement: String { get }
     func refresh() -> Promise<Void>
     func updateTrustList()
     func updateBoosterRules()

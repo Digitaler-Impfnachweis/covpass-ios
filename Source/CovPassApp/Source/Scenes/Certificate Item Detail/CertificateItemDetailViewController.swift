@@ -86,6 +86,7 @@ class CertificateItemDetailViewController: UIViewController {
     }
 
     private func setupHeadline() {
+        titleLabel.textableView.accessibilityTraits = .header
         if viewModel.hasValidationResult {
             titleLabel.attributedText = viewModel.items.first?.value.styledAs(.header_2)
             titleLabel.layoutMargins = .init(top: .zero, left: .space_24, bottom: .space_2, right: .space_24)

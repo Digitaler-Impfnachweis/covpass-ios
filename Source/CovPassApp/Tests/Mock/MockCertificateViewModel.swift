@@ -15,6 +15,8 @@ import UIKit
 
 class MockCertificateViewModel: CertificatesOverviewViewModelProtocol {
 
+    
+
     // MARK: - Test Variables
 
     var refreshedCalled = false
@@ -26,13 +28,13 @@ class MockCertificateViewModel: CertificatesOverviewViewModelProtocol {
     // MARK: - CertificateViewModel
 
     weak var delegate: CertificatesOverviewViewModelDelegate?
-
     var addButtonImage: UIImage? = UIImage()
-
     var hasCertificates: Bool = false
-
     var certificateViewModels: [CardViewModel] = []
-
+    var accessibilityAddCertificate = "addCertificate"
+    var accessibilityMoreInformation = "moreInformation"
+    var accessibilityAnnouncement = "announcement"
+    
     func handleOpen(url: URL) -> Bool {
         return true
     }

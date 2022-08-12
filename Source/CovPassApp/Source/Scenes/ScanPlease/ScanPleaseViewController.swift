@@ -10,14 +10,6 @@ import UIKit
 import WebKit
 
 private enum Constants {
-    enum Text {
-        static let buttonOkText = "certificates_start_screen_pop_up_app_reference_button".localized
-    }
-    enum Accessibility {
-        static let image = VoiceOverOptions.Settings(label: "accessibility_image_alternative_text".localized)
-        static let close = VoiceOverOptions.Settings(label: "accessibility_certificates_start_screen_pop_up_app_reference_label".localized)
-    }
-
     enum Layout {
         static let actionLineHeight: CGFloat = 17
     }
@@ -49,12 +41,17 @@ class ScanPleaseViewController: UIViewController {
         self.viewModel = viewModel
         super.init(nibName: String(describing: Self.self), bundle: .main)
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        UIAccessibility.post(notification: .layoutChanged, argument: viewModel.accessibilityOpeningAnnounce)
+        UIAccessibility.post(notification: .layoutChanged, argument: headline.textLabel)
+    }
 
     // MARK: - Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         configureHeadline()
         configureToolbarView()
         configureContentView()
@@ -94,14 +91,14 @@ class ScanPleaseViewController: UIViewController {
     }
 
     private func configureToolbarView() {
-        toolbarView.state = .confirm(Constants.Text.buttonOkText)
+        toolbarView.state = .confirm(viewModel.buttonOkText)
         toolbarView.layoutMargins.top = .space_24
         toolbarView.delegate = self
     }
 
     private func configureAccessiblity() {
-        headline.actionButton.enableAccessibility(label: Constants.Accessibility.close.label)
-        headerImageView.enableAccessibility(label: Constants.Accessibility.image.label)
+        headline.actionButton.enableAccessibility(label: viewModel.accessibilityClose)
+        headerImageView.enableAccessibility(label: viewModel.accessibilityImage)
     }
 
 }

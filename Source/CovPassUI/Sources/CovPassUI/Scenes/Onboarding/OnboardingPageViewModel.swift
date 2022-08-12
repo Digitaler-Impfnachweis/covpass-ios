@@ -1,5 +1,5 @@
 //
-//  OnboardingPageViewModel.swift
+//  ConsentRouterProtocol.swift
 //
 //
 //  © Copyright IBM Deutschland GmbH 2021
@@ -28,12 +28,14 @@ public struct ConsentRouter: ConsentRouterProtocol {
 
     public func showTermsOfUse() {
         guard let url = Bundle.uiBundle.url(forResource: "us-terms-of-use", withExtension: "html") else { return }
+        let title = "vaccination_fourth_onboarding_page_message_for_us_citizens_title".localized
         sceneCoordinator.present(
             WebviewSceneFactory(
-                title: "vaccination_fourth_onboarding_page_message_for_us_citizens_title".localized,
+                title: title,
                 url: url,
                 closeButtonShown: true,
-                embedInNavigationController: true
+                embedInNavigationController: true,
+                accessibilityAnnouncement: title
             ),
             animated: true
         )

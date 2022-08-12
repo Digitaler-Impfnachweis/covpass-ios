@@ -13,11 +13,6 @@ import Scanner
 import UIKit
 
 private enum Constants {
-    enum Accessibility {
-        static let addCertificate = VoiceOverOptions.Settings(label: "accessibility_vaccination_start_screen_label_add_certificate".localized)
-        static let moreInformation = VoiceOverOptions.Settings(label: "accessibility_vaccination_start_screen_label_information".localized)
-    }
-
     enum Layout {
         static let actionLineHeight: CGFloat = 17
     }
@@ -69,6 +64,11 @@ class CertificatesOverviewViewController: UIViewController {
         super.viewWillDisappear(animated)
         navigationController?.setNavigationBarHidden(false, animated: animated)
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        UIAccessibility.post(notification: .layoutChanged, argument: viewModel.accessibilityAnnouncement)
+    }
 
     // MARK: - Private
 
@@ -83,7 +83,7 @@ class CertificatesOverviewViewController: UIViewController {
         headerView.titleButton.isHidden = !viewModel.hasCertificates
         headerView.titleIcon.isHidden = !viewModel.hasCertificates
         headerView.image = .settings
-        headerView.actionButton.enableAccessibility(label:  Constants.Accessibility.moreInformation.label)
+        headerView.actionButton.enableAccessibility(label: viewModel.accessibilityMoreInformation)
 
         headerView.titleAction = { [weak self] in
             self?.viewModel.showRuleCheck()
@@ -107,7 +107,7 @@ class CertificatesOverviewViewController: UIViewController {
 
     private func setupActionButton() {
         addButton.icon = .plus
-        addButton.innerButton.accessibilityLabel = Constants.Accessibility.addCertificate.label
+        addButton.innerButton.accessibilityLabel = viewModel.accessibilityAddCertificate
         addButton.action = { [weak self] in
             self?.viewModel.scanCertificate()
         }
