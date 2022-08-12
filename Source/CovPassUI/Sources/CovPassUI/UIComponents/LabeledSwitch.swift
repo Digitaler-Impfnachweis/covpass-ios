@@ -19,6 +19,13 @@ public class LabeledSwitch: XibView {
         uiSwitch.layer.cornerRadius = uiSwitch.frame.height / 2.0
         uiSwitch.backgroundColor = .backgroundSecondary
         uiSwitch.clipsToBounds = true
+        updateAccessibility()
+    }
+
+    public func updateAccessibility() {
+        label.isAccessibilityElement = false
+        uiSwitch.accessibilityLabel = label.text
+        accessibilityElements = [uiSwitch].compactMap { $0 }
     }
     
     @IBAction func switchChanged(_ sender: UISwitch) {

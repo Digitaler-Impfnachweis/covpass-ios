@@ -168,6 +168,7 @@ public class CheckSituationViewController: UIViewController {
             self?.viewModel.toggleOfflineRevocation()
         }
         offlineRevocationSwitch.uiSwitch.isOn = viewModel.offlineRevocationIsEnabled
+        offlineRevocationSwitch.updateAccessibility()
     }
     
     func configSelection() {

@@ -38,6 +38,7 @@ class RevocationSettingsViewController: UIViewController {
         title = viewModel.titleText
         descriptionLabel.attributedText = viewModel.descriptionText.styledAs(.body)
         labelSwitchView.label.attributedText = viewModel.labelText.styledAs(.header_3)
+        labelSwitchView.updateAccessibility()
     }
     
  }
