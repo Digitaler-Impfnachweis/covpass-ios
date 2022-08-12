@@ -126,6 +126,7 @@ class ValidatorOverviewViewController: UIViewController {
         }
         scanTypeSegment.setTitle(viewModel.segment3GTitle, forSegmentAt: ScanType._3G.rawValue)
         scanTypeSegment.setTitle(viewModel.segment2GTitle, forSegmentAt: ScanType._2G.rawValue)
+        scanCard.updateAccessibility()
     }
     
     private func setupCheckSituationView() {

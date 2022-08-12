@@ -57,6 +57,13 @@ public class ScanCardView: XibView {
         uiSwitch.backgroundColor = .backgroundSecondary
         uiSwitch.clipsToBounds = true
         contentView?.clipsToBounds = !switchWrapperViewIsHidden
+        updateAccessibility()
+    }
+
+    public func updateAccessibility() {
+        switchWrapperView.accessibilityElements = [uiSwitch].compactMap { $0 }
+        uiSwitch.accessibilityAttributedLabel = switchTextLabel.attributedText
+        switchTextLabel.isAccessibilityElement = false
     }
     
     @IBAction func switchValueChanged(_ sender: UISwitch) {
