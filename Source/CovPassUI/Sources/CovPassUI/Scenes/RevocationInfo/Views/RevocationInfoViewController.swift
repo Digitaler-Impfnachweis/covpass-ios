@@ -10,7 +10,7 @@ import CovPassCommon
 
 private enum Constants {
     enum Accessibility {
-        static let close = VoiceOverOptions.Settings(label: "accessibility_popup_label_close".localized)
+        static let close = VoiceOverOptions.Settings(label: "accessibility_popup_label_close".localized(bundle: .main))
     }
 }
 
