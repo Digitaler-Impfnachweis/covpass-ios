@@ -161,7 +161,7 @@
 
 "certificate_type_booster" = "Booster vaccination";
 
-"certificate_type_rapidtest" = "antigen rapid test";
+"certificate_type_rapidtest" = "Antigen rapid test";
 
 "certificate_type_pcrtest" = "PCR test";
 
@@ -307,9 +307,9 @@
 
 "file_import_success_button" = "OK";
 
-"file_import_error_maximum_title" = "Maximum number of certificates exceeded";
+"file_import_error_maximum_title" = "Too many people";
 
-"file_import_error_maximum_copy" = "The selected file either has too many pages or contains certificates for more than 20 different people. Try to reduce the number of pages.";
+"file_import_error_maximum_copy" = "You can store certificates of up to 20 people in the app. The import exceeds this maximum number of people. Please adjust the selected file or delete certificates already imported into the app that are no longer needed.";
 
 "file_import_error_maximum_button" = "OK";
 
@@ -779,7 +779,7 @@
 
 "certificates_overview_soon_expiring_title" = "Current certificate expires on %@ at %@";
 
-"certificates_overview_soon_expiring_subtitle" = "You can easily replace the certificate in the CovPass app by using the renewal function in the overview of your certificates or by scanning a newly issued certificate.";
+"certificates_overview_soon_expiring_subtitle" = "You can easily renew your latest certificate in the CovPass app. Previous certificates will not be renewed. To do so, use the renewal function in the overview of your certificates or scan a newly issued certificate.";
 
 "certificates_overview_invalid_title" = "Certificate invalid";
 
@@ -1111,7 +1111,7 @@
 
 "certificate_expired_detail_view_note_title" = "Certificate expired";
 
-"certificate_expired_detail_view_note_message" = "You can easily renew your most important certificates in the CovPass app. To do so, use the renewal function in the overview of your certificates or scan a newly issued certificate. If you have a more recent vaccination certificate, you do not need to renew the previous vaccination certificates.";
+"certificate_expired_detail_view_note_message" = "If this is your latest certificate, you can renew it on the overview of your certificates. Otherwise, you don't have to do anything because your latest certificate contains all the necessary information for a check.";
 
 
 /********** print certificate **********/
@@ -1550,7 +1550,7 @@
 
 "certificate_renewal_consent_page_transfer_certificates_consent_box_copy_list_item_2" = "The RKI checks/verifies the certificate, issues an updated certificate and transmits it to the app.";
 
-"certificate_renewal_consent_page_transfer_certificates_consent_box_copy_list_item_3" = "To ensure that certificates can only be updated once, the identifier of the old certificate is documented by the RKI.";
+"certificate_renewal_consent_page_transfer_certificates_consent_box_copy_list_item_3" = "To ensure that certificates can only be updated to a limited extent, the identifier of the old certificate is documented by the RKI.";
 
 "certificate_renewal_consent_page_transfer_certificates_copy" = "The renewal of the certificate is voluntary and free of charge.";
 
@@ -1593,7 +1593,7 @@
 
 "renewal_expiry_notification_button_vaccination" = "Renew vaccination certificate";
 
-"renewal_expiry_notification_copy_recovery" = "The technical expiry date of your recovery certificate is coming up. Renew the certificate to continue using it.";
+"renewal_expiry_notification_copy_recovery" = "The technical validity of your recovery certificate is about to expire or has already expired. Renew the certificate to continue using it.";
 
 "renewal_expiry_notification_button_recovery" = "Renew recovery certificate";
 

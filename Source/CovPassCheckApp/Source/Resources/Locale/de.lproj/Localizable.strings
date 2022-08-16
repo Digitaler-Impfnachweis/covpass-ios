@@ -384,6 +384,12 @@
 
 "error_2G_unexpected_type_button" = "OK";
 
+"error_2G_unexpected_type_old_recovery_title" = "Falscher Zertifikatstyp";
+
+"error_2G_unexpected_type_old_recovery_copy" = "Um 2G+ mit einem Genesenenzertifikat, das älter als 90 Tage ist, zu erfüllen, müssen Sie als zweiten Nachweis eine Grundimmunisierung scannen.";
+
+"error_2G_unexpected_type_old_recovery_button" = "OK";
+
 "result_countdown" = "Diese Ansicht schließt sich in %d Sekunden.";
 
 

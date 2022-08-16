@@ -167,7 +167,7 @@
 
 "certificate_timestamp_hours" = "Vor %d Stunde(n)";
 
-"certificate_timestamp_days" = "Vor %d Tage(n)";
+"certificate_timestamp_days" = "Vor %d Tag(en)";
 
 "certificate_timestamp_months" = "Vor %d Monat(en)";
 
@@ -307,9 +307,9 @@
 
 "file_import_success_button" = "OK";
 
-"file_import_error_maximum_title" = "Maximale Anzahl an Zertifikaten überschritten";
+"file_import_error_maximum_title" = "Zu viele Personen";
 
-"file_import_error_maximum_copy" = "Die gewählte Datei hat entweder zu viele Seiten oder beinhaltet Zertifikate für mehr als 20 unterschiedliche Personen. Versuchen Sie die Seitenzahl zu reduzieren.";
+"file_import_error_maximum_copy" = "Sie können in der App Zertifikate von bis zu 20 Personen speichern. Der Import übersteigt diese maximale Personenzahl. Bitte passen Sie die ausgewählte Datei an oder löschen Sie bereits in die App importierte Zertifikate, die nicht mehr benötigt werden.";
 
 "file_import_error_maximum_button" = "OK";
 
@@ -1111,7 +1111,7 @@
 
 "certificate_expired_detail_view_note_title" = "Zertifikat abgelaufen";
 
-"certificate_expired_detail_view_note_message" = "Sie können Ihre wichtigsten Zertifikate bequem in der CovPass-App austauschen. Nutzen Sie dafür die Erneuerungsfunktion in der Übersicht Ihrer Zertifikate oder scannen Sie ein neu ausgestelltes Zertifikat ein. Sofern ein aktuelleres Impfzertifikat vorliegt, brauchen Sie die vorherigen Impfzertifikate nicht erneuern.";
+"certificate_expired_detail_view_note_message" = "Wenn es sich hierbei um Ihr neuestes Zertifikat handelt, können Sie es auf der Übersicht Ihrer Zertifikate erneuern. Andernfalls müssen Sie nichts tun, da in Ihrem neuesten Zertifikat alle notwendigen Informationen für eine Prüfung enthalten sind.";
 
 
 /********** print certificate **********/
@@ -1550,7 +1550,7 @@
 
 "certificate_renewal_consent_page_transfer_certificates_consent_box_copy_list_item_2" = "Das RKI überprüft das Impfzertifikat, stellt ein aktualisiertes Zertifikat aus und übermittelt dieses an Ihre App.";
 
-"certificate_renewal_consent_page_transfer_certificates_consent_box_copy_list_item_3" = "Um sicherzustellen, dass Zertifikate nur einmalig aktualisiert werden können, wird die Kennung des alten Zertifikats durch das RKI dokumentiert.";
+"certificate_renewal_consent_page_transfer_certificates_consent_box_copy_list_item_3" = "Um sicherzustellen, dass Zertifikate nur in begrenztem Umfang aktualisiert werden können, wird die Kennung des alten Zertifikats durch das RKI dokumentiert.";
 
 "certificate_renewal_consent_page_transfer_certificates_copy" = "Die Aktualisierung des Zertifikats ist freiwillig und kostenlos.";
 
@@ -1593,7 +1593,7 @@
 
 "renewal_expiry_notification_button_vaccination" = "Impfzertifikat erneuern";
 
-"renewal_expiry_notification_copy_recovery" = "Die technische Laufzeit Ihres Genesenenzertifikats läuft bald aus. Erneuern Sie das Zertifikat, um es weiterhin nutzen zu können.";
+"renewal_expiry_notification_copy_recovery" = "Die technische Laufzeit Ihres Genesenenzertifikats läuft bald ab oder ist bereits abgelaufen. Erneuern Sie das Zertifikat, um es weiterhin nutzen zu können.";
 
 "renewal_expiry_notification_button_recovery" = "Genesenenzertifikat erneuern";
 
