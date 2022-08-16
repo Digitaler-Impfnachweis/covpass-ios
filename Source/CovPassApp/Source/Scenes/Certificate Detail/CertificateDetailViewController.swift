@@ -81,17 +81,25 @@ class CertificateDetailViewController: UIViewController {
 
     private func setupNavigationBar() {
         title = ""
-        navigationController?.navigationBar.backIndicatorImage = .arrowBack
-        navigationController?.navigationBar.backIndicatorTransitionMaskImage = .arrowBack
+        let backButton = UIBarButtonItem(image: .arrowBack,
+                                         style: .done,
+                                         target: self,
+                                         action: #selector(backButtonTapped))
+        backButton.accessibilityLabel = viewModel.accessibilityBackToStart
+        navigationItem.leftBarButtonItem = backButton
         navigationController?.navigationBar.tintColor = .onBackground100
-
         if viewModel.favoriteIcon != nil {
             let favoriteIcon = UIBarButtonItem(image: viewModel.favoriteIcon, style: .plain, target: self, action: #selector(toggleFavorite))
             favoriteIcon.tintColor = .onBackground100
             navigationItem.rightBarButtonItem = favoriteIcon
         }
     }
-
+    
+    @objc
+    private func backButtonTapped() {
+        navigationController?.popViewController(animated: true)
+    }
+        
     private func setupHeadline() {
         nameHeadline.attributedText = viewModel.name.styledAs(.header_1).colored(.onBackground100)
         nameHeadline.textableView.accessibilityTraits = .header

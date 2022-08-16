@@ -55,6 +55,7 @@ final class CertificateDetailViewModelMock: CertificateDetailViewModelProtocol {
         showRecoveryExpiryReissueIsNewBadgeValues.count
     }
     var showRecoveryExpiryReissueIsNewBadgeValues: [Bool] = []
+    var accessibilityBackToStart: String = "backToStart"
     func showRecoveryExpiryReissueIsNewBadge(index: Int) -> Bool {
         if index < showRecoveryExpiryReissueIsNewBadgeValues.count {
             return showRecoveryExpiryReissueIsNewBadgeValues[index]

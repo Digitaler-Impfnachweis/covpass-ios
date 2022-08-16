@@ -39,6 +39,9 @@ private enum Constants {
             static let dateOfBirth = "accessibility_certificates_overview_personal_data_date_of_birth".localized
             static let certificatesTitle = "accessibility_certificates_overview_all_certificates_title".localized
         }
+        enum General {
+            static let backToStart = "accessibility_overview_certificates_label_back".localized
+        }
     }
 }
 
@@ -74,6 +77,7 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
         }
         return token.expiresSoon && !token.isGermanIssuer
     }
+    var accessibilityBackToStart = Constants.Accessibility.General.backToStart
     var name: String { selectedDgc?.nam.fullName ?? ""}
     var nameReversed: String { selectedDgc?.nam.fullNameReverse ?? "" }
     var nameTransliterated: String { selectedDgc?.nam.fullNameTransliteratedReverse ?? "" }

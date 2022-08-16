@@ -11,7 +11,7 @@ import UIKit
 
 private enum Constants {
     enum Accessibility {
-        static let qrCode = VoiceOverOptions.Settings(label: "qrCode".localized, hint: "accessibility_button".localized)
+        static let qrCode = VoiceOverOptions.Settings(label: "qrCode".localized, hint: "startscreen_card_title".localized(bundle: .main))
     }
 
     static let alphaValue: CGFloat = 0.6
