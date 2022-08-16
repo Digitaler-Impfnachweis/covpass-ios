@@ -295,7 +295,7 @@ public class CustomToolbarView: XibView {
         return primaryButton
     }
 
-    private var textButton: MainButton {
+    public var textButton: MainButton {
         primaryButton = MainButton()
         primaryButton.action = { [weak self] in
             guard let strongSelf = self else { return }

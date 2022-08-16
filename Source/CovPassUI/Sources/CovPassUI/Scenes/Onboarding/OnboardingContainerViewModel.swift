@@ -9,6 +9,9 @@
 public protocol OnboardingContainerViewModel {
     var router: OnboardingRouterProtocol { get }
     var items: [OnboardingPageViewModel] { get }
+    var accessibilityPageIndicatorText: String { get }
+    var accessibilityBackLabel: String { get }
+    var accessibilityNextLabel: String { get }
 
     func navigateToNextScene()
     func navigateToPreviousScene()
