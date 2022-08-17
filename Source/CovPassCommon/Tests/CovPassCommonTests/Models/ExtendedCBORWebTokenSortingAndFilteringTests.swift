@@ -196,6 +196,41 @@ class CertificateSorterTests: XCTestCase {
         XCTAssertEqual(sortedCertifiates[2].vaccinationCertificate.hcert.dgc.uvci, "1")
     }
     
+    func testSortLatest_firstNotBoostedValidFullImmunizationDowngrading2Of1AlsoIf1Of1IsExpired() throws {
+        // GIVEN
+        let vacinationDateFirstCert = DateUtils.parseDate("2021-10-26T15:05:00")!
+        var firstCertToken = CBORWebToken
+            .mockVaccinationCertificate
+            .medicalProduct(.johnsonjohnson)
+            .seriesOfDoses(1)
+            .doseNumber(1)
+            .mockVaccinationUVCI("1")
+            .mockVaccinationSetDate(vacinationDateFirstCert)
+        firstCertToken.exp = Calendar.current.date(byAdding: .month, value: -13, to: Date())
+        let firstCert = firstCertToken.extended(vaccinationQRCodeData:"1")
+
+        let vacinationDateSecondCert = DateUtils.parseDate("2021-05-26T15:05:00")!
+        let secondCert: ExtendedCBORWebToken = CBORWebToken
+            .mockVaccinationCertificate
+            .medicalProduct(.biontech)
+            .seriesOfDoses(1)
+            .doseNumber(2)
+            .mockVaccinationUVCI("2")
+            .mockVaccinationSetDate(vacinationDateSecondCert)
+            .extended(vaccinationQRCodeData:"2")
+
+        let certificates = [
+            firstCert,
+            secondCert
+        ]
+        
+        // WHEN
+        let firstNotBoostedValidFullImmunization = try XCTUnwrap(certificates.firstNotBoostedValidFullImmunization)
+
+        // THEN
+        XCTAssertEqual(firstNotBoostedValidFullImmunization.vaccinationCertificate.hcert.dgc.uvci, "2")
+    }
+    
     func testLatestIatCertOnSameVaccinationDateButTwoOfThemHasNoIatButOneOfTheseTwoIsLatestVac() throws {
         // GIVEN
         let vacinationDate = DateUtils.parseDate("2021-04-26T15:05:00")!

@@ -382,12 +382,12 @@ public extension Array where Element == ExtendedCBORWebToken {
         filterRecoveries.map{ $0.recoveries }.compactMap{$0}.flatMap{$0}
     }
     
-    var firstNotBosstedValidFullImmunization: ExtendedCBORWebToken? {
+    var firstNotBoostedValidFullImmunization: ExtendedCBORWebToken? {
         first(where: {
-            if let v = $0.firstVaccination, v.fullImmunization, v.fullImmunizationValid, !v.isBoosted(vaccinations: vaccinations, recoveries: recoveries) /* Boosters are currently lower prioritized (see 5.1) */ {
-                return true
+            guard $0.isNotRevoked, $0.isNotExpired, $0.isNotInvalid, let v = $0.firstVaccination else {
+                return false
             }
-            return false
+            return v.fullImmunization && v.fullImmunizationValid && !v.isBoosted(vaccinations: vaccinations, recoveries: recoveries)
         })
     }
     
@@ -529,10 +529,9 @@ public extension Array where Element == ExtendedCBORWebToken {
             .sortByVaccinationDate
     }
     
-    var sortLatestVaccinationsFirstNotBosstedValidFullImmunization: ExtendedCBORWebToken? {
+    var sortLatestVaccinationsfirstNotBoostedValidFullImmunization: ExtendedCBORWebToken? {
         sortLatestVaccinations
-            .filterNotInvalid.filterNotRevoked.filterNotExpired
-            .firstNotBosstedValidFullImmunization
+            .firstNotBoostedValidFullImmunization
     }
     
     var sortLatestVaccinationsFirstNotValidButFullImmunization: ExtendedCBORWebToken? {
@@ -582,7 +581,7 @@ public extension Array where Element == ExtendedCBORWebToken {
         res.append(contentsOf: sortLatestBooster)
         // #4 Vaccination certificate
         //  Latest vaccination of a vaccination series (1/1, 2/2), older then (>) 14 days, and where the iat is the latest
-        if let latestVaccination = sortLatestVaccinationsFirstNotBosstedValidFullImmunization {
+        if let latestVaccination = sortLatestVaccinationsfirstNotBoostedValidFullImmunization {
             res.append(latestVaccination)
         }
         // #5 Recovery certificate
