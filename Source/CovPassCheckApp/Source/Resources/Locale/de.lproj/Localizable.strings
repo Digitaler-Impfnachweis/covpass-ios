@@ -164,13 +164,13 @@
 
 "start_offline_status_unavailable" = "Aktualisierung notwendig";
 
-"start_offline_copy" = " Um ohne Internetverbindung zuverlässig prüfen zu können, sollten die Prüfregeln vor weniger als 24 Stunden aktualisiert worden sein.";
+"start_offline_copy" = "Um ohne Internetverbindung zuverlässig prüfen zu können, sollten die Prüfregeln vor weniger als 24 Stunden aktualisiert worden sein.";
 
 "start_offline_link_title" = "Prüfregeln aktualisieren";
 
-"start_offline_link_subtitle_available" = " Letzte Aktualisierung vor weniger als 24 Stunden";
+"start_offline_link_subtitle_available" = "Letzte Aktualisierung vor weniger als 24 Stunden";
 
-"start_offline_subtitle_unavailable" = " Letzte Aktualisierung älter als 24 Stunden";
+"start_offline_subtitle_unavailable" = "Letzte Aktualisierung älter als 24 Stunden";
 
 
 /********** popup: Check vaccination **********/
@@ -501,7 +501,7 @@
 
 "app_information_offline_revocation_title" = "Gesperrte Zertifikate offline prüfen";
 
-"app_information_offline_revocation_copy" = " Aktivieren Sie diese Einstellung, wenn Sie auch im Offline-Modus von den Behörden gesperrte Zertifikate erkennen möchten. Andernfalls werden gesperrte Zertifikate nur im Online-Modus erkannt. Diese Funktion verbraucht mehr Datenvolumen.";
+"app_information_offline_revocation_copy" = "Aktivieren Sie diese Einstellung, wenn Sie auch im Offline-Modus von den Behörden gesperrte Zertifikate erkennen möchten. Andernfalls werden gesperrte Zertifikate nur im Online-Modus erkannt. Diese Funktion verbraucht mehr Datenvolumen.";
 
 "accessibility_app_information_title_update" = "Die Ansicht \"Prüfregeln aktualisieren\" wurde geöffnet";
 
