@@ -56,16 +56,21 @@ class ReissueConsentViewController: UIViewController {
         hintView.containerView.layer.borderColor = UIColor.brandAccent20.cgColor
         hintView.iconView.image = .infoSignal
         hintView.titleLabel.attributedText = viewModel.hintTitle.styledAs(.header_3)
+        hintView.titleLabel.accessibilityTraits = .header
         hintView.bodyLabel.attributedText = viewModel.hintText
-        hintView.enableAccessibility(label: " ", traits: .staticText)
+        hintView.bodyLabel.accessibilityTraits = .staticText
         hintView.setConstraintsToEdge()
     }
     
     func updateView() {
         titleLabel.attributedText = viewModel.titleText.styledAs(.header_2)
+        titleLabel.accessibilityTraits = .header
         subTitleLabel.attributedText = viewModel.subTitleText.styledAs(.header_3).colored(.onBackground70)
         certStack.subviews.forEach { $0.removeFromSuperview() }
-        viewModel.certItems.forEach { certStack.addArrangedSubview($0) }
+        viewModel.certItems.forEach { certificateItem in
+            certStack.addArrangedSubview(certificateItem)
+            certificateItem.setupAccessibility()
+        }
         configureHintView()
         descriptionLabel.attributedText = viewModel.descriptionText
         bodyStackView.setCustomSpacing(Constants.customSpacingAfterDescription, after: descriptionLabel)
@@ -104,5 +109,19 @@ extension ReissueConsentViewController: ViewModelDelegate {
 
     func viewModelUpdateDidFailWithError(_: Error) {
         updateView()
+    }
+}
+
+private extension CertificateItem {
+    func setupAccessibility() {
+        let line3 = viewModel is RecoveryCertificateItemViewModel ?
+            viewModel.infoAccessibilityLabel :
+            viewModel.statusIconAccessibilityLabel
+        accessibilityLabel = titleLabel.textableView.text
+        accessibilityValue = [
+            viewModel.subtitle,
+            viewModel.info,
+            line3
+        ].compactMap { $0 }.joined(separator: "\n")
     }
 }

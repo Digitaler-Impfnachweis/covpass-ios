@@ -55,10 +55,13 @@ class ReissueStartViewController: UIViewController {
         hintView.iconStackViewAlignToTopTile.isActive = true
         hintView.titleSuperViewBottomConstraint.isActive = true
         hintView.setConstraintsToEdge()
+        hintView.accessibilityLabel = viewModel.hintText
+        hintView.accessibilityTraits = .staticText
     }
     
     func updateView() {
         titleLabel.attributedText = viewModel.titleText.styledAs(.header_2)
+        titleLabel.accessibilityTraits = .header
         imageView.image = UIImage.reissue
         certStack.subviews.forEach { $0.removeFromSuperview() }
         certStack.addArrangedSubview(viewModel.certItem)
@@ -67,6 +70,7 @@ class ReissueStartViewController: UIViewController {
         startButton.title = viewModel.buttonStartTitle
         laterButton.title = viewModel.buttonLaterTitle
         laterButton.style = .plain
+        viewModel.certItem.setupAccessibility()
     }
     
  }
@@ -78,5 +82,16 @@ extension ReissueStartViewController: ViewModelDelegate {
 
     func viewModelUpdateDidFailWithError(_: Error) {
         // already handled in ViewModel
+    }
+}
+
+private extension CertificateItem {
+    func setupAccessibility() {
+        accessibilityLabel = titleLabel.textableView.text
+        accessibilityValue = [
+            viewModel.subtitle,
+            viewModel.info,
+            viewModel.statusIconAccessibilityLabel
+        ].compactMap { $0 }.joined(separator: "\n")
     }
 }

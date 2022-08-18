@@ -25,12 +25,14 @@ public class CertificateItem: XibView {
     @IBOutlet weak var statusIconLeadingConstraint: NSLayoutConstraint!
     @IBOutlet weak var statusIconTopConstraint: NSLayoutConstraint!
     
-    private let action: () -> Void
-    private let viewModel: CertificateItemViewModel
+    private let action: (() -> Void)?
+    private let hasAction: Bool
+    public let viewModel: CertificateItemViewModel
 
     // MARK: - Lifecycle
 
-    public init(viewModel: CertificateItemViewModel, action: @escaping () -> Void) {
+    public init(viewModel: CertificateItemViewModel, action: (() -> Void)? = nil) {
+        self.hasAction = action != nil
         self.viewModel = viewModel
         self.action = action
         super.init(frame: CGRect.zero)
@@ -78,7 +80,8 @@ public class CertificateItem: XibView {
 
     private func setupAccessibility() {
         isAccessibilityElement = true
-        accessibilityTraits = .button
+        accessibilityTraits = hasAction ? .button : .staticText
+        let buttonLabel = hasAction ? viewModel.certificateItemIsSelectableAccessibilityLabel : nil
         titleLabel.accessibilityLabel = viewModel.titleAccessibilityLabel
         subtitleLabel.accessibilityLabel = viewModel.subtitleAccessibilityLabel
         infoLabel.accessibilityLabel = viewModel.infoAccessibilityLabel
@@ -89,12 +92,12 @@ public class CertificateItem: XibView {
                               viewModel.infoAccessibilityLabel,
                               viewModel.info2AccessibilityLabel,
                               viewModel.statusIconAccessibilityLabel,
-                              viewModel.certificateItemIsSelectableAccessibilityLabel].compactMap { $0 }.joined(separator: ", ")
+                              buttonLabel].compactMap { $0 }.joined(separator: ", ")
     }
 
     // MARK: - Methods
 
     @objc func onPressItem() {
-        action()
+        action?()
     }
 }

@@ -21,9 +21,7 @@ extension ExtendedCBORWebToken {
             if vaccinationCertificate.hcert.dgc.v != nil {
                 vm = VaccinationCertificateItemViewModel(self, active: active, neutral: true)
             }
-            let certItem: CertificateItem = CertificateItem(viewModel: vm!, action: {
-                // Action on Cert Tap
-            })
+            let certItem: CertificateItem = CertificateItem(viewModel: vm!)
             certItem.chevron.isHidden = true
             return certItem
     }
