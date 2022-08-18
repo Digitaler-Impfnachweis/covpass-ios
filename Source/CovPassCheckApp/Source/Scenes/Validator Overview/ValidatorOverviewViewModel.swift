@@ -136,7 +136,23 @@ class ValidatorOverviewViewModel {
         Constants.Keys.Toggle.validation_start_screen_scan_message_2G_toggle
     }
 
-    var boosterAsTest = false
+    var boosterAsTest: Bool {
+        get {
+            userDefaults.validatorOverviewBoosterAsTest
+        }
+        set {
+            userDefaults.validatorOverviewBoosterAsTest = newValue
+        }
+    }
+
+    var scanType: ScanType {
+        get {
+            userDefaults.validatorOverviewScanType ?? ._3G
+        }
+        set {
+            userDefaults.validatorOverviewScanType = newValue
+        }
+    }
 
     private(set) var isLoadingScan = false {
         didSet {
@@ -202,7 +218,7 @@ class ValidatorOverviewViewModel {
         certLogic.updateValueSetsIfNeeded().cauterize()
     }
     
-    func startQRCodeValidation(for scanType: ScanType) {
+    func startQRCodeValidation() {
         if scanType == ._2G {
             self.router.showGproof(repository: self.vaccinationRepository,
                                    revocationRepository: self.revocationRepository,
@@ -238,7 +254,7 @@ class ValidatorOverviewViewModel {
                 self.isLoadingScan = false
             }
             .catch { error in
-                self.errorHandling(error: error, token: tmpToken, scanType: scanType)
+                self.errorHandling(error: error, token: tmpToken, scanType: self.scanType)
             }
         }
     }

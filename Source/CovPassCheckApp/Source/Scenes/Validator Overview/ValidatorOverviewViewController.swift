@@ -116,14 +116,10 @@ class ValidatorOverviewViewController: UIViewController {
         scanCard.textLabel.attributedText = viewModel.segment3GMessage.styledAs(.body).colored(.backgroundSecondary)
         scanCard.actionButton.title = "validation_start_screen_scan_action_button_title".localized
         scanCard.actionButton.action = { [weak self] in
-            guard let self = self else {
-                return
-            }
-            guard let scanType = ScanType(rawValue: self.scanTypeSegment.selectedSegmentIndex) else {
-                return
-            }
-            self.viewModel.startQRCodeValidation(for: scanType)
+            self?.viewModel.startQRCodeValidation()
         }
+        scanTypeSegment.selectedSegmentIndex = viewModel.scanType.rawValue
+        segmentChanged(scanTypeSegment)
         scanTypeSegment.setTitle(viewModel.segment3GTitle, forSegmentAt: ScanType._3G.rawValue)
         scanTypeSegment.setTitle(viewModel.segment2GTitle, forSegmentAt: ScanType._2G.rawValue)
         scanCard.updateAccessibility()
@@ -155,10 +151,12 @@ class ValidatorOverviewViewController: UIViewController {
             scanCard.titleLabel.attributedText = viewModel.segment3GTitle.styledAs(.header_1).colored(.backgroundSecondary)
             scanCard.textLabel.attributedText = viewModel.segment3GMessage.styledAs(.body).colored(.backgroundSecondary)
             scanCard.switchWrapperViewIsHidden = true
+            viewModel.scanType = ._3G
         case ._2G:
             scanCard.titleLabel.attributedText = viewModel.segment2GTitle.styledAs(.header_1).colored(.backgroundSecondary)
             scanCard.textLabel.attributedText = viewModel.segment2GMessage.styledAs(.body).colored(.backgroundSecondary)
             scanCard.switchWrapperViewIsHidden = false
+            viewModel.scanType = ._2G
         default: break
         }
     }

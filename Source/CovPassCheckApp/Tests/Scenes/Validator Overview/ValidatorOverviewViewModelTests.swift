@@ -217,4 +217,88 @@ class ValidatorOverviewViewModelTests: XCTestCase {
         wait(for: [router.showDataPrivacyExpectation], timeout: 1)
         XCTAssertEqual(userDefaults.privacyHash, privacyHash)
     }
+
+    func testScanType_get_default() {
+        // When
+        let scanType = sut.scanType
+
+        // Then
+        XCTAssertEqual(scanType, ._3G)
+    }
+
+    func testScanType_get_3G() {
+        // Given
+        userDefaults.validatorOverviewScanType = ._3G
+
+        // When
+        let scanType = sut.scanType
+
+        // Then
+        XCTAssertEqual(scanType, ._3G)
+    }
+
+    func testScanType_get_2G() {
+        // Given
+        userDefaults.validatorOverviewScanType = ._2G
+
+        // When
+        let scanType = sut.scanType
+
+        // Then
+        XCTAssertEqual(scanType, ._2G)
+    }
+
+    func testScanType_set_3G() {
+        // When
+        sut.scanType = ._3G
+
+        // Then
+        XCTAssertEqual(userDefaults.validatorOverviewScanType, ._3G)
+    }
+
+    func testScanType_set_2G() {
+        // When
+        sut.scanType = ._2G
+
+        // Then
+        XCTAssertEqual(userDefaults.validatorOverviewScanType, ._2G)
+    }
+
+    func testStartQRCodeValidation_2G() {
+        // Given
+        sut.scanType = ._2G
+
+        // When
+        sut.startQRCodeValidation()
+
+        // Then
+        wait(for: [router.showGproofExpectation], timeout: 1)
+    }
+
+    func testStartQRCodeValidation_3G() {
+        // When
+        sut.startQRCodeValidation()
+
+        // Then
+        wait(for: [router.scanQRCodeExpectation], timeout: 1)
+    }
+
+    func testBoosterAsTest_default() {
+        // When
+        let boosterAsTest = sut.boosterAsTest
+
+        // Then
+        XCTAssertFalse(boosterAsTest)
+    }
+
+    func testBoosterAsTest_true() {
+        // Given
+        userDefaults.validatorOverviewBoosterAsTest = true
+
+        // When
+        let boosterAsTest = sut.boosterAsTest
+
+        // Then
+        XCTAssertTrue(boosterAsTest)
+    }
 }

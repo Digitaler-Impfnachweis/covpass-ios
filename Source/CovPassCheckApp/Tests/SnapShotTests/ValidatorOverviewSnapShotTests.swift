@@ -17,16 +17,13 @@ class ValidatorOverviewSnapShotTests: BaseSnapShotTests {
                       shouldTrustListUpdate: Bool = true,
                       ntpDate: Date = Date(),
                       ntpOffset: TimeInterval = 0.0,
-                      logicType: DCCCertLogic.LogicType = .de) -> ValidatorOverviewViewController {
+                      logicType: DCCCertLogic.LogicType = .de,
+                      boosterAsTest: Bool = false) -> ValidatorOverviewViewController {
         let certLogicMock = DCCCertLogicMock()
         let vaccinationRepoMock = VaccinationRepositoryMock()
-        var userDefaults = UserDefaultsPersistence()
-        if let lastUpdateTrustList = lastUpdateTrustList {
-            userDefaults.lastUpdatedTrustList = lastUpdateTrustList
-        } else {
-            try? userDefaults.delete(UserDefaults.keyLastUpdatedTrustList)
-        }
-        try? userDefaults.delete(UserDefaults.keyLastUpdatedDCCRules)
+        var userDefaults = MockPersistence()
+        userDefaults.lastUpdatedTrustList = lastUpdateTrustList
+        userDefaults.validatorOverviewBoosterAsTest = boosterAsTest
         vaccinationRepoMock.shouldTrustListUpdate = shouldTrustListUpdate
         userDefaults.selectedLogicType = logicType
         let vm = ValidatorOverviewViewModel(router: ValidatorMockRouter(),
@@ -53,6 +50,14 @@ class ValidatorOverviewSnapShotTests: BaseSnapShotTests {
     
     func testSegment2GSelected() {
         let sut = self.configureSut()
+        sut.view.bounds = UIScreen.main.bounds
+        sut.scanTypeSegment.selectedSegmentIndex = 1
+        sut.segmentChanged(sut.scanTypeSegment)
+        verifyView(vc: sut)
+    }
+
+    func testSegment2GSelected_booster_as_test() {
+        let sut = self.configureSut(boosterAsTest: true)
         sut.view.bounds = UIScreen.main.bounds
         sut.scanTypeSegment.selectedSegmentIndex = 1
         sut.segmentChanged(sut.scanTypeSegment)

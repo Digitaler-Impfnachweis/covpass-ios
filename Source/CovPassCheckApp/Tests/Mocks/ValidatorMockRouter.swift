@@ -15,6 +15,8 @@ class ValidatorMockRouter: ValidatorOverviewRouterProtocol {
 
     var sceneCoordinator: SceneCoordinator = SceneCoordinatorMock()
     var showDataPrivacyExpectation = XCTestExpectation(description: "showDataPrivacyExpectation")
+    var showGproofExpectation = XCTestExpectation(description: "showGproofExpectation")
+    var scanQRCodeExpectation = XCTestExpectation(description: "scanQRCodeExpectation")
 
     func showAppInformation(userDefaults: Persistence) {
         
@@ -29,10 +31,12 @@ class ValidatorMockRouter: ValidatorOverviewRouterProtocol {
                     certLogic: DCCCertLogicProtocol,
                     userDefaults: Persistence,
                     boosterAsTest: Bool) {
+        showGproofExpectation.fulfill()
     }
     
     func scanQRCode() -> Promise<QRCodeImportResult> {
-        .value(.scanResult(.success("")))
+        scanQRCodeExpectation.fulfill()
+        return .value(.scanResult(.success("")))
     }
     
     func showCertificate(_ certificate: ExtendedCBORWebToken?, _2GContext: Bool, userDefaults: Persistence) {
