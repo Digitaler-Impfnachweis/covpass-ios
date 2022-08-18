@@ -5,4 +5,8 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-public protocol CheckSituationRouterProtocol: DialogRouterProtocol { }
+import PromiseKit
+
+public protocol CheckSituationRouterProtocol: DialogRouterProtocol {
+    func showOfflineRevocationDisableConfirmation() -> Guarantee<Bool>
+}

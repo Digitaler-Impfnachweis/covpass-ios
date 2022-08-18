@@ -503,6 +503,10 @@
 
 "app_information_offline_revocation_copy" = "Activate this setting if you also want to detect certificates revoked by the authorities in offline mode. Otherwise, revoked certificates are only detected in online mode. This function consumes more data volume.";
 
+"app_information_offline_revocation_hint_title" = "Note";
+
+"app_information_offline_revocation_hint_copy" = "If the function is deactivated, the local app data will be deleted from your device. Certificates can then only be checked in online mode.";
+
 "accessibility_app_information_title_update" = "The view \"Update rule set\" has been opened";
 
 "accessibility_app_information_title_local_rules" = "The view \"Check situation\" has been opened";

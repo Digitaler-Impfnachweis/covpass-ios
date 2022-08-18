@@ -503,6 +503,10 @@
 
 "app_information_offline_revocation_copy" = "Aktivieren Sie diese Einstellung, wenn Sie auch im Offline-Modus von den Behörden gesperrte Zertifikate erkennen möchten. Andernfalls werden gesperrte Zertifikate nur im Online-Modus erkannt. Diese Funktion verbraucht mehr Datenvolumen.";
 
+"app_information_offline_revocation_hint_title" = " Hinweis";
+
+"app_information_offline_revocation_hint_copy" = " Wenn die Funktion deaktiviert wird, werden die lokalen App-Daten von Ihrem Gerät gelöscht. Zertifikate können dann nur noch im Online-Modus geprüft werden.";
+
 "accessibility_app_information_title_update" = "Die Ansicht \"Prüfregeln aktualisieren\" wurde geöffnet";
 
 "accessibility_app_information_title_local_rules" = "Die Ansicht \"Prüfsituation\" wurde geöffnet";

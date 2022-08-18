@@ -262,6 +262,13 @@ extension CheckSituationViewController: ViewModelDelegate {
     public func viewModelDidUpdate() {
         configSelection()
         updateUpdateRelatedViews()
+        toggleOfflineRevocationIfNeeded()
+    }
+
+    private func toggleOfflineRevocationIfNeeded() {
+        if viewModel.offlineRevocationIsEnabled != offlineRevocationSwitch.uiSwitch.isOn {
+            configureOfflineRevocationView()
+        }
     }
     
     public func viewModelUpdateDidFailWithError(_ error: Error) {}

@@ -226,23 +226,41 @@ public class CheckSituationViewModel: CheckSituationViewModelProtocol {
     public func toggleOfflineRevocation() {
         offlineRevocationIsEnabled.toggle()
         if offlineRevocationIsEnabled, let offlineRevocationService = offlineRevocationService {
-            isLoading = true
-            offlineRevocationService.update()
-                .done{
-                    self.delegate?.viewModelDidUpdate()
-                }
-                .ensure {
-                    self.isLoading = false
-                }
-                .cauterize()
+            enableOfflineRevocation(offlineRevocationService)
         } else {
-            isLoading = false
-            offlineRevocationService?.reset()
+            disableOfflineRevocationIfReallyWanted()
         }
         self.delegate?.viewModelDidUpdate()
     }
     
     // MARK: - Private methods
+
+    private func enableOfflineRevocation(
+        _ offlineRevocationService: CertificateRevocationOfflineServiceProtocol
+    ) {
+        isLoading = true
+        offlineRevocationService.update()
+            .done {
+                self.delegate?.viewModelDidUpdate()
+            }
+            .ensure {
+                self.isLoading = false
+            }
+            .cauterize()
+    }
+
+    private func disableOfflineRevocationIfReallyWanted() {
+        router?.showOfflineRevocationDisableConfirmation()
+            .done { [weak self] disableOfflineRevocation in
+                self?.isLoading = false
+                if disableOfflineRevocation {
+                    self?.offlineRevocationService?.reset()
+                } else {
+                    self?.offlineRevocationIsEnabled.toggle()
+                    self?.delegate?.viewModelDidUpdate()
+                }
+            }
+    }
     
     private func changeContext() {
         switch context {
