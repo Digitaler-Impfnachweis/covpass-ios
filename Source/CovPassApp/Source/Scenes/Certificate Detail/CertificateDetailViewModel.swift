@@ -122,10 +122,7 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
         return fullImmunization ? UIImage.detailStatusFull : UIImage.detailStatusPartial
     }
 
-    var immunizationTitle: String {
-        if selectedCertificatetIsInvalid || selectedCertificateIsRevoked {
-            return "certificate_invalid_detail_view_note_title".localized
-        }
+    var immunizationTitle: String {        
         if selectedTokenIsExpired {
             return "certificate_expired_detail_view_note_title".localized
         }
@@ -136,6 +133,9 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
             return String(format: "certificates_overview_soon_expiring_title".localized,
                           DateUtils.displayDateFormatter.string(from: expireDate),
                           DateUtils.displayTimeFormatter.string(from: expireDate))
+        }
+        if selectedCertificatetIsInvalid || selectedCertificateIsRevoked {
+            return "certificate_invalid_detail_view_note_title".localized
         }
         if selectedCertificatetIsRecovery {
             return "recovery_certificate_overview_valid_until_title".localized
