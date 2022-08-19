@@ -28,7 +28,7 @@ class CertificatesOverviewPersonViewModel: CertificatesOverviewPersonViewModelPr
     var pageSubtitle: String
     var modalButtonTitle: String = Constants.Keys.modalButtonTitle
     var certificateViewModels: [CardViewModel] { cardViewModels(for: certificates) }
-    var showBadge: Bool { certificateViewModels.contains(where:\.showBoosterAvailabilityNotification) }
+    var showBadge: Bool { certificateViewModels.contains(where:\.showNotification) }
     var manageCertificatesIcon: UIImage { showBadge ? .manageNotification : .manage }
     var dotPageIndicatorIsHidden: Bool { certificateViewModels.count == 1 }
     private let repository: VaccinationRepositoryProtocol

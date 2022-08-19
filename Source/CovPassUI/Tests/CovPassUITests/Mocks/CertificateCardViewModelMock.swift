@@ -10,7 +10,7 @@ import CovPassUI
 import UIKit
 
 class CertificateCardViewModelMock: CertificateCardViewModelProtocol {
-    var showBoosterAvailabilityNotification = false
+    var showNotification = false
 
     var isBoosted: Bool = false
 

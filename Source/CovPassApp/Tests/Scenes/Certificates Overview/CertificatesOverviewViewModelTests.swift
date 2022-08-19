@@ -216,6 +216,7 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         cert.vaccinationCertificate.hcert.dgc.nam.fn = "John 1"
         cert.vaccinationCertificate.hcert.dgc.r!.first!.du = DateUtils.parseDate("2021-04-26T15:05:00")!
         cert.invalid = true
+        cert.wasExpiryAlertShown = true
         let certs = [cert]
         vaccinationRepository.certificates = certs
         
@@ -243,12 +244,47 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         XCTAssertEqual(false, model.isFavorite)
     }
     
+    func testRecoveryCertificateInvalidNotShownOnce() {
+        // Given
+        var cert: ExtendedCBORWebToken = CBORWebToken.mockRecoveryCertificate.extended()
+        cert.vaccinationCertificate.hcert.dgc.nam.fn = "John 1"
+        cert.vaccinationCertificate.hcert.dgc.r!.first!.du = DateUtils.parseDate("2021-04-26T15:05:00")!
+        cert.invalid = true
+        cert.wasExpiryAlertShown = false
+        let certs = [cert]
+        vaccinationRepository.certificates = certs
+        
+        // WHEN
+        _ = sut.refresh()
+        RunLoop.current.run(for: 0.1)
+        
+        guard let model = (sut.certificateViewModels.first as? CertificateCardViewModelProtocol) else {
+            XCTFail("Model can not be extracted")
+            return
+        }
+        
+        // THEN
+        XCTAssertEqual("EU Digital COVID Certificate", model.title)
+        XCTAssertEqual("Invalid", model.subtitle)
+        XCTAssertEqual("Display certificates", model.actionTitle)
+        XCTAssertEqual("Doe John 1", model.name)
+        XCTAssertEqual(.neutralWhite, model.textColor)
+        XCTAssertEqual(.onBackground40, model.backgroundColor)
+        XCTAssertEqual(.neutralWhite, model.tintColor)
+        XCTAssertEqual(.expiredNotification, model.titleIcon)
+        XCTAssertEqual("EU Digital COVID Certificate", model.title)
+        XCTAssertEqual("Invalid", model.subtitle)
+        XCTAssertEqual(true, model.isInvalid)
+        XCTAssertEqual(false, model.isFavorite)
+    }
+    
     func testRecoveryCertificateExpired() {
         // Given
         var cert: ExtendedCBORWebToken = CBORWebToken.mockRecoveryCertificate.extended()
         cert.vaccinationCertificate.hcert.dgc.nam.fn = "John 1"
         cert.vaccinationCertificate.hcert.dgc.r!.first!.du = DateUtils.parseDate("2021-04-26T15:05:00")!
         cert.vaccinationCertificate.exp = Calendar.current.date(byAdding: .year, value: -2, to: Date())
+        cert.wasExpiryAlertShown = true
         let certs = [cert]
         vaccinationRepository.certificates = certs
         
@@ -270,6 +306,40 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         XCTAssertEqual(.onBackground40, model.backgroundColor)
         XCTAssertEqual(.neutralWhite, model.tintColor)
         XCTAssertEqual(.expired, model.titleIcon)
+        XCTAssertEqual("EU Digital COVID Certificate", model.title)
+        XCTAssertEqual("Expired", model.subtitle)
+        XCTAssertEqual(true, model.isInvalid)
+        XCTAssertEqual(false, model.isFavorite)
+    }
+    
+    func testRecoveryCertificateExpiredNotShownOnce() {
+        // Given
+        var cert: ExtendedCBORWebToken = CBORWebToken.mockRecoveryCertificate.extended()
+        cert.vaccinationCertificate.hcert.dgc.nam.fn = "John 1"
+        cert.vaccinationCertificate.hcert.dgc.r!.first!.du = DateUtils.parseDate("2021-04-26T15:05:00")!
+        cert.vaccinationCertificate.exp = Calendar.current.date(byAdding: .year, value: -2, to: Date())
+        cert.wasExpiryAlertShown = false
+        let certs = [cert]
+        vaccinationRepository.certificates = certs
+        
+        // WHEN
+        _ = sut.refresh()
+        RunLoop.current.run(for: 0.1)
+        
+        guard let model = (sut.certificateViewModels.first as? CertificateCardViewModelProtocol) else {
+            XCTFail("Model can not be extracted")
+            return
+        }
+        
+        // THEN
+        XCTAssertEqual("EU Digital COVID Certificate", model.title)
+        XCTAssertEqual("Expired", model.subtitle)
+        XCTAssertEqual("Display certificates", model.actionTitle)
+        XCTAssertEqual("Doe John 1", model.name)
+        XCTAssertEqual(.neutralWhite, model.textColor)
+        XCTAssertEqual(.onBackground40, model.backgroundColor)
+        XCTAssertEqual(.neutralWhite, model.tintColor)
+        XCTAssertEqual(.expiredNotification, model.titleIcon)
         XCTAssertEqual("EU Digital COVID Certificate", model.title)
         XCTAssertEqual("Expired", model.subtitle)
         XCTAssertEqual(true, model.isInvalid)

@@ -43,5 +43,5 @@ struct NoCertificateCardViewModel: NoCertificateCardViewModelProtocol {
         return .neutralWhite
     }
     
-    var showBoosterAvailabilityNotification: Bool = false
+    var showNotification: Bool = false
 }

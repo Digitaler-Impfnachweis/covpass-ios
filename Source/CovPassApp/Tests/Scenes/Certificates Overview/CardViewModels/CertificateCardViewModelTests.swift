@@ -50,7 +50,7 @@ class CertificateCardViewModelTests: XCTestCase {
         let sut = sut(token: token)
 
         // When
-        let showNotification = sut.showBoosterAvailabilityNotification
+        let showNotification = sut.showNotification
 
         // Then
         XCTAssertFalse(showNotification)
@@ -67,7 +67,7 @@ class CertificateCardViewModelTests: XCTestCase {
         let sut = sut(token: token, boosterLogic: boosterLogic)
 
         // When
-        let showNotification = sut.showBoosterAvailabilityNotification
+        let showNotification = sut.showNotification
 
         // Then
         XCTAssertTrue(showNotification)

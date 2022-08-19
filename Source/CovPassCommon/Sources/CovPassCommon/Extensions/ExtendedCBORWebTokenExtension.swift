@@ -78,4 +78,9 @@ public extension ExtendedCBORWebToken {
     func isTestedForRecoveryOnSameDateAndIsIssuedBefore(_ token: ExtendedCBORWebToken) -> Bool {
         sameRecoveryTestDate(for: token) && issuedBefore(for: token)
     }
+    
+    var expiryAlertWasNotShown: Bool {
+        let wasAlreadyShown = wasExpiryAlertShown ?? false
+        return !wasAlreadyShown
+    }
 }
