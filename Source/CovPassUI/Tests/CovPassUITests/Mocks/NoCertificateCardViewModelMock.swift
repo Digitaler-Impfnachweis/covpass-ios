@@ -10,7 +10,7 @@ import CovPassUI
 import UIKit
 
 class NoCertificateCardViewModelMock: NoCertificateCardViewModelProtocol {
-    var showBoosterAvailabilityNotification = false
+    var showNotification = false
     
     var reuseIdentifier: String {
         "\(NoCertificateCollectionViewCell.self)"

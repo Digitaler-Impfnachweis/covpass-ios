@@ -43,11 +43,24 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
         return vaccination.isJohnsonJohnson && vaccination.isDoubleDoseComplete
     }()
     // Show notification to the user if he is qualified for a booster vaccination
-    var showBoosterAvailabilityNotification: Bool {
+    private var showBoosterAvailabilityNotification: Bool {
         guard let boosterCandidate = boosterLogic.checkCertificates([token]) else { return false }
         return boosterCandidate.state == .new
     }
+    private var showNotificationForExpiryOrInvalid: Bool {
+        guard token.vaccinationCertificate.isNotTest else {
+            return false
+        }
+        guard token.expiryAlertWasNotShown else {
+            return false
+        }
+        let cert = token.vaccinationCertificate
+        return cert.expiresSoon || token.isInvalid || cert.isExpired
+    }
     private let showNotificationIcon: Bool
+    var showNotification: Bool {
+        showBoosterAvailabilityNotification || showNotificationForExpiryOrInvalid
+    }
 
     // MARK: - Lifecycle
 
@@ -152,13 +165,13 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
 
     var titleIcon: UIImage {
         if isInvalid {
-            return showBoosterAvailabilityNotification && showNotificationIcon ? .expiredNotification : .expired
+            return showNotification && showNotificationIcon ? .expiredNotification : .expired
         } else if isPCRTest || isRapidAntigenTest {
-            return showBoosterAvailabilityNotification && showNotificationIcon ? .testNotification : .detailStatusTestInverse
+            return showNotification && showNotificationIcon ? .testNotification : .detailStatusTestInverse
         } else if isPartialVaccination {
-            return showBoosterAvailabilityNotification && showNotificationIcon ? .halfShieldNotification: .startStatusPartial
+            return showNotification && showNotificationIcon ? .halfShieldNotification: .startStatusPartial
         }
-        return showBoosterAvailabilityNotification && showNotificationIcon ? .statusFullBlueNotification : .statusFullDetail
+        return showNotification && showNotificationIcon ? .statusFullBlueNotification : .statusFullDetail
     }
 
     var isFavorite: Bool {

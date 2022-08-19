@@ -10,7 +10,7 @@ import CovPassUI
 import UIKit
 
 struct MockCardViewModel: CardViewModel {
-    var showBoosterAvailabilityNotification: Bool = false
+    var showNotification: Bool = false
     
     var delegate: ViewModelDelegate?
 

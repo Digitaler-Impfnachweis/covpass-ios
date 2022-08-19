@@ -641,10 +641,3 @@ extension CertificatesOverviewViewModel {
             style: .alert)
     }
 }
-
-private extension ExtendedCBORWebToken {
-    var expiryAlertWasNotShown: Bool {
-        let wasAlreadyShown = wasExpiryAlertShown ?? false
-        return !wasAlreadyShown
-    }
-}

@@ -201,4 +201,32 @@ class ExtendedCBORWebTokenTests: XCTestCase {
         // Then
         XCTAssertTrue(isNotExpired)
     }
+    
+    func testExpiryAlertWasNotShown_false() {
+        var sut = ExtendedCBORWebToken(
+            vaccinationCertificate: .mockVaccinationCertificate,
+            vaccinationQRCodeData: ""
+        )
+        sut.wasExpiryAlertShown = true
+
+        // When
+        let expiryAlertWasNotShown = sut.expiryAlertWasNotShown
+
+        // Then
+        XCTAssertFalse(expiryAlertWasNotShown)
+    }
+    
+    func testExpiryAlertWasNotShown_true() {
+        var sut = ExtendedCBORWebToken(
+            vaccinationCertificate: .mockVaccinationCertificate,
+            vaccinationQRCodeData: ""
+        )
+        sut.wasExpiryAlertShown = false
+
+        // When
+        let expiryAlertWasNotShown = sut.expiryAlertWasNotShown
+
+        // Then
+        XCTAssertTrue(expiryAlertWasNotShown)
+    }
 }

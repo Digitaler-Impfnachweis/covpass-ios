@@ -10,7 +10,7 @@ class CertificatesOverviewPersonViewModelTests: XCTestCase {
         var cert = CBORWebToken.mockVaccinationCertificate.extended(vaccinationQRCodeData: "1")
         cert.revoked = false
         cert.invalid = false
-        cert.vaccinationCertificate.exp = Calendar.current.date(byAdding: .day, value: 1, to: Date())
+        cert.vaccinationCertificate.exp = Calendar.current.date(byAdding: .day, value: 100, to: Date())
         return cert
     }
     
@@ -18,7 +18,7 @@ class CertificatesOverviewPersonViewModelTests: XCTestCase {
         var cert = CBORWebToken.mockRecoveryCertificate.extended(vaccinationQRCodeData: "2")
         cert.revoked = false
         cert.invalid = false
-        cert.vaccinationCertificate.exp = Calendar.current.date(byAdding: .day, value: 1, to: Date())
+        cert.vaccinationCertificate.exp = Calendar.current.date(byAdding: .day, value: 100, to: Date())
         return cert
     }
     
@@ -26,7 +26,7 @@ class CertificatesOverviewPersonViewModelTests: XCTestCase {
         var cert = CBORWebToken.mockRecoveryCertificate.extended(vaccinationQRCodeData: "3")
         cert.revoked = false
         cert.invalid = false
-        cert.vaccinationCertificate.exp = Calendar.current.date(byAdding: .day, value: 1, to: Date())
+        cert.vaccinationCertificate.exp = Calendar.current.date(byAdding: .day, value: 100, to: Date())
         return cert
     }
     
@@ -34,7 +34,7 @@ class CertificatesOverviewPersonViewModelTests: XCTestCase {
         var cert = CBORWebToken.mockTestCertificate.extended(vaccinationQRCodeData: "4")
         cert.revoked = false
         cert.invalid = false
-        cert.vaccinationCertificate.exp = Calendar.current.date(byAdding: .day, value: 1, to: Date())
+        cert.vaccinationCertificate.exp = Calendar.current.date(byAdding: .day, value: 100, to: Date())
         return cert
     }
     
@@ -42,7 +42,7 @@ class CertificatesOverviewPersonViewModelTests: XCTestCase {
         var cert = CBORWebToken.mockTestCertificate.extended(vaccinationQRCodeData: "5")
         cert.revoked = false
         cert.invalid = false
-        cert.vaccinationCertificate.exp = Calendar.current.date(byAdding: .day, value: 1, to: Date())
+        cert.vaccinationCertificate.exp = Calendar.current.date(byAdding: .day, value: 100, to: Date())
         return cert
     }
     
@@ -94,8 +94,8 @@ class CertificatesOverviewPersonViewModelTests: XCTestCase {
         
         // THEN
         XCTAssertEqual(certViewModels.count, 1)
-        XCTAssertEqual(certViewModels[0].showBoosterAvailabilityNotification, false)
-        XCTAssertEqual(certViewModels[0].showBoosterAvailabilityNotification, showBadge)
+        XCTAssertEqual(certViewModels[0].showNotification, false)
+        XCTAssertEqual(certViewModels[0].showNotification, showBadge)
     }
     
     func test_vaccination_and_recovery() {
@@ -110,8 +110,8 @@ class CertificatesOverviewPersonViewModelTests: XCTestCase {
         
         // THEN
         XCTAssertEqual(certViewModels.count, 2)
-        XCTAssertEqual(certViewModels[0].showBoosterAvailabilityNotification, false)
-        XCTAssertEqual(certViewModels[0].showBoosterAvailabilityNotification, showBadge)
+        XCTAssertEqual(certViewModels[0].showNotification, false)
+        XCTAssertEqual(certViewModels[0].showNotification, showBadge)
     }
     
     func test_vaccination_and_twoRecoveries_and_twoTestCertificates() {
@@ -129,8 +129,8 @@ class CertificatesOverviewPersonViewModelTests: XCTestCase {
         
         // THEN
         XCTAssertEqual(certViewModels.count, 3)
-        XCTAssertEqual(certViewModels[0].showBoosterAvailabilityNotification, false)
-        XCTAssertEqual(certViewModels[0].showBoosterAvailabilityNotification, showBadge)
+        XCTAssertEqual(certViewModels[0].showNotification, false)
+        XCTAssertEqual(certViewModels[0].showNotification, showBadge)
     }
     
     func test_vaccination_and_recoveryWithNotification_and_twoTestCertificates() {
@@ -148,9 +148,9 @@ class CertificatesOverviewPersonViewModelTests: XCTestCase {
         
         // THEN
         XCTAssertEqual(certViewModels.count, 2)
-        XCTAssertEqual(certViewModels[0].showBoosterAvailabilityNotification, false)
-        XCTAssertEqual(certViewModels[1].showBoosterAvailabilityNotification, true)
-        XCTAssertEqual(certViewModels[1].showBoosterAvailabilityNotification, showBadge)
+        XCTAssertEqual(certViewModels[0].showNotification, false)
+        XCTAssertEqual(certViewModels[1].showNotification, true)
+        XCTAssertEqual(certViewModels[1].showNotification, showBadge)
     }
     
     func testGoToDetails() {
