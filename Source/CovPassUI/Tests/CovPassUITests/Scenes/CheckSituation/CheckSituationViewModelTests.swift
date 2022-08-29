@@ -63,7 +63,7 @@ class CheckSituationViewModelTests: XCTestCase {
         XCTAssertEqual(sut.travelRulesTitle, "check_context_onboarding_option1_title")
         XCTAssertEqual(sut.domesticRulesDescription, "check_context_onboarding_option2_subtitle")
         XCTAssertEqual(sut.travelRulesDescription, "check_context_onboarding_option1_subtitle")
-        XCTAssertEqual(sut.footerText, "check_context_onboarding_footnote")
+        XCTAssertEqual(sut.footerText, "app_information_message_update")
         XCTAssertEqual(sut.doneButtonTitle, "check_context_onboarding_button")
         XCTAssertEqual(sut.descriptionTextIsTop, true)
         XCTAssertEqual(sut.pageTitleIsHidden, true)

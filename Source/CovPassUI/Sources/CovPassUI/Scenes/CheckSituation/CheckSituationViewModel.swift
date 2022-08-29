@@ -57,6 +57,9 @@ private enum Constants {
             static let loadingTitle = "settings_rules_list_loading_title".localized(bundle: .main)
             static let cancelTitle = "settings_rules_list_loading_cancel".localized(bundle: .main)
         }
+        enum Settings {
+            static let description = "app_information_message_update".localized(bundle: .main)
+        }
     }
     enum Images {
         static let pageImage = UIImage.illustration4
@@ -276,6 +279,7 @@ public class CheckSituationViewModel: CheckSituationViewModelProtocol {
             offlineRevocationIsHidden = true
             updateContextHidden = true
             situationChcekTitleLabelHidden = true
+            footerText = Constants.Keys.General.footerText
         case .settings:
             hStackViewIsHidden = true
             buttonIsHidden = true
@@ -288,6 +292,7 @@ public class CheckSituationViewModel: CheckSituationViewModelProtocol {
             offlineRevocationIsHidden = false
             updateContextHidden = false
             situationChcekTitleLabelHidden = false
+            footerText = Constants.Keys.Settings.description
         case .information:
             hStackViewIsHidden = false
             newBadgeIconIsHidden = true

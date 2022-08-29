@@ -477,7 +477,7 @@
 
 "settings_rules_list_loading_cancel" = "Abbrechen";
 
-"app_information_message_update" = "Zur Überprüfung eingescannter Zertifikate benötigt die App aktuelle Listen der vertrauenswürdigen Zertifikatsaussteller und der momentan in Deutschland geltenden Corona-Regeln. Diese Listen aktualisieren sich im Online-Modus täglich automatisch.";
+"app_information_message_update" = "Legen Sie fest, nach welchen Regeln COVID-Zertifikate geprüft werden sollen. Sollten die Prüfregeln nicht aktuell sein, können Sie hier auch ein manuelles Update vornehmen.";
 
 "app_information_rules_list_title" = "Regelwerk";
 
