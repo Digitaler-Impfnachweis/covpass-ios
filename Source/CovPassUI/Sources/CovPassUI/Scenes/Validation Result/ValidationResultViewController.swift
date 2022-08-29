@@ -154,7 +154,19 @@ public class ValidationResultViewController: UIViewController {
             p.layoutMargins.bottom = .space_20
             self.paragraphStackView.addArrangedSubview(p)
         }
-        UIAccessibility.post(notification: .layoutChanged, argument: resultView.titleLabel)
+        updateAccessibility()
+    }
+
+    private func updateAccessibility() {
+        let speakableParagraphs = viewModel
+            .paragraphs
+            .map { $0.title + "\n" + $0.subtitle }
+        let speakableText = (
+            [viewModel.resultTitle, viewModel.resultBody] +
+            speakableParagraphs +
+            [viewModel.info]
+        ).compactMap { $0 }.joined(separator: "\n")
+        UIAccessibility.post(notification: .screenChanged, argument: speakableText)
     }
 
     private func configureCounter() {
