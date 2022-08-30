@@ -6,14 +6,16 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
+import CovPassCommon
 import CovPassUI
 import Foundation
 
-class GermanAppInformationViewModel: AppInformationBaseViewModel {
+class GermanAppInformationViewModel: CovPassAppInformationViewModel {
     init(
         router: AppInformationRouterProtocol,
         mainBundle: Bundle = .main,
-        licenseBundle: Bundle = .commonBundle
+        licenseBundle: Bundle = .commonBundle,
+        persistence: Persistence
     ) {
         let entries = [
             .webEntry(title: Texts.leichteSprache,
@@ -40,15 +42,16 @@ class GermanAppInformationViewModel: AppInformationBaseViewModel {
             AppInformationEntry(title: Texts.appInformationTitle,
                                 scene: TrustedListDetailsSceneFactory(sceneCoordinator: router.sceneCoordinator))
         ]
-        super.init(router: router, entries: entries)
+        super.init(router: router, entries: entries, persistence: persistence)
     }
 }
 
-class EnglishAppInformationViewModel: AppInformationBaseViewModel {
+class EnglishAppInformationViewModel: CovPassAppInformationViewModel {
     init(
         router: AppInformationRouterProtocol,
         mainBundle: Bundle = .main,
-        licenseBundle: Bundle = .commonBundle
+        licenseBundle: Bundle = .commonBundle,
+        persistence: Persistence
     ) {
         let entries = [
             .webEntry(title: Texts.contactTitle,
@@ -72,7 +75,7 @@ class EnglishAppInformationViewModel: AppInformationBaseViewModel {
             AppInformationEntry(title: Texts.appInformationTitle,
                                 scene: TrustedListDetailsSceneFactory(sceneCoordinator: router.sceneCoordinator))
         ]
-        super.init(router: router, entries: entries)
+        super.init(router: router, entries: entries, persistence: persistence)
     }
 }
 

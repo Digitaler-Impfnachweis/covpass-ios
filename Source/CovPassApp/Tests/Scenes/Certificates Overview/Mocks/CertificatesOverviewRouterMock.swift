@@ -22,6 +22,7 @@ class CertificatesOverviewRouterMock: CertificatesOverviewRouterProtocol {
     let showCertificatePickerExpectation = XCTestExpectation(description: "showCertificatePickerExpectation")
     let showQRCodeScanAndSelectionViewExpectation = XCTestExpectation(description: "showQRCodeScanAndSelectionViewExpectation")
     let showHowToScanExpectation = XCTestExpectation(description: "showHowToScanExpectation")
+    let showAnnouncementExpectation = XCTestExpectation(description: "showAnnouncementExpectation")
     var sceneCoordinator: SceneCoordinator = SceneCoordinatorMock()
     var error: Error?
     var scanCountErrorResponse: ScanCountErrorResponse = .download
@@ -40,7 +41,8 @@ class CertificatesOverviewRouterMock: CertificatesOverviewRouterProtocol {
     }
 
     func showAnnouncement() -> Promise<Void> {
-        .value
+        showAnnouncementExpectation.fulfill()
+        return .value
     }
 
     func showCertificates(certificates: [ExtendedCBORWebToken],

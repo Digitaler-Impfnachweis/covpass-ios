@@ -504,7 +504,9 @@ extension CertificatesOverviewViewModel {
             userDefaults.announcementVersion = bundleVersion
             return Promise.value
         }
-        if announcementVersion == bundleVersion { return Promise.value }
+        if userDefaults.disableWhatsNew || announcementVersion == bundleVersion {
+            return Promise.value
+        }
         userDefaults.announcementVersion = bundleVersion
         return router.showAnnouncement()
     }

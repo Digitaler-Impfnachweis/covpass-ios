@@ -1214,11 +1214,19 @@
 
 "accessibility_app_information_title_open_source_announce" = "The view \"Open-source licences\" has been opened";
 
+"accessibility_app_information_update_notifications_announce_open" = "The view \"update notifications\" has been opened";
+
+"accessibility_app_information_update_notifications_announce_close" = "The view \"update notifications\" has been closed";
+
 "accessibility_app_information_label_back" = "Back to the start screen";
 
 "accessibility_app_information_title_informationt_announce" = "Information has been opened";
 
 "accessibility_app_information_version_number_delimiter" = "point";
+
+"settings_list_status_on" = "On";
+
+"settings_list_status_off" = "Off";
 
 "app_information_title" = "Information";
 
@@ -1266,6 +1274,20 @@
 
 "app_information_message_update" = "To check the validity of certificates, the app requires up-to-date lists of trusted certificate issuers as well as the current Covid-19 rules in the relevant travel countries.\n\nThese lists are updated automatically on a daily basis. You can also manually update them here at any time.";
 
+"app_information_list_update_notifications" = "Update notifications";
+
+"app_information_title_update_notifications" = "Update notifications";
+
+"app_information_copy_update_notifications" = "You can now disable the update notifications. You can use the toggle to disable or re-enable the updates at any time. If you disable the update screen, you will no longer receive updates about the latest software developments in the app.";
+
+"app_information_update_notifications_toggle" = "Show update notifications";
+
+"app_information_update_notifications_new_version_copy" = "New functions (Version %@)";
+
+"whats_new_screen_update_notifications_checkbox_headline" = "Do not show this type of notifications anymore";
+
+"whats_new_screen_update_notifications_checkbox_copy" = "You can change this option anytime in the settings.";
+
 "settings_rules_list_title" = "Checking rules";
 
 "settings_rules_list_status_updated" = "Updated";
@@ -1312,6 +1334,8 @@
 "accessibility_qr_code" = "QR code";
 
 "accessibility_button" = "Button";
+
+"whats_new_screen_title" = "New features";
 
 
 /********** popup: share certification **********/

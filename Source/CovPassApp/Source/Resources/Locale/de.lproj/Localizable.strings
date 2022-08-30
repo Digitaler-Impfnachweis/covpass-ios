@@ -1214,11 +1214,19 @@
 
 "accessibility_app_information_title_open_source_announce" = "Die Ansicht \"Open-Source-Lizenzen\" wurde geöffnet";
 
+"accessibility_app_information_update_notifications_announce_open" = "Die Ansicht \"Update-Benachrichtigungen\" wurde geöffnet";
+
+"accessibility_app_information_update_notifications_announce_close" = "Die Ansicht \"Update-Benachrichtigungen\" wurde geschlossen";
+
 "accessibility_app_information_label_back" = "Zurück zum Startbildschirm";
 
 "accessibility_app_information_title_informationt_announce" = "Die Ansicht \"Informationen\" wurde geöffnet";
 
 "accessibility_app_information_version_number_delimiter" = "Punkt";
+
+"settings_list_status_on" = "An";
+
+"settings_list_status_off" = "Aus";
 
 "app_information_title" = "Informationen";
 
@@ -1266,6 +1274,20 @@
 
 "app_information_message_update" = "Zur Überprüfung der Gültigkeit von Zertifikaten benötigt die App aktuelle Listen der vertrauenswürdigen Zertifikatsaussteller und der momentan geltenden Corona-Einreiseregeln in den entsprechenden Ländern.\n\nDiese Listen aktualisieren sich täglich automatisch. Sie können hier auch jederzeit eine manuelle Aktualisierung vornehmen.";
 
+"app_information_list_update_notifications" = "Update-Benachrichtigungen";
+
+"app_information_title_update_notifications" = "Update-Benachrichtigungen";
+
+"app_information_copy_update_notifications" = "Sie können ab jetzt die Update-Benachrichtigungen deaktivieren. Mit dem Regler können Sie jederzeit die Updates deaktivieren oder wieder aktivieren. Wenn sie den Update-Benachrichtigungen deaktivieren, bekommen Sie keine Updates mehr über die neuesten Software-Entwicklungen in der App.";
+
+"app_information_update_notifications_toggle" = "Update-Benachrichtigungen anzeigen";
+
+"app_information_update_notifications_new_version_copy" = "Neue Funktionen (Version %@)";
+
+"whats_new_screen_update_notifications_checkbox_headline" = "Diese Art von Benachrichtigungen nicht mehr anzeigen";
+
+"whats_new_screen_update_notifications_checkbox_copy" = "Sie können diese Entscheidung jederzeit in den Einstellungen ändern.";
+
 "settings_rules_list_title" = "Prüfregeln";
 
 "settings_rules_list_status_updated" = "Aktualisiert";
@@ -1312,6 +1334,8 @@
 "accessibility_qr_code" = "QR-Code";
 
 "accessibility_button" = "Taste";
+
+"whats_new_screen_title" = "Neue Funktionen";
 
 
 /********** popup: share certification **********/

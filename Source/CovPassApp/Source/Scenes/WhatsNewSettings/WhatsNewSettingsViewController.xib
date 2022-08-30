@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_0" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WhatsNewSettingsViewController" customModule="CovPassApp" customModuleProvider="target">
+            <connections>
+                <outlet property="descriptionLabel" destination="ksK-CI-Pl7" id="Pns-L3-AyC"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="webView" destination="FzE-et-8Jj" id="K9p-An-1Hb"/>
+                <outlet property="webViewHeightConstraint" destination="0k4-yQ-Syy" id="hFc-s9-vZe"/>
+                <outlet property="whatsNewSwitch" destination="jjf-qU-UBd" id="9NN-gu-XnR"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="524"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qwa-F8-TYj">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="524"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="82g-zi-aCD" userLabel="Content View">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="384.5"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ksK-CI-Pl7">
+                                    <rect key="frame" x="24" y="24" width="272" height="93.5"/>
+                                    <string key="text">You can now disable the update notifications. You can use the toggle to disable or re-enable the updates at any time. If you disable the update screen, you will no longer receive updates about the latest software developments in the app.</string>
+                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="jjf-qU-UBd" customClass="LabeledSwitch" customModule="CovPassUI">
+                                    <rect key="frame" x="0.0" y="133.5" width="320" height="50"/>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="50" placeholder="YES" id="deT-I9-HSF"/>
+                                    </constraints>
+                                </view>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z8U-0n-bPB" userLabel="Line View">
+                                    <rect key="frame" x="0.0" y="183.5" width="320" height="1"/>
+                                    <color key="backgroundColor" name="Divider"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="1" id="U50-Wu-4H8"/>
+                                    </constraints>
+                                </view>
+                                <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FzE-et-8Jj">
+                                    <rect key="frame" x="0.0" y="184.5" width="312" height="200"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="200" id="0k4-yQ-Syy"/>
+                                    </constraints>
+                                    <wkWebViewConfiguration key="configuration">
+                                        <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                        <wkPreferences key="preferences"/>
+                                    </wkWebViewConfiguration>
+                                </wkWebView>
+                            </subviews>
+                            <constraints>
+                                <constraint firstItem="ksK-CI-Pl7" firstAttribute="leading" secondItem="82g-zi-aCD" secondAttribute="leadingMargin" constant="16" id="1Eh-as-ubY"/>
+                                <constraint firstItem="jjf-qU-UBd" firstAttribute="leading" secondItem="82g-zi-aCD" secondAttribute="leading" id="3Uk-HY-fvo"/>
+                                <constraint firstItem="FzE-et-8Jj" firstAttribute="leading" secondItem="82g-zi-aCD" secondAttribute="leading" id="5mQ-mx-LAC"/>
+                                <constraint firstItem="jjf-qU-UBd" firstAttribute="top" secondItem="ksK-CI-Pl7" secondAttribute="bottom" constant="16" id="5yb-Gn-kR3"/>
+                                <constraint firstAttribute="bottom" secondItem="FzE-et-8Jj" secondAttribute="bottom" id="6Zu-5p-2Vy"/>
+                                <constraint firstItem="FzE-et-8Jj" firstAttribute="top" secondItem="Z8U-0n-bPB" secondAttribute="bottom" id="7N7-h4-fsC"/>
+                                <constraint firstItem="ksK-CI-Pl7" firstAttribute="top" secondItem="82g-zi-aCD" secondAttribute="topMargin" constant="16" id="eDd-1X-9Gi"/>
+                                <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="ksK-CI-Pl7" secondAttribute="trailing" constant="16" id="hJK-tV-nQj"/>
+                                <constraint firstAttribute="trailing" secondItem="Z8U-0n-bPB" secondAttribute="trailing" id="keZ-uK-bOa"/>
+                                <constraint firstAttribute="trailingMargin" secondItem="FzE-et-8Jj" secondAttribute="trailing" id="n45-qZ-wWs"/>
+                                <constraint firstItem="Z8U-0n-bPB" firstAttribute="leading" secondItem="82g-zi-aCD" secondAttribute="leading" id="s51-OI-NnO"/>
+                                <constraint firstAttribute="trailing" secondItem="jjf-qU-UBd" secondAttribute="trailing" id="vUV-WR-Vwl"/>
+                                <constraint firstItem="Z8U-0n-bPB" firstAttribute="top" secondItem="jjf-qU-UBd" secondAttribute="bottom" id="xDo-CH-y1n"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="82g-zi-aCD" firstAttribute="top" secondItem="jKW-C5-W8f" secondAttribute="top" id="AbJ-3K-ORx"/>
+                        <constraint firstItem="82g-zi-aCD" firstAttribute="bottom" secondItem="jKW-C5-W8f" secondAttribute="bottom" id="EQ7-UR-dlc"/>
+                        <constraint firstItem="82g-zi-aCD" firstAttribute="leading" secondItem="jKW-C5-W8f" secondAttribute="leading" id="JOF-q8-ohh"/>
+                        <constraint firstItem="82g-zi-aCD" firstAttribute="trailing" secondItem="jKW-C5-W8f" secondAttribute="trailing" id="cQU-Dh-JYG"/>
+                        <constraint firstItem="82g-zi-aCD" firstAttribute="width" secondItem="VW9-v2-QBU" secondAttribute="width" id="s8e-ru-vOk"/>
+                        <constraint firstItem="82g-zi-aCD" firstAttribute="height" secondItem="VW9-v2-QBU" secondAttribute="height" priority="250" id="wU9-qy-JBO"/>
+                    </constraints>
+                    <viewLayoutGuide key="contentLayoutGuide" id="jKW-C5-W8f"/>
+                    <viewLayoutGuide key="frameLayoutGuide" id="VW9-v2-QBU"/>
+                </scrollView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="qwa-F8-TYj" secondAttribute="trailing" id="1FA-Ry-eBe"/>
+                <constraint firstAttribute="bottom" secondItem="qwa-F8-TYj" secondAttribute="bottom" id="ADt-Hq-2Xx"/>
+                <constraint firstItem="qwa-F8-TYj" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="gE8-ed-W6c"/>
+                <constraint firstItem="qwa-F8-TYj" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="hat-fQ-jG6"/>
+            </constraints>
+            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
+            <point key="canvasLocation" x="140.57971014492756" y="153.34821428571428"/>
+        </view>
+    </objects>
+    <designables>
+        <designable name="jjf-qU-UBd">
+            <size key="intrinsicContentSize" width="414" height="50"/>
+        </designable>
+    </designables>
+    <resources>
+        <namedColor name="Divider">
+            <color red="0.89411764705882357" green="0.90980392156862744" blue="0.92549019607843142" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

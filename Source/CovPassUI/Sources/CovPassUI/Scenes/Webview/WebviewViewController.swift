@@ -37,6 +37,7 @@ open class WebviewViewController: UIViewController {
     }
 
     open override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         UIAccessibility.post(notification: .layoutChanged, argument: viewModel.accessibilityAnnouncement)
     }
     

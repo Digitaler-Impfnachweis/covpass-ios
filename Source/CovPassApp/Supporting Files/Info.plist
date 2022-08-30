@@ -68,6 +68,8 @@
 	<string>$(DOMESTIC_RULES_URL)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>LSSupportsOpeningDocumentsInPlace</key>
+	<false/>
 	<key>NSCameraUsageDescription</key>
 	<string>Erlauben Sie den Zugriff, um QR Codes scannen zu können.</string>
 	<key>PINNING_HASHES</key>
@@ -99,11 +101,9 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>UIUserInterfaceStyle</key>
-	<string>Light</string>
 	<key>UISupportsDocumentBrowser</key>
 	<false/>
-	<key>LSSupportsOpeningDocumentsInPlace</key>
-	<false/>
+	<key>UIUserInterfaceStyle</key>
+	<string>Light</string>
 </dict>
 </plist>

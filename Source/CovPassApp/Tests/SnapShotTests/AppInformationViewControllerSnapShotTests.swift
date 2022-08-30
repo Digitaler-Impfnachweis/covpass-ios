@@ -9,13 +9,33 @@
 @testable import CovPassUI
 
 class AppInformationViewControllerSnapShotTests: BaseSnapShotTests {
+    private var persistence: MockPersistence!
+    private var sut: AppInformationViewController!
 
-    func testDefault() {
-        let vm = EnglishAppInformationViewModel(
-            router: AppInformationRouterMock()
+    override func setUpWithError() throws {
+        persistence = .init()
+        let viewModel = EnglishAppInformationViewModel(
+            router: AppInformationRouterMock(),
+            persistence: persistence
         )
-        let vc = AppInformationViewController(viewModel: vm)
-        verifyView(vc: vc)
+        sut = .init(viewModel: viewModel)
     }
 
+    override func tearDown() {
+        persistence = nil
+        sut = nil
+    }
+
+    func testDefault() {
+        // Given
+        persistence.disableWhatsNew = true
+        
+        // When
+        verifyView(vc: sut)
+    }
+
+    func test_whats_new_enabled() {
+        // When
+        verifyView(vc: sut)
+    }
 }

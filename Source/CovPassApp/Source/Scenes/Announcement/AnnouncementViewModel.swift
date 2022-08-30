@@ -6,29 +6,54 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
+import CovPassCommon
 import CovPassUI
-import LocalAuthentication
+import Foundation
 import PromiseKit
-import UIKit
 
-class AnnouncementViewModel: BaseViewModel, CancellableViewModelProtocol {
+private enum Constants {
+    static let checkboxTitle = "whats_new_screen_update_notifications_checkbox_headline".localized
+    static let checkboxDescription = "whats_new_screen_update_notifications_checkbox_copy".localized
+    static let okButtonTitle = "dialog_update_info_notification_action_button".localized
+    static let switchOn = "settings_list_status_on".localized
+    static let switchOff = "settings_list_status_off".localized
+}
+
+final class AnnouncementViewModel: AnnouncementViewModelProtocol {
     // MARK: - Properties
 
-    weak var delegate: ViewModelDelegate?
-    let router: AnnouncementRouter
-    let resolver: Resolver<Void>
+    let checkboxTitle = Constants.checkboxTitle
+    let checkboxDescription = Constants.checkboxDescription
+    let okButtonTitle = Constants.okButtonTitle
+    let whatsNewURL: URL
 
-    var webViewRequest: URLRequest? {
-        guard let url = Bundle.commonBundle.url(forResource: Locale.current.isGerman() ? "announcements_de" : "announcements_en", withExtension: "html") else { return nil }
-        return URLRequest(url: url)
+    var disableWhatsNew: Bool {
+        get {
+            persistence.disableWhatsNew
+        }
+        set {
+            persistence.disableWhatsNew = newValue
+        }
     }
+
+    var checkboxAccessibilityValue: String {
+        disableWhatsNew ? Constants.switchOn : Constants.switchOff
+    }
+
+    private let router: AnnouncementRouter
+    private let resolver: Resolver<Void>
+    private var persistence: Persistence
 
     // MARK: - Lifecycle
 
     init(
         router: AnnouncementRouter,
-        resolvable: Resolver<Void>
+        resolvable: Resolver<Void>,
+        persistence: Persistence,
+        whatsNewURL: URL
     ) {
+        self.persistence = persistence
+        self.whatsNewURL = whatsNewURL
         self.router = router
         resolver = resolvable
     }
@@ -38,6 +63,6 @@ class AnnouncementViewModel: BaseViewModel, CancellableViewModelProtocol {
     }
 
     func cancel() {
-        resolver.cancel()
+        resolver.fulfill_()
     }
 }

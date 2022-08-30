@@ -456,6 +456,44 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         ], timeout: 1)
     }
 
+    func testShowNotificationsIfNeeded_announcement_already_shown() throws {
+        // Given
+        userDefaults.disableWhatsNew = false
+        userDefaults.announcementVersion = Bundle.main.shortVersionString ?? ""
+        router.showAnnouncementExpectation.isInverted = true
+
+        // When
+        sut.showNotificationsIfNeeded()
+
+        // Then
+        wait(for: [router.showAnnouncementExpectation], timeout: 1)
+    }
+
+    func testShowNotificationsIfNeeded_announcement_not_shown() throws {
+        // Given
+        userDefaults.disableWhatsNew = false
+        userDefaults.announcementVersion = ""
+
+        // When
+        sut.showNotificationsIfNeeded()
+
+        // Then
+        wait(for: [router.showAnnouncementExpectation], timeout: 1)
+    }
+
+    func testShowNotificationsIfNeeded_announcement_disabled() throws {
+        // Given
+        userDefaults.disableWhatsNew = true
+        userDefaults.announcementVersion = ""
+        router.showAnnouncementExpectation.isInverted = true
+
+        // When
+        sut.showNotificationsIfNeeded()
+
+        // Then
+        wait(for: [router.showAnnouncementExpectation], timeout: 1)
+    }
+
     func testRefresh_expiry_notification_token_is_valid() throws {
         // Given
         try configureSut(certificates: [.mock()])

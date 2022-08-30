@@ -6,6 +6,7 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
+import CovPassCommon
 import CovPassUI
 import UIKit
 
@@ -21,9 +22,10 @@ struct AppInformationSceneFactory: SceneFactory {
     }
 
     func make() -> UIViewController {
+        let persistence = UserDefaultsPersistence()
         let viewModel = Locale.current.isGerman() ?
-            GermanAppInformationViewModel(router: router) :
-            EnglishAppInformationViewModel(router: router)
+            GermanAppInformationViewModel(router: router, persistence: persistence) :
+            EnglishAppInformationViewModel(router: router, persistence: persistence)
         let viewController = AppInformationViewController(viewModel: viewModel)
         return viewController
     }

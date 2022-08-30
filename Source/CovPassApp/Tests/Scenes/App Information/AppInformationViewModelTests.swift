@@ -23,14 +23,15 @@ class GermanAppInformationViewModelTests: XCTestCase {
             AppInformationBaseViewModel.Texts.appInformationTitle
         ]
         let sut = GermanAppInformationViewModel(
-            router: AppInformationRouterMock()
+            router: AppInformationRouterMock(),
+            persistence: MockPersistence()
         )
 
         // When
         let entries = sut.entries
 
         // Then
-        XCTAssertEqual(entries.count, 8)
+        XCTAssertEqual(entries.count, 9)
         for index in 0..<min(entries.count, expectedTitles.count) {
             XCTAssertEqual(entries[index].title, expectedTitles[index])
         }
@@ -50,14 +51,15 @@ class EnglishAppInformationViewModelTests: XCTestCase {
             AppInformationBaseViewModel.Texts.appInformationTitle
         ]
         let sut = EnglishAppInformationViewModel(
-            router: AppInformationRouterMock()
+            router: AppInformationRouterMock(),
+            persistence: MockPersistence()
         )
 
         // When
         let entries = sut.entries
 
         // Then
-        XCTAssertEqual(entries.count, 7)
+        XCTAssertEqual(entries.count, 8)
         for index in 0..<min(entries.count, expectedTitles.count) {
             XCTAssertEqual(entries[index].title, expectedTitles[index])
         }
