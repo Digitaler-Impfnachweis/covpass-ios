@@ -19,8 +19,10 @@ struct ValidationResultFactory {
                                 error: Error?,
                                 _2GContext: Bool,
                                 userDefaults: Persistence) -> ValidationResultViewModel {
-        guard let revocationRepository = CertificateRevocationWrapperRepository() else {
-            fatalError("revocationRepository mut nor be nil.")
+        guard let revocationRepository = CertificateRevocationWrapperRepository(),
+              let audioPlayer = AudioPlayer()
+        else {
+            fatalError("Resource mut nor be nil.")
         }
         let revocationKeyFilename = XCConfiguration.certificationRevocationEncryptionKey
         guard error == nil, let certificate = certificate else {
@@ -32,7 +34,8 @@ struct ValidationResultFactory {
                                         _2GContext: _2GContext,
                                         userDefaults: userDefaults,
                                         revocationKeyFilename: revocationKeyFilename,
-                                        revocationRepository: revocationRepository)
+                                        revocationRepository: revocationRepository,
+                                        audioPlayer: audioPlayer)
         }
 
         let countdownTimerModel = CountdownTimerModel(
@@ -49,7 +52,8 @@ struct ValidationResultFactory {
                                            userDefaults: userDefaults,
                                            revocationKeyFilename: revocationKeyFilename,
                                            countdownTimerModel: countdownTimerModel,
-                                           revocationRepository: revocationRepository)
+                                           revocationRepository: revocationRepository,
+                                           audioPlayer: audioPlayer)
         }
         if certificate.vaccinationCertificate.hcert.dgc.t?.isEmpty == false {
             return TestResultViewModel(resolvable: resolvable,
@@ -60,7 +64,8 @@ struct ValidationResultFactory {
                                        userDefaults: userDefaults,
                                        revocationKeyFilename: revocationKeyFilename,
                                        countdownTimerModel: countdownTimerModel,
-                                       revocationRepository: revocationRepository)
+                                       revocationRepository: revocationRepository,
+                                       audioPlayer: audioPlayer)
         }
         return VaccinationResultViewModel(resolvable: resolvable,
                                           router: router,
@@ -70,6 +75,7 @@ struct ValidationResultFactory {
                                           userDefaults: userDefaults,
                                           revocationKeyFilename: revocationKeyFilename,
                                           countdownTimerModel: countdownTimerModel,
-                                          revocationRepository: revocationRepository)
+                                          revocationRepository: revocationRepository,
+                                          audioPlayer: audioPlayer)
     }
 }

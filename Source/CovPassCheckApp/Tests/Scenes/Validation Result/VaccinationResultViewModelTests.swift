@@ -11,6 +11,7 @@ import PromiseKit
 import XCTest
 
 class VaccinationResultViewModelTests: XCTestCase {
+    private var audioPlayer: AudioPlayerMock!
     private var promise: Promise<ExtendedCBORWebToken>!
     private var router: ValidationResultRouterMock!
     private var sut: VaccinationResultViewModel!
@@ -21,6 +22,7 @@ class VaccinationResultViewModelTests: XCTestCase {
         self.promise = promise
         delegate = .init()
         router = .init()
+        audioPlayer = .init()
         sut = .init(
             resolvable: resolver,
             router: router,
@@ -33,12 +35,14 @@ class VaccinationResultViewModelTests: XCTestCase {
                 dismissAfterSeconds: 0,
                 countdownDuration: 0
             ),
-            revocationRepository: CertificateRevocationRepositoryMock()
+            revocationRepository: CertificateRevocationRepositoryMock(),
+            audioPlayer: audioPlayer
         )
         sut.delegate = delegate
     }
 
     override func tearDownWithError() throws {
+        audioPlayer = nil
         delegate = nil
         promise = nil
         router = nil
@@ -58,5 +62,13 @@ class VaccinationResultViewModelTests: XCTestCase {
         XCTAssertNotNil(sut.countdownTimerModel)
         wait(for: [router.showStartExpectation, expectation], timeout: 2)
         XCTAssertEqual(sut.countdownTimerModel?.shouldDismiss, true)
+    }
+
+    func testScanCerificate() {
+        // When
+        sut.scanCertificate()
+
+        // Then
+        wait(for: [audioPlayer.playCovPassCheckCertificateScannedIfEnabledExpectation], timeout: 1)
     }
 }

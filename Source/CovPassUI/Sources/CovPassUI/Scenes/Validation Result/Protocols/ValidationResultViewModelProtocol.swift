@@ -14,6 +14,7 @@ public protocol ValidationViewModelProtocol {
     var router: ValidationResultRouterProtocol { get set }
     var repository: VaccinationRepositoryProtocol { get set }
     var revocationRepository: CertificateRevocationRepositoryProtocol? { get }
+    var audioPlayer: AudioPlayerProtocol? { get }
     var certificate: ExtendedCBORWebToken? { get set }
     var delegate: ResultViewModelDelegate? { get set }
     var toolbarState: CustomToolbarState { get }

@@ -30,6 +30,7 @@ class ErrorResultViewModel: ValidationResultViewModel {
     let revocationKeyFilename = ""
     let countdownTimerModel: CountdownTimerModel? = nil
     let revocationRepository: CertificateRevocationRepositoryProtocol? = nil
+    let audioPlayer: AudioPlayerProtocol? = nil
     
     private var validationResultError: ValidationResultError {
         error as? ValidationResultError ?? .technical

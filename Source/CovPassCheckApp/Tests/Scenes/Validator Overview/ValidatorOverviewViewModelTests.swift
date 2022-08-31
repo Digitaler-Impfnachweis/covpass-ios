@@ -19,18 +19,21 @@ private enum Constants {
 }
 
 class ValidatorOverviewViewModelTests: XCTestCase {
+    private var audioPlayer: AudioPlayerMock!
     private var userDefaults: MockPersistence!
     private var router: ValidatorMockRouter!
     private var sut: ValidatorOverviewViewModel!
     
     override func setUp() {
         super.setUp()
+        audioPlayer = .init()
         router = .init()
         userDefaults = .init()
         prepareSut()
     }
     
     override func tearDown() {
+        audioPlayer = nil
         router = nil
         userDefaults = nil
         sut = nil
@@ -157,7 +160,8 @@ class ValidatorOverviewViewModelTests: XCTestCase {
             certLogic: certLogic,
             userDefaults: userDefaults,
             privacyFile: Constants.Keys.privacyFile,
-            appVersion: appVersion
+            appVersion: appVersion,
+            audioPlayer: audioPlayer
         )
     }
 
@@ -280,7 +284,10 @@ class ValidatorOverviewViewModelTests: XCTestCase {
         sut.startQRCodeValidation()
 
         // Then
-        wait(for: [router.scanQRCodeExpectation], timeout: 1)
+        wait(for: [
+            router.scanQRCodeExpectation,
+            audioPlayer.playCovPassCheckCertificateScannedIfEnabledExpectation
+        ], timeout: 1)
     }
 
     func testBoosterAsTest_default() {

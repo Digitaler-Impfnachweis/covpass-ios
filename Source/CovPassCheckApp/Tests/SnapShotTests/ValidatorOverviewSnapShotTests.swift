@@ -32,7 +32,8 @@ class ValidatorOverviewSnapShotTests: BaseSnapShotTests {
                                             certLogic: certLogicMock,
                                             userDefaults: userDefaults,
                                             privacyFile: "",
-                                            schedulerIntervall: TimeInterval(10.0))
+                                            schedulerIntervall: TimeInterval(10.0),
+                                            audioPlayer: AudioPlayerMock())
         vm.ntpDate = ntpDate
         vm.ntpOffset = ntpOffset
         return ValidatorOverviewViewController(viewModel: vm)

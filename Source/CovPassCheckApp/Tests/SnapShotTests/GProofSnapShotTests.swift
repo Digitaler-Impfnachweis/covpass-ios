@@ -55,7 +55,8 @@ class GProofSnapShotTests: BaseSnapShotTests {
                                certLogic: certLogicMock,
                                userDefaults: UserDefaultsPersistence(),
                                boosterAsTest: bosterAsTest,
-                               countdownTimerModel: .init(dismissAfterSeconds: 0, countdownDuration: 0))
+                               countdownTimerModel: .init(dismissAfterSeconds: 0, countdownDuration: 0),
+                               audioPlayer: AudioPlayerMock())
     }
 
     // MARK: Init flow with Token failing functional or Technical and passing

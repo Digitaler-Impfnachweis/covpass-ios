@@ -49,7 +49,6 @@
                                     </constraints>
                                 </view>
                             </subviews>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             <constraints>
                                 <constraint firstItem="22g-xj-Hk2" firstAttribute="top" secondItem="2mQ-nh-wTS" secondAttribute="bottom" constant="24" id="7Sc-HU-FmO"/>
                                 <constraint firstAttribute="trailing" secondItem="22g-xj-Hk2" secondAttribute="trailing" id="8iR-rL-BHC"/>

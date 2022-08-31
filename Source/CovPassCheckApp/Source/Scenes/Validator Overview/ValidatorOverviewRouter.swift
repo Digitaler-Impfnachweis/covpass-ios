@@ -78,18 +78,10 @@ class ValidatorOverviewRouter: ValidatorOverviewRouterProtocol {
         )
     }
     
-    func showGproof(repository: VaccinationRepositoryProtocol,
-                    revocationRepository: CertificateRevocationRepositoryProtocol,
-                    certLogic: DCCCertLogicProtocol,
-                    userDefaults: Persistence,
-                    boosterAsTest: Bool) {
+    func showGproof(boosterAsTest: Bool) {
         sceneCoordinator
             .present(
                 GProofSceneFactory(router: GProofRouter(sceneCoordinator: sceneCoordinator),
-                                   repository: repository,
-                                   revocationRepository: revocationRepository,
-                                   certLogic: certLogic,
-                                   userDefaults: userDefaults,
                                    boosterAsTest: boosterAsTest)
             )
             .cauterize()

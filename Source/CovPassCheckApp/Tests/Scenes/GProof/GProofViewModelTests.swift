@@ -24,6 +24,7 @@ class GProofViewModelTests: XCTestCase {
     let (_, resolver) = Promise<ExtendedCBORWebToken>.pending()
     var delegate: ViewModelDelegateMock!
     var countdownTimerModel: CountdownTimerModelMock!
+    var audioPlayer: AudioPlayerMock!
 
     override func setUp() {
         super.setUp()
@@ -36,6 +37,7 @@ class GProofViewModelTests: XCTestCase {
         revocationRespostiroyMock = CertificateRevocationRepositoryMock()
         vaccinationRepoMock.checkedCert = initialToken.vaccinationCertificate
         delegate = .init()
+        audioPlayer = .init()
         configureSut()
         sut.scanQRCode()
         RunLoop.current.run(for: 0.2)
@@ -57,12 +59,14 @@ class GProofViewModelTests: XCTestCase {
             certLogic: certLogicMock,
             userDefaults: UserDefaultsPersistence(),
             boosterAsTest: false,
-            countdownTimerModel: countdownTimerModel
+            countdownTimerModel: countdownTimerModel,
+            audioPlayer: audioPlayer
         )
         sut.delegate = delegate
     }
     
     override func tearDown() {
+        audioPlayer = nil
         sut = nil
         vaccinationRepoMock = nil
         revocationRespostiroyMock = nil
@@ -95,7 +99,8 @@ class GProofViewModelTests: XCTestCase {
                                   certLogic: certLogicMock,
                                   userDefaults: UserDefaultsPersistence(),
                                   boosterAsTest: false,
-                                  countdownTimerModel: countdownTimerModel
+                                  countdownTimerModel: countdownTimerModel,
+                                  audioPlayer: audioPlayer
         )
         sut.startover()
         RunLoop.current.run(for: 0.1)
@@ -723,7 +728,8 @@ class GProofViewModelTests: XCTestCase {
             certLogic: certLogicMock,
             userDefaults: UserDefaultsPersistence(),
             boosterAsTest: false,
-            countdownTimerModel: .init(dismissAfterSeconds: 0, countdownDuration: 0)
+            countdownTimerModel: .init(dismissAfterSeconds: 0, countdownDuration: 0),
+            audioPlayer: audioPlayer
         )
         sut.scanQRCode()
         RunLoop.current.run(for: 0.1)
@@ -755,7 +761,8 @@ class GProofViewModelTests: XCTestCase {
                     certLogic: certLogicMock,
                     userDefaults: UserDefaultsPersistence(),
                     boosterAsTest: boosterAsTest,
-                    countdownTimerModel: .init(dismissAfterSeconds: 0, countdownDuration: 0))
+                    countdownTimerModel: .init(dismissAfterSeconds: 0, countdownDuration: 0),
+                    audioPlayer: audioPlayer)
         sut.scanQRCode()
         RunLoop.current.run(for: 0.1)
         // When
@@ -1408,6 +1415,14 @@ class GProofViewModelTests: XCTestCase {
 
         // Then
         wait(for: [sceneCoordinator.dismissExpectation], timeout: 2)
+    }
+
+    func testScanQRCode_audio_player_called() {
+        // When
+        sut.scanQRCode()
+
+        // Then
+        wait(for: [audioPlayer.playCovPassCheckCertificateScannedIfEnabledExpectation], timeout: 2)
     }
 
     func testCounterInfo_show_info_after_scan() {

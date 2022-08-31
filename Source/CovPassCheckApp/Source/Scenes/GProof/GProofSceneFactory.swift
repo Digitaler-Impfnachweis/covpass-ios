@@ -13,31 +13,26 @@ import PromiseKit
 struct GProofSceneFactory: ResolvableSceneFactory {
     
     // MARK: - Properties
-    
-    private let repository: VaccinationRepositoryProtocol
-    private let revocationRepository: CertificateRevocationRepositoryProtocol
-    private let certLogic: DCCCertLogicProtocol
+
     private let router: GProofRouterProtocol
-    private let userDefaults: Persistence
     private let boosterAsTest: Bool
     
     // MARK: - Lifecycle
     
-    init(router: GProofRouterProtocol,
-         repository: VaccinationRepositoryProtocol,
-         revocationRepository: CertificateRevocationRepositoryProtocol,
-         certLogic: DCCCertLogicProtocol,
-         userDefaults: Persistence,
-         boosterAsTest: Bool) {
+    init(router: GProofRouterProtocol, boosterAsTest: Bool) {
         self.router = router
-        self.repository = repository
-        self.revocationRepository = revocationRepository
-        self.certLogic = certLogic
-        self.userDefaults = userDefaults
         self.boosterAsTest = boosterAsTest
     }
 
     func make(resolvable: Resolver<ExtendedCBORWebToken>) -> UIViewController {
+        guard let revocationRepository = CertificateRevocationWrapperRepository(),
+              let audioPlayer = AudioPlayer()
+        else {
+            fatalError("Class can't be initialized.")
+        }
+        let repository = VaccinationRepository.create()
+        let certLogic = DCCCertLogic.create()
+        let userDefaults = UserDefaultsPersistence()
         let countdownTimerModel = CountdownTimerModel(
             dismissAfterSeconds: 120,
             countdownDuration: 60
@@ -49,7 +44,8 @@ struct GProofSceneFactory: ResolvableSceneFactory {
                                         certLogic: certLogic,
                                         userDefaults: userDefaults,
                                         boosterAsTest: boosterAsTest,
-                                        countdownTimerModel: countdownTimerModel)
+                                        countdownTimerModel: countdownTimerModel,
+                                        audioPlayer: audioPlayer)
         let viewController = GProofViewController(viewModel: viewModel)
         return viewController
     }

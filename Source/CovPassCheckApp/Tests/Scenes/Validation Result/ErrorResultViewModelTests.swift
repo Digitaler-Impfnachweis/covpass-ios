@@ -24,7 +24,8 @@ class ErrorResultViewModelTests: XCTestCase {
             _2GContext: false,
             userDefaults: MockPersistence(),
             revocationKeyFilename: "",
-            revocationRepository: CertificateRevocationRepositoryMock()
+            revocationRepository: CertificateRevocationRepositoryMock(),
+            audioPlayer: AudioPlayerMock()
         )
     }
 

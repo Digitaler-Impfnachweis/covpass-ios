@@ -64,6 +64,7 @@ class ErrorResultViewModel: ValidationResultViewModel {
     let revocationKeyFilename: String
     let revocationRepository: CertificateRevocationRepositoryProtocol?
     let countdownTimerModel: CountdownTimerModel? = nil
+    let audioPlayer: AudioPlayerProtocol?
     private var validationResultError: ValidationResultError {
         error as? ValidationResultError ?? .technical        
     }
@@ -113,8 +114,10 @@ class ErrorResultViewModel: ValidationResultViewModel {
          _2GContext: Bool,
          userDefaults: Persistence,
          revocationKeyFilename: String,
-         revocationRepository: CertificateRevocationRepositoryProtocol
+         revocationRepository: CertificateRevocationRepositoryProtocol,
+         audioPlayer: AudioPlayerProtocol
     ) {
+        self.audioPlayer = audioPlayer
         self.revocationRepository = revocationRepository
         self.resolvable = resolvable
         self.router = router

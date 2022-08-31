@@ -22,6 +22,7 @@ class RecoveryResultViewModel: ValidationResultViewModel {
     var certificate: ExtendedCBORWebToken?
     var revocationKeyFilename: String
     var revocationRepository: CertificateRevocationRepositoryProtocol?
+    let audioPlayer: AudioPlayerProtocol?
 
     var icon: UIImage? {
         .resultSuccess
@@ -71,8 +72,10 @@ class RecoveryResultViewModel: ValidationResultViewModel {
          userDefaults: Persistence,
          revocationKeyFilename: String,
          countdownTimerModel: CountdownTimerModel,
-         revocationRepository: CertificateRevocationRepositoryProtocol
+         revocationRepository: CertificateRevocationRepositoryProtocol,
+         audioPlayer: AudioPlayerProtocol
     ) {
+        self.audioPlayer = audioPlayer
         self.revocationRepository = revocationRepository
         self.resolvable = resolvable
         self.router = router

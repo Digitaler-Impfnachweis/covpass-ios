@@ -122,6 +122,7 @@ class GProofViewModel: GProofViewModelProtocol {
     private let repository: VaccinationRepositoryProtocol
     private let revocationRepository: CertificateRevocationRepositoryProtocol
     private let certLogic: DCCCertLogicProtocol
+    private let audioPlayer: AudioPlayerProtocol
     private let jsonEncoder: JSONEncoder = JSONEncoder()
     private var userDefaults: Persistence
     private var boosterAsTest: Bool
@@ -137,8 +138,10 @@ class GProofViewModel: GProofViewModelProtocol {
          certLogic: DCCCertLogicProtocol,
          userDefaults: Persistence,
          boosterAsTest: Bool,
-         countdownTimerModel: CountdownTimerModel
+         countdownTimerModel: CountdownTimerModel,
+         audioPlayer: AudioPlayerProtocol
     ) {
+        self.audioPlayer = audioPlayer
         self.countdownTimerModel = countdownTimerModel
         self.resolvable = resolvable
         self.repository = repository
@@ -165,6 +168,9 @@ class GProofViewModel: GProofViewModelProtocol {
             router.scanQRCode()
         }
         .then { $0.mapOnScanResult() }
+        .get { _ in
+            _ = self.audioPlayer.playCovPassCheckCertificateScannedIfEnabled()
+        }
         .then {
             ParseCertificateUseCase(scanResult: $0,
                                     vaccinationRepository: self.repository).execute()

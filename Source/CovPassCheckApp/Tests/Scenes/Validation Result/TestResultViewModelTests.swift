@@ -33,7 +33,8 @@ class TestResultViewModelTests: XCTestCase {
                 dismissAfterSeconds: 0,
                 countdownDuration: 0
             ),
-            revocationRepository: nil
+            revocationRepository: nil,
+            audioPlayer: AudioPlayerMock()
         )
         sut.delegate = delegate
     }

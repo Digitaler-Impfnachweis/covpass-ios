@@ -60,6 +60,7 @@ class ValidatorOverviewViewModel {
     private var userDefaults: Persistence
     private var currentDataPrivacyHash: String
     private let appVersion: String?
+    private let audioPlayer: AudioPlayerProtocol
     
     var delegate: ViewModelDelegate?
     
@@ -169,8 +170,10 @@ class ValidatorOverviewViewModel {
          userDefaults: Persistence,
          privacyFile: String,
          schedulerIntervall: TimeInterval = Constants.Config.schedulerIntervall,
-         appVersion: String? = Bundle.main.shortVersionString
+         appVersion: String? = Bundle.main.shortVersionString,
+         audioPlayer: AudioPlayerProtocol
     ) {
+        self.audioPlayer = audioPlayer
         self.router = router
         self.vaccinationRepository = repository
         self.revocationRepository = revocationRepository
@@ -220,11 +223,7 @@ class ValidatorOverviewViewModel {
     
     func startQRCodeValidation() {
         if scanType == ._2G {
-            self.router.showGproof(repository: self.vaccinationRepository,
-                                   revocationRepository: self.revocationRepository,
-                                   certLogic: self.certLogic,
-                                   userDefaults: self.userDefaults,
-                                   boosterAsTest: self.boosterAsTest)
+            router.showGproof(boosterAsTest: boosterAsTest)
         } else {
             var tmpToken: ExtendedCBORWebToken?
             isLoadingScan = true
@@ -232,6 +231,9 @@ class ValidatorOverviewViewModel {
                 router.scanQRCode()
             }
             .then { $0.mapOnScanResult() }
+            .get { _ in
+                _ = self.audioPlayer.playCovPassCheckCertificateScannedIfEnabled()
+            }
             .then {
                 ParseCertificateUseCase(scanResult: $0,
                                         vaccinationRepository: self.vaccinationRepository).execute()

@@ -26,11 +26,7 @@ class ValidatorMockRouter: ValidatorOverviewRouterProtocol {
         .value
     }
     
-    func showGproof(repository: VaccinationRepositoryProtocol,
-                    revocationRepository: CertificateRevocationRepositoryProtocol,
-                    certLogic: DCCCertLogicProtocol,
-                    userDefaults: Persistence,
-                    boosterAsTest: Bool) {
+    func showGproof(boosterAsTest: Bool) {
         showGproofExpectation.fulfill()
     }
     

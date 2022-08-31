@@ -158,7 +158,7 @@
 		09AC1E032757B6C9008356CD /* RecoveryResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09AC1DFC2757B6C9008356CD /* RecoveryResultViewModel.swift */; };
 		09AC1E042757B6C9008356CD /* ErrorResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09AC1DFD2757B6C9008356CD /* ErrorResultViewModel.swift */; };
 		09AC1E052757B6C9008356CD /* ValidationResultFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09AC1DFE2757B6C9008356CD /* ValidationResultFactory.swift */; };
-		09AC1E062757B6C9008356CD /* ValidationViewModel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09AC1DFF2757B6C9008356CD /* ValidationViewModel+Extension.swift */; };
+		09AC1E062757B6C9008356CD /* ValidationViewModelProtocol+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09AC1DFF2757B6C9008356CD /* ValidationViewModelProtocol+Extension.swift */; };
 		09AC1E072757B6C9008356CD /* VaccinationResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09AC1E002757B6C9008356CD /* VaccinationResultViewModel.swift */; };
 		09AC1E082757B6C9008356CD /* TestResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09AC1E012757B6C9008356CD /* TestResultViewModel.swift */; };
 		09B4978D27FF3F3C00C86A83 /* CertificateRevocationRepositoryMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B4978C27FF3F3C00C86A83 /* CertificateRevocationRepositoryMock.swift */; };
@@ -425,6 +425,10 @@
 		E76B96EA27C50F130030FC0C /* URLSession+CertificateReissue.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76B96E927C50F130030FC0C /* URLSession+CertificateReissue.swift */; };
 		E76B96EC27C5120A0030FC0C /* URLSession+CertificateReissueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76B96EB27C5120A0030FC0C /* URLSession+CertificateReissueTests.swift */; };
 		E76B998927AAE8220029FCB1 /* CertificateDetailViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76B998827AAE8220029FCB1 /* CertificateDetailViewModelTests.swift */; };
+		E773F5B228B378480051AE75 /* AcousticFeedbackSettingsViewControllerSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E773F5B028B378030051AE75 /* AcousticFeedbackSettingsViewControllerSnapshotTests.swift */; };
+		E773F5B428B39CFF0051AE75 /* AVAudioSession+CovPassCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = E773F5B328B39CFF0051AE75 /* AVAudioSession+CovPassCheck.swift */; };
+		E773F5B728B3A5210051AE75 /* AudioPlayer+FactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E773F5B528B3A4F80051AE75 /* AudioPlayer+FactoryTests.swift */; };
+		E773F5B928B3A5FB0051AE75 /* AVAudioSession+CovPassCheckTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E773F5B828B3A5FB0051AE75 /* AVAudioSession+CovPassCheckTests.swift */; };
 		E773F5C828B4EA4B0051AE75 /* CovPassAppInformationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E773F5C728B4EA4B0051AE75 /* CovPassAppInformationViewModel.swift */; };
 		E773F5CB28B5108F0051AE75 /* WhatsNewSettingsSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E773F5CA28B5108F0051AE75 /* WhatsNewSettingsSceneFactory.swift */; };
 		E773F5CD28B5113B0051AE75 /* CovPassAppInformationViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E773F5CC28B5113B0051AE75 /* CovPassAppInformationViewModelTests.swift */; };
@@ -475,14 +479,33 @@
 		E7D1F0A22861E04700FA7465 /* ScanSceneFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D1F0A02861E03A00FA7465 /* ScanSceneFactoryTests.swift */; };
 		E7D1F0A52861E12700FA7465 /* CameraAccessProviderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D1F0A32861E12700FA7465 /* CameraAccessProviderMock.swift */; };
 		E7D1F0A62861E12700FA7465 /* ScanRouterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D1F0A42861E12700FA7465 /* ScanRouterMock.swift */; };
+		E7D242BD28BD301100C5D137 /* AudioPlayerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D242BC28BD301100C5D137 /* AudioPlayerMock.swift */; };
+		E7D242BF28BD326A00C5D137 /* ValidationViewModelProtocol+ExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D242BE28BD326A00C5D137 /* ValidationViewModelProtocol+ExtensionTests.swift */; };
 		E7D8062C2890493D00743DAE /* CheckSituationSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D8062A2890455600743DAE /* CheckSituationSceneFactory.swift */; };
 		E7D8062F28904AC700743DAE /* CheckSituationSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D8062E28904AC700743DAE /* CheckSituationSceneFactory.swift */; };
+		E7DE165628AFCD4C007FDF46 /* AcousticFeedbackSettingsRouterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DE165528AFCD4C007FDF46 /* AcousticFeedbackSettingsRouterProtocol.swift */; };
+		E7DE165828AFCDBB007FDF46 /* AcousticFeedbackSettingsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DE165728AFCDBB007FDF46 /* AcousticFeedbackSettingsRouter.swift */; };
+		E7DE165A28AFCEB4007FDF46 /* AcousticFeedbackSettingsSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DE165928AFCEB4007FDF46 /* AcousticFeedbackSettingsSceneFactory.swift */; };
+		E7DE165D28AFD389007FDF46 /* GermanAppInformationViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DE165B28AFD364007FDF46 /* GermanAppInformationViewModelTests.swift */; };
+		E7DE165F28AFD3A6007FDF46 /* EnglishAppInformationViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DE165E28AFD3A6007FDF46 /* EnglishAppInformationViewModelTests.swift */; };
+		E7DE166128AFD548007FDF46 /* AcousticFeedbackSettingsSceneFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DE166028AFD547007FDF46 /* AcousticFeedbackSettingsSceneFactoryTests.swift */; };
+		E7DE166428AFD5BB007FDF46 /* AcousticFeedbackSettingsRouterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DE166328AFD5BB007FDF46 /* AcousticFeedbackSettingsRouterMock.swift */; };
+		E7DE166628AFD780007FDF46 /* AcousticFeedbackSettingsViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DE166528AFD780007FDF46 /* AcousticFeedbackSettingsViewModelProtocol.swift */; };
+		E7DE166828AFD8DB007FDF46 /* AcousticFeedbackSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DE166728AFD8DB007FDF46 /* AcousticFeedbackSettingsViewModel.swift */; };
+		E7DE166A28AFDB1D007FDF46 /* AcousticFeedbackSettingsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DE166928AFDB1D007FDF46 /* AcousticFeedbackSettingsViewModelTests.swift */; };
+		E7DE166D28AFDE84007FDF46 /* AcousticFeedbackSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DE166B28AFDE84007FDF46 /* AcousticFeedbackSettingsViewController.swift */; };
+		E7DE166E28AFDE84007FDF46 /* AcousticFeedbackSettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7DE166C28AFDE84007FDF46 /* AcousticFeedbackSettingsViewController.xib */; };
+		E7DE167228AFF02F007FDF46 /* CovpassCheck-Activated.wav in Resources */ = {isa = PBXBuildFile; fileRef = E7DE167028AFF02E007FDF46 /* CovpassCheck-Activated.wav */; };
+		E7DE167328AFF02F007FDF46 /* CovpassCheck-Certificate-scanned.wav in Resources */ = {isa = PBXBuildFile; fileRef = E7DE167128AFF02F007FDF46 /* CovpassCheck-Certificate-scanned.wav */; };
+		E7DE167828AFFBB8007FDF46 /* AudioPlayer+Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DE167728AFFBB8007FDF46 /* AudioPlayer+Factory.swift */; };
 		E7DF081B28AE7E370089FDA0 /* Persistence+ValidatorOverview.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DF081A28AE7E370089FDA0 /* Persistence+ValidatorOverview.swift */; };
 		E7DF081F28AE8EFC0089FDA0 /* Persistence+ValidatorOverviewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DF081E28AE8EFC0089FDA0 /* Persistence+ValidatorOverviewTests.swift */; };
 		E7F7817A27C4007D009AC907 /* CertificateReissueRepository+Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F7817927C4007D009AC907 /* CertificateReissueRepository+Factory.swift */; };
 		E7F7817D27C400BA009AC907 /* CertificateReissueRepository+FactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F7817C27C400BA009AC907 /* CertificateReissueRepository+FactoryTests.swift */; };
 		E7F8D88928880B61007C4AE7 /* CBORWebToken+GProofViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F8D88728880B1C007C4AE7 /* CBORWebToken+GProofViewModelTests.swift */; };
 		E7F8D88B28880CEB007C4AE7 /* GProofValidationResult+GProofViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F8D88A28880CEB007C4AE7 /* GProofValidationResult+GProofViewModelTests.swift */; };
+		E7FB8FA528AFC46500D9693F /* Persistence+AcousticFeedbackSettingsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FB8FA428AFC46500D9693F /* Persistence+AcousticFeedbackSettingsTests.swift */; };
+		E7FFBDA927F5D5B700796FEA /* URLSession+CertificateRevocationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FFBDA827F5D5B700796FEA /* URLSession+CertificateRevocationTests.swift */; };
 		E7FFBDAB27F5D83900796FEA /* CertificateRevocationRepository+FactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FFBDAA27F5D83900796FEA /* CertificateRevocationRepository+FactoryTests.swift */; };
 /* End PBXBuildFile section */
 
@@ -662,7 +685,7 @@
 		09AC1DFC2757B6C9008356CD /* RecoveryResultViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecoveryResultViewModel.swift; sourceTree = "<group>"; };
 		09AC1DFD2757B6C9008356CD /* ErrorResultViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorResultViewModel.swift; sourceTree = "<group>"; };
 		09AC1DFE2757B6C9008356CD /* ValidationResultFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidationResultFactory.swift; sourceTree = "<group>"; };
-		09AC1DFF2757B6C9008356CD /* ValidationViewModel+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ValidationViewModel+Extension.swift"; sourceTree = "<group>"; };
+		09AC1DFF2757B6C9008356CD /* ValidationViewModelProtocol+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ValidationViewModelProtocol+Extension.swift"; sourceTree = "<group>"; };
 		09AC1E002757B6C9008356CD /* VaccinationResultViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VaccinationResultViewModel.swift; sourceTree = "<group>"; };
 		09AC1E012757B6C9008356CD /* TestResultViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestResultViewModel.swift; sourceTree = "<group>"; };
 		09B4978C27FF3F3C00C86A83 /* CertificateRevocationRepositoryMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertificateRevocationRepositoryMock.swift; sourceTree = "<group>"; };
@@ -961,6 +984,10 @@
 		E76B96E927C50F130030FC0C /* URLSession+CertificateReissue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+CertificateReissue.swift"; sourceTree = "<group>"; };
 		E76B96EB27C5120A0030FC0C /* URLSession+CertificateReissueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+CertificateReissueTests.swift"; sourceTree = "<group>"; };
 		E76B998827AAE8220029FCB1 /* CertificateDetailViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateDetailViewModelTests.swift; sourceTree = "<group>"; };
+		E773F5B028B378030051AE75 /* AcousticFeedbackSettingsViewControllerSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcousticFeedbackSettingsViewControllerSnapshotTests.swift; sourceTree = "<group>"; };
+		E773F5B328B39CFF0051AE75 /* AVAudioSession+CovPassCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AVAudioSession+CovPassCheck.swift"; sourceTree = "<group>"; };
+		E773F5B528B3A4F80051AE75 /* AudioPlayer+FactoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AudioPlayer+FactoryTests.swift"; sourceTree = "<group>"; };
+		E773F5B828B3A5FB0051AE75 /* AVAudioSession+CovPassCheckTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AVAudioSession+CovPassCheckTests.swift"; sourceTree = "<group>"; };
 		E773F5C728B4EA4B0051AE75 /* CovPassAppInformationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CovPassAppInformationViewModel.swift; sourceTree = "<group>"; };
 		E773F5CA28B5108F0051AE75 /* WhatsNewSettingsSceneFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatsNewSettingsSceneFactory.swift; sourceTree = "<group>"; };
 		E773F5CC28B5113B0051AE75 /* CovPassAppInformationViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CovPassAppInformationViewModelTests.swift; sourceTree = "<group>"; };
@@ -1011,14 +1038,33 @@
 		E7D1F0A02861E03A00FA7465 /* ScanSceneFactoryTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanSceneFactoryTests.swift; sourceTree = "<group>"; };
 		E7D1F0A32861E12700FA7465 /* CameraAccessProviderMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraAccessProviderMock.swift; sourceTree = "<group>"; };
 		E7D1F0A42861E12700FA7465 /* ScanRouterMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanRouterMock.swift; sourceTree = "<group>"; };
+		E7D242BC28BD301100C5D137 /* AudioPlayerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerMock.swift; sourceTree = "<group>"; };
+		E7D242BE28BD326A00C5D137 /* ValidationViewModelProtocol+ExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ValidationViewModelProtocol+ExtensionTests.swift"; sourceTree = "<group>"; };
 		E7D8062A2890455600743DAE /* CheckSituationSceneFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckSituationSceneFactory.swift; sourceTree = "<group>"; };
 		E7D8062E28904AC700743DAE /* CheckSituationSceneFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckSituationSceneFactory.swift; sourceTree = "<group>"; };
+		E7DE165528AFCD4C007FDF46 /* AcousticFeedbackSettingsRouterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcousticFeedbackSettingsRouterProtocol.swift; sourceTree = "<group>"; };
+		E7DE165728AFCDBB007FDF46 /* AcousticFeedbackSettingsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcousticFeedbackSettingsRouter.swift; sourceTree = "<group>"; };
+		E7DE165928AFCEB4007FDF46 /* AcousticFeedbackSettingsSceneFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcousticFeedbackSettingsSceneFactory.swift; sourceTree = "<group>"; };
+		E7DE165B28AFD364007FDF46 /* GermanAppInformationViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GermanAppInformationViewModelTests.swift; sourceTree = "<group>"; };
+		E7DE165E28AFD3A6007FDF46 /* EnglishAppInformationViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnglishAppInformationViewModelTests.swift; sourceTree = "<group>"; };
+		E7DE166028AFD547007FDF46 /* AcousticFeedbackSettingsSceneFactoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcousticFeedbackSettingsSceneFactoryTests.swift; sourceTree = "<group>"; };
+		E7DE166328AFD5BB007FDF46 /* AcousticFeedbackSettingsRouterMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcousticFeedbackSettingsRouterMock.swift; sourceTree = "<group>"; };
+		E7DE166528AFD780007FDF46 /* AcousticFeedbackSettingsViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcousticFeedbackSettingsViewModelProtocol.swift; sourceTree = "<group>"; };
+		E7DE166728AFD8DB007FDF46 /* AcousticFeedbackSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcousticFeedbackSettingsViewModel.swift; sourceTree = "<group>"; };
+		E7DE166928AFDB1D007FDF46 /* AcousticFeedbackSettingsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcousticFeedbackSettingsViewModelTests.swift; sourceTree = "<group>"; };
+		E7DE166B28AFDE84007FDF46 /* AcousticFeedbackSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcousticFeedbackSettingsViewController.swift; sourceTree = "<group>"; };
+		E7DE166C28AFDE84007FDF46 /* AcousticFeedbackSettingsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AcousticFeedbackSettingsViewController.xib; sourceTree = "<group>"; };
+		E7DE167028AFF02E007FDF46 /* CovpassCheck-Activated.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "CovpassCheck-Activated.wav"; sourceTree = "<group>"; };
+		E7DE167128AFF02F007FDF46 /* CovpassCheck-Certificate-scanned.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "CovpassCheck-Certificate-scanned.wav"; sourceTree = "<group>"; };
+		E7DE167728AFFBB8007FDF46 /* AudioPlayer+Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AudioPlayer+Factory.swift"; sourceTree = "<group>"; };
 		E7DF081A28AE7E370089FDA0 /* Persistence+ValidatorOverview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Persistence+ValidatorOverview.swift"; sourceTree = "<group>"; };
 		E7DF081E28AE8EFC0089FDA0 /* Persistence+ValidatorOverviewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Persistence+ValidatorOverviewTests.swift"; sourceTree = "<group>"; };
 		E7F7817927C4007D009AC907 /* CertificateReissueRepository+Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CertificateReissueRepository+Factory.swift"; sourceTree = "<group>"; };
 		E7F7817C27C400BA009AC907 /* CertificateReissueRepository+FactoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CertificateReissueRepository+FactoryTests.swift"; sourceTree = "<group>"; };
 		E7F8D88728880B1C007C4AE7 /* CBORWebToken+GProofViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CBORWebToken+GProofViewModelTests.swift"; sourceTree = "<group>"; };
 		E7F8D88A28880CEB007C4AE7 /* GProofValidationResult+GProofViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GProofValidationResult+GProofViewModelTests.swift"; sourceTree = "<group>"; };
+		E7FB8FA428AFC46500D9693F /* Persistence+AcousticFeedbackSettingsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Persistence+AcousticFeedbackSettingsTests.swift"; sourceTree = "<group>"; };
+		E7FFBDA827F5D5B700796FEA /* URLSession+CertificateRevocationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URLSession+CertificateRevocationTests.swift"; sourceTree = "<group>"; };
 		E7FFBDAA27F5D83900796FEA /* CertificateRevocationRepository+FactoryTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CertificateRevocationRepository+FactoryTests.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1345,13 +1391,13 @@
 		09AC1DE52757ACCE008356CD /* Validation Result */ = {
 			isa = PBXGroup;
 			children = (
-				09AC1DE82757ADAA008356CD /* ValidationResultSceneFactory.swift */,
 				09AC1DEE2757B423008356CD /* ErrorResultViewModel.swift */,
 				09AC1DEF2757B423008356CD /* RecoveryResultViewModel.swift */,
 				09AC1DF12757B423008356CD /* TestResultViewModel.swift */,
 				09AC1DF02757B423008356CD /* VaccinationResultViewModel.swift */,
-				E7D1F0852861B1C600FA7465 /* ValidationResultRouter.swift */,
 				09AC1DF62757B439008356CD /* ValidationResultFactory.swift */,
+				E7D1F0852861B1C600FA7465 /* ValidationResultRouter.swift */,
+				09AC1DE82757ADAA008356CD /* ValidationResultSceneFactory.swift */,
 				09AC1DF82757B44C008356CD /* ValidationViewModelProtocol+Extension.swift */,
 			);
 			path = "Validation Result";
@@ -1366,7 +1412,7 @@
 				09AC1E002757B6C9008356CD /* VaccinationResultViewModel.swift */,
 				09AC1DFE2757B6C9008356CD /* ValidationResultFactory.swift */,
 				09AC1DFB2757B6C9008356CD /* ValidationResultSceneFactory.swift */,
-				09AC1DFF2757B6C9008356CD /* ValidationViewModel+Extension.swift */,
+				09AC1DFF2757B6C9008356CD /* ValidationViewModelProtocol+Extension.swift */,
 			);
 			path = "Validation Result";
 			sourceTree = "<group>";
@@ -1483,11 +1529,13 @@
 		09E854382799933F0051AEEE /* Mocks */ = {
 			isa = PBXGroup;
 			children = (
-				0938F7DF289914CD001469C1 /* CertificateRevocationOfflineServiceMock.swift */,
 				09E85439279993470051AEEE /* AppInformationRouterMock.swift */,
+				E7D242BC28BD301100C5D137 /* AudioPlayerMock.swift */,
 				E7D1F0A32861E12700FA7465 /* CameraAccessProviderMock.swift */,
+				0938F7DF289914CD001469C1 /* CertificateRevocationOfflineServiceMock.swift */,
 				09ABDAC927FC93440078EB11 /* CertificateRevocationRepositoryMock.swift */,
 				E745AF2127DA3F2400B3671E /* CoseSign1Message+Mock.swift */,
+				E740448828901E5200B53AE3 /* CountdownTimerModelMock.swift */,
 				0957848927A2D31C00E8206C /* DCCCertLogicMock.swift */,
 				E782BB9F27D280CF00CC033A /* ExtendedCBORWekToken+Mock.swift */,
 				0957848327A2D24600E8206C /* GProofMockRouter.swift */,
@@ -1499,7 +1547,6 @@
 				0957848B27A2D35B00E8206C /* ValidationResultMock.swift */,
 				0957848127A2D1CF00E8206C /* ValidatorMockRouter.swift */,
 				0957848527A2D28400E8206C /* ViewModelDelegateMock.swift */,
-				E740448828901E5200B53AE3 /* CountdownTimerModelMock.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -1863,10 +1910,11 @@
 		21FBCA31264F011800CAEF44 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				E712855A27EC7F7000006F9B /* Revocation */,
-				88AB2A4325FA40CE00D4EA52 /* Assets.xcassets */,
 				21FBCA78264F016E00CAEF44 /* LaunchScreen.storyboard */,
+				88AB2A4325FA40CE00D4EA52 /* Assets.xcassets */,
+				E7DE166F28AFF00C007FDF46 /* Audio */,
 				21FBCA32264F011800CAEF44 /* Locale */,
+				E712855A27EC7F7000006F9B /* Revocation */,
 				88BEE04026550E1900479E5E /* Static */,
 			);
 			path = Resources;
@@ -1883,8 +1931,9 @@
 		21FBCA36264F011800CAEF44 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				E7D806292890451900743DAE /* CheckSituation */,
+				E7FB8FA028AFB19800D9693F /* AcousticFeedbackSettings */,
 				21FBCA47264F011800CAEF44 /* App Information */,
+				E7D806292890451900743DAE /* CheckSituation */,
 				0969AB8C2787AA8000ECCA74 /* GProof */,
 				092699E5278C4FF400331D77 /* GProofDifferentPerson */,
 				21FBCA55264F011800CAEF44 /* Main */,
@@ -1981,10 +2030,12 @@
 			isa = PBXGroup;
 			children = (
 				21FBCA5F264F011900CAEF44 /* ApiServiceFactory.swift */,
+				E7DE167728AFFBB8007FDF46 /* AudioPlayer+Factory.swift */,
+				E773F5B328B39CFF0051AE75 /* AVAudioSession+CovPassCheck.swift */,
 				38FCEEC826EB9DD200D10A22 /* BoosterLogicFactory.swift */,
+				E73453F1286DF4DE00ED7E00 /* CertificateRevocationFilesystemDataSource+Factory.swift */,
 				E7C13AA3284518D5002BC4F5 /* CertificateRevocationHTTPClient+Factory.swift */,
 				E7B49CF2283CC51900401C2E /* CertificateRevocationOfflineService+Factory.swift */,
-				E73453F1286DF4DE00ED7E00 /* CertificateRevocationFilesystemDataSource+Factory.swift */,
 				E76229F32816D9B400BF937C /* DataPrivacySceneFactory.swift */,
 				3829A30A269CFF7C00B8346C /* DCCCertLogicExtension.swift */,
 				E7B76646286B7282003CAEB4 /* QRCodeImportResult+CovPassCheck.swift */,
@@ -2313,15 +2364,15 @@
 		88AB2A5F25FA40CE00D4EA52 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				09541B5827FD7FD800A32547 /* CBORWebTokenExtensions.swift */,
 				E79CF9ED27E896FC00C4619E /* Extensions */,
+				88AB2A6125FA40CE00D4EA52 /* Info.plist */,
 				09E854382799933F0051AEEE /* Mocks */,
 				E74E98C82892F62200F73632 /* Repository */,
 				E7CB54B427B55407002FA55E /* Scenes */,
 				0904337C270EFE920008267B /* SnapShotTests */,
-				09541B5427FD7E6B00A32547 /* UseCases */,
-				88AB2A6125FA40CE00D4EA52 /* Info.plist */,
-				09541B5827FD7FD800A32547 /* CBORWebTokenExtensions.swift */,
 				09A27BC9270F3A2C000FE4F9 /* TestExtension.swift */,
+				09541B5427FD7E6B00A32547 /* UseCases */,
 				95961E872703545200E577A4 /* ValidationResultFactoryTests.swift */,
 			);
 			path = Tests;
@@ -2778,6 +2829,7 @@
 				E740447E2890143400B53AE3 /* VaccinationResultViewModelTests.swift */,
 				E74044842890191A00B53AE3 /* RecoveryResultViewModelTests.swift */,
 				E74044862890198C00B53AE3 /* TestResultViewModelTests.swift */,
+				E7D242BE28BD326A00C5D137 /* ValidationViewModelProtocol+ExtensionTests.swift */,
 			);
 			path = "Validation Result";
 			sourceTree = "<group>";
@@ -2785,6 +2837,8 @@
 		E79CF9ED27E896FC00C4619E /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				E773F5B528B3A4F80051AE75 /* AudioPlayer+FactoryTests.swift */,
+				E773F5B828B3A5FB0051AE75 /* AVAudioSession+CovPassCheckTests.swift */,
 				E7101B612872F76F0026584A /* CertificateRevocationFilesystemDataSource+FactoryTests.swift */,
 				E7101B5E2872F6760026584A /* CertificateRevocationHTTPClient+FactoryTests.swift */,
 				E7B49CF4283CCFEC00401C2E /* CertificateRevocationOfflineService+FactoryTests.swift */,
@@ -2822,6 +2876,7 @@
 		E7CB54B427B55407002FA55E /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				E7FB8FA328AFC43F00D9693F /* AcousticFeebackSettings */,
 				E7CB54B527B55411002FA55E /* App Information */,
 				E7F8D88628880AF0007C4AE7 /* GProof */,
 				E740448A28902C2000B53AE3 /* GProofDifferentPerson */,
@@ -2838,6 +2893,8 @@
 			isa = PBXGroup;
 			children = (
 				E7CB54B627B55436002FA55E /* AppInformationViewModelTests.swift */,
+				E7DE165B28AFD364007FDF46 /* GermanAppInformationViewModelTests.swift */,
+				E7DE165E28AFD3A6007FDF46 /* EnglishAppInformationViewModelTests.swift */,
 			);
 			path = "App Information";
 			sourceTree = "<group>";
@@ -2904,6 +2961,32 @@
 			path = CheckSituation;
 			sourceTree = "<group>";
 		};
+		E7DE165428AFCD23007FDF46 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				E7DE165528AFCD4C007FDF46 /* AcousticFeedbackSettingsRouterProtocol.swift */,
+				E7DE166528AFD780007FDF46 /* AcousticFeedbackSettingsViewModelProtocol.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		E7DE166228AFD5A7007FDF46 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				E7DE166328AFD5BB007FDF46 /* AcousticFeedbackSettingsRouterMock.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
+		E7DE166F28AFF00C007FDF46 /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+				E7DE167028AFF02E007FDF46 /* CovpassCheck-Activated.wav */,
+				E7DE167128AFF02F007FDF46 /* CovpassCheck-Certificate-scanned.wav */,
+			);
+			path = Audio;
+			sourceTree = "<group>";
+		};
 		E7DF081728AE7D360089FDA0 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -2951,6 +3034,31 @@
 				097A54442790C39200FD6F28 /* GProofViewModelTests.swift */,
 			);
 			path = GProof;
+			sourceTree = "<group>";
+		};
+		E7FB8FA028AFB19800D9693F /* AcousticFeedbackSettings */ = {
+			isa = PBXGroup;
+			children = (
+				E7DE165428AFCD23007FDF46 /* Protocol */,
+				E7DE165728AFCDBB007FDF46 /* AcousticFeedbackSettingsRouter.swift */,
+				E7DE165928AFCEB4007FDF46 /* AcousticFeedbackSettingsSceneFactory.swift */,
+				E7DE166B28AFDE84007FDF46 /* AcousticFeedbackSettingsViewController.swift */,
+				E7DE166C28AFDE84007FDF46 /* AcousticFeedbackSettingsViewController.xib */,
+				E7DE166728AFD8DB007FDF46 /* AcousticFeedbackSettingsViewModel.swift */,
+			);
+			path = AcousticFeedbackSettings;
+			sourceTree = "<group>";
+		};
+		E7FB8FA328AFC43F00D9693F /* AcousticFeebackSettings */ = {
+			isa = PBXGroup;
+			children = (
+				E7DE166228AFD5A7007FDF46 /* Mocks */,
+				E7DE166028AFD547007FDF46 /* AcousticFeedbackSettingsSceneFactoryTests.swift */,
+				E7DE166928AFDB1D007FDF46 /* AcousticFeedbackSettingsViewModelTests.swift */,
+				E7FB8FA428AFC46500D9693F /* Persistence+AcousticFeedbackSettingsTests.swift */,
+				E773F5B028B378030051AE75 /* AcousticFeedbackSettingsViewControllerSnapshotTests.swift */,
+			);
+			path = AcousticFeebackSettings;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -3162,9 +3270,12 @@
 				E74C919C289843C5003FC588 /* OpenSans-Bold.ttf in Resources */,
 				3876382F26ADBFEC00FBCA47 /* privacy-covpasscheck-en.html in Resources */,
 				E7170772280088AE000B2E32 /* revocation-trust-key-release.pem in Resources */,
+				E7DE167328AFF02F007FDF46 /* CovpassCheck-Certificate-scanned.wav in Resources */,
 				3823416A268A2A3900722A46 /* contact-covpasscheck-de.html in Resources */,
 				0969AB9A2787AB6B00ECCA74 /* GProofViewController.xib in Resources */,
 				3876382E26ADBFE500FBCA47 /* contact-covpasscheck-en.html in Resources */,
+				E7DE167228AFF02F007FDF46 /* CovpassCheck-Activated.wav in Resources */,
+				E7DE166E28AFDE84007FDF46 /* AcousticFeedbackSettingsViewController.xib in Resources */,
 				88BEE04226550E2500479E5E /* privacy-covpasscheck-de.html in Resources */,
 				E712855C27EC7FEF00006F9B /* revocation-trust-key-debug.pem in Resources */,
 				2181C1BD264F053000DE7412 /* Localizable.strings in Resources */,
@@ -3255,7 +3366,7 @@
 				216D1FD5264EF76400370F16 /* CertificateDetailRouter.swift in Sources */,
 				216D1FFD264EF77C00370F16 /* AppInformationViewModel.swift in Sources */,
 				385FC1AF269F21A200D19AF8 /* RuleCheckDetailRouter.swift in Sources */,
-				09AC1E062757B6C9008356CD /* ValidationViewModel+Extension.swift in Sources */,
+				09AC1E062757B6C9008356CD /* ValidationViewModelProtocol+Extension.swift in Sources */,
 				216D1FB0264EF74600370F16 /* PassConsentPageViewModel.swift in Sources */,
 				E73856622864CE620070C1B0 /* ReissueSuccessViewSceneFactory.swift in Sources */,
 				09AC1E052757B6C9008356CD /* ValidationResultFactory.swift in Sources */,
@@ -3526,7 +3637,9 @@
 				2181C163264F035500DE7412 /* ValidatorOverviewViewModel.swift in Sources */,
 				2181C1A9264F03BC00DE7412 /* OnboardingSceneFactory.swift in Sources */,
 				092699EB278C505200331D77 /* GProofDifferentPersonViewModelProtocol.swift in Sources */,
+				E7DE167828AFFBB8007FDF46 /* AudioPlayer+Factory.swift in Sources */,
 				09AC1DF22757B423008356CD /* ErrorResultViewModel.swift in Sources */,
+				E7DE166628AFD780007FDF46 /* AcousticFeedbackSettingsViewModelProtocol.swift in Sources */,
 				2181C1A4264F03BC00DE7412 /* ValidationOnboardingContainerViewModel.swift in Sources */,
 				E72A2DAA2897EA65002BFBBB /* CertificateRevocationWrapperRepository+Factory.swift in Sources */,
 				09AC1DF52757B423008356CD /* TestResultViewModel.swift in Sources */,
@@ -3535,8 +3648,11 @@
 				2181C174264F037000DE7412 /* WelcomeSceneFactory.swift in Sources */,
 				0991D92D27BBCDDB009C1CB2 /* CBORWebToken+GProofViewModel.swift in Sources */,
 				092699F5278C55CC00331D77 /* GProofDifferentPersonSceneFactory.swift in Sources */,
+				E7DE166D28AFDE84007FDF46 /* AcousticFeedbackSettingsViewController.swift in Sources */,
+				E773F5B428B39CFF0051AE75 /* AVAudioSession+CovPassCheck.swift in Sources */,
 				0969AB932787AB1B00ECCA74 /* GProofViewModel.swift in Sources */,
 				38FCEEC926EB9DD200D10A22 /* BoosterLogicFactory.swift in Sources */,
+				E7DE165828AFCDBB007FDF46 /* AcousticFeedbackSettingsRouter.swift in Sources */,
 				2181C183264F039500DE7412 /* AppInformationViewModel.swift in Sources */,
 				E735E0B3286608F90032025C /* ScanRouter.swift in Sources */,
 				092699F1278C55BE00331D77 /* GProofDifferentPersonRouter.swift in Sources */,
@@ -3554,6 +3670,8 @@
 				0969AB8F2787AAE500ECCA74 /* GProofRouterProtocol.swift in Sources */,
 				0938F7DE289914B5001469C1 /* CheckSituationResolvableSceneFactory.swift in Sources */,
 				3829A30C269CFF7F00B8346C /* DCCCertLogicExtension.swift in Sources */,
+				E7DE165A28AFCEB4007FDF46 /* AcousticFeedbackSettingsSceneFactory.swift in Sources */,
+				E7DE165628AFCD4C007FDF46 /* AcousticFeedbackSettingsRouterProtocol.swift in Sources */,
 				098E44D2282D869200411776 /* VaccinationExtension.swift in Sources */,
 				092699E4278BA14E00331D77 /* GProofRouter.swift in Sources */,
 				09ABDAC827FC3D7C0078EB11 /* ParseCertificateUseCase.swift in Sources */,
@@ -3562,6 +3680,7 @@
 				2181C1B8264F046400DE7412 /* WelcomeViewModel.swift in Sources */,
 				092699E9278C503D00331D77 /* GProofDifferentPersonRouterProtocol.swift in Sources */,
 				2181C1A7264F03BC00DE7412 /* ValidationOnboardingPageViewModel.swift in Sources */,
+				E7DE166828AFD8DB007FDF46 /* AcousticFeedbackSettingsViewModel.swift in Sources */,
 				2181C1A6264F03BC00DE7412 /* ValidationConsentPageViewModel.swift in Sources */,
 				09AC1DF72757B439008356CD /* ValidationResultFactory.swift in Sources */,
 			);
@@ -3574,14 +3693,18 @@
 				09541B5727FD7E7F00A32547 /* ValidateCertificateUseCaseTests.swift in Sources */,
 				E7F8D88B28880CEB007C4AE7 /* GProofValidationResult+GProofViewModelTests.swift in Sources */,
 				096EB4E627D76920005CE76F /* RevocationSettingsViewControllerSnapShotTests.swift in Sources */,
+				E7D242BD28BD301100C5D137 /* AudioPlayerMock.swift in Sources */,
 				096EB4E227D76904005CE76F /* RevocationSettingsViewModelTests.swift in Sources */,
 				0957848627A2D28400E8206C /* ViewModelDelegateMock.swift in Sources */,
 				E7F8D88928880B61007C4AE7 /* CBORWebToken+GProofViewModelTests.swift in Sources */,
+				E7D242BF28BD326A00C5D137 /* ValidationViewModelProtocol+ExtensionTests.swift in Sources */,
 				09541B5927FD7FD800A32547 /* CBORWebTokenExtensions.swift in Sources */,
 				E7D1F0A52861E12700FA7465 /* CameraAccessProviderMock.swift in Sources */,
 				95A031EB27359AC60073FDD1 /* ValidationResultViewControllerSnapShotTests.swift in Sources */,
 				0957848227A2D1CF00E8206C /* ValidatorMockRouter.swift in Sources */,
 				95961E892703550B00E577A4 /* ValidationResultFactoryTests.swift in Sources */,
+				E7DE166A28AFDB1D007FDF46 /* AcousticFeedbackSettingsViewModelTests.swift in Sources */,
+				E773F5B928B3A5FB0051AE75 /* AVAudioSession+CovPassCheckTests.swift in Sources */,
 				E7CB54B927B5563E002FA55E /* AppInformationViewModelTests.swift in Sources */,
 				098E44D4282D88DA00411776 /* VaccinationExtensionTests.swift in Sources */,
 				092090E027060FC30000713F /* ValidatorOverviewViewModelTests.swift in Sources */,
@@ -3591,16 +3714,19 @@
 				E7D1F0A22861E04700FA7465 /* ScanSceneFactoryTests.swift in Sources */,
 				0928183127A2C3B900A0199F /* CheckSituationViewControllerSnapShotTests.swift in Sources */,
 				E7786EED288EF7F40024ED0D /* ErrorResultViewModelTests.swift in Sources */,
+				E773F5B228B378480051AE75 /* AcousticFeedbackSettingsViewControllerSnapshotTests.swift in Sources */,
 				E740448928901E5200B53AE3 /* CountdownTimerModelMock.swift in Sources */,
 				097A54452790C39200FD6F28 /* GProofViewModelTests.swift in Sources */,
 				E74044802890159100B53AE3 /* VaccinationResultViewModelTests.swift in Sources */,
 				09A27BCA270F3A2C000FE4F9 /* TestExtension.swift in Sources */,
 				E7101B632872F7C60026584A /* CertificateRevocationFilesystemDataSource+FactoryTests.swift in Sources */,
 				09E8543A279993470051AEEE /* AppInformationRouterMock.swift in Sources */,
+				E7FB8FA528AFC46500D9693F /* Persistence+AcousticFeedbackSettingsTests.swift in Sources */,
 				E745AF1C27DA3C7000B3671E /* RevocationInfoViewControllerSnapshotTests.swift in Sources */,
 				0957848427A2D24600E8206C /* GProofMockRouter.swift in Sources */,
 				E7101B602872F70C0026584A /* CertificateRevocationHTTPClient+FactoryTests.swift in Sources */,
 				E782BBA027D280CF00CC033A /* ExtendedCBORWekToken+Mock.swift in Sources */,
+				E773F5B728B3A5210051AE75 /* AudioPlayer+FactoryTests.swift in Sources */,
 				09541B5B27FD887500A32547 /* ParseCertificateUseCaseTests.swift in Sources */,
 				E74044872890198C00B53AE3 /* TestResultViewModelTests.swift in Sources */,
 				E7B49CF7283CD17A00401C2E /* CertificateRevocationOfflineService+FactoryTests.swift in Sources */,
@@ -3611,15 +3737,19 @@
 				E79CF9F627E8C6DB00C4619E /* CertificateRevocationWrapperRepository+FactoryTests.swift in Sources */,
 				097A54472790D76C00FD6F28 /* GProofSnapShotTests.swift in Sources */,
 				0969AB8B2785F45F00ECCA74 /* ValidatorOverviewSnapShotTests.swift in Sources */,
+				E7DE165D28AFD389007FDF46 /* GermanAppInformationViewModelTests.swift in Sources */,
 				E74044832890173400B53AE3 /* ResultViewModelDelegateMock.swift in Sources */,
 				E740448C28902C9E00B53AE3 /* GProofDifferentPersonViewModelTests.swift in Sources */,
 				0957848C27A2D35B00E8206C /* ValidationResultMock.swift in Sources */,
 				E74E98CB2892F6A100F73632 /* CertificateRevocationWrapperRepositoryTests.swift in Sources */,
 				0938F7E0289914CD001469C1 /* CertificateRevocationOfflineServiceMock.swift in Sources */,
+				E7DE166428AFD5BB007FDF46 /* AcousticFeedbackSettingsRouterMock.swift in Sources */,
 				E76229F62816EADE00BF937C /* MockPersistence.swift in Sources */,
+				E7DE165F28AFD3A6007FDF46 /* EnglishAppInformationViewModelTests.swift in Sources */,
 				097A54492790E77E00FD6F28 /* GProofDifferentPersonViewControllerSnapshotTests.swift in Sources */,
 				E79CF9F027E8981100C4619E /* URLSession+CertificateRevocationTests.swift in Sources */,
 				09ABDACB27FC934B0078EB11 /* CertificateRevocationRepositoryMock.swift in Sources */,
+				E7DE166128AFD548007FDF46 /* AcousticFeedbackSettingsSceneFactoryTests.swift in Sources */,
 				0904337E270EFEA50008267B /* BaseSnapShotTests.swift in Sources */,
 				E74044852890191A00B53AE3 /* RecoveryResultViewModelTests.swift in Sources */,
 			);
@@ -3888,7 +4018,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Source/CovPassCheckApp/Supporting Files/Info.plist";
@@ -3897,7 +4027,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.18;
+				MARKETING_VERSION = 1.31;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.ega.VaccinationValidator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -3915,7 +4045,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Source/CovPassCheckApp/Supporting Files/Info.plist";
@@ -3924,7 +4054,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.18;
+				MARKETING_VERSION = 1.31;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.ega.VaccinationValidator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

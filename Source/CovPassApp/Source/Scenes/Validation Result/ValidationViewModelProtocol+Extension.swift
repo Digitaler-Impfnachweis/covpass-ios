@@ -1,5 +1,5 @@
 //
-//  ValidationViewModel+Extension.swift
+//  ValidationViewModelProtocol+Extension.swift
 //
 //
 //  © Copyright IBM Deutschland GmbH 2021
@@ -10,7 +10,6 @@ import CovPassCommon
 import CovPassUI
 import PromiseKit
 import UIKit
-
 
 extension ValidationViewModelProtocol {
    

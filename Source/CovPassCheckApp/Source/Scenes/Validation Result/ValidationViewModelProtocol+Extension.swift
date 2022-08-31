@@ -57,6 +57,9 @@ extension ValidationViewModelProtocol {
             router.scanQRCode()
         }
         .then { $0.mapOnScanResult() }
+        .get { _ in
+            _ = self.audioPlayer?.playCovPassCheckCertificateScannedIfEnabled()
+        }
         .then {
             ParseCertificateUseCase(scanResult: $0,
                                     vaccinationRepository: repository).execute()

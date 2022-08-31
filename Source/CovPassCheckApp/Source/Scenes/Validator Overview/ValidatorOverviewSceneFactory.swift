@@ -32,7 +32,10 @@ struct ValidatorOverviewSceneFactory: SceneFactory {
             fatalError("Failed to load privacy file.")
         }
         guard let revocationRepository = CertificateRevocationWrapperRepository() else {
-            fatalError("Revocation Repository can´t initialized")
+            fatalError("Revocation Repository can't be initialized.")
+        }
+        guard let audioPlayer = AudioPlayer() else {
+            fatalError("Audio player can't be initialized.")
         }
         let repository = VaccinationRepository.create()
         let viewModel = ValidatorOverviewViewModel(router: router,
@@ -40,7 +43,8 @@ struct ValidatorOverviewSceneFactory: SceneFactory {
                                                    revocationRepository: revocationRepository,
                                                    certLogic: DCCCertLogic.create(),
                                                    userDefaults: UserDefaultsPersistence(),
-                                                   privacyFile: privacyFile)
+                                                   privacyFile: privacyFile,
+                                                   audioPlayer: audioPlayer)
         let viewController = ValidatorOverviewViewController(viewModel: viewModel)
         let navigationController = UINavigationController(rootViewController: viewController)
         return navigationController

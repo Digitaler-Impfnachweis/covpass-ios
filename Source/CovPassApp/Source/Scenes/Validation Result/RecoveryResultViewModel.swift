@@ -24,6 +24,7 @@ class RecoveryResultViewModel: ValidationResultViewModel {
     let revocationKeyFilename = ""
     let countdownTimerModel: CountdownTimerModel? = nil
     let revocationRepository: CertificateRevocationRepositoryProtocol? = nil
+    let audioPlayer: AudioPlayerProtocol? = nil
 
     var icon: UIImage? {
         .resultSuccess

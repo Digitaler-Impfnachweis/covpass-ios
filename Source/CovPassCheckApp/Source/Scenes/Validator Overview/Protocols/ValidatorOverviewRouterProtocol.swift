@@ -22,11 +22,7 @@ protocol ValidatorOverviewRouterProtocol: DialogRouterProtocol {
                    _2GContext: Bool,
                    userDefaults: Persistence) -> Promise<ExtendedCBORWebToken>
     func showAppInformation(userDefaults: Persistence)
-    func showGproof(repository: VaccinationRepositoryProtocol,
-                    revocationRepository: CertificateRevocationRepositoryProtocol,
-                    certLogic: DCCCertLogicProtocol,
-                    userDefaults: Persistence,
-                    boosterAsTest: Bool)
+    func showGproof(boosterAsTest: Bool)
     func showCheckSituation(userDefaults: Persistence) -> Promise<Void>
     func showDataPrivacy() -> Promise<Void>
     func routeToRulesUpdate(userDefaults: Persistence) -> Promise<Void>

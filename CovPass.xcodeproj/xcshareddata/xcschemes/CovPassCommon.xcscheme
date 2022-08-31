@@ -51,6 +51,12 @@
             </BuildableReference>
             <SkippedTests>
                <Test
+                  Identifier = "AudioPlayerTests/testPlayCovPassCheckAudioFeedbackActivated_file_valid()">
+               </Test>
+               <Test
+                  Identifier = "AudioPlayerTests/testPlayCovPassCheckCertificateScannedIfEnabled_file_valid()">
+               </Test>
+               <Test
                   Identifier = "QualityAssuranceTests">
                </Test>
             </SkippedTests>

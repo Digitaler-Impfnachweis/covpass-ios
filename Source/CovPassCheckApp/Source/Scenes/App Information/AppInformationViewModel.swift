@@ -12,7 +12,11 @@ import Foundation
 
 class CheckAppInformationBaseViewModel: AppInformationBaseViewModel {
     override var entries: [AppInformationEntry] {
-        super.entries + [checkSituationEntry, revocationSettingsEntry]
+        super.entries + [
+            checkSituationEntry,
+            revocationSettingsEntry,
+            acousticFeedbackSettingsEntry
+        ]
     }
 
     private let userDefaults: Persistence
@@ -29,6 +33,21 @@ class CheckAppInformationBaseViewModel: AppInformationBaseViewModel {
         let revocationSettingsRouter: RevocationSettingsRouter = RevocationSettingsRouter(sceneCoordinator: router.sceneCoordinator)
         let scene = RevocationSettingsSceneFactory(router: revocationSettingsRouter, userDefaults: userDefaults)
         return AppInformationEntry(title: LocalText.revocationTitle, scene: scene, rightTitle: rightTitle)
+    }
+    private var acousticFeedbackSettingsEntry: AppInformationEntry {
+        let rightTitle = userDefaults.enableAcousticFeedback ?
+            LocalText.acousticFeedbackOn : LocalText.acousticFeedbackOff
+        let acousticFeedbackSettingsRouter = AcousticFeedbackSettingsRouter(
+            sceneCoordinator: router.sceneCoordinator
+        )
+        let scene = AcousticFeedbackSettingsSceneFactory(
+            router: acousticFeedbackSettingsRouter
+        )
+        return AppInformationEntry(
+            title: LocalText.acousticFeedbackTitle,
+            scene: scene,
+            rightTitle: rightTitle
+        )
     }
 
     init(router:AppInformationRouterProtocol, entries: [AppInformationEntry], userDefaults: Persistence) {
@@ -107,6 +126,9 @@ private enum LocalText {
     static let revocationTitle = "app_information_authorities_function_title".localized
     static let revocationHintOn = "app_information_authorities_function_state_on".localized
     static let revocationHintOff = "app_information_authorities_function_state_off".localized
+    static let acousticFeedbackTitle = "app_information_beep_when_checking_title".localized
+    static let acousticFeedbackOn = "app_information_authorities_function_state_on".localized
+    static let acousticFeedbackOff = "app_information_authorities_function_state_off".localized
 }
 
 private extension AppInformationEntry {

@@ -33,7 +33,8 @@ class RecoveryResultViewModelTests: XCTestCase {
                 dismissAfterSeconds: 0,
                 countdownDuration: 0
             ),
-            revocationRepository: CertificateRevocationRepositoryMock()
+            revocationRepository: CertificateRevocationRepositoryMock(),
+            audioPlayer: AudioPlayerMock()
         )
         sut.delegate = delegate
     }

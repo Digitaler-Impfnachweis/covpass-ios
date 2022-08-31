@@ -47,7 +47,8 @@ class ValidationResultViewControllerSnapShotTests: BaseSnapShotTests {
                                       _2GContext: _2GContext,
                                       userDefaults: persistence,
                                       revocationKeyFilename: "",
-                                      revocationRepository: CertificateRevocationRepositoryMock())
+                                      revocationRepository: CertificateRevocationRepositoryMock(),
+                                      audioPlayer: AudioPlayerMock())
         } else {
             guard let cborWebToken = cborWebToken else {
                 return UIView()
@@ -64,7 +65,8 @@ class ValidationResultViewControllerSnapShotTests: BaseSnapShotTests {
                                                 userDefaults: persistence,
                                                 revocationKeyFilename: "",
                                                 countdownTimerModel: countdownTimerModel,
-                                                revocationRepository: CertificateRevocationRepositoryMock())
+                                                revocationRepository: CertificateRevocationRepositoryMock(),
+                                                audioPlayer: AudioPlayerMock())
             } else if cborWebToken.isRecovery {
                 vm = RecoveryResultViewModel(resolvable: resolver,
                                              router: ValidationResultRouterMock(),
@@ -74,7 +76,8 @@ class ValidationResultViewControllerSnapShotTests: BaseSnapShotTests {
                                              userDefaults: persistence,
                                              revocationKeyFilename: "",
                                              countdownTimerModel: countdownTimerModel,
-                                             revocationRepository: CertificateRevocationRepositoryMock())
+                                             revocationRepository: CertificateRevocationRepositoryMock(),
+                                             audioPlayer: AudioPlayerMock())
             } else if cborWebToken.isTest {
                 vm = TestResultViewModel(resolvable: resolver,
                                          router: ValidationResultRouterMock(),
@@ -84,7 +87,8 @@ class ValidationResultViewControllerSnapShotTests: BaseSnapShotTests {
                                          userDefaults: persistence,
                                          revocationKeyFilename: "",
                                          countdownTimerModel: countdownTimerModel,
-                                         revocationRepository: CertificateRevocationRepositoryMock())
+                                         revocationRepository: CertificateRevocationRepositoryMock(),
+                                         audioPlayer: AudioPlayerMock())
             }
         }
         vm.buttonHidden = buttonHidden
