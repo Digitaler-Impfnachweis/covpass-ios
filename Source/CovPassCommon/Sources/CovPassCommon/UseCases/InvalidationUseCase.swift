@@ -68,12 +68,9 @@ public class InvalidationUseCase {
             revocationRepository.isRevoked(token)
         }
         .then { isRevoked -> Promise<ExtendedCBORWebToken> in
-            if isRevoked {
-                var tmpToken = token
-                tmpToken.revoked = true
-                return .value(tmpToken)
-            }
-            return .value(token)
+            var tmpToken = token
+            tmpToken.revoked = isRevoked
+            return .value(tmpToken)
         }
         .ensure {
             self.userDefaults.lastQueriedRevocation = self.date
