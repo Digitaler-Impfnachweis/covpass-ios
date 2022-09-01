@@ -44,6 +44,7 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
     private lazy var faqURL: URL? = locale.isGerman() ? Constants.Config.covpassFaqUrlGerman : Constants.Config.covpassFaqUrlEnglish
     private let jsonDecoder = JSONDecoder()
     private let pdfExtractor: CertificateExtractorProtocol
+    private let certificateHolderStatusModel: CertificateHolderStatusModelProtocol
     private var privacyFileUrl: URL? {
         guard let url =  Bundle.main.url(forResource: Constants.Config.privacySrcDe,
                                          withExtension: Constants.Config.privacySrcExt) else {
@@ -84,8 +85,10 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
         boosterLogic: BoosterLogicProtocol,
         userDefaults: UserDefaultsPersistence,
         locale: Locale,
-        pdfExtractor: CertificateExtractorProtocol
+        pdfExtractor: CertificateExtractorProtocol,
+        certificateHolderStatusModel: CertificateHolderStatusModelProtocol
     ) {
+        self.certificateHolderStatusModel = certificateHolderStatusModel
         self.pdfExtractor = pdfExtractor
         self.router = router
         self.repository = repository

@@ -13,6 +13,7 @@ import XCTest
 public class VaccinationRepositoryMock: VaccinationRepositoryProtocol {
     let saveCertExpectation = XCTestExpectation(description: "get certificate list has to be called")
     let updateExpectation = XCTestExpectation(description: "updateExpectation")
+    var error: Error?
     var lastUpdateTrustList: Date?
     var shouldTrustListUpdate: Bool = false
 
@@ -44,7 +45,10 @@ public class VaccinationRepositoryMock: VaccinationRepositoryProtocol {
     }
 
     public func getCertificateList() -> Promise<CertificateList> {
-        Promise.value(CertificateList(certificates: []))
+        if let error = error {
+            return .init(error: error)
+        }
+        return Promise.value(CertificateList(certificates: []))
     }
 
     public func saveCertificateList(_ certList: CertificateList) -> Promise<CertificateList> {

@@ -501,6 +501,13 @@ public extension Array where Element == ExtendedCBORWebToken {
             }.sortByDateOfBirth
         }
     }
+
+    func filter(by name: Name, dateOfBirth: Date?) -> Self {
+        filter {
+            let dgc = $0.vaccinationCertificate.hcert.dgc
+            return dgc.nam == name && dgc.dob == dateOfBirth
+        }
+    }
     
     var sortLatestPcrTest: [ExtendedCBORWebToken] {
         filterNegativePCRTestsNotOlderThan72Hours

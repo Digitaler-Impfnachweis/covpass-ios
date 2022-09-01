@@ -1328,6 +1328,56 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
         XCTAssertEqual(recoveryCert2.iat, recoveryToken3Iat)
         XCTAssertEqual(recovery2.fr, recoveryTokenFr2)
     }
+
+    func testFilterByNameDateOfBirth() {
+        // Given
+        var token1Owner1 = CBORWebToken.mockVaccinationCertificate
+        var token2Owner1 = CBORWebToken.mockVaccinationCertificate
+        var tokenOwner2 = CBORWebToken.mockVaccinationCertificate
+        var tokenOwner3 = CBORWebToken.mockVaccinationCertificate
+        token1Owner1.hcert.dgc = .mock(name: .mustermann())
+        token2Owner1.hcert.dgc = .mock(name: .mustermann())
+        tokenOwner2.hcert.dgc = .mock(name: .yildirim())
+        tokenOwner3.hcert.dgc = .mock(name: .mustermann(), dob: Date())
+        let sut = [
+            token1Owner1.extended(),
+            token2Owner1.extended(),
+            tokenOwner2.extended(),
+            tokenOwner3.extended()
+        ]
+        let dateOfBirth = tokenOwner2.hcert.dgc.dob
+
+        // When
+        let tokens = sut.filter(by: .yildirim(), dateOfBirth: dateOfBirth)
+
+        // Then
+        XCTAssertEqual(tokens.count, 1)
+    }
+
+    func testFilterByNameDateOfBirth_dob_is_nil() {
+        // Given
+        var token1Owner1 = CBORWebToken.mockVaccinationCertificate
+        var token2Owner1 = CBORWebToken.mockVaccinationCertificate
+        var tokenOwner2 = CBORWebToken.mockVaccinationCertificate
+        var tokenOwner3 = CBORWebToken.mockVaccinationCertificate
+        token1Owner1.hcert.dgc = .mock(name: .mustermann())
+        token2Owner1.hcert.dgc = .mock(name: .mustermann())
+        tokenOwner2.hcert.dgc = .mock(name: .yildirim())
+        tokenOwner3.hcert.dgc = .mock(name: .mustermann(), dob: Date())
+        let sut = [
+            token1Owner1.extended(),
+            token2Owner1.extended(),
+            tokenOwner2.extended(),
+            tokenOwner3.extended()
+        ]
+        let dateOfBirth: Date? = nil
+
+        // When
+        let tokens = sut.filter(by: .yildirim(), dateOfBirth: dateOfBirth)
+
+        // Then
+        XCTAssertEqual(tokens.count, 1)
+    }
 }
 
 private extension DigitalGreenCertificate {

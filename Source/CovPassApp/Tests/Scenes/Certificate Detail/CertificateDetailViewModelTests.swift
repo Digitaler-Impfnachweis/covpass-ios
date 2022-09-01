@@ -42,7 +42,8 @@ class CertificateDetailViewModelTests: XCTestCase {
             repository: vaccinationRepo,
             boosterLogic: boosterLogic,
             certificates: certificates,
-            resolvable: resolver
+            resolvable: resolver,
+            certificateHolderStatusModel: CertificateHolderStatusModelMock()
         )
         sut.delegate = delegate
     }
@@ -62,7 +63,8 @@ class CertificateDetailViewModelTests: XCTestCase {
             repository: VaccinationRepositoryMock(),
             boosterLogic: boosterLogic,
             certificates: certificates,
-            resolvable: resolver
+            resolvable: resolver,
+            certificateHolderStatusModel: CertificateHolderStatusModelMock()
         )
     }
 

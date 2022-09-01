@@ -44,7 +44,8 @@ class CertificatesOverviewViewModelTests: XCTestCase {
             boosterLogic: BoosterLogicMock(),
             userDefaults: userDefaults,
             locale: locale,
-            pdfExtractor: pdfExtrator
+            pdfExtractor: pdfExtrator,
+            certificateHolderStatusModel: CertificateHolderStatusModelMock()
         )
         sut.delegate = delegate
     }

@@ -56,7 +56,8 @@ class CertificateDetailViewControllerSnapshotTests: BaseSnapShotTests {
                                             repository: VaccinationRepositoryMock(),
                                             boosterLogic: bl,
                                             certificates: certs,
-                                            resolvable: resolver)
+                                            resolvable: resolver,
+                                            certificateHolderStatusModel: CertificateHolderStatusModelMock())
         return vm
     }
     

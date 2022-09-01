@@ -55,6 +55,7 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
     private let boosterLogic: BoosterLogicProtocol
     private let boosterCandidate: BoosterCandidate?
     private let resolver: Resolver<CertificateDetailSceneResult>
+    private let certificateHolderStatusModel: CertificateHolderStatusModelProtocol
     private var isFavorite = false
     private var showFavorite = false
     private var selectedCertificate: ExtendedCBORWebToken? { certificates.sortLatest().first }
@@ -325,8 +326,10 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
         repository: VaccinationRepositoryProtocol,
         boosterLogic: BoosterLogicProtocol,
         certificates: [ExtendedCBORWebToken],
-        resolvable: Resolver<CertificateDetailSceneResult>
+        resolvable: Resolver<CertificateDetailSceneResult>,
+        certificateHolderStatusModel: CertificateHolderStatusModelProtocol
     ) {
+        self.certificateHolderStatusModel = certificateHolderStatusModel
         self.router = router
         self.repository = repository
         self.boosterLogic = boosterLogic

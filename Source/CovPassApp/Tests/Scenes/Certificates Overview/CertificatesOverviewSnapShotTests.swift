@@ -36,7 +36,8 @@ class CertificateOverviewSnapShotTests: BaseSnapShotTests {
             boosterLogic: BoosterLogicMock(),
             userDefaults: UserDefaultsPersistence(),
             locale: .current,
-            pdfExtractor: CertificateExtractorMock()
+            pdfExtractor: CertificateExtractorMock(),
+            certificateHolderStatusModel: CertificateHolderStatusModelMock()
         )
     }
     
