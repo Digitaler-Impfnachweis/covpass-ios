@@ -43,6 +43,16 @@ extension CBORWebToken {
         hcert.dgc.v?.first?.dt = date
         return self
     }
+    
+    func mockTestSetDate(_ date: Date) -> Self {
+        hcert.dgc.t?.first?.sc = date
+        return self
+    }
+    
+    func mockRecoverySetDate(_ date: Date) -> Self {
+        hcert.dgc.r?.first?.fr = date
+        return self
+    }
 
     func doseNumber(_ dn: Int) -> Self {
         hcert.dgc.v?.first?.dn = dn
