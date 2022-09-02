@@ -285,9 +285,12 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
     }
 
     func showRecoveryExpiryReissueIsNewBadge(index: Int) -> Bool {
-        guard 0 ..< recoveryExpiryReissueCandidatesCount ~= index,
-              let alreadySeen = recoveryExpiryReissueTokens[index].first?.reissueProcessNewBadgeAlreadySeen  else {
+        guard recoveryExpiryReissueCandidatesCount > 0 else {
             return false
+        }
+        guard index < recoveryExpiryReissueCandidatesCount,
+              let alreadySeen = recoveryExpiryReissueTokens[index].first?.reissueProcessNewBadgeAlreadySeen  else {
+            return true
         }
         return !alreadySeen
     }

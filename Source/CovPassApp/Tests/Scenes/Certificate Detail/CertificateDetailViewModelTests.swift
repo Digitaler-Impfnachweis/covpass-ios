@@ -760,11 +760,24 @@ class CertificateDetailViewModelTests: XCTestCase {
         // Then
         XCTAssertFalse(showVaccinationExpiryReissueIsNewBadge)
     }
-
+    
     func testShowRecoveryExpiryReissueIsNewBadge_is_new() {
         // Given
         var token = ExtendedCBORWebToken.reissuableRecovery
         token.reissueProcessNewBadgeAlreadySeen = false
+        configureCustomSut(certificates: [token])
+
+        // When
+        let showRecoveryExpiryReissueIsNewBadge = sut.showRecoveryExpiryReissueIsNewBadge(index: 0)
+
+        // Then
+        XCTAssertTrue(showRecoveryExpiryReissueIsNewBadge)
+    }
+    
+    func testShowRecoveryExpiryReissueIsNewBadge_is_new_with_nil() {
+        // Given
+        var token = ExtendedCBORWebToken.reissuableRecovery
+        token.reissueProcessNewBadgeAlreadySeen = nil
         configureCustomSut(certificates: [token])
 
         // When
