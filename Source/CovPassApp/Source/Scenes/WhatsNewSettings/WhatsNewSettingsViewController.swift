@@ -74,7 +74,14 @@ class WhatsNewSettingsViewController: UIViewController {
 // MARK: - WKNavigationDelegate
 
 extension WhatsNewSettingsViewController: WKNavigationDelegate {
+    
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        webViewHeightConstraint.constant = webView.scrollView.contentSize.height
+        if !webView.isLoading {
+            webView.evaluateJavaScript("document.body.scrollHeight", completionHandler: { result, _ in
+                if let height = result as? CGFloat {
+                    self.webViewHeightConstraint.constant = height
+                }
+            })
+        }
     }
 }
