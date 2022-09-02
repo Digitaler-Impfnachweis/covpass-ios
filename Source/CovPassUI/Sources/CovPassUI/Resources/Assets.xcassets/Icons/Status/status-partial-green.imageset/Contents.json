@@ -1,12 +1,15 @@
 {
   "images" : [
     {
-      "filename" : "Status-Partial@1x.pdf",
+      "filename" : "status-partial-green.pdf",
       "idiom" : "universal"
     }
   ],
   "info" : {
     "author" : "xcode",
     "version" : 1
+  },
+  "properties" : {
+    "preserves-vector-representation" : true
   }
 }

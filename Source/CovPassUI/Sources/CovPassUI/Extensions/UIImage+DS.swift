@@ -177,9 +177,6 @@ public extension UIImage {
     @ImageLoader(name: "status_full_detail")
     private(set) static var statusFullDetail
 
-    @ImageLoader(name: "status_partial_detail")
-    private(set) static var statusPartialDetail
-
     @ImageLoader(name: "icon_test")
     private(set) static var iconTest
 
@@ -269,7 +266,34 @@ public extension UIImage {
     
     @ImageLoader(name: "status-expired-circle")
     private(set) static var statusExpiredCircle
-    
+
+    @ImageLoader(name: "status-full-circle")
+    private(set) static var statusFullCircle
+
+    @ImageLoader(name: "status-full-green")
+    private(set) static var statusFullGreen
+
+    @ImageLoader(name: "status-invalid-circle")
+    private(set) static var statusInvalidCircle
+
+    @ImageLoader(name: "status-mask-invalid-circle")
+    private(set) static var statusMaskInvalidCircle
+
+    @ImageLoader(name: "status-mask-optional-circle")
+    private(set) static var statusMaskOptionalCircle
+
+    @ImageLoader(name: "status-mask-required-circle")
+    private(set) static var statusMaskRequiredCircle
+
+    @ImageLoader(name: "status-partial-circle")
+    private(set) static var statusPartialCircle
+
+    @ImageLoader(name: "status-partial-green")
+    private(set) static var statusPartialGreen
+
+    @ImageLoader(name: "status-test-negative")
+    private(set) static var statusTestNegative
+
     @ImageLoader(name: "half-shield-notification")
     private(set) static var halfShieldNotification
     

@@ -1657,3 +1657,50 @@
 "revocation_detail_single_notDE" = "Das Zertifikat wurde vom Zertifikatsaussteller aufgrund einer behördlichen Entscheidung gesperrt.";
 
 "revocation_detail_locationID" = "Das RKI hat das Zertifikat aufgrund einer behördlichen Verfügung gesperrt. Bitte bemühen Sie sich darum, einen neuen digitalen Nachweis ausstellen zu lassen.";
+
+
+/********** infschg **********/
+
+"infschg_info_accessibility_announce_open" = "Die Ansicht \"Neue gesetzliche Regelungen\" wurde geöffnet.";
+
+"infschg_info_accessibility_announce_close" = "Die Ansicht \"Neue gesetzliche Regelungen\" wurde geschlossen.";
+
+"infschg_info_accessibility_close" = "Schließen";
+
+"infschg_info_title" = "Neue gesetzliche Regelungen";
+
+"infschg_info_copy_1" = "In Deutschland tritt eine Änderung des Infektionsschutzgesetzes in Kraft. Deshalb ändert sich Ihre CovPass App ab heute auch.";
+
+"infschg_info_copy_2" = "Befreiung von der Maskenpflicht";
+
+"infschg_info_copy_3" = "Sollten die Nachweise für eine Person ausreichen, um diese Person von der Maskenpflicht zu befreien, färbt sich die Karte dieser Person grün und erhält einen entsprechenden Hinweis. Bei Bedarf können Sie so Ihre Befreiung nachweisen.\n\nVon der Maskenpflicht sind alle Personen befreit, die innerhalb der letzten 3 Monate geimpft wurden oder genesen sind oder innerhalb der letzten 24 Stunden negativ getestet wurden.";
+
+"infschg_info_button" = "OK";
+
+"infschg_start_mask_mandatory" = "Maskenpflicht";
+
+"infschg_start_mask_optional" = "Keine Maskenpflicht";
+
+"infschg_start_immune_complete" = "Immunschutz vorhanden";
+
+"infschg_start_immune_incomplete" = "Immunschutz unvollständig";
+
+"infschg_start_notification" = "Status überprüfen";
+
+"infschg_start_expired_revoked" = "Kein gültiges Zertifikat";
+
+"infschg_cert_overview_title" = "Ihr aktuelles Zertifikat";
+
+"infschg_cert_overview_mask_time_until" = "Befreit bis %d";
+
+"infschg_cert_overview_mask_time_from" = "Befreit ab %d";
+
+"infschg_cert_overview_mask_hint_optional" = "Sie müssen nicht notwendigerweise eine Maske tragen. In manchen Bundesländern kann der zusätzliche Nachweis eines negativen Tests notwendig sein.";
+
+"infschg_cert_overview_mask_hint_mandatory" = "Um von der Maskenpflicht befreit zu sein, müssen Sie innerhalb der letzten 3 Monate geimpft worden oder genesen sein. Auch ein negativer Test innerhalb der letzten 24 Stunden befreit Sie von der Maskenpflicht.";
+
+"infschg_cert_overview_immunisation_time_since" = "Seit %d";
+
+"infschg_cert_overview_immunisation_time_from" = "Ab %d";
+
+"infschg_cert_overview_immunisation_hint" = "Ein vollständiger Immunschutz ist gegeben, wenn drei Einzelimpfungen erfolgt sind und die letzte Einzelimpfung mindestens drei Monate nach der zweiten Einzelimpfung erfolgt ist.";

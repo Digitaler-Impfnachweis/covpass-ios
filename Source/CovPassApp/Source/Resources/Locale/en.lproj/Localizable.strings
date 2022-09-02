@@ -1657,3 +1657,50 @@
 "revocation_detail_single_notDE" = "The certificate was revoked by the certificate issuer due to an official decision.";
 
 "revocation_detail_locationID" = "The RKI has revoked the certificate due to an official decree. Please make every effort to have a new digital certificate issued.";
+
+
+/********** infschg **********/
+
+"infschg_info_accessibility_announce_open" = "The view \"New legal regulations\" has been opened.";
+
+"infschg_info_accessibility_announce_close" = "The view \"New legal regulations\" has been closed.";
+
+"infschg_info_accessibility_close" = "Close";
+
+"infschg_info_title" = "New legal regulations";
+
+"infschg_info_copy_1" = "An amendment to the Infection Protection Act comes into force in Germany. Therefore, your CovPass app will also change as of today.";
+
+"infschg_info_copy_2" = "Exemption from the mask obligation";
+
+"infschg_info_copy_3" = "If the evidence for a person is sufficient to exempt that person from the mask obligation, that person's card will turn green and receive a corresponding note. If necessary, you can prove your exemption in this way.\n\nAll persons who have been vaccinated or have recovered within the last 3 months or have tested negative within the last 24 hours are exempt from the mask obligation.";
+
+"infschg_info_button" = "OK";
+
+"infschg_start_mask_mandatory" = "Mask obligation";
+
+"infschg_start_mask_optional" = "No mask obligation";
+
+"infschg_start_immune_complete" = "Complete immune protection";
+
+"infschg_start_immune_incomplete" = "Incomplete immune protection";
+
+"infschg_start_notification" = "Check status";
+
+"infschg_start_expired_revoked" = "No valid certificate";
+
+"infschg_cert_overview_title" = "Your current certificate";
+
+"infschg_cert_overview_mask_time_until" = "Exempt until %d";
+
+"infschg_cert_overview_mask_time_from" = "Exempt from %d";
+
+"infschg_cert_overview_mask_hint_optional" = "You do not necessarily have to wear a mask. In some federal states, additional proof of a negative test may be required.";
+
+"infschg_cert_overview_mask_hint_mandatory" = "To be exempt from the mask obligation, you must have been vaccinated or recovered within the last 3 months. A negative test within the last 24 hours also exempts you from the mask requirement.";
+
+"infschg_cert_overview_immunisation_time_since" = "Since %d";
+
+"infschg_cert_overview_immunisation_time_from" = "From %d";
+
+"infschg_cert_overview_immunisation_hint" = "Complete immune protection is given if three vaccinations have been given and the last vaccination was given at least three months after the second vaccination.";
