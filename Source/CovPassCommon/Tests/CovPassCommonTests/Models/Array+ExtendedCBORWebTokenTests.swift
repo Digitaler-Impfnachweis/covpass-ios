@@ -726,6 +726,40 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
         XCTAssertEqual(tokens.last, tokenInvalid)
     }
     
+    func test_all_invalids_have_least_priority_but_sorted_by_dtScFr() {
+        // Given
+        let vaccinationIdentifier = "vaccination"
+        let testIdentifier = "test"
+        let recoveryIdentifier = "recovery"
+        let vaccinationDate = try! XCTUnwrap(DateUtils.isoDateFormatter.date(from: "2022-02-04"))
+        let testDate = try! XCTUnwrap(DateUtils.isoDateFormatter.date(from: "2022-02-05"))
+        let recoveryDate = try! XCTUnwrap(DateUtils.isoDateFormatter.date(from: "2022-02-03"))
+        var tokenVaccination = CBORWebToken.mockVaccinationCertificate
+            .mockVaccinationSetDate(vaccinationDate)
+            .extended(vaccinationQRCodeData: vaccinationIdentifier)
+        var tokenTest = CBORWebToken.mockTestCertificate
+            .mockTestSetDate(testDate)
+            .extended(vaccinationQRCodeData: testIdentifier)
+        var tokenRecovery = CBORWebToken.mockRecoveryCertificate
+            .mockRecoverySetDate(recoveryDate)
+            .extended(vaccinationQRCodeData: recoveryIdentifier)
+        
+        tokenVaccination.revoked = true
+        tokenTest.vaccinationCertificate.exp = .init(timeIntervalSinceNow: -60)
+        tokenRecovery.invalid = true
+
+        let sut: [ExtendedCBORWebToken] = [tokenVaccination, tokenTest, tokenRecovery]
+        
+        // WHEN
+        let tokens = sut.sortLatest()
+
+        // Then
+        XCTAssertEqual(tokens.count, 3)
+        XCTAssertEqual(tokens[0].vaccinationQRCodeData, testIdentifier)
+        XCTAssertEqual(tokens[1].vaccinationQRCodeData, vaccinationIdentifier)
+        XCTAssertEqual(tokens[2].vaccinationQRCodeData, recoveryIdentifier)
+    }
+    
     func testQualifiedCertificatesForVaccinationExpiryReissue_token_is_not_reissueable() {
         // Given
         var cborWebToken = CBORWebToken.mockVaccinationCertificate

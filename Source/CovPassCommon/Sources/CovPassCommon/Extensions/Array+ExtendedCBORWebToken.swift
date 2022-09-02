@@ -565,7 +565,7 @@ public extension Array where Element == ExtendedCBORWebToken {
     }
     
     func sortLatestRest(_ res: [ExtendedCBORWebToken]) -> [ExtendedCBORWebToken] {
-        return filter { !res.contains($0) }
+        return filter { !res.contains($0) }.sortedByDtFrAndSc
     }
     
     func sortLatest() -> [ExtendedCBORWebToken] {
