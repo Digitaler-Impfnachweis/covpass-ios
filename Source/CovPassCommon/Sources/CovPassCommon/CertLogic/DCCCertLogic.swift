@@ -196,7 +196,7 @@ public class DCCCertLogic: DCCCertLogicProtocol {
         case .booster:
             rules = boosterRules
         case .de:
-            rules = dccDomesticRules
+            rules = dccDomesticRules.acceptenceAndInvalidationRules
         }
         if rules.isEmpty {
             throw DCCCertLogicError.noRules
