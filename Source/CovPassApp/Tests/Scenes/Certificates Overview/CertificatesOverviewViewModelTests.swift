@@ -494,6 +494,29 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         // Then
         wait(for: [router.showAnnouncementExpectation], timeout: 1)
     }
+#warning("TODO: Uncomment this, when the feature is finally merged.")
+//    func testShowNotificationsIfNeeded_new_regulations_announcement_not_shown() {
+//        // Given
+//        userDefaults.newRegulationsOnboardingScreenWasShown = false
+//
+//        // When
+//        sut.showNotificationsIfNeeded()
+//
+//        // Then
+//        wait(for: [router.showNewRegulationsAnnouncementExpectation], timeout: 1)
+//    }
+
+    func testShowNotificationsIfNeeded_new_regulations_announcement_already_shown() {
+        // Given
+        userDefaults.newRegulationsOnboardingScreenWasShown = true
+        router.showNewRegulationsAnnouncementExpectation.isInverted = true
+
+        // When
+        sut.showNotificationsIfNeeded()
+
+        // Then
+        wait(for: [router.showNewRegulationsAnnouncementExpectation], timeout: 2)
+    }
 
     func testRefresh_expiry_notification_token_is_valid() throws {
         // Given

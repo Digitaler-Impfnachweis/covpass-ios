@@ -19,6 +19,7 @@ enum ScanCountErrorResponse {
 
 protocol CertificatesOverviewRouterProtocol: DialogRouterProtocol {
     func showAnnouncement() -> Promise<Void>
+    func showNewRegulationsAnnouncement() -> Promise<Void>
     func showCertificates(certificates: [ExtendedCBORWebToken],
                           vaccinationRepository: VaccinationRepositoryProtocol,
                           boosterLogic: BoosterLogicProtocol) -> Promise<CertificateDetailSceneResult>

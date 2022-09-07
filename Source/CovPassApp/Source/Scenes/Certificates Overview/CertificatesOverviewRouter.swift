@@ -47,6 +47,12 @@ class CertificatesOverviewRouter: CertificatesOverviewRouterProtocol, DialogRout
             )
         )
     }
+
+    func showNewRegulationsAnnouncement() -> Promise<Void> {
+        sceneCoordinator.present(
+            NewRegulationsAnnouncementSceneFactory()
+        )
+    }
     
     func showDataPrivacy() -> Promise<Void> {
         sceneCoordinator.present(

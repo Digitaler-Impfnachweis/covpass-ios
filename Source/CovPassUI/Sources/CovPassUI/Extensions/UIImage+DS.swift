@@ -47,7 +47,10 @@ public extension UIImage {
     
     @ImageLoader(name: "Illustration_4")
     private(set) static var illustration4
-    
+
+    @ImageLoader(name: "illustration_impfschutzgesetz")
+    private(set) static var illustrationImpfschutzgesetz
+
     @ImageLoader(name: "start_screen_1")
     private(set) static var startScreen
     

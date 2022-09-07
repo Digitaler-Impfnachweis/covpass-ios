@@ -23,6 +23,7 @@ class CertificatesOverviewRouterMock: CertificatesOverviewRouterProtocol {
     let showQRCodeScanAndSelectionViewExpectation = XCTestExpectation(description: "showQRCodeScanAndSelectionViewExpectation")
     let showHowToScanExpectation = XCTestExpectation(description: "showHowToScanExpectation")
     let showAnnouncementExpectation = XCTestExpectation(description: "showAnnouncementExpectation")
+    let showNewRegulationsAnnouncementExpectation = XCTestExpectation(description: "showNewRegulationsAnnouncementExpectation")
     var sceneCoordinator: SceneCoordinator = SceneCoordinatorMock()
     var error: Error?
     var scanCountErrorResponse: ScanCountErrorResponse = .download
@@ -42,6 +43,11 @@ class CertificatesOverviewRouterMock: CertificatesOverviewRouterProtocol {
 
     func showAnnouncement() -> Promise<Void> {
         showAnnouncementExpectation.fulfill()
+        return .value
+    }
+
+    func showNewRegulationsAnnouncement() -> Promise<Void> {
+        showNewRegulationsAnnouncementExpectation.fulfill()
         return .value
     }
 

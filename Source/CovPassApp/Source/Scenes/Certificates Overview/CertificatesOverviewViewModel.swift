@@ -343,6 +343,9 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
         .then {
             self.showAnnouncementIfNeeded()
         }
+        .then {
+            self.showNewRegulationsAnnouncementIfNeeded()
+        }
         .then{
             self.showCheckSituationIfNeeded()
         }
@@ -536,6 +539,20 @@ extension CertificatesOverviewViewModel {
         }
         storeUserDefaults(currentDataPrivacyHash)
         return router.showDataPrivacy()
+    }
+
+    private func showNewRegulationsAnnouncementIfNeeded() -> Guarantee<Void> {
+        return .value
+#warning("TODO: Uncomment this, when the feature is finally merged.")
+//        if userDefaults.newRegulationsOnboardingScreenWasShown {
+//            return .value
+//        }
+//        return router
+//            .showNewRegulationsAnnouncement()
+//            .ensure {
+//                self.userDefaults.newRegulationsOnboardingScreenWasShown = true
+//            }
+//            .recover { _ in () }
     }
 }
 
