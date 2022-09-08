@@ -146,7 +146,24 @@ public class DCCCertLogic: DCCCertLogicProtocol {
             "vaccines-covid-19-names": DCCCertLogic.valueSetFromFile("vaccines-covid-19-names")
         ]
     }
-
+    
+    
+    public var rulesShouldBeUpdated: Bool {
+        userDefaults.lastUpdatedDCCRules?.passed24Hours ?? true
+    }
+    
+    public var boosterRulesShouldBeUpdated: Bool {
+        userDefaults.lastUpdatedBoosterRules?.passed24Hours ?? true
+    }
+    
+    public var valueSetsShouldBeUpdated: Bool {
+        userDefaults.lastUpdatedValueSets?.passed24Hours ?? true
+    }
+    
+    public var domesticRulesShouldBeUpdated: Bool {
+        return userDefaults.lastUpdateDomesticRules?.passed24Hours ?? true
+    }
+    
     private static func valueSetFromFile(_ name: String) -> [String] {
         guard let url = Bundle.commonBundle.url(forResource: name, withExtension: "json"),
               let data = try? Data(contentsOf: url)
@@ -235,29 +252,12 @@ public class DCCCertLogic: DCCCertLogicProtocol {
 
     // MARK: - Updating local rules and data
 
-    public func rulesShouldBeUpdated() -> Bool {
-        if let lastUpdated = userDefaults.lastUpdatedDCCRules,
-           let date = Calendar.current.date(byAdding: .day, value: 1, to: lastUpdated),
-           Date() < date
-        {
-            return false
-        }
-        return true
-    }
-    
-    public func rulesShouldBeUpdated() -> Promise<Bool> {
-        Promise { seal in
-            seal.fulfill(rulesShouldBeUpdated())
-        }
-    }
     
     public func updateRulesIfNeeded() -> Promise<Void> {
-        return firstly {
-            return rulesShouldBeUpdated()
+        guard rulesShouldBeUpdated else {
+            return .value
         }
-        .then(on: .global()) {
-            $0 ? self.updateRules() : .value
-        }
+        return updateRules()
     }
 
     public func updateRules() -> Promise<Void> {
@@ -285,30 +285,13 @@ public class DCCCertLogic: DCCCertLogicProtocol {
             seal.fulfill(updatedRules)
         }
     }
-    
-    public func boosterRulesShouldBeUpdated() -> Bool {
-        if let lastUpdated = userDefaults.lastUpdatedBoosterRules,
-           let date = Calendar.current.date(byAdding: .day, value: 1, to: lastUpdated),
-           Date() < date
-        {
-            return false
-        }
-        return true
-    }
-    
-    public func boosterRulesShouldBeUpdated() -> Promise<Bool> {
-        Promise { seal in
-            seal.fulfill(boosterRulesShouldBeUpdated())
-        }
-    }
-    
+
+
     public func updateBoosterRulesIfNeeded() -> Promise<Void> {
-        return firstly {
-            return boosterRulesShouldBeUpdated()
+        guard boosterRulesShouldBeUpdated else {
+            return .value
         }
-        .then(on: .global()) {
-            $0 ? self.updateBoosterRules() : .value
-        }
+        return updateBoosterRules()
     }
     
     public func updateBoosterRules() -> Promise<Void> {
@@ -327,30 +310,12 @@ public class DCCCertLogic: DCCCertLogicProtocol {
             return .value
         }
     }
-    
-    public func valueSetsShouldBeUpdated() -> Bool {
-        if let lastUpdated = userDefaults.lastUpdatedValueSets,
-           let date = Calendar.current.date(byAdding: .day, value: 1, to: lastUpdated),
-           Date() < date
-        {
-            return false
-        }
-        return true
-    }
-    
-    public func valueSetsShouldBeUpdated() -> Promise<Bool> {
-        Promise { seal in
-            seal.fulfill(valueSetsShouldBeUpdated())
-        }
-    }
-    
+
     public func updateValueSetsIfNeeded() -> Promise<Void> {
-        return firstly {
-            return valueSetsShouldBeUpdated()
+        guard valueSetsShouldBeUpdated else {
+            return .value
         }
-        .then(on: .global()) {
-            $0 ? self.updateValueSets() : .value
-        }
+        return updateValueSets()
     }
     
     public func updateValueSets() -> Promise<Void> {
@@ -383,6 +348,14 @@ public class DCCCertLogic: DCCCertLogicProtocol {
             return .value
         }
     }
+
+
+    public func updateDomesticIfNeeded() -> Promise<Void> {
+        guard domesticRulesShouldBeUpdated else {
+            return .value
+        }
+        return updateDomesticRules()
+    }
     
     public func updateDomesticRules() -> Promise<Void> {
         return firstly {
@@ -394,6 +367,10 @@ public class DCCCertLogic: DCCCertLogicProtocol {
         .map(on: .global()) { rules in
             let data = try self.jsonEncoder.encode(rules)
             try self.keychain.store(KeychainPersistence.Keys.dccDomesticRules.rawValue, value: data)
+        }
+        .then(on: .global()) { () -> Promise<Void> in
+            self.userDefaults.lastUpdateDomesticRules = Date()
+            return .value
         }
     }
     

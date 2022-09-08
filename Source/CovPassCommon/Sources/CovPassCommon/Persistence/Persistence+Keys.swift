@@ -88,7 +88,7 @@ public extension Persistence {
             try? store(UserDefaults.keyLastUpdatedValueSets, value: newValue as Any)
         }
     }
-
+    
     var lastUpdatedDCCRules: Date? {
         get {
             let value = try? fetch(UserDefaults.keyLastUpdatedDCCRules) as? Date
@@ -96,6 +96,16 @@ public extension Persistence {
         }
         set {
             try? store(UserDefaults.keyLastUpdatedDCCRules, value: newValue as Any)
+        }
+    }
+    
+    var lastUpdateDomesticRules: Date? {
+        get {
+            let value = try? fetch(UserDefaults.keyLastUpdateDomesticRuless) as? Date
+            return value
+        }
+        set {
+            try? store(UserDefaults.keyLastUpdateDomesticRuless, value: newValue as Any)
         }
     }
 

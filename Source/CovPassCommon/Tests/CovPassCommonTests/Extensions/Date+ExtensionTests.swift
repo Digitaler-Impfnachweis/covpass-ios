@@ -180,6 +180,39 @@ class Date_ExtensionTests: XCTestCase {
         XCTAssertEqual(dateComponents.minute, 0)
         XCTAssertEqual(dateComponents.second, 0)
     }
+    
+    func test_passed24Hours_false() {
+        // Given
+        sut = Date()
+
+        // When
+        let passed24Hours = sut.passed24Hours
+
+        // Then
+        XCTAssertFalse(passed24Hours)
+    }
+    
+    func test_passed24Hours_false_limit() {
+        // Given
+        sut = Date() - (60 * 60 * 24) + 1
+
+        // When
+        let passed24Hours = sut.passed24Hours
+
+        // Then
+        XCTAssertFalse(passed24Hours)
+    }
+    
+    func test_passed24Hours_true() {
+        // Given
+        sut = Date() - (60 * 60 * 24)
+
+        // When
+        let passed24Hours = sut.passed24Hours
+
+        // Then
+        XCTAssertTrue(passed24Hours)
+    }
 }
 
 private let secondsPerHour: TimeInterval = 60*60

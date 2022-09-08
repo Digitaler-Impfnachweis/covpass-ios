@@ -90,7 +90,7 @@ class TrustedListDetailsViewModel {
         }
     }
     private var shouldSomethingBeUpdated: Bool {
-        certLogic.rulesShouldBeUpdated() || certLogic.valueSetsShouldBeUpdated() || repository.trustListShouldBeUpdated()
+        certLogic.rulesShouldBeUpdated || certLogic.valueSetsShouldBeUpdated || repository.trustListShouldBeUpdated()
     }
     private var canceled: Bool = false
     

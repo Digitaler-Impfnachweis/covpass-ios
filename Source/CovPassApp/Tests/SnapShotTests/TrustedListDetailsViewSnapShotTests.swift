@@ -46,8 +46,8 @@ class TrustedListDetailsViewSnapShotTests: BaseSnapShotTests {
         userDefaults.lastUpdatedDCCRules = DateUtils.parseDate("2021-04-26T15:05:00")
         userDefaults.lastUpdatedValueSets = DateUtils.parseDate("2021-04-26T15:05:00")
         let certLogicMock = DCCCertLogicMock()
-        certLogicMock.rulesShouldUpdate = false
-        certLogicMock.valueSetsShouldUpdate = false
+        certLogicMock.rulesShouldBeUpdated = false
+        certLogicMock.valueSetsShouldBeUpdated = false
         let vaccinationRepoMock = VaccinationRepositoryMock()
         vaccinationRepoMock.shouldTrustListUpdate = false
         let sut = TrustedListDetailsViewModel(repository: vaccinationRepoMock,

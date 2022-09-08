@@ -100,7 +100,7 @@ class RuleCheckViewControllerSnapshotTests: BaseSnapShotTests {
     }
     
     func testWithLastUpdateNow() {
-        certLogicMock.rulesShouldUpdate = true
+        certLogicMock.rulesShouldBeUpdated = true
         vaccinationRepoMock.lastUpdatedTrustList = Date()
         let sut = configureSut()
         let vc = RuleCheckViewController(viewModel: sut)

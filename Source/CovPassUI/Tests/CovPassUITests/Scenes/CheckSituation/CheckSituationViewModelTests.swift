@@ -239,8 +239,8 @@ class CheckSituationViewModelTests: XCTestCase {
         userDefaults.lastUpdatedValueSets = DateUtils.parseDate("2021-04-26T15:05:00")
         userDefaults.lastUpdatedTrustList = DateUtils.parseDate("2021-04-26T15:05:00")
         repository.shouldTrustListUpdate = false
-        certLogic.shouldRulesBeUpdated = false
-        certLogic.shouldValueSetsBeUpdated = false
+        certLogic.rulesShouldBeUpdated = false
+        certLogic.valueSetsShouldBeUpdated = false
         offlineRevocationService.shouldOfflineUpdate = false
 
         // Then

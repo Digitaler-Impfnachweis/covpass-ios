@@ -108,6 +108,34 @@ class DCCCertLogicTests: XCTestCase {
         XCTAssertNotNil(lastUpdateDateAfter)
         XCTAssertEqual(dateDefault, lastUpdateDateAfter)
     }
+    
+    func testUpdateDomesticRulesIfNeededTrue() {
+        let expectation = XCTestExpectation()
+        let lastUpdateDomesticRules = Date() - 100000000
+        userDefaults.lastUpdateDomesticRules = lastUpdateDomesticRules
+        sut.updateDomesticIfNeeded().done { _ in
+            let lastUpdateDateAfter = try XCTUnwrap(self.userDefaults.lastUpdateDomesticRules)
+            XCTAssertNotEqual(lastUpdateDomesticRules, lastUpdateDateAfter)
+            expectation.fulfill()
+        }.catch { error in
+            XCTFail("Should not fail \(error)")
+        }
+        wait(for: [expectation], timeout: 0.1)
+    }
+    
+    func testUpdateDomesticRulesIfNeededFalse() {
+        let expectation = XCTestExpectation()
+        let lastUpdateDomesticRules = Date()
+        userDefaults.lastUpdateDomesticRules = lastUpdateDomesticRules
+        sut.updateDomesticIfNeeded().done { _ in
+            let lastUpdateDateAfter = try XCTUnwrap(self.userDefaults.lastUpdateDomesticRules)
+            XCTAssertEqual(lastUpdateDomesticRules, lastUpdateDateAfter)
+            expectation.fulfill()
+        }.catch { error in
+            XCTFail("Should not fail \(error)")
+        }
+        wait(for: [expectation], timeout: 0.1)
+    }
 
 
     func testSavedAndLocalRules() throws {
@@ -557,38 +585,6 @@ class DCCCertLogicTests: XCTestCase {
         XCTAssertEqual(domesticRules.count, 1)
     }
     
-    func testBoosterRulesShouldUpdate() {
-        let exp = expectation(description: "Booster Rules should update")
-        // GIVEN
-        userDefaults.lastUpdatedBoosterRules = Date().addingTimeInterval(60*60*24 * (-1))
-        // WHEN
-        sut.boosterRulesShouldBeUpdated()
-            .done{
-                // THEN
-                if $0 {
-                    exp.fulfill()
-                } else {
-                    XCTFail()
-                }
-            }.cauterize()
-        wait(for: [exp], timeout: 0.1)
-    }
-    
-    func testBoosterRulesShoulNotdUpdate() {
-        let exp = expectation(description: "Booster Rules should not update")
-        // GIVEN
-        userDefaults.lastUpdatedBoosterRules = Date()
-        // WHEN
-        sut.boosterRulesShouldBeUpdated()
-            .done{
-                if !$0 {
-                    // THEN
-                    exp.fulfill()
-                }
-            }.cauterize()
-        wait(for: [exp], timeout: 0.1, enforceOrder: true)
-    }
-    
     func testUpdateBoosterRuleIfNeeded() {
         let exp = expectation(description: "Update If Needed")
         // GIVEN
@@ -598,36 +594,6 @@ class DCCCertLogicTests: XCTestCase {
             .done{
                 // THEN
                 exp.fulfill()
-            }.cauterize()
-        wait(for: [exp], timeout: 0.1, enforceOrder: true)
-    }
-    
-    func testValueSetsShouldUpdate() {
-        let exp = expectation(description: "Booster Rules should update")
-        // GIVEN
-        userDefaults.lastUpdatedValueSets = Date().addingTimeInterval(60*60*24 * (-1))
-        // WHEN
-        sut.valueSetsShouldBeUpdated()
-            .done{
-                if $0 {
-                    // THEN
-                    exp.fulfill()
-                }
-            }.cauterize()
-        wait(for: [exp], timeout: 0.1, enforceOrder: true)
-    }
-    
-    func testValueSetsShoulNotdUpdate() {
-        let exp = expectation(description: "Booster Rules should not update")
-        // GIVEN
-        userDefaults.lastUpdatedValueSets = Date()
-        // WHEN
-        sut.valueSetsShouldBeUpdated()
-            .done{
-                if !$0 {
-                    // THEN
-                    exp.fulfill()
-                }
             }.cauterize()
         wait(for: [exp], timeout: 0.1, enforceOrder: true)
     }

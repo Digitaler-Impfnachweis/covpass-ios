@@ -123,7 +123,7 @@ class ValidatorOverviewViewModel {
     var offlineInformationUpdateCellTitle: String = Constants.Keys.OfflineInformation.link_title
     var offlineInformationUpdateCellSubtitle: String { shouldSomethingBeUpdated ? Constants.Keys.OfflineInformation.subtitle_unavailable : Constants.Keys.OfflineInformation.link_subtitle_available }
     var offlineInformationCellIcon: UIImage = .chevronRight
-    private var shouldSomethingBeUpdated: Bool { certLogic.rulesShouldBeUpdated() || certLogic.valueSetsShouldBeUpdated() || vaccinationRepository.trustListShouldBeUpdated() }
+    private var shouldSomethingBeUpdated: Bool { certLogic.rulesShouldBeUpdated || certLogic.valueSetsShouldBeUpdated || vaccinationRepository.trustListShouldBeUpdated() }
     
     var checkSituationText: String {
         switch userDefaults.selectedLogicType {

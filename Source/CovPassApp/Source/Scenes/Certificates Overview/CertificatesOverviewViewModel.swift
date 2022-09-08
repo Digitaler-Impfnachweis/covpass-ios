@@ -133,7 +133,7 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
             return .init(error: error)
         }
     }
-
+    
     func updateTrustList() {
         repository.updateTrustListIfNeeded()
             .done {
@@ -144,6 +144,10 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
                     self?.delegate?.viewModelDidUpdate()
                 }
             }
+    }
+    
+    func updateDomesticRules() -> Promise<Void> {
+        certLogic.updateDomesticIfNeeded()
     }
     
     func updateBoosterRules() {
@@ -183,6 +187,7 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
         }.then {
             self.showExpiryAlertIfNeeded()
         }
+        .then(updateDomesticRules)
         .asVoid()
     }
     

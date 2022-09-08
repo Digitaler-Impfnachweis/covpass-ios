@@ -9,15 +9,23 @@ import CovPassCommon
 import Foundation
 import PromiseKit
 import CertLogic
+import XCTest
 
 class DCCCertLogicMock: DCCCertLogicProtocol {
+ 
+    var countries: [Country] = [Country("DE")]
     
-    var rulesShouldUpdate: Bool = true
-    var valueSetsShouldUpdate: Bool = true
-
-    var countries: [Country] = [
-        Country("DE")
-    ]
+    var rulesShouldBeUpdated: Bool = true
+    
+    var boosterRulesShouldBeUpdated: Bool = true
+    
+    var valueSetsShouldBeUpdated: Bool = true
+    
+    var domesticRulesShouldBeUpdated: Bool = true
+    
+    var domesticRulesUpdateTestExpectation = XCTestExpectation()
+    
+    var domesticRulesUpdateIfNeededTestExpectation = XCTestExpectation()
     
     func updateBoosterRulesIfNeeded() -> Promise<Void> {
         .value
@@ -31,32 +39,8 @@ class DCCCertLogicMock: DCCCertLogicProtocol {
         .value
     }
     
-    func boosterRulesShouldBeUpdated() -> Promise<Bool> {
-        .value(boosterRulesShouldBeUpdated())
-    }
-    
-    func boosterRulesShouldBeUpdated() -> Bool {
-        true
-    }
-    
-    func valueSetsShouldBeUpdated() -> Promise<Bool> {
-        .value(valueSetsShouldBeUpdated())
-    }
-    
-    func valueSetsShouldBeUpdated() -> Bool {
-        valueSetsShouldUpdate
-    }
-    
     func updateBoosterRules() -> Promise<Void> {
         .value
-    }
-    
-    func rulesShouldBeUpdated() -> Promise<Bool> {
-        .value(rulesShouldBeUpdated())
-    }
-    
-    public func rulesShouldBeUpdated() -> Bool {
-        rulesShouldUpdate
     }
 
     var validationError: Error?
@@ -77,5 +61,15 @@ class DCCCertLogicMock: DCCCertLogicProtocol {
     func updateRules() -> Promise<Void> {
         didUpdateRules?()
         return Promise.value
+    }
+    
+    func updateDomesticIfNeeded() -> Promise<Void> {
+        domesticRulesUpdateIfNeededTestExpectation.fulfill()
+        return .value
+    }
+    
+    func updateDomesticRules() -> Promise<Void> {
+        domesticRulesUpdateTestExpectation.fulfill()
+        return .value
     }
 }

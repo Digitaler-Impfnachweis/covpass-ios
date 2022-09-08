@@ -193,8 +193,8 @@ public class CheckSituationViewModel: CheckSituationViewModelProtocol {
     // MARK: - Private properties
     private var canceled: Bool = false
     private var shouldSomethingBeUpdated: Bool {
-        certLogic.rulesShouldBeUpdated() ||
-        certLogic.valueSetsShouldBeUpdated() ||
+        certLogic.rulesShouldBeUpdated ||
+        certLogic.valueSetsShouldBeUpdated ||
         repository.trustListShouldBeUpdated() ||
         (offlineRevocationIsEnabled ? offlineRevocationService?.updateNeeded() ?? false : false)
     }

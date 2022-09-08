@@ -19,6 +19,7 @@ class CertificatesOverviewViewModelTests: XCTestCase {
     var userDefaults: UserDefaultsPersistence!
     var vaccinationRepository: VaccinationRepositoryMock!
     var revocationRepository: CertificateRevocationRepositoryMock!
+    var certLogic: DCCCertLogicMock!
     var router: CertificatesOverviewRouterMock!
     var pdfExtrator: CertificateExtractorMock!
     override func setUpWithError() throws {
@@ -26,6 +27,7 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         userDefaults = UserDefaultsPersistence()
         vaccinationRepository = VaccinationRepositoryMock()
         revocationRepository = CertificateRevocationRepositoryMock()
+        certLogic = DCCCertLogicMock()
         pdfExtrator = .init()
         delegate = .init()
         configureSut()
@@ -40,7 +42,7 @@ class CertificatesOverviewViewModelTests: XCTestCase {
             router: router,
             repository: vaccinationRepository,
             revocationRepository: revocationRepository,
-            certLogic: DCCCertLogicMock(),
+            certLogic: certLogic,
             boosterLogic: BoosterLogicMock(),
             userDefaults: userDefaults,
             locale: locale,
@@ -58,6 +60,7 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         userDefaults = nil
         vaccinationRepository = nil
         pdfExtrator = nil
+        certLogic = nil
         super.tearDown()
     }
     
@@ -866,6 +869,20 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         // Then
         XCTAssertTrue(handlesOpen)
         wait(for: [router.showCertificateImportErrorExpectation], timeout: 1)
+    }
+    
+    func test_update_domestic_rules() throws {
+        // Given
+        configureSut(certificates: [])
+        certLogic.domesticRulesShouldBeUpdated = false
+        certLogic.domesticRulesUpdateTestExpectation.isInverted = true
+        
+        // When
+        _ = sut.updateDomesticRules()
+
+        // Then
+        wait(for: [certLogic.domesticRulesUpdateIfNeededTestExpectation,
+                   certLogic.domesticRulesUpdateTestExpectation], timeout: 0.1)
     }
 }
 

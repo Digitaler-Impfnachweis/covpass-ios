@@ -81,8 +81,8 @@ class TrustedListDetailsViewModelTests: XCTestCase {
         userDefaults.lastUpdatedValueSets = DateUtils.parseDate("2021-04-26T15:05:00")
         userDefaults.lastUpdatedTrustList = DateUtils.parseDate("2021-04-26T15:05:00")
         vaccinationRepository.shouldTrustListUpdate = false
-        certLogic.rulesShouldUpdate = false
-        certLogic.valueSetsShouldUpdate = false
+        certLogic.rulesShouldBeUpdated = false
+        certLogic.valueSetsShouldBeUpdated = false
         
         // Then
         XCTAssertEqual(sut.title, "Update checking rules")

@@ -33,8 +33,8 @@ class CheckSituationViewControllerSnapShotTests: BaseSnapShotTests {
         let vaccinationRepositoryMock = VaccinationRepositoryMock()
         vaccinationRepositoryMock.shouldTrustListUpdate = shouldUpdate
         let certLogicMock = DCCCertLogicMock()
-        certLogicMock.shouldRulesBeUpdated = shouldUpdate
-        certLogicMock.shouldValueSetsBeUpdated = shouldUpdate
+        certLogicMock.rulesShouldBeUpdated = shouldUpdate
+        certLogicMock.valueSetsShouldBeUpdated = shouldUpdate
         let viewModel = CheckSituationViewModel(
             context: context,
             userDefaults: persistence,

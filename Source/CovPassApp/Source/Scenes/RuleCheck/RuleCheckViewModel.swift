@@ -64,7 +64,7 @@ class RuleCheckViewModel: BaseViewModel, CancellableViewModelProtocol {
     var domesticRulesHintIshidden: Bool { !country.contains(Constants.Config.defaultDeCountryCode) }
     let domesticRulesHintIcon = UIImage.infoSignal
     let germanInfoBoxText = Constants.Keys.germanInfoBox
-    var timeHintIsHidden: Bool {  !repository.trustListShouldBeUpdated() || !certLogic.rulesShouldBeUpdated() || isLoading }
+    var timeHintIsHidden: Bool {  !repository.trustListShouldBeUpdated() || !certLogic.rulesShouldBeUpdated || isLoading }
     let announce = Constants.Accessibility.announce
     let closingAnnounce = Constants.Accessibility.closingAnnounce
 

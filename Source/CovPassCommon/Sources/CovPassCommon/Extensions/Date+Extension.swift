@@ -8,6 +8,14 @@
 import Foundation
 
 public extension Date {
+    
+    var passed24Hours: Bool {
+        guard let date = Calendar.current.date(byAdding: .day, value: 1, to: self) else {
+            return false
+        }
+        return Date() > date
+    }
+    
     func monthsSince(_ date: Date) -> Int {
         let components: Set<Calendar.Component> = [.month]
         let diffComponents = Calendar.current.dateComponents(

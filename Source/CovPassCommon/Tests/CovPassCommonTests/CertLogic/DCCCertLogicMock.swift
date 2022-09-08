@@ -12,9 +12,19 @@ import Foundation
 import PromiseKit
 
 class DCCCertLogicMock: DCCCertLogicProtocol {
+
+    var countries: [Country] = [Country("DE")]
     
-    var countries: [Country] {
-        [Country("DE")]
+    var rulesShouldBeUpdated: Bool = true
+    
+    var boosterRulesShouldBeUpdated: Bool = true
+    
+    var valueSetsShouldBeUpdated: Bool = true
+    
+    var domesticRulesShouldBeUpdated: Bool = true
+    
+    func updateDomesticIfNeeded() -> Promise<Void> {
+        .value
     }
     
     func updateBoosterRulesIfNeeded() -> Promise<Void> {
@@ -28,39 +38,9 @@ class DCCCertLogicMock: DCCCertLogicProtocol {
     func updateValueSetsIfNeeded() -> Promise<Void> {
         .value
     }
-    
-    func boosterRulesShouldBeUpdated() -> Promise<Bool> {
-        .value(boosterRulesShouldBeUpdated())
-    }
-    
-    func boosterRulesShouldBeUpdated() -> Bool {
-        return true
-    }
-    
-    func valueSetsShouldBeUpdated() -> Promise<Bool> {
-        .value(valueSetsShouldBeUpdated())
-    }
-    
-    func valueSetsShouldBeUpdated() -> Bool {
-        return true
-    }
-    
+
     func updateBoosterRules() -> Promise<Void> {
         .value
-    }
-    
-    public func rulesShouldBeUpdated() -> Promise<Bool> {
-        .value(rulesShouldBeUpdated())
-    }
-    
-    public func rulesShouldBeUpdated() -> Bool {
-        if let lastUpdated = self.lastUpdatedDCCRules(),
-           let date = Calendar.current.date(byAdding: .day, value: 1, to: lastUpdated),
-           Date() < date
-        {
-            return false
-        }
-        return true
     }
 
     func lastUpdatedDCCRules() -> Date? {
@@ -81,6 +61,10 @@ class DCCCertLogicMock: DCCCertLogicProtocol {
     }
 
     func updateRules() -> Promise<Void> {
+        Promise.value
+    }
+    
+    func updateDomesticRules() -> Promise<Void> {
         Promise.value
     }
 }
