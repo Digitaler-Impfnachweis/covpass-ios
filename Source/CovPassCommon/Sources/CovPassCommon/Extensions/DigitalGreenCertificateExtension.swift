@@ -66,3 +66,24 @@ public extension DigitalGreenCertificate {
         v?.contains { $0.isJohnsonJohnson && $0.isDoubleDoseComplete } ?? false
     }
  }
+
+public extension Array where Element == DigitalGreenCertificate {
+    /// Combine multiple certifcates into one, when all have matching names and date of birth.
+    func joinCertificates() -> Element? {
+        let certificatesWithoutFirst = Array(dropFirst())
+        guard var baseCertificate = first,
+              certificatesWithoutFirst.allSatisfy({ $0 == baseCertificate })
+        else {
+            return nil
+        }
+        let vaccinations = compactMap { $0.v }.flatMap { $0 }
+        let recoveries = compactMap { $0.r }.flatMap { $0 }
+        let tests = compactMap { $0.t }.flatMap { $0 }
+
+        baseCertificate.v = vaccinations.isEmpty ? nil : vaccinations
+        baseCertificate.r = recoveries.isEmpty ? nil : recoveries
+        baseCertificate.t = tests.isEmpty ? nil : tests
+
+        return baseCertificate
+    }
+}

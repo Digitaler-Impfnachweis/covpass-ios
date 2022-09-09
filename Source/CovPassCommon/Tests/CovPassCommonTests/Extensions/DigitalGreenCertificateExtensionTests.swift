@@ -105,7 +105,76 @@ class DigitalGreenCertificateExtensionTests: XCTestCase {
         // Then
         XCTAssertTrue(isJohnsonAndJohnson2of2Vaccination)
     }
+
+    func testJoinCertificates_empty() {
+        // Given
+        let sut: [DigitalGreenCertificate] = []
+
+        // When
+        let dgc = sut.joinCertificates()
+
+        // Then
+        XCTAssertNil(dgc)
+    }
+
+    func testJoinCertificates_certificate_one_certificate() {
+        // Given
+        let givenDgc = CBORWebToken.mockRecoveryCertificate.hcert.dgc
+        let sut: [DigitalGreenCertificate] = [givenDgc]
+
+        // When
+        let dgc = sut.joinCertificates()
+
+        // Then
+        guard let dgc = dgc else {
+            XCTFail("dgc must not be nil.")
+            return
+        }
+        XCTAssertNil(dgc.v)
+        XCTAssertEqual(dgc.r?.count, 1)
+        XCTAssertNil(dgc.t)
+    }
+
+    func testJoinCertificates_certificate_holder_do_not_match() {
+        // Given
+        let dgc1 = CBORWebToken.mockRecoveryCertificate.hcert.dgc
+        let dgc2 = CBORWebToken.mockVaccinationCertificateWithOtherName.hcert.dgc
+        let sut: [DigitalGreenCertificate] = [dgc1, dgc2]
+
+        // When
+        let dgc = sut.joinCertificates()
+
+        // Then
+        XCTAssertNil(dgc)
+    }
+
+    func testJoinCertificates_multiple_certifcates() {
+        // Given
+        var dgc1 = CBORWebToken.mockRecoveryCertificate.hcert.dgc
+        dgc1.t = [test, test, test]
+
+        var dgc2 = CBORWebToken.mockVaccinationCertificate.hcert.dgc
+        dgc2.t = [test, test, test, test]
+        dgc2.r = [recovery, recovery, recovery, recovery, recovery]
+
+        var dgc3 = CBORWebToken.mockTestCertificate.hcert.dgc
+        dgc3.v = [vaccination, vaccination, vaccination]
+
+        let sut: [DigitalGreenCertificate] = [dgc1, dgc2, dgc3]
+
+        // When
+        let dgc = sut.joinCertificates()
+
+        // Then
+        XCTAssertEqual(dgc?.v?.count, 4)
+        XCTAssertEqual(dgc?.r?.count, 6)
+        XCTAssertEqual(dgc?.t?.count, 8)
+    }
 }
+
+private let vaccination = Vaccination(tg: "", vp: "", mp: "", ma: "", dn: 0, sd: 0, dt: Date(), co: "", is: "", ci: "")
+private let recovery = Recovery(tg: "", fr: .init(), df: .init(), du: .init(), co: "", is: "", ci: "")
+private let test = Test(tg: "", tt: "", sc: .init(), tr: "", tc: nil, co: "", is: "", ci: "")
 
 private let secondsPerHour: TimeInterval = 60*60
 private let secondsPerDay: TimeInterval = 24*secondsPerHour
