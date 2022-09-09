@@ -21,10 +21,10 @@
       },
       {
         "package": "CertLogic",
-        "repositoryURL": "git@github.ibmgcloud.net:eGA/dgc-certlogic-ios.git",
+        "repositoryURL": "https://github.com/Digitaler-Impfnachweis/dgc-certlogic-ios-covpass.git",
         "state": {
           "branch": "main",
-          "revision": "ac2a6024eeb0390ed91b5a2dd4b1eac18f320ac8",
+          "revision": "448d9d4d1237cfe3cccfc05483ba12f339df883e",
           "version": null
         }
       },
