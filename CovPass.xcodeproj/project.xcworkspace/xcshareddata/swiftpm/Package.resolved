@@ -21,11 +21,11 @@
       },
       {
         "package": "CertLogic",
-        "repositoryURL": "https://github.com/eu-digital-green-certificates/dgc-certlogic-ios",
+        "repositoryURL": "git@github.ibmgcloud.net:eGA/dgc-certlogic-ios.git",
         "state": {
-          "branch": null,
-          "revision": "448d9d4d1237cfe3cccfc05483ba12f339df883e",
-          "version": "1.3.2"
+          "branch": "main",
+          "revision": "ac2a6024eeb0390ed91b5a2dd4b1eac18f320ac8",
+          "version": null
         }
       },
       {
@@ -51,8 +51,8 @@
         "repositoryURL": "https://github.com/eu-digital-green-certificates/json-logic-swift.git",
         "state": {
           "branch": null,
-          "revision": "3898636b43b62e571849790f74485dd1504ee785",
-          "version": "1.2.3"
+          "revision": "10580f69c911df26736ebf31b4eaf629f2972d10",
+          "version": "1.2.4"
         }
       },
       {
