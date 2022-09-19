@@ -37,7 +37,6 @@ class CertificatesOverviewPersonViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.onBrandAccent70
         setupHeaderView()
         setupActionButton()
         setupCollectionView()
@@ -68,6 +67,8 @@ class CertificatesOverviewPersonViewController: UIViewController {
     }
 
     private func setupHeaderView() {
+        view.backgroundColor = viewModel.backgroundColor
+        collectionView.backgroundColor = viewModel.backgroundColor
         subtTitleLabel.attributedText = viewModel.pageSubtitle.styledAs(.body).colored(.white)
         headerView.attributedTitleText = viewModel.pageTitle.styledAs(.header_2).colored(.white)
         headerView.image = .close
@@ -76,7 +77,6 @@ class CertificatesOverviewPersonViewController: UIViewController {
     }
 
     private func setupCollectionView() {
-        collectionView.backgroundColor = UIColor.onBrandAccent70
         collectionView.clipsToBounds = false
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -90,7 +90,7 @@ class CertificatesOverviewPersonViewController: UIViewController {
     }
 
     private func setupActionButton() {
-        gotoDetailsButton.style = .alternativeWhiteTitle
+        gotoDetailsButton.style = viewModel.manageCertificatesButtonStyle
         gotoDetailsButton.icon = viewModel.manageCertificatesIcon
         gotoDetailsButton.title = viewModel.modalButtonTitle
         gotoDetailsButton.action = viewModel.showDetails

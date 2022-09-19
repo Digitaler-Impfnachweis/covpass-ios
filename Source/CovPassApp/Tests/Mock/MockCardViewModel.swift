@@ -10,23 +10,15 @@ import CovPassUI
 import UIKit
 
 struct MockCardViewModel: CardViewModel {
-    var showNotification: Bool = false
+    let showNotification: Bool = false
+    
+    let reuseIdentifier: String = "\(MockCardViewModel.self)"
+
+    let backgroundColor: UIColor = .black
+
+    let iconTintColor: UIColor = .white
+
+    let textColor: UIColor = .black
     
     var delegate: ViewModelDelegate?
-
-    var reuseIdentifier: String {
-        "\(MockCardViewModel.self)"
-    }
-
-    var backgroundColor: UIColor {
-        .black
-    }
-
-    var iconTintColor: UIColor {
-        return .white
-    }
-
-    var textColor: UIColor {
-        return .black
-    }
 }

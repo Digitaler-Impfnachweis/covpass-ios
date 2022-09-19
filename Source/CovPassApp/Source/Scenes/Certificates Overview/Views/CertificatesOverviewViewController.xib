@@ -29,12 +29,12 @@
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
-                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="555" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="UkJ-ri-sjN">
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="555" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="UkJ-ri-sjN">
                     <rect key="frame" x="0.0" y="157" width="414" height="555"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="1" id="BAA-K7-ha9"/>
-                        <constraint firstAttribute="height" relation="lessThanOrEqual" constant="565" id="Dvn-A5-0jL"/>
+                        <constraint firstAttribute="height" relation="lessThanOrEqual" constant="508" id="Dvn-A5-0jL"/>
                     </constraints>
                     <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="mNC-aH-BF7">
                         <size key="itemSize" width="128" height="128"/>
@@ -53,7 +53,7 @@
                         </collectionViewCell>
                     </cells>
                 </collectionView>
-                <view contentMode="scaleToFill" placeholderIntrinsicWidth="240" placeholderIntrinsicHeight="12" translatesAutoresizingMaskIntoConstraints="NO" id="fNK-Jd-P7z" customClass="DotPageIndicator" customModule="CovPassUI">
+                <view contentMode="scaleToFill" ambiguous="YES" placeholderIntrinsicWidth="240" placeholderIntrinsicHeight="12" translatesAutoresizingMaskIntoConstraints="NO" id="fNK-Jd-P7z" customClass="DotPageIndicator" customModule="CovPassUI">
                     <rect key="frame" x="87" y="728" width="240" height="12"/>
                     <color key="backgroundColor" red="0.023529411760000001" green="0.37254901959999998" blue="0.76862745099999996" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
@@ -73,7 +73,8 @@
                 <constraint firstItem="8FF-gi-glk" firstAttribute="bottom" secondItem="wcE-wM-PY1" secondAttribute="bottom" constant="16" id="3WM-y2-Abb"/>
                 <constraint firstItem="qpg-K1-lgH" firstAttribute="top" secondItem="8FF-gi-glk" secondAttribute="top" constant="16" id="4dj-me-YRu"/>
                 <constraint firstItem="wcE-wM-PY1" firstAttribute="centerX" secondItem="48O-Oh-khi" secondAttribute="centerX" id="9k9-M2-psw"/>
-                <constraint firstItem="UkJ-ri-sjN" firstAttribute="top" secondItem="qpg-K1-lgH" secondAttribute="bottom" constant="47" id="EMq-wj-JNe"/>
+                <constraint firstItem="UkJ-ri-sjN" firstAttribute="top" relation="greaterThanOrEqual" secondItem="qpg-K1-lgH" secondAttribute="bottom" constant="4" id="9zM-GS-exU"/>
+                <constraint firstItem="UkJ-ri-sjN" firstAttribute="top" relation="lessThanOrEqual" secondItem="qpg-K1-lgH" secondAttribute="bottom" constant="44" id="EMq-wj-JNe"/>
                 <constraint firstItem="UkJ-ri-sjN" firstAttribute="leading" secondItem="48O-Oh-khi" secondAttribute="leading" id="Jjb-WV-mo6"/>
                 <constraint firstItem="fNK-Jd-P7z" firstAttribute="bottom" secondItem="UkJ-ri-sjN" secondAttribute="bottom" constant="28" id="Mh8-Vc-2Oz"/>
                 <constraint firstItem="fNK-Jd-P7z" firstAttribute="centerX" secondItem="48O-Oh-khi" secondAttribute="centerX" id="PaD-fF-Akk"/>

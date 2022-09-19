@@ -10,81 +10,37 @@ import CovPassUI
 import UIKit
 
 class CertificateCardViewModelMock: CertificateCardViewModelProtocol {
-    var showNotification = false
-
-    var isBoosted: Bool = false
-
-    var isInvalid: Bool = false
-
-    var showFavorite: Bool = false
-
-    var showTitle: Bool = true
+    let headerSubtitle: String? = nil
     
-    var showAction: Bool = true
+    let showNotification = false
+
+    let isInvalid: Bool = false
+        
+    let reuseIdentifier: String = "\(CertificateCollectionViewCell.self)"
+
+    let backgroundColor: UIColor = .onBrandAccent70
+
+    let title: String = "Vaccination Title"
+
+    let subtitle: String = "subtitle"
+
+    let titleIcon: UIImage = .card
     
-    var reuseIdentifier: String {
-        "\(CertificateCollectionViewCell.self)"
-    }
+    let subtitleIcon: UIImage = .statusFullCircle
 
-    var backgroundColor: UIColor {
-        .onBrandAccent70
-    }
+    let qrCode: UIImage? = .card
 
+    let qrCodeTitle: String? = "QR Code Title"
+
+    let name: String = "Vaccination Name"
+
+    let tintColor: UIColor = .backgroundPrimary
+
+    let iconTintColor: UIColor = .white
+
+    let textColor: UIColor = .black
+    
     var delegate: ViewModelDelegate?
 
-    var title: String {
-        "Vaccination Title"
-    }
-
-    var subtitle: String {
-        "subtitle"
-    }
-
-    var titleIcon: UIImage {
-        .card
-    }
-
-    var isFavorite: Bool = true
-
-    var qrCode: UIImage? {
-        .card
-    }
-
-    var qrCodeTitle: String? {
-        "QR Code Title"
-    }
-
-    var name: String {
-        "Vaccination Name"
-    }
-
-    var actionTitle: String {
-        "Action Title"
-    }
-
-    var actionImage: UIImage {
-        .scan
-    }
-
-    var tintColor: UIColor {
-        .backgroundPrimary
-    }
-
-    var iconTintColor: UIColor {
-        .white
-    }
-
-    var textColor: UIColor {
-        .black
-    }
-
-    var isFullImmunization: Bool = true
-
-    var vaccinationDate: Date?
-
     func onClickAction() {}
-
-    func onClickFavorite() {
-        isFavorite.toggle()
-    }
 }

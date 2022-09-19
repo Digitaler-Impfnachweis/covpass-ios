@@ -16,8 +16,10 @@ protocol CertificatesOverviewPersonViewModelProtocol {
     var pageTitle: String { get }
     var pageSubtitle: String { get }
     var modalButtonTitle: String { get }
+    var manageCertificatesButtonStyle: MainButtonStyle { get }
     var manageCertificatesIcon: UIImage { get }
     var showBadge: Bool { get }
+    var backgroundColor: UIColor { get }
     func showDetails()
     func close()
 }

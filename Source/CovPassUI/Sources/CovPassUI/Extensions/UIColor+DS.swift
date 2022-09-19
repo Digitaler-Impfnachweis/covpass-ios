@@ -57,6 +57,8 @@ public extension UIColor {
 
     static let brandAccent70 = UIColor("BrandAccent70")
 
+    static let brandAccent90 = UIColor("brandAccent90")
+    
     static let brandAccentPurple = UIColor("BrandAccentPurple")
 
     static let brandAccentBlue = UIColor("BrandAccentBlue")
@@ -100,6 +102,8 @@ public extension UIColor {
     static let resultRed = UIColor("ResultRed")
 
     static let resultRedBackground = UIColor("ResultRedBackground")
+    
+    static let statusRedDot = UIColor("StatusRedDot")
 }
 
 private extension UIColor {

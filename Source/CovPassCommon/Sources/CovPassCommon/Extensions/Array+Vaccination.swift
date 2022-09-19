@@ -9,8 +9,10 @@ import Foundation
 
 public extension Array where Element == Vaccination {
     var oldestVaccination: Vaccination? {
-        return sorted {
-            $0.dt < $1.dt
-        }.first
+        sorted { $0.dt < $1.dt }.first
+    }
+    
+    var latestVaccination: Vaccination? {
+        sorted { $0.dt > $1.dt }.first
     }
 }

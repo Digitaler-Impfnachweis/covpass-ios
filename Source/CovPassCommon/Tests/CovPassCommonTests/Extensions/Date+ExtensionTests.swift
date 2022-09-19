@@ -213,6 +213,39 @@ class Date_ExtensionTests: XCTestCase {
         // Then
         XCTAssertTrue(passed24Hours)
     }
+    
+    func test_isOlderThan28Days() {
+        // Given
+        sut = Date()
+
+        // When
+        let isOlderThan28Days = sut.isOlderThan29Days
+
+        // Then
+        XCTAssertFalse(isOlderThan28Days)
+    }
+    
+    func test_isOlderThan28Days_before40Days() {
+        // Given
+        sut = Date().add(days: 40)
+
+        // When
+        let isOlderThan28Days = sut.isOlderThan29Days
+
+        // Then
+        XCTAssertFalse(isOlderThan28Days)
+    }
+    
+    func test_isOlderThan28Days_After40Days() {
+        // Given
+        sut = Date().add(days: -40)
+
+        // When
+        let isOlderThan28Days = sut.isOlderThan29Days
+
+        // Then
+        XCTAssertTrue(isOlderThan28Days)
+    }
 }
 
 private let secondsPerHour: TimeInterval = 60*60

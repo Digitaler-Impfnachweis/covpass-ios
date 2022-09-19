@@ -26,6 +26,6 @@ class NewRegulationsAnnouncementViewControllerSnapshotTests: BaseSnapShotTests {
     }
 
     func testDefault() {
-        verifyView(vc: sut)
+        verifyView(view: sut.view, height: 1000)
     }
 }

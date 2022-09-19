@@ -26,17 +26,10 @@ class CertificateCardViewModelTests: XCTestCase {
 
     private func sut(token: ExtendedCBORWebToken,
                      boosterLogic: BoosterLogicMock = BoosterLogicMock()) -> CertificateCardViewModel {
-        .init(
+        return .init(
             token: token,
-            vaccinations: [],
-            recoveries: [],
-            isFavorite: false,
-            showFavorite: false,
-            showTitle: true,
-            showAction: true,
-            showNotificationIcon: true,
+            holderNeedsMask: true,
             onAction: { _ in },
-            onFavorite: { _ in },
             repository: VaccinationRepositoryMock(),
             boosterLogic: boosterLogic,
             currentDate: .distantFuture
@@ -181,7 +174,7 @@ class CertificateCardViewModelTests: XCTestCase {
         XCTAssertNotNil(qrCode)
     }
 
-    func testTitle_vaccination_1_of_2() throws {
+    func testTitle_vaccination() throws {
         // Given
         let token = try ExtendedCBORWebToken.token1Of2()
         let sut = sut(token: token)
@@ -191,30 +184,6 @@ class CertificateCardViewModelTests: XCTestCase {
 
         // Then
         XCTAssertEqual(title, "Vaccine dose 1 of 2")
-    }
-
-    func testTitle_vaccination_2_of_2() throws {
-        // Given
-        let token = try ExtendedCBORWebToken.token2Of2()
-        let sut = sut(token: token)
-
-        // When
-        let title = sut.title
-
-        // Then
-        XCTAssertEqual(title, "Basic immunisation")
-    }
-
-    func testTitle_vaccination_3_of_2() {
-        // Given
-        let token = CBORWebToken.mockVaccinationCertificate.doseNumber(3)
-        let sut = sut(token: .init(vaccinationCertificate: token, vaccinationQRCodeData: ""))
-
-        // When
-        let title = sut.title
-
-        // Then
-        XCTAssertEqual(title, "Booster vaccination")
     }
 
     func testTitle_expired() {
@@ -279,40 +248,7 @@ class CertificateCardViewModelTests: XCTestCase {
         XCTAssertEqual(title, "Rapid antigen test")
     }
 
-    func testTitle_johnson_and_johnson_2_of_2() {
-        // Given
-        let token = CBORWebToken.mockVaccinationCertificate
-            .doseNumber(2)
-            .seriesOfDoses(2)
-            .medicalProduct(.johnsonjohnson)
-            .extended()
-        let sut = sut(token: token)
-
-        // When
-        let title = sut.title
-
-        // Then
-        XCTAssertEqual(title, "Basic immunisation")
-    }
-
-    func testSubtitle_johnson_and_johnson_2_of_2() {
-        // Given
-        let token = CBORWebToken.mockVaccinationCertificate
-            .doseNumber(2)
-            .seriesOfDoses(2)
-            .medicalProduct(.johnsonjohnson)
-            .mockVaccinationSetDate(.init(timeIntervalSinceReferenceDate: 0))
-            .extended()
-        let sut = sut(token: token)
-
-        // When
-        let subtitle = sut.subtitle
-
-        // Then
-        XCTAssertEqual(subtitle, "24000 month(s) ago")
-    }
-
-    func testSubtitle_vaccination_1_of_2() throws {
+    func testSubtitle_vaccination() throws {
         // Given
         let token = try ExtendedCBORWebToken.token1Of2()
         let sut = sut(token: token)
@@ -322,30 +258,6 @@ class CertificateCardViewModelTests: XCTestCase {
 
         // Then
         XCTAssertEqual(subtitle, "23758 month(s) ago")
-    }
-
-    func testSubtitle_vaccination_2_of_2() throws {
-        // Given
-        let token = try ExtendedCBORWebToken.token2Of2()
-        let sut = sut(token: token)
-
-        // When
-        let subtitle = sut.subtitle
-
-        // Then
-        XCTAssertEqual(subtitle, "23758 month(s) ago")
-    }
-
-    func testSubtitle_vaccination_3_of_2() {
-        // Given
-        let token = CBORWebToken.mockVaccinationCertificate.doseNumber(3)
-        let sut = sut(token: .init(vaccinationCertificate: token, vaccinationQRCodeData: ""))
-
-        // When
-        let subtitle = sut.subtitle
-
-        // Then
-        XCTAssertEqual(subtitle, "723180 day(s) ago")
     }
 
     func testSubtitle_expired() {

@@ -133,4 +133,162 @@ class RuleTests: XCTestCase {
         XCTAssertEqual(invalidationRules.count, 2)
         XCTAssertEqual(invalidationRules.isEmpty, false)
     }
+    
+    func test_isGStatus_rule_2GPlus() {
+        // GIVEN
+        let sut = Rule(identifier: "1", type: RuleType._2GPlus.rawValue, version: "", schemaVersion: "", engine: "", engineVersion: "", certificateType: "", description: [], validFrom: "", validTo: "", affectedString: [], logic: JSON(), countryCode: "1")
+        // WHEN
+        let isGStatusRule = sut.isGStatusRule
+        // THEN
+        XCTAssertTrue(isGStatusRule)
+    }
+    
+    func test_isGStatus_rule_3GPlus() {
+        // GIVEN
+        let sut = Rule(identifier: "1", type: RuleType._3GPlus.rawValue, version: "", schemaVersion: "", engine: "", engineVersion: "", certificateType: "", description: [], validFrom: "", validTo: "", affectedString: [], logic: JSON(), countryCode: "1")
+        // WHEN
+        let isGStatusRule = sut.isGStatusRule
+        // THEN
+        XCTAssertTrue(isGStatusRule)
+    }
+    
+    func test_isGStatus_rule_3G() {
+        // GIVEN
+        let sut = Rule(identifier: "1", type: RuleType._3G.rawValue, version: "", schemaVersion: "", engine: "", engineVersion: "", certificateType: "", description: [], validFrom: "", validTo: "", affectedString: [], logic: JSON(), countryCode: "1")
+        // WHEN
+        let isGStatusRule = sut.isGStatusRule
+        // THEN
+        XCTAssertTrue(isGStatusRule)
+    }
+    
+    func test_isGStatus_rule_2G() {
+        // GIVEN
+        let sut = Rule(identifier: "1", type: RuleType._2G.rawValue, version: "", schemaVersion: "", engine: "", engineVersion: "", certificateType: "", description: [], validFrom: "", validTo: "", affectedString: [], logic: JSON(), countryCode: "1")
+        // WHEN
+        let isGStatusRule = sut.isGStatusRule
+        // THEN
+        XCTAssertTrue(isGStatusRule)
+    }
+    
+    func test_isGStatus_rule_mask() {
+        // GIVEN
+        let sut = Rule(identifier: "1", type: RuleType.mask.rawValue, version: "", schemaVersion: "", engine: "", engineVersion: "", certificateType: "", description: [], validFrom: "", validTo: "", affectedString: [], logic: JSON(), countryCode: "1")
+        // WHEN
+        let isGStatusRule = sut.isGStatusRule
+        // THEN
+        XCTAssertFalse(isGStatusRule)
+    }
+    
+    func test_isGStatus_rule_acceptence() {
+        // GIVEN
+        let sut = Rule(identifier: "1", type: RuleType.acceptence.rawValue, version: "", schemaVersion: "", engine: "", engineVersion: "", certificateType: "", description: [], validFrom: "", validTo: "", affectedString: [], logic: JSON(), countryCode: "1")
+        // WHEN
+        let isGStatusRule = sut.isGStatusRule
+        // THEN
+        XCTAssertFalse(isGStatusRule)
+    }
+    
+    func test_isGStatus_rule_invalidation() {
+        // GIVEN
+        let sut = Rule(identifier: "1", type: RuleType.invalidation.rawValue, version: "", schemaVersion: "", engine: "", engineVersion: "", certificateType: "", description: [], validFrom: "", validTo: "", affectedString: [], logic: JSON(), countryCode: "1")
+        // WHEN
+        let isGStatusRule = sut.isGStatusRule
+        // THEN
+        XCTAssertFalse(isGStatusRule)
+    }
+    
+    func test_gStatusRules() {
+        // GIVEN
+        let rule1 = Rule(identifier: "1", type: RuleType._2GPlus.rawValue, version: "", schemaVersion: "", engine: "", engineVersion: "", certificateType: "", description: [], validFrom: "", validTo: "", affectedString: [], logic: JSON(), countryCode: "1")
+        let rule2 = Rule(identifier: "1", type: RuleType._3GPlus.rawValue, version: "", schemaVersion: "", engine: "", engineVersion: "", certificateType: "", description: [], validFrom: "", validTo: "", affectedString: [], logic: JSON(), countryCode: "1")
+        let rule3 = Rule(identifier: "1", type: RuleType.invalidation.rawValue, version: "", schemaVersion: "", engine: "", engineVersion: "", certificateType: "", description: [], validFrom: "", validTo: "", affectedString: [], logic: JSON(), countryCode: "1")
+        let rule4 = Rule(identifier: "1", type: RuleType.acceptence.rawValue, version: "", schemaVersion: "", engine: "", engineVersion: "", certificateType: "", description: [], validFrom: "", validTo: "", affectedString: [], logic: JSON(), countryCode: "1")
+        let rule5 = Rule(identifier: "1", type: RuleType.mask.rawValue, version: "", schemaVersion: "", engine: "", engineVersion: "", certificateType: "", description: [], validFrom: "", validTo: "", affectedString: [], logic: JSON(), countryCode: "1")
+        let rule6 = Rule(identifier: "1", type: RuleType._2G.rawValue, version: "", schemaVersion: "", engine: "", engineVersion: "", certificateType: "", description: [], validFrom: "", validTo: "", affectedString: [], logic: JSON(), countryCode: "1")
+        let rule7 = Rule(identifier: "1", type: RuleType._3G.rawValue, version: "", schemaVersion: "", engine: "", engineVersion: "", certificateType: "", description: [], validFrom: "", validTo: "", affectedString: [], logic: JSON(), countryCode: "1")
+        let sut = [rule1, rule2, rule3, rule4, rule5, rule6, rule7]
+        // WHEN
+        let gStatusRules = sut.gStatusRules
+        // THEN
+        XCTAssertEqual(gStatusRules.count, 4)
+    }
+    
+    func test_isMask_rule_2GPlus() {
+        // GIVEN
+        let sut = Rule(identifier: "1", type: RuleType._2GPlus.rawValue, version: "", schemaVersion: "", engine: "", engineVersion: "", certificateType: "", description: [], validFrom: "", validTo: "", affectedString: [], logic: JSON(), countryCode: "1")
+        // WHEN
+        let isMaskStatusRule = sut.isMaskStatusRule
+        // THEN
+        XCTAssertFalse(isMaskStatusRule)
+    }
+    
+    func test_isMask_rule_3GPlus() {
+        // GIVEN
+        let sut = Rule(identifier: "1", type: RuleType._3GPlus.rawValue, version: "", schemaVersion: "", engine: "", engineVersion: "", certificateType: "", description: [], validFrom: "", validTo: "", affectedString: [], logic: JSON(), countryCode: "1")
+        // WHEN
+        let isMaskStatusRule = sut.isMaskStatusRule
+        // THEN
+        XCTAssertFalse(isMaskStatusRule)
+    }
+    
+    func test_isMask_rule_3G() {
+        // GIVEN
+        let sut = Rule(identifier: "1", type: RuleType._3G.rawValue, version: "", schemaVersion: "", engine: "", engineVersion: "", certificateType: "", description: [], validFrom: "", validTo: "", affectedString: [], logic: JSON(), countryCode: "1")
+        // WHEN
+        let isMaskStatusRule = sut.isMaskStatusRule
+        // THEN
+        XCTAssertFalse(isMaskStatusRule)
+    }
+    
+    func test_isMask_rule_2G() {
+        // GIVEN
+        let sut = Rule(identifier: "1", type: RuleType._2G.rawValue, version: "", schemaVersion: "", engine: "", engineVersion: "", certificateType: "", description: [], validFrom: "", validTo: "", affectedString: [], logic: JSON(), countryCode: "1")
+        // WHEN
+        let isMaskStatusRule = sut.isMaskStatusRule
+        // THEN
+        XCTAssertFalse(isMaskStatusRule)
+    }
+    
+    func test_isMask_rule_mask() {
+        // GIVEN
+        let sut = Rule(identifier: "MA-DE-0100", type: RuleType.mask.rawValue, version: "", schemaVersion: "", engine: "", engineVersion: "", certificateType: "", description: [], validFrom: "", validTo: "", affectedString: [], logic: JSON(), countryCode: "1")
+        // WHEN
+        let isMaskStatusRule = sut.isMaskStatusRule
+        // THEN
+        XCTAssertTrue(isMaskStatusRule)
+    }
+    
+    func test_isMask_rule_acceptence() {
+        // GIVEN
+        let sut = Rule(identifier: "1", type: RuleType.acceptence.rawValue, version: "", schemaVersion: "", engine: "", engineVersion: "", certificateType: "", description: [], validFrom: "", validTo: "", affectedString: [], logic: JSON(), countryCode: "1")
+        // WHEN
+        let isMaskStatusRule = sut.isMaskStatusRule
+        // THEN
+        XCTAssertFalse(isMaskStatusRule)
+    }
+    
+    func test_isMask_rule_invalidation() {
+        // GIVEN
+        let sut = Rule(identifier: "1", type: RuleType.invalidation.rawValue, version: "", schemaVersion: "", engine: "", engineVersion: "", certificateType: "", description: [], validFrom: "", validTo: "", affectedString: [], logic: JSON(), countryCode: "1")
+        // WHEN
+        let isMaskStatusRule = sut.isMaskStatusRule
+        // THEN
+        XCTAssertFalse(isMaskStatusRule)
+    }
+    
+    func test_maskStatusRules() {
+        // GIVEN
+        let rule1 = Rule(identifier: "1", type: RuleType._2GPlus.rawValue, version: "", schemaVersion: "", engine: "", engineVersion: "", certificateType: "", description: [], validFrom: "", validTo: "", affectedString: [], logic: JSON(), countryCode: "1")
+        let rule2 = Rule(identifier: "1", type: RuleType._3GPlus.rawValue, version: "", schemaVersion: "", engine: "", engineVersion: "", certificateType: "", description: [], validFrom: "", validTo: "", affectedString: [], logic: JSON(), countryCode: "1")
+        let rule3 = Rule(identifier: "1", type: RuleType.invalidation.rawValue, version: "", schemaVersion: "", engine: "", engineVersion: "", certificateType: "", description: [], validFrom: "", validTo: "", affectedString: [], logic: JSON(), countryCode: "1")
+        let rule4 = Rule(identifier: "1", type: RuleType.acceptence.rawValue, version: "", schemaVersion: "", engine: "", engineVersion: "", certificateType: "", description: [], validFrom: "", validTo: "", affectedString: [], logic: JSON(), countryCode: "1")
+        let rule5 = Rule(identifier: "MA-DE-0100", type: RuleType.mask.rawValue, version: "", schemaVersion: "", engine: "", engineVersion: "", certificateType: "", description: [], validFrom: "", validTo: "", affectedString: [], logic: JSON(), countryCode: "1")
+        let rule6 = Rule(identifier: "1", type: RuleType._2G.rawValue, version: "", schemaVersion: "", engine: "", engineVersion: "", certificateType: "", description: [], validFrom: "", validTo: "", affectedString: [], logic: JSON(), countryCode: "1")
+        let rule7 = Rule(identifier: "1", type: RuleType._3G.rawValue, version: "", schemaVersion: "", engine: "", engineVersion: "", certificateType: "", description: [], validFrom: "", validTo: "", affectedString: [], logic: JSON(), countryCode: "1")
+        let sut = [rule1, rule2, rule3, rule4, rule5, rule6, rule7]
+        // WHEN
+        let maskStatusRules = sut.maskStatusRules
+        // THEN
+        XCTAssertEqual(maskStatusRules.count, 1)
+    }
 }

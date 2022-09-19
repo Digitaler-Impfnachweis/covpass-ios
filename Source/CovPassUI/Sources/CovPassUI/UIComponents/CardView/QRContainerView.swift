@@ -65,15 +65,17 @@ public class QRContainerView: XibView {
             updateViews()
         }
     }
+    
+    public var subtitleColorValue: UIColor = .onBrandAccent70
+
+    public var titleColorValue: UIColor = .onBrandAccent70
 
     private var subtitleColor: UIColor {
-        isInvalid ?
-            invalidColor.withAlphaComponent(Constants.alphaValue) :
-            .onBrandAccent70.withAlphaComponent(Constants.alphaValue)
+        isInvalid ? invalidColor : subtitleColorValue
     }
 
     private var titleColor: UIColor {
-        isInvalid ? invalidColor : .onBrandAccent70
+        isInvalid ? invalidColor : titleColorValue
     }
 
     private lazy var invalidColor = UIColor(hexString: "878787")

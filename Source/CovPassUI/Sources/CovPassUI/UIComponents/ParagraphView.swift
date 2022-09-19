@@ -16,14 +16,18 @@ public class ParagraphView: XibView {
     @IBOutlet public var textStackView: UIStackView!
     @IBOutlet public var imageView: UIImageView!
     @IBOutlet public var titleLabel: UILabel!
+    @IBOutlet public var subtitleLabel: UILabel!
     @IBOutlet public var bodyLabel: UILabel!
     @IBOutlet public var bottomBorder: UIView!
+    @IBOutlet public var bottomBorderHeightConstraint: NSLayoutConstraint!
+    @IBOutlet public var bottomBorderLeftConstraint: NSLayoutConstraint!
     @IBOutlet weak var imageContainerView: UIView!
 
     // MARK: - Properties
 
     public var image: UIImage? { didSet { updateView() } }
     public var attributedTitleText: NSAttributedString? { didSet { updateView() } }
+    public var attributedSubtitleText: NSAttributedString? { didSet { updateView() } }
     public var attributedBodyText: NSAttributedString? { didSet { updateView() } }
     public var accessibilityLabelValue: String? { didSet { setupAccessibility() } }
 
@@ -35,6 +39,7 @@ public class ParagraphView: XibView {
         contentView?.layoutMargins = .init(top: .zero, left: .space_24, bottom: .zero, right: .space_24)
         stackView.spacing = .space_24
         bottomBorder.backgroundColor = .onBackground20
+        attributedSubtitleText = nil
     }
 
     // MARK: - Methods
@@ -42,7 +47,13 @@ public class ParagraphView: XibView {
     private func setupAccessibility() {
         titleLabel.isAccessibilityElement = false
         bodyLabel.isAccessibilityElement = false
-        accessibilityLabel = accessibilityLabelValue ?? attributedTitleText?.string 
+        subtitleLabel.isAccessibilityElement = false
+        let alternativeAccessibilityLabelText = [
+            attributedTitleText?.string,
+            attributedSubtitleText?.string
+        ].compactMap { $0 }.joined(separator: "\n")
+        accessibilityLabel = accessibilityLabelValue ??
+            (alternativeAccessibilityLabelText.isEmpty ? nil : alternativeAccessibilityLabelText)
         accessibilityValue = attributedBodyText?.string ?? ""
         isAccessibilityElement = true
         accessibilityTraits = .staticText
@@ -53,6 +64,8 @@ public class ParagraphView: XibView {
         imageContainerView.isHidden = image == nil
         titleLabel.attributedText = attributedTitleText
         titleLabel.isHidden = attributedTitleText.isNilOrEmpty
+        subtitleLabel.attributedText = attributedSubtitleText
+        subtitleLabel.isHidden = attributedSubtitleText.isNilOrEmpty
         bodyLabel.attributedText = attributedBodyText
         bodyLabel.isHidden = attributedBodyText.isNilOrEmpty
 

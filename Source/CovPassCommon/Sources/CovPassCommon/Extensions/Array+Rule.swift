@@ -14,4 +14,8 @@ public extension Array where Element == Rule {
     var invalidationRules: Self { filter(\.isInvalidationRule) }
 
     var acceptenceAndInvalidationRules: Self { filter(\.isAcceptenceOrInvalidationRule) }
+    
+    var gStatusRules: Self { filter(\.isGStatusRule) }
+    
+    var maskStatusRules: Self { filter(\.isMaskStatusRule) }
 }

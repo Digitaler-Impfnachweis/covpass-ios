@@ -7,16 +7,21 @@
 
 import CovPassCommon
 import Foundation
+import PromiseKit
 
 struct CertificateHolderStatusModelMock: CertificateHolderStatusModelProtocol {
     var needsMask = false
-    var fullyImmunized = false
-
-    func holderNeedsMask(_ holder: Name, dateOfBirth: Date?) -> Bool {
-        needsMask
+    var holderIsFullyImmunized = false
+    
+    func holderIsFullyImmunized(_ certificates: [ExtendedCBORWebToken]) -> Bool {
+        holderIsFullyImmunized
     }
 
-    func holderIsFullyImmunized(_ holder: Name, dateOfBirth: Date?) -> Bool {
-        fullyImmunized
+    func holderNeedsMask(_ certificates: [ExtendedCBORWebToken]) -> Bool {
+        needsMask
+    }
+    
+    func holderNeedsMaskAsync(_ certificates: [ExtendedCBORWebToken]) -> Guarantee<Bool> {
+        .value(needsMask)
     }
 }

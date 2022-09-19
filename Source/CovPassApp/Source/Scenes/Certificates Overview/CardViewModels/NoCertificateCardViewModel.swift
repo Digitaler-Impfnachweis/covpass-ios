@@ -15,33 +15,19 @@ struct NoCertificateCardViewModel: NoCertificateCardViewModelProtocol {
 
     var delegate: ViewModelDelegate?
 
-    var reuseIdentifier: String {
-        "\(NoCertificateCollectionViewCell.self)"
-    }
+    let reuseIdentifier: String = "\(NoCertificateCollectionViewCell.self)"
 
-    var backgroundColor: UIColor {
-        .backgroundSecondary20
-    }
+    let backgroundColor: UIColor = .backgroundSecondary20
 
-    var title: String {
-        "vaccination_start_screen_note_title".localized
-    }
+    let title: String = "vaccination_start_screen_note_title".localized
 
-    var subtitle: String {
-        "vaccination_start_screen_note_message".localized
-    }
+    let subtitle: String = "vaccination_start_screen_note_message".localized
 
-    var image: UIImage {
-        .noCertificate
-    }
+    let image: UIImage = .noCertificate
 
-    var iconTintColor: UIColor {
-        return .neutralWhite
-    }
+    let iconTintColor: UIColor = .neutralWhite
 
-    var textColor: UIColor {
-        return .neutralWhite
-    }
+    let textColor: UIColor = .neutralWhite
     
-    var showNotification: Bool = false
+    let showNotification: Bool = false
 }

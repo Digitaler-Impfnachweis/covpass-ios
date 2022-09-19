@@ -80,9 +80,15 @@ public extension Array where Element == DigitalGreenCertificate {
         let recoveries = compactMap { $0.r }.flatMap { $0 }
         let tests = compactMap { $0.t }.flatMap { $0 }
 
-        baseCertificate.v = vaccinations.isEmpty ? nil : vaccinations
-        baseCertificate.r = recoveries.isEmpty ? nil : recoveries
-        baseCertificate.t = tests.isEmpty ? nil : tests
+        if let latestVaccination = vaccinations.latestVaccination {
+            baseCertificate.v = vaccinations.isEmpty ? nil : [latestVaccination]
+        }
+        if let latestRecovery = recoveries.latestRecovery {
+            baseCertificate.r = recoveries.isEmpty ? nil : [latestRecovery]
+        }
+        if let latestTest = tests.latestTest {
+            baseCertificate.t = tests.isEmpty ? nil : [latestTest]
+        }
 
         return baseCertificate
     }

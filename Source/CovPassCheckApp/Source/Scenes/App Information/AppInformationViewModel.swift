@@ -141,13 +141,3 @@ private extension AppInformationEntry {
         )
     }
 }
-
-private extension DCCCertLogic.LogicType {
-    var checkSituationInfo: String {
-        switch self {
-        case .de: return "app_information_title_local_rules_status_DE".localized
-        case .eu: return "app_information_title_local_rules_status_EU".localized
-        case .booster: return ""
-        }
-    }
-}

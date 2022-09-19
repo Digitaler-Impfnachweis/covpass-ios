@@ -44,11 +44,12 @@ public class VaccinationRepositoryMock: VaccinationRepositoryProtocol {
         return Promise.value
     }
 
+    var getCertificatesList: [ExtendedCBORWebToken] = []
     public func getCertificateList() -> Promise<CertificateList> {
         if let error = error {
             return .init(error: error)
         }
-        return Promise.value(CertificateList(certificates: []))
+        return Promise.value(CertificateList(certificates: getCertificatesList))
     }
 
     public func saveCertificateList(_ certList: CertificateList) -> Promise<CertificateList> {

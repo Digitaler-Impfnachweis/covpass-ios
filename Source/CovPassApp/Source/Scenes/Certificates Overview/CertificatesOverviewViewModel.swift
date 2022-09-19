@@ -37,7 +37,12 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
     private let revocationRepository: CertificateRevocationRepositoryProtocol
     private var certLogic: DCCCertLogicProtocol
     private let boosterLogic: BoosterLogicProtocol
-    private var certificateList = CertificateList(certificates: [])
+    private var cellViewModels: [CertificateCardMaskImmunityViewModel] = .init()
+    private var certificateList: CertificateList {
+        didSet {
+            createCellViewModels()
+        }
+    }
     private var lastKnownFavoriteCertificateId: String?
     private var userDefaults: UserDefaultsPersistence
     private let locale: Locale
@@ -64,7 +69,6 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
     var certificatePairsSorted: [CertificatePair] {
         repository.matchedCertificates(for: certificateList).sorted(by: { c, _ -> Bool in c.isFavorite })
     }
-    var certificateViewModels: [CardViewModel] { cardViewModels(for: certificatePairsSorted) }
     var hasCertificates: Bool { certificateList.certificates.count > 0 }
     var accessibilityAddCertificate = Constants.Accessibility.addCertificate
     var accessibilityMoreInformation = Constants.Accessibility.moreInformation
@@ -73,6 +77,9 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
         didSet {
             delegate?.viewModelDidUpdate()
         }
+    }
+    var showMultipleCertificateHolder: Bool {
+        countOfCells() > 1
     }
     
     // MARK: - Lifecycle
@@ -97,6 +104,7 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
         self.boosterLogic = boosterLogic
         self.userDefaults = userDefaults
         self.locale = locale
+        self.certificateList = CertificateList(certificates: [])
     }
     
     // MARK: - Methods
@@ -187,7 +195,6 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
         }.then {
             self.showExpiryAlertIfNeeded()
         }
-        .then(updateDomesticRules)
         .asVoid()
     }
     
@@ -366,6 +373,7 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
         .then {
             self.showRevocationWarningIfNeeded()
         }
+        .then(updateDomesticRules)
         .then {
             self.refresh()
         }
@@ -409,46 +417,6 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
             return .value(payload)
         case let .failure(error):
             return .init(error: error)
-        }
-    }
-    
-    private func cardViewModels(for certificates: [CertificatePair]) -> [CardViewModel] {
-        if certificates.isEmpty {
-            return [NoCertificateCardViewModel()]
-        }
-        return certificates.compactMap { certificatePair in
-            let sortedCertificates = certificatePair.certificates.sortLatest()
-            guard let cert = sortedCertificates.first else { return nil }
-            return CertificateCardViewModel(
-                token: cert,
-                vaccinations: sortedCertificates.vaccinations,
-                recoveries: sortedCertificates.recoveries,
-                isFavorite: certificatePair.isFavorite,
-                showFavorite: certificates.count > 1,
-                showTitle: true,
-                showAction: true,
-                showNotificationIcon: true,
-                onAction: onActionCardView,
-                onFavorite: toggleFavoriteStateForCertificateWithId,
-                repository: repository,
-                boosterLogic: BoosterLogic.create()
-            )
-        }
-    }
-    
-    private func toggleFavoriteStateForCertificateWithId(_ id: String) {
-        firstly {
-            repository.toggleFavoriteStateForCertificateWithIdentifier(id)
-        }
-        .then { isFavorite in
-            self.refresh().map { isFavorite }
-        }
-        .done { isFavorite in
-            self.lastKnownFavoriteCertificateId = isFavorite ? id : nil
-            self.delegate?.viewModelNeedsFirstCertificateVisible()
-        }
-        .catch { [weak self] error in
-            self?.router.showUnexpectedErrorDialog(error)
         }
     }
     
@@ -547,17 +515,15 @@ extension CertificatesOverviewViewModel {
     }
 
     private func showNewRegulationsAnnouncementIfNeeded() -> Guarantee<Void> {
-        return .value
-#warning("TODO: Uncomment this, when the feature is finally merged.")
-//        if userDefaults.newRegulationsOnboardingScreenWasShown {
-//            return .value
-//        }
-//        return router
-//            .showNewRegulationsAnnouncement()
-//            .ensure {
-//                self.userDefaults.newRegulationsOnboardingScreenWasShown = true
-//            }
-//            .recover { _ in () }
+        if userDefaults.newRegulationsOnboardingScreenWasShown {
+            return .value
+        }
+        return router
+            .showNewRegulationsAnnouncement()
+            .ensure {
+                self.userDefaults.newRegulationsOnboardingScreenWasShown = true
+            }
+            .recover { _ in () }
     }
 }
 
@@ -666,5 +632,38 @@ extension CertificatesOverviewViewModel {
             message: "revocation_dialog_single".localized,
             actions: [action],
             style: .alert)
+    }
+}
+
+extension CertificatesOverviewViewModel {
+    
+    func countOfCells() -> Int {
+        max(certificateList.certificates.partitionedByOwner.count, 1)
+    }
+    
+    func viewModel(for row: Int) -> CardViewModel {
+        if certificateList.certificates.isEmpty {
+            return NoCertificateCardViewModel()
+        }
+        return cellViewModels[row]
+    }
+    
+    private func createCellViewModels() {
+        cellViewModels = []
+        let certificatesPerPerson = certificateList.certificates.partitionedByOwner
+        certificatesPerPerson.forEach { certificates in
+            let sortedCertificates = certificates.sortLatest()
+            guard let cert = sortedCertificates.first else { return }
+            let viewModel = CertificateCardMaskImmunityViewModel(
+                token: cert,
+                tokens: sortedCertificates,
+                onAction: onActionCardView,
+                certificateHolderStatusModel: certificateHolderStatusModel,
+                repository: repository,
+                boosterLogic: boosterLogic
+            )
+            
+            cellViewModels.append(viewModel)
+        }
     }
 }

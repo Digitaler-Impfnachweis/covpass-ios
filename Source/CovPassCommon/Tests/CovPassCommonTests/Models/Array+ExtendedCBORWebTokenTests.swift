@@ -1387,7 +1387,7 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
         // Then
         XCTAssertEqual(tokens.count, 1)
     }
-
+    
     func testFilterByNameDateOfBirth_dob_is_nil() {
         // Given
         var token1Owner1 = CBORWebToken.mockVaccinationCertificate
@@ -1411,6 +1411,68 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
 
         // Then
         XCTAssertEqual(tokens.count, 1)
+    }
+    
+    func test_sortLatestRecoveries() {
+        // Given
+        let token1r = CBORWebToken.mockRecoveryCertificate
+            .mockRecoverySetDate(Date() - 1)
+            .extended(vaccinationQRCodeData: "1r")
+        let token2r = CBORWebToken.mockRecoveryCertificate
+            .mockRecoverySetDate(Date() - 3)
+            .extended(vaccinationQRCodeData: "2r")
+        let token1v = CBORWebToken.mockVaccinationCertificate
+            .mockVaccinationSetDate(Date() + 1)
+            .extended(vaccinationQRCodeData: "1v")
+        let token1t = CBORWebToken.mockTestCertificate
+            .mockTestSetDate(Date() - 1)
+            .extended(vaccinationQRCodeData: "1t")
+        let sut = [
+            token1r,
+            token2r,
+            token1v,
+            token1t
+        ]
+
+        // When
+        let tokens = sut.sortLatestRecoveries
+
+        // Then
+        XCTAssertEqual(tokens.count, 2)
+        XCTAssertEqual(tokens.first?.vaccinationQRCodeData, "1r")
+        XCTAssertEqual(tokens.last?.vaccinationQRCodeData, "2r")
+    }
+    
+    func test_latestRecovery() {
+        // Given
+        let token1r = CBORWebToken.mockRecoveryCertificate
+            .mockRecoverySetDate(Date() - 1)
+            .mockRecoveryUVCI("1r")
+            .extended(vaccinationQRCodeData: "1r")
+        let token2r = CBORWebToken.mockRecoveryCertificate
+            .mockRecoverySetDate(Date() - 3)
+            .mockRecoveryUVCI("2r")
+            .extended(vaccinationQRCodeData: "2r")
+        let token1v = CBORWebToken.mockVaccinationCertificate
+            .mockVaccinationSetDate(Date() + 1)
+            .mockVaccinationUVCI("1v")
+            .extended(vaccinationQRCodeData: "1v")
+        let token1t = CBORWebToken.mockTestCertificate
+            .mockTestSetDate(Date() - 1)
+            .mockTestUVCI("1t")
+            .extended(vaccinationQRCodeData: "1t")
+        let sut = [
+            token1r,
+            token2r,
+            token1v,
+            token1t
+        ]
+
+        // When
+        let latestRecovery = sut.latestRecovery
+
+        // Then
+        XCTAssertEqual(latestRecovery?.ci, "1r")
     }
 }
 

@@ -146,9 +146,9 @@ public enum MainButtonStyle {
             return .onBackground20
         case .tertiary:
             return .clear
-        case .plain:
+        case .plain, .alternativeWhiteTitle:
             return .clear
-        case .alternative, .alternativeWhiteTitle:
+        case .alternative:
             return .brandBase
         }
     }

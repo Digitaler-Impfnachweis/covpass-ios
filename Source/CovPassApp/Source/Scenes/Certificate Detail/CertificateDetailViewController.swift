@@ -38,7 +38,10 @@ class CertificateDetailViewController: UIViewController {
     @IBOutlet var nameTransliteratedView: ParagraphView!
     @IBOutlet var birtdateView: ParagraphView!
     @IBOutlet var scanHintView: HintView!
-
+    @IBOutlet var immunizationStatusView: ParagraphView!
+    @IBOutlet var maskStatusView: ParagraphView!
+    @IBOutlet var maskFaqLinkLabel: LinkLabel!
+    
     // MARK: - Properties
 
     private(set) var viewModel: CertificateDetailViewModelProtocol
@@ -77,6 +80,17 @@ class CertificateDetailViewController: UIViewController {
         setupScanHintView()
         setupCertificates()
         setupNavigationBar()
+        setupStatusView()
+    }
+
+    private func setupStatusView() {
+        maskFaqLinkLabel.attributedText = viewModel.maskFaqLink.styledAs(.body)
+        maskStatusView.setup(with: viewModel.maskStatusViewModel)
+        maskStatusView.bottomBorderLeftConstraint.constant = -.space_6
+        maskStatusView.bottomBorder.backgroundColor = .neutralWhite
+        immunizationStatusView.setup(with: viewModel.immunizationStatusViewModel)
+        immunizationStatusView.bottomBorder.isHidden = true
+        immunizationStatusView.bottomBorder.layoutMargins.bottom = .space_24
     }
 
     private func setupNavigationBar() {
@@ -121,9 +135,11 @@ class CertificateDetailViewController: UIViewController {
     }
 
     private func setupImmunizationView() {
-        immunizationContainerView.layoutMargins.top = .space_24
-        immunizationContainerView.layoutMargins.bottom = .space_24
-        immunizationContainerView.backgroundColor = .neutralWhite
+        immunizationContainerView.isHidden = viewModel.immunizationDetailsHidden
+        guard !viewModel.immunizationDetailsHidden else { return }
+        immunizationView.layoutMargins.left = .space_7
+        immunizationView.layoutMargins.top = .space_24
+        immunizationView.backgroundColor = .neutralWhite
         immunizationView.stackView.alignment = .top
         immunizationView.bottomBorder.isHidden = true
         immunizationView.image = viewModel.immunizationIcon
@@ -132,7 +148,7 @@ class CertificateDetailViewController: UIViewController {
         immunizationView.layoutMargins.bottom = .space_24
 
         immunizationButton.title = viewModel.immunizationButton
-
+        immunizationButton.isHidden = true
         immunizationButton.action = { [weak self] in
             self?.viewModel.immunizationButtonTapped()
         }
@@ -249,5 +265,24 @@ extension CertificateDetailViewController: ViewModelDelegate {
 
     func viewModelUpdateDidFailWithError(_: Error) {
         // already handled in ViewModel
+    }
+}
+
+private extension ParagraphView {
+    func setup(with viewModel: CertificateHolderImmunizationStatusViewModelProtocol) {
+        layoutMargins.top = .space_24
+        layoutMargins.left = .space_7
+        attributedTitleText = viewModel
+            .title
+            .styledAs(.header_3)
+        attributedSubtitleText = viewModel
+            .subtitle?
+            .styledAs(.header_3)
+            .colored(.onBackground80)
+        attributedBodyText = viewModel
+            .description
+            .styledAs(.body)
+            .colored(.onBackground80)
+        image = viewModel.icon
     }
 }

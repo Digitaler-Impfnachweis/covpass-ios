@@ -30,7 +30,9 @@ class CertificatesOverviewPersonViewModel: CertificatesOverviewPersonViewModelPr
     var certificateViewModels: [CardViewModel] { cardViewModels(for: certificates) }
     var showBadge: Bool { certificateViewModels.contains(where:\.showNotification) }
     var manageCertificatesIcon: UIImage { showBadge ? .manageNotification : .manage }
+    var manageCertificatesButtonStyle: MainButtonStyle { .alternativeWhiteTitle }
     var dotPageIndicatorIsHidden: Bool { certificateViewModels.count == 1 }
+    var backgroundColor: UIColor { holderNeedsMask ? .onBrandAccent70 : .brandAccent90 }
     private let repository: VaccinationRepositoryProtocol
     private let boosterLogic: BoosterLogicProtocol
     private var certificates: [ExtendedCBORWebToken]
@@ -40,12 +42,22 @@ class CertificatesOverviewPersonViewModel: CertificatesOverviewPersonViewModelPr
     private var selectedCertificateIndex: Int = 0
     private var certificateOwnerName: String { selectedCertificate.vaccinationCertificate.hcert.dgc.nam.fullName }
     private var selectedCertificate: ExtendedCBORWebToken { certificatesToShow[selectedCertificateIndex] }
-    
+    private let certificateHolderStatusModel: CertificateHolderStatusModelProtocol
+    private var certificate: CBORWebToken { token.vaccinationCertificate }
+    private var token: ExtendedCBORWebToken {
+        guard let latestCertificate = certificates.sortLatest().first else {
+            fatalError("This scene withouth any certificate makes no sense")
+        }
+        return latestCertificate
+    }
+    private var holderNeedsMask: Bool
+
     // MARK: - Lifecycle
     
     init(router: CertificatesOverviewPersonRouterProtocol,
          repository: VaccinationRepositoryProtocol,
          boosterLogic: BoosterLogicProtocol,
+         certificateHolderStatusModel: CertificateHolderStatusModelProtocol,
          certificates: [ExtendedCBORWebToken],
          resolver: Resolver<CertificateDetailSceneResult>) {
         if certificates.isEmpty {
@@ -54,7 +66,9 @@ class CertificatesOverviewPersonViewModel: CertificatesOverviewPersonViewModelPr
         self.router = router
         self.repository = repository
         self.boosterLogic = boosterLogic
+        self.certificateHolderStatusModel = certificateHolderStatusModel
         self.certificates = certificates
+        self.holderNeedsMask = certificateHolderStatusModel.holderNeedsMask(certificates)
         self.certificatesToShow = certificates.filterFirstOfAllTypes
         self.resolver = resolver
         self.pageSubtitle = String(format: Constants.Keys.modalSubline, certificatesToShow.count)
@@ -65,15 +79,8 @@ class CertificatesOverviewPersonViewModel: CertificatesOverviewPersonViewModelPr
     private func cardViewModels(for certificates: [ExtendedCBORWebToken]) -> [CardViewModel] {
         certificatesToShow.map { cert in
             CertificateCardViewModel(token: cert,
-                                     vaccinations: certificates.vaccinations,
-                                     recoveries: certificates.recoveries,
-                                     isFavorite: false,
-                                     showFavorite: false,
-                                     showTitle: false,
-                                     showAction: false,
-                                     showNotificationIcon: false,
+                                     holderNeedsMask: holderNeedsMask,
                                      onAction: showCertificate,
-                                     onFavorite: { _ in },
                                      repository: repository,
                                      boosterLogic: boosterLogic)
         }

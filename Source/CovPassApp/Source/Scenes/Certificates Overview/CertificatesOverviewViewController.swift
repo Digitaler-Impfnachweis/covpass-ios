@@ -74,8 +74,8 @@ class CertificatesOverviewViewController: UIViewController {
 
     private func setupDotIndicator() {
         dotPageIndicator.delegate = self
-        dotPageIndicator.numberOfDots = viewModel.certificateViewModels.count
-        dotPageIndicator.isHidden = viewModel.certificateViewModels.count == 1
+        dotPageIndicator.numberOfDots = viewModel.countOfCells()
+        dotPageIndicator.isHidden = !viewModel.showMultipleCertificateHolder
     }
 
     private func setupHeaderView() {
@@ -101,7 +101,7 @@ class CertificatesOverviewViewController: UIViewController {
         layout.scrollDirection = .horizontal
         collectionView.collectionViewLayout = layout
         collectionView.register(UINib(nibName: "\(NoCertificateCollectionViewCell.self)", bundle: Bundle.uiBundle), forCellWithReuseIdentifier: "\(NoCertificateCollectionViewCell.self)")
-        collectionView.register(UINib(nibName: "\(CertificateCollectionViewCell.self)", bundle: Bundle.uiBundle), forCellWithReuseIdentifier: "\(CertificateCollectionViewCell.self)")
+        collectionView.register(UINib(nibName: "\(CertificateMaskImmunityCollectionViewCell.self)", bundle: Bundle.uiBundle), forCellWithReuseIdentifier: "\(CertificateMaskImmunityCollectionViewCell.self)")
         collectionView.showsHorizontalScrollIndicator = false
     }
 
@@ -120,10 +120,9 @@ class CertificatesOverviewViewController: UIViewController {
 
     private func reloadCollectionView() {
         collectionView.reloadData()
-        dotPageIndicator.numberOfDots = viewModel.certificateViewModels.count
-        let hasOnlyOneCertificate = viewModel.certificateViewModels.count == 1
-        dotPageIndicator.isHidden = hasOnlyOneCertificate
-        collectionView.isScrollEnabled = !hasOnlyOneCertificate
+        dotPageIndicator.numberOfDots = viewModel.countOfCells()
+        dotPageIndicator.isHidden = !viewModel.showMultipleCertificateHolder
+        collectionView.isScrollEnabled = viewModel.showMultipleCertificateHolder
     }
 }
 
@@ -135,17 +134,17 @@ extension CertificatesOverviewViewController: UICollectionViewDataSource {
     }
 
     public func collectionView(_: UICollectionView, numberOfItemsInSection _: Int) -> Int {
-        viewModel.certificateViewModels.count
+        viewModel.countOfCells()
     }
 
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard viewModel.certificateViewModels.count > indexPath.row else { return UICollectionViewCell() }
-        let vm = viewModel.certificateViewModels[indexPath.row]
+        guard viewModel.countOfCells() > indexPath.row else { return UICollectionViewCell() }
+        let vm = viewModel.viewModel(for: indexPath.row)
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: vm.reuseIdentifier, for: indexPath) as? CardCollectionViewCell else { return UICollectionViewCell() }
         cell.viewModel = vm
         cell.viewModel?.delegate = cell
-        (cell as? CertificateCollectionViewCell)?.contentStackView.layoutMargins.top = 20
-        (cell as? CertificateCollectionViewCell)?.contentStackView.layoutMargins.bottom = 0
+        (cell as? CertificateMaskImmunityCollectionViewCell)?.contentStackView.layoutMargins.top = 20
+        (cell as? CertificateMaskImmunityCollectionViewCell)?.contentStackView.layoutMargins.bottom = 0
         return cell
     }
 }

@@ -11,11 +11,9 @@ import Foundation
 extension CertificateHolderStatusModel {
     init?() {
         let dccCertLogic = DCCCertLogic.create()
-        let vaccinationRepository = VaccinationRepository.create()
 
         self.init(
-            dccCertLogic: dccCertLogic,
-            vaccinationRepository: vaccinationRepository
+            dccCertLogic: dccCertLogic
         )
     }
 }

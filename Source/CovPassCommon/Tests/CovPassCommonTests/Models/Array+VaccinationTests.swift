@@ -24,13 +24,20 @@ class ArrayVaccinationTests: XCTestCase {
     override func tearDownWithError() throws {
         sut = nil
     }
-
-
+    
     func testOldestVaccination() {
         // WHEN
         let oldestVaccination = sut.oldestVaccination
         
         // THEN
         XCTAssertEqual(oldestVaccination?.ci, "3")
+    }
+    
+    func testLatestVaccination() {
+        // WHEN
+        let latestVaccination = sut.latestVaccination
+        
+        // THEN
+        XCTAssertEqual(latestVaccination?.ci, "4")
     }
 }

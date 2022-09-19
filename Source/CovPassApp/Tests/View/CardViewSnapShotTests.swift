@@ -26,17 +26,10 @@ class CardViewSnapShotTests: BaseSnapShotTests {
             boosterRepoMock.boosterCandidates = [boosterCandidate]
         }
         let viewModel = CertificateCardViewModel(token: certificate,
-                                                 vaccinations: [],
-                                                 recoveries: [],
-                                                 isFavorite: false,
-                                                 showFavorite: false,
-                                                 showTitle: true,
-                                                 showAction: true,
-                                                 showNotificationIcon: true,
+                                                 holderNeedsMask: true,
                                                  onAction: { _ in },
-                                                 onFavorite: { _ in },
                                                  repository: vacinationRepoMock,
-                                                 boosterLogic: boosterRepoMock )
+                                                 boosterLogic: boosterRepoMock)
         let view = UINib(nibName: "CertificateCollectionViewCell", bundle: .uiBundle).instantiate(withOwner: nil).first as! CertificateCollectionViewCell
         let viewController = UIViewController()
         viewController.view.addSubview(view)
@@ -47,16 +40,7 @@ class CardViewSnapShotTests: BaseSnapShotTests {
         
         return view
     }
-    
-    func testBoosterNotification() throws {
-        let cert: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended()
-        cert.vaccinationCertificate.hcert.dgc.v!.first!.dn = 3
-        cert.vaccinationCertificate.hcert.dgc.v!.first!.sd = 1
-        cert.vaccinationCertificate.hcert.dgc.v!.first!.dt = try XCTUnwrap(Calendar.current.date(byAdding: .day, value: -489, to: Date()))
-        let sut = try configureSut(certificate: cert)
-        verifyView(view: sut)
-    }
-    
+
     func testBoosterNotification_test_certificate () throws {
         let cert: ExtendedCBORWebToken = CBORWebToken.mockTestCertificate.extended()
         let sut = try configureSut(certificate: cert, asBooster: true)
@@ -78,14 +62,4 @@ class CardViewSnapShotTests: BaseSnapShotTests {
         let sut = try configureSut(certificate: cert)
         verifyView(view: sut)
     }
-
-    func testBasicImmunizationNotification() throws {
-        let cert: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended()
-        cert.vaccinationCertificate.hcert.dgc.v!.first!.dn = 2
-        cert.vaccinationCertificate.hcert.dgc.v!.first!.sd = 2
-        cert.vaccinationCertificate.hcert.dgc.v!.first!.dt = try XCTUnwrap(Calendar.current.date(byAdding: .day, value: -489, to: Date()))
-        let sut = try configureSut(certificate: cert)
-        verifyView(view: sut)
-    }
-    
 }

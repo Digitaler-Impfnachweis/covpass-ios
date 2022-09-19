@@ -11,6 +11,7 @@ import CovPassUI
 import UIKit
 
 final class CertificateDetailViewModelMock: CertificateDetailViewModelProtocol {
+   
     var router: CertificateDetailRouterProtocol = CertificateDetailRouterMock()
     var delegate: ViewModelDelegate?
     var favoriteIcon: UIImage?
@@ -22,6 +23,7 @@ final class CertificateDetailViewModelMock: CertificateDetailViewModelProtocol {
     var immunizationIcon: UIImage?
     var immunizationTitle = ""
     var immunizationBody = ""
+    var immunizationHeader = ""
     var items: [CertificateItem] = []
     var showBoosterNotification = false
     var showScanHint = false
@@ -56,6 +58,10 @@ final class CertificateDetailViewModelMock: CertificateDetailViewModelProtocol {
     }
     var showRecoveryExpiryReissueIsNewBadgeValues: [Bool] = []
     var accessibilityBackToStart: String = "backToStart"
+    var immunizationStatusViewModel: CertificateHolderImmunizationStatusViewModelProtocol = CertificateHolderImmunizationStatusViewModelMock()
+    var maskStatusViewModel: CertificateHolderImmunizationStatusViewModelProtocol = CertificateHolderImmunizationStatusViewModelMock()
+    var immunizationDetailsHidden: Bool = false
+    var maskFaqLink: String = "#Mehr Informationen::https://www.digitaler-impfnachweis-app.de/faq/#die-aktuell-h-ufigsten-fragen#"
     func showRecoveryExpiryReissueIsNewBadge(index: Int) -> Bool {
         if index < showRecoveryExpiryReissueIsNewBadgeValues.count {
             return showRecoveryExpiryReissueIsNewBadgeValues[index]

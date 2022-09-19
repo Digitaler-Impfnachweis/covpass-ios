@@ -47,22 +47,17 @@ class CertificateCollectionViewCellTests: XCTestCase {
 
     func testLayoutSubviews() {
         sut.layoutSubviews()
-
         XCTAssertEqual(sut.contentView.layer.shadowPath, UIBezierPath(roundedRect: sut.containerView.frame, cornerRadius: sut.containerView.layer.cornerRadius).cgPath)
     }
 
     func testUpdateViews() {
         sut.viewModelDidUpdate()
-
         XCTAssertEqual(sut.containerView.backgroundColor, viewModel?.backgroundColor)
-
         XCTAssertEqual(sut.qrContainerView.image, viewModel.qrCode)
         XCTAssertEqual(sut.qrContainerView.layoutMargins, .init(top: .zero, left: .zero, bottom: .space_18, right: .zero))
         XCTAssertFalse(sut.qrContainerView.isHidden)
         XCTAssertFalse(sut.qrContainerView.titleLabel.isHidden)
         XCTAssertEqual(sut.titleView.backgroundColor, .clear)
-
-        XCTAssertEqual(sut.actionView.tintColor, .neutralWhite)
     }
 
     // MARK: - Mock Data

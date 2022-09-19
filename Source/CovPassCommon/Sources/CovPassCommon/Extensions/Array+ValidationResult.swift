@@ -15,9 +15,17 @@ public extension Array where Element == ValidationResult {
     var openResults: [ValidationResult] {
         filter { $0.result == .open }
     }
-
+    
+    var passedResults: [ValidationResult] {
+        filter { $0.result == .passed }
+    }
+    
     var filterAcceptanceRules: Self {
         return filter { $0.rule?.ruleType == .acceptence }
+    }
+    
+    var filterAcceptanceAndInvalidationRules: Self {
+        return filter{ $0.rule?.isAcceptenceOrInvalidationRule ?? false }
     }
     
     func result(ofRule identifier: String) -> Result? {

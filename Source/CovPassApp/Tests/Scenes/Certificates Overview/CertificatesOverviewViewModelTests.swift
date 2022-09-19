@@ -37,6 +37,8 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         certificates: [ExtendedCBORWebToken] = [],
         locale: Locale = .current
     ) {
+        var certificateHolderStatusModel: CertificateHolderStatusModelMock = CertificateHolderStatusModelMock()
+        certificateHolderStatusModel.needsMask = true
         vaccinationRepository.certificates = certificates
         sut = CertificatesOverviewViewModel(
             router: router,
@@ -47,7 +49,7 @@ class CertificatesOverviewViewModelTests: XCTestCase {
             userDefaults: userDefaults,
             locale: locale,
             pdfExtractor: pdfExtrator,
-            certificateHolderStatusModel: CertificateHolderStatusModelMock()
+            certificateHolderStatusModel: certificateHolderStatusModel
         )
         sut.delegate = delegate
     }
@@ -76,22 +78,21 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         _ = sut.refresh()
         RunLoop.current.run(for: 0.1)
         
-        guard let model = (sut.certificateViewModels.first as? CertificateCardViewModelProtocol) else {
+        guard let model = (sut.viewModel(for: 0) as? CertificateCardViewModelProtocol) else {
             XCTFail("Model can not be extracted")
             return
         }
         
         // THEN
-        XCTAssertEqual("Display certificates", model.actionTitle)
         XCTAssertEqual("Doe John 1", model.name)
         XCTAssertEqual(.neutralWhite, model.textColor)
         XCTAssertEqual(.onBrandAccent70, model.backgroundColor)
         XCTAssertEqual(.neutralWhite, model.tintColor)
-        XCTAssertEqual(.detailStatusTestInverse, model.titleIcon)
-        XCTAssertEqual("PCR test", model.title)
-        XCTAssertEqual("8995 hour(s) ago", model.subtitle)
+        XCTAssertEqual(.statusMaskRequiredCircle, model.titleIcon)
+        XCTAssertEqual(.iconRed, model.subtitleIcon)
+        XCTAssertEqual("Mask obligation", model.title)
+        XCTAssertEqual("", model.subtitle)
         XCTAssertEqual(false, model.isInvalid)
-        XCTAssertEqual(false, model.isFavorite)
     }
     
     func testTestCertificateNotPCR() throws {
@@ -107,22 +108,21 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         _ = sut.refresh()
         RunLoop.current.run(for: 0.1)
         
-        guard let model = (sut.certificateViewModels.first as? CertificateCardViewModelProtocol) else {
+        guard let model = (sut.viewModel(for: 0) as? CertificateCardViewModelProtocol) else {
             XCTFail("Model can not be extracted")
             return
         }
         
         // THEN
-        XCTAssertEqual("Display certificates", model.actionTitle)
         XCTAssertEqual("Doe John 1", model.name)
         XCTAssertEqual(.neutralWhite, model.textColor)
         XCTAssertEqual(.onBrandAccent70, model.backgroundColor)
         XCTAssertEqual(.neutralWhite, model.tintColor)
-        XCTAssertEqual(.detailStatusTestInverse, model.titleIcon)
-        XCTAssertEqual("Rapid antigen test", model.title)
-        XCTAssertEqual("8995 hour(s) ago", model.subtitle)
+        XCTAssertEqual(.statusMaskRequiredCircle, model.titleIcon)
+        XCTAssertEqual(.iconRed, model.subtitleIcon)
+        XCTAssertEqual("Mask obligation", model.title)
+        XCTAssertEqual("", model.subtitle)
         XCTAssertEqual(false, model.isInvalid)
-        XCTAssertEqual(false, model.isFavorite)
     }
     
     func testVaccinationCertificate() throws {
@@ -138,20 +138,19 @@ class CertificatesOverviewViewModelTests: XCTestCase {
 
         // THEN
         wait(for: [delegate.viewModelDidUpdateExpectation], timeout: 1)
-        guard let model = (sut.certificateViewModels.first as? CertificateCardViewModelProtocol) else {
+        guard let model = (sut.viewModel(for: 0) as? CertificateCardViewModelProtocol) else {
             XCTFail("Model can not be extracted")
             return
         }
-        XCTAssertEqual("Display certificates", model.actionTitle)
         XCTAssertEqual("Doe John 1", model.name)
         XCTAssertEqual(.neutralWhite, model.textColor)
         XCTAssertEqual(.onBrandAccent70, model.backgroundColor)
         XCTAssertEqual(.neutralWhite, model.tintColor)
-        XCTAssertEqual(.statusFullDetail, model.titleIcon)
-        XCTAssertEqual("Basic immunisation", model.title)
-        XCTAssertEqual("12 month(s) ago", model.subtitle)
+        XCTAssertEqual(.statusMaskRequiredCircle, model.titleIcon)
+        XCTAssertEqual(.iconRed, model.subtitleIcon)
+        XCTAssertEqual("Mask obligation", model.title)
+        XCTAssertEqual("", model.subtitle)
         XCTAssertEqual(false, model.isInvalid)
-        XCTAssertEqual(false, model.isFavorite)
     }
     
     func testVaccinationCertificatePartly() throws {
@@ -168,20 +167,19 @@ class CertificatesOverviewViewModelTests: XCTestCase {
 
         // THEN
         wait(for: [delegate.viewModelDidUpdateExpectation], timeout: 1)
-        guard let model = (sut.certificateViewModels.first as? CertificateCardViewModelProtocol) else {
+        guard let model = (sut.viewModel(for: 0) as? CertificateCardViewModelProtocol) else {
             XCTFail("Model can not be extracted")
             return
         }
-        XCTAssertEqual("Display certificates", model.actionTitle)
         XCTAssertEqual("Doe John 1", model.name)
         XCTAssertEqual(.neutralWhite, model.textColor)
         XCTAssertEqual(.onBrandAccent70, model.backgroundColor)
         XCTAssertEqual(.neutralWhite, model.tintColor)
-        XCTAssertEqual(.startStatusPartial, model.titleIcon)
-        XCTAssertEqual("Vaccine dose 1 of 2", model.title)
-        XCTAssertEqual("12 month(s) ago", model.subtitle)
+        XCTAssertEqual(.statusMaskRequiredCircle, model.titleIcon)
+        XCTAssertEqual(.iconRed, model.subtitleIcon)
+        XCTAssertEqual("Mask obligation", model.title)
+        XCTAssertEqual("", model.subtitle)
         XCTAssertEqual(false, model.isInvalid)
-        XCTAssertEqual(false, model.isFavorite)
     }
     
     func testRecoveryCertificate() throws {
@@ -196,22 +194,21 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         _ = sut.refresh()
         RunLoop.current.run(for: 0.1)
         
-        guard let model = (sut.certificateViewModels.first as? CertificateCardViewModelProtocol) else {
+        guard let model = (sut.viewModel(for: 0) as? CertificateCardViewModelProtocol) else {
             XCTFail("Model can not be extracted")
             return
         }
         
         // THEN
-        XCTAssertEqual("Display certificates", model.actionTitle)
         XCTAssertEqual("Doe John 1", model.name)
         XCTAssertEqual(.neutralWhite, model.textColor)
         XCTAssertEqual(.onBrandAccent70, model.backgroundColor)
         XCTAssertEqual(.neutralWhite, model.tintColor)
-        XCTAssertEqual(.statusFullDetail, model.titleIcon)
-        XCTAssertEqual("Recovery", model.title)
-        XCTAssertEqual("3 month(s) ago", model.subtitle)
+        XCTAssertEqual(.statusMaskRequiredCircle, model.titleIcon)
+        XCTAssertEqual(.iconRed, model.subtitleIcon)
+        XCTAssertEqual("Mask obligation", model.title)
+        XCTAssertEqual("", model.subtitle)
         XCTAssertEqual(false, model.isInvalid)
-        XCTAssertEqual(false, model.isFavorite)
     }
     
     func testRecoveryCertificateInvalid() {
@@ -228,24 +225,21 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         _ = sut.refresh()
         RunLoop.current.run(for: 0.1)
         
-        guard let model = (sut.certificateViewModels.first as? CertificateCardViewModelProtocol) else {
+        guard let model = (sut.viewModel(for: 0) as? CertificateCardViewModelProtocol) else {
             XCTFail("Model can not be extracted")
             return
         }
         
         // THEN
-        XCTAssertEqual("EU Digital COVID Certificate", model.title)
-        XCTAssertEqual("Invalid", model.subtitle)
-        XCTAssertEqual("Display certificates", model.actionTitle)
         XCTAssertEqual("Doe John 1", model.name)
         XCTAssertEqual(.neutralWhite, model.textColor)
         XCTAssertEqual(.onBackground40, model.backgroundColor)
         XCTAssertEqual(.neutralWhite, model.tintColor)
-        XCTAssertEqual(.expired, model.titleIcon)
-        XCTAssertEqual("EU Digital COVID Certificate", model.title)
-        XCTAssertEqual("Invalid", model.subtitle)
+        XCTAssertEqual(.statusMaskInvalidCircle, model.titleIcon)
+        XCTAssertEqual(.statusInvalidCircle, model.subtitleIcon)
+        XCTAssertEqual("No valid certificate", model.title)
+        XCTAssertEqual("No valid certificate", model.subtitle)
         XCTAssertEqual(true, model.isInvalid)
-        XCTAssertEqual(false, model.isFavorite)
     }
     
     func testRecoveryCertificateInvalidNotShownOnce() {
@@ -262,24 +256,21 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         _ = sut.refresh()
         RunLoop.current.run(for: 0.1)
         
-        guard let model = (sut.certificateViewModels.first as? CertificateCardViewModelProtocol) else {
+        guard let model = (sut.viewModel(for: 0) as? CertificateCardViewModelProtocol) else {
             XCTFail("Model can not be extracted")
             return
         }
         
         // THEN
-        XCTAssertEqual("EU Digital COVID Certificate", model.title)
-        XCTAssertEqual("Invalid", model.subtitle)
-        XCTAssertEqual("Display certificates", model.actionTitle)
         XCTAssertEqual("Doe John 1", model.name)
         XCTAssertEqual(.neutralWhite, model.textColor)
         XCTAssertEqual(.onBackground40, model.backgroundColor)
         XCTAssertEqual(.neutralWhite, model.tintColor)
-        XCTAssertEqual(.expiredNotification, model.titleIcon)
-        XCTAssertEqual("EU Digital COVID Certificate", model.title)
-        XCTAssertEqual("Invalid", model.subtitle)
+        XCTAssertEqual(.statusMaskInvalidCircle, model.titleIcon)
+        XCTAssertEqual(.expiredDotNotification, model.subtitleIcon)
+        XCTAssertEqual("No valid certificate", model.title)
+        XCTAssertEqual("No valid certificate", model.subtitle)
         XCTAssertEqual(true, model.isInvalid)
-        XCTAssertEqual(false, model.isFavorite)
     }
     
     func testRecoveryCertificateExpired() {
@@ -296,24 +287,21 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         _ = sut.refresh()
         RunLoop.current.run(for: 0.1)
         
-        guard let model = (sut.certificateViewModels.first as? CertificateCardViewModelProtocol) else {
+        guard let model = (sut.viewModel(for: 0) as? CertificateCardViewModelProtocol) else {
             XCTFail("Model can not be extracted")
             return
         }
         
         // THEN
-        XCTAssertEqual("EU Digital COVID Certificate", model.title)
-        XCTAssertEqual("Expired", model.subtitle)
-        XCTAssertEqual("Display certificates", model.actionTitle)
         XCTAssertEqual("Doe John 1", model.name)
         XCTAssertEqual(.neutralWhite, model.textColor)
         XCTAssertEqual(.onBackground40, model.backgroundColor)
         XCTAssertEqual(.neutralWhite, model.tintColor)
-        XCTAssertEqual(.expired, model.titleIcon)
-        XCTAssertEqual("EU Digital COVID Certificate", model.title)
-        XCTAssertEqual("Expired", model.subtitle)
+        XCTAssertEqual(.statusMaskInvalidCircle, model.titleIcon)
+        XCTAssertEqual(.statusInvalidCircle, model.subtitleIcon)
+        XCTAssertEqual("No valid certificate", model.title)
+        XCTAssertEqual("No valid certificate", model.subtitle)
         XCTAssertEqual(true, model.isInvalid)
-        XCTAssertEqual(false, model.isFavorite)
     }
     
     func testRecoveryCertificateExpiredNotShownOnce() {
@@ -330,24 +318,21 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         _ = sut.refresh()
         RunLoop.current.run(for: 0.1)
         
-        guard let model = (sut.certificateViewModels.first as? CertificateCardViewModelProtocol) else {
+        guard let model = (sut.viewModel(for: 0) as? CertificateCardViewModelProtocol) else {
             XCTFail("Model can not be extracted")
             return
         }
         
         // THEN
-        XCTAssertEqual("EU Digital COVID Certificate", model.title)
-        XCTAssertEqual("Expired", model.subtitle)
-        XCTAssertEqual("Display certificates", model.actionTitle)
         XCTAssertEqual("Doe John 1", model.name)
         XCTAssertEqual(.neutralWhite, model.textColor)
         XCTAssertEqual(.onBackground40, model.backgroundColor)
         XCTAssertEqual(.neutralWhite, model.tintColor)
-        XCTAssertEqual(.expiredNotification, model.titleIcon)
-        XCTAssertEqual("EU Digital COVID Certificate", model.title)
-        XCTAssertEqual("Expired", model.subtitle)
+        XCTAssertEqual(.statusMaskInvalidCircle, model.titleIcon)
+        XCTAssertEqual(.expiredDotNotification, model.subtitleIcon)
+        XCTAssertEqual("No valid certificate", model.title)
+        XCTAssertEqual("No valid certificate", model.subtitle)
         XCTAssertEqual(true, model.isInvalid)
-        XCTAssertEqual(false, model.isFavorite)
     }
 
     func testShowNotificationsIfNeeded_showCheckSituationIfNeeded_shown() {
@@ -497,17 +482,17 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         // Then
         wait(for: [router.showAnnouncementExpectation], timeout: 1)
     }
-#warning("TODO: Uncomment this, when the feature is finally merged.")
-//    func testShowNotificationsIfNeeded_new_regulations_announcement_not_shown() {
-//        // Given
-//        userDefaults.newRegulationsOnboardingScreenWasShown = false
-//
-//        // When
-//        sut.showNotificationsIfNeeded()
-//
-//        // Then
-//        wait(for: [router.showNewRegulationsAnnouncementExpectation], timeout: 1)
-//    }
+
+    func testShowNotificationsIfNeeded_new_regulations_announcement_not_shown() {
+        // Given
+        userDefaults.newRegulationsOnboardingScreenWasShown = false
+
+        // When
+        sut.showNotificationsIfNeeded()
+
+        // Then
+        wait(for: [router.showNewRegulationsAnnouncementExpectation], timeout: 1)
+    }
 
     func testShowNotificationsIfNeeded_new_regulations_announcement_already_shown() {
         // Given
@@ -883,6 +868,36 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         // Then
         wait(for: [certLogic.domesticRulesUpdateIfNeededTestExpectation,
                    certLogic.domesticRulesUpdateTestExpectation], timeout: 0.1)
+    }
+
+    func testShowMultipleCertificateHolder_false() {
+        // When
+        let showMultipleCertificateHolder = sut.showMultipleCertificateHolder
+
+        // Then
+        XCTAssertFalse(showMultipleCertificateHolder)
+    }
+
+    func testShowMultipleCertificateHolder_true() {
+        // Given
+        let tokens  = [
+            CBORWebToken.mockVaccinationCertificate.extended(),
+            CBORWebToken.mockVaccinationCertificateWithOtherName.extended()
+        ]
+        let expectation = XCTestExpectation()
+        configureSut(certificates: tokens)
+        sut.refresh()
+            .done { _ in
+                expectation.fulfill()
+            }
+            .cauterize()
+        wait(for: [expectation], timeout: 1)
+        
+        // When
+        let showMultipleCertificateHolder = sut.showMultipleCertificateHolder
+
+        // Then
+        XCTAssertTrue(showMultipleCertificateHolder)
     }
 }
 

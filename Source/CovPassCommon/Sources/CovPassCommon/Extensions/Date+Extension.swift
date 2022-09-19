@@ -16,6 +16,13 @@ public extension Date {
         return Date() > date
     }
     
+    var isOlderThan29Days: Bool {
+        guard let date = Calendar.current.date(byAdding: .day, value: 29, to: self) else {
+            return false
+        }
+        return Date() > date
+    }
+    
     func monthsSince(_ date: Date) -> Int {
         let components: Set<Calendar.Component> = [.month]
         let diffComponents = Calendar.current.dateComponents(
@@ -68,5 +75,11 @@ public extension Date {
     var endOfMonth: Self? {
         let dateInterval = Calendar.current.dateInterval(of: .month, for: self)
         return dateInterval?.end
+    }
+    
+    func add(days: Int) -> Self? {
+        var dateComponent = DateComponents()
+        dateComponent.day = days
+        return Calendar.current.date(byAdding: dateComponent, to: self)
     }
 }

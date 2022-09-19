@@ -22,6 +22,7 @@ protocol CertificateDetailViewModelProtocol {
     var immunizationIcon: UIImage? { get }
     var immunizationTitle: String { get }
     var immunizationBody: String { get }
+    var immunizationHeader: String { get }
     var title: String { get }
     var nameTitle: String { get }
     var nameTitleStandard: String { get }
@@ -52,6 +53,10 @@ protocol CertificateDetailViewModelProtocol {
     var recoveryExpiryReissueCandidatesCount: Int { get }
     var showBoosterReissueIsNewBadge: Bool { get }
     var showVaccinationExpiryReissueIsNewBadge: Bool { get }
+    var maskFaqLink: String { get }
+    var immunizationDetailsHidden: Bool { get }
+    var immunizationStatusViewModel: CertificateHolderImmunizationStatusViewModelProtocol { get }
+    var maskStatusViewModel: CertificateHolderImmunizationStatusViewModelProtocol { get }
     func showRecoveryExpiryReissueIsNewBadge(index: Int) -> Bool
     func triggerBoosterReissue()
     func triggerVaccinationExpiryReissue()
@@ -61,5 +66,5 @@ protocol CertificateDetailViewModelProtocol {
     func toggleFavorite()
     func updateBoosterCandiate()
     func updateReissueCandidate(to value: Bool)
-    func markExpiryReissueCandidatesAsSeen() 
+    func markExpiryReissueCandidatesAsSeen()
 }

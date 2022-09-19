@@ -610,4 +610,16 @@ class DCCCertLogicTests: XCTestCase {
             }.cauterize()
         wait(for: [exp], timeout: 0.1, enforceOrder: true)
     }
+    
+    func test_domesticRules_gStatus() throws {
+        // WHEN
+        let token = CBORWebToken.mockVaccinationCertificate
+        XCTAssertNoThrow(try sut.validate(type: .maskStatusAndRules, countryCode: "DE", validationClock: Date(), certificate: token))
+    }
+    
+    func test_domesticRules_maskStatus() throws {
+        // WHEN
+        let token = CBORWebToken.mockVaccinationCertificate
+        XCTAssertNoThrow(try sut.validate(type: .maskStatusAndRules, countryCode: "DE", validationClock: Date(), certificate: token))
+    }
 }

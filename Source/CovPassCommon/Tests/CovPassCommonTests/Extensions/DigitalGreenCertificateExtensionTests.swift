@@ -151,14 +151,14 @@ class DigitalGreenCertificateExtensionTests: XCTestCase {
     func testJoinCertificates_multiple_certifcates() {
         // Given
         var dgc1 = CBORWebToken.mockRecoveryCertificate.hcert.dgc
-        dgc1.t = [test, test, test]
+        dgc1.t = [testOldest, testOldest, testMiddle]
 
         var dgc2 = CBORWebToken.mockVaccinationCertificate.hcert.dgc
-        dgc2.t = [test, test, test, test]
-        dgc2.r = [recovery, recovery, recovery, recovery, recovery]
+        dgc2.t = [testOldest, testLatest, testMiddle, testOldest]
+        dgc2.r = [recoveryMiddle, recoveryLatest, recoveryMiddle, recoveryOldest, recoveryMiddle]
 
         var dgc3 = CBORWebToken.mockTestCertificate.hcert.dgc
-        dgc3.v = [vaccination, vaccination, vaccination]
+        dgc3.v = [vaccinationMiddle, vaccinationLatest, vaccinationOldest]
 
         let sut: [DigitalGreenCertificate] = [dgc1, dgc2, dgc3]
 
@@ -166,15 +166,30 @@ class DigitalGreenCertificateExtensionTests: XCTestCase {
         let dgc = sut.joinCertificates()
 
         // Then
-        XCTAssertEqual(dgc?.v?.count, 4)
-        XCTAssertEqual(dgc?.r?.count, 6)
-        XCTAssertEqual(dgc?.t?.count, 8)
+        XCTAssertEqual(dgc?.v?.count, 1)
+        XCTAssertEqual(dgc?.v?.first?.ci, vaccinationLatest.ci)
+        XCTAssertNotEqual(dgc?.v?.first?.ci, vaccinationMiddle.ci)
+        XCTAssertNotEqual(dgc?.v?.first?.ci, vaccinationOldest.ci)
+        XCTAssertEqual(dgc?.r?.count, 1)
+        XCTAssertEqual(dgc?.r?.first?.ci, recoveryLatest.ci)
+        XCTAssertNotEqual(dgc?.r?.first?.ci, recoveryMiddle.ci)
+        XCTAssertNotEqual(dgc?.r?.first?.ci, recoveryOldest.ci)
+        XCTAssertEqual(dgc?.t?.count, 1)
+        XCTAssertEqual(dgc?.t?.first?.ci, testLatest.ci)
+        XCTAssertNotEqual(dgc?.t?.first?.ci, testMiddle.ci)
+        XCTAssertNotEqual(dgc?.t?.first?.ci, testOldest.ci)
     }
 }
 
-private let vaccination = Vaccination(tg: "", vp: "", mp: "", ma: "", dn: 0, sd: 0, dt: Date(), co: "", is: "", ci: "")
-private let recovery = Recovery(tg: "", fr: .init(), df: .init(), du: .init(), co: "", is: "", ci: "")
-private let test = Test(tg: "", tt: "", sc: .init(), tr: "", tc: nil, co: "", is: "", ci: "")
+private let vaccinationLatest = Vaccination(tg: "", vp: "", mp: "", ma: "", dn: 0, sd: 0, dt: .init(), co: "", is: "", ci: "latest")
+private let vaccinationMiddle = Vaccination(tg: "", vp: "", mp: "", ma: "", dn: 0, sd: 0, dt: .init() - 100, co: "", is: "", ci: "middle")
+private let vaccinationOldest = Vaccination(tg: "", vp: "", mp: "", ma: "", dn: 0, sd: 0, dt: .init() - 1000, co: "", is: "", ci: "oldest")
+private let recoveryLatest = Recovery(tg: "", fr: .init(), df: .init(), du: .init(), co: "", is: "", ci: "1")
+private let recoveryMiddle = Recovery(tg: "", fr: .init() - 1, df: .init(), du: .init(), co: "", is: "", ci: "2")
+private let recoveryOldest = Recovery(tg: "", fr: .init() - 10, df: .init(), du: .init(), co: "", is: "", ci: "3")
+private let testLatest = Test(tg: "", tt: "", sc: .init() + 10, tr: "", tc: nil, co: "", is: "", ci: "4")
+private let testMiddle = Test(tg: "", tt: "", sc: .init() + 1, tr: "", tc: nil, co: "", is: "", ci: "5")
+private let testOldest = Test(tg: "", tt: "", sc: .init() , tr: "", tc: nil, co: "", is: "", ci: "6")
 
 private let secondsPerHour: TimeInterval = 60*60
 private let secondsPerDay: TimeInterval = 24*secondsPerHour

@@ -71,6 +71,10 @@ public class DCCCertLogic: DCCCertLogicProtocol {
         case eu
         // validate against DE domestic rules
         case de
+        // validate against DE domestic rules for all Certificate types
+        case maskStatusAndRules
+        // validate against DE domestic rules for all Certificate types
+        case gStatusAndRules
         // validate against vaccination booster rules
         case booster
     }
@@ -214,24 +218,34 @@ public class DCCCertLogic: DCCCertLogicProtocol {
             rules = boosterRules
         case .de:
             rules = dccDomesticRules.acceptenceAndInvalidationRules
+        case .gStatusAndRules:
+            let domesticRules = dccDomesticRules
+            rules = domesticRules.acceptenceAndInvalidationRules + domesticRules.gStatusRules
+        case .maskStatusAndRules:
+            let domesticRules = dccDomesticRules
+            rules = domesticRules.acceptenceAndInvalidationRules + domesticRules.maskStatusRules
         }
         if rules.isEmpty {
             throw DCCCertLogicError.noRules
         }
 
-        var type = CertificateType.general
-        if certificate.isVaccination {
-            type = .vaccination
+        var validationType = ValidationType.all
+        var certificateType = CertificateType.general
+        
+        if type == .maskStatusAndRules {
+            validationType = .allRuleAndCertificateTypes
+        } else if certificate.isVaccination {
+            certificateType = .vaccination
         } else if certificate.isRecovery {
-            type = .recovery
+            certificateType = .recovery
         } else if certificate.isTest {
-            type = .test
+            certificateType = .test
         }
 
         let filter = FilterParameter(
             validationClock: validationClock,
             countryCode: countryCode,
-            certificationType: type,
+            certificationType: certificateType,
             region: nil
         )
         let external = ExternalParameter(
@@ -247,7 +261,7 @@ public class DCCCertLogic: DCCCertLogicProtocol {
         guard let payload = String(data: data, encoding: .utf8) else {
             throw DCCCertLogicError.encodingError
         }
-        return engine.validate(filter: filter, external: external, payload: payload)
+        return engine.validate(filter: filter, external: external, payload: payload, validationType: validationType)
     }
 
     // MARK: - Updating local rules and data

@@ -15,11 +15,7 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
     // MARK: - Private Properties
 
     private var token: ExtendedCBORWebToken
-    private var vaccinations: [Vaccination]
-    private var recoveries: [Recovery]
-    private var certificateIsFavorite: Bool
     private var onAction: (ExtendedCBORWebToken) -> Void
-    private var onFavorite: (String) -> Void
     private var repository: VaccinationRepositoryProtocol
     private var boosterLogic: BoosterLogicProtocol
     private let currentDate: Date
@@ -27,20 +23,13 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
     private lazy var certificate = token.vaccinationCertificate
     private lazy var isExpired = certificate.isExpired
     private lazy var isRecovery = certificate.isRecovery && !isInvalid
-    private lazy var isBasicVaccination = dgc.fullImmunizationValid && !isBoosterVaccination && !isInvalid
     private lazy var isPartialVaccination = certificate.isVaccination && !dgc.fullImmunizationValid && !isInvalid
-    private lazy var isBoosterVaccination = dgc.v?.first?.isBoosted(vaccinations: vaccinations, recoveries: recoveries) ?? false && !isInvalid
     private lazy var isPCRTest = dgc.isPCR && !isInvalid
     private lazy var isRapidAntigenTest = certificate.isTest && !isPCRTest && !isInvalid
     private lazy var isRevoked = token.isRevoked
     private lazy var tokenIsInvalid = token.isInvalid
-    private lazy var partialVaccination: Vaccination? = {
-        guard isPartialVaccination else { return nil }
+    private lazy var vaccination: Vaccination? = {
         return dgc.v?.first
-    }()
-    private lazy var isJohnsonAndJohnson2of2Vaccination: Bool = {
-        guard let vaccination = dgc.v?.first else { return false }
-        return vaccination.isJohnsonJohnson && vaccination.isDoubleDoseComplete
     }()
     // Show notification to the user if he is qualified for a booster vaccination
     private var showBoosterAvailabilityNotification: Bool {
@@ -57,7 +46,7 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
         let cert = token.vaccinationCertificate
         return cert.expiresSoon || token.isInvalid || cert.isExpired
     }
-    private let showNotificationIcon: Bool
+    private var holderNeedsMask: Bool
     var showNotification: Bool {
         showBoosterAvailabilityNotification || showNotificationForExpiryOrInvalid
     }
@@ -66,32 +55,18 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
 
     init(
         token: ExtendedCBORWebToken,
-        vaccinations: [Vaccination],
-        recoveries: [Recovery],
-        isFavorite: Bool,
-        showFavorite: Bool,
-        showTitle: Bool,
-        showAction: Bool,
-        showNotificationIcon: Bool,
+        holderNeedsMask: Bool,
         onAction: @escaping (ExtendedCBORWebToken) -> Void,
-        onFavorite: @escaping (String) -> Void,
         repository: VaccinationRepositoryProtocol,
         boosterLogic: BoosterLogicProtocol,
         currentDate: Date = Date()
     ) {
         self.token = token
-        self.vaccinations = vaccinations
-        self.recoveries = recoveries
-        certificateIsFavorite = isFavorite
-        self.showFavorite = showFavorite
-        self.showTitle = showTitle
-        self.showAction = showAction
+        self.holderNeedsMask = holderNeedsMask
         self.onAction = onAction
-        self.onFavorite = onFavorite
         self.repository = repository
         self.boosterLogic = boosterLogic
         self.currentDate = currentDate
-        self.showNotificationIcon = showNotificationIcon
     }
 
     // MARK: - Internal Properties
@@ -102,16 +77,14 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
         "\(CertificateCollectionViewCell.self)"
     }
 
-    var backgroundColor: UIColor {
-        isInvalid ? .onBackground40 : .onBrandAccent70
-    }
+    let backgroundColor: UIColor = .clear
 
     var iconTintColor: UIColor {
         isInvalid ? UIColor(hexString: "878787") : .onBrandAccent70
     }
 
     var textColor: UIColor {
-        .neutralWhite
+        holderNeedsMask ? .onBrandAccent70 : .brandAccent90
     }
 
     lazy var title: String = {
@@ -120,15 +93,11 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
             title = "startscreen_card_title"
         } else if isRecovery {
             title = "certificate_type_recovery"
-        } else if isBasicVaccination || isJohnsonAndJohnson2of2Vaccination {
-            title = "certificate_type_basic_immunisation"
-        } else if isBoosterVaccination {
-            title = "certificate_type_booster"
         } else if isPCRTest {
             title = "certificates_overview_pcr_test_certificate_message"
         } else if isRapidAntigenTest {
             title = "certificates_overview_test_certificate_message"
-        } else if let vaccination = partialVaccination {
+        } else if let vaccination = vaccination {
             title = String(
                 format: "certificates_overview_vaccination_certificate_message".localized,
                 vaccination.dn,
@@ -146,15 +115,13 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
             subtitle = "certificates_start_screen_qrcode_certificate_expired_subtitle".localized
         } else if isRecovery, let date = dgc.r?.first?.fr {
             subtitle = currentDate.monthSinceString(date)
-        } else if isBasicVaccination || isPartialVaccination || isJohnsonAndJohnson2of2Vaccination,
-                  let date = dgc.v?.first?.dt {
-            subtitle = currentDate.monthSinceString(date)
-        } else if isBoosterVaccination, let date = dgc.v?.first?.dt {
-            subtitle = currentDate.daysSinceString(date)
         } else if isPCRTest || isRapidAntigenTest, let date = dgc.t?.first?.sc {
             subtitle = currentDate.hoursSinceString(date)
         } else if isRevoked || tokenIsInvalid {
             subtitle = "certificates_start_screen_qrcode_certificate_invalid_subtitle".localized
+        } else if certificate.isVaccination,
+                  let date = dgc.v?.first?.dt {
+            subtitle = currentDate.monthSinceString(date)
         } else if showBoosterAvailabilityNotification {
             subtitle = "vaccination_start_screen_qrcode_booster_vaccination_note_subtitle".localized
         } else {
@@ -162,27 +129,26 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
         }
         return subtitle
     }()
+    
+    
+    var headerSubtitle: String? = nil
 
     var titleIcon: UIImage {
         if isInvalid {
-            return showNotification && showNotificationIcon ? .expiredNotification : .expired
+            return .expired
         } else if isPCRTest || isRapidAntigenTest {
-            return showNotification && showNotificationIcon ? .testNotification : .detailStatusTestInverse
+            return holderNeedsMask ? .detailStatusTestInverse : .statusTestNegative
         } else if isPartialVaccination {
-            return showNotification && showNotificationIcon ? .halfShieldNotification: .startStatusPartial
+            return holderNeedsMask ? .startStatusPartial : .statusFullGreen
         }
-        return showNotification && showNotificationIcon ? .statusFullBlueNotification : .statusFullDetail
+        return holderNeedsMask ? .statusFullDetail : .statusFullGreen
     }
-
-    var isFavorite: Bool {
-        certificateIsFavorite
-    }
+    
+    var subtitleIcon: UIImage = .init()
 
     lazy var isInvalid: Bool = isExpired || tokenIsInvalid || isRevoked
 
     var showFavorite: Bool = true
-    var showTitle: Bool = false
-    var showAction: Bool = false
 
     lazy var qrCode: UIImage? = {
         let code = isInvalid ? "" : token.vaccinationQRCodeData
@@ -193,10 +159,6 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
         dgc.nam.fullName
     }
 
-    var actionTitle: String {
-        "startscreen_card_button".localized
-    }
-
     var tintColor: UIColor {
         return textColor
     }
@@ -205,10 +167,6 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
 
     func onClickAction() {
         onAction(token)
-    }
-
-    func onClickFavorite() {
-        onFavorite(dgc.uvci)
     }
 }
 

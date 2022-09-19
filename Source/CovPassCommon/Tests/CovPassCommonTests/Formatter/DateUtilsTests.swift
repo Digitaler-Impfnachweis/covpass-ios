@@ -135,4 +135,26 @@ class DateUtilsTests: XCTestCase {
         XCTAssertNil(DateUtils.parse(dateOfBirth: "15:05:00+02:00"))
         XCTAssertNil(DateUtils.parse(dateOfBirth: "15:05:00"))
     }
+    
+    func test_add_29_days() {
+        // GIVEN
+        // WHEN
+        guard let dateAfter29Days = date.add(days: 29) else {
+            XCTFail()
+            return
+        }
+        // THEN
+        XCTAssertEqual(dateAfter29Days.daysSince(date), 29)
+    }
+    
+    func test_add_minus29_days() {
+        // GIVEN
+        // WHEN
+        guard let dateAfter29Days = date.add(days: -29) else {
+            XCTFail()
+            return
+        }
+        // THEN
+        XCTAssertEqual(dateAfter29Days.daysSince(date), -29)
+    }
 }

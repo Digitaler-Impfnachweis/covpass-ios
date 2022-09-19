@@ -509,6 +509,10 @@ public extension Array where Element == ExtendedCBORWebToken {
         }
     }
     
+    var latestVaccination: Vaccination? { sortLatestVaccinations.first?.firstVaccination }
+    
+    var latestRecovery: Recovery? { sortLatestRecoveries.first?.firstRecovery }
+
     var sortLatestPcrTest: [ExtendedCBORWebToken] {
         filterNegativePCRTestsNotOlderThan72Hours
             .filterNotInvalid.filterNotRevoked.filterNotExpired
@@ -534,6 +538,12 @@ public extension Array where Element == ExtendedCBORWebToken {
         filterVaccinations
             .sortByIssuedAtTime
             .sortByVaccinationDate
+    }
+    
+    var sortLatestRecoveries: [ExtendedCBORWebToken] {
+        filterRecoveries
+            .sortByIssuedAtTime
+            .sortByFirstPositiveResultDate
     }
     
     var sortLatestVaccinationsfirstNotBoostedValidFullImmunization: ExtendedCBORWebToken? {

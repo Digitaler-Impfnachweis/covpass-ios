@@ -14,9 +14,7 @@ import PromiseKit
 import UIKit
 
 class MockCertificateViewModel: CertificatesOverviewViewModelProtocol {
-
     
-
     // MARK: - Test Variables
 
     var refreshedCalled = false
@@ -30,10 +28,10 @@ class MockCertificateViewModel: CertificatesOverviewViewModelProtocol {
     weak var delegate: CertificatesOverviewViewModelDelegate?
     var addButtonImage: UIImage? = UIImage()
     var hasCertificates: Bool = false
-    var certificateViewModels: [CardViewModel] = []
     var accessibilityAddCertificate = "addCertificate"
     var accessibilityMoreInformation = "moreInformation"
     var accessibilityAnnouncement = "announcement"
+    var showMultipleCertificateHolder = true
     
     func handleOpen(url: URL) -> Bool {
         return true
@@ -57,7 +55,7 @@ class MockCertificateViewModel: CertificatesOverviewViewModelProtocol {
     func updateValueSets() {}
     
     func reuseIdentifier(for indexPath: IndexPath) -> String {
-        certificateViewModels[indexPath.row].reuseIdentifier
+        "reuseIdentifier"
     }
 
     var headlineTitle: String {
@@ -69,7 +67,7 @@ class MockCertificateViewModel: CertificatesOverviewViewModelProtocol {
     }
 
     func loadCertificates() {
-        certificateViewModels = [MockCardViewModel()]
+
     }
 
     func process(payload _: String) -> Promise<ExtendedCBORWebToken> {
@@ -107,4 +105,12 @@ class MockCertificateViewModel: CertificatesOverviewViewModelProtocol {
     func showRuleCheck() {}
 
     func showNotificationsIfNeeded() {}
+    
+    func viewModel(for row: Int) -> CardViewModel {
+        NoCertificateCardViewModel()
+    }
+    
+    func countOfCells() -> Int {
+        0
+    }
 }

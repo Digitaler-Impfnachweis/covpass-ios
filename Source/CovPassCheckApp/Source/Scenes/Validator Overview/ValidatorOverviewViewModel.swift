@@ -129,7 +129,7 @@ class ValidatorOverviewViewModel {
         switch userDefaults.selectedLogicType {
         case .eu: return Constants.Keys.CheckSituation.euText
         case .de: return Constants.Keys.CheckSituation.deText
-        case .booster: return ""
+        case .booster, .maskStatusAndRules, .gStatusAndRules: return ""
         }
     }
     

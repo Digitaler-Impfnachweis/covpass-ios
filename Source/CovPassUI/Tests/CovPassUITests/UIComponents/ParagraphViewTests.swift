@@ -87,6 +87,7 @@ class ParagraphViewTests: XCTestCase {
 
         // When
         sut.attributedTitleText = nil
+        sut.attributedSubtitleText = nil
         sut.attributedBodyText = bodyText.styledAs(.body)
 
         // Then

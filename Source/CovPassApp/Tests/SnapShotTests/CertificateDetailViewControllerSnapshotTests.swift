@@ -17,6 +17,7 @@ class CertificateDetailViewControllerSnapshotTests: BaseSnapShotTests {
     private var cert1OutOf1JohnsonJohnson: ExtendedCBORWebToken!
     private var cert2OutOf1Vaccinatio: ExtendedCBORWebToken!
     private var certRecoveryOldestInChain: ExtendedCBORWebToken!
+    private var certificateHolderStatusModel: CertificateHolderStatusModelMock!
     private let (_, resolver) = Promise<CertificateDetailSceneResult>.pending()
     
     override func setUpWithError() throws {
@@ -41,12 +42,14 @@ class CertificateDetailViewControllerSnapshotTests: BaseSnapShotTests {
             .mockRecoveryUVCI("3")
             .recoveryTestDate(DateUtils.parseDate("2020-12-26T15:05:00")!)
             .extended(vaccinationQRCodeData: "3")
+        certificateHolderStatusModel = .init()
     }
     
     override func tearDownWithError() throws {
         cert1OutOf1JohnsonJohnson = nil
         cert2OutOf1Vaccinatio = nil
         certRecoveryOldestInChain = nil
+        certificateHolderStatusModel = nil
     }
     
     func configureSut(certs: [ExtendedCBORWebToken],
@@ -57,28 +60,31 @@ class CertificateDetailViewControllerSnapshotTests: BaseSnapShotTests {
                                             boosterLogic: bl,
                                             certificates: certs,
                                             resolvable: resolver,
-                                            certificateHolderStatusModel: CertificateHolderStatusModelMock())
-        return vm
+                                            certificateHolderStatusModel: certificateHolderStatusModel)
+        return vm!
     }
     
     func testCertificateDetailViewController() {
         let certs: [ExtendedCBORWebToken] = [try! ExtendedCBORWebToken.mock()]
         let vm = configureSut(certs: certs)
         let vc = CertificateDetailViewController(viewModel: vm)
-        verifyView(view: vc.view, height: 1100)
+        verifyView(view: vc.view, height: 1600)
     }
     
     func testCertificateDetail_Vaccination() {
         let vacinationRepoMock: VaccinationRepositoryMock = VaccinationRepositoryMock()
-        let cert: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended()
-        cert.vaccinationCertificate.hcert.dgc.nam.fn = "John 1"
+        let cert: ExtendedCBORWebToken = CBORWebToken
+            .mockVaccinationCertificate
+            .doseNumber(4)
+            .extended()
         let certs = [cert]
         vacinationRepoMock.certificates = certs
+        certificateHolderStatusModel.holderIsFullyImmunized = true
         let vm = configureSut(certs: certs)
         let vc = CertificateDetailViewController(viewModel: vm)
-        verifyView(view: vc.view, height: 1100)
+        verifyView(view: vc.view, height: 1600)
     }
-    
+
     func testCertificateDetail_Vaccination_From() {
         let vacinationRepoMock: VaccinationRepositoryMock = VaccinationRepositoryMock()
         let cert: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended()
@@ -88,7 +94,7 @@ class CertificateDetailViewControllerSnapshotTests: BaseSnapShotTests {
         vacinationRepoMock.certificates = certs
         let vm = configureSut(certs: certs)
         let vc = CertificateDetailViewController(viewModel: vm)
-        verifyView(view: vc.view, height: 1100)
+        verifyView(view: vc.view, height: 1600)
     }
     
     func testCertificateDetail_Partly() {
@@ -97,10 +103,11 @@ class CertificateDetailViewControllerSnapshotTests: BaseSnapShotTests {
         cert.vaccinationCertificate.hcert.dgc.nam.fn = "John 1"
         cert.vaccinationCertificate.hcert.dgc.v!.first!.dn = 1
         let certs = [cert]
+        certificateHolderStatusModel.needsMask = true
         vacinationRepoMock.certificates = certs
         let vm = configureSut(certs: certs)
         let vc = CertificateDetailViewController(viewModel: vm)
-        verifyView(view: vc.view, height: 1100)
+        verifyView(view: vc.view, height: 1600)
     }
     
     func testCertificateDetail_Recovery() {
@@ -111,7 +118,7 @@ class CertificateDetailViewControllerSnapshotTests: BaseSnapShotTests {
         vacinationRepoMock.certificates = certs
         let vm = configureSut(certs: certs)
         let vc = CertificateDetailViewController(viewModel: vm)
-        verifyView(view: vc.view, height: 1100)
+        verifyView(view: vc.view, height: 1600)
     }
     
     func testCertificateDetail_Recovery_From() {
@@ -123,7 +130,7 @@ class CertificateDetailViewControllerSnapshotTests: BaseSnapShotTests {
         vacinationRepoMock.certificates = certs
         let vm = configureSut(certs: certs)
         let vc = CertificateDetailViewController(viewModel: vm)
-        verifyView(view: vc.view, height: 1100)
+        verifyView(view: vc.view, height: 1600)
     }
     
     func testCertificateDetail_test() {
@@ -135,7 +142,7 @@ class CertificateDetailViewControllerSnapshotTests: BaseSnapShotTests {
         vacinationRepoMock.certificates = certs
         let vm = configureSut(certs: certs)
         let vc = CertificateDetailViewController(viewModel: vm)
-        verifyView(view: vc.view, height: 1100)
+        verifyView(view: vc.view, height: 1600)
     }
     
     func testCertificateDetail_IsExpired() {
@@ -148,7 +155,7 @@ class CertificateDetailViewControllerSnapshotTests: BaseSnapShotTests {
         vacinationRepoMock.certificates = certs
         let vm = configureSut(certs: certs)
         let vc = CertificateDetailViewController(viewModel: vm)
-        verifyView(view: vc.view, height: 1100)
+        verifyView(view: vc.view, height: 1600)
     }
     
     func testCertificateDetail_IsInvalid() {
@@ -161,7 +168,7 @@ class CertificateDetailViewControllerSnapshotTests: BaseSnapShotTests {
         vacinationRepoMock.certificates = certs
         let vm = configureSut(certs: certs)
         let vc = CertificateDetailViewController(viewModel: vm)
-        verifyView(view: vc.view, height: 1100)
+        verifyView(view: vc.view, height: 1600)
     }
     
     func testCertificateDetail_AllTypes_Selected_Vaccination() {
@@ -207,7 +214,7 @@ class CertificateDetailViewControllerSnapshotTests: BaseSnapShotTests {
         vacinationRepoMock.certificates = certs
         let vm = configureSut(certs: certs)
         let vc = CertificateDetailViewController(viewModel: vm)
-        verifyView(view: vc.view, height: 1600)
+        verifyView(view: vc.view, height: 1800)
     }
     
     func testCertificateDetail_AllTypes_Selected_Vaccination_with_Bosster() {
@@ -255,7 +262,7 @@ class CertificateDetailViewControllerSnapshotTests: BaseSnapShotTests {
                                    userDefaults: MockPersistence())
         let vm = configureSut(certs: certs)
         let vc = CertificateDetailViewController(viewModel: vm)
-        verifyView(view: vc.view, height: 1600)
+        verifyView(view: vc.view, height: 1800)
     }
     
     func testCertificateDetail_AllTypes_Selected_Recovery() {
@@ -299,7 +306,7 @@ class CertificateDetailViewControllerSnapshotTests: BaseSnapShotTests {
                                    userDefaults: MockPersistence())
         let vm = configureSut(certs: certs)
         let vc = CertificateDetailViewController(viewModel: vm)
-        verifyView(view: vc.view, height: 1600)
+        verifyView(view: vc.view, height: 1800)
     }
     
     func testCertificateDetail_AllTypes_Selected_Vaccination_Partly() {
@@ -380,7 +387,7 @@ class CertificateDetailViewControllerSnapshotTests: BaseSnapShotTests {
         vacinationRepoMock.certificates = certs
         let vm = configureSut(certs: certs)
         let vc = CertificateDetailViewController(viewModel: vm)
-        verifyView(view: vc.view, height: 1100)
+        verifyView(view: vc.view, height: 1600)
     }
     
     var singleDoseImmunizationJohnsonCert = CBORWebToken.mockVaccinationCertificate
@@ -402,7 +409,7 @@ class CertificateDetailViewControllerSnapshotTests: BaseSnapShotTests {
         let certs = [singleDoseImmunizationJohnsonCert, vaccinationWithTwoShotsOfVaccine]
         let vm = configureSut(certs: certs)
         let vc = CertificateDetailViewController(viewModel: vm)
-        verifyView(view: vc.view, height: 1100)
+        verifyView(view: vc.view, height: 1800)
     }
     
     func testCertificateDetail_ShowReissueNotification_NewBadgeAlreadySeen() {
@@ -410,7 +417,7 @@ class CertificateDetailViewControllerSnapshotTests: BaseSnapShotTests {
         let certs = [singleDoseImmunizationJohnsonCert, vaccinationWithTwoShotsOfVaccine]
         let vm = configureSut(certs: certs)
         let vc = CertificateDetailViewController(viewModel: vm)
-        verifyView(view: vc.view, height: 1100)
+        verifyView(view: vc.view, height: 1800)
     }
     
     func testCertificateIsRevoked() throws {
@@ -419,7 +426,7 @@ class CertificateDetailViewControllerSnapshotTests: BaseSnapShotTests {
         let certs = [token]
         let viewModel = configureSut(certs: certs, bl: BoosterLogicMock())
         let viewController = CertificateDetailViewController(viewModel: viewModel)
-        verifyView(view: viewController.view, height: 1100)
+        verifyView(view: viewController.view, height: 1600)
     }
     
     func testCertificateIsRevokedAndIsExpired() throws {
@@ -429,59 +436,7 @@ class CertificateDetailViewControllerSnapshotTests: BaseSnapShotTests {
         let certs = [token]
         let viewModel = configureSut(certs: certs, bl: BoosterLogicMock())
         let viewController = CertificateDetailViewController(viewModel: viewModel)
-        verifyView(view: viewController.view, height: 1100)
-    }
-    
-    func test1OutOf1JohnsonJohnson() throws {
-        let token = try ExtendedCBORWebToken.token1Of1()
-        token.vaccinationCertificate.hcert.dgc.v!.first!.mp = "EU/1/20/1525"
-        let certs = [token]
-        let viewModel = configureSut(certs: certs, bl: BoosterLogicMock())
-        let viewController = CertificateDetailViewController(viewModel: viewModel)
-        verifyView(view: viewController.view, height: 1100)
-    }
-    
-    func test1OutOf1JohnsonJohnsonAnd2OutOf1Vaccination() {
-        let certs = [cert1OutOf1JohnsonJohnson!,
-                     cert2OutOf1Vaccinatio!]
-        let viewModel = configureSut(certs: certs, bl: BoosterLogicMock())
-        let viewController = CertificateDetailViewController(viewModel: viewModel)
-        verifyView(view: viewController.view, height: 1300)
-    }
-    
-    func test1OutOf1JohnsonJohnsonAnd2OutOf1VaccinationAndRecoveryAsOldestCert() {
-        let certs = [cert1OutOf1JohnsonJohnson!,
-                     cert2OutOf1Vaccinatio!,
-                     certRecoveryOldestInChain!]
-        let viewModel = configureSut(certs: certs, bl: BoosterLogicMock())
-        let viewController = CertificateDetailViewController(viewModel: viewModel)
-        verifyView(view: viewController.view, height: 1300)
-    }
-    
-    func test1OutOf1JohnsonJohnsonAnd2OutOf2VaccinationAndRecoveryAsOldestCert() {
-        let certs = [cert1OutOf1JohnsonJohnson!,
-                     cert2OutOf1Vaccinatio!,
-                     certRecoveryOldestInChain!]
-        let viewModel = configureSut(certs: certs, bl: BoosterLogicMock())
-        let viewController = CertificateDetailViewController(viewModel: viewModel)
-        verifyView(view: viewController.view, height: 1800)
-    }
-    
-    func test3OutOf1Vaccination() {
-        // GIVEN
-        let date = DateUtils.parseDate("2021-01-26T15:05:00")!
-        let cert3OutOf1: ExtendedCBORWebToken = CBORWebToken
-            .mockVaccinationCertificate
-            .mockVaccinationUVCI("1")
-            .seriesOfDoses(1)
-            .doseNumber(3)
-            .mockVaccinationSetDate(date)
-            .medicalProduct(.johnsonjohnson)
-            .extended(vaccinationQRCodeData: "1")
-        let certs = [cert3OutOf1]
-        let viewModel = configureSut(certs: certs, bl: BoosterLogicMock())
-        let viewController = CertificateDetailViewController(viewModel: viewModel)
-        verifyView(view: viewController.view, height: 1100)
+        verifyView(view: viewController.view, height: 1600)
     }
 
     func testReissueNotifications_new_badge_shown() {
@@ -491,7 +446,7 @@ class CertificateDetailViewControllerSnapshotTests: BaseSnapShotTests {
         viewModel.showBoosterReissueNotification = true
         viewModel.showRecoveryExpiryReissueIsNewBadgeValues = [true, true]
         let viewController = CertificateDetailViewController(viewModel: viewModel)
-        verifyView(view: viewController.view, height: 1100)
+        verifyView(view: viewController.view, height: 1600)
     }
 
     func testReissueNotifications_new_badge_for_only_one_recovery() {
@@ -499,6 +454,6 @@ class CertificateDetailViewControllerSnapshotTests: BaseSnapShotTests {
         viewModel.showVaccinationExpiryReissueNotification = true
         viewModel.showRecoveryExpiryReissueIsNewBadgeValues = [false, true]
         let viewController = CertificateDetailViewController(viewModel: viewModel)
-        verifyView(view: viewController.view, height: 1100)
+        verifyView(view: viewController.view, height: 1600)
     }
 }

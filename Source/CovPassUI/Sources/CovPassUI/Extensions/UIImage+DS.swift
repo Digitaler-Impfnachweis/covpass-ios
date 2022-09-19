@@ -296,7 +296,7 @@ public extension UIImage {
 
     @ImageLoader(name: "status-test-negative")
     private(set) static var statusTestNegative
-
+    
     @ImageLoader(name: "half-shield-notification")
     private(set) static var halfShieldNotification
     
@@ -305,6 +305,15 @@ public extension UIImage {
     
     @ImageLoader(name: "test-notification")
     private(set) static var testNotification
+    
+    @ImageLoader(name: "partial-dot")
+    private(set) static var partialDotNotification
+    
+    @ImageLoader(name: "valid-dot")
+    private(set) static var validDotNotification
+    
+    @ImageLoader(name: "expired-dot")
+    private(set) static var expiredDotNotification
     
     
 }
