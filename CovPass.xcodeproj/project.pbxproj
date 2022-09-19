@@ -193,6 +193,7 @@
 		09D6E818276CA66200134FBA /* ScanCountWarningViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D6E817276CA66200134FBA /* ScanCountWarningViewModelProtocol.swift */; };
 		09D6E81A276CC96600134FBA /* ScanCountRouterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D6E819276CC96600134FBA /* ScanCountRouterProtocol.swift */; };
 		09D6E81C276CE56700134FBA /* ValidationServiceRoutableProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D6E81B276CE56700134FBA /* ValidationServiceRoutableProtocol.swift */; };
+		09DECC4A28D8903D00FBF061 /* AnnouncementViewControllerSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09DECC4928D8903D00FBF061 /* AnnouncementViewControllerSnapshotTests.swift */; };
 		09E7A64F2822CCF600724F24 /* CertificatesOverviewRouterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E7A64E2822CCF600724F24 /* CertificatesOverviewRouterMock.swift */; };
 		09E85433279992450051AEEE /* AppInformationViewControllerSnapShotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E85432279992450051AEEE /* AppInformationViewControllerSnapShotTests.swift */; };
 		09E85435279992DC0051AEEE /* AppInformationRouterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E85434279992DC0051AEEE /* AppInformationRouterMock.swift */; };
@@ -748,6 +749,7 @@
 		09D6E817276CA66200134FBA /* ScanCountWarningViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanCountWarningViewModelProtocol.swift; sourceTree = "<group>"; };
 		09D6E819276CC96600134FBA /* ScanCountRouterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanCountRouterProtocol.swift; sourceTree = "<group>"; };
 		09D6E81B276CE56700134FBA /* ValidationServiceRoutableProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationServiceRoutableProtocol.swift; sourceTree = "<group>"; };
+		09DECC4928D8903D00FBF061 /* AnnouncementViewControllerSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementViewControllerSnapshotTests.swift; sourceTree = "<group>"; };
 		09E7A64E2822CCF600724F24 /* CertificatesOverviewRouterMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertificatesOverviewRouterMock.swift; sourceTree = "<group>"; };
 		09E85432279992450051AEEE /* AppInformationViewControllerSnapShotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInformationViewControllerSnapShotTests.swift; sourceTree = "<group>"; };
 		09E85434279992DC0051AEEE /* AppInformationRouterMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInformationRouterMock.swift; sourceTree = "<group>"; };
@@ -2710,6 +2712,7 @@
 			isa = PBXGroup;
 			children = (
 				E73D5C7B28B6A6E600564496 /* AnnouncementViewModelTests.swift */,
+				09DECC4928D8903D00FBF061 /* AnnouncementViewControllerSnapshotTests.swift */,
 			);
 			path = Announcement;
 			sourceTree = "<group>";
@@ -3712,6 +3715,7 @@
 				09590D392715E67F004410D7 /* MockCertificateViewModelDelegate.swift in Sources */,
 				9514A5F22732A40E00987109 /* CertificateDetailViewControllerSnapshotTests.swift in Sources */,
 				E74D4C7A2810384200EF5D6F /* CertificateDetailRouterMock.swift in Sources */,
+				09DECC4A28D8903D00FBF061 /* AnnouncementViewControllerSnapshotTests.swift in Sources */,
 				09CE6C9427AB31D50048BDA4 /* CountrySelectionRouterMock.swift in Sources */,
 				09CE6C9227AB31920048BDA4 /* CountrySelectionViewControllerSnapShotTests.swift in Sources */,
 				E7D1F0992861D8B200FA7465 /* ScanSceneFactoryTests.swift in Sources */,

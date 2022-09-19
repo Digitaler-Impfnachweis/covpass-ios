@@ -98,13 +98,6 @@ extension AnnouncementViewController: ModalInteractiveDismissibleProtocol {
 
 // MARK: - WKNavigationDelegate
 
-extension AnnouncementViewController: WKNavigationDelegate {
-    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        webViewHeightConstraint.constant = webView.scrollView.contentSize.height
-    }
-}
-
-
 private extension WKWebView {
     func loadSynchronously(_ url: URL) -> WKNavigation? {
         guard let data = try? Data(contentsOf: url),
@@ -113,5 +106,18 @@ private extension WKWebView {
             return nil
         }
         return loadHTMLString(html, baseURL: url)
+    }
+}
+
+extension AnnouncementViewController: WKNavigationDelegate {
+    
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        if !webView.isLoading {
+            webView.evaluateJavaScript("document.body.scrollHeight", completionHandler: { result, _ in
+                if let height = result as? CGFloat {
+                    self.webViewHeightConstraint.constant = height
+                }
+            })
+        }
     }
 }
