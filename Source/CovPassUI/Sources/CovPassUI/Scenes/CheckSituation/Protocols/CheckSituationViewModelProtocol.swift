@@ -15,8 +15,6 @@ public enum CheckSituationViewModelContextType {
 public protocol CheckSituationViewModelProtocol {
     var navBarTitle: String { get }
     var pageTitle: String { get }
-    var situationChcekTitleLabelHidden: Bool { get }
-    var situationChcekTitle: String { get }
     var newBadgeText: String { get }
     var pageImage: UIImage { get }
     var travelRulesTitle: String { get }
@@ -39,6 +37,7 @@ public protocol CheckSituationViewModelProtocol {
     var descriptionTextIsTop: Bool { get }
     var hStackViewIsHidden: Bool { get }
     var buttonIsHidden: Bool { get set }
+    var descriptionIsHidden: Bool { get }
     var onboardingOpen: String { get }
     var onboardingClose: String { get }
     var onboardingImageDescription: String { get }

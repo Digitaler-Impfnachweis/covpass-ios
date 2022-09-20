@@ -14,7 +14,6 @@ public class CheckSituationViewController: UIViewController {
     @IBOutlet var stackview: UIStackView!
     @IBOutlet var hStackView: UIStackView!
     @IBOutlet var titleLabel: PlainLabel!
-    @IBOutlet var situationCheckTitleLabel: UILabel!
     @IBOutlet var newBadgeView: HighlightLabel!
     @IBOutlet var newBadgeWrapper: UIView!
     @IBOutlet var descriptionTextWrapper: UIView!
@@ -23,6 +22,7 @@ public class CheckSituationViewController: UIViewController {
     @IBOutlet var optionOneTravel: CountryItemView!
     @IBOutlet var optionTwoDomestic: CountryItemView!
     @IBOutlet var descriptionLabel: PlainLabel!
+    @IBOutlet var descriptionContainerView: UIView!
     @IBOutlet var subTitleLabel: PlainLabel!
     @IBOutlet var saveButton: MainButton!
     @IBOutlet var offlineRevocationView: UIView!
@@ -89,7 +89,6 @@ public class CheckSituationViewController: UIViewController {
         domesticRulesAttrbString.append("\n".styledAs(.body))
         domesticRulesAttrbString.append(viewModel.domesticRulesDescription.styledAs(.body))
         optionTwoDomestic.textLabel.attributedText = domesticRulesAttrbString
-        optionTwoDomestic.isHidden = viewModel.selectionIsHidden
         optionTwoDomestic.leftIcon.isHidden = true
         stackview.setCustomSpacing(40, after: optionTwoDomestic)
     }
@@ -109,6 +108,8 @@ public class CheckSituationViewController: UIViewController {
     }
     
     private func configureHidden() {
+        descriptionContainerView.isHidden = viewModel.descriptionIsHidden
+        optionTwoDomestic.isHidden = viewModel.selectionIsHidden
         optionOneTravel.isHidden = viewModel.selectionIsHidden
         optionOneTravel.leftIcon.isHidden = true
         saveButton.isHidden = viewModel.buttonIsHidden
@@ -142,8 +143,6 @@ public class CheckSituationViewController: UIViewController {
         descriptionLabel.attributedText = viewModel.footerText.styledAs(.body)
         subTitleLabel.attributedText = viewModel.subTitleText.styledAs(.header_3)
         configureImageView()
-        situationCheckTitleLabel.attributedText = viewModel.situationChcekTitle.styledAs(.header_2)
-        situationCheckTitleLabel.isHidden = viewModel.situationChcekTitleLabelHidden
         configureTravelRulesSelection()
         configureDomesticSelection()
         configureHidden()

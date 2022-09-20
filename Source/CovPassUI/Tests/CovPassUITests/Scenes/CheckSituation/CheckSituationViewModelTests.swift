@@ -23,14 +23,18 @@ class CheckSituationViewModelTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        let (_, resolver) = Promise<Void>.pending()
         persistence = .init()
         offlineRevocationService = .init()
         certLogic = .init()
         repository = .init()
         router = CheckSituationRouterMock()
         delegate = ViewModelDelegateMock()
-        sut = CheckSituationViewModel(context: .settings,
+        configureSut()
+    }
+
+    private func configureSut(context: CheckSituationViewModelContextType = .settings) {
+        let (_, resolver) = Promise<Void>.pending()
+        sut = CheckSituationViewModel(context: context,
                                       userDefaults: persistence,
                                       router: router,
                                       resolver: resolver,
@@ -380,5 +384,65 @@ class CheckSituationViewModelTests: XCTestCase {
         XCTAssertTrue(sut.isLoading)
         wait(for: [exp1, router.noInternetExpecation, exp2, exp3, offlineRevocationService.updateExpectation, exp4, exp5], timeout: 3, enforceOrder: true)
         XCTAssertFalse(sut.isLoading)
+    }
+
+    func testSelectionIsHidden_settings() {
+        // When
+        let isHidden = sut.selectionIsHidden
+
+        // Then
+        XCTAssertTrue(isHidden)
+    }
+
+    func testSelectionIsHidden_onboarding() {
+        // Given
+        configureSut(context: .onboarding)
+
+        // When
+        let isHidden = sut.selectionIsHidden
+
+        // Then
+        XCTAssertFalse(isHidden)
+    }
+
+    func testSelectionIsHidden_information() {
+        // Given
+        configureSut(context: .information)
+
+        // When
+        let isHidden = sut.selectionIsHidden
+
+        // Then
+        XCTAssertTrue(isHidden)
+    }
+
+    func testDescriptionIsHidden_settings() {
+        // When
+        let isHidden = sut.descriptionIsHidden
+
+        // Then
+        XCTAssertTrue(isHidden)
+    }
+
+    func testDescriptionIsHidden_onboarding() {
+        // Given
+        configureSut(context: .onboarding)
+
+        // When
+        let isHidden = sut.descriptionIsHidden
+
+        // Then
+        XCTAssertFalse(isHidden)
+    }
+
+    func testDescriptionIsHidden_information() {
+        // Given
+        configureSut(context: .information)
+
+        // When
+        let isHidden = sut.descriptionIsHidden
+
+        // Then
+        XCTAssertFalse(isHidden)
     }
 }

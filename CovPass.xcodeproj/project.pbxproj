@@ -506,7 +506,6 @@
 		E7D242BD28BD301100C5D137 /* AudioPlayerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D242BC28BD301100C5D137 /* AudioPlayerMock.swift */; };
 		E7D242BF28BD326A00C5D137 /* ValidationViewModelProtocol+ExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D242BE28BD326A00C5D137 /* ValidationViewModelProtocol+ExtensionTests.swift */; };
 		E7D8062C2890493D00743DAE /* CheckSituationSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D8062A2890455600743DAE /* CheckSituationSceneFactory.swift */; };
-		E7D8062F28904AC700743DAE /* CheckSituationSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D8062E28904AC700743DAE /* CheckSituationSceneFactory.swift */; };
 		E7DE165628AFCD4C007FDF46 /* AcousticFeedbackSettingsRouterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DE165528AFCD4C007FDF46 /* AcousticFeedbackSettingsRouterProtocol.swift */; };
 		E7DE165828AFCDBB007FDF46 /* AcousticFeedbackSettingsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DE165728AFCDBB007FDF46 /* AcousticFeedbackSettingsRouter.swift */; };
 		E7DE165A28AFCEB4007FDF46 /* AcousticFeedbackSettingsSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DE165928AFCEB4007FDF46 /* AcousticFeedbackSettingsSceneFactory.swift */; };
@@ -1088,7 +1087,6 @@
 		E7D242BC28BD301100C5D137 /* AudioPlayerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerMock.swift; sourceTree = "<group>"; };
 		E7D242BE28BD326A00C5D137 /* ValidationViewModelProtocol+ExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ValidationViewModelProtocol+ExtensionTests.swift"; sourceTree = "<group>"; };
 		E7D8062A2890455600743DAE /* CheckSituationSceneFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckSituationSceneFactory.swift; sourceTree = "<group>"; };
-		E7D8062E28904AC700743DAE /* CheckSituationSceneFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckSituationSceneFactory.swift; sourceTree = "<group>"; };
 		E7DE165528AFCD4C007FDF46 /* AcousticFeedbackSettingsRouterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcousticFeedbackSettingsRouterProtocol.swift; sourceTree = "<group>"; };
 		E7DE165728AFCDBB007FDF46 /* AcousticFeedbackSettingsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcousticFeedbackSettingsRouter.swift; sourceTree = "<group>"; };
 		E7DE165928AFCEB4007FDF46 /* AcousticFeedbackSettingsSceneFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcousticFeedbackSettingsSceneFactory.swift; sourceTree = "<group>"; };
@@ -3056,7 +3054,6 @@
 			isa = PBXGroup;
 			children = (
 				0938F7DB2899147B001469C1 /* CheckSituationResolvableSceneFactory.swift */,
-				E7D8062E28904AC700743DAE /* CheckSituationSceneFactory.swift */,
 			);
 			path = CheckSituation;
 			sourceTree = "<group>";
@@ -3592,7 +3589,6 @@
 				E74C5AD328C89F7C00F5370F /* NewRegulationsAnnouncementSceneFactory.swift in Sources */,
 				E74C5ACA28C75FAE00F5370F /* NewRegulationsAnnouncementViewModelProtocol.swift in Sources */,
 				E7B49CF9283D1A3900401C2E /* CertificateRevocationHTTPClient+Factory.swift in Sources */,
-				E7D8062F28904AC700743DAE /* CheckSituationSceneFactory.swift in Sources */,
 				0938F7DC2899147B001469C1 /* CheckSituationResolvableSceneFactory.swift in Sources */,
 				09C422A227F5BA5B00232036 /* CertificateRevocationRepository+Factory.swift in Sources */,
 				3520AA6C26B85AA900D22435 /* PDFExportViewModelProtocol.swift in Sources */,

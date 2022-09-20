@@ -14,7 +14,6 @@ private enum Constants {
     enum Keys {
         enum General {
             static let navBarTitle = "settings_rules_list_title".localized(bundle: .main)
-            static let checkSitationTitle = "app_information_rules_list_title".localized(bundle: .main)
             static let pageTitle = "check_context_onboarding_title".localized(bundle: .main)
             static let newBadgeText = "check_context_onboarding_tag".localized(bundle: .main)
             static let travelRulesTitle = "check_context_onboarding_option1_title".localized(bundle: .main)
@@ -43,7 +42,6 @@ private enum Constants {
         }
         enum Update {
             static let title = "app_information_title_update".localized(bundle: .main)
-            static let offlineModusInformation = "app_information_message_update".localized(bundle: .main)
             static let listTitle = "app_information_title_checkrules".localized(bundle: .main)
             static let statusAvailable = "settings_rules_list_status_updated".localized(bundle: .main)
             static let statusUnavailable = "settings_rules_list_status_outofdate".localized(bundle: .main)
@@ -83,8 +81,6 @@ public class CheckSituationViewModel: CheckSituationViewModelProtocol {
     // MARK: - Public/Protocol properties
     public var navBarTitle: String = Constants.Keys.General.navBarTitle
     public var pageTitle: String = Constants.Keys.General.pageTitle
-    public var situationChcekTitleLabelHidden: Bool = true
-    public var situationChcekTitle: String = Constants.Keys.General.checkSitationTitle
     public var newBadgeText: String = Constants.Keys.General.newBadgeText
     public var pageImage: UIImage = Constants.Images.pageImage
     public var travelRulesTitle: String = Constants.Keys.General.travelRulesTitle
@@ -98,17 +94,18 @@ public class CheckSituationViewModel: CheckSituationViewModelProtocol {
     public var onboardingClose: String = Constants.Accessibility.General.onboardingClose
     public var onboardingImageDescription: String = Constants.Accessibility.General.onboardingImageDescription
     public let offlineRevocationTitle = Constants.Keys.OfflineRevocation.title
-    public let offlineRevocationDescription =  Constants.Keys.OfflineRevocation.description
+    public let offlineRevocationDescription = Constants.Keys.OfflineRevocation.description
     public let offlineRevocationSwitchTitle =  Constants.Keys.OfflineRevocation.switchTitle
     public var hStackViewIsHidden: Bool = false
     public var pageTitleIsHidden: Bool = false
     public var newBadgeIconIsHidden: Bool = false
     public var pageImageIsHidden: Bool = false
-    public var selectionIsHidden: Bool = false
+    private(set) public var selectionIsHidden: Bool = false
     public var subTitleIsHidden: Bool = true
     public var descriptionTextIsTop: Bool = false
     public var buttonIsHidden: Bool = false
     public var offlineRevocationIsHidden = true
+    private(set) public var descriptionIsHidden = false
     private(set) public var offlineRevocationIsEnabled: Bool {
         get {
             userDefaults.isCertificateRevocationOfflineServiceEnabled
@@ -278,7 +275,6 @@ public class CheckSituationViewModel: CheckSituationViewModelProtocol {
             subTitleIsHidden = true
             offlineRevocationIsHidden = true
             updateContextHidden = true
-            situationChcekTitleLabelHidden = true
             footerText = Constants.Keys.General.footerText
         case .settings:
             hStackViewIsHidden = true
@@ -287,12 +283,12 @@ public class CheckSituationViewModel: CheckSituationViewModelProtocol {
             newBadgeIconIsHidden = true
             pageImageIsHidden = true
             descriptionTextIsTop = true
-            selectionIsHidden = false
+            selectionIsHidden = true
             subTitleIsHidden = true
             offlineRevocationIsHidden = false
             updateContextHidden = false
-            situationChcekTitleLabelHidden = false
             footerText = Constants.Keys.Settings.description
+            descriptionIsHidden = true
         case .information:
             hStackViewIsHidden = false
             newBadgeIconIsHidden = true
@@ -317,7 +313,6 @@ public class CheckSituationViewModel: CheckSituationViewModelProtocol {
             onboardingOpen = Constants.Accessibility.Information.onboardingOpen
             onboardingClose = Constants.Accessibility.Information.onboardingClose
             onboardingImageDescription = Constants.Accessibility.Information.onboardingImageDescription
-            situationChcekTitleLabelHidden = true
         }
         delegate?.viewModelDidUpdate()
     }
