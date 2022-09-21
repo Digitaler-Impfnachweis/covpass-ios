@@ -24,10 +24,7 @@ public struct CertificateHolderStatusModel: CertificateHolderStatusModelProtocol
     }
     
     public func holderNeedsMask(_ certificates: [ExtendedCBORWebToken]) -> Bool {
-        guard let joinedTokens = certificates.joinedTokens else { return true }
-        let validationResults = validate(certificate: joinedTokens, type: .maskStatusAndRules)
-        guard validationResults.filterAcceptanceAndInvalidationRules.failedResults.isEmpty else { return true }
-        return validationResults.holderNeedsMask
+        return true
     }
     
     public func holderNeedsMaskAsync(_ certificates: [ExtendedCBORWebToken]) -> Guarantee<Bool> {

@@ -103,14 +103,4 @@ class CertificateHolderStatusModelTests: XCTestCase {
         // Then
         XCTAssertTrue(needsMask)
     }
-
-    func testHolderNeedsMask_unkown_user() {
-        // Given
-
-        // When
-        let needsMask = sut.holderNeedsMask([])
-
-        // Then
-        XCTAssertTrue(needsMask)
-    }
 }

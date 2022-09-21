@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -23,10 +23,10 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="735"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="GdT-D2-fPq">
-                    <rect key="frame" x="0.0" y="12" width="414" height="68"/>
+                    <rect key="frame" x="0.0" y="12" width="414" height="292"/>
                     <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LAf-4B-wkV">
-                            <rect key="frame" x="0.0" y="32" width="414" height="36"/>
+                        <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LAf-4B-wkV">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="36"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Lwj-LU-yCm">
                                     <rect key="frame" x="12" y="0.0" width="390" height="36"/>
@@ -71,7 +71,7 @@
                     <edgeInsets key="layoutMargins" top="0.0" left="0.0" bottom="0.0" right="0.0"/>
                 </stackView>
                 <view opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vTI-EJ-iKv" userLabel="QRContainerView">
-                    <rect key="frame" x="0.0" y="80" width="414" height="655"/>
+                    <rect key="frame" x="0.0" y="304" width="414" height="431"/>
                     <subviews>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="N51-Ce-JsW" userLabel="qrCode">
                             <rect key="frame" x="14" y="4" width="386" height="386"/>
@@ -97,7 +97,7 @@
                             </constraints>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LlY-3B-soM" userLabel="qrInfo">
-                            <rect key="frame" x="18" y="394" width="378" height="253"/>
+                            <rect key="frame" x="18" y="394" width="378" height="29"/>
                             <attributedString key="attributedText">
                                 <fragment content="Dieser QR-Code lässt sich verlässlich mit der CovPassCheck-App überprüfen.">
                                     <attributes>
