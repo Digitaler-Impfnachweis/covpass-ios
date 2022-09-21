@@ -222,6 +222,26 @@ class ValidatorOverviewViewModelTests: XCTestCase {
         XCTAssertEqual(userDefaults.privacyHash, privacyHash)
     }
 
+    func testShowNotificationsIfNeeded_showNewRegulationsAnnouncementIfNeeded_never_shown_before() {
+        // When
+        sut.showNotificationsIfNeeded()
+
+        // Then
+        wait(for: [router.showNewRegulationsAnnouncementExpectation], timeout: 1)
+    }
+
+    func testShowNotificationsIfNeeded_showNewRegulationsAnnouncementIfNeeded_was_shown_before() {
+        // Given
+        router.showNewRegulationsAnnouncementExpectation.isInverted = true
+        userDefaults.newRegulationsOnboardingScreenWasShown = true
+
+        // When
+        sut.showNotificationsIfNeeded()
+
+        // Then
+        wait(for: [router.showNewRegulationsAnnouncementExpectation], timeout: 1)
+    }
+
     func testScanType_get_default() {
         // When
         let scanType = sut.scanType

@@ -22,7 +22,6 @@ class CheckAppInformationBaseViewModel: AppInformationBaseViewModel {
     private let userDefaults: Persistence
     private var checkSituationEntry: AppInformationEntry {
         let scene = CheckSituationSceneFactory(
-            contextType: .settings,
             router: CheckSituationRouter(sceneCoordinator: router.sceneCoordinator),
             userDefaults: userDefaults
         )

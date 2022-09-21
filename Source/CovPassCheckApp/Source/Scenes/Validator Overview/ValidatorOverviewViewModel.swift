@@ -274,23 +274,15 @@ class ValidatorOverviewViewModel {
     
     func showNotificationsIfNeeded() {
         firstly {
-            showCheckSituationIfNeeded()
+            showDataPrivacyIfNeeded()
         }
-        .then(showDataPrivacyIfNeeded)
+        .then(showNewRegulationsAnnouncementIfNeeded)
         .done {
             self.delegate?.viewModelDidUpdate()
         }
         .catch { error in
             print(error.localizedDescription)
         }
-    }
-    
-    private func showCheckSituationIfNeeded() -> Promise<Void> {
-        if userDefaults.onboardingSelectedLogicTypeAlreadySeen ?? false {
-            return .value
-        }
-        userDefaults.onboardingSelectedLogicTypeAlreadySeen = true
-        return router.showCheckSituation(userDefaults: userDefaults)
     }
 
     private func showDataPrivacyIfNeeded() -> Guarantee<Void> {
@@ -308,6 +300,18 @@ class ValidatorOverviewViewModel {
         }
 
         return guarantee
+    }
+
+    private func showNewRegulationsAnnouncementIfNeeded() -> Guarantee<Void> {
+        if userDefaults.newRegulationsOnboardingScreenWasShown {
+            return .value
+        }
+        return router
+            .showNewRegulationsAnnouncement()
+            .ensure {
+                self.userDefaults.newRegulationsOnboardingScreenWasShown = true
+            }
+            .recover { _ in () }
     }
     
     func routeToRulesUpdate() {

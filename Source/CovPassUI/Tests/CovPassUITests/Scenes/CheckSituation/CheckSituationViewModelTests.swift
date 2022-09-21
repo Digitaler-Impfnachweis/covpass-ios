@@ -63,10 +63,6 @@ class CheckSituationViewModelTests: XCTestCase {
         XCTAssertEqual(sut.pageTitle, "check_context_onboarding_title")
         XCTAssertEqual(sut.newBadgeText, "check_context_onboarding_tag")
         XCTAssertEqual(sut.pageImage, .illustration4)
-        XCTAssertEqual(sut.domesticRulesTitle, "check_context_onboarding_option2_title")
-        XCTAssertEqual(sut.travelRulesTitle, "check_context_onboarding_option1_title")
-        XCTAssertEqual(sut.domesticRulesDescription, "check_context_onboarding_option2_subtitle")
-        XCTAssertEqual(sut.travelRulesDescription, "check_context_onboarding_option1_subtitle")
         XCTAssertEqual(sut.footerText, "app_information_message_update")
         XCTAssertEqual(sut.doneButtonTitle, "check_context_onboarding_button")
         XCTAssertEqual(sut.descriptionTextIsTop, true)
@@ -76,29 +72,7 @@ class CheckSituationViewModelTests: XCTestCase {
         XCTAssertEqual(sut.buttonIsHidden, true)
         XCTAssertFalse(sut.offlineRevocationIsHidden)
     }
-    
-    func testOnboardingContext() {
-        // WHEN
-        sut.context = .onboarding
-        
-        //THEN
-        XCTAssertEqual(sut.pageTitle, "check_context_onboarding_title")
-        XCTAssertEqual(sut.newBadgeText, "check_context_onboarding_tag")
-        XCTAssertEqual(sut.pageImage, .illustration4)
-        XCTAssertEqual(sut.domesticRulesTitle, "check_context_onboarding_option2_title")
-        XCTAssertEqual(sut.travelRulesTitle, "check_context_onboarding_option1_title")
-        XCTAssertEqual(sut.domesticRulesDescription, "check_context_onboarding_option2_subtitle")
-        XCTAssertEqual(sut.travelRulesDescription, "check_context_onboarding_option1_subtitle")
-        XCTAssertEqual(sut.footerText, "check_context_onboarding_footnote")
-        XCTAssertEqual(sut.doneButtonTitle, "check_context_onboarding_button")
-        XCTAssertEqual(sut.descriptionTextIsTop, false)
-        XCTAssertEqual(sut.pageTitleIsHidden, false)
-        XCTAssertEqual(sut.newBadgeIconIsHidden, false)
-        XCTAssertEqual(sut.pageImageIsHidden, false)
-        XCTAssertEqual(sut.buttonIsHidden, false)
-        XCTAssertTrue(sut.offlineRevocationIsHidden)
-    }
-    
+
     func testOfflineRevocationIsHidden_information_context() {
         // Given
         sut.context = .information
@@ -109,31 +83,7 @@ class CheckSituationViewModelTests: XCTestCase {
         // Then
         XCTAssertTrue(isHidden)
     }
-    
-    func testFetchSelectedRule() {
-        // GIVEN
-        var persistence = UserDefaultsPersistence()
-        persistence.selectedLogicType = .de
-        
-        // WHEN
-        let selectedType = sut.selectedRule
-        
-        // THEN
-        XCTAssertEqual(selectedType, .de)
-    }
 
-    func testStoreSelectedRule() {
-        // GIVEN
-        sut.selectedRule = .eu
-        
-        // WHEN
-        let persistence = UserDefaultsPersistence()
-        let selectedType = persistence.selectedLogicType
-        
-        // THEN
-        XCTAssertEqual(selectedType, .eu)
-    }
-    
     func testOfflineRevocationIsEnabled_true() {
         // Given
         persistence.isCertificateRevocationOfflineServiceEnabled = true
@@ -386,53 +336,12 @@ class CheckSituationViewModelTests: XCTestCase {
         XCTAssertFalse(sut.isLoading)
     }
 
-    func testSelectionIsHidden_settings() {
-        // When
-        let isHidden = sut.selectionIsHidden
-
-        // Then
-        XCTAssertTrue(isHidden)
-    }
-
-    func testSelectionIsHidden_onboarding() {
-        // Given
-        configureSut(context: .onboarding)
-
-        // When
-        let isHidden = sut.selectionIsHidden
-
-        // Then
-        XCTAssertFalse(isHidden)
-    }
-
-    func testSelectionIsHidden_information() {
-        // Given
-        configureSut(context: .information)
-
-        // When
-        let isHidden = sut.selectionIsHidden
-
-        // Then
-        XCTAssertTrue(isHidden)
-    }
-
     func testDescriptionIsHidden_settings() {
         // When
         let isHidden = sut.descriptionIsHidden
 
         // Then
         XCTAssertTrue(isHidden)
-    }
-
-    func testDescriptionIsHidden_onboarding() {
-        // Given
-        configureSut(context: .onboarding)
-
-        // When
-        let isHidden = sut.descriptionIsHidden
-
-        // Then
-        XCTAssertFalse(isHidden)
     }
 
     func testDescriptionIsHidden_information() {

@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol NewRegulationsAnnouncementViewModelProtocol {
+public protocol NewRegulationsAnnouncementViewModelProtocol {
     var header: String { get }
     var illustration: UIImage { get }
     var copyText1: String { get }

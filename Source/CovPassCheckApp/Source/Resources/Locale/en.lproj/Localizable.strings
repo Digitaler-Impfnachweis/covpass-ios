@@ -598,6 +598,80 @@
 "accessibility_revocation_settings_page_announce" = "Settings about the function for authorities were opened";
 
 
+/********** infschg **********/
+
+"infschg_info_accessibility_announce_open" = "The view \"New legal regulations\" has been opened.";
+
+"infschg_info_accessibility_announce_close" = "The view \"New legal regulations\" has been closed.";
+
+"infschg_info_accessibility_close" = "Close";
+
+"infschg_info_title" = "New legal regulations";
+
+"infschg_info_copy_1" = "In Germany, an amendment to the Infection Protection Act comes into force. From October 1, 2022, the German federal states will be able to make masks compulsory in indoor areas accessible to the public.";
+
+"infschg_info_copy_2" = "Exemption from the mask obligation";
+
+"infschg_info_copy_3" = "If the federal state in which you are staying has decreed that masks are compulsory, a negative rapid or PCR test will exempt you from the requirement to wear a mask at leisure, cultural and sporting events and in catering establishments for 24 hours. An unsupervised self-test is not sufficient. Your state may regulate that you may also be exempt from this requirement through vaccination or convalescence (if these are no more than three months old)*.\n\nIf your COVID certificates stored in the CovPass app are sufficient to exempt you from the mask requirement in your state, your certificate will turn green. Your exemption from the mask requirement in your state can be verified by scanning your QR code on the home screen or from the details view using the CovPassCheck app.\n\n*An exemption from the mask requirement does not apply to long-distance public transportation, hospitals, nursing facilities, and patients in doctors' offices.";
+
+"infschg_info_button" = "OK";
+
+"infschg_accessibility_start_screen_label_information" = "More information";
+
+"infschg_validation_start_screen_title" = "Check mask obligation";
+
+"infschg_start_screen_dropdown_title" = "Federal state";
+
+"infschg_start_screen_dropdown_text" = "%@";
+
+"infschg_start_screen_button_scan" = "Scan certificate";
+
+"infschg_start_screen_white_box_title_1" = "Check offline";
+
+"infschg_start_screen_white_box_tag" = "Available";
+
+"infschg_start_screen_white_box_copy_1" = "To be able to check reliably without an Internet connection, the checking rules should have been updated less than 24 hours ago.";
+
+"infschg_start_screen_white_box_title_2" = "Update checking rules";
+
+"infschg_start_screen_white_box_copy_2" = "Last updated less than 24 hours ago";
+
+
+/********** federal state names **********/
+
+"BY" = "Bavaria";
+
+"BB" = "Brandenburg";
+
+"BE" = "Berlin";
+
+"BW" = "Baden-Württemberg";
+
+"HB" = "Bremen";
+
+"HH" = "Hamburg";
+
+"HE" = "Hesse";
+
+"MV" = "Mecklenburg Western Pomerania";
+
+"NI" = "Lower Saxony";
+
+"NW" = "Northrhine-Westphalia";
+
+"RP" = "Rhineland Palatinate";
+
+"SN" = "Saxony";
+
+"ST" = "Saxony-Anhalt";
+
+"SL" = "Saarland";
+
+"SH" = "Schleswig Holstein";
+
+"TH" = "Thuringia";
+
+
 /********** country list names **********/
 
 "IT" = "Italy";

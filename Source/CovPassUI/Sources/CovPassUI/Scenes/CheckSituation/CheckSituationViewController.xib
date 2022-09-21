@@ -42,8 +42,6 @@
                 <outlet property="offlineRevocationSwitch" destination="s2Z-84-4oW" id="jEP-U3-edO"/>
                 <outlet property="offlineRevocationTitleLabel" destination="qDu-uB-ZZ0" id="ttp-00-B9h"/>
                 <outlet property="offlineRevocationView" destination="0xJ-YP-s2H" id="lM4-hl-372"/>
-                <outlet property="optionOneTravel" destination="jWq-CT-Ywy" id="zck-Ij-eNf"/>
-                <outlet property="optionTwoDomestic" destination="Kf6-3f-TRg" id="b5b-M1-0Ks"/>
                 <outlet property="pageImageView" destination="fI0-wE-LDZ" id="i0u-bi-lyy"/>
                 <outlet property="saveButton" destination="inb-gF-Tlw" id="2zV-l8-e8l"/>
                 <outlet property="stackview" destination="AB7-iK-S63" id="D5F-U3-98G"/>
@@ -65,7 +63,7 @@
                     <rect key="frame" x="0.0" y="48" width="414" height="848"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="AB7-iK-S63">
-                            <rect key="frame" x="0.0" y="32" width="414" height="2175"/>
+                            <rect key="frame" x="0.0" y="32" width="414" height="1919"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Giw-oM-J5h">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="168"/>
@@ -108,16 +106,8 @@
                                     <rect key="frame" x="0.0" y="168" width="414" height="128"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </imageView>
-                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="jWq-CT-Ywy" customClass="CountryItemView" customModule="CovPassUI">
-                                    <rect key="frame" x="0.0" y="296" width="414" height="128"/>
-                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                </view>
-                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="Kf6-3f-TRg" customClass="CountryItemView" customModule="CovPassUI">
-                                    <rect key="frame" x="0.0" y="424" width="414" height="128"/>
-                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0xJ-YP-s2H">
-                                    <rect key="frame" x="0.0" y="552" width="414" height="127"/>
+                                    <rect key="frame" x="0.0" y="296" width="414" height="127"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qDu-uB-ZZ0">
                                             <rect key="frame" x="24" y="0.0" width="41.5" height="20.5"/>
@@ -154,7 +144,7 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Spj-B7-Q0A">
-                                    <rect key="frame" x="0.0" y="679" width="414" height="168"/>
+                                    <rect key="frame" x="0.0" y="423" width="414" height="168"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="QWY-Rx-qtn" userLabel="SubTitle" customClass="PlainLabel" customModule="CovPassUI">
                                             <rect key="frame" x="24" y="0.0" width="366" height="156"/>
@@ -170,7 +160,7 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ADv-Ie-vgD">
-                                    <rect key="frame" x="0.0" y="847" width="414" height="168"/>
+                                    <rect key="frame" x="0.0" y="591" width="414" height="168"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="jkW-LO-gqs" userLabel="Description Label" customClass="PlainLabel" customModule="CovPassUI">
                                             <rect key="frame" x="24" y="0.0" width="366" height="168"/>
@@ -186,7 +176,7 @@
                                     </constraints>
                                 </view>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="dja-AL-WwP" userLabel="updateStackview">
-                                    <rect key="frame" x="0.0" y="1015" width="414" height="992"/>
+                                    <rect key="frame" x="0.0" y="759" width="414" height="992"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="2lw-mO-LjI" userLabel="body">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="816"/>
@@ -491,7 +481,7 @@
                                     </subviews>
                                 </stackView>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NUh-as-M7g">
-                                    <rect key="frame" x="0.0" y="2007" width="414" height="168"/>
+                                    <rect key="frame" x="0.0" y="1751" width="414" height="168"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="inb-gF-Tlw" userLabel="Save Button" customClass="MainButton" customModule="CovPassUI">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="168"/>
@@ -554,9 +544,6 @@
         <designable name="KI2-Ug-rxI">
             <size key="intrinsicContentSize" width="414" height="128"/>
         </designable>
-        <designable name="Kf6-3f-TRg">
-            <size key="intrinsicContentSize" width="414" height="128"/>
-        </designable>
         <designable name="QWY-Rx-qtn">
             <size key="intrinsicContentSize" width="414" height="128"/>
         </designable>
@@ -576,9 +563,6 @@
             <size key="intrinsicContentSize" width="414" height="21"/>
         </designable>
         <designable name="inb-gF-Tlw">
-            <size key="intrinsicContentSize" width="414" height="128"/>
-        </designable>
-        <designable name="jWq-CT-Ywy">
             <size key="intrinsicContentSize" width="414" height="128"/>
         </designable>
         <designable name="jkW-LO-gqs">

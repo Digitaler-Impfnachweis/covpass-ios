@@ -16,10 +16,6 @@ private enum Constants {
             static let navBarTitle = "settings_rules_list_title".localized(bundle: .main)
             static let pageTitle = "check_context_onboarding_title".localized(bundle: .main)
             static let newBadgeText = "check_context_onboarding_tag".localized(bundle: .main)
-            static let travelRulesTitle = "check_context_onboarding_option1_title".localized(bundle: .main)
-            static let travelRulesDescription = "check_context_onboarding_option1_subtitle".localized(bundle: .main)
-            static let domesticRulesTitle = "check_context_onboarding_option2_title".localized(bundle: .main)
-            static let domesticRulesDescription = "check_context_onboarding_option2_subtitle".localized(bundle: .main)
             static let footerText = "check_context_onboarding_footnote".localized(bundle: .main)
             static let doneButtonTitle = "check_context_onboarding_button".localized(bundle: .main)
         }
@@ -27,10 +23,6 @@ private enum Constants {
             static let navBarTitle = "accessibility_dialog_local_rulecheck_title_announce".localized(bundle: .main)
             static let pageTitle = "dialog_local_rulecheck_title".localized(bundle: .main)
             static let newBadgeText = "check_context_onboarding_tag".localized(bundle: .main)
-            static let travelRulesTitle = "check_context_onboarding_option1_title".localized(bundle: .main)
-            static let travelRulesDescription = "check_context_onboarding_option1_subtitle".localized(bundle: .main)
-            static let domesticRulesTitle = "check_context_onboarding_option2_title".localized(bundle: .main)
-            static let domesticRulesDescription = "check_context_onboarding_option2_subtitle".localized(bundle: .main)
             static let footerText = "dialog_local_rulecheck_copy".localized(bundle: .main)
             static let doneButtonTitle = "dialog_local_rulecheck_button".localized(bundle: .main)
             static let subTitleText = "dialog_local_rulecheck_subtitle".localized(bundle: .main)
@@ -83,10 +75,6 @@ public class CheckSituationViewModel: CheckSituationViewModelProtocol {
     public var pageTitle: String = Constants.Keys.General.pageTitle
     public var newBadgeText: String = Constants.Keys.General.newBadgeText
     public var pageImage: UIImage = Constants.Images.pageImage
-    public var travelRulesTitle: String = Constants.Keys.General.travelRulesTitle
-    public var travelRulesDescription: String = Constants.Keys.General.travelRulesDescription
-    public var domesticRulesTitle: String = Constants.Keys.General.domesticRulesTitle
-    public var domesticRulesDescription: String = Constants.Keys.General.domesticRulesDescription
     public var footerText: String = Constants.Keys.General.footerText
     public var subTitleText: String = Constants.Keys.Information.subTitleText
     public var doneButtonTitle: String = Constants.Keys.General.doneButtonTitle
@@ -100,7 +88,6 @@ public class CheckSituationViewModel: CheckSituationViewModelProtocol {
     public var pageTitleIsHidden: Bool = false
     public var newBadgeIconIsHidden: Bool = false
     public var pageImageIsHidden: Bool = false
-    private(set) public var selectionIsHidden: Bool = false
     public var subTitleIsHidden: Bool = true
     public var descriptionTextIsTop: Bool = false
     public var buttonIsHidden: Bool = false
@@ -112,17 +99,6 @@ public class CheckSituationViewModel: CheckSituationViewModelProtocol {
         }
         set {
             userDefaults.isCertificateRevocationOfflineServiceEnabled = newValue
-        }
-    }
-    public var selectedRule: DCCCertLogic.LogicType {
-        get {
-            userDefaults.selectedLogicType
-        }
-        set {
-            userDefaults.selectedLogicType = newValue
-            DispatchQueue.main.async {
-                self.delegate?.viewModelDidUpdate()
-            }
         }
     }
     public var delegate: ViewModelDelegate?
@@ -264,18 +240,6 @@ public class CheckSituationViewModel: CheckSituationViewModelProtocol {
     
     private func changeContext() {
         switch context {
-        case .onboarding:
-            hStackViewIsHidden = false
-            buttonIsHidden = false
-            pageTitleIsHidden = false
-            newBadgeIconIsHidden = false
-            pageImageIsHidden = false
-            descriptionTextIsTop = false
-            selectionIsHidden = false
-            subTitleIsHidden = true
-            offlineRevocationIsHidden = true
-            updateContextHidden = true
-            footerText = Constants.Keys.General.footerText
         case .settings:
             hStackViewIsHidden = true
             buttonIsHidden = true
@@ -283,7 +247,6 @@ public class CheckSituationViewModel: CheckSituationViewModelProtocol {
             newBadgeIconIsHidden = true
             pageImageIsHidden = true
             descriptionTextIsTop = true
-            selectionIsHidden = true
             subTitleIsHidden = true
             offlineRevocationIsHidden = false
             updateContextHidden = false
@@ -296,7 +259,6 @@ public class CheckSituationViewModel: CheckSituationViewModelProtocol {
             buttonIsHidden = false
             pageTitleIsHidden = false
             pageImageIsHidden = false
-            selectionIsHidden = true
             subTitleIsHidden = false
             offlineRevocationIsHidden = true
             updateContextHidden = true
@@ -304,10 +266,6 @@ public class CheckSituationViewModel: CheckSituationViewModelProtocol {
             pageTitle = Constants.Keys.Information.pageTitle
             newBadgeText = Constants.Keys.Information.newBadgeText
             pageImage = Constants.Images.pageImage
-            travelRulesTitle = Constants.Keys.Information.travelRulesTitle
-            travelRulesDescription = Constants.Keys.Information.travelRulesDescription
-            domesticRulesTitle = Constants.Keys.Information.domesticRulesTitle
-            domesticRulesDescription = Constants.Keys.Information.domesticRulesDescription
             footerText = Constants.Keys.Information.footerText
             doneButtonTitle = Constants.Keys.Information.doneButtonTitle
             onboardingOpen = Constants.Accessibility.Information.onboardingOpen

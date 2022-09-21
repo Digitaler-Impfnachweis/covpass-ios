@@ -18,8 +18,7 @@ class CheckSituationViewControllerSnapShotTests: BaseSnapShotTests {
     }
 
     func configureSut(
-        context: CheckSituationViewModelContextType = .onboarding,
-        selectedRule: DCCCertLogic.LogicType? = nil,
+        context: CheckSituationViewModelContextType = .settings,
         updateDate: Date? = nil,
         shouldUpdate: Bool = true
     ) {
@@ -44,65 +43,13 @@ class CheckSituationViewControllerSnapShotTests: BaseSnapShotTests {
             repository: vaccinationRepositoryMock,
             certLogic: certLogicMock
         )
-        if let selectedRule = selectedRule {
-            viewModel.selectedRule = selectedRule
-        }
         sut = CheckSituationViewController(viewModel: viewModel)
     }
 
-
-    func testDefaultOnboarding() {
-        // Given
-        UserDefaults.standard.set(nil, forKey: UserDefaults.keySelectedLogicType)
-
-        // When & Then
-        verifyView(vc: sut)
-    }
-    
     func testDefaultSettings() {
         // Given
         configureSut(context: .settings, updateDate: DateUtils.parseDate("2021-04-26T15:05:00"))
         UserDefaults.standard.set(nil, forKey: UserDefaults.keySelectedLogicType)
-
-        // When & Then
-        verifyView(view: sut.view, height: 1200)
-    }
-    
-    func testOnboardingDERulesSelected() {
-        // Given
-        configureSut(selectedRule: .de)
-
-        // When & Then
-        verifyView(vc: sut)
-    }
-    
-    func testOnboardingEURulesSelected() {
-        // Given
-        configureSut(selectedRule: .eu)
-
-        // When & Then
-        verifyView(vc: sut)
-    }
-    
-    func testSettingsDERulesSelected() {
-        // Given
-        configureSut(context: .settings, selectedRule: .de, updateDate: DateUtils.parseDate("2021-04-26T15:05:00"))
-
-        // When & Then
-        verifyView(view: sut.view, height: 1200)
-    }
-    
-    func testSettingsEURulesSelected() {
-        // Given
-        configureSut(context: .settings, selectedRule: .eu, updateDate: DateUtils.parseDate("2021-04-26T15:05:00"))
-
-        // When & Then
-        verifyView(view: sut.view, height: 1200)
-    }
-    
-    func testSettingsUpdateNotAvailable() {
-        // Given
-        configureSut(context: .settings, selectedRule: .eu, updateDate: DateUtils.parseDate("2021-04-26T15:05:00"), shouldUpdate: false)
 
         // When & Then
         verifyView(view: sut.view, height: 1200)

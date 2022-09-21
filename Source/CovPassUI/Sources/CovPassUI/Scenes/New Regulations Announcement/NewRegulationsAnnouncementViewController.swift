@@ -5,10 +5,9 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-import CovPassUI
 import UIKit
 
-class NewRegulationsAnnouncementViewController: UIViewController {
+public class NewRegulationsAnnouncementViewController: UIViewController {
 
     @IBOutlet var infoHeaderView: InfoHeaderView!
     @IBOutlet var illustrationImageView: UIImageView!
@@ -18,14 +17,14 @@ class NewRegulationsAnnouncementViewController: UIViewController {
     @IBOutlet var button: MainButton!
     private let viewModel: NewRegulationsAnnouncementViewModelProtocol
 
-    init(viewModel: NewRegulationsAnnouncementViewModelProtocol) {
+    public init(viewModel: NewRegulationsAnnouncementViewModelProtocol) {
         self.viewModel = viewModel
-        super.init(nibName: nil, bundle: nil)
+        super.init(nibName: nil, bundle: .uiBundle)
     }
 
     required init?(coder: NSCoder) { nil }
 
-    override func viewDidLoad() {
+    public override func viewDidLoad() {
         super.viewDidLoad()
 
         setupInfoHeaderView()
@@ -34,7 +33,7 @@ class NewRegulationsAnnouncementViewController: UIViewController {
         setupButton()
     }
 
-    override func viewDidAppear(_ animated: Bool) {
+    public override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     }
 
@@ -70,7 +69,7 @@ class NewRegulationsAnnouncementViewController: UIViewController {
 }
 
 extension NewRegulationsAnnouncementViewController: ModalInteractiveDismissibleProtocol {
-    func modalViewControllerDidDismiss() {
+    public func modalViewControllerDidDismiss() {
         viewModel.close()
     }
 }

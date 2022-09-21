@@ -87,14 +87,6 @@ class ValidatorOverviewRouter: ValidatorOverviewRouterProtocol {
             .cauterize()
     }
     
-    func showCheckSituation(userDefaults: Persistence) -> Promise<Void> {
-        sceneCoordinator.present(
-            CheckSituationResolvableSceneFactory(contextType: .onboarding,
-                                                 router: CheckSituationRouter(sceneCoordinator: sceneCoordinator),
-                                                 userDefaults: userDefaults)
-        )
-    }
-
     func showDataPrivacy() -> Promise<Void> {
         sceneCoordinator.present(
             DataPrivacySceneFactory(
@@ -106,8 +98,11 @@ class ValidatorOverviewRouter: ValidatorOverviewRouterProtocol {
     }
     
     func routeToRulesUpdate(userDefaults: Persistence) -> Promise<Void> {
-        sceneCoordinator.push(CheckSituationResolvableSceneFactory(contextType: .settings,
-                                                                   router: CheckSituationRouter(sceneCoordinator: sceneCoordinator),
+        sceneCoordinator.push(CheckSituationResolvableSceneFactory(router: CheckSituationRouter(sceneCoordinator: sceneCoordinator),
                                                                    userDefaults: userDefaults))
+    }
+
+    func showNewRegulationsAnnouncement() -> PromiseKit.Promise<Void> {
+        sceneCoordinator.present(NewRegulationsAnnouncementSceneFactory())
     }
 }

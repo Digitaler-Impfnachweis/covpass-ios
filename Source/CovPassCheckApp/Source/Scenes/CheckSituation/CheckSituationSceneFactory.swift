@@ -13,16 +13,13 @@ import CovPassUI
 public struct CheckSituationSceneFactory: SceneFactory {
     
     // MARK: - Lifecycle
-    private let contextType: CheckSituationViewModelContextType
     private let router: CheckSituationRouterProtocol
     private let userDefaults: Persistence
 
-    public init(contextType: CheckSituationViewModelContextType,
-                router: CheckSituationRouterProtocol,
+    public init(router: CheckSituationRouterProtocol,
                 userDefaults: Persistence) {
         self.userDefaults = userDefaults
         self.router = router
-        self.contextType = contextType
     }
     
     // MARK: - Methods
@@ -31,7 +28,8 @@ public struct CheckSituationSceneFactory: SceneFactory {
         guard let offlineRevocationService = CertificateRevocationOfflineService.shared else {
             fatalError("CertificateRevocationOfflineService must not be nil.")
         }
-        let viewModel = CheckSituationViewModel(context: contextType,
+        let context: CheckSituationViewModelContextType = .settings
+        let viewModel = CheckSituationViewModel(context: context,
                                                 userDefaults: userDefaults,
                                                 router: router,
                                                 resolver: nil,

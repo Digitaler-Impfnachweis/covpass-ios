@@ -6,6 +6,7 @@
 //
 
 @testable import CovPassApp
+import CovPassUI
 import PromiseKit
 import UIKit
 import XCTest

@@ -387,7 +387,6 @@
 		E72A2DAA2897EA65002BFBBB /* CertificateRevocationWrapperRepository+Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79CF9F127E8C2FA00C4619E /* CertificateRevocationWrapperRepository+Factory.swift */; };
 		E72A4C6028747F6B009F593A /* CoseSign1MessageConverter+FactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72A4C5F28747F6B009F593A /* CoseSign1MessageConverter+FactoryTests.swift */; };
 		E72CDF5328C8B83C0008D4B8 /* NewRegulationsAnnouncementSceneFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72CDF5228C8B83C0008D4B8 /* NewRegulationsAnnouncementSceneFactoryTests.swift */; };
-		E72CDF5528C8B9230008D4B8 /* NewRegulationsAnnouncementViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72CDF5428C8B9230008D4B8 /* NewRegulationsAnnouncementViewModelTests.swift */; };
 		E72CDF5728C8BA340008D4B8 /* NewRegulationsAnnouncementViewControllerSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72CDF5628C8BA340008D4B8 /* NewRegulationsAnnouncementViewControllerSnapshotTests.swift */; };
 		E73453F2286DF4DE00ED7E00 /* CertificateRevocationFilesystemDataSource+Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73453F1286DF4DE00ED7E00 /* CertificateRevocationFilesystemDataSource+Factory.swift */; };
 		E735E0AE2865D7340032025C /* Test QR Codes.pdf in Resources */ = {isa = PBXBuildFile; fileRef = E735E0AD2865D7340032025C /* Test QR Codes.pdf */; };
@@ -417,11 +416,7 @@
 		E745AF2227DA3F2500B3671E /* CoseSign1Message+Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E745AF2127DA3F2400B3671E /* CoseSign1Message+Mock.swift */; };
 		E746D97D28290CA5005C31BA /* RuleCheckDetailViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E746D97C28290CA5005C31BA /* RuleCheckDetailViewModelTests.swift */; };
 		E74C5AC628C74F1900F5370F /* Persistence+CovPassTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74C5AC528C74F1900F5370F /* Persistence+CovPassTests.swift */; };
-		E74C5ACA28C75FAE00F5370F /* NewRegulationsAnnouncementViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74C5AC928C75FAE00F5370F /* NewRegulationsAnnouncementViewModelProtocol.swift */; };
-		E74C5ACE28C794FB00F5370F /* NewRegulationsAnnouncementViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E74C5ACD28C794FB00F5370F /* NewRegulationsAnnouncementViewController.xib */; };
-		E74C5AD028C7951500F5370F /* NewRegulationsAnnouncementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74C5ACF28C7951500F5370F /* NewRegulationsAnnouncementViewController.swift */; };
 		E74C5AD328C89F7C00F5370F /* NewRegulationsAnnouncementSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74C5AD228C89F7C00F5370F /* NewRegulationsAnnouncementSceneFactory.swift */; };
-		E74C5AD528C8A2C900F5370F /* NewRegulationsAnnouncementViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74C5AD428C8A2C900F5370F /* NewRegulationsAnnouncementViewModel.swift */; };
 		E74C919328984377003FC588 /* CovPass.png in Resources */ = {isa = PBXBuildFile; fileRef = E74C919228984377003FC588 /* CovPass.png */; };
 		E74C919428984377003FC588 /* CovPass.png in Resources */ = {isa = PBXBuildFile; fileRef = E74C919228984377003FC588 /* CovPass.png */; };
 		E74C919528984377003FC588 /* CovPass.png in Resources */ = {isa = PBXBuildFile; fileRef = E74C919228984377003FC588 /* CovPass.png */; };
@@ -468,7 +463,6 @@
 		E782BBA027D280CF00CC033A /* ExtendedCBORWekToken+Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E782BB9F27D280CF00CC033A /* ExtendedCBORWekToken+Mock.swift */; };
 		E7998F6928C635F700EC6394 /* CertificateHolderInvalidImmunizationStatusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7998F6828C635F700EC6394 /* CertificateHolderInvalidImmunizationStatusViewModel.swift */; };
 		E7998F6B28C637D800EC6394 /* CertificateHolderInvalidMaskStatusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7998F6A28C637D800EC6394 /* CertificateHolderInvalidMaskStatusViewModel.swift */; };
-		E7998F6D28C65C8900EC6394 /* Persistence+CovPass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7998F6C28C65C8900EC6394 /* Persistence+CovPass.swift */; };
 		E79CF9EC27E8923C00C4619E /* URLSession+CertificateRevocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79CF9EB27E8923C00C4619E /* URLSession+CertificateRevocation.swift */; };
 		E79CF9F027E8981100C4619E /* URLSession+CertificateRevocationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79CF9EE27E8974800C4619E /* URLSession+CertificateRevocationTests.swift */; };
 		E79CF9F627E8C6DB00C4619E /* CertificateRevocationWrapperRepository+FactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79CF9F327E8C5DB00C4619E /* CertificateRevocationWrapperRepository+FactoryTests.swift */; };
@@ -525,6 +519,8 @@
 		E7DF081F28AE8EFC0089FDA0 /* Persistence+ValidatorOverviewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DF081E28AE8EFC0089FDA0 /* Persistence+ValidatorOverviewTests.swift */; };
 		E7F7817A27C4007D009AC907 /* CertificateReissueRepository+Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F7817927C4007D009AC907 /* CertificateReissueRepository+Factory.swift */; };
 		E7F7817D27C400BA009AC907 /* CertificateReissueRepository+FactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F7817C27C400BA009AC907 /* CertificateReissueRepository+FactoryTests.swift */; };
+		E7F863AB28DA133600F7D54C /* NewRegulationsAnnouncementSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F863AA28DA133600F7D54C /* NewRegulationsAnnouncementSceneFactory.swift */; };
+		E7F863B028DA172A00F7D54C /* NewRegulationsAnnouncementSceneFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F863AE28DA171200F7D54C /* NewRegulationsAnnouncementSceneFactoryTests.swift */; };
 		E7F8D88928880B61007C4AE7 /* CBORWebToken+GProofViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F8D88728880B1C007C4AE7 /* CBORWebToken+GProofViewModelTests.swift */; };
 		E7F8D88B28880CEB007C4AE7 /* GProofValidationResult+GProofViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F8D88A28880CEB007C4AE7 /* GProofValidationResult+GProofViewModelTests.swift */; };
 		E7FB8FA528AFC46500D9693F /* Persistence+AcousticFeedbackSettingsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FB8FA428AFC46500D9693F /* Persistence+AcousticFeedbackSettingsTests.swift */; };
@@ -974,7 +970,6 @@
 		E7170773280091A9000B2E32 /* revocation-trust-key-release.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "revocation-trust-key-release.pem"; sourceTree = "<group>"; };
 		E72A4C5F28747F6B009F593A /* CoseSign1MessageConverter+FactoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoseSign1MessageConverter+FactoryTests.swift"; sourceTree = "<group>"; };
 		E72CDF5228C8B83C0008D4B8 /* NewRegulationsAnnouncementSceneFactoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewRegulationsAnnouncementSceneFactoryTests.swift; sourceTree = "<group>"; };
-		E72CDF5428C8B9230008D4B8 /* NewRegulationsAnnouncementViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewRegulationsAnnouncementViewModelTests.swift; sourceTree = "<group>"; };
 		E72CDF5628C8BA340008D4B8 /* NewRegulationsAnnouncementViewControllerSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewRegulationsAnnouncementViewControllerSnapshotTests.swift; sourceTree = "<group>"; };
 		E73453F1286DF4DE00ED7E00 /* CertificateRevocationFilesystemDataSource+Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CertificateRevocationFilesystemDataSource+Factory.swift"; sourceTree = "<group>"; };
 		E735E0AD2865D7340032025C /* Test QR Codes.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "Test QR Codes.pdf"; sourceTree = "<group>"; };
@@ -1004,11 +999,7 @@
 		E745AF2127DA3F2400B3671E /* CoseSign1Message+Mock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CoseSign1Message+Mock.swift"; sourceTree = "<group>"; };
 		E746D97C28290CA5005C31BA /* RuleCheckDetailViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleCheckDetailViewModelTests.swift; sourceTree = "<group>"; };
 		E74C5AC528C74F1900F5370F /* Persistence+CovPassTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Persistence+CovPassTests.swift"; sourceTree = "<group>"; };
-		E74C5AC928C75FAE00F5370F /* NewRegulationsAnnouncementViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewRegulationsAnnouncementViewModelProtocol.swift; sourceTree = "<group>"; };
-		E74C5ACD28C794FB00F5370F /* NewRegulationsAnnouncementViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewRegulationsAnnouncementViewController.xib; sourceTree = "<group>"; };
-		E74C5ACF28C7951500F5370F /* NewRegulationsAnnouncementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewRegulationsAnnouncementViewController.swift; sourceTree = "<group>"; };
 		E74C5AD228C89F7C00F5370F /* NewRegulationsAnnouncementSceneFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewRegulationsAnnouncementSceneFactory.swift; sourceTree = "<group>"; };
-		E74C5AD428C8A2C900F5370F /* NewRegulationsAnnouncementViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewRegulationsAnnouncementViewModel.swift; sourceTree = "<group>"; };
 		E74C919228984377003FC588 /* CovPass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CovPass.png; sourceTree = "<group>"; };
 		E74C9197289843C5003FC588 /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Bold.ttf"; sourceTree = "<group>"; };
 		E74C9198289843C5003FC588 /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
@@ -1049,7 +1040,6 @@
 		E782BB9F27D280CF00CC033A /* ExtendedCBORWekToken+Mock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ExtendedCBORWekToken+Mock.swift"; sourceTree = "<group>"; };
 		E7998F6828C635F700EC6394 /* CertificateHolderInvalidImmunizationStatusViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateHolderInvalidImmunizationStatusViewModel.swift; sourceTree = "<group>"; };
 		E7998F6A28C637D800EC6394 /* CertificateHolderInvalidMaskStatusViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateHolderInvalidMaskStatusViewModel.swift; sourceTree = "<group>"; };
-		E7998F6C28C65C8900EC6394 /* Persistence+CovPass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Persistence+CovPass.swift"; sourceTree = "<group>"; };
 		E79CF9EB27E8923C00C4619E /* URLSession+CertificateRevocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+CertificateRevocation.swift"; sourceTree = "<group>"; };
 		E79CF9EE27E8974800C4619E /* URLSession+CertificateRevocationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+CertificateRevocationTests.swift"; sourceTree = "<group>"; };
 		E79CF9F127E8C2FA00C4619E /* CertificateRevocationWrapperRepository+Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CertificateRevocationWrapperRepository+Factory.swift"; sourceTree = "<group>"; };
@@ -1106,6 +1096,8 @@
 		E7DF081E28AE8EFC0089FDA0 /* Persistence+ValidatorOverviewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Persistence+ValidatorOverviewTests.swift"; sourceTree = "<group>"; };
 		E7F7817927C4007D009AC907 /* CertificateReissueRepository+Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CertificateReissueRepository+Factory.swift"; sourceTree = "<group>"; };
 		E7F7817C27C400BA009AC907 /* CertificateReissueRepository+FactoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CertificateReissueRepository+FactoryTests.swift"; sourceTree = "<group>"; };
+		E7F863AA28DA133600F7D54C /* NewRegulationsAnnouncementSceneFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewRegulationsAnnouncementSceneFactory.swift; sourceTree = "<group>"; };
+		E7F863AE28DA171200F7D54C /* NewRegulationsAnnouncementSceneFactoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewRegulationsAnnouncementSceneFactoryTests.swift; sourceTree = "<group>"; };
 		E7F8D88728880B1C007C4AE7 /* CBORWebToken+GProofViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CBORWebToken+GProofViewModelTests.swift"; sourceTree = "<group>"; };
 		E7F8D88A28880CEB007C4AE7 /* GProofValidationResult+GProofViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GProofValidationResult+GProofViewModelTests.swift"; sourceTree = "<group>"; };
 		E7FB8FA428AFC46500D9693F /* Persistence+AcousticFeedbackSettingsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Persistence+AcousticFeedbackSettingsTests.swift"; sourceTree = "<group>"; };
@@ -1801,7 +1793,6 @@
 				09D5811A27C2735900CB50CB /* ExtendedCBORWebToken.swift */,
 				351C6B4C26E15C2D00321B3C /* FileManager+Simulator.swift */,
 				E7D1F0902861C9AF00FA7465 /* PDFCBORExtractor+Factory.swift */,
-				E7998F6C28C65C8900EC6394 /* Persistence+CovPass.swift */,
 				216D1F3A264EF4ED00370F16 /* StringLocalization.swift */,
 				E7AD8C7327D1197600220E9F /* SVGPDFExporter+Factory.swift */,
 				E76B96E927C50F130030FC0C /* URLSession+CertificateReissue.swift */,
@@ -1988,6 +1979,7 @@
 				0969AB8C2787AA8000ECCA74 /* GProof */,
 				092699E5278C4FF400331D77 /* GProofDifferentPerson */,
 				21FBCA55264F011800CAEF44 /* Main */,
+				E7F863A728DA0D6F00F7D54C /* New Regulations Announcement */,
 				21FBCA57264F011800CAEF44 /* Onboarding */,
 				096EB4D127D768D3005CE76F /* RevocationSettings */,
 				E7D1F09A2861DB4200FA7465 /* Scanner */,
@@ -2419,6 +2411,7 @@
 				E79CF9ED27E896FC00C4619E /* Extensions */,
 				88AB2A6125FA40CE00D4EA52 /* Info.plist */,
 				09E854382799933F0051AEEE /* Mocks */,
+				E7F863AC28DA13DF00F7D54C /* New Regulations Announcement */,
 				E74E98C82892F62200F73632 /* Repository */,
 				E7CB54B427B55407002FA55E /* Scenes */,
 				0904337C270EFE920008267B /* SnapShotTests */,
@@ -2640,7 +2633,6 @@
 			isa = PBXGroup;
 			children = (
 				E72CDF5228C8B83C0008D4B8 /* NewRegulationsAnnouncementSceneFactoryTests.swift */,
-				E72CDF5428C8B9230008D4B8 /* NewRegulationsAnnouncementViewModelTests.swift */,
 				E72CDF5628C8BA340008D4B8 /* NewRegulationsAnnouncementViewControllerSnapshotTests.swift */,
 			);
 			path = "New Regulations Announcement";
@@ -2760,21 +2752,9 @@
 		E74C5AC728C75F5C00F5370F /* New Regulations Announcement */ = {
 			isa = PBXGroup;
 			children = (
-				E74C5AC828C75F8500F5370F /* Protocols */,
-				E74C5ACD28C794FB00F5370F /* NewRegulationsAnnouncementViewController.xib */,
-				E74C5ACF28C7951500F5370F /* NewRegulationsAnnouncementViewController.swift */,
-				E74C5AD428C8A2C900F5370F /* NewRegulationsAnnouncementViewModel.swift */,
 				E74C5AD228C89F7C00F5370F /* NewRegulationsAnnouncementSceneFactory.swift */,
 			);
 			path = "New Regulations Announcement";
-			sourceTree = "<group>";
-		};
-		E74C5AC828C75F8500F5370F /* Protocols */ = {
-			isa = PBXGroup;
-			children = (
-				E74C5AC928C75FAE00F5370F /* NewRegulationsAnnouncementViewModelProtocol.swift */,
-			);
-			path = Protocols;
 			sourceTree = "<group>";
 		};
 		E74C919128984377003FC588 /* Resources */ = {
@@ -2978,6 +2958,7 @@
 				E7CB54B527B55411002FA55E /* App Information */,
 				E7F8D88628880AF0007C4AE7 /* GProof */,
 				E740448A28902C2000B53AE3 /* GProofDifferentPerson */,
+				E7F863AD28DA16DF00F7D54C /* New Regulations Announcement */,
 				E745AF1827DA3B6100B3671E /* RevocationInfo */,
 				096EB4E027D76904005CE76F /* RevocationSettings */,
 				E7D1F09F2861E03A00FA7465 /* Scanner */,
@@ -3123,6 +3104,29 @@
 				E773F5F028B559C00051AE75 /* URLSession+CertificateRevocationTests.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		E7F863A728DA0D6F00F7D54C /* New Regulations Announcement */ = {
+			isa = PBXGroup;
+			children = (
+				E7F863AA28DA133600F7D54C /* NewRegulationsAnnouncementSceneFactory.swift */,
+			);
+			path = "New Regulations Announcement";
+			sourceTree = "<group>";
+		};
+		E7F863AC28DA13DF00F7D54C /* New Regulations Announcement */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Regulations Announcement";
+			sourceTree = "<group>";
+		};
+		E7F863AD28DA16DF00F7D54C /* New Regulations Announcement */ = {
+			isa = PBXGroup;
+			children = (
+				E7F863AE28DA171200F7D54C /* NewRegulationsAnnouncementSceneFactoryTests.swift */,
+			);
+			path = "New Regulations Announcement";
 			sourceTree = "<group>";
 		};
 		E7F8D88628880AF0007C4AE7 /* GProof */ = {
@@ -3338,7 +3342,6 @@
 				3509F33526CFD04C00A078E5 /* contact-covpass-de.html in Resources */,
 				35F99E1426B2B75C00D3EFC3 /* PDFExportViewController.xib in Resources */,
 				09D580F727C0BD9700CB50CB /* ReissueStartViewController.xib in Resources */,
-				E74C5ACE28C794FB00F5370F /* NewRegulationsAnnouncementViewController.xib in Resources */,
 				E773F5DB28B52D110051AE75 /* WhatsNewSettingsViewController.xib in Resources */,
 				216D1F9E264EF73D00370F16 /* WelcomeViewController.xib in Resources */,
 				E7B98B302858BBB5005861C8 /* CertificateImportSelectionViewController.xib in Resources */,
@@ -3415,7 +3418,6 @@
 				385FC1A1269ED63500D19AF8 /* DateSelectionSceneFactory.swift in Sources */,
 				E735E0B0286601730032025C /* ScanRouter.swift in Sources */,
 				09D580F227C0BD9700CB50CB /* ReissueStartSceneFactory.swift in Sources */,
-				E7998F6D28C65C8900EC6394 /* Persistence+CovPass.swift in Sources */,
 				950629E62746CEDB00138EBE /* ConsentExchangeViewModel.swift in Sources */,
 				38E36261269B744700DE6D4C /* RuleCheckRouterProtocol.swift in Sources */,
 				09D580F427C0BD9700CB50CB /* ReissueStartViewController.swift in Sources */,
@@ -3548,12 +3550,10 @@
 				09D580F527C0BD9700CB50CB /* ReissueStartViewModel.swift in Sources */,
 				0968979A27C3A843009E2886 /* ReissueConsentViewModel.swift in Sources */,
 				0968979627C3A843009E2886 /* ReissueConsentViewModelProtocol.swift in Sources */,
-				E74C5AD528C8A2C900F5370F /* NewRegulationsAnnouncementViewModel.swift in Sources */,
 				385FC1A2269ED63500D19AF8 /* DateSelectionRouter.swift in Sources */,
 				216D1FD7264EF76400370F16 /* CertificateDetailSceneFactory.swift in Sources */,
 				09943E392892A242005B1184 /* TrustedListDetailsViewController.swift in Sources */,
 				E700EFB3285782EE0088D4CB /* CertificateImportSelectionViewController.swift in Sources */,
-				E74C5AD028C7951500F5370F /* NewRegulationsAnnouncementViewController.swift in Sources */,
 				216D1FA5264EF74100370F16 /* WelcomeViewController.swift in Sources */,
 				096897AE27C3E3C1009E2886 /* ReissueResultViewModelProtocol.swift in Sources */,
 				E7D1F0882861B21400FA7465 /* ValidationResultRouter.swift in Sources */,
@@ -3587,7 +3587,6 @@
 				09AC1E032757B6C9008356CD /* RecoveryResultViewModel.swift in Sources */,
 				216D1FAF264EF74600370F16 /* PassOnboardingContainerViewModel.swift in Sources */,
 				E74C5AD328C89F7C00F5370F /* NewRegulationsAnnouncementSceneFactory.swift in Sources */,
-				E74C5ACA28C75FAE00F5370F /* NewRegulationsAnnouncementViewModelProtocol.swift in Sources */,
 				E7B49CF9283D1A3900401C2E /* CertificateRevocationHTTPClient+Factory.swift in Sources */,
 				0938F7DC2899147B001469C1 /* CheckSituationResolvableSceneFactory.swift in Sources */,
 				09C422A227F5BA5B00232036 /* CertificateRevocationRepository+Factory.swift in Sources */,
@@ -3662,7 +3661,6 @@
 				0994A4D12734319800B21FCF /* TrustedListDetailsViewSnapShotTests.swift in Sources */,
 				0968979F27C3A871009E2886 /* ReissueConsentViewModelTests.swift in Sources */,
 				09CE6C9927AB35D00048BDA4 /* CountrySelectionMock.swift in Sources */,
-				E72CDF5528C8B9230008D4B8 /* NewRegulationsAnnouncementViewModelTests.swift in Sources */,
 				E738565428646CC10070C1B0 /* RecoveryImportSelectionItemTests.swift in Sources */,
 				0994A4D5273431A500B21FCF /* TestUtil.swift in Sources */,
 				E738565F2864AFE10070C1B0 /* CertificateImportSelectionRouterMock.swift in Sources */,
@@ -3742,6 +3740,7 @@
 				2181C172264F037000DE7412 /* WelcomeViewController.swift in Sources */,
 				09AC1DF32757B423008356CD /* RecoveryResultViewModel.swift in Sources */,
 				096EB4DD27D768D3005CE76F /* RevocationSettingsRouterProtocol.swift in Sources */,
+				E7F863AB28DA133600F7D54C /* NewRegulationsAnnouncementSceneFactory.swift in Sources */,
 				09AC1DE92757ADAA008356CD /* ValidationResultSceneFactory.swift in Sources */,
 				2181C161264F035500DE7412 /* ValidatorOverviewViewController.swift in Sources */,
 				2181C19F264F03B800DE7412 /* MainSceneFactory.swift in Sources */,
@@ -3820,6 +3819,7 @@
 				0957848627A2D28400E8206C /* ViewModelDelegateMock.swift in Sources */,
 				E7F8D88928880B61007C4AE7 /* CBORWebToken+GProofViewModelTests.swift in Sources */,
 				E7D242BF28BD326A00C5D137 /* ValidationViewModelProtocol+ExtensionTests.swift in Sources */,
+				E7F863B028DA172A00F7D54C /* NewRegulationsAnnouncementSceneFactoryTests.swift in Sources */,
 				09541B5927FD7FD800A32547 /* CBORWebTokenExtensions.swift in Sources */,
 				E7D1F0A52861E12700FA7465 /* CameraAccessProviderMock.swift in Sources */,
 				95A031EB27359AC60073FDD1 /* ValidationResultViewControllerSnapShotTests.swift in Sources */,

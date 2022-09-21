@@ -19,8 +19,6 @@ public class CheckSituationViewController: UIViewController {
     @IBOutlet var descriptionTextWrapper: UIView!
     @IBOutlet var subTitleTextWrapper: UIView!
     @IBOutlet var pageImageView: UIImageView!
-    @IBOutlet var optionOneTravel: CountryItemView!
-    @IBOutlet var optionTwoDomestic: CountryItemView!
     @IBOutlet var descriptionLabel: PlainLabel!
     @IBOutlet var descriptionContainerView: UIView!
     @IBOutlet var subTitleLabel: PlainLabel!
@@ -82,25 +80,7 @@ public class CheckSituationViewController: UIViewController {
         super.viewWillAppear(animated)
         UIAccessibility.post(notification: .announcement, argument: viewModel.onboardingClose)
     }
-    
-    private func configureDomesticSelection() {
-        let domesticRulesAttrbString = NSMutableAttributedString()
-        domesticRulesAttrbString.append(viewModel.domesticRulesTitle.styledAs(.header_3))
-        domesticRulesAttrbString.append("\n".styledAs(.body))
-        domesticRulesAttrbString.append(viewModel.domesticRulesDescription.styledAs(.body))
-        optionTwoDomestic.textLabel.attributedText = domesticRulesAttrbString
-        optionTwoDomestic.leftIcon.isHidden = true
-        stackview.setCustomSpacing(40, after: optionTwoDomestic)
-    }
-    
-    private func configureTravelRulesSelection() {
-        let travelRulesAttrbString = NSMutableAttributedString()
-        travelRulesAttrbString.append(viewModel.travelRulesTitle.styledAs(.header_3))
-        travelRulesAttrbString.append("\n".styledAs(.body))
-        travelRulesAttrbString.append(viewModel.travelRulesDescription.styledAs(.body))
-        optionOneTravel.textLabel.attributedText = travelRulesAttrbString
-    }
-    
+
     private func configureSaveButton() {
         saveButton.style = .primary
         saveButton.title = viewModel.doneButtonTitle
@@ -109,9 +89,6 @@ public class CheckSituationViewController: UIViewController {
     
     private func configureHidden() {
         descriptionContainerView.isHidden = viewModel.descriptionIsHidden
-        optionTwoDomestic.isHidden = viewModel.selectionIsHidden
-        optionOneTravel.isHidden = viewModel.selectionIsHidden
-        optionOneTravel.leftIcon.isHidden = true
         saveButton.isHidden = viewModel.buttonIsHidden
         subTitleTextWrapper.isHidden = viewModel.subTitleIsHidden
         hStackView.isHidden = viewModel.hStackViewIsHidden
@@ -143,12 +120,9 @@ public class CheckSituationViewController: UIViewController {
         descriptionLabel.attributedText = viewModel.footerText.styledAs(.body)
         subTitleLabel.attributedText = viewModel.subTitleText.styledAs(.header_3)
         configureImageView()
-        configureTravelRulesSelection()
-        configureDomesticSelection()
         configureHidden()
         configureSaveButton()
         configureSpacings()
-        configSelection()
         configureOfflineRevocationView()
         configureUpdateView()
     }
@@ -168,25 +142,6 @@ public class CheckSituationViewController: UIViewController {
         }
         offlineRevocationSwitch.uiSwitch.isOn = viewModel.offlineRevocationIsEnabled
         offlineRevocationSwitch.updateAccessibility()
-    }
-    
-    func configSelection() {
-        switch viewModel.selectedRule {
-        case .eu:
-            optionOneTravel.rightIcon.image = .checkboxChecked
-            optionTwoDomestic.rightIcon.image = .checkboxUnchecked
-        case .de:
-            optionOneTravel.rightIcon.image = .checkboxUnchecked
-            optionTwoDomestic.rightIcon.image = .checkboxChecked
-        default:
-            break
-        }
-        optionOneTravel.action = {
-            self.viewModel.selectedRule = .eu
-        }
-        optionTwoDomestic.action = {
-            self.viewModel.selectedRule = .de
-        }
     }
 }
 
@@ -259,7 +214,6 @@ extension CheckSituationViewController {
 
 extension CheckSituationViewController: ViewModelDelegate {
     public func viewModelDidUpdate() {
-        configSelection()
         updateUpdateRelatedViews()
         toggleOfflineRevocationIfNeeded()
     }
