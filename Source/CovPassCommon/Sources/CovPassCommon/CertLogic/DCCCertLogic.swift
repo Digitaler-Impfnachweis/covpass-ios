@@ -220,7 +220,7 @@ public class DCCCertLogic: DCCCertLogicProtocol {
             rules = dccDomesticRules.acceptenceAndInvalidationRules
         case .gStatusAndRules:
             let domesticRules = dccDomesticRules
-            rules = domesticRules.acceptenceAndInvalidationRules + domesticRules.gStatusRules
+            rules = domesticRules.acceptenceAndInvalidationRules
         case .maskStatusAndRules:
             let domesticRules = dccDomesticRules
             rules = domesticRules.acceptenceAndInvalidationRules + domesticRules.maskStatusRules
