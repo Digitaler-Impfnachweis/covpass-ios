@@ -124,6 +124,7 @@ class CertificateOverviewSnapShotTests: BaseSnapShotTests {
         var cert: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended()
         cert.vaccinationCertificate.exp = Calendar.current.date(byAdding: .year, value: -2, to: Date())
         cert.wasExpiryAlertShown = true
+        cert.reissueProcessNewBadgeAlreadySeen = true
         let certs = [cert]
         vacinationRepoMock.certificates = certs
         let viewModel = self.viewModel(repository: vacinationRepoMock, holderNeedsMask: false)

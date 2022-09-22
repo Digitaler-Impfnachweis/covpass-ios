@@ -218,6 +218,7 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         cert.vaccinationCertificate.hcert.dgc.r!.first!.du = DateUtils.parseDate("2021-04-26T15:05:00")!
         cert.invalid = true
         cert.wasExpiryAlertShown = true
+        cert.reissueProcessNewBadgeAlreadySeen = true
         let certs = [cert]
         vaccinationRepository.certificates = certs
         
@@ -280,6 +281,7 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         cert.vaccinationCertificate.hcert.dgc.r!.first!.du = DateUtils.parseDate("2021-04-26T15:05:00")!
         cert.vaccinationCertificate.exp = Calendar.current.date(byAdding: .year, value: -2, to: Date())
         cert.wasExpiryAlertShown = true
+        cert.reissueProcessNewBadgeAlreadySeen = true
         let certs = [cert]
         vaccinationRepository.certificates = certs
         

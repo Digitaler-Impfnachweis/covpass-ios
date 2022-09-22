@@ -32,7 +32,7 @@ class CertificateCardMaskImmunityViewModel: CertificateCardViewModelProtocol {
         guard token.vaccinationCertificate.isNotTest else {
             return false
         }
-        guard token.expiryAlertWasNotShown else {
+        guard token.expiryAlertWasNotShown || !(token.reissueProcessNewBadgeAlreadySeen ?? false) else {
             return false
         }
         let cert = token.vaccinationCertificate
