@@ -125,14 +125,6 @@ class ValidatorOverviewViewModel {
     var offlineInformationCellIcon: UIImage = .chevronRight
     private var shouldSomethingBeUpdated: Bool { certLogic.rulesShouldBeUpdated || certLogic.valueSetsShouldBeUpdated || vaccinationRepository.trustListShouldBeUpdated() }
     
-    var checkSituationText: String {
-        switch userDefaults.selectedLogicType {
-        case .eu: return Constants.Keys.CheckSituation.euText
-        case .de: return Constants.Keys.CheckSituation.deText
-        case .booster, .maskStatusAndRules, .gStatusAndRules: return ""
-        }
-    }
-    
     var switchText: String {
         Constants.Keys.Toggle.validation_start_screen_scan_message_2G_toggle
     }

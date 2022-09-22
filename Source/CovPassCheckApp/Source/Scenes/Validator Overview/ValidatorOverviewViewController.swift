@@ -19,7 +19,6 @@ class ValidatorOverviewViewController: UIViewController {
     @IBOutlet var scanCard: ScanCardView!
     @IBOutlet var timeHintView: HintView!
     @IBOutlet var scanTypeSegment: UISegmentedControl!
-    @IBOutlet var checkSituationLabel: UILabel!
     @IBOutlet var offlineInformationView: UIView!
     @IBOutlet var offlineInformationStateWrapperView: UIView!
     @IBOutlet var offlineInformationTitleLabel: PlainLabel!
@@ -61,7 +60,6 @@ class ValidatorOverviewViewController: UIViewController {
         viewModel.updateTrustList()
         viewModel.updateDCCRules()
         viewModel.updateValueSets()
-        setupCheckSituationView()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -92,7 +90,6 @@ class ValidatorOverviewViewController: UIViewController {
     private func setupCardView() {
         setScanButtonLoadingState()        
         setupTimeHintView()
-        setupCheckSituationView()
     }
     
     private func setupTimeHintView() {
@@ -123,10 +120,6 @@ class ValidatorOverviewViewController: UIViewController {
         scanTypeSegment.setTitle(viewModel.segment3GTitle, forSegmentAt: ScanType._3G.rawValue)
         scanTypeSegment.setTitle(viewModel.segment2GTitle, forSegmentAt: ScanType._2G.rawValue)
         scanCard.updateAccessibility()
-    }
-    
-    private func setupCheckSituationView() {
-        checkSituationLabel.attributedText = viewModel.checkSituationText.styledAs(.body).aligned(to: .center)
     }
     
     private func setupOfflineInformationView() {

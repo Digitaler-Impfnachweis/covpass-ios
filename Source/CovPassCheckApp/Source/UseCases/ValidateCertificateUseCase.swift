@@ -45,7 +45,7 @@ struct ValidateCertificateUseCase {
     
     private func checkBusinessRules(_ token: ExtendedCBORWebToken) ->  Promise<Result> {
         // Validate given certificate based on GERMAN rules and users local time (CovPassCheck only)
-        let validationResult = try? certLogic.validate(type: persistence.selectedLogicType,
+        let validationResult = try? certLogic.validate(type: .de,
                                                        countryCode: "DE",
                                                        validationClock: Date(),
                                                        certificate: token.vaccinationCertificate)

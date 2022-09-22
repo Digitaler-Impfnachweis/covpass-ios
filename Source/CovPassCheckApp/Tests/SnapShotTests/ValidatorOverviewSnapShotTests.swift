@@ -25,7 +25,6 @@ class ValidatorOverviewSnapShotTests: BaseSnapShotTests {
         userDefaults.lastUpdatedTrustList = lastUpdateTrustList
         userDefaults.validatorOverviewBoosterAsTest = boosterAsTest
         vaccinationRepoMock.shouldTrustListUpdate = shouldTrustListUpdate
-        userDefaults.selectedLogicType = logicType
         let vm = ValidatorOverviewViewModel(router: ValidatorMockRouter(),
                                             repository: vaccinationRepoMock,
                                             revocationRepository: CertificateRevocationRepositoryMock(),
@@ -41,12 +40,12 @@ class ValidatorOverviewSnapShotTests: BaseSnapShotTests {
     
     func testDefault() {
         let sut = self.configureSut()
-        verifyView(vc: sut)
+        verifyView(view: sut.view)
     }
     
     func testDefaultEUCheckSituation() {
         let sut = self.configureSut(logicType: .eu)
-        verifyView(vc: sut)
+        verifyView(view: sut.view)
     }
     
     func testSegment2GSelected() {
@@ -54,7 +53,7 @@ class ValidatorOverviewSnapShotTests: BaseSnapShotTests {
         sut.view.bounds = UIScreen.main.bounds
         sut.scanTypeSegment.selectedSegmentIndex = 1
         sut.segmentChanged(sut.scanTypeSegment)
-        verifyView(vc: sut)
+        verifyView(view: sut.view)
     }
 
     func testSegment2GSelected_booster_as_test() {
@@ -62,24 +61,24 @@ class ValidatorOverviewSnapShotTests: BaseSnapShotTests {
         sut.view.bounds = UIScreen.main.bounds
         sut.scanTypeSegment.selectedSegmentIndex = 1
         sut.segmentChanged(sut.scanTypeSegment)
-        verifyView(vc: sut)
+        verifyView(view: sut.view)
     }
     
     func testOfflineModeAvailable() {
         let sut = self.configureSut(lastUpdateTrustList: DateUtils.parseDate("2021-04-26T15:05:00"),
                                     shouldTrustListUpdate: false)
-        verifyView(vc: sut)
+        verifyView(view: sut.view)
     }
     
     func testOfflineModeNotAvailable() {
         let sut = self.configureSut(lastUpdateTrustList: DateUtils.parseDate("2021-04-26T15:05:00"))
-        verifyView(vc: sut)
+        verifyView(view: sut.view)
     }
     
     func testTimeHint() {
         let sut = self.configureSut(lastUpdateTrustList: DateUtils.parseDate("2021-04-26T15:05:00"),
                                     ntpDate: DateUtils.parseDate("2021-04-26T15:05:00")!,
                                     ntpOffset: 7201)
-        verifyView(vc: sut)
+        verifyView(view: sut.view)
     }
 }

@@ -34,33 +34,6 @@ class UserDefaultsPersistenceTests: XCTestCase {
         XCTAssertNil(try sut.fetch(randomKey))
     }
     
-    func testSetLogicTypeEu() {
-        // GIVEN
-        sut.selectedLogicType = .eu
-        // WHEN
-        let selectedLogicType = sut.selectedLogicType
-        // THEN
-        XCTAssertEqual(selectedLogicType, .eu)
-    }
-    
-    func testSetLogicTypeDe() {
-        // GIVEN
-        sut.selectedLogicType = .de
-        // WHEN
-        let selectedLogicType = sut.selectedLogicType
-        // THEN
-        XCTAssertEqual(selectedLogicType, .de)
-    }
-    
-    func testSetLogicTypeBooster() {
-        // GIVEN
-        sut.selectedLogicType = .booster
-        // WHEN
-        let selectedLogicType = sut.selectedLogicType
-        // THEN
-        XCTAssertEqual(selectedLogicType, .booster)
-    }
-    
     func testSetRevocationExpertMode_True() {
         // GIVEN
         sut.revocationExpertMode = true

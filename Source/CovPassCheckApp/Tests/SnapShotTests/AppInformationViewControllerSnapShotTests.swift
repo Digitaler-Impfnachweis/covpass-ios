@@ -30,16 +30,11 @@ class AppInformationViewControllerSnapShotTests: BaseSnapShotTests {
     }
 
     func testDefault() {
-        // Given
-        persistence.selectedLogicType = .de
-
-        // Then
         verifyView(vc: sut)
     }
     
     func testDefaultAlternative() {
         // Given
-        persistence.selectedLogicType = .eu
         persistence.revocationExpertMode = true
         persistence.enableAcousticFeedback = true
 
