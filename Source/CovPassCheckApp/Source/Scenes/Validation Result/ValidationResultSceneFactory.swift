@@ -18,7 +18,6 @@ struct ValidationResultSceneFactory: ResolvableSceneFactory {
     let certificate: ExtendedCBORWebToken?
     let error: Error?
     let buttonHidden: Bool
-    let _2GContext: Bool
     let userDefaults: Persistence
 
     // MARK: - Lifecycle
@@ -27,13 +26,11 @@ struct ValidationResultSceneFactory: ResolvableSceneFactory {
          certificate: ExtendedCBORWebToken?,
          error: Error?,
          buttonHidden: Bool = false,
-         _2GContext: Bool,
          userDefaults: Persistence) {
         self.router = router
         self.certificate = certificate
         self.error = error
         self.buttonHidden = buttonHidden
-        self._2GContext = _2GContext
         self.userDefaults = userDefaults
     }
     
@@ -44,7 +41,6 @@ struct ValidationResultSceneFactory: ResolvableSceneFactory {
             repository: VaccinationRepository.create(),
             certificate: certificate,
             error: error,
-            _2GContext: _2GContext,
             userDefaults: userDefaults
         )
         viewModel.buttonHidden = buttonHidden

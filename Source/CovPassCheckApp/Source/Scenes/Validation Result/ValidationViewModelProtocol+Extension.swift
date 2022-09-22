@@ -14,7 +14,6 @@ import CertLogic
 
 private enum Constants {
     static let confirmButtonLabel = "validation_check_popup_valid_vaccination_button_title".localized
-    static let confirmButtonLabel2G = "result_2G_button_startover".localized
     static let revocationBody = "validation_check_popup_revoked_certificate_box_text".localized
     static let revocationTitle = "revocation_headline".localized
 }
@@ -22,7 +21,7 @@ private enum Constants {
 extension ValidationViewModelProtocol {
     
     var revocationInfoHidden: Bool {
-        !userDefaults.revocationExpertMode || _2GContext
+        !userDefaults.revocationExpertMode
     }
 
     var revocationInfoText: String {
@@ -34,7 +33,7 @@ extension ValidationViewModelProtocol {
     }
         
     var toolbarState: CustomToolbarState {
-        let buttonText = _2GContext ? Constants.confirmButtonLabel2G : Constants.confirmButtonLabel
+        let buttonText = Constants.confirmButtonLabel
         return .confirm(buttonText)
     }
     
@@ -69,22 +68,16 @@ extension ValidationViewModelProtocol {
             return ValidateCertificateUseCase(token: token,
                                               revocationRepository: self.revocationRepository!,
                                               certLogic: DCCCertLogic.create(),
-                                              persistence: self.userDefaults,
-                                              allowExceptions: _2GContext).execute()
+                                              persistence: self.userDefaults).execute()
         }
         .done { result in
-            if self._2GContext {
-                resolvable.fulfill(result.token)
-                return
-            }
-            
+
             let vm = ValidationResultFactory.createViewModel(
                 resolvable: resolvable,
                 router: self.router,
                 repository: self.repository,
                 certificate: result.token,
                 error: nil,
-                _2GContext: _2GContext,
                 userDefaults: userDefaults
             )
             self.delegate?.viewModelDidChange(vm)
@@ -99,7 +92,6 @@ extension ValidationViewModelProtocol {
                 repository: self.repository,
                 certificate: tmpToken,
                 error: error,
-                _2GContext: _2GContext,
                 userDefaults: userDefaults
             )
             self.delegate?.viewModelDidChange(vm)

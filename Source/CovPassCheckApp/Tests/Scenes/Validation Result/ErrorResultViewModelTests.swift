@@ -21,7 +21,6 @@ class ErrorResultViewModelTests: XCTestCase {
             router: ValidationResultRouterMock(),
             repository: VaccinationRepositoryMock(),
             error: NSError(domain: "TEST", code: 0),
-            _2GContext: false,
             userDefaults: MockPersistence(),
             revocationKeyFilename: "",
             revocationRepository: CertificateRevocationRepositoryMock(),

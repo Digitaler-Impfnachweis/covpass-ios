@@ -92,11 +92,10 @@ class ErrorResultViewModel: ValidationResultViewModel {
     var revocationInfoHidden: Bool {
         let revocationExportModeIsDisabled = !userDefaults.revocationExpertMode
         let isNotAnFunctionalError = !((error as? ValidationResultError) == .functional)
-        return revocationExportModeIsDisabled || isNotAnFunctionalError || _2GContext
+        return revocationExportModeIsDisabled || isNotAnFunctionalError
     }
     
     var buttonHidden: Bool = false
-    var _2GContext: Bool
     var userDefaults: Persistence
     var isLoadingScan: Bool = false {
         didSet {
@@ -111,7 +110,6 @@ class ErrorResultViewModel: ValidationResultViewModel {
          repository: VaccinationRepositoryProtocol,
          certificate: ExtendedCBORWebToken? = nil,
          error: Error,
-         _2GContext: Bool,
          userDefaults: Persistence,
          revocationKeyFilename: String,
          revocationRepository: CertificateRevocationRepositoryProtocol,
@@ -124,7 +122,6 @@ class ErrorResultViewModel: ValidationResultViewModel {
         self.repository = repository
         self.certificate = certificate
         self.error = error
-        self._2GContext = _2GContext
         self.userDefaults = userDefaults
         self.revocationKeyFilename = revocationKeyFilename
     }

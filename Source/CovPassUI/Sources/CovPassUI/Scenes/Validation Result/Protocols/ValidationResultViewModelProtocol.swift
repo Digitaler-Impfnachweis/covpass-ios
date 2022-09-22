@@ -28,7 +28,6 @@ public protocol ValidationViewModelProtocol {
     var revocationInfoText: String { get }
     var buttonHidden: Bool { get set }
     var isLoadingScan: Bool { get set }
-    var _2GContext: Bool { get set }
     var revocationInfoHidden: Bool { get }
     var userDefaults: Persistence { get }
     var revocationKeyFilename: String { get }

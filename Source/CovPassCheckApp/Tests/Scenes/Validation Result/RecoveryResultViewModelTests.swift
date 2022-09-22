@@ -26,7 +26,6 @@ class RecoveryResultViewModelTests: XCTestCase {
             router: router,
             repository: VaccinationRepositoryMock(),
             certificate: nil,
-            _2GContext: false,
             userDefaults: UserDefaultsPersistence(),
             revocationKeyFilename: "",
             countdownTimerModel: .init(

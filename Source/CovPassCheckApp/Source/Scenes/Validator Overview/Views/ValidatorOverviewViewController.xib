@@ -23,7 +23,6 @@
                 <outlet property="offlineInformationUpdateCellTitleLabel" destination="Mkl-Ob-tnN" id="mRu-XL-1Il"/>
                 <outlet property="offlineInformationView" destination="ZnB-jU-bzk" id="0W5-g1-brB"/>
                 <outlet property="scanCard" destination="0Le-DA-8MJ" id="hqR-DR-0ma"/>
-                <outlet property="scanTypeSegment" destination="7SU-cs-ahY" id="4Ef-mN-DXc"/>
                 <outlet property="timeHintView" destination="h6e-Af-Kqm" id="oa1-he-uRS"/>
                 <outlet property="view" destination="oRh-oW-Top" id="0bV-Tk-AFp"/>
             </connections>
@@ -42,58 +41,41 @@
                             <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LPz-bQ-P6F">
-                            <rect key="frame" x="0.0" y="100" width="414" height="1150"/>
+                            <rect key="frame" x="0.0" y="100" width="414" height="1095"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="UmP-gd-ynO">
-                                    <rect key="frame" x="24" y="12" width="366" height="1138"/>
+                                    <rect key="frame" x="24" y="12" width="366" height="1083"/>
                                     <subviews>
-                                        <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="7SU-cs-ahY">
-                                            <rect key="frame" x="0.0" y="0.0" width="366" height="32"/>
-                                            <segments>
-                                                <segment title="First"/>
-                                                <segment title="Second"/>
-                                            </segments>
-                                            <connections>
-                                                <action selector="segmentChanged:" destination="-1" eventType="valueChanged" id="Wor-Je-s7E"/>
-                                            </connections>
-                                        </segmentedControl>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lPj-Yr-ZaZ" userLabel="spacer">
-                                            <rect key="frame" x="0.0" y="31" width="366" height="24"/>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="24" id="6lq-kQ-VBQ"/>
-                                            </constraints>
-                                        </view>
                                         <view contentMode="scaleToFill" placeholderIntrinsicWidth="366" placeholderIntrinsicHeight="350" translatesAutoresizingMaskIntoConstraints="NO" id="0Le-DA-8MJ" customClass="ScanCardView" customModule="CovPassUI">
-                                            <rect key="frame" x="0.0" y="55" width="366" height="350"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="366" height="350"/>
                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="350" id="wHQ-Hr-dqv"/>
                                             </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nRU-ku-FZH" userLabel="spacer">
-                                            <rect key="frame" x="0.0" y="405" width="366" height="20"/>
+                                            <rect key="frame" x="0.0" y="350" width="366" height="20"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="20" id="3C7-tO-Ibx"/>
                                             </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" placeholderIntrinsicWidth="366" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="h6e-Af-Kqm" customClass="HintView" customModule="CovPassUI">
-                                            <rect key="frame" x="0.0" y="425" width="366" height="128"/>
+                                            <rect key="frame" x="0.0" y="370" width="366" height="128"/>
                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="128" id="mxR-kh-HLg"/>
                                             </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oRM-tT-xQQ" userLabel="spacer">
-                                            <rect key="frame" x="0.0" y="553" width="366" height="20"/>
+                                            <rect key="frame" x="0.0" y="498" width="366" height="20"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="20" id="QgE-R4-c51"/>
                                             </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZnB-jU-bzk" userLabel="Offline Information View">
-                                            <rect key="frame" x="0.0" y="573" width="366" height="565"/>
+                                            <rect key="frame" x="0.0" y="518" width="366" height="565"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="2yT-hW-9HN">
                                                     <rect key="frame" x="0.0" y="16" width="366" height="533"/>

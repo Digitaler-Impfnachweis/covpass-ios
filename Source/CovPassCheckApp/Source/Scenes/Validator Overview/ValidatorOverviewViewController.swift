@@ -18,7 +18,6 @@ class ValidatorOverviewViewController: UIViewController {
     @IBOutlet var headerView: InfoHeaderView!
     @IBOutlet var scanCard: ScanCardView!
     @IBOutlet var timeHintView: HintView!
-    @IBOutlet var scanTypeSegment: UISegmentedControl!
     @IBOutlet var offlineInformationView: UIView!
     @IBOutlet var offlineInformationStateWrapperView: UIView!
     @IBOutlet var offlineInformationTitleLabel: PlainLabel!
@@ -104,21 +103,10 @@ class ValidatorOverviewViewController: UIViewController {
     
     private func setupSegmentControl() {
         scanCard.switchWrapperViewIsHidden = true
-        scanCard.uiSwitch.isOn = viewModel.boosterAsTest
-        scanCard.switchAction = { isOn in
-            self.viewModel.boosterAsTest = isOn
-        }
-        scanCard.switchTextLabel.attributedText = viewModel.switchText.styledAs(.body).colored(.backgroundSecondary)
-        scanCard.titleLabel.attributedText = viewModel.segment3GTitle.styledAs(.header_1).colored(.backgroundSecondary)
-        scanCard.textLabel.attributedText = viewModel.segment3GMessage.styledAs(.body).colored(.backgroundSecondary)
         scanCard.actionButton.title = "validation_start_screen_scan_action_button_title".localized
         scanCard.actionButton.action = { [weak self] in
             self?.viewModel.startQRCodeValidation()
         }
-        scanTypeSegment.selectedSegmentIndex = viewModel.scanType.rawValue
-        segmentChanged(scanTypeSegment)
-        scanTypeSegment.setTitle(viewModel.segment3GTitle, forSegmentAt: ScanType._3G.rawValue)
-        scanTypeSegment.setTitle(viewModel.segment2GTitle, forSegmentAt: ScanType._2G.rawValue)
         scanCard.updateAccessibility()
     }
     
@@ -137,22 +125,6 @@ class ValidatorOverviewViewController: UIViewController {
     }
     
     // MARK: - Actions
-    
-    @IBAction func segmentChanged(_ sender: UISegmentedControl) {
-        switch ScanType(rawValue:sender.selectedSegmentIndex) {
-        case ._3G:
-            scanCard.titleLabel.attributedText = viewModel.segment3GTitle.styledAs(.header_1).colored(.backgroundSecondary)
-            scanCard.textLabel.attributedText = viewModel.segment3GMessage.styledAs(.body).colored(.backgroundSecondary)
-            scanCard.switchWrapperViewIsHidden = true
-            viewModel.scanType = ._3G
-        case ._2G:
-            scanCard.titleLabel.attributedText = viewModel.segment2GTitle.styledAs(.header_1).colored(.backgroundSecondary)
-            scanCard.textLabel.attributedText = viewModel.segment2GMessage.styledAs(.body).colored(.backgroundSecondary)
-            scanCard.switchWrapperViewIsHidden = false
-            viewModel.scanType = ._2G
-        default: break
-        }
-    }
     
     @IBAction func routeToUpdateTapped(_ sender: Any) {
         viewModel.routeToRulesUpdate()

@@ -36,13 +36,12 @@ class ValidatorMockRouter: ValidatorOverviewRouterProtocol {
         return .value(.scanResult(.success("")))
     }
     
-    func showCertificate(_ certificate: ExtendedCBORWebToken?, _2GContext: Bool, userDefaults: Persistence) {
+    func showCertificate(_ certificate: ExtendedCBORWebToken?, userDefaults: Persistence) {
 
     }
     
     func showError(_ certificate: ExtendedCBORWebToken?,
                    error: Error,
-                   _2GContext: Bool,
                    userDefaults: Persistence) -> Promise<ExtendedCBORWebToken> {
         .value(ExtendedCBORWebToken(
             vaccinationCertificate: .mockTestCertificate,

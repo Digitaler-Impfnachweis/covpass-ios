@@ -26,7 +26,6 @@ class ValidationResultViewControllerSnapShotTests: BaseSnapShotTests {
 
     func configureView(error: ValidationResultError?,
                        token: ExtendedCBORWebToken?,
-                       _2GContext: Bool,
                        buttonHidden: Bool,
                        expertMode: Bool? = nil,
                        hideCountdown: Bool = true
@@ -44,7 +43,6 @@ class ValidationResultViewControllerSnapShotTests: BaseSnapShotTests {
                                       repository: VaccinationRepositoryMock(),
                                       certificate: nil,
                                       error: error,
-                                      _2GContext: _2GContext,
                                       userDefaults: persistence,
                                       revocationKeyFilename: "",
                                       revocationRepository: CertificateRevocationRepositoryMock(),
@@ -61,7 +59,6 @@ class ValidationResultViewControllerSnapShotTests: BaseSnapShotTests {
                                                 router: ValidationResultRouterMock(),
                                                 repository: VaccinationRepositoryMock(),
                                                 certificate: token,
-                                                _2GContext: _2GContext,
                                                 userDefaults: persistence,
                                                 revocationKeyFilename: "",
                                                 countdownTimerModel: countdownTimerModel,
@@ -72,7 +69,6 @@ class ValidationResultViewControllerSnapShotTests: BaseSnapShotTests {
                                              router: ValidationResultRouterMock(),
                                              repository: VaccinationRepositoryMock(),
                                              certificate: token,
-                                             _2GContext: _2GContext,
                                              userDefaults: persistence,
                                              revocationKeyFilename: "",
                                              countdownTimerModel: countdownTimerModel,
@@ -83,7 +79,6 @@ class ValidationResultViewControllerSnapShotTests: BaseSnapShotTests {
                                          router: ValidationResultRouterMock(),
                                          repository: VaccinationRepositoryMock(),
                                          certificate: token,
-                                         _2GContext: _2GContext,
                                          userDefaults: persistence,
                                          revocationKeyFilename: "",
                                          countdownTimerModel: countdownTimerModel,
@@ -96,36 +91,21 @@ class ValidationResultViewControllerSnapShotTests: BaseSnapShotTests {
     }
     
     func testValidationResultViewControllerWithTechnicalError() {
-        let view = configureView(error: .technical, token: nil, _2GContext: false, buttonHidden: false)
+        let view = configureView(error: .technical, token: nil, buttonHidden: false)
         verifyView(view: view, height: 900)
     }
 
     func testValidationResultViewControllerWithFunctionalError() {
-        let view = configureView(error: .functional, token: nil, _2GContext: false, buttonHidden: false)
+        let view = configureView(error: .functional, token: nil, buttonHidden: false)
         verifyView(view: view, height: 900)
     }
     
-    func testValidationResultViewControllerWithTechnicalError2GContext() {
-        let view = configureView(error: .technical, token: nil, _2GContext: true, buttonHidden: false)
-        verifyView(view: view, height: 900)
 
-    }
-    
-    func testValidationResultViewControllerWithFunctionalError2GContext() {
-        let view = configureView(error: .functional, token: nil, _2GContext: true, buttonHidden: false)
-        verifyView(view: view, height: 900)
-    }
-    
-    func testValidationResultViewControllerWithFunctionalError2GContextButtonHidden() {
-        let view = configureView(error: .functional, token: nil, _2GContext: true, buttonHidden: true)
-        verifyView(view: view, height: 900)
-    }
-    
     func testSuccessVaccination() {
         let token = ExtendedCBORWebToken(
             vaccinationCertificate: CBORWebToken.mockVaccinationCertificate,
             vaccinationQRCodeData: "")
-        let view = configureView(error: nil, token: token, _2GContext: true, buttonHidden: true)
+        let view = configureView(error: nil, token: token, buttonHidden: true)
         verifyView(view: view, height: 900)
     }
 
@@ -133,7 +113,7 @@ class ValidationResultViewControllerSnapShotTests: BaseSnapShotTests {
         let token = ExtendedCBORWebToken(
             vaccinationCertificate: CBORWebToken.mockVaccinationCertificate,
             vaccinationQRCodeData: "")
-        let view = configureView(error: nil, token: token, _2GContext: true, buttonHidden: true, hideCountdown: false)
+        let view = configureView(error: nil, token: token, buttonHidden: true, hideCountdown: false)
         verifyView(view: view, height: 900)
     }
     
@@ -141,7 +121,7 @@ class ValidationResultViewControllerSnapShotTests: BaseSnapShotTests {
         let token = ExtendedCBORWebToken(
             vaccinationCertificate: CBORWebToken.mockVaccinationCertificate,
             vaccinationQRCodeData: "")
-        let view = configureView(error: nil, token: token, _2GContext: true, buttonHidden: true)
+        let view = configureView(error: nil, token: token, buttonHidden: true)
         verifyView(view: view, height: 900)
     }
 
@@ -149,7 +129,7 @@ class ValidationResultViewControllerSnapShotTests: BaseSnapShotTests {
         let token = ExtendedCBORWebToken(
             vaccinationCertificate: CBORWebToken.mockVaccinationCertificate,
             vaccinationQRCodeData: "")
-        let view = configureView(error: nil, token: token, _2GContext: true, buttonHidden: true, hideCountdown: false)
+        let view = configureView(error: nil, token: token, buttonHidden: true, hideCountdown: false)
         verifyView(view: view, height: 900)
     }
     
@@ -157,7 +137,7 @@ class ValidationResultViewControllerSnapShotTests: BaseSnapShotTests {
         let token = ExtendedCBORWebToken(
             vaccinationCertificate: CBORWebToken.mockVaccinationCertificate,
             vaccinationQRCodeData: "")
-        let view = configureView(error: nil, token: token, _2GContext: false, buttonHidden: false, expertMode: true)
+        let view = configureView(error: nil, token: token, buttonHidden: false, expertMode: true)
         verifyView(view: view, height: 900)
     }
     
@@ -165,12 +145,12 @@ class ValidationResultViewControllerSnapShotTests: BaseSnapShotTests {
         let token = ExtendedCBORWebToken(
             vaccinationCertificate: CBORWebToken.mockVaccinationCertificate,
             vaccinationQRCodeData: "")
-        let view = configureView(error: nil, token: token, _2GContext: false, buttonHidden: false, expertMode: true)
+        let view = configureView(error: nil, token: token, buttonHidden: false, expertMode: true)
         verifyView(view: view, height: 900)
     }
     
     func testErrorFunctionalExpertMode() {
-        let view = configureView(error: .functional, token: nil, _2GContext: false, buttonHidden: false, expertMode: true)
+        let view = configureView(error: .functional, token: nil, buttonHidden: false, expertMode: true)
         verifyView(view: view, height: 900)
     }
 }

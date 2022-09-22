@@ -15,7 +15,6 @@ struct ValidateCertificateUseCase {
     let revocationRepository: CertificateRevocationRepositoryProtocol
     let certLogic: DCCCertLogicProtocol
     let persistence: Persistence
-    let allowExceptions: Bool
     
     struct Result {
         let token: ExtendedCBORWebToken
@@ -50,15 +49,7 @@ struct ValidateCertificateUseCase {
                                                        validationClock: Date(),
                                                        certificate: token.vaccinationCertificate)
         let valid = validationResult?.contains(where: { $0.result != .passed }) == false
-        
-        if allowExceptions,
-            token.vaccinationCertificate.isRecovery,
-            validationResult?.failedResults.count == 1,
-            let ruleResult0002 = validationResult?.validationResult(ofRule: "RR-DE-0002"),
-            ruleResult0002.result == .fail {
-            ruleResult0002.result = .open
-            return .value(.init(token: token, validationResults: validationResult))
-        }
+
         // Show error dialog when at least one rule failed or there are no rules at all
         if !valid {
             return .init(error: ValidationResultError.functional)

@@ -48,22 +48,6 @@ class ValidatorOverviewSnapShotTests: BaseSnapShotTests {
         verifyView(view: sut.view)
     }
     
-    func testSegment2GSelected() {
-        let sut = self.configureSut()
-        sut.view.bounds = UIScreen.main.bounds
-        sut.scanTypeSegment.selectedSegmentIndex = 1
-        sut.segmentChanged(sut.scanTypeSegment)
-        verifyView(view: sut.view)
-    }
-
-    func testSegment2GSelected_booster_as_test() {
-        let sut = self.configureSut(boosterAsTest: true)
-        sut.view.bounds = UIScreen.main.bounds
-        sut.scanTypeSegment.selectedSegmentIndex = 1
-        sut.segmentChanged(sut.scanTypeSegment)
-        verifyView(view: sut.view)
-    }
-    
     func testOfflineModeAvailable() {
         let sut = self.configureSut(lastUpdateTrustList: DateUtils.parseDate("2021-04-26T15:05:00"),
                                     shouldTrustListUpdate: false)

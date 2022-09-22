@@ -55,7 +55,6 @@ class VaccinationResultViewModel: ValidationResultViewModel {
     }
 
     var buttonHidden: Bool = false
-    var _2GContext: Bool
     var userDefaults: Persistence
     var isLoadingScan: Bool = false {
         didSet {
@@ -69,7 +68,6 @@ class VaccinationResultViewModel: ValidationResultViewModel {
          router: ValidationResultRouterProtocol,
          repository: VaccinationRepositoryProtocol,
          certificate: ExtendedCBORWebToken?,
-         _2GContext: Bool,
          userDefaults: Persistence,
          revocationKeyFilename: String,
          countdownTimerModel: CountdownTimerModel,
@@ -82,7 +80,6 @@ class VaccinationResultViewModel: ValidationResultViewModel {
         self.router = router
         self.repository = repository
         self.certificate = certificate
-        self._2GContext = _2GContext
         self.userDefaults = userDefaults
         self.revocationKeyFilename = revocationKeyFilename
         self.countdownTimerModel = countdownTimerModel

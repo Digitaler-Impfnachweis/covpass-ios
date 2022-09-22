@@ -64,11 +64,9 @@ class ValidatorOverviewViewModel {
     
     var delegate: ViewModelDelegate?
     
-    var title: String { Constants.Keys.title }
+    var title = Constants.Keys.title
     
-    var timeHintTitle: String {
-        Constants.Keys.syncTitle
-    }
+    var timeHintTitle = Constants.Keys.syncTitle
     
     var timeHintSubTitle: String {
         String(format: Constants.Keys.syncMessage, ntpDateFormatted)
@@ -78,9 +76,7 @@ class ValidatorOverviewViewModel {
         DateUtils.displayDateTimeFormatter.string(from: ntpDate)
     }
     
-    var timeHintIcon: UIImage {
-        .warning
-    }
+    var timeHintIcon = UIImage.warning
     
     var ntpDate: Date = Date() {
         didSet {
@@ -88,7 +84,7 @@ class ValidatorOverviewViewModel {
         }
     }
     
-    var ntpOffset: TimeInterval = Constants.Config.ntpOffsetInit
+    var ntpOffset = Constants.Config.ntpOffsetInit
     
     var schedulerIntervall: TimeInterval
     
@@ -96,22 +92,6 @@ class ValidatorOverviewViewModel {
         get {
             return abs(ntpOffset) < Constants.Config.twoHoursAsSeconds
         }
-    }
-    
-    var segment3GTitle: String {
-        Constants.Keys.ScanType.validation_start_screen_scan_title
-    }
-    
-    var segment3GMessage: String {
-        Constants.Keys.ScanType.validation_start_screen_scan_message
-    }
-    
-    var segment2GTitle: String {
-        Constants.Keys.ScanType.validation_start_screen_scan_title_2G
-    }
-    
-    var segment2GMessage: String {
-        Constants.Keys.ScanType.validation_start_screen_scan_message_2G
     }
     
     var offlineInformationTitle: String = Constants.Keys.OfflineInformation.title
@@ -125,28 +105,6 @@ class ValidatorOverviewViewModel {
     var offlineInformationCellIcon: UIImage = .chevronRight
     private var shouldSomethingBeUpdated: Bool { certLogic.rulesShouldBeUpdated || certLogic.valueSetsShouldBeUpdated || vaccinationRepository.trustListShouldBeUpdated() }
     
-    var switchText: String {
-        Constants.Keys.Toggle.validation_start_screen_scan_message_2G_toggle
-    }
-
-    var boosterAsTest: Bool {
-        get {
-            userDefaults.validatorOverviewBoosterAsTest
-        }
-        set {
-            userDefaults.validatorOverviewBoosterAsTest = newValue
-        }
-    }
-
-    var scanType: ScanType {
-        get {
-            userDefaults.validatorOverviewScanType ?? ._3G
-        }
-        set {
-            userDefaults.validatorOverviewScanType = newValue
-        }
-    }
-
     private(set) var isLoadingScan = false {
         didSet {
             delegate?.viewModelDidUpdate()
@@ -214,49 +172,43 @@ class ValidatorOverviewViewModel {
     }
     
     func startQRCodeValidation() {
-        if scanType == ._2G {
-            router.showGproof(boosterAsTest: boosterAsTest)
-        } else {
-            var tmpToken: ExtendedCBORWebToken?
-            isLoadingScan = true
-            firstly {
-                router.scanQRCode()
-            }
-            .then { $0.mapOnScanResult() }
-            .get { _ in
-                _ = self.audioPlayer.playCovPassCheckCertificateScannedIfEnabled()
-            }
-            .then {
-                ParseCertificateUseCase(scanResult: $0,
-                                        vaccinationRepository: self.vaccinationRepository).execute()
-            }
-            .then { token -> Promise<ValidateCertificateUseCase.Result> in
-                tmpToken = token
-                return ValidateCertificateUseCase(token: token,
-                                                  revocationRepository: self.revocationRepository,
-                                                  certLogic: DCCCertLogic.create(),
-                                                  persistence: self.userDefaults,
-                                                  allowExceptions: false).execute()
-            }
-            .done {
-                self.router.showCertificate($0.token,
-                                            _2GContext: false,
-                                            userDefaults: self.userDefaults)
-                
-            }
-            .ensure {
-                self.isLoadingScan = false
-            }
-            .catch { error in
-                self.errorHandling(error: error, token: tmpToken, scanType: self.scanType)
-            }
+        
+        var tmpToken: ExtendedCBORWebToken?
+        isLoadingScan = true
+        firstly {
+            router.scanQRCode()
+        }
+        .then { $0.mapOnScanResult() }
+        .get { _ in
+            _ = self.audioPlayer.playCovPassCheckCertificateScannedIfEnabled()
+        }
+        .then {
+            ParseCertificateUseCase(scanResult: $0,
+                                    vaccinationRepository: self.vaccinationRepository).execute()
+        }
+        .then { token -> Promise<ValidateCertificateUseCase.Result> in
+            tmpToken = token
+            return ValidateCertificateUseCase(token: token,
+                                              revocationRepository: self.revocationRepository,
+                                              certLogic: DCCCertLogic.create(),
+                                              persistence: self.userDefaults).execute()
+        }
+        .done {
+            self.router.showCertificate($0.token,
+                                        userDefaults: self.userDefaults)
+            
+        }
+        .ensure {
+            self.isLoadingScan = false
+        }
+        .catch { error in
+            self.errorHandling(error: error, token: tmpToken)
         }
     }
     
-    func errorHandling(error: Error, token: ExtendedCBORWebToken?, scanType: ScanType) {
+    func errorHandling(error: Error, token: ExtendedCBORWebToken?) {
         self.router.showError(token,
                               error: error,
-                              _2GContext: scanType == ._2G,
                               userDefaults: self.userDefaults).cauterize()
     }
     

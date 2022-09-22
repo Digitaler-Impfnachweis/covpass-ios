@@ -53,7 +53,6 @@ class RecoveryResultViewModel: ValidationResultViewModel {
     }
     
     var buttonHidden: Bool = false
-    var _2GContext: Bool = false
     var userDefaults: Persistence
     var isLoadingScan: Bool = false
     

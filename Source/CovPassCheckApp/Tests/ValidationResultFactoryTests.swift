@@ -44,7 +44,6 @@ class ValidationResultFactoryTests: XCTestCase {
                                                        repository: vacRepo,
                                                        certificate: certificate,
                                                        error: error,
-                                                       _2GContext: false,
                                                        userDefaults: persistence)
     }
     
@@ -173,7 +172,6 @@ class ValidationResultFactoryExpertModeTests: XCTestCase {
                                                        repository: vacRepo,
                                                        certificate: certificate,
                                                        error: error,
-                                                       _2GContext: false,
                                                        userDefaults: persistence)
     }
     

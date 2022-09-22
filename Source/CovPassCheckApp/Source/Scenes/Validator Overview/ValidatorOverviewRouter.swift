@@ -39,7 +39,6 @@ class ValidatorOverviewRouter: ValidatorOverviewRouterProtocol {
     }
     
     func showCertificate(_ certificate: ExtendedCBORWebToken?,
-                         _2GContext: Bool,
                          userDefaults: Persistence) {
         sceneCoordinator
             .present(
@@ -47,7 +46,6 @@ class ValidatorOverviewRouter: ValidatorOverviewRouterProtocol {
                     router: ValidationResultRouter(sceneCoordinator: sceneCoordinator),
                     certificate: certificate,
                     error: nil,
-                    _2GContext: _2GContext,
                     userDefaults: userDefaults
                 )
             )
@@ -65,26 +63,15 @@ class ValidatorOverviewRouter: ValidatorOverviewRouterProtocol {
     
     func showError(_ certificate: ExtendedCBORWebToken?,
                    error: Error,
-                   _2GContext: Bool,
                    userDefaults: Persistence) -> Promise<ExtendedCBORWebToken>  {
         sceneCoordinator.present(
             ValidationResultSceneFactory(
                 router: ValidationResultRouter(sceneCoordinator: sceneCoordinator),
                 certificate: certificate,
                 error: error,
-                _2GContext: _2GContext,
                 userDefaults: userDefaults
             )
         )
-    }
-    
-    func showGproof(boosterAsTest: Bool) {
-        sceneCoordinator
-            .present(
-                GProofSceneFactory(router: GProofRouter(sceneCoordinator: sceneCoordinator),
-                                   boosterAsTest: boosterAsTest)
-            )
-            .cauterize()
     }
     
     func showDataPrivacy() -> Promise<Void> {
