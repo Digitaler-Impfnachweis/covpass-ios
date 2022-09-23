@@ -53,6 +53,7 @@
 		09590D4027161182004410D7 /* CertLogicMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09590D3E2716117C004410D7 /* CertLogicMock.swift */; };
 		095D3F9A27AABA9D00DC398F /* CheckSituationViewControllerSnapShotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095D3F9927AABA9D00DC398F /* CheckSituationViewControllerSnapShotTests.swift */; };
 		095F4F4A283E4EDB00B6E435 /* CertificatesOverviewPersonViewModelDelegateMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095F4F49283E4EDB00B6E435 /* CertificatesOverviewPersonViewModelDelegateMock.swift */; };
+		0968610F28D9DE9C00F54B9A /* StateSelectionViewControllerSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0968610E28D9DE9B00F54B9A /* StateSelectionViewControllerSnapshotTests.swift */; };
 		096873F127430A4200DB5837 /* ChooseCertificateSnapShotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096873F027430A4200DB5837 /* ChooseCertificateSnapShotTests.swift */; };
 		0968979527C3A843009E2886 /* ReissueConsentSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0968978E27C3A843009E2886 /* ReissueConsentSceneFactory.swift */; };
 		0968979627C3A843009E2886 /* ReissueConsentViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0968978F27C3A843009E2886 /* ReissueConsentViewModelProtocol.swift */; };
@@ -588,6 +589,7 @@
 		09590D3E2716117C004410D7 /* CertLogicMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertLogicMock.swift; sourceTree = "<group>"; };
 		095D3F9927AABA9D00DC398F /* CheckSituationViewControllerSnapShotTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckSituationViewControllerSnapShotTests.swift; sourceTree = "<group>"; };
 		095F4F49283E4EDB00B6E435 /* CertificatesOverviewPersonViewModelDelegateMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificatesOverviewPersonViewModelDelegateMock.swift; sourceTree = "<group>"; };
+		0968610E28D9DE9B00F54B9A /* StateSelectionViewControllerSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateSelectionViewControllerSnapshotTests.swift; sourceTree = "<group>"; };
 		096873F027430A4200DB5837 /* ChooseCertificateSnapShotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseCertificateSnapShotTests.swift; sourceTree = "<group>"; };
 		0968978E27C3A843009E2886 /* ReissueConsentSceneFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReissueConsentSceneFactory.swift; sourceTree = "<group>"; };
 		0968978F27C3A843009E2886 /* ReissueConsentViewModelProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReissueConsentViewModelProtocol.swift; sourceTree = "<group>"; };
@@ -1105,6 +1107,7 @@
 				0969AB8A2785F45F00ECCA74 /* ValidatorOverviewSnapShotTests.swift */,
 				09E854362799932A0051AEEE /* AppInformationViewControllerSnapShotTests.swift */,
 				0928183027A2C3B900A0199F /* CheckSituationViewControllerSnapShotTests.swift */,
+				0968610E28D9DE9B00F54B9A /* StateSelectionViewControllerSnapshotTests.swift */,
 			);
 			path = SnapShotTests;
 			sourceTree = "<group>";
@@ -2298,7 +2301,6 @@
 				E79CF9ED27E896FC00C4619E /* Extensions */,
 				88AB2A6125FA40CE00D4EA52 /* Info.plist */,
 				09E854382799933F0051AEEE /* Mocks */,
-				E7F863AC28DA13DF00F7D54C /* New Regulations Announcement */,
 				E74E98C82892F62200F73632 /* Repository */,
 				E7CB54B427B55407002FA55E /* Scenes */,
 				0904337C270EFE920008267B /* SnapShotTests */,
@@ -2987,13 +2989,6 @@
 			isa = PBXGroup;
 			children = (
 				E7F863AA28DA133600F7D54C /* NewRegulationsAnnouncementSceneFactory.swift */,
-			);
-			path = "New Regulations Announcement";
-			sourceTree = "<group>";
-		};
-		E7F863AC28DA13DF00F7D54C /* New Regulations Announcement */ = {
-			isa = PBXGroup;
-			children = (
 			);
 			path = "New Regulations Announcement";
 			sourceTree = "<group>";
@@ -3711,6 +3706,7 @@
 				E74E98CB2892F6A100F73632 /* CertificateRevocationWrapperRepositoryTests.swift in Sources */,
 				0938F7E0289914CD001469C1 /* CertificateRevocationOfflineServiceMock.swift in Sources */,
 				E7DE166428AFD5BB007FDF46 /* AcousticFeedbackSettingsRouterMock.swift in Sources */,
+				0968610F28D9DE9C00F54B9A /* StateSelectionViewControllerSnapshotTests.swift in Sources */,
 				E76229F62816EADE00BF937C /* MockPersistence.swift in Sources */,
 				E7DE165F28AFD3A6007FDF46 /* EnglishAppInformationViewModelTests.swift in Sources */,
 				E79CF9F027E8981100C4619E /* URLSession+CertificateRevocationTests.swift in Sources */,

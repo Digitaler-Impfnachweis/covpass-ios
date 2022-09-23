@@ -17,6 +17,14 @@
 
 "cancel" = "Cancel";
 
+"next" = "Continue";
+
+"back" = "Back";
+
+"on" = "On";
+
+"off" = "Off";
+
 
 /********** onboarding **********/
 
@@ -119,6 +127,8 @@
 "validation_start_screen_scan_message" = "Scan a G-Proof according to the 3G rules. Which rule applies depends on the federal state you are in.";
 
 "validation_start_screen_scan_message_2G" = "Scan the necessary evidence for 2G+ one by one.";
+
+"start_screen_authority_function_hint" = "The authority function is only available in 3G mode!";
 
 "validation_start_screen_scan_message_2G_toggle" = "No test is needed when a booster vaccination is given";
 
@@ -507,6 +517,10 @@
 
 "app_information_offline_revocation_hint_copy" = "If the function is deactivated, the local app data will be deleted from your device. Certificates can then only be checked in online mode.";
 
+"app_information_offline_revocation_hint_button_active" = "OK";
+
+"app_information_offline_revocation_hint_button_inactive" = "Cancel";
+
 "accessibility_app_information_title_update" = "The view \"Update rule set\" has been opened";
 
 "accessibility_app_information_title_local_rules" = "The view \"Check situation\" has been opened";
@@ -518,6 +532,12 @@
 "app_information_title_local_rules_status_DE" = "Within DE";
 
 "app_information_title_local_rules_status_EU" = "Entering DE";
+
+"accessibility_settings_beep_announce_open" = "The view \"Beep when checking\" has been opened";
+
+"accessibility_settings_beep_announce_close" = "The view \"Beep when checking\" has been closed";
+
+"accessibility_settings_beep_backlabel" = "Back";
 
 "app_information_beep_when_checking_title" = "Beep when checking";
 
@@ -636,40 +656,42 @@
 
 "infschg_start_screen_white_box_copy_2" = "Last updated less than 24 hours ago";
 
+"infschg_module_choose_federal_state_title" = "Choose federal state";
+
 
 /********** federal state names **********/
 
-"BY" = "Bavaria";
+"DE_BY" = "Bavaria";
 
-"BB" = "Brandenburg";
+"DE_BB" = "Brandenburg";
 
-"BE" = "Berlin";
+"DE_BE" = "Berlin";
 
-"BW" = "Baden-Württemberg";
+"DE_BW" = "Baden-Württemberg";
 
-"HB" = "Bremen";
+"DE_HB" = "Bremen";
 
-"HH" = "Hamburg";
+"DE_HH" = "Hamburg";
 
-"HE" = "Hesse";
+"DE_HE" = "Hesse";
 
-"MV" = "Mecklenburg Western Pomerania";
+"DE_MV" = "Mecklenburg Western Pomerania";
 
-"NI" = "Lower Saxony";
+"DE_NI" = "Lower Saxony";
 
-"NW" = "Northrhine-Westphalia";
+"DE_NW" = "Northrhine-Westphalia";
 
-"RP" = "Rhineland Palatinate";
+"DE_RP" = "Rhineland Palatinate";
 
-"SN" = "Saxony";
+"DE_SN" = "Saxony";
 
-"ST" = "Saxony-Anhalt";
+"DE_ST" = "Saxony-Anhalt";
 
-"SL" = "Saarland";
+"DE_SL" = "Saarland";
 
-"SH" = "Schleswig Holstein";
+"DE_SH" = "Schleswig Holstein";
 
-"TH" = "Thuringia";
+"DE_TH" = "Thuringia";
 
 
 /********** country list names **********/

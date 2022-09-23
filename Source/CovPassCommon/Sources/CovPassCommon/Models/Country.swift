@@ -39,9 +39,3 @@ public struct Country: Decodable {
         self.code = code
     }
 }
-
-extension Country: Comparable {
-    public static func < (lhs: Country, rhs: Country) -> Bool {
-        lhs.code < rhs.code
-    }
-}

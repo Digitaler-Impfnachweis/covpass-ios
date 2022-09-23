@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_0" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="StateSelectionViewController">
+            <connections>
+                <outlet property="contentStackView" destination="dv6-WB-cEd" id="Fvx-db-Gxk"/>
+                <outlet property="headerView" destination="l2Z-AL-M34" id="bW4-NA-Zib"/>
+                <outlet property="view" destination="iN0-l3-epB" id="QjD-oZ-IVc"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tzf-lC-6C0">
+                    <rect key="frame" x="0.0" y="47" width="390" height="763"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" placeholderIntrinsicWidth="390" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="l2Z-AL-M34" customClass="InfoHeaderView" customModule="CovPassUI">
+                            <rect key="frame" x="0.0" y="0.0" width="390" height="90"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="90" id="hWX-PU-SKb"/>
+                            </constraints>
+                        </view>
+                        <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="240" placeholderIntrinsicHeight="200" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="dv6-WB-cEd">
+                            <rect key="frame" x="0.0" y="90" width="390" height="200"/>
+                        </stackView>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="dv6-WB-cEd" firstAttribute="leading" secondItem="Tzf-lC-6C0" secondAttribute="leading" id="1D6-I7-doi"/>
+                        <constraint firstItem="dv6-WB-cEd" firstAttribute="width" secondItem="Tzf-lC-6C0" secondAttribute="width" id="5H1-YL-7Yw"/>
+                        <constraint firstItem="l2Z-AL-M34" firstAttribute="leading" secondItem="Tzf-lC-6C0" secondAttribute="leading" id="APZ-sJ-yz4"/>
+                        <constraint firstItem="l2Z-AL-M34" firstAttribute="top" secondItem="Tzf-lC-6C0" secondAttribute="top" id="O6j-sO-UDG"/>
+                        <constraint firstAttribute="trailing" secondItem="dv6-WB-cEd" secondAttribute="trailing" id="mtQ-up-jiR"/>
+                        <constraint firstItem="dv6-WB-cEd" firstAttribute="top" secondItem="l2Z-AL-M34" secondAttribute="bottom" id="sfV-Ff-Zdc"/>
+                        <constraint firstAttribute="trailing" secondItem="l2Z-AL-M34" secondAttribute="trailing" id="vIH-Y0-zkc"/>
+                        <constraint firstAttribute="bottom" secondItem="dv6-WB-cEd" secondAttribute="bottom" id="vyr-dm-48U"/>
+                    </constraints>
+                </scrollView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="Tzf-lC-6C0" firstAttribute="width" secondItem="vUN-kp-3ea" secondAttribute="width" id="Xfh-VI-r3i"/>
+                <constraint firstItem="Tzf-lC-6C0" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="cF7-Nk-P2B"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="Tzf-lC-6C0" secondAttribute="bottom" id="cKg-CK-N4F"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Tzf-lC-6C0" secondAttribute="trailing" id="hAz-yi-Zdd"/>
+                <constraint firstItem="Tzf-lC-6C0" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="itn-Wx-kZw"/>
+            </constraints>
+            <point key="canvasLocation" x="140" y="20.616113744075829"/>
+        </view>
+    </objects>
+    <designables>
+        <designable name="l2Z-AL-M34">
+            <size key="intrinsicContentSize" width="390" height="128"/>
+        </designable>
+    </designables>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

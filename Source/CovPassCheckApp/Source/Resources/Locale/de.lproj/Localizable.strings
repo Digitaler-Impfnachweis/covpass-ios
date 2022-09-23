@@ -17,6 +17,14 @@
 
 "cancel" = "Abbrechen";
 
+"next" = "Weiter";
+
+"back" = "Zurück";
+
+"on" = "An";
+
+"off" = "Aus";
+
 
 /********** onboarding **********/
 
@@ -119,6 +127,8 @@
 "validation_start_screen_scan_message" = "Scannen Sie einen G-Nachweis nach den 3G-Regeln. Welche Regelung gilt, ist abhängig vom Bundesland in dem Sie sich befinden.";
 
 "validation_start_screen_scan_message_2G" = "Scannen Sie nacheinander die notwendigen Nachweise für 2G+.";
+
+"start_screen_authority_function_hint" = "Die Behördenfunktion ist nur im 3G-Modus verfügbar!";
 
 "validation_start_screen_scan_message_2G_toggle" = "Bei Auffrischimpfungen ist kein Test nötig";
 
@@ -503,9 +513,13 @@
 
 "app_information_offline_revocation_copy" = "Aktivieren Sie diese Einstellung, wenn Sie auch im Offline-Modus von den Behörden gesperrte Zertifikate erkennen möchten. Andernfalls werden gesperrte Zertifikate nur im Online-Modus erkannt. Diese Funktion verbraucht mehr Datenvolumen.";
 
-"app_information_offline_revocation_hint_title" = " Hinweis";
+"app_information_offline_revocation_hint_title" = "Hinweis";
 
-"app_information_offline_revocation_hint_copy" = " Wenn die Funktion deaktiviert wird, werden die lokalen App-Daten von Ihrem Gerät gelöscht. Zertifikate können dann nur noch im Online-Modus geprüft werden.";
+"app_information_offline_revocation_hint_copy" = "Wenn die Funktion deaktiviert wird, werden die lokalen App-Daten von Ihrem Gerät gelöscht. Zertifikate können dann nur noch im Online-Modus geprüft werden.";
+
+"app_information_offline_revocation_hint_button_active" = "OK";
+
+"app_information_offline_revocation_hint_button_inactive" = "Abbrechen";
 
 "accessibility_app_information_title_update" = "Die Ansicht \"Prüfregeln aktualisieren\" wurde geöffnet";
 
@@ -518,6 +532,12 @@
 "app_information_title_local_rules_status_DE" = "Innerhalb DE";
 
 "app_information_title_local_rules_status_EU" = "Einreise";
+
+"accessibility_settings_beep_announce_open" = "Die Ansicht \"Signalton beim Scannen\" wurde geöffnet";
+
+"accessibility_settings_beep_announce_close" = "Die Ansicht \"Signalton beim Scannen\" wurde geschlossen";
+
+"accessibility_settings_beep_backlabel" = "Zurück";
 
 "app_information_beep_when_checking_title" = "Signalton beim Scannen";
 
@@ -636,40 +656,42 @@
 
 "infschg_start_screen_white_box_copy_2" = "Letzte Aktualisierung vor weniger als 24 Stunden";
 
+"infschg_module_choose_federal_state_title" = "Bundesland wählen";
+
 
 /********** federal state names **********/
 
-"BY" = "Bayern";
+"DE_BY" = "Bayern";
 
-"BB" = "Brandenburg";
+"DE_BB" = "Brandenburg";
 
-"BE" = "Berlin";
+"DE_BE" = "Berlin";
 
-"BW" = "Baden-Württemberg";
+"DE_BW" = "Baden-Württemberg";
 
-"HB" = "Bremen";
+"DE_HB" = "Bremen";
 
-"HH" = "Hamburg";
+"DE_HH" = "Hamburg";
 
-"HE" = "Hessen";
+"DE_HE" = "Hessen";
 
-"MV" = "Mecklenburg Vorpommern";
+"DE_MV" = "Mecklenburg Vorpommern";
 
-"NI" = "Niedersachsen";
+"DE_NI" = "Niedersachsen";
 
-"NW" = "Nordrhein-Westfalen";
+"DE_NW" = "Nordrhein-Westfalen";
 
-"RP" = "Rheinland Pfalz";
+"DE_RP" = "Rheinland Pfalz";
 
-"SN" = "Sachsen";
+"DE_SN" = "Sachsen";
 
-"ST" = "Sachsen Anhalt";
+"DE_ST" = "Sachsen Anhalt";
 
-"SL" = "Saarland";
+"DE_SL" = "Saarland";
 
-"SH" = "Schleswig Holstein";
+"DE_SH" = "Schleswig Holstein";
 
-"TH" = "Thüringen";
+"DE_TH" = "Thüringen";
 
 
 /********** country list names **********/
