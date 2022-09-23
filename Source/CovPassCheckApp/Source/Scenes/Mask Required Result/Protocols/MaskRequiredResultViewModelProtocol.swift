@@ -10,4 +10,7 @@ protocol MaskRequiredResultViewModelProtocol {
     var subtitle: String { get }
     var description: String { get }
     var reasonViewModels: [MaskRequiredReasonViewModelProtocol] { get }
+
+    func close()
+    func rescan()
 }
