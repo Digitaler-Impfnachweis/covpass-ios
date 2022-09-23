@@ -5,29 +5,54 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
+import CovPassUI
 import PromiseKit
 
 private enum Constants {
     static let title = "".localized
     static let subtitle = "".localized
     static let description = "".localized
+    static let buttonTitle = "".localized
 }
 
 final class MaskRequiredResultViewModel: MaskRequiredResultViewModelProtocol {
+    weak var delegate: ViewModelDelegate?
     let title = Constants.title
     let subtitle = Constants.subtitle
     let description = Constants.description
+    let buttonTitle = Constants.buttonTitle
     let reasonViewModels: [MaskRequiredReasonViewModelProtocol] = []
+    let countdownTimerModel: CountdownTimerModel
+
     private let resolver: Resolver<Void>
     private let router: MaskRequiredResultRouterProtocol
 
-    init(resolver: Resolver<Void>, router: MaskRequiredResultRouterProtocol) {
+    init(countdownTimerModel: CountdownTimerModel,
+         resolver: Resolver<Void>,
+         router: MaskRequiredResultRouterProtocol
+    ) {
+        self.countdownTimerModel = countdownTimerModel
         self.resolver = resolver
         self.router = router
+
+        countdownTimerModel.onUpdate = onCountdownTimerModelUpdate
+        countdownTimerModel.start()
     }
 
-    func close() {
+    private func onCountdownTimerModelUpdate(countdownTimerModel: CountdownTimerModel) {
+        if countdownTimerModel.shouldDismiss {
+            cancel()
+        } else {
+            delegate?.viewModelDidUpdate()
+        }
+    }
+
+    func cancel() {
         resolver.fulfill_()
+    }
+
+    func isCancellable() -> Bool {
+        true
     }
 
     func rescan() {

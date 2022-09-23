@@ -17,7 +17,12 @@ struct MaskRequiredResultSceneFactory: ResolvableSceneFactory {
     }
 
     func make(resolvable: Resolver<Void>) -> UIViewController {
+        let countdownTimerModel = CountdownTimerModel(
+            dismissAfterSeconds: 120,
+            countdownDuration: 60
+        )
         let viewModel = MaskRequiredResultViewModel(
+            countdownTimerModel: countdownTimerModel,
             resolver: resolvable,
             router: router
         )

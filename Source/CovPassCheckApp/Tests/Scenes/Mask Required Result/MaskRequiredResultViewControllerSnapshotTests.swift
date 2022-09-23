@@ -6,6 +6,7 @@
 //
 
 @testable import CovPassCheckApp
+import CovPassUI
 import PromiseKit
 import XCTest
 
@@ -15,7 +16,12 @@ final class MaskRequiredResultViewControllerSnapshotTests: BaseSnapShotTests {
     override func setUpWithError() throws {
         try super.setUpWithError()
         let (_, resolver) = Promise<Void>.pending()
+        let countdownTimerModel = CountdownTimerModel(
+            dismissAfterSeconds: 100,
+            countdownDuration: 0
+        )
         let viewModel = MaskRequiredResultViewModel(
+            countdownTimerModel: countdownTimerModel,
             resolver: resolver,
             router: MaskRequiredResultRouterMock()
         )
