@@ -48,7 +48,7 @@ class CertificateCardMaskImmunityViewModelTests: XCTestCase {
         XCTAssertFalse(showNotification)
     }
     
-    func testIsShowNotification_true() {
+    func testIsShowNotification_booster_true() {
         // Given
         let cborWebToken = CBORWebToken.mockVaccinationCertificate
         let token = cborWebToken.extended()
@@ -63,6 +63,262 @@ class CertificateCardMaskImmunityViewModelTests: XCTestCase {
 
         // Then
         XCTAssertTrue(showNotification)
+    }
+    
+    func testIsShowNotification_expired_before_90Days_default() {
+        // Given
+        let cborWebToken = CBORWebToken.mockVaccinationCertificate
+        var token = cborWebToken.extended()
+        token.vaccinationCertificate.exp = .init().add(days: -1)
+        token.reissueProcessNewBadgeAlreadySeen = false
+        token.wasExpiryAlertShown = false
+        let sut = sut(token: token)
+
+        // When
+        let showNotification = sut.showNotification
+
+        // Then
+        XCTAssertTrue(showNotification)
+    }
+    
+    func testIsShowNotification_expired_before_90Days_wasExpiryAlertShown_true() {
+        // Given
+        let cborWebToken = CBORWebToken.mockVaccinationCertificate
+        var token = cborWebToken.extended()
+        token.vaccinationCertificate.exp = .init().add(days: -1)
+        token.reissueProcessNewBadgeAlreadySeen = false
+        token.wasExpiryAlertShown = true
+        let sut = sut(token: token)
+
+        // When
+        let showNotification = sut.showNotification
+
+        // Then
+        XCTAssertTrue(showNotification)
+    }
+    
+    func testIsShowNotification_expired_before_90Days_true_reissueProcessNewBadgeAlreadySeent_true() {
+        // Given
+        let cborWebToken = CBORWebToken.mockVaccinationCertificate
+        var token = cborWebToken.extended()
+        token.vaccinationCertificate.exp = .init().add(days: -1)
+        token.reissueProcessNewBadgeAlreadySeen = true
+        token.wasExpiryAlertShown = false
+        let sut = sut(token: token)
+
+        // When
+        let showNotification = sut.showNotification
+
+        // Then
+        XCTAssertTrue(showNotification)
+    }
+    
+    func testIsShowNotification_expired_before_90Days_true_reissueProcessNewBadgeAlreadySeent_and_wasExpiryAlertShown_true() {
+        // Given
+        let cborWebToken = CBORWebToken.mockVaccinationCertificate
+        var token = cborWebToken.extended()
+        token.vaccinationCertificate.exp = .init().add(days: -1)
+        token.reissueProcessNewBadgeAlreadySeen = true
+        token.wasExpiryAlertShown = true
+        let sut = sut(token: token)
+
+        // When
+        let showNotification = sut.showNotification
+
+        // Then
+        XCTAssertFalse(showNotification)
+    }
+    
+    func testIsShowNotification_expired_before_100Days_default() {
+        // Given
+        let cborWebToken = CBORWebToken.mockVaccinationCertificate
+        var token = cborWebToken.extended()
+        token.vaccinationCertificate.exp = .init().add(days: -100)
+        token.reissueProcessNewBadgeAlreadySeen = false
+        token.wasExpiryAlertShown = false
+        let sut = sut(token: token)
+
+        // When
+        let showNotification = sut.showNotification
+
+        // Then
+        XCTAssertTrue(showNotification)
+    }
+    
+    func testIsShowNotification_expired_before_100Days_wasExpiryAlertShown_true() {
+        // Given
+        let cborWebToken = CBORWebToken.mockVaccinationCertificate
+        var token = cborWebToken.extended()
+        token.vaccinationCertificate.exp = .init().add(days: -100)
+        token.reissueProcessNewBadgeAlreadySeen = true
+        token.wasExpiryAlertShown = true
+        let sut = sut(token: token)
+        
+        // When
+        let showNotification = sut.showNotification
+        
+        // Then
+        XCTAssertFalse(showNotification)
+    }
+    
+    func testIsShowNotification_expired_before_100Days_reissueProcessNewBadgeAlreadySeen_true() {
+        // Given
+        let cborWebToken = CBORWebToken.mockVaccinationCertificate
+        var token = cborWebToken.extended()
+        token.vaccinationCertificate.exp = .init().add(days: -100)
+        token.reissueProcessNewBadgeAlreadySeen = true
+        token.wasExpiryAlertShown = false
+        let sut = sut(token: token)
+        
+        // When
+        let showNotification = sut.showNotification
+        
+        // Then
+        XCTAssertTrue(showNotification)
+    }
+    
+    func testIsShowNotification_expired_before_100Days_reissueProcessNewBadgeAlreadySeen_and_wasExpiryAlertShown_true() {
+        // Given
+        let cborWebToken = CBORWebToken.mockVaccinationCertificate
+        var token = cborWebToken.extended()
+        token.vaccinationCertificate.exp = .init().add(days: -100)
+        token.reissueProcessNewBadgeAlreadySeen = true
+        token.wasExpiryAlertShown = true
+        let sut = sut(token: token)
+        
+        // When
+        let showNotification = sut.showNotification
+        
+        // Then
+        XCTAssertFalse(showNotification)
+    }
+    
+    func testIsShowNotification_aboutToExpire_default() {
+        // Given
+        let cborWebToken = CBORWebToken.mockVaccinationCertificate
+        var token = cborWebToken.extended()
+        token.vaccinationCertificate.exp = .init().add(days: 1)
+        token.reissueProcessNewBadgeAlreadySeen = false
+        token.wasExpiryAlertShown = false
+        let sut = sut(token: token)
+
+        // When
+        let showNotification = sut.showNotification
+
+        // Then
+        XCTAssertTrue(showNotification)
+    }
+    
+    func testIsShowNotification_aboutToExpire_wasExpiryAlertShown_true() {
+        // Given
+        let cborWebToken = CBORWebToken.mockVaccinationCertificate
+        var token = cborWebToken.extended()
+        token.vaccinationCertificate.exp = .init().add(days: 1)
+        token.reissueProcessNewBadgeAlreadySeen = false
+        token.wasExpiryAlertShown = true
+        let sut = sut(token: token)
+
+        // When
+        let showNotification = sut.showNotification
+
+        // Then
+        XCTAssertTrue(showNotification)
+    }
+    
+    func testIsShowNotification_aboutToExpire_reissueProcessNewBadgeAlreadySeen_true() {
+        // Given
+        let cborWebToken = CBORWebToken.mockVaccinationCertificate
+        var token = cborWebToken.extended()
+        token.vaccinationCertificate.exp = .init().add(days: 1)
+        token.reissueProcessNewBadgeAlreadySeen = true
+        token.wasExpiryAlertShown = false
+        let sut = sut(token: token)
+
+        // When
+        let showNotification = sut.showNotification
+
+        // Then
+        XCTAssertTrue(showNotification)
+    }
+    
+    func testIsShowNotification_aboutToExpire_reissueProcessNewBadgeAlreadySeen_and_wasExpiryAlertShown_true() {
+        // Given
+        let cborWebToken = CBORWebToken.mockVaccinationCertificate
+        var token = cborWebToken.extended()
+        token.vaccinationCertificate.exp = .init().add(days: 1)
+        token.reissueProcessNewBadgeAlreadySeen = true
+        token.wasExpiryAlertShown = true
+        let sut = sut(token: token)
+
+        // When
+        let showNotification = sut.showNotification
+
+        // Then
+        XCTAssertFalse(showNotification)
+    }
+    
+    func testIsShowNotification_invalid_default() {
+        // Given
+        let cborWebToken = CBORWebToken.mockVaccinationCertificate
+        var token = cborWebToken.extended()
+        token.invalid = true
+        token.reissueProcessNewBadgeAlreadySeen = false
+        token.wasExpiryAlertShown = false
+        let sut = sut(token: token)
+
+        // When
+        let showNotification = sut.showNotification
+
+        // Then
+        XCTAssertTrue(showNotification)
+    }
+    
+    func testIsShowNotification_invalid_wasExpiryAlertShown_true() {
+        // Given
+        let cborWebToken = CBORWebToken.mockVaccinationCertificate
+        var token = cborWebToken.extended()
+        token.invalid = true
+        token.reissueProcessNewBadgeAlreadySeen = false
+        token.wasExpiryAlertShown = true
+        let sut = sut(token: token)
+
+        // When
+        let showNotification = sut.showNotification
+
+        // Then
+        XCTAssertFalse(showNotification)
+    }
+    
+    func testIsShowNotification_invalid_reissueProcessNewBadgeAlreadySeen_true() {
+        // Given
+        let cborWebToken = CBORWebToken.mockVaccinationCertificate
+        var token = cborWebToken.extended()
+        token.invalid = true
+        token.reissueProcessNewBadgeAlreadySeen = true
+        token.wasExpiryAlertShown = false
+        let sut = sut(token: token)
+
+        // When
+        let showNotification = sut.showNotification
+
+        // Then
+        XCTAssertTrue(showNotification)
+    }
+    
+    func testIsShowNotification_invalid_reissueProcessNewBadgeAlreadySeen_and_wasExpiryAlertShown_true() {
+        // Given
+        let cborWebToken = CBORWebToken.mockVaccinationCertificate
+        var token = cborWebToken.extended()
+        token.invalid = true
+        token.reissueProcessNewBadgeAlreadySeen = true
+        token.wasExpiryAlertShown = true
+        let sut = sut(token: token)
+
+        // When
+        let showNotification = sut.showNotification
+
+        // Then
+        XCTAssertFalse(showNotification)
     }
     
     func testIsInvalid_false() {

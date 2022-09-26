@@ -40,10 +40,12 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
         guard token.vaccinationCertificate.isNotTest else {
             return false
         }
-        guard token.expiryAlertWasNotShown || !(token.reissueProcessNewBadgeAlreadySeen ?? false) else {
+        let cert = token.vaccinationCertificate
+        let reissueDetailsNotAlreadySeen = !(token.reissueProcessNewBadgeAlreadySeen ?? false)
+        let reissueNotificationNotAlreadySeen = (reissueDetailsNotAlreadySeen && cert.expiredForLessOrEqual90Days)
+        guard token.expiryAlertWasNotShown || reissueNotificationNotAlreadySeen else {
             return false
         }
-        let cert = token.vaccinationCertificate
         return cert.expiresSoon || token.isInvalid || cert.isExpired
     }
     private var holderNeedsMask: Bool
