@@ -241,15 +241,23 @@ class ValidatorOverviewViewModelTests: XCTestCase {
         // Then
         wait(for: [router.showNewRegulationsAnnouncementExpectation], timeout: 1)
     }
-
+    
     func testStartQRCodeValidation_3G() {
         // When
-        sut.startQRCodeValidation()
+        sut.scanAction()
 
         // Then
         wait(for: [
             router.scanQRCodeExpectation,
             audioPlayer.playCovPassCheckCertificateScannedIfEnabledExpectation
         ], timeout: 1)
+    }
+    
+    func testStateSelection() {
+        // When
+        sut.chooseAction()
+
+        // Then
+        wait(for: [router.routeToStateSelectionExpectation], timeout: 1)
     }
 }

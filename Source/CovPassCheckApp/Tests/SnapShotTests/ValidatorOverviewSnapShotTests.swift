@@ -43,11 +43,6 @@ class ValidatorOverviewSnapShotTests: BaseSnapShotTests {
         verifyView(view: sut.view)
     }
     
-    func testDefaultEUCheckSituation() {
-        let sut = self.configureSut(logicType: .eu)
-        verifyView(view: sut.view)
-    }
-    
     func testOfflineModeAvailable() {
         let sut = self.configureSut(lastUpdateTrustList: DateUtils.parseDate("2021-04-26T15:05:00"),
                                     shouldTrustListUpdate: false)

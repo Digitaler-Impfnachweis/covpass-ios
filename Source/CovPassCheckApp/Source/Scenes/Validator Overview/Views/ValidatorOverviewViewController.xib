@@ -49,9 +49,6 @@
                                         <view contentMode="scaleToFill" placeholderIntrinsicWidth="366" placeholderIntrinsicHeight="350" translatesAutoresizingMaskIntoConstraints="NO" id="0Le-DA-8MJ" customClass="ScanCardView" customModule="CovPassUI">
                                             <rect key="frame" x="0.0" y="0.0" width="366" height="350"/>
                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="350" id="wHQ-Hr-dqv"/>
-                                            </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nRU-ku-FZH" userLabel="spacer">
                                             <rect key="frame" x="0.0" y="350" width="366" height="20"/>
