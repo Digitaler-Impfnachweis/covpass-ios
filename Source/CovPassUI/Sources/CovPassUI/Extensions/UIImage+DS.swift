@@ -299,7 +299,16 @@ public extension UIImage {
 
     @ImageLoader(name: "status-test-negative")
     private(set) static var statusTestNegative
-    
+
+    @ImageLoader(name: "status-mask-required-reason-incomplete")
+    private(set) static var statusMaskRequiredReasonIncomplete
+
+    @ImageLoader(name: "status-mask-required-reason-other")
+    private(set) static var statusMaskRequiredReasonOther
+
+    @ImageLoader(name: "status-mask-required-reason-validity-date")
+    private(set) static var statusMaskRequiredReasonValidityDate
+
     @ImageLoader(name: "half-shield-notification")
     private(set) static var halfShieldNotification
     

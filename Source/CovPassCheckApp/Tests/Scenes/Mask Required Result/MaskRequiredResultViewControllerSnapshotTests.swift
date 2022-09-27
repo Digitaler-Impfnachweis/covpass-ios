@@ -22,6 +22,7 @@ final class MaskRequiredResultViewControllerSnapshotTests: BaseSnapShotTests {
         )
         let viewModel = MaskRequiredResultViewModel(
             countdownTimerModel: countdownTimerModel,
+            federalStateCode: "Northrhine-Westphalia",
             resolver: resolver,
             router: MaskRequiredResultRouterMock()
         )

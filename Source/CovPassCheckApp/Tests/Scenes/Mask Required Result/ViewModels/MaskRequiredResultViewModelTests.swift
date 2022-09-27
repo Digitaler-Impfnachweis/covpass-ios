@@ -31,6 +31,7 @@ final class MaskRequiredResultViewModelTests: XCTestCase {
     private func configureSut() {
         sut = .init(
             countdownTimerModel: countdownTimerModel,
+            federalStateCode: "DE_NW",
             resolver: resolver,
             router: router
         )
@@ -91,5 +92,13 @@ final class MaskRequiredResultViewModelTests: XCTestCase {
 
         // Then
         XCTAssertTrue(isCancellable)
+    }
+
+    func testSubtitle() {
+        // When
+        let subtitle = sut.subtitle
+
+        // Then
+        XCTAssertEqual(subtitle, "In Northrhine-Westphalia")
     }
 }

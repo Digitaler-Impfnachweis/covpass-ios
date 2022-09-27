@@ -11,29 +11,39 @@ import UIKit
 
 private enum Constants {
     static let title = "infschg_result_mask_mandatory_title".localized
-    static let subtitle = "".localized
-    static let description = "".localized
-    static let buttonTitle = "".localized
+    static let subtitleFormat = "In %@"
+    static let description = "infschg_result_mask_mandatory_copy".localized
+    static let buttonTitle = "result_2G_button_startover".localized
 }
 
 final class MaskRequiredResultViewModel: MaskRequiredResultViewModelProtocol {
     weak var delegate: ViewModelDelegate?
     let image: UIImage = .statusMaskRequiredCircleLarge
     let title = Constants.title
-    let subtitle = Constants.subtitle
+    let subtitle: String
     let description = Constants.description
     let buttonTitle = Constants.buttonTitle
-    let reasonViewModels: [MaskRequiredReasonViewModelProtocol] = []
+    let reasonViewModels: [MaskRequiredReasonViewModelProtocol] = [
+        MaskRequiredValidityDateReasonViewModel(),
+        MaskRequiredWrongCertificateReasonViewModel(),
+        MaskRequiredIncompleteSeriesReasonViewModel(),
+        MaskRequiredInvalidSignatureReasonViewModel()
+    ]
     let countdownTimerModel: CountdownTimerModel
 
     private let resolver: Resolver<Void>
     private let router: MaskRequiredResultRouterProtocol
 
     init(countdownTimerModel: CountdownTimerModel,
+         federalStateCode: String,
          resolver: Resolver<Void>,
          router: MaskRequiredResultRouterProtocol
     ) {
         self.countdownTimerModel = countdownTimerModel
+        self.subtitle = .init(
+            format: Constants.subtitleFormat,
+            federalStateCode.localized
+        )
         self.resolver = resolver
         self.router = router
 

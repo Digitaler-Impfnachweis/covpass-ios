@@ -5,6 +5,7 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
+import CovPassCommon
 import CovPassUI
 import PromiseKit
 import UIKit
@@ -17,12 +18,17 @@ struct MaskRequiredResultSceneFactory: ResolvableSceneFactory {
     }
 
     func make(resolvable: Resolver<Void>) -> UIViewController {
+        let persistence = UserDefaultsPersistence()
+        guard let federalStateCode = persistence.stateSelection else {
+            fatalError("State must be selected.")
+        }
         let countdownTimerModel = CountdownTimerModel(
             dismissAfterSeconds: 120,
             countdownDuration: 60
         )
         let viewModel = MaskRequiredResultViewModel(
             countdownTimerModel: countdownTimerModel,
+            federalStateCode: federalStateCode,
             resolver: resolvable,
             router: router
         )

@@ -6,6 +6,8 @@
 //
 
 @testable import CovPassCheckApp
+import CovPassCommon
+import CovPassUI
 import PromiseKit
 import UIKit
 import XCTest
@@ -24,6 +26,8 @@ final class MaskRequiredResultSceneFactoryTests: XCTestCase {
 
     func testMake() {
         // Given
+        var persistence = UserDefaultsPersistence()
+        persistence.stateSelection = "DE_NW"
         let (_, resolver) = Promise<Void>.pending()
 
         // When

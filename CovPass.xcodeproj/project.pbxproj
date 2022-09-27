@@ -471,6 +471,10 @@
 		E7BA19D428BFBF4900751DE8 /* CertificateHolderStatusModelMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7BA19D328BFBF4900751DE8 /* CertificateHolderStatusModelMock.swift */; };
 		E7BAB77E2805BB4700C6AA28 /* CertificateCardViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7BAB77D2805BB4700C6AA28 /* CertificateCardViewModelTests.swift */; };
 		E7C13AA4284518D5002BC4F5 /* CertificateRevocationHTTPClient+Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C13AA3284518D5002BC4F5 /* CertificateRevocationHTTPClient+Factory.swift */; };
+		E7C8A01828E2F7AF002D63E0 /* MaskRequiredValidityDateReasonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C8A01728E2F7AF002D63E0 /* MaskRequiredValidityDateReasonViewModel.swift */; };
+		E7C8A01A28E2FC5F002D63E0 /* MaskRequiredWrongCertificateReasonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C8A01928E2FC5F002D63E0 /* MaskRequiredWrongCertificateReasonViewModel.swift */; };
+		E7C8A01C28E2FCE7002D63E0 /* MaskRequiredIncompleteSeriesReasonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C8A01B28E2FCE7002D63E0 /* MaskRequiredIncompleteSeriesReasonViewModel.swift */; };
+		E7C8A01E28E2FD67002D63E0 /* MaskRequiredInvalidSignatureReasonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C8A01D28E2FD67002D63E0 /* MaskRequiredInvalidSignatureReasonViewModel.swift */; };
 		E7C8A4712853333900025770 /* CoseSign1MessageConverter+Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C8A4702853333900025770 /* CoseSign1MessageConverter+Factory.swift */; };
 		E7CB54B327B53296002FA55E /* AppInformationViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CB54B227B53296002FA55E /* AppInformationViewModelTests.swift */; };
 		E7CB54B927B5563E002FA55E /* AppInformationViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CB54B627B55436002FA55E /* AppInformationViewModelTests.swift */; };
@@ -1039,6 +1043,10 @@
 		E7BA19D328BFBF4900751DE8 /* CertificateHolderStatusModelMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateHolderStatusModelMock.swift; sourceTree = "<group>"; };
 		E7BAB77D2805BB4700C6AA28 /* CertificateCardViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateCardViewModelTests.swift; sourceTree = "<group>"; };
 		E7C13AA3284518D5002BC4F5 /* CertificateRevocationHTTPClient+Factory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CertificateRevocationHTTPClient+Factory.swift"; sourceTree = "<group>"; };
+		E7C8A01728E2F7AF002D63E0 /* MaskRequiredValidityDateReasonViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskRequiredValidityDateReasonViewModel.swift; sourceTree = "<group>"; };
+		E7C8A01928E2FC5F002D63E0 /* MaskRequiredWrongCertificateReasonViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskRequiredWrongCertificateReasonViewModel.swift; sourceTree = "<group>"; };
+		E7C8A01B28E2FCE7002D63E0 /* MaskRequiredIncompleteSeriesReasonViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskRequiredIncompleteSeriesReasonViewModel.swift; sourceTree = "<group>"; };
+		E7C8A01D28E2FD67002D63E0 /* MaskRequiredInvalidSignatureReasonViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskRequiredInvalidSignatureReasonViewModel.swift; sourceTree = "<group>"; };
 		E7C8A4702853333900025770 /* CoseSign1MessageConverter+Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoseSign1MessageConverter+Factory.swift"; sourceTree = "<group>"; };
 		E7CB54B227B53296002FA55E /* AppInformationViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInformationViewModelTests.swift; sourceTree = "<group>"; };
 		E7CB54B627B55436002FA55E /* AppInformationViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInformationViewModelTests.swift; sourceTree = "<group>"; };
@@ -2789,6 +2797,10 @@
 			isa = PBXGroup;
 			children = (
 				E75F7DE628DDC66700675093 /* MaskRequiredResultViewModel.swift */,
+				E7C8A01B28E2FCE7002D63E0 /* MaskRequiredIncompleteSeriesReasonViewModel.swift */,
+				E7C8A01D28E2FD67002D63E0 /* MaskRequiredInvalidSignatureReasonViewModel.swift */,
+				E7C8A01728E2F7AF002D63E0 /* MaskRequiredValidityDateReasonViewModel.swift */,
+				E7C8A01928E2FC5F002D63E0 /* MaskRequiredWrongCertificateReasonViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -3686,6 +3698,7 @@
 				096EB4DA27D768D3005CE76F /* RevocationSettingsRouter.swift in Sources */,
 				2181C172264F037000DE7412 /* WelcomeViewController.swift in Sources */,
 				09AC1DF32757B423008356CD /* RecoveryResultViewModel.swift in Sources */,
+				E7C8A01E28E2FD67002D63E0 /* MaskRequiredInvalidSignatureReasonViewModel.swift in Sources */,
 				096EB4DD27D768D3005CE76F /* RevocationSettingsRouterProtocol.swift in Sources */,
 				E7F863AB28DA133600F7D54C /* NewRegulationsAnnouncementSceneFactory.swift in Sources */,
 				09AC1DE92757ADAA008356CD /* ValidationResultSceneFactory.swift in Sources */,
@@ -3732,12 +3745,15 @@
 				0938F7DE289914B5001469C1 /* CheckSituationResolvableSceneFactory.swift in Sources */,
 				3829A30C269CFF7F00B8346C /* DCCCertLogicExtension.swift in Sources */,
 				E7DE165A28AFCEB4007FDF46 /* AcousticFeedbackSettingsSceneFactory.swift in Sources */,
+				E7C8A01828E2F7AF002D63E0 /* MaskRequiredValidityDateReasonViewModel.swift in Sources */,
+				E7C8A01A28E2FC5F002D63E0 /* MaskRequiredWrongCertificateReasonViewModel.swift in Sources */,
 				E7DE165628AFCD4C007FDF46 /* AcousticFeedbackSettingsRouterProtocol.swift in Sources */,
 				098E44D2282D869200411776 /* VaccinationExtension.swift in Sources */,
 				09ABDAC827FC3D7C0078EB11 /* ParseCertificateUseCase.swift in Sources */,
 				2181C182264F039500DE7412 /* AppInformationSceneFactory.swift in Sources */,
 				E74E98C72892DEDC00F73632 /* CertificateRevocationWrapperRepository.swift in Sources */,
 				2181C1B8264F046400DE7412 /* WelcomeViewModel.swift in Sources */,
+				E7C8A01C28E2FCE7002D63E0 /* MaskRequiredIncompleteSeriesReasonViewModel.swift in Sources */,
 				2181C1A7264F03BC00DE7412 /* ValidationOnboardingPageViewModel.swift in Sources */,
 				E7DE166828AFD8DB007FDF46 /* AcousticFeedbackSettingsViewModel.swift in Sources */,
 				2181C1A6264F03BC00DE7412 /* ValidationConsentPageViewModel.swift in Sources */,
