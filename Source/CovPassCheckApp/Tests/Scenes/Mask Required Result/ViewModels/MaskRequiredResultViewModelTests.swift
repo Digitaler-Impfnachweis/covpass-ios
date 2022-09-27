@@ -1,0 +1,135 @@
+//
+//  MaskRequiredResultViewModelTests.swift
+//
+//  © Copyright IBM Deutschland GmbH 2021
+//  SPDX-License-Identifier: Apache-2.0
+//
+
+@testable import CovPassCheckApp
+import CovPassUI
+import PromiseKit
+import XCTest
+
+final class MaskRequiredResultViewModelTests: XCTestCase {
+    var countdownTimerModel: CountdownTimerModel!
+    var delegate: ViewModelDelegateMock!
+    var promise: Promise<Void>!
+    var resolver: Resolver<Void>!
+    var router: MaskRequiredResultRouterMock!
+    var sut: MaskRequiredResultViewModel!
+
+    override func setUpWithError() throws {
+        let (promise, resolver) = Promise<Void>.pending()
+        countdownTimerModel = .init(dismissAfterSeconds: 100, countdownDuration: 0)
+        self.promise = promise
+        self.resolver = resolver
+        router = .init()
+        delegate = .init()
+        configureSut()
+    }
+
+    private func configureSut(reasonType: MaskRequiredReasonType = .functional) {
+        sut = .init(
+            countdownTimerModel: countdownTimerModel,
+            federalStateCode: "DE_NW",
+            resolver: resolver,
+            router: router,
+            reasonType: reasonType
+        )
+        sut.delegate = delegate
+    }
+
+    override func tearDownWithError() throws {
+        countdownTimerModel = nil
+        delegate = nil
+        promise = nil
+        resolver = nil
+        router = nil
+        sut = nil
+    }
+
+    func testCancel() {
+        // Given
+        let expectation = XCTestExpectation()
+        promise.done { expectation.fulfill() }.cauterize()
+
+        // When
+        sut.cancel()
+
+        // Then
+        wait(for: [expectation], timeout: 1)
+    }
+
+    func testRescan() {
+        // Given
+        let expectation = XCTestExpectation()
+        promise.done { expectation.fulfill() }.cauterize()
+
+        // When
+        sut.rescan()
+
+        // Then
+        wait(for: [expectation, router.rescanExpectation], timeout: 1)
+    }
+
+    func testCountdownTimerModel() {
+        // Given
+        let didUpdateExpectation = XCTestExpectation(description: "didUpdateExpectation")
+        let doneExpectation = XCTestExpectation(description: "doneExpectation")
+        countdownTimerModel = .init(dismissAfterSeconds: 1.5, countdownDuration: 1)
+        delegate.didUpdate = { didUpdateExpectation.fulfill() }
+        promise.done { doneExpectation.fulfill() }.cauterize()
+
+        // When
+        configureSut()
+
+        // Then
+        wait(for: [didUpdateExpectation, doneExpectation], timeout: 3, enforceOrder: true)
+    }
+
+    func testIsCancellable() {
+        // When
+        let isCancellable = sut.isCancellable()
+
+        // Then
+        XCTAssertTrue(isCancellable)
+    }
+
+    func testSubtitle() {
+        // When
+        let subtitle = sut.subtitle
+
+        // Then
+        XCTAssertEqual(subtitle, "In Northrhine-Westphalia")
+    }
+
+    func testReasonViewModels_reason_type_functional() {
+        // When
+        let viewModels = sut.reasonViewModels
+
+        // Then
+        if viewModels.count == 3 {
+            XCTAssertTrue(viewModels[0] is MaskRequiredValidityDateReasonViewModel)
+            XCTAssertTrue(viewModels[1] is MaskRequiredWrongCertificateReasonViewModel)
+            XCTAssertTrue(viewModels[2] is MaskRequiredIncompleteSeriesReasonViewModel)
+        } else {
+            XCTFail("Must have 3 reason view models.")
+        }
+    }
+
+    func testReasonViewModels_reason_type_technical() {
+        // Given
+        configureSut(reasonType: .technical)
+
+        // When
+        let viewModels = sut.reasonViewModels
+
+        // Then
+        if viewModels.count == 2 {
+            XCTAssertTrue(viewModels[0] is MaskRequiredInvalidSignatureReasonViewModel)
+            XCTAssertTrue(viewModels[1] is MaskRequiredQRCodeReasonViewModel)
+        } else {
+            XCTFail("Must have 2 reason view models.")
+        }
+    }
+}
