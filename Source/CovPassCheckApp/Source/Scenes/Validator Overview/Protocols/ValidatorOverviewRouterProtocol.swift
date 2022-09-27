@@ -23,4 +23,5 @@ protocol ValidatorOverviewRouterProtocol: DialogRouterProtocol {
     func showDataPrivacy() -> Promise<Void>
     func routeToRulesUpdate(userDefaults: Persistence) -> Promise<Void>
     func showNewRegulationsAnnouncement() -> Promise<Void>
+    func routeToStateSelection() -> Promise<Void>
 }

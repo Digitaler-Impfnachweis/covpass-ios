@@ -37,20 +37,4 @@ class ScanCardViewTests: XCTestCase {
         XCTAssertEqual(sut.actionButton.style, .secondary)
         XCTAssertEqual(sut.actionButton.icon, .scan)
     }
-
-    func testUpdateAccessibility() {
-        // Given
-        let text = NSAttributedString(string: "TEXT")
-        sut.switchTextLabel.attributedText = text
-
-        // When
-        sut.updateAccessibility()
-
-        // Then
-        let elements = sut.switchWrapperView.accessibilityElements
-        XCTAssertEqual(elements?.count, 1)
-        XCTAssertEqual(elements?.first as? UISwitch, sut.uiSwitch)
-        XCTAssertEqual(sut.uiSwitch.accessibilityAttributedLabel, text)
-        XCTAssertFalse(sut.switchTextLabel.isAccessibilityElement)
-    }
 }

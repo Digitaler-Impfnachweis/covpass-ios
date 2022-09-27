@@ -16,22 +16,14 @@ import CertLogic
 
 private enum Constants {
     enum Keys {
-        static let title = "validation_start_screen_title".localized
-        static let syncTitle = "validation_start_screen_scan_sync_message_title".localized
-        static let syncMessage = "validation_start_screen_scan_sync_message_text".localized
-        static let updateTitle = "validation_start_screen_offline_modus_note_update".localized
-        enum ScanType {
-            static let validation_start_screen_scan_title = "validation_start_screen_scan_title".localized
-            static let validation_start_screen_scan_title_2G = "validation_start_screen_scan_title_2G".localized
-            static let validation_start_screen_scan_message = "validation_start_screen_scan_message".localized
-            static let validation_start_screen_scan_message_2G = "validation_start_screen_scan_message_2G".localized
+        static let title = "infschg_validation_start_screen_title".localized
+        enum TimeHint {
+            static let syncTitle = "validation_start_screen_scan_sync_message_title".localized
+            static let syncMessage = "validation_start_screen_scan_sync_message_text".localized
         }
-        enum CheckSituation {
-            static let deText = "🇩🇪 " + "startscreen_rules_tag_local".localized
-            static let euText = "🇪🇺 " + "startscreen_rules_tag_europe".localized
-        }
-        enum Toggle {
-            static let validation_start_screen_scan_message_2G_toggle = "validation_start_screen_scan_message_2G_toggle".localized
+        enum ScanCard {
+            static let actionTitle = "validation_start_screen_scan_action_button_title".localized
+            static let dropDownTitle = "infschg_start_screen_dropdown_title".localized
         }
         enum OfflineInformation {
             static let title = "start_offline_title".localized
@@ -66,10 +58,16 @@ class ValidatorOverviewViewModel {
     
     var title = Constants.Keys.title
     
-    var timeHintTitle = Constants.Keys.syncTitle
+    var scanActionTitle = Constants.Keys.ScanCard.actionTitle
+    
+    var scanDropDownTitle = Constants.Keys.ScanCard.dropDownTitle
+    
+    var scanDropDownValue: String { userDefaults.stateSelection.localized }
+
+    var timeHintTitle = Constants.Keys.TimeHint.syncTitle
     
     var timeHintSubTitle: String {
-        String(format: Constants.Keys.syncMessage, ntpDateFormatted)
+        String(format: Constants.Keys.TimeHint.syncMessage, ntpDateFormatted)
     }
     
     var ntpDateFormatted: String {
@@ -171,8 +169,7 @@ class ValidatorOverviewViewModel {
         certLogic.updateValueSetsIfNeeded().cauterize()
     }
     
-    func startQRCodeValidation() {
-        
+    func scanAction() {
         var tmpToken: ExtendedCBORWebToken?
         isLoadingScan = true
         firstly {
@@ -261,6 +258,14 @@ class ValidatorOverviewViewModel {
     func routeToRulesUpdate() {
         router.routeToRulesUpdate(userDefaults: userDefaults)
             .done { self.delegate?.viewModelDidUpdate() }
+            .cauterize()
+    }
+    
+    func chooseAction() {
+        router.routeToStateSelection()
+            .done {
+                self.delegate?.viewModelDidUpdate()
+            }
             .cauterize()
     }
     

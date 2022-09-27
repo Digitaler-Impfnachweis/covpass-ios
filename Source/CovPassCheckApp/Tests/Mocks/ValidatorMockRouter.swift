@@ -18,6 +18,7 @@ class ValidatorMockRouter: ValidatorOverviewRouterProtocol {
     var showGproofExpectation = XCTestExpectation(description: "showGproofExpectation")
     var scanQRCodeExpectation = XCTestExpectation(description: "scanQRCodeExpectation")
     var showNewRegulationsAnnouncementExpectation = XCTestExpectation(description: "showNewRegulationsAnnouncementExpectation")
+    var routeToStateSelectionExpectation = XCTestExpectation(description: "routeToStateSelection")
 
     func showAppInformation(userDefaults: Persistence) {
         
@@ -60,6 +61,11 @@ class ValidatorMockRouter: ValidatorOverviewRouterProtocol {
 
     func showNewRegulationsAnnouncement() -> Promise<Void> {
         showNewRegulationsAnnouncementExpectation.fulfill()
+        return .value
+    }
+    
+    func routeToStateSelection() -> Promise<Void> {
+        routeToStateSelectionExpectation.fulfill()
         return .value
     }
 }

@@ -18,6 +18,7 @@ public enum TextStyle {
     case header_24
     case subheader_1
     case subheader_2
+    case subheader_3
     case body
     case label
     case mainButton
@@ -63,12 +64,17 @@ public enum TextStyle {
             return string
                 .font(named: UIFont.sansRegular, size: 18.0, lineHeight: 27.0, textStyle: .headline)
                 .colored(.onBackground100)
-
+            
         case .subheader_2:
             return string
                 .font(named: UIFont.sansRegular, size: 14.0, lineHeight: 21.0, textStyle: .headline)
                 .colored(.onBackground70)
-
+            
+        case .subheader_3:
+            return string
+                .font(named: UIFont.sansBold, size: 12.0, lineHeight: 18.0, textStyle: .headline)
+                .colored(.onBackground100)
+            
         case .body:
             return string
                 .font(named: UIFont.sansRegular, size: 14.0, lineHeight: 21.0, textStyle: .body)

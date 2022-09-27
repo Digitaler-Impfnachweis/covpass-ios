@@ -92,4 +92,9 @@ class ValidatorOverviewRouter: ValidatorOverviewRouterProtocol {
     func showNewRegulationsAnnouncement() -> PromiseKit.Promise<Void> {
         sceneCoordinator.present(NewRegulationsAnnouncementSceneFactory())
     }
+    
+    func routeToStateSelection() -> Promise<Void> {
+        sceneCoordinator.present(StateSelectionSceneFactory(),
+                                 animated: true)
+    }
 }

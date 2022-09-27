@@ -48,7 +48,6 @@ class ValidatorOverviewViewController: UIViewController {
         viewModel.delegate = self
         setupHeaderView()
         setupCardView()
-        setupSegmentControl()
         setupOfflineInformationView()
         viewModel.showNotificationsIfNeeded()
     }
@@ -89,6 +88,18 @@ class ValidatorOverviewViewController: UIViewController {
     private func setupCardView() {
         setScanButtonLoadingState()        
         setupTimeHintView()
+        
+        scanCard.actionButton.title = viewModel.scanActionTitle
+        scanCard.actionButton.action = viewModel.scanAction
+        scanCard.titleLabel.attributedText = viewModel.scanDropDownTitle
+            .styledAs(.subheader_3)
+            .colored(.neutralWhite)
+        scanCard.textLabel.attributedText = viewModel.scanDropDownValue
+            .styledAs(.body)
+            .colored(.neutralWhite)
+        scanCard.chooseAction = viewModel.chooseAction
+        scanCard.chooseButton.titleLabel?.text = ""
+
     }
     
     private func setupTimeHintView() {
@@ -99,15 +110,6 @@ class ValidatorOverviewViewController: UIViewController {
         timeHintView.titleLabel.attributedText = viewModel.timeHintTitle.styledAs(.header_3)
         timeHintView.bodyLabel.attributedText = viewModel.timeHintSubTitle.styledAs(.body)
         timeHintView.setConstraintsToEdge()
-    }
-    
-    private func setupSegmentControl() {
-        scanCard.switchWrapperViewIsHidden = true
-        scanCard.actionButton.title = "validation_start_screen_scan_action_button_title".localized
-        scanCard.actionButton.action = { [weak self] in
-            self?.viewModel.startQRCodeValidation()
-        }
-        scanCard.updateAccessibility()
     }
     
     private func setupOfflineInformationView() {
