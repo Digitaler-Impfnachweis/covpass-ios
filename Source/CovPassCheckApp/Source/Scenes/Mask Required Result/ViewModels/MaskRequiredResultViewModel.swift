@@ -7,9 +7,10 @@
 
 import CovPassUI
 import PromiseKit
+import UIKit
 
 private enum Constants {
-    static let title = "".localized
+    static let title = "infschg_result_mask_mandatory_title".localized
     static let subtitle = "".localized
     static let description = "".localized
     static let buttonTitle = "".localized
@@ -17,6 +18,7 @@ private enum Constants {
 
 final class MaskRequiredResultViewModel: MaskRequiredResultViewModelProtocol {
     weak var delegate: ViewModelDelegate?
+    let image: UIImage = .statusMaskRequiredCircleLarge
     let title = Constants.title
     let subtitle = Constants.subtitle
     let description = Constants.description

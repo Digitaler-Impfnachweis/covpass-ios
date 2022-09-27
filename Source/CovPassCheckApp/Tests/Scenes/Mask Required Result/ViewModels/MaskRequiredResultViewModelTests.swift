@@ -84,4 +84,12 @@ final class MaskRequiredResultViewModelTests: XCTestCase {
         // Then
         wait(for: [didUpdateExpectation, doneExpectation], timeout: 3, enforceOrder: true)
     }
+
+    func testIsCancellable() {
+        // When
+        let isCancellable = sut.isCancellable()
+
+        // Then
+        XCTAssertTrue(isCancellable)
+    }
 }
