@@ -9,6 +9,7 @@ import CovPassUI
 import UIKit
 
 final class MaskRequiredResultViewController: UIViewController {
+    @IBOutlet var infoHeaderView: InfoHeaderView!
     @IBOutlet var imageView: UIImageView!
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var subtitleLabel: UILabel!
@@ -30,11 +31,18 @@ final class MaskRequiredResultViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        configureInfoHeaderView()
         configureImageView()
         configureLabels()
         configureReasonStackView()
         configureButton()
         configureCounter()
+    }
+
+    private func configureInfoHeaderView() {
+        infoHeaderView.attributedTitleText = nil
+        infoHeaderView.action = viewModel.cancel
+        infoHeaderView.image = .close
     }
 
     private func configureImageView() {

@@ -35,6 +35,6 @@ final class MaskRequiredResultViewControllerSnapshotTests: BaseSnapShotTests {
     }
 
     func testDefault() throws {
-        verifyView(vc: sut)
+        verifyView(view: sut.view, record: true, height: 1000)
     }
 }
