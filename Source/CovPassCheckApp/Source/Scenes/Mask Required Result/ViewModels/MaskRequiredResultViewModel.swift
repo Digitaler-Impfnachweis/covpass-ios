@@ -23,12 +23,7 @@ final class MaskRequiredResultViewModel: MaskRequiredResultViewModelProtocol {
     let subtitle: String
     let description = Constants.description
     let buttonTitle = Constants.buttonTitle
-    let reasonViewModels: [MaskRequiredReasonViewModelProtocol] = [
-        MaskRequiredValidityDateReasonViewModel(),
-        MaskRequiredWrongCertificateReasonViewModel(),
-        MaskRequiredIncompleteSeriesReasonViewModel(),
-        MaskRequiredInvalidSignatureReasonViewModel()
-    ]
+    let reasonViewModels: [MaskRequiredReasonViewModelProtocol]
     let countdownTimerModel: CountdownTimerModel
 
     private let resolver: Resolver<Void>
@@ -37,7 +32,8 @@ final class MaskRequiredResultViewModel: MaskRequiredResultViewModelProtocol {
     init(countdownTimerModel: CountdownTimerModel,
          federalStateCode: String,
          resolver: Resolver<Void>,
-         router: MaskRequiredResultRouterProtocol
+         router: MaskRequiredResultRouterProtocol,
+         reasonType: MaskRequiredReasonType
     ) {
         self.countdownTimerModel = countdownTimerModel
         self.subtitle = .init(
@@ -46,6 +42,7 @@ final class MaskRequiredResultViewModel: MaskRequiredResultViewModelProtocol {
         )
         self.resolver = resolver
         self.router = router
+        self.reasonViewModels = Self.reasonViewModels(reasonType)
 
         countdownTimerModel.onUpdate = onCountdownTimerModelUpdate
         countdownTimerModel.start()
@@ -56,6 +53,22 @@ final class MaskRequiredResultViewModel: MaskRequiredResultViewModelProtocol {
             cancel()
         } else {
             delegate?.viewModelDidUpdate()
+        }
+    }
+
+    private static func reasonViewModels(_ reasonType: MaskRequiredReasonType) -> [MaskRequiredReasonViewModelProtocol] {
+        switch reasonType {
+        case .functional:
+            return [
+                MaskRequiredValidityDateReasonViewModel(),
+                MaskRequiredWrongCertificateReasonViewModel(),
+                MaskRequiredIncompleteSeriesReasonViewModel()
+            ]
+        case .technical:
+            return [
+                MaskRequiredInvalidSignatureReasonViewModel(),
+                MaskRequiredQRCodeReasonViewModel()
+            ]
         }
     }
 

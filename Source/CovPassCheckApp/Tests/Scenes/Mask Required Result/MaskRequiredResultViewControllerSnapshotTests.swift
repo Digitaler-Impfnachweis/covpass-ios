@@ -24,7 +24,8 @@ final class MaskRequiredResultViewControllerSnapshotTests: BaseSnapShotTests {
             countdownTimerModel: countdownTimerModel,
             federalStateCode: "Northrhine-Westphalia",
             resolver: resolver,
-            router: MaskRequiredResultRouterMock()
+            router: MaskRequiredResultRouterMock(),
+            reasonType: .functional
         )
         sut = .init(viewModel: viewModel)
     }

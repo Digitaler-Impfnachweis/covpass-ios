@@ -20,6 +20,8 @@ struct MaskRequiredResultSceneFactory: ResolvableSceneFactory {
     func make(resolvable: Resolver<Void>) -> UIViewController {
         let persistence = UserDefaultsPersistence()
         let federalStateCode = persistence.stateSelection
+        #warning("TODO: Set reason type, after scan story is done.")
+        let reasonType: MaskRequiredReasonType = .technical
         let countdownTimerModel = CountdownTimerModel(
             dismissAfterSeconds: 120,
             countdownDuration: 60
@@ -28,7 +30,8 @@ struct MaskRequiredResultSceneFactory: ResolvableSceneFactory {
             countdownTimerModel: countdownTimerModel,
             federalStateCode: federalStateCode,
             resolver: resolvable,
-            router: router
+            router: router,
+            reasonType: reasonType
         )
         let viewController = MaskRequiredResultViewController(viewModel: viewModel)
 

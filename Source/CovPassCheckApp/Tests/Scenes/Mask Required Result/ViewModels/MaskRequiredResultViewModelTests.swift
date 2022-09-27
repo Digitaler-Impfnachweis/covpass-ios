@@ -28,12 +28,13 @@ final class MaskRequiredResultViewModelTests: XCTestCase {
         configureSut()
     }
 
-    private func configureSut() {
+    private func configureSut(reasonType: MaskRequiredReasonType = .functional) {
         sut = .init(
             countdownTimerModel: countdownTimerModel,
             federalStateCode: "DE_NW",
             resolver: resolver,
-            router: router
+            router: router,
+            reasonType: reasonType
         )
         sut.delegate = delegate
     }
@@ -100,5 +101,35 @@ final class MaskRequiredResultViewModelTests: XCTestCase {
 
         // Then
         XCTAssertEqual(subtitle, "In Northrhine-Westphalia")
+    }
+
+    func testReasonViewModels_reason_type_functional() {
+        // When
+        let viewModels = sut.reasonViewModels
+
+        // Then
+        if viewModels.count == 3 {
+            XCTAssertTrue(viewModels[0] is MaskRequiredValidityDateReasonViewModel)
+            XCTAssertTrue(viewModels[1] is MaskRequiredWrongCertificateReasonViewModel)
+            XCTAssertTrue(viewModels[2] is MaskRequiredIncompleteSeriesReasonViewModel)
+        } else {
+            XCTFail("Must have 3 reason view models.")
+        }
+    }
+
+    func testReasonViewModels_reason_type_technical() {
+        // Given
+        configureSut(reasonType: .technical)
+
+        // When
+        let viewModels = sut.reasonViewModels
+
+        // Then
+        if viewModels.count == 2 {
+            XCTAssertTrue(viewModels[0] is MaskRequiredInvalidSignatureReasonViewModel)
+            XCTAssertTrue(viewModels[1] is MaskRequiredQRCodeReasonViewModel)
+        } else {
+            XCTFail("Must have 2 reason view models.")
+        }
     }
 }
