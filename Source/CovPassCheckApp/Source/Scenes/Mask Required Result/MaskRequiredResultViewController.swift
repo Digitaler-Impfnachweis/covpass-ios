@@ -53,7 +53,12 @@ final class MaskRequiredResultViewController: UIViewController {
     }
 
     private func configureReasonStackView() {
-
+        reasonStackView.removeAllArrangedSubviews()
+        for viewModel in viewModel.reasonViewModels {
+            let paragraphView = ParagraphView()
+            paragraphView.setup(with: viewModel)
+            reasonStackView.addArrangedSubview(paragraphView)
+        }
     }
 
     private func configureButton() {
@@ -78,4 +83,20 @@ extension MaskRequiredResultViewController: ViewModelDelegate {
     }
 
     func viewModelUpdateDidFailWithError(_: Error) {}
+}
+
+private extension ParagraphView {
+    func setup(with viewModel: MaskRequiredReasonViewModelProtocol) {
+        layoutMargins.top = 0
+        layoutMargins.bottom = 0
+        attributedTitleText = viewModel
+            .title
+            .styledAs(.header_3)
+        attributedBodyText = viewModel
+            .description
+            .styledAs(.body)
+            .colored(.onBackground80)
+        image = viewModel.icon
+        bottomBorder.isHidden = true
+    }
 }

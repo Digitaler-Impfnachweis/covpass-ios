@@ -19,9 +19,7 @@ struct MaskRequiredResultSceneFactory: ResolvableSceneFactory {
 
     func make(resolvable: Resolver<Void>) -> UIViewController {
         let persistence = UserDefaultsPersistence()
-        guard let federalStateCode = persistence.stateSelection else {
-            fatalError("State must be selected.")
-        }
+        let federalStateCode = persistence.stateSelection
         let countdownTimerModel = CountdownTimerModel(
             dismissAfterSeconds: 120,
             countdownDuration: 60

@@ -57,8 +57,11 @@
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Gjq-nP-y9t">
-                                    <rect key="frame" x="24" y="353.5" width="272" height="134"/>
+                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Gjq-nP-y9t">
+                                    <rect key="frame" x="0.0" y="345.5" width="320" height="142"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="142" placeholder="YES" id="iyM-GB-sGK"/>
+                                    </constraints>
                                 </stackView>
                             </subviews>
                             <constraints>
@@ -68,14 +71,14 @@
                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="DoA-3w-hHw" secondAttribute="trailing" constant="24" id="B9N-wX-QsQ"/>
                                 <constraint firstItem="DoA-3w-hHw" firstAttribute="top" secondItem="HSg-Kh-hx8" secondAttribute="bottom" constant="20" id="JCv-ty-BCt"/>
                                 <constraint firstItem="ke7-Eq-NYy" firstAttribute="leading" secondItem="dfv-wP-L03" secondAttribute="leading" constant="24" id="LVc-gJ-hWD"/>
-                                <constraint firstItem="Gjq-nP-y9t" firstAttribute="leading" secondItem="ke7-Eq-NYy" secondAttribute="leading" id="U3G-Y0-5bs"/>
+                                <constraint firstItem="Gjq-nP-y9t" firstAttribute="leading" secondItem="dfv-wP-L03" secondAttribute="leading" id="Rfz-wG-RKb"/>
                                 <constraint firstItem="KNC-XD-YtE" firstAttribute="top" secondItem="dfv-wP-L03" secondAttribute="top" constant="20" symbolic="YES" id="Uz7-09-GNp"/>
+                                <constraint firstAttribute="trailing" secondItem="Gjq-nP-y9t" secondAttribute="trailing" id="YXM-eC-DQa"/>
                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="ke7-Eq-NYy" secondAttribute="trailing" constant="24" id="buY-ND-gh7"/>
-                                <constraint firstItem="Gjq-nP-y9t" firstAttribute="top" secondItem="DoA-3w-hHw" secondAttribute="bottom" constant="32" id="c8o-02-F2b"/>
+                                <constraint firstItem="Gjq-nP-y9t" firstAttribute="top" secondItem="DoA-3w-hHw" secondAttribute="bottom" constant="24" id="c8o-02-F2b"/>
                                 <constraint firstItem="HSg-Kh-hx8" firstAttribute="leading" secondItem="ke7-Eq-NYy" secondAttribute="leading" id="h5p-jc-099"/>
                                 <constraint firstItem="DoA-3w-hHw" firstAttribute="leading" secondItem="ke7-Eq-NYy" secondAttribute="leading" id="qz8-cq-XSA"/>
-                                <constraint firstAttribute="bottom" secondItem="Gjq-nP-y9t" secondAttribute="bottom" id="rr1-Jq-hth"/>
-                                <constraint firstAttribute="trailing" secondItem="Gjq-nP-y9t" secondAttribute="trailing" constant="24" id="vwy-AF-cr0"/>
+                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Gjq-nP-y9t" secondAttribute="bottom" id="rr1-Jq-hth"/>
                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="HSg-Kh-hx8" secondAttribute="trailing" constant="24" id="yXb-pd-jKd"/>
                             </constraints>
                         </view>
@@ -124,7 +127,7 @@
                 </stackView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
-            <color key="backgroundColor" name="BackgroundPrimary"/>
+            <color key="backgroundColor" name="BackgroundSecondary"/>
             <constraints>
                 <constraint firstItem="0iA-GH-w0u" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" constant="12" id="8GC-NV-oWA"/>
                 <constraint firstItem="0iA-GH-w0u" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="USQ-6p-tbP"/>
@@ -142,8 +145,8 @@
         <namedColor name="AccentColor">
             <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <namedColor name="BackgroundPrimary">
-            <color red="0.97254901960784312" green="0.97254901960784312" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        <namedColor name="BackgroundSecondary">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

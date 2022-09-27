@@ -617,18 +617,21 @@
 
 "accessibility_revocation_settings_page_announce" = "Settings about the function for authorities were opened";
 
+"infschg_settings_title" = "Checking rules";
 
-/********** infschg **********/
+"infschg_settings_copy_1" = "Here you can update the rules according to which certificates are checked. If your smartphone is usually connected to the Internet, this happens automatically.";
 
-"infschg_info_accessibility_announce_open" = "The view \"New legal regulations\" has been opened.";
+"infschg_result_mask_optional_title" = "No mask obligation";
 
-"infschg_info_accessibility_announce_close" = "The view \"New legal regulations\" has been closed.";
+"infschg_result_mask_optional_subtitle" = "In %@";
 
-"infschg_info_accessibility_close" = "Close";
+"infschg_result_mask_optional_copy" = "Now compare the following data with an identification document of the person being checked.";
+
+"infschg_result_mask_optional_copy_notification" = "This view will close by itself after 2 min.";
 
 "infschg_info_title" = "New legal regulations";
 
-"infschg_info_copy_1" = "In Germany, an amendment to the Infection Protection Act comes into force. From October 1, 2022, the German federal states will be able to make masks compulsory in indoor areas accessible to the public.";
+"infschg_info_copy_1" = "In Germany, an amendment to the Infection Protection Act comes into force. From October 1, 2022, the federal states will be able to impose a mask requirement in indoor areas accessible to the public.";
 
 "infschg_info_copy_2" = "Exemption from the mask obligation";
 
@@ -644,15 +647,63 @@
 
 "infschg_start_screen_dropdown_text" = "%@";
 
-"infschg_start_screen_button_scan" = "Scan certificate";
+"infschg_result_mask_optional_infobox_title" = "Public authority function";
 
-"infschg_start_screen_white_box_title_1" = "Check offline";
+"infschg_result_mask_optional_infobox_copy" = "This function is intended exclusively for police authorities. Attempting to revoke a certificate without authorization is punishable by law and can have serious consequences.";
 
-"infschg_start_screen_white_box_tag" = "Available";
+"infschg_result_mask_optional_infobox_link" = "Show information about the suspension";
 
-"infschg_start_screen_white_box_copy_1" = "To be able to check reliably without an Internet connection, the checking rules should have been updated less than 24 hours ago.";
+"infschg_result_mask_mandatory_title" = "Mask obligation";
 
-"infschg_start_screen_white_box_title_2" = "Update checking rules";
+"infschg_result_mask_mandatory_copy" = "The scanned certificate does not exempt from the mask requirement. Possible reasons:";
+
+"infschg_result_mask_mandatory_reason_1_title" = "Certificate not within the validity period";
+
+"infschg_result_mask_mandatory_reason_1_copy" = "There may be a waiting period for the scanned certificate, which must be passed, or the certificate may be too old.";
+
+"infschg_result_mask_mandatory_reason_2_title" = "Incorrect certificate type";
+
+"infschg_result_mask_mandatory_reason_2_copy" = "A different type of certificate is required in your federal state for exemption from the masking requirement. Please inform yourself about the current regulations of your federal state.";
+
+"infschg_result_mask_mandatory_reason_3_title" = "Incomplete vaccination series";
+
+"infschg_result_mask_mandatory_reason_3_copy" = "Depending on the vaccine, several doses of vaccine may be required to achieve full protection.";
+
+"infschg_result_mask_mandatory_reason_4_title" = "Invalid signature";
+
+"infschg_result_mask_mandatory_reason_4_copy" = "The certificate was not issued by an authorized body or does not belong to an EU COVID Digital Certificate.";
+
+"infschg_result_mask_mandatory_reason_5_title" = "QR code not scannable";
+
+"infschg_result_mask_mandatory_reason_5_copy" = "The QR code is not scannable. Please update the CovPassCheck app if this problem occurs frequently.";
+
+"infschg_result_mask_mandatory_second_scan_infobox_title" = "Two proofs required?";
+
+"infschg_result_mask_mandatory_second_scan_infobox_copy" = "It is possible that your state allows a mask exemption for basic immunization after recovery. In this case, scan both of the person's certificates:";
+
+"infschg_result_mask_mandatory_second_scan_infobox_button" = "Scan second certificate";
+
+"infschg_result_mask_mandatory_deviating_data_title" = "Deviating data";
+
+"infschg_result_mask_mandatory_deviating_data_copy" = "The personal data of the two scanned proofs do not match:";
+
+"infschg_result_mask_mandatory_deviating_data_subtitle_1" = "1st certificate";
+
+"infschg_result_mask_mandatory_deviating_data_subtitle_2" = "2nd certificate";
+
+"infschg_result_mask_mandatory_deviating_data_subtitle_3" = "Not an error?";
+
+"infschg_result_mask_mandatory_deviating_data_copy_2" = "If you think the error is a typo, you can ignore this discrepancy and continue the check";
+
+"infschg_result_mask_mandatory_deviating_data_link" = "Ignore deviation";
+
+"infschg_result_no_mask_rules_title" = "No present rules";
+
+"infschg_result_no_mask_rules_subtitle" = "In %@";
+
+"infschg_result_no_mask_rules_copy_1_bold" = "There are no federal state-specific rules for this federal state. Therefore, only the uniform federal rules on mandatory masks apply.";
+
+"infschg_result_no_mask_rules_copy_2" = "If the federal state in which you are staying has ordered a mask requirement, a negative rapid or PCR test exempts examinees from this mask requirement for 24 hours at recreational, cultural and sporting events and in catering establishments. An unsupervised self-test is not sufficient. Your state may regulate that examinees are also exempt from the mask requirement due to vaccinations or recovery (if these occurred no more than three months ago). An exemption from the mask requirement does not apply in long-distance public transport, in hospitals, nursing facilities and for patients in doctors' offices.";
 
 "infschg_start_screen_white_box_copy_2" = "Last updated less than 24 hours ago";
 

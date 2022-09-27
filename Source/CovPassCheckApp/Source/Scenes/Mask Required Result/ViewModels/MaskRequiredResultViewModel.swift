@@ -11,7 +11,7 @@ import UIKit
 
 private enum Constants {
     static let title = "infschg_result_mask_mandatory_title".localized
-    static let subtitleFormat = "In %@"
+    static let subtitleFormat = "infschg_result_mask_optional_subtitle".localized
     static let description = "infschg_result_mask_mandatory_copy".localized
     static let buttonTitle = "result_2G_button_startover".localized
 }
