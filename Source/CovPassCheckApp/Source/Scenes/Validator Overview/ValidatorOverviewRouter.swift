@@ -40,16 +40,7 @@ class ValidatorOverviewRouter: ValidatorOverviewRouterProtocol {
     
     func showCertificate(_ certificate: ExtendedCBORWebToken?,
                          userDefaults: Persistence) {
-        sceneCoordinator
-            .present(
-                ValidationResultSceneFactory(
-                    router: ValidationResultRouter(sceneCoordinator: sceneCoordinator),
-                    certificate: certificate,
-                    error: nil,
-                    userDefaults: userDefaults
-                )
-            )
-            .cauterize()
+        #warning("TODO: replace with new scene")
     }
     
     func showAppInformation(userDefaults: Persistence) {
@@ -64,14 +55,8 @@ class ValidatorOverviewRouter: ValidatorOverviewRouterProtocol {
     func showError(_ certificate: ExtendedCBORWebToken?,
                    error: Error,
                    userDefaults: Persistence) -> Promise<ExtendedCBORWebToken>  {
-        sceneCoordinator.present(
-            ValidationResultSceneFactory(
-                router: ValidationResultRouter(sceneCoordinator: sceneCoordinator),
-                certificate: certificate,
-                error: error,
-                userDefaults: userDefaults
-            )
-        )
+#warning("TODO: replace with new scene")
+        return .value(certificate!)
     }
     
     func showDataPrivacy() -> Promise<Void> {
