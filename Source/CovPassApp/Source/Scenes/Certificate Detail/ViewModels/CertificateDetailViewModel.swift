@@ -379,7 +379,7 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
         self.certificates = certificates
         boosterCandidate = boosterLogic.checkCertificates(certificates)
         resolver = resolvable
-        self.holderNeedsMask = certificateHolderStatusModel.holderNeedsMask(self.certificates)
+        self.holderNeedsMask = certificateHolderStatusModel.holderNeedsMask(self.certificates, region: nil)
         self.holderIsFullyImmunized = certificateHolderStatusModel.holderIsFullyImmunized(self.certificates)
         guard let digitalGreenCertificate = certificates.first?.vaccinationCertificate.hcert.dgc else {
             return nil
@@ -449,7 +449,7 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
         .map {
             if let selectedCertificate = self.selectedCertificate {
                 self.certificates = $0.certificates.filterMatching(selectedCertificate)
-                self.holderNeedsMask = self.certificateHolderStatusModel.holderNeedsMask(self.certificates)
+                self.holderNeedsMask = self.certificateHolderStatusModel.holderNeedsMask(self.certificates, region: nil)
                 self.holderIsFullyImmunized = self.certificateHolderStatusModel.holderIsFullyImmunized(self.certificates)
             }
         }
@@ -531,7 +531,7 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
     
     private func certDetailDoneDidDeleteCertificate(_ cert: ExtendedCBORWebToken, _ result: CertificateDetailSceneResult) {
         certificates = certificates.filter { $0 != cert }
-        holderNeedsMask = certificateHolderStatusModel.holderNeedsMask(self.certificates)
+        holderNeedsMask = certificateHolderStatusModel.holderNeedsMask(self.certificates, region: nil)
         holderIsFullyImmunized = certificateHolderStatusModel.holderIsFullyImmunized(self.certificates)
         if certificates.count > 0 {
             delegate?.viewModelDidUpdate()

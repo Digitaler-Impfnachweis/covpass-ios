@@ -12,11 +12,13 @@ import CertLogic
 import XCTest
 
 class DCCCertLogicMock: DCCCertLogicProtocol {
- 
+
     var countries: [Country] = [Country("DE")]
     
-    var rulesShouldBeUpdated: Bool = true
+    var areRulesAvailable: Bool = true
     
+    var rulesShouldBeUpdated: Bool = true
+
     var boosterRulesShouldBeUpdated: Bool = true
     
     var valueSetsShouldBeUpdated: Bool = true
@@ -42,10 +44,18 @@ class DCCCertLogicMock: DCCCertLogicProtocol {
     func updateBoosterRules() -> Promise<Void> {
         .value
     }
-
+    
+    func rulesAvailable(logicType: CovPassCommon.DCCCertLogic.LogicType, region: String?) -> Bool {
+        areRulesAvailable
+    }
+ 
     var validationError: Error?
     var validateResult: [ValidationResult]?
-    func validate(type _: DCCCertLogic.LogicType, countryCode _: String, validationClock _: Date, certificate _: CBORWebToken) throws -> [ValidationResult] {
+    func validate(type _: DCCCertLogic.LogicType,
+                  countryCode _: String,
+                  region _: String?,
+                  validationClock _: Date,
+                  certificate _: CBORWebToken) throws -> [ValidationResult] {
         if let err = validationError {
             throw err
         }

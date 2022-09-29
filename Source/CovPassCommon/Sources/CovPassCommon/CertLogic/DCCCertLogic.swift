@@ -205,19 +205,16 @@ public class DCCCertLogic: DCCCertLogicProtocol {
         self.keychain = keychain
         self.userDefaults = userDefaults
     }
-
-    public func validate(type: LogicType = .eu,
-                         countryCode: String,
-                         validationClock: Date,
-                         certificate: CBORWebToken) throws -> [ValidationResult] {
+    
+    private func rulesFor(logicType: LogicType) -> [Rule] {
         var rules = [Rule]()
-        switch type {
+        switch logicType {
         case .eu:
             rules = dccRules
         case .booster:
             rules = boosterRules
         case .de:
-            rules = dccDomesticRules.acceptenceAndInvalidationRules
+            rules = dccDomesticRules.acceptanceRules
         case .gStatusAndRules:
             let domesticRules = dccDomesticRules
             rules = domesticRules.acceptenceAndInvalidationRules
@@ -225,6 +222,21 @@ public class DCCCertLogic: DCCCertLogicProtocol {
             let domesticRules = dccDomesticRules
             rules = domesticRules.acceptenceAndInvalidationRules + domesticRules.maskStatusRules
         }
+        return rules
+    }
+    
+    public func rulesAvailable(logicType: DCCCertLogic.LogicType, region: String?) -> Bool {
+        return rulesFor(logicType: logicType).filter{ $0.region == region }.isEmpty == false
+    }
+
+    public func validate(type: LogicType = .eu,
+                         countryCode: String,
+                         region: String? = nil,
+                         validationClock: Date,
+                         certificate: CBORWebToken) throws -> [ValidationResult] {
+        
+        var rules = rulesFor(logicType: type)
+        
         if rules.isEmpty {
             throw DCCCertLogicError.noRules
         }
@@ -246,7 +258,7 @@ public class DCCCertLogic: DCCCertLogicProtocol {
             validationClock: validationClock,
             countryCode: countryCode,
             certificationType: certificateType,
-            region: nil
+            region: region
         )
         let external = ExternalParameter(
             validationClock: validationClock,

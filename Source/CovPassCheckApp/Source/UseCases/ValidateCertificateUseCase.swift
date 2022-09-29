@@ -10,53 +10,71 @@ import PromiseKit
 import Foundation
 import CertLogic
 
+enum ValidateCertificateUseCaseError: Error {
+    case maskRulesNotAvailable
+    case holderNeedsMask
+    case invalidDueToRules
+    case invalidDueToTechnicalReason
+}
+
 struct ValidateCertificateUseCase {
     let token: ExtendedCBORWebToken
+    let region: String?
     let revocationRepository: CertificateRevocationRepositoryProtocol
-    let certLogic: DCCCertLogicProtocol
-    let persistence: Persistence
+    public let holderStatus: CertificateHolderStatusModelProtocol
     
-    struct Result {
-        let token: ExtendedCBORWebToken
-        let validationResults: [ValidationResult]?
-    }
-    
-    func execute() -> Promise<Result> {
-        firstly {
-            checkBusinessRules(token)
+    func execute() -> Promise<ExtendedCBORWebToken> {
+        return firstly {
+            checkMaskRulesAvailable()
         }
         .then {
-            isRevoked($0)
+            isRevoked(token)
+        }
+        .then {
+            checkDomesticRules()
+        }
+        .then {
+            checkMaskRules()
+        }
+        .then {
+            Promise.value(token)
         }
     }
     
-    private func isRevoked(_ result: Result) -> Promise<Result> {
-        firstly {
-            revocationRepository.isRevoked(result.token)
+    private func checkMaskRulesAvailable() -> Promise<Void> {
+        guard holderStatus.maskRulesAvailable(for: region) else {
+            return .init(error: ValidateCertificateUseCaseError.maskRulesNotAvailable)
         }
-        .then(on: .global()) { isRevoked -> Promise<Result> in
-            if isRevoked {
-                return .init(error: CertificateError.revoked(result.token))
-            }
-            return .value(result)
-        }
+        return .value
     }
     
-    private func checkBusinessRules(_ token: ExtendedCBORWebToken) ->  Promise<Result> {
-        // Validate given certificate based on GERMAN rules and users local time (CovPassCheck only)
-        let validationResult = try? certLogic.validate(type: .de,
-                                                       countryCode: "DE",
-                                                       validationClock: Date(),
-                                                       certificate: token.vaccinationCertificate)
-        let valid = validationResult?.contains(where: { $0.result != .passed }) == false
+    private func checkMaskRules() -> Promise<Void> {
+        if holderStatus.holderNeedsMask([token], region: region) {
+            return .init(error: ValidateCertificateUseCaseError.holderNeedsMask)
+        }
+        return .value
+    }
 
-        // Show error dialog when at least one rule failed or there are no rules at all
-        if !valid {
-            return .init(error: ValidationResultError.functional)
+    private func isRevoked(_ token: ExtendedCBORWebToken) -> Promise<Void> {
+        firstly {
+            revocationRepository.isRevoked(token)
         }
-        if validationResult?.isEmpty ?? false {
-            return .init(error: ValidationResultError.technical)
+        .then { isRevoked -> Promise<Void> in
+            if isRevoked {
+                return .init(error: CertificateError.revoked(token))
+            }
+            return .value
         }
-        return .value(.init(token: token, validationResults: validationResult))
+    }
+    
+    private func checkDomesticRules() -> Promise<Void> {
+        switch holderStatus.checkDomesticAcceptanceRules([token]) {
+        case .passed:
+            return .value
+        case .failedTechnical:
+            return .init(error: ValidateCertificateUseCaseError.invalidDueToTechnicalReason)
+        case .failedFunctional:
+            return .init(error: ValidateCertificateUseCaseError.invalidDueToRules)
+        }
     }
 }

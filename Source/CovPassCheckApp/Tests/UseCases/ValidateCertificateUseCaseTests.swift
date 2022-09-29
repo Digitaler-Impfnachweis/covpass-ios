@@ -6,142 +6,145 @@
 //
 
 import XCTest
+import CovPassCommon
 @testable import CovPassCheckApp
-@testable import CovPassCommon
-import SwiftyJSON
-import CertLogic
 
 class ValidateCertificateUseCaseTests: XCTestCase {
     
     var sut: ValidateCertificateUseCase!
-    var certLogic: DCCCertLogicMock!
+    var certificateHolderStatusModel: CertificateHolderStatusModelMock!
     var revocationRepository: CertificateRevocationRepositoryMock!
-
+    var token: ExtendedCBORWebToken!
+    
     override func setUpWithError() throws {
-        let token = CBORWebToken.mockRecoveryCertificate.mockRecoveryUVCI("FOO").extended()
-        let persistence = UserDefaultsPersistence()
+        token = CBORWebToken.mockRecoveryCertificate.mockRecoveryUVCI("FOO").extended()
         revocationRepository = CertificateRevocationRepositoryMock()
-        certLogic = DCCCertLogicMock()
+        certificateHolderStatusModel = CertificateHolderStatusModelMock()
         sut = ValidateCertificateUseCase(token: token,
+                                         region: nil,
                                          revocationRepository: revocationRepository,
-                                         certLogic: certLogic,
-                                         persistence: persistence)
+                                         holderStatus: certificateHolderStatusModel)
     }
     
     override func tearDownWithError() throws {
         revocationRepository = nil
-        certLogic = nil
+        certificateHolderStatusModel = nil
+        token = nil
         sut = nil
     }
     
-    func test_isPassed_And_IsNotRevoked() {
+    func test_checkMaskRulesNotAvailable() {
         // GIVEN
-        let testExpectation = XCTestExpectation()
-        certLogic.validationError = nil
-        certLogic.validateResult = [.init(rule: nil, result: .passed, validationErrors: nil)]
-        revocationRepository.isRevoked = false
+        let expectation = XCTestExpectation(description: "test should fail because rules are not available")
+        certificateHolderStatusModel.areMaskRulesAvailable = false
         // WHEN
-        sut.execute().done { result in
-            // THEN
-            XCTAssertNotNil(result.token)
-            XCTAssertTrue(result.token.vaccinationCertificate.isRecovery)
-            XCTAssertEqual(result.token.vaccinationCertificate.hcert.dgc.uvci, "FOO")
-            testExpectation.fulfill()
-        }
-        .catch { error in
-            XCTFail("Should not fail")
-        }
-        wait(for: [revocationRepository.isRevokedExpectation,
-                   testExpectation],
-             timeout: 0.1,
-             enforceOrder: true)
-    }
-    
-    func test_isPassed_And_IsRevoked() {
-        // GIVEN
-        let testExpectation = XCTestExpectation()
-        certLogic.validationError = nil
-        certLogic.validateResult = [.init(rule: nil, result: .passed, validationErrors: nil)]
-        revocationRepository.isRevoked = true
-        // WHEN
-        sut.execute().done { token in
-            // THEN
-            XCTFail("Should fail")
-        }
-        .catch { error in
-            guard case CertificateError.revoked(_) = error else {
-                XCTFail("Wrong error.")
-                return
+        sut.execute()
+            .done { token in
+                XCTFail("Should not successful")
             }
-            testExpectation.fulfill()
-
-        }
-        wait(for: [revocationRepository.isRevokedExpectation,
-                   testExpectation],
-             timeout: 0.1,
-             enforceOrder: true)
+            .catch { error in
+                // THEN
+                XCTAssertEqual(error as? ValidateCertificateUseCaseError, .maskRulesNotAvailable)
+                expectation.fulfill()
+            }
+        wait(for: [expectation], timeout: 1.0)
     }
     
-    func test_isNotPassedFunctional_And_IsNotRevoked() {
+    func test_certificate_is_revoked() {
         // GIVEN
-        let testExpectation = XCTestExpectation()
-        certLogic.validationError = nil
-        certLogic.validateResult = [.init(rule: nil, result: .fail, validationErrors: nil)]
-        revocationRepository.isRevoked = false
-        // WHEN
-        sut.execute().done { token in
-            // THEN
-            XCTFail("Should fail")
-        }
-        .catch { error in
-            let certificateError = error as? ValidationResultError
-            XCTAssertEqual(certificateError, .functional)
-            testExpectation.fulfill()
-        }
-        wait(for: [testExpectation],
-             timeout: 0.1,
-             enforceOrder: true)
-    }
-    
-    func test_isNotPassedFunctional_And_IsRevoked() {
-        // GIVEN
-        let testExpectation = XCTestExpectation()
-        certLogic.validationError = nil
-        certLogic.validateResult = [.init(rule: nil, result: .fail, validationErrors: nil)]
+        let expectation = XCTestExpectation(description: "test should fail because certificate is revoked")
+        certificateHolderStatusModel.areMaskRulesAvailable = true
         revocationRepository.isRevoked = true
         // WHEN
-        sut.execute().done { token in
-            // THEN
-            XCTFail("Should fail")
-        }
-        .catch { error in
-            let certificateError = error as? ValidationResultError
-            XCTAssertEqual(certificateError, .functional)
-            testExpectation.fulfill()
-        }
-        wait(for: [testExpectation],
-             timeout: 0.1,
-             enforceOrder: true)
+        sut.execute()
+            .done { token in
+                XCTFail("Should not successful")
+            }
+            .catch { error in
+                // THEN
+                XCTAssertEqual(error as? CertificateError, .revoked(self.token))
+                expectation.fulfill()
+            }
+        wait(for: [expectation], timeout: 1.0)
     }
     
-    func test_isNotPassedTechnical_And_IsNotRevoked() {
+    func test_checkDomesticRules_failedFunctional() {
         // GIVEN
-        let testExpectation = XCTestExpectation()
-        certLogic.validationError = nil
-        certLogic.validateResult = []
+        let expectation = XCTestExpectation(description: "test should fail because rules are not passed")
+        certificateHolderStatusModel.areMaskRulesAvailable = true
         revocationRepository.isRevoked = false
+        certificateHolderStatusModel.domesticRulesPassedResult = .failedFunctional
         // WHEN
-        sut.execute().done { token in
-            // THEN
-            XCTFail("Should fail")
-        }
-        .catch { error in
-            let certificateError = error as? ValidationResultError
-            XCTAssertEqual(certificateError, .technical)
-            testExpectation.fulfill()
-        }
-        wait(for: [testExpectation],
-             timeout: 0.1,
-             enforceOrder: true)
+        sut.execute()
+            .done { token in
+                XCTFail("Should not successful")
+            }
+            .catch { error in
+                // THEN
+                XCTAssertEqual(error as? ValidateCertificateUseCaseError, .invalidDueToRules)
+                expectation.fulfill()
+            }
+        wait(for: [expectation], timeout: 1.0)
+    }
+    
+    func test_checkDomesticRules_failedTechnical() {
+        // GIVEN
+        let expectation = XCTestExpectation(description: "test should fail because rules are not passed")
+        certificateHolderStatusModel.areMaskRulesAvailable = true
+        revocationRepository.isRevoked = false
+        certificateHolderStatusModel.domesticRulesPassedResult = .failedTechnical
+        // WHEN
+        sut.execute()
+            .done { token in
+                XCTFail("Should not successful")
+            }
+            .catch { error in
+                // THEN
+                XCTAssertEqual(error as? ValidateCertificateUseCaseError, .invalidDueToTechnicalReason)
+                expectation.fulfill()
+            }
+        wait(for: [expectation], timeout: 1.0)
+    }
+    
+    func test_checkMaskRule() {
+        // GIVEN
+        let expectation = XCTestExpectation(description: "test should fail because holder needs mask")
+        certificateHolderStatusModel.areMaskRulesAvailable = true
+        revocationRepository.isRevoked = false
+        certificateHolderStatusModel.domesticRulesPassedResult = .passed
+        certificateHolderStatusModel.needsMask = true
+        // WHEN
+        sut.execute()
+            .done { token in
+                XCTFail("Should not successful")
+            }
+            .catch { error in
+                // THEN
+                XCTAssertEqual(error as? ValidateCertificateUseCaseError, .holderNeedsMask)
+                expectation.fulfill()
+            }
+        wait(for: [expectation], timeout: 1.0)
+    }
+    
+    func test_checkMaskRule_passed() {
+        // GIVEN
+        let expectation = XCTestExpectation(description: "test should fail because holder needs mask")
+        certificateHolderStatusModel.areMaskRulesAvailable = true
+        revocationRepository.isRevoked = false
+        certificateHolderStatusModel.domesticRulesPassedResult = .passed
+        certificateHolderStatusModel.needsMask = false
+        // WHEN
+        sut.execute()
+            .done { token in
+                XCTAssertNotNil(token)
+                XCTAssertEqual(token, self.token)
+                expectation.fulfill()
+            }
+            .catch { error in
+                // THEN
+
+                XCTFail("Should not Fail")
+            }
+        wait(for: [expectation], timeout: 1.0)
     }
 }

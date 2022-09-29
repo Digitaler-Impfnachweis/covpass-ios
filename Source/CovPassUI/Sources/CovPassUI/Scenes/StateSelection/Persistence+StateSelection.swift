@@ -17,7 +17,7 @@ public extension Persistence {
     var stateSelection: String {
         get {
             guard let value = try? fetch(UserDefaults.keyStateSelection) as? String else {
-                return "DE_BW"
+                return "BW"
             }
             return value
         }

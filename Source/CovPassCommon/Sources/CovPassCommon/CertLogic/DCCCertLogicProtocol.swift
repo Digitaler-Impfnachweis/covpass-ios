@@ -15,8 +15,10 @@ public protocol DCCCertLogicProtocol {
     var boosterRulesShouldBeUpdated: Bool { get }
     var valueSetsShouldBeUpdated: Bool { get }
     var domesticRulesShouldBeUpdated: Bool { get }
+    func rulesAvailable(logicType: DCCCertLogic.LogicType, region: String?) -> Bool
     func validate(type: DCCCertLogic.LogicType,
                   countryCode: String,
+                  region: String?,
                   validationClock: Date,
                   certificate: CBORWebToken) throws -> [ValidationResult]
     func updateRulesIfNeeded() -> Promise<Void>

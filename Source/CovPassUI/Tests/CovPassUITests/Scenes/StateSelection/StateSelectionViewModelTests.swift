@@ -39,8 +39,8 @@ class StateSelectionViewModelTests: XCTestCase {
         // WHEN
         let states = sut.states
         // THEN
-        XCTAssertEqual(states.first?.code, "DE_BB")
-        XCTAssertEqual(states.last?.code, "DE_TH")
+        XCTAssertEqual(states.first?.code, "BB")
+        XCTAssertEqual(states.last?.code, "TH")
     }
     
     func testStatesCount() {

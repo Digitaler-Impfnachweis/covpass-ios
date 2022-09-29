@@ -12,7 +12,9 @@ import Foundation
 import XCTest
 
 class DCCCertLogicMock: DCCCertLogicProtocol {
-    
+   
+    var rulesAreAvailable: Bool = true
+
     var rulesShouldBeUpdated: Bool = true
     
     var boosterRulesShouldBeUpdated: Bool = true
@@ -49,10 +51,14 @@ class DCCCertLogicMock: DCCCertLogicProtocol {
     func updateBoosterRules() -> Promise<Void> {
         .value
     }
-
+    
+    func rulesAvailable(logicType: CovPassCommon.DCCCertLogic.LogicType, region: String?) -> Bool {
+        rulesAreAvailable
+    }
+    
     var validationError: Error?
     var validateResult: [ValidationResult]?
-    func validate(type _: DCCCertLogic.LogicType, countryCode _: String, validationClock _: Date, certificate _: CBORWebToken) throws -> [ValidationResult] {
+    func validate(type: DCCCertLogic.LogicType, countryCode: String, region: String?, validationClock: Date, certificate: CovPassCommon.CBORWebToken) throws -> [CertLogic.ValidationResult] {
         if let err = validationError {
             throw err
         }

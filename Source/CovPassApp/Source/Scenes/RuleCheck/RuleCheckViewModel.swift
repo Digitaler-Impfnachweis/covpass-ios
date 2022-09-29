@@ -144,6 +144,7 @@ class RuleCheckViewModel: BaseViewModel, CancellableViewModelProtocol {
                             }
                             if let res = try self?.certLogic.validate(type: logicType,
                                                                       countryCode: country,
+                                                                      region: nil,
                                                                       validationClock: date,
                                                                       certificate: cert.vaccinationCertificate) {
                                 results.append(CertificateResult(certificate: cert, result: res))

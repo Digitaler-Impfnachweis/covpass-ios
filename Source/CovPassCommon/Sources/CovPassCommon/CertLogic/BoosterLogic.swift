@@ -72,6 +72,7 @@ public struct BoosterLogic: BoosterLogicProtocol {
                     let result = try certLogic.validate(
                         type: .booster,
                         countryCode: "DE",
+                        region: nil,
                         validationClock: Date(),
                         certificate: vaccinationCertificate.vaccinationCertificate
                     )

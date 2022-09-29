@@ -12,6 +12,8 @@ import Foundation
 import XCTest
 
 class DCCCertLogicMock: DCCCertLogicProtocol {
+
+    var areRulesAvailable = true
     
     var rulesShouldBeUpdated: Bool = true
     
@@ -51,10 +53,18 @@ class DCCCertLogicMock: DCCCertLogicProtocol {
     func lastUpdatedDCCRules() -> Date? {
         lastUpdateDccrRules
     }
+    
+    func rulesAvailable(logicType: DCCCertLogic.LogicType, region: String?) -> Bool {
+        return areRulesAvailable
+    }
 
     var validationError: Error?
     var validateResult: [ValidationResult]?
-    func validate(type _: DCCCertLogic.LogicType, countryCode _: String, validationClock _: Date, certificate _: CBORWebToken) throws -> [ValidationResult] {
+    func validate(type _: DCCCertLogic.LogicType,
+                  countryCode _: String,
+                  region _: String?,
+                  validationClock _: Date,
+                  certificate _: CBORWebToken) throws -> [ValidationResult] {
         if let err = validationError {
             throw err
         }

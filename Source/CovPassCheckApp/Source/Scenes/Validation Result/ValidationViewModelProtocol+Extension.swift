@@ -51,51 +51,50 @@ extension ValidationViewModelProtocol {
     
     func scanCertificate() {
         var tmpToken: ExtendedCBORWebToken?
-        scanCertificateStarted()
-        firstly {
-            router.scanQRCode()
-        }
-        .then { $0.mapOnScanResult() }
-        .get { _ in
-            _ = self.audioPlayer?.playCovPassCheckCertificateScannedIfEnabled()
-        }
-        .then {
-            ParseCertificateUseCase(scanResult: $0,
-                                    vaccinationRepository: repository).execute()
-        }
-        .then { token -> Promise<ValidateCertificateUseCase.Result> in
-            tmpToken = token
-            return ValidateCertificateUseCase(token: token,
-                                              revocationRepository: self.revocationRepository!,
-                                              certLogic: DCCCertLogic.create(),
-                                              persistence: self.userDefaults).execute()
-        }
-        .done { result in
-
-            let vm = ValidationResultFactory.createViewModel(
-                resolvable: resolvable,
-                router: self.router,
-                repository: self.repository,
-                certificate: result.token,
-                error: nil,
-                userDefaults: userDefaults
-            )
-            self.delegate?.viewModelDidChange(vm)
-        }
-        .ensure {
-            scanCertificateEnded()
-        }
-        .catch { error in
-            let vm = ValidationResultFactory.createViewModel(
-                resolvable: resolvable,
-                router: self.router,
-                repository: self.repository,
-                certificate: tmpToken,
-                error: error,
-                userDefaults: userDefaults
-            )
-            self.delegate?.viewModelDidChange(vm)
-        }
+                 scanCertificateStarted()
+                 firstly {
+                     router.scanQRCode()
+                 }
+                 .then { $0.mapOnScanResult() }
+                 .get { _ in
+                     _ = self.audioPlayer?.playCovPassCheckCertificateScannedIfEnabled()
+                 }
+                 .then {
+                     ParseCertificateUseCase(scanResult: $0,
+                                             vaccinationRepository: repository).execute()
+                 }
+                 .then { token -> Promise<ExtendedCBORWebToken> in
+                     tmpToken = token
+                     return ValidateCertificateUseCase(token: token,
+                                                        region: self.userDefaults.stateSelection,
+                                                        revocationRepository: self.revocationRepository!,
+                                                        holderStatus: CertificateHolderStatusModel.create()).execute()
+                 }
+                 .done { result in
+                     let vm = ValidationResultFactory.createViewModel(
+                         resolvable: resolvable,
+                         router: self.router,
+                         repository: self.repository,
+                         certificate: result,
+                         error: nil,
+                         userDefaults: userDefaults
+                     )
+                     self.delegate?.viewModelDidChange(vm)
+                 }
+                 .ensure {
+                     scanCertificateEnded()
+                 }
+                 .catch { error in
+                     let vm = ValidationResultFactory.createViewModel(
+                         resolvable: resolvable,
+                         router: self.router,
+                         repository: self.repository,
+                         certificate: tmpToken,
+                         error: error,
+                         userDefaults: userDefaults
+                     )
+                     self.delegate?.viewModelDidChange(vm)
+                 }
     }
     
     private func payloadFromScannerResult(_ result: ScanResult) throws -> String {

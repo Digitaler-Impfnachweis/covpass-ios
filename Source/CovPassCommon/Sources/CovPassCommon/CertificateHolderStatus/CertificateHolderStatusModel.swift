@@ -9,6 +9,10 @@ import Foundation
 import CertLogic
 import PromiseKit
 
+public enum CertificateHolderStatusResult {
+    case passed, failedTechnical, failedFunctional
+}
+
 public struct CertificateHolderStatusModel: CertificateHolderStatusModelProtocol {
     
     private let dccCertLogic: DCCCertLogicProtocol
@@ -16,35 +20,70 @@ public struct CertificateHolderStatusModel: CertificateHolderStatusModelProtocol
         self.dccCertLogic = dccCertLogic
     }
     
+    public func checkDomesticAcceptanceRules(_ certificates: [ExtendedCBORWebToken]) -> CertificateHolderStatusResult {
+        guard let joinedTokens = certificates.joinedTokens else {
+            return .failedTechnical
+        }
+        guard let validationResults = try? validate(certificate: joinedTokens, type: .de) else {
+            return .failedTechnical
+        }
+        guard !validationResults.filterAcceptanceRules.isEmpty else {
+            return .failedTechnical
+        }
+        let passed = validationResults.filterAcceptanceRules.failedAndOpenResults.isEmpty
+        return passed ? .passed : .failedFunctional
+    }
+    
     public func holderIsFullyImmunized(_ certificates: [ExtendedCBORWebToken]) -> Bool {
-        guard let joinedTokens = certificates.joinedTokens else { return false }
-        let validationResults = validate(certificate: joinedTokens, type: .gStatusAndRules)
-        guard !validationResults.filterAcceptanceAndInvalidationRules.isEmpty else { return false }
-        return validationResults.filterAcceptanceAndInvalidationRules.failedResults.isEmpty
+        guard let joinedTokens = certificates.joinedTokens else {
+            return false
+        }
+        guard let validationResults = try? validate(certificate: joinedTokens, type: .gStatusAndRules) else {
+            return false
+        }
+        guard !validationResults.filterAcceptanceAndInvalidationRules.isEmpty else {
+            return false
+        }
+        return validationResults.filterAcceptanceAndInvalidationRules.failedAndOpenResults.isEmpty
+    }
+        
+    public func holderNeedsMask(_ certificates: [ExtendedCBORWebToken],
+                                region: String?) -> Bool {
+        guard let joinedTokens = certificates.joinedTokens else {
+            return true
+        }
+        guard let validationResults = try? validate(certificate: joinedTokens, type: .maskStatusAndRules, region: region) else {
+            return true
+        }
+        guard validationResults.failedAndOpenResults.isEmpty else {
+            return true
+        }
+        return validationResults.holderNeedsMask
     }
     
-    public func holderNeedsMask(_ certificates: [ExtendedCBORWebToken]) -> Bool {
-        return true
-    }
-    
-    public func holderNeedsMaskAsync(_ certificates: [ExtendedCBORWebToken]) -> Guarantee<Bool> {
+    public func holderNeedsMaskAsync(_ certificates: [ExtendedCBORWebToken],
+                                     region: String?) -> Guarantee<Bool> {
         Guarantee { resolver in
             DispatchQueue.global(qos: .userInitiated).async {
-                return resolver(holderNeedsMask(certificates))
+                return resolver(holderNeedsMask(certificates, region: region))
             }
         }
     }
     
-    private func validate(certificate: CBORWebToken, type: DCCCertLogic.LogicType) -> [ValidationResult]  {
-        do {
-            let validationResults = try dccCertLogic.validate(type: type,
-                                                              countryCode: "DE",
-                                                              validationClock: Date(),
-                                                              certificate: certificate)
-            return validationResults
-        } catch {
-            return []
-        }
+    public func maskRulesAvailable(for region: String?) -> Bool {
+        return dccCertLogic.rulesAvailable(logicType: .maskStatusAndRules, region: region)
+    }
+    
+    private func validate(certificate: CBORWebToken,
+                          type: DCCCertLogic.LogicType,
+                          region: String? = nil,
+                          countryCode: String = "DE") throws -> [ValidationResult]  {
+        return try dccCertLogic.validate(type: type,
+                                         countryCode: countryCode,
+                                         region: region,
+                                         validationClock: Date(),
+                                         certificate: certificate)
+        
     }
 }
 
