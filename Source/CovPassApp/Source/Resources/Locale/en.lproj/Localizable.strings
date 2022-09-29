@@ -1669,11 +1669,11 @@
 
 "infschg_info_title" = "New legal regulations";
 
-"infschg_info_copy_1" = "An amendment to the Infection Protection Act comes into force in Germany. Therefore, your CovPass app will also change as of today.";
+"infschg_info_copy_1" = "In Germany, an amendment to the Infection Protection Act comes into force. From October 1, 2022, the German federal states will be able to make masks compulsory in indoor areas accessible to the public.";
 
 "infschg_info_copy_2" = "Exemption from the mask obligation";
 
-"infschg_info_copy_3" = "You can now see in the app whether you are required to wear a mask. Currently, the status \"No mask obligation\" is displayed.\n\nPlease note that despite the display in the app, the mask exemption does not apply in all contexts. In the period from 1 October 2022 to 7 April 2023, the mask requirement applies in certain areas throughout Germany, for example in long-distance public transport, hospitals, care facilities and for patients in doctors' offices. In addition, your federal state may have its own regulations for mandatory masks. In the upcoming versions of the CovPass app, you will be able to see for your federal state whether you have to wear a mask.";
+"infschg_info_copy_3" = "In case the federal state in which you are staying has ordered a mask obligation, a negative rapid or PCR test exempts you from this mask obligation for 24 hours at leisure, cultural and sporting events as well as in catering establishments. An unsupervised self-test is not sufficient. Your state may regulate that you are also exempt from the mask requirement through vaccinations or recovery (if these occurred no more than three months ago).* As soon as the first states mandate a mask requirement, the CovPass app will display your state-specific mask requirement status after a further update.\n\nIf your COVID certificates stored in the CovPass app are sufficient to exempt you from the mask requirement in your state, your certificate will turn green. Your exemption from the mask requirement in your state can be verified by scanning your QR code on the home screen or from the details view using the CovPassCheck app.\n\n*An exemption from the mask requirement does not apply to long-distance public transportation, hospitals, nursing facilities, and patients in doctors' offices.";
 
 "infschg_info_button" = "OK";
 
