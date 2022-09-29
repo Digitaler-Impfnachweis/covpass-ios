@@ -133,12 +133,6 @@
 		09A92D6428C786E100477251 /* CertificateCardMaskImmunityViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A92D6328C786E100477251 /* CertificateCardMaskImmunityViewModelTests.swift */; };
 		09ABDAC827FC3D7C0078EB11 /* ParseCertificateUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09ABDAC727FC3D7C0078EB11 /* ParseCertificateUseCase.swift */; };
 		09ABDACB27FC934B0078EB11 /* CertificateRevocationRepositoryMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09ABDAC927FC93440078EB11 /* CertificateRevocationRepositoryMock.swift */; };
-		09AC1DE92757ADAA008356CD /* ValidationResultSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09AC1DE82757ADAA008356CD /* ValidationResultSceneFactory.swift */; };
-		09AC1DF22757B423008356CD /* ErrorResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09AC1DEE2757B423008356CD /* ErrorResultViewModel.swift */; };
-		09AC1DF32757B423008356CD /* RecoveryResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09AC1DEF2757B423008356CD /* RecoveryResultViewModel.swift */; };
-		09AC1DF42757B423008356CD /* VaccinationResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09AC1DF02757B423008356CD /* VaccinationResultViewModel.swift */; };
-		09AC1DF52757B423008356CD /* TestResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09AC1DF12757B423008356CD /* TestResultViewModel.swift */; };
-		09AC1DF72757B439008356CD /* ValidationResultFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09AC1DF62757B439008356CD /* ValidationResultFactory.swift */; };
 		09AC1E022757B6C9008356CD /* ValidationResultSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09AC1DFB2757B6C9008356CD /* ValidationResultSceneFactory.swift */; };
 		09AC1E032757B6C9008356CD /* RecoveryResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09AC1DFC2757B6C9008356CD /* RecoveryResultViewModel.swift */; };
 		09AC1E042757B6C9008356CD /* ErrorResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09AC1DFD2757B6C9008356CD /* ErrorResultViewModel.swift */; };
@@ -326,11 +320,9 @@
 		957454A7273D5889009B25B0 /* ValidationServiceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 957454A2273D5889009B25B0 /* ValidationServiceViewController.xib */; };
 		957454A9273D58AE009B25B0 /* HintTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957454A8273D58AE009B25B0 /* HintTableViewCell.swift */; };
 		957454AB273E80BC009B25B0 /* SubTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957454AA273E80BC009B25B0 /* SubTitleCell.swift */; };
-		95961E892703550B00E577A4 /* ValidationResultFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95961E872703545200E577A4 /* ValidationResultFactoryTests.swift */; };
 		95961E8B270450CA00E577A4 /* SceneCoordinatorMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95961E8A270450CA00E577A4 /* SceneCoordinatorMock.swift */; };
 		959D42CB274BD7A90084FE76 /* iOSSnapshotTestCase in Frameworks */ = {isa = PBXBuildFile; productRef = 959D42CA274BD7A90084FE76 /* iOSSnapshotTestCase */; };
 		959D42CC274BD7A90084FE76 /* iOSSnapshotTestCase in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 959D42CA274BD7A90084FE76 /* iOSSnapshotTestCase */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		95A031EB27359AC60073FDD1 /* ValidationResultViewControllerSnapShotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A031E9273597880073FDD1 /* ValidationResultViewControllerSnapShotTests.swift */; };
 		95BB0D4827020EBE00885BA3 /* ScanPleaseSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95BB0D4227020EBE00885BA3 /* ScanPleaseSceneFactory.swift */; };
 		95BB0D4927020EBE00885BA3 /* ScanPleaseRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95BB0D4327020EBE00885BA3 /* ScanPleaseRouter.swift */; };
 		95BB0D4A27020EBE00885BA3 /* ScanPleaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95BB0D4427020EBE00885BA3 /* ScanPleaseViewController.swift */; };
@@ -389,10 +381,6 @@
 		E738566F2864E6040070C1B0 /* CertificateImportSuccessViewViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E738566E2864E6040070C1B0 /* CertificateImportSuccessViewViewModelTests.swift */; };
 		E73D5C7928B68C0000564496 /* AnnouncementViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73D5C7828B68C0000564496 /* AnnouncementViewModelProtocol.swift */; };
 		E73D5C7C28B6A6E600564496 /* AnnouncementViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73D5C7B28B6A6E600564496 /* AnnouncementViewModelTests.swift */; };
-		E74044802890159100B53AE3 /* VaccinationResultViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E740447E2890143400B53AE3 /* VaccinationResultViewModelTests.swift */; };
-		E74044832890173400B53AE3 /* ResultViewModelDelegateMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74044822890173400B53AE3 /* ResultViewModelDelegateMock.swift */; };
-		E74044852890191A00B53AE3 /* RecoveryResultViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74044842890191A00B53AE3 /* RecoveryResultViewModelTests.swift */; };
-		E74044872890198C00B53AE3 /* TestResultViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74044862890198C00B53AE3 /* TestResultViewModelTests.swift */; };
 		E740448928901E5200B53AE3 /* CountdownTimerModelMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E740448828901E5200B53AE3 /* CountdownTimerModelMock.swift */; };
 		E745AF1C27DA3C7000B3671E /* RevocationInfoViewControllerSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E745AF1A27DA3B9500B3671E /* RevocationInfoViewControllerSnapshotTests.swift */; };
 		E745AF2227DA3F2500B3671E /* CoseSign1Message+Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E745AF2127DA3F2400B3671E /* CoseSign1Message+Mock.swift */; };
@@ -453,7 +441,6 @@
 		E773F5E928B533E00051AE75 /* WhatsNewSettingsViewControllerSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E773F5E828B533E00051AE75 /* WhatsNewSettingsViewControllerSnapshotTests.swift */; };
 		E773F5EB28B5475A0051AE75 /* WhatsNewSettingsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E773F5EA28B5475A0051AE75 /* WhatsNewSettingsViewModelTests.swift */; };
 		E773F5F128B559C00051AE75 /* URLSession+CertificateRevocationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E773F5F028B559C00051AE75 /* URLSession+CertificateRevocationTests.swift */; };
-		E7786EED288EF7F40024ED0D /* ErrorResultViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7786EEC288EF7F40024ED0D /* ErrorResultViewModelTests.swift */; };
 		E782BBA027D280CF00CC033A /* ExtendedCBORWekToken+Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E782BB9F27D280CF00CC033A /* ExtendedCBORWekToken+Mock.swift */; };
 		E7998F6928C635F700EC6394 /* CertificateHolderInvalidImmunizationStatusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7998F6828C635F700EC6394 /* CertificateHolderInvalidImmunizationStatusViewModel.swift */; };
 		E7998F6B28C637D800EC6394 /* CertificateHolderInvalidMaskStatusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7998F6A28C637D800EC6394 /* CertificateHolderInvalidMaskStatusViewModel.swift */; };
@@ -482,12 +469,10 @@
 		E7C8A4712853333900025770 /* CoseSign1MessageConverter+Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C8A4702853333900025770 /* CoseSign1MessageConverter+Factory.swift */; };
 		E7CB54B327B53296002FA55E /* AppInformationViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CB54B227B53296002FA55E /* AppInformationViewModelTests.swift */; };
 		E7CB54B927B5563E002FA55E /* AppInformationViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CB54B627B55436002FA55E /* AppInformationViewModelTests.swift */; };
-		E7CDDC8A2806C024006B5190 /* ValidationViewModelProtocol+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09AC1DF82757B44C008356CD /* ValidationViewModelProtocol+Extension.swift */; };
 		E7CDDC8C28070476006B5190 /* CertificateItemDetailViewControllerSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CDDC8B28070476006B5190 /* CertificateItemDetailViewControllerSnapshotTests.swift */; };
 		E7CDDC8F28072F59006B5190 /* VaccinationCertificateItemViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CDDC8E28072F59006B5190 /* VaccinationCertificateItemViewModelTests.swift */; };
 		E7CDDC912807347B006B5190 /* TestCertificateItemViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CDDC902807347B006B5190 /* TestCertificateItemViewModelTests.swift */; };
 		E7CDDC93280734F1006B5190 /* RecoveryCertificateItemViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CDDC92280734F1006B5190 /* RecoveryCertificateItemViewModelTests.swift */; };
-		E7D1F0862861B1C600FA7465 /* ValidationResultRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D1F0852861B1C600FA7465 /* ValidationResultRouter.swift */; };
 		E7D1F0882861B21400FA7465 /* ValidationResultRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D1F0872861B21400FA7465 /* ValidationResultRouter.swift */; };
 		E7D1F0932861CABD00FA7465 /* PDFCBORExtractor+FactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D1F0922861CABD00FA7465 /* PDFCBORExtractor+FactoryTests.swift */; };
 		E7D1F0962861CF3F00FA7465 /* ScanSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D1F0952861CF3F00FA7465 /* ScanSceneFactory.swift */; };
@@ -498,7 +483,6 @@
 		E7D1F0A52861E12700FA7465 /* CameraAccessProviderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D1F0A32861E12700FA7465 /* CameraAccessProviderMock.swift */; };
 		E7D1F0A62861E12700FA7465 /* ScanRouterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D1F0A42861E12700FA7465 /* ScanRouterMock.swift */; };
 		E7D242BD28BD301100C5D137 /* AudioPlayerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D242BC28BD301100C5D137 /* AudioPlayerMock.swift */; };
-		E7D242BF28BD326A00C5D137 /* ValidationViewModelProtocol+ExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D242BE28BD326A00C5D137 /* ValidationViewModelProtocol+ExtensionTests.swift */; };
 		E7D8062C2890493D00743DAE /* CheckSituationSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D8062A2890455600743DAE /* CheckSituationSceneFactory.swift */; };
 		E7DE165628AFCD4C007FDF46 /* AcousticFeedbackSettingsRouterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DE165528AFCD4C007FDF46 /* AcousticFeedbackSettingsRouterProtocol.swift */; };
 		E7DE165828AFCDBB007FDF46 /* AcousticFeedbackSettingsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DE165728AFCDBB007FDF46 /* AcousticFeedbackSettingsRouter.swift */; };
@@ -676,13 +660,6 @@
 		09A92D6328C786E100477251 /* CertificateCardMaskImmunityViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertificateCardMaskImmunityViewModelTests.swift; sourceTree = "<group>"; };
 		09ABDAC727FC3D7C0078EB11 /* ParseCertificateUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseCertificateUseCase.swift; sourceTree = "<group>"; };
 		09ABDAC927FC93440078EB11 /* CertificateRevocationRepositoryMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertificateRevocationRepositoryMock.swift; sourceTree = "<group>"; };
-		09AC1DE82757ADAA008356CD /* ValidationResultSceneFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationResultSceneFactory.swift; sourceTree = "<group>"; };
-		09AC1DEE2757B423008356CD /* ErrorResultViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorResultViewModel.swift; sourceTree = "<group>"; };
-		09AC1DEF2757B423008356CD /* RecoveryResultViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecoveryResultViewModel.swift; sourceTree = "<group>"; };
-		09AC1DF02757B423008356CD /* VaccinationResultViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaccinationResultViewModel.swift; sourceTree = "<group>"; };
-		09AC1DF12757B423008356CD /* TestResultViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestResultViewModel.swift; sourceTree = "<group>"; };
-		09AC1DF62757B439008356CD /* ValidationResultFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationResultFactory.swift; sourceTree = "<group>"; };
-		09AC1DF82757B44C008356CD /* ValidationViewModelProtocol+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ValidationViewModelProtocol+Extension.swift"; sourceTree = "<group>"; };
 		09AC1DFB2757B6C9008356CD /* ValidationResultSceneFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidationResultSceneFactory.swift; sourceTree = "<group>"; };
 		09AC1DFC2757B6C9008356CD /* RecoveryResultViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecoveryResultViewModel.swift; sourceTree = "<group>"; };
 		09AC1DFD2757B6C9008356CD /* ErrorResultViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorResultViewModel.swift; sourceTree = "<group>"; };
@@ -911,9 +888,7 @@
 		957454A2273D5889009B25B0 /* ValidationServiceViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ValidationServiceViewController.xib; sourceTree = "<group>"; };
 		957454A8273D58AE009B25B0 /* HintTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HintTableViewCell.swift; sourceTree = "<group>"; };
 		957454AA273E80BC009B25B0 /* SubTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubTitleCell.swift; sourceTree = "<group>"; };
-		95961E872703545200E577A4 /* ValidationResultFactoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationResultFactoryTests.swift; sourceTree = "<group>"; };
 		95961E8A270450CA00E577A4 /* SceneCoordinatorMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneCoordinatorMock.swift; sourceTree = "<group>"; };
-		95A031E9273597880073FDD1 /* ValidationResultViewControllerSnapShotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationResultViewControllerSnapShotTests.swift; sourceTree = "<group>"; };
 		95BB0D4227020EBE00885BA3 /* ScanPleaseSceneFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanPleaseSceneFactory.swift; sourceTree = "<group>"; };
 		95BB0D4327020EBE00885BA3 /* ScanPleaseRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanPleaseRouter.swift; sourceTree = "<group>"; };
 		95BB0D4427020EBE00885BA3 /* ScanPleaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanPleaseViewController.swift; sourceTree = "<group>"; };
@@ -971,10 +946,6 @@
 		E738566E2864E6040070C1B0 /* CertificateImportSuccessViewViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateImportSuccessViewViewModelTests.swift; sourceTree = "<group>"; };
 		E73D5C7828B68C0000564496 /* AnnouncementViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementViewModelProtocol.swift; sourceTree = "<group>"; };
 		E73D5C7B28B6A6E600564496 /* AnnouncementViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementViewModelTests.swift; sourceTree = "<group>"; };
-		E740447E2890143400B53AE3 /* VaccinationResultViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaccinationResultViewModelTests.swift; sourceTree = "<group>"; };
-		E74044822890173400B53AE3 /* ResultViewModelDelegateMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewModelDelegateMock.swift; sourceTree = "<group>"; };
-		E74044842890191A00B53AE3 /* RecoveryResultViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecoveryResultViewModelTests.swift; sourceTree = "<group>"; };
-		E74044862890198C00B53AE3 /* TestResultViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestResultViewModelTests.swift; sourceTree = "<group>"; };
 		E740448828901E5200B53AE3 /* CountdownTimerModelMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownTimerModelMock.swift; sourceTree = "<group>"; };
 		E745AF1A27DA3B9500B3671E /* RevocationInfoViewControllerSnapshotTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RevocationInfoViewControllerSnapshotTests.swift; sourceTree = "<group>"; };
 		E745AF2127DA3F2400B3671E /* CoseSign1Message+Mock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CoseSign1Message+Mock.swift"; sourceTree = "<group>"; };
@@ -1029,7 +1000,6 @@
 		E773F5E828B533E00051AE75 /* WhatsNewSettingsViewControllerSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatsNewSettingsViewControllerSnapshotTests.swift; sourceTree = "<group>"; };
 		E773F5EA28B5475A0051AE75 /* WhatsNewSettingsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatsNewSettingsViewModelTests.swift; sourceTree = "<group>"; };
 		E773F5F028B559C00051AE75 /* URLSession+CertificateRevocationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+CertificateRevocationTests.swift"; sourceTree = "<group>"; };
-		E7786EEC288EF7F40024ED0D /* ErrorResultViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorResultViewModelTests.swift; sourceTree = "<group>"; };
 		E782BB9F27D280CF00CC033A /* ExtendedCBORWekToken+Mock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ExtendedCBORWekToken+Mock.swift"; sourceTree = "<group>"; };
 		E7998F6828C635F700EC6394 /* CertificateHolderInvalidImmunizationStatusViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateHolderInvalidImmunizationStatusViewModel.swift; sourceTree = "<group>"; };
 		E7998F6A28C637D800EC6394 /* CertificateHolderInvalidMaskStatusViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateHolderInvalidMaskStatusViewModel.swift; sourceTree = "<group>"; };
@@ -1063,7 +1033,6 @@
 		E7CDDC8E28072F59006B5190 /* VaccinationCertificateItemViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaccinationCertificateItemViewModelTests.swift; sourceTree = "<group>"; };
 		E7CDDC902807347B006B5190 /* TestCertificateItemViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCertificateItemViewModelTests.swift; sourceTree = "<group>"; };
 		E7CDDC92280734F1006B5190 /* RecoveryCertificateItemViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecoveryCertificateItemViewModelTests.swift; sourceTree = "<group>"; };
-		E7D1F0852861B1C600FA7465 /* ValidationResultRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationResultRouter.swift; sourceTree = "<group>"; };
 		E7D1F0872861B21400FA7465 /* ValidationResultRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidationResultRouter.swift; sourceTree = "<group>"; };
 		E7D1F0902861C9AF00FA7465 /* PDFCBORExtractor+Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PDFCBORExtractor+Factory.swift"; sourceTree = "<group>"; };
 		E7D1F0922861CABD00FA7465 /* PDFCBORExtractor+FactoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PDFCBORExtractor+FactoryTests.swift"; sourceTree = "<group>"; };
@@ -1074,7 +1043,6 @@
 		E7D1F0A32861E12700FA7465 /* CameraAccessProviderMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraAccessProviderMock.swift; sourceTree = "<group>"; };
 		E7D1F0A42861E12700FA7465 /* ScanRouterMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanRouterMock.swift; sourceTree = "<group>"; };
 		E7D242BC28BD301100C5D137 /* AudioPlayerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerMock.swift; sourceTree = "<group>"; };
-		E7D242BE28BD326A00C5D137 /* ValidationViewModelProtocol+ExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ValidationViewModelProtocol+ExtensionTests.swift"; sourceTree = "<group>"; };
 		E7D8062A2890455600743DAE /* CheckSituationSceneFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckSituationSceneFactory.swift; sourceTree = "<group>"; };
 		E7DE165528AFCD4C007FDF46 /* AcousticFeedbackSettingsRouterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcousticFeedbackSettingsRouterProtocol.swift; sourceTree = "<group>"; };
 		E7DE165728AFCDBB007FDF46 /* AcousticFeedbackSettingsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcousticFeedbackSettingsRouter.swift; sourceTree = "<group>"; };
@@ -1144,7 +1112,6 @@
 			children = (
 				096EB4E527D76920005CE76F /* RevocationSettingsViewControllerSnapShotTests.swift */,
 				0904337D270EFEA50008267B /* BaseSnapShotTests.swift */,
-				95A031E9273597880073FDD1 /* ValidationResultViewControllerSnapShotTests.swift */,
 				0969AB8A2785F45F00ECCA74 /* ValidatorOverviewSnapShotTests.swift */,
 				09E854362799932A0051AEEE /* AppInformationViewControllerSnapShotTests.swift */,
 				0928183027A2C3B900A0199F /* CheckSituationViewControllerSnapShotTests.swift */,
@@ -1356,21 +1323,6 @@
 				09943E4C2892A7A0005B1184 /* TrustedListDetailsViewModelTests.swift */,
 			);
 			path = TrustedListDetails;
-			sourceTree = "<group>";
-		};
-		09AC1DE52757ACCE008356CD /* Validation Result */ = {
-			isa = PBXGroup;
-			children = (
-				09AC1DEE2757B423008356CD /* ErrorResultViewModel.swift */,
-				09AC1DEF2757B423008356CD /* RecoveryResultViewModel.swift */,
-				09AC1DF12757B423008356CD /* TestResultViewModel.swift */,
-				09AC1DF02757B423008356CD /* VaccinationResultViewModel.swift */,
-				09AC1DF62757B439008356CD /* ValidationResultFactory.swift */,
-				E7D1F0852861B1C600FA7465 /* ValidationResultRouter.swift */,
-				09AC1DE82757ADAA008356CD /* ValidationResultSceneFactory.swift */,
-				09AC1DF82757B44C008356CD /* ValidationViewModelProtocol+Extension.swift */,
-			);
-			path = "Validation Result";
 			sourceTree = "<group>";
 		};
 		09AC1DFA2757B6AC008356CD /* Validation Result */ = {
@@ -1916,7 +1868,6 @@
 				21FBCA57264F011800CAEF44 /* Onboarding */,
 				096EB4D127D768D3005CE76F /* RevocationSettings */,
 				E7D1F09A2861DB4200FA7465 /* Scanner */,
-				09AC1DE52757ACCE008356CD /* Validation Result */,
 				21FBCA37264F011800CAEF44 /* Validator Overview */,
 				21FBCA40264F011800CAEF44 /* Welcome */,
 			);
@@ -2350,7 +2301,6 @@
 				0904337C270EFE920008267B /* SnapShotTests */,
 				09A27BC9270F3A2C000FE4F9 /* TestExtension.swift */,
 				09541B5427FD7E6B00A32547 /* UseCases */,
-				95961E872703545200E577A4 /* ValidationResultFactoryTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -2640,14 +2590,6 @@
 			path = Announcement;
 			sourceTree = "<group>";
 		};
-		E7404481289016C900B53AE3 /* Mocks */ = {
-			isa = PBXGroup;
-			children = (
-				E74044822890173400B53AE3 /* ResultViewModelDelegateMock.swift */,
-			);
-			path = Mocks;
-			sourceTree = "<group>";
-		};
 		E745AF1827DA3B6100B3671E /* RevocationInfo */ = {
 			isa = PBXGroup;
 			children = (
@@ -2887,19 +2829,6 @@
 			path = Mocks;
 			sourceTree = "<group>";
 		};
-		E7786EEB288EF7C50024ED0D /* Validation Result */ = {
-			isa = PBXGroup;
-			children = (
-				E7404481289016C900B53AE3 /* Mocks */,
-				E7786EEC288EF7F40024ED0D /* ErrorResultViewModelTests.swift */,
-				E740447E2890143400B53AE3 /* VaccinationResultViewModelTests.swift */,
-				E74044842890191A00B53AE3 /* RecoveryResultViewModelTests.swift */,
-				E74044862890198C00B53AE3 /* TestResultViewModelTests.swift */,
-				E7D242BE28BD326A00C5D137 /* ValidationViewModelProtocol+ExtensionTests.swift */,
-			);
-			path = "Validation Result";
-			sourceTree = "<group>";
-		};
 		E79CF9ED27E896FC00C4619E /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -2951,7 +2880,6 @@
 				E745AF1827DA3B6100B3671E /* RevocationInfo */,
 				096EB4E027D76904005CE76F /* RevocationSettings */,
 				E7D1F09F2861E03A00FA7465 /* Scanner */,
-				E7786EEB288EF7C50024ED0D /* Validation Result */,
 				E7DF081C28AE8EC20089FDA0 /* Validator Overview */,
 			);
 			path = Scenes;
@@ -3700,22 +3628,17 @@
 			files = (
 				096EB4D927D768D3005CE76F /* RevocationSettingsSceneFactory.swift in Sources */,
 				E75F7DD728DDBF4500675093 /* MaskRequiredResultViewModelProtocol.swift in Sources */,
-				09AC1DF42757B423008356CD /* VaccinationResultViewModel.swift in Sources */,
-				E7D1F0862861B1C600FA7465 /* ValidationResultRouter.swift in Sources */,
 				096EB4DC27D768D3005CE76F /* RevocationSettingsViewModel.swift in Sources */,
 				E75F7DE428DDC58A00675093 /* MaskRequiredResultViewController.swift in Sources */,
 				E75F7DDD28DDC35F00675093 /* MaskRequiredResultSceneFactory.swift in Sources */,
-				E7CDDC8A2806C024006B5190 /* ValidationViewModelProtocol+Extension.swift in Sources */,
 				E76229F42816D9B400BF937C /* DataPrivacySceneFactory.swift in Sources */,
 				2181C160264F035500DE7412 /* ValidatorOverviewSceneFactory.swift in Sources */,
 				096EB4DF27D768D3005CE76F /* RevocationSettingsViewController.swift in Sources */,
 				096EB4DA27D768D3005CE76F /* RevocationSettingsRouter.swift in Sources */,
 				2181C172264F037000DE7412 /* WelcomeViewController.swift in Sources */,
-				09AC1DF32757B423008356CD /* RecoveryResultViewModel.swift in Sources */,
 				E7C8A01E28E2FD67002D63E0 /* MaskRequiredInvalidSignatureReasonViewModel.swift in Sources */,
 				096EB4DD27D768D3005CE76F /* RevocationSettingsRouterProtocol.swift in Sources */,
 				E7F863AB28DA133600F7D54C /* NewRegulationsAnnouncementSceneFactory.swift in Sources */,
-				09AC1DE92757ADAA008356CD /* ValidationResultSceneFactory.swift in Sources */,
 				2181C161264F035500DE7412 /* ValidatorOverviewViewController.swift in Sources */,
 				2181C19F264F03B800DE7412 /* MainSceneFactory.swift in Sources */,
 				E7D8062C2890493D00743DAE /* CheckSituationSceneFactory.swift in Sources */,
@@ -3730,12 +3653,10 @@
 				2181C163264F035500DE7412 /* ValidatorOverviewViewModel.swift in Sources */,
 				2181C1A9264F03BC00DE7412 /* OnboardingSceneFactory.swift in Sources */,
 				E7DE167828AFFBB8007FDF46 /* AudioPlayer+Factory.swift in Sources */,
-				09AC1DF22757B423008356CD /* ErrorResultViewModel.swift in Sources */,
 				E7DE166628AFD780007FDF46 /* AcousticFeedbackSettingsViewModelProtocol.swift in Sources */,
 				2181C1A4264F03BC00DE7412 /* ValidationOnboardingContainerViewModel.swift in Sources */,
 				E7C0A0A028E35AD000DFF0AE /* MaskRequiredReasonType.swift in Sources */,
 				E72A2DAA2897EA65002BFBBB /* CertificateRevocationWrapperRepository+Factory.swift in Sources */,
-				09AC1DF52757B423008356CD /* TestResultViewModel.swift in Sources */,
 				E75F7DD528DDBE7C00675093 /* MaskRequiredResultRouterProtocol.swift in Sources */,
 				E73453F2286DF4DE00ED7E00 /* CertificateRevocationFilesystemDataSource+Factory.swift in Sources */,
 				E79CF9EC27E8923C00C4619E /* URLSession+CertificateRevocation.swift in Sources */,
@@ -3774,7 +3695,6 @@
 				E7DE166828AFD8DB007FDF46 /* AcousticFeedbackSettingsViewModel.swift in Sources */,
 				2181C1A6264F03BC00DE7412 /* ValidationConsentPageViewModel.swift in Sources */,
 				097D902528E2FE47008F5EB3 /* CertificateHolderStatusModel+Factory.swift in Sources */,
-				09AC1DF72757B439008356CD /* ValidationResultFactory.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3788,14 +3708,11 @@
 				096EB4E227D76904005CE76F /* RevocationSettingsViewModelTests.swift in Sources */,
 				0957848627A2D28400E8206C /* ViewModelDelegateMock.swift in Sources */,
 				097D902728E2FFAB008F5EB3 /* CertificateHolderStatusModelMock.swift in Sources */,
-				E7D242BF28BD326A00C5D137 /* ValidationViewModelProtocol+ExtensionTests.swift in Sources */,
 				E7F863B028DA172A00F7D54C /* NewRegulationsAnnouncementSceneFactoryTests.swift in Sources */,
 				09541B5927FD7FD800A32547 /* CBORWebTokenExtensions.swift in Sources */,
 				E7D1F0A52861E12700FA7465 /* CameraAccessProviderMock.swift in Sources */,
 				E75F7DE128DDC42800675093 /* MaskRequiredResultSceneFactoryTests.swift in Sources */,
-				95A031EB27359AC60073FDD1 /* ValidationResultViewControllerSnapShotTests.swift in Sources */,
 				0957848227A2D1CF00E8206C /* ValidatorMockRouter.swift in Sources */,
-				95961E892703550B00E577A4 /* ValidationResultFactoryTests.swift in Sources */,
 				E7DE166A28AFDB1D007FDF46 /* AcousticFeedbackSettingsViewModelTests.swift in Sources */,
 				E773F5B928B3A5FB0051AE75 /* AVAudioSession+CovPassCheckTests.swift in Sources */,
 				E7CB54B927B5563E002FA55E /* AppInformationViewModelTests.swift in Sources */,
@@ -3806,10 +3723,8 @@
 				09E854372799932A0051AEEE /* AppInformationViewControllerSnapShotTests.swift in Sources */,
 				E7D1F0A22861E04700FA7465 /* ScanSceneFactoryTests.swift in Sources */,
 				0928183127A2C3B900A0199F /* CheckSituationViewControllerSnapShotTests.swift in Sources */,
-				E7786EED288EF7F40024ED0D /* ErrorResultViewModelTests.swift in Sources */,
 				E773F5B228B378480051AE75 /* AcousticFeedbackSettingsViewControllerSnapshotTests.swift in Sources */,
 				E740448928901E5200B53AE3 /* CountdownTimerModelMock.swift in Sources */,
-				E74044802890159100B53AE3 /* VaccinationResultViewModelTests.swift in Sources */,
 				09A27BCA270F3A2C000FE4F9 /* TestExtension.swift in Sources */,
 				E7101B632872F7C60026584A /* CertificateRevocationFilesystemDataSource+FactoryTests.swift in Sources */,
 				09E8543A279993470051AEEE /* AppInformationRouterMock.swift in Sources */,
@@ -3821,7 +3736,6 @@
 				E773F5B728B3A5210051AE75 /* AudioPlayer+FactoryTests.swift in Sources */,
 				09541B5B27FD887500A32547 /* ParseCertificateUseCaseTests.swift in Sources */,
 				E75F7DEE28DDCB4A00675093 /* MaskRequiredResultViewModelTests.swift in Sources */,
-				E74044872890198C00B53AE3 /* TestResultViewModelTests.swift in Sources */,
 				E7B49CF7283CD17A00401C2E /* CertificateRevocationOfflineService+FactoryTests.swift in Sources */,
 				E7D1F0A62861E12700FA7465 /* ScanRouterMock.swift in Sources */,
 				0957848827A2D2E000E8206C /* VaccinationRepositoryMock.swift in Sources */,
@@ -3830,7 +3744,6 @@
 				E79CF9F627E8C6DB00C4619E /* CertificateRevocationWrapperRepository+FactoryTests.swift in Sources */,
 				0969AB8B2785F45F00ECCA74 /* ValidatorOverviewSnapShotTests.swift in Sources */,
 				E7DE165D28AFD389007FDF46 /* GermanAppInformationViewModelTests.swift in Sources */,
-				E74044832890173400B53AE3 /* ResultViewModelDelegateMock.swift in Sources */,
 				0957848C27A2D35B00E8206C /* ValidationResultMock.swift in Sources */,
 				E74E98CB2892F6A100F73632 /* CertificateRevocationWrapperRepositoryTests.swift in Sources */,
 				0938F7E0289914CD001469C1 /* CertificateRevocationOfflineServiceMock.swift in Sources */,
@@ -3843,7 +3756,6 @@
 				09ABDACB27FC934B0078EB11 /* CertificateRevocationRepositoryMock.swift in Sources */,
 				E7DE166128AFD548007FDF46 /* AcousticFeedbackSettingsSceneFactoryTests.swift in Sources */,
 				0904337E270EFEA50008267B /* BaseSnapShotTests.swift in Sources */,
-				E74044852890191A00B53AE3 /* RecoveryResultViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

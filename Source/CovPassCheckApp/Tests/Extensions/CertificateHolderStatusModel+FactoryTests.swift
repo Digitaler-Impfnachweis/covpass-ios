@@ -5,7 +5,7 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
-@testable import CovPassApp
+@testable import CovPassCheckApp
 import CovPassCommon
 import XCTest
 
