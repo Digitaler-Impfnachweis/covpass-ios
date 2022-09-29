@@ -16,9 +16,9 @@
                 <outlet property="descriptionLabel" destination="DoA-3w-hHw" id="KfJ-tq-eYP"/>
                 <outlet property="imageView" destination="KNC-XD-YtE" id="voX-Ru-XHY"/>
                 <outlet property="infoHeaderView" destination="asq-Je-taX" id="yrT-CU-N8Z"/>
-                <outlet property="reasonStackView" destination="Gjq-nP-y9t" id="8UU-0q-vxg"/>
                 <outlet property="rescanButton" destination="Zw9-2k-H61" id="97D-AD-0hW"/>
                 <outlet property="subtitleLabel" destination="HSg-Kh-hx8" id="NZN-fG-qeL"/>
+                <outlet property="summaryLabel" destination="cTK-Ng-3hI" id="Dbr-g7-rzc"/>
                 <outlet property="titleLabel" destination="ke7-Eq-NYy" id="GdQ-4o-T2C"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -48,46 +48,48 @@
                                         <constraint firstAttribute="height" constant="140" id="OLG-z5-B0R"/>
                                     </constraints>
                                 </imageView>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MASK OBLIGATION" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ke7-Eq-NYy">
-                                    <rect key="frame" x="24" y="197" width="213.5" height="29"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NO PRESENT RULES" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ke7-Eq-NYy">
+                                    <rect key="frame" x="24" y="197" width="225.5" height="29"/>
                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="24"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NORTHRHINE-WESTPHALIA" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HSg-Kh-hx8">
-                                    <rect key="frame" x="24" y="234" width="191" height="17"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="IN NORTHRHINE-WESTPHALIA" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HSg-Kh-hx8">
+                                    <rect key="frame" x="24" y="234" width="209" height="17"/>
                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="THE SCANNED CERTIFICATE DOES NOT EXEMPT FROM THE MASK REQUIREMENT. POSSIBLE REASONS:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DoA-3w-hHw">
-                                    <rect key="frame" x="24" y="271" width="366" height="33.5"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cTK-Ng-3hI">
+                                    <rect key="frame" x="24" y="263" width="366" height="67"/>
+                                    <string key="text">THERE ARE NO FEDERAL STATE-SPECIFIC RULES FOR THIS FEDERAL STATE. THEREFORE, ONLY THE UNIFORM FEDERAL RULES ON MANDATORY MASKS APPLY.</string>
+                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DoA-3w-hHw">
+                                    <rect key="frame" x="24" y="350" width="365.5" height="251"/>
+                                    <mutableString key="text">IF THE FEDERAL STATE IN WHICH YOU ARE STAYING HAS ORDERED A MASK REQUIREMENT, A NEGATIVE RAPID OR PCR TEST EXEMPTS EXAMINEES FROM THIS MASK REQUIREMENT FOR 24 HOURS AT RECREATIONAL, CULTURAL AND SPORTING EVENTS AND IN CATERING ESTABLISHMENTS. AN UNSUPERVISED SELF-TEST IS NOT SUFFICIENT. YOUR STATE MAY REGULATE THAT EXAMINEES ARE ALSO EXEMPT FROM THE MASK REQUIREMENT DUE TO VACCINATIONS OR RECOVERY (IF THESE OCCURRED NO MORE THAN THREE MONTHS AGO). AN EXEMPTION FROM THE MASK REQUIREMENT DOES NOT APPLY IN LONG-DISTANCE PUBLIC TRANSPORT, IN HOSPITALS, NURSING FACILITIES AND FOR PATIENTS IN DOCTORS' OFFICES.</mutableString>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Gjq-nP-y9t">
-                                    <rect key="frame" x="0.0" y="328.5" width="414" height="142"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="142" placeholder="YES" id="iyM-GB-sGK"/>
-                                    </constraints>
-                                </stackView>
                             </subviews>
                             <constraints>
+                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="DoA-3w-hHw" secondAttribute="bottom" constant="20" symbolic="YES" id="06A-Cr-yY6"/>
                                 <constraint firstItem="KNC-XD-YtE" firstAttribute="centerX" secondItem="dfv-wP-L03" secondAttribute="centerX" id="5Tw-T6-YFZ"/>
                                 <constraint firstItem="ke7-Eq-NYy" firstAttribute="top" secondItem="KNC-XD-YtE" secondAttribute="bottom" constant="37" id="6w9-YV-hUD"/>
                                 <constraint firstItem="HSg-Kh-hx8" firstAttribute="top" secondItem="ke7-Eq-NYy" secondAttribute="bottom" constant="8" id="8qo-0j-giZ"/>
+                                <constraint firstItem="cTK-Ng-3hI" firstAttribute="top" secondItem="HSg-Kh-hx8" secondAttribute="bottom" constant="12" id="A0O-lT-aVy"/>
                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="DoA-3w-hHw" secondAttribute="trailing" constant="24" id="B9N-wX-QsQ"/>
-                                <constraint firstItem="DoA-3w-hHw" firstAttribute="top" secondItem="HSg-Kh-hx8" secondAttribute="bottom" constant="20" id="JCv-ty-BCt"/>
                                 <constraint firstItem="ke7-Eq-NYy" firstAttribute="leading" secondItem="dfv-wP-L03" secondAttribute="leading" constant="24" id="LVc-gJ-hWD"/>
-                                <constraint firstItem="Gjq-nP-y9t" firstAttribute="leading" secondItem="dfv-wP-L03" secondAttribute="leading" id="Rfz-wG-RKb"/>
+                                <constraint firstItem="DoA-3w-hHw" firstAttribute="top" secondItem="cTK-Ng-3hI" secondAttribute="bottom" constant="20" id="U8T-Lt-DQi"/>
                                 <constraint firstItem="KNC-XD-YtE" firstAttribute="top" secondItem="dfv-wP-L03" secondAttribute="top" constant="20" symbolic="YES" id="Uz7-09-GNp"/>
-                                <constraint firstAttribute="trailing" secondItem="Gjq-nP-y9t" secondAttribute="trailing" id="YXM-eC-DQa"/>
                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="ke7-Eq-NYy" secondAttribute="trailing" constant="24" id="buY-ND-gh7"/>
-                                <constraint firstItem="Gjq-nP-y9t" firstAttribute="top" secondItem="DoA-3w-hHw" secondAttribute="bottom" constant="24" id="c8o-02-F2b"/>
+                                <constraint firstAttribute="trailing" secondItem="cTK-Ng-3hI" secondAttribute="trailing" constant="24" id="eYb-AS-vZW"/>
                                 <constraint firstItem="HSg-Kh-hx8" firstAttribute="leading" secondItem="ke7-Eq-NYy" secondAttribute="leading" id="h5p-jc-099"/>
+                                <constraint firstItem="cTK-Ng-3hI" firstAttribute="leading" secondItem="ke7-Eq-NYy" secondAttribute="leading" id="i2u-1s-JKM"/>
                                 <constraint firstItem="DoA-3w-hHw" firstAttribute="leading" secondItem="ke7-Eq-NYy" secondAttribute="leading" id="qz8-cq-XSA"/>
-                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Gjq-nP-y9t" secondAttribute="bottom" id="rr1-Jq-hth"/>
                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="HSg-Kh-hx8" secondAttribute="trailing" constant="24" id="yXb-pd-jKd"/>
                             </constraints>
                         </view>

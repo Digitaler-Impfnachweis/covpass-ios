@@ -10,15 +10,16 @@ import PromiseKit
 import UIKit
 
 private enum Constants {
-    static let title = "".localized
-    static let subtitleFormat = "".localized
-    static let summary = "".localized
-    static let description = "".localized
-    static let buttonTitle = "".localized
+    static let title = "infschg_result_no_mask_rules_title".localized
+    static let subtitleFormat = "infschg_result_no_mask_rules_subtitle".localized
+    static let summary = "infschg_result_no_mask_rules_copy_1_bold".localized
+    static let description = "infschg_result_no_mask_rules_copy_2".localized
+    static let buttonTitle = "result_2G_button_startover".localized
 }
 
 final class NoMaskRulesResultViewModel: NoMaskRulesResultViewModelProtocol {
     weak var delegate: ViewModelDelegate?
+    #warning("TODO: Use correct image.")
     let image: UIImage = .statusMaskRequiredCircleLarge
     let title = Constants.title
     let subtitle: String

@@ -13,8 +13,8 @@ final class NoMaskRulesResultViewController: UIViewController {
     @IBOutlet var imageView: UIImageView!
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var subtitleLabel: UILabel!
+    @IBOutlet var summaryLabel: UILabel!
     @IBOutlet var descriptionLabel: UILabel!
-    @IBOutlet var reasonStackView: UIStackView!
     @IBOutlet var rescanButton: MainButton!
     @IBOutlet var counterLabel: UILabel!
 
@@ -54,6 +54,8 @@ final class NoMaskRulesResultViewController: UIViewController {
         subtitleLabel.attributedText = viewModel.subtitle
             .styledAs(.header_3)
             .colored(.onBackground80)
+        summaryLabel.attributedText = viewModel.summary
+            .styledAs(.header_3)
         descriptionLabel.attributedText = viewModel.description
             .styledAs(.body)
             .colored(.onBackground110)

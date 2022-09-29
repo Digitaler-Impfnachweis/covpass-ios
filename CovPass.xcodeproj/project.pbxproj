@@ -2861,6 +2861,7 @@
 			isa = PBXGroup;
 			children = (
 				E76509DF28E5A53600BC4595 /* Protocols */,
+				E76509E628E5AB1800BC4595 /* ViewModels */,
 				E76509E928E5DAAC00BC4595 /* NoMaskRulesResultRouter.swift */,
 				E76509EC28E5DAAC00BC4595 /* NoMaskRulesResultSceneFactory.swift */,
 				E76509EB28E5DAAC00BC4595 /* NoMaskRulesResultViewController.swift */,
@@ -2885,7 +2886,6 @@
 			children = (
 				E76509E028E5A53600BC4595 /* NoMaskRulesResultRouterProtocol.swift */,
 				E76509E228E5A53600BC4595 /* NoMaskRulesResultViewModelProtocol.swift */,
-				E76509E628E5AB1800BC4595 /* ViewModels */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
