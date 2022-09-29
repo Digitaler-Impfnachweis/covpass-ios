@@ -68,7 +68,7 @@ class CertificatesOverviewPersonViewModel: CertificatesOverviewPersonViewModelPr
         self.boosterLogic = boosterLogic
         self.certificateHolderStatusModel = certificateHolderStatusModel
         self.certificates = certificates
-        self.holderNeedsMask = certificateHolderStatusModel.holderNeedsMask(certificates)
+        self.holderNeedsMask = certificateHolderStatusModel.holderNeedsMask(certificates, region: nil)
         self.certificatesToShow = certificates.filterFirstOfAllTypes
         self.resolver = resolver
         self.pageSubtitle = String(format: Constants.Keys.modalSubline, certificatesToShow.count)

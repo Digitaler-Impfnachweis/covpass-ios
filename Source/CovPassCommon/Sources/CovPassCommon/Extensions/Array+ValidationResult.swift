@@ -16,24 +16,28 @@ public extension Array where Element == ValidationResult {
         filter { $0.result == .open }
     }
     
+    var failedAndOpenResults: [ValidationResult] {
+        filter{ $0.result == .open ||  $0.result == .fail }
+    }
+
     var passedResults: [ValidationResult] {
         filter { $0.result == .passed }
     }
     
     var filterAcceptanceRules: Self {
-        return filter { $0.rule?.ruleType == .acceptence }
+        filter { $0.rule?.ruleType == .acceptence }
     }
     
     var filterAcceptanceAndInvalidationRules: Self {
-        return filter{ $0.rule?.isAcceptenceOrInvalidationRule ?? false }
+        filter{ $0.rule?.isAcceptenceOrInvalidationRule ?? false }
     }
     
     func result(ofRule identifier: String) -> Result? {
-        return validationResult(ofRule: identifier)?.result
+        validationResult(ofRule: identifier)?.result
     }
 
     func validationResult(ofRule identifier: String) -> ValidationResult? {
-        return first(where: { $0.rule?.identifier == identifier })
+        first(where: { $0.rule?.identifier == identifier })
     }
 }
 

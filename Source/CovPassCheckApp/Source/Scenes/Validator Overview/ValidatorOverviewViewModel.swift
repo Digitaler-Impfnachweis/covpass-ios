@@ -62,7 +62,7 @@ class ValidatorOverviewViewModel {
     
     var scanDropDownTitle = Constants.Keys.ScanCard.dropDownTitle
     
-    var scanDropDownValue: String { userDefaults.stateSelection.localized }
+    var scanDropDownValue: String { "DE_\(userDefaults.stateSelection)".localized }
 
     var timeHintTitle = Constants.Keys.TimeHint.syncTitle
     
@@ -170,7 +170,6 @@ class ValidatorOverviewViewModel {
     }
     
     func scanAction() {
-        var tmpToken: ExtendedCBORWebToken?
         isLoadingScan = true
         firstly {
             router.scanQRCode()
@@ -183,15 +182,14 @@ class ValidatorOverviewViewModel {
             ParseCertificateUseCase(scanResult: $0,
                                     vaccinationRepository: self.vaccinationRepository).execute()
         }
-        .then { token -> Promise<ValidateCertificateUseCase.Result> in
-            tmpToken = token
+        .then { token -> Promise<ExtendedCBORWebToken> in
             return ValidateCertificateUseCase(token: token,
+                                              region: self.userDefaults.stateSelection,
                                               revocationRepository: self.revocationRepository,
-                                              certLogic: DCCCertLogic.create(),
-                                              persistence: self.userDefaults).execute()
+                                              holderStatus: CertificateHolderStatusModel.create()).execute()
         }
-        .done {
-            self.router.showCertificate($0.token,
+        .done { token in
+            self.router.showCertificate(token,
                                         userDefaults: self.userDefaults)
             
         }
@@ -199,7 +197,7 @@ class ValidatorOverviewViewModel {
             self.isLoadingScan = false
         }
         .catch { error in
-            self.errorHandling(error: error, token: tmpToken)
+            self.errorHandling(error: error, token: nil)
         }
     }
     

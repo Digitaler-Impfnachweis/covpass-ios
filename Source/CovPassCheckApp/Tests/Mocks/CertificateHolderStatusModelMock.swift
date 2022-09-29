@@ -9,30 +9,34 @@ import CovPassCommon
 import Foundation
 import PromiseKit
 
-struct CertificateHolderStatusModelMock: CertificateHolderStatusModelProtocol {
+class CertificateHolderStatusModelMock: CertificateHolderStatusModelProtocol {
 
-    var needsMask = false
-    var holderIsFullyImmunized = false
     var areMaskRulesAvailable = false
-    var checkDomesticAcceptanceRulesResult = CertificateHolderStatusResult.passed
-    
+    var needsMask = false
+    var fullyImmunized = false
+    var domesticRulesPassedResult = CertificateHolderStatusResult.passed
+    var euInvalidationRulesPassedResult = CertificateHolderStatusResult.passed
+
     func checkDomesticAcceptanceRules(_ certificates: [ExtendedCBORWebToken]) -> CertificateHolderStatusResult {
-        checkDomesticAcceptanceRulesResult
+        domesticRulesPassedResult
     }
     
-    func holderIsFullyImmunized(_ certificates: [ExtendedCBORWebToken]) -> Bool {
-        holderIsFullyImmunized
+    func euInvalidationRulesPassed(_ certificates: [ExtendedCBORWebToken], countryCode: String) -> CertificateHolderStatusResult {
+        euInvalidationRulesPassedResult
     }
-    
+
     func holderNeedsMask(_ certificates: [ExtendedCBORWebToken], region: String?) -> Bool {
         needsMask
     }
-    
     func holderNeedsMaskAsync(_ certificates: [ExtendedCBORWebToken], region: String?) -> Guarantee<Bool> {
         .value(needsMask)
     }
+
+    func holderIsFullyImmunized(_ certificates: [ExtendedCBORWebToken]) -> Bool {
+        fullyImmunized
+    }
     
     func maskRulesAvailable(for region: String?) -> Bool {
-        areMaskRulesAvailable
+        return areMaskRulesAvailable
     }
 }

@@ -67,7 +67,7 @@ class CertificateCardMaskImmunityViewModel: CertificateCardViewModelProtocol {
     
     func updateCertificateHolderStatus() {
         certificateHolderStatusModel
-            .holderNeedsMaskAsync(self.tokens)
+            .holderNeedsMaskAsync(self.tokens, region: nil)
             .done { holderNeedsMask in
                 self.holderNeedsMask = holderNeedsMask
                 DispatchQueue.main.async {

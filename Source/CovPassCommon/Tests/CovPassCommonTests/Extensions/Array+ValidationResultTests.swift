@@ -122,4 +122,26 @@ class ArrayValidationResultTests: XCTestCase {
         XCTAssertEqual(rule.identifier, fetechedResult.first?.rule?.identifier)
         XCTAssertEqual(rule2.identifier, fetechedResult.last?.rule?.identifier)
     }
+    
+    func testFilterFailedAndOpenResults() {
+        // GIVEN
+        let sut: [ValidationResult] = [.init(rule: nil, result: .open, validationErrors: nil),
+                                       .init(rule: nil, result: .open, validationErrors: nil),
+                                       .init(rule: nil, result: .open, validationErrors: nil)]
+        // WHEN
+        let fetechedResult = sut.failedAndOpenResults
+        // THEN
+        XCTAssertEqual(fetechedResult.count, 3)
+    }
+    
+    func testFilterFailedAndOpenResults_Alternative() {
+        // GIVEN
+        let sut: [ValidationResult] = [.init(rule: nil, result: .open, validationErrors: nil),
+                                       .init(rule: nil, result: .passed, validationErrors: nil),
+                                       .init(rule: nil, result: .fail, validationErrors: nil)]
+        // WHEN
+        let fetechedResult = sut.failedAndOpenResults
+        // THEN
+        XCTAssertEqual(fetechedResult.count, 2)
+    }
 }

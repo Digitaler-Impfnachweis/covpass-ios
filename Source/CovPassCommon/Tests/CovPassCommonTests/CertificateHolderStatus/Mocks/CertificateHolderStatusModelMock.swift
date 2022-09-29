@@ -10,17 +10,29 @@ import Foundation
 import PromiseKit
 
 struct CertificateHolderStatusModelMock: CertificateHolderStatusModelProtocol {
+    
+    var areMaskRulesAvailable = false
     var needsMask = false
     var fullyImmunized = false
+    var checkDomesticAcceptanceRulesResult = CertificateHolderStatusResult.passed
 
-    func holderNeedsMask(_ certificates: [ExtendedCBORWebToken]) -> Bool {
+    func checkDomesticAcceptanceRules(_ certificates: [ExtendedCBORWebToken]) -> CertificateHolderStatusResult {
+        checkDomesticAcceptanceRulesResult
+    }
+    
+    func holderNeedsMask(_ certificates: [ExtendedCBORWebToken], region: String?) -> Bool {
         needsMask
     }
-    func holderNeedsMaskAsync(_ certificates: [ExtendedCBORWebToken]) -> Guarantee<Bool> {
+    func holderNeedsMaskAsync(_ certificates: [ExtendedCBORWebToken], region: String?) -> Guarantee<Bool> {
         .value(needsMask)
     }
 
     func holderIsFullyImmunized(_ certificates: [ExtendedCBORWebToken]) -> Bool {
         fullyImmunized
     }
+    
+    func maskRulesAvailable(for region: String?) -> Bool {
+        areMaskRulesAvailable
+    }
+
 }
