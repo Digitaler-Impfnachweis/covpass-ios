@@ -19,8 +19,7 @@ private enum Constants {
 
 final class NoMaskRulesResultViewModel: NoMaskRulesResultViewModelProtocol {
     weak var delegate: ViewModelDelegate?
-    #warning("TODO: Use correct image.")
-    let image: UIImage = .statusMaskRequiredCircleLarge
+    let image: UIImage = .statusMaskNoRulesCircleLarge
     let title = Constants.title
     let subtitle: String
     let summary = Constants.summary

@@ -3242,7 +3242,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1240;
-				LastUpgradeCheck = 1250;
+				LastUpgradeCheck = 1400;
 				ORGANIZATIONNAME = IBM;
 				TargetAttributes = {
 					65D6D4DD25F8B8FB000CB339 = {
@@ -3737,7 +3737,6 @@
 				2181C1A9264F03BC00DE7412 /* OnboardingSceneFactory.swift in Sources */,
 				E7DE167828AFFBB8007FDF46 /* AudioPlayer+Factory.swift in Sources */,
 				E76509EF28E5DAAC00BC4595 /* NoMaskRulesResultViewController.swift in Sources */,
-				09AC1DF22757B423008356CD /* ErrorResultViewModel.swift in Sources */,
 				E7DE166628AFD780007FDF46 /* AcousticFeedbackSettingsViewModelProtocol.swift in Sources */,
 				2181C1A4264F03BC00DE7412 /* ValidationOnboardingContainerViewModel.swift in Sources */,
 				E7C0A0A028E35AD000DFF0AE /* MaskRequiredReasonType.swift in Sources */,
@@ -3924,6 +3923,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -3984,6 +3984,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
