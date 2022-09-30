@@ -282,11 +282,17 @@ public extension UIImage {
     @ImageLoader(name: "status-mask-invalid-circle")
     private(set) static var statusMaskInvalidCircle
 
+    @ImageLoader(name: "status-mask-no-rules-circle-large")
+    private(set) static var statusMaskNoRulesCircleLarge
+
     @ImageLoader(name: "status-mask-optional-circle")
     private(set) static var statusMaskOptionalCircle
 
     @ImageLoader(name: "status-mask-required-circle")
     private(set) static var statusMaskRequiredCircle
+
+    @ImageLoader(name: "status-mask-required-circle-large")
+    private(set) static var statusMaskRequiredCircleLarge
 
     @ImageLoader(name: "status-partial-circle")
     private(set) static var statusPartialCircle
@@ -296,7 +302,19 @@ public extension UIImage {
 
     @ImageLoader(name: "status-test-negative")
     private(set) static var statusTestNegative
-    
+
+    @ImageLoader(name: "status-mask-required-reason-incomplete")
+    private(set) static var statusMaskRequiredReasonIncomplete
+
+    @ImageLoader(name: "status-mask-required-reason-other")
+    private(set) static var statusMaskRequiredReasonOther
+
+    @ImageLoader(name: "status-mask-required-reason-validity-date")
+    private(set) static var statusMaskRequiredReasonValidityDate
+
+    @ImageLoader(name: "status-mask-required-reason-qrcode")
+    private(set) static var statusMaskRequiredReasonQRCode
+
     @ImageLoader(name: "half-shield-notification")
     private(set) static var halfShieldNotification
     
