@@ -129,6 +129,9 @@ public extension UIImage {
     @ImageLoader(name: "icon_card")
     private(set) static var card
 
+    @ImageLoader(name: "icon_card_circle")
+    private(set) static var cardCircle
+
     @ImageLoader(name: "invalid")
     private(set) static var iconRed
 
@@ -287,6 +290,9 @@ public extension UIImage {
 
     @ImageLoader(name: "status-mask-optional-circle")
     private(set) static var statusMaskOptionalCircle
+
+    @ImageLoader(name: "status-mask-optional-circle-large")
+    private(set) static var statusMaskOptionalCircleLarge
 
     @ImageLoader(name: "status-mask-required-circle")
     private(set) static var statusMaskRequiredCircle

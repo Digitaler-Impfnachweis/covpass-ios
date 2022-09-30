@@ -29,12 +29,12 @@ public class HintView: XibView {
 
     // MARK: -
     
-    enum Style {
+    public enum Style {
         case warning
         case info
     }
 
-    var style: Style = .warning {
+    public var style: Style = .warning {
         didSet {
             switch style {
             case .warning:

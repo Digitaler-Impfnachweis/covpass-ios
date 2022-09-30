@@ -21,6 +21,7 @@ public class ParagraphView: XibView {
     @IBOutlet public var bottomBorder: UIView!
     @IBOutlet public var bottomBorderHeightConstraint: NSLayoutConstraint!
     @IBOutlet public var bottomBorderLeftConstraint: NSLayoutConstraint!
+    @IBOutlet public var imageViewWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var imageContainerView: UIView!
 
     // MARK: - Properties
