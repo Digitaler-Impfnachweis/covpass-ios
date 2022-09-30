@@ -10,7 +10,13 @@ import XCTest
 
 final class MaskRequiredResultRouterMock: MaskRequiredResultRouterProtocol {
     let rescanExpectation = XCTestExpectation(description: "rescanExpectation")
+    let scanSecondCertificateExpectation = XCTestExpectation(description: "scanSecondCertificateExpectation")
+
     func rescan() {
         rescanExpectation.fulfill()
+    }
+
+    func scanSecondCertificate() {
+        scanSecondCertificateExpectation.fulfill()
     }
 }

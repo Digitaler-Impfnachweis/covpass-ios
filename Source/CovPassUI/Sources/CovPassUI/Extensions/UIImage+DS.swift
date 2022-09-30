@@ -321,6 +321,9 @@ public extension UIImage {
     @ImageLoader(name: "status-mask-required-reason-qrcode")
     private(set) static var statusMaskRequiredReasonQRCode
 
+    @ImageLoader(name: "status-mask-required-reason-second-certificate")
+    private(set) static var statusMaskRequiredReasonSecondCertificate
+
     @ImageLoader(name: "half-shield-notification")
     private(set) static var halfShieldNotification
     

@@ -7,4 +7,5 @@
 
 protocol MaskRequiredResultRouterProtocol {
     func rescan()
+    func scanSecondCertificate()
 }

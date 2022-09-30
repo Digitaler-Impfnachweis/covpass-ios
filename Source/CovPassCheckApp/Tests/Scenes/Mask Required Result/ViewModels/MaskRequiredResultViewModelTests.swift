@@ -28,13 +28,17 @@ final class MaskRequiredResultViewModelTests: XCTestCase {
         configureSut()
     }
 
-    private func configureSut(reasonType: MaskRequiredReasonType = .functional) {
+    private func configureSut(
+        reasonType: MaskRequiredReasonType = .functional,
+        secondCertificateHintHidden: Bool = false
+    ) {
         sut = .init(
             countdownTimerModel: countdownTimerModel,
             federalStateCode: "DE_NW",
             resolver: resolver,
             router: router,
-            reasonType: reasonType
+            reasonType: reasonType,
+            secondCertificateHintHidden: secondCertificateHintHidden
         )
         sut.delegate = delegate
     }
@@ -131,5 +135,36 @@ final class MaskRequiredResultViewModelTests: XCTestCase {
         } else {
             XCTFail("Must have 2 reason view models.")
         }
+    }
+
+    func testSecondCertificateHintHidden_false() {
+        // When
+        let isHidden = sut.secondCertificateHintHidden
+
+        // Then
+        XCTAssertFalse(isHidden)
+    }
+
+    func testSecondCertificateHintHidden_true() {
+        // Given
+        configureSut(secondCertificateHintHidden: true)
+
+        // When
+        let isHidden = sut.secondCertificateHintHidden
+
+        // Then
+        XCTAssertTrue(isHidden)
+    }
+
+    func testScanSecondCertificate() {
+        // Given
+        let expectation = XCTestExpectation()
+        promise.done { expectation.fulfill() }.cauterize()
+
+        // When
+        sut.scanSecondCertificate()
+
+        // Then
+        wait(for: [expectation, router.scanSecondCertificateExpectation], timeout: 1)
     }
 }

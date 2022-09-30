@@ -23,8 +23,12 @@ final class MaskRequiredResultViewModel: MaskRequiredResultViewModelProtocol {
     let subtitle: String
     let description = Constants.description
     let buttonTitle = Constants.buttonTitle
+    let secondCertificateHintHidden: Bool
     let reasonViewModels: [MaskRequiredReasonViewModelProtocol]
     let countdownTimerModel: CountdownTimerModel
+    lazy var secondCertificateReasonViewModel: MaskRequiredSecondCertificateReasonViewModelProtocol = {
+        MaskRequiredSecondCertificateReasonViewModel()
+    }()
 
     private let resolver: Resolver<Void>
     private let router: MaskRequiredResultRouterProtocol
@@ -33,7 +37,8 @@ final class MaskRequiredResultViewModel: MaskRequiredResultViewModelProtocol {
          federalStateCode: String,
          resolver: Resolver<Void>,
          router: MaskRequiredResultRouterProtocol,
-         reasonType: MaskRequiredReasonType
+         reasonType: MaskRequiredReasonType,
+         secondCertificateHintHidden: Bool
     ) {
         self.countdownTimerModel = countdownTimerModel
         self.subtitle = .init(
@@ -43,6 +48,7 @@ final class MaskRequiredResultViewModel: MaskRequiredResultViewModelProtocol {
         self.resolver = resolver
         self.router = router
         self.reasonViewModels = Self.reasonViewModels(reasonType)
+        self.secondCertificateHintHidden = secondCertificateHintHidden
 
         countdownTimerModel.onUpdate = onCountdownTimerModelUpdate
         countdownTimerModel.start()
@@ -83,5 +89,10 @@ final class MaskRequiredResultViewModel: MaskRequiredResultViewModelProtocol {
     func rescan() {
         resolver.fulfill_()
         router.rescan()
+    }
+
+    func scanSecondCertificate() {
+        resolver.fulfill_()
+        router.scanSecondCertificate()
     }
 }

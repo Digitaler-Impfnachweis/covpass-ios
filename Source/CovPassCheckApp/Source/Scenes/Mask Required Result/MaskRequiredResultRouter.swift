@@ -13,4 +13,9 @@ struct MaskRequiredResultRouter: MaskRequiredResultRouterProtocol, RouterProtoco
     func rescan() {
         #warning("TODO: Finish implementation")
     }
+
+    func scanSecondCertificate() {
+        #warning("TODO: Finish implementation")
+        // Probably we need the first certificate here.
+    }
 }

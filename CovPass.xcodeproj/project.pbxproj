@@ -521,6 +521,8 @@
 		E7DE167228AFF02F007FDF46 /* CovpassCheck-Activated.wav in Resources */ = {isa = PBXBuildFile; fileRef = E7DE167028AFF02E007FDF46 /* CovpassCheck-Activated.wav */; };
 		E7DE167328AFF02F007FDF46 /* CovpassCheck-Certificate-scanned.wav in Resources */ = {isa = PBXBuildFile; fileRef = E7DE167128AFF02F007FDF46 /* CovpassCheck-Certificate-scanned.wav */; };
 		E7DE167828AFFBB8007FDF46 /* AudioPlayer+Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DE167728AFFBB8007FDF46 /* AudioPlayer+Factory.swift */; };
+		E7DEFB5828E709A1005B1D76 /* MaskRequiredSecondCertificateReasonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DEFB5728E709A1005B1D76 /* MaskRequiredSecondCertificateReasonViewModel.swift */; };
+		E7DEFB5A28E70BD8005B1D76 /* MaskRequiredSecondCertificateReasonViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DEFB5928E70BD8005B1D76 /* MaskRequiredSecondCertificateReasonViewModelProtocol.swift */; };
 		E7DF081B28AE7E370089FDA0 /* Persistence+ValidatorOverview.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DF081A28AE7E370089FDA0 /* Persistence+ValidatorOverview.swift */; };
 		E7DF081F28AE8EFC0089FDA0 /* Persistence+ValidatorOverviewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DF081E28AE8EFC0089FDA0 /* Persistence+ValidatorOverviewTests.swift */; };
 		E7F7817A27C4007D009AC907 /* CertificateReissueRepository+Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F7817927C4007D009AC907 /* CertificateReissueRepository+Factory.swift */; };
@@ -1103,6 +1105,8 @@
 		E7DE167028AFF02E007FDF46 /* CovpassCheck-Activated.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "CovpassCheck-Activated.wav"; sourceTree = "<group>"; };
 		E7DE167128AFF02F007FDF46 /* CovpassCheck-Certificate-scanned.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "CovpassCheck-Certificate-scanned.wav"; sourceTree = "<group>"; };
 		E7DE167728AFFBB8007FDF46 /* AudioPlayer+Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AudioPlayer+Factory.swift"; sourceTree = "<group>"; };
+		E7DEFB5728E709A1005B1D76 /* MaskRequiredSecondCertificateReasonViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskRequiredSecondCertificateReasonViewModel.swift; sourceTree = "<group>"; };
+		E7DEFB5928E70BD8005B1D76 /* MaskRequiredSecondCertificateReasonViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskRequiredSecondCertificateReasonViewModelProtocol.swift; sourceTree = "<group>"; };
 		E7DF081A28AE7E370089FDA0 /* Persistence+ValidatorOverview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Persistence+ValidatorOverview.swift"; sourceTree = "<group>"; };
 		E7DF081E28AE8EFC0089FDA0 /* Persistence+ValidatorOverviewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Persistence+ValidatorOverviewTests.swift"; sourceTree = "<group>"; };
 		E7F7817927C4007D009AC907 /* CertificateReissueRepository+Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CertificateReissueRepository+Factory.swift"; sourceTree = "<group>"; };
@@ -2777,6 +2781,7 @@
 				E75F7DD828DDC0AD00675093 /* MaskRequiredReasonViewModelProtocol.swift */,
 				E75F7DD428DDBE7C00675093 /* MaskRequiredResultRouterProtocol.swift */,
 				E75F7DD628DDBF4500675093 /* MaskRequiredResultViewModelProtocol.swift */,
+				E7DEFB5928E70BD8005B1D76 /* MaskRequiredSecondCertificateReasonViewModelProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -2795,11 +2800,12 @@
 		E75F7DE828DDC70D00675093 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				E7C0A09F28E35AD000DFF0AE /* MaskRequiredReasonType.swift */,
 				E75F7DE628DDC66700675093 /* MaskRequiredResultViewModel.swift */,
 				E7C8A01B28E2FCE7002D63E0 /* MaskRequiredIncompleteSeriesReasonViewModel.swift */,
 				E7C8A01D28E2FD67002D63E0 /* MaskRequiredInvalidSignatureReasonViewModel.swift */,
 				E7C0A0A128E35C3300DFF0AE /* MaskRequiredQRCodeReasonViewModel.swift */,
+				E7C0A09F28E35AD000DFF0AE /* MaskRequiredReasonType.swift */,
+				E7DEFB5728E709A1005B1D76 /* MaskRequiredSecondCertificateReasonViewModel.swift */,
 				E7C8A01728E2F7AF002D63E0 /* MaskRequiredValidityDateReasonViewModel.swift */,
 				E7C8A01928E2FC5F002D63E0 /* MaskRequiredWrongCertificateReasonViewModel.swift */,
 			);
@@ -3803,6 +3809,7 @@
 				096EB4DF27D768D3005CE76F /* RevocationSettingsViewController.swift in Sources */,
 				096EB4DA27D768D3005CE76F /* RevocationSettingsRouter.swift in Sources */,
 				2181C172264F037000DE7412 /* WelcomeViewController.swift in Sources */,
+				E7DEFB5A28E70BD8005B1D76 /* MaskRequiredSecondCertificateReasonViewModelProtocol.swift in Sources */,
 				E7C8A01E28E2FD67002D63E0 /* MaskRequiredInvalidSignatureReasonViewModel.swift in Sources */,
 				096EB4DD27D768D3005CE76F /* RevocationSettingsRouterProtocol.swift in Sources */,
 				E7F863AB28DA133600F7D54C /* NewRegulationsAnnouncementSceneFactory.swift in Sources */,
@@ -3871,6 +3878,7 @@
 				E76509E828E5AB1800BC4595 /* NoMaskRulesResultViewModel.swift in Sources */,
 				2181C1A6264F03BC00DE7412 /* ValidationConsentPageViewModel.swift in Sources */,
 				097D902528E2FE47008F5EB3 /* CertificateHolderStatusModel+Factory.swift in Sources */,
+				E7DEFB5828E709A1005B1D76 /* MaskRequiredSecondCertificateReasonViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3883,7 +3891,6 @@
 				E7D242BD28BD301100C5D137 /* AudioPlayerMock.swift in Sources */,
 				096EB4E227D76904005CE76F /* RevocationSettingsViewModelTests.swift in Sources */,
 				0957848627A2D28400E8206C /* ViewModelDelegateMock.swift in Sources */,
-				E7D242BF28BD326A00C5D137 /* ValidationViewModelProtocol+ExtensionTests.swift in Sources */,
 				E7C0A0CA28E4503B00DFF0AE /* MaskOptionalResultViewModelTests.swift in Sources */,
 				097D902728E2FFAB008F5EB3 /* CertificateHolderStatusModelMock.swift in Sources */,
 				E7F863B028DA172A00F7D54C /* NewRegulationsAnnouncementSceneFactoryTests.swift in Sources */,

@@ -22,6 +22,7 @@ struct MaskRequiredResultSceneFactory: ResolvableSceneFactory {
         let federalStateCode = persistence.stateSelection
         #warning("TODO: Set reason type, after scan story is done.")
         let reasonType: MaskRequiredReasonType = .technical
+        let secondCertificateHintHidden = false
         let countdownTimerModel = CountdownTimerModel(
             dismissAfterSeconds: 120,
             countdownDuration: 60
@@ -31,7 +32,8 @@ struct MaskRequiredResultSceneFactory: ResolvableSceneFactory {
             federalStateCode: federalStateCode,
             resolver: resolvable,
             router: router,
-            reasonType: reasonType
+            reasonType: reasonType,
+            secondCertificateHintHidden: secondCertificateHintHidden
         )
         let viewController = MaskRequiredResultViewController(viewModel: viewModel)
 

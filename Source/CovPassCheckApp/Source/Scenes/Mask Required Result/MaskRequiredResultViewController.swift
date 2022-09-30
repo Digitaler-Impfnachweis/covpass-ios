@@ -17,7 +17,8 @@ final class MaskRequiredResultViewController: UIViewController {
     @IBOutlet var reasonStackView: UIStackView!
     @IBOutlet var rescanButton: MainButton!
     @IBOutlet var counterLabel: UILabel!
-
+    @IBOutlet var stackViewLeadingConstraint: NSLayoutConstraint!
+    
     private var viewModel: MaskRequiredResultViewModelProtocol
 
     init(viewModel: MaskRequiredResultViewModelProtocol) {
@@ -62,10 +63,25 @@ final class MaskRequiredResultViewController: UIViewController {
 
     private func configureReasonStackView() {
         reasonStackView.removeAllArrangedSubviews()
+        addSecondCertificateReasonIfNotHidden()
         for viewModel in viewModel.reasonViewModels {
             let paragraphView = ParagraphView()
             paragraphView.setup(with: viewModel)
             reasonStackView.addArrangedSubview(paragraphView)
+        }
+    }
+
+    private func addSecondCertificateReasonIfNotHidden() {
+        if !viewModel.secondCertificateHintHidden {
+            let viewModel = viewModel.secondCertificateReasonViewModel
+            let view = ButtonBox()
+
+            view.paragraphView.setup(with: viewModel)
+            view.button.title = viewModel.buttonText
+            view.button.action = self.viewModel.scanSecondCertificate
+            stackViewLeadingConstraint.constant = 24.0
+
+            reasonStackView.addArrangedSubview(view)
         }
     }
 

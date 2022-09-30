@@ -16,8 +16,11 @@ protocol MaskRequiredResultViewModelProtocol: CancellableViewModelProtocol {
     var subtitle: String { get }
     var description: String { get }
     var reasonViewModels: [MaskRequiredReasonViewModelProtocol] { get }
+    var secondCertificateReasonViewModel: MaskRequiredSecondCertificateReasonViewModelProtocol { get }
     var buttonTitle: String { get }
+    var secondCertificateHintHidden: Bool { get }
     var countdownTimerModel: CountdownTimerModel { get }
 
     func rescan()
+    func scanSecondCertificate()
 }

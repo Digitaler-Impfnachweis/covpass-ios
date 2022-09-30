@@ -15,6 +15,10 @@ final class MaskRequiredResultViewControllerSnapshotTests: BaseSnapShotTests {
 
     override func setUpWithError() throws {
         try super.setUpWithError()
+        configureSut()
+    }
+
+    func configureSut(secondCertificateHintHidden: Bool = true) {
         let (_, resolver) = Promise<Void>.pending()
         let countdownTimerModel = CountdownTimerModel(
             dismissAfterSeconds: 100,
@@ -25,7 +29,8 @@ final class MaskRequiredResultViewControllerSnapshotTests: BaseSnapShotTests {
             federalStateCode: "Northrhine-Westphalia",
             resolver: resolver,
             router: MaskRequiredResultRouterMock(),
-            reasonType: .functional
+            reasonType: .functional,
+            secondCertificateHintHidden: secondCertificateHintHidden
         )
         sut = .init(viewModel: viewModel)
     }
@@ -37,5 +42,13 @@ final class MaskRequiredResultViewControllerSnapshotTests: BaseSnapShotTests {
 
     func testDefault() throws {
         verifyView(view: sut.view, height: 1000)
+    }
+
+    func test_hint_not_hidden() {
+        // Given
+        configureSut(secondCertificateHintHidden: false)
+
+        // When & Then
+        verifyView(view: sut.view, height: 1100)
     }
 }
