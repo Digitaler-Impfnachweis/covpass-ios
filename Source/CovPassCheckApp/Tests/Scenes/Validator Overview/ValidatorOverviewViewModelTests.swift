@@ -8,6 +8,8 @@
 @testable import CovPassCheckApp
 @testable import CovPassCommon
 @testable import CovPassUI
+import CertLogic
+import SwiftyJSON
 import XCTest
 
 private enum Constants {
@@ -23,9 +25,15 @@ class ValidatorOverviewViewModelTests: XCTestCase {
     private var userDefaults: MockPersistence!
     private var router: ValidatorMockRouter!
     private var sut: ValidatorOverviewViewModel!
-    
+    private var certLogic: DCCCertLogicMock!
+    private var repository: VaccinationRepositoryMock!
+    private var revocationRepository: CertificateRevocationRepositoryMock!
+
     override func setUp() {
         super.setUp()
+        revocationRepository = CertificateRevocationRepositoryMock()
+        repository = VaccinationRepositoryMock()
+        certLogic = DCCCertLogicMock()
         audioPlayer = .init()
         router = .init()
         userDefaults = .init()
@@ -33,11 +41,33 @@ class ValidatorOverviewViewModelTests: XCTestCase {
     }
     
     override func tearDown() {
+        revocationRepository = nil
+        repository = nil
+        certLogic = nil
         audioPlayer = nil
         router = nil
         userDefaults = nil
         sut = nil
        super.tearDown()
+    }
+    
+    private func prepareSut(lastUpdateTrustList: Date? = nil, lastUpdateDccrRules: Date? = nil, appVersion: String? = nil) {
+        if let lastUpdateTrustList = lastUpdateTrustList {
+            userDefaults.lastUpdatedTrustList = lastUpdateTrustList
+        }
+        if let lastUpdateDccrRules = lastUpdateDccrRules {
+            userDefaults.lastUpdatedDCCRules = lastUpdateDccrRules
+        }
+        sut = .init(
+            router: router,
+            repository: repository,
+            revocationRepository: revocationRepository,
+            certLogic: certLogic,
+            userDefaults: userDefaults,
+            privacyFile: Constants.Keys.privacyFile,
+            appVersion: appVersion,
+            audioPlayer: audioPlayer
+        )
     }
     
     func testInitDate() throws {
@@ -144,27 +174,6 @@ class ValidatorOverviewViewModelTests: XCTestCase {
         self.waitForExpectations(timeout: 1.0, handler: nil)
     }
 
-    private func prepareSut(lastUpdateTrustList: Date? = nil, lastUpdateDccrRules: Date? = nil, appVersion: String? = nil) {
-        let repository = VaccinationRepositoryMock()
-        let certLogic = DCCCertLogicMock()
-        if let lastUpdateTrustList = lastUpdateTrustList {
-            userDefaults.lastUpdatedTrustList = lastUpdateTrustList
-        }
-        if let lastUpdateDccrRules = lastUpdateDccrRules {
-            userDefaults.lastUpdatedDCCRules = lastUpdateDccrRules
-        }
-        sut = .init(
-            router: router,
-            repository: repository,
-            revocationRepository: CertificateRevocationRepositoryMock(),
-            certLogic: certLogic,
-            userDefaults: userDefaults,
-            privacyFile: Constants.Keys.privacyFile,
-            appVersion: appVersion,
-            audioPlayer: audioPlayer
-        )
-    }
-
     func testShowNotificationsIfNeeded_showDataPrivacy_never_shown_before() {
         // Given
         let privacyHash = Constants.Keys.privacyFile.sha256()
@@ -242,7 +251,7 @@ class ValidatorOverviewViewModelTests: XCTestCase {
         wait(for: [router.showNewRegulationsAnnouncementExpectation], timeout: 1)
     }
     
-    func testStartQRCodeValidation_3G() {
+    func testStartQRCodeValidation() {
         // When
         sut.scanAction()
 
@@ -259,5 +268,98 @@ class ValidatorOverviewViewModelTests: XCTestCase {
 
         // Then
         wait(for: [router.routeToStateSelectionExpectation], timeout: 1)
+    }
+    
+    func test_scanAction_showMaskRequiredTechnicalError_unexpected() {
+        // When
+        sut.scanAction()
+
+        // Then
+        wait(for: [
+            router.showMaskRequiredTechnicalErrorExpectation
+        ], timeout: 1)
+    }
+    
+    func test_scanAction_showMaskRequiredTechnicalError_alternative() {
+        // GIVEN
+        certLogic.validateResult = []
+        repository.checkedCert = CBORWebToken.mockVaccinationCertificate
+        // When
+        sut.scanAction()
+
+        // Then
+        wait(for: [
+            router.showMaskRequiredTechnicalErrorExpectation
+        ], timeout: 1)
+    }
+    
+    func test_scanAction_showMaskRequiredBusinessRules() {
+        // GIVEN
+        let rule = Rule(identifier: "", type: "Acceptence", version: "", schemaVersion: "", engine: "", engineVersion: "", certificateType: "", description: [], validFrom: "", validTo: "", affectedString: [], logic: JSON(), countryCode: "", region: "")
+        certLogic.validateResult = [.init(rule: rule, result: .fail)]
+        repository.checkedCert = CBORWebToken.mockVaccinationCertificate
+        // When
+        sut.scanAction()
+
+        // Then
+        wait(for: [
+            router.showMaskRequiredBusinessRulesExpectation
+        ], timeout: 1)
+    }
+    
+    func test_scanAction_showMaskRequiredBusinessRulesSecondScanAllowed() {
+        // GIVEN
+        let rule = Rule(identifier: "", type: "Invalidation", version: "", schemaVersion: "", engine: "", engineVersion: "", certificateType: "", description: [], validFrom: "", validTo: "", affectedString: [], logic: JSON(), countryCode: "", region: "")
+        certLogic.validateResult = [.init(rule: rule, result: .passed)]
+        repository.checkedCert = CBORWebToken.mockVaccinationCertificate
+        // When
+        sut.scanAction()
+
+        // Then
+        wait(for: [
+            router.showMaskRequiredBusinessRulesSecondScanAllowedExpectation
+        ], timeout: 1)
+    }
+    
+    func test_scanAction_showNoMaskRules() {
+        // GIVEN
+        certLogic.areRulesAvailable = false
+        repository.checkedCert = CBORWebToken.mockVaccinationCertificate
+        // When
+        sut.scanAction()
+
+        // Then
+        wait(for: [
+            router.showNoMaskRulesExpectation
+        ], timeout: 1)
+    }
+    
+    func test_scanAction_showMaskRequiredTechnicalError_alternative_revoked() {
+        // GIVEN
+        revocationRepository.isRevoked = true
+        repository.checkedCert = CBORWebToken.mockVaccinationCertificate
+        // When
+        sut.scanAction()
+
+        // Then
+        wait(for: [
+            router.showMaskRequiredTechnicalErrorExpectation
+        ], timeout: 1)
+    }
+    
+    func test_scanAction_showMaskOptional() {
+        // GIVEN
+        let rule = Rule(identifier: "", type: "Invalidation", version: "", schemaVersion: "", engine: "", engineVersion: "", certificateType: "", description: [], validFrom: "", validTo: "", affectedString: [], logic: JSON(), countryCode: "", region: "")
+        let rule2 = Rule(identifier: "", type: "Mask", version: "", schemaVersion: "", engine: "", engineVersion: "", certificateType: "", description: [], validFrom: "", validTo: "", affectedString: [], logic: JSON(), countryCode: "", region: "")
+        certLogic.validateResult = [.init(rule: rule, result: .passed),
+                                    .init(rule: rule2, result: .passed)]
+        repository.checkedCert = CBORWebToken.mockVaccinationCertificate
+        // When
+        sut.scanAction()
+
+        // Then
+        wait(for: [
+            router.showMaskOptionalExpectation
+        ], timeout: 1)
     }
 }

@@ -171,41 +171,43 @@ class ValidatorOverviewViewModel {
     
     func scanAction() {
         isLoadingScan = true
-        firstly {
-            router.scanQRCode()
-        }
-        .then { $0.mapOnScanResult() }
-        .get { _ in
-            _ = self.audioPlayer.playCovPassCheckCertificateScannedIfEnabled()
-        }
-        .then {
-            ParseCertificateUseCase(scanResult: $0,
-                                    vaccinationRepository: self.vaccinationRepository).execute()
-        }
-        .then { token -> Promise<ExtendedCBORWebToken> in
-            return ValidateCertificateUseCase(token: token,
-                                              region: self.userDefaults.stateSelection,
-                                              revocationRepository: self.revocationRepository,
-                                              holderStatus: CertificateHolderStatusModel.create()).execute()
+        firstly{
+            ScanAndValidateQRCodeUseCase(router: router,
+                                         audioPlayer: audioPlayer,
+                                         vaccinationRepository: vaccinationRepository,
+                                         revocationRepository: revocationRepository,
+                                         userDefaults: userDefaults, certLogic: certLogic).execute()
         }
         .done { token in
-            self.router.showCertificate(token,
-                                        userDefaults: self.userDefaults)
-            
+            self.router.showMaskOptional(token: token).cauterize()
         }
         .ensure {
             self.isLoadingScan = false
         }
         .catch { error in
             self.errorHandling(error: error, token: nil)
+                .recover({_ in })
         }
     }
     
-    func errorHandling(error: Error, token: ExtendedCBORWebToken?) {
-        self.router.showError(token,
-                              error: error,
-                              userDefaults: self.userDefaults).cauterize()
+    func errorHandling(error: Error, token: ExtendedCBORWebToken?) -> Promise<Void> {
+        if case CertificateError.revoked(_) = error {
+            return router.showMaskRequiredTechnicalError()
+        }
+        switch error as? ValidateCertificateUseCaseError {
+        case .maskRulesNotAvailable:
+            return router.showNoMaskRules()
+        case let .holderNeedsMask(token):
+            return router.showMaskRequiredBusinessRulesSecondScanAllowed(token: token)
+        case .invalidDueToRules:
+            return router.showMaskRequiredBusinessRules()
+        case .invalidDueToTechnicalReason:
+            return router.showMaskRequiredTechnicalError()
+        case .none:
+            return router.showMaskRequiredTechnicalError()
+        }
     }
+    
     
     func showAppInformation() {
         router.showAppInformation(userDefaults: userDefaults)

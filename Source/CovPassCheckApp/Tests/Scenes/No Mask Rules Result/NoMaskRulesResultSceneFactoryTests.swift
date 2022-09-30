@@ -27,7 +27,7 @@ final class NoMaskRulesResultSceneFactoryTests: XCTestCase {
     func testMake() {
         // Given
         var persistence = UserDefaultsPersistence()
-        persistence.stateSelection = "DE_NW"
+        persistence.stateSelection = "NW"
         let (_, resolver) = Promise<Void>.pending()
 
         // When

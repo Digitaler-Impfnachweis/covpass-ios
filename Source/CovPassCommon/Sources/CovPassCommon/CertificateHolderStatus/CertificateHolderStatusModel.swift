@@ -69,9 +69,6 @@ public struct CertificateHolderStatusModel: CertificateHolderStatusModelProtocol
         guard let validationResults = try? validate(certificate: joinedTokens, type: .maskStatusAndRules, region: region) else {
             return true
         }
-        guard validationResults.failedAndOpenResults.isEmpty else {
-            return true
-        }
         return validationResults.holderNeedsMask
     }
     

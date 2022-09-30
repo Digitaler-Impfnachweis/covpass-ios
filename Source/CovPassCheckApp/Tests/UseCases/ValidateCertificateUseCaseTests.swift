@@ -161,7 +161,7 @@ class ValidateCertificateUseCaseTests: XCTestCase {
             }
             .catch { error in
                 // THEN
-                XCTAssertEqual(error as? ValidateCertificateUseCaseError, .holderNeedsMask)
+                XCTAssertEqual(error as? ValidateCertificateUseCaseError, .holderNeedsMask(self.token))
                 expectation.fulfill()
             }
         wait(for: [expectation], timeout: 1.0)

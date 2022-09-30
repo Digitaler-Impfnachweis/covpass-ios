@@ -12,17 +12,22 @@ import UIKit
 
 struct MaskRequiredResultSceneFactory: ResolvableSceneFactory {
     private let router: MaskRequiredResultRouterProtocol
+    private let reasonType: MaskRequiredReasonType
+    private let secondCertificateHintHidden: Bool
 
-    init(router: MaskRequiredResultRouterProtocol) {
+    init(router: MaskRequiredResultRouterProtocol,
+         reasonType: MaskRequiredReasonType,
+         secondCertificateHintHidden: Bool) {
         self.router = router
+        self.reasonType = reasonType
+        self.secondCertificateHintHidden = secondCertificateHintHidden
     }
 
     func make(resolvable: Resolver<Void>) -> UIViewController {
         let persistence = UserDefaultsPersistence()
         let federalStateCode = persistence.stateSelection
-        #warning("TODO: Set reason type, after scan story is done.")
-        let reasonType: MaskRequiredReasonType = .technical
-        let secondCertificateHintHidden = false
+        let reasonType: MaskRequiredReasonType = reasonType
+        let secondCertificateHintHidden = secondCertificateHintHidden
         let countdownTimerModel = CountdownTimerModel(
             dismissAfterSeconds: 120,
             countdownDuration: 60

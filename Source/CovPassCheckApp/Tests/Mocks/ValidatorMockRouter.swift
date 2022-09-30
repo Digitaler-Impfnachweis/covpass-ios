@@ -12,13 +12,18 @@ import PromiseKit
 import XCTest
 
 class ValidatorMockRouter: ValidatorOverviewRouterProtocol {
-
+    
     var sceneCoordinator: SceneCoordinator = SceneCoordinatorMock()
     var showDataPrivacyExpectation = XCTestExpectation(description: "showDataPrivacyExpectation")
     var showGproofExpectation = XCTestExpectation(description: "showGproofExpectation")
     var scanQRCodeExpectation = XCTestExpectation(description: "scanQRCodeExpectation")
     var showNewRegulationsAnnouncementExpectation = XCTestExpectation(description: "showNewRegulationsAnnouncementExpectation")
     var routeToStateSelectionExpectation = XCTestExpectation(description: "routeToStateSelection")
+    var showMaskRequiredBusinessRulesExpectation = XCTestExpectation(description: "showMaskRequiredBusinessRules")
+    var showMaskRequiredBusinessRulesSecondScanAllowedExpectation = XCTestExpectation(description: "showMaskRequiredBusinessRulesSecondScanAllowed")
+    var showMaskRequiredTechnicalErrorExpectation = XCTestExpectation(description: "showMaskRequiredTechnicalError")
+    var showMaskOptionalExpectation = XCTestExpectation(description: "showMaskOptional")
+    var showNoMaskRulesExpectation = XCTestExpectation(description: "showNoMaskRulesE")
 
     func showAppInformation(userDefaults: Persistence) {
         
@@ -35,19 +40,6 @@ class ValidatorMockRouter: ValidatorOverviewRouterProtocol {
     func scanQRCode() -> Promise<QRCodeImportResult> {
         scanQRCodeExpectation.fulfill()
         return .value(.scanResult(.success("")))
-    }
-    
-    func showCertificate(_ certificate: ExtendedCBORWebToken?, userDefaults: Persistence) {
-
-    }
-    
-    func showError(_ certificate: ExtendedCBORWebToken?,
-                   error: Error,
-                   userDefaults: Persistence) -> Promise<ExtendedCBORWebToken> {
-        .value(ExtendedCBORWebToken(
-            vaccinationCertificate: .mockTestCertificate,
-            vaccinationQRCodeData: "")
-        )
     }
 
     func showDataPrivacy() -> Promise<Void> {
@@ -66,6 +58,31 @@ class ValidatorMockRouter: ValidatorOverviewRouterProtocol {
     
     func routeToStateSelection() -> Promise<Void> {
         routeToStateSelectionExpectation.fulfill()
+        return .value
+    }
+    
+    func showMaskRequiredBusinessRules() -> Promise<Void> {
+        showMaskRequiredBusinessRulesExpectation.fulfill()
+        return .value
+    }
+    
+    func showMaskRequiredBusinessRulesSecondScanAllowed(token: ExtendedCBORWebToken) -> Promise<Void> {
+        showMaskRequiredBusinessRulesSecondScanAllowedExpectation.fulfill()
+        return .value
+    }
+    
+    func showMaskRequiredTechnicalError() -> Promise<Void> {
+        showMaskRequiredTechnicalErrorExpectation.fulfill()
+        return .value
+    }
+    
+    func showMaskOptional(token: ExtendedCBORWebToken) -> Promise<Void> {
+        showMaskOptionalExpectation.fulfill()
+        return .value
+    }
+    
+    func showNoMaskRules() -> Promise<Void> {
+        showNoMaskRulesExpectation.fulfill()
         return .value
     }
 }

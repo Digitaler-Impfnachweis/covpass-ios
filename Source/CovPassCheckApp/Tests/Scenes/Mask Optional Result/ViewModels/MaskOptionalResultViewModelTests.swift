@@ -102,7 +102,7 @@ final class MaskOptionalResultViewModelTests: XCTestCase {
 
     func testSubtitle() {
         // Given
-        persistence.stateSelection = "DE_NW"
+        persistence.stateSelection = "NW"
         configureSut()
 
         // When

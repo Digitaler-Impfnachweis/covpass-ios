@@ -10,9 +10,9 @@ import PromiseKit
 import Foundation
 import CertLogic
 
-enum ValidateCertificateUseCaseError: Error {
+enum ValidateCertificateUseCaseError: Error, Equatable  {
     case maskRulesNotAvailable
-    case holderNeedsMask
+    case holderNeedsMask(_ token: ExtendedCBORWebToken)
     case invalidDueToRules
     case invalidDueToTechnicalReason
 }
@@ -53,7 +53,7 @@ struct ValidateCertificateUseCase {
     
     private func checkMaskRules() -> Promise<Void> {
         if holderStatus.holderNeedsMask([token], region: region) {
-            return .init(error: ValidateCertificateUseCaseError.holderNeedsMask)
+            return .init(error: ValidateCertificateUseCaseError.holderNeedsMask(token))
         }
         return .value
     }

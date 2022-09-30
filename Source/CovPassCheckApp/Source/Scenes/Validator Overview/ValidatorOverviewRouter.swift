@@ -38,11 +38,6 @@ class ValidatorOverviewRouter: ValidatorOverviewRouterProtocol {
         )
     }
     
-    func showCertificate(_ certificate: ExtendedCBORWebToken?,
-                         userDefaults: Persistence) {
-        #warning("TODO: replace with new scene")
-    }
-    
     func showAppInformation(userDefaults: Persistence) {
         sceneCoordinator.push(
             AppInformationSceneFactory(
@@ -50,13 +45,6 @@ class ValidatorOverviewRouter: ValidatorOverviewRouterProtocol {
                 userDefaults: userDefaults
             )
         )
-    }
-    
-    func showError(_ certificate: ExtendedCBORWebToken?,
-                   error: Error,
-                   userDefaults: Persistence) -> Promise<ExtendedCBORWebToken>  {
-#warning("TODO: replace with new scene")
-        return .value(certificate!)
     }
     
     func showDataPrivacy() -> Promise<Void> {
@@ -81,5 +69,42 @@ class ValidatorOverviewRouter: ValidatorOverviewRouterProtocol {
     func routeToStateSelection() -> Promise<Void> {
         sceneCoordinator.present(StateSelectionSceneFactory(),
                                  animated: true)
+    }
+    
+    func showMaskRequiredBusinessRules() -> Promise<Void> {
+        let router = MaskRequiredResultRouter(sceneCoordinator: sceneCoordinator)
+        return sceneCoordinator.present(MaskRequiredResultSceneFactory(router: router,
+                                                                       reasonType: .functional,
+                                                                       secondCertificateHintHidden: false),
+                                        animated: true)
+    }
+    
+    func showMaskRequiredBusinessRulesSecondScanAllowed(token: ExtendedCBORWebToken) -> Promise<Void> {
+        let router = MaskRequiredResultRouter(sceneCoordinator: sceneCoordinator)
+        return sceneCoordinator.present(MaskRequiredResultSceneFactory(router: router,
+                                                                       reasonType: .functional,
+                                                                       secondCertificateHintHidden: false),
+                                        animated: true)
+    }
+    
+    func showMaskRequiredTechnicalError() -> Promise<Void> {
+        let router = MaskRequiredResultRouter(sceneCoordinator: sceneCoordinator)
+        return sceneCoordinator.present(MaskRequiredResultSceneFactory(router: router,
+                                                                       reasonType: .technical,
+                                                                       secondCertificateHintHidden: true),
+                                        animated: true)
+    }
+    
+    func showMaskOptional(token: ExtendedCBORWebToken) -> Promise<Void> {
+        let router = MaskOptionalResultRouter(sceneCoordinator: sceneCoordinator)
+        return sceneCoordinator.present(MaskOptionalResultSceneFactory(router: router,
+                                                                       token: token),
+                                        animated: true)
+    }
+    
+    func showNoMaskRules() -> Promise<Void> {
+        let router = NoMaskRulesResultRouter(sceneCoordinator: sceneCoordinator)
+        return sceneCoordinator.present(NoMaskRulesResultSceneFactory(router: router),
+                                        animated: true)
     }
 }

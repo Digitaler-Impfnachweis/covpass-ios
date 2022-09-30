@@ -16,18 +16,20 @@ final class MaskRequiredResultSceneFactoryTests: XCTestCase {
     private var sut: MaskRequiredResultSceneFactory!
     override func setUpWithError() throws {
         sut = .init(
-            router: MaskRequiredResultRouterMock()
+            router: MaskRequiredResultRouterMock(),
+            reasonType: .functional,
+            secondCertificateHintHidden: true
         )
     }
 
     override func tearDownWithError() throws {
         sut = nil
     }
-
+    
     func testMake() {
         // Given
         var persistence = UserDefaultsPersistence()
-        persistence.stateSelection = "DE_NW"
+        persistence.stateSelection = "NW"
         let (_, resolver) = Promise<Void>.pending()
 
         // When

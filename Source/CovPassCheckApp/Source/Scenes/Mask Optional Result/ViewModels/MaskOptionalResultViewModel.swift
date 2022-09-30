@@ -53,7 +53,7 @@ final class MaskOptionalResultViewModel: MaskOptionalResultViewModelProtocol {
         self.countdownTimerModel = countdownTimerModel
         self.subtitle = .init(
             format: Constants.subtitleFormat,
-            persistence.stateSelection.localized
+            ("DE_" + persistence.stateSelection).localized
         )
         self.resolver = resolver
         self.router = router
