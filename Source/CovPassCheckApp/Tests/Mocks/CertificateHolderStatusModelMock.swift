@@ -11,17 +11,17 @@ import PromiseKit
 
 class CertificateHolderStatusModelMock: CertificateHolderStatusModelProtocol {
 
-    var areMaskRulesAvailable = false
-    var needsMask = false
-    var fullyImmunized = false
-    var domesticRulesPassedResult = CertificateHolderStatusResult.passed
-    var euInvalidationRulesPassedResult = CertificateHolderStatusResult.passed
+    var areMaskRulesAvailable = true
+    var needsMask = true
+    var fullyImmunized = true
+    var domesticRulesPassedResult = CertificateHolderStatusResult.failedFunctional
+    var euInvalidationRulesPassedResult = CertificateHolderStatusResult.failedFunctional
 
-    func checkDomesticAcceptanceRules(_ certificates: [ExtendedCBORWebToken]) -> CertificateHolderStatusResult {
+    func checkDomesticAcceptanceAndInvalidationRules(_ certificates: [ExtendedCBORWebToken]) -> CertificateHolderStatusResult {
         domesticRulesPassedResult
     }
     
-    func euInvalidationRulesPassed(_ certificates: [ExtendedCBORWebToken], countryCode: String) -> CertificateHolderStatusResult {
+    func checkEuInvalidationRules(_ certificates: [ExtendedCBORWebToken]) -> CertificateHolderStatusResult {
         euInvalidationRulesPassedResult
     }
 

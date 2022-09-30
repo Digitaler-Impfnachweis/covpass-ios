@@ -144,4 +144,19 @@ class ArrayValidationResultTests: XCTestCase {
         // THEN
         XCTAssertEqual(fetechedResult.count, 2)
     }
+    
+    func testFilterInvalidationRules() {
+        // GIVEN
+        let rule = Rule(identifier: "FOO", type: "Acceptance", version: "", schemaVersion: "", engine: "", engineVersion: "", certificateType: "", description: [], validFrom: "", validTo: "", affectedString: [], logic: JSON(""), countryCode: "DE")
+        let rule2 = Rule(identifier: "Bar", type: "Invalidation", version: "", schemaVersion: "", engine: "", engineVersion: "", certificateType: "", description: [], validFrom: "", validTo: "", affectedString: [], logic: JSON(""), countryCode: "DE")
+        let rule3 = Rule(identifier: "Tst", type: "Mask", version: "", schemaVersion: "", engine: "", engineVersion: "", certificateType: "", description: [], validFrom: "", validTo: "", affectedString: [], logic: JSON(""), countryCode: "DE")
+        let sut: [ValidationResult] = [.init(rule: rule, result: .open, validationErrors: nil),
+                                       .init(rule: rule2, result: .passed, validationErrors: nil),
+                                       .init(rule: rule3, result: .fail, validationErrors: nil)]
+        // WHEN
+        let fetechedResult = sut.filterInvalidationRules
+        // THEN
+        XCTAssertEqual(fetechedResult.count, 1)
+        XCTAssertEqual(fetechedResult.first?.rule?.identifier, "Bar")
+    }
 }

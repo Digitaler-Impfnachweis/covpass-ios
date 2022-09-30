@@ -69,6 +69,8 @@ public class DCCCertLogic: DCCCertLogicProtocol {
     public enum LogicType: String {
         // validate against EU rules
         case eu
+        // validate against EU rules (only invalidations)
+        case euInvalidation
         // validate against DE domestic rules
         case de
         // validate against DE domestic rules for all Certificate types
@@ -211,10 +213,12 @@ public class DCCCertLogic: DCCCertLogicProtocol {
         switch logicType {
         case .eu:
             rules = dccRules
+        case .euInvalidation:
+            rules = dccRules.invalidationRules
         case .booster:
             rules = boosterRules
         case .de:
-            rules = dccDomesticRules.acceptanceRules
+            rules = dccDomesticRules.acceptenceAndInvalidationRules
         case .gStatusAndRules:
             let domesticRules = dccDomesticRules
             rules = domesticRules.acceptenceAndInvalidationRules
@@ -235,7 +239,7 @@ public class DCCCertLogic: DCCCertLogicProtocol {
                          validationClock: Date,
                          certificate: CBORWebToken) throws -> [ValidationResult] {
         
-        var rules = rulesFor(logicType: type)
+        let rules = rulesFor(logicType: type)
         
         if rules.isEmpty {
             throw DCCCertLogicError.noRules

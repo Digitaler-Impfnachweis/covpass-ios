@@ -14,10 +14,15 @@ struct CertificateHolderStatusModelMock: CertificateHolderStatusModelProtocol {
     var needsMask = false
     var holderIsFullyImmunized = false
     var areMaskRulesAvailable = false
-    var checkDomesticAcceptanceRulesResult = CertificateHolderStatusResult.passed
+    var checkDomesticAcceptanceAndInvalidationRulesResult = CertificateHolderStatusResult.passed
+    var checkEuInvalidationRulesResult = CertificateHolderStatusResult.passed
+
+    func checkDomesticAcceptanceAndInvalidationRules(_ certificates: [ExtendedCBORWebToken]) -> CertificateHolderStatusResult {
+        checkDomesticAcceptanceAndInvalidationRulesResult
+    }
     
-    func checkDomesticAcceptanceRules(_ certificates: [ExtendedCBORWebToken]) -> CertificateHolderStatusResult {
-        checkDomesticAcceptanceRulesResult
+    func checkEuInvalidationRules(_ certificates: [ExtendedCBORWebToken]) -> CertificateHolderStatusResult {
+        checkEuInvalidationRulesResult
     }
     
     func holderIsFullyImmunized(_ certificates: [ExtendedCBORWebToken]) -> Bool {

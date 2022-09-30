@@ -34,6 +34,9 @@ struct ValidateCertificateUseCase {
             checkDomesticRules()
         }
         .then {
+            checkEuRules()
+        }
+        .then {
             checkMaskRules()
         }
         .then {
@@ -68,7 +71,18 @@ struct ValidateCertificateUseCase {
     }
     
     private func checkDomesticRules() -> Promise<Void> {
-        switch holderStatus.checkDomesticAcceptanceRules([token]) {
+        switch holderStatus.checkDomesticAcceptanceAndInvalidationRules([token]) {
+        case .passed:
+            return .value
+        case .failedTechnical:
+            return .init(error: ValidateCertificateUseCaseError.invalidDueToTechnicalReason)
+        case .failedFunctional:
+            return .init(error: ValidateCertificateUseCaseError.invalidDueToRules)
+        }
+    }
+    
+    private func checkEuRules() -> Promise<Void> {
+        switch holderStatus.checkEuInvalidationRules([token]) {
         case .passed:
             return .value
         case .failedTechnical:

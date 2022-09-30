@@ -32,6 +32,10 @@ public extension Array where Element == ValidationResult {
         filter{ $0.rule?.isAcceptenceOrInvalidationRule ?? false }
     }
     
+    var filterInvalidationRules: Self {
+        filter{ $0.rule?.isInvalidationRule ?? false }
+    }
+    
     func result(ofRule identifier: String) -> Result? {
         validationResult(ofRule: identifier)?.result
     }

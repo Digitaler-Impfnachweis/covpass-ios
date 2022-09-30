@@ -20,17 +20,31 @@ public struct CertificateHolderStatusModel: CertificateHolderStatusModelProtocol
         self.dccCertLogic = dccCertLogic
     }
     
-    public func checkDomesticAcceptanceRules(_ certificates: [ExtendedCBORWebToken]) -> CertificateHolderStatusResult {
+    public func checkDomesticAcceptanceAndInvalidationRules(_ certificates: [ExtendedCBORWebToken]) -> CertificateHolderStatusResult {
         guard let joinedTokens = certificates.joinedTokens else {
             return .failedTechnical
         }
         guard let validationResults = try? validate(certificate: joinedTokens, type: .de) else {
             return .failedTechnical
         }
-        guard !validationResults.filterAcceptanceRules.isEmpty else {
+        guard !validationResults.filterAcceptanceAndInvalidationRules.isEmpty else { return
+            .failedTechnical
+        }
+        let passed = validationResults.failedAndOpenResults.isEmpty
+        return passed ? .passed : .failedFunctional
+    }
+    
+    public func checkEuInvalidationRules(_ certificates: [ExtendedCBORWebToken]) -> CertificateHolderStatusResult {
+        guard let joinedTokens = certificates.joinedTokens else {
             return .failedTechnical
         }
-        let passed = validationResults.filterAcceptanceRules.failedAndOpenResults.isEmpty
+        guard let validationResults = try? validate(certificate: joinedTokens, type: .euInvalidation, countryCode: joinedTokens.iss) else {
+            return .failedTechnical
+        }
+        guard !validationResults.filterInvalidationRules.isEmpty else { return
+            .failedTechnical
+        }
+        let passed = validationResults.failedAndOpenResults.isEmpty
         return passed ? .passed : .failedFunctional
     }
     
@@ -95,9 +109,9 @@ private extension Array where Element == ValidationResult {
     }
     
     var holderNeedsMask: Bool {
-        let maskStatusRuleIdentifier = "MA-DE-0100"
-        let maskOptionalRulePassed = result(ofRule: maskStatusRuleIdentifier) == .passed
-        return !maskOptionalRulePassed
+        let maskOptionalRules = filter{ $0.rule?.isMaskStatusRule ?? false }
+        let maskOptionalRuleFailed = maskOptionalRules.passedResults.isEmpty
+        return maskOptionalRuleFailed
     }
 }
 

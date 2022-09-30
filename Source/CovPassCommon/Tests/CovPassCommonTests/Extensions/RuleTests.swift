@@ -251,7 +251,7 @@ class RuleTests: XCTestCase {
     
     func test_isMask_rule_mask() {
         // GIVEN
-        let sut = Rule(identifier: "MA-DE-0100", type: RuleType.mask.rawValue, version: "", schemaVersion: "", engine: "", engineVersion: "", certificateType: "", description: [], validFrom: "", validTo: "", affectedString: [], logic: JSON(), countryCode: "1")
+        let sut = Rule(identifier: "", type: RuleType.mask.rawValue, version: "", schemaVersion: "", engine: "", engineVersion: "", certificateType: "", description: [], validFrom: "", validTo: "", affectedString: [], logic: JSON(), countryCode: "1")
         // WHEN
         let isMaskStatusRule = sut.isMaskStatusRule
         // THEN

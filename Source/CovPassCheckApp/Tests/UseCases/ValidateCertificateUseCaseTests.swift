@@ -106,12 +106,53 @@ class ValidateCertificateUseCaseTests: XCTestCase {
         wait(for: [expectation], timeout: 1.0)
     }
     
+    func test_euInvalidationRules_failedFunctional() {
+        // GIVEN
+        let expectation = XCTestExpectation(description: "test should fail because rules are not passed")
+        certificateHolderStatusModel.areMaskRulesAvailable = true
+        revocationRepository.isRevoked = false
+        certificateHolderStatusModel.domesticRulesPassedResult = .passed
+        certificateHolderStatusModel.euInvalidationRulesPassedResult = .failedFunctional
+        // WHEN
+        sut.execute()
+            .done { token in
+                XCTFail("Should not successful")
+            }
+            .catch { error in
+                // THEN
+                XCTAssertEqual(error as? ValidateCertificateUseCaseError, .invalidDueToRules)
+                expectation.fulfill()
+            }
+        wait(for: [expectation], timeout: 1.0)
+    }
+    
+    func test_euInvalidationRules_failedTechnical() {
+        // GIVEN
+        let expectation = XCTestExpectation(description: "test should fail because rules are not passed")
+        certificateHolderStatusModel.areMaskRulesAvailable = true
+        revocationRepository.isRevoked = false
+        certificateHolderStatusModel.domesticRulesPassedResult = .passed
+        certificateHolderStatusModel.euInvalidationRulesPassedResult = .failedTechnical
+        // WHEN
+        sut.execute()
+            .done { token in
+                XCTFail("Should not successful")
+            }
+            .catch { error in
+                // THEN
+                XCTAssertEqual(error as? ValidateCertificateUseCaseError, .invalidDueToTechnicalReason)
+                expectation.fulfill()
+            }
+        wait(for: [expectation], timeout: 1.0)
+    }
+    
     func test_checkMaskRule() {
         // GIVEN
         let expectation = XCTestExpectation(description: "test should fail because holder needs mask")
         certificateHolderStatusModel.areMaskRulesAvailable = true
         revocationRepository.isRevoked = false
         certificateHolderStatusModel.domesticRulesPassedResult = .passed
+        certificateHolderStatusModel.euInvalidationRulesPassedResult = .passed
         certificateHolderStatusModel.needsMask = true
         // WHEN
         sut.execute()
@@ -132,6 +173,7 @@ class ValidateCertificateUseCaseTests: XCTestCase {
         certificateHolderStatusModel.areMaskRulesAvailable = true
         revocationRepository.isRevoked = false
         certificateHolderStatusModel.domesticRulesPassedResult = .passed
+        certificateHolderStatusModel.euInvalidationRulesPassedResult = .passed
         certificateHolderStatusModel.needsMask = false
         // WHEN
         sut.execute()

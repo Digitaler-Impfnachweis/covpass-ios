@@ -16,8 +16,16 @@ public protocol CertificateHolderStatusModelProtocol {
     /// - Returns: `passed`, if passed the rules.
     ///            `failedTechnical`, if the user doesn't passed the rules due to any internal error.
     ///            `failedFunctional`, if the user doesn't passed the rules due to CertLogic
-    func checkDomesticAcceptanceRules(_ certificates: [ExtendedCBORWebToken]) -> CertificateHolderStatusResult
-
+    func checkDomesticAcceptanceAndInvalidationRules(_ certificates: [ExtendedCBORWebToken]) -> CertificateHolderStatusResult
+   
+    /// Queries the rules, if a certificate passed eu rules (invalidation rules only)
+    /// - Parameters:
+    ///   - certifiates: The certificates of one Person
+    /// - Returns: `passed`, if passed the rules.
+    ///            `failedTechnical`, if the user doesn't passed the rules due to any internal error.
+    ///            `failedFunctional`, if the user doesn't passed the rules due to CertLogic
+    func checkEuInvalidationRules(_ certificates: [ExtendedCBORWebToken]) -> CertificateHolderStatusResult
+    
     /// Queries the internal rules, if a certificate passed needs to wear a medical face mask.
     /// - Parameters:
     ///   - certifiates: The certificates of one Person

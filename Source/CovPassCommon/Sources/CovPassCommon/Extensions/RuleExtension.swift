@@ -18,5 +18,5 @@ extension Rule {
 
     public var isGStatusRule: Bool { ruleType == ._2G || ruleType == ._2GPlus || ruleType == ._3G || ruleType == ._3GPlus  }
     
-    public var isMaskStatusRule: Bool { identifier == "MA-DE-0100" }
+    public var isMaskStatusRule: Bool { type == "Mask" }
 }

@@ -15,7 +15,7 @@ class CertificateHolderStatusModelTests: XCTestCase {
     private var sut: CertificateHolderStatusModel!
     private var token: ExtendedCBORWebToken!
     private var rule: Rule!
-    private let maskStatusRuleIdentifier = "MA-DE-0100"
+    private let maskStatusRuleTypeIdentifier = "Mask"
     
     override func setUpWithError() throws {
         certLogic = .init()
@@ -31,60 +31,158 @@ class CertificateHolderStatusModelTests: XCTestCase {
         sut = nil
     }
     
-    // MARK: checkDomesticAcceptanceRules
+    // MARK: checkDomesticAcceptanceAndInvalidationRules
     
-    func test_checkDomesticAcceptanceRules_emptyToken() {
+    func test_checkDomesticAcceptanceAndInvalidationRules_emptyToken() {
         // WHEN
-        let result = sut.checkDomesticAcceptanceRules([])
+        let result = sut.checkDomesticAcceptanceAndInvalidationRules([])
         // THEN
         XCTAssertEqual(result, .failedTechnical)
     }
     
-    func test_checkDomesticAcceptanceRules_someError() {
+    func test_checkDomesticAcceptanceAndInvalidationRules_someError() {
         // GIVEN
         certLogic.validationError = NSError(domain: "some error", code: 1)
         // WHEN
-        let result = sut.checkDomesticAcceptanceRules([token])
+        let result = sut.checkDomesticAcceptanceAndInvalidationRules([token])
         // THEN
         XCTAssertEqual(result, .failedTechnical)
     }
     
-    func test_checkDomesticAcceptanceRules_with_ruleWhichHasNotTypeOfAcceptance() {
+    func test_checkDomesticAcceptanceAndInvalidationRules_with_ruleWhichHasTypeOfInvalidationWhichIsFailed() {
         // GIVEN
         rule.type = "Invalidation"
         certLogic.validateResult = [.init(rule: rule)]
         // WHEN
-        let result = sut.checkDomesticAcceptanceRules([token])
+        let result = sut.checkDomesticAcceptanceAndInvalidationRules([token])
+        // THEN
+        XCTAssertEqual(result, .failedFunctional)
+    }
+    
+    func test_checkDomesticAcceptanceAndInvalidationRules_with_ruleWhichHasTypeMaskWhichIsFailed() {
+        // GIVEN
+        rule.type = "Mask"
+        certLogic.validateResult = [.init(rule: rule, result: .fail)]
+        // WHEN
+        let result = sut.checkDomesticAcceptanceAndInvalidationRules([token])
         // THEN
         XCTAssertEqual(result, .failedTechnical)
     }
     
-    func test_checkDomesticAcceptanceRules_with_ruleWhichHasTypeOfAcceptanceWhichIsFailed() {
+    func test_checkDomesticAcceptanceAndInvalidationRules_with_ruleWhichHasTypeMaskWhichIsPassed() {
+        // GIVEN
+        rule.type = "Mask"
+        certLogic.validateResult = [.init(rule: rule, result: .passed)]
+        // WHEN
+        let result = sut.checkDomesticAcceptanceAndInvalidationRules([token])
+        // THEN
+        XCTAssertEqual(result, .failedTechnical)
+    }
+    
+    func test_checkDomesticAcceptanceAndInvalidationRules_with_ruleWhichHasTypeOfAcceptanceWhichIsFailed() {
         // GIVEN
         rule.type = "Acceptance"
         certLogic.validateResult = [.init(rule: rule, result: .fail)]
         // WHEN
-        let result = sut.checkDomesticAcceptanceRules([token])
+        let result = sut.checkDomesticAcceptanceAndInvalidationRules([token])
         // THEN
         XCTAssertEqual(result, .failedFunctional)
     }
     
-    func test_checkDomesticAcceptanceRules_with_ruleWhichHasTypeOfAcceptanceWhichIsOpen() {
+    func test_checkDomesticAcceptanceAndInvalidationRules_with_ruleWhichHasTypeOfAcceptanceWhichIsOpen() {
         // GIVEN
         rule.type = "Acceptance"
         certLogic.validateResult = [.init(rule: rule, result: .open)]
         // WHEN
-        let result = sut.checkDomesticAcceptanceRules([token])
+        let result = sut.checkDomesticAcceptanceAndInvalidationRules([token])
         // THEN
         XCTAssertEqual(result, .failedFunctional)
     }
     
-    func test_checkDomesticAcceptanceRules_with_ruleWhichHasTypeOfAcceptanceWhichIsPassed() {
+    func test_checkDomesticAcceptanceAndInvalidationRules_with_ruleWhichHasTypeOfAcceptanceWhichIsPassed() {
         // GIVEN
         rule.type = "Acceptance"
         certLogic.validateResult = [.init(rule: rule, result: .passed)]
         // WHEN
-        let result = sut.checkDomesticAcceptanceRules([token])
+        let result = sut.checkDomesticAcceptanceAndInvalidationRules([token])
+        // THEN
+        XCTAssertEqual(result, .passed)
+    }
+    
+    // MARK: checkEuInvalidationRules
+    
+    func test_checkEuInvalidationRules_emptyToken() {
+        // WHEN
+        let result = sut.checkEuInvalidationRules([])
+        // THEN
+        XCTAssertEqual(result, .failedTechnical)
+    }
+    
+    func test_checkEuInvalidationRules_someError() {
+        // GIVEN
+        certLogic.validationError = NSError(domain: "some error", code: 1)
+        // WHEN
+        let result = sut.checkEuInvalidationRules([token])
+        // THEN
+        XCTAssertEqual(result, .failedTechnical)
+    }
+    
+    func test_checkEuInvalidationRuless_with_ruleWhichHasTypeOfInvalidationWhichIsFailed() {
+        // GIVEN
+        rule.type = "Invalidation"
+        certLogic.validateResult = [.init(rule: rule)]
+        // WHEN
+        let result = sut.checkEuInvalidationRules([token])
+        // THEN
+        XCTAssertEqual(result, .failedFunctional)
+    }
+    
+    func test_checkEuInvalidationRules_with_ruleWhichHasTypeMaskWhichIsFailed() {
+        // GIVEN
+        rule.type = "Mask"
+        certLogic.validateResult = [.init(rule: rule, result: .fail)]
+        // WHEN
+        let result = sut.checkEuInvalidationRules([token])
+        // THEN
+        XCTAssertEqual(result, .failedTechnical)
+    }
+    
+    func test_checkEuInvalidationRules_with_ruleWhichHasTypeMaskWhichIsPassed() {
+        // GIVEN
+        rule.type = "Mask"
+        certLogic.validateResult = [.init(rule: rule, result: .passed)]
+        // WHEN
+        let result = sut.checkEuInvalidationRules([token])
+        // THEN
+        XCTAssertEqual(result, .failedTechnical)
+    }
+    
+    func test_checkEuInvalidationRules_with_ruleWhichHasTypeOfInvalidationWhichIsFailed() {
+        // GIVEN
+        rule.type = "Invalidation"
+        certLogic.validateResult = [.init(rule: rule, result: .fail)]
+        // WHEN
+        let result = sut.checkEuInvalidationRules([token])
+        // THEN
+        XCTAssertEqual(result, .failedFunctional)
+    }
+    
+    func test_checkEuInvalidationRules_with_ruleWhichHasTypeOfInvalidationWhichIsOpen() {
+        // GIVEN
+        rule.type = "Invalidation"
+        certLogic.validateResult = [.init(rule: rule, result: .open)]
+        // WHEN
+        let result = sut.checkEuInvalidationRules([token])
+        // THEN
+        XCTAssertEqual(result, .failedFunctional)
+    }
+    
+    func test_checkEuInvalidationRules_with_ruleWhichHasTypeOfInvalidationWhichIsPassed() {
+        // GIVEN
+        rule.type = "Invalidation"
+        certLogic.validateResult = [.init(rule: rule, result: .passed)]
+        // WHEN
+        let result = sut.checkEuInvalidationRules([token])
         // THEN
         XCTAssertEqual(result, .passed)
     }
@@ -229,8 +327,7 @@ class CertificateHolderStatusModelTests: XCTestCase {
     
     func test_holderNeedsMask_Passed_MaskRule_inResult() {
         // GIVEN
-        rule.type = "Acceptance"
-        rule.identifier = maskStatusRuleIdentifier
+        rule.type = maskStatusRuleTypeIdentifier
         certLogic.validateResult = [.init(rule: rule, result: .passed)]
         // WHEN
         let result = sut.holderNeedsMask([token], region: nil)
@@ -241,8 +338,7 @@ class CertificateHolderStatusModelTests: XCTestCase {
     func test_holderNeedsMaskAsync_Passed_MaskRule_inResult() {
         // GIVEN
         let expectation = XCTestExpectation(description: "Should have same result like non async method")
-        rule.type = "Acceptance"
-        rule.identifier = maskStatusRuleIdentifier
+        rule.type = maskStatusRuleTypeIdentifier
         certLogic.validateResult = [.init(rule: rule, result: .passed)]
         // WHEN
         sut.holderNeedsMaskAsync([token], region: nil)

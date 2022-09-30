@@ -482,16 +482,30 @@ class DCCCertLogicTests: XCTestCase {
         XCTAssertTrue(rulesAvailable)
     }
     
-    func test_rulesNotAvailable_regionNIL_rulesEU() {
+    func test_rulesNotAvailable_regionBLA_rulesEU() {
         // WHEN
         let rulesAvailable = sut.rulesAvailable(logicType: .eu, region: "BLA")
         // THEN
         XCTAssertFalse(rulesAvailable)
     }
     
-    func test_rulesNotAvailable_regionNIL_rulesMask() {
+    func test_rulesNotAvailable_regionNW_rulesMask() {
         // WHEN
-        let rulesAvailable = sut.rulesAvailable(logicType: .maskStatusAndRules, region: "NW")
+        let rulesAvailable = sut.rulesAvailable(logicType: .maskStatusAndRules, region: "BLA")
+        // THEN
+        XCTAssertFalse(rulesAvailable)
+    }
+    
+    func test_rulesNotAvailable_regionNIL_euInvalidation() {
+        // WHEN
+        let rulesAvailable = sut.rulesAvailable(logicType: .euInvalidation, region: nil)
+        // THEN
+        XCTAssertTrue(rulesAvailable)
+    }
+    
+    func test_rulesNotAvailable_regionNW_euInvalidation() {
+        // WHEN
+        let rulesAvailable = sut.rulesAvailable(logicType: .euInvalidation, region: "BLA")
         // THEN
         XCTAssertFalse(rulesAvailable)
     }
