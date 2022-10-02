@@ -16,8 +16,13 @@ protocol NoMaskRulesResultViewModelProtocol: CancellableViewModelProtocol {
     var subtitle: String { get }
     var summary: String { get }
     var description: String { get }
+    var revocationInfoHidden: Bool { get }
+    var revocationHeadline: String { get }
+    var revocationInfoText: String { get }
+    var revocationLinkTitle: String { get }
     var buttonTitle: String { get }
     var countdownTimerModel: CountdownTimerModel { get }
 
     func rescan()
+    func revoke(_: Any)
 }

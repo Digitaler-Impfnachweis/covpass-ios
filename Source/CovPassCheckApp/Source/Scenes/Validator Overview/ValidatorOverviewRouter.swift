@@ -103,8 +103,12 @@ class ValidatorOverviewRouter: ValidatorOverviewRouterProtocol {
     }
     
     func showNoMaskRules() -> Promise<Void> {
-        let router = NoMaskRulesResultRouter(sceneCoordinator: sceneCoordinator)
-        return sceneCoordinator.present(NoMaskRulesResultSceneFactory(router: router),
-                                        animated: true)
+//        let router = NoMaskRulesResultRouter(sceneCoordinator: sceneCoordinator)
+//        return sceneCoordinator.present(NoMaskRulesResultSceneFactory(
+//            router: router,
+//            token:
+//        ), animated: true)
+#warning("TODO: Add token")
+        return .init(error: NSError(domain: "TODO", code: 0))
     }
 }

@@ -15,11 +15,25 @@ final class NoMaskRulesResultViewController: UIViewController {
     @IBOutlet var subtitleLabel: UILabel!
     @IBOutlet var summaryLabel: UILabel!
     @IBOutlet var descriptionLabel: UILabel!
+    @IBOutlet var revocationInfoContainerView: UIView!
+    @IBOutlet var revocationInfoView: HintView!
     @IBOutlet var rescanButton: MainButton!
     @IBOutlet var counterLabel: UILabel!
 
     private var viewModel: NoMaskRulesResultViewModelProtocol
-
+    private lazy var revocationLink: NSAttributedString = {
+        let linkText = (viewModel.revocationLinkTitle + " ⟩")
+            .styledAs(.header_3)
+            .colored(.brandAccent)
+        let string = NSMutableAttributedString(attributedString: linkText)
+        string.addAttribute(
+            .link,
+            value: "",
+            range: NSMakeRange(0, string.length)
+        )
+        return string
+    }()
+    
     init(viewModel: NoMaskRulesResultViewModelProtocol) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -34,6 +48,7 @@ final class NoMaskRulesResultViewController: UIViewController {
         configureInfoHeaderView()
         configureImageView()
         configureLabels()
+        configureRevocationInfoView()
         configureButton()
         configureCounter()
     }
@@ -59,6 +74,22 @@ final class NoMaskRulesResultViewController: UIViewController {
         descriptionLabel.attributedText = viewModel.description
             .styledAs(.body)
             .colored(.onBackground110)
+    }
+
+    private func configureRevocationInfoView() {
+        revocationInfoView.style = .info
+        revocationInfoContainerView.isHidden = viewModel.revocationInfoHidden
+        let bodyLabel = NSMutableAttributedString(
+            attributedString: viewModel.revocationInfoText
+                .appending("\n\n")
+                .styledAs(.body)
+                .colored(.onBackground70)
+        )
+        bodyLabel.append(revocationLink)
+        revocationInfoView.bodyLabel.attributedText = bodyLabel
+        revocationInfoView.bodyLabel.linkCallback = viewModel.revoke
+        revocationInfoView.titleLabel.attributedText = viewModel.revocationHeadline
+            .styledAs(.mainButton)
     }
 
     private func configureButton() {

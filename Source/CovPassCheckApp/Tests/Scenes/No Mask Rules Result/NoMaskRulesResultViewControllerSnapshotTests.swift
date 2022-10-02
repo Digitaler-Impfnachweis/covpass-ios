@@ -6,6 +6,7 @@
 //
 
 @testable import CovPassCheckApp
+import CovPassCommon
 import CovPassUI
 import PromiseKit
 import XCTest
@@ -20,11 +21,16 @@ final class NoMaskRulesResultViewControllerSnapshotTests: BaseSnapShotTests {
             dismissAfterSeconds: 100,
             countdownDuration: 0
         )
+        var persistence = MockPersistence()
+        persistence.revocationExpertMode = true
+        persistence.stateSelection = "DE_NW"
         let viewModel = NoMaskRulesResultViewModel(
+            token: CBORWebToken.mockVaccinationCertificate.extended(),
             countdownTimerModel: countdownTimerModel,
-            federalStateCode: "Northrhine-Westphalia",
             resolver: resolver,
-            router: NoMaskRulesResultRouterMock()
+            router: NoMaskRulesResultRouterMock(),
+            persistence: persistence,
+            revocationKeyFilename: ""
         )
         sut = .init(viewModel: viewModel)
     }
@@ -35,6 +41,6 @@ final class NoMaskRulesResultViewControllerSnapshotTests: BaseSnapShotTests {
     }
 
     func testDefault() throws {
-        verifyView(view: sut.view)
+        verifyView(view: sut.view, height: 1000)
     }
 }

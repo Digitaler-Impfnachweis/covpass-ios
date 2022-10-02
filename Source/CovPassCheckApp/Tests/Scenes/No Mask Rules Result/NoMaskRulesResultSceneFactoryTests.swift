@@ -16,7 +16,8 @@ final class NoMaskRulesResultSceneFactoryTests: XCTestCase {
     private var sut: NoMaskRulesResultSceneFactory!
     override func setUpWithError() throws {
         sut = .init(
-            router: NoMaskRulesResultRouterMock()
+            router: NoMaskRulesResultRouterMock(),
+            token: CBORWebToken.mockVaccinationCertificate.extended()
         )
     }
 

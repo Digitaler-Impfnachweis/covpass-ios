@@ -6,6 +6,7 @@
 //
 
 @testable import CovPassCheckApp
+import CovPassCommon
 import CovPassUI
 import PromiseKit
 import XCTest
@@ -13,6 +14,7 @@ import XCTest
 final class NoMaskRulesResultViewModelTests: XCTestCase {
     var countdownTimerModel: CountdownTimerModel!
     var delegate: ViewModelDelegateMock!
+    var persistence: MockPersistence!
     var promise: Promise<Void>!
     var resolver: Resolver<Void>!
     var router: NoMaskRulesResultRouterMock!
@@ -23,17 +25,21 @@ final class NoMaskRulesResultViewModelTests: XCTestCase {
         countdownTimerModel = .init(dismissAfterSeconds: 100, countdownDuration: 0)
         self.promise = promise
         self.resolver = resolver
+        persistence = .init()
         router = .init()
         delegate = .init()
+        persistence.stateSelection = "DE_NW"
         configureSut()
     }
 
     private func configureSut() {
         sut = .init(
+            token: CBORWebToken.mockVaccinationCertificate.extended(),
             countdownTimerModel: countdownTimerModel,
-            federalStateCode: "DE_NW",
             resolver: resolver,
-            router: router
+            router: router,
+            persistence: persistence,
+            revocationKeyFilename: "ABC"
         )
         sut.delegate = delegate
     }
@@ -41,6 +47,7 @@ final class NoMaskRulesResultViewModelTests: XCTestCase {
     override func tearDownWithError() throws {
         countdownTimerModel = nil
         delegate = nil
+        persistence = nil
         promise = nil
         resolver = nil
         router = nil
@@ -102,5 +109,38 @@ final class NoMaskRulesResultViewModelTests: XCTestCase {
 
         // Then
         XCTAssertEqual(subtitle, "In Northrhine-Westphalia")
+    }
+
+    func testRevoke() {
+        // When
+        sut.revoke(0)
+
+        // Then
+        wait(for: [router.revokeExpectation], timeout: 1)
+        XCTAssertEqual(router.receivedRevocationKeyFilename, "ABC")
+    }
+
+    func testRevocationInfoHidden_expertMode_true() {
+        // Given
+        persistence.revocationExpertMode = true
+        configureSut()
+
+        // When
+        let isHidden = sut.revocationInfoHidden
+
+        // Then
+        XCTAssertFalse(isHidden)
+    }
+
+    func testRevocationInfoHidden_expertMode_false() {
+        // Given
+        persistence.revocationExpertMode = false
+        configureSut()
+
+        // When
+        let isHidden = sut.revocationInfoHidden
+
+        // Then
+        XCTAssertTrue(isHidden)
     }
 }

@@ -12,23 +12,27 @@ import UIKit
 
 struct NoMaskRulesResultSceneFactory: ResolvableSceneFactory {
     private let router: NoMaskRulesResultRouterProtocol
+    private let token: ExtendedCBORWebToken
 
-    init(router: NoMaskRulesResultRouterProtocol) {
+    init(router: NoMaskRulesResultRouterProtocol, token: ExtendedCBORWebToken) {
         self.router = router
+        self.token = token
     }
 
     func make(resolvable: Resolver<Void>) -> UIViewController {
         let persistence = UserDefaultsPersistence()
-        let federalStateCode = persistence.stateSelection
         let countdownTimerModel = CountdownTimerModel(
             dismissAfterSeconds: 120,
             countdownDuration: 60
         )
+        let revocationKeyFilename = XCConfiguration.certificationRevocationEncryptionKey
         let viewModel = NoMaskRulesResultViewModel(
+            token: token,
             countdownTimerModel: countdownTimerModel,
-            federalStateCode: federalStateCode,
             resolver: resolvable,
-            router: router
+            router: router,
+            persistence: persistence,
+            revocationKeyFilename: revocationKeyFilename
         )
         let viewController = NoMaskRulesResultViewController(viewModel: viewModel)
 

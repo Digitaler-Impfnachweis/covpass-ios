@@ -22,12 +22,14 @@ final class MaskOptionalResultViewControllerSnapshotTests: BaseSnapShotTests {
             countdownDuration: 0
         )
         let token = CBORWebToken.mockVaccinationCertificate.extended()
+        var persistence = MockPersistence()
+        persistence.revocationExpertMode = true
         let viewModel = MaskOptionalResultViewModel(
             token: token,
             countdownTimerModel: countdownTimerModel,
             resolver: resolver,
             router: MaskOptionalResultRouterMock(),
-            persistence: MockPersistence(),
+            persistence: persistence,
             revocationKeyFilename: ""
         )
         sut = .init(viewModel: viewModel)
