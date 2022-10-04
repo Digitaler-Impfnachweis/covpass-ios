@@ -38,13 +38,13 @@ final class MaskOptionalResultViewModel: MaskOptionalResultViewModelProtocol {
     let countdownTimerModel: CountdownTimerModel
 
     private let token: ExtendedCBORWebToken
-    private let resolver: Resolver<Void>
+    private let resolver: Resolver<ValidatorDetailSceneResult>
     private let router: MaskOptionalResultRouterProtocol
     private let revocationKeyFilename: String
 
     init(token: ExtendedCBORWebToken,
          countdownTimerModel: CountdownTimerModel,
-         resolver: Resolver<Void>,
+         resolver: Resolver<ValidatorDetailSceneResult>,
          router: MaskOptionalResultRouterProtocol,
          persistence: Persistence,
          revocationKeyFilename: String
@@ -77,7 +77,7 @@ final class MaskOptionalResultViewModel: MaskOptionalResultViewModelProtocol {
     }
 
     func cancel() {
-        resolver.fulfill_()
+        resolver.fulfill(.close)
     }
 
     func isCancellable() -> Bool {
@@ -85,12 +85,10 @@ final class MaskOptionalResultViewModel: MaskOptionalResultViewModelProtocol {
     }
 
     func rescan() {
-        resolver.fulfill_()
-        router.rescan()
+        resolver.fulfill(.startOver)
     }
 
     func revoke(_: Any) {
-        resolver.fulfill_()
         router.revoke(token: token, revocationKeyFilename: revocationKeyFilename)
     }
 }

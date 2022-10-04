@@ -11,6 +11,8 @@ import Foundation
 import CertLogic
 
 enum ValidateCertificateUseCaseError: Error, Equatable  {
+    case differentPersonalInformation(_ token1OfPerson: ExtendedCBORWebToken, _ token2OfPerson: ExtendedCBORWebToken)
+    case secondScanSameTokenType(_ token: ExtendedCBORWebToken)
     case maskRulesNotAvailable(_ token: ExtendedCBORWebToken)
     case holderNeedsMask(_ token: ExtendedCBORWebToken)
     case invalidDueToRules(_ token: ExtendedCBORWebToken)
@@ -22,7 +24,8 @@ struct ValidateCertificateUseCase {
     let region: String?
     let revocationRepository: CertificateRevocationRepositoryProtocol
     public let holderStatus: CertificateHolderStatusModelProtocol
-    
+    let additionalToken: ExtendedCBORWebToken?
+
     func execute() -> Promise<ExtendedCBORWebToken> {
         return firstly {
             checkMaskRulesAvailable()
@@ -44,6 +47,14 @@ struct ValidateCertificateUseCase {
         }
     }
     
+    private func tokensForMaskRuleCheck() -> [ExtendedCBORWebToken] {
+        var tokens: [ExtendedCBORWebToken] = [token]
+        if let token = additionalToken {
+            tokens.append(token)
+        }
+        return tokens
+    }
+    
     private func checkMaskRulesAvailable() -> Promise<Void> {
         guard holderStatus.maskRulesAvailable(for: region) else {
             return .init(error: ValidateCertificateUseCaseError.maskRulesNotAvailable(token))
@@ -52,9 +63,19 @@ struct ValidateCertificateUseCase {
     }
     
     private func checkMaskRules() -> Promise<Void> {
-        if holderStatus.holderNeedsMask([token], region: region) {
+        if let additionalToken = additionalToken,
+           additionalToken.vaccinationCertificate.certType == token.vaccinationCertificate.certType {
+            return .init(error: ValidateCertificateUseCaseError.secondScanSameTokenType(token))
+        }
+        if let additionalToken = additionalToken,
+           additionalToken.vaccinationCertificate.hcert.dgc.nam != token.vaccinationCertificate.hcert.dgc.nam ||
+           additionalToken.vaccinationCertificate.hcert.dgc.dob != token.vaccinationCertificate.hcert.dgc.dob {
+            return .init(error: ValidateCertificateUseCaseError.differentPersonalInformation(token, additionalToken))
+        }
+        if holderStatus.holderNeedsMask(tokensForMaskRuleCheck(), region: region) {
             return .init(error: ValidateCertificateUseCaseError.holderNeedsMask(token))
         }
+
         return .value
     }
 

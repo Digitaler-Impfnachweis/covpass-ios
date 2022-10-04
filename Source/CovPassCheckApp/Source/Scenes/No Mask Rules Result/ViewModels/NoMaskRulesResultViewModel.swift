@@ -36,13 +36,13 @@ final class NoMaskRulesResultViewModel: NoMaskRulesResultViewModelProtocol {
     let countdownTimerModel: CountdownTimerModel
 
     private let token: ExtendedCBORWebToken
-    private let resolver: Resolver<Void>
+    private let resolver: Resolver<ValidatorDetailSceneResult>
     private let router: NoMaskRulesResultRouterProtocol
     private let revocationKeyFilename: String
 
     init(token: ExtendedCBORWebToken,
          countdownTimerModel: CountdownTimerModel,
-         resolver: Resolver<Void>,
+         resolver: Resolver<ValidatorDetailSceneResult>,
          router: NoMaskRulesResultRouterProtocol,
          persistence: Persistence,
          revocationKeyFilename: String
@@ -51,7 +51,7 @@ final class NoMaskRulesResultViewModel: NoMaskRulesResultViewModelProtocol {
         self.countdownTimerModel = countdownTimerModel
         self.subtitle = .init(
             format: Constants.subtitleFormat,
-            persistence.stateSelection.localized
+            ("DE_" + persistence.stateSelection).localized
         )
         self.resolver = resolver
         self.router = router
@@ -71,7 +71,7 @@ final class NoMaskRulesResultViewModel: NoMaskRulesResultViewModelProtocol {
     }
 
     func cancel() {
-        resolver.fulfill_()
+        resolver.fulfill(.close)
     }
 
     func isCancellable() -> Bool {
@@ -79,12 +79,10 @@ final class NoMaskRulesResultViewModel: NoMaskRulesResultViewModelProtocol {
     }
 
     func rescan() {
-        resolver.fulfill_()
-        router.rescan()
+        resolver.fulfill(.startOver)
     }
 
     func revoke(_: Any) {
-        resolver.fulfill_()
         router.revoke(token: token, revocationKeyFilename: revocationKeyFilename)
     }
 }

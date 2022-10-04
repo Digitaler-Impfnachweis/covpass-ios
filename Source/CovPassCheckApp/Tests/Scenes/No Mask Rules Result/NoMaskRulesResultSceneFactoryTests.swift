@@ -29,7 +29,7 @@ final class NoMaskRulesResultSceneFactoryTests: XCTestCase {
         // Given
         var persistence = UserDefaultsPersistence()
         persistence.stateSelection = "NW"
-        let (_, resolver) = Promise<Void>.pending()
+        let (_, resolver) = Promise<ValidatorDetailSceneResult>.pending()
 
         // When
         let viewController = sut.make(resolvable: resolver)

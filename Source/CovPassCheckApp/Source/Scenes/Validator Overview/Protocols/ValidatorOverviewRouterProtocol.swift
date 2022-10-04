@@ -18,9 +18,11 @@ protocol ValidatorOverviewRouterProtocol: DialogRouterProtocol, ScanAndValidateR
     func routeToRulesUpdate(userDefaults: Persistence) -> Promise<Void>
     func showNewRegulationsAnnouncement() -> Promise<Void>
     func routeToStateSelection() -> Promise<Void>
-    func showMaskRequiredBusinessRules(token: ExtendedCBORWebToken) -> Promise<Void>
-    func showMaskRequiredBusinessRulesSecondScanAllowed(token: ExtendedCBORWebToken) -> Promise<Void>
-    func showMaskRequiredTechnicalError(token: ExtendedCBORWebToken?) -> Promise<Void>
-    func showMaskOptional(token: ExtendedCBORWebToken) -> Promise<Void>
-    func showNoMaskRules(token: ExtendedCBORWebToken) -> Promise<Void>
+    func showMaskRequiredBusinessRules(token: ExtendedCBORWebToken) -> Promise<ValidatorDetailSceneResult>
+    func showMaskRequiredBusinessRulesSecondScanAllowed(token: ExtendedCBORWebToken) -> Promise<ValidatorDetailSceneResult>
+    func showMaskRequiredTechnicalError(token: ExtendedCBORWebToken?) -> Promise<ValidatorDetailSceneResult>
+    func showMaskOptional(token: ExtendedCBORWebToken) -> Promise<ValidatorDetailSceneResult>
+    func showNoMaskRules(token: ExtendedCBORWebToken) -> Promise<ValidatorDetailSceneResult>
+    func showDifferentPerson(token1OfPerson: ExtendedCBORWebToken, token2OfPerson: ExtendedCBORWebToken) -> Promise<DifferentPersonResult>
+    func showSameCertType()
 }

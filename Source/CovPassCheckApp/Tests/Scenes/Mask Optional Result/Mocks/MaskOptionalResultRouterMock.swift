@@ -10,14 +10,9 @@ import CovPassCommon
 import XCTest
 
 final class MaskOptionalResultRouterMock: MaskOptionalResultRouterProtocol {
-    let rescanExpectation = XCTestExpectation(description: "rescanExpectation")
     let revokeExpectation = XCTestExpectation(description: "revokeExpectation")
     var receivedRevocationKeyFilename: String?
 
-    func rescan() {
-        rescanExpectation.fulfill()
-    }
-    
     func revoke(token: ExtendedCBORWebToken, revocationKeyFilename: String) {
         receivedRevocationKeyFilename = revocationKeyFilename
         revokeExpectation.fulfill()

@@ -28,7 +28,7 @@ final class MaskOptionalResultSceneFactoryTests: XCTestCase {
 
     func testMake() {
         // Given
-        let (_, resolver) = Promise<Void>.pending()
+        let (_, resolver) = Promise<ValidatorDetailSceneResult>.pending()
 
         // When
         let viewController = sut.make(resolvable: resolver)

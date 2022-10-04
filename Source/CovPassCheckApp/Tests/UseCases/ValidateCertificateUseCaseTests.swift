@@ -23,7 +23,8 @@ class ValidateCertificateUseCaseTests: XCTestCase {
         sut = ValidateCertificateUseCase(token: token,
                                          region: nil,
                                          revocationRepository: revocationRepository,
-                                         holderStatus: certificateHolderStatusModel)
+                                         holderStatus: certificateHolderStatusModel,
+                                         additionalToken: nil)
     }
     
     override func tearDownWithError() throws {
@@ -186,6 +187,60 @@ class ValidateCertificateUseCaseTests: XCTestCase {
                 // THEN
 
                 XCTFail("Should not Fail")
+            }
+        wait(for: [expectation], timeout: 1.0)
+    }
+    
+    func test_checkMaskRule_withAdditional_token_of_different_person_failed() {
+        // GIVEN
+        let differentPersonToken = CBORWebToken.mockVaccinationCertificateWithOtherName.extended()
+        let sut = ValidateCertificateUseCase(token: token,
+                                             region: nil,
+                                             revocationRepository: revocationRepository,
+                                             holderStatus: certificateHolderStatusModel,
+                                             additionalToken: differentPersonToken)
+        let expectation = XCTestExpectation(description: "test should fail because holder needs mask")
+        certificateHolderStatusModel.areMaskRulesAvailable = true
+        revocationRepository.isRevoked = false
+        certificateHolderStatusModel.domesticRulesPassedResult = .passed
+        certificateHolderStatusModel.euInvalidationRulesPassedResult = .passed
+        certificateHolderStatusModel.needsMask = false
+        // WHEN
+        sut.execute()
+            .done { token in
+                XCTFail("Should not successful")
+            }
+            .catch { error in
+                // THEN
+                XCTAssertEqual(error as? ValidateCertificateUseCaseError, .differentPersonalInformation(self.token, differentPersonToken))
+                expectation.fulfill()
+            }
+        wait(for: [expectation], timeout: 1.0)
+    }
+    
+    func test_checkMaskRule_withAdditional_token_of_same_type_failed() {
+        // GIVEN
+        let differentPersonToken = CBORWebToken.mockRecoveryCertificate.extended()
+        let sut = ValidateCertificateUseCase(token: token,
+                                             region: nil,
+                                             revocationRepository: revocationRepository,
+                                             holderStatus: certificateHolderStatusModel,
+                                             additionalToken: differentPersonToken)
+        let expectation = XCTestExpectation(description: "test should fail because holder needs mask")
+        certificateHolderStatusModel.areMaskRulesAvailable = true
+        revocationRepository.isRevoked = false
+        certificateHolderStatusModel.domesticRulesPassedResult = .passed
+        certificateHolderStatusModel.euInvalidationRulesPassedResult = .passed
+        certificateHolderStatusModel.needsMask = false
+        // WHEN
+        sut.execute()
+            .done { token in
+                XCTFail("Should not successful")
+            }
+            .catch { error in
+                // THEN
+                XCTAssertEqual(error as? ValidateCertificateUseCaseError, .secondScanSameTokenType(differentPersonToken))
+                expectation.fulfill()
             }
         wait(for: [expectation], timeout: 1.0)
     }

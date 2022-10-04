@@ -8,6 +8,5 @@
 import CovPassCommon
 
 protocol NoMaskRulesResultRouterProtocol {
-    func rescan()
     func revoke(token: ExtendedCBORWebToken, revocationKeyFilename: String)
 }

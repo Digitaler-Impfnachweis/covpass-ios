@@ -20,7 +20,7 @@ final class MaskRequiredResultViewControllerSnapshotTests: BaseSnapShotTests {
     }
 
     func configureSut(secondCertificateHintHidden: Bool = true) {
-        let (_, resolver) = Promise<Void>.pending()
+        let (_, resolver) = Promise<ValidatorDetailSceneResult>.pending()
         let countdownTimerModel = CountdownTimerModel(
             dismissAfterSeconds: 100,
             countdownDuration: 0

@@ -16,7 +16,7 @@ final class MaskOptionalResultViewControllerSnapshotTests: BaseSnapShotTests {
 
     override func setUpWithError() throws {
         try super.setUpWithError()
-        let (_, resolver) = Promise<Void>.pending()
+        let (_, resolver) = Promise<ValidatorDetailSceneResult>.pending()
         let countdownTimerModel = CountdownTimerModel(
             dismissAfterSeconds: 100,
             countdownDuration: 0

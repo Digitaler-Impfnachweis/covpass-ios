@@ -22,6 +22,7 @@ struct ScanAndValidateQRCodeUseCase {
     let revocationRepository: CertificateRevocationRepositoryProtocol
     var userDefaults: Persistence
     let certLogic: DCCCertLogicProtocol
+    let additionalToken: ExtendedCBORWebToken?
     
     func execute() -> Promise<ExtendedCBORWebToken> {
         firstly {
@@ -39,7 +40,8 @@ struct ScanAndValidateQRCodeUseCase {
             return ValidateCertificateUseCase(token: token,
                                               region: self.userDefaults.stateSelection,
                                               revocationRepository: self.revocationRepository,
-                                              holderStatus: CertificateHolderStatusModel(dccCertLogic: self.certLogic)).execute()
+                                              holderStatus: CertificateHolderStatusModel(dccCertLogic: self.certLogic),
+                                              additionalToken: additionalToken).execute()
         }
     }
 }

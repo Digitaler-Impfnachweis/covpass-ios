@@ -27,10 +27,7 @@ public struct CertificateHolderStatusModel: CertificateHolderStatusModelProtocol
         guard let validationResults = try? validate(certificate: joinedTokens, type: .de) else {
             return .failedTechnical
         }
-        guard !validationResults.filterAcceptanceAndInvalidationRules.isEmpty else { return
-            .failedTechnical
-        }
-        let passed = validationResults.failedAndOpenResults.isEmpty
+        let passed = validationResults.filterAcceptanceAndInvalidationRules.failedAndOpenResults.isEmpty
         return passed ? .passed : .failedFunctional
     }
     
@@ -41,7 +38,7 @@ public struct CertificateHolderStatusModel: CertificateHolderStatusModelProtocol
         guard let validationResults = try? validate(certificate: joinedTokens, type: .euInvalidation, countryCode: joinedTokens.iss) else {
             return .failedTechnical
         }
-        let passed = validationResults.failedAndOpenResults.isEmpty
+        let passed = validationResults.filterInvalidationRules.failedAndOpenResults.isEmpty
         return passed ? .passed : .failedFunctional
     }
     

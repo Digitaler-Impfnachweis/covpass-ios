@@ -19,7 +19,7 @@ struct MaskOptionalResultSceneFactory: ResolvableSceneFactory {
         self.token = token
     }
 
-    func make(resolvable: Resolver<Void>) -> UIViewController {
+    func make(resolvable: Resolver<ValidatorDetailSceneResult>) -> UIViewController {
         let persistence = UserDefaultsPersistence()
         let countdownTimerModel = CountdownTimerModel(
             dismissAfterSeconds: 120,

@@ -11,15 +11,6 @@ import CovPassCommon
 struct MaskRequiredResultRouter: MaskRequiredResultRouterProtocol, RouterProtocol {
     let sceneCoordinator: SceneCoordinator
 
-    func rescan() {
-        #warning("TODO: Finish implementation")
-    }
-
-    func scanSecondCertificate() {
-        #warning("TODO: Finish implementation")
-        // Probably we need the first certificate here.
-    }
-    
     func revoke(token: ExtendedCBORWebToken, revocationKeyFilename: String) {
          sceneCoordinator.present(
              RevocationInfoSceneFactory(

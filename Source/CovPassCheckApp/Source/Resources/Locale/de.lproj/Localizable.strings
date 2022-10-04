@@ -390,7 +390,7 @@
 
 "error_2G_unexpected_type_title" = "Falscher Zertifikatstyp";
 
-"error_2G_unexpected_type_copy" = "Das gescannte Zertifikat entspricht nicht dem erwarteten Zertifikatstyp. Für 2G+ müssen Sie einen 2G-Nachweis (Genesenen- oder Impfzertifikat) und ein Testzertifikat scannen.";
+"error_2G_unexpected_type_copy" = "Das gescannte Zertifikat entspricht nicht dem erwarteten Zertifikatstyp. Kombinieren Sie entweder ein zweites Impfzertifikat mit einem Genesenenzertifikat oder scannen Sie ein gültiges Testzertifikat.";
 
 "error_2G_unexpected_type_button" = "OK";
 

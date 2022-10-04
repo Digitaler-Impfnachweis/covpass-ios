@@ -390,7 +390,7 @@
 
 "error_2G_unexpected_type_title" = "Wrong certificate type";
 
-"error_2G_unexpected_type_copy" = "The scanned certificate does not match the expected certificate type. For 2G+, you must scan a 2G proof (recovery or vaccination certificate) and a test certificate.";
+"error_2G_unexpected_type_copy" = "Either combine a second vaccination certificate with a recovery certificate or scan a valid test certificate.";
 
 "error_2G_unexpected_type_button" = "OK";
 

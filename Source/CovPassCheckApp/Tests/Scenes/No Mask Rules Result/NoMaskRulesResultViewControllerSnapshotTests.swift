@@ -16,14 +16,14 @@ final class NoMaskRulesResultViewControllerSnapshotTests: BaseSnapShotTests {
 
     override func setUpWithError() throws {
         try super.setUpWithError()
-        let (_, resolver) = Promise<Void>.pending()
+        let (_, resolver) = Promise<ValidatorDetailSceneResult>.pending()
         let countdownTimerModel = CountdownTimerModel(
             dismissAfterSeconds: 100,
             countdownDuration: 0
         )
         var persistence = MockPersistence()
         persistence.revocationExpertMode = true
-        persistence.stateSelection = "DE_NW"
+        persistence.stateSelection = "NW"
         let viewModel = NoMaskRulesResultViewModel(
             token: CBORWebToken.mockVaccinationCertificate.extended(),
             countdownTimerModel: countdownTimerModel,

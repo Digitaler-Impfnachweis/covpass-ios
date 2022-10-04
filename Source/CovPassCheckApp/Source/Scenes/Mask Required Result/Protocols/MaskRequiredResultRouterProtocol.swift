@@ -8,7 +8,5 @@
 import CovPassCommon
 
 protocol MaskRequiredResultRouterProtocol {
-    func rescan()
-    func scanSecondCertificate()
     func revoke(token: ExtendedCBORWebToken, revocationKeyFilename: String)
 }

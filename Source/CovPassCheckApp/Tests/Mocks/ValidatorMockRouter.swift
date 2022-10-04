@@ -12,7 +12,7 @@ import PromiseKit
 import XCTest
 
 class ValidatorMockRouter: ValidatorOverviewRouterProtocol {
-    
+
     var sceneCoordinator: SceneCoordinator = SceneCoordinatorMock()
     var showDataPrivacyExpectation = XCTestExpectation(description: "showDataPrivacyExpectation")
     var showGproofExpectation = XCTestExpectation(description: "showGproofExpectation")
@@ -24,7 +24,10 @@ class ValidatorMockRouter: ValidatorOverviewRouterProtocol {
     var showMaskRequiredTechnicalErrorExpectation = XCTestExpectation(description: "showMaskRequiredTechnicalError")
     var showMaskOptionalExpectation = XCTestExpectation(description: "showMaskOptional")
     var showNoMaskRulesExpectation = XCTestExpectation(description: "showNoMaskRulesE")
-
+    var showDifferentPersonExpectation = XCTestExpectation(description: "showDifferentPersonExpectation")
+    var showSameCertTypeExpectation = XCTestExpectation(description: "showSameCertTypeExpectation")
+    var showDifferentPersonResult = DifferentPersonResult.startover
+    
     func showAppInformation(userDefaults: Persistence) {
         
     }
@@ -61,28 +64,37 @@ class ValidatorMockRouter: ValidatorOverviewRouterProtocol {
         return .value
     }
     
-    func showMaskRequiredBusinessRules(token: ExtendedCBORWebToken) -> Promise<Void> {
+    func showMaskRequiredBusinessRules(token: ExtendedCBORWebToken) -> Promise<ValidatorDetailSceneResult> {
         showMaskRequiredBusinessRulesExpectation.fulfill()
-        return .value
+        return .value(.close)
     }
     
-    func showMaskRequiredBusinessRulesSecondScanAllowed(token: ExtendedCBORWebToken) -> Promise<Void> {
+    func showMaskRequiredBusinessRulesSecondScanAllowed(token: ExtendedCBORWebToken) -> Promise<ValidatorDetailSceneResult> {
         showMaskRequiredBusinessRulesSecondScanAllowedExpectation.fulfill()
-        return .value
+        return .value(.close)
     }
     
-    func showMaskRequiredTechnicalError(token: ExtendedCBORWebToken?) -> Promise<Void> {
+    func showMaskRequiredTechnicalError(token: ExtendedCBORWebToken?) -> Promise<ValidatorDetailSceneResult> {
         showMaskRequiredTechnicalErrorExpectation.fulfill()
-        return .value
+        return .value(.close)
     }
     
-    func showMaskOptional(token: ExtendedCBORWebToken) -> Promise<Void> {
+    func showMaskOptional(token: ExtendedCBORWebToken) -> Promise<ValidatorDetailSceneResult> {
         showMaskOptionalExpectation.fulfill()
-        return .value
+        return .value(.close)
     }
     
-    func showNoMaskRules(token: ExtendedCBORWebToken) -> Promise<Void> {
+    func showNoMaskRules(token: ExtendedCBORWebToken) -> Promise<ValidatorDetailSceneResult> {
         showNoMaskRulesExpectation.fulfill()
-        return .value
+        return .value(.close)
+    }
+    
+    func showDifferentPerson(token1OfPerson: CovPassCommon.ExtendedCBORWebToken, token2OfPerson: CovPassCommon.ExtendedCBORWebToken) -> Promise<DifferentPersonResult> {
+        showDifferentPersonExpectation.fulfill()
+        return .value(showDifferentPersonResult)
+    }
+    
+    func showSameCertType() {
+        showSameCertTypeExpectation.fulfill()
     }
 }

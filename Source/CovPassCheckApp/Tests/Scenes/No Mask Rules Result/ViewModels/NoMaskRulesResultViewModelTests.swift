@@ -15,20 +15,20 @@ final class NoMaskRulesResultViewModelTests: XCTestCase {
     var countdownTimerModel: CountdownTimerModel!
     var delegate: ViewModelDelegateMock!
     var persistence: MockPersistence!
-    var promise: Promise<Void>!
-    var resolver: Resolver<Void>!
+    var promise: Promise<ValidatorDetailSceneResult>!
+    var resolver: Resolver<ValidatorDetailSceneResult>!
     var router: NoMaskRulesResultRouterMock!
     var sut: NoMaskRulesResultViewModel!
 
     override func setUpWithError() throws {
-        let (promise, resolver) = Promise<Void>.pending()
+        let (promise, resolver) = Promise<ValidatorDetailSceneResult>.pending()
         countdownTimerModel = .init(dismissAfterSeconds: 100, countdownDuration: 0)
         self.promise = promise
         self.resolver = resolver
         persistence = .init()
         router = .init()
         delegate = .init()
-        persistence.stateSelection = "DE_NW"
+        persistence.stateSelection = "NW"
         configureSut()
     }
 
@@ -57,7 +57,7 @@ final class NoMaskRulesResultViewModelTests: XCTestCase {
     func testCancel() {
         // Given
         let expectation = XCTestExpectation()
-        promise.done { expectation.fulfill() }.cauterize()
+        promise.done { result in expectation.fulfill() }.cauterize()
 
         // When
         sut.cancel()
@@ -69,13 +69,15 @@ final class NoMaskRulesResultViewModelTests: XCTestCase {
     func testRescan() {
         // Given
         let expectation = XCTestExpectation()
-        promise.done { expectation.fulfill() }.cauterize()
+        promise.done { result in
+            expectation.fulfill()
+        }.cauterize()
 
         // When
         sut.rescan()
 
         // Then
-        wait(for: [expectation, router.rescanExpectation], timeout: 1)
+        wait(for: [expectation], timeout: 1)
     }
 
     func testCountdownTimerModel() {
@@ -84,7 +86,7 @@ final class NoMaskRulesResultViewModelTests: XCTestCase {
         let doneExpectation = XCTestExpectation(description: "doneExpectation")
         countdownTimerModel = .init(dismissAfterSeconds: 1.5, countdownDuration: 1)
         delegate.didUpdate = { didUpdateExpectation.fulfill() }
-        promise.done { doneExpectation.fulfill() }.cauterize()
+        promise.done { result in doneExpectation.fulfill() }.cauterize()
 
         // When
         configureSut()

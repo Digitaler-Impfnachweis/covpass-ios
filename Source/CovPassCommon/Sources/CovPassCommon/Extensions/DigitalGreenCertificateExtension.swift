@@ -68,12 +68,9 @@ public extension DigitalGreenCertificate {
  }
 
 public extension Array where Element == DigitalGreenCertificate {
-    /// Combine multiple certifcates into one, when all have matching names and date of birth.
+    /// Combine multiple certifcates into one
     func joinCertificates() -> Element? {
-        let certificatesWithoutFirst = Array(dropFirst())
-        guard var baseCertificate = first,
-              certificatesWithoutFirst.allSatisfy({ $0 == baseCertificate })
-        else {
+        guard var baseCertificate = first else {
             return nil
         }
         let vaccinations = compactMap { $0.v }.flatMap { $0 }

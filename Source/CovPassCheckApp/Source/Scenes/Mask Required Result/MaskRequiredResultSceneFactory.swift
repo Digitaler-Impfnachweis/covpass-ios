@@ -26,7 +26,7 @@ struct MaskRequiredResultSceneFactory: ResolvableSceneFactory {
         self.token = token
     }
 
-    func make(resolvable: Resolver<Void>) -> UIViewController {
+    func make(resolvable: Resolver<ValidatorDetailSceneResult>) -> UIViewController {
         let persistence = UserDefaultsPersistence()
         let reasonType: MaskRequiredReasonType = reasonType
         let secondCertificateHintHidden = secondCertificateHintHidden

@@ -14,13 +14,13 @@ import XCTest
 final class MaskRequiredResultViewModelTests: XCTestCase {
     var countdownTimerModel: CountdownTimerModel!
     var delegate: ViewModelDelegateMock!
-    var promise: Promise<Void>!
-    var resolver: Resolver<Void>!
+    var promise: Promise<ValidatorDetailSceneResult>!
+    var resolver: Resolver<ValidatorDetailSceneResult>!
     var router: MaskRequiredResultRouterMock!
     var sut: MaskRequiredResultViewModel!
 
     override func setUpWithError() throws {
-        let (promise, resolver) = Promise<Void>.pending()
+        let (promise, resolver) = Promise<ValidatorDetailSceneResult>.pending()
         countdownTimerModel = .init(dismissAfterSeconds: 100, countdownDuration: 0)
         self.promise = promise
         self.resolver = resolver
@@ -61,7 +61,7 @@ final class MaskRequiredResultViewModelTests: XCTestCase {
     func testCancel() {
         // Given
         let expectation = XCTestExpectation()
-        promise.done { expectation.fulfill() }.cauterize()
+        promise.done { result in expectation.fulfill() }.cauterize()
 
         // When
         sut.cancel()
@@ -73,13 +73,15 @@ final class MaskRequiredResultViewModelTests: XCTestCase {
     func testRescan() {
         // Given
         let expectation = XCTestExpectation()
-        promise.done { expectation.fulfill() }.cauterize()
+        promise.done { result
+            in expectation.fulfill()
+        }.cauterize()
 
         // When
         sut.rescan()
 
         // Then
-        wait(for: [expectation, router.rescanExpectation], timeout: 1)
+        wait(for: [expectation], timeout: 1)
     }
 
     func testCountdownTimerModel() {
@@ -88,7 +90,7 @@ final class MaskRequiredResultViewModelTests: XCTestCase {
         let doneExpectation = XCTestExpectation(description: "doneExpectation")
         countdownTimerModel = .init(dismissAfterSeconds: 1.5, countdownDuration: 1)
         delegate.didUpdate = { didUpdateExpectation.fulfill() }
-        promise.done { doneExpectation.fulfill() }.cauterize()
+        promise.done { result in doneExpectation.fulfill() }.cauterize()
 
         // When
         configureSut()
@@ -165,12 +167,14 @@ final class MaskRequiredResultViewModelTests: XCTestCase {
     func testScanSecondCertificate() {
         // Given
         let expectation = XCTestExpectation()
-        promise.done { expectation.fulfill() }.cauterize()
+        promise.done { result in
+            expectation.fulfill()
+        }.cauterize()
 
         // When
         sut.scanSecondCertificate()
 
         // Then
-        wait(for: [expectation, router.scanSecondCertificateExpectation], timeout: 1)
+        wait(for: [expectation], timeout: 1)
     }
 }

@@ -11,10 +11,6 @@ import CovPassUI
 struct MaskOptionalResultRouter: MaskOptionalResultRouterProtocol, RouterProtocol {
     let sceneCoordinator: SceneCoordinator
 
-    func rescan() {
-        #warning("TODO: Finish implementation")
-    }
-
     func revoke(token: ExtendedCBORWebToken, revocationKeyFilename: String) {
         sceneCoordinator.present(
             RevocationInfoSceneFactory(

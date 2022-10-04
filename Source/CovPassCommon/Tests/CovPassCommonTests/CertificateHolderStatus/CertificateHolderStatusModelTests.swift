@@ -66,7 +66,7 @@ class CertificateHolderStatusModelTests: XCTestCase {
         // WHEN
         let result = sut.checkDomesticAcceptanceAndInvalidationRules([token])
         // THEN
-        XCTAssertEqual(result, .failedTechnical)
+        XCTAssertEqual(result, .passed)
     }
     
     func test_checkDomesticAcceptanceAndInvalidationRules_with_ruleWhichHasTypeMaskWhichIsPassed() {
@@ -76,7 +76,7 @@ class CertificateHolderStatusModelTests: XCTestCase {
         // WHEN
         let result = sut.checkDomesticAcceptanceAndInvalidationRules([token])
         // THEN
-        XCTAssertEqual(result, .failedTechnical)
+        XCTAssertEqual(result, .passed)
     }
     
     func test_checkDomesticAcceptanceAndInvalidationRules_with_ruleWhichHasTypeOfAcceptanceWhichIsFailed() {
@@ -144,7 +144,7 @@ class CertificateHolderStatusModelTests: XCTestCase {
         // WHEN
         let result = sut.checkEuInvalidationRules([token])
         // THEN
-        XCTAssertEqual(result, .failedFunctional)
+        XCTAssertEqual(result, .passed)
     }
     
     func test_checkEuInvalidationRules_with_ruleWhichHasTypeMaskWhichIsPassed() {

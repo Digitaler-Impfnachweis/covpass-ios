@@ -90,7 +90,9 @@ class ValidatorOverviewViewController: UIViewController {
         setupTimeHintView()
         
         scanCard.actionButton.title = viewModel.scanActionTitle
-        scanCard.actionButton.action = viewModel.scanAction
+        scanCard.actionButton.action = {
+            self.viewModel.scanAction(additionalToken: nil)
+        }
         scanCard.titleLabel.attributedText = viewModel.scanDropDownTitle
             .styledAs(.subheader_3)
             .colored(.neutralWhite)

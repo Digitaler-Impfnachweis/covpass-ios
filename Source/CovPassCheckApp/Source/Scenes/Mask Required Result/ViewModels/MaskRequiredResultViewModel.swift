@@ -9,6 +9,7 @@ import CovPassCommon
 import CovPassUI
 import PromiseKit
 import UIKit
+import CovPassCommon
 
 private enum Constants {
     static let title = "infschg_result_mask_mandatory_title".localized
@@ -38,7 +39,7 @@ final class MaskRequiredResultViewModel: MaskRequiredResultViewModelProtocol {
         MaskRequiredSecondCertificateReasonViewModel()
     }()
 
-    private let resolver: Resolver<Void>
+    private let resolver: Resolver<ValidatorDetailSceneResult>
     private let router: MaskRequiredResultRouterProtocol
     private let persistence: Persistence
     private let revocationKeyFilename: String
@@ -46,7 +47,7 @@ final class MaskRequiredResultViewModel: MaskRequiredResultViewModelProtocol {
 
     init(token: ExtendedCBORWebToken?,
          countdownTimerModel: CountdownTimerModel,
-         resolver: Resolver<Void>,
+         resolver: Resolver<ValidatorDetailSceneResult>,
          router: MaskRequiredResultRouterProtocol,
          reasonType: MaskRequiredReasonType,
          secondCertificateHintHidden: Bool,
@@ -96,7 +97,7 @@ final class MaskRequiredResultViewModel: MaskRequiredResultViewModelProtocol {
     }
 
     func cancel() {
-        resolver.fulfill_()
+        resolver.fulfill(.close)
     }
 
     func isCancellable() -> Bool {
@@ -104,18 +105,16 @@ final class MaskRequiredResultViewModel: MaskRequiredResultViewModelProtocol {
     }
 
     func rescan() {
-        resolver.fulfill_()
-        router.rescan()
+        resolver.fulfill(.startOver)
     }
 
     func scanSecondCertificate() {
-        resolver.fulfill_()
-        router.scanSecondCertificate()
+        guard let token = token else { return }
+        resolver.fulfill(.secondScan(token))
     }
     
     func revoke(_: Any) {
-         resolver.fulfill_()
         guard let token = token else { return }
-         router.revoke(token: token, revocationKeyFilename: revocationKeyFilename)
+        router.revoke(token: token, revocationKeyFilename: revocationKeyFilename)
      }
 }

@@ -145,7 +145,7 @@ class DigitalGreenCertificateExtensionTests: XCTestCase {
         let dgc = sut.joinCertificates()
 
         // Then
-        XCTAssertNil(dgc)
+        XCTAssertNotNil(dgc)
     }
 
     func testJoinCertificates_multiple_certifcates() {

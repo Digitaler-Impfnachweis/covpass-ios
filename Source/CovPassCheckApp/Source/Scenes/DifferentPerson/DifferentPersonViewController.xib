@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GProofDifferentPersonViewController" customModule="CovPassCheckApp" customModuleProvider="target">
+            <connections>
+                <outlet property="counterLabel" destination="4bP-hc-Re0" id="MaM-jR-Yq3"/>
+                <outlet property="firstResultCard" destination="54t-Rn-hAg" id="d3r-vt-mLb"/>
+                <outlet property="firstResultHeadlineLabel" destination="Bg1-cI-nHB" id="7i4-f1-JcF"/>
+                <outlet property="footerHeadline" destination="qTo-Nw-26Q" id="dhw-2u-efZ"/>
+                <outlet property="footerLink" destination="WnI-om-6IF" id="8n9-ez-MXc"/>
+                <outlet property="footerStack" destination="Pze-tc-qnF" id="Q3Y-w9-bdg"/>
+                <outlet property="footerText" destination="bBG-PZ-D9T" id="qnC-T5-KOL"/>
+                <outlet property="headline" destination="rPT-fc-LXq" id="nfZ-U2-3Yh"/>
+                <outlet property="secondResultCard" destination="Sxb-44-nxk" id="j9e-Kb-fPh"/>
+                <outlet property="secondResultHeadlineLabel" destination="twY-Xp-giH" id="Z9M-Qi-ieH"/>
+                <outlet property="startOverButton" destination="zKZ-k3-xca" id="5RD-Jq-LiN"/>
+                <outlet property="subtitleLabel" destination="4lc-e8-VRv" id="0QN-Pm-aGE"/>
+                <outlet property="view" destination="tsk-8d-S15" id="PvJ-We-xGu"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="tsk-8d-S15">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PXD-qd-waD">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" verticalCompressionResistancePriority="751" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="60" translatesAutoresizingMaskIntoConstraints="NO" id="rPT-fc-LXq" customClass="InfoHeaderView" customModule="CovPassUI">
+                            <rect key="frame" x="0.0" y="24" width="414" height="60"/>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YZD-w6-Gf1" userLabel="Body View">
+                            <rect key="frame" x="24" y="84" width="366" height="752.5"/>
+                            <subviews>
+                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="548-bM-NWY">
+                                    <rect key="frame" x="0.0" y="0.0" width="366" height="752.5"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4lc-e8-VRv" userLabel="Subtitle">
+                                            <rect key="frame" x="0.0" y="0.0" width="366" height="20.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="110" placeholderIntrinsicHeight="200" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="iop-wP-EcF" userLabel="First Person Stack">
+                                            <rect key="frame" x="0.0" y="44.5" width="366" height="200"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="249" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bg1-cI-nHB" userLabel="First Person Headline">
+                                                    <rect key="frame" x="0.0" y="0.0" width="366" height="86"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="110" translatesAutoresizingMaskIntoConstraints="NO" id="54t-Rn-hAg" userLabel="First Person Detail" customClass="CertResultCard" customModule="CovPassUI">
+                                                    <rect key="frame" x="0.0" y="90" width="366" height="110"/>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                </view>
+                                            </subviews>
+                                        </stackView>
+                                        <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="110" placeholderIntrinsicHeight="200" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="AtC-d2-xnR" userLabel="Secon Person Stack">
+                                            <rect key="frame" x="0.0" y="268.5" width="366" height="200"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="249" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="twY-Xp-giH" userLabel="Second Person Headline">
+                                                    <rect key="frame" x="0.0" y="0.0" width="366" height="90"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="106" translatesAutoresizingMaskIntoConstraints="NO" id="Sxb-44-nxk" userLabel="Secon Person Detail" customClass="CertResultCard" customModule="CovPassUI">
+                                                    <rect key="frame" x="0.0" y="94" width="366" height="106"/>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                </view>
+                                            </subviews>
+                                        </stackView>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="Pze-tc-qnF" userLabel="Footer Stack">
+                                            <rect key="frame" x="0.0" y="492.5" width="366" height="63.5"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qTo-Nw-26Q" userLabel="Footer Headline">
+                                                    <rect key="frame" x="0.0" y="0.0" width="41.5" height="20.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bBG-PZ-D9T" userLabel="Footer Text">
+                                                    <rect key="frame" x="0.0" y="20.5" width="41.5" height="20.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fWo-T7-2Pm">
+                                                    <rect key="frame" x="0.0" y="41" width="240" height="2"/>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="2" id="ue0-0p-mbk"/>
+                                                    </constraints>
+                                                </view>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WnI-om-6IF" userLabel="Footer Link">
+                                                    <rect key="frame" x="0.0" y="43" width="41.5" height="20.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <gestureRecognizers/>
+                                            <connections>
+                                                <outletCollection property="gestureRecognizers" destination="kNv-a0-0xg" appends="YES" id="IVs-D3-oI9"/>
+                                            </connections>
+                                        </stackView>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="wVO-nl-3RC" userLabel="Button Stack">
+                                            <rect key="frame" x="0.0" y="580" width="366" height="128"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="zKZ-k3-xca" userLabel="StartOver Button" customClass="MainButton" customModule="CovPassUI">
+                                                    <rect key="frame" x="0.0" y="0.0" width="366" height="128"/>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                </view>
+                                            </subviews>
+                                        </stackView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Diese Ansicht schliesst sich in 59 Sekunden." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4bP-hc-Re0">
+                                            <rect key="frame" x="0.0" y="732" width="366" height="20.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </stackView>
+                            </subviews>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <constraints>
+                                <constraint firstAttribute="bottom" secondItem="548-bM-NWY" secondAttribute="bottom" id="CbY-C0-5MX"/>
+                                <constraint firstAttribute="trailing" secondItem="548-bM-NWY" secondAttribute="trailing" id="UdB-hb-Saa"/>
+                                <constraint firstItem="548-bM-NWY" firstAttribute="top" secondItem="YZD-w6-Gf1" secondAttribute="top" id="YaM-18-ybj"/>
+                                <constraint firstItem="548-bM-NWY" firstAttribute="leading" secondItem="YZD-w6-Gf1" secondAttribute="leading" id="u03-Nw-KK0"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <viewLayoutGuide key="safeArea" id="Zgl-nf-vaQ"/>
+                    <constraints>
+                        <constraint firstItem="YZD-w6-Gf1" firstAttribute="leading" secondItem="PXD-qd-waD" secondAttribute="leading" constant="24" id="Jjp-32-fIX"/>
+                        <constraint firstAttribute="trailing" secondItem="YZD-w6-Gf1" secondAttribute="trailing" constant="24" id="Jor-at-NgJ"/>
+                        <constraint firstItem="YZD-w6-Gf1" firstAttribute="top" secondItem="rPT-fc-LXq" secondAttribute="bottom" id="MJd-J1-3dg"/>
+                        <constraint firstItem="rPT-fc-LXq" firstAttribute="top" secondItem="PXD-qd-waD" secondAttribute="top" constant="24" id="Rqw-sf-Qvd"/>
+                        <constraint firstAttribute="trailing" secondItem="rPT-fc-LXq" secondAttribute="trailing" id="jcm-iY-8Zn"/>
+                        <constraint firstItem="rPT-fc-LXq" firstAttribute="leading" secondItem="PXD-qd-waD" secondAttribute="leading" id="qe4-vr-lJE"/>
+                        <constraint firstAttribute="bottom" secondItem="YZD-w6-Gf1" secondAttribute="bottom" constant="322.5" id="tyJ-5M-U4r"/>
+                        <constraint firstItem="YZD-w6-Gf1" firstAttribute="width" secondItem="PXD-qd-waD" secondAttribute="width" constant="-48" id="vUC-41-hV2"/>
+                    </constraints>
+                </scrollView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="cfX-N3-2mH"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="PXD-qd-waD" firstAttribute="top" secondItem="tsk-8d-S15" secondAttribute="top" id="24a-ct-Lb6"/>
+                <constraint firstAttribute="trailing" secondItem="PXD-qd-waD" secondAttribute="trailing" id="PeB-q9-NA4"/>
+                <constraint firstItem="PXD-qd-waD" firstAttribute="width" secondItem="tsk-8d-S15" secondAttribute="width" id="dY2-yG-ELF"/>
+                <constraint firstItem="PXD-qd-waD" firstAttribute="leading" secondItem="tsk-8d-S15" secondAttribute="leading" id="okG-Lv-9Wr"/>
+                <constraint firstAttribute="bottom" secondItem="PXD-qd-waD" secondAttribute="bottom" constant="34" id="tl9-j6-Kvd"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="142.02898550724638" y="-11.383928571428571"/>
+        </view>
+        <tapGestureRecognizer id="kNv-a0-0xg">
+            <connections>
+                <action selector="footerLinkTapped:" destination="-1" id="USO-4Q-94Z"/>
+                <outlet property="delegate" destination="WnI-om-6IF" id="Cnb-bO-Kyb"/>
+            </connections>
+        </tapGestureRecognizer>
+    </objects>
+    <designables>
+        <designable name="54t-Rn-hAg">
+            <size key="intrinsicContentSize" width="414" height="110"/>
+        </designable>
+        <designable name="Sxb-44-nxk">
+            <size key="intrinsicContentSize" width="414" height="106"/>
+        </designable>
+        <designable name="rPT-fc-LXq">
+            <size key="intrinsicContentSize" width="414" height="60"/>
+        </designable>
+        <designable name="zKZ-k3-xca">
+            <size key="intrinsicContentSize" width="414" height="128"/>
+        </designable>
+    </designables>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

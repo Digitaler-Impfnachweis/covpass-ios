@@ -289,7 +289,7 @@ class ValidatorOverviewViewModelTests: XCTestCase {
 
         // Then
         wait(for: [
-            router.showMaskRequiredTechnicalErrorExpectation
+            router.showMaskRequiredBusinessRulesSecondScanAllowedExpectation
         ], timeout: 1)
     }
     
@@ -321,6 +321,20 @@ class ValidatorOverviewViewModelTests: XCTestCase {
         ], timeout: 1)
     }
     
+    func test_scanAction_showMaskRequiredBusinessRules_testCertificate() {
+        // GIVEN
+        let rule = Rule(identifier: "", type: "Invalidation", version: "", schemaVersion: "", engine: "", engineVersion: "", certificateType: "", description: [], validFrom: "", validTo: "", affectedString: [], logic: JSON(), countryCode: "", region: "")
+        certLogic.validateResult = [.init(rule: rule, result: .passed)]
+        repository.checkedCert = CBORWebToken.mockTestCertificate
+        // When
+        sut.scanAction()
+
+        // Then
+        wait(for: [
+            router.showMaskRequiredBusinessRulesExpectation
+        ], timeout: 1)
+    }
+    
     func test_scanAction_showNoMaskRules() {
         // GIVEN
         certLogic.areRulesAvailable = false
@@ -345,6 +359,34 @@ class ValidatorOverviewViewModelTests: XCTestCase {
         wait(for: [
             router.showMaskRequiredTechnicalErrorExpectation
         ], timeout: 1)
+    }
+    
+    func test_scanAction_secondScan_differentPerson() {
+        // GIVEN
+        let rule = Rule(identifier: "", type: "Invalidation", version: "", schemaVersion: "", engine: "", engineVersion: "", certificateType: "", description: [], validFrom: "", validTo: "", affectedString: [], logic: JSON(), countryCode: "", region: "")
+        let rule2 = Rule(identifier: "", type: "Mask", version: "", schemaVersion: "", engine: "", engineVersion: "", certificateType: "", description: [], validFrom: "", validTo: "", affectedString: [], logic: JSON(), countryCode: "", region: "")
+        certLogic.validateResult = [.init(rule: rule, result: .passed),
+                                    .init(rule: rule2, result: .fail)]
+        repository.checkedCert = CBORWebToken.mockVaccinationCertificateWithOtherName
+        // When
+        sut.scanAction(additionalToken: CBORWebToken.mockRecoveryCertificate.extended())
+
+        // Then
+        wait(for: [
+            router.showDifferentPersonExpectation
+        ], timeout: 102)
+    }
+    
+    func test_scanAction_secondScan_sameCertType() {
+        // GIVEN
+        repository.checkedCert = CBORWebToken.mockVaccinationCertificateWithOtherName
+        // When
+        sut.scanAction(additionalToken: CBORWebToken.mockVaccinationCertificate.extended())
+
+        // Then
+        wait(for: [
+            router.showSameCertTypeExpectation
+        ], timeout: 102)
     }
     
     func test_scanAction_showMaskOptional() {
