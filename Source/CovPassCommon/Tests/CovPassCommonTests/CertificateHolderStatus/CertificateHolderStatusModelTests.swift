@@ -144,7 +144,7 @@ class CertificateHolderStatusModelTests: XCTestCase {
         // WHEN
         let result = sut.checkEuInvalidationRules([token])
         // THEN
-        XCTAssertEqual(result, .failedTechnical)
+        XCTAssertEqual(result, .failedFunctional)
     }
     
     func test_checkEuInvalidationRules_with_ruleWhichHasTypeMaskWhichIsPassed() {
@@ -154,7 +154,7 @@ class CertificateHolderStatusModelTests: XCTestCase {
         // WHEN
         let result = sut.checkEuInvalidationRules([token])
         // THEN
-        XCTAssertEqual(result, .failedTechnical)
+        XCTAssertEqual(result, .passed)
     }
     
     func test_checkEuInvalidationRules_with_ruleWhichHasTypeOfInvalidationWhichIsFailed() {

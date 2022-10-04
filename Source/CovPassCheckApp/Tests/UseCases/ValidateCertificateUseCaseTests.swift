@@ -44,7 +44,7 @@ class ValidateCertificateUseCaseTests: XCTestCase {
             }
             .catch { error in
                 // THEN
-                XCTAssertEqual(error as? ValidateCertificateUseCaseError, .maskRulesNotAvailable)
+                XCTAssertEqual(error as? ValidateCertificateUseCaseError, .maskRulesNotAvailable(self.token))
                 expectation.fulfill()
             }
         wait(for: [expectation], timeout: 1.0)
@@ -81,7 +81,7 @@ class ValidateCertificateUseCaseTests: XCTestCase {
             }
             .catch { error in
                 // THEN
-                XCTAssertEqual(error as? ValidateCertificateUseCaseError, .invalidDueToRules)
+                XCTAssertEqual(error as? ValidateCertificateUseCaseError, .invalidDueToRules(self.token))
                 expectation.fulfill()
             }
         wait(for: [expectation], timeout: 1.0)
@@ -100,7 +100,7 @@ class ValidateCertificateUseCaseTests: XCTestCase {
             }
             .catch { error in
                 // THEN
-                XCTAssertEqual(error as? ValidateCertificateUseCaseError, .invalidDueToTechnicalReason)
+                XCTAssertEqual(error as? ValidateCertificateUseCaseError, .invalidDueToTechnicalReason(self.token))
                 expectation.fulfill()
             }
         wait(for: [expectation], timeout: 1.0)
@@ -120,7 +120,7 @@ class ValidateCertificateUseCaseTests: XCTestCase {
             }
             .catch { error in
                 // THEN
-                XCTAssertEqual(error as? ValidateCertificateUseCaseError, .invalidDueToRules)
+                XCTAssertEqual(error as? ValidateCertificateUseCaseError, .invalidDueToRules(self.token))
                 expectation.fulfill()
             }
         wait(for: [expectation], timeout: 1.0)
@@ -140,7 +140,7 @@ class ValidateCertificateUseCaseTests: XCTestCase {
             }
             .catch { error in
                 // THEN
-                XCTAssertEqual(error as? ValidateCertificateUseCaseError, .invalidDueToTechnicalReason)
+                XCTAssertEqual(error as? ValidateCertificateUseCaseError, .invalidDueToTechnicalReason(self.token))
                 expectation.fulfill()
             }
         wait(for: [expectation], timeout: 1.0)

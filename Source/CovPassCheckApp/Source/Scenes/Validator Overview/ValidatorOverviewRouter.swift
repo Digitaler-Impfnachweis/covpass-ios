@@ -71,11 +71,12 @@ class ValidatorOverviewRouter: ValidatorOverviewRouterProtocol {
                                  animated: true)
     }
     
-    func showMaskRequiredBusinessRules() -> Promise<Void> {
+    func showMaskRequiredBusinessRules(token: ExtendedCBORWebToken) -> Promise<Void> {
         let router = MaskRequiredResultRouter(sceneCoordinator: sceneCoordinator)
         return sceneCoordinator.present(MaskRequiredResultSceneFactory(router: router,
                                                                        reasonType: .functional,
-                                                                       secondCertificateHintHidden: false),
+                                                                       secondCertificateHintHidden: false,
+                                                                       token: token),
                                         animated: true)
     }
     
@@ -83,15 +84,17 @@ class ValidatorOverviewRouter: ValidatorOverviewRouterProtocol {
         let router = MaskRequiredResultRouter(sceneCoordinator: sceneCoordinator)
         return sceneCoordinator.present(MaskRequiredResultSceneFactory(router: router,
                                                                        reasonType: .functional,
-                                                                       secondCertificateHintHidden: false),
+                                                                       secondCertificateHintHidden: false,
+                                                                       token: token),
                                         animated: true)
     }
     
-    func showMaskRequiredTechnicalError() -> Promise<Void> {
+    func showMaskRequiredTechnicalError(token: ExtendedCBORWebToken?) -> Promise<Void> {
         let router = MaskRequiredResultRouter(sceneCoordinator: sceneCoordinator)
         return sceneCoordinator.present(MaskRequiredResultSceneFactory(router: router,
                                                                        reasonType: .technical,
-                                                                       secondCertificateHintHidden: true),
+                                                                       secondCertificateHintHidden: true,
+                                                                       token: token),
                                         animated: true)
     }
     
@@ -102,13 +105,10 @@ class ValidatorOverviewRouter: ValidatorOverviewRouterProtocol {
                                         animated: true)
     }
     
-    func showNoMaskRules() -> Promise<Void> {
-//        let router = NoMaskRulesResultRouter(sceneCoordinator: sceneCoordinator)
-//        return sceneCoordinator.present(NoMaskRulesResultSceneFactory(
-//            router: router,
-//            token:
-//        ), animated: true)
-#warning("TODO: Add token")
-        return .init(error: NSError(domain: "TODO", code: 0))
+    func showNoMaskRules(token: ExtendedCBORWebToken) -> Promise<Void> {
+        let router = NoMaskRulesResultRouter(sceneCoordinator: sceneCoordinator)
+        return sceneCoordinator.present(NoMaskRulesResultSceneFactory(router: router,
+                                                                      token: token),
+                                        animated: true)
     }
 }

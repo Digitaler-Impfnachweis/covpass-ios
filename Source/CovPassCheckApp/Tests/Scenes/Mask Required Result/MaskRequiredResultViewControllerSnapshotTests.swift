@@ -9,6 +9,7 @@
 import CovPassUI
 import PromiseKit
 import XCTest
+import CovPassCommon
 
 final class MaskRequiredResultViewControllerSnapshotTests: BaseSnapShotTests {
     private var sut: MaskRequiredResultViewController!
@@ -24,13 +25,18 @@ final class MaskRequiredResultViewControllerSnapshotTests: BaseSnapShotTests {
             dismissAfterSeconds: 100,
             countdownDuration: 0
         )
+        var persistence = MockPersistence()
+        persistence.revocationExpertMode = true
+        persistence.stateSelection = "NW"
         let viewModel = MaskRequiredResultViewModel(
+            token: CBORWebToken.mockVaccinationCertificate.extended(),
             countdownTimerModel: countdownTimerModel,
-            federalStateCode: "Northrhine-Westphalia",
             resolver: resolver,
             router: MaskRequiredResultRouterMock(),
             reasonType: .functional,
-            secondCertificateHintHidden: secondCertificateHintHidden
+            secondCertificateHintHidden: secondCertificateHintHidden,
+            persistence: persistence,
+            revocationKeyFilename: ""
         )
         sut = .init(viewModel: viewModel)
     }
@@ -41,7 +47,7 @@ final class MaskRequiredResultViewControllerSnapshotTests: BaseSnapShotTests {
     }
 
     func testDefault() throws {
-        verifyView(view: sut.view, height: 1000)
+        verifyView(view: sut.view, height: 1100)
     }
 
     func test_hint_not_hidden() {
@@ -49,6 +55,6 @@ final class MaskRequiredResultViewControllerSnapshotTests: BaseSnapShotTests {
         configureSut(secondCertificateHintHidden: false)
 
         // When & Then
-        verifyView(view: sut.view, height: 1100)
+        verifyView(view: sut.view, height: 1350)
     }
 }

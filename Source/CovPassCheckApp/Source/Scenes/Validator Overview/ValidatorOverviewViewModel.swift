@@ -191,20 +191,20 @@ class ValidatorOverviewViewModel {
     }
     
     func errorHandling(error: Error, token: ExtendedCBORWebToken?) -> Promise<Void> {
-        if case CertificateError.revoked(_) = error {
-            return router.showMaskRequiredTechnicalError()
+        if case let CertificateError.revoked(token) = error {
+            return router.showMaskRequiredTechnicalError(token: token)
         }
         switch error as? ValidateCertificateUseCaseError {
-        case .maskRulesNotAvailable:
-            return router.showNoMaskRules()
+        case let .maskRulesNotAvailable(token):
+            return router.showNoMaskRules(token: token)
         case let .holderNeedsMask(token):
             return router.showMaskRequiredBusinessRulesSecondScanAllowed(token: token)
-        case .invalidDueToRules:
-            return router.showMaskRequiredBusinessRules()
-        case .invalidDueToTechnicalReason:
-            return router.showMaskRequiredTechnicalError()
+        case let .invalidDueToRules(token):
+            return router.showMaskRequiredBusinessRules(token: token)
+        case let .invalidDueToTechnicalReason(token):
+            return router.showMaskRequiredTechnicalError(token: token)
         case .none:
-            return router.showMaskRequiredTechnicalError()
+            return router.showMaskRequiredTechnicalError(token: nil)
         }
     }
     

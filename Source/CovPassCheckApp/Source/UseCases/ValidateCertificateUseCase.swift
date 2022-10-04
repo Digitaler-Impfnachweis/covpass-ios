@@ -11,10 +11,10 @@ import Foundation
 import CertLogic
 
 enum ValidateCertificateUseCaseError: Error, Equatable  {
-    case maskRulesNotAvailable
+    case maskRulesNotAvailable(_ token: ExtendedCBORWebToken)
     case holderNeedsMask(_ token: ExtendedCBORWebToken)
-    case invalidDueToRules
-    case invalidDueToTechnicalReason
+    case invalidDueToRules(_ token: ExtendedCBORWebToken)
+    case invalidDueToTechnicalReason(_ token: ExtendedCBORWebToken)
 }
 
 struct ValidateCertificateUseCase {
@@ -46,7 +46,7 @@ struct ValidateCertificateUseCase {
     
     private func checkMaskRulesAvailable() -> Promise<Void> {
         guard holderStatus.maskRulesAvailable(for: region) else {
-            return .init(error: ValidateCertificateUseCaseError.maskRulesNotAvailable)
+            return .init(error: ValidateCertificateUseCaseError.maskRulesNotAvailable(token))
         }
         return .value
     }
@@ -75,9 +75,9 @@ struct ValidateCertificateUseCase {
         case .passed:
             return .value
         case .failedTechnical:
-            return .init(error: ValidateCertificateUseCaseError.invalidDueToTechnicalReason)
+            return .init(error: ValidateCertificateUseCaseError.invalidDueToTechnicalReason(token))
         case .failedFunctional:
-            return .init(error: ValidateCertificateUseCaseError.invalidDueToRules)
+            return .init(error: ValidateCertificateUseCaseError.invalidDueToRules(token))
         }
     }
     
@@ -86,9 +86,9 @@ struct ValidateCertificateUseCase {
         case .passed:
             return .value
         case .failedTechnical:
-            return .init(error: ValidateCertificateUseCaseError.invalidDueToTechnicalReason)
+            return .init(error: ValidateCertificateUseCaseError.invalidDueToTechnicalReason(token))
         case .failedFunctional:
-            return .init(error: ValidateCertificateUseCaseError.invalidDueToRules)
+            return .init(error: ValidateCertificateUseCaseError.invalidDueToRules(token))
         }
     }
 }

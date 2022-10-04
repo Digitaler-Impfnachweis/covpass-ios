@@ -5,6 +5,7 @@
 //  SPDX-License-Identifier: Apache-2.0
 //
 
+import CovPassCommon
 import CovPassUI
 import PromiseKit
 import UIKit
@@ -14,6 +15,9 @@ private enum Constants {
     static let subtitleFormat = "infschg_result_mask_optional_subtitle".localized
     static let description = "infschg_result_mask_mandatory_copy".localized
     static let buttonTitle = "result_2G_button_startover".localized
+    static let revocationHeadline = "infschg_result_mask_optional_infobox_title".localized
+    static let revocationInfoText = "infschg_result_mask_optional_infobox_copy".localized
+    static let revocationLinkTitle = "infschg_result_mask_optional_infobox_link".localized
 }
 
 final class MaskRequiredResultViewModel: MaskRequiredResultViewModelProtocol {
@@ -22,6 +26,10 @@ final class MaskRequiredResultViewModel: MaskRequiredResultViewModelProtocol {
     let title = Constants.title
     let subtitle: String
     let description = Constants.description
+    let revocationInfoHidden: Bool
+    let revocationHeadline = Constants.revocationHeadline
+    let revocationInfoText = Constants.revocationInfoText
+    let revocationLinkTitle = Constants.revocationLinkTitle
     let buttonTitle = Constants.buttonTitle
     let secondCertificateHintHidden: Bool
     let reasonViewModels: [MaskRequiredReasonViewModelProtocol]
@@ -32,24 +40,33 @@ final class MaskRequiredResultViewModel: MaskRequiredResultViewModelProtocol {
 
     private let resolver: Resolver<Void>
     private let router: MaskRequiredResultRouterProtocol
+    private let persistence: Persistence
+    private let revocationKeyFilename: String
+    private let token: ExtendedCBORWebToken?
 
-    init(countdownTimerModel: CountdownTimerModel,
-         federalStateCode: String,
+    init(token: ExtendedCBORWebToken?,
+         countdownTimerModel: CountdownTimerModel,
          resolver: Resolver<Void>,
          router: MaskRequiredResultRouterProtocol,
          reasonType: MaskRequiredReasonType,
-         secondCertificateHintHidden: Bool
+         secondCertificateHintHidden: Bool,
+         persistence: Persistence,
+         revocationKeyFilename: String
     ) {
         self.countdownTimerModel = countdownTimerModel
         self.subtitle = .init(
             format: Constants.subtitleFormat,
-            federalStateCode.localized
+            ("DE_" + persistence.stateSelection).localized
         )
         self.resolver = resolver
+        self.token = token
         self.router = router
         self.reasonViewModels = Self.reasonViewModels(reasonType)
         self.secondCertificateHintHidden = secondCertificateHintHidden
-
+        self.revocationKeyFilename = revocationKeyFilename
+        self.revocationInfoHidden = !persistence.revocationExpertMode || token == nil
+        self.persistence = persistence
+        
         countdownTimerModel.onUpdate = onCountdownTimerModelUpdate
         countdownTimerModel.start()
     }
@@ -95,4 +112,10 @@ final class MaskRequiredResultViewModel: MaskRequiredResultViewModelProtocol {
         resolver.fulfill_()
         router.scanSecondCertificate()
     }
+    
+    func revoke(_: Any) {
+         resolver.fulfill_()
+        guard let token = token else { return }
+         router.revoke(token: token, revocationKeyFilename: revocationKeyFilename)
+     }
 }

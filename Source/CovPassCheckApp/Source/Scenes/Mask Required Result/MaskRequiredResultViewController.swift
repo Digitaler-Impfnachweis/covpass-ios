@@ -15,12 +15,26 @@ final class MaskRequiredResultViewController: UIViewController {
     @IBOutlet var subtitleLabel: UILabel!
     @IBOutlet var descriptionLabel: UILabel!
     @IBOutlet var reasonStackView: UIStackView!
+    @IBOutlet var revocationInfoContainerView: UIView!
+    @IBOutlet var revocationInfoView: HintView!
     @IBOutlet var rescanButton: MainButton!
     @IBOutlet var counterLabel: UILabel!
     @IBOutlet var stackViewLeadingConstraint: NSLayoutConstraint!
     
     private var viewModel: MaskRequiredResultViewModelProtocol
-
+    private lazy var revocationLink: NSAttributedString = {
+         let linkText = (viewModel.revocationLinkTitle + " ⟩")
+             .styledAs(.header_3)
+             .colored(.brandAccent)
+         let string = NSMutableAttributedString(attributedString: linkText)
+         string.addAttribute(
+             .link,
+             value: "",
+             range: NSMakeRange(0, string.length)
+         )
+         return string
+     }()
+    
     init(viewModel: MaskRequiredResultViewModelProtocol) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -36,9 +50,26 @@ final class MaskRequiredResultViewController: UIViewController {
         configureImageView()
         configureLabels()
         configureReasonStackView()
+        configureRevocationInfoView()
         configureButton()
         configureCounter()
     }
+    
+    private func configureRevocationInfoView() {
+         revocationInfoView.style = .info
+         revocationInfoContainerView.isHidden = viewModel.revocationInfoHidden
+         let bodyLabel = NSMutableAttributedString(
+             attributedString: viewModel.revocationInfoText
+                 .appending("\n\n")
+                 .styledAs(.body)
+                 .colored(.onBackground70)
+         )
+         bodyLabel.append(revocationLink)
+         revocationInfoView.bodyLabel.attributedText = bodyLabel
+         revocationInfoView.bodyLabel.linkCallback = viewModel.revoke
+         revocationInfoView.titleLabel.attributedText = viewModel.revocationHeadline
+             .styledAs(.mainButton)
+     }
 
     private func configureInfoHeaderView() {
         infoHeaderView.attributedTitleText = nil

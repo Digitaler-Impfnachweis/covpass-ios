@@ -41,9 +41,6 @@ public struct CertificateHolderStatusModel: CertificateHolderStatusModelProtocol
         guard let validationResults = try? validate(certificate: joinedTokens, type: .euInvalidation, countryCode: joinedTokens.iss) else {
             return .failedTechnical
         }
-        guard !validationResults.filterInvalidationRules.isEmpty else { return
-            .failedTechnical
-        }
         let passed = validationResults.failedAndOpenResults.isEmpty
         return passed ? .passed : .failedFunctional
     }

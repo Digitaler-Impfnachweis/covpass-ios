@@ -18,7 +18,8 @@ final class MaskRequiredResultSceneFactoryTests: XCTestCase {
         sut = .init(
             router: MaskRequiredResultRouterMock(),
             reasonType: .functional,
-            secondCertificateHintHidden: true
+            secondCertificateHintHidden: true,
+            token: CBORWebToken.mockVaccinationCertificate.extended()
         )
     }
 

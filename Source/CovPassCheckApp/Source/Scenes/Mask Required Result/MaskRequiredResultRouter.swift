@@ -6,6 +6,7 @@
 //
 
 import CovPassUI
+import CovPassCommon
 
 struct MaskRequiredResultRouter: MaskRequiredResultRouterProtocol, RouterProtocol {
     let sceneCoordinator: SceneCoordinator
@@ -18,4 +19,14 @@ struct MaskRequiredResultRouter: MaskRequiredResultRouterProtocol, RouterProtoco
         #warning("TODO: Finish implementation")
         // Probably we need the first certificate here.
     }
+    
+    func revoke(token: ExtendedCBORWebToken, revocationKeyFilename: String) {
+         sceneCoordinator.present(
+             RevocationInfoSceneFactory(
+                 keyFilename: revocationKeyFilename,
+                 router: RevocationInfoRouter(sceneCoordinator: sceneCoordinator),
+                 token: token
+             )
+         ).cauterize()
+     }
 }

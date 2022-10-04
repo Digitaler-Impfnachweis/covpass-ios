@@ -14,31 +14,36 @@ struct MaskRequiredResultSceneFactory: ResolvableSceneFactory {
     private let router: MaskRequiredResultRouterProtocol
     private let reasonType: MaskRequiredReasonType
     private let secondCertificateHintHidden: Bool
-
+    private let token: ExtendedCBORWebToken?
+    
     init(router: MaskRequiredResultRouterProtocol,
          reasonType: MaskRequiredReasonType,
-         secondCertificateHintHidden: Bool) {
+         secondCertificateHintHidden: Bool,
+         token: ExtendedCBORWebToken?) {
         self.router = router
         self.reasonType = reasonType
         self.secondCertificateHintHidden = secondCertificateHintHidden
+        self.token = token
     }
 
     func make(resolvable: Resolver<Void>) -> UIViewController {
         let persistence = UserDefaultsPersistence()
-        let federalStateCode = persistence.stateSelection
         let reasonType: MaskRequiredReasonType = reasonType
         let secondCertificateHintHidden = secondCertificateHintHidden
         let countdownTimerModel = CountdownTimerModel(
             dismissAfterSeconds: 120,
             countdownDuration: 60
         )
+        let revocationKeyFilename = XCConfiguration.certificationRevocationEncryptionKey
         let viewModel = MaskRequiredResultViewModel(
+            token: token,
             countdownTimerModel: countdownTimerModel,
-            federalStateCode: federalStateCode,
             resolver: resolvable,
             router: router,
             reasonType: reasonType,
-            secondCertificateHintHidden: secondCertificateHintHidden
+            secondCertificateHintHidden: secondCertificateHintHidden,
+            persistence: persistence,
+            revocationKeyFilename: revocationKeyFilename
         )
         let viewController = MaskRequiredResultViewController(viewModel: viewModel)
 

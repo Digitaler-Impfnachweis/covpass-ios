@@ -61,7 +61,7 @@ class ValidatorMockRouter: ValidatorOverviewRouterProtocol {
         return .value
     }
     
-    func showMaskRequiredBusinessRules() -> Promise<Void> {
+    func showMaskRequiredBusinessRules(token: ExtendedCBORWebToken) -> Promise<Void> {
         showMaskRequiredBusinessRulesExpectation.fulfill()
         return .value
     }
@@ -71,7 +71,7 @@ class ValidatorMockRouter: ValidatorOverviewRouterProtocol {
         return .value
     }
     
-    func showMaskRequiredTechnicalError() -> Promise<Void> {
+    func showMaskRequiredTechnicalError(token: ExtendedCBORWebToken?) -> Promise<Void> {
         showMaskRequiredTechnicalErrorExpectation.fulfill()
         return .value
     }
@@ -81,7 +81,7 @@ class ValidatorMockRouter: ValidatorOverviewRouterProtocol {
         return .value
     }
     
-    func showNoMaskRules() -> Promise<Void> {
+    func showNoMaskRules(token: ExtendedCBORWebToken) -> Promise<Void> {
         showNoMaskRulesExpectation.fulfill()
         return .value
     }

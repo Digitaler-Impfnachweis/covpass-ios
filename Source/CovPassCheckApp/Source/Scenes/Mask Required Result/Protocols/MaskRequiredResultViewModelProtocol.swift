@@ -20,7 +20,12 @@ protocol MaskRequiredResultViewModelProtocol: CancellableViewModelProtocol {
     var buttonTitle: String { get }
     var secondCertificateHintHidden: Bool { get }
     var countdownTimerModel: CountdownTimerModel { get }
-
+    var revocationInfoHidden: Bool { get }
+    var revocationHeadline: String { get }
+    var revocationInfoText: String { get }
+    var revocationLinkTitle: String { get }
+    
     func rescan()
+    func revoke(_: Any)
     func scanSecondCertificate()
 }

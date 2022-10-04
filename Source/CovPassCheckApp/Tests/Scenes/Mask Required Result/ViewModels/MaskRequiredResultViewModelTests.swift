@@ -7,6 +7,7 @@
 
 @testable import CovPassCheckApp
 import CovPassUI
+import CovPassCommon
 import PromiseKit
 import XCTest
 
@@ -32,13 +33,18 @@ final class MaskRequiredResultViewModelTests: XCTestCase {
         reasonType: MaskRequiredReasonType = .functional,
         secondCertificateHintHidden: Bool = false
     ) {
+        var persistence = MockPersistence()
+        persistence.revocationExpertMode = true
+        persistence.stateSelection = "NW"
         sut = .init(
+            token: CBORWebToken.mockVaccinationCertificate.extended(),
             countdownTimerModel: countdownTimerModel,
-            federalStateCode: "DE_NW",
             resolver: resolver,
             router: router,
             reasonType: reasonType,
-            secondCertificateHintHidden: secondCertificateHintHidden
+            secondCertificateHintHidden: secondCertificateHintHidden,
+            persistence: persistence,
+            revocationKeyFilename: ""
         )
         sut.delegate = delegate
     }
