@@ -364,7 +364,7 @@ class ValidatorOverviewViewModelTests: XCTestCase {
         let rule = Rule(identifier: "", type: "Invalidation", version: "", schemaVersion: "", engine: "", engineVersion: "", certificateType: "", description: [], validFrom: "", validTo: "", affectedString: [], logic: JSON(), countryCode: "", region: "")
         let rule2 = Rule(identifier: "", type: "Mask", version: "", schemaVersion: "", engine: "", engineVersion: "", certificateType: "", description: [], validFrom: "", validTo: "", affectedString: [], logic: JSON(), countryCode: "", region: "")
         certLogic.validateResult = [.init(rule: rule, result: .passed),
-                                    .init(rule: rule2, result: .fail)]
+                                    .init(rule: rule2, result: .passed)]
         repository.checkedCert = CBORWebToken.mockVaccinationCertificateWithOtherName
         // When
         sut.scanAction(additionalToken: CBORWebToken.mockRecoveryCertificate.extended())
@@ -372,7 +372,7 @@ class ValidatorOverviewViewModelTests: XCTestCase {
         // Then
         wait(for: [
             router.showDifferentPersonExpectation
-        ], timeout: 102)
+        ], timeout: 1)
     }
     
     func test_scanAction_secondScan_sameCertType() {
@@ -384,7 +384,7 @@ class ValidatorOverviewViewModelTests: XCTestCase {
         // Then
         wait(for: [
             router.showSameCertTypeExpectation
-        ], timeout: 102)
+        ], timeout: 1)
     }
     
     func test_scanAction_showMaskOptional() {

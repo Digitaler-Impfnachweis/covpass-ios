@@ -67,15 +67,14 @@ struct ValidateCertificateUseCase {
            additionalToken.vaccinationCertificate.certType == token.vaccinationCertificate.certType {
             return .init(error: ValidateCertificateUseCaseError.secondScanSameTokenType(token))
         }
+        if holderStatus.holderNeedsMask(tokensForMaskRuleCheck(), region: region) {
+            return .init(error: ValidateCertificateUseCaseError.holderNeedsMask(token))
+        }
         if let additionalToken = additionalToken,
            additionalToken.vaccinationCertificate.hcert.dgc.nam != token.vaccinationCertificate.hcert.dgc.nam ||
            additionalToken.vaccinationCertificate.hcert.dgc.dob != token.vaccinationCertificate.hcert.dgc.dob {
             return .init(error: ValidateCertificateUseCaseError.differentPersonalInformation(token, additionalToken))
         }
-        if holderStatus.holderNeedsMask(tokensForMaskRuleCheck(), region: region) {
-            return .init(error: ValidateCertificateUseCaseError.holderNeedsMask(token))
-        }
-
         return .value
     }
 
