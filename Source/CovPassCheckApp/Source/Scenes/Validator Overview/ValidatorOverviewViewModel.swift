@@ -51,7 +51,6 @@ class ValidatorOverviewViewModel {
     private let certLogic: DCCCertLogicProtocol
     private var userDefaults: Persistence
     private var currentDataPrivacyHash: String
-    private let appVersion: String?
     private let audioPlayer: AudioPlayerProtocol
     
     var delegate: ViewModelDelegate?
@@ -118,7 +117,6 @@ class ValidatorOverviewViewModel {
          userDefaults: Persistence,
          privacyFile: String,
          schedulerIntervall: TimeInterval = Constants.Config.schedulerIntervall,
-         appVersion: String? = Bundle.main.shortVersionString,
          audioPlayer: AudioPlayerProtocol
     ) {
         self.audioPlayer = audioPlayer
@@ -129,7 +127,6 @@ class ValidatorOverviewViewModel {
         self.userDefaults = userDefaults
         self.schedulerIntervall = schedulerIntervall
         self.currentDataPrivacyHash = privacyFile.sha256()
-        self.appVersion = appVersion
         self.setupTimer()
     }
     
@@ -265,20 +262,16 @@ class ValidatorOverviewViewModel {
     }
 
     private func showDataPrivacyIfNeeded() -> Guarantee<Void> {
-        let guarantee: Guarantee<Void>
-        if let privacyHash = userDefaults.privacyHash,
-           privacyHash == currentDataPrivacyHash,
-           let privacyShownForAppVersion = userDefaults.privacyShownForAppVersion,
-           privacyShownForAppVersion == appVersion
-        {
-            guarantee = .value
-        } else {
+        guard let privacyHash = userDefaults.privacyHash else {
             userDefaults.privacyHash = currentDataPrivacyHash
-            userDefaults.privacyShownForAppVersion = appVersion
-            guarantee = router.showDataPrivacy().recover { _ in }
+            return .value
         }
-
-        return guarantee
+        guard privacyHash != currentDataPrivacyHash else {
+            userDefaults.privacyHash = currentDataPrivacyHash
+            return .value
+        }
+        userDefaults.privacyHash = currentDataPrivacyHash
+        return router.showDataPrivacy().recover { _ in }
     }
 
     private func showNewRegulationsAnnouncementIfNeeded() -> Guarantee<Void> {

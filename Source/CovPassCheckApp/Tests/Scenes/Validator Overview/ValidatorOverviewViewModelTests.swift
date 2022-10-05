@@ -51,7 +51,7 @@ class ValidatorOverviewViewModelTests: XCTestCase {
        super.tearDown()
     }
     
-    private func prepareSut(lastUpdateTrustList: Date? = nil, lastUpdateDccrRules: Date? = nil, appVersion: String? = nil) {
+    private func prepareSut(lastUpdateTrustList: Date? = nil, lastUpdateDccrRules: Date? = nil) {
         if let lastUpdateTrustList = lastUpdateTrustList {
             userDefaults.lastUpdatedTrustList = lastUpdateTrustList
         }
@@ -65,7 +65,6 @@ class ValidatorOverviewViewModelTests: XCTestCase {
             certLogic: certLogic,
             userDefaults: userDefaults,
             privacyFile: Constants.Keys.privacyFile,
-            appVersion: appVersion,
             audioPlayer: audioPlayer
         )
     }
@@ -174,16 +173,18 @@ class ValidatorOverviewViewModelTests: XCTestCase {
         self.waitForExpectations(timeout: 1.0, handler: nil)
     }
 
-    func testShowNotificationsIfNeeded_showDataPrivacy_never_shown_before() {
+    func testShowNotificationsIfNeeded_dont_showDataPrivacy_never_shown_before() {
         // Given
         let privacyHash = Constants.Keys.privacyFile.sha256()
+        userDefaults.privacyHash = nil
+        router.showDataPrivacyExpectation.isInverted = true
         prepareSut()
         
         // When
         sut.showNotificationsIfNeeded()
 
         // Then
-        wait(for: [router.showDataPrivacyExpectation], timeout: 1)
+        wait(for: [router.showDataPrivacyExpectation], timeout: 0.1)
         XCTAssertEqual(userDefaults.privacyHash, privacyHash)
     }
 
@@ -191,9 +192,7 @@ class ValidatorOverviewViewModelTests: XCTestCase {
         // Given
         let privacyHash = Constants.Keys.privacyFile.sha256()
         router.showDataPrivacyExpectation.isInverted = true
-        userDefaults.privacyShownForAppVersion = "0.1"
         userDefaults.privacyHash = privacyHash
-        prepareSut(appVersion: "0.1")
 
         // When
         sut.showNotificationsIfNeeded()
@@ -205,16 +204,15 @@ class ValidatorOverviewViewModelTests: XCTestCase {
     func testShowNotificationsIfNeeded_showDataPrivacy_was_not_shown_for_this_version() {
         // Given
         let privacyHash = Constants.Keys.privacyFile.sha256()
-        userDefaults.privacyShownForAppVersion = "0.1"
-        userDefaults.privacyHash = privacyHash
-        prepareSut(appVersion: "0.2")
+        userDefaults.privacyHash = privacyHash + "A"
 
         // When
+        XCTAssertNotEqual(userDefaults.privacyHash, privacyHash)
         sut.showNotificationsIfNeeded()
 
         // Then
         wait(for: [router.showDataPrivacyExpectation], timeout: 1)
-        XCTAssertEqual(userDefaults.privacyShownForAppVersion, "0.2")
+        XCTAssertEqual(userDefaults.privacyHash, privacyHash)
     }
 
     func testShowNotificationsIfNeeded_showDataPrivacy_was_shown_for_other_version() {

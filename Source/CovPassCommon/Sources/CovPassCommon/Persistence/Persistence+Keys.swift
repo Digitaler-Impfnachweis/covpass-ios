@@ -28,16 +28,6 @@ public extension Persistence {
         }
     }
 
-    var privacyShownForAppVersion: String? {
-        get {
-            let value = try? fetch(UserDefaults.keyPrivacyShownForAppVersion) as? String
-            return value
-        }
-        set {
-            try? store(UserDefaults.keyPrivacyShownForAppVersion, value: newValue as Any)
-        }
-    }
-
     var revocationExpertMode: Bool {
         get {
             let value = try? fetch(UserDefaults.keyRevocationExpertMode) as? Bool
