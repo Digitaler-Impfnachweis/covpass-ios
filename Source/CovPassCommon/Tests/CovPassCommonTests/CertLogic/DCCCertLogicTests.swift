@@ -459,13 +459,13 @@ class DCCCertLogicTests: XCTestCase {
     func test_domesticRules_gStatus() throws {
         // WHEN
         let token = CBORWebToken.mockVaccinationCertificate
-        XCTAssertNoThrow(try sut.validate(type: .maskStatusAndRules, countryCode: "DE", validationClock: Date(), certificate: token))
+        XCTAssertThrowsError(try sut.validate(type: .gStatus, countryCode: "DE", validationClock: Date(), certificate: token))
     }
     
     func test_domesticRules_maskStatus() throws {
         // WHEN
         let token = CBORWebToken.mockVaccinationCertificate
-        XCTAssertNoThrow(try sut.validate(type: .maskStatusAndRules, countryCode: "DE", validationClock: Date(), certificate: token))
+        XCTAssertThrowsError(try sut.validate(type: .maskStatus, countryCode: "DE", validationClock: Date(), certificate: token))
     }
     
     func test_rulesAvailable_regionAT_rulesEU() {
@@ -491,7 +491,7 @@ class DCCCertLogicTests: XCTestCase {
     
     func test_rulesNotAvailable_regionNW_rulesMask() {
         // WHEN
-        let rulesAvailable = sut.rulesAvailable(logicType: .maskStatusAndRules, region: "BLA")
+        let rulesAvailable = sut.rulesAvailable(logicType: .maskStatus, region: "BLA")
         // THEN
         XCTAssertFalse(rulesAvailable)
     }

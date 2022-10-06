@@ -43,10 +43,11 @@ public struct CertificateHolderStatusModel: CertificateHolderStatusModelProtocol
     }
     
     public func holderIsFullyImmunized(_ certificates: [ExtendedCBORWebToken]) -> Bool {
-        guard let joinedTokens = certificates.joinedTokens else {
+        let validCertificates = validCertificates(certificates)
+        guard let joinedTokens = validCertificates.joinedTokens else {
             return false
         }
-        guard let validationResults = try? validate(certificate: joinedTokens, type: .gStatusAndRules) else {
+        guard let validationResults = try? validate(certificate: joinedTokens, type: .gStatus) else {
             return false
         }
         guard !validationResults.filterAcceptanceAndInvalidationRules.isEmpty else {
@@ -57,10 +58,11 @@ public struct CertificateHolderStatusModel: CertificateHolderStatusModelProtocol
         
     public func holderNeedsMask(_ certificates: [ExtendedCBORWebToken],
                                 region: String?) -> Bool {
-        guard let joinedTokens = certificates.joinedTokens else {
+        let validCertificates = validCertificates(certificates)
+        guard let joinedTokens = validCertificates.joinedTokens else {
             return true
         }
-        guard let validationResults = try? validate(certificate: joinedTokens, type: .maskStatusAndRules, region: region) else {
+        guard let validationResults = try? validate(certificate: joinedTokens, type: .maskStatus, region: region) else {
             return true
         }
         return validationResults.holderNeedsMask
@@ -76,7 +78,16 @@ public struct CertificateHolderStatusModel: CertificateHolderStatusModelProtocol
     }
     
     public func maskRulesAvailable(for region: String?) -> Bool {
-        return dccCertLogic.rulesAvailable(logicType: .maskStatusAndRules, region: region)
+        return dccCertLogic.rulesAvailable(logicType: .maskStatus, region: region)
+    }
+    
+    private func validCertificate(_ certificates: [ExtendedCBORWebToken]) -> ExtendedCBORWebToken? {
+        return certificates.first { token in
+            guard let result = try? validate(certificate: token.vaccinationCertificate, type: .de) else {
+                return false
+            }
+            return result.failedAndOpenResults.isEmpty
+        }
     }
     
     private func validate(certificate: CBORWebToken,
@@ -89,6 +100,35 @@ public struct CertificateHolderStatusModel: CertificateHolderStatusModelProtocol
                                          validationClock: Date(),
                                          certificate: certificate)
         
+    }
+    
+    private func validCertificates(_ certificates: [ExtendedCBORWebToken]) -> [ExtendedCBORWebToken] {
+        var result: [ExtendedCBORWebToken] = []
+        if let validVaccinationCertificate = validVaccinationCertificate(certificates) {
+            result.append(validVaccinationCertificate)
+        }
+        if let validRecoveryCertificate = validRecoveryCertificate(certificates) {
+            result.append(validRecoveryCertificate)
+        }
+        if let validTestCertificate = validTestCertificate(certificates) {
+            result.append(validTestCertificate)
+        }
+        return result
+    }
+    
+    private func validVaccinationCertificate(_ certificates: [ExtendedCBORWebToken]) -> ExtendedCBORWebToken? {
+        let filterVaccinationCertificates = certificates.filterVaccinations.filterNotExpired.filterNotInvalid.filterNotRevoked
+        return validCertificate(filterVaccinationCertificates)
+    }
+    
+    private func validRecoveryCertificate(_ certificates: [ExtendedCBORWebToken]) -> ExtendedCBORWebToken? {
+        let filterRecoveryCertificates = certificates.filterRecoveries.filterNotExpired.filterNotInvalid.filterNotRevoked
+        return validCertificate(filterRecoveryCertificates)
+    }
+    
+    private func validTestCertificate(_ certificates: [ExtendedCBORWebToken]) -> ExtendedCBORWebToken? {
+        let filterTestCertificates = certificates.filterTests.filterNotExpired.filterNotInvalid.filterNotRevoked
+        return validCertificate(filterTestCertificates)
     }
 }
 

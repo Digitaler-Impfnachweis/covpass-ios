@@ -73,10 +73,10 @@ public class DCCCertLogic: DCCCertLogicProtocol {
         case euInvalidation
         // validate against DE domestic rules
         case de
-        // validate against DE domestic rules for all Certificate types
-        case maskStatusAndRules
-        // validate against DE domestic rules for all Certificate types
-        case gStatusAndRules
+        // validate against DE domestic rules for mask rule types
+        case maskStatus
+        // validate against DE domestic rules for gStatus rule types
+        case gStatus
         // validate against vaccination booster rules
         case booster
     }
@@ -219,12 +219,10 @@ public class DCCCertLogic: DCCCertLogicProtocol {
             rules = boosterRules
         case .de:
             rules = dccDomesticRules.acceptenceAndInvalidationRules
-        case .gStatusAndRules:
-            let domesticRules = dccDomesticRules
-            rules = domesticRules.acceptenceAndInvalidationRules
-        case .maskStatusAndRules:
-            let domesticRules = dccDomesticRules
-            rules = domesticRules.acceptenceAndInvalidationRules + domesticRules.maskStatusRules
+        case .gStatus:
+            rules = dccDomesticRules.gStatusRules
+        case .maskStatus:
+            rules = dccDomesticRules.maskStatusRules
         }
         return rules
     }
@@ -248,7 +246,7 @@ public class DCCCertLogic: DCCCertLogicProtocol {
         var validationType = ValidationType.all
         var certificateType = CertificateType.general
         
-        if type == .maskStatusAndRules {
+        if type == .maskStatus {
             validationType = .allRuleAndCertificateTypes
         } else if certificate.isVaccination {
             certificateType = .vaccination
