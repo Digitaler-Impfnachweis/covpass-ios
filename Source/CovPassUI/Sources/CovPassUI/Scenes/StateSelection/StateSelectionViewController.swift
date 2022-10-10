@@ -39,6 +39,9 @@ public class StateSelectionViewController: UIViewController {
     private func setupViews() {
         headerView.attributedTitleText = viewModel.pageTitle.styledAs(.header_2)
         headerView.actionButton.setImage(.close, for: .normal)
+        headerView.action = { [weak self] in
+            self?.viewModel.close()
+        }
         let sortedStates = viewModel.states.sorted { state1, state2 in
             let state1CodeWithPrefix = "DE_\(state1.code)".localized(bundle: .main)
             let state2CodeWithPrefix = "DE_\(state2.code)".localized(bundle: .main)

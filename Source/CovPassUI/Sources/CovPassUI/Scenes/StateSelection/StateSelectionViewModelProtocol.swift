@@ -12,4 +12,5 @@ public protocol StateSelectionViewModelProtocol {
     var pageTitle: String { get }
     var states: [Country] { get }
     func choose(state: String)
+    func close()
 }

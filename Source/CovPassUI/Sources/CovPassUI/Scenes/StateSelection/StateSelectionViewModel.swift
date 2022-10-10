@@ -42,4 +42,8 @@ public class StateSelectionViewModel: StateSelectionViewModelProtocol {
         persistence.stateSelection = state
         resolver.fulfill_()
     }
+
+    public func close() {
+        resolver.fulfill_()
+    }
 }
