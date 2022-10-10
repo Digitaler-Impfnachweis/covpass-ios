@@ -22,6 +22,7 @@ public protocol CheckSituationViewModelProtocol {
     var doneButtonTitle: String { get }
     var offlineRevocationTitle: String { get }
     var offlineRevocationDescription: String { get }
+    var offlineRevocationDescription2: String { get }
     var offlineRevocationSwitchTitle: String { get }
     var pageTitleIsHidden: Bool { get }
     var newBadgeIconIsHidden: Bool { get }

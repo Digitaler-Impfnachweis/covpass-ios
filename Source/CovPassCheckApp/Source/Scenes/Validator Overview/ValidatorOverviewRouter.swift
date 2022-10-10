@@ -71,11 +71,6 @@ class ValidatorOverviewRouter: ValidatorOverviewRouterProtocol {
         )
     }
     
-    func routeToRulesUpdate(userDefaults: Persistence) -> Promise<Void> {
-        sceneCoordinator.push(CheckSituationResolvableSceneFactory(router: CheckSituationRouter(sceneCoordinator: sceneCoordinator),
-                                                                   userDefaults: userDefaults))
-    }
-
     func showNewRegulationsAnnouncement() -> PromiseKit.Promise<Void> {
         sceneCoordinator.present(NewRegulationsAnnouncementSceneFactory())
     }

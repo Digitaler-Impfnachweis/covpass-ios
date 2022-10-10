@@ -130,7 +130,7 @@ public class CheckSituationViewController: UIViewController {
     private func configureOfflineRevocationView() {
         offlineRevocationView.isHidden = viewModel.offlineRevocationIsHidden
         offlineRevocationTitleLabel.attributedText = viewModel.offlineRevocationTitle.styledAs(.header_2)
-        offlineRevocationDescriptionLabel.attributedText = viewModel.offlineRevocationDescription
+        offlineRevocationDescriptionLabel.attributedText = viewModel.offlineRevocationDescription2
             .styledAs(.body)
             .colored(.onBackground110)
         offlineRevocationSwitch.label.attributedText = viewModel.offlineRevocationSwitchTitle

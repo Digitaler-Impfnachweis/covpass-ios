@@ -128,11 +128,6 @@ class ValidatorOverviewViewController: UIViewController {
         offlineInformationCellAccesoryImageView.image = viewModel.offlineInformationCellIcon
     }
     
-    // MARK: - Actions
-    
-    @IBAction func routeToUpdateTapped(_ sender: Any) {
-        viewModel.routeToRulesUpdate()
-    }
 }
 
 extension ValidatorOverviewViewController: ViewModelDelegate {

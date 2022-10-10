@@ -15,7 +15,6 @@ import UIKit
 protocol ValidatorOverviewRouterProtocol: DialogRouterProtocol, ScanAndValidateRouterProtocol {
     func showAppInformation(userDefaults: Persistence)
     func showDataPrivacy() -> Promise<Void>
-    func routeToRulesUpdate(userDefaults: Persistence) -> Promise<Void>
     func showNewRegulationsAnnouncement() -> Promise<Void>
     func routeToStateSelection() -> Promise<Void>
     func showMaskRequiredBusinessRules(token: ExtendedCBORWebToken) -> Promise<ValidatorDetailSceneResult>

@@ -63,7 +63,7 @@ class CheckSituationViewModelTests: XCTestCase {
         XCTAssertEqual(sut.pageTitle, "check_context_onboarding_title")
         XCTAssertEqual(sut.newBadgeText, "check_context_onboarding_tag")
         XCTAssertEqual(sut.pageImage, .illustration4)
-        XCTAssertEqual(sut.footerText, "app_information_message_update")
+        XCTAssertEqual(sut.footerText, "app_information_offline_revocation_copy_1")
         XCTAssertEqual(sut.doneButtonTitle, "check_context_onboarding_button")
         XCTAssertEqual(sut.descriptionTextIsTop, true)
         XCTAssertEqual(sut.pageTitleIsHidden, true)
@@ -341,7 +341,7 @@ class CheckSituationViewModelTests: XCTestCase {
         let isHidden = sut.descriptionIsHidden
 
         // Then
-        XCTAssertTrue(isHidden)
+        XCTAssertFalse(isHidden)
     }
 
     func testDescriptionIsHidden_information() {

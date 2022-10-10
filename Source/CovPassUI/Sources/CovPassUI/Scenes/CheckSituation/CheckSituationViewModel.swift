@@ -29,7 +29,8 @@ private enum Constants {
         }
         enum OfflineRevocation {
             static let title = "app_information_offline_revocation_title".localized(bundle: .main)
-            static let description = "app_information_offline_revocation_copy".localized(bundle: .main)
+            static let description = "app_information_offline_revocation_copy_1".localized(bundle: .main)
+            static let description2 = "app_information_offline_revocation_copy_2".localized(bundle: .main)
             static let switchTitle = "app_information_offline_revocation_title".localized(bundle: .main)
         }
         enum Update {
@@ -83,6 +84,7 @@ public class CheckSituationViewModel: CheckSituationViewModelProtocol {
     public var onboardingImageDescription: String = Constants.Accessibility.General.onboardingImageDescription
     public let offlineRevocationTitle = Constants.Keys.OfflineRevocation.title
     public let offlineRevocationDescription = Constants.Keys.OfflineRevocation.description
+    public let offlineRevocationDescription2 = Constants.Keys.OfflineRevocation.description2
     public let offlineRevocationSwitchTitle =  Constants.Keys.OfflineRevocation.switchTitle
     public var hStackViewIsHidden: Bool = false
     public var pageTitleIsHidden: Bool = false
@@ -250,8 +252,8 @@ public class CheckSituationViewModel: CheckSituationViewModelProtocol {
             subTitleIsHidden = true
             offlineRevocationIsHidden = false
             updateContextHidden = false
-            footerText = Constants.Keys.Settings.description
-            descriptionIsHidden = true
+            footerText = offlineRevocationDescription
+            descriptionIsHidden = false
         case .information:
             hStackViewIsHidden = false
             newBadgeIconIsHidden = true

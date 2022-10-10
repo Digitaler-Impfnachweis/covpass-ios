@@ -509,9 +509,11 @@
 
 "app_information_title_checkrules" = "Checking rules";
 
+"app_information_offline_revocation_copy_1" = "Here you can update the rules based on which you check certificates. If your smartphone is continuously connected to the internet, this will happen automatically.";
+
 "app_information_offline_revocation_title" = "Check revoked certificates offline";
 
-"app_information_offline_revocation_copy" = "Activate this setting if you also want to detect certificates revoked by the authorities in offline mode. Otherwise, revoked certificates are only detected in online mode. This function consumes more data volume.";
+"app_information_offline_revocation_copy_2" = "Activate this setting if you also want to detect certificates revoked by the authorities in offline mode. Otherwise, revoked certificates are only detected in online mode. This function consumes more data volume.";
 
 "app_information_offline_revocation_hint_title" = "Note";
 

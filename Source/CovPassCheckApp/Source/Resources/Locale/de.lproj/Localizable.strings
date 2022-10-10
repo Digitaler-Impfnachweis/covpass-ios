@@ -509,9 +509,11 @@
 
 "app_information_title_checkrules" = "Prüfregeln";
 
+"app_information_offline_revocation_copy_1" = "Hier können Sie die Regeln aktualisieren, nach denen Zertifkate geprüft werden. Sollte Ihr Smartphone üblicherweise mit dem Internet verbunden sein, passiert das automatisch.";
+
 "app_information_offline_revocation_title" = "Gesperrte Zertifikate offline prüfen";
 
-"app_information_offline_revocation_copy" = "Aktivieren Sie diese Einstellung, wenn Sie auch im Offline-Modus von den Behörden gesperrte Zertifikate erkennen möchten. Andernfalls werden gesperrte Zertifikate nur im Online-Modus erkannt. Diese Funktion verbraucht mehr Datenvolumen.";
+"app_information_offline_revocation_copy_2" = "Aktivieren Sie diese Einstellung, wenn Sie auch im Offline-Modus von den Behörden gesperrte Zertifikate erkennen möchten. Andernfalls werden gesperrte Zertifikate nur im Online-Modus erkannt. Diese Funktion verbraucht mehr Datenvolumen.";
 
 "app_information_offline_revocation_hint_title" = "Hinweis";
 

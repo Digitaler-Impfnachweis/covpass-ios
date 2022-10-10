@@ -286,12 +286,6 @@ class ValidatorOverviewViewModel {
             .recover { _ in () }
     }
     
-    func routeToRulesUpdate() {
-        router.routeToRulesUpdate(userDefaults: userDefaults)
-            .done { self.delegate?.viewModelDidUpdate() }
-            .cauterize()
-    }
-    
     func chooseAction() {
         router.routeToStateSelection()
             .done {
