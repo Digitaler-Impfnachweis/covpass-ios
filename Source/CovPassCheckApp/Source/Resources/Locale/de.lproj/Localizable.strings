@@ -679,7 +679,7 @@
 
 "infschg_result_mask_mandatory_second_scan_infobox_title" = "Zwei Nachweise notwendig?";
 
-"infschg_result_mask_mandatory_second_scan_infobox_copy" = "Es kann sein, dass Ihr Bundesland eine Maskenbefreiung bei einer Grundimmunisierung nach einer Genesung ermöglicht. Scannen Sie in diesem Fall beide Zertifikate der Person:";
+"infschg_result_mask_mandatory_second_scan_infobox_copy" = "Es kann sein, dass Ihr Bundesland eine Befreiung von der Maskenpflicht bei einer Kombination aus zwei Impfungen plus einer Genesung ermöglicht. Scannen Sie in diesem Fall ein weiteres Zertifikat der Person.";
 
 "infschg_result_mask_mandatory_second_scan_infobox_button" = "Zweites Zertifikat scannen";
 

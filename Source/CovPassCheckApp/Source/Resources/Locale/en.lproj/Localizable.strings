@@ -679,7 +679,7 @@
 
 "infschg_result_mask_mandatory_second_scan_infobox_title" = "Two proofs required?";
 
-"infschg_result_mask_mandatory_second_scan_infobox_copy" = "It is possible that your state allows a mask exemption for basic immunization after recovery. In this case, scan both of the person's certificates:";
+"infschg_result_mask_mandatory_second_scan_infobox_copy" = "It may be that your state allows an exemption from the mask requirement if you have two vaccinations plus one recovery. In this case, scan an additional certificate from the person.";
 
 "infschg_result_mask_mandatory_second_scan_infobox_button" = "Scan second certificate";
 
