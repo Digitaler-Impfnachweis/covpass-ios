@@ -1691,17 +1691,17 @@
 
 "infschg_cert_overview_title" = "Your current certificate";
 
-"infschg_cert_overview_mask_time_until" = "Exempt until %d";
+"infschg_cert_overview_mask_time_until" = "Exempt until %@";
 
-"infschg_cert_overview_mask_time_from" = "Exempt from %d";
+"infschg_cert_overview_mask_time_from" = "Exempt from %@";
 
 "infschg_cert_overview_mask_hint_optional" = "You are exempt from wearing a mask in most areas in Germany. Note that the exemption does not apply to places where a special mask requirement applies: e.g. doctors' offices, hospitals or long-distance passenger transport.";
 
 "infschg_cert_overview_mask_hint_mandatory" = "You can be exempted from the mask requirement for up to 24 hours in your state. Note that different regulations may apply in your federal state. Also remember that the exemption does not apply to places where a special mask requirement applies: e.g. doctors' offices, hospitals or long-distance passenger transport.";
 
-"infschg_cert_overview_immunisation_time_since" = "Since %d";
+"infschg_cert_overview_immunisation_time_since" = "Since %@";
 
-"infschg_cert_overview_immunisation_time_from" = "From %d";
+"infschg_cert_overview_immunisation_time_from" = "From %@";
 
 "infschg_cert_overview_immunisation_incomplete_A" = "You have not yet received all currently recommended vaccinations. Your vaccination protection is not yet complete.";
 
@@ -1716,3 +1716,118 @@
 "infschg_cert_overview_immunisation_invalid" = "Add a valid certificate or renew your latest certificate to get information about your vaccination status.";
 
 "infschg_more_info_link" = "#More information::https://www.digitaler-impfnachweis-app.de/en/faq/#current-most-frequently-asked-questions#";
+
+"infschg_popup_choose_federal_state_title" = "Choose your federal state";
+
+"infschg_popup_choose_federal_state_copy_1" = "Mask requirement rules may vary by federal state. Select your federal state to see your current mask status.*";
+
+"infschg_popup_choose_federal_state_tag" = "Federal state";
+
+"infschg_popup_choose_federal_state_box_content" = "%@";
+
+"infschg_popup_choose_federal_state_copy_2" = "*You may change the federal state from the corresponding selection in the settings at any time.";
+
+"infschg_start_screen_status_green" = "No mask required";
+
+"infschg_start_screen_status_blue" = "Mask mandatory";
+
+"infschg_start_screen_status_grey" = "No valid certificate";
+
+"infschg_start_screen_status_federal_state" = "in %@";
+
+"infschg_settings_federal_state_title" = "Federal state";
+
+"infschg_settings_federal_state_page_title" = "Federal state";
+
+"infschg_settings_federal_state_page_copy" = "Select the federal state according to whose rules you want your mask status to be displayed.";
+
+"infschg_settings_federal_state_page_tag" = "Federal state";
+
+"infschg_detail_page_no_mask_mandatory_title" = "No mask required";
+
+"infschg_detail_page_no_mask_mandatory_subtitle" = "Exempt until %@";
+
+"infschg_detail_page_no_mask_mandatory_federal_state" = "in %@";
+
+"infschg_detail_page_no_mask_mandatory_copy_1" = "You are exempt from the mask requirement in some situations in this state; however, a mask is still recommended.";
+
+"infschg_detail_page_no_mask_mandatory_link" = "More information";
+
+"infschg_detail_page_no_mask_mandatory_subtitle_2" = "Note:";
+
+"infschg_detail_page_no_mask_mandatory_copy_2" = "If the federal state in which you are staying has decreed that masks are compulsory, a negative rapid or PCR test will exempt you from this mask requirement for 24 hours at leisure, cultural and sporting events and in catering establishments. An unsupervised self-test is not sufficient. Your state may regulate that you are also exempt from the mask requirement due to vaccinations or recovery (if these occurred no more than three months ago). An exemption from the mask requirement does not apply to long-distance public transport, hospitals, care facilities, and patients in doctors' offices.\n\nShould your COVID certificates stored in the app be sufficient to exempt you from the mask requirement in your federal state, your certificate will turn green. Your exemption from the mask requirement in your state can be verified by scanning your QR code using the CovPassCheck app.";
+
+"infschg_detail_page_no_mask_mandatory_button" = "Change federal state";
+
+"infschg_detail_page_mask_mandatory_title" = "Mask mandatory";
+
+"infschg_detail_page_mask_mandatory_subtitle" = "Exempt until %@";
+
+"infschg_detail_page_mask_mandatory_federal_state" = "in %@";
+
+"infschg_detail_page_mask_mandatory_copy_1" = "You are not exempt from the mask requirement in this state.";
+
+"infschg_detail_page_mask_mandatory_link" = "More information";
+
+"infschg_detail_page_mask_mandatory_subtitle_2" = "Note:";
+
+"infschg_detail_page_mask_mandatory_copy_2" = "If the federal state in which you are staying has decreed that masks are compulsory, a negative rapid or PCR test will exempt you from this mask requirement for 24 hours at leisure, cultural and sporting events and in catering establishments. An unsupervised self-test is not sufficient. Your state may regulate that you are also exempt from the mask requirement due to vaccinations or recovery (if these occurred no more than three months ago). An exemption from the mask requirement does not apply to long-distance public transport, hospitals, care facilities, and patients in doctors' offices.\n\nShould your COVID certificates stored in the app be sufficient to exempt you from the mask requirement in your federal state, your certificate will turn green. Your exemption from the mask requirement in your state can be verified by scanning your QR code using the CovPassCheck app.";
+
+"infschg_detail_page_mask_mandatory_button" = "Change federal state";
+
+"infschg_detail_page_mask_status_uncertain_title" = "Mask mandatory";
+
+"infschg_detail_page_mask_status_uncertain_federal_state" = "in %@";
+
+"infschg_detail_page_mask_status_uncertain_copy_1" = "There are no federal state-specific rules for this federal state. Therefore, only the uniform federal rules on mandatory masks apply.";
+
+"infschg_detail_page_mask_status_uncertain_link" = "More information";
+
+"infschg_detail_page_mask_status_uncertain_subtitle_2" = "Note:";
+
+"infschg_detail_page_mask_status_uncertain_copy_2" = "If the federal state in which you are staying has decreed that masks are compulsory, a negative rapid or PCR test will exempt you from this mask requirement for 24 hours at leisure, cultural and sporting events and in catering establishments. An unsupervised self-test is not sufficient. Your state may regulate that you are also exempt from the mask requirement due to vaccinations or recovery (if these occurred no more than three months ago). An exemption from the mask requirement does not apply to long-distance public transport, hospitals, care facilities, and patients in doctors' offices.\n\nShould your COVID certificates stored in the app be sufficient to exempt you from the mask requirement in your federal state, your certificate will turn green. Your exemption from the mask requirement in your state can be verified by scanning your QR code using the CovPassCheck app.";
+
+"infschg_detail_page_mask_status_uncertain_button" = "Change federal state";
+
+"infschg_detail_page_no_valid_certificate_title" = "No valid certificate";
+
+"infschg_detail_page_no_valid_certificate_copy" = "In your state, you can be exempt from the mask requirement for up to 24h. Note that different regulations may apply in your state. Also remember that the exemption does not apply to places where a special mask requirement applies: e.g. doctors' offices, hospitals or long-distance passenger transport.";
+
+"infschg_detail_page_no_valid_certificate_link" = "More information";
+
+"infschg_module_choose_federal_state_title" = "Choose federal state";
+
+
+/********** federal state names **********/
+
+"DE_BY" = "Bavaria";
+
+"DE_BB" = "Brandenburg";
+
+"DE_BE" = "Berlin";
+
+"DE_BW" = "Baden-Württemberg";
+
+"DE_HB" = "Bremen";
+
+"DE_HH" = "Hamburg";
+
+"DE_HE" = "Hesse";
+
+"DE_MV" = "Mecklenburg Western Pomerania";
+
+"DE_NI" = "Lower Saxony";
+
+"DE_NW" = "Northrhine-Westphalia";
+
+"DE_RP" = "Rhineland Palatinate";
+
+"DE_SN" = "Saxony";
+
+"DE_ST" = "Saxony-Anhalt";
+
+"DE_SL" = "Saarland";
+
+"DE_SH" = "Schleswig Holstein";
+
+"DE_TH" = "Thuringia";

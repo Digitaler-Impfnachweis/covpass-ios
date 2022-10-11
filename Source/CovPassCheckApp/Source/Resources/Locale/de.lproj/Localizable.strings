@@ -633,11 +633,11 @@
 
 "infschg_info_title" = "Neue gesetzliche Regelungen";
 
-"infschg_info_copy_1" = "In Deutschland tritt eine Änderung des Infektionsschutzgesetzes in Kraft. Ab dem 1. Oktober 2022 können die Bundesländer eine Maskenpflicht in öffentlich zugänglichen Innenräumen anordnen.";
+"infschg_info_copy_1" = "In Deutschland tritt eine Änderung des Infektionsschutzgesetzes in Kraft. Deshalb ändert sich Ihre CovPassCheck-App ab heute auch.";
 
-"infschg_info_copy_2" = "Befreiung von der Maskenpflicht";
+"infschg_info_copy_2" = "Befreiung von einer bundeslandspezifischen Maskenpflicht";
 
-"infschg_info_copy_3" = "Sofern das Bundesland, in dem Sie sich aufhalten, eine Maskenpflicht angeordnet hat, befreit Sie ein negativer Schnell- oder PCR-Test bei Freizeit-, Kultur- und Sportveranstaltungen sowie in gastronomischen Einrichtungen für 24 Stunden von dieser Maskenpflicht. Ein unbeaufsichtigt durchgeführter Selbsttest genügt nicht. Ihr Bundesland kann regeln, dass Sie auch durch Impfungen oder Genesung (wenn diese höchstens drei Monate zurückliegen) von der Maskenpflicht befreit sind.* Sobald die ersten Bundesländer eine Maskenpflicht anordnen, wird die CovPass-App nach einem weiteren Update Ihren Status zur bundeslandspezifischen Maskenpflicht anzeigen.\n\nSollten Ihre in der CovPass-App hinterlegten COVID-Zertifikate ausreichen, um Sie in Ihrem Bundesland von der Maskenpflicht zu befreien, färbt sich Ihr Zertifikat grün. Ihre Befreiung von der Maskenpflicht in Ihrem Bundesland kann durch einen Scan Ihres QR-Codes auf dem Startbildschirm oder aus der Detail-Ansicht heraus mithilfe der CovPassCheck-App nachgewiesen werden.\n\n*Eine Befreiung von der Maskenpflicht gilt nicht im öffentlichen Personenfernverkehr, in Krankenhäusern, Pflegeeinrichtungen und für Patientinnen und Patienten in Arztpraxen.";
+"infschg_info_copy_3" = "Sie können jetzt mit dieser App prüfen, ob die Nachweise einer Person für die Befreiung von einer bundeslandspezifischen Maskenpflicht ausreichen. Wählen Sie dazu einfach Ihr Bundesland vor der Prüfung aus.\n\nEin negativer Schnell- oder PCR-Test befreit 24 Stunden von dieser Maskenpflicht. In manchen Bundesländern können auch Impfungen und Genesungen von dieser Maskenpflicht befreien.";
 
 "infschg_info_button" = "OK";
 
@@ -647,11 +647,9 @@
 
 "infschg_start_screen_dropdown_title" = "Bundesland";
 
-"infschg_start_screen_dropdown_text" = "%@";
-
 "infschg_result_mask_optional_infobox_title" = "Behördenfunktion";
 
-"infschg_result_mask_optional_infobox_copy" = "Diese Funktion richtet sich ausschließlich an die Polizeibehörden. Der Versuch ein Zertifikat unberechtigt sperren zu lassen ist strafbar und kann erhebliche Folgen nach sich ziehen.";
+"infschg_result_mask_optional_infobox_copy" = "Diese Funktion richtet sich ausschließlich an die Polizeibehörden. Der Versuch, ein Zertifikat unberechtigt sperren zu lassen, ist strafbar und kann erhebliche Folgen nach sich ziehen.";
 
 "infschg_result_mask_optional_infobox_link" = "Informationen zur Sperrung anzeigen";
 
@@ -661,19 +659,19 @@
 
 "infschg_result_mask_mandatory_reason_1_title" = "Zertifikat nicht im Gültigkeitszeitraum";
 
-"infschg_result_mask_mandatory_reason_1_copy" = "Eventuell liegt eine Wartezeit für das gescannte Zertifikat vor, welche abgewartet werden muss oder das Zertifikat ist zu alt.";
+"infschg_result_mask_mandatory_reason_1_copy" = "Eventuell sind noch nicht 28 Tage nach dem positiven Test vergangen oder die letzte Impfung/Genesung liegt über 90 Tage zurück.";
 
 "infschg_result_mask_mandatory_reason_2_title" = "Falscher Zertifikatstyp";
 
-"infschg_result_mask_mandatory_reason_2_copy" = "Für die Befreiung von der Maskenpflicht ist in Ihrem Bundesland ein anderer Zertifikatstyp notwendig. Bitte informieren Sie sich über die  aktuellen Bestimmungen Ihres Bundeslands.";
+"infschg_result_mask_mandatory_reason_2_copy" = "Für die Befreiung von der Maskenpflicht ist in Ihrem Bundesland ein anderer Zertifikatstyp notwendig.";
 
 "infschg_result_mask_mandatory_reason_3_title" = "Unvollständige Impfserie";
 
-"infschg_result_mask_mandatory_reason_3_copy" = "Je nach Impfstoff sind für die Erlangung des vollständigen Impfschutzes mehrere Impfdosen erforderlich.";
+"infschg_result_mask_mandatory_reason_3_copy" = "Für die Erlangung eines vollständigen Impfschutzes sind drei Impfstoffdosen oder zwei Impfstoffdosen plus eine Genesung erforderlich.";
 
 "infschg_result_mask_mandatory_reason_4_title" = "Ungültige Signatur";
 
-"infschg_result_mask_mandatory_reason_4_copy" = "Das Zertifikat wurde nicht von einer autorisierten Stelle ausgestellt oder gehört nicht zu einem Digitalen COVID-Zertifikat der EU.";
+"infschg_result_mask_mandatory_reason_4_copy" = "Das Zertifikat ist kein Digitales COVID-Zertifikat der EU oder wurde nicht von einer autorisierten Stelle ausgestellt.";
 
 "infschg_result_mask_mandatory_reason_5_title" = "QR-Code nicht lesbar";
 
@@ -699,13 +697,13 @@
 
 "infschg_result_mask_mandatory_deviating_data_link" = "Abweichung ignorieren";
 
-"infschg_result_no_mask_rules_title" = "Keine vorliegende Regeln";
+"infschg_result_no_mask_rules_title" = "Keine vorliegenden Regeln";
 
-"infschg_result_no_mask_rules_subtitle" = "In %@";
+"infschg_result_no_mask_rules_subtitle" = "in %@";
 
 "infschg_result_no_mask_rules_copy_1_bold" = "Für dieses Bundesland liegen keine bundeslandspezifischen Regeln vor. Es gelten daher nur die bundeseinheitlichen Regeln zur Maskenpflicht.";
 
-"infschg_result_no_mask_rules_copy_2" = "Sofern das Bundesland, in dem Sie sich aufhalten, eine Maskenpflicht angeordnet hat, befreit die Prüflinge ein negativer Schnell- oder PCR-Test bei Freizeit-, Kultur- und Sportveranstaltungen sowie in gastronomischen Einrichtungen für 24 Stunden von dieser Maskenpflicht. Ein unbeaufsichtigt durchgeführter Selbsttest genügt nicht. Ihr Bundesland kann regeln, dass die Prüflinge auch durch Impfungen oder Genesung (wenn diese höchstens drei Monate zurückliegen) von der Maskenpflicht befreit sind. Eine Befreiung von der Maskenpflicht gilt nicht im öffentlichen Personenfernverkehr, in Krankenhäusern, Pflegeeinrichtungen und für Patientinnen und Patienten in Arztpraxen.";
+"infschg_result_no_mask_rules_copy_2" = "Sofern das Bundesland, in dem Sie sich aufhalten, eine Maskenpflicht angeordnet hat, befreit ein negativer Schnell- oder PCR-Test bei Freizeit-, Kultur- und Sportveranstaltungen sowie in gastronomischen Einrichtungen für 24 Stunden von dieser Maskenpflicht. Ein unbeaufsichtigter durchgeführter Selbsttest genügt nicht. Ihr Bundesland kann regeln, dass auch vollständige Impfungen oder Genesungen (wenn diese höchstens drei Monate zurückliegen) von der Maskenpflicht befreien.\n\nEine Befreiung von der Maskenpflicht gilt nicht im öffentlichen Personenfernverkehr, in Krankenhäusern, Pflegeeinrichtungen und in Arztpraxen.";
 
 "infschg_start_screen_white_box_copy_2" = "Letzte Aktualisierung vor weniger als 24 Stunden";
 
@@ -728,21 +726,21 @@
 
 "DE_HE" = "Hessen";
 
-"DE_MV" = "Mecklenburg Vorpommern";
+"DE_MV" = "Mecklenburg-Vorpommern";
 
 "DE_NI" = "Niedersachsen";
 
 "DE_NW" = "Nordrhein-Westfalen";
 
-"DE_RP" = "Rheinland Pfalz";
+"DE_RP" = "Rheinland-Pfalz";
 
 "DE_SN" = "Sachsen";
 
-"DE_ST" = "Sachsen Anhalt";
+"DE_ST" = "Sachsen-Anhalt";
 
 "DE_SL" = "Saarland";
 
-"DE_SH" = "Schleswig Holstein";
+"DE_SH" = "Schleswig-Holstein";
 
 "DE_TH" = "Thüringen";
 

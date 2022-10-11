@@ -1691,17 +1691,17 @@
 
 "infschg_cert_overview_title" = "Ihr aktuelles Zertifikat";
 
-"infschg_cert_overview_mask_time_until" = "Befreit bis %d";
+"infschg_cert_overview_mask_time_until" = "Befreit bis %@";
 
-"infschg_cert_overview_mask_time_from" = "Befreit ab %d";
+"infschg_cert_overview_mask_time_from" = "Befreit ab %@";
 
 "infschg_cert_overview_mask_hint_optional" = "Sie sind in Deutschland in den meisten Bereichen vom Tragen einer Maske befreit. Beachten Sie, dass die Befreiung nicht für Orte gilt, an denen eine besondere Maskenpflicht gilt: z.B. Arztpraxen, Krankenhäuser oder dem Personenfernverkehr.";
 
 "infschg_cert_overview_mask_hint_mandatory" = "In ihrem Bundesland können Sie bis zu 24h von der Maskenpflicht befreit werden. Beachten Sie, dass in Ihrem Bundesland andere Bestimmungen gelten können. Denken Sie auch daran, dass die Befreiung nicht für Orte gilt, an denen eine besondere Maskenpflicht gilt: z.B. Arztpraxen, Krankenhäuser oder dem Personenfernverkehr.";
 
-"infschg_cert_overview_immunisation_time_since" = "Seit %d";
+"infschg_cert_overview_immunisation_time_since" = "Seit %@";
 
-"infschg_cert_overview_immunisation_time_from" = "Ab %d";
+"infschg_cert_overview_immunisation_time_from" = "Ab %@";
 
 "infschg_cert_overview_immunisation_incomplete_A" = "Sie haben noch nicht alle derzeit empfohlenen Impfungen erhalten. Ihr Impfschutz ist noch nicht vollständig.";
 
@@ -1716,3 +1716,118 @@
 "infschg_cert_overview_immunisation_invalid" = "Fügen Sie ein gültiges Zertifikat hinzu oder erneuern Sie Ihr neuestes Zertifikat, um Informationen zu Ihrem Impfstatus zu erhalten.";
 
 "infschg_more_info_link" = "#Mehr Informationen::https://www.digitaler-impfnachweis-app.de/faq/#die-aktuell-h-ufigsten-fragen#";
+
+"infschg_popup_choose_federal_state_title" = "Wählen Sie Ihr Bundesland";
+
+"infschg_popup_choose_federal_state_copy_1" = "Die Regeln zur Maskenpflicht können je nach Bundesland variieren. Wählen Sie Ihr Bundesland aus, um Ihren aktuellen Maskenstatus sehen zu können.*";
+
+"infschg_popup_choose_federal_state_tag" = "Bundesland";
+
+"infschg_popup_choose_federal_state_box_content" = "%@";
+
+"infschg_popup_choose_federal_state_copy_2" = "*Sie dürfen jederzeit das Bundesland von der entsprechenden Auswahl in den Einstellungen ändern.";
+
+"infschg_start_screen_status_green" = "Keine Maskenpflicht";
+
+"infschg_start_screen_status_blue" = "Maskenpflicht";
+
+"infschg_start_screen_status_grey" = "Kein gültiges Zertifikat";
+
+"infschg_start_screen_status_federal_state" = "in %@";
+
+"infschg_settings_federal_state_title" = "Bundesland";
+
+"infschg_settings_federal_state_page_title" = "Bundesland";
+
+"infschg_settings_federal_state_page_copy" = "Wählen Sie das Bundesland aus, nach dessen Regeln Ihr Maskenstatus angezeigt werden soll.";
+
+"infschg_settings_federal_state_page_tag" = "Bundesland";
+
+"infschg_detail_page_no_mask_mandatory_title" = "Keine Maskenpflicht";
+
+"infschg_detail_page_no_mask_mandatory_subtitle" = "Befreit bis %@";
+
+"infschg_detail_page_no_mask_mandatory_federal_state" = "in %@";
+
+"infschg_detail_page_no_mask_mandatory_copy_1" = "Sie sind in diesem Bundesland in einigen Situationen von der Maskenpflicht ausgenommen; eine Maske ist dennoch empfohlen.";
+
+"infschg_detail_page_no_mask_mandatory_link" = "Mehr Informationen";
+
+"infschg_detail_page_no_mask_mandatory_subtitle_2" = "Hinweis:";
+
+"infschg_detail_page_no_mask_mandatory_copy_2" = "Sofern das Bundesland, in dem Sie sich aufhalten, eine Maskenpflicht angeordnet hat, befreit Sie ein negativer Schnell- oder PCR-Test bei Freizeit-, Kultur- und Sportveranstaltungen sowie in gastronomischen Einrichtungen für 24 Stunden von dieser Maskenpflicht. Ein unbeaufsichtigt durchgeführter Selbsttest genügt nicht. Ihr Bundesland kann regeln, dass Sie auch durch Impfungen oder Genesung (wenn diese höchstens drei Monate zurückliegen) von der Maskenpflicht befreit sind. Eine Befreiung von der Maskenpflicht gilt nicht im öffentlichen Personenfernverkehr, in Krankenhäusern, Pflegeeinrichtungen und für Patientinnen und Patienten in Arztpraxen.\n\nSollten Ihre in der App hinterlegten COVID-Zertifikate ausreichen, um Sie in Ihrem Bundesland von der Maskenpflicht zu befreien, färbt sich Ihr Zertifikat grün. Ihre Befreiung von der Maskenpflicht in Ihrem Bundesland kann durch einen Scan Ihres QR-Codes mithilfe der CovPassCheck-App nachgewiesen werden.";
+
+"infschg_detail_page_no_mask_mandatory_button" = "Bundesland ändern";
+
+"infschg_detail_page_mask_mandatory_title" = "Maskenpflicht";
+
+"infschg_detail_page_mask_mandatory_subtitle" = "Befreit bis %@";
+
+"infschg_detail_page_mask_mandatory_federal_state" = "in %@";
+
+"infschg_detail_page_mask_mandatory_copy_1" = "Sie sind in diesem Bundesland nicht von der Maskenpflicht ausgenommen.";
+
+"infschg_detail_page_mask_mandatory_link" = "Mehr Informationen";
+
+"infschg_detail_page_mask_mandatory_subtitle_2" = "Hinweis:";
+
+"infschg_detail_page_mask_mandatory_copy_2" = "Sofern das Bundesland, in dem Sie sich aufhalten, eine Maskenpflicht angeordnet hat, befreit Sie ein negativer Schnell- oder PCR-Test bei Freizeit-, Kultur- und Sportveranstaltungen sowie in gastronomischen Einrichtungen für 24 Stunden von dieser Maskenpflicht. Ein unbeaufsichtigt durchgeführter Selbsttest genügt nicht. Ihr Bundesland kann regeln, dass Sie auch durch Impfungen oder Genesung (wenn diese höchstens drei Monate zurückliegen) von der Maskenpflicht befreit sind. Eine Befreiung von der Maskenpflicht gilt nicht im öffentlichen Personenfernverkehr, in Krankenhäusern, Pflegeeinrichtungen und für Patientinnen und Patienten in Arztpraxen.\n\nSollten Ihre in der App hinterlegten COVID-Zertifikate ausreichen, um Sie in Ihrem Bundesland von der Maskenpflicht zu befreien, färbt sich Ihr Zertifikat grün. Ihre Befreiung von der Maskenpflicht in Ihrem Bundesland kann durch einen Scan Ihres QR-Codes mithilfe der CovPassCheck-App nachgewiesen werden.";
+
+"infschg_detail_page_mask_mandatory_button" = "Bundesland ändern";
+
+"infschg_detail_page_mask_status_uncertain_title" = "Maskenpflicht";
+
+"infschg_detail_page_mask_status_uncertain_federal_state" = "in %@";
+
+"infschg_detail_page_mask_status_uncertain_copy_1" = "Für dieses Bundesland liegen keine bundeslandspezifischen Regeln vor. Es gelten daher nur die bundeseinheitlichen Regeln zur Maskenpflicht.";
+
+"infschg_detail_page_mask_status_uncertain_link" = "Mehr Informationen";
+
+"infschg_detail_page_mask_status_uncertain_subtitle_2" = "Hinweis:";
+
+"infschg_detail_page_mask_status_uncertain_copy_2" = "Sofern das Bundesland, in dem Sie sich aufhalten, eine Maskenpflicht angeordnet hat, befreit Sie ein negativer Schnell- oder PCR-Test bei Freizeit-, Kultur- und Sportveranstaltungen sowie in gastronomischen Einrichtungen für 24 Stunden von dieser Maskenpflicht. Ein unbeaufsichtigt durchgeführter Selbsttest genügt nicht. Ihr Bundesland kann regeln, dass Sie auch durch Impfungen oder Genesung (wenn diese höchstens drei Monate zurückliegen) von der Maskenpflicht befreit sind. Eine Befreiung von der Maskenpflicht gilt nicht im öffentlichen Personenfernverkehr, in Krankenhäusern, Pflegeeinrichtungen und für Patientinnen und Patienten in Arztpraxen.\n\nSollten Ihre in der App hinterlegten COVID-Zertifikate ausreichen, um Sie in Ihrem Bundesland von der Maskenpflicht zu befreien, färbt sich Ihr Zertifikat grün. Ihre Befreiung von der Maskenpflicht in Ihrem Bundesland kann durch einen Scan Ihres QR-Codes mithilfe der CovPassCheck-App nachgewiesen werden.";
+
+"infschg_detail_page_mask_status_uncertain_button" = "Bundesland ändern";
+
+"infschg_detail_page_no_valid_certificate_title" = "Kein gültiges Zertifikat";
+
+"infschg_detail_page_no_valid_certificate_copy" = "In Ihrem Bundesland können Sie bis zu 24h von der Maskenpflicht befreit werden. Beachten Sie, dass in Ihrem Bundesland andere Bestimmungen gelten können. Denken Sie auch daran, dass die Befreiung nicht für Orte gilt, an denen eine besondere Maskenpflicht gilt: z.B. Arztpraxen, Krankenhäuser oder dem Personenfernverkehr.";
+
+"infschg_detail_page_no_valid_certificate_link" = "Mehr Informationen";
+
+"infschg_module_choose_federal_state_title" = "Bundesland wählen";
+
+
+/********** federal state names **********/
+
+"DE_BY" = "Bayern";
+
+"DE_BB" = "Brandenburg";
+
+"DE_BE" = "Berlin";
+
+"DE_BW" = "Baden-Württemberg";
+
+"DE_HB" = "Bremen";
+
+"DE_HH" = "Hamburg";
+
+"DE_HE" = "Hessen";
+
+"DE_MV" = "Mecklenburg Vorpommern";
+
+"DE_NI" = "Niedersachsen";
+
+"DE_NW" = "Nordrhein-Westfalen";
+
+"DE_RP" = "Rheinland Pfalz";
+
+"DE_SN" = "Sachsen";
+
+"DE_ST" = "Sachsen Anhalt";
+
+"DE_SL" = "Saarland";
+
+"DE_SH" = "Schleswig Holstein";
+
+"DE_TH" = "Thüringen";

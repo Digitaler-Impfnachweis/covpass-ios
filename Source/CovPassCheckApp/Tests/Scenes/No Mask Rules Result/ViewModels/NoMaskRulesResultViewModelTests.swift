@@ -110,7 +110,7 @@ final class NoMaskRulesResultViewModelTests: XCTestCase {
         let subtitle = sut.subtitle
 
         // Then
-        XCTAssertEqual(subtitle, "In Northrhine-Westphalia")
+        XCTAssertEqual(subtitle, "in Northrhine-Westphalia")
     }
 
     func testRevoke() {
