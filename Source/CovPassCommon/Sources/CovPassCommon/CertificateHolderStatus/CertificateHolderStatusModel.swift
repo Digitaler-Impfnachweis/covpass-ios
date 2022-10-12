@@ -145,14 +145,3 @@ private extension Array where Element == ValidationResult {
         return maskOptionalRuleFailed
     }
 }
-
-private extension Array where Element == ExtendedCBORWebToken {
-    
-    var joinedTokens: CBORWebToken? {
-        let dgcs = map(\.vaccinationCertificate.hcert.dgc)
-        guard let joinedDgcs = dgcs.joinCertificates() else { return nil }
-        guard var certificate = first?.vaccinationCertificate else { return nil }
-        certificate.hcert.dgc = joinedDgcs
-        return certificate
-    }
-}

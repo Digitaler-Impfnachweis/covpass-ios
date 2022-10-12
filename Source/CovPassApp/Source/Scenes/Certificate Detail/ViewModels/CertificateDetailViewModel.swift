@@ -149,9 +149,9 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
         }
         if let t = selectedCertificate?.firstTest {
             if t.isPCR {
-                return String(format: "pcr_test_certificate_overview_title".localized, DateUtils.displayDateTimeFormatter.string(from: t.sc))
+                return String(format: "pcr_test_certificate_overview_title".localized, t.sc.readableString)
             }
-            return String(format: "test_certificate_overview_title".localized, DateUtils.displayDateTimeFormatter.string(from: t.sc))
+            return String(format: "test_certificate_overview_title".localized, t.sc.readableString)
         }
 
         if let vaccination = selectedCertificate?.firstVaccination {
@@ -232,9 +232,17 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
         if isInvalid {
             return CertificateHolderInvalidMaskStatusViewModel()
         } else if holderNeedsMask {
+            if let vaccination = certificates.latestVaccination, let recovery = certificates.latestRecovery,
+               recovery.fr > vaccination.dt, !recovery.fr.isOlderThan29Days,
+               let fr = recovery.fr.add(days: 28) {
+                return CertificateHolderMaskRequiredStatusViewModel(date: fr.readableString)
+            }
             return CertificateHolderMaskRequiredStatusViewModel()
         } else {
-            return CertificateHolderMaskNotRequiredStatusViewModel()
+            guard let dtOrFr = certificates.joinedTokens?.dtFrOrSc().add(days: 90) else {
+                return CertificateHolderMaskNotRequiredStatusViewModel()
+            }
+            return CertificateHolderMaskNotRequiredStatusViewModel(date: dtOrFr.readableString)
         }
     }
     
@@ -246,21 +254,18 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
                 return CertificateHolderIncompleteImmunizationStatusViewModel()
             }
             if vaccination.dn > 3 {
-                return CertificateHolderCompleteImmunizationB2StatusViewModel()
+                return CertificateHolderCompleteImmunizationB2StatusViewModel(date: vaccination.dt.readableString)
             } else if vaccination.dn == 3 {
-                return CertificateHolderImmunizationC2StatusViewModel()
+                return CertificateHolderImmunizationC2StatusViewModel(date: vaccination.dt.readableString)
             }
             if let recovery = certificates.latestRecovery {
                 if vaccination.dn == 2 && recovery.fr < vaccination.dt {
-                    return CertificateHolderImmunizationE2StatusViewModel()
+                    return CertificateHolderImmunizationE2StatusViewModel(date: vaccination.dt.readableString)
                 } else if vaccination.dn == 2 && recovery.fr > vaccination.dt, recovery.fr.isOlderThan29Days {
-                    return CertificateHolderImmunizationE2StatusViewModel()
+                    return CertificateHolderImmunizationE2StatusViewModel(date: recovery.fr.readableStringAfter29Days)
                 } else if vaccination.dn == 2 && recovery.fr > vaccination.dt {
-                    let frPlus29Days = recovery.fr.add(days: 30)
-                    guard let daysToImmunity: Int = frPlus29Days?.daysSince(Date()) else {
-                        return CertificateHolderIncompleteImmunizationStatusViewModel()
-                    }
-                    return CertificateHolderImmunizationE22StatusViewModel(days: daysToImmunity)
+                    return CertificateHolderImmunizationE22StatusViewModel(days: recovery.fr.daysUntil29Days,
+                                                                           date: recovery.fr.readableStringAfter29Days)
                 }
             }
         }
@@ -600,5 +605,25 @@ private extension CertificateDetailViewModel {
 
     private var isJohnsonAndJohnson2of2Vaccination: Bool {
         selectedDgc?.isJohnsonAndJohnson2of2Vaccination ?? false
+    }
+}
+
+private extension Date {
+    var readableString: String {
+        DateUtils.displayDateTimeFormatter.string(from: self)
+    }
+    
+    var readableStringAfter29Days: String {
+        guard let dateAfter29Days = add(days: 29) else  {
+            return ""
+        }
+        return dateAfter29Days.readableString
+    }
+    
+    var daysUntil29Days: Int {
+        guard let dateAfter29Days = add(days: 30) else  {
+            return 0
+        }
+        return dateAfter29Days.daysSince(Date())
     }
 }

@@ -622,27 +622,19 @@ public extension Array where Element == ExtendedCBORWebToken {
         res.append(contentsOf: sortLatestRest(res))
         return res
     }
+    
+    var joinedTokens: CBORWebToken? {
+        let dgcs = map(\.vaccinationCertificate.hcert.dgc)
+        guard let joinedDgcs = dgcs.joinCertificates() else { return nil }
+        guard var certificate = first?.vaccinationCertificate else { return nil }
+        certificate.hcert.dgc = joinedDgcs
+        return certificate
+    }
 }
 
 
 private extension ExtendedCBORWebToken {
     func matches(_ extendedCBORWebToken: ExtendedCBORWebToken) -> Bool {
         vaccinationCertificate.hcert.dgc == extendedCBORWebToken.vaccinationCertificate.hcert.dgc
-    }
-}
-
-private extension CBORWebToken {
-    func dtFrOrSc() -> Date {
-        let date: Date
-        if let vaccination = hcert.dgc.v?.first {
-            date = vaccination.dt
-        } else if let recovery = hcert.dgc.r?.first {
-            date = recovery.fr
-        } else if let test = hcert.dgc.t?.first {
-            date = test.sc
-        } else {
-            date = .init(timeIntervalSinceReferenceDate: 0)
-        }
-        return date
     }
 }

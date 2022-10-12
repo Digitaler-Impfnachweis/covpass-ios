@@ -126,7 +126,7 @@ class CertificateImportSelectionViewModelTests: XCTestCase {
         XCTAssertEqual(items[2].additionalLines.first, "Vaccine dose 1 of 2")
         XCTAssertEqual(items[2].additionalLines.last, "Vaccinated on 02.02.2021")
         XCTAssertEqual(items[3].additionalLines.first, "Vaccine dose 3 of 3")
-        XCTAssertEqual(items[3].additionalLines.last, "Vaccinated on 02.02.2021")
+        XCTAssertEqual(items[3].additionalLines.last, "Vaccinated on 02.04.2021")
     }
 
     func testTitle() {

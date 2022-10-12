@@ -910,15 +910,17 @@ class CertificateDetailViewModelTests: XCTestCase {
         // Then
         XCTAssertEqual(count, 0)
     }
-
+    
     func testMaskStatusViewModel_optional() {
         // When
         let viewModel = sut.maskStatusViewModel
+        certificateHolderStatusModel.needsMask = false
 
         // Then
         XCTAssertTrue(viewModel is CertificateHolderMaskNotRequiredStatusViewModel)
+        XCTAssertEqual(viewModel.subtitle, "Exempt until Jul 1, 2021 at 12:00 AM")
     }
-
+    
     func testMaskStatusViewModel_required() throws {
         // Given
         certificateHolderStatusModel.needsMask = true
@@ -929,6 +931,39 @@ class CertificateDetailViewModelTests: XCTestCase {
 
         // Then
         XCTAssertTrue(viewModel is CertificateHolderMaskRequiredStatusViewModel)
+        XCTAssertEqual(viewModel.subtitle, nil)
+    }
+    
+    func testMaskStatusViewModel_required_withRecoveryAsFreshest_butOlderThan29Days() throws {
+        // Given
+        certificateHolderStatusModel.needsMask = true
+        try configureCustomSut(certificates: [.token3Of3(),
+            .reissuableRecovery])
+
+        // When
+        let viewModel = sut.maskStatusViewModel
+
+        // Then
+        XCTAssertTrue(viewModel is CertificateHolderMaskRequiredStatusViewModel)
+        XCTAssertEqual(viewModel.subtitle, nil)
+    }
+    
+    func testMaskStatusViewModel_required_withRecoveryAsFreshest_notOlderThan29Days() throws {
+        // Given
+        certificateHolderStatusModel.needsMask = true
+        let recoveryCert: ExtendedCBORWebToken = .reissuableRecovery
+        let dateOfRecovery: Date = Date().add(days: 5)!
+        recoveryCert.vaccinationCertificate.hcert.dgc.r!.first!.fr = dateOfRecovery
+        try configureCustomSut(certificates: [.token3Of3(),
+                                              recoveryCert])
+
+        // When
+        let viewModel = sut.maskStatusViewModel
+
+        // Then
+        let formattedDate = DateUtils.displayDateTimeFormatter.string(from: dateOfRecovery.add(days: 28)!)
+        XCTAssertTrue(viewModel is CertificateHolderMaskRequiredStatusViewModel)
+        XCTAssertEqual(viewModel.subtitle, "Exempt from \(formattedDate)")
     }
 
     func testMaskStatusViewModel_invalid() throws {

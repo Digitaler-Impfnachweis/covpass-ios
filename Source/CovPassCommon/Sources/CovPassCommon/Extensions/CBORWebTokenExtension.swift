@@ -62,4 +62,18 @@ public extension CBORWebToken {
         let willExpireInLessOrEqual28Days = daysSinceExpiry < 0 && -28 <= daysSinceExpiry
         return willExpireInLessOrEqual28Days
     }
+    
+    func dtFrOrSc() -> Date {
+        let date: Date
+        if let vaccination = hcert.dgc.v?.first {
+            date = vaccination.dt
+        } else if let recovery = hcert.dgc.r?.first {
+            date = recovery.fr
+        } else if let test = hcert.dgc.t?.first {
+            date = test.sc
+        } else {
+            date = .init(timeIntervalSinceReferenceDate: 0)
+        }
+        return date
+    }
 }
