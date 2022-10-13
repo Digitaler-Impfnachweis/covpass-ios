@@ -103,7 +103,7 @@ class HowToScanViewController: UIViewController {
     }
 
     private func configureDescriptionText() {
-        descriptionText.attributedBodyText = viewModel.info.styledAs(.body)
+        descriptionText.updateView(body: viewModel.info.styledAs(.body))
         descriptionText.layoutMargins.top = .space_24
         descriptionText.layoutMargins.bottom = .space_24
         descriptionText.bottomBorder.isHidden = true

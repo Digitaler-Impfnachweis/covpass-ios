@@ -88,8 +88,8 @@ extension RevocationInfoViewController: ViewModelDelegate {
 private extension ParagraphView {
     static func from(_ item: ListContentItem) -> ParagraphView {
         let view = ParagraphView()
-        view.attributedTitleText = item.label.styledAs(.header_3)
-        view.attributedBodyText = item.value.styledAs(.body)
+        view.updateView(title: item.label.styledAs(.header_3),
+                        body: item.value.styledAs(.body))
         view.accessibilityLabel = item.accessibilityLabel
         view.accessibilityIdentifier = item.accessibilityIdentifier
         view.layoutMargins.top = .space_12

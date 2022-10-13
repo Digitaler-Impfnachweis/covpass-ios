@@ -42,7 +42,7 @@
                     <rect key="frame" x="0.0" y="24" width="414" height="858"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="4ka-qw-LRS">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="1166"/>
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="2144"/>
                             <subviews>
                                 <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="eZz-97-0Z9" userLabel="Name Headline" customClass="PlainLabel" customModule="CovPassUI">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
@@ -90,16 +90,16 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j4t-Jg-zf5" userLabel="Immunization ContainerView">
-                                    <rect key="frame" x="0.0" y="222" width="414" height="344"/>
+                                    <rect key="frame" x="0.0" y="222" width="414" height="471.5"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="1rx-P9-x8s">
-                                            <rect key="frame" x="0.0" y="2" width="414" height="334"/>
+                                            <rect key="frame" x="0.0" y="2" width="414" height="461.5"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="Fc7-Ur-FVx" userLabel="Immunization View" customClass="ParagraphView" customModule="CovPassUI">
-                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="206"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="333.5"/>
                                                 </view>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Ukt-Bg-k00" userLabel="Immunization Button Container View">
-                                                    <rect key="frame" x="0.0" y="206" width="414" height="128"/>
+                                                    <rect key="frame" x="0.0" y="333.5" width="414" height="128"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="U8I-bk-rPh" userLabel="Immunization Button" customClass="MainButton" customModule="CovPassUI">
                                                             <rect key="frame" x="0.0" y="0.0" width="414" height="128"/>
@@ -117,34 +117,34 @@
                                     </constraints>
                                 </view>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="mH1-6C-Yzb">
-                                    <rect key="frame" x="0.0" y="566" width="414" height="50"/>
+                                    <rect key="frame" x="0.0" y="693.5" width="414" height="50"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="50" placeholder="YES" id="2aQ-ki-wJf"/>
                                     </constraints>
                                 </stackView>
                                 <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="fc2-AT-hbj" userLabel="Booster Hint View" customClass="HintView" customModule="CovPassUI">
-                                    <rect key="frame" x="0.0" y="616" width="414" height="50"/>
+                                    <rect key="frame" x="0.0" y="743.5" width="414" height="50"/>
                                 </view>
                                 <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="jt2-bl-Uis" userLabel="Personal Data Headline" customClass="PlainLabel" customModule="CovPassUI">
-                                    <rect key="frame" x="0.0" y="666" width="414" height="50"/>
+                                    <rect key="frame" x="0.0" y="793.5" width="414" height="50"/>
                                 </view>
                                 <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="axl-hz-02P" userLabel="Name View" customClass="ParagraphView" customModule="CovPassUI">
-                                    <rect key="frame" x="0.0" y="716" width="414" height="50"/>
+                                    <rect key="frame" x="0.0" y="843.5" width="414" height="333.5"/>
                                 </view>
                                 <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="KGk-1M-GC6" userLabel="Name View" customClass="ParagraphView" customModule="CovPassUI">
-                                    <rect key="frame" x="0.0" y="766" width="414" height="50"/>
+                                    <rect key="frame" x="0.0" y="1177" width="414" height="333.5"/>
                                 </view>
                                 <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="o8t-JG-hB0" userLabel="Birtdate View" customClass="ParagraphView" customModule="CovPassUI">
-                                    <rect key="frame" x="0.0" y="816" width="414" height="50"/>
+                                    <rect key="frame" x="0.0" y="1510.5" width="414" height="333.5"/>
                                 </view>
                                 <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="INh-B1-2sv" userLabel="All Certificates Headline" customClass="PlainLabel" customModule="CovPassUI">
-                                    <rect key="frame" x="0.0" y="866" width="414" height="50"/>
+                                    <rect key="frame" x="0.0" y="1844" width="414" height="50"/>
                                 </view>
                                 <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="lZf-yH-BZP" userLabel="ScanHintView" customClass="HintView" customModule="CovPassUI">
-                                    <rect key="frame" x="0.0" y="916" width="414" height="50"/>
+                                    <rect key="frame" x="0.0" y="1894" width="414" height="50"/>
                                 </view>
                                 <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="200" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="rhc-O6-hd2" userLabel="Vaccinations StackView">
-                                    <rect key="frame" x="0.0" y="966" width="414" height="200"/>
+                                    <rect key="frame" x="0.0" y="1944" width="414" height="200"/>
                                 </stackView>
                             </subviews>
                         </stackView>
@@ -193,7 +193,13 @@
         <designable name="eZz-97-0Z9">
             <size key="intrinsicContentSize" width="414" height="50"/>
         </designable>
+        <designable name="fc2-AT-hbj">
+            <size key="intrinsicContentSize" width="414" height="50"/>
+        </designable>
         <designable name="jt2-bl-Uis">
+            <size key="intrinsicContentSize" width="414" height="50"/>
+        </designable>
+        <designable name="lZf-yH-BZP">
             <size key="intrinsicContentSize" width="414" height="50"/>
         </designable>
         <designable name="o8t-JG-hB0">

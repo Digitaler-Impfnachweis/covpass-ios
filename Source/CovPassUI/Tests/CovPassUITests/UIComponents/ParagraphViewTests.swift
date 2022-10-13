@@ -49,7 +49,7 @@ class ParagraphViewTests: XCTestCase {
         let expectedText = "Title".styledAs(.header_3)
 
         // When
-        sut.attributedTitleText = expectedText
+        sut.updateView(title: expectedText)
 
         // Then
         XCTAssertEqual(sut.titleLabel.attributedText, expectedText)
@@ -60,7 +60,7 @@ class ParagraphViewTests: XCTestCase {
         let expectedText = "Body".styledAs(.body)
 
         // When
-        sut.attributedTitleText = expectedText
+        sut.updateView(title: expectedText)
 
         // Then
         XCTAssertEqual(sut.titleLabel.attributedText, expectedText)
@@ -71,8 +71,7 @@ class ParagraphViewTests: XCTestCase {
         let titleText = "Body"
 
         // When
-        sut.attributedTitleText = titleText.styledAs(.header_3)
-        sut.attributedBodyText = nil
+        sut.updateView(title: titleText.styledAs(.header_3))
 
         // Then
         XCTAssertTrue(sut.isAccessibilityElement)
@@ -86,10 +85,8 @@ class ParagraphViewTests: XCTestCase {
         let bodyText = "Some body text"
 
         // When
-        sut.attributedTitleText = nil
-        sut.attributedSubtitleText = nil
-        sut.attributedBodyText = bodyText.styledAs(.body)
-
+        sut.updateView(body: bodyText.styledAs(.body))
+        
         // Then
         XCTAssertTrue(sut.isAccessibilityElement)
         XCTAssertEqual(sut.accessibilityLabel, nil)
@@ -103,8 +100,8 @@ class ParagraphViewTests: XCTestCase {
         let titleText = "Some title text"
 
         // When
-        sut.attributedTitleText = titleText.styledAs(.header_3)
-        sut.attributedBodyText = bodyText.styledAs(.body)
+        sut.updateView(title: titleText.styledAs(.header_3),
+                       body: bodyText.styledAs(.body))
 
         // Then
         XCTAssertTrue(sut.isAccessibilityElement)
@@ -117,8 +114,8 @@ class ParagraphViewTests: XCTestCase {
     func testVisibilityTrue_bothTexts() {
         // Given
         // When
-        sut.attributedTitleText = testText.styledAs(.header_3)
-        sut.attributedBodyText = testText.styledAs(.body)
+        sut.updateView(title: testText.styledAs(.header_3),
+                       body: testText.styledAs(.body))
         // Then
         XCTAssertFalse(sut.isHidden)
     }
@@ -126,8 +123,7 @@ class ParagraphViewTests: XCTestCase {
     func testVisibilityTrue_titleText() {
         // Given
         // When
-        sut.attributedTitleText = testText.styledAs(.header_3)
-        sut.attributedBodyText = nil
+        sut.updateView(title: testText.styledAs(.header_3))
         // Then
         XCTAssertFalse(sut.isHidden)
     }
@@ -135,25 +131,16 @@ class ParagraphViewTests: XCTestCase {
     func testVisibilityTrue_bodyText() {
         // Given
         // When
-        sut.attributedTitleText = testText.styledAs(.header_3)
-        sut.attributedBodyText = "".styledAs(.body)
+        sut.updateView(title: testText.styledAs(.header_3),
+                       body: "".styledAs(.body))
         // Then
         XCTAssertFalse(sut.isHidden)
     }
 
-    func testVisibilityFalse() {
-        // Given
-        // When
-        sut.attributedTitleText = "".styledAs(.header_3)
-        sut.attributedBodyText = "".styledAs(.body)
-        // Then
-        XCTAssertTrue(sut.isHidden)
-    }
-
     func testSetTitleAndBodyText() {
         let otherTestText = "Other test text"
-        sut.attributedTitleText = otherTestText.styledAs(.header_3)
-        sut.attributedBodyText = testText.styledAs(.body)
+        sut.updateView(title: otherTestText.styledAs(.header_3),
+                       body: testText.styledAs(.body))
         XCTAssertEqual(sut.titleLabel.text, otherTestText)
         XCTAssertEqual(sut.bodyLabel.text, testText)
     }

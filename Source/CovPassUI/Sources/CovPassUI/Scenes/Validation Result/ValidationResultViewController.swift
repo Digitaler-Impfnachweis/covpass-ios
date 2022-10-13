@@ -135,8 +135,8 @@ public class ValidationResultViewController: UIViewController {
         stackView.setCustomSpacing(.space_24, after: resultView)
         imageView.image = viewModel.icon
         imageView.enableAccessibility(label: Constants.Accessibility.image.label)
-        resultView.attributedTitleText = viewModel.resultTitle.styledAs(.header_1)
-        resultView.attributedBodyText = viewModel.resultBody.styledAs(.body)
+        resultView.updateView(title: viewModel.resultTitle.styledAs(.header_1),
+                              body: viewModel.resultBody.styledAs(.body))
         resultView.bottomBorder.isHidden = true
         infoView.attributedText = viewModel.info?.styledAs(.body).colored(.onBackground40)
         infoView.layoutMargins = .init(top: .zero, left: .space_24, bottom: .zero, right: .space_24)
@@ -146,9 +146,9 @@ public class ValidationResultViewController: UIViewController {
         }
         viewModel.paragraphs.forEach {
             let p = ParagraphView()
-            p.attributedTitleText = $0.title.styledAs(.header_3)
-            p.attributedBodyText = $0.subtitle.styledAs(.body)
-            p.image = $0.icon
+            p.updateView(image: $0.icon,
+                         title: $0.title.styledAs(.header_3),
+                         body:  $0.subtitle.styledAs(.body))
             p.imageView.tintColor = .brandAccent
             p.bottomBorder.isHidden = true
             p.layoutMargins.bottom = .space_20

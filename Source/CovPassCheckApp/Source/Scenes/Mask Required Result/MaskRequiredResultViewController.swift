@@ -144,14 +144,9 @@ private extension ParagraphView {
     func setup(with viewModel: MaskRequiredReasonViewModelProtocol) {
         layoutMargins.top = 0
         layoutMargins.bottom = 0
-        attributedTitleText = viewModel
-            .title
-            .styledAs(.header_3)
-        attributedBodyText = viewModel
-            .description
-            .styledAs(.body)
-            .colored(.onBackground80)
-        image = viewModel.icon
+        updateView(image: viewModel.icon,
+                   title: viewModel.title.styledAs(.header_3),
+                   body: viewModel.description.styledAs(.body).colored(.onBackground80))
         bottomBorder.isHidden = true
     }
 }

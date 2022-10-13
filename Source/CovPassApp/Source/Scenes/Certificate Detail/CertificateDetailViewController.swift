@@ -140,11 +140,11 @@ class CertificateDetailViewController: UIViewController {
         immunizationView.layoutMargins.left = .space_7
         immunizationView.layoutMargins.top = .space_24
         immunizationView.backgroundColor = .neutralWhite
-        immunizationView.stackView.alignment = .top
+        immunizationView.horizontalContainerStackView.alignment = .top
         immunizationView.bottomBorder.isHidden = true
-        immunizationView.image = viewModel.immunizationIcon
-        immunizationView.attributedTitleText = viewModel.immunizationTitle.styledAs(.header_3)
-        immunizationView.attributedBodyText = viewModel.immunizationBody.styledAs(.body).colored(.onBackground70)
+        immunizationView.updateView(image: viewModel.immunizationIcon,
+                                    title: viewModel.immunizationTitle.styledAs(.header_3),
+                                    body: viewModel.immunizationBody.styledAs(.body).colored(.onBackground70))
         immunizationView.layoutMargins.bottom = .space_24
 
         immunizationButton.title = viewModel.immunizationButton
@@ -221,18 +221,18 @@ class CertificateDetailViewController: UIViewController {
         personalDataHeadline.layoutMargins = .init(top: .space_30, left: .space_24, bottom: .zero, right: .space_24)
         personalDataHeadline.textableView.accessibilityTraits = .header
 
-        nameView.attributedTitleText = viewModel.nameTitle.styledAs(.header_3)
+        nameView.updateView(title: viewModel.nameTitle.styledAs(.header_3),
+                            body: viewModel.nameReversed.styledAs(.body))
         nameView.accessibilityLabelValue = viewModel.accessibilityName
-        nameView.attributedBodyText = viewModel.nameReversed.styledAs(.body)
         nameView.contentView?.layoutMargins = .init(top: .space_12, left: .space_24, bottom: .space_12, right: .space_24)
 
-        nameTransliteratedView.attributedTitleText = viewModel.nameTitleStandard.styledAs(.header_3)
-        nameTransliteratedView.attributedBodyText = viewModel.nameTransliterated.styledAs(.body)
+        nameTransliteratedView.updateView(title: viewModel.nameTitleStandard.styledAs(.header_3),
+                                      body: viewModel.nameTransliterated.styledAs(.body))
         nameTransliteratedView.accessibilityLabelValue = viewModel.accessibilityNameStandard
         nameTransliteratedView.contentView?.layoutMargins = .init(top: .space_12, left: .space_24, bottom: .space_12, right: .space_24)
 
-        birtdateView.attributedTitleText = viewModel.dateOfBirth.styledAs(.header_3)
-        birtdateView.attributedBodyText = viewModel.birthDate.styledAs(.body)
+        birtdateView.updateView(title: viewModel.dateOfBirth.styledAs(.header_3),
+                                body: viewModel.birthDate.styledAs(.body))
         birtdateView.accessibilityLabelValue = viewModel.accessibilityDateOfBirth
         birtdateView.contentView?.layoutMargins = .init(top: .space_12, left: .space_24, bottom: .space_12, right: .space_24)
         birtdateView.accessibilityLabel = "\(viewModel.accessibilityDateOfBirth)\n \(DateUtils.audioDate(viewModel.birthDate) ?? viewModel.birthDate)"
@@ -272,17 +272,10 @@ private extension ParagraphView {
     func setup(with viewModel: CertificateHolderImmunizationStatusViewModelProtocol) {
         layoutMargins.top = .space_24
         layoutMargins.left = .space_7
-        attributedTitleText = viewModel
-            .title
-            .styledAs(.header_3)
-        attributedSubtitleText = viewModel
-            .subtitle?
-            .styledAs(.header_3)
-            .colored(.onBackground80)
-        attributedBodyText = viewModel
-            .description
-            .styledAs(.body)
-            .colored(.onBackground80)
-        image = viewModel.icon
+        updateView(image: viewModel.icon,
+                   title: viewModel.title.styledAs(.header_3),
+                   subtitle: viewModel.subtitle?.styledAs(.header_3).colored(.onBackground80),
+                   body: viewModel.description.styledAs(.body).colored(.onBackground80)
+        )
     }
 }

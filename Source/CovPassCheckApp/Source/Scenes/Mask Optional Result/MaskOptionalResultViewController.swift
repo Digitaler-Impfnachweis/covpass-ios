@@ -78,15 +78,11 @@ final class MaskOptionalResultViewController: UIViewController {
 
     private func configureHolderInformationView() {
         holderInformationView.imageViewWidthConstraint.constant = 32
-        holderInformationView.image = .cardCircle
         holderInformationView.bottomBorder.isHidden = true
-        holderInformationView.attributedTitleText = viewModel.holderName
-            .styledAs(.header_2)
-        holderInformationView.attributedSubtitleText = viewModel.holderNameTransliterated
-            .styledAs(.header_3)
-            .colored(.onBackground80)
-        holderInformationView.attributedBodyText = viewModel.holderBirthday
-            .styledAs(.body)
+        holderInformationView.updateView(image: .cardCircle,
+                                         title: viewModel.holderName.styledAs(.header_2),
+                                         subtitle: viewModel.holderNameTransliterated.styledAs(.header_3).colored(.onBackground80),
+                                         body: viewModel.holderBirthday.styledAs(.body))
         holderInformationView.backgroundColor = .clear
         holderInformationContainerView.backgroundColor = .backgroundSecondary20
     }

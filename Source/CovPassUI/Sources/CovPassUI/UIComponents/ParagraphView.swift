@@ -12,24 +12,26 @@ import UIKit
 public class ParagraphView: XibView {
     // MARK: - IBOutlets
 
-    @IBOutlet public var stackView: UIStackView!
-    @IBOutlet public var textStackView: UIStackView!
+    @IBOutlet public var horizontalContainerStackView: UIStackView!
+    @IBOutlet public var verticalContainerStackView: UIStackView!
     @IBOutlet public var imageView: UIImageView!
-    @IBOutlet public var titleLabel: UILabel!
-    @IBOutlet public var subtitleLabel: UILabel!
-    @IBOutlet public var bodyLabel: UILabel!
-    @IBOutlet public var bottomBorder: UIView!
+    @IBOutlet var titleLabel: UILabel!
+    @IBOutlet var subtitleLabel: UILabel!
+    @IBOutlet var secondSubtitleLabel: UILabel!
+    @IBOutlet var bodyLabel: UILabel!
+    @IBOutlet var bodyTextView: LinkLabel!
+    @IBOutlet var footerStackView: UIStackView!
+    @IBOutlet var footerHeadlineLabel: UILabel!
+    @IBOutlet var footerBodyLabel: UILabel!
+    @IBOutlet var footerButton: MainButton!
     @IBOutlet public var bottomBorderHeightConstraint: NSLayoutConstraint!
     @IBOutlet public var bottomBorderLeftConstraint: NSLayoutConstraint!
     @IBOutlet public var imageViewWidthConstraint: NSLayoutConstraint!
-    @IBOutlet weak var imageContainerView: UIView!
+    @IBOutlet public weak var imageContainerView: UIView!
+    @IBOutlet public var bottomBorder: UIView!
 
     // MARK: - Properties
 
-    public var image: UIImage? { didSet { updateView() } }
-    public var attributedTitleText: NSAttributedString? { didSet { updateView() } }
-    public var attributedSubtitleText: NSAttributedString? { didSet { updateView() } }
-    public var attributedBodyText: NSAttributedString? { didSet { updateView() } }
     public var accessibilityLabelValue: String? { didSet { setupAccessibility() } }
 
     // MARK: - Lifecycle
@@ -38,9 +40,8 @@ public class ParagraphView: XibView {
         super.initView()
         backgroundColor = .neutralWhite
         contentView?.layoutMargins = .init(top: .zero, left: .space_24, bottom: .zero, right: .space_24)
-        stackView.spacing = .space_24
+        horizontalContainerStackView.spacing = .space_24
         bottomBorder.backgroundColor = .onBackground20
-        attributedSubtitleText = nil
     }
 
     // MARK: - Methods
@@ -50,27 +51,54 @@ public class ParagraphView: XibView {
         bodyLabel.isAccessibilityElement = false
         subtitleLabel.isAccessibilityElement = false
         let alternativeAccessibilityLabelText = [
-            attributedTitleText?.string,
-            attributedSubtitleText?.string
+            titleLabel.attributedText?.string,
+            subtitleLabel.attributedText?.string
         ].compactMap { $0 }.joined(separator: "\n")
         accessibilityLabel = accessibilityLabelValue ??
             (alternativeAccessibilityLabelText.isEmpty ? nil : alternativeAccessibilityLabelText)
-        accessibilityValue = attributedBodyText?.string ?? ""
+        accessibilityValue = bodyLabel.attributedText?.string ?? ""
         isAccessibilityElement = true
         accessibilityTraits = .staticText
+        footerButton.style = .alternative
     }
 
-    private func updateView() {
+    public func updateView(image: UIImage? = nil,
+                           title: NSAttributedString? = nil,
+                           subtitle: NSAttributedString? = nil,
+                           secondSubtitle: NSAttributedString? = nil,
+                           body: NSAttributedString? = nil,
+                           secondBody: NSAttributedString? = nil,
+                           footerHeadline: NSAttributedString? = nil,
+                           footerBody: NSAttributedString? = nil,
+                           footerButtonTitle: String? = nil) {
         imageView.image = image
         imageContainerView.isHidden = image == nil
-        titleLabel.attributedText = attributedTitleText
-        titleLabel.isHidden = attributedTitleText.isNilOrEmpty
-        subtitleLabel.attributedText = attributedSubtitleText
-        subtitleLabel.isHidden = attributedSubtitleText.isNilOrEmpty
-        bodyLabel.attributedText = attributedBodyText
-        bodyLabel.isHidden = attributedBodyText.isNilOrEmpty
-
-        isHidden = titleLabel.isHidden && bodyLabel.isHidden
+        
+        titleLabel.attributedText = title
+        titleLabel.isHidden = title.isNilOrEmpty
+        
+        subtitleLabel.attributedText = subtitle
+        subtitleLabel.isHidden = subtitle.isNilOrEmpty
+        
+        secondSubtitleLabel.attributedText = secondSubtitle
+        secondSubtitleLabel.isHidden = secondSubtitle.isNilOrEmpty
+        
+        bodyLabel.attributedText = body
+        bodyLabel.isHidden = body.isNilOrEmpty
+        
+        bodyTextView.attributedText = secondBody
+        bodyTextView.isHidden = secondBody.isNilOrEmpty
+        
+        footerHeadlineLabel.attributedText = footerHeadline
+        footerHeadlineLabel.isHidden = footerHeadline.isNilOrEmpty
+        
+        footerBodyLabel.attributedText = footerBody
+        footerBodyLabel.isHidden = footerBody.isNilOrEmpty
+        
+        footerButton.title = footerButtonTitle
+        footerButton.isHidden = footerButtonTitle.isNilOrEmpty
+        
+        footerStackView.isHidden = footerHeadline.isNilOrEmpty && footerBody.isNilOrEmpty && footerButtonTitle.isNilOrEmpty
 
         setupAccessibility()
     }

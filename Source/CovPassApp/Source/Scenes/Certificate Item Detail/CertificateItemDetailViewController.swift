@@ -169,8 +169,8 @@ class CertificateItemDetailViewController: UIViewController {
         viewModel.items.forEach { item in
             if !item.value.isEmpty {
                 let view = ParagraphView()
-                view.attributedTitleText = item.label.styledAs(.header_3)
-                view.attributedBodyText = item.value.styledAs(.body)
+                view.updateView(title: item.label.styledAs(.header_3),
+                                body: item.value.styledAs(.body))
                 view.accessibilityLabel = item.accessibilityLabel
                 view.accessibilityIdentifier = item.accessibilityIdentifier
                 view.layoutMargins.top = .space_12

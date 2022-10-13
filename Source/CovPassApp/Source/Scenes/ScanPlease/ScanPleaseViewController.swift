@@ -63,12 +63,10 @@ class ScanPleaseViewController: UIViewController {
     private func configureContentView() {
         headerImageView.image = UIImage.scanPleaseIllustration
 
-        textView.attributedTitleText = nil
-        textView.attributedBodyText = viewModel.text.styledAs(.body)
+        textView.updateView(body: viewModel.text.styledAs(.body))
         textView.bottomBorder.isHidden = true
 
-        linkDescriptionView.attributedTitleText = nil
-        linkDescriptionView.attributedBodyText = viewModel.linkDescription.styledAs(.body)
+        linkDescriptionView.updateView(body: viewModel.linkDescription.styledAs(.body))
         linkDescriptionView.bottomBorder.isHidden = true
 
         actionView.textLabel.attributedText = viewModel.linkText.styledAs(.header_3).lineHeight(Constants.Layout.actionLineHeight)
