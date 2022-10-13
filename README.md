@@ -42,3 +42,7 @@ CovPassUI is the UI package for both apps and contains common UI components and 
 CovPassCommon contains the business logic for both apps, like QR code parsing, signature validation, and persistence.
 
 API documentation TBD
+
+## Snapshot Tests
+
+Snapshots use the `iOS 14.5 iPhone 11` simulator.

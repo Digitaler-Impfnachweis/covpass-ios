@@ -49,20 +49,18 @@ class CheckAppInformationBaseViewModel: AppInformationBaseViewModel {
         )
     }
 
-    init(router:AppInformationRouterProtocol, entries: [AppInformationEntry], userDefaults: Persistence) {
+    init(router:AppInformationRouterProtocol, userDefaults: Persistence) {
         self.userDefaults = userDefaults
-        super.init(router: router, entries: entries)
+        super.init(router: router)
     }
 }
 
 class GermanAppInformationViewModel: CheckAppInformationBaseViewModel {
-    init(
-        router: AppInformationRouterProtocol,
-        userDefaults: Persistence,
-        mainBundle: Bundle = .main,
-        licenseBundle: Bundle = .commonBundle
-    ) {
-        let entries: [AppInformationEntry] = [
+    private var mainBundle: Bundle
+    private var licenseBundle: Bundle
+
+    override var entries: [AppInformationEntry] {
+        [
             .webEntry(title: Texts.leichteSprache,
                       url: URL(string: "https://digitaler-impfnachweis-app.de/webviews/leichte-sprache/covpasscheckapp")!,
                       accessibilityAnnouncement: AccessiblityAnnouncments.leichteSprache),
@@ -84,19 +82,27 @@ class GermanAppInformationViewModel: CheckAppInformationBaseViewModel {
             .webEntry(title: Texts.accessibilityStatementTitle,
                       url: URL(string: "https://www.digitaler-impfnachweis-app.de/webviews/covpasscheck-app-ios-barrierefreiheitserklaerung/")!,
                       accessibilityAnnouncement: AccessiblityAnnouncments.accessibilityStatementTitle),
-        ]
-        super.init(router: router, entries: entries, userDefaults: userDefaults)
+        ] + super.entries
     }
-}
 
-class EnglishAppInformationViewModel: CheckAppInformationBaseViewModel {
     init(
         router: AppInformationRouterProtocol,
         userDefaults: Persistence,
         mainBundle: Bundle = .main,
         licenseBundle: Bundle = .commonBundle
     ) {
-        let entries: [AppInformationEntry] = [
+        self.mainBundle = mainBundle
+        self.licenseBundle = licenseBundle
+        super.init(router: router, userDefaults: userDefaults)
+    }
+}
+
+class EnglishAppInformationViewModel: CheckAppInformationBaseViewModel {
+    private var mainBundle: Bundle
+    private var licenseBundle: Bundle
+
+    override var entries: [AppInformationEntry] {
+        [
             .webEntry(title: Texts.contactTitle,
                       url: mainBundle.url(forResource: "contact-covpasscheck-en", withExtension: "html")!,
                       accessibilityAnnouncement: AccessiblityAnnouncments.contactTitle),
@@ -115,8 +121,18 @@ class EnglishAppInformationViewModel: CheckAppInformationBaseViewModel {
             .webEntry(title: Texts.accessibilityStatementTitle,
                       url: URL(string: "https://www.digitaler-impfnachweis-app.de/en/webviews/covpasscheck-app-ios-accessibility-statement/")!,
                       accessibilityAnnouncement: AccessiblityAnnouncments.accessibilityStatementTitle),
-        ]
-        super.init(router: router, entries: entries, userDefaults: userDefaults)
+        ] + super.entries
+    }
+
+    init(
+        router: AppInformationRouterProtocol,
+        userDefaults: Persistence,
+        mainBundle: Bundle = .main,
+        licenseBundle: Bundle = .commonBundle
+    ) {
+        self.mainBundle = mainBundle
+        self.licenseBundle = licenseBundle
+        super.init(router: router, userDefaults: userDefaults)
     }
 }
 

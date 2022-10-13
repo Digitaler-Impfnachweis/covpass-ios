@@ -11,13 +11,11 @@ import CovPassUI
 import Foundation
 
 class GermanAppInformationViewModel: CovPassAppInformationViewModel {
-    init(
-        router: AppInformationRouterProtocol,
-        mainBundle: Bundle = .main,
-        licenseBundle: Bundle = .commonBundle,
-        persistence: Persistence
-    ) {
-        let entries = [
+    private let mainBundle: Bundle
+    private let licenseBundle: Bundle
+
+    override var entries: [AppInformationEntry] {
+        [
             .webEntry(title: Texts.leichteSprache,
                       url: URL(string: "https://digitaler-impfnachweis-app.de/webviews/leichte-sprache/covpassapp")!,
                       accessibilityAnnouncement: AccessiblityAnnouncments.leichteSprache),
@@ -39,21 +37,37 @@ class GermanAppInformationViewModel: CovPassAppInformationViewModel {
             .webEntry(title: Texts.accessibilityStatementTitle,
                       url: URL(string: "https://www.digitaler-impfnachweis-app.de/webviews/covpass-app-ios-barrierefreiheitserklaerung/")!,
                       accessibilityAnnouncement: AccessiblityAnnouncments.accessibilityStatementTitle),
-            AppInformationEntry(title: Texts.appInformationTitle,
-                                scene: TrustedListDetailsSceneFactory(sceneCoordinator: router.sceneCoordinator))
+            AppInformationEntry(
+                title: Texts.appInformationTitle,
+                scene: TrustedListDetailsSceneFactory(sceneCoordinator: router.sceneCoordinator)
+            ),
+            whatsNewEntry,
+            AppInformationEntry(
+                title: Texts.federalStateTitle,
+                scene: FederalStateSettingsSceneFactory(sceneCoordinator: router.sceneCoordinator),
+                rightTitle: persistence.stateSelection.isEmpty ? "" : "DE_\(persistence.stateSelection)".localized
+            ),
         ]
-        super.init(router: router, entries: entries, persistence: persistence)
     }
-}
 
-class EnglishAppInformationViewModel: CovPassAppInformationViewModel {
     init(
         router: AppInformationRouterProtocol,
         mainBundle: Bundle = .main,
         licenseBundle: Bundle = .commonBundle,
         persistence: Persistence
     ) {
-        let entries = [
+        self.mainBundle = mainBundle
+        self.licenseBundle = licenseBundle
+        super.init(router: router, persistence: persistence)
+    }
+}
+
+class EnglishAppInformationViewModel: CovPassAppInformationViewModel {
+    private let mainBundle: Bundle
+    private let licenseBundle: Bundle
+
+    override var entries: [AppInformationEntry] {
+        [
             .webEntry(title: Texts.contactTitle,
                       url: mainBundle.url(forResource: "contact-covpass-en", withExtension: "html")!,
                       accessibilityAnnouncement: AccessiblityAnnouncments.contactTitle),
@@ -72,10 +86,28 @@ class EnglishAppInformationViewModel: CovPassAppInformationViewModel {
             .webEntry(title: Texts.accessibilityStatementTitle,
                       url: URL(string: "https://www.digitaler-impfnachweis-app.de/en/webviews/covpass-app-ios-accessibility-statement/")!,
                       accessibilityAnnouncement: AccessiblityAnnouncments.accessibilityStatementTitle),
-            AppInformationEntry(title: Texts.appInformationTitle,
-                                scene: TrustedListDetailsSceneFactory(sceneCoordinator: router.sceneCoordinator))
+            AppInformationEntry(
+                title: Texts.appInformationTitle,
+                scene: TrustedListDetailsSceneFactory(sceneCoordinator: router.sceneCoordinator)
+            ),
+            whatsNewEntry,
+            AppInformationEntry(
+                title: Texts.federalStateTitle,
+                scene: FederalStateSettingsSceneFactory(sceneCoordinator: router.sceneCoordinator),
+                rightTitle: persistence.stateSelection.isEmpty ? "" : "DE_\(persistence.stateSelection)".localized
+            ),
         ]
-        super.init(router: router, entries: entries, persistence: persistence)
+    }
+
+    init(
+        router: AppInformationRouterProtocol,
+        mainBundle: Bundle = .main,
+        licenseBundle: Bundle = .commonBundle,
+        persistence: Persistence
+    ) {
+        self.mainBundle = mainBundle
+        self.licenseBundle = licenseBundle
+        super.init(router: router, persistence: persistence)
     }
 }
 

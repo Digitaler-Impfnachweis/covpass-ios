@@ -12,12 +12,12 @@ open class AppInformationBaseViewModel: AppInformationViewModelProtocol {
     public let title: String
     public let descriptionText: String
     public let appVersionText: String
-    open var entries: [AppInformationEntry] { constantEntries }
-    private let constantEntries: [AppInformationEntry]
+    open var entries: [AppInformationEntry] {
+        []
+    }
 
     public init(
         router: AppInformationRouterProtocol,
-        entries: [AppInformationEntry],
         title: String = Texts.title,
         descriptionText: String = Texts.description,
         appVersionText: String = Texts.appVersion
@@ -26,7 +26,6 @@ open class AppInformationBaseViewModel: AppInformationViewModelProtocol {
         self.title = title
         self.descriptionText = descriptionText
         self.appVersionText = appVersionText
-        self.constantEntries = entries
     }
 
     public func showSceneForEntry(_ entry: AppInformationEntry) {
@@ -46,6 +45,7 @@ extension AppInformationBaseViewModel {
         public static let title = "app_information_title".localized(bundle: .main)
         public static let description = "app_information_message".localized(bundle: .main)
         public static let accessibilityStatementTitle = "app_information_title_accessibility_statement".localized(bundle: .main)
+        public static let federalStateTitle = "infschg_settings_federal_state_title".localized(bundle: .main)
         public static let appVersion = String(format: "Version %@", Bundle.main.appVersion())
     }
     public enum AccessiblityAnnouncments {

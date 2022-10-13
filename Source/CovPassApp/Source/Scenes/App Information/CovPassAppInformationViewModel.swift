@@ -16,12 +16,10 @@ private enum Constants {
 
 class CovPassAppInformationViewModel: AppInformationBaseViewModel {
     override var entries: [AppInformationEntry] {
-        super.entries + [
-            whatsNewEntry
-        ]
+        super.entries + [whatsNewEntry]
     }
 
-    private var whatsNewEntry: AppInformationEntry {
+    internal var whatsNewEntry: AppInformationEntry {
         let router = WhatsNewSettingsRouter(sceneCoordinator: router.sceneCoordinator)
         let scene = WhatsNewSettingsSceneFactory(router: router)
         let rightTitle = persistence.disableWhatsNew ?
@@ -35,14 +33,13 @@ class CovPassAppInformationViewModel: AppInformationBaseViewModel {
         )
     }
     
-    private let persistence: Persistence
+    internal let persistence: Persistence
 
     init(
         router: AppInformationRouterProtocol,
-        entries: [AppInformationEntry],
         persistence: Persistence
     ) {
         self.persistence = persistence
-        super.init(router: router, entries: entries)
+        super.init(router: router)
     }
 }

@@ -25,7 +25,6 @@ class CheckAppInformationBaseViewModelTests: XCTestCase {
     private func prepareSut(with persistence: Persistence = MockPersistence()) -> CheckAppInformationBaseViewModel {
         CheckAppInformationBaseViewModel(
             router: AppInformationRouterMock(),
-            entries: [],
             userDefaults: persistence
         )
     }

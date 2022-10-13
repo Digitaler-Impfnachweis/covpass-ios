@@ -14,7 +14,7 @@ class AppInformationBaseViewModelTests: XCTestCase {
 
     override func setUpWithError() throws {
         router = .init()
-        sut = AppInformationBaseViewModel(router: router, entries: [])
+        sut = AppInformationBaseViewModel(router: router)
     }
 
     override func tearDownWithError() throws {
@@ -52,7 +52,6 @@ class AppInformationBaseViewModelTests: XCTestCase {
         let version = UUID().uuidString
         sut = .init(
             router: router,
-            entries: [],
             title: title,
             descriptionText: description,
             appVersionText: version
@@ -70,27 +69,6 @@ class AppInformationBaseViewModelTests: XCTestCase {
 
         // Then
         XCTAssertTrue(entries.isEmpty)
-    }
-
-    func testEntries() {
-        // Given
-        let givenEntries: [AppInformationEntry] = [
-            .mock(),
-            .init(title: UUID().uuidString, scene: SceneFactoryMock()),
-            .mock(),
-            .init(title: UUID().uuidString, scene: SceneFactoryMock()),
-            .init(title: UUID().uuidString, scene: SceneFactoryMock()),
-        ]
-        sut = .init(router: router, entries: givenEntries)
-
-        // When
-        let entries = sut.entries
-
-        // Then
-        XCTAssertEqual(entries.count, 5)
-        for index in 0..<min(entries.count, givenEntries.count) {
-            XCTAssertEqual(entries[index].title, givenEntries[index].title)
-        }
     }
 
     func testShowSceneForEntry() {

@@ -14,13 +14,9 @@ class CovPassAppInformationViewModelTests: XCTestCase {
     private var sut: CovPassAppInformationViewModel!
 
     override func setUpWithError() throws {
-        let entries: [AppInformationEntry] = [
-            .init(title: "TEST", scene: SceneFactoryMock())
-        ]
         persistence = .init()
         sut = .init(
             router: AppInformationRouterMock(),
-            entries: entries,
             persistence: persistence
         )
     }
@@ -35,8 +31,7 @@ class CovPassAppInformationViewModelTests: XCTestCase {
         let entries = sut.entries
 
         // Then
-        XCTAssertEqual(entries.count, 2)
-        XCTAssertEqual(entries.first?.title, "TEST")
+        XCTAssertEqual(entries.count, 1)
         let whatsNewSettingsEntry = entries.last
         XCTAssertEqual(whatsNewSettingsEntry?.title, "Update notifications")
         XCTAssertEqual(whatsNewSettingsEntry?.rightTitle, "On")

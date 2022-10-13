@@ -94,16 +94,18 @@ class RuleCheckViewController: UIViewController {
         subtitle.attributedText = "certificate_check_validity_message".localized.styledAs(.body)
         subtitle.layoutMargins = .init(top: .zero, left: .space_24, bottom: .space_24, right: .space_24)
 
-        countrySelection.titleLabel.attributedText = "certificate_check_validity_selection_country".localized.styledAs(.body)
+        countrySelection.titleLabel.attributedText = "certificate_check_validity_selection_country".localized.styledAs(.label)
         countrySelection.valueLabel.attributedText = viewModel.country.localized.styledAs(.body)
         countrySelection.iconView.image = UIImage.map
+        countrySelection.iconView.tintColor = .brandBase
         countrySelection.onClickAction = { [weak self] in
             self?.viewModel.showCountrySelection()
         }
 
-        dateSelection.titleLabel.attributedText = "certificate_check_validity_selection_date".localized.styledAs(.body)
+        dateSelection.titleLabel.attributedText = "certificate_check_validity_selection_date".localized.styledAs(.label)
         dateSelection.valueLabel.attributedText = DateUtils.displayDateTimeFormatter.string(from: viewModel.date).styledAs(.body)
         dateSelection.iconView.image = UIImage.calendar.withRenderingMode(.alwaysTemplate)
+        dateSelection.iconView.tintColor = .brandBase
         dateSelection.layoutMargins.bottom = .space_40
         dateSelection.onClickAction = { [weak self] in
             self?.viewModel.showDateSelection()
