@@ -21,49 +21,31 @@ public class QRContainerMaskImmunityView: XibView {
     // MARK: - IBOutlet
 
     @IBOutlet private var imageView: UIImageView!
+    @IBOutlet private var maskStatusContainer: UIView!
     @IBOutlet private var maskStatusLabel: UILabel!
+    @IBOutlet private var regionLabel: UILabel!
     @IBOutlet private var maskStatusImageView: UIImageView!
     @IBOutlet private var overlay: UIView!
     @IBOutlet private var qrInfoLabel: UILabel!
     @IBOutlet private var qrContainerView: UIView!
 
     // MARK: - Properties
-
-    public var image: UIImage? {
-        didSet {
-            updateViews()
-        }
-    }
     
-    public var maskStatusImage: UIImage? {
-        didSet {
-            updateViews()
-        }
-    }
+    public var maskStatusIsHidden: Bool = true
+    
+    public var image: UIImage?
+    
+    public var maskStatusImage: UIImage?
 
-    public var immunityStatusImage: UIImage? {
-        didSet {
-            updateViews()
-        }
-    }
+    public var immunityStatusImage: UIImage?
+    
+    public var maskStatusText: String?
+    
+    public var regionText: String?
 
-    public var maskStatusText: String? {
-        didSet {
-            updateViews()
-        }
-    }
+    public var qrInfoText: String?
 
-    public var qrInfoText: String? {
-        didSet {
-            updateViews()
-        }
-    }
-
-    public var isInvalid: Bool = false {
-        didSet {
-            updateViews()
-        }
-    }
+    public var isInvalid: Bool = false
 
     private var subtitleColor: UIColor {
         isInvalid ?
@@ -84,12 +66,16 @@ public class QRContainerMaskImmunityView: XibView {
         imageView.enableAccessibility(label: Constants.Accessibility.qrCode.label, hint: Constants.Accessibility.qrCode.hint)
     }
 
-    private func updateViews() {
+    public func updateViews() {
         imageView.image = image
+        maskStatusContainer.isHidden = maskStatusIsHidden
         maskStatusImageView.image = maskStatusImage
         maskStatusLabel.isHidden = maskStatusLabel.attributedText.isNilOrEmpty
         maskStatusLabel.attributedText = maskStatusText?
             .styledAs(.header_3)
+            .colored(titleColor)
+        regionLabel.attributedText = regionText?
+            .styledAs(.body)
             .colored(titleColor)
         qrInfoLabel.attributedText = NSAttributedString(string: qrInfoText ?? "")
             .styledAs(.label)

@@ -10,6 +10,11 @@ import CovPassUI
 import UIKit
 
 class CertificateCardViewModelMock: CertificateCardViewModelProtocol {
+    
+    var maskStatusIsHidden: Bool = true
+    
+    var regionText: String? = nil
+    
     let headerSubtitle: String? = nil
     
     let showNotification = false

@@ -19,6 +19,7 @@ class CertificateCardMaskImmunityViewModel: CertificateCardViewModelProtocol {
     private var tokens: [ExtendedCBORWebToken]
     private var onAction: (ExtendedCBORWebToken) -> Void
     private var boosterLogic: BoosterLogicProtocol
+    private var userDefaults: UserDefaultsPersistence
     private lazy var dgc: DigitalGreenCertificate = certificate.hcert.dgc
     private lazy var certificate = token.vaccinationCertificate
     private lazy var isExpired = certificate.isExpired
@@ -40,12 +41,22 @@ class CertificateCardMaskImmunityViewModel: CertificateCardViewModelProtocol {
         }
         return cert.expiresSoon || token.isInvalid || cert.isExpired
     }
-    var showNotification: Bool {
-        showBoosterAvailabilityNotification || showNotificationForExpiryOrInvalid
-    }
     private let certificateHolderStatusModel: CertificateHolderStatusModelProtocol
     private var holderNeedsMask: Bool
     
+    // MARK: public properties
+    
+    var showNotification: Bool {
+        showBoosterAvailabilityNotification || showNotificationForExpiryOrInvalid
+    }
+    var maskStatusIsHidden: Bool = true
+    var regionText: String? {
+        guard !isInvalid else { return nil }
+        let region = ("DE_" + userDefaults.stateSelection).localized
+        let text = "infschg_start_screen_status_federal_state".localized
+        return String(format: text, region)
+    }
+
     // MARK: - Lifecycle
 
     init(
@@ -54,20 +65,27 @@ class CertificateCardMaskImmunityViewModel: CertificateCardViewModelProtocol {
         onAction: @escaping (ExtendedCBORWebToken) -> Void,
         certificateHolderStatusModel: CertificateHolderStatusModelProtocol,
         repository: VaccinationRepositoryProtocol,
-        boosterLogic: BoosterLogicProtocol
+        boosterLogic: BoosterLogicProtocol,
+        userDefaults: UserDefaultsPersistence
     ) {
         self.token = token
         self.tokens = tokens
         self.onAction = onAction
         self.holderNeedsMask = true
         self.boosterLogic = boosterLogic
+        self.userDefaults = userDefaults
         self.certificateHolderStatusModel = certificateHolderStatusModel
         updateCertificateHolderStatus()
     }
     
     func updateCertificateHolderStatus() {
+        guard certificateHolderStatusModel.maskRulesAvailable(for: userDefaults.stateSelection) else {
+            maskStatusIsHidden = true
+            return
+        }
+        maskStatusIsHidden = false
         certificateHolderStatusModel
-            .holderNeedsMaskAsync(self.tokens, region: nil)
+            .holderNeedsMaskAsync(tokens, region: userDefaults.stateSelection)
             .done { holderNeedsMask in
                 self.holderNeedsMask = holderNeedsMask
                 DispatchQueue.main.async {

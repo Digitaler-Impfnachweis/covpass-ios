@@ -166,6 +166,25 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
         certLogic.updateValueSetsIfNeeded().cauterize()
     }
     
+    func revokeIfNeeded() {
+        firstly {
+            return repository.getCertificateList()
+        }
+        .then { list in
+            return InvalidationUseCase(certificateList: list,
+                                       revocationRepository: self.revocationRepository,
+                                       vaccinationRepository: self.repository,
+                                       date: Date(),
+                                       userDefaults: self.userDefaults)
+            .execute()
+        }
+        .get {
+            return self.certificateList = $0
+            self.delegate?.viewModelDidUpdate()
+        }
+        .cauterize()
+    }
+    
     func refresh() -> Promise<Void> {
         firstly {
             repository.getCertificateList()
@@ -174,19 +193,7 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
             self.certificateList = $0
             self.delegate?.viewModelDidUpdate()
         }
-        .then {
-            InvalidationUseCase(certificateList: $0,
-                                revocationRepository: self.revocationRepository,
-                                vaccinationRepository: self.repository,
-                                date: Date(),
-                                userDefaults: self.userDefaults)
-            .execute()
-        }
-        .get {
-            self.certificateList = $0
-        }
         .map { list in
-            self.delegate?.viewModelDidUpdate()
             // scroll to favorite certificate if needed
             if self.lastKnownFavoriteCertificateId != nil, self.lastKnownFavoriteCertificateId != list.favoriteCertificateId {
                 self.delegate?.viewModelNeedsFirstCertificateVisible()
@@ -195,7 +202,6 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
         }.then {
             self.showExpiryAlertIfNeeded()
         }
-        .asVoid()
     }
     
     private var lastPlayload: String = ""
@@ -660,7 +666,8 @@ extension CertificatesOverviewViewModel {
                 onAction: onActionCardView,
                 certificateHolderStatusModel: certificateHolderStatusModel,
                 repository: repository,
-                boosterLogic: boosterLogic
+                boosterLogic: boosterLogic,
+                userDefaults: userDefaults
             )
             
             cellViewModels.append(viewModel)

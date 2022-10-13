@@ -1814,13 +1814,13 @@
 
 "DE_HE" = "Hesse";
 
-"DE_MV" = "Mecklenburg Western Pomerania";
+"DE_MV" = "Mecklenburg-Western Pomerania";
 
 "DE_NI" = "Lower Saxony";
 
 "DE_NW" = "Northrhine-Westphalia";
 
-"DE_RP" = "Rhineland Palatinate";
+"DE_RP" = "Rhineland-Palatinate";
 
 "DE_SN" = "Saxony";
 
@@ -1828,6 +1828,6 @@
 
 "DE_SL" = "Saarland";
 
-"DE_SH" = "Schleswig Holstein";
+"DE_SH" = "Schleswig-Holstein";
 
 "DE_TH" = "Thuringia";

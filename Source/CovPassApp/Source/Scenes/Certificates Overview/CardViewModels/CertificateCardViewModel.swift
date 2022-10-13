@@ -52,6 +52,8 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
     var showNotification: Bool {
         showBoosterAvailabilityNotification || showNotificationForExpiryOrInvalid
     }
+    var maskStatusIsHidden: Bool = true
+    var regionText: String? = nil
 
     // MARK: - Lifecycle
 

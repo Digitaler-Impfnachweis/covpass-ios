@@ -14,11 +14,13 @@ import XCTest
 
 class CertificateOverviewSnapShotTests: BaseSnapShotTests {
     
+    private var userDefaults = UserDefaultsPersistence()
+    
     func test_default() {
         let window = UIWindow(frame: UIScreen.main.bounds)
         let sceneCoordinator = DefaultSceneCoordinator(window: window)
         let router = CertificatesOverviewRouter(sceneCoordinator: sceneCoordinator)
-        let viewModel = self.viewModel(router: router, repository: VaccinationRepositoryMock(), holderNeedsMask: false)
+        let viewModel = self.viewModel(router: router, repository: VaccinationRepositoryMock(), holderNeedsMask: true)
         let viewController = CertificatesOverviewViewController(viewModel: viewModel)
         let navigationController = UINavigationController(rootViewController: viewController)
         verifyView(view: navigationController.view, waitAfter: 0.1)
@@ -28,9 +30,11 @@ class CertificateOverviewSnapShotTests: BaseSnapShotTests {
         router: CertificatesOverviewRouterProtocol = CertificatesOverviewRouterMock(),
         boosterLogic: BoosterLogicMock = BoosterLogicMock(),
         repository: VaccinationRepositoryProtocol,
-        holderNeedsMask: Bool
+        holderNeedsMask: Bool,
+        maskRulesAvailable: Bool = false
     ) -> CertificatesOverviewViewModelProtocol {
         var certificateHolderStatusModel: CertificateHolderStatusModelMock = CertificateHolderStatusModelMock()
+        certificateHolderStatusModel.areMaskRulesAvailable = maskRulesAvailable
         certificateHolderStatusModel.needsMask = holderNeedsMask
         return CertificatesOverviewViewModel(
             router: router,
@@ -60,8 +64,9 @@ class CertificateOverviewSnapShotTests: BaseSnapShotTests {
                      cert2,
                      cert3]
         vacinationRepoMock.certificates = certs
-        let viewModel = self.viewModel(repository: vacinationRepoMock, holderNeedsMask: false)
+        let viewModel = self.viewModel(repository: vacinationRepoMock, holderNeedsMask: false, maskRulesAvailable: true)
         let viewController = CertificatesOverviewViewController(viewModel: viewModel)
+        userDefaults.stateSelection = "SH"
         verifyView(view: viewController.view, waitAfter: 0.1)
     }
     
@@ -94,8 +99,9 @@ class CertificateOverviewSnapShotTests: BaseSnapShotTests {
         let cert: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended()
         let certs = [cert]
         vacinationRepoMock.certificates = certs
-        let viewModel = self.viewModel(repository: vacinationRepoMock, holderNeedsMask: false)
+        let viewModel = self.viewModel(repository: vacinationRepoMock, holderNeedsMask: false, maskRulesAvailable: true)
         let viewController = CertificatesOverviewViewController(viewModel: viewModel)
+        userDefaults.stateSelection = "SH"
         verifyView(view: viewController.view, waitAfter: 0.1)
     }
     
@@ -114,8 +120,9 @@ class CertificateOverviewSnapShotTests: BaseSnapShotTests {
         let cert: ExtendedCBORWebToken = CBORWebToken.mockVaccinationCertificate.extended()
         let certs = [cert]
         vacinationRepoMock.certificates = certs
-        let viewModel = self.viewModel(repository: vacinationRepoMock, holderNeedsMask: false)
+        let viewModel = self.viewModel(repository: vacinationRepoMock, holderNeedsMask: false, maskRulesAvailable: true)
         let viewController = CertificatesOverviewViewController(viewModel: viewModel)
+        userDefaults.stateSelection = "SH"
         verifyView(view: viewController.view, waitAfter: 0.1)
     }
     
@@ -186,8 +193,9 @@ class CertificateOverviewSnapShotTests: BaseSnapShotTests {
         cert.vaccinationCertificate.exp = Calendar.current.date(byAdding: .day, value: 6, to: Date())
         let certs = [cert]
         vacinationRepoMock.certificates = certs
-        let viewModel = self.viewModel(repository: vacinationRepoMock, holderNeedsMask: false)
+        let viewModel = self.viewModel(repository: vacinationRepoMock, holderNeedsMask: false, maskRulesAvailable: true)
         let viewController = CertificatesOverviewViewController(viewModel: viewModel)
-        verifyView(view: viewController.view, waitAfter: 0.1)
+        userDefaults.stateSelection = "SH"
+        verifyView(view: viewController.view, waitAfter: 1.3)
     }
 }

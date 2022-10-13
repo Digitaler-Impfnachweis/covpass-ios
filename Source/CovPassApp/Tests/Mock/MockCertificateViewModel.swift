@@ -14,7 +14,7 @@ import PromiseKit
 import UIKit
 
 class MockCertificateViewModel: CertificatesOverviewViewModelProtocol {
-    
+
     // MARK: - Test Variables
 
     var refreshedCalled = false
@@ -112,5 +112,9 @@ class MockCertificateViewModel: CertificatesOverviewViewModelProtocol {
     
     func countOfCells() -> Int {
         0
+    }
+    
+    func revokeIfNeeded() {
+        
     }
 }

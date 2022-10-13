@@ -25,14 +25,20 @@ class CertificateCardMaskImmunityViewModelTests: XCTestCase {
     }
 
     private func sut(token: ExtendedCBORWebToken,
-                     boosterLogic: BoosterLogicMock = BoosterLogicMock()) -> CertificateCardMaskImmunityViewModel {
-        let certificateHolder = CertificateHolderStatusModelMock()
+                     boosterLogic: BoosterLogicMock = BoosterLogicMock(),
+                     needsMask: Bool = true,
+                     maskRuleAvailable: Bool = true) -> CertificateCardMaskImmunityViewModel {
+        var certificateHolder = CertificateHolderStatusModelMock()
+        certificateHolder.needsMask = needsMask
+        certificateHolder.areMaskRulesAvailable = maskRuleAvailable
+        let userDefaults = UserDefaultsPersistence()
         return .init(token: token,
                      tokens: [token],
                      onAction: { _ in },
                      certificateHolderStatusModel: certificateHolder,
                      repository: VaccinationRepositoryMock(),
-                     boosterLogic: boosterLogic)
+                     boosterLogic: boosterLogic,
+                     userDefaults: userDefaults)
     }
     
     func testIsShowNotification_false() {
@@ -429,45 +435,6 @@ class CertificateCardMaskImmunityViewModelTests: XCTestCase {
         XCTAssertNotNil(qrCode)
     }
 
-    func testTitle_vaccination_1_of_2() throws {
-        // Given
-        let token = try ExtendedCBORWebToken.token1Of2()
-        let sut = sut(token: token)
-
-        // When
-        RunLoop.main.run(for: 0.001)
-        let title = sut.title
-
-        // Then
-        XCTAssertEqual(title, "No mask obligation")
-    }
-
-    func testTitle_vaccination_2_of_2() throws {
-        // Given
-        let token = try ExtendedCBORWebToken.token2Of2()
-        let sut = sut(token: token)
-
-        // When
-        RunLoop.main.run(for: 0.001)
-        let title = sut.title
-
-        // Then
-        XCTAssertEqual(title, "No mask obligation")
-    }
-
-    func testTitle_vaccination_3_of_2() {
-        // Given
-        let token = CBORWebToken.mockVaccinationCertificate.doseNumber(3)
-        let sut = sut(token: .init(vaccinationCertificate: token, vaccinationQRCodeData: ""))
-
-        // When
-        RunLoop.main.run(for: 0.001)
-        let title = sut.title
-
-        // Then
-        XCTAssertEqual(title, "No mask obligation")
-    }
-
     func testTitle_expired() {
         // Given
         let token = ExtendedCBORWebToken.expiredVaccination()
@@ -505,31 +472,44 @@ class CertificateCardMaskImmunityViewModelTests: XCTestCase {
         // Then
         XCTAssertEqual(title, "No valid certificate")
     }
-
-    func testTitle_pcr_test() {
+    
+    func testTitle_pcr_test_ruleNotAvailable() {
         // Given
         let token = ExtendedCBORWebToken.pcrTest()
-        let sut = sut(token: token)
+        let sut = sut(token: token, needsMask: false, maskRuleAvailable: false)
 
         // When
         RunLoop.main.run(for: 0.001)
         let title = sut.title
 
         // Then
-        XCTAssertEqual(title, "No mask obligation")
+        XCTAssertEqual(title, "Mask obligation")
+    }
+    
+    func testTitle_pcr_test() {
+        // Given
+        let token = ExtendedCBORWebToken.pcrTest()
+        let sut = sut(token: token, needsMask: true)
+
+        // When
+        RunLoop.main.run(for: 0.001)
+        let title = sut.title
+
+        // Then
+        XCTAssertEqual(title, "Mask obligation")
     }
 
     func testTitle_antigen_test() {
         // Given
         let token = ExtendedCBORWebToken.antigenTest()
-        let sut = sut(token: token)
+        let sut = sut(token: token, needsMask: true)
 
         // When
         RunLoop.main.run(for: 0.001)
         let title = sut.title
 
         // Then
-        XCTAssertEqual(title, "No mask obligation")
+        XCTAssertEqual(title, "Mask obligation")
     }
 
     func testTitle_johnson_and_johnson_2_of_2() {
@@ -539,7 +519,7 @@ class CertificateCardMaskImmunityViewModelTests: XCTestCase {
             .seriesOfDoses(2)
             .medicalProduct(.johnsonjohnson)
             .extended()
-        let sut = sut(token: token)
+        let sut = sut(token: token, needsMask: false)
 
         // When
         RunLoop.main.run(for: 0.001)
@@ -557,18 +537,6 @@ class CertificateCardMaskImmunityViewModelTests: XCTestCase {
             .medicalProduct(.johnsonjohnson)
             .mockVaccinationSetDate(.init(timeIntervalSinceReferenceDate: 0))
             .extended()
-        let sut = sut(token: token)
-
-        // When
-        let subtitle = sut.subtitle
-
-        // Then
-        XCTAssertEqual(subtitle, "")
-    }
-
-    func testSubtitle_vaccination_1_of_2() throws {
-        // Given
-        let token = try ExtendedCBORWebToken.token1Of2()
         let sut = sut(token: token)
 
         // When

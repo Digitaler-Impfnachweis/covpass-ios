@@ -58,6 +58,7 @@ class CertificatesOverviewViewController: UIViewController {
         viewModel.updateTrustList()
         viewModel.updateBoosterRules()
         viewModel.updateValueSets()
+        viewModel.revokeIfNeeded()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
