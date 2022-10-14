@@ -19,8 +19,10 @@ class CertificateDetailViewControllerSnapshotTests: BaseSnapShotTests {
     private var certRecoveryOldestInChain: ExtendedCBORWebToken!
     private var certificateHolderStatusModel: CertificateHolderStatusModelMock!
     private let (_, resolver) = Promise<CertificateDetailSceneResult>.pending()
+    private var persistence: UserDefaultsPersistence!
     
     override func setUpWithError() throws {
+        persistence = UserDefaultsPersistence()
         cert1OutOf1JohnsonJohnson = CBORWebToken
             .mockVaccinationCertificate
             .mockVaccinationUVCI("1")
@@ -46,6 +48,7 @@ class CertificateDetailViewControllerSnapshotTests: BaseSnapShotTests {
     }
     
     override func tearDownWithError() throws {
+        persistence = nil
         cert1OutOf1JohnsonJohnson = nil
         cert2OutOf1Vaccinatio = nil
         certRecoveryOldestInChain = nil
@@ -53,14 +56,17 @@ class CertificateDetailViewControllerSnapshotTests: BaseSnapShotTests {
     }
     
     func configureSut(certs: [ExtendedCBORWebToken],
-                      bl: BoosterLogicProtocol = BoosterLogic.init(certLogic: DCCCertLogicMock(), userDefaults: MockPersistence())) -> CertificateDetailViewModel {
+                      bl: BoosterLogicProtocol = BoosterLogic(certLogic: DCCCertLogicMock(),
+                                                              userDefaults: MockPersistence())) -> CertificateDetailViewModel {
+        persistence.stateSelection = "SH"
         let bl = bl
         let vm = CertificateDetailViewModel(router: CertificateDetailRouterMock(),
                                             repository: VaccinationRepositoryMock(),
                                             boosterLogic: bl,
                                             certificates: certs,
                                             resolvable: resolver,
-                                            certificateHolderStatusModel: certificateHolderStatusModel)
+                                            certificateHolderStatusModel: certificateHolderStatusModel,
+                                            userDefaults: persistence)
         return vm!
     }
     
@@ -448,11 +454,33 @@ class CertificateDetailViewControllerSnapshotTests: BaseSnapShotTests {
         let viewController = CertificateDetailViewController(viewModel: viewModel)
         verifyView(view: viewController.view, height: 1600)
     }
-
+    
     func testReissueNotifications_new_badge_for_only_one_recovery() {
         let viewModel = CertificateDetailViewModelMock()
         viewModel.showVaccinationExpiryReissueNotification = true
         viewModel.showRecoveryExpiryReissueIsNewBadgeValues = [false, true]
+        let viewController = CertificateDetailViewController(viewModel: viewModel)
+        verifyView(view: viewController.view, height: 1600)
+    }
+    
+    func test_maskRuleAvailable_and_notNeedMask_() throws {
+        let date = try XCTUnwrap(DateUtils.parseDate("2021-01-26T15:05:00"))
+        let token = CBORWebToken.mockVaccinationCertificate.mockVaccinationSetDate(date).extended()
+        let certs = [token]
+        certificateHolderStatusModel.areMaskRulesAvailable = true
+        certificateHolderStatusModel.needsMask = false
+        let viewModel = configureSut(certs: certs, bl: BoosterLogicMock())
+        let viewController = CertificateDetailViewController(viewModel: viewModel)
+        verifyView(view: viewController.view, height: 1600)
+    }
+    
+    func test_maskRuleAvailable_and_needMask_() throws {
+        let date = try XCTUnwrap(DateUtils.parseDate("2021-01-26T15:05:00"))
+        let token = CBORWebToken.mockVaccinationCertificate.mockVaccinationSetDate(date).extended()
+        let certs = [token]
+        certificateHolderStatusModel.areMaskRulesAvailable = true
+        certificateHolderStatusModel.needsMask = true
+        let viewModel = configureSut(certs: certs, bl: BoosterLogicMock())
         let viewController = CertificateDetailViewController(viewModel: viewModel)
         verifyView(view: viewController.view, height: 1600)
     }

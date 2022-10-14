@@ -12,6 +12,13 @@ struct CertificateHolderIncompleteImmunizationStatusViewModel: CertificateHolder
     let title = "infschg_start_immune_incomplete".localized
     let subtitle: String? = nil
     let description = "infschg_cert_overview_immunisation_incomplete_A".localized
+    var date: String?
+    var federalState: String? = nil
+    var federalStateText: String? = nil
+    let linkLabel: String? = nil
+    let notice: String? = nil
+    let noticeText: String? = nil
+    let selectFederalStateButtonTitle: String? = nil
 }
 
 struct CertificateHolderImmunizationE22StatusViewModel: CertificateHolderImmunizationStatusViewModelProtocol {
@@ -20,7 +27,14 @@ struct CertificateHolderImmunizationE22StatusViewModel: CertificateHolderImmuniz
     let days: Int
     var description: String {String(format: "infschg_cert_overview_immunisation_E22".localized, days)}
     var subtitle: String? {
+        guard let date = date else { return nil }
         return String(format: "infschg_cert_overview_mask_time_from".localized, date)
     }
-    var date: String
+    var date: String?
+    var federalState: String? = nil
+    var federalStateText: String? = nil
+    let linkLabel: String? = nil
+    let notice: String? = nil
+    let noticeText: String? = nil
+    let selectFederalStateButtonTitle: String? = nil
 }

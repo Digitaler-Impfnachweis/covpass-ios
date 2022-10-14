@@ -1751,7 +1751,7 @@
 
 "infschg_detail_page_no_mask_mandatory_copy_1" = "You are exempt from the mask requirement in some situations in this state; however, a mask is still recommended.";
 
-"infschg_detail_page_no_mask_mandatory_link" = "More information";
+"infschg_detail_page_no_mask_mandatory_link" = "#More information::https://www.digitaler-impfnachweis-app.de/en/faq/#current-most-frequently-asked-questions#";
 
 "infschg_detail_page_no_mask_mandatory_subtitle_2" = "Note:";
 
@@ -1761,13 +1761,13 @@
 
 "infschg_detail_page_mask_mandatory_title" = "Mask mandatory";
 
-"infschg_detail_page_mask_mandatory_subtitle" = "Exempt until %@";
+"infschg_detail_page_mask_mandatory_subtitle" = "Exempt from %@";
 
 "infschg_detail_page_mask_mandatory_federal_state" = "in %@";
 
 "infschg_detail_page_mask_mandatory_copy_1" = "You are not exempt from the mask requirement in this state.";
 
-"infschg_detail_page_mask_mandatory_link" = "More information";
+"infschg_detail_page_mask_mandatory_link" = "#More information::https://www.digitaler-impfnachweis-app.de/en/faq/#current-most-frequently-asked-questions#";
 
 "infschg_detail_page_mask_mandatory_subtitle_2" = "Note:";
 
@@ -1781,7 +1781,7 @@
 
 "infschg_detail_page_mask_status_uncertain_copy_1" = "There are no federal state-specific rules for this federal state. Therefore, only the uniform federal rules on mandatory masks apply.";
 
-"infschg_detail_page_mask_status_uncertain_link" = "More information";
+"infschg_detail_page_mask_status_uncertain_link" = "#More information::https://www.digitaler-impfnachweis-app.de/en/faq/#current-most-frequently-asked-questions#";
 
 "infschg_detail_page_mask_status_uncertain_subtitle_2" = "Note:";
 
@@ -1793,7 +1793,7 @@
 
 "infschg_detail_page_no_valid_certificate_copy" = "In your state, you can be exempt from the mask requirement for up to 24h. Note that different regulations may apply in your state. Also remember that the exemption does not apply to places where a special mask requirement applies: e.g. doctors' offices, hospitals or long-distance passenger transport.";
 
-"infschg_detail_page_no_valid_certificate_link" = "More information";
+"infschg_detail_page_no_valid_certificate_link" = "#More information::https://www.digitaler-impfnachweis-app.de/en/faq/#current-most-frequently-asked-questions#";
 
 "infschg_module_choose_federal_state_title" = "Choose federal state";
 

@@ -40,7 +40,6 @@ class CertificateDetailViewController: UIViewController {
     @IBOutlet var scanHintView: HintView!
     @IBOutlet var immunizationStatusView: ParagraphView!
     @IBOutlet var maskStatusView: ParagraphView!
-    @IBOutlet var maskFaqLinkLabel: LinkLabel!
     
     // MARK: - Properties
 
@@ -84,7 +83,6 @@ class CertificateDetailViewController: UIViewController {
     }
 
     private func setupStatusView() {
-        maskFaqLinkLabel.attributedText = viewModel.maskFaqLink.styledAs(.body)
         maskStatusView.setup(with: viewModel.maskStatusViewModel)
         maskStatusView.bottomBorderLeftConstraint.constant = -.space_6
         maskStatusView.bottomBorder.backgroundColor = .neutralWhite
@@ -272,10 +270,16 @@ private extension ParagraphView {
     func setup(with viewModel: CertificateHolderImmunizationStatusViewModelProtocol) {
         layoutMargins.top = .space_24
         layoutMargins.left = .space_7
+        verticalContainerStackView.spacing = .space_14
         updateView(image: viewModel.icon,
                    title: viewModel.title.styledAs(.header_3),
                    subtitle: viewModel.subtitle?.styledAs(.header_3).colored(.onBackground80),
-                   body: viewModel.description.styledAs(.body).colored(.onBackground80)
+                   secondSubtitle: viewModel.federalStateText?.styledAs(.subheader_2).colored(.onBackground80),
+                   body: viewModel.description.styledAs(.body).colored(.onBackground110),
+                   secondBody: viewModel.linkLabel?.styledAs(.body),
+                   footerHeadline: viewModel.notice?.styledAs(.header_3).colored(.onBackground110),
+                   footerBody: viewModel.noticeText?.styledAs(.body).colored(.onBackground110),
+                   footerButtonTitle: viewModel.selectFederalStateButtonTitle
         )
     }
 }

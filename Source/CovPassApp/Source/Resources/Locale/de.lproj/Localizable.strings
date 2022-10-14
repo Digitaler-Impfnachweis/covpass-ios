@@ -1751,7 +1751,7 @@
 
 "infschg_detail_page_no_mask_mandatory_copy_1" = "Sie sind in diesem Bundesland in einigen Situationen von der Maskenpflicht ausgenommen; eine Maske ist dennoch empfohlen.";
 
-"infschg_detail_page_no_mask_mandatory_link" = "Mehr Informationen";
+"infschg_detail_page_no_mask_mandatory_link" = "#Mehr Informationen::https://www.digitaler-impfnachweis-app.de/faq/#die-aktuell-h-ufigsten-fragen#";
 
 "infschg_detail_page_no_mask_mandatory_subtitle_2" = "Hinweis:";
 
@@ -1761,13 +1761,13 @@
 
 "infschg_detail_page_mask_mandatory_title" = "Maskenpflicht";
 
-"infschg_detail_page_mask_mandatory_subtitle" = "Befreit bis %@";
+"infschg_detail_page_mask_mandatory_subtitle" = "Befreit ab %@";
 
 "infschg_detail_page_mask_mandatory_federal_state" = "in %@";
 
 "infschg_detail_page_mask_mandatory_copy_1" = "Sie sind in diesem Bundesland nicht von der Maskenpflicht ausgenommen.";
 
-"infschg_detail_page_mask_mandatory_link" = "Mehr Informationen";
+"infschg_detail_page_mask_mandatory_link" = "#Mehr Informationen::https://www.digitaler-impfnachweis-app.de/faq/#die-aktuell-h-ufigsten-fragen#";
 
 "infschg_detail_page_mask_mandatory_subtitle_2" = "Hinweis:";
 
@@ -1781,7 +1781,7 @@
 
 "infschg_detail_page_mask_status_uncertain_copy_1" = "Für dieses Bundesland liegen keine bundeslandspezifischen Regeln vor. Es gelten daher nur die bundeseinheitlichen Regeln zur Maskenpflicht.";
 
-"infschg_detail_page_mask_status_uncertain_link" = "Mehr Informationen";
+"infschg_detail_page_mask_status_uncertain_link" = "#Mehr Informationen::https://www.digitaler-impfnachweis-app.de/faq/#die-aktuell-h-ufigsten-fragen#";
 
 "infschg_detail_page_mask_status_uncertain_subtitle_2" = "Hinweis:";
 
@@ -1793,7 +1793,7 @@
 
 "infschg_detail_page_no_valid_certificate_copy" = "In Ihrem Bundesland können Sie bis zu 24h von der Maskenpflicht befreit werden. Beachten Sie, dass in Ihrem Bundesland andere Bestimmungen gelten können. Denken Sie auch daran, dass die Befreiung nicht für Orte gilt, an denen eine besondere Maskenpflicht gilt: z.B. Arztpraxen, Krankenhäuser oder dem Personenfernverkehr.";
 
-"infschg_detail_page_no_valid_certificate_link" = "Mehr Informationen";
+"infschg_detail_page_no_valid_certificate_link" = "#Mehr Informationen::https://www.digitaler-impfnachweis-app.de/faq/#die-aktuell-h-ufigsten-fragen#";
 
 "infschg_module_choose_federal_state_title" = "Bundesland wählen";
 

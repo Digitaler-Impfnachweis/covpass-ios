@@ -284,9 +284,12 @@ public extension UIImage {
 
     @ImageLoader(name: "status-mask-invalid-circle")
     private(set) static var statusMaskInvalidCircle
-
+    
     @ImageLoader(name: "status-mask-no-rules-circle-large")
     private(set) static var statusMaskNoRulesCircleLarge
+    
+    @ImageLoader(name: "status-mask-no-rules-circle-small")
+    private(set) static var statusMaskNoRulesCircleSmall
 
     @ImageLoader(name: "status-mask-optional-circle")
     private(set) static var statusMaskOptionalCircle
@@ -296,7 +299,7 @@ public extension UIImage {
 
     @ImageLoader(name: "status-mask-required-circle")
     private(set) static var statusMaskRequiredCircle
-
+    
     @ImageLoader(name: "status-mask-required-circle-large")
     private(set) static var statusMaskRequiredCircleLarge
 

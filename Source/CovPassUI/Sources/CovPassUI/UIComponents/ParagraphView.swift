@@ -42,6 +42,7 @@ public class ParagraphView: XibView {
         contentView?.layoutMargins = .init(top: .zero, left: .space_24, bottom: .zero, right: .space_24)
         horizontalContainerStackView.spacing = .space_24
         bottomBorder.backgroundColor = .onBackground20
+        bodyTextView.textableView.textContainer.lineFragmentPadding = 0;
     }
 
     // MARK: - Methods

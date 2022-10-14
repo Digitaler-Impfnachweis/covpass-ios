@@ -35,7 +35,8 @@ struct CertificateDetailSceneFactory: ResolvableSceneFactory {
                   boosterLogic: BoosterLogic.create(),
                   certificates: certificates,
                   resolvable: resolvable,
-                  certificateHolderStatusModel: certificateHolderStatusModel
+                  certificateHolderStatusModel: certificateHolderStatusModel,
+                  userDefaults: UserDefaultsPersistence()
               )
         else {
             fatalError("Failed to initialize dependency.")

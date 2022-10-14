@@ -13,7 +13,6 @@ import UIKit
 
 private enum Constants {
     enum Keys {
-        static let maskFaqLink = "infschg_more_info_link".localized
         enum Reissue {
             static let boosterHeadline = "certificate_renewal_startpage_headline".localized
             static let boosterDescription = "certificate_renewal_startpage_copy".localized
@@ -84,6 +83,7 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
         }
         return token.expiresSoon && !token.isGermanIssuer
     }
+    private var userDefaults: Persistence
     var accessibilityBackToStart = Constants.Accessibility.General.backToStart
     var name: String { selectedDgc?.nam.fullName ?? ""}
     var nameReversed: String { selectedDgc?.nam.fullNameReverse ?? "" }
@@ -229,20 +229,26 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
     }
 
     var maskStatusViewModel: CertificateHolderImmunizationStatusViewModelProtocol {
-        if isInvalid {
+        guard !isInvalid else {
             return CertificateHolderInvalidMaskStatusViewModel()
-        } else if holderNeedsMask {
+        }
+        
+        guard certificateHolderStatusModel.maskRulesAvailable(for: userDefaults.stateSelection) else {
+            return CertificateHolderNoMaskRulesStatusViewModel(federalState: userDefaults.stateSelection)
+        }
+        
+        if holderNeedsMask {
             if let vaccination = certificates.latestVaccination, let recovery = certificates.latestRecovery,
                recovery.fr > vaccination.dt, !recovery.fr.isOlderThan29Days,
                let fr = recovery.fr.add(days: 28) {
-                return CertificateHolderMaskRequiredStatusViewModel(date: fr.readableString)
+                return CertificateHolderMaskRequiredStatusViewModel(date: fr.readableString, federalState: userDefaults.stateSelection)
             }
-            return CertificateHolderMaskRequiredStatusViewModel()
+            return CertificateHolderMaskRequiredStatusViewModel(federalState: userDefaults.stateSelection)
         } else {
             guard let dtOrFr = certificates.joinedTokens?.dtFrOrSc().add(days: 90) else {
-                return CertificateHolderMaskNotRequiredStatusViewModel()
+                return CertificateHolderMaskNotRequiredStatusViewModel(federalState: userDefaults.stateSelection)
             }
-            return CertificateHolderMaskNotRequiredStatusViewModel(date: dtOrFr.readableString)
+            return CertificateHolderMaskNotRequiredStatusViewModel(date: dtOrFr.readableString, federalState: userDefaults.stateSelection)
         }
     }
     
@@ -365,8 +371,6 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
     
     var immunizationDetailsHidden: Bool { !(isInvalid || selectedToken?.expiresSoon ?? false )}
     
-    let maskFaqLink: String = Constants.Keys.maskFaqLink
-
     // MARK: - Lifecyle
 
     init?(
@@ -375,16 +379,18 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
         boosterLogic: BoosterLogicProtocol,
         certificates: [ExtendedCBORWebToken],
         resolvable: Resolver<CertificateDetailSceneResult>,
-        certificateHolderStatusModel: CertificateHolderStatusModelProtocol
+        certificateHolderStatusModel: CertificateHolderStatusModelProtocol,
+        userDefaults: Persistence
     ) {
         self.certificateHolderStatusModel = certificateHolderStatusModel
         self.router = router
         self.repository = repository
         self.boosterLogic = boosterLogic
+        self.userDefaults = userDefaults
         self.certificates = certificates
         boosterCandidate = boosterLogic.checkCertificates(certificates)
         resolver = resolvable
-        self.holderNeedsMask = certificateHolderStatusModel.holderNeedsMask(self.certificates, region: nil)
+        self.holderNeedsMask = certificateHolderStatusModel.holderNeedsMask(self.certificates, region: userDefaults.stateSelection)
         self.holderIsFullyImmunized = certificateHolderStatusModel.holderIsFullyImmunized(self.certificates)
         guard let digitalGreenCertificate = certificates.first?.vaccinationCertificate.hcert.dgc else {
             return nil
@@ -610,7 +616,7 @@ private extension CertificateDetailViewModel {
 
 private extension Date {
     var readableString: String {
-        DateUtils.displayDateTimeFormatter.string(from: self)
+        DateUtils.displayDateFormatter.string(from: self)
     }
     
     var readableStringAfter29Days: String {

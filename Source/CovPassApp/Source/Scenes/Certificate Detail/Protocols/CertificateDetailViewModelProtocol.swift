@@ -53,7 +53,6 @@ protocol CertificateDetailViewModelProtocol {
     var recoveryExpiryReissueCandidatesCount: Int { get }
     var showBoosterReissueIsNewBadge: Bool { get }
     var showVaccinationExpiryReissueIsNewBadge: Bool { get }
-    var maskFaqLink: String { get }
     var immunizationDetailsHidden: Bool { get }
     var immunizationStatusViewModel: CertificateHolderImmunizationStatusViewModelProtocol { get }
     var maskStatusViewModel: CertificateHolderImmunizationStatusViewModelProtocol { get }

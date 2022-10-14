@@ -20,7 +20,8 @@ class CertificateDetailViewModelTests: XCTestCase {
     private var router: CertificateDetailRouterMock!
     private var sut: CertificateDetailViewModel!
     private var vaccinationRepo: VaccinationRepositoryMock!
-
+    private var persistence: MockPersistence!
+    
     override func setUpWithError() throws {
         let certificates: [ExtendedCBORWebToken] = try [
             .token1Of2(),
@@ -32,20 +33,27 @@ class CertificateDetailViewModelTests: XCTestCase {
         self.resolver = resolver
         router = .init()
         certificateHolderStatusModel = .init()
+        persistence = MockPersistence()
         configureCustomSut(certificates: certificates)
     }
     
-    private func configureCustomSut(certificates: [ExtendedCBORWebToken]) {
+    private func configureCustomSut(certificates: [ExtendedCBORWebToken],
+                                    maskRulesAvailable: Bool = false,
+                                    needsMask: Bool = false) {
         boosterLogic = BoosterLogicMock()
         vaccinationRepo = VaccinationRepositoryMock()
         delegate = .init()
+        certificateHolderStatusModel.areMaskRulesAvailable = maskRulesAvailable
+        certificateHolderStatusModel.needsMask = needsMask
+        persistence.stateSelection = "SH"
         sut = CertificateDetailViewModel(
             router: router,
             repository: vaccinationRepo,
             boosterLogic: boosterLogic,
             certificates: certificates,
             resolvable: resolver,
-            certificateHolderStatusModel: certificateHolderStatusModel
+            certificateHolderStatusModel: certificateHolderStatusModel,
+            userDefaults: persistence
         )
         sut.delegate = delegate
     }
@@ -66,11 +74,13 @@ class CertificateDetailViewModelTests: XCTestCase {
             boosterLogic: boosterLogic,
             certificates: certificates,
             resolvable: resolver,
-            certificateHolderStatusModel: certificateHolderStatusModel
+            certificateHolderStatusModel: certificateHolderStatusModel,
+            userDefaults: persistence
         )
     }
 
     override func tearDownWithError() throws {
+        persistence = nil
         vaccinationRepo = nil
         boosterLogic = nil
         delegate = nil
@@ -911,20 +921,33 @@ class CertificateDetailViewModelTests: XCTestCase {
         XCTAssertEqual(count, 0)
     }
     
-    func testMaskStatusViewModel_optional() {
+    func testMaskStatusViewModel_noMaskRulesAvailable() throws {
         // When
+        let certificates: [ExtendedCBORWebToken] = try [.token1Of1()]
+        configureCustomSut(certificates: certificates, maskRulesAvailable: false, needsMask: false)
         let viewModel = sut.maskStatusViewModel
-        certificateHolderStatusModel.needsMask = false
+
+        // Then
+        XCTAssertTrue(viewModel is CertificateHolderNoMaskRulesStatusViewModel)
+        XCTAssertEqual(viewModel.subtitle, nil)
+        XCTAssertEqual(viewModel.federalStateText, "in Schleswig-Holstein")
+    }
+    
+    func testMaskStatusViewModel_optional() throws {
+        // When
+        let certificates: [ExtendedCBORWebToken] = try [.token1Of1()]
+        configureCustomSut(certificates: certificates, maskRulesAvailable: true, needsMask: false)
+        let viewModel = sut.maskStatusViewModel
 
         // Then
         XCTAssertTrue(viewModel is CertificateHolderMaskNotRequiredStatusViewModel)
-        XCTAssertEqual(viewModel.subtitle, "Exempt until Jul 1, 2021 at 12:00 AM")
+        XCTAssertEqual(viewModel.subtitle, "Exempt until May 3, 2021")
     }
     
     func testMaskStatusViewModel_required() throws {
         // Given
-        certificateHolderStatusModel.needsMask = true
-        try configureSut()
+        let certificates: [ExtendedCBORWebToken] = try [.token1Of1()]
+        configureCustomSut(certificates: certificates, maskRulesAvailable: true, needsMask: true)
 
         // When
         let viewModel = sut.maskStatusViewModel
@@ -936,9 +959,7 @@ class CertificateDetailViewModelTests: XCTestCase {
     
     func testMaskStatusViewModel_required_withRecoveryAsFreshest_butOlderThan29Days() throws {
         // Given
-        certificateHolderStatusModel.needsMask = true
-        try configureCustomSut(certificates: [.token3Of3(),
-            .reissuableRecovery])
+        try configureCustomSut(certificates: [.token3Of3(), .reissuableRecovery], maskRulesAvailable: true, needsMask: true)
 
         // When
         let viewModel = sut.maskStatusViewModel
@@ -950,18 +971,19 @@ class CertificateDetailViewModelTests: XCTestCase {
     
     func testMaskStatusViewModel_required_withRecoveryAsFreshest_notOlderThan29Days() throws {
         // Given
-        certificateHolderStatusModel.needsMask = true
         let recoveryCert: ExtendedCBORWebToken = .reissuableRecovery
         let dateOfRecovery: Date = Date().add(days: 5)!
         recoveryCert.vaccinationCertificate.hcert.dgc.r!.first!.fr = dateOfRecovery
         try configureCustomSut(certificates: [.token3Of3(),
-                                              recoveryCert])
+                                              recoveryCert],
+                               maskRulesAvailable: true,
+                               needsMask: true)
 
         // When
         let viewModel = sut.maskStatusViewModel
 
         // Then
-        let formattedDate = DateUtils.displayDateTimeFormatter.string(from: dateOfRecovery.add(days: 28)!)
+        let formattedDate = DateUtils.displayDateFormatter.string(from: dateOfRecovery.add(days: 28)!)
         XCTAssertTrue(viewModel is CertificateHolderMaskRequiredStatusViewModel)
         XCTAssertEqual(viewModel.subtitle, "Exempt from \(formattedDate)")
     }
@@ -1166,14 +1188,6 @@ class CertificateDetailViewModelTests: XCTestCase {
 
         // Then
         XCTAssertTrue(viewModel is CertificateHolderInvalidImmunizationStatusViewModel)
-    }
-    
-    func test_maskLink() throws {
-        // When
-        let maskFaqLink = sut.maskFaqLink
-
-        // Then
-        XCTAssertEqual(maskFaqLink, "#More information::https://www.digitaler-impfnachweis-app.de/en/faq/#current-most-frequently-asked-questions#")
     }
 }
 

@@ -40,7 +40,7 @@
                             <rect key="frame" x="0.0" y="120.5" width="24" height="51"/>
                             <subviews>
                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FzW-WO-SYV">
-                                    <rect key="frame" x="0.0" y="-77.5" width="24" height="24"/>
+                                    <rect key="frame" x="0.0" y="-50" width="24" height="24"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="24" id="Bra-Uo-4DK"/>
                                         <constraint firstAttribute="width" secondItem="FzW-WO-SYV" secondAttribute="height" id="lOt-FB-6TP"/>
@@ -54,7 +54,7 @@
                             </constraints>
                         </view>
                         <stackView opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="oUb-Cv-MzU" userLabel="Text Stack View">
-                            <rect key="frame" x="39" y="46.5" width="320" height="199"/>
+                            <rect key="frame" x="39" y="74" width="320" height="144"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="top" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="5T4-RZ-OCj">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="36"/>
@@ -90,7 +90,7 @@
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 </view>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="0Jr-Pd-oBC" userLabel="Footer StackView">
-                                    <rect key="frame" x="0.0" y="98" width="320" height="101"/>
+                                    <rect key="frame" x="0.0" y="98" width="320" height="46"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="uwo-T5-4Yn" userLabel="Text">
                                             <subviews>
@@ -107,8 +107,11 @@
                                             </subviews>
                                         </stackView>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xcu-GR-FU3" userLabel="FooterButton" customClass="MainButton" customModule="CovPassUI">
-                                            <rect key="frame" x="0.0" y="14" width="320" height="87"/>
+                                            <rect key="frame" x="0.0" y="14" width="200" height="32"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="32" id="kqs-SD-oZt"/>
+                                            </constraints>
                                         </view>
                                     </subviews>
                                 </stackView>

@@ -13,4 +13,11 @@ struct CertificateHolderImmunizationStatusViewModelMock: CertificateHolderImmuni
     var title = "TITLE"
     var subtitle: String?
     var description = "DESCRIPTION"
+    var date: String?
+    var federalState: String? = nil
+    var federalStateText: String? = nil
+    let linkLabel: String? = nil
+    let notice: String? = nil
+    let noticeText: String? = nil
+    let selectFederalStateButtonTitle: String? = nil
 }
