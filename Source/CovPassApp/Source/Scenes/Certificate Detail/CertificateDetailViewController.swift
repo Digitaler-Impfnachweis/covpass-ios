@@ -86,6 +86,7 @@ class CertificateDetailViewController: UIViewController {
         maskStatusView.setup(with: viewModel.maskStatusViewModel)
         maskStatusView.bottomBorderLeftConstraint.constant = -.space_6
         maskStatusView.bottomBorder.backgroundColor = .neutralWhite
+        maskStatusView.footerButton.action = { self.viewModel.showStateSelection() }
         immunizationStatusView.setup(with: viewModel.immunizationStatusViewModel)
         immunizationStatusView.bottomBorder.isHidden = true
         immunizationStatusView.bottomBorder.layoutMargins.bottom = .space_24

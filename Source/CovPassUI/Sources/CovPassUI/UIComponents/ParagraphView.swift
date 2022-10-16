@@ -23,7 +23,7 @@ public class ParagraphView: XibView {
     @IBOutlet var footerStackView: UIStackView!
     @IBOutlet var footerHeadlineLabel: UILabel!
     @IBOutlet var footerBodyLabel: UILabel!
-    @IBOutlet var footerButton: MainButton!
+    @IBOutlet public var footerButton: MainButton!
     @IBOutlet public var bottomBorderHeightConstraint: NSLayoutConstraint!
     @IBOutlet public var bottomBorderLeftConstraint: NSLayoutConstraint!
     @IBOutlet public var imageViewWidthConstraint: NSLayoutConstraint!

@@ -511,6 +511,12 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
         markRecoveryExpiryReissueAsSeen()
     }
 
+    func showStateSelection() {
+        router.showStateSelection().done { [weak self] in
+            self?.refreshCertsAndUpdateView()
+        }.cauterize()
+    }
+
     private func markVaccinationExpiryReissueAsSeen() {
         guard var vaccination = vaccinationExpiryReissueTokens.first else {
             return

@@ -59,5 +59,10 @@ class CertificateDetailRouter: CertificateDetailRouterProtocol, DialogRouterProt
             )
         )
     }
-    
+
+    func showStateSelection() -> Promise<Void> {
+        sceneCoordinator.present(
+            StateSelectionSceneFactory()
+        )
+    }
 }

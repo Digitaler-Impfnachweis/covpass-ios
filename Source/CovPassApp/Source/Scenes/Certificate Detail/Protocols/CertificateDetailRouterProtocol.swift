@@ -18,4 +18,5 @@ protocol CertificateDetailRouterProtocol: DialogRouterProtocol {
     func showCertificate(for token: ExtendedCBORWebToken) -> Promise<Void>
     func showReissue(for tokens: [ExtendedCBORWebToken],
                      context: ReissueContext) -> Promise<Void>
+    func showStateSelection() -> Promise<Void>
 }

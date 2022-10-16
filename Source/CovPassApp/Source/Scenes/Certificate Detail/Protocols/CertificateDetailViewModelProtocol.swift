@@ -66,4 +66,5 @@ protocol CertificateDetailViewModelProtocol {
     func updateBoosterCandiate()
     func updateReissueCandidate(to value: Bool)
     func markExpiryReissueCandidatesAsSeen()
+    func showStateSelection()
 }

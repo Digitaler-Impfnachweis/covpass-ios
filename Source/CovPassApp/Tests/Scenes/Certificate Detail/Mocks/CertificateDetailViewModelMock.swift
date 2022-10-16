@@ -9,9 +9,10 @@
 import CovPassCommon
 import CovPassUI
 import UIKit
+import PromiseKit
 
 final class CertificateDetailViewModelMock: CertificateDetailViewModelProtocol {
-   
+
     var router: CertificateDetailRouterProtocol = CertificateDetailRouterMock()
     var delegate: ViewModelDelegate?
     var favoriteIcon: UIImage?
@@ -78,4 +79,5 @@ final class CertificateDetailViewModelMock: CertificateDetailViewModelProtocol {
     func updateBoosterCandiate() {}
     func updateReissueCandidate(to value: Bool) {}
     func markExpiryReissueCandidatesAsSeen() {}
+    func showStateSelection() {}
 }

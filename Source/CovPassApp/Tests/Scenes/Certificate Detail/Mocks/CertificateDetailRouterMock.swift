@@ -35,4 +35,6 @@ final class CertificateDetailRouterMock: CertificateDetailRouterProtocol {
         expectationShowReissue.fulfill()
         return .value
     }
+
+    func showStateSelection() -> Promise<Void> { .value }
 }
