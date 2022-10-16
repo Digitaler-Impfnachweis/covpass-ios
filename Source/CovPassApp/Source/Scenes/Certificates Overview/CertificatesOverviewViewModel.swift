@@ -364,6 +364,9 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
         .then {
             self.showNewRegulationsAnnouncementIfNeeded()
         }
+        .then {
+            self.showStateSelectionOnboarding()
+        }
         .then{
             self.showCheckSituationIfNeeded()
         }
@@ -528,6 +531,18 @@ extension CertificatesOverviewViewModel {
             .showNewRegulationsAnnouncement()
             .ensure {
                 self.userDefaults.newRegulationsOnboardingScreenWasShown = true
+            }
+            .recover { _ in () }
+    }
+    
+    private func showStateSelectionOnboarding() -> Promise<Void> {
+        if userDefaults.selectStateOnboardingWasShown {
+            return .value
+        }
+        return router
+            .showStateSelectionOnboarding()
+            .ensure {
+                self.userDefaults.selectStateOnboardingWasShown = true
             }
             .recover { _ in () }
     }

@@ -411,7 +411,7 @@ class CertificatesOverviewViewModelTests: XCTestCase {
             vaccinationRepository.setExpiryAlertExpectation
         ], timeout: 1)
     }
-
+    
     func testShowNotificationsIfNeeded_showRevocationWarning_token_revoked() throws {
         // Given
         var token = try ExtendedCBORWebToken.mock()
@@ -484,7 +484,7 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         // Then
         wait(for: [router.showAnnouncementExpectation], timeout: 1)
     }
-
+    
     func testShowNotificationsIfNeeded_new_regulations_announcement_not_shown() {
         // Given
         userDefaults.newRegulationsOnboardingScreenWasShown = false
@@ -494,6 +494,17 @@ class CertificatesOverviewViewModelTests: XCTestCase {
 
         // Then
         wait(for: [router.showNewRegulationsAnnouncementExpectation], timeout: 1)
+    }
+    
+    func test_showNotificationsIfNeeded_selectStateOnboarding_not_shown() {
+        // Given
+        userDefaults.selectStateOnboardingWasShown = false
+
+        // When
+        sut.showNotificationsIfNeeded()
+
+        // Then
+        wait(for: [router.showStateSelectionOnboardingExpectation], timeout: 1)
     }
 
     func testShowNotificationsIfNeeded_new_regulations_announcement_already_shown() {

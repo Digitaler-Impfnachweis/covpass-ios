@@ -36,6 +36,7 @@ struct CertificatesOverviewPersonSceneFactory: ResolvableSceneFactory {
             fatalError("Failed to initialize dependency.")
         }
         let viewModel = CertificatesOverviewPersonViewModel(router: router,
+                                                            persistence: UserDefaultsPersistence(),
                                                             repository: vaccinationRepository,
                                                             boosterLogic: boosterLogic,
                                                             certificateHolderStatusModel: certificateHolderStatusModel,

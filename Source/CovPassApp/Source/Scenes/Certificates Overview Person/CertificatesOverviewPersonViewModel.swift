@@ -51,10 +51,12 @@ class CertificatesOverviewPersonViewModel: CertificatesOverviewPersonViewModelPr
         return latestCertificate
     }
     private var holderNeedsMask: Bool
+    private var persistence: Persistence
 
     // MARK: - Lifecycle
     
     init(router: CertificatesOverviewPersonRouterProtocol,
+         persistence: Persistence,
          repository: VaccinationRepositoryProtocol,
          boosterLogic: BoosterLogicProtocol,
          certificateHolderStatusModel: CertificateHolderStatusModelProtocol,
@@ -64,11 +66,12 @@ class CertificatesOverviewPersonViewModel: CertificatesOverviewPersonViewModelPr
             fatalError("This scene makes no scence if certificates is empty, sould be covered by caller")
         }
         self.router = router
+        self.persistence = persistence
         self.repository = repository
         self.boosterLogic = boosterLogic
         self.certificateHolderStatusModel = certificateHolderStatusModel
         self.certificates = certificates
-        self.holderNeedsMask = certificateHolderStatusModel.holderNeedsMask(certificates, region: nil)
+        self.holderNeedsMask = certificateHolderStatusModel.holderNeedsMask(certificates, region: persistence.stateSelection)
         self.certificatesToShow = certificates.filterFirstOfAllTypes
         self.resolver = resolver
         self.pageSubtitle = String(format: Constants.Keys.modalSubline, certificatesToShow.count)

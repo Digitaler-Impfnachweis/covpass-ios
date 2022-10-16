@@ -37,7 +37,7 @@ DCC_DOMESTIC_RULES_FILE = dcc-domestic-rules.json
 // BOOSTER (NOTIFICATION) RULES
 
 BOOSTER_RULES_URL = https:/$()/distribution-cff4f7147260.dcc-rules.de/bnrules
-DOMESTIC_RULES_URL = https:/$()/distribution.dcc-rules.de/domesticrules
+DOMESTIC_RULES_URL = https:/$()/distribution-cff4f7147260.dcc-rules.de/domesticrules
 
 // CERTIFICATE REISSUE
 CERTIFICATE_REISSUE_URL = https:/$()/api.reissue.demo.ubirch.com

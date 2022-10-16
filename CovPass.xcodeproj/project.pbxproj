@@ -156,6 +156,7 @@
 		09C422A227F5BA5B00232036 /* CertificateRevocationRepository+Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C422A127F5BA5B00232036 /* CertificateRevocationRepository+Factory.swift */; };
 		09C422A427F5BA8D00232036 /* URLSession+CertificateRevocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C422A327F5BA8D00232036 /* URLSession+CertificateRevocation.swift */; };
 		09C422A727F5C93C00232036 /* revocation-trust-key-debug.pem in Resources */ = {isa = PBXBuildFile; fileRef = 09C422A627F5C93C00232036 /* revocation-trust-key-debug.pem */; };
+		09C7FEFA28F9ACF5001854B2 /* SelectStateOnboardingViewControllerSnapShotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C7FEF828F9ACCB001854B2 /* SelectStateOnboardingViewControllerSnapShotTests.swift */; };
 		09CE6C9227AB31920048BDA4 /* CountrySelectionViewControllerSnapShotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09CE6C9127AB31920048BDA4 /* CountrySelectionViewControllerSnapShotTests.swift */; };
 		09CE6C9427AB31D50048BDA4 /* CountrySelectionRouterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09CE6C9327AB31D50048BDA4 /* CountrySelectionRouterMock.swift */; };
 		09CE6C9727AB354D0048BDA4 /* CountrySelectionViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09CE6C9627AB354D0048BDA4 /* CountrySelectionViewModelTests.swift */; };
@@ -185,6 +186,7 @@
 		09E85435279992DC0051AEEE /* AppInformationRouterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E85434279992DC0051AEEE /* AppInformationRouterMock.swift */; };
 		09E854372799932A0051AEEE /* AppInformationViewControllerSnapShotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E854362799932A0051AEEE /* AppInformationViewControllerSnapShotTests.swift */; };
 		09E8543A279993470051AEEE /* AppInformationRouterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E85439279993470051AEEE /* AppInformationRouterMock.swift */; };
+		09F124C428F9954E000F7843 /* SelectStateOnboardingSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F124C328F9954E000F7843 /* SelectStateOnboardingSceneFactory.swift */; };
 		216D1F48264EF50300370F16 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 216D1F43264EF50300370F16 /* Localizable.strings */; };
 		216D1F49264EF50300370F16 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 216D1F46264EF50300370F16 /* Assets.xcassets */; };
 		216D1F87264EF6A800370F16 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 216D1F86264EF6A800370F16 /* LaunchScreen.storyboard */; };
@@ -725,6 +727,7 @@
 		09C422A127F5BA5B00232036 /* CertificateRevocationRepository+Factory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CertificateRevocationRepository+Factory.swift"; sourceTree = "<group>"; };
 		09C422A327F5BA8D00232036 /* URLSession+CertificateRevocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URLSession+CertificateRevocation.swift"; sourceTree = "<group>"; };
 		09C422A627F5C93C00232036 /* revocation-trust-key-debug.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "revocation-trust-key-debug.pem"; sourceTree = "<group>"; };
+		09C7FEF828F9ACCB001854B2 /* SelectStateOnboardingViewControllerSnapShotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectStateOnboardingViewControllerSnapShotTests.swift; sourceTree = "<group>"; };
 		09CE6C9127AB31920048BDA4 /* CountrySelectionViewControllerSnapShotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountrySelectionViewControllerSnapShotTests.swift; sourceTree = "<group>"; };
 		09CE6C9327AB31D50048BDA4 /* CountrySelectionRouterMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountrySelectionRouterMock.swift; sourceTree = "<group>"; };
 		09CE6C9627AB354D0048BDA4 /* CountrySelectionViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountrySelectionViewModelTests.swift; sourceTree = "<group>"; };
@@ -754,6 +757,7 @@
 		09E85434279992DC0051AEEE /* AppInformationRouterMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInformationRouterMock.swift; sourceTree = "<group>"; };
 		09E854362799932A0051AEEE /* AppInformationViewControllerSnapShotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInformationViewControllerSnapShotTests.swift; sourceTree = "<group>"; };
 		09E85439279993470051AEEE /* AppInformationRouterMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInformationRouterMock.swift; sourceTree = "<group>"; };
+		09F124C328F9954E000F7843 /* SelectStateOnboardingSceneFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectStateOnboardingSceneFactory.swift; sourceTree = "<group>"; };
 		210116F82646D18100B9E8FF /* debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = debug.xcconfig; sourceTree = "<group>"; };
 		2101178C2646E86F00B9E8FF /* debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = debug.xcconfig; sourceTree = "<group>"; };
 		212E757D264F0D09007C0F3A /* CovPassUI */ = {isa = PBXFileReference; lastKnownFileType = folder; path = CovPassUI; sourceTree = "<group>"; };
@@ -1494,6 +1498,14 @@
 			path = Revocation;
 			sourceTree = "<group>";
 		};
+		09C7FEF728F9ACB7001854B2 /* SelectStateOnboarding */ = {
+			isa = PBXGroup;
+			children = (
+				09C7FEF828F9ACCB001854B2 /* SelectStateOnboardingViewControllerSnapShotTests.swift */,
+			);
+			path = SelectStateOnboarding;
+			sourceTree = "<group>";
+		};
 		09CE6C9527AB35380048BDA4 /* CountrySelection */ = {
 			isa = PBXGroup;
 			children = (
@@ -1891,6 +1903,7 @@
 		216D2025264EF95400370F16 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				09C7FEF728F9ACB7001854B2 /* SelectStateOnboarding */,
 				E73D5C7A28B6A6B200564496 /* Announcement */,
 				E7CB54B127B5324E002FA55E /* App Information */,
 				386FDCF826ED1F7C00AC7639 /* BoosterNotification */,
@@ -2146,6 +2159,7 @@
 		3844643128F0DFED00953F06 /* FederalStateSettings */ = {
 			isa = PBXGroup;
 			children = (
+				09F124C328F9954E000F7843 /* SelectStateOnboardingSceneFactory.swift */,
 				3844643228F0E00000953F06 /* FederalStateSettingsSceneFactory.swift */,
 			);
 			path = FederalStateSettings;
@@ -3628,6 +3642,7 @@
 				E7F7817A27C4007D009AC907 /* CertificateReissueRepository+Factory.swift in Sources */,
 				E700EFB5285784210088D4CB /* CertificateImportSelectionFactory.swift in Sources */,
 				216D1F98264EF73200370F16 /* MainSceneFactory.swift in Sources */,
+				09F124C428F9954E000F7843 /* SelectStateOnboardingSceneFactory.swift in Sources */,
 				E76B96EA27C50F130030FC0C /* URLSession+CertificateReissue.swift in Sources */,
 				0983F5F528378E7C0020DBF0 /* CertificatesOverviewPersonSceneFactory.swift in Sources */,
 				385FC1B1269F21A200D19AF8 /* RuleCheckDetailViewModel.swift in Sources */,
@@ -3786,6 +3801,7 @@
 				E773F5E928B533E00051AE75 /* WhatsNewSettingsViewControllerSnapshotTests.swift in Sources */,
 				E773F5E728B532580051AE75 /* WhatsNewSettingsRouterMock.swift in Sources */,
 				E76B96EC27C5120A0030FC0C /* URLSession+CertificateReissueTests.swift in Sources */,
+				09C7FEFA28F9ACF5001854B2 /* SelectStateOnboardingViewControllerSnapShotTests.swift in Sources */,
 				09943E4D2892A7A0005B1184 /* TrustedListDetailsViewModelTests.swift in Sources */,
 				0944683B283D1D6500082BA2 /* CertificatesOverviewPersonViewControllerSnapShotTests.swift in Sources */,
 				E7FFBDAB27F5D83900796FEA /* CertificateRevocationRepository+FactoryTests.swift in Sources */,

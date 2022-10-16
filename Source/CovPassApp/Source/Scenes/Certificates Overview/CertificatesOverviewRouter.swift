@@ -54,6 +54,12 @@ class CertificatesOverviewRouter: CertificatesOverviewRouterProtocol, DialogRout
         )
     }
     
+    
+    func showStateSelectionOnboarding() -> Promise<Void> {
+        let scene = SelectStateOnboardingSceneFactory(sceneCoordinator: sceneCoordinator)
+        return sceneCoordinator.present(scene, animated: true)
+    }
+    
     func showDataPrivacy() -> Promise<Void> {
         sceneCoordinator.present(
             DataPrivacySceneFactory(

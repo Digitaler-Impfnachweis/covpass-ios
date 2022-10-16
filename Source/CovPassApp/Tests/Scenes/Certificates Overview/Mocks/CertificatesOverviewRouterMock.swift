@@ -12,6 +12,7 @@ import PromiseKit
 import XCTest
 
 class CertificatesOverviewRouterMock: CertificatesOverviewRouterProtocol {
+    let showStateSelectionOnboardingExpectation = XCTestExpectation(description: "showStateSelectionOnboardingExpectation")
     let showCheckSituationExpectation = XCTestExpectation(description: "showCheckSituationExpectation")
     let showDialogExpectation = XCTestExpectation(description: "showDialogExpectation")
     let showCertificatesReissueExpectation = XCTestExpectation(description: "showCertificatesReissueExpectation")
@@ -126,5 +127,10 @@ class CertificatesOverviewRouterMock: CertificatesOverviewRouterProtocol {
 
     func showCertificateImportError() {
         showCertificateImportErrorExpectation.fulfill()
+    }
+    
+    func showStateSelectionOnboarding() -> PromiseKit.Promise<Void> {
+        showStateSelectionOnboardingExpectation.fulfill()
+        return .value
     }
 }

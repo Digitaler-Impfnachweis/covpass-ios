@@ -24,6 +24,7 @@ class CertificatesOverviewPersonViewControllerSnapShotTests: BaseSnapShotTests {
         var certificateHolderStatusModel = CertificateHolderStatusModelMock()
         certificateHolderStatusModel.needsMask = needsMask
         return CertificatesOverviewPersonViewModel(router: CertificatesOverviewPersonRouterMock(),
+                                                   persistence: MockPersistence(),
                                                    repository: repository,
                                                    boosterLogic: boosterLogicMock,
                                                    certificateHolderStatusModel: certificateHolderStatusModel,
