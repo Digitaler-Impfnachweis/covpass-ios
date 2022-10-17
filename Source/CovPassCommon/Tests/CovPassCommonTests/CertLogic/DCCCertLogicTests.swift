@@ -459,7 +459,7 @@ class DCCCertLogicTests: XCTestCase {
     func test_domesticRules_gStatus() throws {
         // WHEN
         let token = CBORWebToken.mockVaccinationCertificate
-        XCTAssertThrowsError(try sut.validate(type: .gStatus, countryCode: "DE", validationClock: Date(), certificate: token))
+        XCTAssertNoThrow(try sut.validate(type: .gStatus, countryCode: "DE", validationClock: Date(), certificate: token))
     }
     
     func test_domesticRules_maskStatus() throws {

@@ -220,7 +220,7 @@ public class DCCCertLogic: DCCCertLogicProtocol {
         case .de:
             rules = dccDomesticRules.acceptenceAndInvalidationRules
         case .gStatus:
-            rules = dccDomesticRules.gStatusRules
+            rules = dccDomesticRules.acceptenceAndInvalidationRules
         case .maskStatus:
             rules = dccDomesticRules.maskStatusRules
         }
