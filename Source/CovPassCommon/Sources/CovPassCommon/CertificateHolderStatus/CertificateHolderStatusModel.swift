@@ -102,7 +102,7 @@ public struct CertificateHolderStatusModel: CertificateHolderStatusModelProtocol
         
     }
     
-    private func validCertificates(_ certificates: [ExtendedCBORWebToken]) -> [ExtendedCBORWebToken] {
+    public func validCertificates(_ certificates: [ExtendedCBORWebToken]) -> [ExtendedCBORWebToken] {
         var result: [ExtendedCBORWebToken] = []
         if let validVaccinationCertificate = validVaccinationCertificate(certificates) {
             result.append(validVaccinationCertificate)

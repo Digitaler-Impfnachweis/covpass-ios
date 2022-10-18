@@ -14,6 +14,7 @@ struct CertificateHolderStatusModelMock: CertificateHolderStatusModelProtocol {
     var needsMask = false
     var holderIsFullyImmunized = false
     var areMaskRulesAvailable = false
+    var validCertificates: [ExtendedCBORWebToken]? = nil
     var checkDomesticAcceptanceAndInvalidationRulesResult = CertificateHolderStatusResult.passed
     var checkEuInvalidationRulesResult = CertificateHolderStatusResult.passed
 
@@ -39,5 +40,9 @@ struct CertificateHolderStatusModelMock: CertificateHolderStatusModelProtocol {
     
     func maskRulesAvailable(for region: String?) -> Bool {
         areMaskRulesAvailable
+    }
+    
+    func validCertificates(_ certificates: [ExtendedCBORWebToken]) -> [ExtendedCBORWebToken] {
+        validCertificates ?? certificates
     }
 }

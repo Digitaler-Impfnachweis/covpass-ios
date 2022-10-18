@@ -56,4 +56,10 @@ public protocol CertificateHolderStatusModelProtocol {
     /// - Returns: `true`, if holder is fully immunzed. `false`, if the user is not fully immunized,
     /// is unkown, or on any internal error.
     func holderIsFullyImmunized(_ certificates: [ExtendedCBORWebToken]) -> Bool
+   
+    /// Queries the internal rules,  if a certificate is not passing rules.
+    /// - Parameters:
+    ///   - certifiates: The certificates of one Person
+    /// - Returns: `[ExtendedCBORWebToken]`, same list which passed but filtered with only passing rules
+    func validCertificates(_ certificates: [ExtendedCBORWebToken]) -> [ExtendedCBORWebToken]
 }
