@@ -293,6 +293,12 @@ class ValidatorOverviewViewModel {
             }
             .cauterize()
     }
+
+    func routeToRulesUpdate() {
+         router.routeToRulesUpdate(userDefaults: userDefaults)
+             .done { self.delegate?.viewModelDidUpdate() }
+             .cauterize()
+     }
     
     // MARK: Kronos Usage
     

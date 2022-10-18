@@ -79,6 +79,15 @@ class ValidatorOverviewRouter: ValidatorOverviewRouterProtocol {
         sceneCoordinator.present(StateSelectionSceneFactory(),
                                  animated: true)
     }
+
+    func routeToRulesUpdate(userDefaults: Persistence) -> Promise<Void> {
+         sceneCoordinator.push(
+            CheckSituationResolvableSceneFactory(
+                router: CheckSituationRouter(sceneCoordinator: sceneCoordinator),
+                userDefaults: userDefaults
+            )
+         )
+     }
     
     func showMaskRequiredBusinessRules(token: ExtendedCBORWebToken) -> Promise<ValidatorDetailSceneResult> {
         let router = MaskRequiredResultRouter(sceneCoordinator: sceneCoordinator)

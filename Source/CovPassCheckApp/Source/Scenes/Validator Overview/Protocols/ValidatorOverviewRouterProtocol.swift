@@ -17,6 +17,7 @@ protocol ValidatorOverviewRouterProtocol: DialogRouterProtocol, ScanAndValidateR
     func showDataPrivacy() -> Promise<Void>
     func showNewRegulationsAnnouncement() -> Promise<Void>
     func routeToStateSelection() -> Promise<Void>
+    func routeToRulesUpdate(userDefaults: Persistence) -> Promise<Void>
     func showMaskRequiredBusinessRules(token: ExtendedCBORWebToken) -> Promise<ValidatorDetailSceneResult>
     func showMaskRequiredBusinessRulesSecondScanAllowed(token: ExtendedCBORWebToken) -> Promise<ValidatorDetailSceneResult>
     func showMaskRequiredTechnicalError(token: ExtendedCBORWebToken?) -> Promise<ValidatorDetailSceneResult>
