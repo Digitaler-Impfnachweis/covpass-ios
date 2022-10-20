@@ -10,8 +10,8 @@ import CovPassUI
 import UIKit
 
 class CertificateCardViewModelMock: CertificateCardViewModelProtocol {
-    
-    var maskStatusIsHidden: Bool = true
+
+    var maskRulesNotAvailable: Bool = true
     
     var regionText: String? = nil
     

@@ -144,6 +144,7 @@ extension CertificatesOverviewViewController: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: vm.reuseIdentifier, for: indexPath) as? CardCollectionViewCell else { return UICollectionViewCell() }
         cell.viewModel = vm
         cell.viewModel?.delegate = cell
+        (vm as? CertificateCardMaskImmunityViewModel)?.updateCertificateHolderStatus()
         (cell as? CertificateMaskImmunityCollectionViewCell)?.contentStackView.layoutMargins.top = 20
         (cell as? CertificateMaskImmunityCollectionViewCell)?.contentStackView.layoutMargins.bottom = 0
         return cell

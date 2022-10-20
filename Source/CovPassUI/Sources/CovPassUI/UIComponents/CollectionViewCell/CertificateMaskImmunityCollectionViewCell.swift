@@ -83,7 +83,7 @@ public class CertificateMaskImmunityCollectionViewCell: CardCollectionViewCell {
         qrContainerView.maskStatusText = vm.title
         qrContainerView.qrInfoText = Constants.qrInfoText
         qrContainerView.isInvalid = vm.isInvalid
-        qrContainerView.maskStatusIsHidden = vm.maskStatusIsHidden
+        qrContainerView.maskStatusIsHidden = vm.maskRulesNotAvailable
         qrContainerView.regionText = vm.regionText
         qrContainerView.updateViews()
         titleLabel.attributedText = vm.name.styledAs(.header_3).colored(vm.tintColor)

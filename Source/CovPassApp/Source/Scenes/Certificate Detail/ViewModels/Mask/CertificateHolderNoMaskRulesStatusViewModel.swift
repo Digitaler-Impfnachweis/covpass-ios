@@ -8,8 +8,8 @@
 import UIKit
 
 struct CertificateHolderNoMaskRulesStatusViewModel: CertificateHolderImmunizationStatusViewModelProtocol {
-    let icon: UIImage = .statusMaskNoRulesCircleSmall
-    let title = "infschg_detail_page_mask_status_uncertain_title".localized
+    let icon: UIImage = .statusMaskInvalidCircle
+    let title = "infschg_start_screen_status_grey_2".localized
     var subtitle: String? = nil
     var date: String? = nil
     var federalState: String?
