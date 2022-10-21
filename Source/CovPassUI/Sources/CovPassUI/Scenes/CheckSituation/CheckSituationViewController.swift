@@ -204,8 +204,7 @@ extension CheckSituationViewController {
         valueSetsSubtitleLabel.attributedText = viewModel.valueSetsSubtitle.styledAs(.body)
         certificateProviderSubtitleLabel.attributedText = viewModel.certificateProviderSubtitle.styledAs(.body)
         countryListSubtitleLabel.attributedText = viewModel.countryListSubtitle.styledAs(.body)
-        authorityListSubtitleLabel.attributedText =
-        viewModel.authorityListSubtitle.styledAs(.body)
+        authorityListSubtitleLabel.attributedText = viewModel.authorityListSubtitle.styledAs(.body)
         authorityListView.isHidden = !offlineRevocationSwitch.uiSwitch.isOn
         authorityListDivider.isHidden = !offlineRevocationSwitch.uiSwitch.isOn
     }

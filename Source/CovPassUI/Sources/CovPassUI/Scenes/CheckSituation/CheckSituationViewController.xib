@@ -63,7 +63,7 @@
                     <rect key="frame" x="0.0" y="48" width="414" height="848"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="AB7-iK-S63">
-                            <rect key="frame" x="0.0" y="32" width="414" height="1919"/>
+                            <rect key="frame" x="0.0" y="32" width="414" height="1943"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Giw-oM-J5h">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="168"/>
@@ -481,16 +481,16 @@
                                     </subviews>
                                 </stackView>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NUh-as-M7g">
-                                    <rect key="frame" x="0.0" y="1751" width="414" height="168"/>
+                                    <rect key="frame" x="0.0" y="1751" width="414" height="192"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="inb-gF-Tlw" userLabel="Save Button" customClass="MainButton" customModule="CovPassUI">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="168"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="128"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </view>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
-                                        <constraint firstAttribute="bottom" secondItem="inb-gF-Tlw" secondAttribute="bottom" id="Apo-cj-Xly"/>
+                                        <constraint firstAttribute="bottom" secondItem="inb-gF-Tlw" secondAttribute="bottom" constant="64" id="Apo-cj-Xly"/>
                                         <constraint firstItem="inb-gF-Tlw" firstAttribute="centerX" secondItem="NUh-as-M7g" secondAttribute="centerX" id="LLz-Pe-aif"/>
                                         <constraint firstItem="inb-gF-Tlw" firstAttribute="top" secondItem="NUh-as-M7g" secondAttribute="top" id="wMt-3i-mKr"/>
                                     </constraints>
@@ -503,7 +503,7 @@
                         <constraint firstItem="AB7-iK-S63" firstAttribute="leading" secondItem="4Wg-Ev-lHI" secondAttribute="leading" id="MWb-ru-VjR"/>
                         <constraint firstItem="AB7-iK-S63" firstAttribute="width" secondItem="4Wg-Ev-lHI" secondAttribute="width" id="NdF-HW-GrM"/>
                         <constraint firstAttribute="trailing" secondItem="AB7-iK-S63" secondAttribute="trailing" id="gsa-XE-smX"/>
-                        <constraint firstAttribute="bottom" secondItem="AB7-iK-S63" secondAttribute="bottom" id="mP3-Od-5Lk"/>
+                        <constraint firstAttribute="bottom" secondItem="AB7-iK-S63" secondAttribute="bottom" priority="999" id="mP3-Od-5Lk"/>
                     </constraints>
                 </scrollView>
             </subviews>
