@@ -9,6 +9,7 @@
 import CovPassCommon
 import CovPassUI
 import UIKit
+import PromiseKit
 
 class CertificateCardMaskImmunityViewModel: CertificateCardViewModelProtocol {
 
@@ -75,25 +76,24 @@ class CertificateCardMaskImmunityViewModel: CertificateCardViewModelProtocol {
         self.boosterLogic = boosterLogic
         self.userDefaults = userDefaults
         self.certificateHolderStatusModel = certificateHolderStatusModel
-        updateCertificateHolderStatus()
+        updateCertificateHolderStatus().cauterize()
     }
     
-    func updateCertificateHolderStatus() {
+    func updateCertificateHolderStatus() -> Promise<Void> {
         guard certificateHolderStatusModel.maskRulesAvailable(for: userDefaults.stateSelection) else {
             maskRulesNotAvailable = true
             delegate?.viewModelDidUpdate()
-            return
+            return .value
         }
         maskRulesNotAvailable = false
-        certificateHolderStatusModel
+        return certificateHolderStatusModel
             .holderNeedsMaskAsync(tokens, region: userDefaults.stateSelection)
             .done { holderNeedsMask in
                 self.holderNeedsMask = holderNeedsMask
                 DispatchQueue.main.async {
                     self.delegate?.viewModelDidUpdate()
                 }
-            }
-            .cauterize()
+            }.asVoid()
     }
 
     // MARK: - Internal Properties

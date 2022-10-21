@@ -38,11 +38,7 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
     private var certLogic: DCCCertLogicProtocol
     private let boosterLogic: BoosterLogicProtocol
     private var cellViewModels: [CertificateCardMaskImmunityViewModel] = .init()
-    private var certificateList: CertificateList {
-        didSet {
-            createCellViewModels()
-        }
-    }
+    private var certificateList: CertificateList
     private var lastKnownFavoriteCertificateId: String?
     private var userDefaults: UserDefaultsPersistence
     private let locale: Locale
@@ -123,9 +119,11 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
             .then { _ in
                 self.repository.getCertificateList()
             }
-            .done { [weak self] certificateList in
+            .get { [weak self] certificateList in
                 self?.certificateList = certificateList
-                self?.delegate?.viewModelDidUpdate()
+            }
+            .then { _ in
+                self.refresh()
             }
             .catch { [weak self] _ in
                 self?.router.showCertificateImportError()
@@ -180,7 +178,9 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
         }
         .get {
             return self.certificateList = $0
-            self.delegate?.viewModelDidUpdate()
+        }
+        .then { _ in
+            self.refresh()
         }
         .cauterize()
     }
@@ -191,14 +191,21 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
         }
         .get {
             self.certificateList = $0
+        }
+        .then { _ in
+            self.createCellViewModels()
+        }
+        .get {
             self.delegate?.viewModelDidUpdate()
         }
-        .map { list in
+        .map {
+            if self.cellViewModels.isEmpty { return } // skip in case of no items
+
             // scroll to favorite certificate if needed
-            if self.lastKnownFavoriteCertificateId != nil, self.lastKnownFavoriteCertificateId != list.favoriteCertificateId {
+            if self.lastKnownFavoriteCertificateId != nil, self.lastKnownFavoriteCertificateId != self.certificateList.favoriteCertificateId {
                 self.delegate?.viewModelNeedsFirstCertificateVisible()
             }
-            self.lastKnownFavoriteCertificateId = list.favoriteCertificateId
+            self.lastKnownFavoriteCertificateId = self.certificateList.favoriteCertificateId
         }.then {
             self.showExpiryAlertIfNeeded()
         }
@@ -300,9 +307,11 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
         .ensure {
             self.isLoading = false
         }
-        .done { [weak self] certificateList in
+        .get { [weak self] certificateList in
             self?.certificateList = certificateList
-            self?.delegate?.viewModelDidUpdate()
+        }
+        .then { _ in
+            self.refresh()
         }
         .cauterize()
     }
@@ -596,8 +605,11 @@ extension CertificatesOverviewViewModel {
                 .ensure {
                     self.showExpiryAlert()
                 }
-                .done { certificateList in
+                .get { certificateList in
                     self.certificateList = certificateList
+                }
+                .then { _ in
+                    self.refresh()
                 }
                 .cauterize()
 
@@ -659,33 +671,53 @@ extension CertificatesOverviewViewModel {
 extension CertificatesOverviewViewModel {
     
     func countOfCells() -> Int {
-        max(certificateList.certificates.partitionedByOwner.count, 1)
+        if cellViewModels.count == 0 {
+            // NoCertificateCardViewModel
+            return 1
+        }
+        return cellViewModels.count
     }
     
     func viewModel(for row: Int) -> CardViewModel {
-        if certificateList.certificates.isEmpty {
+        if cellViewModels.isEmpty {
             return NoCertificateCardViewModel()
         }
         return cellViewModels[row]
     }
     
-    private func createCellViewModels() {
-        cellViewModels = []
-        let certificatesPerPerson = certificateList.certificates.partitionedByOwner
-        certificatesPerPerson.forEach { certificates in
-            let sortedCertificates = certificates.sortLatest()
-            guard let cert = sortedCertificates.first else { return }
-            let viewModel = CertificateCardMaskImmunityViewModel(
-                token: cert,
-                tokens: sortedCertificates,
-                onAction: onActionCardView,
-                certificateHolderStatusModel: certificateHolderStatusModel,
-                repository: repository,
-                boosterLogic: boosterLogic,
-                userDefaults: userDefaults
-            )
-            
-            cellViewModels.append(viewModel)
+    private func createCellViewModels() -> Promise<Void> {
+        let cellViewModelPromises = certificateList
+            .certificates
+            .partitionedByOwner
+            .compactMap { (certificates: Array<ExtendedCBORWebToken>) -> Promise<CertificateCardMaskImmunityViewModel>? in
+                let sortedCertificates = certificates.sortLatest()
+                guard let cert = sortedCertificates.first else { return nil }
+                return Promise { seal in
+                    let viewModel = CertificateCardMaskImmunityViewModel(
+                        token: cert,
+                        tokens: sortedCertificates,
+                        onAction: onActionCardView,
+                        certificateHolderStatusModel: certificateHolderStatusModel,
+                        repository: repository,
+                        boosterLogic: boosterLogic,
+                        userDefaults: userDefaults
+                    )
+                    viewModel
+                        .updateCertificateHolderStatus()
+                        .done {
+                            seal.fulfill(viewModel)
+                        }
+                        .catch { error in
+                            print("Unable to update holder status: \(error)")
+                            seal.fulfill(viewModel)
+                        }
+                }
+            }
+
+        return when(fulfilled: cellViewModelPromises).done { viewModels in
+            DispatchQueue.main.async {
+                self.cellViewModels = viewModels
+            }
         }
     }
 }
