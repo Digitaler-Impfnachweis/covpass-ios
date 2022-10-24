@@ -68,7 +68,6 @@ public class QRContainerMaskImmunityView: XibView {
 
     public func updateViews() {
         imageView.image = image
-        maskStatusContainer.isHidden = isInvalid
         maskStatusImageView.image = maskStatusImage
         maskStatusLabel.isHidden = maskStatusLabel.attributedText.isNilOrEmpty
         maskStatusLabel.attributedText = maskStatusText?
