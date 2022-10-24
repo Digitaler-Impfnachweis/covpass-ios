@@ -246,7 +246,8 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
             return CertificateHolderMaskRequiredStatusViewModel(federalState: userDefaults.stateSelection)
         } else {
             let certificatesUsed = certificateHolderStatusModel.validCertificates(certificates)
-            guard let dtOrFr = certificatesUsed.joinedTokens?.dtFrOrSc().add(days: 90) else {
+            guard let latestCertificate = certificatesUsed.sortedByDtFrAndSc.first,
+                    let dtOrFr = latestCertificate.dtFrOrSc.add(days: 90) else {
                 return CertificateHolderMaskNotRequiredStatusViewModel(federalState: userDefaults.stateSelection)
             }
             return CertificateHolderMaskNotRequiredStatusViewModel(date: dtOrFr.readableString, federalState: userDefaults.stateSelection)

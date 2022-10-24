@@ -229,4 +229,49 @@ class ExtendedCBORWebTokenTests: XCTestCase {
         // Then
         XCTAssertTrue(expiryAlertWasNotShown)
     }
+    
+    func test_dtFrOrSc_recovery() {
+        // GIVEN
+        let frDate: Date = Date() - 1
+        let sut = CBORWebToken.mockRecoveryCertificate
+            .mockRecoverySetDate(frDate)
+            .mockRecoveryUVCI("1r")
+            .extended(vaccinationQRCodeData: "1r")
+
+        // When
+        let dtFrOrSc = sut.dtFrOrSc
+
+        // Then
+        XCTAssertEqual(dtFrOrSc, frDate)
+    }
+    
+    func test_dtFrOrSc_vaccination() {
+        // GIVEN
+        let dtDate: Date = Date() + 1
+        let sut = CBORWebToken.mockVaccinationCertificate
+            .mockVaccinationSetDate(dtDate)
+            .mockVaccinationUVCI("1v")
+            .extended(vaccinationQRCodeData: "1v")
+
+        // When
+        let dtFrOrSc = sut.dtFrOrSc
+
+        // Then
+        XCTAssertEqual(dtFrOrSc, dtDate)
+    }
+    
+    func test_dtFrOrSc_test() {
+        // GIVEN
+        let scDate: Date = Date() - 2
+        let sut = CBORWebToken.mockTestCertificate
+            .mockTestSetDate(scDate)
+            .mockTestUVCI("1t")
+            .extended(vaccinationQRCodeData: "1t")
+
+        // When
+        let dtFrOrSc = sut.dtFrOrSc
+
+        // Then
+        XCTAssertEqual(dtFrOrSc, scDate)
+    }
 }

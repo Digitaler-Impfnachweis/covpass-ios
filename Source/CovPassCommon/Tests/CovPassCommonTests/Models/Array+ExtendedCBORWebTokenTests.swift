@@ -1474,6 +1474,34 @@ class ArrayExtendedCBORWebTokenTests: XCTestCase {
         // Then
         XCTAssertEqual(latestRecovery?.ci, "1r")
     }
+    
+    func test_sortedByDtFrAndSc() {
+        // GIVEN
+        let token1r = CBORWebToken.mockRecoveryCertificate
+            .mockRecoverySetDate(Date() - 1)
+            .mockRecoveryUVCI("1r")
+            .extended(vaccinationQRCodeData: "1r")
+        let token1v = CBORWebToken.mockVaccinationCertificate
+            .mockVaccinationSetDate(Date() + 1)
+            .mockVaccinationUVCI("1v")
+            .extended(vaccinationQRCodeData: "1v")
+        let token1t = CBORWebToken.mockTestCertificate
+            .mockTestSetDate(Date() - 2)
+            .mockTestUVCI("1t")
+            .extended(vaccinationQRCodeData: "1t")
+        let sut = [
+            token1r,
+            token1v,
+            token1t
+        ]
+        // WHEN
+        let sortedByDtFrAndSc = sut.sortedByDtFrAndSc
+        
+        // THEN
+        XCTAssertEqual(sortedByDtFrAndSc[0], token1v)
+        XCTAssertEqual(sortedByDtFrAndSc[1], token1r)
+        XCTAssertEqual(sortedByDtFrAndSc[2], token1t)
+    }
 }
 
 private extension DigitalGreenCertificate {

@@ -83,4 +83,18 @@ public extension ExtendedCBORWebToken {
         let wasAlreadyShown = wasExpiryAlertShown ?? false
         return !wasAlreadyShown
     }
+    
+    var dtFrOrSc: Date {
+        let date: Date
+        if let vaccination = vaccinationCertificate.hcert.dgc.v?.first {
+            date = vaccination.dt
+        } else if let recovery = vaccinationCertificate.hcert.dgc.r?.first {
+            date = recovery.fr
+        } else if let test = vaccinationCertificate.hcert.dgc.t?.first {
+            date = test.sc
+        } else {
+            date = .init(timeIntervalSinceReferenceDate: 0)
+        }
+        return date
+    }
 }

@@ -52,9 +52,9 @@ public extension Array where Element == ExtendedCBORWebToken {
         return results
     }
 
-    private var sortedByDtFrAndSc: Self {
+    var sortedByDtFrAndSc: Self {
         sorted { element1, element2 in
-            element1.vaccinationCertificate.dtFrOrSc() > element2.vaccinationCertificate.dtFrOrSc()
+            element1.dtFrOrSc > element2.dtFrOrSc
         }
     }
 
@@ -149,7 +149,7 @@ public extension Array where Element == ExtendedCBORWebToken {
         for token in self {
             if cleanTokens.containsSameDate(like: token) {
                 if token.vaccinationCertificate.certType == .vaccination,
-                    let tokenIndex = cleanTokens.firstIndex(where: {$0.vaccinationCertificate.dtFrOrSc().daysSince(token.vaccinationCertificate.dtFrOrSc()) == 0}) {
+                    let tokenIndex = cleanTokens.firstIndex(where: {$0.dtFrOrSc.daysSince(token.dtFrOrSc) == 0}) {
                     cleanTokens[tokenIndex] = token
                 }
             } else {
@@ -182,7 +182,7 @@ public extension Array where Element == ExtendedCBORWebToken {
     }
     
     func containsSameDate(like token: ExtendedCBORWebToken) -> Bool {
-        contains(where: {$0.vaccinationCertificate.dtFrOrSc().daysSince(token.vaccinationCertificate.dtFrOrSc()) == 0 })
+        contains(where: {$0.dtFrOrSc.daysSince(token.dtFrOrSc) == 0 })
     }
 
     var tokensOfVaccinationWithDoubleDoseCompleteFromGermany: [ExtendedCBORWebToken] {
