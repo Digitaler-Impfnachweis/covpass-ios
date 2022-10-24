@@ -1703,7 +1703,7 @@
 
 "infschg_cert_overview_immunisation_time_from" = "Ab %@";
 
-"infschg_cert_overview_immunisation_incomplete_A" = "Sie haben noch nicht alle derzeit empfohlenen Impfungen erhalten. Ihr Impfschutz ist noch nicht vollständig.";
+"infschg_cert_overview_immunisation_incomplete_A" = "Sie haben noch nicht alle derzeit empfohlenen Impfungen erhalten. Ihr Impfschutz ist noch nicht vollständig. Bitte beachten Sie, dass der in der App angezeigte Impfstatus gemäß Infektionsschutzgesetz bestimmt wird. Für Kinder unter 12 Jahren und alle anderen Personen bestehen nach Bundesrecht derzeit keine Beschränkungen, die an den in der App einsehbaren Impfstatus „vollständig geimpft“ anknüpfen. Bitte beachten Sie zum einen die Empfehlungen der Ständigen Impfkommission und zum anderen möglicherweise abweichende Regeln in Ihrem Bundesland.";
 
 "infschg_cert_overview_immunisation_complete_B2" = "Sie haben alle derzeit empfohlenen Impfungen erhalten. Ihr Impfschutz ist vollständig.";
 
@@ -1732,6 +1732,8 @@
 "infschg_start_screen_status_blue" = "Maskenpflicht";
 
 "infschg_start_screen_status_grey" = "Kein gültiges Zertifikat";
+
+"infschg_start_screen_status_grey_2" = "Keine zusätzlichen Regeln";
 
 "infschg_start_screen_status_federal_state" = "in %@";
 
