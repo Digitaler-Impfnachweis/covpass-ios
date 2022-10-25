@@ -215,9 +215,11 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
     
     private func afterScannedCertFinalFlow(_ certificate: ExtendedCBORWebToken) {
         certificateList.certificates.append(certificate)
-        delegate?.viewModelDidUpdate()
-        handleCertificateDetailSceneResult(.showCertificatesOnOverview(certificate))
-        showCertificates(certificateList.certificates.certificatePair(for: certificate), forceToDetailsPage: true)
+        refresh().done { [weak self] in
+            guard let self = self else { return }
+            self.handleCertificateDetailSceneResult(.showCertificatesOnOverview(certificate))
+            self.showCertificates(self.certificateList.certificates.certificatePair(for: certificate), forceToDetailsPage: true)
+        }.cauterize()
     }
     
     private func continueScanning() -> PMKFinalizer {
