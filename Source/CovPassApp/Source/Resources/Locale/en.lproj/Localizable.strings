@@ -1427,6 +1427,8 @@
 
 "share_certificate_transmission_details_provider" = "Provider";
 
+"share_certificate_transmission_details_partner" = "Verification Partner";
+
 "share_certificate_transmission_details_booking" = "Booking";
 
 "share_certificate_transmission_message" = "The selected certificate and your booking data will now be transmitted to the provider's verification partner. Your consent is required for the transmission of your data to the verification service.";

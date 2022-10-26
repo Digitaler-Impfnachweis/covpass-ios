@@ -1427,6 +1427,8 @@
 
 "share_certificate_transmission_details_provider" = "Anbieter";
 
+"share_certificate_transmission_details_partner" = "Prüfpartner";
+
 "share_certificate_transmission_details_booking" = "Buchung";
 
 "share_certificate_transmission_message" = "Das ausgewählte Zertifikat und Ihre Buchungsdaten werden nun an den Prüfpartner des Anbieters übermittelt. Für die Übermittlung Ihrer Daten an den Überprüfungsservice ist Ihr Einverständnis erforderlich.";
