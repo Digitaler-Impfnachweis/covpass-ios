@@ -38,7 +38,7 @@ private enum Constants {
         }
         
         enum Cell {
-            static let providerTitle = "Prüfpartner"
+            static let providerTitle = "share_certificate_transmission_details_partner".localized
             static let subjectTitle = "share_certificate_transmission_details_provider".localized
         }
     }

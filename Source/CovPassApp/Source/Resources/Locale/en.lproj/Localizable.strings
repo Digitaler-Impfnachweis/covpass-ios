@@ -1427,6 +1427,8 @@
 
 "share_certificate_transmission_details_provider" = "Provider";
 
+"share_certificate_transmission_details_partner" = "Verification Partner";
+
 "share_certificate_transmission_details_booking" = "Booking";
 
 "share_certificate_transmission_message" = "The selected certificate and your booking data will now be transmitted to the provider's verification partner. Your consent is required for the transmission of your data to the verification service.";
@@ -1703,7 +1705,7 @@
 
 "infschg_cert_overview_immunisation_time_from" = "From %@";
 
-"infschg_cert_overview_immunisation_incomplete_A" = "You have not yet received all currently recommended vaccinations. Your vaccination protection is not yet complete.";
+"infschg_cert_overview_immunisation_incomplete_A" = "You have not yet received all currently recommended vaccinations. Your vaccination protection is not yet complete. Please note that the vaccination status displayed in the app is determined in accordance with the Infection Protection Act. For children under 12 and all other persons, there are currently no restrictions under federal law that are linked to the \"fully vaccinated\" vaccination status that can be viewed in the app. Please note, on the one hand, the recommendations of the Permanent Vaccination Commission and, on the other hand, possibly deviating rules in your federal state.";
 
 "infschg_cert_overview_immunisation_complete_B2" = "You have received all currently recommended vaccinations. Your vaccination protection is complete.";
 
@@ -1732,6 +1734,8 @@
 "infschg_start_screen_status_blue" = "Mask mandatory";
 
 "infschg_start_screen_status_grey" = "No valid certificate";
+
+"infschg_start_screen_status_grey_2" = "No additional rules";
 
 "infschg_start_screen_status_federal_state" = "in %@";
 
