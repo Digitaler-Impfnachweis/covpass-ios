@@ -27,6 +27,14 @@ class PDFExportViewController: UIViewController {
 
     private(set) var viewModel: PDFExportViewModel
 
+    var filename: String {
+        let dgc = viewModel.token.vaccinationCertificate.hcert.dgc
+        let name = dgc.nam.fullName.replacingOccurrences(of: " ", with: "-")
+        // Use last few characters of the UVCI to have a unique identifier for the pdf file
+        let uvci = String(dgc.uvci.suffix(5)).replacingOccurrences(of: "#", with: "")
+        return "\(["Certificate", name, uvci].joined(separator: "-")).pdf".sanitizedFileName
+    }
+
     // MARK: - Lifecycle
 
     @available(*, unavailable)
@@ -75,8 +83,8 @@ class PDFExportViewController: UIViewController {
 
                 // generate PDF and present share sheet
                 self?.viewModel.generatePDF { [weak self] document in
-                    guard let document = document else {
-                        print("Could not generate PDF")
+                    guard let document = document, let filename = self?.filename else {
+                        print("Cannot generate PDF")
                         return
                     }
 
@@ -84,10 +92,7 @@ class PDFExportViewController: UIViewController {
                     let temporaryDirectoryURL = URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
 
                     // Customize export name
-                    var name = self?.viewModel.token.vaccinationCertificate.hcert.dgc.nam.fullName
-                    name = name?.replacingOccurrences(of: " ", with: "-")
-                    let fileName = "Certificate-\(name ?? "").pdf".sanitizedFileName
-                    let pdfFile = temporaryDirectoryURL.appendingPathComponent(fileName)
+                    let pdfFile = temporaryDirectoryURL.appendingPathComponent(filename)
                     document.write(to: pdfFile)
 
                     // present 'share sheet'

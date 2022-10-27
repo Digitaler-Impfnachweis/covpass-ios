@@ -290,6 +290,7 @@
 		3876382926ADBED100FBCA47 /* privacy-covpass-en.html in Resources */ = {isa = PBXBuildFile; fileRef = 3876382726ADBED100FBCA47 /* privacy-covpass-en.html */; };
 		3876382E26ADBFE500FBCA47 /* contact-covpasscheck-en.html in Resources */ = {isa = PBXBuildFile; fileRef = 3876382B26ADBED900FBCA47 /* contact-covpasscheck-en.html */; };
 		3876382F26ADBFEC00FBCA47 /* privacy-covpasscheck-en.html in Resources */ = {isa = PBXBuildFile; fileRef = 3876382A26ADBED900FBCA47 /* privacy-covpasscheck-en.html */; };
+		3881BF3F290987B500851D77 /* PDFExportViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3881BF3C290981A400851D77 /* PDFExportViewControllerTests.swift */; };
 		3882AEAB266FD609000354CD /* VaccinationCertificateItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3882AEAA266FD609000354CD /* VaccinationCertificateItemViewModel.swift */; };
 		3882AEAE266FE85C000354CD /* CertificateItemDetailSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3882AEAD266FE85C000354CD /* CertificateItemDetailSceneFactory.swift */; };
 		3882AEB0266FE9EE000354CD /* CertificateItemDetailRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3882AEAF266FE9EE000354CD /* CertificateItemDetailRouter.swift */; };
@@ -887,6 +888,7 @@
 		3876382726ADBED100FBCA47 /* privacy-covpass-en.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "privacy-covpass-en.html"; sourceTree = "<group>"; };
 		3876382A26ADBED900FBCA47 /* privacy-covpasscheck-en.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "privacy-covpasscheck-en.html"; sourceTree = "<group>"; };
 		3876382B26ADBED900FBCA47 /* contact-covpasscheck-en.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "contact-covpasscheck-en.html"; sourceTree = "<group>"; };
+		3881BF3C290981A400851D77 /* PDFExportViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFExportViewControllerTests.swift; sourceTree = "<group>"; };
 		3882AEAA266FD609000354CD /* VaccinationCertificateItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaccinationCertificateItemViewModel.swift; sourceTree = "<group>"; };
 		3882AEAD266FE85C000354CD /* CertificateItemDetailSceneFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateItemDetailSceneFactory.swift; sourceTree = "<group>"; };
 		3882AEAF266FE9EE000354CD /* CertificateItemDetailRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateItemDetailRouter.swift; sourceTree = "<group>"; };
@@ -1903,6 +1905,7 @@
 		216D2025264EF95400370F16 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				3881BF3B2909819300851D77 /* PDF Export */,
 				09C7FEF728F9ACB7001854B2 /* SelectStateOnboarding */,
 				E73D5C7A28B6A6B200564496 /* Announcement */,
 				E7CB54B127B5324E002FA55E /* App Information */,
@@ -2252,6 +2255,14 @@
 				386FDCF926ED1F8B00AC7639 /* BoosterNotificationViewModelTests.swift */,
 			);
 			path = BoosterNotification;
+			sourceTree = "<group>";
+		};
+		3881BF3B2909819300851D77 /* PDF Export */ = {
+			isa = PBXGroup;
+			children = (
+				3881BF3C290981A400851D77 /* PDFExportViewControllerTests.swift */,
+			);
+			path = "PDF Export";
 			sourceTree = "<group>";
 		};
 		3882AEA9266FD5F9000354CD /* Certificates */ = {
@@ -3809,6 +3820,7 @@
 				E7CDDC93280734F1006B5190 /* RecoveryCertificateItemViewModelTests.swift in Sources */,
 				952B7AFB2729BCA8008F69D6 /* ScanPleaseSnapshotTests.swift in Sources */,
 				E7CDDC912807347B006B5190 /* TestCertificateItemViewModelTests.swift in Sources */,
+				3881BF3F290987B500851D77 /* PDFExportViewControllerTests.swift in Sources */,
 				E7385651286465EA0070C1B0 /* CameraAccessProviderMock.swift in Sources */,
 				E773F5D728B5211D0051AE75 /* Persistence+WhatsNewSettingsTests.swift in Sources */,
 				E7BAB77E2805BB4700C6AA28 /* CertificateCardViewModelTests.swift in Sources */,
