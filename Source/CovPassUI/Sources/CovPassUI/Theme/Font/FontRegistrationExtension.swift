@@ -18,10 +18,14 @@ extension UIFont {
 
     // MARK: - Load and unload fonts
 
-    public static func loadCustomFonts() throws {
-        try UIFont.register(with: sansBold, bundle: .module)
-        try UIFont.register(with: sansSemiBold, bundle: .module)
-        try UIFont.register(with: sansRegular, bundle: .module)
+    public static func loadCustomFonts() {
+        do {
+            try UIFont.register(with: sansBold, bundle: .module)
+            try UIFont.register(with: sansSemiBold, bundle: .module)
+            try UIFont.register(with: sansRegular, bundle: .module)
+        } catch {
+            print("Failed to load custom fonts \(error)")
+        }
     }
 
     // MARK: - Register Font

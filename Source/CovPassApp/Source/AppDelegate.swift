@@ -20,7 +20,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     ) -> Bool {
 
         try? setupKeychain()
-        try? UIFont.loadCustomFonts()
+        UIFont.loadCustomFonts()
 
         guard NSClassFromString("XCTest") == nil else { return true }
 

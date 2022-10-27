@@ -26,11 +26,10 @@ public extension NSAttributedString {
               traitCollection: UITraitCollection? = nil) -> NSAttributedString
     {
         if NSClassFromString("XCTest") != nil {
-            try? UIFont.loadCustomFonts()
+            UIFont.loadCustomFonts()
         }
 
-        guard let font = UIFont(name: fontName, size: size) else { fatalError("Error loading font with name \(fontName)") }
-
+        let font = UIFont(name: fontName, size: size) ?? UIFont.systemFont(ofSize: size)
         let fontMetrics = UIFontMetrics(forTextStyle: textStyle)
         let scaledFont = fontMetrics.scaledFont(for: font, compatibleWith: traitCollection)
 

@@ -20,7 +20,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
         try? clearKeychainOnFreshInstall()
-        try? UIFont.loadCustomFonts()
+        UIFont.loadCustomFonts()
 
         guard NSClassFromString("XCTest") == nil else { return true }
 
