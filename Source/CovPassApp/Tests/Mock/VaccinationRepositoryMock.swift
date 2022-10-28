@@ -129,7 +129,7 @@ public class VaccinationRepositoryMock: VaccinationRepositoryProtocol {
         return .value(try! ExtendedCBORWebToken.mock())
     }
 
-    public func checkCertificate(_: String) -> Promise<CBORWebToken> {
+    public func checkCertificate(_: String, checkSealCertificate _: Bool) -> Promise<CBORWebToken> {
         .init(error: ApplicationError.unknownError)
     }
 

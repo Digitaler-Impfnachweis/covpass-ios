@@ -88,7 +88,7 @@ class VaccinationRepositoryTests: XCTestCase {
     }
 
     func testCheckCertificateValidEC() throws {
-        let res = try sut.checkCertificate(CertificateMock.validCertificate2).wait()
+        let res = try sut.checkCertificate(CertificateMock.validCertificate2, checkSealCertificate: false).wait()
         XCTAssertEqual(res.iss, "IT")
     }
 
@@ -107,7 +107,7 @@ class VaccinationRepositoryTests: XCTestCase {
 //        }
 //    }
 
-    func testValidateEntityValidRecoveryCertificate() {
+    func testValidateEntityValidRecoveryCertificate() throws {
         // Given
         let token = CertificateMock.validRecoveryCertificate
         let expectation = XCTestExpectation()
@@ -405,7 +405,7 @@ class VaccinationRepositoryTests: XCTestCase {
     }
 
     func testCheckCertificate() throws {
-        let token = try sut.checkCertificate(CertificateMock.validCertificate2).wait()
+        let token = try sut.checkCertificate(CertificateMock.validCertificate2, checkSealCertificate: false).wait()
         XCTAssertEqual(token.hcert.dgc.uvci, "URN:UVCI:01DE/84503/1651139518/DXSGWLWL40SU8ZFKIYIBK30A4#S")
     }
 

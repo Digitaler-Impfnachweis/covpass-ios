@@ -254,7 +254,7 @@ public class VaccinationRepository: VaccinationRepositoryProtocol {
             QRCoder.parse(data)
         }
         .map(on: .global()) {
-            try self.parseCertificate($0, expirationRuleIsActive: expirationRuleIsActive)
+            try self.parseCertificate($0, expirationRuleIsActive: expirationRuleIsActive, checkSealCertificate: false)
         }
         .map(on: .global()) { certificate in
             if let t = certificate.hcert.dgc.t?.first, t.isPositive {
@@ -315,12 +315,12 @@ public class VaccinationRepository: VaccinationRepositoryProtocol {
         }
     }
 
-    public func checkCertificate(_ data: String) -> Promise<CBORWebToken> {
+    public func checkCertificate(_ data: String, checkSealCertificate: Bool = false) -> Promise<CBORWebToken> {
         firstly {
             QRCoder.parse(data)
         }
         .map(on: .global()) {
-            try self.parseCertificate($0, expirationRuleIsActive: true)
+            try self.parseCertificate($0, expirationRuleIsActive: true, checkSealCertificate: checkSealCertificate)
         }
     }
 
@@ -406,7 +406,7 @@ public class VaccinationRepository: VaccinationRepositoryProtocol {
     // MARK: - Private Helpers
 
     /// Parse certificate payload, verify signature, check expiration, check extended key usage, and validate blacklisted entities
-    func parseCertificate(_ cosePayload: CoseSign1Message, expirationRuleIsActive: Bool) throws -> CBORWebToken {
+    func parseCertificate(_ cosePayload: CoseSign1Message, expirationRuleIsActive: Bool, checkSealCertificate: Bool) throws -> CBORWebToken {
         guard let trustList = self.trustList else {
             throw ApplicationError.general("Missing TrustList")
         }
@@ -421,6 +421,10 @@ public class VaccinationRepository: VaccinationRepositoryProtocol {
         }
 
         try HCert.checkExtendedKeyUsage(certificate: certificate, trustCertificate: trustCert)
+
+        if checkSealCertificate {
+            try HCert.checkSealCertificate(trustCertificate: trustCert)
+        }
 
         try validateEntity(certificate)
 

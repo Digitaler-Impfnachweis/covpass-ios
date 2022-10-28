@@ -18,6 +18,7 @@ public enum HCertError: Error, ErrorCode {
     case illegalKeyUsage
     case failedSignature
     case privateKeyLoadError
+    case expiredCertificate
 
     public var errorCode: Int {
         switch self {
@@ -31,6 +32,8 @@ public enum HCertError: Error, ErrorCode {
             return 414
         case .privateKeyLoadError:
             return 415
+        case .expiredCertificate:
+            return 416
         }
     }
 }
@@ -90,6 +93,18 @@ enum HCert {
         if typeOids.isEmpty {
             // no match, certificate got signed with key for different purpose
             throw HCertError.illegalKeyUsage
+        }
+    }
+
+    // Check if seal certificate is expired
+    public static func checkSealCertificate(trustCertificate: TrustCertificate) throws {
+        let pemString = "-----BEGIN CERTIFICATE-----\n\(trustCertificate.rawData)\n-----END CERTIFICATE-----"
+        guard let pem = pemString.data(using: .utf8) else {
+            throw HCertError.expiredCertificate
+        }
+        let x509 = try X509Certificate(pem: pem)
+        if !x509.checkValidity(Date()) {
+            throw HCertError.expiredCertificate
         }
     }
 

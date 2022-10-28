@@ -39,7 +39,8 @@ public protocol VaccinationRepositoryProtocol {
     /// checkCertificate validates the given QR code and returns the  certificate when it's valid, otherwise an error
     ///
     /// - USED BY CovPassCheck App
-    func checkCertificate(_ data: String) -> Promise<CBORWebToken>
+    /// TODO added checkSealCertificate temporarliy as long as the ExtendedCBORWebToken mocks do not work properly
+    func checkCertificate(_ data: String, checkSealCertificate: Bool) -> Promise<CBORWebToken>
 
     /// Variant of `checkCertificate` which returns an `ExtendedCBORWebToken`.
     func validCertificate(_ data: String) -> Promise<ExtendedCBORWebToken>
