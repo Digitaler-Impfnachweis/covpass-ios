@@ -100,4 +100,9 @@ public class CertificateItem: XibView {
     @objc func onPressItem() {
         action?()
     }
+    
+    public override func didUpdateFocus(in context: UIFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
+        super.didUpdateFocus(in: context, with: coordinator)
+        updateFocusBorderView()
+    }
 }

@@ -22,7 +22,7 @@ struct MainSceneFactory: SceneFactory {
     }
 
     func make() -> UIViewController {
-        UserDefaults.StartupInfo.bool(.onboarding) ?
+        false ?
             mainViewController() :
             welcomeViewController()
     }

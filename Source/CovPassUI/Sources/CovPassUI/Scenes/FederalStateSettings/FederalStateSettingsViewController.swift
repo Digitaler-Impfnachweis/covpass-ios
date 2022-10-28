@@ -55,5 +55,8 @@ open class FederalStateSettingsViewController: UIViewController {
                 }
                 .cauterize()
         }
+        stateSelection.enableAccessibility(label: viewModel.inputTitle,
+                                           value: viewModel.inputValue,
+                                           traits: .button)
     }
 }

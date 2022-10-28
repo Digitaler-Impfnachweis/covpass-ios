@@ -22,16 +22,19 @@ public class InputView: XibView {
 
     override public func initView() {
         super.initView()
-
         containerView.layer.borderWidth = 1.0
         containerView.layer.borderColor = UIColor.onBackground20.cgColor
         containerView.layer.cornerRadius = 12.0
         containerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClick)))
-
         iconView.tintColor = UIColor.onBackground70
     }
 
     @objc func onClick() {
         onClickAction?()
+    }
+    
+    public override func didUpdateFocus(in context: UIFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
+        super.didUpdateFocus(in: context, with: coordinator)
+        updateFocusBorderView()
     }
 }

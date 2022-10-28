@@ -96,11 +96,12 @@ class ConsentViewController: UIViewController {
     }
 
     private func configureHintView() {
-        usTermsOfUse.iconView.image = .info
-        usTermsOfUse.containerView.backgroundColor = .onBackground50
-        usTermsOfUse.containerView.layer.borderColor = UIColor.onBrandBase.cgColor
+        usTermsOfUse.style = .info
         usTermsOfUse.titleLabel.attributedText = "vaccination_fourth_onboarding_page_message_for_us_citizens_title".localized.styledAs(.header_3)
-        usTermsOfUse.bodyLabel.attributedText = "\("vaccination_fourth_onboarding_page_message_for_us_citizens_copy".localized)\n\n#\("vaccination_fourth_onboarding_page_message_for_us_citizens_title".localized)::link#".styledAs(.body)
+        usTermsOfUse.subTitleLabel.attributedText = "\("vaccination_fourth_onboarding_page_message_for_us_citizens_copy".localized)".styledAs(.body)
+        usTermsOfUse.bodyLabel.attributedText = "#\("vaccination_fourth_onboarding_page_message_for_us_citizens_title".localized)::link#".styledAs(.mainButton)
+        usTermsOfUse.titleToSubTitleConstraint.constant = 4
+        usTermsOfUse.subTitleConstraint.constant = 18
         usTermsOfUse.bodyLabel.linkCallback = { [weak self] _ in
             self?.viewModel.router.showTermsOfUse()
         }

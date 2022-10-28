@@ -61,8 +61,9 @@ class CertificatesOverviewPersonViewController: UIViewController {
     private func setupDotIndicator() {
         dotPageIndicator.delegate = self
         dotPageIndicator.isHidden = viewModel.dotPageIndicatorIsHidden
-        dotPageIndicator.selectedColor = .white
-        dotPageIndicator.unselectedColor = .brandBase80
+        dotPageIndicator.selectedColor = .neutralWhite
+        dotPageIndicator.unselectedColor = .neutralWhite.withAlphaComponent(0.3)
+        dotPageIndicator.borderColor = .backgroundSecondary20
         dotPageIndicator.numberOfDots = viewModel.certificateViewModels.count
     }
 

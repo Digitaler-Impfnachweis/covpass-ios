@@ -42,9 +42,7 @@ class ValidationFailedViewController: UIViewController {
         cancelButton.action = {
             self.viewModel.cancelProcess()
         }
-        hintView.containerView.backgroundColor = .brandAccent10
-        hintView.containerView?.layer.borderColor = UIColor.onBackground50.cgColor
-        hintView.iconView.image = .infoSignal
+        hintView.style = .info
         hintView.titleLabel.attributedText = viewModel.hintTitle.styledAs(.mainButton)
         hintView.bodyLabel.attributedText = viewModel.hintText
         hintView.setConstraintsToEdge()

@@ -66,7 +66,7 @@ class CertificateDetailViewController: UIViewController {
     }
 
     // MARK: - Methods
-
+    
     private func setupView() {
         view.backgroundColor = .backgroundPrimary
         scrollView.contentInset = .init(top: .space_24, left: .zero, bottom: .space_70, right: .zero)
@@ -86,6 +86,7 @@ class CertificateDetailViewController: UIViewController {
         maskStatusView.setup(with: viewModel.maskStatusViewModel)
         maskStatusView.bottomBorderLeftConstraint.constant = -.space_6
         maskStatusView.bottomBorder.backgroundColor = .neutralWhite
+        maskStatusView.footerButton.style = .alternative
         maskStatusView.footerButton.action = { self.viewModel.showStateSelection() }
         immunizationStatusView.setup(with: viewModel.immunizationStatusViewModel)
         immunizationStatusView.bottomBorder.isHidden = true

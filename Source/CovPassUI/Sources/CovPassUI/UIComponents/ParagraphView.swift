@@ -48,19 +48,35 @@ public class ParagraphView: XibView {
     // MARK: - Methods
 
     private func setupAccessibility() {
-        titleLabel.isAccessibilityElement = false
-        bodyLabel.isAccessibilityElement = false
-        subtitleLabel.isAccessibilityElement = false
-        let alternativeAccessibilityLabelText = [
-            titleLabel.attributedText?.string,
-            subtitleLabel.attributedText?.string
-        ].compactMap { $0 }.joined(separator: "\n")
-        accessibilityLabel = accessibilityLabelValue ??
-            (alternativeAccessibilityLabelText.isEmpty ? nil : alternativeAccessibilityLabelText)
-        accessibilityValue = bodyLabel.attributedText?.string ?? ""
-        isAccessibilityElement = true
-        accessibilityTraits = .staticText
-        footerButton.style = .alternative
+        if footerHeadlineLabel.text.isNilOrEmpty {
+            titleLabel.isAccessibilityElement = false
+            subtitleLabel.isAccessibilityElement = false
+            bodyLabel.isAccessibilityElement = false
+            subtitleLabel.isAccessibilityElement = false
+            let alternativeAccessibilityLabelText = [
+                titleLabel.attributedText?.string,
+                subtitleLabel.attributedText?.string
+            ].compactMap { $0 }.joined(separator: "\n")
+            accessibilityLabel = accessibilityLabelValue ??
+                (alternativeAccessibilityLabelText.isEmpty ? nil : alternativeAccessibilityLabelText)
+            accessibilityValue = bodyLabel.attributedText?.string ?? ""
+            isAccessibilityElement = true
+            accessibilityTraits = .staticText
+            footerButton.style = .alternative
+            if #available(iOS 13.0, *) {
+                accessibilityRespondsToUserInteraction = true
+            }
+        } else {
+            if #available(iOS 13.0, *) {
+                titleLabel.accessibilityRespondsToUserInteraction = true
+                subtitleLabel.accessibilityRespondsToUserInteraction = true
+                secondSubtitleLabel.accessibilityRespondsToUserInteraction = true
+                bodyLabel.accessibilityRespondsToUserInteraction = true
+                bodyTextView.accessibilityRespondsToUserInteraction = true
+                footerHeadlineLabel.accessibilityRespondsToUserInteraction = true
+                footerBodyLabel.accessibilityRespondsToUserInteraction = true
+            }
+        }
     }
 
     public func updateView(image: UIImage? = nil,

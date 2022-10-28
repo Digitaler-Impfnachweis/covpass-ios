@@ -21,11 +21,12 @@ public class DotPageIndicator: UIView {
         }
     }
 
-    @IBInspectable public var unselectedColor: UIColor = .brandAccent20
+    @IBInspectable public var unselectedColor: UIColor = .clear
     @IBInspectable public var selectedColor: UIColor = .brandAccent70
+    public var borderColor: UIColor = .brandAccent
 
-    private var dotSize: CGFloat = 8.0
-    private var dotPadding: CGFloat = 10.0
+    private var dotSize: CGFloat = 10
+    private var dotPadding: CGFloat = 8.0
     var dots: [UIButton] = []
     var selectedDotIndex: Int = 0
     private var dotContentView: UIStackView!
@@ -103,6 +104,9 @@ public class DotPageIndicator: UIView {
             } else {
                 dot.backgroundColor = unselectedColor
             }
+            dot.layer.borderColor = borderColor.cgColor
+            dot.layer.borderWidth = 1
+            dot.layer.cornerRadius = dotSize / 2
 
             dot.setConstant(size: CGSize(width: dotSize, height: dotSize))
             dots.append(dot)

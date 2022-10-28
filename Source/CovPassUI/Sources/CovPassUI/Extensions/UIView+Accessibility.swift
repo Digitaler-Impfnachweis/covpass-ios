@@ -9,9 +9,10 @@
 import UIKit
 
 public extension UIView {
-    func enableAccessibility(label: String? = nil, hint: String? = nil, traits: UIAccessibilityTraits? = nil) {
+    func enableAccessibility(label: String? = nil, value: String? = nil, hint: String? = nil, traits: UIAccessibilityTraits? = nil) {
         isAccessibilityElement = true
         label.map { accessibilityLabel = $0 }
+        value.map { accessibilityValue = $0 }
         hint.map { accessibilityHint = $0 }
         traits.map { accessibilityTraits = $0 }
     }

@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OverviewHeaderView" customModule="CovPassUI">
             <connections>
-                <outlet property="actionButton" destination="RSG-an-e0J" id="Q1H-u7-Uqh"/>
-                <outlet property="titleButton" destination="VjN-hP-nf7" id="ZWY-kc-1iR"/>
+                <outlet property="actionButton" destination="PsR-G9-pbl" id="lgr-Yj-nEk"/>
+                <outlet property="titleButton" destination="BTc-Ld-rWa" id="syR-9v-QSg"/>
                 <outlet property="titleIcon" destination="3df-fF-xTG" id="qfd-PR-2wi"/>
             </connections>
         </placeholder>
@@ -19,48 +19,49 @@
         <view contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iN0-l3-epB">
             <rect key="frame" x="0.0" y="0.0" width="419" height="34"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VjN-hP-nf7">
-                    <rect key="frame" x="0.0" y="0.0" width="46" height="34"/>
-                    <state key="normal" title="Button"/>
-                    <connections>
-                        <action selector="titleButtonPressedWithButton:" destination="-1" eventType="touchUpInside" id="V1U-Rf-clt"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RSG-an-e0J">
-                    <rect key="frame" x="395" y="5" width="24" height="24"/>
-                    <constraints>
-                        <constraint firstAttribute="width" secondItem="RSG-an-e0J" secondAttribute="height" multiplier="1:1" id="6Pc-0r-rt4"/>
-                        <constraint firstAttribute="width" constant="24" id="Yzb-CK-xmb"/>
-                    </constraints>
-                    <connections>
-                        <action selector="actionButtonPressedWithButton:" destination="-1" eventType="touchUpInside" id="qlZ-Ts-9i8"/>
-                    </connections>
-                </button>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chevron_right" translatesAutoresizingMaskIntoConstraints="NO" id="3df-fF-xTG">
-                    <rect key="frame" x="46" y="5" width="24" height="24"/>
+                    <rect key="frame" x="36" y="5" width="24" height="24"/>
                     <color key="tintColor" name="BrandBase"/>
                 </imageView>
+                <view contentMode="scaleToFill" placeholderIntrinsicWidth="36" placeholderIntrinsicHeight="34" translatesAutoresizingMaskIntoConstraints="NO" id="BTc-Ld-rWa" customClass="MainButton" customModule="CovPassUI">
+                    <rect key="frame" x="0.0" y="0.0" width="36" height="34"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PsR-G9-pbl" customClass="MainButton" customModule="CovPassUI">
+                    <rect key="frame" x="375" y="-5" width="44" height="44"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="PsR-G9-pbl" secondAttribute="height" multiplier="1:1" id="A66-Fl-jx3"/>
+                        <constraint firstAttribute="width" constant="44" id="NHb-XN-qTO"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="3df-fF-xTG" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="5Ki-aq-eg5"/>
-                <constraint firstAttribute="bottom" secondItem="VjN-hP-nf7" secondAttribute="bottom" id="SGa-Hb-FbV"/>
-                <constraint firstAttribute="trailing" secondItem="RSG-an-e0J" secondAttribute="trailing" id="UfB-ed-NiV"/>
+                <constraint firstItem="PsR-G9-pbl" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="6kd-nE-mYb"/>
+                <constraint firstAttribute="trailing" secondItem="PsR-G9-pbl" secondAttribute="trailing" id="B0E-wU-X8g"/>
+                <constraint firstItem="BTc-Ld-rWa" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Do9-zL-Xin"/>
                 <constraint firstItem="3df-fF-xTG" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="VbI-oz-xPf"/>
-                <constraint firstItem="VjN-hP-nf7" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Yge-IT-4XB"/>
-                <constraint firstItem="3df-fF-xTG" firstAttribute="leading" secondItem="VjN-hP-nf7" secondAttribute="trailing" id="b5T-Cj-2vh"/>
-                <constraint firstItem="RSG-an-e0J" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="ieA-6w-eRx"/>
-                <constraint firstItem="VjN-hP-nf7" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="nxX-WW-O9b"/>
+                <constraint firstItem="PsR-G9-pbl" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="3df-fF-xTG" secondAttribute="trailing" constant="4" id="VlH-yv-bSg"/>
+                <constraint firstItem="3df-fF-xTG" firstAttribute="leading" secondItem="BTc-Ld-rWa" secondAttribute="trailing" id="g4W-3X-0Fh"/>
+                <constraint firstAttribute="bottom" secondItem="BTc-Ld-rWa" secondAttribute="bottom" id="kCY-T2-wpB"/>
+                <constraint firstItem="BTc-Ld-rWa" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="zpY-Si-FWe"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <edgeInsets key="layoutMargins" top="0.0" left="0.0" bottom="0.0" right="0.0"/>
             <point key="canvasLocation" x="-567.20000000000005" y="-125.93703148425789"/>
         </view>
     </objects>
+    <designables>
+        <designable name="BTc-Ld-rWa">
+            <size key="intrinsicContentSize" width="36" height="34"/>
+        </designable>
+    </designables>
     <resources>
         <image name="chevron_right" width="24" height="24"/>
         <namedColor name="BrandBase">
-            <color red="0.024000000208616257" green="0.37299999594688416" blue="0.76899999380111694" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.023529411764705882" green="0.37254901960784315" blue="0.7686274509803922" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

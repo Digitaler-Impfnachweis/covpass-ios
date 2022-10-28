@@ -99,12 +99,23 @@ public class CertificateCollectionViewCell: CardCollectionViewCell {
         titleView.lineBreakMode = .byTruncatingTail
         titleView.backgroundColor = .clear
         titleView.isHidden = true
+        var accessibilityText = "\(vm.name) \n \(vm.title) \n \(vm.subtitle) \n \(vm.headerSubtitle ?? "")"
+        if !vm.isInvalid {
+            accessibilityText.append(" \n \(Constants.qrInfoText)")
+        }
+        contentView.enableAccessibility(label: accessibilityText, traits: .button)
+
     }
 
     override public func viewModelDidUpdate() {
         DispatchQueue.main.async {
             self.updateView()
         }
+    }
+    
+    public override func didUpdateFocus(in context: UIFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
+        super.didUpdateFocus(in: context, with: coordinator)
+        contentView.updateFocusBorderView()
     }
 
     // MARK: - Actions

@@ -76,6 +76,9 @@ class CertificatesOverviewViewController: UIViewController {
     private func setupDotIndicator() {
         dotPageIndicator.delegate = self
         dotPageIndicator.numberOfDots = viewModel.countOfCells()
+        dotPageIndicator.selectedColor = .brandAccent
+        dotPageIndicator.unselectedColor = .brandAccent.withAlphaComponent(0.1)
+        dotPageIndicator.borderColor = .brandAccent.withAlphaComponent(0.6)
         dotPageIndicator.isHidden = !viewModel.showMultipleCertificateHolder
     }
 

@@ -26,6 +26,8 @@ public class HintView: XibView {
     @IBOutlet public var iconStackviewCenterYConstraint: NSLayoutConstraint!
     @IBOutlet public var iconStackViewAlignToTopTile: NSLayoutConstraint!
     @IBOutlet public var titleSuperViewBottomConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var titleToSubTitleConstraint: NSLayoutConstraint!
 
     // MARK: -
     
@@ -53,7 +55,7 @@ public class HintView: XibView {
 
     private lazy var infoStyle = CovPassUI.Style(
         backgroundColor: .brandAccent10,
-        borderColor: .onBackground50,
+        borderColor: .brandAccent20,
         icon: .infoSignal
     )
 

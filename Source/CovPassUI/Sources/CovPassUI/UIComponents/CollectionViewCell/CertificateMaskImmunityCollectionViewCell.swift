@@ -100,7 +100,6 @@ public class CertificateMaskImmunityCollectionViewCell: CardCollectionViewCell {
         if !vm.isInvalid {
             accessibilityText.append(" \n \(Constants.qrInfoText)")
         }
-        shouldGroupAccessibilityChildren = true
         contentView.enableAccessibility(label: accessibilityText, traits: .button)
     }
 
@@ -112,6 +111,11 @@ public class CertificateMaskImmunityCollectionViewCell: CardCollectionViewCell {
 
     @IBAction @objc public func onPressAction() {
         (viewModel as? CertificateCardViewModelProtocol)?.onClickAction()
+    }
+    
+    public override func didUpdateFocus(in context: UIFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
+        super.didUpdateFocus(in: context, with: coordinator)
+        contentView.updateFocusBorderView()
     }
 }
 

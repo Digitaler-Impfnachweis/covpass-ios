@@ -42,9 +42,7 @@ class ReissueStartViewController: UIViewController {
 
     private func configureHintView() {
         hintView.isHidden = false
-        hintView.containerView.backgroundColor = .brandAccent10
-        hintView.containerView.layer.borderColor = UIColor.brandAccent20.cgColor
-        hintView.iconView.image = .infoSignal
+        hintView.style = .info
         hintView.iconLabel.text = ""
         hintView.iconLabel.isHidden = true
         hintView.titleLabel.attributedText = viewModel.hintText.styledAs(.body) .colored(.onBackground70)

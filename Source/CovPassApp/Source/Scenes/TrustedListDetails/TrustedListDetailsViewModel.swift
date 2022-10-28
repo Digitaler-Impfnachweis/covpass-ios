@@ -84,6 +84,8 @@ class TrustedListDetailsViewModel {
         guard let date = userDefaults.lastUpdatedDCCRules else { return "" }
         return DateUtils.displayDateTimeFormatter.string(from: date)
     }
+    var accessibilityAnnounce = Constants.Accessibility.titleUpdate
+    var accessibilityClose = Constants.Accessibility.closeView
     var isLoading = false {
         didSet {
             delegate?.viewModelDidUpdate()

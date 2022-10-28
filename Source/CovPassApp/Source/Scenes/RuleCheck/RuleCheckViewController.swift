@@ -159,8 +159,7 @@ class RuleCheckViewController: UIViewController {
     
     private func setupDomesticRulesHintView() {
         domesticRulesHintView.isHidden = viewModel.domesticRulesHintIshidden
-        domesticRulesHintView.containerView.backgroundColor = .brandAccent10
-        domesticRulesHintView.containerView.layer.borderColor = UIColor.brandAccent20.cgColor
+        domesticRulesHintView.style = .info
         domesticRulesHintView.iconView.image = viewModel.domesticRulesHintIcon
         domesticRulesHintView.iconLabel.text = ""
         domesticRulesHintView.iconLabel.isHidden = true
