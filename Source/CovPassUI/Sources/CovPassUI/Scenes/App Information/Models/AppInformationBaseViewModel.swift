@@ -49,6 +49,7 @@ extension AppInformationBaseViewModel {
         public static let appVersion = String(format: "Version %@", Bundle.main.appVersion())
     }
     public enum AccessiblityAnnouncments {
+        public static let informationAnnounce = "accessibility_app_information_title_informationt_announce".localized(bundle: .main)
         public static let leichteSprache = Texts.leichteSprache
         public static let contactTitle = "accessibility_app_information_title_contact_announce".localized(bundle: .main)
         public static let faqTitle = Texts.faqTitle

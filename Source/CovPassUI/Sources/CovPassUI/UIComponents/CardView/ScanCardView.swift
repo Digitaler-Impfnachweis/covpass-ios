@@ -12,13 +12,18 @@ import UIKit
 public class ScanCardView: XibView {
     // MARK: - Outlets
 
+    @IBOutlet public var topDropDownContainer: UIView!
     @IBOutlet public var stackView: UIStackView!
     @IBOutlet public var textStackView: UIStackView!
     @IBOutlet public var titleLabel: UILabel!
     @IBOutlet public var textLabel: UILabel!
     @IBOutlet public var actionButton: MainButton!
-    @IBOutlet public weak var chooseButton: UIButton!
-    public var chooseAction: (()->Void)?
+    @IBOutlet public weak var chooseButton: MainButton!
+    public var chooseAction: (()->Void)? {
+        didSet {
+            chooseButton.action = chooseAction
+        }
+    }
     
     
     // MARK: - Properties
@@ -39,9 +44,6 @@ public class ScanCardView: XibView {
         contentView?.layer.shadowOffset = shadowOffset
         actionButton.style = .secondary
         actionButton.icon = .scan
-    }
-    
-    @IBAction private func chooseActionTapped(_ sender: Any) {
-        chooseAction?()
+        chooseButton.style = .invisible
     }
 }

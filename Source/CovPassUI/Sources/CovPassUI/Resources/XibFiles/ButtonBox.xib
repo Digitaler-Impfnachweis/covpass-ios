@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -29,11 +28,10 @@
                             <rect key="frame" x="0.0" y="20" width="366" height="95"/>
                             <color key="backgroundColor" systemColor="systemMintColor"/>
                         </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wEy-Qb-T19" customClass="MainButton" customModule="CovPassUI">
+                        <view contentMode="scaleToFill" placeholderIntrinsicWidth="240" placeholderIntrinsicHeight="47" translatesAutoresizingMaskIntoConstraints="NO" id="wEy-Qb-T19" customClass="MainButton" customModule="CovPassUI">
                             <rect key="frame" x="70" y="127" width="240" height="47"/>
                             <color key="backgroundColor" name="BrandBase"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="240" placeholder="YES" id="ksj-LQ-xoL"/>
                                 <constraint firstAttribute="height" constant="47" placeholder="YES" id="xjA-qR-KkT"/>
                             </constraints>
                         </view>
@@ -45,6 +43,7 @@
                         <constraint firstAttribute="bottom" secondItem="wEy-Qb-T19" secondAttribute="bottom" constant="12" id="8mP-KE-ZZm"/>
                         <constraint firstItem="wEy-Qb-T19" firstAttribute="leading" secondItem="7NI-rq-bLv" secondAttribute="leading" constant="70" id="Egn-fr-Q7L"/>
                         <constraint firstItem="HY8-4i-rwy" firstAttribute="leading" secondItem="7NI-rq-bLv" secondAttribute="leading" id="i7h-Pi-iJY"/>
+                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="wEy-Qb-T19" secondAttribute="trailing" constant="4" id="lti-n2-1cd"/>
                         <constraint firstItem="wEy-Qb-T19" firstAttribute="top" secondItem="HY8-4i-rwy" secondAttribute="bottom" constant="12" id="s9z-V4-UlU"/>
                     </constraints>
                     <userDefinedRuntimeAttributes>
@@ -65,6 +64,11 @@
             <point key="canvasLocation" x="127.69230769230769" y="-152.13270142180093"/>
         </view>
     </objects>
+    <designables>
+        <designable name="wEy-Qb-T19">
+            <size key="intrinsicContentSize" width="240" height="47"/>
+        </designable>
+    </designables>
     <resources>
         <namedColor name="BrandBase">
             <color red="0.023529411764705882" green="0.37254901960784315" blue="0.7686274509803922" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

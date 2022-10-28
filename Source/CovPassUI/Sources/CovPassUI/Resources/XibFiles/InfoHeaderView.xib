@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="InfoHeaderView" customModule="CovPassUI">
             <connections>
-                <outlet property="actionButton" destination="RSG-an-e0J" id="Q1H-u7-Uqh"/>
-                <outlet property="actionButtonWidthConstraint" destination="dFn-Cr-Q42" id="1Uo-H7-Dd7"/>
+                <outlet property="actionButton" destination="g08-62-OmJ" id="i3Y-6Z-kle"/>
+                <outlet property="actionButtonWidthConstraint" destination="Ilx-1w-ZUz" id="OmR-bd-okx"/>
                 <outlet property="bottomConstraint" destination="Rt4-Fn-YC4" id="snI-Wh-XOP"/>
                 <outlet property="stackView" destination="wwI-KP-np5" id="10F-5c-IQF"/>
                 <outlet property="textLabel" destination="jYL-ZW-bpk" id="f2g-m7-enc"/>
@@ -25,7 +25,7 @@
                     <rect key="frame" x="20" y="8" width="424" height="45"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jYL-ZW-bpk">
-                            <rect key="frame" x="0.0" y="12.5" width="372" height="20.5"/>
+                            <rect key="frame" x="0.0" y="10.5" width="372" height="24"/>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -33,24 +33,23 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UPt-Eo-qct">
                             <rect key="frame" x="380" y="0.5" width="44" height="44"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RSG-an-e0J">
+                                <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g08-62-OmJ" customClass="MainButton" customModule="CovPassUI">
                                     <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
-                                        <constraint firstAttribute="width" secondItem="RSG-an-e0J" secondAttribute="height" id="4gk-UR-xF5"/>
-                                        <constraint firstAttribute="width" constant="44" id="dFn-Cr-Q42"/>
+                                        <constraint firstAttribute="width" constant="44" id="Ilx-1w-ZUz"/>
+                                        <constraint firstAttribute="width" secondItem="g08-62-OmJ" secondAttribute="height" multiplier="1:1" id="WVh-vT-ZwN"/>
                                     </constraints>
-                                    <connections>
-                                        <action selector="actionButtonPressedWithButton:" destination="-1" eventType="touchUpInside" id="qlZ-Ts-9i8"/>
-                                    </connections>
-                                </button>
+                                </view>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="44" id="7z5-uU-ecV"/>
-                                <constraint firstItem="RSG-an-e0J" firstAttribute="leading" secondItem="UPt-Eo-qct" secondAttribute="leading" id="Tyq-Dh-85h"/>
-                                <constraint firstItem="RSG-an-e0J" firstAttribute="centerY" secondItem="UPt-Eo-qct" secondAttribute="centerY" id="WLU-Fj-Ir4"/>
-                                <constraint firstAttribute="trailing" secondItem="RSG-an-e0J" secondAttribute="trailing" id="jPR-eN-M1l"/>
+                                <constraint firstItem="g08-62-OmJ" firstAttribute="leading" secondItem="UPt-Eo-qct" secondAttribute="leading" id="EzV-5d-h8B"/>
+                                <constraint firstItem="g08-62-OmJ" firstAttribute="centerY" secondItem="UPt-Eo-qct" secondAttribute="centerY" id="Y7X-Ku-y4H"/>
+                                <constraint firstAttribute="trailing" secondItem="g08-62-OmJ" secondAttribute="trailing" id="s8e-lA-BTx"/>
                             </constraints>
                         </view>
                     </subviews>

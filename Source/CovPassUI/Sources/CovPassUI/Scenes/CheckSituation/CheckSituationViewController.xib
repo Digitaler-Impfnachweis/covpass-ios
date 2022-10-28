@@ -14,24 +14,29 @@
             <connections>
                 <outlet property="activityIndicatorWrapper" destination="K6O-Xe-HNu" id="ToB-Oi-EhW"/>
                 <outlet property="authorityListDivider" destination="V0R-5P-cjh" id="Qud-cE-ewK"/>
+                <outlet property="authorityListStackView" destination="DNe-fo-4yF" id="9FI-Ga-WaY"/>
                 <outlet property="authorityListSubtitleLabel" destination="ale-lQ-RcM" id="Um9-15-OYU"/>
                 <outlet property="authorityListTitleLabel" destination="qhF-Pk-3Z9" id="39y-Dd-6i2"/>
                 <outlet property="authorityListView" destination="B7l-HY-19t" id="gDM-x4-GHY"/>
                 <outlet property="bodyTitleLabel" destination="ne7-71-95X" id="0ro-P3-7qK"/>
                 <outlet property="cancelButton" destination="yYe-dl-hMS" id="rbB-ab-ez2"/>
+                <outlet property="certificateProviderStackView" destination="5OC-6B-m0M" id="Ode-a4-WyK"/>
                 <outlet property="certificateProviderSubtitleLabel" destination="7pf-kH-iDz" id="Wmw-TC-KnH"/>
                 <outlet property="certificateProviderTitleLabel" destination="efu-GZ-x0y" id="rBC-as-DF2"/>
+                <outlet property="countryListStackView" destination="yIh-Qr-Ssr" id="zhX-gB-Wof"/>
                 <outlet property="countryListSubtitleLabel" destination="tb6-Wf-0hS" id="4Pk-Np-kAN"/>
                 <outlet property="countryListTitleLabel" destination="9gw-rI-wkA" id="yj5-Qk-5bK"/>
                 <outlet property="descriptionContainerView" destination="ADv-Ie-vgD" id="Bsb-M5-exP"/>
                 <outlet property="descriptionLabel" destination="jkW-LO-gqs" id="kbe-ym-Y4t"/>
                 <outlet property="descriptionTextWrapper" destination="ADv-Ie-vgD" id="3gP-E1-l8y"/>
+                <outlet property="domesticRulesStackView" destination="gJv-OT-wdv" id="ntm-VU-LCS"/>
                 <outlet property="domesticRulesSubtitleLabel" destination="kON-aZ-l9X" id="9I4-MU-e04"/>
                 <outlet property="domesticRulesTitleLabel" destination="Wcx-ds-yWC" id="pKj-e9-giA"/>
                 <outlet property="downloadStateHintLabel" destination="HZM-Wa-tBr" id="pK1-zB-wIF"/>
                 <outlet property="downloadStateIconImageView" destination="Iwj-PS-kZ4" id="w5o-yH-PDf"/>
                 <outlet property="downloadStateWrapper" destination="BYh-5G-y0f" id="d3v-vp-YUw"/>
                 <outlet property="downloadingHintLabel" destination="1Nj-Gq-NfJ" id="Tdu-PL-C1G"/>
+                <outlet property="entryRulesStackView" destination="ljT-jw-rph" id="LeO-tO-9Ud"/>
                 <outlet property="entryRulesSubtitleLabel" destination="fCD-q1-FEL" id="o89-Q3-kpZ"/>
                 <outlet property="entryRulesTitleLabel" destination="aEw-ZH-T4h" id="uRu-zM-RYw"/>
                 <outlet property="hStackView" destination="Giw-oM-J5h" id="g3z-y6-Ha4"/>
@@ -49,6 +54,7 @@
                 <outlet property="subTitleTextWrapper" destination="Spj-B7-Q0A" id="qcl-PP-bt8"/>
                 <outlet property="titleLabel" destination="KI2-Ug-rxI" id="T2e-gl-1V4"/>
                 <outlet property="updateStackview" destination="dja-AL-WwP" id="6Bo-aI-ua0"/>
+                <outlet property="valueSetsStackView" destination="ifH-sS-D3R" id="3s1-8W-xD8"/>
                 <outlet property="valueSetsSubtitleLabel" destination="128-g4-qqF" id="ufo-8E-Dxe"/>
                 <outlet property="valueSetsTitleLabel" destination="FFQ-tF-3bl" id="TtL-lj-yG6"/>
                 <outlet property="view" destination="iN0-l3-epB" id="5bK-nm-zTi"/>

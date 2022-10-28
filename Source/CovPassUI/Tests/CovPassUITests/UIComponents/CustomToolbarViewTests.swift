@@ -180,9 +180,7 @@ class CustomToolbarViewTests: XCTestCase {
         let elements = try XCTUnwrap(sut.accessibilityElements)
 
         // Then
-        XCTAssertEqual(elements.count, 3)
-        XCTAssertTrue(elements.contains(sut.leftButton))
-        XCTAssertTrue(elements.contains(sut.rightButton))
+        XCTAssertEqual(elements.count, 1)
         XCTAssertTrue(elements.contains(sut.primaryButton))
     }
 
@@ -195,7 +193,7 @@ class CustomToolbarViewTests: XCTestCase {
         let elements = try XCTUnwrap(sut.accessibilityElements)
 
         // Then
-        XCTAssertEqual(elements.count, 2)
+        XCTAssertEqual(elements.count, 1)
         XCTAssertFalse(elements.contains(sut.leftButton))
     }
 
@@ -208,7 +206,7 @@ class CustomToolbarViewTests: XCTestCase {
         let elements = try XCTUnwrap(sut.accessibilityElements)
 
         // Then
-        XCTAssertEqual(elements.count, 2)
+        XCTAssertEqual(elements.count, 1)
         XCTAssertFalse(elements.contains(sut.rightButton))
     }
 

@@ -38,6 +38,8 @@ public extension UIColor {
     static let backgroundPrimary = UIColor("BackgroundPrimary")
 
     static let backgroundSecondary = UIColor("BackgroundSecondary")
+    
+    static let greyDark = UIColor("greyDark")
 
     static let backgroundSecondary20 = UIColor("BackgroundSecondary20")
     

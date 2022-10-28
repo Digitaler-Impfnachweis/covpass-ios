@@ -34,6 +34,8 @@ public class MainButton: XibView {
     public var icon: UIImage? {
         didSet {
             innerButton.setImage(icon, for: .normal)
+            enableAccessibility(label: icon?.accessibilityLabel,
+                                traits: icon?.accessibilityTraits)
             updateAppearence()
         }
     }
@@ -69,6 +71,10 @@ public class MainButton: XibView {
         setupConstraints()
         setupObservers()
         updateAppearence()
+        isAccessibilityElement = true
+        if #available(iOS 13.0, *) {
+            accessibilityRespondsToUserInteraction = true
+        }
     }
 
     deinit {
@@ -168,6 +174,8 @@ public class MainButton: XibView {
         innerButton.setAttributedTitle(attributedText?.colored(style.textColor), for: .normal)
         innerButton.setAttributedTitle(attributedText?.colored(style.disabledTextColor), for: .disabled)
         innerButton.setAttributedTitle(attributedText?.colored(style.highlightedTextColor), for: .highlighted)
+        enableAccessibility(label: title, traits: .button)
+        
     }
 
     private func updateAppearence() {
@@ -206,7 +214,7 @@ public class MainButton: XibView {
             break
         }
 
-        layer.cornerRadius = bounds.height / 2
+        layer.cornerRadius = style == .invisible ? 0 : bounds.height / 2
     }
 
     private func updateShadow() {
@@ -241,5 +249,10 @@ public class MainButton: XibView {
         default:
             break
         }
+    }
+    
+    public override func didUpdateFocus(in context: UIFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
+        super.didUpdateFocus(in: context, with: coordinator)
+        updateFocusBorderView()
     }
 }

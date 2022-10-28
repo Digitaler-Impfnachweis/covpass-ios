@@ -16,7 +16,7 @@ public class ListItemView: XibView {
     @IBOutlet public var textLabel: UILabel!
     @IBOutlet public var rightTextLabel: UILabel!
     @IBOutlet var seperatorView: UIView!
-    @IBOutlet var internalButton: UIButton!
+    @IBOutlet var internalButton: MainButton!
 
     public var showSeperator: Bool = false {
         didSet {
@@ -24,7 +24,11 @@ public class ListItemView: XibView {
         }
     }
 
-    public var action: (() -> Void)?
+    public var action: (() -> Void)? {
+        didSet {
+            internalButton.action = action
+        }
+    }
 
     private var observation: [NSKeyValueObservation]?
 
@@ -38,13 +42,8 @@ public class ListItemView: XibView {
         rightTextLabel.text = nil
         imageView.image = .chevronRight
         seperatorView.backgroundColor = .onBackground20
+        internalButton.style = .invisible
         setupAccessibility()
-    }
-
-    // MARK: - Methods
-
-    @IBAction func didTapButton() {
-        action?()
     }
 }
 
@@ -57,6 +56,7 @@ extension ListItemView {
 
     private func setupAccessibility() {
         // don't read out the icon
+        contentView?.isAccessibilityElement = false
         accessibilityElements = [internalButton!]
 
         // `textLabel` defines `accessibilityLabel`

@@ -169,6 +169,9 @@ class CertificateItemDetailViewController: UIViewController {
         viewModel.items.forEach { item in
             if !item.value.isEmpty {
                 let view = ParagraphView()
+                if #available(iOS 13.0, *) {
+                    view.accessibilityRespondsToUserInteraction = true
+                }
                 view.updateView(title: item.label.styledAs(.header_3),
                                 body: item.value.styledAs(.body))
                 view.accessibilityLabel = item.accessibilityLabel
@@ -184,8 +187,11 @@ class CertificateItemDetailViewController: UIViewController {
 
         qrCodeButton.title = "vaccination_certificate_detail_view_qrcode_action_button_title".localized
         qrCodeButton.style = .primary
-        qrCodeButton.icon = .scan
-        qrCodeButton.tintColor = .white
+        if #available(iOS 13.0, *) {
+            qrCodeButton.icon = .scan.withTintColor(.white)
+        } else {
+            qrCodeButton.icon = .scan
+        }
         qrCodeButton.action = viewModel.showQRCode
         qrCodeButton.isHidden = viewModel.hideQRCodeButtons
         

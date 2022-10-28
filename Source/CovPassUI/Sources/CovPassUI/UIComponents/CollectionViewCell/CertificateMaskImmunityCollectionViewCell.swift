@@ -95,8 +95,13 @@ public class CertificateMaskImmunityCollectionViewCell: CardCollectionViewCell {
         statusLabel.attributedText = vm.headerSubtitle?.styledAs(.label).colored(.neutralWhite)
         gotoDetailButton.tintColor = vm.tintColor
         gotoDetailButton.setImage(.chevronRight.withRenderingMode(.alwaysTemplate), for: .normal)
-        let accessibilityText = "\(vm.name) \n \(vm.title) \n \(vm.subtitle) \n \(vm.headerSubtitle ?? "") \n \(Constants.qrInfoText)"
-        enableAccessibility(label: accessibilityText, traits: .button)
+        gotoDetailButton.isAccessibilityElement = false
+        var accessibilityText = "\(vm.name) \n \(vm.title) \n \(vm.subtitle) \(vm.regionText ?? "") \n \(vm.headerSubtitle ?? "")"
+        if !vm.isInvalid {
+            accessibilityText.append(" \n \(Constants.qrInfoText)")
+        }
+        shouldGroupAccessibilityChildren = true
+        contentView.enableAccessibility(label: accessibilityText, traits: .button)
     }
 
     override public func viewModelDidUpdate() {

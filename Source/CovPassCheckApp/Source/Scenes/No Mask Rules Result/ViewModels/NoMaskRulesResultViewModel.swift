@@ -19,6 +19,9 @@ private enum Constants {
     static let revocationInfoText = "infschg_result_mask_optional_infobox_copy".localized
     static let revocationLinkTitle = "infschg_result_mask_optional_infobox_link".localized
     static let buttonTitle = "result_2G_button_startover".localized
+    enum Accessibility {
+        static let closeButtonText = "close".localized
+    }
 }
 
 final class NoMaskRulesResultViewModel: NoMaskRulesResultViewModelProtocol {
@@ -34,6 +37,7 @@ final class NoMaskRulesResultViewModel: NoMaskRulesResultViewModelProtocol {
     let revocationLinkTitle = Constants.revocationLinkTitle
     let buttonTitle = Constants.buttonTitle
     let countdownTimerModel: CountdownTimerModel
+    var closeButtonAccessibilityText = Constants.Accessibility.closeButtonText
 
     private let token: ExtendedCBORWebToken
     private let resolver: Resolver<ValidatorDetailSceneResult>

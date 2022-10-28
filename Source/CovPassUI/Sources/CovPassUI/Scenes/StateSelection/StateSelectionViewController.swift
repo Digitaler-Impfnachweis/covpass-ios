@@ -38,7 +38,9 @@ public class StateSelectionViewController: UIViewController {
     
     private func setupViews() {
         headerView.attributedTitleText = viewModel.pageTitle.styledAs(.header_2)
-        headerView.actionButton.setImage(.close, for: .normal)
+        headerView.image =  .close
+        headerView.layoutMargins = .init(top: .zero, left: .space_24, bottom: .zero, right: .space_14)
+
         headerView.action = { [weak self] in
             self?.viewModel.close()
         }
@@ -60,6 +62,7 @@ public class StateSelectionViewController: UIViewController {
             view.action = {
                 self.viewModel.choose(state: state.code)
             }
+            view.enableAccessibility(label: stateCodeWithPrefix.localized(bundle: .main), traits: .button)
             contentStackView.addArrangedSubview(view)
             
             let seperatorView: UIView = {

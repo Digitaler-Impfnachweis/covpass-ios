@@ -39,6 +39,8 @@ open class AppInformationViewController: UIViewController {
     
     open override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        UIAccessibility.post(notification: .layoutChanged,
+                             argument: AppInformationBaseViewModel.AccessiblityAnnouncments.informationAnnounce)
         configureEntries()
     }
 

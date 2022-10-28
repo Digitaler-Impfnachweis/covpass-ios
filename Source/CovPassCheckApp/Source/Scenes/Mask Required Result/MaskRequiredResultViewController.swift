@@ -11,6 +11,7 @@ import UIKit
 final class MaskRequiredResultViewController: UIViewController {
     @IBOutlet var infoHeaderView: InfoHeaderView!
     @IBOutlet var imageView: UIImageView!
+    @IBOutlet var headerStackView: UIStackView!
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var subtitleLabel: UILabel!
     @IBOutlet var descriptionLabel: UILabel!
@@ -53,19 +54,20 @@ final class MaskRequiredResultViewController: UIViewController {
         configureRevocationInfoView()
         configureButton()
         configureCounter()
+        configureAccessibility()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        UIAccessibility.post(notification: .layoutChanged, argument: headerStackView)
+    }
+
     private func configureRevocationInfoView() {
          revocationInfoView.style = .info
          revocationInfoContainerView.isHidden = viewModel.revocationInfoHidden
-         let bodyLabel = NSMutableAttributedString(
-             attributedString: viewModel.revocationInfoText
-                 .appending("\n\n")
-                 .styledAs(.body)
-                 .colored(.onBackground70)
-         )
-         bodyLabel.append(revocationLink)
+         let bodyLabel = viewModel.revocationInfoText.styledAs(.body).colored(.onBackground70)
          revocationInfoView.bodyLabel.attributedText = bodyLabel
+         revocationInfoView.bodyLabel.additionalAttributedText = revocationLink
          revocationInfoView.bodyLabel.linkCallback = viewModel.revoke
          revocationInfoView.titleLabel.attributedText = viewModel.revocationHeadline
              .styledAs(.mainButton)
@@ -75,6 +77,8 @@ final class MaskRequiredResultViewController: UIViewController {
         infoHeaderView.attributedTitleText = nil
         infoHeaderView.action = viewModel.cancel
         infoHeaderView.image = .close
+        infoHeaderView.actionButton.enableAccessibility(label: viewModel.closeButtonAccessibilityText,
+                                                        traits: .button)
     }
 
     private func configureImageView() {
@@ -90,6 +94,8 @@ final class MaskRequiredResultViewController: UIViewController {
         descriptionLabel.attributedText = viewModel.description
             .styledAs(.body)
             .colored(.onBackground110)
+        let titleSubTitleA11lText = viewModel.title + viewModel.subtitle
+        headerStackView.enableAccessibility(label: titleSubTitleA11lText, traits: .header)
     }
 
     private func configureReasonStackView() {
@@ -98,6 +104,9 @@ final class MaskRequiredResultViewController: UIViewController {
         for viewModel in viewModel.reasonViewModels {
             let paragraphView = ParagraphView()
             paragraphView.setup(with: viewModel)
+            if #available(iOS 13.0, *) {
+                paragraphView.accessibilityRespondsToUserInteraction = true
+            }
             reasonStackView.addArrangedSubview(paragraphView)
         }
     }
@@ -106,7 +115,7 @@ final class MaskRequiredResultViewController: UIViewController {
         if !viewModel.secondCertificateHintHidden {
             let viewModel = viewModel.secondCertificateReasonViewModel
             let view = ButtonBox()
-
+            
             view.paragraphView.setup(with: viewModel)
             view.button.title = viewModel.buttonText
             view.button.action = self.viewModel.scanSecondCertificate
@@ -129,6 +138,15 @@ final class MaskRequiredResultViewController: UIViewController {
         counterLabel.isHidden = countdownTimerModel.hideCountdown
         counterLabel.attributedText = counterInfo
         counterLabel.textAlignment = .center
+    }
+    
+    private func configureAccessibility() {
+        if #available(iOS 13.0, *) {
+            headerStackView.accessibilityRespondsToUserInteraction = true
+            descriptionLabel.accessibilityRespondsToUserInteraction = true
+            revocationInfoContainerView.accessibilityRespondsToUserInteraction = true
+            counterLabel.accessibilityRespondsToUserInteraction = true
+        }
     }
 }
 

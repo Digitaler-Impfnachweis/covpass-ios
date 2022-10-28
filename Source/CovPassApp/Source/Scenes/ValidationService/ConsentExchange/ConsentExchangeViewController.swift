@@ -69,10 +69,7 @@ class ConsentExchangeViewController: UIViewController {
             self?.cancel()
         }
         view.actionButton.enableAccessibility(label: ValidationServiceViewModel.Accessibility.close.label)
-        view.actionButton.contentVerticalAlignment = .top
-        view.actionButton.contentHorizontalAlignment = .right
-
-
+        
         var vm: CertificateItemViewModel?
         if viewModel.certificate.vaccinationCertificate.hcert.dgc.r != nil {
             vm = RecoveryCertificateItemViewModel(viewModel.certificate, active: true, neutral: true)

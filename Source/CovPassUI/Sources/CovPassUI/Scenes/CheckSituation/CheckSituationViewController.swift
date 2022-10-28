@@ -32,16 +32,22 @@ public class CheckSituationViewController: UIViewController {
     @IBOutlet var downloadStateHintLabel: PlainLabel!
     @IBOutlet var downloadStateIconImageView: UIImageView!
     @IBOutlet var downloadStateWrapper: UIView!
+    @IBOutlet var entryRulesStackView: UIStackView!
     @IBOutlet var entryRulesTitleLabel: PlainLabel!
     @IBOutlet var entryRulesSubtitleLabel: PlainLabel!
+    @IBOutlet var domesticRulesStackView: UIStackView!
     @IBOutlet var domesticRulesTitleLabel: PlainLabel!
     @IBOutlet var domesticRulesSubtitleLabel: PlainLabel!
+    @IBOutlet var valueSetsStackView: UIStackView!
     @IBOutlet var valueSetsTitleLabel: PlainLabel!
     @IBOutlet var valueSetsSubtitleLabel: PlainLabel!
+    @IBOutlet var certificateProviderStackView: UIStackView!
     @IBOutlet var certificateProviderTitleLabel: PlainLabel!
     @IBOutlet var certificateProviderSubtitleLabel: PlainLabel!
+    @IBOutlet var countryListStackView: UIView!
     @IBOutlet var countryListTitleLabel: PlainLabel!
     @IBOutlet var countryListSubtitleLabel: PlainLabel!
+    @IBOutlet var authorityListStackView: UIStackView!
     @IBOutlet var authorityListView: UIView!
     @IBOutlet var authorityListDivider: UIView!
     @IBOutlet var authorityListTitleLabel: PlainLabel!
@@ -112,6 +118,15 @@ public class CheckSituationViewController: UIViewController {
         stackview.setCustomSpacing(44, after: pageImageView)
     }
     
+    private func configureUpdateEntriesStackViews() {
+        entryRulesStackView.isAccessibilityElement = true
+        domesticRulesStackView.isAccessibilityElement = true
+        valueSetsStackView.isAccessibilityElement = true
+        certificateProviderStackView.isAccessibilityElement = true
+        countryListStackView.isAccessibilityElement = true
+        authorityListStackView.isAccessibilityElement = true
+    }
+    
     func configureView() {
         title = viewModel.navBarTitle
         view.backgroundColor = .backgroundPrimary
@@ -119,6 +134,7 @@ public class CheckSituationViewController: UIViewController {
         newBadgeView.attributedText = viewModel.newBadgeText.styledAs(.label).colored(.white)
         descriptionLabel.attributedText = viewModel.footerText.styledAs(.body)
         subTitleLabel.attributedText = viewModel.subTitleText.styledAs(.header_3)
+        configureUpdateEntriesStackViews()
         configureImageView()
         configureHidden()
         configureSaveButton()
@@ -130,6 +146,7 @@ public class CheckSituationViewController: UIViewController {
     private func configureOfflineRevocationView() {
         offlineRevocationView.isHidden = viewModel.offlineRevocationIsHidden
         offlineRevocationTitleLabel.attributedText = viewModel.offlineRevocationTitle.styledAs(.header_2)
+        offlineRevocationTitleLabel.accessibilityTraits = .header
         offlineRevocationDescriptionLabel.attributedText = viewModel.offlineRevocationDescription2
             .styledAs(.body)
             .colored(.onBackground110)
@@ -159,13 +176,20 @@ extension CheckSituationViewController {
         cancelButton.title = viewModel.cancelButtonTitle
         cancelButton.style = .plain
         entryRulesTitleLabel.attributedText = viewModel.entryRulesTitle.styledAs(.header_3)
+        entryRulesStackView.accessibilityLabel = viewModel.entryRulesTitle
         domesticRulesTitleLabel.attributedText = viewModel.domesticRulesUpdateTitle.styledAs(.header_3)
+        domesticRulesStackView.accessibilityLabel = viewModel.domesticRulesUpdateTitle
         valueSetsTitleLabel.attributedText = viewModel.valueSetsTitle.styledAs(.header_3)
+        valueSetsStackView.accessibilityLabel = viewModel.valueSetsTitle
         certificateProviderTitleLabel.attributedText = viewModel.certificateProviderTitle.styledAs(.header_3)
+        certificateProviderStackView.accessibilityLabel = viewModel.certificateProviderTitle
         countryListTitleLabel.attributedText = viewModel.countryListTitle.styledAs(.header_3)
+        countryListStackView.accessibilityLabel = viewModel.countryListTitle
         authorityListTitleLabel.attributedText = viewModel.authorityListTitle.styledAs(.header_3)
+        authorityListStackView.accessibilityLabel = viewModel.authorityListTitle
         downloadingHintLabel.attributedText = viewModel.loadingHintTitle.styledAs(.header_3).colored(.gray)
         bodyTitleLabel.attributedText = viewModel.listTitle.styledAs(.header_2)
+        bodyTitleLabel.enableAccessibility(label: viewModel.listTitle, traits: .header)
     }
     
     private func configureUpdateView() {
@@ -200,12 +224,18 @@ extension CheckSituationViewController {
         downloadStateIconImageView.image = viewModel.downloadStateHintIcon
         downloadStateWrapper.backgroundColor = viewModel.downloadStateHintColor
         entryRulesSubtitleLabel.attributedText = viewModel.entryRulesSubtitle.styledAs(.body)
+        entryRulesStackView.accessibilityValue = viewModel.entryRulesSubtitle
         domesticRulesSubtitleLabel.attributedText = viewModel.domesticRulesUpdateSubtitle.styledAs(.body)
+        domesticRulesStackView.accessibilityValue = viewModel.domesticRulesUpdateSubtitle
         valueSetsSubtitleLabel.attributedText = viewModel.valueSetsSubtitle.styledAs(.body)
+        valueSetsStackView.accessibilityValue = viewModel.valueSetsSubtitle
         certificateProviderSubtitleLabel.attributedText = viewModel.certificateProviderSubtitle.styledAs(.body)
+        certificateProviderStackView.accessibilityValue = viewModel.certificateProviderSubtitle
         countryListSubtitleLabel.attributedText = viewModel.countryListSubtitle.styledAs(.body)
+        countryListStackView.accessibilityValue = viewModel.countryListSubtitle
         authorityListSubtitleLabel.attributedText =
         viewModel.authorityListSubtitle.styledAs(.body)
+        authorityListStackView.accessibilityValue = viewModel.authorityListSubtitle
         authorityListView.isHidden = !offlineRevocationSwitch.uiSwitch.isOn
         authorityListDivider.isHidden = !offlineRevocationSwitch.uiSwitch.isOn
     }

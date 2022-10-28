@@ -19,6 +19,9 @@ private enum Constants {
     static let revocationInfoText = "infschg_result_mask_optional_infobox_copy".localized
     static let revocationLinkTitle = "infschg_result_mask_optional_infobox_link".localized
     static let birthday = "validation_check_popup_valid_vaccination_date_of_birth".localized
+    enum Accessibility {
+        static let closeButtonText = "close".localized
+    }
 }
 
 final class MaskOptionalResultViewModel: MaskOptionalResultViewModelProtocol {
@@ -36,6 +39,7 @@ final class MaskOptionalResultViewModel: MaskOptionalResultViewModelProtocol {
     let revocationLinkTitle = Constants.revocationLinkTitle
     let buttonTitle = Constants.buttonTitle
     let countdownTimerModel: CountdownTimerModel
+    var closeButtonAccessibilityText = Constants.Accessibility.closeButtonText
 
     private let token: ExtendedCBORWebToken
     private let resolver: Resolver<ValidatorDetailSceneResult>

@@ -177,4 +177,11 @@ final class MaskRequiredResultViewModelTests: XCTestCase {
         // Then
         wait(for: [expectation], timeout: 1)
     }
+    
+    func testAccessibilityCloseButton() {
+        // WHEN
+        let closeButtonAccessibilityText = sut.closeButtonAccessibilityText
+        // THEN
+        XCTAssertEqual(closeButtonAccessibilityText, "Close")
+    }
 }

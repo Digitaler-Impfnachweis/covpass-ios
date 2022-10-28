@@ -27,6 +27,8 @@ class ValidatorOverviewViewController: UIViewController {
     @IBOutlet var offlineInformationUpdateCellTitleLabel: PlainLabel!
     @IBOutlet var offlineInformationUpdateCellSubtitleLabel: PlainLabel!
     @IBOutlet var offlineInformationCellAccesoryImageView: UIImageView!
+    @IBOutlet var offlineInformationUpdateContainer: UIView!
+    @IBOutlet var offlineModusTopContainer: UIView!
     
     // MARK: - Properties
 
@@ -69,12 +71,11 @@ class ValidatorOverviewViewController: UIViewController {
 
     private func setupHeaderView() {
         headerView.attributedTitleText = viewModel.title.styledAs(.header_2)
-        headerView.textLabel.accessibilityTraits = .header
-        headerView.image = .settings
-        headerView.actionButtonWidth = 22.0
-        headerView.action = { [weak self] in
-            self?.viewModel.showAppInformation()
-        }
+        let settingsImage: UIImage = .settings
+        settingsImage.accessibilityLabel = "app_information_title".localized
+        settingsImage.accessibilityTraits = .button
+        headerView.image = settingsImage
+        headerView.action = viewModel.showAppInformation
     }
 
     private func setScanButtonLoadingState() {
@@ -100,7 +101,10 @@ class ValidatorOverviewViewController: UIViewController {
             .styledAs(.body)
             .colored(.neutralWhite)
         scanCard.chooseAction = viewModel.chooseAction
-        scanCard.chooseButton.titleLabel?.text = ""
+        scanCard.chooseButton.innerButton.titleLabel?.text = nil
+        scanCard.chooseButton.enableAccessibility(label: viewModel.scanDropDownTitle,
+                                                          hint: viewModel.scanDropDownValue,
+                                                          traits: .selected)
 
     }
     
@@ -126,6 +130,13 @@ class ValidatorOverviewViewController: UIViewController {
         offlineInformationUpdateCellTitleLabel.attributedText = viewModel.offlineInformationUpdateCellTitle.styledAs(.header_3)
         offlineInformationUpdateCellSubtitleLabel.attributedText = viewModel.offlineInformationUpdateCellSubtitle.styledAs(.body)
         offlineInformationCellAccesoryImageView.image = viewModel.offlineInformationCellIcon
+        offlineInformationUpdateContainer.enableAccessibility(label: viewModel.offlineInformationUpdateCellTitle,
+                                                              hint: viewModel.offlineInformationUpdateCellSubtitle,
+                                                              traits: .button)
+        let offlineInformationAccessibilityText = viewModel.offlineInformationTitle + " " + viewModel.offlineInformationStateText
+        offlineModusTopContainer.enableAccessibility(label: offlineInformationAccessibilityText,
+                                                     hint: viewModel.offlineInformationDescription,
+                                                     traits: .staticText)
     }
 
     // MARK: - Actions

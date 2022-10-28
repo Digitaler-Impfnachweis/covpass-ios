@@ -13,7 +13,7 @@ import UIKit
 public class InfoHeaderView: XibView {
     // MARK: - Outlets
 
-    @IBOutlet public var actionButton: UIButton!
+    @IBOutlet public var actionButton: MainButton!
     @IBOutlet public var textLabel: UILabel!
     @IBOutlet public var topConstraint: NSLayoutConstraint!
     @IBOutlet public var bottomConstraint: NSLayoutConstraint!
@@ -30,7 +30,7 @@ public class InfoHeaderView: XibView {
 
     public var image: UIImage? {
         didSet {
-            actionButton.setImage(image, for: .normal)
+            actionButton.icon = image
         }
     }
     
@@ -40,18 +40,19 @@ public class InfoHeaderView: XibView {
         }
     }
 
-    public var action: (() -> Void)?
+    public var action: (() -> Void)? {
+        didSet {
+            actionButton.action = action
+        }
+    }
 
     // MARK: - Lifecycle
 
     override public func initView() {
         super.initView()
-        layoutMargins = .init(top: .zero, left: .space_24, bottom: .zero, right: .space_24)
+        layoutMargins = .init(top: .zero, left: .space_24, bottom: .zero, right: .space_14)
         textLabel.accessibilityTraits = .header
         accessibilityElements = [textLabel!, actionButton!]
+        actionButton.style = .plain
     }
-
-    // MARK: - IBAction
-
-    @IBAction public func actionButtonPressed(button _: UIButton) { action?() }
 }

@@ -30,11 +30,17 @@ public class CountryItemView: XibView {
         textLabel.text = ""
         rightIcon.image = .checkboxUnchecked
         seperatorView.backgroundColor = .onBackground20
+        accessibilityTraits = .button
     }
 
     // MARK: - Methods
 
     @objc func onClick() {
         action?()
+    }
+    
+    public override func didUpdateFocus(in context: UIFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
+        super.didUpdateFocus(in: context, with: coordinator)
+        updateFocusBorderView()
     }
 }

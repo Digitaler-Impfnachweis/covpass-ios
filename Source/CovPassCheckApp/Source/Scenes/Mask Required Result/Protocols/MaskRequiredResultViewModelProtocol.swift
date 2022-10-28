@@ -24,7 +24,8 @@ protocol MaskRequiredResultViewModelProtocol: CancellableViewModelProtocol {
     var revocationHeadline: String { get }
     var revocationInfoText: String { get }
     var revocationLinkTitle: String { get }
-    
+    var closeButtonAccessibilityText: String { get }
+
     func rescan()
     func revoke(_: Any)
     func scanSecondCertificate()

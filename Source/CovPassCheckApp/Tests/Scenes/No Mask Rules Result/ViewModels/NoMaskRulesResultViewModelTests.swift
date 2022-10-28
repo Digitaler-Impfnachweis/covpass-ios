@@ -145,4 +145,11 @@ final class NoMaskRulesResultViewModelTests: XCTestCase {
         // Then
         XCTAssertTrue(isHidden)
     }
+    
+    func testAccessibilityCloseButton() {
+        // WHEN
+        let closeButtonAccessibilityText = sut.closeButtonAccessibilityText
+        // THEN
+        XCTAssertEqual(closeButtonAccessibilityText, "Close")
+    }
 }

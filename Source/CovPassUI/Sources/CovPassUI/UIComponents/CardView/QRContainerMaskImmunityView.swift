@@ -63,7 +63,7 @@ public class QRContainerMaskImmunityView: XibView {
 
     override public func initView() {
         super.initView()
-        imageView.enableAccessibility(label: Constants.Accessibility.qrCode.label, hint: Constants.Accessibility.qrCode.hint)
+        image?.isAccessibilityElement = false
     }
 
     public func updateViews() {

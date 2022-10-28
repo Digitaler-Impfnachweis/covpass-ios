@@ -19,6 +19,9 @@ private enum Constants {
     static let revocationHeadline = "infschg_result_mask_optional_infobox_title".localized
     static let revocationInfoText = "infschg_result_mask_optional_infobox_copy".localized
     static let revocationLinkTitle = "infschg_result_mask_optional_infobox_link".localized
+    enum Accessibility {
+        static let closeButtonText = "close".localized
+    }
 }
 
 final class MaskRequiredResultViewModel: MaskRequiredResultViewModelProtocol {
@@ -38,6 +41,7 @@ final class MaskRequiredResultViewModel: MaskRequiredResultViewModelProtocol {
     lazy var secondCertificateReasonViewModel: MaskRequiredSecondCertificateReasonViewModelProtocol = {
         MaskRequiredSecondCertificateReasonViewModel()
     }()
+    var closeButtonAccessibilityText = Constants.Accessibility.closeButtonText
 
     private let resolver: Resolver<ValidatorDetailSceneResult>
     private let router: MaskRequiredResultRouterProtocol

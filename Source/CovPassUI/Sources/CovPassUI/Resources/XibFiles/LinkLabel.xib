@@ -10,33 +10,53 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LinkLabel" customModule="CovPassUI">
             <connections>
+                <outlet property="additionalTextableView" destination="esm-gP-8RX" id="ctD-pq-FC4"/>
                 <outlet property="textableView" destination="uzB-59-5vB" id="b24-1E-f6f"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="281" height="91"/>
+            <rect key="frame" x="0.0" y="0.0" width="281" height="500"/>
             <subviews>
-                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uzB-59-5vB">
-                    <rect key="frame" x="0.0" y="0.0" width="281" height="91"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <attributedString key="attributedText">
-                        <fragment>
-                            <string key="content">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                            <attributes>
-                                <color key="NSColor" systemColor="labelColor"/>
-                                <font key="NSFont" metaFont="system" size="14"/>
-                            </attributes>
-                        </fragment>
-                    </attributedString>
-                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                </textView>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="qvW-Rj-bWh">
+                    <rect key="frame" x="0.0" y="0.0" width="281" height="500"/>
+                    <subviews>
+                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" scrollEnabled="NO" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uzB-59-5vB" customClass="LinkTextView" customModule="CovPassUI">
+                            <rect key="frame" x="0.0" y="0.0" width="281" height="250"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <attributedString key="attributedText">
+                                <fragment>
+                                    <string key="content">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                    <attributes>
+                                        <color key="NSColor" systemColor="labelColor"/>
+                                        <font key="NSFont" metaFont="system" size="14"/>
+                                    </attributes>
+                                </fragment>
+                            </attributedString>
+                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                        </textView>
+                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" scrollEnabled="NO" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="esm-gP-8RX" customClass="LinkTextView" customModule="CovPassUI">
+                            <rect key="frame" x="0.0" y="250" width="281" height="250"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <attributedString key="attributedText">
+                                <fragment>
+                                    <string key="content">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                    <attributes>
+                                        <color key="NSColor" systemColor="labelColor"/>
+                                        <font key="NSFont" metaFont="system" size="14"/>
+                                    </attributes>
+                                </fragment>
+                            </attributedString>
+                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                        </textView>
+                    </subviews>
+                </stackView>
             </subviews>
             <constraints>
-                <constraint firstItem="uzB-59-5vB" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="064-ix-QNH"/>
-                <constraint firstItem="uzB-59-5vB" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="BU7-nl-zVV"/>
-                <constraint firstAttribute="bottom" secondItem="uzB-59-5vB" secondAttribute="bottom" id="J95-uP-x4I"/>
-                <constraint firstAttribute="trailing" secondItem="uzB-59-5vB" secondAttribute="trailing" id="KDk-Ar-oKS"/>
+                <constraint firstItem="qvW-Rj-bWh" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="34o-Lq-b0z"/>
+                <constraint firstItem="qvW-Rj-bWh" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="NrW-Ww-6KI"/>
+                <constraint firstAttribute="trailing" secondItem="qvW-Rj-bWh" secondAttribute="trailing" id="RlU-Ns-oj3"/>
+                <constraint firstAttribute="bottom" secondItem="qvW-Rj-bWh" secondAttribute="bottom" id="YMP-JZ-WOF"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <edgeInsets key="layoutMargins" top="0.0" left="0.0" bottom="0.0" right="0.0"/>

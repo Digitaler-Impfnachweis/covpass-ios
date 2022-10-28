@@ -14,6 +14,7 @@
             <connections>
                 <outlet property="counterLabel" destination="Ki2-e0-9DS" id="sKI-w1-mnv"/>
                 <outlet property="descriptionLabel" destination="DoA-3w-hHw" id="KfJ-tq-eYP"/>
+                <outlet property="headerStackView" destination="5Hf-04-V1m" id="7Qd-hQ-mzK"/>
                 <outlet property="imageView" destination="KNC-XD-YtE" id="voX-Ru-XHY"/>
                 <outlet property="infoHeaderView" destination="asq-Je-taX" id="yrT-CU-N8Z"/>
                 <outlet property="rescanButton" destination="Zw9-2k-H61" id="97D-AD-0hW"/>
@@ -50,18 +51,23 @@
                                         <constraint firstAttribute="height" constant="140" id="OLG-z5-B0R"/>
                                     </constraints>
                                 </imageView>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NO PRESENT RULES" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ke7-Eq-NYy">
-                                    <rect key="frame" x="24" y="177" width="225.5" height="29"/>
-                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="24"/>
-                                    <nil key="textColor"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="IN NORTHRHINE-WESTPHALIA" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HSg-Kh-hx8">
-                                    <rect key="frame" x="24" y="214" width="209" height="17"/>
-                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
-                                    <nil key="textColor"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
+                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="5Hf-04-V1m">
+                                    <rect key="frame" x="24" y="177" width="366" height="54"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NO PRESENT RULES" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ke7-Eq-NYy">
+                                            <rect key="frame" x="0.0" y="0.0" width="225.5" height="29"/>
+                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="24"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="IN NORTHRHINE-WESTPHALIA" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HSg-Kh-hx8">
+                                            <rect key="frame" x="0.0" y="37" width="209" height="17"/>
+                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </stackView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cTK-Ng-3hI">
                                     <rect key="frame" x="24" y="243" width="366" height="67"/>
                                     <string key="text">THERE ARE NO FEDERAL STATE-SPECIFIC RULES FOR THIS FEDERAL STATE. THEREFORE, ONLY THE UNIFORM FEDERAL RULES ON MANDATORY MASKS APPLY.</string>
@@ -102,22 +108,19 @@
                             </subviews>
                             <constraints>
                                 <constraint firstItem="KNC-XD-YtE" firstAttribute="centerX" secondItem="dfv-wP-L03" secondAttribute="centerX" id="5Tw-T6-YFZ"/>
-                                <constraint firstItem="ke7-Eq-NYy" firstAttribute="top" secondItem="KNC-XD-YtE" secondAttribute="bottom" constant="37" id="6w9-YV-hUD"/>
-                                <constraint firstItem="HSg-Kh-hx8" firstAttribute="top" secondItem="ke7-Eq-NYy" secondAttribute="bottom" constant="8" id="8qo-0j-giZ"/>
-                                <constraint firstItem="cTK-Ng-3hI" firstAttribute="top" secondItem="HSg-Kh-hx8" secondAttribute="bottom" constant="12" id="A0O-lT-aVy"/>
                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="DoA-3w-hHw" secondAttribute="trailing" constant="24" id="B9N-wX-QsQ"/>
                                 <constraint firstAttribute="trailing" secondItem="x8V-FU-Tto" secondAttribute="trailing" id="Cef-Bo-Cek"/>
-                                <constraint firstItem="ke7-Eq-NYy" firstAttribute="leading" secondItem="dfv-wP-L03" secondAttribute="leading" constant="24" id="LVc-gJ-hWD"/>
+                                <constraint firstItem="cTK-Ng-3hI" firstAttribute="top" secondItem="5Hf-04-V1m" secondAttribute="bottom" constant="12" id="Ghx-dq-70f"/>
                                 <constraint firstItem="DoA-3w-hHw" firstAttribute="top" secondItem="cTK-Ng-3hI" secondAttribute="bottom" constant="20" id="U8T-Lt-DQi"/>
+                                <constraint firstItem="5Hf-04-V1m" firstAttribute="leading" secondItem="dfv-wP-L03" secondAttribute="leading" constant="24" id="UUU-Ob-uFD"/>
                                 <constraint firstItem="KNC-XD-YtE" firstAttribute="top" secondItem="dfv-wP-L03" secondAttribute="top" id="Uz7-09-GNp"/>
-                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="ke7-Eq-NYy" secondAttribute="trailing" constant="24" id="buY-ND-gh7"/>
                                 <constraint firstAttribute="trailing" secondItem="cTK-Ng-3hI" secondAttribute="trailing" constant="24" id="eYb-AS-vZW"/>
-                                <constraint firstItem="HSg-Kh-hx8" firstAttribute="leading" secondItem="ke7-Eq-NYy" secondAttribute="leading" id="h5p-jc-099"/>
+                                <constraint firstItem="cTK-Ng-3hI" firstAttribute="leading" secondItem="dfv-wP-L03" secondAttribute="leading" constant="24" id="frx-9y-vT4"/>
                                 <constraint firstAttribute="bottom" secondItem="x8V-FU-Tto" secondAttribute="bottom" constant="20" symbolic="YES" id="h6q-5Q-yEd"/>
-                                <constraint firstItem="cTK-Ng-3hI" firstAttribute="leading" secondItem="ke7-Eq-NYy" secondAttribute="leading" id="i2u-1s-JKM"/>
                                 <constraint firstItem="x8V-FU-Tto" firstAttribute="leading" secondItem="dfv-wP-L03" secondAttribute="leading" id="krE-L6-0hv"/>
-                                <constraint firstItem="DoA-3w-hHw" firstAttribute="leading" secondItem="ke7-Eq-NYy" secondAttribute="leading" id="qz8-cq-XSA"/>
-                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="HSg-Kh-hx8" secondAttribute="trailing" constant="24" id="yXb-pd-jKd"/>
+                                <constraint firstItem="DoA-3w-hHw" firstAttribute="leading" secondItem="dfv-wP-L03" secondAttribute="leading" constant="24" id="mVV-38-gS8"/>
+                                <constraint firstItem="5Hf-04-V1m" firstAttribute="top" secondItem="KNC-XD-YtE" secondAttribute="bottom" constant="37" id="t26-BG-WLD"/>
+                                <constraint firstAttribute="trailing" secondItem="5Hf-04-V1m" secondAttribute="trailing" constant="24" id="wYY-6K-YJh"/>
                                 <constraint firstItem="x8V-FU-Tto" firstAttribute="top" secondItem="DoA-3w-hHw" secondAttribute="bottom" id="ztK-MN-9GH"/>
                             </constraints>
                         </view>

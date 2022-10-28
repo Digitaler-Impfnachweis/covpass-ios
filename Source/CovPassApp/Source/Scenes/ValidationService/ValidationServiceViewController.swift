@@ -65,8 +65,6 @@ class ValidationServiceViewController: UIViewController {
             self?.cancel()
         }
         view.actionButton.enableAccessibility(label: ValidationServiceViewModel.Accessibility.close.label)
-        view.actionButton.contentVerticalAlignment = .top
-        view.actionButton.contentHorizontalAlignment = .right        
         return view
     }()
 

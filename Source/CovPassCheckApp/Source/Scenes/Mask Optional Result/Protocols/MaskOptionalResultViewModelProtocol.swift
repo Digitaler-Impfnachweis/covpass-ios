@@ -24,6 +24,7 @@ protocol MaskOptionalResultViewModelProtocol: CancellableViewModelProtocol {
     var revocationLinkTitle: String { get }
     var buttonTitle: String { get }
     var countdownTimerModel: CountdownTimerModel { get }
+    var closeButtonAccessibilityText: String { get }
 
     func rescan()
     func revoke(_: Any)
