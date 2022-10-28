@@ -67,7 +67,7 @@ class CertificateOverviewSnapShotTests: BaseSnapShotTests {
         let viewModel = self.viewModel(repository: vacinationRepoMock, holderNeedsMask: false, maskRulesAvailable: true)
         let viewController = CertificatesOverviewViewController(viewModel: viewModel)
         userDefaults.stateSelection = "SH"
-        verifyView(view: viewController.view, waitAfter: 0.1)
+        verifyView(view: viewController.view, waitAfter: 0.3)
     }
     
     func test_anyToken_holder_maskNeeded_isFullyImmunized() {
@@ -147,7 +147,7 @@ class CertificateOverviewSnapShotTests: BaseSnapShotTests {
         vacinationRepoMock.certificates = certs
         let viewModel = self.viewModel(repository: vacinationRepoMock, holderNeedsMask: false)
         let viewController = CertificatesOverviewViewController(viewModel: viewModel)
-        verifyView(view: viewController.view, waitAfter: 0.1)
+        verifyView(view: viewController.view, waitAfter: 0.3)
     }
     
     func test_IsRevoked() {

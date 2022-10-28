@@ -233,8 +233,7 @@ extension CheckSituationViewController {
         certificateProviderStackView.accessibilityValue = viewModel.certificateProviderSubtitle
         countryListSubtitleLabel.attributedText = viewModel.countryListSubtitle.styledAs(.body)
         countryListStackView.accessibilityValue = viewModel.countryListSubtitle
-        authorityListSubtitleLabel.attributedText =
-        viewModel.authorityListSubtitle.styledAs(.body)
+        authorityListSubtitleLabel.attributedText = viewModel.authorityListSubtitle.styledAs(.body)
         authorityListStackView.accessibilityValue = viewModel.authorityListSubtitle
         authorityListView.isHidden = !offlineRevocationSwitch.uiSwitch.isOn
         authorityListDivider.isHidden = !offlineRevocationSwitch.uiSwitch.isOn
