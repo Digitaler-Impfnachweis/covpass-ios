@@ -579,7 +579,7 @@ extension CertificatesOverviewViewModel {
             repository.getCertificateList()
         }
         .then { certificateList -> Promise<Bool> in
-            let users = self.repository.matchedCertificates(for: certificateList)
+            let users = self.certificatePairsSorted
             return self.boosterLogic.checkForNewBoosterVaccinationsIfNeeded(users)
         }
         .then { (showBoosterNotification: Bool) -> Promise<Void> in
@@ -688,11 +688,9 @@ extension CertificatesOverviewViewModel {
     }
     
     private func createCellViewModels() -> Promise<Void> {
-        let cellViewModelPromises = certificateList
-            .certificates
-            .partitionedByOwner
-            .compactMap { (certificates: Array<ExtendedCBORWebToken>) -> Promise<CertificateCardMaskImmunityViewModel>? in
-                let sortedCertificates = certificates.sortLatest()
+        let cellViewModelPromises = certificatePairsSorted
+            .compactMap { certificatePair -> Promise<CertificateCardMaskImmunityViewModel>? in
+                let sortedCertificates = certificatePair.certificates.sortLatest()
                 guard let cert = sortedCertificates.first else { return nil }
                 return Promise { seal in
                     let viewModel = CertificateCardMaskImmunityViewModel(
