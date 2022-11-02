@@ -31,12 +31,12 @@
                             <rect key="frame" x="0.0" y="36" width="414" height="256"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Lwj-LU-yCm" userLabel="mask status container stack view">
-                                    <rect key="frame" x="12" y="0.0" width="390" height="256"/>
+                                    <rect key="frame" x="14" y="0.0" width="386" height="256"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0EM-yi-QuA" userLabel="mask status image container">
                                             <rect key="frame" x="0.0" y="0.0" width="32" height="256"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cMg-Gb-88p" userLabel="mask status image view">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cMg-Gb-88p" userLabel="mask status image view">
                                                     <rect key="frame" x="0.0" y="112" width="32" height="32"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="32" id="0Id-nS-KpW"/>
@@ -54,16 +54,16 @@
                                             </constraints>
                                         </view>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="PtF-W8-sBL">
-                                            <rect key="frame" x="40" y="0.0" width="350" height="256"/>
+                                            <rect key="frame" x="40" y="0.0" width="346" height="256"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="TITLE" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hih-1b-LF2" userLabel="mask status label">
-                                                    <rect key="frame" x="0.0" y="0.0" width="350" height="235.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="346" height="235.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IKT-6E-z0u" userLabel="region label">
-                                                    <rect key="frame" x="0.0" y="235.5" width="350" height="20.5"/>
+                                                    <rect key="frame" x="0.0" y="235.5" width="346" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -77,8 +77,8 @@
                             <constraints>
                                 <constraint firstItem="Lwj-LU-yCm" firstAttribute="top" secondItem="LAf-4B-wkV" secondAttribute="top" id="6Ee-qa-w8n"/>
                                 <constraint firstAttribute="bottom" secondItem="Lwj-LU-yCm" secondAttribute="bottom" id="TP7-sT-faS"/>
-                                <constraint firstAttribute="trailing" secondItem="Lwj-LU-yCm" secondAttribute="trailing" constant="12" id="qSo-T0-kGg"/>
-                                <constraint firstItem="Lwj-LU-yCm" firstAttribute="leading" secondItem="LAf-4B-wkV" secondAttribute="leading" constant="12" id="sQX-Zx-ONR"/>
+                                <constraint firstAttribute="trailing" secondItem="Lwj-LU-yCm" secondAttribute="trailing" constant="14" id="qSo-T0-kGg"/>
+                                <constraint firstItem="Lwj-LU-yCm" firstAttribute="leading" secondItem="LAf-4B-wkV" secondAttribute="leading" constant="14" id="sQX-Zx-ONR"/>
                             </constraints>
                         </view>
                     </subviews>

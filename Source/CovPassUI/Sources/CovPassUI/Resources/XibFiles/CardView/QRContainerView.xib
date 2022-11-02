@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -23,30 +23,30 @@
         <view contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Gyu-2q-STL">
             <rect key="frame" x="0.0" y="0.0" width="414" height="575"/>
             <subviews>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ALc-6G-MIJ" userLabel="iconview">
-                    <rect key="frame" x="18" y="94" width="24" height="24"/>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ALc-6G-MIJ" userLabel="iconview">
+                    <rect key="frame" x="18" y="54" width="32" height="32"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="24" id="5z0-sh-nIk"/>
-                        <constraint firstAttribute="width" constant="24" id="v5a-0a-gEg"/>
+                        <constraint firstAttribute="height" constant="32" id="5z0-sh-nIk"/>
+                        <constraint firstAttribute="width" constant="32" id="v5a-0a-gEg"/>
                     </constraints>
                 </imageView>
-                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="GdT-D2-fPq">
-                    <rect key="frame" x="34" y="12" width="368" height="116"/>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="GdT-D2-fPq">
+                    <rect key="frame" x="58" y="12" width="344" height="116"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="TITLE" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hih-1b-LF2" userLabel="Title">
-                            <rect key="frame" x="15" y="32" width="353" height="20.5"/>
+                            <rect key="frame" x="0.0" y="36" width="44" height="20.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="249" text="SUBTITLE" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MfU-7S-Aoc" userLabel="Subtitle">
-                            <rect key="frame" x="15" y="95.5" width="353" height="20.5"/>
+                            <rect key="frame" x="0.0" y="56.5" width="77" height="59.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
-                    <edgeInsets key="layoutMargins" top="0.0" left="15" bottom="0.0" right="0.0"/>
+                    <edgeInsets key="layoutMargins" top="0.0" left="0.0" bottom="0.0" right="0.0"/>
                 </stackView>
                 <view opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vTI-EJ-iKv" userLabel="QRContainerView">
                     <rect key="frame" x="0.0" y="129" width="414" height="446"/>
@@ -105,9 +105,9 @@
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="vTI-EJ-iKv" secondAttribute="bottom" id="4bQ-ff-kaR"/>
                 <constraint firstItem="GdT-D2-fPq" firstAttribute="top" secondItem="Gyu-2q-STL" secondAttribute="top" constant="12" id="5KH-Dk-fZN"/>
+                <constraint firstItem="ALc-6G-MIJ" firstAttribute="centerY" secondItem="GdT-D2-fPq" secondAttribute="centerY" id="GMv-vR-FqM"/>
                 <constraint firstItem="vTI-EJ-iKv" firstAttribute="leading" secondItem="Gyu-2q-STL" secondAttribute="leading" id="Lv4-lq-HCh"/>
-                <constraint firstItem="MfU-7S-Aoc" firstAttribute="centerY" secondItem="ALc-6G-MIJ" secondAttribute="bottom" id="Tts-3w-KxC"/>
-                <constraint firstItem="GdT-D2-fPq" firstAttribute="leading" secondItem="ALc-6G-MIJ" secondAttribute="trailing" constant="-8" id="U8y-Zr-fyZ"/>
+                <constraint firstItem="GdT-D2-fPq" firstAttribute="leading" secondItem="ALc-6G-MIJ" secondAttribute="trailing" constant="8" id="U8y-Zr-fyZ"/>
                 <constraint firstItem="vTI-EJ-iKv" firstAttribute="top" secondItem="GdT-D2-fPq" secondAttribute="bottom" constant="1" id="for-5t-nAX"/>
                 <constraint firstItem="N51-Ce-JsW" firstAttribute="leading" secondItem="ALc-6G-MIJ" secondAttribute="leading" id="k0V-JZ-o4A"/>
                 <constraint firstAttribute="trailing" secondItem="vTI-EJ-iKv" secondAttribute="trailing" id="mG4-oc-jge"/>
@@ -125,7 +125,7 @@
         </view>
     </objects>
     <resources>
-        <image name="status-expired-circle" width="67" height="68"/>
+        <image name="status-expired-circle" width="32" height="32"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

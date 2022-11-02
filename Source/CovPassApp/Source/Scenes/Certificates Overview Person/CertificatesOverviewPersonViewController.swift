@@ -72,7 +72,7 @@ class CertificatesOverviewPersonViewController: UIViewController {
         collectionView.backgroundColor = viewModel.backgroundColor
         subtTitleLabel.attributedText = viewModel.pageSubtitle.styledAs(.body).colored(.white)
         headerView.attributedTitleText = viewModel.pageTitle.styledAs(.header_2).colored(.white)
-        headerView.image = .close
+        headerView.image = .closeWhite
         headerView.action = viewModel.close
         headerView.titleIcon.isHidden = true
     }

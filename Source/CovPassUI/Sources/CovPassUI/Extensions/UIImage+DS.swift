@@ -71,6 +71,9 @@ public extension UIImage {
     
     @ImageLoader(name: "button_close_alternative")
     private(set) static var closeAlternative
+    
+    @ImageLoader(name: "close-white")
+    private(set) static var closeWhite
 
     @ImageLoader(name: "scan_proof_image")
     private(set) static var proofScreen

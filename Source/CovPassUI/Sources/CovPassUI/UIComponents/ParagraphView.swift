@@ -87,8 +87,10 @@ public class ParagraphView: XibView {
                            secondBody: NSAttributedString? = nil,
                            footerHeadline: NSAttributedString? = nil,
                            footerBody: NSAttributedString? = nil,
-                           footerButtonTitle: String? = nil) {
+                           footerButtonTitle: String? = nil,
+                           contentMode: ContentMode = .scaleAspectFit) {
         imageView.image = image
+        imageView.contentMode = contentMode
         imageContainerView.isHidden = image == nil
         
         titleLabel.attributedText = title

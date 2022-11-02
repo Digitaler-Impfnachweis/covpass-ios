@@ -84,11 +84,13 @@ class CertificateDetailViewController: UIViewController {
 
     private func setupStatusView() {
         maskStatusView.setup(with: viewModel.maskStatusViewModel)
+        maskStatusView.imageViewWidthConstraint.constant = 32
         maskStatusView.bottomBorderLeftConstraint.constant = -.space_6
         maskStatusView.bottomBorder.backgroundColor = .neutralWhite
         maskStatusView.footerButton.style = .alternative
         maskStatusView.footerButton.action = { self.viewModel.showStateSelection() }
         immunizationStatusView.setup(with: viewModel.immunizationStatusViewModel)
+        immunizationStatusView.imageViewWidthConstraint.constant = 32
         immunizationStatusView.bottomBorder.isHidden = true
         immunizationStatusView.bottomBorder.layoutMargins.bottom = .space_24
     }
@@ -142,11 +144,12 @@ class CertificateDetailViewController: UIViewController {
         immunizationView.backgroundColor = .neutralWhite
         immunizationView.horizontalContainerStackView.alignment = .top
         immunizationView.bottomBorder.isHidden = true
+        immunizationView.imageViewWidthConstraint.constant = 32
         immunizationView.updateView(image: viewModel.immunizationIcon,
                                     title: viewModel.immunizationTitle.styledAs(.header_3),
                                     body: viewModel.immunizationBody.styledAs(.body).colored(.onBackground70))
         immunizationView.layoutMargins.bottom = .space_24
-
+        immunizationView.imageView.contentMode = .center
         immunizationButton.title = viewModel.immunizationButton
         immunizationButton.isHidden = true
         immunizationButton.action = { [weak self] in
@@ -281,7 +284,8 @@ private extension ParagraphView {
                    secondBody: viewModel.linkLabel?.styledAs(.body),
                    footerHeadline: viewModel.notice?.styledAs(.header_3).colored(.onBackground110),
                    footerBody: viewModel.noticeText?.styledAs(.body).colored(.onBackground110),
-                   footerButtonTitle: viewModel.selectFederalStateButtonTitle
+                   footerButtonTitle: viewModel.selectFederalStateButtonTitle,
+                   contentMode: .center
         )
     }
 }
