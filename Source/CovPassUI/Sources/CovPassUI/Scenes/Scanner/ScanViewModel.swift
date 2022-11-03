@@ -14,10 +14,10 @@ import CovPassCommon
 
 private enum Constants {
     enum Accessibility {
-        static let close = VoiceOverOptions.Settings(label: "accessibility_button_scanner_label_close".localized)
-        static let torchOn = VoiceOverOptions.Settings(label: "accessibility_button_label_torch_off".localized)
-        static let torchOff = VoiceOverOptions.Settings(label: "accessibility_button_label_torch_on".localized)
-        static let documentPicker = VoiceOverOptions.Settings(label: "accessibility_scan_camera_select_file".localized(bundle: .main))
+        static let close = VoiceOverOptions.Settings(label: "accessibility_button_scanner_label_close".localized, traits: .button)
+        static let torchOn = VoiceOverOptions.Settings(label: "accessibility_button_label_torch_off".localized, traits: .button)
+        static let torchOff = VoiceOverOptions.Settings(label: "accessibility_button_label_torch_on".localized, traits: .button)
+        static let documentPicker = VoiceOverOptions.Settings(label: "accessibility_scan_camera_select_file".localized(bundle: .main), traits: .button)
         static let scanner: String = "accessibility_scan_camera_announce".localized(bundle: .main)
     }
 }

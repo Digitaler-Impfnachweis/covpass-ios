@@ -26,11 +26,11 @@ public class NewRegulationsAnnouncementViewController: UIViewController {
 
     public override func viewDidLoad() {
         super.viewDidLoad()
-
         setupInfoHeaderView()
         setupIllustration()
         setupLabels()
         setupButton()
+        configureAccessibilityRespondsToUserInteraction()
     }
 
     public override func viewDidAppear(_ animated: Bool) {
@@ -40,6 +40,7 @@ public class NewRegulationsAnnouncementViewController: UIViewController {
     private func setupInfoHeaderView() {
         infoHeaderView.attributedTitleText = viewModel.header
             .styledAs(.header_2)
+        infoHeaderView.textLabel.enableAccessibility(label: viewModel.header, traits: .header)
         infoHeaderView.action = viewModel.close
         infoHeaderView.image = .close
         infoHeaderView.layoutMargins.bottom = .space_12
@@ -47,6 +48,7 @@ public class NewRegulationsAnnouncementViewController: UIViewController {
 
     private func setupIllustration() {
         illustrationImageView.image = viewModel.illustration
+        illustrationImageView.isAccessibilityElement = false
     }
 
     private func setupLabels() {
@@ -54,17 +56,28 @@ public class NewRegulationsAnnouncementViewController: UIViewController {
         copyText1Label.attributedText = viewModel.copyText1
             .styledAs(.body)
             .colored(textColor)
+        copyText1Label.enableAccessibility(label: viewModel.copyText1, traits: .staticText)
         copyText2Label.attributedText = viewModel.copyText2
             .styledAs(.body)
             .colored(textColor)
+        copyText2Label.enableAccessibility(label: viewModel.copyText2, traits: .staticText)
         subtitleLabel.attributedText = viewModel.subtitle
             .styledAs(.header_3)
             .colored(textColor)
+        subtitleLabel.enableAccessibility(label: viewModel.subtitle, traits: .staticText)
     }
 
     private func setupButton() {
         button.title = viewModel.buttonTitle
         button.action = viewModel.close
+    }
+    
+    private func configureAccessibilityRespondsToUserInteraction() {
+        if #available(iOS 13.0, *) {
+            copyText1Label.accessibilityRespondsToUserInteraction = true
+            subtitleLabel.accessibilityRespondsToUserInteraction = true
+            copyText2Label.accessibilityRespondsToUserInteraction = true
+        }
     }
 }
 

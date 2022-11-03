@@ -73,7 +73,7 @@ class HowToScanViewController: UIViewController {
 
     private func configureImageView() {
         imageView.image = viewModel.image
-        imageView.enableAccessibility(label: Constants.Accessibility.image.label)
+        imageView.isAccessibilityElement = false
         imageView.pinHeightToScaleAspectFit()
     }
 

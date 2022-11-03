@@ -62,7 +62,7 @@ class ScanPleaseViewController: UIViewController {
 
     private func configureContentView() {
         headerImageView.image = UIImage.scanPleaseIllustration
-
+        headerImageView.isAccessibilityElement = false
         textView.updateView(body: viewModel.text.styledAs(.body))
         textView.bottomBorder.isHidden = true
 
@@ -96,7 +96,6 @@ class ScanPleaseViewController: UIViewController {
 
     private func configureAccessiblity() {
         headline.actionButton.enableAccessibility(label: viewModel.accessibilityClose)
-        headerImageView.enableAccessibility(label: viewModel.accessibilityImage)
     }
 
 }

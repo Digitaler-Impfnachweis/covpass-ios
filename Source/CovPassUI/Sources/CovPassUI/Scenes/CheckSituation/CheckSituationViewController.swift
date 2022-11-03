@@ -57,7 +57,7 @@ public class CheckSituationViewController: UIViewController {
     @IBOutlet var activityIndicatorWrapper: UIView!
     @IBOutlet public var mainButton: MainButton!
     private let activityIndicator = DotPulseActivityIndicator(frame: CGRect(x: 0, y: 0, width: 100, height: 20))
-    
+
     // MARK: - Properties
     private(set) var viewModel: CheckSituationViewModelProtocol
 
@@ -75,6 +75,7 @@ public class CheckSituationViewController: UIViewController {
         super.viewDidLoad()
         viewModel.delegate = self
         configureView()
+        configureAccessibilityRespondsToUserInteraction()
     }
     
     public override func viewDidAppear(_ animated: Bool) {
@@ -105,6 +106,7 @@ public class CheckSituationViewController: UIViewController {
     
     private func configureImageView() {
         pageImageView.image = viewModel.pageImage
+        pageImageView.isAccessibilityElement = false
         pageImageView.enableAccessibility(label: viewModel.onboardingImageDescription, traits: .image)
     }
     
@@ -159,6 +161,25 @@ public class CheckSituationViewController: UIViewController {
         }
         offlineRevocationSwitch.uiSwitch.isOn = viewModel.offlineRevocationIsEnabled
         offlineRevocationSwitch.updateAccessibility()
+    }
+    
+    private func configureAccessibilityRespondsToUserInteraction() {
+        if #available(iOS 13.0, *) {
+            titleLabel.accessibilityRespondsToUserInteraction = true
+            descriptionLabel.accessibilityRespondsToUserInteraction = true
+            subTitleLabel.accessibilityRespondsToUserInteraction = true
+            offlineRevocationTitleLabel.accessibilityRespondsToUserInteraction = true
+            offlineRevocationDescriptionLabel.accessibilityRespondsToUserInteraction = true
+            bodyTitleLabel.accessibilityRespondsToUserInteraction = true
+            downloadStateHintLabel.accessibilityRespondsToUserInteraction = true
+            entryRulesStackView.accessibilityRespondsToUserInteraction = true
+            domesticRulesStackView.accessibilityRespondsToUserInteraction = true
+            valueSetsStackView.accessibilityRespondsToUserInteraction = true
+            certificateProviderStackView.accessibilityRespondsToUserInteraction = true
+            countryListStackView.accessibilityRespondsToUserInteraction = true
+            authorityListStackView.accessibilityRespondsToUserInteraction = true
+            downloadingHintLabel.accessibilityRespondsToUserInteraction = true
+        }
     }
 }
 

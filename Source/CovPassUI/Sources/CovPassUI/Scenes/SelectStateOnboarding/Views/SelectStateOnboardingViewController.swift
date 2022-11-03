@@ -42,10 +42,12 @@ open class SelectStateOnboardingViewController: UIViewController {
     private func configureView() {
         decorativeImageView.image = viewModel.image
         decorativeImageView.backgroundColor = .backgroundPrimary
+        decorativeImageView.isAccessibilityElement = false
         button.style = .primary
         button.title = "ok".localized(bundle: .main)
         headerView.attributedTitleText = viewModel.title.styledAs(.header_1)
         headerView.image = .close
+        headerView.textLabel.enableAccessibility(label: viewModel.title, traits: .header)
         headerView.action = viewModel.close
         button.action = viewModel.close
         copyLabel.attributedText = viewModel.copyText.styledAs(.body)
@@ -57,6 +59,9 @@ open class SelectStateOnboardingViewController: UIViewController {
     private func configureInputView() {
         stateSelection.titleLabel.attributedText = viewModel.inputTitle.styledAs(.label)
         stateSelection.valueLabel.attributedText = viewModel.inputValue.styledAs(.body)
+        stateSelection.enableAccessibility(label: viewModel.inputTitle,
+                                           value: viewModel.inputValue,
+                                           traits: .button)
         stateSelection.iconView.image = .map
         stateSelection.iconView.tintColor = .brandBase
         stateSelection.backgroundColor = .white
@@ -67,6 +72,14 @@ open class SelectStateOnboardingViewController: UIViewController {
                     self?.stateSelection.valueLabel.text = self?.viewModel.inputValue
                 }
                 .cauterize()
+        }
+    }
+    
+    private func configureAccessibilityRespondsToUserInteraction() {
+        if #available(iOS 13.0, *) {
+            copyLabel.accessibilityRespondsToUserInteraction = true
+            stateSelection.accessibilityRespondsToUserInteraction = true
+            copy2Label.accessibilityRespondsToUserInteraction = true
         }
     }
 }

@@ -51,6 +51,7 @@ class ConsentViewController: UIViewController {
         configureParagraphView()
         configureInfoView()
         configureHintView()
+        configureAccessibilityRespondsToUserInteraction()
         view.backgroundColor = UIColor.backgroundPrimary
     }
 
@@ -68,23 +69,25 @@ class ConsentViewController: UIViewController {
     private func configureImageView() {
         imageView.image = viewModel.image
         imageView.pinHeightToScaleAspectFit()
-        imageView.enableAccessibility(label: Constants.Accessibility.image.label)
+        imageView.isAccessibilityElement = false
     }
 
     private func configureHeadline() {
         headline.attributedText = viewModel.title?.styledAs(.header_2)
-        headline.textableView.accessibilityTraits = .header
+        headline.enableAccessibility(label: viewModel.title, traits: .header)
         headline.layoutMargins = .init(top: .space_40, left: .space_24, bottom: .zero, right: .space_24)
     }
 
     private func configureListItems() {
         listItems.layoutMargins = .init(top: .space_24, left: .space_24, bottom: .zero, right: .space_24)
+        listItems.enableAccessibility(label: viewModel.listItems.string, traits: .staticText)
         listItems.attributedText = viewModel.listItems
     }
 
     private func configureParagraphView() {
         descriptionText.attributedText = viewModel.info?.styledAs(.body).colored(.onBackground70)
         descriptionText.layoutMargins = .init(top: .space_40, left: .space_24, bottom: .zero, right: .space_24)
+        descriptionText.enableAccessibility(label: viewModel.info, traits: .staticText)
     }
 
     private func configureInfoView() {
@@ -93,19 +96,33 @@ class ConsentViewController: UIViewController {
         dataPrivacyInfoView.action = infoViewAction
         dataPrivacyInfoView.showSeperator = true
         dataPrivacyInfoView.layoutMargins = .init(top: .space_24, left: .zero, bottom: .zero, right: .zero)
+        dataPrivacyInfoView.enableAccessibility(label: viewModel.dataPrivacyTitle.string, traits: .button)
     }
 
     private func configureHintView() {
         usTermsOfUse.style = .info
-        usTermsOfUse.titleLabel.attributedText = "vaccination_fourth_onboarding_page_message_for_us_citizens_title".localized.styledAs(.header_3)
-        usTermsOfUse.subTitleLabel.attributedText = "\("vaccination_fourth_onboarding_page_message_for_us_citizens_copy".localized)".styledAs(.body)
-        usTermsOfUse.bodyLabel.attributedText = "#\("vaccination_fourth_onboarding_page_message_for_us_citizens_title".localized)::link#".styledAs(.mainButton)
+        let usTermsOfUseTitle = "vaccination_fourth_onboarding_page_message_for_us_citizens_title".localized
+        let usTermsOfUseSubtitle = "vaccination_fourth_onboarding_page_message_for_us_citizens_copy".localized
+        let usTermsOfUseLink = "vaccination_fourth_onboarding_page_message_for_us_citizens_title".localized
+        usTermsOfUse.titleLabel.attributedText = usTermsOfUseTitle.styledAs(.header_3)
+        usTermsOfUse.subTitleLabel.attributedText = "\(usTermsOfUseSubtitle)".styledAs(.body)
+        usTermsOfUse.bodyLabel.attributedText = "#\(usTermsOfUseLink)::link#".styledAs(.mainButton)
         usTermsOfUse.titleToSubTitleConstraint.constant = 4
         usTermsOfUse.subTitleConstraint.constant = 18
         usTermsOfUse.bodyLabel.linkCallback = { [weak self] _ in
             self?.viewModel.router.showTermsOfUse()
         }
         usTermsOfUse.isHidden = !viewModel.showUSTerms
+    }
+    
+    private func configureAccessibilityRespondsToUserInteraction() {
+        if #available(iOS 13.0, *) {
+            headline.accessibilityRespondsToUserInteraction = true
+            listItems.accessibilityRespondsToUserInteraction = true
+            descriptionText.accessibilityRespondsToUserInteraction = true
+            dataPrivacyInfoView.accessibilityRespondsToUserInteraction = true
+            usTermsOfUse.accessibilityRespondsToUserInteraction = true
+        }
     }
 }
 
