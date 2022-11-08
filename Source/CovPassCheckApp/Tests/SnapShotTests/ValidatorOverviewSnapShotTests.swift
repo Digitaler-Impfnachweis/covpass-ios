@@ -18,13 +18,13 @@ class ValidatorOverviewSnapShotTests: BaseSnapShotTests {
                       ntpDate: Date = Date(),
                       ntpOffset: TimeInterval = 0.0,
                       logicType: DCCCertLogic.LogicType = .de,
-                      boosterAsTest: Bool = false) -> ValidatorOverviewViewController {
+                      selectedCheckType: CheckType = .mask) -> ValidatorOverviewViewController {
         let certLogicMock = DCCCertLogicMock()
         let vaccinationRepoMock = VaccinationRepositoryMock()
         var userDefaults = MockPersistence()
         userDefaults.lastUpdatedTrustList = lastUpdateTrustList
-        userDefaults.validatorOverviewBoosterAsTest = boosterAsTest
         vaccinationRepoMock.shouldTrustListUpdate = shouldTrustListUpdate
+        userDefaults.selectedCheckType = selectedCheckType.rawValue
         let vm = ValidatorOverviewViewModel(router: ValidatorMockRouter(),
                                             repository: vaccinationRepoMock,
                                             revocationRepository: CertificateRevocationRepositoryMock(),
@@ -58,6 +58,11 @@ class ValidatorOverviewSnapShotTests: BaseSnapShotTests {
         let sut = self.configureSut(lastUpdateTrustList: DateUtils.parseDate("2021-04-26T15:05:00"),
                                     ntpDate: DateUtils.parseDate("2021-04-26T15:05:00")!,
                                     ntpOffset: 7201)
+        verifyView(view: sut.view)
+    }
+    
+    func testImmunitySelected() {
+        let sut = configureSut(selectedCheckType: .immunity)
         verifyView(view: sut.view)
     }
 }

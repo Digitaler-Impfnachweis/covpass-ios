@@ -12,11 +12,18 @@ import Foundation
 import Scanner
 import UIKit
 
+public enum CheckType: Int {
+    case mask, immunity
+}
+
 class ValidatorOverviewViewController: UIViewController {
     // MARK: - IBOutlet
 
     @IBOutlet var headerView: InfoHeaderView!
     @IBOutlet var scanCard: ScanCardView!
+    @IBOutlet var checkTypesStackview: UIStackView!
+    @IBOutlet var immunityCheckView: ImmunityScanCardView!
+    @IBOutlet var checkTypeSegment: UISegmentedControl!
     @IBOutlet var timeHintView: HintView!
     @IBOutlet var offlineInformationView: UIView!
     @IBOutlet var offlineInformationStateWrapperView: UIView!
@@ -105,7 +112,34 @@ class ValidatorOverviewViewController: UIViewController {
         scanCard.chooseButton.enableAccessibility(label: viewModel.scanDropDownTitle,
                                                           hint: viewModel.scanDropDownValue,
                                                           traits: .selected)
-
+        
+        let immunityCheckTitleAccessibility = viewModel.immunityCheckTitleAccessibility
+        let immunityCheckTitle = viewModel.immunityCheckTitle
+            .styledAs(.header_2)
+            .colored(.neutralWhite)
+        let immunityCheckDescription = viewModel.immunityCheckDescription
+            .styledAs(.body)
+            .colored(.neutralWhite)
+        let immunityCheckInfoText = viewModel.immunityCheckInfoText
+            .styledAs(.header_3)
+            .colored(.neutralWhite)
+        let immunityCheckActionTitle = viewModel.immunityCheckActionTitle
+        immunityCheckView.set(title: immunityCheckTitle,
+                              titleAccessibility: immunityCheckTitleAccessibility,
+                              titleEdges: .init(top: 24, left: 24, bottom: 8, right: 24),
+                              description: immunityCheckDescription,
+                              descriptionEdges: .init(top: 8, left: 24, bottom: 12, right: 24),
+                              infoText: immunityCheckInfoText,
+                              infoTextEdges: .init(top: 0, left: 0, bottom: 0, right: 0),
+                              actionTitle: immunityCheckActionTitle)
+        immunityCheckView.action = viewModel.checkImmunityStatus
+        
+        checkTypeSegment.setTitle(viewModel.segmentMaskTitle, forSegmentAt: CheckType.mask.rawValue)
+        checkTypeSegment.setTitle(viewModel.segmentImmunityTitle, forSegmentAt: CheckType.immunity.rawValue)
+        
+        immunityCheckView.isHidden = viewModel.selectedCheckType == .mask
+        scanCard.isHidden = viewModel.selectedCheckType == .immunity
+        checkTypeSegment.selectedSegmentIndex = viewModel.selectedCheckType.rawValue
     }
     
     private func setupTimeHintView() {
@@ -141,7 +175,14 @@ class ValidatorOverviewViewController: UIViewController {
 
     // MARK: - Actions
 
-     @IBAction func routeToUpdateTapped(_ sender: Any) {
+    @IBAction func chekTypeSegmentChanged(_ sender: UISegmentedControl) {
+        guard let selectedCheckType = CheckType(rawValue: sender.selectedSegmentIndex) else {
+            return
+        }
+        viewModel.selectedCheckType = selectedCheckType
+    }
+    
+    @IBAction func routeToUpdateTapped(_ sender: Any) {
          viewModel.routeToRulesUpdate()
      }
 }

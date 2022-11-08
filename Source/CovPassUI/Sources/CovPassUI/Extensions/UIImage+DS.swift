@@ -267,6 +267,9 @@ public extension UIImage {
     @ImageLoader(name: "detail-status-partial")
     private(set) static var detailStatusPartial
 
+    @ImageLoader(name: "infoWhite")
+    private(set) static var infoWhite
+
     @ImageLoader(name: "start-status-full-blue")
     private(set) static var startStatusFullBlue
 

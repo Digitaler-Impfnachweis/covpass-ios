@@ -9,11 +9,6 @@
 import Foundation
 import PromiseKit
 
-public enum ScanType: Int {
-    case _3G = 0
-    case _2G = 1
-}
-
 private enum Constants {
     static let firstLimit = 2
     static let secondLimit = 10

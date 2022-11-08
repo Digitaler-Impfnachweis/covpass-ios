@@ -34,6 +34,17 @@ private enum Constants {
             static let subtitle_unavailable = "start_offline_subtitle_unavailable".localized
             static let link_subtitle_available = "start_offline_link_subtitle_available".localized
         }
+        enum ImmunityScanCard {
+            static let immunityCheckTitle = "start_screen_vaccination_status_title".localized
+            static let immunityCheckTitleAccessibility = "accessibility_start_screen_vaccination_status_title".localized
+            static let immunityCheckDescription = "start_screen_vaccination_status_copy".localized
+            static let immunityCheckActionTitle = "validation_start_screen_scan_action_button_title".localized
+            static let immunityCheckInfoText = "start_screen_vaccination_status_hint".localized
+        }
+        enum Segment {
+            static let maskTitle = "start_screen_toggle_mask".localized
+            static let immunityTitle = "start_screen_toggle_vaccination".localized
+        }
     }
     enum Config {
         static let twoHoursAsSeconds = 7200.0
@@ -52,58 +63,58 @@ class ValidatorOverviewViewModel {
     private var userDefaults: Persistence
     private var currentDataPrivacyHash: String
     private let audioPlayer: AudioPlayerProtocol
+    private var shouldSomethingBeUpdated: Bool { certLogic.rulesShouldBeUpdated || certLogic.valueSetsShouldBeUpdated || vaccinationRepository.trustListShouldBeUpdated() }
+    
+    private(set) var isLoadingScan = false {
+        didSet {
+            delegate?.viewModelDidUpdate()
+        }
+    }
     
     var delegate: ViewModelDelegate?
-    
-    var title = Constants.Keys.title
-    
-    var scanActionTitle = Constants.Keys.ScanCard.actionTitle
-    
-    var scanDropDownTitle = Constants.Keys.ScanCard.dropDownTitle
-    
+    let title = Constants.Keys.title
+    let scanActionTitle = Constants.Keys.ScanCard.actionTitle
+    let scanDropDownTitle = Constants.Keys.ScanCard.dropDownTitle
     var scanDropDownValue: String { "DE_\(userDefaults.stateSelection)".localized }
-
-    var timeHintTitle = Constants.Keys.TimeHint.syncTitle
-    
+    let timeHintTitle = Constants.Keys.TimeHint.syncTitle
     var timeHintSubTitle: String {
         String(format: Constants.Keys.TimeHint.syncMessage, ntpDateFormatted)
     }
-    
     var ntpDateFormatted: String {
         DateUtils.displayDateTimeFormatter.string(from: ntpDate)
     }
-    
     var timeHintIcon = UIImage.warning
-    
     var ntpDate: Date = Date() {
         didSet {
             self.delegate?.viewModelDidUpdate()
         }
     }
-    
     var ntpOffset = Constants.Config.ntpOffsetInit
-    
     var schedulerIntervall: TimeInterval
-    
     var timeHintIsHidden: Bool {
         get {
             return abs(ntpOffset) < Constants.Config.twoHoursAsSeconds
         }
     }
-    
     var offlineInformationTitle: String = Constants.Keys.OfflineInformation.title
     var offlineInformationStateIcon: UIImage { shouldSomethingBeUpdated ? .warning : .check }
     var offlineInformationStateTextColor: UIColor { shouldSomethingBeUpdated ? .neutralBlack : .neutralWhite }
     var offlineInformationStateBackgroundColor: UIColor { shouldSomethingBeUpdated ? .warningAlternative : .resultGreen }
     var offlineInformationStateText: String { shouldSomethingBeUpdated ? Constants.Keys.OfflineInformation.status_unavailable : Constants.Keys.OfflineInformation.status_available }
-    var offlineInformationDescription: String = Constants.Keys.OfflineInformation.copy
-    var offlineInformationUpdateCellTitle: String = Constants.Keys.OfflineInformation.link_title
     var offlineInformationUpdateCellSubtitle: String { shouldSomethingBeUpdated ? Constants.Keys.OfflineInformation.subtitle_unavailable : Constants.Keys.OfflineInformation.link_subtitle_available }
-    var offlineInformationCellIcon: UIImage = .chevronRight
-    private var shouldSomethingBeUpdated: Bool { certLogic.rulesShouldBeUpdated || certLogic.valueSetsShouldBeUpdated || vaccinationRepository.trustListShouldBeUpdated() }
-    
-    private(set) var isLoadingScan = false {
+    let offlineInformationDescription = Constants.Keys.OfflineInformation.copy
+    let offlineInformationUpdateCellTitle = Constants.Keys.OfflineInformation.link_title
+    let offlineInformationCellIcon = UIImage.chevronRight
+    let immunityCheckTitle = Constants.Keys.ImmunityScanCard.immunityCheckTitle
+    let immunityCheckTitleAccessibility = Constants.Keys.ImmunityScanCard.immunityCheckTitleAccessibility
+    let immunityCheckDescription = Constants.Keys.ImmunityScanCard.immunityCheckDescription
+    let immunityCheckInfoText = Constants.Keys.ImmunityScanCard.immunityCheckInfoText
+    let immunityCheckActionTitle = Constants.Keys.ImmunityScanCard.immunityCheckActionTitle
+    let segmentMaskTitle = Constants.Keys.Segment.maskTitle
+    let segmentImmunityTitle = Constants.Keys.Segment.immunityTitle
+    public var selectedCheckType: CheckType {
         didSet {
+            userDefaults.selectedCheckType = selectedCheckType.rawValue
             delegate?.viewModelDidUpdate()
         }
     }
@@ -127,6 +138,7 @@ class ValidatorOverviewViewModel {
         self.userDefaults = userDefaults
         self.schedulerIntervall = schedulerIntervall
         self.currentDataPrivacyHash = privacyFile.sha256()
+        self.selectedCheckType = CheckType(rawValue: userDefaults.selectedCheckType) ?? .mask
         self.setupTimer()
     }
     
@@ -189,6 +201,23 @@ class ValidatorOverviewViewModel {
             self.errorHandling(error: error, token: nil)
                 .done(self.validatorDetailSceneRsult(result:))
                 .cauterize()
+        }
+    }
+    
+    func checkImmunityStatus() {
+        isLoadingScan = true
+        firstly{
+#warning("TODO: add immunity check")
+        }
+        .done { token in
+#warning("TODO: add immunity check")
+        }
+        .ensure {
+            self.isLoadingScan = false
+        }
+        .catch { error in
+#warning("TODO: add immunity check")
+
         }
     }
     

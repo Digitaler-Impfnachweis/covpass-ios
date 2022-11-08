@@ -6,30 +6,18 @@
 //
 
 import CovPassCommon
-
-private let keyValidatorOverviewScanType = "keyValidatorOverviewScanType"
-private let keyValidatorOverviewBoosterAsTest = "keyValidatorOverviewBoosterAsTest"
+private let keyValidatorOverviewSelectedCheckType = "keyValidatorOverviewSelectedCheckType"
 
 extension Persistence {
-    var validatorOverviewScanType: ScanType? {
-        get {
-            guard let value = try? fetch(keyValidatorOverviewScanType) as? Int else {
-                return nil
-            }
-            return ScanType(rawValue: value)
-        }
-        set {
-            try? store(keyValidatorOverviewScanType, value: newValue?.rawValue as Any)
-        }
-    }
 
-    var validatorOverviewBoosterAsTest: Bool {
+    
+    var selectedCheckType: Int {
         get {
-            let value = try? fetch(keyValidatorOverviewBoosterAsTest) as? Bool
-            return value ?? false
+            let value = try? fetch(keyValidatorOverviewSelectedCheckType) as? Int
+            return value ?? 0
         }
         set {
-            try? store(keyValidatorOverviewBoosterAsTest, value: newValue as Any)
+            try? store(keyValidatorOverviewSelectedCheckType, value: newValue as Any)
         }
     }
 }

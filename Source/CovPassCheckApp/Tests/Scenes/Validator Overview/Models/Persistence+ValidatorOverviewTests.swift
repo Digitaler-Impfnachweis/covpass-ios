@@ -19,41 +19,24 @@ class Persistence_ValidatorOverviewTests: XCTestCase {
         sut = nil
     }
 
-    func testValidatorOverviewScanType_default() {
+    func testValidatorOverviewCheckType_default() {
         // When
-        let scanType = sut.validatorOverviewScanType
+        let scanType = sut.selectedCheckType
 
         // Then
-        XCTAssertNil(scanType)
+        XCTAssertNotNil(scanType)
+        XCTAssertEqual(scanType, CheckType.mask.rawValue)
     }
 
-    func testValidatorOverviewScanType_set() {
+    func testValidatorOverviewCheckType_set() {
         // Given
-        sut.validatorOverviewScanType = ._3G
+        sut.selectedCheckType = CheckType.immunity.rawValue
 
         // When
-        let scanType = sut.validatorOverviewScanType
+        let scanType = sut.selectedCheckType
 
         // Then
-        XCTAssertEqual(scanType, ._3G)
+        XCTAssertEqual(scanType, CheckType.immunity.rawValue)
     }
 
-    func testValidatorOverviewBoosterAsTest_default() {
-        // When
-        let boosterAsTest = sut.validatorOverviewBoosterAsTest
-
-        // Then
-        XCTAssertFalse(boosterAsTest)
-    }
-
-    func testValidatorOverviewBoosterAsTest_set() {
-        // Given
-        sut.validatorOverviewBoosterAsTest = true
-
-        // When
-        let boosterAsTest = sut.validatorOverviewBoosterAsTest
-
-        // Then
-        XCTAssertTrue(boosterAsTest)
-    }
 }

@@ -116,9 +116,21 @@
 
 /********** start screen **********/
 
-"accessibility_validation_start_screen_label_information" = "Mehr Informationen";
+"accessibility_validation_start_screen_label_information" = "Einstellungen";
 
-"validation_start_screen_title" = "Übersicht";
+"validation_start_screen_title" = "CovPass-Check";
+
+"start_screen_toggle_mask" = "Maskenpflicht";
+
+"start_screen_toggle_vaccination" = "Impfstatus";
+
+"start_screen_vaccination_status_title" = "Impfstatus nach IfSG §22a";
+
+"accessibility_start_screen_vaccination_status_title" = "Impfstatus nach Infektionsschutzgesetz Paragraph 22a";
+
+"start_screen_vaccination_status_copy" = "Einen gültigen Impfstatus hat, wer mindestens drei Impfungen oder zwei Impfungen und eine Genesung nachweisen kann.";
+
+"start_screen_vaccination_status_hint" = "Bitte scannen Sie immer die aktuellsten Nachweise zuerst.";
 
 "validation_start_screen_scan_title" = "3G prüfen";
 
