@@ -48,14 +48,26 @@ extension AppInformationBaseViewModel {
         public static let federalStateTitle = "infschg_settings_federal_state_title".localized(bundle: .main)
         public static let appVersion = String(format: "Version %@", Bundle.main.appVersion())
     }
-    public enum AccessiblityAnnouncments {
-        public static let informationAnnounce = "accessibility_app_information_title_informationt_announce".localized(bundle: .main)
-        public static let leichteSprache = Texts.leichteSprache
-        public static let contactTitle = "accessibility_app_information_title_contact_announce".localized(bundle: .main)
-        public static let faqTitle = Texts.faqTitle
-        public static let datenschutzTitle = "accessibility_app_information_datenschutz_announce".localized(bundle: .main)
-        public static let companyDetailsTitle = Texts.companyDetailsTitle
-        public static let openSourceLicenseTitle = "accessibility_app_information_title_open_source_announce".localized(bundle: .main)
-        public static let accessibilityStatementTitle = Texts.accessibilityStatementTitle
+    public enum Accessibility {
+        public enum Opening {
+            public static let informationAnnounce = "accessibility_app_information_title_information_announce".localized(bundle: .main)
+            public static let leichteSprache = "accessibility_app_information_title_simple_language_announce".localized(bundle: .main)
+            public static let contactTitle = "accessibility_app_information_title_contact_announce".localized(bundle: .main)
+            public static let faqTitle = "accessibility_app_information_title_faq_announce".localized(bundle: .main)
+            public static let datenschutzTitle = "accessibility_app_information_datenschutz_announce".localized(bundle: .main)
+            public static let companyDetailsTitle = "accessibility_app_information_title_legal_information_announce".localized(bundle: .main)
+            public static let openSourceLicenseTitle = "accessibility_app_information_title_open_source_announce".localized(bundle: .main)
+            public static let accessibilityStatementTitle = "accessibility_app_information_title_accessibility_statement_announce".localized(bundle: .main)
+        }
+        public enum Closing {
+            public static let informationAnnounce = "accessibility_app_information_title_information_closing_announce".localized(bundle: .main)
+            public static let leichteSprache = "accessibility_app_information_title_simple_language_announce_closing".localized(bundle: .main)
+            public static let contactTitle = "accessibility_app_information_title_contact_closing_announce".localized(bundle: .main)
+            public static let faqTitle = "accessibility_app_information_title_faq_announce_closing".localized(bundle: .main)
+            public static let datenschutzTitle = "accessibility_app_information_datenschutz_closing_announce".localized(bundle: .main)
+            public static let companyDetailsTitle = "accessibility_app_information_title_legal_information_announce_closing".localized(bundle: .main)
+            public static let openSourceLicenseTitle = "accessibility_app_information_title_open_source_announce_closing".localized(bundle: .main)
+            public static let accessibilityStatementTitle = "accessibility_app_information_title_accessibility_statement_announce_closing".localized(bundle: .main)
+        }
     }
 }

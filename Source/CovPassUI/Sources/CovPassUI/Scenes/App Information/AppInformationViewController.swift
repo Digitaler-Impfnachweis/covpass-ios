@@ -40,8 +40,14 @@ open class AppInformationViewController: UIViewController {
     open override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         UIAccessibility.post(notification: .layoutChanged,
-                             argument: AppInformationBaseViewModel.AccessiblityAnnouncments.informationAnnounce)
+                             argument: AppInformationBaseViewModel.Accessibility.Opening.informationAnnounce)
         configureEntries()
+    }
+    
+    open override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        UIAccessibility.post(notification: .layoutChanged,
+                             argument: AppInformationBaseViewModel.Accessibility.Closing.informationAnnounce)
     }
 
     // MARK: - Methods

@@ -34,6 +34,16 @@ public class StateSelectionViewController: UIViewController {
         setupViews()
     }
     
+    public override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        UIAccessibility.post(notification: .layoutChanged, argument: viewModel.openingAnnounce)
+    }
+    
+    public override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        UIAccessibility.post(notification: .layoutChanged, argument: viewModel.closingAnnounce)
+    }
+    
     // MARK: private methods
     
     private func setupViews() {
@@ -60,6 +70,8 @@ public class StateSelectionViewController: UIViewController {
             view.rightIcon.image = .chevronRight
             view.textLabel.attributedText = stateCodeWithPrefix.localized(bundle: .main).styledAs(.header_3)
             view.action = {
+                let readOut = String(format: self.viewModel.choosenState, stateCodeWithPrefix.localized(bundle: .main))
+                UIAccessibility.post(notification: .layoutChanged, argument: readOut)
                 self.viewModel.choose(state: state.code)
             }
             view.enableAccessibility(label: stateCodeWithPrefix.localized(bundle: .main), traits: .button)

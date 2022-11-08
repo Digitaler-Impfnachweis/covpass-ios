@@ -1218,6 +1218,26 @@
 
 /********** app information **********/
 
+"accessibility_app_information_title_accessibility_statement_announce" = "The view \"Accessibility statement\" has been opened";
+
+"accessibility_app_information_title_accessibility_statement_announce_closing" = "The view \"Accessibility statement\" has been closed";
+
+"accessibility_app_information_title_legal_information_announce" = "The view \"Legal information\" has been opened";
+
+"accessibility_app_information_title_legal_information_announce_closing" = "The view \"Legal information\" has been closed";
+
+"accessibility_app_information_title_simple_language_announce" = "The view \"Simple language\" has been opened";
+
+"accessibility_app_information_title_simple_language_announce_closing" = "The view \"Simple language\" has been closed";
+
+"accessibility_app_information_title_faq_announce" = "The view \"Frequently asked questions\" has been opened";
+
+"accessibility_app_information_title_faq_announce_closing" = "The view \"Frequently asked questions\" has been closed";
+
+"accessibility_app_information_title_us_terms_announce" = "The view \"Terms of use for US citizens\" has been opened";
+
+"accessibility_app_information_title_us_terms_announce_closing" = "The view \"Terms of use for US citizens\" has been closed";
+
 "accessibility_app_information_title_update" = "The view \"Update checking rules\" has been opened";
 
 "accessibility_app_information_title_update_closing_announce" = "The view \"Update checking rules\" has been closed";
@@ -1240,7 +1260,27 @@
 
 "accessibility_app_information_label_back" = "Back to the start screen";
 
-"accessibility_app_information_title_informationt_announce" = "Information has been opened";
+"accessibility_app_information_title_information_announce" = "Information has been opened";
+
+"accessibility_app_information_title_information_closing_announce" = "Information has been closed";
+
+"accessibility_app_information_title_checking_rules_announce" = "Update Checking Rules has been opened";
+
+"accessibility_app_information_title_checking_rules_closing_announce" = "Update checking rules has been closed";
+
+"accessibility_app_information_title_update_notifications_announce" = "Update notifications has been opened";
+
+"accessibility_app_information_title_update_notifications_closing_announce" = "Update notifications has been closed";
+
+"accessibility_app_information_title_federal_state_rules_announce" = "Federal state rules has been opened";
+
+"accessibility_app_information_title_federal_state_rules_icon" = "Select federal state";
+
+"accessibility_popup_valid_certificate_germany_announce" = "Validity of certificates in Germany has been opened";
+
+"accessibility_popup_valid_certificate_germany_closing_announce" = "Validity of certificates in Germany has been closed";
+
+"accessibility_app_information_title_federal_state_rules_closing_announce" = "Federal state rules has been closed";
 
 "accessibility_app_information_title_information_closing_announce" = "Information has been closed";
 
@@ -1745,7 +1785,7 @@
 
 "infschg_cert_overview_mask_time_from" = "Exempt from %@";
 
-"infschg_cert_overview_mask_hint_optional" = "You are exempt from wearing a mask in most areas in Germany. Note that the exemption does not apply to places where a special mask requirement applies: e.g. doctors' offices, hospitals or long-distance passenger transport.";
+"infschg_cert_overview_mask_hint_optional" = "You are exempt from the mask requirement in some situations in this state; however, a mask is still recommended.";
 
 "infschg_cert_overview_mask_hint_mandatory" = "You can be exempted from the mask requirement for up to 24 hours in your state. Note that different regulations may apply in your federal state. Also remember that the exemption does not apply to places where a special mask requirement applies: e.g. doctors' offices, hospitals or long-distance passenger transport.";
 

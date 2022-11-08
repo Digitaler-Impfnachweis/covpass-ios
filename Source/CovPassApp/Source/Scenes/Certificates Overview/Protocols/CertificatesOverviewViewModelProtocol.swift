@@ -18,8 +18,9 @@ protocol CertificatesOverviewViewModelProtocol {
     var showMultipleCertificateHolder: Bool { get }
     var accessibilityAddCertificate: String { get }
     var accessibilityMoreInformation: String { get }
-    var accessibilityAnnouncement: String { get }
-    func revokeIfNeeded() 
+    var openingAnnouncment: String { get }
+    var closingAnnouncment: String { get }
+    func revokeIfNeeded()
     func refresh() -> Promise<Void>
     func updateTrustList()
     func updateBoosterRules()

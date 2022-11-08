@@ -17,8 +17,11 @@ private enum Constants {
         static let close = VoiceOverOptions.Settings(label: "accessibility_button_scanner_label_close".localized, traits: .button)
         static let torchOn = VoiceOverOptions.Settings(label: "accessibility_button_label_torch_off".localized, traits: .button)
         static let torchOff = VoiceOverOptions.Settings(label: "accessibility_button_label_torch_on".localized, traits: .button)
+        static let torchWasTurnedOn = VoiceOverOptions.Settings(label: "accessibility_scan_camera_torch_on".localized, traits: .button)
+        static let torchWasTurnedOff = VoiceOverOptions.Settings(label: "accessibility_scan_camera_torch_turn_off".localized, traits: .button)
         static let documentPicker = VoiceOverOptions.Settings(label: "accessibility_scan_camera_select_file".localized(bundle: .main), traits: .button)
-        static let scanner: String = "accessibility_scan_camera_announce".localized(bundle: .main)
+        static let openingAnnounce = "accessibility_scan_camera_announce".localized(bundle: .main)
+        static let closingAnnounce = "accessibility_scan_camera_closing_announce".localized(bundle: .main)
     }
 }
 
@@ -43,6 +46,10 @@ public class ScanViewModel: CancellableViewModelProtocol {
     private let certificateExtractor: CertificateExtractorProtocol?
     private let certificateRepository: VaccinationRepositoryProtocol?
 
+    var currentTorchWasTurnedVoiceOverOptions: VoiceOverOptions.Settings {
+        isFlashlightOn ? Constants.Accessibility.torchWasTurnedOn : Constants.Accessibility.torchWasTurnedOff
+    }
+    
     var currentTorchVoiceOverOptions: VoiceOverOptions.Settings {
         isFlashlightOn ? Constants.Accessibility.torchOn : Constants.Accessibility.torchOff
     }
@@ -55,8 +62,12 @@ public class ScanViewModel: CancellableViewModelProtocol {
         Constants.Accessibility.documentPicker
     }
     
-    var accessibilityScannerText: String {
-        Constants.Accessibility.scanner
+    var openingAnnounce: String {
+        Constants.Accessibility.openingAnnounce
+    }
+    
+    var closingAnnounce: String {
+        Constants.Accessibility.closingAnnounce
     }
 
     var mode: Mode = .scan {

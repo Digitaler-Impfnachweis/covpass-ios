@@ -17,7 +17,8 @@ public class WebviewViewModel: WebviewViewModelProtocol {
     public let urlRequest: URLRequest
     public var closeButtonShown: Bool
     public var isToolbarShown: Bool
-    public var accessibilityAnnouncement: String
+    public var openingAnnounce: String
+    public var closingAnnounce: String
     
     // MARK: - Lifecycle
 
@@ -25,11 +26,13 @@ public class WebviewViewModel: WebviewViewModelProtocol {
                 url: URL,
                 closeButtonShown: Bool,
                 isToolbarShown: Bool,
-                accessibilityAnnouncement: String) {
+                openingAnnounce: String,
+                closingAnnounce: String) {
         self.title = title
         self.closeButtonShown = closeButtonShown
         self.isToolbarShown = isToolbarShown
-        self.accessibilityAnnouncement = accessibilityAnnouncement
+        self.openingAnnounce = openingAnnounce
+        self.closingAnnounce = closingAnnounce
         urlRequest = URLRequest(url: url)
     }
 }

@@ -16,8 +16,9 @@ public struct WebviewSceneFactory: SceneFactory {
     private let closeButtonShown: Bool
     private let isToolbarShown: Bool
     private let embedInNavigationController: Bool
-    private let accessibilityAnnouncement: String
-    
+    private let openingAnnounce: String
+    private let closingAnnounce: String
+
     // MARK: - Lifecycle
     
     public init(title: String,
@@ -25,8 +26,10 @@ public struct WebviewSceneFactory: SceneFactory {
                 closeButtonShown: Bool = false,
                 isToolbarShown: Bool = false,
                 embedInNavigationController: Bool = false,
-                accessibilityAnnouncement: String) {
-        self.accessibilityAnnouncement = accessibilityAnnouncement
+                openingAnnounce: String,
+                closingAnnounce: String) {
+        self.openingAnnounce = openingAnnounce
+        self.closingAnnounce = closingAnnounce
         self.title = title
         self.url = url
         self.closeButtonShown = closeButtonShown
@@ -39,7 +42,8 @@ public struct WebviewSceneFactory: SceneFactory {
                                          url: url,
                                          closeButtonShown: closeButtonShown,
                                          isToolbarShown: isToolbarShown,
-                                         accessibilityAnnouncement: accessibilityAnnouncement)
+                                         openingAnnounce: openingAnnounce,
+                                         closingAnnounce: closingAnnounce)
         let viewController = WebviewViewController(viewModel: viewModel)
         return embedInNavigationController ? UINavigationController(rootViewController: viewController) : viewController
     }

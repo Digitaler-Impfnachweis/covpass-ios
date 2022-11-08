@@ -36,6 +36,16 @@ open class SelectStateOnboardingViewController: UIViewController {
         configureView()
         configureInputView()
     }
+    
+    open override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        UIAccessibility.post(notification: .layoutChanged, argument: viewModel.openingAnnounce)
+    }
+    
+    open override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        UIAccessibility.post(notification: .layoutChanged, argument: viewModel.closingAnnounce)
+    }
 
     // MARK: - Methods
 
@@ -69,6 +79,7 @@ open class SelectStateOnboardingViewController: UIViewController {
             self?.viewModel
                 .showFederalStateSelection()
                 .done {
+                    UIAccessibility.post(notification: .layoutChanged, argument: self?.viewModel.choosenState)
                     self?.stateSelection.valueLabel.text = self?.viewModel.inputValue
                 }
                 .cauterize()

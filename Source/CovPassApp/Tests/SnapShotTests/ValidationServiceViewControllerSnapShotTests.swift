@@ -25,7 +25,8 @@ class ValidationServiceViewControllerSnapShotTests: BaseSnapShotTests {
                                   url: ValidationServiceInitialisation.mock.privacyUrl,
                                   closeButtonShown: false,
                                   isToolbarShown: true,
-                                  accessibilityAnnouncement: "")
+                                  openingAnnounce: "",
+                                  closingAnnounce: "")
         let vc = WebviewViewController(viewModel: vm)
         
         verifyView(view: vc.view)

@@ -41,10 +41,11 @@ struct ConsentExchangeRouter: ConsentExchangeRoutable {
     }
 
     func routeToPrivacyStatement(url: URL) {
-        let webViewScene = WebviewSceneFactory(title: "app_information_title_datenschutz".localized,
-                                               url: url,
-                                               isToolbarShown: true,
-                                               accessibilityAnnouncement: "accessibility_app_information_datenschutz_announce".localized)
-        sceneCoordinator.push(webViewScene)
+        let scene = WebviewSceneFactory(title: "app_information_title_datenschutz".localized,
+                                        url: url,
+                                        isToolbarShown: true,
+                                        openingAnnounce: "accessibility_app_information_datenschutz_announce".localized,
+                                        closingAnnounce: "accessibility_app_information_datenschutz_closing_announce".localized)
+        sceneCoordinator.push(scene)
     }
 }

@@ -47,6 +47,16 @@ public final class ScanViewController: UIViewController, UINavigationControllerD
         }
         viewModel.requestCameraAccess()
     }
+    
+    public override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        UIAccessibility.post(notification: .layoutChanged, argument: viewModel.openingAnnounce)
+    }
+    
+    public override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        UIAccessibility.post(notification: .layoutChanged, argument: viewModel.closingAnnounce)
+    }
 
     // MARK: - Private
 
@@ -57,7 +67,6 @@ public final class ScanViewController: UIViewController, UINavigationControllerD
         container.addSubview(viewController.view)
         viewController.view.pinEdges(to: container)
         scanViewController = viewController
-        UIAccessibility.post(notification: .screenChanged, argument: viewModel.accessibilityScannerText)
     }
 
     private func configureToolbarView() {
@@ -166,6 +175,7 @@ extension ScanViewController: CustomToolbarViewDelegate {
             viewModel.cancel()
         case .flashLight:
             viewModel.toggleFlashlight()
+            UIAccessibility.post(notification: .layoutChanged, argument: viewModel.currentTorchWasTurnedVoiceOverOptions)
             toolbarView.leftButton2VoiceOverSettings = viewModel.currentTorchVoiceOverOptions
         case .documentPicker:
             viewModel.documentPicker()

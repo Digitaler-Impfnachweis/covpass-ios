@@ -17,7 +17,8 @@ private enum Constants {
     enum Accessibility {
         static let addCertificate = "accessibility_vaccination_start_screen_label_add_certificate".localized
         static let moreInformation = "accessibility_vaccination_start_screen_label_information".localized
-        static let announcement = "accessibility_start_screen_info_announce".localized
+        static let openingAnnouncment = "accessibility_start_screen_info_announce".localized
+        static let closingAnnouncment = "accessibility_start_screen_info_closing_announce".localized
     }
     enum Config {
         static let privacySrcDe = "privacy-covpass-de"
@@ -68,7 +69,8 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
     var hasCertificates: Bool { certificateList.certificates.count > 0 }
     var accessibilityAddCertificate = Constants.Accessibility.addCertificate
     var accessibilityMoreInformation = Constants.Accessibility.moreInformation
-    var accessibilityAnnouncement = Constants.Accessibility.announcement
+    var openingAnnouncment = Constants.Accessibility.openingAnnouncment
+    var closingAnnouncment = Constants.Accessibility.closingAnnouncment
     var isLoading: Bool = false {
         didSet {
             delegate?.viewModelDidUpdate()

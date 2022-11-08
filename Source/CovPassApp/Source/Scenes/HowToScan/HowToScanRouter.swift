@@ -26,11 +26,17 @@ class HowToScanRouter: HowToScanRouterProtocol {
 
     func showMoreInformation() {
         let title: String = "app_information_title_faq".localized
-        let webViewScene = WebviewSceneFactory(title: title,
-                                               url: URL(string: Locale.current.isGerman() ? "https://www.digitaler-impfnachweis-app.de/webviews/client-app/faq/" : "https://www.digitaler-impfnachweis-app.de/en/webviews/client-app/faq/")!,
-                                               closeButtonShown: true,
-                                               embedInNavigationController: true,
-                                               accessibilityAnnouncement: title)
-        sceneCoordinator.present(webViewScene)
+        let germanUrl = "https://www.digitaler-impfnachweis-app.de/webviews/client-app/faq/"
+        let englishUrl = "https://www.digitaler-impfnachweis-app.de/en/webviews/client-app/faq/"
+        let url = URL(string: Locale.current.isGerman() ? germanUrl : englishUrl)!
+        let faqTitleOpen = "accessibility_app_information_title_faq_announce".localized
+        let faqTitleClose = "accessibility_app_information_title_faq_announce_closing".localized
+        let factory = WebviewSceneFactory(title: title,
+                                          url: url,
+                                          closeButtonShown: true,
+                                          embedInNavigationController: true,
+                                          openingAnnounce: faqTitleOpen,
+                                          closingAnnounce: faqTitleClose)
+        sceneCoordinator.present(factory)
     }
 }

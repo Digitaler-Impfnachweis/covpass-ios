@@ -1218,6 +1218,26 @@
 
 /********** app information **********/
 
+"accessibility_app_information_title_accessibility_statement_announce" = "Die Ansicht \"Barrierefreiheitserklärung\" wurde geöffnet";
+
+"accessibility_app_information_title_accessibility_statement_announce_closing" = "Die Ansicht \"Barrierefreiheitserklärung\" wurde geschlossen";
+
+"accessibility_app_information_title_legal_information_announce" = "Die Ansicht \"Impressum\" wurde geöffnet";
+
+"accessibility_app_information_title_legal_information_announce_closing" = "Die Ansicht \"Impressum\" wurde geschlossen";
+
+"accessibility_app_information_title_simple_language_announce" = "Die Ansicht \"Leichte Sprache\" wurde geöffnet";
+
+"accessibility_app_information_title_simple_language_announce_closing" = "Die Ansicht \"Leichte Sprache\" wurde geschlossen";
+
+"accessibility_app_information_title_faq_announce" = "Die Ansicht \"Häufige Fragen\" wurde geöffnet";
+
+"accessibility_app_information_title_faq_announce_closing" = "Die Ansicht \"Häufige Fragen\" wurde geschlossen";
+
+"accessibility_app_information_title_us_terms_announce" = "Die Ansicht \"Nutzungsbedingungen für US-Bürgerinnen und Bürger\" wurde geöffnet";
+
+"accessibility_app_information_title_us_terms_announce_closing" = "Die Ansicht \"Nutzungsbedingungen für US-Bürgerinnen und Bürger\" wurde geschlossen";
+
 "accessibility_app_information_title_update" = "Die Ansicht \"Prüfregeln aktualisieren\" wurde geöffnet";
 
 "accessibility_app_information_title_update_closing_announce" = "Die Ansicht \"Prüfregeln aktualisieren\" wurde geschlossen";
@@ -1240,7 +1260,27 @@
 
 "accessibility_app_information_label_back" = "Zurück zum Startbildschirm";
 
-"accessibility_app_information_title_informationt_announce" = "Die Ansicht \"Informationen\" wurde geöffnet";
+"accessibility_app_information_title_information_announce" = "Die Ansicht \"Informationen\" wurde geöffnet";
+
+"accessibility_app_information_title_information_closing_announce" = "Die Ansicht \"Informationen\" wurde geschlossen";
+
+"accessibility_app_information_title_checking_rules_announce" = "Die Ansicht \"Prüfregeln aktualisieren\" wurde geöffnet";
+
+"accessibility_app_information_title_checking_rules_closing_announce" = "Die Ansicht \"Prüfregeln aktualisieren\" wurde geschlossen";
+
+"accessibility_app_information_title_update_notifications_announce" = "Die Ansicht \"Update-Benachrichtigungen\" wurde geöffnet";
+
+"accessibility_app_information_title_update_notifications_closing_announce" = "Die Ansicht \"Update-Benachrichtigungen\" wurde geschlossen";
+
+"accessibility_app_information_title_federal_state_rules_announce" = "Die Ansicht \"Bundeslandregeln\" wurde geöffnet";
+
+"accessibility_app_information_title_federal_state_rules_icon" = "Bundesland auswählen";
+
+"accessibility_popup_valid_certificate_germany_announce" = "Die Ansicht \"Gültigkeit von Zertifikaten in Deutschland\" wurde geöffnet";
+
+"accessibility_popup_valid_certificate_germany_closing_announce" = "Die Ansicht \"Gültigkeit von Zertifikaten in Deutschland\" wurde geschlossen";
+
+"accessibility_app_information_title_federal_state_rules_closing_announce" = "Die Ansicht \"Bundeslandregeln\" wurde geschlossen";
 
 "accessibility_app_information_title_information_closing_announce" = "Die Ansicht \"Informationen\" wurde geschlossen";
 
@@ -1745,7 +1785,7 @@
 
 "infschg_cert_overview_mask_time_from" = "Befreit ab %@";
 
-"infschg_cert_overview_mask_hint_optional" = "Sie sind in Deutschland in den meisten Bereichen vom Tragen einer Maske befreit. Beachten Sie, dass die Befreiung nicht für Orte gilt, an denen eine besondere Maskenpflicht gilt: z.B. Arztpraxen, Krankenhäuser oder dem Personenfernverkehr.";
+"infschg_cert_overview_mask_hint_optional" = "Sie sind in diesem Bundesland  in einigen Situationen von der Maskenpflicht ausgenommen; eine Maske ist dennoch empfohlen.";
 
 "infschg_cert_overview_mask_hint_mandatory" = "In ihrem Bundesland können Sie bis zu 24h von der Maskenpflicht befreit werden. Beachten Sie, dass in Ihrem Bundesland andere Bestimmungen gelten können. Denken Sie auch daran, dass die Befreiung nicht für Orte gilt, an denen eine besondere Maskenpflicht gilt: z.B. Arztpraxen, Krankenhäuser oder dem Personenfernverkehr.";
 

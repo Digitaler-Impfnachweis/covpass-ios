@@ -68,7 +68,12 @@ class CertificatesOverviewViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        UIAccessibility.post(notification: .layoutChanged, argument: viewModel.accessibilityAnnouncement)
+        UIAccessibility.post(notification: .layoutChanged, argument: viewModel.openingAnnouncment)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        UIAccessibility.post(notification: .layoutChanged, argument: viewModel.closingAnnouncment)
     }
 
     // MARK: - Private

@@ -38,7 +38,12 @@ open class WebviewViewController: UIViewController {
 
     open override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        UIAccessibility.post(notification: .layoutChanged, argument: viewModel.accessibilityAnnouncement)
+        UIAccessibility.post(notification: .layoutChanged, argument: viewModel.openingAnnounce)
+    }
+    
+    open override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        UIAccessibility.post(notification: .layoutChanged, argument: viewModel.closingAnnounce)
     }
     
     private func setupTitle() {

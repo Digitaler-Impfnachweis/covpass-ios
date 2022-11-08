@@ -46,7 +46,8 @@ struct OnboardingRouter: OnboardingRouterProtocol {
                                                url: staticHtmlUrl!,
                                                closeButtonShown: true,
                                                embedInNavigationController: true,
-                                               accessibilityAnnouncement: "accessibility_app_information_datenschutz_announce".localized)
+                                               openingAnnounce: "accessibility_app_information_datenschutz_announce".localized,
+                                               closingAnnounce: "accessibility_app_information_datenschutz_closing_announce".localized)
         sceneCoordinator.present(webViewScene)
     }
 }

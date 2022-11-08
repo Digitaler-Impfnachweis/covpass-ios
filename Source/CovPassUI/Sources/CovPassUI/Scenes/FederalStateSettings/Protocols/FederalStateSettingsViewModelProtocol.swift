@@ -10,10 +10,13 @@ import Foundation
 import PromiseKit
 
 public protocol FederalStateSettingsViewModelProtocol {
-    var title: String { get set }
-    var copyText: String { get set }
-    var inputTitle: String { get set }
+    var title: String { get }
+    var copyText: String { get }
+    var inputTitle: String { get }
     var inputValue: String { get }
+    var openingAnnounce: String { get }
+    var closingAnnounce: String { get }
+    var choosenState: String { get }
 
     func showFederalStateSelection() -> Promise<Void>
 }

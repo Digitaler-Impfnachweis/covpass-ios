@@ -29,13 +29,16 @@ public struct ConsentRouter: ConsentRouterProtocol {
     public func showTermsOfUse() {
         guard let url = Bundle.uiBundle.url(forResource: "us-terms-of-use", withExtension: "html") else { return }
         let title = "vaccination_fourth_onboarding_page_message_for_us_citizens_title".localized
+        let openingAnnounce = "accessibility_app_information_title_us_terms_announce".localized(bundle: .main)
+        let closingAnnounce = "accessibility_app_information_title_us_terms_announce_closing".localized(bundle: .main)
         sceneCoordinator.present(
             WebviewSceneFactory(
                 title: title,
                 url: url,
                 closeButtonShown: true,
                 embedInNavigationController: true,
-                accessibilityAnnouncement: title
+                openingAnnounce: openingAnnounce,
+                closingAnnounce: closingAnnounce
             ),
             animated: true
         )

@@ -14,6 +14,8 @@ public protocol NewRegulationsAnnouncementViewModelProtocol {
     var subtitle: String { get }
     var copyText2: String { get }
     var buttonTitle: String { get }
+    var openingAnnounce: String { get }
+    var closingAnnounce: String { get }
 
     func close()
 }

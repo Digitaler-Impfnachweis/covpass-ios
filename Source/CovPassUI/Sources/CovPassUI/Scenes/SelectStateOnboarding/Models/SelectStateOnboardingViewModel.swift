@@ -17,6 +17,11 @@ extension SelectStateOnboardingViewModel {
         public static let inputValue = "infschg_popup_choose_federal_state_box_content".localized(bundle: .main)
         public static let copy2Text = "infschg_popup_choose_federal_state_copy_2".localized(bundle: .main)
     }
+    public enum Accessibility {
+        static let openingAnnounce = "accessibility_checkapp_popup_choose_federal_state_announce".localized(bundle: .main)
+        static let choosenState = "accessibility_checkapp_popup_choose_federal_state_announce_when_chosen".localized(bundle: .main)
+        static let closingAnnounce = "accessibility_checkapp_popup_choose_federal_state_announce".localized(bundle: .main)
+    }
 }
 
 open class SelectStateOnboardingViewModel: SelectStateOnboardingViewModelProtocol {
@@ -24,11 +29,14 @@ open class SelectStateOnboardingViewModel: SelectStateOnboardingViewModelProtoco
     private var userDefaults: Persistence
     private let resolver: Resolver<Void>
 
-    public var title: String = Texts.title
-    public var copyText: String = Texts.copyText
-    public var copy2Text: String = Texts.copy2Text
-    public var inputTitle: String = Texts.inputTitle
-    public var image: UIImage = .illustrationImpfschutzgesetz
+    public let title: String = Texts.title
+    public let copyText: String = Texts.copyText
+    public let copy2Text: String = Texts.copy2Text
+    public let inputTitle: String = Texts.inputTitle
+    public let image: UIImage = .illustrationImpfschutzgesetz
+    public let openingAnnounce: String = Accessibility.openingAnnounce
+    public let closingAnnounce: String = Accessibility.closingAnnounce
+    public var choosenState: String { String(format: Accessibility.choosenState, inputValue) }
 
     public var inputValue: String {
         let federalState = userDefaults.stateSelection.isEmpty ? "" : "DE_\(userDefaults.stateSelection)".localized(bundle: .main)

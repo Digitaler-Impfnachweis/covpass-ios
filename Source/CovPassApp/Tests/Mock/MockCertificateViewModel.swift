@@ -14,6 +14,7 @@ import PromiseKit
 import UIKit
 
 class MockCertificateViewModel: CertificatesOverviewViewModelProtocol {
+    
 
     // MARK: - Test Variables
 
@@ -22,7 +23,7 @@ class MockCertificateViewModel: CertificatesOverviewViewModelProtocol {
     var configureCalled = false
     var selectedCertificateIndex: Int?
     var isLoading: Bool = false
-    
+
     // MARK: - CertificateViewModel
 
     weak var delegate: CertificatesOverviewViewModelDelegate?
@@ -30,7 +31,8 @@ class MockCertificateViewModel: CertificatesOverviewViewModelProtocol {
     var hasCertificates: Bool = false
     var accessibilityAddCertificate = "addCertificate"
     var accessibilityMoreInformation = "moreInformation"
-    var accessibilityAnnouncement = "announcement"
+    var openingAnnouncment = "announcement"
+    var closingAnnouncment: String = "closingannouncement"
     var showMultipleCertificateHolder = true
     
     func handleOpen(url: URL) -> Bool {

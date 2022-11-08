@@ -35,8 +35,14 @@ public class NewRegulationsAnnouncementViewController: UIViewController {
 
     public override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        UIAccessibility.post(notification: .layoutChanged, argument: viewModel.openingAnnounce)
     }
 
+    public override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        UIAccessibility.post(notification: .layoutChanged, argument: viewModel.closingAnnounce)
+    }
+    
     private func setupInfoHeaderView() {
         infoHeaderView.attributedTitleText = viewModel.header
             .styledAs(.header_2)

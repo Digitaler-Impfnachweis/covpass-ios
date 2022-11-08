@@ -9,12 +9,15 @@ import PromiseKit
 import UIKit
 
 public protocol SelectStateOnboardingViewModelProtocol {
-    var title: String { get set }
-    var image: UIImage { get set }
-    var copyText: String { get set }
-    var inputTitle: String { get set }
+    var title: String { get }
+    var image: UIImage { get }
+    var copyText: String { get }
+    var inputTitle: String { get }
     var inputValue: String { get }
-    var copy2Text: String { get set }
+    var copy2Text: String { get }
+    var openingAnnounce: String { get }
+    var closingAnnounce: String { get }
+    var choosenState: String { get }
     func showFederalStateSelection() -> Promise<Void>
     func close()
 }

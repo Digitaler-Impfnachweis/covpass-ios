@@ -36,10 +36,14 @@ class CertificateDetailRouter: CertificateDetailRouterProtocol, DialogRouterProt
 
     func showWebview(_ url: URL) {
         let title = "app_information_title_faq".localized
-        sceneCoordinator.present(WebviewSceneFactory(title: title,
-                                                     url: url,
-                                                     closeButtonShown: true,
-                                                     accessibilityAnnouncement: title))
+        let faqTitleOpen = "accessibility_app_information_title_faq_announce".localized
+        let faqTitleClose = "accessibility_app_information_title_faq_announce_closing".localized
+        let factory = WebviewSceneFactory(title: title,
+                                          url: url,
+                                          closeButtonShown: true,
+                                          openingAnnounce: faqTitleOpen,
+                                          closingAnnounce: faqTitleClose)
+        sceneCoordinator.present(factory)
     }
     
     @discardableResult
