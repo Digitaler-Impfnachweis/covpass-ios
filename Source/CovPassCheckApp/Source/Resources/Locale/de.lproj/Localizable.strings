@@ -195,8 +195,6 @@
 
 "accessibility_scan_dialog_camera_access_label_close" = "Schließen";
 
-"accessibility_scan_camera_announce" = "Kamera-Ansicht wurde geöffnet";
-
 "accessibility_scan_camera_closing_announce" = "Kamera-Ansicht wurde geschlossen";
 
 "error_camera_access_title" = "Die CovPassCheck-App möchte auf Ihre Kamera zugreifen.";
@@ -207,9 +205,15 @@
 
 "error_camera_access_button_allow" = "Erlauben";
 
-"accessibility_scan_camera_torch_on" = "Taschenlampe anschalten";
-
 "accessibility_scan_camera_torch_off" = "Taschenlampe ausschalten";
+
+"accessibility_scan_camera_announce" = "Kamera-Ansicht wurde geöffnet. Der QR-Code wird automatisch gescannt.";
+
+"accessibility_scan_camera_torch_turn_on" = "Taschenlampe anschalten";
+
+"accessibility_scan_camera_torch_on" = "Taschenlampe wurde angeschaltet";
+
+"accessibility_scan_camera_torch_turn_off" = "Taschenlampe wurde ausgeschaltet";
 
 "validation_check_popup_valid_vaccination_recovery_title" = "Zertifikat gültig*";
 
@@ -415,6 +419,8 @@
 
 "accessibility_app_information_title_contact_announce" = "Die Ansicht \"Kontakt\" wurde geöffnet";
 
+"accessibility_app_information_title_contact_closing_announce" = "Die Ansicht \"Kontakt\" wurde geschlossen";
+
 "app_information_message_contact_support" = "Kontakt bei technischen Fragen zur CovPassCheck-App";
 
 "app_information_message_contact_support_phone" = "Telefon: #0800–4747–002::tel:0800–4747–002#";
@@ -447,6 +453,8 @@
 
 "app_information_title_open_source" = "Open-Source-Lizenzen";
 
+"accessibility_app_information_title_open_source_closing_announce" = "Die Ansicht \"Open-Source-Lizenzen\" wurde geschlossen";
+
 "app_information_title_accessibility_statement" = "Barrierefreiheitserklärung";
 
 "app_information_title_accessibility_statement_linked" = "#Barrierefreiheitserklärung::$0#";
@@ -458,6 +466,8 @@
 "accessibility_app_information_version_number_delimiter" = "Punkt";
 
 "app_information_message_open_source" = "Die App verwendet die folgenden Open-Source-Bibliotheken:";
+
+"accessibility_app_information_title_informationt_closing_announce" = "Die Ansicht \"Informationen\" wurde geschlossen";
 
 "accessibility_app_information_open_source_label_back" = "Zurück";
 
@@ -631,6 +641,10 @@
 
 "infschg_result_mask_optional_copy_notification" = "Diese Ansicht schließt sich nach 2 Min. von selbst.";
 
+"accessibility_popup_new_rules_announce" = "Die Ansicht \"Neue gesetzliche Regelungen\" wurde geöffnet";
+
+"accessibility_popup_new_rules_closing_announce" = "Die Ansicht \"Neue gesetzliche Regelungen\" wurde geschlossen";
+
 "infschg_info_title" = "Neue gesetzliche Regelungen";
 
 "infschg_info_copy_1" = "In Deutschland tritt eine Änderung des Infektionsschutzgesetzes in Kraft. Deshalb ändert sich Ihre CovPassCheck-App ab heute auch.";
@@ -706,6 +720,12 @@
 "infschg_result_no_mask_rules_copy_2" = "Sofern das Bundesland, in dem Sie sich aufhalten, eine Maskenpflicht angeordnet hat, befreit ein negativer Schnell- oder PCR-Test bei Freizeit-, Kultur- und Sportveranstaltungen sowie in gastronomischen Einrichtungen für 24 Stunden von dieser Maskenpflicht. Ein unbeaufsichtigter durchgeführter Selbsttest genügt nicht. Ihr Bundesland kann regeln, dass auch vollständige Impfungen oder Genesungen (wenn diese höchstens drei Monate zurückliegen) von der Maskenpflicht befreien.\n\nEine Befreiung von der Maskenpflicht gilt nicht im öffentlichen Personenfernverkehr, in Krankenhäusern, Pflegeeinrichtungen und in Arztpraxen.";
 
 "infschg_start_screen_white_box_copy_2" = "Letzte Aktualisierung vor weniger als 24 Stunden";
+
+"accessibility_checkapp_popup_choose_federal_state_announce" = "Die Ansicht \"Bundesland wählen\" wurde geöffnet";
+
+"accessibility_checkapp_popup_choose_federal_state_announce_when_chosen" = "Bundesland %@ wurde ausgewählt";
+
+"accessibility_checkapp_popup_choose_federal_state_closing_announce" = "Die Ansicht \"Bundesland wählen\" wurde geschlossen";
 
 "infschg_module_choose_federal_state_title" = "Bundesland wählen";
 

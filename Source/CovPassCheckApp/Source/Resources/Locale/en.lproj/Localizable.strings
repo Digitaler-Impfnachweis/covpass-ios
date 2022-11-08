@@ -195,8 +195,6 @@
 
 "accessibility_scan_dialog_camera_access_label_close" = "Close";
 
-"accessibility_scan_camera_announce" = "Camera has been opened";
-
 "accessibility_scan_camera_closing_announce" = "Camera has been closed";
 
 "error_camera_access_title" = "The CovPassCheck app wants to access your camera.";
@@ -207,9 +205,15 @@
 
 "error_camera_access_button_allow" = "Allow";
 
-"accessibility_scan_camera_torch_on" = "Switch on torch";
-
 "accessibility_scan_camera_torch_off" = "Switch off torch";
+
+"accessibility_scan_camera_announce" = "Camera has been opened. The QR code will be scanned automatically.";
+
+"accessibility_scan_camera_torch_turn_on" = "Switch on torch";
+
+"accessibility_scan_camera_torch_on" = "Torch has been switched on";
+
+"accessibility_scan_camera_torch_turn_off" = "Torch has been switched off";
 
 "validation_check_popup_valid_vaccination_recovery_title" = "Certificate valid*";
 
@@ -415,6 +419,8 @@
 
 "accessibility_app_information_title_contact_announce" = "Contact has been opened";
 
+"accessibility_app_information_title_contact_closing_announce" = "Contact has been closed";
+
 "app_information_message_contact_support" = "Contact for technical questions about the CovPassCheck app";
 
 "app_information_message_contact_support_phone" = "Telephone: #0800–4747–002::tel:0800–4747–002#";
@@ -447,6 +453,8 @@
 
 "app_information_title_open_source" = "Open-source licences";
 
+"accessibility_app_information_title_open_source_closing_announce" = "The view \"Open-source licences\" has been closed";
+
 "app_information_title_accessibility_statement" = "Accessibility statement";
 
 "app_information_title_accessibility_statement_linked" = "#Accessibility statement::$0#";
@@ -458,6 +466,8 @@
 "accessibility_app_information_version_number_delimiter" = "point";
 
 "app_information_message_open_source" = "The app uses the following open-source libraries:";
+
+"accessibility_app_information_title_informationt_closing_announce" = "Information has been closed";
 
 "accessibility_app_information_open_source_label_back" = "Back";
 
@@ -631,6 +641,10 @@
 
 "infschg_result_mask_optional_copy_notification" = "This view will close by itself after 2 min.";
 
+"accessibility_popup_new_rules_announce" = "New state rules has been opened";
+
+"accessibility_popup_new_rules_closing_announce" = "New state rules has been opened";
+
 "infschg_info_title" = "New legal regulations";
 
 "infschg_info_copy_1" = "An amendment to the Infection Protection Act comes into force in Germany. Therefore, as of today, your CovPassCheck app will also change.";
@@ -706,6 +720,12 @@
 "infschg_result_no_mask_rules_copy_2" = "If the federal state in which you are staying has ordered a mask obligation, a negative rapid or PCR test exempts you from this mask obligation for 24 hours at recreational, cultural and sporting events and in catering establishments. An unsupervised self-test performed is not sufficient. Your state may regulate that complete vaccinations or recoveries (if these occurred no more than three months ago) also exempt you from the mask requirement.\n\nAn exemption from the mask requirement does not apply in long-distance public transport, hospitals, nursing facilities, and doctors' offices.";
 
 "infschg_start_screen_white_box_copy_2" = "Last updated less than 24 hours ago";
+
+"accessibility_checkapp_popup_choose_federal_state_announce" = "Choose federal state has been opened";
+
+"accessibility_checkapp_popup_choose_federal_state_announce_when_chosen" = "Federal state %@ was selected";
+
+"accessibility_checkapp_popup_choose_federal_state_closing_announce" = "Choose federal state has been closed";
 
 "infschg_module_choose_federal_state_title" = "Choose federal state";
 
