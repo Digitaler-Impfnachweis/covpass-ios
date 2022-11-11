@@ -71,7 +71,7 @@ class ValidatorOverviewRouter: ValidatorOverviewRouterProtocol {
         )
     }
     
-    func showNewRegulationsAnnouncement() -> PromiseKit.Promise<Void> {
+    func showNewRegulationsAnnouncement() -> Promise<Void> {
         sceneCoordinator.present(NewRegulationsAnnouncementSceneFactory())
     }
     
@@ -154,19 +154,19 @@ class ValidatorOverviewRouter: ValidatorOverviewRouterProtocol {
     
     // MARK: Ifsg22a Check
 
-    func showVaccinationCycleComplete(token: CovPassCommon.ExtendedCBORWebToken) -> PromiseKit.Promise<ValidatorDetailSceneResult> {
+    func showVaccinationCycleComplete(token: ExtendedCBORWebToken) -> Promise<ValidatorDetailSceneResult> {
         let router = VaccinationCycleCompleteResultRouter(sceneCoordinator: sceneCoordinator)
         let view = VaccinationCycleCompleteResultSceneFactory(router: router,
                                                               token: token)
         return sceneCoordinator.present(view, animated: true)
     }
     
-    func showNoIfsg22aCheckRulesNotAvailable(token: CovPassCommon.ExtendedCBORWebToken) -> PromiseKit.Promise<ValidatorDetailSceneResult> {
+    func showNoIfsg22aCheckRulesNotAvailable(token: ExtendedCBORWebToken) -> Promise<ValidatorDetailSceneResult> {
 #warning("TODO: finalize in upcoming sotries")
         return .value(.close)
     }
     
-    func showIfsg22aCheckDifferentPerson(token1OfPerson: CovPassCommon.ExtendedCBORWebToken, token2OfPerson: CovPassCommon.ExtendedCBORWebToken) -> PromiseKit.Promise<ValidatorDetailSceneResult> {
+    func showIfsg22aCheckDifferentPerson(token1OfPerson: ExtendedCBORWebToken, token2OfPerson: ExtendedCBORWebToken) -> Promise<ValidatorDetailSceneResult> {
 #warning("TODO: finalize in upcoming sotries")
         return .value(.close)
     }
@@ -175,14 +175,16 @@ class ValidatorOverviewRouter: ValidatorOverviewRouterProtocol {
 #warning("TODO: finalize in upcoming sotries")
     }
     
-    func showIfsg22aNotComplete(token: CovPassCommon.ExtendedCBORWebToken) -> PromiseKit.Promise<ValidatorDetailSceneResult> {
+    func showIfsg22aNotComplete(token: ExtendedCBORWebToken) -> Promise<ValidatorDetailSceneResult> {
 #warning("TODO: finalize in upcoming sotries")
         return .value(.close)
     }
     
-    func showIfsg22aCheckError(token: CovPassCommon.ExtendedCBORWebToken?) -> PromiseKit.Promise<ValidatorDetailSceneResult> {
-#warning("TODO: finalize in upcoming sotries")
-        return .value(.close)
+    func showIfsg22aCheckError(token: ExtendedCBORWebToken?) -> Promise<ValidatorDetailSceneResult> {
+        let router = CertificateInvalidResultRouter(sceneCoordinator: sceneCoordinator)
+        let view = CertificateInvalidResultSceneFactory(router: router,
+                                                              token: token)
+        return sceneCoordinator.present(view, animated: true)
     }
     
     func showIfsg22aCheckTestIsNotAllowed(token: ExtendedCBORWebToken?) -> Promise<ValidatorDetailSceneResult> {
