@@ -382,6 +382,10 @@ public extension Array where Element == ExtendedCBORWebToken {
         filterRecoveries.map{ $0.recoveries }.compactMap{$0}.flatMap{$0}
     }
     
+    var tests: [Test] {
+        filterTests.map{ $0.tests }.compactMap{$0}.flatMap{$0}
+    }
+    
     var firstNotBoostedValidFullImmunization: ExtendedCBORWebToken? {
         first(where: {
             guard $0.isNotRevoked, $0.isNotExpired, $0.isNotInvalid, let v = $0.firstVaccination else {
@@ -628,6 +632,14 @@ public extension Array where Element == ExtendedCBORWebToken {
         guard let joinedDgcs = dgcs.joinCertificates() else { return nil }
         guard var certificate = first?.vaccinationCertificate else { return nil }
         certificate.hcert.dgc = joinedDgcs
+        return certificate
+    }
+    
+    var joinedExtendedTokens: ExtendedCBORWebToken? {
+        let dgcs = map(\.vaccinationCertificate.hcert.dgc)
+        guard let joinedDgcs = dgcs.joinCertificates() else { return nil }
+        guard var certificate = first else { return nil }
+        certificate.vaccinationCertificate.hcert.dgc = joinedDgcs
         return certificate
     }
 }

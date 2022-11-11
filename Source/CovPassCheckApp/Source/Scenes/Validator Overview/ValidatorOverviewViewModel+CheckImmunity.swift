@@ -48,7 +48,13 @@ extension ValidatorOverviewViewModel {
              router.showIfsg22aCheckSameCert()
             return .value(.close)
         case let .vaccinationCycleIsNotComplete(token):
-            return router.showIfsg22aNotComplete(token: token)
+            if token.countOfTokens == 1 {
+                return router.showIfsg22aNotComplete(token: token, isThirdScan: false)
+            } else if token.countOfTokens == 2 {
+                return router.showIfsg22aNotComplete(token: token, isThirdScan: true)
+            } else {
+                return router.showIfsg22aIncompleteResult(token: token)
+            }
         case .none, .invalidDueToRules(_), .invalidDueToTechnicalReason(_):
             return router.showIfsg22aCheckError(token: nil)
         }
@@ -77,5 +83,13 @@ extension ValidatorOverviewViewModel {
                 return .value(.close)
             }
         }
+    }
+}
+
+private extension ExtendedCBORWebToken {
+    var countOfTokens: Int {
+        (vaccinationCertificate.hcert.dgc.v?.count ?? 0) +
+        (vaccinationCertificate.hcert.dgc.r?.count ?? 0) +
+        (vaccinationCertificate.hcert.dgc.t?.count ?? 0)
     }
 }

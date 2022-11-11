@@ -34,6 +34,7 @@ class ValidatorMockRouter: ValidatorOverviewRouterProtocol {
     var showIfsg22aNotCompleteExpectation = XCTestExpectation(description: "showIfsg22aCheckSecondScanAllowedExpectation")
     var showIfsg22aCheckErrorExpectation = XCTestExpectation(description: "showIfsg22aCheckTechnicalErrorExpectation")
     var showIfsg22aCheckTestIsNotAllowedExpectation = XCTestExpectation(description: "showIfsg22aCheckTestIsNotAllowedExpectation")
+    var showIfsg22aIncompleteResultExpectation = XCTestExpectation(description: "showIfsg22aIncompleteResultExpectation")
     
     func showAppInformation(userDefaults: Persistence) {
         
@@ -124,7 +125,7 @@ class ValidatorMockRouter: ValidatorOverviewRouterProtocol {
         showIfsg22aCheckSameCertExpectation.fulfill()
     }
 
-    func showIfsg22aNotComplete(token: ExtendedCBORWebToken) -> Promise<ValidatorDetailSceneResult> {
+    func showIfsg22aNotComplete(token: ExtendedCBORWebToken, isThirdScan: Bool) -> Promise<ValidatorDetailSceneResult> {
         showIfsg22aNotCompleteExpectation.fulfill()
         return .value(.close)
     }
@@ -136,6 +137,11 @@ class ValidatorMockRouter: ValidatorOverviewRouterProtocol {
     
     func showIfsg22aCheckTestIsNotAllowed(token: ExtendedCBORWebToken?) -> Promise<ValidatorDetailSceneResult> {
         showIfsg22aCheckTestIsNotAllowedExpectation.fulfill()
+        return .value(.close)
+    }
+    
+    func showIfsg22aIncompleteResult(token: ExtendedCBORWebToken) -> Promise<ValidatorDetailSceneResult> {
+        showIfsg22aIncompleteResultExpectation.fulfill()
         return .value(.close)
     }
 }

@@ -276,6 +276,9 @@ public extension UIImage {
     @ImageLoader(name: "certificate_invalid")
     private(set) static var certificateInvalid
 
+    @ImageLoader(name: "card_empty")
+    private(set) static var cardEmpty
+
     @ImageLoader(name: "start-status-full-blue")
     private(set) static var startStatusFullBlue
 

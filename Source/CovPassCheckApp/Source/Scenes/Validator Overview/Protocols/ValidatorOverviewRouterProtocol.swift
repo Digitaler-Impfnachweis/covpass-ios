@@ -38,7 +38,8 @@ protocol CheckImmunityRouterProtocol {
     func showNoIfsg22aCheckRulesNotAvailable(token: ExtendedCBORWebToken) -> Promise<ValidatorDetailSceneResult>
     func showIfsg22aCheckDifferentPerson(token1OfPerson: ExtendedCBORWebToken, token2OfPerson: ExtendedCBORWebToken) -> Promise<ValidatorDetailSceneResult>
     func showIfsg22aCheckSameCert()
-    func showIfsg22aNotComplete(token: ExtendedCBORWebToken) -> Promise<ValidatorDetailSceneResult>
+    func showIfsg22aNotComplete(token: ExtendedCBORWebToken, isThirdScan: Bool) -> Promise<ValidatorDetailSceneResult>
+    func showIfsg22aIncompleteResult(token: ExtendedCBORWebToken) -> Promise<ValidatorDetailSceneResult>
     func showIfsg22aCheckError(token: ExtendedCBORWebToken?) -> Promise<ValidatorDetailSceneResult>
     func showIfsg22aCheckTestIsNotAllowed(token: ExtendedCBORWebToken?) -> Promise<ValidatorDetailSceneResult>
 }

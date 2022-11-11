@@ -63,8 +63,10 @@ struct CheckIfsg22aUseCase {
            additionalToken == token {
             return .init(error: CheckIfsg22aUseCaseError.secondScanSameToken(token))
         }
-        guard holderStatus.vaccinationCycleIsComplete(tokensForIfsg22aCheck()) else {
-            return .init(error: CheckIfsg22aUseCaseError.vaccinationCycleIsNotComplete(token))
+        let tokens = tokensForIfsg22aCheck()
+        guard holderStatus.vaccinationCycleIsComplete(tokens) else {
+            let joinedTokens = tokens.joinedExtendedTokens ?? token
+            return .init(error: CheckIfsg22aUseCaseError.vaccinationCycleIsNotComplete(joinedTokens))
         }
         if let additionalToken = additionalToken,
            additionalToken.vaccinationCertificate.hcert.dgc.nam != token.vaccinationCertificate.hcert.dgc.nam ||

@@ -1,0 +1,87 @@
+//
+//  SecondScanViewModel.swift
+//
+//  © Copyright IBM Deutschland GmbH 2021
+//  SPDX-License-Identifier: Apache-2.0
+//
+
+import CovPassUI
+import UIKit
+import CovPassCommon
+import PromiseKit
+
+struct Constant {
+    struct Keys {
+        static let title = "functional_validation_check_popup_second_scan_title".localized
+        static let subtitle = "functional_validation_check_popup_second_scan_subtitle".localized
+        static let card1Title = "functional_validation_check_popup_second_scan_blue_card_1_title".localized
+        static let card2Title = "functional_validation_check_popup_second_scan_blue_card_2_title".localized
+        static let card3Title = "functional_validation_check_popup_second_scan_blue_card_3_title".localized
+        static let card1Subtitle = "functional_validation_check_popup_second_scan_blue_card_1_subtitle".localized
+        static let card2Subtitle = "functional_validation_check_popup_second_scan_blue_card_2_subtitle".localized
+        static let card3Subtitle = "functional_validation_check_popup_second_scan_blue_card_3_subtitle".localized
+        static let hintTitle = "functional_validation_check_popup_second_scan_hint_title".localized
+        static let hintSubtitle = "functional_validation_check_popup_second_scan_hint_copy".localized
+        static let startOverButtonTitle = "technical_validation_check_popup_valid_vaccination_button_1_title".localized
+        static let scanNextButtonTitle = "validation_check_popup_valid_vaccination_button_title".localized
+    }
+}
+
+class SecondScanViewModel: SecondScanViewModelProtocol {
+    
+    var title: String = Constant.Keys.title
+    var subtitle: String = Constant.Keys.subtitle
+    var thirdScanViewIsHidden: Bool { isThirdScan ? false : true }
+    var firstScanTitle: String = Constant.Keys.card1Title
+    var firstScanSubtitle: String = Constant.Keys.card1Subtitle
+    var firstScanIcon: UIImage = .statusPartialCircle
+    var secondScanTitle: String = Constant.Keys.card2Title
+    var secondScanSubtitle: String = Constant.Keys.card2Subtitle
+    var secondScanIcon: UIImage { isThirdScan ? .statusPartialCircle : .cardEmpty }
+    var thirdScanTitle: String = Constant.Keys.card3Title
+    var thirdScanSubtitle: String = Constant.Keys.card3Subtitle
+    var thirdScanIcon: UIImage = .cardEmpty
+    var hintTitle: String = Constant.Keys.hintTitle
+    var hintSubtitle: String = Constant.Keys.hintSubtitle
+    var hintImage: UIImage = .warning
+    let countdownTimerModel: CountdownTimerModel
+    var scanNextButtonTitle: String = Constant.Keys.scanNextButtonTitle
+    var startOverButtonTitle: String = Constant.Keys.startOverButtonTitle
+    var delegate: ViewModelDelegate?
+    private var isThirdScan: Bool
+    private var token: ExtendedCBORWebToken
+    private var resolver: Resolver<ValidatorDetailSceneResult>
+
+    init(resolver: Resolver<ValidatorDetailSceneResult>,
+         isThirdScan: Bool,
+         token: ExtendedCBORWebToken,
+         countdownTimerModel: CountdownTimerModel) {
+        self.resolver = resolver
+        self.token = token
+        self.isThirdScan = isThirdScan
+        self.countdownTimerModel = countdownTimerModel
+        countdownTimerModel.onUpdate = onCountdownTimerModelUpdate
+        countdownTimerModel.start()
+    }
+    
+    private func onCountdownTimerModelUpdate(countdownTimerModel: CountdownTimerModel) {
+        if countdownTimerModel.shouldDismiss {
+            cancel()
+        } else {
+            delegate?.viewModelDidUpdate()
+        }
+    }
+    
+    func startOver() {
+        resolver.fulfill(.startOver)
+    }
+
+    func scanNext() {
+        resolver.fulfill(.secondScan(token))
+    }
+    
+    func cancel() {
+        resolver.fulfill(.close)
+    }
+
+}

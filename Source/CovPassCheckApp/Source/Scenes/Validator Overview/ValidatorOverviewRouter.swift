@@ -12,7 +12,7 @@ import PromiseKit
 import Scanner
 import UIKit
 
-enum ValidatorDetailSceneResult {
+enum ValidatorDetailSceneResult: Equatable {
     case close
     case secondScan(ExtendedCBORWebToken)
     case startOver
@@ -163,21 +163,25 @@ class ValidatorOverviewRouter: ValidatorOverviewRouterProtocol {
     
     func showNoIfsg22aCheckRulesNotAvailable(token: ExtendedCBORWebToken) -> Promise<ValidatorDetailSceneResult> {
 #warning("TODO: finalize in upcoming sotries")
+        print("showNoIfsg22aCheckRulesNotAvailable")
         return .value(.close)
     }
     
     func showIfsg22aCheckDifferentPerson(token1OfPerson: ExtendedCBORWebToken, token2OfPerson: ExtendedCBORWebToken) -> Promise<ValidatorDetailSceneResult> {
+        print("showIfsg22aCheckDifferentPerson")
 #warning("TODO: finalize in upcoming sotries")
         return .value(.close)
     }
     
     func showIfsg22aCheckSameCert() {
+        print("showIfsg22aCheckSameCert")
 #warning("TODO: finalize in upcoming sotries")
     }
     
-    func showIfsg22aNotComplete(token: ExtendedCBORWebToken) -> Promise<ValidatorDetailSceneResult> {
-#warning("TODO: finalize in upcoming sotries")
-        return .value(.close)
+    func showIfsg22aNotComplete(token: ExtendedCBORWebToken, isThirdScan: Bool) -> Promise<ValidatorDetailSceneResult> {
+        let view = SecondScanSceneFactory(isThirdScan: isThirdScan,
+                                          token: token)
+        return sceneCoordinator.present(view, animated: true)
     }
     
     func showIfsg22aCheckError(token: ExtendedCBORWebToken?) -> Promise<ValidatorDetailSceneResult> {
@@ -188,6 +192,11 @@ class ValidatorOverviewRouter: ValidatorOverviewRouterProtocol {
     }
     
     func showIfsg22aCheckTestIsNotAllowed(token: ExtendedCBORWebToken?) -> Promise<ValidatorDetailSceneResult> {
+#warning("TODO: finalize in upcoming sotries")
+        return .value(.close)
+    }
+    
+    func showIfsg22aIncompleteResult(token: ExtendedCBORWebToken) -> Promise<ValidatorDetailSceneResult> {
 #warning("TODO: finalize in upcoming sotries")
         return .value(.close)
     }
