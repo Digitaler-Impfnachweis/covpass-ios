@@ -155,8 +155,10 @@ class ValidatorOverviewRouter: ValidatorOverviewRouterProtocol {
     // MARK: Ifsg22a Check
 
     func showVaccinationCycleComplete(token: CovPassCommon.ExtendedCBORWebToken) -> PromiseKit.Promise<ValidatorDetailSceneResult> {
-#warning("TODO: finalize in upcoming Pull request")
-        return .value(.close)
+        let router = VaccinationCycleCompleteResultRouter(sceneCoordinator: sceneCoordinator)
+        let view = VaccinationCycleCompleteResultSceneFactory(router: router,
+                                                              token: token)
+        return sceneCoordinator.present(view, animated: true)
     }
     
     func showNoIfsg22aCheckRulesNotAvailable(token: CovPassCommon.ExtendedCBORWebToken) -> PromiseKit.Promise<ValidatorDetailSceneResult> {

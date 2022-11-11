@@ -1,0 +1,20 @@
+//
+//  VaccinationCycleCompleteResultRouterMock.swift
+//
+//  © Copyright IBM Deutschland GmbH 2021
+//  SPDX-License-Identifier: Apache-2.0
+//
+
+@testable import CovPassCheckApp
+import CovPassCommon
+import XCTest
+
+final class VaccinationCycleCompleteResultRouterMock: VaccinationCycleCompleteResultRouterProtocol {
+    let revokeExpectation = XCTestExpectation(description: "revokeExpectation")
+    var receivedRevocationKeyFilename: String?
+
+    func revoke(token: ExtendedCBORWebToken, revocationKeyFilename: String) {
+        receivedRevocationKeyFilename = revocationKeyFilename
+        revokeExpectation.fulfill()
+    }
+}

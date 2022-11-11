@@ -270,6 +270,9 @@ public extension UIImage {
     @ImageLoader(name: "infoWhite")
     private(set) static var infoWhite
 
+    @ImageLoader(name: "vaccination_cycle_complete")
+    private(set) static var vaccinationCycleComplete
+
     @ImageLoader(name: "start-status-full-blue")
     private(set) static var startStatusFullBlue
 

@@ -153,6 +153,18 @@
 		09AC1E072757B6C9008356CD /* VaccinationResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09AC1E002757B6C9008356CD /* VaccinationResultViewModel.swift */; };
 		09AC1E082757B6C9008356CD /* TestResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09AC1E012757B6C9008356CD /* TestResultViewModel.swift */; };
 		09AE255828E72D2E006AB2A8 /* ScanAndParseQRCodeAndCheckMaskRulesUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09AE255728E72D2E006AB2A8 /* ScanAndParseQRCodeAndCheckMaskRulesUseCase.swift */; };
+		09AE255828E72D2E006AB2A8 /* ScanAndParseQRCodeAndCheckMaskRulesUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09AE255728E72D2E006AB2A8 /* ScanAndParseQRCodeAndCheckMaskRulesUseCase.swift */; };
+		09B20752291BC21000C4E370 /* VaccinationCycleCompleteResultViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09B20749291BC21000C4E370 /* VaccinationCycleCompleteResultViewController.xib */; };
+		09B20753291BC21000C4E370 /* VaccinationCycleCompleteResultRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B2074A291BC21000C4E370 /* VaccinationCycleCompleteResultRouter.swift */; };
+		09B20754291BC21000C4E370 /* VaccinationCycleCompleteResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B2074C291BC21000C4E370 /* VaccinationCycleCompleteResultViewModel.swift */; };
+		09B20755291BC21000C4E370 /* VaccinationCycleCompleteResultSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B2074D291BC21000C4E370 /* VaccinationCycleCompleteResultSceneFactory.swift */; };
+		09B20756291BC21000C4E370 /* VaccinationCycleCompleteResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B2074E291BC21000C4E370 /* VaccinationCycleCompleteResultViewController.swift */; };
+		09B20757291BC21000C4E370 /* VaccinationCycleCompleteResultViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B20750291BC21000C4E370 /* VaccinationCycleCompleteResultViewModelProtocol.swift */; };
+		09B20758291BC21000C4E370 /* VaccinationCycleCompleteResultRouterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B20751291BC21000C4E370 /* VaccinationCycleCompleteResultRouterProtocol.swift */; };
+		09B20760291BC92E00C4E370 /* VaccinationCycleCompleteResultRouterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B2075B291BC92E00C4E370 /* VaccinationCycleCompleteResultRouterMock.swift */; };
+		09B20761291BC92E00C4E370 /* VaccinationCycleCompleteResultViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B2075D291BC92E00C4E370 /* VaccinationCycleCompleteResultViewModelTests.swift */; };
+		09B20762291BC92E00C4E370 /* VaccinationCycleCompleteResultViewControllerSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B2075E291BC92E00C4E370 /* VaccinationCycleCompleteResultViewControllerSnapshotTests.swift */; };
+		09B20763291BC92E00C4E370 /* VaccinationCycleCompleteResultSceneFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B2075F291BC92E00C4E370 /* VaccinationCycleCompleteResultSceneFactoryTests.swift */; };
 		09B4978D27FF3F3C00C86A83 /* CertificateRevocationRepositoryMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B4978C27FF3F3C00C86A83 /* CertificateRevocationRepositoryMock.swift */; };
 		09B5D240276A194C005F8FCE /* ScanCountRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B5D23F276A194C005F8FCE /* ScanCountRouter.swift */; };
 		09B5D242276ABF16005F8FCE /* ScanCountWarningViewSnapShotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B5D241276ABF16005F8FCE /* ScanCountWarningViewSnapShotTests.swift */; };
@@ -724,6 +736,18 @@
 		09AC1E002757B6C9008356CD /* VaccinationResultViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VaccinationResultViewModel.swift; sourceTree = "<group>"; };
 		09AC1E012757B6C9008356CD /* TestResultViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestResultViewModel.swift; sourceTree = "<group>"; };
 		09AE255728E72D2E006AB2A8 /* ScanAndParseQRCodeAndCheckMaskRulesUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanAndParseQRCodeAndCheckMaskRulesUseCase.swift; sourceTree = "<group>"; };
+		09AE255728E72D2E006AB2A8 /* ScanAndParseQRCodeAndCheckMaskRulesUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanAndParseQRCodeAndCheckMaskRulesUseCase.swift; sourceTree = "<group>"; };
+		09B20749291BC21000C4E370 /* VaccinationCycleCompleteResultViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VaccinationCycleCompleteResultViewController.xib; sourceTree = "<group>"; };
+		09B2074A291BC21000C4E370 /* VaccinationCycleCompleteResultRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VaccinationCycleCompleteResultRouter.swift; sourceTree = "<group>"; };
+		09B2074C291BC21000C4E370 /* VaccinationCycleCompleteResultViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VaccinationCycleCompleteResultViewModel.swift; sourceTree = "<group>"; };
+		09B2074D291BC21000C4E370 /* VaccinationCycleCompleteResultSceneFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VaccinationCycleCompleteResultSceneFactory.swift; sourceTree = "<group>"; };
+		09B2074E291BC21000C4E370 /* VaccinationCycleCompleteResultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VaccinationCycleCompleteResultViewController.swift; sourceTree = "<group>"; };
+		09B20750291BC21000C4E370 /* VaccinationCycleCompleteResultViewModelProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VaccinationCycleCompleteResultViewModelProtocol.swift; sourceTree = "<group>"; };
+		09B20751291BC21000C4E370 /* VaccinationCycleCompleteResultRouterProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VaccinationCycleCompleteResultRouterProtocol.swift; sourceTree = "<group>"; };
+		09B2075B291BC92E00C4E370 /* VaccinationCycleCompleteResultRouterMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VaccinationCycleCompleteResultRouterMock.swift; sourceTree = "<group>"; };
+		09B2075D291BC92E00C4E370 /* VaccinationCycleCompleteResultViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VaccinationCycleCompleteResultViewModelTests.swift; sourceTree = "<group>"; };
+		09B2075E291BC92E00C4E370 /* VaccinationCycleCompleteResultViewControllerSnapshotTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VaccinationCycleCompleteResultViewControllerSnapshotTests.swift; sourceTree = "<group>"; };
+		09B2075F291BC92E00C4E370 /* VaccinationCycleCompleteResultSceneFactoryTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VaccinationCycleCompleteResultSceneFactoryTests.swift; sourceTree = "<group>"; };
 		09B4978C27FF3F3C00C86A83 /* CertificateRevocationRepositoryMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertificateRevocationRepositoryMock.swift; sourceTree = "<group>"; };
 		09B5D23F276A194C005F8FCE /* ScanCountRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanCountRouter.swift; sourceTree = "<group>"; };
 		09B5D241276ABF16005F8FCE /* ScanCountWarningViewSnapShotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanCountWarningViewSnapShotTests.swift; sourceTree = "<group>"; };
@@ -1472,6 +1496,63 @@
 			path = "Validation Result";
 			sourceTree = "<group>";
 		};
+		09B20748291BC18200C4E370 /* Ifsg22a Valid Scan */ = {
+			isa = PBXGroup;
+			children = (
+				09B2074A291BC21000C4E370 /* VaccinationCycleCompleteResultRouter.swift */,
+				09B2074D291BC21000C4E370 /* VaccinationCycleCompleteResultSceneFactory.swift */,
+				09B2074E291BC21000C4E370 /* VaccinationCycleCompleteResultViewController.swift */,
+				09B20749291BC21000C4E370 /* VaccinationCycleCompleteResultViewController.xib */,
+				09B2074F291BC21000C4E370 /* Protocols */,
+				09B2074B291BC21000C4E370 /* ViewModels */,
+			);
+			path = "Ifsg22a Valid Scan";
+			sourceTree = "<group>";
+		};
+		09B2074B291BC21000C4E370 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				09B2074C291BC21000C4E370 /* VaccinationCycleCompleteResultViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		09B2074F291BC21000C4E370 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				09B20750291BC21000C4E370 /* VaccinationCycleCompleteResultViewModelProtocol.swift */,
+				09B20751291BC21000C4E370 /* VaccinationCycleCompleteResultRouterProtocol.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		09B20759291BC90C00C4E370 /* VaccinationCycleComplete */ = {
+			isa = PBXGroup;
+			children = (
+				09B2075F291BC92E00C4E370 /* VaccinationCycleCompleteResultSceneFactoryTests.swift */,
+				09B2075E291BC92E00C4E370 /* VaccinationCycleCompleteResultViewControllerSnapshotTests.swift */,
+				09B2075A291BC92E00C4E370 /* Mocks */,
+				09B2075C291BC92E00C4E370 /* ViewModels */,
+			);
+			path = VaccinationCycleComplete;
+			sourceTree = "<group>";
+		};
+		09B2075A291BC92E00C4E370 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				09B2075B291BC92E00C4E370 /* VaccinationCycleCompleteResultRouterMock.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
+		09B2075C291BC92E00C4E370 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				09B2075D291BC92E00C4E370 /* VaccinationCycleCompleteResultViewModelTests.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 		09B62BAA283779B6004FF596 /* Certificates Overview Person */ = {
 			isa = PBXGroup;
 			children = (
@@ -2004,6 +2085,7 @@
 		21FBCA36264F011800CAEF44 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				09B20748291BC18200C4E370 /* Ifsg22a Valid Scan */,
 				092C9CAD28EB900500DCFDAC /* DifferentPerson */,
 				E7FB8FA028AFB19800D9693F /* AcousticFeedbackSettings */,
 				21FBCA47264F011800CAEF44 /* App Information */,
@@ -3154,6 +3236,7 @@
 		E7CB54B427B55407002FA55E /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				09B20759291BC90C00C4E370 /* VaccinationCycleComplete */,
 				098ED5CF28EC2AC900FFE446 /* DIfferentPerson */,
 				E7FB8FA328AFC43F00D9693F /* AcousticFeebackSettings */,
 				E7CB54B527B55411002FA55E /* App Information */,
@@ -3564,6 +3647,7 @@
 				E7DE167228AFF02F007FDF46 /* CovpassCheck-Activated.wav in Resources */,
 				E7DE166E28AFDE84007FDF46 /* AcousticFeedbackSettingsViewController.xib in Resources */,
 				88BEE04226550E2500479E5E /* privacy-covpasscheck-de.html in Resources */,
+				09B20752291BC21000C4E370 /* VaccinationCycleCompleteResultViewController.xib in Resources */,
 				E712855C27EC7FEF00006F9B /* revocation-trust-key-debug.pem in Resources */,
 				2181C1BD264F053000DE7412 /* Localizable.strings in Resources */,
 				2181C168264F035A00DE7412 /* ValidatorOverviewViewController.xib in Resources */,
@@ -3936,8 +4020,10 @@
 				2181C172264F037000DE7412 /* WelcomeViewController.swift in Sources */,
 				E7DEFB5A28E70BD8005B1D76 /* MaskRequiredSecondCertificateReasonViewModelProtocol.swift in Sources */,
 				E7C8A01E28E2FD67002D63E0 /* MaskRequiredInvalidSignatureReasonViewModel.swift in Sources */,
+				09B20755291BC21000C4E370 /* VaccinationCycleCompleteResultSceneFactory.swift in Sources */,
 				096EB4DD27D768D3005CE76F /* RevocationSettingsRouterProtocol.swift in Sources */,
 				E7F863AB28DA133600F7D54C /* NewRegulationsAnnouncementSceneFactory.swift in Sources */,
+				09B20757291BC21000C4E370 /* VaccinationCycleCompleteResultViewModelProtocol.swift in Sources */,
 				2181C161264F035500DE7412 /* ValidatorOverviewViewController.swift in Sources */,
 				2181C19F264F03B800DE7412 /* MainSceneFactory.swift in Sources */,
 				E7D8062C2890493D00743DAE /* CheckSituationSceneFactory.swift in Sources */,
@@ -3963,6 +4049,7 @@
 				E72A2DAA2897EA65002BFBBB /* CertificateRevocationWrapperRepository+Factory.swift in Sources */,
 				E75F7DD528DDBE7C00675093 /* MaskRequiredResultRouterProtocol.swift in Sources */,
 				E73453F2286DF4DE00ED7E00 /* CertificateRevocationFilesystemDataSource+Factory.swift in Sources */,
+				09B20753291BC21000C4E370 /* VaccinationCycleCompleteResultRouter.swift in Sources */,
 				E79CF9EC27E8923C00C4619E /* URLSession+CertificateRevocation.swift in Sources */,
 				2181C174264F037000DE7412 /* WelcomeSceneFactory.swift in Sources */,
 				E7DE166D28AFDE84007FDF46 /* AcousticFeedbackSettingsViewController.swift in Sources */,
@@ -3976,9 +4063,12 @@
 				092C9CBA28EB90DD00DCFDAC /* DifferentPersonViewModelProtocol.swift in Sources */,
 				E735E0B3286608F90032025C /* ScanRouter.swift in Sources */,
 				098748B027FB24ED00A28414 /* CheckMaskRulesUseCase.swift in Sources */,
+				09B20758291BC21000C4E370 /* VaccinationCycleCompleteResultRouterProtocol.swift in Sources */,
+				098748B027FB24ED00A28414 /* CheckMaskRulesUseCase.swift in Sources */,
 				38E94DEC266123520015553C /* VaccinationRepositoryExtension.swift in Sources */,
 				E7C13AA4284518D5002BC4F5 /* CertificateRevocationHTTPClient+Factory.swift in Sources */,
 				E7B76647286B7282003CAEB4 /* QRCodeImportResult+CovPassCheck.swift in Sources */,
+				09B20754291BC21000C4E370 /* VaccinationCycleCompleteResultViewModel.swift in Sources */,
 				2181C1B3264F040500DE7412 /* StringLocalization.swift in Sources */,
 				88AB2AC025FA433F00D4EA52 /* AppDelegate.swift in Sources */,
 				2181C162264F035500DE7412 /* ValidatorOverviewRouter.swift in Sources */,
@@ -3988,6 +4078,8 @@
 				E75F7DE728DDC66700675093 /* MaskRequiredResultViewModel.swift in Sources */,
 				E76509ED28E5DAAC00BC4595 /* NoMaskRulesResultRouter.swift in Sources */,
 				0927996A291AAB2B00296B68 /* ScanAndParseQRCodeAndCheckIfsg22aUseCase.swift in Sources */,
+				0927996A291AAB2B00296B68 /* ScanAndParseQRCodeAndCheckIfsg22aUseCase.swift in Sources */,
+				09B20756291BC21000C4E370 /* VaccinationCycleCompleteResultViewController.swift in Sources */,
 				0938F7DE289914B5001469C1 /* CheckSituationResolvableSceneFactory.swift in Sources */,
 				3829A30C269CFF7F00B8346C /* DCCCertLogicExtension.swift in Sources */,
 				E7DE165A28AFCEB4007FDF46 /* AcousticFeedbackSettingsSceneFactory.swift in Sources */,
@@ -4039,6 +4131,7 @@
 				098E44D4282D88DA00411776 /* VaccinationExtensionTests.swift in Sources */,
 				092090E027060FC30000713F /* ValidatorOverviewViewModelTests.swift in Sources */,
 				E7DF081F28AE8EFC0089FDA0 /* Persistence+ValidatorOverviewTests.swift in Sources */,
+				09B20761291BC92E00C4E370 /* VaccinationCycleCompleteResultViewModelTests.swift in Sources */,
 				096EB4E427D7690F005CE76F /* RevocationSettingsMocks.swift in Sources */,
 				09E854372799932A0051AEEE /* AppInformationViewControllerSnapShotTests.swift in Sources */,
 				E7D1F0A22861E04700FA7465 /* ScanSceneFactoryTests.swift in Sources */,
@@ -4046,6 +4139,7 @@
 				E773F5B228B378480051AE75 /* AcousticFeedbackSettingsViewControllerSnapshotTests.swift in Sources */,
 				E740448928901E5200B53AE3 /* CountdownTimerModelMock.swift in Sources */,
 				09A27BCA270F3A2C000FE4F9 /* TestExtension.swift in Sources */,
+				09B20762291BC92E00C4E370 /* VaccinationCycleCompleteResultViewControllerSnapshotTests.swift in Sources */,
 				E7101B632872F7C60026584A /* CertificateRevocationFilesystemDataSource+FactoryTests.swift in Sources */,
 				09E8543A279993470051AEEE /* AppInformationRouterMock.swift in Sources */,
 				E7FB8FA528AFC46500D9693F /* Persistence+AcousticFeedbackSettingsTests.swift in Sources */,
@@ -4053,6 +4147,7 @@
 				E745AF1C27DA3C7000B3671E /* RevocationInfoViewControllerSnapshotTests.swift in Sources */,
 				E76509F928E5EFB900BC4595 /* NoMaskRulesResultViewControllerSnapshotTests.swift in Sources */,
 				E75F7DF028DDCE4D00675093 /* MaskRequiredResultViewControllerSnapshotTests.swift in Sources */,
+				09B20760291BC92E00C4E370 /* VaccinationCycleCompleteResultRouterMock.swift in Sources */,
 				E7101B602872F70C0026584A /* CertificateRevocationHTTPClient+FactoryTests.swift in Sources */,
 				0999707E291AD1AE00ACCDA8 /* CheckIfsg22aUseCaseTests.swift in Sources */,
 				E782BBA027D280CF00CC033A /* ExtendedCBORWekToken+Mock.swift in Sources */,
@@ -4062,6 +4157,7 @@
 				E7B49CF7283CD17A00401C2E /* CertificateRevocationOfflineService+FactoryTests.swift in Sources */,
 				E7D1F0A62861E12700FA7465 /* ScanRouterMock.swift in Sources */,
 				E76509F728E5EFB900BC4595 /* NoMaskRulesResultSceneFactoryTests.swift in Sources */,
+				09B20763291BC92E00C4E370 /* VaccinationCycleCompleteResultSceneFactoryTests.swift in Sources */,
 				0957848827A2D2E000E8206C /* VaccinationRepositoryMock.swift in Sources */,
 				E76509F828E5EFB900BC4595 /* NoMaskRulesResultViewModelTests.swift in Sources */,
 				95961E8B270450CA00E577A4 /* SceneCoordinatorMock.swift in Sources */,

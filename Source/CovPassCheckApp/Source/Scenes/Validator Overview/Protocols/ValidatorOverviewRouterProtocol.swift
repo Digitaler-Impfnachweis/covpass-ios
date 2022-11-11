@@ -12,13 +12,13 @@ import PromiseKit
 import Scanner
 import UIKit
 
+
 protocol ValidatorOverviewRouterProtocol: DialogRouterProtocol, ScanQRCodeProtocol, MaskCheckRouterProtocol, CheckImmunityRouterProtocol {
     func showAppInformation(userDefaults: Persistence)
     func showDataPrivacy() -> Promise<Void>
     func showNewRegulationsAnnouncement() -> Promise<Void>
     func routeToStateSelection() -> Promise<Void>
     func routeToRulesUpdate(userDefaults: Persistence) -> Promise<Void>
-    func showMaskCheckSameCertType()
 }
 
 protocol MaskCheckRouterProtocol {
@@ -29,6 +29,7 @@ protocol MaskCheckRouterProtocol {
     func showMaskOptional(token: ExtendedCBORWebToken) -> Promise<ValidatorDetailSceneResult>
     func showNoMaskRules(token: ExtendedCBORWebToken) -> Promise<ValidatorDetailSceneResult>
     func showMaskCheckDifferentPerson(token1OfPerson: ExtendedCBORWebToken, token2OfPerson: ExtendedCBORWebToken) -> Promise<DifferentPersonResult>
+    func showMaskCheckSameCertType()
 }
 
 protocol CheckImmunityRouterProtocol {
