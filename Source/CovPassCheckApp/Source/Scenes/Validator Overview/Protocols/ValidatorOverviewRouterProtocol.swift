@@ -12,17 +12,32 @@ import PromiseKit
 import Scanner
 import UIKit
 
-protocol ValidatorOverviewRouterProtocol: DialogRouterProtocol, ScanAndValidateRouterProtocol {
+protocol ValidatorOverviewRouterProtocol: DialogRouterProtocol, ScanQRCodeProtocol, MaskCheckRouterProtocol, CheckImmunityRouterProtocol {
     func showAppInformation(userDefaults: Persistence)
     func showDataPrivacy() -> Promise<Void>
     func showNewRegulationsAnnouncement() -> Promise<Void>
     func routeToStateSelection() -> Promise<Void>
     func routeToRulesUpdate(userDefaults: Persistence) -> Promise<Void>
+    func showMaskCheckSameCertType()
+}
+
+protocol MaskCheckRouterProtocol {
+    // MARK: Mask Check
     func showMaskRequiredBusinessRules(token: ExtendedCBORWebToken) -> Promise<ValidatorDetailSceneResult>
     func showMaskRequiredBusinessRulesSecondScanAllowed(token: ExtendedCBORWebToken) -> Promise<ValidatorDetailSceneResult>
     func showMaskRequiredTechnicalError(token: ExtendedCBORWebToken?) -> Promise<ValidatorDetailSceneResult>
     func showMaskOptional(token: ExtendedCBORWebToken) -> Promise<ValidatorDetailSceneResult>
     func showNoMaskRules(token: ExtendedCBORWebToken) -> Promise<ValidatorDetailSceneResult>
-    func showDifferentPerson(token1OfPerson: ExtendedCBORWebToken, token2OfPerson: ExtendedCBORWebToken) -> Promise<DifferentPersonResult>
-    func showSameCertType()
+    func showMaskCheckDifferentPerson(token1OfPerson: ExtendedCBORWebToken, token2OfPerson: ExtendedCBORWebToken) -> Promise<DifferentPersonResult>
+}
+
+protocol CheckImmunityRouterProtocol {
+    // MARK: Ifsg22a Check
+    func showVaccinationCycleComplete(token: ExtendedCBORWebToken) -> Promise<ValidatorDetailSceneResult>
+    func showNoIfsg22aCheckRulesNotAvailable(token: ExtendedCBORWebToken) -> Promise<ValidatorDetailSceneResult>
+    func showIfsg22aCheckDifferentPerson(token1OfPerson: ExtendedCBORWebToken, token2OfPerson: ExtendedCBORWebToken) -> Promise<ValidatorDetailSceneResult>
+    func showIfsg22aCheckSameCert()
+    func showIfsg22aNotComplete(token: ExtendedCBORWebToken) -> Promise<ValidatorDetailSceneResult>
+    func showIfsg22aCheckError(token: ExtendedCBORWebToken?) -> Promise<ValidatorDetailSceneResult>
+    func showIfsg22aCheckTestIsNotAllowed(token: ExtendedCBORWebToken?) -> Promise<ValidatorDetailSceneResult>
 }

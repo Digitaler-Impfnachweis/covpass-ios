@@ -27,7 +27,7 @@ private enum Constants {
  }
 
 class ValidatorOverviewRouter: ValidatorOverviewRouterProtocol {
-    
+   
     // MARK: - Properties
     
     let sceneCoordinator: SceneCoordinator
@@ -89,6 +89,8 @@ class ValidatorOverviewRouter: ValidatorOverviewRouterProtocol {
          )
      }
     
+    // MARK: Mask Check
+
     func showMaskRequiredBusinessRules(token: ExtendedCBORWebToken) -> Promise<ValidatorDetailSceneResult> {
         let router = MaskRequiredResultRouter(sceneCoordinator: sceneCoordinator)
         return sceneCoordinator.present(MaskRequiredResultSceneFactory(router: router,
@@ -130,14 +132,14 @@ class ValidatorOverviewRouter: ValidatorOverviewRouterProtocol {
                                         animated: true)
     }
     
-    func showDifferentPerson(token1OfPerson: ExtendedCBORWebToken,
+    func showMaskCheckDifferentPerson(token1OfPerson: ExtendedCBORWebToken,
                              token2OfPerson: ExtendedCBORWebToken) -> Promise<DifferentPersonResult> {
         let view = DifferentPersonSceneFactory(firstResultCert: token1OfPerson.vaccinationCertificate,
                                                secondResultCert: token2OfPerson.vaccinationCertificate)
         return sceneCoordinator.present(view, animated: true)
     }
     
-    func showSameCertType() {
+    func showMaskCheckSameCertType() {
         let copyString = Constants.Keys.error_2G_unexpected_type_copy
         showDialog(title: Constants.Keys.error_2G_unexpected_type_title,
                    message: copyString,
@@ -148,5 +150,41 @@ class ValidatorOverviewRouter: ValidatorOverviewRouterProtocol {
                                  completion: nil)
                    ],
                    style: .alert)
+    }
+    
+    // MARK: Ifsg22a Check
+
+    func showVaccinationCycleComplete(token: CovPassCommon.ExtendedCBORWebToken) -> PromiseKit.Promise<ValidatorDetailSceneResult> {
+#warning("TODO: finalize in upcoming Pull request")
+        return .value(.close)
+    }
+    
+    func showNoIfsg22aCheckRulesNotAvailable(token: CovPassCommon.ExtendedCBORWebToken) -> PromiseKit.Promise<ValidatorDetailSceneResult> {
+#warning("TODO: finalize in upcoming sotries")
+        return .value(.close)
+    }
+    
+    func showIfsg22aCheckDifferentPerson(token1OfPerson: CovPassCommon.ExtendedCBORWebToken, token2OfPerson: CovPassCommon.ExtendedCBORWebToken) -> PromiseKit.Promise<ValidatorDetailSceneResult> {
+#warning("TODO: finalize in upcoming sotries")
+        return .value(.close)
+    }
+    
+    func showIfsg22aCheckSameCert() {
+#warning("TODO: finalize in upcoming sotries")
+    }
+    
+    func showIfsg22aNotComplete(token: CovPassCommon.ExtendedCBORWebToken) -> PromiseKit.Promise<ValidatorDetailSceneResult> {
+#warning("TODO: finalize in upcoming sotries")
+        return .value(.close)
+    }
+    
+    func showIfsg22aCheckError(token: CovPassCommon.ExtendedCBORWebToken?) -> PromiseKit.Promise<ValidatorDetailSceneResult> {
+#warning("TODO: finalize in upcoming sotries")
+        return .value(.close)
+    }
+    
+    func showIfsg22aCheckTestIsNotAllowed(token: ExtendedCBORWebToken?) -> Promise<ValidatorDetailSceneResult> {
+#warning("TODO: finalize in upcoming sotries")
+        return .value(.close)
     }
 }

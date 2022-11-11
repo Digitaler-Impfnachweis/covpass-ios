@@ -10,7 +10,7 @@ import PromiseKit
 import Foundation
 import CertLogic
 
-enum ValidateCertificateUseCaseError: Error, Equatable  {
+enum CheckMaskRulesUseCaseError: Error, Equatable  {
     case differentPersonalInformation(_ token1OfPerson: ExtendedCBORWebToken, _ token2OfPerson: ExtendedCBORWebToken)
     case secondScanSameTokenType(_ token: ExtendedCBORWebToken)
     case maskRulesNotAvailable(_ token: ExtendedCBORWebToken)
@@ -19,7 +19,7 @@ enum ValidateCertificateUseCaseError: Error, Equatable  {
     case invalidDueToTechnicalReason(_ token: ExtendedCBORWebToken)
 }
 
-struct ValidateCertificateUseCase {
+struct CheckMaskRulesUseCase {
     let token: ExtendedCBORWebToken
     let region: String?
     let revocationRepository: CertificateRevocationRepositoryProtocol
@@ -57,7 +57,7 @@ struct ValidateCertificateUseCase {
     
     private func checkMaskRulesAvailable() -> Promise<Void> {
         guard holderStatus.maskRulesAvailable(for: region) else {
-            return .init(error: ValidateCertificateUseCaseError.maskRulesNotAvailable(token))
+            return .init(error: CheckMaskRulesUseCaseError.maskRulesNotAvailable(token))
         }
         return .value
     }
@@ -65,15 +65,15 @@ struct ValidateCertificateUseCase {
     private func checkMaskRules() -> Promise<Void> {
         if let additionalToken = additionalToken,
            additionalToken.vaccinationCertificate.certType == token.vaccinationCertificate.certType {
-            return .init(error: ValidateCertificateUseCaseError.secondScanSameTokenType(token))
+            return .init(error: CheckMaskRulesUseCaseError.secondScanSameTokenType(token))
         }
         if holderStatus.holderNeedsMask(tokensForMaskRuleCheck(), region: region) {
-            return .init(error: ValidateCertificateUseCaseError.holderNeedsMask(token))
+            return .init(error: CheckMaskRulesUseCaseError.holderNeedsMask(token))
         }
         if let additionalToken = additionalToken,
            additionalToken.vaccinationCertificate.hcert.dgc.nam != token.vaccinationCertificate.hcert.dgc.nam ||
            additionalToken.vaccinationCertificate.hcert.dgc.dob != token.vaccinationCertificate.hcert.dgc.dob {
-            return .init(error: ValidateCertificateUseCaseError.differentPersonalInformation(token, additionalToken))
+            return .init(error: CheckMaskRulesUseCaseError.differentPersonalInformation(token, additionalToken))
         }
         return .value
     }
@@ -95,9 +95,9 @@ struct ValidateCertificateUseCase {
         case .passed:
             return .value
         case .failedTechnical:
-            return .init(error: ValidateCertificateUseCaseError.invalidDueToTechnicalReason(token))
+            return .init(error: CheckMaskRulesUseCaseError.invalidDueToTechnicalReason(token))
         case .failedFunctional:
-            return .init(error: ValidateCertificateUseCaseError.invalidDueToRules(token))
+            return .init(error: CheckMaskRulesUseCaseError.invalidDueToRules(token))
         }
     }
     
@@ -106,9 +106,9 @@ struct ValidateCertificateUseCase {
         case .passed:
             return .value
         case .failedTechnical:
-            return .init(error: ValidateCertificateUseCaseError.invalidDueToTechnicalReason(token))
+            return .init(error: CheckMaskRulesUseCaseError.invalidDueToTechnicalReason(token))
         case .failedFunctional:
-            return .init(error: ValidateCertificateUseCaseError.invalidDueToRules(token))
+            return .init(error: CheckMaskRulesUseCaseError.invalidDueToRules(token))
         }
     }
 }

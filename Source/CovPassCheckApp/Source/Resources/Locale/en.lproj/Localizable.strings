@@ -227,7 +227,9 @@
 
 "accessibility_scan_camera_torch_turn_off" = "Torch has been switched off";
 
-"validation_check_popup_valid_vaccination_recovery_title" = "Certificate valid*";
+"validation_check_popup_valid_vaccination_recovery_title" = "Full vaccination protection available";
+
+"validation_check_popup_valid_vaccination_recovery_subtitle" = "according to IfSG §22a";
 
 "validation_check_popup_valid_vaccination_recovery_message" = "Check the following data against an ID document from the person you are checking.";
 
@@ -243,31 +245,55 @@
 
 "technical_validation_check_popup_unsuccessful_certificate_signature_subheading" = "Invalid signature";
 
-"technical_validation_check_popup_unsuccessful_certificate_signature_subline" = "The certificate was issued by an unauthorized organization, or does not belong to the EU Digital Covid Certificate network.";
+"technical_validation_check_popup_unsuccessful_certificate_signature_subline" = "The certificate is not an EU Digital COVID Certificate or has not been issued by an authorized body.";
 
 "technical_validation_check_popup_unsuccessful_certificate_qrreadibility_subheading" = "QR code unreadable";
 
 "technical_validation_check_popup_unsuccessful_certificate_qrreadibility_subline" = "Unable to read the QR code. Please update the CovPassCheck App, if the problem is recurring.";
 
-"technical_validation_check_popup_valid_vaccination_button_title" = "Scan another certificate";
+"technical_validation_check_popup_valid_vaccination_button_1_title" = "New scan";
 
-"functional_validation_check_popup_unsuccessful_certificate_title" = "Certificate does not fulfill all conditions";
+"technical_validation_check_popup_valid_vaccination_button_3_title" = "Cancel";
 
-"functional_validation_check_popup_unsuccessful_certificate_subline" = "The checked person can see the reason in their CovPass App. The most common reasons:";
+"functional_validation_check_popup_unsuccessful_certificate_title" = "Incomplete vaccination protection";
 
-"functional_validation_check_popup_unsuccessful_certificate_subheadline_expiration" = "Test expired";
+"functional_validation_check_popup_unsuccessful_certificate_subtitle" = "according to IfSG §22a";
 
-"functional_validation_check_popup_unsuccessful_certificate_subheadline_expiration_text" = "A negative rapid test has a maximal validity of 48 hours. A negative PCR test has a maximal validity of 72 hours.";
+"functional_validation_check_popup_unsuccessful_certificate_copy" = "The certificate provided does not indicate complete vaccination protection. Possible reasons:";
 
-"functional_validation_check_popup_unsuccessful_certificate_subheadline_protection" = "Protection not yet valid";
+"functional_validation_check_popup_unsuccessful_certificate_subheadline_expiration" = "Vaccination series incomplete";
 
-"functional_validation_check_popup_unsuccessful_certificate_subheadline_protection_text" = "Individuals are not completely protected until 14 days after the second vaccination. A recovery from a Corona infection has to be at least 28 days in the past.";
+"functional_validation_check_popup_unsuccessful_certificate_subheadline_expiration_text" = "For a complete vaccination status, a series of at least three vaccinations or recoveries must be demonstrated, including at least two vaccinations.";
 
-"functional_validation_check_popup_unsuccessful_certificate_subheadline_uncompleted" = "Uncompleted vaccination series";
+"functional_validation_check_popup_unsuccessful_certificate_subheadline_protection" = "Wrong certificates scanned";
 
-"functional_validation_check_popup_unsuccessful_certificate_subheadline_uncompleted_text" = "Depending on the vaccine, multiple vaccine doses have to be administered for completed protection.";
+"functional_validation_check_popup_unsuccessful_certificate_subheadline_protection_text" = "Please always scan the most recent certificates first.";
 
-"technical_validation_check_popup_valid_vaccination_button_further" = "Scan another certificate";
+"functional_validation_check_popup_unsuccessful_certificate_subheadline_uncompleted" = "Not approved vaccine";
+
+"functional_validation_check_popup_unsuccessful_certificate_subheadline_uncompleted_text" = "If the last vaccination was with a vaccine not licensed in Germany, another vaccination with an mRNA vaccine must be proven.";
+
+"functional_validation_check_popup_unsuccessful_certificate_subheadline_uncompleted_button" = "New scan";
+
+"functional_validation_check_popup_second_scan_title" = "Check vaccination status";
+
+"functional_validation_check_popup_second_scan_subtitle" = "according to IfSG §22a";
+
+"functional_validation_check_popup_second_scan_blue_card_1_title" = "1st certificate";
+
+"functional_validation_check_popup_second_scan_blue_card_1_subtitle" = "Insufficient";
+
+"functional_validation_check_popup_second_scan_blue_card_2_title" = "2nd certificate";
+
+"functional_validation_check_popup_second_scan_blue_card_2_subtitle" = "Please scan another proof of vaccination";
+
+"functional_validation_check_popup_second_scan_blue_card_3_title" = "3rd certificate";
+
+"functional_validation_check_popup_second_scan_blue_card_3_subtitle" = "Please scan another proof of vaccination";
+
+"functional_validation_check_popup_second_scan_hint_title" = "Please note";
+
+"functional_validation_check_popup_second_scan_hint_copy" = "Multiple vaccination proofs are required to confirm complete vaccination protection.";
 
 "validation_check_popup_valid_vaccination_button_title" = "Scan another certificate";
 

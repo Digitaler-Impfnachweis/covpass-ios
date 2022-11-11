@@ -227,7 +227,9 @@
 
 "accessibility_scan_camera_torch_turn_off" = "Taschenlampe wurde ausgeschaltet";
 
-"validation_check_popup_valid_vaccination_recovery_title" = "Zertifikat gültig*";
+"validation_check_popup_valid_vaccination_recovery_title" = "Vollständiger Impfschutz vorhanden";
+
+"validation_check_popup_valid_vaccination_recovery_subtitle" = "nach IfSG §22a";
 
 "validation_check_popup_valid_vaccination_recovery_message" = "Gleichen Sie jetzt folgende Daten mit einem Ausweisdokument der geprüften Person ab.";
 
@@ -243,31 +245,55 @@
 
 "technical_validation_check_popup_unsuccessful_certificate_signature_subheading" = "Ungültige Signatur";
 
-"technical_validation_check_popup_unsuccessful_certificate_signature_subline" = "Das Zertifikat wurde nicht von einer autorisierten Stelle ausgestellt oder gehört nicht zu einem Digitalen COVID-Zertifikat der EU.";
+"technical_validation_check_popup_unsuccessful_certificate_signature_subline" = "Das Zertifikat ist kein Digitales COVID-Zertifikat der EU oder wurde nicht von einer autorisierten Stelle ausgestellt.";
 
 "technical_validation_check_popup_unsuccessful_certificate_qrreadibility_subheading" = "QR-Code nicht lesbar";
 
 "technical_validation_check_popup_unsuccessful_certificate_qrreadibility_subline" = "Der QR-Code ist nicht lesbar. Bitte aktualisieren Sie die CovPassCheck-App, wenn dieses Problem häufiger auftritt.";
 
-"technical_validation_check_popup_valid_vaccination_button_title" = "Weiteres Zertifikat scannen";
+"technical_validation_check_popup_valid_vaccination_button_1_title" = "Neue Prüfung";
 
-"functional_validation_check_popup_unsuccessful_certificate_title" = "Zertifikat erfüllt nicht alle Bedingungen";
+"technical_validation_check_popup_valid_vaccination_button_3_title" = "Abbrechen";
 
-"functional_validation_check_popup_unsuccessful_certificate_subline" = "Die geprüfte Person kann den Grund z. B. in der CovPass-App einsehen. Die häufigsten Gründe:";
+"functional_validation_check_popup_unsuccessful_certificate_title" = "Unvollständiger Impfschutz";
 
-"functional_validation_check_popup_unsuccessful_certificate_subheadline_expiration" = "Abgelaufener Test";
+"functional_validation_check_popup_unsuccessful_certificate_subtitle" = "nach IfSG §22a";
 
-"functional_validation_check_popup_unsuccessful_certificate_subheadline_expiration_text" = "Ein negativer Schnelltest ist für maximal 48 Stunden gültig. Ein negativer PCR-Test ist für maximal 72 Stunden gültig.";
+"functional_validation_check_popup_unsuccessful_certificate_copy" = "Der erbrachte Nachweis weist keinen vollständigen Impfschutz aus. Mögliche Gründe:";
 
-"functional_validation_check_popup_unsuccessful_certificate_subheadline_protection" = "Noch nicht gültiger Schutz";
+"functional_validation_check_popup_unsuccessful_certificate_subheadline_expiration" = "Impfserie unvollständig";
 
-"functional_validation_check_popup_unsuccessful_certificate_subheadline_protection_text" = "Erst 14 Tage nach der Zweitimpfung gilt der Impfschutz als vollständig. Die Genesung von einer Corona-Infektion muss mindestens 28 Tage alt sein.";
+"functional_validation_check_popup_unsuccessful_certificate_subheadline_expiration_text" = "Für einen vollständigen Impfstatus muss eine Reihe von mindestens drei Immun-Ereignissen (Impfungen oder Genesungen) nachgewiesen werden, davon mindestens zwei Impfungen.";
 
-"functional_validation_check_popup_unsuccessful_certificate_subheadline_uncompleted" = "Unvollständige Impfserie";
+"functional_validation_check_popup_unsuccessful_certificate_subheadline_protection" = "Falsche Zertifikate gescannt";
 
-"functional_validation_check_popup_unsuccessful_certificate_subheadline_uncompleted_text" = "Je nach Impfstoff sind für die Erlangung des vollständigen Impfschutzes mehrere Impfdosen erforderlich.";
+"functional_validation_check_popup_unsuccessful_certificate_subheadline_protection_text" = "Bitte scannen Sie immer die aktuellsten Nachweise zuerst.";
 
-"technical_validation_check_popup_valid_vaccination_button_further" = "Weiteres Zertifikat scannen";
+"functional_validation_check_popup_unsuccessful_certificate_subheadline_uncompleted" = "Nicht zugelassener Impfstoff";
+
+"functional_validation_check_popup_unsuccessful_certificate_subheadline_uncompleted_text" = "Wenn die letzte Impfung mit einem nicht in Deutschland zugelassenen Impfstoff erfolgte, muss eine weitere Impfung mit einem mRNA-Impfstoff nachgewiesen werden.";
+
+"functional_validation_check_popup_unsuccessful_certificate_subheadline_uncompleted_button" = "Neue Prüfung";
+
+"functional_validation_check_popup_second_scan_title" = "Impfstatus prüfen";
+
+"functional_validation_check_popup_second_scan_subtitle" = "nach IfSG §22a";
+
+"functional_validation_check_popup_second_scan_blue_card_1_title" = "1. Zertifikat";
+
+"functional_validation_check_popup_second_scan_blue_card_1_subtitle" = "Nicht ausreichend";
+
+"functional_validation_check_popup_second_scan_blue_card_2_title" = "2. Zertifikat";
+
+"functional_validation_check_popup_second_scan_blue_card_2_subtitle" = "Scannen Sie einen weiteren Nachweis";
+
+"functional_validation_check_popup_second_scan_blue_card_3_title" = "3. Zertifikat";
+
+"functional_validation_check_popup_second_scan_blue_card_3_subtitle" = "Scannen Sie einen weiteren Nachweis";
+
+"functional_validation_check_popup_second_scan_hint_title" = "Hiinweis";
+
+"functional_validation_check_popup_second_scan_hint_copy" = "Für den Nachweis eines vollständigen Impfschutzes sind mehrere Nachweise notwendig.";
 
 "validation_check_popup_valid_vaccination_button_title" = "Weiteres Zertifikat scannen";
 

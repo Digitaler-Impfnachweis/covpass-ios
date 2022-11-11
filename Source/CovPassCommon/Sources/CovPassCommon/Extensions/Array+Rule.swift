@@ -12,10 +12,12 @@ public extension Array where Element == Rule {
     var acceptanceRules: Self { filter(\.isAcceptence) }
     
     var invalidationRules: Self { filter(\.isInvalidationRule) }
-
+    
     var acceptenceAndInvalidationRules: Self { filter(\.isAcceptenceOrInvalidationRule) }
     
     var gStatusRules: Self { filter(\.isGStatusRule) }
     
     var maskStatusRules: Self { filter(\.isMaskStatusRule) }
+    
+    var ifsg22aRules: Self { filter(\.isIfsg22aRule) }
 }

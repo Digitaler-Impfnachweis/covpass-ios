@@ -132,7 +132,9 @@ class ValidatorOverviewViewController: UIViewController {
                               infoText: immunityCheckInfoText,
                               infoTextEdges: .init(top: 0, left: 0, bottom: 0, right: 0),
                               actionTitle: immunityCheckActionTitle)
-        immunityCheckView.action = viewModel.checkImmunityStatus
+        immunityCheckView.action = {
+            self.viewModel.checkImmunityStatus(additionalToken: nil)
+        }
         
         checkTypeSegment.setTitle(viewModel.segmentMaskTitle, forSegmentAt: CheckType.mask.rawValue)
         checkTypeSegment.setTitle(viewModel.segmentImmunityTitle, forSegmentAt: CheckType.immunity.rawValue)

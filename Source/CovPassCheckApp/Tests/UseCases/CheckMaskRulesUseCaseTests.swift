@@ -1,5 +1,5 @@
 //
-//  ValidationUseCase.swift
+//  CheckMaskRulesUseCaseTests.swift
 //
 //  © Copyright IBM Deutschland GmbH 2021
 //  SPDX-License-Identifier: Apache-2.0
@@ -9,9 +9,9 @@ import XCTest
 import CovPassCommon
 @testable import CovPassCheckApp
 
-class ValidateCertificateUseCaseTests: XCTestCase {
+class CheckMaskRulesUseCaseTests: XCTestCase {
     
-    var sut: ValidateCertificateUseCase!
+    var sut: CheckMaskRulesUseCase!
     var certificateHolderStatusModel: CertificateHolderStatusModelMock!
     var revocationRepository: CertificateRevocationRepositoryMock!
     var token: ExtendedCBORWebToken!
@@ -20,7 +20,7 @@ class ValidateCertificateUseCaseTests: XCTestCase {
         token = CBORWebToken.mockRecoveryCertificate.mockRecoveryUVCI("FOO").extended()
         revocationRepository = CertificateRevocationRepositoryMock()
         certificateHolderStatusModel = CertificateHolderStatusModelMock()
-        sut = ValidateCertificateUseCase(token: token,
+        sut = CheckMaskRulesUseCase(token: token,
                                          region: nil,
                                          revocationRepository: revocationRepository,
                                          holderStatus: certificateHolderStatusModel,
@@ -45,7 +45,7 @@ class ValidateCertificateUseCaseTests: XCTestCase {
             }
             .catch { error in
                 // THEN
-                XCTAssertEqual(error as? ValidateCertificateUseCaseError, .maskRulesNotAvailable(self.token))
+                XCTAssertEqual(error as? CheckMaskRulesUseCaseError, .maskRulesNotAvailable(self.token))
                 expectation.fulfill()
             }
         wait(for: [expectation], timeout: 1.0)
@@ -74,7 +74,7 @@ class ValidateCertificateUseCaseTests: XCTestCase {
         let expectation = XCTestExpectation(description: "test should fail because rules are not passed")
         certificateHolderStatusModel.areMaskRulesAvailable = true
         revocationRepository.isRevoked = false
-        certificateHolderStatusModel.domesticRulesPassedResult = .failedFunctional
+        certificateHolderStatusModel.domesticAcceptanceAndInvalidationRulesPassedResult = .failedFunctional
         // WHEN
         sut.execute()
             .done { token in
@@ -82,7 +82,7 @@ class ValidateCertificateUseCaseTests: XCTestCase {
             }
             .catch { error in
                 // THEN
-                XCTAssertEqual(error as? ValidateCertificateUseCaseError, .invalidDueToRules(self.token))
+                XCTAssertEqual(error as? CheckMaskRulesUseCaseError, .invalidDueToRules(self.token))
                 expectation.fulfill()
             }
         wait(for: [expectation], timeout: 1.0)
@@ -93,7 +93,7 @@ class ValidateCertificateUseCaseTests: XCTestCase {
         let expectation = XCTestExpectation(description: "test should fail because rules are not passed")
         certificateHolderStatusModel.areMaskRulesAvailable = true
         revocationRepository.isRevoked = false
-        certificateHolderStatusModel.domesticRulesPassedResult = .failedTechnical
+        certificateHolderStatusModel.domesticAcceptanceAndInvalidationRulesPassedResult = .failedTechnical
         // WHEN
         sut.execute()
             .done { token in
@@ -101,7 +101,7 @@ class ValidateCertificateUseCaseTests: XCTestCase {
             }
             .catch { error in
                 // THEN
-                XCTAssertEqual(error as? ValidateCertificateUseCaseError, .invalidDueToTechnicalReason(self.token))
+                XCTAssertEqual(error as? CheckMaskRulesUseCaseError, .invalidDueToTechnicalReason(self.token))
                 expectation.fulfill()
             }
         wait(for: [expectation], timeout: 1.0)
@@ -112,7 +112,7 @@ class ValidateCertificateUseCaseTests: XCTestCase {
         let expectation = XCTestExpectation(description: "test should fail because rules are not passed")
         certificateHolderStatusModel.areMaskRulesAvailable = true
         revocationRepository.isRevoked = false
-        certificateHolderStatusModel.domesticRulesPassedResult = .passed
+        certificateHolderStatusModel.domesticAcceptanceAndInvalidationRulesPassedResult = .passed
         certificateHolderStatusModel.euInvalidationRulesPassedResult = .failedFunctional
         // WHEN
         sut.execute()
@@ -121,7 +121,7 @@ class ValidateCertificateUseCaseTests: XCTestCase {
             }
             .catch { error in
                 // THEN
-                XCTAssertEqual(error as? ValidateCertificateUseCaseError, .invalidDueToRules(self.token))
+                XCTAssertEqual(error as? CheckMaskRulesUseCaseError, .invalidDueToRules(self.token))
                 expectation.fulfill()
             }
         wait(for: [expectation], timeout: 1.0)
@@ -132,7 +132,7 @@ class ValidateCertificateUseCaseTests: XCTestCase {
         let expectation = XCTestExpectation(description: "test should fail because rules are not passed")
         certificateHolderStatusModel.areMaskRulesAvailable = true
         revocationRepository.isRevoked = false
-        certificateHolderStatusModel.domesticRulesPassedResult = .passed
+        certificateHolderStatusModel.domesticAcceptanceAndInvalidationRulesPassedResult = .passed
         certificateHolderStatusModel.euInvalidationRulesPassedResult = .failedTechnical
         // WHEN
         sut.execute()
@@ -141,7 +141,7 @@ class ValidateCertificateUseCaseTests: XCTestCase {
             }
             .catch { error in
                 // THEN
-                XCTAssertEqual(error as? ValidateCertificateUseCaseError, .invalidDueToTechnicalReason(self.token))
+                XCTAssertEqual(error as? CheckMaskRulesUseCaseError, .invalidDueToTechnicalReason(self.token))
                 expectation.fulfill()
             }
         wait(for: [expectation], timeout: 1.0)
@@ -152,7 +152,7 @@ class ValidateCertificateUseCaseTests: XCTestCase {
         let expectation = XCTestExpectation(description: "test should fail because holder needs mask")
         certificateHolderStatusModel.areMaskRulesAvailable = true
         revocationRepository.isRevoked = false
-        certificateHolderStatusModel.domesticRulesPassedResult = .passed
+        certificateHolderStatusModel.domesticAcceptanceAndInvalidationRulesPassedResult = .passed
         certificateHolderStatusModel.euInvalidationRulesPassedResult = .passed
         certificateHolderStatusModel.needsMask = true
         // WHEN
@@ -162,7 +162,7 @@ class ValidateCertificateUseCaseTests: XCTestCase {
             }
             .catch { error in
                 // THEN
-                XCTAssertEqual(error as? ValidateCertificateUseCaseError, .holderNeedsMask(self.token))
+                XCTAssertEqual(error as? CheckMaskRulesUseCaseError, .holderNeedsMask(self.token))
                 expectation.fulfill()
             }
         wait(for: [expectation], timeout: 1.0)
@@ -173,7 +173,7 @@ class ValidateCertificateUseCaseTests: XCTestCase {
         let expectation = XCTestExpectation(description: "test should fail because holder needs mask")
         certificateHolderStatusModel.areMaskRulesAvailable = true
         revocationRepository.isRevoked = false
-        certificateHolderStatusModel.domesticRulesPassedResult = .passed
+        certificateHolderStatusModel.domesticAcceptanceAndInvalidationRulesPassedResult = .passed
         certificateHolderStatusModel.euInvalidationRulesPassedResult = .passed
         certificateHolderStatusModel.needsMask = false
         // WHEN
@@ -194,7 +194,7 @@ class ValidateCertificateUseCaseTests: XCTestCase {
     func test_checkMaskRule_withAdditional_token_of_different_person_failed() {
         // GIVEN
         let differentPersonToken = CBORWebToken.mockVaccinationCertificateWithOtherName.extended()
-        let sut = ValidateCertificateUseCase(token: token,
+        let sut = CheckMaskRulesUseCase(token: token,
                                              region: nil,
                                              revocationRepository: revocationRepository,
                                              holderStatus: certificateHolderStatusModel,
@@ -202,7 +202,7 @@ class ValidateCertificateUseCaseTests: XCTestCase {
         let expectation = XCTestExpectation(description: "test should fail because holder needs mask")
         certificateHolderStatusModel.areMaskRulesAvailable = true
         revocationRepository.isRevoked = false
-        certificateHolderStatusModel.domesticRulesPassedResult = .passed
+        certificateHolderStatusModel.domesticAcceptanceAndInvalidationRulesPassedResult = .passed
         certificateHolderStatusModel.euInvalidationRulesPassedResult = .passed
         certificateHolderStatusModel.needsMask = false
         // WHEN
@@ -212,7 +212,7 @@ class ValidateCertificateUseCaseTests: XCTestCase {
             }
             .catch { error in
                 // THEN
-                XCTAssertEqual(error as? ValidateCertificateUseCaseError, .differentPersonalInformation(self.token, differentPersonToken))
+                XCTAssertEqual(error as? CheckMaskRulesUseCaseError, .differentPersonalInformation(self.token, differentPersonToken))
                 expectation.fulfill()
             }
         wait(for: [expectation], timeout: 1.0)
@@ -221,7 +221,7 @@ class ValidateCertificateUseCaseTests: XCTestCase {
     func test_checkMaskRule_withAdditional_token_of_same_type_failed() {
         // GIVEN
         let differentPersonToken = CBORWebToken.mockRecoveryCertificate.extended()
-        let sut = ValidateCertificateUseCase(token: token,
+        let sut = CheckMaskRulesUseCase(token: token,
                                              region: nil,
                                              revocationRepository: revocationRepository,
                                              holderStatus: certificateHolderStatusModel,
@@ -229,7 +229,7 @@ class ValidateCertificateUseCaseTests: XCTestCase {
         let expectation = XCTestExpectation(description: "test should fail because holder needs mask")
         certificateHolderStatusModel.areMaskRulesAvailable = true
         revocationRepository.isRevoked = false
-        certificateHolderStatusModel.domesticRulesPassedResult = .passed
+        certificateHolderStatusModel.domesticAcceptanceAndInvalidationRulesPassedResult = .passed
         certificateHolderStatusModel.euInvalidationRulesPassedResult = .passed
         certificateHolderStatusModel.needsMask = false
         // WHEN
@@ -239,7 +239,7 @@ class ValidateCertificateUseCaseTests: XCTestCase {
             }
             .catch { error in
                 // THEN
-                XCTAssertEqual(error as? ValidateCertificateUseCaseError, .secondScanSameTokenType(differentPersonToken))
+                XCTAssertEqual(error as? CheckMaskRulesUseCaseError, .secondScanSameTokenType(differentPersonToken))
                 expectation.fulfill()
             }
         wait(for: [expectation], timeout: 1.0)

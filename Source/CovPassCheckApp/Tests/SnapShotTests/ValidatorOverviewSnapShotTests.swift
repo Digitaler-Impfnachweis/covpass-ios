@@ -17,7 +17,7 @@ class ValidatorOverviewSnapShotTests: BaseSnapShotTests {
                       shouldTrustListUpdate: Bool = true,
                       ntpDate: Date = Date(),
                       ntpOffset: TimeInterval = 0.0,
-                      logicType: DCCCertLogic.LogicType = .de,
+                      logicType: DCCCertLogic.LogicType = .deAcceptenceAndInvalidationRules,
                       selectedCheckType: CheckType = .mask) -> ValidatorOverviewViewController {
         let certLogicMock = DCCCertLogicMock()
         let vaccinationRepoMock = VaccinationRepositoryMock()

@@ -24,7 +24,18 @@ public struct CertificateHolderStatusModel: CertificateHolderStatusModelProtocol
         guard let joinedTokens = certificates.joinedTokens else {
             return .failedTechnical
         }
-        guard let validationResults = try? validate(certificate: joinedTokens, type: .de) else {
+        guard let validationResults = try? validate(certificate: joinedTokens, type: .deAcceptenceAndInvalidationRules) else {
+            return .failedTechnical
+        }
+        let passed = validationResults.filterAcceptanceAndInvalidationRules.failedAndOpenResults.isEmpty
+        return passed ? .passed : .failedFunctional
+    }
+    
+    public func checkDomesticInvalidationRules(_ certificates: [ExtendedCBORWebToken]) -> CertificateHolderStatusResult {
+        guard let joinedTokens = certificates.joinedTokens else {
+            return .failedTechnical
+        }
+        guard let validationResults = try? validate(certificate: joinedTokens, type: .deInvalidationRules) else {
             return .failedTechnical
         }
         let passed = validationResults.filterAcceptanceAndInvalidationRules.failedAndOpenResults.isEmpty
@@ -43,7 +54,7 @@ public struct CertificateHolderStatusModel: CertificateHolderStatusModelProtocol
     }
     
     public func holderIsFullyImmunized(_ certificates: [ExtendedCBORWebToken]) -> Bool {
-        let validCertificates = validCertificates(certificates)
+        let validCertificates = validCertificates(certificates, logicType: .deAcceptenceAndInvalidationRules)
         guard let joinedTokens = validCertificates.joinedTokens else {
             return false
         }
@@ -58,7 +69,7 @@ public struct CertificateHolderStatusModel: CertificateHolderStatusModelProtocol
         
     public func holderNeedsMask(_ certificates: [ExtendedCBORWebToken],
                                 region: String?) -> Bool {
-        let validCertificates = validCertificates(certificates)
+        let validCertificates = validCertificates(certificates, logicType: .deAcceptenceAndInvalidationRules)
         guard let joinedTokens = validCertificates.joinedTokens else {
             return true
         }
@@ -77,13 +88,28 @@ public struct CertificateHolderStatusModel: CertificateHolderStatusModelProtocol
         }
     }
     
+    public func vaccinationCycleIsComplete(_ certificates: [ExtendedCBORWebToken]) -> Bool {
+        let validCertificates = validCertificates(certificates, logicType: .deInvalidationRules)
+        guard let joinedTokens = validCertificates.joinedTokens else {
+            return false
+        }
+        guard let validationResults = try? validate(certificate: joinedTokens, type: .ifsg22a) else {
+            return false
+        }
+        return validationResults.vaccinationCycleIsComplete
+    }
+    
     public func maskRulesAvailable(for region: String?) -> Bool {
         return dccCertLogic.rulesAvailable(logicType: .maskStatus, region: region)
     }
     
-    private func validCertificate(_ certificates: [ExtendedCBORWebToken]) -> ExtendedCBORWebToken? {
+    public func ifsg22aRulesAvailable() -> Bool {
+        return dccCertLogic.rulesAvailable(logicType: .ifsg22a, region: nil)
+    }
+    
+    private func validCertificate(_ certificates: [ExtendedCBORWebToken], logicType: DCCCertLogic.LogicType) -> ExtendedCBORWebToken? {
         return certificates.first { token in
-            guard let result = try? validate(certificate: token.vaccinationCertificate, type: .de) else {
+            guard let result = try? validate(certificate: token.vaccinationCertificate, type: logicType) else {
                 return false
             }
             return result.failedAndOpenResults.isEmpty
@@ -102,33 +128,33 @@ public struct CertificateHolderStatusModel: CertificateHolderStatusModelProtocol
         
     }
     
-    public func validCertificates(_ certificates: [ExtendedCBORWebToken]) -> [ExtendedCBORWebToken] {
+    public func validCertificates(_ certificates: [ExtendedCBORWebToken], logicType: DCCCertLogic.LogicType) -> [ExtendedCBORWebToken] {
         var result: [ExtendedCBORWebToken] = []
-        if let validVaccinationCertificate = validVaccinationCertificate(certificates) {
+        if let validVaccinationCertificate = validVaccinationCertificate(certificates, logicType: logicType) {
             result.append(validVaccinationCertificate)
         }
-        if let validRecoveryCertificate = validRecoveryCertificate(certificates) {
+        if let validRecoveryCertificate = validRecoveryCertificate(certificates, logicType: logicType) {
             result.append(validRecoveryCertificate)
         }
-        if let validTestCertificate = validTestCertificate(certificates) {
+        if let validTestCertificate = validTestCertificate(certificates, logicType: logicType) {
             result.append(validTestCertificate)
         }
         return result
     }
     
-    private func validVaccinationCertificate(_ certificates: [ExtendedCBORWebToken]) -> ExtendedCBORWebToken? {
+    private func validVaccinationCertificate(_ certificates: [ExtendedCBORWebToken], logicType: DCCCertLogic.LogicType) -> ExtendedCBORWebToken? {
         let filterVaccinationCertificates = certificates.filterVaccinations.filterNotExpired.filterNotInvalid.filterNotRevoked
-        return validCertificate(filterVaccinationCertificates)
+        return validCertificate(filterVaccinationCertificates, logicType: logicType)
     }
     
-    private func validRecoveryCertificate(_ certificates: [ExtendedCBORWebToken]) -> ExtendedCBORWebToken? {
+    private func validRecoveryCertificate(_ certificates: [ExtendedCBORWebToken], logicType: DCCCertLogic.LogicType) -> ExtendedCBORWebToken? {
         let filterRecoveryCertificates = certificates.filterRecoveries.filterNotExpired.filterNotInvalid.filterNotRevoked
-        return validCertificate(filterRecoveryCertificates)
+        return validCertificate(filterRecoveryCertificates, logicType: logicType)
     }
     
-    private func validTestCertificate(_ certificates: [ExtendedCBORWebToken]) -> ExtendedCBORWebToken? {
+    private func validTestCertificate(_ certificates: [ExtendedCBORWebToken], logicType: DCCCertLogic.LogicType) -> ExtendedCBORWebToken? {
         let filterTestCertificates = certificates.filterTests.filterNotExpired.filterNotInvalid.filterNotRevoked
-        return validCertificate(filterTestCertificates)
+        return validCertificate(filterTestCertificates, logicType: logicType)
     }
 }
 
@@ -137,6 +163,11 @@ private extension Array where Element == ValidationResult {
         contains { validationResult in
             validationResult.rule?.ruleType == ._2GPlus || validationResult.rule?.ruleType == ._2G
         }
+    }
+    
+    var vaccinationCycleIsComplete: Bool {
+        let dict = Dictionary(grouping: self, by: { $0.rule?.ruleType })
+        return dict.contains(where: \.value.failedAndOpenResults.isEmpty)
     }
     
     var holderNeedsMask: Bool {

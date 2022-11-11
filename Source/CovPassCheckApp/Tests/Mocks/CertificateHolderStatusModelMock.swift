@@ -10,16 +10,23 @@ import Foundation
 import PromiseKit
 
 class CertificateHolderStatusModelMock: CertificateHolderStatusModelProtocol {
-
+    
     var areMaskRulesAvailable = true
     var needsMask = true
     var fullyImmunized = true
-    var domesticRulesPassedResult = CertificateHolderStatusResult.failedFunctional
+    var isVaccinationCycleComplete = true
+    var areIfsg22aRulesAvailable = true
+    var domesticAcceptanceAndInvalidationRulesPassedResult = CertificateHolderStatusResult.failedFunctional
+    var domesticInvalidationRulesPassedResult = CertificateHolderStatusResult.failedFunctional
     var euInvalidationRulesPassedResult = CertificateHolderStatusResult.failedFunctional
     var validCertificates: [ExtendedCBORWebToken]? = nil
 
     func checkDomesticAcceptanceAndInvalidationRules(_ certificates: [ExtendedCBORWebToken]) -> CertificateHolderStatusResult {
-        domesticRulesPassedResult
+        domesticAcceptanceAndInvalidationRulesPassedResult
+    }
+    
+    func checkDomesticInvalidationRules(_ certificates: [ExtendedCBORWebToken]) -> CertificateHolderStatusResult {
+        domesticInvalidationRulesPassedResult
     }
     
     func checkEuInvalidationRules(_ certificates: [ExtendedCBORWebToken]) -> CertificateHolderStatusResult {
@@ -41,7 +48,15 @@ class CertificateHolderStatusModelMock: CertificateHolderStatusModelProtocol {
         return areMaskRulesAvailable
     }
 
-    func validCertificates(_ certificates: [ExtendedCBORWebToken]) -> [ExtendedCBORWebToken] {
+    func validCertificates(_ certificates: [ExtendedCBORWebToken], logicType: DCCCertLogic.LogicType) -> [ExtendedCBORWebToken] {
         validCertificates ?? certificates
+    }
+    
+    func vaccinationCycleIsComplete(_ certificates: [CovPassCommon.ExtendedCBORWebToken]) -> Bool {
+        isVaccinationCycleComplete
+    }
+    
+    func ifsg22aRulesAvailable() -> Bool {
+        areIfsg22aRulesAvailable
     }
 }

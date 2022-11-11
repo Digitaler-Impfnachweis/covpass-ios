@@ -15,8 +15,8 @@
         "repositoryURL": "https://github.com/krzyzanowskim/CryptoSwift.git",
         "state": {
           "branch": null,
-          "revision": "4b0565384d3c4c588af09e660535b2c7c9bf5b39",
-          "version": "1.4.2"
+          "revision": "19b3c3ceed117c5cc883517c4e658548315ba70b",
+          "version": "1.6.0"
         }
       },
       {
@@ -24,7 +24,7 @@
         "repositoryURL": "https://github.com/Digitaler-Impfnachweis/dgc-certlogic-ios-covpass.git",
         "state": {
           "branch": "main",
-          "revision": "3a00ecb4573d141ab060ed0bccfe8d01e5984498",
+          "revision": "533dd8e8173685e0ede5c1337b7d7c21349fc849",
           "version": null
         }
       },
@@ -78,8 +78,8 @@
         "repositoryURL": "https://github.com/mxcl/PromiseKit",
         "state": {
           "branch": null,
-          "revision": "d2f7ba14bcdc45e18f4f60ad9df883fb9055f081",
-          "version": "6.15.3"
+          "revision": "43772616c46a44a9977e41924ae01d0e55f2f9ca",
+          "version": "6.18.1"
         }
       },
       {

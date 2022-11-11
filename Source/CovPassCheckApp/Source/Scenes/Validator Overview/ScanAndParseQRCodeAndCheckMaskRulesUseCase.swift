@@ -11,12 +11,8 @@ import PromiseKit
 import Foundation
 import CertLogic
 
-protocol ScanAndValidateRouterProtocol {
-    func scanQRCode() -> Promise<QRCodeImportResult>
-}
-
-struct ScanAndValidateQRCodeUseCase {
-    let router: ScanAndValidateRouterProtocol
+struct ScanAndParseQRCodeAndCheckMaskRulesUseCase {
+    let router: ScanQRCodeProtocol
     let audioPlayer: AudioPlayerProtocol
     let vaccinationRepository: VaccinationRepositoryProtocol
     let revocationRepository: CertificateRevocationRepositoryProtocol
@@ -37,7 +33,7 @@ struct ScanAndValidateQRCodeUseCase {
                                     vaccinationRepository: self.vaccinationRepository).execute()
         }
         .then { token -> Promise<ExtendedCBORWebToken> in
-            return ValidateCertificateUseCase(token: token,
+            return CheckMaskRulesUseCase(token: token,
                                               region: self.userDefaults.stateSelection,
                                               revocationRepository: self.revocationRepository,
                                               holderStatus: CertificateHolderStatusModel(dccCertLogic: self.certLogic),

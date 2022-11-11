@@ -371,4 +371,52 @@ class CertificateHolderStatusModelTests: XCTestCase {
         // THEN
         XCTAssertEqual(result, expectedResult)
     }
+    
+    func test_ifsg22aRulesAvailable_true() {
+        // GIVEN
+        let expectedResult = true
+        certLogic.areRulesAvailable = expectedResult
+        // WHEN
+        let result = sut.ifsg22aRulesAvailable()
+        // THEN
+        XCTAssertEqual(result, expectedResult)
+    }
+    
+    func test_ifsg22aRulesAvailable_false() {
+        // GIVEN
+        let expectedResult = false
+        certLogic.areRulesAvailable = expectedResult
+        // WHEN
+        let result = sut.ifsg22aRulesAvailable()
+        // THEN
+        XCTAssertEqual(result, expectedResult)
+    }
+    
+    func test_ifsg22a_passed() {
+        // GIVEN
+        certLogic.validateResult = [.init(rule: rule, result: .passed)]
+        // WHEN
+        let result = sut.vaccinationCycleIsComplete([token])
+        // THEN
+        XCTAssertTrue(result)
+    }
+    
+    func test_ifsg22a_invalidation_rule_fails() {
+        // GIVEN
+        certLogic.validateResult = [.init(rule: rule, result: .fail)]
+        // WHEN
+        let result = sut.vaccinationCycleIsComplete([token])
+        // THEN
+        XCTAssertFalse(result)
+    }
+    
+    func test_ifsg22a_invalidation_someError() {
+        // GIVEN
+        certLogic.validationError = NSError(domain: "some error", code: 1)
+        // WHEN
+        let result = sut.vaccinationCycleIsComplete([token])
+        // THEN
+        XCTAssertEqual(result, false)
+    }
+    
 }

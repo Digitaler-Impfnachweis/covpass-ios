@@ -181,7 +181,7 @@ class ValidatorOverviewViewModel {
     func scanAction(additionalToken: ExtendedCBORWebToken? = nil) {
         isLoadingScan = true
         firstly{
-            ScanAndValidateQRCodeUseCase(router: router,
+            ScanAndParseQRCodeAndCheckMaskRulesUseCase(router: router,
                                          audioPlayer: audioPlayer,
                                          vaccinationRepository: vaccinationRepository,
                                          revocationRepository: revocationRepository,
@@ -198,40 +198,72 @@ class ValidatorOverviewViewModel {
             self.isLoadingScan = false
         }
         .catch { error in
-            self.errorHandling(error: error, token: nil)
+            self.errorHandlingMaskCheck(error: error, token: nil)
                 .done(self.validatorDetailSceneRsult(result:))
                 .cauterize()
         }
     }
     
-    func checkImmunityStatus() {
+    func checkImmunityStatus(additionalToken: ExtendedCBORWebToken? = nil) {
         isLoadingScan = true
         firstly{
-#warning("TODO: add immunity check")
+            ScanAndParseQRCodeAndCheckIfsg22aUseCase(router: router,
+                                                     audioPlayer: audioPlayer,
+                                                     vaccinationRepository: vaccinationRepository,
+                                                     revocationRepository: revocationRepository,
+                                                     certLogic: certLogic,
+                                                     additionalToken: additionalToken).execute()
         }
         .done { token in
-#warning("TODO: add immunity check")
+            self.router.showVaccinationCycleComplete(token: token)
+                .done(self.validatorDetailSceneRsult(result:))
+                .cauterize()
         }
         .ensure {
             self.isLoadingScan = false
         }
         .catch { error in
-#warning("TODO: add immunity check")
+            self.errorHandlingIfsg22aCheck(error: error, token: nil)
+                .done(self.validatorDetailSceneRsult(result:))
+                .cauterize()
 
         }
     }
     
-    func errorHandling(error: Error, token: ExtendedCBORWebToken?) -> Promise<ValidatorDetailSceneResult> {
+    func errorHandlingIfsg22aCheck(error: Error, token: ExtendedCBORWebToken?) -> Promise<ValidatorDetailSceneResult> {
+        if case let CertificateError.revoked(token) = error {
+            return router.showIfsg22aCheckError(token: token)
+        }
+        switch error as? CheckIfsg22aUseCaseError {
+        case let .showMaskCheckdifferentPersonalInformation(token1OfPerson, token2OfPerson):
+            return router.showIfsg22aCheckDifferentPerson(token1OfPerson: token1OfPerson, token2OfPerson: token2OfPerson)
+        case let .ifsg22aRulesNotAvailable(token):
+            return router.showNoIfsg22aCheckRulesNotAvailable(token: token)
+        case .secondScanSameToken(_):
+             router.showIfsg22aCheckSameCert()
+            return .value(.close)
+        case let .vaccinationCycleIsNotComplete(token):
+            if token.vaccinationCertificate.isTest {
+                return router.showIfsg22aCheckTestIsNotAllowed(token: token)
+            } else {
+                return router.showIfsg22aNotComplete(token: token)
+            }
+        case .none, .invalidDueToRules(_), .invalidDueToTechnicalReason(_):
+            return router.showIfsg22aCheckError(token: nil)
+        }
+    }
+    
+    func errorHandlingMaskCheck(error: Error, token: ExtendedCBORWebToken?) -> Promise<ValidatorDetailSceneResult> {
         if case let CertificateError.revoked(token) = error {
             return router.showMaskRequiredTechnicalError(token: token)
         }
-        switch error as? ValidateCertificateUseCaseError {
+        switch error as? CheckMaskRulesUseCaseError {
         case let .differentPersonalInformation(token1OfPerson, token2OfPerson):
-            return showDifferentPerson(token1OfPerson: token1OfPerson, token2OfPerson: token2OfPerson)
+            return showMaskCheckDifferentPerson(token1OfPerson: token1OfPerson, token2OfPerson: token2OfPerson)
         case let .maskRulesNotAvailable(token):
             return router.showNoMaskRules(token: token)
         case .secondScanSameTokenType(_):
-             router.showSameCertType()
+             router.showMaskCheckSameCertType()
             return .value(.close)
         case let .holderNeedsMask(token):
             if token.vaccinationCertificate.isTest {
@@ -259,9 +291,9 @@ class ValidatorOverviewViewModel {
         }
     }
     
-    func showDifferentPerson(token1OfPerson: ExtendedCBORWebToken,
+    func showMaskCheckDifferentPerson(token1OfPerson: ExtendedCBORWebToken,
                              token2OfPerson: ExtendedCBORWebToken) ->  Promise<ValidatorDetailSceneResult> {
-        router.showDifferentPerson(token1OfPerson: token1OfPerson,
+        router.showMaskCheckDifferentPerson(token1OfPerson: token1OfPerson,
                                    token2OfPerson: token2OfPerson)
         .then { result -> Promise<ValidatorDetailSceneResult> in
             switch result {

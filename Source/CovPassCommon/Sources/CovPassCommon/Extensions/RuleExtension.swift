@@ -18,5 +18,8 @@ extension Rule {
 
     public var isGStatusRule: Bool { ruleType == ._2G || ruleType == ._2GPlus || ruleType == ._3G || ruleType == ._3GPlus  }
     
-    public var isMaskStatusRule: Bool { type == "Mask" }
+    public var isMaskStatusRule: Bool { ruleType == .mask }
+   
+    public var isIfsg22aRule: Bool { ruleType == .impfstatusBZwei || ruleType == .impfstatusCZwei || ruleType == .impfstatusEZwei }
+    
 }

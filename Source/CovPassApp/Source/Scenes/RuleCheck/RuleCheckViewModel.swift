@@ -140,7 +140,7 @@ class RuleCheckViewModel: BaseViewModel, CancellableViewModelProtocol {
                             var logicType: DCCCertLogic.LogicType = .eu
                             if country == Constants.Config.domesticDeCountryCode {
                                 country = Constants.Config.defaultDeCountryCode
-                                logicType = .de
+                                logicType = .deAcceptenceAndInvalidationRules
                             }
                             if let res = try self?.certLogic.validate(type: logicType,
                                                                       countryCode: country,
