@@ -349,7 +349,7 @@
 
 "accessibility_popup_check_validity_choose_country" = "Destination %@. Choose a country";
 
-"accessibility_popup_check_validity_choose_date" = "Date chosen %d. Choose a departure date.";
+"accessibility_popup_check_validity_choose_date" = "Date chosen %@. Choose a departure date.";
 
 "accessibility_certificate_check_validity_announce" = "The view \"Check validity\" has been opened";
 
@@ -1282,26 +1282,6 @@
 
 "accessibility_app_information_title_federal_state_rules_closing_announce" = "Federal state rules has been closed";
 
-"accessibility_app_information_title_information_closing_announce" = "Information has been closed";
-
-"accessibility_app_information_title_checking_rules_announce" = "Update Checking Rules has been opened";
-
-"accessibility_app_information_title_checking_rules_closing_announce" = "Update checking rules has been closed";
-
-"accessibility_app_information_title_update_notifications_announce" = "Update notifications has been opened";
-
-"accessibility_app_information_title_update_notifications_closing_announce" = "Update notifications has been closed";
-
-"accessibility_app_information_title_federal_state_rules_announce" = "Federal state rules has been opened";
-
-"accessibility_app_information_title_federal_state_rules_icon" = "Select federal state";
-
-"accessibility_popup_valid_certificate_germany_announce" = "Validity of certificates in Germany has been opened";
-
-"accessibility_popup_valid_certificate_germany_closing_announce" = "Validity of certificates in Germany has been closed";
-
-"accessibility_app_information_title_federal_state_rules_closing_announce" = "Federal state rules has been closed";
-
 "accessibility_app_information_version_number_delimiter" = "point";
 
 "settings_list_status_on" = "On";
@@ -1881,7 +1861,7 @@
 
 "infschg_detail_page_mask_status_uncertain_federal_state" = "in %@";
 
-"infschg_detail_page_mask_status_uncertain_copy_1" = "There are no federal state-specific rules for this federal state. Therefore, only the uniform federal rules on mandatory masks apply.";
+"infschg_detail_page_mask_status_uncertain_copy_1" = "For this federal state the RKI has not received federal state-specifc rules. Therefore, only the uniform federal rules on mandatory masks apply.";
 
 "infschg_detail_page_mask_status_uncertain_link" = "#More information::https://www.digitaler-impfnachweis-app.de/en/faq/#current-most-frequently-asked-questions#";
 

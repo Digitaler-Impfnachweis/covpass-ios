@@ -122,13 +122,13 @@
 
 "start_screen_toggle_mask" = "Maskenpflicht";
 
-"start_screen_toggle_vaccination" = "Impfstatus";
+"start_screen_toggle_vaccination" = "Impfschutz";
 
-"start_screen_vaccination_status_title" = "Impfstatus nach IfSG §22a";
+"start_screen_vaccination_status_title" = "Impfschutz nach IfSG §22a";
 
-"accessibility_start_screen_vaccination_status_title" = "Impfstatus nach Infektionsschutzgesetz Paragraph 22a";
+"accessibility_start_screen_vaccination_status_title" = "Impfschutz nach Infektionsschutzgesetz Paragraph 22a";
 
-"start_screen_vaccination_status_copy" = "Einen gültigen Impfstatus hat, wer mindestens drei Impfungen oder zwei Impfungen und eine Genesung nachweisen kann.";
+"start_screen_vaccination_status_copy" = "Einen gültigen Impfschutz hat, wer mindestens drei Impfungen oder zwei Impfungen und eine Genesung nachweisen kann.";
 
 "start_screen_vaccination_status_hint" = "Bitte scannen Sie immer die aktuellsten Nachweise zuerst.";
 
@@ -263,7 +263,7 @@
 
 "functional_validation_check_popup_unsuccessful_certificate_subheadline_expiration" = "Impfserie unvollständig";
 
-"functional_validation_check_popup_unsuccessful_certificate_subheadline_expiration_text" = "Für einen vollständigen Impfstatus muss eine Reihe von mindestens drei Immun-Ereignissen (Impfungen oder Genesungen) nachgewiesen werden, davon mindestens zwei Impfungen.";
+"functional_validation_check_popup_unsuccessful_certificate_subheadline_expiration_text" = "Für einen vollständigen Impfschutz muss eine Reihe von mindestens drei Immun-Ereignissen (Impfungen oder Genesungen) nachgewiesen werden, davon mindestens zwei Impfungen.";
 
 "functional_validation_check_popup_unsuccessful_certificate_subheadline_protection" = "Falsche Zertifikate gescannt";
 
@@ -271,11 +271,13 @@
 
 "functional_validation_check_popup_unsuccessful_certificate_subheadline_uncompleted" = "Nicht zugelassener Impfstoff";
 
-"functional_validation_check_popup_unsuccessful_certificate_subheadline_uncompleted_text" = "Wenn die letzte Impfung mit einem nicht in Deutschland zugelassenen Impfstoff erfolgte, muss eine weitere Impfung mit einem mRNA-Impfstoff nachgewiesen werden.";
+"functional_validation_check_popup_unsuccessful_certificate_subheadline_uncompleted_text" = "Bei Impfserien mit nicht in Deutschland zugelassenen Impfstoffen muss mindestens eine Impfung mit einem mRNA-Impfstoff nachgewiesen werden.";
+
+"validation_faq_link" = "#Mehr Informationen::https://www.digitaler-impfnachweis-app.de/faq/#die-aktuell-h-ufigsten-fragen#";
 
 "functional_validation_check_popup_unsuccessful_certificate_subheadline_uncompleted_button" = "Neue Prüfung";
 
-"functional_validation_check_popup_second_scan_title" = "Impfstatus prüfen";
+"functional_validation_check_popup_second_scan_title" = "Impfschutz-Prüfung";
 
 "functional_validation_check_popup_second_scan_subtitle" = "nach IfSG §22a";
 
@@ -291,7 +293,7 @@
 
 "functional_validation_check_popup_second_scan_blue_card_3_subtitle" = "Scannen Sie einen weiteren Nachweis";
 
-"functional_validation_check_popup_second_scan_hint_title" = "Hiinweis";
+"functional_validation_check_popup_second_scan_hint_title" = "Hinweis";
 
 "functional_validation_check_popup_second_scan_hint_copy" = "Für den Nachweis eines vollständigen Impfschutzes sind mehrere Nachweise notwendig.";
 
@@ -766,6 +768,14 @@
 "accessibility_checkapp_popup_choose_federal_state_closing_announce" = "Die Ansicht \"Bundesland wählen\" wurde geschlossen";
 
 "infschg_module_choose_federal_state_title" = "Bundesland wählen";
+
+"infschg_name_matching_error_title" = "Abweichende Daten";
+
+"infschg_name_matching_error_copy" = "Die persönlichen Daten der beiden gescannten Nachweise stimmen nicht überein. Scannen Sie bitte einen anderen Nachweis.";
+
+"infschg_name_matching_error_retry" = "Nochmal versuchen";
+
+"infschg_name_matching_error_cancel" = "Prüfung abbrechen";
 
 
 /********** federal state names **********/

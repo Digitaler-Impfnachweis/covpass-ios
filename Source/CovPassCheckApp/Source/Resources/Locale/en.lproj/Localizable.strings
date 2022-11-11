@@ -271,7 +271,9 @@
 
 "functional_validation_check_popup_unsuccessful_certificate_subheadline_uncompleted" = "Not approved vaccine";
 
-"functional_validation_check_popup_unsuccessful_certificate_subheadline_uncompleted_text" = "If the last vaccination was with a vaccine not licensed in Germany, another vaccination with an mRNA vaccine must be proven.";
+"functional_validation_check_popup_unsuccessful_certificate_subheadline_uncompleted_text" = "For vaccination series with vaccines not approved in Germany, at least one vaccination with an mRNA vaccine must be proven.";
+
+"validation_faq_link" = "#More information::https://www.digitaler-impfnachweis-app.de/en/faq/#current-most-frequently-asked-questions#";
 
 "functional_validation_check_popup_unsuccessful_certificate_subheadline_uncompleted_button" = "New scan";
 
@@ -766,6 +768,14 @@
 "accessibility_checkapp_popup_choose_federal_state_closing_announce" = "Choose federal state has been closed";
 
 "infschg_module_choose_federal_state_title" = "Choose federal state";
+
+"infschg_name_matching_error_title" = "Deviating details";
+
+"infschg_name_matching_error_copy" = "The personal data of the two scanned certificates do not match. Please scan another certificate.";
+
+"infschg_name_matching_error_retry" = "Try again";
+
+"infschg_name_matching_error_cancel" = "Cancel check";
 
 
 /********** federal state names **********/
