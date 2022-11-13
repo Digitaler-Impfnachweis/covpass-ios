@@ -273,6 +273,9 @@ public extension UIImage {
     @ImageLoader(name: "vaccination_cycle_complete")
     private(set) static var vaccinationCycleComplete
 
+    @ImageLoader(name: "vaccination_cycle_incomplete")
+    private(set) static var vaccinationCycleIncomplete
+
     @ImageLoader(name: "certificate_invalid")
     private(set) static var certificateInvalid
 

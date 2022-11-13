@@ -197,7 +197,7 @@ class ValidatorOverviewRouter: ValidatorOverviewRouterProtocol {
     }
     
     func showIfsg22aIncompleteResult(token: ExtendedCBORWebToken) -> Promise<ValidatorDetailSceneResult> {
-#warning("TODO: finalize in upcoming sotries")
-        return .value(.close)
+        let view = VaccinationCycleIncompleteResultSceneFactory(router: VaccinationCycleIncompleteResultRouter(sceneCoordinator: sceneCoordinator))
+        return sceneCoordinator.present(view, animated: true)
     }
 }
