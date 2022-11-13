@@ -30,6 +30,12 @@ open class FederalStateSettingsViewController: UIViewController {
     override public func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .backgroundPrimary
+
+        let backButton = UIBarButtonItem(image: .arrowBack, style: .done, target: self, action: #selector(backButtonTapped))
+        backButton.accessibilityLabel = "accessibility_app_information_contact_label_back".localized // TODO change accessibility text when they are available
+        navigationItem.leftBarButtonItem = backButton
+        navigationController?.navigationBar.tintColor = .onBackground100
+        
         configureCopy()
         configureInputView()
     }
@@ -69,5 +75,9 @@ open class FederalStateSettingsViewController: UIViewController {
         stateSelection.enableAccessibility(label: viewModel.inputTitle,
                                            value: viewModel.inputValue,
                                            traits: .button)
+    }
+
+    @objc private func backButtonTapped() {
+        navigationController?.popViewController(animated: true)
     }
 }

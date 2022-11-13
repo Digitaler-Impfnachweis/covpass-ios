@@ -109,6 +109,11 @@ class TrustedListDetailsViewController: UIViewController {
         updateView()
         setupStaticTexts()
         downloadStateWrapper.layer.cornerRadius = 12.0
+
+        let backButton = UIBarButtonItem(image: .arrowBack, style: .done, target: self, action: #selector(backButtonTapped))
+        backButton.accessibilityLabel = "accessibility_app_information_contact_label_back".localized // TODO change accessibility text when they are available
+        navigationItem.leftBarButtonItem = backButton
+        navigationController?.navigationBar.tintColor = .onBackground100
     }
     
     private func updateLoadingView(isLoading: Bool) {
@@ -169,6 +174,10 @@ class TrustedListDetailsViewController: UIViewController {
             certificateProviderContainer.accessibilityRespondsToUserInteraction = true
             countryListContainer.accessibilityRespondsToUserInteraction = true
         }
+    }
+
+    @objc private func backButtonTapped() {
+        navigationController?.popViewController(animated: true)
     }
 }
 

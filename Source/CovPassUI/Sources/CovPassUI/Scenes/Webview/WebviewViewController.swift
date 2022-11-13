@@ -65,19 +65,29 @@ open class WebviewViewController: UIViewController {
             return
         }
 
-        if navigationController?.navigationBar.backItem != nil { return }
-        let button = UIButton(type: .custom)
-        button.setImage(.close, for: .normal)
-        button.accessibilityLabel = "accessibility_certificate_add_popup_label_close".localized
-        button.addTarget(self, action: #selector(backButtonPressed), for: .touchUpInside)
-        button.frame = CGRect(x: 0, y: 0, width: 32, height: 32)
-        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: button)
-        navigationController?.navigationBar.setValue(true, forKey: "hidesShadow")
-        navigationController?.navigationBar.barTintColor = .neutralWhite
+        if navigationController?.navigationBar.backItem == nil {
+            let button = UIButton(type: .custom)
+            button.setImage(.close, for: .normal)
+            button.accessibilityLabel = "accessibility_certificate_add_popup_label_close".localized
+            button.addTarget(self, action: #selector(backButtonPressed), for: .touchUpInside)
+            button.frame = CGRect(x: 0, y: 0, width: 32, height: 32)
+            navigationItem.rightBarButtonItem = UIBarButtonItem(customView: button)
+            navigationController?.navigationBar.setValue(true, forKey: "hidesShadow")
+            navigationController?.navigationBar.barTintColor = .neutralWhite
+        } else {
+            let backButton = UIBarButtonItem(image: .arrowBack, style: .done, target: self, action: #selector(backButtonTapped))
+            backButton.accessibilityLabel = "accessibility_app_information_contact_label_back".localized // TODO change accessibility text when they are available
+            navigationItem.leftBarButtonItem = backButton
+            navigationController?.navigationBar.tintColor = .onBackground100
+        }
     }
 
     @objc func backButtonPressed() {
         dismiss(animated: true, completion: nil)
+    }
+
+    @objc private func backButtonTapped() {
+        navigationController?.popViewController(animated: true)
     }
 }
 
@@ -107,9 +117,11 @@ extension WebviewViewController: WKNavigationDelegate {
             completionHandler(.cancelAuthenticationChallenge, nil)
             return
         }
-        let exceptions = SecTrustCopyExceptions(serverTrust)
-        SecTrustSetExceptions(serverTrust, exceptions)
-        completionHandler(.useCredential, URLCredential(trust: serverTrust))
+        DispatchQueue.global(qos: .userInitiated).async {
+            let exceptions = SecTrustCopyExceptions(serverTrust)
+            SecTrustSetExceptions(serverTrust, exceptions)
+            completionHandler(.useCredential, URLCredential(trust: serverTrust))
+        }
     }
 }
 
