@@ -9,42 +9,40 @@ APP_NAME = CovPass
 
 
 // API
-
 API_URL = https:/$()/de.dscg.ubirch.com/trustList/DSC/
 
 
 // TLS CERTIVICATE PINNING
-
 TLS_CERTIFICATE_NAME = rsa-certify.prod.ubirch.com-V3_1982645.der
 
 
 // SEAL VERIVICATION
-
 TRUST_LIST_PUBLIC_KEY = pubkey.pem
 TRUST_LIST_STATIC_DATA = dsc.json
 
+
 // Certificate/public key pinning
 PINNING_HASHES = 4fb578f6cb5b4e77f1311f14bee084d552a6b6c53b334e283b88649cdf6a15e9,35bc5ff1a9e64dde09042804e1502140c6cbbe24fba4d5d0b9417f007849aed5
-
 PINNING_HASHES_VAAS = b5b2db195b572b4ad1125c66b657d25f75c709a092dbb9ac052de0ca23bb7e93
 
-// DCC RULES
 
+// DCC RULES
 DCC_RULES_URL = https:/$()/distribution.dcc-rules.de
 DCC_RULES_FILE = dcc-rules.json
 DCC_DOMESTIC_RULES_FILE = dcc-domestic-rules.json
 
-// BOOSTER (NOTIFICATION) RULES
 
+// BOOSTER (NOTIFICATION) RULES
 BOOSTER_RULES_URL = https:/$()/distribution.dcc-rules.de/bnrules
 DOMESTIC_RULES_URL = https:/$()/distribution.dcc-rules.de/domesticrules
+
 
 // CERTIFICATE REISSUE
 CERTIFICATE_REISSUE_URL = https:/$()/api.reissue.ubirch.com
 CERTIFICATE_REISSUE_PINNING_HASHES = ab0b70216c80024e7ed798c305256293e7be0b283b96451fca104c27caab1777
 
-// REVOCATION
 
+// REVOCATION
 CERTIFICATE_REVOCATION_PINNING_HASHES = bf80973b418089c8e7e8fb377b6a70020c7f14e4b07fd2da7d60670bf5084bff
 CERTIFICATE_REVOCATION_URL = https:/$()/de.crl.dscg.ubirch.com
 CERTIFICATE_REVOCATION_TRUST_KEY = revocation-trust-key-release.pem

@@ -4,47 +4,44 @@
 //
 
 // BASIC
-
 APP_NAME = CovPass
 
 
 // API
-
 API_URL = https:/$()/de.test.dscg.ubirch.com/trustList/DSC/
 
 
 // TLS CERTIVICATE PINNING
-
 TLS_CERTIFICATE_NAME = de.test.dscg.ubirch.com.combined.der
 
 
 // SEAL VERIVICATION
-
 TRUST_LIST_PUBLIC_KEY = pubkey.pem
 TRUST_LIST_STATIC_DATA = dsc.json
 
+
 // Certificate/public key pinning
 PINNING_HASHES = 99cbc210bec8bad16f0827e733b1972e2a7b110cfbbc01e749c2b8572ddbf306,35bc5ff1a9e64dde09042804e1502140c6cbbe24fba4d5d0b9417f007849aed5,1564f08198bdb5b6a85aa0f2b7bc5e6333cdd9b5b7ff989e6bfa7acd513a95f8
-
 PINNING_HASHES_VAAS = 9720c40c10804e4859afd5425bc0efd2f91a8ff4601c051f9a08cdd3f4b6a7f6,b5b2db195b572b4ad1125c66b657d25f75c709a092dbb9ac052de0ca23bb7e93
 
-// DCC RULES
 
+// DCC RULES
 DCC_RULES_URL = https:/$()/distribution.dcc-rules.de
 DCC_RULES_FILE = dcc-rules.json
 DCC_DOMESTIC_RULES_FILE = dcc-domestic-rules.json
 
-// BOOSTER (NOTIFICATION) RULES
 
+// BOOSTER (NOTIFICATION) RULES
 BOOSTER_RULES_URL = https:/$()/distribution-cff4f7147260.dcc-rules.de/bnrules
 DOMESTIC_RULES_URL = https:/$()/distribution-cff4f7147260.dcc-rules.de/domesticrules
+
 
 // CERTIFICATE REISSUE
 CERTIFICATE_REISSUE_URL = https:/$()/api.reissue.demo.ubirch.com
 CERTIFICATE_REISSUE_PINNING_HASHES = 151bb50bb467f6b7f346c602b22a00b651fbbdf8695c238beba832ae9c0e056d
 
+
 // REVOCATION
- 
 CERTIFICATE_REVOCATION_PINNING_HASHES = 99cbc210bec8bad16f0827e733b1972e2a7b110cfbbc01e749c2b8572ddbf306
 CERTIFICATE_REVOCATION_URL = https:/$()/de.crl.test.dscg.ubirch.com
 CERTIFICATE_REVOCATION_TRUST_KEY = revocation-trust-key-debug.pem
