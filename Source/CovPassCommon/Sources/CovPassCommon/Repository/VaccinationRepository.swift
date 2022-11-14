@@ -319,9 +319,9 @@ public class VaccinationRepository: VaccinationRepositoryProtocol {
         }
     }
 
-    public func validCertificate(_ data: String) -> Promise<ExtendedCBORWebToken> {
+    public func validCertificate(_ data: String, checkSealCertificate: Bool = false) -> Promise<ExtendedCBORWebToken> {
         firstly {
-            return checkCertificate(data)
+            return checkCertificate(data, checkSealCertificate: checkSealCertificate)
         }
         .then {
             Promise.value(ExtendedCBORWebToken(vaccinationCertificate: $0,

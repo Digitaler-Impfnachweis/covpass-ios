@@ -92,7 +92,7 @@ public class VaccinationRepositoryMock: VaccinationRepositoryProtocol {
         }
     }
 
-    public func validCertificate(_ data: String) -> Promise<ExtendedCBORWebToken> {
+    public func validCertificate(_ data: String, checkSealCertificate _: Bool) -> Promise<ExtendedCBORWebToken> {
         checkedCert != nil ?
             .value(
                 ExtendedCBORWebToken(

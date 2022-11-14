@@ -43,7 +43,7 @@ public protocol VaccinationRepositoryProtocol {
     func checkCertificate(_ data: String, checkSealCertificate: Bool) -> Promise<CBORWebToken>
 
     /// Variant of `checkCertificate` which returns an `ExtendedCBORWebToken`.
-    func validCertificate(_ data: String) -> Promise<ExtendedCBORWebToken>
+    func validCertificate(_ data: String, checkSealCertificate: Bool) -> Promise<ExtendedCBORWebToken>
 
     /// Toogles the favorite state and returns the updated flag
     func toggleFavoriteStateForCertificateWithIdentifier(_ id: String) -> Promise<Bool>
