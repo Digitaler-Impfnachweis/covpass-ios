@@ -22,6 +22,7 @@ class GermanAppInformationViewModel: CovPassAppInformationViewModel {
                       closingAnnounce: Accessibility.Closing.leichteSprache),
             .webEntry(title: Texts.contactTitle,
                       url: mainBundle.url(forResource: "contact-covpass-de", withExtension: "html")!,
+                      enableDynamicFonts: true,
                       openingAnnounce: Accessibility.Opening.contactTitle,
                       closingAnnounce: Accessibility.Closing.contactTitle),
             .webEntry(title: Texts.faqTitle,
@@ -30,6 +31,7 @@ class GermanAppInformationViewModel: CovPassAppInformationViewModel {
                       closingAnnounce: Accessibility.Closing.faqTitle),
             .webEntry(title: Texts.datenschutzTitle,
                       url: mainBundle.url(forResource: "privacy-covpass-de", withExtension: "html")!,
+                      enableDynamicFonts: true,
                       openingAnnounce: Accessibility.Opening.datenschutzTitle,
                       closingAnnounce: Accessibility.Closing.datenschutzTitle),
             .webEntry(title: Texts.companyDetailsTitle,
@@ -38,6 +40,7 @@ class GermanAppInformationViewModel: CovPassAppInformationViewModel {
                       closingAnnounce: Accessibility.Closing.companyDetailsTitle),
             .webEntry(title: Texts.openSourceLicenseTitle,
                       url: licenseBundle.url(forResource: "license_de", withExtension: "html")!,
+                      enableDynamicFonts: true,
                       openingAnnounce: Accessibility.Opening.openSourceLicenseTitle,
                       closingAnnounce: Accessibility.Closing.openSourceLicenseTitle),
             .webEntry(title: Texts.accessibilityStatementTitle,
@@ -77,6 +80,7 @@ class EnglishAppInformationViewModel: CovPassAppInformationViewModel {
         [
             .webEntry(title: Texts.contactTitle,
                       url: mainBundle.url(forResource: "contact-covpass-en", withExtension: "html")!,
+                      enableDynamicFonts: true,
                       openingAnnounce: Accessibility.Opening.contactTitle,
                       closingAnnounce: Accessibility.Closing.contactTitle),
             .webEntry(title: Texts.faqTitle,
@@ -85,6 +89,7 @@ class EnglishAppInformationViewModel: CovPassAppInformationViewModel {
                       closingAnnounce: Accessibility.Closing.faqTitle),
             .webEntry(title: Texts.datenschutzTitle,
                       url: mainBundle.url(forResource: "privacy-covpass-en", withExtension: "html")!,
+                      enableDynamicFonts: true,
                       openingAnnounce: Accessibility.Opening.datenschutzTitle,
                       closingAnnounce: Accessibility.Closing.datenschutzTitle),
             .webEntry(title: Texts.companyDetailsTitle,
@@ -93,6 +98,7 @@ class EnglishAppInformationViewModel: CovPassAppInformationViewModel {
                       closingAnnounce: Accessibility.Closing.companyDetailsTitle),
             .webEntry(title: Texts.openSourceLicenseTitle,
                       url: licenseBundle.url(forResource: "license_en", withExtension: "html")!,
+                      enableDynamicFonts: true,
                       openingAnnounce: Accessibility.Opening.openSourceLicenseTitle,
                       closingAnnounce: Accessibility.Closing.openSourceLicenseTitle),
             .webEntry(title: Texts.accessibilityStatementTitle,
@@ -127,12 +133,14 @@ class EnglishAppInformationViewModel: CovPassAppInformationViewModel {
 private extension AppInformationEntry {
     static func webEntry(title: String,
                          url: URL,
+                         enableDynamicFonts: Bool = false,
                          openingAnnounce: String,
                          closingAnnounce: String) -> AppInformationEntry {
         .init(
             title: title,
             scene: WebviewSceneFactory(title: title,
                                        url: url,
+                                       enableDynamicFonts: enableDynamicFonts,
                                        openingAnnounce: openingAnnounce,
                                        closingAnnounce: closingAnnounce)
         )

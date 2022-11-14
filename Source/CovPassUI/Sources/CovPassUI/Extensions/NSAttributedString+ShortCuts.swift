@@ -9,6 +9,8 @@
 import Foundation
 import UIKit
 
+let MAX_SCALING_FACTOR = 2.0
+
 public extension NSAttributedString {
     func styledAs(_ style: TextStyle) -> NSAttributedString {
         style.apply(self)
@@ -31,7 +33,7 @@ public extension NSAttributedString {
 
         let font = UIFont(name: fontName, size: size) ?? UIFont.systemFont(ofSize: size)
         let fontMetrics = UIFontMetrics(forTextStyle: textStyle)
-        let scaledFont = fontMetrics.scaledFont(for: font, compatibleWith: traitCollection)
+        let scaledFont = fontMetrics.scaledFont(for: font, maximumPointSize: size * MAX_SCALING_FACTOR, compatibleWith: traitCollection)
 
         let result = setAttribute(.font, value: scaledFont, in: range)
         if let lineHeight = lineHeight {
@@ -63,6 +65,8 @@ public extension NSAttributedString {
     {
         paragraphStyled(in: range) { style in
             guard let font: UIFont = attribute(.font) else { return }
+
+            style.maximumLineHeight = value * MAX_SCALING_FACTOR
 
             // font.lineHeight is already scaled, so we must scale the requested lineHeight value too, to calculate the multiple.
             style.lineHeightMultiple = 1.0 / font.lineHeight * fontMetrics.scaledValue(for: value, compatibleWith: traitCollection)

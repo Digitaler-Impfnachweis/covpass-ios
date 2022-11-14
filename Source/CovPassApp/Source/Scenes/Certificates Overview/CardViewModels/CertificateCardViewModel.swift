@@ -84,7 +84,7 @@ class CertificateCardViewModel: CertificateCardViewModelProtocol {
     let backgroundColor: UIColor = .clear
 
     var iconTintColor: UIColor {
-        isInvalid ? UIColor(hexString: "878787") : .onBrandAccent70
+        isInvalid ? UIColor(hexString: "737373") : .onBrandAccent70
     }
 
     var textColor: UIColor {

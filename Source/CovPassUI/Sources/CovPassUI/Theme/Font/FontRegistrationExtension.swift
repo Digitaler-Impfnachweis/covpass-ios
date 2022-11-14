@@ -12,9 +12,9 @@ import UIKit
 extension UIFont {
     // MARK: - Supported fonts name
 
-    static let sansBold = "OpenSans-Bold"
-    static let sansSemiBold = "OpenSans-SemiBold"
-    static let sansRegular = "OpenSans-Regular"
+    public static let sansBold = "OpenSans-Bold"
+    public static let sansSemiBold = "OpenSans-SemiBold"
+    public static let sansRegular = "OpenSans-Regular"
 
     // MARK: - Load and unload fonts
 

@@ -13,7 +13,7 @@ import WebKit
 class AnnouncementViewController: UIViewController {
     // MARK: - IBOutlet
 
-    @IBOutlet var webView: WKWebView!
+    @IBOutlet var webView: StaticWebView!
     @IBOutlet var webViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet var okButton: MainButton!
     @IBOutlet var checkButton: UIButton!
@@ -47,7 +47,9 @@ class AnnouncementViewController: UIViewController {
 
     private func configureWebView() {
         webView.scrollView.isScrollEnabled = false
-        webView.navigationDelegate = self
+        webView.onScrollHeight = { height in
+            self.webViewHeightConstraint.constant = height
+        }
         _ = webView.loadSynchronously(viewModel.whatsNewURL)
     }
 
@@ -106,18 +108,5 @@ private extension WKWebView {
             return nil
         }
         return loadHTMLString(html, baseURL: url)
-    }
-}
-
-extension AnnouncementViewController: WKNavigationDelegate {
-    
-    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        if !webView.isLoading {
-            webView.evaluateJavaScript("document.body.scrollHeight", completionHandler: { result, _ in
-                if let height = result as? CGFloat {
-                    self.webViewHeightConstraint.constant = height
-                }
-            })
-        }
     }
 }

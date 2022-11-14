@@ -51,7 +51,7 @@ final class CertificateImportSelectionViewController: UIViewController {
 
     private func configureInfoHeaderView() {
         infoHeaderView.image = .close
-        infoHeaderView.attributedTitleText = viewModel.title.styledAs(.header_20)
+        infoHeaderView.attributedTitleText = viewModel.title.styledAs(.header_2)
         infoHeaderView.action = viewModel.cancel
     }
 

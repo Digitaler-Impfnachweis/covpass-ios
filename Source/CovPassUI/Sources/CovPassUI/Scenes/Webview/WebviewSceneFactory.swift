@@ -16,6 +16,7 @@ public struct WebviewSceneFactory: SceneFactory {
     private let closeButtonShown: Bool
     private let isToolbarShown: Bool
     private let embedInNavigationController: Bool
+    private let enableDynamicFonts: Bool
     private let openingAnnounce: String
     private let closingAnnounce: String
 
@@ -26,6 +27,7 @@ public struct WebviewSceneFactory: SceneFactory {
                 closeButtonShown: Bool = false,
                 isToolbarShown: Bool = false,
                 embedInNavigationController: Bool = false,
+                enableDynamicFonts: Bool = false,
                 openingAnnounce: String,
                 closingAnnounce: String) {
         self.openingAnnounce = openingAnnounce
@@ -35,6 +37,7 @@ public struct WebviewSceneFactory: SceneFactory {
         self.closeButtonShown = closeButtonShown
         self.isToolbarShown = isToolbarShown
         self.embedInNavigationController = embedInNavigationController
+        self.enableDynamicFonts = enableDynamicFonts
     }
     
     public func make() -> UIViewController {
@@ -42,6 +45,7 @@ public struct WebviewSceneFactory: SceneFactory {
                                          url: url,
                                          closeButtonShown: closeButtonShown,
                                          isToolbarShown: isToolbarShown,
+                                         enableDynamicFonts: enableDynamicFonts,
                                          openingAnnounce: openingAnnounce,
                                          closingAnnounce: closingAnnounce)
         let viewController = WebviewViewController(viewModel: viewModel)

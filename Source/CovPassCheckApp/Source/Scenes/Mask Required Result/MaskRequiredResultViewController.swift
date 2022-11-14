@@ -87,7 +87,7 @@ final class MaskRequiredResultViewController: UIViewController {
 
     private func configureLabels() {
         titleLabel.attributedText = viewModel.title
-            .styledAs(.header_24)
+            .styledAs(.header_1)
         subtitleLabel.attributedText = viewModel.subtitle
             .styledAs(.header_3)
             .colored(.onBackground80)

@@ -54,7 +54,7 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jTD-88-mud">
                                             <rect key="frame" x="0.0" y="0.0" width="366" height="71"/>
                                             <subviews>
-                                                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="m40-Sj-leB" userLabel="check type segment">
+                                                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="m40-Sj-leB" userLabel="check type segment" customClass="SegmentedControl" customModule="CovPassUI">
                                                     <rect key="frame" x="0.0" y="0.0" width="366" height="48"/>
                                                     <segments>
                                                         <segment title="First"/>

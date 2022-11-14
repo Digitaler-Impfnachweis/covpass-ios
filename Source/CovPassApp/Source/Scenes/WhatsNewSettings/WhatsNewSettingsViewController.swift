@@ -12,7 +12,7 @@ import WebKit
 class WhatsNewSettingsViewController: UIViewController {
     @IBOutlet var descriptionLabel: UILabel!
     @IBOutlet var whatsNewSwitch: LabeledSwitch!
-    @IBOutlet var webView: WKWebView!
+    @IBOutlet var webView: StaticWebView!
     @IBOutlet var webViewHeightConstraint: NSLayoutConstraint!
     private var viewModel: WhatsNewSettingsViewModelProtocol
 
@@ -75,22 +75,9 @@ class WhatsNewSettingsViewController: UIViewController {
 
     private func setupWebView() {
         webView.scrollView.isScrollEnabled = false
-        webView.navigationDelegate = self
-        webView.load(viewModel.whatsNewURLRequest)
-    }
-}
-
-// MARK: - WKNavigationDelegate
-
-extension WhatsNewSettingsViewController: WKNavigationDelegate {
-    
-    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        if !webView.isLoading {
-            webView.evaluateJavaScript("document.body.scrollHeight", completionHandler: { result, _ in
-                if let height = result as? CGFloat {
-                    self.webViewHeightConstraint.constant = height
-                }
-            })
+        webView.onScrollHeight = { [weak self] height in
+            self?.webViewHeightConstraint.constant = height
         }
+        webView.load(viewModel.whatsNewURLRequest)
     }
 }

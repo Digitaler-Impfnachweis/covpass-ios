@@ -37,6 +37,7 @@ public struct ConsentRouter: ConsentRouterProtocol {
                 url: url,
                 closeButtonShown: true,
                 embedInNavigationController: true,
+                enableDynamicFonts: true,
                 openingAnnounce: openingAnnounce,
                 closingAnnounce: closingAnnounce
             ),

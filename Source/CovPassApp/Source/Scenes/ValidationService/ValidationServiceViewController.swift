@@ -60,7 +60,7 @@ class ValidationServiceViewController: UIViewController {
         view.image = .close
         view.frame.size.height = Constants.Layout.headerViewHeight
         view.textLabel.numberOfLines = 0
-        view.attributedTitleText = Constants.Text.headerText.styledAs(.header_16)
+        view.attributedTitleText = Constants.Text.headerText.styledAs(.header_3)
         view.action = { [weak self] in
             self?.cancel()
         }

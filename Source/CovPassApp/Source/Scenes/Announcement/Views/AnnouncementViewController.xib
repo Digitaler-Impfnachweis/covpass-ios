@@ -32,13 +32,13 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RZn-8r-649" userLabel="Content View">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="570.5"/>
                             <subviews>
-                                <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a59-FX-pcd">
+                                <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a59-FX-pcd" customClass="StaticWebView" customModule="CovPassUI">
                                     <rect key="frame" x="0.0" y="8" width="312" height="250"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="250" id="lwd-Vg-e7N"/>
                                     </constraints>
                                     <wkWebViewConfiguration key="configuration">
-                                        <dataDetectorTypes key="dataDetectorTypes"/>
+                                        <dataDetectorTypes key="dataDetectorTypes" none="YES"/>
                                         <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
                                         <wkPreferences key="preferences"/>
                                     </wkWebViewConfiguration>

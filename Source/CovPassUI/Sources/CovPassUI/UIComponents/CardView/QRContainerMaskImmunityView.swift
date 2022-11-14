@@ -57,7 +57,7 @@ public class QRContainerMaskImmunityView: XibView {
         isInvalid ? invalidColor : .onBackground110
     }
 
-    private lazy var invalidColor = UIColor(hexString: "878787")
+    private lazy var invalidColor = UIColor(hexString: "737373")
 
     // MARK: - Lifecycle
 

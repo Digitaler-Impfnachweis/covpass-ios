@@ -78,7 +78,7 @@ public class QRContainerView: XibView {
         isInvalid ? invalidColor : titleColorValue
     }
 
-    private lazy var invalidColor = UIColor(hexString: "878787")
+    private lazy var invalidColor = UIColor(hexString: "737373")
 
     // MARK: - Lifecycle
 

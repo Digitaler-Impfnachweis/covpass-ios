@@ -25,6 +25,7 @@ class ValidationServiceViewControllerSnapShotTests: BaseSnapShotTests {
                                   url: ValidationServiceInitialisation.mock.privacyUrl,
                                   closeButtonShown: false,
                                   isToolbarShown: true,
+                                  enableDynamicFonts: false,
                                   openingAnnounce: "",
                                   closingAnnounce: "")
         let vc = WebviewViewController(viewModel: vm)

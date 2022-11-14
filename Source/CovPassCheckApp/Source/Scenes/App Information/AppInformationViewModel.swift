@@ -67,6 +67,7 @@ class GermanAppInformationViewModel: CheckAppInformationBaseViewModel {
                       closingAnnounce: Accessibility.Closing.leichteSprache),
             .webEntry(title: Texts.contactTitle,
                       url: mainBundle.url(forResource: "contact-covpasscheck-de", withExtension: "html")!,
+                      enableDynamicFonts: true,
                       openingAnnounce: Accessibility.Opening.contactTitle,
                       closingAnnounce: Accessibility.Closing.contactTitle),
             .webEntry(title: Texts.faqTitle,
@@ -75,6 +76,7 @@ class GermanAppInformationViewModel: CheckAppInformationBaseViewModel {
                       closingAnnounce: Accessibility.Closing.faqTitle),
             .webEntry(title: Texts.datenschutzTitle,
                       url: mainBundle.url(forResource: "privacy-covpasscheck-de", withExtension: "html")!,
+                      enableDynamicFonts: true,
                       openingAnnounce: Accessibility.Opening.datenschutzTitle,
                       closingAnnounce: Accessibility.Closing.datenschutzTitle),
             .webEntry(title: Texts.companyDetailsTitle,
@@ -83,6 +85,7 @@ class GermanAppInformationViewModel: CheckAppInformationBaseViewModel {
                       closingAnnounce: Accessibility.Closing.companyDetailsTitle),
             .webEntry(title: Texts.openSourceLicenseTitle,
                       url: licenseBundle.url(forResource: "license_de" , withExtension: "html")!,
+                      enableDynamicFonts: true,
                       openingAnnounce: Accessibility.Opening.openSourceLicenseTitle,
                       closingAnnounce: Accessibility.Closing.openSourceLicenseTitle),
             .webEntry(title: Texts.accessibilityStatementTitle,
@@ -112,6 +115,7 @@ class EnglishAppInformationViewModel: CheckAppInformationBaseViewModel {
         [
             .webEntry(title: Texts.contactTitle,
                       url: mainBundle.url(forResource: "contact-covpasscheck-en", withExtension: "html")!,
+                      enableDynamicFonts: true,
                       openingAnnounce: Accessibility.Opening.contactTitle,
                       closingAnnounce: Accessibility.Closing.contactTitle),
             .webEntry(title: Texts.faqTitle,
@@ -120,6 +124,7 @@ class EnglishAppInformationViewModel: CheckAppInformationBaseViewModel {
                       closingAnnounce: Accessibility.Closing.faqTitle),
             .webEntry(title: Texts.datenschutzTitle,
                       url: mainBundle.url(forResource: "privacy-covpasscheck-en", withExtension: "html")!,
+                      enableDynamicFonts: true,
                       openingAnnounce: Accessibility.Opening.datenschutzTitle,
                       closingAnnounce: Accessibility.Closing.datenschutzTitle),
             .webEntry(title: Texts.companyDetailsTitle,
@@ -128,6 +133,7 @@ class EnglishAppInformationViewModel: CheckAppInformationBaseViewModel {
                       closingAnnounce: Accessibility.Closing.companyDetailsTitle),
             .webEntry(title: Texts.openSourceLicenseTitle,
                       url: licenseBundle.url(forResource: "license_en" , withExtension: "html")!,
+                      enableDynamicFonts: true,
                       openingAnnounce: Accessibility.Opening.openSourceLicenseTitle,
                       closingAnnounce: Accessibility.Closing.openSourceLicenseTitle),
             .webEntry(title: Texts.accessibilityStatementTitle,
@@ -162,6 +168,7 @@ private enum LocalText {
 private extension AppInformationEntry {
     static func webEntry(title: String,
                          url: URL,
+                         enableDynamicFonts: Bool = false,
                          openingAnnounce: String,
                          closingAnnounce: String) -> AppInformationEntry {
         .init(

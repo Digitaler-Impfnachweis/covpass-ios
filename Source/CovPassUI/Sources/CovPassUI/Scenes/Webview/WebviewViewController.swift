@@ -13,7 +13,7 @@ open class WebviewViewController: UIViewController {
     // MARK: - Properties
 
     let viewModel: WebviewViewModelProtocol
-    @IBOutlet var webView: WKWebView!
+    @IBOutlet var webView: StaticWebView!
     @IBOutlet weak var toolbar: CustomToolbarView!
 
     // MARK: - Lifecycle
@@ -121,6 +121,12 @@ extension WebviewViewController: WKNavigationDelegate {
             let exceptions = SecTrustCopyExceptions(serverTrust)
             SecTrustSetExceptions(serverTrust, exceptions)
             completionHandler(.useCredential, URLCredential(trust: serverTrust))
+        }
+    }
+
+    public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        if !webView.isLoading {
+            self.webView.setDynamicFont()
         }
     }
 }

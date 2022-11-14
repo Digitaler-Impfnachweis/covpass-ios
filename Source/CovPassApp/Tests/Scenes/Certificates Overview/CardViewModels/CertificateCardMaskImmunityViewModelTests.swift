@@ -642,7 +642,7 @@ class CertificateCardMaskImmunityViewModelTests: XCTestCase {
         let iconTintColor = sut.iconTintColor
 
         // Then
-        XCTAssertEqual(iconTintColor, UIColor(hexString: "878787"))
+        XCTAssertEqual(iconTintColor, UIColor(hexString: "737373"))
     }
     
     func testIconTintColor_not_invalid() throws {

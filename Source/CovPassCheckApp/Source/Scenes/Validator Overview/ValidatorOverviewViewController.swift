@@ -23,7 +23,7 @@ class ValidatorOverviewViewController: UIViewController {
     @IBOutlet var scanCard: ScanCardView!
     @IBOutlet var checkTypesStackview: UIStackView!
     @IBOutlet var immunityCheckView: ImmunityScanCardView!
-    @IBOutlet var checkTypeSegment: UISegmentedControl!
+    @IBOutlet var checkTypeSegment: SegmentedControl!
     @IBOutlet var timeHintView: HintView!
     @IBOutlet var offlineInformationView: UIView!
     @IBOutlet var offlineInformationStateWrapperView: UIView!
@@ -102,7 +102,7 @@ class ValidatorOverviewViewController: UIViewController {
             self.viewModel.scanAction(additionalToken: nil)
         }
         scanCard.titleLabel.attributedText = viewModel.scanDropDownTitle
-            .styledAs(.subheader_3)
+            .styledAs(.header_3)
             .colored(.neutralWhite)
         scanCard.textLabel.attributedText = viewModel.scanDropDownValue
             .styledAs(.body)

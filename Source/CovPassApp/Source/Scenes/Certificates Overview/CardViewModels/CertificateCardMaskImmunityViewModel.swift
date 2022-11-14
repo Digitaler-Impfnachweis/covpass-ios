@@ -115,7 +115,7 @@ class CertificateCardMaskImmunityViewModel: CertificateCardViewModelProtocol {
     }
 
     var iconTintColor: UIColor {
-        isInvalid ? UIColor(hexString: "878787") : .onBrandAccent70
+        isInvalid ? UIColor(hexString: "737373") : .onBrandAccent70
     }
 
     let textColor: UIColor = .neutralWhite
