@@ -70,20 +70,6 @@ extension ValidatorOverviewViewModel {
             self.checkImmunityStatus(additionalToken: token)
         }
     }
-    
-    func showImmunityCheckDifferentPerson(token1OfPerson: ExtendedCBORWebToken,
-                                      token2OfPerson: ExtendedCBORWebToken) ->  Promise<ValidatorDetailSceneResult> {
-        router.showIfsg22aCheckDifferentPerson(token1OfPerson: token1OfPerson,
-                                               token2OfPerson: token2OfPerson)
-        .then { result -> Promise<ValidatorDetailSceneResult> in
-            switch result {
-            case .startOver:
-                return .value(.startOver)
-            case .close, .secondScan(_):
-                return .value(.close)
-            }
-        }
-    }
 }
 
 private extension ExtendedCBORWebToken {

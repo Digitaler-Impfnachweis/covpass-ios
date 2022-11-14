@@ -23,6 +23,11 @@ private enum Constants {
          static let error_2G_unexpected_type_title = "error_2G_unexpected_type_title".localized
          static let error_2G_unexpected_type_copy = "error_2G_unexpected_type_copy".localized
          static let error_2G_unexpected_type_button = "error_2G_unexpected_type_button".localized
+
+         static let infschg_name_matching_error_title = "infschg_name_matching_error_title".localized
+         static let infschg_name_matching_error_copy = "infschg_name_matching_error_copy".localized
+         static let infschg_name_matching_error_retry = "infschg_name_matching_error_retry".localized
+         static let infschg_name_matching_error_cancel = "infschg_name_matching_error_cancel".localized
      }
  }
 
@@ -140,16 +145,17 @@ class ValidatorOverviewRouter: ValidatorOverviewRouterProtocol {
     }
     
     func showMaskCheckSameCertType() {
-        let copyString = Constants.Keys.error_2G_unexpected_type_copy
-        showDialog(title: Constants.Keys.error_2G_unexpected_type_title,
-                   message: copyString,
-                   actions: [
-                    DialogAction(title: Constants.Keys.error_2G_unexpected_type_button,
-                                 style: UIAlertAction.Style.default,
-                                 isEnabled: true,
-                                 completion: nil)
-                   ],
-                   style: .alert)
+        showDialog(
+            title: Constants.Keys.error_2G_unexpected_type_title,
+            message: Constants.Keys.error_2G_unexpected_type_copy,
+            actions: [
+            DialogAction(title: Constants.Keys.error_2G_unexpected_type_button,
+                 style: UIAlertAction.Style.default,
+                 isEnabled: true,
+                 completion: nil)
+            ],
+            style: .alert
+        )
     }
     
     // MARK: Ifsg22a Check
@@ -168,9 +174,31 @@ class ValidatorOverviewRouter: ValidatorOverviewRouterProtocol {
     }
     
     func showIfsg22aCheckDifferentPerson(token1OfPerson: ExtendedCBORWebToken, token2OfPerson: ExtendedCBORWebToken) -> Promise<ValidatorDetailSceneResult> {
-        print("showIfsg22aCheckDifferentPerson")
-#warning("TODO: finalize in upcoming sotries")
-        return .value(.close)
+        Promise { seal in
+            showDialog(
+                title: Constants.Keys.infschg_name_matching_error_title,
+                message: Constants.Keys.infschg_name_matching_error_copy,
+                actions: [
+                    DialogAction(
+                        title: Constants.Keys.infschg_name_matching_error_retry,
+                        style: UIAlertAction.Style.default,
+                        isEnabled: true,
+                        completion: { _ in
+                            seal.fulfill(.secondScan(token1OfPerson))
+                        }
+                    ),
+                    DialogAction(
+                        title: Constants.Keys.infschg_name_matching_error_cancel,
+                        style: UIAlertAction.Style.default,
+                        isEnabled: true,
+                        completion: { _ in
+                            seal.fulfill(.close)
+                        }
+                    ),
+                ],
+                style: .alert
+            )
+        }
     }
     
     func showIfsg22aCheckSameCert() {
