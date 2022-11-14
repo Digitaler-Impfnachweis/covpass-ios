@@ -55,6 +55,11 @@ class ConsentViewController: UIViewController {
         view.backgroundColor = UIColor.backgroundPrimary
     }
 
+    public override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        configureImageView()
+    }
+
     // MARK: - Methods
 
     public func scrollToBottom() {
@@ -70,6 +75,7 @@ class ConsentViewController: UIViewController {
         imageView.image = viewModel.image
         imageView.pinHeightToScaleAspectFit()
         imageView.isAccessibilityElement = false
+        imageView.isHidden = UIScreen.main.bounds.size.width > UIScreen.main.bounds.size.height
     }
 
     private func configureHeadline() {

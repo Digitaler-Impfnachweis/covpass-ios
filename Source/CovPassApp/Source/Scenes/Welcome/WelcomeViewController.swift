@@ -54,6 +54,11 @@ class WelcomeViewController: UIViewController {
         configureAccessibilityRespondsToUserInteraction()
     }
 
+    public override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        configureImageView()
+    }
+
     // MARK: - Methods
 
     private func configureScrollView() {
@@ -68,6 +73,7 @@ class WelcomeViewController: UIViewController {
         imageView.image = viewModel.image
         imageView.pinHeightToScaleAspectFit()
         imageView.isAccessibilityElement = false
+        imageView.isHidden = UIScreen.isLandscape
     }
 
     private func configureHeadline() {

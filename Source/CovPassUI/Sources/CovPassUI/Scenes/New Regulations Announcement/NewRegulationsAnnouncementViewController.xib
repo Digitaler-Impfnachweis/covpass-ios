@@ -16,6 +16,7 @@
                 <outlet property="copyText1Label" destination="Jn1-E8-fzN" id="J7u-cQ-pa4"/>
                 <outlet property="copyText2Label" destination="bt6-lg-dwE" id="ixb-qD-6wF"/>
                 <outlet property="illustrationImageView" destination="67P-Pj-bJa" id="ahb-fd-DT5"/>
+                <outlet property="imageViewConstraint" destination="Gtc-vG-xU2" id="ezG-Nu-uLr"/>
                 <outlet property="infoHeaderView" destination="YJV-3D-iVA" id="wNC-jR-vSe"/>
                 <outlet property="subtitleLabel" destination="rLr-Hv-dKb" id="Prm-hI-Ous"/>
                 <outlet property="view" destination="iN0-l3-epB" id="kKJ-Bj-pdm"/>

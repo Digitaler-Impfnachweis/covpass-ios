@@ -11,6 +11,7 @@ public class NewRegulationsAnnouncementViewController: UIViewController {
 
     @IBOutlet var infoHeaderView: InfoHeaderView!
     @IBOutlet var illustrationImageView: UIImageView!
+    @IBOutlet var imageViewConstraint: NSLayoutConstraint!
     @IBOutlet var copyText1Label: UILabel!
     @IBOutlet var subtitleLabel: UILabel!
     @IBOutlet var copyText2Label: UILabel!
@@ -42,6 +43,11 @@ public class NewRegulationsAnnouncementViewController: UIViewController {
         super.viewDidDisappear(animated)
         UIAccessibility.post(notification: .layoutChanged, argument: viewModel.closingAnnounce)
     }
+
+    public override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        setupIllustration()
+    }
     
     private func setupInfoHeaderView() {
         infoHeaderView.attributedTitleText = viewModel.header
@@ -55,6 +61,10 @@ public class NewRegulationsAnnouncementViewController: UIViewController {
     private func setupIllustration() {
         illustrationImageView.image = viewModel.illustration
         illustrationImageView.isAccessibilityElement = false
+        illustrationImageView.isHidden = UIScreen.isLandscape
+        illustrationImageView.constraints.forEach { constraint in
+            constraint.isActive = !UIScreen.isLandscape
+        }
     }
 
     private func setupLabels() {

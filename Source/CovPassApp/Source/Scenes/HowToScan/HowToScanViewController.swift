@@ -67,12 +67,17 @@ class HowToScanViewController: UIViewController {
         super.viewWillDisappear(animated)
         UIAccessibility.post(notification: .layoutChanged, argument: viewModel.sceneClosingAnnouncement)
     }
-    
+
+    public override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        configureImageView()
+    }
 
     // MARK: - Private
 
     private func configureImageView() {
         imageView.image = viewModel.image
+        imageView.isHidden = UIScreen.isLandscape
         imageView.isAccessibilityElement = false
         imageView.pinHeightToScaleAspectFit()
     }

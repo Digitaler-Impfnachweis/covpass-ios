@@ -47,12 +47,18 @@ open class SelectStateOnboardingViewController: UIViewController {
         UIAccessibility.post(notification: .layoutChanged, argument: viewModel.closingAnnounce)
     }
 
+    public override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        configureView()
+    }
+
     // MARK: - Methods
 
     private func configureView() {
         decorativeImageView.image = viewModel.image
         decorativeImageView.backgroundColor = .backgroundPrimary
         decorativeImageView.isAccessibilityElement = false
+        decorativeImageView.isHidden = UIScreen.isLandscape
         button.style = .primary
         button.title = "ok".localized(bundle: .main)
         headerView.attributedTitleText = viewModel.title.styledAs(.header_1)

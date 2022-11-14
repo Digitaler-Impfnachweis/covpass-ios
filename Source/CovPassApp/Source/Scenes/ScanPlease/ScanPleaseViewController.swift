@@ -58,11 +58,17 @@ class ScanPleaseViewController: UIViewController {
         configureAccessiblity()
     }
 
+    public override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        configureContentView()
+    }
+
     // MARK: - Private
 
     private func configureContentView() {
         headerImageView.image = UIImage.scanPleaseIllustration
         headerImageView.isAccessibilityElement = false
+        headerImageView.isHidden = UIScreen.isLandscape
         textView.updateView(body: viewModel.text.styledAs(.body))
         textView.bottomBorder.isHidden = true
 

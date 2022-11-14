@@ -41,11 +41,16 @@ public class OnboardingPageViewController: UIViewController {
         view.backgroundColor = UIColor.backgroundPrimary
         scrollView.backgroundColor = UIColor.backgroundPrimary
         scrollView.contentInset.bottom = .space_120
-        configureImageView()
         configureHeadline()
+        configureImageView()
         configureParagraphView()
         configureAccessibilityRespondsToUserInteraction()
         accessibilityLabel = headline.attributedText?.string
+    }
+
+    public override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        configureImageView()
     }
 
     // MARK: - Methods
@@ -54,6 +59,7 @@ public class OnboardingPageViewController: UIViewController {
         imageView.image = viewModel.image
         imageView.isAccessibilityElement = false
         imageView.pinHeightToScaleAspectFit()
+        imageView.isHidden = UIScreen.main.bounds.size.width > UIScreen.main.bounds.size.height
     }
 
     private func configureHeadline() {

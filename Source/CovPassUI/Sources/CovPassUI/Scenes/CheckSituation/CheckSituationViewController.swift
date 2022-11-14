@@ -88,6 +88,11 @@ public class CheckSituationViewController: UIViewController {
         UIAccessibility.post(notification: .announcement, argument: viewModel.onboardingClose)
     }
 
+    public override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        configureHidden()
+    }
+
     private func configureSaveButton() {
         saveButton.style = .primary
         saveButton.title = viewModel.doneButtonTitle
@@ -100,7 +105,7 @@ public class CheckSituationViewController: UIViewController {
         subTitleTextWrapper.isHidden = viewModel.subTitleIsHidden
         hStackView.isHidden = viewModel.hStackViewIsHidden
         newBadgeWrapper.isHidden = viewModel.newBadgeIconIsHidden
-        pageImageView.isHidden = viewModel.pageImageIsHidden
+        pageImageView.isHidden = viewModel.pageImageIsHidden || UIScreen.isLandscape
         titleLabel.isHidden = viewModel.pageTitleIsHidden
     }
     
