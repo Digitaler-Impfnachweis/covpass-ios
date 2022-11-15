@@ -253,13 +253,15 @@
 
 "technical_validation_check_popup_valid_vaccination_button_1_title" = "New scan";
 
+"technical_validation_check_popup_retry" = "Retry last scan";
+
 "technical_validation_check_popup_valid_vaccination_button_3_title" = "Cancel";
 
 "functional_validation_check_popup_unsuccessful_certificate_title" = "Incomplete vaccination protection";
 
 "functional_validation_check_popup_unsuccessful_certificate_subtitle" = "according to IfSG §22a";
 
-"functional_validation_check_popup_unsuccessful_certificate_copy" = "The certificate provided does not indicate complete vaccination protection. Possible reasons:";
+"functional_validation_check_popup_unsuccessful_certificate_copy" = "The certificates provided do not indicate complete vaccination protection. Possible reasons:";
 
 "functional_validation_check_popup_unsuccessful_certificate_subheadline_expiration" = "Vaccination series incomplete";
 
@@ -755,7 +757,7 @@
 
 "infschg_result_no_mask_rules_subtitle" = "in %@";
 
-"infschg_result_no_mask_rules_copy_1_bold" = "There are no federal state-specific rules for this federal state. Therefore, only the uniform federal rules on mandatory masks apply.";
+"infschg_result_no_mask_rules_copy_1_bold" = "The RKI does not currently have any state-specific rules for this federal state. Therefore, only the uniform federal rules on mandatory masks apply.";
 
 "infschg_result_no_mask_rules_copy_2" = "If the federal state in which you are staying has ordered a mask obligation, a negative rapid or PCR test exempts you from this mask obligation for 24 hours at recreational, cultural and sporting events and in catering establishments. An unsupervised self-test performed is not sufficient. Your state may regulate that complete vaccinations or recoveries (if these occurred no more than three months ago) also exempt you from the mask requirement.\n\nAn exemption from the mask requirement does not apply in long-distance public transport, hospitals, nursing facilities, and doctors' offices.";
 
@@ -996,3 +998,75 @@
 "AR" = "Argentina";
 
 "MX" = "Mexico";
+
+
+/********** ruleset date **********/
+
+"state_ruleset_date_available_long" = "The federal state-specific rules from %@ (start of validity) apply.";
+
+"state_ruleset_date_available_short" = "*Rules from %@ (start of validity)";
+
+"state_ruleset_date_unavailable" = "The RKI currently has no state-specific rules for this federal state. The rules of the federal government apply.";
+
+
+/********** Entry Check: Settings **********/
+
+"settings_rules_context_title" = "Check context";
+
+"settings_rules_context_subtitle" = "On this basis, the vaccination status is displayed.";
+
+"settings_rules_context_germany_title" = "I check within Germany";
+
+"settings_rules_context_germany_subtitle" = "On the basis of the Infection Protection Act §22a";
+
+"settings_rules_context_entry_title" = "I check at entries";
+
+"settings_rules_context_entry_subtitle" = "On the basis of the Coronavirus Entry Regulations";
+
+"accessibility_option_selected" = "Selected";
+
+"accessibility_option_unselected" = "Not selected";
+
+
+/********** Entry Check: Start View **********/
+
+"start_vaccination_status_entry_title" = "Vaccination status according to the Coronavirus Entry Regulations";
+
+"start_vaccination_status_entry_subtitle" = "There are currently no restrictions on entering Germany. To check the vaccination status within Germany according to Infection Protection Act §22a, change the check context in the settings.";
+
+
+/********** Entry Check: Initial setup **********/
+
+"accessibility_rules_context_initial_setup_open" = "The view \"Determine check context\" has been opened.";
+
+"accessibility_rules_context_initial_setup_close" = "The view \"Determine check context\" has been closed.";
+
+"rules_context_initial_setup_title" = "How do you use the CovPassCheck app?";
+
+"rules_context_initial_setup_subtitle" = "Select on which basis the vaccination status is to be determined:";
+
+"rules_context_initial_setup_hint" = "You can change this at any time in the settings.";
+
+"rules_context_initial_setup_button" = "Apply";
+
+
+/********** Entry Check: No rules dialog **********/
+
+"dialog_no_entry_rules_available_title" = "No entry rules";
+
+"dialog_no_entry_rules_available_subtitle" = "There are currently no entry rules to Germany. Do you still want to continue the scanning process?";
+
+"dialog_no_entry_rules_available_button1" = "Continue";
+
+"dialog_no_entry_rules_available_button2" = "Cancel";
+
+
+/********** Entry Check: Result Views **********/
+
+"entry_check_success_title" = "No restriction";
+
+"entry_check_success_subtitle" = "according to the Coronavirus Entry Regulations";
+
+"entry_check_success_copy" = "Now match the following data with an identity document of the person being checked.";
+
+"entry_check_link" = "#More about the Coronavirus Entry Regulations::https://www.bundesgesundheitsministerium.de/en/service/gesetze-und-verordnungen/guv-19-lp/coronavirus-einreiseverordnung.html#";

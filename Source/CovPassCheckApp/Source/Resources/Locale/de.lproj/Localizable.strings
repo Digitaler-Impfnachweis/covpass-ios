@@ -245,7 +245,7 @@
 
 "technical_validation_check_popup_unsuccessful_certificate_signature_subheading" = "Ungültige Signatur";
 
-"technical_validation_check_popup_unsuccessful_certificate_signature_subline" = "Das Zertifikat ist kein Digitales COVID-Zertifikat der EU oder wurde nicht von einer autorisierten Stelle ausgestellt.";
+"technical_validation_check_popup_unsuccessful_certificate_signature_subline" = "Das Zertifikat ist kein digitales COVID-Zertifikat der EU oder wurde nicht von einer autorisierten Stelle ausgestellt.";
 
 "technical_validation_check_popup_unsuccessful_certificate_qrreadibility_subheading" = "QR-Code nicht lesbar";
 
@@ -253,13 +253,15 @@
 
 "technical_validation_check_popup_valid_vaccination_button_1_title" = "Neue Prüfung";
 
+"technical_validation_check_popup_retry" = "Letzten Scan wiederholen";
+
 "technical_validation_check_popup_valid_vaccination_button_3_title" = "Abbrechen";
 
 "functional_validation_check_popup_unsuccessful_certificate_title" = "Unvollständiger Impfschutz";
 
 "functional_validation_check_popup_unsuccessful_certificate_subtitle" = "nach IfSG §22a";
 
-"functional_validation_check_popup_unsuccessful_certificate_copy" = "Der erbrachte Nachweis weist keinen vollständigen Impfschutz aus. Mögliche Gründe:";
+"functional_validation_check_popup_unsuccessful_certificate_copy" = "Die erbrachten Nachweise ergeben keinen vollständigen Impfschutz. Mögliche Gründe:";
 
 "functional_validation_check_popup_unsuccessful_certificate_subheadline_expiration" = "Impfserie unvollständig";
 
@@ -639,7 +641,7 @@
 
 "revocation_headline" = "Behördenfunktion";
 
-"revocation_copy" = "Diese Funktion richtet sich ausschließlich an die Polizeibehörden und ermöglicht diesen, die Sperrkennung eines Zertifikats im Rahmen von Ermittlungen auszulesen. Im normalen Gebrauch soll diese Funktion deaktiviert bleiben. Der Versuch ein Zertifikat unberechtigt durch die Behördenfunktion sperren zu lassen ist strafbar und kann erhebliche Folgen nach sich ziehen.\n\nSollten Sie den Verdacht haben, dass ein gefälschtes oder inhaltlich unrichtiges Zertifikat vorliegt, informieren Sie bitte die nächste Polizeibehörde.";
+"revocation_copy" = "Diese Funktion richtet sich ausschließlich an die Polizeibehörden und ermöglicht diesen, die Sperrkennung eines Zertifikats im Rahmen von Ermittlungen auszulesen. Im normalen Gebrauch soll diese Funktion deaktiviert bleiben. Der Versuch, ein Zertifikat unberechtigt durch die Behördenfunktion sperren zu lassen, ist strafbar und kann erhebliche Folgen nach sich ziehen.\n\nSollten Sie den Verdacht haben, dass ein gefälschtes oder inhaltlich unrichtiges Zertifikat vorliegt, informieren Sie bitte die nächste Polizeibehörde.";
 
 "revocation_toggle_text" = "Behördenfunktion aktivieren";
 
@@ -755,7 +757,7 @@
 
 "infschg_result_no_mask_rules_subtitle" = "in %@";
 
-"infschg_result_no_mask_rules_copy_1_bold" = "Für dieses Bundesland liegen keine bundeslandspezifischen Regeln vor. Es gelten daher nur die bundeseinheitlichen Regeln zur Maskenpflicht.";
+"infschg_result_no_mask_rules_copy_1_bold" = "Für dieses Bundesland liegen dem RKI aktuell keine bundeslandspezifischen Regeln vor. Es gelten daher nur die bundeseinheitlichen Regeln zur Maskenpflicht.";
 
 "infschg_result_no_mask_rules_copy_2" = "Sofern das Bundesland, in dem Sie sich aufhalten, eine Maskenpflicht angeordnet hat, befreit ein negativer Schnell- oder PCR-Test bei Freizeit-, Kultur- und Sportveranstaltungen sowie in gastronomischen Einrichtungen für 24 Stunden von dieser Maskenpflicht. Ein unbeaufsichtigter durchgeführter Selbsttest genügt nicht. Ihr Bundesland kann regeln, dass auch vollständige Impfungen oder Genesungen (wenn diese höchstens drei Monate zurückliegen) von der Maskenpflicht befreien.\n\nEine Befreiung von der Maskenpflicht gilt nicht im öffentlichen Personenfernverkehr, in Krankenhäusern, Pflegeeinrichtungen und in Arztpraxen.";
 
@@ -996,3 +998,75 @@
 "AR" = "Argentinien";
 
 "MX" = "Mexiko";
+
+
+/********** ruleset date **********/
+
+"state_ruleset_date_available_long" = "Es gelten die bundeslandspezifischen Regeln vom %@ (Gültigkeitsbeginn).";
+
+"state_ruleset_date_available_short" = "*Regeln vom %@ (Gültigkeitsbeginn)";
+
+"state_ruleset_date_unavailable" = "Für dieses Bundesland liegen dem RKI aktuell keine bundeslandspezifischen Regeln vor. Es gelten die Regeln des Bundes.";
+
+
+/********** Entry Check: Settings **********/
+
+"settings_rules_context_title" = "Prüfkontext";
+
+"settings_rules_context_subtitle" = "Auf dieser Basis wird der Impfschutz angezeigt.";
+
+"settings_rules_context_germany_title" = "Ich prüfe innerhalb Deutschlands";
+
+"settings_rules_context_germany_subtitle" = "Auf Basis des Infektionsschutzgesetz §22a";
+
+"settings_rules_context_entry_title" = "Ich prüfe bei Einreisen";
+
+"settings_rules_context_entry_subtitle" = "Auf Basis der Coronavirus-Einreiseverordnung";
+
+"accessibility_option_selected" = "Ausgewählt";
+
+"accessibility_option_unselected" = "Nicht ausgewählt";
+
+
+/********** Entry Check: Start View **********/
+
+"start_vaccination_status_entry_title" = "Impfschutz nach Coronavirus-Einreiseverordnung";
+
+"start_vaccination_status_entry_subtitle" = "Derzeit gibt es keine Beschränkungen für die Einreise nach Deutschland. Um den Impfschutz innerhalb Deutschlands nach Infektionsschutzgesetz §22a zu prüfen, ändern Sie den Prüfkontext in den Einstellungen.";
+
+
+/********** Entry Check: Initial setup **********/
+
+"accessibility_rules_context_initial_setup_open" = "Die Ansicht \"Prüfkontext bestimmen\" wurde geöffnet.";
+
+"accessibility_rules_context_initial_setup_close" = "Die Ansicht \"Prüfkontext bestimmen\" wurde geschlossen.";
+
+"rules_context_initial_setup_title" = "Wann nutzen Sie die CovPassCheck-App?";
+
+"rules_context_initial_setup_subtitle" = "Wählen Sie, auf welcher Grundlage der Impfschutz bestimmt werden soll:";
+
+"rules_context_initial_setup_hint" = "Sie können die Angabe jederzeit in den Einstellungen ändern.";
+
+"rules_context_initial_setup_button" = "Übernehmen";
+
+
+/********** Entry Check: No rules dialog **********/
+
+"dialog_no_entry_rules_available_title" = "Keine Einreiseregeln";
+
+"dialog_no_entry_rules_available_subtitle" = "Aktuell bestehen keine Einreiseregeln nach Deutschland. Wollen Sie den Scanvorgang trotzdem weiterführen?";
+
+"dialog_no_entry_rules_available_button1" = "Weiter";
+
+"dialog_no_entry_rules_available_button2" = "Abbrechen";
+
+
+/********** Entry Check: Result Views **********/
+
+"entry_check_success_title" = "Keine Einschränkung";
+
+"entry_check_success_subtitle" = "nach Coronavirus-Einreiseverordnung";
+
+"entry_check_success_copy" = "Gleichen Sie jetzt folgende Daten mit einem Ausweisdokument der geprüften Person ab.";
+
+"entry_check_link" = "#Mehr zur Coronavirus-Einreiseverordnung::https://www.bundesgesundheitsministerium.de/service/gesetze-und-verordnungen/guv-19-lp/coronaeinreisev.html#";
