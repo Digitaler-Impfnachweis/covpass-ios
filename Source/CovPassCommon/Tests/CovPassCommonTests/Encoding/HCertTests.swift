@@ -37,7 +37,7 @@ class HCertTests: XCTestCase {
             return
         }
         let cosePayload = try! CoseSign1Message(decompressedPayload: decompressedPayload)
-        let trustCert = try? HCert.verify(message: cosePayload, trustList: trustListValid)
+        let trustCert = try? HCert.verify(message: cosePayload, trustList: trustListValid, checkSealCertificate: false)
         XCTAssertNotNil(trustCert)
     }
 
@@ -49,7 +49,7 @@ class HCertTests: XCTestCase {
             return
         }
         let cosePayload = try! CoseSign1Message(decompressedPayload: decompressedPayload)
-        let trustCert = try? HCert.verify(message: cosePayload, trustList: trustListInvalid)
+        let trustCert = try? HCert.verify(message: cosePayload, trustList: trustListInvalid, checkSealCertificate: false)
         XCTAssertNil(trustCert)
     }
 
@@ -61,7 +61,7 @@ class HCertTests: XCTestCase {
             return
         }
         let cosePayload = try! CoseSign1Message(decompressedPayload: decompressedPayload)
-        let trustCert = try? HCert.verify(message: cosePayload, trustList: TrustList(certificates: []))
+        let trustCert = try? HCert.verify(message: cosePayload, trustList: TrustList(certificates: []), checkSealCertificate: false)
         XCTAssertNil(trustCert)
     }
 
@@ -73,7 +73,7 @@ class HCertTests: XCTestCase {
             return
         }
         let cosePayload = try! CoseSign1Message(decompressedPayload: decompressedPayload)
-        let trustCert = try? HCert.verify(message: cosePayload, trustList: trustListValid)
+        let trustCert = try? HCert.verify(message: cosePayload, trustList: trustListValid, checkSealCertificate: false)
         XCTAssertNil(trustCert)
     }
 
@@ -85,7 +85,7 @@ class HCertTests: XCTestCase {
             return
         }
         let cosePayload = try CoseSign1Message(decompressedPayload: Data(decompressedPayload))
-        let trustCert = try HCert.verify(message: cosePayload, trustList: TrustList.mock)
+        let trustCert = try HCert.verify(message: cosePayload, trustList: TrustList.mock, checkSealCertificate: false)
         XCTAssertNotNil(trustCert)
     }
 }

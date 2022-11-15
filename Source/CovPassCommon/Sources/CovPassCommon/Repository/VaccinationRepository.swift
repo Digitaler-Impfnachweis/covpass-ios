@@ -406,7 +406,7 @@ public class VaccinationRepository: VaccinationRepositoryProtocol {
             throw ApplicationError.general("Missing TrustList")
         }
 
-        let trustCert = try HCert.verify(message: cosePayload, trustList: trustList)
+        let trustCert = try HCert.verify(message: cosePayload, trustList: trustList, checkSealCertificate: checkSealCertificate)
 
         let cosePayloadJsonData = try cosePayload.toJSON()
         let certificate = try JSONDecoder().decode(CBORWebToken.self, from: cosePayloadJsonData)
@@ -416,10 +416,6 @@ public class VaccinationRepository: VaccinationRepositoryProtocol {
         }
 
         try HCert.checkExtendedKeyUsage(certificate: certificate, trustCertificate: trustCert)
-
-        if checkSealCertificate {
-            try HCert.checkSealCertificate(trustCertificate: trustCert)
-        }
 
         try validateEntity(certificate)
 

@@ -160,15 +160,6 @@ class DCCCertLogicTests: XCTestCase {
         XCTAssertEqual(res.count, 1)
         XCTAssertEqual(res.failedResults.count, 0)
     }
-
-    func testInvalidSealCertificate() throws {
-        do {
-            _ = try repository.checkCertificate(CertificateMock.validCertificate2, checkSealCertificate: true).wait()
-            XCTFail("Validation should fail with expired seal certificate")
-        } catch {
-            XCTAssertEqual(error as? HCertError, HCertError.expiredCertificate)
-        }
-    }
     
 //    func testInvalidVaccinationDE() throws {
 //        let cert = try repository.checkCertificate(CertificateMock.validCertificate2).wait()

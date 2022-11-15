@@ -19,7 +19,7 @@ struct ParseCertificateUseCase {
             payloadFromScannerResult(scanResult)
         }
         .then{
-            vaccinationRepository.validCertificate($0, checkSealCertificate: false)
+            vaccinationRepository.validCertificate($0, checkSealCertificate: true)
         }
     }
     

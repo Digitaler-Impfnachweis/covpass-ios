@@ -665,9 +665,9 @@ class VaccinationRepositoryTests: XCTestCase {
     
     func testCountRule_Enabled_addingThirdCertWhichIsOfAnAlreadyAvailablePerson() {
         
-        let person1Cert1 = CertificateMock.validCertificate3
-        let person2Cert1 = CertificateMock.validCertificate4
-        let person2Cert2 = CertificateMock.validCertificate6
+        let person1Cert1 = CertificateMock.validCertificate2
+        let person2Cert1 = CertificateMock.validCertificate3
+        let person2Cert2 = CertificateMock.validCertificate3.appending("A")
 
         do {
             _ = try sut.scanCertificate(person1Cert1, isCountRuleEnabled: false, expirationRuleIsActive: true).wait()
@@ -682,10 +682,10 @@ class VaccinationRepositoryTests: XCTestCase {
     
     func testCountRule_Enabled_addingFourthCertWhichIsANewPerson() {
         
-        let person1Cert1 = CertificateMock.validCertificate3
-        let person2Cert1 = CertificateMock.validCertificate4
-        let person2Cert2 = CertificateMock.validCertificate6
-        let person3Cert1 = CertificateMock.validCertificate2
+        let person1Cert1 = CertificateMock.validCertificate2
+        let person2Cert1 = CertificateMock.validCertificate3
+        let person2Cert2 = CertificateMock.validCertificate3.appending("A")
+        let person3Cert1 = CertificateMock.validCertificate3.appending("B")
 
         do {
             _ = try sut.scanCertificate(person1Cert1, isCountRuleEnabled: false, expirationRuleIsActive: true).wait()
