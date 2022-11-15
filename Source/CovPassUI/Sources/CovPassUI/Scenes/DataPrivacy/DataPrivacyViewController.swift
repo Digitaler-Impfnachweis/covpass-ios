@@ -12,7 +12,7 @@ import WebKit
 public class DataPrivacyViewController: UIViewController {
     // MARK: - IBOutlet
 
-    @IBOutlet var webView: WKWebView!
+    @IBOutlet var webView: StaticWebView!
     @IBOutlet var toolbarView: CustomToolbarView!
 
     // MARK: - Properties
