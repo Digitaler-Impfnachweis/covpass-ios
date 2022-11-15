@@ -92,10 +92,10 @@ final class VaccinationCycleCompleteResultViewController: UIViewController {
         holderInformationView.bottomBorder.isHidden = true
         holderInformationView.updateView(image: .cardCircle,
                                          title: viewModel.holderName.styledAs(.header_2),
-                                         subtitle: viewModel.holderNameTransliterated.styledAs(.header_3).colored(.onBackground80),
+                                         subtitle: viewModel.holderNameTransliterated.styledAs(.body).colored(.onBackground80),
                                          body: viewModel.holderBirthday.styledAs(.body))
         holderInformationView.backgroundColor = .clear
-        holderInformationContainerView.backgroundColor = .backgroundSecondary20
+        holderInformationContainerView.backgroundColor = .brandAccent20
     }
 
     private func configureRevocationInfoView() {

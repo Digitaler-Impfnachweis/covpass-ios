@@ -126,8 +126,8 @@ final class CertificateImportSelectionViewController: UIViewController {
         hintView.titleLabel.attributedText = viewModel.hintTitle
             .styledAs(.header_3)
             .colored(.onBackground110)
-        hintView.containerView.backgroundColor = .brandAccent30
-        hintView.containerView.layer.borderColor = UIColor.brandAccent20.cgColor
+        hintView.containerView.backgroundColor = .brandAccent20
+        hintView.containerView.layer.borderColor = UIColor.brandAccent40.cgColor
         hintView.iconView.image = .infoSignal
     }
 

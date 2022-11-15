@@ -40,7 +40,7 @@
                     <rect key="frame" x="0.0" y="128" width="414" height="533.5"/>
                     <subviews>
                         <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dfv-wP-L03" userLabel="Content View">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="533.5"/>
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="539"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="CaI-1f-Rt7">
                                     <rect key="frame" x="24" y="0.0" width="103" height="17"/>
@@ -91,7 +91,7 @@
                                 <constraint firstItem="Gjq-nP-y9t" firstAttribute="top" secondItem="O7A-Cj-s0p" secondAttribute="bottom" id="a9j-cw-CdY"/>
                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="CaI-1f-Rt7" secondAttribute="trailing" constant="24" id="had-DF-jv5"/>
                                 <constraint firstItem="CaI-1f-Rt7" firstAttribute="top" secondItem="dfv-wP-L03" secondAttribute="top" id="m3y-lh-XzJ"/>
-                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Gjq-nP-y9t" secondAttribute="bottom" id="rr1-Jq-hth"/>
+                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Gjq-nP-y9t" secondAttribute="bottom" constant="32" id="rr1-Jq-hth"/>
                             </constraints>
                         </view>
                     </subviews>

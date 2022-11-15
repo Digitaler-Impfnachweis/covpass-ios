@@ -16,7 +16,7 @@ import CertLogic
 
 private enum Constants {
     enum Keys {
-        static let title = "infschg_validation_start_screen_title".localized
+        static let title = "validation_start_screen_title".localized
         enum TimeHint {
             static let syncTitle = "validation_start_screen_scan_sync_message_title".localized
             static let syncMessage = "validation_start_screen_scan_sync_message_text".localized

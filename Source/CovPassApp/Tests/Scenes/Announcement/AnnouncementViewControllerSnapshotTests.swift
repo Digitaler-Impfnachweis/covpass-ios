@@ -37,6 +37,6 @@ class AnnouncementViewControllerSnapshotTests: BaseSnapShotTests {
         let window = UIWindow(frame: UIScreen.main.bounds)
         window.makeKeyAndVisible()
         UIApplication.shared.keyWindow?.rootViewController = sut
-        verifyView(view: sut.view, height: 1000, waitAfter: 0.8)
+        verifyView(view: sut.view, height: 1000, waitAfter: 1.0)
     }
 }

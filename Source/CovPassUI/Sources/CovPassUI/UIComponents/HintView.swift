@@ -55,7 +55,7 @@ public class HintView: XibView {
 
     private lazy var infoStyle = CovPassUI.Style(
         backgroundColor: .brandAccent10,
-        borderColor: .brandAccent20,
+        borderColor: .brandAccent40,
         icon: .infoSignal
     )
 

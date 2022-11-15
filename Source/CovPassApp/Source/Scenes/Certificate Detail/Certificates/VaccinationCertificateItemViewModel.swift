@@ -54,7 +54,7 @@ struct VaccinationCertificateItemViewModel: CertificateItemViewModel {
             return .onBackground20
         }
         if dgc.v?.first?.fullImmunization ?? true == false {
-            return .brandAccent20
+            return .brandAccent40
         }
         return .brandAccent
     }

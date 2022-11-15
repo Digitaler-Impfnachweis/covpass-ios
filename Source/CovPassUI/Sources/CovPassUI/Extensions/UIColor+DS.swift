@@ -55,7 +55,7 @@ public extension UIColor {
 
     static let brandAccent20 = UIColor("BrandAccent20")
 
-    static let brandAccent30 = UIColor("BrandAccent30")
+    static let brandAccent40 = UIColor("BrandAccent40")
 
     static let brandAccent70 = UIColor("BrandAccent70")
 
