@@ -34,10 +34,10 @@ struct ScanAndParseQRCodeAndCheckMaskRulesUseCase {
         }
         .then { token -> Promise<ExtendedCBORWebToken> in
             return CheckMaskRulesUseCase(token: token,
-                                              region: self.userDefaults.stateSelection,
-                                              revocationRepository: self.revocationRepository,
-                                              holderStatus: CertificateHolderStatusModel(dccCertLogic: self.certLogic),
-                                              additionalToken: additionalToken).execute()
+                                         region: self.userDefaults.stateSelection,
+                                         revocationRepository: self.revocationRepository,
+                                         holderStatus: CertificateHolderStatusModel(dccCertLogic: self.certLogic),
+                                         additionalToken: additionalToken).execute()
         }
     }
 }

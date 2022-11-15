@@ -30,10 +30,10 @@ final class SecondScanViewModelTests: XCTestCase {
         configureSut()
         
     }
-    private func configureSut(isThirdScan: Bool = false) {
+    private func configureSut(secondToken: ExtendedCBORWebToken? = nil) {
         sut = .init(resolver: resolver,
-                    isThirdScan: isThirdScan,
                     token: CBORWebToken.mockVaccinationCertificate.extended(),
+                    secondToken: secondToken,
                     countdownTimerModel: countdownTimerModel)
         sut.delegate = delegate
     }
@@ -60,7 +60,7 @@ final class SecondScanViewModelTests: XCTestCase {
     }
     
     func test_thirdScanViewIsHidden_false() {
-        configureSut(isThirdScan: true)
+        configureSut(secondToken: CBORWebToken.mockRecoveryCertificate.extended())
         XCTAssertEqual(sut.thirdScanViewIsHidden, false)
     }
     
@@ -97,7 +97,7 @@ final class SecondScanViewModelTests: XCTestCase {
     }
     
     func test_secondScanIcon_isThirdScan() {
-        configureSut(isThirdScan: true)
+        configureSut(secondToken: CBORWebToken.mockRecoveryCertificate.extended())
         XCTAssertEqual(sut.secondScanIcon, .statusPartialCircle)
     }
 

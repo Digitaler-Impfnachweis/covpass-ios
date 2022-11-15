@@ -64,7 +64,7 @@ final class CertificateInvalidResultViewModel: CertificateInvalidResultViewModel
         self.resolver = resolver
         self.router = router
         self.revocationKeyFilename = revocationKeyFilename
-        revocationInfoHidden = !persistence.revocationExpertMode
+        revocationInfoHidden = !persistence.revocationExpertMode || token == nil
         let dgc = token?.vaccinationCertificate.hcert.dgc
         holderName = dgc?.nam.fullName ?? ""
         holderNameTransliterated = dgc?.nam.fullNameTransliterated ?? ""

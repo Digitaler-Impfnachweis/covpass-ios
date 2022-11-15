@@ -18,7 +18,6 @@ struct VaccinationCycleIncompleteResultSceneFactory: ResolvableSceneFactory {
     }
 
     func make(resolvable: Resolver<ValidatorDetailSceneResult>) -> UIViewController {
-        let persistence = UserDefaultsPersistence()
         let countdownTimerModel = CountdownTimerModel(
             dismissAfterSeconds: 120,
             countdownDuration: 60
@@ -29,7 +28,6 @@ struct VaccinationCycleIncompleteResultSceneFactory: ResolvableSceneFactory {
             router: router
         )
         let viewController = VaccinationCycleIncompleteResultViewController(viewModel: viewModel)
-
         return viewController
     }
 }

@@ -15,6 +15,7 @@ import UIKit
 enum ValidatorDetailSceneResult: Equatable {
     case close
     case secondScan(ExtendedCBORWebToken)
+    case thirdScan(ExtendedCBORWebToken, ExtendedCBORWebToken)
     case startOver
 }
 
@@ -166,13 +167,7 @@ class ValidatorOverviewRouter: ValidatorOverviewRouterProtocol {
                                                               token: token)
         return sceneCoordinator.present(view, animated: true)
     }
-    
-    func showNoIfsg22aCheckRulesNotAvailable(token: ExtendedCBORWebToken) -> Promise<ValidatorDetailSceneResult> {
-#warning("TODO: finalize in upcoming sotries")
-        print("showNoIfsg22aCheckRulesNotAvailable")
-        return .value(.close)
-    }
-    
+
     func showIfsg22aCheckDifferentPerson(token1OfPerson: ExtendedCBORWebToken, token2OfPerson: ExtendedCBORWebToken) -> Promise<ValidatorDetailSceneResult> {
         Promise { seal in
             showDialog(
@@ -201,27 +196,17 @@ class ValidatorOverviewRouter: ValidatorOverviewRouterProtocol {
         }
     }
     
-    func showIfsg22aCheckSameCert() {
-        print("showIfsg22aCheckSameCert")
-#warning("TODO: finalize in upcoming sotries")
-    }
-    
-    func showIfsg22aNotComplete(token: ExtendedCBORWebToken, isThirdScan: Bool) -> Promise<ValidatorDetailSceneResult> {
-        let view = SecondScanSceneFactory(isThirdScan: isThirdScan,
-                                          token: token)
+    func showIfsg22aNotComplete(token: ExtendedCBORWebToken, secondToken: ExtendedCBORWebToken?) -> Promise<ValidatorDetailSceneResult> {
+        let view = SecondScanSceneFactory(token: token,
+                                          secondToken: secondToken)
         return sceneCoordinator.present(view, animated: true)
     }
     
     func showIfsg22aCheckError(token: ExtendedCBORWebToken?) -> Promise<ValidatorDetailSceneResult> {
         let router = CertificateInvalidResultRouter(sceneCoordinator: sceneCoordinator)
         let view = CertificateInvalidResultSceneFactory(router: router,
-                                                              token: token)
+                                                        token: token)
         return sceneCoordinator.present(view, animated: true)
-    }
-    
-    func showIfsg22aCheckTestIsNotAllowed(token: ExtendedCBORWebToken?) -> Promise<ValidatorDetailSceneResult> {
-#warning("TODO: finalize in upcoming sotries")
-        return .value(.close)
     }
     
     func showIfsg22aIncompleteResult(token: ExtendedCBORWebToken) -> Promise<ValidatorDetailSceneResult> {

@@ -635,11 +635,11 @@ public extension Array where Element == ExtendedCBORWebToken {
         return certificate
     }
     
-    var joinedExtendedTokens: ExtendedCBORWebToken? {
+    var joinedAllTokens: CBORWebToken? {
         let dgcs = map(\.vaccinationCertificate.hcert.dgc)
-        guard let joinedDgcs = dgcs.joinCertificates() else { return nil }
-        guard var certificate = first else { return nil }
-        certificate.vaccinationCertificate.hcert.dgc = joinedDgcs
+        guard let joinedDgcs = dgcs.joinCertificates(latestOnly: false) else { return nil }
+        guard var certificate = first?.vaccinationCertificate else { return nil }
+        certificate.hcert.dgc = joinedDgcs
         return certificate
     }
 }

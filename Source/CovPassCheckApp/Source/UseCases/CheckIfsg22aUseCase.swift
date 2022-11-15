@@ -12,24 +12,19 @@ import CertLogic
 
 enum CheckIfsg22aUseCaseError: Error, Equatable  {
     case showMaskCheckdifferentPersonalInformation(_ token1OfPerson: ExtendedCBORWebToken, _ token2OfPerson: ExtendedCBORWebToken)
-    case secondScanSameToken(_ token: ExtendedCBORWebToken)
-    case ifsg22aRulesNotAvailable(_ token: ExtendedCBORWebToken)
-    case vaccinationCycleIsNotComplete(_ token: ExtendedCBORWebToken)
-    case invalidDueToRules(_ token: ExtendedCBORWebToken)
-    case invalidDueToTechnicalReason(_ token: ExtendedCBORWebToken)
+    case vaccinationCycleIsNotComplete(_ firstToken: ExtendedCBORWebToken, _ secondToken: ExtendedCBORWebToken?, _ thirdToken: ExtendedCBORWebToken?)
+    case invalidToken(_ token: ExtendedCBORWebToken)
 }
 
 struct CheckIfsg22aUseCase {
     let token: ExtendedCBORWebToken
     let revocationRepository: CertificateRevocationRepositoryProtocol
     public let holderStatus: CertificateHolderStatusModelProtocol
-    let additionalToken: ExtendedCBORWebToken?
+    let secondToken: ExtendedCBORWebToken?
+    let thirdToken: ExtendedCBORWebToken?
 
     func execute() -> Promise<ExtendedCBORWebToken> {
         return firstly {
-            checkIfsg22aRulesAvailable()
-        }
-        .then {
             isRevoked(token)
         }
         .then {
@@ -43,35 +38,31 @@ struct CheckIfsg22aUseCase {
         }
     }
     
-    
-    private func checkIfsg22aRulesAvailable() -> Promise<Void> {
-        guard holderStatus.ifsg22aRulesAvailable() else {
-            return .init(error: CheckIfsg22aUseCaseError.ifsg22aRulesNotAvailable(token))
-        }
-        return .value
-    }
     private func tokensForIfsg22aCheck() -> [ExtendedCBORWebToken] {
         var tokens: [ExtendedCBORWebToken] = [token]
-        if let token = additionalToken {
-            tokens.append(token)
+        if let secondToken = secondToken {
+            tokens.append(secondToken)
+        }
+        if let thirdToken = thirdToken {
+            tokens.append(thirdToken)
         }
         return tokens
     }
     
     private func checkIfsg22aRules() -> Promise<Void> {
-        if let additionalToken = additionalToken,
-           additionalToken == token {
-            return .init(error: CheckIfsg22aUseCaseError.secondScanSameToken(token))
-        }
         let tokens = tokensForIfsg22aCheck()
-        guard holderStatus.vaccinationCycleIsComplete(tokens) else {
-            let joinedTokens = tokens.joinedExtendedTokens ?? token
-            return .init(error: CheckIfsg22aUseCaseError.vaccinationCycleIsNotComplete(joinedTokens))
+        if let secondToken = secondToken,
+           secondToken.vaccinationCertificate.hcert.dgc.nam != token.vaccinationCertificate.hcert.dgc.nam ||
+            secondToken.vaccinationCertificate.hcert.dgc.dob != token.vaccinationCertificate.hcert.dgc.dob {
+            return .init(error: CheckIfsg22aUseCaseError.showMaskCheckdifferentPersonalInformation(secondToken, token))
         }
-        if let additionalToken = additionalToken,
-           additionalToken.vaccinationCertificate.hcert.dgc.nam != token.vaccinationCertificate.hcert.dgc.nam ||
-           additionalToken.vaccinationCertificate.hcert.dgc.dob != token.vaccinationCertificate.hcert.dgc.dob {
-            return .init(error: CheckIfsg22aUseCaseError.showMaskCheckdifferentPersonalInformation(token, additionalToken))
+        if let thirdToken = thirdToken, let secondToken = secondToken,
+           thirdToken.vaccinationCertificate.hcert.dgc.nam != secondToken.vaccinationCertificate.hcert.dgc.nam ||
+            thirdToken.vaccinationCertificate.hcert.dgc.dob != secondToken.vaccinationCertificate.hcert.dgc.dob {
+            return .init(error: CheckIfsg22aUseCaseError.showMaskCheckdifferentPersonalInformation(thirdToken, secondToken))
+        }
+        guard holderStatus.vaccinationCycleIsComplete(tokens) else {
+            return .init(error: CheckIfsg22aUseCaseError.vaccinationCycleIsNotComplete(token, secondToken, thirdToken))
         }
         return .value
     }
@@ -92,10 +83,8 @@ struct CheckIfsg22aUseCase {
         switch holderStatus.checkDomesticInvalidationRules([token]) {
         case .passed:
             return .value
-        case .failedTechnical:
-            return .init(error: CheckIfsg22aUseCaseError.invalidDueToTechnicalReason(token))
-        case .failedFunctional:
-            return .init(error: CheckIfsg22aUseCaseError.invalidDueToRules(token))
+        case .failedTechnical, .failedFunctional:
+            return .init(error: CheckIfsg22aUseCaseError.invalidToken(token))
         }
     }
 }

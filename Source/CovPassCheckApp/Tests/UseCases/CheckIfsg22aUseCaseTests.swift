@@ -23,7 +23,8 @@ class CheckIfsg22aUseCaseTests: XCTestCase {
         sut = CheckIfsg22aUseCase(token: token,
                                   revocationRepository: revocationRepository,
                                   holderStatus: certificateHolderStatusModel,
-                                  additionalToken: nil)
+                                  secondToken: nil,
+                                  thirdToken: nil)
     }
     
     override func tearDownWithError() throws {
@@ -31,23 +32,6 @@ class CheckIfsg22aUseCaseTests: XCTestCase {
         certificateHolderStatusModel = nil
         token = nil
         sut = nil
-    }
-    
-    func test_checkIfsg22aRulesNotAvailable() {
-        // GIVEN
-        let expectation = XCTestExpectation(description: "test should fail because rules are not available")
-        certificateHolderStatusModel.areIfsg22aRulesAvailable = false
-        // WHEN
-        sut.execute()
-            .done { token in
-                XCTFail("Should not successful")
-            }
-            .catch { error in
-                // THEN
-                XCTAssertEqual(error as? CheckIfsg22aUseCaseError, .ifsg22aRulesNotAvailable(self.token))
-                expectation.fulfill()
-            }
-        wait(for: [expectation], timeout: 1.0)
     }
     
     func test_certificate_is_revoked() {
@@ -82,7 +66,7 @@ class CheckIfsg22aUseCaseTests: XCTestCase {
             }
             .catch { error in
                 // THEN
-                XCTAssertEqual(error as? CheckIfsg22aUseCaseError, .vaccinationCycleIsNotComplete(self.token))
+                XCTAssertEqual(error as? CheckIfsg22aUseCaseError, .vaccinationCycleIsNotComplete(self.token, nil, nil))
                 expectation.fulfill()
             }
         wait(for: [expectation], timeout: 1.0)
@@ -116,7 +100,8 @@ class CheckIfsg22aUseCaseTests: XCTestCase {
         let sut = CheckIfsg22aUseCase(token: token,
                                       revocationRepository: revocationRepository,
                                       holderStatus: certificateHolderStatusModel,
-                                      additionalToken: differentPersonToken)
+                                      secondToken: differentPersonToken,
+                                      thirdToken: nil)
         let expectation = XCTestExpectation(description: "test should fail because holder needs mask")
         certificateHolderStatusModel.areIfsg22aRulesAvailable = true
         revocationRepository.isRevoked = false
@@ -129,34 +114,10 @@ class CheckIfsg22aUseCaseTests: XCTestCase {
             }
             .catch { error in
                 // THEN
-                XCTAssertEqual(error as? CheckIfsg22aUseCaseError, .showMaskCheckdifferentPersonalInformation(self.token, differentPersonToken))
+                XCTAssertEqual(error as? CheckIfsg22aUseCaseError, .showMaskCheckdifferentPersonalInformation(differentPersonToken, self.token))
                 expectation.fulfill()
             }
         wait(for: [expectation], timeout: 1.0)
     }
     
-    func test_checkMaskRule_withAdditional_token_of_same_type_failed() {
-        // GIVEN
-        let differentPersonToken = CBORWebToken.mockRecoveryCertificate.extended()
-        let sut = CheckIfsg22aUseCase(token: token,
-                                      revocationRepository: revocationRepository,
-                                      holderStatus: certificateHolderStatusModel,
-                                      additionalToken: differentPersonToken)
-        let expectation = XCTestExpectation(description: "test should fail because holder needs mask")
-        certificateHolderStatusModel.areIfsg22aRulesAvailable = true
-        revocationRepository.isRevoked = false
-        certificateHolderStatusModel.domesticInvalidationRulesPassedResult = .passed
-        certificateHolderStatusModel.isVaccinationCycleComplete = false
-        // WHEN
-        sut.execute()
-            .done { token in
-                XCTFail("Should not successful")
-            }
-            .catch { error in
-                // THEN
-                XCTAssertEqual(error as? CheckIfsg22aUseCaseError, .secondScanSameToken(differentPersonToken))
-                expectation.fulfill()
-            }
-        wait(for: [expectation], timeout: 1.0)
-    }
 }

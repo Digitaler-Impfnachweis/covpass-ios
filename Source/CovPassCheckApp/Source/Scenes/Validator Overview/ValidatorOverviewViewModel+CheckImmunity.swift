@@ -9,7 +9,7 @@ import CovPassCommon
 import PromiseKit
 
 extension ValidatorOverviewViewModel {
-    func checkImmunityStatus(additionalToken: ExtendedCBORWebToken? = nil) {
+    func checkImmunityStatus(secondToken: ExtendedCBORWebToken? = nil, thirdToken: ExtendedCBORWebToken? = nil) {
         isLoadingScan = true
         firstly{
             ScanAndParseQRCodeAndCheckIfsg22aUseCase(router: router,
@@ -17,7 +17,8 @@ extension ValidatorOverviewViewModel {
                                                      vaccinationRepository: vaccinationRepository,
                                                      revocationRepository: revocationRepository,
                                                      certLogic: certLogic,
-                                                     additionalToken: additionalToken).execute()
+                                                     secondToken: secondToken,
+                                                     thirdToken: thirdToken).execute()
         }
         .done { token in
             self.router.showVaccinationCycleComplete(token: token)
@@ -42,32 +43,29 @@ extension ValidatorOverviewViewModel {
         switch error as? CheckIfsg22aUseCaseError {
         case let .showMaskCheckdifferentPersonalInformation(token1OfPerson, token2OfPerson):
             return router.showIfsg22aCheckDifferentPerson(token1OfPerson: token1OfPerson, token2OfPerson: token2OfPerson)
-        case let .ifsg22aRulesNotAvailable(token):
-            return router.showNoIfsg22aCheckRulesNotAvailable(token: token)
-        case .secondScanSameToken(_):
-             router.showIfsg22aCheckSameCert()
-            return .value(.close)
-        case let .vaccinationCycleIsNotComplete(token):
-            if token.countOfTokens == 1 {
-                return router.showIfsg22aNotComplete(token: token, isThirdScan: false)
-            } else if token.countOfTokens == 2 {
-                return router.showIfsg22aNotComplete(token: token, isThirdScan: true)
+        case let .vaccinationCycleIsNotComplete(firstToken, secondToken, thirdToken):
+            if secondToken != nil, thirdToken != nil {
+                return router.showIfsg22aIncompleteResult(token: firstToken)
             } else {
-                return router.showIfsg22aIncompleteResult(token: token)
+                return router.showIfsg22aNotComplete(token: firstToken, secondToken: secondToken)
             }
-        case .none, .invalidDueToRules(_), .invalidDueToTechnicalReason(_):
+        case .none, .invalidToken(_):
             return router.showIfsg22aCheckError(token: nil)
+        case .invalidToken(token):
+            return router.showIfsg22aCheckError(token: token)
         }
     }
     
     func checkImmunityStatusResult(result: ValidatorDetailSceneResult) {
         switch result {
         case .startOver:
-            self.checkImmunityStatus()
+            self.checkImmunityStatus(secondToken: nil, thirdToken: nil)
         case .close:
             break
-        case let .secondScan(token):
-            self.checkImmunityStatus(additionalToken: token)
+        case let .secondScan(secondToken):
+            self.checkImmunityStatus(secondToken: secondToken, thirdToken: nil)
+        case let .thirdScan(secondToken, thirdToken):
+            self.checkImmunityStatus(secondToken: secondToken, thirdToken: thirdToken)
         }
     }
 }

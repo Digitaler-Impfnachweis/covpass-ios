@@ -439,18 +439,6 @@ class ValidatorOverviewViewModelTests: XCTestCase {
         ], timeout: 1)
     }
     
-    func test_checkImmunityStatus_ifsg22a_rules_not_available() {
-        // GIVEN
-        certLogic.areRulesAvailable = false
-        repository.checkedCert = CBORWebToken.mockVaccinationCertificate
-        // When
-        sut.checkImmunityStatus()
-        // Then
-        wait(for: [
-            router.showIfsg22aNoCheckRulesExpectation
-        ], timeout: 1)
-    }
-    
     func test_checkImmunityStatus_certificate_is_revoked() {
         // GIVEN
         revocationRepository.isRevoked = true
@@ -476,34 +464,22 @@ class ValidatorOverviewViewModelTests: XCTestCase {
             .extended(vaccinationQRCodeData: "2")
         repository.checkedCert = token.vaccinationCertificate
         // When
-        sut.checkImmunityStatus(additionalToken: additionalToken)
+        sut.checkImmunityStatus(secondToken: additionalToken, thirdToken: nil)
         // Then
         wait(for: [
             router.showIfsg22aCheckDifferentPersonExpectation
         ], timeout: 1)
     }
     
-    func test_checkImmunityStatus_secondScan_sameCert() {
-        // GIVEN
-        let token = CBORWebToken.mockVaccinationCertificateWithOtherName.extended()
-        repository.checkedCert = token.vaccinationCertificate
-        // When
-        sut.checkImmunityStatus(additionalToken: token)
-        // Then
-        wait(for: [
-            router.showIfsg22aCheckSameCertExpectation
-        ], timeout: 1)
-    }
-    
     func test_checkImmunityStatus_secondScan_sameCertType() {
         // GIVEN
-        let token = CBORWebToken.mockVaccinationCertificateWithOtherName
+        let token = CBORWebToken.mockVaccinationCertificate
             .extended(vaccinationQRCodeData: "1")
         let additionalToken = CBORWebToken.mockVaccinationCertificate
             .extended(vaccinationQRCodeData: "2")
         repository.checkedCert = token.vaccinationCertificate
         // When
-        sut.checkImmunityStatus(additionalToken: additionalToken)
+        sut.checkImmunityStatus(secondToken: additionalToken, thirdToken: nil)
         // Then
         wait(for: [
             router.showIfsg22aNotCompleteExpectation

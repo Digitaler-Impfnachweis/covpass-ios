@@ -69,24 +69,45 @@ public extension DigitalGreenCertificate {
 
 public extension Array where Element == DigitalGreenCertificate {
     /// Combine multiple certifcates into one
-    func joinCertificates() -> Element? {
+    func joinCertificates(latestOnly: Bool = true) -> Element? {
         guard var baseCertificate = first else {
             return nil
         }
+        baseCertificate.v = []
+        baseCertificate.t = []
+        baseCertificate.r = []
+        
         let vaccinations = compactMap { $0.v }.flatMap { $0 }
         let recoveries = compactMap { $0.r }.flatMap { $0 }
         let tests = compactMap { $0.t }.flatMap { $0 }
 
-        if let latestVaccination = vaccinations.latestVaccination {
+        if let latestVaccination = vaccinations.latestVaccination, latestOnly {
             baseCertificate.v = vaccinations.isEmpty ? nil : [latestVaccination]
+        } else {
+            baseCertificate.v?.append(contentsOf: vaccinations)
         }
-        if let latestRecovery = recoveries.latestRecovery {
+        if let latestRecovery = recoveries.latestRecovery, latestOnly {
             baseCertificate.r = recoveries.isEmpty ? nil : [latestRecovery]
+        } else {
+            baseCertificate.r?.append(contentsOf: recoveries)
         }
-        if let latestTest = tests.latestTest {
+        if let latestTest = tests.latestTest, latestOnly {
             baseCertificate.t = tests.isEmpty ? nil : [latestTest]
+        } else {
+            baseCertificate.t?.append(contentsOf: tests)
         }
-
+        
+        if baseCertificate.v?.isEmpty ?? true {
+            baseCertificate.v = nil
+        }
+        if baseCertificate.r?.isEmpty ?? true {
+            baseCertificate.r = nil
+        }
+        if baseCertificate.t?.isEmpty ?? true {
+            baseCertificate.t = nil
+        }
+        
         return baseCertificate
     }
+    
 }

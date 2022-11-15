@@ -70,6 +70,9 @@ extension ValidatorOverviewViewModel {
             break
         case let .secondScan(token):
             self.scanAction(additionalToken: token)
+        case .thirdScan(_, _):
+            // Not relevant for Mask Check
+            break
         }
     }
     
