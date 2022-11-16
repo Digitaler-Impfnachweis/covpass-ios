@@ -40,4 +40,15 @@ class ArrayVaccinationTests: XCTestCase {
         // THEN
         XCTAssertEqual(latestVaccination?.ci, "4")
     }
+    
+    func test_sortByLatestDt() {
+        // WHEN
+        let sortByLatestDt = sut.sortByLatestDt
+        
+        // THEN
+        XCTAssertEqual(sortByLatestDt.first?.ci, "4")
+        XCTAssertEqual(sortByLatestDt[1].ci, "1")
+        XCTAssertEqual(sortByLatestDt[2].ci, "2")
+        XCTAssertEqual(sortByLatestDt.last?.ci, "3")
+    }
 }

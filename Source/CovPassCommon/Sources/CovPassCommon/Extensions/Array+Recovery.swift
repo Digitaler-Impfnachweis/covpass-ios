@@ -8,7 +8,11 @@
 import Foundation
 
 public extension Array where Element == Recovery {
+    var sortByLatestFr: Self {
+        sorted { $0.fr > $1.fr }
+    }
+    
     var latestRecovery: Recovery? {
-        sorted { $0.fr > $1.fr }.first
+        sortByLatestFr.first
     }
 }

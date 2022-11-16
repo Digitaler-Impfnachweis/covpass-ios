@@ -25,13 +25,23 @@ class ArrayRevoceryTests: XCTestCase {
         sut = nil
     }
 
-
     func testOldestVaccination() {
         // WHEN
         let latestRecovery = sut.latestRecovery
         
         // THEN
         XCTAssertEqual(latestRecovery?.ci, "3")
+    }
+    
+    func test_sortByLatestFr() {
+        // WHEN
+        let sortByLatestFr = sut.sortByLatestFr
+        
+        // THEN
+        XCTAssertEqual(sortByLatestFr.first?.ci, "3")
+        XCTAssertEqual(sortByLatestFr[1].ci, "2")
+        XCTAssertEqual(sortByLatestFr[2].ci, "1")
+        XCTAssertEqual(sortByLatestFr.last?.ci, "4")
     }
 }
 

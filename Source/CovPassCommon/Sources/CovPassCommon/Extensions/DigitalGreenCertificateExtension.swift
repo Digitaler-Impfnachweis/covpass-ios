@@ -77,9 +77,9 @@ public extension Array where Element == DigitalGreenCertificate {
         baseCertificate.t = []
         baseCertificate.r = []
         
-        let vaccinations = compactMap { $0.v }.flatMap { $0 }
-        let recoveries = compactMap { $0.r }.flatMap { $0 }
-        let tests = compactMap { $0.t }.flatMap { $0 }
+        let vaccinations = compactMap { $0.v }.flatMap { $0 }.sortByLatestDt
+        let recoveries = compactMap { $0.r }.flatMap { $0 }.sortByLatestFr
+        let tests = compactMap { $0.t }.flatMap { $0 }.sortByLatestSc
 
         if let latestVaccination = vaccinations.latestVaccination, latestOnly {
             baseCertificate.v = vaccinations.isEmpty ? nil : [latestVaccination]

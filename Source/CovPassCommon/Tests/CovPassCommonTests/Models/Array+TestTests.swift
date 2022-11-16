@@ -34,4 +34,16 @@ class ArrayTestTests: XCTestCase {
         // THEN
         XCTAssertEqual(latestTest?.ci, "4")
     }
+    
+    func test_sortByLatestSc() {
+        // WHEN
+        let sortByLatestSc = sut.sortByLatestSc
+        
+        // THEN
+        XCTAssertEqual(sortByLatestSc.first?.ci, "4")
+        XCTAssertEqual(sortByLatestSc[1].ci, "5")
+        XCTAssertEqual(sortByLatestSc[2].ci, "1")
+        XCTAssertEqual(sortByLatestSc[3].ci, "2")
+        XCTAssertEqual(sortByLatestSc.last?.ci, "3")
+    }
 }

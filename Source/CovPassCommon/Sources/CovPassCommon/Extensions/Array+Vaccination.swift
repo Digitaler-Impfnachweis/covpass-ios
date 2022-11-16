@@ -12,7 +12,11 @@ public extension Array where Element == Vaccination {
         sorted { $0.dt < $1.dt }.first
     }
     
+    var sortByLatestDt: Self {
+        sorted { $0.dt > $1.dt }
+    }
+    
     var latestVaccination: Vaccination? {
-        sorted { $0.dt > $1.dt }.first
+        sortByLatestDt.first
     }
 }

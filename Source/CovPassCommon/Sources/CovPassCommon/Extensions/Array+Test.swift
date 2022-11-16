@@ -9,7 +9,10 @@
 import Foundation
 
 public extension Array where Element == Test {
+    var sortByLatestSc: Self {
+        sorted { $0.sc > $1.sc }
+    }
     var latestTest: Test? {
-        sorted { $0.sc > $1.sc }.first
+        sortByLatestSc.first
     }
 }
