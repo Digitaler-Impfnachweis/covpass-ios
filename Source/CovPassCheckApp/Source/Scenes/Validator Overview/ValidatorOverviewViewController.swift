@@ -140,12 +140,18 @@ class ValidatorOverviewViewController: UIViewController {
             self.viewModel.checkImmunityStatus(secondToken: nil, thirdToken: nil)
         }
         
+        configureSegmentControl()
+    }
+    
+    func configureSegmentControl(){
         checkTypeSegment.setTitle(viewModel.segmentMaskTitle, forSegmentAt: CheckType.mask.rawValue)
         checkTypeSegment.setTitle(viewModel.segmentImmunityTitle, forSegmentAt: CheckType.immunity.rawValue)
-        
+        let font = UIFont(name: UIFont.sansBold, size: 14.0) ?? UIFont.systemFont(ofSize: 14.0, weight: .bold)
+        let boldTextAttributes: [NSAttributedString.Key : AnyObject] = [.font : font]
+        checkTypeSegment.setTitleTextAttributes(boldTextAttributes, for: .selected)
+        checkTypeSegment.selectedSegmentIndex = viewModel.selectedCheckType.rawValue
         immunityCheckView.isHidden = viewModel.selectedCheckType == .mask
         scanCard.isHidden = viewModel.selectedCheckType == .immunity
-        checkTypeSegment.selectedSegmentIndex = viewModel.selectedCheckType.rawValue
     }
     
     private func setupCheckSituationView() {
