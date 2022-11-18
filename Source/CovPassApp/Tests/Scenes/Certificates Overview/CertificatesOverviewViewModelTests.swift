@@ -801,7 +801,7 @@ class CertificatesOverviewViewModelTests: XCTestCase {
         // When
         sut.scanCertificate(withIntroduction: false)
         XCTAssertTrue(sut.isLoading)
-        RunLoop.main.run(for: 0.01)
+        RunLoop.main.run(for: 0.05)
         // Then
         XCTAssertFalse(sut.isLoading)
         wait(for: [router.showCertificateExpectation], timeout: 0.1)
