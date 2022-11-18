@@ -219,6 +219,9 @@ public extension UIImage {
     @ImageLoader(name: "flag_de")
     private(set) static var flagDE
     
+    @ImageLoader(name: "flag_world")
+    private(set) static var flagWorld
+    
     @ImageLoader(name: "status_full_notification")
     private(set) static var statusFullNotfication
     

@@ -24,6 +24,7 @@ class ValidatorOverviewViewController: UIViewController {
     @IBOutlet var checkTypesStackview: UIStackView!
     @IBOutlet var immunityCheckView: ImmunityScanCardView!
     @IBOutlet var checkTypeSegment: SegmentedControl!
+    @IBOutlet var timeHintContainerStackView: UIStackView!
     @IBOutlet var timeHintView: HintView!
     @IBOutlet var offlineInformationView: UIView!
     @IBOutlet var offlineInformationStateWrapperView: UIView!
@@ -36,6 +37,8 @@ class ValidatorOverviewViewController: UIViewController {
     @IBOutlet var offlineInformationCellAccesoryImageView: UIImageView!
     @IBOutlet var offlineInformationUpdateContainer: UIView!
     @IBOutlet var offlineModusTopContainer: UIView!
+    @IBOutlet var checkSituationContainerStackView: UIStackView!
+    @IBOutlet var checkSituationView: ImageTitleSubtitleView!
     
     // MARK: - Properties
 
@@ -58,6 +61,7 @@ class ValidatorOverviewViewController: UIViewController {
         setupHeaderView()
         setupCardView()
         setupOfflineInformationView()
+        setupCheckSituationView()
         viewModel.showNotificationsIfNeeded()
     }
 
@@ -144,8 +148,15 @@ class ValidatorOverviewViewController: UIViewController {
         checkTypeSegment.selectedSegmentIndex = viewModel.selectedCheckType.rawValue
     }
     
+    private func setupCheckSituationView() {
+        let title = viewModel.checkSituationTitle.styledAs(.body).colored(.onBackground80)
+        let image = viewModel.checkSituationImage
+        checkSituationView.update(title: title, subtitle: nil, image: image, backGroundColor: .clear, imageWidth: .space_16, margin: .zero)
+        checkSituationContainerStackView.isHidden = viewModel.selectedCheckType == .mask
+    }
+    
     private func setupTimeHintView() {
-        timeHintView.isHidden = viewModel.timeHintIsHidden
+        timeHintContainerStackView.isHidden = viewModel.timeHintIsHidden
         timeHintView.iconView.image = viewModel.timeHintIcon
         timeHintView.iconLabel.text = ""
         timeHintView.iconLabel.isHidden = true
@@ -193,6 +204,7 @@ extension ValidatorOverviewViewController: ViewModelDelegate {
     func viewModelDidUpdate() {
         setupCardView()
         setupOfflineInformationView()
+        setupCheckSituationView()
     }
 
     func viewModelUpdateDidFailWithError(_: Error) {}

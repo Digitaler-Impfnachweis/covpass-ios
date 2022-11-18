@@ -18,13 +18,15 @@ class ValidatorOverviewSnapShotTests: BaseSnapShotTests {
                       ntpDate: Date = Date(),
                       ntpOffset: TimeInterval = 0.0,
                       logicType: DCCCertLogic.LogicType = .deAcceptenceAndInvalidationRules,
-                      selectedCheckType: CheckType = .mask) -> ValidatorOverviewViewController {
+                      selectedCheckType: CheckType = .mask,
+                      selectedCheckSituation: CheckSituationType = .enteringGermany) -> ValidatorOverviewViewController {
         let certLogicMock = DCCCertLogicMock()
         let vaccinationRepoMock = VaccinationRepositoryMock()
         var userDefaults = MockPersistence()
         userDefaults.lastUpdatedTrustList = lastUpdateTrustList
         vaccinationRepoMock.shouldTrustListUpdate = shouldTrustListUpdate
         userDefaults.selectedCheckType = selectedCheckType.rawValue
+        userDefaults.checkSituation = selectedCheckSituation.rawValue
         let vm = ValidatorOverviewViewModel(router: ValidatorMockRouter(),
                                             repository: vaccinationRepoMock,
                                             revocationRepository: CertificateRevocationRepositoryMock(),
@@ -63,6 +65,20 @@ class ValidatorOverviewSnapShotTests: BaseSnapShotTests {
     
     func testImmunitySelected() {
         let sut = configureSut(selectedCheckType: .immunity)
+        verifyView(view: sut.view)
+    }
+    
+    func testImmunitySelected_withinGermany() {
+        let sut = configureSut(selectedCheckType: .immunity, selectedCheckSituation: .withinGermany)
+        verifyView(view: sut.view)
+    }
+    
+    func testImmunitySelected_timeHint() {
+        let sut = configureSut(lastUpdateTrustList: DateUtils.parseDate("2021-04-26T15:05:00"),
+                               ntpDate: DateUtils.parseDate("2021-04-26T15:05:00")!,
+                               ntpOffset: 7201,
+                               selectedCheckType: .immunity,
+                               selectedCheckSituation: .withinGermany)
         verifyView(view: sut.view)
     }
 }

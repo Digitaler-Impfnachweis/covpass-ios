@@ -45,6 +45,10 @@ private enum Constants {
             static let maskTitle = "start_screen_toggle_mask".localized
             static let immunityTitle = "start_screen_toggle_vaccination".localized
         }
+        enum CheckSituation {
+            static let withinGermanyTitle = "startscreen_rules_tag_local".localized
+            static let enteringGermanyTitle = "startscreen_rules_tag_europe".localized
+        }
     }
     enum Config {
         static let twoHoursAsSeconds = 7200.0
@@ -117,6 +121,14 @@ class ValidatorOverviewViewModel {
             userDefaults.selectedCheckType = selectedCheckType.rawValue
             delegate?.viewModelDidUpdate()
         }
+    }
+    
+    var checkSituation: CheckSituationType { .init(rawValue: userDefaults.checkSituation) ?? .withinGermany }
+    var checkSituationTitle: String {
+        return checkSituation == .withinGermany ? Constants.Keys.CheckSituation.withinGermanyTitle : Constants.Keys.CheckSituation.enteringGermanyTitle
+    }
+    var checkSituationImage: UIImage {
+        return checkSituation == .withinGermany ? .flagDE : .flagWorld
     }
 
     // MARK: - Lifecycle
