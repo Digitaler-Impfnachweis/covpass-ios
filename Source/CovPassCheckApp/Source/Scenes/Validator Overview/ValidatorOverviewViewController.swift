@@ -157,7 +157,7 @@ class ValidatorOverviewViewController: UIViewController {
     private func setupCheckSituationView() {
         let title = viewModel.checkSituationTitle.styledAs(.body).colored(.onBackground80)
         let image = viewModel.checkSituationImage
-        checkSituationView.update(title: title, subtitle: nil, image: image, backGroundColor: .clear, imageWidth: .space_16, margin: .zero)
+        checkSituationView.update(title: title, leftImage: image, backGroundColor: .clear, imageWidth: .space_16, margin: .zero)
         checkSituationContainerStackView.isHidden = viewModel.selectedCheckType == .mask
     }
     

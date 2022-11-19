@@ -59,21 +59,21 @@ class SecondScanViewController: UIViewController {
         let title = viewModel.firstScanTitle.styledAs(.header_2)
         let subtitle = viewModel.firstScanSubtitle.styledAs(.body)
         let image = viewModel.firstScanIcon
-        fistScanView.update(title: title, subtitle: subtitle, image: image)
+        fistScanView.update(title: title, subtitle: subtitle, leftImage: image)
     }
     
     private func configureSecondScanView() {
         let title = viewModel.secondScanTitle.styledAs(.header_2)
         let subtitle = viewModel.secondScanSubtitle.styledAs(.body)
         let image = viewModel.secondScanIcon
-        secondScanView.update(title: title, subtitle: subtitle, image: image)
+        secondScanView.update(title: title, subtitle: subtitle, leftImage: image)
     }
     
     private func configureThirdScanView() {
         let title = viewModel.thirdScanTitle.styledAs(.header_2)
         let subtitle = viewModel.thirdScanSubtitle.styledAs(.body)
         let image = viewModel.thirdScanIcon
-        thirdScanView.update(title: title, subtitle: subtitle, image: image)
+        thirdScanView.update(title: title, subtitle: subtitle, leftImage: image)
     }
     
     private func configureHintView() {

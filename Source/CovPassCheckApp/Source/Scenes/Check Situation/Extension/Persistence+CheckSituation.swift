@@ -9,7 +9,7 @@ import CovPassCommon
 import Foundation
 
 public extension UserDefaults {
-    static let keyCheckSituation = "keyCheckSituation"
+    static let keyCheckSituation = "keyCheckSituationNew"
 }
 
 enum CheckSituationType: Int {

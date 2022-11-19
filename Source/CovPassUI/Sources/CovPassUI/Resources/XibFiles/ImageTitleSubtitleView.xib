@@ -11,10 +11,14 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ImageTitleSubtitleView" customModule="CovPassUI">
             <connections>
                 <outlet property="bottomConstraint" destination="qZ0-C0-x5B" id="tkD-j4-7MX"/>
+                <outlet property="button" destination="Qwt-Ce-Ym7" id="YsR-09-7Bp"/>
                 <outlet property="containerView" destination="KOm-NC-2LG" id="Y3x-iH-NUl"/>
-                <outlet property="imageView" destination="ClW-eD-mrQ" id="wM0-7q-VbO"/>
                 <outlet property="imageWidthConstraint" destination="QC0-xx-cIP" id="T7m-j3-CVH"/>
                 <outlet property="leadingConstraint" destination="0cn-hC-cFA" id="ScD-Pb-z03"/>
+                <outlet property="leftImageContainer" destination="QxK-IZ-UAE" id="hfk-ed-Kig"/>
+                <outlet property="leftImageView" destination="ClW-eD-mrQ" id="wM0-7q-VbO"/>
+                <outlet property="rightImageContainer" destination="biw-mV-IFg" id="7LS-zX-unG"/>
+                <outlet property="rightImageView" destination="inO-MB-iYC" id="6Dg-gP-xXh"/>
                 <outlet property="subtitleLabel" destination="BIS-hx-gKe" id="kxk-Tl-lCO"/>
                 <outlet property="titleLabel" destination="eGC-vD-Qs4" id="jBe-wS-Sb1"/>
                 <outlet property="topConstraint" destination="a4w-82-wsx" id="xji-M9-6Dg"/>
@@ -52,28 +56,60 @@
                                     </constraints>
                                 </view>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="aUS-Uq-qQW">
-                                    <rect key="frame" x="44" y="0.0" width="436" height="231"/>
+                                    <rect key="frame" x="44" y="0.0" width="392" height="231"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" verticalHuggingPriority="249" placeholderIntrinsicWidth="243" placeholderIntrinsicHeight="27" translatesAutoresizingMaskIntoConstraints="NO" id="eGC-vD-Qs4" customClass="PlainLabel" customModule="CovPassUI">
-                                            <rect key="frame" x="0.0" y="0.0" width="436" height="204"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="392" height="204"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </view>
                                         <view contentMode="scaleToFill" placeholderIntrinsicWidth="243" placeholderIntrinsicHeight="27" translatesAutoresizingMaskIntoConstraints="NO" id="BIS-hx-gKe" customClass="PlainLabel" customModule="CovPassUI">
-                                            <rect key="frame" x="0.0" y="204" width="436" height="27"/>
+                                            <rect key="frame" x="0.0" y="204" width="392" height="27"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </view>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </stackView>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="biw-mV-IFg">
+                                    <rect key="frame" x="448" y="0.0" width="32" height="231"/>
+                                    <subviews>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="status-partial-circle" translatesAutoresizingMaskIntoConstraints="NO" id="inO-MB-iYC">
+                                            <rect key="frame" x="0.0" y="99.666666666666671" width="32" height="32.000000000000014"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="32" id="gcE-F1-dT5"/>
+                                                <constraint firstAttribute="width" secondItem="inO-MB-iYC" secondAttribute="height" multiplier="1:1" id="ktO-PX-CTB"/>
+                                            </constraints>
+                                        </imageView>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="inO-MB-iYC" secondAttribute="trailing" id="VKg-W4-dYz"/>
+                                        <constraint firstItem="inO-MB-iYC" firstAttribute="centerY" secondItem="biw-mV-IFg" secondAttribute="centerY" id="bpV-rA-i1E"/>
+                                        <constraint firstItem="inO-MB-iYC" firstAttribute="leading" secondItem="biw-mV-IFg" secondAttribute="leading" id="ogu-5k-JJd"/>
+                                        <constraint firstItem="inO-MB-iYC" firstAttribute="centerX" secondItem="biw-mV-IFg" secondAttribute="centerX" id="wfK-Gi-4QO"/>
+                                    </constraints>
+                                </view>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </stackView>
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qwt-Ce-Ym7">
+                            <rect key="frame" x="0.0" y="-6" width="520" height="283"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="plain"/>
+                            <connections>
+                                <action selector="buttonTapped:" destination="-1" eventType="touchUpInside" id="bVf-Qa-I2p"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="qRa-QK-qd9" secondAttribute="trailing" constant="20" id="0EW-rY-fuh"/>
                         <constraint firstItem="qRa-QK-qd9" firstAttribute="leading" secondItem="KOm-NC-2LG" secondAttribute="leading" constant="20" id="0cn-hC-cFA"/>
+                        <constraint firstItem="Qwt-Ce-Ym7" firstAttribute="top" secondItem="KOm-NC-2LG" secondAttribute="top" constant="-6" id="6CA-Ez-MEe"/>
+                        <constraint firstAttribute="trailing" secondItem="Qwt-Ce-Ym7" secondAttribute="trailing" id="N09-JG-toH"/>
+                        <constraint firstItem="Qwt-Ce-Ym7" firstAttribute="leading" secondItem="KOm-NC-2LG" secondAttribute="leading" id="T0N-E6-VUS"/>
                         <constraint firstItem="qRa-QK-qd9" firstAttribute="top" secondItem="KOm-NC-2LG" secondAttribute="top" constant="20" id="a4w-82-wsx"/>
+                        <constraint firstAttribute="bottom" secondItem="Qwt-Ce-Ym7" secondAttribute="bottom" constant="-6" id="c75-2r-u2F"/>
                         <constraint firstAttribute="bottom" secondItem="qRa-QK-qd9" secondAttribute="bottom" constant="20" id="qZ0-C0-x5B"/>
                     </constraints>
                 </view>
