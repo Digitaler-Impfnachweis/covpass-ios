@@ -12,6 +12,8 @@ import PromiseKit
 import XCTest
 
 class ValidatorMockRouter: ValidatorOverviewRouterProtocol {
+    
+    
 
     var sceneCoordinator: SceneCoordinator = SceneCoordinatorMock()
     var showDataPrivacyExpectation = XCTestExpectation(description: "showDataPrivacyExpectation")
@@ -32,6 +34,12 @@ class ValidatorMockRouter: ValidatorOverviewRouterProtocol {
     var showIfsg22aNotCompleteExpectation = XCTestExpectation(description: "showIfsg22aCheckSecondScanAllowedExpectation")
     var showIfsg22aCheckErrorExpectation = XCTestExpectation(description: "showIfsg22aCheckTechnicalErrorExpectation")
     var showIfsg22aIncompleteResultExpectation = XCTestExpectation(description: "showIfsg22aIncompleteResultExpectation")
+    var routeToChooseCheckSituationExpectation = XCTestExpectation(description: "routeToChooseCheckSituationExpectation")
+
+    func routeToChooseCheckSituation() -> PromiseKit.Promise<Void> {
+        routeToChooseCheckSituationExpectation.fulfill()
+        return .value
+    }
     
     func showAppInformation(userDefaults: Persistence) {
         

@@ -54,7 +54,7 @@ public class ImmunityScanCardView: XibView {
                     titleEdges: UIEdgeInsets,
                     description: NSAttributedString,
                     descriptionEdges: UIEdgeInsets,
-                    infoText: NSAttributedString,
+                    infoText: NSAttributedString?,
                     infoTextEdges: UIEdgeInsets,
                     actionTitle: String) {
         titleLabel.attributedText = title
@@ -65,5 +65,6 @@ public class ImmunityScanCardView: XibView {
         infoLabel.attributedText = infoText
         infoLabel.contentView?.layoutMargins = infoTextEdges
         actionButton.title = actionTitle
+        infoView.isHidden = infoText.isNilOrEmpty
     }
 }

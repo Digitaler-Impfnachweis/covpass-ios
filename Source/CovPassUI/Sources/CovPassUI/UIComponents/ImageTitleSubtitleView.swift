@@ -10,7 +10,7 @@ import UIKit
 
 public class ImageTitleSubtitleView: XibView {
     
-    @IBOutlet private var containerView: UIView!
+    @IBOutlet public var containerView: UIView!
     @IBOutlet private var leftImageContainer: UIView!
     @IBOutlet private var leftImageView: UIImageView!
     @IBOutlet private var rightImageContainer: UIView!
@@ -23,10 +23,11 @@ public class ImageTitleSubtitleView: XibView {
     @IBOutlet private var topConstraint: NSLayoutConstraint!
     @IBOutlet private var leadingConstraint: NSLayoutConstraint!
     @IBOutlet private var button: UIButton!
+    @IBOutlet private var iconVerticalAlignmentConstraints: NSLayoutConstraint!
     
     public var onTap: (()->Void)? {
         didSet {
-            button.isHidden = onTap == nil
+            configureButton()
         }
     }
     
@@ -42,7 +43,9 @@ public class ImageTitleSubtitleView: XibView {
                 rightImage: UIImage? = nil,
                 backGroundColor: UIColor = .brandAccent20,
                 imageWidth: CGFloat = 32,
-                margin: CGFloat = 20) {
+                edgeInstes: UIEdgeInsets = .init(top: 20, left: 20, bottom: 20, right: 20),
+                backgroundColor: UIColor = .brandAccent20,
+                iconVerticalAlignmentActive: Bool = true) {
         titleLabel.attributedText = title
         subtitleLabel.attributedText = subtitle
         subtitleLabel.isHidden = subtitle.isNilOrEmpty
@@ -52,25 +55,36 @@ public class ImageTitleSubtitleView: XibView {
         leftImageContainer.isHidden = leftImage == nil
         rightImageView.image = rightImage
         rightImageContainer.isHidden = rightImage == nil
-        trailingConstraints.constant = margin
-        bottomConstraint.constant = margin
-        leadingConstraint.constant = margin
-        topConstraint.constant = margin
-        button.isHidden = onTap == nil
+        trailingConstraints.constant = edgeInstes.right
+        bottomConstraint.constant = edgeInstes.bottom
+        leadingConstraint.constant = edgeInstes.left
+        topConstraint.constant = edgeInstes.top
+        configureButton()
+        containerView.backgroundColor = backGroundColor
+        iconVerticalAlignmentConstraints.isActive = iconVerticalAlignmentActive
+        setupAccessibility()
     }
     
-    func setupAccessibility() {
+    private func configureButton() {
+        button.isHidden = onTap == nil
+        setupAccessibility()
+    }
+    
+    private func setupAccessibility() {
         var accessibilityText = ""
         accessibilityText = titleLabel.attributedText?.string ?? ""
         accessibilityText = accessibilityText + ""
         accessibilityText = accessibilityText + (subtitleLabel.attributedText?.string ?? "")
-        containerView.enableAccessibility(label: accessibilityText, value: "", hint: "", traits: .button)
+        let traitToUse: UIAccessibilityTraits = onTap == nil ? .staticText : .button
+        containerView.enableAccessibility(label: accessibilityText, value: "", hint: "", traits: traitToUse)
         if #available(iOS 13.0, *) {
             containerView.accessibilityRespondsToUserInteraction = true
         }
     }
-        
+    
+    
     @IBAction func buttonTapped(_ sender: Any) {
         onTap?()
     }
+
 }

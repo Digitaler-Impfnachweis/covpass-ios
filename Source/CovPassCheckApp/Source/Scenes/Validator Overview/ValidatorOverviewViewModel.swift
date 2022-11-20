@@ -35,11 +35,18 @@ private enum Constants {
             static let link_subtitle_available = "start_offline_link_subtitle_available".localized
         }
         enum ImmunityScanCard {
-            static let immunityCheckTitle = "start_screen_vaccination_status_title".localized
-            static let immunityCheckTitleAccessibility = "accessibility_start_screen_vaccination_status_title".localized
-            static let immunityCheckDescription = "start_screen_vaccination_status_copy".localized
-            static let immunityCheckActionTitle = "validation_start_screen_scan_action_button_title".localized
-            static let immunityCheckInfoText = "start_screen_vaccination_status_hint".localized
+            enum WithinGermany {
+                static let immunityCheckTitle = "start_screen_vaccination_status_title".localized
+                static let immunityCheckTitleAccessibility = "accessibility_start_screen_vaccination_status_title".localized
+                static let immunityCheckDescription = "start_screen_vaccination_status_copy".localized
+                static let immunityCheckActionTitle = "validation_start_screen_scan_action_button_title".localized
+                static let immunityCheckInfoText = "start_screen_vaccination_status_hint".localized
+            }
+            enum EnterginGermany {
+                static let immunityCheckTitle = "start_vaccination_status_entry_title".localized
+                static let immunityCheckDescription = "start_vaccination_status_entry_subtitle".localized
+                static let immunityCheckActionTitle = "validation_start_screen_scan_action_button_title".localized
+            }
         }
         enum Segment {
             static let maskTitle = "start_screen_toggle_mask".localized
@@ -61,12 +68,25 @@ class ValidatorOverviewViewModel {
     // MARK: - Properties
     
     private var currentDataPrivacyHash: String
-    var userDefaults: Persistence
+    private var withinGermanyIsSelected: Bool { checkSituation == .withinGermany }
+    
     let vaccinationRepository: VaccinationRepositoryProtocol
     let revocationRepository: CertificateRevocationRepositoryProtocol
     let router: ValidatorOverviewRouterProtocol
     let certLogic: DCCCertLogicProtocol
     let audioPlayer: AudioPlayerProtocol
+    let title = Constants.Keys.title
+    let scanActionTitle = Constants.Keys.ScanCard.actionTitle
+    let scanDropDownTitle = Constants.Keys.ScanCard.dropDownTitle
+    let offlineInformationDescription = Constants.Keys.OfflineInformation.copy
+    let offlineInformationUpdateCellTitle = Constants.Keys.OfflineInformation.link_title
+    let offlineInformationCellIcon = UIImage.chevronRight
+    let segmentMaskTitle = Constants.Keys.Segment.maskTitle
+    let segmentImmunityTitle = Constants.Keys.Segment.immunityTitle
+    let timeHintTitle = Constants.Keys.TimeHint.syncTitle
+    
+    var delegate: ViewModelDelegate?
+    var userDefaults: Persistence
     var shouldSomethingBeUpdated: Bool { certLogic.rulesShouldBeUpdated || certLogic.valueSetsShouldBeUpdated || vaccinationRepository.trustListShouldBeUpdated() }
     
     var isLoadingScan = false {
@@ -74,13 +94,7 @@ class ValidatorOverviewViewModel {
             delegate?.viewModelDidUpdate()
         }
     }
-    
-    var delegate: ViewModelDelegate?
-    let title = Constants.Keys.title
-    let scanActionTitle = Constants.Keys.ScanCard.actionTitle
-    let scanDropDownTitle = Constants.Keys.ScanCard.dropDownTitle
     var scanDropDownValue: String { "DE_\(userDefaults.stateSelection)".localized }
-    let timeHintTitle = Constants.Keys.TimeHint.syncTitle
     var timeHintSubTitle: String {
         String(format: Constants.Keys.TimeHint.syncMessage, ntpDateFormatted)
     }
@@ -106,31 +120,43 @@ class ValidatorOverviewViewModel {
     var offlineInformationStateBackgroundColor: UIColor { shouldSomethingBeUpdated ? .warningAlternative : .resultGreen }
     var offlineInformationStateText: String { shouldSomethingBeUpdated ? Constants.Keys.OfflineInformation.status_unavailable : Constants.Keys.OfflineInformation.status_available }
     var offlineInformationUpdateCellSubtitle: String { shouldSomethingBeUpdated ? Constants.Keys.OfflineInformation.subtitle_unavailable : Constants.Keys.OfflineInformation.link_subtitle_available }
-    let offlineInformationDescription = Constants.Keys.OfflineInformation.copy
-    let offlineInformationUpdateCellTitle = Constants.Keys.OfflineInformation.link_title
-    let offlineInformationCellIcon = UIImage.chevronRight
-    let immunityCheckTitle = Constants.Keys.ImmunityScanCard.immunityCheckTitle
-    let immunityCheckTitleAccessibility = Constants.Keys.ImmunityScanCard.immunityCheckTitleAccessibility
-    let immunityCheckDescription = Constants.Keys.ImmunityScanCard.immunityCheckDescription
-    let immunityCheckInfoText = Constants.Keys.ImmunityScanCard.immunityCheckInfoText
-    let immunityCheckActionTitle = Constants.Keys.ImmunityScanCard.immunityCheckActionTitle
-    let segmentMaskTitle = Constants.Keys.Segment.maskTitle
-    let segmentImmunityTitle = Constants.Keys.Segment.immunityTitle
+    var immunityCheckTitle: String {
+        withinGermanyIsSelected ?
+        Constants.Keys.ImmunityScanCard.WithinGermany.immunityCheckTitle :
+        Constants.Keys.ImmunityScanCard.EnterginGermany.immunityCheckTitle
+    }
+    var immunityCheckTitleAccessibility: String {
+        withinGermanyIsSelected ?
+        Constants.Keys.ImmunityScanCard.WithinGermany.immunityCheckTitleAccessibility : Constants.Keys.ImmunityScanCard.EnterginGermany.immunityCheckTitle
+    }
+    var immunityCheckDescription: String {
+        withinGermanyIsSelected ?
+        Constants.Keys.ImmunityScanCard.WithinGermany.immunityCheckDescription :
+        Constants.Keys.ImmunityScanCard.EnterginGermany.immunityCheckDescription
+    }
+    var immunityCheckInfoText: String? {
+        withinGermanyIsSelected ?
+        Constants.Keys.ImmunityScanCard.WithinGermany.immunityCheckInfoText : nil
+    }
+    var immunityCheckActionTitle: String {
+        withinGermanyIsSelected ?
+        Constants.Keys.ImmunityScanCard.EnterginGermany.immunityCheckActionTitle :
+        Constants.Keys.ImmunityScanCard.WithinGermany.immunityCheckActionTitle
+    }
     public var selectedCheckType: CheckType {
         didSet {
-            userDefaults.selectedCheckType = selectedCheckType.rawValue
-            delegate?.viewModelDidUpdate()
+            postSetSelectedCheckType()
         }
     }
-    
     var checkSituation: CheckSituationType { .init(rawValue: userDefaults.checkSituation) ?? .withinGermany }
     var checkSituationTitle: String {
-        return checkSituation == .withinGermany ? Constants.Keys.CheckSituation.withinGermanyTitle : Constants.Keys.CheckSituation.enteringGermanyTitle
+        return withinGermanyIsSelected ? Constants.Keys.CheckSituation.withinGermanyTitle : Constants.Keys.CheckSituation.enteringGermanyTitle
     }
     var checkSituationImage: UIImage {
-        return checkSituation == .withinGermany ? .flagDE : .flagWorld
+        return withinGermanyIsSelected ? .flagDE : .flagWorld
     }
-
+    
+    
     // MARK: - Lifecycle
     
     init(router: ValidatorOverviewRouterProtocol,
@@ -152,6 +178,59 @@ class ValidatorOverviewViewModel {
         self.currentDataPrivacyHash = privacyFile.sha256()
         self.selectedCheckType = CheckType(rawValue: userDefaults.selectedCheckType) ?? .mask
         self.setupTimer()
+        self.setupProperties()
+    }
+    
+    // MARK: - Methods
+    
+    private func showDataPrivacyIfNeeded() -> Guarantee<Void> {
+        guard let privacyHash = userDefaults.privacyHash else {
+            userDefaults.privacyHash = currentDataPrivacyHash
+            return .value
+        }
+        guard privacyHash != currentDataPrivacyHash else {
+            userDefaults.privacyHash = currentDataPrivacyHash
+            return .value
+        }
+        userDefaults.privacyHash = currentDataPrivacyHash
+        return router.showDataPrivacy().recover { _ in }
+    }
+
+    private func showNewRegulationsAnnouncementIfNeeded() -> Guarantee<Void> {
+        if userDefaults.newRegulationsOnboardingScreenWasShown {
+            return .value
+        }
+        return router
+            .showNewRegulationsAnnouncement()
+            .ensure {
+                self.userDefaults.newRegulationsOnboardingScreenWasShown = true
+            }
+            .recover { _ in () }
+    }
+    
+    
+    private func resetCheckTypeIfCheckSituationWasNotChoosenBefore() {
+        if UserDefaults.standard.object(forKey: UserDefaults.keyCheckSituation) == nil {
+            selectedCheckType = .mask
+        }
+    }
+    
+    private func setupProperties() {
+        resetCheckTypeIfCheckSituationWasNotChoosenBefore()
+    }
+    
+    private func routeToChooseCheckSituation() -> PMKFinalizer {
+        return router.routeToChooseCheckSituation().cauterize()
+    }
+    
+    private func postSetSelectedCheckType() {
+        userDefaults.selectedCheckType = selectedCheckType.rawValue
+        if selectedCheckType == .immunity && UserDefaults.standard.object(forKey: UserDefaults.keyCheckSituation) == nil {
+            routeToChooseCheckSituation().finally {
+                self.delegate?.viewModelDidUpdate()
+            }
+        }
+        delegate?.viewModelDidUpdate()
     }
     
     private func setupTimer() {
@@ -161,8 +240,6 @@ class ValidatorOverviewViewModel {
             self?.tick()
         }
     }
-    
-    // MARK: - Methods
     
     func updateTrustList() {
         vaccinationRepository
@@ -205,31 +282,6 @@ class ValidatorOverviewViewModel {
         .catch { error in
             print(error.localizedDescription)
         }
-    }
-
-    private func showDataPrivacyIfNeeded() -> Guarantee<Void> {
-        guard let privacyHash = userDefaults.privacyHash else {
-            userDefaults.privacyHash = currentDataPrivacyHash
-            return .value
-        }
-        guard privacyHash != currentDataPrivacyHash else {
-            userDefaults.privacyHash = currentDataPrivacyHash
-            return .value
-        }
-        userDefaults.privacyHash = currentDataPrivacyHash
-        return router.showDataPrivacy().recover { _ in }
-    }
-
-    private func showNewRegulationsAnnouncementIfNeeded() -> Guarantee<Void> {
-        if userDefaults.newRegulationsOnboardingScreenWasShown {
-            return .value
-        }
-        return router
-            .showNewRegulationsAnnouncement()
-            .ensure {
-                self.userDefaults.newRegulationsOnboardingScreenWasShown = true
-            }
-            .recover { _ in () }
     }
     
     func chooseAction() {

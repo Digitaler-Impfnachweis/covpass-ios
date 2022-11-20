@@ -10,7 +10,7 @@ import UIKit
 import CovPassCommon
 import PromiseKit
 
-struct Constant {
+private struct Constant {
     struct Keys {
         static let title = "functional_validation_check_popup_second_scan_title".localized
         static let subtitle = "functional_validation_check_popup_second_scan_subtitle".localized

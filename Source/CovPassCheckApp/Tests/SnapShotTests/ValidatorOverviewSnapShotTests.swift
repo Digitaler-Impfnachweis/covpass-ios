@@ -65,12 +65,12 @@ class ValidatorOverviewSnapShotTests: BaseSnapShotTests {
     
     func testImmunitySelected() {
         let sut = configureSut(selectedCheckType: .immunity)
-        verifyView(view: sut.view)
+        verifyView(view: sut.view, waitAfter: 0.1)
     }
     
     func testImmunitySelected_withinGermany() {
         let sut = configureSut(selectedCheckType: .immunity, selectedCheckSituation: .withinGermany)
-        verifyView(view: sut.view)
+        verifyView(view: sut.view, waitAfter: 0.1)
     }
     
     func testImmunitySelected_timeHint() {
@@ -79,6 +79,6 @@ class ValidatorOverviewSnapShotTests: BaseSnapShotTests {
                                ntpOffset: 7201,
                                selectedCheckType: .immunity,
                                selectedCheckSituation: .withinGermany)
-        verifyView(view: sut.view)
+        verifyView(view: sut.view, waitAfter: 0.0)
     }
 }

@@ -124,15 +124,16 @@ class ValidatorOverviewViewController: UIViewController {
         let immunityCheckDescription = viewModel.immunityCheckDescription
             .styledAs(.body)
             .colored(.neutralWhite)
-        let immunityCheckInfoText = viewModel.immunityCheckInfoText
+        let immunityCheckInfoText = viewModel.immunityCheckInfoText?
             .styledAs(.header_3)
             .colored(.neutralWhite)
         let immunityCheckActionTitle = viewModel.immunityCheckActionTitle
+        let descriptionTextBottomEdge = viewModel.immunityCheckInfoText == nil ? 24.0 : 12.0
         immunityCheckView.set(title: immunityCheckTitle,
                               titleAccessibility: immunityCheckTitleAccessibility,
                               titleEdges: .init(top: 24, left: 24, bottom: 8, right: 24),
                               description: immunityCheckDescription,
-                              descriptionEdges: .init(top: 8, left: 24, bottom: 12, right: 24),
+                              descriptionEdges: .init(top: 8, left: 24, bottom: descriptionTextBottomEdge, right: 24),
                               infoText: immunityCheckInfoText,
                               infoTextEdges: .init(top: 0, left: 0, bottom: 0, right: 0),
                               actionTitle: immunityCheckActionTitle)
@@ -157,7 +158,11 @@ class ValidatorOverviewViewController: UIViewController {
     private func setupCheckSituationView() {
         let title = viewModel.checkSituationTitle.styledAs(.body).colored(.onBackground80)
         let image = viewModel.checkSituationImage
-        checkSituationView.update(title: title, leftImage: image, backGroundColor: .clear, imageWidth: .space_16, margin: .zero)
+        checkSituationView.update(title: title,
+                                  leftImage: image,
+                                  backGroundColor: .clear,
+                                  imageWidth: .space_16,
+                                  edgeInstes: .init(top: 0, left: 0, bottom: 0, right: 0))
         checkSituationContainerStackView.isHidden = viewModel.selectedCheckType == .mask
     }
     

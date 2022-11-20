@@ -95,6 +95,12 @@ class ValidatorOverviewRouter: ValidatorOverviewRouterProtocol {
          )
      }
     
+    func routeToChooseCheckSituation() -> Promise<Void> {
+        let router = ChooseCheckSituationRouter(sceneCoordinator: sceneCoordinator)
+        let factory = ChooseCheckSituationSceneFactory(router: router)
+        return sceneCoordinator.present(factory, animated: true)
+    }
+    
     // MARK: Mask Check
 
     func showMaskRequiredBusinessRules(token: ExtendedCBORWebToken) -> Promise<ValidatorDetailSceneResult> {
