@@ -64,6 +64,21 @@ public protocol CheckSituationViewModelProtocol {
     var authorityListSubtitle: String  { get }
     var isLoading: Bool { get }
     
+    // MARK: Check Situation related properties
+    var checkSituationTitle: String { get }
+    var checkSituationSubtitle: String { get }
+    var checkSituationWithinGermanyTitle: String { get }
+    var checkSituationWithinGermanySubtitle : String { get }
+    var checkSituationWithinGermanyImage: UIImage { get }
+    var checkSituationEnteringGermanyTitle: String { get }
+    var checkSituationEnteringGermanySubtitle: String { get }
+    var checkSituationEnteringGermanyImage: UIImage { get }
+    var checkSituationWithinGermanyOptionAccessibiliyLabel: String { get }
+    var checkSituationEnteringGermanyOptionAccessibiliyLabel: String { get }
+    var checkSituationIsHidden: Bool { get }
+    
+    func withinGermanyIsChoosen()
+    func enteringGermanyViewIsChoosen()
     func doneIsTapped()
     func toggleOfflineRevocation()
     func refresh()

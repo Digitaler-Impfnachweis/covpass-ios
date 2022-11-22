@@ -12,7 +12,7 @@ public extension UserDefaults {
     static let keyCheckSituation = "keyCheckSituationNew"
 }
 
-enum CheckSituationType: Int {
+public enum CheckSituationType: Int {
     case withinGermany = 0
     case enteringGermany = 1
 }

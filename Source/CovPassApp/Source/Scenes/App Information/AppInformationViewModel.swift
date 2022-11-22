@@ -16,6 +16,20 @@ class GermanAppInformationViewModel: CovPassAppInformationViewModel {
 
     override var entries: [AppInformationEntry] {
         [
+            AppInformationEntry(
+                title: Texts.federalStateTitle,
+                scene: FederalStateSettingsSceneFactory(sceneCoordinator: router.sceneCoordinator),
+                rightTitle: persistence.stateSelection.isEmpty ? "" : "DE_\(persistence.stateSelection)".localized
+            ),
+            AppInformationEntry(
+                title: Texts.appInformationTitle,
+                scene: TrustedListDetailsSceneFactory(sceneCoordinator: router.sceneCoordinator)
+            ),
+            whatsNewEntry,
+            .webEntry(title: Texts.faqTitle,
+                      url: URL(string: "https://www.digitaler-impfnachweis-app.de/webviews/client-app/faq/")!,
+                      openingAnnounce: Accessibility.Opening.faqTitle,
+                      closingAnnounce: Accessibility.Closing.faqTitle),
             .webEntry(title: Texts.leichteSprache,
                       url: URL(string: "https://digitaler-impfnachweis-app.de/webviews/leichte-sprache/covpassapp")!,
                       openingAnnounce: Accessibility.Opening.leichteSprache,
@@ -25,10 +39,6 @@ class GermanAppInformationViewModel: CovPassAppInformationViewModel {
                       enableDynamicFonts: true,
                       openingAnnounce: Accessibility.Opening.contactTitle,
                       closingAnnounce: Accessibility.Closing.contactTitle),
-            .webEntry(title: Texts.faqTitle,
-                      url: URL(string: "https://www.digitaler-impfnachweis-app.de/webviews/client-app/faq/")!,
-                      openingAnnounce: Accessibility.Opening.faqTitle,
-                      closingAnnounce: Accessibility.Closing.faqTitle),
             .webEntry(title: Texts.datenschutzTitle,
                       url: mainBundle.url(forResource: "privacy-covpass-de", withExtension: "html")!,
                       enableDynamicFonts: true,
@@ -47,16 +57,6 @@ class GermanAppInformationViewModel: CovPassAppInformationViewModel {
                       url: URL(string: "https://www.digitaler-impfnachweis-app.de/webviews/covpass-app-ios-barrierefreiheitserklaerung/")!,
                       openingAnnounce: Accessibility.Opening.accessibilityStatementTitle,
                       closingAnnounce: Accessibility.Closing.accessibilityStatementTitle),
-            AppInformationEntry(
-                title: Texts.appInformationTitle,
-                scene: TrustedListDetailsSceneFactory(sceneCoordinator: router.sceneCoordinator)
-            ),
-            whatsNewEntry,
-            AppInformationEntry(
-                title: Texts.federalStateTitle,
-                scene: FederalStateSettingsSceneFactory(sceneCoordinator: router.sceneCoordinator),
-                rightTitle: persistence.stateSelection.isEmpty ? "" : "DE_\(persistence.stateSelection)".localized
-            ),
         ]
     }
 
@@ -78,15 +78,25 @@ class EnglishAppInformationViewModel: CovPassAppInformationViewModel {
 
     override var entries: [AppInformationEntry] {
         [
+            AppInformationEntry(
+                title: Texts.federalStateTitle,
+                scene: FederalStateSettingsSceneFactory(sceneCoordinator: router.sceneCoordinator),
+                rightTitle: persistence.stateSelection.isEmpty ? "" : "DE_\(persistence.stateSelection)".localized
+            ),
+            AppInformationEntry(
+                title: Texts.appInformationTitle,
+                scene: TrustedListDetailsSceneFactory(sceneCoordinator: router.sceneCoordinator)
+            ),
+            whatsNewEntry,
+            .webEntry(title: Texts.faqTitle,
+                      url: URL(string: "https://www.digitaler-impfnachweis-app.de/en/webviews/client-app/faq/")!,
+                      openingAnnounce: Accessibility.Opening.faqTitle,
+                      closingAnnounce: Accessibility.Closing.faqTitle),
             .webEntry(title: Texts.contactTitle,
                       url: mainBundle.url(forResource: "contact-covpass-en", withExtension: "html")!,
                       enableDynamicFonts: true,
                       openingAnnounce: Accessibility.Opening.contactTitle,
                       closingAnnounce: Accessibility.Closing.contactTitle),
-            .webEntry(title: Texts.faqTitle,
-                      url: URL(string: "https://www.digitaler-impfnachweis-app.de/en/webviews/client-app/faq/")!,
-                      openingAnnounce: Accessibility.Opening.faqTitle,
-                      closingAnnounce: Accessibility.Closing.faqTitle),
             .webEntry(title: Texts.datenschutzTitle,
                       url: mainBundle.url(forResource: "privacy-covpass-en", withExtension: "html")!,
                       enableDynamicFonts: true,
@@ -105,16 +115,6 @@ class EnglishAppInformationViewModel: CovPassAppInformationViewModel {
                       url: URL(string: "https://www.digitaler-impfnachweis-app.de/en/webviews/covpass-app-ios-accessibility-statement/")!,
                       openingAnnounce: Accessibility.Opening.accessibilityStatementTitle,
                       closingAnnounce: Accessibility.Closing.accessibilityStatementTitle),
-            AppInformationEntry(
-                title: Texts.appInformationTitle,
-                scene: TrustedListDetailsSceneFactory(sceneCoordinator: router.sceneCoordinator)
-            ),
-            whatsNewEntry,
-            AppInformationEntry(
-                title: Texts.federalStateTitle,
-                scene: FederalStateSettingsSceneFactory(sceneCoordinator: router.sceneCoordinator),
-                rightTitle: persistence.stateSelection.isEmpty ? "" : "DE_\(persistence.stateSelection)".localized
-            ),
         ]
     }
 

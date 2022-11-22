@@ -23,6 +23,11 @@
                 <outlet property="certificateProviderStackView" destination="5OC-6B-m0M" id="Ode-a4-WyK"/>
                 <outlet property="certificateProviderSubtitleLabel" destination="7pf-kH-iDz" id="Wmw-TC-KnH"/>
                 <outlet property="certificateProviderTitleLabel" destination="efu-GZ-x0y" id="rBC-as-DF2"/>
+                <outlet property="checkSituationContainer" destination="5HW-7p-m6P" id="f7l-69-b0p"/>
+                <outlet property="checkSituationEnteringGermany" destination="9TG-mw-YII" id="nvg-Jn-p7V"/>
+                <outlet property="checkSituationSubtitle" destination="lzu-lb-UcQ" id="V1p-R1-Uof"/>
+                <outlet property="checkSituationTitleLabel" destination="C7a-uj-t5O" id="NaH-nQ-cJJ"/>
+                <outlet property="checkSituationWithinGermany" destination="K3k-V5-DcC" id="XP1-FY-sar"/>
                 <outlet property="countryListStackView" destination="yIh-Qr-Ssr" id="zhX-gB-Wof"/>
                 <outlet property="countryListSubtitleLabel" destination="tb6-Wf-0hS" id="4Pk-Np-kAN"/>
                 <outlet property="countryListTitleLabel" destination="9gw-rI-wkA" id="yj5-Qk-5bK"/>
@@ -69,7 +74,7 @@
                     <rect key="frame" x="0.0" y="48" width="414" height="848"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="AB7-iK-S63">
-                            <rect key="frame" x="0.0" y="32" width="414" height="1943"/>
+                            <rect key="frame" x="0.0" y="32" width="414" height="2455"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Giw-oM-J5h">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="168"/>
@@ -112,8 +117,56 @@
                                     <rect key="frame" x="0.0" y="168" width="414" height="128"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </imageView>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5HW-7p-m6P" userLabel="checksituation view">
+                                    <rect key="frame" x="0.0" y="296" width="414" height="512"/>
+                                    <subviews>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Kp4-PK-ahX">
+                                            <rect key="frame" x="0.0" y="16" width="414" height="456"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="27" translatesAutoresizingMaskIntoConstraints="NO" id="C7a-uj-t5O" customClass="PlainLabel" customModule="CovPassUI">
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="233"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </view>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sfe-cX-hg1" userLabel="spacer">
+                                                    <rect key="frame" x="0.0" y="233" width="414" height="12"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="12" id="977-R5-5W1"/>
+                                                    </constraints>
+                                                </view>
+                                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="21" translatesAutoresizingMaskIntoConstraints="NO" id="lzu-lb-UcQ" customClass="PlainLabel" customModule="CovPassUI">
+                                                    <rect key="frame" x="0.0" y="245" width="414" height="21"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </view>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XpM-V6-pg7" userLabel="spacer">
+                                                    <rect key="frame" x="0.0" y="266" width="414" height="24"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="24" id="lfi-nh-uyA"/>
+                                                    </constraints>
+                                                </view>
+                                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="83" translatesAutoresizingMaskIntoConstraints="NO" id="K3k-V5-DcC" customClass="ImageTitleSubtitleView" customModule="CovPassUI">
+                                                    <rect key="frame" x="0.0" y="290" width="414" height="83"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </view>
+                                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="83" translatesAutoresizingMaskIntoConstraints="NO" id="9TG-mw-YII" customClass="ImageTitleSubtitleView" customModule="CovPassUI">
+                                                    <rect key="frame" x="0.0" y="373" width="414" height="83"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </view>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </stackView>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstItem="Kp4-PK-ahX" firstAttribute="leading" secondItem="5HW-7p-m6P" secondAttribute="leading" id="5uK-bg-sh0"/>
+                                        <constraint firstAttribute="bottom" secondItem="Kp4-PK-ahX" secondAttribute="bottom" constant="40" id="9b0-CO-2xU"/>
+                                        <constraint firstAttribute="trailing" secondItem="Kp4-PK-ahX" secondAttribute="trailing" id="PhW-KE-gQL"/>
+                                        <constraint firstItem="Kp4-PK-ahX" firstAttribute="top" secondItem="5HW-7p-m6P" secondAttribute="top" constant="16" id="niA-s4-ZVC"/>
+                                    </constraints>
+                                </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0xJ-YP-s2H">
-                                    <rect key="frame" x="0.0" y="296" width="414" height="127"/>
+                                    <rect key="frame" x="0.0" y="808" width="414" height="127"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qDu-uB-ZZ0">
                                             <rect key="frame" x="24" y="0.0" width="41.5" height="20.5"/>
@@ -150,7 +203,7 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Spj-B7-Q0A">
-                                    <rect key="frame" x="0.0" y="423" width="414" height="168"/>
+                                    <rect key="frame" x="0.0" y="935" width="414" height="168"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="QWY-Rx-qtn" userLabel="SubTitle" customClass="PlainLabel" customModule="CovPassUI">
                                             <rect key="frame" x="24" y="0.0" width="366" height="156"/>
@@ -166,7 +219,7 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ADv-Ie-vgD">
-                                    <rect key="frame" x="0.0" y="591" width="414" height="168"/>
+                                    <rect key="frame" x="0.0" y="1103" width="414" height="168"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="jkW-LO-gqs" userLabel="Description Label" customClass="PlainLabel" customModule="CovPassUI">
                                             <rect key="frame" x="24" y="0.0" width="366" height="168"/>
@@ -182,7 +235,7 @@
                                     </constraints>
                                 </view>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="dja-AL-WwP" userLabel="updateStackview">
-                                    <rect key="frame" x="0.0" y="759" width="414" height="992"/>
+                                    <rect key="frame" x="0.0" y="1271" width="414" height="992"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="2lw-mO-LjI" userLabel="body">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="816"/>
@@ -487,7 +540,7 @@
                                     </subviews>
                                 </stackView>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NUh-as-M7g">
-                                    <rect key="frame" x="0.0" y="1751" width="414" height="192"/>
+                                    <rect key="frame" x="0.0" y="2263" width="414" height="192"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="inb-gF-Tlw" userLabel="Save Button" customClass="MainButton" customModule="CovPassUI">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="128"/>
@@ -535,6 +588,9 @@
         <designable name="7pf-kH-iDz">
             <size key="intrinsicContentSize" width="414" height="21"/>
         </designable>
+        <designable name="9TG-mw-YII">
+            <size key="intrinsicContentSize" width="414" height="83"/>
+        </designable>
         <designable name="9gw-rI-wkA">
             <size key="intrinsicContentSize" width="414" height="21"/>
         </designable>
@@ -546,6 +602,9 @@
         </designable>
         <designable name="Ivx-lO-k36">
             <size key="intrinsicContentSize" width="414" height="20"/>
+        </designable>
+        <designable name="K3k-V5-DcC">
+            <size key="intrinsicContentSize" width="414" height="83"/>
         </designable>
         <designable name="KI2-Ug-rxI">
             <size key="intrinsicContentSize" width="414" height="128"/>
@@ -575,6 +634,9 @@
             <size key="intrinsicContentSize" width="414" height="128"/>
         </designable>
         <designable name="kON-aZ-l9X">
+            <size key="intrinsicContentSize" width="414" height="21"/>
+        </designable>
+        <designable name="lzu-lb-UcQ">
             <size key="intrinsicContentSize" width="414" height="21"/>
         </designable>
         <designable name="ne7-71-95X">

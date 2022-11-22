@@ -31,11 +31,11 @@ class AppInformationViewControllerSnapShotTests: BaseSnapShotTests {
         persistence.disableWhatsNew = true
         
         // When
-        verifyView(vc: sut)
+        verifyView(view: sut.view)
     }
 
     func test_whats_new_enabled() {
         // When
-        verifyView(vc: sut)
+        verifyView(view: sut.view)
     }
 }

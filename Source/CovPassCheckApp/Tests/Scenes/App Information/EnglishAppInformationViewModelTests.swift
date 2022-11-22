@@ -14,13 +14,15 @@ class EnglishAppInformationViewModelTests: XCTestCase {
     func testEntries_default() {
         // Given
         let expectedTitles = [
-            AppInformationBaseViewModel.Texts.contactTitle,
+            "settings_rules_list_title".localized,
             AppInformationBaseViewModel.Texts.faqTitle,
+            "app_information_beep_when_checking_title".localized,
+            AppInformationBaseViewModel.Texts.contactTitle,
             AppInformationBaseViewModel.Texts.datenschutzTitle,
             AppInformationBaseViewModel.Texts.companyDetailsTitle,
             AppInformationBaseViewModel.Texts.openSourceLicenseTitle,
             AppInformationBaseViewModel.Texts.accessibilityStatementTitle,
-            AppInformationBaseViewModel.Texts.appInformationTitle,
+            "app_information_authorities_function_title".localized,
         ]
         let sut = EnglishAppInformationViewModel(
             router: AppInformationRouterMock(),

@@ -13,16 +13,16 @@ class GermanAppInformationViewModelTests: XCTestCase {
     func testEntries_default() {
         // Given
         let expectedTitles = [
+            AppInformationBaseViewModel.Texts.federalStateTitle,
+            AppInformationBaseViewModel.Texts.appInformationTitle,
+            "app_information_list_update_notifications".localized,
+            AppInformationBaseViewModel.Texts.faqTitle,
             AppInformationBaseViewModel.Texts.leichteSprache,
             AppInformationBaseViewModel.Texts.contactTitle,
-            AppInformationBaseViewModel.Texts.faqTitle,
             AppInformationBaseViewModel.Texts.datenschutzTitle,
             AppInformationBaseViewModel.Texts.companyDetailsTitle,
             AppInformationBaseViewModel.Texts.openSourceLicenseTitle,
             AppInformationBaseViewModel.Texts.accessibilityStatementTitle,
-            AppInformationBaseViewModel.Texts.appInformationTitle,
-            "app_information_list_update_notifications".localized,
-            AppInformationBaseViewModel.Texts.federalStateTitle
         ]
         let sut = GermanAppInformationViewModel(
             router: AppInformationRouterMock(),
@@ -44,15 +44,15 @@ class EnglishAppInformationViewModelTests: XCTestCase {
     func testEntries_default() {
         // Given
         let expectedTitles = [
-            AppInformationBaseViewModel.Texts.contactTitle,
+            AppInformationBaseViewModel.Texts.federalStateTitle,
+            AppInformationBaseViewModel.Texts.appInformationTitle,
+            "app_information_list_update_notifications".localized,
             AppInformationBaseViewModel.Texts.faqTitle,
+            AppInformationBaseViewModel.Texts.contactTitle,
             AppInformationBaseViewModel.Texts.datenschutzTitle,
             AppInformationBaseViewModel.Texts.companyDetailsTitle,
             AppInformationBaseViewModel.Texts.openSourceLicenseTitle,
             AppInformationBaseViewModel.Texts.accessibilityStatementTitle,
-            AppInformationBaseViewModel.Texts.appInformationTitle,
-            "app_information_list_update_notifications".localized,
-            AppInformationBaseViewModel.Texts.federalStateTitle
         ]
         let sut = EnglishAppInformationViewModel(
             router: AppInformationRouterMock(),

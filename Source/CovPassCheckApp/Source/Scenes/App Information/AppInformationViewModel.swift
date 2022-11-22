@@ -20,20 +20,20 @@ class CheckAppInformationBaseViewModel: AppInformationBaseViewModel {
     }
 
     private let userDefaults: Persistence
-    private var checkSituationEntry: AppInformationEntry {
+    internal var checkSituationEntry: AppInformationEntry {
         let scene = CheckSituationSceneFactory(
             router: CheckSituationRouter(sceneCoordinator: router.sceneCoordinator),
             userDefaults: userDefaults
         )
         return AppInformationEntry(title: LocalText.rulesTitle, scene: scene)
     }
-    private var revocationSettingsEntry: AppInformationEntry {
+    internal var revocationSettingsEntry: AppInformationEntry {
         let rightTitle = userDefaults.revocationExpertMode ? LocalText.revocationHintOn : LocalText.revocationHintOff
         let revocationSettingsRouter: RevocationSettingsRouter = RevocationSettingsRouter(sceneCoordinator: router.sceneCoordinator)
         let scene = RevocationSettingsSceneFactory(router: revocationSettingsRouter, userDefaults: userDefaults)
         return AppInformationEntry(title: LocalText.revocationTitle, scene: scene, rightTitle: rightTitle)
     }
-    private var acousticFeedbackSettingsEntry: AppInformationEntry {
+    internal var acousticFeedbackSettingsEntry: AppInformationEntry {
         let rightTitle = userDefaults.enableAcousticFeedback ?
             LocalText.acousticFeedbackOn : LocalText.acousticFeedbackOff
         let acousticFeedbackSettingsRouter = AcousticFeedbackSettingsRouter(
@@ -61,6 +61,12 @@ class GermanAppInformationViewModel: CheckAppInformationBaseViewModel {
 
     override var entries: [AppInformationEntry] {
         [
+            checkSituationEntry,
+            .webEntry(title: Texts.faqTitle,
+                      url: URL(string: "https://www.digitaler-impfnachweis-app.de/webviews/verification-app/faq/")!,
+                      openingAnnounce: Accessibility.Opening.faqTitle,
+                      closingAnnounce: Accessibility.Closing.faqTitle),
+            acousticFeedbackSettingsEntry,
             .webEntry(title: Texts.leichteSprache,
                       url: URL(string: "https://digitaler-impfnachweis-app.de/webviews/leichte-sprache/covpasscheckapp")!,
                       openingAnnounce: Accessibility.Opening.leichteSprache,
@@ -70,10 +76,6 @@ class GermanAppInformationViewModel: CheckAppInformationBaseViewModel {
                       enableDynamicFonts: true,
                       openingAnnounce: Accessibility.Opening.contactTitle,
                       closingAnnounce: Accessibility.Closing.contactTitle),
-            .webEntry(title: Texts.faqTitle,
-                      url: URL(string: "https://www.digitaler-impfnachweis-app.de/webviews/verification-app/faq/")!,
-                      openingAnnounce: Accessibility.Opening.faqTitle,
-                      closingAnnounce: Accessibility.Closing.faqTitle),
             .webEntry(title: Texts.datenschutzTitle,
                       url: mainBundle.url(forResource: "privacy-covpasscheck-de", withExtension: "html")!,
                       enableDynamicFonts: true,
@@ -92,7 +94,8 @@ class GermanAppInformationViewModel: CheckAppInformationBaseViewModel {
                       url: URL(string: "https://www.digitaler-impfnachweis-app.de/webviews/covpasscheck-app-ios-barrierefreiheitserklaerung/")!,
                       openingAnnounce: Accessibility.Opening.accessibilityStatementTitle,
                       closingAnnounce: Accessibility.Closing.accessibilityStatementTitle),
-        ] + super.entries
+            revocationSettingsEntry,
+        ]
     }
 
     init(
@@ -113,15 +116,17 @@ class EnglishAppInformationViewModel: CheckAppInformationBaseViewModel {
 
     override var entries: [AppInformationEntry] {
         [
+            checkSituationEntry,
+            .webEntry(title: Texts.faqTitle,
+                      url: URL(string: "https://www.digitaler-impfnachweis-app.de/en/webviews/client-app/faq/")!,
+                      openingAnnounce: Accessibility.Opening.faqTitle,
+                      closingAnnounce: Accessibility.Closing.faqTitle),
+            acousticFeedbackSettingsEntry,
             .webEntry(title: Texts.contactTitle,
                       url: mainBundle.url(forResource: "contact-covpasscheck-en", withExtension: "html")!,
                       enableDynamicFonts: true,
                       openingAnnounce: Accessibility.Opening.contactTitle,
                       closingAnnounce: Accessibility.Closing.contactTitle),
-            .webEntry(title: Texts.faqTitle,
-                      url: URL(string: "https://www.digitaler-impfnachweis-app.de/en/webviews/client-app/faq/")!,
-                      openingAnnounce: Accessibility.Opening.faqTitle,
-                      closingAnnounce: Accessibility.Closing.faqTitle),
             .webEntry(title: Texts.datenschutzTitle,
                       url: mainBundle.url(forResource: "privacy-covpasscheck-en", withExtension: "html")!,
                       enableDynamicFonts: true,
@@ -140,7 +145,8 @@ class EnglishAppInformationViewModel: CheckAppInformationBaseViewModel {
                       url: URL(string: "https://www.digitaler-impfnachweis-app.de/en/webviews/covpasscheck-app-ios-accessibility-statement/")!,
                       openingAnnounce: Accessibility.Opening.accessibilityStatementTitle,
                       closingAnnounce: Accessibility.Closing.accessibilityStatementTitle),
-        ] + super.entries
+            revocationSettingsEntry,
+        ]
     }
 
     init(

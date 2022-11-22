@@ -30,7 +30,7 @@ class AppInformationViewControllerSnapShotTests: BaseSnapShotTests {
     }
 
     func testDefault() {
-        verifyView(vc: sut)
+        verifyView(view: sut.view)
     }
     
     func testDefaultAlternative() {
@@ -39,6 +39,6 @@ class AppInformationViewControllerSnapShotTests: BaseSnapShotTests {
         persistence.enableAcousticFeedback = true
 
         // Then
-        verifyView(vc: sut)
+        verifyView(view: sut.view)
     }
 }

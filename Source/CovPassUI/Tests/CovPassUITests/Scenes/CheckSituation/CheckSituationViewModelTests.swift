@@ -29,11 +29,13 @@ class CheckSituationViewModelTests: XCTestCase {
         repository = .init()
         router = CheckSituationRouterMock()
         delegate = ViewModelDelegateMock()
-        configureSut()
+        configureSut(checkSituation: .enteringGermany)
     }
 
-    private func configureSut(context: CheckSituationViewModelContextType = .settings) {
+    private func configureSut(context: CheckSituationViewModelContextType = .settings,
+                              checkSituation: CheckSituationType) {
         let (_, resolver) = Promise<Void>.pending()
+        persistence.checkSituation = checkSituation.rawValue
         sut = CheckSituationViewModel(context: context,
                                       userDefaults: persistence,
                                       router: router,
@@ -346,12 +348,172 @@ class CheckSituationViewModelTests: XCTestCase {
 
     func testDescriptionIsHidden_information() {
         // Given
-        configureSut(context: .information)
+        configureSut(context: .information, checkSituation: .enteringGermany)
 
         // When
         let isHidden = sut.descriptionIsHidden
 
         // Then
         XCTAssertFalse(isHidden)
+    }
+    
+    // MARK - Check situation related
+    
+    func test_checkSituation_title() {
+        // WHEN
+        let sut = sut.checkSituationTitle
+        
+        // THEN
+        XCTAssertEqual(sut, "settings_rules_context_title")
+    }
+    
+    func test_checkSituation_subtitle() {
+        // WHEN
+        let sut = sut.checkSituationSubtitle
+        
+        // THEN
+        XCTAssertEqual(sut, "settings_rules_context_subtitle")
+    }
+    
+    func test_checkSituation_isHidden_context_settings() {
+        // GIVEN
+        sut.context = .settings
+        // WHEN
+        let sut = sut.checkSituationIsHidden
+        // THEN
+        XCTAssertEqual(sut, false)
+    }
+    
+    func test_checkSituation_isHidden_context_information() {
+        // GIVEN
+        sut.context = .information
+        // WHEN
+        let sut = sut.checkSituationIsHidden
+        // THEN
+        XCTAssertEqual(sut, true)
+    }
+    
+    func test_checkSituation_withinGermanyImage_unchecked() {
+        // GIVEN
+        configureSut(checkSituation: .enteringGermany)
+        // WHEN
+        let sut = sut.checkSituationWithinGermanyImage
+        // THEN
+        XCTAssertEqual(sut, .checkboxUnchecked)
+    }
+    
+    func test_checkSituation_withinGermanyImage_checked() {
+        // GIVEN
+        configureSut(checkSituation: .withinGermany)
+        // WHEN
+        let sut = sut.checkSituationWithinGermanyImage
+        // THEN
+        XCTAssertEqual(sut, .checkboxChecked)
+    }
+    
+    func test_checkSituation_withinGermanyTitle() {
+        // WHEN
+        let sut = sut.checkSituationWithinGermanyTitle
+        
+        // THEN
+        XCTAssertEqual(sut, "settings_rules_context_germany_title")
+    }
+    
+    func test_checkSituation_withinGermanySubtitle() {
+        // WHEN
+        let sut = sut.checkSituationWithinGermanySubtitle
+        
+        // THEN
+        XCTAssertEqual(sut, "settings_rules_context_germany_subtitle")
+    }
+    
+    func test_checkSituation_enteringGermanyImage_unchecked() {
+        // GIVEN
+        configureSut(checkSituation: .withinGermany)
+        // WHEN
+        let sut = sut.checkSituationEnteringGermanyImage
+        // THEN
+        XCTAssertEqual(sut, .checkboxUnchecked)
+    }
+    
+    func test_checkSituation_enteringGermanyImage_checked() {
+        // GIVEN
+        configureSut(checkSituation: .enteringGermany)
+        // WHEN
+        let sut = sut.checkSituationEnteringGermanyImage
+        // THEN
+        XCTAssertEqual(sut, .checkboxChecked)
+    }
+    
+    func test_checkSituation_enteringGermanyTitle() {
+        // WHEN
+        let sut = sut.checkSituationEnteringGermanyTitle
+        
+        // THEN
+        XCTAssertEqual(sut, "settings_rules_context_entry_title")
+    }
+    
+    func test_checkSituation_enteringGermanySubtitle() {
+        // WHEN
+        let sut = sut.checkSituationEnteringGermanySubtitle
+        
+        // THEN
+        XCTAssertEqual(sut, "settings_rules_context_entry_subtitle")
+    }
+    
+    func test_checkSituation_withinGermanyOptionAccessibiliyLabel_unselected() {
+        // GIVEN
+        configureSut(checkSituation: .enteringGermany)
+        // WHEN
+        let sut = sut.checkSituationWithinGermanyOptionAccessibiliyLabel
+        // THEN
+        XCTAssertEqual(sut, "accessibility_option_unselected")
+    }
+    
+    func test_checkSituation_withinGermanyOptionAccessibiliyLabel_selected() {
+        // GIVEN
+        configureSut(checkSituation: .withinGermany)
+        // WHEN
+        let sut = sut.checkSituationWithinGermanyOptionAccessibiliyLabel
+        // THEN
+        XCTAssertEqual(sut, "accessibility_option_selected")
+    }
+    
+    func test_checkSituation_enteringGermanyOptionAccessibiliyLabel_selected() {
+        // GIVEN
+        configureSut(checkSituation: .enteringGermany)
+        // WHEN
+        let sut = sut.checkSituationEnteringGermanyOptionAccessibiliyLabel
+        // THEN
+        XCTAssertEqual(sut, "accessibility_option_selected")
+    }
+    
+    func test_checkSituation_enteringGermanyOptionAccessibiliyLabel_unselected() {
+        // GIVEN
+        configureSut(checkSituation: .withinGermany)
+        // WHEN
+        let sut = sut.checkSituationEnteringGermanyOptionAccessibiliyLabel
+        // THEN
+        XCTAssertEqual(sut, "accessibility_option_unselected")
+    }
+    
+    func test_checkSituation_enteringGermanyViewIsChoosen() {
+        // GIVEN
+        configureSut(checkSituation: .withinGermany)
+        // WHEN
+        sut.enteringGermanyViewIsChoosen()
+        let sut = sut.checkSituationEnteringGermanyImage
+        // THEN
+        XCTAssertEqual(sut, .checkboxChecked)
+    }
+    
+    func test_checkSituation_withinGermanyIsChoosen() {
+        // GIVEN
+        configureSut(checkSituation: .enteringGermany)
+        // WHEN
+        sut.withinGermanyIsChoosen()
+        let sut = sut.checkSituationWithinGermanyImage
+        // THEN
+        XCTAssertEqual(sut, .checkboxChecked)
     }
 }

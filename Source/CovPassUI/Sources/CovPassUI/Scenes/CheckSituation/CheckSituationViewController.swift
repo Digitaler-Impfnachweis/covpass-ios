@@ -55,6 +55,12 @@ public class CheckSituationViewController: UIViewController {
     @IBOutlet var cancelButton: MainButton!
     @IBOutlet var downloadingHintLabel: PlainLabel!
     @IBOutlet var activityIndicatorWrapper: UIView!
+    @IBOutlet var checkSituationContainer: UIView!
+    @IBOutlet var checkSituationTitleLabel: PlainLabel!
+    @IBOutlet var checkSituationSubtitle: PlainLabel!
+    @IBOutlet var checkSituationWithinGermany: ImageTitleSubtitleView!
+    @IBOutlet var checkSituationEnteringGermany: ImageTitleSubtitleView!
+    
     @IBOutlet public var mainButton: MainButton!
     private let activityIndicator = DotPulseActivityIndicator(frame: CGRect(x: 0, y: 0, width: 100, height: 20))
 
@@ -154,6 +160,7 @@ public class CheckSituationViewController: UIViewController {
         configureSpacings()
         configureOfflineRevocationView()
         configureUpdateView()
+        configureCheckSituation()
     }
 
     private func configureOfflineRevocationView() {
@@ -274,12 +281,59 @@ extension CheckSituationViewController {
         authorityListView.isHidden = !offlineRevocationSwitch.uiSwitch.isOn
         authorityListDivider.isHidden = !offlineRevocationSwitch.uiSwitch.isOn
     }
+    
+    private func configureCheckSituation() {
+        guard !viewModel.checkSituationIsHidden else {
+            checkSituationContainer.isHidden = true
+            return
+        }
+        checkSituationContainer.isHidden = false
+        checkSituationTitleLabel.attributedText = viewModel.checkSituationTitle.styledAs(.header_2)
+        checkSituationTitleLabel.layoutMargins = .init(top: 0, left: 24, bottom: 0, right: 24)
+        checkSituationSubtitle.attributedText = viewModel.checkSituationSubtitle.styledAs(.body)
+        checkSituationSubtitle.layoutMargins = .init(top: 0, left: 24, bottom: 0, right: 24)
+        updateWithinGermany()
+        updateEnteringGermany()
+    }
+    
+    func updateWithinGermany() {
+        let title = viewModel.checkSituationWithinGermanyTitle.styledAs(.header_3)
+        let subtitle = viewModel.checkSituationWithinGermanySubtitle.styledAs(.body)
+        let image = viewModel.checkSituationWithinGermanyImage
+        checkSituationWithinGermany.update(title: title,
+                                           subtitle: subtitle,
+                                           rightImage: image,
+                                           backGroundColor: .neutralWhite,
+                                           edgeInstes: .init(top: 12, left: 24, bottom: 12, right: 24))
+        checkSituationWithinGermany.onTap = {
+            self.viewModel.withinGermanyIsChoosen()
+            UIAccessibility.post(notification: .layoutChanged, argument: self.viewModel.checkSituationWithinGermanyOptionAccessibiliyLabel)
+        }
+        checkSituationWithinGermany.containerView?.accessibilityValue = viewModel.checkSituationWithinGermanyOptionAccessibiliyLabel
+    }
+    
+    func updateEnteringGermany() {
+        let title = viewModel.checkSituationEnteringGermanyTitle.styledAs(.header_3)
+        let subtitle = viewModel.checkSituationEnteringGermanySubtitle.styledAs(.body)
+        let image = viewModel.checkSituationEnteringGermanyImage
+        checkSituationEnteringGermany.update(title: title,
+                                             subtitle: subtitle,
+                                             rightImage: image,
+                                             backGroundColor: .neutralWhite,
+                                             edgeInstes: .init(top: 12, left: 24, bottom: 12, right: 24))
+        checkSituationEnteringGermany.onTap = {
+            self.viewModel.enteringGermanyViewIsChoosen()
+            UIAccessibility.post(notification: .layoutChanged, argument: self.viewModel.checkSituationEnteringGermanyOptionAccessibiliyLabel)
+        }
+        checkSituationEnteringGermany.containerView?.accessibilityValue = viewModel.checkSituationEnteringGermanyOptionAccessibiliyLabel
+    }
 }
 
 
 extension CheckSituationViewController: ViewModelDelegate {
     public func viewModelDidUpdate() {
         updateUpdateRelatedViews()
+        configureCheckSituation()
         toggleOfflineRevocationIfNeeded()
     }
 

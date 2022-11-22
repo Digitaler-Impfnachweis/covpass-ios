@@ -51,6 +51,16 @@ private enum Constants {
         enum Settings {
             static let description = "app_information_message_update".localized(bundle: .main)
         }
+        enum CheckSituation {
+            static let title = "settings_rules_context_title".localized(bundle: .main)
+            static let subtitle = "settings_rules_context_subtitle".localized(bundle: .main)
+            static let withinGermanyTitle = "settings_rules_context_germany_title".localized(bundle: .main)
+            static let withinGermanySubtitle = "settings_rules_context_germany_subtitle".localized(bundle: .main)
+            static let enteringGermanyTitle = "settings_rules_context_entry_title".localized(bundle: .main)
+            static let enteringGermanySubtitle = "settings_rules_context_entry_subtitle".localized(bundle: .main)
+            static let optionSelected = "accessibility_option_selected".localized(bundle: .main)
+            static let optionUnselected = "accessibility_option_unselected".localized(bundle: .main)
+        }
     }
     enum Images {
         static let pageImage = UIImage.illustration4
@@ -70,7 +80,7 @@ private enum Constants {
 }
 
 public class CheckSituationViewModel: CheckSituationViewModelProtocol {
-    
+        
     // MARK: - Public/Protocol properties
     public var navBarTitle: String = Constants.Keys.General.navBarTitle
     public var pageTitle: String = Constants.Keys.General.pageTitle
@@ -165,7 +175,24 @@ public class CheckSituationViewModel: CheckSituationViewModelProtocol {
         }
     }
     
+    // MARK: - properties of check situation
+    
+    public let checkSituationTitle = Constants.Keys.CheckSituation.title
+    public let checkSituationSubtitle = Constants.Keys.CheckSituation.subtitle
+    public let checkSituationWithinGermanyTitle = Constants.Keys.CheckSituation.withinGermanyTitle
+    public let checkSituationWithinGermanySubtitle = Constants.Keys.CheckSituation.withinGermanySubtitle
+    public let checkSituationEnteringGermanyTitle = Constants.Keys.CheckSituation.enteringGermanyTitle
+    public let checkSituationEnteringGermanySubtitle = Constants.Keys.CheckSituation.enteringGermanySubtitle
+    public var checkSituationWithinGermanyImage: UIImage { withinGermanyIsSelected ? .checkboxChecked : .checkboxUnchecked }
+    public var checkSituationEnteringGermanyImage: UIImage { withinGermanyIsSelected ? .checkboxUnchecked : .checkboxChecked }
+    public var checkSituationWithinGermanyOptionAccessibiliyLabel: String { withinGermanyIsSelected ? Constants.Keys.CheckSituation.optionSelected : Constants.Keys.CheckSituation.optionUnselected }
+    public var checkSituationEnteringGermanyOptionAccessibiliyLabel: String { !withinGermanyIsSelected ? Constants.Keys.CheckSituation.optionSelected : Constants.Keys.CheckSituation.optionUnselected }
+    public var checkSituationIsHidden: Bool = true
+    private var selectedCheckSituation: CheckSituationType { didSet { delegate?.viewModelDidUpdate() } }
+    private var withinGermanyIsSelected: Bool { selectedCheckSituation == .withinGermany }
+    
     // MARK: - Private properties
+    
     private var canceled: Bool = false
     private var shouldSomethingBeUpdated: Bool {
         certLogic.rulesShouldBeUpdated ||
@@ -194,6 +221,7 @@ public class CheckSituationViewModel: CheckSituationViewModelProtocol {
         self.repository = repository
         self.certLogic = certLogic
         self.router = router
+        self.selectedCheckSituation = .init(rawValue: userDefaults.checkSituation) ?? .withinGermany
         self.changeContext()
     }
     
@@ -254,6 +282,7 @@ public class CheckSituationViewModel: CheckSituationViewModelProtocol {
             updateContextHidden = false
             footerText = offlineRevocationDescription
             descriptionIsHidden = false
+            checkSituationIsHidden = false
         case .information:
             hStackViewIsHidden = false
             newBadgeIconIsHidden = true
@@ -264,6 +293,7 @@ public class CheckSituationViewModel: CheckSituationViewModelProtocol {
             subTitleIsHidden = false
             offlineRevocationIsHidden = true
             updateContextHidden = true
+            checkSituationIsHidden = true
             navBarTitle = Constants.Keys.Information.navBarTitle
             pageTitle = Constants.Keys.Information.pageTitle
             newBadgeText = Constants.Keys.Information.newBadgeText
@@ -277,6 +307,25 @@ public class CheckSituationViewModel: CheckSituationViewModelProtocol {
         delegate?.viewModelDidUpdate()
     }
 }
+
+// MARK: - Methods of Check Situation
+
+extension CheckSituationViewModel {
+    
+    public func enteringGermanyViewIsChoosen() {
+        userDefaults.checkSituation = CheckSituationType.enteringGermany.rawValue
+        selectedCheckSituation = .enteringGermany
+        delegate?.viewModelDidUpdate()
+    }
+    
+    public func withinGermanyIsChoosen() {
+        userDefaults.checkSituation = CheckSituationType.withinGermany.rawValue
+        selectedCheckSituation = .withinGermany
+        delegate?.viewModelDidUpdate()
+    }
+    
+}
+
 
 // MARK: - Methods of Update Context
 

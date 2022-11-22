@@ -14,15 +14,17 @@ class CheckSituationViewControllerSnapShotTests: BaseSnapShotTests {
     private var sut: CheckSituationViewController!
 
     override func setUpWithError() throws {
-        configureSut()
+        configureSut(checkSituation: .enteringGermany)
     }
 
     func configureSut(
         context: CheckSituationViewModelContextType = .settings,
         updateDate: Date? = nil,
-        shouldUpdate: Bool = true
+        shouldUpdate: Bool = true,
+        checkSituation: CheckSituationType
     ) {
         var persistence = UserDefaultsPersistence()
+        persistence.checkSituation = checkSituation.rawValue
         persistence.isCertificateRevocationOfflineServiceEnabled = true
         if let date = updateDate {
             persistence.lastUpdatedValueSets = date
@@ -45,10 +47,19 @@ class CheckSituationViewControllerSnapShotTests: BaseSnapShotTests {
         )
         sut = CheckSituationViewController(viewModel: viewModel)
     }
-
+    
     func testDefaultSettings() {
         // Given
-        configureSut(context: .settings, updateDate: DateUtils.parseDate("2021-04-26T15:05:00"))
+        configureSut(context: .settings, updateDate: DateUtils.parseDate("2021-04-26T15:05:00"), checkSituation: .enteringGermany)
+        UserDefaults.standard.set(nil, forKey: UserDefaults.keySelectedLogicType)
+
+        // When & Then
+        verifyView(view: sut.view, height: 1200)
+    }
+    
+    func testDefaultSettings_withinGermany() {
+        // Given
+        configureSut(context: .settings, updateDate: DateUtils.parseDate("2021-04-26T15:05:00"), checkSituation: .withinGermany)
         UserDefaults.standard.set(nil, forKey: UserDefaults.keySelectedLogicType)
 
         // When & Then
