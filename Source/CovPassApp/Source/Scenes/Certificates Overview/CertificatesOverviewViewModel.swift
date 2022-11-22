@@ -17,8 +17,7 @@ private enum Constants {
     enum Accessibility {
         static let addCertificate = "accessibility_vaccination_start_screen_label_add_certificate".localized
         static let moreInformation = "accessibility_vaccination_start_screen_label_information".localized
-        static let openingAnnouncment = "accessibility_start_screen_info_announce".localized
-        static let closingAnnouncment = "accessibility_start_screen_info_closing_announce".localized
+        static let announcement = "accessibility_start_screen_info_announce".localized
     }
     enum Config {
         static let privacySrcDe = "privacy-covpass-de"
@@ -69,8 +68,7 @@ class CertificatesOverviewViewModel: CertificatesOverviewViewModelProtocol {
     var hasCertificates: Bool { certificateList.certificates.count > 0 }
     var accessibilityAddCertificate = Constants.Accessibility.addCertificate
     var accessibilityMoreInformation = Constants.Accessibility.moreInformation
-    var openingAnnouncment = Constants.Accessibility.openingAnnouncment
-    var closingAnnouncment = Constants.Accessibility.closingAnnouncment
+    var accessibilityAnnouncement = Constants.Accessibility.announcement
     var isLoading: Bool = false {
         didSet {
             delegate?.viewModelDidUpdate()
@@ -581,7 +579,7 @@ extension CertificatesOverviewViewModel {
             repository.getCertificateList()
         }
         .then { certificateList -> Promise<Bool> in
-            let users = self.certificatePairsSorted
+            let users = self.repository.matchedCertificates(for: certificateList)
             return self.boosterLogic.checkForNewBoosterVaccinationsIfNeeded(users)
         }
         .then { (showBoosterNotification: Bool) -> Promise<Void> in
@@ -690,9 +688,11 @@ extension CertificatesOverviewViewModel {
     }
     
     private func createCellViewModels() -> Promise<Void> {
-        let cellViewModelPromises = certificatePairsSorted
-            .compactMap { certificatePair -> Promise<CertificateCardMaskImmunityViewModel>? in
-                let sortedCertificates = certificatePair.certificates.sortLatest()
+        let cellViewModelPromises = certificateList
+            .certificates
+            .partitionedByOwner
+            .compactMap { (certificates: Array<ExtendedCBORWebToken>) -> Promise<CertificateCardMaskImmunityViewModel>? in
+                let sortedCertificates = certificates.sortLatest()
                 guard let cert = sortedCertificates.first else { return nil }
                 return Promise { seal in
                     let viewModel = CertificateCardMaskImmunityViewModel(

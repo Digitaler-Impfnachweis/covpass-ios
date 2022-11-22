@@ -50,7 +50,7 @@ class CertificateCardMaskImmunityViewModel: CertificateCardViewModelProtocol {
     var showNotification: Bool {
         showBoosterAvailabilityNotification || showNotificationForExpiryOrInvalid
     }
-    var maskStatusIsHidden: Bool = true
+    var maskRulesNotAvailable: Bool = true
     var regionText: String? {
         guard !isInvalid else { return nil }
         let region = ("DE_" + userDefaults.stateSelection).localized
@@ -81,11 +81,11 @@ class CertificateCardMaskImmunityViewModel: CertificateCardViewModelProtocol {
     
     func updateCertificateHolderStatus() -> Promise<Void> {
         guard certificateHolderStatusModel.maskRulesAvailable(for: userDefaults.stateSelection) else {
-            maskStatusIsHidden = true
+            maskRulesNotAvailable = true
             delegate?.viewModelDidUpdate()
             return .value
         }
-        maskStatusIsHidden = false
+        maskRulesNotAvailable = false
         return certificateHolderStatusModel
             .holderNeedsMaskAsync(tokens, region: userDefaults.stateSelection)
             .done { holderNeedsMask in
@@ -123,6 +123,8 @@ class CertificateCardMaskImmunityViewModel: CertificateCardViewModelProtocol {
     lazy var title: String = {
         if isInvalid {
             return "infschg_start_expired_revoked".localized
+        } else if maskRulesNotAvailable {
+            return "infschg_start_screen_status_grey_2".localized
         } else if holderNeedsMask {
             return "infschg_start_mask_mandatory".localized
         }
@@ -142,6 +144,8 @@ class CertificateCardMaskImmunityViewModel: CertificateCardViewModelProtocol {
 
     var titleIcon: UIImage {
         if isInvalid {
+            return .statusMaskInvalidCircle
+        } else if maskRulesNotAvailable {
             return .statusMaskInvalidCircle
         } else if holderNeedsMask {
             return .statusMaskRequiredCircle

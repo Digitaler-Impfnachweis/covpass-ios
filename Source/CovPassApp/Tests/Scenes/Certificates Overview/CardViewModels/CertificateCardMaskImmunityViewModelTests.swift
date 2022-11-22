@@ -483,7 +483,7 @@ class CertificateCardMaskImmunityViewModelTests: XCTestCase {
         let title = sut.title
 
         // Then
-        XCTAssertEqual(title, "Mask obligation")
+        XCTAssertEqual(title, "No additional rules")
     }
     
     func testTitle_pcr_test() {
