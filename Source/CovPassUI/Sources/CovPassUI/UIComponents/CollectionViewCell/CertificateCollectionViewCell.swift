@@ -33,7 +33,7 @@ public protocol CertificateCardViewModelBase {
     var name: String { get }
     var tintColor: UIColor { get }
     var delegate: ViewModelDelegate? { get set }
-    var maskStatusIsHidden: Bool { get set }
+    var maskRulesNotAvailable: Bool { get set }
     var regionText: String? { get }
     func onClickAction()
 }
