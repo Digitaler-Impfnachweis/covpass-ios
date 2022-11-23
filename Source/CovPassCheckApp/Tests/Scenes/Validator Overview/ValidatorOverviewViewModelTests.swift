@@ -402,6 +402,7 @@ class ValidatorOverviewViewModelTests: XCTestCase {
     
     func test_checkImmunityStatus_vaccinationCycleIsComplete() {
         // GIVEN
+        userDefaults.checkSituation = CheckSituationType.withinGermany.rawValue
         certLogic.validateResult = [.init(rule: invalidationRule, result: .passed),
                                     .init(rule: bZweiRule, result: .passed)]
         repository.checkedCert = CBORWebToken.mockVaccinationCertificate
@@ -415,6 +416,7 @@ class ValidatorOverviewViewModelTests: XCTestCase {
     
     func test_checkImmunityStatus_vaccinationCycleIsComplete_but_invalidation_fails() {
         // GIVEN
+        userDefaults.checkSituation = CheckSituationType.withinGermany.rawValue
         certLogic.validateResult = [.init(rule: invalidationRule, result: .fail),
                                     .init(rule: bZweiRule, result: .passed)]
         repository.checkedCert = CBORWebToken.mockVaccinationCertificate
@@ -428,6 +430,7 @@ class ValidatorOverviewViewModelTests: XCTestCase {
     
     func test_checkImmunityStatus_vaccinationCycleIsNOTComplete() {
         // GIVEN
+        userDefaults.checkSituation = CheckSituationType.withinGermany.rawValue
         certLogic.validateResult = [.init(rule: invalidationRule, result: .passed),
                                     .init(rule: bZweiRule, result: .fail)]
         repository.checkedCert = CBORWebToken.mockVaccinationCertificate
@@ -441,6 +444,7 @@ class ValidatorOverviewViewModelTests: XCTestCase {
     
     func test_checkImmunityStatus_certificate_is_revoked() {
         // GIVEN
+        userDefaults.checkSituation = CheckSituationType.withinGermany.rawValue
         revocationRepository.isRevoked = true
         repository.checkedCert = CBORWebToken.mockVaccinationCertificate
         // When
@@ -454,6 +458,7 @@ class ValidatorOverviewViewModelTests: XCTestCase {
     
     func test_checkImmunityStatus_secondScan_differentPerson() {
         // GIVEN
+        userDefaults.checkSituation = CheckSituationType.withinGermany.rawValue
         certLogic.validateResult = [.init(rule: invalidationRule, result: .passed),
                                     .init(rule: maskRule, result: .passed)]
         let token = CBORWebToken
@@ -473,6 +478,7 @@ class ValidatorOverviewViewModelTests: XCTestCase {
     
     func test_checkImmunityStatus_secondScan_sameCertType() {
         // GIVEN
+        userDefaults.checkSituation = CheckSituationType.withinGermany.rawValue
         let token = CBORWebToken.mockVaccinationCertificate
             .extended(vaccinationQRCodeData: "1")
         let additionalToken = CBORWebToken.mockVaccinationCertificate
@@ -487,6 +493,8 @@ class ValidatorOverviewViewModelTests: XCTestCase {
     }
     
     func test_checkImmunityStatus_error() {
+        // GIVEN
+        userDefaults.checkSituation = CheckSituationType.withinGermany.rawValue
         // When
         sut.checkImmunityStatus()
         // Then
@@ -494,4 +502,79 @@ class ValidatorOverviewViewModelTests: XCTestCase {
             router.showIfsg22aCheckErrorExpectation
         ], timeout: 1)
     }
+    
+    func test_checkImmunityStatus_entering_germany_valid() {
+        // GIVEN
+        userDefaults.checkSituation = CheckSituationType.enteringGermany.rawValue
+        repository.checkedCert = CBORWebToken.mockVaccinationCertificate
+        // When
+        sut.checkImmunityStatus()
+        // Then
+        wait(for: [
+            router.showTravelRulesValidExpectation
+        ], timeout: 1)
+    }
+
+    func test_checkImmunityStatus_entering_germany_valid_revoked() {
+        // GIVEN
+        userDefaults.checkSituation = CheckSituationType.enteringGermany.rawValue
+        revocationRepository.isRevoked = true
+        let token = CBORWebToken.mockVaccinationCertificate
+        repository.checkedCert = token
+        // When
+        sut.checkImmunityStatus()
+        // Then
+        wait(for: [
+            router.showTravelRulesInvalidExpectation
+        ], timeout: 1)
+    }
+    
+    func test_checkImmunityStatus_entering_germany_invalid() {
+        // GIVEN
+        userDefaults.checkSituation = CheckSituationType.enteringGermany.rawValue
+        // When
+        sut.checkImmunityStatus()
+        // Then
+        wait(for: [
+            router.showTravelRulesInvalidExpectation
+        ], timeout: 1)
+    }
+    
+    func test_selectedCheckType_mask() {
+        // When
+        sut.selectedCheckType = .mask
+        // Then
+        XCTAssertEqual(userDefaults.selectedCheckType, CheckType.mask.rawValue)
+    }
+    
+    func test_selectedCheckType_immunity() {
+        // When
+        sut.selectedCheckType = .immunity
+        // Then
+        XCTAssertEqual(userDefaults.selectedCheckType, CheckType.immunity.rawValue)
+    }
+    
+    func test_selectedCheckType_immunity_checkSituationNotSeenBefore() {
+        // GIVEN
+        UserDefaults.standard.set(nil, forKey: UserDefaults.keyCheckSituation)
+        // When
+        sut.selectedCheckType = .immunity
+        // Then
+        wait(for: [
+            router.routeToChooseCheckSituationExpectation
+        ], timeout: 1)
+    }
+    
+    func test_selectedCheckType_immunity_checkSituationSeenBefore() {
+        // GIVEN
+        UserDefaults.standard.set(CheckSituationType.withinGermany.rawValue, forKey: UserDefaults.keyCheckSituation)
+        router.routeToChooseCheckSituationExpectation.isInverted = true
+        // When
+        sut.selectedCheckType = .immunity
+        // Then
+        wait(for: [
+            router.routeToChooseCheckSituationExpectation
+        ], timeout: 1)
+    }
+    
 }

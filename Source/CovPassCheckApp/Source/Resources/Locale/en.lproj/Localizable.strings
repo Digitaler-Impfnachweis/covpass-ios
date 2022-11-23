@@ -539,7 +539,7 @@
 
 "settings_rules_list_loading_cancel" = "Cancel";
 
-"app_information_message_update" = "Define the rules according to which COVID certificates are to be checked. If the checking rules are not up to date, you can also update them manually here.";
+"app_information_message_update" = "Define the rules according to which COVID certificates are to be checked. If necessary, update the checking rules (see below).";
 
 "app_information_rules_list_title" = "Rules";
 
@@ -565,7 +565,7 @@
 
 "app_information_offline_revocation_title" = "Check revoked certificates offline";
 
-"app_information_offline_revocation_copy_2" = "Activate this setting if you also want to detect certificates revoked by the authorities in offline mode. Otherwise, revoked certificates are only detected in online mode. This function consumes more data volume.";
+"app_information_offline_revocation_copy_2" = "If you enable this setting, the app will detect certificates blocked by the authorities even if you are not connected to the Internet. This feature consumes more data volume.";
 
 "app_information_offline_revocation_hint_title" = "Note";
 

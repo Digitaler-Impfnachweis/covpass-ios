@@ -539,7 +539,7 @@
 
 "settings_rules_list_loading_cancel" = "Abbrechen";
 
-"app_information_message_update" = "Legen Sie fest, nach welchen Regeln COVID-Zertifikate geprüft werden sollen. Sollten die Prüfregeln nicht aktuell sein, können Sie hier auch ein manuelles Update vornehmen.";
+"app_information_message_update" = "Legen Sie fest, nach welchen Regeln COVID-Zertifikate geprüft werden sollen. Aktualisieren Sie gegebenenfalls die Prüfregeln (siehe unten).";
 
 "app_information_rules_list_title" = "Regelwerk";
 
@@ -565,7 +565,7 @@
 
 "app_information_offline_revocation_title" = "Gesperrte Zertifikate offline prüfen";
 
-"app_information_offline_revocation_copy_2" = "Aktivieren Sie diese Einstellung, wenn Sie auch im Offline-Modus von den Behörden gesperrte Zertifikate erkennen möchten. Andernfalls werden gesperrte Zertifikate nur im Online-Modus erkannt. Diese Funktion verbraucht mehr Datenvolumen.";
+"app_information_offline_revocation_copy_2" = "Aktivieren Sie diese Einstellung, erkennt die App von den Behörden gesperrte Zertifikate auch, wenn Sie nicht mit dem Internet verbunden sind. Diese Funktion verbraucht mehr Datenvolumen.";
 
 "app_information_offline_revocation_hint_title" = "Hinweis";
 

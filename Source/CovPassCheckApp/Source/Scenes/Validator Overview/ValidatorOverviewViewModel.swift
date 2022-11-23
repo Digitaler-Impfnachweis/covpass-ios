@@ -68,8 +68,7 @@ class ValidatorOverviewViewModel {
     // MARK: - Properties
     
     private var currentDataPrivacyHash: String
-    private var withinGermanyIsSelected: Bool { checkSituation == .withinGermany }
-    
+   
     let vaccinationRepository: VaccinationRepositoryProtocol
     let revocationRepository: CertificateRevocationRepositoryProtocol
     let router: ValidatorOverviewRouterProtocol
@@ -155,7 +154,8 @@ class ValidatorOverviewViewModel {
     var checkSituationImage: UIImage {
         return withinGermanyIsSelected ? .flagDE : .flagWorld
     }
-    
+    var withinGermanyIsSelected: Bool { checkSituation == .withinGermany }
+
     
     // MARK: - Lifecycle
     

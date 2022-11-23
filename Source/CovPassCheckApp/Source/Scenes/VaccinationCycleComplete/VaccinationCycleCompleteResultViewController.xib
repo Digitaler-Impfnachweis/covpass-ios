@@ -24,6 +24,7 @@
                 <outlet property="revocationInfoView" destination="3y8-5r-4KC" id="bLz-pL-eSM"/>
                 <outlet property="subtitleLabel" destination="HSg-Kh-hx8" id="NZN-fG-qeL"/>
                 <outlet property="titleLabel" destination="ke7-Eq-NYy" id="GdQ-4o-T2C"/>
+                <outlet property="travelRulesLinkLabel" destination="nz0-nh-NBA" id="w5H-cG-ytx"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -43,7 +44,7 @@
                     <rect key="frame" x="0.0" y="128" width="414" height="629.5"/>
                     <subviews>
                         <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dfv-wP-L03" userLabel="Content View">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="602"/>
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="629.5"/>
                             <subviews>
                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="vaccination_cycle_complete" translatesAutoresizingMaskIntoConstraints="NO" id="KNC-XD-YtE">
                                     <rect key="frame" x="137" y="0.0" width="140" height="140"/>
@@ -78,11 +79,15 @@
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Gjq-nP-y9t">
                                     <rect key="frame" x="0.0" y="440" width="414" height="142"/>
                                     <subviews>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bbw-cK-rm7" userLabel="Revocation Info Container View">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="142"/>
+                                        <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="nz0-nh-NBA" userLabel="Travel Rules Link Label" customClass="LinkLabel" customModule="CovPassUI">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </view>
+                                        <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="72" translatesAutoresizingMaskIntoConstraints="NO" id="bbw-cK-rm7" userLabel="Revocation Info Container View">
+                                            <rect key="frame" x="0.0" y="70" width="414" height="72"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3y8-5r-4KC" customClass="HintView" customModule="CovPassUI">
-                                                    <rect key="frame" x="0.0" y="8" width="414" height="126"/>
+                                                    <rect key="frame" x="0.0" y="8" width="414" height="56"/>
                                                     <color key="backgroundColor" systemColor="systemBrownColor"/>
                                                 </view>
                                             </subviews>
@@ -127,7 +132,6 @@
                                 <constraint firstItem="wh7-Jt-Csz" firstAttribute="leading" secondItem="dfv-wP-L03" secondAttribute="leading" constant="24" id="605-8Z-Xw3"/>
                                 <constraint firstItem="CaI-1f-Rt7" firstAttribute="leading" secondItem="dfv-wP-L03" secondAttribute="leading" constant="24" id="6ta-gY-rUT"/>
                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="DoA-3w-hHw" secondAttribute="trailing" constant="24" id="B9N-wX-QsQ"/>
-                                <constraint firstAttribute="bottom" secondItem="Gjq-nP-y9t" secondAttribute="bottom" constant="20" id="C1R-ht-d1c"/>
                                 <constraint firstItem="DoA-3w-hHw" firstAttribute="top" secondItem="CaI-1f-Rt7" secondAttribute="bottom" constant="20" id="F2u-Ll-Grh"/>
                                 <constraint firstItem="Gjq-nP-y9t" firstAttribute="top" secondItem="wh7-Jt-Csz" secondAttribute="bottom" id="KqE-9L-9Wn"/>
                                 <constraint firstItem="DoA-3w-hHw" firstAttribute="leading" secondItem="dfv-wP-L03" secondAttribute="leading" constant="24" id="Mje-tV-k7v"/>
@@ -202,6 +206,11 @@
             <point key="canvasLocation" x="140" y="41.943127962085306"/>
         </view>
     </objects>
+    <designables>
+        <designable name="nz0-nh-NBA">
+            <size key="intrinsicContentSize" width="414" height="50"/>
+        </designable>
+    </designables>
     <resources>
         <image name="vaccination_cycle_complete" width="143" height="140"/>
         <namedColor name="AccentColor">

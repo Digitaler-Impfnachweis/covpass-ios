@@ -219,4 +219,19 @@ class ValidatorOverviewRouter: ValidatorOverviewRouterProtocol {
         let view = VaccinationCycleIncompleteResultSceneFactory(router: VaccinationCycleIncompleteResultRouter(sceneCoordinator: sceneCoordinator))
         return sceneCoordinator.present(view, animated: true)
     }
+    
+    func showTravelRulesInvalid(token: ExtendedCBORWebToken?) -> Promise<ValidatorDetailSceneResult> {
+        let router = CertificateInvalidResultRouter(sceneCoordinator: sceneCoordinator)
+        let view = CertificateInvalidResultSceneFactory(router: router,
+                                                        token: token)
+        return sceneCoordinator.present(view, animated: true)
+    }
+    
+    func showTravelRulesValid(token: ExtendedCBORWebToken) -> Promise<ValidatorDetailSceneResult> {
+        let router = VaccinationCycleCompleteResultRouter(sceneCoordinator: sceneCoordinator)
+        let view = VaccinationCycleCompleteResultSceneFactory(router: router,
+                                                              token: token)
+        return sceneCoordinator.present(view, animated: true)
+
+    }
 }

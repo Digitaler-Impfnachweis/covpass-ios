@@ -23,6 +23,7 @@
                 <outlet property="revocationInfoView" destination="3y8-5r-4KC" id="bLz-pL-eSM"/>
                 <outlet property="subtitleLabel" destination="HSg-Kh-hx8" id="NZN-fG-qeL"/>
                 <outlet property="titleLabel" destination="ke7-Eq-NYy" id="GdQ-4o-T2C"/>
+                <outlet property="travelRulesLinkLabel" destination="8wc-k4-jKK" id="a1n-Xf-oC7"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -60,7 +61,7 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HSg-Kh-hx8">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="0.0" placeholderIntrinsicHeight="0.0" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HSg-Kh-hx8">
                                             <rect key="frame" x="0.0" y="37" width="0.0" height="0.0"/>
                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
                                             <nil key="textColor"/>
@@ -74,14 +75,21 @@
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
+                                <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="64.5" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="yo0-Pg-3os" userLabel="reasonstackview">
+                                    <rect key="frame" x="0.0" y="275" width="414" height="64.5"/>
+                                </stackView>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Gjq-nP-y9t">
-                                    <rect key="frame" x="0.0" y="467.5" width="414" height="142"/>
+                                    <rect key="frame" x="0.0" y="339.5" width="414" height="270"/>
                                     <subviews>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bbw-cK-rm7" userLabel="Revocation Info Container View">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="142"/>
+                                        <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="8wc-k4-jKK" userLabel="Travel Rules Link Label" customClass="LinkLabel" customModule="CovPassUI">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </view>
+                                        <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="200" translatesAutoresizingMaskIntoConstraints="NO" id="bbw-cK-rm7" userLabel="Revocation Info Container View">
+                                            <rect key="frame" x="0.0" y="70" width="414" height="200"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3y8-5r-4KC" customClass="HintView" customModule="CovPassUI">
-                                                    <rect key="frame" x="0.0" y="8" width="414" height="126"/>
+                                                    <rect key="frame" x="0.0" y="8" width="414" height="184"/>
                                                     <color key="backgroundColor" systemColor="systemBrownColor"/>
                                                 </view>
                                             </subviews>
@@ -93,12 +101,6 @@
                                             </constraints>
                                         </view>
                                     </subviews>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="142" placeholder="YES" id="iyM-GB-sGK"/>
-                                    </constraints>
-                                </stackView>
-                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="yo0-Pg-3os" userLabel="reasonstackview">
-                                    <rect key="frame" x="0.0" y="275" width="414" height="192.5"/>
                                 </stackView>
                             </subviews>
                             <constraints>
@@ -106,7 +108,6 @@
                                 <constraint firstItem="KNC-XD-YtE" firstAttribute="centerX" secondItem="dfv-wP-L03" secondAttribute="centerX" id="5Tw-T6-YFZ"/>
                                 <constraint firstItem="CaI-1f-Rt7" firstAttribute="leading" secondItem="dfv-wP-L03" secondAttribute="leading" constant="24" id="6ta-gY-rUT"/>
                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="DoA-3w-hHw" secondAttribute="trailing" constant="24" id="B9N-wX-QsQ"/>
-                                <constraint firstAttribute="bottom" secondItem="Gjq-nP-y9t" secondAttribute="bottom" constant="20" id="C1R-ht-d1c"/>
                                 <constraint firstItem="Gjq-nP-y9t" firstAttribute="top" secondItem="yo0-Pg-3os" secondAttribute="bottom" id="DAz-iH-IyV"/>
                                 <constraint firstItem="DoA-3w-hHw" firstAttribute="top" secondItem="CaI-1f-Rt7" secondAttribute="bottom" constant="20" id="F2u-Ll-Grh"/>
                                 <constraint firstItem="DoA-3w-hHw" firstAttribute="leading" secondItem="dfv-wP-L03" secondAttribute="leading" constant="24" id="Mje-tV-k7v"/>
@@ -181,6 +182,11 @@
             <point key="canvasLocation" x="140" y="41.943127962085306"/>
         </view>
     </objects>
+    <designables>
+        <designable name="8wc-k4-jKK">
+            <size key="intrinsicContentSize" width="414" height="50"/>
+        </designable>
+    </designables>
     <resources>
         <image name="certificate_invalid" width="143" height="140"/>
         <namedColor name="AccentColor">

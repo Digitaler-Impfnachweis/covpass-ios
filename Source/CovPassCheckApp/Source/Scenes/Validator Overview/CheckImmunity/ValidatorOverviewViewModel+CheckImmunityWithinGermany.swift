@@ -9,7 +9,16 @@ import CovPassCommon
 import PromiseKit
 
 extension ValidatorOverviewViewModel {
+    
     func checkImmunityStatus(secondToken: ExtendedCBORWebToken? = nil, thirdToken: ExtendedCBORWebToken? = nil) {
+        if withinGermanyIsSelected {
+            checkImmunityStatusWithinGermany(secondToken, thirdToken)
+        } else {
+            checkImmunityStatusEnteringGermany()
+        }
+    }
+    
+    private func checkImmunityStatusWithinGermany(_ secondToken: ExtendedCBORWebToken?, _ thirdToken: ExtendedCBORWebToken?) {
         isLoadingScan = true
         firstly{
             ScanAndParseQRCodeAndCheckIfsg22aUseCase(router: router,
@@ -32,7 +41,6 @@ extension ValidatorOverviewViewModel {
             self.errorHandlingIfsg22aCheck(error: error, token: nil)
                 .done(self.checkImmunityStatusResult(result:))
                 .cauterize()
-
         }
     }
     
@@ -67,13 +75,5 @@ extension ValidatorOverviewViewModel {
         case let .thirdScan(secondToken, thirdToken):
             self.checkImmunityStatus(secondToken: secondToken, thirdToken: thirdToken)
         }
-    }
-}
-
-private extension ExtendedCBORWebToken {
-    var countOfTokens: Int {
-        (vaccinationCertificate.hcert.dgc.v?.count ?? 0) +
-        (vaccinationCertificate.hcert.dgc.r?.count ?? 0) +
-        (vaccinationCertificate.hcert.dgc.t?.count ?? 0)
     }
 }

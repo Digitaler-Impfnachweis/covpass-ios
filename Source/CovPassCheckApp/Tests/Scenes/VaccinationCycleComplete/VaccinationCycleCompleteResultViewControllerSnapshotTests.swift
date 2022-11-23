@@ -14,8 +14,7 @@ import XCTest
 final class VaccinationCycleCompleteResultViewControllerSnapshotTests: BaseSnapShotTests {
     private var sut: VaccinationCycleCompleteResultViewController!
 
-    override func setUpWithError() throws {
-        try super.setUpWithError()
+    private func configureSut(checkSituation: CheckSituationType) {
         let (_, resolver) = Promise<ValidatorDetailSceneResult>.pending()
         let countdownTimerModel = CountdownTimerModel(
             dismissAfterSeconds: 100,
@@ -24,6 +23,7 @@ final class VaccinationCycleCompleteResultViewControllerSnapshotTests: BaseSnapS
         let token = CBORWebToken.mockVaccinationCertificate.extended()
         var persistence = MockPersistence()
         persistence.revocationExpertMode = true
+        persistence.checkSituation = checkSituation.rawValue
         let viewModel = VaccinationCycleCompleteResultViewModel(
             token: token,
             countdownTimerModel: countdownTimerModel,
@@ -34,13 +34,24 @@ final class VaccinationCycleCompleteResultViewControllerSnapshotTests: BaseSnapS
         )
         sut = .init(viewModel: viewModel)
     }
+    
+    override func setUpWithError() throws {
+        try super.setUpWithError()
+        configureSut(checkSituation: .withinGermany)
+    }
 
     override func tearDownWithError() throws {
         sut = nil
         try super.tearDownWithError()
     }
-
+    
     func testDefault() throws {
+        configureSut(checkSituation: .withinGermany)
+        verifyView(view: sut.view, height: 1000)
+    }
+    
+    func testDefault_enteringGermany() throws {
+        configureSut(checkSituation: .enteringGermany)
         verifyView(view: sut.view, height: 1000)
     }
 }

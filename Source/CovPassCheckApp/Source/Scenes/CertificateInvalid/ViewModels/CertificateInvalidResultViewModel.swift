@@ -14,6 +14,7 @@ private enum Constants {
     static let title = "technical_validation_check_popup_unsuccessful_certificate_title".localized
     static let subtitleFormat = "".localized
     static let description = "technical_validation_check_popup_unsuccessful_certificate_subline".localized
+    static let travelRules = "entry_check_link".localized
     static let buttonTitle = "technical_validation_check_popup_valid_vaccination_button_1_title".localized
     static let revocationHeadline = "infschg_result_mask_optional_infobox_title".localized
     static let revocationInfoText = "infschg_result_mask_optional_infobox_copy".localized
@@ -33,6 +34,8 @@ final class CertificateInvalidResultViewModel: CertificateInvalidResultViewModel
     var holderName: String
     var holderNameTransliterated: String
     var holderBirthday: String
+    var travelRules: String = Constants.travelRules
+    var travelRulesIsHidden: Bool
     let revocationInfoHidden: Bool
     let revocationHeadline = Constants.revocationHeadline
     let revocationInfoText = Constants.revocationInfoText
@@ -47,6 +50,7 @@ final class CertificateInvalidResultViewModel: CertificateInvalidResultViewModel
     private let resolver: Resolver<ValidatorDetailSceneResult>
     private let router: CertificateInvalidResultRouterProtocol
     private let revocationKeyFilename: String
+    private let checkSituationType: CheckSituationType
 
     init(token: ExtendedCBORWebToken?,
          countdownTimerModel: CountdownTimerModel,
@@ -74,7 +78,8 @@ final class CertificateInvalidResultViewModel: CertificateInvalidResultViewModel
             holderBirthday = ""
         }
         self.reasonViewModels = Self.reasonViewModels()
-
+        self.checkSituationType = .init(rawValue: persistence.checkSituation) ?? .withinGermany
+        self.travelRulesIsHidden = checkSituationType == .withinGermany
         countdownTimerModel.onUpdate = onCountdownTimerModelUpdate
         countdownTimerModel.start()
     }

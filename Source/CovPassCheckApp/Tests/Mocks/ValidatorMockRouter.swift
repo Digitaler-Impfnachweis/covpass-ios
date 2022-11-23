@@ -12,8 +12,6 @@ import PromiseKit
 import XCTest
 
 class ValidatorMockRouter: ValidatorOverviewRouterProtocol {
-    
-    
 
     var sceneCoordinator: SceneCoordinator = SceneCoordinatorMock()
     var showDataPrivacyExpectation = XCTestExpectation(description: "showDataPrivacyExpectation")
@@ -35,7 +33,19 @@ class ValidatorMockRouter: ValidatorOverviewRouterProtocol {
     var showIfsg22aCheckErrorExpectation = XCTestExpectation(description: "showIfsg22aCheckTechnicalErrorExpectation")
     var showIfsg22aIncompleteResultExpectation = XCTestExpectation(description: "showIfsg22aIncompleteResultExpectation")
     var routeToChooseCheckSituationExpectation = XCTestExpectation(description: "routeToChooseCheckSituationExpectation")
+    var showTravelRulesValidExpectation = XCTestExpectation(description: "showTravelRulesValidExpectation")
+    var showTravelRulesInvalidExpectation = XCTestExpectation(description: "showTravelRulesInvalidExpectation")
 
+    func showTravelRulesValid(token: ExtendedCBORWebToken) -> Promise<ValidatorDetailSceneResult> {
+        showTravelRulesValidExpectation.fulfill()
+        return .value(.close)
+    }
+    
+    func showTravelRulesInvalid(token: ExtendedCBORWebToken?) -> Promise<ValidatorDetailSceneResult> {
+        showTravelRulesInvalidExpectation.fulfill()
+        return .value(.close)
+    }
+    
     func routeToChooseCheckSituation() -> PromiseKit.Promise<Void> {
         routeToChooseCheckSituationExpectation.fulfill()
         return .value

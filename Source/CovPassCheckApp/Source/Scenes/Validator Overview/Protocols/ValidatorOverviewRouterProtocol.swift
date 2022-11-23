@@ -40,4 +40,6 @@ protocol CheckImmunityRouterProtocol {
     func showIfsg22aNotComplete(token: ExtendedCBORWebToken, secondToken: ExtendedCBORWebToken?) -> Promise<ValidatorDetailSceneResult>
     func showIfsg22aIncompleteResult(token: ExtendedCBORWebToken) -> Promise<ValidatorDetailSceneResult>
     func showIfsg22aCheckError(token: ExtendedCBORWebToken?) -> Promise<ValidatorDetailSceneResult>
+    func showTravelRulesValid(token: ExtendedCBORWebToken) -> Promise<ValidatorDetailSceneResult>
+    func showTravelRulesInvalid(token: ExtendedCBORWebToken?) -> Promise<ValidatorDetailSceneResult> 
 }

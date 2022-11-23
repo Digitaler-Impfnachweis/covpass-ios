@@ -20,7 +20,8 @@ final class CertificateInvalidResultViewController: UIViewController {
     @IBOutlet var rescanButton: MainButton!
     @IBOutlet var reasonStackview: UIStackView!
     @IBOutlet var counterLabel: UILabel!
-
+    @IBOutlet var travelRulesLinkLabel: LinkLabel!
+    
     private var viewModel: CertificateInvalidResultViewModelProtocol
     private lazy var revocationLink: NSAttributedString = {
         let linkText = (viewModel.revocationLinkTitle + " ⟩")
@@ -45,7 +46,6 @@ final class CertificateInvalidResultViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         configureInfoHeaderView()
         configureImageView()
         configureLabels()
@@ -84,6 +84,9 @@ final class CertificateInvalidResultViewController: UIViewController {
             .colored(.onBackground110)
         let titleSubTitleA11lText = viewModel.title + viewModel.subtitle
         headerStackView.enableAccessibility(label: titleSubTitleA11lText, traits: .header)
+        travelRulesLinkLabel.attributedText = viewModel.travelRules.styledAs(.header_3)
+        travelRulesLinkLabel.isHidden = viewModel.travelRulesIsHidden
+        travelRulesLinkLabel.layoutMargins = .init(top: 8, left: 18, bottom: 0, right: 18)
     }
 
     private func configureReasonStackView() {
