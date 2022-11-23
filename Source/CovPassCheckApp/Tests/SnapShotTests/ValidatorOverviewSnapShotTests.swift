@@ -19,7 +19,8 @@ class ValidatorOverviewSnapShotTests: BaseSnapShotTests {
                       ntpOffset: TimeInterval = 0.0,
                       logicType: DCCCertLogic.LogicType = .deAcceptenceAndInvalidationRules,
                       selectedCheckType: CheckType = .mask,
-                      selectedCheckSituation: CheckSituationType = .enteringGermany) -> ValidatorOverviewViewController {
+                      selectedCheckSituation: CheckSituationType = .enteringGermany,
+                      latestMaskRuleDate: Date? = DateUtils.parseDate("2021-04-26T15:05:00")) -> ValidatorOverviewViewController {
         let certLogicMock = DCCCertLogicMock()
         let vaccinationRepoMock = VaccinationRepositoryMock()
         var userDefaults = MockPersistence()
@@ -27,9 +28,12 @@ class ValidatorOverviewSnapShotTests: BaseSnapShotTests {
         vaccinationRepoMock.shouldTrustListUpdate = shouldTrustListUpdate
         userDefaults.selectedCheckType = selectedCheckType.rawValue
         userDefaults.checkSituation = selectedCheckSituation.rawValue
+        let certificateHolderStatus = CertificateHolderStatusModelMock()
+        certificateHolderStatus.latestMaskRuleDate = latestMaskRuleDate
         let vm = ValidatorOverviewViewModel(router: ValidatorMockRouter(),
                                             repository: vaccinationRepoMock,
                                             revocationRepository: CertificateRevocationRepositoryMock(),
+                                            certificateHolderStatus: certificateHolderStatus,
                                             certLogic: certLogicMock,
                                             userDefaults: userDefaults,
                                             privacyFile: "",
@@ -39,9 +43,14 @@ class ValidatorOverviewSnapShotTests: BaseSnapShotTests {
         vm.ntpOffset = ntpOffset
         return ValidatorOverviewViewController(viewModel: vm)
     }
-    
+
     func testDefault() {
         let sut = self.configureSut()
+        verifyView(view: sut.view)
+    }
+
+    func testDefault_NoMaskRules() {
+        let sut = self.configureSut(latestMaskRuleDate: nil)
         verifyView(view: sut.view)
     }
     

@@ -28,6 +28,8 @@ final class MaskRequiredResultViewControllerSnapshotTests: BaseSnapShotTests {
         var persistence = MockPersistence()
         persistence.revocationExpertMode = true
         persistence.stateSelection = "NW"
+        let certificateHolderStatus = CertificateHolderStatusModelMock()
+        certificateHolderStatus.latestMaskRuleDate = DateUtils.parseDate("2021-04-26T15:05:00")
         let viewModel = MaskRequiredResultViewModel(
             token: CBORWebToken.mockVaccinationCertificate.extended(),
             countdownTimerModel: countdownTimerModel,
@@ -36,6 +38,7 @@ final class MaskRequiredResultViewControllerSnapshotTests: BaseSnapShotTests {
             reasonType: .functional,
             secondCertificateHintHidden: secondCertificateHintHidden,
             persistence: persistence,
+            certificateHolderStatus: certificateHolderStatus,
             revocationKeyFilename: ""
         )
         sut = .init(viewModel: viewModel)

@@ -20,6 +20,7 @@ struct CertificateHolderStatusModelMock: CertificateHolderStatusModelProtocol {
     var checkDomesticInvalidationRulesResult = CertificateHolderStatusResult.passed
     var checkEuInvalidationRulesResult = CertificateHolderStatusResult.passed
     var validCertificates: [ExtendedCBORWebToken]? = nil
+    var latestMaskRuleDate: Date? = nil
 
     func checkDomesticAcceptanceAndInvalidationRules(_ certificates: [ExtendedCBORWebToken]) -> CertificateHolderStatusResult {
         checkDomesticAcceptanceAndInvalidationRulesResult
@@ -46,6 +47,10 @@ struct CertificateHolderStatusModelMock: CertificateHolderStatusModelProtocol {
     
     func maskRulesAvailable(for region: String?) -> Bool {
         areMaskRulesAvailable
+    }
+
+    func latestMaskRuleDate(for region: String?) -> Date? {
+        latestMaskRuleDate
     }
     
     func validCertificates(_ certificates: [ExtendedCBORWebToken], logicType: DCCCertLogic.LogicType) -> [ExtendedCBORWebToken] {

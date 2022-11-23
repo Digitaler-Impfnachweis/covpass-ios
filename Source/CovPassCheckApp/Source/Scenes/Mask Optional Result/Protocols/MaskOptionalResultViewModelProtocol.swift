@@ -18,6 +18,7 @@ protocol MaskOptionalResultViewModelProtocol: CancellableViewModelProtocol {
     var holderName: String { get }
     var holderNameTransliterated: String { get }
     var holderBirthday: String { get }
+    var ruleDate: String? { get }
     var revocationInfoHidden: Bool { get }
     var revocationHeadline: String { get }
     var revocationInfoText: String { get }

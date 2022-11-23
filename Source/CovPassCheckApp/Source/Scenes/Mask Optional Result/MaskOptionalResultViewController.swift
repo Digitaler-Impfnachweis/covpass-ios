@@ -15,6 +15,7 @@ final class MaskOptionalResultViewController: UIViewController {
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var subtitleLabel: UILabel!
     @IBOutlet var descriptionLabel: UILabel!
+    @IBOutlet var rulesDateLabel: UILabel!
     @IBOutlet var holderInformationContainerView: UIView!
     @IBOutlet var holderInformationView: ParagraphView!
     @IBOutlet var revocationInfoContainerView: UIView!
@@ -83,6 +84,8 @@ final class MaskOptionalResultViewController: UIViewController {
         descriptionLabel.attributedText = viewModel.description
             .styledAs(.body)
             .colored(.onBackground110)
+        rulesDateLabel.attributedText = viewModel.ruleDate?.styledAs(.body).colored(.darkGray)
+        rulesDateLabel.isHidden = viewModel.ruleDate == nil
         let titleSubTitleA11lText = viewModel.title + viewModel.subtitle
         headerStackView.enableAccessibility(label: titleSubTitleA11lText, traits: .header)
     }

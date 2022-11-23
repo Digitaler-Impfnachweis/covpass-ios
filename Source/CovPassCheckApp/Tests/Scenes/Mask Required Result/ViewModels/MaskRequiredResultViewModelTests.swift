@@ -44,6 +44,7 @@ final class MaskRequiredResultViewModelTests: XCTestCase {
             reasonType: reasonType,
             secondCertificateHintHidden: secondCertificateHintHidden,
             persistence: persistence,
+            certificateHolderStatus: CertificateHolderStatusModelMock(),
             revocationKeyFilename: ""
         )
         sut.delegate = delegate

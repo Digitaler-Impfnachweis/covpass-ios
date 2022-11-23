@@ -467,7 +467,14 @@ class DCCCertLogicTests: XCTestCase {
         let token = CBORWebToken.mockVaccinationCertificate
         XCTAssertThrowsError(try sut.validate(type: .maskStatus, countryCode: "DE", validationClock: Date(), certificate: token))
     }
-    
+
+    func test_rules_regionAT_rulesEU() {
+        // WHEN
+        let rules = sut.rules(logicType: .eu, region: "AT")
+        // THEN
+        XCTAssertEqual(rules.count, 14)
+    }
+
     func test_rulesAvailable_regionAT_rulesEU() {
         // WHEN
         let rulesAvailable = sut.rulesAvailable(logicType: .eu, region: "AT")
@@ -509,7 +516,7 @@ class DCCCertLogicTests: XCTestCase {
         // THEN
         XCTAssertFalse(rulesAvailable)
     }
-    
+
     func test_rulesAvailable_ifsg22a() {
         // WHEN
         let rulesAvailable = sut.rulesAvailable(logicType: .ifsg22a, region: nil)

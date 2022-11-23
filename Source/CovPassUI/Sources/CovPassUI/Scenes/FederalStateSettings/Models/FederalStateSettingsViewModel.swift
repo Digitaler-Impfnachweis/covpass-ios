@@ -11,10 +11,17 @@ import PromiseKit
 
 open class FederalStateSettingsViewModel: FederalStateSettingsViewModelProtocol {
     private let router: FederalStateSettingsRouterProtocol
-    private var userDefaults: Persistence
+    private let userDefaults: Persistence
+    private let certificateHolderStatus: CertificateHolderStatusModelProtocol
 
     public let title: String = Texts.title
-    public let copyText: String = Texts.copyText
+    public let copy1Text: String = Texts.copy1Text
+    public var copy2Text: String? {
+        guard let date = certificateHolderStatus.latestMaskRuleDate(for: userDefaults.stateSelection) else {
+            return nil
+        }
+        return String(format: Texts.copy2Text, DateUtils.displayDateFormatter.string(from: date))
+    }
     public let inputTitle: String = Texts.inputTitle
     public let openingAnnounce: String = Accessibility.openingAnnounce
     public let closingAnnounce: String = Accessibility.closingAnnounce
@@ -24,9 +31,10 @@ open class FederalStateSettingsViewModel: FederalStateSettingsViewModelProtocol 
         userDefaults.stateSelection.isEmpty ? "" : "DE_\(userDefaults.stateSelection)".localized(bundle: .main)
     }
 
-    public init(router: FederalStateSettingsRouterProtocol, userDefaults: Persistence) {
+    public init(router: FederalStateSettingsRouterProtocol, userDefaults: Persistence, certificateHolderStatus: CertificateHolderStatusModelProtocol) {
         self.router = router
         self.userDefaults = userDefaults
+        self.certificateHolderStatus = certificateHolderStatus
     }
 
     public func showFederalStateSelection() -> Promise<Void> {
@@ -37,7 +45,8 @@ open class FederalStateSettingsViewModel: FederalStateSettingsViewModelProtocol 
 extension FederalStateSettingsViewModel {
     public enum Texts {
         public static let title = "infschg_settings_federal_state_page_title".localized(bundle: .main)
-        public static let copyText = "infschg_settings_federal_state_page_copy".localized(bundle: .main)
+        public static let copy1Text = "infschg_settings_federal_state_page_copy_1".localized(bundle: .main)
+        public static let copy2Text = "infschg_settings_federal_state_page_copy_2".localized(bundle: .main)
         public static let inputTitle = "infschg_settings_federal_state_page_tag".localized(bundle: .main)
     }
     public enum Accessibility {

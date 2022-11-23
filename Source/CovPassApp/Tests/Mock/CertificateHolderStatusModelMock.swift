@@ -9,7 +9,7 @@ import CovPassCommon
 import Foundation
 import PromiseKit
 
-struct CertificateHolderStatusModelMock: CertificateHolderStatusModelProtocol {
+class CertificateHolderStatusModelMock: CertificateHolderStatusModelProtocol {
 
     var needsMask = false
     var holderIsFullyImmunized = false
@@ -20,6 +20,7 @@ struct CertificateHolderStatusModelMock: CertificateHolderStatusModelProtocol {
     var checkDomesticAcceptanceAndInvalidationRulesResult = CertificateHolderStatusResult.passed
     var checkDomesticInvalidationRulesResult = CertificateHolderStatusResult.passed
     var checkEuInvalidationRulesResult = CertificateHolderStatusResult.passed
+    var latestMaskRuleDate: Date? = nil
 
     func checkDomesticAcceptanceAndInvalidationRules(_ certificates: [ExtendedCBORWebToken]) -> CertificateHolderStatusResult {
         checkDomesticAcceptanceAndInvalidationRulesResult
@@ -44,9 +45,13 @@ struct CertificateHolderStatusModelMock: CertificateHolderStatusModelProtocol {
     func holderNeedsMaskAsync(_ certificates: [ExtendedCBORWebToken], region: String?) -> Guarantee<Bool> {
         .value(needsMask)
     }
-    
+
     func maskRulesAvailable(for region: String?) -> Bool {
         areMaskRulesAvailable
+    }
+
+    func latestMaskRuleDate(for region: String?) -> Date? {
+        latestMaskRuleDate
     }
     
     func validCertificates(_ certificates: [ExtendedCBORWebToken], logicType: DCCCertLogic.LogicType) -> [ExtendedCBORWebToken] {

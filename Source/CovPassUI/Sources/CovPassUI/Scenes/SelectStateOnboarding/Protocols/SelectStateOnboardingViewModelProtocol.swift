@@ -15,6 +15,7 @@ public protocol SelectStateOnboardingViewModelProtocol {
     var inputTitle: String { get }
     var inputValue: String { get }
     var copy2Text: String { get }
+    var copy3Text: String? { get }
     var openingAnnounce: String { get }
     var closingAnnounce: String { get }
     var choosenState: String { get }

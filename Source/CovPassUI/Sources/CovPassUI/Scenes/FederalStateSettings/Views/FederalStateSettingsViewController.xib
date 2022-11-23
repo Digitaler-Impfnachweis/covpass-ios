@@ -11,7 +11,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FederalStateSettingsViewController" customModule="CovPassUI">
             <connections>
-                <outlet property="copyLabel" destination="o1e-73-NAg" id="yDd-7V-HYQ"/>
+                <outlet property="copy1Label" destination="jbV-KR-Kmv" id="MxT-7Z-Uxc"/>
+                <outlet property="copy2Label" destination="o1e-73-NAg" id="Dpg-kL-kEe"/>
                 <outlet property="stateSelection" destination="i1G-IS-hhZ" id="1yb-2u-Qmy"/>
                 <outlet property="view" destination="xYK-sf-bd8" id="aN9-Q0-28g"/>
             </connections>
@@ -28,24 +29,24 @@
                             <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="5WU-bn-YHG">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="204"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="248"/>
                                     <subviews>
-                                        <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="60" translatesAutoresizingMaskIntoConstraints="NO" id="o1e-73-NAg" customClass="PlainLabel" customModule="CovPassUI">
+                                        <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="60" translatesAutoresizingMaskIntoConstraints="NO" id="jbV-KR-Kmv" customClass="PlainLabel" customModule="CovPassUI">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="qx9-r7-pBa"/>
+                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="f5R-La-KUg"/>
                                             </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="i1G-IS-hhZ" customClass="InputView" customModule="CovPassUI">
                                             <rect key="frame" x="0.0" y="60" width="414" height="128"/>
                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         </view>
-                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gc9-YY-fvI">
-                                            <rect key="frame" x="0.0" y="188" width="414" height="16"/>
+                                        <view contentMode="scaleToFill" ambiguous="YES" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="60" translatesAutoresizingMaskIntoConstraints="NO" id="o1e-73-NAg" customClass="PlainLabel" customModule="CovPassUI">
+                                            <rect key="frame" x="0.0" y="188" width="414" height="60"/>
                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="16" id="hYY-pm-eTY"/>
+                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="qx9-r7-pBa"/>
                                             </constraints>
                                         </view>
                                     </subviews>
@@ -83,6 +84,9 @@
         </view>
     </objects>
     <designables>
+        <designable name="jbV-KR-Kmv">
+            <size key="intrinsicContentSize" width="414" height="60"/>
+        </designable>
         <designable name="o1e-73-NAg">
             <size key="intrinsicContentSize" width="414" height="60"/>
         </designable>

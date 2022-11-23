@@ -9,10 +9,12 @@ import Foundation
 import CovPassUI
 import PromiseKit
 import UIKit
+import CovPassCommon
 
 class SelectStateOnboardingViewControllerSnapShotTests: BaseSnapShotTests {
     private var sut: SelectStateOnboardingViewController!
     private var persistence: MockPersistence!
+    private var certificateHolderStatus: CertificateHolderStatusModelMock!
     private var router: SelectStateOnboardingViewRouter!
     
     override func setUpWithError() throws {
@@ -20,9 +22,13 @@ class SelectStateOnboardingViewControllerSnapShotTests: BaseSnapShotTests {
         let (_, resolver) = Promise<Void>.pending()
         persistence = .init()
         router = SelectStateOnboardingViewRouter(sceneCoordinator: SceneCoordinatorMock())
-        let viewModel = SelectStateOnboardingViewModel(resolver: resolver,
-                                                       router: router,
-                                                       userDefaults: persistence)
+        certificateHolderStatus = CertificateHolderStatusModelMock()
+        let viewModel = SelectStateOnboardingViewModel(
+            resolver: resolver,
+            router: router,
+            userDefaults: persistence,
+            certificateHolderStatus: certificateHolderStatus
+        )
         sut = .init(viewModel: viewModel)
     }
 
@@ -30,10 +36,18 @@ class SelectStateOnboardingViewControllerSnapShotTests: BaseSnapShotTests {
         sut = nil
         try super.tearDownWithError()
     }
-    
+
     func testDefault() {
         let window = UIWindow(frame: UIScreen.main.bounds)
         window.makeKeyAndVisible()
+        UIApplication.shared.keyWindow?.rootViewController = sut
+        verifyView(view: sut.view, height: 1000, waitAfter: 0.6)
+    }
+
+    func testDefault_withMaskRuleDate() {
+        let window = UIWindow(frame: UIScreen.main.bounds)
+        window.makeKeyAndVisible()
+        certificateHolderStatus.latestMaskRuleDate = DateUtils.parseDate("2021-01-26T15:05:00")
         UIApplication.shared.keyWindow?.rootViewController = sut
         verifyView(view: sut.view, height: 1000, waitAfter: 0.6)
     }

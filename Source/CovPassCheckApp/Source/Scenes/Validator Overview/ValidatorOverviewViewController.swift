@@ -111,6 +111,7 @@ class ValidatorOverviewViewController: UIViewController {
         scanCard.textLabel.attributedText = viewModel.scanDropDownValue
             .styledAs(.body)
             .colored(.neutralWhite)
+        scanCard.subtitle.attributedText = viewModel.maskRuleDateCopy?.styledAs(.body).colored(.neutralWhite).aligned(to: .center)
         scanCard.chooseAction = viewModel.chooseAction
         scanCard.chooseButton.innerButton.titleLabel?.text = nil
         scanCard.chooseButton.enableAccessibility(label: viewModel.scanDropDownTitle,

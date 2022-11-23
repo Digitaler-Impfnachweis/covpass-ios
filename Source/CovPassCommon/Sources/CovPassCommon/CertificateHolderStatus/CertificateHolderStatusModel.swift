@@ -102,6 +102,11 @@ public struct CertificateHolderStatusModel: CertificateHolderStatusModelProtocol
     public func maskRulesAvailable(for region: String?) -> Bool {
         return dccCertLogic.rulesAvailable(logicType: .maskStatus, region: region)
     }
+
+    public func latestMaskRuleDate(for region: String?) -> Date? {
+        if region == nil { return nil }
+        return dccCertLogic.rules(logicType: .maskStatus, region: region).map({ $0.validFromDate}).latestDate
+    }
     
     public func ifsg22aRulesAvailable() -> Bool {
         return dccCertLogic.rulesAvailable(logicType: .ifsg22a, region: nil)

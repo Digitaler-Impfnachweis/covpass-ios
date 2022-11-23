@@ -24,6 +24,8 @@ private enum Constants {
         enum ScanCard {
             static let actionTitle = "validation_start_screen_scan_action_button_title".localized
             static let dropDownTitle = "infschg_start_screen_dropdown_title".localized
+            static let maskRuleDateUnavailable = "state_ruleset_date_unavailable".localized
+            static let maskRuleDateAvailable = "state_ruleset_date_available_long".localized
         }
         enum OfflineInformation {
             static let title = "start_offline_title".localized
@@ -71,6 +73,7 @@ class ValidatorOverviewViewModel {
    
     let vaccinationRepository: VaccinationRepositoryProtocol
     let revocationRepository: CertificateRevocationRepositoryProtocol
+    let certificateHolderStatus: CertificateHolderStatusModelProtocol
     let router: ValidatorOverviewRouterProtocol
     let certLogic: DCCCertLogicProtocol
     let audioPlayer: AudioPlayerProtocol
@@ -94,6 +97,12 @@ class ValidatorOverviewViewModel {
         }
     }
     var scanDropDownValue: String { "DE_\(userDefaults.stateSelection)".localized }
+    var maskRuleDateCopy: String? {
+        guard let date = certificateHolderStatus.latestMaskRuleDate(for: userDefaults.stateSelection) else {
+            return Constants.Keys.ScanCard.maskRuleDateUnavailable
+        }
+        return String(format: Constants.Keys.ScanCard.maskRuleDateAvailable, DateUtils.displayDateFormatter.string(from: date))
+    }
     var timeHintSubTitle: String {
         String(format: Constants.Keys.TimeHint.syncMessage, ntpDateFormatted)
     }
@@ -162,6 +171,7 @@ class ValidatorOverviewViewModel {
     init(router: ValidatorOverviewRouterProtocol,
          repository: VaccinationRepositoryProtocol,
          revocationRepository: CertificateRevocationRepositoryProtocol,
+         certificateHolderStatus: CertificateHolderStatusModelProtocol,
          certLogic: DCCCertLogicProtocol,
          userDefaults: Persistence,
          privacyFile: String,
@@ -172,6 +182,7 @@ class ValidatorOverviewViewModel {
         self.router = router
         self.vaccinationRepository = repository
         self.revocationRepository = revocationRepository
+        self.certificateHolderStatus = certificateHolderStatus
         self.certLogic = certLogic
         self.userDefaults = userDefaults
         self.schedulerIntervall = schedulerIntervall

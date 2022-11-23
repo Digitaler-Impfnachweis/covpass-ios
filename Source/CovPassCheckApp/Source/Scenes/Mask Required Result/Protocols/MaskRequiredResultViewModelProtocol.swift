@@ -15,6 +15,7 @@ protocol MaskRequiredResultViewModelProtocol: CancellableViewModelProtocol {
     var title: String { get }
     var subtitle: String { get }
     var description: String { get }
+    var ruleDate: String? { get }
     var reasonViewModels: [MaskRequiredReasonViewModelProtocol] { get }
     var secondCertificateReasonViewModel: MaskRequiredSecondCertificateReasonViewModelProtocol { get }
     var buttonTitle: String { get }

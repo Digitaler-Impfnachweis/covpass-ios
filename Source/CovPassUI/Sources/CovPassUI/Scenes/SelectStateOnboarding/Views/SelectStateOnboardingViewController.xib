@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -13,6 +13,7 @@
             <connections>
                 <outlet property="button" destination="JqW-rC-xD4" id="YLz-ap-dyg"/>
                 <outlet property="copy2Label" destination="qB0-tj-ODZ" id="9Zz-bX-8zD"/>
+                <outlet property="copy3Label" destination="R1r-lY-wLt" id="zqn-A7-G7m"/>
                 <outlet property="copyLabel" destination="fyN-Gw-OcI" id="zE0-Uz-vhL"/>
                 <outlet property="decorativeImageView" destination="4LK-sX-tfZ" id="zs0-pV-paG"/>
                 <outlet property="headerView" destination="h7s-cG-VWO" id="xhx-3Y-pOg"/>
@@ -25,17 +26,17 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <subviews>
                 <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="118" translatesAutoresizingMaskIntoConstraints="NO" id="h7s-cG-VWO" customClass="InfoHeaderView" customModule="CovPassUI">
-                    <rect key="frame" x="0.0" y="72" width="414" height="118"/>
+                    <rect key="frame" x="0.0" y="68" width="414" height="118"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NOK-tl-rDY">
-                    <rect key="frame" x="0.0" y="190" width="414" height="528"/>
+                    <rect key="frame" x="0.0" y="186" width="414" height="532"/>
                     <subviews>
                         <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KPB-pJ-YNe">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="528"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="X0R-nC-XtI">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="663"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="723.5"/>
                                     <subviews>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="414" translatesAutoresizingMaskIntoConstraints="NO" id="4LK-sX-tfZ">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="414"/>
@@ -49,8 +50,12 @@
                                             <rect key="frame" x="0.0" y="474.5" width="414" height="128"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </view>
-                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qB0-tj-ODZ" customClass="PlainLabel" customModule="CovPassUI">
+                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="R1r-lY-wLt" customClass="PlainLabel" customModule="CovPassUI">
                                             <rect key="frame" x="0.0" y="602.5" width="414" height="60.5"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </view>
+                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qB0-tj-ODZ" customClass="PlainLabel" customModule="CovPassUI">
+                                            <rect key="frame" x="0.0" y="663" width="414" height="60.5"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </view>
                                     </subviews>

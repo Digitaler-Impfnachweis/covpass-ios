@@ -227,6 +227,14 @@
 
 "accessibility_scan_camera_torch_turn_off" = "Taschenlampe wurde ausgeschaltet";
 
+"dialog_second_scan_title" = "Zertifikat wurde bereits gescannt";
+
+"dialog_second_scan_message" = "Sie haben dieses Zertifikat bereits gescannt. Scannen Sie bitte einen anderen Nachweis.";
+
+"dialog_second_scan_button_repeat" = "Wiederholen";
+
+"dialog_second_scan_button_update" = "Abbrechen";
+
 "validation_check_popup_valid_vaccination_recovery_title" = "Vollständiger Impfschutz vorhanden";
 
 "validation_check_popup_valid_vaccination_recovery_subtitle" = "nach IfSG §22a";

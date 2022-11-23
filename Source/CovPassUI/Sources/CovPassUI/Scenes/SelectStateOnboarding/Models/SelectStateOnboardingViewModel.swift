@@ -16,6 +16,7 @@ extension SelectStateOnboardingViewModel {
         public static let inputTitle = "infschg_popup_choose_federal_state_tag".localized(bundle: .main)
         public static let inputValue = "infschg_popup_choose_federal_state_box_content".localized(bundle: .main)
         public static let copy2Text = "infschg_popup_choose_federal_state_copy_2".localized(bundle: .main)
+        public static let copy3Text = "infschg_popup_choose_federal_state_copy_3".localized(bundle: .main)
     }
     public enum Accessibility {
         static let openingAnnounce = "accessibility_checkapp_popup_choose_federal_state_announce".localized(bundle: .main)
@@ -27,11 +28,18 @@ extension SelectStateOnboardingViewModel {
 open class SelectStateOnboardingViewModel: SelectStateOnboardingViewModelProtocol {
     private let router: SelectStateOnboardingViewRouterProtocol
     private var userDefaults: Persistence
+    private let certificateHolderStatus: CertificateHolderStatusModelProtocol
     private let resolver: Resolver<Void>
 
     public let title: String = Texts.title
     public let copyText: String = Texts.copyText
     public let copy2Text: String = Texts.copy2Text
+    public var copy3Text: String? {
+        guard let date = certificateHolderStatus.latestMaskRuleDate(for: userDefaults.stateSelection) else {
+            return nil
+        }
+        return String(format: Texts.copy3Text, DateUtils.displayDateFormatter.string(from: date))
+    }
     public let inputTitle: String = Texts.inputTitle
     public let image: UIImage = .illustrationImpfschutzgesetz
     public let openingAnnounce: String = Accessibility.openingAnnounce
@@ -43,10 +51,11 @@ open class SelectStateOnboardingViewModel: SelectStateOnboardingViewModelProtoco
         return String(format: Texts.inputValue, federalState)
     }
 
-    public init(resolver: Resolver<Void>, router: SelectStateOnboardingViewRouterProtocol, userDefaults: Persistence) {
+    public init(resolver: Resolver<Void>, router: SelectStateOnboardingViewRouterProtocol, userDefaults: Persistence, certificateHolderStatus: CertificateHolderStatusModelProtocol) {
         self.resolver = resolver
         self.router = router
         self.userDefaults = userDefaults
+        self.certificateHolderStatus = certificateHolderStatus
     }
 
     public func showFederalStateSelection() -> Promise<Void> {

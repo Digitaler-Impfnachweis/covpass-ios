@@ -32,6 +32,7 @@ struct MaskOptionalResultSceneFactory: ResolvableSceneFactory {
             resolver: resolvable,
             router: router,
             persistence: persistence,
+            certificateHolderStatus: CertificateHolderStatusModel(dccCertLogic: DCCCertLogic.create()),
             revocationKeyFilename: revocationKeyFilename
         )
         let viewController = MaskOptionalResultViewController(viewModel: viewModel)

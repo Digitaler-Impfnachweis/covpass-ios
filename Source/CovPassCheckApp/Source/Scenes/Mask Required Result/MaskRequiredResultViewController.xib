@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -21,6 +21,7 @@
                 <outlet property="rescanButton" destination="Zw9-2k-H61" id="97D-AD-0hW"/>
                 <outlet property="revocationInfoContainerView" destination="Qy2-zY-oWj" id="Y8g-TM-Km7"/>
                 <outlet property="revocationInfoView" destination="BI7-jj-2QT" id="MHi-WV-c43"/>
+                <outlet property="rulesDateLabel" destination="W3I-8Z-b04" id="VCb-ex-iqD"/>
                 <outlet property="stackViewLeadingConstraint" destination="Rfz-wG-RKb" id="BIZ-EI-90Q"/>
                 <outlet property="subtitleLabel" destination="HSg-Kh-hx8" id="NZN-fG-qeL"/>
                 <outlet property="titleLabel" destination="ke7-Eq-NYy" id="GdQ-4o-T2C"/>
@@ -33,17 +34,17 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="asq-Je-taX" customClass="InfoHeaderView" customModule="CovPassUI">
-                    <rect key="frame" x="0.0" y="68" width="414" height="60"/>
+                    <rect key="frame" x="0.0" y="64" width="414" height="60"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="60" placeholder="YES" id="epB-oE-mB6"/>
                     </constraints>
                 </view>
                 <scrollView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cg9-Ut-n76">
-                    <rect key="frame" x="0.0" y="128" width="414" height="629.5"/>
+                    <rect key="frame" x="0.0" y="124" width="414" height="633.5"/>
                     <subviews>
                         <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dfv-wP-L03" userLabel="Content View">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="632.5"/>
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="701"/>
                             <subviews>
                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="status-mask-required-circle-large" translatesAutoresizingMaskIntoConstraints="NO" id="KNC-XD-YtE">
                                     <rect key="frame" x="137" y="20" width="140" height="140"/>
@@ -81,8 +82,14 @@
                                         <constraint firstAttribute="height" constant="142" placeholder="YES" id="iyM-GB-sGK"/>
                                     </constraints>
                                 </stackView>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W3I-8Z-b04">
+                                    <rect key="frame" x="24" y="494.5" width="366" height="20.5"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="daB-Yp-dIb" userLabel="Revocation Stackview">
-                                    <rect key="frame" x="0.0" y="470.5" width="414" height="142"/>
+                                    <rect key="frame" x="0.0" y="539" width="414" height="142"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qy2-zY-oWj" userLabel="Revocation Info Container View">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="142"/>
@@ -107,13 +114,16 @@
                             </subviews>
                             <constraints>
                                 <constraint firstAttribute="bottom" secondItem="daB-Yp-dIb" secondAttribute="bottom" constant="20" id="2Fw-bO-Ky8"/>
-                                <constraint firstItem="Gjq-nP-y9t" firstAttribute="bottom" secondItem="daB-Yp-dIb" secondAttribute="top" id="2rC-U0-8vP"/>
+                                <constraint firstAttribute="trailing" secondItem="W3I-8Z-b04" secondAttribute="trailing" constant="24" id="4El-mA-IDH"/>
                                 <constraint firstItem="WrP-DE-QZG" firstAttribute="leading" secondItem="dfv-wP-L03" secondAttribute="leading" constant="24" id="4rY-zi-AGe"/>
                                 <constraint firstItem="KNC-XD-YtE" firstAttribute="centerX" secondItem="dfv-wP-L03" secondAttribute="centerX" id="5Tw-T6-YFZ"/>
+                                <constraint firstItem="W3I-8Z-b04" firstAttribute="leading" secondItem="dfv-wP-L03" secondAttribute="leading" constant="24" id="77c-1A-1QF"/>
                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="DoA-3w-hHw" secondAttribute="trailing" constant="24" id="B9N-wX-QsQ"/>
+                                <constraint firstItem="daB-Yp-dIb" firstAttribute="top" secondItem="W3I-8Z-b04" secondAttribute="bottom" constant="24" id="D8j-WR-ThK"/>
                                 <constraint firstItem="DoA-3w-hHw" firstAttribute="top" secondItem="WrP-DE-QZG" secondAttribute="bottom" constant="20" id="OWY-hn-E3d"/>
                                 <constraint firstItem="WrP-DE-QZG" firstAttribute="top" secondItem="KNC-XD-YtE" secondAttribute="bottom" constant="37" id="QNL-L7-JwD"/>
                                 <constraint firstItem="Gjq-nP-y9t" firstAttribute="leading" secondItem="dfv-wP-L03" secondAttribute="leading" id="Rfz-wG-RKb"/>
+                                <constraint firstItem="W3I-8Z-b04" firstAttribute="top" secondItem="Gjq-nP-y9t" secondAttribute="bottom" constant="24" id="Rjm-8L-CQC"/>
                                 <constraint firstItem="KNC-XD-YtE" firstAttribute="top" secondItem="dfv-wP-L03" secondAttribute="top" constant="20" symbolic="YES" id="Uz7-09-GNp"/>
                                 <constraint firstItem="daB-Yp-dIb" firstAttribute="leading" secondItem="dfv-wP-L03" secondAttribute="leading" id="ViJ-mE-cEg"/>
                                 <constraint firstAttribute="trailing" secondItem="Gjq-nP-y9t" secondAttribute="trailing" id="YXM-eC-DQa"/>

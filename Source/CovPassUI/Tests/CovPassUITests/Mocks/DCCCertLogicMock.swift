@@ -29,6 +29,8 @@ class DCCCertLogicMock: DCCCertLogicProtocol {
     
     var throwErrorOnUpdateRules: Bool = false
 
+    var rules: [Rule] = []
+
     func updateBoosterRulesIfNeeded() -> Promise<Void> {
         .value
     }
@@ -51,9 +53,13 @@ class DCCCertLogicMock: DCCCertLogicProtocol {
     func updateBoosterRules() -> Promise<Void> {
         .value
     }
-    
+
     func rulesAvailable(logicType: CovPassCommon.DCCCertLogic.LogicType, region: String?) -> Bool {
         rulesAreAvailable
+    }
+
+    func rules(logicType: CovPassCommon.DCCCertLogic.LogicType, region: String?) -> [Rule] {
+        rules
     }
     
     var validationError: Error?

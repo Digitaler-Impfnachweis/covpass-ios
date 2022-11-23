@@ -43,6 +43,7 @@ struct MaskRequiredResultSceneFactory: ResolvableSceneFactory {
             reasonType: reasonType,
             secondCertificateHintHidden: secondCertificateHintHidden,
             persistence: persistence,
+            certificateHolderStatus: CertificateHolderStatusModel(dccCertLogic: DCCCertLogic.create()),
             revocationKeyFilename: revocationKeyFilename
         )
         let viewController = MaskRequiredResultViewController(viewModel: viewModel)

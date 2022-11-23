@@ -11,7 +11,8 @@ import PromiseKit
 
 public protocol FederalStateSettingsViewModelProtocol {
     var title: String { get }
-    var copyText: String { get }
+    var copy1Text: String { get }
+    var copy2Text: String? { get }
     var inputTitle: String { get }
     var inputValue: String { get }
     var openingAnnounce: String { get }

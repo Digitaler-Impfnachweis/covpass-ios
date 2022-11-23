@@ -18,6 +18,7 @@ public class ScanCardView: XibView {
     @IBOutlet public var titleLabel: UILabel!
     @IBOutlet public var textLabel: UILabel!
     @IBOutlet public var actionButton: MainButton!
+    @IBOutlet public var subtitle: UILabel!
     @IBOutlet public weak var chooseButton: MainButton!
     public var chooseAction: (()->Void)? {
         didSet {

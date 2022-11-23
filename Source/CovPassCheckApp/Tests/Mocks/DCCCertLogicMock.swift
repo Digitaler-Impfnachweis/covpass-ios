@@ -28,6 +28,7 @@ class DCCCertLogicMock: DCCCertLogicProtocol {
     var domesticRulesUpdateIfNeededTestExpectation = XCTestExpectation()
     
     var lastUpdateDccrRules: Date?
+    var rules: [Rule] = []
 
     func updateBoosterRulesIfNeeded() -> Promise<Void> {
         .value
@@ -55,7 +56,11 @@ class DCCCertLogicMock: DCCCertLogicProtocol {
     }
     
     func rulesAvailable(logicType: DCCCertLogic.LogicType, region: String?) -> Bool {
-        return areRulesAvailable
+        areRulesAvailable
+    }
+
+    func rules(logicType: DCCCertLogic.LogicType, region: String?) -> [Rule] {
+        rules
     }
 
     var validationError: Error?

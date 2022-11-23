@@ -50,12 +50,18 @@ public protocol CertificateHolderStatusModelProtocol {
     /// a mask, is unkown, or on any internal error.
     func holderNeedsMaskAsync(_ certificates: [ExtendedCBORWebToken],
                               region: String?) -> Guarantee<Bool>
-    
+
     /// Queries the internal rules, if rules for given parameter is available. Can be helpfull to prevent requests to CertLogic where it is clear that no rules are available
     /// - Parameters:
     /// - region: A region for which the rules should be respected
     /// - Returns: `true`, if rules available for region. `false`, if no rules are available
     func maskRulesAvailable(for region: String?) -> Bool
+
+    /// Queries the latest mask rule date for given region
+    /// - Parameters:
+    /// - region: A region for which the rules should be respected
+    /// - Returns: `Date`, if rules available for region. `nil`, if no rules are available
+    func latestMaskRuleDate(for region: String?) -> Date?
     
     /// Queries the internal rules, if a certificate passed the §22a IfSG rules.
     /// - Parameters:

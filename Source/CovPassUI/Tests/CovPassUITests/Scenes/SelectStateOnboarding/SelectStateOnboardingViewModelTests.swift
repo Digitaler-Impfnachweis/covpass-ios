@@ -8,6 +8,7 @@
 @testable import CovPassUI
 import PromiseKit
 import XCTest
+import CovPassCommon
 
 class SelectStateOnboardingViewModelTests: XCTestCase {
     private var promise: Promise<Void>!
@@ -18,7 +19,7 @@ class SelectStateOnboardingViewModelTests: XCTestCase {
         let (promise, resolver) = Promise<Void>.pending()
         self.promise = promise
         router = SelectStateOnboardingViewRouterMock()
-        sut = .init(resolver: resolver, router: router, userDefaults: MockPersistence())
+        sut = .init(resolver: resolver, router: router, userDefaults: MockPersistence(), certificateHolderStatus: CertificateHolderStatusModel(dccCertLogic: DCCCertLogicMock()))
     }
     
     override func tearDownWithError() throws {

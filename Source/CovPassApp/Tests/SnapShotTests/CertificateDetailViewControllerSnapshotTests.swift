@@ -469,6 +469,7 @@ class CertificateDetailViewControllerSnapshotTests: BaseSnapShotTests {
         let certs = [token]
         certificateHolderStatusModel.areMaskRulesAvailable = true
         certificateHolderStatusModel.needsMask = false
+        certificateHolderStatusModel.latestMaskRuleDate = DateUtils.parseDate("2021-01-26T15:05:00")
         let viewModel = configureSut(certs: certs, bl: BoosterLogicMock())
         let viewController = CertificateDetailViewController(viewModel: viewModel)
         verifyView(view: viewController.view, height: 1600)
@@ -480,6 +481,7 @@ class CertificateDetailViewControllerSnapshotTests: BaseSnapShotTests {
         let certs = [token]
         certificateHolderStatusModel.areMaskRulesAvailable = true
         certificateHolderStatusModel.needsMask = true
+        certificateHolderStatusModel.latestMaskRuleDate = DateUtils.parseDate("2021-01-26T15:05:00")
         let viewModel = configureSut(certs: certs, bl: BoosterLogicMock())
         let viewController = CertificateDetailViewController(viewModel: viewModel)
         verifyView(view: viewController.view, height: 1600)

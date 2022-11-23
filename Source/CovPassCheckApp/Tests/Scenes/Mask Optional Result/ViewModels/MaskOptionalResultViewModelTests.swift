@@ -38,6 +38,7 @@ final class MaskOptionalResultViewModelTests: XCTestCase {
             resolver: resolver,
             router: router,
             persistence: persistence,
+            certificateHolderStatus: CertificateHolderStatusModelMock(),
             revocationKeyFilename: "ABC"
         )
         sut.delegate = delegate

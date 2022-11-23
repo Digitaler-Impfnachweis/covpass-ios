@@ -1771,7 +1771,7 @@
 
 "infschg_cert_overview_immunisation_time_since" = "Seit %@";
 
-"infschg_cert_overview_immunisation_time_from" = "Ab %@";
+"infschg_cert_overview_immunisation_time_from" = "Vollständig ab %@";
 
 "infschg_cert_overview_immunisation_incomplete_A" = "Sie haben noch nicht alle derzeit empfohlenen Impfungen erhalten. Ihr Impfschutz ist noch nicht vollständig. Bitte beachten Sie, dass der in der App angezeigte Impfstatus gemäß Infektionsschutzgesetz bestimmt wird. Für Kinder unter 12 Jahren und alle anderen Personen bestehen nach Bundesrecht derzeit keine Beschränkungen, die an den in der App einsehbaren Impfstatus „vollständig geimpft“ anknüpfen. Bitte beachten Sie zum einen die Empfehlungen der Ständigen Impfkommission und zum anderen möglicherweise abweichende Regeln in Ihrem Bundesland.";
 
@@ -1803,6 +1803,8 @@
 
 "infschg_popup_choose_federal_state_copy_2" = "*Sie können jederzeit das Bundesland von der entsprechenden Auswahl in den Einstellungen ändern.";
 
+"infschg_popup_choose_federal_state_copy_3" = "Regeln vom %@ (Gültigkeitsbeginn)";
+
 "accessibility_infschg_modal_view_announce" = "Eine Übersicht aller Zertifikate wurde geöffnet";
 
 "accessibility_infschg_modal_view_announce_closing" = "Die Übersicht aller Zertifikate wurde geschlossen";
@@ -1821,7 +1823,9 @@
 
 "infschg_settings_federal_state_page_title" = "Bundesland";
 
-"infschg_settings_federal_state_page_copy" = "Wählen Sie das Bundesland aus, nach dessen Regeln Ihr Maskenstatus angezeigt werden soll.";
+"infschg_settings_federal_state_page_copy_1" = "Wählen Sie das Bundesland aus, nach dessen Regeln Ihr Maskenstatus angezeigt werden soll.";
+
+"infschg_settings_federal_state_page_copy_2" = "Regeln vom %@ (Gültigkeitsbeginn)";
 
 "infschg_settings_federal_state_page_tag" = "Bundesland";
 
@@ -1829,9 +1833,9 @@
 
 "infschg_detail_page_no_mask_mandatory_subtitle" = "Befreit bis %@";
 
-"infschg_detail_page_no_mask_mandatory_federal_state" = "in %@";
+"infschg_detail_page_no_mask_mandatory_federal_state" = "in %@*";
 
-"infschg_detail_page_no_mask_mandatory_copy_1" = "Sie sind in diesem Bundesland in einigen Situationen von der Maskenpflicht ausgenommen; eine Maske ist dennoch empfohlen.";
+"infschg_detail_page_no_mask_mandatory_copy_1" = "Sie sind in diesem Bundesland in einigen Situationen von der Maskenpflicht ausgenommen; eine Maske ist dennoch empfohlen.\n\n *Regeln vom %@ (Gültigkeitsbeginn)";
 
 "infschg_detail_page_no_mask_mandatory_link" = "#Mehr Informationen::https://www.digitaler-impfnachweis-app.de/faq/#die-aktuell-h-ufigsten-fragen#";
 
@@ -1845,9 +1849,9 @@
 
 "infschg_detail_page_mask_mandatory_subtitle" = "Befreit ab %@";
 
-"infschg_detail_page_mask_mandatory_federal_state" = "in %@";
+"infschg_detail_page_mask_mandatory_federal_state" = "in %@*";
 
-"infschg_detail_page_mask_mandatory_copy_1" = "Sie sind in diesem Bundesland nicht von der Maskenpflicht ausgenommen.";
+"infschg_detail_page_mask_mandatory_copy_1" = "Sie sind in diesem Bundesland nicht von der Maskenpflicht ausgenommen.\n\n *Regeln vom %@ (Gültigkeitsbeginn)";
 
 "infschg_detail_page_mask_mandatory_link" = "#Mehr Informationen::https://www.digitaler-impfnachweis-app.de/faq/#die-aktuell-h-ufigsten-fragen#";
 
@@ -1859,7 +1863,7 @@
 
 "infschg_detail_page_mask_status_uncertain_title" = "Maskenpflicht";
 
-"infschg_detail_page_mask_status_uncertain_federal_state" = "in %@";
+"infschg_detail_page_mask_status_uncertain_federal_state" = "in %@*";
 
 "infschg_detail_page_mask_status_uncertain_copy_1" = "Für dieses Bundesland liegen dem RKI aktuell keine bundeslandspezifischen Regeln vor. Es gelten daher nur die bundeseinheitlichen Regeln zur Maskenpflicht.";
 

@@ -38,10 +38,12 @@ struct ValidatorOverviewSceneFactory: SceneFactory {
             fatalError("Audio player can't be initialized.")
         }
         let repository = VaccinationRepository.create()
+        let certLogic = DCCCertLogic.create()
         let viewModel = ValidatorOverviewViewModel(router: router,
                                                    repository: repository,
                                                    revocationRepository: revocationRepository,
-                                                   certLogic: DCCCertLogic.create(),
+                                                   certificateHolderStatus: CertificateHolderStatusModel(dccCertLogic: certLogic),
+                                                   certLogic: certLogic,
                                                    userDefaults: UserDefaultsPersistence(),
                                                    privacyFile: privacyFile,
                                                    audioPlayer: audioPlayer)

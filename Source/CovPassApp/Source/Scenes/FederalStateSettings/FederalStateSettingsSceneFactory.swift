@@ -27,7 +27,8 @@ struct FederalStateSettingsSceneFactory: SceneFactory {
                 router: FederalStateSettingsRouter(
                     sceneCoordinator: sceneCoordinator
                 ),
-                userDefaults: UserDefaultsPersistence()
+                userDefaults: UserDefaultsPersistence(),
+                certificateHolderStatus: CertificateHolderStatusModel(dccCertLogic: DCCCertLogic.create())
             )
         )
     }

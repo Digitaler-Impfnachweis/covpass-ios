@@ -15,6 +15,7 @@ private enum Constants {
     static let title = "infschg_result_mask_mandatory_title".localized
     static let subtitleFormat = "infschg_result_mask_optional_subtitle".localized
     static let description = "infschg_result_mask_mandatory_copy".localized
+    static let ruleDate = "state_ruleset_date_available_short".localized
     static let buttonTitle = "result_2G_button_startover".localized
     static let revocationHeadline = "infschg_result_mask_optional_infobox_title".localized
     static let revocationInfoText = "infschg_result_mask_optional_infobox_copy".localized
@@ -26,10 +27,17 @@ private enum Constants {
 
 final class MaskRequiredResultViewModel: MaskRequiredResultViewModelProtocol {
     weak var delegate: ViewModelDelegate?
+    var certificateHolderStatus: CertificateHolderStatusModelProtocol
     let image: UIImage = .statusMaskRequiredCircleLarge
     let title = Constants.title
     let subtitle: String
     let description = Constants.description
+    var ruleDate: String? {
+        guard let date = certificateHolderStatus.latestMaskRuleDate(for: persistence.stateSelection) else {
+            return Constants.ruleDate
+        }
+        return String(format: Constants.ruleDate, DateUtils.displayDateFormatter.string(from: date))
+    }
     let revocationInfoHidden: Bool
     let revocationHeadline = Constants.revocationHeadline
     let revocationInfoText = Constants.revocationInfoText
@@ -56,6 +64,7 @@ final class MaskRequiredResultViewModel: MaskRequiredResultViewModelProtocol {
          reasonType: MaskRequiredReasonType,
          secondCertificateHintHidden: Bool,
          persistence: Persistence,
+         certificateHolderStatus: CertificateHolderStatusModelProtocol,
          revocationKeyFilename: String
     ) {
         self.countdownTimerModel = countdownTimerModel
@@ -71,6 +80,7 @@ final class MaskRequiredResultViewModel: MaskRequiredResultViewModelProtocol {
         self.revocationKeyFilename = revocationKeyFilename
         self.revocationInfoHidden = !persistence.revocationExpertMode || token == nil
         self.persistence = persistence
+        self.certificateHolderStatus = certificateHolderStatus
         
         countdownTimerModel.onUpdate = onCountdownTimerModelUpdate
         countdownTimerModel.start()

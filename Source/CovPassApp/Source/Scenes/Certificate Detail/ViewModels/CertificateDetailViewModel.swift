@@ -241,16 +241,34 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
             if let vaccination = certificates.latestVaccination, let recovery = certificates.latestRecovery,
                recovery.fr > vaccination.dt, !recovery.fr.isOlderThan29Days,
                let fr = recovery.fr.add(days: 28) {
-                return CertificateHolderMaskRequiredStatusViewModel(date: fr.readableString, federalState: userDefaults.stateSelection)
+                return CertificateHolderMaskRequiredStatusViewModel(
+                    userDefaults: userDefaults,
+                    certificateHolderStatus: certificateHolderStatusModel,
+                    date: fr.readableString,
+                    federalState: userDefaults.stateSelection
+                )
             }
-            return CertificateHolderMaskRequiredStatusViewModel(federalState: userDefaults.stateSelection)
+            return CertificateHolderMaskRequiredStatusViewModel(
+                userDefaults: userDefaults,
+                certificateHolderStatus: certificateHolderStatusModel,
+                federalState: userDefaults.stateSelection
+            )
         } else {
             let certificatesUsed = certificateHolderStatusModel.validCertificates(certificates, logicType: .deAcceptenceAndInvalidationRules)
             guard let latestCertificate = certificatesUsed.sortedByDtFrAndSc.first,
                     let dtOrFr = latestCertificate.dtFrOrSc.add(days: 90) else {
-                return CertificateHolderMaskNotRequiredStatusViewModel(federalState: userDefaults.stateSelection)
+                return CertificateHolderMaskNotRequiredStatusViewModel(
+                    userDefaults: userDefaults,
+                    certificateHolderStatus: certificateHolderStatusModel,
+                    federalState: userDefaults.stateSelection
+                )
             }
-            return CertificateHolderMaskNotRequiredStatusViewModel(date: dtOrFr.readableString, federalState: userDefaults.stateSelection)
+            return CertificateHolderMaskNotRequiredStatusViewModel(
+                userDefaults: userDefaults,
+                certificateHolderStatus: certificateHolderStatusModel,
+                date: dtOrFr.readableString,
+                federalState: userDefaults.stateSelection
+            )
         }
     }
     

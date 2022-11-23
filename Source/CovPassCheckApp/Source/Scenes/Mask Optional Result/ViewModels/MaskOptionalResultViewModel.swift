@@ -14,6 +14,7 @@ private enum Constants {
     static let title = "infschg_result_mask_optional_title".localized
     static let subtitleFormat = "infschg_result_mask_optional_subtitle".localized
     static let description = "infschg_result_mask_optional_copy".localized
+    static let ruleDate = "state_ruleset_date_available_short".localized
     static let buttonTitle = "result_2G_button_startover".localized
     static let revocationHeadline = "infschg_result_mask_optional_infobox_title".localized
     static let revocationInfoText = "infschg_result_mask_optional_infobox_copy".localized
@@ -26,6 +27,8 @@ private enum Constants {
 
 final class MaskOptionalResultViewModel: MaskOptionalResultViewModelProtocol {
     weak var delegate: ViewModelDelegate?
+    var persistence: Persistence
+    var certificateHolderStatus: CertificateHolderStatusModelProtocol
     let image: UIImage = .statusMaskOptionalCircleLarge
     let title = Constants.title
     let subtitle: String
@@ -33,6 +36,12 @@ final class MaskOptionalResultViewModel: MaskOptionalResultViewModelProtocol {
     var holderName: String
     var holderNameTransliterated: String
     var holderBirthday: String
+    var ruleDate: String? {
+        guard let date = certificateHolderStatus.latestMaskRuleDate(for: persistence.stateSelection) else {
+            return Constants.ruleDate
+        }
+        return String(format: Constants.ruleDate, DateUtils.displayDateFormatter.string(from: date))
+    }
     let revocationInfoHidden: Bool
     let revocationHeadline = Constants.revocationHeadline
     let revocationInfoText = Constants.revocationInfoText
@@ -51,6 +60,7 @@ final class MaskOptionalResultViewModel: MaskOptionalResultViewModelProtocol {
          resolver: Resolver<ValidatorDetailSceneResult>,
          router: MaskOptionalResultRouterProtocol,
          persistence: Persistence,
+         certificateHolderStatus: CertificateHolderStatusModelProtocol,
          revocationKeyFilename: String
     ) {
         self.token = token
@@ -61,6 +71,8 @@ final class MaskOptionalResultViewModel: MaskOptionalResultViewModelProtocol {
         )
         self.resolver = resolver
         self.router = router
+        self.persistence = persistence
+        self.certificateHolderStatus = certificateHolderStatus
         self.revocationKeyFilename = revocationKeyFilename
         revocationInfoHidden = !persistence.revocationExpertMode
         let dgc = token.vaccinationCertificate.hcert.dgc

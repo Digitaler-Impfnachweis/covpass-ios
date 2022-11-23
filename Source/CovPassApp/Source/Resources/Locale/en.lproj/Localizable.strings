@@ -1771,7 +1771,7 @@
 
 "infschg_cert_overview_immunisation_time_since" = "Since %@";
 
-"infschg_cert_overview_immunisation_time_from" = "From %@";
+"infschg_cert_overview_immunisation_time_from" = "Complete from %@";
 
 "infschg_cert_overview_immunisation_incomplete_A" = "You have not yet received all currently recommended vaccinations. Your vaccination protection is not yet complete. Please note that the vaccination status displayed in the app is determined in accordance with the Infection Protection Act. For children under 12 and all other persons, there are currently no restrictions under federal law that are linked to the \"fully vaccinated\" vaccination status that can be viewed in the app. Please note, on the one hand, the recommendations of the Permanent Vaccination Commission and, on the other hand, possibly deviating rules in your federal state.";
 
@@ -1803,6 +1803,8 @@
 
 "infschg_popup_choose_federal_state_copy_2" = "*You can change the federal state from the corresponding selection in the settings at any time.";
 
+"infschg_popup_choose_federal_state_copy_3" = "Rules from %@ (start of validity)";
+
 "accessibility_infschg_modal_view_announce" = "An overview of all certificates has been opened";
 
 "accessibility_infschg_modal_view_announce_closing" = "The overview of all certificates has been closed";
@@ -1821,7 +1823,9 @@
 
 "infschg_settings_federal_state_page_title" = "Federal state";
 
-"infschg_settings_federal_state_page_copy" = "Select the federal state according to whose rules you want your mask status to be displayed.";
+"infschg_settings_federal_state_page_copy_1" = "Select the federal state according to whose rules you want your mask status to be displayed.";
+
+"infschg_settings_federal_state_page_copy_2" = "Rules from %@ (start of validity)";
 
 "infschg_settings_federal_state_page_tag" = "Federal state";
 
@@ -1829,9 +1833,9 @@
 
 "infschg_detail_page_no_mask_mandatory_subtitle" = "Exempt until %@";
 
-"infschg_detail_page_no_mask_mandatory_federal_state" = "in %@";
+"infschg_detail_page_no_mask_mandatory_federal_state" = "in %@*";
 
-"infschg_detail_page_no_mask_mandatory_copy_1" = "You are exempt from the mask requirement in some situations in this state; however, a mask is still recommended.";
+"infschg_detail_page_no_mask_mandatory_copy_1" = "You are exempt from the mask requirement in some situations in this state; however, a mask is still recommended.\n\n *Rules from %@ (start of validity)";
 
 "infschg_detail_page_no_mask_mandatory_link" = "#More information::https://www.digitaler-impfnachweis-app.de/en/faq/#current-most-frequently-asked-questions#";
 
@@ -1845,9 +1849,9 @@
 
 "infschg_detail_page_mask_mandatory_subtitle" = "Exempt from %@";
 
-"infschg_detail_page_mask_mandatory_federal_state" = "in %@";
+"infschg_detail_page_mask_mandatory_federal_state" = "in %@*";
 
-"infschg_detail_page_mask_mandatory_copy_1" = "You are not exempt from the mask requirement in this state.";
+"infschg_detail_page_mask_mandatory_copy_1" = "You are not exempt from the mask requirement in this state.\n\n *Rules from %@ (start of validity)";
 
 "infschg_detail_page_mask_mandatory_link" = "#More information::https://www.digitaler-impfnachweis-app.de/en/faq/#current-most-frequently-asked-questions#";
 
@@ -1859,7 +1863,7 @@
 
 "infschg_detail_page_mask_status_uncertain_title" = "Mask mandatory";
 
-"infschg_detail_page_mask_status_uncertain_federal_state" = "in %@";
+"infschg_detail_page_mask_status_uncertain_federal_state" = "in %@*";
 
 "infschg_detail_page_mask_status_uncertain_copy_1" = "For this federal state the RKI has not received federal state-specifc rules. Therefore, only the uniform federal rules on mandatory masks apply.";
 

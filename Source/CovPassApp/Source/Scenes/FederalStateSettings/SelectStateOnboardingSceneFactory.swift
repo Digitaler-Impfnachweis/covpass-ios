@@ -28,7 +28,8 @@ struct SelectStateOnboardingSceneFactory: ResolvableSceneFactory {
                 router: SelectStateOnboardingViewRouter(
                     sceneCoordinator: sceneCoordinator
                 ),
-                userDefaults: UserDefaultsPersistence()
+                userDefaults: UserDefaultsPersistence(),
+                certificateHolderStatus: CertificateHolderStatusModel(dccCertLogic: DCCCertLogic.create())
             )
         )
     }

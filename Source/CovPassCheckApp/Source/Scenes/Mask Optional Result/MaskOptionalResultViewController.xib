@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -22,6 +22,7 @@
                 <outlet property="rescanButton" destination="Zw9-2k-H61" id="97D-AD-0hW"/>
                 <outlet property="revocationInfoContainerView" destination="bbw-cK-rm7" id="7jo-gI-Toq"/>
                 <outlet property="revocationInfoView" destination="3y8-5r-4KC" id="bLz-pL-eSM"/>
+                <outlet property="rulesDateLabel" destination="Eeq-g4-Z8w" id="AcO-GM-bd7"/>
                 <outlet property="subtitleLabel" destination="HSg-Kh-hx8" id="NZN-fG-qeL"/>
                 <outlet property="titleLabel" destination="ke7-Eq-NYy" id="GdQ-4o-T2C"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -33,17 +34,17 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="asq-Je-taX" customClass="InfoHeaderView" customModule="CovPassUI">
-                    <rect key="frame" x="0.0" y="68" width="414" height="60"/>
+                    <rect key="frame" x="0.0" y="64" width="414" height="60"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="60" placeholder="YES" id="epB-oE-mB6"/>
                     </constraints>
                 </view>
                 <scrollView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cg9-Ut-n76">
-                    <rect key="frame" x="0.0" y="128" width="414" height="629.5"/>
+                    <rect key="frame" x="0.0" y="124" width="414" height="633.5"/>
                     <subviews>
                         <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dfv-wP-L03" userLabel="Content View">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="573.5"/>
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="642"/>
                             <subviews>
                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="status-mask-optional-circle-large" translatesAutoresizingMaskIntoConstraints="NO" id="KNC-XD-YtE">
                                     <rect key="frame" x="137" y="0.0" width="140" height="140"/>
@@ -75,29 +76,6 @@
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Gjq-nP-y9t">
-                                    <rect key="frame" x="0.0" y="411.5" width="414" height="142"/>
-                                    <subviews>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bbw-cK-rm7" userLabel="Revocation Info Container View">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="142"/>
-                                            <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3y8-5r-4KC" customClass="HintView" customModule="CovPassUI">
-                                                    <rect key="frame" x="0.0" y="8" width="414" height="126"/>
-                                                    <color key="backgroundColor" systemColor="systemBrownColor"/>
-                                                </view>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="3y8-5r-4KC" secondAttribute="trailing" id="8HO-l0-KUr"/>
-                                                <constraint firstAttribute="bottom" secondItem="3y8-5r-4KC" secondAttribute="bottom" constant="8" id="GzQ-ME-Yfd"/>
-                                                <constraint firstItem="3y8-5r-4KC" firstAttribute="top" secondItem="bbw-cK-rm7" secondAttribute="top" constant="8" id="TVw-u1-zNk"/>
-                                                <constraint firstItem="3y8-5r-4KC" firstAttribute="leading" secondItem="bbw-cK-rm7" secondAttribute="leading" id="mwo-DZ-w60"/>
-                                            </constraints>
-                                        </view>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="142" placeholder="YES" id="iyM-GB-sGK"/>
-                                    </constraints>
-                                </stackView>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wh7-Jt-Csz" userLabel="Holder Information Container View">
                                     <rect key="frame" x="24" y="313.5" width="366" height="98"/>
                                     <subviews>
@@ -121,15 +99,46 @@
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
                                 </view>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eeq-g4-Z8w">
+                                    <rect key="frame" x="24" y="435.5" width="366" height="20.5"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Gjq-nP-y9t">
+                                    <rect key="frame" x="0.0" y="480" width="414" height="142"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bbw-cK-rm7" userLabel="Revocation Info Container View">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="142"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3y8-5r-4KC" customClass="HintView" customModule="CovPassUI">
+                                                    <rect key="frame" x="0.0" y="8" width="414" height="126"/>
+                                                    <color key="backgroundColor" systemColor="systemBrownColor"/>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="3y8-5r-4KC" secondAttribute="trailing" id="8HO-l0-KUr"/>
+                                                <constraint firstAttribute="bottom" secondItem="3y8-5r-4KC" secondAttribute="bottom" constant="8" id="GzQ-ME-Yfd"/>
+                                                <constraint firstItem="3y8-5r-4KC" firstAttribute="top" secondItem="bbw-cK-rm7" secondAttribute="top" constant="8" id="TVw-u1-zNk"/>
+                                                <constraint firstItem="3y8-5r-4KC" firstAttribute="leading" secondItem="bbw-cK-rm7" secondAttribute="leading" id="mwo-DZ-w60"/>
+                                            </constraints>
+                                        </view>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="142" placeholder="YES" id="iyM-GB-sGK"/>
+                                    </constraints>
+                                </stackView>
                             </subviews>
                             <constraints>
+                                <constraint firstItem="Eeq-g4-Z8w" firstAttribute="top" secondItem="wh7-Jt-Csz" secondAttribute="bottom" constant="24" id="1QT-DR-BYL"/>
                                 <constraint firstItem="KNC-XD-YtE" firstAttribute="centerX" secondItem="dfv-wP-L03" secondAttribute="centerX" id="5Tw-T6-YFZ"/>
                                 <constraint firstItem="wh7-Jt-Csz" firstAttribute="leading" secondItem="dfv-wP-L03" secondAttribute="leading" constant="24" id="605-8Z-Xw3"/>
                                 <constraint firstItem="CaI-1f-Rt7" firstAttribute="leading" secondItem="dfv-wP-L03" secondAttribute="leading" constant="24" id="6ta-gY-rUT"/>
                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="DoA-3w-hHw" secondAttribute="trailing" constant="24" id="B9N-wX-QsQ"/>
                                 <constraint firstAttribute="bottom" secondItem="Gjq-nP-y9t" secondAttribute="bottom" constant="20" id="C1R-ht-d1c"/>
                                 <constraint firstItem="DoA-3w-hHw" firstAttribute="top" secondItem="CaI-1f-Rt7" secondAttribute="bottom" constant="20" id="F2u-Ll-Grh"/>
-                                <constraint firstItem="Gjq-nP-y9t" firstAttribute="top" secondItem="wh7-Jt-Csz" secondAttribute="bottom" id="KqE-9L-9Wn"/>
+                                <constraint firstItem="Gjq-nP-y9t" firstAttribute="top" secondItem="Eeq-g4-Z8w" secondAttribute="bottom" constant="24" id="L9M-hg-fbz"/>
+                                <constraint firstItem="Eeq-g4-Z8w" firstAttribute="leading" secondItem="dfv-wP-L03" secondAttribute="leading" constant="24" id="MbQ-yx-DRe"/>
                                 <constraint firstItem="DoA-3w-hHw" firstAttribute="leading" secondItem="dfv-wP-L03" secondAttribute="leading" constant="24" id="Mje-tV-k7v"/>
                                 <constraint firstItem="Gjq-nP-y9t" firstAttribute="leading" secondItem="dfv-wP-L03" secondAttribute="leading" id="Rfz-wG-RKb"/>
                                 <constraint firstItem="KNC-XD-YtE" firstAttribute="top" secondItem="dfv-wP-L03" secondAttribute="top" id="Uz7-09-GNp"/>
@@ -137,6 +146,7 @@
                                 <constraint firstAttribute="trailing" secondItem="Gjq-nP-y9t" secondAttribute="trailing" id="YXM-eC-DQa"/>
                                 <constraint firstItem="CaI-1f-Rt7" firstAttribute="top" secondItem="KNC-XD-YtE" secondAttribute="bottom" constant="37" id="bcY-Zd-5eZ"/>
                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="CaI-1f-Rt7" secondAttribute="trailing" constant="24" id="had-DF-jv5"/>
+                                <constraint firstAttribute="trailing" secondItem="Eeq-g4-Z8w" secondAttribute="trailing" constant="24" id="psG-Wx-oiP"/>
                                 <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Gjq-nP-y9t" secondAttribute="bottom" id="rr1-Jq-hth"/>
                                 <constraint firstAttribute="trailing" secondItem="wh7-Jt-Csz" secondAttribute="trailing" constant="24" id="x8U-M4-idL"/>
                             </constraints>

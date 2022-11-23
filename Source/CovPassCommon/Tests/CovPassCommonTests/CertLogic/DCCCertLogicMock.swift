@@ -24,6 +24,8 @@ class DCCCertLogicMock: DCCCertLogicProtocol {
     var valueSetsShouldBeUpdated: Bool = true
     
     var domesticRulesShouldBeUpdated: Bool = true
+
+    var rules: [Rule] = []
     
     func updateDomesticIfNeeded() -> Promise<Void> {
         .value
@@ -51,6 +53,10 @@ class DCCCertLogicMock: DCCCertLogicProtocol {
     
     func rulesAvailable(logicType: DCCCertLogic.LogicType, region: String?) -> Bool {
         areRulesAvailable
+    }
+
+    func rules(logicType: DCCCertLogic.LogicType, region: String?) -> [Rule] {
+        rules
     }
 
     var validationError: Error?

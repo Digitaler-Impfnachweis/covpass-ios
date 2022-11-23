@@ -227,6 +227,14 @@
 
 "accessibility_scan_camera_torch_turn_off" = "Torch has been switched off";
 
+"dialog_second_scan_title" = "Certificate has already been scanned";
+
+"dialog_second_scan_message" = "You have already scanned this certificate. Please scan another certificate.";
+
+"dialog_second_scan_button_repeat" = "Repeat";
+
+"dialog_second_scan_button_update" = "Cancel";
+
 "validation_check_popup_valid_vaccination_recovery_title" = "Full vaccination protection available";
 
 "validation_check_popup_valid_vaccination_recovery_subtitle" = "according to IfSG §22a";

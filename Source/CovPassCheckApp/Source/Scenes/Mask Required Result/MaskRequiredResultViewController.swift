@@ -15,6 +15,7 @@ final class MaskRequiredResultViewController: UIViewController {
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var subtitleLabel: UILabel!
     @IBOutlet var descriptionLabel: UILabel!
+    @IBOutlet var rulesDateLabel: UILabel!
     @IBOutlet var reasonStackView: UIStackView!
     @IBOutlet var revocationInfoContainerView: UIView!
     @IBOutlet var revocationInfoView: HintView!
@@ -94,6 +95,8 @@ final class MaskRequiredResultViewController: UIViewController {
         descriptionLabel.attributedText = viewModel.description
             .styledAs(.body)
             .colored(.onBackground110)
+        rulesDateLabel.attributedText = viewModel.ruleDate?.styledAs(.body).colored(.darkGray)
+        rulesDateLabel.isHidden = viewModel.ruleDate == nil
         let titleSubTitleA11lText = viewModel.title + viewModel.subtitle
         headerStackView.enableAccessibility(label: titleSubTitleA11lText, traits: .header)
     }

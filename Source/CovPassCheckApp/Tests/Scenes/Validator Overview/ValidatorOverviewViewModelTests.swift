@@ -66,6 +66,7 @@ class ValidatorOverviewViewModelTests: XCTestCase {
             router: router,
             repository: repository,
             revocationRepository: revocationRepository,
+            certificateHolderStatus: CertificateHolderStatusModelMock(),
             certLogic: certLogic,
             userDefaults: userDefaults,
             privacyFile: Constants.Keys.privacyFile,

@@ -48,7 +48,7 @@ extension Rule {
             engineVersion: "",
             certificateType: "",
             description: [],
-            validFrom: "",
+            validFrom: "2022-01-01T00:00:00Z",
             validTo: "",
             affectedString: [],
             logic: JSON(""),

@@ -371,6 +371,26 @@ class CertificateHolderStatusModelTests: XCTestCase {
         // THEN
         XCTAssertEqual(result, expectedResult)
     }
+
+    func test_latestMaskRuleDate_withRegion() {
+        // GIVEN
+        let ruleMock = Rule.mock
+        certLogic.rules = [ruleMock]
+        // WHEN
+        let result = sut.latestMaskRuleDate(for: "HH")
+        // THEN
+        XCTAssertEqual(result, ruleMock.validFromDate)
+    }
+
+    func test_latestMaskRuleDate_withoutRegion() {
+        // GIVEN
+        let ruleMock = Rule.mock
+        certLogic.rules = [ruleMock]
+        // WHEN
+        let result = sut.latestMaskRuleDate(for: nil)
+        // THEN
+        XCTAssertNil(result)
+    }
     
     func test_ifsg22aRulesAvailable_true() {
         // GIVEN

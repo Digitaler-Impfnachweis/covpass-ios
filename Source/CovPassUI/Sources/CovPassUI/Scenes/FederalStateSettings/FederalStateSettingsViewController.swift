@@ -11,7 +11,8 @@ import UIKit
 open class FederalStateSettingsViewController: UIViewController {
     // MARK: - Properties
 
-    @IBOutlet var copyLabel: PlainLabel!
+    @IBOutlet var copy1Label: PlainLabel!
+    @IBOutlet var copy2Label: PlainLabel!
     @IBOutlet var stateSelection: InputView!
 
     let viewModel: FederalStateSettingsViewModelProtocol
@@ -53,8 +54,12 @@ open class FederalStateSettingsViewController: UIViewController {
     // MARK: - Methods
 
     private func configureCopy() {
-        copyLabel.attributedText = viewModel.copyText.styledAs(.body)
-        copyLabel.layoutMargins = .init(top: .space_24, left: .space_24, bottom: .space_24, right: .space_24)
+        copy1Label.attributedText = viewModel.copy1Text.styledAs(.body)
+        copy1Label.layoutMargins = .init(top: .space_24, left: .space_24, bottom: .space_24, right: .space_24)
+        copy2Label.attributedText = viewModel.copy2Text?.styledAs(.body).colored(.greyDark)
+        copy2Label.layoutMargins = .init(top: .space_8, left: .space_24, bottom: .space_24, right: .space_24)
+        copy2Label.backgroundColor = .neutralWhite
+        copy2Label.isHidden = viewModel.copy2Text == nil
     }
 
     private func configureInputView() {

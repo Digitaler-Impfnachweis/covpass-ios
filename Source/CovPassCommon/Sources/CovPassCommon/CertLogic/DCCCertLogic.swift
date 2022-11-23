@@ -234,9 +234,13 @@ public class DCCCertLogic: DCCCertLogicProtocol {
         }
         return rules
     }
-    
+
     public func rulesAvailable(logicType: DCCCertLogic.LogicType, region: String?) -> Bool {
         return rulesFor(logicType: logicType).filter{ $0.region == region }.isEmpty == false
+    }
+
+    public func rules(logicType: DCCCertLogic.LogicType, region: String?) -> [Rule] {
+        return rulesFor(logicType: logicType).filter{ $0.region == region }
     }
 
     public func validate(type: LogicType = .eu,
