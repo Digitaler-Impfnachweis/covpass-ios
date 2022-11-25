@@ -488,7 +488,7 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
         .map {
             if let selectedCertificate = self.selectedCertificate {
                 self.certificates = $0.certificates.filterMatching(selectedCertificate)
-                self.holderNeedsMask = self.certificateHolderStatusModel.holderNeedsMask(self.certificates, region: nil)
+                self.holderNeedsMask = self.certificateHolderStatusModel.holderNeedsMask(self.certificates, region: self.userDefaults.stateSelection)
                 self.holderIsFullyImmunized = self.certificateHolderStatusModel.holderIsFullyImmunized(self.certificates)
             }
         }
@@ -575,7 +575,7 @@ class CertificateDetailViewModel: CertificateDetailViewModelProtocol {
 
     private func certDetailDoneDidDeleteCertificate(_ cert: ExtendedCBORWebToken, _ result: CertificateDetailSceneResult) {
         certificates = certificates.filter { $0 != cert }
-        holderNeedsMask = certificateHolderStatusModel.holderNeedsMask(certificates, region: nil)
+        holderNeedsMask = certificateHolderStatusModel.holderNeedsMask(certificates, region: userDefaults.stateSelection)
         holderIsFullyImmunized = certificateHolderStatusModel.holderIsFullyImmunized(certificates)
         if certificates.count > 0 {
             delegate?.viewModelDidUpdate()
