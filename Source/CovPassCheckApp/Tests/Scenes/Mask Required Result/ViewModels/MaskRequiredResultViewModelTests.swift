@@ -113,7 +113,7 @@ final class MaskRequiredResultViewModelTests: XCTestCase {
         let subtitle = sut.subtitle
 
         // Then
-        XCTAssertEqual(subtitle, "In Northrhine-Westphalia")
+        XCTAssertEqual(subtitle, "in Northrhine-Westphalia*")
     }
 
     func testReasonViewModels_reason_type_functional() {

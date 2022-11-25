@@ -72,7 +72,7 @@ final class SecondScanViewModelTests: XCTestCase {
     }
 
     func test_subtitle() {
-        XCTAssertEqual(sut.subtitle, "according to IfSG §22a")
+        XCTAssertEqual(sut.subtitle, "according to IfSG § 22a")
     }
 
     func test_title() {

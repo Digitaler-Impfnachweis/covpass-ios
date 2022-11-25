@@ -124,7 +124,7 @@
 
 "start_screen_toggle_vaccination" = "Vaccination status";
 
-"start_screen_vaccination_status_title" = "Vaccination status according to IfSG §22a";
+"start_screen_vaccination_status_title" = "Vaccination status according to IfSG § 22a";
 
 "accessibility_start_screen_vaccination_status_title" = "Vaccination status according to Infection Protection Act paragraph 22a";
 
@@ -237,7 +237,7 @@
 
 "validation_check_popup_valid_vaccination_recovery_title" = "Full vaccination protection available";
 
-"validation_check_popup_valid_vaccination_recovery_subtitle" = "according to IfSG §22a";
+"validation_check_popup_valid_vaccination_recovery_subtitle" = "according to IfSG § 22a";
 
 "validation_check_popup_valid_vaccination_recovery_message" = "Check the following data against an ID document from the person you are checking.";
 
@@ -267,7 +267,7 @@
 
 "functional_validation_check_popup_unsuccessful_certificate_title" = "Incomplete vaccination protection";
 
-"functional_validation_check_popup_unsuccessful_certificate_subtitle" = "according to IfSG §22a";
+"functional_validation_check_popup_unsuccessful_certificate_subtitle" = "according to IfSG § 22a";
 
 "functional_validation_check_popup_unsuccessful_certificate_copy" = "The certificates provided do not indicate complete vaccination protection. Possible reasons:";
 
@@ -289,7 +289,7 @@
 
 "functional_validation_check_popup_second_scan_title" = "Check vaccination status";
 
-"functional_validation_check_popup_second_scan_subtitle" = "according to IfSG §22a";
+"functional_validation_check_popup_second_scan_subtitle" = "according to IfSG § 22a";
 
 "functional_validation_check_popup_second_scan_blue_card_1_title" = "1st certificate";
 
@@ -685,7 +685,7 @@
 
 "infschg_result_mask_optional_title" = "No mask obligation";
 
-"infschg_result_mask_optional_subtitle" = "In %@";
+"infschg_result_mask_optional_subtitle" = "in %@*";
 
 "infschg_result_mask_optional_copy" = "Now compare the following data with an identification document of the person being checked.";
 
@@ -1025,7 +1025,7 @@
 
 "settings_rules_context_germany_title" = "I check within Germany";
 
-"settings_rules_context_germany_subtitle" = "On the basis of the Infection Protection Act §22a";
+"settings_rules_context_germany_subtitle" = "On the basis of the Infection Protection Act § 22a";
 
 "settings_rules_context_entry_title" = "I check at entries";
 
@@ -1040,7 +1040,7 @@
 
 "start_vaccination_status_entry_title" = "Vaccination status according to the Coronavirus Entry Regulations";
 
-"start_vaccination_status_entry_subtitle" = "There are currently no restrictions on entering Germany. To check the vaccination status within Germany according to Infection Protection Act §22a, change the check context in the settings.";
+"start_vaccination_status_entry_subtitle" = "There are currently no restrictions on entering Germany. To check the vaccination status within Germany according to Infection Protection Act § 22a, change the check context in the settings.";
 
 
 /********** Entry Check: Initial setup **********/

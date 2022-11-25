@@ -69,7 +69,7 @@ final class ChooseCheckSituationViewModelTests: XCTestCase {
     }
 
     func test_withinGermanySubtitle() {
-        XCTAssertEqual(sut.withinGermanySubtitle, "On the basis of the Infection Protection Act §22a")
+        XCTAssertEqual(sut.withinGermanySubtitle, "On the basis of the Infection Protection Act § 22a")
     }
 
     func test_withinGermanyTitle() {

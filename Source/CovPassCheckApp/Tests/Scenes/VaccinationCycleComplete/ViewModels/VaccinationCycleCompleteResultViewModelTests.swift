@@ -121,7 +121,7 @@ final class VaccinationCycleCompleteResultViewModelTests: XCTestCase {
         let subtitle = sut.subtitle
 
         // Then
-        XCTAssertEqual(subtitle, "according to IfSG §22a")
+        XCTAssertEqual(subtitle, "according to IfSG § 22a")
     }
 
     func testDescription() {

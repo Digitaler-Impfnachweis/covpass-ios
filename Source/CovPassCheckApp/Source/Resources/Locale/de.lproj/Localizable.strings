@@ -124,7 +124,7 @@
 
 "start_screen_toggle_vaccination" = "Impfschutz";
 
-"start_screen_vaccination_status_title" = "Impfschutz nach IfSG §22a";
+"start_screen_vaccination_status_title" = "Impfschutz nach IfSG § 22a";
 
 "accessibility_start_screen_vaccination_status_title" = "Impfschutz nach Infektionsschutzgesetz Paragraph 22a";
 
@@ -237,7 +237,7 @@
 
 "validation_check_popup_valid_vaccination_recovery_title" = "Vollständiger Impfschutz vorhanden";
 
-"validation_check_popup_valid_vaccination_recovery_subtitle" = "nach IfSG §22a";
+"validation_check_popup_valid_vaccination_recovery_subtitle" = "nach IfSG § 22a";
 
 "validation_check_popup_valid_vaccination_recovery_message" = "Gleichen Sie jetzt folgende Daten mit einem Ausweisdokument der geprüften Person ab.";
 
@@ -267,7 +267,7 @@
 
 "functional_validation_check_popup_unsuccessful_certificate_title" = "Unvollständiger Impfschutz";
 
-"functional_validation_check_popup_unsuccessful_certificate_subtitle" = "nach IfSG §22a";
+"functional_validation_check_popup_unsuccessful_certificate_subtitle" = "nach IfSG § 22a";
 
 "functional_validation_check_popup_unsuccessful_certificate_copy" = "Die erbrachten Nachweise ergeben keinen vollständigen Impfschutz. Mögliche Gründe:";
 
@@ -289,7 +289,7 @@
 
 "functional_validation_check_popup_second_scan_title" = "Impfschutz-Prüfung";
 
-"functional_validation_check_popup_second_scan_subtitle" = "nach IfSG §22a";
+"functional_validation_check_popup_second_scan_subtitle" = "nach IfSG § 22a";
 
 "functional_validation_check_popup_second_scan_blue_card_1_title" = "1. Zertifikat";
 
@@ -685,7 +685,7 @@
 
 "infschg_result_mask_optional_title" = "Keine Maskenpflicht";
 
-"infschg_result_mask_optional_subtitle" = "In %@";
+"infschg_result_mask_optional_subtitle" = "in %@*";
 
 "infschg_result_mask_optional_copy" = "Gleichen Sie jetzt folgende Daten mit einem Ausweisdokument der geprüften Person ab.";
 
@@ -1025,7 +1025,7 @@
 
 "settings_rules_context_germany_title" = "Ich prüfe innerhalb Deutschlands";
 
-"settings_rules_context_germany_subtitle" = "Auf Basis des Infektionsschutzgesetz §22a";
+"settings_rules_context_germany_subtitle" = "Auf Basis des Infektionsschutzgesetz § 22a";
 
 "settings_rules_context_entry_title" = "Ich prüfe bei Einreisen";
 
@@ -1040,7 +1040,7 @@
 
 "start_vaccination_status_entry_title" = "Impfschutz nach Coronavirus-Einreiseverordnung";
 
-"start_vaccination_status_entry_subtitle" = "Derzeit gibt es keine Beschränkungen für die Einreise nach Deutschland. Um den Impfschutz innerhalb Deutschlands nach Infektionsschutzgesetz §22a zu prüfen, ändern Sie den Prüfkontext in den Einstellungen.";
+"start_vaccination_status_entry_subtitle" = "Derzeit gibt es keine Beschränkungen für die Einreise nach Deutschland. Um den Impfschutz innerhalb Deutschlands nach Infektionsschutzgesetz § 22a zu prüfen, ändern Sie den Prüfkontext in den Einstellungen.";
 
 
 /********** Entry Check: Initial setup **********/
